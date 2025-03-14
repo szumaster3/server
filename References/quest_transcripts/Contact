@@ -1,0 +1,310 @@
+Contact! (February 14, 2009)
+Sources: https://www.youtube.com/watch?v=BfH-QsojiLc
+
+Start the quest by talking to the High Priest of Icthlarin in the south-west temple of Sophanem. 
+
+High Priest: "Good day, <playername>"
+Player: "Hello there. How goes the fight for Klenter's soul?"
+High Priest: "It never ends; as soon as I think we have it won, The Devourer catches us off our guard again."
+Player: "I wish you luck in your attempts."
+High Priest: "Likewise, <playername>, in your adventures."
+Player: "What plans have you for the future of the town?"
+High Priest: "You have proved that the plagues aren't contagious, so we must try to lift the quarantine that Menaphos has imposed on us."
+Player: "So, what are you going to do?"
+High Priest: "I don't have a clue. I've tried to meet with them and we were rebuffed in a most unpleasant fashion."
+Player: "Perhaps I could help?"
+High Priest: "I have a feeling this could prove a somewhat hazardous quest for you and I'm not even sure where you would start. However, if you are happy dealing with our woes, we would, of course, be grateful."
+Select an option:
+	"Sounds like a quest for me; I can't turn that down!"
+		Player: "Sounds like a quest for me; I can't turn that down!"
+		High Priest: "I'm glad you want to help, but exactly how to continue, I don't know."
+		Player: "You mentioned earlier that you were rebuffed in an unpleasant fashion. What happened?"
+		High Priest: "I led a delegation across the bridge but were we allowed no further."
+		
+		<Cue cutscene>
+		
+		High Priest: "Greetings, Coenus."
+		Coenus: "Halt!"
+		Coenus: "Don't take another step."
+		High Priest: "That is an improper greeting. You address the High Priest of Icthlarin!"
+		Coenus: "Don't try my patience!"
+		Coenus: "I have been ordered to prevent anyone from attempting to cross this bridge."
+		High Priest: "You will let us pass. We are not contagious."
+		Coenus: "Step back or we will open fire."
+		High Priest: "You wouldn't dare!"
+		Coenus: "Archers, take your mark."
+		High Priest: "You wouldn't?"
+		Coenus: "Take aim!"
+		High Priest: "Run!"
+		Coenus: "Fire!"
+		The high priest tells his story
+	
+		<End cutscene>
+		
+		Player: "That Coenus is a cold-blooded thug."
+		High Priest: "The Menaphites are led by a more secular ruler than I would like. Respect for the old ways is diminishing."
+		Player: "Why do you need Menaphos to lift the quarantine? You have control over your own gates and, with the magic carpet based ouside the city, you could create new trade links with some of the other desert towns to"
+		Player: "replace Menaphos."
+		High Priest: "That would solve part of our problems, but a large number of our townsfolk are in Menaphos. We must get word to them that it's safe to return."
+		Player: "How should we do that?"
+		High Priest: "I don't know. I think I'll leave that up to you."
+		Select an option:
+			"What if I disguised myself as a Menaphite?"
+			"Is Menaphos defended by large walls all along the river bank?"
+			"Is there any time when the gate is unguarded?"
+			"Perhaps I could fight my way in?"
+			"Is there any way into Menaphos from below?"
+				Player: "Is there any way into Menaphos from below?"
+				High Priest: "None that I know of; if there was, it would probably be guarded."
+				Player: "Oh. So there aren't any secret tunnels under this city?"
+				High Priest: "No. All Tumeken's children and their followers revel in the light these days."
+				Player: "Who's Tumeken?"
+				High Priest: "He is the husband of Elidinis, father of both Icthlarin and The Devourer, and the head of the pantheon of gods."
+				Player: "You said 'these days'."
+				High Priest: "Well, the followers of The Devourer shunned the light, but all her temples have been destroyed. Though there was also the Sect of Scabaras."
+				Player: "Who?"
+				High Priest: "The Book of Light and Day says that Tumeken once fell into a deep sleep and dreamt for four days and nights. The first night he slept and dreamt a good dream. He dreamt of a journey long and arduous."
+				High Priest: "From the loins of his subconscious Apmeken was born into reality, a physical manifestation of his dream. Tumeken continued to have pleasant dreams for a further two days and nights. After each, a new"
+				High Priest: "deity came into being. On the fourth night, however, Tumeken dreamt a bad dream. He dreamt of himself and he dreamt of his increasing isolation caused by his extended sleep. This isolation sprunt forth into the"
+				High Priest: "world and took on the form of Scabaras."
+				Player: "Okay, you could have just said...'a dream' or something." Where were we?"
+				High Priest: "Yes, the followers of Scabaras used to be great architects of the subterranean. According to legend, they once planned to build a passage under the river Elid. No doubt Elidinis smote them, because none of"
+				High Priest: "the followers were ever seen again."
+				Player: "That sounds interesting. Do they have any altars or temples left in the city?"
+				High Priest: "Yes, there is a shrine dedicated to Scabaras in the Temple of the Lesser Gods in the north-east of the city."
+				Player: "I might check it out."
+				High Priest: "In that case, be sure to talk to Jex. He looks after the building and can tell you all about the place."
+				
+				<End dialogue, quest progresses>
+				
+	"I'm not sure I can take on such a responsibility now."
+	
+
+Talk to Jex.
+
+Player: "Hello, Jex."
+Jex: "What can I do for you?"
+Player: "The high priest mentioned that you know all about the Temple of the Lesser Gods."
+Jex: "I know bits and pieces about its history; I help maintain the place and even held services until recently. Please excuse its current sorry state."
+Player: "Oh? What's happened to the place?"
+Jex: "Some strange scarab creatures burst up from the cellars a few months ago. We fought them back into some kind of dungeon but, in doing so, the temple and the bank beneath were devastated."
+Player: "I'd like to have a look."
+Jex: "I wouldn't, if I were you. It's incredibly dangerous down there. We've lost far too many townsfolk already who underestimated the dangers. There are some fearsome traps and vicious monsters lurking in the"
+Jex: "darkness."
+Player: "I'm trying to investigate any tunnels under the city by request of the high priest."
+Jex: "If you must, then I bestow the blessing of Icthlarin and the minor deities upon you. Climb down the ladder in the corner of the temple. This will leave you in the wrecked bank."
+Jex: "we've posted a number of guards there to hold back the scarab monsters. There is a barricaded trapdoor there that is a little complicated to open."
+
+"Jex tells you how to open the trapdoor."
+
+Player: "Thanks, Jex, you've been a great help."
+Jex: "It's dark down there; you should really take a torch or some sort of light source along with you - that and a tinderbox in case it goes out."
+Player: "Thanks."
+Jex: "Remember, be very careful down there; it's seriously dangerous. I don't want to be kept awake by your cries of anguish when your light goes out."
+
+<End dialogue, quest progresses>
+
+Go down trap door in temple's basement/bank.
+
+Bank Guard: "Be careful down there!"
+Player: "I will, I will."
+Bank Guard: "It really is incredibly dangerous down there!"
+Player: "So people keep telling me."
+Bank Guard: "You should take some food down with you in case you get hurt!"
+Player: "Thanks for the advice."
+Bank Guard: "I wouldn't take too many valuables down there the first time I went, just in case something bad happened."
+Player: "Have some faith in me."
+Bank Guard: "Watch out for the traps!"
+Player: "I will, I will."
+Bank Guard: "If you see a scarab on any of the walls, stay well away from it!"
+Player: "Um, why?"
+Bank Guard: "I saw one of the other bank guards disappear down the trap door when he approached it and we never saw him again!"
+Player: "I'll look out for it, then."
+"You open the trap door using the trick that Jex showed you, closing it after you as you descend."
+<End dialogue, quest progresses>
+
+Navigate through the maze until you find a crushed body. Search it.
+System message: You search the corpse and find a piece of parchment covered in blood."
+
+Blood spattered parchment reads (centered)
+	Kaleef
+	Your mission is to contact our agent inside Menaphos.
+	Use the tunnels beneath the temple of the lesser gods.
+	Be vigilant of traps and the hostile natives.
+	They're about as welcoming as the Menaphites only 
+	slightly better looking.
+	
+	Os
+
+Find Maisa nearby. You can talk to him from across the ravine. 
+
+Maisa: "You're not Kaleef!"
+Player: "Of course I'm not; I'm <playername>. Besides, Kaleef's dead!"
+Maisa: "Who? I mean what?"
+Player: "He's dead. His body is lying over there. At least, somebody is, with a message addressed to Kaleef."
+Maisa: "Nooooo!"
+"You wait a moment until Maisa's cries subside."
+Player: "Are you Kaleef's contact in Menaphos?"
+Maisa: "Curse you, Osman! I'm so sick of this posting; I just want to go home."
+Player: "Was Kaleef close to you?"
+Maisa: "No, I hardly knew him. He was meant to tell me how to get out of Menaphos; now that he's dead, I'm stuck here."
+Player: "Perhaps we can help each other..."
+Maisa: "How could we do that?"
+Player: "I need to tell the Sophanites inside Menaphos to return home and you need to talk with Osman the Spymaster."
+Maisa: "Do you know Osman? Are you a friend of Al Kharid?"
+Player: "I helped rescue Prince Ali from Lady Keli"
+Maisa: "If you are who you say, tell me where the prince was being kept."
+
+Select an Option
+	"Pollnivneach."
+	"Draynor Village"
+		Player: "Prince Ali was being held outside Draynor Village"
+		Maisa: "Fair enough. Who helped you find the prince?"
+			
+			Select an Option
+				"Hassan."
+				"Traitorous Ali."
+				"Louie Legs."
+				"Leela."
+					Player: "Leela helped me find him."
+					Maisa: "Sorry I doubted you. Bring Osman here and I'll tell the Sophanites to return."
+					Player: "I'll get right to it."
+					Maisa: "Just make sure he comes down in person. Don't let him send another one of his people; you saw what happened to the last one."
+					
+					<end dialogue, quest progresses>
+					
+				"Ranael."
+	"Port Sarim"
+	"The Goblin Village"
+	"Canifis"
+	
+	
+Travel to Kharid palace or whatever it's called. Talk to Osman out front.
+
+Select an Option
+	"I'd like to talk about sq'irks"
+	"I want to talk to you about Sophanem."
+		Player: "I want to talk to you about Sophanem."
+		Player: "Your help is needed urgently in Sophanem."
+		Osman: "My help is needed all over the place."
+		Osman: "What makes you suggest that I'm needed more urgently in Sophanem?"
+		Player: "Maisa wants to speak with you."
+		Osman: "You must be mistaken. She's in Menaphos and that city is locked tight to everyone, thanks in no small part to me."
+		Player: "What? What have you been up to there?"
+		Osman: "Nothing out of the ordinary. I've had my people instigate a bit of civil unrest. Officially our cities may be at peace, but I have some old scores to settle first."
+		Player: "Look, one of your people, Kaleef, is dead and the contact he was meant to meet in the tunnels under the river demands to see you."
+		Player: "She wants to get out of Menaphos."
+		Osman: "Ah, Maisa, a great talent but far too highly strung. I should have known. I'll send one of my people to sort her out shortly."
+		Player: "She wanted you to come in person."
+		Osman: "I can't do that; that would be tantamount to sticking one's head in a crocodile's mouth."
+		Osman: "I would be lynched on sight if I were to be found."
+		Player: "What's the deal between yourself and the Menaphites?"
+		Osman: "Our two kingdoms were at war with one another for centuries. They tried to expand their kingdom northwards many times over the years, but we held them off."
+		Player: "Wow, that's impressive, seeing as you don't have much of an army."
+		Osman: "The desert is a great equalizer. It's very difficult to move large armies about in it, particularly if you don't have ready access to water."
+		Player: "But you're at peace now?"
+		Osman: "Technically, yes, but that doesn't mean that bad blood will instantly run good. As Spy Master of Al Kharid, I've been responsible for many a dark deed."
+		Osman: "The Menaphites would find it difficult not to try to punish me or extract certain delicate information out of me if I managed to fall into their arms."
+		Osman: "So I'd need a very very good reason to go there."
+		Player: "You owe me a favour. I rescued Prince Ali for you."
+		Osman: "I owe you nothing for that; Hassan the Chancellor paid you for your services."
+		Osman: "What exactly are you up to, anyway?"
+		Player: "As you probably know, Sophanem is under quarantine at the moment because of the outbreak of plagues."
+		Osman: "Yes, yes, but what are you doing?"
+		Player: "The plagues aren't contagious so this seems a little pointless. The high priest in the town wants to open the town up again. Unfortunately, Menaphos has shut its doors to everyone and many of the essential townsfolk"
+		Player: "who were in Menaphos when the plague first broke out are uncontactable."
+		Osman: "So, you've agreed with Maisa to get these people to return to Sophanem? What makes you think that I'll aid you with helping the old enemy?"
+		Player: "Hmmm...let me think of that for a second."
+		
+		Select an Option
+			"It must be boring here..."
+			"There might be treasures under Sophanem."
+			"It would drive a wedge between Menaphite cities."
+				Player: "I have it, if Al Kharid were to help Sophanem with its troublesome neighbor Menaphor, it could drive a wedge between the two cities."
+				Osman: "I think you may be on to something. Leverage... I like that."
+				Osman: "I have one or two things to sort here before I depart. I'll meet you close to Sophanem shortly."
+				<end dialogue, quest progresses>
+			"It would give you the chance to spy first hand."
+				Player: "It would give you the chance to spy on the Menaphites first hand."
+				
+				
+
+
+
+Talk to Osman at Sophanem's north gate.
+
+Player: "There you are."
+Osman: "I couldn't find a way in; I'm getting too old for scaling city walls."
+
+Select an Option
+	"Why don't we just walk through the city gates?"
+	"You could try a disguise."
+	"I know of a secret entrance to the north"
+		Player: "I know of a secret entrance to the north. The Devourer showed it to me when I first arrived in these parts."
+		Osman: "Perfect! Where is it?"
+		Player: "There's a tunnel near the encampment to the north-east. Look for a clump of rocks...it's through there."
+		Osman: "Wait for me here; there's no point in both of us risking our necks getting seen together."
+		Player: "What if you're spotted in the town or you injure yourself down in the maze?"
+		Osman: "Don't worry about me. I've been in Sophanem more times than I'd care for and, besides, I'm not called a Spy Master for nothing."
+		Player: "But there's..."
+		Osman: "Give me two hours. If I'm not back by then, come and look for me."
+		Player: "Fair enough."
+		
+			<cue cutscene>
+			
+			"While you patiently wait..."
+			Osman: "Psst!"
+			Jex: "Huh?!"
+			"While you patiently wait..."
+		
+			<end cutscene>
+		
+		Player: "Osman's been gone for hours."
+		Player: "I think I should have a look for him."
+		<End of dialogue, quest progresses.>
+
+Go back to Maisa
+
+<cue cutscene>
+	Osman: "... and whatever you do, don't risk giving yourself away when you tell the Sophanites to return."
+	Maisa: "Okay, will do."
+	Maisa: "What's going on, Osman? It feels like the ground is shaking."
+	Osman: "It's nothing. Your nerves are probably just shot. Losing Kaleef was tough on us all."
+	Maisa: "There's definitely something going on!"
+	Osman: "Get out of here quick before the cave collapses!"
+	"You watch from afar"
+<cutscene ends>
+
+Player: "Osman! Nooo!"
+
+<dialogue ends, quest progresses>
+
+Attack the giant scarab.
+
+Osman: "<playername>, what are you doing here!"
+Player: "Rescuing your ungrateful hide!"
+Osman: "I had under control here! Besides, I thought we agreed you would wait upstairs for me?"
+Player: "Your two hours ran out a long time ago."
+Player: "Where did you disappear off to during the fight?"
+Osman: "I didn't go anywhere. I decided to blend into the shadow... just one of the many tricks I've picked up over the years."
+Player: "So you're not going to say 'thank you' or anything?"
+Osman: "Nah, but I do recommend you pick up Kaleef's dagger. I can assure you, it packs some punch."
+Player: "I'd say so,; it managed to pierce that bug's shell."
+Osman: "It's good to see he went out fighting."
+Player: "He stabbed the bug in the back!"
+Osman: "Indeed, I'm glad he took on board some of my teaching."
+Osman: "Well then, <playername>, my business is done here so I'll be off."
+Osman: "One more thing..."
+Player: "What?"
+Osman: "Thanks."
+
+<end dialogue, quest progresses.>
+
+Travel back to the high priest and talk to him
+
+High Priest: "Good day, <playername>."
+Player: "Greetings, cleric."
+High Priest: "I don't know how you managed to get word to our citizens, but I am very grateful."
+Player: "No problem; I had some outside help."
+High Priest: "If you rub this lamp, it will increase your combat stats. Be aware it only has two wishes, rather than the traditional three."
+<dialogue ends, quest complete>

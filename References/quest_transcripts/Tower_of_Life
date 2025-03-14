@@ -1,0 +1,1022 @@
+Tower of Life Quest
+Sources: https://www.youtube.com/watch?v=MPZdtQ3_Ldg, https://www.youtube.com/watch?v=UyQ_6KSzR6I, https://www.youtube.com/watch?v=l3XHjVkXUuo
+
+***Before Quest Dialogue with various associated NPC's***
+
+class BlackeyeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("What's going on?").also { stage++ }
+		1 -> npc("Ah, we be building this 'ere tower. Lookin' good ain't it?").also { stage++ }
+		2 -> player("It does look pretty impressive, but what are you doing hanging around?").also { stage++ }
+		3 -> npc("Tea break, naturally.").also { stage++ }
+		4 -> player("Naturally. Not sure why I asked.").also { stage++ }
+		5 -> npc("Fancy some?").also { stage++ }
+		6 -> player("Tea? Sure.").also { stage++ }
+		7 -> npc("You'll find a kettle in the box to the-").also { stage++ }
+		8 -> player("Erm...yeah...no...sorry...gotta go.").also { state = END_DIALOGUE }
+}
+
+class GummyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("What are you up to?").also { stage++ }
+		1 -> npc("Rock, Paper, Scissors. Can't you tell?").also { stage++ }
+		2 -> player("It was more of a rhetorical question.").also { stage++ }
+		3 -> npc("Rhetora-what?").also { stage++ }
+		4 -> player("Shouldn't you be working?").also { stage++ }
+		5 -> npc("We are. It's team building.").also { state = END_DIALOGUE }
+}
+
+class TheGunsDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Wow, that looks pretty heavy.").also { stage++ }
+		1 -> npc("Umpf! Yeah, mate...argghh...this is...umpf...hard work...").also { stage++ }
+		2 -> player("What would happen if I were to say...").also { stage++ }
+		3 -> player("135").also { stage++ }
+		4 -> player("25").also { stage++ }
+		5 -> player("234").also { stage++ }
+		6 -> player("2351....").also { stage++ }
+		7 -> npc("Stop! Stop! Humpf...I'll beat you to...urghh...a pulp!").also { stage++ }
+		8 -> player("Okay, okay! Don't cry!").also { stage++ }
+		9 -> player("Why, I oughta...").also { state = END_DIALOGUE }
+}
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi there.").also { stage++ }
+		1 -> npc("A'up, babe, how's it goin'?").also { stage++ }
+		2 -> player("Not bad, thank you. What are you building here?").also { stage++ }
+		3 -> npc("Nowt at moment. We're on strike!").also { stage++ }
+		4 -> player("You're on strike? Whatever for?").also { stage++ }
+		5 -> npc("Those strange alchemists are up ta somefin', best go ta one ov 'em.").also { stage++ }
+		6 -> player("Oh, okay.").also { state = END_DIALOGUE }
+}
+
+class NoFingersDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("You seem to like playing with danger, there.").also { stage++ }
+		1 -> npc("They don't call me 'No-fingers' for nothing!").also { stage++ }
+		2 -> player("Well, correct me if I'm wrong, but you seem to have all your fingers.").also { stage++ }
+		3 -> npc("It may seem that way mate, but I think you'll find I don't have any.").also { stage++ }
+		4 -> player("What?").also { stage++ }
+		5 -> npc("These not be fingers. These 'ere be wooden fingers.").also { stage++ }
+		6 -> player("Wooden fingers?").also { stage++ }
+		7 -> npc("Yep.").also { stage++ }
+		8 -> player("That's not possible, how could you move them?").also { stage++ }
+		9 -> npc("Magic wood.").also { stage++ }
+		10 -> player("Yes, well I think I'd better be going now.").also { state = END_DIALOGUE }
+}
+
+class CurrencyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("This is quite the tower.").also { stage++ }
+		1 -> npc("Yeah, it cost a fair bit.").also { stage++ }
+		2 -> player("How much?").also { stage++ }
+		3 -> npc("Well, I had to 'alch' a fair few belongings of my fellow alchemists to afford it.").also { stage++ }
+		4 -> player("I bet they love you for that.").also { stage++ }
+		5 -> npc("Everyone loves someone that can create money.").also { stage++ }
+		6 -> player("I don't.").also { state = END_DIALOGUE }
+}
+
+class TransmuteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi there. What is this place?").also { stage++ }
+		1 -> npc("Ah, this be the Tower of Life! Beautiful, isn't it?").also { stage++ }
+		2 -> player("I prefer ordinary houses.").also { stage++ }
+		3 -> npc("Pah, you have no taste.").also { state = END_DIALOGUE }
+}
+
+
+
+***Speak to Effigy to start quest***
+
+class EffigyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi. Interesting building you have here.").also { stage++ }
+		1 -> player("What's it for?").aslo { stage++ }
+		2 -> npc("You like it? It's simply fabulous, isn't it? A real marvel of modern design made just for my fellow alchemists and I!").also { stage++ }
+		3 -> player("I see some builders over there. So I assume it's not yet finished.").also { stage++ }
+		4 -> npc("What a keen eye this LAD/LASS has! But imagine this: a gargantuan cylinder of expert design, incorporating an inventive inner spiral walkway to multiple planes of wondrous inhabitance!").also { stage++ }
+		5 -> player("So, it's a tower.").also { stage++ }
+		6 -> npc("Oh, no, no, no, no.").also { stage++ }
+		7 -> npc("It's going to have a use that will change this world!").also { stage++ }
+		8 -> npc("Or at least it would if we could ever get it finished.").also { stage++ }
+		9 -> npc("See those builders?").also { stage++ }
+		10 -> player("They don't seem to be building much.").also { stage++ }
+		11 -> npc("Exactly").also { stage++ }
+		12 -> npc("They've gone on strike for some petty reason about the tower being too weird. I really can't understand those men.").also { stage++ }
+		13 -> player("Shame.").also { stage++ }
+		14 -> npc("Hey! Maybe you could talk to them?").also { stage++ }
+		15 -> npc("You look like a sturdy LAD/LASS.").also { stage++ }
+		16 -> npc("Maybe you could finish the work?").also { stage++ }
+		17 -> player("Me?").also { stage++ }
+		18 -> npc("Come on! This is the chance of a lifetime!").also { stage++ }
+		19 -> options("Sure, why not.", "Sorry, feeling a bit ill today.").also { stage++ }
+		20 -> when(buttonId) {
+			1 -> player("Sure, why not.").also { stage = 21 }
+			2 -> player("Sorry, feeling a bit ill today.").also { stage = END_DIALOGUE }
+			}
+		21 -> npc("That's fantastic! Oh, I'm so pleased."). also { stage++ }
+		22 -> player("Calm down. I'm not making any promises."). also { stage++ }
+		23 -> npc("Oh, I have a good feeling about this.").also { stage++ }
+		24 -> npc("Right"). also { stage++ }
+		25 -> npc("Go have a word with Bonafido the head builder. See if you can't get him off his backside to do some work. Oh, and I'm Effigy by the way.").also { stage++ }
+		26 -> player("Nice to meet you Effigy, I'm PLAYER NAME. Hold on and I'll see what I can do!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bonafido after the quest starts***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Are you Bonafido by any chance?").also { stage++ }
+		1 -> npc("That I am, babe.").also { stage++ }
+		2 -> npc("How can I be of assistance?").also { stage++ }
+		3 -> player("Well, I've just spoken with Effigy about this tower. He tells me he hired you to work but you're on strike. Something about an extended tea break?").also { stage++ }
+		4 -> npc("Extended cup o' char? E's got it all wrong, babe. We know those alchemi-whatsits are up ta somefin' weird in building this tower, wot wiv all the machinery, and until we get some answers we're not moving a muscle.").also { stage ++ }
+		5 -> player("Well, he wanted me to do something about it.").also { stage++ }
+		6 -> player("Is there no way I can convince you to continue?").also { stage++ }
+		7 -> npc("Sorry, babe.").also { stage++ }
+		8 -> player("Well, can I at least have a look inside the tower?").also { stage++ }
+		9 -> npc("Only builders are allowed in there, like. You don't look much ov a builder to me.").also { stage++ }
+		10 -> player("I take offence at that! Give me a chance; you may be surprised").also { stage++ }
+		11 -> npc("Okay. Come on me kitted out likea  builder - hard hat, some boots, scruffy trousers and shirt - and I'll let ya try out ta be one ov us.").also { stage++ }
+		12 -> player("Count me in!").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Blackeye after speaking to Bonafido***
+
+class BlackeyeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Say, that's a nice helmet").also { stage++ }
+		1 -> npc("Why, thanks.").also { stage++ }
+		2 -> player("I was just wondering if you might be able to help me out with one?").also { stage++ }
+		3 -> npc("Always glad to help a budding builder.").also { stage++ }
+		4 -> npc("But first, prove your Construction knowledge by answering some questions.").also { stage++ }
+		5 -> npc("How many nails does it take to make a rocking chair?").also { stage++ }
+		6 -> options("One", "Five", "Three").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> player("One").also { stage = 8 }
+			2 -> player("Five").also { stage = 9 }
+			3 -> player("Three").also { stage = 10 }
+			}
+		8 -> npc("One? How do you suppose to use a single nail?").also { stage = END_DIALOGUE }
+		9 -> npc("Nope. Keep guessing!").also { stage = END_DIALOGUE }
+		10 -> npc("Bingo! Okay, now what takes 3 planks, 3 cloths, and 3 nails to make, and help remove light from a room?").also { stage++ }
+		11 -> options("Torn curtains", "A brown rug", "Opulent curtains").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> player("Torn curtains").also { stage = 15 }
+			2 -> player("A brown rug").also { stage = 13 }
+			3 -> player("Opulent curtains").also { stage = 14 }
+			}
+		13 -> npc("Of course, because that's what everyone needs - a rug up at their window.").also { stage = END_DIALOGUE }
+		14 -> npc("Those curtains are not going to be in any way opulent, matey.").also { stage = END_DIALOGUE }
+		15 -> npc("Nice one. Last question: I like fish and I want to put some in my garden, but I need a special water feature. What materials would I require?").also { stage++ }
+		16 -> options("8 clay pieces and 3 limestone bricks", "10 clay pieces", "10 limestone bricks").also { stage++ }
+		17 -> when(buttonId) {
+			1 -> player("8 clay pieces and 3 limestone bricks").also { stage = 18 }
+			2 -> player("10 clay pieces").also { stage = 20 }
+			3 -> player("10 limestone bricks").also { stage = 19 }
+			}
+		18 -> npc("Oh, and you were so close!").also { stage = END_DIALOGUE }
+		19 -> npc("Guess again, babe.").also { stage = END_DIALOGUE }
+		20 -> npc("That's it!").also { stage++ }
+		21 -> npc("You seem to know your stuff. I got a spare helmet from a builder that died on... I mean, err, had to leave the job for greener pastures."). also { stage++ }
+		22 -> player("Greener pastures?").also { stage++ }
+		23 -> player("Fair enough.").also { stage++ }
+		24 -> player("Wait a minute! Is there blood on this helmet?").also { stage++ }
+		25 -> npc("Erm, no, that's just, erm, paint. Yes, paint! That's what it is!").also { stage++ }
+		26 -> player("Oh, okay. Thanks. Bye.").also { stage++ }
+		27 -> npc("Ha, gullible fool.").also { stage++ }
+		28 -> player("What?").also { stage++ }
+		29 -> npc("Nothing.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to The Guns for the first time after speaking to Bonafido without beer in inventory***
+
+class TheGunsDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi, I'm looking to get some kit to look like one of you guys.").also { stage ++ }
+		1 -> player("Anything you might be able to help me out with?").also { stage++ }
+		2 -> npc("Well...Urmpf! Ye can 'ave me shirt...".also { stage++ }
+		3 -> player("Hmmm. Has it been cleaned? I don't want some sweaty hand-me-down.").also { stage++ }
+		4 -> npc("What? Huhmf! It ain't ever been...uurrgg...worn.").also { stage++ }
+		5 -> player("Well, that sounds good. Can I have it then?").also { stage++ }
+		6 -> npc("Can't...hurrr... see why not. This is firsty work doh. Could do wiv a beer.").also { stage++ }
+		7 -> player("Sure. What's your 'usual'?").also { stage++ }
+		8 -> npc("I'm a simple...umph...man. I like the bar in Yanille and their cheap bear.").also { stage++ }
+		9 -> player("Simple, cheap beer. No problem.").also { stage = END_DIALOGUE }
+}
+
+***Returning to The Guns with a beer after the above dialogue***
+
+class TheGunsDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi, I'm looking to get some kit to look like one of you guys. You said you wanted a beer?").also { stage++ }
+		1 -> npc("Ahhh! Smashin...urrghh...deal!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to The Guns for the first time after speaking to Bonafido with beer in inventory***
+
+class TheGunsDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi, I'm looking to get some kit to look like one of you guys.").also { stage ++ }
+		1 -> player("Anything you might be able to help me out with?").also { stage++ }
+		2 -> npc("Well...Urmpf! Ye can 'ave me shirt...".also { stage++ }
+		3 -> player("Hmmm. Has it been cleaned? I don't want some sweaty hand-me-down.").also { stage++ }
+		4 -> npc("What? Huhmf! It ain't ever been...uurrgg...worn.").also { stage++ }
+		5 -> player("Well, that sounds good. Can I have it then?").also { stage++ }
+		6 -> npc("Can't...hurrr... see why not. This is firsty work doh. Could do wiv a beer.").also { stage++ }
+		7 -> player("Well, today's your lucky day!").also { stage++ }
+		8 -> npc("Ahhh! Smashin...urrghh...deal!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to No Fingers after speaking to Bonafido***
+
+class NoFingersDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hello. I was just wondering... I don't suppose you have any spare clothing you could lend me?").also { stage++ }
+		1 -> npc("I do have many boots.").also { stage++ }
+		2 -> player("Ah, thanks.").also { stage++ }
+		3 -> npc("But there's no way I'm giving any to you.").also { stage++ }
+		4 -> player("Oh, but why? I could pay you!").also { stage++ }
+		5 -> npc("Nope. Only real builders can wear builders' boots, and you're not even close.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Gummy after speaking to Bonafido***
+
+class GummyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Why, hello there!").also { stage++ }
+		1 -> npc("What do you want?").also { stage++ }
+		2 -> player("Clothing.").also { stage++ }
+		3 -> npc("Nope. Need mine.").also { stage++ }
+		4 -> player("Ah, come on. You know you want to give me free stuff.").also { stage++ }
+		5 -> npc("Stop bothering me, can't you see I'm busy?").also { stage++ }
+		6 -> player("Yes, VERY busy I'm sure.").also { stage++ }
+		7 -> npc("Okay, okay. The other day I was drying my clothes on a line down by the shore. A storm hit and some of my clothing went missing.").also { stage++ }
+		8 -> player("Likely story. Sure you weren't skinny dipping?").also { stage++ }
+		9 -> npc("Just go look and leave me be! Search around the tower and you may find them.").also { state = END_DIALOGUE }
+}
+
+***Speaking to Bonafido after obtaining the builder outfit***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hey, Bonafido.").also { stage++ }
+		1 -> npc("Well, if it ain't ol' skinny bones.").also { stage++ }
+		2 -> player("So...").also { stage++ }
+		3 -> player("How do I look?").also { stage++ }
+		4 -> npc("Like a builder frew and frew... Good job, babe! Nah, it's time to test yur skills.").also { stage++ }
+		5 -> player("Okay, what do you want me to build?").also { stage++ }
+		6 -> npc("Build?").also { stage++ }
+		7 -> npc("Hahaha, don't be a plonka!").also { stage++ }
+		8 -> npc("It's not building skills that makes a true builder, you have to have the right mental attitude, yeah?").also { stage++ }
+		9 -> npc("Let me see...").also { stage++ }
+		10 -> npc("You've plenty of work to do, but you need a drink fast - what do you go for?").also { stage++ }
+		11 -> options("Orange juice", "Tea", "Bottle of wine").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> player("Orange juice").also { stage = 13 }
+			2 -> player("Tea").also { stage = 15 }
+			3 -> player("Bottle of wine").also { stage = 14 }
+			}
+		13 -> npc("What are you? A healthy builder? Of course, not juice!").also { stage = END_DIALOGUE }
+		14 -> npc("Ooh, got 'MISTER/MISS Fancy Pants' here and HIS/HER posh wine. You're no builder.").also { stage = END_DIALOGUE }
+		15 -> npc("Bingo! Ain't nufin' betta.").also { stage++ }
+		16 -> npc("Now, let's hear you whistle!").also { stage++ }
+		17 -> options("Do a little dance and whistle as loud as you can", "Whistle a pretty tune", "Whiste for attention").also { stage++ }
+		18 -> when(buttonId) {
+			1 -> player("Do a little dance and whistle as loud as you can").also { stage = 19 }
+			2 -> player("Whistle a pretty tune").also { stage = 20 }
+			3 -> player("Whiste for attention").also { stage = 24 }
+			}
+		19 -> npc("What on runescape are you doing? Get out of my sight.").also { stage = END_DIALOGUE }
+		20 -> npc("You know, you have quite a talent there.").also { stage++ }
+		21 -> player("Why thank you. Do you think I have what it takes to become a famous whistler?").also { stage++ }
+		22 -> npc("No.").also { stage++ }
+		23 -> player("Oh.").also { stage = END_DIALOGUE }
+		24 -> npc("Wahey! Nice on. Next question.").also { stage++ }
+		25 -> npc("What's a good sign that you need to replace your trousers?").also { stage++ }
+		26 -> options("Your legs are getting a bit cold", "They're ripped and full of holes", "The colour is starting to fade").also { stage++ }
+		27 -> when(buttonId) {
+			1 -> player("Your legs are getting a bit cold").also { stage = 30 }
+			2 -> player("They're ripped and full of holes").also { stage = 28 }
+			3 -> player("The colour is starting to fade").also { stage = 29 }
+			}
+		28 -> npc("No, no, no. That's the only way they should be!").also { stage = END_DIALOGUE }
+		29 -> npc("Oh no, mate, you're really not getting the hang of this are you?").also { stage = END_DIALOGUE }
+		30 -> npc("Exactamondo! Glad to see you are thinking like a builder.").also { stage++ }
+		31 -> player("I am?").also { stage++ }
+		32 -> npc("Yes, obviously if your legs are cold, you lost your trousers altogether!").also { stage++ }
+		33 -> player("That's just what I was thinking.").also { stage++ }
+		34 -> npc("Now the last question - what do you do if you cut your finger?").also { stage++ }
+		35 -> options("Cry", "Carry on, it'll fix itself", "Fetch a plaster and ointment").also { stage++ }
+		36 -> when(buttonId) {
+			1 -> player("Cry").also { stage = 37 }
+			2 -> player("Carry on, it'll fix itself").also { stage = 39 }
+			3 -> player("Fetch a plaster and ointment").also { stage = 38 }
+			}
+		37 -> npc("When was the last time you saw a builder cry?").also { stage = END_DIALOGUE }
+		38 -> npc("Look, let me give you a bit of advice. If you want to look weak, that's the best way to go.").also { stage = END_DIALOGUE }
+		39 -> npc("Yep, that's the one!").also { stage++ }
+		40 -> player("Suppose it could get infected then, but that'll just impress the lads all the more.").also { stage++ }
+		41 -> npc("Exactly, you're gettin the hang of this quickly!").also { stage++ }
+		42 -> npc("Cosmic! I canna see no reason why ya can't go in t'tower now. But be careful, there be some precarious situations in there.").also { stage++ }
+		43 -> player("So, what's left to build?").also { stage++ }
+		44 -> npc("Well, there's a pipe system, a pressure machine, and a strange cage up at the top that needs finishing off. The alchemists couldn't explain what they were for.").also { stage++ }
+		45 -> player("Thanks!").also { stage = END_DIALOGUE }
+}
+
+
+
+***After becoming a builder and before entering the tower of life for the first time dialogue with various associated NPC's***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi again Bonafido.").also { stage++ }
+		1 -> npc("Hi, 'PLAYERNAME the Builder'! Been into the tower yet?").also { stage++ }
+		2 -> player("Not yet. I'll go when I'm ready. I'm taking my time, may have a quick cup of tea first.").also { stage++ }
+		3 -> npc("Hahaha.").also { stage = END_DIALOGUE }
+}
+}
+
+class GummyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("You winning?").also { stage++ }
+		1 -> npc("It's a draw at the moment. First it was best of three, then it was best of five.").also { stage++ }
+		2 -> player("And now?").also { stage++ }
+		3 -> npc("Best of a hundred and one.").also { stage = END_DIALOGUE }
+}
+}
+
+class TheGunsDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("What do you do when you're not lifting logs above your head?").also { stage++ }
+		1 -> npc("In my free time?").also { stage++ }
+		2 -> player("Yes.").also { stage++ }
+		3 -> npc("All sorts. I like...hummft...a good kebab and a cold beer down...urrghh...the pub. And for those quiet evenings...hurrr... A bit of needlepoint is always welcome.").also { stage++ }
+		4 -> player("I can honestly say you're a very original guy.").also { stage = END_DIALOGUE }
+}
+}
+
+class NoFingersDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi.").also { stage++ }
+		1 -> npc("Don't suppose you've seen any boots around here? Size nine, steel toed, brown leather...").also { stage++ }
+		2 -> npc("Nope, not at all. I'd best be going. Have a nice day. Bye!").also { stage = END_DIALOGUE }
+}
+}
+
+class TransmuteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("I'm a builder!").also { stage++ }
+		1 -> npc("I question why you are so pleased about this.").also { stage++ }
+		2 -> player("Well, I think it's a positive step in my career as a courageous adventurer.").also { stage = END_DIALOGUE }
+}
+}
+
+class CurrencyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi. Sorry, but why do they call you 'Currency'?").also { stage++ }
+		1 -> npc("That's down to my interest in all things of monetary value.").also { stage++ }
+		2 -> player("You must be pretty rich then.").also { stage++ }
+		3 -> npc("I wish. And I was, up until recently.").also { stage++ }
+		4 -> player("What happened?").also { stage++ }
+		5 -> npc("This tower. Set me back a fair few million.").also { stage++ }
+		6 -> player("I'll bet! It pleases you, then, to know that I have just become a builder and have been granted permission to go mess around inside.").also { stage++ }
+		7 -> npc("This is not a good day for me.").also { stage = END_DIALOGUE }
+}
+}
+
+class EffigyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Guess what!").also { stage++ }
+		1 -> npc("What?").also { stage++ }
+		2 -> player("I'm a fully-fledged builder!").also { stage++ }
+		3 -> npc("Marvelous! So you can bring this tower to life!").also { stage++ }
+		4 -> player("I'm not sure about that, but I'll take a look and see what I can do.").also { stage++ }
+		5 -> npc("Oh, what a wondrous person you are!").also { stage = END_DIALOGUE }
+}
+}
+
+
+
+***Entering the tower of life for the first time***
+
+class PlayerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("Wow, this place looks special. Best I look around for something to fix.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Interacting with the Pressure Machine with the required items in inventory***
+
+class PressureMachineDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npc("The mahcine appears unfinished. You're going to need some materials:").also { stage++ }
+		1 -> npc("4 coloured balls, 3 pieces of metal sheeting and 4 valve wheels").also { stage++ }
+		2 -> options("Yes","No").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> player("Yes").also { stage = 4 }
+			2 -> player("No").also { stage = END_DIALOGUE }
+			}
+		4 -> npc("You built the machine! It still needs calibrating, though.").also { stage++ }
+		5 -> npc("The pressure seems to be affected by holes in the pipes. Perhaps I can block them up with the balls.").also { stage = END_DIALOGUE }
+}
+
+
+***After completing the Pressure Machine puzzle***
+
+class PressureMachineDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The machine is working!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Interacting with the Pipe Machine with the required items in inventory***
+
+class PipeMachineDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The mahcine appears unfinished. You're going to need some materials:").also { stage++ }
+		1 -> npc("6 rivets, 4 metal pipes, and 5 metal rings.").also { stage++ }
+		2 -> options("Yes","No").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> player("Yes").also { stage = 4 }
+			2 -> player("No").also { stage = END_DIALOGUE }
+			}
+		4 -> npc("You built the machine! It still needs calibrating, though.").also { stage++ }
+		5 -> npc("Looks like the pipes need connecting, to allow the liquid to travel further up the tower!").also { stage = END_DIALOGUE }
+}
+
+
+
+***After completing the Pipe Machine puzzle***
+
+class PipeMachineDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The machine is working!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Interacting with the Cage with the required items in inventory***
+
+class CageDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The cage appears unfinished. You're going to need some materials:").also { stage++ }
+		1 -> npc("5 metal bars and 4 bottles of binding fluid.").also { stage++ }
+		2 -> options("Yes","No").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> player("Yes").also { stage = 4 }
+			2 -> player("No").also { stage = END_DIALOGUE }
+			}
+		4 -> npc("You built the cage!").also { stage++ }
+		5 -> npc("Some of the bars need to be completed - you need to get the sizes correct, though.").also { stage = END_DIALOGUE }
+}
+
+
+
+***After completing the Cage puzzle***
+
+class CageDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The cage is complete!").also { stage = END_DIALOGUE }
+}
+
+
+
+***After completing all three puzzles***
+
+class TowerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npc("The tower should be in working order now! Best go and tell Effigy!").also { stage = END_DIALOGUE }
+}
+
+
+***After entering the Tower of Life***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Heya, Bona. I had a look at the building. There's some complex machinery in there! Going to cost someone.").also { stage++ }
+		1 -> npc("Yep, told ya so. Any idea what those alchemists are up ta?").also { stage++ }
+		2 -> player("Well, I agree now they're up to something. The question is what...? I don't think we're going to find out much from the alchemists, though.").also { stage++ }
+		3 -> npc("So what are you going to do?").also { stage++ }
+		4 -> player("I shall see if I can't fix it up and see for myself what is going on. Should be able to get a good reward from them. But don't worry, I'll make sure your efforts don't go unpaid.").also { stage++ }
+		5 -> npc("You're a star among builders, darling!").also { stage = END_DIALOGUE }
+}
+
+class TransmuteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("I must say, the inside of the tower is really something to behold.").also { stage++ }
+		1 -> npc("Why, thanks. You'll find various pieces of machinery to fix in there. You can no doubt find the materials in there, too.").also { stage = END_DIALOGUE }
+}
+
+class CurrencyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi, Currency. Got any spare cash?").also { stage++ }
+		1 -> npc("Nope; you?").also { stage++ }
+		2 -> player("No, do you?").also { stage++ }
+		3 -> npc("Afraid not. You?").also { stage++ }
+		4 -> player("I'm going to stop before this gets violent.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Effigy after completing the tower puzzles***
+
+class EffigyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("I've fixed all the machinery.").also { stage++ }
+		1 -> npc("Hurrah! Splendiferous!").also { stage++ }
+		2 -> player("Now listen, what does it all do? Why are you-").also { stage++ }
+		3 -> npc("Years of devoted work; it's complete!").also { stage++ }
+		4 -> npc("Hey, guys! It's finished!").also { stage++ }
+		5 -> npc("At last! Our work is complete!").also { stage++ }
+		6 -> npc("I can almost taste the riches!").also { stage++ }
+		7 -> npc("To the top of the tower, fellow alchemists!").also { stage++ }
+		8 -> player("Wait! What about-").also { stage = END_DIALOGUE }
+}
+
+
+
+***After the alchemists run to the top of the tower***
+
+class PlayerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Why does nobody listen?").also { stage++ }
+		1 -> player("Best I follow them, I suppose.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bonafido after the alchemists run to the top of the tower***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("I'm really getting annoyed with those alchemists.").also { stage++ }
+		1 -> npc("Why?").also { stage++ }
+		2 -> player("Well, I completed the tower and I still have no idea what it does, and then as soon as I tell Effigy of my hard work, he doesn't say one word of thanks and legs it off into the tower!").also { stage++ }
+		3 -> npc("Well, I'll be a rabbit in da eyes of a fox. Best ya chase after 'im then and get us our dosh! Don't you do a runner, now!").also { stage++ }
+		4 -> player("Don't worry, I'm not about to let Effigy get away with treating us builders like this!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Cutscene at the top of the tower***
+
+class CutSceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("What on runescape is...").also { stage++ }
+		1 -> npc("It is time, my friends! The culmination of our work is complete!").also { stage++ }
+		2 -> npc("Long time indeed!").also { stage++ }
+		3 -> npc("Many hours we have worked!").also { stage++ }
+		4 -> npc("A great many years of planning and preperation has brought us here, my fellow alchemists. Now we have... The Tower of Life! We can already create gold, we can already transform matter from one thing to").also { stage++ }
+		5 -> npc("another, and now we have the ability to create life itself! We owe much to the power of Guthix, for without the life essence he left below the ground, we would never have been able to bring this tower alive!").also { stage++ }
+		6 -> player("They're insane!").also { stage++ }
+		7 -> npc("It begins! The first day of creation!").also { stage = END_DIALOGUE }
+}
+
+
+***After the Homunculus is summoned***
+
+class CutSceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		0 -> npc("It worked!").also { stage++ }
+		1 -> npc("Marvellous!").also { stage++ }
+		2 -> player("How is this possible?").also { stage++ }
+		3 -> npc("It's alive!").also { stage++ }
+		4 -> npc("We did it. A Homunculus!").also { stage++ }
+		5 -> npc("Beautiful").also { stage = END_DIALOGUE }
+}
+
+
+
+***The Homunculus is alive!!***
+
+class CutSceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		0 -> npc("It can talk! A real success.").also { stage++ }
+		1 -> npc("Where me? Skin burn...arrgh...eyes hurt...let me go!").also { stage++ }
+		2 -> npc("Excellent, it can fell! It's self-aware. This is really a great day.").also { stage++ }
+		3 -> npc("Whyeee cage? Argh...please help me! Graaahhh!").also { stage++ }
+		4 -> player("This is terrible, you must do something!").also { stage++ }
+		5 -> npc("Ah, it's our helper. Thank you for fixing the tower; we will reward you greatly.").also { stage++ }
+		6 -> player("I don't want a reward, just let it go. Can't you see it's in pain?").also { stage++ }
+		7 -> npc("Don't worry. It has no soul; it has no worth.").also { stage++ }
+		8 -> npc("Yes, it's just an experiment in alchemy.").also { stage++ }
+		9 -> npc("The creature must be grateful for his creation.").also { stage++ }
+		10 -> npc("You create hurt. Not fair, let me free!").also { stage++ }
+		11 -> npc("Silence, creature!").also { stage++ }
+		12 -> npc("Yes, be still and quit your moaning.").also { stage++ }
+		13 -> npc("No, mean, nasty people.").also { stage++ }
+		14 -> npc("Shut up, you pathetic being.").also { stage++ }
+		15 -> npc("Arghh! Let me go!").also { stage++ }
+		16 -> npc("Don't make us hurt you.").also { stage++ }
+		17 -> player("Stop this! Let it go!").also { stage++ }
+		18 -> npc("So horrible beings. Daarrrr!").also { stage++ }
+		19 -> player("It's getting angry.").also { stage++ }
+		20 -> npc("You should know your place, adventurer. This is no concern of yours now.").also { stage++ }
+		21 -> npc("You should be satisfied and leave. Then we can begin our experiments.").also { stage++ }
+		22 -> player("Not wise.").also { stage++ }
+		23 -> npc("Arghhh!").also { stage++ }
+		24 -> npc("Oh no...").also { stage++ }
+		25 -> npc("Get out of the tower before it's too late!").also { stage++ }
+		26 -> npc("Run away!").also { stage++ }
+		27 -> npc("Flee for your lives!").also { stage = END_DIALOGUE }
+}
+
+
+
+***After the cutscene ends and the alchemists run out of the tower***
+
+class PlayerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("They've run away. I must go confront those alchemists downstairs.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to NPC's downstairs after the cutscene***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("You won't BELIEVE what I just saw!").also { stage++ }
+		1 -> npc("What? What?").also { stage++ }
+		2 -> player("That tower is...a tower of life! I just witnessed with my very own eyes the creation of a homunculus.").also { stage++ }
+		3 -> npc("A homanque-what?").also { stage++ }
+		4 -> player("Homunculus! They have found a way of creating life itself, but the creature they have made is not a happy being.").also { stage++ }
+		5 -> npc("And our money?").also { stage++ }
+		6 -> player("Are you listening at all? This creature is very dangerous. It needs to be stopped. And fast!").also { stage++ }
+		7 -> npc("I'm glad you've got the money sorted.").also { stage = END_DIALOGUE }
+}
+
+class CurrencyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("That is one very sad creature.").also { stage++ }
+		1 -> npc("It'll be alright: it just needs a pat on the back.").also { stage++ }
+		2 -> player("Why am I suddenly glad that you're not responsible for sorting out this mess?").also { stage = END_DIALOGUE }
+}
+
+class TransmuteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("I can't believe what you guys have done.").also { stage++ }
+		1 -> npc("Marvellous.").also { stage++ }
+		2 -> player("No. Scary!").also { stage++ }
+		3 -> npc("That too.").also { stage = END_DIALOGUE }
+}
+
+class EffigyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Effigy!").also { stage++ }
+		1 -> npc("I know, I know. This is a truly dangerous creation, of all proportions.").also { stage++ }
+		2 -> player("I hope you learn from this.").also { stage++ }
+		3 -> npc("I will, I will. Next time we'll use a stronger cage.").also { stage++ }
+		4 -> player("What?!").also { stage++ }
+		5 -> npc("A bad joke.").also { stage++ }
+		6 -> player("I'll just ignore that.").also { stage++ }
+		7 -> player("So, what about that Homunculus up there? You can't just leave it.").also { stage++ }
+		8 -> npc("Maybe you could go have a talk with it?").also { stage++ }
+		9 -> player("Why me? You created it!").also { stage++ }
+		10 -> npc("Pleeeaaase.").also { stage++ }
+		11 -> player("No.").also { stage++ }
+		12 -> npc("Pretty please with a cherry on top?").also { stage++ }
+		13 -> player("No way!").also { stage++ }
+		14 -> npc("I'll make sure you're compensated. You won't be forgotten for this!").also { stage++ }
+		15 -> player("Why do I get the feeling I'm doomed to go face that creature on my own?").also { stage++ }
+		16 -> npc("Good! I knew you would help us!").also { stage++ }
+		17 -> player("Oh well. My mum did always tell me that experience teaches fools.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Homunculus after Effigy begs you to***
+
+class HomunculusDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hello?").also { stage++ }
+		1 -> npc("Leeet mwwe free. Argyyghh.").also { stage++ }
+		2 -> player("It's okay. I'm here to help you.").also { stage++ }
+		3 -> npc("Lieees. Grahhh").also { stage++ }
+		4 -> player("No, honest. I helped the alchemists, but I had no idea what their plans involved.").also { stage++ }
+		5 -> npc("Arggh, so alchemist create me now I trapped for experiements. But still I confused.").also { stage++ }
+		6 -> player("About what?").also { stage++ }
+		7 -> npc("Me see logic, feeeel magic. A mix of the two.").also { stage++ }
+		8 -> player("Hmmm. A creature created of logic and magic.").also { stage++ }
+		9 -> player("Don't fear. I shall fix your mind!").also { stage++ }
+		10 -> npc("No so sure it is easy to do. No one canna 'elp. Arghhh.").also { stage++ }
+		11 -> player("Watch me.").also { stage++ }
+		12 -> npc("You must now make sense of the Homunculus's mind. Force him to either follow the line of logic or the line of magic.").also { stage++ }
+		13 -> player("You tell me that you're confused, so ask me some questions!").also { stage++ }
+		14 -> npc("Ah, please...").also { stage++ }
+		15 -> options("Get some logs and a tinderbox.", "With the aid of 5 fire runes.", "That's impossible! No one can do that!").also { stage++ }
+		16 -> when(buttonId) {
+			1 -> player("Get some logs and a tinderbox.").also { stage++ }
+			2 -> player("With the aid of 5 fire runes.").also { stage++ }
+			3 -> player("That's impossible! No one can do that!").also { stage++ }
+    			}
+		17 -> options("Not too sure, I've never seen it happen.", With the help of the magical dragonstones!", "By ignition of gas in their belly as they exhale.").also { stage++ }
+		18 -> when(buttonId) {
+			1 -> player("Not too sure, I've never seen it happen.").also { stage++ }
+			2 -> player("With the help of the magical dragonstones!").also { stage++ }
+			3 -> player("By ignition of gas in their belly as they exhale.").also { stage++ }
+			}
+		19 -> options("Runecraft, enchant jewellery, perform alchemy.", "Eat, sleep, nothing that exciting.", "Fletching, Crafting, Smithing.").also { stage++ }
+		20 -> when(buttonId) {
+			1 -> player("Runecraft, enchant jewellery, perform alchemy.").also { stage++ }
+			2 -> player("Eat, sleep, nothing that exciting.").also { stage++ }
+			3 -> player("Fletching, Crafting, Smithing.").also { stage++ }
+			}
+		21 -> options("Bury them.", "I'd like to think you wouldn't be carrying bones around.", "Turn them into bananas or peaches!").also { stage++ }
+		22 -> when(buttonId) {
+			1 -> player("Bury them.").also { stage++ }
+			2 -> player("I'd like to think you wouldn't be carrying bones around.").also { stage++ }
+			3 -> player("Turn them into bananas or peaches!").also { stage++ }
+			}
+		23 -> options("I'm not really much of a traveller, sorry.", "Run, run as fast as you can.", "Depends where you are headed, but teleport spells are a safe bet.").also { stage++ }
+		24 -> when(buttonId) {
+			1 -> player("I'm not really much of a traveller, sorry.").also { stage++ }
+			2 -> player("Run, run as fast as you can.").also { stage++ }
+			3 -> player("Depends where you are headed, but teleport spells are a safe bet.").also { stage++ }
+			}
+		25 -> options("Yes, you can make magic potions to boost your skills.", "People mix together ingredients in vials. The nutrients will help you.", "Yes, liquid-filled vials. Big deal.").also { stage++ }
+		26 -> when(buttonId) {
+			1 -> player("Yes, you can make magic potions to boost your skills.").also { stage++ }
+			2 -> player("People mix together ingredients in vials. The nutrients will help you.").also { stage++ }
+			3 -> player("Yes, liquid-filled vials. Big deal.").also { stage++ }
+			}
+		27 -> options("By harnessing the power of the gods!", "Never seen one personally.", "Take a rune stone to an altar and use a talisman.").also { stage++ }
+		28 -> when(buttonId) {
+			1 -> player("By harnessing the power of the gods!").also { stage++ }
+			2 -> player("Never seen one personally.").also { stage++ }
+			3 -> player("Take a rune stone to an altar and use a talisman.").also { stage++ }
+			}
+		29 -> options("Perhaps. I've never seen it myself, though.", "Yep, you can use the Telekinetic Grab spell.", "Sure. Use your brain to tell someone to move it!").also { stage++ }
+		30 -> when(buttonId) {
+			1 -> player("Perhaps. I've never seen it myself, though.").also { stage++ }
+			2 -> player("Yep, you can use the Telekinetic Grab spell.").also { stage++ }
+			3 -> player("Sure. Use your brain to tell someone to move it!").also { stage++ }
+			}
+		31 -> options("Through the power of alchemy.", "It's beyond me!", "It's a simple case of combining materials.").also { stage++ }
+		32 -> when(buttonId) {
+			1 -> player("Through the power of alchemy.").also { stage++ }
+			2 -> player("It's beyond me!").also { stage++ }
+			3 -> player("It's a simple case of combining materials.").also { stage++ }
+			}
+		33 -> options("You have special powers - no surprise seeing how you were created.", "Coincidence - there is a lot of loose metal around.", "Yeah, they were cool! Nice one.").also { stage++ }
+		34 -> when(buttonId) {
+			1 -> player("You have special powers - no surprise seeing how you were created.").also { stage++ }
+			2 -> player("Coincidence - there is a lot of loose metal around.").also { stage++ }
+			3 -> player("Yeah, they were cool! Nice one.").also { stage++ }
+			}
+		35 -> options("Try some Mining followed by Smithing.", "How about Magic and Runecrafting?", "That's up to you; depends on what you find interesting.").also { stage++ }
+		36 -> when(buttonId) {
+			1 -> player("Try some Mining followed by Smithing.").also { stage++ }
+			2 -> player("How about Magic and Runecrafting?").also { stage++ }
+			3 -> player("That's up to you; depends on what you find interesting.").also { stage++ }
+			}
+		37 -> options("Don't be silly! You'd get burnt!", "Can't see why not, anything is possible.", "Well the sun is not actually there, it's where it used to be!").also { stage++ }
+		38 -> when(buttonId) {
+			1 -> player("Don't be silly! You'd get burnt!").also { stage++ }
+			2 -> player("Can't see why not, anything is possible.").also { stage++ }
+			3 -> player("Well the sun is not actually there, it's where it used to be!").also { stage++ }
+			}
+		39 -> options("Everything has a reason, even if you don't know what it is.", "Probably a bit of both.", "Your very existence speaks of mystical forces.").also { stage++ }
+		40 -> when(buttonId) {
+			1 -> player("Everything has a reason, even if you don't know what it is.").also { stage++ }
+			2 -> player("Probably a bit of both.").also { stage++ }
+			3 -> player("Your very existence speaks of mystical forces.").also { stage++ }
+			}
+		41 -> options("Magic.", "I'm too laid back to really care, mate.", "Logic.").also { stage++ }
+		42 -> when(buttonId) {
+			1 -> player("Magic.").also { stage++ }
+			2 -> player("I'm too laid back to really care, mate.").also { stage++ }
+			3 -> player("Logic.").also { stage++ }
+			}
+   		43 -> npc("Thats it! Make sense now, thank you!").also { stage++ }
+		44 -> player("I decided to root for MAGIC/LOGIC").also { stage++ }
+		45 -> npc("No does matter which you chose. Me needed organise my thoughts. I see there is truth in both.").also { stage++ }
+      		46 -> player("Okay.").also { stage++ }
+		47 -> npc("Now we go scare alchemies - they have been wrong to do this. Although I have life, they mustn't go about this again.").also { stage++ }
+		48 -> player("Sounds like a good plan. Can you get out of that cage?").also { stage++ }
+		49 -> npc("Easy. You run down and I watching from here. I surprise right moment.").also { stage++ }
+		50 -> player("Okay.").also { stage = END_DIALOGUE }
+}
+
+
+***14 questions asked in order with associated answers and magic/logic values***
+    How can I make fire appear at my fingertips?
+        Logic - Get some logs and a tinderbox.
+        Magic - With the aid of 5 fire runes.
+        Neither - That's impossible! No one can do that!
+    How do dragons breathe fire?
+        Neither - Not too sure, I've never seen it happen.
+        Magic - With the help of the magical dragonstones!
+        Logic - By ignition of gas in their belly as they exhale.
+    What do people do, day-in, day-out?
+        Magic - Runecraft, enchant jewellery, perform alchemy.
+        Neither - Eat, sleep, nothing that exciting.
+        Logic - Fletching, Crafting, Smithing.
+    What could I do with unwanted bones?
+        Logic - Bury them.
+        Neither - I'd like to think you wouldn't be carrying bones around.
+        Magic - Turn them into bananas or peaches!
+    What's the best way to travel?
+        Neither - I'm not really much of a traveller, sorry.
+        Logic - Run, run as fast as you can.
+        Magic - Depends where you are headed, but teleport spells are a safe bet.
+    I hear people whisper of potions...
+        Magic - Yes, you can make magic potions to boost your skills.
+        Logic - People mix together ingredients in vials. The nutrients will help you.
+        Neither - Yes, liquid-filled vials. Big deal.
+    How are rune stones created?
+        Magic - By harnessing the power of the gods!
+        Neither - Never seen one personally.
+        Logic - Take a rune stone to an altar and use a talisman.
+    Can people move things with the power of the mind?
+        Neither - Perhaps. I've never seen it myself, though.
+        Magic - Yep, you can use the Telekinetic Grab spell.
+        Logic - Sure. Use your brain to tell someone to move it!
+    How can I possibly exist?
+        Magic - Through the power of alchemy.
+        Neither - It's beyond me!
+        Logic - It's a simple case of combining materials.
+    Explain those flashing sparks that scared the alchemists.
+        Magic - You have special powers - no surprise seeing how you were created.
+        Logic - Coincidence - there is a lot of loose metal around.
+        Neither - Yeah, they were cool! Nice one.
+    I want to learn more - what should I study?
+        Logic - Try some Mining followed by Smithing.
+        Magic - How about Magic and Runecrafting?
+        Neither - That's up to you; depends on what you find interesting.
+    If I reach out far enough I can grab the sun.
+        Neither - Don't be silly! You'd get burnt!
+        Magic - Can't see why not, anything is possible.
+        Logic - Well the sun is not actually there, it's where it used to be!
+    Am I a creature of magic or a creature of logic?
+        Logic - Everything has a reason, even if you don't know what it is.
+        Neither - Probably a bit of both.
+        Magic - Your very existence speaks of mystical forces.
+    Which do you believe in?
+        Magic - Magic.
+        Neither - I'm too laid back to really care, mate.
+        Logic - Logic.
+
+
+
+***Speaking to the Homunculous after helping it and before talking to Effigy***
+
+class HomunculusDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("How are you?").also { stage++ }
+		1 -> npc("Better. You been mine angel. I now have the understanding I need.").also { stage++ }
+		2 -> player("My pleasure.").also { stage++ }
+		3 -> npc("Please, alchemists you speak, me appear to surprise.").also { stage++ }
+		4 -> player("I'm not sure I understand, but okay, I will go have a word with them.").also { stage++ }
+		5 -> npc("Thank you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to NPC's after helping the Homunculus***
+
+class BonafidoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi, Bonafido.").also { stage++ }
+		1 -> npc("Hi. How's the tower?").also { stage++ }
+		2 -> player("Finished, really.").also { stage++ }
+		3 -> npc("Looks like we're out of a job then.").also { stage++ }
+		4 -> player("Oh, I wouldn't worry about it. There are frequently new buildings required around runescape. I'm sure your services will be called upon again.").also { stage = END_DIALOGUE }
+}
+
+class CurrencyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("The Homunculus is a bit better off now.").also { stage++ }
+		1 -> npc("Excellent. So we can go back in.").also { stage++ }
+		2 -> player("Not just yet.").also { stage = END_DIALOGUE }
+}
+
+class TransmuteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Well, I've sat down and had a good chat with the Homunculus.").also { stage++ }
+		1 -> npc("And?").also { stage++ }
+		2 -> player("You'll soon find out!").also { stage++ }
+		3 -> npc("Huh?").also { stage = END_DIALOGUE }
+}
+
+class EffigyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Effigy, I need a word with you.").also { stage++ }
+		1 -> npc("You've killed it?").also { stage++ }
+		2 -> player("Not quite...").also { stage++ }
+		3 -> npc("Boo.").also { stage++ }
+		4 -> npc("On no, look!").also { stage++ }
+		5 -> npc("Arrghhh! Have mercy!").also { stage++ }
+		6 -> npc("You set it free. Oh, please don't hurt me!").also { stage++ }
+		7 -> npc("Hahaha.").also { stage++ }
+		8 -> npc("Me not hurt. Now tell. What you plans? What you do with me?").also { stage++ }
+		9 -> npc("Please, we just wanted to experiment. We wanted to create life. There's a dungeon under the tower. Long ago, we found a strange source of energy that we believe was left behind by the great Guthix. He used to").also { stage++ }
+		10 -> npc("create life with such ease. We realised we should be able to use this powerful substance, but we needed to bring together our magic along with the logical construction of the builders. It seemed through our experiments that").also { stage++ }
+		11 -> npc("even magic needs a certain level of rules and laws to work.").also { stage++ }
+		12 -> npc("Bad play with. Naughty men. Go! Go, never return!").also { stage++ }
+		13 -> npc("Right away, right away!").also { stage++ }
+		14 -> npc("Go look dungeon, PLAYERNAME. Please meet there.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Homunculus in the Tower of Life basement***
+
+class HomunculusDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("This place is bizarre!").also { stage++ }
+		1 -> npc("Me do know. Pleased you rescue.").also { stage++ }
+		2 -> player("My pleasure. So what is this place?").also { stage++ }
+		3 -> npc("They use essence of Guthix power. Create tower pump this from ground. Make me with godly power. Dangerous.").also { stage++ }
+		4 -> player("Oh dear, but you're okay now. You have this place to reside in.").also { stage++ }
+		5 -> npc("Thrank you. For reward you speak me, I makes monsters.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Quest complete :)****
+
+
+
+***Post-Quest dialogue with the Homunculues***
+
+class HomunculusDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> player("Hi there, you mentioned something about creating monsters...?").also { stage++ }
+		1 -> npc("Good! I gain know from alchemists and builders. Me make beings.").also { stage++ }
+		2 -> player("Interesting. Tell me if I'm right. By the alchemists and builders creating you, you have inherited their combined knowledge in much the same way that a child might inherit the looks of their parents.").also { stage++ }
+		3 -> npc("Yes, you right!").also { stage++ }
+		4 -> player("So what do you need me to do?").also { stage++ }
+		5 -> npc("Inspect symbol of life altars around dungeon. You see item give. Use item on altar. Activate altar to create, you fight.").also { stage++ }
+		6 -> player("Okay. Sounds like a challenge.").also { stage = END_DIALOGUE }
+}

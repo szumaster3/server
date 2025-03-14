@@ -1,0 +1,244 @@
+package content.global.skill.smithing
+
+import core.game.node.entity.player.Player
+import org.rs.consts.Items
+
+enum class Bars(
+    val barType: BarType,
+    val smithingType: SmithingType,
+    @JvmField val product: Int,
+    @JvmField val level: Int,
+) {
+    BRONZE_DAGGER(BarType.BRONZE, SmithingType.TYPE_DAGGER, Items.BRONZE_DAGGER_1205, 1),
+    BRONZE_AXE(BarType.BRONZE, SmithingType.TYPE_AXE, Items.BRONZE_AXE_1351, 1),
+    BRONZE_MACE(BarType.BRONZE, SmithingType.TYPE_MACE, Items.BRONZE_MACE_1422, 2),
+    BRONZE_MED_HELM(BarType.BRONZE, SmithingType.TYPE_MEDIUM_HELM, Items.BRONZE_MED_HELM_1139, 3),
+    BRONZE_CROSSBOW_BOLT(BarType.BRONZE, SmithingType.TYPE_CROSSBOW_BOLT, Items.BRONZE_BOLTS_UNF_9375, 3),
+    BRONZE_SWORD(BarType.BRONZE, SmithingType.TYPE_SWORD, Items.BRONZE_SWORD_1277, 4),
+    BRONZE_DART_TIPS(BarType.BRONZE, SmithingType.TYPE_DART_TIP, Items.BRONZE_DART_TIP_819, 4),
+    BRONZE_NAILS(BarType.BRONZE, SmithingType.TYPE_NAIL, Items.BRONZE_NAILS_4819, 4),
+    BRONZE_WIRE(BarType.BRONZE, SmithingType.TYPE_WIRE, Items.BRONZE_WIRE_1794, 4),
+    BRONZE_ARROW_TIPS(BarType.BRONZE, SmithingType.TYPE_ARROW_TIP, Items.BRONZE_ARROWTIPS_39, 5),
+    BRONZE_SCIMITAR(BarType.BRONZE, SmithingType.TYPE_SCIMITAR, Items.BRONZE_SCIMITAR_1321, 5),
+    BRONZE_CROSSBOW_LIMBS(BarType.BRONZE, SmithingType.TYPE_CROSSBOW_LIMB, Items.BRONZE_LIMBS_9420, 6),
+    BRONZE_LONGSWORD(BarType.BRONZE, SmithingType.TYPE_LONGSWORD, Items.BRONZE_LONGSWORD_1291, 6),
+    BRONZE_THROWING_KNIFE(BarType.BRONZE, SmithingType.TYPE_THROWING_KNIFE, Items.BRONZE_KNIFE_864, 7),
+    BRONZE_FULL_HELM(BarType.BRONZE, SmithingType.TYPE_FULL_HELM, Items.BRONZE_FULL_HELM_1155, 7),
+    BRONZE_SQUARE_SHIELD(BarType.BRONZE, SmithingType.TYPE_SQUARE_SHIELD, Items.BRONZE_SQ_SHIELD_1173, 8),
+    BRONZE_WAR_HAMMER(BarType.BRONZE, SmithingType.TYPE_WARHAMMER, Items.BRONZE_WARHAMMER_1337, 9),
+    BRONZE_BATTLEAXE(BarType.BRONZE, SmithingType.TYPE_BATTLE_AXE, Items.BRONZE_BATTLEAXE_1375, 10),
+    BRONZE_CHAIN_BODY(BarType.BRONZE, SmithingType.TYPE_CHAINBODY, Items.BRONZE_CHAINBODY_1103, 11),
+    BRONZE_KITE_SHIELD(BarType.BRONZE, SmithingType.TYPE_KITE_SHIELD, Items.BRONZE_KITESHIELD_1189, 12),
+    BRONZE_CLAWS(BarType.BRONZE, SmithingType.TYPE_CLAWS, Items.BRONZE_CLAWS_3095, 13),
+    BRONZE_TWO_HANDED(BarType.BRONZE, SmithingType.TYPE_TWO_HAND_SWORD, Items.BRONZE_2H_SWORD_1307, 14),
+    BRONZE_PLATE_SKIRT(BarType.BRONZE, SmithingType.TYPE_PLATE_SKIRT, Items.BRONZE_PLATESKIRT_1087, 16),
+    BRONZE_PLATE_LEGS(BarType.BRONZE, SmithingType.TYPE_PLATELEG, Items.BRONZE_PLATELEGS_1075, 16),
+    BRONZE_PLATE_BODY(BarType.BRONZE, SmithingType.TYPE_PLATEBODY, Items.BRONZE_PLATEBODY_1117, 18),
+    BRONZE_PICKAXE(BarType.BRONZE, SmithingType.TYPE_PICKAXE, Items.BRONZE_PICKAXE_1265, 5),
+    IRON_DAGGER(BarType.IRON, SmithingType.TYPE_DAGGER, Items.IRON_DAGGER_1203, 15),
+    IRON_AXE(BarType.IRON, SmithingType.TYPE_AXE, Items.IRON_AXE_1349, 16),
+    IRON_MACE(BarType.IRON, SmithingType.TYPE_MACE, Items.IRON_MACE_1420, 17),
+    IRON_MED_HELM(BarType.IRON, SmithingType.TYPE_MEDIUM_HELM, Items.IRON_MED_HELM_1137, 18),
+    IRON_BOLT(BarType.IRON, SmithingType.TYPE_CROSSBOW_BOLT, Items.IRON_BOLTS_UNF_9377, 18),
+    IRON_SWORD(BarType.IRON, SmithingType.TYPE_SWORD, Items.IRON_SWORD_1279, 19),
+    IRON_DART_TIPS(BarType.IRON, SmithingType.TYPE_DART_TIP, Items.IRON_DART_TIP_820, 19),
+    IRON_NAILS(BarType.IRON, SmithingType.TYPE_NAIL, Items.IRON_NAILS_4820, 19),
+    IRON_SPIT(BarType.IRON, SmithingType.TYPE_SPIT_IRON, Items.IRON_SPIT_7225, 16),
+    IRON_ARROW_TIPS(BarType.IRON, SmithingType.TYPE_ARROW_TIP, Items.IRON_ARROWTIPS_40, 20),
+    IRON_SCIMITAR(BarType.IRON, SmithingType.TYPE_SCIMITAR, Items.IRON_SCIMITAR_1323, 20),
+    IRON_CROSSBOW_LIMBS(BarType.IRON, SmithingType.TYPE_CROSSBOW_LIMB, Items.IRON_LIMBS_9423, 23),
+    IRON_LONGSWORD(BarType.IRON, SmithingType.TYPE_LONGSWORD, Items.IRON_LONGSWORD_1293, 21),
+    IRON_KNIFE(BarType.IRON, SmithingType.TYPE_THROWING_KNIFE, Items.IRON_KNIFE_863, 22),
+    IRON_FULL_HELM(BarType.IRON, SmithingType.TYPE_FULL_HELM, Items.IRON_FULL_HELM_1153, 22),
+    IRON_SQUARE_SHIELD(BarType.IRON, SmithingType.TYPE_SQUARE_SHIELD, Items.IRON_SQ_SHIELD_1175, 23),
+    OIL_LANTERN_FRAME(BarType.IRON, SmithingType.TYPE_OIL_LANTERN, Items.OIL_LANTERN_FRAME_4540, 26),
+    IRON_WAR_HAMMER(BarType.IRON, SmithingType.TYPE_WARHAMMER, Items.IRON_WARHAMMER_1335, 24),
+    IRON_BATTLEAXE(BarType.IRON, SmithingType.TYPE_BATTLE_AXE, Items.IRON_BATTLEAXE_1363, 25),
+    IRON_CHAIN_BODY(BarType.IRON, SmithingType.TYPE_CHAINBODY, Items.IRON_CHAINBODY_1101, 26),
+    IRON_KITE_SHIELD(BarType.IRON, SmithingType.TYPE_KITE_SHIELD, Items.IRON_KITESHIELD_1191, 27),
+    IRON_CLAWS(BarType.IRON, SmithingType.TYPE_CLAWS, Items.IRON_CLAWS_3096, 28),
+    IRON_TWO_HANDED_SWORD(BarType.IRON, SmithingType.TYPE_TWO_HAND_SWORD, Items.IRON_2H_SWORD_1309, 29),
+    IRON_PLATE_SKIRT(BarType.IRON, SmithingType.TYPE_PLATE_SKIRT, Items.IRON_PLATESKIRT_1081, 31),
+    IRON_PLATE_LEGS(BarType.IRON, SmithingType.TYPE_PLATELEG, Items.IRON_PLATELEGS_1067, 31),
+    IRON_PLATE_BODY(BarType.IRON, SmithingType.TYPE_PLATEBODY, Items.IRON_PLATEBODY_1115, 33),
+    IRON_PICKAXE(BarType.IRON, SmithingType.TYPE_PICKAXE, Items.IRON_PICKAXE_1267, 20),
+    STEEL_DAGGER(BarType.STEEL, SmithingType.TYPE_DAGGER, Items.STEEL_DAGGER_1207, 30),
+    STEEL_AXE(BarType.STEEL, SmithingType.TYPE_AXE, Items.STEEL_AXE_1353, 31),
+    STEEL_MACE(BarType.STEEL, SmithingType.TYPE_MACE, Items.STEEL_MACE_1424, 32),
+    STEEL_MED_HELM(BarType.STEEL, SmithingType.TYPE_MEDIUM_HELM, Items.STEEL_MED_HELM_1141, 33),
+    STEEL_CROSSBOW_BOLT(BarType.STEEL, SmithingType.TYPE_CROSSBOW_BOLT, Items.STEEL_BOLTS_UNF_9378, 33),
+    STEEL_SWORD(BarType.STEEL, SmithingType.TYPE_SWORD, Items.STEEL_SWORD_1281, 34),
+    STEEL_DART_TIPS(BarType.STEEL, SmithingType.TYPE_DART_TIP, Items.STEEL_DART_TIP_821, 34),
+    STEEL_NAILS(BarType.STEEL, SmithingType.TYPE_NAIL, Items.STEEL_NAILS_1539, 34),
+    STEEL_ARROW_TIPS(BarType.STEEL, SmithingType.TYPE_ARROW_TIP, Items.STEEL_ARROWTIPS_41, 35),
+    STEEL_SCIMITAR(BarType.STEEL, SmithingType.TYPE_SCIMITAR, Items.STEEL_SCIMITAR_1325, 35),
+    STEEL_CROSSBOW_LIMBS(BarType.STEEL, SmithingType.TYPE_CROSSBOW_LIMB, Items.STEEL_LIMBS_9425, 36),
+    STEEL_LONGSWORD(BarType.STEEL, SmithingType.TYPE_LONGSWORD, Items.STEEL_LONGSWORD_1295, 36),
+    STEEL_THROWING_KNIFE(BarType.STEEL, SmithingType.TYPE_THROWING_KNIFE, Items.STEEL_KNIFE_865, 37),
+    STEEL_FULL_HELM(BarType.STEEL, SmithingType.TYPE_FULL_HELM, Items.STEEL_FULL_HELM_1157, 37),
+    STEEL_STUDS(BarType.STEEL, SmithingType.TYPE_STUDS, Items.STEEL_STUDS_2370, 36),
+    STEEL_SQUARE_SHIELD(BarType.STEEL, SmithingType.TYPE_SQUARE_SHIELD, Items.STEEL_SQ_SHIELD_1177, 38),
+    STEEL_BULLSEYE(BarType.STEEL, SmithingType.TYPE_BULLSEYE, Items.BULLSEYE_LANTERN_4544, 49),
+    STEEL_WAR_HAMMER(BarType.STEEL, SmithingType.TYPE_WARHAMMER, Items.STEEL_WARHAMMER_1339, 39),
+    STEEL_BATTLE_AXE(BarType.STEEL, SmithingType.TYPE_BATTLE_AXE, Items.STEEL_BATTLEAXE_1365, 40),
+    STEEL_CHAIN_BODY(BarType.STEEL, SmithingType.TYPE_CHAINBODY, Items.STEEL_CHAINBODY_1105, 41),
+    STEEL_KITE_SHIELD(BarType.STEEL, SmithingType.TYPE_KITE_SHIELD, Items.STEEL_KITESHIELD_1193, 42),
+    STEEL_CLAWS(BarType.STEEL, SmithingType.TYPE_CLAWS, Items.STEEL_CLAWS_3097, 43),
+    STEEL_TWO_HANDED_SWORD(BarType.STEEL, SmithingType.TYPE_TWO_HAND_SWORD, Items.STEEL_2H_SWORD_1311, 44),
+    STEEL_PLATE_SKIRT(BarType.STEEL, SmithingType.TYPE_PLATE_SKIRT, Items.STEEL_PLATESKIRT_1083, 46),
+    STEEL_PLATE_LEGS(BarType.STEEL, SmithingType.TYPE_PLATELEG, Items.STEEL_PLATELEGS_1069, 46),
+    STEEL_PLATE_BODY(BarType.STEEL, SmithingType.TYPE_PLATEBODY, Items.STEEL_PLATEBODY_1119, 48),
+    STEEL_PICKAXE(BarType.STEEL, SmithingType.TYPE_PICKAXE, Items.STEEL_PICKAXE_1269, 35),
+    BLURITE_CROSSBOW_BOLT(BarType.BLURITE, SmithingType.TYPE_Crossbow_Bolt, Items.BLURITE_BOLTS_UNF_9376, 8),
+    BLURITE_CROSSBOW_LIMBS(BarType.BLURITE, SmithingType.TYPE_Crossbow_Limb, Items.BLURITE_LIMBS_9422, 13),
+    MITHRIL_DAGGER(BarType.MITHRIL, SmithingType.TYPE_DAGGER, Items.MITHRIL_DAGGER_1209, 50),
+    MITHRIL_HATCHET(BarType.MITHRIL, SmithingType.TYPE_AXE, Items.MITHRIL_AXE_1355, 51),
+    MITHRIL_MACE(BarType.MITHRIL, SmithingType.TYPE_MACE, Items.MITHRIL_MACE_1428, 52),
+    MITHRIL_MED_HELM(BarType.MITHRIL, SmithingType.TYPE_MEDIUM_HELM, Items.MITHRIL_MED_HELM_1143, 53),
+    MITHRIL_CROSSBOW_BOLT(BarType.MITHRIL, SmithingType.TYPE_CROSSBOW_BOLT, Items.MITHRIL_BOLTS_UNF_9379, 53),
+    MITHRIL_SWORD(BarType.MITHRIL, SmithingType.TYPE_SWORD, Items.MITHRIL_SWORD_1285, 54),
+    MITHRIL_DART_TIPS(BarType.MITHRIL, SmithingType.TYPE_DART_TIP, Items.MITHRIL_DART_TIP_822, 54),
+    MITHRIL_NAILS(BarType.MITHRIL, SmithingType.TYPE_NAIL, Items.MITHRIL_NAILS_4822, 54),
+    MITHRIL_ARROW_TIPS(BarType.MITHRIL, SmithingType.TYPE_ARROW_TIP, Items.MITHRIL_ARROWTIPS_42, 55),
+    MITHRIL_SCIMITAR(BarType.MITHRIL, SmithingType.TYPE_SCIMITAR, Items.MITHRIL_SCIMITAR_1329, 55),
+    MITHRIL_CROSSBOW_LIMBS(BarType.MITHRIL, SmithingType.TYPE_CROSSBOW_LIMB, Items.MITHRIL_LIMBS_9427, 56),
+    MITHRIL_LONGSWORD(BarType.MITHRIL, SmithingType.TYPE_LONGSWORD, Items.MITHRIL_LONGSWORD_1299, 56),
+    MITHRIL_KNIFE(BarType.MITHRIL, SmithingType.TYPE_THROWING_KNIFE, Items.MITHRIL_KNIFE_866, 57),
+    MITHRIL_FULL_HELM(BarType.MITHRIL, SmithingType.TYPE_FULL_HELM, Items.MITHRIL_FULL_HELM_1159, 57),
+    MITHRIL_SQUARE_SHIELD(BarType.MITHRIL, SmithingType.TYPE_SQUARE_SHIELD, Items.MITHRIL_SQ_SHIELD_1181, 58),
+    MITHRIL_GRAPPLE_TIPS(BarType.MITHRIL, SmithingType.TYPE_GRAPPLE_TIP, Items.MITH_GRAPPLE_TIP_9416, 59),
+    MITHRIL_WAR_HAMMER(BarType.MITHRIL, SmithingType.TYPE_WARHAMMER, Items.MITHRIL_WARHAMMER_1343, 59),
+    MITHRIL_BATTLEAXE(BarType.MITHRIL, SmithingType.TYPE_BATTLE_AXE, Items.MITHRIL_BATTLEAXE_1369, 60),
+    MITHRIL_CHAIN_BODY(BarType.MITHRIL, SmithingType.TYPE_CHAINBODY, Items.MITHRIL_CHAINBODY_1109, 61),
+    MITHRIL_KITE_SHIELD(BarType.MITHRIL, SmithingType.TYPE_KITE_SHIELD, Items.MITHRIL_KITESHIELD_1197, 62),
+    MITHRIL_CLAWS(BarType.MITHRIL, SmithingType.TYPE_CLAWS, Items.MITHRIL_CLAWS_3099, 63),
+    MITHRIL_TWO_HANDED_SWORD(BarType.MITHRIL, SmithingType.TYPE_TWO_HAND_SWORD, Items.MITHRIL_2H_SWORD_1315, 64),
+    MITHRIL_PLATE_SKIRT(BarType.MITHRIL, SmithingType.TYPE_PLATE_SKIRT, Items.MITHRIL_PLATESKIRT_1085, 66),
+    MITHRIL_PLATE_LEGS(BarType.MITHRIL, SmithingType.TYPE_PLATELEG, Items.MITHRIL_PLATELEGS_1071, 66),
+    MITHRIL_PLATE_BODY(BarType.MITHRIL, SmithingType.TYPE_PLATEBODY, Items.MITHRIL_PLATEBODY_1121, 68),
+    MITHRIL_PICKAXE(BarType.MITHRIL, SmithingType.TYPE_PICKAXE, Items.MITHRIL_PICKAXE_1273, 55),
+    ADAMANT_DAGGER(BarType.ADAMANT, SmithingType.TYPE_DAGGER, Items.ADAMANT_DAGGER_1211, 70),
+    ADAMANT_AXE(BarType.ADAMANT, SmithingType.TYPE_AXE, Items.ADAMANT_AXE_1357, 71),
+    ADAMANT_MACE(BarType.ADAMANT, SmithingType.TYPE_MACE, Items.ADAMANT_MACE_1430, 72),
+    ADAMANT_MEDIUM_HELM(BarType.ADAMANT, SmithingType.TYPE_MEDIUM_HELM, Items.ADAMANT_MED_HELM_1145, 73),
+    ADAMANT_BOLT(BarType.ADAMANT, SmithingType.TYPE_CROSSBOW_BOLT, Items.ADAMANT_BOLTS_UNF_9380, 73),
+    ADAMANT_SWORD(BarType.ADAMANT, SmithingType.TYPE_SWORD, Items.ADAMANT_SWORD_1287, 74),
+    ADAMANT_DART_TIPS(BarType.ADAMANT, SmithingType.TYPE_DART_TIP, Items.ADAMANT_DART_TIP_823, 74),
+    ADAMANT_NAILS(BarType.ADAMANT, SmithingType.TYPE_NAIL, Items.ADAMANTITE_NAILS_4823, 74),
+    ADAMANT_ARROW_TIPS(BarType.ADAMANT, SmithingType.TYPE_ARROW_TIP, Items.ADAMANT_ARROWTIPS_43, 75),
+    ADAMANT_SCIMITAR(BarType.ADAMANT, SmithingType.TYPE_SCIMITAR, Items.ADAMANT_SCIMITAR_1331, 75),
+    ADAMANT_LIMBS(BarType.ADAMANT, SmithingType.TYPE_CROSSBOW_LIMB, Items.ADAMANTITE_LIMBS_9429, 76),
+    ADAMANT_LONGSWORD(BarType.ADAMANT, SmithingType.TYPE_LONGSWORD, Items.ADAMANT_LONGSWORD_1301, 76),
+    ADAMANT_KNIFE(BarType.ADAMANT, SmithingType.TYPE_THROWING_KNIFE, Items.ADAMANT_KNIFE_867, 77),
+    ADAMANT_FULL_HELM(BarType.ADAMANT, SmithingType.TYPE_FULL_HELM, Items.ADAMANT_FULL_HELM_1161, 77),
+    ADAMANT_SQUARE_SHIELD(BarType.ADAMANT, SmithingType.TYPE_SQUARE_SHIELD, Items.ADAMANT_SQ_SHIELD_1183, 78),
+    ADAMANT_WAR_HAMMER(BarType.ADAMANT, SmithingType.TYPE_WARHAMMER, Items.ADAMANT_WARHAMMER_1345, 79),
+    ADAMANT_BATTLEAXE(BarType.ADAMANT, SmithingType.TYPE_BATTLE_AXE, Items.ADAMANT_BATTLEAXE_1371, 80),
+    ADAMANT_CHAIN_BODY(BarType.ADAMANT, SmithingType.TYPE_CHAINBODY, Items.ADAMANT_CHAINBODY_1111, 81),
+    ADAMANT_KITE_SHIELD(BarType.ADAMANT, SmithingType.TYPE_KITE_SHIELD, Items.ADAMANT_KITESHIELD_1199, 82),
+    ADAMANT_CLAWS(BarType.ADAMANT, SmithingType.TYPE_CLAWS, Items.ADAMANT_CLAWS_3100, 83),
+    ADAMANT_TWO_HANDED_SWORD(BarType.ADAMANT, SmithingType.TYPE_TWO_HAND_SWORD, Items.ADAMANT_2H_SWORD_1317, 84),
+    ADAMANT_PLATE_SKIRT(BarType.ADAMANT, SmithingType.TYPE_PLATE_SKIRT, Items.ADAMANT_PLATESKIRT_1091, 86),
+    ADAMANT_PLATE_LEGS(BarType.ADAMANT, SmithingType.TYPE_PLATELEG, Items.ADAMANT_PLATELEGS_1073, 86),
+    ADAMANT_PLATE_BODY(BarType.ADAMANT, SmithingType.TYPE_PLATEBODY, Items.ADAMANT_PLATEBODY_1123, 88),
+    ADAMANT_PICKAXE(BarType.ADAMANT, SmithingType.TYPE_PICKAXE, Items.ADAMANT_PICKAXE_1271, 75),
+    RUNE_DAGGER(BarType.RUNITE, SmithingType.TYPE_DAGGER, Items.RUNE_DAGGER_1213, 85),
+    RUNITE_AXE(BarType.RUNITE, SmithingType.TYPE_AXE, Items.RUNE_AXE_1359, 86),
+    RUNITE_MACE(BarType.RUNITE, SmithingType.TYPE_MACE, Items.RUNE_MACE_1432, 87),
+    RUNITE_MEDIUM_HELM(BarType.RUNITE, SmithingType.TYPE_MEDIUM_HELM, Items.RUNE_MED_HELM_1147, 88),
+    RUNITE_BOLT(BarType.RUNITE, SmithingType.TYPE_CROSSBOW_BOLT, Items.RUNITE_BOLTS_UNF_9381, 88),
+    RUNITE_SWORD(BarType.RUNITE, SmithingType.TYPE_SWORD, Items.RUNE_SWORD_1289, 89),
+    RUNITE_DART_TIPS(BarType.RUNITE, SmithingType.TYPE_DART_TIP, Items.RUNE_DART_TIP_824, 89),
+    RUNITE_NAILS(BarType.RUNITE, SmithingType.TYPE_NAIL, Items.RUNE_NAILS_4824, 89),
+    RUNITE_ARROW_TIPS(BarType.RUNITE, SmithingType.TYPE_ARROW_TIP, Items.RUNE_ARROWTIPS_44, 90),
+    RUNITE_SCIMITAR(BarType.RUNITE, SmithingType.TYPE_SCIMITAR, Items.RUNE_SCIMITAR_1333, 90),
+    RUNITE_LIMBS(BarType.RUNITE, SmithingType.TYPE_CROSSBOW_LIMB, Items.RUNITE_LIMBS_9431, 91),
+    RUNITE_LONGSWORD(BarType.RUNITE, SmithingType.TYPE_LONGSWORD, Items.RUNE_LONGSWORD_1303, 91),
+    RUNITE_KNIFE(BarType.RUNITE, SmithingType.TYPE_THROWING_KNIFE, Items.RUNE_KNIFE_868, 92),
+    RUNITE_FULL_HELM(BarType.RUNITE, SmithingType.TYPE_FULL_HELM, Items.RUNE_FULL_HELM_1163, 92),
+    RUNITE_SQUARE_SHIELD(BarType.RUNITE, SmithingType.TYPE_SQUARE_SHIELD, Items.RUNE_SQ_SHIELD_1185, 93),
+    RUNITE_WAR_HAMMER(BarType.RUNITE, SmithingType.TYPE_WARHAMMER, Items.RUNE_WARHAMMER_1347, 94),
+    RUNITE_BATTLEAXE(BarType.RUNITE, SmithingType.TYPE_BATTLE_AXE, Items.RUNE_BATTLEAXE_1373, 95),
+    RUNITE_CHAIN_BODY(BarType.RUNITE, SmithingType.TYPE_CHAINBODY, Items.RUNE_CHAINBODY_1113, 96),
+    RUNITE_KITE_SHIELD(BarType.RUNITE, SmithingType.TYPE_KITE_SHIELD, Items.RUNE_KITESHIELD_1201, 97),
+    RUNITE_CLAWS(BarType.RUNITE, SmithingType.TYPE_CLAWS, Items.RUNE_CLAWS_3101, 98),
+    RUNITE_TWO_HANDED_SWORD(BarType.RUNITE, SmithingType.TYPE_TWO_HAND_SWORD, Items.RUNE_2H_SWORD_1319, 99),
+    RUNITE_PLATE_SKIRT(BarType.RUNITE, SmithingType.TYPE_PLATE_SKIRT, Items.RUNE_PLATESKIRT_1093, 99),
+    RUNITE_PLATE_LEGS(BarType.RUNITE, SmithingType.TYPE_PLATELEG, Items.RUNE_PLATELEGS_1079, 99),
+    RUNITE_PLATE_BODY(BarType.RUNITE, SmithingType.TYPE_PLATEBODY, Items.RUNE_PLATEBODY_1127, 99),
+    RUNITE_PICKAXE(BarType.RUNITE, SmithingType.TYPE_PICKAXE, Items.RUNE_PICKAXE_1275, 90),
+    ;
+
+    companion object {
+        private val bars: MutableMap<Short, Bars> = HashMap()
+
+        fun forId(item: Int): Bars? {
+            for (bar in values()) {
+                if (bar.product == item) {
+                    return bar
+                }
+            }
+            return null
+        }
+
+        init {
+            for (bar in values()) {
+                bars[bar.product.toShort()] = bar
+            }
+        }
+
+        @JvmStatic
+        fun getBars(type: BarType): Array<Bars?> {
+            val bars: MutableList<Bars> = ArrayList()
+            for (bar in values()) {
+                if (bar.barType == type) {
+                    bars.add(bar)
+                }
+            }
+            val barss = arrayOfNulls<Bars>(bars.size)
+            for (i in bars.indices) {
+                barss[i] = bars[i]
+            }
+            return barss
+        }
+
+        fun getItemId(
+            buttonId: Int,
+            type: BarType,
+        ): Int {
+            for (bar in values()) {
+                if (bar.barType != type) {
+                    continue
+                }
+                for (i in bar.smithingType.button) {
+                    if (buttonId == i) {
+                        return bar.product
+                    }
+                }
+            }
+            return -1
+        }
+
+        fun getIndex(
+            player: Player?,
+            buttonId: Int,
+            type: BarType,
+        ): Int {
+            var index = 0
+            for (bar in values()) {
+                var bar = bar
+                if (bar.barType != type) {
+                    continue
+                }
+                bar = forId(bar.product)!!
+                for (i in bar.smithingType.button.indices) {
+                    if (buttonId != bar.smithingType.button[i]) {
+                        index++
+                        return index
+                    }
+                }
+            }
+            return -1
+        }
+    }
+}

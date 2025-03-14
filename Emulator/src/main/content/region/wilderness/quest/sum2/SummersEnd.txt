@@ -1,0 +1,174 @@
+/*package content.region.miscquest.sum2
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class SummersEnd : Quest("Summer's End", 158, 157, 1, Vars.VARBIT_QUEST_SUMMERS_END_5331, 0, 1, 36) {
+
+    /*
+     * Quest description:
+     * The Spirit Beast is threatening to tear its way into ._., so Summer and her
+     * family need your help to stop it once and for all. You must once more venture into the Spirit Beast's Realm and,
+     * together with the elders, take on the Beast to save them.
+     */
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 12
+        player ?: return
+        if (stage >= 0) {
+            line(player, "I can start this quest by talking to !!Summer?? at the", line++)
+            line(player, "!!abandoned farm?? in the !!Wilderness??.", line++)
+            line++
+            line(player, "Minimum requirements:", line++)
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.FIREMAKING,
+                        47
+                    )
+                ) "---Level 47 Firemaking./--" else "!!Level 47 Firemaking.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.HUNTER, 35)) "---Level 35 Hunter./--" else "!!Level 35 Hunter.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.MINING, 45)) "---Level 45 Mining./--" else "!!Level 45 Mining.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.PRAYER, 55)) "---Level 55 Prayer./--" else "!!Level 55 Prayer.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.SUMMONING,
+                        23
+                    )
+                ) "---Level 23 Summoning./--" else "!!Level 23 Summoning.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.WOODCUTTING,
+                        37
+                    )
+                ) "---Level 37 Woodcutting./--" else "!!Level 37 Woodcutting.??",
+                line++
+            )
+            line(player, "!!A farily high Hitpoints level and a higher Woodcutting level??", line++)
+            line(player, "!!will be an adventage.??", line++)
+            line++
+        }
+
+        if (stage >= 1) {
+            line(player, "I found Summer again by the Wilderness wall.", line++)
+            line(player, "She looked scared and insisted that I come back", line++)
+            line(player, "to the Beast's realm with her.", line++)
+            line(player, "Summer brought me to the portal at the farm and we ended up in a", line++)
+            line(player, "horribly bright place where the three elders were waiting for us.", line++)
+            line(player, "They explained that the Spirit Beast has broken free from the", line++)
+            line(player, "prison they set up last time", line++)
+            line(player, "I went there and it is now stronger than ever. Over the centuries,", line++)
+            line(player, "it has been attempting to break through into Gielinor and, with its", line++)
+            line(player, "new powers, it is now closer than ever to achieving this, so they", line++)
+            line(player, "asked me if I could help defeating it.", line++)
+            line(player, "The elders wanted me to lure the Beast into the cave north of the farm,", line++)
+            line(player, "but the entrance had collapsed.", line++)
+            line(player, "I used my Mining skills to collapse the cave in the real world,", line++)
+            line(player, "which opened it up in the Beast's realm.", line++)
+            line(player, "I then used a familiar to lure the Beast in there. Once inside the cave,", line++)
+            line(player, "I cut logs from the cursed will roots growing from the walls.", line++)
+            line(player, "I used the logs to create big pyres which burned with a supernatural", line++)
+            line(player, "intensity and fooled the Beast into thinking they were souls.", line++)
+            line(player, "When it came up to devour the souls, it recoiled in surprise and Meranek", line++)
+            line(player, "got a chance to strike at its chest.", line++)
+            line(player, "After a few blows, he managed to break through the shield protecting its", line++)
+            line(player, "chest and the Beast fled into the next chamber.", line++)
+            line(player, "I followed the Beast into the second chamber and Jallek explained", line++)
+            line(player, "to me that all the soul fragments the Beast devours and draws energy", line++)
+            line(player, "from has formed into a separate creature within the Beast's chest.", line++)
+            line(player, "It was now free to escape and I used my Hunter skills to trap it in holes", line++)
+            line(player, "I had dug in the soft soil. When the Beast tried to get it back out,", line++)
+            line(player, "Jallek cast a weakening spell at its head. After a couple of hits,", line++)
+            line(player, "the Beast fled into the last chamber of the cave.", line++)
+            line(player, "The last chamber of the cave held Summer's, Jennica's,", line++)
+            line(player, "and the three elders' graves.", line++)
+            line(player, "The three elders projected themselves into the graves and", line++)
+            line(player, "I blessed them with holy power to cause a backlash of energy", line++)
+            line(player, "at the Beast when it was charging its own powers.", line++)
+            line(player, "After each of the three spirits had damaged the Beast,", line++)
+            line(player, "it was finally destroyed!", line++)
+            line(player, "I talked to the elders and they asked me to come outside", line++)
+            line(player, "and talk to them there.", line++)
+            line(player, "They had some something they wanted to give me.", line++)
+            line(player, "I talked to the elders and Summer outside of the cave and", line++)
+            line(player, "they were very thankful for everything I d done for them", line++)
+            line(player, "- they are finally free from the Beast's torment!", line++)
+            line(player, "They sealed off the cave entrance.", line++)
+            line(player, "Summer gave a proper blessing to Jennica's ring, and Meranek gave me his shield.", line++)
+            line(player, "Then they were finally allowed to die as they should've done a long time ago.", line++)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.JENNICAS_RING_13566, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point, 1,500 Summoning XP, 5,000", ln++)
+        drawReward(player, "Hunter Xp, 5,000 Mining XP, 5,000", ln++)
+        drawReward(player, "Woodcutting XP, 10,000 Prayer XP, 15,000", ln++)
+        drawReward(player, "Firemaking XP, ability to wield spirit shields,", ln++)
+        drawReward(player, "and an upgraded version of Jennica's ring.", ln++)
+        rewardXP(player, Skills.SUMMONING, 1500.0)
+        rewardXP(player, Skills.HUNTER, 5000.0)
+        rewardXP(player, Skills.MINING, 5000.0)
+        rewardXP(player, Skills.WOODCUTTING, 5000.0)
+        rewardXP(player, Skills.PRAYER, 10000.0)
+        rewardXP(player, Skills.FIREMAKING, 15000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_SUMMERS_END_5331, 36, true)
+        val hasRing = hasAnItem(player, Items.JENNICAS_RING_13566).container != null
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//1,500 Summoning experience
+//5,000 Hunter experience
+//5,000 Mining experience
+//5,000 Woodcutting experience
+//10,000 Prayer experience
+//15,000 Firemaking experience
+//A spirit shield and the ability to wield all Spirit shields
+//An upgraded version of Jennica's ring which gives access to the new spirit portals
+//Ability to fight the level 785 Corporeal Beast
+//Ability to fight the level 42 Tormented Wraith
+//Ability to bless spirit shields with holy elixirs by using either component at any Saradomin altar
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

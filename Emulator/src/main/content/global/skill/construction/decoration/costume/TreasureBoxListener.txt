@@ -1,0 +1,32 @@
+package content.global.skill.construction.decoration.costume
+
+class TreasureBoxListener : InterfaceListener, InteractionListener {
+
+    private val treasureBoxInterface = 467
+    private val lowLevelChest = Scenery.TREASURE_CHEST_18804
+    private val mediumLevelChest = Scenery.TREASURE_CHEST_18806
+    private val highLevelChest = Scenery.TREASURE_CHEST_18808
+    override fun defineListeners() {
+        on(intArrayOf(lowLevelChest, mediumLevelChest, highLevelChest), IntType.SCENERY, "open") { player, node ->
+            animate(player, Animation(Animations.HUMAN_OPEN_CHEST_536))
+            queueScript(player, Animation(Animations.HUMAN_OPEN_CHEST_536).duration) { stage ->
+                openInterface(player, treasureChestInterface)
+                return@queueScript stopExecuting(player)
+            }
+            return@on true
+        }
+    }
+
+    override fun defineInterfaceListeners() {
+       onOpen(treasureBoxInterface) { player, component ->
+           return@onOpen true
+       }
+
+        on(treasureBoxInterface) { player, component, opcode, buttonID, slot, Items ->
+
+            return@on true
+        }
+    }
+}
+
+ */

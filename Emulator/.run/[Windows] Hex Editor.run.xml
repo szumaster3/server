@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="[Windows] Hex Editor" type="JarApplication">
+        <option name="JAR_PATH" value="$PROJECT_DIR$/Tools/Mgi Editor/Hex Editor.jar"/>
+        <option name="WORKING_DIRECTORY" value="Tools\Mgi Editor"/>
+        <option name="ALTERNATIVE_JRE_PATH"/>
+        <method v="2"/>
+    </configuration>
+</component>

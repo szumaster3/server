@@ -1,0 +1,388 @@
+// Joining the Hazeel side
+
+// Obtaining the poison after an initially full inventory
+Player:Hello there.
+Clivet:Here's that poison you need. Take it and pour it into Ceril Carnillean's food. Once the deed is done, return here and speak to me once more.
+
+// If the player has a full inventory:
+Clivet tries to give you some poison, but you don't have enough room to take it.
+// end
+
+// If the player inventory space:
+Clivet gives you some poison.
+// Talking to Clivet again
+
+Player:Hello there.
+Clivet:You have a mission for us, adventurer. Go to the Carnilliean household and poison Ceril Carnillean's meal to prove your loyalty.
+If the player has poison in their inventory:
+// end
+
+// If the player has no poison in their inventory:
+Player:I need some more poison.
+Clivet:Fool! Be more careful with it this time.
+// If the player has a full inventory:
+Clivet tries to give you some poison, but you don't have enough room to take it.
+// end
+
+// If the player inventory space:
+Clivet gives you some poison.
+// end
+
+// Talking to the guard
+Player:Hello.
+Guard:Hello there. I hear you're after that cult who broke in the other night. It always gladdens me when civilians assist the law like this.
+Player:I'm just happy to be of help.
+// end
+
+// Talking to Butler Jones
+Player:Hello there.
+Butler Jones:Hello, adventurer. I hear your quest is going well.
+Player:Really?
+Butler Jones:Oh yes. Do keep up the good work.
+// end
+
+// Talking to Ceril
+Ceril Carnillean:You're back. Have you had any luck yet?
+Player:I'm afraid not, Ceril.
+Ceril Carnillean:That's Sir Ceril you blooming scoundrel! Show respect when addressing someone of my rank! I must say, I am a bit disapointed you haven't made any progress. Maybe I was wrong about you.
+Player:Yeah, well, just unlucky I guess.
+// end
+
+// Talking to Henryeta
+Player:Hello.
+Henryeta Carnillean:Oh, hello. I hope you've found those awful cultists! I simply cannot sleep at night knowing they're loose!
+Player:I'm afraid I haven't found them yet.
+Henryeta Carnillean:Well you really are useless, aren't you?
+Player:Yup, I guess I am.
+// end
+
+// Talking to Philipe
+Player:Hello there.
+Philipe Carnillean:Mommy said you're here to kill all the nasty people that keep breaking in.
+Player:Something like that.
+Philipe Carnillean:Can I watch?
+Player:No!
+// end
+
+// Talking to Claus
+Player:Hey.
+Claus the Chef:You're that adventurer the family asked to help deal with those weird cultists, right?
+Player:That's me.
+Claus the Chef:Good luck with that!
+// end
+
+// Inspecting the range
+A pot of soup is bubbling away on the range.
+Pour the poison into the pot?
+Yes.
+You pour the poison into the pot and it dissolves into the soup.
+// end
+No.
+// end
+
+// Using the poison on the range
+You pour the poison into the pot and it dissolves into the soup.
+// end
+
+// Using another poison the range
+You've already done enough poisoning.
+// end
+
+// Talking to Claus after the poisoning
+Claus the Chef:Hello there. Caught any of those weird cultists yet?
+Player:Afraid not.
+Claus the Chef:Well, keep at it!
+// end
+
+// Talking to Henryeta after the poisoning
+Player:Hello.
+Henryeta Carnillean:Those hooligans! They slaughtered my precious Scruffy! I shall never recover! I am emotionally scarred for life!
+Player:Yeah... Hopefully someone finds them soon.
+// end
+
+// Talking to Butler Jones after the poisoning
+Player:Hello there.
+Butler Jones:Hello, adventurer. Such a terrible shame about Scruffy. I wonder if the family will ever fully recover.
+Butler Jones:Anyway, I hear your quest is going well.
+Player:Really?
+Butler Jones:Oh yes. Do keep up the good work.
+// end
+
+// Talking to Philipe again
+Player:Hello there.
+Philipe Carnillean:Someone killed Scruffy. I liked Scruffy. He never told me off.
+Player:Yeah... it's a real shame.
+Philipe Carnillean:I want my mommy.
+// end
+
+// Talking to Ceril after the poisoning
+Player:Hello again.
+Ceril Carnillean:Oh the inhumanity... the cruelty... the misery... the pain...
+Ceril Carnillean:My son is a good boy, really, but how could he give his dinner to Scruffy without having the servants test it for poison first? How? How could he be so thoughtless and careless? He knows we are all under threat!
+Player:Scruffy?
+Ceril Carnillean:He's been with our family for twenty years... that's 140 in dog years! The poor dog... What did he ever do to deserve such a fate?
+Player:Your dog got poisoned? That's not right.
+Ceril Carnillean:I agree! I hope whichever evildoer is responsible gets the full weight of the law brought upon them!
+Player:Uh... yeah... me too.
+// end
+
+// Talking to Ceril again after the poisoning
+Player:Hello again.
+Ceril Carnillean:Oh the misery... How could someone do something like this?
+Player:Uh... I'm sure they won't get away with it...
+// end
+
+// Talking to the guard again
+Player:Hello there.
+Guard:Today is a dark day. Those cultists have been back, and this time they've gone further than ever before! Murder! We can't afford to keep letting them get away with this.
+// end
+
+// The scroll
+// Talking to Clivet
+Player:I poisoned the food as requested, but it didn't quite go to plan.
+Clivet:Yes, we heard all about it from one of our sources. It's a shame that Ceril Carnillean survived, but that is no fault of yours. You have proven your loyalty to Hazeel.
+Player:So what now?
+Clivet:I would like you to meet with our leader, Alomone. You'll find him in our hideout, deeper in the sewers. You can use this raft to get there.
+Clivet:However, be warned that reaching the hideout is impossible unless the flow of water down here is set correctly. You'll need to use the sewer valves above to do that.
+Player:But how will I know how to set the valves?
+Clivet:For that, you'll need this.
+// If the player has a full inventory:
+Clivet tries to give you an amulet, but you don't have enough room to take it.
+// end
+
+// If the player has inventory space:
+Clivet gives you an amulet.
+Clivet:Going from left to right, turn each of the five sewer valves above so that they follow the design of the amulet. Once you've done that, you'll be able to use the raft here to enter our hideout.
+// end
+
+// If the player did not have enough space for the amulet
+Clivet:Here, you'll need this.
+// Clivet gives you an amulet.
+Clivet:Going from left to right, turn each of the five sewer valves above so that they follow the design of the amulet. Once you've done that, you'll be able to use the raft here to enter our hideout.
+// end
+
+// Reclaiming a lost amulet
+Player:I lost that amulet you gave me.
+Clivet:Careless! Look afer[sic]this one!
+// If the player has a full inventory:
+Clivet tries to give you an amulet, but you don't have enough room to take it.
+// end
+
+// If the player has inventory space:
+Clivet gives you an amulet.
+// end
+
+// Talking to Clivet again
+Player:What am I meant to be doing?
+Clivet:Use the raft here to enter our hideout and meet with our leader, Alomone.
+Clivet:Be warned, you'll need to ensure the flow of water down here is set correctly for you to be able to use the raft.
+Clivet:Going from left to right, turn each of the five sewer valves above so that they follow the design of the amulet I gave you.
+// end
+
+// Using the raft
+The current is flowing against the raft. It won't move.
+// Inspecting a sewer valve that is to the right
+The valve is currently turned to the right.
+// Turn it to the left.
+You turn the valve to the left. Beneath your feet you hear the sudden sound of rushing water.
+// end
+
+// Do nothing.
+You leave the valve alone.
+// end
+
+// Inspecting a sewer valve that is to the left
+The valve is currently turned to the left.
+Turn it to the right.
+You turn the valve to the right. Beneath your feet you hear the sudden sound of rushing water.
+// end
+
+// Do nothing.
+You leave the valve alone.
+// end
+
+// One valve set correctly
+The raft washes up the sewer and stops at the first island. You'll need to find the right combination of the five sewer valves above if you want to go further.
+The raft flows back to the cave entrance.
+// Two valves set correctly
+The raft washes up the sewer and stops at the second island. You'll need to find the right combination of the five sewer valves above if you want to go further.
+The raft flows back to the cave entrance.
+// Three valves set correctly
+The raft washes up the sewer and stops at the fourth island. You'll need to find the right combination of the five sewer valves above if you want to go further.
+The raft flows back to the cave entrance.
+// Four valves set correctly
+The raft washes up the sewer and stops at the third island. You'll need to find the right combination of the five sewer valves above if you want to go further.
+The raft flows back to the cave entrance.
+// Sucessfully using the raft with the correct water valve settings
+The raft washes up the sewer until it reaches the end of the passage.
+
+// Talking to a Hazeel cultist
+Player:Hello.
+Hazeel Cultist:I cannot talk right now. Lord Hazeel will soon be back with us and I have many preparations to make.
+// end
+
+// Talking to Alomone
+Player:Hello there.
+Alomone:Well, well, well... we have a new recruit. Clivet told me of your desire to join us in our glorious task to resurrect the mighty Hazeel.
+Player:That's right.
+Alomone:Well if all goes well, you'll play a key role in just that. Before his defeat, Hazeel secured within his home a powerful magical scroll of restoration. It remains there still, hidden to even the foolish Carnilleans.
+Alomone:Up to now, our attempts to recover this scroll have been met with disappointment. However, I know you will not fail us.
+Player:So you want me to find this scroll?
+Alomone:That is correct. You must return to the Carnillean Mansion and find where it is hidden. We already have an agent in place to support you.
+Player:You do?
+Alomone:Indeed. Their Butler Jones is in fact a faithful follower of Hazeel. He has been unsuccessful in locating the scroll himself, but together the two of you will find it.
+Alomone:Now, go with haste. Soon we will restore Hazeel to his true power and glory!
+// end
+
+// Talking to Alomone again
+Player:Hello, Alomone.
+Alomone:Hazeel has already waited far too long for his return. It is imperative that you find that scroll! It hides somewhere within the Carnillean Mansion.
+Player:Don't worry, I'm on it.
+// end
+
+// Taking the raft back
+The raft flows back to the cave entrance.
+
+// Talking to Clivet again
+Player:Hello.
+Clivet:It is good to see you once more, adventurer. Glory to Hazeel!
+// end
+
+// Talking to Ceril again
+Player:Hello, Ceril. How's things?
+Ceril Carnillean:Sir Ceril! Sir! And things are terrible! Our beloved dog is dead, and I fear it's only a matter of time before those cultists strike again!
+Player:Don't worry, I'm sure it will all be okay in the end.
+// end
+// Talking to Claus again
+Player:Hello there.
+Claus the Chef:I just don't understand it! How? How could someone poison my delicious food without me even noticing? I... I just don't get it!
+Claus the Chef:Oh man... I hope I don't lose my job over this... but how? How did they do it? And why would they want to kill poor Scruffy anyway? He was such a good dog...
+Player:Yeah... it's a real mystery.
+// end
+
+// Talking to Ceril
+Player:Ceril. How are you?
+Ceril Carnillean:Oh cruel world! Scruffy... I knew you well... I... just... don't think I can... go on without...
+Sir Ceril breaks down into tears.
+
+Player:Loosen up already. It was only a DOG.
+// end
+
+// Talking to Butler Jones
+Player:Hello there.
+Butler Jones:Hello, adventurer. I hear your quest is going well.
+Player:I'm making progress. On that note, I hear you might be able to help me with my next task.
+Butler Jones:Ah yes, the scroll. I'm afraid I've searched high and low, but have so far been unable to locate it. I'm sure it is somewhere within the house, hidden where even the family won't find it.
+Player:Hmm... So it must be somewhere they'd have never stepped foot. I'll keep on looking.
+// end
+
+// Using the Knock-at wall
+You knock on the wall. It sounds like there's a hollow space on the other side.
+Push against the wall?
+Yes.
+The player enters the wall.
+// end
+No.
+// end
+
+// Chest without the key
+The chest is locked. It looks like it needs a key.
+
+// Searching the crate in the kitchen
+// With a full inventory:
+You search the crate and find an old key hidden at the bottom, but you don't have enough room to take it.
+// end
+
+// Without a full inventory:
+You search the crate and find an old key hidden at the bottom.
+// end
+
+// Searching a crate with the key
+You search the crate but find nothing of interest.
+
+// Opening the chest
+// With a full inventory:
+You unlock the chest and find a scroll inside, but you don't have enough room to take it.
+// end
+
+// Without a full inventory:
+You unlock the chest and find a scroll inside.
+// end
+
+// Searching the chest with a scroll already
+You already have the scroll from this chest.
+
+// Talking to Jones after obtaining the scroll
+Player:Hello there.
+Butler Jones:Hello, adventurer. How is your quest going?
+// If the player does not have the scroll:
+Player:I'm making progress.
+Butler Jones:Good. Remember, the scroll must be somewhere within the house, hidden where even the family won't find it.
+Player:Hmm... I'll keep on looking.
+// end
+
+// If the player has the scroll:
+Player:I have the scroll!
+Butler Jones:Then you should waste no time in returning to Alomone. The return of Hazeel will soon be upon us!
+// end
+
+// Talking to Hentryeta after obtaining the scroll
+Player:Hello.
+Henryeta Carnillean:I'm sorry. I am far too upset to talk to anybody right now. Oh... poor Scruffy...
+Player:Yeah... poor Scruffy.
+// end
+
+// Talking to Ceril after obtaining the scroll
+Player:Hello, Ceril. How's things?
+Ceril Carnillean:Sir Ceril! Sir! And things are terrible! Our beloved dog is dead, and I fear it's only a matter of time before those cultists strike again!
+Player:Don't worry, I'm sure it will all be okay in the end.
+// end
+
+// Talking to Philipe after obtaining the scroll
+Player:Hello there.
+Philipe Carnillean:Someone killed Scruffy. I liked Scruffy. He never told me off.
+Player:Yeah... it's a real shame.
+Philipe Carnillean:I want my mommy.
+// end
+
+// Talking to Claus after obtaining the scroll
+Player:Hello there.
+Claus the Chef:I just don't understand it! How? How could someone poison my delicious food without me even noticing? I... I just don't get it!
+Claus the Chef:Oh man... I hope I don't lose my job over this... but how? How did they do it? And why would they want to kill poor Scruffy anyway? He was such a good dog...
+Player:Yeah... it's a real mystery.
+// end
+
+// Talking to the guard after obtaining the scroll
+Player:Hello there.
+Guard:Hello, adventurer. I hope you find the cult soon. We have a horrible suspicion that there's been another burglary.
+Player:That's worrying.
+Guard:Yes, it is. The thing is, we can't even work out what they've taken! It's all very odd.
+// end
+
+// Taking the raft
+The raft washes up the sewer until it reaches the end of the passage.
+// Talking to Alomone after obtaining the scroll
+Player:Hello, Alomone.
+Alomone:Have you brought the scroll of restoration?
+// If the player has the scroll in their inventory:
+Player:Yes, I have it right here.
+Alomone:At long last! With the words contained within this scroll, our lord shall finally return to us!
+Alomone:Watch adventurer, and witness the glorious rebirth of Hazeel!
+// end
+
+// cutscene
+Alomone:Sentente sillaberi junque dithmento! Ia! Ia! Dextrimon encanto! Termando... Imcando... Solly enty rando... Sentente! Ia! Ia! Indenti zaggarati g'thxa!
+Alomone:Dintenta! Sententa! Retenta! Q'exjta! Ia! Sottottott! Ia! Dysmenta junque fammatio svelken! Sottey! Sentey! Soloment!
+// end
+
+Hazeel:My loyal followers, I have pride in you all. You have achieved a feat many would have considered impossible and returned me to this land.
+Hazeel:Much time has passed and I have much to attend to, but first, I believe there is one here who deserves my gratitude.
+Hazeel:Adventurer, I know that your efforts were essential in bringing about my return. You have my thanks. Know that I consider you an ally.
+Hazeel:Now, I must leave you, loyal subjects, for time is short. My Mahjarrat kin will soon head northwards, and I have much to prepare.
+Hazeel:Rest assured, when my work is done, I will return to you. Before long, the world will know of Hazeel once more!
+// Quest complete
+
+// If the player does not have the scroll in their inventory:
+Player:Nope, sorry.
+Alomone:You must find it and bring it to me! Hazeel has already waited far too long for his return.
+// end

@@ -1,0 +1,58 @@
+/*package content.kingdom.desert.quest.member.ics
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class IcthlarinsLittleHelper :
+    Quest("Icthlarin's Little Helper", 78, 77, 2, Vars.VARBIT_QUEST_ICTHLARINS_LITTLE_HELPER_418, 0, 1, 26) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.GOBLIN_MAIL_288, 230, 277, 5)
+        player.packetDispatch.sendString("You have completed Icthlarin's Little Helper!", 277, 4)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "4500 Thieving XP", ln++)
+        drawReward(player, "4000 Agility XP", ln++)
+        drawReward(player, "4000 Woodcutting XP", ln++)
+        rewardXP(player, Skills.THIEVING, 4500.0)
+        rewardXP(player, Skills.AGILITY, 4000.0)
+        rewardXP(player, Skills.WOODCUTTING, 4000.0)
+        addItemOrDrop(player, Items.CATSPEAK_AMULET_4677, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_ICTHLARINS_LITTLE_HELPER_418, 26, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//4,500 Thieving experience
+//4,000 Agility experience
+//4,000 Woodcutting experience
+//Catspeak amulet
+//Access to the city of Sophanem
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

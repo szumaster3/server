@@ -1,0 +1,69 @@
+/*package content.kingdom.misthalin.quest.member.fairy
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class FairyTale :
+    Quest("Fairytale I - Growing Pains", 57, 56, 2, Vars.VARBIT_QUEST_FAIRY_TALE_I_GROWING_PAINS_1803, 0, 1, 90) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!Martin the Master??", line++, false)
+            line(player, "!!Gardener?? in !!Draynor Village square??.", line++, false)
+            line(player, "", line++, false)
+            line(player, "", line++, false)
+            line(player, "I must have completed:", line++, false)
+            line(player, "Lost City", line++, isQuestComplete(player, "Lost City"))
+            line(player, "Nature Spirit", line++, isQuestComplete(player, "Nature Spirit"))
+            line(player, "A high farming level would be an adventage.", line++, false)
+            line(player, "High enough combat to defeat a level 111 monster.", line++, false)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.MAGIC_SECATEURS_7409, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "3,500 Farming XP", ln++)
+        drawReward(player, "2,000 Attack XP", ln++)
+        drawReward(player, "1,000 Magic XP", ln++)
+        rewardXP(player, Skills.FARMING, 3500.0)
+        rewardXP(player, Skills.ATTACK, 2000.0)
+        rewardXP(player, Skills.MAGIC, 1000.0)
+        addItemOrDrop(player, Items.MAGIC_SECATEURS_7409)
+        setVarbit(player, Vars.VARBIT_QUEST_FAIRY_TALE_I_GROWING_PAINS_1803, 90, true)
+    }
+
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//Magic secateurs (increases Farming-yields by 10% when harvesting allotments, herbs and hops)
+//3,500 Farming experience
+//2,000 Attack experience
+//1,000 Magic experience
+
+ */

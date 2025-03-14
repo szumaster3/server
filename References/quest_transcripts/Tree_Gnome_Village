@@ -1,0 +1,924 @@
+Tree Gnome Village Quest Dialogue
+Sources: https://www.youtube.com/watch?v=nVKmxyeKO4I, https://www.youtube.com/watch?v=YqTCAhLd-aU, https://www.youtube.com/watch?v=siVtdQnPkIw
+
+***Speak to King Bolren to start quest***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Well hello stranger. My name's Bolren, I'm the king of the tree gnomes.").also { stage++ }
+		2 -> npcl("I'm surprised you made it in, maybe I made the maze too easy.").also { stage++ }
+		3 -> playerl("Maybe.").also { stage++ }
+		4 -> npcl("I'm afraid I have more serious concerns at the moment. Very serious.").also { stage++ }
+		5 -> options("I'll leave you to it then.", "Can I help at all?").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("I'll leave you to it then.").also { stage = 7 }
+			2 -> playerl("Can I help at all?").also { stage = 8 }
+			}
+		7 -> npcl("Ok, take care.").also { stage = END_DIALOGUE }
+		8 -> npcl("I'm glad you asked.").also { stage++ }
+		9 -> npcl("The truth is my people are in grave danger. We have always been protected by the Spirit Tree. No creature of dark can harm us while its three orbs are in place.").also { stage++ }
+		10 -> npcl("We are not a violent race, but we fight when we must. Many gnomes have fallen battling the dark forces of Khazard to the North.").also { stage++ }
+		11 -> npcl("We became desperate, so we took one orb of protection to the battlefield. It was a foolish move.").also { stage++ }
+		12 -> npcl("Khazard troops seized the orb. Now we are completely defenceless.").also { stage++ }
+		13 -> playerl("How can I help?").also { stage++ }
+		14 -> npcl("You would be a huge benefit on the battlefield. If you would go there and try to retrieve the orb, my people and I will be forever grateful.").also { stage++ }
+		15 -> options("I would be glad to help.", "I'm sorry but I won't be involved.").also { stage++ }
+		16 -> when(buttonId) {
+			1 -> playerl("I would be glad to help.").also { stage = 18 }
+			2 -> playerl("I'm sorry but I won't be involved.").also { stage = 17 }
+		17 -> npcl("Ok then, travel safe.").also { stage = END_DIALOGUE }
+		18 -> npcl("Thank you. The battlefield is to the north of the maze. Commander Montai will inform you of their current situation.").also { stage++ }
+		19 -> npcl("That is if he's still alive.").also { stage++ }
+		20 -> npcl("My assistant shall guide you out. Good luck friend, try your best to return the orb.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to King Bolren before bringing the logs to Montai***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Bolren.").also { stage++ }
+		1 -> npcl("Hello traveller, we must retrieve the orb. It's being held by Khazard troops north of here.").also { stage++ }
+		2 -> playerl("Ok, I'll try my best.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to King Bolren after bringing the logs to Montai***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Bolren.").also { stage++ }
+		1 -> npcl("The orb is being held at the battlefield north of the maze.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to King Bolren after retrieving the orb from the stronghold chest WITHOUT the orb in inventory***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Bolren.").also { stage++ }
+		1 -> npcl("Do you have the orb?").also { stage++ }
+		2 -> playerl("No, I'm afraid not.").also { stage++ }
+		3 -> npcl("Please, we must have the orb if we are to survive.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to King Bolren after retrieving the orb from the stronghold chest WITH the orb in inventory***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have the orb.").also { stage++ }
+		1 -> npcl("Oh my... The misery, the horror!").also { stage++ }
+		2 -> playerl("King Bolren, are you OK?").also { stage++ }
+		3 -> npcl("Thank you traveller, but it's too late. We're all doomed.").also { stage++ }
+		4 -> playerl("What happened?").also { stage++ }
+		5 -> npcl("They came in the night. I don't know how many, but enough.").also { stage++ }
+		6 -> playerl("Who?").also { stage++ }
+		7 -> npcl("Khazard troops. They slaughtered anyone who got in their way. Women, children, my wife.").also { stage++ }
+		8 -> playerl("I'm sorry.").also { stage++ }
+		9 -> npcl("They took the other orbs, now we are defenceless.").also { stage++ }
+		10 -> playerl("Where did they take them?").also { stage++ }
+		11 -> npcl("They headed north of the stronghold. A warlord carries the orbs.").also { stage++ }
+		12 -> options("I will find the warlord and bring back the orbs.", I'm sorry but I can't help.").also { stage++ }
+		13 -> when(buttonId) {
+			1 -> playerl("I will find the warlord and bring back the orbs.").also { stage = 15 }
+			2 -> playerl("I'm sorry but I can't help.").also { stage = 14 }
+			}
+		14 -> npcl("I understand, this isn't your battle.").also { stage = END_DIALOGUE }
+		15 -> npcl("You are brave, but this task will be tough even for you. I wish you the best of luck. Once again you are our only hope.").also { stage++ }
+		16 -> npcl("I will safeguard this orb and pray for your safe return. My assistant will guide you out.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to King Bolren after defeating the Khazard Warlord***
+
+class KingBolrenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Bolren, I have returned.").also { stage++ }
+		1 -> npcl("You made it back! Do you have the orbs?").also { stage++ }
+		2 -> playerl("I have them here.").also { stage++ }
+		3 -> npcl("Hooray, you're amazing. I didn't think it was possible but you've saved us.").also { stage++ }
+		4 -> npcl("Once the orbs are replaced we will be safe once more. We must begin the ceremony immediately.").also { stage++ }
+		5 -> playerl("What does the ceremony involve?").also { stage++ }
+		6 -> npcl("The spirit tree has looked over us for centuries. Now we must pay our respects.").also { stage++ }
+		7 -> npcl("The gnomes begin to chant. Meanwhile, King Bolren holds the orbs of protection out in front of him.").also { stage++ }
+		8 -> npcl("The orbs of protection come to rest gently in the branches of the ancient spirit tree.
+		9 -> npcl("Now at last my people are safe once more. We can live in peace again.
+		10 -> playerl("I'm pleased I could help.").also { stage++ }
+		11 -> npcl("You are modest brave traveller.").also { stage++ }
+		12 -> npcl("Please, for your efforts take this amulet. It's made from the same sacred stone as the orbs of protection. It will help keep you safe on your journeys.").also { stage++ }
+		13 -> playerl("Thank you King Bolren.").also { stage++ }
+		14 -> npcl("The tree has many other powers, some of which I cannot reveal. As a friend of the gnome people, I can now allow you to use the tree's magic to teleport to other trees grown from related seeds.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Elkoy immediately leads the player out of the maze***
+
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("We're out of the maze now. Please hurry, we must have the orb if we are to survive.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy before bringing the logs to Montai outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Oh my! The orb, they have the orb. We're doomed.").also { stage++ }
+		1 -> playerl("Perhaps I'll be able to get it back for you.").also { stage++ }
+		2 -> npcl("Would you like me to show you the way to the village?").also { stage++ }
+		3 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		5 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Here we are. I hope you get the orb back soon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after bringing the logs to Montai outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("You must retrieve the orb, or the gnome village is doomed.").also { stage++ }
+		2 -> npcl("Would you like me to guide you there?").also { stage++ }
+		3 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		5 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Here we are. I hope you get the orb back soon.").also { stage = END_DIALOGUE }
+}
+
+
+***Speaking to Elkoy after bringing the logs to Montai inside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("You must retrieve the orb, or the gnome village is doomed.").also { stage++ }
+		2 -> npcl("Would you like me to show you the way out?").also { stage++ }
+		3 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		5 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Here we are. I hope you get the orb back soon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after retrieving the orb from the stronghold chest WITHOUT the orb in inventory outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("You're back! And the orb?").also { stage++ }
+		2 -> playerl("No, I'm afraid not.").also { stage++ }
+		3 -> npcl("Please, we must have the orb if we are to survive. Would you like me to show you the way to the village?").also { stage++ }
+		4 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		5 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 7 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 6 }
+			}
+		6 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		7 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		8 -> npcl("Here we are. I hope you get the orb back soon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after retrieving the orb from the stronghold chest WITH the orb in inventory outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("You're back! And the orb?").also { stage++ }
+		2 -> playerl("I have it here.").also { stage++ }
+		3 -> npcl("You're our saviour. Please return it to the village and we are all saved. Would you like me to show you the way to the village?").also { stage++ }
+		4 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		5 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 7 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 6 }
+			}
+		6 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		7 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		8 -> npcl("Here we are. Take the orb to King Bolren, I'm sure he'll be pleased to see you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after retrieving the orb from the stronghold chest WITHOUT the orb in inventory inside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("You're back! And the orb?").also { stage++ }
+		2 -> playerl("No, I'm afraid not.").also { stage++ }
+		3 -> npcl("Please, we must have the orb if we are to survive. Would you like me to guide you out of the village so you can search for it?").also { stage++ }
+		4 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		5 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 7 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 6 }
+			}
+		6 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		7 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		8 -> npcl("Here we are. I hope you get the orb back soon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after retrieving the orb from the stronghold chest WITH the orb in inventory inside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy. I have the orb.").also { stage++ }
+		1 -> npcl("Take it to King Bolren, I'm sure he'll be pleased to see you.").also { stage++ }
+		2 -> options("Alright, I'll do that.", "Can you guide me out of the maze now?").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Alright, I'll do that.").also { stage = END_DIALOGUE }
+			2 -> playerl("Can you guide me out of the maze now?").also { stage = 5 }
+			}
+		5 -> npcl("If you like, but please take the orb to King Bolren soon.").also { stage++ }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Here we are. Please don't lose the orb!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Elkoy immediately leads the player out of the maze after returning the orb to Bolren***
+
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Good luck friend.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after returning the orb to Bolren outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("Did you hear? Khazard's men have pillaged the village! They slaughtered many, and took the other orbs in an attempt to lead us out of the maze. When will the misery end?").also { stage++ }
+		2 -> npcl("Would you like me to show you the way to the village?").also { stage++ }
+		3 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		5 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Here we are. Despite what has happened here, I hope you feel welcome.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after returning the orb to Bolren inside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("Did you hear? Khazard's men have pillaged the village! They slaughtered many, and took the other orbs in an attempt to lead us out of the maze. When will the misery end?").also { stage++ }
+		2 -> npcl("Shall I guide you out of the village?").also { stage++ }
+		3 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		4 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		5 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		6 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		7 -> npcl("Please try to get our orbs back for us, otherwise the village is doomed!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after defeating the Khazard Warlord outside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("You truly are a hero.").also { stage++ }
+		2 -> playerl("Thanks.").also { stage++ }
+		3 -> npcl("You saved us by defeating the warlord. I'm humbled and wish you well.").also { stage++ }
+		4 -> npcl("Would you like me to show you the way to the village?").also { stage++ }
+		5 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		6 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		7 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		8 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		9 -> npcl("Here we are. Feel free to have a look around.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elkoy after defeating the Khazard Warlord inside of the maze***
+
+class ElkoyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Elkoy.").also { stage++ }
+		1 -> npcl("You truly are a hero.").also { stage++ }
+		2 -> playerl("Thanks.").also { stage++ }
+		3 -> npcl("You saved us by defeating the warlord. I'm humbled and wish you well.").also { stage++ }
+		4 -> npcl("Would you like me to show you the way out?").also { stage++ }
+		5 -> options("Yes please.", "No thanks Elkoy.").also { stage++ } 
+		6 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 6 }
+			2 -> playerl("No thanks Elkoy.").also { stage = 5 }
+			}
+		7 -> npcl("Ok then, take care.").also { stage = END_DIALOGUE }
+		8 -> npcl("Elkoy escorts you through the maze...").also { stage++ }
+		9 -> npcl("Here we are. Have a safe journey.").also { stage = END_DIALOGUE }
+}
+
+
+***Speaking to Commander Montai after starting the quest***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello traveller, are you here to help or just to watch?").also { stage++ }
+		2 -> playerl("I've been sent by King Bolren to retrieve the orb of protection.").also { stage++ }
+		3 -> npcl("Excellent we need all the help we can get.").also { stage++ }
+		4 -> npcl("I'm Commander Montai. The orb is in the Khazard stronghold to the north, but until we weaken their defences we can't get close.").also { stage++ }
+		5 -> playerl("What can I do?").also { stage++ }
+		6 -> npcl("Firstly we need to strengthen our own defences. We desperately need wood to make more battlements, once the battlements are gone it's all over. Six loads of normal logs should do it.").also { stage++ }
+		7 -> options("Ok, I'll gather some wood.", "Sorry, I no longer want to be involved.").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playrel("Ok, I'll gather some wood.").also { stage = 10 }
+			2 -> playrel("Sorry, I no longer want to be involved.").also { stage = 9 }
+			}
+		9 -> npcl("That's a shame, we could have done with your help.").also { stage = END_DIALOGUE }
+		10 -> npcl("Please be as quick as you can, I don't know how much longer we can hold out.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai without six logs***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again, we're still desperate for wood soldier. We need six loads of normal logs.").also { stage++ }
+		2 -> playerl("I'll see what I can do.").also { stage++ }
+		3 -> npcl("Thank you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai with six logs***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again, we're still desperate for wood soldier.").also { stage++ }
+		2 -> playerl("I have some here. (You give six loads of logs to the commander.)").also { stage++ }
+		3 -> npcl("That's excellent, now we can make more defensive battlements. and then come speak to me. I'll inform you of our next phase of attack.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai again after bringing the logs to Montai***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How are you doing Montai?").also { stage++ }
+		1 -> npcl("We're hanging in there soldier. For the next phase of our attack we need to breach their stronghold.").also { stage++ }
+		2 -> npcl("The ballista can break through the stronghold wall, and then we can advance and seize back the orb.").also { stage++ }
+		3 -> playerl("So what's the problem?").also { stage++ }
+		4 -> npcl("From this distance we can't get an accurate enough shot. We need the correct coordinates of the stronghold for a direct hit. I've sent out three tracker gnomes to gather them.").also { stage++ }
+		5 -> playerl("Have they returned?").also { stage++ }
+		6 -> npcl("I'm afraid not, and we're running out of time. I need you to go into the heart of the battlefield, find the trackers, and bring back the coordinates.").also { stage++ }
+		7 -> npcl("Do you think you can do it?").also { stage++ }
+		8 -> options("No, I've had enough of your battle.", "I'll try my best.").also { stage++ }
+		9 -> when(buttonId) {
+			1 -> playerl("No, I've had enough of your battle.").also { stage = 10 }
+			2 -> playerl("I'll try my best.").also { stage = 11 }
+			}
+		10 -> npcl("I understand, this isn't your fight.").also { stage = END_DIALOGUE }
+		11 -> npcl("Thank you, you're braver than most.").also { stage++ }
+		12 -> npcl("I don't know how long I will be able to hold out. Once you have the coordinates come back and fire the ballista right into those monsters.").also { stage++ }
+		13 -> npcl("If you can retrieve the orb and bring safety back to my people, none of the blood spilled on this field will be in vain.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai again, before talking to the gnome trackers***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello warrior. We need the coordinates for a direct hit from the ballista.").also { stage++ } 
+		2 -> npcl("Once you have a direct hit you will be able to enter the stronghold and retrieve the orb.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai after breaching the stronghold***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've breached the stronghold.").also { stage++ }
+		1 -> npcl("I saw, that was a beautiful sight. The Khazard troops didn't know what hit them.").also { stage++ } 
+		2 -> npcl("Now is the time to retrieve the orb. It's all in your hands. I'll be praying for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai after retrieving the orb from the stronghold chest***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have the orb of protection.").also { stage++ }
+		1 -> npcl("Incredible, for a human you really are something.").also { stage++ }
+		2 -> playerl("Thanks... I think!").also { stage++ }
+		3 -> npcl("I'll stay here with my troops and try and hold Khazard's men back. You return the orb to the gnome village. Go as quick as you can, the village is still unprotected.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Montai after returning the orb to Bolren***
+
+class CommanderMontaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Montai, how are you?").also { stage++ }
+		1 -> npcl("I'm ok, this battle is going to take longer to win than I expected. The Khazard troops won't give up even without the orb.").also { stage++ }
+		2 -> playerl("Hang in there.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome One after being asked to retrieve coordinates by Montai***
+
+class TrackerGnomeOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you know the coordinates of the Khazard stronghold?").also { stage++ }
+		1 -> npcl("I managed to get one, although it wasn't easy.").also { stage++ }
+		2 -> npcl("The gnome tells you the height coordinate.").also { stage++ }
+		3 -> playerl("Well done.").also { stage++ }
+		4 -> npcl("The other two tracker gnomes should have the other coordinates if they're still alive.").also { stage++ }
+		5 -> playerl("OK, take care.").also { stage = END_DIALOGUE }
+}
+
+***Speaking to Tracker Gnome One after breaching the stronghold***
+
+class TrackerGnomeOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello again.").also { stage++ } 
+		1 -> npcl("Well done, you've broken down their defences. This battle must be ours.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome One after retrieving the orb from the stronghold chest***
+
+class TrackerGnomeOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How are you tracker?").also { stage++ }
+		1 -> npcl("Now we have the orb I'm much better. They won't stand a chance without it.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome One after returning the orb to Bolren***
+
+class TrackerGnomeOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello").also { stage++ }
+		1 -> npcl("When will this battle end? I feel like I've been fighting forever.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Two after being asked to retrieve coordinates by Montai***
+
+class TrackerGnomeTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Are you OK?").also { stage++ }
+		1 -> npcl("They caught me spying on the stronghold. They beat and tortured me.").also { stage++ }
+		2 -> npcl("But I didn't crack. I told them nothing. They can't break me!").also { stage++ }
+		3 -> playerl("I'm sorry little man.").also { stage++ }
+		4 -> npcl("Don't be. I have the position of the stronghold!").also { stage++ }
+		5 -> npcl("The gnome tells you the y coordinate.").also { stage++ }
+		6 -> playerl("Well done.").also { stage++ }
+		7 -> npcl("Now leave before they find you and all is lost.").also { stage++ }
+		8 -> playerl("Hang in there.").also { stage++ }
+		9 -> npcl("Go!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Two after breaching the stronghold***
+
+class TrackerGnomeTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello again.").also { stage++ } 
+		1 -> npcl("Well done, you've broken down their defences. This battle must be ours.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Two after retrieving the orb from the stronghold chest***
+
+class TrackerGnomeTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How are you tracker?").also { stage++ }
+		1 -> npcl("Now we have the orb I'm much better. Soon my comrades will come and free me.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Two after returning the orb to Bolren***
+
+class TrackerGnomeTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello").also { stage++ }
+		1 -> npcl("When will this battle end? I feel like I've been locked up my whole life.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Three after being asked to retrieve coordinates by Montai***
+
+class TrackerGnomeThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Are you OK?").also { stage++ }
+		1 -> npcl("OK? Who's OK? Not me! Hee hee!").also { stage++ }
+		2 -> playerl("What's wrong?").also { stage++ }
+		3 -> npcl("You can't see me, no one can. Monsters, demons, they're all around me!").also { stage++ }
+		4 -> playerl("What do you mean?").also { stage++ }
+		5 -> npcl("They're dancing, all of them, hee hee.").also { stage++ }
+		6 -> npcl("He's clearly lost the plot.").also { stage++ }
+		7 -> playerl("Do you have the coordinate for the Khazard stronghold?").also { stage++ }
+		8 -> npcl("Who holds the stronghold?").also { stage++ }
+		9 -> playerl("What?").also { stage++ }
+		10 -> npcl("The coordinate is 000${player.getAttribute("quest:gnome-village:gnome3", 0)").also { stage++ }
+		11 -> playerl("You're mad").also { stage++ }
+		12 -> npcl("Dance with me, and Khazard's men are beat.").also { stage++ }
+		13 -> npcl("The toll of war has affected his mind.").also { stage++ }
+		14 -> playerl("I'll pray for you little man.").also { stage++ }
+		15 -> npcl("All day we pray in the hay, hee hee.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Three after breaching the stronghold***
+
+class TrackerGnomeThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello again.").also { stage++ } 
+		1 -> npcl("Don't talk to me, you can't see me. No one can, just the demons.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Tracker Gnome Three after retrieving the orb from the stronghold chest AND after returning the orb to Bolren***
+
+class TrackerGnomeThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello").also { stage++ }
+		1 -> npcl("I feel dizzy, where am I? Oh dear, oh dear I need some rest.").also { stage++ }
+		2 -> playerl("I think you do.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fire the Ballista without any of the coordinates***
+
+class BallistaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You enter some random coordinates.").also { stage++ }
+		1 -> npcl("The huge spear completely misses the Khazard stronghold!").also { stage++ }
+		2 -> playerl("I've got no hope of hitting the stronghold without knowing any of the coordinates. Maybe I should ask Montai's tracker gnomes for more coordinates.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fire the Ballista with only the height coordinate***
+
+class BallistaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You enter the height coordinate you got from the tracker gnome.").also { stage++ }
+		1 -> npcl("The huge spear completely misses the Khazard stronghold!").also { stage++ }
+		2 -> playerl("I'm not going to be able to hit the stronghold while I only know its height coordinate. Maybe I should ask Montai's other tracker gnomes for more coordinates.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fire the Ballista with the height and y coordinate, but without the x coordinate***
+
+class BallistaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You enter the height and y coordinates you got from the tracker gnome.").also { stage++ }
+		1 -> npcl("The huge spear completely misses the Khazard stronghold!").also { stage++ }
+		2 -> playerl("Maybe I should ask the other tracker gnome for the x-coordinate.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fire the Ballista with all three coordinates***
+***I don't know how to do this part :(***
+
+class BallistaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("That tracker gnome was a bit vague about the x coordinate! What could it be?").also { stage++ }
+		1 -> npcl("Enter the x-coordinate of the stronghold").also { stage++ }
+		2 ->options("0001", "0002", "0003", "0004").also { stage++ }
+		3 ->when(buttonId) {
+			1 -> playerl("0001").also { stage = }
+			2 -> playerl("0002").also { stage = }
+			3 -> playerl("0003").also { stage = }
+			4 -> playerl("0004").also { stage = }
+			}
+		4 -> npcl("You enter the height and y coordinates you got from the tracker gnomes.").also { stage++ }
+		5 -> npcl("The huge spear completely misses the Khazard stronghold!").also { stage++ }
+		6 -> playerl("Evidently that wasn't the right x coordinate.").also { stage = END_DIALOGUE }
+		7 -> npcl("The huge spear flies through the air and screams down directly into the Khazard stronghold.A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fire the Ballista after the stronghold has been breached***
+
+class BallistaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("The Khazard stronghold has already been breached.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Climbing over the crumbled stronghold wall after breaching the stronghold***
+
+class CrumbledWallDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("The wall has been reduced to rubble. It should be possible to climb over the remains.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the chest in the Khazard Stronghold***
+
+class StrongholdChestDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You search the chest. Inside you find the gnomes' stolen orb of protection.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Khazard Warlord after retrieving the orb from the stronghold chest***
+
+class KhazardWarlordDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("You think you're so clever. You know nothing!").also { stage++ }
+		2 -> playerl("What?").also { stage++ }
+		3 -> npcl("I'll crush you and those pesky little green men!").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Khazard Warlord after returning the orb to Bolren***
+
+class KhazardWarlordDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("You there, stop!").also { stage++ }
+		1 -> npcl("Go back to your pesky little green friends.").also { stage++ }
+		2 -> playerl("I've come for the orbs.").also { stage++ }
+		3 -> npcl("You're out of your depth traveller. These orbs are part of a much larger picture.").also { stage++ }
+		4 -> playerl("They're stolen goods, now give them here!").also { stage++ }
+		5 -> npcl("Ha, you really think you stand a chance? I'll crush you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***After defeating the Khazard Warlord***
+
+class KhazardWarlordDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("As the warlord falls to the ground, a ghostly vapour floats upwards from his battle-worn armour. Out of sight you hear a shrill scream in the still air of the valley. You search his satchel and find the orbs of protection.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Khazard Warlord after defeating him***
+
+class KhazardWarlordDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I thought I killed you?").also { stage++ }
+		1 -> npcl("Fool, warriors blessed by Khazard don't die. You can't kill that which is already dead. However I can kill you!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Remsai before retrieving the orb from the stronghold chest***
+
+class RemsaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Oh my, oh my!").also { stage++ }
+		1 -> playerl("What's wrong?").also { stage++ }
+		2 -> npcl("The orb, they have the orb. It must be returned or we're doomed.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Remsai after retrieving the orb from the stronghold chest WITHOUT the orb***
+
+class RemsaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Remsai.").also { stage++ }
+		1 -> npcl("Hello, did you find the orb?").also { stage++ }
+		2 -> playerl("No, I'm afraid not.").also { stage++ }
+		3 -> npcl("Please, we must have the orb if we are to survive.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Remsai after retrieving the orb from the stronghold chest WITH the orb***
+
+class RemsaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello Remsai.").also { stage++ }
+		1 -> npcl("Hello, did you find the orb?").also { stage++ }
+		2 -> playerl("I have it here.").also { stage++ }
+		3 -> npcl("You're our saviour.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Remsai after returning the orb to Bolren***
+
+class RemsaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Are you ok?").also { stage++ }
+		1 -> npcl("Khazard's men came. Without the orb we were defenceless. They killed many and then took our last hope, the other orbs. Now surely we're all doomed. Without them the spirit tree is useless.").also { stage = END_DIALOGUE }
+}
+
+
+
+Speaking to Remsai after defeating the Khazard Warlord***
+
+class RemsaiDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've returned.").also { stage++ }
+		1 -> npcl("You're back, well done brave adventurer. Now the orbs are safe we can perform the ritual for the spirit tree. We can live in peace once again.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Local Gnome before returning the orb***
+
+class LocalGnomeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello little man.").also { stage++ }
+		1 -> npcl("Little man stronger than big man. Hee hee, lardi dee, lardi da.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Local Gnome after returning the orb***
+
+class LocalGnomeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hi.").also { stage++ }
+		1 -> npcl("Must save the orbs and kill the Khazard warlord. That will be fun, hee hee.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Local Gnome after defeating the Khazard Warlord***
+
+class LocalGnomeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello gnome.").also { stage++ }
+		1 -> npcl("Soon we're gonna have the sacred ceremony and boy am I going to party. Lock up your daughters. Hee hee.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bolkoy before completing the quest***
+
+class LocalGnomeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("Hello stranger, new to these parts? I'm Bolkoy by the way. I'm the village shopkeeper. Would you like to buy something?").also { stage++ }
+		2 -> options("What have you got?", No thank you.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("What have you got?").also { stage = 4 }
+			2 -> playerl("No thank you.").also { stage = 5 }
+			}
+		4 -> npcl("Take a look.").also { stage = END_DIALOGUE }
+		5 -> npcl("Ok, maybe later.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bolkoy after completing the quest***
+
+class LocalGnomeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("Welcome, welcome. It's good to see you again. The village is much safer now you have returned the orbs. By the way, I'm the village shop keeper. Would you like to buy something?").also { stage++ }
+		2 -> options("What have you got?", No thank you.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("What have you got?").also { stage = 4 }
+			2 -> playerl("No thank you.").also { stage = 5 }
+			}
+		4 -> npcl("Take a look.").also { stage = END_DIALOGUE }
+		5 -> npcl("Ok, maybe later.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lieutenant Schepbur at any point***
+
+class LieutenantSchepburDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Move into position lads! eh? Who are you and what do you want?").also { stage++ }
+		1 -> playerl("Who are you then?").also { stage++ }
+		2 -> npcl("Lieutenant Schepbur, commanding officer of the new Armoured Tortoise Regiment.").also { stage++ }
+		3 -> playerl("There's only two tortoises here, that's hardly a regiment.").also { stage++ }
+		4 -> npcl("This is just the beginning! Gnome breeders and trainers are already working to expand the number of units. Soon we'll have hundreds of these beauties, nay thousands! And they will not only carry mages and").also { stage++ }
+		5 -> npcl("archers but other fiendish weapons of destruction of gnome devising. An army of giant tortoises will march upon this battlefield and rain the fire of our wrath upon all our enemies! Nothing will be able to stop us!").also { stage++ }
+		6 -> playerl("Oooookayy...... I'll leave you to it then....").also { stage = END_DIALOGUE }
+}

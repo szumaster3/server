@@ -1,0 +1,193 @@
+/*package content.region.miscquest.afr
+
+import org.rs.consts.Vars
+import core.api.hasLevelStat
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class AsaFirstResort : Quest("As a First Resort", 147, 146, 1) {
+    class SkillRequirement(val skill: Int?, val level: Int?)
+
+    val requirements = arrayListOf<SkillRequirement>()
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line++
+            line(player, "I can start this quest by speaking to !!Chief Tess??, the chief", line++, false)
+            line(player, "of !!Oo'glog??, the ogress encampment south of the !!Feldip??", line++, false)
+            line(player, "!!Hills.??", line++, false)
+            line++
+            line(player, "To start this quest, I need to complete:", line++, false)
+            if (isQuestComplete(player, "Zogre Flesh Eaters")) {
+                line(player, "<str><col=000000>Zogre Flesh Eaters</str>", line++, false)
+            } else {
+                line(player, "!!Zogre Flesh Eaters??", line++, false)
+            }
+            line(player, "", line++, false)
+            line(player, "To complete this quest I need:", line++, false)
+            if (hasLevelStat(player, Skills.HUNTER, 48)) {
+                line(player, "<str><col=000000>Level 48 Hunter</str>", line++)
+            } else {
+                line(player, "!!Level 48 Hunter??", line++)
+            }
+            if (hasLevelStat(player, Skills.FIREMAKING, 51)) {
+                line(player, "<str><col=000000>Level 51 Firemaking</str>", line++, false)
+            } else {
+                line(player, "!!Level 51 Firemaking??", line++, false)
+            }
+            if (hasLevelStat(player, Skills.WOODCUTTING, 58)) {
+                line(player, "<str><col=000000>Level 58 Woodcutting</str>", line++, false)
+            } else {
+                line(player, "!!Level 58 Woodcutting??", line++, false)
+            }
+        }
+        if (stage == 1) {
+            line++
+            line(player, "I have met Chief Tess, the chief of Oo'glog,", line++, false)
+            line(player, "the ogress encampment south of the Feldip Hills.", line++, false)
+            line(player, "It seems that someone has been talking to", line++, false)
+            line(player, "Chief Tess about some sort of business venture.", line++, false)
+            line++
+            line(player, "Chief Tess seems to be having difficulty understanding what this lady wants.", line++, false)
+            line(
+                player,
+                "I have offered to help Chief Tess by talking to the human lady in the bank at Oo'glog.",
+                line++,
+                false
+            )
+            line++
+            line(player, "I have agreed to help Balnea transform Oo'glog into a luxurious health spa.", line++, false)
+            line(player, "Balnea has given me access to the bank of Oo'glog.", line++, false)
+            line++
+            line(player, "Balnea told me to help Chargurr, the ogress chef,", line++, false)
+            line(player, "to prepare the 'catering facilities'.", line++, false)
+            line++
+            line(player, "I have agreed to help Chargurr collect wood,", line++, false)
+            line(player, "spears and raw chompy for the cooking fire.", line++, false)
+            line++
+            line(player, "I have placed 10 eucalyptus logs and 8 achey tree logs on the cooking fire.", line++, false)
+            line++
+            line(player, "I have positioned 4 spears over the cooking fire.", line++, false)
+            line++
+            line(player, "I have out 2 chompies on the spear spits over the fire pit.", line++, false)
+            line++
+            line(player, "I've started the cooking fire for Chargurr", line++, false)
+            line(player, "- the chompies are now roasting away.", line++, false)
+            line++
+            line(player, "I lit Chargurr's cooking fire; the catering facilities are now ready.", line++, false)
+            line(player, "Balnea has asked me to find Snurgh at the 'hotel facilities'", line++, false)
+            line(player, "and sort out whatever trouble she's having.", line++, false)
+            line++
+            line(player, "I have delivered 8 stripy feathers to Snurgh", line++, false)
+            line(player, "- she's going to use them to make feather pillows.", line++, false)
+            line++
+            line(player, "I've let Balnea know that everything's in order at the 'hotel'.", line++, false)
+            line(player, "She has now asked me to help Kringk get the salon ready for business.", line++, false)
+            line++
+            line(player, "I've delivered some wolf bones and spined larupia furs to Kringk", line++, false)
+            line(player, "so that she can make some hair brushes.", line++, false)
+            line++
+            line(player, "I have reported to Balnea after helping to set up the salon.", line++, false)
+            line++
+            line(player, "Balnea has sent me to talk to Seegud about ridding Oo'glog of", line++, false)
+            line(player, "the insects that swarm around its pools.", line++, false)
+            line++
+            line(player, "I've burned the insect-repelling materials as Seegud instructed, but nothing", line++, false)
+            line++
+            line(player, "I've burned the insect-repelling materials as", line++, false)
+            line(player, "Seegud instructed, but nothing happened.", line++, false)
+            line(player, "It seems some mischievous ogre children switched the colours of the rocks.", line++, false)
+            line++
+            line(player, "I've figured out which materials need to be burned", line++, false)
+            line(player, "at each fire pit and I have lit all five fires.", line++, false)
+            line(player, "The insects have dispersed I've told Balnea that live de-bugged the pools.", line++, false)
+            line++
+            line(player, "Balnea tells me there are some creatures that need to", line++, false)
+            line(player, "be removed before guests can safely use the pools.", line++, false)
+            line++
+            line(player, "I have cleared Oo'glog of diseased kebbits and wimpy birds.", line++, false)
+            line(player, " I've also moved the family of platypodes away from the pools.", line++, false)
+            line++
+            line(player, "Balnea says the spa is now ready for its grand opening.", line++, false)
+            line++
+            line(player, "The spa is now up-and-running.", line++, false)
+            line(player, "I've spoken to Balnea who has given me free use of all the spa pools.", line++, false)
+            line++
+        }
+        if (stage == 100) {
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+            line++
+            line(player, "<str>I can talk to Seegud to find out more about", line++, false)
+            line(player, "<str>the special effects of bathing in the pools.", line++, false)
+            line(player, "<str>I can also shop at the gift shop, buy and sell meat to Chargurr", line++, false)
+            line(player, "<str>use the charter ship to sail to and from Oo'glog, and", line++, false)
+            line(player, "<str>get a beauty treatment at the salon.", line++, false)
+            line(player, "<str>I can also hunt the disease kebbits and", line++, false)
+            line(player, "<str>wimpy birds outside the gates of Oo'glog", line++, false)
+            line(player, "<str>If I have a Summoning level of 10 or more,", line++, false)
+            line(player, "<str>I can catch a baby platypus and raise it as a pet.", line++, false)
+            line(player, "<str>I should speak to Balnea to learn more about this.", line++, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.BARRELCHEST_ANCHOR_10887, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "15,000 Firemaking XP", ln++)
+        drawReward(player, "15,000 Hunter XP", ln++)
+        drawReward(player, "15,000 Woodcutting XP", ln++)
+        rewardXP(player, Skills.FIREMAKING, 15000.0)
+        rewardXP(player, Skills.HUNTER, 15000.0)
+        rewardXP(player, Skills.WOODCUTTING, 15000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 200, true)
+
+        //addItemOrDrop(player,Items.ARDRIGAL_MIXTURE_738)
+
+    }
+
+    override fun getConfig(player: Player?, stage: Int): IntArray {
+        if (stage == 100) return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 200)
+        if (stage > 0) return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 1)
+        else return intArrayOf(Vars.VARBIT_QUEST_AS_A_FIRST_RESORT_4321, 0)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        requirements.add(SkillRequirement(Skills.HUNTER, 48))
+        requirements.add(SkillRequirement(Skills.FIREMAKING, 51))
+        requirements.add(SkillRequirement(Skills.WOODCUTTING, 58))
+        return this
+    }
+
+}
+//1 quest point
+//15,000 Firemaking experience
+//15,000 Hunter experience
+//15,000 Woodcutting experience
+//A mixture of 4 items, either caskets or oysters
+//Access to spa facilities
+//Access to Oo'glog bank
+//Access to Oo'glog hunter area
+//Access to platypus summoning pet (level 10 Summoning). If you release your pet in the spot you released the others during the quest you will receive another casket or oyster
+//Access to Fresh Meat
+//Access to Gift Shop
+//Ability to travel to Oo'glog using the Charter ships
+//Ability to create Robust glass and Crystal glass
+//Access to decanting five and six dose flasks into other flasks or vials (speak to Teplin Macagan)
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+//varbits:  4322 salon
+
+ */

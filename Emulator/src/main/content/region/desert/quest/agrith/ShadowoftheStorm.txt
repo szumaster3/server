@@ -1,0 +1,94 @@
+/*package content.kingdom.desert.quest.member.agrith
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.getStatLevel
+import core.api.quest.isQuestComplete
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class ShadowoftheStorm : Quest("Shadow of the Storm", 112, 111, 1,Vars.VARBIT_QUEST_SHADOW_OF_THE_STORM_1372,0,1,125) {
+
+class SkillRequirement(val skill: Int?, val level: Int?)
+
+    val requirements = arrayListOf<SkillRequirement>()
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to !!Fr. Reen?? in !!Al Kharid.??", line++, false)
+            line++
+            line(player, "I must have completed:", line++, false)
+            if (isQuestComplete(player,"Demon Slayer")) {
+                line(player, "<str><col=000000>Demon Slayer", line++, false)
+            } else {
+                line(player, "!!Demon Slayer??", line++, false)
+            }
+            if (isQuestComplete(player,Quests.THE_GOLEM)) {
+                line(player, "<str><col=000000>The Golem", line++, false)
+            } else {
+                line(player, "!!The Golem??", line++, false)
+            }
+            line(player, "and have:", line++, false)
+            if (getStatLevel(player,Skills.CRAFTING)!! >= 30) {
+                line(player, "<str><col=000000>Level 30 crafting", line++, false)
+            } else {
+                line(player, "!!Level 30 crafting??", line++, false)
+            }
+            line++
+        }
+        if (stage == 1) {
+            line++
+            line(player, "I joined a group of dark wizards in Uzer who were going to summon", line++, false)
+            line(player, "the demon Agrith Naar, so that I could kill the demon when it was summoned.", line++, false)
+            line(player, "But the leader of the group, Denath, turned out to be Agrith Naar in human form,", line++, false)
+            line(player, "and the summoning ritual actually returned him to his own dimension where", line++, false)
+            line(player, "he would be far more powerful!", line++, false)
+            line++
+            line(player, "I assembled the surviving wizards, Fr. Badden,", line++, false)
+            line(player, "Fr. Reen and the golem, and we summoned Agrith Naar.", line++, false)
+            line++
+            line(player, "I killed Agrith Naar using Silverlight.", line++, false)
+            line++
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.DEMONIC_SIGIL_6748, 230, 277, 5)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "10,000 Combat experience", ln++)
+        drawReward(player, "as a combat XP lamp, in Attack", ln++)
+        drawReward(player, "Constitution, Defence, Magic", ln++)
+        drawReward(player, "Ranged, or Strength.", ln++)
+        addItemOrDrop(player, Items.COMBAT_LAMP_10586)
+        addItemOrDrop(player, Items.DEMONIC_SIGIL_6748)
+        addItemOrDrop(player, Items.DEMONIC_TOME_6749)
+        setVarbit(player, Vars.VARBIT_QUEST_SHADOW_OF_THE_STORM_1372, 125, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        requirements.add(SkillRequirement(Skills.CRAFTING, 30))
+        return this
+    }
+
+}
+//1 quest point
+//10,000 Combat experience, as a combat XP lamp, in Attack, Constitution, Defence, Magic, Ranged, or Strength.
+//Demonic sigil (can be used to chant any number of times even after the quest)
+//Demonic tome (updated in your bookcases)
+//Silverlight turns into Darklight: It is even more powerful against demons. If a player loses Darklight, it can be retrieved by talking to Gideon Bede at Varrock's north church. You must have him replace Silverlight for you first.
+//If you didn't do so in The Golem, you can loot the demon throne at the north end of the room to obtain 2 emeralds, 2 sapphires, and 2 rubies
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

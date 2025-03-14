@@ -1,0 +1,58 @@
+/*package content.region.miscquest.toktzketdill
+
+import org.rs.consts.Vars
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TokTzKetDill : Quest("TokTz-Ket-Dill", 152, 151, 1, Vars.VARBIT_QUEST_TOKTZ_KET_DRILL_4700, 0, 1, 63) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.TOKTZ_KET_XIL_6524, 230, 277, 5)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "5,000 Attack XP, 5,000 Strength", ln++)
+        drawReward(player, "XP, 5,000 Strength XP, 10,000 Crafting", ln++)
+        drawReward(player, "XP, 15,000 Mining XP", ln++)
+        drawReward(player, "20,000 Construction XP", ln++)
+        rewardXP(player, Skills.ATTACK, 5000.0)
+        rewardXP(player, Skills.STRENGTH, 5000.0)
+        rewardXP(player, Skills.CRAFTING, 10000.0)
+        rewardXP(player, Skills.MINING, 15000.0)
+        rewardXP(player, Skills.CONSTRUCTION, 20000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_TOKTZ_KET_DRILL_4700, 63, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//5,000 Attack experience
+//5,000 Strength experience
+//10,000 Crafting experience
+//15,000 Mining experience
+//20,000 Construction experience
+//Access to the TokTz-Ket-Dill mine with 1 silver rock, 8 coal rocks, 3 mithril rocks and 2 adamantite rocks (access is obtained after reaching the third dungeon; you don't have to kill the TokTz-Ket-Dill).
+//Ability to mine stone slabs (unsmithable obsidian) in the TzHaar obsidian mine
+//The possibility of watching TzHaar-Hur-Brekt's play
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+ */

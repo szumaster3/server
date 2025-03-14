@@ -1,0 +1,100 @@
+/*package content.kingdom.desert.quest.member.scab
+
+import org.rs.consts.Vars
+import core.api.hasLevelStat
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class DealingWithScarabas :
+    Quest("Dealing with Scabaras", 145, 144, 1, Vars.VARBIT_QUEST_DEALING_WITH_SCARABAS_4230, 0, 1, 700) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 12
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to the !!High Priest of??", line++, false)
+            line(player, "!!Icthlarin?? in !!Sophanem??.", line++, false)
+            line(player, "This quest has the following requirements:", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.THIEVING, 60)) "---Level 60 Thieving/--" else "!!Level 60 Thieving??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.AGILITY, 50)) "---Level 50 Agility/--" else "!!Level 50 Agility??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.STRENGTH, 60)) "---Level 60 Strength/--" else "!!Level 60 Strength??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.FIREMAKING,
+                        21
+                    )
+                ) "---Level 21 Firemaking/--" else "!!Level 21 Firemaking??",
+                line++
+            )
+            line(player, "I must have completed the following quests:", line++, false)
+            line(player, "Contact!", line++, isQuestComplete(player, "Contact!"))
+            line(player, "The Feud", line++, isQuestComplete(player, "The Feud"))
+            line(player, "Zogre Flesh Eaters", line++, isQuestComplete(player, "Zogre Flesh Eaters"))
+            line(player, "I will require the ability to defeat !!multiple foes of level 100??", line++, false)
+            line(player, "!!and greater??.", line++, false)
+            line(player, "A Crafting level of at least !!60?? would be useful during this", line++, false)
+            line(player, "quest.", line++, false)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.ENCHANTED_WATER_TIARA_11969, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "7,000 Strength XP", ln++)
+        drawReward(player, "7,000 Thieving XP", ln++)
+        drawReward(player, "7,000 Agility XP", ln++)
+        drawReward(player, "7,000 Prayer XP", ln++)
+        rewardXP(player, Skills.STRENGTH, 7000.0)
+        rewardXP(player, Skills.THIEVING, 7000.0)
+        rewardXP(player, Skills.AGILITY, 7000.0)
+        rewardXP(player, Skills.PRAYER, 7000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_DEALING_WITH_SCARABAS_4230, 700, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//7,000 Strength experience
+//7,000 Thieving experience
+//7,000 Agility experience
+//7,000 Prayer experience
+//The ability to craft an Enchanted water tiara - protects you from the Desert heat effect
+//To craft an enchanted tiara, use water runes on a normal water tiara (they will be stored inside the tiara); every time the player takes a 'drink', the total number of water runes stored in the tiara will decrease by three.
+//Destroy the enchanted tiara to get the normal water tiara and remaining water runes back—they will drop on the ground.
+//You can only have one enchanted water tiara at any given time.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

@@ -1,0 +1,154 @@
+/*package content.region.miscquest.catcon
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class CatapultConstruction :
+    Quest("Catapult Construction", 148, 147, 2, Vars.VARBIT_QUEST_CATAPULT_CONSTRUCTION_4396, 0, 1, 60) {
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line++
+            line(player, "I can start this quest by talking to the !!Catapult Guard??", line++, false)
+            line(player, "found north of the !!Tyras Camp.??", line++, false)
+            line++
+            line++
+            line++
+            line(player, "Minimum requirements:", line++, false)
+            line(player, "!!I must complete 'Regicide'??", line++, isQuestComplete(player, "Regicide"))
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.CONSTRUCTION,
+                        44
+                    )
+                ) "---Level 44 Construction/--" else "!!Level 44 Construction??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.FLETCHING,
+                        42
+                    )
+                ) "---Level 42 Fletching/--" else "!!Level 42 Fletching??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.SMITHING,
+                        54
+                    )
+                ) "---Level 54 Smithing may be an advantage/--" else "!!Level 54 Smithing may be an advantage??",
+                line++
+            )
+            line++
+        }
+        if (stage == 1) {
+            line(
+                player,
+                "I can start this quest by talking to the Catapult Guard found north of the Tyras Camp.",
+                line++,
+                false
+            )
+            line(player, "The Catapult Guard seems to be having a rough time.", line++, false)
+            line(player, "Perhaps I should listen to his problems.", line++, false)
+            line(
+                player,
+                "The Catapult Guard forgot to treat the catapult and the wooden frame is rotten.",
+                line++,
+                false
+            )
+            line(
+                player,
+                "He's asked me to speak to General Hining in the Tyras Camp about repairing the catapult.",
+                line++,
+                false
+            )
+            line(player, "General Hining wants me to find the Catapult Engineer", line++, false)
+            line(player, "who is somewhere in the forests of Isafdar.", line++, false)
+            line(player, "I need to take him a letter from his superior officer.", line++, false)
+            line(player, "I should speak to the Catapult Engineer again now that ", line++, false)
+            line(player, "he's had a chance to read the letter I delivered.", line++, false)
+            line(player, "The Catapult Engineer is having trouble fixing the catapult.", line++, false)
+            line(player, "He's given me the repair schematics so I can help repair it.", line++, false)
+            line(player, "I need to find out how to make the repair parts.", line++, false)
+            line(player, "The Catapult Engineer's letter says that Rolad the dwarf has", line++, false)
+            line(player, "made some metal parts required for the catapult.", line++, false)
+            line(player, "I should find his workshop to discover what has happened to the parts.", line++, false)
+            line(player, "The Catapult Engineer's letter says that the wooden repair parts", line++, false)
+            line(player, "must be made from mahogany planks and at least mithril nails.", line++, false)
+            line(player, "General Hining told me that making these parts will take a lot of", line++, false)
+            line(player, "Construction and Fletching skill.", line++, false)
+            line(player, "Rolad has sent the metal repair parts for the catapult to ", line++, false)
+            line(player, "Port Sarim I should try to find Thaki the delivery dwarf there.", line++, false)
+            line(player, "Thaki the delivery dwarf is refusing to give me the metal repair parts.", line++, false)
+            line(player, "He's been told to give them to a sailor: perhaps I should disguise myself.", line++, false)
+            line(player, "I should take the metal and wooden parts to the catapult at the ", line++, false)
+            line(player, "Tyras Camp and speak to the Catapult Guard about repairing it.", line++, false)
+            line(player, "I need to continue repairing the catapult at the Tyras Camp.", line++, false)
+            line(player, "I will need the metal parts and all ten wooden parts to do this.", line++, false)
+            line(player, "I have repaired the catapult frame,", line++, false)
+            line(player, "I should speak to the Catapult Guard to see if there's a reward.", line++, false)
+            line(player, "The Tyras Camp catapult is still useless - I should speak to", line++, false)
+            line(player, "the Catapult Guard about testing it with the new frame.", line++, false)
+            line(player, "The Tyras Camp catapult is now tested and works fine.", line++, false)
+            line(player, "I should speak to the Catapult Guard to see if there's a reward.", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.TEAK_PLANK_8780, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "15,000 Construction XP", ln++)
+        drawReward(player, "5,000 Fletching XP", ln++)
+        drawReward(player, "30 Teak planks", ln++)
+        drawReward(player, "2,000 Coins", ln++)
+        rewardXP(player, Skills.CONSTRUCTION, 15000.0)
+        rewardXP(player, Skills.FLETCHING, 5000.0)
+        addItemOrDrop(player, Items.TEAK_PLANK_8781, 30)
+        addItemOrDrop(player, Items.COINS_995, 2000)
+        addItemOrDrop(player, Items.ADAMANT_HALBERD_3200, 1)
+        addItemOrDrop(player, Items.SAILORS_HAT_12595, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_CATAPULT_CONSTRUCTION_4396, 60, true)
+    }
+
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//15,000 Construction experience
+//5,000 Fletching experience
+//30 Teak planks (worth 25,830 coins)
+//2,000 coins
+//Adamant halberd
+//Increased damage when using the Castle Wars catapults
+//Sailor's hat
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+//Music unlocked
+//Meridian (When you finish building the catapult)
+
+ */

@@ -1,0 +1,134 @@
+Olaf's Quest (November 25, 2008)
+Sources: https://www.youtube.com/watch?v=7W0FYN5loR0
+
+Talk to Olaf Hradson, who is north-east of Rellekka, to start this quest.
+
+Olaf Hradson: "Who is that? Identify yourself!"
+Player: "It's me, <playername>. What are you doing out here?"
+Olaf Hradson: "Nothing... Just carving these horribly broken pieces of driftwood."
+Olaf Hradson: "In the middle of nowhere."
+Olaf Hradson: "In damp clothing."
+Player: "Okay..."
+Player: "Well, have a nice day."
+Olaf Hradson: "Wait! Would you do me a favor?"
+Player: "What kind of a favour?"
+Olaf Hradson: "Look, you see that heap of driftwood over there? That is my ship, and all that is left of my one shot at making my ancestors proud of me."
+Olaf Hradson: "My family have always been great explorers and seafarers, and I recently set off on my maiden voyage."
+Olaf Hradson: "However, a big storm - yes, a huge storm in fact - blew my ship onto the rocks. Three times."
+Olaf Hradson: "I've been sitting here ever since, trying to think of a way to make my family proud, and if you will help me...I think I have a way."
+
+Select an Option
+	"Okay, I'll help you out."
+		Player: "Okay, I'll help you out."
+		Olaf Hradson: "Thank you! I don't have much apart from my carvings, some driftwood and the map I was following when I had my little..."
+		Olaf Hradson: "...accident."
+		Olaf Hradson: "If you help me out, then I'll gladly hand it over."
+		Player: "So, what is your plan?"
+		Olaf Hradson: "Well, I have a little food left, although it's a little briny."
+		Olaf Hradson: "If you take a couple of my carvings to my wife and son in the village over the hill and tell them that I sent you with them from a distant island, then I can wait out here for a week or so before returning." 
+		Player: "Alright, hand me over the carvings and I'll be on my way."
+		Olaf Hradson: "Well, none of these are any good. I'll need some fresh wood from a decent tree."
+		Olaf Hradson: "When I was swimming for my life I saw an odd-looking windswept tree to the east of here, up that cliff."
+		Olaf Hradson: "Could you bring me some of that wood so I can work it?
+		Player: "Wow, you must have pretty good eyes to be able to see a single tree from the water during a heavy storn."
+		Olaf Hradson: "Yes...great eyes...they run in the family."
+		<end of dialogue, quest progresses>		
+	"Possibly later, when you don't smell so damp."
+	
+	
+
+Chop down windswept tree to the north-east of Olaf, then return to him.
+
+Player: "Olaf. I cut some logs from the tree. Here's the wood."
+Olaf Hradson: "Wonderful! I'll carve them up now."
+"Olaf carves furiously."
+Olaf Hradson: "Done!"
+Player: "That's it?"
+Olaf Hradson: "Yep!"
+Olaf Hradson: "This is for my wife, Ingrid. I'm sure she will love it. Tell her it's tribal or something."
+Player: "Sure..."
+Olaf Hradson: "And this one is for my son, Volf. Kids love planks in my experience. Tell him I said hello."
+Player: "Alright. They live in Rellekka, right?"
+Olaf Hradson: "Yes. Hurry back! And don't forget the story: I'm not here, I'm someplace far away."
+<end dialogue, quest progresses>
+
+
+Find Ingrid Hradson in Rellekka village, by the well, and talk to her.
+
+Player: "Excuse me, but are you Ingrid? The same Ingrid that is married to Olaf Hradson?"
+Ingrid Hradson: "Yes I am. Why do you ask?"
+Player: "I am a friend of your husband. He sent me here with a gift for you."
+Player: "An expensive, exotic gift from the far-flung and tropical shores of the Island of Obscurity."
+Ingrid Hradson: "How wonderful! I assumed from the way the big oaf always referred to the rigging as 'big strings' that he couldn't navigate his way out of a soggy paper page. So, can I see the gift he sent?"
+Player: "Certainly! Here it is. He sends his best wishes along with it."
+Ingrid Hradson: "I see. It looks like a log with 'Olaf was here' carved in it."
+Player: "It's tribal. Very tribal! I watched the natives carve it myself."
+Ingrid Hradson: "Well, since you have some such a long way, you can have this. I baked it this morning, so it's still nice and fresh."
+Player: "Oh, thank you! Enjoy yor Obscurian Tribal Artifact(tm). It has a million-and-one uses!"
+
+<end of dialogue, quest progresses.> 
+
+Go to the north-west of village to find Volf Olafson, and talk to him.
+
+Player: "Volf? Son of Olaf Hradson?"
+Volf Olafson: "Yes? Do I know you?"
+Player: "No, but I know your father. He sent me with a present for you from, err..."
+Player: "From the Island of Obscurity."
+Volf Olafson: "Oh! That was fast! He only set off recently, so I was wondering how he was doing. So, where is this gift?"
+Player: "Right here. Enjoy!"
+Volf Olafson: "What is it?"
+Player: "Very valuable. Have a nice time!"
+Volf Olafson: "Wait! Here, take this. I was going to have it for my lunch, but I suppose you can have it in payment."
+Player: "Thanks! Enjoy your new...thing!"
+
+<end dialogue, progresses story>
+
+Go back and talk to Olaf Hradson.
+
+Player: "Olaf, are you all right?"
+Olaf Hradson: "So...cold...need...fire."
+Player: "I delivered your carvings as you asked. Your family would like to see you again."
+Player: "Here, let me get you to the village before you freeze to death."
+Olaf Hradson: "I won't...go...anywhere. I don't...care... if I...freeze."
+Olaf Hradson: "I'd rather...die...than suffer...the shame."
+Olaf Hradson: "Just get the....fire burning. Use...these."
+Player: "Well, at least give me the map like you promised!"
+Olaf Hradson: "Too...cold...to...hear...whining."
+<end dialogue, progresses quest>
+
+Use the damp planks on embers (probably need a tinderbox as well) to start a fire.
+
+"You managed to get the fire going!"
+<end dialogue, progresses story>
+
+Olaf Hradson: "Ahhhhhhhh... Much better."
+Player: "Well, I'm glad you're happy. Can I have that map now?"
+Olaf Hradson: "Well, okay...but could I have a little of that food first? I've had nothing but seaweed and biscuits for the past week."
+
+Select an option
+	"Alright, here, have some food. Now give me the map."
+		Player: "All right, here, have son food. Now give me the map."
+		Olaf Hradson: "Oh... That was a banquet compared to the stuff I've been living off."
+		Olaf Hradson: "Look, I have a bit of a confession. I think that the map may well be cursed."
+		Player: "What? All this running about for a cursed map! Couldn't you have made this little revelation before I fed you?"
+		Olaf Hradson: "Look, I'm sorry, okay. Remember that I followed this map and ended up on the rocks."
+		Olaf Hradson: "It may be nothing, after all, but I think you should be very careful if you go looking for the treasure."
+		Olaf Hradson: "Well, regardless, you've more than earned this map. It was the last one my grandfather, Sven the Helmsman, ever made."
+		Olaf Hradson: "It's supposed to show the location of one of his staches of treasure, but I have never been able to decipher the strange, runic inscriptions that point the way."
+		Olaf Hradson: "I wish you luck!"
+		Player: "Well, thanks. What will you do now?"
+		Olaf Hradson: "I'll sit here and practice carving."
+		Olaf Hradson: "If you pass this way again, I'll be glad if you drop my next load of work off with my family."
+		Olaf Hradson: "That or bring me some food before I starve. Whichever."
+		<end dialogue,  progresses quest>
+		
+	"Not a chance"
+	
+	
+	
+Read the map, then go dig around the windswept tree from earlier.
+
+System message: "You dig a hole..."
+System message: "... and fall into a dark and slimy pit!"
+
+Make your way to the chest, kill the big baddie, then open chest. Quest done.

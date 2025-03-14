@@ -1,0 +1,53 @@
+{
+  "ip_address": "localhost",
+  "ip_management" : "localhost",
+  "server_port": 43594,
+  "wl_port": 43595,
+  "js5_port": 43595,
+  "world": 1,
+
+  "customization": {
+    "login_theme": "book of spells",
+    "december_snow": true,
+
+    "right_click_menu": {
+      "left_click_attack": false,
+      "background": {
+        "color": "#0fab00",
+        "opacity": "70"
+      },
+      "title_bar": {
+        "color": "#000000",
+        "opacity": "255",
+        "font_color": "#FFFFFF"
+      },
+      "border": {
+        "color": "#FFFFFF",
+        "opacity": "255"
+      },
+      "styles": {
+        "Presets provide default customizations.": "",
+        "presets": "classic",
+        "rs3border": false
+      }
+    },
+    "rendering_options": {
+      "technical": {
+        "render_distance_increase": true
+      },
+      "skybox": {
+        "skybox_color" : ""
+      }
+    }
+  },
+
+  "debug": {
+    "item_debug": false,
+    "object_debug": false,
+    "npc_debug": false,
+    "hd_login_region_debug": false,
+    "hd_login_region_debug_verbose": false,
+    "cache_debug": false,
+    "world_map_debug": false
+  }
+}

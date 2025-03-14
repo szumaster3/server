@@ -1,0 +1,122 @@
+/*package content.region.miscquest.betweenarock
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class BetweenARock : Quest("Between a Rock...", 34, 33, 2, Vars.VARBIT_QUEST_BETWEEN_A_ROCK_299, 0, 1, 110) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "!!mountain camp??, underneath the !!troll mountains??. To start", line++, false)
+            line(player, "this quest I need to have completed:", line++, false)
+            line(player, "!!Fishing Contest??", line++, isQuestComplete(player, "Fishing Contest"))
+            line(player, "!!Dwarf Cannon??", line++, isQuestComplete(player, Quests.DWARF_CANNON))
+            line++
+            line(player, "I must also have:", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.DEFENCE, 30)) "---Level 30 defence/--" else "!!30 defence??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.MINING,
+                        40
+                    )
+                ) "---Level 40 mining (higher mining being an advantage)/--" else "!!Level 40 mining (higher mining being an advantage)??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.SMITHING, 50)) "---Level 50 smithing/--" else "!!Level 50 smithing??",
+                line++
+            )
+            line(player, "The ability to defeat at least a !!level 75 enemy??.", line++, false)
+            line++
+        }
+        if (stage == 1) {
+            line(player, "Dondakan the dwarf wants me to help him break through", line++, false)
+            line(player, "a seemingly impenetrable rock.", line++, false)
+            line(player, "I have been told that a certain scholar might know more", line++, false)
+            line(player, "about the subject of the rock.", line++, false)
+            line(player, "I have found Rolad, the dwarven scholar,", line++, false)
+            line(player, "who does indeed appear to know more about the rock.", line++, false)
+            line(
+                player,
+                "I have found the missing pages of a book. Rolad has given me the assembled version.",
+                line++,
+                false
+            )
+            line(player, "I have read the book that was given to me by Rolad.", line++, false)
+            line(player, "It contained an interesting section on the history of the rock,", line++, false)
+            line(player, "and how what appear to be dwarves imprisoned a demonic spirit inside", line++, false)
+            line(player, "the rock with yellow power stones'.", line++, false)
+            line(player, "I have told Dondakan what I read in the book,", line++, false)
+            line(
+                player,
+                "how a demonic spirit was imprisoned inside the rock through 'yellow power stones'.",
+                line++,
+                false
+            )
+            line(player, "I have given Dondakan a golden cannonball.", line++, false)
+            line(player, "It disappeared right into the rock!", line++, false)
+            line(player, "Dondakan has told me that he wants to shoot me through the rock!", line++, false)
+            line(
+                player,
+                "I have been shot into the rock and have spoken to the spirit that lives inside!",
+                line++,
+                false
+            )
+            line(player, "I have killed the avatar of the Arzinian Being of Bordanzan,", line++, false)
+            line(player, "banishing it from the rock.", line++, false)
+            line(player, "I have told Dondakan about the defeat of the Arzinian Being OfBordanzan,", line++, false)
+            line(player, "making the rock a viable place for Dondakan to mine gold.", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.ADAMANT_PICKAXE_1271, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "5,000 Defence XP", ln++)
+        drawReward(player, "5,000 Mining XP", ln++)
+        drawReward(player, "5,000 Smithing XP", ln++)
+        rewardXP(player, Skills.DEFENCE, 5000.0)
+        rewardXP(player, Skills.MINING, 5000.0)
+        rewardXP(player, Skills.SMITHING, 5000.0)
+        addItemOrDrop(player, Items.ADAMANT_PICKAXE_1271)
+        setVarbit(player, Vars.VARBIT_QUEST_BETWEEN_A_ROCK_299, 110, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//5,000 Defence experience
+//5,000 Mining experience
+//5,000 Smithing experience
+//Adamant pickaxe + 2
+//Players may keep their gold helmet and access the Arzinian Mine, where 146 gold rocks and veins can be found. After the quest's completion, a dwarven boatman due east of the mine will bank the player's gold ore for a small fee. He keeps 20% of the ores, rounded up, or 10% if the player has the FairyRing of Charos (a).
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

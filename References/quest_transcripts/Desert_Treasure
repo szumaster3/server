@@ -1,0 +1,542 @@
+Desert Treasure (December 19, 2008)
+Sources: https://www.youtube.com/watch?v=Ik8SlQjzStM
+
+Start quest by talking to the archaeologist 
+
+Player: "Hello there."
+Archaeologist: "Howdy stranger. What brings you out to these parts?"
+
+Select an Option
+	"What are you doing here?"
+	"Do you have any quests?"
+		Player: "Do you have any quests? Call it a hunch, but you look like the type of man who might..."
+		Archaeologist: "Well, it's funny you should say that. I'm not sure if I would really call it a quest as such, but I foun this ancient stone tablet in one of my excavations, and it would really help me out if you"
+		Archaeologist: "could go and take it back to the digsite for me and get it examined."
+		Archaeologist: "It's very old, and I don't recognize any of the inscriptions on it."
+		
+		Select an Option
+			"Yes, I'll help you."
+				"Sure, I was heading that way anyway. Any particular person at the digsite you want me to talk to?"
+				Archaeologist: "His name's Terry Balando. Give it to nobody but him. I'm sorry, I can't entrust you with the actual tablet I found, it's far too valuable to give away, but I took these etchings - they should be enough for him to make"
+				Archaeologist: "a premininary translation on. Come back and let me know what he says, I would hate to waste my time excavating anything that isn't worth my time as a world famous archaeologist!"
+				<end of dialogue, quest progresses>
+			"No thanks, I don't want to help."
+			
+	"Who are you?"
+	"Nothing really."
+
+Go talk to Terry Balando. (Archaeological expert)
+
+What would you like to talk about?
+	"Ask about the Desert Treasure quest."
+		Player: "Hello, are you Terry Balando?"
+		Archaeological expert: "That's right, who wants to know...?"
+		Archaeological expert: "Ah yes, I recognize you! You're the lass who found that strange artefact about Zaros for the museum, aren't you? What can I do for you now?"
+		Player: "That's right. I was in the desert down by the Bebadin Camp, and I found an archaeologist who asked me to deliver this to you."
+		Archaeological expert: "You spoke to the legendary Asgarnia Smith??? Quickly, let me see what he had to give you! He is always at the forefront of archaeological breakthroughs!"
+		Player: "So what does the inscription say? Anything interesting?"
+		Archaeological expert: "This... is fascinating! These cuneiforms seem to predate even the settlement we are excavating here... Yes, yes, this is most interesting indeed!"
+		Player: "Can you translate it for me?"
+		Archaeological expert: "Well, I am not familiar with this particular language, but the similarities inherent in the pictographs seem to show a prevalent trend towards a syllabary consistent with the phonemes we have discovered in this excavation!"
+		Player: "Um... So, can you translate it for me or not?"
+		Archaeological expert: "Well, unfortunately this is the only example of this particular language I have ever seen, but I might be able to make a rough translation, of sorts..."
+		Archaeological expert: "It might be slightly obscure on the finer details, but it should be good enough to understand the rough meaning of what was originally written. Please, just wait a moment, I will write up what I can"
+		Archaeological expert: "translate into a journal for you. Then you can take it back to Asgarnia, I think he will be extremely interested in the translation."
+		<end of dialogue, quest progresses>
+	"Ask about the Digsite quest."
+	
+Talk to him again
+
+Archaeological expert: "There you go, that book contains the sum of my translating ability. If you would be so kind as to take that back to Asgarnia, I think it will reassure him he is on the"
+Archaeological expert: "right track for a find of great archaeological importance!'
+Player: "Wow! You write really quickly don't you?"
+Archaeological expert: "What can I say? It's a skill I picked up through my many years of taking field notes!"
+<end of dialogue, quest progresses>
+
+Book you get: "Translation"
+
+Title: "Translation Primer"
+P1: "This is a rough translation of the stone tablet brought to me earlier today."
+P2: "The cuneiforms aof this particular tablet are far different to anything I have previously seen in my career as an archaeological expert."
+P3: "Where possible I have given as accurate a translation as possible, but some of the words I have attempted to translate hold different meanings depending upon their intonation and context; Due to my unfamiliarity with this language, I have given possible translations for these words wherever I have encountered them. Wherever I have a word in brackers, it is a word which has many meaning depending on the context, although the general meaning should be clear to even a casual study."
+P4: "Hopefully this translation will help you in your excavations Asgarnia, and as usual I look forward to seeing what relics you bring back to the Museum of Varrock this time!/ Your friend as always, Terry Balando"
+P5: "The translation follows:"
+P6: "(There are some missing sentence fragments here, presumably from a stome tablet preceding this one which you have not yet discovered)"
+P7: "... the permanent (exile/journey) of the people ended / And so it came to pass, that deep in the (fiery/uncomfortable) desert, then gods (argued/decied) amongst themselves that the (fortress/home) would be the (select/chosen) place that would (imprison/conceal) the (wealth/power). / Thus (guarded/protected) by the (unusually archair word here, I believe it means either sick or the dead depending on context) and (defended/trapped) by the (diamonds/crystals) of (this word is untranslatable). So it was that the gods left the four (diamonds/crystals) as the (key/secret). / (Guarded/Protected) by the (again, this word has no moder nequivalent) an held by the (worth/strong) so that the (wealth/power) might forever be (imprisoned/concealed).
+P8: "There seems to be some further missing information continued onto a further tablet, but from this preliminary translation I think you may be onto something very big indeed!"
+End of book
+
+Talk to the Archaeologist
+
+Player: "Hello there."
+Archaeologist: "So what did Terry Balando say about those etchings? Did he give you a translation for me?"
+Player: "Yeah, he did. I have it here in this book."
+Archaeologist: "Did you take a read of this? It will do you good to understand how this profression works. Here, have a read."
+
+Select an Option
+	"Read book"
+		<dialogue ends,book opens>
+	"Don't read book"
+		Player: "Yeah, I did. Kind of boring really."
+		Archaeologist: "Excellent. Just give me a moment to read this, and talk to me again in a second."
+		<end of dialogue, quest progresses>
+	
+Talk to him again.
+
+Player: "Hello there."
+Archaeologist: "Hmmm. Interesting. It seems to me like there's some kind of treasure hidden out in the desert."
+Archaeologist: "So what do you say? Fancy being a treasure hunter like me?
+Player: "Uh... don't you mean archaeologist?"
+Archaeologist: "Yeeees... An archaeologist..."
+Archaeologist: "It's all this hot sun getting to me I think."
+Archaeologist: "Well anyway, let's just assume there is a treasure hidden in the desert somewhere, and let's just say that for the sake of argument that maybe if I found a big stash of gold and treasure I wouldn't necessarily just hand it"
+Archaeologist: "all over to the Museum of Varrock."
+Archaeologist: "Let's also say, purely hypothetically, that if there were such a big stash of treasure  and someone were to help me find it, then that hypothetical person might be entitled to, oh, let's say a purely for the sake of"
+Archaeologist: "argument thirty percent split..."
+Player: "Fifty percent."
+Archaeologist: "That's right!"
+Archaeologist: "A purely for the sake of argument fifty-fifty split on this hypothetical treasure, sure it exist..."
+Archaeologist: "Do you see where I'm going with this?"
+Player: "You want me to help you find some treasure for a fifty percent share, as long as I don't tell anybody, and your reputation as an esteemed archaeologist with the Museum of Varrock remains intact, and nobody"
+Player: "discovers you're actually just a treasure hunter?"
+Archaeologist: Uh... yes, but the way you said it makes it sound like I'm doing something wrong..."
+Archaeologist: "So what do you say? Partners?"
+
+Select an Option
+	"Help him"
+		Player: "Well... I guess nobody is really going to lose out on anything, and we don't even know if there is any treasure..."
+		Player: "Aw, go on then. Count me in."
+		Archaeologist: "Good girl! Well, if we split up we'll be able to find treasure quicker."
+		Archaeologist: "I'll continue searching around here in this Bebadin Camp, you head due South to the Bandit Village. If either of us find anything, we'll come find each other and say what, okay?"
+		Archaeologist: "You head due South, see what you can find out about this tablet."
+		<end of dialogue, quest progresses>
+	"Don't help him"
+
+
+Talk to the bartender
+
+	Bartender: "If you're not buying anything, I have nothing to say to you."
+	
+	Select an Option
+		"Ask about Desert Treasure"
+			Player: "As I understand it there's some kind of hidden treasure in these parts..."
+			Bartender: "Look around lady. Does it look like there's any treasure near here?"
+			Bartender: "If I were you I'd get lost before someone takes a dislike to your face and removes it for you."
+			<end of dialogue>
+		"Buy a drink"
+			Bartender: "What's that? You wanna buy a beer? It'll cost ya 650 coins."
+			
+			Select an Option
+				"Buy a beer"
+					Bartender: "There you go. Now get out, we don't like your sort around here."
+					<end of dialogue, quest progresses>
+				"Don't buy anything"
+
+Talk to him after buying the booze
+
+Bartender: "You've had your drink, now get out of here. I have nothing to say to the-"
+Player: "No, Wait! Look, I'm here on an archaeological expedition for the Museum of Varrock."
+Player: "I am only here looking for artefacts..."
+Bartender: "Oh really? Our inheritence is only sand and death. What do you expect to find out here in this desert forsaken by the gods?"
+
+Select an Option
+	"I heard about treasure..."
+	"I heard about four diamonds..."
+		Player: "I heard a rumour about four diamonds or crytals..."
+		Bartender: "The four diamonds of Azzanadra??? How came you to know of this?"
+		Player: "You've heard of them then?"
+		Bartender: "It's just a fairy tale for children. Maybe one of the village elders might know more, but it's not really something I care about."
+		Bartender: "Now get out of here, your sort isn't welcome in my bar."
+		<end of dialogue, new dialogue option>
+	"I heard about a fortress..."
+		Player: "Certain things have led me to believe they may be some kind of ruined fortress around here..."
+		Bartender: "Doubt it. What in the world would someone need to guard against in the middle of this desert?"
+		Bartender: "A bad attack of sand? I think you're on the wrong track, miss so-called archaeologist."
+		<end of dialogue>
+	"I've heard of the Diamonds of Azzanadra. (Appears after asking about the four diamonds)"
+		Player: "Tell me all you know about the Diamonds of Azzanadra."
+		Bartender: "Not that I think it's any of your business, but when I was a child I remember hearing the legend."
+		Bartender: "I don't recall it particularly well, other than they are said to contain an incredible power."
+		Bartender: "If you really want to hear more about it you'd be best off finding someone who cares about the past, and the history of this area, and stop bothering me."
+		<end of dialogue, quest progresses>
+	
+Talk to Eblis, in a building by general store
+
+Player: "Hello. I represent the Museum of Varrock, and I have reason to believe there may be some kind of artefacts of historical significance in the nearby area..."
+Eblis: "Ah yes. The only time people care about our existence is when they think they have something to gain from us."
+Eblis: "I have nothing to say to you. You and your kind are not welcome here."
+Player: "Please, if I can just have a few minutes of your time to ask some questions...?"
+Eblis: "(sigh) I suppose I can spare you that. What do you wish to know about?"
+
+Select an Option
+	"Why is this village so hostile?"
+	"Do you know anything about treasure near here?"
+	"Do you know anything about a fortress near here?"
+	"Tell me of The four diamonds of Azzanadra"
+		Player: "So tell me... Did you ever hear of something called the Diamonds of Azzanadra?"
+		Eblis: "This is the treasure which you seek?"
+		Eblis: "Please accept my apoloogies noble madam! I thought you were buy some opportunistic thief, looking to steal what heritage we have left! Now I see that you are in fact a brave adventurer,"
+		Eblis: "looking to restore our glories back upon us!"
+		Player: "Uh... yeah... So anyways, you have heard of them?"
+		Eblis: "Heard of them? Of course I have heard of them! They are the legacy of our greatest ever hero!" (Me?)
+		Player: "So... do you have any idea where they might be? I have a feeling they will be very valuable."
+		Player: "Uh, valuable as historical artefacts I mean, obviously."
+		Eblis: "They were stolen by warriors of the false god Zamorak generations ago. When you find the warriors, you will find the diamonds."
+		Eblis: "I suspect they will not willingly part with such objects of power however."
+		Eblis: "Beware too, for these warriors are very powerful; they have taken the powers of the diamonds into themselves!"
+		Player: "How do you mean?"
+		Eblis: "Each diamond has an elemental quality..."
+		Eblis: "There is the Diamond of Blood, the Diamond of Ice, the Diamond of Smoke, and the Diamond of Shadow."
+		Eblis: "You should expect the warriors to have taken some apsect of these diamonds as their own..."
+		Player: "Do you have any idea how I could track down these warriors somehow, then?"
+		Eblis: "There is an ancient spell I know of that may spy upon such power... But it will require a few ingredients for it to work."
+		Eblis: "Should you be willing to get these ingredients for me, I will be able to locate the rough area where each of these warriors has taken refuge. The spell is imprecise, but it should help you get on the"
+		Eblis: "right track in your search."
+		Eblis: "Is your desire for our freedom strong enough? Will you gather ingredients for this spell for me?'
+		
+		Select an Option
+			"Yes"
+				Player: "Sure, what do you need?"
+				Eblis: "For this spell, I will need to make some scrying glasses. I will need enough so that we can view the realm in its entirety. "
+				Eblis: "When enchanted, the scrying glass will be able to let us view any area that have been influenced by the presence of the Diamonds of Azzanadra."
+				Player: "Okay, but what exactly do you need for this spell?"
+				Eblis: "Well, six scrying glasses should be sufficient. For each scrying glass, I will need two magic logs, a steel bar and some molten glass. This make a total of 12 magic logs, 6 pieces of molten"
+				Eblis: "glass, and 6 steel bars."
+				Eblis: "In addition, for the actual spell to enchant the glasses, I will require one set of normal bones, some ash, some charcoal and a single blood rune."
+				Eblis: "Do you understand me adventurer?"
+				Player: "Quick question; what kind of bones do you need?"
+				Eblis: "Standard bones. Other types of bones are of no use to me in this spell."
+					
+				Select an Option
+					"Yes, I will go get those for you."
+						Player: "It's a slightly odd collection of ingredients, but I shouldn't have too much trouble getting those for you."
+						<end of dialogue, quest progresess>
+					"No, please repeat those ingredients."
+			"No"
+			
+			
+Once you get all the materials, you use them on him to give them. 
+
+If you talk to him before you've given all the materials, he will say: (X = amount still needed)
+Eblis: "Before I can complete the spell I will still need the following items;"
+Eblis: "X magic logs / X steel bars / X molten glass"
+Eblis: "X bones, / X ashes, / X charcoal and X blood runes"
+
+When you give him the blood rune: 
+Eblis: "Thank you, that blood rune should be sufficient for the spell."
+When you give the ashes:
+Eblis "Thank you, that is enough ash for the spell."
+When you give him the bones:
+Eblis: "Thank you, those are enough bones for the spell."
+Once you give him the charcoal:
+Eblis: "Thank you, that is enough charcoal for the spell."
+
+Talk to him once you give him all the materials.
+
+Eblis: "Excellent! Those are all the ingredients I need to create the scrying glases."
+Eblis: "I will find a suitable spot in the desert to the Easte of here, and set them up. When you are ready to begin your search, please come and find me there, I will show you how to utilize the"
+Eblis: "mirrors to find the diamonds."
+<end of dialogue, quest progresses>
+
+If you talk to him in the same spot, he will say:
+"Meet me again in the desert East of here, I will use these ingredients to create a scrying glass for you."
+
+Hunt down Eblis, and talk to him.
+
+Eblis: "Ah, so you got here at last."
+Eblis: "As you may have noticed, I have made the mirrors for the spell, and cast the enchantment upon them."
+Eblis: "By simply looking into each mirror, you will be able to see the area where the trace magics from the Diamonds of Azzanadra are emanating from."
+Eblis: 'Unfortunately, I cannot narrow the search closer with this kind of spell, but if you search the areas shown to you, you may be able to find some clues leading you to the evil warriors of Zamorak who stole the diamonds in"
+Eblis: "the first place."
+Player: "So you can't be any more specific about where to look for these warriors and their diamonds?"
+Eblis: "I'm afraid not, other than the direction that the mirrow is facing will be approximately the direction you will need to head in."
+Eblis: "Make sure to come and speak to me when you have retrieved all four diamonds."
+<end of dialogue, quest progresses>
+
+Go to the smokey well.
+Player: "I can see a lot of foul looking smoke at the bottom of this well."
+Player: "I don't think breathing it in directly would be very good for my health."
+<end of dialogue>
+
+Enter the well
+Find the burnt chest, and attempt to open it
+"There seems to be no way to open this chest. Engraved where the keyhole should be is a message; 'Light the path, and find the key...'"
+
+Once you light all the torches, go back to the chest and open it.
+Chat message: "You open the chest and take a key."
+You now have a toasty key.
+
+Go open the gate to then North-east of the cave
+Beat the baddy.
+Chat message: "You take the Diamond of Smoke from the ashes of the warrior."
+
+Talk to Rasolo
+
+Rasolo: "Greetings friend. I am Rasolo, the famous merchant. Would you care to see my wares?"
+
+Select an Option
+	"Yes"
+	"No"
+	"Ask about the Diamonds of Azzanadra"
+		Player: "No, actually I was looking for something specific..."
+		Rasolo: "Hmmmm? And what would that be?"
+		Player: "I am looking for one of the Diamonds of Azzanadra. I have reason to believe it may be somewhere around here."
+		Rasolo: "Ahhh... The Shadow Diamond..."
+		Rasolo: "I know the object of which you speak. It is guarded by a fearsome warrior known as Damis, they say, who lives in the shadows, invisible to prying eyes..."
+		Player: "How can I find this 'Damis' then?"
+		Rasolo: "Well now... perhaps we can help each other out here."
+		Rasolo: "I have in my possession a small trinket, a ring, that allows the wearer to see the unseen..."
+		Player: "How much do you want for it?"
+		Rasolo: "Ah, but it is not for sale... As such..."
+		Rasolo: "I am offering to trade it for an item that was rightfully mine, but was stolen by a bandit named Laheeb."
+		Rasolo: "The item in question is a gilded cross, that has some sentimental value to myself. I wish for you to recover this item for me, and I will happily let you have my ring of visibility."
+		Player: "Where can I find this Laheeb?"
+		Rasolo: "Well, as a travelling merchant I have roamed these lands for many years..."
+		Rasolo: "To the far east of here there is an area that is dry, and barrel like the desert... it is called..."
+		Player :"Al-Kharid?"
+		Rasolo: "... Yes, Al-Kharid. Now, to the sound of Al-Kharid there is a passageway, it is called the..."
+		Player: "Shantay Pass."
+		Rasolo: "... Yes. I didn't realize you had travelled there yourself."
+		Rasolo: "Anyway, when you have gone through the Shantay Pass, you will find yourself in a hostile desert... YOu will need to bring water with you to keep your life. Now, to the south-west of this pass, you will find a small"
+		Rasolo: "village..."
+		Player: "The Bedabin camp."
+		Rasolo: "If you know where Laheeb lives, why did you ask me?" (Lul. This guy's gettin' pissed.)
+		Player: "I don't. Sorry, please continue."
+		Rasolo: "Well, okay then. Anyway, south of this encampment there is an area where few have ever been... It is a village of murderous bandits and treacherous"
+		Rasolo: "thieves... This is where Laheeb makes his home."
+		Rasolo: "He will have hidden his stolen trasure somewhere in that village, I am sure of it. When you find his loot, you will find my gilded cross. Return it to me, and I will reward you with my ring"
+		Rasolo: "of visiblity, so that you may find Damis. Does this seem fair to you?"
+		
+		Select an Option
+			"Yes"
+				Player: "Not a problem. I'll be back with your cross before you know it."
+				<end of dialogue, quest progresses>
+			"No"
+
+Go spam lockpick on the secure chest in the southern-most tent in the thief village
+Has three locks. On the final success:
+Chat message: "Inside the chest, hidden under some rags, you find a Gilded Cross."
+Chat message:"An old and strangely shaped metal cross."
+
+Go back to Rasolo.
+Rasolo: "Have you retrieved my gilded cross for me yet?"
+Player: "Yes I have!"
+Rasolo: "Excellent, excellent. Here, take this ring. While you wear it, you will be able to see things that live in the shadows."
+Rasolo: "And you will be able to find the entrance to Damis' lair."
+<end of dialogue, quest progresses>
+
+Find and enter the evil baddy's lair
+Part way through exploring it, you'll get the chat message,
+"A voice seems to come from the walls around you;"
+"'You... do not be... long in this... place..."
+"Turn... back now, or... prepare... to meet your... doom...'"
+
+Then when you find the baddy, he'll say in overhead chat, "You should... have listened to me!"
+Eh. Too lazy to sift through and get all overhead stuffs.
+
+Anyways, you get the shadow diamond one you rekt him.
+
+Go talk to Malak in the south building of Canifis in Morytania
+
+Malak: "A human, eh? Give me one good reason why I should not just take you to Lord Drakan now."
+Malak: "You had better make it a good one too, or you will not survive the night, I'll wager."
+
+Select an Option
+	"I am here to worship Zamorak"
+	"I am here to praise Lord Drakkan"
+	"I am here to worship you, oh mighty Malak"
+	"I am here to kill Lord Drakan"
+	"I am looking for a special diamond..."
+		Player: "I am here looking for a special diamond... I have reason to believe it is somewhere in this vicinity, and it is probably in the possession of a warrior of Zamorak."
+		Player: "I'm fairly sure it will have some kind of magical aura or something too. I don't suppose you've seen it, or know where it might be?"
+		Malak: "Interesting... Well, perhaps we can come to a little... arrangement, human."
+		Malak: "I may have information that may assist you, but you in turn will have to do something for me. What do you say? Do you think we could come to some form of"
+		Malak: "agreement?"
+		Player: "Well, what kind of something? No offence, but you're not exactly the trustworthy type..."
+		Malak: "Ah, you have a healthy sense of paranoia, I see. It is not a particularly unfair request on my part..."
+		Malak: "All I ask is that you ensure that the current owner of the diamond is killed. For my part, I will let you know his whereabout, and how exactly to kill him."
+		Malak: "When he is dead, you may take the diamond from his corpse and do with it what you will. I have no interest in such baubles."
+		Malak: "So what say you? A life for a diamond. As a mark of good faith, I will give you some information for free:"
+		Malak: "The current owner of this diamond is named Dessous."
+		
+		Agree to this arrangement?
+			"Yes"
+				Player: "Well, I can't see any drawback. Okay, I accept your offer. Now tell me what you know."
+				Malak: "What I know? Hah! After you have been alive as long as I, the things I know are enough to fill a library."
+				Malak: "I'm afraid you will need to be a little more specific."
+				
+				Choose an Option
+					"Why do you want Dessous dead?"
+						Player: "I don't see exactly how this bargain benefits you... Why exactly do you want Dessous killed anyways?"
+						Malak: "That is an impertinent question to demand from myself.
+						Malak: "However, if it will help seal our deal, I will let you know some of the details."
+						Malak: "As you may or may not know, myself and my blood kin are the rulers of this land, all serving under Lord Drakan. However, we tend not to die of old age or similar"
+						Malak: "natural causes, which means that to gain another Lords title or land, there often need to be..." (Apostrophe in Lords?)
+						Malak: "Unnatural causes of death involved. Let us just say, that Dessous is in control of some land that I myself would like some say in, and that it is not in my interest to be seen to be responsible for the"
+						Malak: "death of a fellow Lord."
+						Malak: "It would however be extremely advantageous to myself should some random human adventurer take it upon themself to remove this rival for me... Do you understand?"
+						Player: "Yes... I think so..."
+						Malak: "Good, we understand each other then. We will both benefit from the death of Dessous."
+					"Where can I find Dessous?"
+						Player: "Where can I find this Dessous?"
+						Malak: "He currently resides in a graveyard to the South-East of here. You will not be able to move the gravestone which he lies beneath however, you will need to find some way to"
+						Malak: "lure him out from his tomb."
+						Player: "And how exactly would I go about doing that?"
+						Malak: "Well, he is a vampire, so fresh blood would almost certainly entice him out."
+						Malak: "However, even though he is a frail and decrepit example of our species, he will be albe to kill a weakling human such as yourself extremely easily. Having him in a bloodlust as he does so, will not make"
+						Malak: "your job any easier."
+					"How can I kill Dessous?
+						"So what advice can you give me on killing Dessous?"
+						Malak: "An ancient and weak as Dessous is, he is still more than a match for the likes of you."
+						Malak: "That is, assuming you were to fight him fairly."
+						Malak: "My proposal would be for you to even up the odds a little bit."
+						Player: "How would I go about doing that?"
+						Malak: "Well, my plan would be as follows. First, take a silver bar to the man living in the sewers in Draynor. He was an assistant to Count Draynor for some of his..."
+						Malak: "more interesting experiments many years past. Tell him you need a sacrificial offering pot. He will know what you speak of, it is a unique type of container used in various ancient vampiric ceremonies."
+						Malak: "Then take that pot to Entrana, and get it blessed by the Head Monk. This will lend the pot some holy power."
+						Malak: "If you then bring that silver pot back to me, I will provide you with some fresh blood, to put into it. To that pot of blood, you will add some crushed garlic and some spice to disguise the smell."
+						Malak: "Use that pot of blood on Dessous' tomb, and he will be unable to resist rising and drinking from it."
+						Malak: "The combination of garlic, silver, and blessings from Saradomin will act upon him as a poison, and allow you to kill him."
+						Malak: "This is just my suggestion of curse, you may ignore it if you wish, although I offer  no guarantees of your ability to defeat him otherwise."
+						Malak: "Was there anything else you wanted?"
+					"Actually, I don't need to know anything."
+						Player: "Never mind, I will figure out all I need to know by myself."
+						Malak: "As you wish. Come and see me when you have managed to kill Dessous."
+						<end of dialogue, quest progresses>
+			"No"
+			
+
+Anywho, go hunt down Ruantun in the sewers under Draynor Village.
+
+Player: "Hello."
+Ruantun: "You ssshould not be down here."
+Player: "Are you an assistant to Count Draynor?"
+Ruantun: "I usssed to have that honour... Why do you ssseek me?"
+Player: "I have a silver bar with me, I was wondering if you could make it into a 'sacrificial offering pot' for me?"
+Ruantun: "Yesss, of courssse... There you are, put it to good usssse."
+<end of dialogue, quest progresses>
+
+Go to Entrana and talk to the high priest
+
+High Priest: "Many greetings. Welcome to our fair island."
+Player: "Hi, I was wondering if you can quickly bless this for me?"
+High Priest: "A somewhat strange request, but I see not harm in it. There you go. May Saradomin walk with you."
+<end of dialogue, quest progresses>
+
+Talk to Malak again.
+Player: "I found Ruantun in Draynors sewers. He made me this pot, now where can I get some fresh blood to fill it with? (Again, missing apostrophe)
+Chat Message: "Malak cuts you and pours some of your blood into the pot."
+Player: "Ow!"
+Malak: "There you go. As fresh as it gets."
+Player: "Thanks for nothing."
+Malak: "Come and speak to me again when you have managed to kill Dessous."
+<end of dialogue, quest progresses>
+
+Mix the rest of the ingredients in, then go kill Desu-chan.
+
+Go back to talk to Malak after you kill him.
+
+Malak: "Ah, the wandering hero returns! I take it you have dispatched poor old Dessous for me?"
+Player: "Quit playing games with me, Malak. I want that diamond, and I want it now!"
+Malak: "Do not take that tone of voice with me, meat. You should be thankful I have allowed you your life."
+Malak: "Here, take your precious little bauble."
+Malak: "I will take that silver pot from you as well, humans are not meant to possess such artefacts. Now get out of my sight, our deal is complete, and if I see you here again I will not hesitate to take you to"
+Malak: "Lord Drakan."
+Malak: "He will be extremely pleased to meet the murderer of poor Dessous, I suspect."
+<end of dialogue, quest progresses>
+
+Go find mr. troll child the terrible.
+Give it a chocolate cake.
+Player: "Hey there little troll... Take this and dry those tears..."
+Troll child: "(Sniff)"
+<end of dialogue>
+
+Talk to troll child again.
+Player: "Hello there."
+Troll child: "-sniff- H-hello there."
+Player: "Why so sad, little troll?"
+Troll child: "It was the bad man! He hurt my mommy and daddy! He made them all freezey!"
+Player: "Bad man...?"
+Troll child: "He said it was because they stole his diamond! But they never did! They found it, and didn't know who it belonged to!"
+Troll child: "My mommy always told me stealing is wrong, they would never steal from someone!"
+Troll child: "Then he did some wavey hand thing and my mommy and daddy got frozified!"
+Player: "A diamond you say? Listen, I think I might be able to help your parents, but I need that Diamond in return."
+Troll child: "-niff- I don't think they really wanted ti anyway, they would have given it back to the bad man if he'd asked for it before freezifying them..."
+Troll child: "I give you my promise lady that if you unfreeze my mommy and daddy, you can have the stupid diamond."
+Troll child: "Do we have a deal?"	
+
+Select an Option
+	"Yes"
+		Player: "Absolutely. Don't worry kid, I'll get your parents back to you safe and sound."
+		<end of dialogue, quest progresses>
+	"No"
+
+Attempt to go through ice gate.
+Troll child: "Oh, I'm sorry. My mommy says that we ice trolls are so cold we can freeze the air around use when we are upset or angry."
+Troll child: "I'm afraid I must have frozen those gates too much when I was crying, but since you told me you are going to help rescue my mommy and daddy you should be able to squeeze through the bars."
+Troll child: "You are much smaller than most troll,s it should be easy for you!"
+<end of dialogue>
+
+As you approach boss battle:
+Chat message: "You can feel an evil presence nearby..."
+
+
+When you break the mother our first: 
+
+Troll mother: "Wow, thanks for breaking me out of that ice! But please, my husband is still trapped in there!"
+Troll father: "Phew! am I glad to be out of that big ice cube! Are you okay too darling?"
+Troll mother: "Yes, I thought we were done for! Why did that nasty Kamil freeze us up there anyway?"
+Player: "He must have been trying to protect his Diamond."
+Troll father: "You mean that diamond I found the other day belong to him? But why didn't he just ask for it back? It's not like I really want it or anything!"
+Troll father: "And how did you know we had that diamond anyway, fleshy?"
+Player: "Your son told me. That's why I rescued you, it is very important that I have that diamond..."
+Troll mother: "Ooohhhhh, my poor baby! He must have been so worried about us..."
+Troll father: "Yes, but he certainly inherited Dad's smarts!"
+Troll father: "If he'd told this fleshy that he had the Diamond and not us, we might never have been rescued!"
+Player: "Wait... what? That stupid little troll kid had the diamond all along?"
+Troll mother: "Don't you talk about my baby like that!"
+Troll father: "Now now dear, all's well that ends well. We've been freed and this fleshy has certainly earned himself that diamond."
+Troll father: "Let's get out of this terrible place and see our son!"
+<you teleport to the kid outside the gate>
+Troll child: "Mommy! Daddy! You're free!"
+Troll father: "That's right son, and it's all thanks to this brave adventurer here. Now, make sure you hand over that diamond he was looking for."
+Troll father: "It's been nothing but trouble for us, let's just get back to our cave and have dinner."
+Troll mother: "That's right son, it's your favorite  tonight too! A plate of raw mackerel!" 
+Troll child: "RAW MACKEREL! YUMMY!"
+Troll child: "Here ya go lady! Thanks for getting my mom and dad away from the bad man!"
+Player: "Don't worry about it, just as long as I don't have to go back into that blizzard."
+Player: "I should make sure I have all four diamonds with me before speaking to Eblis again."
+ 
+Go talk to Eblis at the mirrors with all the diamonds in your inv.
+Player: "So I have all four of these Diamonds of Azzanadra, now what?"
+Eblis: "Azzanadra was our greatest ever hero. He was unkillable, and the cowardly traitors who stole our lands did not know what to do with him, for his hatred for them was as strong as his magics."
+Eblis: "In the end, they cast a spell upon him, to trap him in the stone structure to the South of here."
+Eblis: "They stole his very life force, the essence of his power, and trapped it within the four crystals - the very same Four Diamonds which you have now recovered from the brigands who stole from us."
+Eblis: "The four pillars surrounding the structure are keeping the containement spell intact. By placing a diamond into each, you will breach the magical defenses and begin to restore Azzanadra's"
+Eblis: "power, and be able to enter the structure."
+Eblis: "Go, place the diamonds, and free my lord Azzanadra! (Sounding like I'm summoning some eldritch horror from the space between dimensions)
+Eblis: "The path will be hard, for his prison is full of traps and danger to prevent his rescue, but he will reward you beyond your wildest dreams when freed!"
+Eblis: "Quickly... After all these centuries, Lord Azzanadra is nearly free! You must spare no time, place the Diamonds upon the pillars and enter the pyramid so that you may free him!"
+<end of dialogue, quest progresses>
+
+Place diamonds on pillars, and make your pay to the center of the pyramid
+Talk to Azzanadra.
+
+Azzanadra: "I knew they could not trap me here for long!"
+Azzanadra: "Well done, soldier, tell me, how goes the battle?"
+Player: "Battle?"
+Azzanadra: "You do not know of the battle?"
+Azzanadra: "More time must have passed than I had thought..."
+Azzanadra: "Tell me, what news of the great Paddewwa? Do the shining spires of Laddar still stand? And what of glorious Annakarl? The fortress is still intact?"
+Player: "Uh... Sorry, I've never heard of them..."
+Azzanadra: "No!"
+Azzanadra: "My lord... What has become of you? I cannot hear your voice in my mind anymore!"
+Azzanadra: "My thanks to you brave warrior for your help in freeing me from this accursed tomb, but it seems I have much to do to make amends."
+Azzanadra: "If the shinies cities no longer stand, then it means that we must have failed my lord..."
+Azzanadra: "How long have I been trapped here? Master... Have you truly been dispatched from this world?"
+Azzanadra: "Warrior, for your efforts in freeing me, I offer you the gift of knowledge."
+Azzanadra: "I bestow upon you the ancient magicks, taught me by my Lord before his disappearances, may you use the mwell in battle for our people."
+Azzanadra: "They will replace the knowledge you previously had, but you may switch between them by praying at the altar in this room at any time."
+Azzanadra: "I trust we shall meet again adventurer, I offer you the messings of myself and my master in all of your endeavours!"
+Azzanadra: "Now I must leave you, for there must be some trace of my master's power left somewhere. Feel free to use the portal I shall create to return here easily in the future!"
+<end of quest>

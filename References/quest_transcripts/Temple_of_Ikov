@@ -1,0 +1,425 @@
+Temple of Ikov Quest Dialogue
+Sources: https://www.youtube.com/watch?v=uvGrn6SuQ-8, https://www.youtube.com/watch?v=eQdXnLEDoAk, https://www.youtube.com/watch?v=OKYM2oFOUtk
+
+***Speaking to Lucien to start the quest***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("I seek a hero to go on an important mission!").also { stage++ }
+		1 -> options("I am a mighty hero!", "Yup, lots of heroes about these days.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("I am a mighty hero!").also { stage = 4 }
+			2 -> playerl("Yup, lots of heroes about these days.").also { stage = 3 }
+			} 
+		3 -> npcl("Well, if you see any be sure to point them in my direction.").also { stage = END_DIALOGUE }
+		4 -> npcl("I require the Staff of Armadyl. It is in the deserted Temple of Ikov, near Hemenster, north east of here.").also { stage++ }
+		5 -> npcl("Take care hero! There is a dangerous monster somewhere in the temple!").also { stage++ }
+		6 -> options("Why can't you get it yourself?", "That sounds like a laugh!", "Oh no! Sounds far too dangerous!", "What's the reward?!").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Why can't you get it yourself?").also { stage = 8 }
+			2 -> playerl("That sounds like a laugh!").also { stage = 10 }
+			3 -> playerl("Oh no! Sounds far too dangerous!").also { stage = 16 }
+			4 -> playerl("What's the reward?!").also { stage = 17 }
+			} 
+		8 -> npcl("The guardians of the Staff of Armadyl fear me!").also { stage++ }
+		9 -> npcl(" They have set up a magical barrier which even my power cannot overcome!").also { stage = 6 }
+		10 -> npcl("It's not as easy as it sounds. The monster can only be killed with a weapon of ice. There are many other dangers.").also { stage++ }
+		11 -> playerl("I'm up for it!").also { stage++ }
+		12 -> npcl("Take this pendant. Without it you will not be enter the Chamber of Fear.").also { stage++ }
+		13 -> npcl("Lucien has given you a pendant!").also { stage++ }
+		14 -> npcl("I cannot stay here much longer. ").also { stage++ }
+		15 -> npcl("I will be west of the Grand Exchange in Varrock. I have a small holding up there.").also { stage = END_DIALOGUE }
+		16 -> ncpl("Wimp! Call yourself a hero?! My daughter is more a hero than you!").also { stage = END_DIALOGUE }
+		17 -> npcl("I see you are the mercenary type.").also { stage++ }
+		18 -> playerl("It's a living.").also { stage++ }
+		19 -> npcl("I will reward you well if you bring me the staff.").also { stage = 6 }
+}
+
+
+
+***Speaking to Lucien in Ardougne after starting the quest***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("I told you not to meet me here again!").also { stage++ }
+		1 -> playerl("Sorry! Can you remind me of my mission?").also { stage++ }
+		2 -> npcl("My patience grows thin hero!").also { stage++ }
+		3 -> npcl("I need the Staff of Armadyl. It's in the Temple of Ikov, near Hemenster, north east of here.").also { stage++ }
+		4 -> playerl("I'm up for it!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lucien in Varrock after starting the quest and before getting the staff***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you got the Staff of Armadyl yet?").also { stage++ }
+		1 -> playerl("No, not yet.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lucien after starting the quest and if player has lost the pendant***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've lost the pendant you gave me.").also { stage++ }
+		1 -> npcl("Have another, it will remind you of my power!").also { stage++ }
+		2 -> npcl("Lucien has given you another pendant!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to attack Lucien in Varrock before choosing a side in the quest***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You don't want to attack me. I am your friend.").also { stage++ }
+		1 -> npcl("You decide to not attack Lucien. He is your friend.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lucien in Varrock after starting the quest and after getting the staff***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you got the Staff of Armadyl yet?").also { stage++ }
+		1 -> options("Yes! Here it is.", "No, not yet.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes! Here it is.").also { stage = 3 }
+			2 -> playerl("No, not yet.").also { stage = END_DIALOGUE }
+		3 -> npcl("You give Lucien the Staff of Armadyl.").also { stage++ }
+		4 -> npcl("Muhahhahahahaha!").also { stage++ }
+		5 -> npcl("I can feel the power of the staff running through me! I will be more powerful and they shall bow down to me!").also { stage++ }
+		6 -> npcl("I suppose you want your reward? I shall grant you much power!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Upon killing Lucien***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You have defeated me for now! I shall reappear in the North!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lucien after killing him***
+
+class LucienDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I thought I killed you?!").also { stage++ }
+		1 -> npcl("Ha! Ha! Ha!").also { stage++ }
+		2 -> npcl("You can not kill me human!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the lever on the lever bracket***
+
+class LeverDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You fit the lever into the bracket.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Flipping the lever***
+
+class LeverDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You hear the clunking of some hidden machinery.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching an ice chest and finding one ice arrow***
+
+class IceChestDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You found an ice arrow!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching an ice chest and finding multiple ice arrows***
+
+class IceChestDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You found some ice arrows!").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Searching the second lever for traps***
+
+class SecondLeverDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You find a trap on the lever! You disable the trap.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the fire warrior***
+
+class FireWarriorDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Amitus Smeti! Who dares to enter the Temple of Ikov!").also { stage++ }
+		1 -> options("A humble pilgrim.", "I am a mighty hero!").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("A humble pilgrim.").also { stage = 3 }
+			2 -> playerl("I am a mighty hero!").also { stage = 4 }
+			}
+		3 -> npcl("I haven't seen a pilgrim for thousands of years! Temple is closed!").also { stage = END_DIALOGUE }
+		4 -> npcl("Pathetic fool! Prepare to die!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Winelda WITHOUT twenty limpwurts***
+
+class WineldaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hehe! We see you're in a pickle!
+		1 -> npcl("Wants to be getting over the nasty lava do we?
+		2 -> options("Nah, not bothered!", "Yes, we do!", "Yes, I do!").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Nah, not bothered!").also { stage = 4 }
+			2 -> playerl("Yes, we do!").also { stage = 5 }
+			3 -> playerl("Yes, I do!").also { stage = 6 }
+			}
+		4 -> npcl("Hehe! Ye'll come back! They always come back!").also { stage = END_DIALOGUE }
+		5 -> npcl("Mocking us are we? Clever one aren't we?").also { stage = 6 }
+		6 -> npcl("I'm knowing some magic trickesses! I could get over easy as that!").also { stage++ }
+		7 -> npcl("Don't tell them! they always come! They pester poor Winelda!").also { stage++ }
+		8 -> playerl("If you're such a great witch, get me over!").also { stage++ }
+		9 -> npcl("See? they pester Winelda!").also { stage++ }
+		10 -> playerl("I can do something for you!").also { stage++ }
+		11 -> npcl(" Good! Don't pester, help!").also { stage++ }
+		12 -> npcl("Get Winelda 20 limpwurt roots for my pot.").also { stage++ }
+		13 -> npcl("Then we shows them some magic!").also { stage = END_DIALOGUE }
+
+
+
+***Speaking to Winelda WITH twenty limpwurts***
+
+class WineldaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hehe! We see you're in a pickle!
+		1 -> npcl("Wants to be getting over the nasty lava do we?
+		2 -> options("Nah, not bothered!", "Yes, we do!", "Yes, I do!").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Nah, not bothered!").also { stage = 4 }
+			2 -> playerl("Yes, we do!").also { stage = 5 }
+			3 -> playerl("Yes, I do!").also { stage = 6 }
+			}
+		4 -> npcl("Hehe! Ye'll come back! They always come back!").also { stage = END_DIALOGUE }
+		5 -> npcl("Mocking us are we? Clever one aren't we?").also { stage = 6 }
+		6 -> npcl("I'm knowing some magic trickesses! I could get over easy as that!").also { stage++ }
+		7 -> npcl("Don't tell them! they always come! They pester poor Winelda!").also { stage++ }
+		8 -> playerl("If you're such a great witch, get me over!").also { stage++ }
+		9 -> npcl("See? they pester Winelda!").also { stage++ }
+		10 -> playerl("I can do something for you!").also { stage++ }
+		11 -> npcl(" Good! Don't pester, help!").also { stage++ }
+		12 -> npcl("Get Winelda 20 limpwurt roots for my pot.").also { stage++ }
+		13 -> npcl("Then we shows them some magic!").also { stage++ }
+		14 -> playerl("Okay, here are you limpwurt roots.").also { stage++ }
+		12 -> npcl("Ooh, they're well prepared! hehe!").also { stage++ }
+		13 -> npcl("You give Winelda the limpwurt roots.").also { stage++ }
+		14 -> npcl("Good! Good! My potion is nearly ready! bubble, bubble, toil and trouble!").also { stage++ }
+		15 -> npcl("Now we shows them ours magic! Hold on tight").also { stage = END_DIALOGUE }
+
+}
+
+
+
+***Returning to Winelda with no limpwurt roots***
+
+class WineldaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you got roots for poor Winelda?").also { stage++ }
+		1 -> playerl("No, I haven't got any.").also { stage++ }
+		2 -> npcl("We needs 20 limpwurt roots for pot. Then Winelda helps you get over nasty lava.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Returning to Winelda with less than twenty limpwurt roots***
+
+class WineldaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you got roots for poor Winelda?").also { stage++ }
+		1 -> playerl("I've got some. How many did you need?").also { stage++ }
+		2 -> npcl("We needs 20 limpwurt roots for pot. Then Winelda helps you get over nasty lava.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Returning to Winelda with twenty limpwurt roots***
+
+class WineldaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you got roots for poor Winelda?").also { stage++ }
+		1 -> playerl("Yes, I've got them.").also { stage++ }
+		2 -> npcl("Good! Good! My potion is nearly ready! bubble, bubble, toil and trouble!").also { stage++ }
+		3 -> npcl("Now we shows them ours magic! Hold on tight!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Guardian of Armadyl WITH Lucien's pendant equipped***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Thou is a foul agent of Lucien! Such an agent must die!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Guardian of Armadyl WITHOUT Lucien's pendant equipped***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Thou hast ventured deep into the tunnels, you have reached the temple of our master. It is many ages since a pilgrim has come here.").also { stage++ } 
+		1 -> options("I seek the Staff of Armadyl.", "Out of my way fool!", "What are your kind and what are you doing here?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("I seek the Staff of Armadyl.").also { stage = 19 }
+			2 -> playerl("Out of my way fool!").also { stage = 41 }
+			3 -> playerl("What are your kind and what are you doing here?").also { stage = 3 } 
+			}
+		3 -> playerl("We are the Guardians of Armadyl. We have kept the temple safe for many ages. The evil in the dungeons seek what lies here. The Mahjarrat are the worse.").also { stage++ }
+		4 -> options("What is the Armadyl?", "Who are the Mahjarrat?", "Wow! You must be really old!").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("What is the Armadyl?").also { stage = 6 }
+			2 -> playerl("Who are the Mahjarrat?").also { stage = 11 }
+			3 -> playerl("Wow! You must be really old!").also { stage = 18 }
+			}
+		6 -> npcl("Armadyl is the god we serve. We have been charged with guarding his sacred artefacts until he requires them.").also { stage++ }
+		7 -> options("Ah ok, thanks.", "Someone told me there were only three gods. Saradomin, Zamorak and Guthix.").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playerl("Ah ok, thanks.").also { stage = 9 }
+			2 -> playerl("Someone told me there were only three gods. Saradomin, Zamorak and Guthix.").also { stage = 10 } 
+			}
+		9 -> npcl("Go in peace.").also { stage = END_DIALOGUE }
+		10 -> npcl("Saradominists. Bleh. They only acknowledge those three. There are at least twenty gods!").also { stage = END_DIALOGUE }
+		11 -> npcl("They are ancient and powerful beings of evil! it is said that they once had great influence over this plane of existence, and that Zamorak was once of their kind.").also { stage++ }
+		12 -> npcl("They are far fewer in number now, but there are still some present in this world. One such as Lucien would become nigh unstoppable if he were to possess the Staff of Armadyl.").also { stage++ }
+		13 -> options("Did you say Lucien? It was Lucien that asked me to get the staff!", "I hope you are doing a good job then!").also { stage++ }
+		14 -> when(buttonId) {
+			1 -> playerl("Did you say Lucien? It was Lucien that asked me to get the staff!").also { stage = 15 } 
+			2 -> playerl("I hope you are doing a good job then!").also { stage = 17 }
+		15 -> npcl("You are a fool to be working for Lucien! Your soul must be cleansed to save you!").also { stage++ }
+		16 -> playerl("You're right, it's time for my yearly bath.").also { stage = 29 }
+		17 -> npcl("Do not fear! We are devoted to our charge!").also { stage = END_DIALOGUE }
+		18 -> npcl("No! I am not old! my family has guarded the staff for many generations.").also { stage = END_DIALOGUE }
+		19 -> npcl("We are the guardians of the staff, our fathers were guardians and our father's fathers before that. Why dost thou seek it?").also { stage++ }
+		20 -> options("Lucien will give me a grand reward for it!", "Give it to me!", "I collect rare and powerful artefacts.").also { stage++ }
+		21 -> when(buttonId) {
+			1 -> playerl("Lucien will give me a grand reward for it!").also { stage = 22 } 
+			2 -> playerl("Give it to me!").also { stage = 27 }
+			3 -> playerl("I collect rare and powerful artefacts.").also { stage = 28 } 
+			}
+		22 -> npcl("Thou art working for that spawn of evil?! Fool. You must be cleansed to save your soul!").also { stage++ } 
+		23 -> options("How dare you call me a fool?", "I just thought of something I must do!", "You're right, it's time for my yearly bath.").also { stage++ } 
+		24 -> when(buttonId) {
+			1 -> playerl("How dare you call me a fool?").also { stage = 25 }
+			2 -> playerl("I just thought of something I must do!").also { stage = 26 }
+			3 -> playerl("You're right, it's time for my yearly bath.").also { stage = 29 }
+			}
+		25 -> npcl("We must cleanse the temple!").also { stage = END_DIALOGUE }
+		26 -> npcl("An agent of evil cannot be allowed to leave!").also { stage = END_DIALOGUE }
+		27 -> npcl("The staff is sacred! You will not have it!").also { stage = END_DIALOGUE }
+		28 -> npcl("Your worldy greed has darkened your soul!").also { stage = END_DIALOGUE }
+		29 -> npcl("The guardian splashes holy water over you.").also { stage++ }
+		30 -> npcl("You have been cleansed!").also { stage++ }
+		31 -> npcl("Lucien must not get hold of the staff! he would become too powerful!").also { stage++ }
+		32 -> npcl("Hast thou come across the undead necromancer? It was he that raised an army of the undead against Varrock a generation ago. If you know where he is you can help us defeat him.").also { stage++ }
+		33 -> options("Ok! I'll help!", "No! I shan't turn against my employer.", "I need time to think.").also { stage++ }
+		34 -> when(buttonId) {
+			1 -> playerl("Ok! I'll help!").also { stage = 35 } 
+			2 -> playerl("No! I shan't turn against my employer.").also { stage = 39 } 
+			3 -> playerl("I need time to think.").also { stage = 40 }
+			}
+		35 -> npcl("So he is close by?").also { stage++ }
+		36 -> playerl("Yes!").also { stage++ }
+		37 -> npcl("He must be gaining in power again. If you can defeat him, he will be banished from this plane for a while. You will need this pendant to attack him.").also { stage++ }
+		38 -> npcl("The guardian has given you a pendant.").also { stage = END_DIALOGUE }
+		39 -> npcl("Fool! You will die for your sins!").also { stage = END_DIALOGUE }
+		40 -> npcl("Linger a while and be at peace.").also { stage = END_DIALOGUE }
+		41 -> npcl("I may be a fool but I will not step aside! 
+		42 -> options("Why not?", "Then you must die!", "You're right, I will go now.").also { stage++ }
+		43 -> when(buttonId) {
+			1 -> playerl("Why not?").also { stage = 44 } 
+			2 -> playerl("Then you must die!").also { stage = END_DIALOGUE } 
+			3 -> playerl("You're right, I will go now").also { stage = 45 }
+			}
+		44 -> npcl("Only members of our order are allowed to handle the staff.").also { stage = 41 }
+		45 -> npcl("That is a wise decision. Stay a while and let your soul be cleansed!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Guardian of Armadyl after attempting to steal the staff / siding with Lucien***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Halt! You will not leave here with the Staff of Armadyl!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Guardian of Armadyl after obtaining the Armadyl Pendant***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you rid us of Lucien yet?").also { stage++ }
+		1 -> playerl("Not yet.").also { stage++ }
+		2 -> npcl("Hurry friend! Time is against us!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Guardian of Armadyl after killing lucien***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I got rid of Lucien!").also { stage++ }
+		1 -> npcl("Well done, friend! He knows we are strong and still defend the staff. This is good news!").also { stage = END_DIALOGUE }
+}
+
+
+***Speaking to Guardian of Armadyl after giving the staff to lucien***
+
+class GurdianOfArmadylDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Thou art a foul agent of Lucien! Such an agent must die!").also { stage = END_DIALOGUE }
+}

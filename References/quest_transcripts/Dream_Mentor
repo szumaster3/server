@@ -1,0 +1,561 @@
+Dream Mentor (February 11, 2009)
+Sources: https://www.youtube.com/watch?v=CxNAlFCVcw4
+
+Fair warning, this is going to be a bit of a mess due to the 'minigame' or whatever you want to call it.
+
+To start quest, talk to the fallen man inside the small cave in the Lunar Isle Mine.
+
+"This guy seems a little down on his luck / Do you want to help him?"
+
+Help the man?
+	"Yes"
+		<cue cutscene>
+		"Torn clothes, covered in bruises and cuts.../ This man must have been down here a long time."
+		"He seems to have a pulse."
+		"And he's definitely breathing, although very weakly."
+		"Let's have a closer inspection of this man."
+		"The following screen will show you the man's stats. YOu can find out more information by clicking on the stat names. His stats will need improving to the bar markers to progress.
+		<cutscene ends, dialogue ends, quest progresses>
+	"No"
+
+"You can access this interface at any time by selecting the 'Inspect' option on the man." 
+
+If you feed him food:
+"You managed to feed him. He seems to like it."
+
+If you don't alternate the foods between three types:
+"The man rejects the food. / It seems he would rather some variety."
+
+If you feed him enough:
+"The man takes the food. He seems to enjoy it and opens his eyes."
+Player: "Hello?"
+Fallen Man: "Uuummmpf..."
+Player: "Can you hear me?"
+Fallen Man: "Owww... paaaain."
+Player: "Don't move, don't move!"
+Player: "You'll be okay. You'll be fine."
+Fallen Man: "Help me."
+Player: "I will, just stay still."
+<end dialogue>
+
+If you talk to him again:
+Player: "Can you hear me?"
+Fallen Man: "Just about."
+
+Select an Option
+	"Just don't worry."
+	"I'm going to have to go soon."
+	"It's quite dark down here."
+			Player: "It's quite dark down here."
+			Fallen Man: "I hadn't noticed. Who knows what danger lurks in the shadows. I'm so scared."
+			<end of dialogue>
+	"I wonder what monster carved this cave out?"
+	 
+Talk to him again
+
+Select an Option:
+	"Did you hear that noise?"
+	"You're looking better now."
+		Player: "You're looking better now."
+		Fallen Man: "You're lying. I look dreadful."
+		Player: "No, honest."
+		Fallen Man: "Really? In what way?"
+		Select an Option
+			"You don't look dead anymore, for a start."
+			"Well, you look and sound more lively."
+				Player: "Well, you look and sound more lively."
+				Fallen Man: That's promising. Perhaps I will make it out of here."
+				<end of dialogue>
+
+	"How long have you been down here?"
+	"This place gives me the creeps!"
+
+Talk to him again.
+
+Select an Option
+	"Feeling positive"
+		Player: "Feeling positive"
+		Fallen Man: "Not really."
+		Player: "Oh."
+		<end dialogue>
+	"Are you looking forward to getting out?"
+		Player: "Are you looking forward to getting out?"
+		Cyrisus: "Definitely. A good wash, fresh clothes, a nice meal."
+		
+		Select an Option
+			"Just take it a step at a time."
+			"That's the spirit!"
+				Player: "That's the spirit!"
+				Cyrisus: "Thank you, your help is really appreciated."
+				<end of dialogue>
+	"Why do you look so sad?"
+	"Cheer up, it may never happen!"
+	
+Talk to him again
+
+Select an Option
+	"Those are some deep cuts on your legs."
+	"I think I feel a bit ill."
+	"You seem like a nice guy."
+		Player: "You seem like a nice guy."
+		Fallen Man: "Ah, thanks. That's a really nice thing to say."
+		Select an Option
+			"I thought I had better say it before it's too late."
+			"Just being honest."
+				Player: "Just being honest."
+				Fallen Man: "Thank you. Right back at ya!"
+				<end of dialogue>
+	"I can't believe how many suqahs are on this island."
+
+Talk to him again
+
+Select an Option
+	"Don't you think you should give up being an adventurer?"
+	"When we get out of here I'll buy you a drink!"
+		Player: "When we get out of here I'll buy you a drink!"
+		Fallen Man: "Really?" (No. Not really. You smell a bit, and are a terrible adventurer. ;3)
+		Player: "Naturally."
+		Fallen Man: "That's nice, that kind?"
+		
+		Select an Option
+			"Whatever and wherever you want - my treat."
+				Player: "Whatever and wherever you want - my treat."
+				Fallen Man: "That's really appreciated. Thank you."
+				<end of dialogue>
+			"Something cheap. Although it's my pleasure, helping you is costing me." (Ngl, you spend way more on food for him than it'd cost to buy hundreds of drinks)
+			
+	"Hope you don't mind me saying, but you smell a bit."
+	"It'll be a while before we get out."
+
+Talk to him again
+
+Select an Option
+	"I'm very impressed you managed to get into this cave."
+		Player: "I'm very impressed you managed to get into this cave."
+		Fallen Man: "I must admit it was hard to crawl this far."
+		
+		Select an Option
+			"Did you not want to give up?"
+			"I would have given up personally."
+				Player: "I would have given up personally."
+				Fallen Man: "Really? I was determined to survive."
+				Player: "That's good."
+				<end of dialogue>
+	"Congratulations on not dying!"
+	"Good job you didn't find more suqah don here."
+	"I was wondering why nothing lives down here."
+	
+If you cheer him up enough:
+Cyrisus: "Thank you."
+Player: "I'm so pleased you're getting better! You must stay still though. You're not fit to walk yet."
+Cyrisus: "Where am I? Who are you?"
+Player: "My name is <playername>. You're on Lunar Isle, in a cave."
+Cyrisus: "I'm Cyrisus. Oh yes, I remember, I was on the island and..."
+Cyrisus: "Suqhs! There were suqah monsters!"
+Player: "What?"
+Cyrisus: "They attacked! I ran and ran. I crawled down here."
+Player: "It's okay, it's okay. You're safe now."
+Cyrisus: "I am?"
+Player: "Yes."
+Cyrisus: "I was so afraid."
+Cyrisus: "Ow my head hurts. And my legs. I'm so tired."
+Cyrisus: "Please, just leave me, I'm a waste of effort, my body is in ruin."
+Player: "No, just trust me, I'll see that you get out of here. Don't give up."
+<end of dialogue>
+
+Talk to him again
+
+Select an Option
+	"I trust you usually look smarter."
+	"It's a bit damp in here."
+	"Spider!"
+	"You'll survive this easily."
+		Player: "You'll survive this easily."
+		Cyrisus: "I'm no so sure."
+		Player: "Come on. Think positive!"
+		Cyrisus: "What's the point?"
+		
+		Select an Option
+			"Think of all the places you can visit when you get out!
+				Player: "Think of all the places you can visit when you get out!
+				Cyrisus: "That's true."
+				Player: "Such possibilities and adventures!"
+				Cyrisus: "Yes. I can't wait!"
+				<end of dialogue>
+			"Because otherwise you'll fail."
+			
+			
+Talk to him again.
+
+Select an Option
+	"I had better be going now."
+	"What are you going to do when you get out of here?"
+		Player: "What are you going to do when you get out of here?"
+		Cyrisus: "Well I don't know. What should I do?"
+		
+		Select an Option
+			"That's up to you. You could travel with me!"
+				Player: "That's up to you. You could travel with me!" (I mean, I could use a slave to do the menial stuff like chop trees, mine, banking my stuff, etc.)
+				Cyrisus: "You'd do that for me? That sounds marvellous! I will look forward to it." (Death flag found)
+				<end of dialogue>
+			"If I were you I'd stay indoors."
+	"Any chance you could pay me for this?"
+	"It's very cold down here."
+	
+Talk to him again
+
+Select an Option
+	"It's a good thing you have me to look after you."
+	"What would you do if I wasn't here?"
+	"What a coincidence that I found you."
+		Player: "Quite the coincidence that I found you."
+		Cyrisus: "Yes, I think I've been very lucky."
+		Player: "That you have."
+		<end of dialogue>
+	"So you don't know how long you've been down here?"
+	
+Talk to him again
+
+Select an Option
+	"Not long now and you'll be back on your feet!"
+		Player: "Not long now and you'll be back on your feet!"
+		Cyrisus: "Oh, my friend, you really think so?"
+		Player: "That kind of depends."
+		Cyrisus: "On what?"
+		
+		Select an Option
+			"On whether we have to amputate your legs or not."
+			"On whether you mind me helping you further."
+				Player: "On whether you mind me helping you further."
+				Cyrisus: "I'm so glad to have your help. I would never turn it down!"
+				Player: "I'm glad."
+				<end of dialogue>
+	"Do you think anyone else is down here?"
+	"You've got quite the collection of bruises there!"
+	"Since when did you only have one leg?"
+
+Select an Option
+	"You look like I feel."
+	"I'm tired, I think I'll take a nap."
+	"Do you think this cave is stable?"
+	"You're sounding much better."
+		Player: "You're sounding much better."
+		Cyrisus: "My voice, you mean?"
+		Player: "Yes, much more positive. Which is great."
+		Cyrisus: "Thanks."
+		
+		Select an Option
+			"But you probably don't want to sort out the bad breath."
+			"If you need anything, just let me know."
+				Player: "If you need anything, just let me know."
+				Cyrisus: "Will do."
+				<end of dialogue>
+
+Talk again
+
+Select an Option
+	"You have a big apetite."
+	"Let's sing a song!"
+		Player: "Let's sing a song!"
+		Cyrisus: "Is it really the time to?"
+		Player: "Half a pound of tuppenny rice, half a pound of treacle." 
+		Cyrisus: "But..."
+		Player: "That's the way the money goes. Pop goes the weasel!"
+		Cyrisus: "Please go away..."
+		<end of dialogue>
+	"It's quite cosy in here."
+	"How about a joke?"
+
+Talk again.
+
+Select an Option
+	"This would probably make a nice home."
+	"We could do with something for you to sit on."
+	"Can you smell gas?"
+	"You're very safe in this little cave."
+		Player: "You're very safe in this little cave."
+		Cyrisus: "I suppose I am."
+		
+		Select an Option
+			"Just one entrance."
+			"The suqah will never fit through that tunnel."
+				Player: "The suqah will never fit through that tunnel."
+				Cyrisus: "Very true. I think I picked a good spot."
+				<end of dialogue>
+
+
+Pick him up after he's happy enough or whatever
+
+Player: "There we are."
+Cyrisus: "Thank you <playername>. I would surely be dead without you."
+Player: "Don't worry. So what were you doing on this island?"
+Cyrisus: "Exploring. I greatly enjoy travelling the world and taking in all the experiences available."
+Player: "I can relate to that, and Lunar Isle is definitely worth a visit. Where else have you been?"
+Cyrisus: "Well, I've traveled from the frozen wastes in the Wilderness to the pyramids of the Kharidian Desert. I've lived with the monkeys of Ape Atoll and dined with the Tz'Harr under the volcano of Karamja."
+Player: "Impressive. You must have a great many stories and mastered loads of skills."
+Cyrisus: "You could say that."
+Cyrisus: "I could smith you full rune, farm spirit trees and still have time to cook you a summer pie for tea."
+Player: "Wow. No need to say more."
+Player: "But why have you had such a difficulty with the suqah? Surely you're a skilled warrior?"
+Cyrisus: "Err, well..."
+Player: "You must have mastered all forms of combat?"
+Cyrisus: "No. Not really."
+Player: "Why?"
+Cyrisus: "I... erm..."
+Player: "Why?"
+Cyrisus: "Please, let's leave that line of conversation."
+Player: "Oh, okay. If you wish. So, what now?"
+Cyrisus: I still don't feel fit enough to go outside. I could also do with some armour."
+Player: "I suppose I could lone you some armour?"
+Cyrisus: Oh, there's really no need to worry."
+Player: "Oh?"
+Cyrisus: "Trust, me, there's no need. Please, just go to the bank on this island, I have a friend working there. Just tell him I sent you."
+Player: "And what does he look like? What's his name?"
+Cyrisus: "Trust me: when you see him, you'll know."
+Player: "Okaaay."
+Cyrisus: "Oh, and if you want, you can contact me with the NPC Contact spell in the Lunar Spellbook. It might save you running back and forth."
+<end of dialogue, quest progresses>
+
+
+Talk to 'Bird's-Eye' Jack
+
+What would you like to talk about?
+	"Using the bank"
+	"Cyrisus in the mine"
+		Player: "Hi there, this may sound a bit random, but do you know Cyrisus?"
+		'Bird's-Eye' Jack: "That I do. But I must say you seem quite familiar too."
+		Player: "I do?"
+		'Bird's-Eye' Jack: "..."
+		'Bird's-Eye' Jack: "Why! You're that insolent fool who insulted my navigational skills!"
+		Player: "What!"
+		'Bird's-Eye' Jack: "Accusing me of navigating in circles!"
+		Player: "Wait a minute! Now I recognise you; you're the navigator on the ship that first took me to Lunar Isle! The first time I visited this place your navigation was useless!"
+		'Bird's-Eye' Jack: "How dare you! It was a jinx."
+		Player: "Ahh."
+		Player: "Of course."
+		Player: "Well, if it wasn't for me you would never have reached this place."
+		'Bird's-Eye' Jack: "Oh, behold the great adventurer <playername>. How the world would crumble without her."
+		Player: "Oh, the wit."
+		'Bird's-Eye' Jack: "Better than yours."
+		Player: "Er, no it isn't."
+		'Bird's-Eye' Jack: "Er. Yes it is."
+		Player: "Er. No it..."
+		Player: "Stop. Let's not do that again. So, why are you working here now?"
+		'Bird's-Eye' Jack: "Why, you have a problem with it?"
+		Player: "Oh no. It's just that the job of banker doesn't seem quite as... 'exotic' as 'pirate'. Seems like a step-down to me."
+		'Bird's-Eye' Jack: "How dare you! I'll have you know that the job of a banker is far more exciting than that of a pirate!"
+		Player: "Er, yeah, whatever you say mate."
+		'Bird's-Eye' Jack: "It is! And it's an honest living."
+		'Bird's-Eye' Jack: "I was tired of looting and hunting for treasure. It was time to turn my life around."
+		Player: "What a heart touching story."
+		'Bird's-Eye' Jack: "Don't patronise me."
+		Player: "Anyway, as I was saying, do you know Cyrisus?"
+		'Bird's-Eye' Jack: "Yes."
+		Player: "Well, he's down in the caves at the north end of the island, and I need your help."
+		'Bird's-Eye' Jack: "Listening."
+		Player: "I need to get some items out of his bank acocunt. Is that possible?"
+		'Bird's-Eye' Jack: "I suppose. Knock yourself out."
+		'Bird's-Eye' Jack: "I suppose you had better take this chest to carry his stuff. Don't want you losing any of it."
+		<end of dialogue, open Cyrisus's bank.>
+		
+		Talk to Cyrisus after getting stuff in chest.
+		Player: "Hi there!"
+		Cyrisus: "Hi! Managed to get my armour yet?"
+		Player: "I have got a chest and filled it with some items."
+		Cyrisus: "Superb! What have you got?"
+		Player: "There is..."
+		<list items in chest and whether they're good or not.
+		
+		<end dialogue>
+		Talk to him again
+		
+		Player: "Hi, I've been to see 'Bird's-Eye' Jack, and I've got a chest."
+		Player: "I've also gilled it with some armour; what do you think?"
+		Cyrisus: Okay, I'll try it on. No peeking."
+		Player: "Oh, I won't. I'll close my eyes."
+		Cyrisus: "Still changing."
+		Cyrisus: "Hmm...."
+		Cyrisus: "Perfect! I couldn't ask for a better set-up!"
+		Player: "Excellent!"
+		<end of dialogue>
+		
+		Talk to him again.
+		Player: "Looking good in your kit!"
+		Cyrisus: "Thanks."
+		
+		Select an Option
+			"Let me tell you about myself."
+			"What do you want to talk about?"
+				Player: "What do you want to talk about?"
+				Cyrisus: "I don't know, I don't think I feel like talking."
+				Player: "Your loss."
+				<end of dialogue>
+			"Is it okay if I talk to you?"
+			"Tell me a bit about yourself."
+
+Talk to him again
+	
+Select an Option
+	"Just don't worry."
+		Player: "Just don't worry."
+		Cyrisus: "You think things will turn out okay?"
+		Player: "Well..."
+		
+		Select an Option
+			"Of course."
+				Player: "Of course."
+				Cyrisus: "Oh thanks, I feel a bit better now."
+				<end of dialogue>
+			"Well, probably not, to be honest."
+		
+	"I'm going to have to go soon."
+	"It's quite dark down here."
+	"I wonder what monster carved this cave out."
+	
+
+Once he's armored and feeling healthy
+Cyrisus: "Perfect! I feel fealthy, I am positively charged and I'm dressed like a war machine!"
+Player: "Excellent!"
+Player: "You certainly look the part!"
+Cyrisus: "Why thanks, I feel it too!"
+Player: "Now, Cyrisus. Please tell me."
+Player: "Why did you have such difficulty against the suqahs?"
+Cyrisus: "Ah, well. Best I tell you. The thing is... the thing that I should say... the problem I have, for which you should know..."
+Player: "Just tell me."
+Cyrisus: "Okay."
+Cyrisus: "I'm afraid of combat."
+Player: "What?"
+Cyrisus: "I tried so hard over the years, but I simply cannot gather the courage to fight monsters."
+Cyrisus: "I've learnt the techniques, I've got the equipment. I just get so afraid. My legs turn to jelly, I'm dropping with sweat. All I can do is run."
+Player: "Now that surprises me."
+Cyrisus: "I know it seems bad, but honestly, I've tried. It was part of the reason I came to Lunar Isle to see the Moon Clan. I trust you've gone through the ceremony to visit the Dreamland?"
+Player: "I have indeed. A very strange day I must say, but very valuable! Especially gaining the Lunar spells."
+Cyrisus: "Yes, so I came to the Moon Clan again to see if they could help me visit my dreams again and conquer my fear of combat. But then I came across the suqah."
+Cyrisus: "Say, would you come with me to the Oneiromancer? Perhaps you can give me some support or guidance?"
+Player: "Well, I suppose. Can't see why not."
+Cyrisus: "Excellent! Please, you go on ahead, I'll make my way there myself. I'm not walking out of this cave past those suqahs again!"
+<end of dialogue>
+
+Talk to the Oneiromancer.
+
+What do you want to talk about?
+	"The state of the island"
+	"Cyrisus"
+		Player: "Hello again."
+		Oneiromancer: "Oh hello <playername>! It has been a while."
+		Oneiromancer: "What brings you here again? Creating more astral runes?"
+		Player: "Not at the moment. I've come on behalf of a friend. You will probably have met him - his name is Cyrisus."
+		Oneiromancer: "Oh yes, I know him. A bright man. What is it about him, my dear?"
+		Player: "Well, I..."
+		Oneiromancer: "Oh my."
+		Cyrisus: "Hello!"
+		Oneiromancer: "Cyrisus. It's been a while. Your kind friend here was just talking about you."
+		Cyrisus: "Good. We were hoping you could help us."
+		Oneiromancer: "Yes, I can try."
+		Cyrisus: "I need to get over my fear of combat. Surely I can sort that out in the Dreamland?"
+		Oneiromancer: "Of course. With the Potion of Shared Reaming. It'll send both of you into the Dreamland, and sort out your biggest issue."
+		Player: "Sounds simple."
+		Oneiromancer: "In most ways, yes. However, it will be dangerous."
+		Player: "Why?"
+		Oneiromancer: "To get you into the dream together, the potion works by binding your subconsciousnesses together. The brazier has its own intelligence in intepreting your subconscious so it will understand your intentions when"
+		Oneiromancer: "placing you in the dream."
+		Cyrisus: "Okay, I shall just take your word for that bit, but I still can't see the dangerous part."
+		Oneiromancer: "With your minds melded as one, you need each other to survive. If one of you dies, you both die for real. Unlike before, you will die just as if you were killed by a monster in the wild."
+		Cyrisus: "I'm not so sure abou this anymore."
+		Player: "Don't worry Cyrisus, we can do this. Oneiromancer, how do we make the potion?"
+		Oneiromancer: "Simple. I shall give you a vial, within which you should place water followed by one ground astral rune and goutweed. Then just use it on the brazier. Oh! You'll have to light it first, of course."
+		Player: "Very well."
+		Oneiromancer: "Good luck!"
+		Cyrisus: "Wait. Do we need to wear the clothes we had to wear to go to the dreamland before?"
+		Oneiromancer: "Oh no, no need. They were simply ceremonial clothes, you can wear whatever you want."
+		Player: "Thanks."
+		Cyrisus: "See you at the brazier!"
+		<end of dialogue, quest progresses>
+		
+	"Nothing"
+
+If you talk to Cyrisus after making the potion, without lighting brazier
+Player: "Okay, I have the Potion of Shared Dreaming; now what?"
+Cyrisus: "Best you light the brazier with a tinderbox first, then give me the potion."
+<end of dialogue>
+
+Light brazier and talk to him again
+
+Player: "Okay, I have the Potion of Shared Dreaming; now what?"
+Cyrisus: "Pass it to me and I'll put it on the brazier. Okay?"
+Warning
+"You can proceed into the dream, but if you die you will lose your items and have to find your way back to the island. The lectern in the dream has a right-click option to leave should you want a fast exit!"
+Proceed into the dream?
+	"Yes, let's go!"
+		Player: "Yes, let's go!"
+		<cue cutscene>
+		Player: "Arrghhh!!!"
+		Player: "What on RuneScape is that?"
+		Player: "..."
+		Player: "Cyrisus?"
+		Player: "Cyrisus..."
+		Cyrisus: "That lecturn is rather pretty."
+		Player: "Cyrisus."
+		Cyrisus: "Yes?"
+		Player: "Turn."
+		Player: "Around."
+		Player: "Please."
+		Cyrisus: "Huh?"
+		Cyrisus: "Arghh!"
+		Cyrisus: "What's that?"
+		Player: "Don't ask me, it's your dream!"
+		Player: "You must really be afraid of combat!"
+		Cyrisus: "Why?"
+		Player: "What do you mean 'why'? This huge creature must symbolise your fears!"
+		Cyrisus: "I'm guessing we're going to be fighting my fears."
+		Player: "Cyrisus. Let's do this!"
+		Cyrisus: "I'm still scared. Show me how you fight, and I should gain courage."
+		
+		Boss title card or whatever:
+		"The Inadequacy / Are you good enough to fight?"
+		<end of dialogue, end of cutscene, FIGHT!>
+	
+	"No, not yet."
+
+Beat all the OP bosses
+
+Player: "Now, now, now! Cyrisus! Get it!
+Player: "You did it!"
+Cyrisus: "I did! Yes! Thanks!"
+Player: "I knew you'd do it."
+Cyrisus: "What now?"
+Player: "Back to reality, I suppose, and on to the Oneiromancer!"
+Cyrisus: "See you there!"
+Player: "Okay!"
+<end of dialogue, quest progresses>
+
+Talk to the Oneiromancer.
+
+(If you don't have the coin thingy)
+Player: "Hi, I..."
+
+(If you do)
+
+What do you want to talk about?
+	"The state of the island"
+	"Cyrisus"
+		Player: "We did it!"
+		Oneiromancer: "You did?"
+		Cyrisus: "Yes, I've conquered my fear of combat."
+		Player: "We beat those monsters well and good, didn't we?"
+		Cyrisus: "We sure did! I was very afraid to start off with, but once I saw how you dealt with combat I felt sure I could do it too." (Sounds more like an insult, tbh)
+		Oneiromancer: "Oh, I'm pleased. Congratulations."
+		Cyrisus: "Thank you <playername>. I really couldn't have done it without your help. Please let me pass some of my knowledge onto you."
+		Player: "Okay, in what way?"
+		Cyrisus: "On my last visit to this island I spent a good while with the Moon Clan. It seems it isn't all that impossible to instantly transfer knowledge to one another."
+		Player: "Huh?"
+		Cyrisus: "I shall just use lunar magic to pass some information onto you."
+		Cyrisus: "Just keep your mind blank, relax and hold still."
+		Player: "Ooooh. That was a weird sensation."
+		Player: "I must admit, I do feel enlightened already. Thank you!"
+		Cyrisus: "My pleasure. And I best be off, I think I am going to put my courage to the test! I have a new goal to reach - the ultimate warrior!"
+		Player: "Be careful!"
+		Cyrisus: "I will. I'll see you around, I'm sure!"
+		<end of quest>
+	"Nothing"
+	

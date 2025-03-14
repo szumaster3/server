@@ -1,0 +1,146 @@
+/*package content.kingdom.misthalin.quest.member.dttd
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class DeathToTheDorgeshuun :
+    Quest("Death to the Dorgeshuun", 43, 42, 1, Vars.VARBIT_QUEST_DEATH_TO_DORGESHUUN_2258, 0, 1, 13) {
+
+    /*
+     * Quest description:
+     * Humans have been visiting the Dorgeshuun mines for some time now,
+     * but no Dorgeshuun has visited the surface since the signing of the Lumbridge-Dorgeshuun treaty.
+     * The Dorgeshuun Council fears that the H.A.M. group may be planning another attack,
+     * and want to send an agent to the surface to investigate.
+     * But they do not want to send someone to the surface without a guide...
+     */
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage >= 0) {
+            line(player, "I can start this quest by speaking to !!Mistag?? in the", line++)
+            line(player, "!!Dorgeshuun Mines??.", line++)
+            line(player, "Minimum requirements:", line++)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.THIEVING, 23)) "---Level 23 Thieving./--" else "!!Level 23 Thieving.??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.AGILITY, 23)) "---Level 23 Agility./--" else "!!Level 23 Agility.??",
+                line++
+            )
+            line(player, "Be able to defeat a level !!50?? foe.", line++)
+            line(player, "I need to have completed The Lost Tribe.", line++, isQuestComplete(player, Quests.THE_LOST_TRIBE))
+            line++
+        }
+
+        if (stage > 1) {
+            line(player, "I spoke to Mistag and agreed to help a Dorgeshuun agent", line++)
+            line(player, "spy on the HAM group.", line++)
+            line(player, "I fetched two sets of HAM robes and gave one of them to", line++)
+            line(player, "Zanik so that we could go to the HAM cave in disguise.", line++)
+
+            line(player, "Zanik has asked me to take her on a tour of Lumbridge.", line++)
+            line(player, "She is the first cave goblin to visit the surface.", line++)
+            line(player, "Zanik was amazed when she saw the sun for the first time.", line++)
+
+            line(player, "Zanik spoke to Duke Horacio and gave him the Dorgeshuun", line++)
+            line(player, "headman's regards.", line++)
+            line(player, "The ordinary Lumbridge citizens were rather prejudiced", line++)
+            line(player, "against Zanik.", line++)
+
+            line(player, "Zanik was fascinated by wooden tools in the general store,", line++)
+            line(player, "and bought some as souvenirs.", line++)
+            line(player, "Father Aereck told Zanik about the gods. The Dorgeshuun", line++)
+            line(player, "fear and hate the gods but Zanik is trying to keep an", line++)
+            line(player, "open mind.", line++)
+
+            line(player, "Zanik talked to an ordinary goblin and was horrified", line++)
+            line(player, "at how violent their culture is.", line++)
+
+            line(player, "Zanik told me that the mark on her forehead appeared", line++)
+            line(player, "once when she drank the Tears of Guthix. Juna told her", line++)
+            line(player, "that one day it would glow and then Zanik should return", line++)
+            line(player, "to Juna.", line++)
+
+            line(player, "Zanik asked me to take her to the HAM cave so we can", line++)
+            line(player, "see if they are plotting anything against the Dorgeshuun.", line++)
+
+            line(player, "Zanik has noticed a hidden trapdoor in the HAM lair.", line++)
+            line(player, "She thinks the room where the senior HAM members make", line++)
+            line(player, "their plans will be down there somewhere.", line++)
+
+            line(player, "Zanik and I found the HAM meeting room and listened", line++)
+            line(player, "outside, but then we were caught! I woke up in the HAM", line++)
+            line(player, "prison cell but there was no sign of Zanik.", line++)
+
+            line(player, "I found Zanik's dead body outside the HAM cave.", line++)
+
+            line(player, "I brought Zanik's body to Juna.", line++)
+            line(player, "Juna said that Zanik could be resurrected if I", line++)
+            line(player, "collected some of the Tears of Guthix. I collected", line++)
+            line(player, "the tears and Zanik came back to life!", line++)
+
+            line(player, "Zanik told me what she heard in the HAM meeting.", line++)
+            line(player, "Sigmund was planning to break through the bed of", line++)
+            line(player, " the River Lum and flood the Dorgeshuun city!", line++)
+            line(player, "I hid Zanik in a crate and carried her down into the", line++)
+            line(player, "water mill cellar.", line++)
+
+            line(player, "Zanik and I defeated Sigmund but he managed to escape", line++)
+            line(player, "using a ring of life.", line++)
+
+            line(player, "Zanik and I smashed Sigmund's drilling machine so that", line++)
+            line(player, "he could not use it to flood the city.", line++)
+
+            line(player, "Zanik and I returned to Dorgesh-Kaan. Ur-Tag and Zanik", line++)
+            line(player, "both thanked me, and Zanik told me she thought we would", line++)
+            line(player, "meet again.", line++)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        sendItemZoomOnInterface(player, 230, 5, Items.COMBAT_LAMP_10586, 230)
+        drawReward(player, "1 quest point", ln++)
+        drawReward(player, "2,000 Thieving and Ranged XP", ln++)
+        drawReward(player, "Dorgeshuun special attacks.", ln++)
+        drawReward(player, "Entry to H.A.M. store rooms.", ln++)
+        drawReward(player, "Entry to Dorgesh-Kaan", ln)
+        rewardXP(player, Skills.THIEVING, 2000.0)
+        addItemOrDrop(player, Items.COMBAT_LAMP_10586)
+        setVarbit(player, Vars.VARBIT_QUEST_DEATH_TO_DORGESHUUN_2258, 13, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//2,000 Thieving experience lamp
+//2,000 Combat experience lamp in either Attack, Defence, Strength, Constitution, Ranged, Magic
+//Access to the H.A.M. storerooms, where you can loot items.
+//Access to Dorgesh-Kaan, the Dorgeshuun city.
+//Access to Dorgesh-Kaan South Dungeon and a route to Kalphite Lair from there.
+//Access to the watermill tunnel (Dartog will appear there, and you'll be able to freely travel between the Lumbridge Castle cellar, the Dorgeshuun Mines and the watermill tunnel).
+//Access to the cave goblin technology tree with level 40 Invention
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

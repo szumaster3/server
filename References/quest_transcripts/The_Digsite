@@ -1,0 +1,1997 @@
+The Digsite Quest
+Sources: https://www.youtube.com/watch?v=nFufoHQmT5E
+
+***Speaking to Examiner to start quest***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Ah hello there! I am the resident lecturer on antiques and artefacts. I also set the Earth Science exams.").also { stage++ }
+		2 -> playerl("Earth Sciences?").also { stage++ }
+		3 -> npcl("That is right dear, the world of gielinor holds many wonders beneath its surface. Students come to me to take exams so that they may join in on the archeological dig going on just north of here.").also { stage++ }
+		4 -> playerl("So if they don’t pass the exams they can’t dig at all?").also { stage++ }
+		5 -> npcl("That’s right! We have to make sure that students know enough to be able to dig safely and not damage the artefacts.").also { stage++ }
+		6 -> options("Can I take an exam?", "Interesting...").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Can I take an exam?").also { stage = 9 }
+			2 -> playerl("Interesting...").also { stage = 8 }
+			}
+		8 -> npcl("You could gain much with an understanding of the world below.").also { stage = END_DIALOGUE }
+		9 -> npcl("You can if you get this letter stamped by the Curator of Varrock’s museum.").also { stage++ }
+		10 -> playerl("Why’s that then?").also { stage++ }
+		11 -> npcl("Because he is a very knowledgeable man and employs our archaeological expert. I’m sure he knows a lot about your exploits and can judge whether you’d make a good archaeologist or not.").also { stage++ }
+		12 -> npcl("Besides, the museum contributes funds to the dig.").also { stage++ }
+		13 -> playerl("But why are you writing the letter? Shouldn’t he?").also { stage++ }
+		14 -> npcl("He’s also a very busy man, so I write the letters and he just stamps them if he approves.").also { stage++ }
+		15 -> playerl("Oh, I see. I’ll ask him if he’ll approve me, and bring my stamped letter back here. Thanks.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner with the signed letter + attempting first exam***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> playerl("Here is the stamped letter you asked for.").also { stage++ }
+		3 -> npcl("Good good, we will begin the exam...").also { stage++ }
+		4 -> npcl("Okay, we will start with the first exam: Earth Sciences level 1 – Beginner.").also { stage++ }
+		5 -> npcl("Question 1 – Earth Sciences overview. Can you tell me what Earth Sciences is? ").also { stage++ }
+		6 -> options("The study of gardening, planting and fruiting vegetation.", "The study of planets and the history of worlds.", "The combination of archeology and vegetarianism.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("The study of gardening, planting and fruiting vegetation.").also { stage++ }
+			2 -> playerl("The study of planets and the history of worlds.").also { stage++ }
+			3 -> playerl("The combination of archeology and vegetarianism.").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 1, question 2 – Eligibility. Can you tell me which people are allowed to use the digsite?").also { stage++ }
+		10 -> options("Magic users, miners and their escorts.", "Professors, students and workmen only.", "Local residents, contractors and small pink fish.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Magic users, miners and their escorts.").also { stage++ }
+			2 -> playerl("Professors, students and workmen only.").also { stage++ }
+			3 -> playerl("Local residents, contractors and small pink fish.").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 1, question 3 – Health and safety. Can you tell me the proper safety points when working on a digsite?").also { stage++ }
+		14 -> options("Heat-resistant clothing to be worn at all times.", "Rubber chickens to be worn on the head at all times.", "Protective clothing to be worn; tools kept away from site.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Heat-resistant clothing to be worn at all times.").also { stage++ }
+			2 -> playerl("Rubber chickens to be worn on the head at all times.").also { stage++ }
+			3 -> playerl("Protective clothing to be worn; tools kept away from site.").also { stage++ }
+			}
+		16 -> npcl("Okay, that covers the level 1 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let’s see how you did...").also { stage++ }
+		18 -> npcl("Oh dear me! This is appalling, none correct at all! I suggest you go and study properly.").also { stage++ }
+		19 -> playerl("Oh dear...").also { stage++ }
+		20 -> npcl("Why don’t you use the resources here? There are books and the researchers... and you could even ask other students who are also studying for these exams.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after getting answers from the three students for the first exam***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again. Are you ready for another shot at the exam?").also { stage++ }
+		2 -> options("Yes, I certainly am.", "No, not at the moment."
+		3 -> when(buttonId) {
+			1 -> playerl("Yes, I certainly am.").also { stage = 4 }
+			2 -> playerl("No, not at the moment.").also { stage = END_DIALOGUE }
+			}
+		4 -> npcl("Okay, we will start with the first exam: Earth Sciences level 1 – Beginner.").also { stage++ }
+		5 -> npcl("Question 1 – Earth Sciences overview. Can you tell me what Earth Sciences is? ").also { stage++ }
+		6 -> options("The study of the earth, its contents and history.", "The study of planets and the history of worlds.", "The combination of archeology and vegetarianism.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("The study of the earth, its contents and history.").also { stage++ }
+			2 -> playerl("The study of planets and the history of worlds.").also { stage = 26 }
+			3 -> playerl("The combination of archeology and vegetarianism.").also { stage = 26 }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 1, question 2 – Eligibility. Can you tell me which people are allowed to use the digsite?").also { stage++ }
+		10 -> options("Professors, students and workmen only.", "Local residents, contractors and small pink fish.", "All that have passed the appropriate Earth Sciences exam.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Professors, students and workmen only.").also { stage = 39 }
+			2 -> playerl("Local residents, contractors and small pink fish.").also { stage = 39 }
+			3 -> playerl("All that have passed the appropriate Earth Sciences exam.").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 1, question 3 – Health and safety. Can you tell me the proper safety points when working on a digsite?").also { stage++ }
+		14 -> options("Heat-resistant clothing to be worn at all times.", "Rubber chickens to be worn on the head at all times.", "Protective clothing to be worn; tools kept away from site.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Rubber chickens to be worn on the head at all times.").also { stage = 21 }
+			2 -> playerl("Gloves and boots to be worn at all times’ proper tools must be used.").also { stage = 16 }
+			3 -> playerl("Protective clothing to be worn; tools kept away from site.").also { stage = 21 }
+			}
+		16 -> npcl("Okay, that covers the level 1 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let’s see how you did...").also { stage++ }
+		18 -> npcl("You got all the questions correct. Well done!").also { stage++ }
+		19 -> playerl("Hey! Excellent!").also { stage++ }
+		20 -> npcl("You have now passed the Earth Sciences level 1 general exam. Here is your certificate to prove it. You also get a decent trowel to dig with. Of course, you’ll want to get studying for your next exam now!").also { stage = END_DIALOGUE }
+		21 -> npcl("Okay, that covers the level 1 Earth Sciences exam.").also { stage++ }
+		22 -> npcl("Let’s see how you did...").also { stage++ }
+		23 -> npcl("Oh dear me! This is appalling! I suggest you go and study properly.").also { stage++ }
+		24 -> playerl("Oh dear...").also { stage++ }
+		25 -> npcl("Why don’t you use the resources here? There are books and the researchers... and you could even ask other students who are also studying for these exams.").also { stage = END_DIALOGUE }
+		26 -> npcl("Okay, next question...").also { stage++ }
+		27 -> npcl("Earth Sciences level 1, question 2 – Eligibility. Can you tell me which people are allowed to use the digsite?").also { stage++ }
+		28 -> options("Professors, students and workmen only.", "Local residents, contractors and small pink fish.", "All that have passed the appropriate Earth Sciences exam.").also { stage++ }
+		29 -> when(buttonId) {
+			1 -> playerl("Professors, students and workmen only.").also { stage++ }
+			2 -> playerl("Local residents, contractors and small pink fish.").also { stage++ }
+			3 -> playerl("All that have passed the appropriate Earth Sciences exam.").also { stage++ }
+			}
+		30 -> Okay, next question...").also { stage++ }
+		31 -> Earth Sciences level 1, question 3 – Health and safety. Can you tell me the proper safety points when working on a digsite?").also { stage++ }
+		32 -> options("Heat-resistant clothing to be worn at all times.", "Rubber chickens to be worn on the head at all times.", "Protective clothing to be worn; tools kept away from site.").also { stage++ }
+		33 -> when(buttonId) {
+			1 -> playerl("Rubber chickens to be worn on the head at all times.").also { stage++ }
+			2 -> playerl("Gloves and boots to be worn at all times’ proper tools must be used.").also { stage++ }
+			3 -> playerl("Protective clothing to be worn; tools kept away from site.").also { stage++ }
+			}
+		34 -> npcl("Okay, that covers the level 1 Earth Sciences exam.").also { stage++ }
+		35 -> npcl("Let’s see how you did...").also { stage++ }
+		36 -> npcl("Oh dear me! This is appalling! I suggest you go and study properly.").also { stage++ }
+		37 -> playerl("Oh dear...").also { stage++ }
+		38 -> npcl("Why don’t you use the resources here? There are books and the researchers... and you could even ask other students who are also studying for these exams.").also { stage = END_DIALOGUE }
+		39 -> Okay, next question...").also { stage++ }
+		40 -> Earth Sciences level 1, question 3 – Health and safety. Can you tell me the proper safety points when working on a digsite?").also { stage++ }
+		41 -> options("Heat-resistant clothing to be worn at all times.", "Rubber chickens to be worn on the head at all times.", "Protective clothing to be worn; tools kept away from site.").also { stage++ }
+		42 -> when(buttonId) {
+			1 -> playerl("Rubber chickens to be worn on the head at all times.").also { stage++ }
+			2 -> playerl("Gloves and boots to be worn at all times’ proper tools must be used.").also { stage++ }
+			3 -> playerl("Protective clothing to be worn; tools kept away from site.").also { stage++ }
+			}
+		43 -> npcl("Okay, that covers the level 1 Earth Sciences exam.").also { stage++ }
+		44 -> npcl("Let’s see how you did...").also { stage++ }
+		45 -> npcl("Oh dear me! This is appalling! I suggest you go and study properly.").also { stage++ }
+		46 -> playerl("Oh dear...").also { stage++ }
+		47 -> npcl("Why don’t you use the resources here? There are books and the researchers... and you could even ask other students who are also studying for these exams.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after successfully completing the first exam before getting the answers for the second exam WITHOUT a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 21 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 22 }
+			4 -> playerl("I have lost my trowel.").also { stage = 23 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 2 - Intermediate.").also { stage++ }
+		5 -> npcl("Question 1 - Sample transportation. Can you tell me how we transport samples?").also { stage++ }
+		6 -> options("Samples cut and cleaned before transportation. ", "Samples ground and suspended in an acid solution.", "Samples to be given to the melon-collecting monkey.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples cut and cleaned before transportation. ").also { stage++ }
+			2 -> playerl("Samples ground and suspended in an acid solution.").also { stage++ }
+			3 -> playerl("Samples to be given to the melon-collecting monkey. ").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		10 -> options("Finds must not be handled by anyone. ", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them. ").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Finds must not be handled by anyone.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen. ").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them. ").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		14 -> options("Strike rock repeatedly until powdered.", "Rock pick must be used flat and with strong force.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Strike rock repeatedly until powdered.").also { stage++ }
+			2 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning. ").also { stage++ }
+			}
+		16 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up your total...").also { stage++ }
+		18 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		19 -> playerl("Oh no!").also { stage++ }
+		20 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		21 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		22 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		23 -> npcl("Deary me. That was a good one as well. It's a good job I have another. Here you go...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after successfully completing the first exam before getting the answers for the second exam WITH a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 21 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 22 }
+			4 -> playerl("I have lost my trowel.").also { stage = 23 }
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 2 - Intermediate.").also { stage++ }
+		5 -> npcl("Question 1 - Sample transportation. Can you tell me how we transport samples?").also { stage++ }
+		6 -> options("Samples cut and cleaned before transportation. ", "Samples ground and suspended in an acid solution.", "Samples to be given to the melon-collecting monkey.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples cut and cleaned before transportation. ").also { stage++ }
+			2 -> playerl("Samples ground and suspended in an acid solution.").also { stage++ }
+			3 -> playerl("Samples to be given to the melon-collecting monkey. ").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		10 -> options("Finds must not be handled by anyone. ", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them. ").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Finds must not be handled by anyone.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen. ").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them. ").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		14 -> options("Strike rock repeatedly until powdered.", "Rock pick must be used flat and with strong force.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Strike rock repeatedly until powdered.").also { stage++ }
+			2 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning. ").also { stage++ }
+			}
+		16 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up your total...").also { stage++ }
+		18 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		19 -> playerl("Oh no!").also { stage++ }
+		20 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		21 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		22 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		23 -> npcl("Really? Look in your backpack and make sure first.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after getting answers from the three students for the second exam WITHOUT a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 34 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 35 }
+			4 -> playerl("I have lost my trowel.").also { stage = 36 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 2 - Intermediate.").also { stage++ }
+		5 -> npcl("Question 1 - Sample transportation. Can you tell me how we transport samples?").also { stage++ }
+		6 -> options("Samples ground and suspended in an acid solution.", "Samples to be given to the melon-collecting monkey.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples ground and suspended in an acid solution.").also { stage = 21 }
+			2 -> playerl("Samples to be given to the melon-collecting monkey.").also { stage = 21 }
+			3 -> playerl("Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		10 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage = 25 }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage = 25 }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		14 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage = 29 }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage = 29 }
+			}
+		16 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up your total...").also { stage++ }
+		18 -> npcl("You got all the questions correct, well done!").also { stage++ }
+		19 -> playerl("Great, I'm getting good at this.").also { stage++ }
+		20 -> npcl("You have now passed the Earth Sciences level 2 intermediate exam. Here is your certificate. You also get a nice rock pick. Of course, you'll want to get studying for your next exam now!").also { stage = END_DIALOGUE }
+		21 -> npcl("Okay, next question...").also { stage++ }
+		22 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		23 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		24 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage++ }
+			}
+		25 -> Okay, next question...").also { stage++ }
+		26 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		27 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		28 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+			}
+		29 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		30 -> npcl("Let me add up your total...").also { stage++ }
+		31 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		32 -> playerl("Oh no!").also { stage++ }
+		33 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		34 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		35 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		36 -> npcl("Deary me. That was a good one as well. It's a good job I have another. Here you go...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after getting answers from the three students for the second exam WITH a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 34 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 35 }
+			4 -> playerl("I have lost my trowel.").also { stage = 36 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 2 - Intermediate.").also { stage++ }
+		5 -> npcl("Question 1 - Sample transportation. Can you tell me how we transport samples?").also { stage++ }
+		6 -> options("Samples ground and suspended in an acid solution.", "Samples to be given to the melon-collecting monkey.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples ground and suspended in an acid solution.").also { stage = 21 }
+			2 -> playerl("Samples to be given to the melon-collecting monkey.").also { stage = 21 }
+			3 -> playerl("Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		10 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage = 25 }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage = 25 }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		14 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage = 29 }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage = 29 }
+			}
+		16 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up your total...").also { stage++ }
+		18 -> npcl("You got all the questions correct, well done!").also { stage++ }
+		19 -> playerl("Great, I'm getting good at this.").also { stage++ }
+		20 -> npcl("You have now passed the Earth Sciences level 2 intermediate exam. Here is your certificate. You also get a nice rock pick. Of course, you'll want to get studying for your next exam now!").also { stage = END_DIALOGUE }
+		21 -> npcl("Okay, next question...").also { stage++ }
+		22 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		23 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		24 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage++ }
+			}
+		25 -> Okay, next question...").also { stage++ }
+		26 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		27 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		28 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+			}
+		29 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		30 -> npcl("Let me add up your total...").also { stage++ }
+		31 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		32 -> playerl("Oh no!").also { stage++ }
+		33 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		34 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		35 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		36 -> npcl("Really? Look in your backpack and make sure first.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner before getting answers from the three students for the third exam WITHOUT a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 20 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 21 }
+			4 -> playerl("I have lost my trowel.").also { stage = 22 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 3 - Advanced.").also { stage++ }
+		5 -> npcl("Question 1 - Sample preparation. Can you tell me how we prepare samples?").also { stage++ }
+		6 -> options("Samples may be mixed together safely.", "Sample types catalogued and carried by hand only.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples may be mixed together safely.").also { stage++ }
+			2 -> playerl("Sample types catalogued and carried by hand only.").also { stage++ }
+			3 -> playerl("Samples to be spread thickly with mashed banana.").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 3, question 2  - Specimen brush use. What is the proper way to use a specimen brush?").also { stage++ }
+		10 -> options("Brush quickly using a wet brush." , "Dipped in glue and stuck to a sheep's back.", "Brush quickly and with force.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Brush quickly using a wet brush.").also { stage++ }
+			2 -> playerl("Dipped in glue and stuck to a sheep's back.").also { stage++ }
+			3 -> playerl("Brush quickly and with force. ").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 3, question 3 - Advanced techniques. Can you describe the technique for handling bones?").also { stage++ }
+		14 -> options("Bones must not be taken from the site.", "Feed to hungry dogs.", "Bones to be ground and tested for mineral content.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Bones must not be taken from the site.").also { stage++ }
+			2 -> playerl("Feed to hungry dogs.").also { stage++ }
+			3 -> playerl("Bones to be ground and tested for mineral content.").also { stage++ }
+			}
+		16 -> npcl("Okay, that covers the level 3 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up the results...").also { stage++ }
+		18 -> npcl("I cannot believe this! Absolutely none right at all. I doubt you did any research before you took this exam...").also { stage++ }
+		19 -> playerl("Ah... Yes... Erm.... I think I had better go and revise first!").also { stage = END_DIALOGUE }
+		20 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		21 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		22 -> npcl("Deary me. That was a good one as well. It's a good job I have another. Here you go...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner before getting answers from the three students for the third exam WITH a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 20 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 21 }
+			4 -> playerl("I have lost my trowel.").also { stage = 22 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 3 - Advanced.").also { stage++ }
+		5 -> npcl("Question 1 - Sample preparation. Can you tell me how we prepare samples?").also { stage++ }
+		6 -> options("Samples may be mixed together safely.", "Sample types catalogued and carried by hand only.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples may be mixed together safely.").also { stage++ }
+			2 -> playerl("Sample types catalogued and carried by hand only.").also { stage++ }
+			3 -> playerl("Samples to be spread thickly with mashed banana.").also { stage++ }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 3, question 2  - Specimen brush use. What is the proper way to use a specimen brush?").also { stage++ }
+		10 -> options("Brush quickly using a wet brush." , "Dipped in glue and stuck to a sheep's back.", "Brush quickly and with force.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Brush quickly using a wet brush.").also { stage++ }
+			2 -> playerl("Dipped in glue and stuck to a sheep's back.").also { stage++ }
+			3 -> playerl("Brush quickly and with force. ").also { stage++ }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 3, question 3 - Advanced techniques. Can you describe the technique for handling bones?").also { stage++ }
+		14 -> options("Bones must not be taken from the site.", "Feed to hungry dogs.", "Bones to be ground and tested for mineral content.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Bones must not be taken from the site.").also { stage++ }
+			2 -> playerl("Feed to hungry dogs.").also { stage++ }
+			3 -> playerl("Bones to be ground and tested for mineral content.").also { stage++ }
+			}
+		16 -> npcl("Okay, that covers the level 3 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up the results...").also { stage++ }
+		18 -> npcl("I cannot believe this! Absolutely none right at all. I doubt you did any research before you took this exam...").also { stage++ }
+		19 -> playerl("Ah... Yes... Erm.... I think I had better go and revise first!").also { stage = END_DIALOGUE }
+		20 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		21 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		22 -> npcl("Really? Look in your backpack and make sure first.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after getting answers from the three students for the third exam WITH a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 34 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 35 }
+			4 -> playerl("I have lost my trowel.").also { stage = 36 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 3 - Advanced.").also { stage++ }
+		5 -> npcl("Question 1 - Sample preparation. Can you tell me how we prepare samples?").also { stage++ }
+		6 -> options("Samples cleaned, and carried only in specimen jars.", "Sample types catalogued and carried by hand only.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples cleaned, and carried only in specimen jars.").also { stage++ }
+			2 -> playerl("Sample types catalogued and carried by hand only.").also { stage = 23 }
+			3 -> playerl("Samples to be spread thickly with mashed banana.").also { stage = 23 }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 3, question 2  - Specimen brush use. What is the proper way to use a specimen brush?").also { stage++ }
+		10 -> options("Brush carefully and slowly using short strokes." , "Dipped in glue and stuck to a sheep's back.", "Brush quickly and with force.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Brush carefully and slowly using short strokes.").also { stage++ }
+			2 -> playerl("Dipped in glue and stuck to a sheep's back.").also { stage = 27 }
+			3 -> playerl("Brush quickly and with force. ").also { stage = 27 }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 3, question 3 - Advanced techniques. Can you describe the technique for handling bones?").also { stage++ }
+		14 -> options("Feed to hungry dogs.", "Bones to be ground and tested for mineral content.", "Handle bones very carefully and keep them away from other samples.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Feed to hungry dogs.").also { stage = 31 }
+			2 -> playerl("Bones to be ground and tested for mineral content.").also { stage++ }
+			3 -> playerl("Handle bones very carefully and keep them away from other samples.").also { stage = 31 }
+			}
+		16 -> npcl("Okay, that covers the level 3 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up the results...").also { stage++ }
+		18 -> npcl("You got all the questions correct, well done!").also { stage++ }
+		19 -> playerl("Hooray!").also { stage++ }
+		20 -> npcl("Congratulations! You have now passed the Earth Sciences level 3 exam. Here is your level 3 certificate and a specimen jar and brush.").also { stage++ }
+		21 -> playerl("I can dig wherever I want now!").also { stage++ }
+		22 -> npcl("Perhaps you should use your newfound skills to find an artefact on the site that will impress Terry, our archaeological expert.").also { stage = END_DIALOGUE }
+		23 -> npcl("Okay, next question...").also { stage++ }
+		24 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		25 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		26 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage++ }
+			}
+		27 -> Okay, next question...").also { stage++ }
+		28 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		29 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		30 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+			}
+		31 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		32 -> npcl("Let me add up the results...").also { stage++ }
+		33 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		34 -> playerl("Oh no!").also { stage++ }
+		35 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		36 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		37 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		38 -> npcl("Really? Look in your backpack and make sure first.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after getting answers from the three students for the third exam WITHOUT a trowel in inventory***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Hello again.").also { stage++ }
+		2 -> options("I am ready for the next exam.", "I am stuck on a question.", "Sorry, I didn't mean to disturb you.", "I have lost my trowel.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I am ready for the next exam.").also { stage = 4 }
+			2 -> playerl("I am stuck on a question.").also { stage = 34 }
+			3 -> playerl("Sorry, I didn't mean to disturb you.").also { stage = 35 }
+			4 -> playerl("I have lost my trowel.").also { stage = 36 } 
+			}
+		4 -> npcl("Okay, this is the next part of the Earth Sciences exam: Earth Sciences level 3 - Advanced.").also { stage++ }
+		5 -> npcl("Question 1 - Sample preparation. Can you tell me how we prepare samples?").also { stage++ }
+		6 -> options("Samples cleaned, and carried only in specimen jars.", "Sample types catalogued and carried by hand only.", "Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Samples cleaned, and carried only in specimen jars.").also { stage++ }
+			2 -> playerl("Sample types catalogued and carried by hand only.").also { stage = 23 }
+			3 -> playerl("Samples to be spread thickly with mashed banana.").also { stage = 23 }
+			}
+		8 -> npcl("Okay, next question...").also { stage++ }
+		9 -> npcl("Earth Sciences level 3, question 2  - Specimen brush use. What is the proper way to use a specimen brush?").also { stage++ }
+		10 -> options("Brush carefully and slowly using short strokes." , "Dipped in glue and stuck to a sheep's back.", "Brush quickly and with force.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Brush carefully and slowly using short strokes.").also { stage++ }
+			2 -> playerl("Dipped in glue and stuck to a sheep's back.").also { stage = 27 }
+			3 -> playerl("Brush quickly and with force. ").also { stage = 27 }
+			}
+		12 -> Okay, next question...").also { stage++ }
+		13 -> Earth Sciences level 3, question 3 - Advanced techniques. Can you describe the technique for handling bones?").also { stage++ }
+		14 -> options("Feed to hungry dogs.", "Bones to be ground and tested for mineral content.", "Handle bones very carefully and keep them away from other samples.").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Feed to hungry dogs.").also { stage = 31 }
+			2 -> playerl("Bones to be ground and tested for mineral content.").also { stage++ }
+			3 -> playerl("Handle bones very carefully and keep them away from other samples.").also { stage = 31 }
+			}
+		16 -> npcl("Okay, that covers the level 3 Earth Sciences exam.").also { stage++ }
+		17 -> npcl("Let me add up the results...").also { stage++ }
+		18 -> npcl("You got all the questions correct, well done!").also { stage++ }
+		19 -> playerl("Hooray!").also { stage++ }
+		20 -> npcl("Congratulations! You have now passed the Earth Sciences level 3 exam. Here is your level 3 certificate and a specimen jar and brush.").also { stage++ }
+		21 -> playerl("I can dig wherever I want now!").also { stage++ }
+		22 -> npcl("Perhaps you should use your newfound skills to find an artefact on the site that will impress Terry, our archaeological expert.").also { stage = END_DIALOGUE }
+		23 -> npcl("Okay, next question...").also { stage++ }
+		24 -> npcl("Earth Sciences level 2, question 2 – Handling of finds. What is the proper way to handle finds?").also { stage++ }
+		25 -> options("Finds must be carefully handled, and gloves worn.", "Finds to be given to the site workmen.", "Drop them on the floor and jump on them.").also { stage++ }
+		26 -> when(buttonId) {
+			1 -> playerl("Finds must be carefully handled, and gloves worn.").also { stage++ }
+			2 -> playerl("Finds to be given to the site workmen.").also { stage++ }
+			3 -> playerl("Drop them on the floor and jump on them.").also { stage++ }
+			}
+		27 -> Okay, next question...").also { stage++ }
+		28 -> Earth Sciences level 2, question 3 - Rock pick usage. Can you tell me the proper use for a rock pick?").also { stage++ }
+		29 -> options("Rock pick must be used flat and with strong force.", "Always handle with care; strike cleanly on its cleaving point.", "Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+		30 -> when(buttonId) {
+			1 -> playerl("Rock pick must be used flat and with strong force.").also { stage++ }
+			2 -> playerl("Always handle with care; strike cleanly on its cleaving point. ").also { stage++ }
+			3 -> playerl("Rock picks are to be used to milk cows on a rainy morning.").also { stage++ }
+			}
+		31 -> npcl("Okay, that covers the level 2 Earth Sciences exam.").also { stage++ }
+		32 -> npcl("Let me add up the results...").also { stage++ }
+		33 -> npcl("No, no, no! This will not do. Start again!").also { stage++ }
+		34 -> playerl("Oh no!").also { stage++ }
+		35 -> npcl("More studying for you!").also { stage = END_DIALOGUE }
+		36 -> npcl("Well, well, have you not been doing any studies? I am not giving you the answers, talk to the other students and remember the answers.").also { stage = END_DIALOGUE }
+		37 -> npcl("Oh, no problem at all.").also { stage = END_DIALOGUE }
+		38 -> npcl("Deary me. That was a good one as well. It's a good job I have another. Here you go...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Examiner after passing the third exam***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Well, what are you doing here? Get digging!").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Examiner after quest completion***
+
+class ExaminerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hello there!").also { stage++ }
+		1 -> npcl("My colleague tells me you helped to uncover a hidden altar to the god Zaros. A great scholar and archaeologist indeed! Good health and prosperity to you.").also { stage++ }
+		3 -> playerl("Thanks!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Curator Haig Halen after speaking to Examiner***
+
+class CuratorHaigHalenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Welcome to the museum of Varrock.").also { stage++ }
+		1 -> playerl("I have been given this letter by an examiner at the Dig Site. Can you stamp this for me?").also { stage++ }
+		2 -> npcl("What have we here? A letter of recommendation indeed...").also { stage++ }
+		3 -> npcl("The letter here says your name is PLAYER. Well, PLAYER, I wouldn’t normally do this for just anyone, but as you did us such a great service with the Shield of Arrav I don’t see why not. Run this letter").also { stage++ }
+		4 -> npcl("back to the Examiner to begin your adventure into the world of Earth Sciences. Enjoy your studies, Student!").also { stage++ }
+		5 -> npcl("There you go, good luck student... Be sure to come back and show me your certificates. I would like to see how you get on.").also { stage++ }
+		6 -> playerl("Ok, I will. Thanks, see you later.").also { stage++ }
+		7 -> options("Have you any interesting news?", "Do you know where I could find any treasure?").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playerl("Have you any interesting news?").also { stage = 9 }
+			2 -> playerl("Do you know where I could find any treasure?").also { stage = 15 }
+			}
+		9 -> npcl("Yes, we found a rather interesting island to the north of Morytania. We believe that it may be of archaeological significance.").also { stage++ }
+		10 -> playerl("Oh? That sounds interesting.").also { stage++ }
+		11 -> npcl("Indeed. I suspect we'll be looking for qualified archaeologists once we have built the transport we need to get there.").also { stage++ }
+		12 -> playerl("Would I qualify then?").also { stage++ }
+		13 -> npcl("You've certainly done a lot to help out Varrock Museum, so we'd be silly not to ask for your expertise.").also { stage++ }
+		14 -> playerl("Thank you. I'll look forward to it!").also { stage = END_DIALOGUE }
+		15 -> npcl("Look around you! This museum is full of treasures!").also { stage++ }
+		16 -> playerl("No, I meant treasures for ME.").also { stage++ }
+		17 -> npcl("Any treasures this museum knows about it goes to great lengths to acquire.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Curator Haig Halen after passing the first exam WITH the first exam certificate in inventory***
+
+class CuratorHaigHalenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Welcome to the museum of Varrock.").also { stage++ }
+		1 -> playerl("Look what I have been awarded.").also { stage++ }
+		2 -> npcl("Well that's great, well done. I'll take that for safe keeping. Come and tell me when you are the next level.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Curator Haig Halen after passing the second exam WITH the second exam certificate in inventory***
+
+class CuratorHaigHalenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Welcome to the museum of Varrock.").also { stage++ }
+		1 -> playerl("Look what I have been awarded.").also { stage++ }
+		2 -> npcl("Excellent work! I'll take that for safe keeping, remember to come and see me when you have graduated.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Curator Haig Halen after passing the third exam WITH the third exam certificate in inventory***
+
+class CuratorHaigHalenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Welcome to the museum of Varrock.").also { stage++ }
+		1 -> playerl("Look at this certificate, curator...").also { stage++ }
+		2 -> npcl("Well well, a level 3 graduate! I'll keep your certificate safe for you. I feel I must reward you for your work...").also { stage++ }
+		3 -> npcl("What would you prefer, something to eat or drink?").also { stage++ }
+		4 -> options("Something to eat please.", "Something to drink please.").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("Something to eat please.").also { stage = 6 }
+			2 -> playerl("Something to drink please.").also { stage = 8 }
+			}
+		6 -> npcl("Certainly, have this... It's a delicious chocolate cake. You'll like it, I'm sure!").also { stage++ }
+		7 -> playerl("A chocolate cake? Thanks!").also { stage = END_DIALOGUE }
+		8 -> npcl("Certainly, have this... It's a new recipe from the gnome kingdom. You'll like it, I'm sure!").also { stage++ }
+		9 -> playerl("A cocktail? Cheers!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Curator Haig Halen after passing the third exam WITH all three exam certificates in inventory***
+
+class CuratorHaigHalenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		0 -> npcl("Welcome to the museum of Varrock.").also { stage++ }
+		1 -> playerl("Look what I have been awarded.").also { stage++ }
+		2 -> npcl("Well that's great, well done. I'll take that for safe keeping. Come and tell me when you are the next level.").also { stage++ } 
+		3 -> playerl("Look what I have been awarded.").also { stage++ }
+		4 -> npcl("Excellent work! I'll take that for safe keeping, remember to come and see me when you have graduated.").also { stage++ } 
+		5 -> playerl("Look at this certificate, curator...").also { stage++ }
+		6 -> npcl("Well well, a level 3 graduate! I'll keep your certificate safe for you. I feel I must reward you for your work...").also { stage++ }
+		7 -> npcl("What would you prefer, something to eat or drink?").also { stage++ }
+		8 -> options("Something to eat please.", "Something to drink please.").also { stage++ }
+		9 -> when(buttonId) {
+			1 -> playerl("Something to eat please.").also { stage = 10 }
+			2 -> playerl("Something to drink please.").also { stage = 12 }
+			}
+		10 -> npcl("Certainly, have this... It's a delicious chocolate cake. You'll like it, I'm sure!").also { stage++ }
+		11 -> playerl("A chocolate cake? Thanks!").also { stage = END_DIALOGUE }
+		12 -> npcl("Certainly, have this... It's a new recipe from the gnome kingdom. You'll like it, I'm sure!").also { stage++ }
+		13 -> playerl("A cocktail? Cheers!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Researcher during the quest***
+
+class ResearcherDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hello there. What are you doing here?").also { stage++ }
+		1 -> playerl("I’m going to pass the Earth Sciences exams so I can dig at the site north of here.").also { stage++ }
+		2 -> npcl("A good goal to work towards, and it should prove rewarding to you. So where are you starting your studies?").also { stage++ }
+		3 -> playerl("I’m not quite sure.").also { stage++ }
+		4 -> npcl("Well, you could try looking in the Earth Sciences section of the shelves over there, although the other students may have beaten you to it. You could even ask the students themselves. I’m sure I saw a group of them on their way to the digsite earlier today.").also { stage++ }
+		5 -> playerl("Anything else?").also { stage++ }
+		6 -> npcl("If you need something identified or are not sure about something, give it to Terry; he’s the archaeologist expert in the next room.").also { stage++ }
+		7 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage++ }
+		8 -> npcl("Of course! Let’s see now... Rock picks are for splitting rocks or scraping away soil; you can get one from a cupboard in the Education Centre.").also { stage++ }
+		9 -> playerl("What about sampling jars?").also { stage++ }
+		10 -> npcl("I think you’ll find them scattered about pretty much everywhere, but I know you can get one from a cupboard somewhere in the Education Centre, just like the rock pick!").also { stage++ }
+		11 -> playerl("Okay, what about a specimen brush?").also { stage++ }
+		12 -> npcl("We have a bit of a shortage of those at the moment. You could try borrowing one from a woman on the site... but I don’t think they’d give it willingly.").also { stage++ }
+		13 -> playerl("Sounds like I’ll need to be sneaky to get one of those, then... Okay – trowel?").also { stage++ }
+		14 -> npcl("Ahh... that you must earn by passing your exams! The examiner holds those.").also { stage++ }
+		15 -> playerl("Anything else?").also { stage++ }
+		16 -> npcl("If you need something identified or are not sure about something, give it to Terry; he’s the archaeologist expert in the next room.").also { stage++ }
+		17 -> playerl("Ahh, ok thanks.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Digsite Workman before the third exam***
+
+class DigsiteWorkmanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("Hello!").also { stage++ }
+		1 -> npcl("Why hello there! What can I do you for?").also { stage++ }
+		2 -> options("What do you do here?", "I’m not sure.", "Can I dig around here?").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("What do you do here?").also { stage = 4 }
+			2 -> playerl("I’m not sure.").also { stage = 7 }
+			3 -> playerl("Can I dig around here?").also { stage = 8 }
+			}
+		4 -> npcl("Well, my job involved digging for finds, cleaning them and transporting them for identification.").also { stage++ }
+		5 -> playerl("Sounds interesting.").also { stage++ }
+		6 -> npcl("I find it very interesting and very rewarding. So glad to see you’re taking an interest in the digsite. Hope to see you out here digging sometime!").also { stage = END_DIALOGUE }
+		7 -> npcl("Well, let me know when you are and I’ll do my very best to help you!").also { stage = END_DIALOGUE }
+		8 -> npcl("You can only use a site you have the appropriate exam level for.").also { stage++ }
+		9 -> playerl("Appropriate exam level?").also { stage++ }
+		10 -> npcl("Oh yes, you need to have been trained in the various techniques before you can be allowed to dig for artefacts.").also { stage++ }
+		11 -> playerl("Ah yes; I understand.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Digsite Workman after passing the third exam***
+
+class DigsiteWorkmanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("Hello!").also { stage++ }
+		1 -> npcl("Why hello there! What can I do you for?").also { stage++ }
+		2 -> playerl("Can I dig around here?").also { stage++ }
+		3 -> npcl("You can only use a site you have the appropriate exam level for.").also { stage++ }
+		4 -> playerl("I am already skilled in digging.").also { stage++ }
+		5 -> npcl("Really? What qualifications do you have?").also { stage++ }
+		6 -> playerl("I have passed all three Earth Sciences exams!").also { stage++ }
+		7 -> npcl("Well done! That means you can dig anywhere on this site, but you'll need to impress the examiner to use the winches.").also { stage++ }
+		8 -> playerl("Ok!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to operate the winch before giving the invitation letter to the digsite workman***
+
+class DigsiteWorkmanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Sorry, this area is private. The only way you'll get to use these is by impressing the archeological expert up at the centre.").also { stage++ }
+		1 -> npcl("Find something worthwhile and he might let you use the winches. Until then, get lost!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Digsite Workman with the invitation letter in inventory***
+
+class DigsiteWorkmanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> player("Hello!").also { stage++ }
+		1 -> npcl("Good day; what can I do for you?").also { stage++ }
+		2 -> playerl("Here, have a look at this...").also { stage++ }
+		3 -> npcl("I give permission... blah de blah... etc. Okay, that's all in order; you may use the mineshaft now. I'll hang onto this scroll, shall I?").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Digsite Workman after quest completions***
+
+class DigsiteWorkmanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Oh wow! You're the archaeologist who found that altar in the mines aren't you!").also { stage++ }
+		1 -> playerl("Um, yes.").also { stage++ }
+		2 -> npcl("So glad to meet you! Well done!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student One after failing the first exam***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Can you help me with the Earth Sciences exams at all?").also { stage++ }
+		2 -> npcl("Well... Maybe I will if you help me with something.").also { stage++ }
+		3 -> playerl("What’s that?").also { stage++ }
+		4 -> npcl("I have lost my recent good find.").also { stage++ }
+		5 -> playerl("What does it look like?").also { stage++ }
+		6 -> npcl("Err... Like an animal skull!").also { stage++ }
+		7 -> playerl("Well, that’s not too helpful, there are lots of those around here; can you remember where you last had it?").also { stage++ }
+		8 -> npcl("It was around here for sure. Maybe someone picked it up?").also { stage++ }
+		9 -> player("Okay, I’ll have a look for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student One again without obtaining the skull***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("How's the study going?").also { stage++ }
+		2 -> npcl("Very well, thanks. Have you found my animal skull yet?").also { stage++ }
+		3 -> playerl("No, sorry, not yet.").also { stage++ }
+		4 -> npcl("Oh well, I am sure it's been picked up. Couldn't you try looking through some pockets?").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student One after obtaining the skull when giving him the skull***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Is this your animal skull?").also { stage++ }
+		2 -> npcl("Oh wow! You’ve found it! Thank you so much. I’ll be glad to tell you what I know about the exam.").also { stage++ }
+		3 -> npcl("The study of Earth Sciences is: The study of the earth, its contents and history.").also { stage++ }
+		4 -> playerl("Okay, I’ll remember that.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Student One again after obtaining the skull and before passing the first exam***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I need more help with the exam.").also { stage++ }
+		3 -> npcl("Well, okay, this is what I have learned since I last spoke to you...").also { stage++ }
+		4 -> npcl("The study of Earth Sciences is: The study of the earth, its contents and history.").also { stage++ }
+		5 -> player("Okay, I'll remember that.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student One again after passing the first exam and before passing the second exam***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I need more help with the exam.").also { stage++ }
+		3 -> npcl("Well, okay, this is what I have learned since I last spoke to you...").also { stage++ }
+		4 -> npcl("Correct rock pick usage: Always handle with care; strike the rock cleanly on its cleaving point.").also { stage++ }
+		5 -> player("Okay, I'll remember that.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student One again after passing the second exam and before passing the third exam***
+
+class StudentOneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I need more help with the exam.").also { stage++ }
+		3 -> npcl("Well, okay, this is what I have learned since I last spoke to you...").also { stage++ }
+		4 -> npcl("Specimen brush use: Brush carefully and slowly using short strokes.").also { stage++ }
+		5 -> player("Okay, I'll remember that. Thanks for all your help.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Two after failing the first exam***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Can you help me with the Earth Sciences exams at all?").also { stage++ }
+		2 -> npcl("I can’t do anything unless I find my special cup.").also { stage++ }
+		3 -> playerl("Your what?").also { stage++ }
+		4 -> npcl("My special cup. I won it for a particularly good find last month.").also { stage++ }
+		5 -> playerl("Oh, right. So if I find it you’ll help me?").also { stage++ }
+		6 -> npcl("I sure will!").also { stage++ }
+		7 -> playerl("Any ideas where it may be?").also { stage++ }
+		8 -> npcl("All I remember is that I was working near the tents when I lost it.").also { stage++ }
+		9 -> player("Okay, I’ll see what I can do.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Two again without obtaining the special cup***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("How's the study going?").also { stage++ }
+		2 -> npcl("I'm getting there. Have you found my special cup yet?").also { stage++ }
+		3 -> playerl("No, sorry, not yet.").also { stage++ }
+		4 -> npcl("Oh dear, I hope it didn't fall into the river. I might never find it again.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Two after obtaining the special cup***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Look what I found!").also { stage++ }
+		2 -> npcl("Excellent! I’m so happy. Let me now help you with your exams... ").also { stage++ }
+		3 -> npcl("The people eligible to use the digsite are: All that have passed the appropriate Earth Sciences exams.").also { stage++ }
+		4 -> playerl("Thanks for the information.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Student Two again after obtaining the special cup and before passing the first exam***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("There are more exam questions I'm stuck on.").also { stage++ }
+		3 -> npcl("Hey, I'll tell you what I've learned. That may help.").also { stage++ }
+		4 -> npcl("The people eligible to use the site are: All that have passed the appropriate Earth Sciences exams.").also { stage++ }
+		5 -> player("Thanks for the information.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Two again again after passing the first exam and before passing the second exam***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("There are more exam questions I'm stuck on.").also { stage++ }
+		3 -> npcl("Hey, I'll tell you what I've learned. That may help.").also { stage++ }
+		4 -> npcl("Correct sample transportation: Samples taken in rough form; kept only in sealed containers.").also { stage++ }
+		5 -> player("Thanks for the information.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Student Two again again after passing the second exam and before passing the third exam***
+
+class StudentTwoDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("There are more exam questions I'm stuck on.").also { stage++ }
+		3 -> npcl("Hey, I'll tell you what I've learned. That may help.").also { stage++ }
+		4 -> npcl("The proper technique for handling bones is: Handle bones carefully and keep them away from other samples.").also { stage++ }
+		5 -> player("Thanks for the information.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three after failing the first exam***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Can you help me with the Earth Sciences exams at all?").also { stage++ }
+		2 -> npcl("I can if can help me...").also { stage++ }
+		3 -> playerl("How can I do that?").also { stage++ }
+		4 -> npcl("I have lost me teddy bear. He was my lucky mascot.").also { stage++ }
+		5 -> playerl("Do you know where you dropped him?").also { stage++ }
+		6 -> npcl("Well, I was doing a lot of walking that day... Oh yes, that’s right, we were studying ceramics in fact, near the edge of the digsite.").also { stage++ }
+		7 -> npcl("I found some pottery that seemed to match the design on those large urns.").also { stage++ }
+		8 -> npcl("I was in the process of checking this out, and when we got back to the centre my lucky mascot had gone!").also { stage++ }
+		9 -> playerl("Leave it to me. I’ll find it.").also { stage++ }
+		10 -> npcl("Oh great! Thanks!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again without obtaining the teddy bear***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("How's the study going?").also { stage++ }
+		2 -> npcl("Very well thanks. Have you found my lucky mascot yet?").also { stage++ }
+		3 -> playerl("No, sorry, not yet.").also { stage++ }
+		4 -> npcl("I'm sure it's just outside the site somewhere...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three after obtaining the teddy bear***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> playerl("Guess what I found.").also { stage++ }
+		2 -> npcl("Hey! My lucky mascot! That’s ever so much. Let me help you with those questions now.").also { stage++ }
+		3 -> npcl("The proper health and safety points are: Leather gloves and boots to be worn at all times; proper tools must be used.").also { stage++ }
+		4 -> playerl("Great, thanks for your advice.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again after obtaining the special cup and before passing the first exam***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I am stuck on some more exam questions.").also { stage++ }
+		3 -> npcl("Okay, I'll tell you my latest notes...").also { stage++ }
+		4 -> npcl("The proper health and safety points are: Proper tools must be used.").also { stage++ }
+		5 -> player("Great, thanks for your advice.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again after passing the first exam and before passing the second exam***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I am stuck on some more exam questions.").also { stage++ }
+		3 -> npcl("Okay, I'll tell you my latest notes...").also { stage++ }
+		4 -> npcl("Finds handling: Finds must be carefully handled.").also { stage++ }
+		5 -> player("Great, thanks for your advice.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again after passing the second exam and before passing the third exam***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("What, you want more help?").also { stage++ }
+		2 -> playerl("Err... Yes please!").also { stage++ }
+		3 -> npcl("Well... it's going to cost you...").also { stage++ }
+		4 -> playerl("Oh, well how much?").also { stage++ }
+		5 -> npcl("I'll tell you what I would like: a precious stone. I don't find many of them. My favorite are opals; they are beautiful.").also { stage++ } 
+		6 -> npcl("Just like me! Tee hee hee!").also { stage++ }
+		7 -> playerl("Err... OK I'll see what I can do, but I'm not sure where I'd get one.").also { stage++ }
+		7 -> npcl("Well, I have seen people get them from panning occasionally.").also { stage++ }
+		8 -> player("OK, I'll see what I can turn up for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again without a cut or uncut opal***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("Oh, hi again. Did you bring me the opal?").also { stage++ }
+		2 -> playerl("I haven't found one yet.").also { stage++ }
+		3 -> npcl("Oh, well, tell me when you do. Remember that they can be found around the site; perhaps try panning the river.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again with a cut or uncut opal***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Would an opal look like this by any chance?").also { stage++ }
+		1 -> npcl("Wow, great, you've found one. This will look beautiful set in my necklace. Thanks for that; now I'll tell you what I know... ").also { stage++ }
+		2 -> npcl("Sample preparation: Samples cleaned, and carried only in specimen jars.").also { stage++ }
+		3 -> playerl("Great, thanks for your advice.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Student Three again after giving her a cut or uncut opal before passing the third exam***
+
+class StudentThreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("How's it going?").also { stage++ }
+		2 -> playerl("I am stuck on some more exam questions.").also { stage++ }
+		3 -> npcl("Okay, I'll tell you my latest notes...").also { stage++ }
+		4 -> npcl("Sample preparation: Samples cleaned, and carried only in specimen jars.").also { stage++ }
+		5 -> player("Great, thanks for your advice.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pan before speaking to the Panning Guide WITH tea in inventory***
+
+class PanningGuideDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hey! You can’t pan yet!").also { stage++ }
+		1 -> player("Why not?").also { stage++ }
+		2 -> npcl("We do not allow the uninvited to pan here.").also { stage++ }
+		3 -> playerl("So how do I become invited then?").also { stage++ }
+		4 -> npcl("I’m not supposed to let people pan here unless they have permission from the authorities first. Mind you, I could let you have a go if you’re willing to do me a favour.").also { stage++ }
+		5 -> playerl("What’s that?").also { stage++ }
+		6 -> npcl("Well, to be honest, what I would really like is... a nice cup of tea!").also { stage++ }
+		7 -> playerl("I've some here that you can have.").also { stage++ }
+		8 -> npcl("Ah! Lovely! You can’t beat a good cuppa... You’re free to pan all you want.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pan before speaking to the Panning Guide WITHOUT tea in inventory***
+
+class PanningGuideDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hey! You can’t pan yet!").also { stage++ }
+		1 -> player("Why not?").also { stage++ }
+		2 -> npcl("We do not allow the uninvited to pan here.").also { stage++ }
+		3 -> playerl("So how do I become invited then?").also { stage++ }
+		4 -> npcl("I’m not supposed to let people pan here unless they have permission from the authorities first. Mind you, I could let you have a go if you’re willing to do me a favour.").also { stage++ }
+		5 -> playerl("What’s that?").also { stage++ }
+		6 -> npcl("Well, to be honest, what I would really like is... a nice cup of tea!").also { stage++ }
+		7 -> playerl("Tea?!").also { stage++ }
+		8 -> npcl("Absolutely, I’m parched! If you could bring me one of those, I would be more than willing to let you pan here. I usually get some from Varrock but I’m busy at the moment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Panning Guide before giving him tea WITH tea in inventory***
+
+class PanningGuideDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello, who are you?").also { stage++ }
+		1 -> npcl("Hello, I am the panning guide. I teach students how to pan in these waters. They're not permitted to do so until after they've had training and of course they must be invited to pan here too.").also { stage++ }
+		2 -> playerl("So how do I become invited then?").also { stage++ }
+		3 -> npcl("I’m not supposed to let people pan here unless they have permission from the authorities first. Mind you, I could let you have a go if you’re willing to do me a favour.").also { stage++ }
+		4 -> playerl("What’s that?").also { stage++ }
+		5 -> npcl("Well, to be honest, what I would really like is... a nice cup of tea!").also { stage++ }
+		6 -> playerl("I've some here that you can have.").also { stage++ }
+		7 -> npcl("Ah! Lovely! You can’t beat a good cuppa... You’re free to pan all you want.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Panning Guide before giving him tea WITHOUT tea in inventory***
+
+class PanningGuideDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello, who are you?").also { stage++ }
+		1 -> npcl("Hello, I am the panning guide. I teach students how to pan in these waters. They're not permitted to do so until after they've had training and of course they must be invited to pan here too.").also { stage++ }
+		2 -> playerl("So how do I become invited then?").also { stage++ }
+		3 -> npcl("I’m not supposed to let people pan here unless they have permission from the authorities first. Mind you, I could let you have a go if you’re willing to do me a favour.").also { stage++ }
+		4 -> playerl("What’s that?").also { stage++ }
+		5 -> npcl("Well, to be honest, what I would really like is... a nice cup of tea!").also { stage++ }
+		6 -> playerl("Tea?!").also { stage++ }
+		7 -> npcl("Absolutely, I’m parched! If you could bring me one of those, I would be more than willing to let you pan here. I usually get some from Varrock but I’m busy at the moment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Panning Guide after giving him tea***
+
+class PanningGuideDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello, who are you?").also { stage++ }
+		1 -> npcl("Hello, I am the panning guide. I'm here to teach you how to pan for gold.").also { stage++ }
+		2 -> playerl("Excellent!").also { stage++ }
+		3 -> npcl("Let me explain how panning works. First you need a panning tray. Use the tray in the panning points in the water and then search your tray.").also { stage++ }
+		4 -> npcl("If you find any gold, take it to the archaeological expert up in the museum storage facility. He will calculate its value for you.").also { stage++ }
+		5 -> playerl("Thank you!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Panning in the river***
+
+class PanningDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You lift the full tray from the water").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Archaeological Expert before and during the quest before using the strange talisman on him***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello. Who are you?").also { stage++ }
+		1 -> npcl("Good day to you. My name is Terry Balando, I am an expert archaeologist. I am employed by Varrock Museum to oversee all finds at this site. Anything you find must be reported to me.").also { stage++ }
+		2 -> playerl("Oh, okay. If I find anything of interest I will bring it here.").also { stage++ }
+		3 -> npcl("Can I help you at all?").also { stage++ }
+		4 -> options("I have something I need checking out.", "No thanks.", "Can you tell me anything about the digsite?", "Can you tell me more about the tools an archaeologist uses?").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("I have something I need checking out.").also { stage = 6 }
+			2 -> playerl("No thanks.").also { stage = 7 }
+			3 -> playerl("Can you tell me anything about the digsite?").also { stage = 8 }
+			4 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			}
+		6 -> npcl("Okay, give it to me and I'll have a look for you.").also { stage = END_DIALOGUE }
+		7 -> npcl("Good, let me know if you find anything unusual.").also { stage = END_DIALOGUE }
+		8 -> npcl("Yes, indeed! I am studying the lives of the settlers.").also { stage++ }
+		9 -> npcl("During the end of the Third Age, there used to be a great city at the site. Its inhabitants were humans, supporters of the god Saradomin.").also { stage++ }
+		10 -> npcl("It's not recorded what happened to the community here. I suspect nobody has lived here for over a millennium!").also { stage++ }
+		11 -> options("Can you tell me more about the tools an archaeologist uses?", "Thank you!").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			2 -> playerl("Thank you!").also { stage = END_DIALOGUE }
+			}
+		13 -> npcl("Of course! Let's see now...").also { stage++ }
+		14 -> npcl("Trowels are vital for fine digging work, so you can be careful to not damage or disturb any artefacts. Rock picks are for splitting rocks or scraping away soil.").also { stage++ }
+		15 -> playerl("What about specimen jars and brushes?").also { stage++ }
+		16 -> npcl("Those are essential for carefully cleaning and storing smaller samples.").also { stage++ }
+		17 -> player("Where can I get any of these things?").also { stage++ }
+		18 -> npcl("Well, we've come into a bit more funding of late, so there should be a stock of each of them in the Exam Centre's tools cupboard. We also hand out relevant tools as students complete each level of their Earth Sciences exams.").also { stage++ }
+		19 -> playerl("Ah, okay, thanks.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using an empty panning tray on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("I have no need for panning trays!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using an full panning tray on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you searched this tray yet?").also { stage++ }
+		1 -> playerl("Not that I remember...").also { stage++ }
+		2 -> npcl("Have you searched this tray yet?").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using the special cup on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("The expert cleans off the mud.").also { stage++ }
+		2 -> npcl("Looks like an award cup for some small find. Perhaps it belongs to one of the students?").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using the strange talisman on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Take a look at this talisman.").also { stage++ }
+		1 -> npcl("Unusual... This object doesn't appear right...").also { stage++ }
+		2 -> npcl("Hmmm...").also { stage++ }
+		3 -> npcl("I wonder... Let me check my guide... Could it be? Surely not!").also { stage++ }
+		4 -> npcl("From the markings on it, it seems to be a ceremonial ornament to a god named...").also { stage++ }
+		5 -> npcl("...Zaros? I haven't heard much about him before. This is a great discovery; we know very little of the ancient gods that people worshipped.").also { stage++ }
+		6 -> npcl("There is some strange writing embossed upon it. It says: 'Zaros will return and wreak his vengeance upon Zamorak the betrayer.'").also { stage++ }
+		7 -> npcl("I wonder what it means by that. Some silly superstition, probably.").also { stage++ }
+		8 -> npcl("Still, I wonder what this is doing around here. I'll tell you what - seeing how you were the one to find this, I'll allow you to use the private dig shafts.").also { stage++ }
+		9 -> npcl("You obviously have a keen eye. Take this letter and give it to one of the winch operators at the north end of the dig, and they will allow you to use them.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Archaeological Expert after using the strange talisman on him WITH the invitation letter in inventory***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello. Who are you?").also { stage++ }
+		1 -> npcl("Good day to you. My name is Terry Balando, I am an expert archaeologist. I am employed by Varrock Museum to oversee all finds at this site. Anything you find must be reported to me.").also { stage++ }
+		2 -> playerl("Oh, okay. If I find anything of interest I will bring it here.").also { stage++ }
+		3 -> npcl("Can I help you at all?").also { stage++ }
+		4 -> options("I have something I need checking out.", "No thanks.", "Can you tell me anything about the digsite?", "Can you tell me more about the tools an archaeologist uses?").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("I have something I need checking out.").also { stage = 6 }
+			2 -> playerl("No thanks.").also { stage = 7 }
+			3 -> playerl("Can you tell me anything about the digsite?").also { stage = 8 }
+			4 -> playerl("I lost the letter you gave me.").also { stage = 20 }
+			5 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			}
+		6 -> npcl("Okay, give it to me and I'll have a look for you.").also { stage = END_DIALOGUE }
+		7 -> npcl("Good, let me know if you find anything unusual.").also { stage = END_DIALOGUE }
+		8 -> npcl("Yes, indeed! I am studying the lives of the settlers.").also { stage++ }
+		9 -> npcl("During the end of the Third Age, there used to be a great city at the site. Its inhabitants were humans, supporters of the god Saradomin.").also { stage++ }
+		10 -> npcl("It's not recorded what happened to the community here. I suspect nobody has lived here for over a millennium!").also { stage++ }
+		11 -> options("Can you tell me more about the tools an archaeologist uses?", "Thank you!").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			2 -> playerl("Thank you!").also { stage = END_DIALOGUE }
+			}
+		13 -> npcl("Of course! Let's see now...").also { stage++ }
+		14 -> npcl("Trowels are vital for fine digging work, so you can be careful to not damage or disturb any artefacts. Rock picks are for splitting rocks or scraping away soil.").also { stage++ }
+		15 -> playerl("What about specimen jars and brushes?").also { stage++ }
+		16 -> npcl("Those are essential for carefully cleaning and storing smaller samples.").also { stage++ }
+		17 -> player("Where can I get any of these things?").also { stage++ }
+		18 -> npcl("Well, we've come into a bit more funding of late, so there should be a stock of each of them in the Exam Centre's tools cupboard. We also hand out relevant tools as students complete each level of their Earth Sciences exams.").also { stage++ }
+		19 -> playerl("Ah, okay, thanks.").also { stage = END_DIALOGUE }
+		20 -> npcl("No you haven't! You have one in your backpack!").also { stage = END_DIALOGUE }
+}
+
+
+***Speaking to the Archaeological Expert after using the strange talisman on him WITHOUT the invitation letter***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello. Who are you?").also { stage++ }
+		1 -> npcl("Good day to you. My name is Terry Balando, I am an expert archaeologist. I am employed by Varrock Museum to oversee all finds at this site. Anything you find must be reported to me.").also { stage++ }
+		2 -> playerl("Oh, okay. If I find anything of interest I will bring it here.").also { stage++ }
+		3 -> npcl("Can I help you at all?").also { stage++ }
+		4 -> options("I have something I need checking out.", "No thanks.", "Can you tell me anything about the digsite?", "Can you tell me more about the tools an archaeologist uses?").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("I have something I need checking out.").also { stage = 6 }
+			2 -> playerl("No thanks.").also { stage = 7 }
+			3 -> playerl("Can you tell me anything about the digsite?").also { stage = 8 }
+			4 -> playerl("I lost the letter you gave me.").also { stage = 20 }
+			5 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			}
+		6 -> npcl("Okay, give it to me and I'll have a look for you.").also { stage = END_DIALOGUE }
+		7 -> npcl("Good, let me know if you find anything unusual.").also { stage = END_DIALOGUE }
+		8 -> npcl("Yes, indeed! I am studying the lives of the settlers.").also { stage++ }
+		9 -> npcl("During the end of the Third Age, there used to be a great city at the site. Its inhabitants were humans, supporters of the god Saradomin.").also { stage++ }
+		10 -> npcl("It's not recorded what happened to the community here. I suspect nobody has lived here for over a millennium!").also { stage++ }
+		11 -> options("Can you tell me more about the tools an archaeologist uses?", "Thank you!").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("Can you tell me more about the tools an archaeologist uses?").also { stage = 13 }
+			2 -> playerl("Thank you!").also { stage = END_DIALOGUE }
+			}
+		13 -> npcl("Of course! Let's see now...").also { stage++ }
+		14 -> npcl("Trowels are vital for fine digging work, so you can be careful to not damage or disturb any artefacts. Rock picks are for splitting rocks or scraping away soil.").also { stage++ }
+		15 -> playerl("What about specimen jars and brushes?").also { stage++ }
+		16 -> npcl("Those are essential for carefully cleaning and storing smaller samples.").also { stage++ }
+		17 -> player("Where can I get any of these things?").also { stage++ }
+		18 -> npcl("Well, we've come into a bit more funding of late, so there should be a stock of each of them in the Exam Centre's tools cupboard. We also hand out relevant tools as students complete each level of their Earth Sciences exams.").also { stage++ }
+		19 -> playerl("Ah, okay, thanks.").also { stage = END_DIALOGUE }
+		20 -> npcl("I can't believe it! I go to all the effort of writing you a letter of recommendation and you lose it! Here, I'll write another... Don't lose it again!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using unidentified liquid vial on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("This is a VERY dangerous liquid called nitroglycerin. Be careful how you handle it. Don't drop it or it will explode!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using powder from digsite chest on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("Really, you do find the most unusual items. I know what this is - it's a strong chemical called ammonium nitrate. Why you want this I'll never know...").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a needle on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found a needle.").also { stage++ }
+		1 -> npcl("Hmm, yes; I wondered why this race were so well dressed! It looks like they had mastery of needlework.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a rotten apple on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found these...").also { stage++ }
+		1 -> npcl("Ew! Throw them away this instant!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using broken glass on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this glass.").also { stage++ }
+		1 -> npcl("Hey you should be careful of that. It might cut your fingers, throw it away!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a broken arrow on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this arrow.").also { stage++ }
+		1 -> npcl("No doubt this arrow was shot by a strong warrior – it's split in half! It is not a valuable object though.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using bones on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at these bones.").also { stage++ }
+		1 -> npcl("Ah, yes – a fine bone example... no noticeable fractures... and in good condition. These are common cow bones, however; they have no archaeological value.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using buttons on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found these buttons.").also { stage++ }
+		1 -> npcl("Let's have a look. Ah, I think these are from the nobility, perhaps a royal servant?").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a cracked sample on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found this rock...").also { stage++ }
+		1 -> npcl("What a shame it's cracked; this looks like it would have been a good sample.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using an old tooth on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hey look at this.").also { stage++ }
+		1 -> npcl("Oh, an old tooth. It looks like it has come from a mighty being. Pity there are no tooth fairies around here!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a rusty sword on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found an old sword.").also { stage++ }
+		1 -> npcl("Oh, it's very rusty isn't it? I'm not sure this sword belongs here, it looks very out of place.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a broken staff on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this staff.").also { stage++ }
+		1 -> npcl("Look at this... Interesting... This appears to belong to a cleric of some kind; certainly not a follower of Saradomin, however.").also { stage++ }
+		2 -> npcl("I wonder if there was another civilization here before the Saradominists?").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using broken armour on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found some armour.").also { stage++ }
+		1 -> npcl("It looks like the wearer of this fought a mighty battle.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using danaged armour on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found some old armour.").also { stage++ }
+		1 -> npcl("How unusual. This armour doesn't seem to match with the other finds. Keep looking.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using ceramic remains on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found some pottery pieces.").also { stage++ }
+		1 -> npcl("Yes, many parts are discovered. The inhabitants of these parts were great potters.").also { stage++ }
+		2 -> playerl("You mean they were good at using potions?").also { stage++ }
+		3 -> npcl("No, no, silly. They were known for their skill with clay.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using a belt buckle on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this unusual item...").also { stage++ }
+		1 -> npcl("Let me see. This is a belt buckle. Not so unusual - I should imagine it came from a guard.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using an animal skull on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("Hmm, an interesting find; an animal skull for sure. Another student found one just like this today.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using the teddy bear on Archeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("Why, it looks like a teddy bear to me. Perhaps someone's lucky mascot!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using gold nuggets on Archeological Expert when the player has less than 3 nuggets***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have these gold nuggets...").also { stage++ }
+		1 -> npcl("I can't do much with these nuggets yet. Come back when you have 3 and I will exchange them for you.").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Using gold nuggets on Archeological Expert when the player has 3 or more nuggets***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have these gold nuggets...").also { stage++ }
+		1 -> npcl("Good – that's three; I can exchange them for normal gold now. You can get this refined and make a profit!").also { stage++ }
+		2 -> player"(Excellent!").also { stage = END_DIALOGUE }
+} 
+
+
+
+***Speaking to Archaeological Expert with the stone tablet in inventory***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found this in a hidden cavern beneath the site.").also { stage++ }
+		1 -> npcl("Incredible!").also { stage++ }
+		2 -> playerl("There is an altar down there. The place is crawling with skeletons!").also { stage++ }
+		3 -> npcl("Yuck!").also { stage++ }
+		4 -> npcl("This is an amazing discovery! All this while we were convinced that no other race had lived here.").also { stage++ }
+		5 -> npcl("It seems the followers of Saradomin have tried to cover up the evidence of this Zaros altar. This whole city must have been built over it!").also { stage++ }
+		6 -> npcl("Thanks for your help; your sharp eyes have spotted what many have missed. Here, take this gold as your reward.").also { stage++ }
+		7 -> npcl("The expert gives you two gold bars as payment.").also { stage = END_DIALOGUE }
+
+
+***Speaking to Archaeological Expert after quest complete***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hello again. I am now studying this mysterious altar and its inhabitants. The markings are strange...").also { stage++ }
+		1 -> npcl("It refers to a god I have never heard of before, named Zaros. It must be some pagan superstition.").also { stage++ }
+		2 -> npcl("That was a great find; who knows what other secrets lie buried beneath the surface of our land...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the stone tablet on the Archaelogical Expert after quest completion***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("I don't need another tablet! One is enough, thank you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Archaeological Expert after quest complete while holding an Ancient Staff OR using an Ancient Staff on him***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What do you think of this?").also { stage++ }
+		1 -> npcl("That staff is incredible! It's the same symbol that was on that talisman you found here. Does this mean you've found out more about Zaros?").also { stage++ }
+		2 -> playerl("I found out that he was banished, and that the people's hero was trapped in a pyramid and...").also { stage++ }
+		3 -> npcl("So you're the one who found out about that. I've heard the story from my friends in the museum. Well done on being able to wield such an impressive symbol.").also { stage++ }
+		4 -> npcl("Anyway....").also { stage++ }
+		5 -> npcl("Hello again. I am now studying this mysterious altar and its inhabitants. The markings are strange...").also { stage++ }
+		6 -> npcl("It refers to a god I have never heard of before, named Zaros. It must be some pagan superstition.").also { stage++ }
+		7 -> npcl("That was a great find; who knows what other secrets lie buried beneath the surface of our land...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using any other item not listed here on the Archaeological Expert***
+
+class ArchaeologicalExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Have a look at this.").also { stage++ }
+		1 -> npcl("I don't think that has any archaeological significance.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Finding the ancient talisman in the digsite***
+
+class StrangeTalismanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You find a strange talisman.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Reading the invitation letter***
+
+class InvitationLetterDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("It says, 'I give permission for the bearer...to use the mine shafts on site. Signed Terrance Balando, Archaeological Expert, City of Varrock.'").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a rope on the winch before giving the invitation letter to a workman***
+
+class WinchDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Err... I have no idea why I am doing this!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Operating the winch after giving the digsite workman the invitation letter***
+
+class WinchDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hey, I think I could fit down here. I need something to help me get all the way down.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the bricks before using the chemical compound on it***
+
+class BricksDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone else working in these underground areas here who can help...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the chemical compound on the bricks***
+
+class BricksDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Okay, the mixture is all over the bricks. I need some way to ignite this compound.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a tinderbox on the bricks AFTER using the chemical compound on the bricks***
+
+class BricksDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Whoa! This is going to blow! I'd better run!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Bricks go boom!***
+
+class PlayerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Wow, that was a big explosion! What's that noise I can hear? Sounds like bones moving or something...").also { stage = END_DIALOGUE }
+}  
+
+
+
+***Speaking to Doug Deeping for the first time AND without the chest key in inventory***
+
+class DougDeepingExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Well, well... I have a visitor. What are you doing here?").also { stage++ }
+		2 -> options("I have been invited to research here.", "I'm not really sure.", "I'm here to get rich, rich, rich!", "How could I move a large pile of rocks?").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I have been invited to research here.").also { stage = 4 }
+			2 -> playerl("I'm not really sure.").also { stage = 9 }
+			3 -> playerl("I'm here to get rich, rich, rich!").also { stage = 10 }
+			4 -> playerl("How could I move a large pile of rocks?").also { stage = 11 }
+			}
+		4 -> npcl("Indeed, you must be someone special to be allowed down here.").also { stage++ }
+		5 -> options("Do you know where to find a specimen jar?", "I have things to do...").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Do you know where to find a specimen jar?").also { stage = 7 }
+			2 -> playerl("I have things to do...").also { stage = 8 }
+		7 -> npcl("Hmmm, let me think... Nope, can't help you there, I'm afraid. Try asking at the Exam Centre.").also { stage = END_DIALOGUE }
+		8 -> npcl("Of course, don't let me keep you.").also { stage = END_DIALOGUE }
+		9 -> npcl("A miner without a clue - how funny!").also { stage = END_DIALOGUE }
+		10 -> npcl("Oh, well, don't forget that wealth and riches aren't everything.").also { stage = END_DIALOGUE }
+		11 -> npcl("There used to be this chap that worked in the other shaft. He was working on an explosive chemical mixture to be used for clearing blocked areas underground.").also { stage++ }
+		12 -> npcl("He left in a hurry one day. Apparently, something in the shaft scared him to death, but he didn't say what.").also { stage++ }
+		13 -> playerl("Oh?").also { stage++ }
+		14 -> npcl("Rumour has it he'd been writing a book on his chemical mixture. I'm not sure what goes in it, but I'm sure you'll find the stuff he was using scattered around the digsite. He left so quickly, he didn't take anything with").also { stage++ }
+		15 -> npcl("him. In fact, I still have a chest key he gave me to look after - perhaps it's more useful to you.").also { stage++ }
+		16 -> npcl("Doug hands you a key").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Doug Deeping WITH the chest key in inventory***
+
+class DougDeepingExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello.").also { stage++ }
+		1 -> npcl("Well, well... I have a visitor. What are you doing here?").also { stage++ }
+		2 -> options("I have been invited to research here.", "I'm not really sure.", "I'm here to get rich, rich, rich!", "How could I move a large pile of rocks?").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I have been invited to research here.").also { stage = 4 }
+			2 -> playerl("I'm not really sure.").also { stage = 9 }
+			3 -> playerl("I'm here to get rich, rich, rich!").also { stage = 10 }
+			4 -> playerl("How could I move a large pile of rocks?").also { stage = 11 }
+			}
+		4 -> npcl("Indeed, you must be someone special to be allowed down here.").also { stage++ }
+		5 -> options("Do you know where to find a specimen jar?", "I have things to do...").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Do you know where to find a specimen jar?").also { stage = 7 }
+			2 -> playerl("I have things to do...").also { stage = 8 }
+		7 -> npcl("Hmmm, let me think... Nope, can't help you there, I'm afraid. Try asking at the Exam Centre.").also { stage = END_DIALOGUE }
+		8 -> npcl("Of course, don't let me keep you.").also { stage = END_DIALOGUE }
+		9 -> npcl("A miner without a clue - how funny!").also { stage = END_DIALOGUE }
+		10 -> npcl("Oh, well, don't forget that wealth and riches aren't everything.").also { stage = END_DIALOGUE }
+		11 -> npcl("There used to be this chap that worked in the other shaft. He was working on an explosive chemical mixture to be used for clearing blocked areas underground.").also { stage++ }
+		12 -> npcl("He left in a hurry one day. Apparently, something in the shaft scared him to death, but he didn't say what.").also { stage++ }
+		13 -> playerl("Oh?").also { stage++ }
+		14 -> npcl("Rumour has it he'd been writing a book on his chemical mixture. I'm not sure what goes in it, but I'm sure you'll find the stuff he was using scattered around the digsite. He left so quickly, he didn't take anything with").also { stage++ }
+		15 -> npcl("him. In fact, I still have a chest key he gave me to look after - perhaps it's more useful to you.").also { stage++ }
+		16 -> npcl("It's okay, I already have one.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pickpocket Doug Deeping***
+
+class DougDeepingExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Hey! Trying to steal from me, are you? What do you think I am, stupid or something?!").also { stage++ }
+		1 -> playerl("Err... Sorry.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the digsite chest with the chest key in inventory***
+
+class DigsiteChestExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You find some unusual power inside...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to open the digsite barrel***
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("The lid is shut tight; I'll have to find something to lever it off.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a trowel on the digsite barrel***
+
+
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Great! It's opened it.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the now opened barrel***
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I'll need a container to collect some. It looks and smells rather dangerous, so it'll need to be something small and capable of containing dangerous chemicals.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a specimen jar on the digsite barrel***
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Perhaps not; it might contaminate the samples.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a panning tray on the digsite barrel***
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Not the best idea I've had; it's likely to spill everywhere in that!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a vial on the digsite barrel***
+
+class DigsiteBarrelExpertDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("You fill the vial with the liquid.").also { stage++ }
+		1 -> playerl("I'm not sure what this stuff is. I had better be VERY careful with it; I had better not drop it either...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Completing the chemical compound***
+
+class ChemicalCompoundDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Excellent! This looks just right!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Reading the stone tablet***
+
+class StoneTabletDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("It says: 'Tremble, mortals, for Zaros shall return.'").also { stage = END_DIALOGUE }
+}

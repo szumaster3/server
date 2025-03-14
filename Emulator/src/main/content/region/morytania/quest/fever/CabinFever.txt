@@ -1,0 +1,145 @@
+/*package content.region.miscquest.fever
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.hasLevelStat
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class CabinFever : Quest("Cabin Fever", 37, 36, 2, Vars.VARP_QUEST_CABIN_FEVER_655, 0, 1, 131) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!Bill Teach?? in !!Port??", line++, false)
+            line(player, "!!Phasmatys.??", line++, false)
+            line++
+            line(player, "Minimum requirements:", line++, false)
+            line(player, "!!I must have completed Rum Deal??", line++, isQuestComplete(player, "Rum Deal"))
+            line(
+                player,
+                "!!I must have completed Pirate's Treasure??",
+                line++,
+                isQuestComplete(player, "Pirate's Treasure")
+            )
+            line(player, if (hasLevelStat(player, Skills.AGILITY, 42)) "---42 Agility/--" else "!!42 Agility??", line++)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.CRAFTING, 45)) "---45 Crafting/--" else "!!45 Crafting??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.SMITHING, 50)) "---50 Smithing/--" else "!!50 Smithing??",
+                line++
+            )
+            line(player, if (hasLevelStat(player, Skills.RANGE, 40)) "---40 Ranged/--" else "!!40 Ranged??", line++)
+            line(player, "The ability to defeat at least a !!level 75 enemy??.", line++, false)
+            line++
+        }
+
+        if (stage == 1) {
+            line(player, "I have spoken to Bill Teach and agreed to help him sail his ship", line++, false)
+            line(player, " to a place called Mos Le'Harmless.", line++, false)
+            line(player, "We are likely to be attacked by enemy pirates on the way.", line++, false)
+            line(player, "Bill is ready, all I have to do is board the Adventurous,", line++, false)
+            line(player, "and we can set off.", line++, false)
+            line(player, "I have gone to the ship and spoken to Bill Teach again.", line++, false)
+            line(player, "He is ready to set off as soon as I give the word.", line++, false)
+            line(player, "We have been attacked by pirates,", line++, false)
+            line(player, "and Bill has told me to destroy their cannon before they sink the ship.", line++, false)
+            line(player, "He has told me I can climb the mast and use a rope", line++, false)
+            line(player, "to make a rope swing and swing across.", line++, false)
+            line(player, "When I get there, I will need to use some sort of a flame on a fuse", line++, false)
+            line(player, "after attaching it to the gunpowder barrel they have next to the cannon.", line++, false)
+            line(player, "Having destroyed the enemy ship's cannon I should return", line++, false)
+            line(player, "to my ship and see what Bill wants me to do next.", line++, false)
+            line(player, "The ship is taking on water, so I will need to repair it.", line++, false)
+            line(player, "I will need to take repair planks from the repair locker", line++, false)
+            line(player, "and use a hammer and tacks to fix them over the cannon hole.", line++, false)
+            line(player, "I will then need to use swamp paste on the patch to waterproof it.", line++, false)
+            line(player, "I have repaired and waterproofed the holes in the hull.", line++, false)
+            line(player, "I should tell Bill in case he wants me to do anything else.", line++, false)
+            line(player, "Bill wants me to take five loads of Plunder from the enemy hold and", line++, false)
+            line(player, "put them into the chest in our hold", line++, false)
+            line(player, "Having looted to my heart's content I should go and tell Bill", line++, false)
+            line(player, "that I have filled the hold with plunder.", line++, false)
+            line(player, "My next task it to finish off the enemy ship using our cannon.", line++, false)
+            line(player, "To do this I will need to repair it first.", line++, false)
+            line(player, "I will need to go to the gun locker and retrieve a new cannon barrel.", line++, false)
+            line(player, "I will then need to replace the broken barrel with this.", line++, false)
+            line(player, "Bill wants me to fire the cannon at the enemy ship, but did not tell me how.", line++, false)
+            line(player, "Having fixed the cannon I should go and ask him how to do it.", line++, false)
+            line(player, "I have been told how to fire the cannon,", line++, false)
+            line(player, "and ordered to fire a shot at the crew.", line++, false)
+            line(player, "I will need to add gunpowder to the cannon,", line++, false)
+            line(player, "tamp the charge with a ramrod, add a canister,", line++, false)
+            line(player, "then use a fuse on the cannon and fire it.", line++, false)
+            line(player, "Afterwards I will need to use the ramrod on the cannon to clean it,", line++, false)
+            line(player, "mostly to stop it from exploding.", line++, false)
+            line(player, "Having shot the enemy crew full of holes,", line++, false)
+            line(player, "I think we can probably sail off into the sunset now.", line++, false)
+            line(player, "I will go and tell Bill that I have done what he wanted.", line++, false)
+            line(player, "Bill has asked me to hole the enemy ship,", line++, false)
+            line(player, "preventing them from following us and learnin' them to mess with us.", line++, false)
+            line(player, "I will need to add gunpowder to the cannon, tamp the charge with a ramrod,", line++, false)
+            line(player, "add a cannonball, then use fuse on the cannon and fire it.", line++, false)
+            line(player, "Afterwards I will need to use the ramrod on the cannon to clean it,", line++, false)
+            line(player, "mostly to stop it from exploding.", line++, false)
+            line(player, "I have shot holes in the enemy ship,", line++, false)
+            line(player, "and we have sailed triumphantly into Mos Le'Harmless.", line++, false)
+            line(player, "Bill has given me the Little Book o' Piracy,", line++, false)
+            line(player, "which I will need to be able to speak", line++, false)
+            line(player, "to some of the pirates in town, and he has told me to speak to him", line++, false)
+            line(player, "if I need to go back to the mainland.", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.COINS_995, 230, 277, 5)
+        player.packetDispatch.sendString("You have completed Cabin Fever!", 277, 4)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "7,000 Smithing XP", ln++)
+        drawReward(player, "7,000 Crafting XP", ln++)
+        drawReward(player, "7,000 Agility XP", ln++)
+        drawReward(player, "10,000 coins", ln++)
+        rewardXP(player, Skills.SMITHING, 7000.0)
+        rewardXP(player, Skills.CRAFTING, 7000.0)
+        rewardXP(player, Skills.AGILITY, 7000.0)
+        addItemOrDrop(player, Items.COINS_995, 10000)
+
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//7,000 Smithing experience lamp
+//7,000 Crafting experience lamp
+//7,000 Agility experience lamp
+//10,000 coins (only if you speak to Bill Teach after the quest)
+//Access to Mos Le'Harmless
+//Access to kill cave horrors and unspeakable horrors
+//The ability to understand pirates on Mos Le'Harmless with the book o' piracy
+//Charter ship prices are halved
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

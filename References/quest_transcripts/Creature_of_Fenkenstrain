@@ -1,0 +1,632 @@
+Creature of Fenkenstrain Quest
+Sources: https://www.youtube.com/watch?v=RXDUr1yxMiQ
+
+***Reading the Canafis signpost to start the quest***
+
+class SignpostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("The signpost has a note pinned onto it. The note says: '--- Braindead Butler Wanted --- Gravedigging skills essential – Hunchback advantageous See Dr. Fenkenstrain at the castle NE of Canifis'").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain for the first time***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you come to apply for the job?").also { stage++ }
+		1 -> options("Yes, if it pays well.", "No.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, if it pays well.").also { stage = 3 }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+		3 -> npcl("I'll have to ask you some questions first.").also { stage++ }
+		4 -> playerl("Okay...
+		5 -> npcl("How would you describe yourself in one word?
+		6 -> options("Stunning.", "Awe-inspiring.", "Breathtaking.", "Braindead.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("Stunning.").also { stage = 25 }
+			2 -> playerl("Awe-inspiring.").also { stage = 25 }
+			3 -> playerl("Breathtaking.").also { stage = 25 }
+ 			4 -> playerl("Braindead.").also { stage++ }
+			}
+		8 -> npcl("Mmmm, I see.").also { stage++ }
+		9 -> npcl("Just one more question. What would you say is your greatest skill?").also { stage++ }
+		10 -> options("Combat.", "Magic.", "Cooking.", "Grave-digging.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Combat.").also { stage = 29 }
+			2 -> playerl("Magic.").also { stage = 29 }
+			3 -> playerl("Cooking.").also { stage = 29 }
+ 			4 -> playerl("Grave-digging.").also { stage++ }
+			}
+		12 -> npcl("Mmmm, I see.").also { stage++ }
+		13 -> npcl("Looks like you're just the MAN/WOMAN for the job! Welcome aboard!").also { stage++ }
+		14 -> playerl("Is there anything you'd like me to do for you, sir?").also { stage++ }
+		15 -> npcl("Yes, there is. You're highly skilled at grave-digging, yes?").also { stage++ }
+		16 -> playerl("Err...yes, that's what I said.").also { stage++ }
+		17 -> npcl("Excellent. Now listen carefully. I need you to find some...stuff...for me.").also { stage++ }
+		18 -> playerl("Stuff?").also { stage++ }
+		19 -> npcl("That's what I said...stuff.").also { stage++ }
+		20 -> playerl("What kind of stuff?").also { stage++ }
+		21 -> npcl("Well...dead stuff.").also { stage++ }
+		22 -> playerl("Go on...").also { stage++ }
+		23 -> npcl("I need you to get me enough dead body parts for me to stitch together a complete body, which I plan to bring to life.").also { stage++ }
+		24 -> playerl("Right...okay...if you insist.").also { stage = END_DIALOGUE }
+		25 -> npcl("Mmmm, I see.").also { stage++ }
+		26 -> npcl("Just one more question. What would you say is your greatest skill?").also { stage++ }
+		27 -> options("Combat.", "Magic.", "Cooking.", "Grave-digging.").also { stage++ }
+		28 -> when(buttonId) {
+			1 -> playerl("Combat.").also { stage++ }
+			2 -> playerl("Magic.").also { stage++ }
+			3 -> playerl("Cooking.").also { stage++ }
+ 			4 -> playerl("Grave-digging.").also { stage++ }
+			}
+		29 -> npcl("Mmmm, I see.").also { stage++ }
+		30 -> npcl("Looks like you're not the MAN/WOMAN for the job").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after being hired***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Do you know where I could find body parts?", "What do you want me to do again?", "Why do you want to make a creature?", "Will this creature put me out of a job?", "I must get back to work, sir.").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Do you know where I could find body parts?").also { stage = 2 }
+			2 -> playerl("What do you want me to do again?").also { stage = 5 }
+			3 -> playerl("Why do you want to make a creature?").also { stage = 7 }
+			4 -> playerl("Will this creature put me out of a job?").also { stage = 12 }
+			5 -> playerl("I must get back to work, sir.").also { stage = END_DIALOGUE }
+			}
+		2 -> npcl("The soil of Morytania is unique in its ability to preserve the bodies of the dead, which is one reason why I have chosen to carry out my experiments here.").also { stage++ }
+		3 -> npcl("I recommend digging up some graves in the local area. To the south-east you will find the Haunted Woods; I believe there are many graves there.").also { stage++ }
+		4 -> npcl("There is also a mausoleum on an island west of this castle. I expect the bodies that are buried there to be extremely well preserved, as they were wealthy in life.").also { stage = END_DIALOGUE }
+		5 -> npcl("I need you to get me enough dead body parts for me to stitch together a complete body, which I plan to bring to life.").also { stage++ }
+		6 -> playerl("Right...okay...if you insist.").also { stage = END_DIALOGUE }
+		7 -> npcl("I came to the land of Morytania many years ago, to find a safe sanctuary for my experiments. This abandoned castle suited my purposes exactly.").also { stage++ }
+		8 -> playerl("What were you experimenting in?").also { stage++ }
+		9 -> npcl("Oh, perfectly innocent experiments – for the good of mankind.").also { stage++ }
+		10 -> playerl("Then why did you need to come to Morytania?").also { stage++ }
+		11 -> npcl("Enough questions, now. Get back to your work.").also { stage = END_DIALOGUE }
+		12 -> npcl("No, my friend. I have a very special purpose in mind for this creature.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain WITH all of the body parts in inventory***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("I have some body parts for you.", "What do you want me to do again?", "Why do you want to make a creature?", "Will this creature put me out of a job?", "I must get back to work, sir.").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("I have some body parts for you.").also { stage = 2 }
+			2 -> playerl("What do you want me to do again?").also { stage = 5 }
+			3 -> playerl("Why do you want to make a creature?").also { stage = 7 }
+			4 -> playerl("Will this creature put me out of a job?").also { stage = 12 }
+			5 -> playerl("I must get back to work, sir.").also { stage = END_DIALOGUE }
+			}
+		2 -> npcl("Great, you've brought me some arms.").also { stage = 13 }
+		3 -> npcl("I recommend digging up some graves in the local area. To the south-east you will find the Haunted Woods; I believe there are many graves there.").also { stage++ }
+		4 -> npcl("There is also a mausoleum on an island west of this castle. I expect the bodies that are buried there to be extremely well preserved, as they were wealthy in life.").also { stage = END_DIALOGUE }
+		5 -> npcl("I need you to get me enough dead body parts for me to stitch together a complete body, which I plan to bring to life.").also { stage++ }
+		6 -> playerl("Right...okay...if you insist.").also { stage = END_DIALOGUE }
+		7 -> npcl("I came to the land of Morytania many years ago, to find a safe sanctuary for my experiments. This abandoned castle suited my purposes exactly.").also { stage++ }
+		8 -> playerl("What were you experimenting in?").also { stage++ }
+		9 -> npcl("Oh, perfectly innocent experiments – for the good of mankind.").also { stage++ }
+		10 -> playerl("Then why did you need to come to Morytania?").also { stage++ }
+		11 -> npcl("Enough questions, now. Get back to your work.").also { stage = END_DIALOGUE }
+		12 -> npcl("No, my friend. I have a very special purpose in mind for this creature.").also { stage = END_DIALOGUE }
+		13 -> npcl("Excellent, you've brought me some legs.").also { stage++ }
+		14 -> npcl("Splendid, you've brought me a torso.").also { stage++ }
+		15 -> npcl("Fantastic, you've brought me a head.").also { stage++ }
+		16 -> npcl("Superb! Those are all the parts I need. Now to sew them together...").also { stage++ }
+		17 -> npcl("Oh bother! I haven't got a needle or thread!").also { stage++ }
+		18 -> npcl("Go and get me a needle, and I'll need 5 lots of thread.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the decapitated head on Dr. Fenkenstrain***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have some body parts for you.").also { stage++ }
+		1 -> npcl("I can't use this head, PLAYER. It's missing the most important part – the old grey matter.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after turning in the body parts WITHOUT a needle and 5 thread***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Where are my needle and thread, PLAYER?").also { stage = END_DIALOGUE } 
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after turning in the body parts WITH a needle and 5 thread***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Where are my needle and thread, PLAYER?").also { stage++ }
+		1 -> npcl("Ah, a needle. Wonderful.").also { stage++ }
+		2 -> npcl("Some thread. Excellent.").also { stage++ }
+		3 -> npcl("Fenkenstrain uses the needle and thread to sew the body parts together. Soon, a hideous creature lies inanimate on the ritual table.").also { stage++ }
+		4 -> npcl("Perfect. But I need one more thing from you – flesh and bones by themselves do not make life.").also { stage++ }
+		5 -> playerl("Really?").also { stage++ }
+		6 -> npcl("I have honed to perfection an ancient ritual that will give life to this creature, but for this I must harness the very power of Nature.").also { stage++ }
+		7 -> playerl("And what power is this?").also { stage++ }
+		8 -> npcl("The power of lightning.").also { stage++ }
+		9 -> playerl("Sorry, can't make lightning, you've got the wrong MAN/WOMAN-").also { stage++ }
+		10 -> npcl("Silence your insolent tongue! The storm that brews overhead will create the lightning. What I need you to do is to repair the lightning conductor on the balcony above.").also { stage++ }
+		11 -> playerl("Repair the lightning conductor, right. Can I have a break, soon? By law I'm entitled to 15 minutes every-").also { stage++ }
+		12 -> npcl("Repair the conductor and BEGONE!!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after being instructed to repair the conductor and before repairing the conductor***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How do I repair the lighting conductor?").also { stage++ }
+		1 -> npcl("Oh, it would be easier to do it myself! If you find a conductor mould you should be able to cast a new one.").also { stage++ }
+		2 -> npcl("Remember this, PLAYER, my experiment will only work with a conductor made from silver.").also { stage = END_DIALOGUE }
+}
+
+
+***Attempting to pickpocket Fenkenstrain before the Monster instructs the player to steal the ring***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("What do you think you're doing???").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after reparing the lightning conductor***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("So did it work, then?").also { stage++ }
+		1 -> npcl("Yes, I'm afraid it did, PLAYER – all too well.").also { stage++ }
+		2 -> playerl("I can't see it anywhere.").also { stage++ }
+		3 -> npcl("I tricked it into going up to the Tower, and there it remains, imprisoned.").also { stage++ }
+		4 -> playerl("So the creature wasn't all you'd hoped, then?").also { stage++ }
+		5 -> npcl("...oh, what have I done...").also { stage++ }
+		6 -> playerl("Oh, I see, we're developing a sense of right and wrong now are we? Bit late for that, I'd say.").also { stage++ }
+		7 -> npcl("I have no control over it! It's coming to get me!").also { stage++ }
+		8 -> playerl("What do you want me to do about it?").also { stage++ }
+		9 -> npcl("Destroy it!!! Take the key to the Tower and take back the life I never should have granted!!!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain again before speaking to the monster***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("So have you destroyed it?!?").also { stage++ }
+		1 -> playerl("Not yet.").also { stage++ }
+		2 -> npcl("Please, hurry – save me!!!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after speaking to the monster***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("So have you destroyed it?!?").also { stage++ }
+		1 -> playerl("Never, now that he has told me the truth!").also { stage++ }
+		2 -> npcl("Oh my, oh my, this is exactly what I feared! Why did you have to pick Rologarth's brain of all brains?!?").also { stage++ }
+		3 -> playerl("I'm through working for you.").also { stage++ }
+		4 -> npcl("No! I refuse to release you! You must help me build another creature to destroy this dreadful mistake!!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dr. Fenkenstrain after the quest***
+
+class DrFenkenstrainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("theyrecomingtogetme theyrecomingtogetme...").also { stage++ }
+		1 -> playerl("It is all you deserve. Lord Rologarth is master of this castle once more. Let him protect you – if he wants to.").also { stage++ }
+		2 -> npcl("theyrecomingtogetme theyrecomingtogetme...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the clock in the southwest tower after being hired***
+
+class ClockDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("As you wind the old clock a letter falls out. Judging by the thick covering of dust it must have been here for some time.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after being hired WITH the amulet of ghostspeak equipped***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Can you tell me anything about Fenkenstrain?", "What happened to your head?", "What's your name?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Can you tell me anything about Fenkenstrain?").also { stage = 8 }
+			2 -> playerl("What happened to your head?").also { stage = 2 }
+			3 -> playerl("What's your name?").also { stage = 19 }
+			}
+		2 -> npcl("You feel power emanate from the Amulet of Ghostspeak and the air around you vibrates with the ghostly voice of the headless gardener.").also { stage++ }
+		3 -> npcl("Oi was in the old 'aunted Forest to the south, diggin' a pit for moi old master, old Fenkenstrain, when would you believe it, someone chops me head off. Awful bad luck weren't it?").also { stage++ }
+		4 -> playerl("Oh yes, dreadful bad luck.").also { stage++ }
+		5 -> npcl("So oi thinks to meself, I don't needs any 'ead to be getting on with me gardenin', long as I got me hands and me spade.").also { stage++ }
+		6 -> playerl("Would you show me where the place was?").also { stage++ }
+		7 -> npcl("Well, oi s'pose oi've got ten minutes to spare.").also { stage = END_DIALOGUE }
+		8 -> npcl("You feel power emanate from the Amulet of Ghostspeak and the air around you vibrates with the ghostly voice of the headless gardener.").also { stage++ }
+		9 -> npcl("Oi could tell you a few things about old Fenky, yeah.").also { stage++ }
+		10 -> playerl("Go on.").also { stage++ }
+		11 -> npcl("Once, this castle were full o' good folk – my friends. Fenky was just the castle doctor, you know, to the lord and the castle folk. I don't know what happened to them all, but one by one they all disappeared.").also { stage++ }
+		12 -> npcl("When they were gone a while, I went an dug graves for 'em in the forest. After a while there weren't no one left, but the lord, Fenkenstrain and meself.").also { stage++ }
+		13 -> npcl("Old Fenky sent me into the forest to dig 'im a pit – never said what for – then would you believe it, someone chops me 'ead off.").also { stage++ }
+		14 -> playerl("Did you see who did it...before...?").also { stage++ }
+		15 -> npcl("Before oi kicked the bucket, you mean?").also { stage++ }
+		16 -> playerl("Umm...").also { stage++ }
+		17 -> npcl("Don't worry yerself. I'm not worried about bein' dead. Worse things could happen, I suppose.").also { stage++ }
+		18 -> npcl("One thing I do know is, there ain't no lord of the castle anymore, 'cept for old Fenky. Makes ya think a bit, don't it?").also { stage = END_DIALOGUE }
+		19 -> npcl("You feel power emanate from the Amulet of Ghostspeak and the air around you vibrates with the ghostly voice of the headless gardener.").also { stage++ }
+		20 -> npcl("Me name? It's been a moivellous long while, mate, since I had any use for such a thing as a name.").also { stage++ }
+		21 -> playerl("Don't worry, I was just trying to make conversation.").also { stage++ }
+		22 -> npcl("No, no, I can't be havin' that. I'll remember in a minute...").also { stage++ }
+		23 -> playerl("Please, don't worry.").also { stage++ }
+		24 -> npcl("Lestwit, that's it! Ed Lestwit.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after he begins to follow OUTSIDE of the haunted woods***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You need to head off to them Haunted Woods, mate.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after he begins to follow INSIDE of the haunted woods***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Go DIRECTION, mate.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after he begins to follow near his grave***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("This is the place where I met me' maker.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Digging up the Gardener Ghosts' grave***
+
+class GardenerGhostGraveDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You start digging...").also { stage++ }
+		1 -> npcl("... and you unearth a decapitated head.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after being instructed to repair the conductor***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Can you tell me anything about Fenkenstrain?", "What happened to your head?", "What's your name?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Can you tell me anything about Fenkenstrain?").also { stage = 8 }
+			2 -> playerl("Do you know where the key to the shed is?").also { stage = 19 }
+			3 -> playerl("Do you know where I can find a lightning conductor mould is?").also { stage = 21 }
+			4 -> playerl("What happened to your head?").also { stage = 2 }
+			}
+		2 -> npcl("You feel power emanate from the Amulet of Ghostspeak and the air around you vibrates with the ghostly voice of the headless gardener.").also { stage++ }
+		3 -> npcl("Oi was in the old 'aunted Forest to the south, diggin' a pit for moi old master, old Fenkenstrain, when would you believe it, someone chops me head off. Awful bad luck weren't it?").also { stage++ }
+		4 -> playerl("Oh yes, dreadful bad luck.").also { stage++ }
+		5 -> npcl("So oi thinks to meself, I don't needs any 'ead to be getting on with me gardenin', long as I got me hands and me spade.").also { stage++ }
+		6 -> playerl("Would you show me where the place was?").also { stage++ }
+		7 -> npcl("Well, oi s'pose oi've got ten minutes to spare.").also { stage = END_DIALOGUE }
+		8 -> npcl("You feel power emanate from the Amulet of Ghostspeak and the air around you vibrates with the ghostly voice of the headless gardener.").also { stage++ }
+		9 -> npcl("Oi could tell you a few things about old Fenky, yeah.").also { stage++ }
+		10 -> playerl("Go on.").also { stage++ }
+		11 -> npcl("Once, this castle were full o' good folk – my friends. Fenky was just the castle doctor, you know, to the lord and the castle folk. I don't know what happened to them all, but one by one they all disappeared.").also { stage++ }
+		12 -> npcl("When they were gone a while, I went an dug graves for 'em in the forest. After a while there weren't no one left, but the lord, Fenkenstrain and meself.").also { stage++ }
+		13 -> npcl("Old Fenky sent me into the forest to dig 'im a pit – never said what for – then would you believe it, someone chops me 'ead off.").also { stage++ }
+		14 -> playerl("Did you see who did it...before...?").also { stage++ }
+		15 -> npcl("Before oi kicked the bucket, you mean?").also { stage++ }
+		16 -> playerl("Umm...").also { stage++ }
+		17 -> npcl("Don't worry yerself. I'm not worried about bein' dead. Worse things could happen, I suppose.").also { stage++ }
+		18 -> npcl("One thing I do know is, there ain't no lord of the castle anymore, 'cept for old Fenky. Makes ya think a bit, don't it?").also { stage = END_DIALOGUE }
+		19 -> npcl("Got it right 'ere in my pocket. Here you go.").also { stage++ }
+		20 -> npcl("The headless gardener hands you a rusty key.").also { stage = END_DIALOGUE }
+		21 -> npcl("A conductor mould, you say? Let me see...").also { stage++ }
+		22 -> npcl("There used to be a bloke 'ere, sort of an 'andyman 'e was. Did everything 'round the place – fixed what was broke, swept the chimneys and the like. He would 'ave had a mould, I imagine.").also { stage++ } 
+		23 -> playerl("Where is he now?").also { stage++ }
+		24 -> npcl("E's dead, just like everyone else round 'ere... 'cept for me.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Gardener Ghost after the quest***
+
+class GardenerGhostDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How are you?").also { stage++ }
+		1 -> npcl("Same as ever, mate, just getting' on with it regardless.").also { stage++ }
+		2 -> playerl("Good for you...err...mate.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Taling to Roavar after being hired***
+
+class RoavarDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Can I buy something to eat?").also { stage++ }
+		1 -> npcl("If you've got the money, I've got a real treat for you.").also { stage++ }
+		1 -> playerl("What have you got?").also { stage++ }
+		2 -> npcl("Pickled brain, my friend. Only 50 gold to you.").also { stage++ }
+		3 -> playerl("Err... pickled brain from what animal?").also { stage++ }
+		4 -> npcl("Animal? Don't be disgusting, man! No, this a human brain - only the best for my customers.").also { stage++ }
+		5 -> options("I'll buy one, please.", "I'm not very hungry.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("I'll buy one, please.").also { stage = 7 }
+			2 -> playerl("I'm afraid I'm not really hungry at the moment.").also { stage = END_DIALOGUE }
+			}
+		7 -> npcl("A very wise choice. Don't eat it all at once, savour every morsel - that's my advice to you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pick up the pickled brain in Canafis***
+
+class RoavarDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You're interested in our speciality, I see. Would you like to buy some?").also { stage++ }
+		1 -> playerl("What exactly is in the jar?").also { stage++ }
+		2 -> npcl("Pickled brain, my friend. Only 50 gold to you.").also { stage++ }
+		3 -> playerl("Err... pickled brain from what animal?").also { stage++ }
+		4 -> npcl("Animal? Don't be disgusting, man! No, this a human brain - only the best for my customers.").also { stage++ }
+		5 -> options("I'll buy one, please.", "I'm not very hungry.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("I'll buy one, please.").also { stage = 7 }
+			2 -> playerl("I'm afraid I'm not really hungry at the moment.").also { stage = END_DIALOGUE }
+			}
+		7 -> npcl("A very wise choice. Don't eat it all at once, savour every morsel - that's my advice to you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the pickled brain on the decapitated head or vice versa***
+
+class HeadDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You squeeze the pickled brain into the decapitated head.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the bookcase in the western room on the second floor of the castle***
+
+class WesternBookcaseDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("1001 Ways To Eat Fried Gizzards", "Practical Gardening For The Headless", "Human Taxidermy for Nincompoops", "The Joy of Gravedigging").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("1001 Ways To Eat Fried Gizzards").also { stage = 2 }
+			2 -> playerl("Practical Gardening For The Headless").also { stage = 3 }
+			3 -> playerl("Human Taxidermy for Nincompoops").also { stage = 4 }
+			4 -> playerl("The Joy of Gravedigging").also { stage = 5 }
+			}
+		2 -> npcl("This book leaves you contemplating vegetarianism.").also { stage = END_DIALOGUE }
+		3 -> npcl("This book has some very enlightening points to make, but you are at a loss to know how anyone without a head could possibly read it.").also { stage = END_DIALOGUE }
+		4 -> npcl("This book seems to have been read hundreds of times, and has scribbles and formulae on every page. One such scribble says 'None good enough – have to lock them in the caverns...").also { stage = END_DIALOGUE }
+		5 -> npcl("As you pull the book a hidden latch springs into place, and the bookcase swings open, revealing a secret compartment.").also { stage++ }
+		6 -> npcl("You find a marble amulet in the secret compartment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the bookcase in the eastern room on the second floor of the castle***
+
+class EasternBookcaseDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Men are from Morytania, Women are from Lumbridge", "Chimney Sweeping on a Budget", "Handy Maggot Avoidance Techniques", "My Family and Other Zombies").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Men are from Morytania, Women are from Lumbridge").also { stage = 2 }
+			2 -> playerl("Chimney Sweeping on a Budget").also { stage = 3 }
+			3 -> playerl("Handy Maggot Avoidance Techniques").also { stage = 6 }
+			4 -> playerl("My Family and Other Zombies").also { stage = 8 }
+			}
+		2 -> npcl("You discover some fascinating insights into the mind of the male kind.").also { stage = END_DIALOGUE }
+		3 -> npcl("Page 26. that sometimes a sweep may find themselves brushless and without the funds to purchase the one tool that is most essential to their trade.").also { stage++ }
+		4 -> npcl("What is a chimney sweep without his or her brush? In this kind of situation any normal long-handled brush might be a suitable replacement, although").also { stage++ }
+		5 -> npcl("when attaching extensions to the handle make sure to use something sturdy like wire, otherwise a sweep may find themselves losing their brush and livelihood to the forces of gravity.").also { stage = END_DIALOGUE }
+		6 -> npcl("As you pull the book a hidden latch springs into place, and the bookcase swings open, revealing a secret compartment.").also { stage++ }
+		7 -> npcl("You find an obsidian amulet in the secret compartment.").also { stage = END_DIALOGUE }
+		8 -> npcl("The book is mildly amusing.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the marble amulet on the obsidian amulet or vice versa***
+
+class FenkenstrainAmuletDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("The marble and obsidian amulets snap together tightly to form a six-pointed amulet.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the star amulet on the far-east coffin***
+
+class FenkenstrainAmuletDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("The star amulet fits exactly into the depression on the coffin lid.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Digging the Middle Island Grave on the island north of Morytania***
+
+class MiddleIslandGraveDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You start digging...").also { stage++ }
+		1 -> npcl("... and you unearth a pair of arms.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Digging the East Island Grave on the island north of Morytania***
+
+class EastIslandGraveDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You start digging...").also { stage++ }
+		1 -> npcl("... and you unearth a pair of legs.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Digging the West Island Grave on the island north of Morytania***
+
+class WestIslandGraveDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You start digging...").also { stage++ }
+		1 -> npcl("... and you unearth a torso.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Searching the garden cubbard after getting the garden key from the Gardener Ghost***
+
+class GardenCupboardDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You find a garden brush in the cupboard.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using the extended broom on the western fireplace on the second floor of the castle***
+
+class WesternFireplaceDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("A lightning conductor mould falls down out of the chimney.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Repairing the lightning conductor***
+
+class LightningConductorDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You repair the lightning conductor not one moment too soon – a tremendous bolt of lightning melts the new lightning conductor, and power blazes throughout the castle, if only briefly.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to monster for the first time***
+
+class FenkenstrainMonsterDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I am commanded to destroy you, creature!").also { stage++ }
+		1 -> npcl("Oh that's *hic* not very *hic* nice...").also { stage++ }
+		2 -> playerl("Are you feeling okay?").also { stage++ }
+		3 -> npcl("Abso *hic* lutely. Never *buuurrp* better.").also { stage++ }
+		4 -> playerl("You don't look very dangerous.").also { stage++ }
+		5 -> npcl("How *hic* do I look?").also { stage++ }
+		6 -> playerl("You really don't know, do you? Have a look for yourself.").also { stage++ }
+		7 -> npcl("The creature stumbles over towards the mirror, focuses upon his reflection and...").also { stage++ }
+		8 -> npcl("AAAAARRGGGGHHHH!").also { stage++ }
+		9 -> npcl("The creature becomes instantly sober, horror all too evident in his undead eyes.").also { stage++ }
+		10 -> playerl("I'm sorry. I suppose I'm partially to blame for this.").also { stage++ }
+		11 -> npcl("No – it was him I wager – Fenkenstrain – wasn't it? He's brought me back to life!").also { stage++ }
+		12 -> playerl("Who are – were – you?").also { stage++ }
+		13 -> npcl("I was Rologarth, Lord of the North Coast – this castle was once mine. Fenkenstrain was the castle doctor.").also { stage++ }
+		14 -> playerl("So the castle wasn't really abandoned when he found it?").also { stage++ }
+		15 -> npcl("Is that what he told you? No, no, this castle was once full of people and life. Fenkenstrain advised me to sell them to the vampyres, which – I am sad to say – I did.").also { stage++ }
+		16 -> playerl("I found your brain in a jar in Canifis, so he must have sold you too.").also { stage++ }
+		17 -> npcl("Of that I will not speak. There lie memories that should rest with the dead, the living unable to bear them.").also { stage++ }
+		18 -> playerl("That's it – I'm leaving this dreadful place, whether I get paid or not. Is there anything I can do for you before I leave?").also { stage++ }
+		19 -> npcl("Only one – please stop Fenkenstrain from carrying on his experiments, once and for all, so that no other poor soul has to endure suffering such as that of my people and I.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to monster again before talking to Fenkenstrain***
+
+class FenkenstrainMonsterDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you know how I can stop Fenkenstrain's experiments?").also { stage++ }
+		1 -> npcl("Take the Ring of Charos from him.").also { stage++ }
+		2 -> playerl("What is this ring?").also { stage++ }
+		3 -> npcl("It was my birthright, passed down to me through the ages, its origin forgotten.").also { stage++ }
+		4 -> npcl("The Ring of Charos has many powers, but Fenkenstrain has bent them to his own evil purposes. Without the power of the ring, he will not be able to raise the dead from their sleep.").also { stage++ }
+		5 -> npcl("It has one other, extremely important use – it confuses the werewolves' senses, making them believe that they smell one of their own kind.").also { stage++ }
+		6 -> npcl("Without the ring, Fenkenstrain will be at their mercy.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to the monster, now Lord Rologarth after the quest***
+
+class FenkenstrainMonsterDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		0 -> npcl("How goes it, friend?").also { stage++ }
+		1 -> playerl("I stole the Ring of Charos from Fenkenstrain.").also { stage++ }
+		2 -> npcl("I saw him climb up into the Tower to hide it.").also { stage++ }
+		3 -> npcl("It doesn't matter – soon the werewolves will come for him, and his experiments will be forever ceased.").also { stage++ }
+		4 -> playerl("Do you want the ring back? It is yours after all.").also { stage++ }
+		5 -> npcl("No, you keep it, my friend. Werewolves hunger for the scent of live flesh – I have no need for the ring. I have my castle back, if not my soul.").also { stage = END_DIALOGUE }
+}

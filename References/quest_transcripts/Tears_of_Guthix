@@ -1,0 +1,386 @@
+Tears of Guthix Quest
+
+Sources: https://www.youtube.com/watch?v=RGVvxJWVt2g, https://www.youtube.com/watch?v=62r5drYYfJY
+
+***Speaking to Juna to start quest, lines 9 and 10 will change randomly based on quests completed, I've added animal magnetism here for an example, not sure how this works :) goign to include a list of quests we have with responses at bottom of doc***
+
+class JunaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("Tell me... a story...").also { stage++ }
+		1 -> playerl("A story?").also { stage++ }
+		2 -> npcl("I have been waiting here three thousand years, guarding the Tears of Guthix. I serve my master faithfully, but I am bored.").also { stage++ }
+		3 -> npcl("An adventurer such as yourself must have many tales to tell. If you can entertain me, I will let you into the cave for a time.").also { stage++ }
+		4 -> npcl("The more I enjoy your story, the more time I will give you in the cave.").also { stage++ }
+		5 -> npcl("Then you can drink of the power of balance, which will make you stronger in whatever area you are weakest.").also { stage++ }
+		6 -> options("Okay...", "Not now.", "What are the Tears of Guthix?").also { stage++ }
+		7 -> when(buttonID) {
+			1 -> playerl("Okay...").also { stage = 8 }
+			2 -> playerl("Not now.").also { stage = END_DIALOGUE }
+			3 -> playerl("What are the Tears of Guthix?").also { stage = 15 }
+			}
+		8 -> playerl("You tell Juna some stories of your adventures.").also { stage++ }
+		9 -> playerl("...and so the attractor works using an undead chicken and a magnet.").also { stage++ }
+		10 -> npcl("How odd.").also { stage++ }
+		11 -> npcl("Your stories have entertained me. I will let you into the cave for a short time.").also { stage++ }
+		12 -> npcl("But first you will need to make a bowl in which to collect the tears.").also { stage++ }
+		13 -> npcl("There is a cave on the south side of the chasm that is similarly infused with the power of Guthix.The stone in that cave is the only substance that can catch the Tears of Guthix.").also { stage++ }
+		14 -> npcl("Mine some stone from that cave, make it into a bowl, and bring it to me, and then I will let you catch the tears.").also { stage = END_DIALOGUE }
+		15 -> npcl("The Third Age of the world was a time of great conflict, of destruction never seen before or since, when all the gods save Guthix warred for control.").also { stage++ }
+		16 -> npcl("The colossal wyrms, of whom today's dragons are a pale reflection, turned all the sky to fire, while on the ground armies of foot soldiers - goblins and trolls and humans - filled the valleys and plains with blood.").also { stage++ }
+		17 -> npcl("In time the noise of the conflict woke Guthix from His deep slumber, and He rose and stood in the centre of the battlefield so that the splendour of His wrath filled the world, and He called for the conflict to cease!").also { stage++ }
+		18 -> npcl("Silence fell, for the gods knew that none could challenge the power of the mighty Guthix; for His power is that of nature itself,").also { stage++ }
+		19 -> npcl("to which all other things are subject, in the Guthix reclaimed that which had been stolen from Him, and went back underground to return to His sleep and continue to draw the world's power into Himself.").also { stage++ }
+		20 -> npcl("But on His way into the depths of the earth He sat and rested in this cave; and, thinking of the battle-scarred desert that now stretched from one side of His world to the other, He wept.").also { stage++ }
+		21 -> npcl("And so great was His sorrow, and so great was His life- giving power, that the rocks themselves began to weep with Him.").also { stage++ }
+		22 -> npcl("Later, Guthix noticed that the rocks continued to weep, and that their tears were infused with a small part of His power.").also { stage++ }
+		23 -> npcl("So He set me, His servant, to guard the cave, and He entrusted to me the task of judging who was and was not worthy to access the tears.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Juna again without a stone bowl***
+
+class JunaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Before you can collect the Tears of Guthix you must make a bowl out of the stone in the cave on the south of the chasm.").also { stage++ }
+		1 -> options("But I don't know how to reach the cave!", "What are the Tears of Guthix?", "Okay.").also { stage++ }
+		2 -> when(buttonID) {
+			1 -> playerl("But I don't know how to reach the cave!").also { stage = 3 }
+			2 -> playerl("What are the Tears of Guthix?").also { stage = 12 }
+			3 -> playerl("Okay.").also { stage = END_DIALOGUE }
+			}
+		3 -> npcl("I will tell you the story of the light creatures.").also { stage++ }
+		4 -> npcl("Myriad and beautiful were the creatures and civilizations of the early ages of the world. Gielinor was a work of art, shaped lovingly over the millennia by the creative mind of Guthix.").also { stage++ }
+		5 -> npcl("Only the sturdiest races survived the God Wars, and even then only by abandoning their high culture and gearing their societies towards war.").also { stage++ }
+		6 -> npcl("Of the more delicate races there is now no trace, and almost no memory.").also { stage++ }
+		7 -> npcl("One such race had bodies as fragile as snowflakes, yet they built crystal cities that stood for a thousand years.").also { stage++ }
+		8 -> npcl("The wind would whisper through the spires and fill them with sweet harmonies, and the rising sun would shine through the precious gems that studded the towers and create inter plays of light as if rainbows were dancing.").also { stage++ }
+		9 -> npcl("Indeed, so marvellous was this light-show at its height that the patterns of light themselves became alive, and great flocks of luminous creatures rode along the gem- cast beams, each drawn to its own colour.").also { stage++ }
+		10 -> npcl("The creatures you see floating in this chasm are the last sorry remnants of that age.").also { stage++ }
+		11 -> npcl("I do not know how they made their way here and survived to this time, but I am grateful for their company.").also { stage = END_DIALOGUE }
+		12 -> npcl("The Third Age of the world was a time of great conflict, of destruction never seen before or since, when all the gods save Guthix warred for control.").also { stage++ }
+		13 -> npcl("The colossal wyrms, of whom today's dragons are a pale reflection, turned all the sky to fire, while on the ground armies of foot soldiers - goblins and trolls and humans - filled the valleys and plains with blood.").also { stage++ }
+		14 -> npcl("In time the noise of the conflict woke Guthix from His deep slumber, and He rose and stood in the centre of the battlefield so that the splendour of His wrath filled the world, and He called for the conflict to cease!").also { stage++ }
+		15 -> npcl("Silence fell, for the gods knew that none could challenge the power of the mighty Guthix; for His power is that of nature itself,").also { stage++ }
+		16 -> npcl("to which all other things are subject, in the Guthix reclaimed that which had been stolen from Him, and went back underground to return to His sleep and continue to draw the world's power into Himself.").also { stage++ }
+		17 -> npcl("But on His way into the depths of the earth He sat and rested in this cave; and, thinking of the battle-scarred desert that now stretched from one side of His world to the other, He wept.").also { stage++ }
+		18 -> npcl("And so great was His sorrow, and so great was His life- giving power, that the rocks themselves began to weep with Him.").also { stage++ }
+		19 -> npcl("Later, Guthix noticed that the rocks continued to weep, and that their tears were infused with a small part of His power.").also { stage++ }
+		20 -> npcl("So He set me, His servant, to guard the cave, and He entrusted to me the task of judging who was and was not worthy to access the tears.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Juna again with stone bowl in inventory***
+
+class JunaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("Before you can collect the Tears of Guthix you must make a bowl out of the stone in the cave on the south of the chasm.").also { stage++ }
+		1 -> playerl("I have a bowl.").also { stage++ }
+		2 -> npcl("I will keep your bowl for you, so that you may collect the tears many times in the future.").also { stage++ }
+		3 -> npcl("Now, tell me another story, and I will let you collect the tears for the first time.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Juna after the quest is complete and NOT having collected tears this week, again using animal magnetism as an example***
+
+class JunaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Tell me... a story...").also { stage++ }
+		1 -> playerl("You tell Juna some stories of your adventures.").also { stage++ }
+		2 -> playerl("...and so the attractor works using an undead chicken and a magnet.").also { stage++ }
+		3 -> npcl("How odd.").also { stage++ }
+		4 -> npcl("Your stories have entertained me. I will let you into the cave for a short time.").also { stage++ }
+		5 -> npcl("Collect as much as you can from the blue streams. If you let in water from the green streams, it will take away from the blue. For Guthix is god of balance, and balance lies in the juxtaposition of opposites.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Juna after the quest is complete and having collected tears this week, again using animal magnetism as an example***
+
+class JunaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("Tell me... a story...").also { stage++ }
+		1 -> playerl("You tell Juna some stories of your adventures.").also { stage++ }
+		2 -> playerl("...and so the attractor works using an undead chicken and a magnet.").also { stage++ }
+		3 -> npcl("How odd.").also { stage++ }
+		4 -> npcl("Your stories have entertained me. But I will not permit any adventurer to access the tears more than once a week.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Quest specific dialogue for quests we have implemented, followed by quests that are waiting for implementation***
+
+All Fired Up
+		 -> playerl("...And that was how I learned to maintain King Roald's watchtower beacons.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Bar Crawl
+
+		 -> playerl("I completed my bar crawl card and earned access to the Barbarian Outpost agility course.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Black Knights Fortress
+
+		 -> playerl("...in the end the Black Knights were defeated by a cabbage!").also { stage++ }
+		 -> npcl("One should never underestimate the vegetables of Guthix.").also { stage++ }
+
+Cook's Assistant
+
+		 -> playerl("...And, in the end, I found all the ingredients, so the Duke of Lumbridge had a birthday cake after all.").also { stage++ }
+		 -> npcl("Ah, a happy ending. It would not be good for such an anniversary to go unmarked.").also { stage++ }
+
+Demon Slayer
+
+		 -> playerl("...so I destroyed the demon Delrith and saved Varrock!").also { stage++ }
+		 -> npcl("I remember Delrith. A most unpleasant character; I am glad he has been dispatched.").also { stage++ }
+
+Doric's Quest
+
+		 -> playerl("...so once I had got all the ores he wanted, Doric let me use his anvils.").also { stage++ }
+		 -> npcl("Such a small task hardly seems worthy of the term 'quest'.").also { stage++ }
+
+Dragon Slayer
+
+		 -> playerl("...so with Elvarg the dragon dead, the master of the Champions' Guild let me in, and I was able to wear rune plate armour!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Druidic Ritual
+
+		 -> playerl("...so Kaqemeex taught me how to use the Herblore skill.").also { stage++ }
+		 -> npcl("A generous reward indeed.").also { stage++ }
+
+Dwarf Cannon
+
+		 -> playerl("...and that was how I fixed the dwarf multicannon.").also { stage++ }
+		 -> npcl("So, war still rages in the world above? Will you never tire of creating machines of destruction?").also { stage++ }
+
+Enter the Abyss
+
+		 -> playerl("I gained access to the Abyss.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Ernest the Chicken
+
+		 -> playerl("...So, once I had found all the parts for the machine, poor Ernest could be himself once more.").also { stage++ }
+		 -> npcl("That was a good deed. It is a terrible thing to be locked out of one's natural form.").also { stage++ }
+
+Family Crest
+
+		 -> playerl("...So all three parts of the family crest were reunited.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Fishing Contest
+
+		 -> playerl("...And after I had won the fishing contest, the Dwarves let me go under White Wolf Mountain.").also { stage++ }
+		 -> npcl("Fishing? A strange test of worthiness to pass through an underground tunnel!").also { stage++ }
+
+Fremennik Trials
+
+		 -> playerl("...And that was how I became an honourary member of the Fremennik, and was given my Fremennik name, (player's Fremennik name).").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Gertrude's Cat
+
+		 -> playerl("...I returned Fluffs safely to Gertrude and she gave me a cat of my own!").also { stage++ }
+		 -> npcl("Cats are one of the most mysterious creatures of Guthix. I hope you take your responsibility seriously.").also { stage++ }
+
+Goblin Diplomacy
+
+		 -> playerl("...and so the goblins ended up wearing the armour colour they had to start off with!").also { stage++ }
+		 -> npcl("Poor, silly goblins! Their race had such potential; if only they could rise above their petty squabbles.").also { stage++ }
+
+Imp Catcher
+
+		 -> playerl("...took some time, but I finally got all four beads back, and Mizgog gave me my reward.").also { stage++ }
+		 -> npcl("Imps! I remember the age of great war, when armies of Zamorak's imps bloodied the ankles of the other gods' creatures.").also { stage++ }
+
+Jungle Potion
+
+		 -> playerl("...and once I had gathered all the herbs, Trufitus Shakaya was able to commune with his gods.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Lost City
+
+		 -> playerl("...And when I entered the door carrying the Dramen Staff, I was transported to a whole new world - a world populated by magical fairies!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Lost Tribe
+
+		 -> playerl("...Sigmund was dismissed, and the duke and the ruler of the cave goblins signed a peace treaty.").also { stage++ }
+		 -> npcl("The Dorgueshuun goblins have been good neighbours during my vigil here. They are a timid race, but not cowardly, and I am glad they have the peace they desire.").also { stage++ }
+
+Merlin's Crystal
+
+		 -> playerl("...and when I told King Arthur that I had single-handedly freed Merlin from his crystal prison, he made me a knight of the Round Table!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Monk's Friend
+
+		 -> playerl("...so the monks had a drunken party to celebrate the child's birthday.").also { stage++ }
+		 -> npcl("Mirth should not be taken to excess. These Saradominists have never understood the importance of balance.").also { stage++ }
+
+Nature Spirit
+
+		 -> playerl("...and that was how I helped Filliman Tarlock transform into a nature spirit.").also { stage++ }
+		 -> npcl("It is good that you helped a servant of Guthix to his rest.").also { stage++ }
+
+Pirate's Treasure
+
+		 -> playerl("...And when I dug in the middle of the park in Falador, I found the pirate's treasure!").also { stage++ }
+		 -> npcl("Such is ever the folly of pirates, to bury their loot in the ground so that another can dig it up.").also { stage++ }
+
+Priest in Peril
+
+		 -> playerl("...but with Drezel's help I was able to purify the River Salve.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Prince Ali Rescue
+
+		 -> playerl("...And I had to disguise Prince Ali as a woman in order to smuggle him out!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Romeo & Juliet
+
+		 -> playerl("...I gave the message to Romeo, but he misunderstood, so they never were together.").also { stage++ }
+		 -> npcl("Never was there a story of more woe that this of Juliet and her Romeo.").also { stage++ }
+
+Roving Elves
+
+		 -> playerl("...and when I planted the shard it grew into a crystal tree!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Rune Mysteries
+
+		 -> playerl("...So, I brought Aubury's notes to Sedridor the head wizard and, from then on, I was able to mine rune essence.").also { stage++ }
+		 -> npcl("So, the mortals above have discovered magic once more? Very interesting.").also { stage++ }
+
+Sheep Herder
+
+		 -> playerl("...so the sheep were safely killed and incinerated.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Sheep Shearer
+
+		 -> playerl("Out of sheer hard work, I managed to shear some sheep for farmer Fred. Then I got in a spin and created some balls of wool.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Shield of Arrav
+
+		 -> playerl("...so that's how I helped return the Shield of Arrav.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+The Knight's Sword
+
+		 -> playerl("...that was how I found the Imcando Dwarves and got the knight a new sword.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+The Restless Ghost
+
+		 -> playerl("...and once I returned the skull, the ghost was able to rest.").also { stage++ }
+		 -> npcl("A strange attachment to an item that has no use after one's death.").also { stage++ }
+
+The Tourtist Trap
+
+		 -> playerl("...Ana wasn't too happy to be cooped up in that barrel! But at least I got her out of the mining camp.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Vampire Slayer
+
+		 -> playerl("...And once the vampyre was dead, the people of Draynor no longer lived in fear.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Waterfall Quest
+
+		 -> playerl("...And that was how I retrieved the Chalice of Eternity from the waterfall.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+What Lies Below
+
+		 -> playerl("...but after I defeated King Roald, Rat was able to remove Surok's mind control spell from him.").also { stage++ }
+		 -> npcl("I see the servants of Zamorak still play their part in balancing the world between good and evil.").also { stage++ }
+
+Witch's House
+
+		 -> playerl("...All that trouble just to get a ball out of someone's garden!").also { stage++ }
+		 -> npcl("It is often hard to know how long a task will take when we begin it.").also { stage++ }
+
+Witch's Potion
+
+		 -> playerl("...And once I got her all the ingredients, Hetty's potion increased my magical power!").also { stage++ }
+		 -> npcl("I see you are on your way to becoming strong in the magical arts.").also { stage++ }
+
+Wolf Whistle
+
+		 -> playerl("...And that was how I learned the secrets of summoning.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+
+
+***
+
+Big Chompy Bird Hunting
+
+		 -> playerl("...poor Rantz was so clumsy he couldn't shoot anything, but I managed to kill the Chompy bird.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Creature of Fenkenstrain
+
+		 -> playerl("...But in the end I stopped Fenkenstrain from continuing his horrible experiments.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Enlightened Journey
+
+		 -> playerl("...we landed the balloon in Taverley and Auguste thanked me for helping him get his idea off the ground.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Garden of Tranquility
+
+		 -> playerl("...so the garden at Varrock palace is all my work!").also { stage++ }
+		 -> npcl("It is good that you can take time from slaying and adventuring to grow a beautiful garden.").also { stage++ }
+
+Horror from the Deep
+
+		 -> playerl("...And that was the end of the horror from the deep!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Murder Mystery
+
+		 -> playerl("...And that's how I solved the murder of Lord Sinclair.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Scorpion Catcher
+
+		 -> playerl("...I would never have thought that three scorpions would take that long to find!").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Temple of Ikov (helping lucien)
+
+		 -> playerl("...Lucien said that the Staff of Armadyl I gave him had made him more powerful.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+Temple of Ikov (against lucien)
+
+		 -> playerl("I refused to give Lucien the Staff of Armadyl and had to fight him.").also { stage++ }
+		 -> npcl("...").also { stage++ }
+
+The Digsite
+
+		 -> playerl("...And the examiner was very impressed that I had discovered an ancient altar of Zaros.").also { stage++ }
+		 -> npcl("Zaros? I had not heard that name for a thousand years, even before the start of my sojourn here.").also { stage++ }
+
+Tower of Life
+
+		 -> playerl("...So, it turned out that the alchemists had created a Homunculus - a mixture of logic and magic.").also { stage++ }
+		 -> npcl("Ah, that is good. New forms of life should always be created according to a balance between different principles.").also { stage++ }
+
+Tree Gnome village
+
+		 -> playerl("..And King Bolren thanked me for defeating the warlord and returning the orbs to the gnome people.").also { stage++ }
+		 -> npcl("...").also { stage++ }

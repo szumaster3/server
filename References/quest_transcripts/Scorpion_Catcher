@@ -1,0 +1,150 @@
+Scorpion Catcher Dialogue
+Sources: https://www.youtube.com/watch?v=crc-47rwjvE https://www.youtube.com/watch?v=aS77ju1SA4c
+
+***Speak to Thormac the Sorcerer to start quest***
+
+class ThormacDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl("Hello I am Thormac the sorcerer. I don't suppose you could be of assistance to me?").also { stage++ }
+		1 -> when(buttonId) {
+		    1 -> playerl("What do you need assistance with?").also { stage = 3 }
+			2 -> playerl ("I'm a little busy.").also { stage = 2 }
+		2 -> playerl ("I'm a little busy.").also { stage = END_DIALOGUE }
+		3 -> playerl ("What do you need assistance with?").also { stage++ }
+		4 -> npcl ("I've lost my pet scorpions. They're lesser Kharid scorpions, a very rare breed.").also { stage++ }
+		5 -> npcl ("I left their cage door open, now I don't know where they've gone.").also { stage++ }
+		6 -> npcl ("There's three of them, and they're quick little beasties. They're all over Gielinor.").also { stage++ }
+		7 -> when(buttonId) {
+		    1 -> playerl ("So how would I go about catching them then?").also { stage = 13 }
+	        2 -> playerl ("What's in it for me?").also { stage = 10 }
+		    3 -> playerl ("I'm not interested then.").also { stage = 8 }
+		8 -> playerl ("I'm not interested then.").also { stage++ }
+		9 -> npcl ("Blast, I suppose I'll have to find someone else then.").also { stage = END_DIALOGUE }
+		10 -> playerl ("What's in it for me?").also { stage++ }
+		11 -> npcl ("Well I suppose I can aid you with my skills as a staff sorcerer. Most battlestaves around here are a bit puny. I can beef them up for you a bit.").also { stage++ }
+		12 -> when(buttonId) {
+		    1 -> playerl ("So how would I go about catching them then?").also { stage = 13 }
+		    2 -> playerl ("I'm not interested then.").also { stage = 8 }
+		13 -> playerl ("So how would I go about catching them then?").also { stage++ }
+		14 -> npcl ("Well I have a scorpion cage here which you can use to catch them in.").also { stage++ }
+		15 -> npcl ("If you go up to the village of Seers, to the North of here, one of them will be able to tell you where the scorpions are now.").also { stage = ++ }
+		16 -> when(buttonId) {
+		    1 -> playerl ("Ok, I will do it then").also { stage = END_DIALOGUE }
+			2 -> playerl ("What's in it for me?").also { stage = 17 }
+	        3 -> playerl ("I'm not interested then.").also { stage = 8 }
+		17 -> npcl ("Well I suppose I can aid you with my skills as a staff sorcerer. Most battlestaves around here are a bit puny. I can beef them up for you a bit.").also { stage++ }
+		18 -> when(buttonId) {
+		    1 -> playerl ("Ok, I will do it then").also { stage = END_DIALOGUE }
+	        2 -> playerl ("I'm not interested then.").also { stage = 8 }
+		//add an empty scorpion cage to the player's inventory on stage 14, 16-1 or 18-1 and display Thormac gives you a cage. in the chat box. skip this if they already own one
+		
+		
+***Speaking to Thormac without having caught all scorpions***
+
+class ThormacDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("How goes your quest?").also { stage++ }
+		1 -> playerl ("I've not caught all the scorpions yet.").also { stage++ }
+		2 -> npcl ("Well remember to go speak to the Seers, North of here, if you need any help.").also { stage = END_DIALOGUE }
+		
+		
+***Speaking to Thormac after starting the quest but having lost your scorpion cage***
+
+class ThormacDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("How goes your quest?").also { stage++ }
+		1 -> playerl ("I've lost my cage.").also { stage++ }
+		2 -> npcl ("Ok, here's another cage. You're almost as bad at losing things as me.").also { stage = END_DIALOGUE }
+
+***Speaking to Thormac having caught all scorpions, ending the quest***
+
+class ThormacDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("How goes your quest?").also { stage++ }
+		1 -> playerl ("I have retrieved all your scorpions.").also { stage++ }
+		2 -> npcl ("Aha, my little scorpions home at last!").also { stage = END_DIALOGUE }
+		
+
+***Speaking to Thormac after the quest***
+
+class ThormacDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Thank you for rescuing my scorpions.").also { stage++ }
+		1 -> when(buttonId) {
+		    1 -> playerl ("That's okay.").also { stage = 2 }
+	        2 -> playerl ("You said you'd enchant my battlestaff for me.").also { stage = 3 }
+		2 -> playerl ("That's okay.").also { stage = END_DIALOGUE }
+		3 -> playerl ("You said you'd enchant my battlestaff for me.").also { stage++ }
+		4 -> npcl ("Yes, it'll cost you [27,000 / 40,000] coins for the materials needed though. Which sort of staff did you want enchanting?") //opens related interface
+
+					
+					
+
+***Talking to a Seer without a scorpion, this makes the old wall in taverly dungeon be passable***
+
+class SeerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Many Greetings.").also { stage++ }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Your friend Thormac sent me to speak to you.").also { stage = 2 }
+			 2 -> playerl ("I need to locate some scorpions.").also { stage = 10 }
+		2 -> playerl ("Your friend Thormac sent me to speak to you.").also { stage++ }
+		3 -> npcl ("What does the old fellow want?").also { stage++ }
+		4 -> playerl ("He's lost his valuable lesser Kharid scorpions.").also { stage++ }
+		5 -> npcl ("Well you have come to the right place. I am a master of animal detection.").also { stage++ }
+		6 -> npcl ("Let me look into my looking glass.").also { stage++ }
+		The seer produces a small mirror.
+        The seer gazes into the mirror.
+        The seer smoothes his hair with his hand.
+		7 -> npcl ("I can see a scorpion that you seek. It would appear to be near some nasty spiders. I can see two coffins there as well.").also { stage++ }
+		8 -> npcl ("The scorpion seems to be going through some crack in the wall. Its gone into some sort of secret room.").also { stage++ }
+		9 -> npcl ("Well see if you can find the scorpion then, and I'll try and get you some information on the others.").also { stage = END_DIALOGUE }
+		10 -> playerl ("I need to locate some scorpions.").also { stage++ }
+		11 -> npcl ("Well you have come to the right place. I am a master of animal detection.").also { stage++ }
+		12 -> npcl ("Do you need to locate any particular scorpion? Scorpions are a creature somewhat in abundance.").also { stage++ }
+		13 -> playerl ("I'm looking for some lesser Kharid scorpions. They belong to Thormac the sorcerer.").also { stage = 6 }
+		
+***Talking to a Seer after finding the first scorpion***
+class SeerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> playerl ("Hi, I have retrieved the scorpion from near the spiders.").also { stage++ }
+		1 -> npcl ("Well, I've checked my looking glass. There seems to be a kharid scorpion in a little village to the east, surrounded by lots of uncivilized-looking warriors. Some kind of merchant there seems to have picked it up.").also { stage++ }
+		2 -> npcl ("That's all I can tell about that scorpion.").also { stage++ }
+		3 -> playerl("Any more scorpions?").also { stage++ }
+		4 -> npcl ("It's good that you should ask. I have information on the last scorpion for you.").also { stage++ }
+		5 -> npcl ("It seems to be in some sort of upstairs room. There seems to be some sort of brown clothing lying on a table.").also { stage = END_DIALOGUE }
+
+***Peksa during this quest***
+
+class SeerDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Are you interested in buying or selling a helmet").also { stage++ }
+		1 -> when(buttonId) {
+		     1 -> playerl ("I could be, yes.").also { stage = 2 }
+			 2 -> playerl ("No, I'll pass on that.").also { stage = 3 }
+			 3 -> playerl ("I've heard you have a small scorpion in your possession.").also { stage = 5 }
+		2 //open the shop
+		3 -> playerl ("No, I'll pass on that.").also { stage++ }
+		4 -> npcl ("Well, come back if you change your mind.").also { stage++ }
+		5 -> playerl ("I've heard you have a small scorpion in your possession.").also { stage++ }
+		6 -> npcl ("Now how could you know about that, I wonder? Mind you, I don't have it anymore.").also { stage++ }
+        7 -> npcl (" I gave it as a present to my brother Ivor when I visited our outpost in the west.").also { stage++ }
+        8 -> npcl ("Well, actually I hid it in his bed so it would nip him. It was a bit of a surprise gift.").also { stage++ }
+		9 -> when(buttonId) {
+		     1 -> playerl ("So where's this outpost?").also { stage = 10 }
+			 2 -> playerl ("Thanks for the information").also { stage 12 }
+		10 -> playerl ("So where's this outpost?").also { stage++ }
+		11 -> npcl ("Its a fair old trek to the west, across the White Wolf Mountains. Then head west, north-west until you see the axes and horned helmets.").also { stage++ }
+		12 -> playerl ("Thanks for the information").also { stage++ }
+                13 -> npcl ("No problems! Tell Ivor I said hi!").also { stage = END_DIALOGUE }
+
+
+		

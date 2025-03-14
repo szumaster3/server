@@ -1,0 +1,50 @@
+/*package content.kingdom.morytania.quest.myreque_2
+
+import org.rs.consts.Vars
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.plugin.Initializable
+
+@Initializable
+class InAidOfTheMyreque :
+    Quest("In Aid of the Myreque", 79, 78, 2, Vars.VARBIT_QUEST_IN_AID_OF_THE_MYREQUE_1990, 0, 1, 421) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.ANTIQUE_LAMP_11137, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln++)
+        setVarbit(player, Vars.VARBIT_QUEST_IN_AID_OF_THE_MYREQUE_1990, 421, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//2,000 Attack experience lamp
+//2,000 Strength experience lamp
+//2,000 Crafting experience lamp
+//2,000 Defence experience lamp
+//Access to Burgh de Rott and its facilities
+//Ability to play the Temple Trekking minigame
+//Ability to use a Gadderhammer, which is strong against shades
+//Ability to make and use the rod of Ivandis and Guthix balance potions to fight and defeat Vampyre Juveniles and Juvinates
+//Talk to Historian Minas to receive 5 kudos in the Varrock Museum
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

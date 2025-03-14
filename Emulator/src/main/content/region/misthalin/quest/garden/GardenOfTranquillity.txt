@@ -1,0 +1,56 @@
+/*package content.kingdom.misthalin.quest.member.garden
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class GardenOfTranquillity :
+    Quest("Garden of Tranquility", 66, 65, 2, Vars.VARBIT_QUEST_GARDEN_OF_TRANQUILLITY_961, 0, 1, 60) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.APPLE_SEEDLING_5480, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "5,000 Farming XP", ln++)
+        rewardXP(player, Skills.FARMING, 5000.0)
+        addItemOrDrop(player, Items.APPLE_SEEDLING_5480)
+        addItemOrDrop(player, Items.ACORN_5312)
+        addItemOrDrop(player, Items.GUAM_SEED_5291, 5)
+        addItemOrDrop(player, Items.SUPERCOMPOST_6034)
+        setVarbit(player, Vars.VARBIT_QUEST_GARDEN_OF_TRANQUILLITY_961, 60, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//5,000 Farming experience (During the quest, you will get even more experience from raking, composting, planting and harvesting)
+//An activated ring of charos, which is used to charm various NPCs to pay less for certain services, or get choices that are otherwise unavailable.
+//1 apple seed
+//1 acorn
+//5 guam seeds
+//4 doses of supercompost potion, each of which can be used in a compost bin to turn compost into supercompost.
+//After the quest you can visit the garden and pick fruit from the White Tree. Each fruit restores about 17% run energy and gives 12 Farming experience when picked.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

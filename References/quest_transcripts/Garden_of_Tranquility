@@ -1,0 +1,1232 @@
+Garden of Tranquility Quest
+Sources: https://www.youtube.com/watch?v=unVDPSxhE5M, https://www.youtube.com/watch?v=LF7UiHhiNFg
+
+***Speaking to Ellamaria to start the quest***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What's going on here? I see a lot of farming patches with nothing growing in them.").also { stage++ }
+		1 -> npcl("No, one has just had them installed. One has had the most marvelous idea to bring renewed happiness to one's own dearest husband.").also { stage++ }
+            	2 -> playerl("One? I'm not sure I understand you–").also { stage++ }
+		3 -> npcl("Oh dear – the common classes, oh how they fill one with intolerable levels of exasperation, I swear to be most true.").also { stage++ }
+            	4 -> playerl("Ri-ight ... if you say so, my lady. I'll be off then, if you don't mind–").also { stage++ }
+		5 -> npcl("Yes, be off with you, before I call the guards.").also { stage++ }
+            	6 -> playerl("No problem, sorry to have bothered you.").also { stage++ }
+		7 -> npcl("Peasant – WAIT!!!").also { stage++ }
+            	8 -> playerl("Are you speaking to me?").also { stage++ }
+		9 -> npcl("Who else would I be speaking to, you funny little MAN/WOMAN? Of course you.").also { stage++ }
+            	10 -> playerl("Well for a moment there I thought there was a dog around here somewhere...").also { stage++ }
+		11 -> npcl("Oh yes, sarcasm – how amusing. No, no, peasant – I have a question to ask of you, and you are required to answer.").also { stage++ }
+            	12 -> playerl("Well, seeing as you put it so nicely...").also { stage++ }
+		13 -> npcl("Do you know of anyone who might have some degree of horticultural experience?").also { stage++ }
+            	14 -> playerl("If you're asking me do I know a gardener, then yes I do. I happen to be quite handy at farming myself, as it happens.").also { stage++ }
+		15 -> npcl("Oh, marvellous! Peasant, I hereby order you to assist me with a little project I have planned.").also { stage++ }
+		16 -> playerl("You'll have to ask me nicely first.").also { stage++ }
+		17 -> npcl("Oh, what I have to deal with these days – to think this is what being a Queen has become. Very well then: would you ... good SIR/LADY help me with a little project of mine?").also { stage++ } 
+		18 -> options("I would be happy to help someone who is so in touch with the people.", "I'd rather jump off the docks at Port Sarim.").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("I would be happy to help someone who is so in touch with the people.").also { stage = 20 }
+			2 -> playerl("I'd rather jump off the docks at Port Sarim.").also { stage = END_DIALOGUE }
+			}
+		20 -> npcl("Ah, more sarcasm – wonderful. Well, it is nice to have a master of the fine art of gardening to assist me; in the absence of any such person, I gladly accept your service.").also { stage++ }
+		21 -> playerl("I'm not sure if that's a compliment or not. Anyway, what would you like me to do, and what do I get out of it?").also { stage++ }
+		22 -> npcl("To answer your first question, you have noticed the new farming patches that we have had installed around us. We wish to grow many varied and exotic plants in them, to bring happiness back to my husband.").also { stage++ }
+		21 -> playerl("King Roald?").also { stage++ }
+		22 -> npcl("The very same, and that's 'His Most Royal Majesty' to you. Now we come to the plants that one wishes you to grow in these patches. I would tell you all at once, but I fear that your small mind would not cope.").also { stage++ }
+		21 -> playerl("Thanks, I'm sure. So tell me Queeny, how do I know which plants I am to get for you?").also { stage++ }
+		22 -> npcl("I have given you a list of the items that I need in each patch. One is sure that you will know how to use the list with each patch to find out what needs to go in each one. There is one more thing, though.").also { stage++ }
+		21 -> playerl("One listens with bated breath...").also { stage++ }
+		22 -> npcl("Obtaining the seeds may prove difficult if you go about it by hacking and slashing everything that moves. No, to gather these items you will need to employ a finer tactic; the art of persuasion.").also { stage++ }
+		23 -> npcl("You must go at once and converse with the wise old man who is said to dwell in Draynor Village; he may guide you in mastering this delicate and sophisticated ability.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after starting the quest WITHOUT the list WITHOUT the trolly***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Can I have another list?", "How am I supposed to move statues all the way here?", "What am I supposed to be getting again?", "Will these patches need much in the way of watering?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Can I have another list?").also { stage = 2 }
+			2 -> playerl("How am I supposed to move statues all the way here?").also { stage = 3 }
+			3 -> playerl("What am I supposed to be getting again?").also { stage = 6 }
+			4 -> playerl("Will these patches need much in the way of watering?").also { stage = 9 }
+			}
+		2 -> npcl("Take better care with this one.").also { stage = END_DIALOGUE }
+		3 -> npcl("You use the dormant object that lies between your ears, that's how. A statue may be far too heavy to carry, but simplicity itself to push.").also { stage++ }
+		4 -> playerl("Push?").also { stage++ }
+		5 -> npcl("Yes peasant, push. Here – take this trolley. You can use it to push the statues here.").also { stage = END_DIALOGUE }
+		6 -> npcl("Haven't you got that list I gave you?").also { stage++ }
+		7 -> playerl("Er ... no ... I seem to have lost it...").also { stage++ }
+		8 -> npcl("Oh dear, what a pathetic creature you are. Here, have another one.").also { stage = END_DIALOGUE }
+		9 -> npcl(" Well, you are supposed to be the gardener here, but I would say not. One had the soil imported from an extremely fertile area at great cost – watering should not be necessary one would have thought.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after starting the quest WITHOUT the list WITH the trolly***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Can I have another list?", "How am I supposed to move statues all the way here?", "What am I supposed to be getting again?", "Will these patches need much in the way of watering?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Can I have another list?").also { stage = 2 }
+			2 -> playerl("How am I supposed to move statues all the way here?").also { stage = 3 }
+			3 -> playerl("What am I supposed to be getting again?").also { stage = 6 }
+			4 -> playerl("Will these patches need much in the way of watering?").also { stage = 9 }
+			}
+		2 -> npcl("Take better care with this one.").also { stage = END_DIALOGUE }
+		3 -> npcl("You use the dormant object that lies between your ears, that's how. A statue may be far too heavy to carry, but simplicity itself to push.").also { stage++ }
+		4 -> playerl("Push?").also { stage++ }
+		5 -> npcl("What are you talking about?!? You still have the trolly I gave you!").also { stage = END_DIALOGUE }
+		6 -> npcl("Haven't you got that list I gave you?").also { stage++ }
+		7 -> playerl("Er ... no ... I seem to have lost it...").also { stage++ }
+		8 -> npcl("Oh dear, what a pathetic creature you are. Here, have another one.").also { stage = END_DIALOGUE }
+		9 -> npcl("Well, you are supposed to be the gardener here, but I would say not. One had the soil imported from an extremely fertile area at great cost – watering should not be necessary one would have thought.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after starting the quest WITH the list WITHOUT the trolly***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("How am I supposed to move statues all the way here?", "What am I supposed to be getting again?", "Will these patches need much in the way of watering?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("How am I supposed to move statues all the way here?").also { stage = 2 }
+			2 -> playerl("What am I supposed to be getting again?").also { stage = 5 }
+			3 -> playerl("Will these patches need much in the way of watering?").also { stage = 8 }
+			}
+		2 -> npcl("You use the dormant object that lies between your ears, that's how. A statue may be far too heavy to carry, but simplicity itself to push.").also { stage++ }
+		3 -> playerl("Push?").also { stage++ }
+		4 -> npcl("Yes peasant, push. Here – take this trolley. You can use it to push the statues here.").also { stage = END_DIALOGUE }
+		5 -> npcl("Haven't you got that list I gave you?").also { stage++ }
+		6 -> playerl("Er ... yes I do have a list...").also { stage++ }
+		7 -> npcl("Well read it then! That should tell you everything you need to know!!").also { stage = END_DIALOGUE }
+		8 -> npcl(" Well, you are supposed to be the gardener here, but I would say not. One had the soil imported from an extremely fertile area at great cost – watering should not be necessary one would have thought.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after starting the quest WITH the list WITH the trolly***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("How am I supposed to move statues all the way here?", "What am I supposed to be getting again?", "Will these patches need much in the way of watering?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("How am I supposed to move statues all the way here?").also { stage = 2 }
+			2 -> playerl("What am I supposed to be getting again?").also { stage = 5 }
+			3 -> playerl("Will these patches need much in the way of watering?").also { stage = 8 }
+			}
+		2 -> npcl("You use the dormant object that lies between your ears, that's how. A statue may be far too heavy to carry, but simplicity itself to push.").also { stage++ }
+		3 -> playerl("Push?").also { stage++ }
+		4 -> npcl("What are you talking about?!? You still have the trolly I gave you!").also { stage = END_DIALOGUE }
+		5 -> npcl("Haven't you got that list I gave you?").also { stage++ }
+		6 -> playerl("Er ... yes I do have a list...").also { stage++ }
+		7 -> npcl("Well read it then! That should tell you everything you need to know!!").also { stage = END_DIALOGUE }
+		8 -> npcl(" Well, you are supposed to be the gardener here, but I would say not. One had the soil imported from an extremely fertile area at great cost – watering should not be necessary one would have thought.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using a quest seed on Ellamaria***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Very good peasant, you've got the seed; but its the plant that one wishes, not seeds. Plant it in the patch, and let it grow.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using anything else on Ellamaria***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Very good peasant, thank you for showing one that, but one has given you a job to do. Do it.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after planting all of the seeds and before the plants are done growing***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Well, I think that's everything...").also { stage++ }
+		1 -> npcl("One finds that hard to believe. Out of my way, let me see for myself.").also { stage++ } 
+		2 -> npcl("One was right not to trust your word, common as it is. The garden is not yet complete.").also { stage++ }
+		3 -> playerl("Really? What haven't I finished yet?").also { stage++ }
+		4 -> npcl("One suggest you learn a little patience. These plants should not take long to grow - these patches have been filled with extremely fertile soil that was very expensive to import.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after planting all of the seeds and before the plants are done growing***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Well, I think that's everything...").also { stage++ }
+		1 -> npcl("One finds that hard to believe. Out of my way, let me see for myself.").also { stage++ }
+		2 -> npcl("Oh yes, very nice, if a little yobbish. Rollie will be so pleased–").also { stage++ }
+		3 -> playerl("Rollie?!?").also { stage++ }
+		4 -> npcl("You will address my husband by his proper title!!!!! Speaking of whom, I think it is time that we brought him to see his new garden. And when one says we, one means you.").also { stage++ }
+		5 -> playerl("Oh, you want me to go and get Roald – sorry ... King Roald ... and bring him here. Fair enough, wait here then, I'll be back in a moment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after the plants are done growing and before talking to Roald***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("So are you going to get Rollie then?").also { stage++ }
+		1 -> playerl("No, I haven't spoken to Roll ... King Roald ... yet.").also { stage++ }
+		2 -> npcl("Well hurry along peasant. This garden will be such a wonderful surprise!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after Roald sees the garden to end the quest***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Excuse my husband, he can be so rude sometimes.").also { stage++ }
+		1 -> playerl("Only sometimes?").also { stage++ }
+		2 -> npcl("Are you being rude again ... ? Yes, and that's all he deserves! Here you go, your help here has proved invaluable.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Ellamaria after the quest***
+
+class EllamariaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("What's the suprcompost potion for?", "Can I use this garden for my own farming?").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("What's the suprcompost potion for?").also { stage = 2 }
+			2 -> playerl("Can I use this garden for my own farming?").also { stage = 6 }
+			}
+		2 -> npcl("Oh, let one see peasant - perhaps it is a potion for making supercompost?").also { stage++ }
+		3 -> playerl("No, I didn't mean that-").also { stage++ }
+		4 -> npcl("You wish to know how to use it?").also { stage++ }
+		5 -> npcl("Pour it on some normal compost and it will transform into supercompost. You can do this with a bucket of compost, although it is possibly wiser to use it on a full compost bin.").also { stage = END_DIALOGUE }
+		6 -> npcl("What, you want to dig up the plants that took one so long to grow? Don't be ridiculous, you silly little man.").also { stage++ }
+		7 -> playerl("All right then, sorry I asked.").also { stage++ }
+		8 -> npcl("Impertinent peasant! Oh, if you promise to leave one alone then feel free to pick fruit from the White Tree. One is told that they are a great natural energy restorative.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to the Wild old Man after starting the quest WITH Ring of Charos in inventory***
+***Options 2, 3, and 4 under line 2 provide a metric ton of dialogue options unrelated to the quest. I have included them here for the sake of completeness, but they can also be expanded on***
+
+class WiseOldManDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Greetings, PLAYER").also { stage++ }
+		1 -> options("I have been sent by Queen Ellamaria of Varrock to seek your guidance.", "Could you check my things for junk, please?", "I've got something I'd like you to look at.", "I'd just like to ask you something.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("I have been sent by Queen Ellamaria of Varrock to seek your guidance.").also { stage = 3 }
+			2 -> playerl("Could you check my things for junk, please?").also { stage = 81 }
+			3 -> playerl("I've got something I'd like you to look at.").also { stage = 82 }
+			4 -> playerl("I'd just like to ask you something.").also { stage = 83 }
+			}
+		3 -> npcl("Ellamaria? Well, if you're in her service my guidance is this: do the fastest run that you can off the shortest pier you can find.").also { stage++ }
+		4 -> playerl("You know Queen Ellamaria?").also { stage++ }
+		5 -> npcl("Oh yes, we go way back, long before she married that fool the King of Varrock. She wasn't always royal you know.").also { stage++ }
+		6 -> playerl("Really?").also { stage++ }
+		7 -> npcl("No, in her youth she was a barmaid at the Blue Moon Inn. All that fancy talk, that's just for show. No, the Ellamaria I knew was as common as muck, until she lucked onto good King Roald.").also { stage++ }
+		8 -> playerl("I'll certainly look at her in a different light when I return to Varrock.").also { stage++ }
+		9 -> npcl("So what sort of guidance has Little-Miss-Hoity-Toity sent you to seek?").also { stage++ }
+		10 -> playerl("I am supposed to gain some knowledge of diplomacy and persuasion from you.").also { stage++ }
+		11 -> npcl("That is an area that – luckily for you, young PLAYER – I have studied. Have you heard of the diplomat known as Charos?").also { stage++ }
+		12 -> playerl("Charos? I must say the name rings a bell...").also { stage++ }
+		13 -> playerl("Charos...").also { stage++ }
+		14 -> playerl("Yes, I remember! Once, during my travels to Morytania, I came upon an item of magical jewellery called the Ring of Charos.").also { stage++ }
+		15 -> npcl("You have found the Ring of Charos?!? Tell me – do you still have it in your possession?").also { stage++ }
+		16 -> playerl("Yes, I have it in my bag. Is it important, then?").also { stage++ }
+		17 -> npcl("Charos rose to power under the rule of Lord Drakan of Morytania; Charos was his only living servant.").also { stage++ }
+		18 -> npcl("The vampyre lord suffered the existence of Charos because of the talents that this sophisticated diplomat had to offer.").also { stage++ }
+		19 -> playerl("The art of persuasion?").also { stage++ }
+		20 -> npcl("Indeed. Charos had many uses – spy, assassin, negotiator – because he could convince anyone to do his wishes. These talents were in some part Charos's own, but greatly enhanced by the ring that he fashioned.").also { stage++ }
+		21 -> playerl("The Ring of Charos.").also { stage++ }
+		22 -> npcl("Exactly. One who wears the ring must possess some innate ability of their own, which the ring enhances so that the wearer can convince all but the most strong-minded to do their bidding.").also { stage++ }
+		23 -> playerl("What happened to Charos? And why did Fenkenstrain have the ring?").also { stage++ }
+		24 -> npcl("Charos had a castle built on the northern coast of Morytania, where he dwelt for many years in service to Drakan. None really know what became of him, but some say that he became too certain of his abilities,").also { stage++ }
+		25 -> npcl("and turned them on his master. This would have been his ultimate downfall, for the ring's power would have had little or no effect upon Drakan.").also { stage++ }
+		26 -> npcl("Fenkenstrain probably found the ring many years later, buried somewhere within the depths of Charos's castle.").also { stage++ }
+		27 -> playerl("So what you are telling me is that nobody really knows what happened to Charos? That he could still be alive? And if he is still alive...").also { stage++ }
+		28 -> npcl("...he would naturally come looking for the ring that is his by right. But I don't believe that you should worry about that – it has been many years since his disappearance, and the likelyhood is that he is dead.").also { stage++ }
+		29 -> playerl("Still – it doesn't inspire me with much confidence.").also { stage++ }
+		30 -> npcl("I could activate the power within this ring for you, but for me to do that I must know that you will use it wisely. To do that I must ask you a few questions, to see how good a diplomat you can be.").also { stage++ }
+		31 -> playerl("Okay, go ahead...").also { stage++ }
+		32 -> npcl("1/7: Two goblins are fighting over the colour of their armour. What do you do?").also { stage++ }
+		33 -> options("[A] Show them a range of colours so that they can come to a compromise.", "[B] Leave them to it. Armour's not going to help – any noob can take them.", "[C] Kill them both and steal their bronze spears.").also { stage++ }
+		34 -> when(buttonId) {
+			1 -> playerl("[A] Show them a range of colours so that they can come to a compromise.").also { stage++ }
+			2 -> playerl("[B] Leave them to it. Armour's not going to help – any noob can take them.").also { stage = 60 }
+			3 -> playerl("[C] Kill them both and steal their bronze spears.").also { stage = 60 }
+			}
+		35 -> npcl("2/7: A Drunken dwarf offers you a kebab. What do you do?").also { stage++ }
+		36 -> options("[A] Run away leaving the lonely dwarf on his own.", "[B] Take his generous gift even though you have no need for it.", "[C] Stand there until he gets annoyed and attacks you.").also { stage++ }
+		37 -> when(buttonId) {
+			1 -> playerl("[A] Run away leaving the lonely dwarf on his own.").also { stage = 63 }
+			2 -> playerl("[B] Take his generous gift even though you have no need for it.").also { stage++ }
+			3 -> playerl("[C] Stand there until he gets annoyed and attacks you.").also { stage = 63 }
+			}
+		38 -> npcl("3/7: Are you enjoying your experience of Farming?").also { stage++ }
+		39 -> options("[A] It's absolutely, unquestionably the most interesting thing I've ever done!", "[B] Yes.", "[C] Definitely.").also { stage++ }
+		40 -> when(buttonId) {
+			1 -> playerl("[A] It's absolutely, unquestionably the most interesting thing I've ever done!").also { stage++ }
+			2 -> playerl("[B] Yes.").also { stage = 66 }
+			3 -> playerl("[C] Definitely.").also { stage = 66 }
+			}
+		41 -> npcl("4/7: A dwarf asks you to put on a silly golden helmet so that you can be fired from a cannon into a wall. What do you do?").also { stage++ }
+		42 -> options("[A] Put the helmet on the dwarf and fire him into the wall.", "[B] Put on the silly helmet and jump into the cannon.", "[C] Refuse this crazy request blankly.").also { stage++ }
+		43 -> when(buttonId) {
+			1 -> playerl("[A] Put the helmet on the dwarf and fire him into the wall.").also { stage = 69 }
+			2 -> playerl("[B] Put on the silly helmet and jump into the cannon.").also { stage++ }
+			3 -> playerl("[C] Refuse this crazy request blankly.").also { stage = 69 }
+			}
+		44 -> npcl("5/7: You meet Pkmaster0036 in the Wilderness. He asks you who is the greatest player killer in the world. How do you reply?").also { stage++ }
+		45 -> options("[A] I am, prepare to meet your doom Pkmaster0036!", "[B] Cower in fear and quickly cast teleport to Varrock.", "[C] You of course Pkmaster0036, no one could ever challenge your greatness!").also { stage++ }
+		46 -> when(buttonId) {
+			1 -> playerl("[A] I am, prepare to meet your doom Pkmaster0036!").also { stage = 72 }
+			2 -> playerl("[B] Cower in fear and quickly cast teleport to Varrock.").also { stage = 72 }
+			3 -> playerl("[C] You of course Pkmaster0036, no one could ever challenge your greatness!").also { stage++ }
+			}
+		47 -> npcl("6/7: Queen Ellamaria orders you to go on a foolish quest without any offer of reward. What do you say?").also { stage++ }
+		48 -> options("[A] Stop ordering me about and get back behind the bar where you belong!", "[B] Ask me nicely and I might consider it.", "[C] I'll do whatever you ask – I just love the monarchy!").also { stage++ }
+		49 -> when(buttonId) {
+			1 -> playerl("[A] Stop ordering me about and get back behind the bar where you belong!").also { stage = 75 }
+			2 -> playerl("[B] Ask me nicely and I might consider it.").also { stage++ }
+			3 -> playerl("[C] I'll do whatever you ask – I just love the monarchy!").also { stage = 75 }
+			}
+		50 -> npcl("7/7: A Draynor bank guard asks you if you've seen any suspicious characters lately, because the bank has been robbed. What do you say?").also { stage++ }
+		51 -> options("[A] If I do I'll let you know.", "[B] Yes, that wise old man over there looks incredibly dodgy.", "[C] No, especially not that wise old man, who doesn't look at all suspicious.").also { stage++ }
+		52 -> when(buttonId) {
+			1 -> playerl("[A] If I do I'll let you know.").also { stage = 78 }
+			2 -> playerl("[B] Yes, that wise old man over there looks incredibly dodgy.").also { stage = 78 }
+			3 -> playerl("[C] No, especially not that wise old man, who doesn't look at all suspicious.").also { stage++ }
+			}
+		53 -> playerl("Okay, I've answered your questions – what's the verdict?").also { stage++ }
+		54 -> npcl("Mmmm, it was close but...").also { stage++ }
+		55 -> npcl("Congratulations! You have clearly got what it takes to use the Ring of Charos. Wait a moment, PLAYER...").also { stage++ }
+		56 -> npcl("The wise old man passes his hand slowly over the Ring of Charos that lies in your outstretched palm. Gradually, you feel the ring begin to vibrate with gentle energy.").also { stage++ }
+		57 -> npcl("The Ring of Charos has now been opened to you, PLAYER. You may use its power to charm the weak-minded, but it will only work whilst you are wearing it.").also { stage++ }
+		58 -> playerl("Thanks for your help, Wise Old Man.").also { stage++ }
+		59 -> npcl("Funny, I thought you would take the chance to test the power of the ring on me! No matter – leave me be now, I have important surveillance duties to carry out.").also { stage = END_DIALOGUE }
+		60 -> npcl("2/7: A Drunken dwarf offers you a kebab. What do you do?").also { stage++ }
+		61 -> options("[A] Run away leaving the lonely dwarf on his own.", "[B] Take his generous gift even though you have no need for it.", "[C] Stand there until he gets annoyed and attacks you.").also { stage++ }
+		62 -> when(buttonId) {
+			1 -> playerl("[A] Run away leaving the lonely dwarf on his own.").also { stage++ }
+			2 -> playerl("[B] Take his generous gift even though you have no need for it.").also { stage++ }
+			3 -> playerl("[C] Stand there until he gets annoyed and attacks you.").also { stage++ }
+			}
+		63 -> npcl("3/7: Are you enjoying your experience of Farming?").also { stage++ }
+		64 -> options("[A] It's absolutely, unquestionably the most interesting thing I've ever done!", "[B] Yes.", "[C] Definitely.").also { stage++ }
+		65 -> when(buttonId) {
+			1 -> playerl("[A] It's absolutely, unquestionably the most interesting thing I've ever done!").also { stage++ }
+			2 -> playerl("[B] Yes.").also { stage++ }
+			3 -> playerl("[C] Definitely.").also { stage++ }
+			}
+		66 -> npcl("4/7: A dwarf asks you to put on a silly golden helmet so that you can be fired from a cannon into a wall. What do you do?").also { stage++ }
+		67 -> options("[A] Put the helmet on the dwarf and fire him into the wall.", "[B] Put on the silly helmet and jump into the cannon.", "[C] Refuse this crazy request blankly.").also { stage++ }
+		68 -> when(buttonId) {
+			1 -> playerl("[A] Put the helmet on the dwarf and fire him into the wall.").also { stage++ }
+			2 -> playerl("[B] Put on the silly helmet and jump into the cannon.").also { stage++ }
+			3 -> playerl("[C] Refuse this crazy request blankly.").also { stage++ }
+			}
+		69 -> npcl("5/7: You meet Pkmaster0036 in the Wilderness. He asks you who is the greatest player killer in the world. How do you reply?").also { stage++ }
+		70 -> options("[A] I am, prepare to meet your doom Pkmaster0036!", "[B] Cower in fear and quickly cast teleport to Varrock.", "[C] You of course Pkmaster0036, no one could ever challenge your greatness!").also { stage++ }
+		71 -> when(buttonId) {
+			1 -> playerl("[A] I am, prepare to meet your doom Pkmaster0036!").also { stage++ }
+			2 -> playerl("[B] Cower in fear and quickly cast teleport to Varrock.").also { stage++ }
+			3 -> playerl("[C] You of course Pkmaster0036, no one could ever challenge your greatness!").also { stage++ }
+			}
+		72 -> npcl("6/7: Queen Ellamaria orders you to go on a foolish quest without any offer of reward. What do you say?").also { stage++ }
+		73 -> options("[A] Stop ordering me about and get back behind the bar where you belong!", "[B] Ask me nicely and I might consider it.", "[C] I'll do whatever you ask – I just love the monarchy!").also { stage++ }
+		74 -> when(buttonId) {
+			1 -> playerl("[A] Stop ordering me about and get back behind the bar where you belong!").also { stage++ }
+			2 -> playerl("[B] Ask me nicely and I might consider it.").also { stage++ }
+			3 -> playerl("[C] I'll do whatever you ask – I just love the monarchy!").also { stage++ }
+			}
+		75 -> npcl("7/7: A Draynor bank guard asks you if you've seen any suspicious characters lately, because the bank has been robbed. What do you say?").also { stage++ }
+		76 -> options("[A] If I do I'll let you know.", "[B] Yes, that wise old man over there looks incredibly dodgy.", "[C] No, especially not that wise old man, who doesn't look at all suspicious.").also { stage++ }
+		77 -> when(buttonId) {
+			1 -> playerl("[A] If I do I'll let you know.").also { stage++ }
+			2 -> playerl("[B] Yes, that wise old man over there looks incredibly dodgy.").also { stage++ }
+			3 -> playerl("[C] No, especially not that wise old man, who doesn't look at all suspicious.").also { stage++ }
+			}
+		78 -> playerl("Okay, I've answered your questions – what's the verdict?").also { stage++ }
+		79 -> npcl("Mmmm, it was close but...").also { stage++ }
+		80 -> npcl("You clearly do not have what it takes to use the Ring of Charos.").also { stage = END_DIALOGUE }
+		81 -> npcl("Certainly, but I should warn you that I don't know about all items.").also { stage = END_DIALOGUE }
+		82 -> npcl("Jolly good. Give it to me, and I'll tell you anything I know about it.").also { stage = END_DIALOGUE }
+		83 -> npcl("Please do!").also { stage++ }
+		84 -> options("Distant lands", "Strange beasts", "Days gone by", "Gods and demons", "Something to do with you...").also { stage++ }
+		85 -> when(buttonId) {
+			1 -> playerl("Distant lands").also { stage = 86 }
+			2 -> playerl("Strange beasts").also { stage = 109 }
+			3 -> playerl("Days gone by").also { stage = 130 }
+			4 -> playerl("Gods and demons").also { stage = 151 }
+			5 -> playerl("Something to do with you...").also { stage = 168 }
+			}
+		86 -> options("The Wilderness", "Misty jungles", "Underground domains", "Mystical realms").also { stage++ }
+		87 -> when(buttonId) {
+			1 -> playerl("The Wilderness").also { stage = 88 }
+			2 -> playerl("Misty jungles").also { stage = 93 }
+			3 -> playerl("Underground domains").also { stage = 100 }
+			4 -> playerl("Mystical realms").also { stage = 106 }
+			}
+		88 -> playerl("Could you tell me about the Wilderness, please?").also { stage++ }
+		89 -> npcl("Many years ago, when the foul Zamorak was doing battle with the forces of Saradomin, the northern reaches of this continent were blasted by his evil magic, transforming a vast area into a barren wasteland of rocks and lava.").also { stage++ }
+		90 -> npcl("The spirits of the monsters that perished in this cataclysm are still roaming the Wilderness, even today, hunting for people to slaughter in their endless desire for revenge. They are incredibly dangerous, far more deadly than other monsters.").also { stage++ }
+		91 -> npcl("However, it's still often worth the risk of entering the Wilderness. There are treasures in the Wilderness that are scarce elsewhere, and some of the other monsters are popular for combat training. There are even arenas where you can fight other people like yourself!").also { stage++ }
+		92 -> npcl("If you dare to go to the far north-west of the Wilderness, there's a building called the Mage Arena where you can learn to summon the power of Saradomin himself!").also { stage = 174 }
+		93 -> playerl("What can you tell me about jungles?").also { stage++ }
+		94 -> npcl("If it's a jungle you want, look no further than the southern regions of Karamja.").also { stage++ }
+		95 -> npcl("Once you get south of Brimhaven, the whole island is pretty much covered in exotic trees, creepers and shrubs.").also { stage++ }
+		96 -> npcl("There's a small settlement called Tai Bwo Wannai Village in the middle of the island. It's a funny place; the chieftain's an unfriendly chap and his sons are barking mad.").also { stage++ }
+		97 -> npcl("Honestly, one of them asked me to stuff a dead monkey with seaweed so he could EAT it!").also { stage++ }
+		98 -> npcl("Further south you'll find Shilo Village. It's been under attack by terrifying zombies in recent months, if my sources are correct.").also { stage++ }
+		99 -> npcl("The jungle's filled with nasty creatures. There are vicious spiders that you can hardly see before they try to bite your legs off, and great big jungle ogres.").also { stage = 174 }
+		100 -> playerl("Tell me about what's underground.").also { stage++ }
+		101 -> npcl("Oh, the dwarven realms?").also { stage++ }
+		102 -> npcl("Yes, there was a time, back in the Fourth Age, when we humans wouldn't have been able to venture underground. That was before we had magic; the dwarves were quite a threat.").also { stage++ }
+		103 -> npcl("Still, it's much more friendly now. You can visit the vast dwarven mine if you like; the entrance is on the mountain north of Falador.").also { stage++ }
+		104 -> npcl("If you go further west you may be able to visit the dwarven city of Keldagrim. But they were a bit cautious about letting humans in, last time I asked.").also { stage++ }
+		105 -> npcl("On the other hand, if you go west of Brimhaven, you'll find a huge underground labyrint full of giants, demons, dogs and dragons to fight. It's even bigger than the caves under Taverley, although the Taverley dungeon's pretty good for training your combat skills.").also { stage = 174 }
+		106 -> playerl("What mystical realms can I visit?").also { stage++ }
+		107 -> npcl("The fabled Lost City of Zanaris has an entrance somewhere near here. Perhaps some day you'll go there.").also { stage++ }
+		108 -> npcl("Also, in my research I came across ancient references to some kind of Abyss. Demons from the Abyss have already escaped into this land; Saradomin be thanked that they are very rare!").also { stage = } HERE
+		109 -> options("Biggest & Baddest", "Poison and how to survive it", "Wealth through slaughter").also { stage++ }
+		110 -> when(buttonId) {
+			1 -> playerl("Biggest & Baddest").also { stage = 111 }
+			2 -> playerl("Poison and how to survive it").also { stage = 121 }
+			3 -> playerl("Wealth through slaughter").also { stage = 126 }
+			}
+		111 -> playerl("Tell me about mighty monsters.").also { stage++ }
+		112 -> npcl("There's a mighty fire-breathing dragon living underground in the deep Wilderness, known as the King Black Dragon. It's a fearsome beast, with a breath that can poison you, freeze you to the ground or incinerate you where you stand.").also { stage++ }
+		113 -> npcl("But even more deadly is the Queen of the Kalphites. As if her giant mandibles of death were not enough, she also throws her spines at her foes with deadly force. She can even cast rudimentary spells.").also { stage++ }
+		114 -> npcl("Some dark power must be protecting her, for she can block attacks using prayer just as humans do.").also { stage++ }
+		115 -> npcl("Another beast that's worthy of a special mention is the Shaikahan. It dwells in the eastern reaches of Karamja, and is almost impossible to kill except with specially prepared weapons.").also { stage++ }
+		116 -> npcl("In the north, beyond the troll lands, there is a cavern where an endless battle rages between the forces of Saradomin and those of Zamorak.").also { stage++ }
+		117 -> npcl("Saradomin's forces are led by the icyene warrior Commander Zilyana, Keeper of the Faith. According to legend, she takes the form of a collossal woman with wings.").also { stage++ }
+		118 -> npcl("Zamorak's forces are led by K'ril Tsutsaroth, a demon of devastating power. Around their encampment is a mystical darkness that no lantern can alleviate.").also { stage++ }
+		119 -> npcl("Two minor armies are loosely allied with the Saradominist force. One consists of bird-like creatures, the Aviansie. Another consists of mindless monsters such as ogres and orks. The leaders of those armies are terrifying creatures in their own right, although inferior by far to Zilyana.").also { stage++ }
+		120 -> npcl("Beyond the Fremennik lands dwell the fearsome Dagannoth Kings, reptillian creatures of the deep. There are three of them, fighting with melee, magic and ranged attacks respectively, on a small island at the bottom of a labyrinthine cavern.").also { stage = 174 }
+		121 -> playerl("What does poison do?").also { stage++ }
+		122 -> npcl("Many monsters use poison against their foes. If you get poisoned, you will not feel it at the time, but later you will begin to suffer its effects, and your life will drain slowly from you.").also { stage++ }
+		123 -> npcl("Over time the effects dwindle to nothing, but if you had already been wounded you might die before they wear off completely.").also { stage++ }
+		124 -> npcl("Fortunately, followers of Guthix have devised potions that can cure the poison or even give immunity to it.").also { stage++ }
+		125 -> npcl("Should you wish to use poison against your own enemies and those of our Lord Saradomin, there is a potion that you can smear on your daggers, arrows, spears, javelins and throwing knives.").also { stage = 174 }
+		126 -> playerl("What monsters drop good items?").also { stage++ }
+		127 -> npcl("As a general rule, tougher monsters drop more valuable items. But even a lowly hobgoblin can drop valuable gems; it just does this extremely rarely.").also { stage++ }
+		128 -> npcl("If you can persuade the Slayer Masters to train you as a Slayer, you will be able to fight certain monsters that drop valuable items far more often.").also { stage++ }
+		129 -> npcl("You might care to invest in an enchanted dragonstone ring. These are said to make a monster drop its most valuable items a little more often.").also { stage = 174 }
+		130 -> options("Heroic figures", "The origin of magic", "Settlements", "The Wise Old Man of Draynor Village").also { stage++ }
+		131 -> when(buttonId) {
+			1 -> playerl("Heroic figures").also { stage = 132 }
+			2 -> playerl("The origin of magic").also { stage = 139 }
+			3 -> playerl("Settlements").also { stage = 143 }
+			4 -> playerl("The Wise Old Man of Draynor Village").also { stage = 149 }
+			}
+		132 -> playerl("Tell me about valiant heroes!").also { stage++ }
+		133 -> npcl("Ha ha ha... There are plenty of heroes. Always have been, always will be, until the fall of the world.").also { stage++ }
+		134 -> npcl("You're quite a noted adventurer yourself!").also { stage++ }
+		135 -> npcl("But I suppose I could tell you of a couple...").also { stage++ }
+		136 -> npcl("Yes, there was a man named Arrav. No-one knew where he came from, but he was a fearsome fighter, a skilful hunter and a remarkable farmer.").also { stage++ }
+		137 -> npcl("He lived in the ancient settlement of Avarrocka, defending it from goblins, until he went forth in search of some strange artifact long desired by the dreaded Mahjarrat.").also { stage++ }
+		138 -> npcl("But do not let your head be turned by heroics. Randas was another great man, but he let himself be beguiled into turning to serve Zamorak, and they say he is now a mindless creature deep in the Underground Pass that leads to Isafdar.").also { stage = 174 }
+		139 -> playerl("Where did humans learn to use magic?").also { stage++ }
+		140 -> npcl("Ah, that was quite a discovery! It revolutionised our way of life and jolted us into the Fifth Age of the world.").also { stage++ }
+		141 -> npcl("They say a traveller in the north discovered the key, although no records state exactly what he found. From this he was able to summon the magic of four elements, using magic as a tool and a weapon. He and his followers learnt how to bind the power into little stones so that others could use it.").also { stage++ }
+		142 -> npcl("In the land south of here they constructed an immense tower where the power could be studied, but followers of Zamorak destroyed it with fire many years ago, and most of the knowledge was lost.").also { stage = 174 }
+		143 -> playerl("I suppose you'd know about the history of today's cities?").also { stage++ }
+		144 -> npcl("Yes, there are fairly good records of the formation of the cities from primitive settlements.").also { stage++ }
+		145 -> npcl("In the early part of the Fourth Age, of course, there were no permanent settlements. Tribes wandered the lands, staying where they could until the resources were exhausted.").also { stage++ }
+		146 -> npcl("This changed as people learnt to grow crops and breed animals, and now there are very few of the old nomadic tribes. There's at least one tribe roaming between the Troll Stronghold and Rellekka, though.").also { stage++ }
+		147 -> npcl("One settlement was Avarrocka, a popular trading centre.").also { stage++ }
+		148 -> npcl("In the west, Ardougne gradually formed under the leadership of the Carnillean family, despite the threat of the Mahjarrat warlord Hazeel who dwelt in that area until his downfall.").also { stage = 174 }
+		149 -> playerl("Tell me about yourself, old man.").also { stage++ }
+		150 -> npcl("Ah, so you want to know about me, eh?").also { stage++ }
+		150 -> npcl("Mmm... what could I say about myself? Let's see what I've done...").also { stage++ }
+		150 -> npcl("I've delved into the dungeon west of Brimhaven and heard the terrifying CRASH of the steel dragons battling each other for territory.").also { stage++ }
+		150 -> npcl("I spent some years on Entrana, where I learnt the techniques of pure meditation.").also { stage++ }
+		150 -> npcl("I've wandered through the vast desert that lies south of Al Kharid and seen the great walls of Menaphos and Sophanem.").also { stage++ }
+		150 -> npcl("Apart from all that, I've spent many a happy hour in dusty libraries, searching through ancient scrolls and texts for the wisdom of those who have passed on.").also { stage++ }
+		150 -> npcl("Plus plenty of other adventures, quests, journeys...").also { stage = 174 } 
+		151 -> options("Three gods?", "The wars of the gods", "The Mahjarrat", "Wielding the power of the gods").also { stage++ }
+		152 -> when(buttonId) {
+			1 -> playerl("Three gods?").also { stage = 153 }
+			2 -> playerl("The wars of the gods").also { stage = 158 }
+			3 -> playerl("The Mahjarrat").also { stage = 162 }
+			4 -> playerl("Wielding the power of the gods").also { stage = 166 }
+			}
+		153 -> playerl("I heard that the world used to have three gods.").also { stage++ }
+		154 -> npcl("Indeed. That was correct: Saradomin, Guthix and Zamorak.").also { stage++ }
+		155 -> npcl("Saradomin, the great and glorious, gives life to this world.").also { stage++ }
+		156 -> npcl("Zamorak craves only death and destruction.").also { stage++ }
+		157 -> npcl("Guthix, calling itself a god of 'balance', held no allegiance, but simply aided whatever cause suits its shifting purpose.").also { stage = 174 }
+		158 -> playerl("I wanna know about the wars of the gods!").also { stage++ }
+		159 -> npcl("Ah, the first war was terrible time. The armies of Saradomin fought gloriously against the minions of Zamorak, but many brave warriors and noble cities were overthrown and destroyed utterly.").also { stage++ }
+		160 -> playerl("How did it end?").also { stage++ }
+		161 -> npcl("Before the Zamorakian forces could be utterly routed, Lord Saradomin took pity on them and the battle-scarred world, and allowed a truce.").also { stage = 174 }
+		162 -> playerl("What are the Mahjarrat?").also { stage++ }
+		163 -> npcl("Very little is written about the tribe of the Mahjarrat. They are believed to be from a realm of Freneskae, or Frenaskrae - the spelling in this tongue is only approximate.").also { stage++ }
+		164 -> npcl("One of them, the foul Zamorak, had achieved godhood, although none know how this came about.").also { stage++ }
+		165 -> npcl("Other Mahjarrat who have been particularly active upon this plane are Hazeel, Lucien, Azzanadra and Zemouregal.").also { stage = 174 }
+		166 -> playerl("Can I wield the power of Saradomin myself?").also { stage++ }
+		167 -> npcl("On completing the trials to use the Mage Arena, you can wield the cloak and staff of Saradomin. You will then be able to cast the Saradomin Strike spell, which summons his power against your foe.").also { stage = 174 }
+		168 -> playerl("Your hat!").also { stage++ }
+		169 -> npcl("Why, thank you! I rather like it myself.").also { stage++ }
+		170 -> playerl("How can I get a hat like that? ").also { stage++ }
+		171 -> npcl("Ahh, sadly these hats are now very rare. Maybe some other player would be willing to sell you theirs, but it would be incredibly expensive.").also { stage++ }
+		172 -> playerl("Can I buy your hat?").also { stage++ }
+		173 -> npcl("Ohhh no, I don't intend to part with this.").also { stage = 174 }
+		174 -> npcl("Is there anything else you'd like to ask?").also { stage++ }
+		175 -> options("Yes please.", "Thanks, maybe some other time.").also { stage++ }
+		176 -> when(buttonId) {
+			1 -> playerl("Yes please.").also { stage = 83 }
+			2 -> playerl("Thanks, maybe some other time.").also { stage++ }
+			}
+		177 -> npcl("As you wish. Farewell, PLAYER").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Dantaera after having the Ring of Charos enchanted and equipped***
+
+class DantaeraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you know how I could grow a White Tree?").also { stage++ }
+		1 -> npcl("There are no more White Trees left in the world – they have all been chopped down, and their beauty has forever left this world.").also { stage++ }
+		2 -> options("Then my quest is over – I cannot grow a White Tree.", "[Charm] I think that there is something that you are not telling me.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Then my quest is over – I cannot grow a White Tree.").also { stage = 4 }
+			2 -> playerl("[Charm] I think that there is something that you are not telling me.").also { stage = 5 }
+			}
+		4 -> npcl("Even if there were a White Tree somewhere I would not tell you, for as soon as it would grow then it would be slaughtered in its prime. Man's hunger for fire is greater than his admiration of beauty.").also { stage = END_DIALOGUE }
+		5 -> npcl("Am I so transparent? You have seen through me; there is something I would rather not tell you.").also { stage++ }
+		6 -> options("You need to chill out an stop taking yourself so seriously.", "[Charm] A secret is a dreadful burden to have to keep to yourself.").also { stage++ } 
+		7 -> when(buttonId) {
+			1 -> playerl("You need to chill out an stop taking yourself so seriously.").also { stage = 8 }
+			2 -> playerl("[Charm] A secret is a dreadful burden to have to keep to yourself.").also { stage = 9 }
+			}
+		8 -> npcl("Leave me in peace then, if you are so unable to understand my grief.").also { stage = END_DIALOGUE }
+		9 -> npcl("It is not hard to keep this secret – to give it away would cause me great sorrow.").also { stage++ }
+		10 -> playerl("I don't see how. Tell me your secret, and I will keep it as well as you have done.").also { stage++ }
+		11 -> npcl("Very well – I feel deep trust in you for some reason. It is the White Tree, last survivor of a race of Trees that have disappeared from our landscape. Once they covered the land; now there is only one.").also { stage++ }
+		12 -> playerl("What happened to them?").also { stage++ }
+		13 -> npcl("Man desired the wood of the White Tree, because of its wood of pure white. Need I tell you more?").also { stage++ }
+		14 -> playerl("I can fill in the rest. So where is the remaining White Tree?").also { stage++ }
+		15 -> npcl("She stands atop Ice Mountain, alone and sorrowful; and, I fear, that she is dying.").also { stage++ }
+		16 -> playerl("If I took a cutting from ... her ... then I could grow another one.").also { stage++ }
+		17 -> npcl("Yes, but she only has life enough to produce one shoot. Cut this shoot, and she will die, last of her kind gone forever. If you failed to grow this shoot, there would be no more White Trees.").also { stage++ }
+		18 -> options("You should get out a bit more and quit worrying about trees.", "[Charm] Unless you allow me to do this she will die anyway.").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("You should get out a bit more and quit worrying about trees.").also { stage = 20 }
+			2 -> playerl("[Charm] Unless you allow me to do this she will die anyway.").also { stage = 21 }
+			}
+		20 -> npcl("No, I am afraid I cannot do that. She is the last White Tree, and I am the last to care about her. I will not let her pass away alone and unloved.").also { stage = END_DIALOGUE }
+		21 -> npcl("I know, but I try not to think about that. You speak truly – she does not have much time left.").also { stage++ }
+		22 -> playerl("Then will you allow me to take this cutting?").also { stage++ }
+		23 -> npcl("Do so with my blessing. I wish you good fortune, PLAYER. Go now, and save the beauty of the White Tree.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Daentera if the player loses the white tree cutting***
+
+class DantaeraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have lost the cutting from the White Tree.").also { stage++ }
+		1 -> npcl("I do not believe what I am hearing, after everything you said to me before!").also { stage++ }
+		2 -> playerl("Er, yes I know ... sorry ...").also { stage++ }
+		3 -> npcl("Maybe - just maybe - there might be another shoot somewhere on the Tree that you can take as a cutting. Go and havea look, before she dies without offspring!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Daentera with the white tree cutting or potted white tree shoot in inventory***
+
+class DantaeraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have taken the the cutting from the White Tree.").also { stage++ }
+		1 -> npcl("Then it is done now, whatever happens. Though I am eager for offspring to be planted I am doubly sorrowful that she will now die.").also { stage++ }
+		2 -> playerl("Don't worry - this White Tree cutting is safe with me.").also { stage = END_DIALOGUE }
+}
+
+
+
+***After the quest, Daentera's dialogue reverts to what it is now, before the quest***
+
+
+
+***Cutting the white tree for the first time***
+
+class WhiteTreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Here is the shoot that Dantaera spoke of. Everything she told me is true – this tree will die once I cut this shoot. Well, here goes...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Cutting the white tree again if the shoot is lost***
+
+class WhiteTreeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Ah, luckily there is another shoot here that I can cut. Better not lose this one...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Brother Althric for the first time after quest is started WITH Ring of Charos equipped***
+
+class BrotherAlthricDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Can I have some rosebush seeds, please?", "[Charm] These are the most beautiful rosebushes I've ever seen.").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Can I have some rosebush seeds, please?").also { stage = 5 }
+			2 -> playerl("[Charm] These are the most beautiful rosebushes I've ever seen.").also { stage = 2 }
+			}
+		2 -> npcl("Nice of you to say so, but I sense the use of some unnatural power underneath your fine words. You are concealing something of great evil, an evil that cannot touch someone of my purity.").also { stage++ }
+		3 -> playerl("Oh ... no, that's not true ...").also { stage++ }
+		4 -> npcl("Nonsense, you reek of this evil power! I suggest that you throw whatever dark talisman it is that you are using down the Edgeville well, and never think of it again! Either that or just simply destroy it!").also { stage = END_DIALOGUE }
+		5 -> npcl("Are you messing about with my rosebushes?").also { stage++ }
+		6 -> playerl("Um..I'm just... savouring their sweet perfume...").also { stage++ }
+		7 -> npcl("No you're not - you're trying to steal some seeds. Well, you can leave them alone. It's take me many months of tending to bring them to this fine state of near-perfection.").also { stage++ }
+		8 -> playerl("Please?").also { stage++ }
+		9 -> npcl("No. Now leave me in peace.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Brother Althric after throwing the Ring of Charos down the Edgeville well OR attempting to pick any rose***
+
+class BrotherAlthricDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Are you messing about with my rosebushes again?").also { stage++ }
+		1 -> playerl("Er ... no ... I was just admiring them.").also { stage++ }
+		2 -> npcl("Ah, I sense that you speak so without the use of the evil power you carried before. That is good. As you have taken the road back towards the light, you may take any seeds that you wish.").also { stage++ }
+		3 -> playerl("I threw it down the Edgeville well like you told me.").also { stage++ }
+		4 -> npcl("That is good. Although it could always be regained by someone using an implement long enough to reach the bottom of the well, something with a hook on the end to catch the ring with. I hope I haven't put any ideas into your head.").also { stage++ }
+		5 -> playerl("Oh no, I definitely wouldn't try something like that...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Brother Althric after destroying the Ring of Charos OR attempting to pick any rose***
+
+class BrotherAlthricDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Are you messing about with my rosebushes again?").also { stage++ }
+		1 -> playerl("Er ... no ... I was just admiring them.").also { stage++ }
+		2 -> npcl("Ah, I sense that you speak so without the use of the evil power you carried before. That is good. As you have taken the road back towards the light, you may take any seeds that you wish.").also { stage++ }
+		3 -> playerl("I destroyed it like you told me.").also { stage++ }
+		4 -> npcl("That is good. Although I sense that an evil talisman like that cannot truly be destroyed - it will probably try to find it's way back to it's master. I pray that you don't try and seek it out again.").also { stage++ }
+		5 -> playerl("Oh no, I definitely wouldn't try something like that...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pick a red rose after speaking to Brother Althric after losing the Ring of Charos***
+
+class RedRosebushDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You take some seeds from the red rosebush.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pick a pink rose after speaking to Brother Althric after losing the Ring of Charos***
+
+class PinkRosebushDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You take some seeds from the pink rosebush.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to pick a white rose after speaking to Brother Althric after losing the Ring of Charos***
+
+class WhiteRosebushDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You take some seeds from the white rosebush.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lyra after having the Ring of Charos enchanted and equipped***
+
+class LyraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you have any orchid seeds to spare?
+		1 -> npcl("Please, do not bother me – I have problems to attend to.
+		2 -> options("Oh sorry, I didn't mean to take up your valuable time.", "[Charm] If you tell me your problems, I may be able to help you.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Oh sorry, I didn't mean to take up your valuable time.").also { stage = END_DIALOGUE }
+			2 -> playerl("[Charm] If you tell me your problems, I may be able to help you.").also { stage = 4 }
+			}
+		4 -> npcl("As you ask so nicely I will relate my problems to you, but I very much doubt that you may help me at all.").also { stage++ }
+		5 -> playerl("Try me.").also { stage++ }
+		6 -> npcl("You must think it strange that a girl such as myself would choose to ply her trade in a place such as this, this darkest of lands.").also { stage++ }
+		7 -> options("No, not really – you fit in here a treat.", "[Charm] Yes, I was wondering about that.").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playerl("No, not really – you fit in here a treat.").also { stage = 9 }
+			2 -> playerl("[Charm] Yes, I was wondering about that.").also { stage = 10 }
+			}
+		9 -> npcl("Then begone simple fool and halt your churlish tongue. There are things about me that would leave you with nightmares for the rest of your life.").also { stage = END_DIALOGUE }
+		10 -> npcl("My mother, Alice, tends to our farming shop in yonder farmhouse, while I tend to this small allotment. Passing trade has quite literally died off in recent years, and with it our income.").also { stage++ }
+		11 -> options("I can only say one thing to you – move.", "[Charm] Times must be very hard for you.").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("I can only say one thing to you – move.").also { stage = 13 }
+			2 -> playerl("[Charm] Times must be very hard for you.").also { stage = 14 }
+			}
+		13 -> npcl("And leave behind all that we possess?!? Never!!!").also { stage = END_DIALOGUE }
+		14 -> npcl(" It is but the smallest of our worries. We get by, we survive, on the miserable harvests that I grow here. The price of our survival is what pains me, as it is a price I have paid with the souls of others.").also { stage++ }
+		15 -> options("Ah, it all makes sense now – you're a psychopath.", "[Charm] Whatever you've done, I'm sure you had just cause.").also { stage++ }
+		16 -> when(buttonId) {
+			1 -> playerl("Ah, it all makes sense now – you're a psychopath.").also { stage = END_DIALOGUE }
+			2 -> playerl("[Charm] Whatever you've done, I'm sure you had just cause.").also { stage = 17 }
+			}
+		17 -> npcl("You say this, but you know nothing of my crimes. I cannot tell you all, but this much I will say – that being allowed to exist in this land is a privilege that must be paid for, and the cost is dear.").also { stage++ }
+		18 -> options("*Yawn* Could you get to the point please?", "[Charm] And what is the nature of this fee that you pay?").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("*Yawn* Could you get to the point please?").also { stage = 20 } 
+			2 -> playerl("[Charm] And what is the nature of this fee that you pay?").also { stage = 21 }
+			}
+		20 -> npcl("If your time is so pressing then leave me be and go about your business!").also { stage = END_DIALOGUE }
+		21 -> npcl("Mother and I must pay a tithe of blood to the vampyres. Father would have protected us, but he is no longer with us, although his presence still walks among us in the fields. We pay with the blood of others.").also { stage++ }
+		22 -> options("Er, can I withdraw my offer of help now?", "[Charm] If not yours, then whose blood are you offering?").also { stage++ }
+		23 -> when(buttonId) {
+			1 -> playerl("Er, can I withdraw my offer of help now?").also { stage = 24 }
+			2 -> playerl("[Charm] If not yours, then whose blood are you offering?").also { stage = 25 }
+			}
+		24 -> npcl("I would not talk so if I were you - I know a secret call that will bring the vampires here right now, and then you may live only long enough to feel regret for your impertinence.").also { stage = END_DIALOGUE }
+		25 -> npcl("Sometimes I travel to market fairs in distant lands, and I use my feminine arts to lure young farmers back to this land; then the vampyres come for them and I see them no more.").also { stage++ }
+		26 -> options("Something tells me that you actually enjoy it, really.", "[Charm] How can you deal with so much guilt?").also { stage++ }
+		27 -> when(buttonId) {
+			1 -> playerl("Something tells me that you actually enjoy it, really.").also { stage = END_DIALOGUE }
+			2 -> playerl("[Charm] How can you deal with so much guilt?").also { stage = 28 }
+			}
+		28 -> npcl("Please – ask me no more. You said that you were looking for some orchid seeds? I do have some as a matter of fact, and you may as well have them because they do not grow well in this grim land.").also { stage++ }
+		29 -> playerl("Okay, can I have them then...").also { stage++ }
+		30 -> npcl("You must pass a test first. These are no ordinary flowers, and no ordinary farmer can grow them. You must grow onions here in one of these patches, and when they are fully grown I will give you the seeds.").also { stage++ }
+		31 -> options("That's a deal – I'll grow a patch of onions for you.", "I think not – I've loitered too long in this land.", "[Charm] Oh for Saradomin's sake, just give me the seeds!").also { stage++ }
+		32 -> when(buttonId) {
+			1 -> playerl("That's a deal – I'll grow a patch of onions for you.").also { stage = 33 } 
+			2 -> playerl("I think not – I've loitered too long in this land.").also { stage = 34 }
+			3 -> playerl("[Charm] Oh for Saradomin's sake, just give me the seeds!").also { stage = 35 }
+			}
+		33 -> npcl("Speak to me when they are fully grown. You need not pick them for me, I will be able to assess your skills by simply watching you.").also { stage = END_DIALOGUE }
+		34 -> npcl("Yes, I agree - far too long.").also { stage = END_DIALOGUE }
+		35 -> npcl("This feeling in my head - it is so strange - and it is a feeling I have felt before, although I cannot explain it. If you are trying to use some unnatural power over me, you have failed.").also { stage = 30 }
+}
+
+
+
+***Speaking to Lyra after agreeing to plant the onions and before the onions are fully grown***
+
+class LyraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What did you ask me to do?").also { stage++ }
+		1 -> npcl("I need you to grow some onions in one of these vegetable patches, from seed until they are fully grown - then I will give you some orchid seeds.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lyra after agreeing to plany the onions and after the onions are fully grown***
+
+class LyraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Okay, I've grown those onions like you asked.").also { stage++ }
+		1 -> npcl("Yes, you have demonstrated that you have some moderate skills as a farmer. Take these seeds, and do with them that you will.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Lyra if the player loses the orchid seeds***
+
+class LyraDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Can I have some more orchid seeds?").also { stage++ }
+		1 -> npcl("Yes, here you go - I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***After the quest, Lyra's dialogue reverts to what it is now, before the quest***
+
+
+
+***Speaking to Kragen after having the Ring of Charos enchanted and equipped***
+
+class KragenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you have any snowdrop seeds to spare?").also { stage++ }
+		1 -> npcl("No I don't, as it happens. Sorry.
+		2 -> options("But I was told that you did!", "[Charm] You seem to be a little irritable, my friend.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("But I was told that you did!").also { stage = 4 }
+			2 -> playerl("[Charm] You seem to be a little irritable, my friend.").also { stage = 5 }
+			}
+		4 -> npcl("Well, you were told wrong then! Goodbye!").also { stage++ } 
+		5 -> npcl("Oh, you think so?!? And what concern is it of yours?").also { stage++ }
+		6 -> options("I'm not concerned, I just want you to give me some snowdrop seeds.", "[Charm] I don't like to see a fellow human being so upset.").also { stage++ }
+		7 -> when(buttonId) {
+			1 -> playerl("I'm not concerned, I just want you to give me some snowdrop seeds.").also { stage = 8 }
+			2 -> playerl("[Charm] I don't like to see a fellow human being so upset.").also { stage = 9 }
+			}
+		8 -> npcl("Is that right?!? Well, I do actually have some snowdrop seeds, but you would be the last person I would give them to.").also { stage = END_DIALOGUE }
+		9 -> npcl("I must say, you don't often meet people who show concern the way you have done.").also { stage++ }
+		10 -> options("I can't take it anymore – just give me the seeds.", "[Charm] So what ails you, my friend?").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("I can't take it anymore – just give me the seeds.").also { stage = 12 }
+			2 -> playerl("[Charm] So what ails you, my friend?").also { stage = 13 }
+			}
+		12 -> npcl("And to think I listened to you! I was right fter all - there is no kindness between human beings anymore.").also { stage = END_DIALOGUE }
+		13 -> npcl("All these people, asking me to look after their crops! And no-one ever asking me how I feel, or if there's something they can do for me!").also { stage++ }
+		14 -> options("Oh stop whining, it's not like you do it for free.", "[Charm] Well, is there anything I can do for you?").also { stage++ }
+		15 -> when(buttonId) {
+			1 -> playerl("Oh stop whining, it's not like you do it for free.").also { stage = 16 }
+			2 -> playerl("[Charm] Well, is there anything I can do for you?").also { stage = 17 }
+			}
+		16 -> npcl("Kragen stares at you in silence, in such a manner that says to you that is probably best to end this conversation right now.").also { stage = END_DIALOGUE }
+		17 -> npcl("Oh, that's very kind of you! And here I was, thinking of giving it all up and heading off across the seas to find my fortune!").also { stage++ }
+		18 -> options("Don't let me stop you, there are plenty of ships missing cabin boys.", "[Charm] So what can I do for you?").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("Don't let me stop you, there are plenty of ships missing cabin boys.").also { stage = 20 }
+			2 -> playerl("[Charm] So what can I do for you?").also { stage = 21 }
+			}
+		20 -> npcl("If you carry on speaking to me like that I might just put this spade to good use, and I'm not talking about digging!").also { stage = END_DIALOGUE }
+		21 -> npcl("I'd like just for once for somebody to grow something for me. Just something simple; some vegetables would be nice.").also { stage++ }
+		22 -> playerl("How about some potatoes?").also { stage++ }
+		23 -> npcl("Nah, there's a whole field of them over to the west. I don't have any particular use for onions, so how about cabbages, then?").also { stage++ }
+		24 -> playerl("Cabbages? Sounds good to me. Where do you want me to grow them?").also { stage++ }
+		25 -> npcl("Oh, in one of these allotments here. Plant them from seed, and when they're ready for harvesting let me know, I'll give you your seeds.").also { stage++ }
+		26 -> options("That's a deal – I'll let you know when your cabbages are ready.", "I'm not wasting my time growing cabbages.", "[Charm] Aarrrrrghhhh! I hate cabbages!!!! Give me the seeds!!!!!").also { stage++ }
+		27 -> when(buttonId) {
+			1 -> playerl("That's a deal – I'll let you know when your cabbages are ready.").also { stage = END_DIALOGUE }
+			2 -> playerl("I'm not wasting my time growing cabbages.").also { stage = 28 }
+			3 -> playerl("[Charm] Aarrrrrghhhh! I hate cabbages!!!! Give me the seeds!!!!!").also { stage = 29 }
+			}
+		28 -> npcl("And I'm not wasting my seeds on an upstart like you!").also { stage = END_DIALOGUE }
+		29 -> npcl("Give ... you ... the ... yes I should ... no I won't ... Not after speaking to me like that you upstart!!! Is it a deal or not?!?").also { stage = 26 }
+}
+
+
+
+***Speaking to Kragen after agreeing to plant the cabbages and after the cabbages are fully grown***
+
+class KragenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Okay, I've grown those cabbages like you asked.").also { stage++ }
+		1 -> npcl("Yes, I saw – what fine farming prowess! Nobody has ever done anything like that for me before; here you go, these are the seeds you were after I believe. Yes, here you go – I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Kragen after agreeing to plant the cabbages and before the cabbages are fully grown***
+
+class KragenDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What did you ask me to do?").also { stage++ }
+		1 -> npcl("You said that you would grow me some cabbages in one of these allotments. When they're ready for harvest come and talk to me, and I'll give you those snowdrop seeds that you're after.").also { stage = END_DIALOGUE }
+}
+
+
+***Speaking to Kragen if the player loses the snowdrop seeds***
+
+class Kragen Dialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Can I have some more snowdrop seeds?").also { stage++ }
+		1 -> npcl("Yes, here you go - I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***After the quest, Kragen's dialogue reverts to what it is now, before the quest***
+
+
+
+***Speaking to Elstan after having the Ring of Charos enchanted and equipped***
+
+class ElstanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you have any delphinium seeds to spare?").also { stage++ }
+		1 -> npcl("I do have delphinium seeds, yes – but to spare, I'm not so sure. You don't look like that much of a gardener to me.
+		2 -> options("I'll have you know I'm a pretty good farmer, actually!", "[Charm] That is why I have come to an expert for advice.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("I'll have you know I'm a pretty good farmer, actually!").also { stage = END_DIALOGUE }
+			2 -> playerl("[Charm] That is why I have come to an expert for advice.").also { stage = 4 }
+			}
+		4 -> npcl("Ah, now that I like the sound of. So people are saying I'm an expert, then?").also { stage++ }
+		5 -> options("No, I just said that to get you to give me some seeds.", "Yeah, carry on – milk it for all it's worth.", "[Charm] Not just AN expert, Elstan – they say you are THE expert.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("No, I just said that to get you to give me some seeds.").also { stage = 7 }
+			2 -> playerl("Yeah, carry on – milk it for all it's worth.").also { stage = 8 }
+			3 -> playerl("[Charm] Not just AN expert, Elstan – they say you are THE expert.").also { stage = 9 }
+			}
+		7 -> npcl("Really?!? Well, give me any more of that kind of talk and I'll give you something to remember me by, and I'll tell you now it ain't seeds!!").also { stage = END_DIALOGUE }
+		8 -> npcl("What?!? Any more of that talk and it'll be curtains for you, mate!").also { stage = END_DIALOGUE }
+		9 -> npcl("I can't say that I'm surprised, really – I do seem to have the golden touch with the old gardening lark. Only just the other day I managed to grow a – I'm not boring you, am I?").also { stage++ }
+		10 -> options("Yes, please stop right now.", "[Charm] Oh no, I love listening to gardening stories...").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("Yes, please stop right now.").also { stage = 12 }
+			2 -> playerl("[Charm] Oh no, I love listening to gardening stories...").also { stage = 13 }
+			}
+		12 -> npcl("As a matter of fact I will! I'm not wasting my time on the likes of you!").also { stage = END_DIALOGUE }
+		13 -> npcl("You do! That's the first person I've ever met has said that! Well, don't you worry mate, I've got millions of 'em!").also { stage++ }
+		14 -> options("Somebody kill me now.", "[Charm] Millions? Ah, just what I wanted to hear...").also { stage++ }
+		15 -> when(buttonID) {
+			1 -> playerl("Somebody kill me now.").also { stage = END_DIALOGUE }
+			2 -> playerl("[Charm] Millions? Ah, just what I wanted to hear...").also { stage = 16 } 
+			}
+		16 -> npcl("Ah, but there's plenty of time for stories. You wanted delphinium seeds, did you say?").also { stage++ }
+		17 -> playerl("Er ... what ... er... Yes, delphinium seeds!").also { stage++ }
+		18 -> npcl("As I'm in an especially good mood I think I will let you have some. But you have to do something for me first.").also { stage++ }
+		19 -> playerl("And what's that?").also { stage++ }
+		20 -> npc("I need some marigolds to give to Lyra, one of my fellow gardeners over in Morytania. She's a bit mysterious, and has some – well – sinister ways to be sure, but she's just my type.").also { stage++ }
+		21 -> playerl("So, a bunch of marigolds then?").also { stage++ }
+		22 -> ncpl("Yes, and while I'm at it I can see how good a gardener you are. Grow those marigolds in this flower patch here from seed to flower, pick them and give them to me, and I'll give you some delphinium seeds.").also { stage++ }
+		23 -> options("Okay, I'll grow you some marigolds.", "No, I don't have time to do that.", "[Charm] Are you sure you don't just want to give me the seeds now?").also { stage++ }
+		24 -> when(buttonId) {
+			1 -> playerl("Okay, I'll grow you some marigolds.").also { stage = END_DIALOGUE }
+			2 -> playerl("No, I don't have time to do that.").also { stage = 25 }
+			3 -> playerl("[Charm] Are you sure you don't just want to give me the seeds now?").also { stage = 26 }
+			}
+		25 -> npcl("Have it your own way, mate. No seeds for you then.").also { stage = END_DIALOGUE }
+		26 -> npcl("Strange - there is this funny buzzing in my head that says that I should - but I don't think I will. I need those marigolds for Lyra.").also { stage = 21 }
+}
+
+
+
+***Speaking to Elstan after agreeing to plant the cabbages and before the marigolds are fully grown***
+
+class ElstanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What did I agree to do for delphinium seeds?").also { stage++ }
+		1 -> npcl("I need some marigolds so that I can woo Lyra. Grow them from seed to flower in this flower patch here, pick them and give them to me, and I'll give you some delphinium seeds.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elstan after agreeing to plant the cabbages and after the marigolds are fully grown***
+
+class ElstanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have those marigolds for you.").also { stage++ }
+		1 -> npcl("Ah, fantastic – Lyra will surely be mine now! Here you go mate, here's those delphinium seeds you were after. Yes, here you go – I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Elstan if the player loses the delphinium seeds***
+
+class ElstanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Can I have some more delphinium seeds?").also { stage++ }
+		1 -> npcl("Yes, here you go - I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***After the quest, Elstan's dialogue reverts to what it is now, before the quest***
+
+
+
+***Speaking to Bernald after having the Ring of Charos enchanted and equipped***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you know anything about grapevine diseases?").also { stage++ }
+		1 -> playerl("I might – what's the problem?").also { stage++ }
+            	2 -> npcl("You see those grapevines over there?").also { stage++ }
+		3 -> playerl("Yes. They don't look too happy at the moment.").also { stage++ }
+            	4 -> npcl("They've come down with some strange disease that I've never encountered before. I've tried everything with them, but nothing seems to work. If it carries on like this I will lose all this year's crops.").also { stage++ }
+		5 -> playerl("I could probably help you with that, but I'd need something in return.").also { stage++ }
+            	6 -> npcl("Anything, you just need to ask!").also { stage++ }
+		7 -> playerl("Well, I'd like a supply of Burthorpe Vine seeds.").also { stage++ }
+		8 -> npcl("I'm afraid I can't do that.").also { stage++ }
+		9 -> options("I thought you said anything!", "[Charm] But it is the only way that these vines will be cured.").also { stage++ }
+		10 -> when(buttonId) {
+			1 -> playerl("I thought you said anything!").also { stage = 11 }
+			2 -> playerl("[Charm] But it is the only way that these vines will be cured.").also { stage = 12 } 
+			}
+		11 -> npcl("I'm afraid that is the one thing I cannot give you. Burthorpe vine has been bred over many years and many generations of my family. I could never give away something so special.").also { stage = END_DIALOGUE }
+		12 -> npcl("Hmm, you may be right. If I lose these crops what use are more seeds to me, when I have gone out of business? Very well then, this is the deal – cure my vines and I will give you some Burthorpe Vine seeds.").also { stage++ }
+		13 -> options("I accept the deal.", "Actually, it seems like a lot of hard work for nothing.").also { stage++ }
+		14 -> when(buttonId) {
+			1 -> playerl("I accept the deal.").also { stage = 15 }
+			2 -> playerl("Actually, it seems like a lot of hard work for nothing.").also { stage = 16 }
+			}
+		15 -> npcl("Oh, thank you! Please speak to me again when you've cured the vines and, hence, saved my livelihood and an important part of Burthorpe's history.").also { stage = END_DIALOGUE }
+		16 -> npcl("I wouldn't call the last living example of this rare plant 'nothing' if I were you. Very well, I shall find someone else to assist me.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald again before attempting to cure the vines***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Can you suggest any way that I can cure these grapevines?").also { stage++ }
+		1 -> npcl("I thought you were the one with horticultural knowledge here. How would you normally cure plant diseases?").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald after using a plant cure on the vine***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Plant cure not doing the trick, eh?").also { stage++ }
+		1 -> playerl("I don't understand – it's worked with everything else.").also { stage++ }
+		2 -> npcl("That grapevine disease must be much stronger than the usual. You'll need something a bit more potent to cut out that infection.").also { stage++ }
+		3 -> playerl("Do you know of any stronger cures?").also { stage++ }
+		4 -> npcl("No, I don't – but I know of a man who might. Not far from here there's a druid gardener who goes by the name of Alain. He's an expert on things like this, so they tell me.").also { stage++ }
+		5 -> playerl("Why didn't you just go and ask him yourself?").also { stage++ }
+		6 -> npcl("These vines are very precious indeed. I could not hazard the risk that someone would steal my grapes while I was away – they may be diseased, but they still contain Burthorpe vine seeds.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald after speaking to Alain***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Have you spoken to Alain yet?").also { stage++ }
+		1 -> playerl("Yes. He has given me some knowledge so that I can make a more potent plant cure.").also { stage++ }
+		2 -> npcl("Let's hope that it does the job, then.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald after curing the vines***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("My vines are cured! You have worked a wonder here, PLAYER! Here, you can have those seeds like I promised. Yes, here you go – I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald after recieving the seeds with the seeds***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("How are your grapes coming along?").also { stage++ }
+		1 -> npcl("Marvellously, thanks to your help, PLAYER.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Bernald if the player has lost the seeds***
+
+class BernaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Do you have any more Burthorpe Vine seeds?").also { stage++ }
+		1 -> npcl("What did you do with the ones I gave you?").also { stage++ }
+		2 -> playerl("Erm...").also { stage++ }
+		3 -> npcl("Yes, here you go - I hope they grow for you.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Alain after attempting to cure Bernald's vines***
+
+class AlainDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I need to ask you about strong plant cures.").also { stage++ }
+		1 -> npcl("Well, then, you've come to the right person – I researched exotic plant diseases as part of my druidic training. What is the affliction that you need to cure?").also { stage++ }
+            	2 -> playerl("Bernald has got some seriously diseased grapevines. I tried plant cure on them, but it didn't seem to have any positive effect.").also { stage++ }
+		3 -> npcl("Ah, so is this the famous Burthorpe Vine?").also { stage++ }
+            	4 -> playerl("The very one.").also { stage++ }
+		5 -> npcl("I'm afraid that my research did not extend to Burthorpe vine. Bernald and his ancestors have always closely guarded their heritage. In fact, I'm surprised that he has involved you.").also { stage++ }
+		6 -> npcl("Although I am pretty sure that it is a sign of how desperate he must be. Those vines were all burned or eaten by the trolls when they invaded, after all. If the vine is sick he must be at the end of his teather.").also { stage++ }
+            	7 -> playerl("Er, I did have some...assistance with persuading him.").also { stage++ }
+		8 -> npcl("I see. Well, if it involves some unnatural power I would rather not know. I prefer the use of power that can be brought forth from the plants around us.").also { stage++ }
+		9 -> options("Are you sure there's nothing you can suggest?", "[Charm] You're hiding something from me.").also { stage++ }
+		10 -> when(buttonId) {
+			1 -> playerl("Are you sure there's nothing you can suggest?").also { stage = 11 }
+			2 -> playerl("[Charm] You're hiding something from me.").also { stage = 16 }
+			}
+		11 -> npcl("Well...").also { stage++ }
+		12 -> npcl("There is one thing you could try. One of the most potent cures I have discovered involves using the natural power held within a very special mineral, but it is a very closely guarded secret.").also { stage++ }
+		13 -> playerl("Do you mean the rune essence?").also { stage++ }
+		14 -> npcl("You know of that?!? Then I can do no further harm here. You can make a potent plant cure by mixing some crumbled rune essence into a normal plant cure. This may possibly cure Bernald's vines.").also { stage++ }
+		15 -> playerl("Thank you Alain, I will try it out immediately!").also { stage = END_DIALOGUE }
+		16 -> npcl("This is the power you are abusing!! I feel it now – it emanates from the ring you wear, a festering fountain of corruption that appalls my very soul!!!").also { stage++ }
+		17 -> playerl("Oh, sorry. I forgot that it only works on the weak-minded.").also { stage++ }
+		18 -> npcl("You, PLAYER, are the one who must be weak-minded, if you consider using such a dreadful weapon. Beware – it may one day be your downfall.").also { stage = 9 }
+}
+
+
+
+***After the quest, Alain's dialogue reverts to what it is now, before the quest***
+
+
+
+***Falador Guard cutscene***
+
+class FallyCutsceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("(Hmm. I'd better not let those guards see me...)").also { stage++ }
+		1 -> npcl("Meanwhile... Billy, a new recruit of the Falador Guard, has just arrived for his first shift guarding Falador's north gate...").also { stage++ }
+		2 -> npcl("So, what are you doing this weekend?").also { stage++ }
+		3 -> npcl("This weekend? You haven't been here long, I take it?").also { stage++ }
+		4 -> npcl("What do you mean?").also { stage++ }
+		5 -> npcl("Do you know the life expectancy of a guard here?").also { stage++ }
+		6 -> npcl("No. How long is it?").also { stage++ }
+		7 -> npcl("About thirty seconds, I reckon.").also { stage++ }
+		8 -> npcl("Thirty seconds? They didn't tell me that when I signed up!").also { stage++ }
+		9 -> npcl("Any second now, someone is going to attack us for no apparent reason, completely unprovoked.").also { stage++ }
+		10 -> npcl("But why, Bob? What have we ever done to them?").also { stage++ }
+		11 -> npcl("I don't know, Billy. I just don't know. But I'm not wasting my final seconds worrying about it.").also { stage++ }
+		12 -> npcl("Meanwhile... (shows your character fiddling with the statue)").also { stage++ }
+		13 -> npcl("Uhoh, someone's coming...").also { stage++ }
+		14 -> npcl("Bob?").also { stage++ }
+		15 -> npcl("Steady, Billy. Remember that you are a guard of Falador.").also { stage++ }
+		16 -> npcl("But...").also { stage++ }
+		17 -> npcl("See you in the next world...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Roald after the Garden is grown***
+
+class KingRoaldDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there. Would you like to follow me for a minute?").also { stage++ }
+		1 -> npcl("Follow you?!? I am the King! I am the followed, not the follower!!").also { stage++ }
+		2 -> options("Well, if you can't be bothered then neither can I.", "[Charm] Of course, your majesty – please forgive me.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Well, if you can't be bothered then neither can I.").also { stage = 4 }
+			2 -> playerl("[Charm] Of course, your majesty – please forgive me.").also { stage = 34 }
+			}
+		4 -> npcl("Suit yourself.").also { stage++ }
+		5 -> playerl("No, you suit yourself.").also { stage++ }
+		6 -> npcl("You're quite argumentative for a peasant.").also { stage++ }
+		7 -> playerl("I'm not the one who's arguing, you are.").also { stage++ }
+		8 -> npcl("Then why do you keep answering me back?").also { stage++ }
+		9 -> playerl("No, you're answering me back. Well, stop talking and I'll stop answering.").also { stage++ }
+		10 -> npcl("No, you stop talking.").also { stage++ }
+		11 -> playerl("I have stopped talking.").also { stage++ }
+		12 -> npcl("No you haven't, you're doing it now.").also { stage++ }
+		13 -> playerl("No, I'm just answering what you're saying.").also { stage++ }
+		14 -> npcl("Okay, so if I don't say anything, you won't answer me back.").also { stage++ }
+		15 -> playerl("Suits me.").also { stage++ }
+		16 -> npcl("Go on, then.").also { stage++ }
+		17 -> playerl("No, you first.").also { stage++ }
+		18 -> npcl("King Roald doesn't say anything to you.").also { stage++ }
+		19 -> playerl("You don't say anything back.").also { stage++ }
+		20 -> npcl("See, that's better.").also { stage++ }
+		21 -> playerl("Yes, much better.").also { stage++ }
+		22 -> npcl("What were you saying about me following you somewhere?").also { stage++ }
+		23 -> playerl("I can't remember, it was such a long time ago.").also { stage++ }
+		24 -> npcl("Ah, that's a shame – I could have done with a breath of fresh air.").also { stage++ }
+		25 -> playerl("Oh well.").also { stage++ }
+		26 -> npcl("Yes, never mind.").also { stage++ }
+		27 -> playerl("See you around.").also { stage++ }
+		28 -> npcl("Yes, see you later.").also { stage++ }
+		29 -> npcl("I thought you were going.").also { stage++ }
+		30 -> playerl("I was until you spoke to me again.").also { stage++ }
+		31 -> npcl("I'm sorry, I'll stop speaking to you then.").also { stage++ }
+		32 -> playerl("See you around.").also { stage++ }
+		33 -> npcl("Yes, see you later.").also { stage = END_DIALOGUE }
+		34 -> npcl("Forgiveness is something that cannot be earned so easily. And I'm certainly not following you off on some wild goose chase when I have important matters of state to attend to.").also { stage++ }
+		35 -> options("That's it – I've had it with royalty.", "[Charm] The Queen asked me to bring you.").also { stage++ }
+		36 -> when(buttonId) {
+			1 -> playerl("That's it – I've had it with royalty.").also { stage = 37 }
+			2 -> playerl("[Charm] The Queen asked me to bring you.").also { stage = 38 }
+			}
+		37 -> npcl("And I've had enough of peasantry! Get out of my castle!").also { stage = END_DIALOGUE }
+		38 -> npcl("Ellie? Now that's a different matter. Lead on, peasant – let's see what my darling wife has been up to now.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Garden cutscene***
+
+class GardenCutsceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("This is murder on my hayfever, you know...").also { stage++ }
+            	1 -> npcl("Ah, Rollie, my love!").also { stage++ }
+            	2 -> npcl("What have you been up to now, pumpkin?").also { stage++ }
+            	3 -> npcl("Behold: your new garden!").also { stage++ }
+            	4 -> npcl("Have you been spending my money again?").also { stage++ }
+		5 -> playerl("Here's some orchids from Morytania.").also { stage++ }
+		6 -> npcl("Orchids bring me out in a rash.").also { stage++ }
+		7 -> playerl("One of the last Burthorpe vine plants!").also { stage++ }
+		8 -> npcl("Oh, great, let's hope they don't eat into the walls.").also { stage++ }
+		9 -> playerl("Snowdrops from Ardougne!").also { stage++ }
+		10 -> npcl("What a boring colour.").also { stage++ }
+		11 -> playerl("The last surviving white tree!").also { stage++ }
+		12 -> npcl("Should make a nice table and chairs.").also { stage++ }
+		13 -> playerl("Delphiniums from Falador!").also { stage++ }
+		14 -> npcl("I hate delphiniums.").also { stage++ }
+		15 -> playerl("Rollie?").also { stage++ }
+		16 -> npcl("Yes, pumpkin?").also { stage++ }
+		17 -> npcl("One has gone to great pains to provide you with this beautiful garden...").also { stage++ }
+		18 -> npcl("YOU COULD SHOW ONE A LITTLE GRATITUDE!").also { stage++ }
+		19 -> playerl("Actually, I think I did most of the wor–").also { stage++ }
+		20 -> npcl("SILENCE!").also { stage++ }
+		21 -> npcl("Well? Are you going to thank one, Rollie?").also { stage++ }
+		22 -> npcl("Pumpkin, I–").also { stage++ }
+		23 -> npcl("SPEAK UP, I CAN'T HEAR YOU!").also { stage++ }
+		24 -> npcl("Thank you very much, my darling. It's a, er, beautiful garden. Really it is.").also { stage++ }
+		25 -> npcl("Much better. Now, get back to the castle and rule our kingdom – there's a good monarch.").also { stage++ }
+		26 -> npcl("Yes, pumpkin.").also { stage = END_DIALOGUE }
+}
+
+
+

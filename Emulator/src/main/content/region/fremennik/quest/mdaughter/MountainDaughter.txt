@@ -1,0 +1,57 @@
+/*package content.kingdom.fremennik.quest.mdaughter
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class MountainDaughter : Quest("Mountain Daughter", 90, 89, 2, Vars.VARBIT_QUEST_MOUNTAIN_DAUGHTER_260, 0, 1, 70) {
+    companion scenery {
+        const val MountainDaughter = "Mountain Daughter"
+    }
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.BEARHEAD_4502, 230, 277, 5)
+        player.packetDispatch.sendString("You have completed Mountain Daughter!", 277, 4)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "2,000 Prayer XP", ln++)
+        drawReward(player, "1,000 Attack XP", ln++)
+        rewardXP(player, Skills.PRAYER, 2000.0)
+        rewardXP(player, Skills.ATTACK, 1000.0)
+        addItemOrDrop(player, Items.BEARHEAD_4502)
+        setVarbit(player, Vars.VARBIT_QUEST_MOUNTAIN_DAUGHTER_260, 70, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//2,000 Prayer experience
+//1,000 Attack experience
+//Bearhead (only requires partial completion)
+//Access to the Mountain Camp without a rope (only requires partial completion)
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

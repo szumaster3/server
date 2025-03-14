@@ -1,0 +1,578 @@
+Enlightened Journey Quest
+Sources: https://www.youtube.com/watch?v=0Hq2R2RXjsU, https://www.youtube.com/watch?v=egf7bD6dfxs
+
+***Speaking to Auguste to start quest***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Greetings! Would you like to be my number one accomplice? I mean, assistant?").also { stage++ }
+		1 -> playerl("Who are you?").also { stage++ }
+            	2 -> npcl("I am Auguste. I am going to be the first balloonist in all of Gielinor!").also { stage++ }
+		3 -> playerl("Balloo-what? I thought only monks lived on Entrana.").also { stage++ }
+            	4 -> npcl("Well, they do...I was a monk. But I'm so sick of living on this island! I want to explore new frontiers!").also { stage++ }
+		5 -> playerl("And go where no man has gone before?").also { stage++ }
+            	6 -> npcl("Maybe! That sounds good. I was thinking just over to Taverley, though.").also { stage++ }
+		7 -> playerl("Why not take the boat then?").also { stage++ }
+            	8 -> npcl("Ugh! Ocean! Don't talk to me about the ocean...oh dear...I think I feel ill.").also { stage++ }
+		9 -> playerl("Whoa, ok, no ocean. How exactly are you going to get off the island, then?").also { stage++ }
+            	10 -> npcl("I have devised a new way to travel. But I need an assistant balloonist to help me build my design. Are you an experienced adventurer willing to help me?").also { stage++ }
+		11 -> options("Yes! Sign me up.", "Not right now.").also { stage++ }
+		12 -> when(buttonID) {
+			1 -> playerl("Yes! Sign me up.").also { stage = 13 }
+			2 -> playerl("Not right now.").also { stage = END_DIALOGUE }
+			}
+		13 -> npcl("Wonderful! Let's get started.").also { stage++ }
+		14 -> playerl("Wait. I still don't know exactly what we're doing.").also { stage++ }
+		15 -> npcl("Of course, of course, how foolish of me. Well, we are going to make a balloon.").also { stage++ }
+		16 -> playerl("Which is what exactly?").also { stage++ }
+		17 -> npcl("Let me show you!").also { stage++ }
+		18 -> npcl("Auguste shows the player a diagram of a balloon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the quest has begun***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> playerl("How exactly do you plan to get to Taverley in that? How will it work?").also { stage++ }
+		1 -> npcl("Have you noticed how ashes float above fires for long periods of time?").also { stage++ }
+		2 -> options("Umm, yes. What's your point?", "Err, no. I can't see that kind of detail.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("Umm, yes. What's your point?").also { stage = 5 }
+			2 -> playerl("Err, no. I can't see that kind of detail.").also { stage = 4 }
+			}
+		4 -> npcl("You don't? Oh...well...it's just, they rise, you know, from the fire... Maybe you should pay more attention to things!").also { stage++ }
+		5 -> playerl("What's your point?").also { stage++ }
+		6 -> npcl("Don't you see? It's the hot air! It rises, taking the ashes with it.").also { stage++ }
+		7 -> npcl("I had this epiphany while I was at the glass blower's house. If we pump hot air into an envelope it will rise because it is lighter than the cold air around it.").also { stage++ }
+		8 -> playerl("Come again?").also { stage++ }
+		9 -> npcl("We are going to sew a big sack and light a fire under it. Once the sack fills with hot air it will begin to rise, taking us along with it in the basket.").also { stage++ }
+		10 -> playerl("You seem pretty confident about this. Have you tested it?").also { stage++ }
+		11 -> npcl("Well, no. You see, I don't have the materials here to make any test balloons.").also { stage++ }
+		12 -> npcl("That's where you come in!").also { stage++ }
+		13 -> npcl("You are going to collect materials for two test runs of the balloon.").also { stage++ }
+		14 -> npcl("You will need to get three sheets of papyrus, one ball of wool, one full sack of potatoes, and one unlit candle.").also { stage++ }
+		15 -> playerl("What am I supposed to do with all that junk?").also { stage++ }
+		16 -> npcl("When you have all of it, bring it to me and I'll explain what to do next. Any questions?").also { stage++ }
+		17 -> playerl("Where do I get all this stuff?").also { stage++ }
+		18 -> npcl("You're the adventurer, you should know! Think of logical places, like, churches; they have tons of candles.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after being asked to get the materials WITH all the materials***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("Have you gotten the materials?").also { stage++ }
+		1 -> options("Yes.", "No.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = 3 }
+			2 -> playerl("No.").also { stage = 4 }
+			}
+		3 -> npcl("Good, you have everything! Now, I need you to create an origami balloon.").also { stage = 5 }
+		4 -> npcl("Failure is not an option.").also { stage = END_DIALOGUE }
+		5 -> playerl("How do you make the origami balloon?").also { stage++ }
+		6 -> npcl("First, use the papyrus on the ball of wool. The papyrus is folded into an origami box and the yarn will support the heat source.").also { stage++ }
+		7 -> npcl("Next, add the unlit candle to the balloon structure. It will act as the heat source.").also { stage++ }
+		8 -> npcl("Once you have done that let me know and we will begin our experiment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after being asked to make the origami balloon WITHOUT an origami balloon***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> playerl("How do you make the origami balloon?").also { stage++ }
+		1 -> npcl("First, use the papyrus on the ball of wool. The papyrus is folded into an origami box and the yarn will support the heat source.").also { stage++ }
+		2 -> npcl("Next, add the unlit candle to the balloon structure. It will act as the heat source.").also { stage++ }
+		3 -> npcl("Once you have done that let me know and we will begin our experiment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after being asked to make the origami balloon WITH an origami balloon***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> playerl("I finished the origami balloon!").also { stage++ }
+		1 -> npcl("Wonderful! I'll take that, and we'll conduct our first experiment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***During the origami balloon cutscene***
+
+class OrigamiCutsceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("That was perfect. My hypothesis was right!").also { stage++ }
+		1 -> playerl("Did you not see the burning?").also { stage++ }
+		2 -> npcl("One more test. Then we shall proceed.").also { stage++ }
+		3 -> playerl("Burning? Fire? Hello?").also { stage++ }
+		4 -> npcl("We shall meekly go! No...no...it needs to sound grander. We shall cautiously go...").also { stage++ }
+		5 -> playerl("We're doomed.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the origami balloon cutscene WITHOUT papyrus and potatoes***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have the other two sheets of papyrus and a full sack of potatoes?").also { stage++ }
+		1 -> options("Yes, I have them here.", "Oh, I've misplaced them.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I have them here.").also { stage = 3 }
+			2 -> playerl("Oh, I've misplaced them.").also { stage = 4 }
+			}
+		3 -> npcl("You need a full sack of potatoes and more papyrus.").also { stage = END_DIALOGUE }
+		4 -> npcl("Failure is not an option.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the origami balloon cutscene WITH papyrus WITHOUT potatoes***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have the other two sheets of papyrus and a full sack of potatoes?").also { stage++ }
+		1 -> options("Yes, I have them here.", "Oh, I've misplaced them.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I have them here.").also { stage = 3 }
+			2 -> playerl("Oh, I've misplaced them.").also { stage = 4 }
+			}
+		3 -> npcl("You need a full sack of potatoes.").also { stage = END_DIALOGUE }
+		4 -> npcl("Failure is not an option.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the origami balloon cutscene WITH potatoes WITHOUT papyrus***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have the other two sheets of papyrus and a full sack of potatoes?").also { stage++ }
+		1 -> options("Yes, I have them here.", "Oh, I've misplaced them.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I have them here.").also { stage = 3 }
+			2 -> playerl("Oh, I've misplaced them.").also { stage = 4 }
+			}
+		3 -> npcl("You need more papyrus.").also { stage = END_DIALOGUE }
+		4 -> npcl("Failure is not an option.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the origami balloon cutscene WITH papyrus and potatoes***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have the other two sheets of papyrus and a full sack of potatoes?").also { stage++ }
+		1 -> options("Yes, I have them here.", "Oh, I've misplaced them.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I have them here.").also { stage = 3 }
+			2 -> playerl("Oh, I've misplaced them.").also { stage = 4 }
+			}
+		3 -> npcl("Commendable. If I may have those, I will construct this experiment.").also { stage = END_DIALOGUE }
+		4 -> npcl("Failure is not an option.").also { stage = END_DIALOGUE }
+}
+
+
+
+***During the second origami balloon cutscene***
+
+class OrigamiCutsceneDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Well, that went down like a lead balloon.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the second origami balloon cutscene***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> playerl("Those peasants... where did they come from?").also { stage++ }
+		1 -> npcl("Ahh, the flash mob phenomenon. Many have hypothesized that they are beings of great power sent to smite those who question the gods.").also { stage++ }
+		2 -> playerl(" And this isn't worrying because...?").also { stage++ }
+		3 -> npcl(" Don't worry! I know exactly what I'm doing.").also { stage++ }
+		4 -> npcl("Those experiments went extraordinarily well.").also { stage++ }
+		5 -> playerl("Was I the ONLY one who saw them burning? BURNING???").also { stage++ }
+		6 -> npcl("Yes, very well indeed. Now we will start building the balloon that will carry us off the island.").also { stage++ }
+		7 -> npcl("This task will be much greater than the last two. I hope you are prepared for it.").also { stage++ }
+		8 -> playerl("This is madness.").also { stage++ }
+		9 -> npcl("You need to get the following items:").also { stage++ }
+		10 -> npcl("Yellow dye Red dye Ten pieces of silk A clay bowl").also { stage++ }
+		11 -> npcl("and eight sandbags.").also { stage++ }
+		12 -> npcl("Sandbags can be made by getting empty sacks and filling them at the sand pit here on Entrana.").also { stage++ }
+		13 -> npcl("However, there are other sand pits around the world that will work as well; there is one in Yanille, Rellekka, and Zanaris.").also { stage++ }
+		14 -> npcl("You can bring items back to me as you get them, while you are waiting for the tree to grow.").also { stage++ }
+		15 -> playerl("What tree?").also { stage++ }
+		16 -> npcl("I am going to give you a willow sapling and a basket of apples. You must plant the willow sapling at a tree patch.").also { stage++ }
+		17 -> npcl("If you give the basket of apples to the gardener near the patch, he will look after the tree for you while it grows.").also { stage++ }
+		18 -> npcl("Don't lose the sapling! It took me a long time to save up enough for one. If you do, you'll have to pay me 30,000 coins for a new one.").also { stage++ }
+		19 -> npcl("Once the tree is fully grown, cut twelve branches from it using secateurs. Bring the branches back here and use them on the metal frame on the platform to create the basket.").also { stage++ }
+		20 -> npcl("Here you go. Now be very careful not to lose it!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after being asked to make the hot air balloon WITHOUT any of the items and lost the sapling ***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have anything for me?").also { stage++ }
+		1 -> options("Yes, I want to give you some items.", "I'm having trouble finding some items.", "I have lost my willow sapling. Can I buy a replacement?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I want to give you some items.").also { stage = 3 }
+			2 -> playerl("I'm having trouble finding some items.").also { stage = 12 }
+			3 -> playerl("I have lost my willow sapling. Can I buy a replacement?").also { stage = 20 }
+			}
+		3 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage++ }
+		4 -> when(buttonId) {
+			1 -> playerl("Dye.").also { stage = 5 }
+			2 -> playerl("Sandbags.").also { stage = 7 }
+			3 -> playerl("Silk.").also { stage = 10 }
+			4 -> playerl("Bowl.").also { stage = 11 }
+			5 -> playerl("Never mind.").also { stage = END_DIALOGUE }
+			}
+		5 -> npcl("You don't have any dye with you.").also { stage++ }
+		6 -> npcl("I need red and yellow dye for the balloon.").also { stage = 3 }
+		7 -> npcl("You don't have enough sandbags. Please bring me eight.").also { stage++ }
+		8 -> npcl("Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage++ }
+		9 -> npcl("However, there are other sand pits around the world that will work as well.").also { stage = 3 }
+		10 -> npcl("You don't have enough silk. Please bring me ten pieces.").also { stage = 3 }
+		11 -> npcl("I need a plain clay-fired bowl; they're quite ease to come by.").also { stage = 3 }
+		12 -> npcl("What do you need help with?").also { stage++ }
+		13 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage++ }
+		14 -> when(buttonId) {
+			1 -> playerl("Dye.").also { stage = 15 }
+			2 -> playerl("Sandbags.").also { stage = 16 }
+			3 -> playerl("Silk.").also { stage = 18 }
+			4 -> playerl("Bowl.").also { stage = 19 }
+			5 -> playerl("Never mind.").also { stage = END_DIALOGUE }
+			}
+		15 -> npcl("I was told a while ago that there was a witch who made dye in Draynor Village. Maybe you should start by looking there.").also { stage = END_DIALOGUE }
+		16 -> npcl("Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage++ }
+		17 -> npcl("However, there are other sand pits around the world that will work as well; there is one in Yanille, Rellekka, and Zanaris.").also { stage = END_DIALOGUE }
+		18 -> npcl("Hmm, I believe silk is imported from the desert. Perhaps someone there can tell you where to find it.").also { stage = END_DIALOGUE }
+		19 -> npcl("I think there is a spare one in the glass blower's house. I rent a room from him there, so I don't think he'll mind you taking it.").also { stage = END_DIALOGUE }
+		20 -> npcl("It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage++ }
+		21 -> options("Yes.", "No way!
+		22 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = 23 }
+			2 -> playerl("No way!").also { stage = END_DIALOGUE }
+			}
+		23 -> npcl("Here you go. Now be very careful not to lose it again!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after being asked to make the hot air balloon WITH the items and the sapling ***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you have anything for me?").also { stage++ }
+		1 -> options("Yes, I want to give you some items.", "I'm having trouble finding some items.", "I have lost my willow sapling. Can I buy a replacement?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes, I want to give you some items.").also { stage = 3 }
+			2 -> playerl("I'm having trouble finding some items.").also { stage = 12 }
+			3 -> playerl("I have lost my willow sapling. Can I buy a replacement?").also { stage = 20 }
+			}
+		3 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage++ }
+		4 -> when(buttonId) {
+			1 -> playerl("Dye.").also { stage = 5 }
+			2 -> playerl("Sandbags.").also { stage = 7 }
+			3 -> playerl("Silk.").also { stage = 8 }
+			4 -> playerl("Bowl.").also { stage = 9 }
+			5 -> playerl("Never mind.").also { stage = END_DIALOGUE }
+			}
+		5 -> npcl("Ah, wonderful, yellow dye. Thank you.").also { stage++ }
+		6 -> npcl("Red dye! Thank you.").also { stage = 3 }
+		7 -> npcl("Sandbags, thank you. This will allow us to change height.").also { stage = 3 }
+		8 -> npcl("Silk for the balloon, thank you.").also { stage = 3 }
+		9 -> npcl("Ah the bowl. This will be used to hold the fuel while it heats the air in the balloon.").also { stage = 3 }
+		10 -> npcl("What do you need help with?").also { stage++ }
+		11 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("Dye.").also { stage = 13 }
+			2 -> playerl("Sandbags.").also { stage = 14 }
+			3 -> playerl("Silk.").also { stage = 16 }
+			4 -> playerl("Bowl.").also { stage = 17 }
+			5 -> playerl("Never mind.").also { stage = END_DIALOGUE }
+			}
+		13 -> npcl("I was told a while ago that there was a witch who made dye in Draynor Village. Maybe you should start by looking there.").also { stage = END_DIALOGUE }
+		14 -> npcl("Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage++ }
+		15 -> npcl("However, there are other sand pits around the world that will work as well; there is one in Yanille, Rellekka, and Zanaris.").also { stage = END_DIALOGUE }
+		16 -> npcl("Hmm, I believe silk is imported from the desert. Perhaps someone there can tell you where to find it.").also { stage = END_DIALOGUE }
+		17 -> npcl("I think there is a spare one in the glass blower's house. I rent a room from him there, so I don't think he'll mind you taking it.").also { stage = END_DIALOGUE }
+		18 -> npcl("It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage++ }
+		19 -> options("Yes.", "No way!
+		20 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = 21 }
+			2 -> playerl("No way!").also { stage = END_DIALOGUE }
+			}
+		21 -> npcl("You already have one! Don't be greedy.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after turning in all the hot air balloon items and before building the basket WITH the sapling in inventory***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("You just need to build the basket and I can finish the balloon! How are you getting on with the willow?").also { stage++ }
+		1 -> options("I have lost my willow sapling. Can I buy a replacement?", "What do I do again?", "Fine thanks.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("I have lost my willow sapling. Can I buy a replacement?").also { stage = 3 }
+			2 -> playerl("What do I do again?").also { stage = 7 }
+			3 -> playerl("Fine thanks.").also { stage = END_DIALOGUE }
+			}
+		3 -> npcl("It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage++ }
+		4 -> options("Yes.", "No way!").also { stage++ }
+		5 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = 6 }
+			2 -> playerl("No way!").also { stage = END_DIALOGUE }
+			}
+		6 -> npcl("You already have one! Don't be greedy.").also { stage = END_DIALOGUE }
+		7 -> npcl("Use the willow sapling I gave you to grow a willow tree. Cut twelve branches from it using secateurs. Use the branches on the platform here.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Using twelve willow branches on the hot air balloon platform***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Great! Let me just put it together and we'll be ready to lift off! Speak to me again in a moment.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste after the hot air balloon is constructed***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> npcl("Well, let's get going!").also { stage++ }
+		1 -> options("Wait; tell me what we're doing.", "Okay.", "No, I'm not ready.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Wait; tell me what we're doing.").also { stage = 3 }
+			2 -> playerl("Okay.").also { stage = END_DIALOGUE }
+			3 -> playerl("No, I'm not ready.").also { stage = END_DIALOGUE }
+			}
+            	3 -> npcl("Theoretically, we are ready for the maiden voyage.").also { stage++ }
+		4 -> playerl("Theoretically?").also { stage++ }
+            	5 -> npcl("Well, of course. With you piloting I am sure we will survive.").also { stage++ }
+		6 -> playerl("WHAT!? This is your balloon! Why aren't you going to pilot it? And what do mean 'survive'? You never said anything about me flying this bird!").also { stage++ }
+            	7 -> npcl("Don't be silly. I'm not going to pilot it. We will be safe in the basket, the only thing we will lose are the logs. You will pilot it, won't you?").also { stage++ }
+		8 -> playerl("Fine, I will. So how do I control the balloon?").also { stage++ }
+            	9 -> npcl("Wonderful! Let me explain my hypothesis on how to control a balloon.").also { stage++ }
+		10 -> playerl("Oh no, not another hypothesis!").also { stage++ }
+            	11 -> npcl("The balloon needs ten normal logs for fuel. I believe the balloon will be controlled based on weight, so you must not have more than 40kg with you.").also { stage++ }
+		12 -> npcl("Also, I seem to have lost my tinderbox, do you think you could bring one? We need it to light the fire.").also { stage++ }
+            	13 -> playerl("And here, I thought all the legwork was done. Fine, I'll bring a tinderbox.").also { stage++ }
+		14 -> npcl("Right! So, the balloon mechanics.").also { stage++ }
+            	15 -> npcl("Your prime direction will always be to land the balloon on the target at the end of our route. I've written to some friends in Taverley who have kindly painted one on the ground there.").also { stage++ } 
+		16 -> npcl("We must avoid everything, because the balloon is very fragile. Even clouds will be dangerous! But if my calculations are correct, we will be able to squeeze through some surprising spaces, if you pilot it well.").also { stage++ }
+		17 -> npcl("Those sandbags you made earlier will give the balloon a big lift when dropped, whereas adding the logs will only make it rise a little bit. But don't use them up too quickly! We have no way of replenishing them.").also { stage++ }
+		18 -> npcl("If you do run out of logs and sandbags you will not be able to go up any longer. Just make the best of it and hope we can make it to our destination without going upwards.").also { stage++ }
+		19 -> npcl("I've added two ropes, the red one is an emergency rope, it will let the hot air out of the balloon and we will drop quickly. The other rope will only drop us a little.").also { stage++ }
+		20 -> npcl("If we get into tribb...beg your pardon, trouble, in all likelihood we will crash. But do not fear! We should be fine. Just make sure you come back to Entrana so we can try again.").also { stage++ }
+		21 -> npcl("If it all goes horribly wrong, you can always bail. If we're still over Entrana, we can land quickly and try again. However, once past the island, we will crash.").also { stage++ }
+		22 -> npcl("Are you ready to go?").also { stage = 1 }
+}
+
+
+
+***Speaking to Auguste if the hot air balloon is crashed***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Well, that didn't go as planned.").also { stage++ }
+		1 -> playerl("So what now? How will we get the balloon back?").also { stage++ }
+		2 -> npcl("I'll have to get one of the monks to come pick it up. You head back on your own; just follow the path. I'll meet you back at Entrana.").also { stage++ }
+		3 -> playerl("You walk away from the crash site.").also { stage++ }
+		4 -> playerl("The crash must have really sent us off course. I'm near Falador!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste if the hot air balloon is successfully landed***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("We have traveled in a way that no man has traveled before! The next step will be to go where no men have gone before.").also { stage++ }
+		1 -> npcl("PLAYER, it has been a privilege flying with you.").also { stage++ }
+		2 -> npcl("For all your hard work, I give you this jacket and cap for future ballooning adventures.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste in Tavelry after the quest***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+        0 -> playerl("So what are you going to do now?").also { stage++ }
+		1 -> npcl("I am considering starting a balloon enterprise. People all over Runescape will be able to travel in a new, exciting way.").also { stage++ }
+		2 -> npcl("As my first assistant, you will always be welcome to use a balloon. You'll have to bring your own fuel, though.").also { stage++ }
+		3 -> playerl("Thanks!").also { stage++ }
+		4 -> npcl("I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Auguste on Entrana after the quest***
+
+class AugusteDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+***Speaking to Assistant Brock after the quest***
+
+class AssistantBrockDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.", "Who are you?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			3 -> playerl("Who are you?").also { stage = 3 }
+			}
+		3 -> npcl("I am Assistant Brock. I serve under Auguste as his number two assistant.").also { stage++ }
+		4 -> npcl("Do you want to use the balloon?").also { stage++ }
+		5 -> options("Yes.", "No.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+***Speaking to Assistant Serf after the quest***
+
+class AssistantSerfDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.", "Who are you?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			3 -> playerl("Who are you?").also { stage = 3 }
+			}
+		3 -> npcl("I am a serf. Assistant Serf to you! Auguste freed me and gave me this job.").also { stage++ }
+		4 -> npcl("Do you want to use the balloon?").also { stage++ }
+		5 -> options("Yes.", "No.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+***Speaking to Assistant Stan after the quest***
+
+class AssistantStanDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.", "Who are you?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			3 -> playerl("Who are you?").also { stage = 3 }
+			}
+		3 -> npcl("I am Stan. Auguste hired me to look after this balloon. I make sure people are prepared to fly.").also { stage++ }
+		4 -> npcl("Do you want to use the balloon?").also { stage++ }
+		5 -> options("Yes.", "No.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+***Speaking to Assistant Le Smith after the quest***
+
+class AssistantLeSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.", "Who are you?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			3 -> playerl("Who are you?").also { stage = 3 }
+			}
+		3 -> npcl("I am Assistant Le Smith. I used to work as a glider pilot, but they kicked me off.").also { stage++ }
+		4 -> playerl("Why?").also { stage++ }
+		5 -> npcl("They said I was too full of hot air.").also { stage++ }
+		6 -> npcl("Do you want to use the balloon?").also { stage++ }
+		7 -> options("Yes.", "No.").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+***Speaking to Assistant Marrow after the quest***
+
+class AssistantMarrowDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Do you want to use the balloon? Just so you know, some locations require special logs and high Firemaking skills.").also { stage++ }
+		1 -> options("Yes.", "No.", "Who are you?").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			3 -> playerl("Who are you?").also { stage = 3 }
+			}
+		3 -> npcl("I am Assistant Marrow. I'm working here part time while I study to be a doctor.").also { stage++ }
+		4 -> npcl("Do you want to use the balloon?").also { stage++ }
+		5 -> options("Yes.", "No.").also { stage++ }
+		6 -> when(buttonId) {
+			1 -> playerl("Yes.").also { stage = END_DIALOGUE }
+			2 -> playerl("No.").also { stage = END_DIALOGUE }
+			}
+}
+
+
+
+

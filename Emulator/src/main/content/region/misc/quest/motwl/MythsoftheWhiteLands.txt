@@ -1,0 +1,61 @@
+/*package content.region.miscquest.motwl
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.plugin.Initializable
+
+@Initializable
+class MythsoftheWhiteLands :
+    Quest("Myths of the White Lands", 163, 162, 2, Vars.VARBIT_QUEST_MYTHS_OF_THE_WHITE_LANDS_5733, 0, 1, 60) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 12
+        player ?: return
+        if (stage == 0) {
+            line(player, "This quest is available to free players during !!Christmas??,", line++)
+            line(player, "after which it will become members-only.", line++)
+            line++
+            line(player, "I can start this quest by talking to !!Exlorer Jack?? in", line++)
+            line(player, "!!Lumbridge??.", line++)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.STONES_14597, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "500 xp reward lamp", ln++)
+        addItemOrDrop(player, Items.ANTIQUE_LAMP_4447, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_MYTHS_OF_THE_WHITE_LANDS_5733, 60, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+
+//Journal 14597 | Received 14598 enchanted
+//2 quest points (or 1; depending on whether you finished Sheep Shearer/Witch's Potion before their demotion to miniquest)
+//Antique lamp (500 experience)
+//5,000 coins (if you talk to Jack after logging out or speaking to Explorer Jack later on)
+//Access to Land of Snow
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+//Additional rewards/activities
+//2,000 Crafting experience lamp (requiring level 30 Crafting: Second cavern (see above))
+//10,000 Agility experience lamp (requiring level 55 Agility: Fourth cavern (see above))
+//20,000 Woodcutting experience lamp (requiring level 80 Woodcutting: Sixth cavern (see above))
+
+ */

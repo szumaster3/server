@@ -1,0 +1,238 @@
+Heroes' Quest (June 13, 2008)
+Sources: https://www.youtube.com/watch?v=rEzuCix51aM
+
+Talk to Achietties
+
+Achietties: "Greetings. Welcome to the Heroes' Guild."
+Achietties: "Only the greatest heroes of this land may gain entrance to this guild."
+
+Select an Option
+	"I am a hero, may I apply to join?"
+		Player: "I am a hero - may I apply to join?"
+		Achietties: "Well, you have a lot of quest points, and you have done all of the required quests, so you may not begin the tasks to meet the entry requirements for membership in the Heroes' Guild. The three items required"
+		Achietties: "for entrance are: An Entranan Firebird feather, a Master Theives' armband, and a cooked Lava Eel."
+		
+		Select an Option
+			"Any hints on getting the armband?"
+				Player: "Any hints on getting the thieves armband?"
+				Achietties: "I'm sure you have relevant contacts to find out about that."
+				<end of dialogue>
+			"Any hints on getting the feather?"
+				Player: "Any hints on getting the feather?"
+				Achietties: "Not really - other than Entranan firebirds tend to live on Entrana."
+				<end of dialogue>
+			"Any hints on getting the eel?"
+				Player: "Any hints on getting the eel?"
+				Achietties: "Maybe go and find someone who knows a lot about fishing?"
+				<end of dialogue>
+			"I'll start looking for all those things then.
+	"Good for the foremost heroes of the land."
+	
+Talk to Gerrant the fishing dude
+
+Gerrant: "Welcome! You can buy fishing equipment at my store. We'll also buy anything you catch off you."
+
+Select an Option
+	"Let's see what you've got then."
+	"Sorry, I'm not interested."
+	"I want to find out how to catch a lava eel."
+		Player: "I want to find out how to catch a lava eel."
+		Gerrant: "Lava eels eh? That's a tricky one that is, you'll need a lava-proof fishing line. The method for making this would be to take an ordinary fishing rod, and then cover it with the fire-proof Blamish Oil."
+		Gerrant: "You know... thinking about it... I may have a jar of Blamish Slime around here somewhere... Now where did I put it?"
+		"Gerrant searches around a bit."
+		Gerrant: "Aha! Here it is! Take this slime, mix it with some Harralander and water and you'll have the Blamish Oil you need for treating your fishing rod."
+		<end of dialogue, quest progresses>
+Then go find you eel or whatever.
+
+
+For the thieves armband, you'll need to work with someone in the opposite gang.
+
+For those in Phoenix:
+	Talk to Straven from Phoenix Gang
+	Player: "How would I go about getting a Master Thief armband?"
+	Straven: "Ooh... tricky stuff. Took me YEARS to get that rank."
+	Straven: "Well, what some of the more aspiring thieves in our gang are working on right now is to steal some very valuable candlesticks from Scarface Pete - the pirate leader on Karamja."
+	Straven: "His security is excellent, and the target very valuable so that might be enough to get you the rank."
+	Straven: "Go talk to our man Alfonse, the waiter in the Shrimp and Parrot."
+	Straven: "Use the secret word 'gherkin' to show you're one of us."
+	<end of dialogue, quest progresses>
+	
+	Talk to Alphonse.
+	Player: "Do you sell Gherkins?"
+	Alfonse the waiter: "Hmmmm Gherkins eh? Ask Charlie the cook, round the back. He may have some gherkins for you!"
+	"Alfonse winks at you."
+	<end of dialogue>
+	
+	Talk to Charlie the cook.
+	Charlie the cook: "Hey! What are you doing back here?"
+	
+	Select an Option
+		"I'm just looking for a gherkin..."
+			Player: "I'm just looking for a gherkin..."
+			Charlie the cook: "Aaaaaah... a fellow Phoenix! So, tell me compadre... what brings you to sunny Brimhaven?"
+			
+			Select an Option
+				"Sun, sand and the fresh sea air!
+				"I want to steal Scarface Pete's candlesticks."
+					Player: "I want to steal Scarface Pete's candlesticks."
+					Charlie the cook: "Ah yes, of course. The candlesticks. Well, I have to be honest with you compadre, we haven't made much progress in that task ourselves so far. We can however offer"
+					Charlie the cook: "a little assistance. The setting up of this restaurant was the start of things; we have a secret door out the back of here that leads through the back of Mr Olbors' garden."
+					Charlie the cook: "Now, at the other side of Mr Olbors' garden is an old side entrance to Scarface Pete's mansion. It seems to have been blocked off from the rest of the mansion years ago"
+					Charlie the cook: "and we can't seem to find a way through. We're positiv this is the key to entering the house undetected however, and I promise to let you know if we find anything there."
+					Player: "Mind if I check it out for myself?"
+					Charlie the cook: "Not at all! The more minds we have working on the problem, the quicker we get that loot!"
+					<end of dialogue, quest progresses>
+
+			
+		"I'm a fellow member of the Phoenix gang."
+		"Just exploring..."
+						
+	Get misc. key from other gang member player dude guy. Or dudette and gal.
+				
+	Then kill the guy, get the candlestick from the partner.
+		
+	
+For those in Black Arms: 
+
+	Talk to Katrine
+	
+	Player: "Hey."
+	Katrine: "Hey."
+	
+	Select an Option
+		
+		"Who are all those people in there?"
+		"Is there any way I can get the rank of master thief?"
+			Player: "Is there any way I can get the rank of master thief?"
+			Katrine: "Master thief? Ain't we the ambitious one!"
+			Katrine: "Well, you're gonna have to do something pretty amazing."
+			Player: "Anything you can suggest?"
+			Katrine: "Well, some of the MOST coveted prizes in thiefdom right now are in the pirate town of Brimhaven on Karamja."
+			Katrine: "The pirate leader Scarface Pete has a pair of extremely valuable candlesticks."
+			Katrine: "His security is VERY good."
+			Katrine: "We, of course, have gang membesr in a town like Brimhaven who may be able to help you."
+			Katrine: "Visit our hideout in the alleyway on palm street."
+			Katrine: "To get in you will need to tell them the secret password 'four leafed clover'."
+			<end of dialogue, quest progresses>
+
+	Talk to Grubor, in the 'odd shaped house'.
+	
+	Grubor: "Yes? What do you want?"
+	
+	Select an Option
+		"Rabbit's foot."
+		"Four leafed clover."
+			Player: "Four leafed clover."
+			Grubor: "Of, you're one of the gang are you? Ok, hold up a second, I'll just let you in through here."
+			"You hear the door being unbarred from inside."
+			<end of dialogue, quest progresses, door unlocks>
+		"Lucky horseshoe"
+		"Black cat."
+		
+	Talk to Trobert.
+	
+	Trobert: "Welcome to our Brimhaven headquarters. I'm Trobert and I'm in charge here."
+	
+	Select an Option
+		"So can you help me get Scarface Pete's candlesticks?"
+			Player: "So can you help me get Scarface Pete's candlesticks?"
+			Trobert: "Well, we have made some progress there. We know that one of the only keys to Pete's treasure room is carried by Grip, the head guard, so we thought it might be good to get close to him somehow."
+			Trobert: "Grip was taking on a new deputy called Hartigen, an Asgarnian Black Knight who was deserting the Black Knight Fortress and seeking new employment here on Brimhaven."
+			Trobert: "We managed to waylay him on the journey here, and steal his I.D. papers. Now all we need is to find somebody willing to impersonate him and take the deputy role to get that key for us."
+			
+			Select an Option
+				"I volunteer to undertake that mission!"
+					Player: "I volunteer to undertake that mission!"
+					Trobert: "Good good. Well, Here's the I.D. papers, take then and introduce yourself to the guards at Scarface Pete's mansion, we'll have that treasure in no time." (Fix the errors yourself if you want)
+					<end dialogue, quest progresses>
+					
+				"Well, good luck then."
+		"Pleased to meet you."
+	
+	Talk to Garv, who is guiding that door you gotta go through
+	
+	If not wearing the right outfit: 
+	
+	Garv: "Oi! Where do you think you're going pal?"
+	Player: "Hi. I'm Hartigen. I've come to work here."
+	Garv: "Hartigen the Black Knight? I don't think so. He doesn't dress like that."
+	<end of dialogue>
+	
+	Else: 
+	
+	Garv: "Oi! Where do you think you're going pal?"
+	Player: "Hi. I'm Hartigen. I've come to work here."
+	Garv: "I assume you have your I.D. papers then?"
+	Garv: "You'd better come in then. Grip will want to talk to you."
+	<end of dialogue, quest progresses, door unlocks>
+	
+	If you attempt to attack Grip:
+		Player: "I can't attack the head guard here! There are too many witnesses around to see me do it! I'd have the whole of Brimhaven after me! Besides, if he does I want the promotion!"
+		<end of dialogue>
+	
+	Talk to Grip
+	
+	Player: "Hi there. I am Hartigen. reporting for duty as your new deputy sir!" (Fix errors if you want)
+	Grip: "Ah good, at least. You took your time getting here! Now let me see..."
+	Grip: "I'll get your hours and duty roster sorted out in a while. Oh, and do you have your I.D. papers with you? Internal security is almost as important as external security for a guard."
+	Player: "Right here sir!"
+	"You hand the ID papers over to Grip."
+	
+	Select an Option
+		"So can I guard the treasure room please?
+		"So what do my duties involve?"
+			Player: "So what do my duties involve?"
+			Grip: "You'll have various guard related duties on various shifts. I'll assign specific duties as they are as they are required as and when they become necessary. Just so you know, if anything happens to me"
+			Grip: "you'll need to take over as head guard here. You'll find important keys to the treasure room and Pete's quarters inside my jacket - although I doubt anything bad's going to happen to"
+			Grip: "me anytime soon!"
+			"Grip laughs to himself at the thought.
+		"Well, I'd better sort my new room out."
+		"Anything I can do now?" (After you choose the second option)
+			Player: "Anything I can do now?"
+			Grip: "Hmm. Well, you could find out what this key opens for me. Apparently it's for something in this building, but for the life of me I can't find what."
+			"Grip hands you a key."
+			<end of dialogue, quest progresses>
+		
+	
+	Give that key to the phoenix gang guy you're working with. They will kill Grip for you. Get his key ring.
+		
+			
+	If you attempt to open the cupboard in Grip's room:
+	Pirate Guard: "I don't think Mr Grip will like you opening that. That's his private drinks cabinet."
+	
+	Select an Option: 
+		"He won't notice me having a quick look."
+			Violence ensues. <end of dialogue>
+		"Ok, I'll leave it."
+		
+	Your buddy kills Grip, loot key ring. Use that to open the chests.
+	"You find two candlesticks in the chest. So that will be one for you, and one for the person who killed Grip for you."
+	Give a candle to the guy who helped you.
+	
+	Talk to Katrine
+	
+	Select an Option
+		"Who are all those people in there?"
+		"I have a candlestick now."
+			Player: "I have a candlestick now!"
+			Katrine: "Wow.... is... it REALLY it?"
+			Katrine: "This really is a FINE bit of thievery."
+			Katrine: "Us thieves have been trying to get hold of this one for a while!"
+			Katrine: "You wanted to be ranked as a master thief didn't you? Well, I guess this just about ranks as good enough!"
+			"Katrine gives you a master thief armband."
+			<end of dialogue>
+			
+
+
+Bring all the goodies to Achietties.
+
+	Achietties: "Greetings. Welcome to the Heroes' Guild."
+	Achietties: "How goes thy quest adventurer?"
+	Player: "I have all the required items."
+	Achietties: "I see that you have. Well done; Now, to complete your quest, and gain entry to the Heroes' Guild in your final task all that you have to do is..."
+	Player: "W-what? What do you mean? There's MORE???"
+	Achietties: "I'm sorry, I was just having a little fun with you. Just a little Heroes' Guild humour there. What I really meant was"
+	Achietties: "Congratulations! You have completed the Heroes' Guild entry requirements! You will find the door now open for you! Enter, Hero! And take this reward!"
+
+
+Aaaanad that's all folks.

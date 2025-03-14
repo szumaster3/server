@@ -1,0 +1,91 @@
+/*package content.kingdom.desert.quest.member.enakh
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.hasLevelStat
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class EnakhrasLament : Quest("Enakhra's Lament", 54, 53, 2, Vars.VARBIT_QUEST_ENAKHRAS_LAMENT_1560, 0, 1, 70) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!a man called Lazim?? in", line++, false)
+            line(player, "!the desert south of the Bandit Camp.?? To complete the", line++, false)
+            line(player, "quest I need the following:", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.CRAFTING, 50)) "---Level 50 Crafting/--" else "!!Level 50 Crafting??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.FIREMAKING,
+                        45
+                    )
+                ) "---Level 45 Firemaking/--" else "!!Level 45 Firemaking??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.PRAYER, 43)) "---Level 43 Prayer/--" else "!!Level 43 Prayer??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.MAGIC, 39)) "---Level 39 Magic/--" else "!!Level 39 Magic??",
+                line++
+            )
+            line(player, "Willingness to think litterally and solve puzzles.", line++, false)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.CAMULET_6707, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "7,000 Crafting XP", ln++)
+        drawReward(player, "7,000 Mining XP", ln++)
+        drawReward(player, "7,000 Firemaking XP", ln++)
+        drawReward(player, "7,000 Magic XP", ln++)
+        rewardXP(player, Skills.CRAFTING, 7000.0)
+        rewardXP(player, Skills.MINING, 7000.0)
+        rewardXP(player, Skills.FIREMAKING, 7000.0)
+        rewardXP(player, Skills.MAGIC, 7000.0)
+        addItemOrDrop(player, Items.CAMULET_6707)
+        addItemOrDrop(player, Items.CAMEL_MASK_7003)
+        setVarbit(player, Vars.VARBIT_QUEST_ENAKHRAS_LAMENT_1560, 70, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//7,000 Crafting experience
+//7,000 Mining experience
+//7,000 Firemaking experience
+//7,000 Magic experience
+//A camulet, which allows you to talk to camels and teleport to the temple four times; it can be recharged by using camel dung on it.
+//Camel mask (use a piece of soft clay on the pedestal with the globes on it to make one)
+*/

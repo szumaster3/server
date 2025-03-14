@@ -1,0 +1,72 @@
+/*package content.kingdom.karamja.quest.tbwt
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TaiBwoWannaiTrio : Quest("Tai Bwo Wannai Trio", 118, 117, 2, Vars.VARP_QUEST_TAI_BWO_WANNAI_TRIO_320, 0, 1, 6) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.COINS_995, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "1,500 Fishing XP", ln++)
+        drawReward(player, "10,000 Prayer XP", ln++)
+        drawReward(player, "10,000 Fishing XP", ln++)
+        drawReward(player, "2,000 Coins", ln++)
+        rewardXP(player, Skills.FISHING, 1500.0)
+        addItemOrDrop(player, Items.COINS_995, 2000)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//2,000 coins
+//1,500 Fishing experience when obtaining a karambwan vessel for the first time from Lubufu.
+//Ability to fight the Shaikahan (level 70)
+//Ability to take part in the smithing section of Otto's Barbarian training.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+//Additional rewards/activities
+//The three brothers can be found in the three small huts along the southern wall of Tai Bwo Wannai after the quest is completed. Each of them will give the player additional quest rewards.
+//
+//Tamayu gives the following rewards when spoken to:
+//
+//2,500 Attack experience
+//2,500 Strength experience
+//A rune spear (kp) (due to poisoned weapon update, you should use a cleaning cloth (sold by Tamayu) to revert it to a wieldable, tradeable rune spear)
+//Access to Tamayu's Spear Stall (also sells cleaning cloths)
+//Tinsay gives the following rewards when spoken to:
+//
+//5,000 Cooking experience
+//Ability to pray at the newly repaired tribal statue (works like a regular altar and is just east of Timfraku's hut - not marked on the map)
+//Ability to properly make marinated jogre bones
+//Tiadeche gives the following rewards when spoken to:
+//
+//5,000 Fishing experience
+//Ability to catch and cook karambwan and karambwanji
+//Access to Tiadeche's Karambwan Stall which sells raw karambwan and karambwan vessels
+
+ */

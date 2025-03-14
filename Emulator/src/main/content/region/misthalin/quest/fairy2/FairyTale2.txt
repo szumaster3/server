@@ -1,0 +1,55 @@
+/*package content.kingdom.misthalin.quest.member.fairy2
+
+import org.rs.consts.Vars
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class FairyTale2 :
+    Quest("Fairytale II - Cure a Queen", 58, 57, 2, Vars.VARBIT_QUEST_FAIRY_TALE_II_CURE_A_QUEEN_2326, 0, 1, 81) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "!!Martin's?? crops have had plenty of time to grow.", line++, false)
+            line(player, "I should go back and speak to him.", line++, false)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.MAGIC_SECATEURS_7409, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "3,500 Herblore XP", ln++)
+        drawReward(player, "2,500 Thieving XP", ln++)
+        rewardXP(player, Skills.HERBLORE, 3500.0)
+        rewardXP(player, Skills.THIEVING, 2500.0)
+        setVarbit(player, Vars.VARBIT_QUEST_FAIRY_TALE_II_CURE_A_QUEEN_2326, 81, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 Quest points
+//Herblore 3,500  experience
+//Thieving 2,500  experience
+//An antique lamp granting 2,500 experience in any skill over level 30
+//Access to the fairy rings network
+//Access to Fairy Fixit's Fairy Enchantment shop
+//Note: There are six Medium Achievement Diary values() requiring travel to a fairy ring which can be completed once fairy rings are unlocked: als (Kandarin); air and bis (Ardougne); cip (Fremennik); dis (Lumbridge & Draynor); cir (Kourend & Kebos)
+*/

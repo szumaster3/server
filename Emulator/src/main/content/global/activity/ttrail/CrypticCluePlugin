@@ -1,0 +1,62 @@
+package content.global.activity.ttrail
+
+import core.game.world.map.Location
+import core.plugin.Plugin
+
+class CrypticCluePlugin : CrypticClueScroll {
+    constructor() : super(null, -1, null, null, null, null,null)
+
+    constructor(name: String, clueId: Int, boolean: Boolean, location: Location, string: String) : super(
+        name,
+        clueId,
+        ClueLevel.EASY,
+        1,
+        Location.create(0, 0, 0),
+        "",
+        1
+    )
+    
+    override fun newInstance(arg: Any): Plugin<Any>? {
+        register(CrypticCluePlugin("wilderness-sapphire", 0, false, Location(0, 0, 0), "46 is my number, my body is the colour of burnt orange and crawls among those with eight. Three mouths I have, yet I cannot eat. My blinking blue eye hides my grave."))
+        register(CrypticCluePlugin("abbot-langley", 0, false, Location(0, 0, 0), "'A bag belt only?' he asked his balding brothers"))
+        register(CrypticCluePlugin("east-ardougne-crate", 0, false, Location(0, 0, 0), "A crate found in the tower of a church is your next stop."))
+        register(CrypticCluePlugin("oziac-armor-seller", 0, true, Location(0, 0, 0), "A strange little man who sells armour only to those who've proven themselves to be unafraid of dragons."))
+        register(CrypticCluePlugin("aggie-house-draynor", 0, false, Location(0, 0, 0), "Aggie I see, Lonely and southern I feel, I am neither inside nor outside the house, yet no house would be complete without me. The treasure lies beneath me!"))
+        register(CrypticCluePlugin("almera-house", 0, false, Location(0, 0, 0), "A great view - watch the rapidly drying hides get splashed. Check the box you are sitting on."))
+        register(CrypticCluePlugin("canifis-clothes-shop", 0, false, Location(0, 0, 0), "A town with a different sort of night-life is your destination. Search for some crates in one of the houses."))
+        register(CrypticCluePlugin("etceteria-evergreen", 0, false, Location(0, 0, 0), "And so on, and so on, and so on. Walking from the land of many unimportant things leads to a choice of paths."))
+        register(CrypticCluePlugin("zanaris-forge", 0, false, Location(0, 0, 0), "After a hard slays spraying back the vegetation, why not pop off to the nearby forge and search the crates?"))
+        register(CrypticCluePlugin("port-khazard-anvil", 0, false, Location(0, 0, 0), "After trawling for bars, go to the nearest place and smith them and dig by the door."))
+        register(CrypticCluePlugin("nardah-flying-rug", 0, false, Location(0, 0, 0), "As you desert this town, keep an eye out for a set of spines that could ruin nearby rugs: dig carefully around the greenery"))
+        register(CrypticCluePlugin("west-ardougne-prison", 0, false, Location(0, 0, 0), "Being this far north has meant that these crates have escaped being battled over."))
+        register(CrypticCluePlugin("sandstone-granite-quarry", 0, false, Location(0, 0, 0), "Brush off the sand and dig in the quarry. There is a wheely handy barrow to the east. Don't worry, it's coal to dig there—in fact, it's all oclay."))
+        register(CrypticCluePlugin("port-phasmatys-tree", 0, false, Location(0, 0, 0), "By the town of the dead, walk south down a rickety bridge, then dig near the slime-covered tree."))
+        register(CrypticCluePlugin("citric-cellar", 0, true, Location(0, 0, 0), "Citric Cellar"))
+        register(CrypticCluePlugin("edgeville-yew-tree", 0, false, Location(0, 0, 0), "Come to the evil ledge, Yew know yew want to, And try not to get stung."))
+        register(CrypticCluePlugin("mortton-circle-shadows", 0, false, Location(0, 0, 0), "Covered in shadows, the centre of the circle is where you will find the answer."))
+        register(CrypticCluePlugin("pollnivneach-well", 0, false, Location(0, 0, 0), "Dig here if you aren't feeling too well after travelling through the desert. Ali heartily recommends it."))
+        register(CrypticCluePlugin("mudskipper-point", 0, false, Location(0, 0, 0), "Don't skip here, it's too muddy. You'll feel like a star if you dig here, though."))
+        register(CrypticCluePlugin("baxtorian-falls-hay", 0, false, Location(0, 0, 0), "Hay! Stop for a bit and admire the scenery, just like the tourism promoter says."))
+        register(CrypticCluePlugin("blue-moon-inn", 0, true, Location(0, 0, 0), "Find a bar with a centre fountain in its city. Go upstairs and get changed."))
+        register(CrypticCluePlugin("monastery-monks", 0, false, Location(0, 0, 0), "Find a crate close to the monks that like to paaarty!"))
+        register(CrypticCluePlugin("mage-training-bookcase", 0, false, Location(0, 0, 0), "For any aspiring mage, I'm sure searching this bookcase will be a rewarding experience."))
+        register(CrypticCluePlugin("lumbridge-windmill", 0, false, Location(0, 0, 0), "Four blades I have yet I draw no blood. But I mash and turn my victims to powder. Search in my head, search in my rafters, Where my blades are louder."))
+        register(CrypticCluePlugin("general-bentnoze", 0, true, Location(0, 0, 0), "Generally speaking, his nose was very bent"))
+        register(CrypticCluePlugin("dunstan-burthorpe", 0, true, Location(0, 0, 0), "Go to the village being attacked by trolls, search the drawers while you are there."))
+        register(CrypticCluePlugin("lighthouse-drawers", 0, true, Location(0, 0, 0), "Go to this building to be illuminated, and search the drawers while you're there."))
+        register(CrypticCluePlugin("lumbridge-castle-spinning-wheel", 0, false, Location(0, 0, 0), "My home is grey and made of stone, A castle with a search for a meal, Hidden in some drawers I am, Across from a wooden wheel."))
+        register(CrypticCluePlugin("tai-bwo-wannai-crates", 0, false, Location(0, 0, 0), "In a village made of bamboo look for some crates under one of the houses."))
+        register(CrypticCluePlugin("dungeon-chest", 0, false, Location(0, 0, 0), "This temple is rather sluggish. The chest just inside the entrance, however, is filled with goodies."))
+        register(CrypticCluePlugin("shilo-village-bookcase", 0, false, Location(0, 0, 0), "This village has a problem with cartloads of the undead. Try checking the bookcase to find the answer."))
+        register(CrypticCluePlugin("necromancer-tower", 0, false, Location(0, 0, 0), "Throat mage seeks companionship. Seek answers inside my furniture if interested."))
+        register(CrypticCluePlugin("fishing-platform-crate", 0, false, Location(0, 0, 0), "Try not to step on the crates that dot this platform."))
+        register(CrypticCluePlugin("elemental-workshop-crates", 0, false, Location(0, 0, 0), "You have all of the elements available to solve this clue. Fortunately you do not have to go so far as to stand in a draft."))
+        register(CrypticCluePlugin("varrock-chest", 0, false, Location(0, 0, 0), "You'll need to look for a town with a central fountain. Look for a locked chest in the town's chapel."))
+        register(CrypticCluePlugin("lumbridge-crates", 0, false, Location(0, 0, 0), "You will need to under-cook to solve this one."))
+        register(CrypticCluePlugin("braine-death-island-lake", 0, false, Location(0, 0, 0), "You will need to wash the old ash off of your spade when you dig here, but the only water nearby is stagnant."))
+        register(CrypticCluePlugin("digsite-doug-deep", 0, false, Location(0, 0, 0), "You'll need to have Doug Deep into the distant past to get to these sacks."))
+        register(CrypticCluePlugin("captain-klemfoodle", 0, false, Location(0, 0, 0), "You can cook food on me, but don't cook any foodles - That would be just wrong."))
+        register(CrypticCluePlugin("lubufu-brimhaven", 0, false, Location(0, 0, 0), "The owner of this crate has a hunch that he put more than fish inside."))
+        return null
+    }
+}

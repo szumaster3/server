@@ -1,0 +1,33 @@
+package content.global.activity.ttrails.scroll
+/*
+import org.rs.consts.Components
+import org.rs.consts.Items
+import core.api.openInterface
+import core.api.setInterfaceText
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+
+class ChallengeScroll : InteractionListener {
+
+    val scroll = Components.TRAIL_MAP09_345
+    private val gnomeCoachQuestion = arrayOf("<br><br><br><br><br> How many gnomes on the", "gnome ball field", "have red patches on", "their uniforms?")
+
+    override fun defineListeners() {
+
+        on(Items.CHALLENGE_SCROLL_7283, IntType.ITEM, "read") { player, _ ->
+
+            openInterface(player, scroll).also {
+                for (i in 1..8) {
+                    setInterfaceText(player,"", scroll, i)
+                }
+                setInterfaceText(player, "$gnomeCoachQuestion", scroll, 1)
+            }
+            return@on true
+        }
+    }
+
+    companion object {
+        val challengeClues = intArrayOf()
+    }
+}
+*/

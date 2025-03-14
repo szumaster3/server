@@ -1,0 +1,176 @@
+Fairytale II - Cure a Queen (January 19, 2009)
+Sources: https://www.youtube.com/watch?v=MhjGZbfjtu8
+
+Talk to Martin the Master Gardener to start quest
+
+What would you like to ask about?
+	
+	"Skillcape of Farming."
+	"Quest."
+		Player: "Hello Martin, you must be the slowest gardener in the world! I don't suppose those crops have grown yet?"
+		Martin the Master Gardener: "Well, you've got a nerve showing up around here again!"
+		Player: "What? What are you talking about?"
+		Martin the Master Gardener: "You told me that you'd solved the problems of the Gardening Group's members, well, I've planted loads of seeds since then and there's no doubt that even more plants are dying."
+		Player: "But I gave the Fairy Queen's secateurs back to the Godfather, things should be growing again."
+		Martin the Master Gardener: "Yah, sure, whatever. You know, I didn't believe you when you told me the story about 'the fairies' in the first place. You'd better solve this problem, when people get hundred, they get angry and you're the"
+		Martin the Master Gardener: "person who said that everything would be all right, so you're thep erson who they'll get angry with!"
+		
+		Select an Option
+			"I suppose I'd better go and see what the problem is then."
+				Player: "I suppose I'd better go and see what the problem is then."
+				<end of dialogue, quest progresses>
+			"I've done enough for you, sort it out yourself!"
+				
+Go to Fairy Nuff's place.
+
+Player: "Wow! Somebody has trashed this cave! And what's happened to Fairy Nuff and the Fairy Queen?"
+<end dialogue, quest progresses>
+Loot the place, then go talk to the godfatha
+
+Select an Option
+	"Where is the Fairy Queen?"
+		Player: "Godfather! Where is the Fairy Queen?"
+		Fairy Godfather: "Whata are you-a talking about?"
+		Player: "I've just been to Fairy Nuff's cave and when I got there I found it ransacked! Everything had been broken and the Fairy Queen and Fairy Nuff are missing!"
+		Fairy Godfather: "Essere nel panico! You-a say datta da Queen Bee, she izza meesing? Theez izza terreeble! Who could-a have done such a theeng? We musta find her! I weel organize a search-a party right-a-way!"
+		Player: "Calm down1 Let's think this through carefully." 
+		
+		Select an Option
+			"Do you have any idea who could have done this?"
+				Player: "Do you have any idea who could have done this?"
+				Fairy Godfather: "Errm...no! None atta all! Da Queen Bee, she izza well liked by-a everyone."
+				Player: "That's not very helpful."
+				<choosing either option results in the other being next>
+			"Where could she have been taken to?"
+				Player: "Where could she have been taken to?"
+				Fairy Godfather: "Ze keednapper must-a have taken her through-a da fairyreengs. Dey weel-a be long gone by-a now."
+				Player: "We must go after them!"
+				Fairy Godfather: "Yes! We must-a, but most-a da folk are away from Zanaris atta da momento."
+				Player: "Well tell me what to do and I'll go myself."
+				Fairy Godfather: "Ye-es, dat izza good idea. Hokay, you may use-a da fairyreengs. Talk-a to da co-ordinator, she will-a explain-a to you how to use-a da reengs, but you must-a promees me dat you weel come-a back-a here, eef you"
+				Fairy Godfather: "find-a her. Whoever keednapped her must-a been bery powerful. You find-a da Queen Bee and den-a yous come right back here and we will-a rescure her together. Hokay?"
+				
+				Select an Option
+					
+					"Yes, okay."
+						Player: "Yes, okay."
+						Fairy Godfather: "Good. Now-a yous talk-a to da co-ordinator. She will-a tell you how-a da fairyreengs work."
+						<end of dialogue, quest progresses>
+					"No, I'll rescue her myself."
+						
+	"Where have all the fairies gone?
+	"Show the Godfather the Certificate!"
+	
+Talk to the Co-ordinator.
+
+What do you want to ask about?
+
+	"Fairy Nuff's cerificate."
+		"You show the certificate to the co-ordinator."
+		Player: "Do you know what these strange marks mean?"
+		Co-ordinator: "They look familiar, but I can't think where I've seen marks like that. Try asking around, and maybe somebody else will recognise them."
+		<end of dialogue>
+	"The fairy rings"
+		Player: "Hi, the Godfather said I should ask you to explain how the fairy rings work."
+		Co-ordinator: "Goodness! As if I don't have enough to do already without giving every adventurer that comes along a history lesson! Let's get this over with quickly. Zanaris is an extremely old place, it was here long before we"
+		Co-ordinator: "fairyfolk came to live here. In fact it is rumoured that to be the nexus of all planes. When we arrived here we found many of the magical properties of this place to be dormant. One of these was the ability to jump between"
+		Co-ordinator: "planes using a powerful portal that had been sealed for centuries. The Fairy Queen harnessed that magic and created the fairy rings, these are not as powerful as the original poweral would have been, but very effective"
+		Co-ordinator: "nonetheless. There are 3 fairy rings in Zanaris, the one in the market and the one near the evil chicken's shrine will only take users to one specific place. However the third fairy ring, near the fountains, is a major portal."
+		Co-ordinator: "Anybody who activates that fairy ring will find themselves able to dial in a 3 digit code. These codes will all take the user to different locations. Some of the codes no longer work and other codes go to extremely"
+		Co-ordinator: "dangerous places, so be careful. Fortunately the fairy rings are imbued with a powerful protective magic and as long as you stand in the middle of them nothing will be able to attack you. Remember, because you are a"
+		Co-ordinator: "human, you will need to be holding your dramen staff to activate the rings. Now I must get back to work, there is so much left to do and so few fairies left to do it."
+		<end of dialogue, quest progresses>
+Talk to the Fairy Chef
+"You show the certificate to the Fairy chef."
+Player: "Do you know what these strange marks mean?"
+Fairy Chef: "Sorry dearie, no, but I have seen a sign with similar marks near the mysterious ruins. You know, the ones that lead you to the Cosmic Rune Altar."
+<end of dialogue, quest progresses>
+
+Talk to Fairy Fixit
+Player: "Why are you carrying that toolbox?"
+Fairy Fixit: "It's the fizgog! It's picking up cable again!"
+Player: "Uh, right. So is it safe to use the fairy rings then?"
+Fairy Fixit: "Sure, as long as you have been given permission to use them. You should just be aware that using fairy rings sometimes has strange results, the locations that you have been to may affect the locations you are"
+Fairy Fixit: "trying to reach. I could fix it by replacing the fizgog and the whosprangit, I've put in a request for some new parts but they're pretty hard to get hold of, it seems."
+<end of dialogue, quest progresses>
+
+Use various signs lying around as hints to decrypt the note on the certificate to get the combination for the rings.
+
+Talk to Fairy Nuff
+
+Fairy Nuff: "<playername>! You found us! I'm so glad. I was afraid you wouldn't get my message."
+Player: "Fairy Nuff, what happened?"
+Fairy Nuff: "After you brought the Queen's enchanted secateurs and gave them to the Fairy Godfather, I went to him to ask for them so I could wake Her Majesty up, but he refused to give them to me. Then I"
+Fairy Nuff: "noticed that lots of my friends were missing, when I asked him about them he said they were off working for him and then he threatened to have his bodyguards pull my wings off! I was scared for the Queen, and so I"
+Fairy Nuff: "moved her here."
+Fairy Nuff: "When I returned to Zanaris I found my cave ransacked! There were other fairies that had been attacked by the Godfather and we we fled the city and came hee. I managed to hide a note that I hoped you"
+Fairy Nuff: "would find..."
+Fairy Nuff: "... obviously you did."
+Player: "But why would the Godfather do this?"
+Fairy Nuff: "Isn't it obvious? He wants to rule Zanaris instead of the Fairy Queen. The latest fairies to arrive have even reported that he has invited all sorts of monsters to the Lost City."
+Player: "So what should we do about it do you think?"
+<chat message> "You see a fairy approaching..."
+Fairy Very Wise: "I've got terrible news! One of our spies has just returned from Zanaris and reported that the Godfather has enlisted an army of orcs! Apparently they are wandering freely around our homes!"
+Player: "I'm sorry, but who are you?"
+Fairy Nuff: "Oh, how rude of me! <playername> this is Fairy Very Wise, advisor to the Queen. Fairy Very Wise, this is <playername>."
+Fairy Very Wise: "Oh, I've heard of you. You're the young adventurer that defeated the Tanglefoot."
+Player: "Yes, that's me."
+Fairy Very Wise: "So you're also the idiot who gave the Godfather maniac the Fairy Queen's magic secateurs!"
+Player: "But that was a mistake! I thought he was trying to help the Fairy Queen!"
+Fairy Very Wise: "So you're not evil, you're just not too bright. Well I'm glad you found this place, although if you can find it it's obviously not much of a hiding place, now you can help fix the dmaage that you've done."
+Player: "Alright, what do I need to do?"
+Fairy Very Wise: "The first thing we have to do is wake up the Fairy Queen. You will have to go back to Zanaris and find a way to get those magical secateurs back from the Godfather!"
+Player: "That's easy I'll just pickpocket them off of him, I'm really good at that."
+Fairy Very Wise: "Ok, just be careful, his henchmen have keen eyes and will be watching out for him."
+<end of dialogue, quest progresses>
+
+Pickpocket the secateurs off the godfatha
+If you walk to Fairy Very Wise:
+Fairy Very Wise: "I'm so worried about the Queen, without her the fairy people may be chased out of RuneScape completely! You must wake her, for all our sakes!"
+Go back and talk to Fairy Nuff. 
+Fairy Nuff: "Oh, <playername>, you're back! I'm so glad. Did you manage to get the secateurs?"
+Player: "You should have seen me! The Godfather didn't even know I was going through his pockets! Here they are."
+Fairy Nuff: "Fantastic! Let's just hope that it's not too late..."
+"You hand fairy Nuff the Queen's enchanted secateurs."
+Fairy Nuff: "Oh no! It didn't work! She's been asleep too long!"
+Player: "Calm down. There's got to be something we can do. After all, we've given her back het magical essence, right?"
+Fairy Nuff: "Yes, we have. There is one small chance that we might be able to wake her up still, but I'd need a potion of Magic Essence."
+Player: "Well that doesn't seem to bad, what do I need to do to make one?"
+Fairy Nuff: "A potion of magic essence is made in the same way as any other potion, first you mix a vial of water with a base herb, in this case a Star Flower. Star flowers are rich in magic essence and are excellent for curing"
+Fairy Nuff: "poisons and that's what the Queen is suffering from - a poisoning of her life essence. Then we need to add the catalyst ingredient; a powdered Gorak's claw. Goraks drain life from their prey, so by using one of their"
+Fairy Nuff: "claws we hare hoping to draw the Queen's life essence back."
+Player: "Thanks for the lecture, but where do I get one of those Star Flowers and where can I find a Gorak?"
+Fairy Nuff: "Star Flowers only grow on the higher planes and even there they are extremely difficult to find. You should be able to access some of the higher planes by using the fairy rings. Goraks also live on a different plane. They"
+Fairy Nuff: "are viscious creatures that draw the life essence of any living thing they find. It seems that in drawing the life force from the world they they live on have trapped themselves on a small plane, as far as I am"
+Fairy Nuff: "aware, the only way onto or off their world is through the fairy rings."
+<end of dialogue, quest progresses>
+
+Once you get the stuff and make the essence, talk to Fairy Nuff. 
+Fairy Nuff: "Oh, <playername> that's fantastic! Please give it to Her Majesty immediately."
+<end of dialogue>
+Use it on the queen.
+Then she shall be healed.
+Talk to le queen.
+
+Fairy Queen: "...Urgh! Wh... what happened? ...Why do I feel so awful?"
+Fairy Nuff: "Your majesty! You're awake!"
+Fairy Queen: "Wh... what happened? The last thing I remember was confronting that Tanglefoot with the aid of the Godfather."
+Player: "THE GODFATHER?"
+Fairy Queen: "Yes, that's what I said... oh, hello <playername>. Please excuse me for not having noticed you earlier, I'm not quite feeling myself. Why did you should about the Godfather?"
+Player: "I'm not really sure how to tell you this, your majesty... It seems as though you've fallen foul of a clever scheme of the Godfather's..." (fallen afoul? Eh. British vs 'murican English)
+Fairy Queen: "That's absurd, why would the Godfather want to hurt me?"
+Fairy Very Wise: "I'm afraid it's true your majesty. You see nobody knew that the Godfather was with you when you fought the Tanglefoot..."
+Fairy Queen: "But that's the point, I didn't fight the Tanglefoot. We had only just entered its lair and sending danger to itself, the Tanglefoot fled down a passage, then... blackness."
+Fairy Very Wise: "Then your majesty, I think it may be worse than I imagined. I suspect the Fairy Godfather attacked you from behind and left you for dead. He has taken over control of Zanaris whilst you were... er, ...sleeping. He"
+Fairy Very Wise: "has enlisted the aid of orcs and other assorted ruffians, if any of your subjects dared to question him, they were assaulted. I very much suspect that if it wasn't for the quick thinking of Fair Nuff here, you would be"
+Fairy Very Wise: "dead! She fled here with you and as many of your loyal fairies as she could gather. Wer've been in hiding ever since, until this brave adventurer managed to awaken you."
+Fairy Queen: "I can't believe it!"
+Fairy Queen: "He shan't get away with this, how do I get back to Zanaris? The Godfather shall answer for his crimes!"
+Fairy Very Wise: "No! Stop your majesty!"
+Fairy Queen: "Why, old friend?"
+Fairy Very Wise: "The Godfather recruited an army of villains, whilst we just have the few fairies who escaped and although they would gladly follow you into battle, many are still wounded from their treatment at the tyrant's hands. I"
+Fairy Very Wise: "must counsel caution., lest this brave hero's efforts are all wasted and the godfather captures you. He won't let you survive a second time."
+Fairy Queen: "There is wisdom in what you say. I shall ponder your words before I act rashly. As for you, <playername>, how can I reward you? You have done the fairy people a great favour that shall not be forgotten. I'm afraid you"
+Fairy Queen: "find us in trying tiems, but please accept this magic lamp as a sign of our thanks."
+"The Fairy Queen gives you an XP lamp."
+<quest completed, boo-ya>

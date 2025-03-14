@@ -1,0 +1,52 @@
+/*package content.kingdom.kandarin.quest.handsand
+
+import org.rs.consts.Vars
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TheHandintheSand :
+    Quest("The Hand in the Sand", 72, 71, 1, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_1527, 0, 1, 160) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.PINK_DYE_6955, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "1,000 Thieving XP", ln++)
+        drawReward(player, "9,000 Crafting XP", ln++)
+        rewardXP(player, Skills.THIEVING, 1000.0)
+        rewardXP(player, Skills.CRAFTING, 9000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_1527, 160, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//1,000 Thieving experience
+//9,000 Crafting experience
+//Able to buy pink dye from Betty
+//Bert will ship 84 buckets of sand to your bank if you talk to him after the quest. This number is increased to 120 after completing the elite Ardougne Tasks. This can be done once per day. Clicking on the quest's name will give you the time left before you can ask him again.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+ */

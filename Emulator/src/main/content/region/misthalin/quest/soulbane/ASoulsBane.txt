@@ -1,0 +1,85 @@
+/*package content.kingdom.misthalin.quest.member.soulbane
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.plugin.Initializable
+
+@Initializable
+class ASoulsBane : Quest("A Soul's Bane", 115, 114, 1,Vars.VARBIT_QUEST_A_SOULS_BANE_2011,0,1,13) {
+
+    /*
+     * Description:
+     * Tolna was a young boy when he left his home in Varrock in search of a more exciting
+     * lif away from his parents. He travelled northeast of Varrock, but did not make it far.
+     * Shortly after leaving his home, Tolna discovered a strange crevice in the woods
+     * northeast of the city. As he moved closer to investigate, he fell in, where he would
+     * be imprisoned for the next twenty-five years. Tolna's emotions caused the rift to
+     * change. His emotions, which were mostly anger, confusion, fear, and hopelessness,
+     * were manifested in the caverns' chambers. Tolna descended further into madness and
+     * ultimately lost his humanity.
+     */
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line++
+            line(player, "I can start this quest by talking to !!Launa?? at the !!Rift<br><br>!!entrance north west of the dig site.", line++, false)
+        }
+        if (stage == 1) {
+            line(player, "I spoke with !!Launa?? next to the rift and she told me<br><br>about her lost !!Son.??", line++, false)
+        }
+        if (stage == 2) {
+            line(player, "I heard Tolna's voice say, 'Why should I, Tolna, be<br><br>trapped in such a wretched place? Feel my ANGER!'", line++, false)
+            line(player, "I beat the anger beasts in the rift.", line++, false)
+            line(player, "I heard Tolna's voice say, 'I'm trapped and it's so dark. I FEAR I may never escape this place. Mum, help me!'", line++, false)
+            line(player, "I defeated the fear beasts in the rift.", line++, false)
+            line(player, "I heard Tolna's voice say, 'Where am I? How long have I been here? Am I still the person I once was? I hate my CONFUSION'", line++, false)
+            line(player, "I conquered the beasts of confusion.", line++, false)
+            line(player, "I heard Tolna's voice say, 'What's the point? Why do I defy such HOPELESSNESS? No-one will ever help me.'", line++, false)
+            line(player, "I overcame the emotion of hopelessness.", line++, false)
+            line(player, "I've discovered the physical form of Tolna, and his father.", line++, false)
+            line(player, "I fought Tolna and he appears to have returned to his human form.", line++, false)
+            line(player, "Tolna has repented and returned to the entrance of the rift.", line++, false)
+            line(player, "Tolna has set up a dungeon to help others avoid his mistakes.", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.COINS_995, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "500 Coins", ln++)
+        //500 Defence experience lamp
+        //500 Constitution experience lamp
+        addItemOrDrop(player, Items.COINS_995, 500)
+        setVarbit(player, Vars.VARBIT_QUEST_A_SOULS_BANE_2011, 13, true)
+        setVarbit(player ,VARBIT_TOLNA_RIFT_WARNING_SIGN, 0)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//500 Defence experience lamp
+//500 Constitution experience lamp
+//500 coins
+//Access to the Tolna's rift for combat training
+//Anger Battleaxe, Maul, Spear and Sword overrides
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

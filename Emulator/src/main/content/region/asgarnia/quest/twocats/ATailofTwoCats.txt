@@ -1,0 +1,98 @@
+/*package content.region.miscquest.twocats
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.quest.isQuestComplete
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.plugin.Initializable
+
+@Initializable
+class ATailofTwoCats : Quest("A Tail of Two Cats", 119, 118, 2, Vars.VARBIT_QUEST_A_TAIL_OF_TWO_CATS_1028, 0, 1, 70) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!Unferth?? in his house in", line++, false)
+            line(player, "!!Burthope??. Burthope is north of the Heroes' Guild in the", line++, false)
+            line(player, "Kingdom of Asgarnia. To start this quest I need the", line++, false)
+            line(player, "following:", line++, false)
+            line(
+                player,
+                "!!Completed Icthlarin's Little Helper quest.??",
+                line++,
+                isQuestComplete(player, "Icthlarin's Little Helper")
+            )
+            line(player, "!!Completed Gertrude's Cat.??", line++, isQuestComplete(player, "Gertrude's Cat"))
+            line(player, "!!A cat or kitten from Gertrude in Varrock.??", line++, stage >= 1)
+            line++
+        }
+        if (stage == 1) {
+            line(player, "I spoke to !!Hild??, she doesn't know where !!Bob?? is", line++, false)
+            line(player, "but will enchant my !!Amulet of Catspeak?? so that I can find Bob.", line++, false)
+            line(player, "!!Hild?? enchanted my !!Amulet of Catspeak??,", line++, false)
+            line(player, "if I open it up I can use it to locate Bob.", line++, false)
+            line(player, "I used the enchanted !!Amulet of Catspeak?? to locate !!Bob??.", line++, false)
+            line(player, "I spoke to !!Gertrude?? about Bob's past,", line++, false)
+            line(player, "she doesn't know anything.", line++, false)
+            line(player, "I spoke to !!Reldo?? in the !!Palace Library?? in !!Varrock??,", line++, false)
+            line(player, "he told me about the legend of !!Robert the Strong??.", line++, false)
+            line(player, "I spoke to Bob, he has no memory of being Robert the Strong.", line++, false)
+            line(player, "The Sphinx summoned Bob.", line++, false)
+            line(player, "hypnotised Bob and Bob recounted an event when he killed a Dragonkin.", line++, false)
+            line(player, "The Sphinx was then kind enough to summon !!Neite??,", line++, false)
+            line(player, "once we had persuaded her that !!Bob?? used to", line++, false)
+            line(player, "be !!Robert the Strong?? the couple went away for a few days.", line++, false)
+            line(player, "I have done all the chores for Bob.", line++, false)
+            line(player, "Oh dear, !!Unferth?? has fallen ill.", line++, false)
+            line(player, "The Apothecary said that !!Unferth?? is a hypochondriac;", line++, false)
+            line(player, "!!Unferth?? only thinks he is ill.", line++, false)
+            line(player, "I fooled !!Unferth?? into thinking I was a member of the medical", line++, false)
+            line(player, "profession and 'cured' him.", line++, false)
+            line(player, "!!Bob?? & !!Neite?? seem very happy, they had a wonderful time away together!", line++, false)
+            line(player, "Bob went home to see !!Unferth??.", line++, false)
+            line(player, "I've decided I agree with my cat, I don't like !!Unferth?? very much.", line++, false)
+            line++
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.CATSPEAK_AMULETE_6544, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln)
+        addItemOrDrop(player, Items.ANTIQUE_LAMP_11139, 2)
+        addItemOrDrop(player, Items.MOUSE_TOY_6541, 1)
+        addItemOrDrop(player, Items.CATSPEAK_AMULETE_6544, 1)
+        addItemOrDrop(player, Items.DOCTORS_HAT_6547, 1)
+        //addItemOrDrop(player, Items.NURSE_HAT_6548, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_A_TAIL_OF_TWO_CATS_1028, 70, true)
+        setVarbit(player, 3657, 1, true) // Display case.
+
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//A mysterious present containing
+//2 antique lamps, which grant 2,500 experience each in a skill above level 30
+//Mouse toy
+//Catspeak amulet (e), which allows you to locate Bob.
+//Doctor's hat or nurse hat (you can switch by destroying your hat and requesting a new one from the Apothecary)
+//You can talk to Historian Minas in the Varrock Museum to receive 5 kudos.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+
+ */

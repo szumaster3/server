@@ -1,0 +1,79 @@
+/*package content.region.miscquest.giantdwarf
+
+import org.rs.consts.Vars
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TheGiantDwarf : Quest("The Giant Dwarf", 69, 68, 2, Vars.VARBIT_QUEST_GIANT_DWARF_571, 0, 1, 50) {
+    companion scenery {
+        const val questName = "The Giant Dwarf"
+    }
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage >= 1) {
+            line++
+            line(player, "I have been taken to Keldagrim, capital of the dwarven", line++, stage >= 1)
+            line(player, "realm, but accidentally knocked over a huge statue on the", line++, stage >= 1)
+            line(player, "way in", line++, stage >= 2)
+            line++
+        }
+        if (stage >= 2) {
+            line(player, "I must speak to !!Commander Veldaban?? of the !!Black Guard??,", line++, stage >= 2)
+            line(player, "in connection with the statue that was knocked over.", line++, stage >= 2)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line++, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.RUNE_PICKAXE_1275, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "2,500 Crafting, Mining", ln++)
+        drawReward(player, "Smithing XP, 1,500", ln++)
+        drawReward(player, "Firemaking Magic,", ln++)
+        drawReward(player, "Thieving XP", ln++)
+        rewardXP(player, Skills.CRAFTING, 2500.0)
+        rewardXP(player, Skills.MINING, 2500.0)
+        rewardXP(player, Skills.SMITHING, 2500.0)
+        rewardXP(player, Skills.FIREMAKING, 1500.0)
+        rewardXP(player, Skills.MAGIC, 1500.0)
+        rewardXP(player, Skills.THIEVING, 1500.0)
+
+        setVarbit(player, Vars.VARBIT_QUEST_GIANT_DWARF_571, 50, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//2,500 Crafting experience
+//2,500 Mining experience
+//2,500 Smithing experience
+//1,500 Firemaking experience
+//1,500 Magic experience
+//1,500 Thieving experience
+//The ability to use the mine cart system
+//The ability to work for the company the player has chosen by completing tasks similar to the ones in the quest
+//The ability to teleport to Keldagrim with a luck of the Dwarves or a Hazelmere's signet ring (with partial quest completion)
+//The ability to use members-only gravestones, which last longer than the free-to-play gravestones
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+*/

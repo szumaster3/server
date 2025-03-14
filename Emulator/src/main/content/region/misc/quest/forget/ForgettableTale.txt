@@ -1,0 +1,89 @@
+/*package content.region.miscquest.forget
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class ForgettableTale : Quest(
+    "Forgettable Tale of a Drunken Dwarf",
+    63,
+    62,
+    2,
+    Vars.VARBIT_QUEST_FORGETTABLE_TALE_OF_A_DRUNKEN_DWARF_822,
+    0,
+    1,
+    140
+) {
+    companion scenery {
+        const val ForgettableTale = "Forgettable Tale of a Drunken Dwarf"
+    }
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!Veldaban??, the", line++, false)
+            line(player, "Commander of the Black Guard in !!Keldagrim??. To finish", line++, false)
+            line(player, "this quest I need to have:", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.FARMING, 17)) "---Level 17 farming/--" else "!!Level 17 farming??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.COOKING, 22)) "---Level 22 cooking/--" else "!!Level 22 cooking??",
+                line++
+            )
+            line(
+                player,
+                "I also need to have completed The Giant Dwarf.",
+                line++,
+                isQuestComplete(player, "The Giant Dwarf")
+            )
+            line(
+                player,
+                "Additionally, I need to have won the Fishing Contest.",
+                line++,
+                isQuestComplete(player, "Fishing Contest")
+            )
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.DWARVEN_STOUTM_5747, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "5,000 Cooking XP", ln++)
+        drawReward(player, "5,000 Farming XP", ln++)
+        rewardXP(player, Skills.COOKING, 5000.0)
+        rewardXP(player, Skills.FARMING, 5000.0)
+        addItemOrDrop(player, Items.DWARVEN_STOUTM_5748, 2)
+        setVarbit(player, Vars.VARBIT_QUEST_FORGETTABLE_TALE_OF_A_DRUNKEN_DWARF_822, 140, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 Quest points
+//Cooking 5,000 Cooking experience
+//Farming 5,000 Farming experience
+//2 Dwarven stout (m)
+
+ */

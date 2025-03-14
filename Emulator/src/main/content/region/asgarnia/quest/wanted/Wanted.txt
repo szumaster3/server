@@ -1,0 +1,74 @@
+/*package content.kingdom.asgarnia.quest.member.wanted
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class Wanted : Quest("Wanted!", 130, 129, 1, Vars.VARBIT_QUEST_WANTED_1051, 0, 1, 11) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 1) {
+            line(player, "It turned out that there had been a problem with my application", line++, false)
+            line(player, "to the Temple Knights, because I was not a fully qualified", line++, false)
+            line(player, "member of the White Knights beforehand", line++, false)
+            line(player, "Luckily, Sir Tiffy Cashien had a plan to get me into", line++, false)
+            line(player, "the White Knights without having to be", line++, false)
+            line(player, "a squire for 5 years beforehand.", line++, false)
+            line(player, "I went and spoke to Sir Amik,", line++, false)
+            line(player, "and he seemed happy to deputise me,", line++, false)
+            line(player, "but there is no crisis to allow him to.", line++, false)
+            line(player, "Sir Tiffy's plan relied on the fact that when a crisis occurs,", line++, false)
+            line(player, "I could be deputised immediately and become a full-fledged White Knight.", line++, false)
+            line(player, "Tiffy's plan worked perfectly, and", line++, false)
+            line(player, "I am now deputised to bring in the dangerous criminal", line++, false)
+            line(player, "Solus Dellagar by any means necessary - but first I have to find him!", line++, false)
+            line(player, "With the help of Savant from the Temple Knights, and their CommOrb device,", line++, false)
+            line(player, "I managed to finally track down the evil Solus and have him taken into", line++, false)
+            line(player, "Temple Knight custody for interrogation.", line++, false)
+            line(player, "In reward, I have now become a fully fledged White Knight of Falador!", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line++, false)
+            line++
+            line(player, "As a White Knight I can buy", line++, false)
+            line(player, "Armour and weaponry from Sir Vyvin in Falador Castle.", line++, false)
+            line(player, "I can buy armour appropriate to my White Knight level.", line++, false)
+            line(player, "I can improve this level by killing Black Knights", line++, false)
+            line(player, "I am currently a LEVEL White Knight.", line++, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.WHITE_PLATEBODY_10618, 230, 277, 5)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "5,000 Slayer XP", ln++)
+        rewardXP(player, Skills.SLAYER, 5000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_WANTED_1051, 11, true)
+        addItemOrDrop(player, Items.PURE_ESSENCE_7937, 20)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+
+//1 quest point
+//5,000 Slayer experience
+//Access to the White equipment
+//20 noted pure/rune essence and the other items (from chasing Solus)
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

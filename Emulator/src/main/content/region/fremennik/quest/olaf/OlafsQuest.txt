@@ -1,0 +1,67 @@
+/* package content.kingdom.fremennik.quest.olaf
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class OlafsQuest : Quest("Olaf's Quest", 137, 136, 1, Vars.VARBIT_QUEST_OLAFS_QUEST_3534, 0, 1, 80) {
+    companion scenery {
+        const val OlafQuest = "Olaf's Quest"
+    }
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 0) {
+            line++
+            line(player, "", line, false)
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.PARCHMENT_10585, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "12,000 Defence XP", ln++)
+        drawReward(player, "20,000 Coins", ln++)
+        rewardXP(player, Skills.DEFENCE, 12000.0)
+        addItemOrDrop(player, Items.RUBY_1604, 4)
+        addItemOrDrop(player, Items.PARCHMENT_10585)
+        addItemOrDrop(player, Items.BREAD_2309)
+        addItemOrDrop(player, Items.COINS_995, 20000)
+        //addItemOrDrop(player, Items.SHARK_385)
+        setVarbit(player, Vars.VARBIT_QUEST_OLAFS_QUEST_3534, 80, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//12,000 Defence experience
+//20,000 coins
+//4 cut rubies
+//Access to the Brine Rat Cavern where you can kill brine rats (requires level 47 Slayer)
+//A piece of parchment telling you of other shipwrecks with more treasure. Content following up on this teaser has yet to be released.
+//A shark and/or bread
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

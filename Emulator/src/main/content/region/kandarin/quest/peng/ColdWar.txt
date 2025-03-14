@@ -1,0 +1,171 @@
+/*package content.kingdom.kandarin.quest.coldwar
+
+import org.rs.consts.Vars
+import core.api.hasLevelStat
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class ColdWar : Quest("Cold War", 132, 131, 1, Vars.VARBIT_QUEST_COLD_WAR_3293, 0, 1, 135) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to !!Larry?? at the", line++, false)
+            line(player, "!!Ardougne Zoo.??", line++, false)
+            line(player, "<col=000000>Minimum requirements:", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.AGILITY, 30)) "---Level 30 Agility/--" else "!!Level 30 Agility??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.CRAFTING, 30)) "---Level 30 Crafting/--" else "!!Level 30 Crafting??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.CONSTRUCTION,
+                        34
+                    )
+                ) "---Level 34 Construction/--" else "!!Level 34 Construction??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.HUNTER, 10)) "---Level 10 Hunter/--" else "!!Level 10 Hunter??",
+                line++
+            )
+            line++
+        }
+        if (stage == 1) {
+            line(player, "I have agreed to help Larry build a bird hide on an iceberg", line++, false)
+            line(player, "to the north. I should take the road from Catherby going", line++, false)
+            line(player, "north. I follow it until I reach the Sinclair Mansion-I", line++, false)
+            line(player, "take a left at the Mansion, cross two bridges and follow", line++, false)
+            line(player, "the road until I reach Rellekka. Then I head east, around", line++, false)
+            line(player, "Rellekka, to the coast near the entrance of Keldagrim. ", line++, false)
+            line(player, "I built the bird hide structure. It wasn't easy to do in", line++, false)
+            line(player, "all this snow. Larry and I spied on the penguins from the", line++, false)
+            line(player, "bird hide. It wasn't as exciting as I expected, but Larry", line++, false)
+            line(player, "seemed to think otherwise. Larry had this crackpot idea", line++, false)
+            line(player, "about making a penguin suit and infiltrating their ranks.", line++, false)
+            line(player, "Apparently, he used to work at the Ardougne Zoo. For some", line++, false)
+            line(player, "reason he thinks the penguins got him fired. I made a penguin", line++, false)
+            line(player, "suit using my crafting table at my house. I used a wood", line++, false)
+            line(player, "plank, a piece of silk and a clockwork mechanism. We tried", line++, false)
+            line(player, "out the suit at the Zoo. Being shrunk down and walking", line++, false)
+            line(player, "around as a penguin was easier than I expected. The penguins", line++, false)
+            line(player, "at the Zoo wouldn't talk to me without a greeting. The", line++, false)
+            line(player, "greeting was what we observed the penguins on the iceberg", line++, false)
+            line(player, "doing. I had to twirl, then wave and flap. He asked if", line++, false)
+            line(player, "I'd learned how to fly How very strange! I decided to improvise. ", line++, false)
+            line(player, "I told him about getting shot out of a cannon. I hope I never", line++, false)
+            line(player, "have to do that again. I explained how I'd flown in a hot", line++, false)
+            line(player, "air balloon. That will sure confuse them. I said that I", line++, false)
+            line(player, "flapped really hard and jumped. He seemed to buy it. He", line++, false)
+            line(player, "noted it down in his mission report and then gave it to", line++, false)
+            line(player, "me. He told me to go and see the penguins in Lumbridge.", line++, false)
+            line(player, "Larry said he'd meet me there. I went to Lumbridge and", line++, false)
+            line(player, "found the penguin operatives disguised as sheep in Fred", line++, false)
+            line(player, "the Farmer's field! I performed the greeting correctly", line++, false)
+            line(player, "for these new penguins. They didn't seem impressed. These", line++, false)
+            line(player, "Lumbridge penguins wouldn't talk to me with out[sic] a", line++, false)
+            line(player, "secret phrase. I wonder if the penguin at the Ardougne", line++, false)
+            line(player, "Zoo knows the phrase? I managed to 'convince' the penguin", line++, false)
+            line(player, "to tell me the secret phrase. It was: Do not trust the", line++, false)
+            line(player, "walrus. I went back to Lumbridge to tell the penguins the", line++, false)
+            line(player, "secret phrase. They talked to me, but reluctantly. The", line++, false)
+            line(player, "penguins wanted me to investigate Fred the Farmer. I talked", line++, false)
+            line(player, "to Fred, but he wasn't too impressed when I explained that", line++, false)
+            line(player, "there were penguins in his field. I told the penguins about", line++, false)
+            line(player, "Fred the Farmer, but I wanted to spice it up a little.", line++, false)
+            line(player, "I said that Fred the Farmer was the King of Lumbridge.", line++, false)
+            line(player, "They thought I was being serious! Then they gave me their", line++, false)
+            line(player, "mission report. I managed to get the Lumbridge penguins", line++, false)
+            line(player, "to tell me where this 'outpost' is It's the iceberg we", line++, false)
+            line(player, "visited originally! They said the password to get in was", line++, false)
+            line(player, "'cabbage' Larry and I returned to the iceberg, I gave the", line++, false)
+            line(player, "correct greeting to the guard at the door. Then I gave", line++, false)
+            line(player, "him the password. I thought I was on my way in but the", line++, false)
+            line(player, "guard told me I couldn't get in without ID. Why penguins", line++, false)
+            line(player, "need ID eludes me. Larry suggested finding a shifty penguin", line++, false)
+            line(player, "who could get me a fake ID. I spoke to a penguin named", line++, false)
+            line(player, "Noodle. Noodle wanted swamp tar and chicken feathers in", line++, false)
+            line(player, "exchange for an ID and a mission report. I used the 10", line++, false)
+            line(player, "on the guard and he let me into the iceberg. I needed to", line++, false)
+            line(player, "be debriefed before I could go any further. I met a KGP", line++, false)
+            line(player, "agent in the debriefing room. I gave him all the mission", line++, false)
+            line(player, "reports. But, even after all that, I still had to complete", line++, false)
+            line(player, "a physical! It was an agility course, but I had to do it", line++, false)
+            line(player, "in my penguin suit. I saw a regiment doing drills. They", line++, false)
+            line(player, "look quite dangerous. I rushed to tell Larry about the", line++, false)
+            line(player, "army. He said it sounded like they were preparing for war...", line++, false)
+            line(player, "with us. Larry said we needed to find out what the penguins", line++, false)
+            line(player, "were planning. I found some doors that are well guarded.", line++, false)
+            line(player, "I think what I need is through there. I spoke to Ping and", line++, false)
+            line(player, "Pong - the 'berg bards - about the doors, but they didn't", line++, false)
+            line(player, "know much. They just wanted to sing me a song. I wanted", line++, false)
+            line(player, "to hear Ping and Pong's song but they didn't have any instruments,", line++, false)
+            line(player, "so I had to steal a cowbell from a cow and make a set of", line++, false)
+            line(player, "bongos. I saw what the penguins were working on. It was", line++, false)
+            line(player, "a Giant Penguin Monster! I went for a closer look, but", line++, false)
+            line(player, "got caught. They took my suit and are going to use the", line++, false)
+            line(player, "design to finish their Giant Penguin. He said I was to", line++, false)
+            line(player, "be thrown to the Ice Lords. I was thrown into a pit deep", line++, false)
+            line(player, "in the iceberg where they locked away the Ice Lords. I", line++, false)
+            line(player, "killed an Ice Lord and managed to escape! It was a close", line++, false)
+            line(player, "call. Larry met me out by the bird hide. I told him what", line++, false)
+            line(player, "happened in the War Room", line++, false)
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.WARHAMMER_1415, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "2,000 Crafting XP", ln++)
+        drawReward(player, "5,000 Agility XP", ln++)
+        drawReward(player, "1,500 Construction XP", ln++)
+        rewardXP(player, Skills.CRAFTING, 2000.0)
+        rewardXP(player, Skills.AGILITY, 5000.0)
+        rewardXP(player, Skills.CONSTRUCTION, 1500.0)
+        setVarbit(player, Vars.VARBIT_QUEST_COLD_WAR_3293, 135, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//2,000 Crafting experience
+//5,000 Agility experience
+//1,500 Construction experience
+//Ability to make the penguin suit. To enter the suit again, you must talk to Larry again at the zoo, pier, farm or Iceberg.
+//Ability to use the Penguin Agility Course.
+//Players can also steal more cowbells and make more bongos to play, while in a penguin suit.
+//Ability to contact Larry through the NPC Contact spell.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+//Music unlocked
+//Espionage
+//Have an Ice Day
+
+ */

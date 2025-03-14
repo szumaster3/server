@@ -1,0 +1,380 @@
+Horror from the Deep Quest
+Sources: https://www.youtube.com/watch?v=PPuxeI9RGYg, https://www.youtube.com/watch?v=C1kXeFlsNkA
+
+***Speak to Larrissa to start quest***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello there.").also { stage++ }
+		1 -> npcl("Oh, thank Armadyl! I am in such a worry... please help me!").also { stage++ }
+		2 -> options("With what?", "Sorry, just passing through.").also { stage++ }
+		3 -> when(buttonId) {
+			1 -> playerl("With what?").also { stage = 4 }
+			2 -> playerl("Sorry, just passing through.").also { stage = END_DIALOGUE }
+			}
+		4 -> npcl("Oh... it is terrible... horrible... MY boyfriend lives here in this lighthouse, but I haven't seen him the last few days! I think something terrible has happened!").also { stage++ }
+		5 -> npcl("Look, you can see for yourself that the light has gone out, and the front door is locked up tight! He would NEVER do that!").also { stage++ }
+		6 -> npcl("With the light off this coastline is terribly dangerous to ships! And to lock the front door so that nobody can turn the light back on?").also { stage++ }
+		7 -> playerl("Maybe he just went on holiday or something? Must be pretty boring living in a lighthouse.").also { stage++ }
+		8 -> npcl("That is terribly irresponsible! He is far too thoughtful for that! He would never leave it unattended! He would also never leave without telling me!").also { stage++ }
+		9 -> npcl("Please, I know something terrible has happened to him... I can sense it! Please... please help me adventurer!").also { stage++ }
+		10 -> options("But how can I help?", "Sorry, just passing through.").also { stage++ }
+		11 -> when(buttonId) {
+			1 -> playerl("But how can I help?").also { stage = 12 }
+			2 -> playerl("Sorry, just passing through.").also { stage = END_DIALOGUE }
+			}
+		12 -> npcl("Well, we have to do something to get the lighthouse working again! Also, as you may have noticed, the storm that knocked the bridge out"). also { stage++ }
+		13 -> npcl("has trapped me on this causeway! You seem to have got here okay somehow, so if you could go and visit my cousin and get the spare key I left him,").also { stage++ }
+		14 -> npcl("as well as fix the bridge enough so that I can go and speak to my family in Rellekka and tell them whats happened, I will be eternally grateful!").also { stage++ }
+		15 -> options("Okay, I'll help!", "Sorry, just passing through.").also { stage++ }
+		16 -> when(buttonId) {
+			1 -> playerl("Okay, I'll help!").also { stage = 17 }
+			2 -> playerl("Sorry, just passing through.").also { stage = END_DIALOGUE }
+			}
+		17 -> npcl("OH! THANK YOU SO MUCH! I know my darling would never have left with the lighthouse lights off and without even telling me where he's gone!").also { stage++ }
+		18 -> options("Where is your cousin?", "How can I fix the bridge?", "I'll see what I can do.").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("Where is your cousin?").also { stage = 20 }
+			2 -> playerl("How can I fix the bridge?").also { stage = 22 }
+			3 -> playerl("I'll see what I can do.").also { stage = 24 }
+			}
+		20 -> npcl("My cousin was always interested in agility. He left our home in Rellekka many moons ago, so that he could pursue this interest.").also { stage++ }
+		21 -> npcl("I don't exactly know where he has gone, but I am sure he went somewhere to practice his agility. If you see him, his name is Gunnjorn. Mention my name, he will recognise it.").also { stage = 19 }
+		22 -> npcl("Well, I am not just some helpless girl! I have pretty good agility, so you will only need to use two planks to make a ledge that I can balance along.").also { stage++ }
+		23 -> npcl("Just use a plank on each side of the bridge. You will need a hammer, and thirty steel nails for each plank you use as well. I believe there are some planks near here...").also { stage = 19 }
+		24 -> npcl("Thank you so much!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larrissa after starting the quest and before getting the key and fixing the bridge***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Hello again.").also { stage++ }
+		1 -> npcl("Oh, please find my darling! I just know something horrible has happened!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larrissa after starting the quest and after getting the key but before fixing the bridge***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've got your key for you!").also { stage++ }
+		1 -> npcl("Thank you adventurer, but I need you to fix the bridge for me. The key to the lighthouse is of little comfort while I am trapped here on this causeway!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larrissa after starting the quest and before getting the key but after fixing the bridge***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've fixed the bridge for you!").also { stage++ }
+		1 -> npcl("Oh, thank you so much! Please find the key to the lighthouse for me though! I cannot bear to think that something bad may have happened to my darling Jossik...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larrissa after getting the key and fixing the bridge***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I've got your key for you!").also { stage++ }
+		1 -> npcl("Oh, thank you so much!").also { stage++ }
+		2 -> npcl("Quickly, we must go inside and find out what has happened to my beloved Jossik!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larissa outside after unlocking entrance to the lighthouse via the above dialogue***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Quickly, we must go inside and find out what has happened to my beloved Jossik!").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Larissa inside the lighthouse for the first time***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("This is terrible... What could have happened here? Please, you must fix the light, we cannot let my darling Jossik take the blame for any shipwrecks!").also { stage++ }
+		1 -> playerl("Okay, I will see what I can do.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larissa inside the lighthouse after speaking to her for the first time inside the lighthouse***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("What am I supposed to be doing again?").also { stage++ }
+		1 -> npcl("You MUST find a way to fix the lighthouse! The ships are in terrible danger as long as the light is not working properly!").also { stage++ }
+		2 -> playerl("Okay, I will see what I can do.").also { stage++ }
+		3 -> npcl("I'm sorry adventurer, I do not know anything about lighthouses.").also { stage++ }
+		4 -> npcl("I'm sure there must be some kind of user's guide around here somewhere though.").also { stage++ }
+		5 -> npcl("My darling Jossik knew nothing about Lighthouses when he first came here, so the council must have left him some kind of manual or something.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larissa after the quest is complete***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Oh! Thank you so much for all of your help in rescuing my darling Jossik! I do not know what would have happened to him had you not chanced along this path!").also { stage++ }
+		1 -> playerl("Don't worry about it, I was glad to help out.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to climb down the ladder to the basement before fixing the lighthouse***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("Please adventurer, do not let curiosity get the better of you! We have to fix the lighthouse before any accidents happen!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larissa after fixing the lighthouse and before finding Jossik***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I have managed to fix the light!").also { stage++ }
+		1 -> npcl("Excellent work, adventurer! Now you can devote all of your energies to finding out what has happened to my darling Jossik!").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speaking to Larissa after finding Jossik and before killing the dag mommy***
+
+class LarrissaDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I found Jossik! He's in a cavern underground...").also { stage++ }
+		1 -> npcl("That is wonderful news! But why does he not come up out of there?").also { stage++ }
+		2 -> playerl("Um... well, there's a big monster down there with him stopping him leaving.").also { stage++ }
+		3 -> npcl("What?!?! You MUST save him! I beseech you, please! Do something!").also { stage++ }
+		4 -> playerl("Okay, okay, sheesh, keep your hair on...").also { stage = END_DIALOGUE }
+}
+
+
+
+***Speak to Gunnjorn at BARBASS after quest start***
+
+class GunnjornDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> options("Talk about Horror from the Deep.", "Talk about the Agility course.", "Talk about the wall after the log balance.", "Nothing.").also { stage++ }
+		1 -> when(buttonId) {
+			1 -> playerl("Talk about Horror from the Deep.").also { stage = 2 }
+			2 -> playerl("Talk about the Agility course.").also { stage = 9 }
+			3 -> playerl("Talk about the wall after the log balance.").also { stage = 11 }
+			4 -> playerl("Nothing.").also { stage = 17 }
+			}
+		2 -> npcl("Haha welcome to my obstacle course. Have fun, but remember this isn't a child's playground. People have died here.").also { stage++ }
+		3 -> playerl("Hi, are you called Gunnjorn?").also { stage++ }
+		4 -> npcl("Why, indeed I am. I own this agility course, it can be very dangerous!").also { stage++ }
+		5 -> playerl("Yeah, that's great. Anyway, I understand you have a cousin named Larrissa who gave you a key...?").also { stage++ }
+		6 -> npcl("Yes, she did! How did you know of this? She said she probably wouldn't need it, but gave it to me for safe keeping just in case.").also { stage++ }
+		7 -> playerl("Well, something has happened at the lighthouse, and she has been locked out. I need you to give me her key.").also { stage++ }
+		8 -> npcl("Sure. Here you go.").also { stage = END_DIALOGUE }
+		9 -> playerl("Hey there. What is this place?").also { stage++ }
+		10 -> npcl("Aha! Welcome to my obstacle course. Have fun, but remember this isn't a children's playground. People have died here. This course starts at the ropeswings to the east. When you've done the swing, head across the slippery log to the building. When you've traveresed the obstacles inside, you'll come out on the other side. From there, head across the low walls to finish. If you've done all the obstacles as I've described, and in order, you'll get a lap bonus.").also { stage = END_DIALOGUE }
+		11 -> playerl("What's wrong with the wall after the log balance?").also { stage++ }
+		12 -> npcl("The wall after the log balance? Nothing, really. I just put some tough material on it, giving some people something to grip hold of.").also { stage++ }
+		13 -> playerl("Why would you do that?").also { stage++ }
+		14 -> npcl("So people like you can have a tougher route round this course. Me and a mate get together and set up a new challenge that only the truly agile will conquer. The extra stuff starts at that wall; so, if you think you're up to it, I suggest you scramble up there after the log balance.").also { stage++ }
+		15 -> playerl("Sounds interesting. Anything else I should know?").also { stage++ }
+		16 -> npcl("Nothing, really. Just make sure you complete the other obstacles before ya do. If you finish a full lap, you'll get an increased bonus for doing the tougher route. If you manage to do 250 laps of this advanced route without a single mistake, I'll let you have a special item. I'll keep track of your lap tallies, so you can check how you're getting on with me at any time.").also { stage = END_DIALOGUE }
+		17 -> playerl("That's all I need for now. Bye.").also { stage++ }
+		18 -> npcl("Bye for now. Come back if you need any help.").also {stage = END_DIALOGUE }
+}
+
+
+
+***THIS DIALOGUE WILL NEED REWORKED WITH ADDITION OF BARBARIAN ADVANCED COURSE/250 LAP REWARD, CHECK CRASH'S RAR FOR THE DIALOGUE***
+
+
+
+***Attempting to fix the bridge without nails in inventory***
+
+class BridgeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You need 30 steel nails to attach the plank with.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Attempting to fix the bridge with plank and nails in inventory***\
+
+class BridgeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You create half a makeshift walkway out of the plank.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Finishing the bridge***
+
+class BridgeDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("You have now made a makeshift walkway over the bridge.").also { stage = END_DIALOGUE }
+}
+
+
+
+***Searching the bookcase on the second floor of the lighthouse***
+
+class BookcaseDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("There are three books here that look important... What would you like to do?").also { stage++ }
+		1 -> options("Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Take the Lighthouse Manual").also { stage = END_DIALOGUE }
+			2 -> playerl("Take the ancient Diary").also { stage = END_DIALOGUE } 
+			3 -> playerl("Take Jossik's Journal").also { stage = END_DIALOGUE } 
+			4 -> playerl("Take all three books").also { stage = END_DIALOGUE } 
+			}
+}
+
+
+***Book text at 7:45 of second source video if needed***
+
+
+
+***After reading the three books and fixing the lighthouse light, using items on the strange wall in the lighthouse basement, repeats for each item***
+
+class StrangeWallDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I don't think I'll get that back if I put it in there.").also { stage++ }
+		1 -> options("Yes", "No").also { stage++ }
+		2 -> when(buttonId) {
+			1 -> playerl("Yes").also { stage = END_DIALOGUE } 
+			2 -> playerl("No").also { stage = END_DIALOGUE } 
+			}
+}
+
+
+
+***Speaking to Jossik in lighthouse basement after passing the strange wall***
+
+class JossikDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> npcl("*cough* Please...please help me... I think my leg is broken and those creatures will be back any minute now!").also { stage++ }
+		1 -> playerl("I guess you're Jossik then... What creatures are you talking about?").also { stage++ }
+		2 -> npcl("I... I do not know. I have never seen their like before!").also { stage++ }
+		3 -> npcl("I was searching for information about my uncle Silas, who vanished mysteriously from this lighthouse many months ago. I found the secret of that strange wall, and I discovered that I could use it as a door but when I").also { stage++ }
+		4 -> npcl("came down here I was attacked by...").also { stage++ }
+		5 -> npcl("Well, I do not know what they are, but they are very strong! They hurt me badly enough to trap me here, and I have been fearing for my life ever since!").also { stage++ }
+		6 -> playerl("Don't worry, I'm here now. Larrissa was worried about you and asked for my help.").also { stage++ }
+		7 -> playerl("I'll go back upstairs and let her know that I've found you and that you're still alive, and then we can work out some way of getting you out of here, okay?").also { stage++ }
+		8 -> npcl("NO! No, you can't leave me now! Look! They're coming again! Do something!").also { stage = END_DIALOGUE }
+}
+
+
+
+***After killing the lvl 100 Daggonoth baby***
+
+class JossikDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Okay, now that the creature's dead we can get you out of here.").also { stage++ }
+		1 -> npcl("No... you do not understand...").also { stage++ }
+		2 -> npcl("That was not the creature that attacked me...").also { stage++ }
+		3 -> npcl("That was one of its babies...").also { stage = END_DIALOGUE }
+}
+
+
+
+***After killing the Daggonoth Mother QUEST COMPLETE***
+
+class JossikDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("Okay, it's dead! Let's get out of here!").also { stage++ }
+		1 ->npcl("Yes, quickly, the mother might be dead, but its children are not!").also { stage++ }
+		2 ->npcl("Follow me upstairs, I might be able to help you with that casket you found.").also { stage++ }
+		3 ->npcl("Bring it to my library, it looks familiar somehow...").also { stage = END_DIALOGUE }
+}
+
+
+
+
+***Speaking to Jossik after the quest is complete***
+
+class JossikDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+            	0 -> playerl("I see you managed to escape from those monsters intact!").also { stage++ }
+		1 -> npcl("It seems I was not as injured as I thought I was after all! I must thank you for all of your help!").also { stage++ }
+		2 -> npcl("Now, about that casket you found on that monster's corpse...").also { stage++ }
+		3 -> playerl("I have it here. You said you might be able to tell me something about it...?").also { stage++ }
+		4 -> npcl("I can indeed! Here, let me have a closer look...").also { stage++ }
+		5 -> npcl("Yes! There is something written on it!").also { stage++ }
+		6 -> npcl("It is very faint however... Can you read it?").also { stage++ }
+		7 -> options("Saradomin","Zamorak","Guthix").also { stage++ }
+		8 -> when(buttonId) {
+			1 -> playerl("Saradomin").also { stage = 9 }
+			2 -> playerl("Zamorak").also { stage = 16 }
+			3 -> playerl("Guthix").also { stage = 23 }
+			}
+		9 -> playerl("I think it says... Saradomin...").also { stage++ }
+		10 -> npcl("Are you sure? I mean, are you REALLY sure? Maybe you'd better look again...").also { stage++ }
+		11 -> options("Saradomin","Zamorak","Guthix").also { stage++ }
+		12 -> when(buttonId) {
+			1 -> playerl("Saradomin").also { stage = 13 }
+			2 -> playerl("Zamorak").also { stage = 16 }
+			3 -> playerl("Guthix").also { stage = 23 }
+			}
+		13 -> playerl("Nope, it definitely says Saradomin.").also { stage++ }
+		14 -> npcl("I think you're right! Hand it over, and let's see what's inside!").also { stage ++ }
+		15 -> npcl("Wow! It's an Holy Book of Saradomin! I thought these things had all vanished! Well, it's all yours, I hope you appreciate it.").also { stage = END_DIALOGUE }
+		16 -> playerl("I think it says... Zamorak").also { stage++ }
+		17 -> npcl("Are you sure? I mean, are you REALLY sure? Maybe you'd better look again...").also { stage++ }
+		18 -> options("Saradomin","Zamorak","Guthix").also { stage++ }
+		19 -> when(buttonId) {
+			1 -> playerl("Saradomin").also { stage = 9 }
+			2 -> playerl("Zamorak").also { stage = 20 }
+			3 -> playerl("Guthix").also { stage = 23 }
+			}
+		20 -> playerl("Nope, it definitely says Zamorak.").also { stage++ }
+		21 -> npcl("I think you're right! Hand it over, and let's see what's inside!").also { stage ++ }
+		22 -> npcl("Wow! It's an Unholy Book of Zamorak! I thought these things had all vanished! Well, it's all yours, I hope you appreciate it.").also { stage = END_DIALOGUE }
+		23 -> playerl("I think it says... Guthix").also { stage++ }
+		24 -> npcl("Are you sure? I mean, are you REALLY sure? Maybe you'd better look again...").also { stage++ }
+		25 -> options("Saradomin","Zamorak","Guthix").also { stage++ }
+		26 -> when(buttonId) {
+			1 -> playerl("Saradomin").also { stage = 9 }
+			2 -> playerl("Zamorak").also { stage = 16 }
+			3 -> playerl("Guthix").also { stage = 27 }
+			}
+		27 -> playerl("Nope, it definitely says Guthix.").also { stage++ }
+		28 -> npcl("I think you're right! Hand it over, and let's see what's inside!").also { stage ++ }
+		29 -> npcl("Wow! It's an Balance Book of Guthix! I thought these things had all vanished! Well, it's all yours, I hope you appreciate it.").also { stage = END_DIALOGUE }
+}
+
+
+

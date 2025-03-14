@@ -1,0 +1,124 @@
+/*package content.region.miscquest.smki
+
+import org.rs.consts.Vars
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class SmokingKills : Quest("Smoking Kills", 153, 152, 1, Vars.VARBIT_QUEST_SMOKING_KILLS_4764, 0, 1, 250) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage >= 1) {
+            line++
+            line(player, "I have spoken with Sumona.", line++, true)
+            line(
+                player,
+                "She has requested that I rescue her sister from the well in the centre of Pollniveach.",
+                line++,
+                true
+            )
+            line(player, "I tried to travel down the Pollniveach well. I was pestered by a vicious cat.", line++, true)
+            line(player, "I should ask it what is happening.", line++, true)
+            line(player, "I talked to Ali Cat and he warned me of terrible perils.", line++, true)
+            line(
+                player,
+                "I must explore an ancient tomb, east of the Agility Pyramid, in order to talk to a spirit.",
+                line++,
+                true
+            )
+            line(
+                player,
+                "The spirit should enable me to survive combined assaults from banshees and smoke. Ali Cat suggested that I take my cat with me to help, but warned that the spirit's ghostly form will make conversation tricky.",
+                line++,
+                true
+            )
+            line(
+                player,
+                "I have entered the tomb and discovered it is more complex than I first thought.",
+                line++,
+                true
+            )
+            line(player, "I should seek out the spirit.", line++, true)
+            line(
+                player,
+                "Catolax, the spirit, has taught me how to create masked earmuffs, which can fend off smoke.",
+                line++,
+                true
+            )
+            line(
+                player,
+                "I need to combine a pair of earmuffs and a slayer face mask in order to rescue Sumona's sister from the well in Pollniveach.",
+                line++,
+                true
+            )
+            line(player, "If the player owns a pair of masked earmuffs:", line++, true)
+            line(
+                player,
+                "I have combined a pair of earmuffs and a Slayer face mask to create masked earmuffs.",
+                line++,
+                true
+            )
+            line(player, "I must now rescue Sumona's sister from the well in Pollniveach.", line++, true)
+            line(player, "If the player does not own a pair of masked earmuffs:", line++, true)
+            line(
+                player,
+                "I have combined a pair of earmuffs and a Slayer face mask to create masked earmuffs,",
+                line++,
+                true
+            )
+            line(player, "although I have lost them and I need to make more.", line++, true)
+            line(player, "I must now rescue Sumona's sister from the well in Pollniveach.", line++, true)
+            line(player, "I have obtained a banshee's voice from the caverns beneath Pollniveach's well.", line++, true)
+            line(player, "I should explore the caverns further.", line++, true)
+            line++
+        }
+
+        if (stage == 100) {
+            line++
+            line(
+                player,
+                "I have defeated the banshee mistress and some insectoid assassins in order to rescue Sumona's sister, Jesmona.",
+                line++,
+                true
+            )
+            line(player, "Jesmona teleported away so I should report this to Sumona in Pollniveach.", line++, true)
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.SLAYER_HELMET_13263, 230, 277, 5)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "5,000 Slayer XP", ln++)
+        rewardXP(player, Skills.SLAYER, 5000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_SMOKING_KILLS_4764, 250, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//5,000 Slayer experience
+//Ability to earn the full amount of slayer points that can be exchanged for slayer rewards
+//New Slayer Master in Pollnivneach
+//Access to the Pollnivneach Slayer Dungeon and Tomb of Catolax
+//Ability to construct slayer items
+//Access to the Desert Slayer Dungeon miniquest
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

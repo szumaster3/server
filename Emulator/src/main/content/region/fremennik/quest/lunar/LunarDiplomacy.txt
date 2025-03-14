@@ -1,0 +1,220 @@
+/*package content.kingdom.fremennik.quest.lunar
+
+import org.rs.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class LunarDiplomacy : Quest("Lunar Diplomacy", 85, 84, 2, Vars.VARBIT_QUEST_LUNAR_DIPLOMACY_2448, 0, 1, 190) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by talking to !!Lokar?? at the !!Docks to??", line++, false)
+            line(player, "!!the west of Rellekka??.", line++, false)
+            line++
+            line(player, "Minimum Requirements :", line++, false)
+            line(
+                player,
+                if (hasLevelStat(player, Skills.MAGIC, 65)) "---Level 65 Magic/--" else "!!Level 65 Magic??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.DEFENCE, 40)) "---Level 40 Defence/--" else "!!Level 40 Defence??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.HERBLORE, 5)) "---Level 5 Herblore/--" else "!!Level 5 Herblore??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.MINING, 60)) "---Level 60 Mining/--" else "!!Level 60 Mining??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.CRAFTING, 61)) "---Level 61 Crafting/--" else "!!Level 61 Crafting??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.WOODCUTTING,
+                        55
+                    )
+                ) "---Level 55 Woodcutting/--" else "!!Level 55 Woodcutting??",
+                line++
+            )
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.FIREMAKING,
+                        49
+                    )
+                ) "---Level 49 Firemaking/--" else "!!Level 49 Firemaking??",
+                line++
+            )
+            line(player, "I need to have completed the following quests:", line++, false)
+            line(player, "!!Fremennik Trials??", line++, isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS))
+            line(player, "!!Lost City??", line++, isQuestComplete(player, "Lost City"))
+            line(player, "!!Shilo Village??", line++, isQuestComplete(player, "Shilo Village"))
+            line(player, "!!Rune Mysteries??", line++, isQuestComplete(player, Quests.RUNE_MYSTERIES))
+        }
+
+        if (stage == 20) {
+            line(player, "I can start this quest by talking to Lokar at the docks to", line++, false)
+            line(player, "the west of Rellekka.", line++, false)
+            line(player, "I need to talk to Brundt the Chieftain in Rellekka to get", line++, false)
+            line(player, "hold of a Seal of Passage.", line++, false)
+            line(player, "I can take my Seal of Passage to Lokar so I can head to", line++, false)
+            line(player, "Lunar Isle.", line++, false)
+            line(player, "We've stopped at the pirate's hideout. Best I see if someone", line++, false)
+            line(player, "can take us further.", line++, false)
+            line(player, "The Captain tried to travel to Lunar Isle, but we went around", line++, false)
+            line(player, "in a circle!", line++, false)
+            line(player, "I spoke to the navigator, he sounds like the likely suspect", line++, false)
+            line(player, "- what a cheeky chap!", line++, false)
+            line(player, "But he suggested I check with the captain.", line++, false)
+            line(player, "The Captain ain't so sure it was the navigator,", line++, false)
+            line(player, "he wants me to talk to him yet again!", line++, false)
+            line(player, "The navigator suggests that a jinx has been put upon the ship.", line++, false)
+            line(player, "Maybe someone else on the ship knows more?", line++, false)
+            line(player, "The lookout told me a bit about jinxes. But who could have", line++, false)
+            line(player, "done such a thing?", line++, false)
+            line(player, "The chef told me of a feast that took place on Lunar Isle where", line++, false)
+            line(player, "everyone was present. Wonder if anyone knows more?", line++, false)
+            line(player, "It seems the first mate disappeared during the feast.", line++, false)
+            line(player, "Perhaps I should check what he was up to.", line++, false)
+            line(player, "The first mate had an alibi. But the cabin boy seems to ", line++, false)
+            line(player, "have been missing too...", line++, false)
+            line(player, "It was the cabin boy! The naughty boy went and put symbols everywhere.", line++, false)
+            line(player, "I should be able to find them with the lens he gave me.", line++, false)
+            line(player, "Symbol One", line++, false)
+            line(player, "Symbol Two", line++, false)
+            line(player, "Symbol Three", line++, false)
+            line(player, "Symbol Four", line++, false)
+            line(player, "Symbol Five", line++, false)
+            line(player, "The jinx is removed! We should be able to sail to Lunar Isle,", line++, false)
+            line(player, "so I should talk to the Captain.", line++, false)
+            line(player, "I have seen Lunar Isle for the first time! Time to explore!", line++, false)
+            line(player, "Now that I'm here I should seek someone on the Lunar Isle to", line++, false)
+            line(player, "talk about diplomacy.", line++, false)
+            line(player, "I spoke with the Oneiromancer, I need to perform a ritual, for which", line++, false)
+            line(
+                player,
+                "I need to get a Potion of waking sleep by speaking to Baba Yaga in her chicken house.",
+                line++,
+                false
+            )
+            line(player, "Bizarre!", line++, false)
+            line(player, "Baba Yaga told me to make a potion from Guam leaf, Marrentill leaf and", line++, false)
+            line(player, "a Suqah Tooth. I can then give this to the Oneiromancer", line++, false)
+            line(player, "I have given the potion to Oneiromancer to look after for me,", line++, false)
+            line(
+                player,
+                "she has told me to make a Lunar Staff. This I can do by using a Dramen staff on:",
+                line++,
+                false
+            )
+            line(player, "the Air Altar", line++, false)
+            line(player, "then the Fire Altar", line++, false)
+            line(player, "then the Water Altar", line++, false)
+            line(player, "then the Earth Altar.", line++, false)
+            line(player, "I gave the Lunar Staff to the Oneiromancer for safe-keeping.", line++, false)
+            line(player, "Now I need to make the ceremonial clothes and give them to the Oneiromancer.", line++, false)
+            line(player, "I can talk to her for more information.", line++, false)
+            line(player, "Lunar Helm", line++, false)
+            line(player, "Lunar Torso", line++, false)
+            line(player, "Lunar Legs", line++, false)
+            line(player, "Lunar Gloves", line++, false)
+            line(player, "Lunar Boots", line++, false)
+            line(player, "Lunar Cape", line++, false)
+            line(player, "Lunar Amulet", line++, false)
+            line(player, "Lunar FairyRing", line++, false)
+            line++
+            line(player, "I gave all the clothes to the Oneiromancer. Now taking the potion,", line++, false)
+            line(player, "clothes, staff and kindling from the Oneiromancer, I can use start the ritual", line++, false)
+            line(player, "at the Brazier in town.", line++, false)
+            line(player, "I have entered the dreamland! Best I explore around!", line++, false)
+            line(player, "I talked with the strange character in the centre.", line++, false)
+            line(player, "Seems I have to solve some games to learn about myself:", line++, false)
+            line(player, "A game of chance!", line++, false)
+            line(player, "Communicating in numbers.", line++, false)
+            line(player, "Chop, chop, chop away!", line++, false)
+            line(player, "Where am I?", line++, false)
+            line(player, "The race is on!", line++, false)
+            line(player, "Anything you can do...", line++, false)
+            line(player, "I've learnt a fair bit from those games,", line++, false)
+            line(
+                player,
+                "if I talk to the strange character in the centre, they will take me to the last stage.",
+                line++,
+                false
+            )
+            line(player, "Whatever that is!", line++, false)
+            line(player, "I had to fight a mirror of myself and I won! I think", line++, false)
+            line(player, "I should talk to the Oneiromancer about erience.", line++, false)
+        }
+
+        if (stage == 100) {
+            line(player, "I have achieved a level of peace between", line++, false)
+            line(player, "!!the Moon clan?? and !!the Fremennik??!", line++, false)
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.LUNAR_STAFF_9084, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "5,000 Magic XP", ln++)
+        drawReward(player, "5,000 Runecrafting XP", ln++)
+        rewardXP(player, Skills.MAGIC, 5000.0)
+        rewardXP(player, Skills.RUNECRAFTING, 5000.0)
+        addItemOrDrop(player, Items.ASTRAL_RUNE_9075, 50)
+        addItemOrDrop(player, Items.LUNAR_HELM_9096)
+        addItemOrDrop(player, Items.LUNAR_AMULET_9102)
+        addItemOrDrop(player, Items.LUNAR_GLOVES_9099)
+        addItemOrDrop(player, Items.LUNAR_TORSO_9097)
+        addItemOrDrop(player, Items.LUNAR_LEGS_9098)
+        addItemOrDrop(player, Items.LUNAR_BOOTS_9100)
+        addItemOrDrop(player, Items.LUNAR_RING_9104)
+        setVarbit(player, Vars.VARBIT_QUEST_LUNAR_DIPLOMACY_2448, 190, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//5,000 Magic experience
+//5,000 Runecrafting experience
+//Full access to Lunar Isle
+//Use of the Astral altar
+//Access to Livid Farm
+//Ability to buy astral runes from Baba Yaga
+//Ability to use Lunar Spells
+//A set of Lunar equipment (obtained during quest)
+//50 astral runes
+//Ability to have suqahs assigned as a Slayer task
+//Ability to unlock the Ourania Teleport spell from the Lunar Spellbook, by talking to Baba Yaga with Lunar spells active
+//An extra 10,338 Magic experience when Swept Away quest is completed and the broomstick is brought to Baba Yaga (with level 73 Magic)
+//The ability to Home Teleport to the Lunar Isle lodestone
+//The seal of passage can now be used to teleport to Lunar Isle once per day
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

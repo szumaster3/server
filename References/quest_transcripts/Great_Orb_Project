@@ -1,0 +1,80 @@
+[DIALOGUE]
+- "I have enough people helping me at the moment, thank you"
+- "Excellent! You are now part of my team.
+
+[DIALOGUE - WIZARD ACANTHA]
+npc(FacialExpression.HAPPY, "How do you expect to be of any use to my team if", "you don't know what you're doing? Settle down and let", "me explain what's going on.")
+npc(FacialExpression.ANNOYED, "You need your head right hand and two free", "inventory slots, or I can't give you the necessary", "equipment.")
+npc("You have chosen...wisely. Green orbs will save the altars.")
+sendDialogueOptions(player, "Are you sure you want to join?", "Yes.", "No.").also { stage++ }
+So you've decided to help 'Wizard' Vief?
+Welcome to the green team, the place for intelligent individuals.
+The portal will open any moment. Are you ready?
+I'm ready!
+Good, preparation is the key to success. Keep those yellow orbs away.
+No. What am I supposed to do?
+
+I knew you were an intelligent lad. Here are your wands. When each team has enough people, Wizard Elriss will open the portal and you can get started. While we wait, shall I tell you what you need to do?
+
+You already told me what to do.
+I know that! I'm not senile, you know. Repetition is good for understanding. Tell me what you know, Mr Smarty Pants.
+Errr, green orbs good, yellow orbs bad.
+You won't be winning any awards for verbosity, but you got the gist of it.
+
+Wizard Vief told me what to do.
+That two-bit hack? That boy will quote you all kinds of algorithms and equations that other people have discovered. He's done nothing to forward the science of Runecrafting. I'll bet he told you to put yellow orbs into the altar.
+Is that wrong?
+It's completely wrong. He's misinterpreted Wizard Hallam's discoveries about the elemental rune energy signature. That mane was as crazy as Wizard Korvak over there. He really should have been reading the discoveries of Wizard Fowl in the interpretation of dimensional energy. At any rate, the yellow orbs contain a centre of energy that is harmful to run altars. They must be kept away. Green orbs must be put back to counteract the triangulated force of dimensional weight opposed against.
+
+[MESSAGES]
+- That portal is serving a different game. You should wait for your portal.
+- You enter the portal.
+- If you were wearing your explorer's ring you may have earned more runes.
+- The green orbs have stopped responding to yellow wands.
+- You cannot create a barrier this close to the altar.
+- You wand needs time to charge before creating another barrier. The barrier will be added shortly.
+- You remove the barrier.
+
+[MESSAGES]
+Wizard Vief gives you 750 tokens. [perfect strike]
+- "for loosers lolipop" XDD
+
+[MESSAGES]
+If team made annihilation:
+ - Perfect! We captured every single altar! At this rate,
+
+[MESSAGES]
+- I'm well on track to be the new head of the guild.
+- Your purchase has been added to your inventory.
+- You do not have enough tokens to buy that item.
+- You must select something to buy before you can confirm your purchase
+- The Lumbridge ring sparkles to life, creating more runes for you.
+- Waiting for players to join.
+- Waiting for portal to open.
+- Waiting for orbs to appear.
+- The portal is open
+
+[TELEPORT SPOTS]
+ https://www.youtube.com/watch?v=4j47RYJbFWI&ab_channel=avahol1c
+
+[18L]
+ roll ess on next round (saw 14) if inv full drop
+
+[AFK_TIMER]
+ "you are pulled through the portal."
+
+[WIZARD VIEF]
+  - Are you ready?
+  - ~The portal will open in any moment.~
+
+  - options("Im ready!", "No what am i supposed to do?")
+  - when(buttonId) {
+    1 -> Excellent. I knew I could count on you.
+    2 -> "It's quite ocmplicated but a runecrafter of your calibre"," should have no trouble understanding. after all, most of","the people they let in here are highly intelligent."
+         "The runecrafting altars are sources of energy. Every","time we craft runes, that energy comes out of the"," altars and into the eccences."
+         "Sometimes, too much energy comes out, and it forms","into yellow energy orbs that hang in the air. These","attract another form of energy from the surrounding","space, which manifests as green orbs."
+         "The yellow orbs need to be put back into the altar. The","green orbs should be kept away. You can move the","orbs around by attracting and repelling them using","special wands. I'll give you a thrid wand to create"
+         "barriers. barriers will stop green orbs from getting to"," the altar."
+
+[OPTION OR DIALOGUE?]
+ I want to quit the team.

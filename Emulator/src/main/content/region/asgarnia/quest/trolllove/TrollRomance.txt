@@ -1,0 +1,97 @@
+/*package content.region.miscquest.troll_love
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.hasLevelStat
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TrollRomance : Quest("Troll Romance", 127, 126, 2, Vars.VARP_QUEST_TROLL_ROMANCE_385, 0, 1, 45) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to !!Ug?? who is in the !!Troll??", line++, false)
+            line(player, "!!Stronghold??.", line++, false)
+            line++
+            line(player, "Requirements:", line++, false)
+            line(
+                player,
+                "!!Must have completed Troll Stronghold??",
+                line++,
+                isQuestComplete(player, Quests.TROLL_STRONGHOLD)
+            )
+            line(
+                player,
+                if (hasLevelStat(player, Skills.AGILITY, 28)) "---Level 28 Agility/--" else "!!Level 28 Agility??",
+                line++
+            )
+            line(player, "Must be able to defeat a !!level 113 Troll??.", line++, player.properties.combatLevel >= 126)
+            line++
+        }
+        if (stage >= 1) {
+            line(player, "I have spoken to Ug and found out that he is in love with Aga.", line++, false)
+            line(player, "I have spoken to Aga and found out that her heart could", line++, false)
+            line(player, "be won with a certain flower.", line++, false)
+            line++
+        }
+        if (stage >= 2) {
+            line(player, "I have spoken to Freda who told me where to find !!Trollweiss??", line++, false)
+            line(player, "and that I will need a sled to get there.", line++, false)
+            line(player, "!!Dunstan?? told me what he needs for the sled.", line++, false)
+            line(player, "I got some !!logs??, an !!iron bar?? and !!rope?? and", line++, false)
+            line(player, "and gave them to !!Dunstan?? who made a !!sled?? for me.", line++, false)
+            line(player, "I have made some sled wax and waxed the sled.", line++, false)
+            line(player, "I got the !!Trollweiss??.", line++, false)
+            line(player, "I have given the !!Trollweiss?? to !!Ug??.", line++, false)
+            line(player, "I have defeated !!Arrg??.", line++, false)
+            line(player, "I got my reward and Ug and Aga can live happily ever after.", line++, false)
+            line++
+        }
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.SLED_4083, 230, 277, 5)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "8,000 Agility XP", ln++)
+        drawReward(player, "4,000 Strength XP", ln++)
+        rewardXP(player, Skills.AGILITY, 8000.0)
+        rewardXP(player, Skills.STRENGTH, 4000.0)
+        addItemOrDrop(player, Items.SLED_4083)
+        addItemOrDrop(player, Items.UNCUT_DIAMOND_1617)
+        addItemOrDrop(player, Items.UNCUT_RUBY_1620, 2)
+        addItemOrDrop(player, Items.UNCUT_EMERALD_1622, 4)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+
+//2 quest points
+//8,000 Agility experience
+//4,000 Strength experience
+//A handful of uncut gems from Ug (1 uncut diamond, 2 uncut rubies and 4 uncut emeralds)
+//A sled
+//Unlocks sledding route from Trollweiss
+//A new colour of wieldable flowers
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+
+ */

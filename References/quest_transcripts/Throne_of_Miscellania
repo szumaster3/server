@@ -1,0 +1,665 @@
+Throne of Miscellania (Nov 7, 2008)
+Sources: https://www.youtube.com/watch?v=gNa8qCmeb-Q
+
+Start quest by talking to King Vargas in Miscellania.
+
+King Vargas: "Who are you? Who seeks audience with the King of this fair land of Miscellania?"
+Player: "I am known in these lands as <fremennikname>, Your Majesty. I come in search of a quest."
+King Vargas: "Ah, it pleases me to see such enthusiasm!"
+King Vargas: "I was once an adventurer such as yourself; even while fulfilling my duties as King of Miscellania, I would roam the lands in search of adventure, and strike down mighty foes with a single blow!"
+King Vargas: "Unfortunately, I was a little too daring, and attempted to brave the icelands, where I finally met my match."
+King Vargas: "I survived, barely, but I was cursed for the rest of my life to stay in this form. Which leaves me incapable of performing my duties as ruler."
+King Vargas: "This is why I am looking for an exceptional soul to be regent of this fair kingdom of Miscellania."
+
+Select an Option
+	"If I may be so bold..."
+		Player: "If I may be so bold, Your Majesty, I think Miscellania would rest in capable hands with me."
+		King Vargas: "Hahaha! You are bold, <fremennikname>, but then I have yet to see a good ruler who was not."
+		King Vargas: "You will first have to demonstrate your worth. You are a good warrior, that I do not doubt; however ruling also requires a good grasp of diplomacy."
+		King Vargas: "We have been at war with neighbouring Etceteria for hundreds of years; however, I think both of us have rather lost our apetite for hostilities."
+		King Vargas: "Now may be an opportune time to make amends. If you manage to negotiate peace with them, then you will truly have shown your skill as a diplomat."
+		Player: "Then do not stray far, Your Majesty, for I shall soon return."
+		King Vargas: "Wait! There is one more matter to discuss... a mere formality, of course."
+		King Vargas: "By Miscellanious tradition, one may not become the ruler of the kingdom if one is not part of the royal family."
+		King Vargas: "You will have to convince my <son/daughter>, <Prince Bland/Princess Astrid>, to marry you."
+		Player: "And you say this is a mere formality, Your Majesty?"
+		King Vargas: "I'm sure <he/she> won't be able to resist your heroic charms. You can ask Ghrim for advice; that's what he's here for, after all."
+		<end of dialogue, quest progresses>
+		
+	"I'm afraid I must decline."
+	
+Talk to Advisor Ghrim.
+
+Advisor Ghrim: "Greetings <Madam/Sir>."
+
+Select an Option
+	"What am I meant to be doing again?"
+	"How do I make peace with Etceteria?"
+		Player: "How do I make peace with Etceteria?"
+		Advisor Ghrim: "You should go talk to Queen Sigrid of Etceteria."
+		<end dialogue>
+	"How am I supposed to get the <Prince/Princess> to marry me?"
+	"Is there anything else you can tell me?"
+	
+Go talk to Queen Sigrid in Etceteria.
+
+Queen Sigrid: "Hello."
+Player: "Er... Hello, Your Majesty."
+Queen Sigrid: Have you come for a particular reason? I am a busy Queen, you know. I had to attend the opening of a new orphanage this morning."
+Player: "Yes, I..."
+Queen Sigrid: "And this afternoon, I shall be receiving the Embassador of Karamja and accompanying him on this week-long tour of Etceteria."
+Player: "Er, I..."
+Queen Sigrid: "Then this evening we shall be putting on a grand ball. All of the kingdom's nobility will be present!"
+Player: "If I m..."
+Queen Sigrid: "Oh, who am I kidding...nothing ever happens here. I always wanted to be a princess when I was a girl. If I'd been told it would be like this, I wouldn't have bothered."
+Player: "Your Majesty!"
+Queen Sigrid: "Yes? Did you want something?"
+Player: "I have been sent by King Vargas to negotiate a treaty of peace between your two great nations."
+Queen Sigrid: "Great nations? Don't make me laugh. Still, peace sounds like a nice idea. He will, of course, have to recognise Etceteria officially as a sovereign nation."
+Player: "This isn't already the case?"
+Queen Sigrid: "I'm afraid not. Last time we met I called him a pompous old fool for thinking he was still worth anything as an adventurer."
+Queen Sigrid: "He promptly declared war, claiming the land of Etceteria belonged to Miscellania."
+Queen Sigrid: "When he realized neither of us had an army, he was ever so angry!"
+Player: "What happened then?"
+Queen Sigrid: "He set off for the icelands to prove me wrong and, well, I expect you saw what happened to him."
+Player: "I shall go ask him to officially recognise Etceteria."
+<end of dialogue, quest progresses>
+
+Go talk to King Vargas.
+
+Player: "Your Majesty."
+King Vargas: "How are you getting on, <fremennikname>? Have you tried talking to Queen Sigrid of Etceteria?"
+Player: "I have, Your Majesty. She says she will agree to peace as long as Miscellania recognises Etceteria as a sovereign nation."
+King Vargas: "Hmph! You can tell her I'll officially recognise her country as soon as she changes the Etceteria national anthem."
+Player: "Why is that, Your Majesty?"
+King Vargas: "It's insulting! The title alone, "You're Stupid, We're the Best", should be enough to give you an idea!"
+Player: "I'm sure I can convince her there are better anthems."
+<end of dialogue, quest progresses>
+
+Talk to Queen Sigrid.
+
+Queen Sigrid: "Hello. Have you talked to Vargas yet?"
+Player: "I have, Your Majesty. He says he will recognise the country when you change your anthem."
+Queen Sigrid: "What? But it's a great anthem, I composed it myself! Listen!"
+Queen Sigrid: ""You're stupid, we're the best / Etceteria beats the rest! / and Queen Sigrid is very pretty, / King Vargas is a good, hey, nonny-nonny!""
+Player: "I'm afraid he insisted, Your Majesty."
+Queen Sigrid: "Well, it can't be helped I suppose..."
+Queen Sigrid: "You'll have to find a bard to write a new one though. And there isn't a hard to be had for love nor money in Etceteria."
+Player: "I'll see what I can do, Your Majesty."
+
+Go talk to Prince Brand.
+Player: "I need someone to compose a new anthem for Etceteria."
+Prince Brand: "You've come to the right bard! I'll write one for you immediately!"
+Player: "You can take your time, really..."
+Prince Brand: "No problem, I'm already done! Here, listen!"
+Prince Brand: "'Etceteria, Etceteria, / Oh what a great country it is. / Etceteria, Etceteria, / So I wrote a song about it.'"
+Prince Brand: "'It's somewhere in the sea, / And it looks very nice, / If it weren't for your ancestors, / It wouldn't be there at all,'"
+Prince Brand: "'And when things aren't going too well, /  We sing this lovely song, / And then we'll all feel so much better, / It won't take very long.'"
+Prince Brand: "Here's a copy, you can keep it!"
+Player: "... that's lovely, thanks."
+Prince Brand: "Don't mention it, <Madam/Sir>."
+<end of dialogue, quest progresses.>
+
+Talk to Advisor Ghrim
+
+Advisor Ghrim: "Greetings, <Madam/Sir>."
+Player: "I got Prince Brand to compose a new Etceterian Anthem for me, but it's awful.!"
+Advisor Ghrim: "Oh dear. Well, that is only to be expected. May I see it, please?"
+Player: "Here you go."
+Advisor Ghrim: "Hmm, yes...allow me to make a few adjustments."
+Advisor Ghrim: "There you go <Madam/Sir>. Are there any other matters in which I may be of assistance?"
+
+Select an Option
+	"What am I meant to be doing again?"
+	"How do I make peace with Etceteria?"
+	"How am I supposed to get the <Prince/Princess> to marry me?"
+	"Is there anything else you can tell me?"
+		Player: "Is there anything else you can tell me?"
+		
+
+Go talk to Queen Sigrid.
+
+Queen Sigrid: "Hello. Have you found a new anthem yet?"
+Player: "Yes, Your Majesty."
+Queen Sigrid: "Let's see now..."
+Queen Sigrid: "'Etceteria, Etceteria, / Of our country are are proud! / Etceteria, Etceteria, / Let all sing its name out loud!'"
+Queen Sigrid: "'Rising high above the water, / The jewel of the North!, / Our mothers and our fathers, / To build this land came forth!'"
+Queen Sigrid: "'And in the times of darkness, /  Sing praises of our land! / And in our hearts we can be sure, / Our victory is at hand!'"
+Queen Sigrid: "Why, this is quite good! I'm surprised!"
+Queen Sigrid: "Here is a treaty declaring what we've mutually agreed to. I've already signed, so all it needs is King Vargas' signature and it'll be official."
+<end of dialogue, quest progresses>
+
+Talk to King Vargas.
+
+Player: "Your Majesty."
+King Vargas: "How are you getting on, <fremennikname>? Have you convinced Sigrid yet?"
+Player: "I have here a treaty awaiting your signature."
+King Vargas: "I doubt I will be able to hold an ordinary pen well enough to sign the treaty. You will have to find a pen large enough for me to hold."
+<end of dialogue, quest progresses>
+
+Talk to Derrik, to the north east in the smithy.
+
+Derrik: Good day, <Madam/Sir>. Can I help you with anything?
+
+Select an Option
+	"Can I use your anvil?"
+	"I have a slightly strange request..."
+		Player: "I have a slightly strange request..."
+		Player: "The King needs to sign a treaty, but is unable to because he lacks a pen large enough for him to hold. Could you make me a nib of the right size?"
+		Derrik: "Hm... I may be able to manage that. What sort of size?"
+		Player: "About the size of a helm should do."
+		Derrik: "All right, but I'll need an iron bar to make it from."
+		Player: "I have one here." 
+		Derrik: "Good. Just a minute..."
+		Derrik: "Here you go! One giant pen nib!"
+		<end of dialogue, quest progresses.>
+	"Nothing, thanks."
+	
+Go talk to King Vargas.
+
+Player: "Your Majesty."
+King Vargas: "How are you getting on, <fremennikname>? Have you found me a pen yet?"
+Player: "Here it is, Your Majesty."
+King Vargas: "Excellent! And now, with a flourish, I sign the end of the rivalry between our two proud kingdoms."
+King Vargas: "Now, has my <son/daughter> agreed to marry you?"
+Player: "Not yet, Your Majesty."	
+King Vargas: "Well, keep at it then!"
+King Vargas: "Ghrim tells me that the population is not suppportive of having you as a ruler. You should try to gain their support."
+<end of dialogue, quest progresses>
+
+Talk to Gardener Gunnhild.
+
+Gardener Gunnhild: "Hello."
+
+What would you like to talk about?
+	"Gardener Gunnhild."
+		Player: "Good day. What are you doing?"
+		Gardener Gunnhild: I'm weeding this herb garden. It's hard work! I also sell a few gardening supplies."
+		Select an Option
+			"Good luck with that."
+			"What do you have for sale?"
+				Player: "What do you have for sale?"
+				Gardener Gunnhild: "At the moment I'm selling garden rakes and iron sickles. They're 15gp each, if you'd like one?
+				Select an Option
+					"I'd like a rake, please."
+						Player: "I'd like a rake, please."
+						Gardener Gunnhild: "Thank you! Here you go."
+						<end of dialogue, shiny new rake 4 u>
+					"I'd like an iron sickle, please."
+					"No, thank you."
+					"What are iron sickles for?"
+	"Your approval rating."
+		Player: "What do people of me around here?"
+		Gardener Gunnhild: "You haven't really won the hearts of the locals, if you see what I mean. At the last poll, only 28% of the population liked you. 
+		<end of dialogue>
+		
+
+Go around and earn approval by weeding outside of the castle, mining coal to the north, chopping maple trees, fishing tuna/swordfish/lobsters. Don't kill or steal. 
+
+Talk to Vargas when you get 75% public support.
+
+Player: "Your Majesty."
+King Vargas: "How are you getting on, <fremennikname>? Has my <son/daughter> agreed to marry you?"
+Player: "Not yet, Your Majesty."
+King Vargas: "Well, keep at it then!"
+King Vargas: "Ghrim tells me that the population would be glad to have you as a ruler."
+<end of dialogue, quest progresses>
+
+Talk to Advisor Ghrim.
+
+Advisor Ghrim: "Greetings <Madam/Sir>."
+
+Select an Option
+	"What am I meant to be doing again?"
+	"How am I supposed to get the <Prince/Princess> to marry me?"
+		Player: "How am I supposed to get the <Prince/Princess> to marry me?"
+		Advisor Ghrim: "I think you may find that talking to <him/her> would be a good way to start."
+		<end of dialogue, quest progresses>
+	"How do I gain the support of the population?"
+	"Is there anything else you can tell me?"
+
+If female:
+	Talk to Prince Brand
+	
+	Prince Brand: "Good day, Madam."
+	Player: "Good day, Your Royal Highness."
+	Player: "As I'm sure you are aware, your father the King is seeking someone to rule the Kingdom in his stead. I have put myself forward, but in order for me to become ruler..."
+	Prince Brand: "...you have to marry someone in the royal family,, namely myself?"
+	Player: "Yes, Your Royal Highness."
+	Prince Brand: "Ahahahaha!"
+	Prince Brand: "Come now, what interest would I have in a crass adventurer like yourself? What would you know of the poetry that flows through my veins like an avalanche through a peaceful mountain village?"
+	Player: "I think you may find I know good poetry when I see it, Your Royal Highness."
+	Prince Brand: "This may be the case. I am willing to give you a chance; if you impress me enough, I will consider accepting to marry you."
+	<end of dialogue, quest progresses>
+	
+	Give the Prince flowers
+	
+	Prince Brand: "Are these for me? Really?"
+	
+	Select an Option
+		"Yes"
+			Player: "Of course, Your Royal Highness."
+			Prince Brand: "Thank you! They're lovely!"
+			<end of dialogue, quest progresses>
+		"No"
+		
+	Talk to Prince Brand
+
+	Prince Brand: "I composed a poem, would you like to hear it?"
+	Player: "Of course, I'd love to."
+	Prince Brand: "I got up / This morning, / And had an egg / For breakfast"
+
+	Select an Option
+		"Be still, my heart."
+			Player: "Be still, my heart."
+			Prince Brand:"I'm glad you liked it."
+			<end dialogue, quest progresses>
+		"And then what happened?"
+		"That doesn't even rhyme!"
+		"Nah, that Kalphite was weedier than your garden."
+
+	Use the clap emote
+
+	Talk to Prince Brand
+
+	Prince Brand: "Thank you. It's nice to be appreciated."
+	<end of dialogue, quest progresses>
+
+	Talk to Prince Brand
+
+	Player: "So, you practice the harp? I see you have one over there."
+	Prince Brand: "Yes; I play the lyre and the harp, and compose songs, poems and sagas to move you, to delight you and entertain you! Sadly, my father does not think much of the art. What do you think?"
+
+	Select an Option
+		"You should listen to your father."
+		"You're an awful bard."
+		"You will be the greatest bard!"
+			Player: "You will be the greatest bard!"
+			Prince Brand: "I'm so glad you agree!"
+			<end of dialogue, quest progresses.>
+		"Selling ring of poverty 30 mil!" (Peak RS humor)
+		
+	Talk to him again
+	 <missing text, can't find anyone using a female character who recorded this.>
+	 
+	 Select an Option
+		"No-one's ever heard of you."
+		"They don't understand your poetry as I do."
+			Player: "They don't understand your poetry as I do."
+			Prince Brand: "Mmm, a very good answer, Madam."
+			<end of dialogue, quest progresses>
+			
+		"They're all already married."
+		"Cattle prod? Weapon of choice I reckon."
+	
+	Talk to Prince again
+	<missing dialogue>
+	
+	Give Prince a cake
+	Prince Brand: "Is this for me? Really?"
+	
+	Select an Option
+		"Yes"
+			Player: "Of course, Prince."
+			Prince Brand: "Thank you! It's lovely!"
+			<end of dialogue, quest progresses>
+		"No"
+
+	Talk to Prince again
+	
+	Player: "What would you do if you became ruler of Miscellania?"
+	Prince Brand: "Oh, I would never concern myself with such trivial matters as those involved in ruling a Kingdom. My interests lie solely in the arts." (Dear god, princess is way more likeable. Not sure if this is punishment for female players, or putting a positive female character in the game with a negative male counterpart.)
+	
+	Select an Option
+		"You're just afraid of responsibility."
+		"A much nobler pursuit, to be sure."
+			Player: "A much nobler pursuit, to be sure."
+			Prince Brand: "I'm glad you agree."
+			<end dialogue, quest progresses>
+		"If only you were any good at them..."
+		"Lies!!! It's all lies!!!"
+	
+	Talk to prince again
+	
+	Prince Brand: "I composed a saga, would you like to hear it?"
+	Player: "I don't know if I have time for a whole saga..."
+	Prince Brand: "Don't worry, it's quite short. Here we go!"
+	Prince Brand: "Once upon a time there was a Prince, / And his name was Brand, / He always had a song in his heart. / And a rhyme in his head,"
+	Prince Brand: "And he became the world's greatest bard, / And delighted one and all, / With his songs and sagas, / And Brand was his name!"
+	
+	Select an Option
+		"That's not a saga!
+		"I think my ears are bleeding."
+		"How inspiring!"
+			Player: "How inspiring!"
+			Prince Brand: "Thank you! I thought I would compose something for future generations, to tell them my story."
+			<end of dialogue, quest progresses>
+		"Cattle prod? Weapon of choice I reckon."
+	
+	Dance for the prince
+	
+	Prince Brand: "You dance well, Madam."
+	<dialogue ends, quest progresses>
+	
+	Talk to le prince
+	
+	Player: "So, why did you decide to become a bard?"
+	Prince Brand: "Poetry and music have always fascinated me. I am drawn to them like a moth to an overenthusiastic mage who has set himself on fire."
+	
+	Select an Option
+		"Wait, are you the moth or the mage?"
+		"That's a strange metaphor..."
+		"How poetic."
+			Player: "How poetic." 
+			Prince Brand: "Why thank you. Sometimes I amaze even myself."
+			<dialogue ends, quest progresses.>
+		"Selling ring of poverty 30 mil!"
+	
+	Talk to him again
+	
+	Prince Brand: "I must admit I am growing quite fond of you, <fremennikname>."
+	Player: "Could it be, my Prince, that you would consider wedding a crass adventurer such as myself?"
+	Prince Brand: "Not yet, my darling; let us just say my heart is a maze of inescapable tunnels, and you are the light at the end of one of them."
+	<end dialogue, quest progresses>
+	
+	Talk to him again
+	
+	Player: "What do you think of your sister?"
+	Prince Brand: "We don't always see eye-to-eye, but she understands my art better than our father."
+	
+	Select an Option
+		"You should listen to your father."
+		"What art is that?"
+		"I'm glad to hear it."
+			Player: "I'm glad to hear it."
+			Prince Brand: "Of course, she couldn't understand as well as you do, my darling."
+			<dialogue end, quest progresses>
+			
+		"Sneaky sneaky stick da chompy."
+
+	Blow kiss at Prince Brand.
+	
+	Prince Brand: "You flatter me, my darling."
+	<end dialogue, quest progresses.>
+	
+	Prince Brand: "Tell me, have you ever composed any poems yourself?"
+	
+	Select an Option
+		"I wouldn't presume to have the skill... "
+			Player: "I wouldn't presume to have the skill."
+			Prince Brand: "You're right, it takes great skill and inspiration to be a great poet such as myself."
+			<end of dialogue, quest progresses>
+		"There once was a man from Varrock..."
+		"Not really, but it can't be that hard."
+		"I'm a little teapot, short and stout."
+	
+	
+	Talk to him again
+	Prince Brand: "I wrote a song about you. Would you like to hear it?"
+	Player: "I'd love to!"
+	Prince Brand: "Your hair is like a waterfall / Or perhaps a bramble brush / Your eyes are like an ocean on which / I want to sail the ship of our love"
+	
+	Select an Option
+		"That was awful!"
+		"That was lovely. I'm touched!"
+			Player: "That was lovely. I'm touched!"
+			Prince Brand: "I'm glad you liked it, my darling."
+			<dialogue ends, quest progresses>
+			
+		"Eyes...ship...sail...what?"
+		"Cattle prod? Weapon of choice I reckon."
+	
+	Give Prince Brand a ring with a gem on it.
+	
+	Select an Option
+		"Yes"
+			Player: "Prince Brand, will you marry me?"
+			Prince Brand: "My heart is an open book to you, my darling, and all the pages say yes... "Yes"!"
+			Prince Brand: "We'll have to put off the actual ceremony until we can find a priest, but you can tell my father I have agreed to marry you."
+			<end of dialogue, quest progresses>
+		"No"
+	
+If male:
+	Talk to Princess Astrid
+	
+	Princess Astrid: "Good day, Sir"
+	Player: "Good day, Your Royal Highness."
+	Player: "As I'm sure you are aware, your father the King is seeking someone to rule the Kingdom in his stead. I have put myself forward, but in order for me to become ruler..."
+	Princess Astrid: "...you have to marry someone in the royal family,, namely myself?"
+	Player: "Yes, Your Royal Highness."
+	Princess Astrid: "You realise, I hope, that I have many suitors."
+	Player: "I take it you are not especially fond of any of them?"
+	Princess Astrid: "That is true. However I am willing to give you a chance; if you impress me enough, I will consider accepting to marry you."
+	<end of dialogue, quest progresses>
+	
+	Talk to Princess Astrid.
+	
+	Player: "What do you think of Advisor Ghrim?"
+	Princess Astrid: "He's a bit scary sometimes, but he's always so nice to me! When I was young, I called him Uncle Ghrim."
+	
+	Select an Option
+		"I think he's far too grumpy."
+		"No wonder you turned out like this..."
+		"He's been very helpful."
+			Player: "He's been very helpful."
+			Princess Astrid: "Yes, my father made a wise decision when he chose him to be his advisor."
+			<End dialogue, quest progresses>
+		"I'm rubber you're glue.........!"
+		
+	Talk to Princess Astrid
+	
+	Player: "So, tell me about all these other suitors you have."
+	Princess Astrid: "They never cease to bother me. They swarm around me like flies, all hoping to win my heart." (I mean, the player isn't much different.)
+	Princess Astrid: "Perhaps I should use them for target practice."
+	
+	Select an Option
+		"Hahahaha!"
+			Player: "Hahahaha!"
+			Player: "I can hold them still for you if you like."
+			Princess Astrid: "How do you know I wouldn't hit you as well?"
+			Player: "I have confidence in your skills, Your Royal Highness."
+			<end dialogue, quest progresses>
+			
+		"I don't know why they bother..."
+		"You monster!"
+		"Don't threaten me with a dead fish!"
+	
+	Talk to Princess Astrid.
+	
+	Player: "So, you practice archery? I see you have a bow mounted on your wall."
+	Princess Astrid: "Yes; my father thinks it is a cowardly art, but I find there is just as much courage, and more skill, involved in going into combat with just a bow and quiver. What do you think?"
+	
+	Select an Option
+		"You should listen to your father."
+		"Archery is a noble art!"
+			Player: "Archery is a noble art!"
+			Princess Astrid: "I'm so glad you agree!"
+			<end dialogue, quest progresses>
+		"Archers are all cowards!"
+		"Beards? Dangerous, flammable and make you look mad!"
+	
+	Give Princess Astrid flowers
+	
+	Princess Astrid: "Are these for me? Really?"
+	
+	Select an Option
+		"Yes"
+			Player: "Of course, Your Royal Highness."
+			Princess Astrid: "Thank you! They're lovely!"
+			<End of dialogue, quest progresses>
+		"No"
+		
+	Dance for the lady
+	
+	Princess Astrid: "Impressive. I like a man who knows how to dance."
+	<end dialogue, quest progresses>
+	
+	Talk to Princess Astrid
+	
+	Princess Astrid: "You are perhaps a more interesting man than I first took you for, Sir..."
+	Princess Astrid: "Oh, but I realise you have not yet told me your name!"
+	Player: "My name is <fremennikname>, Your Highness."
+	Princess Astrid: "Then may I call you <fremennikname>, Sir?"
+	Player: "If I may call you Astrid, Your Royal Highness."
+	Princess Astrid: "You may call me 'Princess'."
+	Player: "Very well, Princess."
+	<dialogue ends, quest progresses>
+	
+	Talk to Princess Astrid.
+	
+	Player: "So why are you so interested in archery?"
+	Princess Astrid: "I'm not sure. Even when I was little, archery always fascinated me."
+	
+	Select an Option
+		"You should try swordfighting instead."
+		"You should stick to knitting."
+		"I'm quite fond of it myself."
+			Player: "I'm quite fond of it myself."
+			Princess Astrid: "It's good to know someone who shares me interests."
+			<end of dialogue, quest progresses>
+			
+		"Care to sign my petition for pet frogs?"
+		
+	
+	Use any bow on el princesso.
+	
+	Princess Astrid: "Is this for me? Really?"
+	
+	Select an Option
+		"Yes"
+			Player: "Of course, Princess."
+			Princess Astrid: "Thank you! It's lovely!"
+			<end of dialogue, quest progresses>
+		"No"
+		
+	Talk to Princess
+	
+	Player: "So what's the history of these islands?"
+	Princess Astrid: "Well, nothing very exciting ever happened until my father declared war on Etceteria..."
+	Player: "Why did he do that?"
+	Princess Astrid: "Queen Sigrid of Etceteria insulted him."
+	
+	Select an Option
+		"He probably deserved it."
+		"Hahahaha!"
+		"What happened next?"
+			Player: "What happened next?"
+			Princess Astrid: "He realised that neither of us have an army."
+			<end dialogue, quest progresses>
+		"Nah, that Kalphite was weedier than your garden."
+		
+	Talk to the future queen
+	
+	Player: "What would you do if you ruled this Kingdom?"
+	Princess Astrid: "Very little. It's not as if there's much to it... I might try to set up trade with other islands."
+	
+	Select an Option
+		"What a silly idea!"
+		"That sounds like a good idea."
+			Player: "That sounds like a good idea."
+			Princess Astrid: "Thank you."
+			<end dialogue, quest progresses.>
+		"That's not very enterprising."
+		"I'm rubber you're glue.........!"
+		
+	Talk to le princess
+	
+	Princess Astrid: "I must admit I am growing quite fond of you, <fremennikname>."
+	Player: "My, could it be that I have succeeded where so many before me have failed, and finally melted the heart of the fair Princess?"
+	Princess Astrid: "Not yet, my dear; let us just say you have made it onto the shortlist."
+	<end dialogue, quest progresses>
+	
+	Talk to the princess
+	
+	Player: "Do you go out into battle often?"
+	Princess Astrid: "Not often, no. I sometimes go hunting..."
+	
+	Select an Option
+		"I suppose you don't have much opportunity to."
+			Player: "I suppose you don't have much opportunity to."
+			Princess Astrid: "Exactly! Perhaps you could take me with you sometime, dear."
+			<end dialogue, quest progresses>
+			
+		"Hunting the mighty rabbits outside the castle?"
+		"And you call yourself an archer?"
+		"Cattle prod? Weapon of choice I reckon."
+		
+	Talk to princess
+	
+	Princess Astrid: "So, my dear, what do you think of Miscellania?"
+	
+	Select an Option
+		"Well, I've seen better..."
+		"It's boring."
+		"It's a lovely little country."
+			Player: "It's a lovely little country."
+			Princess Astrid: "I'm glad you like it."
+			<end of dialogue, quest progresses>
+		"Don't threaten me with a dead fish!"
+		
+	Talk to her again
+	
+	Player: "What do you think of your brother?"
+	Princess Astrid: "We don't always get along, but I'm sure he's a nice guy at heart."
+	
+	Select an Option
+		"I have heard better drains!"
+		"I really don't like him."
+		"And what a great bard he makes!"
+			Player: "And what a great bard he makes!"
+			Princess Astrid: "Haha! Oh yes, quite the hard, he is."
+			<end dialogue, quest progresses.>
+		"Selling ring of poverty 30 mil!"
+	
+	Talk to her again
+	Princess Astrid: "Hello, dear."
+	Player: "Hello, darling."
+	<end dialogue>
+	
+	Use the blow kiss emote by the princess.
+	
+	Princess Astrid: "*giggle* My, aren't you the charmer?"
+	<end of dialogue, quest progresses>
+	
+	Talk to Advisor Ghrimm.
+	
+	Advisor Ghrimm: "Greetings, Sir."
+	
+	Select an Option
+		"What am I meant to be doing again?"
+		"How do I make peace with Etceteria?"
+		"How am I supposed to get the Princess to marry me?"
+			Player: "How am I supposed to get the Princess to marry me?"
+			Advisor Ghrimm: "When the time comes to actually ask for her hand in marriage, do not forget the engagement ring."
+			<dialogue ends>
+		"Is there anything else you can tell me?"
+		"I have a question about my Achievement Diary."
+		
+	Use a ring with a gem on the princess
+	
+	Princess Astrid: "Is this for me? Really?"
+	
+	Select an Option
+		"Yes"
+			Player: "Princess Astrid, will you marry me?"
+			Princess Astrid: "Oh, my dear, I thought you'd never ask! Of course I'll marry you!"
+			Princess Astrid: "We'll have to put off the actual ceremony until we can find a priest, but you can tell my father I have agreed to marry you."
+			<end of dialogue, quest progresses>
+		"No"
+		
+Talk to da king
+	
+Player: "Your Majesty."
+King Vargas: "How are you getting on, <fremennikname>? Has my <daughter/son> agreed to marry you?"
+Player: "She has, Your Majesty."
+King Vargas: "Excellent, excellent."
+King Vargas: "Ghrim tells me that the population would be glad to have you as a ruler."
+King Vargas: "I see no reason to delay your regency any further. Ghrim, please proceed with the ceremony."
+Advisor Ghrimm: "Yes, sir."
+Advisor Ghrimm: "We are gathered here today to witness the rise of a new hero to the regency of the Kingdom of Miscellania, to continue the work of our great King Vargas who is unfortunately now no longer able to rule."
+Advisor Ghrimm: "By the powers invested in me by the Miscellaneous Constitution, I declare thee, <fremennikname>, to be the new Regent of this fair kingdom."
+Advisor Ghrimm: "May you bring success and prosperity to Miscellania and to all of its people."
+Advisor Ghrimm: "... is that all?"
+King Vargas: "That is all. I wish you luck as Regent. Speak to Ghrim if you require assistance."
+
+Quest fin.

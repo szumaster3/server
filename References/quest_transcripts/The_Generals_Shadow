@@ -1,0 +1,213 @@
+The General's Shadow (January 9, 2009)
+Sources: https://www.youtube.com/watch?v=DXVpvebxdVw
+
+Talk to General Khazard to start the quest, in between Fremmenik and the Golden Apple Tree.
+
+If holding weapons(?)
+General Khazard: "You can see into the Shadoe Realm and yet you are not of it. Oh well, you will be of no use."
+
+If not(?)
+Player: "Hello, General."
+General Khazard: What? You are not dead and yet you walk and talk in the Shadow Realm. Explain yourself."
+Player: "I am a being of great power and experience. I can see and speak to ghosts. For my assistance they clothed me in their garb. Can I offer you assistance, General?"
+General Khazard: "This intrigues me. How do you know me? You look familiar but I can't place it."
+
+Select an Option
+	"Uh, well, you don't really have eyes, so how can you tell?"
+		Player: "Uh, well, you don't really have eyes, so how can you tell?"
+		General Khazard: "There are ways to see that you humans cannot grasp."
+		Player: "Oh."
+		General Khazard: "It doesn't matter anyway. YOu are not of the blood and I cannot trust you."
+		
+		Select an Option
+			"I'm a very trustworthy person."
+				Player: "I'm a very trustworthy person."
+				General Khazard: "That is not something I can take your word on."
+				Player: "So whos word would you take?"
+				General Khazard: "Hmm. There is one person's word I would believe. IF you visited Sin Seer, and she judged you trustworthy, then I would have use for you."
+				Player: "Where would I find her?"
+				General Khazard: "Well, considering I told you she was a seer, of source, I would imagine you would find her in Seers' Village. It is to the sound of here, not far."
+				General Khazard: "Go and see her, return with her report and I will see if I have use for you. You will be well rewarded."
+				Player: "Okay! That sounds reasonable. Sin Seer, huh? How do you know someone like her?"
+				General Khazard: "It's a long story, and I do not have the time to sell it."
+				<end of dialogue, quest progresses>
+				
+			"You're right. I'm completely untrustworthy."
+	"I just have one of those faces."
+	
+Go chat up Sincere the Sinning Seer.
+
+Player: "I'm looking for Sin Seer."
+Sin Seer: "Are you another one of those 'holier than thou' fools wanting to redeem themselves?"
+Player: "Uh, no actually. I'm trying to join a really evil guy's team."
+Sin Seer: "Really? Finally, something worthwhile."
+Sin Seer: "It was fun messing with those devoteees for the first few times but, after a while, condemning people to an eternity of damnation gets a bit dull."
+Sin Seer: "So, whom are you trying to hook up with? Dark priest? Warload? Penguin?"
+Player: "Uh, I want to prove to General Khazard I'm trustworthy."
+Sin Seer: "Oh, that old fart? Is he still around? Humph. I dunno if I can be bothered."
+
+Select an Option
+	"Bribe"
+		Player: "What if I pay you for the trouble - would you then? I can't imagine you make much money, seeing peoples sins and all."
+		Sin Seer: "Oh, there's money in it. I just don't get invited to many parties."
+		Sin Seer: "You got me all excited about evit plots, and now it's just a matter of trust. I really can't be bothered to strain myself on that account."
+		Player: "Fine, you don't actually have to see my sins, just pronounce me to be trustworhy. I'll pay you and be on my way."
+		Sin Seer: "He'll know it's a lie. But I do need the cash, so I'll do it. Gimme 40 gold coins and you'll be as trustworthy as a newborn."
+		Select an Option
+			"Here's the money"
+				Player: Here's the money.
+				Sin Seer: "Fine. I declare you trustworthy, if you consider bribing a seer a trustyworthy action."
+				Sin Seer: "Give this note to Khazard, it will prove you have been to see me."
+				"You received a note from Sin Seer."
+				<end of dialogue, quest progresses>
+			"Nevermind"
+	"Plead"
+	
+Go back to your bestie ghosty buddy.
+
+Player: "I have been to the Sin Seer. She has made her verdict."
+General Khazard: "And?"
+Player: "She said to give you this note to prove I went to see her."
+General Khazard: "The note says you have committed many sins and atrocities in your life. I'm impressed; I will use you."
+General Khazard: "It has been a long time since I have left my home in the south. I have lost track of what is going on in the world, but now it is imperative that I know."
+General Khazard: "So I sent out four scouts to gather information for me. I brought them to walk like me in the Shadow Realm, so they would be safe from my enemies."
+General Khazard: "I sent them on four missions. One was to go to the land of the gnomes and explore their holdings. One was to go to a jungle to the sound. One was to explore where the White Knights rule. And one was to the place that"
+General Khazard: "I once called home - a place of great heat."
+General Khazard: "I am going to entrust you with a very important message, which you must deliver to each one of them."
+General Khazard: "Tell them: The planets are nearing alignment; we will meet in the place of half light and ice soon. Beware the others, for though they are weak and few, they are cunning."
+Player: "You can trust me to do it, sir!"
+
+General Khazard: "Do you make progress in finding my scouts?"
+Player: "I haven't found any. Where are they headed?"
+General Khazard: "One was to go to a jungle to the south."
+General Khazard: "One was to go to the land of the gnomes and explore their holdings."
+General Khazard: "One was to explore where the White Knights rule."
+General Khazard: "One was to go to a place of great heat."
+General Khazard: "If I knew more of their locations I would go myself. Now go and finish the job."
+<end dialogue>
+
+Talk to scout in desert
+	
+Player: "Hello there! General Khazard sent me."
+Scout: "Gah! Don't sneak up on me!"
+Player: "Uh, sorry."
+Scout: "I think I can see my heart pounding!"
+Player: "You're pretty jumpy for a scout. I thought you'd be made of sterner stuff."
+Scout: "What is it you want exactly?"
+Player: "I bring a message from the General!"
+Player: Khazard says: 'The planets are nearing alignment; we will meet in the place of half light and ice soon. Beware the others, for though they are weak and few, they are cunning.'"
+Scout: "Oh good, I long for the cold. This place is so hot! The General has told me much of his time spent here and I can see why he left."
+Player: "Oh, did the General live here?"
+Scout: "Long ago, yes. But not by choice. His evil lord and master forced him and his kind to reside here."
+Player: 'Khazard with a master? Hard to believe. Who was it?"
+Scout: "I think I have said too much already."
+Player: "So what have you discovered on your travels through the desert?"
+Scout: "The fighting in the desert has come to a stop. However, there is still much distruct between Menaphos and Al Kharid. It seems like it would be possible to reignite the war if needed."
+Scout: "I have heard whisperings in the bandit camp that the prisoner of Jaldraocht is now free."
+Scout: "I followed one called Lazim. He let slip that he had discovered the buried temple. Now the two other who were there are on the move. The General may find there are new players at the ritual this time."
+Player: "This desert seems to be a hotbed of information. Do you want me to relay any of this to the General?"
+Scout: "Not at this time. I must investigate further."
+Player: "Any idea where I can find the other scouts?"
+Scout: "Hmm, I left one of them near a haunted wood - the trees kept trying to hit us. One scout headed for a jungle and the other for the gnomes."
+<end of dialogue, quest progresses>
+
+Talk to the scout near Draynor/Fally
+
+Player: "Hello there! General Khazard sent me."
+Scout: "Finally, news! What message does he send?"
+Player: "Err. it was something about planets."
+Scout: "Well, spit it out! I can't wait here all day."
+Player: Khazard says: 'The planets are nearing alignment; we will meet in the place of half light and ice soon. Beware the others, for though they are weak and few, they are cunning.'"
+Scout: "Good. I long for the slaughter. These local squabbles and politics bore me. I wonder if the others have begun to move as well?"
+Player: "The other what? Who are you slaughtering?"
+Scout: "Ah, not for your ears, messenger!"
+Player: "So how's your mission going. Enjoying the Draynor woods?"
+Scout: "There is talk in the village that the Count of Draynor Manor has been slain by some meddling adventurer. I will need to enter the manor to verify this."
+Scout: "Other than that, nothing of interest."
+Player: "Have you been in touch with any of the other scouts?"
+Scout: "I'm too busy scouting to be in touch. One headed this direction with me seeking the place of heat and sand, another sought a place of moisture and growth and the last sought gnomes."
+<end of dialogue, quest progresses>
+If you talk to him again, he repeats the last two lines.
+
+Talk to the scout on Karamja. 
+Player: "Hello there! General Khazard sent me."
+Scout: "You must be a great mage to be able to see me, human."
+Player: "So, are you a ghost?"
+Scout: "Nothing so morbid. I am a scout for Khazard, and I move more easily through the land unseen. There are enemies everywhere."
+Player: "If you're not a ghost, why do I need an Amulet of Ghostspeak to talk to you?"
+Scout: "Those who walk fully in the Shadow Realm become warped by it and speak as ghosts do. That is why I cannot speak to you unless you wear the amulet."
+Player: "Oh. Well, here's your message."
+Player: "Khazard says: 'The planets are nearing alignment; we will meet in the place of half light and ice soon. Beware the others, for though they are weak and few, they are cunning.'"
+Scout: "Thank you, messenger."
+Player: "So, how's your mission going?"
+Scout: "There is nothing pleasant about this land. The animals are vile, the temperature is unbearable and the plant life is often more dangerous than the animals."
+Scout: "There were some strange occurrences in Tai Bwo Wannai. The people fled from their village because their gods were angry with them, or the like, but now they have returned. I must investigate why."
+Scout: "Shilo Village was overrun by the undead, but someone of great ability has brought the situation under control."
+Player: "Well, there's always something interesting going on here."
+Player: Any idea where the other scouts are?"
+Scout: "I'm a scout, not a spy. I do not keep track of them."
+Scout: "I was told to go south, so here I am. I know one was to investigate the gnomes. I believe one headed towards Asgarnia. Another was told to go to a place of great heat, but that they would have to sneak through a pass."
+<end of dialogue, quest progresses>
+ Attempting to talk to him again repeats the last three lines of dialogue.
+ 
+Talk to le gnome-y spy.
+Player: "Hello there! General Khazard sent me." 
+Scout: "What news, skinbag?"
+Player: "Hey, no need to be rude."
+Scout: "Your smell disgusts me, so make it quick."
+Player: "Khazard says: 'The planets are nearing alignment; we will meet in the place of half light and ice soon. Beware the others, for though they are weak and few, they are cunning.'"
+Scout: "I'll be glad when all this is over. The General will be strong again and we will push back this tide of filth that is humanity."
+Player: "Oi! I am one of those filth, I mean, humans! Besides, we were here first."
+Scout: "Haa, haa, haa. Oh, you naive mortals. There were many here before you. The last time the General went north, all this land belonged to the elves. Do not think so highly of your race."
+Player: "Discovered anything interesting on your travels?"
+Scout: "As I passed through Ardougne, I overheard some news. The plague in the west grows worse. King Latha's popularity continues to increase, while people are becoming more and more hostile to Tyras. I suspect"
+Scout: "there is more to be learned, but my mission is to observe gnomes, not humans."
+Scout: "I have learned that the cultists, who think they are so well hidden in the sewers, have failed in their ritual"
+Scout: "I head to the land of the gnomes; rumours say it is peaceful right now."
+Scout: "But I hear Glough has lost his position as advisor."
+Scout: "That is all I have heard."
+Player: "Well, I've found all of you now."
+Scout: "How do you mean?"
+Player: "The General sent me to find his four scouts, and now I've found all of you and delivered his message."
+Scout: "You have served the General well. I hope he rewards you. How did you come to his service?"
+Player: "He was surprised to see someone like me in the Shadow Realm and I offered to give him assistance if he needed it."
+Scout: "You did not know of him before that? I am surprised he would speak to someone who did not know of his greatness."
+Player: "Greatness? He's crazy. He kidnapped innocent people and butched them in his arena. Not to mention sicking that dog on people. Killing it was the best thing I ever...heard about."
+Scout: "Indeed? Strange you would serve a man you feel that way about, but I will not doubt the General's judgement. You'd best go back to the General and report. I have a message you could take to him."
+Player: "Okay, let 'er rip."
+Scout: "I have nothing to rip, but the message is 'We of the blood are still loyal. Pavlov is the messenger.'"
+Player: "I'll remember that. Anything else?"
+Scout: "No, you may go."
+<end of dialogue, quest progresses.>
+
+Talk to Daddy Ghosty baddy again.
+Player: "I did it, sir! I found all the scouts and delivered your message. The last one said I should report back to you."
+General Khazard: "Oh, and what did he say that for?"
+Player: "He said to tell you, 'We of the blood are still loyal. Pavlov is the messenger.'"
+General Khazard: "Ah. Interesting. Well, you have served your purpose. Now to award you with something appropriate."
+General Khazard: "There is a cave near where the fish-men gather. Go to the east branch of this cave and seek out the one who lives in the Shadow Realm. He will reward you well."
+Player: "Right! Fish-men. Cave. Ghost. Thanks, General!"
+General Khazard: "Wait! Take this, it is the key to your reward."
+"The General hands you a severed leg."
+Player: "Ugh, well, at least it's not another hand."
+General Khazard: "Ah, you have dealt with severed limbs before?"
+Player: "It's a long story."
+General Khazard: "Don't worry if you lose it, I can always get more to replace it."
+<end of dialogue, quest progresses>
+
+Go to cave by fishing guild.
+Enter crack in the east side of cave.
+"You have a bad feeling about crawling into the next cavern."
+
+Do you want to enter the cavern?
+	"Yes"
+		"What the...! It's Bouncer, Khazard's hell hound."
+		"Khazard tricked me! This is no reward, he's trying to get me killed...AGAIN!"
+		<end of dialogue, quest progresses>
+	"No"
+
+Kill le doggo.
+
+"You receive a shadow sword and 2000 Slayer xp."
+
+And that's all, folks.

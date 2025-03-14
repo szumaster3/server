@@ -1,0 +1,56 @@
+/*package content.kingdom.desert.quest.member.feud
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class TheFeud : Quest("The Feud", 60, 59, 1, Vars.VARBIT_QUEST_THE_FEUD_334, 0, 1, 28) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.DESERT_DISGUISE_4611, 230, 277, 5)
+
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "15,000 Thieving XP", ln++)
+        rewardXP(player, Skills.THIEVING, 15000.0)
+        addItemOrDrop(player, Items.MAPLE_BLACKJACKD_6421)
+        addItemOrDrop(player, Items.DESERT_DISGUISE_4611)
+        addItemOrDrop(player, Items.COINS_995, 500)
+        setVarbit(player, Vars.VARBIT_QUEST_THE_FEUD_334, 28, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+// Key 4589
+//1 quest point
+//Blackjacks
+//15,000 Thieving experience
+//Desert disguise
+//500 coins
+//The ability to do another part of Rogue Trader
+//Free beer when telling Faisal the Barman about Traitorous Hesham's drink being poisoned.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/

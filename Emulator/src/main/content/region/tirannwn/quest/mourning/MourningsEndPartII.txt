@@ -1,0 +1,53 @@
+/*package content.region.miscquest.mourning
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class MourningsEndPartII :
+    Quest("Mourning's End Part II", 92, 91, 2, Vars.VARBIT_QUEST_MOURNINGS_END_PART_II_1103, 0, 1, 60) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+
+        player.packetDispatch.sendItemZoomOnInterface(Items.MINECART_TICKET_5020, 230, 277, 5)
+
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "20,000 Agility XP", ln++)
+        rewardXP(player, Skills.AGILITY, 20000.0)
+        addItemOrDrop(player, Items.CRYSTAL_TRINKET_6653, 1)
+        setVarbit(player, Vars.VARBIT_QUEST_MOURNINGS_END_PART_II_1103, 60, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//2 quest points
+//20,000 Agility experience
+//A crystal trinket (allows access to the Temple of Light)
+//Access to the death altar (includes access via the Abyss)
+//Access to Dark Beasts (quest completion not required)
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
+
+ */

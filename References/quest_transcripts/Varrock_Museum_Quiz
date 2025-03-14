@@ -1,0 +1,1095 @@
+Sources: https://www.youtube.com/watch?v=pSzNn_d5Q98
+
+*"Talking" to any of the 14 plaques without having accepted Orlando's quiz, this actually just prints the message to the chatbox*
+
+class DisplayCaseNatural : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> playerl ("This looks like some sort of quiz. I wonder if I can take part...").also { stage = END_DIALOGUE }
+
+
+***Talking to Orlando Smith***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("G'day there, mate.").also { stage++ }
+		1 -> playerl ("Good day. Are you alright? You look a little lost.").also { stage++ }
+		2 -> npcl ("Well, mate, to tell you the truth, I think I've come a gutser with these displays..").also { stage++ }
+		3 -> playerl ("Come a what?").also { stage++ }
+		4 -> npcl ("Gutser and no mistake. Me boss asked me to put together a quiz for the visitors.").also { stage++ }
+		5 -> npcl ("But to be deadset with you, I wasn't paying much attention to me boss over there and I've done a bit of a rush job.").also { stage++ }
+		6 -> playerl ("You mean the natural historian?").also { stage++ }
+		7 -> npcl ("Yep, that's the bloke. Say, mate, you do me a favour?").also { stage++ }
+		8 -> playerl ("Perhaps. What do you need?").also { stage++ }
+		9 -> npcl ("Well, you look like a pretty smart cobber. Could you take a look at the display plaques and give 'em a runthrough?").also { stage++ }
+		10 -> when(buttonId) {
+		     1 -> playerl ("Sure Thing.").also { stage = 13 }
+			 2 -> playerl ("No thanks, I'm too busy.").also { stage = 11 }
+		11 -> playerl ("No thanks, I'm too busy.").also { stage++ }
+		12 -> npcl ("Fair dinkum mate. I'm sure I'll get someone else to help me.").also { stage = END_DIALOGUE }
+		13 -> playerl ("Sure Thing.").also { stage++ }
+		14 -> npcl ("Bonza, mate! I reckon three questions per case should be bang to rights.").also { stage++ }
+		15 -> npcl ("Take a gander at each case and I'll look over your shoulder to give some advice.).also { stage++ }
+		16 -> playerl ("Will do.").also { stage = END_DIALOGUE }
+		//start quest
+		
+***Talking to Orlando Smith, having started the quest but read no plaques***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("G'day there, mate. How're the display cases coming along?").also { stage++ }
+		1 -> playerl ("I haven't had the chance to take a look yet.").also { stage++ }
+		2 -> npcl ("No worries, mate; just have a go when you can.").also { stage++ }
+		3 -> playerl ("Will do.").also { stage = END_DIALOGUE }
+		
+***Talking to Orlando Smith, having answered at least one of the questions***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("G'day there, mate. How're the display cases coming along?").also { stage++ }
+		1 -> playerl ("I'm getting there. I still have a few left to do.").also { stage++ }
+		2 -> npcl ("Bonza, mate. You're doing a great job so far.").also { stage++ }
+		3 -> playerl ("Righty ho! I'll get back and finish the rest.").also { stage++ }
+        4 -> npcl ("Good luck!").also { stage = END_DIALOGUE }
+		
+		
+***Orlando Smith, immediately after the player finishes all displays***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Well done, mate. You finished all of the displays.").also { stage++ }
+		1 -> npcl ("Come over and have a chat with me. I might have something for you.").also { stage = END_DIALOGUE }
+		
+***Talking to Orlando Smith, having answered all questions***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("G'day there, mate. How're the display cases coming along?").also { stage++ }
+		1 -> playerl ("All done. I've corrected the mistakes.").also { stage++ }
+		2 -> npcl ("Beaut' mate! That's the best news I've had all day.").also { stage++ }
+		3 -> playerl ("Glad I could help.").also { stage++ }
+		4 -> npcl ("Right, I'll have a chat to me boss over there and let him know you've helped me out").also { stage++ }
+		5 -> npcl ("You know, with all this new information you've absorbed, I reckon you can say you're more experienced in Slaying and Hunting now.).also { stage++ }
+		6 -> playerl ("Oh, thank you very much.").also { stage++ }
+		7 -> npcl ("No worries, mate. You take care now.").also { stage++ }
+		8 -> playerl ("Goodbye.).also { stage = END_DIALOGUE }
+		
+***Talking to Orlando Smith, after finishing the miniquest***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Thanks for all your help, mate. Hope you enjoy the museum!.").also { stage = END_DIALOGUE }
+
+***Talking to Northern Natural Historian***
+
+class NaturalHistorianDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Hello again, [sir/madam], how can I help you on this fine day?").also { stage++ }
+		1 -> playerl ("I was hoping you could tell me about something.").also { stage++ }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Tell me about lizards.").also { stage = 4 }
+			 2 -> playerl ("Tell me about the tortoises.").also { stage = 16 }
+			 3 -> playerl (Tell me about dragons.).also { stage = 28 }
+			 4 -> playerl (Tell me about the wyverns.).also { stage = 44 }
+		4 -> playerl ("Tell me about lizards.").also { stage++ }
+		5 -> npcl ("Ahh lizards, the scaly carnivores.").also { stage++ }
+		6 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		7 -> npcl ("Contrary to popular belief, even though most lizards have a yellow belly, they are not in fact cowardly. Most Gielinor lizards will not shy away from a good fight and can be very tough.").also { stage++ }
+		8 -> npcl ("This is due to a very thick and tough hide, made from thousands of thick scales. Most people who claim to be hunters have a very hard time trying to dispatch lizards.").also { stage++ }
+		9 -> npcl ("In fact, the only people to successfully discern how to kill these tough little squamatas are the five legendary Slayer masters, although we assume they must have some kind of natural predator.").also { stage++ }
+		10 -> npcl ("Interestingly enough, these scales are made from the same substance that your hair is comprised of. This substance is called keratin.").also { stage++ }
+		11 -> npcl ("Lizards have a very well developed sense of vision and hearing. Some people think that some lizards have a third eye!").also { stage++ }
+		12 -> npcl ("A tiny, light-sensitive, transparent structure on top of the head that helps them regulate how long they stay in the sun.").also { stage++ }
+		13 -> npcl ("This is vital for the cold-blooded lizards who have no means to regulate their internal temperature.").also { stage++ }
+		14 -> npcl ("Like many cold-blooded creatures, if they are subjected to a sudden decrease in temperature, they will become sluggish and sleepy.").also { stage++ }
+		15 -> npcl (" And this concludes my short lecture on lizards. I hope you've enjoyed yourselves.").also { stage = 59 }
+		16 -> playerl ("Tell me about the tortoises.").also { stage++ }
+		17 -> npcl ("Ahh tortoises, the armoured ancients.").also { stage++ }
+		18 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		19 -> npcl ("The tortoise is a very well defended beast. It uses an armoured shell just like its aquatic cousins the terrapin and the turtle.").also { stage++ }
+		20 -> npcl ("Tortoises can vary in size from about as long as your hand to as big as a unicorn. Most land tortoises eat nothing but plants in the wild.").also { stage++ }
+		21 -> npcl ("Did you know you can tell how old a tortoise is by the number of rings in its shell, just like a tree").also { stage++ }
+		22 -> npcl ("Most land-based tortoises eat plants, feeding on grazing grasses, weeds, leafy greens, flowers, and cabbages.").also { stage++ }
+		23 -> npcl ("Tortoises generally live as long as people, and some individual ones are known to have lived longer than 300 years.").also { stage++ }
+		24 -> npcl ("Because of this, they symbolise longevity within some cultures, such as gnomes who also breed them for battle.").also { stage++ }
+		25 -> npcl ("The oldest tortoise ever recorded was Mibbiwocket, who was presented to the King Healthorg the Great, by the famous explorer Admiral Bake, shortly after its birth.").also { stage++ }
+		26 -> npcl ("Mibbiwocket is still in the care of the gnomish royal family.").also { stage++ }
+		27 -> npcl ("And this concludes my short lecture on tortoises. I hope you've enjoyed yourselves.").also { stage = 60 }
+		28 -> playerl ("Tell me about dragons.").also { stage++ }
+		29 -> npcl ("Ahh dragons, the mighty hunters of the sky.").also { stage++ }
+		30 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		31 -> npcl ("The dragons of Gielinor are a most confusing species. Standing at approximately twelve feet tall, these imposing predators strike fear into the hearts and minds of most sane folk.").also { stage++ }
+		32 -> npcl ("However, if you delve a little deeper into their history and lifestyle, a few things stick out as very unusual.").also { stage++ }
+		33 -> npcl ("With most species there is a line, an ancestry if you will, whereby you can track how a creature has come to be in its present form.").also { stage++ }
+		34 -> npcl ("For instance, you can trace the ancestry of the common house cat back to the same creature that became the sabre-toothed kyatt.").also { stage++ }
+		35 -> npcl ("However, with the dragon, no such root ancestor can be found.").also { stage++ }
+		36 -> npcl ("There are many forms of dragon, such as the common coloured and the metallic, or ferrous, dragon.").also { stage++ }
+		37 -> npcl ("They colonise many areas of Gielinor, though most notably, sites of ancient battles and small dank caves.").also { stage++ }
+		38 -> npcl ("Eating habits tend to vary, with the majority of their food being meat. However, it has also been noted that they can consume metals just as easily, with runite being thought of as a delicacy.").also { stage++ }
+		39 -> npcl ("Throughout history, dragons have appeared in myth and legend as fearsome adversaries and cunning creatures.").also { stage++ }
+		40 -> npcl ("However, modern evidence does not support this. Most young dragons are largely creatures of instinct with a strong vicious streak.").also { stage++ }
+		41 -> npcl ("The lifespan of the common dragon is as yet unknown, as no dragon has ever been observed dying of old age.").also { stage++ }
+		42 -> npcl ("Although, it has been mooted that spontaneous combustion could be considered a natural cause of death for this species.").also { stage++ }
+		43 -> npcl ("And this concludes my short lecture on dragons. I hope you've enjoyed yourselves.").also { stage = 61 }
+		44 -> playerl ("Tell me about the wyverns.").also { stage++ }
+		45 -> npcl ("Ahh, wyverns. The extinct lizards.").also { stage++ }
+		46 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		47 -> npcl ("The wyverns' tale is a sad one. This now extinct species is presumed in some way to be related to the dragon.").also { stage++ }
+		48 -> npcl ("The wyverns' tale is a sad one. This now extinct species is presumed in some way to be related to the dragon.").also { stage++ }
+		49 -> npcl ("Much of the evidence for wyvern behaviour comes from the reconstruction of old bones in the icy mountains of Asgarnia.").also { stage++ }
+		50 -> npcl ("As most lizards cannot maintain their own body temperature, two theories as to how they managed to survive have been proposed.").also { stage++ }
+		51 -> npcl ("One is that Asgarnia was at one time a much more temperate climate than it is now. The other is that wyverns could generate fire internally in much the same way as dragons.").also { stage++ }
+		52 -> npcl ("If they follow the dragon paradigm, then they would have been carnivores, feeding on cows, sheep and other livestock animals.").also { stage++ }
+		53 -> npcl ("How and why the wyverns became extinct is something of a mystery. Though if you consider the theory that the climate of Asgarnia changed suddenly, then this could provide an explanation.").also { stage++ }
+		54 -> npcl ("There are some inconsistencies in the findings we have for the wyverns, such as the odd wear patterns of some of bones, which really could only have happened after the creature died.").also { stage++ }
+		55 -> npcl ("Also the bones we have collected remain a little below room temperature wherever they are kept.").also { stage++ }
+		56 -> npcl ("They have also been shown to radiate a very weak magical aura.").also { stage++ }
+		57 -> npcl ("I'm sure that in due time, these mysteries will be solved.").also { stage++ }
+		58 -> npcl ("And this concludes my short lecture on wyverns. I hope you've enjoyed yourselves.").also { stage = 62 }
+		59 -> when(buttonId) {
+		     1 -> playerl (That's enough education for one day.).also { stage = 63 }
+			 2 -> playerl ("Tell me about the tortoises.").also { stage = 16 }
+			 3 -> playerl (Tell me about dragons.).also { stage = 28 }
+			 4 -> playerl (Tell me about the wyverns.).also { stage = 44 }
+		60 -> when(buttonId) {
+		     1 -> playerl ("Tell me about lizards.").also { stage = 4 }
+			 2 -> playerl (That's enough education for one day.).also { stage = 63 }
+			 3 -> playerl (Tell me about dragons.).also { stage = 28 }
+			 4 -> playerl (Tell me about the wyverns.).also { stage = 44 }
+		61 -> when(buttonId) {
+		     1 -> playerl ("Tell me about lizards.").also { stage = 4 }
+			 2 -> playerl ("Tell me about the tortoises.").also { stage = 16 }
+			 3 -> playerl (That's enough education for one day.).also { stage = 63 }
+			 4 -> playerl (Tell me about the wyverns.).also { stage = 44 }
+		62 -> when(buttonId) {
+		     1 -> playerl ("Tell me about lizards.").also { stage = 4 }
+			 2 -> playerl ("Tell me about the tortoises.").also { stage = 16 }
+			 3 -> playerl (Tell me about dragons.).also { stage = 28 }
+			 4 -> playerl (That's enough education for one day.).also { stage = 63 }
+		63 -> playerl ("That's enough education for one day.").also { stage++ }
+		64 -> npcl ("Nonsense! There's always room for more.").also { stage++ }
+		65 -> npcl ("And remember, science isn't dull!").also { stage = END_DIALOGUE }
+
+***Talking to Western Natural Historian***
+
+class NaturalHistorianDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Hello again, [sir/madam], how can I help you on this fine day?").also { stage++ }
+		1 -> playerl ("I was hoping you could tell me about something.").also { stage++ }
+		2 -> when(buttonId) {
+		     1 -> playerl (" Tell me about camels.").also { stage = 4 }
+			 2 -> playerl ("Tell me about leeches.").also { stage = 17 }
+			 3 -> playerl (Tell me about moles.).also { stage = 34 }
+			 4 -> playerl (Tell me about penguins.).also { stage = 45 }
+		4 -> playerl ("Tell me about camels.").also { stage++ }
+		5 -> npcl ("Ahh camels, the ships of the desert.").also { stage++ }
+		6 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		7 -> npcl ("The term camel refers to either of the two known species of camelid.").also { stage++ }
+		8 -> npcl ("There is the bactrian, which has two humps and can be found throughout Al Kharid. It also refers to the Ugthanki, or one-humped camel.").also { stage++ }
+		9 -> npcl ("Camels are ill-tempered beasts at the best of times, requiring a great deal of time and effort to tame.").also { stage++ }
+		10 -> npcl ("This would explain why used camel salesmen are in such a hurry to be rid of them.").also { stage++ }
+		11 -> npcl ("In the wild, camels have been known to lie in wait and ambush hapless travellers, before devouring them.").also { stage++ }
+		12 -> npcl ("This is quite surprising, as most domestic camels are happy eating nothing but vegetables.").also { stage++ }
+		13 -> npcl ("Camel milk is much more nutritious than cow milk and goes well in the strong desert drink akin to tea.").also { stage++ }
+		14 -> npcl ("Another useful camel by-product is dung. Their dung is very dry, due to the highly efficient metabolism of the camel.").also { stage++ }
+		15 -> npcl ("Scientific research has also shown that chilli has a disastrous effect on a camel's digestive system, which produces toxic dung.").also { stage++ }
+		16 -> npcl ("And this concludes my short lecture on camels. I hope you've enjoyed yourselves.").also { stage = 57 }
+		17 -> playerl ("Player: Tell me about leeches.").also { stage++ }
+		18 -> npcl ("Ahh leeches, the haemophagic parasites.").also { stage++ }
+		19 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		20 -> npcl ("Leeches are fascinating creatures and are very similar to worms in most respects.").also { stage++ }
+		21 -> npcl ("They like to inhabit streams, rivers and seas, but their preference is for stagnant pools of water.").also { stage++ }
+		22 -> npcl ("One of the most common misconceptions is that all leeches feed on blood.").also { stage++ }
+		23 -> npcl ("In fact, very, very few leeches are parasitic bloodsucking animals.").also { stage++ }
+		24 -> npcl ("Most leeches are meat eaters, feeding on a variety of invertebrates such as worms, snails, insect larvae and snails.").also { stage++ }
+		25 -> npcl ("Those that do feed on blood have developed an amazing method of doing so. Firstly they latch onto the skin using a ring of tiny teeth, before injecting their prey with an anaesthetic.").also { stage++ }
+		26 -> npcl ("Then they bite into the skin using a Y-shaped mouthpiece and introducing a chemical that stops the blood from clotting.").also { stage++ }
+		27 -> npcl ("They will then feed until they are completely full, sometimes doubling in size!").also { stage++ }
+		28 -> npcl ("Most leeches are very small, measuring no more than the length of your middle finger. An exception to these are the leeches of Morytania, which can reach the size of a dog.").also { stage++ }
+		29 -> npcl ("They are much more mobile than their smaller cousins and are able to jump rather high when attacking.").also { stage++ }
+		30 -> npcl ("Quite how these leeches came to be so big is something of a mystery.").also { stage++ }
+		31 -> npcl ("All we can assume is that there is some kind of environmental influence, which has governed their immense growth.").also { stage++ }
+		32 -> npcl ("And this concludes my short lecture on leeches. I hope you've enjoyed yourselves.
+").also { stage = 58 }
+		33 -> playerl ("Tell me about moles.").also { stage++ }
+		34 -> npcl ("Ahh moles, the mammalian mountain makers.").also { stage++ }
+		35 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		36 -> npcl ("Now, moles are small mammals of the talpidae family. These subterranean burrowers mainly live on a diet of slugs, snails and insects.").also { stage++ }
+		37 -> npcl ("They vary greatly in habitat and can be found in almost every part of Gielinor. Some species have even known to be aquatic!").also { stage++ }
+		38 -> npcl ("Male moles are known as boars with the females called sows. Should you come across a group of moles, you would call them a labour.").also { stage++ }
+		39 -> npcl ("Moles are considered to be an agricultural pest in most places, digging up the ground and leaving molehills all over the place.").also { stage++ }
+		40 -> npcl ("This has been highlighted in Falador by Wyson the Gardener who, after using some Malignus Mortifer's Super Ultra Flora Growth Potion, managed to create Gielinor's only known species of giant mole.").also { stage++ }
+		41 -> npcl ("This fearsome beast has huge claws, wicked teeth and a penchant for shiny objects. It is a very tough animal with a thick protective hide and an ill temperament.").also { stage++ }
+		42 -> npcl ("That said, they do benefit the soil by aerating and tilling it, adding to its fertility. Contrary to popular belief, moles don't eat plant roots.").also { stage++ }
+		43 -> npcl ("And this concludes my short lecture on moles. I hope you've enjoyed yourselves.").also { stage = 59 }
+		44 -> playerl ("Tell me about penguins.").also { stage++ }
+		45 -> npcl ("Ahh penguins, the cunning birds of the sea.").also { stage++ }
+		46 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		47 -> npcl ("This often-maligned aquatic bird is known to be native to the ice fields of Etceteria, although they have been known to live as far as the fields of Lumbridge.").also { stage++ }
+		48 -> npcl ("These aquatic birds seem to spend the majority of their time eating and fostering their young.").also { stage++ }
+		49 -> npcl ("Unlike most animals that prefer cold climes, these sphenisciformes work very well together in large groups, by watching for predators and caring for each other's young.").also { stage++ }
+		50 -> npcl ("For creatures with such small brains, they do seem to have a disproportionate capacity for forward thinking and planning. As this serves no natural purpose, scholars are divided as to how this evolved.").also { stage++ }
+		51 -> npcl ("Their diet consists mainly of fish, squid and a small shrimp-like creature called krill. However, some have developed a taste for the mushrooms that grow around fairy rings.").also { stage++ }
+		52 -> npcl ("Penguins primarily rely on their vision while hunting. What we don't know is how penguins locate prey in the darkness, or at great depths.").also { stage++ }
+		53 -> npcl ("Some theories suggest that penguins are helped by some sort of extra sensory perception; perhaps even precognition.").also { stage++ }
+		54 -> npcl ("Penguins spend a long time going without food when they are breeding. In fact, they won't even leave their nests if they can help it.").also { stage++ }
+		55 -> npcl ("Fortunately, most penguins build up a layer of fat to keep them warm and provide energy until the moult is over.").also { stage++ }
+		56 -> npcl ("And this concludes my short lecture on penguins. I hope you've enjoyed yourselves.").also { stage = 60 }
+		57 -> when(buttonId) {
+		     1 -> playerl (That's enough education for one day.).also { stage = 61 }
+			 2 -> playerl ("Tell me about leeches.").also { stage = 17 }
+			 3 -> playerl (Tell me about moles.).also { stage = 34 }
+			 4 -> playerl (Tell me about penguins.).also { stage = 45 }
+		58 -> when(buttonId) {
+		     1 -> playerl (" Tell me about camels.").also { stage = 4 }
+			 2 -> playerl (That's enough education for one day.).also { stage = 61 }
+			 3 -> playerl (Tell me about moles.).also { stage = 34 }
+			 4 -> playerl (Tell me about penguins.).also { stage = 45 }
+		59 -> when(buttonId) {
+		     1 -> playerl (" Tell me about camels.").also { stage = 4 }
+			 2 -> playerl ("Tell me about leeches.").also { stage = 17 }
+			 3 -> playerl (That's enough education for one day.).also { stage = 61 }
+			 4 -> playerl (Tell me about penguins.).also { stage = 45 }
+		60 -> when(buttonId) {
+		     1 -> playerl (" Tell me about camels.").also { stage = 4 }
+			 2 -> playerl ("Tell me about leeches.").also { stage = 17 }
+			 3 -> playerl (Tell me about moles.).also { stage = 34 }
+			 4 -> playerl (That's enough education for one day.).also { stage = 61 }
+		61 -> playerl ("That's enough education for one day.").also { stage++ }
+		62 -> npcl ("Nonsense! There's always room for more.").also { stage++ }
+		63 -> npcl ("And remember, science isn't dull!").also { stage = END_DIALOGUE }
+		
+***Talking to Southern Natural Historian***
+
+class NaturalHistorianDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Hello again, [sir/madam], how can I help you on this fine day?").also { stage++ }
+		1 -> playerl ("I was hoping you could tell me about something.").also { stage++ }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Tell me about natural history.").also { stage = 3 }
+			 2 -> playerl ("Tell me about terrorbirds.").also { stage = 8 }
+			 3 -> playerl (Tell me the Kalphite Queen.).also { stage = 23 }
+		3 -> playerl ("Tell me about natural history.").also { stage++ }
+		4 -> npcl ("Well, the field of natural history covers a wide range of sciences.").also { stage++ }
+		5 -> npcl ("So we use biology, the study of living things, botany, the study of plants and zoology, the study of animals.").also { stage++ }
+		6 -> npcl ("Though the field is growing all the time and we're also using techniques from magic, astrology and numerology.").also { stage++ }
+		7 -> npcl (" A person interested in natural history is known as a naturalist.").also { stage = 39 }
+		8 -> playerl (" Tell me about the terrorbirds.").also { stage++ }
+		9 -> npcl (" Ahh terrorbirds, the fastest bird on two legs.").also { stage++ }
+		10 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		11 -> npcl ("Terrorbirds live in nomadic groups of between five and fifty birds that often travel together with other grazing animals.").also { stage++ }
+		12 -> npcl ("They mainly feed on seeds and other plants. They also eat insects such as locusts if they can catch them.").also { stage++ }
+		13 -> npcl ("They have no teeth to chew with, so they swallow pebbles that help to grind the swallowed foods in the gizzard.").also { stage++ }
+		14 -> npcl ("They can go without water for a long time, exclusively living off the water in the plants. However, they enjoy water and frequently take baths when they can.").also { stage++ }
+		15 -> npcl ("Terrorbirds are known to eat almost anything, particularly in captivity, where opportunity is increased.").also { stage++ }
+		16 -> npcl ("Terrorbirds usually weigh a little less than a small unicorn. The feathers of adult males are mostly green, with some white on the wings and tail.").also { stage++ }
+		17 -> npcl ("There are claws on two of the wings' fingers and their strong legs have no feathers. The bird stands on two toes, with the bigger one resembling a hoof. Its feet have no claws.").also { stage++ }
+		18 -> npcl ("This is an adaptation unique to terrorbirds that appears to aid in running. Their legs are powerful enough to kill even large animals.").also { stage++ }
+		19 -> npcl ("The gnomes in particular, prize the terrorbird for its fast running speed, using them as mounts whenever possible.").also { stage++ }
+		20 -> npcl ("There are a number of recorded incidents of people being attacked and killed. Big males can be very territorial and aggressive, and can attack and kick very powerfully with their legs.").also { stage++ }
+		21 -> npcl ("A terrorbird is so fast, it can easily outrun any human athlete.").also { stage++ }
+		22 -> npcl ("And this concludes my short lecture on terrorbirds. I hope you've enjoyed yourselves.").also { stage = 40 }
+		23 -> playerl ("Tell me about the Kalphite Queen.").also { stage++ }
+		24 -> npcl ("Ahh kalphites, the insectoid eating machines.").also { stage++ }
+		25 -> npcl (" If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		26 -> npcl ("The kalphites, otherwise known as the kalphiscarabeinae, are perhaps the largest species of insect on the face of Gielinor. Their queen is called kalphiscarabeinae pasha.").also { stage++ }
+		27 -> npcl ("Most of the early documentation and research on this fearsome predatory species was performed by the noted bug hunter Iqbar Ali-Abdula.").also { stage++ }
+		28 -> npcl (" This, of course, was before he was driven insane by his research and ran off into the desert, screaming.").also { stage++ }
+		29 -> npcl (" Kalphites are related to beetles and scorpions; they are mainly green in colour. Some have remarkable antennae which can detect the slightest movement. Their carapace is composed of armoured plates called lamellae.").also { stage++ }
+		30 -> npcl ("This shell can be compressed into a ball or fanned out like leaves, in order to sense odours. The front legs are adapted for digging the enormous tunnel systems that serve as their nests.").also { stage++ }
+		31 -> npcl ("They exist in a caste-based society, with the soft shelled larvae at the bottom, up through the workers, soldiers and finally the queen.").also { stage++ }
+		32 -> npcl ("Voracious carnivores, a pack of adult workers can strip the flesh from a full grown camel in a matter of seconds, leaving nothing but a few bones and strips of fur for other scavengers to pick over.").also { stage++ }
+		33 -> npcl ("They typically live in large nests marked by the rock hard pillars found in hot, arid deserts, such as the one south-west of Al Kharid, which rise out of the sands like the tombs of desert pharaohs.").also { stage++ }
+		34 -> npcl ("Indeed, there is some relationship between the Kalphite Queen and the desert god Scabaras, but no one is really sure what.").also { stage++ }
+		35 -> npcl ("During the early part of the fourth age, Scabaras proclaimed himself omnipotent and outlawed worship of all other gods save him.").also { stage++ }
+		36 -> npcl ("When the people eventually revolted against his repressive rule and banished Scabaras, it is said his blood washed over the scarabs and transformed them into the kalphites we know today.").also { stage++ }
+		37 -> npcl ("Of course, any right-minded scientist discounts these myths as mere stories, with no historical basis in fact.").also { stage++ }
+		38 -> npcl ("And this concludes my short lecture on kalphites. I hope you've enjoyed yourselves.").also { stage = 41 }
+		39 -> when(buttonId) {
+		     1 -> playerl ("That's enough education for one day.").also { stage = 42 }
+			 2 -> playerl ("Tell me about terrorbirds.").also { stage = 8 }
+			 3 -> playerl (Tell me the Kalphite Queen.).also { stage = 23 }
+		40 -> when(buttonId) {
+		     1 -> playerl ("Tell me about natural history.").also { stage = 3 }
+			 2 -> playerl ("That's enough education for one day.").also { stage = 42 }
+			 3 -> playerl (Tell me the Kalphite Queen.).also { stage = 23 }
+		41 -> when(buttonId) {
+		     1 -> playerl ("Tell me about natural history.").also { stage = 3 }
+			 2 -> playerl ("Tell me about terrorbirds.").also { stage = 8 }
+			 3 -> playerl ("That's enough education for one day.").also { stage = 42 }
+		42 -> playerl ("That's enough education for one day.").also { stage++ }
+		43 -> npcl ("Nonsense! There's always room for more.").also { stage++ }
+		44 -> npcl ("And remember, science isn't dull!").also { stage++ }
+
+
+***Talking to Eastern Natural Historian***
+
+class NaturalHistorianDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> npcl ("Hello again, [sir/madam], how can I help you on this fine day?").also { stage++ }
+		1 -> playerl ("I was hoping you could tell me about something.").also { stage++ }
+		2 -> when(buttonId) {
+		     1 -> playerl (" Tell me about snails.").also { stage = 3 }
+			 2 -> playerl ("Tell me about the monkeys.").also { stage = 17 }
+			 3 -> playerl (Tell me about sea slugs.).also { stage = 29 }
+			 4 -> playerl (Tell me about the snakes.).also { stage = 43 }
+		3 -> playerl ("Tell me about snails.").also { stage++ }
+		4 -> npcl ("Ahh snails, the gelatinous gastropods.").also { stage++ }
+		5 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		6 -> npcl ("Snails move like worms by squishing up and stretching out, very, very slowly. They also make a lot of slime, in order to aid moving by reducing friction.").also { stage++ }
+		7 -> npcl ("They also use slime for protection. For instance, snails can use their slime to crawl over razor-blades without being hurt. It also helps keep away dangerous insects like ants.").also { stage++ }
+		8 -> npcl (" When they hide in their shells, snails secrete a special type of slime, which dries to cover the entrance of their shells like a 'trapdoor'. This is called an operculum.").also { stage++ }
+		9 -> npcl ("The snails of Morytania are the most malignant molluscs ever to have been studied.").also { stage++ }
+		10 -> npcl ("They are broken down into two distinct species: achatina acidia and achatina acidia giganteus or, as they are more commonly known, the acid-spitting snail and the giant acid-spitting snail.").also { stage++ }
+		11 -> npcl ("Both of these varieties are voracious carnivores, using their mutated mouthpieces to spit a glob of powerful acid to kill their foe.").also { stage++ }
+		12 -> npcl ("They then simply have to wait, whilst the digestive juices make short work of the poor creature. Then, they simply slurp up what remains.").also { stage++ }
+		13 -> npcl (" How these strange creatures came to be is still something of a mystery. The most prevalent theory suggests that they mutated, as a reaction to an 'as yet unknown' pollutant that has appeared in the swamps.").also { stage++ }
+		14 -> npcl ("The local populace has capitalised on the appearance of these strange species, using their shells to fashion a rudimentary helm that is fairly resistant to the snails acid.").also { stage++ }
+		15 -> npcl ("Other known uses of snail by-products include a tasty local delicacy and a fireproof oil.").also { stage++ }
+		16 -> npcl ("And this concludes my short lecture on snails. I hope you've enjoyed yourselves.").also { stage = 56 }
+		17 -> playerl ("Tell me about monkeys.").also { stage++ }
+		18 -> npcl ("Ahh monkeys, the simian collective.").also { stage++ }
+		19 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		20 -> npcl ("A monkey is a member of either of two known groupings of simian primates. These two known groupings are the Karamja monkeys and the 'harmless' monkeys.").also { stage++ }
+		21 -> npcl ("Because of their similarity to monkeys, apes such as chimpanzees and gibbons are often called monkeys by accident.").also { stage++ }
+		22 -> npcl ("Though some natural historians don't consider them to be monkeys. Also, a few monkey species have the word 'ape' in their common name.").also { stage++ }
+		23 -> npcl ("The Karamja monkeys are rumoured to be fairly cunning and intelligent creatures, although rumours that they have learned human speech is anecdotal at best.").also { stage++ }
+		24 -> npcl (" In appearance, they stand much shorter than a human and tend to move in a hunched fashion. Karamja monkeys also sport a red mohawk, though it is unknown whether this is an affectation or not.").also { stage++ }
+		25 -> npcl ("They are very fond of bananas and bitternuts, eating them in huge quantities whenever they can get their paws on them.").also { stage++ }
+		26 -> npcl ("The harmless monkeys of Mos Le'Harmless are a very similar, but in some ways entirely different, breed. They stand roughly the same size but are a lighter colour.").also { stage++ }
+		27 -> npcl ("Interestingly, Karamja monkeys have a deep dislike of seaweed, though this may stem from the actions of a number of irresponsible people.").also { stage++ }
+		28 -> npcl ("And this concludes my short lecture on monkeys. I hope you've enjoyed yourselves.").also { stage = 57 }
+		29 -> playerl ("Tell me about the sea slugs.").also { stage++ }
+		30 -> npcl ("Ahh sea slugs, the cute crustaceans.").also { stage++ }
+		31 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		32 -> npcl ("The term 'sea slug' is something of a misnomer. Whilst these small creatures have a soft body like that of a slug, they also possess a very hard shell like a snail.").also { stage++ }
+		33 -> npcl ("Very little is actually known about the sea slug, as we have, as yet, been unable to procure a sample for observation and study.").also { stage++ }
+		34 -> npcl (" For some reason all expeditions we have sent have either vanished mysteriously, or those on the expedition have sent letters back announcing their desire to leave the Museum and go on to other things.").also { stage++ }
+		35 -> npcl (" It is presumed that the species is native to the very deep waters around the eastern Ardougne coastline.").also { stage++ }
+		36 -> npcl ("There must be some natural resource in the area that the sea slugs are using, as the underwater habitat there is much the same around many coastal areas on Gielinor.").also { stage++ }
+		37 -> npcl ("Through looking at similar species we have determined that the sea slug is a harmless little creature. It spends much of its life grazing on seaweed and other plant life.").also { stage++ }
+		38 -> npcl ("There are reports that these reclusive animals have two large fangs at their front, though this is assumed to be either for decorative or defensive purposes.").also { stage++ }
+		39 -> npcl ("If they do follow the same pattern as other similar creatures, the shell will be nigh on impervious to most attacks. The exposed soft skin may have a number of nematocysts, or stinging organs, similar to jellyfish.").also { stage++ }
+		40 -> npcl ("It is typical of prey animals such as these to develop some kind of unique defence mechanism that allows them to survive.").also { stage++ }
+		41 -> npcl ("If only we could acquire one for study. I'm sure we would find this mechanism to be truly unique.").also { stage++ }
+		42 -> npcl ("And this concludes my short lecture on sea slugs. I hope you've enjoyed yourselves.").also { stage = 58 }
+		43 -> playerl ("Tell me about snakes.").also { stage++ }
+		44 -> npcl ("Ahh snakes, the slithering squamata.").also { stage++ }
+		45 -> npcl ("If you just follow me to the display case I shall explain all about them.").also { stage++ }
+		46 -> npcl ("Serpentes, or ophidia, is the suborder under squamata that snakes belong to, like a big family.").also { stage++ }
+		47 -> npcl ("Unlike lizards, snakes have no limbs whatsoever; not that this limits them. Snakes live in or near every habitat in the world.").also { stage++ }
+		48 -> npcl ("Found in nice tropical forests, temperate lattitudes and even in the ocean - some have adapted specialised stomach juices that they inject into their prey as venom, while others prefer to grab and crush their food.").also { stage++ }
+		49 -> npcl ("While others still are fast hunters who use speed and strength to overcome their prey.").also { stage++ }
+		50 -> npcl ("The sense of smell in snakes has been enhanced in an amazing way. With most animals, like you and me, tiny particles are filtered through the nose.").also { stage++ }
+		51 -> npcl ("However, instead of using just their nose, these animals use their tongues as well. When a lizard or a snake wants to smell it's surroundings, it will wave its tongue around and pick up the particles in the air.").also { stage++ }
+		52 -> npcl ("The tongue then returns to the mouth and the tips of the tongue are pushed up against two tiny pits in the roof of the snake's mouth.").also { stage++ }
+		53 -> npcl ("Since these pits are split apart from each other, the tongue itself also has to split. This is why snakes have forked tongues.").also { stage++ }
+		54 -> npcl ("So the next time you see a snake sticking it's tongue out at you, remember, it's sniffing the air, not trying to bite you.").also { stage++ }
+		55 -> npcl ("And this concludes my short lecture on snakes. I hope you've enjoyed yourselves.").also { stage = 59 }
+		56 -> when(buttonId) {
+		     1 -> playerl ("That's enough education for one day.").also { stage = 60 }
+			 2 -> playerl ("Tell me about the monkeys.").also { stage = 17 }
+			 3 -> playerl (Tell me about sea slugs.).also { stage = 29 }
+			 4 -> playerl (Tell me about the snakes.).also { stage = 43 }
+		57 -> when(buttonId) {
+		     1 -> playerl (" Tell me about snails.").also { stage = 3 }
+			 2 -> playerl ("That's enough education for one day.").also { stage = 60 }
+			 3 -> playerl (Tell me about sea slugs.).also { stage = 29 }
+			 4 -> playerl (Tell me about the snakes.).also { stage = 43 }
+		58 -> when(buttonId) {
+		     1 -> playerl (" Tell me about snails.").also { stage = 3 }
+			 2 -> playerl ("Tell me about the monkeys.").also { stage = 17 }
+			 3 -> playerl ("That's enough education for one day.").also { stage = 60 }
+			 4 -> playerl (Tell me about the snakes.).also { stage = 43 }
+		59 -> when(buttonId) {
+		     1 -> playerl (" Tell me about snails.").also { stage = 3 }
+			 2 -> playerl ("Tell me about the monkeys.").also { stage = 17 }
+			 3 -> playerl (Tell me about sea slugs.).also { stage = 29 }
+			 4 -> playerl ("That's enough education for one day.").also { stage = 60 }
+		60 -> playerl ("That's enough education for one day.").also { stage++ }
+		61 -> npcl ("Nonsense! There's always room for more.").also { stage++ }
+		62 -> npcl ("And remember, science isn't dull!").also { stage = END_DIALOGUE }
+		
+		
+		
+***THE QUIZ ITSELF***
+
+//When you click on a plaque/case it opens one of 6 interfaces at random, skipping ones that have been correctly answered. After answering 3 of them correctly the player recieves 2 Museum Kudos and the plaque will instead display an interface with a short description on what it depicts. Unless you want to write 1680 lines for those I would reccomend some counters; one that checks if you have completed all 14 questions and one per case that checks if you have correctly answered 3 of the 6 questions. You will also want to call the global Kudos counter and I know you know all of this but we are only human and can get tired and forget and that's ok.
+
+-Northern Plaques-
+
+***LIZARD***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(How does a lizard regulate body heat?).also { Stage = 1 }
+				(Who discovered how to kill lizards?).also { Stage = 2 }
+				(How many eyes does a lizard have?).also { Stage = 3 }
+				(What order do lizards belong to?).also { Stage = 4 }
+				(What happens when a lizard becomes cold?).also { Stage = 5 }
+				(Lizard skin is made of the same substance as?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Chilli sauce").also { Stage = 7 }
+			 2 -> playerl ("Fire").also { Stage = 7 }
+			 3 -> playerl ("Sunlight").also { Stage = 8 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Admiral Bake").also { Stage = 7 }
+			 2 -> playerl ("The Slayer Masters").also { Stage = 8 }
+			 3 -> playerl ("The Wise Old Man").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Two").also { Stage = 7 }
+			 2 -> playerl ("Three").also { Stage = 8 }
+			 3 -> playerl ("Six").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Mammal").also { Stage = 7 }
+			 2 -> playerl ("Squamata").also { Stage = 8 }
+			 3 -> playerl ("Insecta").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("It becomes sleepy").also { Stage = 8 }
+			 2 -> playerl ("It becomes aggressive").also { Stage = 7 }
+			 3 -> playerl ("It explodes").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Hair").also { Stage = 8 }
+			 2 -> playerl ("Bone").also { Stage = 7 }
+			 3 -> playerl ("Wood").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***BATTLE TORTOISE***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is the name of the oldest tortoise ever recorded?).also { Stage = 1 }
+				(What is a tortoise's favourite food?).also { Stage = 2 }
+				(Name the explorer who discovered the world's oldest tortoise.).also { Stage = 3 }
+				(How does the tortoise protect itself?).also { Stage = 4 }
+				(If a tortoise had twenty rings on its shell, how old would it be?).also { Stage = 5 }
+				(Which race breeds tortoises for battle?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Healthorg").also { Stage = 7 }
+			 2 -> playerl ("Mibbiwocket").also { Stage = 8 }
+			 3 -> playerl ("Snookums").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Sharks").also { Stage = 7 }
+			 2 -> playerl ("Kebabs").also { Stage = 7 }
+			 3 -> playerl ("Vegetables").also { Stage = 8 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Admiral Bake").also { Stage = 8 }
+			 2 -> playerl ("Captain Cook").also { Stage = 7 }
+			 3 -> playerl ("Ensign Chef").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Thick skin").also { Stage = 7 }
+			 2 -> playerl ("Magic").also { Stage = 7 }
+			 3 -> playerl ("Hard shell ").also { Stage = 8 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Ten years").also { Stage = 7 }
+			 2 -> playerl ("Twenty years").also { Stage = 8 }
+			 3 -> playerl ("Sixty years").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Gnomes").also { Stage = 8 }
+			 2 -> playerl ("Orks").also { Stage = 7 }
+			 3 -> playerl ("Elves").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***DRAGON***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is considered a delicacy by dragons?).also { Stage = 1 }
+				(What is the best defence against a dragon's attack?).also { Stage = 2 }
+				(How long do dragons live?).also { Stage = 3 }
+				(Which of these is not a type of dragon?).also { Stage = 4 }
+				(What is the favoured territory of a dragon?).also { Stage = 5 }
+				(Approximately how many feet tall do dragons stand?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Adventurers").also { Stage = 7 }
+			 2 -> playerl ("Runite").also { Stage = 8 }
+			 3 -> playerl ("Cheese").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Anti-dragon-breath shield").also { Stage = 8}
+			 2 -> playerl ("Rune plate").also { Stage = 7 }
+			 3 -> playerl ("Cats").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Fifty years").also { Stage = 7 }
+			 2 -> playerl ("Forever").also { Stage = 7 }
+			 3 -> playerl ("Unknown").also { Stage = 8}
+		4 -> when(buttonId) {
+		     1 -> playerl ("Coloured").also { Stage = 7 }
+			 2 -> playerl ("Elemental").also { Stage = 8}
+			 3 -> playerl ("Ferrous").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Swamps").also { Stage = 7 }
+			 2 -> playerl ("Old battle sites").also { Stage = 8}
+			 3 -> playerl ("Lumbridge Castle").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Twelve").also { Stage = 8}
+			 2 -> playerl ("Six").also { Stage = 7 }
+			 3 -> playerl ("Ten").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***WYVERN***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(How did the wyverns die out?).also { Stage = 1 }
+				(How many legs does a wyvern have?).also { Stage = 2 }
+				(Where have wyvern bones been found?).also { Stage = 3 }
+				(Which genus does the wyvern theoretically belong to?).also { Stage = 4 }
+				(What are the wyverns' closest relations?).also { Stage = 5 }
+				(What is the ambient temperature of wyvern bones?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Climate Change").also { Stage = 8 }
+			 2 -> playerl ("Disease").also { Stage = 7 }
+			 3 -> playerl ("Marauding adventurers").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Two").also { Stage = 8 }
+			 2 -> playerl ("Five").also { Stage = 7 }
+			 3 -> playerl ("Six").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Ape Atoll").also { Stage = 7 }
+			 2 -> playerl ("Al Kharid").also { Stage = 7 }
+			 3 -> playerl ("Asgarnia").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Invertebrates").also { Stage = 7 }
+			 2 -> playerl ("Reptiles").also { Stage = 8 }
+			 3 -> playerl ("Mammals").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Lizards").also { Stage = 7 }
+			 2 -> playerl ("Snakes").also { Stage = 7 }
+			 3 -> playerl ("Dragons").also { Stage = 8 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Room temperature").also { Stage = 7 }
+			 2 -> playerl ("Below room temperature").also { Stage = 8 }
+			 3 -> playerl ("Above room temperature").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+-Western Plaques-
+
+***LEECH***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is the favoured habitat of leeches?).also { Stage = 1 }
+				(What shape is the inside of a leech's mouth?).also { Stage = 2 }
+				(Which of these is not eaten by leeches?).also { Stage = 3 }
+				(What contributed to the giant growth of Morytanian leeches?).also { Stage = 4 }
+				(What is special about the Morytanian leeches?).also { Stage = 5 }
+				(How does a leech change when it feeds?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Water").also { Stage = 8 }
+			 2 -> playerl ("Desert").also { Stage = 7 }
+			 3 -> playerl ("Trees").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Star-shaped").also { Stage = 7 }
+			 2 -> playerl ("'X'-shaped").also { Stage = 7 }
+			 3 -> playerl ("'Y'-shaped").also { Stage = 8 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Meat").also { Stage = 7 }
+			 2 -> playerl ("Apples").also { Stage = 8 }
+			 3 -> playerl ("Blood").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Environment").also { Stage = 8 }
+			 2 -> playerl ("Healthy living").also { Stage = 7 }
+			 3 -> playerl ("Magic").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("They sing").also { Stage = 7 }
+			 2 -> playerl ("They attack by jumping").also { Stage = 8 }
+			 3 -> playerl ("They have legs").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("It turns blue").also { Stage = 7 }
+			 2 -> playerl ("It starts singing").also { Stage = 7 }
+			 3 -> playerl ("It doubles in size").also { Stage = 8 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***CAMEL***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is produced by feeding chilli to a camel?).also { Stage = 1 }
+				(If an ugthanki has one, how many does a bactrian have?).also { Stage = 2 }
+				(Camels:herbivore, carnivore or omnivore?).also { Stage = 3 }
+				(What is the usual mood for a camel?).also { Stage = 4 }
+				(Where would you find an ugthanki?).also { Stage = 5 }
+				(Which camel byproduct is known to be very nutritious?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("An irate camel").also { Stage = 7 }
+			 2 -> playerl ("Toxic dung ").also { Stage = 8 }
+			 3 -> playerl ("An undead bactrian").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("One").also { Stage = 7 }
+			 2 -> playerl ("Two").also { Stage = 8 }
+			 3 -> playerl ("Four").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Herbivore").also { Stage = 7 }
+			 2 -> playerl ("Carnivore").also { Stage = 7 }
+			 3 -> playerl ("Omnivore").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Annoyed").also { Stage = 8}
+			 2 -> playerl ("Bemused").also { Stage = 7 }
+			 3 -> playerl ("Cheerful").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Al Kharid").also { Stage = 8 }
+			 2 -> playerl ("Morytania").also { Stage = 7 }
+			 3 -> playerl ("Nowhere").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Milk").also { Stage = 8 }
+			 2 -> playerl ("Dung").also { Stage = 7 }
+			 3 -> playerl ("Meat").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***MOLE***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What habitat do moles prefer?).also { Stage = 1 }
+				(Why are moles considered to be an agricultural pest?).also { Stage = 2 }
+				(Who discovered giant moles?).also { Stage = 3 }
+				(What would you call a group of young moles?).also { Stage = 4 }
+				(What is a mole's favourite food?).also { Stage = 5 }
+				(Which family do moles belong to?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Subterranean").also { Stage = 8 }
+			 2 -> playerl ("Any").also { Stage = 7 }
+			 3 -> playerl ("Subaquatic").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("They dig holes").also { Stage = 8 }
+			 2 -> playerl ("They eat food meant for livestock").also { Stage = 7 }
+			 3 -> playerl ("They attack farmers").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Sir Tiffy Cashien").also { Stage = 7 }
+			 2 -> playerl ("Ak-Haranu").also { Stage = 7 }
+			 3 -> playerl ("Wyson the Gardener").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("A litter").also { Stage = 7 }
+			 2 -> playerl ("A mess").also { Stage = 7 }
+			 3 -> playerl ("A labour").also { Stage = 8 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Insects and other invertebrates").also { Stage = 8 }
+			 2 -> playerl ("Humans and gnomes").also { Stage = 7 }
+			 3 -> playerl ("Seeds and plant roots").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("The Malpidae family").also { Stage = 7 }
+			 2 -> playerl ("The Talpidae family").also { Stage = 8 }
+			 3 -> playerl ("The Falpidae family").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***PENGUIN*** 
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(Which sense do penguins rely on when hunting?).also { Stage = 1 }
+				(Which skill seems unusual for the penguins to possess?).also { Stage = 2 }
+				(How do penguins keep warm?).also { Stage = 3 }
+				(What is the preferred climate for penguins?).also { Stage = 4 }
+				(Describe the behaviour of penguins?).also { Stage = 5 }
+				(When do penguins fast?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Smell").also { Stage = 7 }
+			 2 -> playerl ("Taste").also { Stage = 7 }
+			 3 -> playerl ("Sight").also { Stage = 8 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Planning").also { Stage = 8 }
+			 2 -> playerl ("Fishing").also { Stage = 7 }
+			 3 -> playerl ("Sleeping").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("A layer of fat").also { Stage = 8 }
+			 2 -> playerl ("Vigorous exercise").also { Stage = 7 }
+			 3 -> playerl ("Magic").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Cpld").also { Stage = 8 }
+			 2 -> playerl ("Hot").also { Stage = 7 }
+			 3 -> playerl ("Damp").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Social").also { Stage = 8 }
+			 2 -> playerl ("Asocial").also { Stage = 7 }
+			 3 -> playerl ("Hive").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Just before dawn").also { Stage = 7 }
+			 2 -> playerl ("During breeding").also { Stage = 8 }
+			 3 -> playerl ("During the night").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+-Southern Plaques-
+
+***TERRORBIRD***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is a terrorbird's preferred food?).also { Stage = 1 }
+				(Who use terrorbirds as mounts?).also { Stage = 2 }
+				(Where do terrorbirds get most of their water?).also { Stage = 3 }
+				(How many claws do terrorbirds have?).also { Stage = 4 }
+				(What do terrorbirds eat to aid digestion?).also { Stage = 5 }
+				(How many teeth do terrorbirds have?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Anything").also { Stage = 8 }
+			 2 -> playerl ("Pizza").also { Stage = 7 }
+			 3 -> playerl ("Vegetables").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Dwarves").also { Stage = 7 }
+			 2 -> playerl ("Gnomes").also { Stage = 8 }
+			 3 -> playerl ("Goblins").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Streams and rivers").also { Stage = 7 }
+			 2 -> playerl ("Licking trees").also { Stage = 7 }
+			 3 -> playerl ("Eating plants").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Two").also { Stage = 7 }
+			 2 -> playerl ("Four").also { Stage = 8 }
+			 3 -> playerl ("Six").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Blurite").also { Stage = 7 }
+			 2 -> playerl ("Stones").also { Stage = 8 }
+			 3 -> playerl ("Paper").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("28").also { Stage = 7 }
+			 2 -> playerl ("14").also { Stage = 7 }
+			 3 -> playerl ("0").also { Stage = 8 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***KALPHITE QUEEN***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(Kalphites are ruled by a...?).also { Stage = 1 }
+				(What is the lowest caste in kalphite society?).also { Stage = 2 }
+				(What are the armoured plates on a kalphite called?).also { Stage = 3 }
+				(Are kalphites carnivores, herbivores, or omnivores?).also { Stage = 4 }
+				(What are kalphites assumed to have evolved from?).also { Stage = 5 }
+				(Name the prominent figure in kalphite mythology?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("King").also { Stage = 7 }
+			 2 -> playerl ("Pasha").also { Stage = 8 }
+			 3 -> playerl ("Caliph").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Prince").also { Stage = 7 }
+			 2 -> playerl ("Soldier").also { Stage = 7 }
+			 3 -> playerl ("Worker").also { Stage = 8 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Hauberk").also { Stage = 7 }
+			 2 -> playerl ("Lamellae").also { Stage = 8 }
+			 3 -> playerl ("Shield").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Omnivores").also { Stage = 7 }
+			 2 -> playerl ("Herbivores").also { Stage = 7 }
+			 3 -> playerl ("Carnivores").also { Stage = 8 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Scarab beetles").also { Stage = 8 }
+			 2 -> playerl ("Penguins").also { Stage = 7 }
+			 3 -> playerl ("Dragons").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Postie Pete").also { Stage = 7 }
+			 2 -> playerl ("Scabaras").also { Stage = 8 }
+			 3 -> playerl ("Jorral the Historian").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+-Eastern Plaques-
+
+***MONKEY***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(Which type of primates do monkeys belong to?).also { Stage = 1 }
+				(Which have the lighter colour: Karamjan or Harmless monkeys?).also { Stage = 2 }
+				(Monkeys love bananas. What else do they like to eat?).also { Stage = 3 }
+				(There are two known families of monkeys. One is Karamjan, the other is...?).also { Stage = 4 }
+				(What colour mohawk do Karamjan monkeys have?).also { Stage = 5 }
+				(What have Karamjan monkeys taken a deep dislike to?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Simian").also { Stage = 8 }
+			 2 -> playerl ("Hominid").also { Stage = 7 }
+			 3 -> playerl ("Lagomorpha").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("They are the same").also { Stage = 7 }
+			 2 -> playerl ("Karamjan").also { Stage = 7 }
+			 3 -> playerl ("Harmless").also { Stage = 8 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Chili").also { Stage = 7 }
+			 2 -> playerl ("Seaweed").also { Stage = 7 }
+			 3 -> playerl ("Bitternuts").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Pointless").also { Stage = 7 }
+			 2 -> playerl ("Harmless").also { Stage = 8 }
+			 3 -> playerl ("Hairless").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Red").also { Stage = 8 }
+			 2 -> playerl ("Blue").also { Stage = 7 }
+			 3 -> playerl ("Green").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("Seaweed").also { Stage = 8 }
+			 2 -> playerl ("Chili").also { Stage = 7 }
+			 3 -> playerl ("Taxes").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***SEA SLUG***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(We assume that sea slugs have a stinging organ on their soft skin - what is it called?).also { Stage = 1 }
+				(Why has the museum never examined a live sea slug?).also { Stage = 2 }
+				(What do we think the sea slug feeds upon?).also { Stage = 3 }
+				(What are the two fangs presumed to be used for?).also { Stage = 4 }
+				(Off of which coastline would you find sea slugs?).also { Stage = 5 }
+				(In what way are sea slugs similar to snails?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Nematocysts").also { Stage = 8 }
+			 2 -> playerl ("Hematocysts").also { Stage = 7 }
+			 3 -> playerl ("Pematocysts").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("The sea slugs are shy").also { Stage = 7 }
+			 2 -> playerl ("The researchers keep vanishing").also { Stage = 8 }
+			 3 -> playerl ("Sea slugs are extinct").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Blood").also { Stage = 7 }
+			 2 -> playerl ("Seaweed").also { Stage = 8 }
+			 3 -> playerl ("Insects").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Defence or display").also { Stage = 8 }
+			 2 -> playerl ("Attacking prey").also { Stage = 7 }
+			 3 -> playerl ("Latching on to objects").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Karamja").also { Stage = 7 }
+			 2 -> playerl ("Miscellania").also { Stage = 7 }
+			 3 -> playerl ("Ardougne").also { Stage = 8 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("They eat lettuce").also { Stage = 7 }
+			 2 -> playerl ("They move very slowly").also { Stage = 7 }
+			 3 -> playerl ("They have a hard shell").also { Stage = 8 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***SNAKE*** 
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is snake venom adapted from?).also { Stage = 1 }
+				(Aside from their noses, what do snakes use to smell?).also { Stage = 2 }
+				(If a snake sticks its tongue out at you, what is it doing?).also { Stage = 3 }
+				(If some snakes use venom to kill their prey, what do other snakes use?).also { Stage = 4 }
+				(Lizards and snakes belong to the same order - what is it?).also { Stage = 5 }
+				(Which habitat do snakes prefer?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("Ear wax").also { Stage = 7 }
+			 2 -> playerl ("Stomach acid").also { Stage = 8 }
+			 3 -> playerl ("Saliva").also { Stage = 7 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Tongue").also { Stage = 8 }
+			 2 -> playerl ("Eyes").also { Stage = 7 }
+			 3 -> playerl ("Ears").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Being rude").also { Stage = 7 }
+			 2 -> playerl ("Seeing how you taste").also { Stage = 7 }
+			 3 -> playerl ("Seeing how you smell").also { Stage = 8 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Fire").also { Stage = 7 }
+			 2 -> playerl ("Constriction").also { Stage = 8 }
+			 3 -> playerl ("Magic").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Squamata").also { Stage = 8 }
+			 2 -> playerl ("Insecta").also { Stage = 7 }
+			 3 -> playerl ("Sarcopterghi").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("The desert").also { Stage = 7 }
+			 2 -> playerl ("The ocean").also { Stage = 7 }
+			 3 -> playerl ("Anywhere").also { Stage = 8 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***SNAIL***
+
+class OrlandoSmithDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        when(stage) {
+		        0 -> //call one of these interfaces at random
+				(What is special about the shell of the giant Morytanian snail?).also { Stage = 1 }
+				(How do Morytanian snails capture their prey?).also { Stage = 2 }
+				(Which of these is a snail byproduct?).also { Stage = 3 }
+				(What does 'Achatina Acidia' mean?).also { Stage = 4 }
+				(How do snails move?).also { Stage = 5 }
+				(What is the 'trapdoor', which snails use to cover the entrance to their shells called?).also { Stage = 6 }
+		1 -> when(buttonId) {
+		     1 -> playerl ("It glows in the dark").also { Stage = 7 }
+			 2 -> playerl ("It is very tasty").also { Stage = 7 }
+			 3 -> playerl ("It is resistant to acid").also { Stage = 8 }
+		2 -> when(buttonId) {
+		     1 -> playerl ("Aggressive marketing").also { Stage = 7 }
+			 2 -> playerl ("Spitting acid").also { Stage = 8 }
+			 3 -> playerl ("Hex them until they glow").also { Stage = 7 }
+		3 -> when(buttonId) {
+		     1 -> playerl ("Fireproof oil").also { Stage = 8 }
+			 2 -> playerl ("A musical instrument").also { Stage = 7 }
+			 3 -> playerl ("Snail-a-cola").also { Stage = 7 }
+		4 -> when(buttonId) {
+		     1 -> playerl ("Giant acid-spitting snail").also { Stage = 7 }
+			 2 -> playerl ("Acid-spitting snail").also { Stage = 8}
+			 3 -> playerl ("Giant cheese-spitting snail").also { Stage = 7 }
+		5 -> when(buttonId) {
+		     1 -> playerl ("Flapping their wings").also { Stage = 7 }
+			 2 -> playerl ("Contracting and stretching").also { Stage = 8 }
+			 3 -> playerl ("Hopping about").also { Stage = 7 }
+		6 -> when(buttonId) {
+		     1 -> playerl ("An operculum").also { Stage = 8 }
+			 2 -> playerl ("A caldarium").also { Stage = 7 }
+			 3 -> playerl ("A tavernium").also { Stage = 7 }
+		7 -> npcl ("Hmm, I don't think that's right, mate. Try again.").also { Stage = 0 }
+		//Increase the counter for correct answers by 1 here
+		8 -> npcl ("Nice job, mate. That looks about right.") //If the counter is less than 3 then .also { Stage = 0 } otherwise .also { Stage++ }
+		//Increase the counter for completed Plaques by 1 here
+		9 -> npcl ("Bonza, mate! I think that's all of them.").also { Stage = END_DIALOGUE }
+		//If that counter is 14 then trigger his dialogue on line 74 of this document
+		
+
+***Plaque messages after completing them***
+//These all open an interface, that read, in order:
+
+"Lacertilia Giganteus, Latin for "Giant lizard" Display number 4"
+"Testudines Giganteus, Latin for "Giant tortoise" Display number 3"
+""Draconis Rex", Latin for "king dragon" Display number 1"
+"Draconis Ossis, Latin for "bone dragon" Display number 2"
+"Giant Leech (Hirudinea Acidia, Latin for "Sharp") Display number 5"
+"Camelus Bactrian, (Latin for "Bactrian camel") Display number 6"
+"Giant Mole (Talpidae Wysonian, Latin for 'Mole of Wyson') Display number 7"
+"Spheniscidae Callidus, Latin for "Cunning Penguin" Display number 8"
+"Aves Terror literally 'Bird terror', correctly translated as Aves Formidonis Display number 9"
+"Kalphiscarabeinae Pasha, Latin for 'kalphite-scarab', 'Pasha' is an Ottoman rank corresponding to 'Lord' Display number 10"
+"Simiiformes Karamjan, Latin for "Karamjan primate" Display number 11"
+"Opisthobranchia Alucinor, literally "Behind gill dream" Display number 12"
+"Serpentes Fellis, Latin for 'serpent gallbladder' Display number 13"
+"Giant Snail (Achatina Acidia Giganteus), Latin for "giant acid snail" Display number 14"
+
+['ou have earned kudos with the Museum']
+['You carefully place the &nbsp; in the display and update']
+['the information.']
+['You carefully place the']+['intToStr()']+['in the display and update']
+['animate(player,6462)']
+['You clean the find with your brush.']
+['You clean the find with your rock pick.']
+['You find some pottery.']
+['You sort through the pile of finds...they all look a bit like','rocks to you. You take a random rock. Now to clean','it']
+['You find a battered old coin.'] ['id=11180']
+['you find some ancient arrowheads, almost rusted away.']
+['animate(player,6459)']
+['I found something interesting.']
+['Oh? Let's take a look...']
+['Hello there; I see you're qualified. Come to help us out?','I found this piece of pottery - is it of any use?','You've already shown me one of those, but it was in','better condition. It's in the display case over there. You','can pop this one in the finds crate over in the corner.']
+['Ahh, yes, we find lots of those - they're not important.','We already have some in our display. Just add it to the','crate of finds over near the door.']
+['If there is anything already in the crate, feel free to','take it as a reward for your work.']
+['what have we here?']
+['Oh! This is very interesting...and confusing at the same','time. The coin means that the city that we're','excavating on the Digsite - Saranthium - was actually','inhabited much, much ealier by followers of Zamorak,']
+['at which time, the city was known as Senntisten.']
+['This is a most remarkable discovery, as we have other','evidence indicating that Zarosian followers were resident','before the Saradominists took over, but it also seems','that Zamorakian forces used it during a battle of some']
+['sort. Still, it allows us to roughly date when the city','changed from following Zaros and Zamorak to following','Saradomin. Put it in display case 44.']
+['Case 44 it is']
+
+

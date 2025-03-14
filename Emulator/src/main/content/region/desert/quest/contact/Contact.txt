@@ -1,0 +1,76 @@
+/*package content.kingdom.desert.quest.member.contact
+
+import org.rs.consts.Vars
+import core.api.addItemOrDrop
+import core.api.quest.isQuestComplete
+import core.api.rewardXP
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+
+@Initializable
+class Contact : Quest("Contact!", 39, 38, 1, Vars.VARBIT_QUEST_CONTACT_3274, 0, 1, 130) {
+
+    companion scenery {
+        const val Contact = "Contact!"
+    }
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        player ?: return
+        if (stage == 0) {
+            line++
+            line(player, "I can start this quest !!by speaking to the High Priest of??", line++, false)
+            line(player, "!!Icthlarin,?? who lives in !!Sophanem.??", line++, false)
+            line++
+            line(player, "I must have completed the following quests:", line++, false)
+            line(player, "!!Gertrude's Cat??", line++, isQuestComplete(player, "Gertrude's Cat"))
+            line(
+                player,
+                "!!Icthlarin's Little Helper quest.??",
+                line++,
+                isQuestComplete(player, "Icthlarin's Little Helper")
+            )
+            line(player, "!!Prince Ali Rescue.??", line++, isQuestComplete(player, "Prince Ali Rescue"))
+            line++
+        }
+        if (stage == 100) {
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.KERIS_10581, 230, 277, 5)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "7,000 Thieving XP", ln++)
+        rewardXP(player, Skills.THIEVING, 7000.0)
+        addItemOrDrop(player, Items.KERIS_10581)
+        setVarbit(player, Vars.VARBIT_QUEST_CONTACT_3274, 130, true)
+    }
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//Keris, a dagger which is very effective against Kalphites and Scarabs
+//7,000 Thieving experience
+//Access to Sophanem's bank under the Temple of Lesser Deities in the north-east corner (useful for Pyramid Plunder)
+//Coenus will allow a one-way passage from Menaphos to Sophanem.
+//Combat lamp giving 2 wishes each granting 7,000 experience to:
+//Attack
+//Strength
+//Defence
+//Constitution
+//Ranged
+//Magic
+//Summoning (if over level 30)
+//If you accidentally destroy the experience lamp, another may be obtained by seeing the High Priest
+*/
