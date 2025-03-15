@@ -2,24 +2,11 @@
 
 Fork of [2009scape](https://gitlab.com/2009scape/2009scape).
 
-For information on content, please visit the [Emulation blog](https://szumaster100.github.io/530-content/).
+For information on content, please visit the [blog](http://szumaster.work.gd/).
 
 [![License][license-shield]][license-url] [![Release][libs]][libs-url] [![Release][play-release]][play-url]<br>
 
 ___
-
-#### Table of Contents
-
-- [Requirements](#essentials)
-- [Forking the Repository](#forking-the-repository)
-- [Cloning the Repository](#cloning-the-repository)
-- [Importing into IntelliJ IDEA](#import-into-intellij-idea)
-- [Setting Up the Project](#setting-up-the-project)
-- [Running the Application](#launching)
-- [Setting Up GitLab with SSH](#gitlab-vcs-in-intellij-idea)
-- [License Information](#license)
-
----
 
 #### Essentials
 
@@ -128,4 +115,4 @@ ___
 
 [play-release]: https://img.shields.io/badge/singleplayer-release-blue
 
-[play-url]: https://gitlab.com/rs2-emu/530-game
+[play-url]: https://mega.nz/folder/3ngT2JpZ#NNn2Pb9UCIFaYk2nVHWtAQ
