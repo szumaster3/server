@@ -24,7 +24,7 @@ enum class Runes(
     GUTHIX_STAFF(Items.GUTHIX_STAFF_2416),
     ZAMORAK_STAFF(Items.ZAMORAK_STAFF_2417),
     ZURIELS_STAFF(Items.ZURIELS_STAFF_13867),
-    ARMADYL_RUNE(Items.ARMADYL_RUNE_14700)
+    ARMADYL_STAFF(Items.ARMADYL_BATTLESTAFF_14696)
     ;
 
     fun transform(): Item {
@@ -54,6 +54,11 @@ enum class Runes(
                 return false
             }
             if (type != null) {
+                if (weapon.id == Items.ARMADYL_BATTLESTAFF_14696 && rune == ARMADYL_STAFF && type.size == 1) {
+                    if (type[0] === SpellType.STORM_OF_ARMADYL) {
+                        return true
+                    }
+                }
                 if (weapon.id == 2415 && rune == SARADOMIN_STAFF && type.size == 1) {
                     if (type[0] === SpellType.GOD_STRIKE) {
                         return true

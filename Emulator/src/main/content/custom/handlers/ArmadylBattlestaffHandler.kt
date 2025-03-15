@@ -5,6 +5,7 @@ import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.InteractionType
+import core.game.node.entity.combat.spell.CombatSpell
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 
@@ -59,7 +60,7 @@ class ArmadylBattlestaffHandler : CombatSwingHandler(CombatStyle.MAGIC) {
     }
 
     companion object {
-        private val SPELL = SpellBookManager.SpellBook.MODERN.getSpell(126) as StormOfArmadylSpell?
+        private val SPELL = SpellBookManager.SpellBook.MODERN.getSpell(126) as CombatSpell?
 
         @JvmField
         val INSTANCE: ArmadylBattlestaffHandler = ArmadylBattlestaffHandler()
