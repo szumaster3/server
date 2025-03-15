@@ -2782,7 +2782,7 @@
     "archery_ticket_price": "0",
     "id": "292"
   },
-    {
+  {
     "examine": "This will unlock something. (Waterfall Quest)",
     "name": "A key",
     "tradeable": "false",
@@ -124096,18 +124096,18 @@
     "weapon_interface": "1",
     "absorb": "0,0,0",
     "equip_audio": "2247",
-    "stand_anim": "813",
-    "tradeable": "true",
-    "run_anim": "1210",
-    "stand_turn_anim": "1209",
     "render_anim": "28",
     "equipment_slot": "3",
     "attack_anims": "2555,0,0,0",
     "destroy_message": "Drop",
     "grand_exchange_price": "219418",
+    "stand_anim": "813",
     "attack_audios": "2555,0,0,0",
+    "tradeable": "true",
     "name": "Corrupt zuriel's staff",
+    "run_anim": "1210",
     "archery_ticket_price": "0",
+    "stand_turn_anim": "1209",
     "id": "13941",
     "bonuses": "13,-1,65,18,0,5,7,4,18,0,0,72,0,0,10"
   },
@@ -132443,7 +132443,7 @@
     "archery_ticket_price": "0",
     "id": "14696",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
+    "bonuses": "2,3,1,10,0,2,3,1,10,0,0,50,0,0,0",
     "requirements": "{0,70}-{6,77}",
     "durability": null,
     "weight": "2.2",
@@ -132487,9 +132487,91 @@
     "id": "14701"
   },
   {
+    "examine": "A tiny part of what was once an orb.",
+    "name": "null",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "id": "14702"
+  },
+  {
+    "examine": "A tiny part of what was once an orb.",
+    "name": "null",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "id": "14703"
+  },
+  {
+    "examine": "A tiny part of what was once an orb.",
+    "name": "null",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "id": "14704"
+  },
+  {
+    "examine": "A tiny part of what was once an orb.",
+    "name": "null",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "id": "14705"
+  },
+  {
     "examine": "Once part of the staff of Armadyl.",
     "name": "Orb of Armadyl",
-    "id": "14702"
+    "id": "14706"
+  },
+  {
+    "shop_price": "1",
+    "examine": "It seems to be made of incredibly light, but durable materials.",
+    "durability": null,
+    "destroy": "true",
+    "weight": "0.3",
+    "absorb": "0,0,0",
+    "equipment_slot": "4",
+    "destroy_message": "You can get a replacement from Gunnjorn at the Barbarian Agility Course at the Barbarian Outpost.",
+    "remove_sleeves": "true",
+    "name": "Agile top",
+    "archery_ticket_price": "0",
+    "id": "14707",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+  },
+  {
+    "remove_sleeves": "true",
+    "shop_price": "1",
+    "examine": "It seems to be made of incredibly light, but durable materials.",
+    "durability": null,
+    "name": "Agile top",
+    "archery_ticket_price": "0",
+    "weight": "0.3",
+    "id": "14708",
+    "absorb": "0,0,0",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "equipment_slot": "4"
+  },
+  {
+    "destroy_message": "You can get replacement from any gnome trainer on the Gnome Agility Course.",
+    "shop_price": "1",
+    "examine": "They seem to be made of an incredibly light but durable material.",
+    "durability": null,
+    "name": "Agile legs",
+    "destroy": "true",
+    "archery_ticket_price": "0",
+    "weight": "0.3",
+    "id": "14709",
+    "absorb": "0,0,0",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "equipment_slot": "7"
+  },
+  {
+    "shop_price": "1",
+    "examine": "They seem to be made of an incredibly light but durable material.",
+    "durability": null,
+    "name": "Agile legs",
+    "archery_ticket_price": "0",
+    "weight": "0.3",
+    "id": "14710",
+    "absorb": "0,0,0",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "equipment_slot": "7"
   },
   {
     "examine": "Item container for C. Ele Minor Drop Table. You should not be able to obtain this item.",

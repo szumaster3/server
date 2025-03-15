@@ -111,6 +111,11 @@ enum class GrindItem(
         product = Item(Items.GROUND_GUAM_6681),
         message = "You grind down the guam.",
     ),
+    ARMADYL_DUST(
+        items = listOf(Item(Items.SHARDS_OF_ARMADYL_14701)),
+        product = Item(Items.DUST_OF_ARMADYL_14698),
+        message = "You grind down the Armadyl shard's.",
+    )
     ;
 
     companion object {

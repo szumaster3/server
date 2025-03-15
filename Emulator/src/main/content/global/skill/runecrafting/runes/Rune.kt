@@ -1,6 +1,5 @@
 package content.global.skill.runecrafting.runes
 
-import content.global.skill.runecrafting.items.Tiara
 import core.game.node.entity.combat.spell.Runes
 import core.game.node.item.Item
 
@@ -22,6 +21,7 @@ enum class Rune(
     NATURE(Runes.NATURE_RUNE.transform(), 44, 9.0, 1, 91, 182),
     LAW(Runes.LAW_RUNE.transform(), 54, 9.5, 1, 110),
     DEATH(Runes.DEATH_RUNE.transform(), 65, 10.0, 1, 131),
+    ARMADYL(Runes.ARMADYL_RUNE.transform(), 72, 10.0, 7, 8, 9, 10),
     BLOOD(Runes.BLOOD_RUNE.transform(), 77, 10.5, 1, 154),
     SOUL(Runes.SOUL_RUNE.transform(), 90, 11.0),
     ;

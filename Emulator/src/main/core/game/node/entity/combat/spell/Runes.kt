@@ -24,7 +24,7 @@ enum class Runes(
     GUTHIX_STAFF(Items.GUTHIX_STAFF_2416),
     ZAMORAK_STAFF(Items.ZAMORAK_STAFF_2417),
     ZURIELS_STAFF(Items.ZURIELS_STAFF_13867),
-    ARMADYL_RUNE(14700)
+    ARMADYL_RUNE(Items.ARMADYL_RUNE_14700)
     ;
 
     fun transform(): Item {

@@ -33,6 +33,12 @@ enum class Battlestaff(
         requiredLevel = 66,
         experience = 137.5,
     ),
+    ARMADYL_BATTLESTAFF(
+        required = Items.ORB_OF_ARMADYL_14702,
+        productId = Items.ARMADYL_BATTLESTAFF_14696,
+        requiredLevel = 77,
+        experience = 150.0,
+    )
     ;
 
     companion object {
