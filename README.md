@@ -2,7 +2,7 @@
 
 Fork of [2009scape](https://gitlab.com/2009scape/2009scape).
 
-For information on content, please visit the [blog](http://szumaster.work.gd/).
+For information on content, please visit the [blog](https://szumaster3.github.io/530-content/).
 
 [![License][license-shield]][license-url] [![Release][libs]][libs-url] [![Release][play-release]][play-url]<br>
 
