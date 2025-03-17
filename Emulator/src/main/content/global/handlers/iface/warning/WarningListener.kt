@@ -42,7 +42,8 @@ class WarningListener :
             Components.WILDERNESS_WARNING_382,
             Components.CWS_WARNING_4_579,
             Components.CWS_WARNING_1_574,
-            Components.CWS_WARNING_24_581
+            Components.CWS_WARNING_24_581,
+            Components.CWS_WARNING_26_627,
         )
 
     override fun defineInterfaceListeners() {
@@ -65,21 +66,26 @@ class WarningListener :
                         closeOverlay(player)
                         closeInterface(player)
 
-                        if (component.id == Components.WILDERNESS_WARNING_382) {
-                            val wildernessDitch = player.getAttribute<Scenery>("wildy_ditch")
-                            val wildernessGate = player.getAttribute<Scenery>("wildy_gate")
+                        val warnings = mapOf(
+                            Components.CWS_WARNING_24_581 to 3872,
+                            Components.CWS_WARNING_26_627 to 4132
+                        )
 
-                            if (wildernessDitch != null) {
-                                player.interfaceManager.close()
-                                handleDitch(player)
-                            } else if (wildernessGate != null) {
-                                player.interfaceManager.close()
-                                handleGate(player)
-                            }
+                        if (component.id == Components.WILDERNESS_WARNING_382) {
+                            player.interfaceManager.close()
+
+                            player.getAttribute<Scenery>("wildy_ditch")?.let { handleDitch(player) }
+                                ?: player.getAttribute<Scenery>("wildy_gate")?.let { handleGate(player) }
+
                             WarningManager.increment(player, component.id)
-                        }
-                        if(component.id == Components.CWS_WARNING_24_581 && getVarbit(player, 3872) >= 6) {
-                            WarningManager.toggle(player, component.id)
+                        } else {
+                            warnings[component.id]?.let { varbit ->
+                                if (getVarbit(player, varbit) >= 6) {
+                                    WarningManager.toggle(player, component.id)
+                                } else {
+                                    WarningManager.increment(player, component.id)
+                                }
+                            } ?: WarningManager.increment(player, component.id)
                         }
                     }
 
@@ -232,13 +238,14 @@ class WarningListener :
                     teleport(player, player.location.transform(4, 0, 0))
                     setAttribute(player, "corp-beast-cave-delay", GameWorld.ticks + 5)
                 } else {
-                    if (!player.interfaceManager.isOpened &&
-                        player.interfaceManager.opened.id == (Warnings.CORPOREAL_BEAST_DANGEROUS.component)
-                    ) {
+                    if (!Warnings.CORPOREAL_BEAST_DANGEROUS.isDisabled) {
                         WarningManager.openWarning(
                             player,
                             Warnings.CORPOREAL_BEAST_DANGEROUS,
                         )
+                    } else {
+                        teleport(player, player.location.transform(4, 0, 0))
+                        setAttribute(player, "corp-beast-cave-delay", GameWorld.ticks + 5)
                     }
                 }
             }

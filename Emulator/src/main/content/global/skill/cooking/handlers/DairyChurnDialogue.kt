@@ -13,78 +13,46 @@ import org.rs.consts.Items
 class DairyChurnDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    private val ingredientId =
-        arrayOf(Item(Items.BUCKET_OF_MILK_1927, 1), Item(Items.POT_OF_CREAM_2130, 1), Item(Items.PAT_OF_BUTTER_6697, 1))
-
-    private var product: DairyProduct? = null
-    private var amount: Int = 0
+    private val ingredientIds = listOf(
+        Item(Items.BUCKET_OF_MILK_1927, 1),
+        Item(Items.POT_OF_CREAM_2130, 1),
+        Item(Items.PAT_OF_BUTTER_6697, 1)
+    )
 
     override fun open(vararg args: Any): Boolean {
-        openChatbox(player, Components.COOKING_CHURN_OP3_74)
-        return true
-    }
+        val hasMilk = player.inventory.contains(Items.BUCKET_OF_MILK_1927, 1)
+        val hasCream = player.inventory.contains(Items.POT_OF_CREAM_2130, 1)
+        val hasButter = player.inventory.contains(Items.PAT_OF_BUTTER_6697, 1)
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        var product: DairyProduct? = null
-        var amount = 0
-        when (buttonId) {
-            6 -> {
-                product = DairyProduct.POT_OF_CREAM
-                amount = 1
-            }
-
-            5 -> {
-                product = DairyProduct.POT_OF_CREAM
-                amount = 5
-            }
-
-            4 -> {
-                product = DairyProduct.POT_OF_CREAM
-                amount = 10
-            }
-
-            9 -> {
-                product = DairyProduct.PAT_OF_BUTTER
-                amount = 1
-            }
-
-            8 -> {
-                product = DairyProduct.PAT_OF_BUTTER
-                amount = 5
-            }
-
-            7 -> {
-                product = DairyProduct.PAT_OF_BUTTER
-                amount = 10
-            }
-
-            12 -> {
-                product = DairyProduct.CHEESE
-                amount = 1
-            }
-
-            11 -> {
-                product = DairyProduct.CHEESE
-                amount = 5
-            }
-
-            10 -> {
-                product = DairyProduct.CHEESE
-                amount = 10
-            }
+        val interfaceId = when {
+            hasMilk && !hasButter -> Components.COOKING_CHURN_OP1_72
+            hasButter || hasCream -> Components.COOKING_CHURN_OP2_73
+            else -> Components.COOKING_CHURN_OP3_74
         }
-        player.pulseManager.run(DairyChurnPulse(player, ingredientId[0], product!!, amount))
+
+        openChatbox(player, interfaceId)
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DairyChurnDialogue(player)
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val (product, amount) = when (buttonId) {
+            6 -> DairyProduct.POT_OF_CREAM to 1
+            5 -> DairyProduct.POT_OF_CREAM to 5
+            4 -> DairyProduct.POT_OF_CREAM to 10
+            9 -> DairyProduct.PAT_OF_BUTTER to 1
+            8 -> DairyProduct.PAT_OF_BUTTER to 5
+            7 -> DairyProduct.PAT_OF_BUTTER to 10
+            12 -> DairyProduct.CHEESE to 1
+            11 -> DairyProduct.CHEESE to 5
+            10 -> DairyProduct.CHEESE to 10
+            else -> return false
+        }
+
+        player.pulseManager.run(DairyChurnPulse(player, ingredientIds.first(), product, amount))
+        return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(984374)
-    }
+    override fun newInstance(player: Player): Dialogue = DairyChurnDialogue(player)
+
+    override fun getIds(): IntArray = intArrayOf(984374)
 }

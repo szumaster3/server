@@ -1,6 +1,9 @@
 package content.minigame.duelarena.handlers
 
+import content.global.handlers.iface.warning.WarningManager
+import content.global.handlers.iface.warning.Warnings
 import content.global.skill.summoning.familiar.Familiar
+import core.api.inBorders
 import core.api.setAttribute
 import core.cache.def.impl.SceneryDefinition
 import core.game.container.Container
@@ -265,6 +268,12 @@ class DuelArea
         }
 
         override fun enter(e: Entity): Boolean {
+            if(!Warnings.DUEL_ARENA.isDisabled && inBorders(e.asPlayer(), 3312, 3233, 3313, 3236)) {
+                WarningManager.openWarning(
+                    e.asPlayer(),
+                    Warnings.DUEL_ARENA,
+                )
+            }
             if (e.isPlayer) {
                 getSession(e.asPlayer())
                 e.properties.isSafeZone = true
