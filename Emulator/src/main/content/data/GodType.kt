@@ -15,7 +15,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 /**
- * Enum representing the different types of gods and their associated items and actions.
+ * Represents the different types of gods and their associated items and actions.
  *
  * @property cape The item representing the cape of the god.
  * @property staff The item representing the staff of the god.

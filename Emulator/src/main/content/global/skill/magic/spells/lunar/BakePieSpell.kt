@@ -40,7 +40,7 @@ class BakePieSpell : SpellListener("lunar") {
 
                     override fun pulse(): Boolean {
                         if (playerPies.isEmpty()) return true
-                        if (counter == 0) delay = Animation(Animations.LUNAR_BAKE_PIE_4413).definition.durationTicks + 1
+                        if (counter == 0) delay = Animation(Animations.LUNAR_BAKE_PIE_4413).definition.getDurationTicks() + 1
                         val item = playerPies[0]
                         val pie = CookableItem.forId(item.id)
                         visualizeSpell(player, Animations.LUNAR_BAKE_PIE_4413, 746, 75, Sounds.LUNAR_BAKE_PIE_2879)

@@ -305,7 +305,7 @@ object QCRepository {
         map: Int,
         index: Int,
     ): String {
-        return DataMap.get(map).getString(index)
+        return DataMap.get(map).getString(index)!!
     }
 
     @JvmStatic

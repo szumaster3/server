@@ -3,6 +3,9 @@ package content.data
 import core.game.node.item.Item
 import org.rs.consts.Items
 
+/**
+ * Represents the different types of lamps.
+ */
 enum class Lamps(
     val item: Int,
     val experience: Int,
@@ -226,6 +229,12 @@ enum class Lamps(
     ;
 
     companion object {
+        /**
+         * Retrieves the corresponding `Lamps` enum value for a given item.
+         *
+         * @param item The item to search for in the enum.
+         * @return The `Lamps` enum value if a match is found, or `null` if no match is found.
+         */
         @JvmStatic
         fun forItem(item: Item): Lamps? {
             for (lamp in values()) {

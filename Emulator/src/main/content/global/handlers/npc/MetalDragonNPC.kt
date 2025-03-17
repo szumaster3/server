@@ -12,6 +12,8 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import org.rs.consts.Animations
+import org.rs.consts.Graphics
 import org.rs.consts.NPCs
 
 @Initializable
@@ -57,10 +59,10 @@ class MetalDragonNPC(
             DragonfireSwingHandler.get(
                 false,
                 52,
-                Animation(81, Priority.HIGH),
+                Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
                 null,
                 null,
-                Projectile.create(null as Entity?, null, 54, 40, 36, 41, 46, 20, 255),
+                Projectile.create(null as Entity?, null, Graphics.GIANT_ORANGE_BLAST_54, 40, 36, 41, 46, 20, 255),
             )
     }
 }

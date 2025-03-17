@@ -349,6 +349,12 @@ enum class SkillingTool(
     ;
 
     companion object {
+        /**
+         * Returns the [SkillingTool] associated with the specified item id.
+         *
+         * @param itemId The item id to search for.
+         * @return The SkillingTool for the specified item id, or `null` if no match is found.
+         */
         @JvmStatic
         fun forId(itemId: Int): SkillingTool? {
             for (tool in values()) {
@@ -359,6 +365,12 @@ enum class SkillingTool(
             return null
         }
 
+        /**
+         * Returns the best available hatchet for the player based on priority.
+         *
+         * @param player The player for whom the best hatchet is determined.
+         * @return The best axe [SkillingTool] that the player can use, or `null` if no suitable hatchet is found.
+         */
         @JvmStatic
         fun getHatchet(player: Player): SkillingTool? {
             var tool: SkillingTool? = null
@@ -392,6 +404,12 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available pickaxe for the player based on priority.
+         *
+         * @param player The player for whom the best pickaxe is determined.
+         * @return The best pickaxe [SkillingTool] that the player can use, or `null` if no suitable pickaxe is found.
+         */
         @JvmStatic
         fun getPickaxe(player: Player): SkillingTool? {
             var tool: SkillingTool? = null
@@ -423,6 +441,12 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available harpoon for the player based on priority.
+         *
+         * @param player The player for whom the best harpoon is determined.
+         * @return The best harpoon [SkillingTool] that the player can use, or `null` if no suitable harpoon is found.
+         */
         @JvmStatic
         fun getHarpoon(player: Player): SkillingTool? {
             var tool: SkillingTool? = null
@@ -443,6 +467,12 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available butterfly net for the player based on priority.
+         *
+         * @param player The player for whom the best butterfly net is determined.
+         * @return The best butterfly net [SkillingTool] that the player can use, or `null` if no suitable net is found.
+         */
         @JvmStatic
         fun getButterflyNet(player: Player): SkillingTool? {
             var tool: SkillingTool? = null
@@ -463,6 +493,12 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available firemaking tool for the player based on priority.
+         *
+         * @param player The player for whom the best firemaking tool is determined.
+         * @return The best firemaking tool [SkillingTool] that the player can use, or `null` if no suitable tool is found.
+         */
         @JvmStatic
         fun getFiremakingTool(player: Player): SkillingTool? {
             var tool: SkillingTool? = null
@@ -493,6 +529,12 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available machete for the player based on priority.
+         *
+         * @param player The player for whom the best machete is determined.
+         * @return The best machete [SkillingTool] that the player can use, or `null` if no suitable machete is found.
+         */
         @JvmStatic
         fun getMachete(player: Player?): SkillingTool? {
             var tool: SkillingTool? = null
@@ -513,6 +555,13 @@ enum class SkillingTool(
             return tool
         }
 
+        /**
+         * Returns the best available tool for the specified skill and player.
+         *
+         * @param player The player for whom the best tool is determined.
+         * @param skill The skill for which the tool is needed.
+         * @return The best [SkillingTool] for the specified skill and player, or `null` if no suitable tool is found.
+         */
         @JvmStatic
         fun getToolForSkill(
             player: Player?,
@@ -528,6 +577,14 @@ enum class SkillingTool(
             }
         }
 
+        /**
+         * Checks if the player has the specified tool for the given skill.
+         *
+         * @param player The player to check for the tool.
+         * @param skillId The skill id for which the tool is needed.
+         * @param tool The tool to check for in the player inventory or equipment.
+         * @return True if the player has the tool, false otherwise.
+         */
         @JvmStatic
         fun checkTool(
             player: Player,

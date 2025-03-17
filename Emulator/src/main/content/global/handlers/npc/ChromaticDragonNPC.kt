@@ -11,6 +11,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
+import org.rs.consts.Animations
 import org.rs.consts.NPCs
 
 @Initializable
@@ -72,7 +73,7 @@ class ChromaticDragonNPC(
             DragonfireSwingHandler.get(
                 true,
                 52,
-                Animation(81, Priority.HIGH),
+                Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
                 Graphics(1, 64),
                 null,
                 null,

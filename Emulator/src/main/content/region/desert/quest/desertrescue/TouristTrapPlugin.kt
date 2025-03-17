@@ -1215,7 +1215,7 @@ class TouristTrapPlugin : OptionHandler() {
             player.faceLocation(base.transform(15, 9, 0))
             player.animate(Animation.create(5054))
             Pulser.submit(
-                object : Pulse(AnimationDefinition.forId(Animations.UNTYING_5054)!!.durationTicks, player) {
+                object : Pulse(AnimationDefinition.forId(Animations.UNTYING_5054)!!.getDurationTicks(), player) {
                     override fun pulse(): Boolean {
                         TouristTrap.addConfig(player, 2048 + (1 shl 4))
                         this@WinchCutscene.stop(true)

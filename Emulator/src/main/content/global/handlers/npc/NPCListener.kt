@@ -28,10 +28,18 @@ import org.rs.consts.Scenery
 
 class NPCListener : InteractionListener {
     override fun defineListeners() {
+        /*
+         * Handles hair-cut interaction.
+         */
+
         on(NPCs.HAIRDRESSER_598, IntType.NPC, "hair-cut") { player, node ->
             player.dialogueInterpreter.open(NPCs.HAIRDRESSER_598, (node as NPC?), true)
             return@on true
         }
+
+        /*
+         * Handles interaction with dummies.
+         */
 
         on(dummySceneryIds, IntType.SCENERY, "attack", "hit") { player, _ ->
             lock(player, 3)
@@ -56,6 +64,10 @@ class NPCListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles banking interaction with Peer the seer NPC.
+         */
+
         on(peerTheSeerNPC, IntType.NPC, "deposit") { player, _ ->
             if (!anyInEquipment(
                     player,
@@ -78,6 +90,10 @@ class NPCListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles BarCrawl activity interaction with NPCs.
+         */
+
         on(barCrawlNPCs, IntType.NPC, "talk-to", "talk") { player, node ->
             val type = BarcrawlType.forId(node.id)
             val instance = BarcrawlManager.getInstance(player)
@@ -89,6 +105,10 @@ class NPCListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles disturb.
+         */
+
         on(IntType.NPC, "disturb") { player, node ->
             if (node is IdleAbstractNPC) {
                 if (node.canDisturb(player)) {
@@ -97,6 +117,10 @@ class NPCListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Basic interactions with NPCs.
+         */
 
         on(IntType.NPC, "talk-to", "talk", "talk to") { player, node ->
             val npc = node.asNpc()

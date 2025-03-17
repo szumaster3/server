@@ -90,7 +90,7 @@ public final class MainInterface extends ComponentPlugin {
                         configureWorldMap(player);
                         break;
                     case 69://Logout
-                        player.getPacketDispatch().sendString("When you have finished playing " + GameWorld.getSettings().getName() + ", always use the button below to logout safely. ", 182, 0);
+                        player.getPacketDispatch().sendString("When you have finished playing " + GameWorld.getSettings().getName() + ", always use the button below to logout safely.", 182, 0);
                         break;
                 }
                 return true;

@@ -5,6 +5,9 @@ import core.game.node.item.Item
 import org.rs.consts.Components
 import org.rs.consts.Items
 
+/**
+ * Represents different light sources in the game.
+ */
 enum class LightSource(
     val level: Int,
     val raw: Item,
@@ -117,6 +120,11 @@ enum class LightSource(
     ),
     ;
 
+    /**
+     * Returns the strength of the light source based on its interface id.
+     *
+     * @return the strength of the light source.
+     */
     fun getStrength(): Int {
         return when (interfaceId) {
             Components.DARKNESS_LIGHT_97 -> 1
@@ -126,16 +134,33 @@ enum class LightSource(
         }
     }
 
+    /**
+     * Returns the name of the light source in a human-readable format.
+     *
+     * @return the name of the light source.
+     */
     fun getName(): String {
         return name.lowercase().replace("_", " ")
     }
 
     companion object {
+        /**
+         * Checks if the player has an active light source.
+         *
+         * @param player the player to check.
+         * @return `true` if the player has an active light source, `false` otherwise.
+         */
         @JvmStatic
         fun hasActiveLightSource(player: Player): Boolean {
             return getActiveLightSource(player) != null
         }
 
+        /**
+         * Gets the active light source of the player.
+         *
+         * @param player the player to check.
+         * @return the active light source, or `null` if no active light source exists.
+         */
         @JvmStatic
         fun getActiveLightSource(player: Player): LightSource? {
             for (item in player.inventory.toArray()) {
@@ -147,16 +172,33 @@ enum class LightSource(
             return null
         }
 
+        /**
+         * Retrieves the light source associated with a given item id.
+         *
+         * @param id the item id.
+         * @return the light source, or `null` if no match is found.
+         */
         @JvmStatic
         fun forId(id: Int): LightSource? {
             return values().firstOrNull { it.raw.id == id }
         }
 
+        /**
+         * Retrieves the light source associated with a given product item id.
+         *
+         * @param id the product item id.
+         * @return the light source, or `null` if no match is found.
+         */
         @JvmStatic
         fun forProductId(id: Int): LightSource? {
             return values().firstOrNull { it.product.id == id }
         }
 
+        /**
+         * Retrieves an array of raw item IDs for all light sources.
+         *
+         * @return an array of raw item IDs.
+         */
         @JvmStatic
         fun getRawIds(): IntArray {
             return values().map { it.raw.id }.toIntArray()

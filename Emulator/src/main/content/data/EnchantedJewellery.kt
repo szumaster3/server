@@ -383,7 +383,7 @@ enum class EnchantedJewellery(
 
     companion object {
         private val ANIMATION = Animation(9603)
-        private val Graphics = Graphics(org.rs.consts.Graphics.DUELING_RING_TP_1684)
+        private val Graphics = Graphics(org.rs.consts.Graphics.TP_RING_OF_DUELING_1684)
         val idMap = HashMap<Int, EnchantedJewellery>()
 
         init {

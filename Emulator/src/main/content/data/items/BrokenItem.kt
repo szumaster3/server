@@ -5,7 +5,14 @@ import core.game.node.item.WeightedChanceItem
 import core.tools.RandomFunction
 import org.rs.consts.Items
 
+/**
+ * The [BrokenItem] object manages the logic of retrieving damaged
+ * or broken items that can be repaired.
+ */
 object BrokenItem {
+    /*
+     * List of broken arrows with their respective weighted chances.
+     */
     private val brokenArrows = ArrayList<WeightedChanceItem>()
 
     init {
@@ -15,6 +22,9 @@ object BrokenItem {
         brokenArrows.add(WeightedChanceItem(Items.MITHRIL_ARROW_888, 1, 10))
     }
 
+    /*
+     * List of broken staves with their respective weighted chances.
+     */
     private val brokenStaves = ArrayList<WeightedChanceItem>()
 
     init {
@@ -24,6 +34,9 @@ object BrokenItem {
         brokenStaves.add(WeightedChanceItem(Items.STAFF_OF_FIRE_1387, 1, 25))
     }
 
+    /*
+     * List of rusty swords with their respective weighted chances.
+     */
     private val rustySwords = ArrayList<WeightedChanceItem>()
 
     init {
@@ -39,6 +52,9 @@ object BrokenItem {
         rustySwords.add(WeightedChanceItem(Items.MITHRIL_LONGSWORD_1299, 1, 8))
     }
 
+    /*
+     * List of rusty scimitars with their respective weighted chances.
+     */
     private val rustyScimitars = ArrayList<WeightedChanceItem>()
 
     init {
@@ -49,6 +65,9 @@ object BrokenItem {
         rustyScimitars.add(WeightedChanceItem(Items.MITHRIL_SCIMITAR_1329, 1, 8))
     }
 
+    /*
+     * List of damaged armor items with their respective weighted chances.
+     */
     private val damagedArmour = ArrayList<WeightedChanceItem>()
 
     init {
@@ -59,6 +78,9 @@ object BrokenItem {
         damagedArmour.add(WeightedChanceItem(Items.MITHRIL_PLATEBODY_1121, 1, 5))
     }
 
+    /*
+     * List of broken armor items with their respective weighted chances.
+     */
     private val brokenArmour = ArrayList<WeightedChanceItem>()
 
     init {
@@ -69,6 +91,12 @@ object BrokenItem {
         brokenArmour.add(WeightedChanceItem(Items.MITHRIL_PLATELEGS_1071, 1, 5))
     }
 
+    /**
+     * Returns a repaired item of a specific type.
+     *
+     * @param type The [EquipmentType] representing the type of equipment to repair.
+     * @return The repaired [Item], or `null` if no repairable item is found.
+     */
     fun getRepair(type: EquipmentType): Item? {
         return when (type) {
             EquipmentType.ARROWS -> RandomFunction.rollWeightedChanceTable(brokenArrows)
@@ -80,6 +108,9 @@ object BrokenItem {
         }
     }
 
+    /**
+     * Represents the different types of equipment that can be repaired.
+     */
     enum class EquipmentType {
         ARROWS,
         STAVES,

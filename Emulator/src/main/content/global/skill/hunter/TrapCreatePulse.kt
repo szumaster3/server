@@ -75,7 +75,7 @@ class TrapCreatePulse(
     }
 
     override fun reward(): Boolean {
-        if (++ticks % (trap.settings.setupAnimation.definition.durationTicks) != 0) {
+        if (++ticks % (trap.settings.setupAnimation.definition.getDurationTicks()) != 0) {
             return false
         }
         var `object` = trap.settings.buildObject(player, node)

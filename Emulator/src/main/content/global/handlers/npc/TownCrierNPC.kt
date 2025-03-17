@@ -19,17 +19,18 @@ private val IDS =
     )
 
 class TownCrierNPC : NPCBehavior(*IDS) {
+
+    private val forceChatAnimation = mapOf(
+        "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_RING_BELL_6865,
+        "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCHES_HEAD_6863
+    )
+
     override fun tick(self: NPC): Boolean {
-        when {
-            RandomFunction.random(100) < 5 -> {
+        forceChatAnimation.forEach { (chat, animation) ->
+            if (RandomFunction.random(35) == 5) {
                 stopWalk(self)
-                animate(self, Animations.TOWN_CRIER_RING_BELL_6865)
-                sendChat(self, "The Duke of Lumbridge needs a hand.")
-            }
-            RandomFunction.random(100) < 3 -> {
-                stopWalk(self)
-                animate(self, Animations.TOWN_CRIER_SCRATCHES_HEAD_6863)
-                sendChat(self, "The squirrels! The squirrels are coming! Noooo, get them out of my head!")
+                animate(self, animation)
+                sendChat(self, chat)
             }
         }
         return super.tick(self)

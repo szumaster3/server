@@ -39,13 +39,13 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
                 try {
                     val ifaceMap = ifaceDef::class.memberProperties.filter { prop ->
-                            prop.returnType.classifier !in listOf(
-                                IfaceDefinition::class, List::class, Map::class
-                            )
-                        }.associate { prop ->
-                            prop.isAccessible = true
-                            prop.name to (prop.getter.call(ifaceDef) ?: "null")
-                        }
+                        prop.returnType.classifier !in listOf(
+                            IfaceDefinition::class, List::class, Map::class
+                        )
+                    }.associate { prop ->
+                        prop.isAccessible = true
+                        prop.name to (prop.getter.call(ifaceDef) ?: "null")
+                    }
 
                     if (ifaceMap.isNotEmpty()) {
                         interfaces.add(ifaceMap)
@@ -87,7 +87,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 val bodyModelIdsString = def.bodyModelIds?.joinToString(",") { it.toString() } ?: ""
                 val headModelIdsString = def.headModelIds?.joinToString(",") { it.toString() }
 
-                writer.appendLine("$i,${def.bodyPartId},$bodyModelIdsString,${def.isNotSelectable},$headModelIdsString")
+                writer.appendLine("$i,${def.bodyPartId},$bodyModelIdsString,${def.notSelectable},$headModelIdsString")
             }
 
             writer.close()
@@ -111,15 +111,15 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             for (itemId in 0 until Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
                 val itemDef = ItemDefinition.forId(itemId) ?: continue
                 val itemMap = itemDef::class.memberProperties.filter { prop ->
-                        prop.returnType.classifier !in listOf(ItemDefinition::class, List::class, Map::class)
-                    }.associate { prop ->
-                        prop.isAccessible = true
-                        try {
-                            prop.name to prop.getter.call(itemDef)
-                        } catch (e: Exception) {
-                            prop.name to "Error"
-                        }
+                    prop.returnType.classifier !in listOf(ItemDefinition::class, List::class, Map::class)
+                }.associate { prop ->
+                    prop.isAccessible = true
+                    try {
+                        prop.name to prop.getter.call(itemDef)
+                    } catch (e: Exception) {
+                        prop.name to "Error"
                     }
+                }
 
                 if (itemMap.isNotEmpty()) {
                     items.add(itemMap)
@@ -410,8 +410,8 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     "id" to id,
                     "duration" to animDef.getDuration(),
                     "cycles" to animDef.getCycles(),
-                    "durationTicks" to animDef.getDurationTicks(),
-                    "emoteItem" to animDef.emoteItem,
+                    "duration" to animDef.getDurationTicks(),
+                    "rightHandItem" to animDef.rightHandItem,
                     "hasSoundEffect" to animDef.hasSoundEffect,
                     "effect2Sound" to animDef.effect2Sound,
                 )
@@ -550,12 +550,12 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val file = File("animation_dump.txt")
             BufferedWriter(FileWriter(file)).use { writer ->
                 for ((animationId, animationDef) in AnimationDefinition.getDefinition()) {
-                    val frameIds = animationDef.anIntArray2139
-                    val frameLengths = animationDef.durations ?: intArrayOf()
-                    val cycleLength = animationDef.durationTicks
+                    val frameIds = animationDef.frames
+                    val frameLengths = animationDef.duration ?: intArrayOf()
+                    val cycleLength = animationDef.getDurationTicks()
                     writer.write("Animation ID: $animationId\n")
                     writer.write("Cycle Length: $cycleLength\n")
-                    writer.write("Frame IDs: ${frameIds.joinToString(",")}\n")
+                    writer.write("Frame IDs: ${frameIds!!.joinToString(",")}\n")
                     writer.write("Frame Lengths: ${frameLengths.joinToString(",")}\n")
                     writer.write("-----\n")
                 }

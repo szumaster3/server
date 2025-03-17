@@ -103,8 +103,7 @@ enum class ChargedItem(
     ;
 
     /**
-     * Returns the ID corresponding to the item at the specified charge level.
-     * If the charge is invalid (less than 1 or greater than the maximum charge), the closest valid ID will be returned.
+     * Returns the id to the item at the specified charge level.
      *
      * @param charge The charge level (1-based index).
      * @return The item ID corresponding to the specified charge level.
@@ -157,28 +156,28 @@ enum class ChargedItem(
         }
 
         /**
-         * Checks if an item ID is a valid charged item.
+         * Checks if an item ID is a valid-charged item.
          *
-         * @param id The item ID.
-         * @return True if the item ID corresponds to a charged item, false otherwise.
+         * @param id The item id.
+         * @return True if the item id to a charged item, false otherwise.
          */
         @JvmStatic
         fun contains(id: Int): Boolean = idMap.containsKey(id)
 
         /**
-         * Returns the charged item associated with the specified item ID.
+         * Returns the charged item for given id.
          *
-         * @param id The item ID.
-         * @return The charged item corresponding to the specified ID, or null if no match is found.
+         * @param id The item id.
+         * @return The charged item for the specified id, or `null` if no match is found.
          */
         @JvmStatic
         fun forId(id: Int): ChargedItem? = idMap[id]
 
         /**
-         * Returns the charge level for the specified item ID.
+         * Returns the charge level for the specified item id.
          *
          * @param id The item ID.
-         * @return The charge level, or null if the item is not a charged item.
+         * @return The charge level, or `null` if the item is not a charged item.
          */
         @JvmStatic
         fun getCharge(id: Int): Int? {

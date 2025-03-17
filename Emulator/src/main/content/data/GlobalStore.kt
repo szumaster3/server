@@ -6,6 +6,10 @@ import core.api.sendMessage
 import core.game.node.entity.player.Player
 import org.rs.consts.Items
 
+/**
+ * A class that checks whether an item has been regenerated
+ * after the next login (restart) or after the expiration of a given time.
+ */
 object GlobalStore {
     @JvmStatic
     fun check(player: Player) {
