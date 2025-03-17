@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 /**
@@ -20,19 +21,19 @@ import org.rs.consts.Sounds;
  */
 @Initializable
 public final class WaterSpell extends CombatSpell {
-    private static final Graphics STRIKE_START = new Graphics(93, 96);
-    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, 94, 40, 36, 52, 75, 15, 11);
-    private static final Graphics STRIKE_END = new Graphics(95, 96);
-    private static final Graphics BOLT_START = new Graphics(120, 96);
-    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, 121, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BOLT_END = new Graphics(122, 96);
-    private static final Graphics BLAST_START = new Graphics(135, 96);
-    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, 136, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BLAST_END = new Graphics(137, 96);
-    private static final Graphics WAVE_START = new Graphics(161, 96);
-    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, 162, 40, 36, 52, 75, 15, 11);
-    private static final Graphics WAVE_END = new Graphics(163, 96);
-    private static final Animation ANIMATION = new Animation(711, Priority.HIGH);
+    private static final Graphics STRIKE_START = new Graphics(org.rs.consts.Graphics.WATER_STRIKE_CAST_93, 96);
+    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WATER_STRIKE_PROJECTILE_94, 40, 36, 52, 75, 15, 11);
+    private static final Graphics STRIKE_END = new Graphics(org.rs.consts.Graphics.WATER_STRIKE_IMPACT_95, 96);
+    private static final Graphics BOLT_START = new Graphics(org.rs.consts.Graphics.WATER_BOLT_CAST_120, 96);
+    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WATER_BOLT_PROJECTILE_121, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BOLT_END = new Graphics(org.rs.consts.Graphics.WATER_BOLT_IMPACT_122, 96);
+    private static final Graphics BLAST_START = new Graphics(org.rs.consts.Graphics.WATER_BLAST_CAST_135, 96);
+    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WATER_BLAST_PROJECTILE_136, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BLAST_END = new Graphics(org.rs.consts.Graphics.WATER_BLAST_IMPACT_137, 96);
+    private static final Graphics WAVE_START = new Graphics(org.rs.consts.Graphics.WATER_WAVE_CAST_161, 96);
+    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WATER_WAVE_PROJECTILE_162, 40, 36, 52, 75, 15, 11);
+    private static final Graphics WAVE_END = new Graphics(org.rs.consts.Graphics.WATER_WAVE_IMPACT_163, 96);
+    private static final Animation ANIMATION = new Animation(Animations.CAST_SPELL_711, Priority.HIGH);
 
     /**
      * Instantiates a new Water spell.

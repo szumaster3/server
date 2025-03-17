@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 /**
@@ -21,19 +22,19 @@ import org.rs.consts.Sounds;
 @Initializable
 public final class EarthSpell extends CombatSpell {
 
-    private static final Graphics STRIKE_START = new Graphics(96, 96);
-    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, 97, 40, 36, 52, 75, 15, 11);
-    private static final Graphics STRIKE_END = new Graphics(98, 96);
-    private static final Graphics BOLT_START = new Graphics(123, 96);
-    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, 124, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BOLT_END = new Graphics(125, 96);
-    private static final Graphics BLAST_START = new Graphics(138, 96);
-    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, 139, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BLAST_END = new Graphics(140, 96);
-    private static final Graphics WAVE_START = new Graphics(164, 96);
-    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, 165, 40, 36, 52, 75, 15, 11);
-    private static final Graphics WAVE_END = new Graphics(166, 96);
-    private static final Animation ANIMATION = new Animation(711, Priority.HIGH);
+    private static final Graphics STRIKE_START = new Graphics(org.rs.consts.Graphics.EARTH_STRIKE_CAST_96, 96);
+    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.EARTH_STRIKE_PROJECTILE_97, 40, 36, 52, 75, 15, 11);
+    private static final Graphics STRIKE_END = new Graphics(org.rs.consts.Graphics.EARTH_STRIKE_IMPACT_98, 96);
+    private static final Graphics BOLT_START = new Graphics(org.rs.consts.Graphics.EARTH_BOLT_CAST_123, 96);
+    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.EARTH_BOLT_PROJECTILE_124, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BOLT_END = new Graphics(org.rs.consts.Graphics.EARTH_BOLT_IMPACT_125, 96);
+    private static final Graphics BLAST_START = new Graphics(org.rs.consts.Graphics.EARTH_BLAST_CAST_138, 96);
+    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.EARTH_BLAST_PROJECTILE_139, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BLAST_END = new Graphics(org.rs.consts.Graphics.EARTH_BLAST_IMPACT_140, 96);
+    private static final Graphics WAVE_START = new Graphics(org.rs.consts.Graphics.EARTH_WAVE_CAST_164, 96);
+    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.EARTH_WAVE_PROJECTILE_165, 40, 36, 52, 75, 15, 11);
+    private static final Graphics WAVE_END = new Graphics(org.rs.consts.Graphics.EARTH_WAVE_IMPACT_166, 96);
+    private static final Animation ANIMATION = new Animation(Animations.CAST_SPELL_711, Priority.HIGH);
 
     /**
      * Instantiates a new Earth spell.

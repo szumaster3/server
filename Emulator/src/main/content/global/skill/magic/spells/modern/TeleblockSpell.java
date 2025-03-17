@@ -28,7 +28,7 @@ public final class TeleblockSpell extends CombatSpell {
 
     private static final Projectile TELEBLOCK_ORB = Projectile.create((Entity) null, null, 1842, 40, 36, 52, 75, 15, 11);
 
-    private static final Graphics TELEBLOCK_SUCCESS = new Graphics(1843, 0);
+    private static final Graphics TELEBLOCK_SUCCESS = new Graphics(org.rs.consts.Graphics.CORP_STOMP_1834, 0);
 
     private static final Graphics TELEBLOCK_START = new Graphics(1841, 0);
 

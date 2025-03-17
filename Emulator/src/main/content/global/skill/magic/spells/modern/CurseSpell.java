@@ -14,6 +14,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 /**
@@ -22,26 +23,26 @@ import org.rs.consts.Sounds;
 @Initializable
 public final class CurseSpell extends CombatSpell {
 
-    private static final Graphics CONFUSE_START = new Graphics(102, 96);
-    private static final Projectile CONFUSE_PROJECTILE = Projectile.create((Entity) null, null, 103, 40, 36, 52, 75, 15, 11);
-    private static final Graphics CONFUSE_END = new Graphics(104, 96);
-    private static final Graphics WEAKEN_START = new Graphics(105, 96);
-    private static final Projectile WEAKEN_PROJECTILE = Projectile.create((Entity) null, null, 106, 40, 36, 52, 75, 15, 11);
-    private static final Graphics WEAKEN_END = new Graphics(107, 96);
-    private static final Graphics CURSE_START = new Graphics(108, 96);
-    private static final Projectile CURSE_PROJECTILE = Projectile.create((Entity) null, null, 109, 40, 36, 52, 75, 15, 11);
-    private static final Graphics CURSE_END = new Graphics(110, 96);
-    private static final Graphics VULNER_START = new Graphics(167, 96);
-    private static final Projectile VULNER_PROJECTILE = Projectile.create((Entity) null, null, 168, 40, 36, 52, 75, 15, 11);
-    private static final Graphics VULNER_END = new Graphics(169, 96, 1);
-    private static final Graphics ENFEEBLE_START = new Graphics(170, 96);
-    private static final Projectile ENFEEBLE_PROJECTILE = Projectile.create((Entity) null, null, 171, 40, 36, 52, 75, 15, 11);
-    private static final Graphics ENFEEBLE_END = new Graphics(172, 96);
-    private static final Graphics STUN_START = new Graphics(173, 96);
-    private static final Projectile STUN_PROJECTILE = Projectile.create((Entity) null, null, 174, 40, 36, 52, 75, 15, 11);
-    private static final Graphics STUN_END = new Graphics(107, 96);
+    private static final Graphics CONFUSE_START = new Graphics(org.rs.consts.Graphics.CONFUSE_CAST_102, 96);
+    private static final Projectile CONFUSE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.CONFUSE_PROJECTILE_103, 40, 36, 52, 75, 15, 11);
+    private static final Graphics CONFUSE_END = new Graphics(org.rs.consts.Graphics.CONFUSE_IMPACT_104, 96);
+    private static final Graphics WEAKEN_START = new Graphics(org.rs.consts.Graphics.WEAKEN_CAST_105, 96);
+    private static final Projectile WEAKEN_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WEAKEN_PROJECTILE_106, 40, 36, 52, 75, 15, 11);
+    private static final Graphics WEAKEN_END = new Graphics(org.rs.consts.Graphics.WEAKEN_IMPACT_107, 96);
+    private static final Graphics CURSE_START = new Graphics(org.rs.consts.Graphics.CURSE_CAST_108, 96);
+    private static final Projectile CURSE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.CURSE_PROJECTILE_109, 40, 36, 52, 75, 15, 11);
+    private static final Graphics CURSE_END = new Graphics(org.rs.consts.Graphics.CURSE_IMPACT_110, 96);
+    private static final Graphics VULNER_START = new Graphics(org.rs.consts.Graphics.VULNERABILITY_CAST_167, 96);
+    private static final Projectile VULNER_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.VULNERABILITY_PROJECTILE_168, 40, 36, 52, 75, 15, 11);
+    private static final Graphics VULNER_END = new Graphics(org.rs.consts.Graphics.VULNERABILITY_IMPACT_169, 96, 1);
+    private static final Graphics ENFEEBLE_START = new Graphics(org.rs.consts.Graphics.ENFEEBLE_CAST_170, 96);
+    private static final Projectile ENFEEBLE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.ENFEEBLE_PROJECTILE_171, 40, 36, 52, 75, 15, 11);
+    private static final Graphics ENFEEBLE_END = new Graphics(org.rs.consts.Graphics.ENFEEBLE_IMPACT_172, 96);
+    private static final Graphics STUN_START = new Graphics(org.rs.consts.Graphics.STUN_CAST_173, 96);
+    private static final Projectile STUN_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.STUN_PROJECTILE_174, 40, 36, 52, 75, 15, 11);
+    private static final Graphics STUN_END = new Graphics(org.rs.consts.Graphics.WEAKEN_IMPACT_107, 96);
     private static final Animation LOW_ANIMATION = new Animation(716, Priority.HIGH);
-    private static final Animation HIGH_ANIMATION = new Animation(729, Priority.HIGH);
+    private static final Animation HIGH_ANIMATION = new Animation(Animations.CAST_SPELL_B_729, Priority.HIGH);
 
     /**
      * Instantiates a new Curse spell.

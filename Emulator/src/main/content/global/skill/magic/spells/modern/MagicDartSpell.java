@@ -17,6 +17,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import org.rs.consts.Items;
+import org.rs.consts.Sounds;
 
 /**
  * The type Magic dart spell.
@@ -28,7 +29,18 @@ public class MagicDartSpell extends CombatSpell {
      * Instantiates a new Magic dart spell.
      */
     public MagicDartSpell() {
-        super(SpellType.MAGIC_DART, SpellBook.MODERN, 50, 30.0, 218, 219, new Animation(1576, Priority.HIGH), null, Projectile.create((Entity) null, null, 330, 40, 36, 52, 75, 15, 11), new Graphics(331, 96), Runes.DEATH_RUNE.getItem(1), Runes.MIND_RUNE.getItem(4));
+        super(SpellType.MAGIC_DART,
+                SpellBook.MODERN,
+                50,
+                30.0,
+                Sounds.WINDBOLT_CAST_AND_FIRE_218,
+                Sounds.WINDBOLT_HIT_219,
+                new Animation(1576, Priority.HIGH),
+                null,
+                Projectile.create((Entity) null, null, org.rs.consts.Graphics.SLAYER_DART_PROJECTILE_SLIGHTLY_BETTER_LOOKING_330, 40, 36, 52, 75, 15, 11),
+                new Graphics(org.rs.consts.Graphics.SLAYER_DART_CONTACT_SAME_AS_ABOVE_SLIGHT_COLOR_CHANGE_331, 96),
+                Runes.DEATH_RUNE.getItem(1),
+                Runes.MIND_RUNE.getItem(4));
     }
 
     @Override

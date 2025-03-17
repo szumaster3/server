@@ -9,6 +9,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import org.rs.consts.Components;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -25,11 +26,11 @@ public final class AssistSession extends Pulse implements RequestModule {
 
     private Player partner;
 
-    private final Component component = new Component(301).setCloseEvent(getCloseEvent());
+    private final Component component = new Component(Components.REQ_ASSIST_301).setCloseEvent(getCloseEvent());
 
     private static final Animation ANIMATION = Animation.create(7299);
 
-    private static final Graphics GRAPHICS = Graphics.create(1247);
+    private static final Graphics GRAPHICS = Graphics.create(org.rs.consts.Graphics.ASSIST_LEVELS_1247);
 
     private static final long TIME_OUT = 86400000;// 60000; //86400000;
 

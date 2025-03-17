@@ -19,7 +19,9 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Items;
+import org.rs.consts.NPCs;
 import org.rs.consts.Sounds;
 
 import static core.api.ContentAPIKt.playGlobalAudio;
@@ -34,14 +36,14 @@ public final class GodSpell extends CombatSpell {
     private static final int[] GOD_STAVES = new int[]{Items.SARADOMIN_STAFF_2415, Items.GUTHIX_STAFF_2416, Items.ZAMORAK_STAFF_2417};
     private static final Graphics SARA_START = null;
     private static final Projectile SARA_PROJECTILE = null;
-    private static final Graphics SARA_END = new Graphics(76, 0);
+    private static final Graphics SARA_END = new Graphics(org.rs.consts.Graphics.SARADOMIN_STRIKE_76, 0);
     private static final Graphics GUTHIX_START = null;
     private static final Projectile GUTHIX_PROJECTILE = null;
-    private static final Graphics GUTHIX_END = new Graphics(77, 0);
+    private static final Graphics GUTHIX_END = new Graphics(org.rs.consts.Graphics.CLAWS_OF_GUTHIX_77, 0);
     private static final Graphics ZAM_START = null;
     private static final Projectile ZAM_PROJECTILE = null;
-    private static final Graphics ZAM_END = new Graphics(78, 0);
-    private static final Animation ANIMATION = new Animation(811, Priority.HIGH);
+    private static final Graphics ZAM_END = new Graphics(org.rs.consts.Graphics.FLAMES_OF_ZAMORAK_78, 0);
+    private static final Animation ANIMATION = new Animation(Animations.HUMAN_CAST_SPELL_LONG_811, Priority.HIGH);
 
     /**
      * Instantiates a new God spell.
@@ -118,7 +120,7 @@ public final class GodSpell extends CombatSpell {
         super.visualize(entity, target);
         if (entity instanceof NPC) {
             NPC n = (NPC) entity;
-            if (n.getId() > 911 && n.getId() < 915 || (n.getId() > 906 && n.getId() < 912)) {
+            if (n.getId() > NPCs.KOLODION_911 && n.getId() < NPCs.LEELA_915 || (n.getId() > NPCs.KOLODION_906 && n.getId() < NPCs.BATTLE_MAGE_912)) {
                 n.getAnimator().forceAnimation(n.getProperties().getAttackAnimation());
             }
         }

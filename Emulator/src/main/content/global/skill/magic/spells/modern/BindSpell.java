@@ -24,15 +24,15 @@ import org.rs.consts.Sounds;
 @Initializable
 public final class BindSpell extends CombatSpell {
 
-    private static final Graphics BIND_START = new Graphics(177, 96);
-    private static final Projectile BIND_PROJECTILE = Projectile.create((Entity) null, null, 178, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BIND_END = new Graphics(181, 96);
-    private static final Graphics SNARE_START = new Graphics(177, 96);
-    private static final Projectile SNARE_PROJECTILE = Projectile.create((Entity) null, null, 178, 40, 36, 52, 75, 15, 11);
-    private static final Graphics SNARE_END = new Graphics(180, 96);
-    private static final Graphics ENTANGLE_START = new Graphics(177, 96);
-    private static final Projectile ENTANGLE_PROJECTILE = Projectile.create((Entity) null, null, 178, 40, 36, 52, 75, 15, 11);
-    private static final Graphics ENTANGLE_END = new Graphics(179, 96);
+    private static final Graphics BIND_START = new Graphics(org.rs.consts.Graphics.BIND_CAST_177, 96);
+    private static final Projectile BIND_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.BIND_PROJECTILE_178, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BIND_END = new Graphics(org.rs.consts.Graphics.BIND_IMPACT_179, 96);
+    private static final Graphics SNARE_START = new Graphics(org.rs.consts.Graphics.BIND_CAST_177, 96);
+    private static final Projectile SNARE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.BIND_PROJECTILE_178, 40, 36, 52, 75, 15, 11);
+    private static final Graphics SNARE_END = new Graphics(org.rs.consts.Graphics.SNARE_IMPACT_180, 96);
+    private static final Graphics ENTANGLE_START = new Graphics(org.rs.consts.Graphics.BIND_CAST_177, 96);
+    private static final Projectile ENTANGLE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.BIND_PROJECTILE_178, 40, 36, 52, 75, 15, 11);
+    private static final Graphics ENTANGLE_END = new Graphics(org.rs.consts.Graphics.ENTANGLE_IMPACT_181, 96);
     private static final Animation ANIMATION = new Animation(710, Priority.HIGH);
 
     /**

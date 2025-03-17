@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
@@ -27,7 +28,13 @@ public final class ChargeSpell extends MagicSpell {
      * Instantiates a new Charge spell.
      */
     public ChargeSpell() {
-        super(SpellBook.MODERN, 80, 180, Animation.create(811), new Graphics(6, 96), new Audio(Sounds.CHARGE_1651), new Item[]{Runes.FIRE_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3)});
+        super(SpellBook.MODERN,
+                80,
+                180,
+                Animation.create(Animations.NS_CHARGE_SPELL_811),
+                new Graphics(6, 96),
+                new Audio(Sounds.CHARGE_1651),
+                new Item[]{Runes.FIRE_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3)});
     }
 
     @Override

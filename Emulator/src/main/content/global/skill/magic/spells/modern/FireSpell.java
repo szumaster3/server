@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 /**
@@ -21,19 +22,19 @@ import org.rs.consts.Sounds;
 @Initializable
 public final class FireSpell extends CombatSpell {
 
-    private static final Graphics STRIKE_START = new Graphics(99, 96);
-    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, 100, 40, 36, 52, 75, 15, 11);
-    private static final Graphics STRIKE_END = new Graphics(101, 96);
-    private static final Graphics BOLT_START = new Graphics(126, 96);
-    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, 127, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BOLT_END = new Graphics(128, 96);
+    private static final Graphics STRIKE_START = new Graphics(org.rs.consts.Graphics.FIRE_STRIKE_CAST_99, 96);
+    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.FIRE_STRIKE_PROJECTILE_100, 40, 36, 52, 75, 15, 11);
+    private static final Graphics STRIKE_END = new Graphics(org.rs.consts.Graphics.FIRE_STRIKE_IMPACT_101, 96);
+    private static final Graphics BOLT_START = new Graphics(org.rs.consts.Graphics.FIRE_BOLT_CAST_126, 96);
+    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.FIRE_BOLT_PROJECTILE_127, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BOLT_END = new Graphics(org.rs.consts.Graphics.FIRE_BOLT_IMPACT_128, 96);
     private static final Graphics BLAST_START = new Graphics(129, 96);
     private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, 130, 40, 36, 52, 75, 15, 11);
     private static final Graphics BLAST_END = new Graphics(131, 96);
-    private static final Graphics WAVE_START = new Graphics(155, 96);
-    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, 156, 40, 36, 52, 75, 15, 11);
-    private static final Graphics WAVE_END = new Graphics(157, 96);
-    private static final Animation ANIMATION = new Animation(711, Priority.HIGH);
+    private static final Graphics WAVE_START = new Graphics(org.rs.consts.Graphics.FIRE_WAVE_CAST_155, 96);
+    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.FIRE_WAVE_PROJECTILE_156, 40, 36, 52, 75, 15, 11);
+    private static final Graphics WAVE_END = new Graphics(org.rs.consts.Graphics.FIRE_WAVE_IMPACT_157, 96);
+    private static final Animation ANIMATION = new Animation(Animations.CAST_SPELL_711, Priority.HIGH);
 
     /**
      * Instantiates a new Fire spell.

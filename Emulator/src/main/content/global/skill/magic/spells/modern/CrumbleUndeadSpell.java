@@ -15,6 +15,8 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
+import org.rs.consts.NPCs;
 import org.rs.consts.Sounds;
 
 /**
@@ -27,13 +29,25 @@ public final class CrumbleUndeadSpell extends CombatSpell {
      * Instantiates a new Crumble undead spell.
      */
     public CrumbleUndeadSpell() {
-        super(SpellType.CRUMBLE_UNDEAD, SpellBook.MODERN, 39, 24.5, Sounds.CRUMBLE_CAST_AND_FIRE_122, Sounds.CRUMBLE_HIT_124, new Animation(724, Priority.HIGH), new Graphics(145, 96), Projectile.create((Entity) null, null, 146, 40, 36, 52, 75, 15, 11), new Graphics(147, 96), Runes.EARTH_RUNE.getItem(2), Runes.AIR_RUNE.getItem(2), Runes.CHAOS_RUNE.getItem(1));
+        super(SpellType.CRUMBLE_UNDEAD,
+                SpellBook.MODERN,
+                39,
+                24.5,
+                Sounds.CRUMBLE_CAST_AND_FIRE_122,
+                Sounds.CRUMBLE_HIT_124,
+                new Animation(Animations.CAST_SPELL_PUSH_724, Priority.HIGH),
+                new Graphics(org.rs.consts.Graphics.CRUMBLE_UNDEAD_CAST_145, 96),
+                Projectile.create((Entity) null, null, org.rs.consts.Graphics.CRUMBLE_UNDEAD_PROJECTILE_146, 40, 36, 52, 75, 15, 11),
+                new Graphics(org.rs.consts.Graphics.CRUMBLE_UNDEAD_IMPACT_147, 96),
+                Runes.EARTH_RUNE.getItem(2),
+                Runes.AIR_RUNE.getItem(2),
+                Runes.CHAOS_RUNE.getItem(1));
     }
 
     @Override
     public boolean cast(Entity entity, Node target) {
         NPC npc = target instanceof NPC ? (NPC) target : null;
-        if (npc == null || npc.getTask() == null || !npc.getTask().undead || npc.getId() != 2060) {
+        if (npc == null || npc.getTask() == null || !npc.getTask().undead || npc.getId() != NPCs.SLASH_BASH_2060) {
             ((Player) entity).getPacketDispatch().sendMessage("This spell only affects the undead.");
             return false;
         }

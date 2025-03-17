@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
 
 /**
@@ -21,19 +22,19 @@ import org.rs.consts.Sounds;
 @Initializable
 public final class AirSpell extends CombatSpell {
 
-    private static final Graphics STRIKE_START = new Graphics(90, 96);
-    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, 91, 40, 36, 52, 75, 15, 11);
-    private static final Graphics STRIKE_END = new Graphics(92, 96);
-    private static final Graphics BOLT_START = new Graphics(117, 96);
-    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, 118, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BOLT_END = new Graphics(119, 96);
-    private static final Graphics BLAST_START = new Graphics(132, 96);
-    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, 133, 40, 36, 52, 75, 15, 11);
-    private static final Graphics BLAST_END = new Graphics(134, 96);
-    private static final Graphics WAVE_START = new Graphics(158, 96);
-    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, 159, 40, 36, 52, 75, 15, 11);
-    private static final Graphics WAVE_END = new Graphics(160, 96);
-    private static final Animation ANIMATION = new Animation(711, Priority.HIGH);
+    private static final Graphics STRIKE_START = new Graphics(org.rs.consts.Graphics.WIND_STRIKE_CAST_90, 96);
+    private static final Projectile STRIKE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WIND_STRIKE_PROJECTILE_91, 40, 36, 52, 75, 15, 11);
+    private static final Graphics STRIKE_END = new Graphics(org.rs.consts.Graphics.WIND_STRIKE_IMPACT_92, 96);
+    private static final Graphics BOLT_START = new Graphics(org.rs.consts.Graphics.WIND_BOLT_CAST_117, 96);
+    private static final Projectile BOLT_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WIND_BOLT_PROJECTILE_118, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BOLT_END = new Graphics(org.rs.consts.Graphics.WIND_BOLT_IMPACT_119, 96);
+    private static final Graphics BLAST_START = new Graphics(org.rs.consts.Graphics.WIND_BLAST_CAST_132, 96);
+    private static final Projectile BLAST_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WIND_BLAST_PROJECTILE_133, 40, 36, 52, 75, 15, 11);
+    private static final Graphics BLAST_END = new Graphics(org.rs.consts.Graphics.WIND_BLAST_IMPACT_134, 96);
+    private static final Graphics WAVE_START = new Graphics(org.rs.consts.Graphics.WIND_WAVE_CAST_158, 96);
+    private static final Projectile WAVE_PROJECTILE = Projectile.create((Entity) null, null, org.rs.consts.Graphics.WIND_WAVE_PROJECTILE_159, 40, 36, 52, 75, 15, 11);
+    private static final Graphics WAVE_END = new Graphics(org.rs.consts.Graphics.WIND_WAVE_IMPACT_160, 96);
+    private static final Animation ANIMATION = new Animation(Animations.CAST_SPELL_711, Priority.HIGH);
 
     /**
      * Instantiates a new Air spell.
