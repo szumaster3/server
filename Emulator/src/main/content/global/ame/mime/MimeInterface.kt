@@ -11,14 +11,14 @@ class MimeInterface : InterfaceListener {
         on(Components.MACRO_MIME_EMOTES_188) { player, _, _, buttonID, _, _ ->
 
             when (buttonID) {
-                2 -> animate(player, Emotes.THINK)
-                3 -> animate(player, Emotes.CRY)
-                4 -> animate(player, Emotes.LAUGH)
-                5 -> animate(player, Emotes.DANCE)
-                6 -> animate(player, Emotes.CLIMB_ROPE)
-                7 -> animate(player, Emotes.LEAN_ON_AIR)
-                8 -> animate(player, Emotes.GLASS_BOX)
-                9 -> animate(player, Emotes.GLASS_WALL)
+                2 -> Emotes.THINK
+                3 -> Emotes.CRY
+                4 -> Emotes.LAUGH
+                5 -> Emotes.DANCE
+                6 -> Emotes.CLIMB_ROPE
+                7 -> Emotes.LEAN_ON_AIR
+                8 -> Emotes.GLASS_BOX
+                9 -> Emotes.GLASS_WALL
             }
 
             for (i in (2..9)) {
@@ -34,10 +34,10 @@ class MimeInterface : InterfaceListener {
 
                 if (correct in 1..3) {
                     sendUnclosablePlainDialogue(player, true, "", "Correct!")
-                    animate(player, Emotes.CHEER)
+                    Emotes.CHEER
                 } else {
                     sendUnclosablePlainDialogue(player, true, "", "Wrong!")
-                    animate(player, Emotes.CRY)
+                    Emotes.CRY
                 }
 
                 removeAttribute(player, GameAttributes.RE_MIME_EMOTE)

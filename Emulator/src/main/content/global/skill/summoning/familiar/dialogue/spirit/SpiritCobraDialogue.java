@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.plugin.Initializable;
+import org.rs.consts.Animations;
 import org.rs.consts.Items;
 import org.rs.consts.NPCs;
 
@@ -136,7 +137,7 @@ public class SpiritCobraDialogue extends Dialogue {
             case 14:
                 playerl(FaceAnim.FRIENDLY, "I'll dance for you!");
                 end();
-                animate(player, Emotes.DANCE, false);
+                animate(npc, Animations.DANCE_866, true);
                 stage = END_DIALOGUE;
                 break;
             case 15:

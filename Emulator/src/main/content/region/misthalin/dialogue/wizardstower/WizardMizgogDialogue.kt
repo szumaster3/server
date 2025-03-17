@@ -17,7 +17,7 @@ class WizardMizgogDialogue(
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.IMP_CATCHER)) {
-            openDialogue(player, WizardMizgogDialogue(), npc)
+            openDialogue(player, content.region.misthalin.quest.imp.dialogue.WizardMizgogDialogue(), npc)
         } else {
             options("Got any more quests?", "Do you know any interesting spells you could teach me?")
         }

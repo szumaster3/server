@@ -101,20 +101,20 @@ object MimeUtils {
 
                         3 -> {
                             when (emoteId) {
-                                2 -> animate(npc, Emotes.THINK)
-                                3 -> animate(npc, Emotes.CRY)
-                                4 -> animate(npc, Emotes.LAUGH)
-                                5 -> animate(npc, Emotes.DANCE)
-                                6 -> animate(npc, Emotes.CLIMB_ROPE)
-                                7 -> animate(npc, Emotes.LEAN_ON_AIR)
-                                8 -> animate(npc, Emotes.GLASS_BOX)
-                                9 -> animate(npc, Emotes.GLASS_WALL)
+                                2 -> Emotes.THINK
+                                3 -> Emotes.CRY
+                                4 -> Emotes.LAUGH
+                                5 -> Emotes.DANCE
+                                6 -> Emotes.CLIMB_ROPE
+                                7 -> Emotes.LEAN_ON_AIR
+                                8 -> Emotes.GLASS_BOX
+                                9 -> Emotes.GLASS_WALL
                             }
                             setAttribute(player, GameAttributes.RE_MIME_INDEX, emoteId)
                         }
 
                         10 -> npc.faceLocation(location(2008, 4762, 0))
-                        11 -> animate(npc, Emotes.BOW)
+                        11 -> Emotes.BOW
                         14 ->
                             replaceScenery(
                                 Scenery(

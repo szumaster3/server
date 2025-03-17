@@ -13,10 +13,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
-import org.rs.consts.NPCs
-import org.rs.consts.Quests
-import org.rs.consts.Scenery
-import org.rs.consts.Sounds
+import org.rs.consts.*
 
 class WizardTowerListener : InteractionListener {
     override fun defineListeners() {
@@ -66,7 +63,7 @@ class WizardTowerListener : InteractionListener {
             sendMessage(player, "You taunt the demon, making it growl.")
             sendChat(demon, "Graaaagh!")
             face(demon, player, 3)
-            animate(player, Emotes.RASPBERRY)
+            animate(player, Animations.RASPBERRY_2110)
             return@on true
         }
 
