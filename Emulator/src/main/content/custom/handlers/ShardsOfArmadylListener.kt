@@ -4,6 +4,7 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
+import org.rs.consts.Animations
 import org.rs.consts.Items
 
 class ShardsOfArmadylListener : InteractionListener {
@@ -24,7 +25,7 @@ class ShardsOfArmadylListener : InteractionListener {
                             lock(player, 2)
                             animate(player, 712, true)
                             removeItem(player, Item(node.id, 100))
-                            addItemOrDrop(player, 14706)
+                            addItemOrDrop(player, Items.ORB_OF_ARMADYL_14706)
                             sendMessage(player, "You combine the shards into the Orb of Armadyl.")
                         }
                         else -> closeInterface(player)

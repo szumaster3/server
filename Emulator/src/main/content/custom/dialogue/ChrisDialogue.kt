@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.Components
+import org.rs.consts.NPCs
 
 @Initializable
 class ChrisDialogue(
@@ -48,6 +49,6 @@ class ChrisDialogue(
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(8592)
+        return intArrayOf(NPCs.CHRIS_8591)
     }
 }
