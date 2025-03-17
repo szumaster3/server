@@ -1,12 +1,8 @@
 package content.global.handlers.npc
 
-import core.api.finishDiaryTask
-import core.api.hasDiaryTaskComplete
-import core.api.withinDistance
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.map.Location
@@ -16,7 +12,7 @@ import org.rs.consts.NPCs
 import kotlin.random.Random
 
 @Initializable
-class IceGiantNPC(
+class IceSpiderNPC(
     id: Int = 0,
     location: Location? = null,
 ) : AbstractNPC(id, location) {
@@ -25,32 +21,22 @@ class IceGiantNPC(
         location: Location,
         vararg objects: Any,
     ): AbstractNPC {
-        return IceGiantNPC(id, location)
+        return IceSpiderNPC(id, location)
     }
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         if (killer is Player) {
-            val player = killer.asPlayer()
             val random = Random.nextInt(1, 10)
             if (random == 1) {
                 GroundItemManager.create(Item(Items.SHARDS_OF_ARMADYL_14701, 1), getLocation(), killer.asPlayer())
-            }
-            if (withinDistance(player, Location(3052, 9573, 0), 100) &&
-                !hasDiaryTaskComplete(player, DiaryType.FALADOR, 1, 4)
-            ) {
-                finishDiaryTask(player, DiaryType.FALADOR, 1, 4)
             }
         }
     }
 
     override fun getIds(): IntArray {
         return intArrayOf(
-            NPCs.ICE_GIANT_111,
-            NPCs.ICE_GIANT_3072,
-            NPCs.ICE_GIANT_4685,
-            NPCs.ICE_GIANT_4686,
-            NPCs.ICE_GIANT_4687,
+            NPCs.ICE_SPIDER_64,
         )
     }
 }

@@ -60,7 +60,7 @@ class ArmadylBattlestaffHandler : CombatSwingHandler(CombatStyle.MAGIC) {
     }
 
     companion object {
-        private val SPELL = SpellBookManager.SpellBook.MODERN.getSpell(126) as CombatSpell?
+        private val SPELL = SpellBookManager.SpellBook.forInterface(90)!!.register(5, StormOfArmadylSpell()) as CombatSpell?
 
         @JvmField
         val INSTANCE: ArmadylBattlestaffHandler = ArmadylBattlestaffHandler()

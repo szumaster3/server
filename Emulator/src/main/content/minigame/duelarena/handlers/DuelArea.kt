@@ -268,11 +268,14 @@ class DuelArea
         }
 
         override fun enter(e: Entity): Boolean {
-            if(!Warnings.DUEL_ARENA.isDisabled && inBorders(e.asPlayer(), 3312, 3233, 3313, 3236)) {
-                WarningManager.openWarning(
-                    e.asPlayer(),
-                    Warnings.DUEL_ARENA,
-                )
+            if (e is Player) {
+                val p = e.asPlayer()
+                if (!Warnings.DUEL_ARENA.isDisabled && inBorders(p, 3312, 3233, 3313, 3236)) {
+                    WarningManager.openWarning(
+                        p,
+                        Warnings.DUEL_ARENA,
+                    )
+                }
             }
             if (e.isPlayer) {
                 getSession(e.asPlayer())

@@ -621,9 +621,6 @@ public class Player extends Entity {
         if (style == CombatStyle.RANGE && weaponId == 10033 || weaponId == 10034) {
             return ChinchompaSwingHandler.getInstance();
         }
-        if (equipment.getNew(3).getId() == 14696) {
-            return ArmadylBattlestaffHandler.INSTANCE;
-        }
         if (weaponId >= 10146 && weaponId <= 10149) {
             return SalamanderSwingHandler.Companion.getINSTANCE();
         }

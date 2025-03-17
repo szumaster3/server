@@ -28,24 +28,26 @@ class StormOfArmadylSpell :
         -1,
         -1,
         null,
-        null,
+        Graphics(1333, 96),
         Projectile.create(null as Entity?, null, 1333, 20, 0, 52, 75, 15, 11),
         Graphics(1334, 96),
         Runes.ARMADYL_RUNE.getItem(1)
     ) {
 
     override fun cast(entity: Entity, target: Node): Boolean {
-        val player = entity.asPlayer()
-        if ((entity as Player).equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != 14696) {
-            sendMessage(player, "You need to wield the Armadyl Battlestaff to cast this spell.")
-            return false
+        if (entity is Player) {
+            val player = entity.asPlayer()
+            if (player.equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != Items.ARMADYL_BATTLESTAFF_14696 && player.interfaceManager.opened.id != 90) {
+                sendMessage(player, "You need to wield the Armadyl Battlestaff to cast this spell.")
+                return false
+            }
         }
         return true
     }
 
     @Throws(Throwable::class)
     override fun newInstance(arg: SpellType?): Plugin<SpellType?>? {
-        SpellBookManager.SpellBook.MODERN.register(126, this)
+        SpellBookManager.SpellBook.forInterface(90)?.register(5, this)
         return this
     }
 
@@ -54,7 +56,6 @@ class StormOfArmadylSpell :
     }
 
     override fun visualize(entity: Entity, target: Node) {
-        entity.visualize(Animation(10546, Priority.HIGH), Graphics(-1))
         super.visualize(entity, target)
     }
 }
