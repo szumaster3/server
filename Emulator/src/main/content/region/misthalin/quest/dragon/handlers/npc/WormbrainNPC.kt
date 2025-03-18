@@ -23,9 +23,7 @@ class WormbrainNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return WormbrainNPC(id, location)
-    }
+    ): AbstractNPC = WormbrainNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -60,7 +58,5 @@ class WormbrainNPC : AbstractNPC {
         return super.isAttackable(entity, style, message)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WORMBRAIN_745)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WORMBRAIN_745)
 }

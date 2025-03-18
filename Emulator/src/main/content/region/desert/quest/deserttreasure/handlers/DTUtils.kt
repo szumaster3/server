@@ -63,9 +63,7 @@ object DTUtils {
     fun getSubStage(
         player: Player,
         attributeName: String,
-    ): Int {
-        return getAttribute(player, attributeName, 0)
-    }
+    ): Int = getAttribute(player, attributeName, 0)
 
     /**
      * Sets the subStage value for a given attribute name.
@@ -78,9 +76,7 @@ object DTUtils {
         player: Player,
         attributeName: String,
         value: Int,
-    ) {
-        return setAttribute(player, attributeName, value)
-    }
+    ) = setAttribute(player, attributeName, value)
 
     /**
      * Checks if all substages of the Desert Treasure quest have been completed.

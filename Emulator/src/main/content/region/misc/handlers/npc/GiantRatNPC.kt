@@ -36,9 +36,7 @@ class GiantRatNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GiantRatNPC(id, location)
-    }
+    ): AbstractNPC = GiantRatNPC(id, location)
 
     override fun tick() {
         super.tick()
@@ -66,7 +64,5 @@ class GiantRatNPC : AbstractNPC {
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANT_RAT_86)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_RAT_86)
 }

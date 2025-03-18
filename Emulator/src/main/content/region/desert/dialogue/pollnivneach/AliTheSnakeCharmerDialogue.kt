@@ -75,11 +75,7 @@ class AliTheSnakeCharmerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AliTheSnakeCharmerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AliTheSnakeCharmerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_THE_SNAKE_CHARMER_1872)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_SNAKE_CHARMER_1872)
 }

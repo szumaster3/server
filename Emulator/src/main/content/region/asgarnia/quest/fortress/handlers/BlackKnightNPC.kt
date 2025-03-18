@@ -19,9 +19,7 @@ class BlackKnightNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BlackKnightNPC(id, location)
-    }
+    ): AbstractNPC = BlackKnightNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -33,13 +31,12 @@ class BlackKnightNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BLACK_KNIGHT_178,
             NPCs.BLACK_KNIGHT_179,
             NPCs.BLACK_KNIGHT_CAPTAIN_610,
             NPCs.BLACK_KNIGHT_2698,
             NPCs.BLACK_KNIGHT_6189,
         )
-    }
 }

@@ -155,11 +155,7 @@ class IgnatiusVulcanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return IgnatiusVulcanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = IgnatiusVulcanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IGNATIUS_VULCAN_4946)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IGNATIUS_VULCAN_4946)
 }

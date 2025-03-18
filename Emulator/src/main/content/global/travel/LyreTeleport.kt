@@ -22,14 +22,10 @@ class LyreTeleport(
         val rellekaProvince = Location(2663, 3646, 0)
 
         @JvmStatic
-        fun getStoreFile(): JSONObject {
-            return getArchive("daily-lyre-teleport")
-        }
+        fun getStoreFile(): JSONObject = getArchive("daily-lyre-teleport")
 
         @JvmStatic
-        fun getLyreTeleportFile(): JSONObject {
-            return getArchive("daily-lyre-teleport")
-        }
+        fun getLyreTeleportFile(): JSONObject = getArchive("daily-lyre-teleport")
 
         fun teleport(player: Player) {
             if (hasTimerActive(player, "teleblock")) {

@@ -182,7 +182,5 @@ class GabootyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2519, NPCs.GABOOTY_2520, NPCs.GABOOTY_2521, NPCs.GABOOTY_2522)
-    }
+    override fun getIds(): IntArray = intArrayOf(2519, NPCs.GABOOTY_2520, NPCs.GABOOTY_2521, NPCs.GABOOTY_2522)
 }

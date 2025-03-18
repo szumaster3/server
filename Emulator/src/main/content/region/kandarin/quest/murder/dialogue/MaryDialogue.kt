@@ -156,7 +156,5 @@ class MaryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MARY_810)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MARY_810)
 }

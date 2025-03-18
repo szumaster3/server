@@ -15,7 +15,8 @@ import kotlin.reflect.jvm.isAccessible
 
 @Initializable
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
-    override fun defineCommands() {/*
+    override fun defineCommands() {
+        /*
          * Dumps for educational purposes the interface id data.
          */
 
@@ -23,29 +24,36 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             name = "dumpinterfaces",
             privilege = Privilege.ADMIN,
             usage = "::dumpinterfaces",
-            description = "Dumps all interface definitions to a .json file."
+            description = "Dumps all interface definitions to a .json file.",
         ) { p, _ ->
             val gson = GsonBuilder().setPrettyPrinting().create()
             val dump = File("interface_definitions.json")
             val interfaces = mutableListOf<Map<String, Any?>>()
 
             for (interfaceId in 0 until Cache.getIndexCapacity(CacheIndex.COMPONENTS)) {
-                val ifaceDef = try {
-                    IfaceDefinition.forId(interfaceId)
-                } catch (e: Exception) {
-                    println("Error loading interface ID $interfaceId: ${e.message}")
-                    null
-                } ?: continue
+                val ifaceDef =
+                    try {
+                        IfaceDefinition.forId(interfaceId)
+                    } catch (e: Exception) {
+                        println("Error loading interface ID $interfaceId: ${e.message}")
+                        null
+                    } ?: continue
 
                 try {
-                    val ifaceMap = ifaceDef::class.memberProperties.filter { prop ->
-                        prop.returnType.classifier !in listOf(
-                            IfaceDefinition::class, List::class, Map::class
-                        )
-                    }.associate { prop ->
-                        prop.isAccessible = true
-                        prop.name to (prop.getter.call(ifaceDef) ?: "null")
-                    }
+                    val ifaceMap =
+                        ifaceDef::class
+                            .memberProperties
+                            .filter { prop ->
+                                prop.returnType.classifier !in
+                                    listOf(
+                                        IfaceDefinition::class,
+                                        List::class,
+                                        Map::class,
+                                    )
+                            }.associate { prop ->
+                                prop.isAccessible = true
+                                prop.name to (prop.getter.call(ifaceDef) ?: "null")
+                            }
 
                     if (ifaceMap.isNotEmpty()) {
                         interfaces.add(ifaceMap)
@@ -110,16 +118,19 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
             for (itemId in 0 until Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
                 val itemDef = ItemDefinition.forId(itemId) ?: continue
-                val itemMap = itemDef::class.memberProperties.filter { prop ->
-                    prop.returnType.classifier !in listOf(ItemDefinition::class, List::class, Map::class)
-                }.associate { prop ->
-                    prop.isAccessible = true
-                    try {
-                        prop.name to prop.getter.call(itemDef)
-                    } catch (e: Exception) {
-                        prop.name to "Error"
-                    }
-                }
+                val itemMap =
+                    itemDef::class
+                        .memberProperties
+                        .filter { prop ->
+                            prop.returnType.classifier !in listOf(ItemDefinition::class, List::class, Map::class)
+                        }.associate { prop ->
+                            prop.isAccessible = true
+                            try {
+                                prop.name to prop.getter.call(itemDef)
+                            } catch (e: Exception) {
+                                prop.name to "Error"
+                            }
+                        }
 
                 if (itemMap.isNotEmpty()) {
                     items.add(itemMap)
@@ -152,24 +163,25 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     for (itemId in 0 until 6000) {
                         val itemDef = CS2Mapping.forId(itemId) ?: continue
 
-                        val values = allProperties.map { propName ->
-                            val prop = CS2Mapping::class.memberProperties.find { it.name == propName }
-                            prop?.let {
-                                it.isAccessible = true
-                                try {
-                                    val value = it.getter.call(itemDef)
-                                    when (value) {
-                                        is Array<*> -> value.joinToString(";") { it.toString() }
-                                        is List<*> -> value.joinToString(";") { it.toString() }
-                                        is Map<*, *> -> gson.toJson(value)
-                                        null -> "null"
-                                        else -> value.toString()
+                        val values =
+                            allProperties.map { propName ->
+                                val prop = CS2Mapping::class.memberProperties.find { it.name == propName }
+                                prop?.let {
+                                    it.isAccessible = true
+                                    try {
+                                        val value = it.getter.call(itemDef)
+                                        when (value) {
+                                            is Array<*> -> value.joinToString(";") { it.toString() }
+                                            is List<*> -> value.joinToString(";") { it.toString() }
+                                            is Map<*, *> -> gson.toJson(value)
+                                            null -> "null"
+                                            else -> value.toString()
+                                        }
+                                    } catch (e: Exception) {
+                                        "Error"
                                     }
-                                } catch (e: Exception) {
-                                    "Error"
-                                }
-                            } ?: "null"
-                        }
+                                } ?: "null"
+                            }
 
                         writer.write(values.joinToString(", "))
                         writer.newLine()
@@ -255,22 +267,23 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                         try {
                             val def = DataMap.parse(archiveId shl 8 or fileId, fileData)
 
-                            val dataMap = mapOf(
-                                "id" to def.id,
-                                "keyType" to def.keyType,
-                                "valueType" to when (def.valueType) {
-                                    'K' -> "Normal"
-                                    'J' -> "Struct Pointer"
-                                    else -> "Unknown"
-                                },
-                                "defaultString" to (def.defaultString ?: "N/A"),
-                                "defaultInt" to def.defaultInt,
-                                "dataStore" to def.dataStore,
-                            )
+                            val dataMap =
+                                mapOf(
+                                    "id" to def.id,
+                                    "keyType" to def.keyType,
+                                    "valueType" to
+                                        when (def.valueType) {
+                                            'K' -> "Normal"
+                                            'J' -> "Struct Pointer"
+                                            else -> "Unknown"
+                                        },
+                                    "defaultString" to (def.defaultString ?: "N/A"),
+                                    "defaultInt" to def.defaultInt,
+                                    "dataStore" to def.dataStore,
+                                )
 
                             dataMapsList.add(dataMap)
                         } catch (e: Exception) {
-
                         }
                     }
                 }
@@ -284,7 +297,6 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-
         /*
          * Dumps for educational purposes the NPC definitions into a .json file.
          */
@@ -296,7 +308,10 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps NPC definitions data to a .json file.",
         ) { p, _ ->
             val gson =
-                GsonBuilder().setPrettyPrinting().disableHtmlEscaping().excludeFieldsWithModifiers(Modifier.TRANSIENT)
+                GsonBuilder()
+                    .setPrettyPrinting()
+                    .disableHtmlEscaping()
+                    .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                     .create()
 
             val dump = File("npc_definitions.json")
@@ -317,32 +332,37 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     try {
                         val value = prop.getter.call(npcDef)
 
-                        npcMap[prop.name] = when (value) {
-                            is String -> {
-                                if (prop.name == "combat_audio") {
-                                    value
-                                } else {
-                                    value.contains("Animation [priority=").toString()
-                                        .replace("Animation [priority=", "priority=").replace("]", " ")
+                        npcMap[prop.name] =
+                            when (value) {
+                                is String -> {
+                                    if (prop.name == "combat_audio") {
+                                        value
+                                    } else {
+                                        value
+                                            .contains("Animation [priority=")
+                                            .toString()
+                                            .replace("Animation [priority=", "priority=")
+                                            .replace("]", " ")
+                                    }
                                 }
-                            }
 
-                            is Number, is Boolean -> value
-                            is List<*> -> value.map { it.toString() }
-                            is Map<*, *> -> value.mapValues { it.value.toString() }
-                            is ShortArray -> value.toList().map { it.toInt().toString() }
-                            is ByteArray -> value.toList().map { it.toString() }
-                            is IntArray -> value.toList().map { it.toInt().toString() }
-                            is Array<*> -> when (value) {
+                                is Number, is Boolean -> value
+                                is List<*> -> value.map { it.toString() }
+                                is Map<*, *> -> value.mapValues { it.value.toString() }
                                 is ShortArray -> value.toList().map { it.toInt().toString() }
                                 is ByteArray -> value.toList().map { it.toString() }
                                 is IntArray -> value.toList().map { it.toInt().toString() }
-                                else -> value.toList().joinToString(",") { it.toString() }
-                            }
+                                is Array<*> ->
+                                    when (value) {
+                                        is ShortArray -> value.toList().map { it.toInt().toString() }
+                                        is ByteArray -> value.toList().map { it.toString() }
+                                        is IntArray -> value.toList().map { it.toInt().toString() }
+                                        else -> value.toList().joinToString(",") { it.toString() }
+                                    }
 
-                            null -> "null"
-                            else -> value.toString()
-                        }
+                                null -> "null"
+                                else -> value.toString()
+                            }
                     } catch (e: Exception) {
                         p.debug("Err read prop '${prop.name}': ${e.message}")
                         npcMap[prop.name] = "Err: ${e.message}"
@@ -377,13 +397,14 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val components = mutableListOf<Map<String, Any?>>()
 
             for ((id, componentDef) in ComponentDefinition.getDefinitions()) {
-                val componentMap = mapOf(
-                    "id" to id,
-                    "type" to componentDef.type.name,
-                    "walkable" to componentDef.isWalkable,
-                    "tabIndex" to componentDef.tabIndex,
-                    "plugin" to componentDef.plugin?.javaClass?.simpleName,
-                )
+                val componentMap =
+                    mapOf(
+                        "id" to id,
+                        "type" to componentDef.type.name,
+                        "walkable" to componentDef.isWalkable,
+                        "tabIndex" to componentDef.tabIndex,
+                        "plugin" to componentDef.plugin?.javaClass?.simpleName,
+                    )
                 components.add(componentMap)
             }
 
@@ -406,15 +427,16 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val animations = mutableListOf<Map<String, Any?>>()
 
             for ((id, animDef) in AnimationDefinition.getDefinition()) {
-                val animationMap = mapOf(
-                    "id" to id,
-                    "duration" to animDef.getDuration(),
-                    "cycles" to animDef.getCycles(),
-                    "duration" to animDef.getDurationTicks(),
-                    "rightHandItem" to animDef.rightHandItem,
-                    "hasSoundEffect" to animDef.hasSoundEffect,
-                    "effect2Sound" to animDef.effect2Sound,
-                )
+                val animationMap =
+                    mapOf(
+                        "id" to id,
+                        "duration" to animDef.getDuration(),
+                        "cycles" to animDef.getCycles(),
+                        "duration" to animDef.getDurationTicks(),
+                        "rightHandItem" to animDef.rightHandItem,
+                        "hasSoundEffect" to animDef.hasSoundEffect,
+                        "effect2Sound" to animDef.effect2Sound,
+                    )
                 animations.add(animationMap)
             }
 
@@ -437,13 +459,14 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val varbits = mutableListOf<Map<String, Any?>>()
 
             for ((id, varbitDef) in VarbitDefinition.getMapping()) {
-                val varbitMap = mapOf(
-                    "id" to id,
-                    "varpId" to varbitDef.varpId,
-                    "startBit" to varbitDef.startBit,
-                    "endBit" to varbitDef.endBit,
-                    "mask" to varbitDef.getMask()
-                )
+                val varbitMap =
+                    mapOf(
+                        "id" to id,
+                        "varpId" to varbitDef.varpId,
+                        "startBit" to varbitDef.startBit,
+                        "endBit" to varbitDef.endBit,
+                        "mask" to varbitDef.getMask(),
+                    )
                 varbits.add(varbitMap)
             }
 
@@ -459,7 +482,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             name = "dumpcs2txt",
             privilege = Privilege.ADMIN,
             usage = "::dumpcs2txt",
-            description = "Dumps CS2Mapping data to a .txt file."
+            description = "Dumps CS2Mapping data to a .txt file.",
         ) { p, _ ->
             val dump = File("cs2_mappings.txt")
             val sb = StringBuilder()
@@ -495,7 +518,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             name = "regioncache",
             privilege = Privilege.ADMIN,
             usage = "::regioncache <region_id>",
-            description = "Display the region name based on the given region ID."
+            description = "Display the region name based on the given region ID.",
         ) { player, args ->
 
             if (args.isEmpty()) {
@@ -512,7 +535,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val x = (regionId shr 8) and 0xFF
             val y = regionId and 0xFF
 
-            val regionName = "l${x}_${y}"
+            val regionName = "l${x}_$y"
 
             player.debug("The region name for region ID [$regionId] is: [$regionName].")
         }
@@ -525,7 +548,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             name = "itemprices",
             privilege = Privilege.ADMIN,
             usage = "::itemprices",
-            description = "Creates an item price index."
+            description = "Creates an item price index.",
         ) { player, _ ->
             val file = File("530_cache_item_values_from_client.csv")
             PrintWriter(file).use { writer ->
@@ -545,7 +568,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             name = "animdefs",
             privilege = Privilege.ADMIN,
             usage = "::animdefs",
-            description = "Dumps animation definitions to a file."
+            description = "Dumps animation definitions to a file.",
         ) { player, _ ->
             val file = File("animation_dump.txt")
             BufferedWriter(FileWriter(file)).use { writer ->

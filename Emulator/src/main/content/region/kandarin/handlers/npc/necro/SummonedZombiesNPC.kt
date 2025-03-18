@@ -23,13 +23,9 @@ class SummonedZombiesNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SummonedZombiesNPC(id, location)
-    }
+    ): AbstractNPC = SummonedZombiesNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SUMMONED_ZOMBIE_77)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUMMONED_ZOMBIE_77)
 
     companion object {
         fun summonZombie(player: Player) {

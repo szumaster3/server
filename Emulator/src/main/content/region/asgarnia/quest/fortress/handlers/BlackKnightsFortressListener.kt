@@ -22,8 +22,8 @@ class BlackKnightsFortressListener : InteractionListener {
         private fun determineDestination(
             scenery: Scenery?,
             id: Int,
-        ): Location? {
-            return when (id) {
+        ): Location? =
+            when (id) {
                 17160 ->
                     when (scenery?.location) {
                         Location(3022, 3518, 1) -> Location.create(3022, 3517, 0)
@@ -50,7 +50,6 @@ class BlackKnightsFortressListener : InteractionListener {
 
                 else -> null
             }
-        }
     }
 
     override fun defineListeners() {

@@ -36,7 +36,5 @@ class MishkalunDornDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MISHKALUN_DORN_5839)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISHKALUN_DORN_5839)
 }

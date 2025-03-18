@@ -31,27 +31,19 @@ abstract class DialogueFile {
         return this
     }
 
-    open fun player(vararg msg: String?): Component? {
-        return interpreter!!.sendDialogues(player, null, *msg)
-    }
+    open fun player(vararg msg: String?): Component? = interpreter!!.sendDialogues(player, null, *msg)
 
     open fun player(
         expr: FaceAnim?,
         vararg msg: String?,
-    ): Component? {
-        return interpreter!!.sendDialogues(player, expr, *msg)
-    }
+    ): Component? = interpreter!!.sendDialogues(player, expr, *msg)
 
     open fun playerl(
         expr: FaceAnim?,
         msg: String?,
-    ): Component? {
-        return player(expr, *splitLines(msg!!))
-    }
+    ): Component? = player(expr, *splitLines(msg!!))
 
-    open fun playerl(msg: String?): Component? {
-        return player(*splitLines(msg!!))
-    }
+    open fun playerl(msg: String?): Component? = player(*splitLines(msg!!))
 
     open fun npc(vararg msg: String?): Component? {
         if (npc != null) {
@@ -67,28 +59,23 @@ abstract class DialogueFile {
     open fun npc(
         id: Int,
         vararg msg: String?,
-    ): Component? {
-        return interpreter!!.sendDialogues(id, FaceAnim.FRIENDLY, *msg)
-    }
+    ): Component? = interpreter!!.sendDialogues(id, FaceAnim.FRIENDLY, *msg)
 
     open fun npc(
         expr: FaceAnim?,
         vararg msg: String?,
-    ): Component? {
-        return if (npc == null) {
+    ): Component? =
+        if (npc == null) {
             interpreter!!.sendDialogues(0, expr, *msg)
         } else {
             interpreter!!.sendDialogues(npc, expr, *msg)
         }
-    }
 
     open fun npc(
         id: Int,
         expr: FaceAnim?,
         vararg msg: String?,
-    ): Component? {
-        return interpreter!!.sendDialogues(id, expr, *msg)
-    }
+    ): Component? = interpreter!!.sendDialogues(id, expr, *msg)
 
     open fun npc(
         id: Int,
@@ -104,30 +91,22 @@ abstract class DialogueFile {
     open fun npcl(
         expr: FaceAnim?,
         msg: String?,
-    ): Component? {
-        return npc(expr, *splitLines(msg!!))
-    }
+    ): Component? = npc(expr, *splitLines(msg!!))
 
     open fun npcl(
         id: Int,
         expr: FaceAnim?,
         msg: String?,
-    ): Component? {
-        return npc(id, expr, *splitLines(msg!!))
-    }
+    ): Component? = npc(id, expr, *splitLines(msg!!))
 
     open fun npcl(
         id: Int,
         title: String,
         expr: FaceAnim?,
         msg: String?,
-    ): Component? {
-        return npc(id, title, expr, *splitLines(msg!!))
-    }
+    ): Component? = npc(id, title, expr, *splitLines(msg!!))
 
-    open fun npcl(msg: String?): Component? {
-        return npc(*splitLines(msg!!))
-    }
+    open fun npcl(msg: String?): Component? = npc(*splitLines(msg!!))
 
     open fun end() {
         interpreter?.close()
@@ -162,13 +141,9 @@ abstract class DialogueFile {
         player("Nevermind.")
     }
 
-    open fun getCurrentStage(): Int {
-        return stage
-    }
+    open fun getCurrentStage(): Int = stage
 
-    fun Int.substage(stage: Int): Int {
-        return this + stage
-    }
+    fun Int.substage(stage: Int): Int = this + stage
 
     fun dialogue(vararg messages: String) {
         player?.dialogueInterpreter?.sendDialogue(*messages)

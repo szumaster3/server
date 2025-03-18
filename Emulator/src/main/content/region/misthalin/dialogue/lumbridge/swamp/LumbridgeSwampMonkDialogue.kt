@@ -28,11 +28,7 @@ class LumbridgeSwampMonkDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LumbridgeSwampMonkDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LumbridgeSwampMonkDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_651)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_651)
 }

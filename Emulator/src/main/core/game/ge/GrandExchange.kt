@@ -138,12 +138,11 @@ class GrandExchange :
             return base
         }
 
-        private fun getItemDefPrice(itemID: Int): Int {
-            return max(
+        private fun getItemDefPrice(itemID: Int): Int =
+            max(
                 itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0,
                 itemDefinition(itemID).value,
             )
-        }
 
         @JvmStatic
         fun getOfferStats(

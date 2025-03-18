@@ -90,11 +90,7 @@ class SeleneDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SeleneDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SeleneDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SELENE_4517)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SELENE_4517)
 }

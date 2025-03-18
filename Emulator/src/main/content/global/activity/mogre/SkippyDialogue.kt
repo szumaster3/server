@@ -357,9 +357,7 @@ class SkippyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2795, 2796, 2797, 2798, 2799)
-    }
+    override fun getIds(): IntArray = intArrayOf(2795, 2796, 2797, 2798, 2799)
 
     companion object {
         const val NETTLE_TEA_BOWL = Items.NETTLE_TEA_4239

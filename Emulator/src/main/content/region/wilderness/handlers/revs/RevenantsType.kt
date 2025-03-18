@@ -201,9 +201,10 @@ enum class RevenantsType(
         private val sortedByCombatLevel: List<RevenantsType> =
             values().sortedBy { NPCDefinition.forId(it.ids[0]).combatLevel }
 
-        fun getClosestHigherOrEqual(combatLevel: Int): RevenantsType {
-            return sortedByCombatLevel.find { NPCDefinition.forId(it.ids[0]).combatLevel >= combatLevel } ?: DRAGON
-        }
+        fun getClosestHigherOrEqual(combatLevel: Int): RevenantsType =
+            sortedByCombatLevel.find {
+                NPCDefinition.forId(it.ids[0]).combatLevel >= combatLevel
+            } ?: DRAGON
 
         val allIds: List<Int> = values().flatMap { it.ids.toList() }
     }

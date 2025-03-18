@@ -16,13 +16,9 @@ class FremennikGuardNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return FremennikGuardNPC(id, location)
-    }
+    ): AbstractNPC = FremennikGuardNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_5489, NPCs.GUARD_5490)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_5489, NPCs.GUARD_5490)
 
     override fun tick() {
         if (this.isRespawn) {

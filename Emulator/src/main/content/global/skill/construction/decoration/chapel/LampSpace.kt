@@ -31,8 +31,8 @@ class LampSpace : InteractionListener {
         }
     }
 
-    private fun checkRequirements(player: Player): String? {
-        return when {
+    private fun checkRequirements(player: Player): String? =
+        when {
             !anyInInventory(
                 player,
                 Items.TINDERBOX_590,
@@ -53,7 +53,6 @@ class LampSpace : InteractionListener {
 
             else -> null
         }
-    }
 
     companion object {
         private val burnerIds =

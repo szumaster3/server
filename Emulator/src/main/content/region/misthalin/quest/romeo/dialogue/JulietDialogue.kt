@@ -631,13 +631,9 @@ class JulietDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JulietDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JulietDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JULIET_637)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JULIET_637)
 
     companion object {
         private val POTION = Item(Items.CADAVA_POTION_756)

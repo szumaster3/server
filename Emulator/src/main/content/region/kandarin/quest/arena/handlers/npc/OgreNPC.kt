@@ -23,13 +23,9 @@ class OgreNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return OgreNPC(id, location)
-    }
+    ): AbstractNPC = OgreNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_OGRE_270)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_OGRE_270)
 
     companion object {
         fun spawnOgre(player: Player) {

@@ -82,7 +82,5 @@ class BootDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOOT_665)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOOT_665)
 }

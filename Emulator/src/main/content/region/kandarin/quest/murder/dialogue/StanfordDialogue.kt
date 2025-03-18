@@ -132,7 +132,5 @@ class StanfordDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STANFORD_811)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STANFORD_811)
 }

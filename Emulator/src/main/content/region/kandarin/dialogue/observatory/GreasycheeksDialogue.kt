@@ -29,11 +29,7 @@ class GreasycheeksDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GreasycheeksDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GreasycheeksDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GREASYCHEEKS_6127)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GREASYCHEEKS_6127)
 }

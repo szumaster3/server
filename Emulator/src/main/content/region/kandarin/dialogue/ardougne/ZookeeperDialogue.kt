@@ -63,11 +63,7 @@ class ZookeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZookeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZookeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZOO_KEEPER_28)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOO_KEEPER_28)
 }

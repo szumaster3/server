@@ -6,7 +6,6 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
 
 class GnomeBattaInterface : InterfaceListener {
-
     private val gnomeBattaInterface = 434
 
     override fun defineInterfaceListeners() {
@@ -21,14 +20,15 @@ class GnomeBattaInterface : InterfaceListener {
 
         on(gnomeBattaInterface) { player, _, _, buttonID, _, _ ->
             var hasAll = true
-            val batta: CookedProduct? = when (buttonID) {
-                3 -> CookedProduct.HALF_MADE_FR
-                14 -> CookedProduct.HALF_MADE_TO
-                25 -> CookedProduct.HALF_MADE_WO
-                34 -> CookedProduct.HALF_MADE_VE
-                47 -> CookedProduct.HALF_MADE_CT
-                else -> null
-            }
+            val batta: CookedProduct? =
+                when (buttonID) {
+                    3 -> CookedProduct.HALF_MADE_FR
+                    14 -> CookedProduct.HALF_MADE_TO
+                    25 -> CookedProduct.HALF_MADE_WO
+                    34 -> CookedProduct.HALF_MADE_VE
+                    47 -> CookedProduct.HALF_MADE_CT
+                    else -> null
+                }
 
             if (batta != null) {
                 if (getStatLevel(player, Skills.COOKING) < batta.levelReq) {
@@ -72,12 +72,31 @@ class GnomeBattaInterface : InterfaceListener {
         val product: Int,
         val levelReq: Int,
         val experience: Double,
-        vararg val requiredItems: Int
+        vararg val requiredItems: Int,
     ) {
         HALF_MADE_CT(Items.HALF_MADE_BATTA_9478, 29, 40.0, Items.TOMATO_1982, Items.CHEESE_1985),
-        HALF_MADE_FR(Items.HALF_MADE_BATTA_9480, 25, 40.0, Items.EQUA_LEAVES_2128, Items.EQUA_LEAVES_2128, Items.LIME_CHUNKS_2122, Items.ORANGE_CHUNKS_2110, Items.PINEAPPLE_CHUNKS_2116),
+        HALF_MADE_FR(
+            Items.HALF_MADE_BATTA_9480,
+            25,
+            40.0,
+            Items.EQUA_LEAVES_2128,
+            Items.EQUA_LEAVES_2128,
+            Items.LIME_CHUNKS_2122,
+            Items.ORANGE_CHUNKS_2110,
+            Items.PINEAPPLE_CHUNKS_2116,
+        ),
         HALF_MADE_TO(Items.HALF_MADE_BATTA_9482, 26, 40.0, Items.EQUA_LEAVES_2128, Items.CHEESE_1985, Items.TOADS_LEGS_2152),
-        HALF_MADE_VE(Items.HALF_MADE_BATTA_9483, 28, 40.0, Items.TOMATO_1982, Items.TOMATO_1982, Items.CHEESE_1985, Items.DWELLBERRIES_2126, Items.ONION_1957, Items.CABBAGE_1965),
+        HALF_MADE_VE(
+            Items.HALF_MADE_BATTA_9483,
+            28,
+            40.0,
+            Items.TOMATO_1982,
+            Items.TOMATO_1982,
+            Items.CHEESE_1985,
+            Items.DWELLBERRIES_2126,
+            Items.ONION_1957,
+            Items.CABBAGE_1965,
+        ),
         HALF_MADE_WO(Items.HALF_MADE_BATTA_9485, 27, 40.0, Items.KING_WORM_2162, Items.CHEESE_1985),
     }
 }

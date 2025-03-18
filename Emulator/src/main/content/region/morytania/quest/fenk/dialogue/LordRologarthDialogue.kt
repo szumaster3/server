@@ -24,13 +24,9 @@ class LordRologarthDialogue(
         return false
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LordRologarthDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LordRologarthDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DR_FENKENSTRAIN_1671, NPCs.DR_FENKENSTRAIN_1672, NPCs.FENKENSTRAINS_MONSTER_1673)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DR_FENKENSTRAIN_1671, NPCs.DR_FENKENSTRAIN_1672, NPCs.FENKENSTRAINS_MONSTER_1673)
 }
 
 class LordRologarthDialogueFile : DialogueBuilderFile() {

@@ -141,7 +141,5 @@ class LuthasDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUTHAS_379)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUTHAS_379)
 }

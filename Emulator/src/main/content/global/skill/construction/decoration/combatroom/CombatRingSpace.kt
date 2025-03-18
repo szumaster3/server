@@ -49,8 +49,8 @@ class CombatRingSpace : InteractionListener {
         forceMove(player, player.location, destination, 0, animationCycles(animation), direction, animation)
     }
 
-    private fun setAnimation(player: Player): Int {
-        return when {
+    private fun setAnimation(player: Player): Int =
+        when {
             inEquipment(player, Items.BOXING_GLOVES_7671) -> Animations.HUMAN_JUMP_RING_RED_GLOVES_3689
             inEquipment(
                 player,
@@ -58,5 +58,4 @@ class CombatRingSpace : InteractionListener {
             ) -> Animations.JUMP_OVER_BOXING_RING_FENCE_WITH_BLUE_GLOVES_3690
             else -> Animations.HUMAN_JUMP_BOXING_RING_3688
         }
-    }
 }

@@ -302,18 +302,15 @@ class MazeInterface :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(11591))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(11591))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.CANNON,
             ZoneRestriction.FOLLOWERS,
             ZoneRestriction.TELEPORT,
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

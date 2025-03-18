@@ -76,11 +76,7 @@ class MelenaMoonlanderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MelenaMoonlanderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MelenaMoonlanderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MELANA_MOONLANDER_4516)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MELANA_MOONLANDER_4516)
 }

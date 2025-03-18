@@ -58,7 +58,5 @@ class FrogDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FROG_2472)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FROG_2472)
 }

@@ -38,11 +38,7 @@ class ShopkeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ShopkeeperDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ShopkeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_555, NPCs.SHOPKEEPER_532)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_555, NPCs.SHOPKEEPER_532)
 }

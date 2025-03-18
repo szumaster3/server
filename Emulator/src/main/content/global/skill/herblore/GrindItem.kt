@@ -115,15 +115,16 @@ enum class GrindItem(
         items = listOf(Item(Items.SHARDS_OF_ARMADYL_14701)),
         product = Item(Items.DUST_OF_ARMADYL_14698),
         message = "You grind down the Armadyl shard's.",
-    )
+    ),
     ;
 
     companion object {
-        private val grindItemMap = HashMap<Int, GrindItem>().apply {
-            values().forEach { grindItem ->
-                grindItem.items.forEach { put(it.id, grindItem) }
+        private val grindItemMap =
+            HashMap<Int, GrindItem>().apply {
+                values().forEach { grindItem ->
+                    grindItem.items.forEach { put(it.id, grindItem) }
+                }
             }
-        }
 
         @JvmStatic
         fun forItem(item: Item): GrindItem? = grindItemMap[item.id]

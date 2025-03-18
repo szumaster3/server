@@ -227,17 +227,14 @@ class TownCrierDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TownCrierDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TownCrierDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.TOWN_CRIER_6135,
             NPCs.TOWN_CRIER_6136,
             NPCs.TOWN_CRIER_6137,
             NPCs.TOWN_CRIER_6138,
             NPCs.TOWN_CRIER_6139,
         )
-    }
 }

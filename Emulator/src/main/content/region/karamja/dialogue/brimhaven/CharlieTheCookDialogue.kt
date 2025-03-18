@@ -118,13 +118,9 @@ class CharlieTheCookDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CharlieTheCookDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CharlieTheCookDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHARLIE_THE_COOK_794)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_THE_COOK_794)
 }
 
 class CharlieTheCookDialogueFile : DialogueBuilderFile() {

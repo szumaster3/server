@@ -142,7 +142,5 @@ class OutpostSquireDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SQUIRE_3791, NPCs.SQUIRE_3792, NPCs.SQUIRE_3793, NPCs.SQUIRE_3801)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_3791, NPCs.SQUIRE_3792, NPCs.SQUIRE_3793, NPCs.SQUIRE_3801)
 }

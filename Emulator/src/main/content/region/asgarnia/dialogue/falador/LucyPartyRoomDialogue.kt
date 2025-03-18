@@ -65,9 +65,7 @@ class LucyPartyRoomDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUCY_662)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUCY_662)
 
     companion object {
         private val COINS = Item(995, 2)

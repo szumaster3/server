@@ -19,9 +19,7 @@ class GemCuttingListener : InteractionListener {
                         player.pulseManager.run(GemCuttingPulse(player, gem!!.uncut, amount, gem))
                     }
 
-                    override fun getAll(index: Int): Int {
-                        return amountInInventory(player, gem!!.uncut.id)
-                    }
+                    override fun getAll(index: Int): Int = amountInInventory(player, gem!!.uncut.id)
                 }
             if (amountInInventory(player, gem.uncut.id) == 1) {
                 handler.create(0, 1)

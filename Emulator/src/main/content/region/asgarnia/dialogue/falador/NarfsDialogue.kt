@@ -36,7 +36,5 @@ class NarfsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NARF_3238)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NARF_3238)
 }

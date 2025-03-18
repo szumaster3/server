@@ -29,7 +29,5 @@ class SkavidDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SKAVID_865)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKAVID_865)
 }

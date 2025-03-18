@@ -21,9 +21,7 @@ class BFOreContainer {
         return amount - toAdd
     }
 
-    fun coalAmount(): Int {
-        return coalRemaining
-    }
+    fun coalAmount(): Int = coalRemaining
 
     fun addOre(
         id: Int,
@@ -115,9 +113,7 @@ class BFOreContainer {
         return xpReward
     }
 
-    fun getBarAmount(bar: Bar): Int {
-        return barAmounts[bar.ordinal]
-    }
+    fun getBarAmount(bar: Bar): Int = barAmounts[bar.ordinal]
 
     fun getTotalBarAmount(): Int {
         var total = 0
@@ -162,9 +158,7 @@ class BFOreContainer {
         return (freeSlots - getBarAmount(bar)).coerceAtLeast(0)
     }
 
-    fun hasAnyOre(): Boolean {
-        return ores[0] != -1
-    }
+    fun hasAnyOre(): Boolean = ores[0] != -1
 
     fun toJson(): JSONObject {
         val root = JSONObject()

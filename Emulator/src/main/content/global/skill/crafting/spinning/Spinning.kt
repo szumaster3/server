@@ -94,13 +94,9 @@ enum class Spinning(
         fun forId(id: Int): Spinning? = values().find { it.button == id }
 
         @JvmStatic
-        fun getAllNeed(): MutableList<Item> {
-            return values().map { Item(it.need, 1) }.toMutableList()
-        }
+        fun getAllNeed(): MutableList<Item> = values().map { Item(it.need, 1) }.toMutableList()
 
         @JvmStatic
-        fun getAllProduct(): MutableList<Item> {
-            return values().map { Item(it.product, 1) }.toMutableList()
-        }
+        fun getAllProduct(): MutableList<Item> = values().map { Item(it.product, 1) }.toMutableList()
     }
 }

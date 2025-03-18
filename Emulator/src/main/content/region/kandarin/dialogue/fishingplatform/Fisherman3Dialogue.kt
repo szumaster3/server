@@ -35,11 +35,7 @@ class Fisherman3Dialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return Fisherman3Dialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = Fisherman3Dialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FISHERMAN_704)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FISHERMAN_704)
 }

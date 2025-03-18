@@ -34,9 +34,7 @@ class DelMontyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DEL_MONTY_5563)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEL_MONTY_5563)
 
     companion object {
         fun hasCatAmulet(player: Player): Boolean {

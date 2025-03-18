@@ -22,15 +22,12 @@ enum class Rule(
 
     companion object {
         @JvmStatic
-        fun canRequest(target: Player?): Boolean {
-            return target?.let {
+        fun canRequest(target: Player?): Boolean =
+            target?.let {
                 it.getSavedData().globalData.getChatPing() >= System.currentTimeMillis()
             } ?: false
-        }
 
         @JvmStatic
-        fun forId(id: Int): Rule? {
-            return values().find { it.rule == id }
-        }
+        fun forId(id: Int): Rule? = values().find { it.rule == id }
     }
 }

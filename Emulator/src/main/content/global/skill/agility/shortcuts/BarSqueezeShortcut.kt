@@ -19,11 +19,10 @@ class BarSqueezeShortcut : AgilityShortcut {
 
     constructor(ids: IntArray, level: Int, exp: Double, option: String) : super(ids, level, exp, option)
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg).apply {
+    override fun newInstance(arg: Any?): Plugin<Any> =
+        super.newInstance(arg).apply {
             configure(BarSqueezeShortcut(intArrayOf(2186), 1, 0.0, "squeeze-through"))
         }
-    }
 
     override fun run(
         player: Player,
@@ -60,12 +59,11 @@ class BarSqueezeShortcut : AgilityShortcut {
         )
     }
 
-    override fun checkRequirements(player: Player): Boolean {
-        return if (!isQuestComplete(player, Quests.PRIEST_IN_PERIL) && player.location.y !in 3159..3161) {
+    override fun checkRequirements(player: Player): Boolean =
+        if (!isQuestComplete(player, Quests.PRIEST_IN_PERIL) && player.location.y !in 3159..3161) {
             sendDialogue(player, "You need to have completed Priest in Peril in order to do this.")
             false
         } else {
             super.checkRequirements(player)
         }
-    }
 }

@@ -21,15 +21,9 @@ class CrateGoblinDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return CrateGoblinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CrateGoblinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CRATE_GOBLIN_5784)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CRATE_GOBLIN_5784)
 }

@@ -60,8 +60,8 @@ class TunnelShortcut : AgilityShortcut {
             object : Pulse(1, player) {
                 private var count = 0
 
-                override fun pulse(): Boolean {
-                    return when (++count) {
+                override fun pulse(): Boolean =
+                    when (++count) {
                         1 -> {
                             player.lock(6)
                             player.locks.lockMovement(6)
@@ -101,7 +101,6 @@ class TunnelShortcut : AgilityShortcut {
 
                         else -> false
                     }
-                }
             },
         )
     }
@@ -109,23 +108,21 @@ class TunnelShortcut : AgilityShortcut {
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location {
-        return if (n.id == 14922) {
+    ): Location =
+        if (n.id == 14922) {
             n.location.transform(getObjectDirection(n.asScenery().direction), 1)
         } else {
             getStart(n.location, n.direction)
         }
-    }
 
     private fun getStart(
         location: Location,
         dir: Direction,
-    ): Location {
-        return when (dir) {
+    ): Location =
+        when (dir) {
             Direction.NORTH, Direction.SOUTH -> location
             Direction.EAST -> location.transform(0, if (location.y == 3111) 1 else -1, 0)
             Direction.WEST -> location.transform(0, 1, 0)
             else -> location
         }
-    }
 }

@@ -117,7 +117,5 @@ class HenryetaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HENRYETA_CARNILLEAN_889)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HENRYETA_CARNILLEAN_889)
 }

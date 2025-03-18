@@ -38,9 +38,7 @@ class DisconnectionQueue {
         }
     }
 
-    fun isEmpty(): Boolean {
-        return queue.isEmpty()
-    }
+    fun isEmpty(): Boolean = queue.isEmpty()
 
     private fun finish(
         entry: DisconnectionEntry?,
@@ -98,9 +96,7 @@ class DisconnectionQueue {
         log(this::class.java, Log.INFO, "Queueing ${player.name} for disconnection.")
     }
 
-    operator fun contains(name: String?): Boolean {
-        return queue.containsKey(name)
-    }
+    operator fun contains(name: String?): Boolean = queue.containsKey(name)
 
     fun remove(name: String?) {
         queue.remove(name)

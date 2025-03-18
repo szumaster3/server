@@ -44,11 +44,7 @@ class FactoryManagerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FactoryManagerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FactoryManagerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FACTORY_MANAGER_2171)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FACTORY_MANAGER_2171)
 }

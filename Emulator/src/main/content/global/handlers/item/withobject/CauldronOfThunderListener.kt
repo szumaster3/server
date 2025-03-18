@@ -12,7 +12,6 @@ import org.rs.consts.Scenery
 
 class CauldronOfThunderListener : InteractionListener {
     override fun defineListeners() {
-
         /*
          * Handles interaction with cauldron of thunder.
          * The cauldron of thunder was missing its animation.

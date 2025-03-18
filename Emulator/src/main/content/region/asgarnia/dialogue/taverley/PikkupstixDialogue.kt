@@ -1104,13 +1104,9 @@ class PikkupstixDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PikkupstixDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PikkupstixDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PIKKUPSTIX_6970, NPCs.PIKKUPSTIX_6971)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PIKKUPSTIX_6970, NPCs.PIKKUPSTIX_6971)
 
     companion object {
         private var quest: Quest? = null

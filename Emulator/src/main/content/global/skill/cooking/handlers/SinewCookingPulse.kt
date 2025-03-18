@@ -22,15 +22,11 @@ class SinewCookingPulse(
         player: Player,
         scenery: Scenery,
         food: Int,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     override fun getMessage(
         food: Item,
         product: Item,
         burned: Boolean,
-    ): String {
-        return "You dry a piece of beef and extract the sinew."
-    }
+    ): String = "You dry a piece of beef and extract the sinew."
 }

@@ -128,9 +128,7 @@ class RoguesCastleListener : InteractionListener {
         submitIndividualPulse(
             player,
             object : Pulse(animationDuration(CHEST_ANIM)) {
-                override fun pulse(): Boolean {
-                    return true.also { replaceScenery(scenery, scenery.id + 1, 20) }
-                }
+                override fun pulse(): Boolean = true.also { replaceScenery(scenery, scenery.id + 1, 20) }
             },
         )
     }

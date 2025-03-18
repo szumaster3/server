@@ -8,21 +8,13 @@ object RandomUtils {
     fun random(
         random: Random,
         i: Int,
-    ): Int {
-        return random.nextInt(i + 1)
-    }
+    ): Int = random.nextInt(i + 1)
 
-    fun random(i: Int): Int {
-        return random(random, i)
-    }
+    fun random(i: Int): Int = random(random, i)
 
-    fun randomDouble(random: Random): Double {
-        return random.nextDouble()
-    }
+    fun randomDouble(random: Random): Double = random.nextDouble()
 
-    fun randomDouble(): Double {
-        return randomDouble(random)
-    }
+    fun randomDouble(): Double = randomDouble(random)
 
     fun <T> randomChoice(options: List<T>): T = options.random()
 }

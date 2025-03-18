@@ -73,9 +73,7 @@ class SorceressDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SORCERESS_5531)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SORCERESS_5531)
 
     private fun teleport() {
         sendChat(npc, "Be gone intruder!")

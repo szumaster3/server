@@ -60,7 +60,9 @@ class VisualCommand : CommandPlugin() {
                 val names = arrayOf("Ahrim", "Dharok", "Guthan", "Karil", "Torag", "Verac")
                 player!!.savedData.activityData.barrowKills = 50
                 player.packetDispatch.sendMessage(
-                    "Flagged all barrow brothers killed and 50 catacomb kills, current entrance: " + names[player.savedData.activityData.barrowTunnelIndex] + ".",
+                    "Flagged all barrow brothers killed and 50 catacomb kills, current entrance: " +
+                        names[player.savedData.activityData.barrowTunnelIndex] +
+                        ".",
                 )
                 return true
             }
@@ -68,15 +70,16 @@ class VisualCommand : CommandPlugin() {
             "1hko" -> {
                 player!!.setAttribute("1hko", !player.getAttribute("1hko", false))
                 player.packetDispatch.sendMessage(
-                    "1-hit KO mode " + if (player.getAttribute(
-                            "1hko",
-                            false,
-                        )
-                    ) {
-                        "on."
-                    } else {
-                        "off."
-                    },
+                    "1-hit KO mode " +
+                        if (player.getAttribute(
+                                "1hko",
+                                false,
+                            )
+                        ) {
+                            "on."
+                        } else {
+                            "off."
+                        },
                 )
                 return true
             }
@@ -171,7 +174,9 @@ class VisualCommand : CommandPlugin() {
                 npc.init()
                 npc.isWalks = args.size > 2
                 val npcString =
-                    "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," + npc.direction.ordinal + "}"
+                    "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," +
+                        npc.direction.ordinal +
+                        "}"
                 val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
                 clpbrd.setContents(StringSelection(npcString), null)
                 println(npcString)
@@ -187,11 +192,12 @@ class VisualCommand : CommandPlugin() {
                 var sizeY = 3
                 if (args.size > 2) {
                     sizeX = toInteger(args[2]!!)
-                    sizeY = if (args.size > 3) {
-                        toInteger(args[3]!!)
-                    } else {
-                        sizeX
-                    }
+                    sizeY =
+                        if (args.size > 3) {
+                            toInteger(args[3]!!)
+                        } else {
+                            sizeX
+                        }
                 }
                 val aggressive = args.size > 4
                 var x = 0
@@ -239,15 +245,16 @@ class VisualCommand : CommandPlugin() {
                     player!!.debug("syntax error: x y id")
                     return true
                 }
-                location = if (args.size > 2) {
-                    Location.create(
-                        args[1]!!.toInt(),
-                        args[2]!!.toInt(),
-                        player!!.location.z,
-                    )
-                } else {
-                    player!!.location
-                }
+                location =
+                    if (args.size > 2) {
+                        Location.create(
+                            args[1]!!.toInt(),
+                            args[2]!!.toInt(),
+                            player!!.location.z,
+                        )
+                    } else {
+                        player!!.location
+                    }
                 scenery = RegionManager.getObject(location)
                 if (scenery == null) {
                     player.debug("error: object not found in region cache.")
@@ -501,7 +508,8 @@ class VisualCommand : CommandPlugin() {
                         var id = s
 
                         override fun pulse(): Boolean {
-                            Projectile.create(
+                            Projectile
+                                .create(
                                     player!!.location,
                                     player.location.transform(0, 3, 0),
                                     id,

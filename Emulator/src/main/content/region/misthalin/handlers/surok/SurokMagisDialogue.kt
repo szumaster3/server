@@ -50,9 +50,7 @@ class SurokMagisDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SUROK_MAGIS_7136)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUROK_MAGIS_7136)
 
     class SurokCutscene() : CutscenePlugin("Surok Cutscene") {
         var scene: SurokScene? = null
@@ -73,17 +71,11 @@ class SurokMagisDialogue(
             return super.start(player, login, *args)
         }
 
-        override fun newInstance(p: Player): ActivityPlugin {
-            return SurokCutscene(p)
-        }
+        override fun newInstance(p: Player): ActivityPlugin = SurokCutscene(p)
 
-        override fun getStartLocation(): Location {
-            return base.transform(scene!!.startData[0], scene!!.startData[1], 0)
-        }
+        override fun getStartLocation(): Location = base.transform(scene!!.startData[0], scene!!.startData[1], 0)
 
-        override fun getSpawnLocation(): Location? {
-            return null
-        }
+        override fun getSpawnLocation(): Location? = null
 
         override fun configure() {}
 

@@ -44,11 +44,7 @@ class MawrthDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return MawrthDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = MawrthDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAWRTH_2366)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAWRTH_2366)
 }

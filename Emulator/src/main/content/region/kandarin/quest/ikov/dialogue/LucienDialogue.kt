@@ -17,9 +17,7 @@ import org.rs.consts.Quests
 class LucienDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun newInstance(player: Player): Dialogue {
-        return LucienDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LucienDialogue(player)
 
     override fun handle(
         interfaceId: Int,
@@ -29,9 +27,7 @@ class LucienDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUCIEN_273)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUCIEN_273)
 }
 
 class LucienDialogueFile : DialogueBuilderFile() {

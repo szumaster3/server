@@ -21,13 +21,9 @@ class TrampNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return TrampNPC(id, location)
-    }
+    ): AbstractNPC = TrampNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRAMP_2794, NPCs.TRAMP_2793, NPCs.TRAMP_2792)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRAMP_2794, NPCs.TRAMP_2793, NPCs.TRAMP_2792)
 
     override fun handleTickActions() {
         super.handleTickActions()

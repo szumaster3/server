@@ -355,24 +355,20 @@ enum class BNetTypes(
         private val implings = mutableListOf<ImplingNode>()
 
         @JvmStatic
-        fun getImpling(player: Player): ImplingNode? {
-            return implings.firstOrNull { player.inventory.containsItem(it.reward) }
-        }
+        fun getImpling(player: Player): ImplingNode? = implings.firstOrNull { player.inventory.containsItem(it.reward) }
 
         @JvmStatic
-        fun forNpc(npc: NPC): BNetTypes? {
-            return values().firstOrNull { type ->
+        fun forNpc(npc: NPC): BNetTypes? =
+            values().firstOrNull { type ->
                 type.node.npcs.contains(npc.id)
             }
-        }
 
         @JvmStatic
-        fun forItem(item: Item): BNetNode? {
-            return values()
+        fun forItem(item: Item): BNetNode? =
+            values()
                 .firstOrNull { type ->
                     type.node.reward.id == item.id
                 }?.node
-        }
 
         fun getImplings(): List<ImplingNode> = implings
 

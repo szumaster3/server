@@ -218,9 +218,7 @@ class SmeltingPulse : SkillPulse<Item?> {
         return amount < 1
     }
 
-    private fun hasForgingRing(player: Player): Boolean {
-        return inEquipment(player, RING_OF_FORGING)
-    }
+    private fun hasForgingRing(player: Player): Boolean = inEquipment(player, RING_OF_FORGING)
 
     fun success(player: Player): Boolean {
         if (bar == Bar.IRON && !superHeat) {

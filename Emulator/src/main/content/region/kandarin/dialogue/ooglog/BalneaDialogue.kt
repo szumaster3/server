@@ -33,7 +33,5 @@ class BalneaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BALNEA_7047)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BALNEA_7047)
 }

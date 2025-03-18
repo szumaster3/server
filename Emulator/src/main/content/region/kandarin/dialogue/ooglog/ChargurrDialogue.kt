@@ -36,7 +36,5 @@ class ChargurrDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHARGURR_7054)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHARGURR_7054)
 }

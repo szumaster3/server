@@ -5,7 +5,5 @@ import core.game.world.map.build.DynamicRegion
 class UseExistingRegionContract(
     val region: DynamicRegion,
 ) : RegionSpecContract {
-    override fun instantiateRegion(): DynamicRegion {
-        return region
-    }
+    override fun instantiateRegion(): DynamicRegion = region
 }

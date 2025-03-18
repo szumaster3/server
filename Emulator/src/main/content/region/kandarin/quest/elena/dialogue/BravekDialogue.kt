@@ -236,7 +236,5 @@ class BravekDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BRAVEK_711)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BRAVEK_711)
 }

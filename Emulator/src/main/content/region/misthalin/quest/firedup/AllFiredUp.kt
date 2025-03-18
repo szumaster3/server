@@ -175,7 +175,5 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
         }
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

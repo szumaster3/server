@@ -17,17 +17,14 @@ class RebornWarriorNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RebornWarriorNPC(id, location)
-    }
+    ): AbstractNPC = RebornWarriorNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.LESSER_REBORN_MAGE_8573,
             NPCs.LESSER_REBORN_RANGER_8571,
             NPCs.LESSER_REBORN_WARRIOR_8569,
         )
-    }
 
     val forceChat =
         arrayOf(

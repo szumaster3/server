@@ -117,7 +117,5 @@ class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_
         )
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

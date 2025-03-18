@@ -17,27 +17,19 @@ class PitfallNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return PitfallNPC(id, location)
-    }
+    ): AbstractNPC = PitfallNPC(id, location)
 
     init {
         walkRadius = 22
     }
 
-    override fun getIds(): IntArray {
-        return Pitfall.BEAST_IDS
-    }
+    override fun getIds(): IntArray = Pitfall.BEAST_IDS
 
     override fun isAttackable(
         entity: Entity,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
-    override fun isIgnoreAttackRestrictions(victim: Entity): Boolean {
-        return victim is Player
-    }
+    override fun isIgnoreAttackRestrictions(victim: Entity): Boolean = victim is Player
 }

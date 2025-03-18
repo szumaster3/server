@@ -26,11 +26,7 @@ class SuneDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SuneDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SuneDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SUNE_2191)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUNE_2191)
 }

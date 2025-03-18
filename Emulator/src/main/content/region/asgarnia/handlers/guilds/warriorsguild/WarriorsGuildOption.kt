@@ -57,12 +57,11 @@ class WarriorsGuildOption : OptionHandler() {
         return true
     }
 
-    private fun canEnter(player: Player): Boolean {
-        return player.getSkills().getStaticLevel(Skills.ATTACK) + player.getSkills().getStaticLevel(Skills.STRENGTH) >=
+    private fun canEnter(player: Player): Boolean =
+        player.getSkills().getStaticLevel(Skills.ATTACK) + player.getSkills().getStaticLevel(Skills.STRENGTH) >=
             130 ||
             player.getSkills().getStaticLevel(Skills.ATTACK) == 99 ||
             player.getSkills().getStaticLevel(Skills.STRENGTH) == 99
-    }
 
     class ClaimTokenDialogue : Dialogue {
         private var npcId = 0
@@ -71,9 +70,7 @@ class WarriorsGuildOption : OptionHandler() {
 
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player): Dialogue {
-            return ClaimTokenDialogue(player)
-        }
+        override fun newInstance(player: Player): Dialogue = ClaimTokenDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             npcId = args[0] as Int
@@ -120,9 +117,7 @@ class WarriorsGuildOption : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("wg:claim-tokens"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("wg:claim-tokens"))
     }
 
     companion object {

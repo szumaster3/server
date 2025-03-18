@@ -93,7 +93,5 @@ class VelrakDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VELRAK_THE_EXPLORER_798)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VELRAK_THE_EXPLORER_798)
 }

@@ -14,9 +14,7 @@ import org.rs.consts.NPCs
 class BrotherBordissDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun npc(vararg messages: String?): Component {
-        return npc(FaceAnim.OLD_NORMAL, *messages)
-    }
+    override fun npc(vararg messages: String?): Component = npc(FaceAnim.OLD_NORMAL, *messages)
 
     override fun open(vararg args: Any?): Boolean {
         player ?: return false
@@ -71,9 +69,7 @@ class BrotherBordissDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_BORDISS_7724)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_BORDISS_7724)
 
     fun getSigil(player: Player): Item? {
         for (sigil in arrayOf(
@@ -87,13 +83,12 @@ class BrotherBordissDialogue(
         return null
     }
 
-    fun getShield(sigil: Item): Item? {
-        return when (sigil.id) {
+    fun getShield(sigil: Item): Item? =
+        when (sigil.id) {
             Items.ARCANE_SIGIL_13746 -> Item(Items.ARCANE_SPIRIT_SHIELD_13738)
             Items.ELYSIAN_SIGIL_13750 -> Item(Items.ELYSIAN_SPIRIT_SHIELD_13742)
             Items.DIVINE_SIGIL_13748 -> Item(Items.DIVINE_SPIRIT_SHIELD_13740)
             Items.SPECTRAL_SIGIL_13752 -> Item(Items.SPECTRAL_SPIRIT_SHIELD_13744)
             else -> null
         }
-    }
 }

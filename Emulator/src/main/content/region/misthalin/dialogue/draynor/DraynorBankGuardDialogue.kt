@@ -187,16 +187,12 @@ class DraynorBankGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DraynorBankGuardDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DraynorBankGuardDialogue(player)
 
     private fun startRecording(player: Player) {
         end()
         ActivityManager.start(player, "dbr cutscene", false)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BANK_GUARD_2574)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BANK_GUARD_2574)
 }

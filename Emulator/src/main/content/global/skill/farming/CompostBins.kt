@@ -20,9 +20,7 @@ enum class CompostBins(
         val bins = values().map { it.varbit to it }.toMap()
 
         @JvmStatic
-        fun forObject(obj: Scenery): CompostBins? {
-            return forObjectID(obj.id)
-        }
+        fun forObject(obj: Scenery): CompostBins? = forObjectID(obj.id)
 
         @JvmStatic
         fun forObjectID(id: Int): CompostBins? {

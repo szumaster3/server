@@ -90,9 +90,7 @@ class PinballListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(PinballUtils.PINBALL_EVENT_ZONE_BORDERS)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(PinballUtils.PINBALL_EVENT_ZONE_BORDERS)
 
     override fun entityStep(
         entity: Entity,
@@ -107,13 +105,12 @@ class PinballListener :
         }
     }
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.CANNON,
             ZoneRestriction.FOLLOWERS,
             ZoneRestriction.FIRES,
         )
-    }
 
     override fun areaLeave(
         entity: Entity,

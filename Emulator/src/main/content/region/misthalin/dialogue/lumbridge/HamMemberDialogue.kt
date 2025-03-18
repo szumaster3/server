@@ -112,8 +112,8 @@ class HamMemberDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.HAM_GUARD_1710,
             NPCs.HAM_GUARD_1711,
             NPCs.HAM_GUARD_1712,
@@ -123,5 +123,4 @@ class HamMemberDialogue(
             NPCs.HAM_MEMBER_1716,
             NPCs.HAM_MEMBER_1717,
         )
-    }
 }

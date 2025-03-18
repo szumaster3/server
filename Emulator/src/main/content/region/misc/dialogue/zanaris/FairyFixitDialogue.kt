@@ -87,11 +87,7 @@ class FairyFixitDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FairyFixitDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FairyFixitDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FAIRY_FIXIT_4455)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_FIXIT_4455)
 }

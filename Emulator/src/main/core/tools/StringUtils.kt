@@ -565,9 +565,7 @@ object StringUtils {
         )
 
     @JvmStatic
-    fun getFormattedNumber(amount: Int): String {
-        return DecimalFormat("#,###,##0").format(amount.toLong()).toString()
-    }
+    fun getFormattedNumber(amount: Int): String = DecimalFormat("#,###,##0").format(amount.toLong()).toString()
 
     @JvmStatic
     fun containsInvalidCharacter(name: String): Boolean {
@@ -782,12 +780,11 @@ object StringUtils {
     }
 
     @JvmStatic
-    fun getString(s: String): String {
-        return s
+    fun getString(s: String): String =
+        s
             .replace("\\<.*?>".toRegex(), "")
             .replace("&#160;".toRegex(), "")
             .replace("Discontinued Item:".toRegex(), "")
-    }
 
     @JvmStatic
     fun splitIntoLine(
@@ -1424,8 +1421,8 @@ object StringUtils {
     }
 
     @JvmStatic
-    fun invalidAccountName(name: String): Boolean {
-        return name.length < 2 ||
+    fun invalidAccountName(name: String): Boolean =
+        name.length < 2 ||
             name.length > 12 ||
             name.startsWith("_") ||
             name.endsWith("_") ||
@@ -1433,7 +1430,6 @@ object StringUtils {
             containsInvalidCharacter(
                 name,
             )
-    }
 
     @JvmStatic
     fun longToString(l: Long): String {

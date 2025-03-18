@@ -25,11 +25,10 @@ class PizzaCookingPulse(
         food: Item,
         product: Item,
         burned: Boolean,
-    ): String {
-        return if (burned) {
+    ): String =
+        if (burned) {
             "You accidentally burn the pizza."
         } else {
             "You cook a delicious looking pizza."
         }
-    }
 }

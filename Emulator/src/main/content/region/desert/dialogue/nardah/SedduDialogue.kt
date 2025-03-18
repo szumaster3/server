@@ -37,11 +37,7 @@ class SedduDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SedduDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SedduDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SEDDU_3038)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SEDDU_3038)
 }

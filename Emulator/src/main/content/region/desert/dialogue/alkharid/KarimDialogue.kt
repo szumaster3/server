@@ -47,11 +47,7 @@ class KarimDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KarimDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KarimDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KARIM_543)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KARIM_543)
 }

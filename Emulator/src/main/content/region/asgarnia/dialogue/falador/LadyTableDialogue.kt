@@ -19,7 +19,5 @@ class LadyTableDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LADY_TABLE_2283)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LADY_TABLE_2283)
 }

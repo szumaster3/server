@@ -62,9 +62,7 @@ class OracleDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ORACLE_746)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ORACLE_746)
 
     companion object {
         var quest: Quest? = null

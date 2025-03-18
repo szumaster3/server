@@ -26,11 +26,7 @@ class MerlinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MerlinDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MerlinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MERLIN_249)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_249)
 }

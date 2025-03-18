@@ -125,11 +125,7 @@ class JefferyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JefferyDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JefferyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JEFFERY_6298)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEFFERY_6298)
 }

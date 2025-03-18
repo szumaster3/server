@@ -98,7 +98,5 @@ class DoctorOrbonDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DOCTOR_ORBON_290)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DOCTOR_ORBON_290)
 }

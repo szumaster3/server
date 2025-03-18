@@ -122,7 +122,5 @@ class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1,
         removeAttributes(player, stagePass, stageFail, stage, stage0, stage1, stage2, stage3, stage4)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

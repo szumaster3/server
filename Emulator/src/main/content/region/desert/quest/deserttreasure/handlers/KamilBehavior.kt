@@ -65,9 +65,7 @@ class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
     override fun getSwingHandlerOverride(
         self: NPC,
         original: CombatSwingHandler,
-    ): CombatSwingHandler {
-        return KamilCombatHandler()
-    }
+    ): CombatSwingHandler = KamilCombatHandler()
 }
 
 class KamilCombatHandler :

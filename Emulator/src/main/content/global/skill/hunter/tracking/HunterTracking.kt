@@ -43,9 +43,7 @@ abstract class HunterTracking : OptionHandler() {
 
     var requiredLevel = 1
 
-    fun getInitialTrail(objects: Scenery): TrailDefinition? {
-        return initialMap[objects.id]?.random()
-    }
+    fun getInitialTrail(objects: Scenery): TrailDefinition? = initialMap[objects.id]?.random()
 
     fun generateTrail(
         startobj: Scenery,
@@ -159,9 +157,7 @@ abstract class HunterTracking : OptionHandler() {
         setVarp(player, varp, 0)
     }
 
-    fun hasTrail(player: Player): Boolean {
-        return false
-    }
+    fun hasTrail(player: Player): Boolean = false
 
     fun reward(
         player: Player,
@@ -266,7 +262,6 @@ abstract class HunterTracking : OptionHandler() {
         return true
     }
 
-    fun hasNooseWand(player: Player): Boolean {
-        return inEquipment(player, Items.NOOSE_WAND_10150, 1) || inInventory(player, Items.NOOSE_WAND_10150, 1)
-    }
+    fun hasNooseWand(player: Player): Boolean =
+        inEquipment(player, Items.NOOSE_WAND_10150, 1) || inInventory(player, Items.NOOSE_WAND_10150, 1)
 }

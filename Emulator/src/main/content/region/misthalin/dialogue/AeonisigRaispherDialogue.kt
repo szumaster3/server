@@ -119,7 +119,5 @@ class AeonisigRaispherDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AEONISIG_RAISPHER_4710)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AEONISIG_RAISPHER_4710)
 }

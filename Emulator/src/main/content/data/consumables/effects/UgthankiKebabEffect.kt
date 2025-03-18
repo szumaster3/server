@@ -11,9 +11,7 @@ class UgthankiKebabEffect : ConsumableEffect() {
         effect.activate(player)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return HEALING
-    }
+    override fun getHealthEffectValue(player: Player): Int = HEALING
 
     companion object {
         private const val HEALING = 19

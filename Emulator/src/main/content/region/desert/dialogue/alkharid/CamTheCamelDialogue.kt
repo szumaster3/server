@@ -34,11 +34,7 @@ class CamTheCamelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CamTheCamelDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CamTheCamelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAM_THE_CAMEL_2813)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAM_THE_CAMEL_2813)
 }

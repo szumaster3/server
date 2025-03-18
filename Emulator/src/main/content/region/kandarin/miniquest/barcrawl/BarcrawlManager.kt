@@ -101,17 +101,11 @@ class BarcrawlManager :
         }
     }
 
-    fun isCompleted(index: Int): Boolean {
-        return bars[index]
-    }
+    fun isCompleted(index: Int): Boolean = bars[index]
 
-    fun hasCard(): Boolean {
-        return inInventory(player!!, Items.BARCRAWL_CARD_455) || inBank(player, Items.BARCRAWL_CARD_455)
-    }
+    fun hasCard(): Boolean = inInventory(player!!, Items.BARCRAWL_CARD_455) || inBank(player, Items.BARCRAWL_CARD_455)
 
-    fun isStarted(): Boolean {
-        return started
-    }
+    fun isStarted(): Boolean = started
 
     fun setStarted(started: Boolean) {
         this.started = started
@@ -135,8 +129,6 @@ class BarcrawlManager :
         val COMPONENT = Components.MESSAGESCROLL_220
 
         @JvmStatic
-        fun getInstance(player: Player): BarcrawlManager {
-            return player.getAttribute("barcrawl-inst", BarcrawlManager())
-        }
+        fun getInstance(player: Player): BarcrawlManager = player.getAttribute("barcrawl-inst", BarcrawlManager())
     }
 }

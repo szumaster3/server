@@ -108,11 +108,7 @@ class HegirDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HegirDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HegirDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HEGIR_2188)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HEGIR_2188)
 }

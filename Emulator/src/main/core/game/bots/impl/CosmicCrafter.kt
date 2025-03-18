@@ -159,9 +159,7 @@ class CosmicCrafter : Script() {
         }
     }
 
-    override fun newInstance(): Script {
-        return this
-    }
+    override fun newInstance(): Script = this
 
     enum class State {
         INIT,

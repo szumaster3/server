@@ -406,11 +406,7 @@ class SirAmikVarzeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SirAmikVarzeDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SirAmikVarzeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_AMIK_VARZE_608)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_AMIK_VARZE_608)
 }

@@ -124,11 +124,7 @@ class CaveyDaveyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CaveyDaveyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CaveyDaveyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAVEY_DAVEY_4358)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAVEY_DAVEY_4358)
 }

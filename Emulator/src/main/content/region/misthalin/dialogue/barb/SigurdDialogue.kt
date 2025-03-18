@@ -202,11 +202,7 @@ class SigurdDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SigurdDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SigurdDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIGURD_3329)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIGURD_3329)
 }

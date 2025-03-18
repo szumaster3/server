@@ -37,7 +37,5 @@ class WayneDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WAYNE_581)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WAYNE_581)
 }

@@ -17,9 +17,7 @@ class MazeZombieNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MazeZombieNPC(id, location)
-    }
+    ): AbstractNPC = MazeZombieNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -32,9 +30,7 @@ class MazeZombieNPC : AbstractNPC {
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZOMBIE_75)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOMBIE_75)
 
     companion object {
         private val LOCATION: Location = Location.create(2933, 9641, 0)

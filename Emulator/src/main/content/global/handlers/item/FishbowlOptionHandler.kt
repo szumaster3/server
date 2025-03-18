@@ -89,9 +89,7 @@ class FishbowlOptionHandler : OptionHandler() {
             return this
         }
 
-        override fun handle(event: NodeUsageEvent): Boolean {
-            return event.player.dialogueInterpreter.open("fishbowl-options", "feed")
-        }
+        override fun handle(event: NodeUsageEvent): Boolean = event.player.dialogueInterpreter.open("fishbowl-options", "feed")
     }
 
     inner class FishbowlDialogue(
@@ -100,9 +98,7 @@ class FishbowlOptionHandler : OptionHandler() {
         private var fishbowl: Item? = null
         private var option: String? = null
 
-        override fun newInstance(player: Player): Dialogue {
-            return FishbowlDialogue(player)
-        }
+        override fun newInstance(player: Player): Dialogue = FishbowlDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             for (arg in args) {
@@ -193,9 +189,7 @@ class FishbowlOptionHandler : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("fishbowl-options"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("fishbowl-options"))
     }
 
     class AquariumPlugin : OptionHandler() {
@@ -209,9 +203,7 @@ class FishbowlOptionHandler : OptionHandler() {
             player: Player,
             node: Node,
             option: String,
-        ): Boolean {
-            return getFish(player)
-        }
+        ): Boolean = getFish(player)
 
         fun getFish(player: Player): Boolean {
             if (!player.inventory.containsAtLeastOneItem(TINY_NET)) {
@@ -255,9 +247,7 @@ class FishbowlOptionHandler : OptionHandler() {
                 return this
             }
 
-            override fun handle(event: NodeUsageEvent): Boolean {
-                return getFish(event.player)
-            }
+            override fun handle(event: NodeUsageEvent): Boolean = getFish(event.player)
         }
     }
 

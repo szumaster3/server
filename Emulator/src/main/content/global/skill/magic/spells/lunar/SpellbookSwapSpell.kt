@@ -107,7 +107,5 @@ class SpellbookSwapDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(3264731)
-    }
+    override fun getIds(): IntArray = intArrayOf(3264731)
 }

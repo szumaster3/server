@@ -31,76 +31,81 @@ class GrindItemHandler : UseWithHandler(Items.PESTLE_AND_MORTAR_233) {
     override fun handle(event: NodeUsageEvent): Boolean {
         val grind =
             GrindItem.forItem(if (event.usedItem.id == Items.PESTLE_AND_MORTAR_233) event.baseItem else event.usedItem)
-        val handler = object : SkillDialogueHandler(event.player, SkillDialogue.ONE_OPTION, grind!!.product) {
-            override fun create(amount: Int, index: Int) {
-                player.pulseManager.run(object : SkillPulse<Item>(player, event.usedItem) {
-                    var amt = 0
+        val handler =
+            object : SkillDialogueHandler(event.player, SkillDialogue.ONE_OPTION, grind!!.product) {
+                override fun create(
+                    amount: Int,
+                    index: Int,
+                ) {
+                    player.pulseManager.run(
+                        object : SkillPulse<Item>(player, event.usedItem) {
+                            var amt = 0
 
-                    init {
-                        amt = amount
-                        if (amt > amountInInventory(player, node.id)) {
-                            amt = amountInInventory(player, node.id)
-                        }
-                        if (node.id == FISHING_BAIT) {
-                            if (amt > (amountInInventory(player, node.id) / 10)) {
-                                amt = ceil(amountInInventory(player, node.id).toDouble() / 10).roundToInt()
-                            }
-                        }
-                    }
-
-                    override fun checkRequirements(): Boolean {
-                        if (!hasSpaceFor(player, Item(GrindItem.forItem(node)!!.product.id))) {
-                            sendDialogue(player, "You do not have enough inventory space.")
-                            return false
-                        }
-                        clearScripts(player)
-                        return true
-                    }
-
-                    override fun animate() {
-                        animate(player, ANIMATION, true)
-                    }
-
-                    override fun reward(): Boolean {
-                        if (delay == 1) {
-                            super.setDelay(2)
-                        }
-                        when (node.id) {
-                            FISHING_BAIT -> {
-                                var quantity = 0
-                                quantity = if (amountInInventory(player, FISHING_BAIT) >= 10) {
-                                    10
-                                } else {
-                                    amountInInventory(player, FISHING_BAIT)
+                            init {
+                                amt = amount
+                                if (amt > amountInInventory(player, node.id)) {
+                                    amt = amountInInventory(player, node.id)
                                 }
-                                if (removeItem(player, Item(node.id, quantity))) {
-                                    addItem(player, GrindItem.forItem(node)!!.product.id, quantity)
+                                if (node.id == FISHING_BAIT) {
+                                    if (amt > (amountInInventory(player, node.id) / 10)) {
+                                        amt = ceil(amountInInventory(player, node.id).toDouble() / 10).roundToInt()
+                                    }
                                 }
                             }
 
-                            ARMADYL_SHARDS -> {
-                                if (removeItem(player, Item(node.id, 1))) {
-                                    addItem(player, GrindItem.forItem(node)!!.product.id, 8)
+                            override fun checkRequirements(): Boolean {
+                                if (!hasSpaceFor(player, Item(GrindItem.forItem(node)!!.product.id))) {
+                                    sendDialogue(player, "You do not have enough inventory space.")
+                                    return false
                                 }
+                                clearScripts(player)
+                                return true
                             }
 
-                            else -> {
-                                if (removeItem(player, Item(node.id, 1))) {
-                                    addItem(player, GrindItem.forItem(node)!!.product.id)
-                                }
+                            override fun animate() {
+                                animate(player, ANIMATION, true)
                             }
-                        }
-                        sendMessage(player, GrindItem.forItem(node)!!.message)
-                        amt--
-                        return amt <= 0
-                    }
-                })
+
+                            override fun reward(): Boolean {
+                                if (delay == 1) {
+                                    super.setDelay(2)
+                                }
+                                when (node.id) {
+                                    FISHING_BAIT -> {
+                                        var quantity = 0
+                                        quantity =
+                                            if (amountInInventory(player, FISHING_BAIT) >= 10) {
+                                                10
+                                            } else {
+                                                amountInInventory(player, FISHING_BAIT)
+                                            }
+                                        if (removeItem(player, Item(node.id, quantity))) {
+                                            addItem(player, GrindItem.forItem(node)!!.product.id, quantity)
+                                        }
+                                    }
+
+                                    ARMADYL_SHARDS -> {
+                                        if (removeItem(player, Item(node.id, 1))) {
+                                            addItem(player, GrindItem.forItem(node)!!.product.id, 8)
+                                        }
+                                    }
+
+                                    else -> {
+                                        if (removeItem(player, Item(node.id, 1))) {
+                                            addItem(player, GrindItem.forItem(node)!!.product.id)
+                                        }
+                                    }
+                                }
+                                sendMessage(player, GrindItem.forItem(node)!!.message)
+                                amt--
+                                return amt <= 0
+                            }
+                        },
+                    )
+                }
+
+                override fun getAll(index: Int): Int = amountInInventory(player, event.usedItem.id)
             }
-
-            override fun getAll(index: Int): Int {
-                return amountInInventory(player, event.usedItem.id)
-            }
-        }
         handler.open()
         PacketRepository.send(
             RepositionChild::class.java,

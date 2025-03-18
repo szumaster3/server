@@ -145,7 +145,5 @@ class RumDeal : Quest("Rum Deal", 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PROGRESS
         addItemOrDrop(player, Items.HOLY_WRENCH_6714)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

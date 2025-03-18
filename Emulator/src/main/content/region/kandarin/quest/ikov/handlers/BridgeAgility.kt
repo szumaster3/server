@@ -22,9 +22,7 @@ class BridgeAgility : MapArea {
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2648, 9828, 2649, 9829))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2648, 9828, 2649, 9829))
 
     override fun areaEnter(entity: Entity) {
         checkWeightOrFailBridge(entity)

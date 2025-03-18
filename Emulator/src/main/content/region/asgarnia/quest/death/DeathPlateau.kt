@@ -223,7 +223,5 @@ class DeathPlateau : Quest(Quests.DEATH_PLATEAU, 44, 43, 1, 314, 0, 1, 80) {
         player.skills.addExperience(Skills.ATTACK, 3000.0)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

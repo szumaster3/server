@@ -94,11 +94,7 @@ class IsidorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return IsidorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IsidorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ISIDOR_8544)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ISIDOR_8544)
 }

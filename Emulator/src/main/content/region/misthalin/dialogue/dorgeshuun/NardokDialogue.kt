@@ -90,11 +90,7 @@ class NardokDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return NardokDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = NardokDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NARDOK_4312)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NARDOK_4312)
 }

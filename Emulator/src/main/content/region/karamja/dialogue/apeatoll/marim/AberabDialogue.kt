@@ -21,15 +21,9 @@ class AberabDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return AberabDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = AberabDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ABERAB_1432)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ABERAB_1432)
 }

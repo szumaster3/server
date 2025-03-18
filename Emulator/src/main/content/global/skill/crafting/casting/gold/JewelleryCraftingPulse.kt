@@ -23,9 +23,7 @@ class JewelleryCraftingPulse(
 
     var ticks = 0
 
-    override fun checkRequirements(): Boolean {
-        return getStatLevel(player, Skills.CRAFTING) >= type.level
-    }
+    override fun checkRequirements(): Boolean = getStatLevel(player, Skills.CRAFTING) >= type.level
 
     override fun animate() {
         if (ticks % 5 == 0) {

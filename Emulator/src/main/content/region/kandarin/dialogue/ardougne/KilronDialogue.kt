@@ -54,11 +54,7 @@ class KilronDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KilronDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KilronDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KILRON_349)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KILRON_349)
 }

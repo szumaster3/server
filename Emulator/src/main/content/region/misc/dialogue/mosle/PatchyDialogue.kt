@@ -98,11 +98,7 @@ class PatchyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return PatchyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = PatchyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PATCHY_4359)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PATCHY_4359)
 }

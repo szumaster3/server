@@ -89,11 +89,7 @@ class FlorinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FlorinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FlorinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FLORIN_3550)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FLORIN_3550)
 }

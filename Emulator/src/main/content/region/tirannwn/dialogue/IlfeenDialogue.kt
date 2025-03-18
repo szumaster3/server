@@ -99,11 +99,7 @@ class IlfeenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return IlfeenDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IlfeenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ILFEEN_1777)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ILFEEN_1777)
 }

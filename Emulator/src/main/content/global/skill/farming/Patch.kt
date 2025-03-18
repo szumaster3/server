@@ -102,17 +102,11 @@ class Patch(
         if (cropLives <= 0) clear()
     }
 
-    fun isWeedy(): Boolean {
-        return getCurrentState() in 0..2
-    }
+    fun isWeedy(): Boolean = getCurrentState() in 0..2
 
-    fun isEmptyAndWeeded(): Boolean {
-        return getCurrentState() == 3
-    }
+    fun isEmptyAndWeeded(): Boolean = getCurrentState() == 3
 
-    fun getCurrentState(): Int {
-        return getVarbit(player, patch.varbit)
-    }
+    fun getCurrentState(): Int = getVarbit(player, patch.varbit)
 
     fun setCurrentState(state: Int) {
         setVarbit(player, patch.varbit, state)
@@ -157,13 +151,9 @@ class Patch(
         return state
     }
 
-    fun isFertilized(): Boolean {
-        return compost != CompostType.NONE
-    }
+    fun isFertilized(): Boolean = compost != CompostType.NONE
 
-    fun isGrown(): Boolean {
-        return currentGrowthStage == (plantable?.stages ?: 0)
-    }
+    fun isGrown(): Boolean = currentGrowthStage == (plantable?.stages ?: 0)
 
     fun updateBit() {
         if (isCheckHealth) {
@@ -277,9 +267,7 @@ class Patch(
         updateBit()
     }
 
-    private fun getUnmodifiedValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage
-    }
+    private fun getUnmodifiedValue(): Int = (plantable?.value ?: 0) + currentGrowthStage
 
     private fun getBushDiseaseValue(): Int {
         if (plantable == Plantable.POISON_IVY_SEED) {
@@ -297,47 +285,33 @@ class Patch(
         }
     }
 
-    private fun getFruitTreeDiseaseValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 12
-    }
+    private fun getFruitTreeDiseaseValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 12
 
-    private fun getFruitTreeDeathValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 18
-    }
+    private fun getFruitTreeDeathValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 18
 
-    private fun getBelladonnaDiseaseValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 4
-    }
+    private fun getBelladonnaDiseaseValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 4
 
-    private fun getBelladonnaDeathValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 7
-    }
+    private fun getBelladonnaDeathValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 7
 
-    private fun getCactusDiseaseValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 10
-    }
+    private fun getCactusDiseaseValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 10
 
-    private fun getCactusDeathValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 16
-    }
+    private fun getCactusDeathValue(): Int = (plantable?.value ?: 0) + currentGrowthStage + 16
 
-    private fun getHerbDiseaseValue(): Int {
-        return if (plantable?.value ?: -1 <= 103) {
+    private fun getHerbDiseaseValue(): Int =
+        if (plantable?.value ?: -1 <= 103) {
             128 + (((plantable?.ordinal ?: 0) - Plantable.GUAM_SEED.ordinal) * 3) + currentGrowthStage - 1
         } else if (plantable == Plantable.SPIRIT_WEED_SEED) {
             211 + currentGrowthStage - 1
         } else {
             198 + currentGrowthStage - 1
         }
-    }
 
-    private fun getHerbDeathValue(): Int {
-        return if (plantable == Plantable.GOUT_TUBER) {
+    private fun getHerbDeathValue(): Int =
+        if (plantable == Plantable.GOUT_TUBER) {
             201 + currentGrowthStage - 1
         } else {
             170 + currentGrowthStage - 1
         }
-    }
 
     private fun grow() {
         if ((isWeedy() || isEmptyAndWeeded()) && getCurrentState() > 0) {

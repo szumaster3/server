@@ -77,16 +77,13 @@ class GrandExchangeClerkDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GrandExchangeClerkDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GrandExchangeClerkDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.GRAND_EXCHANGE_CLERK_6528,
             NPCs.GRAND_EXCHANGE_CLERK_6529,
             NPCs.GRAND_EXCHANGE_CLERK_6530,
             NPCs.GRAND_EXCHANGE_CLERK_6531,
         )
-    }
 }

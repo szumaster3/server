@@ -23,13 +23,9 @@ class SpinolypNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SpinolypNPC(id, location)
-    }
+    ): AbstractNPC = SpinolypNPC(id, location)
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return SWING_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = SWING_HANDLER
 
     override fun init() {
         super.init()
@@ -53,9 +49,7 @@ class SpinolypNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2894, 2896)
-    }
+    override fun getIds(): IntArray = intArrayOf(2894, 2896)
 
     class SpinolpySwingHandler :
         MultiSwingHandler(
@@ -89,16 +83,12 @@ class SpinolypNPC(
             e: Entity,
             v: Entity,
             rawDistance: Int,
-        ): Int {
-            return 12
-        }
+        ): Int = 12
 
         override fun calculateDefence(
             victim: Entity?,
             attacker: Entity?,
-        ): Int {
-            return CombatStyle.RANGE.swingHandler.calculateDefence(victim, attacker)
-        }
+        ): Int = CombatStyle.RANGE.swingHandler.calculateDefence(victim, attacker)
 
         override fun visualize(
             entity: Entity,

@@ -48,11 +48,7 @@ class CarolineDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CarolineDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CarolineDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAROLINE_696)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAROLINE_696)
 }

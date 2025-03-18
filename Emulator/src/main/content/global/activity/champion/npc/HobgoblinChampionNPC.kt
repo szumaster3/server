@@ -28,13 +28,9 @@ class HobgoblinChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return HobgoblinChampionNPC(id, location)
-    }
+    ): AbstractNPC = HobgoblinChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOBGOBLIN_CHAMPION_3061)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOBGOBLIN_CHAMPION_3061)
 
     override fun handleTickActions() {
         super.handleTickActions()

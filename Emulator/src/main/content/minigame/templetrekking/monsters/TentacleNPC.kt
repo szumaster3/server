@@ -22,13 +22,9 @@ class TentacleNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return TentacleNPC(id, location)
-    }
+    ): AbstractNPC = TentacleNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TENTACLE_3580)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TENTACLE_3580)
 
     companion object {
         fun spawnTentacleNPC(player: Player) {

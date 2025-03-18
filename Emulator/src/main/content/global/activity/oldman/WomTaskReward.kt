@@ -91,8 +91,6 @@ enum class WomTaskReward(
             }
         }
 
-        fun forId(id: Int): WeightBasedTable? {
-            return rewardMap[id]
-        }
+        fun forId(id: Int): WeightBasedTable? = rewardMap[id]
     }
 }

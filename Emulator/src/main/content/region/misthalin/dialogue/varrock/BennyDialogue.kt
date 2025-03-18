@@ -91,11 +91,7 @@ class BennyDialogue(
         return false
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BennyDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BennyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BENNY_5925)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BENNY_5925)
 }

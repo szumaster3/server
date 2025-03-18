@@ -111,25 +111,23 @@ class PyramidArea {
 
         val safeZone = ZoneBorders(3227, 9310, 3239, 9320)
 
-        fun getNewLocation(direction: Direction): Location {
-            return when (direction) {
+        fun getNewLocation(direction: Direction): Location =
+            when (direction) {
                 Direction.NORTH -> Location(-1, 0)
                 Direction.WEST -> Location(0, -1)
                 Direction.EAST -> Location(0, 1)
                 Direction.SOUTH -> Location(1, 0)
                 else -> Location(0, 0)
             }
-        }
 
-        fun getNewFacing(direction: Direction): Direction {
-            return when (direction) {
+        fun getNewFacing(direction: Direction): Direction =
+            when (direction) {
                 Direction.NORTH -> Direction.NORTH
                 Direction.WEST -> Direction.NORTH_WEST
                 Direction.SOUTH -> Direction.WEST
                 Direction.EAST -> Direction.NORTH_EAST
                 else -> direction
             }
-        }
 
         fun nearSarcophagus(loc: Location): Location? {
             for (sarcoph in sarcophagusList) {
@@ -248,14 +246,13 @@ class PyramidArea {
 }
 
 class PyramidAreaFirstThree : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             getRegionBorders(11597),
             getRegionBorders(11341),
             getRegionBorders(11085),
             // getRegionBorders(12945),
         )
-    }
 
     override fun entityStep(
         entity: Entity,
@@ -284,11 +281,10 @@ class PyramidAreaFirstThree : MapArea {
 }
 
 class PyramidAreaFinal : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             getRegionBorders(12945),
         )
-    }
 
     override fun entityStep(
         entity: Entity,

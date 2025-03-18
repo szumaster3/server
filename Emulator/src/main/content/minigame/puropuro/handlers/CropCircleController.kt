@@ -59,9 +59,7 @@ class CropCircleController :
         activeSceneries.clear()
     }
 
-    private fun hasImpBox(player: Player): Boolean {
-        return inInventory(player, 10025) || inInventory(player, 10027) || inInventory(player, 10028)
-    }
+    private fun hasImpBox(player: Player): Boolean = inInventory(player, 10025) || inInventory(player, 10027) || inInventory(player, 10028)
 
     companion object {
         var currentLocName = ""

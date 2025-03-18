@@ -25,13 +25,9 @@ class MageArenaMapZone :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
-    override fun enter(e: Entity): Boolean {
-        return super.enter(e)
-    }
+    override fun enter(e: Entity): Boolean = super.enter(e)
 
     override fun leave(
         e: Entity,
@@ -81,9 +77,7 @@ class MageArenaMapZone :
         return super.continueAttack(e, target, style, message)
     }
 
-    fun getSession(player: Player?): KolodionSession {
-        return KolodionSession.getSession(player!!)
-    }
+    fun getSession(player: Player?): KolodionSession = KolodionSession.getSession(player!!)
 
     fun hasSession(player: Player?): Boolean {
         KolodionSession.getSession(player!!)

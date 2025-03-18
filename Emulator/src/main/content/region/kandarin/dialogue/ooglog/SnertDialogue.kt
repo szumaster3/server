@@ -241,12 +241,10 @@ class SnertDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SnertDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SnertDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SNERT_7067,
             NPCs.THUDDLEY_7072,
             NPCs.SNARRK_7070,
@@ -254,5 +252,4 @@ class SnertDialogue(
             NPCs.GRUNTHER_7076,
             NPCs.IRK_7071,
         )
-    }
 }

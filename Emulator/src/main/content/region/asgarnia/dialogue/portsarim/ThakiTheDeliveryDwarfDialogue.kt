@@ -30,7 +30,5 @@ class ThakiTheDeliveryDwarfDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THAKI_THE_DELIVERY_DWARF_7115)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THAKI_THE_DELIVERY_DWARF_7115)
 }

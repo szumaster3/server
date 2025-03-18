@@ -62,11 +62,7 @@ class JaraahDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JaraahDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JaraahDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JARAAH_962)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JARAAH_962)
 }

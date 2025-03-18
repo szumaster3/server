@@ -78,11 +78,7 @@ class RogueVarrockDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RogueVarrockDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RogueVarrockDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROGUE_8122)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROGUE_8122)
 }

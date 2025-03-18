@@ -40,7 +40,5 @@ class PheasantNPC : NPCBehavior(NPCs.PHEASANT_2459, NPCs.PHEASANT_2460, NPCs.PHE
     override fun getXpMultiplier(
         self: NPC,
         attacker: Entity,
-    ): Double {
-        return 0.0
-    }
+    ): Double = 0.0
 }

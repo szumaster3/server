@@ -309,8 +309,7 @@ class EstateAgentDialogue(
                 player.houseManager.location = location
                 npc(
                     "Your house has been moved to " +
-                        location.name.lowercase().replaceFirstChar {
-                            c ->
+                        location.name.lowercase().replaceFirstChar { c ->
                             c.uppercase()
                         } +
                         ".",
@@ -359,13 +358,9 @@ class EstateAgentDialogue(
         }
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EstateAgentDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EstateAgentDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ESTATE_AGENT_4247)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ESTATE_AGENT_4247)
 
     private val CONSTRUCTION_GUIDE_8463 = Item(Items.CONSTRUCTION_GUIDE_8463, 1)
     private val REGION_VARROCK_NE = 12854

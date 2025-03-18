@@ -176,7 +176,5 @@ class DenulthDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DENULTH_1060)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DENULTH_1060)
 }

@@ -92,11 +92,7 @@ class BanditDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BanditDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BanditDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BANDIT_1926)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BANDIT_1926)
 }

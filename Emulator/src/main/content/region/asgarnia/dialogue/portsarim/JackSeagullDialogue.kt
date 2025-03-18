@@ -47,7 +47,5 @@ class JackSeagullDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JACK_SEAGULL_2690)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JACK_SEAGULL_2690)
 }

@@ -3,20 +3,25 @@ package content.region.kandarin.quest.elementalquest2
 import content.region.kandarin.quest.elementalquest2.handlers.EW2Utils
 import core.api.*
 import core.api.quest.isQuestComplete
-import org.rs.consts.Items
-import org.rs.consts.Vars
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
+import org.rs.consts.Items
+import org.rs.consts.Vars
 
 // @Initializable
 class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTAL_WORKSHOP_II_PROGRESS_2639, 0, 1, 11) {
-
-    class SkillRequirement(val skill: Int?, val level: Int?)
+    class SkillRequirement(
+        val skill: Int?,
+        val level: Int?,
+    )
 
     val requirements = arrayListOf<SkillRequirement>()
 
-    override fun drawJournal(player: Player, stage: Int) {
+    override fun drawJournal(
+        player: Player,
+        stage: Int,
+    ) {
         super.drawJournal(player, stage)
         var line = 11
         player ?: return
@@ -56,7 +61,12 @@ class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTA
             line(player, "I was able to !!find a key??.", line++, stage > 5)
         }
         if (stage >= 5) {
-            line(player, "The !!key?? I've found opens the !!large hatch?? in the !!workshop??; there are !!4 machines?? on this level to fix:", line++, false)
+            line(
+                player,
+                "The !!key?? I've found opens the !!large hatch?? in the !!workshop??; there are !!4 machines?? on this level to fix:",
+                line++,
+                false,
+            )
             line++
         }
         if (stage >= 6) {
@@ -106,5 +116,4 @@ class EW2 : Quest("Elemental Workshop II", 53, 52, 1, Vars.VARBIT_QUEST_ELEMENTA
         requirements.add(SkillRequirement(Skills.SMITHING, 30))
         return this
     }
-
 }

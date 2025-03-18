@@ -25,9 +25,7 @@ class PCBrawlerNPC : AbstractNPC {
         session = getExtension(PestControlSession::class.java)
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return true
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = true
 
     override fun onImpact(
         entity: Entity,
@@ -50,11 +48,8 @@ class PCBrawlerNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCBrawlerNPC(id, location)
-    }
+    ): AbstractNPC = PCBrawlerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BRAWLER_3772, NPCs.BRAWLER_3773, NPCs.BRAWLER_3774, NPCs.BRAWLER_3775, NPCs.BRAWLER_3776)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.BRAWLER_3772, NPCs.BRAWLER_3773, NPCs.BRAWLER_3774, NPCs.BRAWLER_3775, NPCs.BRAWLER_3776)
 }

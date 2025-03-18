@@ -356,9 +356,7 @@ class FremennikTrialsListener : InteractionListener {
         val ney: Int,
     )
 
-    fun DestRoom.getCenter(): Location {
-        return Location((swx + nex) / 2, (swy + ney) / 2).transform(1, 0, 0)
-    }
+    fun DestRoom.getCenter(): Location = Location((swx + nex) / 2, (swy + ney) / 2).transform(1, 0, 0)
 
     fun getRandomLocation(player: Player?): Location {
         var obj: Scenery? = null

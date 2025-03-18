@@ -32,7 +32,5 @@ class SilasDahcsnuDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SILAS_DAHCSNU_5841)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SILAS_DAHCSNU_5841)
 }

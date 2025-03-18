@@ -18,21 +18,14 @@ class SheepShearer : Quest(Quests.SHEEP_SHEARER, 28, 27, 1, Vars.VARP_QUEST_SHEE
         val ATTR_NUM_BALLS_OF_WOOL_DELIVERED = "/save:sheep-shearer:num-balls-of-wool-delivered"
         val ATTR_IS_PENGUIN_SHEEP_SHEARED = "/save:sheep-shearer:is-penguin-sheep-sheared"
 
-        fun getBallsOfWoolDelivered(player: Player): Int {
-            return getAttribute(player, ATTR_NUM_BALLS_OF_WOOL_DELIVERED, 0)
-        }
+        fun getBallsOfWoolDelivered(player: Player): Int = getAttribute(player, ATTR_NUM_BALLS_OF_WOOL_DELIVERED, 0)
 
-        fun getBallsOfWoolRequired(player: Player): Int {
-            return 20 - getBallsOfWoolDelivered(player)
-        }
+        fun getBallsOfWoolRequired(player: Player): Int = 20 - getBallsOfWoolDelivered(player)
 
-        fun getBallsOfWoolToRemove(player: Player): Int {
-            return min(getBallsOfWoolRequired(player), amountInInventory(player, Items.BALL_OF_WOOL_1759))
-        }
+        fun getBallsOfWoolToRemove(player: Player): Int =
+            min(getBallsOfWoolRequired(player), amountInInventory(player, Items.BALL_OF_WOOL_1759))
 
-        fun getBallsOfWoolToCollect(player: Player): Int {
-            return getBallsOfWoolRequired(player) - getBallsOfWoolToRemove(player)
-        }
+        fun getBallsOfWoolToCollect(player: Player): Int = getBallsOfWoolRequired(player) - getBallsOfWoolToRemove(player)
 
         fun deliverBallsOfWool(player: Player): Int {
             val removeAmount = getBallsOfWoolToRemove(player)
@@ -44,9 +37,7 @@ class SheepShearer : Quest(Quests.SHEEP_SHEARER, 28, 27, 1, Vars.VARP_QUEST_SHEE
         }
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun drawJournal(
         player: Player,

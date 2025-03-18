@@ -172,13 +172,10 @@ class EvilBobListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3400, 4762, 3443, 4793))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3400, 4762, 3443, 4793))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     override fun areaEnter(entity: Entity) {
         entity.locks.lockTeleport(100000)

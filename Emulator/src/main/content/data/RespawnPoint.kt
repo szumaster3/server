@@ -15,7 +15,7 @@ enum class RespawnPoint(
 ) {
     LUMBRIDGE(ServerConstants.HOME_LOCATION!!.location),
     FALADOR(Location(2972, 3337, 0)),
-    CAMELOT(Location(2757, 3477, 0));
+    CAMELOT(Location(2757, 3477, 0)),
 }
 
 /**
@@ -24,11 +24,12 @@ enum class RespawnPoint(
  * @param respawnPoint The [RespawnPoint] representing the desired respawn location.
  */
 fun Player.setRespawnLocation(respawnPoint: RespawnPoint) {
-    val newLocation = when (respawnPoint) {
-        RespawnPoint.FALADOR -> RespawnPoint.FALADOR.location
-        RespawnPoint.CAMELOT -> RespawnPoint.CAMELOT.location
-        else -> RespawnPoint.LUMBRIDGE.location
-    }
+    val newLocation =
+        when (respawnPoint) {
+            RespawnPoint.FALADOR -> RespawnPoint.FALADOR.location
+            RespawnPoint.CAMELOT -> RespawnPoint.CAMELOT.location
+            else -> RespawnPoint.LUMBRIDGE.location
+        }
 
     setAttribute(this, "/save:spawnLocation", newLocation)
     this.properties.spawnLocation = newLocation

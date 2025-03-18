@@ -42,7 +42,5 @@ class BreocaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BREOCA_1084)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BREOCA_1084)
 }

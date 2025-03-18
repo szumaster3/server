@@ -29,11 +29,7 @@ class DrokarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DrokarDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DrokarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DRORKAR_7723)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRORKAR_7723)
 }

@@ -19,7 +19,5 @@ class BrotherKojoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_KOJO_223)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_KOJO_223)
 }

@@ -250,9 +250,7 @@ class ApothecaryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.APOTHECARY_638)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.APOTHECARY_638)
 
     companion object {
         private val POTION_ITEMS = arrayOf(Item(223), Item(225), Item(995, 5))

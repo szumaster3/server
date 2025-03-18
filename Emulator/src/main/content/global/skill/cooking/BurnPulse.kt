@@ -17,9 +17,7 @@ class BurnPulse
         override var product: Int,
         override var amount: Int,
     ) : CookingPulse(player, scenery, initial, product, amount) {
-        override fun checkRequirements(): Boolean {
-            return scenery.isActive
-        }
+        override fun checkRequirements(): Boolean = scenery.isActive
 
         override fun reward(): Boolean {
             if (delay == 1) {

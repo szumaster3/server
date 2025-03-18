@@ -27,9 +27,7 @@ class RowdySlaveNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RowdySlaveNPC(id, location)
-    }
+    ): AbstractNPC = RowdySlaveNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -71,9 +69,7 @@ class RowdySlaveNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROWDY_SLAVE_827)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROWDY_SLAVE_827)
 
     companion object {
         private val CHATS =

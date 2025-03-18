@@ -13,9 +13,7 @@ import org.rs.consts.NPCs
 class LekaDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun newInstance(player: Player): Dialogue {
-        return LekaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LekaDialogue(player)
 
     override fun handle(
         interfaceId: Int,
@@ -44,7 +42,5 @@ class LekaDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
 }

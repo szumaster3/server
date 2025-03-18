@@ -69,11 +69,7 @@ class NurmofDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return NurmofDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = NurmofDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NURMOF_594)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NURMOF_594)
 }

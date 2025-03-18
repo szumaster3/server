@@ -168,7 +168,5 @@ class KolodionDialogue(
         KolodionSession.create(player).start()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KOLODION_905)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KOLODION_905)
 }

@@ -300,7 +300,5 @@ class GrandpaJackDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRANDPA_JACK_230)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRANDPA_JACK_230)
 }

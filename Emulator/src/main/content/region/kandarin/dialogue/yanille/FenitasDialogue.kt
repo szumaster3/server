@@ -32,11 +32,7 @@ class FenitasDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FenitasDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FenitasDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRENITA_593)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRENITA_593)
 }

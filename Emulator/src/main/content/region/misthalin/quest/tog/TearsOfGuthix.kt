@@ -20,8 +20,7 @@ import org.rs.consts.Vars
  */
 @Initializable
 class
-TearsOfGuthix :
-    Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, Vars.VARBIT_QUEST_TEARS_OF_GUTHIX_PROGRESS_451, 0, 1, 2) {
+TearsOfGuthix : Quest(Quests.TEARS_OF_GUTHIX, 120, 119, 1, 449, Vars.VARBIT_QUEST_TEARS_OF_GUTHIX_PROGRESS_451, 0, 1, 2) {
     companion object {
         fun daysLeft(player: Player): Int {
             val currentTime = System.currentTimeMillis()
@@ -43,13 +42,12 @@ TearsOfGuthix :
             return 1 - (currentQuestPoints - previousQuestPoints)
         }
 
-        fun hasRequirements(player: Player): Boolean {
-            return arrayOf(
+        fun hasRequirements(player: Player): Boolean =
+            arrayOf(
                 hasLevelStat(player, Skills.FIREMAKING, 49),
                 hasLevelStat(player, Skills.CRAFTING, 20),
                 hasLevelStat(player, Skills.MINING, 20),
             ).all { it }
-        }
     }
 
     override fun drawJournal(
@@ -151,7 +149,5 @@ TearsOfGuthix :
         removeAttribute(player, GameAttributes.QUEST_TOG_LAST_QP)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

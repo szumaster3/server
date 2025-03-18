@@ -26,8 +26,8 @@ class UserAccountInfo(
         val default = createDefault()
 
         @JvmStatic
-        fun createDefault(): UserAccountInfo {
-            return UserAccountInfo(
+        fun createDefault(): UserAccountInfo =
+            UserAccountInfo(
                 username = "",
                 password = "",
                 uid = 0,
@@ -49,7 +49,6 @@ class UserAccountInfo(
             ).also {
                 it.setInitialReferenceValues()
             }
-        }
     }
 
     lateinit var initialValues: Array<Any>
@@ -69,8 +68,8 @@ class UserAccountInfo(
         return Pair(changed, current)
     }
 
-    fun toArray(): Array<Any> {
-        return arrayOf(
+    fun toArray(): Array<Any> =
+        arrayOf(
             username,
             password,
             uid,
@@ -90,11 +89,8 @@ class UserAccountInfo(
             online,
             joinDate,
         )
-    }
 
-    override fun toString(): String {
-        return "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,IP:$ip,LASTIP:$lastUsedIp"
-    }
+    override fun toString(): String = "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,IP:$ip,LASTIP:$lastUsedIp"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -144,7 +140,5 @@ class UserAccountInfo(
         return result
     }
 
-    fun isDefault(): Boolean {
-        return this == default
-    }
+    fun isDefault(): Boolean = this == default
 }

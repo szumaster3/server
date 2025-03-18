@@ -24,13 +24,9 @@ class KamfreenaNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return KamfreenaNPC(id, location)
-    }
+    ): AbstractNPC = KamfreenaNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KAMFREENA_4289)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KAMFREENA_4289)
 
     override fun tick() {
         if (RandomFunction.random(35) == 5) {

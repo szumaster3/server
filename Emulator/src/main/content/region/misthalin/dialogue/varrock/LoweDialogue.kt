@@ -40,11 +40,7 @@ class LoweDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LoweDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LoweDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOWE_550)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOWE_550)
 }

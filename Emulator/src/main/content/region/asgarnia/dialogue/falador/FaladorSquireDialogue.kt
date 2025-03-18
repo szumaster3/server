@@ -280,7 +280,5 @@ class FaladorSquireDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SQUIRE_606)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_606)
 }

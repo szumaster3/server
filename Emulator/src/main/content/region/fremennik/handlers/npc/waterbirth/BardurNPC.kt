@@ -16,13 +16,9 @@ class BardurNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BardurNPC(id, location)
-    }
+    ): AbstractNPC = BardurNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARDUR_2879)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARDUR_2879)
 
     override fun tick() {
         if (isActive && !inCombat() && RandomFunction.roll(10)) {

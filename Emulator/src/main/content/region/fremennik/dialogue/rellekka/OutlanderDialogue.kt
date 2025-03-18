@@ -37,12 +37,10 @@ class OutlanderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return OutlanderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = OutlanderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BORROKAR_1307,
             NPCs.FREIDIR_1306,
             NPCs.INGA_1314,
@@ -51,5 +49,4 @@ class OutlanderDialogue(
             NPCs.PONTAK_1309,
             NPCs.SASSILIK_1313,
         )
-    }
 }

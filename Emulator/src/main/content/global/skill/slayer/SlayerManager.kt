@@ -198,9 +198,7 @@ class SlayerManager(
             flags.setMaster(master!!)
         }
 
-    fun hasTask(): Boolean {
-        return amount > 0
-    }
+    fun hasTask(): Boolean = amount > 0
 
     val isCompleted: Boolean
         get() = flags.getTaskAmount() <= 0
@@ -216,9 +214,7 @@ class SlayerManager(
         setVarp(player!!, 2502, flags.taskFlags shr 4)
     }
 
-    fun hasStarted(): Boolean {
-        return flags.completedTasks > 0 || flags.getTaskAmount() > 0
-    }
+    fun hasStarted(): Boolean = flags.completedTasks > 0 || flags.getTaskAmount() > 0
 
     var slayerPoints: Int
         get() = flags.getPoints()
@@ -234,12 +230,11 @@ class SlayerManager(
 
     companion object {
         @JvmStatic
-        fun getInstance(player: Player): SlayerManager {
-            return getAttribute(
+        fun getInstance(player: Player): SlayerManager =
+            getAttribute(
                 player,
                 "slayer-manager",
                 SlayerManager(),
             )
-        }
     }
 }

@@ -55,7 +55,5 @@ class MysteriousStatue : MapArea {
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2739, 3489, 2742, 3492))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2739, 3489, 2742, 3492))
 }

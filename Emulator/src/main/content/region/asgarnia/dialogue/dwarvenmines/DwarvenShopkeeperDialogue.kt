@@ -53,11 +53,7 @@ class DwarvenShopkeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DwarvenShopkeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DwarvenShopkeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARF_582)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_582)
 }

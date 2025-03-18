@@ -27,13 +27,9 @@ class BartenderDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BartenderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BartenderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARTENDER_1921)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_1921)
 }
 
 class BartenderDialogueFile : DialogueBuilderFile() {

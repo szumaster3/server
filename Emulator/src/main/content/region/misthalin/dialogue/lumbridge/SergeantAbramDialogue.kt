@@ -144,14 +144,11 @@ class SergeantAbramDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SergeantAbramDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SergeantAbramDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SERGEANT_ABRAM_7888,
             NPCs.SERGEANT_ABRAM_7902,
         )
-    }
 }

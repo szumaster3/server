@@ -37,7 +37,5 @@ class FaladorGardenerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARDENER_1217, NPCs.GARDENER_3234)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARDENER_1217, NPCs.GARDENER_3234)
 }

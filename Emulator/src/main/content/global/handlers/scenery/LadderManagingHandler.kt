@@ -32,7 +32,5 @@ class LadderManagingHandler : OptionHandler() {
     override fun getDestination(
         n: Node,
         `object`: Node,
-    ): Location? {
-        return ClimbActionHandler.getDestination(`object` as Scenery)
-    }
+    ): Location? = ClimbActionHandler.getDestination(`object` as Scenery)
 }

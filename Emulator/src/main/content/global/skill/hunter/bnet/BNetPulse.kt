@@ -29,9 +29,7 @@ class BNetPulse(
 
     private var ticks = 0
 
-    fun updateLumbridgeImplingTask(player: Player): Boolean {
-        return player.zoneMonitor.isInZone("puro puro")
-    }
+    fun updateLumbridgeImplingTask(player: Player): Boolean = player.zoneMonitor.isInZone("puro puro")
 
     init {
         this.resetAnimation = false

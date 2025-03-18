@@ -43,7 +43,5 @@ class RPDTEmployeeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RPDT_EMPLOYEE_843)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RPDT_EMPLOYEE_843)
 }

@@ -35,7 +35,5 @@ class KaramjaManDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAN_3915)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAN_3915)
 }

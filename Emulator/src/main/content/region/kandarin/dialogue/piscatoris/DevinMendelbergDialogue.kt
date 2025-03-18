@@ -135,11 +135,7 @@ class DevinMendelbergDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DevinMendelbergDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DevinMendelbergDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DEVIN_MENDELBERG_3825, 3828)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DEVIN_MENDELBERG_3825, 3828)
 }

@@ -11,9 +11,7 @@ import org.rs.consts.Vars
 
 @Initializable
 class PlagueCity : Quest(Quests.PLAGUE_CITY, 98, 97, 1, Vars.VARP_QUEST_PLAGUE_CITY_PROGRESS_165, 0, 1, 29) {
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun drawJournal(
         player: Player,

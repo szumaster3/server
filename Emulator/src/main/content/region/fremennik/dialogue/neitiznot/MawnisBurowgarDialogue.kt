@@ -66,11 +66,7 @@ class MawnisBurowgarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MawnisBurowgarDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MawnisBurowgarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAWNIS_BUROWGAR_5504)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAWNIS_BUROWGAR_5504)
 }

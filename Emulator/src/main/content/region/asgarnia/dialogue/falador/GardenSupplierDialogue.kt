@@ -36,7 +36,5 @@ class GardenSupplierDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARDEN_SUPPLIER_4251)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARDEN_SUPPLIER_4251)
 }

@@ -85,11 +85,7 @@ class ShirattiTheCustodianDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ShirattiTheCustodianDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ShirattiTheCustodianDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHIRATTI_THE_CUSTODIAN_3044)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHIRATTI_THE_CUSTODIAN_3044)
 }

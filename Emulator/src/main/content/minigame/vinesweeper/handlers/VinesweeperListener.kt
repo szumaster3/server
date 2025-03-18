@@ -1,5 +1,7 @@
 package content.minigame.vinesweeper.handlers
 
+import content.minigame.vinesweeper.dialogue.BlinkinDialogueFile
+import content.minigame.vinesweeper.dialogue.MrsWinkinDialogueFile
 import content.minigame.vinesweeper.handlers.FlagsHandler.Companion.FARMER_FLAG_LINES
 import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.FARMERS
 import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.FARMER_CLEAR_RADIUS
@@ -10,8 +12,6 @@ import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.SEED_
 import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.populateSeeds
 import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.scheduleNPCs
 import content.minigame.vinesweeper.handlers.VinesweeperListener.Companion.sendPoints
-import content.minigame.vinesweeper.dialogue.BlinkinDialogueFile
-import content.minigame.vinesweeper.dialogue.MrsWinkinDialogueFile
 import core.api.*
 import core.api.MapArea
 import core.game.component.Component
@@ -47,9 +47,7 @@ class VinesweeperListener :
     InteractionListener,
     InterfaceListener,
     MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(6473))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(6473))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {
@@ -289,17 +287,14 @@ class VinesweeperListener :
         val loc: Location,
         val alive: Boolean,
     ) {
-        override fun equals(other: Any?): Boolean {
-            return if (other is SeedDestination) {
+        override fun equals(other: Any?): Boolean =
+            if (other is SeedDestination) {
                 loc == other.loc
             } else {
                 false
             }
-        }
 
-        override fun hashCode(): Int {
-            return loc.hashCode()
-        }
+        override fun hashCode(): Int = loc.hashCode()
     }
 
     companion object {
@@ -655,17 +650,13 @@ class VinesweeperNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return VinesweeperNPC(id, location)
-    }
+    ): AbstractNPC = VinesweeperNPC(id, location)
 
     init {
         walkRadius = 22
     }
 
-    override fun getIds(): IntArray {
-        return RABBITS + FARMERS
-    }
+    override fun getIds(): IntArray = RABBITS + FARMERS
 
     override fun handleTickActions() {
         val dest = seedDestinations.find { sd -> sd.loc == location }

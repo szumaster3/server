@@ -56,11 +56,7 @@ class AliTheCarterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AliTheCarterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AliTheCarterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_THE_CARTER_3030)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_CARTER_3030)
 }

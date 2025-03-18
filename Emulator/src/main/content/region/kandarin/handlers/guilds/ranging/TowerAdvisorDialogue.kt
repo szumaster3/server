@@ -86,12 +86,11 @@ class TowerAdvisorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.TOWER_ADVISOR_684,
             NPCs.TOWER_ADVISOR_685,
             NPCs.TOWER_ADVISOR_686,
             NPCs.TOWER_ADVISOR_687,
         )
-    }
 }

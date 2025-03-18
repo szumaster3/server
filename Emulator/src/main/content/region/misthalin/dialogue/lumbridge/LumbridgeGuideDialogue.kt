@@ -203,7 +203,5 @@ class LumbridgeGuideDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUMBRIDGE_GUIDE_2244)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUMBRIDGE_GUIDE_2244)
 }

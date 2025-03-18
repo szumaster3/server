@@ -25,9 +25,7 @@ class IgnatiusVulcanNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return IgnatiusVulcanNPC(id, location)
-    }
+    ): AbstractNPC = IgnatiusVulcanNPC(id, location)
 
     override fun tick() {
         if (lastFire < ticks) {
@@ -37,9 +35,7 @@ class IgnatiusVulcanNPC(
         super.tick()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IGNATIUS_VULCAN_4946)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IGNATIUS_VULCAN_4946)
 
     companion object {
         private val ANIMATION = Animation(Animations.TINDERBOX_733, Priority.HIGH)

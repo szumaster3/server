@@ -270,10 +270,9 @@ enum class SlayerMaster(
 
     var tasks: List<Task> = ArrayList(arrayListOf(*tasks))
 
-    fun hasRequirements(player: Player): Boolean {
-        return player.properties.currentCombatLevel >= this.requiredCombat &&
+    fun hasRequirements(player: Player): Boolean =
+        player.properties.currentCombatLevel >= this.requiredCombat &&
             player.getSkills().getLevel(Skills.SLAYER) >= this.requirements
-    }
 
     class Task internal constructor(
         var task: Tasks,
@@ -290,20 +289,17 @@ enum class SlayerMaster(
         }
 
         @JvmStatic
-        fun forId(id: Int): SlayerMaster {
-            return idMap[id]!!
-        }
+        fun forId(id: Int): SlayerMaster = idMap[id]!!
 
         @JvmStatic
         fun hasSameTask(
             master: SlayerMaster,
             player: Player,
-        ): Boolean {
-            return master.tasks
+        ): Boolean =
+            master.tasks
                 .stream()
                 .filter { task: Task ->
                     task.task == SlayerManager.getInstance(player).task
                 }.count() != 0L
-        }
     }
 }

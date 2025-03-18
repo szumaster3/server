@@ -17,8 +17,7 @@ import org.rs.consts.Sounds
  * Will notify the player of various levels of remaining Dragon Fire immunity, and then remove itself once it has run out.
  * This timer is a "soft" timer, meaning it will tick down even while other timers would normally stall (e.g. during entity delays or when the entity has a modal open.)
 **/
-class DragonFireImmunity :
-    PersistTimer(1, "dragonfire:immunity", isSoft = true, flags = arrayOf(TimerFlag.ClearOnDeath)) {
+class DragonFireImmunity : PersistTimer(1, "dragonfire:immunity", isSoft = true, flags = arrayOf(TimerFlag.ClearOnDeath)) {
     var ticksRemaining = 0
 
     override fun save(

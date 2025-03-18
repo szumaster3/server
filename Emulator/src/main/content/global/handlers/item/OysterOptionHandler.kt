@@ -44,7 +44,5 @@ class OysterOptionHandler : OptionHandler() {
         return true
     }
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 }

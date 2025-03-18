@@ -104,7 +104,5 @@ class ButlerJonesDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BUTLER_JONES_890)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BUTLER_JONES_890)
 }

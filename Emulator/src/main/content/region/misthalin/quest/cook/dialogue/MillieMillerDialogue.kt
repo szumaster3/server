@@ -122,7 +122,5 @@ class MillieMillerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MILLIE_MILLER_3806)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MILLIE_MILLER_3806)
 }

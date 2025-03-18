@@ -18,14 +18,26 @@ import org.rs.consts.Quests
  * Represents the Duke Horacio dialogues.
  * @author Ceikry
  */
-class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
-
+class DukeHoracioDialogue(
+    player: Player? = null,
+) : Dialogue(player) {
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        if ((player.questRepository.getQuest(Quests.DRAGON_SLAYER).getStage(player) == 100 && !player.inventory.containsItem(DragonSlayer.SHIELD) && !player.bank.containsItem(DragonSlayer.SHIELD) )|| (player.questRepository.getQuest(Quests.DRAGON_SLAYER).isStarted(player) && !player.questRepository.getQuest(Quests.DRAGON_SLAYER).isCompleted(player))) {
+        if ((
+                player.questRepository.getQuest(Quests.DRAGON_SLAYER).getStage(player) == 100 &&
+                    !player.inventory.containsItem(DragonSlayer.SHIELD) &&
+                    !player.bank.containsItem(DragonSlayer.SHIELD)
+            ) ||
+            (
+                player.questRepository.getQuest(Quests.DRAGON_SLAYER).isStarted(player) &&
+                    !player.questRepository.getQuest(Quests.DRAGON_SLAYER).isCompleted(player)
+            )
+        ) {
             addOption(Quests.DRAGON_SLAYER, DukeDragonSlayerDialogue(player.questRepository.getStage(Quests.DRAGON_SLAYER)))
         }
-        if (!player.questRepository.isComplete(Quests.THE_LOST_TRIBE) && player.questRepository.getQuest(Quests.THE_LOST_TRIBE).isStarted(player)) {
+        if (!player.questRepository.isComplete(Quests.THE_LOST_TRIBE) &&
+            player.questRepository.getQuest(Quests.THE_LOST_TRIBE).isStarted(player)
+        ) {
             addOption(Quests.THE_LOST_TRIBE, DukeHoracioLostTribeDialogue(player.questRepository.getStage(Quests.THE_LOST_TRIBE)))
         }
         if (!sendChoices()) {
@@ -34,9 +46,11 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
-
             DIALOGUE_INITIAL_OPTIONS_HANDLE -> {
                 npc("Greetings. Welcome to my castle.")
                 loadFile(optionFiles[buttonId - 1])
@@ -46,21 +60,22 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
                 options("Have you any quests for me?", "Where can I find money?")
                 stage = 1
             }
-            1 -> when (buttonId) {
-                1 -> {
-                    player(FaceAnim.HALF_GUILTY, "Have any quests for me?")
-                    stage = 20
+            1 ->
+                when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.HALF_GUILTY, "Have any quests for me?")
+                        stage = 20
+                    }
+                    2 -> {
+                        npc(
+                            FaceAnim.HALF_GUILTY,
+                            "I hear many of the local people earn money by learning a",
+                            "skill. Many people get by in life by becoming accomplished",
+                            "smiths, cooks, miners and woodcutters.",
+                        )
+                        stage = END_DIALOGUE
+                    }
                 }
-                2 -> {
-                    npc(
-                        FaceAnim.HALF_GUILTY,
-                        "I hear many of the local people earn money by learning a",
-                        "skill. Many people get by in life by becoming accomplished",
-                        "smiths, cooks, miners and woodcutters.",
-                    )
-                    stage = END_DIALOGUE
-                }
-            }
             20 -> {
                 npc("Let me see...")
                 if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
@@ -77,12 +92,7 @@ class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DukeHoracioDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DukeHoracioDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DUKE_HORACIO_741)
-    }
-
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUKE_HORACIO_741)
 }

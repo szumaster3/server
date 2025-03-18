@@ -144,7 +144,5 @@ class PierreDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PIERRE_807)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PIERRE_807)
 }

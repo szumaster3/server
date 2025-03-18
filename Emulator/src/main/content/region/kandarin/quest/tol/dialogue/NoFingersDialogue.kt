@@ -93,7 +93,5 @@ class NoFingersDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NO_FINGERS_5590)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NO_FINGERS_5590)
 }

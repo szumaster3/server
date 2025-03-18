@@ -99,11 +99,10 @@ data class PlayerScore(
             playerScores: List<PlayerScore>,
             team: Boolean,
             winner: Boolean,
-        ): Int {
-            return playerScores
+        ): Int =
+            playerScores
                 .filter { it.team == team }
                 .sumOf { it.total(winner) }
-        }
 
         /**
          * Finds the player with the highest total score.
@@ -114,9 +113,7 @@ data class PlayerScore(
         fun highestTotal(
             playerScores: List<PlayerScore>,
             winnerTeam: Int,
-        ): PlayerScore? {
-            return playerScores.maxByOrNull { it.total(it.team == (winnerTeam == 1)) }
-        }
+        ): PlayerScore? = playerScores.maxByOrNull { it.total(it.team == (winnerTeam == 1)) }
 
         /**
          * Finds the player with the lowest total score.
@@ -127,62 +124,48 @@ data class PlayerScore(
         fun lowestTotal(
             playerScores: List<PlayerScore>,
             winnerTeam: Int,
-        ): PlayerScore? {
-            return playerScores.minByOrNull { it.total(it.team == (winnerTeam == 1)) }
-        }
+        ): PlayerScore? = playerScores.minByOrNull { it.total(it.team == (winnerTeam == 1)) }
 
         /**
          * Finds the player with the most kills.
          * @param playerScores the list of scores
          * @return the player with the most kills
          */
-        fun mostKills(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { it.kills }
-        }
+        fun mostKills(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { it.kills }
 
         /**
          * Finds the player with the most deaths.
          * @param playerScores the list of scores
          * @return the player with the most deaths
          */
-        fun mostDeaths(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { it.deaths }
-        }
+        fun mostDeaths(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { it.deaths }
 
         /**
          * Finds the player who gathered the most resources.
          * @param playerScores the list of scores
          * @return the player with the most gathered resources
          */
-        fun mostGathered(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { it.gather }
-        }
+        fun mostGathered(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { it.gather }
 
         /**
          * Finds the player who processed the most resources.
          * @param playerScores the list of scores
          * @return the player with the most processed resources
          */
-        fun mostProcessed(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { it.process }
-        }
+        fun mostProcessed(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { it.process }
 
         /**
          * Finds the player who deposited the most resources.
          * @param playerScores the list of scores
          * @return the player with the most deposited resources
          */
-        fun mostDeposited(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { (it.depositing - it.withdraw) * 2 }
-        }
+        fun mostDeposited(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { (it.depositing - it.withdraw) * 2 }
 
         /**
          * Finds the player who dealt the most damage.
          * @param playerScores the list of scores
          * @return the player with the most damage dealt
          */
-        fun mostDamaged(playerScores: List<PlayerScore>): PlayerScore? {
-            return playerScores.maxByOrNull { it.damage }
-        }
+        fun mostDamaged(playerScores: List<PlayerScore>): PlayerScore? = playerScores.maxByOrNull { it.damage }
     }
 }

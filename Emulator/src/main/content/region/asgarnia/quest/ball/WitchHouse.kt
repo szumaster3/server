@@ -33,7 +33,7 @@ class WitchHouse : Quest(Quests.WITCHS_HOUSE, 124, 123, 4, Vars.VARP_QUEST_WTICH
                 line(player, "After puzzling through the strangely elaborate security", line++, true)
                 line(player, "system, and defeating a very strange monster, I returned", line++, true)
                 line(player, "the child's ball to him, and he thanked me for my help.", line++, true)
-                line++;
+                line++
                 line(player, "<col=FF0000>QUEST COMPLETE!</col>", line)
             }
         }
@@ -48,7 +48,5 @@ class WitchHouse : Quest(Quests.WITCHS_HOUSE, 124, 123, 4, Vars.VARP_QUEST_WTICH
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.BALL_2407, 240)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

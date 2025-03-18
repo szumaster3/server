@@ -45,11 +45,7 @@ class GateKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GateKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GateKeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GATEKEEPER_3307)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GATEKEEPER_3307)
 }

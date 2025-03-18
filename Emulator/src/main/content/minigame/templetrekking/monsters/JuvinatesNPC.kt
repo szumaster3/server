@@ -15,13 +15,9 @@ class JuvinatesNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return JuvinatesNPC(id, location)
-    }
+    ): AbstractNPC = JuvinatesNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JUVINATE_3576, NPCs.JUVINATE_3577, NPCs.JUVINATE_3578, NPCs.JUVINATE_7418)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JUVINATE_3576, NPCs.JUVINATE_3577, NPCs.JUVINATE_3578, NPCs.JUVINATE_7418)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

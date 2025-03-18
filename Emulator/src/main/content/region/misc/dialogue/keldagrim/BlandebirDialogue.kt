@@ -91,11 +91,7 @@ class BlandebirDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlandebirDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlandebirDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLANDEBIR_2321)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLANDEBIR_2321)
 }

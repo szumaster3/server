@@ -43,7 +43,5 @@ class BellemordeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BELLEMORDE_2942)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BELLEMORDE_2942)
 }

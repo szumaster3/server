@@ -53,11 +53,7 @@ class ZandarHorfyreDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZandarHorfyreDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZandarHorfyreDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZANDAR_HORFYRE_3308)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZANDAR_HORFYRE_3308)
 }

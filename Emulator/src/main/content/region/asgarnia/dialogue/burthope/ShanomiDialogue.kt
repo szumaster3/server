@@ -123,7 +123,5 @@ class ShanomiDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHANOMI_4290)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHANOMI_4290)
 }

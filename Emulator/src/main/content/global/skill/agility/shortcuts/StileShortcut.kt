@@ -59,8 +59,8 @@ class StileShortcut : InteractionListener {
             pLoc: Location,
             sLoc: Location,
             orientation: Orientation,
-        ): Location {
-            return when (orientation) {
+        ): Location =
+            when (orientation) {
                 Orientation.HORIZONTAL -> {
                     if (pLoc.x <= sLoc.x) {
                         sLoc.transform(-1, 0, 0)
@@ -77,14 +77,12 @@ class StileShortcut : InteractionListener {
                     }
                 }
             }
-        }
 
-        fun getOrientation(rotation: Direction): Orientation {
-            return when (rotation) {
+        fun getOrientation(rotation: Direction): Orientation =
+            when (rotation) {
                 Direction.EAST, Direction.WEST -> Orientation.HORIZONTAL
                 else -> Orientation.VERTICAL
             }
-        }
 
         fun handleFalconry(
             p: Player,

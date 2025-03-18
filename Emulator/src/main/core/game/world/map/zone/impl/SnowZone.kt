@@ -24,8 +24,8 @@ class SnowZone :
         register(TROLLWEIS_MOUNTAIN_2)
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             ZoneBorders(2728, 3716, 2732, 3731),
             ZoneBorders(2733, 3716, 2738, 3730),
             ZoneBorders(2751, 3740, 2735, 3712),
@@ -33,7 +33,6 @@ class SnowZone :
             getRegionBorders(11067),
             getRegionBorders(11068),
         )
-    }
 
     override fun entityStep(
         entity: Entity,

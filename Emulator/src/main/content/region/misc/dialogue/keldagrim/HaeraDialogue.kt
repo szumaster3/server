@@ -73,11 +73,7 @@ class HaeraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HaeraDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HaeraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HAERA_2189)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HAERA_2189)
 }

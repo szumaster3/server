@@ -7,13 +7,9 @@ class NPCDropTable : WeightBasedTable() {
     private val charmDrops = WeightBasedTable()
     private val tertiaryDrops = WeightBasedTable()
 
-    fun addToCharms(element: WeightedItem): Boolean {
-        return charmDrops.add(element)
-    }
+    fun addToCharms(element: WeightedItem): Boolean = charmDrops.add(element)
 
-    fun addToTertiary(element: WeightedItem): Boolean {
-        return tertiaryDrops.add(element)
-    }
+    fun addToTertiary(element: WeightedItem): Boolean = tertiaryDrops.add(element)
 
     override fun roll(
         receiver: Entity?,

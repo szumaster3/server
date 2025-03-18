@@ -213,7 +213,5 @@ class PontimerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PONTIMER_7603)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PONTIMER_7603)
 }

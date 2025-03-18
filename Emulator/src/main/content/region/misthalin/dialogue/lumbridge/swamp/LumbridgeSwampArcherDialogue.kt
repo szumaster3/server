@@ -37,11 +37,7 @@ class LumbridgeSwampArcherDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LumbridgeSwampArcherDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LumbridgeSwampArcherDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARCHER_649)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARCHER_649)
 }

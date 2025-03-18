@@ -56,9 +56,7 @@ class DadDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAD_1125)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAD_1125)
 }
 
 class DadDialogueFile(

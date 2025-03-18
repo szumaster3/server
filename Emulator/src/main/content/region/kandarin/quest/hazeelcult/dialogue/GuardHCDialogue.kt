@@ -137,7 +137,5 @@ class GuardHCDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_887)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_887)
 }

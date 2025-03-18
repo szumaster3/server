@@ -25,24 +25,19 @@ class HeroesQuest : Quest(Quests.HEROES_QUEST, 75, 74, 1, Vars.VARP_QUEST_HEROES
         const val attributeHasOpenedBackdoor = "/save:quest:heroesquest-hasopenedbackdoor"
         const val attributeHasOpenedChestDoor = "/save:quest:heroesquest-hasopenedchestdoor"
 
-        fun checkQuestsAreComplete(player: Player): Boolean {
-            return isQuestComplete(player, Quests.SHIELD_OF_ARRAV) &&
+        fun checkQuestsAreComplete(player: Player): Boolean =
+            isQuestComplete(player, Quests.SHIELD_OF_ARRAV) &&
                 isQuestComplete(player, Quests.LOST_CITY) &&
                 isQuestComplete(player, Quests.MERLINS_CRYSTAL) &&
                 isQuestComplete(player, Quests.DRAGON_SLAYER) &&
                 getQuestPoints(player) >= 55
-        }
 
-        fun isPhoenix(player: Player): Boolean {
-            return ShieldofArrav.isPhoenix(player)
-        }
+        fun isPhoenix(player: Player): Boolean = ShieldofArrav.isPhoenix(player)
 
-        fun isBlackArm(player: Player): Boolean {
-            return ShieldofArrav.isBlackArm(player)
-        }
+        fun isBlackArm(player: Player): Boolean = ShieldofArrav.isBlackArm(player)
 
-        fun hasRequirements(player: Player): Boolean {
-            return arrayOf(
+        fun hasRequirements(player: Player): Boolean =
+            arrayOf(
                 hasLevelStat(player, Skills.HERBLORE, 25),
                 hasLevelStat(player, Skills.MINING, 50),
                 hasLevelStat(player, Skills.FISHING, 53),
@@ -53,13 +48,11 @@ class HeroesQuest : Quest(Quests.HEROES_QUEST, 75, 74, 1, Vars.VARP_QUEST_HEROES
                 isQuestComplete(player, Quests.DRAGON_SLAYER),
                 getQuestPoints(player) >= 55,
             ).all { it }
-        }
 
-        fun allItemsInInventory(player: Player): Boolean {
-            return inInventory(player, Items.FIRE_FEATHER_1583) &&
+        fun allItemsInInventory(player: Player): Boolean =
+            inInventory(player, Items.FIRE_FEATHER_1583) &&
                 inInventory(player, Items.LAVA_EEL_2149) &&
                 inInventory(player, Items.THIEVES_ARMBAND_1579)
-        }
     }
 
     override fun drawJournal(
@@ -234,7 +227,5 @@ class HeroesQuest : Quest(Quests.HEROES_QUEST, 75, 74, 1, Vars.VARP_QUEST_HEROES
         rewardXP(player, Skills.HERBLORE, 1325.0)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

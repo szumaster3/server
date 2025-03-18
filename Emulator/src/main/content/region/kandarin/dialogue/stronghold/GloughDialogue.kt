@@ -40,11 +40,7 @@ class GloughDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GloughDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GloughDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GLOUGH_671)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GLOUGH_671)
 }

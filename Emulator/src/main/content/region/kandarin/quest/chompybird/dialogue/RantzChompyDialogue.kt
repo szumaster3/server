@@ -147,7 +147,5 @@ class RantzChompyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANTZ_1010)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANTZ_1010)
 }

@@ -74,7 +74,5 @@ class GhommalDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOMMAL_4285)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOMMAL_4285)
 }

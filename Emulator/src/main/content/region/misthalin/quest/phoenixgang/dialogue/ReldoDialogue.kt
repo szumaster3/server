@@ -668,7 +668,5 @@ class ReldoDialogue(
         stage = 0
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RELDO_2660, NPCs.RELDO_2661)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RELDO_2660, NPCs.RELDO_2661)
 }

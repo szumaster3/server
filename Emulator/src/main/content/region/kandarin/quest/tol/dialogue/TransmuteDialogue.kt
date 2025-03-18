@@ -86,7 +86,5 @@ class TransmuteDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRANSMUTE_THE_ALCHEMIST_5585)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRANSMUTE_THE_ALCHEMIST_5585)
 }

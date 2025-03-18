@@ -36,13 +36,9 @@ class BugsChompyDialogue(
     override fun handle(
         componentId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BUGS_1012)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BUGS_1012)
 }
 
 class BugsChompyDialogueFile(

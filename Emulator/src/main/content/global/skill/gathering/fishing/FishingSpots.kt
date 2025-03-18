@@ -222,12 +222,11 @@ enum class FishingSpots(
         }
 
         @JvmStatic
-        fun forLocation(loc: Location): FishingSpots? {
-            return if (locMap[loc] == null) {
+        fun forLocation(loc: Location): FishingSpots? =
+            if (locMap[loc] == null) {
                 TUTORIAL_ISLAND
             } else {
                 locMap[loc]
             }
-        }
     }
 }

@@ -37,9 +37,7 @@ class BloatedToadNPC : AbstractNPC {
         return npc
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLOATED_TOAD_1014)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLOATED_TOAD_1014)
 
     override fun handleTickActions() {
         super.handleTickActions()

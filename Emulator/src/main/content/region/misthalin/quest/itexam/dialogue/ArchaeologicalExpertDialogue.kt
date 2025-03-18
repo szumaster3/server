@@ -211,7 +211,5 @@ class ArchaeologicalExpertDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARCHAEOLOGICAL_EXPERT_619)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARCHAEOLOGICAL_EXPERT_619)
 }

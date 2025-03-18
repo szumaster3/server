@@ -25,9 +25,7 @@ class AIRepository {
         }
 
         @JvmStatic
-        fun getItems(player: Player): ArrayList<GroundItem>? {
-            return groundItems[player]
-        }
+        fun getItems(player: Player): ArrayList<GroundItem>? = groundItems[player]
 
         @JvmStatic
         fun addOffer(
@@ -38,9 +36,7 @@ class AIRepository {
         }
 
         @JvmStatic
-        fun getOffer(player: Player): GrandExchangeOffer? {
-            return GrandExchangeOffers[player]
-        }
+        fun getOffer(player: Player): GrandExchangeOffer? = GrandExchangeOffers[player]
 
         @JvmStatic
         fun clearAllBots() {

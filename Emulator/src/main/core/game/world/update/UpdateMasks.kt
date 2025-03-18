@@ -158,16 +158,12 @@ class UpdateMasks(
         updating.set(false)
     }
 
-    fun isUpdating(): Boolean {
-        return updating.get()
-    }
+    fun isUpdating(): Boolean = updating.get()
 
     val isUpdateRequired: Boolean
         get() = presenceFlags != 0
 
-    fun hasSynced(): Boolean {
-        return syncedPresenceFlags != 0
-    }
+    fun hasSynced(): Boolean = syncedPresenceFlags != 0
 
     companion object {
         const val SIZE = 11

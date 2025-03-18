@@ -32,9 +32,7 @@ class CompostBin(
         updateBit()
     }
 
-    fun isFull(): Boolean {
-        return items.size == 15
-    }
+    fun isFull(): Boolean = items.size == 15
 
     fun close() {
         isClosed = true
@@ -75,16 +73,12 @@ class CompostBin(
         return Item(item)
     }
 
-    fun isDefaultState(): Boolean {
-        return (isFinished == false && finishedTime == 0L && items.size == 0)
-    }
+    fun isDefaultState(): Boolean = (isFinished == false && finishedTime == 0L && items.size == 0)
 
-    fun isReady(): Boolean {
-        return System.currentTimeMillis() > finishedTime && finishedTime != 0L
-    }
+    fun isReady(): Boolean = System.currentTimeMillis() > finishedTime && finishedTime != 0L
 
-    fun checkSuperCompostItem(id: Int): Boolean {
-        return when (id) {
+    fun checkSuperCompostItem(id: Int): Boolean =
+        when (id) {
             Items.WATERMELON_5982,
             Items.PINEAPPLE_2114,
             Items.CALQUAT_FRUIT_5980,
@@ -119,7 +113,6 @@ class CompostBin(
 
             else -> false
         }
-    }
 
     fun addItem(item: Int) {
         if (!isFull()) {

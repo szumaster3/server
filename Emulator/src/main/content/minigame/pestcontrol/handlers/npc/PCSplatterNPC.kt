@@ -48,9 +48,7 @@ class PCSplatterNPC : AbstractNPC {
         }
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -120,19 +118,16 @@ class PCSplatterNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCSplatterNPC(id, location)
-    }
+    ): AbstractNPC = PCSplatterNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SPLATTER_3727,
             NPCs.SPLATTER_3728,
             NPCs.SPLATTER_3729,
             NPCs.SPLATTER_3730,
             NPCs.SPLATTER_3731,
         )
-    }
 
     companion object {
         private fun isTarget(id: Int): Boolean {

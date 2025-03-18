@@ -31,9 +31,7 @@ class ClobberSpecialHandler :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any {
-        return Unit
-    }
+    ): Any = Unit
 
     override fun visualize(
         entity: Entity,

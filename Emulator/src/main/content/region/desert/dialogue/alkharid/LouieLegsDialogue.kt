@@ -40,11 +40,7 @@ class LouieLegsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LouieLegsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LouieLegsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOUIE_LEGS_542)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOUIE_LEGS_542)
 }

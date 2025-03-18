@@ -33,13 +33,9 @@ class Grave : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return Grave(id, location)
-    }
+    ): AbstractNPC = Grave(id, location)
 
-    override fun getIds(): IntArray {
-        return GraveType.ids
-    }
+    override fun getIds(): IntArray = GraveType.ids
 
     fun configureType(type: GraveType) {
         this.type = type
@@ -175,15 +171,12 @@ class Grave : AbstractNPC {
         clearHintIcon(owner)
     }
 
-    fun getItems(): Array<GroundItem> {
-        return this.items.toTypedArray()
-    }
+    fun getItems(): Array<GroundItem> = this.items.toTypedArray()
 
-    fun getFormattedText(): String {
-        return type.text
+    fun getFormattedText(): String =
+        type.text
             .replace("@name", ownerUsername)
             .replace("@mins", getFormattedTimeRemaining())
-    }
 
     fun getFormattedTimeRemaining(): String {
         val seconds = ticksToSeconds(ticksRemaining)

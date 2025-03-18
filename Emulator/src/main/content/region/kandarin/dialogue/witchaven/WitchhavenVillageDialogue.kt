@@ -61,12 +61,10 @@ class WitchhavenVillageDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return WitchhavenVillageDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = WitchhavenVillageDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.WITCHAVEN_VILLAGER_4883,
             NPCs.WITCHAVEN_VILLAGER_4884,
             NPCs.WITCHAVEN_VILLAGER_4885,
@@ -74,7 +72,6 @@ class WitchhavenVillageDialogue(
             NPCs.WITCHAVEN_VILLAGER_4887,
             NPCs.WITCHAVEN_VILLAGER_4888,
         )
-    }
 
     companion object {
         private val conversations = arrayOf(0, 7, 11, 19, 24)

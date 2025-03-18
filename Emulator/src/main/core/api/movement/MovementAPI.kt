@@ -10,8 +10,6 @@ import core.game.world.GameWorld
  * @param entity The entity whose movement status is being checked.
  * @return True if the entity has finished moving, otherwise false.
  */
-fun finishedMoving(entity: Entity): Boolean {
-    return entity.clocks[Clocks.MOVEMENT] < GameWorld.ticks
-}
+fun finishedMoving(entity: Entity): Boolean = entity.clocks[Clocks.MOVEMENT] < GameWorld.ticks
 
 private class MovementAPI

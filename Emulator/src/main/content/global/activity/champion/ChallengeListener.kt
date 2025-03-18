@@ -248,13 +248,10 @@ class ChallengeListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(regionID))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(regionID))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
 
     companion object {
         fun isFinalBattle(player: Player) {

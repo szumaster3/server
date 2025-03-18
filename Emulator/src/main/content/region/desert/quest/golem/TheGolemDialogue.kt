@@ -54,9 +54,7 @@ class ClayGolemDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(1907, NPCs.BROKEN_CLAY_GOLEM_1908, NPCs.DAMAGED_CLAY_GOLEM_1909, NPCs.CLAY_GOLEM_1910)
-    }
+    override fun getIds(): IntArray = intArrayOf(1907, NPCs.BROKEN_CLAY_GOLEM_1908, NPCs.DAMAGED_CLAY_GOLEM_1909, NPCs.CLAY_GOLEM_1910)
 }
 
 class ClayGolemDialogueFile : DialogueBuilderFile() {

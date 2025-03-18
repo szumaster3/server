@@ -55,11 +55,7 @@ class LisseIsaaksonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LisseIsaaksonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LisseIsaaksonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LISSE_ISAAKSON_5513)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LISSE_ISAAKSON_5513)
 }

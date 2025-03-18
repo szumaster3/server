@@ -1,7 +1,7 @@
 package content.minigame.sorceressgarden.handlers
 
-import content.minigame.sorceressgarden.handlers.SorceressGarden.SeasonDefinitions.Companion.forGateId
 import content.minigame.sorceressgarden.dialogue.SorceressApprenticeDialogue
+import content.minigame.sorceressgarden.handlers.SorceressGarden.SeasonDefinitions.Companion.forGateId
 import core.api.*
 import core.api.ui.setMinimapState
 import core.game.dialogue.Dialogue
@@ -381,9 +381,7 @@ class SqirkMakingDialogue(
     private var dialogueId = 0
     private var definition: SorceressGarden.SeasonDefinitions? = null
 
-    override fun getIds(): IntArray {
-        return intArrayOf(43382)
-    }
+    override fun getIds(): IntArray = intArrayOf(43382)
 
     override fun handle(
         interfaceId: Int,

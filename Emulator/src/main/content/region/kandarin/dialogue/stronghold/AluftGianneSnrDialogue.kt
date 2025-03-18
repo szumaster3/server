@@ -185,17 +185,11 @@ class AluftGianneSnrDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AluftGianneSnrDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AluftGianneSnrDialogue(player)
 
-    override fun npc(vararg messages: String?): Component {
-        return super.npc(FaceAnim.OLD_NORMAL, *messages)
-    }
+    override fun npc(vararg messages: String?): Component = super.npc(FaceAnim.OLD_NORMAL, *messages)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALUFT_GIANNE_SNR_850)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALUFT_GIANNE_SNR_850)
 
     private fun getJob(level: GnomeCookingTipper.LEVEL) {
         if (!player.inventory.containsItem(ALUFT_ALOFT_BOX) && !player.bank.containsItem(ALUFT_ALOFT_BOX)) {

@@ -205,7 +205,5 @@ class KlarenseDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KLARENSE_744)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KLARENSE_744)
 }

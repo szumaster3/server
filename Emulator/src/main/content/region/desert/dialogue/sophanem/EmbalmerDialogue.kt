@@ -42,7 +42,5 @@ class EmbalmerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EMBALMER_1980)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EMBALMER_1980)
 }

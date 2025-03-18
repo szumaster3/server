@@ -269,7 +269,5 @@ class FatherAereckDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FATHER_AERECK_456)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FATHER_AERECK_456)
 }

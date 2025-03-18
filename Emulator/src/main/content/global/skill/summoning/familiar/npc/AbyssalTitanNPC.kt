@@ -25,22 +25,19 @@ class AbyssalTitanNPC
         override fun construct(
             owner: Player,
             id: Int,
-        ): Familiar {
-            return AbyssalTitanNPC(owner, id)
-        }
+        ): Familiar = AbyssalTitanNPC(owner, id)
 
         override fun isAllowed(
             owner: Player,
             item: Item,
-        ): Boolean {
-            return when (item.id) {
+        ): Boolean =
+            when (item.id) {
                 Items.RUNE_ESSENCE_1436, Items.PURE_ESSENCE_7936 -> super.isAllowed(owner, item)
                 else -> {
                     owner.packetDispatch.sendMessage("Your familiar can only hold unnoted essence.")
                     false
                 }
             }
-        }
 
         override fun specialMove(special: FamiliarSpecial): Boolean {
             val playerRuneEssenceAmount = amountInInventory(owner, Items.RUNE_ESSENCE_1436)
@@ -91,7 +88,5 @@ class AbyssalTitanNPC
             visualize(Animation.create(7694), Graphics.create(1457))
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.ABYSSAL_TITAN_7349, NPCs.ABYSSAL_TITAN_7350)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_TITAN_7349, NPCs.ABYSSAL_TITAN_7350)
     }

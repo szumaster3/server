@@ -6,7 +6,6 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
 
 class GnomeCocktailInterface : InterfaceListener {
-
     private val cookingGnomeCocktailsInterface = 436
 
     override fun defineInterfaceListeners() {
@@ -27,16 +26,17 @@ class GnomeCocktailInterface : InterfaceListener {
 
         on(cookingGnomeCocktailsInterface) { player, _, _, buttonID, _, _ ->
             var hasAll = true
-            val cocktail: FruitCocktail? = when (buttonID) {
-                3 -> FruitCocktail.WIZARD_BLIZZARD
-                16 -> FruitCocktail.SHORT_GREEN_GUY
-                23 -> FruitCocktail.FRUIT_BLAST
-                32 -> FruitCocktail.PINEAPPLE_PUNCH
-                41 -> FruitCocktail.DRUNK_DRAGON
-                50 -> FruitCocktail.CHOC_SATURDAY
-                61 -> FruitCocktail.BLURBERRY_SPEC
-                else -> null
-            }
+            val cocktail: FruitCocktail? =
+                when (buttonID) {
+                    3 -> FruitCocktail.WIZARD_BLIZZARD
+                    16 -> FruitCocktail.SHORT_GREEN_GUY
+                    23 -> FruitCocktail.FRUIT_BLAST
+                    32 -> FruitCocktail.PINEAPPLE_PUNCH
+                    41 -> FruitCocktail.DRUNK_DRAGON
+                    50 -> FruitCocktail.CHOC_SATURDAY
+                    61 -> FruitCocktail.BLURBERRY_SPEC
+                    else -> null
+                }
 
             if (cocktail != null) {
                 val cookingLevel = getStatLevel(player, Skills.COOKING)
@@ -76,14 +76,42 @@ class GnomeCocktailInterface : InterfaceListener {
         val levelReq: Int,
         val experience: Double,
         val product: Int,
-        vararg val requiredItems: Int
+        vararg val requiredItems: Int,
     ) {
         FRUIT_BLAST(6, 50.0, Items.MIXED_BLAST_9568, Items.PINEAPPLE_2114, Items.LEMON_2102, Items.ORANGE_2108),
         PINEAPPLE_PUNCH(8, 70.0, Items.MIXED_PUNCH_9569, Items.PINEAPPLE_2114, Items.PINEAPPLE_2114, Items.LEMON_2102, Items.ORANGE_2108),
-        WIZARD_BLIZZARD(18, 110.0, Items.MIXED_BLIZZARD_9566, Items.VODKA_2015, Items.VODKA_2015, Items.GIN_2019, Items.LIME_2120, Items.LEMON_2102, Items.ORANGE_2108),
+        WIZARD_BLIZZARD(
+            18,
+            110.0,
+            Items.MIXED_BLIZZARD_9566,
+            Items.VODKA_2015,
+            Items.VODKA_2015,
+            Items.GIN_2019,
+            Items.LIME_2120,
+            Items.LEMON_2102,
+            Items.ORANGE_2108,
+        ),
         SHORT_GREEN_GUY(20, 120.0, Items.MIXED_SGG_9567, Items.VODKA_2015, Items.LIME_2120, Items.LIME_2120, Items.LIME_2120),
         DRUNK_DRAGON(32, 160.0, Items.MIXED_DRAGON_9574, Items.VODKA_2015, Items.GIN_2019, Items.DWELLBERRIES_2126),
-        CHOC_SATURDAY(33, 170.0, Items.MIXED_SATURDAY_9571, Items.WHISKY_2017, Items.CHOCOLATE_BAR_1973, Items.EQUA_LEAVES_2128, Items.BUCKET_OF_MILK_1927),
-        BLURBERRY_SPEC(37, 180.0, Items.MIXED_BLURBERRY_SPECIAL_9570, Items.VODKA_2015, Items.BRANDY_2021, Items.GIN_2019, Items.LEMON_2102, Items.LEMON_2102, Items.ORANGE_2108),
+        CHOC_SATURDAY(
+            33,
+            170.0,
+            Items.MIXED_SATURDAY_9571,
+            Items.WHISKY_2017,
+            Items.CHOCOLATE_BAR_1973,
+            Items.EQUA_LEAVES_2128,
+            Items.BUCKET_OF_MILK_1927,
+        ),
+        BLURBERRY_SPEC(
+            37,
+            180.0,
+            Items.MIXED_BLURBERRY_SPECIAL_9570,
+            Items.VODKA_2015,
+            Items.BRANDY_2021,
+            Items.GIN_2019,
+            Items.LEMON_2102,
+            Items.LEMON_2102,
+            Items.ORANGE_2108,
+        ),
     }
 }

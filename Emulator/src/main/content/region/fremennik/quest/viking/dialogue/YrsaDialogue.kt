@@ -195,7 +195,5 @@ class YrsaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.YRSA_1301)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.YRSA_1301)
 }

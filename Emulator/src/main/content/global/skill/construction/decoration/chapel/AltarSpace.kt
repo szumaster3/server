@@ -98,15 +98,14 @@ class AltarSpace : InteractionListener {
         )
     }
 
-    private fun isLit(obj: Scenery?): Boolean {
-        return obj != null &&
+    private fun isLit(obj: Scenery?): Boolean =
+        obj != null &&
             obj.id != org.rs.consts.Scenery.LAMP_SPACE_15271 &&
             SceneryDefinition.forId(obj.id).options != null &&
             !SceneryDefinition
                 .forId(
                     obj.id,
                 ).hasAction("light")
-    }
 
     private fun getBase(altar: Scenery?): Double {
         var base = 150.0
@@ -144,13 +143,12 @@ class AltarSpace : InteractionListener {
     private fun getMessage(
         isLeft: Boolean,
         isRight: Boolean,
-    ): String {
-        return when {
+    ): String =
+        when {
             isLeft && isRight -> "The gods are very pleased with your offering."
             isLeft || isRight -> "The gods are pleased with your offering."
             else -> "The gods accept your offering."
         }
-    }
 
     companion object {
         private val GFX = Graphics(org.rs.consts.Graphics.BONE_ON_ALTAR_624)

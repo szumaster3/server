@@ -14,7 +14,6 @@ import org.rs.consts.Quests
 class TorrcsAndMarfetDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
@@ -338,12 +337,7 @@ class TorrcsAndMarfetDialogue(
         return true
     }
 
+    override fun newInstance(player: Player): Dialogue = TorrcsAndMarfetDialogue(player)
 
-    override fun newInstance(player: Player): Dialogue {
-        return TorrcsAndMarfetDialogue(player)
-    }
-
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TORRCS_5939, NPCs.MARFET_5940)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TORRCS_5939, NPCs.MARFET_5940)
 }

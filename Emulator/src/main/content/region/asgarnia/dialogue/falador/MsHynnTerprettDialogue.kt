@@ -19,7 +19,5 @@ class MsHynnTerprettDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MS_HYNN_TERPRETT_2289)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MS_HYNN_TERPRETT_2289)
 }

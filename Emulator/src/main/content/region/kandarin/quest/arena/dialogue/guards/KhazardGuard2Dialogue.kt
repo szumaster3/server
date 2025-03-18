@@ -84,7 +84,5 @@ class KhazardGuard2Dialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_GUARD_254)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_GUARD_254)
 }

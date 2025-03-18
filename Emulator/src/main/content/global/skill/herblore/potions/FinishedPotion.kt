@@ -228,14 +228,13 @@ enum class FinishedPotion(
         fun getPotion(
             unf: Item,
             ingredient: Item,
-        ): FinishedPotion? {
-            return Arrays
+        ): FinishedPotion? =
+            Arrays
                 .stream(values())
                 .filter { potion: FinishedPotion? ->
                     potion!!.unfinished.potion.id == unf.id &&
                         potion.ingredient.id == ingredient.id
                 }.findFirst()
                 .orElse(null)
-        }
     }
 }

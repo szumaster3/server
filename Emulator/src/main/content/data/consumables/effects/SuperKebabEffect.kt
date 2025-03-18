@@ -17,9 +17,8 @@ class SuperKebabEffect : ConsumableEffect() {
         }
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return if (RandomFunction.nextInt(8) < 5) (3 + (player.getSkills().maximumLifepoints * 0.07)).toInt() else 0
-    }
+    override fun getHealthEffectValue(player: Player): Int =
+        if (RandomFunction.nextInt(8) < 5) (3 + (player.getSkills().maximumLifepoints * 0.07)).toInt() else 0
 
     companion object {
         private val healingEffect = MultiEffect(HealingEffect(3), PercentageHealthEffect(7))

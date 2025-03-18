@@ -46,11 +46,7 @@ class RanaelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RanaelDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RanaelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANAEL_544)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANAEL_544)
 }

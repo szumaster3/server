@@ -22,13 +22,9 @@ class MonkNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MonkNPC(id, location)
-    }
+    ): AbstractNPC = MonkNPC(id, location)
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return CombatAction()
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = CombatAction()
 
     private class CombatAction : MeleeSwingHandler() {
         override fun swing(
@@ -49,7 +45,5 @@ class MonkNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_7727)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_7727)
 }

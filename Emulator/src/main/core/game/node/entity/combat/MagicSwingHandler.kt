@@ -265,11 +265,10 @@ open class MagicSwingHandler(
         super.addExperience(entity, victim, state)
     }
 
-    override fun getArmourSet(e: Entity?): ArmourSet? {
-        return if (ArmourSet.AHRIM.isUsing(e)) {
+    override fun getArmourSet(e: Entity?): ArmourSet? =
+        if (ArmourSet.AHRIM.isUsing(e)) {
             ArmourSet.AHRIM
         } else {
             super.getArmourSet(e)
         }
-    }
 }

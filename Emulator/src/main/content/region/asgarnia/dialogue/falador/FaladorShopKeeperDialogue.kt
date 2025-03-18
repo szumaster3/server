@@ -52,7 +52,5 @@ class FaladorShopKeeperDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_526, NPCs.SHOP_ASSISTANT_527)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_526, NPCs.SHOP_ASSISTANT_527)
 }

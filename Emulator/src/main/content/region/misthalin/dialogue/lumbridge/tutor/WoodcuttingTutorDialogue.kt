@@ -257,11 +257,7 @@ class WoodcuttingTutorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return WoodcuttingTutorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = WoodcuttingTutorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WOODCUTTING_TUTOR_4906)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WOODCUTTING_TUTOR_4906)
 }

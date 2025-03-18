@@ -12,7 +12,5 @@ class PoisonEffect(
         impact(player, amount, ImpactHandler.HitsplatType.POISON)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return -amount
-    }
+    override fun getHealthEffectValue(player: Player): Int = -amount
 }

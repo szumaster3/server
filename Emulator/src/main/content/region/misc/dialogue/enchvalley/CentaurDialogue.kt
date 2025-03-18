@@ -28,15 +28,9 @@ class CentaurDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CentaurDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CentaurDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CENTAUR_4438, NPCs.CENTAUR_4439)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CENTAUR_4438, NPCs.CENTAUR_4439)
 }

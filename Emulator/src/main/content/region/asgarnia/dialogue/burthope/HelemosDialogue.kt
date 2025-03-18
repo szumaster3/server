@@ -50,7 +50,5 @@ class HelemosDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HELEMOS_797)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HELEMOS_797)
 }

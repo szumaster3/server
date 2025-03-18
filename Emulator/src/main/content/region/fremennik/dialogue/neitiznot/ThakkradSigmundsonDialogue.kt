@@ -26,11 +26,7 @@ class ThakkradSigmundsonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ThakkradSigmundsonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ThakkradSigmundsonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THAKKRAD_SIGMUNDSON_5506)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THAKKRAD_SIGMUNDSON_5506)
 }

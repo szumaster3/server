@@ -35,11 +35,7 @@ class CreakykneesDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CreakykneesDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CreakykneesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CREAKYKNEES_6129)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CREAKYKNEES_6129)
 }

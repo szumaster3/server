@@ -40,7 +40,5 @@ class TribalWeaponSalesmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
 }

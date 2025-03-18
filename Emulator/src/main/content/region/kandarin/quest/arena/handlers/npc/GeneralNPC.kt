@@ -23,13 +23,9 @@ class GeneralNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GeneralNPC(id, location)
-    }
+    ): AbstractNPC = GeneralNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GENERAL_KHAZARD_258)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_KHAZARD_258)
 
     override fun handleTickActions() {
         super.handleTickActions()

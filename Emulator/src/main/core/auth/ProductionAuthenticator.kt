@@ -59,9 +59,7 @@ class ProductionAuthenticator : AuthProvider<AccountStorageProvider>() {
     override fun checkPassword(
         player: Player,
         password: String,
-    ): Boolean {
-        return SystemManager.encryption.checkPassword(password, player.details.password)
-    }
+    ): Boolean = SystemManager.encryption.checkPassword(password, player.details.password)
 
     override fun updatePassword(
         username: String,

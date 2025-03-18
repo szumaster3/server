@@ -42,7 +42,5 @@ class FishingPlatformJebDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JEB_4896)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEB_4896)
 }

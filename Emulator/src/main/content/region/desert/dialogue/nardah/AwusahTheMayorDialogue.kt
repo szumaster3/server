@@ -24,15 +24,9 @@ class AwusahTheMayorDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AwusahTheMayorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AwusahTheMayorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AWUSAH_THE_MAYOR_3040)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AWUSAH_THE_MAYOR_3040)
 }

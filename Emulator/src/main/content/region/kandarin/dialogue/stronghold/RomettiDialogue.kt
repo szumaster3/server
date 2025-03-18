@@ -47,11 +47,7 @@ class RomettiDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RomettiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RomettiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROMETTI_601)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROMETTI_601)
 }

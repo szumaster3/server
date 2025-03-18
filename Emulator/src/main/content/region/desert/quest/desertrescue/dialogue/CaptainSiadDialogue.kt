@@ -112,7 +112,5 @@ class CaptainSiadDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(831)
-    }
+    override fun getIds(): IntArray = intArrayOf(831)
 }

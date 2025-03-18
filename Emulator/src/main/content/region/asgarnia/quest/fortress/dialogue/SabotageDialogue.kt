@@ -163,7 +163,5 @@ class SabotageDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(992752973)
-    }
+    override fun getIds(): IntArray = intArrayOf(992752973)
 }

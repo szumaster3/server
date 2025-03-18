@@ -72,11 +72,7 @@ class MyndillDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MyndillDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MyndillDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYNDILL_2197)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYNDILL_2197)
 }

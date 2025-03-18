@@ -250,11 +250,7 @@ class ElunedDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELUNED_1679)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELUNED_1679)
 
-    fun crystalTeleportPrice(timesRecharged: Int): Int {
-        return Math.max(750 - 150 * timesRecharged, 150)
-    }
+    fun crystalTeleportPrice(timesRecharged: Int): Int = Math.max(750 - 150 * timesRecharged, 150)
 }

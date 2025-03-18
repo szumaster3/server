@@ -9,13 +9,9 @@ class TimeStamp {
         interval = start
     }
 
-    fun interval(): Long {
-        return interval(true, "")
-    }
+    fun interval(): Long = interval(true, "")
 
-    fun interval(debug: Boolean): Long {
-        return interval(debug, "")
-    }
+    fun interval(debug: Boolean): Long = interval(debug, "")
 
     fun interval(
         debug: Boolean,

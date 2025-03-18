@@ -45,13 +45,9 @@ class GardenerGhostDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GardenerGhostDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GardenerGhostDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARDENER_GHOST_1675)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARDENER_GHOST_1675)
 }
 
 class GardenerGhostDialogueFile : DialogueBuilderFile() {

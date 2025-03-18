@@ -48,11 +48,7 @@ class AablaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AablaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AablaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AABLA_959)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AABLA_959)
 }

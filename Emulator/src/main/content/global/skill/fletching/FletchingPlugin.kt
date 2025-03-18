@@ -62,13 +62,12 @@ class FletchingPlugin :
         return this
     }
 
-    override fun handle(event: NodeUsageEvent): Boolean {
-        return when {
+    override fun handle(event: NodeUsageEvent): Boolean =
+        when {
             Dart.isDart(event.usedItem.id) -> handleDart(event)
             Bolt.isBolt(event.usedItem.id) || Bolt.isBolt(event.usedWith.id) -> handleBolt(event)
             else -> false
         }
-    }
 
     private fun handleDart(event: NodeUsageEvent): Boolean {
         val dart = Dart.product[event.usedItem.id] ?: return false
@@ -89,12 +88,11 @@ class FletchingPlugin :
                     )
                 }
 
-                override fun getAll(index: Int): Int {
-                    return min(
+                override fun getAll(index: Int): Int =
+                    min(
                         amountInInventory(player, event.usedItem.id),
                         amountInInventory(player, event.usedWith.id),
                     )
-                }
             }
         handler.open()
         return true
@@ -124,12 +122,11 @@ class FletchingPlugin :
                     )
                 }
 
-                override fun getAll(index: Int): Int {
-                    return min(
+                override fun getAll(index: Int): Int =
+                    min(
                         amountInInventory(player, event.usedItem.id),
                         amountInInventory(player, event.usedWith.id),
                     )
-                }
             }
         handler.open()
         return true

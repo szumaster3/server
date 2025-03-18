@@ -40,11 +40,7 @@ class FionellaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FionellaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FionellaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIONELLA_932)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIONELLA_932)
 }

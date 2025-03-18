@@ -23,13 +23,9 @@ class BouncerNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BouncerNPC(id, location)
-    }
+    ): AbstractNPC = BouncerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOUNCER_269)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOUNCER_269)
 
     companion object {
         fun spawnBouncer(player: Player) {

@@ -9,9 +9,7 @@ import org.rs.consts.Quests
 class HudonDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("hudon_dialogue"), 305)
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hudon_dialogue"), 305)
 
     override fun handle(
         interfaceId: Int,

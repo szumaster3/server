@@ -49,8 +49,6 @@ enum class Pottery(
 
     companion object {
         @JvmStatic
-        fun forId(id: Int): Pottery? {
-            return values().find { it.unfinished.id == id }
-        }
+        fun forId(id: Int): Pottery? = values().find { it.unfinished.id == id }
     }
 }

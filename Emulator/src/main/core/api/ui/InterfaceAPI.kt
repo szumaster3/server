@@ -30,9 +30,7 @@ fun setInterfaceText(
  *
  * @param player The player whose interface tabs are being restored.
  */
-fun restoreTabs(player: Player) {
-    return player.interfaceManager.restoreTabs()
-}
+fun restoreTabs(player: Player) = player.interfaceManager.restoreTabs()
 
 /**
  * Opens a specific interface tab for a player.
@@ -56,9 +54,7 @@ fun openSingleTab(
 fun setMinimapState(
     player: Player,
     state: Int,
-) {
-    return PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, state))
-}
+) = PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, state))
 
 /**
  * Sends an interface configuration update to the player.
@@ -92,11 +88,9 @@ fun repositionChild(
     childId: Int,
     positionX: Int,
     positionY: Int,
-) {
-    return PacketRepository.send(
-        RepositionChild::class.java,
-        ChildPositionContext(player, interfaceId, childId, positionX, positionY),
-    )
-}
+) = PacketRepository.send(
+    RepositionChild::class.java,
+    ChildPositionContext(player, interfaceId, childId, positionX, positionY),
+)
 
 private class InterfaceAPI

@@ -58,7 +58,5 @@ class TheFaceDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THE_FACE_2950)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THE_FACE_2950)
 }

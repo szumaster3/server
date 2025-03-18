@@ -82,8 +82,8 @@ class RunecraftingListener : InteractionListener {
         }
     }
 
-    fun map(staff: TalismanStaves): Altar? {
-        return when (staff) {
+    fun map(staff: TalismanStaves): Altar? =
+        when (staff) {
             TalismanStaves.AIR -> Altar.AIR
             TalismanStaves.MIND -> Altar.MIND
             TalismanStaves.WATER -> Altar.WATER
@@ -98,7 +98,6 @@ class RunecraftingListener : InteractionListener {
             TalismanStaves.BLOOD -> Altar.BLOOD
             else -> null
         }
-    }
 
     private fun checkAmount(
         runeEssenceAmount: Int,

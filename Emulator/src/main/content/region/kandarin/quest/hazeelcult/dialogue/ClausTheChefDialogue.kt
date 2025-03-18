@@ -89,7 +89,5 @@ class ClausTheChefDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CLAUS_THE_CHEF_886)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CLAUS_THE_CHEF_886)
 }

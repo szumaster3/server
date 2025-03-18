@@ -23,7 +23,7 @@ class GhostSailorDialogue(
         }
         player(
             "Hi there. Why do you still bother having ships here? I",
-            "mean - you're dead, what use are they to you?"
+            "mean - you're dead, what use are they to you?",
         )
         return true
     }
@@ -48,7 +48,5 @@ class GhostSailorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOST_SAILOR_1703)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_SAILOR_1703)
 }

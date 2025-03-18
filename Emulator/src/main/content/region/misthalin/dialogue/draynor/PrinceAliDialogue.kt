@@ -127,13 +127,9 @@ class PrinceAliDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PrinceAliDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PrinceAliDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRINCE_ALI_920)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRINCE_ALI_920)
 
     companion object {
         private val DISGUISE = arrayOf(Item(2424), Item(2419), Item(2418), Item(1013))

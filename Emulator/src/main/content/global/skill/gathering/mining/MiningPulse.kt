@@ -2,7 +2,6 @@ package content.global.skill.gathering.mining
 
 import content.data.items.SkillingTool
 import core.api.*
-import core.cache.def.impl.ItemDefinition
 import core.game.event.ResourceProducedEvent
 import core.game.node.Node
 import core.game.node.entity.impl.Animator

@@ -52,9 +52,7 @@ class BFPlayerState(
         if (getVarbit(player, DISPENSER_STATE) == 3) setVarbit(player, DISPENSER_STATE, 0, true)
     }
 
-    fun hasBarsClaimable(): Boolean {
-        return container.getTotalBarAmount() > 0
-    }
+    fun hasBarsClaimable(): Boolean = container.getTotalBarAmount() > 0
 
     fun claimBars(
         bar: Bar,
@@ -92,8 +90,8 @@ class BFPlayerState(
         setVarbit(player, COAL_NEEDED, (totalCoalNeeded - container.coalAmount()).coerceAtLeast(0))
     }
 
-    private fun getVarbitForBar(bar: Bar): Int {
-        return when (bar) {
+    private fun getVarbitForBar(bar: Bar): Int =
+        when (bar) {
             Bar.BRONZE -> BRONZE_COUNT
             Bar.IRON -> IRON_COUNT
             Bar.STEEL -> STEEL_COUNT
@@ -104,7 +102,6 @@ class BFPlayerState(
             Bar.SILVER -> SILVER_COUNT
             else -> 0
         }
-    }
 
     fun toJson(): JSONObject {
         val save = JSONObject()

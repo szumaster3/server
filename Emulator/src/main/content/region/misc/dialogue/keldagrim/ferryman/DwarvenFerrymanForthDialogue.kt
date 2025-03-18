@@ -66,11 +66,7 @@ class DwarvenFerrymanForthDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DwarvenFerrymanForthDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DwarvenFerrymanForthDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARVEN_FERRYMAN_1843)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARVEN_FERRYMAN_1843)
 }

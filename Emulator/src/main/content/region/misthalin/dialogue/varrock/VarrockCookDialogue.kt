@@ -155,11 +155,7 @@ class VarrockCookDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VarrockCookDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VarrockCookDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COOK_5910)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COOK_5910)
 }

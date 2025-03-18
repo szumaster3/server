@@ -137,9 +137,7 @@ object CharterUtils {
             2,
             13,
         ) {
-            override fun checkTravel(player: Player?): Boolean {
-                return requireQuest(player!!, Quests.PRIEST_IN_PERIL, "to go there.")
-            }
+            override fun checkTravel(player: Player?): Boolean = requireQuest(player!!, Quests.PRIEST_IN_PERIL, "to go there.")
         },
         CRANDOR(
             Location(2792, 3417, 1),
@@ -282,9 +280,7 @@ object CharterUtils {
             return current.costs[index]
         }
 
-        open fun checkTravel(player: Player?): Boolean {
-            return true
-        }
+        open fun checkTravel(player: Player?): Boolean = true
 
         fun sail(player: Player) {
             player.lock(7)

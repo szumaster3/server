@@ -111,7 +111,5 @@ class HunterTalismanListener : InteractionListener {
     fun diff(
         x: Double,
         y: Double,
-    ): Double {
-        return abs(x - y)
-    }
+    ): Double = abs(x - y)
 }

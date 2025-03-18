@@ -113,13 +113,13 @@ object QCRepository {
 
         // Messages that include items
         if ((
-                    qcString.contains("item") ||
-                            qcString.contains("Can I buy your") ||
-                            qcString.contains("What is the best world to buy") ||
-                            qcString.contains("What is the best world to sell") ||
-                            qcString.contains("Would you like to borrow") ||
-                            qcString.contains("Could I please borrow")
-                    ) &&
+                qcString.contains("item") ||
+                    qcString.contains("Can I buy your") ||
+                    qcString.contains("What is the best world to buy") ||
+                    qcString.contains("What is the best world to sell") ||
+                    qcString.contains("Would you like to borrow") ||
+                    qcString.contains("Could I please borrow")
+            ) &&
             qcString.contains("<")
         ) {
             val itemName = ItemDefinition.forId(selectionIndex).name
@@ -304,9 +304,7 @@ object QCRepository {
     fun getFromMap(
         map: Int,
         index: Int,
-    ): String {
-        return DataMap.get(map).getString(index)!!
-    }
+    ): String = DataMap.get(map).getString(index)!!
 
     @JvmStatic
     fun getDoubleQC(

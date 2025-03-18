@@ -23,9 +23,7 @@ class ChromaticDragonNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ChromaticDragonNPC(id, location)
-    }
+    ): AbstractNPC = ChromaticDragonNPC(id, location)
 
     private val combatAction: CombatSwingHandler =
         MultiSwingHandler(
@@ -35,16 +33,12 @@ class ChromaticDragonNPC(
             DRAGONFIRE,
         )
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatAction
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatAction
 
-    override fun getDragonfireProtection(fire: Boolean): Int {
-        return 0x2 or 0x4 or 0x8
-    }
+    override fun getDragonfireProtection(fire: Boolean): Int = 0x2 or 0x4 or 0x8
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.GREEN_DRAGON_941,
             NPCs.GREEN_DRAGON_4677,
             NPCs.GREEN_DRAGON_4678,
@@ -66,7 +60,6 @@ class ChromaticDragonNPC(
             NPCs.BLUE_DRAGON_4683,
             NPCs.BLUE_DRAGON_4684,
         )
-    }
 
     companion object {
         private val DRAGONFIRE: SwitchAttack =

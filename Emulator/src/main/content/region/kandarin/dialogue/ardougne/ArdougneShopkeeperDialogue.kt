@@ -66,11 +66,7 @@ class ArdougneShopkeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ArdougneShopkeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ArdougneShopkeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AEMAD_590, NPCs.KORTAN_591)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AEMAD_590, NPCs.KORTAN_591)
 }

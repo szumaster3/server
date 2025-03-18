@@ -31,13 +31,9 @@ class ArchaeologistDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ArchaeologistDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ArchaeologistDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARCHAEOLOGIST_1918)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARCHAEOLOGIST_1918)
 }
 
 class ArchaeologistDialogueFile : DialogueBuilderFile() {

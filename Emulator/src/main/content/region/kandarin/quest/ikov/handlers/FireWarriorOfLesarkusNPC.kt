@@ -25,13 +25,9 @@ class FireWarriorOfLesarkusNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return FireWarriorOfLesarkusNPC(id, null, location)
-    }
+    ): AbstractNPC = FireWarriorOfLesarkusNPC(id, null, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_WARRIOR_OF_LESARKUS_277)
 
     override fun handleTickActions() {
         super.handleTickActions()

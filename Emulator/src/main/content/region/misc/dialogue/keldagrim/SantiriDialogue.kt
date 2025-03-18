@@ -42,11 +42,7 @@ class SantiriDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SantiriDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SantiriDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SANTIRI_2152)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SANTIRI_2152)
 }

@@ -76,7 +76,6 @@ object Server {
         // models.update()
         // sprites.update()
 
-
         // cache.rebuild(File("data/cache/rebuild"))
 
         // WorldCommunicator.connect()
@@ -180,9 +179,7 @@ object Server {
     fun autoReconnect() {
     }
 
-    fun getStartTime(): Long {
-        return startTime
-    }
+    fun getStartTime(): Long = startTime
 
     private fun threadDump(
         lockedMonitors: Boolean,

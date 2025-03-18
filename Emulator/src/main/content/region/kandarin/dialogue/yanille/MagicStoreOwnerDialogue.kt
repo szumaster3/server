@@ -37,11 +37,7 @@ class MagicStoreOwnerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MagicStoreOwnerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MagicStoreOwnerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAGIC_STORE_OWNER_461)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_STORE_OWNER_461)
 }

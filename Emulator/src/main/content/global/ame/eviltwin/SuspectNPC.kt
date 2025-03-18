@@ -15,17 +15,11 @@ class SuspectNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SuspectNPC(id, location)
-    }
+    ): AbstractNPC = SuspectNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return SUSPECT_IDS
-    }
+    override fun getIds(): IntArray = SUSPECT_IDS
 
-    override fun shouldPreventStacking(mover: Entity?): Boolean {
-        return true
-    }
+    override fun shouldPreventStacking(mover: Entity?): Boolean = true
 
     companion object {
         val SUSPECT_IDS = (3852..3891).toIntArray()

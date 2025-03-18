@@ -35,8 +35,8 @@ class CrestCombiningHandler : UseWithHandler(779, 780, 781) {
     private fun CraftCrest(
         player: Player,
         event: NodeUsageEvent,
-    ): Boolean {
-        return when (event.usedWith.id) {
+    ): Boolean =
+        when (event.usedWith.id) {
             779, 780, 781 -> {
                 if (player.inventory.containItems(779, 780, 781)) {
                     player.inventory.remove(CREST_AVAN)
@@ -50,5 +50,4 @@ class CrestCombiningHandler : UseWithHandler(779, 780, 781) {
 
             else -> false
         }
-    }
 }

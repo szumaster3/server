@@ -59,7 +59,5 @@ class WanderingImplingDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WANDERING_IMPLING_6073)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WANDERING_IMPLING_6073)
 }

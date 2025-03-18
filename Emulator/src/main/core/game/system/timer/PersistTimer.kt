@@ -26,7 +26,5 @@ abstract class PersistTimer(
         runInterval = root["ticksLeft"].toString().toInt()
     }
 
-    override fun retrieveInstance(): RSTimer {
-        return this::class.createInstance()
-    }
+    override fun retrieveInstance(): RSTimer = this::class.createInstance()
 }

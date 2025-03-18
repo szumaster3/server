@@ -46,11 +46,7 @@ class GlumDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GlumDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GlumDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GLUM_7077)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GLUM_7077)
 }

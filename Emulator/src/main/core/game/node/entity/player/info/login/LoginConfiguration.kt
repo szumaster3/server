@@ -185,8 +185,8 @@ object LoginConfiguration {
         }
     }
 
-    fun getMessageChild(interfaceId: Int): Int {
-        return when (interfaceId) {
+    fun getMessageChild(interfaceId: Int): Int =
+        when (interfaceId) {
             Components.BANNER_GROUP_622 -> 8
             Components.BANNER_ANTI_VIRUS_16 -> 6
             Components.MESSAGE_OF_THE_WEEK_20,
@@ -210,15 +210,13 @@ object LoginConfiguration {
             Components.BANNER_SUMMONING_679 -> 1
             else -> 0
         }
-    }
 
-    private fun autoSelectMessageModel(): Int {
-        return if (IntStream.of(lobbyComponents.size).anyMatch { it == GameWorld.settings?.message_model }) {
+    private fun autoSelectMessageModel(): Int =
+        if (IntStream.of(lobbyComponents.size).anyMatch { it == GameWorld.settings?.message_model }) {
             GameWorld.settings?.message_model ?: lobbyComponents.random()
         } else {
             lobbyComponents.random()
         }
-    }
 
     @JvmStatic
     fun getLastLogin(player: Player): String {
@@ -242,13 +240,9 @@ object LoginConfiguration {
         }
     }
 
-    private fun isTutorialCompleted(player: Player): Boolean {
-        return player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
-    }
+    private fun isTutorialCompleted(player: Player): Boolean = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
 
-    private fun Player.isNotReconnecting(): Boolean {
-        return getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE
-    }
+    private fun Player.isNotReconnecting(): Boolean = getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE
 
     private fun checkEmotes(player: Player) {
         if (player.globalData.getPlayerTestStage() == 3 && !player.emoteManager.isUnlocked(Emotes.SAFETY_FIRST)) {

@@ -112,7 +112,5 @@ class GillieGroatsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GILLIE_GROATS_3807)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GILLIE_GROATS_3807)
 }

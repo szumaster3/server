@@ -55,11 +55,7 @@ class OsvaldDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return OsvaldDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = OsvaldDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OSVALD_3923)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OSVALD_3923)
 }

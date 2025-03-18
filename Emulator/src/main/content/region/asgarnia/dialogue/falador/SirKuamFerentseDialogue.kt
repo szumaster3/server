@@ -19,7 +19,5 @@ class SirKuamFerentseDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_KUAM_FERENTSE_2284)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_KUAM_FERENTSE_2284)
 }

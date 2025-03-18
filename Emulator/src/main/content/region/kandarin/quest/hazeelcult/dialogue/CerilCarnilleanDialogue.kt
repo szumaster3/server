@@ -389,7 +389,5 @@ class CerilCarnilleanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CERIL_CARNILLEAN_885)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CERIL_CARNILLEAN_885)
 }

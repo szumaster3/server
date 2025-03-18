@@ -94,13 +94,12 @@ enum class HolidayRandomEvents(
             populateMappings()
         }
 
-        fun getHolidayRandom(type: String): HolidayRandomEvents {
-            return when (type) {
+        fun getHolidayRandom(type: String): HolidayRandomEvents =
+            when (type) {
                 "halloween" -> halloweenEventsList.random() // Return a random Halloween event
                 "christmas" -> christmasEventsList.random() // Return a random Christmas event
                 else -> throw Exception("Invalid event type!") // Throw an exception for invalid types
             }
-        }
 
         // Populates the Halloween and Christmas event lists
         private fun populateMappings() {

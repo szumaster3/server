@@ -113,7 +113,5 @@ class CurrencyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CURRENCY_THE_ALCHEMIST_5587)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CURRENCY_THE_ALCHEMIST_5587)
 }

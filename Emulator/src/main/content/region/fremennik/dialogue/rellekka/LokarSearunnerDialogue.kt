@@ -440,11 +440,7 @@ class LokarSearunnerDialogue(
         )
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LokarSearunnerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LokarSearunnerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOKAR_SEARUNNER_4536, NPCs.LOKAR_SEARUNNER_4537)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOKAR_SEARUNNER_4536, NPCs.LOKAR_SEARUNNER_4537)
 }

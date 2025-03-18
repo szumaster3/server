@@ -71,11 +71,7 @@ class MinerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MinerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MinerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MINER_5497, NPCs.MINER_5498)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINER_5497, NPCs.MINER_5498)
 }

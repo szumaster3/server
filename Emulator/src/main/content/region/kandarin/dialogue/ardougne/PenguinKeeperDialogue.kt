@@ -86,11 +86,7 @@ class PenguinKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return PenguinKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = PenguinKeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PENGUIN_KEEPER_6891)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PENGUIN_KEEPER_6891)
 }

@@ -20,9 +20,7 @@ class MonkOfZamorakNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MonkOfZamorakNPC(id, location)
-    }
+    ): AbstractNPC = MonkOfZamorakNPC(id, location)
 
     override fun tick() {
         super.tick()
@@ -37,7 +35,5 @@ class MonkOfZamorakNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_OF_ZAMORAK_1046)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_OF_ZAMORAK_1046)
 }

@@ -69,9 +69,7 @@ class AFUSession(
         setAttribute(player!!, "afu-session", this)
     }
 
-    fun getLitBeacons(): Int {
-        return beaconTimers.count { it.ticks > 0 }
-    }
+    fun getLitBeacons(): Int = beaconTimers.count { it.ticks > 0 }
 
     fun end() {
         isActive = false
@@ -108,9 +106,7 @@ class AFUSession(
         logInventories[index] = logs
     }
 
-    fun isWatched(index: Int): Boolean {
-        return beaconWatched[index]
-    }
+    fun isWatched(index: Int): Boolean = beaconWatched[index]
 
     fun getTicks(logID: Int): Int {
         val ticks =
@@ -126,8 +122,8 @@ class AFUSession(
         return ticks
     }
 
-    fun getBonusExperience(): Double {
-        return when (getLitBeacons()) {
+    fun getBonusExperience(): Double =
+        when (getLitBeacons()) {
             1 -> 608.4
             2 -> 1622.4
             3 -> 1987.4
@@ -144,7 +140,6 @@ class AFUSession(
             14 -> 4867.4
             else -> 0.0
         }
-    }
 
     override fun logout(player: Player) {
         AFUBeacon.resetAllBeacons(player)

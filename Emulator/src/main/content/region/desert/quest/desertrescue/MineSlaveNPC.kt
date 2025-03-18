@@ -19,9 +19,7 @@ class MineSlaveNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MineSlaveNPC(id, location)
-    }
+    ): AbstractNPC = MineSlaveNPC(id, location)
 
     override fun tick() {
         if (delay < ticks) {
@@ -31,9 +29,7 @@ class MineSlaveNPC : AbstractNPC {
         super.tick()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MALE_SLAVE_4975, NPCs.MALE_SLAVE_4976, NPCs.FEMALE_SLAVE_4977, NPCs.FEMALE_SLAVE_4978)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MALE_SLAVE_4975, NPCs.MALE_SLAVE_4976, NPCs.FEMALE_SLAVE_4977, NPCs.FEMALE_SLAVE_4978)
 
     companion object {
         private val CHATS =

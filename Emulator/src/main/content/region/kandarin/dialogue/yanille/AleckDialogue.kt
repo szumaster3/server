@@ -70,11 +70,7 @@ class AleckDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AleckDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AleckDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALECK_5110)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALECK_5110)
 }

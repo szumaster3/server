@@ -79,11 +79,7 @@ class SurokMagisDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SurokMagisDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SurokMagisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SUROK_MAGIS_7002)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SUROK_MAGIS_7002)
 }

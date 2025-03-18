@@ -15,13 +15,9 @@ class GiantSnailNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GiantSnailNPC(id, location)
-    }
+    ): AbstractNPC = GiantSnailNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANT_SNAIL_3612, NPCs.GIANT_SNAIL_3613, NPCs.GIANT_SNAIL_3614)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_SNAIL_3612, NPCs.GIANT_SNAIL_3613, NPCs.GIANT_SNAIL_3614)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

@@ -301,9 +301,7 @@ class AbyssLoc(
     val radius: Double,
     val angle: Double,
 ) {
-    fun attract(steps: Int = 1): AbyssLoc {
-        return AbyssLoc(radius - steps.toDouble(), angle)
-    }
+    fun attract(steps: Int = 1): AbyssLoc = AbyssLoc(radius - steps.toDouble(), angle)
 
     fun getSegment(): Int {
         val segments = 12
@@ -354,9 +352,7 @@ class AbyssLoc(
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return AbyssalNPC(id, location)
-        }
+        ): AbstractNPC = AbyssalNPC(id, location)
 
         override fun init() {
             super.init()
@@ -410,9 +406,7 @@ class AbyssLoc(
             }
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.ABYSSAL_LEECH_2263, NPCs.ABYSSAL_GUARDIAN_2264, NPCs.ABYSSAL_WALKER_2265)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.ABYSSAL_LEECH_2263, NPCs.ABYSSAL_GUARDIAN_2264, NPCs.ABYSSAL_WALKER_2265)
     }
 
     @Initializable
@@ -551,9 +545,7 @@ class AbyssLoc(
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.DARK_MAGE_2262)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.DARK_MAGE_2262)
     }
 
     @Initializable
@@ -1097,23 +1089,20 @@ class AbyssLoc(
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(
+        override fun getIds(): IntArray =
+            intArrayOf(
                 2257,
                 NPCs.MAGE_OF_ZAMORAK_2258,
                 NPCs.MAGE_OF_ZAMORAK_2259,
                 NPCs.MAGE_OF_ZAMORAK_2260,
                 NPCs.MAGE_OF_ZAMORAK_2261,
             )
-        }
 
         override fun setStage(stage: Int) {
             setVarp(player, 492, stage, true)
         }
 
-        fun getStage(): Int {
-            return getVarp(player, 492)
-        }
+        fun getStage(): Int = getVarp(player, 492)
 
         companion object {
             private val ORBS = arrayOf(Item(Items.SCRYING_ORB_5519), Item(Items.SCRYING_ORB_5518))

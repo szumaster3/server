@@ -50,11 +50,7 @@ class JorzikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JorzikDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JorzikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JORZIK_2565)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JORZIK_2565)
 }

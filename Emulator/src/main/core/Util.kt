@@ -65,25 +65,17 @@ object Util {
         count: Long,
         singular: String,
         plural: String,
-    ): String {
-        return if (count == 1L) "$count $singular" else "$count $plural"
-    }
+    ): String = if (count == 1L) "$count $singular" else "$count $plural"
 
     fun random(
         random: Random,
         i: Int,
-    ): Int {
-        return random.nextInt(i + 1)
-    }
+    ): Int = random.nextInt(i + 1)
 
-    fun random(i: Int): Int {
-        return random(random, i)
-    }
+    fun random(i: Int): Int = random(random, i)
 
     @JvmOverloads
-    fun randomDouble(random: Random = Util.random): Double {
-        return random.nextDouble()
-    }
+    fun randomDouble(random: Random = Util.random): Double = random.nextDouble()
 
     fun capitalize(name: String?): String? {
         if (name != null && name.length != 0) {
@@ -106,19 +98,16 @@ object Util {
         input: Double,
         min: Double,
         max: Double,
-    ): Double {
-        return kotlin.math.max(kotlin.math.min(input, max), min)
-    }
+    ): Double = kotlin.math.max(kotlin.math.min(input, max), min)
 
     fun clamp(
         input: Int,
         min: Int,
         max: Int,
-    ): Int {
-        return kotlin.math
+    ): Int =
+        kotlin.math
             .max(kotlin.math.min(input.toDouble(), max.toDouble()), min.toDouble())
             .toInt()
-    }
 
     fun nextMidnight(currentTime: Long): Long {
         val date = Date()
@@ -138,16 +127,12 @@ object Util {
     inline fun <T> findMatching(
         array: Array<T>,
         predicate: (T) -> Boolean,
-    ): T? {
-        return array.firstOrNull(predicate)
-    }
+    ): T? = array.firstOrNull(predicate)
 
     fun <T> getOrDefault(
         primary: T?,
         defaultValue: T,
-    ): T {
-        return primary ?: defaultValue
-    }
+    ): T = primary ?: defaultValue
 
     fun random(
         random: Random,
@@ -161,9 +146,7 @@ object Util {
     fun random(
         min: Int,
         max: Int,
-    ): Int {
-        return random(random, min, max)
-    }
+    ): Int = random(random, min, max)
 
     fun getDistance(
         coordX1: Int,
@@ -240,24 +223,16 @@ object Util {
 
     private val DECIMAL_FORMAT = DecimalFormat(".###")
 
-    fun format(number: Int): String {
-        return NumberFormat.getNumberInstance().format(number.toLong())
-    }
+    fun format(number: Int): String = NumberFormat.getNumberInstance().format(number.toLong())
 
-    fun format(number: Long): String {
-        return NumberFormat.getNumberInstance().format(number)
-    }
+    fun format(number: Long): String = NumberFormat.getNumberInstance().format(number)
 
-    fun format(number: Float): String {
-        return NumberFormat.getNumberInstance().format(number.toDouble())
-    }
+    fun format(number: Float): String = NumberFormat.getNumberInstance().format(number.toDouble())
 
     fun equals(
         a: Any?,
         b: Any,
-    ): Boolean {
-        return (a === b) || (a != null && a == b)
-    }
+    ): Boolean = (a === b) || (a != null && a == b)
 
     fun round(
         value: Double,

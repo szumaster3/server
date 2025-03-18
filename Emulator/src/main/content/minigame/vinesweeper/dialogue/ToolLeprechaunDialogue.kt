@@ -126,9 +126,7 @@ class ToolLeprechaunDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TOOL_LEPRECHAUN_3021, NPCs.TECLYN_2861)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOOL_LEPRECHAUN_3021, NPCs.TECLYN_2861)
 }
 
 @Initializable
@@ -219,9 +217,7 @@ class ToolLeprechaunGothDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOTH_LEPRECHAUN_8000)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOTH_LEPRECHAUN_8000)
 }
 
 @Initializable
@@ -296,7 +292,5 @@ class ToolLeprechaunOnVacationDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TOOL_LEPRECHAUN_4965)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOOL_LEPRECHAUN_4965)
 }

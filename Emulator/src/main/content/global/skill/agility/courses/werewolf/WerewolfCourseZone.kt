@@ -7,9 +7,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Items
 
 class WerewolfCourseZone : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3510, 9851, 3592, 9920))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3510, 9851, 3592, 9920))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

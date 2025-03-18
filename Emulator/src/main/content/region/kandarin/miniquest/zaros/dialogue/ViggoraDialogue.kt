@@ -596,11 +596,7 @@ class ViggoraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ViggoraDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ViggoraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYSTERIOUS_GHOST_2402)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYSTERIOUS_GHOST_2402)
 }

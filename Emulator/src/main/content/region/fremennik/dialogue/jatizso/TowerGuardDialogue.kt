@@ -70,11 +70,7 @@ class TowerGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TowerGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TowerGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_5489, NPCs.GUARD_5490)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_5489, NPCs.GUARD_5490)
 }

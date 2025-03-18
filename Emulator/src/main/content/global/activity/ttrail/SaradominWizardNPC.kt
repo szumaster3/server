@@ -29,9 +29,7 @@ class SaradominWizardNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SaradominWizardNPC(id, location)
-    }
+    ): AbstractNPC = SaradominWizardNPC(id, location)
 
     override fun init() {
         player = getAttribute("player", null)
@@ -64,34 +62,22 @@ class SaradominWizardNPC : AbstractNPC {
         }
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return COMBAT_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = COMBAT_HANDLER
 
-    override fun canAttack(entity: Entity): Boolean {
-        return entity is Player && entity == player || super.canAttack(entity)
-    }
+    override fun canAttack(entity: Entity): Boolean = entity is Player && entity == player || super.canAttack(entity)
 
     override fun isAttackable(
         entity: Entity,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return entity is Player && entity == player || super.isAttackable(entity, style, message)
-    }
+    ): Boolean = entity is Player && entity == player || super.isAttackable(entity, style, message)
 
-    override fun canSelectTarget(target: Entity): Boolean {
-        return target == player
-    }
+    override fun canSelectTarget(target: Entity): Boolean = target == player
 
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg)
-    }
+    override fun newInstance(arg: Any?): Plugin<Any> = super.newInstance(arg)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SARADOMIN_WIZARD_1264)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARADOMIN_WIZARD_1264)
 
     companion object {
         private val COMBAT_HANDLER =

@@ -74,9 +74,7 @@ class BountyLocateSpell :
             }
             player.pulseManager.run(
                 object : MovementPulse(player, target) {
-                    override fun pulse(): Boolean {
-                        return true
-                    }
+                    override fun pulse(): Boolean = true
                 },
                 PulseType.STANDARD,
             )

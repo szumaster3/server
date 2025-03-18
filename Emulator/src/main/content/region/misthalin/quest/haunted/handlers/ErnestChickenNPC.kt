@@ -14,16 +14,12 @@ class ErnestChickenNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ErnestChickenNPC(id, location)
-    }
+    ): AbstractNPC = ErnestChickenNPC(id, location)
 
     override fun isHidden(player: Player): Boolean {
         val questStage = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player)
         return questStage == 100 || player.getAttribute("ernest-hide", false)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHICKEN_288)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHICKEN_288)
 }

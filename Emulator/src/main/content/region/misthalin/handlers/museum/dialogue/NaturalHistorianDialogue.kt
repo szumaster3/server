@@ -12,14 +12,16 @@ import org.rs.consts.NPCs
 class NaturalHistorianDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "Hello there and welcome to the Natural History exhibit of the Varrock Museum!")
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 playerl(FaceAnim.HALF_GUILTY, "Hello. So what is it you do here?")
@@ -34,7 +36,7 @@ class NaturalHistorianDialogue(
             2 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "When I'm not doing that, I'm teaching people like yourself about how wonderful the natural world is."
+                    "When I'm not doing that, I'm teaching people like yourself about how wonderful the natural world is.",
                 )
                 stage++
             }
@@ -47,7 +49,7 @@ class NaturalHistorianDialogue(
             4 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Well, fire away and I'll give you an insight into the exciting world of animals."
+                    "Well, fire away and I'll give you an insight into the exciting world of animals.",
                 )
                 stage = END_DIALOGUE
             }
@@ -55,11 +57,7 @@ class NaturalHistorianDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return NaturalHistorianDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = NaturalHistorianDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NATURAL_HISTORIAN_5970)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NATURAL_HISTORIAN_5970)
 }

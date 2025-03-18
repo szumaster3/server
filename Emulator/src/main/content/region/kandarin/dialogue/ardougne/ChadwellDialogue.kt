@@ -41,11 +41,7 @@ class ChadwellDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ChadwellDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ChadwellDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHADWELL_971)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHADWELL_971)
 }

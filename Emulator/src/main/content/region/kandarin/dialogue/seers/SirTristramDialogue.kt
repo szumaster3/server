@@ -84,11 +84,7 @@ class SirTristramDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirTristramDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirTristramDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_TRISTRAM_243)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_TRISTRAM_243)
 }

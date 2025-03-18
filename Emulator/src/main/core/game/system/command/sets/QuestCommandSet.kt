@@ -69,7 +69,6 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
             JeremyRescueCutscene(player).start()
         }
 
-
         define(name = "quest", Privilege.ADMIN) { player, args ->
             if (args.size < 3) {
                 val lookupP =

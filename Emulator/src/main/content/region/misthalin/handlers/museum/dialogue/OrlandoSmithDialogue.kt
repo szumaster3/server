@@ -11,13 +11,15 @@ import org.rs.consts.NPCs
 class OrlandoSmithDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun open(vararg args: Any): Boolean {
         npcl(FaceAnim.HALF_GUILTY, "G'day there, mate.")
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 playerl(FaceAnim.FRIENDLY, "Good day. Are you alright? You look a little lost.")
@@ -27,7 +29,7 @@ class OrlandoSmithDialogue(
             1 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Well, mate, to tell you the truth, I think I've come a gutser with these displays."
+                    "Well, mate, to tell you the truth, I think I've come a gutser with these displays.",
                 )
                 stage++
             }
@@ -40,7 +42,7 @@ class OrlandoSmithDialogue(
             3 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Gutser and no mistake. Me boss asked me to put together a quiz for the visitors."
+                    "Gutser and no mistake. Me boss asked me to put together a quiz for the visitors.",
                 )
                 stage++
             }
@@ -48,7 +50,7 @@ class OrlandoSmithDialogue(
             4 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "But to be deadset with you, I wasn't paying much attention to me boss over there and I've done a bit of a rush job."
+                    "But to be deadset with you, I wasn't paying much attention to me boss over there and I've done a bit of a rush job.",
                 )
                 stage++
             }
@@ -71,7 +73,7 @@ class OrlandoSmithDialogue(
             8 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Well, you look like a pretty smart cobber. Could you take a look at the display plaques and give 'em a runthrough?"
+                    "Well, you look like a pretty smart cobber. Could you take a look at the display plaques and give 'em a runthrough?",
                 )
                 stage++
             }
@@ -81,17 +83,18 @@ class OrlandoSmithDialogue(
                 stage++
             }
 
-            10 -> when (buttonId) {
-                1 -> {
-                    player("Sure thing.")
-                    stage = 11
-                }
+            10 ->
+                when (buttonId) {
+                    1 -> {
+                        player("Sure thing.")
+                        stage = 11
+                    }
 
-                2 -> {
-                    player("No thanks I'm too busy.")
-                    stage = 13
+                    2 -> {
+                        player("No thanks I'm too busy.")
+                        stage = 13
+                    }
                 }
-            }
 
             11 -> {
                 npcl(FaceAnim.HALF_GUILTY, "Bonza, mate! I reckon three questions per case should be bang to rights.")
@@ -101,7 +104,7 @@ class OrlandoSmithDialogue(
             12 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Take a gander at each case and I'll look over your shoulder to give some advice."
+                    "Take a gander at each case and I'll look over your shoulder to give some advice.",
                 )
                 stage = END_DIALOGUE
             }
@@ -114,11 +117,7 @@ class OrlandoSmithDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OrlandoSmithDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OrlandoSmithDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ORLANDO_SMITH_5965)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ORLANDO_SMITH_5965)
 }

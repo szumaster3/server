@@ -32,11 +32,7 @@ class SmellytoesDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SmellytoesDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SmellytoesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SMELLYTOES_6128)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SMELLYTOES_6128)
 }

@@ -63,11 +63,7 @@ class SnarrlDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SnarrlDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SnarrlDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SNARRL_7069, NPCs.CHOMP_7074)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SNARRL_7069, NPCs.CHOMP_7074)
 }

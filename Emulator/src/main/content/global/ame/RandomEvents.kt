@@ -148,13 +148,9 @@ enum class RandomEvents(
             populateMappings()
         }
 
-        fun getSkillBasedRandomEvent(skill: Int): RandomEvents? {
-            return skillMap[skill]?.random()
-        }
+        fun getSkillBasedRandomEvent(skill: Int): RandomEvents? = skillMap[skill]?.random()
 
-        fun getNonSkillRandom(): RandomEvents {
-            return nonSkillList.random()
-        }
+        fun getNonSkillRandom(): RandomEvents = nonSkillList.random()
 
         private fun populateMappings() {
             for (event in values()) {

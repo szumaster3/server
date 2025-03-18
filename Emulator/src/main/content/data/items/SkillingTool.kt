@@ -566,8 +566,8 @@ enum class SkillingTool(
         fun getToolForSkill(
             player: Player?,
             skill: Int,
-        ): SkillingTool? {
-            return when (skill) {
+        ): SkillingTool? =
+            when (skill) {
                 Skills.MINING -> getPickaxe(player!!)
                 Skills.WOODCUTTING -> getHatchet(player!!)
                 Skills.FISHING -> getHarpoon(player!!)
@@ -575,7 +575,6 @@ enum class SkillingTool(
                 Skills.FIREMAKING -> getFiremakingTool(player!!)
                 else -> null
             }
-        }
 
         /**
          * Checks if the player has the specified tool for the given skill.

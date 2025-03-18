@@ -13,9 +13,7 @@ class MiasmicImmunity :
         identifier = "miasmic:immunity",
         flags = arrayOf(TimerFlag.ClearOnDeath),
     ) {
-    override fun run(entity: Entity): Boolean {
-        return false
-    }
+    override fun run(entity: Entity): Boolean = false
 
     override fun onRegister(entity: Entity) {
         if (hasTimerActive<Miasmic>(entity)) {

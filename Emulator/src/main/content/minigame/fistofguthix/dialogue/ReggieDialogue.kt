@@ -59,7 +59,5 @@ class ReggieDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REGGIE_7601)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REGGIE_7601)
 }

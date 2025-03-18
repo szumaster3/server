@@ -1,13 +1,13 @@
 package content.region.kandarin.handlers.guthanoth
 
 import core.api.getStatLevel
+import core.api.sendItemSelect
+import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import org.rs.consts.NPCs
-import core.api.sendItemSelect
-import core.api.sendMessage
 
 class BogrogListener : InteractionListener {
     override fun defineListeners() {

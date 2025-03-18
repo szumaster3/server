@@ -36,11 +36,7 @@ class GruvaPatrullDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GruvaPatrullDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GruvaPatrullDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRUVA_PATRULL_5500)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRUVA_PATRULL_5500)
 }

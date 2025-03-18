@@ -25,14 +25,13 @@ object RDUtils {
 
     const val ATTRIBUTE_NPC_SPAWN = "rd:generatedsirleye"
 
-    fun getLocationForScenery(node: Node): Location {
-        return when (node.asScenery().id) {
+    fun getLocationForScenery(node: Node): Location =
+        when (node.asScenery().id) {
             Scenery.CRATE_7347 -> Location(2476, 4943)
             Scenery.CRATE_7348 -> Location(2476, 4937)
             Scenery.CRATE_7349 -> Location(2475, 4943)
             else -> Location(0, 0)
         }
-    }
 
     fun resetPlayerState(player: Player) {
         setMinimapState(player, 0)

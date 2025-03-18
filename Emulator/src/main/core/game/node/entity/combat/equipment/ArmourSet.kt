@@ -339,9 +339,7 @@ enum class ArmourSet(
         e: Entity,
         victim: Entity,
         state: BattleState,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     open fun isUsing(e: Entity?): Boolean {
         if (e !is Player) {

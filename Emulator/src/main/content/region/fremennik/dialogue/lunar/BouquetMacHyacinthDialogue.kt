@@ -73,11 +73,7 @@ class BouquetMacHyacinthDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BouquetMacHyacinthDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BouquetMacHyacinthDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOUQUET_MAC_HYACINTH_4526)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOUQUET_MAC_HYACINTH_4526)
 }

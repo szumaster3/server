@@ -38,7 +38,5 @@ class RecruiterDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RECRUITER_720)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RECRUITER_720)
 }

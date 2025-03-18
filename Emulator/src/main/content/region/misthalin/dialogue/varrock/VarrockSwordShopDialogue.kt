@@ -36,11 +36,7 @@ class VarrockSwordShopDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VarrockSwordShopDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VarrockSwordShopDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_551, NPCs.SHOP_ASSISTANT_552)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_551, NPCs.SHOP_ASSISTANT_552)
 }

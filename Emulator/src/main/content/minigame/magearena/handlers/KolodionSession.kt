@@ -60,12 +60,8 @@ class KolodionSession(
     }
 
     companion object {
-        fun create(player: Player): KolodionSession {
-            return KolodionSession(player)
-        }
+        fun create(player: Player): KolodionSession = KolodionSession(player)
 
-        fun getSession(player: Player): KolodionSession {
-            return getSession(player)
-        }
+        fun getSession(player: Player): KolodionSession = getSession(player)
     }
 }

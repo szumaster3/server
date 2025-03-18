@@ -1,7 +1,7 @@
 package content.region.morytania.dialogue.phasmatys
 
-import content.region.morytania.quest.ahoy.handlers.GhostsAhoyUtils
 import content.region.morytania.quest.ahoy.dialogue.GhostVillagerDialogueFile
+import content.region.morytania.quest.ahoy.handlers.GhostsAhoyUtils
 import core.api.getAttribute
 import core.api.inEquipment
 import core.api.openDialogue
@@ -51,9 +51,10 @@ class GhostVillagerDialogue(
                         1 -> npc("We do not talk to the warm-bloods.").also { stage = END_DIALOGUE }
                         2 -> npc("What do you want, mortal?").also { stage = END_DIALOGUE }
                         3 -> npc("Why did we have to listen to that maniacal priest?").also { stage = END_DIALOGUE }
-                        4 -> npc("Worship the Ectofuntus all you want, but", "don't bother us, human.").also {
-                            stage = END_DIALOGUE
-                        }
+                        4 ->
+                            npc("Worship the Ectofuntus all you want, but", "don't bother us, human.").also {
+                                stage = END_DIALOGUE
+                            }
                     }
                 }
             }
@@ -62,7 +63,5 @@ class GhostVillagerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOST_VILLAGER_1697)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_VILLAGER_1697)
 }

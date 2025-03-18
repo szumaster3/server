@@ -246,7 +246,5 @@ class WizardTowerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WATCHTOWER_WIZARD_872, NPCs.WIZARD_5195)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WATCHTOWER_WIZARD_872, NPCs.WIZARD_5195)
 }

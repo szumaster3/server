@@ -104,8 +104,6 @@ class AllotmentSeedDropTable : StartupListener {
         }
 
         @JvmStatic
-        fun retrieve(receiver: Entity?): Item? {
-            return TABLE.roll(receiver).getOrNull(0)
-        }
+        fun retrieve(receiver: Entity?): Item? = TABLE.roll(receiver).getOrNull(0)
     }
 }

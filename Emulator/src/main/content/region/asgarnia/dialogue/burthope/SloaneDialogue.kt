@@ -100,7 +100,5 @@ class SloaneDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SLOANE_4297)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLOANE_4297)
 }

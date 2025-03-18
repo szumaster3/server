@@ -39,9 +39,7 @@ class MonkeyGreeGreesListener :
         private val AIR_BLAST_ANIMATION = Graphics(359, 96)
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(APE_ATOLL_ZONE)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(APE_ATOLL_ZONE)
 
     override fun areaLeave(
         entity: Entity,

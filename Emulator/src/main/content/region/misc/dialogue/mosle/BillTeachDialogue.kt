@@ -66,11 +66,7 @@ class BillTeachDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BillTeachDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BillTeachDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BILL_TEACH_3155)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BILL_TEACH_3155)
 }

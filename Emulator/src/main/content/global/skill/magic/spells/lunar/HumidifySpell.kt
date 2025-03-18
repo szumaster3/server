@@ -80,13 +80,9 @@ class HumidifySpell :
         companion object {
             private val productOfFill = values().associate { it.empty to it.full }
 
-            fun forId(id: Int): Int {
-                return productOfFill[id]!!
-            }
+            fun forId(id: Int): Int = productOfFill[id]!!
 
-            fun emptyContains(id: Int): Boolean {
-                return productOfFill.contains(id)
-            }
+            fun emptyContains(id: Int): Boolean = productOfFill.contains(id)
         }
     }
 

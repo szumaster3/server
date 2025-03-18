@@ -87,15 +87,14 @@ class SummoningCreationPlugin : ComponentPlugin() {
 
     private fun getAdjustedSlot(slot: Int) = if (slot > 50) slot - 1 else slot
 
-    private fun getItemAmount(opcode: Int): Int {
-        return when (opcode) {
+    private fun getItemAmount(opcode: Int): Int =
+        when (opcode) {
             155 -> 1
             196 -> 5
             124 -> 10
             199 -> 28
             else -> -1
         }
-    }
 
     class ObeliskHandler :
         UseWithHandler(

@@ -11,14 +11,13 @@ import core.plugin.Plugin
 @Initializable
 class CookingRecipe : UseWithHandler(*getAllowedNodes()) {
     companion object {
-        private fun getAllowedNodes(): IntArray {
-            return Recipe
+        private fun getAllowedNodes(): IntArray =
+            Recipe
                 .values()
                 .flatMap { recipe ->
                     recipe.parts.map { it.id } + recipe.base.id
                 }.distinct()
                 .toIntArray()
-        }
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -52,9 +51,7 @@ class CookingRecipe : UseWithHandler(*getAllowedNodes()) {
                     )
                 }
 
-                override fun getAll(index: Int): Int {
-                    return player.inventory.getAmount(recipe.base)
-                }
+                override fun getAll(index: Int): Int = player.inventory.getAmount(recipe.base)
             }
 
         if (player.inventory.getAmount(recipe.base) == 1) {
@@ -65,8 +62,8 @@ class CookingRecipe : UseWithHandler(*getAllowedNodes()) {
         return true
     }
 
-    private fun findMatchingRecipe(event: NodeUsageEvent): Recipe? {
-        return Recipe.values().firstOrNull { recipe ->
+    private fun findMatchingRecipe(event: NodeUsageEvent): Recipe? =
+        Recipe.values().firstOrNull { recipe ->
             if (recipe.singular) {
                 (recipe.base.id == event.usedItem.id || recipe.base.id == event.baseItem.id) &&
                     recipe.ingredients.any { it.id == event.usedItem.id || it.id == event.baseItem.id }
@@ -79,5 +76,4 @@ class CookingRecipe : UseWithHandler(*getAllowedNodes()) {
                 }
             }
         }
-    }
 }

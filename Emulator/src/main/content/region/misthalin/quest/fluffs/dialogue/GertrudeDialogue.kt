@@ -291,13 +291,9 @@ class GertrudeDialogue(
     val kitten: Item
         get() = Item(RandomFunction.random(Items.PET_KITTEN_1555, Items.PET_KITTEN_1560))
 
-    override fun newInstance(player: Player): Dialogue {
-        return GertrudeDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GertrudeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GERTRUDE_780)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GERTRUDE_780)
 
     companion object {
         private val COINS = Item(995, 100)

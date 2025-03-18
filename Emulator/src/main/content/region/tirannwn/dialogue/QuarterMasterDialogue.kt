@@ -48,11 +48,7 @@ class QuarterMasterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return QuarterMasterDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = QuarterMasterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.QUARTERMASTER_1208)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.QUARTERMASTER_1208)
 }

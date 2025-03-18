@@ -133,8 +133,8 @@ class AssistantDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.AUGUSTE_5050,
             NPCs.ASSISTANT_SERF_5053,
             NPCs.ASSISTANT_MARROW_5055,
@@ -142,5 +142,4 @@ class AssistantDialogue(
             NPCs.ASSISTANT_STAN_5057,
             5065,
         )
-    }
 }

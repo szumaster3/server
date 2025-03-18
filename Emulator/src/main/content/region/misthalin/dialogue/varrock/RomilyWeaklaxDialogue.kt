@@ -202,9 +202,7 @@ class RomilyWeaklaxDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROMILY_WEAKLAX_3205)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROMILY_WEAKLAX_3205)
 
     private enum class PieReward(
         var id: Int,

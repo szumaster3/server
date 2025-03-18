@@ -90,7 +90,5 @@ class RobinDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROBIN_1694)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROBIN_1694)
 }

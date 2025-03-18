@@ -18,9 +18,7 @@ import org.rs.consts.Quests
 class GuardianOfArmadylDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun newInstance(player: Player): Dialogue {
-        return GuardianOfArmadylDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GuardianOfArmadylDialogue(player)
 
     override fun handle(
         interfaceId: Int,
@@ -30,9 +28,7 @@ class GuardianOfArmadylDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARDIAN_OF_ARMADYL_274, NPCs.GUARDIAN_OF_ARMADYL_275)
 }
 
 class GuardianOfArmadylDialogueFile : DialogueBuilderFile() {

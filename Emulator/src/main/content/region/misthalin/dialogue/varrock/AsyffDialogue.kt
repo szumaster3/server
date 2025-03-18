@@ -89,11 +89,7 @@ class AsyffDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return AsyffDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = AsyffDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FANCY_DRESS_SHOP_OWNER_554)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FANCY_DRESS_SHOP_OWNER_554)
 }

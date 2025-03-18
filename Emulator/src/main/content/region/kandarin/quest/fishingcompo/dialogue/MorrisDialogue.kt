@@ -59,7 +59,5 @@ class MorrisDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MORRIS_227)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MORRIS_227)
 }

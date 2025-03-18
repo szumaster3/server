@@ -43,11 +43,7 @@ class JariDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JariDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JariDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JARI_3935)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JARI_3935)
 }

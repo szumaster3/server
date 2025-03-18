@@ -135,7 +135,5 @@ class DunstanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DUNSTAN_1082)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DUNSTAN_1082)
 }

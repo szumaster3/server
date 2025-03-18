@@ -776,13 +776,9 @@ class OsmanDialogue(
         return false
     }
 
-    private fun hasSqirks(): Boolean {
-        return hasSqirkFruit() || hasSqirkJuice()
-    }
+    private fun hasSqirks(): Boolean = hasSqirkFruit() || hasSqirkJuice()
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OSMAN_924, NPCs.MAISA_5282)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OSMAN_924, NPCs.MAISA_5282)
 
     companion object {
         private const val KEY_PRINT = Items.KEY_PRINT_2423

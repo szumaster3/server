@@ -206,11 +206,7 @@ class JarvaldDialogue(
             }
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JarvaldDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JarvaldDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438)
-    }
+    override fun getIds(): IntArray = intArrayOf(2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438)
 }

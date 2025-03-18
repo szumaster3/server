@@ -47,16 +47,13 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
         return super.tick(self)
     }
 
-    private fun sendTutorialChat(self: NPC): Boolean {
-        return RandomFunction.random(100) < 10 &&
+    private fun sendTutorialChat(self: NPC): Boolean =
+        RandomFunction.random(100) < 10 &&
             inBorders(self, SkippyUtils.TUTORIAL_ISLAND).also {
                 if (it) sendChat(self, "You can skip the tutorial by talking to me!")
             }
-    }
 
-    private fun randomRoll(self: NPC): Boolean {
-        return RandomFunction.random(100) < 5 && inBorders(self, SkippyUtils.PORT_SARIM)
-    }
+    private fun randomRoll(self: NPC): Boolean = RandomFunction.random(100) < 5 && inBorders(self, SkippyUtils.PORT_SARIM)
 
     private fun handleThrow(self: NPC) {
         if (!finishedMoving(self)) return

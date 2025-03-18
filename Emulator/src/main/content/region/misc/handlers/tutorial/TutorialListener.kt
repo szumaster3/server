@@ -1,7 +1,6 @@
 package content.region.misc.handlers.tutorial
 
 import content.data.GameAttributes
-import content.region.misc.handlers.tutorial.TutorialStage.TUTORIAL_HINT
 import content.region.misc.handlers.tutorial.TutorialStage.TUTORIAL_STAGE
 import core.api.*
 import core.api.ui.closeDialogue
@@ -12,16 +11,15 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.interaction.QueueStrength
-import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.repository.Repository
 import org.rs.consts.*
 
-class TutorialListener : InteractionListener, InterfaceListener {
-
+class TutorialListener :
+    InteractionListener,
+    InterfaceListener {
     override fun defineInterfaceListeners() {
         onClose(Components.EQUIP_SCREEN2_667) { p, c ->
             if (!getAttribute(p, GameAttributes.TUTORIAL_COMPLETE, false)) {
@@ -73,6 +71,7 @@ class TutorialListener : InteractionListener, InterfaceListener {
             return@onClose true
         }
     }
+
     override fun defineListeners() {
         on(RS_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 3) {
@@ -236,7 +235,7 @@ class TutorialListener : InteractionListener, InterfaceListener {
 
         on(COMBAT_GATE, IntType.SCENERY, "open") { player, node ->
             val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1)
-            if(stage < 42) {
+            if (stage < 42) {
                 Component
                     .setUnclosable(
                         player,
@@ -249,7 +248,7 @@ class TutorialListener : InteractionListener, InterfaceListener {
                     )
                 return@on true
             }
-            if(stage >= 44) {
+            if (stage >= 44) {
                 Component
                     .setUnclosable(
                         player,
@@ -270,14 +269,15 @@ class TutorialListener : InteractionListener, InterfaceListener {
         on(GIANT_RAT_GATE, IntType.SCENERY, "open") { player, node ->
             val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
             if (stage !in 50..53) {
-                player.dialogueInterpreter.sendDialogues(
-                    NPCs.COMBAT_INSTRUCTOR_944,
-                    FaceAnim.NEUTRAL,
-                    "Oi, get away from there!",
-                    "Don't enter my rat pen unless I say so!",
-                ).also {
-                    closeDialogue(player)
-                }
+                player.dialogueInterpreter
+                    .sendDialogues(
+                        NPCs.COMBAT_INSTRUCTOR_944,
+                        FaceAnim.NEUTRAL,
+                        "Oi, get away from there!",
+                        "Don't enter my rat pen unless I say so!",
+                    ).also {
+                        closeDialogue(player)
+                    }
                 return@on true
             }
             if (stage == 50) {

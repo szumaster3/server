@@ -33,7 +33,5 @@ class RepairItemHandler : UseWithHandler() {
         return true
     }
 
-    private fun isBarrowsItem(itemId: Int): Boolean {
-        return BobDialogue.BarrowsEquipment.isBarrowsItem(itemId)
-    }
+    private fun isBarrowsItem(itemId: Int): Boolean = BobDialogue.BarrowsEquipment.isBarrowsItem(itemId)
 }

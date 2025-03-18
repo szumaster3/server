@@ -125,9 +125,7 @@ class CyclopesRoom :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     private class KamfreenaCyclopsRoomDialogue : Dialogue {
         private var defenderId = 0
@@ -135,9 +133,7 @@ class CyclopesRoom :
         constructor() : super()
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player?): Dialogue {
-            return KamfreenaCyclopsRoomDialogue(player)
-        }
+        override fun newInstance(player: Player?): Dialogue = KamfreenaCyclopsRoomDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             defenderId = args[0] as Int
@@ -185,9 +181,7 @@ class CyclopesRoom :
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("defender entry"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("defender entry"))
     }
 
     companion object {

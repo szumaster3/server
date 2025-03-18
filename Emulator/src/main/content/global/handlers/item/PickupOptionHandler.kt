@@ -33,7 +33,5 @@ class PickupOptionHandler : OptionHandler() {
     override fun getDestination(
         node: Node,
         item: Node,
-    ): Location? {
-        return null
-    }
+    ): Location? = null
 }

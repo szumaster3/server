@@ -33,9 +33,7 @@ fun produceGroundItem(
     id: Int,
     amount: Int,
     location: Location,
-): GroundItem {
-    return GroundItemManager.create(Item(id, amount), location, owner)
-}
+): GroundItem = GroundItemManager.create(Item(id, amount), location, owner)
 
 /**
  * Removes a ground item from the game world.
@@ -52,8 +50,6 @@ fun removeGroundItem(node: GroundItem) {
  * @param node The [GroundItem] to be checked for validity.
  * @return True if the ground item exists in the world, otherwise false.
  */
-fun isValidGroundItem(node: GroundItem): Boolean {
-    return GroundItemManager.getItems().contains(node)
-}
+fun isValidGroundItem(node: GroundItem): Boolean = GroundItemManager.getItems().contains(node)
 
 private class GroundItemAPI

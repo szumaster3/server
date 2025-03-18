@@ -53,9 +53,7 @@ class SoftclayPlugin : UseWithHandler(Items.CLAY_434) {
                     )
                 }
 
-                override fun getAll(index: Int): Int {
-                    return player.inventory.getAmount(clayId)
-                }
+                override fun getAll(index: Int): Int = player.inventory.getAmount(clayId)
             }
         if (player.inventory.getAmount(clayId) == 1) {
             create(player, event)

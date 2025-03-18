@@ -118,11 +118,7 @@ class VarrockEastBartenderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VarrockEastBartenderDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VarrockEastBartenderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARTENDER_733)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARTENDER_733)
 }

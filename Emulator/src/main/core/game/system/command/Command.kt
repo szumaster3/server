@@ -32,21 +32,15 @@ class Command(
 object CommandMapping {
     private val mapping = hashMapOf<String, Command>()
 
-    fun get(name: String): Command? {
-        return mapping[name]
-    }
+    fun get(name: String): Command? = mapping[name]
 
     fun register(command: Command) {
         mapping[command.name] = command
     }
 
-    fun getCommands(): Array<Command> {
-        return mapping.values.toTypedArray()
-    }
+    fun getCommands(): Array<Command> = mapping.values.toTypedArray()
 
-    fun getNames(): Array<String> {
-        return mapping.keys.toTypedArray()
-    }
+    fun getNames(): Array<String> = mapping.keys.toTypedArray()
 
     fun getPageIndices(rights: Int): IntArray {
         val list = ArrayList<Int>()

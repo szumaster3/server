@@ -287,11 +287,7 @@ class MatthiasFalconryDialogue(
             )
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return MatthiasFalconryDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = MatthiasFalconryDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MATTHIAS_5093)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MATTHIAS_5093)
 }

@@ -76,11 +76,7 @@ class DiangoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DiangoDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DiangoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DIANGO_970)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DIANGO_970)
 }

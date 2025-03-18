@@ -140,7 +140,5 @@ class BaileyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BAILEY_695)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BAILEY_695)
 }

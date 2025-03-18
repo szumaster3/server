@@ -41,7 +41,5 @@ class FernaheiDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FERNAHEI_517)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FERNAHEI_517)
 }

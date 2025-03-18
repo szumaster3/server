@@ -18,13 +18,9 @@ class PoisonSpiderNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PoisonSpiderNPC(id, location)
-    }
+    ): AbstractNPC = PoisonSpiderNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.POISON_SPIDER_1009)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.POISON_SPIDER_1009)
 
     override fun handleTickActions() {
         super.handleTickActions()

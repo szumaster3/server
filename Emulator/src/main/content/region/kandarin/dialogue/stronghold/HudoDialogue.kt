@@ -43,11 +43,7 @@ class HudoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HudoDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HudoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HUDO_600)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HUDO_600)
 }

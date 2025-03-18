@@ -72,11 +72,7 @@ class RokuhDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RokuhDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RokuhDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROKUH_3045)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROKUH_3045)
 }

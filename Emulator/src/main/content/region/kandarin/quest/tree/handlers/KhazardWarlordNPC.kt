@@ -21,13 +21,9 @@ class KhazardWarlordNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return KhazardWarlordNPC(id, location)
-    }
+    ): AbstractNPC = KhazardWarlordNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_WARLORD_477)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_WARLORD_477)
 
     override fun finalizeDeath(killer: Entity?) {
         if (getQuestStage(killer as Player, Quests.TREE_GNOME_VILLAGE) == 40) {

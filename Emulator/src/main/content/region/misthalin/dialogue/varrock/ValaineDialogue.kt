@@ -38,11 +38,7 @@ class ValaineDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ValaineDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ValaineDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VALAINE_536)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VALAINE_536)
 }

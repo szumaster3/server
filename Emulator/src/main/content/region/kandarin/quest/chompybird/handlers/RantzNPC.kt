@@ -19,13 +19,9 @@ class RantzNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return RantzNPC(id, location)
-    }
+    ): AbstractNPC = RantzNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANTZ_1010)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANTZ_1010)
 
     override fun handleTickActions() {
         super.handleTickActions()

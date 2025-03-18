@@ -72,9 +72,7 @@ class CartConductorDialogue(
         }
     }
 
-    override fun npc(vararg messages: String?): Component {
-        return super.npc(FaceAnim.OLD_NORMAL, *messages)
-    }
+    override fun npc(vararg messages: String?): Component = super.npc(FaceAnim.OLD_NORMAL, *messages)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -89,11 +87,7 @@ class CartConductorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CartConductorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CartConductorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ICE_MOUNTAIN_CONDUCTOR, WHITE_WOLF_CONDUCTOR, KELDAGRIM_CONDUCTOR)
-    }
+    override fun getIds(): IntArray = intArrayOf(ICE_MOUNTAIN_CONDUCTOR, WHITE_WOLF_CONDUCTOR, KELDAGRIM_CONDUCTOR)
 }

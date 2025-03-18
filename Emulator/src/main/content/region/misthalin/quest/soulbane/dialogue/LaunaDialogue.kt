@@ -87,7 +87,5 @@ class LaunaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LAUNA_3640, NPCs.LAUNA_3639, 3638)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LAUNA_3640, NPCs.LAUNA_3639, 3638)
 }

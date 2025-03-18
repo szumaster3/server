@@ -10,14 +10,13 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Components
 
 class Ratpit : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             getRegionBorders(VARROCK_RAT_PITS_REGION),
             getRegionBorders(PORT_SARIM_RAT_PITS_REGION),
             getRegionBorders(KELDAGRIM_RAT_PITS_REGION),
             getRegionBorders(ARDOUGNE_RAT_PITS_REGION),
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)

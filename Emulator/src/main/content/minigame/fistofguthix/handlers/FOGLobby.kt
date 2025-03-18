@@ -59,9 +59,7 @@ class FOGLobby :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         super.registerRegion(6743)

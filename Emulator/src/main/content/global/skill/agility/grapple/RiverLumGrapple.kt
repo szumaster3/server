@@ -281,11 +281,10 @@ class RiverLumGrapple : OptionHandler() {
     override fun getDestination(
         moving: Node,
         destination: Node,
-    ): Location {
-        return if (moving.location.x > 3258) {
+    ): Location =
+        if (moving.location.x > 3258) {
             Location.create(3259, 3179, 0)
         } else {
             Location.create(3246, 3179, 0)
         }
-    }
 }

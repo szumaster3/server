@@ -24,13 +24,9 @@ class LucienEndingNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return LucienEndingNPC(id, location)
-    }
+    ): AbstractNPC = LucienEndingNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUCIEN_272)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUCIEN_272)
 
     override fun isAttackable(
         entity: Entity,

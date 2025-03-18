@@ -44,11 +44,7 @@ class KelynDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return KelynDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = KelynDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KELYN_2367)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KELYN_2367)
 }

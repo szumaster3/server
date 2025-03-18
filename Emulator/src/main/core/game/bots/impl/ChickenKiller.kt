@@ -96,9 +96,7 @@ class ChickenKiller : Script() {
         }
     }
 
-    override fun newInstance(): Script {
-        return this
-    }
+    override fun newInstance(): Script = this
 
     enum class State {
         IDLE,

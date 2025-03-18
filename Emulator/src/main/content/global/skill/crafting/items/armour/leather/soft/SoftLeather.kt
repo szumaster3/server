@@ -63,8 +63,6 @@ enum class SoftLeather(
         }
 
         @JvmStatic
-        fun forButton(button: Int): SoftLeather? {
-            return values().find { it.button == button }
-        }
+        fun forButton(button: Int): SoftLeather? = values().find { it.button == button }
     }
 }

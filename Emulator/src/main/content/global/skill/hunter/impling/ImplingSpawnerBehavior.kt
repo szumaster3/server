@@ -42,11 +42,7 @@ class ImplingSpawnerBehavior : NPCBehavior(*ImplingSpawner.getIds()) {
         return true
     }
 
-    override fun getClippingSupplier(self: NPC): ClipMaskSupplier {
-        return ImplingClipper
-    }
+    override fun getClippingSupplier(self: NPC): ClipMaskSupplier = ImplingClipper
 
-    private fun isPuroSpawner(self: NPC): Boolean {
-        return self.id > 6000
-    }
+    private fun isPuroSpawner(self: NPC): Boolean = self.id > 6000
 }

@@ -37,11 +37,7 @@ class RadimusErkeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RadimusErkeDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RadimusErkeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RADIMUS_ERKLE_400)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RADIMUS_ERKLE_400)
 }

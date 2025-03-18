@@ -179,9 +179,7 @@ class MTAShop : InterfaceListener {
     fun getPoints(
         player: Player,
         index: Int,
-    ): Int {
-        return player.getSavedData().activityData.getPizazzPoints(index)
-    }
+    ): Int = player.getSavedData().activityData.getPizazzPoints(index)
 
     companion object {
         @JvmStatic

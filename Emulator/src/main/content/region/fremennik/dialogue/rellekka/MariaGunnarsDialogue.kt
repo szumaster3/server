@@ -605,11 +605,7 @@ class MariaGunnarsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MariaGunnarsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MariaGunnarsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MARIA_GUNNARS_5507, NPCs.MARIA_GUNNARS_5508)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MARIA_GUNNARS_5507, NPCs.MARIA_GUNNARS_5508)
 }

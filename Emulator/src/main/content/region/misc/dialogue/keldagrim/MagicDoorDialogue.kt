@@ -84,13 +84,9 @@ class MagicDoorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GATEKEEPER_3321, DialogueInterpreter.getDialogueKey(NAME))
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GATEKEEPER_3321, DialogueInterpreter.getDialogueKey(NAME))
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MagicDoorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MagicDoorDialogue(player)
 
     companion object {
         const val NAME: String = "tax door"

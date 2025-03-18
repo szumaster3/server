@@ -100,11 +100,7 @@ class JayeneKliynDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JayeneKliynDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JayeneKliynDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JAYENE_KLIYN_3628)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JAYENE_KLIYN_3628)
 }

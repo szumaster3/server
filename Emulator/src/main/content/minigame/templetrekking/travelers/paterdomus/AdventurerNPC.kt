@@ -17,13 +17,9 @@ class AdventurerNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return AdventurerNPC(id, location)
-    }
+    ): AbstractNPC = AdventurerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ADVENTURER_1512)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ADVENTURER_1512)
 
     companion object;
 

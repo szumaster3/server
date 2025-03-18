@@ -195,11 +195,7 @@ class VeronicaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VeronicaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VeronicaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VERONICA_285)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VERONICA_285)
 }

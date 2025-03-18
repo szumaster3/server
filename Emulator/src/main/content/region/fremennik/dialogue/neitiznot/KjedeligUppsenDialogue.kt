@@ -28,11 +28,7 @@ class KjedeligUppsenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KjedeligUppsenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KjedeligUppsenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KJEDELIG_UPPSEN_5518)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KJEDELIG_UPPSEN_5518)
 }

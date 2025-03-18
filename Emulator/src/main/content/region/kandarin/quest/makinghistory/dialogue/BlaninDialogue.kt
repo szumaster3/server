@@ -130,7 +130,5 @@ class BlaninDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLANIN_2940)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLANIN_2940)
 }

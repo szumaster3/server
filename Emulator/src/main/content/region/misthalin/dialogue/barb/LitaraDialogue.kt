@@ -69,11 +69,7 @@ class LitaraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LitaraDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LitaraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LITARA_4376)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LITARA_4376)
 }

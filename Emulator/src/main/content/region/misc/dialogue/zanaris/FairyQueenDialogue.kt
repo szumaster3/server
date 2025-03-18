@@ -63,11 +63,7 @@ class FairyQueenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FairyQueenDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FairyQueenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FAIRY_QUEEN_4437)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_QUEEN_4437)
 }

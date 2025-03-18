@@ -132,8 +132,8 @@ class SheepdogDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SHEEPDOG_PUPPY_6966,
             NPCs.SHEEPDOG_6967,
             NPCs.SHEEPDOG_PUPPY_7253,
@@ -141,5 +141,4 @@ class SheepdogDialogue(
             NPCs.SHEEPDOG_PUPPY_7255,
             NPCs.SHEEPDOG_7256,
         )
-    }
 }

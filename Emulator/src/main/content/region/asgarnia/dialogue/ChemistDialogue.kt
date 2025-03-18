@@ -177,11 +177,7 @@ class ChemistDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ChemistDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ChemistDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHEMIST_367)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHEMIST_367)
 }

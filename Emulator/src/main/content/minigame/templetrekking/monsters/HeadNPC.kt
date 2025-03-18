@@ -23,13 +23,9 @@ class HeadNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return HeadNPC(id, location)
-    }
+    ): AbstractNPC = HeadNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HEAD_3619, NPCs.HEAD_3620)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HEAD_3619, NPCs.HEAD_3620)
 
     override fun handleTickActions() {
         super.handleTickActions()

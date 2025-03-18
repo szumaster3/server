@@ -580,9 +580,7 @@ class BrimhavenCourse : OptionHandler() {
         private fun getExp(
             player: Player,
             exp: Double,
-        ): Double {
-            return if (player.achievementDiaryManager.karamjaGlove > 1) exp + (exp * 0.10) else exp
-        }
+        ): Double = if (player.achievementDiaryManager.karamjaGlove > 1) exp + (exp * 0.10) else exp
 
         private fun getHitAmount(player: Player): Int {
             var hit = player.getSkills().lifepoints / 12

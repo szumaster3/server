@@ -21,15 +21,9 @@ class GeneralHiningDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return GeneralHiningDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GeneralHiningDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GENERAL_HINING_7121)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_HINING_7121)
 }

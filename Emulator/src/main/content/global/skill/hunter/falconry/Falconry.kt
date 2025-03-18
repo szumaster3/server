@@ -11,9 +11,7 @@ import core.game.world.map.zone.ZoneRestriction
 import org.rs.consts.Items
 
 class Falconry : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2363, 3574, 2395, 3620))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2363, 3574, 2395, 3620))
 
     override fun areaLeave(
         entity: Entity,
@@ -31,7 +29,6 @@ class Falconry : MapArea {
         }
     }
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FIRES, ZoneRestriction.RANDOM_EVENTS)
 }

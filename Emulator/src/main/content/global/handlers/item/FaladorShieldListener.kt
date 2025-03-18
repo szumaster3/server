@@ -66,22 +66,21 @@ class FaladorShieldListener : InteractionListener {
         }
     }
 
-    private fun getLevel(itemId: Int): Int {
-        return when (itemId) {
+    private fun getLevel(itemId: Int): Int =
+        when (itemId) {
             Items.FALADOR_SHIELD_1_14577 -> 0
             Items.FALADOR_SHIELD_2_14578 -> 1
             Items.FALADOR_SHIELD_3_14579 -> 2
             else -> -1
         }
-    }
 
     private fun getPulse(
         entity: Entity,
         level: Int,
-    ): Pulse {
-        return object : Pulse(1) {
-            override fun pulse(): Boolean {
-                return when (delay++) {
+    ): Pulse =
+        object : Pulse(1) {
+            override fun pulse(): Boolean =
+                when (delay++) {
                     0 -> {
                         lock(entity, 3)
                         visualize(
@@ -99,9 +98,7 @@ class FaladorShieldListener : InteractionListener {
 
                     else -> false
                 }
-            }
         }
-    }
 
     companion object {
         const val ANIM_EMOTE: Int = Animations.HUMAN_FALADOR_SHIELD_RESTORE_11012

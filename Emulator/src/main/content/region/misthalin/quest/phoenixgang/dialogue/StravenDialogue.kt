@@ -445,13 +445,9 @@ class StravenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return StravenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = StravenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STRAVEN_644)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STRAVEN_644)
 
     fun handleDefault(buttonId: Int) {
         when (stage) {

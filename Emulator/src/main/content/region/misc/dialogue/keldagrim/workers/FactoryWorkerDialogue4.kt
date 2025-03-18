@@ -43,7 +43,5 @@ class FactoryWorkerDialogue4(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FACTORY_WORKER_2175)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FACTORY_WORKER_2175)
 }

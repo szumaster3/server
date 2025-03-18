@@ -28,11 +28,7 @@ class EdWoodDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EdWoodDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EdWoodDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ED_WOOD_5964)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ED_WOOD_5964)
 }

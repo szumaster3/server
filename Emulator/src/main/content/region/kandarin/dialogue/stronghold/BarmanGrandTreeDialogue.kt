@@ -96,11 +96,7 @@ class BarmanGrandTreeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BarmanGrandTreeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BarmanGrandTreeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARMAN_849)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARMAN_849)
 }

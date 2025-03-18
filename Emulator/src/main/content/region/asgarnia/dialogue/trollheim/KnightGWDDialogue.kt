@@ -71,7 +71,5 @@ class KnightGWDDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KNIGHT_6202)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KNIGHT_6202)
 }

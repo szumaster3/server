@@ -27,11 +27,7 @@ class CaranockDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GLO_CARANOCK_1427)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GLO_CARANOCK_1427)
 }

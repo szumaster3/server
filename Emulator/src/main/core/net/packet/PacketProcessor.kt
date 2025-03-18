@@ -99,14 +99,14 @@ object PacketProcessor {
             is Packet.UseWithScenery,
             is Packet.UseWithGroundItem,
             is Packet.UseWithPlayer,
-                -> processUseWith(pkt)
+            -> processUseWith(pkt)
 
             is Packet.IfAction -> processIfAction(pkt)
             is Packet.CloseIface -> processCloseIface(pkt)
             is Packet.WorldspaceWalk,
             is Packet.MinimapWalk,
             is Packet.InteractWalk,
-                -> processWalkPacket(pkt)
+            -> processWalkPacket(pkt)
 
             is Packet.AddFriend -> CommunicationInfo.add(pkt.player, pkt.username)
             is Packet.RemoveFriend -> CommunicationInfo.remove(pkt.player, pkt.username, false)
@@ -117,18 +117,18 @@ object PacketProcessor {
             is Packet.ComponentNpcAction,
             is Packet.ComponentSceneryAction,
             is Packet.ComponentGroundItemAction,
-                -> processComponentUseWith(pkt)
+            -> processComponentUseWith(pkt)
 
             is Packet.SlotSwitchSingleComponent,
             is Packet.SlotSwitchMultiComponent,
-                -> processSlotSwitch(pkt)
+            -> processSlotSwitch(pkt)
 
             is Packet.TrackingMouseClick,
             is Packet.TrackingAfkTimeout,
             is Packet.TrackingFocus,
             is Packet.TrackingCameraPos,
             is Packet.TrackingDisplayUpdate,
-                -> processTrackingPacket(pkt)
+            -> processTrackingPacket(pkt)
 
             is Packet.PlayerPrefsUpdate -> {}
             is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
@@ -411,7 +411,7 @@ object PacketProcessor {
                                 pkt.player.bank.freeSlot()
                             } else {
                                 pkt.player.bank.tabStartSlot[tabIndex] +
-                                        pkt.player.bank.getItemsInTab(tabIndex)
+                                    pkt.player.bank.getItemsInTab(tabIndex)
                             }
                         val inSlot: Item = pkt.player.bank.get(pkt.sourceSlot)
                         if (secondSlot == -1 && pkt.player.bank.remove(inSlot)) {
@@ -812,7 +812,9 @@ object PacketProcessor {
         player.debug("Loc: ${scenery.location}, Dir: ${scenery.direction}")
         if (hasWrapper) {
             player.debug(
-                "WrapperID: ${scenery.id}, ${scenery.definition.configFile?.let { "Varbit: ${it.id}" } ?: "Varp: ${scenery.definition.configId}"}",
+                "WrapperID: ${scenery.id}, ${scenery.definition.configFile?.let {
+                    "Varbit: ${it.id}"
+                } ?: "Varp: ${scenery.definition.configId}"}",
             )
         }
         player.debug("------------------------------------------------")
@@ -883,14 +885,13 @@ object PacketProcessor {
     private fun getLikelyContainerForIface(
         player: Player,
         iface: Int,
-    ): Container? {
-        return when (iface) {
+    ): Container? =
+        when (iface) {
             Components.INVENTORY_149 -> player.inventory
             Components.BANK_V2_MAIN_762 -> player.bank
             Components.EQUIP_SCREEN2_667 -> player.equipment
             else -> null
         }
-    }
 
     private fun sendClearMinimap(player: Player) {
         PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(player))

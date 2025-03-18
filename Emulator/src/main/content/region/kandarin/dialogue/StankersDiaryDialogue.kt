@@ -185,7 +185,5 @@ class StankersDiaryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STANKERS_383)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STANKERS_383)
 }

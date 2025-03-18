@@ -45,11 +45,7 @@ class LonghallBouncerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LonghallBouncerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LonghallBouncerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LONGHALL_BOUNCER_1278)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LONGHALL_BOUNCER_1278)
 }

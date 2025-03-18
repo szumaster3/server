@@ -28,13 +28,9 @@ class GiantChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GiantChampionNPC(id, location)
-    }
+    ): AbstractNPC = GiantChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANT_CHAMPION_3058)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_CHAMPION_3058)
 
     override fun handleTickActions() {
         super.handleTickActions()

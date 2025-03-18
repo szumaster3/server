@@ -30,9 +30,7 @@ class EquipmentDegrade {
         }
     }
 
-    fun Int.canDegrade(): Boolean {
-        return itemList.contains(this)
-    }
+    fun Int.canDegrade(): Boolean = itemList.contains(this)
 
     fun checkArmourDegrades(player: Player?) {
         p = player
@@ -83,7 +81,5 @@ class EquipmentDegrade {
         }
     }
 
-    private fun getDegradableSet(item: Int): ArrayList<Int>? {
-        return setList.find { it.contains(item) }
-    }
+    private fun getDegradableSet(item: Int): ArrayList<Int>? = setList.find { it.contains(item) }
 }

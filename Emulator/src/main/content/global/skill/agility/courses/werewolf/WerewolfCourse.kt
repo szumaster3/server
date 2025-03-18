@@ -266,9 +266,7 @@ class WerewolfCourse constructor(
         return null
     }
 
-    override fun createInstance(player: Player): AgilityCourse {
-        return WerewolfCourse(player)
-    }
+    override fun createInstance(player: Player): AgilityCourse = WerewolfCourse(player)
 
     companion object {
         private val stickLocation = location(3542, 9912, 0)

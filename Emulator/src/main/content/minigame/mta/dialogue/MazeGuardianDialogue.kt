@@ -56,7 +56,5 @@ class MazeGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAZE_GUARDIAN_3102)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAZE_GUARDIAN_3102)
 }

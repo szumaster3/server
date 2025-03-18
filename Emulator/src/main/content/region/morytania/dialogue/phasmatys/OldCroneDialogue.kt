@@ -26,17 +26,18 @@ class OldCroneDialogue(
         val animalMagnetism = getQuestStage(player, Quests.ANIMAL_MAGNETISM)
         val sweptAway =
             isQuestComplete(player, Quests.SWEPT_AWAY) &&
-                    inInventory(player, Items.BROOMSTICK_14057) &&
-                    getDynLevel(player, Skills.MAGIC) >= 53 &&
-                    getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)
+                inInventory(player, Items.BROOMSTICK_14057) &&
+                getDynLevel(player, Skills.MAGIC) >= 53 &&
+                getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)
 
         npc = args[0] as NPC
 
         when {
             // If Ghosts Ahoy quest stage >= 3 and Animal Magnetism quest is either incomplete or completed
-            getQuestStage(player, Quests.GHOSTS_AHOY) >= 3 && (
+            getQuestStage(player, Quests.GHOSTS_AHOY) >= 3 &&
+                (
                     animalMagnetism < 16 || isQuestComplete(player, Quests.ANIMAL_MAGNETISM)
-                    ) -> {
+                ) -> {
                 openDialogue(player, OldCroneDialogueFile())
             }
 
@@ -45,7 +46,7 @@ class OldCroneDialogue(
                 options(
                     "Talk about quest. (Animal Magnetism)",
                     "Talk about quest. (Ghosts Ahoy)",
-                    "Nevermind."
+                    "Nevermind.",
                 ).also { stage = 1 }
             }
 
@@ -58,7 +59,7 @@ class OldCroneDialogue(
             sweptAway -> {
                 options(
                     "Hello, old woman.",
-                    "Could you enchant this broom for me?"
+                    "Could you enchant this broom for me?",
                 ).also { stage = 2 }
             }
 
@@ -123,7 +124,5 @@ class OldCroneDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLD_CRONE_1695)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLD_CRONE_1695)
 }

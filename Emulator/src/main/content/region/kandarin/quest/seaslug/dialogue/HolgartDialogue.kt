@@ -92,7 +92,5 @@ class HolgartDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOLGART_699, NPCs.HOLGART_700)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGART_699, NPCs.HOLGART_700)
 }

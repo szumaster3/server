@@ -120,13 +120,9 @@ class StringJewellerySpell : SpellListener("lunar") {
         companion object {
             private val productOfString = values().associate { it.unstrung to it.strung }
 
-            fun forId(id: Int): Int {
-                return productOfString[id]!!
-            }
+            fun forId(id: Int): Int = productOfString[id]!!
 
-            fun unstrungContains(id: Int): Boolean {
-                return productOfString.contains(id)
-            }
+            fun unstrungContains(id: Int): Boolean = productOfString.contains(id)
         }
     }
 }

@@ -40,7 +40,5 @@ class LeatherWorkerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LEATHERWORKER_680)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LEATHERWORKER_680)
 }

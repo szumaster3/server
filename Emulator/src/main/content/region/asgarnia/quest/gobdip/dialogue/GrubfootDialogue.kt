@@ -126,7 +126,5 @@ class GrubfootDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GENERAL_WARTFACE_4495, NPCs.GRUBFOOT_4497, NPCs.GRUBFOOT_4498, NPCs.GRUBFOOT_4496)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_WARTFACE_4495, NPCs.GRUBFOOT_4497, NPCs.GRUBFOOT_4498, NPCs.GRUBFOOT_4496)
 }

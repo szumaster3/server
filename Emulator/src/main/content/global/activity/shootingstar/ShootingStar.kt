@@ -97,9 +97,7 @@ class ShootingStar(
         starScenery = newStar
     }
 
-    private fun getNextType(): ShootingStarType {
-        return ShootingStarType.values()[level.ordinal - 1]
-    }
+    private fun getNextType(): ShootingStarType = ShootingStarType.values()[level.ordinal - 1]
 
     fun fire() {
         SceneryBuilder.remove(starScenery)

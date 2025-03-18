@@ -24,17 +24,17 @@ class HorrorFromTheDeepListener : InteractionListener {
     private val brokenBridge = intArrayOf(Scenery.BROKEN_BRIDGE_4615, Scenery.BROKEN_BRIDGE_4616)
     private val strangeWalls = intArrayOf(Scenery.STRANGE_WALL_4544, Scenery.STRANGE_WALL_4543)
     private val strangeDoors = intArrayOf(Scenery.STRANGE_WALL_4545, Scenery.STRANGE_WALL_4546)
-    private val requiredItems = intArrayOf(
-        Items.BRONZE_ARROW_882,
-        Items.BRONZE_SWORD_1277,
-        Items.AIR_RUNE_556,
-        Items.FIRE_RUNE_554,
-        Items.EARTH_RUNE_557,
-        Items.WATER_RUNE_555
-    )
+    private val requiredItems =
+        intArrayOf(
+            Items.BRONZE_ARROW_882,
+            Items.BRONZE_SWORD_1277,
+            Items.AIR_RUNE_556,
+            Items.FIRE_RUNE_554,
+            Items.EARTH_RUNE_557,
+            Items.WATER_RUNE_555,
+        )
 
     override fun defineListeners() {
-
         /*
          * Handles lighthouse bookcase.
          */
@@ -59,11 +59,12 @@ class HorrorFromTheDeepListener : InteractionListener {
 
         on(Scenery.IRON_LADDER_4383, IntType.SCENERY, "climb") { player, _ ->
             val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
-            val teleportLocation = when {
-                isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> Location(2519, 9994, 1)
-                questStage >= 40 -> Location(2519, 4618, 1)
-                else -> null
-            }
+            val teleportLocation =
+                when {
+                    isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP) -> Location(2519, 9994, 1)
+                    questStage >= 40 -> Location(2519, 4618, 1)
+                    else -> null
+                }
 
             if (teleportLocation != null) {
                 animate(player, Animations.MULTI_BEND_OVER_827)
@@ -94,16 +95,19 @@ class HorrorFromTheDeepListener : InteractionListener {
                     val insideLighthouse = inBorders(player, 2508, 3634, 2510, 3635)
                     val teleportLocation = if (insideLighthouse) location(2445, 4596, 0) else location(2509, 3635, 0)
 
-                    submitIndividualPulse(player, object : Pulse(2) {
-                        override fun pulse(): Boolean {
-                            if (insideLighthouse) {
-                                sendMessage(player, "You unlock the Lighthouse front door.")
-                                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 30)
+                    submitIndividualPulse(
+                        player,
+                        object : Pulse(2) {
+                            override fun pulse(): Boolean {
+                                if (insideLighthouse) {
+                                    sendMessage(player, "You unlock the Lighthouse front door.")
+                                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 30)
+                                }
+                                runTask(player, 3) { teleport(player, teleportLocation) }
+                                return true
                             }
-                            runTask(player, 3) { teleport(player, teleportLocation) }
-                            return true
-                        }
-                    })
+                        },
+                    )
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 }
 
@@ -111,7 +115,7 @@ class HorrorFromTheDeepListener : InteractionListener {
                     sendNPCDialogue(
                         player,
                         NPCs.LARRISSA_1336,
-                        "Please adventurer... We are both curious as to what has happened in that lighthouse, but you need to fix the bridge for me!"
+                        "Please adventurer... We are both curious as to what has happened in that lighthouse, but you need to fix the bridge for me!",
                     )
                 }
 
@@ -168,8 +172,8 @@ class HorrorFromTheDeepListener : InteractionListener {
         }
 
         /*
-        * Handles study the strange wall.
-        */
+         * Handles study the strange wall.
+         */
 
         on(strangeWalls, IntType.SCENERY, "study") { player, _ ->
             when (player.location.y) {
@@ -277,7 +281,6 @@ class HorrorFromTheDeepListener : InteractionListener {
             return@onUseWith true
         }
 
-
         /*
          * Handles crossing the bridge.
          */
@@ -290,10 +293,12 @@ class HorrorFromTheDeepListener : InteractionListener {
             val baseLocationX = if (fromWest) 2595 else 2598
             val locations = (0..3).map { Location(baseLocationX + it * (if (fromWest) 1 else -1), 3608, 0) }
 
-            val animations = if (fromWest)
-                listOf(Animation(753), Animation(756), Animation(757), Animation(759))
-            else
-                listOf(Animation(752), Animation(754), Animation(755), Animation(758))
+            val animations =
+                if (fromWest) {
+                    listOf(Animation(753), Animation(756), Animation(757), Animation(759))
+                } else {
+                    listOf(Animation(752), Animation(754), Animation(755), Animation(758))
+                }
 
             val direction = if (fromWest) Direction.EAST else Direction.WEST
 
@@ -301,41 +306,49 @@ class HorrorFromTheDeepListener : InteractionListener {
                 // Crossing the bridge before fix.
                 bridgeUnlock == 1 && fromWest -> {
                     lock(player, 6)
-                    submitIndividualPulse(player, object : Pulse() {
-                        var count = 0
-                        override fun pulse(): Boolean {
-                            when (count++) {
-                                0 -> forceMove(player, locations[0], locations[2], 0, 60, direction)
-                                2 -> animate(player, Animations.JUMP_BRIDGE_769)
-                                3 -> teleport(player, locations[3])
-                                5 -> forceWalk(player, locations[3], "").also { return true }
+                    submitIndividualPulse(
+                        player,
+                        object : Pulse() {
+                            var count = 0
+
+                            override fun pulse(): Boolean {
+                                when (count++) {
+                                    0 -> forceMove(player, locations[0], locations[2], 0, 60, direction)
+                                    2 -> animate(player, Animations.JUMP_BRIDGE_769)
+                                    3 -> teleport(player, locations[3])
+                                    5 -> forceWalk(player, locations[3], "").also { return true }
+                                }
+                                return false
                             }
-                            return false
-                        }
-                    })
+                        },
+                    )
                 }
 
                 // Crossing the bridge after fix both sides.
                 bridgeUnlock == 2 || questComplete -> {
                     lock(player, 4)
-                    submitIndividualPulse(player, object : Pulse() {
-                        var count = 0
-                        override fun pulse(): Boolean {
-                            if (count in 0..2) {
-                                ForceMovement.run(
-                                    player,
-                                    locations[count],
-                                    locations[count + 1],
-                                    animations[count],
-                                    animations.getOrElse(count + 1) { animations.last() },
-                                    direction
-                                )
-                                count++
-                                return false
+                    submitIndividualPulse(
+                        player,
+                        object : Pulse() {
+                            var count = 0
+
+                            override fun pulse(): Boolean {
+                                if (count in 0..2) {
+                                    ForceMovement.run(
+                                        player,
+                                        locations[count],
+                                        locations[count + 1],
+                                        animations[count],
+                                        animations.getOrElse(count + 1) { animations.last() },
+                                        direction,
+                                    )
+                                    count++
+                                    return false
+                                }
+                                return true
                             }
-                            return true
-                        }
-                    })
+                        },
+                    )
                 }
 
                 else -> sendMessage(player, "I might be able to make it to the other side.")
@@ -343,5 +356,4 @@ class HorrorFromTheDeepListener : InteractionListener {
             return@on true
         }
     }
-
 }

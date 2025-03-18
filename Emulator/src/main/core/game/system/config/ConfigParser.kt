@@ -1,7 +1,6 @@
 package core.game.system.config
 
 import core.api.Commands
-import core.cache.def.impl.VarbitDefinition
 import core.game.node.item.GroundItemManager
 import core.game.system.command.Privilege
 import core.game.world.map.RegionManager

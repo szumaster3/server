@@ -22,9 +22,7 @@ class LumberKittenNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return LumberKittenNPC(id, location)
-    }
+    ): AbstractNPC = LumberKittenNPC(id, location)
 
     override fun init() {
         isWalks = false
@@ -51,7 +49,5 @@ class LumberKittenNPC(
         return hidden || quest.getStage(player) < 20 || quest.getStage(player) > 50
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CRATE_767)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CRATE_767)
 }

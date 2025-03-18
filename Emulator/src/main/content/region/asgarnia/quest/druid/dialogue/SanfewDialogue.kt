@@ -54,21 +54,22 @@ class SanfewDialogue(
             }
 
             1 -> end()
-            2 -> when (buttonId) {
-                1 -> {
-                    player(
-                        FaceAnim.HALF_GUILTY,
-                        "I've been sent to assist you with the ritual to purify the",
-                        "Varrockian stone circle.",
-                    )
-                    stage = 5
-                }
+            2 ->
+                when (buttonId) {
+                    1 -> {
+                        player(
+                            FaceAnim.HALF_GUILTY,
+                            "I've been sent to assist you with the ritual to purify the",
+                            "Varrockian stone circle.",
+                        )
+                        stage = 5
+                    }
 
-                2 -> {
-                    player(FaceAnim.NEUTRAL, "Actually, I don't need to speak to you.")
-                    stage = 3
+                    2 -> {
+                        player(FaceAnim.NEUTRAL, "Actually, I don't need to speak to you.")
+                        stage = 3
+                    }
                 }
-            }
 
             3 -> {
                 npc(FaceAnim.FRIENDLY, "Well, we all make mistakes sometimes.")
@@ -101,10 +102,11 @@ class SanfewDialogue(
                 stage = 8
             }
 
-            8 -> when (buttonId) {
-                1 -> player(FaceAnim.ASKING, "Where can I find this cauldron?").also { stage = 9 }
-                2 -> player(FaceAnim.FRIENDLY, "Ok, I'll do that then.").also { stage = 10 }
-            }
+            8 ->
+                when (buttonId) {
+                    1 -> player(FaceAnim.ASKING, "Where can I find this cauldron?").also { stage = 9 }
+                    2 -> player(FaceAnim.FRIENDLY, "Ok, I'll do that then.").also { stage = 10 }
+                }
 
             9 -> {
                 npc(
@@ -127,7 +129,7 @@ class SanfewDialogue(
                         Items.ENCHANTED_BEEF_522,
                         Items.ENCHANTED_RAT_MEAT_523,
                         Items.ENCHANTED_BEAR_MEAT_524,
-                        Items.ENCHANTED_CHICKEN_525
+                        Items.ENCHANTED_CHICKEN_525,
                     )
                 ) {
                     player(FaceAnim.HALF_GUILTY, "No, not yet...")
@@ -175,7 +177,7 @@ class SanfewDialogue(
                     Item(Items.ENCHANTED_BEEF_522, 1),
                     Item(Items.ENCHANTED_RAT_MEAT_523, 1),
                     Item(Items.ENCHANTED_BEAR_MEAT_524, 1),
-                    Item(Items.ENCHANTED_CHICKEN_525, 1)
+                    Item(Items.ENCHANTED_CHICKEN_525, 1),
                 )
                 setQuestStage(player, Quests.DRUIDIC_RITUAL, 99)
                 updateQuestTab(player)
@@ -193,7 +195,5 @@ class SanfewDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SANFEW_454)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SANFEW_454)
 }

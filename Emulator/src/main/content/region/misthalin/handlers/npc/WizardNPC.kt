@@ -22,9 +22,7 @@ class WizardNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return WizardNPC(id, location)
-    }
+    ): AbstractNPC = WizardNPC(id, location)
 
     override fun init() {
         super.init()
@@ -32,7 +30,5 @@ class WizardNPC(
         properties.autocastSpell = SpellBook.MODERN.getSpell(8) as CombatSpell
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_13)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_13)
 }

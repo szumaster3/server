@@ -18,7 +18,5 @@ class NettleTeaEffect : ConsumableEffect() {
         effect.activate(player)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return HEALING
-    }
+    override fun getHealthEffectValue(player: Player): Int = HEALING
 }

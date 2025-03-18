@@ -42,11 +42,7 @@ class FishmongerRellekkaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FishmongerRellekkaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FishmongerRellekkaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FISH_MONGER_1315)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FISH_MONGER_1315)
 }

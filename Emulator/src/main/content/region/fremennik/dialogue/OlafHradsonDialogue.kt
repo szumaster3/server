@@ -24,15 +24,9 @@ class OlafHradsonDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return OlafHradsonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = OlafHradsonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLAF_HRADSON_2621)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF_HRADSON_2621)
 }

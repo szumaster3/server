@@ -11,15 +11,20 @@ import java.nio.ByteBuffer
 /**
  * The type Login write event.
  */
-class LoginWriteEvent(session: IoSession, context: Any) : IoWriteEvent(session, context) {
-
+class LoginWriteEvent(
+    session: IoSession,
+    context: Any,
+) : IoWriteEvent(session, context) {
     companion object {
         private val GAME_PRODUCER: EventProducer = GameEventProducer()
 
         private fun getWorldResponse(session: IoSession): ByteBuffer {
             val buffer = ByteBuffer.allocate(150)
             val player: Player = session.player
-            buffer.put(player.details.rights.ordinal.toByte())
+            buffer.put(
+                player.details.rights.ordinal
+                    .toByte(),
+            )
             buffer.put(0)
             buffer.put(0)
             buffer.put(0)
@@ -34,7 +39,10 @@ class LoginWriteEvent(session: IoSession, context: Any) : IoWriteEvent(session, 
         }
     }
 
-    override fun write(session: IoSession, context: Any) {
+    override fun write(
+        session: IoSession,
+        context: Any,
+    ) {
         val response = context as AuthResponse
         val buffer = ByteBuffer.allocate(500)
         buffer.put(response.ordinal.toByte())

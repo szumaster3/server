@@ -45,9 +45,7 @@ class ElvargNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ElvargNPC(id, location)
-    }
+    ): AbstractNPC = ElvargNPC(id, location)
 
     override fun commenceDeath(killer: Entity) {
         val direction = Direction.getLogicalDirection(getLocation(), killer.location)
@@ -94,13 +92,9 @@ class ElvargNPC : AbstractNPC {
         )
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatHandler
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELVARG_742)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELVARG_742)
 
     val rotation: Int
         get() {
@@ -139,9 +133,7 @@ class ElvargNPC : AbstractNPC {
         return super.isAttackable(entity, style, message)
     }
 
-    override fun getDragonfireProtection(fire: Boolean): Int {
-        return 0x2 or 0x4 or 0x8
-    }
+    override fun getDragonfireProtection(fire: Boolean): Int = 0x2 or 0x4 or 0x8
 
     internal class ElvargCombatSwingHandler : CombatSwingHandler(CombatStyle.RANGE) {
         private var style = CombatStyle.RANGE
@@ -215,16 +207,12 @@ class ElvargNPC : AbstractNPC {
             return InteractionType.NO_INTERACT
         }
 
-        override fun getArmourSet(e: Entity?): ArmourSet? {
-            return style.swingHandler.getArmourSet(e)
-        }
+        override fun getArmourSet(e: Entity?): ArmourSet? = style.swingHandler.getArmourSet(e)
 
         override fun getSetMultiplier(
             e: Entity?,
             skillId: Int,
-        ): Double {
-            return style.swingHandler.getSetMultiplier(e, skillId)
-        }
+        ): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
         override fun impact(
             entity: Entity?,

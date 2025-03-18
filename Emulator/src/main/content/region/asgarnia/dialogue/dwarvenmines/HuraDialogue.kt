@@ -132,11 +132,7 @@ class HuraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HuraDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HuraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HURA_4563)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HURA_4563)
 }

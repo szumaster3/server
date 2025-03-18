@@ -6,10 +6,10 @@ import core.game.node.item.GroundItemManager
 import core.game.world.map.RegionManager
 import core.game.world.repository.InitializingNodeList
 import core.game.world.repository.Repository
+import core.integration.grafana.Grafana
 import core.net.packet.PacketRepository
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
-import core.integration.grafana.Grafana
 
 class UpdateSequence {
     // List of players in the lobby.

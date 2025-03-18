@@ -379,11 +379,7 @@ class ZooknockDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZooknockDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZooknockDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZOOKNOCK_1425)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOOKNOCK_1425)
 }

@@ -28,9 +28,7 @@ class SinclairFlourBarrelPlugin : OptionHandler() {
         player: Player,
         node: Node,
         option: String,
-    ): Boolean {
-        return retrieveFlour(player, node as Scenery)
-    }
+    ): Boolean = retrieveFlour(player, node as Scenery)
 
     private fun retrieveFlour(
         player: Player,
@@ -79,8 +77,6 @@ class SinclairFlourBarrelPlugin : OptionHandler() {
             return this
         }
 
-        override fun handle(event: NodeUsageEvent): Boolean {
-            return retrieveFlour(event.player, event.usedWith.asScenery())
-        }
+        override fun handle(event: NodeUsageEvent): Boolean = retrieveFlour(event.player, event.usedWith.asScenery())
     }
 }

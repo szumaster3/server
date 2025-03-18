@@ -258,7 +258,5 @@ class CompetitionJudgeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMPETITION_JUDGE_693)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COMPETITION_JUDGE_693)
 }

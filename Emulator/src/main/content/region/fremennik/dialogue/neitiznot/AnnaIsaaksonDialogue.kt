@@ -39,11 +39,7 @@ class AnnaIsaaksonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AnnaIsaaksonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AnnaIsaaksonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANNE_ISAAKSON_5512)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANNE_ISAAKSON_5512)
 }

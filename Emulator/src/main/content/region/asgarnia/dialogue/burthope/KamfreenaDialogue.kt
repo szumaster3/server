@@ -83,7 +83,5 @@ class KamfreenaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KAMFREENA_4289)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KAMFREENA_4289)
 }

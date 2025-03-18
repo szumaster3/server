@@ -12,15 +12,16 @@ import org.rs.consts.NPCs
 class HistorianMinasDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
-
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hello")
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 npcl(FaceAnim.HALF_GUILTY, "Hello there, welcome to Varrock Museum! Can I help you?")
@@ -35,7 +36,7 @@ class HistorianMinasDialogue(
             2 -> {
                 npcl(
                     FaceAnim.HALF_GUILTY,
-                    "Well, as you can see we have recently expanded a great deal to cope with the influx of finds from the Dig Site."
+                    "Well, as you can see we have recently expanded a great deal to cope with the influx of finds from the Dig Site.",
                 )
                 stage++
             }
@@ -48,7 +49,5 @@ class HistorianMinasDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HISTORIAN_MINAS_5931)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HISTORIAN_MINAS_5931)
 }

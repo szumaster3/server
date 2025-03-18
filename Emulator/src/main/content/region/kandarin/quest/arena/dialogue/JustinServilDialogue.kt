@@ -148,7 +148,5 @@ class JustinServilDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JUSTIN_SERVIL_267)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JUSTIN_SERVIL_267)
 }

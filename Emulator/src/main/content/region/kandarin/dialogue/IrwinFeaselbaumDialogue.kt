@@ -100,13 +100,9 @@ class IrwinFeaselbaumDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return IrwinFeaselbaumDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IrwinFeaselbaumDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IRWIN_FEASELBAUM_2066)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IRWIN_FEASELBAUM_2066)
 }
 
 class IrwinFeaselbaumAboutTornPagesDialogue : DialogueFile() {

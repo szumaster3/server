@@ -42,13 +42,12 @@ class SmokeDungeon :
                 }
             }
 
-        private fun isPlayerAffected(player: Player): Boolean {
-            return !player.interfaceManager.isOpened &&
+        private fun isPlayerAffected(player: Player): Boolean =
+            !player.interfaceManager.isOpened &&
                 !player.interfaceManager.hasChatbox() &&
                 !player.locks.isMovementLocked &&
                 getDelay(player) < GameWorld.ticks &&
                 !isProtected(player)
-        }
 
         private fun applyEffect(player: Player) {
             setDelay(player)
@@ -63,13 +62,9 @@ class SmokeDungeon :
             setAttribute(player, "smoke-delay", GameWorld.ticks + DELAY)
         }
 
-        private fun getDelay(player: Player): Int {
-            return player.getAttribute("smoke-delay", 0)
-        }
+        private fun getDelay(player: Player): Int = player.getAttribute("smoke-delay", 0)
 
-        private fun isProtected(player: Player): Boolean {
-            return SlayerEquipmentFlags.hasFaceMask(player)
-        }
+        private fun isProtected(player: Player): Boolean = SlayerEquipmentFlags.hasFaceMask(player)
     }
 
     override fun newInstance(arg: Any?): Plugin<Any?> {

@@ -29,11 +29,7 @@ class WizardFrumsconeDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_FRUMSCONE_460)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_FRUMSCONE_460)
 }

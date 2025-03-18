@@ -47,11 +47,7 @@ class AlTheCamelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AlTheCamelDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AlTheCamelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AL_THE_CAMEL_2809)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AL_THE_CAMEL_2809)
 }

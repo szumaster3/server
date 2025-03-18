@@ -260,9 +260,7 @@ class CombatPulse(
         nextAttack += ticks
     }
 
-    fun getNextAttack(): Int {
-        return nextAttack
-    }
+    fun getNextAttack(): Int = nextAttack
 
     fun canInteract(): InteractionType? {
         if (victim == null) {
@@ -314,9 +312,7 @@ class CombatPulse(
             return entity != null && entity.properties.combatPulse.isAttacking
         }
 
-    fun getVictim(): Entity? {
-        return victim
-    }
+    fun getVictim(): Entity? = victim
 
     companion object {
         fun swing(
@@ -383,9 +379,7 @@ class CombatPulse(
     init {
         movement =
             object : MovementPulse(entity, null) {
-                override fun pulse(): Boolean {
-                    return false
-                }
+                override fun pulse(): Boolean = false
             }
     }
 }

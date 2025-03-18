@@ -91,11 +91,7 @@ class EzekialLovecraftDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EzekialLovecraftDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EzekialLovecraftDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EZEKIAL_LOVECRAFT_4856)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EZEKIAL_LOVECRAFT_4856)
 }

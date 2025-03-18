@@ -132,9 +132,7 @@ class CatapultRoom :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         super.register(ZoneBorders(2837, 3542, 2847, 3556))

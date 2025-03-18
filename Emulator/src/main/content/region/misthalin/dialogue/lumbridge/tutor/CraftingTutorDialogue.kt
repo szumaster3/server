@@ -47,11 +47,7 @@ class CraftingTutorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CraftingTutorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CraftingTutorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CRAFTING_TUTOR_4900)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CRAFTING_TUTOR_4900)
 }

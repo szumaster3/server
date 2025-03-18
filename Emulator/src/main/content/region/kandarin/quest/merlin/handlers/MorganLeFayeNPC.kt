@@ -19,13 +19,9 @@ class MorganLeFayeNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return MorganLeFayeNPC(id, location)
-    }
+    ): AbstractNPC = MorganLeFayeNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MORGAN_LE_FAYE_248)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MORGAN_LE_FAYE_248)
 
     override fun tick() {
         super.tick()

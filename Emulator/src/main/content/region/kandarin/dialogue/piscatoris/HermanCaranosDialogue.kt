@@ -373,11 +373,7 @@ class HermanCaranosDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HermanCaranosDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HermanCaranosDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HERMAN_CARANOS_3822)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HERMAN_CARANOS_3822)
 }

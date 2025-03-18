@@ -19,9 +19,7 @@ class RemovalDialogue : Dialogue {
 
     constructor(player: Player?) : super(player)
 
-    override fun newInstance(player: Player): Dialogue {
-        return RemovalDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RemovalDialogue(player)
 
     override fun open(vararg args: Any): Boolean {
         pos = args[1] as IntArray
@@ -82,7 +80,5 @@ class RemovalDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("con:remove"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("con:remove"))
 }

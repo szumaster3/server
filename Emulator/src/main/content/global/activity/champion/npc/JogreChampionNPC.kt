@@ -29,13 +29,9 @@ class JogreChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return JogreChampionNPC(id, location)
-    }
+    ): AbstractNPC = JogreChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOGRE_CHAMPION_3063)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOGRE_CHAMPION_3063)
 
     override fun handleTickActions() {
         super.handleTickActions()

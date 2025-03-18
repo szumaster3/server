@@ -35,7 +35,5 @@ class LidioDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LIDIO_4293)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LIDIO_4293)
 }

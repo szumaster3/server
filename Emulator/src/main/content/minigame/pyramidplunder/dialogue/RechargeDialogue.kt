@@ -240,9 +240,7 @@ class RechargeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(999876)
-    }
+    override fun getIds(): IntArray = intArrayOf(999876)
 
     companion object {
         var usedSceptre = Item(Items.PHARAOHS_SCEPTRE_9050)

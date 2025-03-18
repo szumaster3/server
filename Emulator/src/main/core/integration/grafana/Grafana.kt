@@ -161,9 +161,7 @@ class Grafana : StartupListener {
                 }
         }
 
-        private fun getNowTime(): Int {
-            return (System.currentTimeMillis() / 1000L).toInt()
-        }
+        private fun getNowTime(): Int = (System.currentTimeMillis() / 1000L).toInt()
 
         private const val INSERT_TOP_PULSES = "INSERT INTO top_pulses (pulse_info, ts) VALUES (?, ?);"
         private const val INSERT_PULSE_COUNT = "INSERT INTO high_volume_pulses (pulse_info, ts) VALUES (?, ?);"

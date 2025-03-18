@@ -69,11 +69,7 @@ class JogreCavernDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JogreCavernDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JogreCavernDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("jogre_dialogue"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("jogre_dialogue"))
 }

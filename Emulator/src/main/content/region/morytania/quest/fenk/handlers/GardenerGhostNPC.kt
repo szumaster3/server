@@ -24,13 +24,9 @@ class GardenerGhostNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return GardenerGhostNPC(id, location)
-    }
+    ): AbstractNPC = GardenerGhostNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARDENER_GHOST_1675)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARDENER_GHOST_1675)
 
     override fun handleTickActions() {
         if (target == null) {

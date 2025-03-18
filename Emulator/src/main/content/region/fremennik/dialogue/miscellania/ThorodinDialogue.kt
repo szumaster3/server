@@ -58,11 +58,7 @@ class ThorodinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ThorodinDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ThorodinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THORODIN_3936)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THORODIN_3936)
 }

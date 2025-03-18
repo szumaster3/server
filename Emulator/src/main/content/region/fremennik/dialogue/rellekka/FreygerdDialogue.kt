@@ -92,11 +92,7 @@ class FreygerdDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FreygerdDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FreygerdDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FREYGERD_1310)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FREYGERD_1310)
 }

@@ -18,7 +18,6 @@ import org.rs.consts.Items
  * The lost property shop.
  */
 class LostPropertyInterface : InterfaceListener {
-
     override fun defineInterfaceListeners() {
         onOpen(Components.LOST_PROPERTY_834) { player, _ ->
             val itemsToDisplay = LostPropertyStock.values().map { Item(it.item, 1) }.toTypedArray()
@@ -38,20 +37,20 @@ class LostPropertyInterface : InterfaceListener {
                 155 -> {
                     val price = lostItem.currency
                     // Quest requirements for purchase.
-                    if(lostItem.reqs != null && !lostItem.reqs?.let { QuestReq(it) }?.let { hasRequirement(player, it, false) }!!) {
+                    if (lostItem.reqs != null && !lostItem.reqs?.let { QuestReq(it) }?.let { hasRequirement(player, it, false) }!!) {
                         sendDialogue(player, "You must complete $DARK_RED${lostItem.reqs.questName} Quest</col> to purchase this.")
                         return@on true
                     }
                     // Diary requirements for purchase.
                     if (isDiaryIncomplete(player, lostItem)) return@on true
                     // Mini-quest requirements for purchase.
-                    if(lostItem.otherReqs != null && !getAttribute(player, lostItem.otherReqs, false)) {
+                    if (lostItem.otherReqs != null && !getAttribute(player, lostItem.otherReqs, false)) {
                         sendDialogue(player, "You must complete a$DARK_RED Curse of Zaros</col> to purchase this.")
                         return@on true
                     }
 
                     // Skill requirements for purchase.
-                    if(lostItem.item == Items.AVAS_ACCUMULATOR_10499 && getStatLevel(player, Skills.RANGE) < 50) {
+                    if (lostItem.item == Items.AVAS_ACCUMULATOR_10499 && getStatLevel(player, Skills.RANGE) < 50) {
                         sendDialogue(player, "You need at least$DARK_BLUE 50 range level</col> to purchase this.")
                         return@on true
                     }
@@ -76,13 +75,21 @@ class LostPropertyInterface : InterfaceListener {
         }
     }
 
-    private fun isDiaryIncomplete(player: Player, lostItem: LostPropertyStock): Boolean {
-        val diaryRequirements = mapOf(
-            Items.FALADOR_SHIELD_3_14579 to Pair(DiaryType.FALADOR, "You need to complete the$DARK_RED Falador diary (level 2)</col> to purchase this."),
-            Items.FREMENNIK_SEA_BOOTS_3_14573 to Pair(DiaryType.FREMENNIK, "You need to complete the$DARK_RED Fremennik diary (level 2)</col> to purchase this."),
-            Items.EXPLORERS_RING_3_13562 to Pair(DiaryType.LUMBRIDGE, "You need to complete the$DARK_RED Lumbridge diary (level 2)</col> to purchase this."),
-            Items.VARROCK_ARMOUR_3_11758 to Pair(DiaryType.VARROCK, "You need to complete the$DARK_RED Varrock diary (level 2)</col> to purchase this.")
-        )
+    private fun isDiaryIncomplete(
+        player: Player,
+        lostItem: LostPropertyStock,
+    ): Boolean {
+        val diaryRequirements =
+            mapOf(
+                Items.FALADOR_SHIELD_3_14579 to
+                    Pair(DiaryType.FALADOR, "You need to complete the$DARK_RED Falador diary (level 2)</col> to purchase this."),
+                Items.FREMENNIK_SEA_BOOTS_3_14573 to
+                    Pair(DiaryType.FREMENNIK, "You need to complete the$DARK_RED Fremennik diary (level 2)</col> to purchase this."),
+                Items.EXPLORERS_RING_3_13562 to
+                    Pair(DiaryType.LUMBRIDGE, "You need to complete the$DARK_RED Lumbridge diary (level 2)</col> to purchase this."),
+                Items.VARROCK_ARMOUR_3_11758 to
+                    Pair(DiaryType.VARROCK, "You need to complete the$DARK_RED Varrock diary (level 2)</col> to purchase this."),
+            )
 
         val requirement = diaryRequirements[lostItem.item] ?: return false
         val (diaryType, message) = requirement
@@ -136,7 +143,13 @@ enum class LostPropertyStock(
     LunarCape(Items.LUNAR_CAPE_9101, 18000, 21, "Lunar Cape costs 18000 coins.", QuestRequirements.LUNAR_DIPLOMACY),
     LunarAmulet(Items.LUNAR_AMULET_9102, 9000, 22, "Lunar Amulet costs 9000 coins.", QuestRequirements.LUNAR_DIPLOMACY),
     LunarRing(Items.LUNAR_RING_9104, 8000, 23, "Lunar Ring costs 8000 coins.", QuestRequirements.LUNAR_DIPLOMACY),
-    BarrelchestAnchor(Items.BARRELCHEST_ANCHOR_10887, 290000, 24, "Barrelchest Anchor costs 290000 coins.", QuestRequirements.BRAIN_ROBBERY),
+    BarrelchestAnchor(
+        Items.BARRELCHEST_ANCHOR_10887,
+        290000,
+        24,
+        "Barrelchest Anchor costs 290000 coins.",
+        QuestRequirements.BRAIN_ROBBERY,
+    ),
     BootsOfLightness(Items.BOOTS_OF_LIGHTNESS_88, 9800, 25, "Boots of Lightness cost 9800 coins.", QuestRequirements.IKOV),
     CapeOfLegends(Items.CAPE_OF_LEGENDS_1052, 1900, 26, "Cape of Legends costs 1900 coins.", QuestRequirements.LEGEND),
     Keris(Items.KERIS_10581, 25000, 27, "Keris costs 25000 coins.", QuestRequirements.CONTACT),
@@ -146,7 +159,8 @@ enum class LostPropertyStock(
     HelmOfNeitiznot(Items.HELM_OF_NEITIZNOT_10828, 95000, 31, "Helm of Neitiznot costs 95000 coins.", QuestRequirements.FREM_TRIALS),
     IvandisFlail(Items.IVANDIS_FLAIL28_13119, 30000, 32, "Ivandis Flail costs 30000 coins.", QuestRequirements.SEERGAZE),
     AvasAttractor(Items.AVAS_ATTRACTOR_10498, 7000, 33, "Ava's Attractor costs 7000 coins.", QuestRequirements.ANMA),
-    AvasAccumulator(Items.AVAS_ACCUMULATOR_10499, 7000, 34, "Ava's Accumulator costs 7000 coins.", QuestRequirements.ANMA);
+    AvasAccumulator(Items.AVAS_ACCUMULATOR_10499, 7000, 34, "Ava's Accumulator costs 7000 coins.", QuestRequirements.ANMA),
+    ;
 
     companion object {
         val itemsMap: MutableMap<Int, LostPropertyStock> = mutableMapOf()

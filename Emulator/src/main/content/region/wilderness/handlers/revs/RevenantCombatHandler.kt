@@ -95,8 +95,6 @@ class RevenantCombatHandler(
         private val MAGIC_Graphics: Graphics = Graphics.create(org.rs.consts.Graphics.PUFF_OF_GREY_1276)
         private val RANGE_Graphics: Graphics = Graphics.create(org.rs.consts.Graphics.BIT_OF_WATER_1278)
 
-        fun createProjectile(graphics: Graphics): Projectile {
-            return Projectile.create(null, null, graphics.id, 48, 36, 34, 20)
-        }
+        fun createProjectile(graphics: Graphics): Projectile = Projectile.create(null, null, graphics.id, 48, 36, 34, 20)
     }
 }

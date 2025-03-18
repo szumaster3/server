@@ -29,13 +29,9 @@ class FruitCuttingListener : InteractionListener {
             val productOfSlice = values().associate { it.fruit to it.slice }
             val cutable = intArrayOf(PINEAPPLE.fruit, BANANA.fruit, LEMON.fruit, LIME.fruit, ORANGE.fruit)
 
-            fun forChunkId(id: Int): Int {
-                return productOfChunk[id]!!
-            }
+            fun forChunkId(id: Int): Int = productOfChunk[id]!!
 
-            fun forSliceId(id: Int): Item {
-                return productOfSlice[id]!!
-            }
+            fun forSliceId(id: Int): Item = productOfSlice[id]!!
         }
     }
 

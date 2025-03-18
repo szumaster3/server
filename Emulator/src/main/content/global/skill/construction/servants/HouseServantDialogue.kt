@@ -733,19 +733,13 @@ class HouseServantDialogue(
     ) {
         npc.pulseManager.run(
             object : MovementPulse(npc, player, Pathfinder.SMART) {
-                override fun pulse(): Boolean {
-                    return false
-                }
+                override fun pulse(): Boolean = false
             },
             PulseType.STANDARD,
         )
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HouseServantDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HouseServantDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RICK_4235, NPCs.MAID_4237, NPCs.COOK_4239, NPCs.BUTLER_4241, NPCs.DEMON_BUTLER_4243)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RICK_4235, NPCs.MAID_4237, NPCs.COOK_4239, NPCs.BUTLER_4241, NPCs.DEMON_BUTLER_4243)
 }

@@ -53,14 +53,13 @@ enum class UnfinishedPotion(
         fun forItem(
             item: Item,
             base: Item,
-        ): UnfinishedPotion? {
-            return Arrays
+        ): UnfinishedPotion? =
+            Arrays
                 .stream(values())
                 .filter { potion: UnfinishedPotion? ->
                     (potion!!.ingredient.id == item.id || potion.ingredient.id == base.id) &&
                         (item.id == potion.base.id || base.id == potion.base.id)
                 }.findFirst()
                 .orElse(null)
-        }
     }
 }

@@ -60,7 +60,5 @@ class PrivatePierrebDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRIVATE_PIERREB_5033)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRIVATE_PIERREB_5033)
 }

@@ -193,7 +193,5 @@ class ArmourSalesmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARMOUR_SALESMAN_682)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARMOUR_SALESMAN_682)
 }

@@ -47,9 +47,7 @@ class AgilityPyramidZone :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(ZoneBorders(3352, 2826, 3378, 2854))

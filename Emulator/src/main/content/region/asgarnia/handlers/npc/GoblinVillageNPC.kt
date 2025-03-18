@@ -21,9 +21,7 @@ class GoblinVillageNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GoblinVillageNPC(id, location)
-    }
+    ): AbstractNPC = GoblinVillageNPC(id, location)
 
     override fun init() {
         super.init()
@@ -97,9 +95,7 @@ class GoblinVillageNPC(
         super.finalizeDeath(killer)
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID =

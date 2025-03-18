@@ -43,11 +43,7 @@ class VanessaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return VanessaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = VanessaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VANESSA_2305)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VANESSA_2305)
 }

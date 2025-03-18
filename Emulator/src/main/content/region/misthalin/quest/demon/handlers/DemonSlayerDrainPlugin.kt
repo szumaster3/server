@@ -56,9 +56,7 @@ class DemonSlayerDrainPlugin : UseWithHandler(1929) {
     override fun getDestination(
         player: Player,
         with: Node,
-    ): Location {
-        return Location(3225, 3495)
-    }
+    ): Location = Location(3225, 3495)
 
     companion object {
         private val ANIMATION = Animation(827)

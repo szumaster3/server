@@ -61,11 +61,7 @@ class GaussDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GaussDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GaussDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GAUSS_2196)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GAUSS_2196)
 }

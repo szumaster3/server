@@ -187,13 +187,9 @@ class AliTheDyerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AliTheDyerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AliTheDyerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_THE_DYER_2549)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_DYER_2549)
 
     companion object {
         val ONIONS = Item(Items.ONION_1957, 2)

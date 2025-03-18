@@ -37,7 +37,5 @@ class UnferthDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.UNFERTH_2655)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.UNFERTH_2655)
 }

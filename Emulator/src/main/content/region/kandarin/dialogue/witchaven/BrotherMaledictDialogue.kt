@@ -21,15 +21,9 @@ class BrotherMaledictDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BrotherMaledictDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BrotherMaledictDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_MALEDICT_4878)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_MALEDICT_4878)
 }

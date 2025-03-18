@@ -35,12 +35,10 @@ class BlackGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlackGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlackGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BLACK_GUARD_2130,
             NPCs.BLACK_GUARD_2131,
             NPCs.BLACK_GUARD_2132,
@@ -49,5 +47,4 @@ class BlackGuardDialogue(
             NPCs.BLACK_GUARD_BERSERKER_2135,
             NPCs.BLACK_GUARD_BERSERKER_2136,
         )
-    }
 }

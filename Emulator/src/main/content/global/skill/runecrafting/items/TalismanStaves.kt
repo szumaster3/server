@@ -32,9 +32,6 @@ enum class TalismanStaves(
         }
 
         @JvmStatic
-        fun from(item: Item): TalismanStaves? {
-            return itemToTalismanStaves[item.id]
-        }
+        fun from(item: Item): TalismanStaves? = itemToTalismanStaves[item.id]
     }
-
 }

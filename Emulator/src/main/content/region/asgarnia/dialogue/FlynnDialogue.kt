@@ -37,11 +37,7 @@ class FlynnDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FlynnDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FlynnDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FLYNN_580)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FLYNN_580)
 }

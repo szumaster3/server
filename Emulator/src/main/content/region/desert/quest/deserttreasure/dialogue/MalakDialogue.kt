@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.dialogue
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueBuilder
@@ -25,13 +25,9 @@ class MalakDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MalakDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MalakDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MALAK_1920)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MALAK_1920)
 }
 
 class MalakDialogueFile : DialogueBuilderFile() {

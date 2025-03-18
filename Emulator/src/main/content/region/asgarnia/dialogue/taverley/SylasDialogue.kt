@@ -278,11 +278,7 @@ class SylasDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SylasDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SylasDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SYLAS_5987)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SYLAS_5987)
 }

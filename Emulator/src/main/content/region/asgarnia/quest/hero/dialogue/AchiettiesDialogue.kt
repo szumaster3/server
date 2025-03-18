@@ -30,17 +30,11 @@ class AchiettiesDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AchiettiesDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AchiettiesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ACHIETTIES_796)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ACHIETTIES_796)
 }
 
 class AchiettiesDialogueFile : DialogueBuilderFile() {

@@ -41,11 +41,7 @@ class JebDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JebDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JebDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JEB_4895)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEB_4895)
 }

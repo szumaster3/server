@@ -43,12 +43,11 @@ class GnomePilotDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.GNORMADIUM_AVLAFRIM_1800,
             NPCs.CAPTAIN_DALBUR_3809,
             NPCs.CAPTAIN_BLEEMADGE_3810,
             NPCs.CAPTAIN_KLEMFOODLE_3812,
         )
-    }
 }

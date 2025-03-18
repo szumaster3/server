@@ -76,7 +76,5 @@ class RobeStoreDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROBE_STORE_OWNER_1658)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROBE_STORE_OWNER_1658)
 }

@@ -30,9 +30,7 @@ class UriNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return UriNPC(id, location)
-    }
+    ): AbstractNPC = UriNPC(id, location)
 
     override fun init() {
         player = getAttribute("player", null)
@@ -67,17 +65,14 @@ class UriNPC : AbstractNPC {
         entity: Entity,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return if (entity is Player && player == entity) {
+    ): Boolean =
+        if (entity is Player && player == entity) {
             true
         } else {
             super.isAttackable(entity, style, message)
         }
-    }
 
-    override fun canSelectTarget(target: Entity): Boolean {
-        return target == player
-    }
+    override fun canSelectTarget(target: Entity): Boolean = target == player
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -85,9 +80,8 @@ class UriNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.URI_5141, NPCs.URI_5142, NPCs.URI_5143, NPCs.DOUBLE_AGENT_5144, NPCs.DOUBLE_AGENT_5145)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.URI_5141, NPCs.URI_5142, NPCs.URI_5143, NPCs.DOUBLE_AGENT_5144, NPCs.DOUBLE_AGENT_5145)
 
     private val isDoubleAgent: Boolean
         get() = getAttribute("double-agent", false)
@@ -97,9 +91,7 @@ class UriNPC : AbstractNPC {
 
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player): Dialogue {
-            return UriDialogue(player)
-        }
+        override fun newInstance(player: Player): Dialogue = UriDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             npc = args[0] as NPC
@@ -152,19 +144,16 @@ class UriNPC : AbstractNPC {
                 scroll.hasEquipment(player, scroll.equipment)
         }
 
-        private fun asUri(): UriNPC {
-            return npc as UriNPC
-        }
+        private fun asUri(): UriNPC = npc as UriNPC
 
-        override fun getIds(): IntArray {
-            return intArrayOf(
+        override fun getIds(): IntArray =
+            intArrayOf(
                 NPCs.URI_5141,
                 NPCs.URI_5142,
                 NPCs.URI_5143,
                 NPCs.DOUBLE_AGENT_5144,
                 NPCs.DOUBLE_AGENT_5145,
             )
-        }
 
         companion object {
             private val QUOTES =

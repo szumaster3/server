@@ -396,11 +396,7 @@ class RovingElvesObstacles : OptionHandler() {
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return node !is Item
-    }
+    ): Boolean = node !is Item
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 }

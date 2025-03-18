@@ -76,7 +76,5 @@ class GeckoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(*babyGecko, *adultGecko)
-    }
+    override fun getIds(): IntArray = intArrayOf(*babyGecko, *adultGecko)
 }

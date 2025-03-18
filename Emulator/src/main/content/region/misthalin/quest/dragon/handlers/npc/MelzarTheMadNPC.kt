@@ -28,9 +28,7 @@ class MelzarTheMadNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MelzarTheMadNPC(id, location)
-    }
+    ): AbstractNPC = MelzarTheMadNPC(id, location)
 
     override fun init() {
         super.init()
@@ -52,13 +50,9 @@ class MelzarTheMadNPC : AbstractNPC {
         GroundItemManager.create(DragonSlayer.PURPLE_KEY, getLocation(), (killer as Player))
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatHandler
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MELZAR_THE_MAD_753)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MELZAR_THE_MAD_753)
 
     inner class MelzarSwingHandler : CombatSwingHandler(CombatStyle.MAGIC) {
         private var style = CombatStyle.MAGIC
@@ -67,9 +61,7 @@ class MelzarTheMadNPC : AbstractNPC {
         override fun canSwing(
             entity: Entity,
             victim: Entity,
-        ): InteractionType? {
-            return type!!.swingHandler.canSwing(entity, victim)
-        }
+        ): InteractionType? = type!!.swingHandler.canSwing(entity, victim)
 
         override fun swing(
             entity: Entity?,
@@ -127,24 +119,18 @@ class MelzarTheMadNPC : AbstractNPC {
             style.swingHandler.adjustBattleState(entity, victim, state)
         }
 
-        override fun calculateAccuracy(entity: Entity?): Int {
-            return style.swingHandler.calculateAccuracy(entity)
-        }
+        override fun calculateAccuracy(entity: Entity?): Int = style.swingHandler.calculateAccuracy(entity)
 
         override fun calculateDefence(
             victim: Entity?,
             attacker: Entity?,
-        ): Int {
-            return style.swingHandler.calculateDefence(victim, attacker)
-        }
+        ): Int = style.swingHandler.calculateDefence(victim, attacker)
 
         override fun calculateHit(
             entity: Entity?,
             victim: Entity?,
             modifier: Double,
-        ): Int {
-            return style.swingHandler.calculateHit(entity, victim, modifier)
-        }
+        ): Int = style.swingHandler.calculateHit(entity, victim, modifier)
 
         override fun impact(
             entity: Entity?,
@@ -154,16 +140,12 @@ class MelzarTheMadNPC : AbstractNPC {
             style.swingHandler.impact(entity, victim, state)
         }
 
-        override fun getArmourSet(e: Entity?): ArmourSet? {
-            return style.swingHandler.getArmourSet(e)
-        }
+        override fun getArmourSet(e: Entity?): ArmourSet? = style.swingHandler.getArmourSet(e)
 
         override fun getSetMultiplier(
             e: Entity?,
             skillId: Int,
-        ): Double {
-            return style.swingHandler.getSetMultiplier(e, skillId)
-        }
+        ): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
         val combatSpell: CombatSpell?
             get() = (

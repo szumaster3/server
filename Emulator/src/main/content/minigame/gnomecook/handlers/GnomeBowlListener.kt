@@ -11,17 +11,17 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 
 class GnomeBowlListener : InteractionListener {
-
     private val sceneryIDs = intArrayOf(Scenery.GNOME_COOKER_17131, Scenery.RANGE_2728)
 
     override fun defineListeners() {
-        val cookingMap = mapOf(
-            Items.RAW_GNOMEBOWL_2178 to Items.HALF_BAKED_BOWL_2177,
-            Items.HALF_MADE_BOWL_9558 to Items.UNFINISHED_BOWL_9560,
-            Items.HALF_MADE_BOWL_9559 to Items.TANGLED_TOADS_LEGS_2187,
-            Items.HALF_MADE_BOWL_9561 to Items.UNFINISHED_BOWL_9562,
-            Items.HALF_MADE_BOWL_9563 to Items.UNFINISHED_BOWL_9564
-        )
+        val cookingMap =
+            mapOf(
+                Items.RAW_GNOMEBOWL_2178 to Items.HALF_BAKED_BOWL_2177,
+                Items.HALF_MADE_BOWL_9558 to Items.UNFINISHED_BOWL_9560,
+                Items.HALF_MADE_BOWL_9559 to Items.TANGLED_TOADS_LEGS_2187,
+                Items.HALF_MADE_BOWL_9561 to Items.UNFINISHED_BOWL_9562,
+                Items.HALF_MADE_BOWL_9563 to Items.UNFINISHED_BOWL_9564,
+            )
 
         cookingMap.forEach { (raw, cooked) ->
             onUseWith(IntType.SCENERY, raw, *sceneryIDs) { player, used, _ ->
@@ -42,18 +42,18 @@ class GnomeBowlListener : InteractionListener {
             }
         }
 
-
-        val garnishMap = mapOf(
-            Pair(Items.UNFINISHED_BOWL_9562, Items.EQUA_LEAVES_2128) to Items.VEG_BALL_2195,
-            Pair(Items.UNFINISHED_BOWL_9564, Items.EQUA_LEAVES_2128) to Items.WORM_HOLE_2191,
-            Pair(Items.UNFINISHED_BOWL_9560, Items.POT_OF_CREAM_2130) to Items.CHOCOLATE_BOMB_2185,
-            Pair(Items.UNFINISHED_BOWL_9560, Items.CHOCOLATE_DUST_1975) to Items.CHOCOLATE_BOMB_2185
-        )
+        val garnishMap =
+            mapOf(
+                Pair(Items.UNFINISHED_BOWL_9562, Items.EQUA_LEAVES_2128) to Items.VEG_BALL_2195,
+                Pair(Items.UNFINISHED_BOWL_9564, Items.EQUA_LEAVES_2128) to Items.WORM_HOLE_2191,
+                Pair(Items.UNFINISHED_BOWL_9560, Items.POT_OF_CREAM_2130) to Items.CHOCOLATE_BOMB_2185,
+                Pair(Items.UNFINISHED_BOWL_9560, Items.CHOCOLATE_DUST_1975) to Items.CHOCOLATE_BOMB_2185,
+            )
 
         onUseWith(
             IntType.ITEM,
             garnishMap.keys.map { it.first }.toIntArray(),
-            *garnishMap.keys.map { it.second }.toIntArray()
+            *garnishMap.keys.map { it.second }.toIntArray(),
         ) { player, used, with ->
             val product = garnishMap[Pair(used.id, with.id)] ?: return@onUseWith false
 

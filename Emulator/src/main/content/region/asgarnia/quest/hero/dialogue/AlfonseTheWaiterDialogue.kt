@@ -55,13 +55,9 @@ class AlfonseTheWaiterDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AlfonseTheWaiterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AlfonseTheWaiterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALFONSE_THE_WAITER_793)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALFONSE_THE_WAITER_793)
 }
 
 class AlfonseTheWaiterDialogueFile : DialogueBuilderFile() {

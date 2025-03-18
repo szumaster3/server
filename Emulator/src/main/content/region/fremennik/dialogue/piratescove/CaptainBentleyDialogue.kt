@@ -68,11 +68,7 @@ class CaptainBentleyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CaptainBentleyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CaptainBentleyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_BENTLEY_4540)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_BENTLEY_4540)
 }

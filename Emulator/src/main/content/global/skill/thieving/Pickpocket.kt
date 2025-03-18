@@ -523,12 +523,8 @@ enum class Pickpocket(
         }
 
         @JvmStatic
-        fun forID(id: Int): Pickpocket? {
-            return idMap[id]
-        }
+        fun forID(id: Int): Pickpocket? = idMap[id]
     }
 
-    fun getSuccessChance(player: Player): Double {
-        return RandomFunction.getSkillSuccessChance(low, high, player.skills.getLevel(Skills.THIEVING))
-    }
+    fun getSuccessChance(player: Player): Double = RandomFunction.getSkillSuccessChance(low, high, player.skills.getLevel(Skills.THIEVING))
 }

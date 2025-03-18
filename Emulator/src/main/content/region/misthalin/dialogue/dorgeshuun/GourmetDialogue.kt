@@ -53,7 +53,5 @@ class GourmetDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOURMET_5788, NPCs.GOURMET_5789, NPCs.GOURMET_5790, NPCs.GOURMET_5791)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOURMET_5788, NPCs.GOURMET_5789, NPCs.GOURMET_5790, NPCs.GOURMET_5791)
 }

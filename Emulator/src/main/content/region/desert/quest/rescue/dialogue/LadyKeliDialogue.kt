@@ -280,9 +280,7 @@ class LadyKeliDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LADY_KELI_919)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LADY_KELI_919)
 
     companion object {
         private val SOFT_CLAY = Item(Items.SOFT_CLAY_1761)

@@ -15,8 +15,8 @@ import org.rs.consts.Scenery
 class AbandonedMine : MapArea {
     val FUNGUS = intArrayOf(Scenery.GLOWING_FUNGUS_4932, Scenery.GLOWING_FUNGUS_4933)
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             ZoneBorders.forRegion(10822),
             ZoneBorders.forRegion(11077),
             ZoneBorders.forRegion(11078),
@@ -24,7 +24,6 @@ class AbandonedMine : MapArea {
             ZoneBorders.forRegion(10821),
             ZoneBorders.forRegion(10822),
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)

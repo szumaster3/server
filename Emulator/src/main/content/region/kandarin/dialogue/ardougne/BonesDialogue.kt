@@ -36,11 +36,7 @@ class BonesDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BonesDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BonesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BONES_2945)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BONES_2945)
 }

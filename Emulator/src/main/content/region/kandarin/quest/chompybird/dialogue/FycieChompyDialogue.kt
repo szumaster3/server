@@ -35,13 +35,9 @@ class FycieChompyDialogue(
     override fun handle(
         componentId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FYCIE_1011)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FYCIE_1011)
 }
 
 class FycieChompyDialogueFile(

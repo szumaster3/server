@@ -19,19 +19,16 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.*
 
 class KaramjaListener : InteractionListener {
-    private fun checkRequirement(player: Player): Boolean {
-        return anyInEquipment(player, *MACHETE_ID) || anyInInventory(player, *MACHETE_ID)
-    }
+    private fun checkRequirement(player: Player): Boolean = anyInEquipment(player, *MACHETE_ID) || anyInInventory(player, *MACHETE_ID)
 
-    private fun getAnimation(item: Int): Animation {
-        return when (item) {
+    private fun getAnimation(item: Int): Animation =
+        when (item) {
             Items.MACHETE_975 -> Animation.create(Animations.MACHETE_910)
             Items.JADE_MACHETE_6315 -> Animation.create(Animations.JADE_MACHETE_2424)
             Items.OPAL_MACHETE_6313 -> Animation.create(Animations.OPAL_MACHETE_2429)
             Items.RED_TOPAZ_MACHETE_6317 -> Animation.create(Animations.RED_TOPAZ_MACHETE_2426)
             else -> Animation.create(Animations.MACHETE_910)
         }
-    }
 
     override fun defineListeners() {
         on(JUNGLE_BUSH, IntType.SCENERY, "chop-down") { player, node ->

@@ -65,11 +65,7 @@ class MikeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MikeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MikeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MIKE_3166)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MIKE_3166)
 }

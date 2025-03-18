@@ -17,13 +17,9 @@ class RolayneTwickitNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RolayneTwickitNPC(id, location)
-    }
+    ): AbstractNPC = RolayneTwickitNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROLAYNE_TWICKIT_3627)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROLAYNE_TWICKIT_3627)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

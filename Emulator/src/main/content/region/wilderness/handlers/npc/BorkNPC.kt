@@ -50,9 +50,7 @@ class BorkNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BorkNPC(id, location)
-    }
+    ): AbstractNPC = BorkNPC(id, location)
 
     override fun handleTickActions() {
         if (player == null) {
@@ -225,9 +223,7 @@ class BorkNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BORK_7133)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BORK_7133)
 
     inner class OrkLegion : AbstractNPC {
         private var player: Player? = null
@@ -251,13 +247,9 @@ class BorkNPC : AbstractNPC {
             }
         }
 
-        override fun isIgnoreMultiBoundaries(victim: Entity): Boolean {
-            return true
-        }
+        override fun isIgnoreMultiBoundaries(victim: Entity): Boolean = true
 
-        override fun canAttack(e: Entity): Boolean {
-            return true
-        }
+        override fun canAttack(e: Entity): Boolean = true
 
         override fun construct(
             id: Int,
@@ -269,9 +261,7 @@ class BorkNPC : AbstractNPC {
             return legion
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.ORK_LEGION_7135)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.ORK_LEGION_7135)
     }
 
     inner class DagonElite : AbstractNPC {
@@ -285,21 +275,15 @@ class BorkNPC : AbstractNPC {
             state.neutralizeHits()
         }
 
-        override fun isIgnoreMultiBoundaries(victim: Entity): Boolean {
-            return true
-        }
+        override fun isIgnoreMultiBoundaries(victim: Entity): Boolean = true
 
-        override fun canAttack(e: Entity): Boolean {
-            return true
-        }
+        override fun canAttack(e: Entity): Boolean = true
 
         override fun isAttackable(
             e: Entity,
             style: CombatStyle,
             message: Boolean,
-        ): Boolean {
-            return false
-        }
+        ): Boolean = false
 
         override fun handleTickActions() {
             if (player == null) {
@@ -321,9 +305,7 @@ class BorkNPC : AbstractNPC {
             return elite
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(7137)
-        }
+        override fun getIds(): IntArray = intArrayOf(7137)
     }
 
     inner class BorkCutscene() : CutscenePlugin("Bork cutscene") {
@@ -421,17 +403,11 @@ class BorkNPC : AbstractNPC {
             )
         }
 
-        override fun newInstance(p: Player?): ActivityPlugin {
-            return BorkCutscene(player)
-        }
+        override fun newInstance(p: Player?): ActivityPlugin = BorkCutscene(player)
 
-        override fun getStartLocation(): Location {
-            return base.transform(36, 33, 0)
-        }
+        override fun getStartLocation(): Location = base.transform(36, 33, 0)
 
-        override fun getSpawnLocation(): Location? {
-            return null
-        }
+        override fun getSpawnLocation(): Location? = null
 
         override fun configure() {
             region = DynamicRegion.create(BORK_REGION)
@@ -448,9 +424,7 @@ class BorkNPC : AbstractNPC {
 
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player): Dialogue {
-            return DagonDialogue(player)
-        }
+        override fun newInstance(player: Player): Dialogue = DagonDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             npc = args[0] as NPC
@@ -482,9 +456,7 @@ class BorkNPC : AbstractNPC {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("dagon-dialogue"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("dagon-dialogue"))
     }
 
     companion object {

@@ -68,9 +68,7 @@ class GroundSpawnLoader {
         item: Item,
         location: Location?,
     ) : GroundItem(item, location) {
-        override fun toString(): String {
-            return "GroundSpawn [name=" + getName() + ", respawnRate=" + respawnRate + ", loc=" + getLocation() + "]"
-        }
+        override fun toString(): String = "GroundSpawn [name=" + getName() + ", respawnRate=" + respawnRate + ", loc=" + getLocation() + "]"
 
         fun save(buffer: ByteBuffer) {
             buffer.putInt(respawnRate)
@@ -82,21 +80,13 @@ class GroundSpawnLoader {
                 .put(getLocation().z.toByte())
         }
 
-        fun init(): GroundItem {
-            return GroundItemManager.create(this)
-        }
+        fun init(): GroundItem = GroundItemManager.create(this)
 
-        override fun isActive(): Boolean {
-            return true
-        }
+        override fun isActive(): Boolean = true
 
-        override fun isPrivate(): Boolean {
-            return false
-        }
+        override fun isPrivate(): Boolean = false
 
-        override fun isAutoSpawn(): Boolean {
-            return true
-        }
+        override fun isAutoSpawn(): Boolean = true
 
         override fun respawn() {
             GameWorld.Pulser.submit(

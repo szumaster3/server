@@ -42,15 +42,11 @@ class SpellBookManager {
             spells[buttonId] = spell
         }
 
-        fun getSpell(buttonId: Int): MagicSpell? {
-            return spells[buttonId]
-        }
+        fun getSpell(buttonId: Int): MagicSpell? = spells[buttonId]
 
         companion object {
             @JvmStatic
-            fun forInterface(id: Int): SpellBook? {
-                return values().find { it.interfaceId == id }
-            }
+            fun forInterface(id: Int): SpellBook? = values().find { it.interfaceId == id }
         }
     }
 }

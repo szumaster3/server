@@ -101,12 +101,11 @@ class GodBookOptionHandler : OptionHandler() {
         }
     }
 
-    private fun getNumberName(i: Int): String {
-        return when (i) {
+    private fun getNumberName(i: Int): String =
+        when (i) {
             1 -> "first"
             2 -> "second"
             3 -> "third"
             else -> "fourth"
         }
-    }
 }

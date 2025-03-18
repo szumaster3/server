@@ -53,11 +53,7 @@ class CuffsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CuffsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CuffsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CUFFS_3237)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CUFFS_3237)
 }

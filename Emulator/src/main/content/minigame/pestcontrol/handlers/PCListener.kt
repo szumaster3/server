@@ -68,8 +68,10 @@ class PCListener : InteractionListener {
         }
 
         on(SQUIRE, IntType.NPC, "talk-to", "leave") { player, node ->
-            val session = node.asNpc().getExtension<PestControlSession>(
-                PestControlSession::class.java)
+            val session =
+                node.asNpc().getExtension<PestControlSession>(
+                    PestControlSession::class.java,
+                )
             when (getUsedOption(player)) {
                 "talk-to" -> {
                     if (session == null) {

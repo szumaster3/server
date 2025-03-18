@@ -35,11 +35,7 @@ class IceTrollDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return IceTrollDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = IceTrollDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ICE_TROLL_1935)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICE_TROLL_1935)
 }

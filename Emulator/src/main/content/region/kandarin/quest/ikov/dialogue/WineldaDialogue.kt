@@ -20,9 +20,7 @@ import org.rs.consts.Quests
 class WineldaDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun newInstance(player: Player): Dialogue {
-        return WineldaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = WineldaDialogue(player)
 
     override fun handle(
         interfaceId: Int,
@@ -32,9 +30,7 @@ class WineldaDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WINELDA_276)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WINELDA_276)
 }
 
 class WineldaDialogueFile : DialogueBuilderFile() {

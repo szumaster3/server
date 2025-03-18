@@ -54,11 +54,7 @@ class UglugNarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return UglugNarDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = UglugNarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.UGLUG_NAR_2039)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.UGLUG_NAR_2039)
 }

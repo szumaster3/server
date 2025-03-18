@@ -28,11 +28,7 @@ class CroneDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CroneDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CroneDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CRONE_217)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CRONE_217)
 }

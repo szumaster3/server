@@ -41,11 +41,7 @@ class VigrDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return VigrDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = VigrDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VIGR_2151)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VIGR_2151)
 }

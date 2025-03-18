@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit
 private const val CHEST = org.rs.consts.Scenery.CHEST_2827
 
 class GutanothChestListener : InteractionListener {
-
     override fun defineListeners() {
         on(CHEST, IntType.SCENERY, "open") { player, node ->
             val delay = getAttribute(player, "gutanoth-chest-delay", 0L)

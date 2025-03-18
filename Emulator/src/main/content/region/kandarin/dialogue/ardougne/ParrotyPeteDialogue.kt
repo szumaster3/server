@@ -51,11 +51,7 @@ class ParrotyPeteDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ParrotyPeteDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ParrotyPeteDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PARROTY_PETE_1216)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PARROTY_PETE_1216)
 }

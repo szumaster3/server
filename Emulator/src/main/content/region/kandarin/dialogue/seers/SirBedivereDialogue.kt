@@ -107,11 +107,7 @@ class SirBedivereDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirBedivereDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirBedivereDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_BEDIVERE_242)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_BEDIVERE_242)
 }

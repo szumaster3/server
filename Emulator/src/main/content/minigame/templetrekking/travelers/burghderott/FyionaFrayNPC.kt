@@ -17,13 +17,9 @@ class FyionaFrayNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return FyionaFrayNPC(id, location)
-    }
+    ): AbstractNPC = FyionaFrayNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FYIONA_FRAY_3634)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FYIONA_FRAY_3634)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

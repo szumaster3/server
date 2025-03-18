@@ -22,9 +22,7 @@ class LoginValidation : Plugin<Player> {
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun newInstance(player: Player): Plugin<Player> {
         player.unlock()

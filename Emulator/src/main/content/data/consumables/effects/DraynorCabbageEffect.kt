@@ -11,7 +11,5 @@ class DraynorCabbageEffect : ConsumableEffect() {
         effect.activate(player)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return if (getStatLevel(player, Skills.DEFENCE) > 50) 3 else 4
-    }
+    override fun getHealthEffectValue(player: Player): Int = if (getStatLevel(player, Skills.DEFENCE) > 50) 3 else 4
 }

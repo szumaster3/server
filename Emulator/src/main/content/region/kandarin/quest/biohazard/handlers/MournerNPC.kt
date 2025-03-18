@@ -21,13 +21,9 @@ class MournerNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MournerNPC(id, location)
-    }
+    ): AbstractNPC = MournerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MOURNER_370)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOURNER_370)
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {

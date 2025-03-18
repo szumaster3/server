@@ -62,7 +62,5 @@ class LillyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LILLY_4294)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LILLY_4294)
 }

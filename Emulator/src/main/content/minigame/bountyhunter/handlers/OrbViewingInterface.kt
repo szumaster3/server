@@ -114,9 +114,7 @@ class OrbViewingInterface : ComponentPlugin() {
         player.interfaceManager.openSingleTab(component)
         player.pulseManager.run(
             object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    return false
-                }
+                override fun pulse(): Boolean = false
 
                 override fun stop() {
                     super.stop()

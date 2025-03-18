@@ -39,12 +39,11 @@ class AFURepairClimbHandler : InteractionListener {
         }
     }
 
-    private fun getClimbingObject(player: Player): RepairClimbObject? {
-        return RepairClimbObject.values().firstOrNull {
+    private fun getClimbingObject(player: Player): RepairClimbObject? =
+        RepairClimbObject.values().firstOrNull {
             it.destinationDown?.withinDistance(player.location, 2) == true ||
                 it.destinationUp?.withinDistance(player.location, 2) == true
         }
-    }
 
     private fun repair(
         player: Player,
@@ -172,8 +171,7 @@ class AFURepairClimbHandler : InteractionListener {
         TEMPLE(5164, Location.create(2949, 3835, 0), Location.create(2956, 3835, 0), Pair(0, 0)),
         ;
 
-        fun getOtherLocation(player: Player): Location? =
-            if (player.location == destinationDown) destinationUp else destinationDown
+        fun getOtherLocation(player: Player): Location? = if (player.location == destinationDown) destinationUp else destinationDown
 
         fun getAnimation(player: Player): Animation =
             if (getOtherLocation(player) ==

@@ -39,9 +39,7 @@ class Vector3d {
         this.z = 0.0
     }
 
-    override fun toString(): String {
-        return "($x, $y, $z)"
-    }
+    override fun toString(): String = "($x, $y, $z)"
 
     fun add(
         v1: Vector3d,
@@ -106,13 +104,9 @@ class Vector3d {
         return this
     }
 
-    fun dot(v2: Vector3d): Double {
-        return (this.x * v2.x + this.y * v2.y + this.z * v2.z)
-    }
+    fun dot(v2: Vector3d): Double = (this.x * v2.x + this.y * v2.y + this.z * v2.z)
 
-    fun l2norm(): Double {
-        return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
-    }
+    fun l2norm(): Double = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
 
     fun normalize(): Vector3d {
         val norm = this.l2norm()
@@ -127,9 +121,7 @@ class Vector3d {
             v1: Vector3d,
             v2: Vector3d,
             n: Vector3d,
-        ): Double {
-            return Math.atan2(Vector3d().cross(v1, v2).dot(n), v1.dot(v2))
-        }
+        ): Double = Math.atan2(Vector3d().cross(v1, v2).dot(n), v1.dot(v2))
     }
 
     override fun equals(other: Any?): Boolean {

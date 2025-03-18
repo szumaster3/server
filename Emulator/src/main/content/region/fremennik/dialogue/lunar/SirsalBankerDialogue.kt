@@ -95,11 +95,7 @@ class SirsalBankerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirsalBankerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirsalBankerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIRSAL_BANKER_4519)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIRSAL_BANKER_4519)
 }

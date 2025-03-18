@@ -32,12 +32,8 @@ class KoscheiSession(
     }
 
     companion object {
-        fun create(player: Player): KoscheiSession {
-            return KoscheiSession(player)
-        }
+        fun create(player: Player): KoscheiSession = KoscheiSession(player)
 
-        fun getSession(player: Player): KoscheiSession {
-            return player.getExtension(KoscheiSession::class.java)
-        }
+        fun getSession(player: Player): KoscheiSession = player.getExtension(KoscheiSession::class.java)
     }
 }

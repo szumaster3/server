@@ -52,13 +52,9 @@ enum class Origami(
 
     companion object {
         @JvmStatic
-        fun forId(itemId: Int): Origami? {
-            return values().find { it.base == itemId }
-        }
+        fun forId(itemId: Int): Origami? = values().find { it.base == itemId }
 
         @JvmStatic
-        fun forBalloon(used: Int): Origami? {
-            return values().find { it.product == used }
-        }
+        fun forBalloon(used: Int): Origami? = values().find { it.product == used }
     }
 }

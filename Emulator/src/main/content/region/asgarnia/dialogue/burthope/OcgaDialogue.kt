@@ -42,7 +42,5 @@ class OcgaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OCGA_1085)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OCGA_1085)
 }

@@ -65,11 +65,7 @@ class FadliDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FadliDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FadliDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FADLI_958)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FADLI_958)
 }

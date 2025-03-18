@@ -22,13 +22,9 @@ class TwigNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return TwigNPC(id, location)
-    }
+    ): AbstractNPC = TwigNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TWIG_1126, NPCs.TWIG_1128)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TWIG_1126, NPCs.TWIG_1128)
 
     override fun isAttackable(
         entity: Entity,

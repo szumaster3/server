@@ -62,11 +62,7 @@ class DavonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DavonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DavonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAVON_588)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAVON_588)
 }

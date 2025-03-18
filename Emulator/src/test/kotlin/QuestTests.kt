@@ -12,9 +12,7 @@ class QuestTests {
     }
 
     class TestQuest : Quest("Test Quest", 0, 0, 1, 1, 0, 1, 2) {
-        override fun newInstance(`object`: Any?): Quest {
-            return this
-        }
+        override fun newInstance(`object`: Any?): Quest = this
     }
 
     val testQuest = TestQuest()

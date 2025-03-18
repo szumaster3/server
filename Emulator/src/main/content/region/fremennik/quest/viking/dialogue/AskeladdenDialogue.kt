@@ -299,7 +299,5 @@ class AskeladdenDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ASKELADDEN_1295, NPCs.ASKELADDEN_2439)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ASKELADDEN_1295, NPCs.ASKELADDEN_2439)
 }

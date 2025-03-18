@@ -322,7 +322,5 @@ class SigliTheHuntsmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIGLI_THE_HUNTSMAN_1281)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIGLI_THE_HUNTSMAN_1281)
 }

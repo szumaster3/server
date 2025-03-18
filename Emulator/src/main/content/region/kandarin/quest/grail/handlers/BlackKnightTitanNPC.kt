@@ -32,9 +32,7 @@ class BlackKnightTitanNPC :
     override fun fireEvent(
         identifier: String?,
         vararg args: Any?,
-    ): Any {
-        return Unit
-    }
+    ): Any = Unit
 
     override fun startDeath(
         e: Entity?,

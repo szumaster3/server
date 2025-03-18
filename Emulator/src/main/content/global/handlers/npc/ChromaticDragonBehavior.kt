@@ -24,7 +24,7 @@ class ChromaticDragonBehavior : NPCBehavior(*greenDragons, *blueDragons, *redDra
                 Items.RED_DRAGON_EGG_12477.asItem(),
                 Items.BLUE_DRAGON_EGG_12478.asItem(),
                 Items.GREEN_DRAGON_EGG_12479.asItem(),
-                    -> removeList.add(item.id)
+                -> removeList.add(item.id)
             }
         }
 
@@ -44,37 +44,45 @@ class ChromaticDragonBehavior : NPCBehavior(*greenDragons, *blueDragons, *redDra
 
     companion object {
         // Green dragons.
-        val greenDragons = intArrayOf(
-            NPCs.GREEN_DRAGON_941,
-            NPCs.GREEN_DRAGON_4677,
-            NPCs.GREEN_DRAGON_4678,
-            NPCs.GREEN_DRAGON_4679,
-            NPCs.GREEN_DRAGON_4680,
-        )
+        val greenDragons =
+            intArrayOf(
+                NPCs.GREEN_DRAGON_941,
+                NPCs.GREEN_DRAGON_4677,
+                NPCs.GREEN_DRAGON_4678,
+                NPCs.GREEN_DRAGON_4679,
+                NPCs.GREEN_DRAGON_4680,
+            )
+
         // Blue dragons.
-        val blueDragons = intArrayOf(
-            NPCs.BLUE_DRAGON_55,
-            NPCs.BLUE_DRAGON_4681,
-            NPCs.BLUE_DRAGON_4682,
-            NPCs.BLUE_DRAGON_4683,
-            NPCs.BLUE_DRAGON_4684,
-        )
+        val blueDragons =
+            intArrayOf(
+                NPCs.BLUE_DRAGON_55,
+                NPCs.BLUE_DRAGON_4681,
+                NPCs.BLUE_DRAGON_4682,
+                NPCs.BLUE_DRAGON_4683,
+                NPCs.BLUE_DRAGON_4684,
+            )
+
         // Red dragons.
-        val redDragons = intArrayOf(
-            NPCs.RED_DRAGON_53,
-            NPCs.RED_DRAGON_4669,
-            NPCs.RED_DRAGON_4670,
-            NPCs.RED_DRAGON_4671,
-            NPCs.RED_DRAGON_4672,
-        )
+        val redDragons =
+            intArrayOf(
+                NPCs.RED_DRAGON_53,
+                NPCs.RED_DRAGON_4669,
+                NPCs.RED_DRAGON_4670,
+                NPCs.RED_DRAGON_4671,
+                NPCs.RED_DRAGON_4672,
+            )
+
         // Black dragons.
-        val blackDragons = intArrayOf(
-            NPCs.BLACK_DRAGON_54,
-            NPCs.BLACK_DRAGON_4673,
-            NPCs.BLACK_DRAGON_4674,
-            NPCs.BLACK_DRAGON_4675,
-            NPCs.BLACK_DRAGON_4676,
-        )
+        val blackDragons =
+            intArrayOf(
+                NPCs.BLACK_DRAGON_54,
+                NPCs.BLACK_DRAGON_4673,
+                NPCs.BLACK_DRAGON_4674,
+                NPCs.BLACK_DRAGON_4675,
+                NPCs.BLACK_DRAGON_4676,
+            )
+
         // Egg drop rate.
         var EGG_RATE = 1000
     }

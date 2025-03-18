@@ -216,7 +216,5 @@ class GhostInkeeperDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOST_INNKEEPER_1700)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_INNKEEPER_1700)
 }

@@ -79,11 +79,7 @@ class ZekeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZekeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZekeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZEKE_541)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZEKE_541)
 }

@@ -12,9 +12,7 @@ import org.rs.consts.Scenery
 import java.util.*
 
 class Rellekka : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
 
     override fun interactBehavior(
         entity: Entity,

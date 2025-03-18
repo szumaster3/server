@@ -25,13 +25,9 @@ class LeonDCourNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return LeonDCourNPC(id, location)
-    }
+    ): AbstractNPC = LeonDCourNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LEON_DCOUR_3067)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LEON_DCOUR_3067)
 
     override fun handleTickActions() {
         super.handleTickActions()

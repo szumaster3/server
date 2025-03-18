@@ -153,9 +153,7 @@ class SilkMerchantDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SilkMerchantDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SilkMerchantDialogue(player)
 
     fun buy(price: Int) {
         end()
@@ -169,7 +167,5 @@ class SilkMerchantDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SILK_MERCHANT_574)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SILK_MERCHANT_574)
 }

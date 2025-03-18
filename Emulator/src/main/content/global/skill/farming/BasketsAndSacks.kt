@@ -65,20 +65,12 @@ enum class BasketsAndSacks(
         }
 
         @JvmStatic
-        fun forId(itemId: Int): BasketsAndSacks? {
-            return BasketsAndSacks.Companion.map[itemId]
-        }
+        fun forId(itemId: Int): BasketsAndSacks? = BasketsAndSacks.Companion.map[itemId]
     }
 
-    fun checkIsLast(containerID: Int): Boolean {
-        return containerID == containers.last()
-    }
+    fun checkIsLast(containerID: Int): Boolean = containerID == containers.last()
 
-    fun checkIsFirst(containerID: Int): Boolean {
-        return containerID == containers.first()
-    }
+    fun checkIsFirst(containerID: Int): Boolean = containerID == containers.first()
 
-    fun checkWhich(containerID: Int): Int {
-        return containers.indexOf(containerID)
-    }
+    fun checkWhich(containerID: Int): Int = containers.indexOf(containerID)
 }

@@ -193,11 +193,7 @@ class BaraekDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BaraekDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BaraekDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARAEK_547)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARAEK_547)
 }

@@ -46,11 +46,7 @@ class ZahurDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZahurDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZahurDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAHUR_3037)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAHUR_3037)
 }

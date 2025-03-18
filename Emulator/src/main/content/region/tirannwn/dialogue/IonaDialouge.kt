@@ -32,11 +32,7 @@ class IonaDialouge(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return IonaDialouge(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IonaDialouge(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IONA_2369)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IONA_2369)
 }

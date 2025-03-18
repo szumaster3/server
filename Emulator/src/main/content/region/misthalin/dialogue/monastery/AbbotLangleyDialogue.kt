@@ -107,11 +107,7 @@ class AbbotLangleyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return AbbotLangleyDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = AbbotLangleyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ABBOT_LANGLEY_801)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ABBOT_LANGLEY_801)
 }

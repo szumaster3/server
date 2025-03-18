@@ -185,8 +185,8 @@ open class CookingPulse(
         food: Item,
         product: Item,
         burned: Boolean,
-    ): String? {
-        return when {
+    ): String? =
+        when {
             food.id == Items.RAW_OOMLIE_2337 -> "The meat is far too delicate to cook like this. Perhaps you should wrap something around it to protect it from the heat."
             product.id == Items.SODA_ASH_1781 && (food.id == Items.SEAWEED_401 || food.id == Items.SWAMP_WEED_10978) -> "You burn the ${food.name.lowercase()} into soda ash."
             food.id == Items.RAW_SWAMP_PASTE_1940 -> "You warm the paste over the fire. It thickens into a sticky goo."
@@ -213,11 +213,9 @@ open class CookingPulse(
                     "You accidentally burn some ${food.name.replace("Raw ", "")}."
                 }
         }
-    }
 
-    private fun getAnimation(scenery: Scenery): Animation {
-        return if (!scenery.name.equals("fire", ignoreCase = true)) RANGE_ANIMATION else FIRE_ANIMATION
-    }
+    private fun getAnimation(scenery: Scenery): Animation =
+        if (!scenery.name.equals("fire", ignoreCase = true)) RANGE_ANIMATION else FIRE_ANIMATION
 
     companion object {
         private val RANGE_ANIMATION = Animation(Animations.HUMAN_MAKE_PIZZA_883, Animator.Priority.HIGH)

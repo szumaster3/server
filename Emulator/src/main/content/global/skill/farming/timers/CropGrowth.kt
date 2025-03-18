@@ -93,13 +93,9 @@ class CropGrowth : PersistTimer(500, "farming:crops", isSoft = true) {
     fun getPatch(
         patch: FarmingPatch,
         addPatch: Boolean,
-    ): Patch {
-        return patchMap[patch] ?: (Patch(player, patch).also { if (addPatch) patchMap[patch] = it })
-    }
+    ): Patch = patchMap[patch] ?: (Patch(player, patch).also { if (addPatch) patchMap[patch] = it })
 
-    fun getPatches(): MutableCollection<Patch> {
-        return patchMap.values
-    }
+    fun getPatches(): MutableCollection<Patch> = patchMap.values
 
     override fun save(
         root: JSONObject,

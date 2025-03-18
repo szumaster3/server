@@ -88,11 +88,7 @@ class CitizenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CitizenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CitizenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LENSA_5494, NPCs.SASSILIK_5496, NPCs.FREYGERD_5493)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LENSA_5494, NPCs.SASSILIK_5496, NPCs.FREYGERD_5493)
 }

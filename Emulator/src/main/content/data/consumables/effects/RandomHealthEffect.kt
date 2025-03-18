@@ -20,7 +20,5 @@ class RandomHealthEffect(
         effect.activate(player)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return RandomFunction.random(a, b)
-    }
+    override fun getHealthEffectValue(player: Player): Int = RandomFunction.random(a, b)
 }

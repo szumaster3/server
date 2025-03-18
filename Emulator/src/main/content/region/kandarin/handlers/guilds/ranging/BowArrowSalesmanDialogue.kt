@@ -36,7 +36,5 @@ class BowArrowSalesmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
 }

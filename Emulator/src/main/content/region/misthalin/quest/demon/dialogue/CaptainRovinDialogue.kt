@@ -234,11 +234,7 @@ class CaptainRovinDialogue(
         }
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CaptainRovinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CaptainRovinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_ROVIN_884)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_ROVIN_884)
 }

@@ -107,15 +107,9 @@ class FishingTrawlerActivity :
         return this
     }
 
-    override fun getSpawnLocation(): Location {
-        return Location.create(2667, 3161, 0)
-    }
+    override fun getSpawnLocation(): Location = Location.create(2667, 3161, 0)
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return ftWaitingArea
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = ftWaitingArea
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT)
 }

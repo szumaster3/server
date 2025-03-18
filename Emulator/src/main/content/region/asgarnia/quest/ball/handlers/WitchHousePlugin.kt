@@ -21,9 +21,7 @@ class WitchHousePlugin : OptionHandler() {
         player: Player,
         node: Node,
         option: String,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         definePlugin(WitchHouseUseWithHandler())
@@ -48,7 +46,10 @@ class WitchHousePlugin : OptionHandler() {
                         val usedItem = event.usedItem
                         val npc = event.usedWith as NPC
                         checkNotNull(usedItem)
-                        if (usedItem.id == Items.MAGNET_2410 && npc.id == NPCs.MOUSE_901 && player.getAttribute<Any?>("mouse_out") != null) {
+                        if (usedItem.id == Items.MAGNET_2410 &&
+                            npc.id == NPCs.MOUSE_901 &&
+                            player.getAttribute<Any?>("mouse_out") != null
+                        ) {
                             sendDialogueLines(
                                 player,
                                 "You attach a magnet to the mouse's harness. The mouse finishes",
@@ -57,9 +58,13 @@ class WitchHousePlugin : OptionHandler() {
                                 "the door frame.",
                             )
                             removeAttribute(player, "mouse_out")
-                            if (removeItem(player, Items.MAGNET_2410, Container.INVENTORY)) setAttribute(
-                                player, "attached_magnet", true
-                            )
+                            if (removeItem(player, Items.MAGNET_2410, Container.INVENTORY)) {
+                                setAttribute(
+                                    player,
+                                    "attached_magnet",
+                                    true,
+                                )
+                            }
                         }
                         return true
                     }
@@ -76,13 +81,18 @@ class WitchHousePlugin : OptionHandler() {
             if (player.getAttribute<Any?>("mouse_out") != null && used.id == Items.CHEESE_1985 && scenery.id == 15518) {
                 sendDialogue(player, "You can't do this right now.")
             }
-            if (used.id == Items.CHEESE_1985 && scenery.id == org.rs.consts.Scenery.MOUSE_HOLE_15518 && player.getAttribute<Any?>(
-                    "mouse_out"
+            if (used.id == Items.CHEESE_1985 &&
+                scenery.id == org.rs.consts.Scenery.MOUSE_HOLE_15518 &&
+                player.getAttribute<Any?>(
+                    "mouse_out",
                 ) == null
             ) {
-                if (removeItem(player, Items.CHEESE_1985, Container.INVENTORY)) sendDialogue(
-                    player, "A mouse runs out of the hole."
-                )
+                if (removeItem(player, Items.CHEESE_1985, Container.INVENTORY)) {
+                    sendDialogue(
+                        player,
+                        "A mouse runs out of the hole.",
+                    )
+                }
                 val mouse = NPC.create(NPCs.MOUSE_901, Location.create(2903, 3466, 0)) as MouseNPC
                 mouse.player = player
                 mouse.isRespawn = false
@@ -94,5 +104,4 @@ class WitchHousePlugin : OptionHandler() {
             return true
         }
     }
-
 }

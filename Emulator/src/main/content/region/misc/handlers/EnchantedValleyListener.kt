@@ -12,7 +12,6 @@ import org.rs.consts.*
 import kotlin.math.ceil
 
 class EnchantedValleyListener : InteractionListener {
-
     override fun defineListeners() {
         /*
          * Handles spawn of River troll.
@@ -23,7 +22,7 @@ class EnchantedValleyListener : InteractionListener {
             if (!inInventory(player, Items.SMALL_FISHING_NET_303)) {
                 sendDialogue(
                     player,
-                    "You need a small net to catch these fish."
+                    "You need a small net to catch these fish.",
                 )
                 return@on true
             }
@@ -39,7 +38,10 @@ class EnchantedValleyListener : InteractionListener {
                                 3 -> {
                                     visualize(t, -1, Graphics.RANDOM_EVENT_PUFF_OF_SMOKE_86)
                                     when {
-                                        hasRequirement(player, Quests.SWAN_SONG) -> sendChat(t, "You killed da Sea Troll Queen - you die now!")
+                                        hasRequirement(
+                                            player,
+                                            Quests.SWAN_SONG,
+                                        ) -> sendChat(t, "You killed da Sea Troll Queen - you die now!")
                                         // "Leave dem fishies alone!"
                                         else -> sendChat(t, "Fishies be mine, leave dem fishies!")
                                     }

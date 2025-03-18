@@ -315,13 +315,9 @@ class AuburyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return AuburyDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = AuburyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AUBURY_553)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AUBURY_553)
 
     companion object {
         private val PACKAGE = Item(Items.RESEARCH_PACKAGE_290)

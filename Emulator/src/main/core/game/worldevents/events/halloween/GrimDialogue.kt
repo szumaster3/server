@@ -382,9 +382,7 @@ class GrimDialogue(
     fun canPurchase(
         player: Player,
         cost: Int,
-    ): Boolean {
-        return getCandyTotals(player) >= cost
-    }
+    ): Boolean = getCandyTotals(player) >= cost
 
     fun removeCandies(
         player: Player,
@@ -393,9 +391,7 @@ class GrimDialogue(
         addToCandyTotal(player, -amount)
     }
 
-    fun getCandyTotals(player: Player): Int {
-        return ServerStore.getArchive("hween2021-candies").getInt(player.username.lowercase())
-    }
+    fun getCandyTotals(player: Player): Int = ServerStore.getArchive("hween2021-candies").getInt(player.username.lowercase())
 
     fun addToCandyTotal(
         player: Player,
@@ -404,7 +400,5 @@ class GrimDialogue(
         ServerStore.getArchive("hween2021-candies").put(player.username.lowercase(), getCandyTotals(player) + amount)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(6390)
-    }
+    override fun getIds(): IntArray = intArrayOf(6390)
 }

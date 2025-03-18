@@ -37,7 +37,5 @@ class BrotherOmadDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_OMAD_279)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_OMAD_279)
 }

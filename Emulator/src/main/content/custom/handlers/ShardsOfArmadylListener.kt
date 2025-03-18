@@ -4,11 +4,9 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
-import org.rs.consts.Animations
 import org.rs.consts.Items
 
 class ShardsOfArmadylListener : InteractionListener {
-
     override fun defineListeners() {
         on(Items.SHARDS_OF_ARMADYL_14701, IntType.ITEM, "Combine") { player, node ->
             if (inInventory(player, node.id) && amountInInventory(player, node.id) >= 100) {
@@ -17,7 +15,7 @@ class ShardsOfArmadylListener : InteractionListener {
                 addDialogueAction(player) { _, button ->
                     when (button) {
                         2 -> {
-                            if(freeSlots(player) == 0) {
+                            if (freeSlots(player) == 0) {
                                 closeInterface(player)
                                 sendMessage(player, "You don't have enough inventory space.")
                                 return@addDialogueAction

@@ -57,13 +57,9 @@ class BarcrawlDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BarcrawlDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BarcrawlDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("barcrawl dialogue"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("barcrawl dialogue"))
 
     companion object {
         private var type: BarcrawlType? = null

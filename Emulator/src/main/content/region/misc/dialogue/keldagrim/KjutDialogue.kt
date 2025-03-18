@@ -107,11 +107,7 @@ class KjutDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KjutDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KjutDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KJUT_2198)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KJUT_2198)
 }

@@ -86,11 +86,7 @@ class DoomsayerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DoomsayerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DoomsayerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DOOMSAYER_3777)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DOOMSAYER_3777)
 }

@@ -1027,9 +1027,7 @@ class AugusteDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AUGUSTE_5049)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AUGUSTE_5049)
 }
 
 class AugusteDialogueFile : DialogueFile() {

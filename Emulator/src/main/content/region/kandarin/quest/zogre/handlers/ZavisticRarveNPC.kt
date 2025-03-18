@@ -23,13 +23,9 @@ class ZavisticRarveNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ZavisticRarveNPC(id, location)
-    }
+    ): AbstractNPC = ZavisticRarveNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
 
     override fun handleTickActions() {
         super.handleTickActions()

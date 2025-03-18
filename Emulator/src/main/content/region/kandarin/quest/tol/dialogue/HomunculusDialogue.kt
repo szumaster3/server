@@ -453,7 +453,5 @@ class HomunculusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOMUNCULUS_5581)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOMUNCULUS_5581)
 }

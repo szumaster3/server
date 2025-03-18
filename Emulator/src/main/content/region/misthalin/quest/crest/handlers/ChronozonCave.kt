@@ -30,9 +30,7 @@ class ChronozonCave :
         e: Entity?,
         from: Location?,
         to: Location?,
-    ): Boolean {
-        return super.move(e, from, to)
-    }
+    ): Boolean = super.move(e, from, to)
 
     override fun enter(e: Entity?): Boolean {
         if (e != null) {
@@ -77,7 +75,5 @@ class ChronozonCave :
     override fun fireEvent(
         identifier: String?,
         vararg args: Any?,
-    ): Any {
-        return UInt
-    }
+    ): Any = UInt
 }

@@ -61,7 +61,5 @@ class JiminuaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JIMINUA_560)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JIMINUA_560)
 }

@@ -16,8 +16,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class TrollStronghold :
-    Quest(Quests.TROLL_STRONGHOLD, 128, 127, 1, Vars.VARP_QUEST_TROLL_SRONGHOLD_PROGRESS_317, 0, 1, 50) {
+class TrollStronghold : Quest(Quests.TROLL_STRONGHOLD, 128, 127, 1, Vars.VARP_QUEST_TROLL_SRONGHOLD_PROGRESS_317, 0, 1, 50) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -110,7 +109,5 @@ class TrollStronghold :
         addItemOrDrop(player, Items.MYSTERIOUS_LAMP_13227, 2)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

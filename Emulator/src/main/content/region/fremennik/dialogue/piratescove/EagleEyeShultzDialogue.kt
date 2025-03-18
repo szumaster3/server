@@ -44,11 +44,7 @@ class EagleEyeShultzDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EagleEyeShultzDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EagleEyeShultzDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EAGLE_EYE_SHULTZ_4542)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EAGLE_EYE_SHULTZ_4542)
 }

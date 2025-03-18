@@ -130,7 +130,5 @@ class KalebParamayaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KALEB_PARAMAYA_512)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KALEB_PARAMAYA_512)
 }

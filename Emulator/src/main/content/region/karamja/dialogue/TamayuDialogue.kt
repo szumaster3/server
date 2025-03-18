@@ -47,9 +47,7 @@ class TamayuDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2487, NPCs.TAMAYU_1167, NPCs.TAMAYU_1168, NPCs.TAMAYU_1169, NPCs.TAMAYU_1170)
-    }
+    override fun getIds(): IntArray = intArrayOf(2487, NPCs.TAMAYU_1167, NPCs.TAMAYU_1168, NPCs.TAMAYU_1169, NPCs.TAMAYU_1170)
 
     companion object {
         val randomConversation =

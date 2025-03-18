@@ -29,15 +29,9 @@ class CouncilWorkmanDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CouncilWorkmanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CouncilWorkmanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COUNCIL_WORKMAN_1287)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COUNCIL_WORKMAN_1287)
 }

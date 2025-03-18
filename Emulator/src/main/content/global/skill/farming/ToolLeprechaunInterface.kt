@@ -285,19 +285,16 @@ class ToolLeprechaunInterface : InterfaceListener {
         updateQuantityMethod.invoke(player, -finalAmount)
     }
 
-    fun getAmount(opcode: Int): Int {
-        return when (opcode) {
+    fun getAmount(opcode: Int): Int =
+        when (opcode) {
             155 -> 1
             196 -> 5
             124 -> -1
             199 -> -2
             else -> 0
         }
-    }
 
-    private fun hasRake(player: Player?): Boolean {
-        return getVarbit(player!!, 1435) == 1
-    }
+    private fun hasRake(player: Player?): Boolean = getVarbit(player!!, 1435) == 1
 
     private fun setHasRake(
         player: Player?,
@@ -306,9 +303,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1435, if (hasRake) 1 else 0, true)
     }
 
-    private fun hasDibber(player: Player?): Boolean {
-        return getVarbit(player!!, 1436) == 1
-    }
+    private fun hasDibber(player: Player?): Boolean = getVarbit(player!!, 1436) == 1
 
     private fun setHasDibber(
         player: Player?,
@@ -317,9 +312,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1436, if (hasDibber) 1 else 0, true)
     }
 
-    private fun hasSpade(player: Player?): Boolean {
-        return getVarbit(player!!, 1437) == 1
-    }
+    private fun hasSpade(player: Player?): Boolean = getVarbit(player!!, 1437) == 1
 
     private fun setHasSpade(
         player: Player?,
@@ -328,9 +321,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1437, if (hasSpade) 1 else 0, true)
     }
 
-    private fun hasSecateurs(player: Player?): Boolean {
-        return getVarbit(player!!, 1438) == 1
-    }
+    private fun hasSecateurs(player: Player?): Boolean = getVarbit(player!!, 1438) == 1
 
     private fun setHasSecateurs(
         player: Player?,
@@ -339,9 +330,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1438, if (hasSecateurs) 1 else 0, true)
     }
 
-    private fun hasWateringCan(player: Player?): Boolean {
-        return getVarbit(player!!, 1439) > 0
-    }
+    private fun hasWateringCan(player: Player?): Boolean = getVarbit(player!!, 1439) > 0
 
     private fun getWateringCan(player: Player?): Int {
         var can =
@@ -377,9 +366,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1439, 0, true)
     }
 
-    private fun hasGardeningTrowel(player: Player?): Boolean {
-        return getVarbit(player!!, 1440) == 1
-    }
+    private fun hasGardeningTrowel(player: Player?): Boolean = getVarbit(player!!, 1440) == 1
 
     private fun setHasGardeningTrowel(
         player: Player?,
@@ -388,9 +375,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1440, if (hasTrowel) 1 else 0, true)
     }
 
-    private fun getNumBuckets(player: Player?): Int {
-        return getVarbit(player!!, 1441)
-    }
+    private fun getNumBuckets(player: Player?): Int = getVarbit(player!!, 1441)
 
     private fun updateBuckets(
         player: Player?,
@@ -399,9 +384,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1441, getNumBuckets(player) + amount, true)
     }
 
-    private fun getNumCompost(player: Player?): Int {
-        return getVarbit(player!!, 1442)
-    }
+    private fun getNumCompost(player: Player?): Int = getVarbit(player!!, 1442)
 
     private fun updateCompost(
         player: Player?,
@@ -410,9 +393,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1442, getNumCompost(player) + amount, true)
     }
 
-    private fun getNumSuperCompost(player: Player?): Int {
-        return getVarbit(player!!, 1443)
-    }
+    private fun getNumSuperCompost(player: Player?): Int = getVarbit(player!!, 1443)
 
     private fun updateSuperCompost(
         player: Player?,
@@ -421,9 +402,7 @@ class ToolLeprechaunInterface : InterfaceListener {
         setVarbit(player!!, 1443, getNumSuperCompost(player) + amount, true)
     }
 
-    private fun hasMagicSecateurs(player: Player?): Boolean {
-        return getVarbit(player!!, 1848) == 1
-    }
+    private fun hasMagicSecateurs(player: Player?): Boolean = getVarbit(player!!, 1848) == 1
 
     private fun setHasMagicSecateurs(
         player: Player?,

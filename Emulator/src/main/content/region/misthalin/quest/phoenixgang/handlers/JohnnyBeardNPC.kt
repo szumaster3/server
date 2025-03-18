@@ -22,9 +22,7 @@ class JohnnyBeardNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return JohnnyBeardNPC(id, location)
-    }
+    ): AbstractNPC = JohnnyBeardNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -40,9 +38,7 @@ class JohnnyBeardNPC : AbstractNPC {
         }
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.JONNY_THE_BEARD_645)

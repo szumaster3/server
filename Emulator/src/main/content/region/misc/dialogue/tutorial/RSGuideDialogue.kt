@@ -132,11 +132,7 @@ class RSGuideDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RSGuideDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RSGuideDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUNESCAPE_GUIDE_945)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUNESCAPE_GUIDE_945)
 }

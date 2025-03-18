@@ -26,7 +26,6 @@ class GhostShopkeeperDialogue(
         return true
     }
 
-
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
@@ -62,7 +61,5 @@ class GhostShopkeeperDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOST_SHOPKEEPER_1699)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_SHOPKEEPER_1699)
 }

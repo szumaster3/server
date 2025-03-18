@@ -98,11 +98,7 @@ class WeaponsMasterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return WeaponsMasterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = WeaponsMasterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WEAPONSMASTER_643)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WEAPONSMASTER_643)
 }

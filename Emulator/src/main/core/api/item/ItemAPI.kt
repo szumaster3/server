@@ -10,9 +10,7 @@ import core.game.node.entity.player.Player
  * @param id The id for the item.
  * @return The [ItemDefinition] associated with the provided item id.
  */
-fun itemDefinition(id: Int): ItemDefinition {
-    return ItemDefinition.forId(id)
-}
+fun itemDefinition(id: Int): ItemDefinition = ItemDefinition.forId(id)
 
 /**
  * Checks if all specified items are present in the player's inventory.
@@ -24,10 +22,9 @@ fun itemDefinition(id: Int): ItemDefinition {
 fun allInInventory(
     player: Player,
     vararg ids: Int,
-): Boolean {
-    return ids.all { id ->
+): Boolean =
+    ids.all { id ->
         inInventory(player, id)
     }
-}
 
 private class ItemAPI

@@ -65,9 +65,7 @@ class ChompyBirdNPC :
         return npc
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHOMPY_BIRD_1550)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHOMPY_BIRD_1550)
 
     override fun isAttackable(
         entity: Entity,
@@ -124,9 +122,7 @@ class ChompyBirdNPC :
             submitIndividualPulse(
                 this,
                 object : MovementPulse(this, newLoc, Pathfinder.DUMB) {
-                    override fun pulse(): Boolean {
-                        return true
-                    }
+                    override fun pulse(): Boolean = true
                 },
             )
         }

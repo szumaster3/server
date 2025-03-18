@@ -41,11 +41,7 @@ class DagonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DagonDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DagonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("dagon-dialogue"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("dagon-dialogue"))
 }

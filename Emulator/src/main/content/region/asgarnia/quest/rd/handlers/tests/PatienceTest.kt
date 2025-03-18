@@ -53,15 +53,14 @@ class PatienceTest(
             }
     }
 
-    private fun isInitialDialogue(player: Player): Boolean {
-        return dialogueNum == 0 &&
+    private fun isInitialDialogue(player: Player): Boolean =
+        dialogueNum == 0 &&
             !getAttribute(player, patience, false) &&
             !getAttribute(
                 player,
                 RecruitmentDrive.stageFail,
                 false,
             )
-    }
 
     private fun handlePatienceDialogue(player: Player) {
         setAttribute(player, patience, true)
@@ -88,8 +87,8 @@ class PatienceTest(
         )
     }
 
-    private fun isFailDialogue(player: Player): Boolean {
-        return dialogueNum == 0 &&
+    private fun isFailDialogue(player: Player): Boolean =
+        dialogueNum == 0 &&
             (
                 getAttribute(player, patience, false) ||
                     getAttribute(
@@ -99,7 +98,6 @@ class PatienceTest(
                     ) ||
                     dialogueNum == 2
             )
-    }
 
     fun handleFailStage(player: Player) {
         removeAttribute(player, patience)
@@ -111,9 +109,7 @@ class PatienceTest(
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2474, 4959, 2478, 4957))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2474, 4959, 2478, 4957))
 
     override fun entityStep(
         entity: Entity,

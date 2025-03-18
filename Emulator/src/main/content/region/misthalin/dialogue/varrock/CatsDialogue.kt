@@ -193,12 +193,10 @@ class CatsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CatsDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CatsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.KITTEN_761,
             NPCs.KITTEN_762,
             NPCs.KITTEN_763,
@@ -206,5 +204,4 @@ class CatsDialogue(
             NPCs.KITTEN_765,
             NPCs.KITTEN_766,
         )
-    }
 }

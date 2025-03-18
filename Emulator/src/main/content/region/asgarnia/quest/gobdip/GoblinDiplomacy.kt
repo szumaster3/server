@@ -11,8 +11,6 @@ import core.api.sendItemZoomOnInterface
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.game.node.item.GroundItemManager
-import core.game.node.item.Item
 import core.plugin.ClassScanner.definePlugins
 import core.plugin.Initializable
 import org.rs.consts.Components
@@ -21,8 +19,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class GoblinDiplomacy :
-    Quest(Quests.GOBLIN_DIPLOMACY, 20, 19, 5, Vars.VARP_QUEST_GOBLIN_DIPLOMACY_QUEST_PROGRESS_62, 0, 1, 100) {
+class GoblinDiplomacy : Quest(Quests.GOBLIN_DIPLOMACY, 20, 19, 5, Vars.VARP_QUEST_GOBLIN_DIPLOMACY_QUEST_PROGRESS_62, 0, 1, 100) {
     override fun drawJournal(
         player: Player,
         stage: Int,

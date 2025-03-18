@@ -120,9 +120,7 @@ class SplitbarkWizardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_1263)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_1263)
 
     companion object {
         private const val BARK = Items.BARK_3239

@@ -71,7 +71,5 @@ class SphinxDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPHINX_1990)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SPHINX_1990)
 }

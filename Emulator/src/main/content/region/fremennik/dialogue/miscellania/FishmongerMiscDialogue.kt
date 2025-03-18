@@ -50,11 +50,7 @@ class FishmongerMiscDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FishmongerMiscDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FishmongerMiscDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FISHMONGER_1393)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FISHMONGER_1393)
 }

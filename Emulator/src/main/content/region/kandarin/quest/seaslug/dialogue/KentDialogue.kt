@@ -145,9 +145,7 @@ class KentDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KENT_701)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KENT_701)
 
     internal class KentDialogueFile : DialogueFile() {
         override fun handle(

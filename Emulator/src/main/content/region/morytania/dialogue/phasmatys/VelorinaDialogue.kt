@@ -21,7 +21,7 @@ class VelorinaDialogue(
 
         // If the player is not wearing the Ghostspeak Amulet.
         if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
-            npc( "Woooo wooo wooooo woooo")
+            npc("Woooo wooo wooooo woooo")
             stage = 4
         }
 
@@ -30,7 +30,7 @@ class VelorinaDialogue(
             isQuestComplete(player, Quests.GHOSTS_AHOY) -> {
                 options(
                     "I thought you were going to pass over to the next world.",
-                    "Can I have another Ectophial?"
+                    "Can I have another Ectophial?",
                 )
             }
 
@@ -87,7 +87,5 @@ class VelorinaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VELORINA_1683)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VELORINA_1683)
 }

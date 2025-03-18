@@ -35,11 +35,7 @@ class DerrikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DerrikDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DerrikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DERRIK_1376)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DERRIK_1376)
 }

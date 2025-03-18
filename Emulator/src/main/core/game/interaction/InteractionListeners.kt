@@ -48,9 +48,7 @@ object InteractionListeners {
         }
     }
 
-    private fun validate(key: String): Boolean {
-        return !listeners.containsKey(key) && !useWithListeners.containsKey(key)
-    }
+    private fun validate(key: String): Boolean = !listeners.containsKey(key) && !useWithListeners.containsKey(key)
 
     @JvmStatic
     fun add(
@@ -148,14 +146,10 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun getEquip(id: Int): ((Player, Node) -> Boolean)? {
-        return equipListeners["equip:$id"]
-    }
+    fun getEquip(id: Int): ((Player, Node) -> Boolean)? = equipListeners["equip:$id"]
 
     @JvmStatic
-    fun getUnequip(id: Int): ((Player, Node) -> Boolean)? {
-        return equipListeners["unequip:$id"]
-    }
+    fun getUnequip(id: Int): ((Player, Node) -> Boolean)? = equipListeners["unequip:$id"]
 
     @JvmStatic
     fun get(
@@ -181,17 +175,13 @@ object InteractionListeners {
         id: Int,
         type: Int,
         option: String,
-    ): ((Player, Node) -> Boolean)? {
-        return listeners["$id:$type:${option.lowercase()}"]
-    }
+    ): ((Player, Node) -> Boolean)? = listeners["$id:$type:${option.lowercase()}"]
 
     @JvmStatic
     fun get(
         option: String,
         type: Int,
-    ): ((Player, Node) -> Boolean)? {
-        return listeners["$type:${option.lowercase()}"]
-    }
+    ): ((Player, Node) -> Boolean)? = listeners["$type:${option.lowercase()}"]
 
     @JvmStatic
     fun addDestOverride(
@@ -232,25 +222,19 @@ object InteractionListeners {
         type: Int,
         id: Int,
         option: String,
-    ): ((Entity, Node) -> Location)? {
-        return destinationOverrides["$type:$id:${option.lowercase()}"]
-    }
+    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id:${option.lowercase()}"]
 
     @JvmStatic
     fun getOverride(
         type: Int,
         id: Int,
-    ): ((Entity, Node) -> Location)? {
-        return destinationOverrides["$type:$id"]
-    }
+    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id"]
 
     @JvmStatic
     fun getOverride(
         type: Int,
         option: String,
-    ): ((Entity, Node) -> Location)? {
-        return destinationOverrides["$type:$option"]
-    }
+    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$option"]
 
     @JvmStatic
     fun run(
@@ -380,9 +364,7 @@ object InteractionListeners {
             player.scripts.setInteractionScript(node, script)
             player.pulseManager.run(
                 object : MovementPulse(player, node, flag) {
-                    override fun pulse(): Boolean {
-                        return true
-                    }
+                    override fun pulse(): Boolean = true
                 },
             )
             return true

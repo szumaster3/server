@@ -19,9 +19,7 @@ class AttackOption : OptionHandler() {
         return true
     }
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -30,7 +28,5 @@ class AttackOption : OptionHandler() {
         return this
     }
 
-    override fun isDelayed(player: Player): Boolean {
-        return false
-    }
+    override fun isDelayed(player: Player): Boolean = false
 }

@@ -11,8 +11,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class ScorpionCatcher :
-    Quest(Quests.SCORPION_CATCHER, 108, 107, 1, Vars.VARP_QUEST_SCORPION_CATCHER_PROGRESS_76, 0, 1, 6) {
+class ScorpionCatcher : Quest(Quests.SCORPION_CATCHER, 108, 107, 1, Vars.VARP_QUEST_SCORPION_CATCHER_PROGRESS_76, 0, 1, 6) {
     companion object {
         const val ATTRIBUTE_MIRROR = "/save:scorpion_catcher:start-talk"
         const val ATTRIBUTE_SECRET = "/save:scorpion_catcher:secret-room"
@@ -156,7 +155,5 @@ class ScorpionCatcher :
         removeAttributes(player, ATTRIBUTE_SECRET, ATTRIBUTE_NPC, ATTRIBUTE_MIRROR, ATTRIBUTE_CAGE)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

@@ -219,9 +219,7 @@ class GnomeStrongholdCourse
             SceneryDefinition.forId(154).handlers["option:squeeze-through"] = this
         }
 
-        override fun createInstance(player: Player): content.global.skill.agility.AgilityCourse {
-            return GnomeStrongholdCourse(player)
-        }
+        override fun createInstance(player: Player): content.global.skill.agility.AgilityCourse = GnomeStrongholdCourse(player)
 
         companion object {
             private val USED_PIPES = IntArray(2)

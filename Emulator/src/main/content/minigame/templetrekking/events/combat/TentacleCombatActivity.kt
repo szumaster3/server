@@ -104,15 +104,10 @@ class TentacleCombatActivity :
         return this
     }
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2569, 5027, 2581, 5042, 2, true))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2569, 5027, 2581, 5042, 2, true))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.TELEPORT, ZoneRestriction.FOLLOWERS)
 }

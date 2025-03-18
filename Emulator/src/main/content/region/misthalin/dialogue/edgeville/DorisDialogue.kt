@@ -177,13 +177,9 @@ class DorisDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DorisDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DorisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DORIS_3381)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DORIS_3381)
 
     companion object {
         var HELLCATS = intArrayOf(NPCs.OVERGROWN_HELLCAT_3503, NPCs.HELLCAT_3504, NPCs.HELL_KITTEN_3505)

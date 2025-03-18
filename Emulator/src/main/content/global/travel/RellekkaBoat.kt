@@ -82,9 +82,10 @@ class RellekkaBoat : OptionHandler() {
 
                         1 ->
                             when (buttonID) {
-                                1 -> end().also {
-                                    sail(player, TravelDestination.RELLEKKA_TO_ICEBERG)
-                                }
+                                1 ->
+                                    end().also {
+                                        sail(player, TravelDestination.RELLEKKA_TO_ICEBERG)
+                                    }
                                 2 -> end()
                             }
                     }
@@ -121,9 +122,7 @@ class RellekkaBoat : OptionHandler() {
         )
     }
 
-    private fun isDestinationValid(destination: TravelDestination): Boolean {
-        return TravelDestination.values().contains(destination)
-    }
+    private fun isDestinationValid(destination: TravelDestination): Boolean = TravelDestination.values().contains(destination)
 
     private fun completeJourney(
         player: Player,
@@ -135,9 +134,7 @@ class RellekkaBoat : OptionHandler() {
         unlock(player)
     }
 
-    private fun TravelDestination.animationDuration(): Int {
-        return animationDuration(getAnimation(this.shipAnim))
-    }
+    private fun TravelDestination.animationDuration(): Int = animationDuration(getAnimation(this.shipAnim))
 }
 
 enum class TravelDestination(

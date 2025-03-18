@@ -17,21 +17,16 @@ class JulietNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return JulietNPC(id, location)
-    }
+    ): AbstractNPC = JulietNPC(id, location)
 
-    override fun isHidden(player: Player): Boolean {
-        return player
+    override fun isHidden(player: Player): Boolean =
+        player
             .getQuestRepository()
             .getQuest(Quests.ROMEO_JULIET)
             .getStage(player) > 60 &&
             player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) < 100
-    }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.JULIET_637)

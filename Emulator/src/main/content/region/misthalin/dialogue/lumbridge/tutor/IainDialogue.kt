@@ -21,15 +21,9 @@ class IainDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return IainDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IainDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IAIN_7868)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IAIN_7868)
 }

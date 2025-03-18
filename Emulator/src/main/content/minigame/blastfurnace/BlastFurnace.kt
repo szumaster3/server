@@ -17,9 +17,7 @@ class BlastFurnace :
     MapArea,
     PersistPlayer,
     TickListener {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(bfArea)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(bfArea)
 
     override fun savePlayer(
         player: Player,
@@ -139,9 +137,7 @@ class BlastFurnace :
         var pedaler: Player? = null
         var pumper: Player? = null
 
-        fun insideBorders(player: Player): Boolean {
-            return bfArea.insideBorder(player.location)
-        }
+        fun insideBorders(player: Player): Boolean = bfArea.insideBorder(player.location)
 
         fun placeAllOre(
             p: Player,
@@ -196,9 +192,7 @@ class BlastFurnace :
             return state
         }
 
-        fun getOreContainer(p: Player): BFOreContainer {
-            return getPlayerState(p).container
-        }
+        fun getOreContainer(p: Player): BFOreContainer = getPlayerState(p).container
 
         fun addOreToBelt(
             p: Player,
@@ -247,16 +241,15 @@ class BlastFurnace :
             id: Int,
             coalAmount: Int,
             level: Int,
-        ): Bar? {
-            return when (id) {
+        ): Bar? =
+            when (id) {
                 Items.COPPER_ORE_436, Items.TIN_ORE_438 -> Bar.BRONZE
                 Items.IRON_ORE_440 -> if (coalAmount >= 1 && level >= Bar.STEEL.level) Bar.STEEL else Bar.IRON
                 else -> Bar.forOre(id)
             }
-        }
 
-        fun getNpcForOre(id: Int): Int {
-            return when (id) {
+        fun getNpcForOre(id: Int): Int =
+            when (id) {
                 Items.IRON_ORE_440 -> NPCs.IRON_ORE_2556
                 Items.COPPER_ORE_436 -> NPCs.COPPER_ORE_2555
                 Items.TIN_ORE_438 -> NPCs.TIN_ORE_2554
@@ -268,7 +261,6 @@ class BlastFurnace :
                 Items.RUNITE_ORE_451 -> NPCs.RUNITE_ORE_2559
                 else -> -1
             }
-        }
 
         fun getEntranceFee(
             hasCharos: Boolean,

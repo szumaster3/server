@@ -60,11 +60,7 @@ class ElderGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ElderGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ElderGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELDER_GUARD_1461, NPCs.ELDER_GUARD_1462)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELDER_GUARD_1461, NPCs.ELDER_GUARD_1462)
 }

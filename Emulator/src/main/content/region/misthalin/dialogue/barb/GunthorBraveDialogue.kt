@@ -36,13 +36,9 @@ class GunthorBraveDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GunthorBraveDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GunthorBraveDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUNTHOR_THE_BRAVE_199)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUNTHOR_THE_BRAVE_199)
 
     companion object {
         val forceChat = arrayOf("Ah, you've come for fight!", "You look funny!", "Wanna fight?", "Grrr!", "Go away!")

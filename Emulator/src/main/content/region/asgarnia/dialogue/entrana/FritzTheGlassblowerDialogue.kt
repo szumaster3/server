@@ -220,13 +220,9 @@ class FritzTheGlassblowerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FritzTheGlassblowerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FritzTheGlassblowerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRITZ_THE_GLASSBLOWER_4909)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRITZ_THE_GLASSBLOWER_4909)
 
     companion object {
         private val MOLTEN_GLASS = Item(Items.MOLTEN_GLASS_1775)

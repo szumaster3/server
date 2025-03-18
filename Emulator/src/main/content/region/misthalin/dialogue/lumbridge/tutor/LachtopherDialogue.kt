@@ -89,7 +89,5 @@ class LachtopherDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LACHTOPHER_7870)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LACHTOPHER_7870)
 }

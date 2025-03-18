@@ -31,17 +31,11 @@ class FruitBatFamiliar(
     override fun construct(
         owner: Player,
         id: Int,
-    ): Familiar {
-        return FruitBatFamiliar(owner, id)
-    }
+    ): Familiar = FruitBatFamiliar(owner, id)
 
-    override fun isHidden(player: Player?): Boolean {
-        return super.isHidden(player)
-    }
+    override fun isHidden(player: Player?): Boolean = super.isHidden(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(FRUIT_BAT)
-    }
+    override fun getIds(): IntArray = intArrayOf(FRUIT_BAT)
 
     override fun specialMove(special: FamiliarSpecial?): Boolean {
         if (owner.getAttribute("fruit-bat", 0) > GameWorld.ticks) {

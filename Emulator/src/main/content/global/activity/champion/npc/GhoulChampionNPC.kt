@@ -31,13 +31,9 @@ class GhoulChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GhoulChampionNPC(id, location)
-    }
+    ): AbstractNPC = GhoulChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOUL_CHAMPION_3059)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOUL_CHAMPION_3059)
 
     override fun handleTickActions() {
         super.handleTickActions()

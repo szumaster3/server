@@ -44,11 +44,7 @@ class HorvikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HorvikDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HorvikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HORVIK_549)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HORVIK_549)
 }

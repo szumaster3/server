@@ -40,11 +40,7 @@ class GunnarHoldstromDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GunnarHoldstromDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GunnarHoldstromDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUNNAR_HOLDSTROM_5511)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUNNAR_HOLDSTROM_5511)
 }

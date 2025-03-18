@@ -29,9 +29,7 @@ class SmeltingInteraction : InteractionListener {
                         submitIndividualPulse(player, CannonballPulse(player, used.asItem(), amount))
                     }
 
-                    override fun getAll(index: Int): Int {
-                        return amountInInventory(player, used.id)
-                    }
+                    override fun getAll(index: Int): Int = amountInInventory(player, used.id)
                 }
 
             handler.open()

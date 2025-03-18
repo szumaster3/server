@@ -200,11 +200,7 @@ class ThessaliaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ThessaliaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ThessaliaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THESSALIA_548)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THESSALIA_548)
 }

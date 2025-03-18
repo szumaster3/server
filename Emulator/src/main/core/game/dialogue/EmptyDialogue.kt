@@ -8,9 +8,7 @@ class EmptyDialogue(
     player: Player? = null,
     val file: DialogueFile?,
 ) : Dialogue(player) {
-    override fun newInstance(player: Player?): Dialogue {
-        return EmptyDialogue(player, null)
-    }
+    override fun newInstance(player: Player?): Dialogue = EmptyDialogue(player, null)
 
     override fun open(vararg args: Any?): Boolean {
         if (args.isNotEmpty() && args[0] is NPC) {
@@ -25,11 +23,7 @@ class EmptyDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(Integer.MAX_VALUE)
-    }
+    override fun getIds(): IntArray = intArrayOf(Integer.MAX_VALUE)
 }

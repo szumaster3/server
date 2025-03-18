@@ -184,7 +184,5 @@ class GuardianMummyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARDIAN_MUMMY_4476)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARDIAN_MUMMY_4476)
 }

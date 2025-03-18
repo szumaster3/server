@@ -919,11 +919,7 @@ class RomeoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RomeoDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RomeoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROMEO_639)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROMEO_639)
 }

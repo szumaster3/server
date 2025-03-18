@@ -39,9 +39,7 @@ class GameSettings internal constructor(
     val isHosted: Boolean
         get() = !isDevMode
 
-    override fun toString(): String {
-        return "GameSettings [name=$name, debug=$isBeta, devMode=$isDevMode, gui=$isGui, worldId=$worldId]"
-    }
+    override fun toString(): String = "GameSettings [name=$name, debug=$isBeta, devMode=$isDevMode, gui=$isGui, worldId=$worldId]"
 
     companion object {
         fun parse(data: JSONObject): GameSettings {

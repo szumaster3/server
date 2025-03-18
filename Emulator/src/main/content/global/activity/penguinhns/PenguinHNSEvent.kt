@@ -18,8 +18,6 @@ class PenguinHNSEvent : StartupListener {
 
     companion object {
         @JvmStatic
-        fun getStoreFile(): JSONObject {
-            return ServerStore.getArchive("weekly-penguinhns")
-        }
+        fun getStoreFile(): JSONObject = ServerStore.getArchive("weekly-penguinhns")
     }
 }

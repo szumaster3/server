@@ -109,7 +109,5 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
         setVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_21_3661, 1, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

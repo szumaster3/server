@@ -134,13 +134,9 @@ class SurvivalExpertDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SurvivalExpertDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SurvivalExpertDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SURVIVAL_EXPERT_943)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SURVIVAL_EXPERT_943)
 }
 
 class SurvivalExpert : DialogueFile() {

@@ -22,13 +22,9 @@ class BlackDemonNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return BlackDemonNPC(id, location)
-    }
+    ): AbstractNPC = BlackDemonNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLACK_DEMON_4702)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLACK_DEMON_4702)
 
     companion object {
         fun spawnBlackDemon(player: Player) {

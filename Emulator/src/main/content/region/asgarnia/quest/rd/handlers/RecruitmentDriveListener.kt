@@ -37,17 +37,14 @@ class RecruitmentDriveListener :
         }
     }
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.CANNON,
             ZoneRestriction.FOLLOWERS,
         )
-    }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(9805))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(9805))
 
     override fun defineListeners() {
         on(Rooms.statueIDs, IntType.SCENERY, "touch") { player, node ->

@@ -1,7 +1,7 @@
 package content.region.asgarnia.dialogue.rimmington
 
-import content.region.kandarin.quest.biohazard.handlers.BiohazardUtils
 import content.region.kandarin.quest.biohazard.dialogue.HopsDialogue
+import content.region.kandarin.quest.biohazard.handlers.BiohazardUtils
 import core.api.getAttribute
 import core.api.openDialogue
 import core.api.quest.getQuestStage
@@ -37,7 +37,5 @@ class HopsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOPS_340)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOPS_340)
 }

@@ -15,7 +15,5 @@ class Yanille : MapArea {
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2598, 3103, 2590, 3108, 1, true))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2598, 3103, 2590, 3108, 1, true))
 }

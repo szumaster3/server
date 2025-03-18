@@ -10,7 +10,5 @@ class HealingEffect(
         player.getSkills().heal(amt)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return amt
-    }
+    override fun getHealthEffectValue(player: Player): Int = amt
 }

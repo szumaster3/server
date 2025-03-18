@@ -124,7 +124,5 @@ class JungleScoutDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SCOUT_5568)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SCOUT_5568)
 }

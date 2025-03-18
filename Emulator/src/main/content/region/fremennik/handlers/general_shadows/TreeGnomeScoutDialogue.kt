@@ -135,7 +135,5 @@ class TreeGnomeScoutDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SCOUT_5567)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SCOUT_5567)
 }

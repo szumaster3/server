@@ -151,12 +151,10 @@ class CharterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CharterDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CharterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.TRADER_STAN_4650,
             NPCs.TRADER_CREWMEMBER_4651,
             NPCs.TRADER_CREWMEMBER_4652,
@@ -165,5 +163,4 @@ class CharterDialogue(
             NPCs.TRADER_CREWMEMBER_4655,
             NPCs.TRADER_CREWMEMBER_4656,
         )
-    }
 }

@@ -214,7 +214,5 @@ class AlranDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALRAN_7604)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALRAN_7604)
 }

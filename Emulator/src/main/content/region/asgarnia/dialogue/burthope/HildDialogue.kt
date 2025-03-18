@@ -42,7 +42,5 @@ class HildDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HILD_1090)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HILD_1090)
 }

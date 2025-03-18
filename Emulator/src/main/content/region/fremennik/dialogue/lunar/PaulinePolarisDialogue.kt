@@ -66,11 +66,7 @@ class PaulinePolarisDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return PaulinePolarisDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = PaulinePolarisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PAULINE_POLARIS_4514)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PAULINE_POLARIS_4514)
 }

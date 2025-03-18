@@ -29,30 +29,23 @@ class MetalDragonNPC(
             DRAGONFIRE,
         )
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatAction
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatAction
 
-    override fun getDragonfireProtection(fire: Boolean): Int {
-        return 0x2 or 0x4 or 0x8
-    }
+    override fun getDragonfireProtection(fire: Boolean): Int = 0x2 or 0x4 or 0x8
 
     override fun construct(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MetalDragonNPC(id, location)
-    }
+    ): AbstractNPC = MetalDragonNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BRONZE_DRAGON_1590,
             NPCs.IRON_DRAGON_1591,
             NPCs.STEEL_DRAGON_1592,
             NPCs.STEEL_DRAGON_3590,
         )
-    }
 
     companion object {
         private val DRAGONFIRE: SwitchAttack =

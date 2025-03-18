@@ -21,13 +21,9 @@ class GoblinGuardNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GoblinGuardNPC(id, location)
-    }
+    ): AbstractNPC = GoblinGuardNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOBLIN_GUARD_489)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOBLIN_GUARD_489)
 
     override fun handleTickActions() {
         super.handleTickActions()

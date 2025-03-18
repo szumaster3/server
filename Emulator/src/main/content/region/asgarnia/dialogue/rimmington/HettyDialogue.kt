@@ -277,7 +277,5 @@ class HettyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HETTY_307)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HETTY_307)
 }

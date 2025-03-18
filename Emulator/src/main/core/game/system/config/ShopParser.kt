@@ -16,9 +16,7 @@ class ShopParser {
         fun openUid(
             player: Player,
             uid: Int,
-        ): Boolean {
-            return true
-        }
+        ): Boolean = true
     }
 
     fun load() {

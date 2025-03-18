@@ -18,22 +18,21 @@ import org.rs.consts.Quests
 class NecrovarusDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun open(vararg args: Any): Boolean {
-        if(!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
+        if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
             core.api.sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
             return true
         }
-        if(hasRequirement(player, Quests.GHOSTS_AHOY) && !isQuestComplete(player, Quests.GHOSTS_AHOY)) {
+        if (hasRequirement(player, Quests.GHOSTS_AHOY) && !isQuestComplete(player, Quests.GHOSTS_AHOY)) {
             end()
             openDialogue(player, NecrovarusDialogueFile())
             return true
         }
-        if(isQuestComplete(player, Quests.GHOSTS_AHOY)) {
+        if (isQuestComplete(player, Quests.GHOSTS_AHOY)) {
             player(
                 "Told you I'd defeat you, Necrovarus. My advice to",
                 "you is to pass over to the next world yourself with",
-                "everybody else."
+                "everybody else.",
             )
             stage = 4
         } else {
@@ -78,7 +77,5 @@ class NecrovarusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NECROVARUS_1684)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NECROVARUS_1684)
 }

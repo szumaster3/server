@@ -36,11 +36,7 @@ class BeefyBurnsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BeefyBurnsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BeefyBurnsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BEEFY_BURNS_4541)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BEEFY_BURNS_4541)
 }

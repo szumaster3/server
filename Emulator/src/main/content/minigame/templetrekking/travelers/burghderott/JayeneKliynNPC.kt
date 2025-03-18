@@ -17,13 +17,9 @@ class JayeneKliynNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return JayeneKliynNPC(id, location)
-    }
+    ): AbstractNPC = JayeneKliynNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JAYENE_KLIYN_3629)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JAYENE_KLIYN_3629)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

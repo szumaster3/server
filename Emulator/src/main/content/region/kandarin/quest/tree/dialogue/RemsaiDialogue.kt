@@ -100,7 +100,5 @@ class RemsaiDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REMSAI_472)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REMSAI_472)
 }

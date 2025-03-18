@@ -5,8 +5,8 @@ import core.game.node.entity.player.Player
 import org.rs.consts.Items
 
 class ShadowOfMortonMinigame {
-    fun getLogTypeFromInventory(player: Player): LogType? {
-        return when {
+    fun getLogTypeFromInventory(player: Player): LogType? =
+        when {
             inInventory(player, Items.LOGS_1511) -> LogType.REGULAR
             inInventory(player, Items.OAK_LOGS_1521) -> LogType.OAK
             inInventory(player, Items.WILLOW_LOGS_1519) -> LogType.WILLOW
@@ -19,5 +19,4 @@ class ShadowOfMortonMinigame {
             inInventory(player, Items.MAGIC_LOGS_1513) -> LogType.MAGIC
             else -> null
         }
-    }
 }

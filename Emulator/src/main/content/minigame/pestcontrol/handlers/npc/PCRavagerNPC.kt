@@ -37,9 +37,7 @@ class PCRavagerNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCRavagerNPC(id, location)
-    }
+    ): AbstractNPC = PCRavagerNPC(id, location)
 
     override fun init() {
         super.init()
@@ -114,17 +112,13 @@ class PCRavagerNPC : AbstractNPC {
     private fun walk(destination: Node?) {
         pulseManager.run(
             object : MovementPulse(this, destination, Pathfinder.SMART) {
-                override fun pulse(): Boolean {
-                    return true
-                }
+                override fun pulse(): Boolean = true
             },
             PulseType.STANDARD,
         )
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -153,9 +147,8 @@ class PCRavagerNPC : AbstractNPC {
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RAVAGER_3742, NPCs.RAVAGER_3743, NPCs.RAVAGER_3744, NPCs.RAVAGER_3745, NPCs.RAVAGER_3746)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.RAVAGER_3742, NPCs.RAVAGER_3743, NPCs.RAVAGER_3744, NPCs.RAVAGER_3745, NPCs.RAVAGER_3746)
 
     companion object {
         private fun isTarget(id: Int): Boolean {

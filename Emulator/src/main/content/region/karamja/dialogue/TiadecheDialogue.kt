@@ -51,7 +51,5 @@ class TiadecheDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TIADECHE_1164)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TIADECHE_1164)
 }

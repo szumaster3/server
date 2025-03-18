@@ -188,7 +188,5 @@ class HieronymusAvlafrimDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HIERONYMUS_AVLAFRIM_7420)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIERONYMUS_AVLAFRIM_7420)
 }

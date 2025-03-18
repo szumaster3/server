@@ -40,11 +40,7 @@ class GuidorsWifeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GuidorsWifeDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GuidorsWifeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUIDORS_WIFE_342)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUIDORS_WIFE_342)
 }

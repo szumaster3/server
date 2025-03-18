@@ -32,17 +32,13 @@ object EntityFlags {
     fun getOrdinal(
         type: EFlagType,
         flag: EntityFlag,
-    ): Int {
-        return getFlagFor(type, flag)?.ordinal ?: -1
-    }
+    ): Int = getFlagFor(type, flag)?.ordinal ?: -1
 
     @JvmStatic
     fun getPresenceFlag(
         type: EFlagType,
         flag: EntityFlag,
-    ): Int {
-        return getFlagFor(type, flag)?.presenceFlag ?: 0
-    }
+    ): Int = getFlagFor(type, flag)?.presenceFlag ?: 0
 
     private fun getMapToken(
         revision: Int,

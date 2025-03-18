@@ -122,9 +122,7 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
         updateQuestTab(player)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     private fun getRequiredMessage(player: Player): String {
         hasRequirements(player)

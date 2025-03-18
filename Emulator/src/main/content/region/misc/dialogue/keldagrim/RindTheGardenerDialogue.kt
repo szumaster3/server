@@ -148,11 +148,7 @@ class RindTheGardenerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RindTheGardenerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RindTheGardenerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RIND_THE_GARDENER_2170)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RIND_THE_GARDENER_2170)
 }

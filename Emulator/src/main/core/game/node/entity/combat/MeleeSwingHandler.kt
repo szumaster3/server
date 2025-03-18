@@ -320,8 +320,8 @@ open class MeleeSwingHandler(
         }
     }
 
-    private fun checkUndead(name: String): Boolean {
-        return (
+    private fun checkUndead(name: String): Boolean =
+        (
             name == "Zombie" ||
                 name.contains("rmoured") ||
                 name == "Ankou" ||
@@ -337,7 +337,6 @@ open class MeleeSwingHandler(
                 name == "Zogre" ||
                 name == "Spiritual Mage"
         )
-    }
 
     companion object {
         private fun usingHalberd(entity: Entity): Boolean {

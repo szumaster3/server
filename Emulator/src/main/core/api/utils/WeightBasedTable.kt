@@ -29,8 +29,8 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
      * @param element The [WeightedItem] to add.
      * @return True if the item was successfully added, false otherwise.
      */
-    override fun add(element: WeightedItem): Boolean {
-        return if (element.guaranteed) {
+    override fun add(element: WeightedItem): Boolean =
+        if (element.guaranteed) {
             guaranteedItems.add(element)
         } else {
             totalWeight += element.weight
@@ -43,7 +43,6 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
             this[end] = temp
             true
         }
-    }
 
     /**
      * Rolls the table once to generate a list of items.
@@ -52,9 +51,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
      * @param receiver The entity that will receive the items. Default is null.
      * @return A list of items rolled.
      */
-    open fun roll(receiver: Entity? = null): ArrayList<Item> {
-        return roll(receiver, 1)
-    }
+    open fun roll(receiver: Entity? = null): ArrayList<Item> = roll(receiver, 1)
 
     /**
      * Rolls the table multiple times to generate a list of items.
@@ -150,8 +147,8 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
      * @param receiver The entity (player) that is receiving the item.
      * @return The herb item to be dropped.
      */
-    private fun handleHerbDrop(receiver: Entity?): Item? {
-        return if (receiver is Player && RandomFunction.nextBool()) {
+    private fun handleHerbDrop(receiver: Entity?): Item? =
+        if (receiver is Player && RandomFunction.nextBool()) {
             when {
                 inEquipment(receiver, Items.IRIT_GLOVES_12856) -> {
                     FOGGlovesListener.updateCharges(receiver)
@@ -178,7 +175,6 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         } else {
             HerbDropTable.retrieve(receiver)
         }
-    }
 
     /**
      * Checks if the player can roll the table based on their inventory space.

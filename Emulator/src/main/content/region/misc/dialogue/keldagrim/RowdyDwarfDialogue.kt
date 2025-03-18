@@ -22,11 +22,7 @@ class RowdyDwarfDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RowdyDwarfDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RowdyDwarfDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROWDY_DWARF_2187)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROWDY_DWARF_2187)
 }

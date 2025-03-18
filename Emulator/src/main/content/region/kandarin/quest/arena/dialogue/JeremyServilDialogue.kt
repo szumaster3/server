@@ -55,7 +55,5 @@ class JeremyServilDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JEREMY_SERVIL_265)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEREMY_SERVIL_265)
 }

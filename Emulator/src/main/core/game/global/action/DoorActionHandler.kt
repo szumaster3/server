@@ -169,9 +169,7 @@ object DoorActionHandler {
     fun getEndLocation(
         entity: Entity,
         scenery: Scenery,
-    ): Location {
-        return getEndLocation(entity, scenery, false)
-    }
+    ): Location = getEndLocation(entity, scenery, false)
 
     @JvmStatic
     fun getEndLocation(

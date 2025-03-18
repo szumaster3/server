@@ -105,25 +105,19 @@ class RevenantsNPC
             }
         }
 
-        override fun getAudio(index: Int): Audio? {
-            return null
-        }
+        override fun getAudio(index: Int): Audio? = null
 
         override fun construct(
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return RevenantsNPC(id, location, null)
-        }
+        ): AbstractNPC = RevenantsNPC(id, location, null)
 
         override fun setNextWalk() {
             nextWalk = ticks + RandomFunction.random(7, 15)
         }
 
-        override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-            return swingHandler!!
-        }
+        override fun getSwingHandler(swing: Boolean): CombatSwingHandler = swingHandler!!
 
         override fun canMove(location: Location): Boolean {
             for (zone in SAFE_ZONES) {
@@ -149,17 +143,13 @@ class RevenantsNPC
             return l
         }
 
-        override fun getWalkRadius(): Int {
-            return 20
-        }
+        override fun getWalkRadius(): Int = 20
 
         override fun continueAttack(
             target: Entity,
             style: CombatStyle,
             message: Boolean,
-        ): Boolean {
-            return if (target is Player) hasAcceptableCombatLevel(target.asPlayer()) else true
-        }
+        ): Boolean = if (target is Player) hasAcceptableCombatLevel(target.asPlayer()) else true
 
         override fun isAttackable(
             entity: Entity,
@@ -192,8 +182,8 @@ class RevenantsNPC
             return hasAcceptableCombatLevel(target.asPlayer())
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(
+        override fun getIds(): IntArray =
+            intArrayOf(
                 6604,
                 6635,
                 6655,
@@ -324,7 +314,6 @@ class RevenantsNPC
                 6998,
                 6999,
             )
-        }
 
         private fun configureBonuses() {
             for (i in properties.bonuses.indices) {

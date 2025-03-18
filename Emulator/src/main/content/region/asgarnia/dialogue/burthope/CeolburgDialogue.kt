@@ -42,7 +42,5 @@ class CeolburgDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CEOLBURG_1089)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CEOLBURG_1089)
 }

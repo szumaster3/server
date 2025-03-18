@@ -19,11 +19,11 @@ private val IDS =
     )
 
 class TownCrierNPC : NPCBehavior(*IDS) {
-
-    private val forceChatAnimation = mapOf(
-        "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_RING_BELL_6865,
-        "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCHES_HEAD_6863
-    )
+    private val forceChatAnimation =
+        mapOf(
+            "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_RING_BELL_6865,
+            "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCHES_HEAD_6863,
+        )
 
     override fun tick(self: NPC): Boolean {
         forceChatAnimation.forEach { (chat, animation) ->

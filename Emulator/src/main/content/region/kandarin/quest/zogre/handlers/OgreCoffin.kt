@@ -57,8 +57,6 @@ enum class OgreCoffin(
             }
         }
 
-        fun forId(id: Int): WeightBasedTable? {
-            return coffinMap[id]
-        }
+        fun forId(id: Int): WeightBasedTable? = coffinMap[id]
     }
 }

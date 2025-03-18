@@ -49,13 +49,9 @@ enum class Snelm(
         private val shellToSnelmMap: Map<Int, Snelm> = values().associateBy { it.shell }
 
         @JvmStatic
-        fun fromShellId(shellId: Int): Snelm? {
-            return shellToSnelmMap[shellId]
-        }
+        fun fromShellId(shellId: Int): Snelm? = shellToSnelmMap[shellId]
 
         @JvmStatic
-        fun getProductByShellId(shellId: Int): Int? {
-            return fromShellId(shellId)?.product
-        }
+        fun getProductByShellId(shellId: Int): Int? = fromShellId(shellId)?.product
     }
 }

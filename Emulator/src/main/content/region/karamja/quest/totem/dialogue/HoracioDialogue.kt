@@ -78,7 +78,5 @@ class HoracioDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HORACIO_845)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HORACIO_845)
 }

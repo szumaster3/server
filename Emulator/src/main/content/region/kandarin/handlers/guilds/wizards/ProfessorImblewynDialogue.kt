@@ -36,7 +36,5 @@ class ProfessorImblewynDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PROFESSOR_IMBLEWYN_4586)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_IMBLEWYN_4586)
 }

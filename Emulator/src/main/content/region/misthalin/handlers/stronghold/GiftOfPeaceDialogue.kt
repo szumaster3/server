@@ -46,7 +46,5 @@ class GiftOfPeaceDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(54678)
-    }
+    override fun getIds(): IntArray = intArrayOf(54678)
 }

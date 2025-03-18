@@ -19,9 +19,7 @@ class HighwayManNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return HighwayManNPC(id, location)
-    }
+    ): AbstractNPC = HighwayManNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -39,7 +37,5 @@ class HighwayManNPC(
         sendChat("Stand and deliver!")
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HIGHWAYMAN_180, NPCs.HIGHWAYMAN_2677)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIGHWAYMAN_180, NPCs.HIGHWAYMAN_2677)
 }

@@ -107,38 +107,26 @@ class NetTrapSetting :
     override fun buildObject(
         player: Player,
         node: Node,
-    ): core.game.node.scenery.Scenery {
-        return (node as core.game.node.scenery.Scenery).transform(NetTrap.forId(node.getId())!!.bent)
-    }
+    ): core.game.node.scenery.Scenery = (node as core.game.node.scenery.Scenery).transform(NetTrap.forId(node.getId())!!.bent)
 
-    override fun createHook(wrapper: TrapWrapper): TrapHook {
-        return TrapHook(wrapper, arrayOf(wrapper.secondary.location))
-    }
+    override fun createHook(wrapper: TrapWrapper): TrapHook = TrapHook(wrapper, arrayOf(wrapper.secondary.location))
 
     override fun getTransformId(
         wrapper: TrapWrapper?,
         node: TrapNode?,
-    ): Int {
-        return wrapper!!.netType.catching
-    }
+    ): Int = wrapper!!.netType.catching
 
     override fun getFinalId(
         wrapper: TrapWrapper,
         node: TrapNode,
-    ): Int {
-        return wrapper.netType.caught
-    }
+    ): Int = wrapper.netType.caught
 
     override fun getFailId(
         wrapper: TrapWrapper,
         node: TrapNode,
-    ): Int {
-        return wrapper.netType.failing
-    }
+    ): Int = wrapper.netType.failing
 
-    override fun getTimeUpMessage(): String {
-        return "The net trap that you constructed has collapsed."
-    }
+    override fun getTimeUpMessage(): String = "The net trap that you constructed has collapsed."
 
     private fun getNetInfo(
         player: Player,

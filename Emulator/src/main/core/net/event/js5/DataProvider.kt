@@ -3,15 +3,22 @@ package core.net.event.js5
 import com.displee.cache.CacheLibrary
 
 interface DataProvider {
-    fun data(index: Int, archive: Int): ByteArray?
+    fun data(
+        index: Int,
+        archive: Int,
+    ): ByteArray?
 
     companion object {
-        operator fun invoke(cache: CacheLibrary) = object : DataProvider {
-            override fun data(index: Int, archive: Int) =
-                if (index == 255)
+        operator fun invoke(cache: CacheLibrary) =
+            object : DataProvider {
+                override fun data(
+                    index: Int,
+                    archive: Int,
+                ) = if (index == 255) {
                     cache.index255?.readArchiveSector(archive)?.data
-                else
+                } else {
                     cache.index(index).readArchiveSector(archive)?.data
-        }
+                }
+            }
     }
 }

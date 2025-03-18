@@ -510,7 +510,5 @@ class ThorvalDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THORVALD_THE_WARRIOR_1289)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THORVALD_THE_WARRIOR_1289)
 }

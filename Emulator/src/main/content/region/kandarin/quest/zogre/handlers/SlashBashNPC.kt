@@ -35,13 +35,9 @@ class SlashBashNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SlashBashNPC(id, location)
-    }
+    ): AbstractNPC = SlashBashNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SLASH_BASH_2060)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLASH_BASH_2060)
 
     override fun handleTickActions() {
         super.handleTickActions()

@@ -61,9 +61,7 @@ class TradeModule(
         getExtension(target)!!.display(stage)
     }
 
-    private fun openInterface(component: Component): TradeModule {
-        return if (component === MAIN_INTERFACE) openMain() else openSecond()
-    }
+    private fun openInterface(component: Component): TradeModule = if (component === MAIN_INTERFACE) openMain() else openSecond()
 
     private val acceptMessage: String
         get() {
@@ -120,13 +118,9 @@ class TradeModule(
         return this
     }
 
-    fun getInterface(stage: Int = this.stage): Component {
-        return if (stage == 0) MAIN_INTERFACE else ACCEPT_INTERFACE
-    }
+    fun getInterface(stage: Int = this.stage): Component = if (stage == 0) MAIN_INTERFACE else ACCEPT_INTERFACE
 
-    fun getInterface(): Component {
-        return getInterface(stage)
-    }
+    fun getInterface(): Component = getInterface(stage)
 
     private fun displayModified(stage: Int) {
         val otherModified = getExtension(target)!!.isModified
@@ -286,9 +280,7 @@ class TradeModule(
         return hasSpace
     }
 
-    private fun getFormattedNumber(amount: Int): String {
-        return DecimalFormat("#,###,##0").format(amount.toLong()).toString()
-    }
+    private fun getFormattedNumber(amount: Int): String = DecimalFormat("#,###,##0").format(amount.toLong()).toString()
 
     private fun giveContainers(module: TradeModule) {
         val pContainer: Container = module.container ?: return
@@ -416,9 +408,7 @@ class TradeModule(
         }
 
         @JvmStatic
-        fun getExtension(player: Player?): TradeModule? {
-            return player!!.getExtension(TradeModule::class.java)
-        }
+        fun getExtension(player: Player?): TradeModule? = player!!.getExtension(TradeModule::class.java)
     }
 
     init {

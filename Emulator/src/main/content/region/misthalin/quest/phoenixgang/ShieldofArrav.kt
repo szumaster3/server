@@ -105,18 +105,14 @@ class ShieldofArrav :
          * @param player the player.
          * @return `true` if so.
          */
-        fun isPhoenix(player: Player): Boolean {
-            return player.getAttribute("phoenix-gang", false)
-        }
+        fun isPhoenix(player: Player): Boolean = player.getAttribute("phoenix-gang", false)
 
         /**
          * Method used to check if the player is part of the black arm gang.
          * @param player the player.
          * @return `true` if so.
          */
-        fun isBlackArm(player: Player): Boolean {
-            return player.getAttribute("black-arm-gang", false)
-        }
+        fun isBlackArm(player: Player): Boolean = player.getAttribute("black-arm-gang", false)
 
         /**
          * Method used to set that the player is trying to do the phoenix mission.
@@ -140,27 +136,21 @@ class ShieldofArrav :
          * @param player the player.
          * @return `true` if so.
          */
-        fun isBlackArmMission(player: Player): Boolean {
-            return player.getAttribute("blackarm-mission", false)
-        }
+        fun isBlackArmMission(player: Player): Boolean = player.getAttribute("blackarm-mission", false)
 
         /**
          * Method used to check if they're doing the phoenix gang mission.
          * @param player the player.
          * @return `true` if so.
          */
-        fun isPhoenixMission(player: Player): Boolean {
-            return player.getAttribute("phoenix-mission", false)
-        }
+        fun isPhoenixMission(player: Player): Boolean = player.getAttribute("phoenix-mission", false)
 
         /**
          * Gets the shield item.
          * @param player the player.
          * @return
          */
-        fun getShield(player: Player): Item {
-            return if (isBlackArm(player)) BLACKARM_SHIELD else PHOENIX_SHIELD
-        }
+        fun getShield(player: Player): Item = if (isBlackArm(player)) BLACKARM_SHIELD else PHOENIX_SHIELD
     }
 
     override fun newInstance(arg: Any?): Quest {

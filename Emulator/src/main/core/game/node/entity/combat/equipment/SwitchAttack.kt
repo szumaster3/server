@@ -58,9 +58,7 @@ open class SwitchAttack
             entity: Entity?,
             victim: Entity?,
             state: BattleState?,
-        ): Boolean {
-            return true
-        }
+        ): Boolean = true
 
         val style: CombatStyle? get() = handler!!.type
 

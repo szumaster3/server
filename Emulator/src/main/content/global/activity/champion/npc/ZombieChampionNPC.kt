@@ -28,13 +28,9 @@ class ZombieChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ZombieChampionNPC(id, location)
-    }
+    ): AbstractNPC = ZombieChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZOMBIES_CHAMPION_3066)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOMBIES_CHAMPION_3066)
 
     override fun handleTickActions() {
         super.handleTickActions()

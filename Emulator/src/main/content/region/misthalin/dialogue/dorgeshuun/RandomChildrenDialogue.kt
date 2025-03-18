@@ -55,7 +55,5 @@ class RandomChildrenDialogue(
 
     val ids = 5807..5822
 
-    override fun getIds(): IntArray {
-        return ids.toIntArray()
-    }
+    override fun getIds(): IntArray = ids.toIntArray()
 }

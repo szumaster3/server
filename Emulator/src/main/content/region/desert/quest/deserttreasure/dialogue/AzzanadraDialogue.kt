@@ -144,11 +144,7 @@ class AzzanadraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AzzanadraDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AzzanadraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SCARABS_1970, NPCs.AZZANADRA_1971)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SCARABS_1970, NPCs.AZZANADRA_1971)
 }

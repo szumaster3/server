@@ -15,9 +15,7 @@ class RomeoNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RomeoNPC(id, location)
-    }
+    ): AbstractNPC = RomeoNPC(id, location)
 
     override fun init() {
         isWalks = true
@@ -29,9 +27,7 @@ class RomeoNPC : AbstractNPC {
         super.tick()
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.ROMEO_639)

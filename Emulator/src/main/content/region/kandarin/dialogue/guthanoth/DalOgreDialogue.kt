@@ -21,15 +21,9 @@ class DalOgreDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return DalOgreDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DalOgreDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OGRE_TRADER_876)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_TRADER_876)
 }

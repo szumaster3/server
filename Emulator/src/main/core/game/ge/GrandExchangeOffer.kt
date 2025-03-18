@@ -183,8 +183,8 @@ class GrandExchangeOffer {
         return sb.toString()
     }
 
-    override fun toString(): String {
-        return "[name=" + ItemDefinition.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount +
+    override fun toString(): String =
+        "[name=" + ItemDefinition.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount +
             ", completedAmount=" +
             completedAmount +
             ", offeredValue=" +
@@ -202,7 +202,6 @@ class GrandExchangeOffer {
             ", playerUID=" +
             playerUID +
             "]"
-    }
 
     companion object {
         fun fromQuery(result: ResultSet): GrandExchangeOffer {

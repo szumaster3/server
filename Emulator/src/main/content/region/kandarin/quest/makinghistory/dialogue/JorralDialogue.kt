@@ -494,9 +494,7 @@ class JorralDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JORRAL_2932)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JORRAL_2932)
 }
 
 class JorralDialogueExtension : DialogueFile() {

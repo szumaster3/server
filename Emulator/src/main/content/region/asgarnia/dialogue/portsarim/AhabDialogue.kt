@@ -99,7 +99,5 @@ class AhabDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AHAB_2692)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AHAB_2692)
 }

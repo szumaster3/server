@@ -200,20 +200,14 @@ abstract class MagicSpell
             entity.getSkills().addExperience(Skills.MAGIC, hit * (CombatSwingHandler.EXPERIENCE_MOD), true)
         }
 
-        fun levelRequirement(): Int {
-            return level
-        }
+        fun levelRequirement(): Int = level
 
         override fun fireEvent(
             identifier: String,
             vararg args: Any,
-        ): Any? {
-            return null
-        }
+        ): Any? = null
 
-        open fun getExperience(player: Player): Double {
-            return experience
-        }
+        open fun getExperience(player: Player): Double = experience
 
         companion object {
             fun castSpell(

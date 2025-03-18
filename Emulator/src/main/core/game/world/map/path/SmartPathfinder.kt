@@ -319,9 +319,7 @@ class SmartPathfinder
                 }
             }
 
-            override fun hashCode(): Int {
-                return end.hashCode()
-            }
+            override fun hashCode(): Int = end.hashCode()
         }
 
         private fun checkSingleTraversalAstar(

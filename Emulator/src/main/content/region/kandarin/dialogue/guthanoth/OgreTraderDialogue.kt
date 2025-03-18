@@ -41,11 +41,7 @@ class OgreTraderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OgreTraderDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OgreTraderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OGRE_TRADER_873)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_TRADER_873)
 }

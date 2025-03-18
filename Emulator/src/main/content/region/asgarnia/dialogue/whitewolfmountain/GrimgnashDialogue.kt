@@ -46,7 +46,5 @@ class GrimgnashDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(5997)
-    }
+    override fun getIds(): IntArray = intArrayOf(5997)
 }

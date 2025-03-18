@@ -95,7 +95,6 @@ class BrimhavenListener : InteractionListener {
         private const val RESTAURANT_REAR_DOOR = Scenery.DOOR_1591
         private const val KARAMBWAN_FISHING_SPOT = NPCs.FISHING_SPOT_1178
 
-
         private fun success(
             player: Player,
             skill: Int,

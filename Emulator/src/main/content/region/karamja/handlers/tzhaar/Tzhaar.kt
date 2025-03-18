@@ -19,9 +19,7 @@ class Tzhaar :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(ZoneBorders(2369, 5054, 2549, 5188))

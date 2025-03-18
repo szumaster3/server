@@ -37,11 +37,7 @@ class FranklinCaranosDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FranklinCaranosDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FranklinCaranosDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRANKLIN_CARANOS_3823)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRANKLIN_CARANOS_3823)
 }

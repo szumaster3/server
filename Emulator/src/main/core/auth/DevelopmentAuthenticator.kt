@@ -34,9 +34,7 @@ class DevelopmentAuthenticator : AuthProvider<AccountStorageProvider>() {
     override fun checkPassword(
         player: Player,
         password: String,
-    ): Boolean {
-        return password == player.details.password
-    }
+    ): Boolean = password == player.details.password
 
     override fun updatePassword(
         username: String,

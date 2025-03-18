@@ -253,9 +253,7 @@ class GraveController :
         }
 
         @JvmStatic
-        fun getGraveType(player: Player): GraveType {
-            return GraveType.values()[getAttribute(player, ATTR_GTYPE, 0)]
-        }
+        fun getGraveType(player: Player): GraveType = GraveType.values()[getAttribute(player, ATTR_GTYPE, 0)]
 
         @JvmStatic
         fun updateGraveType(
@@ -266,9 +264,7 @@ class GraveController :
         }
 
         @JvmStatic
-        fun hasGraveAt(loc: Location): Boolean {
-            return activeGraves.values.toTypedArray().any { it.location == loc }
-        }
+        fun hasGraveAt(loc: Location): Boolean = activeGraves.values.toTypedArray().any { it.location == loc }
 
         fun serializeToServerStore() {
             val archive = ServerStore.getArchive("active-graves")

@@ -35,11 +35,7 @@ class HerviDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HerviDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HerviDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HERVI_2157)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HERVI_2157)
 }

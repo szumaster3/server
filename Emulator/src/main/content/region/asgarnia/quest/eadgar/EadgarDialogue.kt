@@ -48,7 +48,5 @@ class EadgarDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EADGAR_1113)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EADGAR_1113)
 }

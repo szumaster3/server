@@ -28,12 +28,10 @@ class MiscCitizenGoodDayDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MiscCitizenGoodDayDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MiscCitizenGoodDayDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.ALRIK_1381,
             NPCs.RUNOLF_3924,
             NPCs.BRODDI_1390,
@@ -48,5 +46,4 @@ class MiscCitizenGoodDayDialogue(
             NPCs.VALGERD_1388,
             NPCs.TJORVI_3925,
         )
-    }
 }

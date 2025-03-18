@@ -47,11 +47,7 @@ class VermundiDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return VermundiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = VermundiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VERMUNDI_2162)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VERMUNDI_2162)
 }

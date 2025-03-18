@@ -72,11 +72,7 @@ class SbottDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SbottDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SbottDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SBOTT_1041)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SBOTT_1041)
 }

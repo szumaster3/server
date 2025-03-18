@@ -84,7 +84,5 @@ class SquirrelDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(*babySquirrel, *adultSquirrel)
-    }
+    override fun getIds(): IntArray = intArrayOf(*babySquirrel, *adultSquirrel)
 }

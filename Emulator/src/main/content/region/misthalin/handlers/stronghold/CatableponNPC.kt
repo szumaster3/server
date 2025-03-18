@@ -52,9 +52,7 @@ class CatableponNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return CatableponNPC(id, location)
-    }
+    ): AbstractNPC = CatableponNPC(id, location)
 
     /**
      * Get swing handler.
@@ -62,18 +60,14 @@ class CatableponNPC : AbstractNPC {
      * @param swing boolean indicating if a swing action is occurring.
      * @return the combat swing handler associated with the NPC.
      */
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatHandler
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
     /**
      * Gets the npc.
      *
      * @return the array of npc ids.
      */
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CATABLEPON_4397, NPCs.CATABLEPON_4398, NPCs.CATABLEPON_4399)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CATABLEPON_4397, NPCs.CATABLEPON_4398, NPCs.CATABLEPON_4399)
 
     companion object {
         private val ANIMATION = Animation(4272)

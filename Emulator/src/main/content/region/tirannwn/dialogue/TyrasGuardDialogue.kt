@@ -83,11 +83,7 @@ class TyrasGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TyrasGuardDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TyrasGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TYRAS_GUARD_1203)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TYRAS_GUARD_1203)
 }

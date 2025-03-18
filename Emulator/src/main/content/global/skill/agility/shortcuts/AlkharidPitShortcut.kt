@@ -39,7 +39,5 @@ class AlkharidPitShortcut : AgilityShortcut(intArrayOf(9331, 9332), 38, 0.0, "cl
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location? {
-        return (n as? Scenery)?.takeIf { it.id == 9331 }?.location?.transform(1, 0, 0)
-    }
+    ): Location? = (n as? Scenery)?.takeIf { it.id == 9331 }?.location?.transform(1, 0, 0)
 }

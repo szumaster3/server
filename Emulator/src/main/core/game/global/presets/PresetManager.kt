@@ -32,7 +32,5 @@ class PresetManager {
         }
     }
 
-    fun maxSize(): Int {
-        return 6
-    }
+    fun maxSize(): Int = 6
 }

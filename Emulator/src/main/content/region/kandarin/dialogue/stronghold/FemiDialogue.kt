@@ -78,11 +78,7 @@ class FemiDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FemiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FemiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FEMI_676)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FEMI_676)
 }

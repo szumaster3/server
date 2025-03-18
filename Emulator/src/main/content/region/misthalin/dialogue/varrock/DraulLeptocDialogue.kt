@@ -42,11 +42,7 @@ class DraulLeptocDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DraulLeptocDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DraulLeptocDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DRAUL_LEPTOC_3324)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRAUL_LEPTOC_3324)
 }

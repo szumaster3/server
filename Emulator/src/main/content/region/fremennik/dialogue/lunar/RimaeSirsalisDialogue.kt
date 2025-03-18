@@ -119,11 +119,7 @@ class RimaeSirsalisDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RimaeSirsalisDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RimaeSirsalisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RIMAE_SIRSALIS_4518)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RIMAE_SIRSALIS_4518)
 }

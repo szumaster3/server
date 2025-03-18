@@ -20,21 +20,13 @@ object NSUtils {
         setAttribute(player, "/save:ns:card_placed", true)
     }
 
-    fun hasPlacedFungus(player: Player): Boolean {
-        return getAttribute(player, "ns:fungus_placed", false)
-    }
+    fun hasPlacedFungus(player: Player): Boolean = getAttribute(player, "ns:fungus_placed", false)
 
-    fun hasPlacedCard(player: Player): Boolean {
-        return getAttribute(player, "ns:card_placed", false)
-    }
+    fun hasPlacedCard(player: Player): Boolean = getAttribute(player, "ns:card_placed", false)
 
-    fun onStone(player: Player): Boolean {
-        return player.location.equals(3440, 3335, 0)
-    }
+    fun onStone(player: Player): Boolean = player.location.equals(3440, 3335, 0)
 
-    fun getGhastKC(player: Player): Int {
-        return getAttribute(player, "ns:ghasts_killed", 0)
-    }
+    fun getGhastKC(player: Player): Int = getAttribute(player, "ns:ghasts_killed", 0)
 
     fun incrementGhastKC(player: Player) {
         setAttribute(player, "/save:ns:ghasts_killed", getGhastKC(player) + 1)

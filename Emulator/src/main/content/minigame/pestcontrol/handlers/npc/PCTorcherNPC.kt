@@ -42,9 +42,7 @@ class PCTorcherNPC : AbstractNPC {
         }
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -59,20 +57,16 @@ class PCTorcherNPC : AbstractNPC {
         }
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return SWING_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = SWING_HANDLER
 
     override fun construct(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCTorcherNPC(id, location)
-    }
+    ): AbstractNPC = PCTorcherNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.TORCHER_3752,
             NPCs.TORCHER_3753,
             NPCs.TORCHER_3754,
@@ -84,7 +78,6 @@ class PCTorcherNPC : AbstractNPC {
             NPCs.TORCHER_3760,
             NPCs.TORCHER_3761,
         )
-    }
 
     companion object {
         private val SPELL = TorcherSpell()
@@ -130,12 +123,8 @@ class PCTorcherNPC : AbstractNPC {
             entity: Entity,
             victim: Entity,
             state: BattleState,
-        ): Int {
-            return entity.properties.currentCombatLevel / 7
-        }
+        ): Int = entity.properties.currentCombatLevel / 7
 
-        override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
-            return this
-        }
+        override fun newInstance(arg: SpellType?): Plugin<SpellType?> = this
     }
 }

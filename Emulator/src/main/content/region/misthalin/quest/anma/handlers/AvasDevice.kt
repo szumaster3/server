@@ -112,13 +112,9 @@ class AvasDevice :
         addItemOrDrop(entity, reward)
     }
 
-    private fun attractEnabled(entity: Entity): Boolean {
-        return getAttribute(entity, ATTRACT_ENABLED, true)
-    }
+    private fun attractEnabled(entity: Entity): Boolean = getAttribute(entity, ATTRACT_ENABLED, true)
 
-    private fun getLastTick(entity: Entity): Int {
-        return getAttribute(entity, LAST_TICK, 0)
-    }
+    private fun getLastTick(entity: Entity): Int = getAttribute(entity, LAST_TICK, 0)
 
     private fun isInterfered(player: Player): Boolean {
         val chestPiece = getItemFromEquipment(player, EquipmentSlot.CHEST)

@@ -141,11 +141,7 @@ class SilverMerchantDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SilverMerchantDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SilverMerchantDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SILVER_MERCHANT_569)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SILVER_MERCHANT_569)
 }

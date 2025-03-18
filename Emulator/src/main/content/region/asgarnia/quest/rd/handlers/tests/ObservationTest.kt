@@ -66,8 +66,8 @@ class ObservationTest(
             object : Pulse() {
                 var counter = 0
 
-                override fun pulse(): Boolean {
-                    return when (counter++) {
+                override fun pulse(): Boolean =
+                    when (counter++) {
                         16 -> {
                             openOverlay(player!!, Components.FADE_TO_BLACK_120)
                             sendNPCDialogueLines(
@@ -90,7 +90,6 @@ class ObservationTest(
 
                         else -> false
                     }
-                }
             },
         )
     }

@@ -20,15 +20,9 @@ class GhaslorTheElderDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GhaslorTheElderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GhaslorTheElderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHASLOR_THE_ELDER_3029)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHASLOR_THE_ELDER_3029)
 }

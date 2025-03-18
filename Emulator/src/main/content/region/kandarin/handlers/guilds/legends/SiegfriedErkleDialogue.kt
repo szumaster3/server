@@ -57,11 +57,7 @@ class SiegfriedErkleDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SiegfriedErkleDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SiegfriedErkleDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIEGFRIED_ERKLE_933)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIEGFRIED_ERKLE_933)
 }

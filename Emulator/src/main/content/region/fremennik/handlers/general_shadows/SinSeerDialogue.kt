@@ -199,7 +199,5 @@ class SinSeerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIN_SEER_5571)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIN_SEER_5571)
 }

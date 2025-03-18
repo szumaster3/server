@@ -46,7 +46,5 @@ class AmbassadorSpanfippleDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AMBASSADOR_SPANFIPPLE_4581)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AMBASSADOR_SPANFIPPLE_4581)
 }

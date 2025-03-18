@@ -116,13 +116,12 @@ class AncientCavern :
                 override fun getDestination(
                     node: Node,
                     n: Node,
-                ): Location {
-                    return if (node.location.x <= 2511) {
+                ): Location =
+                    if (node.location.x <= 2511) {
                         Location.create(2511, 3516, 0)
                     } else {
                         Location.create(2512, 3516, 0)
                     }
-                }
             },
         )
         return this

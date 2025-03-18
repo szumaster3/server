@@ -301,13 +301,12 @@ open class RangeSwingHandler(
         return 1.0
     }
 
-    override fun getArmourSet(e: Entity?): ArmourSet? {
-        return if (ArmourSet.KARIL.isUsing(e)) {
+    override fun getArmourSet(e: Entity?): ArmourSet? =
+        if (ArmourSet.KARIL.isUsing(e)) {
             ArmourSet.KARIL
         } else {
             super.getArmourSet(e)
         }
-    }
 
     companion object {
         fun hasAmmo(

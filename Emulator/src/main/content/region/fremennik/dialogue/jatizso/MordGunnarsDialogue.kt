@@ -59,11 +59,7 @@ class MordGunnarsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MordGunnarsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MordGunnarsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MORD_GUNNARS_5482, NPCs.MORD_GUNNARS_5481)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MORD_GUNNARS_5482, NPCs.MORD_GUNNARS_5481)
 }

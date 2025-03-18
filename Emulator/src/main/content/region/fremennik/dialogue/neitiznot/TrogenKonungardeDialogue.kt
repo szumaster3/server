@@ -26,11 +26,7 @@ class TrogenKonungardeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TrogenKonungardeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TrogenKonungardeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TROGEN_KONUNGARDE_5519)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TROGEN_KONUNGARDE_5519)
 }

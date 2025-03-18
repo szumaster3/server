@@ -50,11 +50,7 @@ class LubufuDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LubufuDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LubufuDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUBUFU_1171)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUBUFU_1171)
 }

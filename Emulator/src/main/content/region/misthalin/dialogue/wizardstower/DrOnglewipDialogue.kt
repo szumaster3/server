@@ -49,7 +49,5 @@ class DrOnglewipDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PROFESSOR_ONGLEWIP_4585)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_ONGLEWIP_4585)
 }

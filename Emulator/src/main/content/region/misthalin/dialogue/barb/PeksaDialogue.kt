@@ -50,11 +50,7 @@ class PeksaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PeksaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PeksaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PEKSA_538)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PEKSA_538)
 }

@@ -99,9 +99,7 @@ enum class FarmingPatch(
         }
 
         @JvmStatic
-        fun forObject(obj: Scenery): FarmingPatch? {
-            return forObjectID(obj.id)
-        }
+        fun forObject(obj: Scenery): FarmingPatch? = forObjectID(obj.id)
 
         @JvmStatic
         fun forObjectID(id: Int): FarmingPatch? {
@@ -109,9 +107,7 @@ enum class FarmingPatch(
             return patches[objDef.varbitID]
         }
 
-        fun getSceneryDefByVarbit(id: Int): SceneryDefinition? {
-            return nodeMap[id]
-        }
+        fun getSceneryDefByVarbit(id: Int): SceneryDefinition? = nodeMap[id]
     }
 
     fun getPatchFor(

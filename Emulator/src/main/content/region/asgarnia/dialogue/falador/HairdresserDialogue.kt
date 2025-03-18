@@ -125,7 +125,5 @@ class HairdresserDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HAIRDRESSER_598)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HAIRDRESSER_598)
 }

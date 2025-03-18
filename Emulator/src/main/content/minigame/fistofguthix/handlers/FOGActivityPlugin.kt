@@ -10,13 +10,9 @@ class FOGActivityPlugin : ActivityPlugin("Fist of Guthix", false, true, true) {
     var round = 0
 
     @Throws(Throwable::class)
-    override fun newInstance(p: Player): ActivityPlugin {
-        return FOGActivityPlugin()
-    }
+    override fun newInstance(p: Player): ActivityPlugin = FOGActivityPlugin()
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
     override fun configure() {
         definePlugin(FOGLobby())

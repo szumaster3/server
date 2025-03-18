@@ -69,11 +69,7 @@ class DagaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DagaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DagaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAGA_1434)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAGA_1434)
 }

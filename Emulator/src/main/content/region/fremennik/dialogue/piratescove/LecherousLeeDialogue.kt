@@ -214,11 +214,7 @@ class LecherousLeeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LecherousLeeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LecherousLeeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LECHEROUS_LEE_4556)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LECHEROUS_LEE_4556)
 }

@@ -8,11 +8,9 @@ import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.spell.CombatSpell
 import core.game.node.entity.combat.spell.Runes
 import core.game.node.entity.combat.spell.SpellType
-import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
-import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -31,13 +29,17 @@ class StormOfArmadylSpell :
         Graphics(1333, 96),
         Projectile.create(null as Entity?, null, 1333, 20, 0, 52, 75, 15, 11),
         Graphics(1334, 96),
-        Runes.ARMADYL_RUNE.getItem(1)
+        Runes.ARMADYL_RUNE.getItem(1),
     ) {
-
-    override fun cast(entity: Entity, target: Node): Boolean {
+    override fun cast(
+        entity: Entity,
+        target: Node,
+    ): Boolean {
         if (entity is Player) {
             val player = entity.asPlayer()
-            if (player.equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != Items.ARMADYL_BATTLESTAFF_14696 && player.interfaceManager.opened.id != 90) {
+            if (player.equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != Items.ARMADYL_BATTLESTAFF_14696 &&
+                player.interfaceManager.opened.id != 90
+            ) {
                 sendMessage(player, "You need to wield the Armadyl Battlestaff to cast this spell.")
                 return false
             }
@@ -51,11 +53,16 @@ class StormOfArmadylSpell :
         return this
     }
 
-    override fun getMaximumImpact(entity: Entity, victim: Entity, state: BattleState): Int {
-        return type.getImpactAmount(entity, victim, 20)
-    }
+    override fun getMaximumImpact(
+        entity: Entity,
+        victim: Entity,
+        state: BattleState,
+    ): Int = type.getImpactAmount(entity, victim, 20)
 
-    override fun visualize(entity: Entity, target: Node) {
+    override fun visualize(
+        entity: Entity,
+        target: Node,
+    ) {
         super.visualize(entity, target)
     }
 }

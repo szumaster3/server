@@ -46,11 +46,7 @@ class LegendsGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LegendsGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LegendsGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LEGENDS_GUARD_398, NPCs.LEGENDS_GUARD_399)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LEGENDS_GUARD_398, NPCs.LEGENDS_GUARD_399)
 }

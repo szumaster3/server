@@ -21,15 +21,9 @@ class EntranaChurchMonkDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EntranaChurchMonkDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EntranaChurchMonkDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_222)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_222)
 }

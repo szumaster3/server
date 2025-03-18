@@ -426,7 +426,5 @@ class TrufitusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRUFITUS_740)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRUFITUS_740)
 }

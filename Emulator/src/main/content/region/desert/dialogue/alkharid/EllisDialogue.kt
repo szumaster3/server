@@ -93,11 +93,7 @@ class EllisDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EllisDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EllisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELLIS_2824)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELLIS_2824)
 }

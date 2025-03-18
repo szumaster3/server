@@ -126,7 +126,5 @@ class WaterOrbGrapple : OptionHandler() {
     override fun getDestination(
         moving: Node,
         destination: Node,
-    ): Location {
-        return Location.create(2841, 3427, 0)
-    }
+    ): Location = Location.create(2841, 3427, 0)
 }

@@ -156,13 +156,9 @@ class MasterChefDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MasterChefDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MasterChefDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MASTER_CHEF_942)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MASTER_CHEF_942)
 }
 
 class MasterChef : DialogueFile() {
@@ -184,11 +180,24 @@ class MasterChef : DialogueFile() {
                 stage++
             }
 
-            1 -> when (buttonID) {
-                1 -> sendNPCDialogue(player!!, npc!!.id, "This is the base for many of the meals. To make dough we must mix flour and water. First, right click the bucket of water and select use, then left click on the pot of flour.").also { stage = END_DIALOGUE }
-                2 -> sendNPCDialogue(player!!, npc!!.id, "To cook the dough, use it with the range shown by the arrow.").also { stage = END_DIALOGUE }
-                3 -> end()
-            }
+            1 ->
+                when (buttonID) {
+                    1 ->
+                        sendNPCDialogue(
+                            player!!,
+                            npc!!.id,
+                            "This is the base for many of the meals. To make dough we must mix flour and water. First, right click the bucket of water and select use, then left click on the pot of flour.",
+                        ).also {
+                            stage =
+                                END_DIALOGUE
+                        }
+                    2 ->
+                        sendNPCDialogue(player!!, npc!!.id, "To cook the dough, use it with the range shown by the arrow.").also {
+                            stage =
+                                END_DIALOGUE
+                        }
+                    3 -> end()
+                }
         }
     }
 }

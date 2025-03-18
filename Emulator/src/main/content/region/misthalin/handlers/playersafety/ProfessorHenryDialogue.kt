@@ -136,9 +136,7 @@ class ProfessorHenryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PROFESSOR_HENRY_7143)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_HENRY_7143)
 
     private fun showReward() {
         /*

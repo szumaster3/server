@@ -63,9 +63,7 @@ class DesertBandit(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DesertBandit(id, location)
-    }
+    ): AbstractNPC = DesertBandit(id, location)
 
     override fun tick() {
         if (!inCombat()) {
@@ -121,9 +119,8 @@ class DesertBandit(
         super.onImpact(entity, state)
     }
 
-    override fun canSelectTarget(target: Entity?): Boolean {
-        return if (target is Player) isWieldingValuableItem(target) else super.canSelectTarget(target)
-    }
+    override fun canSelectTarget(target: Entity?): Boolean =
+        if (target is Player) isWieldingValuableItem(target) else super.canSelectTarget(target)
 
     override fun isAggressive(): Boolean {
         val check = super.isAggressive()
@@ -156,7 +153,5 @@ class DesertBandit(
         super.finalizeDeath(killer)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BANDIT_1926)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BANDIT_1926)
 }

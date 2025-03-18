@@ -82,7 +82,5 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 2, Vars.VARBIT_QUEST_SWEPT_
         setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 50, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

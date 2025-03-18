@@ -162,7 +162,5 @@ class TarquinDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TARQUIN_3328)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TARQUIN_3328)
 }

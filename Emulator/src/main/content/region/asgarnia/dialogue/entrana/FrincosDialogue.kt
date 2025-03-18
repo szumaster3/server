@@ -44,11 +44,7 @@ class FrincosDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FrincosDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FrincosDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRINCOS_578)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRINCOS_578)
 }

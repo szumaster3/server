@@ -76,7 +76,5 @@ class MasterFisherDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MASTER_FISHER_308)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MASTER_FISHER_308)
 }

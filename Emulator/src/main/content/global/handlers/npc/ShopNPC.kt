@@ -14,22 +14,16 @@ class ShopNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ShopNPC(id, location)
-    }
+    ): AbstractNPC = ShopNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     override fun init() {
         super.init()
         isWalks = true
     }
 
-    override fun getWalkRadius(): Int {
-        return 3
-    }
+    override fun getWalkRadius(): Int = 3
 
     companion object {
         private val ID =

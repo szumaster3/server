@@ -31,8 +31,8 @@ class CatbasketSpace : InteractionListener {
                 object : Pulse() {
                     var counter = 0
 
-                    override fun pulse(): Boolean {
-                        return when (counter++) {
+                    override fun pulse(): Boolean =
+                        when (counter++) {
                             0 -> {
                                 familiar.lock()
                                 familiar.sendChat("Meeeew!")
@@ -47,7 +47,6 @@ class CatbasketSpace : InteractionListener {
 
                             else -> true
                         }
-                    }
                 },
             )
             return@onUseWith true

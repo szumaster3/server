@@ -98,11 +98,7 @@ class LarryDialogue(
         setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0)
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LarryDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LarryDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LARRY_5424)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LARRY_5424)
 }

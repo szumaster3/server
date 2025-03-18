@@ -29,13 +29,9 @@ class LesserDemonChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return LesserDemonChampionNPC(id, location)
-    }
+    ): AbstractNPC = LesserDemonChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LESSER_DEMON_CHAMPION_3064)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LESSER_DEMON_CHAMPION_3064)
 
     override fun handleTickActions() {
         super.handleTickActions()

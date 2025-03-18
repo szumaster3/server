@@ -326,13 +326,9 @@ class ProfessorOddensteinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ProfessorOddensteinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ProfessorOddensteinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PROFESSOR_ODDENSTEIN_286)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_ODDENSTEIN_286)
 
     companion object {
         private val OIL_CAN = Item(Items.OIL_CAN_277)

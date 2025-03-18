@@ -252,9 +252,7 @@ class DesertGuardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(4993, 4994, 4995, 4996, 4997, 4998, 4999, 5000, 5001)
-    }
+    override fun getIds(): IntArray = intArrayOf(4993, 4994, 4995, 4996, 4997, 4998, 4999, 5000, 5001)
 
     class DesertGuardNPC : AbstractNPC {
         private var lastCheck = 0
@@ -267,9 +265,7 @@ class DesertGuardDialogue(
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return DesertGuardNPC(id, location)
-        }
+        ): AbstractNPC = DesertGuardNPC(id, location)
 
         override fun tick() {
             if (lastCheck < ticks) {
@@ -348,8 +344,8 @@ class DesertGuardDialogue(
             }
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(
+        override fun getIds(): IntArray =
+            intArrayOf(
                 NPCs.GUARD_4993,
                 NPCs.GUARD_4994,
                 NPCs.GUARD_4995,
@@ -361,6 +357,5 @@ class DesertGuardDialogue(
                 NPCs.GUARD_5001,
                 NPCs.GUARD_5002,
             )
-        }
     }
 }

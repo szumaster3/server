@@ -348,7 +348,5 @@ class AliTheCamelManDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_THE_CAMEL_MAN_1867)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_CAMEL_MAN_1867)
 }

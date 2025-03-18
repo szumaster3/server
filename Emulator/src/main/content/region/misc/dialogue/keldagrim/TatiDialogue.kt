@@ -72,11 +72,7 @@ class TatiDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TatiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TatiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TATI_2160)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TATI_2160)
 }

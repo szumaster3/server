@@ -93,7 +93,5 @@ class LocalDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOCAL_268)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOCAL_268)
 }

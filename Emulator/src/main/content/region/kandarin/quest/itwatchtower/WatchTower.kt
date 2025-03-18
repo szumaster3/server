@@ -87,9 +87,7 @@ class WatchTower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTO
         addItemOrDrop(player, Items.COINS_995, 5000)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }
 // 4 quest points
 // 15,250 Magic experience

@@ -93,7 +93,5 @@ class SquireTypeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SQUIRE_NOVICE_3802, NPCs.SQUIRE_INTERMEDIATE_6140, NPCs.SQUIRE_VETERAN_6141)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SQUIRE_NOVICE_3802, NPCs.SQUIRE_INTERMEDIATE_6140, NPCs.SQUIRE_VETERAN_6141)
 }

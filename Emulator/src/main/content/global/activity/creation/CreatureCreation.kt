@@ -59,8 +59,6 @@ enum class CreatureCreation(
 
     companion object {
         @JvmStatic
-        fun forLocation(location: Location): CreatureCreation? {
-            return values().find { it.location == location }
-        }
+        fun forLocation(location: Location): CreatureCreation? = values().find { it.location == location }
     }
 }

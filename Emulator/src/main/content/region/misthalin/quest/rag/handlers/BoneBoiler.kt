@@ -234,13 +234,9 @@ enum class BoneBoiler(
         val boneInVinegarMap = values().associateBy { it.boneInVinegar }
 
         @JvmStatic
-        fun forBone(id: Int): BoneBoiler? {
-            return boneMap[id]
-        }
+        fun forBone(id: Int): BoneBoiler? = boneMap[id]
 
         @JvmStatic
-        fun forBoneInVinegar(id: Int): BoneBoiler? {
-            return boneInVinegarMap[id]
-        }
+        fun forBoneInVinegar(id: Int): BoneBoiler? = boneInVinegarMap[id]
     }
 }

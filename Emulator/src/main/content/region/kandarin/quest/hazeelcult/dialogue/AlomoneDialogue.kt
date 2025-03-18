@@ -98,7 +98,5 @@ class AlomoneDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALOMONE_891)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALOMONE_891)
 }

@@ -28,17 +28,11 @@ class TrobertDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TrobertDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TrobertDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TROBERT_1884)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TROBERT_1884)
 }
 
 class TrobertDialogueFile : DialogueBuilderFile() {

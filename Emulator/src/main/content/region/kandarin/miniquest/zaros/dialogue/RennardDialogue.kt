@@ -242,11 +242,7 @@ class RennardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RennardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RennardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYSTERIOUS_GHOST_2397)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYSTERIOUS_GHOST_2397)
 }

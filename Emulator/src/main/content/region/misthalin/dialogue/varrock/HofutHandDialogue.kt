@@ -69,11 +69,7 @@ class HofutHandDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HofutHandDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HofutHandDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOFUTHAND_ARMOUR_AND_WEAPONS_6527)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOFUTHAND_ARMOUR_AND_WEAPONS_6527)
 }

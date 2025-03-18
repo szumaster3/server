@@ -101,11 +101,7 @@ class GnomeWaiterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GnomeWaiterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GnomeWaiterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GNOME_WAITER_851)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_WAITER_851)
 }

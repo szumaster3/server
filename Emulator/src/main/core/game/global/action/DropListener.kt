@@ -31,9 +31,7 @@ class DropListener : InteractionListener {
         fun drop(
             player: Player,
             item: Item,
-        ): Boolean {
-            return handleDropAction(player, item)
-        }
+        ): Boolean = handleDropAction(player, item)
 
         private fun handleDropAction(
             player: Player,

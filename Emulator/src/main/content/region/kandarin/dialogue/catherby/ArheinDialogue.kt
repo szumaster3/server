@@ -230,11 +230,7 @@ class ArheinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ArheinDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ArheinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARHEIN_563)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARHEIN_563)
 }

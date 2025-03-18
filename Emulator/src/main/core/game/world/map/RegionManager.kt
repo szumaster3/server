@@ -52,9 +52,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getClippingFlag(l: Location): Int {
-        return getClippingFlag(l.z, l.x, l.y)
-    }
+    fun getClippingFlag(l: Location): Int = getClippingFlag(l.z, l.x, l.y)
 
     @JvmStatic
     fun getClippingFlag(
@@ -101,9 +99,7 @@ object RegionManager {
         regionY: Int,
         localX: Int,
         localY: Int,
-    ): Pair<Int, Int> {
-        return Pair((regionX shl 8) or regionY, (z * 64 * 64) + (localX * 64) + localY)
-    }
+    ): Pair<Int, Int> = Pair((regionX shl 8) or regionY, (z * 64 * 64) + (localX * 64) + localY)
 
     @JvmStatic
     fun getFlags(
@@ -119,13 +115,12 @@ object RegionManager {
     fun getFlags(
         regionId: Int,
         projectile: Boolean,
-    ): Array<Int> {
-        return if (projectile) {
+    ): Array<Int> =
+        if (projectile) {
             PROJECTILE_FLAGS.getOrPut(regionId) { Array(16384) { 0 } }
         } else {
             CLIPPING_FLAGS.getOrPut(regionId) { Array(16384) { -1 } }
         }
-    }
 
     @JvmStatic
     fun resetFlags(regionId: Int) {
@@ -148,9 +143,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun isLandscape(l: Location): Boolean {
-        return isLandscape(l.z, l.x, l.y)
-    }
+    fun isLandscape(l: Location): Boolean = isLandscape(l.z, l.x, l.y)
 
     @JvmStatic
     fun isLandscape(
@@ -232,9 +225,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun isTeleportPermitted(location: Location): Boolean {
-        return isTeleportPermitted(location.z, location.x, location.y)
-    }
+    fun isTeleportPermitted(location: Location): Boolean = isTeleportPermitted(location.z, location.x, location.y)
 
     @JvmStatic
     fun isTeleportPermitted(
@@ -250,9 +241,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun isClipped(location: Location): Boolean {
-        return isClipped(location.z, location.x, location.y)
-    }
+    fun isClipped(location: Location): Boolean = isClipped(location.z, location.x, location.y)
 
     @JvmStatic
     fun isClipped(
@@ -311,18 +300,14 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getObject(l: Location): Scenery? {
-        return getObject(l.z, l.x, l.y)
-    }
+    fun getObject(l: Location): Scenery? = getObject(l.z, l.x, l.y)
 
     @JvmStatic
     fun getObject(
         z: Int,
         x: Int,
         y: Int,
-    ): Scenery? {
-        return getObject(z, x, y, -1)
-    }
+    ): Scenery? = getObject(z, x, y, -1)
 
     @JvmStatic
     fun getObject(
@@ -399,9 +384,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getLocalNpcs(n: Entity): List<NPC> {
-        return getLocalNpcs(n, MapDistance.RENDERING.distance)
-    }
+    fun getLocalNpcs(n: Entity): List<NPC> = getLocalNpcs(n, MapDistance.RENDERING.distance)
 
     @JvmStatic
     fun getLocalEntitys(
@@ -418,14 +401,10 @@ object RegionManager {
     fun getLocalEntitys(
         entity: Entity,
         distance: Int,
-    ): List<Entity> {
-        return getLocalEntitys(entity.location, distance)
-    }
+    ): List<Entity> = getLocalEntitys(entity.location, distance)
 
     @JvmStatic
-    fun getLocalEntitys(entity: Entity): List<Entity> {
-        return getLocalEntitys(entity.location, MapDistance.RENDERING.distance)
-    }
+    fun getLocalEntitys(entity: Entity): List<Entity> = getLocalEntitys(entity.location, MapDistance.RENDERING.distance)
 
     @JvmStatic
     fun getLocalNpcs(
@@ -444,9 +423,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getLocalPlayers(n: Entity): List<Player> {
-        return getLocalPlayers(n, MapDistance.RENDERING.distance)
-    }
+    fun getLocalPlayers(n: Entity): List<Player> = getLocalPlayers(n, MapDistance.RENDERING.distance)
 
     @JvmStatic
     fun getLocalPlayers(
@@ -468,9 +445,7 @@ object RegionManager {
     fun getSurroundingPlayers(
         n: Node,
         vararg ignore: Node,
-    ): List<Player> {
-        return getSurroundingPlayers(n, 9, *ignore)
-    }
+    ): List<Player> = getSurroundingPlayers(n, 9, *ignore)
 
     @JvmStatic
     fun getSurroundingPlayers(
@@ -509,9 +484,7 @@ object RegionManager {
     fun getSurroundingNPCs(
         n: Node,
         vararg ignore: Node,
-    ): List<NPC> {
-        return getSurroundingNPCs(n, 9, *ignore)
-    }
+    ): List<NPC> = getSurroundingNPCs(n, 9, *ignore)
 
     @JvmStatic
     fun getSurroundingNPCs(
@@ -637,9 +610,7 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getLocalPlayers(l: Location): List<Player> {
-        return getLocalPlayers(l, MapDistance.RENDERING.distance)
-    }
+    fun getLocalPlayers(l: Location): List<Player> = getLocalPlayers(l, MapDistance.RENDERING.distance)
 
     @JvmStatic
     fun getLocalPlayers(
@@ -701,26 +672,20 @@ object RegionManager {
     }
 
     @JvmStatic
-    fun getLocalNpcs(l: Location): List<NPC> {
-        return getLocalNpcs(l, MapDistance.RENDERING.distance)
-    }
+    fun getLocalNpcs(l: Location): List<NPC> = getLocalNpcs(l, MapDistance.RENDERING.distance)
 
     @JvmStatic
     fun getNpc(
         entity: Entity,
         id: Int,
-    ): NPC? {
-        return getNpc(entity, id, 16)
-    }
+    ): NPC? = getNpc(entity, id, 16)
 
     @JvmStatic
     fun getNpc(
         entity: Entity,
         id: Int,
         distance: Int,
-    ): NPC? {
-        return getNpc(entity.location, id, distance)
-    }
+    ): NPC? = getNpc(entity.location, id, distance)
 
     @JvmStatic
     fun getNpc(

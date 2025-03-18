@@ -212,11 +212,7 @@ class BlasidarTheSculptorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlasidarTheSculptorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlasidarTheSculptorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLASIDAR_THE_SCULPTOR_2141)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLASIDAR_THE_SCULPTOR_2141)
 }

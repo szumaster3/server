@@ -198,7 +198,5 @@ class YanniSalikaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.YANNI_SALIKA_515)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.YANNI_SALIKA_515)
 }

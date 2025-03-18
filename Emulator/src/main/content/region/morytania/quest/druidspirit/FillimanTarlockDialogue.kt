@@ -530,9 +530,7 @@ class FillimanTarlockDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
 
     fun setQuest(stage: Int) {
         player.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player, stage)

@@ -536,7 +536,5 @@ class AliceHusbandDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALICES_HUSBAND_5202)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALICES_HUSBAND_5202)
 }

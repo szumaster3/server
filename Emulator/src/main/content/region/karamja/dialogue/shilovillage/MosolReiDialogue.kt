@@ -66,7 +66,5 @@ class MosolReiDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MOSOL_REI_500)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOSOL_REI_500)
 }

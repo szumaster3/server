@@ -633,7 +633,5 @@ class GuildmasterDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUILDMASTER_198)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUILDMASTER_198)
 }

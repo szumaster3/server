@@ -37,7 +37,5 @@ class EadburgDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EADBURG_1072)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EADBURG_1072)
 }

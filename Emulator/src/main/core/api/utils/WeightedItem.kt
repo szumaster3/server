@@ -10,7 +10,5 @@ class WeightedItem(
     var weight: Double,
     var guaranteed: Boolean = false,
 ) {
-    fun getItem(): Item {
-        return Item(id, RandomFunction.random(minAmt, maxAmt))
-    }
+    fun getItem(): Item = Item(id, RandomFunction.random(minAmt, maxAmt))
 }

@@ -17,16 +17,12 @@ class PhoenixNPC(
     override fun construct(
         owner: Player,
         id: Int,
-    ): Familiar {
-        return PhoenixNPC(owner, id)
-    }
+    ): Familiar = PhoenixNPC(owner, id)
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         owner.getSkills().updateLevel(Skills.FIREMAKING, 6, 6)
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PHOENIX_8575, NPCs.PHOENIX_8576)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PHOENIX_8575, NPCs.PHOENIX_8576)
 }

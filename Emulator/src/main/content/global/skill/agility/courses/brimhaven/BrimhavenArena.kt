@@ -292,9 +292,7 @@ class BrimhavenArena :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     companion object {
         private val LOCATION_TRAPS: MutableMap<Location, MovementHook> = HashMap()

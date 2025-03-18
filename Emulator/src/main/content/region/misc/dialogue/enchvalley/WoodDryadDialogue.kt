@@ -28,11 +28,7 @@ class WoodDryadDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return WoodDryadDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = WoodDryadDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WOOD_DRYAD_4441)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WOOD_DRYAD_4441)
 }

@@ -39,15 +39,9 @@ class DrunkenAliDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DrunkenAliDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DrunkenAliDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DRUNKEN_ALI_1863)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRUNKEN_ALI_1863)
 }

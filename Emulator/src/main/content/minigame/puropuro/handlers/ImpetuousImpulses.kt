@@ -39,9 +39,7 @@ class ImpetuousImpulses :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun enter(e: Entity): Boolean {
         if (e is Player) {
@@ -75,9 +73,7 @@ class ImpetuousImpulses :
         e: Entity,
         target: Node,
         option: Option,
-    ): Boolean {
-        return super.interact(e, target, option)
-    }
+    ): Boolean = super.interact(e, target, option)
 
     private fun spawnWheat() {
         for (set in WHEAT) {
@@ -197,9 +193,7 @@ class ImpetuousImpulses :
             this.nextWhilt = ticks + RandomFunction.random(40, 300)
         }
 
-        fun canWhilt(): Boolean {
-            return ticks > nextWhilt && ticks > busyTicks
-        }
+        fun canWhilt(): Boolean = ticks > nextWhilt && ticks > busyTicks
     }
 
     companion object {

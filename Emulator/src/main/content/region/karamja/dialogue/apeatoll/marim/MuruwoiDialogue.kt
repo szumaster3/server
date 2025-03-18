@@ -21,15 +21,9 @@ class MuruwoiDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MuruwoiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MuruwoiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MURUWOI_1450)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MURUWOI_1450)
 }

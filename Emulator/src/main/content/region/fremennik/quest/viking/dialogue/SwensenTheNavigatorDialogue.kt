@@ -314,7 +314,5 @@ class SwensenTheNavigatorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SWENSEN_THE_NAVIGATOR_1283)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SWENSEN_THE_NAVIGATOR_1283)
 }

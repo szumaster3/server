@@ -30,11 +30,7 @@ class KanelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return KanelDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = KanelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KANEL_784)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KANEL_784)
 }

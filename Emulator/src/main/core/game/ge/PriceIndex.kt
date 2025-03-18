@@ -141,19 +141,16 @@ data class PriceInfo(
     var uniqueTrades: Int,
     var lastUpdate: Long,
 ) {
-    fun copy(): PriceInfo {
-        return PriceInfo(itemId, currentValue, totalValue, uniqueTrades, lastUpdate)
-    }
+    fun copy(): PriceInfo = PriceInfo(itemId, currentValue, totalValue, uniqueTrades, lastUpdate)
 
     companion object {
-        fun fromQuery(result: ResultSet): PriceInfo {
-            return PriceInfo(
+        fun fromQuery(result: ResultSet): PriceInfo =
+            PriceInfo(
                 result.getInt(1), // item_id
                 result.getInt(2), // value
                 result.getLong(3), // total_value
                 result.getInt(4), // unique_trades
                 result.getLong(5), // last_update
             )
-        }
     }
 }

@@ -37,11 +37,7 @@ class KazemdeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KazemdeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KazemdeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KAZEMDE_3039)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KAZEMDE_3039)
 }

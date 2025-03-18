@@ -47,7 +47,5 @@ class PrivatePaldoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRIVATE_PALDO_5031)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRIVATE_PALDO_5031)
 }

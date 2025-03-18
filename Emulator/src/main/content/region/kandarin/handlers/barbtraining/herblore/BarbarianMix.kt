@@ -7,7 +7,7 @@ enum class BarbarianMix(
     val level: Int,
     val product: Int,
     val exp: Double,
-    val both: Boolean
+    val both: Boolean,
 ) {
     ATTACK_POTION(Items.ATTACK_POTION2_123, 4, Items.ATTACK_MIX2_11429, 8.0, true),
     ANTI_POISON_POTION(Items.ANTIPOISON2_177, 6, Items.ANTIPOISON_MIX2_11433, 12.0, true),
@@ -32,11 +32,10 @@ enum class BarbarianMix(
     ANTIFIRE_POTION(Items.ANTIFIRE_POTION2_2456, 75, Items.ANTIFIRE_MIX2_11505, 53.0, false),
     RANGING_POTION(Items.RANGING_POTION2_171, 80, Items.RANGING_MIX2_11509, 54.0, false),
     MAGIC_POTION(Items.MAGIC_POTION2_3044, 83, Items.MAGIC_MIX2_11513, 57.0, false),
-    ZAMORAK_BREW(Items.ZAMORAK_BREW2_191, 85, Items.ZAMORAK_MIX2_11521, 58.0, false);
+    ZAMORAK_BREW(Items.ZAMORAK_BREW2_191, 85, Items.ZAMORAK_MIX2_11521, 58.0, false),
+    ;
 
     companion object {
-        fun forId(id: Int): BarbarianMix? {
-            return values().find { it.item == id }
-        }
+        fun forId(id: Int): BarbarianMix? = values().find { it.item == id }
     }
 }

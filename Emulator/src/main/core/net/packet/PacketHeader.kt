@@ -17,5 +17,5 @@ enum class PacketHeader {
     /**
      * Short packet header.
      */
-    SHORT
+    SHORT,
 }

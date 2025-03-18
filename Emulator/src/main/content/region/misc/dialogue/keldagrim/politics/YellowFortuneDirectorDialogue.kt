@@ -34,15 +34,9 @@ class YellowFortuneDirectorDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return YellowFortuneDirectorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = YellowFortuneDirectorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.YELLOW_FORTUNE_DIRECTOR_2102)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.YELLOW_FORTUNE_DIRECTOR_2102)
 }

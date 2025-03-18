@@ -225,7 +225,17 @@ class DrezelMonumentDialogue(
                             Items.PURE_ESSENCE_7936,
                         )
                     }
-                player.inventory.remove(if (player.inventory.contains(Items.RUNE_ESSENCE_1436, 1)) Item(Items.RUNE_ESSENCE_1436, amt) else Item(Items.PURE_ESSENCE_7936, amt))
+                player.inventory.remove(
+                    if (player.inventory.contains(
+                            Items.RUNE_ESSENCE_1436,
+                            1,
+                        )
+                    ) {
+                        Item(Items.RUNE_ESSENCE_1436, amt)
+                    } else {
+                        Item(Items.PURE_ESSENCE_7936, amt)
+                    },
+                )
                 val runes = player.gameAttributes.getAttribute("priest-in-peril:rune", 50)
                 if (runes > amt) {
                     amt = runes - amt
@@ -428,8 +438,5 @@ class DrezelMonumentDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DREZEL_7707)
-    }
-
+    override fun getIds(): IntArray = intArrayOf(NPCs.DREZEL_7707)
 }

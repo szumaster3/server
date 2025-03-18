@@ -176,9 +176,7 @@ enum class FishingOption(
         }
 
         @JvmStatic
-        fun forName(opName: String): FishingOption? {
-            return nameMap[opName]
-        }
+        fun forName(opName: String): FishingOption? = nameMap[opName]
     }
 
     fun rollFish(player: Player): Fish? {
@@ -213,8 +211,8 @@ enum class FishingOption(
         return "none"
     }
 
-    fun hasBait(player: Player): Boolean {
-        return if (bait == null) {
+    fun hasBait(player: Player): Boolean =
+        if (bait == null) {
             true
         } else {
             var anyBait = false
@@ -223,7 +221,6 @@ enum class FishingOption(
             }
             anyBait
         }
-    }
 
     fun removeBait(player: Player): Boolean {
         return if (bait == null) {
@@ -238,7 +235,5 @@ enum class FishingOption(
         }
     }
 
-    fun getStartMessage(): String {
-        return if (option == "net") "You cast out your net..." else "You attempt to catch a fish."
-    }
+    fun getStartMessage(): String = if (option == "net") "You cast out your net..." else "You attempt to catch a fish."
 }

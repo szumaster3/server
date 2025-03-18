@@ -517,11 +517,7 @@ class HooknosedJackDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HooknosedJackDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HooknosedJackDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOOKNOSED_JACK_2948)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOOKNOSED_JACK_2948)
 }

@@ -34,9 +34,10 @@ class GravingasDialogue(
             }
 
             else -> {
-                npc(FaceAnim.FRIENDLY,
+                npc(
+                    FaceAnim.FRIENDLY,
                     "Will you join with me and protect against the evil ban",
-                    "of Necrovarus and his disciples?"
+                    "of Necrovarus and his disciples?",
                 ).also { stage = 1 }
             }
         }
@@ -55,7 +56,5 @@ class GravingasDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRAVINGAS_1685)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRAVINGAS_1685)
 }

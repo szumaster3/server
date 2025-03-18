@@ -123,7 +123,5 @@ class BankZone : MapZone("bank", true) {
         @JvmField var BANK_ZONE_36 = ZoneBorders(3118, 3123, 3124, 3125)
     }
 
-    fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.FIRES, ZoneRestriction.CANNON)
-    }
+    fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.FIRES, ZoneRestriction.CANNON)
 }

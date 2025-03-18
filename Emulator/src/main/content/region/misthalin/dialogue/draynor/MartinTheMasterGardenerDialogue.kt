@@ -92,7 +92,5 @@ class MartinTheMasterGardenerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MARTIN_THE_MASTER_GARDENER_3299)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MARTIN_THE_MASTER_GARDENER_3299)
 }

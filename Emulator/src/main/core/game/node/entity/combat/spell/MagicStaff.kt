@@ -53,8 +53,6 @@ enum class MagicStaff(
         }
 
         @JvmStatic
-        fun forId(runeId: Int): MagicStaff? {
-            return MAGIC_STAVES[runeId]
-        }
+        fun forId(runeId: Int): MagicStaff? = MAGIC_STAVES[runeId]
     }
 }

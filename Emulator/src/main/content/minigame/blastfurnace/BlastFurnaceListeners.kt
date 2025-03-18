@@ -190,8 +190,8 @@ class BlastFurnaceListeners : InteractionListener {
                 submitIndividualPulse(
                     player,
                     object : Pulse() {
-                        override fun pulse(): Boolean {
-                            return if (removeItem(player, Items.SPADEFUL_OF_COKE_6448, Container.INVENTORY) &&
+                        override fun pulse(): Boolean =
+                            if (removeItem(player, Items.SPADEFUL_OF_COKE_6448, Container.INVENTORY) &&
                                 addItem(
                                     player,
                                     Items.SPADE_952,
@@ -206,7 +206,6 @@ class BlastFurnaceListeners : InteractionListener {
                             } else {
                                 false
                             }
-                        }
                     },
                 )
             } else {

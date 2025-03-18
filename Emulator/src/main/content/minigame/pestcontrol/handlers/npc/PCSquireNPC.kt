@@ -23,17 +23,13 @@ class PCSquireNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCSquireNPC(id, location)
-    }
+    ): AbstractNPC = PCSquireNPC(id, location)
 
     override fun isAttackable(
         entity: Entity,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return !(DeathTask.isDead(this) || entity is Player)
-    }
+    ): Boolean = !(DeathTask.isDead(this) || entity is Player)
 
     override fun init() {
         super.setRespawn(false)
@@ -72,7 +68,5 @@ class PCSquireNPC : AbstractNPC {
         updateLifepoints = true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(3782, 3785)
-    }
+    override fun getIds(): IntArray = intArrayOf(3782, 3785)
 }

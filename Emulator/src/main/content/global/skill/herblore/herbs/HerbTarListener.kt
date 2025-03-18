@@ -27,9 +27,7 @@ class HerbTarListener : InteractionListener {
                         )
                     }
 
-                    override fun getAll(index: Int): Int {
-                        return amountInInventory(player, used.id)
-                    }
+                    override fun getAll(index: Int): Int = amountInInventory(player, used.id)
                 }
             handler.open()
             repositionChild(player, Components.SKILL_MULTI1_309, 2, 210, 15)

@@ -158,13 +158,9 @@ class CustomsOfficerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CustomsOfficerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CustomsOfficerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CUSTOMS_OFFICER_380)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CUSTOMS_OFFICER_380)
 
     companion object {
         private val LOCATIONS = arrayOf(Location.create(2771, 3227, 0), Location.create(2954, 3147, 0))

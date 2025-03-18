@@ -882,13 +882,9 @@ enum class Plantable(
         val plantables = values().associateBy { it.itemID }
 
         @JvmStatic
-        fun forItemID(id: Int): Plantable? {
-            return plantables[id]
-        }
+        fun forItemID(id: Int): Plantable? = plantables[id]
 
         @JvmStatic
-        fun forItem(item: Item): Plantable? {
-            return forItemID(item.id)
-        }
+        fun forItem(item: Item): Plantable? = forItemID(item.id)
     }
 }

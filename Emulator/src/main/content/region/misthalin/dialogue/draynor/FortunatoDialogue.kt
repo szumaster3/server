@@ -40,11 +40,7 @@ class FortunatoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FortunatoDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FortunatoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FORTUNATO_3671)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FORTUNATO_3671)
 }

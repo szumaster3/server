@@ -19,11 +19,7 @@ class WhiteKnightDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KNIGHT_660)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KNIGHT_660)
 }

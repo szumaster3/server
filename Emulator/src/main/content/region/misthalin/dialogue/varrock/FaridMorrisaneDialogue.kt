@@ -96,11 +96,7 @@ class FaridMorrisaneDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FaridMorrisaneDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FaridMorrisaneDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FARID_MORRISANE_ORES_6523)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FARID_MORRISANE_ORES_6523)
 }

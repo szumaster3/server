@@ -94,16 +94,12 @@ abstract class PyramidPlunderNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC? {
-        return null
-    }
+    ): AbstractNPC? = null
 
     fun startFollowing() {
         pulseManager.run(
             object : MovementPulse(this, player, Pathfinder.DUMB) {
-                override fun pulse(): Boolean {
-                    return false
-                }
+                override fun pulse(): Boolean = false
             },
             PulseType.STANDARD,
         )
@@ -111,7 +107,5 @@ abstract class PyramidPlunderNPC(
     }
 
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg)
-    }
+    override fun newInstance(arg: Any?): Plugin<Any> = super.newInstance(arg)
 }

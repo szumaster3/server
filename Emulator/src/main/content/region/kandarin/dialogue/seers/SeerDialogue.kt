@@ -154,11 +154,7 @@ class SeerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SeerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SeerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SEER_388)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SEER_388)
 }

@@ -52,11 +52,7 @@ class AfflictedDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AFFLICTED_1257, NPCs.AFFLICTED_1258, NPCs.AFFLICTED_1261, NPCs.AFFLICTED_1262)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AFFLICTED_1257, NPCs.AFFLICTED_1258, NPCs.AFFLICTED_1261, NPCs.AFFLICTED_1262)
 }

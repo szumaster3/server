@@ -87,7 +87,7 @@ object TutorialStage {
             player.bank.add(Item(Items.COINS_995, 25))
             setAttribute(player, "/save:${STARTER_BANK}", true)
         }
-        */
+         */
         updateProgressBar(player)
         when (stage) {
             0 -> {
@@ -633,7 +633,7 @@ object TutorialStage {
             32 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                if(!finishedMoving(player)) return
+                if (!finishedMoving(player)) return
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -674,7 +674,7 @@ object TutorialStage {
             34 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                if(!finishedMoving(player)) return
+                if (!finishedMoving(player)) return
                 registerHintIcon(player, Repository.findNPC(NPCs.MINING_INSTRUCTOR_948)!!)
                 Component.setUnclosable(
                     player,

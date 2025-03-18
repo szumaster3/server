@@ -80,9 +80,7 @@ class DoublingMoney : Script() {
             } to {
                 stateString = "Doing nothing"
             },
-            fun(): Int {
-                return 1
-            } to {
+            fun(): Int = 1 to {
                 stateString = "Saying Doubling money"
                 when (effort) {
                     Effort.LOW -> {
@@ -255,9 +253,8 @@ class DoublingMoney : Script() {
             },
         )
 
-    override fun toString(): String {
-        return "stateString: $stateString, sleepTime: $sleepTime, ticks: $ticks, maxTicks: $maxTicks, debtOwed: $debtOwed, playerOwed: $playerOwed, victim: $victim, effort: $effort, scamMode: $scamMode"
-    }
+    override fun toString(): String =
+        "stateString: $stateString, sleepTime: $sleepTime, ticks: $ticks, maxTicks: $maxTicks, debtOwed: $debtOwed, playerOwed: $playerOwed, victim: $victim, effort: $effort, scamMode: $scamMode"
 
     override fun tick() {
         if (!bot.isActive) {
@@ -302,9 +299,7 @@ class DoublingMoney : Script() {
         ImmerseWorld.spawnDoubleMoneyBot(true)
     }
 
-    override fun newInstance(): Script? {
-        return null
-    }
+    override fun newInstance(): Script? = null
 
     init {
         skills[Skills.AGILITY] = 99

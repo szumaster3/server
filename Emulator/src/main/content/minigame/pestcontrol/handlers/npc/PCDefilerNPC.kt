@@ -33,9 +33,7 @@ class PCDefilerNPC : AbstractNPC {
         }
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -54,20 +52,16 @@ class PCDefilerNPC : AbstractNPC {
         }
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return SWING_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = SWING_HANDLER
 
     override fun construct(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCDefilerNPC(id, location)
-    }
+    ): AbstractNPC = PCDefilerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.DEFILER_3762,
             NPCs.DEFILER_3763,
             NPCs.DEFILER_3764,
@@ -79,7 +73,6 @@ class PCDefilerNPC : AbstractNPC {
             NPCs.DEFILER_3770,
             NPCs.DEFILER_3771,
         )
-    }
 
     companion object {
         private val SWING_HANDLER: CombatSwingHandler =

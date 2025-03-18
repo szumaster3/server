@@ -26,9 +26,7 @@ class SlayerFlags {
         taskFlags = (taskFlags - (getTask().ordinal shl 4)) or (tasks.ordinal shl 4)
     }
 
-    fun getTaskAmount(): Int {
-        return (taskFlags shr 11) and 0xFF
-    }
+    fun getTaskAmount(): Int = (taskFlags shr 11) and 0xFF
 
     fun setTaskAmount(amount: Int) {
         taskFlags = (taskFlags - (getTaskAmount() shl 11)) or (amount shl 11)
@@ -38,33 +36,25 @@ class SlayerFlags {
         setTaskAmount(getTaskAmount() - amount)
     }
 
-    fun canEarnPoints(): Boolean {
-        return (taskFlags shr 20) and 1 == 1
-    }
+    fun canEarnPoints(): Boolean = (taskFlags shr 20) and 1 == 1
 
     fun flagCanEarnPoints() {
         taskFlags = taskFlags or (1 shl 20)
     }
 
-    fun isBroadsUnlocked(): Boolean {
-        return rewardFlags and 1 == 1
-    }
+    fun isBroadsUnlocked(): Boolean = rewardFlags and 1 == 1
 
     fun unlockBroads() {
         rewardFlags = rewardFlags or 1
     }
 
-    fun isRingUnlocked(): Boolean {
-        return (rewardFlags shr 1) and 1 == 1
-    }
+    fun isRingUnlocked(): Boolean = (rewardFlags shr 1) and 1 == 1
 
     fun unlockRing() {
         rewardFlags = rewardFlags or (1 shl 1)
     }
 
-    fun isHelmUnlocked(): Boolean {
-        return (rewardFlags shr 2) and 1 == 1
-    }
+    fun isHelmUnlocked(): Boolean = (rewardFlags shr 2) and 1 == 1
 
     fun unlockHelm() {
         rewardFlags = rewardFlags or (1 shl 2)
@@ -74,9 +64,7 @@ class SlayerFlags {
         rewardFlags = (rewardFlags - (getPoints() shl 15)) or (amount shl 15)
     }
 
-    fun getPoints(): Int {
-        return (rewardFlags shr 15) and 0xFFFF
-    }
+    fun getPoints(): Int = (rewardFlags shr 15) and 0xFFFF
 
     fun incrementPoints(amount: Int) {
         setPoints(getPoints() + amount)
@@ -87,9 +75,7 @@ class SlayerFlags {
         setTaskAmount(0)
     }
 
-    fun hasTask(): Boolean {
-        return getTaskAmount() != 0
-    }
+    fun hasTask(): Boolean = getTaskAmount() != 0
 
     fun fullClear() {
         taskFlags = 0

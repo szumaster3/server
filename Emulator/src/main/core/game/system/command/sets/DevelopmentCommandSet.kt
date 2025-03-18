@@ -18,7 +18,6 @@ import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
-import core.tools.Log
 import core.tools.RED
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -553,7 +552,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             name = "respawn",
             privilege = Privilege.ADMIN,
             usage = "::respawn <point>",
-            description = "Change the player's respawn point."
+            description = "Change the player's respawn point.",
         ) { player, args ->
 
             if (args.isEmpty()) {
@@ -561,20 +560,20 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 return@define
             }
 
-            val respawnPoint = when (args[1].lowercase()) {
-                "lumbridge" -> RespawnPoint.LUMBRIDGE
-                "falador" -> RespawnPoint.FALADOR
-                "camelot" -> RespawnPoint.CAMELOT
-                else -> {
-                    player.debug("Invalid respawn point. Valid options are: lumbridge, falador, camelot.")
-                    return@define
+            val respawnPoint =
+                when (args[1].lowercase()) {
+                    "lumbridge" -> RespawnPoint.LUMBRIDGE
+                    "falador" -> RespawnPoint.FALADOR
+                    "camelot" -> RespawnPoint.CAMELOT
+                    else -> {
+                        player.debug("Invalid respawn point. Valid options are: lumbridge, falador, camelot.")
+                        return@define
+                    }
                 }
-            }
 
             player.setRespawnLocation(respawnPoint)
 
             player.debug("Your respawn point has been set to: [${respawnPoint.name}]")
         }
-
     }
 }

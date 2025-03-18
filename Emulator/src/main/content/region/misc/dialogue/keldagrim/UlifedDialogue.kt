@@ -30,11 +30,7 @@ class UlifedDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return UlifedDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = UlifedDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ULIFED_2193)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ULIFED_2193)
 }

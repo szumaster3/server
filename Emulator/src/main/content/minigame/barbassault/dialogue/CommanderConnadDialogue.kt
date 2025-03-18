@@ -32,7 +32,5 @@ class CommanderConnadDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMMANDER_CONNAD_5029)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COMMANDER_CONNAD_5029)
 }

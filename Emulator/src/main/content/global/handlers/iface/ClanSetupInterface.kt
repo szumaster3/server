@@ -13,7 +13,6 @@ import core.tools.StringUtils
 import org.rs.consts.Components
 
 class ClanSetupInterface : InterfaceListener {
-
     override fun defineInterfaceListeners() {
         on(Components.CLANJOIN_589) { player, _, _, buttonID, _, _ ->
             if (buttonID == 9) {
@@ -46,7 +45,8 @@ class ClanSetupInterface : InterfaceListener {
                             if (clan.name == "Chat disabled") {
                                 sendMessage(player, "Your clan channel has now been enabled!")
                                 sendMessage(
-                                    player, "Join your channel by clicking 'Join Chat' and typing: ${player.username}"
+                                    player,
+                                    "Join your channel by clicking 'Join Chat' and typing: ${player.username}",
                                 )
                             }
 
@@ -101,8 +101,8 @@ class ClanSetupInterface : InterfaceListener {
         }
     }
 
-    fun getRank(opcode: Int): ClanRank {
-        return when (opcode) {
+    fun getRank(opcode: Int): ClanRank =
+        when (opcode) {
             155 -> ClanRank.ANYONE
             196 -> ClanRank.ANY_FRIEND
             124 -> ClanRank.RECRUIT
@@ -114,7 +114,6 @@ class ClanSetupInterface : InterfaceListener {
             53 -> ClanRank.ONLY_ME
             else -> ClanRank.NO_ONE
         }
-    }
 
     fun updateSettings(player: Player) {
         val clan = ClanRepository.get(player.name, true)
@@ -138,6 +137,4 @@ class ClanSetupInterface : InterfaceListener {
             updateSettings(player)
         }
     }
-
-
 }

@@ -120,7 +120,5 @@ class AlchemyGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALCHEMY_GUARDIAN_3099)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALCHEMY_GUARDIAN_3099)
 }

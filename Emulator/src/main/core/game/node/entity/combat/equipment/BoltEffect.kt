@@ -216,9 +216,7 @@ enum class BoltEffect(
         victim.graphics(graphics)
     }
 
-    open fun canFire(state: BattleState): Boolean {
-        return RandomFunction.random(13) == 5
-    }
+    open fun canFire(state: BattleState): Boolean = RandomFunction.random(13) == 5
 
     companion object {
         @JvmStatic fun forId(id: Int): BoltEffect? {

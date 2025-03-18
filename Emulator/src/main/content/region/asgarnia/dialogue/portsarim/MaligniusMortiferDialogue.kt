@@ -224,7 +224,5 @@ class MaligniusMortiferDialogue(
         )
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MALIGNIUS_MORTIFER_2713)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MALIGNIUS_MORTIFER_2713)
 }

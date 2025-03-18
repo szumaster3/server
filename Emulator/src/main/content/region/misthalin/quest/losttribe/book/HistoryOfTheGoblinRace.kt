@@ -73,7 +73,5 @@ class HistoryOfTheGoblinRace : ComponentPlugin() {
         setAttribute(player, "hgr-index", index)
     }
 
-    fun getIndex(player: Player): Int {
-        return player.getAttribute("hgr-index", 0)
-    }
+    fun getIndex(player: Player): Int = player.getAttribute("hgr-index", 0)
 }

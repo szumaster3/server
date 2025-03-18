@@ -6,13 +6,11 @@ import org.rs.consts.Items
 class BotPrices {
     companion object {
         @JvmStatic
-        fun getPrice(id: Int): Int {
-            return getPriceOverrides(id) ?: ItemDefinition.forId(id).value
-        }
+        fun getPrice(id: Int): Int = getPriceOverrides(id) ?: ItemDefinition.forId(id).value
 
         @JvmStatic
-        fun getPriceOverrides(id: Int): Int? {
-            return when (id) {
+        fun getPriceOverrides(id: Int): Int? =
+            when (id) {
                 Items.PURE_ESSENCE_7936 -> 50
                 Items.BOW_STRING_1777 -> 250
                 Items.MAGIC_LOGS_1513 -> 750
@@ -39,6 +37,5 @@ class BotPrices {
                 Items.RAW_SHARK_383 -> 710
                 else -> null
             }
-        }
     }
 }

@@ -156,16 +156,12 @@ class SalamanderSwingHandler(
     override fun calculateDefence(
         victim: Entity?,
         attacker: Entity?,
-    ): Int {
-        return style.swingHandler.calculateDefence(victim, attacker)
-    }
+    ): Int = style.swingHandler.calculateDefence(victim, attacker)
 
     override fun getSetMultiplier(
         e: Entity?,
         skillId: Int,
-    ): Double {
-        return style.swingHandler.getSetMultiplier(e, skillId)
-    }
+    ): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
     private fun checkStyle(e: Entity?) {
         val index = e!!.properties.attackStyle.style

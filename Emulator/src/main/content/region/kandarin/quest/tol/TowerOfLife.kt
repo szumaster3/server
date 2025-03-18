@@ -87,7 +87,5 @@ class TowerOfLife : Quest(Quests.TOWER_OF_LIFE, 134, 133, 2, Vars.VARBIT_QUEST_T
         setVarbit(player, Vars.VARBIT_QUEST_TOWER_OF_LIFE_PROGRESS_3337, 18, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

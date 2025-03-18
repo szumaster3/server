@@ -86,9 +86,7 @@ class ZygomiteNPC :
     override fun shouldIgnoreMultiRestrictions(
         self: NPC,
         victim: Entity,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     private fun handleFungicideSpray(
         player: Player,

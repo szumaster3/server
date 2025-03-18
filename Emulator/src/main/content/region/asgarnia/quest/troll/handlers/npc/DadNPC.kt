@@ -25,13 +25,9 @@ class DadNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DadNPC(id, location)
-    }
+    ): AbstractNPC = DadNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAD_1125)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAD_1125)
 
     override fun isAttackable(
         entity: Entity,

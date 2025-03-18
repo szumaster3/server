@@ -585,9 +585,7 @@ class LumbridgeCookDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COOK_278)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COOK_278)
 
     companion object {
         const val EMPTY_BUCKET = Items.BUCKET_1925

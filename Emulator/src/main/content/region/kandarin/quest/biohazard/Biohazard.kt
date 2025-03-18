@@ -221,7 +221,5 @@ class Biohazard : Quest(Quests.BIOHAZARD, 36, 35, 3, Vars.VARP_QUEST_BIOHAZARD_P
         removeAttributes(player, BiohazardUtils.FEED_ON_FENCE, BiohazardUtils.ELENA_REPLACE)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

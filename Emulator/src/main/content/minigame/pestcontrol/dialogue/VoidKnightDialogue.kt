@@ -250,9 +250,7 @@ class VoidKnightDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return IDS
-    }
+    override fun getIds(): IntArray = IDS
 
     companion object {
         val IDS: IntArray =

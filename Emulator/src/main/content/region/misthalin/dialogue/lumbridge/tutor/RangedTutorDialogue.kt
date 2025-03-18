@@ -251,7 +251,5 @@ class RangedTutorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANGED_TUTOR_1861)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGED_TUTOR_1861)
 }

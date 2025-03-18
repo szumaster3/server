@@ -33,13 +33,18 @@ class BallPlugin : PluginInteraction() {
         return this
     }
 
-    override fun handle(player: Player, item: Item, option: Option): Boolean {
+    override fun handle(
+        player: Player,
+        item: Item,
+        option: Option,
+    ): Boolean {
         if (option.name.lowercase(Locale.getDefault()) == "take") {
-            player.pulseManager.run(object : MovementPulse(player, item.location.transform(0, -1, 0)) {
-                override fun pulse(): Boolean {
-                    return true
-                }
-            }, PulseType.STANDARD)
+            player.pulseManager.run(
+                object : MovementPulse(player, item.location.transform(0, -1, 0)) {
+                    override fun pulse(): Boolean = true
+                },
+                PulseType.STANDARD,
+            )
             handleBall(player)
         }
         return handled
@@ -61,19 +66,23 @@ class BallPlugin : PluginInteraction() {
             val skillsToDecrease =
                 intArrayOf(Skills.DEFENCE, Skills.ATTACK, Skills.STRENGTH, Skills.RANGE, Skills.MAGIC)
             for (i in skillsToDecrease.indices) {
-                player.getSkills()
+                player
+                    .getSkills()
                     .setLevel(i, if (player.getSkills().getLevel(i) > 5) player.getSkills().getLevel(i) - 5 else 1)
             }
             player.packetDispatch.sendMessage("<col=ff0000>The experiment glares at you, and you feel yourself weaken.</col>")
             WitchExperimentNPC(
-                player.getAttribute("witchs_house:experiment_id", 897), Location.create(2936, 3463, 0), player
+                player.getAttribute("witchs_house:experiment_id", 897),
+                Location.create(2936, 3463, 0),
+                player,
             ).init()
             player.setAttribute("witchs-experiment:npc_spawned", true)
             handled = true
         }
     }
 
-    override fun fireEvent(identifier: String, vararg args: Any): Any? {
-        return null
-    }
+    override fun fireEvent(
+        identifier: String,
+        vararg args: Any,
+    ): Any? = null
 }

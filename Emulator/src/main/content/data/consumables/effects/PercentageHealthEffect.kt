@@ -13,7 +13,5 @@ class PercentageHealthEffect(
         effect.activate(player)
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return (player.getSkills().maximumLifepoints * percentage).toInt()
-    }
+    override fun getHealthEffectValue(player: Player): Int = (player.getSkills().maximumLifepoints * percentage).toInt()
 }

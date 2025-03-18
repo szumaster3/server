@@ -38,11 +38,7 @@ class CassieDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CassieDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CassieDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CASSIE_577)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CASSIE_577)
 }

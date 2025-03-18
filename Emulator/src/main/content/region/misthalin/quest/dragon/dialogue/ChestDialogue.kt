@@ -57,7 +57,5 @@ class ChestDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(3802875)
-    }
+    override fun getIds(): IntArray = intArrayOf(3802875)
 }

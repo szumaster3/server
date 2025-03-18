@@ -64,13 +64,9 @@ class DagannothKingNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DagannothKingNPC(id, location)
-    }
+    ): AbstractNPC = DagannothKingNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAGANNOTH_SUPREME_2881, NPCs.DAGANNOTH_PRIME_2882, NPCs.DAGANNOTH_REX_2883)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAGANNOTH_SUPREME_2881, NPCs.DAGANNOTH_PRIME_2882, NPCs.DAGANNOTH_REX_2883)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -109,9 +105,7 @@ class DagannothKingNPC(
         ),
         ;
 
-        fun isImmune(style: CombatStyle): Boolean {
-            return style == immuneStyle || style == this.style
-        }
+        fun isImmune(style: CombatStyle): Boolean = style == immuneStyle || style == this.style
 
         companion object {
             fun forId(id: Int): DagType? {

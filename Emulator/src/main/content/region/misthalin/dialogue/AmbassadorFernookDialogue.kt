@@ -38,7 +38,5 @@ class AmbassadorFernookDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AMBASSADOR_FERRNOOK_4582)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AMBASSADOR_FERRNOOK_4582)
 }

@@ -39,11 +39,7 @@ class GunslikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GunslikDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GunslikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUNSLIK_2154)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUNSLIK_2154)
 }

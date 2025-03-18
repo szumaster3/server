@@ -34,12 +34,10 @@ class BarbarianDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BarbarianDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BarbarianDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BARBARIAN_12,
             NPCs.BARBARIAN_3246,
             NPCs.BARBARIAN_3247,
@@ -60,5 +58,4 @@ class BarbarianDialogue(
             NPCs.BARBARIAN_3263,
             NPCs.BARBARIAN_5909,
         )
-    }
 }

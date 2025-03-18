@@ -65,7 +65,5 @@ class HadleyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("hadley_dialogue"), NPCs.HADLEY_302)
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hadley_dialogue"), NPCs.HADLEY_302)
 }

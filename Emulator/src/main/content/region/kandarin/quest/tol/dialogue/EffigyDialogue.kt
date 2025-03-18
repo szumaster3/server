@@ -248,7 +248,5 @@ class EffigyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EFFIGY_5578)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EFFIGY_5578)
 }

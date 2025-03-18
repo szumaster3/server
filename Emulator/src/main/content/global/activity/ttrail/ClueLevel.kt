@@ -23,14 +23,13 @@ enum class ClueLevel(
     ;
 
     companion object {
-        private fun getLevelForCasket(casket: Item): ClueLevel {
-            return when (casket.id) {
+        private fun getLevelForCasket(casket: Item): ClueLevel =
+            when (casket.id) {
                 Items.CASKET_2714 -> EASY
                 Items.CASKET_2717 -> MEDIUM
                 Items.CASKET_2720 -> HARD
                 else -> UNKNOWN
             }
-        }
 
         fun open(
             player: Player,
@@ -131,20 +130,15 @@ enum class ClueLevel(
             return loot
         }
 
-        fun getChatColor(level: ClueLevel): String {
-            return when (level) {
+        fun getChatColor(level: ClueLevel): String =
+            when (level) {
                 HARD -> "<col=ff1a1a>"
                 MEDIUM -> "<col=b38f00>"
                 else -> "<col=00e673>"
             }
-        }
     }
 
-    fun getCasket(): Item {
-        return Item(casketId)
-    }
+    fun getCasket(): Item = Item(casketId)
 
-    fun getName(): String {
-        return Companion.toString()
-    }
+    fun getName(): String = Companion.toString()
 }

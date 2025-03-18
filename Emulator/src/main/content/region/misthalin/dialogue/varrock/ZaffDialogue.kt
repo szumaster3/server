@@ -46,9 +46,7 @@ class ZaffDialogue : OptionHandler() {
         constructor()
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player?): Dialogue {
-            return ZaffQuestDialogue(player)
-        }
+        override fun newInstance(player: Player?): Dialogue = ZaffQuestDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             npc = args[0] as NPC
@@ -325,9 +323,7 @@ class ZaffDialogue : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.ZAFF_546)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.ZAFF_546)
 
         companion object {
             private val STAFF = Item(11014, 1)
@@ -340,9 +336,7 @@ class ZaffDialogue : OptionHandler() {
         constructor()
         constructor(player: Player?) : super(player)
 
-        override fun newInstance(player: Player?): Dialogue {
-            return ZaffBattlestaffsDialogue(player)
-        }
+        override fun newInstance(player: Player?): Dialogue = ZaffBattlestaffsDialogue(player)
 
         override fun open(vararg args: Any): Boolean {
             ammount = getStoreFile().getInt(player.username.lowercase())
@@ -419,16 +413,12 @@ class ZaffDialogue : OptionHandler() {
                 }
             }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(9679)
-        }
+        override fun getIds(): IntArray = intArrayOf(9679)
     }
 
     companion object {
         val BEACON_RING = Item(Items.BEACON_RING_11014)
 
-        fun getStoreFile(): JSONObject {
-            return ServerStore.getArchive("daily-zaff")
-        }
+        fun getStoreFile(): JSONObject = ServerStore.getArchive("daily-zaff")
     }
 }

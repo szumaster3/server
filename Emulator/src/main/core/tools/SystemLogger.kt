@@ -14,9 +14,7 @@ object SystemLogger {
     val errT = t.forStdErr()
     val formatter = SimpleDateFormat("dd-MM-yyyy HH:mm:ss XXX")
 
-    private fun getTime(): String {
-        return "[" + formatter.format(Date(System.currentTimeMillis())) + "]"
-    }
+    private fun getTime(): String = "[" + formatter.format(Date(System.currentTimeMillis())) + "]"
 
     @JvmStatic
     fun processLogEntry(

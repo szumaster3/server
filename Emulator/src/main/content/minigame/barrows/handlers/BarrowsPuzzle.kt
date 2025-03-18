@@ -160,8 +160,6 @@ class BarrowsPuzzle private constructor(
         private fun getAnswerModel(
             modelId: Int,
             correct: Boolean,
-        ): Int {
-            return modelId or ((if (correct) 1 else 0) shl 16)
-        }
+        ): Int = modelId or ((if (correct) 1 else 0) shl 16)
     }
 }

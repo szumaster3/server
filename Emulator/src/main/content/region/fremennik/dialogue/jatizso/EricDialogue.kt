@@ -26,11 +26,7 @@ class EricDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EricDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EricDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ERIC_5499)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ERIC_5499)
 }

@@ -574,13 +574,9 @@ class BountyHunterActivity
         }
 
         @Throws(Throwable::class)
-        override fun newInstance(p: Player): ActivityPlugin {
-            return this
-        }
+        override fun newInstance(p: Player): ActivityPlugin = this
 
-        override fun getSpawnLocation(): Location {
-            return Location.create(3166, 3679, 0)
-        }
+        override fun getSpawnLocation(): Location = Location.create(3166, 3679, 0)
 
         override fun configure() {
             registerRegion(6234)

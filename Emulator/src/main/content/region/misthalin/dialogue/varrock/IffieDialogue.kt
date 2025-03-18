@@ -22,15 +22,9 @@ class IffieDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return IffieDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IffieDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IFFIE_5914)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IFFIE_5914)
 }

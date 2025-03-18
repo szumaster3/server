@@ -59,11 +59,7 @@ class DonieDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DonieDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DonieDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DONIE_2238)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DONIE_2238)
 }

@@ -96,8 +96,6 @@ open class BarrowsCrypt(
             }
         }
 
-        fun getCrypt(index: Int): BarrowsCrypt {
-            return CRYPTS[index]
-        }
+        fun getCrypt(index: Int): BarrowsCrypt = CRYPTS[index]
     }
 }

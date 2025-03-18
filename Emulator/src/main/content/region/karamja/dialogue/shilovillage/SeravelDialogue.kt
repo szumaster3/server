@@ -68,7 +68,5 @@ class SeravelDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SERAVEL_514)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SERAVEL_514)
 }

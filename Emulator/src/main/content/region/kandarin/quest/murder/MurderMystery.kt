@@ -73,7 +73,5 @@ class MurderMystery : Quest(Quests.MURDER_MYSTERY, 93, 92, 3, Vars.VARP_QUEST_MU
         )
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

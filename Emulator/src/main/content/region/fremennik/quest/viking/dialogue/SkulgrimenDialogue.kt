@@ -293,7 +293,5 @@ class SkulgrimenDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SKULGRIMEN_1303)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKULGRIMEN_1303)
 }

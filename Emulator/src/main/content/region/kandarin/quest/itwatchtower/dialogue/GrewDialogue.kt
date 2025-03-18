@@ -65,7 +65,5 @@ class GrewDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GREW_854)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GREW_854)
 }

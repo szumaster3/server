@@ -188,7 +188,5 @@ class TempleOfIkov : Quest(Quests.TEMPLE_OF_IKOV, 121, 120, 1, Vars.VARP_QUEST_T
         setVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_28_3650, 1, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

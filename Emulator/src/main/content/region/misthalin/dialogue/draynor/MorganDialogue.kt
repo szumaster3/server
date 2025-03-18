@@ -91,11 +91,7 @@ class MorganDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return MorganDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = MorganDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MORGAN_755)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MORGAN_755)
 }

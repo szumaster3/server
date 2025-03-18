@@ -195,16 +195,15 @@ class PyreSitePlugin : OptionHandler() {
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location? {
-        return if (n is Scenery) {
+    ): Location? =
+        if (n is Scenery) {
             n.location.transform(n.direction, 1)
         } else {
             null
         }
-    }
 
-    fun getAnimation(tool: SkillingTool?): Animation? {
-        return when (tool) {
+    fun getAnimation(tool: SkillingTool?): Animation? =
+        when (tool) {
             SkillingTool.BRONZE_AXE -> Animation.create(3291)
             SkillingTool.IRON_AXE -> Animation.create(3290)
             SkillingTool.STEEL_AXE -> Animation.create(3289)
@@ -215,7 +214,6 @@ class PyreSitePlugin : OptionHandler() {
             SkillingTool.DRAGON_AXE -> Animation.create(3292)
             else -> null
         }
-    }
 
     enum class LogType(
         val log: Log,
@@ -298,13 +296,9 @@ class PyreSitePlugin : OptionHandler() {
                 id: Int,
                 location: Location,
                 vararg objects: Any,
-            ): AbstractNPC {
-                return FerociousBarbarianNPC(id, location)
-            }
+            ): AbstractNPC = FerociousBarbarianNPC(id, location)
 
-            override fun getIds(): IntArray {
-                return intArrayOf(NPCs.FEROCIOUS_BARBARIAN_SPIRIT_752)
-            }
+            override fun getIds(): IntArray = intArrayOf(NPCs.FEROCIOUS_BARBARIAN_SPIRIT_752)
         }
 
     companion object {

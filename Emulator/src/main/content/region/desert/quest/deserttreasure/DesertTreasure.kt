@@ -60,8 +60,8 @@ class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 0, 1, 15) {
         const val varbitIceObelisk = 389
         const val varbitShadowObelisk = 388
 
-        fun hasRequirements(player: Player): Boolean {
-            return arrayOf(
+        fun hasRequirements(player: Player): Boolean =
+            arrayOf(
                 hasLevelStat(player, Skills.SLAYER, 10),
                 hasLevelStat(player, Skills.FIREMAKING, 50),
                 hasLevelStat(player, Skills.MAGIC, 50),
@@ -73,7 +73,6 @@ class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 0, 1, 15) {
                 isQuestComplete(player, Quests.WATERFALL_QUEST),
                 isQuestComplete(player, Quests.TROLL_STRONGHOLD),
             ).all { it }
-        }
     }
 
     override fun drawJournal(
@@ -484,7 +483,5 @@ class DesertTreasure : Quest(Quests.DESERT_TREASURE, 45, 44, 3, 440, 0, 1, 15) {
         }
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

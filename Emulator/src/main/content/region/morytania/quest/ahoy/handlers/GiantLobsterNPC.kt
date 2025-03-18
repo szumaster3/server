@@ -17,13 +17,9 @@ class GiantLobsterNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GiantLobsterNPC(id, location)
-    }
+    ): AbstractNPC = GiantLobsterNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANT_LOBSTER_1693)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANT_LOBSTER_1693)
 
     companion object {
         fun spawnGiantLobster(player: Player) {

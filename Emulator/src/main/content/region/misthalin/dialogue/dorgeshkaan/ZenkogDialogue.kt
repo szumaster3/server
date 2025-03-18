@@ -40,11 +40,7 @@ class ZenkogDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ZenkogDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ZenkogDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZENKOG_5797)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZENKOG_5797)
 }

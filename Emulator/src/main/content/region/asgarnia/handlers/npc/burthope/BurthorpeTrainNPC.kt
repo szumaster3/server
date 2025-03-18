@@ -41,9 +41,7 @@ class BurthorpeTrainNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BurthorpeTrainNPC(id, location)
-    }
+    ): AbstractNPC = BurthorpeTrainNPC(id, location)
 
     override fun tick() {
         if (delay < System.currentTimeMillis()) {
@@ -52,13 +50,9 @@ class BurthorpeTrainNPC : AbstractNPC {
         super.tick()
     }
 
-    override fun getWalkRadius(): Int {
-        return if (id == 1061) 6 else 12
-    }
+    override fun getWalkRadius(): Int = if (id == 1061) 6 else 12
 
-    override fun getIds(): IntArray {
-        return IDS
-    }
+    override fun getIds(): IntArray = IDS
 
     private fun action() {
         when (id) {

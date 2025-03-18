@@ -39,9 +39,7 @@ class StorageSpace : InteractionListener {
         }
     }
 
-    private fun isWearingOtherGloves(player: Player): Boolean {
-        return getItemFromEquipment(player, EquipmentSlot.HANDS) != null
-    }
+    private fun isWearingOtherGloves(player: Player): Boolean = getItemFromEquipment(player, EquipmentSlot.HANDS) != null
 
     private inner class WeaponRackDialogue(
         player: Player,

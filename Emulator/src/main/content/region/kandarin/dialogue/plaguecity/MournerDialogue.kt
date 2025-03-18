@@ -66,8 +66,8 @@ class MournerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.MOURNER_347,
             NPCs.MOURNER_348,
             NPCs.MOURNER_357,
@@ -80,5 +80,4 @@ class MournerDialogue(
             NPCs.MOURNER_719,
             NPCs.MOURNER_3216,
         )
-    }
 }

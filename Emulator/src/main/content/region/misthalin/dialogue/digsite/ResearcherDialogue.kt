@@ -31,7 +31,5 @@ class ResearcherDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RESEARCHER_4568)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RESEARCHER_4568)
 }

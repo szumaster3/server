@@ -137,9 +137,7 @@ class MartinThwaitDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MARTIN_THWAIT_2270)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MARTIN_THWAIT_2270)
 
     companion object {
         private val ITEMS =

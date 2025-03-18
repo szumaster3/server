@@ -64,14 +64,13 @@ class RockClimbShortcut :
         }
     }
 
-    private fun determineRequirement(location: Location): Int {
-        return when (location) {
+    private fun determineRequirement(location: Location): Int =
+        when (location) {
             Location(2346, 3300, 0), Location(2344, 3294, 0) -> 59
             Location(2338, 3281, 0), Location(2338, 3286, 0) -> 85
             Location(2332, 3252, 0), Location(2338, 3253, 0) -> 68
             else -> 0
         }
-    }
 
     private fun handleClimbShortcut(
         player: Player,

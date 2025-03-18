@@ -27,11 +27,7 @@ class GrrbahDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GrrbahDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GrrbahDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRRBAH_7073)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRRBAH_7073)
 }

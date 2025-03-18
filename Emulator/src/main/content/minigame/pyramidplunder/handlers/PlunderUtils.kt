@@ -12,9 +12,7 @@ import org.rs.consts.Components
 import org.rs.consts.Items
 
 object PlunderUtils {
-    fun hasPlayer(player: Player): Boolean {
-        return PlunderData.playerLocations[player] != null
-    }
+    fun hasPlayer(player: Player): Boolean = PlunderData.playerLocations[player] != null
 
     fun registerPlayer(player: Player) {
         PlunderData.players.add(player)
@@ -72,17 +70,11 @@ object PlunderUtils {
         PlunderData.playerLocations[player] = next
     }
 
-    fun getRoom(number: Int): PlunderRoom {
-        return PlunderData.rooms[number - 1]
-    }
+    fun getRoom(number: Int): PlunderRoom = PlunderData.rooms[number - 1]
 
-    fun getRoom(player: Player): PlunderRoom? {
-        return PlunderData.playerLocations[player]
-    }
+    fun getRoom(player: Player): PlunderRoom? = PlunderData.playerLocations[player]
 
-    fun getRoomLevel(player: Player): Int {
-        return 11 + (10 * getRoom(player)!!.room)
-    }
+    fun getRoomLevel(player: Player): Int = 11 + (10 * getRoom(player)!!.room)
 
     fun getSpearDestination(player: Player): Location {
         val room = getRoom(player)!!
@@ -256,9 +248,7 @@ object PlunderUtils {
         }
     }
 
-    fun checkEntrance(door: Node): Boolean {
-        return door.asScenery().definition.varbitID == PlunderData.currentEntrance
-    }
+    fun checkEntrance(door: Node): Boolean = door.asScenery().definition.varbitID == PlunderData.currentEntrance
 
     fun rollUrnSuccess(
         player: Player,

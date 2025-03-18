@@ -438,7 +438,5 @@ class BonafidoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BONAFIDO_5580)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BONAFIDO_5580)
 }

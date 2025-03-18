@@ -19,9 +19,7 @@ class RottenPotatoRSHDDialogue(
 ) : Dialogue(player) {
     val ID = 38575793
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RottenPotatoRSHDDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RottenPotatoRSHDDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         options("Wipe bots", "Spawn bots", "Force log players", "View bank", "Copy inventory")
@@ -97,7 +95,5 @@ class RottenPotatoRSHDDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(ID)
 }

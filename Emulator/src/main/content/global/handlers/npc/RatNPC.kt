@@ -21,9 +21,7 @@ class RatNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RatNPC(id, location)
-    }
+    ): AbstractNPC = RatNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -34,9 +32,7 @@ class RatNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID =

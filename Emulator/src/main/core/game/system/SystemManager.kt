@@ -44,7 +44,5 @@ object SystemManager {
     val isTerminated: Boolean
         get() = state == SystemState.TERMINATED
 
-    fun state(): SystemState {
-        return state
-    }
+    fun state(): SystemState = state
 }

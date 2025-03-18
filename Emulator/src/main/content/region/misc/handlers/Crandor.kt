@@ -16,16 +16,12 @@ class Crandor :
         return this
     }
 
-    override fun enter(entity: Entity): Boolean {
-        return super.enter(entity)
-    }
+    override fun enter(entity: Entity): Boolean = super.enter(entity)
 
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(ZoneBorders(2813, 3223, 2864, 3312))

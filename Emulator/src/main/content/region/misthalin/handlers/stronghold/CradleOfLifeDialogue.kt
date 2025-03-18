@@ -176,9 +176,7 @@ class CradleOfLifeDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(96873)
-    }
+    override fun getIds(): IntArray = intArrayOf(96873)
 
     companion object {
         private val ITEMS = arrayOf(Item(9005, 1), Item(9006, 1))

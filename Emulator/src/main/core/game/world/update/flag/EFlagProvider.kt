@@ -13,9 +13,7 @@ enum class EFlagType {
 
     companion object {
         @JvmStatic
-        fun of(e: Entity): EFlagType {
-            return if (e is core.game.node.entity.player.Player) Player else NPC
-        }
+        fun of(e: Entity): EFlagType = if (e is core.game.node.entity.player.Player) Player else NPC
     }
 }
 
@@ -46,7 +44,9 @@ open class EFlagProvider(
         logWithStack(
             this::class.java,
             Log.ERR,
-            "Invalid context of type ${context?.let { it::class.java.simpleName } ?: "null"} passed to ${this::class.simpleName} flag which expects $expected.",
+            "Invalid context of type ${context?.let {
+                it::class.java.simpleName
+            } ?: "null"} passed to ${this::class.simpleName} flag which expects $expected.",
         )
     }
 }

@@ -297,27 +297,24 @@ class AFUBeaconListener : InteractionListener {
         return Item(logId, amount)
     }
 
-    fun Player.hasFireRing(): Boolean {
-        return inventory.containsItem(Item(Items.RING_OF_FIRE_13659)) ||
+    fun Player.hasFireRing(): Boolean =
+        inventory.containsItem(Item(Items.RING_OF_FIRE_13659)) ||
             bank.containsItem(Item(Items.RING_OF_FIRE_13659)) ||
             equipment.containsItem(
                 Item(Items.RING_OF_FIRE_13659),
             )
-    }
 
-    fun Player.hasFlameGloves(): Boolean {
-        return inventory.containsItem(Item(Items.FLAME_GLOVES_13660)) ||
+    fun Player.hasFlameGloves(): Boolean =
+        inventory.containsItem(Item(Items.FLAME_GLOVES_13660)) ||
             bank.containsItem(Item(Items.FLAME_GLOVES_13660)) ||
             equipment.containsItem(
                 Item(Items.FLAME_GLOVES_13660),
             )
-    }
 
-    fun Player.hasInfernoAdze(): Boolean {
-        return inventory.containsItem(Item(Items.INFERNO_ADZE_13661)) ||
+    fun Player.hasInfernoAdze(): Boolean =
+        inventory.containsItem(Item(Items.INFERNO_ADZE_13661)) ||
             bank.containsItem(Item(Items.INFERNO_ADZE_13661)) ||
             equipment.containsItem(
                 Item(Items.INFERNO_ADZE_13661),
             )
-    }
 }

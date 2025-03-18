@@ -51,39 +51,25 @@ object SlayerEquipmentFlags {
     }
 
     @JvmStatic
-    fun hasNosePeg(player: Player): Boolean {
-        return SlayerManager.getInstance(player).flags.equipmentFlags and 1 == 1
-    }
+    fun hasNosePeg(player: Player): Boolean = SlayerManager.getInstance(player).flags.equipmentFlags and 1 == 1
 
     @JvmStatic
-    fun hasEarmuffs(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 1) and 1 == 1
-    }
+    fun hasEarmuffs(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 1) and 1 == 1
 
     @JvmStatic
-    fun hasFaceMask(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 2) and 1 == 1
-    }
+    fun hasFaceMask(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 2) and 1 == 1
 
     @JvmStatic
-    fun hasBlackMask(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 3) and 1 == 1
-    }
+    fun hasBlackMask(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 3) and 1 == 1
 
     @JvmStatic
-    fun hasSpinyHelmet(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 4) and 1 == 1
-    }
+    fun hasSpinyHelmet(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 4) and 1 == 1
 
     @JvmStatic
-    fun hasWitchwoodIcon(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 7) and 1 == 1
-    }
+    fun hasWitchwoodIcon(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 7) and 1 == 1
 
     @JvmStatic
-    fun hasMirrorShield(player: Player): Boolean {
-        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 8) and 1 == 1
-    }
+    fun hasMirrorShield(player: Player): Boolean = (SlayerManager.getInstance(player).flags.equipmentFlags shr 8) and 1 == 1
 
     @JvmStatic
     fun getDamAccBonus(player: Player): Double {
@@ -101,11 +87,7 @@ object SlayerEquipmentFlags {
     private fun hasItem(
         player: Player,
         id: Int,
-    ): Boolean {
-        return (getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: 0) == id
-    }
+    ): Boolean = (getItemFromEquipment(player, EquipmentSlot.HEAD)?.id ?: 0) == id
 
-    fun isSlayerEq(item: Int): Boolean {
-        return item in slayerItems
-    }
+    fun isSlayerEq(item: Int): Boolean = item in slayerItems
 }

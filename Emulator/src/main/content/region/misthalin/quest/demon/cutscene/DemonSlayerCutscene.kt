@@ -13,9 +13,7 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 
 class DemonSlayerCutscene : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3222, 3364, 3234, 3375))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3222, 3364, 3234, 3375))
 
     override fun areaEnter(entity: Entity) {
         if (entity !is Player) return

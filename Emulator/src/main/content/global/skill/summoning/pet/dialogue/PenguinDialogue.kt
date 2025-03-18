@@ -98,7 +98,5 @@ class PenguinDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(*babyPenguin, *adultPenguin)
-    }
+    override fun getIds(): IntArray = intArrayOf(*babyPenguin, *adultPenguin)
 }

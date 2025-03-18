@@ -99,7 +99,5 @@ class TzHaarMejKahDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TZHAAR_MEJ_KAH_2618)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TZHAAR_MEJ_KAH_2618)
 }

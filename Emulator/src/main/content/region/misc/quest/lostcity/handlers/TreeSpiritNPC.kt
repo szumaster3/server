@@ -22,13 +22,9 @@ class TreeSpiritNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return TreeSpiritNPC(id, location)
-    }
+    ): AbstractNPC = TreeSpiritNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TREE_SPIRIT_655)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TREE_SPIRIT_655)
 
     init {
         isWalks = true

@@ -40,11 +40,7 @@ class NolarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return NolarDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = NolarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NOLAR_2158)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NOLAR_2158)
 }

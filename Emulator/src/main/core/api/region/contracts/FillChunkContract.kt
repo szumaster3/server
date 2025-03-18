@@ -42,9 +42,7 @@ open class FillChunkContract(
         y: Int,
         plane: Int,
         dyn: DynamicRegion,
-    ): BuildRegionChunk? {
-        return chunkDelegate.invoke(x, y, plane, sourceRegion)?.copy(dyn.planes[plane])
-    }
+    ): BuildRegionChunk? = chunkDelegate.invoke(x, y, plane, sourceRegion)?.copy(dyn.planes[plane])
 
     open fun afterSetting(
         chunk: BuildRegionChunk?,

@@ -6,7 +6,6 @@ import content.region.kandarin.quest.arena.dialogue.*
 import content.region.kandarin.quest.arena.handlers.npc.GeneralNPC
 import core.api.*
 import core.api.quest.getQuestStage
-import core.api.quest.isQuestComplete
 import core.api.quest.setQuestStage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -62,7 +61,7 @@ class FightArenaListener : InteractionListener {
 
             animate(player, Animations.MULTI_TAKE_832)
 
-            if(freeSlots(player) > 1 && !hasArmor && !hasHelmet) {
+            if (freeSlots(player) > 1 && !hasArmor && !hasHelmet) {
                 replaceScenery(scenery, node.id + 18, 10)
                 sendMessage(player, "You borrow the full suit of armour. It looks like it's just your size.")
                 addItem(player, ARMOR, 1)

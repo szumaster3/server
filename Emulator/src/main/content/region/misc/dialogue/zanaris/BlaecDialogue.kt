@@ -28,15 +28,9 @@ class BlaecDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return BlaecDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BlaecDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLAEC_3115)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLAEC_3115)
 }

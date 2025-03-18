@@ -215,12 +215,8 @@ class JobManager(
 
     companion object {
         @JvmStatic
-        fun getInstance(player: Player): JobManager {
-            return player.getAttribute("job-manager", JobManager(player))
-        }
+        fun getInstance(player: Player): JobManager = player.getAttribute("job-manager", JobManager(player))
 
-        fun getStoreFile(): JSONObject {
-            return ServerStore.getArchive("daily-jobs-tracking")
-        }
+        fun getStoreFile(): JSONObject = ServerStore.getArchive("daily-jobs-tracking")
     }
 }

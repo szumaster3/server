@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.diamonds
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.*
 import core.api.event.applyPoison
 import core.api.quest.getQuestStage
@@ -225,9 +225,7 @@ class ShadowDiamond : InteractionListener {
 }
 
 class ShadowDungeonWarning : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2726, 5072, 2728, 5072))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2726, 5072, 2728, 5072))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player &&
@@ -244,9 +242,7 @@ class ShadowDungeonWarning : MapArea {
 }
 
 class ShadowDungeonAttack : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2731, 5085, 2748, 5097))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2731, 5085, 2748, 5097))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

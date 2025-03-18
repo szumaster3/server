@@ -14,9 +14,7 @@ abstract class ItemPlugin : Plugin<Any> {
     override fun fireEvent(
         identifier: String,
         vararg args: Any?,
-    ): Any {
-        return this
-    }
+    ): Any = this
 
     fun register(vararg ids: Int) {
         for (id in ids) {
@@ -35,27 +33,19 @@ abstract class ItemPlugin : Plugin<Any> {
         player: Player,
         item: GroundItem,
         type: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     open fun createDrop(
         item: Item,
         player: Player,
         npc: NPC?,
         location: Location,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     open fun getItem(
         item: Item,
         npc: NPC?,
-    ): Item {
-        return item
-    }
+    ): Item = item
 
-    open fun getDeathItem(item: Item): Item {
-        return item
-    }
+    open fun getDeathItem(item: Item): Item = item
 }

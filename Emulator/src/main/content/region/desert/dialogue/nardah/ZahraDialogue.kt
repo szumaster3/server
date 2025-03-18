@@ -50,11 +50,7 @@ class ZahraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ZahraDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ZahraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAHRA_3036)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAHRA_3036)
 }

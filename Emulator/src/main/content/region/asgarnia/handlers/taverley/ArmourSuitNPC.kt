@@ -15,14 +15,16 @@ import org.rs.consts.NPCs
  */
 @Initializable
 class ArmourSuitNPC(
-    id: Int = NPCs.SUIT_OF_ARMOUR_453, location: Location? = null
+    id: Int = NPCs.SUIT_OF_ARMOUR_453,
+    location: Location? = null,
 ) : AbstractNPC(id, location) {
-
     private var clearTime = 0
 
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return ArmourSuitNPC(id, location)
-    }
+    override fun construct(
+        id: Int,
+        location: Location,
+        vararg objects: Any,
+    ): AbstractNPC = ArmourSuitNPC(id, location)
 
     override fun handleTickActions() {
         super.handleTickActions()

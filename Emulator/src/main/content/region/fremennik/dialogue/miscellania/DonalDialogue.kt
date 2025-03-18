@@ -39,11 +39,7 @@ class DonalDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DonalDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DonalDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DONAL_3938)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DONAL_3938)
 }

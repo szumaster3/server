@@ -54,11 +54,7 @@ class AlvissDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AlvissDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AlvissDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALVISS_3933)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALVISS_3933)
 }

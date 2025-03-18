@@ -397,9 +397,7 @@ class MiningListener : InteractionListener {
         return hostRatio < clientRatio
     }
 
-    fun getDelay(): Int {
-        return 1
-    }
+    fun getDelay(): Int = 1
 
     fun anim(
         player: Player,
@@ -429,7 +427,7 @@ class MiningListener : InteractionListener {
             sendMessage(player, "Your inventory is too full to hold any more ore.")
             return false
         }
-        if(inInventory(player, Items.MAGIC_STONE_4703)) {
+        if (inInventory(player, Items.MAGIC_STONE_4703)) {
             sendMessage(player, "You have already mined some stone. You don't need any more.")
             return false
         }

@@ -426,9 +426,7 @@ class TraibornDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRAIBORN_881)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRAIBORN_881)
 
     companion object {
         private val BONES = arrayOf(Item(526, 25), Item(2530, 25))

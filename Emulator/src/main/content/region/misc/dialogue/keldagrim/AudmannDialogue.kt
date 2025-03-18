@@ -38,11 +38,7 @@ class AudmannDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AudmannDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AudmannDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AUDMANN_2201)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AUDMANN_2201)
 }

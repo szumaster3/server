@@ -14,9 +14,7 @@ class RPUseWithNPCDialogue(
     var npc: NPC? = null
     val ID = 38575795
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RPUseWithNPCDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RPUseWithNPCDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -63,7 +61,5 @@ class RPUseWithNPCDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(ID)
 }

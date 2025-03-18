@@ -29,13 +29,9 @@ class PyramidPlunderSwarmNPC(
         }
     }
 
-    override fun isIgnoreMultiBoundaries(victim: Entity): Boolean {
-        return victim === player
-    }
+    override fun isIgnoreMultiBoundaries(victim: Entity): Boolean = victim === player
 
-    override fun getIds(): IntArray {
-        return IDS
-    }
+    override fun getIds(): IntArray = IDS
 
     companion object {
         private val IDS = intArrayOf(NPCs.SCARAB_SWARM_2001)

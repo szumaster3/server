@@ -18,9 +18,7 @@ abstract class CommandSet(
     override fun fireEvent(
         identifier: String?,
         vararg args: Any?,
-    ): Any {
-        return Unit
-    }
+    ): Any = Unit
 
     abstract fun defineCommands()
 

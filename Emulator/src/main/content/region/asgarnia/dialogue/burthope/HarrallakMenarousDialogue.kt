@@ -304,7 +304,5 @@ class HarrallakMenarousDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HARRALLAK_MENAROUS_8267)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HARRALLAK_MENAROUS_8267)
 }

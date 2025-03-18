@@ -144,7 +144,5 @@ class AnnaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANNA_814)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANNA_814)
 }

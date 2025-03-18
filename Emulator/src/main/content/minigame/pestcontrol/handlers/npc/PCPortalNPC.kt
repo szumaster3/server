@@ -47,9 +47,7 @@ class PCPortalNPC(
         }
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return true
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = true
 
     override fun onImpact(
         entity: Entity,
@@ -147,9 +145,7 @@ class PCPortalNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCPortalNPC(id, location)
-    }
+    ): AbstractNPC = PCPortalNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -181,9 +177,7 @@ class PCPortalNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return PORTAL
-    }
+    override fun getIds(): IntArray = PORTAL
 
     val difficultyIndex: Int
         get() {

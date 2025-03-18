@@ -221,7 +221,5 @@ class TarikDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TARIK_4478)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TARIK_4478)
 }

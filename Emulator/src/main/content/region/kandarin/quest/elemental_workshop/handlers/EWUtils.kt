@@ -68,31 +68,17 @@ object EWUtils {
     const val FURNACE_STATE = 2062
     const val BELLOWS_STATE = 2063
 
-    fun leftWaterControlBit(player: Player): Int {
-        return getVarbit(player, LEFT_WATER_CONTROL_STATE)
-    }
+    fun leftWaterControlBit(player: Player): Int = getVarbit(player, LEFT_WATER_CONTROL_STATE)
 
-    fun rightWaterControlBit(player: Player): Int {
-        return getVarbit(player, RIGHT_WATER_CONTROL_STATE)
-    }
+    fun rightWaterControlBit(player: Player): Int = getVarbit(player, RIGHT_WATER_CONTROL_STATE)
 
-    fun leftWaterControlEnabled(player: Player): Boolean {
-        return getVarbit(player, LEFT_WATER_CONTROL_STATE) == 1
-    }
+    fun leftWaterControlEnabled(player: Player): Boolean = getVarbit(player, LEFT_WATER_CONTROL_STATE) == 1
 
-    fun rightWaterControlEnabled(player: Player): Boolean {
-        return getVarbit(player, RIGHT_WATER_CONTROL_STATE) == 1
-    }
+    fun rightWaterControlEnabled(player: Player): Boolean = getVarbit(player, RIGHT_WATER_CONTROL_STATE) == 1
 
-    fun waterWheelEnabled(player: Player): Boolean {
-        return getVarbit(player, WATER_WHEEL_STATE) == 1
-    }
+    fun waterWheelEnabled(player: Player): Boolean = getVarbit(player, WATER_WHEEL_STATE) == 1
 
-    fun bellowsEnabled(player: Player): Boolean {
-        return getVarbit(player, BELLOWS_STATE) == 1
-    }
+    fun bellowsEnabled(player: Player): Boolean = getVarbit(player, BELLOWS_STATE) == 1
 
-    fun currentStage(player: Player): Int {
-        return player.questRepository.getStage(Quests.ELEMENTAL_WORKSHOP_I)
-    }
+    fun currentStage(player: Player): Int = player.questRepository.getStage(Quests.ELEMENTAL_WORKSHOP_I)
 }

@@ -28,11 +28,7 @@ class PoxDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PoxDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PoxDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.POX_2943)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.POX_2943)
 }

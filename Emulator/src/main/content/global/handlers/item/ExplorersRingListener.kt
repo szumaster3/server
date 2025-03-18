@@ -78,18 +78,15 @@ class ExplorersRingListener : InteractionListener {
         teleport(player, CABBAGE_PORT, TeleportType.CABBAGE)
     }
 
-    fun getRingLevel(id: Int): Int {
-        return when (id) {
+    fun getRingLevel(id: Int): Int =
+        when (id) {
             Items.EXPLORERS_RING_1_13560 -> 1
             Items.EXPLORERS_RING_2_13561 -> 2
             Items.EXPLORERS_RING_3_13562 -> 3
             else -> -1
         }
-    }
 
-    fun getStoreFile(): JSONObject {
-        return ServerStore.getArchive("daily-explorer-ring")
-    }
+    fun getStoreFile(): JSONObject = ServerStore.getArchive("daily-explorer-ring")
 
     companion object {
         val RINGS = intArrayOf(Items.EXPLORERS_RING_1_13560, Items.EXPLORERS_RING_2_13561, Items.EXPLORERS_RING_3_13562)

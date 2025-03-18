@@ -96,7 +96,5 @@ class AnjaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANJA_2684)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANJA_2684)
 }

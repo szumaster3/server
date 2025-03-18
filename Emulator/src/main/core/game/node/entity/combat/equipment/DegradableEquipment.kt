@@ -30,9 +30,7 @@ abstract class DegradableEquipment(
     override fun fireEvent(
         key: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     companion object {
         @JvmStatic private val EQUIPMENT: Array<ArrayList<DegradableEquipment>?> =

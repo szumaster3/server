@@ -61,7 +61,5 @@ class DoricsQuest : Quest(Quests.DORICS_QUEST, 17, 16, 1, Vars.VARP_QUEST_DORICS
         updateQuestTab(player)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

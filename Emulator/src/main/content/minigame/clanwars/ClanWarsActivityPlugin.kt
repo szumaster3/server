@@ -210,13 +210,12 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
     override fun death(
         e: Entity,
         killer: Entity,
-    ): Boolean {
-        return if (e is Player) {
+    ): Boolean =
+        if (e is Player) {
             enterViewingRoom(e)
         } else {
             false
         }
-    }
 
     fun enterViewingRoom(player: Player): Boolean {
         var destination: Location? = null
@@ -383,14 +382,10 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
         }
     }
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
     @Throws(Throwable::class)
-    override fun newInstance(p: Player): ActivityPlugin {
-        return ClanWarsActivityPlugin()
-    }
+    override fun newInstance(p: Player): ActivityPlugin = ClanWarsActivityPlugin()
 
     companion object {
         private val ATTACK_OPTION =
@@ -405,18 +400,12 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
                         return true
                     }
 
-                    override fun isWalk(): Boolean {
-                        return false
-                    }
+                    override fun isWalk(): Boolean = false
 
                     @Throws(Throwable::class)
-                    override fun newInstance(arg: Any?): Plugin<Any> {
-                        return this
-                    }
+                    override fun newInstance(arg: Any?): Plugin<Any> = this
 
-                    override fun isDelayed(player: Player): Boolean {
-                        return false
-                    }
+                    override fun isDelayed(player: Player): Boolean = false
                 },
             )
         private val leaveLocation: Location

@@ -11,18 +11,18 @@ import org.rs.consts.Quests
 import org.rs.consts.Sounds
 
 class StrangeWallInterface : InterfaceListener {
-
     override fun defineInterfaceListeners() {
         onOpen(Components.HORROR_METALDOOR_142) { player, _ ->
             val questComplete = isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)
-            val runeAttributes = listOf(
-                GameAttributes.QUEST_HFTD_USE_FIRE_RUNE to 2,
-                GameAttributes.QUEST_HFTD_USE_AIR_RUNE to 3,
-                GameAttributes.QUEST_HFTD_USE_EARTH_RUNE to 4,
-                GameAttributes.QUEST_HFTD_USE_WATER_RUNE to 5,
-                GameAttributes.QUEST_HFTD_USE_ARROW to 6,
-                GameAttributes.QUEST_HFTD_USE_SWORD to 7
-            )
+            val runeAttributes =
+                listOf(
+                    GameAttributes.QUEST_HFTD_USE_FIRE_RUNE to 2,
+                    GameAttributes.QUEST_HFTD_USE_AIR_RUNE to 3,
+                    GameAttributes.QUEST_HFTD_USE_EARTH_RUNE to 4,
+                    GameAttributes.QUEST_HFTD_USE_WATER_RUNE to 5,
+                    GameAttributes.QUEST_HFTD_USE_ARROW to 6,
+                    GameAttributes.QUEST_HFTD_USE_SWORD to 7,
+                )
 
             runeAttributes.forEach { (attribute, componentIndex) ->
                 setComponentVisibility(player, Components.HORROR_METALDOOR_142, componentIndex, getAttribute(player, attribute, 0) != 1)

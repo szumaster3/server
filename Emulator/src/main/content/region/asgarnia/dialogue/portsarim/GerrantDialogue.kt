@@ -99,7 +99,5 @@ class GerrantDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GERRANT_558)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GERRANT_558)
 }

@@ -115,11 +115,7 @@ class ThakkradYakDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ThakkradYakDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ThakkradYakDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("thakkrad-yak"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("thakkrad-yak"))
 }

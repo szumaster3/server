@@ -17,8 +17,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class ErnestTheChicken :
-    Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_QUEST_ERNEST_THE_CHICKEN_PROGRESS_32, 0, 1, 3) {
+class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_QUEST_ERNEST_THE_CHICKEN_PROGRESS_32, 0, 1, 3) {
     override fun drawJournal(
         player: Player,
         stage: Int,

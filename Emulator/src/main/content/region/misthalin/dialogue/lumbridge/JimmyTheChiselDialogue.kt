@@ -21,11 +21,7 @@ class JimmyTheChiselDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JIMMY_THE_CHISEL_1718)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JIMMY_THE_CHISEL_1718)
 }

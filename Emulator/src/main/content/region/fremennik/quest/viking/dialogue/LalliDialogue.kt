@@ -348,7 +348,5 @@ class LalliDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LALLI_1270)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LALLI_1270)
 }

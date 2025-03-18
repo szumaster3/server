@@ -170,7 +170,5 @@ class AlmeraDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALMERA_304)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALMERA_304)
 }

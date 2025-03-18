@@ -24,7 +24,6 @@ class Weapon
             CHINCHOMPA,
         }
 
-        override fun toString(): String {
-            return "Weapon(id=$id, name=$name, type=$type, ammunitionSlot=$ammunitionSlot, ammunition=${ammunition?.name ?: "none"})"
-        }
+        override fun toString(): String =
+            "Weapon(id=$id, name=$name, type=$type, ammunitionSlot=$ammunitionSlot, ammunition=${ammunition?.name ?: "none"})"
     }

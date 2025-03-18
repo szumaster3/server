@@ -36,11 +36,7 @@ class ArdougneBakerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ArdougneBakerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ArdougneBakerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BAKER_571)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BAKER_571)
 }

@@ -27,9 +27,7 @@ class ZamorakWizardNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ZamorakWizardNPC(id, location)
-    }
+    ): AbstractNPC = ZamorakWizardNPC(id, location)
 
     override fun init() {
         player = getAttribute("player", null)
@@ -66,24 +64,14 @@ class ZamorakWizardNPC : AbstractNPC {
         entity: Entity,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return (entity is Player && entity == player) || super.isAttackable(entity, style, message)
-    }
+    ): Boolean = (entity is Player && entity == player) || super.isAttackable(entity, style, message)
 
-    override fun canAttack(entity: Entity): Boolean {
-        return (entity is Player && entity == player) || super.canAttack(entity)
-    }
+    override fun canAttack(entity: Entity): Boolean = (entity is Player && entity == player) || super.canAttack(entity)
 
-    override fun canSelectTarget(target: Entity): Boolean {
-        return target == player
-    }
+    override fun canSelectTarget(target: Entity): Boolean = target == player
 
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg)
-    }
+    override fun newInstance(arg: Any?): Plugin<Any> = super.newInstance(arg)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAMORAK_WIZARD_1007)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAMORAK_WIZARD_1007)
 }

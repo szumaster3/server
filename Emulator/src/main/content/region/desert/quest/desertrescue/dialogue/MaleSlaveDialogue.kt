@@ -404,7 +404,5 @@ class MaleSlaveDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(825, 826, 4985)
-    }
+    override fun getIds(): IntArray = intArrayOf(825, 826, 4985)
 }

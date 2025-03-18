@@ -13,28 +13,39 @@ import org.rs.consts.NPCs
 class TeacherDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         if (npc.location.z == 0) {
             sendNPCDialogue(
-                player, NPCs.TEACHER_5950, "Stop pulling, we've plenty of time to see everything.", FaceAnim.ANGRY
+                player,
+                NPCs.TEACHER_5950,
+                "Stop pulling, we've plenty of time to see everything.",
+                FaceAnim.ANGRY,
             )
             stage = 0
         } else {
             sendNPCDialogue(
-                player, NPCs.SCHOOLGIRL_5951, "That man over there talks funny, miss.", FaceAnim.HALF_GUILTY
+                player,
+                NPCs.SCHOOLGIRL_5951,
+                "That man over there talks funny, miss.",
+                FaceAnim.HALF_GUILTY,
             )
             stage = 1
         }
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 sendNPCDialogue(
-                    player, NPCs.SCHOOLGIRL_5951, "Aww, but miss, it's sooo exciting.", FaceAnim.CHILD_FRIENDLY
+                    player,
+                    NPCs.SCHOOLGIRL_5951,
+                    "Aww, but miss, it's sooo exciting.",
+                    FaceAnim.CHILD_FRIENDLY,
                 )
                 stage = END_DIALOGUE
             }
@@ -44,7 +55,7 @@ class TeacherDialogue(
                     player,
                     NPCs.TEACHER_5950,
                     "That's because he's an art critic, dear. They have some very funny ideas.",
-                    FaceAnim.HALF_GUILTY
+                    FaceAnim.HALF_GUILTY,
                 )
                 stage = END_DIALOGUE
             }
@@ -52,11 +63,7 @@ class TeacherDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TeacherDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TeacherDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TEACHER_AND_PUPIL_5947)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TEACHER_AND_PUPIL_5947)
 }

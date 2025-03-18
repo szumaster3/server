@@ -60,7 +60,5 @@ class GeeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GEE_2237)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GEE_2237)
 }

@@ -27,13 +27,9 @@ class EarthWarriorChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return EarthWarriorChampionNPC(id, location)
-    }
+    ): AbstractNPC = EarthWarriorChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EARTH_WARRIOR_CHAMPION_3057)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EARTH_WARRIOR_CHAMPION_3057)
 
     override fun handleTickActions() {
         super.handleTickActions()

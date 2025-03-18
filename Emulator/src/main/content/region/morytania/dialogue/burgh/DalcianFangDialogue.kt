@@ -100,11 +100,7 @@ class DalcianFangDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DalcianFangDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DalcianFangDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DALCIAN_FANG_3632)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DALCIAN_FANG_3632)
 }

@@ -82,7 +82,5 @@ class VampireSlayer : Quest(Quests.VAMPIRE_SLAYER, 30, 29, 3, Vars.VARP_QUEST_VA
         rewardXP(player, Skills.ATTACK, 4825.0)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

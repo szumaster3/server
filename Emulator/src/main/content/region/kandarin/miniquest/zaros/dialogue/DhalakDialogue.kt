@@ -275,11 +275,7 @@ class DhalakDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DhalakDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DhalakDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYSTERIOUS_GHOST_2398)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYSTERIOUS_GHOST_2398)
 }

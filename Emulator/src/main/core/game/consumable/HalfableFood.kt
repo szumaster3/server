@@ -22,10 +22,9 @@ class HalfableFood(
         }
     }
 
-    override fun getFormattedName(item: Item): String {
-        return item.name
+    override fun getFormattedName(item: Item): String =
+        item.name
             .replace(Regex("1/2|Half an|Half a"), "")
             .trim()
             .lowercase(Locale.getDefault())
-    }
 }

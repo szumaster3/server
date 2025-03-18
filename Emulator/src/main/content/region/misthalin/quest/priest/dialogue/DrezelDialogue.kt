@@ -9,7 +9,6 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs.consts.Items
 import org.rs.consts.NPCs
@@ -695,8 +694,5 @@ class DrezelDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DREZEL_7690)
-    }
-
+    override fun getIds(): IntArray = intArrayOf(NPCs.DREZEL_7690)
 }

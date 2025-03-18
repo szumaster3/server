@@ -11,9 +11,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 
 class JiggigCave : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2445, 9458, 2447, 9467))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2445, 9458, 2447, 9467))
 
     override fun entityStep(
         entity: Entity,

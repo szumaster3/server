@@ -104,15 +104,12 @@ class MageTrainingArena : OptionHandler() {
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location? {
-        return if (n.id == NPCs.MAZE_GUARDIAN_3102) {
+    ): Location? =
+        if (n.id == NPCs.MAZE_GUARDIAN_3102) {
             n.location.transform(Direction.getDirection(node.location, n.location), -1)
         } else {
             null
         }
-    }
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 }

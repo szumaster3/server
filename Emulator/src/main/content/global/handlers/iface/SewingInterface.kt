@@ -16,11 +16,18 @@ class SewingInterface : InterfaceListener {
         }
     }
 
-    private fun create(player: Player, stock: PirateClothes) {
+    private fun create(
+        player: Player,
+        stock: PirateClothes,
+    ) {
         when {
             freeSlots(player) < 1 -> sendMessage(player, "You don't have enough inventory space for this.")
             amountInInventory(player, Items.COINS_995) < 500 -> sendMessage(player, "You can't afford that.")
-            !inInventory(player, stock.firstItem) || !inInventory(player, stock.secondItem) -> sendMessage(player, "You don't have required items in your inventory.")
+            !inInventory(
+                player,
+                stock.firstItem,
+            ) ||
+                !inInventory(player, stock.secondItem) -> sendMessage(player, "You don't have required items in your inventory.")
             else -> {
                 removeItem(player, stock.firstItem, Container.INVENTORY)
                 removeItem(player, stock.secondItem, Container.INVENTORY)
@@ -32,12 +39,17 @@ class SewingInterface : InterfaceListener {
     }
 }
 
-enum class PirateClothes(val firstItem: Int, val secondItem: Int, val product: Int, val buttonId: Int) {
+enum class PirateClothes(
+    val firstItem: Int,
+    val secondItem: Int,
+    val product: Int,
+    val buttonId: Int,
+) {
     WHITE_RIGHT_EYE(
         firstItem = Items.PIRATE_BANDANA_7112,
         secondItem = Items.EYE_PATCH_1025,
         product = Items.BANDANA_AND_EYEPATCH_8924,
-        buttonId = 38
+        buttonId = 38,
     ),
     WHITE_DOUBLE_EYE(Items.PIRATE_BANDANA_7112, Items.DOUBLE_EYEPATCHES_13353, Items.BANDANA_AND_EYEPATCHES_13340, 66),
     WHITE_LEFT_EYE(Items.PIRATE_BANDANA_7112, Items.LEFT_EYEPATCH_13355, Items.BANDANA_AND_EYEPATCH_13339, 68),
@@ -65,10 +77,12 @@ enum class PirateClothes(val firstItem: Int, val secondItem: Int, val product: I
     DOUBLE_PATCH(Items.LEFT_EYEPATCH_13355, Items.EYE_PATCH_1025, Items.DOUBLE_EYEPATCHES_13353, 86),
     CRAB_HAND(Items.CRAB_CLAW_7537, Items.PIRATES_HOOK_2997, Items.CRABCLAW_AND_HOOK_8929, 88),
     CAVALIER_AND_MASK(Items.HIGHWAYMAN_MASK_2631, Items.BLACK_CAVALIER_2643, Items.CAVALIER_AND_MASK_11280, 90),
-    BERET_AND_MASK(Items.MIME_MASK_3057, Items.BLACK_BERET_2635, Items.BERET_AND_MASK_11282, 92);
+    BERET_AND_MASK(Items.MIME_MASK_3057, Items.BLACK_BERET_2635, Items.BERET_AND_MASK_11282, 92),
+    ;
 
     companion object {
         private val buttonMap = values().associateBy { it.buttonId }
+
         fun fromButtonId(buttonId: Int) = buttonMap[buttonId]
     }
 }

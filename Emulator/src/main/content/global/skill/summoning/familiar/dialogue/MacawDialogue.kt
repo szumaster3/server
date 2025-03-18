@@ -58,17 +58,11 @@ class MacawDialogue(
         return true
     }
 
-    fun getViewAnimation(): Animation {
-        return Animation.create(8013)
-    }
+    fun getViewAnimation(): Animation = Animation.create(8013)
 
-    fun getRandom(): Int {
-        return 40
-    }
+    fun getRandom(): Int = 40
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MACAW_6851, NPCs.MACAW_6852)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MACAW_6851, NPCs.MACAW_6852)
 }
 
 class MacawDialogueFile : DialogueFile() {

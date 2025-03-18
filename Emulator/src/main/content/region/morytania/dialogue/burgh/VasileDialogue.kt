@@ -84,11 +84,7 @@ class VasileDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VasileDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VasileDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VASILE_3563)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VASILE_3563)
 }

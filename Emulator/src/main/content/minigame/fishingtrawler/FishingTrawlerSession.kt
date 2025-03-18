@@ -300,9 +300,7 @@ class FishingTrawlerSession(
         }
     }
 
-    fun getLeakingHoles(): Int {
-        return maxHoles - hole_locations.size
-    }
+    fun getLeakingHoles(): Int = maxHoles - hole_locations.size
 
     fun repairHole(
         player: Player,
@@ -345,18 +343,15 @@ class FishingTrawlerSession(
         )
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf()
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf()
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.CANNON,
             ZoneRestriction.FIRES,
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.TELEPORT,
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)

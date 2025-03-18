@@ -126,9 +126,7 @@ enum class GodType(
          * @return The corresponding GodType, or null if not found.
          */
         @JvmStatic
-        fun forScenery(scenery: Int): GodType? {
-            return values().find { it.statueId == scenery }
-        }
+        fun forScenery(scenery: Int): GodType? = values().find { it.statueId == scenery }
 
         /**
          * Retrieves the corresponding god type for a player based on the cape they possess.
@@ -141,15 +139,14 @@ enum class GodType(
         fun getCape(
             player: Player,
             invyOnly: Boolean,
-        ): GodType? {
-            return values().find { cape ->
+        ): GodType? =
+            values().find { cape ->
                 if (invyOnly) {
                     player.inventory.containsItems(cape.cape)
                 } else {
                     player.equipment.containsItem(cape.cape) || player.inventory.containsItems(cape.cape)
                 }
             }
-        }
 
         /**
          * Retrieves the corresponding god type for a player based on the cape they possess, checking both inventory and equipment.
@@ -157,9 +154,7 @@ enum class GodType(
          * @param player The player whose inventory and equipment are checked for the cape.
          * @return The corresponding GodType, or null if no cape is found.
          */
-        fun getCape(player: Player): GodType? {
-            return getCape(player, false)
-        }
+        fun getCape(player: Player): GodType? = getCape(player, false)
 
         /**
          * Retrieves the corresponding god type for a given cape item.
@@ -167,9 +162,7 @@ enum class GodType(
          * @param cape The cape item.
          * @return The corresponding GodType, or null if not found.
          */
-        fun forCape(cape: Item): GodType? {
-            return values().find { it.cape.id == cape.id }
-        }
+        fun forCape(cape: Item): GodType? = values().find { it.cape.id == cape.id }
 
         /**
          * Retrieves the corresponding god type for a given NPC ID.
@@ -177,9 +170,7 @@ enum class GodType(
          * @param id The NPC ID.
          * @return The corresponding GodType, or null if not found.
          */
-        fun forId(id: Int): GodType? {
-            return values().find { it.npcId == id }
-        }
+        fun forId(id: Int): GodType? = values().find { it.npcId == id }
 
         /**
          * Checks if the player possesses any of the god's cape items.
@@ -187,9 +178,7 @@ enum class GodType(
          * @param player The player to check.
          * @return True if the player has any of the god's capes, otherwise false.
          */
-        fun hasAny(player: Player): Boolean {
-            return values().any { player.hasItem(it.cape) }
-        }
+        fun hasAny(player: Player): Boolean = values().any { player.hasItem(it.cape) }
     }
 
     /**
@@ -198,16 +187,12 @@ enum class GodType(
      * @param player The player to check.
      * @return True if the player has the cape equipped, otherwise false.
      */
-    fun isFriendly(player: Player): Boolean {
-        return player.equipment.containsItem(cape)
-    }
+    fun isFriendly(player: Player): Boolean = player.equipment.containsItem(cape)
 
     /**
      * Retrieves the display name of the god.
      *
      * @return The formatted display name of the god.
      */
-    fun getName(): String {
-        return StringUtils.formatDisplayName(name.lowercase())
-    }
+    fun getName(): String = StringUtils.formatDisplayName(name.lowercase())
 }

@@ -46,7 +46,5 @@ class RoomikDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROMMIK_585)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROMMIK_585)
 }

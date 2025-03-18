@@ -203,7 +203,7 @@ class MagicInstructorDialogue(
                             player,
                             npc.id,
                             "If all else fails, visit the " + GameWorld.settings!!.name +
-                                    " website for a whole chestload of information on quests skills and minigames as well as a very good starter's guide.",
+                                " website for a whole chestload of information on quests skills and minigames as well as a very good starter's guide.",
                         ).also { stage++ }
 
                     8 -> {
@@ -217,11 +217,7 @@ class MagicInstructorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MagicInstructorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MagicInstructorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAGIC_INSTRUCTOR_946)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAGIC_INSTRUCTOR_946)
 }

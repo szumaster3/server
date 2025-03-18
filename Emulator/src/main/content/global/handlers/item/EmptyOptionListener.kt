@@ -19,8 +19,8 @@ class EmptyOptionListener : InteractionListener {
                 node.name.lowercase().contains("serum") ||
                 node.name.contains("cure") ||
                 node.name.contains("mix") ||
-                node.name.contains("balm",))
-            {
+                node.name.contains("balm")
+            ) {
                 replaceSlot(player, node.asItem().slot, Item(EmptyItem.getEmpty(Items.POTION_195)!!), node.asItem())
                 playAudio(player, EmptyItem.getEmptyAudio(Items.POTION_195)!!)
                 return@on true
@@ -45,11 +45,31 @@ class EmptyOptionListener : InteractionListener {
         BOWL_OF_WATER(Items.BOWL_OF_WATER_1921, Items.BOWL_1923, "You empty the contents of the bowl onto the floor.", Sounds.LIQUID_2401),
         BROOM_OINTMENT(Items.BROOM_OINTMENT_14062, Items.VIAL_229, "You empty the vial.", Sounds.LIQUID_2401),
         BUCKET_OF_COMPOST(Items.COMPOST_6032, Items.BUCKET_1925, "You empty the bucket of compost."),
-        BUCKET_OF_MILK(Items.BUCKET_OF_MILK_1927, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.LIQUID_2401),
-        BUCKET_OF_SAND(Items.BUCKET_OF_SAND_1783, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.SAND_BUCKET_2584),
-        BUCKET_OF_SLIME(Items.BUCKET_OF_SLIME_4286, Items.BUCKET_1925, "You empty the contents of the bucket on the floor.", Sounds.LIQUID_2401),
+        BUCKET_OF_MILK(
+            Items.BUCKET_OF_MILK_1927,
+            Items.BUCKET_1925,
+            "You empty the contents of the bucket onto the floor.",
+            Sounds.LIQUID_2401,
+        ),
+        BUCKET_OF_SAND(
+            Items.BUCKET_OF_SAND_1783,
+            Items.BUCKET_1925,
+            "You empty the contents of the bucket onto the floor.",
+            Sounds.SAND_BUCKET_2584,
+        ),
+        BUCKET_OF_SLIME(
+            Items.BUCKET_OF_SLIME_4286,
+            Items.BUCKET_1925,
+            "You empty the contents of the bucket on the floor.",
+            Sounds.LIQUID_2401,
+        ),
         BUCKET_OF_SUPERCOMPOST(Items.SUPERCOMPOST_6034, Items.BUCKET_1925, "You empty the bucket of supercompost."),
-        BUCKET_OF_WATER(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925, "You empty the contents of the bucket onto the floor.", Sounds.LIQUID_2401),
+        BUCKET_OF_WATER(
+            Items.BUCKET_OF_WATER_1929,
+            Items.BUCKET_1925,
+            "You empty the contents of the bucket onto the floor.",
+            Sounds.LIQUID_2401,
+        ),
         BURNT_CURRY(Items.BURNT_CURRY_2013, Items.BOWL_1923, "You empty the contents of the bowl onto the floor.", Sounds.LIQUID_2401),
         BURNT_EGG(Items.BURNT_EGG_7090, Items.BOWL_1923, "You empty the contents of the bowl onto the floor."),
         BURNT_GNOMEBOWL(Items.BURNT_GNOMEBOWL_2175, Items.GNOMEBOWL_MOULD_2166, "You empty the contents of the gnomebowl onto the floor."),
@@ -108,17 +128,11 @@ class EmptyOptionListener : InteractionListener {
                 }
             }
 
-            fun getEmpty(id: Int): Int? {
-                return emptyItemMap[id]
-            }
+            fun getEmpty(id: Int): Int? = emptyItemMap[id]
 
-            fun getEmptyMessage(id: Int): String? {
-                return emptyMessageMap[id]
-            }
+            fun getEmptyMessage(id: Int): String? = emptyMessageMap[id]
 
-            fun getEmptyAudio(id: Int): Int? {
-                return emptyAudioMap[id]
-            }
+            fun getEmptyAudio(id: Int): Int? = emptyAudioMap[id]
         }
     }
 }

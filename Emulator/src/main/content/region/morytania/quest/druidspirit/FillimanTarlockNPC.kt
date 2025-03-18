@@ -17,9 +17,7 @@ class FillimanTarlockNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return FillimanTarlockNPC(id, location)
-    }
+    ): AbstractNPC = FillimanTarlockNPC(id, location)
 
     init {
         isNeverWalks = true
@@ -31,7 +29,5 @@ class FillimanTarlockNPC : AbstractNPC {
         if (spawnedTicks++ > 100) poofClear(this)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FILLIMAN_TARLOCK_1050)
 }

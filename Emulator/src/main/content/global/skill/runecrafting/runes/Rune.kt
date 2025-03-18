@@ -26,16 +26,12 @@ enum class Rune(
     SOUL(Runes.SOUL_RUNE.transform(), 90, 11.0),
     ;
 
-    fun getMultiple(): IntArray? {
-        return multiple
-    }
+    fun getMultiple(): IntArray? = multiple
 
     val isNormal: Boolean
         get() = this == AIR || this == MIND || this == WATER || this == EARTH || this == FIRE || this == BODY
 
-    fun isMultiple(): Boolean {
-        return getMultiple() != null
-    }
+    fun isMultiple(): Boolean = getMultiple() != null
 
     companion object {
         private val itemToRune = HashMap<Int, Rune>()
@@ -47,12 +43,8 @@ enum class Rune(
         }
 
         @JvmStatic
-        fun forItem(item: Item): Rune? {
-            return itemToRune[item.id]
-        }
+        fun forItem(item: Item): Rune? = itemToRune[item.id]
 
-        fun forName(name: String): Rune? {
-            return values().find { it.name == name }
-        }
+        fun forName(name: String): Rune? = values().find { it.name == name }
     }
 }

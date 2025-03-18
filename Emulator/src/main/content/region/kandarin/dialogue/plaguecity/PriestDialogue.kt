@@ -44,7 +44,5 @@ class PriestDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRIEST_358)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRIEST_358)
 }

@@ -21,15 +21,11 @@ class SirMordredNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return SirMordredNPC(id, location)
-    }
+    ): AbstractNPC = SirMordredNPC(id, location)
 
     var lockMovementPlr: Player? = null
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_MORDRED_247)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_MORDRED_247)
 
     override fun canAttack(victim: Entity?): Boolean {
         if (lockMovementPlr != null) {

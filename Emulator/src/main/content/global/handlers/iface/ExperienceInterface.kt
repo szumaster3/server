@@ -108,17 +108,11 @@ class ExperienceInterface : ComponentPlugin() {
         return true
     }
 
-    private fun checkHerblore(player: Player): Boolean {
-        return (isQuestComplete(player, Quests.DRUIDIC_RITUAL))
-    }
+    private fun checkHerblore(player: Player): Boolean = (isQuestComplete(player, Quests.DRUIDIC_RITUAL))
 
-    private fun checkSummoning(player: Player): Boolean {
-        return isQuestComplete(player, Quests.WOLF_WHISTLE)
-    }
+    private fun checkSummoning(player: Player): Boolean = isQuestComplete(player, Quests.WOLF_WHISTLE)
 
-    private fun checkRunecrafting(player: Player): Boolean {
-        return isQuestComplete(player, Quests.RUNE_MYSTERIES)
-    }
+    private fun checkRunecrafting(player: Player): Boolean = isQuestComplete(player, Quests.RUNE_MYSTERIES)
 
     companion object {
         private val SOUND = Sounds.TBCU_FINDGEM_1270

@@ -83,20 +83,14 @@ class RovingElvesPlugin : OptionHandler() {
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location? {
-        return null
-    }
+    ): Location? = null
 
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return node !is Item
-    }
+    ): Boolean = node !is Item
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     companion object {
         val ANIMATION_DIG: Animation = Animation.create(830)

@@ -67,11 +67,7 @@ class HallaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HallaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HallaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HALLA_3921)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HALLA_3921)
 }

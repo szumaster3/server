@@ -193,9 +193,7 @@ class ScriptProcessor(
      * @param script The script to check for persistence.
      * @return Returns `true` if the script is persistent, `false` otherwise.
      */
-    fun isPersist(script: Script<*>): Boolean {
-        return script.persist
-    }
+    fun isPersist(script: Script<*>): Boolean = script.persist
 
     /**
      * Processes interaction scripts when the entity is within range and ready to interact.
@@ -422,13 +420,9 @@ class ScriptProcessor(
      *
      * @return The currently active script or null if no script is active.
      */
-    fun getActiveScript(): Script<*>? {
-        return currentScript ?: getActiveInteraction()
-    }
+    fun getActiveScript(): Script<*>? = currentScript ?: getActiveInteraction()
 
-    private fun getActiveInteraction(): Script<*>? {
-        return opScript ?: apScript
-    }
+    private fun getActiveInteraction(): Script<*>? = opScript ?: apScript
 
     /**
      * Checks if a specific type of script is present in the queue.

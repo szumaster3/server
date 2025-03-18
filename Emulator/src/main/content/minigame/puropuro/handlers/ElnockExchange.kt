@@ -43,24 +43,16 @@ enum class ElnockExchange(
     ),
 
     IMPLING_JAR(32, 1231360, Items.PICTURE_11269, Item(Items.IMPLING_JAR_11260, 3)) {
-        override fun hasItems(player: Player): Boolean {
-            return BNetTypes.getImplings().any { player.inventory.containsItem(it.reward) }
-        }
+        override fun hasItems(player: Player): Boolean = BNetTypes.getImplings().any { player.inventory.containsItem(it.reward) }
     }, ;
 
-    open fun hasItems(player: Player): Boolean {
-        return player.inventory.containsItems(*required)
-    }
+    open fun hasItems(player: Player): Boolean = player.inventory.containsItems(*required)
 
     companion object {
         @JvmStatic
-        fun getItem(player: Player): Item? {
-            return BNetTypes.getImplings().firstOrNull { player.inventory.containsItem(it.reward) }?.reward
-        }
+        fun getItem(player: Player): Item? = BNetTypes.getImplings().firstOrNull { player.inventory.containsItem(it.reward) }?.reward
 
         @JvmStatic
-        fun forButton(button: Int): ElnockExchange? {
-            return values().firstOrNull { it.button == button }
-        }
+        fun forButton(button: Int): ElnockExchange? = values().firstOrNull { it.button == button }
     }
 }

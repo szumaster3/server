@@ -34,11 +34,7 @@ class FrawdDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FrawdDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FrawdDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRAWD_7048)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRAWD_7048)
 }

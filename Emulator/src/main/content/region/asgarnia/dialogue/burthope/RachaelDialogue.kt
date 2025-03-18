@@ -118,7 +118,5 @@ class RachaelDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SAM_1357, NPCs.RACHAEL_1358)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SAM_1357, NPCs.RACHAEL_1358)
 }

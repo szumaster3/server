@@ -39,11 +39,7 @@ class GulldamarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GulldamarDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GulldamarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GULLDAMAR_2159)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GULLDAMAR_2159)
 }

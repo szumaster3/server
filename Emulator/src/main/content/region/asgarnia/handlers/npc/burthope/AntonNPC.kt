@@ -22,13 +22,9 @@ class AntonNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return AntonNPC(id, location)
-    }
+    ): AbstractNPC = AntonNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANTON_4295)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANTON_4295)
 
     override fun tick() {
         if (RandomFunction.random(35) == 5) {

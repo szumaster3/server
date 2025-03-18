@@ -374,7 +374,6 @@ object ManagementEvents {
         }
     }
 
-    private fun shouldWaitForClanInfo(clanName: String): Boolean {
-        return ClanRepository.get(clanName) == null && hasRequestedClanInfo[clanName] == null
-    }
+    private fun shouldWaitForClanInfo(clanName: String): Boolean =
+        ClanRepository.get(clanName) == null && hasRequestedClanInfo[clanName] == null
 }

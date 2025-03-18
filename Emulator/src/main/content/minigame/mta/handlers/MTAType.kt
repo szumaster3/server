@@ -149,13 +149,9 @@ enum class MTAType(
         teleport(player, endLocation)
     }
 
-    open fun hasRequirement(player: Player): Boolean {
-        return false
-    }
+    open fun hasRequirement(player: Player): Boolean = false
 
-    fun getZone(): MTAZone {
-        return mtaZone
-    }
+    fun getZone(): MTAZone = mtaZone
 
     companion object {
         private val zoneCache: MutableSet<MTAType> = HashSet(values().toList())

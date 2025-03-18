@@ -23,9 +23,7 @@ class MouseNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MouseNPC(id, location)
-    }
+    ): AbstractNPC = MouseNPC(id, location)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -45,7 +43,5 @@ class MouseNPC : AbstractNPC {
         player!!.removeAttribute("mouse_out")
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MOUSE_901)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOUSE_901)
 }

@@ -38,11 +38,7 @@ class SpiceSellerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SpiceSellerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SpiceSellerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPICE_SELLER_572)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SPICE_SELLER_572)
 }

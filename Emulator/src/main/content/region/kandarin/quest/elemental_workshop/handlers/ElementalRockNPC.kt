@@ -33,13 +33,9 @@ class ElementalRockNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return ElementalRockNPC(id, location)
-    }
+    ): AbstractNPC = ElementalRockNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EARTH_ELEMENTAL_4910, NPCs.ELEMENTAL_ROCK_4911)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EARTH_ELEMENTAL_4910, NPCs.ELEMENTAL_ROCK_4911)
 
     override fun defineListeners() {
         on(ids, IntType.NPC, "Mine") { player, node ->

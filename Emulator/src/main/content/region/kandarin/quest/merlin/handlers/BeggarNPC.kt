@@ -18,13 +18,9 @@ class BeggarNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return BeggarNPC(id, location)
-    }
+    ): AbstractNPC = BeggarNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BEGGAR_252)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BEGGAR_252)
 
     override fun tick() {
         super.tick()

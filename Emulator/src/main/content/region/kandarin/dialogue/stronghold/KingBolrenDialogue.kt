@@ -59,11 +59,7 @@ class KingBolrenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KingBolrenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KingBolrenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KING_BOLREN_469)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_BOLREN_469)
 }

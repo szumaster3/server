@@ -22,13 +22,12 @@ open class MultiSwingHandler(
     override fun canSwing(
         entity: Entity,
         victim: Entity,
-    ): InteractionType? {
-        return if (isMeleeDistance) {
+    ): InteractionType? =
+        if (isMeleeDistance) {
             CombatStyle.RANGE.swingHandler.canSwing(entity, victim)
         } else {
             next.handler!!.canSwing(entity, victim)
         }
-    }
 
     override fun swing(
         entity: Entity?,
@@ -166,39 +165,30 @@ open class MultiSwingHandler(
         victim!!.visualize(victim.properties.defenceAnimation, current.endGraphics)
     }
 
-    override fun calculateAccuracy(entity: Entity?): Int {
-        return current.handler!!.calculateAccuracy(entity)
-    }
+    override fun calculateAccuracy(entity: Entity?): Int = current.handler!!.calculateAccuracy(entity)
 
     override fun calculateHit(
         entity: Entity?,
         victim: Entity?,
         modifier: Double,
-    ): Int {
-        return if (current.maximumHit > -1) {
+    ): Int =
+        if (current.maximumHit > -1) {
             current.maximumHit
         } else {
             current.handler!!.calculateHit(entity, victim, modifier)
         }
-    }
 
     override fun calculateDefence(
         victim: Entity?,
         attacker: Entity?,
-    ): Int {
-        return current.handler!!.calculateDefence(victim, attacker)
-    }
+    ): Int = current.handler!!.calculateDefence(victim, attacker)
 
     override fun getSetMultiplier(
         e: Entity?,
         skillId: Int,
-    ): Double {
-        return current.handler!!.getSetMultiplier(e, skillId)
-    }
+    ): Double = current.handler!!.getSetMultiplier(e, skillId)
 
-    fun canSelect(attack: SwitchAttack?): Boolean {
-        return true
-    }
+    fun canSelect(attack: SwitchAttack?): Boolean = true
 
     fun getNext(
         entity: Entity?,

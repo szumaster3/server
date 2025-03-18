@@ -57,8 +57,8 @@ object PlagueCityUtils {
             Items.WILY_CAT_14093,
         )
 
-    fun hasFullMournerGear(player: Player): Boolean {
-        return player.equipment.containsItems(
+    fun hasFullMournerGear(player: Player): Boolean =
+        player.equipment.containsItems(
             Item(Items.GAS_MASK_1506),
             Item(Items.MOURNER_TOP_6065),
             Item(Items.MOURNER_TROUSERS_6067),
@@ -66,10 +66,9 @@ object PlagueCityUtils {
             Item(Items.MOURNER_CLOAK_6070),
             Item(Items.MOURNER_GLOVES_6068),
         )
-    }
 
-    fun hasAnCat(player: Player): Boolean {
-        return player.inventory.containsAtLeastOneItem(
+    fun hasAnCat(player: Player): Boolean =
+        player.inventory.containsAtLeastOneItem(
             Item(Items.PET_CAT_1561),
             Item(Items.PET_CAT_1562),
             Item(Items.PET_CAT_1563),
@@ -97,10 +96,9 @@ object PlagueCityUtils {
             Item(Items.LAZY_HELL_CAT_7584),
             Item(Items.WILY_HELLCAT_7585),
         )
-    }
 
-    fun hasAnKitten(player: Player): Boolean {
-        return player.inventory.containsAtLeastOneItem(
+    fun hasAnKitten(player: Player): Boolean =
+        player.inventory.containsAtLeastOneItem(
             Item(NPCs.CLOCKWORK_CAT_3598),
             Item(NPCs.KITTEN_8217),
             Item(NPCs.HELL_KITTEN_3505),
@@ -111,5 +109,4 @@ object PlagueCityUtils {
             Item(NPCs.KITTEN_762),
             Item(NPCs.KITTEN_761),
         )
-    }
 }

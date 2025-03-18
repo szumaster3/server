@@ -131,7 +131,5 @@ class KangaiMauDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KANGAI_MAU_846)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KANGAI_MAU_846)
 }

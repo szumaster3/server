@@ -21,15 +21,9 @@ class WildernessBanditsDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return WildernessBanditsDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = WildernessBanditsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLACK_HEATHER_202, NPCs.DONNY_THE_LAD_203, NPCs.SPEEDY_KEITH_204)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLACK_HEATHER_202, NPCs.DONNY_THE_LAD_203, NPCs.SPEEDY_KEITH_204)
 }

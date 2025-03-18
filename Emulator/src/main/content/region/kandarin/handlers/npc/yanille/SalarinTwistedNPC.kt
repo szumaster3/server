@@ -21,9 +21,7 @@ class SalarinTwistedNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return SalarinTwistedNPC(id, location)
-    }
+    ): AbstractNPC = SalarinTwistedNPC(id, location)
 
     override fun checkImpact(state: BattleState) {
         if (state.style != CombatStyle.MAGIC) {
@@ -44,7 +42,5 @@ class SalarinTwistedNPC : AbstractNPC {
         state.neutralizeHits()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SALARIN_THE_TWISTED_205)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SALARIN_THE_TWISTED_205)
 }

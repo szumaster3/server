@@ -91,7 +91,5 @@ class MelinaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MELINA_2935)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MELINA_2935)
 }

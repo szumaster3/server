@@ -22,11 +22,7 @@ class ThormacDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ThormacDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ThormacDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THORMAC_389)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THORMAC_389)
 }

@@ -16,9 +16,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 class Morytania : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3426, 3191, 3715, 3588))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3426, 3191, 3715, 3588))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player &&

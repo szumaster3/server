@@ -125,7 +125,5 @@ class MubarizDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MUBARIZ_957)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MUBARIZ_957)
 }

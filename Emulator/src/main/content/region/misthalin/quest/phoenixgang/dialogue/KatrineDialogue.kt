@@ -513,13 +513,9 @@ class KatrineDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KatrineDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KatrineDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KATRINE_642)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KATRINE_642)
 
     companion object {
         private val CROSSBOWS = Item(Items.PHOENIX_CROSSBOW_767, 2)

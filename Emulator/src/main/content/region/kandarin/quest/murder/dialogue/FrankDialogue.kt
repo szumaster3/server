@@ -141,7 +141,5 @@ class FrankDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRANK_819)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRANK_819)
 }

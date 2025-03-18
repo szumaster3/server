@@ -21,9 +21,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 class FalconryActivityPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false) {
-    override fun newInstance(p: Player): ActivityPlugin {
-        return FalconryActivityPlugin()
-    }
+    override fun newInstance(p: Player): ActivityPlugin = FalconryActivityPlugin()
 
     override fun start(
         player: Player,
@@ -46,13 +44,9 @@ class FalconryActivityPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false
         e: Entity,
         target: Node,
         option: Option,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
     override fun configure() {
         register(ZoneBorders(2363, 3574, 2395, 3620))
@@ -130,9 +124,7 @@ class FalconryActivityPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false
             return true
         }
 
-        override fun isWalk(): Boolean {
-            return false
-        }
+        override fun isWalk(): Boolean = false
 
         override fun isWalk(
             player: Player,

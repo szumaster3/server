@@ -87,13 +87,10 @@ class PrisonPeteListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(PrisonPeteUtils.PRISON_ZONE)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(PrisonPeteUtils.PRISON_ZONE)
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     override fun defineDestinationOverrides() {
         setDest(IntType.NPC, intArrayOf(NPCs.PRISON_PETE_3118), "talk-to") { _, _ ->

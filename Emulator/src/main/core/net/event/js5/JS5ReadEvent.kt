@@ -3,9 +3,14 @@ package core.net.event.js5
 import core.net.*
 import java.nio.ByteBuffer
 
-class JS5ReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(session, buffer) {
-
-    override fun read(session: IoSession?, buffer: ByteBuffer?) {
+class JS5ReadEvent(
+    session: IoSession?,
+    buffer: ByteBuffer?,
+) : IoReadEvent(session, buffer) {
+    override fun read(
+        session: IoSession?,
+        buffer: ByteBuffer?,
+    ) {
         if (session != null) {
             while (buffer!!.hasRemaining()) {
                 val opcode = buffer.g1()
@@ -16,7 +21,6 @@ class JS5ReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(sessi
                 }
 
                 when (opcode) {
-
                     /**
                      *  OPCODE 0 - Prefetch file request (Low priority request)
                      *  Handler for the prefetch file request opcode for the JS5 connection
@@ -94,7 +98,6 @@ class JS5ReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(sessi
                     ENCRYPTED -> {
                         val value = buffer.g1()
                         val mark = buffer.g2()
-
                     }
 
                     /**
@@ -119,7 +122,6 @@ class JS5ReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(sessi
                         buffer.g3()
                         session.disconnect()
                     }
-
                 }
             }
         }

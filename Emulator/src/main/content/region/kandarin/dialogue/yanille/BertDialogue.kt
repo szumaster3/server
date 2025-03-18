@@ -71,11 +71,7 @@ class BertDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BertDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BertDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BERT_3108)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BERT_3108)
 }

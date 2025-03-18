@@ -39,7 +39,5 @@ class ObliDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OBLI_516)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OBLI_516)
 }

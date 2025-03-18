@@ -6,9 +6,9 @@ import core.api.log
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.GameWorld
+import core.integration.mysql.SQLiteProvider
 import core.tools.Log
 import core.tools.SystemLogger.logStartup
-import core.integration.mysql.SQLiteProvider
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import java.io.File
@@ -32,9 +32,7 @@ class PlayerStatsCounter(
     companion object {
         lateinit var db: SQLiteProvider
 
-        private fun resolveUIDFromPlayerUsername(playerUsername: String): Int {
-            return GameWorld.accountStorage.getAccountInfo(playerUsername).uid
-        }
+        private fun resolveUIDFromPlayerUsername(playerUsername: String): Int = GameWorld.accountStorage.getAccountInfo(playerUsername).uid
 
         private fun portLegacyKillCounterJsonToSQLite() {
             val file = File(Path(ServerConstants.DATA_PATH ?: "", "global_kill_stats.json").toString())

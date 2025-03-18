@@ -178,9 +178,7 @@ class NetLootDialogue(
     var session: FishingTrawlerSession? = null
     var rolls = 0
 
-    override fun newInstance(player: Player?): Dialogue {
-        return NetLootDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = NetLootDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         rolls = player.getAttribute("/save:ft-rolls", 0)
@@ -208,9 +206,7 @@ class NetLootDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(18237582)
-    }
+    override fun getIds(): IntArray = intArrayOf(18237582)
 }
 
 @Initializable
@@ -219,9 +215,7 @@ class NetRepairDialogue(
 ) : Dialogue(player) {
     var session: FishingTrawlerSession? = null
 
-    override fun newInstance(player: Player?): Dialogue {
-        return NetRepairDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = NetRepairDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         session = player.getAttribute("ft-session", null)
@@ -259,7 +253,5 @@ class NetRepairDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(18237583)
-    }
+    override fun getIds(): IntArray = intArrayOf(18237583)
 }

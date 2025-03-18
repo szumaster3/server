@@ -28,11 +28,7 @@ class NkukuDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return NkukuDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = NkukuDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NKUKU_3032)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NKUKU_3032)
 }

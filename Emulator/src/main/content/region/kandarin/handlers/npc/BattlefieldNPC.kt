@@ -21,9 +21,7 @@ class BattlefieldNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BattlefieldNPC(id, location)
-    }
+    ): AbstractNPC = BattlefieldNPC(id, location)
 
     override fun init() {
         super.init()
@@ -65,9 +63,7 @@ class BattlefieldNPC(
         }
     }
 
-    private fun getOpposingFaction(): IntArray {
-        return if (isGnome) TROOPERS else GNOMES
-    }
+    private fun getOpposingFaction(): IntArray = if (isGnome) TROOPERS else GNOMES
 
     private fun getRandomChat(): String {
         val chatArray = if (isGnome) GNOMES_FORCE_CHAT else TROOPERS_FORCE_CHAT
@@ -78,9 +74,7 @@ class BattlefieldNPC(
         super.finalizeDeath(killer)
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID =

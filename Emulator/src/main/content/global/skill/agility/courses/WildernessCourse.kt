@@ -393,9 +393,7 @@ class WildernessCourse
             SceneryDefinition.forId(2328).handlers["option:climb"] = this
         }
 
-        override fun createInstance(player: Player): AgilityCourse {
-            return WildernessCourse(player)
-        }
+        override fun createInstance(player: Player): AgilityCourse = WildernessCourse(player)
 
         companion object {
             private var ropeDelay = 0

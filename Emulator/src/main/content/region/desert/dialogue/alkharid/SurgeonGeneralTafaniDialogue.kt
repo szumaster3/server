@@ -89,11 +89,7 @@ class SurgeonGeneralTafaniDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SurgeonGeneralTafaniDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SurgeonGeneralTafaniDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SURGEON_GENERAL_TAFANI_961)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SURGEON_GENERAL_TAFANI_961)
 }

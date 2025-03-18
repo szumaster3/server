@@ -20,15 +20,9 @@ class BettyBBopinDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BettyBBopinDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BettyBBopinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BETTY_BBOPPIN_4553)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BETTY_BBOPPIN_4553)
 }

@@ -12,7 +12,6 @@ import org.rs.consts.Items
 
 class BarbHerbloreListener : InteractionListener {
     override fun defineListeners() {
-
         for (potion in BarbarianMix.values()) {
             /*
              * Handle cases where both items are needed.
@@ -42,7 +41,7 @@ class BarbHerbloreListener : InteractionListener {
     private fun handle(
         player: Player,
         inputPotion: Node,
-        egg: Node
+        egg: Node,
     ): Boolean {
         val potion = BarbarianMix.forId(inputPotion.id) ?: return false
         if (!getAttribute(player, BarbarianTraining.HERBLORE_START, false)) {
@@ -73,7 +72,7 @@ class BarbHerbloreListener : InteractionListener {
             sendDialogueLines(
                 player,
                 "You feel you have learned more of barbarian ways. Otto might wish",
-                "to talk to you more."
+                "to talk to you more.",
             )
         }
         return true

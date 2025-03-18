@@ -88,11 +88,7 @@ class ProgressHatDialogue(
         return true
     }
 
-    fun getPoints(index: Int): Int {
-        return player.getSavedData().activityData.getPizazzPoints(index)
-    }
+    fun getPoints(index: Int): Int = player.getSavedData().activityData.getPizazzPoints(index)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PIZZAZ_HAT_3096)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PIZZAZ_HAT_3096)
 }

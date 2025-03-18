@@ -58,19 +58,13 @@ object Fletching {
     fun isLog(id: Int): Boolean = logMap.containsKey(id)
 
     @JvmStatic
-    fun isBolt(id: Int): Boolean {
-        return Bolt.product[id] != null
-    }
+    fun isBolt(id: Int): Boolean = Bolt.product[id] != null
 
     @JvmStatic
-    fun isDart(id: Int): Boolean {
-        return Dart.product[id] != null
-    }
+    fun isDart(id: Int): Boolean = Dart.product[id] != null
 
     @JvmStatic
-    fun getItems(id: Int): Array<core.game.node.item.Item>? {
-        return getEntries(id)?.map { Item(it.id) }?.toTypedArray()
-    }
+    fun getItems(id: Int): Array<core.game.node.item.Item>? = getEntries(id)?.map { Item(it.id) }?.toTypedArray()
 
     private enum class Item(
         val id: Int,
@@ -166,6 +160,7 @@ object Fletching {
             level = 5,
             amount = 4,
         ),
+
         // Authentic.
         OGRE_COMPOSITE_BOW(
             id = Items.COMP_OGRE_BOW_4827,

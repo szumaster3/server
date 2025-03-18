@@ -53,23 +53,20 @@ object DrillDemonUtils {
     }
 
     @JvmStatic
-    fun getVarbitForId(id: Int): Int {
-        return when (id) {
+    fun getVarbitForId(id: Int): Int =
+        when (id) {
             10076 -> 1335
             10077 -> 1336
             10078 -> 1337
             10079 -> 1338
             else -> 0
         }
-    }
 
     @JvmStatic
     fun getMatTask(
         id: Int,
         player: Player,
-    ): Int {
-        return getVarbit(player, getVarbitForId(id))
-    }
+    ): Int = getVarbit(player, getVarbitForId(id))
 
     @JvmStatic
     fun cleanup(player: Player) {
@@ -90,15 +87,14 @@ object DrillDemonUtils {
     }
 
     @JvmStatic
-    fun animationForTask(task: Int): Animation {
-        return when (task) {
+    fun animationForTask(task: Int): Animation =
+        when (task) {
             DD_SIGN_SITUP -> Animation(Animations.SIT_UPS_FROM_DRILL_DEMON_EVENT_2763)
             DD_SIGN_PUSHUP -> Animation(Animations.PUSH_UPS_DRILL_DEMON_EVENT_2762)
             DD_SIGN_JUMP -> Animation(Animations.JUMPS_FROM_DRILL_DEMON_EVENT_2761)
             DD_SIGN_RUN -> Animation(Animations.RUNNING_IN_PLACE_FROM_DRILL_DEMON_EVENT_2764)
             else -> Animation(-1)
         }
-    }
 
     @JvmStatic
     fun reward(player: Player) {

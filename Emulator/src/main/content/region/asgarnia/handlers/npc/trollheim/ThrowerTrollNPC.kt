@@ -19,9 +19,7 @@ class ThrowerTrollNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ThrowerTrollNPC(id, location)
-    }
+    ): AbstractNPC = ThrowerTrollNPC(id, location)
 
     override fun setDefaultBehavior() {
         super.setAggressive(true)
@@ -56,23 +54,21 @@ class ThrowerTrollNPC(
         properties.combatPulse.style = CombatStyle.RANGE
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
-
+    override fun getIds(): IntArray = ID
 
     companion object {
-        val ID = intArrayOf(
-            NPCs.THROWER_TROLL_1101,
-            NPCs.THROWER_TROLL_1102,
-            NPCs.THROWER_TROLL_1103,
-            NPCs.THROWER_TROLL_1104,
-            NPCs.THROWER_TROLL_1105,
-            NPCs.THROWER_TROLL_1130,
-            NPCs.THROWER_TROLL_1131,
-            NPCs.THROWER_TROLL_1132,
-            NPCs.THROWER_TROLL_1133,
-            NPCs.THROWER_TROLL_1134,
-        )
+        val ID =
+            intArrayOf(
+                NPCs.THROWER_TROLL_1101,
+                NPCs.THROWER_TROLL_1102,
+                NPCs.THROWER_TROLL_1103,
+                NPCs.THROWER_TROLL_1104,
+                NPCs.THROWER_TROLL_1105,
+                NPCs.THROWER_TROLL_1130,
+                NPCs.THROWER_TROLL_1131,
+                NPCs.THROWER_TROLL_1132,
+                NPCs.THROWER_TROLL_1133,
+                NPCs.THROWER_TROLL_1134,
+            )
     }
 }

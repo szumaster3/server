@@ -45,9 +45,7 @@ class PCSpinnerNPC : AbstractNPC {
                     }
                     pulseManager.run(
                         object : MovementPulse(this, portal) {
-                            override fun pulse(): Boolean {
-                                return true
-                            }
+                            override fun pulse(): Boolean = true
                         },
                         PulseType.STANDARD,
                     )
@@ -83,9 +81,7 @@ class PCSpinnerNPC : AbstractNPC {
         )
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -113,11 +109,8 @@ class PCSpinnerNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCSpinnerNPC(id, location)
-    }
+    ): AbstractNPC = PCSpinnerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPINNER_3747, NPCs.SPINNER_3748, NPCs.SPINNER_3749, NPCs.SPINNER_3750, NPCs.SPINNER_3751)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.SPINNER_3747, NPCs.SPINNER_3748, NPCs.SPINNER_3749, NPCs.SPINNER_3750, NPCs.SPINNER_3751)
 }

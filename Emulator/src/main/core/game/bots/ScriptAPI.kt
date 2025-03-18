@@ -60,14 +60,13 @@ class ScriptAPI(
     fun distance(
         n1: Node,
         n2: Node,
-    ): Double {
-        return sqrt(
+    ): Double =
+        sqrt(
             (n1.location.x - n2.location.x.toDouble()).pow(2.0) +
                 (n2.location.y - n1.location.y.toDouble()).pow(
                     2.0,
                 ),
         )
-    }
 
     fun interact(
         bot: Player,
@@ -175,12 +174,11 @@ class ScriptAPI(
         }
     }
 
-    fun getNearestNode(entityName: String): Node? {
-        return processEvaluationList(
+    fun getNearestNode(entityName: String): Node? =
+        processEvaluationList(
             RegionManager.forId(bot.location.regionId).planes[bot.location.z].entities,
             acceptedName = listOf(entityName),
         )
-    }
 
     fun getNearestNode(
         name: String,
@@ -199,12 +197,11 @@ class ScriptAPI(
         }
     }
 
-    fun getNearestObjectByPredicate(predicate: (Node?) -> Boolean): Node? {
-        return processEvaluationList(
+    fun getNearestObjectByPredicate(predicate: (Node?) -> Boolean): Node? =
+        processEvaluationList(
             RegionManager.forId(bot.location.regionId).planes[bot.location.z].objectList,
             acceptedPredicate = predicate,
         )
-    }
 
     fun evaluateViability(
         e: Node?,
@@ -433,9 +430,7 @@ class ScriptAPI(
         val loc = bot.location.transform(norm * tiles)
         bot.pulseManager.run(
             object : MovementPulse(bot, loc) {
-                override fun pulse(): Boolean {
-                    return true
-                }
+                override fun pulse(): Boolean = true
             },
         )
     }
@@ -460,9 +455,7 @@ class ScriptAPI(
         }
     }
 
-    fun GroundItem.distance(loc: Location): Double {
-        return location.getDistance(loc)
-    }
+    fun GroundItem.distance(loc: Location): Double = location.getDistance(loc)
 
     fun teleportToGE(): Boolean {
         if (bot.isTeleBlocked) {
@@ -620,12 +613,11 @@ class ScriptAPI(
     fun saleIsBigNews(
         itemID: Int,
         amount: Int,
-    ): Boolean {
-        return ItemDefinition.forId(itemID).getAlchemyValue(true) * amount >= (
+    ): Boolean =
+        ItemDefinition.forId(itemID).getAlchemyValue(true) * amount >= (
             GameWorld.settings?.ge_announcement_limit
                 ?: 500
         )
-    }
 
     fun teleport(loc: Location): Boolean {
         if (bot.isTeleBlocked) {
@@ -811,15 +803,12 @@ class ScriptAPI(
         bot.skills.updateCombatLevel()
     }
 
-    fun getOverlay(): BottingOverlay {
-        return BottingOverlay(bot)
-    }
+    fun getOverlay(): BottingOverlay = BottingOverlay(bot)
 
-    fun checkPriceOverrides(id: Int): Int? {
-        return when (id) {
+    fun checkPriceOverrides(id: Int): Int? =
+        when (id) {
             else -> itemDefinition(id).getConfiguration(ItemConfigParser.GE_PRICE)
         }
-    }
 
     class BottingOverlay(
         val player: Player,

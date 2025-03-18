@@ -19,18 +19,10 @@ class RegionSpecification(
     }
 }
 
-fun fillWith(chunk: RegionChunk?): FillChunkContract {
-    return FillChunkContract(chunk)
-}
+fun fillWith(chunk: RegionChunk?): FillChunkContract = FillChunkContract(chunk)
 
-fun fillWith(delegate: (Int, Int, Int, Region) -> RegionChunk?): FillChunkContract {
-    return FillChunkContract(delegate)
-}
+fun fillWith(delegate: (Int, Int, Int, Region) -> RegionChunk?): FillChunkContract = FillChunkContract(delegate)
 
-fun copyOf(regionId: Int): RegionSpecContract {
-    return CloneRegionContract(regionId)
-}
+fun copyOf(regionId: Int): RegionSpecContract = CloneRegionContract(regionId)
 
-fun using(region: DynamicRegion): UseExistingRegionContract {
-    return UseExistingRegionContract(region)
-}
+fun using(region: DynamicRegion): UseExistingRegionContract = UseExistingRegionContract(region)

@@ -195,7 +195,5 @@ class SirTiffyCashienDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_TIFFY_CASHIEN_2290)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_TIFFY_CASHIEN_2290)
 }

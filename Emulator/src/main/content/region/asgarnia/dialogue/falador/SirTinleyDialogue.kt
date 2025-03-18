@@ -19,7 +19,5 @@ class SirTinleyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_TINLEY_2286)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_TINLEY_2286)
 }

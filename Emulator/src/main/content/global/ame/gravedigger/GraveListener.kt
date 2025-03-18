@@ -98,9 +98,7 @@ class GraveListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(1921, 4993, 1934, 5006))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(1921, 4993, 1934, 5006))
 
     override fun areaLeave(
         entity: Entity,
@@ -110,8 +108,9 @@ class GraveListener :
         if (entity is Player) {
             val player = entity.asPlayer()
             for (itemId in GraveUtils.coffins) {
-                if (anyInInventory(player, *GraveUtils.coffins))
+                if (anyInInventory(player, *GraveUtils.coffins)) {
                     removeItem(player, itemId)
+                }
             }
         }
     }

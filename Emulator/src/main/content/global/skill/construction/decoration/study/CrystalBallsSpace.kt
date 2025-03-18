@@ -112,13 +112,9 @@ class CrystalBallsSpace : InteractionListener {
             fun getProduct(
                 type: StaffType,
                 element: String,
-            ): Int? {
-                return VALUES.firstOrNull { it.type == type && it.name.contains(element, ignoreCase = true) }?.staffId
-            }
+            ): Int? = VALUES.firstOrNull { it.type == type && it.name.contains(element, ignoreCase = true) }?.staffId
 
-            fun getCost(staffId: Int): Item? {
-                return MAP[staffId]?.cost
-            }
+            fun getCost(staffId: Int): Item? = MAP[staffId]?.cost
         }
     }
 

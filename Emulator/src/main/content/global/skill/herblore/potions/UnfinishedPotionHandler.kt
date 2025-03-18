@@ -30,9 +30,7 @@ class UnfinishedPotionHandler : UseWithHandler(Items.VIAL_OF_WATER_227, Items.CO
                     player.pulseManager.run(HerblorePulse(player, potion.base, amount, potion))
                 }
 
-                override fun getAll(index: Int): Int {
-                    return player.inventory.getAmount(potion.base)
-                }
+                override fun getAll(index: Int): Int = player.inventory.getAmount(potion.base)
             }
         if (player.inventory.getAmount(potion.base) == 1) {
             handler.create(0, 1)

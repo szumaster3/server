@@ -755,13 +755,9 @@ class SedridorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SedridorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SedridorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SEDRIDOR_300)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SEDRIDOR_300)
 
     companion object {
         private const val TALISMAN = Items.AIR_TALISMAN_1438

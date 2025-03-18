@@ -631,9 +631,7 @@ class RedbeardFrankDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REDBEARD_FRANK_375)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REDBEARD_FRANK_375)
 
     companion object {
         private val KARAMJAN_RUM = Item(431)

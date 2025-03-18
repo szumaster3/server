@@ -65,17 +65,13 @@ class KolodionNPC(
         properties.autocastSpell = spell
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return SWING_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = SWING_HANDLER
 
     override fun construct(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return KolodionNPC(id, location, null)
-    }
+    ): AbstractNPC = KolodionNPC(id, location, null)
 
     override fun isAttackable(
         entity: Entity,
@@ -103,9 +99,8 @@ class KolodionNPC(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KOLODION_907, NPCs.KOLODION_908, NPCs.KOLODION_909, NPCs.KOLODION_910, NPCs.KOLODION_911)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.KOLODION_907, NPCs.KOLODION_908, NPCs.KOLODION_909, NPCs.KOLODION_910, NPCs.KOLODION_911)
 
     enum class KolodionType(
         val npcId: Int,
@@ -198,9 +193,7 @@ class KolodionNPC(
             )
         }
 
-        fun next(): KolodionType {
-            return values()[ordinal + 1]
-        }
+        fun next(): KolodionType = values()[ordinal + 1]
 
         companion object {
             fun forId(id: Int): KolodionType? {

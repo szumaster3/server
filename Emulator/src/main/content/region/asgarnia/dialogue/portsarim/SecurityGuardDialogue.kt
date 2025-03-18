@@ -43,7 +43,5 @@ class SecurityGuardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SECURITY_GUARD_4375)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SECURITY_GUARD_4375)
 }

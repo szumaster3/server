@@ -157,11 +157,7 @@ class HeadChefDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HeadChefDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HeadChefDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HEAD_CHEF_847)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HEAD_CHEF_847)
 }

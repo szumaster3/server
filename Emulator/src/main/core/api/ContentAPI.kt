@@ -98,9 +98,7 @@ fun hasLevelDyn(
     player: Player,
     skill: Int,
     level: Int,
-): Boolean {
-    return player.skills.getLevel(skill) >= level
-}
+): Boolean = player.skills.getLevel(skill) >= level
 
 /**
  * Checks if the player has a static level in the specified skill greater than or equal to the given level.
@@ -114,9 +112,7 @@ fun hasLevelStat(
     player: Player,
     skill: Int,
     level: Int,
-): Boolean {
-    return player.skills.getStaticLevel(skill) >= level
-}
+): Boolean = player.skills.getStaticLevel(skill) >= level
 
 /**
  * Returns the amount of a specific item in the player's inventory.
@@ -128,9 +124,7 @@ fun hasLevelStat(
 fun amountInInventory(
     player: Player,
     id: Int,
-): Int {
-    return player.inventory.getAmount(id)
-}
+): Int = player.inventory.getAmount(id)
 
 /**
  * Returns the total amount of a specific item in the player's bank, including the secondary bank if requested.
@@ -144,9 +138,7 @@ fun amountInBank(
     player: Player,
     id: Int,
     includeSecondary: Boolean = true,
-): Int {
-    return getAmountInBank(player, id) + if (includeSecondary) getAmountInBank(player, id, true) else 0
-}
+): Int = getAmountInBank(player, id) + if (includeSecondary) getAmountInBank(player, id, true) else 0
 
 /**
  * Returns the amount of a specific item in the player's bank, from either the primary or secondary bank.
@@ -194,9 +186,7 @@ fun inInventory(
     player: Player,
     id: Int,
     amount: Int = 1,
-): Boolean {
-    return player.inventory.contains(id, amount)
-}
+): Boolean = player.inventory.contains(id, amount)
 
 /**
  * Checks if the player has a specific amount of an item in their bank.
@@ -210,9 +200,7 @@ fun inBank(
     player: Player,
     id: Int,
     amount: Int = 1,
-): Boolean {
-    return amountInBank(player, id) >= amount
-}
+): Boolean = amountInBank(player, id) >= amount
 
 /**
  * Checks if the player has a specific amount of an item in their equipment.
@@ -226,9 +214,7 @@ fun inEquipment(
     player: Player,
     id: Int,
     amount: Int = 1,
-): Boolean {
-    return amountInEquipment(player, id) >= amount
-}
+): Boolean = amountInEquipment(player, id) >= amount
 
 /**
  * Checks if the player has a specific amount of an item in their equipment or inventory.
@@ -242,9 +228,7 @@ fun inEquipmentOrInventory(
     player: Player,
     id: Int,
     amount: Int = 1,
-): Boolean {
-    return inEquipment(player, id, amount) || inInventory(player, id, amount)
-}
+): Boolean = inEquipment(player, id, amount) || inInventory(player, id, amount)
 
 /**
  * Checks if the player has all specified items in their equipment.
@@ -256,9 +240,7 @@ fun inEquipmentOrInventory(
 fun allInEquipment(
     player: Player,
     vararg ids: Int,
-): Boolean {
-    return ids.all { id -> inEquipment(player, id) }
-}
+): Boolean = ids.all { id -> inEquipment(player, id) }
 
 /**
  * Checks if the player has any of the specified items in their equipment.
@@ -270,9 +252,7 @@ fun allInEquipment(
 fun anyInEquipment(
     player: Player,
     vararg ids: Int,
-): Boolean {
-    return ids.any { id -> inEquipment(player, id) }
-}
+): Boolean = ids.any { id -> inEquipment(player, id) }
 
 /**
  * Checks if the player has any of the specified items in their inventory.
@@ -284,9 +264,7 @@ fun anyInEquipment(
 fun anyInInventory(
     player: Player,
     vararg ids: Int,
-): Boolean {
-    return ids.any { id -> inInventory(player, id) }
-}
+): Boolean = ids.any { id -> inInventory(player, id) }
 
 /**
  * Returns an item from the player's equipment at a specific slot.
@@ -298,9 +276,7 @@ fun anyInInventory(
 fun getItemFromEquipment(
     player: Player,
     slot: EquipmentSlot,
-): Item? {
-    return player.equipment.get(slot.ordinal)
-}
+): Item? = player.equipment.get(slot.ordinal)
 
 /**
  * Represents an item in a container, with methods to remove or check its existence.
@@ -317,18 +293,14 @@ class ContainerisedItem(
      *
      * @return True if the item was removed successfully, false otherwise.
      */
-    fun remove(): Boolean {
-        return this.container?.remove(this.itemId.asItem()) ?: false
-    }
+    fun remove(): Boolean = this.container?.remove(this.itemId.asItem()) ?: false
 
     /**
      * Checks if the item exists in the container.
      *
      * @return True if the item exists in the container, false otherwise.
      */
-    fun exists(): Boolean {
-        return this.container != null && this.itemId > -1
-    }
+    fun exists(): Boolean = this.container != null && this.itemId > -1
 }
 
 /**
@@ -568,9 +540,7 @@ fun poofClear(npc: NPC) {
  * @param player The player whose inventory is being checked.
  * @return The number of free slots in the player's inventory.
  */
-fun freeSlots(player: Player): Int {
-    return player.inventory.freeSlots()
-}
+fun freeSlots(player: Player): Int = player.inventory.freeSlots()
 
 /**
  * Returns an animation corresponding to the given ID.
@@ -578,9 +548,7 @@ fun freeSlots(player: Player): Int {
  * @param id The ID of the animation.
  * @return The animation object corresponding to the specified ID.
  */
-fun getAnimation(id: Int): Animation {
-    return Animation(id)
-}
+fun getAnimation(id: Int): Animation = Animation(id)
 
 /**
  * Returns an animation corresponding to the given ID, with priority.
@@ -592,9 +560,7 @@ fun getAnimation(id: Int): Animation {
 fun getAnimationWithPriority(
     id: Int,
     priority: Animator.Priority,
-): Animation {
-    return Animation(id, Animator.Priority.values()[priority.ordinal])
-}
+): Animation = Animation(id, Animator.Priority.values()[priority.ordinal])
 
 /**
  * Resets the player's animation to a neutral state.
@@ -611,9 +577,7 @@ fun resetAnimator(player: Player) {
  * @param animation The animation object.
  * @return The duration of the animation in ticks.
  */
-fun animationDuration(animation: Animation): Int {
-    return animation.definition.getDurationTicks()
-}
+fun animationDuration(animation: Animation): Int = animation.definition.getDurationTicks()
 
 /**
  * Returns the number of cycles for a specific animation.
@@ -752,9 +716,7 @@ fun replaceScenery(
  * @param id The ID of the item.
  * @return The name of the item.
  */
-fun getItemName(id: Int): String {
-    return ItemDefinition.forId(id).name
-}
+fun getItemName(id: Int): String = ItemDefinition.forId(id).name
 
 /**
  * Checks if the player has space in their inventory for a item.
@@ -766,18 +728,14 @@ fun getItemName(id: Int): String {
 fun hasSpaceFor(
     player: Player,
     item: Item,
-): Boolean {
-    return player.inventory.hasSpaceFor(item)
-}
+): Boolean = player.inventory.hasSpaceFor(item)
 
 /**
  * Gets the current number of world ticks.
  *
  * @return The current world tick count.
  */
-fun getWorldTicks(): Int {
-    return GameWorld.ticks
-}
+fun getWorldTicks(): Int = GameWorld.ticks
 
 /**
  * Creates an audio object with the id and other parameters.
@@ -791,9 +749,7 @@ fun getAudio(
     id: Int,
     volume: Int = 10,
     delay: Int = 1,
-): Audio {
-    return Audio(id, volume, delay)
-}
+): Audio = Audio(id, volume, delay)
 
 /**
  * Plays a jingle for a player.
@@ -851,14 +807,13 @@ fun impact(
 fun hasOption(
     node: Node,
     option: String,
-): Boolean {
-    return when (node) {
+): Boolean =
+    when (node) {
         is NPC -> node.definition.hasAction(option)
         is Scenery -> node.definition.hasAction(option)
         is Item -> node.definition.hasAction(option)
         else -> throw IllegalArgumentException("Expected an NPC, Scenery or an Item, got ${node.javaClass.simpleName}.")
     }
-}
 
 /**
  * Animates a scenery object.
@@ -1420,9 +1375,7 @@ fun openDialogue(
  * @param id The ID of the NPC to find.
  * @return The NPC with the specified ID, or null if not found.
  */
-fun findNPC(id: Int): NPC? {
-    return Repository.findNPC(id)
-}
+fun findNPC(id: Int): NPC? = Repository.findNPC(id)
 
 /**
  * Gets the scenery at the specified location.
@@ -1436,9 +1389,7 @@ fun getScenery(
     x: Int,
     y: Int,
     z: Int,
-): Scenery? {
-    return RegionManager.getObject(z, x, y)
-}
+): Scenery? = RegionManager.getObject(z, x, y)
 
 /**
  * Gets the scenery at the specified location.
@@ -1446,9 +1397,7 @@ fun getScenery(
  * @param loc The location.
  * @return The Scenery object at the location, or null if not found.
  */
-fun getScenery(loc: Location): Scenery? {
-    return RegionManager.getObject(loc)
-}
+fun getScenery(loc: Location): Scenery? = RegionManager.getObject(loc)
 
 /**
  * Finds an NPC by location and ID.
@@ -1460,9 +1409,7 @@ fun getScenery(loc: Location): Scenery? {
 fun findNPC(
     refLoc: Location,
     id: Int,
-): NPC? {
-    return Repository.npcs.firstOrNull { it.id == id && it.location.withinDistance(refLoc) }
-}
+): NPC? = Repository.npcs.firstOrNull { it.id == id && it.location.withinDistance(refLoc) }
 
 /**
  * Finds a local NPC by its ID for the specified entity.
@@ -1474,9 +1421,7 @@ fun findNPC(
 fun findLocalNPC(
     entity: Entity,
     id: Int,
-): NPC? {
-    return RegionManager.getLocalNpcs(entity).firstOrNull { it.id == id }
-}
+): NPC? = RegionManager.getLocalNpcs(entity).firstOrNull { it.id == id }
 
 /**
  * Finds local NPCs within a specified distance of a location.
@@ -1488,9 +1433,7 @@ fun findLocalNPC(
 fun findLocalNPCs(
     location: Location,
     distance: Int,
-): MutableList<NPC> {
-    return RegionManager.getLocalNpcs(location, distance)
-}
+): MutableList<NPC> = RegionManager.getLocalNpcs(location, distance)
 
 /**
  * Finds local NPCs by their IDs for the specified entity.
@@ -1502,9 +1445,7 @@ fun findLocalNPCs(
 fun findLocalNPCs(
     entity: Entity,
     ids: IntArray,
-): List<NPC> {
-    return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
-}
+): List<NPC> = RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
 
 /**
  * Finds local NPCs by their IDs for the specified entity and within a certain distance.
@@ -1518,9 +1459,7 @@ fun findLocalNPCs(
     entity: Entity,
     ids: IntArray,
     distance: Int,
-): List<NPC> {
-    return RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
-}
+): List<NPC> = RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
 
 /**
  * Gets the zone borders for a specified region ID.
@@ -1528,9 +1467,7 @@ fun findLocalNPCs(
  * @param regionId The ID of the region.
  * @return The zone borders for the specified region.
  */
-fun getRegionBorders(regionId: Int): ZoneBorders {
-    return ZoneBorders.forRegion(regionId)
-}
+fun getRegionBorders(regionId: Int): ZoneBorders = ZoneBorders.forRegion(regionId)
 
 /**
  * Retrieves an attribute from the entity, providing a default value if not found.
@@ -1544,9 +1481,7 @@ fun <T> getAttribute(
     entity: Entity,
     attribute: String,
     default: T,
-): T {
-    return entity.getAttribute(attribute, default)
-}
+): T = entity.getAttribute(attribute, default)
 
 /**
  * Sets an attribute on the entity.
@@ -1629,9 +1564,7 @@ inline fun <reified T : RSTimer> getOrStartTimer(
 fun spawnTimer(
     identifier: String,
     vararg args: Any,
-): RSTimer? {
-    return TimerRegistry.getTimerInstance(identifier, *args)
-}
+): RSTimer? = TimerRegistry.getTimerInstance(identifier, *args)
 
 /**
  * Spawns a new timer of the specified type with the given arguments.
@@ -1639,9 +1572,7 @@ fun spawnTimer(
  * @param args The arguments to spawn the timer with.
  * @return The spawned timer.
  */
-inline fun <reified T : RSTimer> spawnTimer(vararg args: Any): T {
-    return TimerRegistry.getTimerInstance<T>(*args)!!
-}
+inline fun <reified T : RSTimer> spawnTimer(vararg args: Any): T = TimerRegistry.getTimerInstance<T>(*args)!!
 
 /**
  * Checks if a timer of the specified type is active for the given entity.
@@ -1649,9 +1580,7 @@ inline fun <reified T : RSTimer> spawnTimer(vararg args: Any): T {
  * @param entity The entity to check for an active timer.
  * @return True if the timer is active, false otherwise.
  */
-inline fun <reified T : RSTimer> hasTimerActive(entity: Entity): Boolean {
-    return getTimer<T>(entity) != null
-}
+inline fun <reified T : RSTimer> hasTimerActive(entity: Entity): Boolean = getTimer<T>(entity) != null
 
 /**
  * Retrieves the active timer of the specified type for the entity.
@@ -1659,9 +1588,7 @@ inline fun <reified T : RSTimer> hasTimerActive(entity: Entity): Boolean {
  * @param entity The entity to retrieve the timer from.
  * @return The active timer, or null if not found.
  */
-inline fun <reified T : RSTimer> getTimer(entity: Entity): T? {
-    return entity.timers.getTimer<T>()
-}
+inline fun <reified T : RSTimer> getTimer(entity: Entity): T? = entity.timers.getTimer<T>()
 
 /**
  * Removes the active timer of the specified type for the given entity.
@@ -1682,9 +1609,7 @@ inline fun <reified T : RSTimer> removeTimer(entity: Entity) {
 fun hasTimerActive(
     entity: Entity,
     identifier: String,
-): Boolean {
-    return getTimer(entity, identifier) != null
-}
+): Boolean = getTimer(entity, identifier) != null
 
 /**
  * Retrieves the timer associated with the given identifier for the specified entity.
@@ -1696,9 +1621,7 @@ fun hasTimerActive(
 fun getTimer(
     entity: Entity,
     identifier: String,
-): RSTimer? {
-    return entity.timers.getTimer(identifier)
-}
+): RSTimer? = entity.timers.getTimer(identifier)
 
 /**
  * Removes the timer associated with the given identifier from the specified entity.
@@ -1822,9 +1745,7 @@ fun location(
     x: Int,
     y: Int,
     z: Int,
-): Location {
-    return Location.create(x, y, z)
-}
+): Location = Location.create(x, y, z)
 
 /**
  * Checks if the entity is within the boundaries of a specified zone.
@@ -1836,9 +1757,7 @@ fun location(
 fun inBorders(
     entity: Entity,
     borders: ZoneBorders,
-): Boolean {
-    return borders.insideBorder(entity)
-}
+): Boolean = borders.insideBorder(entity)
 
 /**
  * Checks if the entity is within a zone defined by its southwest and northeast coordinates.
@@ -1856,9 +1775,7 @@ fun inBorders(
     swY: Int,
     neX: Int,
     neY: Int,
-): Boolean {
-    return ZoneBorders(swX, swY, neX, neY).insideBorder(entity)
-}
+): Boolean = ZoneBorders(swX, swY, neX, neY).insideBorder(entity)
 
 /**
  * Checks if the entity is within a named zone.
@@ -1870,9 +1787,7 @@ fun inBorders(
 fun inZone(
     entity: Entity,
     name: String,
-): Boolean {
-    return entity.zoneMonitor.isInZone(name)
-}
+): Boolean = entity.zoneMonitor.isInZone(name)
 
 /**
  * Heals the entity by the specified amount.
@@ -1897,9 +1812,7 @@ fun heal(
 fun getVarp(
     player: Player,
     varpIndex: Int,
-): Int {
-    return player.varpMap[varpIndex] ?: 0
-}
+): Int = player.varpMap[varpIndex] ?: 0
 
 /**
  * Retrieves the value of a varbit for the player based on the provided varbit definition.
@@ -2162,13 +2075,12 @@ fun stopWalk(entity: Entity) {
  * @param scenery The scenery object ID.
  * @return An array of child object IDs for the given scenery.
  */
-fun getChildren(scenery: Int): IntArray {
-    return SceneryDefinition
+fun getChildren(scenery: Int): IntArray =
+    SceneryDefinition
         .forId(scenery)
         .configObjectIds!!
         .filter { it != -1 }
         .toIntArray()
-}
 
 /**
  * Adjusts the charge of a node (either an Item or a Scenery object) by a specified amount.
@@ -2239,9 +2151,7 @@ fun setCharge(
  * @param player The player whose used option is to be retrieved.
  * @return The used interaction option.
  */
-fun getUsedOption(player: Player): String {
-    return player.getAttribute("interact:option", "INVALID")
-}
+fun getUsedOption(player: Player): String = player.getAttribute("interact:option", "INVALID")
 
 /**
  * Visualizes an animation and graphics effect for the specified entity.
@@ -2370,9 +2280,7 @@ fun setTempLevel(
 fun getStatLevel(
     entity: Entity,
     skill: Int,
-): Int {
-    return entity.skills.getStaticLevel(skill)
-}
+): Int = entity.skills.getStaticLevel(skill)
 
 /**
  * Retrieves the dynamic skill level for the entity, considering bonuses.
@@ -2384,9 +2292,7 @@ fun getStatLevel(
 fun getDynLevel(
     entity: Entity,
     skill: Int,
-): Int {
-    return entity.skills.getLevel(skill)
-}
+): Int = entity.skills.getLevel(skill)
 
 /**
  * Adjusts a skill level for the entity by a specified amount.
@@ -2943,9 +2849,7 @@ fun sendItemZoomOnInterface(
  * @param id The ID of the scenery.
  * @return The [SceneryDefinition] object corresponding to the ID.
  */
-fun sceneryDefinition(id: Int): SceneryDefinition {
-    return SceneryDefinition.forId(id)
-}
+fun sceneryDefinition(id: Int): SceneryDefinition = SceneryDefinition.forId(id)
 
 /**
  * Registers a map zone with specified borders.
@@ -3269,9 +3173,7 @@ fun dumpBeastOfBurden(player: Player) {
 fun getFamiliarBoost(
     player: Player,
     skill: Int,
-): Int {
-    return player.familiarManager.getBoost(skill)
-}
+): Int = player.familiarManager.getBoost(skill)
 
 /**
  * Converts an item to its noted form, if possible.
@@ -3305,9 +3207,7 @@ fun unnote(item: Item): Item {
  * @param player The player to check.
  * @return True if the player has the Seal of Passage, false otherwise.
  */
-fun hasSealOfPassage(player: Player): Boolean {
-    return inEquipmentOrInventory(player, Items.SEAL_OF_PASSAGE_9083)
-}
+fun hasSealOfPassage(player: Player): Boolean = inEquipmentOrInventory(player, Items.SEAL_OF_PASSAGE_9083)
 
 /**
  * Checks if the player has a house.
@@ -3315,9 +3215,7 @@ fun hasSealOfPassage(player: Player): Boolean {
  * @param player The player to check.
  * @return True if the player has a house, false otherwise.
  */
-fun hasHouse(player: Player): Boolean {
-    return player.houseManager.hasHouse()
-}
+fun hasHouse(player: Player): Boolean = player.houseManager.hasHouse()
 
 /**
  * Retrieves the cutscene currently assigned to the player.
@@ -3325,27 +3223,21 @@ fun hasHouse(player: Player): Boolean {
  * @param player The player to retrieve the cutscene for.
  * @return The [Cutscene] object assigned to the player, or null if none exists.
  */
-fun Player.getCutscene(): Cutscene? {
-    return getAttribute<Cutscene?>(this, Cutscene.ATTRIBUTE_CUTSCENE, null)
-}
+fun Player.getCutscene(): Cutscene? = getAttribute<Cutscene?>(this, Cutscene.ATTRIBUTE_CUTSCENE, null)
 
 /**
  * Retrieves the current cutscene stage for the player.
  *
  * @return The cutscene stage.
  */
-fun Player.getCutsceneStage(): Int {
-    return getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
-}
+fun Player.getCutsceneStage(): Int = getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
 
 /**
  * Retrieves the server configuration as a Toml object.
  *
  * @return The server configuration.
  */
-fun getServerConfig(): Toml {
-    return ServerConfigParser.tomlData ?: Toml()
-}
+fun getServerConfig(): Toml = ServerConfigParser.tomlData ?: Toml()
 
 /**
  * Attempts to find a pathable random location within a specified radius around a given center location.
@@ -3411,9 +3303,7 @@ fun getPathableCardinal(
 fun hasIronmanRestriction(
     player: Player,
     restriction: IronmanMode,
-): Boolean {
-    return player.ironmanManager.isIronman && player.ironmanManager.mode.ordinal >= restriction.ordinal
-}
+): Boolean = player.ironmanManager.isIronman && player.ironmanManager.mode.ordinal >= restriction.ordinal
 
 /**
  * Registers a hint icon for a player at the specified location.
@@ -3478,9 +3368,8 @@ fun hasHandsFree(player: Player): Boolean {
  * @param item The item ID.
  * @return The corresponding equipment slot, or null if no slot is found.
  */
-fun equipSlot(item: Int): EquipmentSlot? {
-    return EquipmentSlot.values().getOrNull(itemDefinition(item).getConfiguration(ItemConfigParser.EQUIP_SLOT, -1))
-}
+fun equipSlot(item: Int): EquipmentSlot? =
+    EquipmentSlot.values().getOrNull(itemDefinition(item).getConfiguration(ItemConfigParser.EQUIP_SLOT, -1))
 
 /**
  * Checks if the provided node is a player.
@@ -3488,9 +3377,7 @@ fun equipSlot(item: Int): EquipmentSlot? {
  * @param node The node to check.
  * @return True if the node is a player, otherwise false.
  */
-fun isPlayer(node: Node): Boolean {
-    return (node is Player)
-}
+fun isPlayer(node: Node): Boolean = (node is Player)
 
 /**
  * Adds a dialogue action to a player's dialogue queue.
@@ -3605,9 +3492,7 @@ fun apRange(
 fun hasLineOfSight(
     entity: Entity,
     target: Node,
-): Boolean {
-    return CombatSwingHandler.isProjectileClipped(entity, target, false)
-}
+): Boolean = CombatSwingHandler.isProjectileClipped(entity, target, false)
 
 /**
  * Checks if the animation for an entity has finished.
@@ -3615,9 +3500,7 @@ fun hasLineOfSight(
  * @param entity The entity to check.
  * @return True if the animation has finished, otherwise false.
  */
-fun animationFinished(entity: Entity): Boolean {
-    return entity.clocks[Clocks.ANIMATION_END] < GameWorld.ticks
-}
+fun animationFinished(entity: Entity): Boolean = entity.clocks[Clocks.ANIMATION_END] < GameWorld.ticks
 
 /**
  * Clears all scripts associated with an entity.
@@ -3788,9 +3671,7 @@ fun isDiaryComplete(
     player: Player,
     type: DiaryType,
     level: Int,
-): Boolean {
-    return player.achievementDiaryManager.getDiary(type)!!.isComplete(level)
-}
+): Boolean = player.achievementDiaryManager.getDiary(type)!!.isComplete(level)
 
 /**
  * Checks if a specific diary task is completed for a player.
@@ -3806,9 +3687,7 @@ fun hasDiaryTaskComplete(
     type: DiaryType,
     level: Int,
     index: Int,
-): Boolean {
-    return player.achievementDiaryManager.hasCompletedTask(type, level, index)
-}
+): Boolean = player.achievementDiaryManager.hasCompletedTask(type, level, index)
 
 /**
  * Checks if an entity is within a specified distance from another location.
@@ -3859,9 +3738,7 @@ fun finishDiaryTask(
 fun isPrayerActive(
     player: Player,
     type: PrayerType,
-): Boolean {
-    return player.prayer.active.contains(type)
-}
+): Boolean = player.prayer.active.contains(type)
 
 /**
  * Removes one or more interface tabs from a player's interface.
@@ -3872,9 +3749,7 @@ fun isPrayerActive(
 fun removeTabs(
     player: Player,
     vararg tabs: Int,
-) {
-    return player.interfaceManager.removeTabs(*tabs)
-}
+) = player.interfaceManager.removeTabs(*tabs)
 
 /**
  * Resets a player's camera view.

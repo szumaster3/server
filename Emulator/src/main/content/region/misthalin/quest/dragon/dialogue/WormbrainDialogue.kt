@@ -110,9 +110,7 @@ class WormbrainDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WORMBRAIN_745)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WORMBRAIN_745)
 
     fun defaultDialogue(buttonId: Int) {
         when (stage) {

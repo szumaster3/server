@@ -32,9 +32,10 @@ enum class Herbs(
     ;
 
     companion object {
-        private val herbMap = HashMap<Int, Herbs>().apply {
-            values().forEach { herbData -> put(herbData.herb.id, herbData) }
-        }
+        private val herbMap =
+            HashMap<Int, Herbs>().apply {
+                values().forEach { herbData -> put(herbData.herb.id, herbData) }
+            }
 
         fun forItem(item: Item): Herbs? = herbMap[item.id]
     }

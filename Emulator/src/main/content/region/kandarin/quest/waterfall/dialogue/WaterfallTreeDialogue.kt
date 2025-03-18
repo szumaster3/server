@@ -11,9 +11,7 @@ import core.game.world.update.flag.context.Animation
 class WaterfallTreeDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("waterfall_tree_dialogue"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("waterfall_tree_dialogue"))
 
     override fun handle(
         interfaceId: Int,

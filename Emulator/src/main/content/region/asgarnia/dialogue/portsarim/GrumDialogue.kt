@@ -42,7 +42,5 @@ class GrumDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRUM_556)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRUM_556)
 }

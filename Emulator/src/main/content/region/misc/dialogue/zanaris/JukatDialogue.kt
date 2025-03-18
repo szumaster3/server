@@ -37,7 +37,5 @@ class JukatDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JUKAT_564)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JUKAT_564)
 }

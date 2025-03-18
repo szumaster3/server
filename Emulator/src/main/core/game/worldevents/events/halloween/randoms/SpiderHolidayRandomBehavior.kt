@@ -15,9 +15,7 @@ class SpiderHolidayRandomBehavior : NPCBehavior() {
         attacker: Entity,
         style: CombatStyle,
         shouldSendMessage: Boolean,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     override fun onDeathStarted(
         self: NPC,

@@ -76,8 +76,6 @@ enum class Penguin(
     companion object {
         private val locationMap = values().associateBy { it.location.toString() }
 
-        fun forLocation(location: Location): Penguin? {
-            return locationMap[location.toString()]
-        }
+        fun forLocation(location: Location): Penguin? = locationMap[location.toString()]
     }
 }

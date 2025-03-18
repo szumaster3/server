@@ -193,7 +193,5 @@ class IfaceSettingsBuilder {
      *
      * @return The generated settings value.
      */
-    fun build(): Int {
-        return value
-    }
+    fun build(): Int = value
 }

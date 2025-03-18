@@ -111,7 +111,5 @@ class KhazardBarmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_BARMAN_259)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_BARMAN_259)
 }

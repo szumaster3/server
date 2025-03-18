@@ -100,11 +100,7 @@ class CabinBoyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CabinBoyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CabinBoyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CABIN_BOY_4539)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CABIN_BOY_4539)
 }

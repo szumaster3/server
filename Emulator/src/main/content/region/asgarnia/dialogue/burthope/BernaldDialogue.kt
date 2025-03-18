@@ -34,7 +34,5 @@ class BernaldDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BERNALD_2580)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BERNALD_2580)
 }

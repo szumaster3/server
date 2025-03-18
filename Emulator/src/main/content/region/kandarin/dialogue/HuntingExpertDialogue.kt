@@ -288,13 +288,9 @@ class HuntingExpertDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HuntingExpertDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HuntingExpertDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HUNTING_EXPERT_5113)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HUNTING_EXPERT_5113)
 
     companion object {
         private val ITEMS =

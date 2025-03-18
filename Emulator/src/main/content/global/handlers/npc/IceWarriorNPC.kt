@@ -20,9 +20,7 @@ class IceWarriorNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return IceWarriorNPC(id, location)
-    }
+    ): AbstractNPC = IceWarriorNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -34,9 +32,8 @@ class IceWarriorNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.ICE_WARRIOR_125,
         )
-    }
 }

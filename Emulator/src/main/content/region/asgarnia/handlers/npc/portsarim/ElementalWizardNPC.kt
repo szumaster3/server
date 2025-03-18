@@ -16,19 +16,26 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class ElementalWizardNPC(id: Int, location: Location?) : AbstractNPC(id, location, true) {
-
+class ElementalWizardNPC(
+    id: Int,
+    location: Location?,
+) : AbstractNPC(id, location, true) {
     init {
         properties.combatPulse.style = CombatStyle.MAGIC
     }
 
     constructor() : this(0, null)
 
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return ElementalWizardNPC(id, location)
-    }
+    override fun construct(
+        id: Int,
+        location: Location,
+        vararg objects: Any,
+    ): AbstractNPC = ElementalWizardNPC(id, location)
 
-    override fun onImpact(entity: Entity, state: BattleState) {
+    override fun onImpact(
+        entity: Entity,
+        state: BattleState,
+    ) {
         state.spell?.takeIf { isSpellType(it) }?.let {
             state.estimatedHit = 0
             state.maximumHit = 0
@@ -36,7 +43,9 @@ class ElementalWizardNPC(id: Int, location: Location?) : AbstractNPC(id, locatio
             getSkills().heal(getSkills().getStaticLevel(Skills.HITPOINTS))
 
             (state.attacker as? Player)?.let { player ->
-                player.achievementDiaryManager.getDiary(DiaryType.FALADOR)?.takeIf { !it.isComplete(0, 8) }
+                player.achievementDiaryManager
+                    .getDiary(DiaryType.FALADOR)
+                    ?.takeIf { !it.isComplete(0, 8) }
                     ?.updateTask(player, 0, 8, true)
             }
         }
@@ -74,16 +83,16 @@ class ElementalWizardNPC(id: Int, location: Location?) : AbstractNPC(id, locatio
     private val spellIndex: Int
         get() = ids.indexOf(id).takeIf { it >= 0 } ?: 0
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIRE_WIZARD_2709, NPCs.WATER_WIZARD_2710, NPCs.EARTH_WIZARD_2711, NPCs.AIR_WIZARD_2712)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.FIRE_WIZARD_2709, NPCs.WATER_WIZARD_2710, NPCs.EARTH_WIZARD_2711, NPCs.AIR_WIZARD_2712)
 
     companion object {
-        private val SPELLS = arrayOf(
-            intArrayOf(8, 7),  // Fire
-            intArrayOf(4, 7),  // Water
-            intArrayOf(6, 7),  // Earth
-            intArrayOf(1, 7)   // Air
-        )
+        private val SPELLS =
+            arrayOf(
+                intArrayOf(8, 7), // Fire
+                intArrayOf(4, 7), // Water
+                intArrayOf(6, 7), // Earth
+                intArrayOf(1, 7), // Air
+            )
     }
 }

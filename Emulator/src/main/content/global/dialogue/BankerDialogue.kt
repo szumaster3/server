@@ -116,11 +116,7 @@ class BankerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BankerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BankerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(*BankerNPC.NPC_IDS)
-    }
+    override fun getIds(): IntArray = intArrayOf(*BankerNPC.NPC_IDS)
 }

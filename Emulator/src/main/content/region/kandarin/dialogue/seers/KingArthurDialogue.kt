@@ -240,11 +240,7 @@ class KingArthurDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KingArthurDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KingArthurDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KING_ARTHUR_251)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_ARTHUR_251)
 }

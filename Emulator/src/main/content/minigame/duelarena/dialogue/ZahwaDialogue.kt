@@ -53,7 +53,5 @@ class ZahwaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAHWA_963)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAHWA_963)
 }

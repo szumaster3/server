@@ -147,13 +147,9 @@ class TrickOrTreatHandler : InteractionListener {
         ServerStore.getArchive("daily-tot-total")[player.username.lowercase()] = getDailyTrickOrTreats(player) + 1
     }
 
-    fun getDailyTrickOrTreats(player: Player): Int {
-        return ServerStore.getArchive("daily-tot-total").getInt(player.username.lowercase())
-    }
+    fun getDailyTrickOrTreats(player: Player): Int = ServerStore.getArchive("daily-tot-total").getInt(player.username.lowercase())
 
-    fun getTrickOrTreatedNPCs(player: Player): String {
-        return ServerStore.getArchive("daily-tot-npcs").getString(player.username.lowercase())
-    }
+    fun getTrickOrTreatedNPCs(player: Player): String = ServerStore.getArchive("daily-tot-npcs").getString(player.username.lowercase())
 
     fun registerNpc(
         player: Player,

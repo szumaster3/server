@@ -78,7 +78,5 @@ class CarlaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CARLA_712)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CARLA_712)
 }

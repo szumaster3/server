@@ -272,9 +272,7 @@ class GarkorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARKOR_1411)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARKOR_1411)
 
     companion object {
         val FIRST_TALK = 25

@@ -28,7 +28,5 @@ class SirVyvinDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(SIR_VYVIN_605)
-    }
+    override fun getIds(): IntArray = intArrayOf(SIR_VYVIN_605)
 }

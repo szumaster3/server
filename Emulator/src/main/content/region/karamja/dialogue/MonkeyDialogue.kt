@@ -29,7 +29,5 @@ class MonkeyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONKEY_2301)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONKEY_2301)
 }

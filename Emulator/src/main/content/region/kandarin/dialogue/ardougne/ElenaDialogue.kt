@@ -29,15 +29,9 @@ class ElenaDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ElenaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ElenaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELENA_3209)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELENA_3209)
 }

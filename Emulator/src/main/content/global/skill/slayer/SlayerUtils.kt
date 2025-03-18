@@ -36,8 +36,8 @@ object SlayerUtils {
     fun canBeAssigned(
         player: Player,
         task: Tasks,
-    ): Boolean {
-        return player
+    ): Boolean =
+        player
             .getSkills()
             .getLevel(Skills.SLAYER) >= task.levelReq &&
             !SlayerManager
@@ -47,7 +47,6 @@ object SlayerUtils {
             task.hasQuestRequirements(
                 player,
             )
-    }
 
     fun assign(
         player: Player,
@@ -70,8 +69,8 @@ object SlayerUtils {
     fun hasBroadWeaponEquipped(
         player: Player,
         state: BattleState,
-    ): Boolean {
-        return (
+    ): Boolean =
+        (
             state.weapon != null &&
                 state.weapon.id == Items.LEAF_BLADED_SPEAR_4158 ||
                 state.weapon != null &&
@@ -85,5 +84,4 @@ object SlayerUtils {
                 state.spell.spellId == 31 &&
                 player.spellBookManager.spellBook == SpellBook.MODERN.interfaceId
         )
-    }
 }

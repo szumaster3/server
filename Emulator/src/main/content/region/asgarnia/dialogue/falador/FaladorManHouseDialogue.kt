@@ -43,7 +43,5 @@ class FaladorManHouseDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAN_3223)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAN_3223)
 }

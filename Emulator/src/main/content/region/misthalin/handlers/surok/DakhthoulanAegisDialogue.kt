@@ -37,7 +37,5 @@ class DakhthoulanAegisDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAKHTHOULAN_AEGIS_5840)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAKHTHOULAN_AEGIS_5840)
 }

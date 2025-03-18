@@ -156,7 +156,5 @@ class HarlanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MELEE_TUTOR_705)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MELEE_TUTOR_705)
 }

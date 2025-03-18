@@ -18,8 +18,8 @@ import org.rs.consts.Quests
 class DroalakDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun open(vararg args: Any): Boolean {
-        return when {
+    override fun open(vararg args: Any): Boolean =
+        when {
             !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> {
                 npcl(FaceAnim.FRIENDLY, "wooo wooo")
                 stage = 31
@@ -91,7 +91,6 @@ class DroalakDialogue(
 
             else -> true
         }
-    }
 
     override fun handle(
         interfaceId: Int,
@@ -195,7 +194,5 @@ class DroalakDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DROALAK_2938)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DROALAK_2938)
 }

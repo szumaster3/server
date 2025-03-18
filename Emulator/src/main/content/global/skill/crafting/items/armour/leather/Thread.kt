@@ -8,9 +8,7 @@ import org.rs.consts.Items
 
 object Thread {
     @JvmStatic
-    fun isLastThread(player: Player): Boolean {
-        return getThread(player)?.charge?.let { it >= 1004 } ?: false
-    }
+    fun isLastThread(player: Player): Boolean = getThread(player)?.charge?.let { it >= 1004 } ?: false
 
     @JvmStatic
     fun decayThread(player: Player) {
@@ -28,7 +26,5 @@ object Thread {
     }
 
     @JvmStatic
-    fun getThread(player: Player): Item? {
-        return player.inventory[player.inventory.getSlot(Item(Items.THREAD_1734, 1))]
-    }
+    fun getThread(player: Player): Item? = player.inventory[player.inventory.getSlot(Item(Items.THREAD_1734, 1))]
 }

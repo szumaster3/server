@@ -134,7 +134,5 @@ class DoricDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DORIC_284)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DORIC_284)
 }

@@ -39,17 +39,13 @@ enum class Bones(
         private val bonemealIndex: MutableMap<Int, Bones> = mutableMapOf()
 
         @JvmStatic
-        fun forBoneMeal(itemId: Int): Bones? {
-            return bonemealIndex[itemId]
-        }
+        fun forBoneMeal(itemId: Int): Bones? = bonemealIndex[itemId]
 
         val array: IntArray
             get() = bones.keys.toIntArray()
 
         @JvmStatic
-        fun forId(itemId: Int): Bones? {
-            return bones[itemId]
-        }
+        fun forId(itemId: Int): Bones? = bones[itemId]
 
         init {
             for (bone in values()) {

@@ -45,9 +45,7 @@ class AppleMushPulse(
     override fun animate() {
     }
 
-    override fun reward(): Boolean {
-        return false
-    }
+    override fun reward(): Boolean = false
 
     companion object {
         val START_LOCATION: Location = Location.create(2914, 10193, 1)

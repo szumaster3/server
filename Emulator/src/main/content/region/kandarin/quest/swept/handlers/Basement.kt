@@ -9,13 +9,9 @@ import core.game.world.map.zone.ZoneRestriction
 import org.rs.consts.Items
 
 class Basement : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(bettyBasement, hettyBasement)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(bettyBasement, hettyBasement)
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS)
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)

@@ -41,8 +41,6 @@ enum class Log(
         }
 
         @JvmStatic
-        fun forId(id: Int): Log? {
-            return logMap[id]
-        }
+        fun forId(id: Int): Log? = logMap[id]
     }
 }

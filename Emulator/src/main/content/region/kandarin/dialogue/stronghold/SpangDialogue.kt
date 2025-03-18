@@ -80,11 +80,7 @@ class SpangDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SpangDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SpangDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SPANG_4575)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SPANG_4575)
 }

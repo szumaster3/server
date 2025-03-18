@@ -28,9 +28,7 @@ class SnowGlobeHandler : OptionHandler() {
         player: Player,
         node: Node,
         option: String,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     inner class SnowGlobeInterface : ComponentPlugin() {
         override fun newInstance(arg: Any?): Plugin<Any?> {

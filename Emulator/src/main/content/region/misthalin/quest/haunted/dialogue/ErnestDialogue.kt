@@ -57,7 +57,5 @@ class ErnestDialogue(
         finishQuest(player, Quests.ERNEST_THE_CHICKEN)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ERNEST_287)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ERNEST_287)
 }

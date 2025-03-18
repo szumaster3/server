@@ -53,11 +53,7 @@ class VolfOlasfsonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return VolfOlasfsonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = VolfOlasfsonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.VOLF_OLAFSON_3695)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.VOLF_OLAFSON_3695)
 }

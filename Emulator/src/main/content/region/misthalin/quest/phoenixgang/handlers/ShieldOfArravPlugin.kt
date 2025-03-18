@@ -211,18 +211,15 @@ class ShieldOfArravPlugin : OptionHandler() {
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return if (node is GroundItem) true else node !is Item
-    }
+    ): Boolean = if (node is GroundItem) true else node !is Item
 
     override fun getDestination(
         n: Node,
         node: Node,
-    ): Location? {
-        return if (node is Scenery && node.name.lowercase().contains("door")) {
+    ): Location? =
+        if (node is Scenery && node.name.lowercase().contains("door")) {
             DoorActionHandler.getDestination(n as Player, node)
         } else {
             null
         }
-    }
 }

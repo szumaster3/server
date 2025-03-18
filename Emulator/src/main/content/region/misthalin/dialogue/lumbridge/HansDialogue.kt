@@ -77,7 +77,5 @@ class HansDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HANS_0)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HANS_0)
 }

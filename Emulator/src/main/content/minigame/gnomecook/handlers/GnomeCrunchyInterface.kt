@@ -1,12 +1,11 @@
 package content.minigame.gnomecook.handlers
 
 import core.api.*
-import core.game.node.entity.skill.Skills
 import core.game.interaction.InterfaceListener
+import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
 
 class GnomeCrunchyInterface : InterfaceListener {
-
     private val gnomeCrunchyInterface = 437
 
     override fun defineInterfaceListeners() {
@@ -20,13 +19,14 @@ class GnomeCrunchyInterface : InterfaceListener {
 
         on(gnomeCrunchyInterface) { player, _, _, buttonID, _, _ ->
             var hasAll = true
-            val crunchy: HalfMadeCrunchy? = when (buttonID) {
-                3 -> HalfMadeCrunchy.TOAD
-                10 -> HalfMadeCrunchy.SPICY
-                17 -> HalfMadeCrunchy.WORM
-                26 -> HalfMadeCrunchy.CHOCCHIP
-                else -> null
-            }
+            val crunchy: HalfMadeCrunchy? =
+                when (buttonID) {
+                    3 -> HalfMadeCrunchy.TOAD
+                    10 -> HalfMadeCrunchy.SPICY
+                    17 -> HalfMadeCrunchy.WORM
+                    26 -> HalfMadeCrunchy.CHOCCHIP
+                    else -> null
+                }
 
             if (crunchy != null) {
                 if (getStatLevel(player, Skills.COOKING) < crunchy.reqLevel) {
@@ -67,7 +67,7 @@ class GnomeCrunchyInterface : InterfaceListener {
     internal enum class HalfMadeCrunchy(
         val product: Int,
         val reqLevel: Int,
-        vararg val requiredItems: Int
+        vararg val requiredItems: Int,
     ) {
         CHOCCHIP(Items.HALF_MADE_CRUNCHY_9577, 16, Items.CHOCOLATE_BAR_1973, Items.CHOCOLATE_BAR_1973),
         SPICY(Items.HALF_MADE_CRUNCHY_9579, 12, Items.EQUA_LEAVES_2128, Items.EQUA_LEAVES_2128),

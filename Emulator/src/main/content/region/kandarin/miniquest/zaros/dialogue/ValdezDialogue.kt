@@ -257,11 +257,7 @@ class ValdezDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ValdezDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ValdezDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYSTERIOUS_GHOST_2399)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYSTERIOUS_GHOST_2399)
 }

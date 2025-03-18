@@ -41,11 +41,7 @@ class InnKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return InnKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = InnKeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.INN_KEEPER_2177)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.INN_KEEPER_2177)
 }

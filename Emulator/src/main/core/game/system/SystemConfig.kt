@@ -42,9 +42,7 @@ class SystemConfig {
         }
     }
 
-    fun validLogin(player: Player?): Boolean {
-        return true
-    }
+    fun validLogin(player: Player?): Boolean = true
 
     val isDoubleExp: Boolean
 
@@ -75,17 +73,14 @@ class SystemConfig {
         return split
     }
 
-    fun isBetaUser(name: String): Boolean {
-        return betaUsers.contains(name)
-    }
+    fun isBetaUser(name: String): Boolean = betaUsers.contains(name)
 
-    fun <T> getConfig(key: String): T? {
-        return if (!configs.containsKey(key)) {
+    fun <T> getConfig(key: String): T? =
+        if (!configs.containsKey(key)) {
             null
         } else {
             configs[key] as T?
         }
-    }
 
     fun <T> getConfig(
         string: String,
@@ -99,7 +94,5 @@ class SystemConfig {
         }
     }
 
-    fun getConfigs(): Map<String, Any?> {
-        return configs
-    }
+    fun getConfigs(): Map<String, Any?> = configs
 }

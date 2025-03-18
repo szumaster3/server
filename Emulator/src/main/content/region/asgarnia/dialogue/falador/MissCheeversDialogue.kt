@@ -19,7 +19,5 @@ class MissCheeversDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MISS_CHEEVERS_2288)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISS_CHEEVERS_2288)
 }

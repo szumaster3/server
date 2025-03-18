@@ -259,6 +259,5 @@ object EvilTwinUtils {
         }
     }
 
-    private fun getMollyId(hash: Int): Int =
-        3892 + (hash and 0xFF) + (((hash shr 16) and 0xFF) * EvilTwinColors.values().size)
+    private fun getMollyId(hash: Int): Int = 3892 + (hash and 0xFF) + (((hash shr 16) and 0xFF) * EvilTwinColors.values().size)
 }

@@ -110,11 +110,7 @@ class BarmanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BarmanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BarmanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARMAN_2179)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARMAN_2179)
 }

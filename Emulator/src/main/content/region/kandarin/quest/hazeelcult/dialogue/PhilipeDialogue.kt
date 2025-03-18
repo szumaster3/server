@@ -107,7 +107,5 @@ class PhilipeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PHILIPE_CARNILLEAN_888)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PHILIPE_CARNILLEAN_888)
 }

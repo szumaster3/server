@@ -50,11 +50,7 @@ class FinnDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FinnDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FinnDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FINN_3922)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FINN_3922)
 }

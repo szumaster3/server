@@ -28,12 +28,10 @@ class RikiTheSculptorsDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RikiTheSculptorsDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RikiTheSculptorsDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.RIKI_THE_SCULPTORS_MODEL_2143,
             NPCs.RIKI_THE_SCULPTORS_MODEL_2144,
             NPCs.RIKI_THE_SCULPTORS_MODEL_2145,
@@ -43,5 +41,4 @@ class RikiTheSculptorsDialogue(
             NPCs.RIKI_THE_SCULPTORS_MODEL_2149,
             NPCs.RIKI_THE_SCULPTORS_MODEL_2150,
         )
-    }
 }

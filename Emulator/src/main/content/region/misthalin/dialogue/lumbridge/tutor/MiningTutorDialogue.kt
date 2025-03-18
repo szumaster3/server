@@ -96,7 +96,5 @@ class MiningTutorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MINING_TUTOR_4902)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINING_TUTOR_4902)
 }

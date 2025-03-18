@@ -31,11 +31,7 @@ class GreengrocerMiscDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GreengrocerMiscDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GreengrocerMiscDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GREENGROCER_1394)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GREENGROCER_1394)
 }

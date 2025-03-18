@@ -138,7 +138,5 @@ class BonzoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BONZO_225)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BONZO_225)
 }

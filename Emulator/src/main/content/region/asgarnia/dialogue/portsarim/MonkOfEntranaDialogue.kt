@@ -100,8 +100,8 @@ class MonkOfEntranaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.MONK_OF_ENTRANA_657,
             NPCs.MONK_OF_ENTRANA_658,
             NPCs.MONK_OF_ENTRANA_2728,
@@ -109,5 +109,4 @@ class MonkOfEntranaDialogue(
             NPCs.MONK_OF_ENTRANA_2730,
             NPCs.MONK_OF_ENTRANA_2731,
         )
-    }
 }

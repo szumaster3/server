@@ -17,13 +17,9 @@ class WomanAtArmsNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return WomanAtArmsNPC(id, location)
-    }
+    ): AbstractNPC = WomanAtArmsNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WOMAN_AT_ARMS_1509)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WOMAN_AT_ARMS_1509)
 
     companion object;
 

@@ -47,9 +47,7 @@ class SlayerTowerZone :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(ZoneBorders(3401, 3527, 3459, 3585))

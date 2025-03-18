@@ -202,7 +202,5 @@ class GeotrixDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GETORIX_7602)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GETORIX_7602)
 }

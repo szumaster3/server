@@ -101,22 +101,20 @@ class PlayerPeltOptionListener : InteractionListener {
             return false
         }
 
-        private fun getPeltableAnim(id: Int): Int {
-            return when (id) {
+        private fun getPeltableAnim(id: Int): Int =
+            when (id) {
                 Items.SNOWBALL_11951 -> 7530
                 Items.ROTTEN_TOMATO_2518 -> 385
                 else -> -1
             }
-        }
     }
 
-    private fun getPeltableGfx(id: Int): IntArray {
-        return when (id) {
+    private fun getPeltableGfx(id: Int): IntArray =
+        when (id) {
             Items.SNOWBALL_11951 -> intArrayOf(-1, 861, 1282)
             Items.ROTTEN_TOMATO_2518 -> intArrayOf(-1, 29, 31)
             else -> IntArray(3) { -1 }
         }
-    }
 
     private fun getPeltable(player: Player): Item? {
         val equipped = getItemFromEquipment(player, EquipmentSlot.WEAPON) ?: return null

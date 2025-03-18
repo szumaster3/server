@@ -463,9 +463,7 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.CloseIface(player)
-        }
+        ): Packet = Packet.CloseIface(player)
     },
     IF_GROUNDITEM_ACTION(73) {
         override fun decode(
@@ -589,25 +587,19 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.SceneryExamine(player, buffer.leShortA)
-        }
+        ): Packet = Packet.SceneryExamine(player, buffer.leShortA)
     },
     EXAMINE_ITEM(92) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.ItemExamine(player, buffer.leShortA)
-        }
+        ): Packet = Packet.ItemExamine(player, buffer.leShortA)
     },
     EXAMINE_NPC(72) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.NpcExamine(player, buffer.short)
-        }
+        ): Packet = Packet.NpcExamine(player, buffer.short)
     },
 
     CLAN_JOIN(104) {
@@ -643,33 +635,25 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.AddFriend(player, StringUtils.longToString(buffer.long))
-        }
+        ): Packet = Packet.AddFriend(player, StringUtils.longToString(buffer.long))
     },
     REMOVE_FRIEND(57) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.RemoveFriend(player, StringUtils.longToString(buffer.long))
-        }
+        ): Packet = Packet.RemoveFriend(player, StringUtils.longToString(buffer.long))
     },
     ADD_IGNORE(34) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.AddIgnore(player, StringUtils.longToString(buffer.long))
-        }
+        ): Packet = Packet.AddIgnore(player, StringUtils.longToString(buffer.long))
     },
     REMOVE_IGNORE(213) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.RemoveIgnore(player, StringUtils.longToString(buffer.long))
-        }
+        ): Packet = Packet.RemoveIgnore(player, StringUtils.longToString(buffer.long))
     },
     PRIVATE_MESSAGE(201) {
         override fun decode(
@@ -686,9 +670,7 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.TrackingFocus(player, buffer.get() == 1)
-        }
+        ): Packet = Packet.TrackingFocus(player, buffer.get() == 1)
     },
     CAMERA_MOVEMENT(21) {
         override fun decode(
@@ -716,9 +698,7 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.TrackingAfkTimeout(player)
-        }
+        ): Packet = Packet.TrackingAfkTimeout(player)
     },
     MOUSE_CLICKED(75) {
         override fun decode(
@@ -779,25 +759,19 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.InputPromptResponse(player, StringUtils.longToString(buffer.long))
-        }
+        ): Packet = Packet.InputPromptResponse(player, StringUtils.longToString(buffer.long))
     },
     INPUT_LONG_STRING_RESPONSE(65) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.InputPromptResponse(player, buffer.string)
-        }
+        ): Packet = Packet.InputPromptResponse(player, buffer.string)
     },
     INPUT_INT_RESPONSE(23) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.InputPromptResponse(player, buffer.int)
-        }
+        ): Packet = Packet.InputPromptResponse(player, buffer.int)
     },
 
     GE_SET_OFFER_ITEM(111) {
@@ -830,14 +804,13 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.ChatSetting(
+        ): Packet =
+            Packet.ChatSetting(
                 player,
                 buffer.get(),
                 buffer.get(),
                 buffer.get(),
             )
-        }
     },
     CHAT_MESSAGE(237) {
         override fun decode(
@@ -885,9 +858,7 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.Ping(player)
-        }
+        ): Packet = Packet.Ping(player)
     },
     QUICKCHAT(167) {
         override fun decode(
@@ -949,17 +920,13 @@ enum class Decoders530(
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.NoProcess()
-        }
+        ): Packet = Packet.NoProcess()
     },
     MAP_REBUILD_FINISHED(110) {
         override fun decode(
             player: Player,
             buffer: IoBuffer,
-        ): Packet {
-            return Packet.NoProcess()
-        }
+        ): Packet = Packet.NoProcess()
     },
     PLAYER_PREFS_UPDATE(98) {
         override fun decode(
@@ -996,9 +963,7 @@ enum class Decoders530(
         buffer: IoBuffer,
     ): Packet
 
-    fun deHash(ifHash: Int): Pair<Int, Int> {
-        return Pair(ifHash shr 16, ifHash and 0xFFFF)
-    }
+    fun deHash(ifHash: Int): Pair<Int, Int> = Pair(ifHash shr 16, ifHash and 0xFFFF)
 
     fun decodeWalkInformation(
         buffer: IoBuffer,

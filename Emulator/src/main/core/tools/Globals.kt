@@ -26,8 +26,8 @@ private val testData =
         "This %ffffff is an arbitrary hex string.",
     )
 
-fun colorize(line: String): String {
-    return line
+fun colorize(line: String): String =
+    line
         .replace("%BK", BLACK)
         .replace("%R", RED)
         .replace("%O", ORANGE)
@@ -44,22 +44,15 @@ fun colorize(line: String): String {
         .replace("%DP", DARK_PURPLE)
         .replace(pattern) { matchResult -> "<col=${matchResult.value.substring(1)}>" }
         .append("</col>") + " "
-}
 
 fun colorize(
     line: String,
     hexColor: String,
-): String {
-    return line.prepend("<col=$hexColor>").append("</col>")
-}
+): String = line.prepend("<col=$hexColor>").append("</col>")
 
-fun String.append(line: String): String {
-    return this + line
-}
+fun String.append(line: String): String = this + line
 
-fun String.prepend(line: String): String {
-    return line + this
-}
+fun String.prepend(line: String): String = line + this
 
 fun String.shuffle(): String {
     var new = ""

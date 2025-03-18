@@ -10,7 +10,5 @@ interface Job {
 
     val employer: Employers
 
-    fun getAmount(): Int {
-        return RandomFunction.random(lower, upper + 1)
-    }
+    fun getAmount(): Int = RandomFunction.random(lower, upper + 1)
 }

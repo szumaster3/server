@@ -40,7 +40,5 @@ class FaladorWomenParkDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WOMAN_3226)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WOMAN_3226)
 }

@@ -17,13 +17,9 @@ class DalcianFangNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DalcianFangNPC(id, location)
-    }
+    ): AbstractNPC = DalcianFangNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DALCIAN_FANG_3633)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DALCIAN_FANG_3633)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

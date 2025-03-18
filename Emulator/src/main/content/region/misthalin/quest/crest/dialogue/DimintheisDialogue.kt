@@ -328,7 +328,5 @@ class DimintheisDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DIMINTHEIS_8171)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DIMINTHEIS_8171)
 }

@@ -317,9 +317,7 @@ enum class EnchantedJewellery(
         }
     }
 
-    private fun isSlayerRing(item: Item): Boolean {
-        return item.id in RING_OF_SLAYING.ids
-    }
+    private fun isSlayerRing(item: Item): Boolean = item.id in RING_OF_SLAYING.ids
 
     private fun slayerProgressDialogue(player: Player) {
         val slayerManager = SlayerManager.getInstance(player)
@@ -346,24 +344,16 @@ enum class EnchantedJewellery(
     private fun canTeleport(
         player: Player,
         item: Item,
-    ): Boolean {
-        return player.zoneMonitor.teleport(1, item)
-    }
+    ): Boolean = player.zoneMonitor.teleport(1, item)
 
-    private fun getNext(index: Int): Int {
-        return if (index + 1 > ids.size - 1) ids.last() else ids[index + 1]
-    }
+    private fun getNext(index: Int): Int = if (index + 1 > ids.size - 1) ids.last() else ids[index + 1]
 
-    private fun getLocation(index: Int): Location {
-        return if (index >= locations.size) locations.last() else locations[index]
-    }
+    private fun getLocation(index: Int): Location = if (index >= locations.size) locations.last() else locations[index]
 
-    fun getJewelleryName(item: Item): String {
-        return item.name.replace(""" ?\(t?[0-9]?\)""".toRegex(), "")
-    }
+    fun getJewelleryName(item: Item): String = item.name.replace(""" ?\(t?[0-9]?\)""".toRegex(), "")
 
-    fun getJewelleryType(item: Item): String {
-        return when {
+    fun getJewelleryType(item: Item): String =
+        when {
             this == GAMES_NECKLACE -> "games necklace"
             this == DIGSITE_PENDANT -> "digsite pendant"
             this == COMBAT_BRACELET -> "combat bracelet"
@@ -373,13 +363,10 @@ enum class EnchantedJewellery(
             this == RING_OF_DUELING -> "ring of dueling"
             else -> item.name.split(" ")[0].lowercase()
         }
-    }
 
     fun isLastItemIndex(index: Int): Boolean = index == ids.size - 1
 
-    fun getItemIndex(item: Item): Int {
-        return ids.indexOf(item.id)
-    }
+    fun getItemIndex(item: Item): Int = ids.indexOf(item.id)
 
     companion object {
         private val ANIMATION = Animation(9603)

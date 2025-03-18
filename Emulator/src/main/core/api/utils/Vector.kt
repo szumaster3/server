@@ -35,9 +35,7 @@ class Vector(
      *
      * @return The magnitude of the vector.
      */
-    fun magnitude(): Double {
-        return sqrt(x.pow(2.0) + y.pow(2.0))
-    }
+    fun magnitude(): Double = sqrt(x.pow(2.0) + y.pow(2.0))
 
     /**
      * Unary minus operator. Negates both components of the vector.
@@ -52,9 +50,7 @@ class Vector(
      * @param other The scalar value to multiply the vector with.
      * @return A new vector resulting from the multiplication.
      */
-    operator fun times(other: Double): Vector {
-        return Vector(this.x * other, this.y * other)
-    }
+    operator fun times(other: Double): Vector = Vector(this.x * other, this.y * other)
 
     /**
      * Multiplies the vector by a scalar value (Int).
@@ -62,9 +58,7 @@ class Vector(
      * @param other The scalar value to multiply the vector with.
      * @return A new vector resulting from the multiplication.
      */
-    operator fun times(other: Int): Vector {
-        return Vector(this.x * other, this.y * other)
-    }
+    operator fun times(other: Int): Vector = Vector(this.x * other, this.y * other)
 
     /**
      * Adds another vector to the current vector.
@@ -72,9 +66,7 @@ class Vector(
      * @param other The vector to add.
      * @return A new vector resulting from the addition.
      */
-    operator fun plus(other: Vector): Vector {
-        return Vector(this.x + other.x, this.y + other.y)
-    }
+    operator fun plus(other: Vector): Vector = Vector(this.x + other.x, this.y + other.y)
 
     /**
      * Subtracts another vector from the current vector.
@@ -82,27 +74,21 @@ class Vector(
      * @param other The vector to subtract.
      * @return A new vector resulting from the subtraction.
      */
-    operator fun minus(other: Vector): Vector {
-        return Vector(this.x - other.x, this.y - other.y)
-    }
+    operator fun minus(other: Vector): Vector = Vector(this.x - other.x, this.y - other.y)
 
     /**
      * Returns a string representation of the vector in the form "{x, y}".
      *
      * @return A string representing the vector.
      */
-    override fun toString(): String {
-        return "{$x,$y}"
-    }
+    override fun toString(): String = "{$x,$y}"
 
     /**
      * Inverts the vector by negating both components.
      *
      * @return A new vector with the negated components.
      */
-    fun invert(): Vector {
-        return -this
-    }
+    fun invert(): Vector = -this
 
     /**
      * Converts the vector to a [Location] object. The x and y components are floored to integers,
@@ -111,9 +97,7 @@ class Vector(
      * @param plane The plane value to be used in the Location (default is 0).
      * @return A Location object representing the vector's position.
      */
-    fun toLocation(plane: Int = 0): Location {
-        return Location.create(floor(x).toInt(), floor(y).toInt(), plane)
-    }
+    fun toLocation(plane: Int = 0): Location = Location.create(floor(x).toInt(), floor(y).toInt(), plane)
 
     /**
      * Converts the vector to a [Direction] based on its normalized direction.

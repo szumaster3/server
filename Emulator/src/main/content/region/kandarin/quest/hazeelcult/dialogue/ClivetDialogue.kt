@@ -355,7 +355,5 @@ class ClivetDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CLIVET_893)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CLIVET_893)
 }

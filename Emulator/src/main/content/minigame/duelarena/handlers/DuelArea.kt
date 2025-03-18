@@ -433,9 +433,7 @@ class DuelArea
             return super.death(e, killer)
         }
 
-        fun isValidLocation(location: Location?): Boolean {
-            return isTeleportPermitted(location!!) && getObject(location) == null
-        }
+        fun isValidLocation(location: Location?): Boolean = isTeleportPermitted(location!!) && getObject(location) == null
 
         fun checkAttack(
             player: Player,
@@ -511,18 +509,12 @@ class DuelArea
                             return true
                         }
 
-                        override fun isWalk(): Boolean {
-                            return false
-                        }
+                        override fun isWalk(): Boolean = false
 
                         @Throws(Throwable::class)
-                        override fun newInstance(arg: Any?): Plugin<Any> {
-                            return this
-                        }
+                        override fun newInstance(arg: Any?): Plugin<Any> = this
 
-                        override fun isDelayed(player: Player): Boolean {
-                            return false
-                        }
+                        override fun isDelayed(player: Player): Boolean = false
                     },
                 )
 

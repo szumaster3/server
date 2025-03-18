@@ -60,7 +60,7 @@ class PriestDoorDialogue(
                     "$BLUE(Psst... Hey... Who's Roald? Who's Drezel?)$RED (Uh... isn't Drezel that",
                     "${RED}dude upstairs? Oh, wait, Roald's the King of Varrock right?)$BLUE (He is???",
                     "${BLUE}Aw man... Hey, you deal with this okay?) He's just coming! Wait a",
-                    "${BLUE}second!${RED} Hello, my name is Drevil.$BLUE (Drezel!)$RED I mean Drezel.",
+                    "${BLUE}second!$RED Hello, my name is Drevil.$BLUE (Drezel!)$RED I mean Drezel.",
                 )
                 stage = 3
             }
@@ -124,7 +124,7 @@ class PriestDoorDialogue(
 
             12 -> {
                 interpreter.sendDialogue(
-                    "${BLUE}HAHAHAHAHA! Really? Hey, that's great!${RED} Yeah thanks a lot buddy!",
+                    "${BLUE}HAHAHAHAHA! Really? Hey, that's great!$RED Yeah thanks a lot buddy!",
                     "${RED}HAHAHAHAHAHA",
                 )
                 stage = 13
@@ -153,11 +153,7 @@ class PriestDoorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PriestDoorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PriestDoorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(54584)
-    }
+    override fun getIds(): IntArray = intArrayOf(54584)
 }

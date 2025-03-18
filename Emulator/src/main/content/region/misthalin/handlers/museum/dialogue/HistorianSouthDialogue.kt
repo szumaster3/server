@@ -121,9 +121,7 @@ class HistorianSouthDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NATURAL_HISTORIAN_5968)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NATURAL_HISTORIAN_5968)
 }
 
 class TalkAboutTerrorBirds : DialogueFile() {

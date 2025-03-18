@@ -58,16 +58,12 @@ class GoblinDiplomacyPlugin : OptionHandler() {
         return true
     }
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return node !is Item
-    }
+    ): Boolean = node !is Item
 
     class GoblinMailPlugin : UseWithHandler(1763, 1769, 1765, 1771, 1767, 1773, 4622, 11808, 6955) {
         override fun newInstance(arg: Any?): Plugin<Any> {

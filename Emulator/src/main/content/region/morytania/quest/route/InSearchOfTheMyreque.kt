@@ -75,7 +75,5 @@ class InSearchOfTheMyreque :
         drawReward(player, "2 Quest Points", ln++)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

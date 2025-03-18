@@ -134,13 +134,9 @@ enum class FishingSpot(
             }
         }
 
-        fun forId(npcID: Int): FishingSpot? {
-            return spotMap[npcID]
-        }
+        fun forId(npcID: Int): FishingSpot? = spotMap[npcID]
 
-        fun getAllIds(): IntArray {
-            return array.toIntArray()
-        }
+        fun getAllIds(): IntArray = array.toIntArray()
     }
 
     fun getOptionByName(option: String): FishingOption? {

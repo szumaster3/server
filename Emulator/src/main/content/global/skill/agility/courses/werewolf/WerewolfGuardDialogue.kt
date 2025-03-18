@@ -64,7 +64,5 @@ class WerewolfGuardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WEREWOLF_1665)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WEREWOLF_1665)
 }

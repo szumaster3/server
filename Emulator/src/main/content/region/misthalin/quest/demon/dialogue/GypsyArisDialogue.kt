@@ -579,9 +579,7 @@ class GypsyArisDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GYPSY_ARIS_882)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GYPSY_ARIS_882)
 
     companion object {
         private val COINS = Item(995, 1)

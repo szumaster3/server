@@ -33,13 +33,9 @@ val rebornWarriors =
 class PhoenixLair : MapArea {
     private val spawnedNPC = mutableListOf<NPC>()
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders.forRegion(13905), ZoneBorders.forRegion(14161))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(13905), ZoneBorders.forRegion(14161))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

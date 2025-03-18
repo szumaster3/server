@@ -54,11 +54,7 @@ class TzhaarMejJalDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TzhaarMejJalDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TzhaarMejJalDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("firecape-exchange"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("firecape-exchange"))
 }

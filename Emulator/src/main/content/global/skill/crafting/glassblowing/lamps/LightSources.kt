@@ -110,8 +110,8 @@ enum class LightSources(
     ;
 
     companion object {
-        fun forId(id: Int): LightSources? {
-            return when (id) {
+        fun forId(id: Int): LightSources? =
+            when (id) {
                 36, 33 -> WHITE_CANDLE
                 38, 32 -> BLACK_CANDLE
                 596, 594 -> TORCH
@@ -126,6 +126,5 @@ enum class LightSources(
                 9064, 9065 -> EMERALD_LANTERN
                 else -> null
             }
-        }
     }
 }

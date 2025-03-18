@@ -91,12 +91,10 @@ class LumbridgeGuardsmanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LumbridgeGuardsmanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LumbridgeGuardsmanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.GUARDSMAN_BRAWN_7867,
             NPCs.GUARDSMAN_BRAWN_7887,
             NPCs.GUARDSMAN_DANTE_7865,
@@ -108,5 +106,4 @@ class LumbridgeGuardsmanDialogue(
             NPCs.GUARDSMAN_PEALE_7890,
             NPCs.GUARDSMAN_PEALE_7904,
         )
-    }
 }

@@ -24,9 +24,7 @@ class AvaDialogue(
 ) : Dialogue(player) {
     private var quest: Quest? = null
 
-    override fun newInstance(player: Player): Dialogue {
-        return AvaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = AvaDialogue(player)
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
@@ -1046,9 +1044,7 @@ class AvaDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AVA_5198, NPCs.AVA_5199)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AVA_5198, NPCs.AVA_5199)
 
     companion object {
         private val UNDEAD_CHICKENS = Item(Items.UNDEAD_CHICKEN_10487, 2)

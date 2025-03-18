@@ -138,7 +138,5 @@ class RaccoonDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(*babyRaccoon, *adultRaccoon)
-    }
+    override fun getIds(): IntArray = intArrayOf(*babyRaccoon, *adultRaccoon)
 }

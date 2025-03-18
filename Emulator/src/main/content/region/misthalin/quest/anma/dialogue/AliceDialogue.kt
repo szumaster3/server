@@ -204,7 +204,5 @@ class AliceDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALICE_2307)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALICE_2307)
 }

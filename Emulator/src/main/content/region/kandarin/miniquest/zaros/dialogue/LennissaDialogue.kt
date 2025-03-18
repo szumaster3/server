@@ -332,11 +332,7 @@ class LennissaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LennissaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LennissaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MYSTERIOUS_GHOST_2401)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MYSTERIOUS_GHOST_2401)
 }

@@ -92,11 +92,7 @@ class ReloboBlinyoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ReloboBlinyoDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ReloboBlinyoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RELOBO_BLINYO_LOGS_6526)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RELOBO_BLINYO_LOGS_6526)
 }

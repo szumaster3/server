@@ -50,11 +50,7 @@ class SarbleDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SarbleDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SarbleDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SARBLE_4599)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARBLE_4599)
 }

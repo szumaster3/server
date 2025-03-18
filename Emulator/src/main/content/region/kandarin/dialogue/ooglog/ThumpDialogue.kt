@@ -46,9 +46,7 @@ class ThumpDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ThumpDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ThumpDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(7101)
 }

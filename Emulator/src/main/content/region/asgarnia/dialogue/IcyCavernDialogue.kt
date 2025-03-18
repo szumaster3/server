@@ -17,9 +17,7 @@ class IcyCavernDialogue : Dialogue {
     constructor()
     constructor(player: Player?) : super(player)
 
-    override fun newInstance(player: Player): Dialogue {
-        return IcyCavernDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = IcyCavernDialogue(player)
 
     override fun open(vararg args: Any): Boolean {
         sendDialogueLines(player, "STOP! The creatures in this cave are VERY Dangerous. Are you", "sure you want to enter?")
@@ -27,29 +25,31 @@ class IcyCavernDialogue : Dialogue {
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 options("Yes, I'm not afraid of death!", "No thanks, I don't want to die!")
                 stage = 1
             }
 
-            1 -> when (buttonId) {
-                1 -> {
-                    end()
-                    player.properties.teleportLocation = LOCATION
-                    sendMessage(player, "You venture into the icy cavern.")
-                }
+            1 ->
+                when (buttonId) {
+                    1 -> {
+                        end()
+                        player.properties.teleportLocation = LOCATION
+                        sendMessage(player, "You venture into the icy cavern.")
+                    }
 
-                2 -> end()
-            }
+                    2 -> end()
+                }
         }
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(ID)
 
     companion object {
         private const val ID: Int = 238284

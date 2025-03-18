@@ -37,11 +37,7 @@ class RunvastrDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RunvastrDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RunvastrDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUNVASTR_2190)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUNVASTR_2190)
 }

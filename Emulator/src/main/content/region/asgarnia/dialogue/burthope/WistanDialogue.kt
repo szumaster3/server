@@ -44,7 +44,5 @@ class WistanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WISTAN_1083)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WISTAN_1083)
 }

@@ -22,7 +22,13 @@ class EastDoorSupportDialogue : DialogueFile() {
                 if (isQuestComplete(player!!, Quests.FIGHT_ARENA)) {
                     npcl(
                         FaceAnim.ANGRY,
-                        "You're " + if (!player!!.isMale) "her" else "him" + "! The one who beat the " + if (!completeOptionalTask) "General's Pet" else "General" + "! Begone, murderer!"
+                        "You're " +
+                            if (!player!!.isMale) {
+                                "her"
+                            } else {
+                                "him" + "! The one who beat the " +
+                                    if (!completeOptionalTask) "General's Pet" else "General" + "! Begone, murderer!"
+                            },
                     )
                     stage = 3
                 } else {

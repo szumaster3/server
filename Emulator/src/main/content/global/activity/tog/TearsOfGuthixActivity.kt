@@ -303,18 +303,15 @@ class TearsOfGuthixActivity :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3253, 9513, 3262, 9522, 2))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3253, 9513, 3262, 9522, 2))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.CANNON,
             ZoneRestriction.FOLLOWERS,
             ZoneRestriction.TELEPORT,
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

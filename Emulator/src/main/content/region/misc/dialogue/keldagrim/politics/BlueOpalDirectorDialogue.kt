@@ -53,11 +53,7 @@ class BlueOpalDirectorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlueOpalDirectorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlueOpalDirectorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLUE_OPAL_DIRECTOR_2101)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLUE_OPAL_DIRECTOR_2101)
 }

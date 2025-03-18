@@ -87,9 +87,7 @@ class TelekineticTheatre
             e: Entity,
             target: Node,
             option: Option,
-        ): Boolean {
-            return super.interact(e, target, option)
-        }
+        ): Boolean = super.interact(e, target, option)
 
         override fun parseCommand(
             player: Player,
@@ -170,9 +168,7 @@ class TelekineticTheatre
                     location,
                     player,
                 ) {
-                    override fun isActive(): Boolean {
-                        return !isRemoved
-                    }
+                    override fun isActive(): Boolean = !isRemoved
                 }
             return item
         }

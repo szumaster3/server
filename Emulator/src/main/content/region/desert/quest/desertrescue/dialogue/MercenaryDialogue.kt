@@ -204,9 +204,7 @@ class MercenaryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(4989, 4990, 4991, 4992)
-    }
+    override fun getIds(): IntArray = intArrayOf(4989, 4990, 4991, 4992)
 
     companion object {
         private val COINS = Item(995, 5)

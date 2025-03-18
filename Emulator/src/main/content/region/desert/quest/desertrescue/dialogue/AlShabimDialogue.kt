@@ -342,9 +342,7 @@ class AlShabimDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(832)
-    }
+    override fun getIds(): IntArray = intArrayOf(832)
 
     companion object {
         private val BRONZE_DARTS = Item(806, 6)

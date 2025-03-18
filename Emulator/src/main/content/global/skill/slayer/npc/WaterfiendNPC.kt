@@ -35,7 +35,5 @@ class WaterfiendNPC : NPCBehavior(*Tasks.WATERFIENDS.npcs) {
     override fun getSwingHandlerOverride(
         self: NPC,
         original: CombatSwingHandler,
-    ): CombatSwingHandler {
-        return combatHandler
-    }
+    ): CombatSwingHandler = combatHandler
 }

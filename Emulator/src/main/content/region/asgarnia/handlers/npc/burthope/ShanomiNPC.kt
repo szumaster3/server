@@ -29,13 +29,9 @@ class ShanomiNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ShanomiNPC(id, location)
-    }
+    ): AbstractNPC = ShanomiNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHANOMI_4290)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHANOMI_4290)
 
     override fun tick() {
         if (RandomFunction.random(35) == 5) {

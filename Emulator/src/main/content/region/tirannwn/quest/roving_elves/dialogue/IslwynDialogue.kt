@@ -519,11 +519,7 @@ class IslwynDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("islwyn_dialogue"), NPCs.ISLWYN_1680)
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("islwyn_dialogue"), NPCs.ISLWYN_1680)
 
-    fun crystalWeaponPrice(timesRecharged: Int): Int {
-        return Math.max(900000 - 180000 * timesRecharged, 180000)
-    }
+    fun crystalWeaponPrice(timesRecharged: Int): Int = Math.max(900000 - 180000 * timesRecharged, 180000)
 }

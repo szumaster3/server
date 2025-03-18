@@ -62,9 +62,7 @@ class MithrilSeedsPlugin : OptionHandler() {
         return true
     }
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     companion object {
         private val ITEM = Item(299, 1)
@@ -72,8 +70,6 @@ class MithrilSeedsPlugin : OptionHandler() {
         private val RARE = intArrayOf(2987, 2988)
         private val ANIMATION = Animation(827)
 
-        fun getFlower(array: IntArray): Int {
-            return array[RandomFunction.random(array.size)]
-        }
+        fun getFlower(array: IntArray): Int = array[RandomFunction.random(array.size)]
     }
 }

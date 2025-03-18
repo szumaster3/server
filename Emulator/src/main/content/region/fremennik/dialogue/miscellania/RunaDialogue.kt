@@ -57,11 +57,7 @@ class RunaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RunaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RunaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUNA_3920)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUNA_3920)
 }

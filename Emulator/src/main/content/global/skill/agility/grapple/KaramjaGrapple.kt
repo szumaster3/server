@@ -351,11 +351,10 @@ class KaramjaGrapple : OptionHandler() {
     override fun getDestination(
         moving: Node,
         destination: Node,
-    ): Location {
-        return if (moving.location.y > 3134) {
+    ): Location =
+        if (moving.location.y > 3134) {
             Location.create(2874, 3142, 0)
         } else {
             Location.create(2874, 3127, 0)
         }
-    }
 }

@@ -34,11 +34,7 @@ class JonnytheBeardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JonnytheBeardDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JonnytheBeardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JONNY_THE_BEARD_645)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JONNY_THE_BEARD_645)
 }

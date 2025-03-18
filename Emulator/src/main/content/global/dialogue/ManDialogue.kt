@@ -78,12 +78,10 @@ class ManDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ManDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ManDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.MAN_1,
             NPCs.MAN_2,
             NPCs.MAN_3,
@@ -130,5 +128,4 @@ class ManDialogue(
             NPCs.WOMAN_7884,
             NPCs.WOMAN_7925,
         )
-    }
 }

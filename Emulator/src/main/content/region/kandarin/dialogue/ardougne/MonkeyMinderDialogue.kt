@@ -79,11 +79,7 @@ class MonkeyMinderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MonkeyMinderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MonkeyMinderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONKEY_MINDER_1469)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONKEY_MINDER_1469)
 }

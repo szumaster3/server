@@ -33,11 +33,7 @@ class CustomerDwarfDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CustomerDwarfDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CustomerDwarfDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CUSTOMER_2167)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CUSTOMER_2167)
 }

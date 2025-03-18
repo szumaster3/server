@@ -24,8 +24,6 @@ enum class StuddedArmour(
 
     companion object {
         @JvmStatic
-        fun forId(itemId: Int): StuddedArmour? {
-            return StuddedArmour.values().find { it.leather == itemId }
-        }
+        fun forId(itemId: Int): StuddedArmour? = StuddedArmour.values().find { it.leather == itemId }
     }
 }

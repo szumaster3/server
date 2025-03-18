@@ -15,13 +15,9 @@ class SwampSnakeNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SwampSnakeNPC(id, location)
-    }
+    ): AbstractNPC = SwampSnakeNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SWAMP_SNAKE_3599, NPCs.SWAMP_SNAKE_3600, NPCs.SWAMP_SNAKE_3601, NPCs.SWAMP_SNAKE_3602)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SWAMP_SNAKE_3599, NPCs.SWAMP_SNAKE_3600, NPCs.SWAMP_SNAKE_3601, NPCs.SWAMP_SNAKE_3602)
 
     companion object;
 

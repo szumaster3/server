@@ -153,9 +153,7 @@ class BeaconKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BeaconKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BeaconKeeperDialogue(player)
 
     fun getIndexOf(id: Int): Int {
         if (id == NPCs.NANUQ_8065) return 0
@@ -180,8 +178,8 @@ class BeaconKeeperDialogue(
         return Item(logId, amount)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.NANUQ_8067,
             NPCs.NANUQ_8068,
             NPCs.NANUQ_8069,
@@ -193,5 +191,4 @@ class BeaconKeeperDialogue(
             NPCs.NANUQ_8075,
             NPCs.NANUQ_8076,
         )
-    }
 }

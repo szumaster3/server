@@ -126,7 +126,5 @@ class BobDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOB_815)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOB_815)
 }

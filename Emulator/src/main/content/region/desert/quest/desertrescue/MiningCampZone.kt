@@ -22,9 +22,7 @@ class MiningCampZone :
         return this
     }
 
-    override fun enter(entity: Entity): Boolean {
-        return super.enter(entity)
-    }
+    override fun enter(entity: Entity): Boolean = super.enter(entity)
 
     override fun leave(
         e: Entity,
@@ -65,13 +63,12 @@ class MiningCampZone :
         entity: Entity,
         type: Int,
         node: Node,
-    ): Boolean {
-        return if (entity is Player && type != -1) {
+    ): Boolean =
+        if (entity is Player && type != -1) {
             !checkAnna(entity)
         } else {
             super.teleport(entity, type, node)
         }
-    }
 
     fun checkAnna(p: Player): Boolean {
         val quest = p.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
@@ -98,7 +95,5 @@ class MiningCampZone :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 }

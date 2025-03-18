@@ -47,14 +47,13 @@ class ZanarisSqueezeShortcut : InteractionListener {
     private fun calculateRotation(
         sceneryRotation: Int,
         direction: Direction,
-    ): Int {
-        return when {
+    ): Int =
+        when {
             sceneryRotation == 3 && direction == Direction.SOUTH -> 1
             sceneryRotation == 3 && direction == Direction.NORTH -> 0
             direction == Direction.NORTH || (direction == Direction.SOUTH && sceneryRotation != 0) -> 1
             else -> 0
         }
-    }
 
     private fun handleShortcut(
         player: Player,

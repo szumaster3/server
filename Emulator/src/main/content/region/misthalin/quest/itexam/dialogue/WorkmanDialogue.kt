@@ -80,17 +80,14 @@ class WorkmanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return WorkmanDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = WorkmanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.DIGSITE_WORKMAN_613,
             NPCs.DIGSITE_WORKMAN_4564,
             NPCs.DIGSITE_WORKMAN_4565,
         )
-    }
 
     override fun defineListeners() {
         onUseWith(

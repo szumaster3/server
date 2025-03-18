@@ -61,11 +61,7 @@ class PortalChamberDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return PortalChamberDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = PortalChamberDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(394857)
-    }
+    override fun getIds(): IntArray = intArrayOf(394857)
 }

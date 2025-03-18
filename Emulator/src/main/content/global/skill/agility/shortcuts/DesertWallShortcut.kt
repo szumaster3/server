@@ -60,8 +60,8 @@ class DesertWallShortcut : OptionHandler() {
             object : Pulse(1, player) {
                 private var count = 0
 
-                override fun pulse(): Boolean {
-                    return when (++count) {
+                override fun pulse(): Boolean =
+                    when (++count) {
                         2 -> {
                             player.animate(CRAWL_THROUGH)
                             player.properties.teleportLocation = END_LOCATION
@@ -75,7 +75,6 @@ class DesertWallShortcut : OptionHandler() {
 
                         else -> false
                     }
-                }
             },
         )
     }

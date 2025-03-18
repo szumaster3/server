@@ -12,8 +12,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class FremennikTrials :
-    Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_QUEST_FREMENNIK_TRIALS_PROGRESS_347, 0, 1, 10) {
+class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_QUEST_FREMENNIK_TRIALS_PROGRESS_347, 0, 1, 10) {
     class SkillRequirement(
         val skill: Int?,
         val level: Int?,

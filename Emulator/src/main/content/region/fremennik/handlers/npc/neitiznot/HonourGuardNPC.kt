@@ -16,18 +16,15 @@ class HonourGuardNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return HonourGuardNPC(id, location)
-    }
+    ): AbstractNPC = HonourGuardNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.HONOUR_GUARD_5514,
             NPCs.HONOUR_GUARD_5515,
             NPCs.HONOUR_GUARD_5516,
             NPCs.HONOUR_GUARD_5517,
         )
-    }
 
     override fun tick() {
         if (isActive && !inCombat() && RandomFunction.roll(10)) {

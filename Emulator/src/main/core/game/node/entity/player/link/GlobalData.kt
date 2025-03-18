@@ -163,17 +163,13 @@ class GlobalData {
         savedH = z
     }
 
-    fun getTravelLogs(): BooleanArray {
-        return travelLogs
-    }
+    fun getTravelLogs(): BooleanArray = travelLogs
 
     fun removeTravelLog(index: Int) {
         travelLogs[index] = false
     }
 
-    fun hasTravelLog(index: Int): Boolean {
-        return travelLogs[index]
-    }
+    fun hasTravelLog(index: Int): Boolean = travelLogs[index]
 
     fun setTravelLog(index: Int) {
         travelLogs[index] = true
@@ -183,145 +179,105 @@ class GlobalData {
         charmingDelay = delay
     }
 
-    fun getCharmingDelay(): Long {
-        return charmingDelay
-    }
+    fun getCharmingDelay(): Long = charmingDelay
 
-    fun getTestStage(): Int {
-        return playerTestStage
-    }
+    fun getTestStage(): Int = playerTestStage
 
     fun setTestStage(stage: Int) {
         playerTestStage = stage
     }
 
-    fun getTutorialStage(): Int {
-        return tutorialStage
-    }
+    fun getTutorialStage(): Int = tutorialStage
 
     fun setTutorialStage(tutorialStage: Int) {
         this.tutorialStage = tutorialStage
     }
 
-    fun getHomeTeleportDelay(): Long {
-        return homeTeleportDelay
-    }
+    fun getHomeTeleportDelay(): Long = homeTeleportDelay
 
     fun setHomeTeleportDelay(homeTeleportDelay: Long) {
         this.homeTeleportDelay = homeTeleportDelay
     }
 
-    fun hasTiedLumbridgeRope(): Boolean {
-        return lumbridgeRope
-    }
+    fun hasTiedLumbridgeRope(): Boolean = lumbridgeRope
 
     fun setLumbridgeRope(lumbridgeRope: Boolean) {
         this.lumbridgeRope = lumbridgeRope
     }
 
-    fun hasSpokenToApprentice(): Boolean {
-        return apprentice
-    }
+    fun hasSpokenToApprentice(): Boolean = apprentice
 
     fun setApprentice(apprentice: Boolean) {
         this.apprentice = apprentice
     }
 
-    fun getAssistTime(): Long {
-        return assistTime
-    }
+    fun getAssistTime(): Long = assistTime
 
     fun setAssistTime(assistTime: Long) {
         this.assistTime = assistTime
     }
 
-    fun getAssistExperience(): DoubleArray {
-        return assistExperience
-    }
+    fun getAssistExperience(): DoubleArray = assistExperience
 
     fun setAssistExperience(assistExperience: DoubleArray) {
         this.assistExperience = assistExperience
     }
 
-    fun getStrongHoldRewards(): BooleanArray {
-        return strongholdRewards
-    }
+    fun getStrongHoldRewards(): BooleanArray = strongholdRewards
 
-    fun hasStrongholdReward(reward: Int): Boolean {
-        return strongholdRewards[reward - 1]
-    }
+    fun hasStrongholdReward(reward: Int): Boolean = strongholdRewards[reward - 1]
 
-    fun getChatPing(): Long {
-        return chatPing
-    }
+    fun getChatPing(): Long = chatPing
 
     fun setChatPing(chatPing: Long) {
         this.chatPing = chatPing
     }
 
-    fun getTutorClaim(): Long {
-        return tutorClaim
-    }
+    fun getTutorClaim(): Long = tutorClaim
 
     fun setTutorClaim(tutorClaim: Long) {
         this.tutorClaim = tutorClaim
     }
 
-    fun isLuthasTask(): Boolean {
-        return luthasTask
-    }
+    fun isLuthasTask(): Boolean = luthasTask
 
     fun setLuthasTask(luthasTask: Boolean) {
         this.luthasTask = luthasTask
     }
 
-    fun getKaramjaBananas(): Int {
-        return karamjaBananas
-    }
+    fun getKaramjaBananas(): Int = karamjaBananas
 
     fun setKaramjaBannanas(karamjaBannanas: Int) {
         this.karamjaBananas = karamjaBannanas
     }
 
-    fun getTeaSteal(): Long {
-        return teaSteal
-    }
+    fun getTeaSteal(): Long = teaSteal
 
     fun setTeaSteal(teaSteal: Long) {
         this.teaSteal = teaSteal
     }
 
-    fun getSilkSteal(): Long {
-        return silkSteal
-    }
+    fun getSilkSteal(): Long = silkSteal
 
     fun setSilkSteal(silkSteal: Long) {
         this.silkSteal = silkSteal
     }
 
-    fun getZaffAmount(): Int {
-        return zaffAmount
-    }
+    fun getZaffAmount(): Int = zaffAmount
 
     fun setZaffAmount(zaffAmount: Int) {
         this.zaffAmount = zaffAmount
     }
 
-    fun getZaffTime(): Long {
-        return zaffTime
-    }
+    fun getZaffTime(): Long = zaffTime
 
-    fun isDraynorRecording(): Boolean {
-        return draynorRecording
-    }
+    fun isDraynorRecording(): Boolean = draynorRecording
 
     fun setDraynorRecording(draynorRecording: Boolean) {
         this.draynorRecording = draynorRecording
     }
 
-    fun isWydinEmployee(): Boolean {
-        return wydinEmployee
-    }
+    fun isWydinEmployee(): Boolean = wydinEmployee
 
     fun setWydinEmployee(wydinEmployee: Boolean) {
         this.wydinEmployee = wydinEmployee
@@ -331,49 +287,37 @@ class GlobalData {
         this.zaffTime = zaffTime
     }
 
-    fun isFritzGlass(): Boolean {
-        return fritzGlass
-    }
+    fun isFritzGlass(): Boolean = fritzGlass
 
     fun setFritzGlass(frizGlass: Boolean) {
         this.fritzGlass = frizGlass
     }
 
-    fun isGeTutorial(): Boolean {
-        return geTutorial
-    }
+    fun isGeTutorial(): Boolean = geTutorial
 
     fun setGeTutorial(geTutorial: Boolean) {
         this.geTutorial = geTutorial
     }
 
-    fun getEssenceTeleporter(): Int {
-        return essenceTeleporter
-    }
+    fun getEssenceTeleporter(): Int = essenceTeleporter
 
     fun setEssenceTeleporter(essenceTeleporter: Int) {
         this.essenceTeleporter = essenceTeleporter
     }
 
-    fun getRecoilDamage(): Int {
-        return recoilDamage
-    }
+    fun getRecoilDamage(): Int = recoilDamage
 
     fun setRecoilDamage(recoilDamage: Int) {
         this.recoilDamage = recoilDamage
     }
 
-    fun getDoubleExpDelay(): Long {
-        return doubleExpDelay
-    }
+    fun getDoubleExpDelay(): Long = doubleExpDelay
 
     fun setDoubleExpDelay(doubleExpDelay: Long) {
         this.doubleExpDelay = doubleExpDelay
     }
 
-    fun isJoinedMonastery(): Boolean {
-        return joinedMonastery
-    }
+    fun isJoinedMonastery(): Boolean = joinedMonastery
 
     fun setJoinedMonastery(joinedMonastery: Boolean) {
         this.joinedMonastery = joinedMonastery
@@ -392,21 +336,15 @@ class GlobalData {
         godBooks[book.ordinal] = true
     }
 
-    fun hasCompletedGodBook(book: GodBook): Boolean {
-        return godBooks[book.ordinal]
-    }
+    fun hasCompletedGodBook(book: GodBook): Boolean = godBooks[book.ordinal]
 
-    fun getForgingUses(): Int {
-        return forgingUses
-    }
+    fun getForgingUses(): Int = forgingUses
 
     fun setForgingUses(forgingUses: Int) {
         this.forgingUses = forgingUses
     }
 
-    fun getEctoCharges(): Int {
-        return ectoCharges
-    }
+    fun getEctoCharges(): Int = ectoCharges
 
     fun setEctoCharges(ectoCharges: Int) {
         this.ectoCharges = ectoCharges
@@ -422,13 +360,9 @@ class GlobalData {
         abyssData[ordinal] = true
     }
 
-    fun hasAbyssCharge(ordinal: Int): Boolean {
-        return abyssData[ordinal]
-    }
+    fun hasAbyssCharge(ordinal: Int): Boolean = abyssData[ordinal]
 
-    fun getDropDelay(): Long {
-        return dropDelay
-    }
+    fun getDropDelay(): Long = dropDelay
 
     fun setDropDelay(dropDelay: Long) {
         this.dropDelay = dropDelay
@@ -441,225 +375,167 @@ class GlobalData {
         return rcDecays[ordinal]
     }
 
-    fun getRcDecays(): IntArray {
-        return rcDecays
-    }
+    fun getRcDecays(): IntArray = rcDecays
 
-    fun isDeathScreenDisabled(): Boolean {
-        return disableDeathScreen
-    }
+    fun isDeathScreenDisabled(): Boolean = disableDeathScreen
 
     fun setDisableDeathScreen(b: Boolean) {
         this.disableDeathScreen = b
     }
 
-    fun getGodBooks(): BooleanArray {
-        return godBooks
-    }
+    fun getGodBooks(): BooleanArray = godBooks
 
     fun setGodBooks(godBooks: BooleanArray) {
         this.godBooks = godBooks
     }
 
-    fun getGodBook(): Int {
-        return godBook
-    }
+    fun getGodBook(): Int = godBook
 
     fun setGodBook(godBook: Int) {
         this.godBook = godBook
     }
 
-    fun isDisableNews(): Boolean {
-        return disableNews
-    }
+    fun isDisableNews(): Boolean = disableNews
 
     fun setDisableNews(disableNews: Boolean) {
         this.disableNews = disableNews
     }
 
-    fun getGodPages(): BooleanArray {
-        return godPages
-    }
+    fun getGodPages(): BooleanArray = godPages
 
     fun setGodPages(godPages: BooleanArray) {
         this.godPages = godPages
     }
 
-    fun getOverChargeDelay(): Long {
-        return overChargeDelay
-    }
+    fun getOverChargeDelay(): Long = overChargeDelay
 
     fun setOverChargeDelay(overChargeDelay: Long) {
         this.overChargeDelay = overChargeDelay
     }
 
-    fun getBossCounters(): IntArray {
-        return bossCounters
-    }
+    fun getBossCounters(): IntArray = bossCounters
 
     fun setBossCounters(bossCounters: IntArray) {
         this.bossCounters = bossCounters
     }
 
-    fun getBarrowsLoots(): Int {
-        return barrowsLoots
-    }
+    fun getBarrowsLoots(): Int = barrowsLoots
 
     fun setBarrowsLoots(barrowsLoots: Int) {
         this.barrowsLoots = barrowsLoots
     }
 
-    fun getLootSharePoints(): Int {
-        return lootSharePoints
-    }
+    fun getLootSharePoints(): Int = lootSharePoints
 
     fun setLootSharePoints(lootSharePoints: Int) {
         this.lootSharePoints = lootSharePoints
     }
 
-    fun getLootShareDelay(): Long {
-        return lootShareDelay
-    }
+    fun getLootShareDelay(): Long = lootShareDelay
 
     fun setLootShareDelay(lootShareDelay: Long) {
         this.lootShareDelay = lootShareDelay
     }
 
-    fun getDoubleExp(): Long {
-        return doubleExp
-    }
+    fun getDoubleExp(): Long = doubleExp
 
     fun setDoubleExp(doubleExp: Long) {
         this.doubleExp = doubleExp
     }
 
-    fun hasDoubleExp(): Boolean {
-        return doubleExp > System.currentTimeMillis()
-    }
+    fun hasDoubleExp(): Boolean = doubleExp > System.currentTimeMillis()
 
-    fun getGlobalTeleporterDelay(): Long {
-        return globalTeleporterDelay
-    }
+    fun getGlobalTeleporterDelay(): Long = globalTeleporterDelay
 
     fun setGlobalTeleporterDelay(globalTeleporterDelay: Long) {
         this.globalTeleporterDelay = globalTeleporterDelay
     }
 
-    fun getRunReplenishDelay(): Long {
-        return runReplenishDelay
-    }
+    fun getRunReplenishDelay(): Long = runReplenishDelay
 
     fun setRunReplenishDelay(runReplenishDelay: Long) {
         this.runReplenishDelay = runReplenishDelay
     }
 
-    fun getRunReplenishCharges(): Int {
-        return runReplenishCharges
-    }
+    fun getRunReplenishCharges(): Int = runReplenishCharges
 
     fun setRunReplenishCharges(runReplenishCharges: Int) {
         this.runReplenishCharges = runReplenishCharges
     }
 
-    fun getLowAlchemyCharges(): Int {
-        return lowAlchemyCharges
-    }
+    fun getLowAlchemyCharges(): Int = lowAlchemyCharges
 
     fun setLowAlchemyCharges(lowAlchemyCharges: Int) {
         this.lowAlchemyCharges = lowAlchemyCharges
     }
 
-    fun getLowAlchemyDelay(): Long {
-        return lowAlchemyDelay
-    }
+    fun getLowAlchemyDelay(): Long = lowAlchemyDelay
 
     fun setLowAlchemyDelay(lowAlchemyDelay: Long) {
         this.lowAlchemyDelay = lowAlchemyDelay
     }
 
-    fun isEnableCoinMachine(): Boolean {
-        return enableCoinMachine
-    }
+    fun isEnableCoinMachine(): Boolean = enableCoinMachine
 
     fun setEnableCoinMachine(enableCoinMachine: Boolean) {
         this.enableCoinMachine = enableCoinMachine
     }
 
-    fun getMagicSkillCapeDelay(): Long {
-        return magicSkillCapeDelay
-    }
+    fun getMagicSkillCapeDelay(): Long = magicSkillCapeDelay
 
     fun setMagicSkillCapeDelay(magicSkillCapeDelay: Long) {
         this.magicSkillCapeDelay = magicSkillCapeDelay
     }
 
-    fun getHunterCapeDelay(): Long {
-        return hunterCapeDelay
-    }
+    fun getHunterCapeDelay(): Long = hunterCapeDelay
 
     fun setHunterCapeDelay(hunterCapeDelay: Long) {
         this.hunterCapeDelay = hunterCapeDelay
     }
 
-    fun getHunterCapeCharges(): Int {
-        return hunterCapeCharges
-    }
+    fun getHunterCapeCharges(): Int = hunterCapeCharges
 
     fun setHunterCapeCharges(hunterCapeCharges: Int) {
         this.hunterCapeCharges = hunterCapeCharges
     }
 
-    fun isEnableCharmCollector(): Boolean {
-        return enableCharmCollector
-    }
+    fun isEnableCharmCollector(): Boolean = enableCharmCollector
 
     fun setEnableCharmCollector(enableCharmCollector: Boolean) {
         this.enableCharmCollector = enableCharmCollector
     }
 
-    fun getMinigameTeleportDelay(): Long {
-        return minigameTeleportDelay
-    }
+    fun getMinigameTeleportDelay(): Long = minigameTeleportDelay
 
     fun setMinigameTeleportDelay(delay: Long) {
         this.minigameTeleportDelay = delay
     }
 
-    fun getSavedH(): Int {
-        return savedH
-    }
+    fun getSavedH(): Int = savedH
 
     fun setSavedH(savedH: Int) {
         this.savedH = savedH
     }
 
-    fun getSavedY(): Int {
-        return savedY
-    }
+    fun getSavedY(): Int = savedY
 
     fun setSavedY(savedY: Int) {
         this.savedY = savedY
     }
 
-    fun getSavedX(): Int {
-        return savedX
-    }
+    fun getSavedX(): Int = savedX
 
     fun setSavedX(savedX: Int) {
         this.savedX = savedX
     }
 
-    fun getTaskAmount(): Int {
-        return taskAmount
-    }
+    fun getTaskAmount(): Int = taskAmount
 
     fun setTaskAmount(taskAmount: Int) {
         this.taskAmount = taskAmount
     }
 
-    fun getTaskPoints(): Int {
-        return taskPoints
-    }
+    fun getTaskPoints(): Int = taskPoints
 
     fun setTaskPoints(taskPoints: Int) {
         this.taskPoints = taskPoints
@@ -669,15 +545,9 @@ class GlobalData {
         this.macroDisabled = disabled
     }
 
-    fun getMacroDisabled(): Boolean {
-        return this.macroDisabled
-    }
+    fun getMacroDisabled(): Boolean = this.macroDisabled
 
-    fun getAbyssData(): BooleanArray {
-        return abyssData
-    }
+    fun getAbyssData(): BooleanArray = abyssData
 
-    fun getPlayerTestStage(): Int {
-        return playerTestStage
-    }
+    fun getPlayerTestStage(): Int = playerTestStage
 }

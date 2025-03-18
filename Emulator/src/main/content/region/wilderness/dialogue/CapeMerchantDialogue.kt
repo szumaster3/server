@@ -56,12 +56,10 @@ class CapeMerchantDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CapeMerchantDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CapeMerchantDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.WILLIAM_1778,
             NPCs.IAN_1779,
             NPCs.LARRY_1780,
@@ -73,5 +71,4 @@ class CapeMerchantDialogue(
             NPCs.SIMON_1786,
             NPCs.SAM_1787,
         )
-    }
 }

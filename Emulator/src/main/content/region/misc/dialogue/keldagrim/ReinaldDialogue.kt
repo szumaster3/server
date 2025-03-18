@@ -39,11 +39,7 @@ class ReinaldDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ReinaldDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ReinaldDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REINALD_2194)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REINALD_2194)
 }

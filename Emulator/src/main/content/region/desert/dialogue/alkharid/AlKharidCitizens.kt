@@ -66,11 +66,8 @@ class AlKharidCitizens(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AlKharidCitizens(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AlKharidCitizens(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IMA_964, NPCs.SABEIL_965, NPCs.JADID_966, NPCs.DALAL_967, NPCs.AFRAH_968, NPCs.JEED_969)
-    }
+    override fun getIds(): IntArray =
+        intArrayOf(NPCs.IMA_964, NPCs.SABEIL_965, NPCs.JADID_966, NPCs.DALAL_967, NPCs.AFRAH_968, NPCs.JEED_969)
 }

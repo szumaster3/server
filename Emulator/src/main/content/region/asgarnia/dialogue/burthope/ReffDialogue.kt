@@ -121,7 +121,5 @@ class ReffDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REF_4299, NPCs.REF_4300)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REF_4299, NPCs.REF_4300)
 }

@@ -45,24 +45,16 @@ object InterfaceListeners {
     fun get(
         componentID: Int,
         buttonID: Int,
-    ): ((Player, Component, Int, Int, Int, Int) -> Boolean)? {
-        return buttonListeners["$componentID:$buttonID"]
-    }
+    ): ((Player, Component, Int, Int, Int, Int) -> Boolean)? = buttonListeners["$componentID:$buttonID"]
 
     @JvmStatic
-    fun get(componentID: Int): ((Player, Component, Int, Int, Int, Int) -> Boolean)? {
-        return buttonListeners["$componentID"]
-    }
+    fun get(componentID: Int): ((Player, Component, Int, Int, Int, Int) -> Boolean)? = buttonListeners["$componentID"]
 
     @JvmStatic
-    fun getOpenListener(componentID: Int): ((Player, Component) -> Boolean)? {
-        return openListeners["$componentID"]
-    }
+    fun getOpenListener(componentID: Int): ((Player, Component) -> Boolean)? = openListeners["$componentID"]
 
     @JvmStatic
-    fun getCloseListener(componentID: Int): ((Player, Component) -> Boolean)? {
-        return openListeners["close:$componentID"]
-    }
+    fun getCloseListener(componentID: Int): ((Player, Component) -> Boolean)? = openListeners["close:$componentID"]
 
     @JvmStatic
     fun onSlotSwitch(

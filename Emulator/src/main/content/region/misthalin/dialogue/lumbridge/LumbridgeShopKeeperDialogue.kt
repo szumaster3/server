@@ -52,7 +52,5 @@ class LumbridgeShopKeeperDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_520, NPCs.SHOP_ASSISTANT_521)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_520, NPCs.SHOP_ASSISTANT_521)
 }

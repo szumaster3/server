@@ -7,7 +7,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.link.emote.Emotes
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location

@@ -140,7 +140,5 @@ class AjjatDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AJJAT_4288)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AJJAT_4288)
 }

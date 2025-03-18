@@ -45,7 +45,5 @@ class WoundedSoldierDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SOLDIER_1069)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SOLDIER_1069)
 }

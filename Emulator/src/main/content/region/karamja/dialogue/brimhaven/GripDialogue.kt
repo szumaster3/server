@@ -24,17 +24,11 @@ class GripDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GripDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GripDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRIP_792)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRIP_792)
 }
 
 class GripDialogueFile : DialogueBuilderFile() {

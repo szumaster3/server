@@ -38,8 +38,7 @@ abstract class DiaryEventHookBase(
 
     open val areaTasks get() = arrayOf<DiaryAreaTask>()
 
-    final override fun defineAreaBorders(): Array<ZoneBorders> =
-        areaTasks.map { task -> task.zoneBorders }.toTypedArray()
+    final override fun defineAreaBorders(): Array<ZoneBorders> = areaTasks.map { task -> task.zoneBorders }.toTypedArray()
 
     final override fun areaEnter(entity: Entity) {
         if (entity !is Player) return
@@ -168,9 +167,7 @@ abstract class DiaryEventHookBase(
         player: Player,
         level: DiaryLevel,
         task: Int,
-    ): Boolean {
-        return player.achievementDiaryManager.hasCompletedTask(diaryType, findIndexFor(level), task)
-    }
+    ): Boolean = player.achievementDiaryManager.hasCompletedTask(diaryType, findIndexFor(level), task)
 
     private fun findIndexFor(level: DiaryLevel): Int {
         val levelName = level.name.lowercase().replaceFirstChar { c -> c.uppercase() }

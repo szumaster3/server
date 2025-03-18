@@ -100,11 +100,7 @@ class FyionaFrayDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FyionaFrayDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FyionaFrayDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FYIONA_FRAY_3634)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FYIONA_FRAY_3634)
 }

@@ -103,7 +103,5 @@ class LogBalanceShortcut : AgilityShortcut {
     override fun getDestination(
         node: Node,
         n: Node,
-    ): Location {
-        return if (node.location.getDistance(start) < node.location.getDistance(end)) start else end
-    }
+    ): Location = if (node.location.getDistance(start) < node.location.getDistance(end)) start else end
 }

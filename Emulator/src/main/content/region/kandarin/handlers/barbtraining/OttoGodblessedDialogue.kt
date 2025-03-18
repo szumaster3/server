@@ -377,41 +377,44 @@ class OttoGodblessedDialogue(
                 ).also { stage++ }
 
             123 -> player("..and I thought Fishing was a safe way to pass the time.").also { stage = 20 }
-            200 -> npcl(
-                FaceAnim.NEUTRAL,
-                "Yes, I can convert a Zamorakian spear into a hasta. The spirits require me to request 300,000 coins from you for this service."
-            ).also { stage++ }
+            200 ->
+                npcl(
+                    FaceAnim.NEUTRAL,
+                    "Yes, I can convert a Zamorakian spear into a hasta. The spirits require me to request 300,000 coins from you for this service.",
+                ).also { stage++ }
 
-            201 -> if (!inInventory(player, Items.COINS_995, 300000)) {
-                player("I can't afford that. Maybe another time.").also { stage = END_DIALOGUE }
-            } else {
-                setTitle(player, 2)
-                sendDialogueOptions(player, "Do you wish to convert your spear?", "Yes", "No")
-                stage++
-
-            }
-
-            202 -> when (buttonId) {
-                1 -> {
-                    end()
-                    if (removeItem(player, Item(Items.COINS_995, 300000))) {
-                        removeItem(player, Items.ZAMORAKIAN_SPEAR_11716)
-                        sendItemDialogue(player, Items.ZAMORAKIAN_HASTA_14638, "Otto has converted your spear into a hasta.")
-                        addItem(player, Items.ZAMORAKIAN_HASTA_14638)
-                    } else {
-                        end()
-                    }
+            201 ->
+                if (!inInventory(player, Items.COINS_995, 300000)) {
+                    player("I can't afford that. Maybe another time.").also { stage = END_DIALOGUE }
+                } else {
+                    setTitle(player, 2)
+                    sendDialogueOptions(player, "Do you wish to convert your spear?", "Yes", "No")
+                    stage++
                 }
 
-                2 -> player("Actually, forget it.").also { stage++ }
-            }
+            202 ->
+                when (buttonId) {
+                    1 -> {
+                        end()
+                        if (removeItem(player, Item(Items.COINS_995, 300000))) {
+                            removeItem(player, Items.ZAMORAKIAN_SPEAR_11716)
+                            sendItemDialogue(player, Items.ZAMORAKIAN_HASTA_14638, "Otto has converted your spear into a hasta.")
+                            addItem(player, Items.ZAMORAKIAN_HASTA_14638)
+                        } else {
+                            end()
+                        }
+                    }
+
+                    2 -> player("Actually, forget it.").also { stage++ }
+                }
 
             203 -> npc("As you wish.").also { stage = END_DIALOGUE }
 
-            300 -> npcl(
-                FaceAnim.HAPPY,
-                "Yes, I can convert a Zamorakian hasta into a spear. I do not charge for this service."
-            ).also { stage++ }
+            300 ->
+                npcl(
+                    FaceAnim.HAPPY,
+                    "Yes, I can convert a Zamorakian hasta into a spear. I do not charge for this service.",
+                ).also { stage++ }
 
             301 -> {
                 setTitle(player, 2)
@@ -419,28 +422,27 @@ class OttoGodblessedDialogue(
                 stage++
             }
 
-            302 -> when (buttonId) {
-                1 -> {
-                    end()
-                    if (removeItem(player, Items.ZAMORAKIAN_HASTA_14638)) {
-                        sendItemDialogue(
-                            player,
-                            Items.ZAMORAKIAN_SPEAR_11716,
-                            "Otto has converted your hasta into a spear."
-                        )
-                        addItem(player, Items.ZAMORAKIAN_SPEAR_11716)
-                    } else {
+            302 ->
+                when (buttonId) {
+                    1 -> {
                         end()
+                        if (removeItem(player, Items.ZAMORAKIAN_HASTA_14638)) {
+                            sendItemDialogue(
+                                player,
+                                Items.ZAMORAKIAN_SPEAR_11716,
+                                "Otto has converted your hasta into a spear.",
+                            )
+                            addItem(player, Items.ZAMORAKIAN_SPEAR_11716)
+                        } else {
+                            end()
+                        }
                     }
-                }
 
-                2 -> player("Actually, forget it.").also { stage = 203 }
-            }
+                    2 -> player("Actually, forget it.").also { stage = 203 }
+                }
         }
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OTTO_GODBLESSED_2725)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OTTO_GODBLESSED_2725)
 }

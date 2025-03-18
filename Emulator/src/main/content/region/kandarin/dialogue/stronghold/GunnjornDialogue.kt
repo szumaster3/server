@@ -226,11 +226,7 @@ class GunnjornDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GunnjornDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GunnjornDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUNNJORN_607)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUNNJORN_607)
 }

@@ -154,13 +154,9 @@ class AntiMacro :
             getEventNpc(player)?.terminate()
         }
 
-        fun rollEventLoot(player: Player): ArrayList<Item> {
-            return getEventNpc(player)?.loot?.roll(player) ?: ArrayList()
-        }
+        fun rollEventLoot(player: Player): ArrayList<Item> = getEventNpc(player)?.loot?.roll(player) ?: ArrayList()
 
-        fun getEventNpc(player: Player): RandomEventNPC? {
-            return getAttribute<RandomEventNPC?>(player, EVENT_NPC, null)
-        }
+        fun getEventNpc(player: Player): RandomEventNPC? = getAttribute<RandomEventNPC?>(player, EVENT_NPC, null)
 
         fun pause(player: Player) {
             val timer = getTimer<AntiMacro>(player) ?: return

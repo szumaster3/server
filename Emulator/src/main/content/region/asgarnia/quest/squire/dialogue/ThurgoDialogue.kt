@@ -433,9 +433,7 @@ class ThurgoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THURGO_604)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THURGO_604)
 
     companion object {
         private var quest: Quest? = null

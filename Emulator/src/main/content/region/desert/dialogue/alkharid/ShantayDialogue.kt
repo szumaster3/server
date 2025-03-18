@@ -293,11 +293,7 @@ class ShantayDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ShantayDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ShantayDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHANTAY_836)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHANTAY_836)
 }

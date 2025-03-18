@@ -183,11 +183,7 @@ class FatherLawrenceDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FatherLawrenceDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FatherLawrenceDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FATHER_LAWRENCE_640)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FATHER_LAWRENCE_640)
 }

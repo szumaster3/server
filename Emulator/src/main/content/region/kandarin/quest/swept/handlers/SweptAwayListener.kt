@@ -210,12 +210,13 @@ class SweptAwayListener :
             return@on true
         }
 
-        val sweepLines = hashMapOf<Int, (Player) -> Unit>(
-            Scenery.LINE_39364 to SweptUtils::sweepFirstLines,
-            Scenery.LINE_39377 to SweptUtils::sweepSecondLines,
-            Scenery.LINE_39408 to SweptUtils::sweepThirdLines,
-            Scenery.LINE_39414 to SweptUtils::sweepFourthLines
-        )
+        val sweepLines =
+            hashMapOf<Int, (Player) -> Unit>(
+                Scenery.LINE_39364 to SweptUtils::sweepFirstLines,
+                Scenery.LINE_39377 to SweptUtils::sweepSecondLines,
+                Scenery.LINE_39408 to SweptUtils::sweepThirdLines,
+                Scenery.LINE_39414 to SweptUtils::sweepFourthLines,
+            )
 
         /*
          * Handles sweeping the lines of the area during the quest.

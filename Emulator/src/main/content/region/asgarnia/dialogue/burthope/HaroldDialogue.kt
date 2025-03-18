@@ -58,7 +58,5 @@ class HaroldDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HAROLD_1078)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HAROLD_1078)
 }

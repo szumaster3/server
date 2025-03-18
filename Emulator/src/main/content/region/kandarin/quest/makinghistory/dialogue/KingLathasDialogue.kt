@@ -106,7 +106,5 @@ class KingLathasDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KING_LATHAS_364)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_LATHAS_364)
 }

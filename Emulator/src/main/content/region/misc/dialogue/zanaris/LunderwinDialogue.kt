@@ -62,11 +62,7 @@ class LunderwinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LunderwinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LunderwinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUNDERWIN_565)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUNDERWIN_565)
 }

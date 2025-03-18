@@ -10,7 +10,6 @@ import org.rs.consts.Quests
 import org.rs.consts.Scenery
 
 class TaverleyDungeonListener : InteractionListener {
-
     private val GATES = intArrayOf(Scenery.DOOR_31844, Scenery.DOOR_31841)
 
     override fun defineListeners() {

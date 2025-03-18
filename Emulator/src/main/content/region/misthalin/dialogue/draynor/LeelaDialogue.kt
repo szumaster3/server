@@ -358,13 +358,9 @@ class LeelaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LeelaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LeelaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LEELA_915)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LEELA_915)
 
     companion object {
         private val ROPE = Item(954)

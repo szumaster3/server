@@ -25,9 +25,7 @@ class CastleWarsWaitingArea :
         val waitingZamorakPlayers = mutableSetOf<Player>()
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return areaBorders
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = areaBorders
 
     override fun areaEnter(entity: Entity) {
         val player = entity as? Player ?: return

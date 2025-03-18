@@ -74,13 +74,12 @@ class StallThiefPulse(
         return true
     }
 
-    override fun hasInactiveNode(): Boolean {
-        return if (player.getAttribute("thieveDelay", 0) <= GameWorld.ticks) {
+    override fun hasInactiveNode(): Boolean =
+        if (player.getAttribute("thieveDelay", 0) <= GameWorld.ticks) {
             false
         } else {
             super.hasInactiveNode()
         }
-    }
 
     override fun animate() {}
 

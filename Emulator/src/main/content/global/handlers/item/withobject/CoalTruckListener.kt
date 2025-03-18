@@ -13,8 +13,8 @@ class CoalTruckListener : InteractionListener {
     private fun calculateAvailableSpace(
         player: Player,
         coalInTruck: Int,
-    ): Int {
-        return if (inEquipment(player, Items.SEERS_HEADBAND_1_14631)) {
+    ): Int =
+        if (inEquipment(player, Items.SEERS_HEADBAND_1_14631)) {
             when {
                 isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 2) -> 196 - coalInTruck
                 isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 1) -> 168 - coalInTruck
@@ -24,10 +24,9 @@ class CoalTruckListener : InteractionListener {
         } else {
             120 - coalInTruck
         }
-    }
 
-    private fun calculateMaxCoalCapacity(player: Player): Int {
-        return when {
+    private fun calculateMaxCoalCapacity(player: Player): Int =
+        when {
             inEquipment(player, Items.SEERS_HEADBAND_1_14631) &&
                 isDiaryComplete(
                     player,
@@ -51,7 +50,6 @@ class CoalTruckListener : InteractionListener {
 
             else -> 120
         }
-    }
 
     override fun defineListeners() {
         onUseWith(IntType.SCENERY, Items.COAL_453, Scenery.COAL_TRUCK_2114) { player, _, _ ->

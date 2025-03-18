@@ -23,12 +23,10 @@ class CaveGoblinMinerNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return CaveGoblinMinerNPC(id, location)
-    }
+    ): AbstractNPC = CaveGoblinMinerNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.CAVE_GOBLIN_MINER_2078,
             NPCs.CAVE_GOBLIN_MINER_2077,
             NPCs.CAVE_GOBLIN_MINER_2076,
@@ -38,7 +36,6 @@ class CaveGoblinMinerNPC(
             NPCs.CAVE_GOBLIN_MINER_2070,
             NPCs.CAVE_GOBLIN_MINER_2069,
         )
-    }
 
     override fun tick() {
         mining = (id > 2074)

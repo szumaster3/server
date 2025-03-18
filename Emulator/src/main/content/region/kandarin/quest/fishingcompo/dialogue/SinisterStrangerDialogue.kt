@@ -184,7 +184,5 @@ class SinisterStrangerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SINISTER_STRANGER_3677)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SINISTER_STRANGER_3677)
 }

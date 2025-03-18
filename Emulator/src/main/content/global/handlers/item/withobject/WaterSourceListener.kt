@@ -5,7 +5,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
-
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Scenery
@@ -106,7 +105,7 @@ class WaterSourceListener : InteractionListener {
                 6249,
                 3264,
                 16302,
-                11661
+                11661,
             )
     }
 
@@ -179,8 +178,23 @@ class WaterSourceListener : InteractionListener {
         VIAL(intArrayOf(Items.VIAL_229), Items.VIAL_OF_WATER_227),
         JUG(intArrayOf(Items.JUG_1935), Items.JUG_OF_WATER_1937),
         BOWL(intArrayOf(Items.BOWL_1923), Items.BOWL_OF_WATER_1921),
-        WATERING_CAN(intArrayOf(Items.WATERING_CAN_5331, Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339), Items.WATERING_CAN8_5340,),
-        WATER_SKIN(intArrayOf(Items.WATERSKIN0_1831, Items.WATERSKIN1_1829, Items.WATERSKIN2_1827, Items.WATERSKIN3_1825), Items.WATERSKIN4_1823),
+        WATERING_CAN(
+            intArrayOf(
+                Items.WATERING_CAN_5331,
+                Items.WATERING_CAN1_5333,
+                Items.WATERING_CAN2_5334,
+                Items.WATERING_CAN3_5335,
+                Items.WATERING_CAN4_5336,
+                Items.WATERING_CAN5_5337,
+                Items.WATERING_CAN6_5338,
+                Items.WATERING_CAN7_5339,
+            ),
+            Items.WATERING_CAN8_5340,
+        ),
+        WATER_SKIN(
+            intArrayOf(Items.WATERSKIN0_1831, Items.WATERSKIN1_1829, Items.WATERSKIN2_1827, Items.WATERSKIN3_1825),
+            Items.WATERSKIN4_1823,
+        ),
         FISHBOWL(intArrayOf(Items.FISHBOWL_6667), Items.FISHBOWL_6668),
         ;
 
@@ -193,13 +207,9 @@ class WaterSourceListener : InteractionListener {
                 }
             }
 
-            fun getInputs(): IntArray {
-                return itemMap.keys.toIntArray()
-            }
+            fun getInputs(): IntArray = itemMap.keys.toIntArray()
 
-            fun forId(id: Int): WaterVessel? {
-                return itemMap[id]
-            }
+            fun forId(id: Int): WaterVessel? = itemMap[id]
         }
     }
 }

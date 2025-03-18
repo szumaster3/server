@@ -117,11 +117,7 @@ class HiylikMynaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HiylikMynaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HiylikMynaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HIYLIK_MYNA_1514)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIYLIK_MYNA_1514)
 }

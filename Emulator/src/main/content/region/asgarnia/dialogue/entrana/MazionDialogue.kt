@@ -25,15 +25,9 @@ class MazionDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MazionDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MazionDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAZION_3114)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAZION_3114)
 }

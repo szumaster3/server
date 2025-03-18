@@ -26,13 +26,9 @@ class ForemanNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return ForemanNPC(id, location)
-    }
+    ): AbstractNPC = ForemanNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FOREMAN_674)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FOREMAN_674)
 
     override fun defineListeners() {
         on(this.ids, IntType.NPC, "talk-to") { player, npc ->

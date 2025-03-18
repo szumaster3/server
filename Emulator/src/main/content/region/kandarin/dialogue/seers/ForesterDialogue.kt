@@ -21,15 +21,9 @@ class ForesterDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ForesterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ForesterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FORESTER_231)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FORESTER_231)
 }

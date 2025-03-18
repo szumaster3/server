@@ -22,9 +22,7 @@ class DarkWizardNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DarkWizardNPC(id, location)
-    }
+    ): AbstractNPC = DarkWizardNPC(id, location)
 
     override fun init() {
         super.init()

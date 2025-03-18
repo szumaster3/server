@@ -36,7 +36,5 @@ class MonasteryMonkDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_281)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_281)
 }

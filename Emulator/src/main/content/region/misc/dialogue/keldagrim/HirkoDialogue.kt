@@ -120,11 +120,7 @@ class HirkoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HirkoDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HirkoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HIRKO_4558)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIRKO_4558)
 }

@@ -61,11 +61,7 @@ class IngridHradsonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return IngridHradsonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = IngridHradsonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.INGRID_HRADSON_3696)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.INGRID_HRADSON_3696)
 }

@@ -11,9 +11,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Quests
 
 class SecretPassage : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2866, 3609, 2866, 3609))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2866, 3609, 2866, 3609))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player && getQuestStage(entity, Quests.DEATH_PLATEAU) == 25) {

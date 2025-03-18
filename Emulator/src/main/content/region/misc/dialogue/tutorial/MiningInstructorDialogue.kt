@@ -8,7 +8,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import core.tools.END_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
@@ -56,8 +55,7 @@ class MiningInstructorDialogue(
                 }
             }
 
-            in 43..100 -> end() .also { openDialogue(player, MiningInstruction()) }
-
+            in 43..100 -> end().also { openDialogue(player, MiningInstruction()) }
         }
         return true
     }
@@ -149,13 +147,9 @@ class MiningInstructorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MiningInstructorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MiningInstructorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MINING_INSTRUCTOR_948)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MINING_INSTRUCTOR_948)
 }
 
 class MiningInstruction : DialogueFile() {
@@ -176,11 +170,12 @@ class MiningInstruction : DialogueFile() {
                 )
                 stage++
             }
-            1 -> when (buttonID) {
-                0 -> player("Tell me about prospecting again.").also { stage++ }
-                1 -> player("Tell me about Mining again.").also { stage = 3 }
-                2 -> end().also { TutorialStage.rollback(player!!) }
-            }
+            1 ->
+                when (buttonID) {
+                    0 -> player("Tell me about prospecting again.").also { stage++ }
+                    1 -> player("Tell me about Mining again.").also { stage = 3 }
+                    2 -> end().also { TutorialStage.rollback(player!!) }
+                }
             2 -> {
                 sendNPCDialogue(
                     player!!,

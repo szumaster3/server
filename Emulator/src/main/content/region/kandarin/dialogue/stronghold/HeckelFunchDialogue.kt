@@ -49,11 +49,7 @@ class HeckelFunchDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HeckelFunchDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HeckelFunchDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HECKEL_FUNCH_603)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HECKEL_FUNCH_603)
 }

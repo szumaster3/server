@@ -233,21 +233,13 @@ enum class Fish(
         }
 
         @JvmStatic
-        fun getBigFish(fish: Fish): Int? {
-            return bigFishMap[fish]
-        }
+        fun getBigFish(fish: Fish): Int? = bigFishMap[fish]
 
         @JvmStatic
-        fun forItem(item: Item): Fish? {
-            return fishMap[item.id]
-        }
+        fun forItem(item: Item): Fish? = fishMap[item.id]
     }
 
-    fun getSuccessChance(level: Int): Double {
-        return (level.toDouble() - 1.0) * ((highChance - lowChance) / (99.0 - 1.0)) + lowChance
-    }
+    fun getSuccessChance(level: Int): Double = (level.toDouble() - 1.0) * ((highChance - lowChance) / (99.0 - 1.0)) + lowChance
 
-    fun getItem(): Item {
-        return this.id.asItem()
-    }
+    fun getItem(): Item = this.id.asItem()
 }

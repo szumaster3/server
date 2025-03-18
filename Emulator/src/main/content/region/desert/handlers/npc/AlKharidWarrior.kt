@@ -22,9 +22,7 @@ class AlKharidWarrior(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return AlKharidWarrior(id, location)
-    }
+    ): AbstractNPC = AlKharidWarrior(id, location)
 
     override fun tick() {
         target?.let { player ->
@@ -66,9 +64,7 @@ class AlKharidWarrior(
         super.onImpact(entity, state)
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.AL_KHARID_WARRIOR_18)

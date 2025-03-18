@@ -60,11 +60,7 @@ class DalldavDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DalldavDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DalldavDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DALLDAV_7447)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DALLDAV_7447)
 }

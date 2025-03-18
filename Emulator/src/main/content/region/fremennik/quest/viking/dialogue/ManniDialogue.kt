@@ -439,7 +439,5 @@ class ManniDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MANNI_THE_REVELLER_1286)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MANNI_THE_REVELLER_1286)
 }

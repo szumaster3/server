@@ -101,11 +101,7 @@ class OliviaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OliviaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OliviaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLIVIA_2233, NPCs.OLIVIA_2572)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLIVIA_2233, NPCs.OLIVIA_2572)
 }

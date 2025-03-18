@@ -242,7 +242,5 @@ class CharlieGTDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHARLIE_673)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_673)
 }

@@ -22,9 +22,7 @@ import java.util.regex.Pattern
  * @param id The NPC id.
  * @return The name of the NPC as a String.
  */
-fun getNPCName(id: Int): String {
-    return NPCDefinition.forId(id).name
-}
+fun getNPCName(id: Int): String = NPCDefinition.forId(id).name
 
 /**
  * Decants items in a container, organizing them by dosage and creating new items with the correct dosage.
@@ -96,9 +94,7 @@ fun openNpcShop(
  * @param player The player whose Slayer Master is being retrieved.
  * @return The [NPC] representing the player's Slayer Master.
  */
-fun getSlayerMaster(player: Player): NPC {
-    return findNPC(SlayerManager.getInstance(player).master?.npc as Int) as NPC
-}
+fun getSlayerMaster(player: Player): NPC = findNPC(SlayerManager.getInstance(player).master?.npc as Int) as NPC
 
 /**
  * Retrieves the location of the player's assigned Slayer Master.
@@ -106,8 +102,8 @@ fun getSlayerMaster(player: Player): NPC {
  * @param player The player whose Slayer Master location is being retrieved.
  * @return A string representing the location of the Slayer Master.
  */
-fun getSlayerMasterLocation(player: Player): String {
-    return when (getSlayerMaster(player).id) {
+fun getSlayerMasterLocation(player: Player): String =
+    when (getSlayerMaster(player).id) {
         NPCs.CHAELDAR_1598 -> "Zanaris"
         NPCs.DURADEL_8275 -> "Shilo Village"
         NPCs.MAZCHNA_8274 -> "Canifis"
@@ -115,7 +111,6 @@ fun getSlayerMasterLocation(player: Player): String {
         NPCs.VANNAKA_1597 -> "Edgeville Dungeon"
         else -> "The Backrooms"
     }
-}
 
 /**
  * Retrieves the player's current Slayer task.
@@ -123,9 +118,7 @@ fun getSlayerMasterLocation(player: Player): String {
  * @param player The player whose Slayer task is being retrieved.
  * @return The active [Tasks] assigned to the player, or null if no task is assigned.
  */
-fun getSlayerTask(player: Player): Tasks? {
-    return SlayerManager.getInstance(player).activeTask
-}
+fun getSlayerTask(player: Player): Tasks? = SlayerManager.getInstance(player).activeTask
 
 /**
  * Checks if the player has an active Slayer task.
@@ -133,9 +126,7 @@ fun getSlayerTask(player: Player): Tasks? {
  * @param player The player whose task status is being checked.
  * @return True if the player has an active Slayer task, otherwise false.
  */
-fun hasSlayerTask(player: Player): Boolean {
-    return SlayerManager.getInstance(player).hasTask()
-}
+fun hasSlayerTask(player: Player): Boolean = SlayerManager.getInstance(player).hasTask()
 
 /**
  * Retrieves the name of the player's current Slayer task.
@@ -143,9 +134,7 @@ fun hasSlayerTask(player: Player): Boolean {
  * @param player The player whose Slayer task name is being retrieved.
  * @return A string representing the name of the Slayer task.
  */
-fun getSlayerTaskName(player: Player): String {
-    return SlayerManager.getInstance(player).taskName
-}
+fun getSlayerTaskName(player: Player): String = SlayerManager.getInstance(player).taskName
 
 /**
  * Retrieves the number of kills remaining for the player's current Slayer task.
@@ -153,9 +142,7 @@ fun getSlayerTaskName(player: Player): String {
  * @param player The player whose remaining kills are being retrieved.
  * @return An int representing the number of kills left to complete the Slayer task.
  */
-fun getSlayerTaskKillsRemaining(player: Player): Int {
-    return SlayerManager.getInstance(player).amount
-}
+fun getSlayerTaskKillsRemaining(player: Player): Int = SlayerManager.getInstance(player).amount
 
 /**
  * Retrieves the task flags for the player's current Slayer task.
@@ -163,9 +150,7 @@ fun getSlayerTaskKillsRemaining(player: Player): Int {
  * @param player The player whose task flags are being retrieved.
  * @return An int representing the task flags.
  */
-fun getSlayerTaskFlags(player: Player): Int {
-    return SlayerManager.getInstance(player).flags.taskFlags
-}
+fun getSlayerTaskFlags(player: Player): Int = SlayerManager.getInstance(player).flags.taskFlags
 
 /**
  * Provides a tip or hint about the player's current Slayer task.
@@ -173,13 +158,12 @@ fun getSlayerTaskFlags(player: Player): Int {
  * @param player The player whose Slayer task tip is being retrieved.
  * @return An array of string containing the Slayer task tip.
  */
-fun getSlayerTip(player: Player): Array<out String> {
-    return if (hasSlayerTask(player)) {
+fun getSlayerTip(player: Player): Array<out String> =
+    if (hasSlayerTask(player)) {
         getSlayerTask(player)?.tip!!
     } else {
         arrayOf("You need something new to hunt.")
     }
-}
 
 /**
  * Transforms an NPC into another NPC for a specified duration before reverting back.

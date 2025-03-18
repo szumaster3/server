@@ -27,13 +27,9 @@ enum class Runes(
     ZURIELS_STAFF(Items.ZURIELS_STAFF_13867),
     ;
 
-    fun transform(): Item {
-        return Item(id)
-    }
+    fun transform(): Item = Item(id)
 
-    fun getItem(amount: Int): Item {
-        return Item(id, amount)
-    }
+    fun getItem(amount: Int): Item = Item(id, amount)
 
     companion object {
         fun forId(id: Int): Runes? {

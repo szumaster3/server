@@ -32,11 +32,7 @@ class TykeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TykeDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TykeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TYKE_7068)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TYKE_7068)
 }

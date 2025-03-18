@@ -1,7 +1,6 @@
 package content.region.asgarnia.handlers.trollheim.godwars
 
 import core.api.*
-import core.api.quest.hasRequirement
 import core.api.quest.isQuestComplete
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

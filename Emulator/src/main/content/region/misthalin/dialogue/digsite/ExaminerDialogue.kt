@@ -27,13 +27,9 @@ class ExaminerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ExaminerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ExaminerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EXAMINER_618, NPCs.EXAMINER_4566, NPCs.EXAMINER_4567)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EXAMINER_618, NPCs.EXAMINER_4566, NPCs.EXAMINER_4567)
 }
 
 class ExaminerDialogueFile : DialogueBuilderFile() {

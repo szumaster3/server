@@ -76,11 +76,7 @@ class TeaSellerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TeaSellerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TeaSellerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TEA_SELLER_595)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TEA_SELLER_595)
 }

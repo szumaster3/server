@@ -183,11 +183,7 @@ class CharlieTheTrampDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CharlieTheTrampDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CharlieTheTrampDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHARLIE_THE_TRAMP_641)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_THE_TRAMP_641)
 }

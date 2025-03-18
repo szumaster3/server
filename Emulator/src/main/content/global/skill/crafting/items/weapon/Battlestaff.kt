@@ -38,18 +38,14 @@ enum class Battlestaff(
         productId = Items.ARMADYL_BATTLESTAFF_14696,
         requiredLevel = 77,
         experience = 150.0,
-    )
+    ),
     ;
 
     companion object {
         @JvmStatic
-        fun forId(itemId: Int): Battlestaff? {
-            return values().find { it.required == itemId }
-        }
+        fun forId(itemId: Int): Battlestaff? = values().find { it.required == itemId }
 
         @JvmStatic
-        fun forProductId(productId: Int): Battlestaff? {
-            return values().find { it.productId == productId }
-        }
+        fun forProductId(productId: Int): Battlestaff? = values().find { it.productId == productId }
     }
 }

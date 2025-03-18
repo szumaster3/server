@@ -133,9 +133,7 @@ class MercenaryCaptainDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(830)
-    }
+    override fun getIds(): IntArray = intArrayOf(830)
 
     class MercenaryCaptain : AbstractNPC {
         constructor() : super(0, null)
@@ -146,9 +144,7 @@ class MercenaryCaptainDialogue(
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return MercenaryCaptain(id, location)
-        }
+        ): AbstractNPC = MercenaryCaptain(id, location)
 
         override fun finalizeDeath(killer: Entity) {
             super.finalizeDeath(killer)
@@ -176,8 +172,6 @@ class MercenaryCaptainDialogue(
             }
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(830)
-        }
+        override fun getIds(): IntArray = intArrayOf(830)
     }
 }

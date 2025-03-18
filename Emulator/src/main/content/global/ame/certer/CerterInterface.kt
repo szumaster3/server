@@ -84,12 +84,11 @@ class CerterInterface : InterfaceListener {
         player.packetDispatch.sendModelOnInterface(iFaceModelId, CERTER_INTERFACE, ITEM_CHILD, iFaceZoom)
     }
 
-    fun optionFromIndex(index: Int): Int {
-        return when (index) {
+    fun optionFromIndex(index: Int): Int =
+        when (index) {
             1 -> OPTION_A_CHILD
             2 -> OPTION_B_CHILD
             3 -> OPTION_C_CHILD
             else -> OPTION_A_CHILD
         }
-    }
 }

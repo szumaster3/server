@@ -83,9 +83,7 @@ abstract class Cutscene(
         logCutscene("Moving ${entity.username} to LOCAL[$regionX,$regionY].")
         entity.pulseManager.run(
             object : MovementPulse(entity, base.transform(regionX, regionY, 0), Pathfinder.SMART) {
-                override fun pulse(): Boolean {
-                    return true
-                }
+                override fun pulse(): Boolean = true
             },
         )
     }
@@ -156,13 +154,9 @@ abstract class Cutscene(
         )
     }
 
-    fun getNPC(id: Int): NPC? {
-        return addedNPCs[id]?.firstOrNull()
-    }
+    fun getNPC(id: Int): NPC? = addedNPCs[id]?.firstOrNull()
 
-    fun getNPCs(id: Int): ArrayList<NPC> {
-        return addedNPCs[id] ?: ArrayList()
-    }
+    fun getNPCs(id: Int): ArrayList<NPC> = addedNPCs[id] ?: ArrayList()
 
     fun getObject(
         regionX: Int,

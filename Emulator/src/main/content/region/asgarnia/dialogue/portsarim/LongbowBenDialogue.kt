@@ -132,7 +132,5 @@ class LongbowBenDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LONGBOW_BEN_2691)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LONGBOW_BEN_2691)
 }

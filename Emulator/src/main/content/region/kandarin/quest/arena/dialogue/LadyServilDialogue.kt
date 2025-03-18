@@ -166,7 +166,5 @@ class LadyServilDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LADY_SERVIL_264)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LADY_SERVIL_264)
 }

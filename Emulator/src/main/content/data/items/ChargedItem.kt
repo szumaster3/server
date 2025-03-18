@@ -108,8 +108,8 @@ enum class ChargedItem(
      * @param charge The charge level (1-based index).
      * @return The item ID corresponding to the specified charge level.
      */
-    fun forCharge(charge: Int): Int {
-        return ids[
+    fun forCharge(charge: Int): Int =
+        ids[
             maxCharge() -
                 if (charge < 1) {
                     1 + maxCharge() - ids.size
@@ -119,7 +119,6 @@ enum class ChargedItem(
                     charge
                 },
         ]
-    }
 
     /**
      * Returns the maximum charge level for this charged item.
@@ -147,13 +146,12 @@ enum class ChargedItem(
          * @return The maximum charge level.
          */
         @JvmStatic
-        private fun getMaxCharge(chargedItem: ChargedItem): Int {
-            return CHARGE_REGEX
+        private fun getMaxCharge(chargedItem: ChargedItem): Int =
+            CHARGE_REGEX
                 .find(ItemDefinition.forId(chargedItem.ids.first()).name)!!
                 .groups[1]!!
                 .value
                 .toInt()
-        }
 
         /**
          * Checks if an item ID is a valid-charged item.

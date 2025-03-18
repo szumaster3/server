@@ -12,13 +12,9 @@ open class RequestType(
     open fun canRequest(
         player: Player?,
         target: Player?,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    fun getRequestMessage(target: Player): String {
-        return target.username + requestMessage
-    }
+    fun getRequestMessage(target: Player): String = target.username + requestMessage
 
     companion object {
         val TRADE = RequestType("Sending a trade offer...", ":tradereq:", TradeModule(null, null))

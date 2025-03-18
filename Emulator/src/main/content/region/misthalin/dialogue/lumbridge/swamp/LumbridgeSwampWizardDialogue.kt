@@ -37,11 +37,7 @@ class LumbridgeSwampWizardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LumbridgeSwampWizardDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LumbridgeSwampWizardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_652)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_652)
 }

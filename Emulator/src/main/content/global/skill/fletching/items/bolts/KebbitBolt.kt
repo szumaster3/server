@@ -32,8 +32,6 @@ enum class KebbitBolt(
     ;
 
     companion object {
-        fun forId(item: Item): KebbitBolt? {
-            return values().firstOrNull { it.base == item.id }
-        }
+        fun forId(item: Item): KebbitBolt? = values().firstOrNull { it.base == item.id }
     }
 }

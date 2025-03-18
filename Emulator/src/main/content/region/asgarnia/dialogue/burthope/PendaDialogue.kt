@@ -61,7 +61,5 @@ class PendaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PENDA_1087)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PENDA_1087)
 }

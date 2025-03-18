@@ -36,9 +36,7 @@ class FremennikDungeon :
     override fun fireEvent(
         identifier: String,
         vararg args: Any?,
-    ): Any? {
-        return true
-    }
+    ): Any? = true
 
     override fun interact(
         entity: Entity,
@@ -71,8 +69,8 @@ class FremennikDungeon :
             object : Pulse(1, player) {
                 var count = 0
 
-                override fun pulse(): Boolean {
-                    return when (++count) {
+                override fun pulse(): Boolean =
+                    when (++count) {
                         1 -> {
                             val start = scenery.location.transform(direction.opposite, 2)
                             player.walkingQueue.reset()
@@ -109,7 +107,6 @@ class FremennikDungeon :
 
                         else -> true
                     }
-                }
             },
         )
         return true

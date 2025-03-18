@@ -16,11 +16,7 @@ class Hotspot(
         currentY = chunkY
     }
 
-    fun isValid(): Boolean {
-        return chunkX2 != -1 && chunkY2 != -1
-    }
+    fun isValid(): Boolean = chunkX2 != -1 && chunkY2 != -1
 
-    fun copy(): Hotspot {
-        return Hotspot(hotspot, chunkX, chunkY, chunkX2, chunkY2)
-    }
+    fun copy(): Hotspot = Hotspot(hotspot, chunkX, chunkY, chunkX2, chunkY2)
 }

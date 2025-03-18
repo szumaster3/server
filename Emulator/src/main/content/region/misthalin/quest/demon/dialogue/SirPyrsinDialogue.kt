@@ -574,7 +574,5 @@ class SirPyrsinDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_PRYSIN_883, NPCs.SIR_PRYSIN_4657)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_PRYSIN_883, NPCs.SIR_PRYSIN_4657)
 }

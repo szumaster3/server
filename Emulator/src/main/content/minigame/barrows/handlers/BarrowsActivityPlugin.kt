@@ -184,7 +184,8 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                             if (alive.size > 1) {
                                 index = RandomFunction.random(0, alive.size)
                             }
-                            BarrowsCrypt.getCrypt(alive[index])
+                            BarrowsCrypt
+                                .getCrypt(alive[index])
                                 .spawnBrother(player, getTeleportLocation(target.getLocation(), 1))
                         }
                     }
@@ -230,7 +231,8 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                             false,
                         )
                     ) {
-                        BarrowsCrypt.getCrypt(brother)
+                        BarrowsCrypt
+                            .getCrypt(brother)
                             .spawnBrother(player, getTeleportLocation(target.getCenterLocation(), 4))
                     }
                     setAttribute(player, "barrow:opened_chest", true)
@@ -268,9 +270,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         slot: Int,
         itemId: Int,
         opcode: Int,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     override fun continueAttack(
         e: Entity,
@@ -294,13 +294,9 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
     }
 
     @Throws(Throwable::class)
-    override fun newInstance(p: Player): ActivityPlugin {
-        return this
-    }
+    override fun newInstance(p: Player): ActivityPlugin = this
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
     override fun configure() {
         definePlugin(BarrowsPuzzle.SHAPES)

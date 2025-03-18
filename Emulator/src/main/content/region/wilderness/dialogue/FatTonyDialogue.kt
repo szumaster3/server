@@ -101,11 +101,7 @@ class FatTonyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FatTonyDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FatTonyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FAT_TONY_596)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAT_TONY_596)
 }

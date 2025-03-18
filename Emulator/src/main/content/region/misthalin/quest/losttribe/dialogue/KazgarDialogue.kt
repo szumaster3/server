@@ -46,7 +46,5 @@ class KazgarDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MISTAG_2085)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISTAG_2085)
 }

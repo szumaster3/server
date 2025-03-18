@@ -35,13 +35,9 @@ open class SkillDialogueHandler(
         index: Int,
     ) {}
 
-    open fun getAll(index: Int): Int {
-        return player.inventory.getAmount(data[0] as Item)
-    }
+    open fun getAll(index: Int): Int = player.inventory.getAmount(data[0] as Item)
 
-    protected open fun getName(item: Item): String {
-        return StringUtils.formatDisplayName(item.name.replace("Unfired", ""))
-    }
+    protected open fun getName(item: Item): String = StringUtils.formatDisplayName(item.name.replace("Unfired", ""))
 
     enum class SkillDialogue(
         val interfaceId: Int,
@@ -69,14 +65,13 @@ open class SkillDialogueHandler(
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
-            ): Int {
-                return when (buttonId) {
+            ): Int =
+                when (buttonId) {
                     5 -> 1
                     4 -> 5
                     3 -> -1
                     else -> handler.getAll(getIndex(handler, buttonId))
                 }
-            }
         },
 
         MAKE_SET_ONE_OPTION(Components.SKILL_MULTI1_SMALL_582, 4, 1) {
@@ -99,15 +94,14 @@ open class SkillDialogueHandler(
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
-            ): Int {
-                return when (buttonId) {
+            ): Int =
+                when (buttonId) {
                     5 -> 1
                     4 -> 1
                     3 -> 5
                     2 -> 10
                     else -> 10
                 }
-            }
         },
 
         TWO_OPTION(Components.SKILL_MAKE_303, 7, 2) {

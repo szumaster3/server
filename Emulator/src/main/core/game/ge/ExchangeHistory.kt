@@ -235,8 +235,7 @@ class ExchangeHistory(
 
     companion object {
         @JvmStatic
-        fun getInstance(player: Player? = null): ExchangeHistory {
-            return player?.getAttribute("ge-records", ExchangeHistory()) ?: ExchangeHistory()
-        }
+        fun getInstance(player: Player? = null): ExchangeHistory =
+            player?.getAttribute("ge-records", ExchangeHistory()) ?: ExchangeHistory()
     }
 }

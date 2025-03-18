@@ -834,12 +834,10 @@ class SlayerMasterDialogue(
         }
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SlayerMasterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SlayerMasterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.CHAELDAR_1598,
             NPCs.SANIBOCH_1596,
             NPCs.VANNAKA_1597,
@@ -849,7 +847,6 @@ class SlayerMasterDialogue(
             NPCs.TURAEL_8273,
             NPCs.MAZCHNA_8274,
         )
-    }
 
     companion object {
         private val GEM = Item(Items.ENCHANTED_GEM_4155, 1)

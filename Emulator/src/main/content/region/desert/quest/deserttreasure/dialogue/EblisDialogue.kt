@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.dialogue
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete
@@ -341,13 +341,9 @@ class EblisDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return EblisDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = EblisDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EBLIS_1923, NPCs.EBLIS_1924, NPCs.EBLIS_1925)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EBLIS_1923, NPCs.EBLIS_1924, NPCs.EBLIS_1925)
 }
 
 class EblisDialogueFile : DialogueBuilderFile() {

@@ -154,11 +154,7 @@ class MiodvetnirDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MiodvetnirDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MiodvetnirDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MIODVETNIR_1847, NPCs.DERNU_1848, NPCs.DERNI_1849)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MIODVETNIR_1847, NPCs.DERNU_1848, NPCs.DERNI_1849)
 }

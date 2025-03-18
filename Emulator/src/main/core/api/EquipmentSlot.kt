@@ -51,8 +51,6 @@ enum class EquipmentSlot {
          * Return the equipment slot by name.
          * @return null if matching no slot.
          */
-        fun slotByName(input: String): EquipmentSlot? {
-            return slotMap[input.lowercase()]
-        }
+        fun slotByName(input: String): EquipmentSlot? = slotMap[input.lowercase()]
     }
 }

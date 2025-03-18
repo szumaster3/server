@@ -17,9 +17,7 @@ class KingRoaldNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return KingRoaldNPC(id, location)
-    }
+    ): AbstractNPC = KingRoaldNPC(id, location)
 
     override fun checkImpact(state: BattleState) {
         val lp = getSkills().lifepoints
@@ -54,7 +52,5 @@ class KingRoaldNPC(
         this.cutscene = cutscene
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KING_ROALD_5838)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_ROALD_5838)
 }

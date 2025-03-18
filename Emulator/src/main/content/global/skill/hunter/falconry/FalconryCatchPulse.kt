@@ -132,13 +132,12 @@ class FalconryCatchPulse(
     val distance: Int
         get() = (2 + player.location.getDistance(node!!.asNpc().location) * 0.5).toInt()
 
-    fun success(): Boolean {
-        return if (originalLocation !== node!!.asNpc().location) {
+    fun success(): Boolean =
+        if (originalLocation !== node!!.asNpc().location) {
             RandomFunction.random(1, 3) == 2
         } else {
             RandomFunction.getRandom(3) * player.getSkills().getLevel(Skills.HUNTER) / 3 > falconCatch.level / 2
         }
-    }
 
     companion object {
         private val FALCON = Item(Items.FALCONERS_GLOVE_10024)

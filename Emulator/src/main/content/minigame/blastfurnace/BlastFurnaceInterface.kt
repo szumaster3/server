@@ -42,8 +42,8 @@ class BlastFurnaceInterface : InterfaceListener {
         }
     }
 
-    private fun getBarForButton(id: Int): Pair<Boolean, Bar> {
-        return when (id) {
+    private fun getBarForButton(id: Int): Pair<Boolean, Bar> =
+        when (id) {
             43, 44 -> Pair(id == 44, Bar.BRONZE)
             40, 41 -> Pair(id == 41, Bar.IRON)
             36, 38 -> Pair(id == 38, Bar.STEEL)
@@ -54,5 +54,4 @@ class BlastFurnaceInterface : InterfaceListener {
             21, 23 -> Pair(id == 23, Bar.GOLD)
             else -> Pair(false, Bar.BRONZE)
         }
-    }
 }

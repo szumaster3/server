@@ -78,9 +78,7 @@ class TrainingGroundActivity :
         player: Player?,
         login: Boolean,
         vararg args: Any?,
-    ): Boolean {
-        return super.start(player, login, *args)
-    }
+    ): Boolean = super.start(player, login, *args)
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
@@ -104,14 +102,13 @@ class TrainingGroundActivity :
         return this
     }
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.CANNON,
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.FOLLOWERS,
             ZoneRestriction.TELEPORT,
         )
-    }
 
     override fun getSpawnLocation(): Location? = null
 
@@ -158,13 +155,9 @@ class TrainingGroundActivity :
             entity: Entity,
             style: CombatStyle,
             message: Boolean,
-        ): Boolean {
-            return player == entity
-        }
+        ): Boolean = player == entity
 
-        override fun canSelectTarget(target: Entity): Boolean {
-            return target is Player && target == player
-        }
+        override fun canSelectTarget(target: Entity): Boolean = target is Player && target == player
 
         override fun checkImpact(state: BattleState) {
             super.checkImpact(state)
@@ -197,12 +190,10 @@ class TrainingGroundActivity :
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return KnightWavesNPC(id, location, null)
-        }
+        ): AbstractNPC = KnightWavesNPC(id, location, null)
 
-        override fun getIds(): IntArray {
-            return intArrayOf(
+        override fun getIds(): IntArray =
+            intArrayOf(
                 NPCs.SIR_BEDIVERE_6177,
                 NPCs.SIR_PELLEAS_6176,
                 NPCs.SIR_TRISTRAM_6175,
@@ -212,7 +203,6 @@ class TrainingGroundActivity :
                 NPCs.SIR_KAY_6171,
                 NPCs.SIR_LANCELOT_6170,
             )
-        }
 
         fun setCommenced(commenced: Boolean) {
             this.commenced = commenced
@@ -230,13 +220,9 @@ class TrainingGroundActivity :
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return MerlinNPC(id, location)
-        }
+        ): AbstractNPC = MerlinNPC(id, location)
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.MERLIN_213)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
 
         override fun handleTickActions() {
             super.handleTickActions()
@@ -302,8 +288,8 @@ enum class WaveTier(
             object : Pulse(3, npc, player) {
                 private var counter = 0
 
-                override fun pulse(): Boolean {
-                    return when (++counter) {
+                override fun pulse(): Boolean =
+                    when (++counter) {
                         1 -> {
                             npc.unlock()
                             npc.animator.reset()
@@ -325,19 +311,14 @@ enum class WaveTier(
 
                         else -> false
                     }
-                }
             },
         )
     }
 
-    fun next(): WaveTier? {
-        return if (ordinal + 1 < knightTypes.size) knightTypes[ordinal + 1] else knightTypes[ordinal]
-    }
+    fun next(): WaveTier? = if (ordinal + 1 < knightTypes.size) knightTypes[ordinal + 1] else knightTypes[ordinal]
 
     companion object {
-        fun forId(id: Int): WaveTier? {
-            return values().find { it.id == id }
-        }
+        fun forId(id: Int): WaveTier? = values().find { it.id == id }
 
         private val knightTypes = values()
     }

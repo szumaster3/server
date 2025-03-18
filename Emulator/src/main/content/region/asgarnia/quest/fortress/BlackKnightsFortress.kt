@@ -43,25 +43,25 @@ class BlackKnightsFortress :
                 player,
                 "!!Sir Amik Varze?? has asked me to investigate the !!Black??",
                 line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false)
+                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
             )
             line(
                 player,
                 "!!Knights' Fortress?? which is located on !!Ice Mountain??.",
                 line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false)
+                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
             )
             line(
                 player,
                 "I need to disguise myself to gain entry to the !!Black??",
                 line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false)
+                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
             )
             line(
                 player,
                 "!!Knights' Fortress??.",
                 line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false)
+                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
             )
         }
 

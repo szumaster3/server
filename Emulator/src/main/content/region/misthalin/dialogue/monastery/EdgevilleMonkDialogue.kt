@@ -83,11 +83,7 @@ class EdgevilleMonkDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EdgevilleMonkDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EdgevilleMonkDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MONK_7727)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_7727)
 }

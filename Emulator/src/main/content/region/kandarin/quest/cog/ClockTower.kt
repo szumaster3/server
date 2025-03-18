@@ -123,7 +123,5 @@ class ClockTower : Quest(Quests.CLOCK_TOWER, 38, 37, 1, Vars.VARP_QUEST_CLOCK_TO
         addItemOrDrop(player, Items.COINS_995, 500)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

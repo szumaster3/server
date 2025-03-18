@@ -142,11 +142,7 @@ class NedDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return NedDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = NedDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NED_743)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NED_743)
 }

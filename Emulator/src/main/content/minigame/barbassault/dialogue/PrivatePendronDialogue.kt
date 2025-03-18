@@ -34,7 +34,5 @@ class PrivatePendronDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRIVATE_PENDRON_5032)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRIVATE_PENDRON_5032)
 }

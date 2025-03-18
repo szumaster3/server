@@ -31,9 +31,7 @@ class DesertZone :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(getRegionBorders(12589))

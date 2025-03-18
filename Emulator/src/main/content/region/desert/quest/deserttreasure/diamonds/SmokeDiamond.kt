@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.diamonds
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.*
 import core.api.quest.getQuestStage
 import core.game.global.action.DoorActionHandler

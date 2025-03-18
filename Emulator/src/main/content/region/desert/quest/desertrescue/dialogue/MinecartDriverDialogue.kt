@@ -200,9 +200,7 @@ class MinecartDriverDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(841)
-    }
+    override fun getIds(): IntArray = intArrayOf(841)
 
     companion object {
         private val COINS = Item(995, 100)

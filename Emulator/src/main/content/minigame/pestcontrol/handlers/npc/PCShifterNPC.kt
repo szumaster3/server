@@ -45,9 +45,7 @@ class PCShifterNPC : AbstractNPC {
         }
     }
 
-    override fun shouldPreventStacking(mover: Entity): Boolean {
-        return mover is NPC
-    }
+    override fun shouldPreventStacking(mover: Entity): Boolean = mover is NPC
 
     override fun onImpact(
         entity: Entity,
@@ -66,9 +64,7 @@ class PCShifterNPC : AbstractNPC {
         }
     }
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return SWING_HANDLER
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = SWING_HANDLER
 
     private fun getDestination(victim: Entity?): Location? {
         val locations: MutableList<Location?> = ArrayList(20)
@@ -93,12 +89,10 @@ class PCShifterNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return PCShifterNPC(id, location)
-    }
+    ): AbstractNPC = PCShifterNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SHIFTER_3732,
             NPCs.SHIFTER_3733,
             NPCs.SHIFTER_3734,
@@ -110,7 +104,6 @@ class PCShifterNPC : AbstractNPC {
             NPCs.SHIFTER_3740,
             NPCs.SHIFTER_3741,
         )
-    }
 
     companion object {
         private val SWING_HANDLER: CombatSwingHandler =
@@ -118,9 +111,7 @@ class PCShifterNPC : AbstractNPC {
                 override fun canSwing(
                     entity: Entity,
                     victim: Entity,
-                ): InteractionType? {
-                    return CombatStyle.RANGE.swingHandler.canSwing(entity, victim)
-                }
+                ): InteractionType? = CombatStyle.RANGE.swingHandler.canSwing(entity, victim)
             }
 
         fun teleport(

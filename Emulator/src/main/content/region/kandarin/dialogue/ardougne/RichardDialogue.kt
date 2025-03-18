@@ -46,11 +46,7 @@ class RichardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RichardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RichardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RICHARD_2306)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RICHARD_2306)
 }

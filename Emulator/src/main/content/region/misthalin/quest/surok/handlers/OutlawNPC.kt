@@ -21,12 +21,10 @@ class OutlawNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return OutlawNPC(id, location)
-    }
+    ): AbstractNPC = OutlawNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.OUTLAW_5842,
             NPCs.OUTLAW_5843,
             NPCs.OUTLAW_5844,
@@ -37,7 +35,6 @@ class OutlawNPC(
             NPCs.OUTLAW_5849,
             NPCs.OUTLAW_5850,
         )
-    }
 
     override fun onAttack(e: Entity) {
         sendChat("Stand and deliver!")

@@ -109,9 +109,7 @@ fun sendSkillDialogue(
          * @param index The index of the selected item.
          * @return The total amount of the item available for the player.
          */
-        override fun getAll(index: Int): Int {
-            return builder.totalAmountCallback(builder.items[index].id)
-        }
+        override fun getAll(index: Int): Int = builder.totalAmountCallback(builder.items[index].id)
     }.open()
 }
 
@@ -125,9 +123,7 @@ fun sendSkillDialogue(
 fun getTool(
     player: Player,
     pickaxe: Boolean,
-): SkillingTool? {
-    return if (pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
-}
+): SkillingTool? = if (pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
 
 /**
  * Delays an entity's clock by a specified number of ticks.
@@ -156,8 +152,6 @@ fun delayClock(
 fun clockReady(
     entity: Entity,
     clock: Int,
-): Boolean {
-    return entity.clocks[clock] <= getWorldTicks()
-}
+): Boolean = entity.clocks[clock] <= getWorldTicks()
 
 private class SkillAPI

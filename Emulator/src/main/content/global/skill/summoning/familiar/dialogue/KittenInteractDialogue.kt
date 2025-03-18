@@ -107,9 +107,7 @@ class KittenInteractDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(343823)
-    }
+    override fun getIds(): IntArray = intArrayOf(343823)
 
     companion object {
         private val PLAYER_STROKE_ANIMATION = Animation(9224)

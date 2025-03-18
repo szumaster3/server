@@ -238,9 +238,7 @@ class RunecraftPulse(
         }
     }
 
-    private fun hasSpellImbue(): Boolean {
-        return player.getAttribute("spell:imbue", 0) > ticks
-    }
+    private fun hasSpellImbue(): Boolean = player.getAttribute("spell:imbue", 0) > ticks
 
     private val essenceAmount: Int
         get() {
@@ -281,9 +279,7 @@ class RunecraftPulse(
             return getMultiplier(rcLevel, rune, runecraftingFormulaRevision, lumbridgeDiary)
         }
 
-    fun hasBindingNecklace(): Boolean {
-        return inEquipment(player, BINDING_NECKLACE)
-    }
+    fun hasBindingNecklace(): Boolean = inEquipment(player, BINDING_NECKLACE)
 
     companion object {
         private const val RUNE_ESSENCE = Items.RUNE_ESSENCE_1436

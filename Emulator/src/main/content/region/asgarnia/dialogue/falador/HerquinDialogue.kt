@@ -36,7 +36,5 @@ class HerquinDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HERQUIN_584)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HERQUIN_584)
 }

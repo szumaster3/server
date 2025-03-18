@@ -130,9 +130,7 @@ class BankerNPC :
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return BankerNPC(id, location)
-    }
+    ): AbstractNPC = BankerNPC(id, location)
 
     private fun findAdjacentBankBoothLocation(): Pair<Direction, Location>? {
         for (side in arrayOf(Direction.SOUTH, Direction.WEST, Direction.NORTH, Direction.EAST)) {

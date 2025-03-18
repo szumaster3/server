@@ -86,7 +86,5 @@ class FairyAerykaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FAIRY_AERYKA_6072)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FAIRY_AERYKA_6072)
 }

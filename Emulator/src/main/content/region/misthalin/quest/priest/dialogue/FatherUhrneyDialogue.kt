@@ -146,16 +146,17 @@ class FatherUhrneyDialogue(
                 }
 
             27 -> sendDialogue(player, "Father Urhney sighs.").also { stage++ }
-            28 -> if(inInventory(player, Items.GHOSTSPEAK_AMULET_552, 1) || inEquipment(player, Items.GHOSTSPEAK_AMULET_552, 1)) {
-                npc("What are you talking about? I can see you've got it", "with you!").also { stage = END_DIALOGUE }
-            } else if (inBank(player, Items.GHOSTSPEAK_AMULET_552, 1)) {
-                npc("What are you talking about? I can see you've got it", "in your bank!").also { stage = END_DIALOGUE }
-            } else {
-                npc(
-                    "How careless can you get? Those things aren't easy to",
-                    "come by you know! It's a good job I've got a spare.",
-                ).also { stage++ }
-            }
+            28 ->
+                if (inInventory(player, Items.GHOSTSPEAK_AMULET_552, 1) || inEquipment(player, Items.GHOSTSPEAK_AMULET_552, 1)) {
+                    npc("What are you talking about? I can see you've got it", "with you!").also { stage = END_DIALOGUE }
+                } else if (inBank(player, Items.GHOSTSPEAK_AMULET_552, 1)) {
+                    npc("What are you talking about? I can see you've got it", "in your bank!").also { stage = END_DIALOGUE }
+                } else {
+                    npc(
+                        "How careless can you get? Those things aren't easy to",
+                        "come by you know! It's a good job I've got a spare.",
+                    ).also { stage++ }
+                }
             29 -> {
                 addItem(player, Items.GHOSTSPEAK_AMULET_552, 1)
                 sendItemDialogue(
@@ -171,7 +172,5 @@ class FatherUhrneyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FATHER_URHNEY_458)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FATHER_URHNEY_458)
 }

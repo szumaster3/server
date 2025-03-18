@@ -43,7 +43,5 @@ class GoblinVillageGuardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_3241)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUARD_3241)
 }

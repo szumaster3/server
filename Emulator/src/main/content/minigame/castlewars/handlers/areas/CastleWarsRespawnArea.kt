@@ -21,9 +21,7 @@ class CastleWarsRespawnArea :
         val saradominPlayersInRespawnRoom = mutableSetOf<Player>()
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(zamorakRespawnRoom, saradominRespawnRoom)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(zamorakRespawnRoom, saradominRespawnRoom)
 
     override fun areaEnter(entity: Entity) {
         val player = entity as? Player ?: return

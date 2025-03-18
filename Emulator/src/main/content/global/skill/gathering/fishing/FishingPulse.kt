@@ -239,8 +239,8 @@ class FishingPulse(
     }
 
     companion object {
-        fun checkFish(p: Player): Int {
-            return if (p.skills.getLevel(Skills.FISHING) >= 55 && p.skills.getLevel(Skills.STRENGTH) >= 35) {
+        fun checkFish(p: Player): Int =
+            if (p.skills.getLevel(Skills.FISHING) >= 55 && p.skills.getLevel(Skills.STRENGTH) >= 35) {
                 if (p.skills.getLevel(Skills.FISHING) >= 70 && p.skills.getLevel(Skills.STRENGTH) >= 50) {
                     if (p.skills.getLevel(Skills.FISHING) >= 96 && p.skills.getLevel(Skills.STRENGTH) >= 76) {
                         3
@@ -253,6 +253,5 @@ class FishingPulse(
             } else {
                 0
             }
-        }
     }
 }

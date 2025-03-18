@@ -116,7 +116,5 @@ class PrayerTutorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PRAYER_TUTOR_4903)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PRAYER_TUTOR_4903)
 }

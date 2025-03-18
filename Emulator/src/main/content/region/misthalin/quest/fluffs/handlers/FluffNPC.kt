@@ -16,9 +16,7 @@ class FluffNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return FluffNPC(id, location)
-    }
+    ): AbstractNPC = FluffNPC(id, location)
 
     override fun isHidden(player: Player): Boolean {
         if (player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT).getStage(player) < 20) {
@@ -30,9 +28,7 @@ class FluffNPC(
         ) > System.currentTimeMillis()
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.GERTRUDES_CAT_2997)

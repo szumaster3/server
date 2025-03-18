@@ -57,11 +57,7 @@ class BogrogDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BogrogDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BogrogDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BOGROG_4472)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BOGROG_4472)
 }

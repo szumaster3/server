@@ -107,11 +107,7 @@ class HighPriestEntranaDialogue(
         }
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HighPriestEntranaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HighPriestEntranaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HIGH_PRIEST_216)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HIGH_PRIEST_216)
 }

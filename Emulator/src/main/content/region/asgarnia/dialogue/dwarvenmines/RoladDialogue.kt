@@ -33,11 +33,7 @@ class RoladDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RoladDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RoladDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROLAD_1841)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROLAD_1841)
 }

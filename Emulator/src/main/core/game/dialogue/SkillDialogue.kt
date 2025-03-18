@@ -10,9 +10,7 @@ class SkillDialogue(
 ) : Dialogue(player) {
     private lateinit var handler: SkillDialogueHandler
 
-    override fun newInstance(player: Player): Dialogue {
-        return SkillDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SkillDialogue(player)
 
     override fun open(vararg args: Any): Boolean {
         handler = args[0] as SkillDialogueHandler
@@ -46,7 +44,5 @@ class SkillDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(SkillDialogueHandler.SKILL_DIALOGUE)
-    }
+    override fun getIds(): IntArray = intArrayOf(SkillDialogueHandler.SKILL_DIALOGUE)
 }

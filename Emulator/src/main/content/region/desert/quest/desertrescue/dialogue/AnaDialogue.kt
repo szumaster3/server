@@ -286,9 +286,7 @@ class AnaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(822)
-    }
+    override fun getIds(): IntArray = intArrayOf(822)
 
     class AnaBarrelHandler : UseWithHandler(TouristTrap.BARREL.id) {
         override fun newInstance(arg: Any?): Plugin<Any> {
@@ -316,9 +314,7 @@ class AnaDialogue(
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return AnaNPC(id, location)
-        }
+        ): AbstractNPC = AnaNPC(id, location)
 
         override fun isHidden(player: Player): Boolean {
             val quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
@@ -332,8 +328,6 @@ class AnaDialogue(
             }
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(822)
-        }
+        override fun getIds(): IntArray = intArrayOf(822)
     }
 }

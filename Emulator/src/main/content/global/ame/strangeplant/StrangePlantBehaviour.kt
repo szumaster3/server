@@ -17,9 +17,7 @@ class StrangePlantBehavior : NPCBehavior(NPCs.STRANGE_PLANT_408) {
         attacker: Entity,
         style: CombatStyle,
         shouldSendMessage: Boolean,
-    ): Boolean {
-        return !(attacker !is Player || AntiMacro.getEventNpc(attacker.asPlayer()) != self)
-    }
+    ): Boolean = !(attacker !is Player || AntiMacro.getEventNpc(attacker.asPlayer()) != self)
 
     override fun beforeAttackFinalized(
         self: NPC,

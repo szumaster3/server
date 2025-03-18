@@ -121,13 +121,12 @@ class DiangoReclaimInterface : ComponentPlugin() {
             open(player)
         }
 
-        fun getEligibleItems(player: Player): Array<Item?>? {
-            return ITEMS
+        fun getEligibleItems(player: Player): Array<Item?>? =
+            ITEMS
                 .filter { item ->
                     !player.equipment.containsItem(item) &&
                         !player.inventory.containsItem(item) &&
                         !player.bank.containsItem(item)
                 }.toTypedArray()
-        }
     }
 }

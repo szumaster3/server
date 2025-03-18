@@ -52,11 +52,7 @@ class VarrockShopKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VarrockShopKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VarrockShopKeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_522, NPCs.SHOP_ASSISTANT_523)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_522, NPCs.SHOP_ASSISTANT_523)
 }

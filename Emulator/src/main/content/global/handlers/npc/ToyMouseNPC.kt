@@ -33,13 +33,9 @@ class ToyMouseNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ToyMouseNPC(id, location)
-    }
+    ): AbstractNPC = ToyMouseNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TOY_MOUSE_3597)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOY_MOUSE_3597)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -94,7 +90,5 @@ class ToyMouseNPC(
         super.checkImpact(state)
     }
 
-    override fun getInteraction(): InteractPlugin {
-        return super.getInteraction()
-    }
+    override fun getInteraction(): InteractPlugin = super.getInteraction()
 }

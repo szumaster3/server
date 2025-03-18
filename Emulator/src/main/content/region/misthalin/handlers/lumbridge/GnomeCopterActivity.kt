@@ -25,9 +25,7 @@ import core.plugin.Initializable
 class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) {
     private val usedLandingPads = BooleanArray(4)
 
-    override fun newInstance(p: Player?): ActivityPlugin {
-        return this
-    }
+    override fun newInstance(p: Player?): ActivityPlugin = this
 
     override fun interact(
         e: Entity,
@@ -195,9 +193,7 @@ class GnomeCopterActivity : ActivityPlugin("Gnome copters", false, false, true) 
         )
     }
 
-    override fun getSpawnLocation(): Location {
-        return Location.create(3161, 3337, 0)
-    }
+    override fun getSpawnLocation(): Location = Location.create(3161, 3337, 0)
 
     override fun configure() {
         register(ZoneBorders(3154, 3330, 3171, 3353))

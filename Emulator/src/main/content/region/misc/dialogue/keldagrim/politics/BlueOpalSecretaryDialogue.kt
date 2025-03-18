@@ -103,11 +103,7 @@ class BlueOpalSecretaryDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlueOpalSecretaryDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlueOpalSecretaryDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLUE_OPAL_SECRETARY_2094)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLUE_OPAL_SECRETARY_2094)
 }

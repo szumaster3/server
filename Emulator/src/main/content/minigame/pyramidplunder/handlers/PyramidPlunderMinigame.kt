@@ -408,16 +408,13 @@ class PyramidPlunderMinigame :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(7749))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(7749))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(
             ZoneRestriction.TELEPORT,
             ZoneRestriction.RANDOM_EVENTS,
             ZoneRestriction.CANNON,
             ZoneRestriction.FIRES,
         )
-    }
 }

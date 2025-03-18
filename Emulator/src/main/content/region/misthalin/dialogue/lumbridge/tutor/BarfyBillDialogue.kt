@@ -139,11 +139,7 @@ class BarfyBillDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BarfyBillDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BarfyBillDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARFY_BILL_3331)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARFY_BILL_3331)
 }

@@ -245,13 +245,9 @@ class RevenantController :
         }
     }
 
-    private fun getRandomSpawnLocation(): Location {
-        return spawnLocations.random()
-    }
+    private fun getRandomSpawnLocation(): Location = spawnLocations.random()
 
-    private fun assignRandomTask(npc: RevenantsNPC): RevenantTask {
-        return RevenantTask.values().random().also { it.assign(npc) }
-    }
+    private fun assignRandomTask(npc: RevenantsNPC): RevenantTask = RevenantTask.values().random().also { it.assign(npc) }
 
     override fun defineCommands() {
         define("setrevcap", Privilege.ADMIN) { _, strings ->
@@ -298,12 +294,11 @@ class RevenantController :
                 taskTimeRemaining[revenantNPC] = RandomFunction.random(MAX_ROAM_TICKS)
             }
 
-            fun canMove(revenantNPC: RevenantsNPC): Boolean {
-                return !revenantNPC.walkingQueue.isMoving &&
+            fun canMove(revenantNPC: RevenantsNPC): Boolean =
+                !revenantNPC.walkingQueue.isMoving &&
                     !revenantNPC.pulseManager.hasPulseRunning() &&
                     !revenantNPC.properties.combatPulse.isAttacking &&
                     !revenantNPC.properties.combatPulse.isInCombat
-            }
 
             fun getNextLocation(revenantNPC: RevenantsNPC): Location {
                 val nextX = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
@@ -385,23 +380,20 @@ class RevenantController :
                         )
                     revenantNPC.pulseManager.run(
                         object : MovementPulse(revenantNPC, nextLoc, Pathfinder.SMART) {
-                            override fun pulse(): Boolean {
-                                return true
-                            }
+                            override fun pulse(): Boolean = true
                         },
                     )
                     revenantNPC.setAttribute("routeidx", routeIdx + 1)
                 }
             }
 
-            fun canMove(revenantNPC: RevenantsNPC): Boolean {
-                return !revenantNPC.walkingQueue.isMoving &&
+            fun canMove(revenantNPC: RevenantsNPC): Boolean =
+                !revenantNPC.walkingQueue.isMoving &&
                     !revenantNPC.pulseManager.hasPulseRunning() &&
                     !revenantNPC.properties.combatPulse.isAttacking &&
                     !revenantNPC.properties.combatPulse.isInCombat &&
                     revenantNPC.properties.teleportLocation == null &&
                     !revenantNPC.getAttribute("done", false)
-            }
         }, ;
 
         abstract fun execute(revenantNPC: RevenantsNPC)

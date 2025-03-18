@@ -45,11 +45,7 @@ class TombarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TombarDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TombarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TOMBAR_2199)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOMBAR_2199)
 }

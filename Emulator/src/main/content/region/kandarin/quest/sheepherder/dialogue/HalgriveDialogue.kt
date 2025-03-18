@@ -244,11 +244,7 @@ class HalgriveDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return HalgriveDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = HalgriveDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COUNCILLOR_HALGRIVE_289)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COUNCILLOR_HALGRIVE_289)
 }

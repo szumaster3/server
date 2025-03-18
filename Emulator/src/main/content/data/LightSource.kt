@@ -125,23 +125,20 @@ enum class LightSource(
      *
      * @return the strength of the light source.
      */
-    fun getStrength(): Int {
-        return when (interfaceId) {
+    fun getStrength(): Int =
+        when (interfaceId) {
             Components.DARKNESS_LIGHT_97 -> 1
             Components.DARKNESS_MEDIUM_98 -> 2
             -1 -> 3
             else -> 0
         }
-    }
 
     /**
      * Returns the name of the light source in a human-readable format.
      *
      * @return the name of the light source.
      */
-    fun getName(): String {
-        return name.lowercase().replace("_", " ")
-    }
+    fun getName(): String = name.lowercase().replace("_", " ")
 
     companion object {
         /**
@@ -151,9 +148,7 @@ enum class LightSource(
          * @return `true` if the player has an active light source, `false` otherwise.
          */
         @JvmStatic
-        fun hasActiveLightSource(player: Player): Boolean {
-            return getActiveLightSource(player) != null
-        }
+        fun hasActiveLightSource(player: Player): Boolean = getActiveLightSource(player) != null
 
         /**
          * Gets the active light source of the player.
@@ -179,9 +174,7 @@ enum class LightSource(
          * @return the light source, or `null` if no match is found.
          */
         @JvmStatic
-        fun forId(id: Int): LightSource? {
-            return values().firstOrNull { it.raw.id == id }
-        }
+        fun forId(id: Int): LightSource? = values().firstOrNull { it.raw.id == id }
 
         /**
          * Retrieves the light source associated with a given product item id.
@@ -190,9 +183,7 @@ enum class LightSource(
          * @return the light source, or `null` if no match is found.
          */
         @JvmStatic
-        fun forProductId(id: Int): LightSource? {
-            return values().firstOrNull { it.product.id == id }
-        }
+        fun forProductId(id: Int): LightSource? = values().firstOrNull { it.product.id == id }
 
         /**
          * Retrieves an array of raw item IDs for all light sources.
@@ -200,8 +191,6 @@ enum class LightSource(
          * @return an array of raw item IDs.
          */
         @JvmStatic
-        fun getRawIds(): IntArray {
-            return values().map { it.raw.id }.toIntArray()
-        }
+        fun getRawIds(): IntArray = values().map { it.raw.id }.toIntArray()
     }
 }

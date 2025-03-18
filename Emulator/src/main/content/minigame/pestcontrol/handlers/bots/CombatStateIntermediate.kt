@@ -119,9 +119,7 @@ class CombatStateIntermediate(
 
         GameWorld.Pulser.submit(
             object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
-                override fun pulse(): Boolean {
-                    return true
-                }
+                override fun pulse(): Boolean = true
             },
         )
     }

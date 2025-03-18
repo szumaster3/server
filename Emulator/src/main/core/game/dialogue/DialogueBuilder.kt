@@ -82,9 +82,7 @@ class NpcLNode(
     val expression: FaceAnim,
     val value: String,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"npcl(FacialExpression.${expression.name}, \\\"${value}\\\")\"]; @index -> @indexPlus;"
-    }
+    override fun toString(): String = "[label=\"npcl(FacialExpression.${expression.name}, \\\"${value}\\\")\"]; @index -> @indexPlus;"
 
     override fun handle(
         df: DialogueFile,
@@ -101,9 +99,8 @@ class NpcNode(
     val expression: FaceAnim,
     val values: Array<String>,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"npc(FacialExpression.${expression.name}, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
-    }
+    override fun toString(): String =
+        "[label=\"npc(FacialExpression.${expression.name}, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
 
     override fun handle(
         df: DialogueFile,
@@ -120,9 +117,7 @@ class ItemNode(
     val item: Int,
     val values: Array<String>,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"item($item, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
-    }
+    override fun toString(): String = "[label=\"item($item, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
 
     override fun handle(
         df: DialogueFile,
@@ -139,9 +134,7 @@ class PlayerLNode(
     val expression: FaceAnim,
     val value: String,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"playerl(FacialExpression.${expression.name}, \\\"${value}\\\")\"]; @index -> @indexPlus;"
-    }
+    override fun toString(): String = "[label=\"playerl(FacialExpression.${expression.name}, \\\"${value}\\\")\"]; @index -> @indexPlus;"
 
     override fun handle(
         df: DialogueFile,
@@ -158,9 +151,8 @@ class PlayerNode(
     val expression: FaceAnim,
     val values: Array<String>,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"player(FacialExpression.${expression.name}, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
-    }
+    override fun toString(): String =
+        "[label=\"player(FacialExpression.${expression.name}, \\\"${values.contentDeepToString()}\\\")\"]; @index -> @indexPlus;"
 
     override fun handle(
         df: DialogueFile,
@@ -176,9 +168,7 @@ class PlayerNode(
 class BetweenStageNode(
     val f: (DialogueFile, Player, Int, Int) -> Unit,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"betweenstage(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
-    }
+    override fun toString(): String = "[label=\"betweenstage(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
 
     override fun handle(
         df: DialogueFile,
@@ -196,9 +186,7 @@ class BetweenStageNode(
 class ManualStageNode(
     val f: (DialogueFile, Player, Int, Int) -> Unit,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"manualstage(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
-    }
+    override fun toString(): String = "[label=\"manualstage(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
 
     override fun handle(
         df: DialogueFile,
@@ -215,18 +203,14 @@ class ManualStageWithGotoNode(
     val f: (DialogueFile, Player, Int, Int, Int) -> Int,
     g: (Int) -> Int,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"manualstagewithgoto(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
-    }
+    override fun toString(): String = "[label=\"manualstagewithgoto(${(f as Object).getClass().getName()})\"]; @index -> @indexPlus"
 
     override fun handle(
         df: DialogueFile,
         componentID: Int,
         buttonID: Int,
         stage: Int,
-    ): Int {
-        return f(df, df.player!!, componentID, buttonID, stage)
-    }
+    ): Int = f(df, df.player!!, componentID, buttonID, stage)
 }
 
 class PlaceholderNode(
@@ -234,9 +218,7 @@ class PlaceholderNode(
     val clauseIndex: Int,
     var targetStage: Int,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"placeholder($targetStage)\"]; @index -> $targetStage"
-    }
+    override fun toString(): String = "[label=\"placeholder($targetStage)\"]; @index -> $targetStage"
 
     override fun handle(
         df: DialogueFile,
@@ -258,9 +240,7 @@ class PlaceholderNode(
 class GotoNode(
     val node: PlaceholderNode,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"goto(${node.targetStage})\"]; @index -> ${node.targetStage}"
-    }
+    override fun toString(): String = "[label=\"goto(${node.targetStage})\"]; @index -> ${node.targetStage}"
 
     override fun handle(
         df: DialogueFile,
@@ -297,14 +277,13 @@ class OptionsNode(
         return ret
     }
 
-    fun optionNames(player: Player): Array<String?> {
-        return options.entries
+    fun optionNames(player: Player): Array<String?> =
+        options.entries
             .asSequence()
             .filter({ it.predicate(player) })
             .map({ it.text })
             .toList()
             .toTypedArray()
-    }
 
     override fun handle(
         df: DialogueFile,
@@ -343,9 +322,7 @@ class OptionsNode(
 class OptionsDispatchNode(
     var options: OptionsData,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"OptionsDispatchNode\"]"
-    }
+    override fun toString(): String = "[label=\"OptionsDispatchNode\"]"
 
     override fun handle(
         df: DialogueFile,
@@ -406,9 +383,7 @@ class DialogueOptionsBuilder(
         return DialogueBuilder(target, clauseIndex)
     }
 
-    fun option_playerl(value: String): DialogueBuilder {
-        return option(value).playerl(value)
-    }
+    fun option_playerl(value: String): DialogueBuilder = option(value).playerl(value)
 
     fun recordAttribute(name: String): DialogueOptionsBuilder {
         options.attr = name
@@ -449,15 +424,14 @@ class DialogueBranchBuilder(
     val clauseIndex: Int,
     var branches: BranchesData,
 ) {
-    fun onValue(value: Boolean): DialogueBuilder {
-        return onValue(
+    fun onValue(value: Boolean): DialogueBuilder =
+        onValue(
             if (value) {
                 1
             } else {
                 0
             },
         )
-    }
 
     fun onValue(value: Int): DialogueBuilder {
         val index = target.data[clauseIndex].nodes.size
@@ -469,9 +443,7 @@ class DialogueBranchBuilder(
 class EndWithNode(
     val f: (DialogueFile, Player) -> Unit,
 ) : DialogueNode {
-    override fun toString(): String {
-        return "[label=\"endWith(${(f as Object).getClass().getName()})\"]"
-    }
+    override fun toString(): String = "[label=\"endWith(${(f as Object).getClass().getName()})\"]"
 
     override fun handle(
         df: DialogueFile,
@@ -580,21 +552,17 @@ class DialogueBuilder(
     fun iteml(
         item: Int,
         value: String,
-    ): DialogueBuilder {
-        return item(item, *splitLines(value))
-    }
+    ): DialogueBuilder = item(item, *splitLines(value))
 
-    fun line(vararg values: String): DialogueBuilder {
-        return manualStage { df, player, _, _ ->
+    fun line(vararg values: String): DialogueBuilder =
+        manualStage { df, player, _, _ ->
             df.interpreter!!.sendDialogue(*(values as Array<String>))
         }
-    }
 
-    fun linel(value: String): DialogueBuilder {
-        return manualStage { df, _, _, _ ->
+    fun linel(value: String): DialogueBuilder =
+        manualStage { df, _, _, _ ->
             df.interpreter!!.sendDialogue(*splitLines(value))
         }
-    }
 
     fun endWith(f: (DialogueFile, Player) -> Unit) {
         target.data[clauseIndex].nodes.add(EndWithNode(f))
@@ -622,9 +590,7 @@ class DialogueBuilder(
         return this
     }
 
-    fun options(): DialogueOptionsBuilder {
-        return options("Select an Option")
-    }
+    fun options(): DialogueOptionsBuilder = options("Select an Option")
 
     fun options(header: String): DialogueOptionsBuilder {
         val options: ArrayList<OptionEntry> = ArrayList()

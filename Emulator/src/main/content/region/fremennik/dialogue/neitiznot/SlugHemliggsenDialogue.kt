@@ -26,11 +26,7 @@ class SlugHemliggsenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SlugHemliggsenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SlugHemliggsenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SLUG_HEMLIGSSEN_5520)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SLUG_HEMLIGSSEN_5520)
 }

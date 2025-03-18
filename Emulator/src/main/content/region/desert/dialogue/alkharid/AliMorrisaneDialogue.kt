@@ -101,7 +101,7 @@ class AliMorrisaneDialogue(
                     1 -> end()
                     2 -> {
                         end()
-                        if (!hasRequirement(player,Quests.THE_FEUD)) {
+                        if (!hasRequirement(player, Quests.THE_FEUD)) {
                             return true
                         }
                         openNpcShop(player, NPCs.ALI_MORRISANE_1862)
@@ -111,11 +111,7 @@ class AliMorrisaneDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AliMorrisaneDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AliMorrisaneDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_MORRISANE_1862)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_MORRISANE_1862)
 }

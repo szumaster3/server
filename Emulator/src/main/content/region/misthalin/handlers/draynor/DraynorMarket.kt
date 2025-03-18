@@ -9,9 +9,7 @@ import core.game.world.map.zone.ZoneBorders
 class DraynorMarket :
     MapArea,
     LogoutListener {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(DraynorUtils.draynorMarket)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(DraynorUtils.draynorMarket)
 
     override fun logout(player: Player) {
         if (!defineAreaBorders().any { it.insideBorder(player.location) }) {

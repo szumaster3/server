@@ -721,21 +721,13 @@ class DuelSession(
         return false
     }
 
-    fun hasRule(r: DuelRule): Boolean {
-        return rules[r.ordinal] != null
-    }
+    fun hasRule(r: DuelRule): Boolean = rules[r.ordinal] != null
 
-    fun getOppositeContainer(player: Player): StakeContainer? {
-        return if (player === this.player) targetContainer else playerContainer
-    }
+    fun getOppositeContainer(player: Player): StakeContainer? = if (player === this.player) targetContainer else playerContainer
 
-    fun getContainer(player: Player): StakeContainer? {
-        return if (player === this.player) playerContainer else targetContainer
-    }
+    fun getContainer(player: Player): StakeContainer? = if (player === this.player) playerContainer else targetContainer
 
-    private fun getFormattedNumber(amount: Int): String {
-        return DecimalFormat("#,###,##0").format(amount.toLong()).toString()
-    }
+    private fun getFormattedNumber(amount: Int): String = DecimalFormat("#,###,##0").format(amount.toLong()).toString()
 
     val ruleSize: Int
         get() {
@@ -748,13 +740,9 @@ class DuelSession(
             return count
         }
 
-    fun getOpposite(player: Player): Player {
-        return if (this.player === player) other!! else this.player!!
-    }
+    fun getOpposite(player: Player): Player = if (this.player === player) other!! else this.player!!
 
-    fun getOther(player: Player): Player {
-        return if (player === this.player) other!! else player
-    }
+    fun getOther(player: Player): Player = if (player === this.player) other!! else player
 
     companion object {
         private val FRIENDLY_INTER =

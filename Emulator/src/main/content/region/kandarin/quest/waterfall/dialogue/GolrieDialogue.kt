@@ -71,7 +71,5 @@ class GolrieDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("golrie_dialogue"), NPCs.GOLRIE_306)
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("golrie_dialogue"), NPCs.GOLRIE_306)
 }

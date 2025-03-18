@@ -89,7 +89,5 @@ class CabinBoyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CABIN_BOY_JENKINS_6085)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CABIN_BOY_JENKINS_6085)
 }

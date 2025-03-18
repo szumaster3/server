@@ -171,13 +171,9 @@ class StarSpriteDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return StarSpriteDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = StarSpriteDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STAR_SPRITE_8091)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STAR_SPRITE_8091)
 
     fun rollForRingBonus(
         player: Player,
@@ -197,7 +193,5 @@ class StarSpriteDialogue(
         }
     }
 
-    fun getStoreFile(): JSONObject {
-        return ServerStore.getArchive("daily-shooting-star")
-    }
+    fun getStoreFile(): JSONObject = ServerStore.getArchive("daily-shooting-star")
 }

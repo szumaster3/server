@@ -11,9 +11,7 @@ import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.world.map.zone.ZoneBorders
 
 class CourtHouse : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2735, 3471, 2736, 3471))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2735, 3471, 2736, 3471))
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player && !entity.isArtificial) {

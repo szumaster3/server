@@ -28,55 +28,46 @@ class DrFenkenstrainDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DrFenkenstrainDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DrFenkenstrainDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WEREWOLF_1668, NPCs.WEREWOLF_1669, NPCs.DR_FENKENSTRAIN_1670)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WEREWOLF_1668, NPCs.WEREWOLF_1669, NPCs.DR_FENKENSTRAIN_1670)
 }
 
 class DrFenkenstrainDialogueFile : DialogueBuilderFile() {
     companion object {
-        private fun allPartsSubmitted(player: Player): Boolean {
-            return getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) &&
+        private fun allPartsSubmitted(player: Player): Boolean =
+            getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) &&
                 getAttribute(player, CreatureOfFenkenstrain.attributeLegs, false) &&
                 getAttribute(player, CreatureOfFenkenstrain.attributeTorso, false) &&
                 getAttribute(player, CreatureOfFenkenstrain.attributeHead, false)
-        }
 
-        private fun reqArms(player: Player): Boolean {
-            return !getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) &&
+        private fun reqArms(player: Player): Boolean =
+            !getAttribute(player, CreatureOfFenkenstrain.attributeArms, false) &&
                 inInventory(
                     player,
                     Items.ARMS_4195,
                 )
-        }
 
-        private fun reqLegs(player: Player): Boolean {
-            return !getAttribute(player, CreatureOfFenkenstrain.attributeLegs, false) &&
+        private fun reqLegs(player: Player): Boolean =
+            !getAttribute(player, CreatureOfFenkenstrain.attributeLegs, false) &&
                 inInventory(
                     player,
                     Items.LEGS_4196,
                 )
-        }
 
-        private fun reqTorso(player: Player): Boolean {
-            return !getAttribute(player, CreatureOfFenkenstrain.attributeTorso, false) &&
+        private fun reqTorso(player: Player): Boolean =
+            !getAttribute(player, CreatureOfFenkenstrain.attributeTorso, false) &&
                 inInventory(
                     player,
                     Items.TORSO_4194,
                 )
-        }
 
-        private fun reqHead(player: Player): Boolean {
-            return !getAttribute(player, CreatureOfFenkenstrain.attributeHead, false) &&
+        private fun reqHead(player: Player): Boolean =
+            !getAttribute(player, CreatureOfFenkenstrain.attributeHead, false) &&
                 inInventory(
                     player,
                     Items.DECAPITATED_HEAD_4198,
                 )
-        }
 
         private fun hasPart(
             b: DialogueBuilder,

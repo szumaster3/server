@@ -63,9 +63,7 @@ class WaterbirthDungeon :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun move(
         e: Entity,
@@ -270,13 +268,12 @@ class WaterbirthDungeon :
         private fun pressurePadActivated(
             player: Player,
             location: Location,
-        ): Boolean {
-            return if (getLocalPlayers(location, 0).size > 0) {
+        ): Boolean =
+            if (getLocalPlayers(location, 0).size > 0) {
                 true
             } else {
                 getRegionPlane(location).getItem(Items.PET_ROCK_3695, location, player) != null
             }
-        }
 
         override fun handle(
             player: Player,
@@ -349,9 +346,7 @@ class WaterbirthDungeon :
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return DoorSupportNPC(id, location)
-        }
+        ): AbstractNPC = DoorSupportNPC(id, location)
 
         override fun init() {
             lock()
@@ -374,13 +369,9 @@ class WaterbirthDungeon :
             }
         }
 
-        override fun face(entity: Entity): Boolean {
-            return false
-        }
+        override fun face(entity: Entity): Boolean = false
 
-        override fun faceLocation(locatin: Location): Boolean {
-            return false
-        }
+        override fun faceLocation(locatin: Location): Boolean = false
 
         override fun checkImpact(state: BattleState) {
             getSkills().setStaticLevel(Skills.HITPOINTS, 1)
@@ -392,9 +383,7 @@ class WaterbirthDungeon :
             walkingQueue.reset()
         }
 
-        override fun canStartCombat(victim: Entity): Boolean {
-            return false
-        }
+        override fun canStartCombat(victim: Entity): Boolean = false
 
         override fun commenceDeath(killer: Entity) {
             animator.reset()
@@ -429,9 +418,7 @@ class WaterbirthDungeon :
             return style !== CombatStyle.MELEE
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.DOOR_SUPPORT_2440, NPCs.DOOR_SUPPORT_2443, NPCs.DOOR_SUPPORT_2446)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.DOOR_SUPPORT_2440, NPCs.DOOR_SUPPORT_2443, NPCs.DOOR_SUPPORT_2446)
     }
 
     companion object {

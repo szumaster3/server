@@ -107,13 +107,9 @@ class ShantayGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ShantayGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ShantayGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHANTAY_GUARD_837, NPCs.SHANTAY_GUARD_838)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHANTAY_GUARD_837, NPCs.SHANTAY_GUARD_838)
 
     companion object {
         private val PASS = Item(Items.SHANTAY_PASS_1854)

@@ -56,9 +56,7 @@ class MithrilSeedsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(1 shl 16 or 1)
-    }
+    override fun getIds(): IntArray = intArrayOf(1 shl 16 or 1)
 
     companion object {
         private val ANIMATION = Animation(827)

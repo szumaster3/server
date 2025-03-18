@@ -26,11 +26,10 @@ class PieCookingPulse(
         food: Item,
         product: Item,
         burned: Boolean,
-    ): String {
-        return if (burned) {
+    ): String =
+        if (burned) {
             "You accidentally burn the pie."
         } else {
             "You successfully bake a delicious " + getItemName(product.id).lowercase() + "."
         }
-    }
 }

@@ -60,12 +60,11 @@ class CharmedWarriorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.CHARMED_WARRIOR_3104,
             NPCs.CHARMED_WARRIOR_3105,
             NPCs.CHARMED_WARRIOR_3106,
             NPCs.CHARMED_WARRIOR_3107,
         )
-    }
 }

@@ -161,11 +161,7 @@ class LibrarianDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LibrarianDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LibrarianDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LIBRARIAN_2165)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LIBRARIAN_2165)
 }

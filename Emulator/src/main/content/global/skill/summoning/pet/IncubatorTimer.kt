@@ -12,9 +12,7 @@ import org.json.simple.JSONObject
 class IncubatorTimer : PersistTimer(500, "incubation") {
     val incubatingEggs = HashMap<Int, IncubatingEgg>()
 
-    override fun getInitialRunDelay(): Int {
-        return 50
-    }
+    override fun getInitialRunDelay(): Int = 50
 
     override fun parse(
         root: JSONObject,
@@ -76,9 +74,7 @@ class IncubatorTimer : PersistTimer(500, "incubation") {
         var finished: Boolean = false,
     )
 
-    fun IncubatingEgg.isDone(): Boolean {
-        return endTime < System.currentTimeMillis()
-    }
+    fun IncubatingEgg.isDone(): Boolean = endTime < System.currentTimeMillis()
 
     companion object {
         val TAVERLEY_REGION = 11573
@@ -86,13 +82,12 @@ class IncubatorTimer : PersistTimer(500, "incubation") {
         val YANILLE_REGION = 10288
         val YANILLE_VARBIT = 4221
 
-        fun varbitForRegion(region: Int): Int {
-            return when (region) {
+        fun varbitForRegion(region: Int): Int =
+            when (region) {
                 TAVERLEY_REGION -> TAVERLEY_VARBIT
                 YANILLE_REGION -> YANILLE_VARBIT
                 else -> -1
             }
-        }
 
         fun getEggFor(
             player: Player,

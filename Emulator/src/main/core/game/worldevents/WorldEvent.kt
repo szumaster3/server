@@ -13,9 +13,7 @@ abstract class WorldEvent(
 ) : ContentInterface {
     var plugins = PluginSet()
 
-    open fun checkActive(cal: Calendar): Boolean {
-        return false
-    }
+    open fun checkActive(cal: Calendar): Boolean = false
 
     open fun initEvent() {
         // Empty
@@ -48,11 +46,7 @@ object WorldEvents {
         events[event.name.lowercase()] = event
     }
 
-    fun get(name: String): WorldEvent? {
-        return events[name.lowercase()]
-    }
+    fun get(name: String): WorldEvent? = events[name.lowercase()]
 
-    fun getArchive(): JSONObject {
-        return ServerStore.getArchive("world-event-status")
-    }
+    fun getArchive(): JSONObject = ServerStore.getArchive("world-event-status")
 }

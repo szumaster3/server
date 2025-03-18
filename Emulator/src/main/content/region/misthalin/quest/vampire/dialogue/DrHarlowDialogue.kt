@@ -148,11 +148,7 @@ class DrHarlowDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return DrHarlowDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = DrHarlowDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DR_HARLOW_756)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DR_HARLOW_756)
 }

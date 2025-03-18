@@ -347,7 +347,5 @@ class GardenerDialogue(
         openDialogue(player, FarmerPayOptionDialogue(fPatch.getPatchFor(player)), npc)
     }
 
-    override fun getIds(): IntArray {
-        return Farmers.values().map(Farmers::id).toIntArray()
-    }
+    override fun getIds(): IntArray = Farmers.values().map(Farmers::id).toIntArray()
 }

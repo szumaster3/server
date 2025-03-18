@@ -355,7 +355,5 @@ class GossipDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOSSIP_813)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOSSIP_813)
 }

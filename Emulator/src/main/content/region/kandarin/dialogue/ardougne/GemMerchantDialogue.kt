@@ -31,11 +31,7 @@ class GemMerchantDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GemMerchantDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GemMerchantDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GEM_MERCHANT_570)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GEM_MERCHANT_570)
 }

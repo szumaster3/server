@@ -90,7 +90,5 @@ class ChamberGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHAMBER_GUARDIAN_904)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHAMBER_GUARDIAN_904)
 }

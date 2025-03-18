@@ -124,7 +124,5 @@ class NatureSpirit : Quest(Quests.NATURE_SPIRIT, 95, 94, 2, Vars.VARP_QUEST_NATU
         NSUtils.cleanupAttributes(player)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

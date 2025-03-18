@@ -106,7 +106,5 @@ class SkullballBossDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SKULLBALL_BOSS_1660)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKULLBALL_BOSS_1660)
 }

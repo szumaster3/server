@@ -67,9 +67,7 @@ object PCHelper {
             Location.create(2665, 2660, 0)
         }
 
-    fun isInPestControlInstance(p: Player): Boolean {
-        return p.getAttribute<Any?>("pc_zeal") != null
-    }
+    fun isInPestControlInstance(p: Player): Boolean = p.getAttribute<Any?>("pc_zeal") != null
 
     enum class BoatInfo(
         val boatBorder: ZoneBorders,
@@ -103,11 +101,7 @@ object PCHelper {
         return false
     }
 
-    fun getMyPestControlSession1(p: PestControlNoviceBot): PestControlSession? {
-        return p.getExtension(PestControlSession::class.java)
-    }
+    fun getMyPestControlSession1(p: PestControlNoviceBot): PestControlSession? = p.getExtension(PestControlSession::class.java)
 
-    fun getMyPestControlSession2(p: PestControlIntermediateBot): PestControlSession? {
-        return p.getExtension(PestControlSession::class.java)
-    }
+    fun getMyPestControlSession2(p: PestControlIntermediateBot): PestControlSession? = p.getExtension(PestControlSession::class.java)
 }

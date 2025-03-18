@@ -166,7 +166,5 @@ class BlackEyeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLACK_EYE_5589)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLACK_EYE_5589)
 }

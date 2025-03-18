@@ -99,7 +99,5 @@ class RewardsGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REWARDS_GUARDIAN_3103)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REWARDS_GUARDIAN_3103)
 }

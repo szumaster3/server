@@ -52,11 +52,7 @@ class ArvelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ArvelDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ArvelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARVEL_2365)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARVEL_2365)
 }

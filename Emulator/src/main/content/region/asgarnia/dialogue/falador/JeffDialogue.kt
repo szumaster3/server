@@ -29,7 +29,5 @@ class JeffDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JEFF_3240)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JEFF_3240)
 }

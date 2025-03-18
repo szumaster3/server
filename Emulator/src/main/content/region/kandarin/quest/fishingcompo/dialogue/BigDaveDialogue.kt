@@ -85,7 +85,5 @@ class BigDaveDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BIG_DAVE_228)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BIG_DAVE_228)
 }

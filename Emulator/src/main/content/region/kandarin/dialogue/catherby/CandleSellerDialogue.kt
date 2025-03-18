@@ -253,13 +253,9 @@ class CandleSellerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CandleSellerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CandleSellerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CANDLE_SELLER_1834)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CANDLE_SELLER_1834)
 
     companion object {
         private val COINS = Item(995, 1000)

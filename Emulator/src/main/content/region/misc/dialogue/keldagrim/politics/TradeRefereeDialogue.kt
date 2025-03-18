@@ -24,11 +24,7 @@ class TradeRefereeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TradeRefereeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TradeRefereeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRADE_REFEREE_2127)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRADE_REFEREE_2127)
 }

@@ -39,7 +39,5 @@ class DrunkenManDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DRUNKEN_MAN_3222)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRUNKEN_MAN_3222)
 }

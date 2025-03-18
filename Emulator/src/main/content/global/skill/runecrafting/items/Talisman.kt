@@ -88,22 +88,16 @@ enum class Talisman(
         player.packetDispatch.sendMessage("The talisman pulls towards the $direction.")
     }
 
-    fun getRuin(): MysteriousRuins? {
-        return ruin
-    }
+    fun getRuin(): MysteriousRuins? = ruin
 
     val tiara: Tiara?
         get() = Tiara.values().find { it.name == name }
 
     companion object {
         @JvmStatic
-        fun forItem(item: Item): Talisman? {
-            return values().find { it.item.id == item.id }
-        }
+        fun forItem(item: Item): Talisman? = values().find { it.item.id == item.id }
 
         @JvmStatic
-        fun forName(name: String): Talisman? {
-            return values().find { it.name == name }
-        }
+        fun forName(name: String): Talisman? = values().find { it.name == name }
     }
 }

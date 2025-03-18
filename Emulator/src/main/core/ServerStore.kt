@@ -79,11 +79,12 @@ class ServerStore : PersistWorld {
         var counter = 0
 
         @JvmStatic
-        fun getArchive(name: String): JSONObject {
-            return fileMap.getOrPut(name) { JSONObject() }
-        }
+        fun getArchive(name: String): JSONObject = fileMap.getOrPut(name) { JSONObject() }
 
-        fun setArchive(name: String, data: JSONObject) {
+        fun setArchive(
+            name: String,
+            data: JSONObject,
+        ) {
             fileMap[name] = data
         }
 
@@ -96,40 +97,44 @@ class ServerStore : PersistWorld {
         }
 
         @JvmStatic
-        fun JSONObject.getInt(key: String, default: Int = 0): Int {
-            return when (val value = this[key]) {
+        fun JSONObject.getInt(
+            key: String,
+            default: Int = 0,
+        ): Int =
+            when (val value = this[key]) {
                 is Long -> value.toInt()
                 is Double -> value.toInt()
                 is Float -> value.toInt()
                 is Int -> value
                 else -> default
             }
-        }
 
         @JvmStatic
-        fun JSONObject.getString(key: String, default: String = "nothing"): String {
-            return this[key] as? String ?: default
-        }
+        fun JSONObject.getString(
+            key: String,
+            default: String = "nothing",
+        ): String = this[key] as? String ?: default
 
         @JvmStatic
-        fun JSONObject.getLong(key: String, default: Long = 0L): Long {
-            return this[key] as? Long ?: default
-        }
+        fun JSONObject.getLong(
+            key: String,
+            default: Long = 0L,
+        ): Long = this[key] as? Long ?: default
 
         @JvmStatic
-        fun JSONObject.getBoolean(key: String, default: Boolean = false): Boolean {
-            return this[key] as? Boolean ?: default
-        }
+        fun JSONObject.getBoolean(
+            key: String,
+            default: Boolean = false,
+        ): Boolean = this[key] as? Boolean ?: default
 
-        fun List<Int>.toJSONArray(): JSONArray {
-            return JSONArray().apply { this@toJSONArray.forEach { add(it) } }
-        }
+        fun List<Int>.toJSONArray(): JSONArray = JSONArray().apply { this@toJSONArray.forEach { add(it) } }
 
-        inline fun <reified T> JSONObject.getList(key: String): List<T> {
-            return (this[key] as? JSONArray)?.mapNotNull { it as? T } ?: emptyList()
-        }
+        inline fun <reified T> JSONObject.getList(key: String): List<T> = (this[key] as? JSONArray)?.mapNotNull { it as? T } ?: emptyList()
 
-        fun JSONObject.addToList(key: String, value: Any) {
+        fun JSONObject.addToList(
+            key: String,
+            value: Any,
+        ) {
             val array = this.getOrPut(key) { JSONArray() } as JSONArray
             array.add(value)
         }
@@ -148,9 +153,7 @@ class ServerStore : PersistWorld {
             npc: Int,
             item: Int,
             period: String = "daily",
-        ): JSONObject {
-            return getArchive(NPCItemFilename(npc, item, period))
-        }
+        ): JSONObject = getArchive(NPCItemFilename(npc, item, period))
 
         fun getNPCItemStock(
             npc: Int,

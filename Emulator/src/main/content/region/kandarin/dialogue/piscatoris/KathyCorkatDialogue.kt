@@ -193,11 +193,7 @@ class KathyCorkatDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return KathyCorkatDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = KathyCorkatDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KATHY_CORKAT_3830, NPCs.KATHY_CORKAT_3831)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KATHY_CORKAT_3830, NPCs.KATHY_CORKAT_3831)
 }

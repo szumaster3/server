@@ -126,11 +126,7 @@ class ElfTrackerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ElfTrackerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ElfTrackerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELF_TRACKER_1199)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELF_TRACKER_1199)
 }

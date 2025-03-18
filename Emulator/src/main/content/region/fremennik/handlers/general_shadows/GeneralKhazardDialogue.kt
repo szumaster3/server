@@ -354,7 +354,5 @@ class GeneralKhazardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GENERAL_KHAZARD_5566)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_KHAZARD_5566)
 }

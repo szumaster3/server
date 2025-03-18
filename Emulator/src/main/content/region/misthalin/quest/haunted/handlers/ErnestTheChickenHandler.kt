@@ -142,11 +142,10 @@ class ErnestTheChickenHandler : OptionHandler() {
             updateConfigs()
         }
 
-        private fun calculateLeverConfig(): Int {
-            return levers.foldIndexed(0) { index, acc, isUp ->
+        private fun calculateLeverConfig(): Int =
+            levers.foldIndexed(0) { index, acc, isUp ->
                 if (!isUp) acc + (1 shl (index + 1)) else acc
             }
-        }
 
         private fun calculateDoorConfig(): Int {
             val downCount = downCount()
@@ -195,11 +194,10 @@ class ErnestTheChickenHandler : OptionHandler() {
             private const val LEVER_CONFIG = 33
             private const val DOOR_CONFIG = 668
 
-            fun extend(player: Player): LeverCacheExtension {
-                return player.getExtension(LeverCacheExtension::class.java) ?: LeverCacheExtension(player).apply {
+            fun extend(player: Player): LeverCacheExtension =
+                player.getExtension(LeverCacheExtension::class.java) ?: LeverCacheExtension(player).apply {
                     player.addExtension(LeverCacheExtension::class.java, this)
                 }
-            }
         }
     }
 
@@ -238,9 +236,7 @@ class ErnestTheChickenHandler : OptionHandler() {
         ;
 
         companion object {
-            fun forObject(objectId: Int): Lever? {
-                return values().firstOrNull { lever -> lever.objectIds.contains(objectId) }
-            }
+            fun forObject(objectId: Int): Lever? = values().firstOrNull { lever -> lever.objectIds.contains(objectId) }
         }
     }
 
@@ -253,9 +249,10 @@ class ErnestTheChickenHandler : OptionHandler() {
             return when (n.id) {
                 11450 -> Location.create(3109, 3353, 0)
                 11451, 11452, 11453, 11454, 11455, 11456, 11457, 11458, 11459, 11460, 11461, 11462 ->
-                    LeverCacheExtension.extend(
-                        player,
-                    ).walkData[2] as Location
+                    LeverCacheExtension
+                        .extend(
+                            player,
+                        ).walkData[2] as Location
 
                 else -> null
             }

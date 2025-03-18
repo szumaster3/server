@@ -17,8 +17,6 @@ enum class LoginType(
 
     companion object {
         @JvmStatic
-        fun fromType(type: Int): LoginType? {
-            return values().find { it.type == type }
-        }
+        fun fromType(type: Int): LoginType? = values().find { it.type == type }
     }
 }

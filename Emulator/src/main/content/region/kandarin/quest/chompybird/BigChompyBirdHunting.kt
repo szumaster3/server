@@ -163,9 +163,7 @@ class BigChompyBirdHunting :
         removeAttributes(player, ATTR_ING_BUGS, ATTR_BUGS_ASKED, ATTR_ING_RANTZ, ATTR_ING_FYCIE, ATTR_FYCIE_ASKED)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun defineListeners() {
         val filledBellows = intArrayOf(Items.OGRE_BELLOWS_3_2872, Items.OGRE_BELLOWS_2_2873, Items.OGRE_BELLOWS_1_2874)

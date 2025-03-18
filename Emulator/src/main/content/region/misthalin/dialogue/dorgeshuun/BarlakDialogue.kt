@@ -398,35 +398,19 @@ class BarlakDialogue(
         return amountInInventory(player, itemId)
     }
 
-    private fun getTotalCoinsForCurItem(): Int {
-        return getCoinsForCurItem() * getNumToExchange()
-    }
+    private fun getTotalCoinsForCurItem(): Int = getCoinsForCurItem() * getNumToExchange()
 
-    private fun getItemForCurItem(): Item {
-        return Item(getItemIdForCurItem())
-    }
+    private fun getItemForCurItem(): Item = Item(getItemIdForCurItem())
 
-    private fun getItemIdForCurItem(): Int {
-        return sets[curItem][0]
-    }
+    private fun getItemIdForCurItem(): Int = sets[curItem][0]
 
-    private fun getCoinsForCurItem(): Int {
-        return sets[curItem][1]
-    }
+    private fun getCoinsForCurItem(): Int = sets[curItem][1]
 
-    private fun getXpForCurItem(): Int {
-        return sets[curItem][2]
-    }
+    private fun getXpForCurItem(): Int = sets[curItem][2]
 
-    private fun getSkillForCurItem(): Int {
-        return sets[curItem][3]
-    }
+    private fun getSkillForCurItem(): Int = sets[curItem][3]
 
-    override fun newInstance(player: Player): Dialogue {
-        return BarlakDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BarlakDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARLAK_5828)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARLAK_5828)
 }

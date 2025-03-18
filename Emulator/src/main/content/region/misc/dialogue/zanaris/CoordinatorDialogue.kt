@@ -28,13 +28,9 @@ class CoordinatorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CoordinatorDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CoordinatorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CO_ORDINATOR_3302)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CO_ORDINATOR_3302)
 
     companion object {
         val randomDialogue =

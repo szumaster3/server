@@ -271,9 +271,7 @@ class IrenaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(4986)
-    }
+    override fun getIds(): IntArray = intArrayOf(4986)
 
     companion object {
         private val SKILLS = intArrayOf(Skills.FLETCHING, Skills.AGILITY, Skills.SMITHING, Skills.THIEVING)

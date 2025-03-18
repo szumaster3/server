@@ -126,25 +126,17 @@ class TreasureTrailManager :
     val isCompleted: Boolean
         get() = trailStage != 0 && trailLength != 0 && trailStage >= trailLength
 
-    fun hasTrail(): Boolean {
-        return clueId != 0 && (level != null) and (trailLength != 0) && trailStage != 0
-    }
+    fun hasTrail(): Boolean = clueId != 0 && (level != null) and (trailLength != 0) && trailStage != 0
 
     fun incrementClues(level: ClueLevel) {
         completedClues[level.ordinal]++
     }
 
-    fun getCompletedClues(level: ClueLevel): Int {
-        return completedClues[level.ordinal]
-    }
+    fun getCompletedClues(level: ClueLevel): Int = completedClues[level.ordinal]
 
-    fun getTrailLength(): Int {
-        return trailLength
-    }
+    fun getTrailLength(): Int = trailLength
 
-    fun getTrailStage(): Int {
-        return trailStage
-    }
+    fun getTrailStage(): Int = trailStage
 
     companion object {
         private val IDS =
@@ -480,8 +472,6 @@ class TreasureTrailManager :
                 13080,
             )
 
-        fun getInstance(player: Player): TreasureTrailManager {
-            return player.getAttribute("tt-manager", TreasureTrailManager())
-        }
+        fun getInstance(player: Player): TreasureTrailManager = player.getAttribute("tt-manager", TreasureTrailManager())
     }
 }

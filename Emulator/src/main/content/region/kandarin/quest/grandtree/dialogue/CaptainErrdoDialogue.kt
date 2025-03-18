@@ -126,7 +126,5 @@ class CaptainErrdoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_ERRDO_3811)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_ERRDO_3811)
 }

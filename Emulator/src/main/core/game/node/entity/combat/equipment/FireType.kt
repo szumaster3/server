@@ -23,9 +23,7 @@ enum class FireType(
             override fun exec(
                 node: Node,
                 vararg n: Node,
-            ): Boolean {
-                return true
-            }
+            ): Boolean = true
         },
     ),
 

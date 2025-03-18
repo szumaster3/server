@@ -43,7 +43,5 @@ class BoxOfHealthDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(96878)
-    }
+    override fun getIds(): IntArray = intArrayOf(96878)
 }

@@ -632,9 +632,7 @@ class AgilityPyramidCourse
         private fun hasFailed(
             player: Player,
             mod: Double = 0.009000,
-        ): Boolean {
-            return AgilityHandler.hasFailed(player, 10, mod)
-        }
+        ): Boolean = AgilityHandler.hasFailed(player, 10, mod)
 
         override fun getDestination(
             node: Node,
@@ -662,9 +660,7 @@ class AgilityPyramidCourse
             return null
         }
 
-        override fun createInstance(player: Player): AgilityCourse {
-            return AgilityPyramidCourse(player)
-        }
+        override fun createInstance(player: Player): AgilityCourse = AgilityPyramidCourse(player)
 
         companion object {
             private val PYRAMID_TOP = Item(6970)

@@ -55,9 +55,7 @@ class ShootingStarBot : Script() {
         inventory.add(Item(Items.RUNE_PICKAXE_1275))
     }
 
-    override fun newInstance(): Script {
-        return ShootingStarBot()
-    }
+    override fun newInstance(): Script = ShootingStarBot()
 
     fun activate(instant: Boolean) {
         state = State.TELEPORT_TO
@@ -70,13 +68,9 @@ class ShootingStarBot : Script() {
         state = State.TELEPORT_BACK
     }
 
-    fun isMining(): Boolean {
-        return state == State.MINING
-    }
+    fun isMining(): Boolean = state == State.MINING
 
-    fun isIdle(): Boolean {
-        return state == State.FULL_IDLE
-    }
+    fun isIdle(): Boolean = state == State.FULL_IDLE
 
     internal enum class State {
         FULL_IDLE,

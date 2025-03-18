@@ -37,11 +37,7 @@ class GoreuDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GoreuDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GoreuDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GOREU_2363)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GOREU_2363)
 }

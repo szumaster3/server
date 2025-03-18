@@ -72,11 +72,7 @@ class RatpitBarmanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RatpitBarmanDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RatpitBarmanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RAUBORN_2991, NPCs.BARMAN_3000)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RAUBORN_2991, NPCs.BARMAN_3000)
 }

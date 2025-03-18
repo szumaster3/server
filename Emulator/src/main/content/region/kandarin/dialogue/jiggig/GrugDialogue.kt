@@ -21,15 +21,9 @@ class GrugDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return GrugDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GrugDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRUG_2041)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRUG_2041)
 }

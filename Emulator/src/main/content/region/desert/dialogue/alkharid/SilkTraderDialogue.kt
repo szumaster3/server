@@ -84,11 +84,7 @@ class SilkTraderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SilkTraderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SilkTraderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SILK_TRADER_539)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SILK_TRADER_539)
 }

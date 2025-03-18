@@ -52,17 +52,13 @@ class NechryaelNPC : NPCBehavior(*Tasks.NECHRYAELS.npcs) {
         return getNextSpawn(self) <= GameWorld.ticks
     }
 
-    fun getNextSpawn(self: NPC): Int {
-        return getAttribute(self, ATTR_NEXTSPAWN, 0)
-    }
+    fun getNextSpawn(self: NPC): Int = getAttribute(self, ATTR_NEXTSPAWN, 0)
 
     fun setNextSpawn(self: NPC) {
         setAttribute(self, ATTR_NEXTSPAWN, GameWorld.ticks + 50)
     }
 
-    fun getSpawns(self: NPC): ArrayList<NPC> {
-        return getAttribute(self, ATTR_SPAWNS, ArrayList())
-    }
+    fun getSpawns(self: NPC): ArrayList<NPC> = getAttribute(self, ATTR_SPAWNS, ArrayList())
 
     fun addSpawn(
         self: NPC,
@@ -116,16 +112,12 @@ class DeathSpawnBehavior : NPCBehavior(NPCs.DEATH_SPAWN_1614) {
     override fun shouldIgnoreMultiRestrictions(
         self: NPC,
         victim: Entity,
-    ): Boolean {
-        return victim == getAttribute<Player?>(self, "target", null)
-    }
+    ): Boolean = victim == getAttribute<Player?>(self, "target", null)
 
     override fun canBeAttackedBy(
         self: NPC,
         attacker: Entity,
         style: CombatStyle,
         shouldSendMessage: Boolean,
-    ): Boolean {
-        return attacker == getAttribute<Player?>(self, "target", null)
-    }
+    ): Boolean = attacker == getAttribute<Player?>(self, "target", null)
 }

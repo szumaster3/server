@@ -167,9 +167,7 @@ class SmithingApprenticeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SMELTING_TUTOR_4904, NPCs.SMITHING_TUTOR_7959, NPCs.SMITHING_TUTOR_7970)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SMELTING_TUTOR_4904, NPCs.SMITHING_TUTOR_7959, NPCs.SMITHING_TUTOR_7970)
 
     companion object {
         private val ores =

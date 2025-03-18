@@ -21,15 +21,9 @@ class ArianwynDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player): Dialogue {
-        return ArianwynDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ArianwynDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARIANWYN_1202)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARIANWYN_1202)
 }

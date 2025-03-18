@@ -46,7 +46,5 @@ class GrainOfPlentyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(56875)
-    }
+    override fun getIds(): IntArray = intArrayOf(56875)
 }

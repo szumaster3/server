@@ -115,7 +115,5 @@ class GraveyardGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRAVEYARD_GUARDIAN_3101)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRAVEYARD_GUARDIAN_3101)
 }

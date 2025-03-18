@@ -116,13 +116,9 @@ class HunterPlugin : OptionHandler() {
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return node is GroundItem || node !is Item
-    }
+    ): Boolean = node is GroundItem || node !is Item
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     class HuntingItemUseWithHandler : UseWithHandler(*ids) {
         override fun newInstance(arg: Any?): Plugin<Any> {
@@ -200,9 +196,7 @@ class HunterPlugin : OptionHandler() {
             return true
         }
 
-        override fun isWalk(): Boolean {
-            return false
-        }
+        override fun isWalk(): Boolean = false
 
         enum class ReleaseType(
             vararg val ids: Int,

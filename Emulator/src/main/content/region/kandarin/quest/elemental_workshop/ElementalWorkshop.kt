@@ -16,9 +16,7 @@ import org.rs.consts.Vars
 class ElementalWorkshop :
     Quest(Quests.ELEMENTAL_WORKSHOP_I, 52, 51, 1),
     Commands {
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun drawJournal(
         player: Player,

@@ -39,9 +39,7 @@ class ChaosElementalNPC
             }
         }
 
-        override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-            return COMBAT_HANDLER
-        }
+        override fun getSwingHandler(swing: Boolean): CombatSwingHandler = COMBAT_HANDLER
 
         override fun sendImpact(state: BattleState) {
             if (state.estimatedHit > 28) {
@@ -54,13 +52,9 @@ class ChaosElementalNPC
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC {
-            return ChaosElementalNPC(id, location)
-        }
+        ): AbstractNPC = ChaosElementalNPC(id, location)
 
-        override fun getIds(): IntArray {
-            return intArrayOf(NPCs.CHAOS_ELEMENTAL_3200)
-        }
+        override fun getIds(): IntArray = intArrayOf(NPCs.CHAOS_ELEMENTAL_3200)
 
         override fun finalizeDeath(killer: Entity) {
             super.finalizeDeath(killer)
@@ -189,9 +183,7 @@ class ChaosElementalNPC
                                 entity: Entity?,
                                 victim: Entity?,
                                 state: BattleState?,
-                            ): Boolean {
-                                return true
-                            }
+                            ): Boolean = true
                         },
                         object : SwitchAttack(
                             CombatStyle.MAGIC.swingHandler,
@@ -214,9 +206,7 @@ class ChaosElementalNPC
                                 entity: Entity?,
                                 victim: Entity?,
                                 state: BattleState?,
-                            ): Boolean {
-                                return true
-                            }
+                            ): Boolean = true
                         },
                     )
             }

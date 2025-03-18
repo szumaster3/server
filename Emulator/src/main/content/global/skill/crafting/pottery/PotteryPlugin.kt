@@ -48,9 +48,7 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
                 player.pulseManager.run(PotteryCraftingPulse(player, event.usedItem, amount, Pottery.values()[index]))
             }
 
-            override fun getAll(index: Int): Int {
-                return amountInInventory(player, SOFT_CLAY)
-            }
+            override fun getAll(index: Int): Int = amountInInventory(player, SOFT_CLAY)
         }.open()
         return true
     }
@@ -104,8 +102,8 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
             }
         }
 
-        fun getSkillHandler(player: Player): SkillDialogueHandler {
-            return object :
+        fun getSkillHandler(player: Player): SkillDialogueHandler =
+            object :
                 SkillDialogueHandler(player, SkillDialogueHandler.SkillDialogue.FIVE_OPTION, *getPottery(true)) {
                 override fun create(
                     amount: Int,
@@ -121,10 +119,7 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
                     )
                 }
 
-                override fun getAll(index: Int): Int {
-                    return player.inventory.getAmount(Pottery.values()[index].unfinished)
-                }
+                override fun getAll(index: Int): Int = player.inventory.getAmount(Pottery.values()[index].unfinished)
             }
-        }
     }
 }

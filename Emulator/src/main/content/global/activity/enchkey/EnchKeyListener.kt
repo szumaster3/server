@@ -185,8 +185,8 @@ class EnchKeyListener :
         return initialTreasure + shuffledLocation
     }
 
-    private fun meetingTreasures(player: Player): Map<Location, Treasure> {
-        return mapOf(
+    private fun meetingTreasures(player: Player): Map<Location, Treasure> =
+        mapOf(
             EnchKeyTreasure.gnomeballfieldTreasure to
                 Treasure(
                     listOf(
@@ -287,7 +287,6 @@ class EnchKeyListener :
                     ),
                 ),
         )
-    }
 
     override fun defineCommands() {
         define(

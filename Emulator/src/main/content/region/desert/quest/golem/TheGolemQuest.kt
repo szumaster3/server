@@ -77,9 +77,8 @@ class TheGolemQuest : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_G
         }
     }
 
-    override fun hasRequirements(player: Player?): Boolean {
-        return getStatLevel(player!!, Skills.CRAFTING) >= 20 && getStatLevel(player, Skills.THIEVING) >= 25
-    }
+    override fun hasRequirements(player: Player?): Boolean =
+        getStatLevel(player!!, Skills.CRAFTING) >= 20 && getStatLevel(player, Skills.THIEVING) >= 25
 
     override fun finish(player: Player) {
         super.finish(player)
@@ -93,9 +92,7 @@ class TheGolemQuest : Quest(Quests.THE_GOLEM, 70, 69, 1, Vars.VARBIT_QUEST_THE_G
         rewardXP(player, Skills.THIEVING, 1000.0)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun updateVarps(player: Player?) {
         TheGolemListeners.updateVarps(player!!)
@@ -111,18 +108,15 @@ class ClayGolemNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return ClayGolemNPC(id, location)
-    }
+    ): AbstractNPC = ClayGolemNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.TOUGH_GUY_1907,
             NPCs.BROKEN_CLAY_GOLEM_1908,
             NPCs.DAMAGED_CLAY_GOLEM_1909,
             NPCs.CLAY_GOLEM_1910,
         )
-    }
 }
 
 class TheGolemListeners :
@@ -130,14 +124,13 @@ class TheGolemListeners :
     InterfaceListener {
     companion object {
         @JvmStatic
-        fun hasStatuette(player: Player): Boolean {
-            return player.inventory.containsAtLeastOneItem(Items.STATUETTE_4618) ||
+        fun hasStatuette(player: Player): Boolean =
+            player.inventory.containsAtLeastOneItem(Items.STATUETTE_4618) ||
                 player.bank.containsAtLeastOneItem(Items.STATUETTE_4618) ||
                 player.getAttribute(
                     "the-golem:placed-statuette",
                     false,
                 )
-        }
 
         @JvmStatic
         fun initializeStatuettes(player: Player) {

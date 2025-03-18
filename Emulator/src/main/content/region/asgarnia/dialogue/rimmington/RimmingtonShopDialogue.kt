@@ -49,7 +49,5 @@ class RimmingtonShopDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOP_ASSISTANT_531, NPCs.SHOPKEEPER_530)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOP_ASSISTANT_531, NPCs.SHOPKEEPER_530)
 }

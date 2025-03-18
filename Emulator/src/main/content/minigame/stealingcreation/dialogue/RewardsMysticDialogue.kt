@@ -176,7 +176,5 @@ class RewardsMysticDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REWARDS_MYSTIC_8228)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REWARDS_MYSTIC_8228)
 }

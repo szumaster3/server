@@ -64,9 +64,7 @@ open class QPReq(
 open class QPCumulative(
     val amount: Int,
 ) : Requirements {
-    override fun evaluate(player: Player): Pair<Boolean, List<Requirements>> {
-        return Pair(false, listOf(this))
-    }
+    override fun evaluate(player: Player): Pair<Boolean, List<Requirements>> = Pair(false, listOf(this))
 }
 
 enum class QuestRequirements(

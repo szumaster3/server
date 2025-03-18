@@ -25,13 +25,12 @@ class CombatBotAssembler {
         type: Type,
         tier: Tier,
         location: Location,
-    ): AIPlayer? {
-        return when (type) {
+    ): AIPlayer? =
+        when (type) {
             Type.RANGE -> assembleRangedBot(tier, location)
             Type.MELEE -> assembleMeleeBot(tier, location)
             Type.MAGE -> assembleMeleeBot(tier, location)
         }
-    }
 
     fun assembleRangedBot(
         tier: Tier,

@@ -689,59 +689,89 @@ class BarbarianBook : InteractionListener {
             )
     }
 
-    private fun displayGuide(player: Player, guideType: GuideType) {
-        val guideContent = when (guideType) {
-            GuideType.FISH_BASE -> FISHING_BASICS
-            GuideType.FISH_FULL -> FISHING_COMPLETE
-            GuideType.BARE_H_BASE -> BAREHAND_BASICS
-            GuideType.BARE_H_FULL -> BAREHAND_COMPLETE
-            GuideType.FM_BASE -> FM_BOW_BASICS
-            GuideType.FM_FULL -> FM_BOW_COMPLETE
-            GuideType.PS_BASE -> PYRESHIP_BASICS
-            GuideType.PS_FULL -> PYRESHIP_COMPLETE
-            GuideType.H_BASE -> HERBLORE_BASICS
-            GuideType.H_FULL -> HERBLORE_COMPLETE
-            GuideType.FISH_FM_FULL -> FISHING_FM_COMPLETE
-            GuideType.FISH_FM_H_FULL -> FISHING_FM_HERBLORE_COMPLETE
-            GuideType.SMITH_N_REQS -> SMITHING_SPEAR_BASICS_NO_QUEST
-            GuideType.SMITH_M_REQS -> SMITHING_SPEAR_BASICS
-            GuideType.SMITH_S_FULL -> SMITHING_SPEAR_COMPLETE
-            GuideType.SMITH_H_BASE -> SMITHING_HASTAE_BASICS
-            GuideType.SMITH_H_FULL -> SMITHING_HASTAE_COMPLETE
-            else -> BARB_TRAINING_BASIC_PAGE
-        }
+    private fun displayGuide(
+        player: Player,
+        guideType: GuideType,
+    ) {
+        val guideContent =
+            when (guideType) {
+                GuideType.FISH_BASE -> FISHING_BASICS
+                GuideType.FISH_FULL -> FISHING_COMPLETE
+                GuideType.BARE_H_BASE -> BAREHAND_BASICS
+                GuideType.BARE_H_FULL -> BAREHAND_COMPLETE
+                GuideType.FM_BASE -> FM_BOW_BASICS
+                GuideType.FM_FULL -> FM_BOW_COMPLETE
+                GuideType.PS_BASE -> PYRESHIP_BASICS
+                GuideType.PS_FULL -> PYRESHIP_COMPLETE
+                GuideType.H_BASE -> HERBLORE_BASICS
+                GuideType.H_FULL -> HERBLORE_COMPLETE
+                GuideType.FISH_FM_FULL -> FISHING_FM_COMPLETE
+                GuideType.FISH_FM_H_FULL -> FISHING_FM_HERBLORE_COMPLETE
+                GuideType.SMITH_N_REQS -> SMITHING_SPEAR_BASICS_NO_QUEST
+                GuideType.SMITH_M_REQS -> SMITHING_SPEAR_BASICS
+                GuideType.SMITH_S_FULL -> SMITHING_SPEAR_COMPLETE
+                GuideType.SMITH_H_BASE -> SMITHING_HASTAE_BASICS
+                GuideType.SMITH_H_FULL -> SMITHING_HASTAE_COMPLETE
+                else -> BARB_TRAINING_BASIC_PAGE
+            }
         BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_26, TITLE, guideContent, false)
     }
 
     override fun defineListeners() {
         on(Items.BARBARIAN_SKILLS_11340, IntType.ITEM, "read") { player, _ ->
-            val barbarianAttributes = mapOf(
-                BarbarianTraining.FISHING_BASE to GuideType.FISH_BASE,
-                BarbarianTraining.FISHING_FULL to GuideType.FISH_FULL,
-                BarbarianTraining.FM_BASE to GuideType.FM_BASE,
-                BarbarianTraining.FM_FULL to GuideType.FM_FULL,
-                BarbarianTraining.PYRESHIP_BASE to GuideType.PS_BASE,
-                BarbarianTraining.PYRESHIP_FULL to GuideType.PS_FULL,
-                BarbarianTraining.HERBLORE_BASE to GuideType.H_BASE,
-                BarbarianTraining.HERBLORE_FULL to GuideType.H_FULL,
-                BarbarianTraining.SPEAR_BASE to GuideType.SMITH_N_REQS,
-                BarbarianTraining.SPEAR_FULL to GuideType.SMITH_S_FULL,
-                BarbarianTraining.HASTA_FULL to GuideType.SMITH_H_FULL
-            )
+            val barbarianAttributes =
+                mapOf(
+                    BarbarianTraining.FISHING_BASE to GuideType.FISH_BASE,
+                    BarbarianTraining.FISHING_FULL to GuideType.FISH_FULL,
+                    BarbarianTraining.FM_BASE to GuideType.FM_BASE,
+                    BarbarianTraining.FM_FULL to GuideType.FM_FULL,
+                    BarbarianTraining.PYRESHIP_BASE to GuideType.PS_BASE,
+                    BarbarianTraining.PYRESHIP_FULL to GuideType.PS_FULL,
+                    BarbarianTraining.HERBLORE_BASE to GuideType.H_BASE,
+                    BarbarianTraining.HERBLORE_FULL to GuideType.H_FULL,
+                    BarbarianTraining.SPEAR_BASE to GuideType.SMITH_N_REQS,
+                    BarbarianTraining.SPEAR_FULL to GuideType.SMITH_S_FULL,
+                    BarbarianTraining.HASTA_FULL to GuideType.SMITH_H_FULL,
+                )
 
-            val attributes = barbarianAttributes.entries
-                .filter { getAttribute(player, it.key, false) }
-                .firstOrNull()?.let { it.key to it.value }
+            val attributes =
+                barbarianAttributes.entries
+                    .filter { getAttribute(player, it.key, false) }
+                    .firstOrNull()
+                    ?.let { it.key to it.value }
 
-            val guideType = when {
-                attributes == null -> GuideType.DEFAULT
-                attributes.first == BarbarianTraining.FISHING_FULL && getAttribute(player, BarbarianTraining.FM_FULL, false) -> GuideType.FISH_FM_FULL
-                attributes.first == BarbarianTraining.FM_FULL && getAttribute(player, BarbarianTraining.PYRESHIP_BASE, false) -> GuideType.PS_FULL
-                attributes.first == BarbarianTraining.HERBLORE_FULL && getAttribute(player, BarbarianTraining.FISHING_FULL, false) && getAttribute(player, BarbarianTraining.FM_FULL, false) -> GuideType.FISH_FM_H_FULL
-                attributes.first == BarbarianTraining.SPEAR_BASE && getAttribute(player, BarbarianTraining.FISHING_FULL, false) -> GuideType.SMITH_M_REQS
-                attributes.first == BarbarianTraining.SPEAR_FULL && getAttribute(player, BarbarianTraining.HASTA_BASE, false) -> GuideType.SMITH_H_BASE
-                else -> attributes.second
-            }
+            val guideType =
+                when {
+                    attributes == null -> GuideType.DEFAULT
+                    attributes.first == BarbarianTraining.FISHING_FULL &&
+                        getAttribute(
+                            player,
+                            BarbarianTraining.FM_FULL,
+                            false,
+                        ) -> GuideType.FISH_FM_FULL
+                    attributes.first == BarbarianTraining.FM_FULL &&
+                        getAttribute(
+                            player,
+                            BarbarianTraining.PYRESHIP_BASE,
+                            false,
+                        ) -> GuideType.PS_FULL
+                    attributes.first == BarbarianTraining.HERBLORE_FULL &&
+                        getAttribute(player, BarbarianTraining.FISHING_FULL, false) &&
+                        getAttribute(player, BarbarianTraining.FM_FULL, false) -> GuideType.FISH_FM_H_FULL
+                    attributes.first == BarbarianTraining.SPEAR_BASE &&
+                        getAttribute(
+                            player,
+                            BarbarianTraining.FISHING_FULL,
+                            false,
+                        ) -> GuideType.SMITH_M_REQS
+                    attributes.first == BarbarianTraining.SPEAR_FULL &&
+                        getAttribute(
+                            player,
+                            BarbarianTraining.HASTA_BASE,
+                            false,
+                        ) -> GuideType.SMITH_H_BASE
+                    else -> attributes.second
+                }
 
             displayGuide(player, guideType)
             return@on true

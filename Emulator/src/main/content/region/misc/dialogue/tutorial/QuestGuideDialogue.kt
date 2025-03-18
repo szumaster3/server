@@ -107,11 +107,7 @@ class QuestGuideDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return QuestGuideDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = QuestGuideDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.QUEST_GUIDE_949)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.QUEST_GUIDE_949)
 }

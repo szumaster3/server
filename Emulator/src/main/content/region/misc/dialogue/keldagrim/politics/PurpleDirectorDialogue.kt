@@ -53,11 +53,7 @@ class PurpleDirectorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return PurpleDirectorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = PurpleDirectorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PURPLE_PEWTER_DIRECTOR_2100)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PURPLE_PEWTER_DIRECTOR_2100)
 }

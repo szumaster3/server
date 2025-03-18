@@ -22,9 +22,7 @@ class FatherTrollBehavior :
         attacker: Entity,
         style: CombatStyle,
         shouldSendMessage: Boolean,
-    ): Boolean {
-        return attacker is Player
-    }
+    ): Boolean = attacker is Player
 
     override fun beforeDamageReceived(
         self: NPC,
@@ -68,9 +66,7 @@ class MotherTrollBehavior : NPCBehavior(NPCs.ICE_BLOCK_1945) {
         attacker: Entity,
         style: CombatStyle,
         shouldSendMessage: Boolean,
-    ): Boolean {
-        return attacker is Player
-    }
+    ): Boolean = attacker is Player
 
     override fun beforeDamageReceived(
         self: NPC,

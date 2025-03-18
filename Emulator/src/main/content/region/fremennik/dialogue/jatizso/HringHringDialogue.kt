@@ -37,11 +37,7 @@ class HringHringDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HringHringDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HringHringDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HRING_HRING_5483)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HRING_HRING_5483)
 }

@@ -94,13 +94,9 @@ class CaveMonkDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CaveMonkDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CaveMonkDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAVE_MONK_656)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAVE_MONK_656)
 
     companion object {
         private val DUNGEON: Location = Location.create(2822, 9774, 0)

@@ -567,13 +567,9 @@ class TouristTrapPlugin : OptionHandler() {
     override fun isWalk(
         player: Player,
         node: Node,
-    ): Boolean {
-        return node !is Item
-    }
+    ): Boolean = node !is Item
 
-    override fun isWalk(): Boolean {
-        return false
-    }
+    override fun isWalk(): Boolean = false
 
     override fun getDestination(
         node: Node,
@@ -588,9 +584,7 @@ class TouristTrapPlugin : OptionHandler() {
     private fun hasItem(
         player: Player,
         item: Item,
-    ): Boolean {
-        return !player.inventory.containsItem(item) && !player.bank.containsItem(item)
-    }
+    ): Boolean = !player.inventory.containsItem(item) && !player.bank.containsItem(item)
 
     class WinchDialogue(
         player: Player? = null,
@@ -768,9 +762,7 @@ class TouristTrapPlugin : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("winch dialogue"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("winch dialogue"))
     }
 
     class AnnaCartHandler : UseWithHandler(TouristTrap.ANNA_BARREL.id) {
@@ -879,17 +871,11 @@ class TouristTrapPlugin : OptionHandler() {
                 )
             }
 
-            override fun newInstance(p: Player): ActivityPlugin {
-                return AnnaCartCutscene(p)
-            }
+            override fun newInstance(p: Player): ActivityPlugin = AnnaCartCutscene(p)
 
-            override fun getSpawnLocation(): Location? {
-                return null
-            }
+            override fun getSpawnLocation(): Location? = null
 
-            override fun getStartLocation(): Location {
-                return base.transform(54, 23, 0)
-            }
+            override fun getStartLocation(): Location = base.transform(54, 23, 0)
 
             override fun configure() {
                 region = DynamicRegion.create(13203)
@@ -987,9 +973,7 @@ class TouristTrapPlugin : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("ana cart dialogue"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("ana cart dialogue"))
     }
 
     class MineCartDialogue(
@@ -1146,17 +1130,11 @@ class TouristTrapPlugin : OptionHandler() {
                 }
             }
 
-            override fun newInstance(p: Player): ActivityPlugin {
-                return MiningCartCutscene(p)
-            }
+            override fun newInstance(p: Player): ActivityPlugin = MiningCartCutscene(p)
 
-            override fun getSpawnLocation(): Location? {
-                return null
-            }
+            override fun getSpawnLocation(): Location? = null
 
-            override fun getStartLocation(): Location {
-                return base.transform(path[0].localX, path[0].localY, 0)
-            }
+            override fun getStartLocation(): Location = base.transform(path[0].localX, path[0].localY, 0)
 
             override fun configure() {
                 region = DynamicRegion.create(13203)
@@ -1188,9 +1166,7 @@ class TouristTrapPlugin : OptionHandler() {
             }
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("cart dialogue"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("cart dialogue"))
 
         companion object {
             private val FAIL_ANIMATION = Animation(5048)
@@ -1205,9 +1181,7 @@ class TouristTrapPlugin : OptionHandler() {
             this.player = player
         }
 
-        override fun newInstance(p: Player): ActivityPlugin {
-            return WinchCutscene(p)
-        }
+        override fun newInstance(p: Player): ActivityPlugin = WinchCutscene(p)
 
         override fun open() {
             super.open()
@@ -1226,13 +1200,9 @@ class TouristTrapPlugin : OptionHandler() {
             )
         }
 
-        override fun getSpawnLocation(): Location? {
-            return null
-        }
+        override fun getSpawnLocation(): Location? = null
 
-        override fun getStartLocation(): Location {
-            return base.transform(16, 10, 0)
-        }
+        override fun getStartLocation(): Location = base.transform(16, 10, 0)
 
         override fun configure() {
             region = DynamicRegion.create(13103)
@@ -1339,9 +1309,7 @@ class TouristTrapPlugin : OptionHandler() {
             return true
         }
 
-        override fun getIds(): IntArray {
-            return intArrayOf(DialogueInterpreter.getDialogueKey("barrel dialogue"))
-        }
+        override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("barrel dialogue"))
     }
 
     class BedabinAnvilHandler : UseWithHandler(2349) {
@@ -1438,9 +1406,7 @@ class TouristTrapPlugin : OptionHandler() {
                     return true
                 }
 
-                override fun getIds(): IntArray {
-                    return intArrayOf(DialogueInterpreter.getDialogueKey("prototype dart"))
-                }
+                override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("prototype dart"))
 
                 companion object {
                     private val FEATHERS = Item(314, 10)
@@ -1541,9 +1507,7 @@ class TouristTrapPlugin : OptionHandler() {
                 }
             }
 
-            override fun getIds(): IntArray {
-                return intArrayOf(DialogueInterpreter.getDialogueKey("bedabin-anvil"))
-            }
+            override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("bedabin-anvil"))
         }
     }
 }

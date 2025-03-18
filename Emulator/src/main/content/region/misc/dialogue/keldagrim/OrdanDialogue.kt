@@ -36,13 +36,9 @@ class OrdanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return OrdanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = OrdanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ORDAN_2564)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ORDAN_2564)
 
     class OrdanUnnoteListener : InteractionListener {
         val notedOre =

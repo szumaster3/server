@@ -64,11 +64,7 @@ class HonestJimmyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HonestJimmyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HonestJimmyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HONEST_JIMMY_4362)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HONEST_JIMMY_4362)
 }

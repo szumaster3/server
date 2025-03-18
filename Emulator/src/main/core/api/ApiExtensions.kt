@@ -19,9 +19,7 @@ fun IntProgression.toIntArray(): IntArray {
  *
  * @return A new [Item] initialized with the given [Int].
  */
-fun Int.asItem(): Item {
-    return Item(this)
-}
+fun Int.asItem(): Item = Item(this)
 
 /**
  * Converts a collection of [IntArray] to a single [IntArray].
@@ -40,9 +38,7 @@ fun Collection<IntArray>.toIntArray(): IntArray {
  * @param element The element to check.
  * @return `true` if the [element] is the last in the collection, otherwise `false`.
  */
-inline fun <reified T> Collection<T>.isLast(element: T): Boolean {
-    return this.indexOf(element) == this.size - 1
-}
+inline fun <reified T> Collection<T>.isLast(element: T): Boolean = this.indexOf(element) == this.size - 1
 
 /**
  * Gets the next element after the specified [element] in the collection.
@@ -65,9 +61,7 @@ inline fun <reified T> Collection<T>.getNext(element: T): T {
  * @param element The element to check.
  * @return `true` if the next element is the last in the collection, otherwise `false`.
  */
-inline fun <reified T> Collection<T>.isNextLast(element: T): Boolean {
-    return this.isLast(this.getNext(element))
-}
+inline fun <reified T> Collection<T>.isNextLast(element: T): Boolean = this.isLast(this.getNext(element))
 
 /**
  * Checks if the specified [element] is the last element in the array.
@@ -75,9 +69,7 @@ inline fun <reified T> Collection<T>.isNextLast(element: T): Boolean {
  * @param element The element to check.
  * @return `true` if the [element] is the last in the array, otherwise `false`.
  */
-fun IntArray.isLast(element: Int): Boolean {
-    return this.indexOf(element) == this.size - 1
-}
+fun IntArray.isLast(element: Int): Boolean = this.indexOf(element) == this.size - 1
 
 /**
  * Gets the next element after the specified [element] in the array.
@@ -100,9 +92,7 @@ fun IntArray.getNext(element: Int): Int {
  * @param element The element to check.
  * @return `true` if the next element is the last in the array, otherwise `false`.
  */
-fun IntArray.isNextLast(element: Int): Boolean {
-    return this.isLast(this.getNext(element))
-}
+fun IntArray.isNextLast(element: Int): Boolean = this.isLast(this.getNext(element))
 
 /**
  * Attempts to pop an element from the [LinkedList], returning the default value if the list is empty.
@@ -121,10 +111,9 @@ fun <T> LinkedList<T>.tryPop(default: T?): T? {
  * @param name The name of the enum entry to parse.
  * @return The enum entry if found, otherwise `null`.
  */
-inline fun <reified E : Enum<E>> parseEnumEntry(name: String): E? {
-    return try {
+inline fun <reified E : Enum<E>> parseEnumEntry(name: String): E? =
+    try {
         enumValueOf<E>(name)
     } catch (e: Exception) {
         null
     }
-}

@@ -38,15 +38,9 @@ class ReesoDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ReesoDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ReesoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.REESO_3116)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.REESO_3116)
 }

@@ -36,7 +36,7 @@ class RestlessGhostDialogue(
                     return true
                 }
                 if (getQuestStage(player, Quests.THE_RESTLESS_GHOST) == 20) {
-                        npc(FaceAnim.HALF_GUILTY, "Not very good actually.")
+                    npc(FaceAnim.HALF_GUILTY, "Not very good actually.")
                     stage = 18
                     return true
                 }
@@ -169,7 +169,5 @@ class RestlessGhostDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RESTLESS_GHOST_457)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RESTLESS_GHOST_457)
 }

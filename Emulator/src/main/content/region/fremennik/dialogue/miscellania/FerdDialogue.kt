@@ -41,11 +41,7 @@ class FerdDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FerdDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FerdDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FERD_3937)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FERD_3937)
 }

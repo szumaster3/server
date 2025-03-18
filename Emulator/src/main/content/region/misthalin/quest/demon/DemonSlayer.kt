@@ -63,9 +63,12 @@ class DemonSlayer : Quest(Quests.DEMON_SLAYER, 16, 15, 3, Vars.VARP_QUEST_DEMON_
             line(player, "destroyed Varrock over 150 years ago.", line++, stage >= 30)
             line(player, "To defeat the !!demon?? I need the magical sword !!Silverlight??.", line++, stage >= 30)
             line(player, "!!Sir Prysin?? needs !!3 keys?? before he can give me !!Silverlight??.", line++, stage >= 30)
-            if (inInventory(player, DemonSlayerUtils.FIRST_KEY.id) && inInventory(
-                    player, DemonSlayerUtils.SECOND_KEY.id
-                ) && inInventory(player, DemonSlayerUtils.THIRD_KEY.id)
+            if (inInventory(player, DemonSlayerUtils.FIRST_KEY.id) &&
+                inInventory(
+                    player,
+                    DemonSlayerUtils.SECOND_KEY.id,
+                ) &&
+                inInventory(player, DemonSlayerUtils.THIRD_KEY.id)
             ) {
                 line(player, "Now I have !!all 3 keys?? I should go and speak to !!Sir Prysin??", line++, stage >= 30)
                 line(player, "and collect the magical sword !!Silverlight?? from him.", line++, stage >= 30)
@@ -136,7 +139,6 @@ class DemonSlayer : Quest(Quests.DEMON_SLAYER, 16, 15, 3, Vars.VARP_QUEST_DEMON_
             line(player, "<col=FF0000>QUEST COMPLETE!", line)
         }
     }
-
 
     override fun finish(player: Player) {
         super.finish(player)

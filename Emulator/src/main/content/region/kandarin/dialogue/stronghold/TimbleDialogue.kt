@@ -43,11 +43,7 @@ class TimbleDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TimbleDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TimbleDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TIMBLE_4573)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TIMBLE_4573)
 }

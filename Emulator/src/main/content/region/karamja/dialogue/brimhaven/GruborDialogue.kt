@@ -56,13 +56,9 @@ class GruborDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GruborDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GruborDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GRUBOR_789)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GRUBOR_789)
 }
 
 class GruborDialogueFile : DialogueBuilderFile() {

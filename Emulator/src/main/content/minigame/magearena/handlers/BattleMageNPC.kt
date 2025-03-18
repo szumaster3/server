@@ -27,9 +27,7 @@ class BattleMageNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BattleMageNPC(id, location)
-    }
+    ): AbstractNPC = BattleMageNPC(id, location)
 
     override fun init() {
         super.init()
@@ -62,7 +60,5 @@ class BattleMageNPC : AbstractNPC {
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BATTLE_MAGE_913, NPCs.BATTLE_MAGE_912, NPCs.BATTLE_MAGE_914)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BATTLE_MAGE_913, NPCs.BATTLE_MAGE_912, NPCs.BATTLE_MAGE_914)
 }

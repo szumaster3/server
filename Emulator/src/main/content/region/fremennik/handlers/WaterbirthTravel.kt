@@ -36,9 +36,7 @@ object WaterbirthTravel {
         )
     }
 
-    private fun isDestinationValid(destination: TravelDestination): Boolean {
-        return TravelDestination.values().contains(destination)
-    }
+    private fun isDestinationValid(destination: TravelDestination): Boolean = TravelDestination.values().contains(destination)
 
     private fun completeJourney(
         player: Player,
@@ -50,9 +48,7 @@ object WaterbirthTravel {
         unlock(player)
     }
 
-    private fun TravelDestination.animationDuration(): Int {
-        return animationDuration(getAnimation(this.shipAnim))
-    }
+    private fun TravelDestination.animationDuration(): Int = animationDuration(getAnimation(this.shipAnim))
 }
 
 enum class TravelDestination(

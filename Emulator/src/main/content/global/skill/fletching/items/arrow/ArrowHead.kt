@@ -27,8 +27,6 @@ enum class ArrowHead(
             }
         }
 
-        fun getByUnfinishedId(id: Int): ArrowHead? {
-            return PRODUCT_MAP[id]
-        }
+        fun getByUnfinishedId(id: Int): ArrowHead? = PRODUCT_MAP[id]
     }
 }

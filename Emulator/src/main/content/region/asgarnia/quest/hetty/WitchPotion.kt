@@ -89,7 +89,5 @@ class WitchPotion : Quest(Quests.WITCHS_POTION, 31, 30, 1, Vars.VARP_QUEST_WITCH
         updateQuestTab(player)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

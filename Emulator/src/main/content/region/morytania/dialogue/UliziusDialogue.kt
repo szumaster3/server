@@ -56,11 +56,7 @@ class UliziusDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return UliziusDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = UliziusDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ULIZIUS_1054)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ULIZIUS_1054)
 }

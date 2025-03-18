@@ -19,15 +19,9 @@ class StreetUrchinDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return StreetUrchinDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = StreetUrchinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STREET_URCHIN_6357)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STREET_URCHIN_6357)
 }

@@ -170,11 +170,7 @@ class CharlieDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CharlieDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CharlieDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHARLIE_5138)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHARLIE_5138)
 }

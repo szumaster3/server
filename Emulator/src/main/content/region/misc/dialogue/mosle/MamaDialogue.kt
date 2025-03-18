@@ -63,11 +63,7 @@ class MamaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MamaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MamaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAMA_3164)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAMA_3164)
 }

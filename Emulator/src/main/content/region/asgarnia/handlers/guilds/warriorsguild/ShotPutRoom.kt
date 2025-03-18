@@ -68,9 +68,7 @@ class ShotPutRoom(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("shot_put"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("shot_put"))
 
     companion object {
         init {
@@ -201,7 +199,14 @@ class ShotPutRoom(
                                     (if (tiles > 2) "s!" else "!"),
                             )
                         }
-                        GroundItemManager.create(GroundItem(Item(if (lowWeight) Items.EIGHTEEN_LB_SHOT_8858 else Items.TWENTY_TWO_LB_SHOT_8859), loc, 20, player))
+                        GroundItemManager.create(
+                            GroundItem(
+                                Item(if (lowWeight) Items.EIGHTEEN_LB_SHOT_8858 else Items.TWENTY_TWO_LB_SHOT_8859),
+                                loc,
+                                20,
+                                player,
+                            ),
+                        )
                         return true
                     }
                 },

@@ -8,16 +8,24 @@ import core.tools.SystemLogger
 import java.nio.ByteBuffer
 import kotlin.math.min
 
-class JS5WriteEvent(session: IoSession?, context: Any?) : IoWriteEvent(session, context) {
-
-    override fun write(session: IoSession, context: Any) {
+class JS5WriteEvent(
+    session: IoSession?,
+    context: Any?,
+) : IoWriteEvent(session, context) {
+    override fun write(
+        session: IoSession,
+        context: Any,
+    ) {
         val request = context as Triple<*, *, *>
         val index = request.first as Int
         val archive = request.second as Int
         val priority = request.third as Boolean
-        val data = data(index, archive) ?: return SystemLogger.processLogEntry(
-            this::class.java, Log.WARN, "Unable to fulfill request $index $archive $priority."
-        )
+        val data =
+            data(index, archive) ?: return SystemLogger.processLogEntry(
+                this::class.java,
+                Log.WARN,
+                "Unable to fulfill request $index $archive $priority.",
+            )
         if (index == 255 && archive == 255) {
             val buffer = serve255(data)
             session.queue(buffer)
@@ -31,7 +39,10 @@ class JS5WriteEvent(session: IoSession?, context: Any?) : IoWriteEvent(session, 
     /**
      * @return data for an [index]'s [archive] file or [versionTable] when index and archive are both 255
      */
-    fun data(index: Int, archive: Int): ByteArray? {
+    fun data(
+        index: Int,
+        archive: Int,
+    ): ByteArray? {
         if (index == 255 && archive == 255) {
             return versionTable
         }
@@ -55,7 +66,12 @@ class JS5WriteEvent(session: IoSession?, context: Any?) : IoWriteEvent(session, 
         return buffer
     }
 
-    fun serve(index: Int, archive: Int, data: ByteArray, prefetch: Boolean): ByteBuffer {
+    fun serve(
+        index: Int,
+        archive: Int,
+        data: ByteArray,
+        prefetch: Boolean,
+    ): ByteBuffer {
         val compression = data[0].toInt()
         val size = getInt(data[1], data[2], data[3], data[4]) + if (compression != 0) 8 else 4 // 9 : 5?
         val buffer = ByteBuffer.allocate((size + 5) + (size / 512) + 10)
@@ -78,8 +94,12 @@ class JS5WriteEvent(session: IoSession?, context: Any?) : IoWriteEvent(session, 
     }
 
     companion object {
-        private fun getInt(b1: Byte, b2: Byte, b3: Byte, b4: Byte) =
-            b1.toInt() shl 24 or (b2.toInt() and 0xff shl 16) or (b3.toInt() and 0xff shl 8) or (b4.toInt() and 0xff)
+        private fun getInt(
+            b1: Byte,
+            b2: Byte,
+            b3: Byte,
+            b4: Byte,
+        ) = b1.toInt() shl 24 or (b2.toInt() and 0xff shl 16) or (b3.toInt() and 0xff shl 8) or (b4.toInt() and 0xff)
 
         private const val SEPARATOR = 255
         private const val HEADER = 4

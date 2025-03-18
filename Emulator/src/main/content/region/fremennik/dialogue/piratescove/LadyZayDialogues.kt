@@ -225,16 +225,12 @@ class LadyZayDialogues(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LadyZayDialogues(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LadyZayDialogues(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BIRDS_EYE_JACK_4544,
             NPCs.BEDREAD_THE_BOLD_4547,
             NPCs.TOMMY_2_TIMES_4549,
@@ -244,5 +240,4 @@ class LadyZayDialogues(
             NPCs.JENNY_BLADE_4555,
             NPCs.STICKY_SANDERS_4557,
         )
-    }
 }

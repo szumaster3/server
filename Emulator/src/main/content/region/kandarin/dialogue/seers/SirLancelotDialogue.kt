@@ -147,11 +147,7 @@ class SirLancelotDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirLancelotDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirLancelotDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_LANCELOT_239)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_LANCELOT_239)
 }

@@ -34,9 +34,7 @@ class UnicornStallionNPC(
     override fun construct(
         owner: Player,
         id: Int,
-    ): Familiar {
-        return UnicornStallionNPC(owner, id)
-    }
+    ): Familiar = UnicornStallionNPC(owner, id)
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         val player = special.node as Player
@@ -99,7 +97,5 @@ class UnicornStallionNPC(
         )
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.UNICORN_STALLION_6822, NPCs.UNICORN_STALLION_6823)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.UNICORN_STALLION_6822, NPCs.UNICORN_STALLION_6823)
 }

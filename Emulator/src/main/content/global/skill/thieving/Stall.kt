@@ -293,11 +293,12 @@ enum class Stall(
         get() = rewards[RandomFunction.random(rewards.size)]
 
     companion object {
-        private val idMap = HashMap<Int, Stall>().apply {
-            Stall.values().forEach { entry ->
-                entry.fullIDs.forEach { id -> putIfAbsent(id, entry) }
+        private val idMap =
+            HashMap<Int, Stall>().apply {
+                Stall.values().forEach { entry ->
+                    entry.fullIDs.forEach { id -> putIfAbsent(id, entry) }
+                }
             }
-        }
 
         fun forScenery(scenery: Scenery): Stall? = idMap[scenery.id]
     }

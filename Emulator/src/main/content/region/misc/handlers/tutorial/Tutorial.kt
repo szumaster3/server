@@ -10,8 +10,8 @@ import core.game.world.map.zone.ZoneBorders
 class Tutorial :
     MapArea,
     LogoutListener {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(
             getRegionBorders(12079),
             getRegionBorders(12180),
             getRegionBorders(12592),
@@ -19,7 +19,6 @@ class Tutorial :
             getRegionBorders(12335),
             getRegionBorders(12336),
         )
-    }
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

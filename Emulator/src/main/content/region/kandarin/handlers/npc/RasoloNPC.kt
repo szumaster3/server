@@ -4,7 +4,6 @@ import core.api.interaction.openNpcShop
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -12,7 +11,6 @@ import org.rs.consts.NPCs
 
 @Initializable
 class RasoloNPC : OptionHandler() {
-
     companion object {
         private const val NPC_ID = NPCs.RASOLO_1972
     }
@@ -23,8 +21,12 @@ class RasoloNPC : OptionHandler() {
         return null
     }
 
-    override fun handle(player: Player, node: Node, option: String): Boolean {
-        return when (option) {
+    override fun handle(
+        player: Player,
+        node: Node,
+        option: String,
+    ): Boolean =
+        when (option) {
             "trade" -> {
                 openNpcShop(player, NPC_ID)
                 true
@@ -35,5 +37,4 @@ class RasoloNPC : OptionHandler() {
             }
             else -> false
         }
-    }
 }

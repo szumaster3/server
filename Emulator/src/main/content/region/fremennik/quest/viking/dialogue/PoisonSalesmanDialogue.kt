@@ -198,7 +198,5 @@ class PoisonSalesmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.POISON_SALESMAN_820)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.POISON_SALESMAN_820)
 }

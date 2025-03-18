@@ -899,9 +899,7 @@ class ChieftanBrundtDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BRUNDT_THE_CHIEFTAIN_1294)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BRUNDT_THE_CHIEFTAIN_1294)
 }
 
 fun GenerateFremennikName(): String {

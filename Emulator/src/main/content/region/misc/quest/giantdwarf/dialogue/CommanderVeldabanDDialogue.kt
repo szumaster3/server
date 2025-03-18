@@ -106,7 +106,5 @@ class CommanderVeldabanDDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMMANDER_VELDABAN_2129)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COMMANDER_VELDABAN_2129)
 }

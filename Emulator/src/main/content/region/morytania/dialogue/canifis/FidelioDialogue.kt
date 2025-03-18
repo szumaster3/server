@@ -79,11 +79,7 @@ class FidelioDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return FidelioDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = FidelioDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIDELIO_1040)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIDELIO_1040)
 }

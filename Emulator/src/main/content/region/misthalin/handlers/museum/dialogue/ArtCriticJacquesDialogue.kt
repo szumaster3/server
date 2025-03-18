@@ -12,14 +12,16 @@ import org.rs.consts.NPCs
 class ArtCriticJacquesDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "I sit in the sky like a sphinx misunderstood")
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 npc(
@@ -27,7 +29,7 @@ class ArtCriticJacquesDialogue(
                     "I combine a heart of snow to the whiteness of swans;",
                     "I hate the movement that moves the lines;",
                     " ",
-                    "And I never cry and I never laugh."
+                    "And I never cry and I never laugh.",
                 )
                 stage++
             }
@@ -40,11 +42,7 @@ class ArtCriticJacquesDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return ArtCriticJacquesDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = ArtCriticJacquesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ART_CRITIC_JACQUES_5930)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ART_CRITIC_JACQUES_5930)
 }

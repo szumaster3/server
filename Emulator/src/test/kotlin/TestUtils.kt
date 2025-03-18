@@ -69,25 +69,23 @@ object TestUtils {
         general: Boolean,
         highAlch: Boolean,
         vararg stock: Item,
-    ): Shop {
-        return Shop(
+    ): Shop =
+        Shop(
             name,
             stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(),
             general,
             highAlch = highAlch,
         )
-    }
 
     fun getMockTokkulShop(
         name: String,
         vararg stock: Item,
-    ): Shop {
-        return Shop(
+    ): Shop =
+        Shop(
             name,
             stock.map { ShopItem(it.id, it.amount, 100) }.toTypedArray(),
             currency = Items.TOKKUL_6529,
         )
-    }
 
     fun preTestSetup() {
         if (ServerConstants.DATA_PATH == null) {
@@ -259,9 +257,7 @@ class MockSession : IoSession(null, null) {
         val payload: ByteArray,
     )
 
-    override fun getRemoteAddress(): String? {
-        return "127.0.0.1"
-    }
+    override fun getRemoteAddress(): String? = "127.0.0.1"
 
     override fun write(
         context: Any,
@@ -283,14 +279,13 @@ class MockSession : IoSession(null, null) {
         return list
     }
 
-    override fun getIsaacPair(): ISAACPair {
-        return ISAACPair(
+    override fun getIsaacPair(): ISAACPair =
+        ISAACPair(
             ISAACCipher(
                 intArrayOf(0),
             ),
             ISAACCipher(intArrayOf(0)),
         )
-    }
 
     override fun queue(buffer: ByteBuffer?) {}
 

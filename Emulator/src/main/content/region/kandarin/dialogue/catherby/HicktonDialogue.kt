@@ -103,11 +103,7 @@ class HicktonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HicktonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HicktonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HICKTON_575)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HICKTON_575)
 }

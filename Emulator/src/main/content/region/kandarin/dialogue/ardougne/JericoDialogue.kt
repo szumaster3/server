@@ -41,11 +41,7 @@ class JericoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JericoDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JericoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JERICO_366)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JERICO_366)
 }

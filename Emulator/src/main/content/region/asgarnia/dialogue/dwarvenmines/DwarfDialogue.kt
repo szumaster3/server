@@ -193,13 +193,9 @@ class DwarfDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DwarfDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DwarfDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARF_3295)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_3295)
 
     companion object {
         private val ITEMS = arrayOf(Item(9792), Item(9793), Item(9794))

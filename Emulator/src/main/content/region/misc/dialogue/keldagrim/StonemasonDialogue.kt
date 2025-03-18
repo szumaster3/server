@@ -76,11 +76,7 @@ class StonemasonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return StonemasonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = StonemasonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.STONEMASON_4248)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.STONEMASON_4248)
 }

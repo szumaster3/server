@@ -145,13 +145,9 @@ enum class ImplingSpawner(
     companion object {
         private val idMap = values().map { it.npcId to it }.toMap()
 
-        fun forId(id: Int): ImplingSpawner? {
-            return idMap[id]
-        }
+        fun forId(id: Int): ImplingSpawner? = idMap[id]
 
-        fun getIds(): IntArray {
-            return idMap.keys.toIntArray()
-        }
+        fun getIds(): IntArray = idMap.keys.toIntArray()
     }
 }
 

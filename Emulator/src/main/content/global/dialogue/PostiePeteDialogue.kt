@@ -461,7 +461,5 @@ class PostiePeteDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.POSTIE_PETE_3805)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.POSTIE_PETE_3805)
 }

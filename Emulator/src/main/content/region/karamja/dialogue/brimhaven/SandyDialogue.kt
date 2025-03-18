@@ -21,15 +21,9 @@ class SandyDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SandyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SandyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(3110, NPCs.SANDY_3112, NPCs.SANDY_3113)
-    }
+    override fun getIds(): IntArray = intArrayOf(3110, NPCs.SANDY_3112, NPCs.SANDY_3113)
 }

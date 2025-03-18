@@ -106,11 +106,7 @@ class HonourGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HonourGuardDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HonourGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HONOUR_GUARD_5514, NPCs.HONOUR_GUARD_5515)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HONOUR_GUARD_5514, NPCs.HONOUR_GUARD_5515)
 }

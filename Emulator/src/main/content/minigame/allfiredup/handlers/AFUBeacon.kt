@@ -68,9 +68,7 @@ enum class AFUBeacon(
         setVarbit(player, varbit, 1, true)
     }
 
-    fun getState(player: Player): BeaconState {
-        return BeaconState.values()[getVarbit(player, varbit)]
-    }
+    fun getState(player: Player): BeaconState = BeaconState.values()[getVarbit(player, varbit)]
 }
 
 enum class BeaconState {

@@ -16,44 +16,49 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 
 class GnomeCookingListener : InteractionListener {
-
     private val sceneryIDs = intArrayOf(Scenery.GNOME_COOKER_17131, Scenery.RANGE_2728)
 
     // Crunchy cooking process items.
 
-    private val halfCrunchy = intArrayOf(
-        Items.HALF_MADE_CRUNCHY_9577,
-        Items.HALF_MADE_CRUNCHY_9579,
-        Items.HALF_MADE_CRUNCHY_9581,
-        Items.HALF_MADE_CRUNCHY_9583,
-        Items.RAW_CRUNCHIES_2202
-    )
+    private val halfCrunchy =
+        intArrayOf(
+            Items.HALF_MADE_CRUNCHY_9577,
+            Items.HALF_MADE_CRUNCHY_9579,
+            Items.HALF_MADE_CRUNCHY_9581,
+            Items.HALF_MADE_CRUNCHY_9583,
+            Items.RAW_CRUNCHIES_2202,
+        )
 
     // Gnome cooking recipe ingredients.
 
-    private val gnomeItems = arrayOf(
-        Items.FRUIT_BATTA_2277,
-        Items.TOAD_BATTA_2255,
-        Items.CHEESE_PLUSTOM_BATTA_2259,
-        Items.WORM_BATTA_2253,
-        Items.VEGETABLE_BATTA_2281,
-        Items.CHOCOLATE_BOMB_2185,
-        Items.VEG_BALL_2195,
-        Items.TANGLED_TOADS_LEGS_2187,
-        Items.WORM_HOLE_2191,
-        Items.TOAD_CRUNCHIES_2217,
-        Items.WORM_CRUNCHIES_2205,
-        Items.CHOCCHIP_CRUNCHIES_2209,
-        Items.SPICY_CRUNCHIES_2213,
-    )
+    private val gnomeItems =
+        arrayOf(
+            Items.FRUIT_BATTA_2277,
+            Items.TOAD_BATTA_2255,
+            Items.CHEESE_PLUSTOM_BATTA_2259,
+            Items.WORM_BATTA_2253,
+            Items.VEGETABLE_BATTA_2281,
+            Items.CHOCOLATE_BOMB_2185,
+            Items.VEG_BALL_2195,
+            Items.TANGLED_TOADS_LEGS_2187,
+            Items.WORM_HOLE_2191,
+            Items.TOAD_CRUNCHIES_2217,
+            Items.WORM_CRUNCHIES_2205,
+            Items.CHOCCHIP_CRUNCHIES_2209,
+            Items.SPICY_CRUNCHIES_2213,
+        )
 
     override fun defineListeners() {
-
         /*
          * Handles all interfaces.
          */
 
-        val preparationItems = mapOf(Items.HALF_BAKED_BATTA_2249 to 434, Items.HALF_BAKED_BOWL_2177 to 435, Items.HALF_BAKED_CRUNCHY_2201 to 437)
+        val preparationItems =
+            mapOf(
+                Items.HALF_BAKED_BATTA_2249 to 434,
+                Items.HALF_BAKED_BOWL_2177 to 435,
+                Items.HALF_BAKED_CRUNCHY_2201 to 437,
+            )
         preparationItems.forEach { (item, interfaceId) ->
             on(item, IntType.ITEM, "prepare") { player, _ ->
                 openInterface(player, interfaceId)
@@ -62,32 +67,32 @@ class GnomeCookingListener : InteractionListener {
         }
 
         // Map of raw and cooked items for the cooking process.
-        val cookingMap = mapOf(
-            Items.RAW_BATTA_2250 to Items.HALF_BAKED_BATTA_2249,
-            Items.HALF_MADE_BATTA_9478 to Items.UNFINISHED_BATTA_9479,
-            Items.HALF_MADE_BATTA_9480 to Items.UNFINISHED_BATTA_9481,
-            Items.HALF_MADE_BATTA_9483 to Items.UNFINISHED_BATTA_9484,
-            Items.HALF_MADE_BATTA_9485 to Items.UNFINISHED_BATTA_9486,
-            Items.HALF_MADE_BATTA_9482 to Items.TOAD_BATTA_2255,
+        val cookingMap =
+            mapOf(
+                Items.RAW_BATTA_2250 to Items.HALF_BAKED_BATTA_2249,
+                Items.HALF_MADE_BATTA_9478 to Items.UNFINISHED_BATTA_9479,
+                Items.HALF_MADE_BATTA_9480 to Items.UNFINISHED_BATTA_9481,
+                Items.HALF_MADE_BATTA_9483 to Items.UNFINISHED_BATTA_9484,
+                Items.HALF_MADE_BATTA_9485 to Items.UNFINISHED_BATTA_9486,
+                Items.HALF_MADE_BATTA_9482 to Items.TOAD_BATTA_2255,
+                Items.HALF_MADE_CRUNCHY_9577 to Items.UNFINISHED_CRUNCHY_9578,
+                Items.HALF_MADE_CRUNCHY_9579 to Items.UNFINISHED_CRUNCHY_9580,
+                Items.HALF_MADE_CRUNCHY_9581 to Items.UNFINISHED_CRUNCHY_9582,
+                Items.HALF_MADE_CRUNCHY_9583 to Items.UNFINISHED_CRUNCHY_9584,
+                Items.RAW_CRUNCHIES_2202 to Items.HALF_BAKED_CRUNCHY_2201,
+            )
 
-            Items.HALF_MADE_CRUNCHY_9577 to Items.UNFINISHED_CRUNCHY_9578,
-            Items.HALF_MADE_CRUNCHY_9579 to Items.UNFINISHED_CRUNCHY_9580,
-            Items.HALF_MADE_CRUNCHY_9581 to Items.UNFINISHED_CRUNCHY_9582,
-            Items.HALF_MADE_CRUNCHY_9583 to Items.UNFINISHED_CRUNCHY_9584,
-            Items.RAW_CRUNCHIES_2202 to Items.HALF_BAKED_CRUNCHY_2201
-        )
-
-        val garnishMap = mapOf(
-            Pair(Items.UNFINISHED_BATTA_9486, Items.EQUA_LEAVES_2128) to Items.WORM_BATTA_2253,
-            Pair(Items.UNFINISHED_BATTA_9484, Items.EQUA_LEAVES_2128) to Items.VEGETABLE_BATTA_2281,
-            Pair(Items.UNFINISHED_BATTA_9479, Items.EQUA_LEAVES_2128) to Items.CHEESE_PLUSTOM_BATTA_2259,
-            Pair(Items.UNFINISHED_BATTA_9481, Items.GNOME_SPICE_2169) to Items.FRUIT_BATTA_2277,
-
-            Pair(Items.UNFINISHED_CRUNCHY_9578, Items.CHOCOLATE_DUST_1975) to Items.CHOCCHIP_CRUNCHIES_2209,
-            Pair(Items.UNFINISHED_CRUNCHY_9584, Items.GNOME_SPICE_2169) to Items.WORM_CRUNCHIES_2205,
-            Pair(Items.UNFINISHED_CRUNCHY_9580, Items.GNOME_SPICE_2169) to Items.SPICY_CRUNCHIES_2213,
-            Pair(Items.UNFINISHED_CRUNCHY_9582, Items.EQUA_LEAVES_2128) to Items.TOAD_CRUNCHIES_2217
-        )
+        val garnishMap =
+            mapOf(
+                Pair(Items.UNFINISHED_BATTA_9486, Items.EQUA_LEAVES_2128) to Items.WORM_BATTA_2253,
+                Pair(Items.UNFINISHED_BATTA_9484, Items.EQUA_LEAVES_2128) to Items.VEGETABLE_BATTA_2281,
+                Pair(Items.UNFINISHED_BATTA_9479, Items.EQUA_LEAVES_2128) to Items.CHEESE_PLUSTOM_BATTA_2259,
+                Pair(Items.UNFINISHED_BATTA_9481, Items.GNOME_SPICE_2169) to Items.FRUIT_BATTA_2277,
+                Pair(Items.UNFINISHED_CRUNCHY_9578, Items.CHOCOLATE_DUST_1975) to Items.CHOCCHIP_CRUNCHIES_2209,
+                Pair(Items.UNFINISHED_CRUNCHY_9584, Items.GNOME_SPICE_2169) to Items.WORM_CRUNCHIES_2205,
+                Pair(Items.UNFINISHED_CRUNCHY_9580, Items.GNOME_SPICE_2169) to Items.SPICY_CRUNCHIES_2213,
+                Pair(Items.UNFINISHED_CRUNCHY_9582, Items.EQUA_LEAVES_2128) to Items.TOAD_CRUNCHIES_2217,
+            )
 
         /*
          * Handles cooking raw items and turning them into cooked items.
@@ -118,7 +123,7 @@ class GnomeCookingListener : InteractionListener {
 
         garnishMap.forEach { (pair, result) ->
             onUseWith(IntType.ITEM, pair.first, pair.second) { player, used, with ->
-                if(removeItem(player, used) && removeItem(player, with)) {
+                if (removeItem(player, used) && removeItem(player, with)) {
                     addItem(player, result, 1)
                     rewardXP(player, Skills.COOKING, 88.0)
                 }
@@ -191,7 +196,9 @@ class GnomeCookingListener : InteractionListener {
                 val item = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_NEEDED_ITEM", Item(0))
                 val npcName = getNPCName(job.npc_id).lowercase()
                 sendDialogueLines(
-                    player, "I need to deliver a ${item.name.lowercase()} to $npcName,", "who is ${job.tip}"
+                    player,
+                    "I need to deliver a ${item.name.lowercase()} to $npcName,",
+                    "who is ${job.tip}",
                 )
             }
             return@on true
@@ -222,14 +229,16 @@ class GnomeCookingListener : InteractionListener {
             }
             return@on true
         }
-
     }
 
     /*
      * Handles the delivery of redeemed food charges.
      */
 
-    private fun sendCharges(amount: Int, player: Player) {
+    private fun sendCharges(
+        amount: Int,
+        player: Player,
+    ) {
         val playerCharges = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
         if (playerCharges < amount) {
             sendDialogue(player, "You don't have that many charges.")
@@ -255,7 +264,10 @@ class GnomeCookingListener : InteractionListener {
      * Handles the pulse of the delivery process.
      */
 
-    class DeliveryPulse(val player: Player, val items: ArrayList<Item>) : Pulse(RandomFunction.random(15, 30)) {
+    class DeliveryPulse(
+        val player: Player,
+        val items: ArrayList<Item>,
+    ) : Pulse(RandomFunction.random(15, 30)) {
         override fun pulse(): Boolean {
             player.inventory.add(*items.toTypedArray())
             sendDialogue(player, "Your food delivery has arrived!")

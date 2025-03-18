@@ -347,11 +347,7 @@ class BlastFurnaceForemanDialogue(
         }
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlastFurnaceForemanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlastFurnaceForemanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLAST_FURNACE_FOREMAN_2553)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLAST_FURNACE_FOREMAN_2553)
 }

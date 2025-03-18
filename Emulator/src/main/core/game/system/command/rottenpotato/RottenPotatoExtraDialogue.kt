@@ -19,9 +19,7 @@ class RottenPotatoExtraDialogue(
     val BossIDs = arrayOf(50, 8350, 8133, 2745)
     val BossNames = arrayOf("KBD", "Tormented Demon", "Corporeal Beast", "Jad")
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RottenPotatoExtraDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RottenPotatoExtraDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         options("Send Player Notification", "Targeted AME", "Spawn Boss", "Force Area NPC Chat", "Kill All Nearby NPCs")
@@ -105,7 +103,5 @@ class RottenPotatoExtraDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(ID)
 }

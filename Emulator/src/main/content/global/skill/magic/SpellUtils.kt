@@ -98,17 +98,14 @@ object SpellUtils {
     }
 
     @JvmStatic
-    fun attackableNPC(npc: NPC): Boolean {
-        return npc.definition.hasAction("attack")
-    }
+    fun attackableNPC(npc: NPC): Boolean = npc.definition.hasAction("attack")
 
     @JvmStatic
-    fun getBookFromInterface(id: Int): String {
-        return when (id) {
+    fun getBookFromInterface(id: Int): String =
+        when (id) {
             Components.MAGIC_192 -> "modern"
             Components.MAGIC_ZAROS_193 -> "ancient"
             Components.MAGIC_LUNAR_430 -> "lunar"
             else -> "none"
         }
-    }
 }

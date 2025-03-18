@@ -1100,7 +1100,5 @@ class SirReniteeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_RENITEE_4249)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_RENITEE_4249)
 }

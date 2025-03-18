@@ -72,7 +72,5 @@ class AgilityBossDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AGILITY_BOSS_1661)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGILITY_BOSS_1661)
 }

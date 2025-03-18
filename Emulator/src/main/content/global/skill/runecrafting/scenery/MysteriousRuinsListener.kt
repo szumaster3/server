@@ -51,12 +51,11 @@ class MysteriousRuinsListener : InteractionListener {
         }
     }
 
-    private fun allRuins(): IntArray {
-        return MysteriousRuins
+    private fun allRuins(): IntArray =
+        MysteriousRuins
             .values()
             .flatMap { ruins -> ruins.`object`.asList() }
             .toIntArray()
-    }
 
     private fun handleTalisman(
         player: Player,
@@ -128,13 +127,12 @@ class MysteriousRuinsListener : InteractionListener {
     private fun checkQuestCompletion(
         player: Player,
         ruin: MysteriousRuins,
-    ): Boolean {
-        return when (ruin) {
+    ): Boolean =
+        when (ruin) {
             MysteriousRuins.DEATH -> hasRequirement(player, QuestReq(QuestRequirements.MEP_2), true)
             MysteriousRuins.BLOOD -> hasRequirement(player, QuestReq(QuestRequirements.SEERGAZE), true)
             else -> hasRequirement(player, QuestReq(QuestRequirements.RUNE_MYSTERIES), true)
         }
-    }
 
     private fun teleportToRuinTalisman(
         player: Player,

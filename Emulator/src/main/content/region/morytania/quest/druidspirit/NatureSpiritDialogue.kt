@@ -247,9 +247,7 @@ class NatureSpiritDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NATURE_SPIRIT_1051)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NATURE_SPIRIT_1051)
 
     internal class SickleBlessPulse(
         val player: Player,

@@ -136,11 +136,7 @@ class MissSchismDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return MissSchismDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = MissSchismDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MISS_SCHISM_2634)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISS_SCHISM_2634)
 }

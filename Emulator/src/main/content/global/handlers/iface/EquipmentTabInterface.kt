@@ -1,10 +1,6 @@
 package content.global.handlers.iface
 
-import content.data.GameAttributes
-import content.region.misc.handlers.tutorial.TutorialStage
-import content.region.misc.handlers.tutorial.TutorialStage.TUTORIAL_STAGE
 import core.api.ContainerListener
-import core.api.getAttribute
 import core.api.log
 import core.api.submitWorldPulse
 import core.cache.def.impl.ItemDefinition

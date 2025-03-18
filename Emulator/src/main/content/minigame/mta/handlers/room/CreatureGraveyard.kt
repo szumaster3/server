@@ -77,9 +77,10 @@ class CreatureGraveyard :
             when (target.id) {
                 org.rs.consts.Scenery.FOOD_CHUTE_10735 -> deposit(e)
                 in org.rs.consts.Scenery.BONES_10725..org.rs.consts.Scenery.BONES_10728 ->
-                    BoneType.forObject(
-                        target.id,
-                    )?.grab(e, target.asScenery())
+                    BoneType
+                        .forObject(
+                            target.id,
+                        )?.grab(e, target.asScenery())
                 else -> return super.interact(e, target, option)
             }
             return true

@@ -46,17 +46,13 @@ class LumbridgeDungeon :
         }
     }
 
-    private fun hasHelmet(player: Player): Boolean {
-        return SlayerEquipmentFlags.hasSpinyHelmet(player)
-    }
+    private fun hasHelmet(player: Player): Boolean = SlayerEquipmentFlags.hasSpinyHelmet(player)
 
     override fun interact(
         entity: Entity,
         target: Node,
         option: Option,
-    ): Boolean {
-        return super.interact(entity, target, option)
-    }
+    ): Boolean = super.interact(entity, target, option)
 
     override fun fireEvent(
         identifier: String,
@@ -75,9 +71,7 @@ class LumbridgeDungeon :
             id: Int,
             location: Location,
             vararg objects: Any?,
-        ): AbstractNPC {
-            return WallBeastNPC(id, location)
-        }
+        ): AbstractNPC = WallBeastNPC(id, location)
 
         override fun init() {
             super.init()

@@ -55,7 +55,10 @@ class LostTribe : Quest(Quests.THE_LOST_TRIBE, 84, 83, 1) {
                 )
                 line++
             }
-            if(stage >= 30 && getVarbit(player, Vars.VARBIT_QUEST_LOST_TRIBE_CAVE_HOLE_STATUS_532) == 4 || getAttribute(player, GameAttributes.QUEST_LOST_TRIBE_LUMBRIDGE_CELLAR, false)) {
+            if (stage >= 30 &&
+                getVarbit(player, Vars.VARBIT_QUEST_LOST_TRIBE_CAVE_HOLE_STATUS_532) == 4 ||
+                getAttribute(player, GameAttributes.QUEST_LOST_TRIBE_LUMBRIDGE_CELLAR, false)
+            ) {
                 line(player, "I found a !!brooch??. I should show it to the Duke.", line++, stage >= 43)
                 line++
             }
@@ -102,9 +105,7 @@ class LostTribe : Quest(Quests.THE_LOST_TRIBE, 84, 83, 1) {
         }
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun finish(player: Player) {
         super.finish(player)

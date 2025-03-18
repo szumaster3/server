@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.dialogue
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.*
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue
@@ -79,13 +79,9 @@ class FatherTrollDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FatherTrollDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FatherTrollDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ICE_TROLL_1943)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ICE_TROLL_1943)
 }
 
 @Initializable
@@ -154,13 +150,9 @@ class MotherTrollDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return MotherTrollDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = MotherTrollDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TROLL_MOTHER_1950)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TROLL_MOTHER_1950)
 }
 
 class ChatFatherAndMotherTrollDialogueFile : DialogueFile() {

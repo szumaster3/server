@@ -131,18 +131,15 @@ object Repository {
     }
 
     @JvmStatic
-    fun getPlayerByName(name: String?): Player? {
-        return if (name == null) {
+    fun getPlayerByName(name: String?): Player? =
+        if (name == null) {
             null
         } else {
             playerNames[name.lowercase().replace(" ".toRegex(), "_")]
         }
-    }
 
     @JvmStatic
-    fun getPlayerByUid(uid: Int): Player? {
-        return uid_map[uid]
-    }
+    fun getPlayerByUid(uid: Int): Player? = uid_map[uid]
 
     @JvmStatic
     val renderableNpcs: List<NPC>

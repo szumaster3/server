@@ -4,7 +4,6 @@ import core.api.animate
 import core.api.quest.getQuestStage
 import core.api.runTask
 import core.api.stopWalk
-import core.api.ui.closeDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -36,10 +35,11 @@ class GeraldDialogue(
         buttonId: Int,
     ): Boolean {
         when (stage) {
-            0 -> npcl(
-                FaceAnim.NEUTRAL,
-                "Good day to you traveller, are you here to fish or just looking around?",
-            ).also { stage++ }
+            0 ->
+                npcl(
+                    FaceAnim.NEUTRAL,
+                    "Good day to you traveller, are you here to fish or just looking around?",
+                ).also { stage++ }
 
             1 -> npcl(FaceAnim.NEUTRAL, "I've caught some beauties down here.").also { stage++ }
             2 -> player("Really?").also { stage++ }
@@ -55,21 +55,18 @@ class GeraldDialogue(
             5 -> npcl(FaceAnim.NEUTRAL, "Hello traveller.").also { stage++ }
             6 -> npcl(FaceAnim.HALF_ASKING, "Are you here to fish or to hunt for treasure?").also { stage++ }
             7 -> player("Why do you say that?").also { stage++ }
-            8 -> npcl(
-                FaceAnim.NEUTRAL,
-                "Adventurers pass through here every week, they never find anything though.",
-            ).also {
-                stage = END_DIALOGUE
-            }
+            8 ->
+                npcl(
+                    FaceAnim.NEUTRAL,
+                    "Adventurers pass through here every week, they never find anything though.",
+                ).also {
+                    stage = END_DIALOGUE
+                }
         }
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GeraldDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GeraldDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GERALD_303)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GERALD_303)
 }

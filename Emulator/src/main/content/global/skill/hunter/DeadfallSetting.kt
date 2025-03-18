@@ -38,9 +38,7 @@ class DeadfallSetting :
         return false
     }
 
-    override fun createHook(wrapper: TrapWrapper): TrapHook {
-        return TrapHook(wrapper, getLocations(wrapper.`object`).toTypedArray())
-    }
+    override fun createHook(wrapper: TrapWrapper): TrapHook = TrapHook(wrapper, getLocations(wrapper.`object`).toTypedArray())
 
     override fun reward(
         player: Player,
@@ -90,9 +88,7 @@ class DeadfallSetting :
     override fun isSuccess(
         player: Player,
         node: TrapNode,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
     override fun getTransformId(
         wrapper: TrapWrapper,
@@ -106,24 +102,16 @@ class DeadfallSetting :
     override fun getFinalId(
         wrapper: TrapWrapper,
         node: TrapNode,
-    ): Int {
-        return node.objectIds[2]
-    }
+    ): Int = node.objectIds[2]
 
     override fun buildObject(
         player: Player,
         node: Node,
-    ): Scenery {
-        return node.asScenery().transform(getObjectForNode(node))
-    }
+    ): Scenery = node.asScenery().transform(getObjectForNode(node))
 
-    override fun getLimitMessage(player: Player): String {
-        return "You can only have one deadfall trap at a time."
-    }
+    override fun getLimitMessage(player: Player): String = "You can only have one deadfall trap at a time."
 
-    override fun exceedsLimit(player: Player): Boolean {
-        return HunterManager.getInstance(player).trapAmount > 0
-    }
+    override fun exceedsLimit(player: Player): Boolean = HunterManager.getInstance(player).trapAmount > 0
 
     private fun getLocations(scenery: Scenery): List<Location> {
         val locations = ArrayList<Location>(20)

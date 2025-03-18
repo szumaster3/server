@@ -601,13 +601,9 @@ enum class SpecialLadder(
         }
 
         @JvmStatic
-        fun getDestination(loc: Location): Location? {
-            return destinationMap[loc]
-        }
+        fun getDestination(loc: Location): Location? = destinationMap[loc]
 
         @JvmStatic
-        fun getSpecialLadder(loc: Location): SpecialLadder? {
-            return ladderMap[loc]
-        }
+        fun getSpecialLadder(loc: Location): SpecialLadder? = ladderMap[loc]
     }
 }

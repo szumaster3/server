@@ -85,25 +85,20 @@ object Skillcape {
     fun isMaster(
         player: Player,
         skill: Int,
-    ): Boolean {
-        return player.getSkills().getStaticLevel(skill) == 99
-    }
+    ): Boolean = player.getSkills().getStaticLevel(skill) == 99
 
     @JvmStatic
     fun getItems(
         player: Player,
         skill: Int,
-    ): Array<Item> {
-        return arrayOf(
+    ): Array<Item> =
+        arrayOf(
             Item(ids[skill] + if (player.getSkills().getMasteredSkills() > 1) 1 else 0),
             Item(ids[skill] + 2),
         )
-    }
 
     @JvmStatic
-    private fun getTrimmed(skill: Int): Item {
-        return Item(ids[skill] + 1)
-    }
+    private fun getTrimmed(skill: Int): Item = Item(ids[skill] + 1)
 
     @JvmStatic
     private fun getCapeIndex(item: Item): Int {

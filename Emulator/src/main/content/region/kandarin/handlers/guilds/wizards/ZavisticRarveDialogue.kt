@@ -35,11 +35,7 @@ class ZavisticRarveDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZAVISTIC_RARVE_2059)
 }

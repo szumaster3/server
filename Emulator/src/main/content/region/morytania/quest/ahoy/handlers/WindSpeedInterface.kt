@@ -22,9 +22,7 @@ class WindSpeedInterface :
     InteractionListener,
     EventHook<TickEvent>,
     MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(3616, 3545, 3622, 3539, 2))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3616, 3545, 3622, 3539, 2))
 
     override fun areaEnter(entity: Entity) {
         openInterface(entity.asPlayer(), Components.AHOY_WINDSPEED_10)

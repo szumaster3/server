@@ -638,7 +638,5 @@ class CaptainLawgofDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_LAWGOF_208)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_LAWGOF_208)
 }

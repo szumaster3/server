@@ -190,7 +190,5 @@ class LordDaquariusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LORD_DAQUARIUS_200)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LORD_DAQUARIUS_200)
 }

@@ -20,7 +20,7 @@ class BarbSmithingListener : InteractionListener {
                 create { id, amount ->
                     submitIndividualPulse(
                         entity = player,
-                        pulse = BarbSmithingPulse(player, weapon, amount, id)
+                        pulse = BarbSmithingPulse(player, weapon, amount, id),
                     )
                 }
                 calculateMaxAmount {
@@ -30,5 +30,4 @@ class BarbSmithingListener : InteractionListener {
             return@onUseWith true
         }
     }
-
 }

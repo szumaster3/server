@@ -34,11 +34,7 @@ class OllieTheCamelDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OllieTheCamelDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OllieTheCamelDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLLIE_THE_CAMEL_2811)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLLIE_THE_CAMEL_2811)
 }

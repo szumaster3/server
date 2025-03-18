@@ -24,7 +24,7 @@ class PacketWriteQueue {
                 is InstancedLocationUpdate,
                 is Logout,
                 is ClearRegionChunk,
-                    -> packet.send(context)
+                -> packet.send(context)
                 // Rest get queued up and sent at the end of the tick (authentic)
                 else -> push(packet, context)
             }

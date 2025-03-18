@@ -46,11 +46,7 @@ class FurTraderDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FurTraderDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FurTraderDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FUR_TRADER_1316)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FUR_TRADER_1316)
 }

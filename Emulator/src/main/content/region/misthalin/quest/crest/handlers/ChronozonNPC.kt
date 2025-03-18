@@ -23,13 +23,9 @@ class ChronozonNPC(
         id: Int,
         location: Location?,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return ChronozonNPC(id, location)
-    }
+    ): AbstractNPC = ChronozonNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CHRONOZON_667)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CHRONOZON_667)
 
     override fun checkImpact(state: BattleState?) {
         if (state != null) {

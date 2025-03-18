@@ -21,11 +21,7 @@ class SethGroatsDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SETH_GROATS_452)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SETH_GROATS_452)
 }

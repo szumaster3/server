@@ -224,11 +224,7 @@ class GertrudesChildrenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GertrudesChildrenDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GertrudesChildrenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHILOP_781, NPCs.WILOUGH_783)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHILOP_781, NPCs.WILOUGH_783)
 }

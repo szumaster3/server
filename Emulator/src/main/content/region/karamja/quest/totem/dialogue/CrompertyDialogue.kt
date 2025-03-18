@@ -177,13 +177,9 @@ class CrompertyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CrompertyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CrompertyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(844)
-    }
+    override fun getIds(): IntArray = intArrayOf(844)
 
     fun TribalTotemTeleport(
         player: Player,

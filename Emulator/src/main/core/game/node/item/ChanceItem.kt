@@ -74,8 +74,8 @@ class ChanceItem
                 return newItem
             }
 
-        override fun toString(): String {
-            return "ChanceItem " + super.toString() + " [chanceRate=" + chanceRate + ", minimumAmount=" + minimumAmount +
+        override fun toString(): String =
+            "ChanceItem " + super.toString() + " [chanceRate=" + chanceRate + ", minimumAmount=" + minimumAmount +
                 ", maximumAmount=" +
                 maximumAmount +
                 ", tableSlot=" +
@@ -83,15 +83,12 @@ class ChanceItem
                 ", dropFrequency=" +
                 dropFrequency +
                 "]"
-        }
 
         companion object {
             val DROP_RATES: IntArray = intArrayOf(5, 15, 150, 750)
 
             @JvmStatic
-            fun getItem(vararg table: ChanceItem): ChanceItem {
-                return getItem(RandomFunction.getRandomDouble(75.0), *table)
-            }
+            fun getItem(vararg table: ChanceItem): ChanceItem = getItem(RandomFunction.getRandomDouble(75.0), *table)
 
             @JvmStatic
             fun getItem(

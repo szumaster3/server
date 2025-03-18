@@ -113,13 +113,12 @@ fun toggleBankAccount(player: Player) {
 fun getBankAccountName(
     player: Player,
     invert: Boolean = false,
-): String {
-    return if (isUsingSecondaryBankAccount(player)) {
+): String =
+    if (isUsingSecondaryBankAccount(player)) {
         if (invert) "primary" else "secondary"
     } else {
         if (invert) "secondary" else "primary"
     }
-}
 
 /**
  * Activates the player's secondary bank account if they meet the required conditions.
@@ -206,9 +205,7 @@ enum class SecondaryBankAccountActivationResult {
  * @param player The player to check the secondary bank account activation for.
  * @return True if the secondary bank account is activated, otherwise false.
  */
-fun hasActivatedSecondaryBankAccount(player: Player): Boolean {
-    return getAttribute(player, "UnlockedSecondaryBank", false)
-}
+fun hasActivatedSecondaryBankAccount(player: Player): Boolean = getAttribute(player, "UnlockedSecondaryBank", false)
 
 /**
  * Checks if the player is using their secondary bank account.
@@ -216,9 +213,7 @@ fun hasActivatedSecondaryBankAccount(player: Player): Boolean {
  * @param player The player to check the usage of their secondary bank account.
  * @return True if the player is using the secondary bank account, otherwise false.
  */
-fun isUsingSecondaryBankAccount(player: Player): Boolean {
-    return player.useSecondaryBank
-}
+fun isUsingSecondaryBankAccount(player: Player): Boolean = player.useSecondaryBank
 
 /**
  * Opens the Grand Exchange interface for the player, with restrictions based on their Ironman mode.

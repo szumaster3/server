@@ -27,9 +27,7 @@ class MossGiantNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MossGiantNPC(id, location)
-    }
+    ): AbstractNPC = MossGiantNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -64,7 +62,5 @@ class MossGiantNPC : AbstractNPC {
         return super.newInstance(arg)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MOSS_GIANT_1681)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MOSS_GIANT_1681)
 }

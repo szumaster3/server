@@ -19,13 +19,9 @@ class TarnsLair : MapArea {
         val borders = ZoneBorders(3121, 4537, 3204, 4673)
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(borders)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(borders)
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON)
 
     override fun entityStep(
         entity: Entity,

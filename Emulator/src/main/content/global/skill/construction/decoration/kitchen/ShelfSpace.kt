@@ -118,20 +118,18 @@ class ShelfSpace : InteractionListener {
                 Scenery.SHELVES_13551,
             )
 
-        private fun getTeapot(id: Int): Int {
-            return when (id) {
+        private fun getTeapot(id: Int): Int =
+            when (id) {
                 13550, 13551 -> Items.TEAPOT_7726
                 13549, 13547 -> Items.TEAPOT_7714
                 else -> Items.TEAPOT_7702
             }
-        }
 
-        private fun getPorcelainCup(id: Int): Int {
-            return when (id) {
+        private fun getPorcelainCup(id: Int): Int =
+            when (id) {
                 13550, 13551 -> Items.PORCELAIN_CUP_7735
                 13549, 13548, 13547 -> Items.PORCELAIN_CUP_7732
                 else -> Items.EMPTY_CUP_7728
             }
-        }
     }
 }

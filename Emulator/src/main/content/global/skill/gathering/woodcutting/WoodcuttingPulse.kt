@@ -275,9 +275,7 @@ class WoodcuttingPulse(
         return experience * amount
     }
 
-    private fun calculateReward(reward: Int): Int {
-        return reward
-    }
+    private fun calculateReward(reward: Int): Int = reward
 
     private fun checkReward(tool: SkillingTool?): Boolean {
         val skill = Skills.WOODCUTTING

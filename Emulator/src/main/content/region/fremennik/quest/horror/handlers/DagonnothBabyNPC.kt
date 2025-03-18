@@ -23,13 +23,9 @@ class DagonnothBabyNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DagonnothBabyNPC(id, location)
-    }
+    ): AbstractNPC = DagonnothBabyNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DAGANNOTH_3591)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DAGANNOTH_3591)
 
     companion object {
         @JvmStatic

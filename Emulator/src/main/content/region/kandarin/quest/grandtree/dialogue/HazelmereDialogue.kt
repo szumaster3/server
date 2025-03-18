@@ -77,7 +77,5 @@ class HazelmereDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HAZELMERE_669)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HAZELMERE_669)
 }

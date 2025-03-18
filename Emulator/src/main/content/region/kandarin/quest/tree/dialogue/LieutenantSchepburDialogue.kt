@@ -64,7 +64,5 @@ class LieutenantSchepburDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LIEUTENANT_SCHEPBUR_3817)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LIEUTENANT_SCHEPBUR_3817)
 }

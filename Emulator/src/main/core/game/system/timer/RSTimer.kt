@@ -12,9 +12,7 @@ abstract class RSTimer(
 ) {
     abstract fun run(entity: Entity): Boolean
 
-    open fun getInitialRunDelay(): Int {
-        return runInterval
-    }
+    open fun getInitialRunDelay(): Int = runInterval
 
     open fun onRegister(entity: Entity) {}
 
@@ -23,11 +21,7 @@ abstract class RSTimer(
     var lastExecution: Int = 0
     var nextExecution: Int = 0
 
-    open fun retrieveInstance(): RSTimer {
-        return this::class.createInstance()
-    }
+    open fun retrieveInstance(): RSTimer = this::class.createInstance()
 
-    open fun getTimer(vararg args: Any): RSTimer {
-        return retrieveInstance()
-    }
+    open fun getTimer(vararg args: Any): RSTimer = retrieveInstance()
 }

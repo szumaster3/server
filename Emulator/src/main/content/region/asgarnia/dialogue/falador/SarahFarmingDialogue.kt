@@ -40,7 +40,5 @@ class SarahFarmingDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SARAH_2304)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARAH_2304)
 }

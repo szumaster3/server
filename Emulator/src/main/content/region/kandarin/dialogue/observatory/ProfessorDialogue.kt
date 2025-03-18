@@ -131,11 +131,7 @@ class ProfessorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ProfessorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ProfessorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OBSERVATORY_PROFESSOR_488)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OBSERVATORY_PROFESSOR_488)
 }

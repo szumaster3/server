@@ -47,11 +47,7 @@ class NoterazzoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return NoterazzoDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = NoterazzoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NOTERAZZO_597)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NOTERAZZO_597)
 }

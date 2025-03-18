@@ -83,7 +83,5 @@ class CaptainCainDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_CAIN_5030)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_CAIN_5030)
 }

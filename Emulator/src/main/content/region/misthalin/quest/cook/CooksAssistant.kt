@@ -125,7 +125,5 @@ class CooksAssistant : Quest(Quests.COOKS_ASSISTANT, 15, 14, 1, Vars.VARP_QUEST_
         )
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

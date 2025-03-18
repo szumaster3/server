@@ -51,11 +51,7 @@ class ArtimeusDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ArtimeusDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ArtimeusDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARTIMEUS_5109)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ARTIMEUS_5109)
 }

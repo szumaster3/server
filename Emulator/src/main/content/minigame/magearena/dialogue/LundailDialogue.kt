@@ -52,7 +52,5 @@ class LundailDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LUNDAIL_903)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LUNDAIL_903)
 }

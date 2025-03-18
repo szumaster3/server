@@ -364,9 +364,7 @@ class NulodionDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NULODION_209)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NULODION_209)
 
     companion object {
         private val CANNON_PIECES = arrayOf(Item(6), Item(8), Item(10), Item(12))

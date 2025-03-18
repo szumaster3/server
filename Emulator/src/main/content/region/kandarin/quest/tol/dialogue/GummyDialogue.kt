@@ -77,7 +77,5 @@ class GummyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUMMY_5591)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUMMY_5591)
 }

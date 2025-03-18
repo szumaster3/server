@@ -126,15 +126,14 @@ class FortressGuardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.FORTRESS_GUARD_609,
             NPCs.FORTRESS_GUARD_4603,
             NPCs.FORTRESS_GUARD_4604,
             NPCs.FORTRESS_GUARD_4605,
             NPCs.FORTRESS_GUARD_4606,
         )
-    }
 
     companion object {
         private val UNIFORM = arrayOf(Item(Items.BRONZE_MED_HELM_1139), Item(Items.IRON_CHAINBODY_1101))

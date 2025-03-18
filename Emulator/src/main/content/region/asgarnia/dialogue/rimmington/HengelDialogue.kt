@@ -60,7 +60,5 @@ class HengelDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HENGEL_2683)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HENGEL_2683)
 }

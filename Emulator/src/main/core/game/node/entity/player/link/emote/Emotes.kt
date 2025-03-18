@@ -557,9 +557,7 @@ enum class Emotes(
         }
 
         @JvmStatic
-        fun forId(buttonId: Int): Emotes? {
-            return values().find { it.buttonId == buttonId }
-        }
+        fun forId(buttonId: Int): Emotes? = values().find { it.buttonId == buttonId }
 
         private fun isWearingChickenOutfit(player: Player): Boolean {
             val head = player.equipment[EquipmentContainer.SLOT_HAT]
@@ -572,8 +570,8 @@ enum class Emotes(
                 feet?.id == Items.CHICKEN_FEET_11019
         }
 
-        private fun isEligibleForSalute(player: Player): Boolean {
-            return !player.achievementDiaryManager.hasCompletedTask(DiaryType.FALADOR, 1, 8) &&
+        private fun isEligibleForSalute(player: Player): Boolean =
+            !player.achievementDiaryManager.hasCompletedTask(DiaryType.FALADOR, 1, 8) &&
                 player.location == Location(2997, 3374, 0) &&
                 player.direction == Direction.SOUTH &&
                 anyInEquipment(
@@ -582,10 +580,8 @@ enum class Emotes(
                     Items.INITIATE_HAUBERK_5575,
                     Items.INITIATE_CUISSE_5576,
                 )
-        }
 
-        private fun isEligibleForGoblinBow(player: Player): Boolean {
-            return player.location.regionId == 13206 && !player.getAttribute("mistag-greeted", false)
-        }
+        private fun isEligibleForGoblinBow(player: Player): Boolean =
+            player.location.regionId == 13206 && !player.getAttribute("mistag-greeted", false)
     }
 }

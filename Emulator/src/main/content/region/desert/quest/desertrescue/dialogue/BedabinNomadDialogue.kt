@@ -184,11 +184,10 @@ class BedabinNomadDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             834,
             833,
             1239,
         )
-    }
 }

@@ -42,9 +42,7 @@ class KingNarnodeGTDialogue : DialogueFile() {
                             lock(player!!, 10)
                             npc!!.pulseManager.run(
                                 object : MovementPulse(npc, player, Pathfinder.SMART) {
-                                    override fun pulse(): Boolean {
-                                        return false
-                                    }
+                                    override fun pulse(): Boolean = false
                                 },
                                 PulseType.STANDARD,
                             )
@@ -733,9 +731,7 @@ class KingNarnodeUnderGroundDialogue : DialogueFile() {
                             lock(player!!, 10)
                             npc!!.pulseManager.run(
                                 object : MovementPulse(npc, player, Pathfinder.SMART) {
-                                    override fun pulse(): Boolean {
-                                        return false
-                                    }
+                                    override fun pulse(): Boolean = false
                                 },
                                 PulseType.STANDARD,
                             )

@@ -103,12 +103,10 @@ class CanifisCitizenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return CanifisCitizenDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = CanifisCitizenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.BORIS_6026,
             NPCs.IMRE_6027,
             NPCs.YURI_6028,
@@ -130,5 +128,4 @@ class CanifisCitizenDialogue(
             NPCs.ZOJA_6044,
             NPCs.LILIYA_6045,
         )
-    }
 }

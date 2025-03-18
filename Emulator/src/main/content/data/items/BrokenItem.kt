@@ -97,8 +97,8 @@ object BrokenItem {
      * @param type The [EquipmentType] representing the type of equipment to repair.
      * @return The repaired [Item], or `null` if no repairable item is found.
      */
-    fun getRepair(type: EquipmentType): Item? {
-        return when (type) {
+    fun getRepair(type: EquipmentType): Item? =
+        when (type) {
             EquipmentType.ARROWS -> RandomFunction.rollWeightedChanceTable(brokenArrows)
             EquipmentType.STAVES -> RandomFunction.rollWeightedChanceTable(brokenStaves)
             EquipmentType.SWORDS -> RandomFunction.rollWeightedChanceTable(rustySwords)
@@ -106,7 +106,6 @@ object BrokenItem {
             EquipmentType.ARMOUR -> RandomFunction.rollWeightedChanceTable(damagedArmour)
             EquipmentType.LEGS -> RandomFunction.rollWeightedChanceTable(brokenArmour)
         }
-    }
 
     /**
      * Represents the different types of equipment that can be repaired.

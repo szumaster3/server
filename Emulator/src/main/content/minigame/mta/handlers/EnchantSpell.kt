@@ -276,13 +276,12 @@ class EnchantSpell : MagicSpell {
     override val delay: Int
         get() = super.delay
 
-    override fun getExperience(player: Player): Double {
-        return if (player.zoneMonitor.isInZone("Enchantment Chamber")) {
+    override fun getExperience(player: Player): Double =
+        if (player.zoneMonitor.isInZone("Enchantment Chamber")) {
             experience - experience * 0.25
         } else {
             experience
         }
-    }
 
     override fun newInstance(arg: SpellType?): Plugin<SpellType?>? {
         SpellBookManager.SpellBook.MODERN.register(

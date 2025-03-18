@@ -163,7 +163,5 @@ class TheGunsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THE_GUNS_5592)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THE_GUNS_5592)
 }

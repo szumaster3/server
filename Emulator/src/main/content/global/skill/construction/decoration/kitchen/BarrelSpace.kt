@@ -28,9 +28,7 @@ class BarrelSpace : InteractionListener {
         }
     }
 
-    private fun getReward(barrelId: Int): Int {
-        return REWARDS[barrelId - 13568] ?: DEFAULT_REWARD
-    }
+    private fun getReward(barrelId: Int): Int = REWARDS[barrelId - 13568] ?: DEFAULT_REWARD
 
     companion object {
         private val BARRELS = intArrayOf(13568, 13569, 13570, 13571, 13572, 13573)

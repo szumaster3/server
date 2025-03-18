@@ -204,11 +204,7 @@ class CaptainShanksDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CaptainShanksDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CaptainShanksDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_SHANKS_518)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_SHANKS_518)
 }

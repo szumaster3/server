@@ -259,7 +259,5 @@ class DronDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DRON_2939)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DRON_2939)
 }

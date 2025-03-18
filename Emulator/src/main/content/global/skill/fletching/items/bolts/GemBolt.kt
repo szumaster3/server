@@ -115,18 +115,12 @@ enum class GemBolt(
         val product = values.associateBy { it.base }
 
         @JvmStatic
-        fun forId(id: Int): GemBolt? {
-            return values().find { it.base == id || it.tip == id }
-        }
+        fun forId(id: Int): GemBolt? = values().find { it.base == id || it.tip == id }
 
         @JvmStatic
-        fun getGemId(gemBolt: GemBolt): Int {
-            return gemBolt.gem
-        }
+        fun getGemId(gemBolt: GemBolt): Int = gemBolt.gem
 
         @JvmStatic
-        fun getTipId(gemBolt: GemBolt): Int {
-            return gemBolt.tip
-        }
+        fun getTipId(gemBolt: GemBolt): Int = gemBolt.tip
     }
 }

@@ -27,7 +27,5 @@ class HoodedMonkDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(3074)
-    }
+    override fun getIds(): IntArray = intArrayOf(3074)
 }

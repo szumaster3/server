@@ -95,11 +95,7 @@ class BlurberryDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BlurberryDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BlurberryDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BLURBERRY_848)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BLURBERRY_848)
 }

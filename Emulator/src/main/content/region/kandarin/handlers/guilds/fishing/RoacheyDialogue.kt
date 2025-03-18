@@ -34,7 +34,5 @@ class RoacheyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROACHEY_592)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROACHEY_592)
 }

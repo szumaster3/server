@@ -1,7 +1,7 @@
 package content.region.desert.quest.deserttreasure.dialogue
 
-import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
+import content.region.desert.quest.deserttreasure.handlers.DTUtils
 import core.api.inInventory
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
@@ -26,35 +26,29 @@ class TrollChildDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return TrollChildDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = TrollChildDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BANDIT_1932)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BANDIT_1932)
 }
 
 class TrollChildDialogueFile : DialogueBuilderFile() {
     companion object {
-        fun dialogueBeforeQuestCrying(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueBeforeQuestCrying(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl("Hello there.")
                 .line("The troll child is crying to itself.", "It is ignoring you completely.")
-        }
 
-        fun dialogueStillCrying(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueStillCrying(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl("Hello there.")
                 .npcl(FaceAnim.OLD_NEARLY_CRYING, "Waaaaaaa!")
                 .line(
                     "This troll seems very upset about something.",
                     "Maybe some sweet food would take his mind off things?",
                 )
-        }
 
-        fun dialogueStoppedCrying(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueStoppedCrying(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl("Hello there.")
                 .npc(FaceAnim.OLD_SAD, "-sniff-", "H-hello there.")
                 .playerl("Why so sad, little troll?")
@@ -82,45 +76,39 @@ class TrollChildDialogueFile : DialogueBuilderFile() {
                     FaceAnim.OLD_NEARLY_CRYING,
                     "I give you my promise mister that if you unfreeze my mommy and daddy, you can have the stupid diamond.",
                 ).npcl(FaceAnim.OLD_NEARLY_CRYING, "Do we have a deal?")
-        }
 
-        fun dialogueYesToHelp(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueYesToHelp(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl("Absolutely. Don't worry kid, I'll get your parents back to you safe and sound.")
-        }
 
-        fun dialogueNoToHelp(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueNoToHelp(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl(
                     "Sorry, I can't make any promises about that, and I don't think I have the time to waste trying to defrost some stupid ice trolls.",
                 ).npcl(FaceAnim.OLD_NEARLY_CRYING, "Waaaaaaa!")
-        }
 
-        fun dialogueHaveYouFreedThem(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueHaveYouFreedThem(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .npcl(FaceAnim.OLD_SAD, "You didn't free my mommy and daddy yet?")
                 .player("Not yet...")
                 .npc(FaceAnim.OLD_SAD, "Please try harder!", "I love my mommy and daddy!")
-        }
 
-        fun dialogueThankYou(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueThankYou(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .npc(
                     FaceAnim.OLD_CALM_TALK1,
                     "Thanks for all of your help!",
                     "I'm surprised you managed to survive the blizzard,",
                     "being a thin skinned fleshy and all!",
                 ).player("What can I say?", "I'm a lot tougher than I look.")
-        }
 
-        fun dialogueLostDiamond(builder: DialogueBuilder): DialogueBuilder {
-            return builder
+        fun dialogueLostDiamond(builder: DialogueBuilder): DialogueBuilder =
+            builder
                 .playerl("I lost that diamond of Ice you gave me...")
                 .npcl(
                     FaceAnim.OLD_CALM_TALK1,
                     "That's okay, it blew back on an icy wind... It's almost like it wants to stay here! Here, take it back, you've earned it.",
                 )
-        }
     }
 
     override fun create(b: DialogueBuilder) {

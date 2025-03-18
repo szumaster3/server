@@ -159,13 +159,9 @@ class BardurDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BardurDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BardurDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARDUR_2879)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARDUR_2879)
 }
 
 class BardurExchangeDialogue : DialogueFile() {

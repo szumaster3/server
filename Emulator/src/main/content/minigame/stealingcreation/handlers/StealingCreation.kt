@@ -201,12 +201,10 @@ object StealingCreation {
         return Item(-1, 1)
     }
 
-    fun getScenery(): Int {
-        return 0
-    }
+    fun getScenery(): Int = 0
 
-    fun getRequestedKilnSkill(index: Int): Int {
-        return when {
+    fun getRequestedKilnSkill(index: Int): Int =
+        when {
             index in 0..1 || index in 6..8 || index in 15..17 -> Skills.SMITHING
             index in 2..3 || index in 9..14 || index in 18..19 || index == 23 -> Skills.CRAFTING
             index == 4 -> Skills.CONSTRUCTION
@@ -216,7 +214,6 @@ object StealingCreation {
             index in 25..32 -> Skills.HERBLORE
             else -> 1
         }
-    }
 
     private fun getLevelForIndex(index: Int): Int {
         var level = 0
@@ -227,9 +224,7 @@ object StealingCreation {
         return level
     }
 
-    private fun hasRequiredPlayers(): Boolean {
-        return redTeam.size >= 5 && blueTeam.size >= 5
-    }
+    private fun hasRequiredPlayers(): Boolean = redTeam.size >= 5 && blueTeam.size >= 5
 
     fun updateInterfaces() {
         val hidden = hasRequiredPlayers()
@@ -310,7 +305,5 @@ object StealingCreation {
     fun getAnimationForBase(
         baseId: Int,
         index: Int,
-    ): Animation {
-        return Animation(basicAnimation[index] + baseId)
-    }
+    ): Animation = Animation(basicAnimation[index] + baseId)
 }

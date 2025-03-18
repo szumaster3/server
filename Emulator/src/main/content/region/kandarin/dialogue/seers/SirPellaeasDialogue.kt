@@ -123,11 +123,7 @@ class SirPellaeasDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirPellaeasDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirPellaeasDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_PELLEAS_244)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_PELLEAS_244)
 }

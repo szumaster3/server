@@ -88,9 +88,7 @@ class PoisonChaliceEffect : ConsumableEffect() {
         }
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return (20 + (player.getSkills().maximumLifepoints - 100) * 0.14).toInt()
-    }
+    override fun getHealthEffectValue(player: Player): Int = (20 + (player.getSkills().maximumLifepoints - 100) * 0.14).toInt()
 
     companion object {
         var hitValue = RandomFunction.random(1, 49)

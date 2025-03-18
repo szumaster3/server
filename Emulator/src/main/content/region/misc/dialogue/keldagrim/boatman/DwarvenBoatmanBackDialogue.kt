@@ -50,13 +50,9 @@ class DwarvenBoatmanBackDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DwarvenBoatmanBackDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DwarvenBoatmanBackDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARVEN_BOATMAN_2206)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARVEN_BOATMAN_2206)
 }
 
 class TravelBackPulse(

@@ -10,9 +10,7 @@ class TrailDefinition(
     val endLocation: Location,
     val triggerObjectLocation: Location = endLocation,
 ) {
-    override fun toString(): String {
-        return "$startLocation $endLocation [varbit: $varbit] [${type.name}] [inverted: $inverted]"
-    }
+    override fun toString(): String = "$startLocation $endLocation [varbit: $varbit] [${type.name}] [inverted: $inverted]"
 }
 
 enum class TrailType {

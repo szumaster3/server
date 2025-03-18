@@ -9,9 +9,7 @@ object DialogueUtils {
     fun removeMatches(
         message: String,
         regex: Regex,
-    ): String {
-        return regex.replace(message, "")
-    }
+    ): String = regex.replace(message, "")
 }
 
 /**

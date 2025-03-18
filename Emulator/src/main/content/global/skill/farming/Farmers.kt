@@ -35,8 +35,6 @@ enum class Farmers(
         val farmers = values().map { it.id to it }.toMap()
 
         @JvmStatic
-        fun forId(id: Int): Farmers? {
-            return farmers[id]
-        }
+        fun forId(id: Int): Farmers? = farmers[id]
     }
 }

@@ -32,11 +32,7 @@ class EoinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EoinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EoinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EOIN_2368)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EOIN_2368)
 }

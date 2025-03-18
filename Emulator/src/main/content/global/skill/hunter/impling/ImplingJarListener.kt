@@ -335,8 +335,6 @@ enum class ImplingLoot(
             }
         }
 
-        fun forId(id: Int): WeightBasedTable? {
-            return jarMap[id]
-        }
+        fun forId(id: Int): WeightBasedTable? = jarMap[id]
     }
 }

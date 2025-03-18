@@ -37,11 +37,7 @@ class DromundDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DromundDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DromundDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DROMUND_2169)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DROMUND_2169)
 }

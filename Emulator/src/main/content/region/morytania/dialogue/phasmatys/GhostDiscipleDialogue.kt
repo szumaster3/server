@@ -174,7 +174,5 @@ class GhostDiscipleDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GHOST_DISCIPLE_1686)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_DISCIPLE_1686)
 }

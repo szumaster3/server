@@ -122,7 +122,5 @@ class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_C
         addItemOrDrop(player, Items.COINS_995, 2005)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

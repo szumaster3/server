@@ -102,9 +102,7 @@ class SeamanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SeamanDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SeamanDialogue(player)
 
     fun pay(price: Int) {
         if (!removeItem(player, Item(Items.COINS_995, price))) {
@@ -121,7 +119,5 @@ class SeamanDialogue(
         Charter.PORT_SARIM_TO_KARAMJA.sail(player)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_TOBIAS_376, NPCs.SEAMAN_LORRIS_377, NPCs.SEAMAN_THRESNOR_378)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_TOBIAS_376, NPCs.SEAMAN_LORRIS_377, NPCs.SEAMAN_THRESNOR_378)
 }

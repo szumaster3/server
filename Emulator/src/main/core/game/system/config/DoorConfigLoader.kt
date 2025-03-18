@@ -12,9 +12,7 @@ class DoorConfigLoader {
     companion object {
         @JvmStatic val DOORS = hashMapOf<Int, Door>()
 
-        @JvmStatic fun forId(id: Int): Door? {
-            return DOORS[id]
-        }
+        @JvmStatic fun forId(id: Int): Door? = DOORS[id]
     }
 
     val parser = JSONParser()

@@ -45,13 +45,9 @@ class GarvDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GarvDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GarvDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GARV_788)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GARV_788)
 }
 
 class GarvDialogueFile : DialogueBuilderFile() {

@@ -76,11 +76,7 @@ class JofridrMordstatterDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JofridrMordstatterDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JofridrMordstatterDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOFRIDR_MORDSTATTER_5509)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOFRIDR_MORDSTATTER_5509)
 }

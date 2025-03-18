@@ -205,13 +205,9 @@ class SorceressElementalNPC : AbstractNPC {
         ),
         ;
 
-        fun getId(): Int {
-            return npcId
-        }
+        fun getId(): Int = npcId
 
-        fun getLocation(): Array<Location> {
-            return locations
-        }
+        fun getLocation(): Array<Location> = locations
 
         companion object {
             fun forId(id: Int): ElementalDefinition? {
@@ -281,12 +277,10 @@ class SorceressElementalNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SorceressElementalNPC(id, location)
-    }
+    ): AbstractNPC = SorceressElementalNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.AUTUMN_ELEMENTAL_5533,
             NPCs.AUTUMN_ELEMENTAL_5534,
             NPCs.AUTUMN_ELEMENTAL_5535,
@@ -314,7 +308,6 @@ class SorceressElementalNPC : AbstractNPC {
             NPCs.WINTER_ELEMENTAL_5557,
             NPCs.WINTER_ELEMENTAL_5558,
         )
-    }
 
     val respawnLocation: Location?
         get() {
@@ -354,9 +347,7 @@ class SorceressElementalNPC : AbstractNPC {
     }
 
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg)
-    }
+    override fun newInstance(arg: Any?): Plugin<Any> = super.newInstance(arg)
 
     private fun sendTeleport(player: Player) {
         lock(player, 7)

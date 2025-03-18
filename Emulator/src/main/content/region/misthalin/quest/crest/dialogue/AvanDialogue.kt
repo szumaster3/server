@@ -297,7 +297,5 @@ class AvanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAN_663)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MAN_663)
 }

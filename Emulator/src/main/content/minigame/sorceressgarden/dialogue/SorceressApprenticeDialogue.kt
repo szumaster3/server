@@ -242,9 +242,7 @@ class SorceressApprenticeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.APPRENTICE_5532)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.APPRENTICE_5532)
 
     companion object {
         fun teleport(

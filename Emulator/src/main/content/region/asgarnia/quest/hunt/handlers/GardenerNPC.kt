@@ -20,9 +20,7 @@ class GardenerNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return GardenerNPC(id, location)
-    }
+    ): AbstractNPC = GardenerNPC(id, location)
 
     override fun tick() {
         super.tick()
@@ -66,9 +64,7 @@ class GardenerNPC : AbstractNPC {
         super.finalizeDeath(killer)
     }
 
-    override fun getIds(): IntArray {
-        return ID
-    }
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.GARDENER_1217)

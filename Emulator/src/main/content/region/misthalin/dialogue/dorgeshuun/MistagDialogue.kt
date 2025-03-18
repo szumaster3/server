@@ -1,8 +1,8 @@
 package content.region.misthalin.dialogue.dorgeshuun
 
 import content.region.misthalin.quest.dttd.dialogue.MistagDialogueFile
-import content.region.misthalin.quest.losttribe.handlers.GoblinFollower
 import content.region.misthalin.quest.losttribe.dialogue.MistagLostTribeDialogue
+import content.region.misthalin.quest.losttribe.handlers.GoblinFollower
 import core.api.getAttribute
 import core.api.inInventory
 import core.api.openDialogue
@@ -23,9 +23,7 @@ import org.rs.consts.Quests
 class MistagDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    override fun npc(vararg messages: String?): Component {
-        return npc(FaceAnim.OLD_NORMAL, *messages)
-    }
+    override fun npc(vararg messages: String?): Component = npc(FaceAnim.OLD_NORMAL, *messages)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -211,11 +209,7 @@ class MistagDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return MistagDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = MistagDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MISTAG_2084)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MISTAG_2084)
 }

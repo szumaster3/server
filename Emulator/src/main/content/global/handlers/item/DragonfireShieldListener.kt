@@ -178,7 +178,5 @@ class DFSItemPlugin : ItemPlugin() {
         return this
     }
 
-    override fun getDeathItem(item: Item): Item {
-        return Item(Items.DRAGONFIRE_SHIELD_11284)
-    }
+    override fun getDeathItem(item: Item): Item = Item(Items.DRAGONFIRE_SHIELD_11284)
 }

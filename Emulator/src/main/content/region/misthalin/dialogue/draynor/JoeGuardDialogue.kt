@@ -114,13 +114,9 @@ class JoeGuardDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return JoeGuardDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = JoeGuardDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOE_916)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOE_916)
 
     companion object {
         private val BEER = Item(Items.BEER_1917)

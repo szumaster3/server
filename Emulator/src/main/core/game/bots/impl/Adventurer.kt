@@ -64,8 +64,8 @@ class Adventurer(
         skills[Skills.SLAYER] = 90
     }
 
-    override fun toString(): String {
-        return "${bot.username} is an Adventurer bot " +
+    override fun toString(): String =
+        "${bot.username} is an Adventurer bot " +
             "at ${bot.location}! " +
             "State: $state - " +
             "City: $city - " +
@@ -73,29 +73,18 @@ class Adventurer(
             "Freshspawn: $freshspawn - " +
             "Sold: $sold - " +
             "Counter: $counter"
-    }
 
     var state = State.START
 
-    private fun getRandomCity(): Location {
-        return cities.random()
-    }
+    private fun getRandomCity(): Location = cities.random()
 
-    private fun getRandomPoi(): Location {
-        return pois.random()
-    }
+    private fun getRandomPoi(): Location = pois.random()
 
-    private fun getRandomGESocialLocation(): Location {
-        return socialLocationsGE.random()
-    }
+    private fun getRandomGESocialLocation(): Location = socialLocationsGE.random()
 
-    private fun getRandomGELocation(): Location {
-        return cityLocationsGE.random()
-    }
+    private fun getRandomGELocation(): Location = cityLocationsGE.random()
 
-    private fun randomNumberFromOne(maxInt: Int): Int {
-        return Random.nextInt(0, maxInt)
-    }
+    private fun randomNumberFromOne(maxInt: Int): Int = Random.nextInt(0, maxInt)
 
     private fun otherPlayersNearby(): Boolean {
         val localPlayers = RegionManager.getLocalPlayers(bot)
@@ -777,12 +766,8 @@ class Adventurer(
             dateCode = formatted.toInt()
         }
 
-        private fun JSONObject.getLines(category: String): JSONArray {
-            return this[category] as JSONArray
-        }
+        private fun JSONObject.getLines(category: String): JSONArray = this[category] as JSONArray
 
-        private fun JSONArray.rand(): String {
-            return this.random() as String
-        }
+        private fun JSONArray.rand(): String = this.random() as String
     }
 }

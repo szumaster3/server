@@ -670,7 +670,5 @@ class WizardElrissDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_ELRISS_8032)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_ELRISS_8032)
 }

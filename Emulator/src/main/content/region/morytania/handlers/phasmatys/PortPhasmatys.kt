@@ -11,9 +11,7 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Items
 
 class PortPhasmatys : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders.forRegion(14646), ZoneBorders.forRegion(14747))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders.forRegion(14646), ZoneBorders.forRegion(14747))
 
     override fun areaLeave(
         entity: Entity,

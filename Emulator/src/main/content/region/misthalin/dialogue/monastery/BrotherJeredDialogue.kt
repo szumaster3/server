@@ -258,11 +258,7 @@ class BrotherJeredDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BrotherJeredDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BrotherJeredDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_JERED_802)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_JERED_802)
 }

@@ -62,11 +62,7 @@ class LibAssistantDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return LibAssistantDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = LibAssistantDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ASSISTANT_2166)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ASSISTANT_2166)
 }

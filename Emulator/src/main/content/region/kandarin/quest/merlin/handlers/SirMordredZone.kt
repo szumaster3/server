@@ -26,14 +26,10 @@ class SirMordredZone :
     override fun fireEvent(
         identifier: String?,
         vararg args: Any?,
-    ): Any {
-        return Unit
-    }
+    ): Any = Unit
 
     override fun startDeath(
         e: Entity?,
         killer: Entity?,
-    ): Boolean {
-        return !(e != null && e is NPC && e.asNpc().id == NPCs.SIR_MORDRED_247)
-    }
+    ): Boolean = !(e != null && e is NPC && e.asNpc().id == NPCs.SIR_MORDRED_247)
 }

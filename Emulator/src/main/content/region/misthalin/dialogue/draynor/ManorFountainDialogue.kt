@@ -56,9 +56,7 @@ class ManorFountainDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DIALOGUE_ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(DIALOGUE_ID)
 
     companion object {
         const val DIALOGUE_ID = 3954922

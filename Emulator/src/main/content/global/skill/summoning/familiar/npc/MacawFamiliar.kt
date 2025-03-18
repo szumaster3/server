@@ -29,17 +29,11 @@ class MacawFamiliar(
     override fun construct(
         owner: Player,
         id: Int,
-    ): Familiar {
-        return MacawFamiliar(owner, id)
-    }
+    ): Familiar = MacawFamiliar(owner, id)
 
-    override fun newInstance(`object`: Any?): Plugin<Any> {
-        return super.newInstance(`object`)
-    }
+    override fun newInstance(`object`: Any?): Plugin<Any> = super.newInstance(`object`)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MACAW_6851, NPCs.MACAW_6852)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MACAW_6851, NPCs.MACAW_6852)
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         if (specialDelay > GameWorld.ticks) {

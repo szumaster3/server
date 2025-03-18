@@ -61,7 +61,5 @@ class KlenterDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KLENTER_2014)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KLENTER_2014)
 }

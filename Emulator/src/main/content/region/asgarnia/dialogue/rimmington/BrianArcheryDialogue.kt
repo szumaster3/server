@@ -45,7 +45,5 @@ class BrianArcheryDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BRIAN_1860)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BRIAN_1860)
 }

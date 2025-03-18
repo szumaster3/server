@@ -105,17 +105,11 @@ class ShootingStarPlugin :
         }
 
         @JvmStatic
-        fun getStar(): ShootingStar {
-            return star
-        }
+        fun getStar(): ShootingStar = star
 
         @JvmStatic
-        fun getStoreFile(): JSONObject {
-            return ServerStore.getArchive("shooting-star")
-        }
+        fun getStoreFile(): JSONObject = ServerStore.getArchive("shooting-star")
 
-        fun getStarDust(player: Player): Int {
-            return player.inventory.getAmount(STAR_DUST) + player.bank.getAmount(STAR_DUST)
-        }
+        fun getStarDust(player: Player): Int = player.inventory.getAmount(STAR_DUST) + player.bank.getAmount(STAR_DUST)
     }
 }

@@ -61,17 +61,11 @@ class NoraTHaggNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return NoraTHaggNPC(id, location)
-    }
+    ): AbstractNPC = NoraTHaggNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NORA_T_HAGG_896)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NORA_T_HAGG_896)
 
-    override fun getWalkRadius(): Int {
-        return 50
-    }
+    override fun getWalkRadius(): Int = 50
 
     override fun configure() {
         super.configure()

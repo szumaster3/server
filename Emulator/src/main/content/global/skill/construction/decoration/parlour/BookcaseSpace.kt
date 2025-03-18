@@ -104,11 +104,10 @@ class BookcaseSpace :
             )
     }
 
-    fun getBook(id: Int): Int {
-        return if (id in 56..114 step 2) {
+    fun getBook(id: Int): Int =
+        if (id in 56..114 step 2) {
             bookDetails[(id - 56) / 2].first
         } else {
             0
         }
-    }
 }

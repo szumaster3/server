@@ -99,7 +99,5 @@ class DigUpPatchDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(67984003)
-    }
+    override fun getIds(): IntArray = intArrayOf(67984003)
 }

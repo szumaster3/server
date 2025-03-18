@@ -39,7 +39,5 @@ class DoormanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANGING_GUILD_DOORMAN_679)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANGING_GUILD_DOORMAN_679)
 }

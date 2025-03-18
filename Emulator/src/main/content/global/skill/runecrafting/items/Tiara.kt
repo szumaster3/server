@@ -37,9 +37,6 @@ enum class Tiara(
         fun from(item: Item): Tiara? = itemToTiara[item.id]
 
         @JvmStatic
-        fun forItem(item: Item): Tiara? {
-            return itemToTiara[item.id]
-        }
+        fun forItem(item: Item): Tiara? = itemToTiara[item.id]
     }
-
 }

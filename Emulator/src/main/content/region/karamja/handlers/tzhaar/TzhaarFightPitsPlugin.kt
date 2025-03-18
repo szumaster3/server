@@ -194,9 +194,7 @@ class TzhaarFightPitsPlugin : ActivityPlugin("fight pits", false, true, true, Zo
     }
 
     @Throws(Throwable::class)
-    override fun newInstance(p: Player): ActivityPlugin {
-        return this
-    }
+    override fun newInstance(p: Player): ActivityPlugin = this
 
     companion object {
         private val WAR_ZONE = ZoneBorders(2368, 5120, 2420, 5168)

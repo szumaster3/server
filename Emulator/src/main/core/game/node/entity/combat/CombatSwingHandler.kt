@@ -105,24 +105,18 @@ abstract class CombatSwingHandler(
         victim!!.onImpact(entity, state)
     }
 
-    open fun getArmourSet(e: Entity?): ArmourSet? {
-        return null
-    }
+    open fun getArmourSet(e: Entity?): ArmourSet? = null
 
     fun isAccurateImpact(
         entity: Entity?,
         victim: Entity?,
-    ): Boolean {
-        return isAccurateImpact(entity, victim, type, 1.0, 1.0)
-    }
+    ): Boolean = isAccurateImpact(entity, victim, type, 1.0, 1.0)
 
     fun isAccurateImpact(
         entity: Entity?,
         victim: Entity?,
         style: CombatStyle?,
-    ): Boolean {
-        return isAccurateImpact(entity, victim, style, 1.0, 1.0)
-    }
+    ): Boolean = isAccurateImpact(entity, victim, style, 1.0, 1.0)
 
     fun isAccurateImpact(
         entity: Entity?,
@@ -152,9 +146,7 @@ abstract class CombatSwingHandler(
     open fun canSwing(
         entity: Entity,
         victim: Entity,
-    ): InteractionType? {
-        return isAttackable(entity, victim)
-    }
+    ): InteractionType? = isAttackable(entity, victim)
 
     open fun isAttackable(
         entity: Entity,

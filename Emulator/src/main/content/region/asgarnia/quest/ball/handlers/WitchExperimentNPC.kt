@@ -49,9 +49,11 @@ class WitchExperimentNPC : AbstractNPC {
         super.startDeath(killer)
     }
 
-    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
-        return p == entity
-    }
+    override fun isAttackable(
+        entity: Entity,
+        style: CombatStyle,
+        message: Boolean,
+    ): Boolean = p == entity
 
     override fun canSelectTarget(target: Entity): Boolean {
         if (target is Player) {
@@ -60,25 +62,33 @@ class WitchExperimentNPC : AbstractNPC {
         return true
     }
 
+    override fun construct(
+        id: Int,
+        location: Location,
+        vararg objects: Any,
+    ): AbstractNPC = WitchExperimentNPC(id, location, null)
 
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
-        return WitchExperimentNPC(id, location, null)
-    }
-
-    override fun getIds(): IntArray {
-        return intArrayOf(897, 898, 899, 900)
-    }
+    override fun getIds(): IntArray = intArrayOf(897, 898, 899, 900)
 
     fun setCommenced(commenced: Boolean) {
         this.commenced = commenced
     }
 
-    enum class ExperimentType(val id: Int, vararg message: String) {
-        FIRST(897, ""), SECOND(
-            898, "The shapeshifter's body begins to deform!", "The shapeshifter turns into a spider!"
+    enum class ExperimentType(
+        val id: Int,
+        vararg message: String,
+    ) {
+        FIRST(897, ""),
+        SECOND(
+            898,
+            "The shapeshifter's body begins to deform!",
+            "The shapeshifter turns into a spider!",
         ),
-        THIRD(899, "The shapeshifter's body begins to twist!", "The shapeshifter turns into a bear!"), FOURTH(
-            900, "The shapeshifter's body pulses!", "The shapeshifter turns into a wolf!"
+        THIRD(899, "The shapeshifter's body begins to twist!", "The shapeshifter turns into a bear!"),
+        FOURTH(
+            900,
+            "The shapeshifter's body pulses!",
+            "The shapeshifter turns into a wolf!",
         ),
         END(-1, ""), ;
 
@@ -87,53 +97,54 @@ class WitchExperimentNPC : AbstractNPC {
         /**
          * Transforms the new npc.
          */
-        fun transform(npc: WitchExperimentNPC, player: Player) {
+        fun transform(
+            npc: WitchExperimentNPC,
+            player: Player,
+        ) {
             val newType = next()
             npc.lock()
             npc.pulseManager.clear()
             npc.walkingQueue.reset()
             setAttribute(player, "/save:witchs_house:experiment_id", id)
-            Pulser.submit(object : Pulse(1, npc, player) {
-                var counter: Int = 0
+            Pulser.submit(
+                object : Pulse(1, npc, player) {
+                    var counter: Int = 0
 
-                override fun pulse(): Boolean {
-                    when (++counter) {
-                        1 -> {
-                            npc.unlock()
-                            npc.animator.reset()
-                            npc.fullRestore()
-                            npc.type = newType
-                            npc.transform(newType.id)
-                            npc.impactHandler.disabledTicks = 1
-                            if (newType != END) {
-                                npc.properties.combatPulse.attack(player)
+                    override fun pulse(): Boolean {
+                        when (++counter) {
+                            1 -> {
+                                npc.unlock()
+                                npc.animator.reset()
+                                npc.fullRestore()
+                                npc.type = newType
+                                npc.transform(newType.id)
+                                npc.impactHandler.disabledTicks = 1
+                                if (newType != END) {
+                                    npc.properties.combatPulse.attack(player)
+                                }
+                                if (newType.getMessage() != null && newType != END) {
+                                    player.sendMessage(newType.getMessage()!![0])
+                                    player.sendMessage(newType.getMessage()!![1])
+                                }
+                                if (newType == END) {
+                                    player.setAttribute("witchs_house:experiment_killed", true)
+                                    player.sendMessage("You finally kill the shapeshifter once and for all.")
+                                    npc.clear()
+                                    return false
+                                }
+                                player.unlock()
+                                return true
                             }
-                            if (newType.getMessage() != null && newType != END) {
-                                player.sendMessage(newType.getMessage()!![0])
-                                player.sendMessage(newType.getMessage()!![1])
-                            }
-                            if (newType == END) {
-                                player.setAttribute("witchs_house:experiment_killed", true)
-                                player.sendMessage("You finally kill the shapeshifter once and for all.")
-                                npc.clear()
-                                return false
-                            }
-                            player.unlock()
-                            return true
                         }
+                        return false
                     }
-                    return false
-                }
-            })
+                },
+            )
         }
 
-        fun next(): ExperimentType {
-            return experimentTypes[ordinal + 1]
-        }
+        fun next(): ExperimentType = experimentTypes[ordinal + 1]
 
-        fun getMessage(): Array<String>? {
-            return message
-        }
+        fun getMessage(): Array<String>? = message
 
         companion object {
             fun forId(id: Int): ExperimentType? {

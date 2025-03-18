@@ -294,7 +294,5 @@ class ThoraDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.THORA_THE_BARKEEP_1300)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.THORA_THE_BARKEEP_1300)
 }

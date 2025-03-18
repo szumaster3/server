@@ -16,15 +16,10 @@ class NedNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return NedNPC(id, location)
-    }
+    ): AbstractNPC = NedNPC(id, location)
 
-    override fun isHidden(player: Player): Boolean {
-        return getQuestStage(player, Quests.DRAGON_SLAYER) != 30 && getQuestStage(player, Quests.DRAGON_SLAYER) != 40
-    }
+    override fun isHidden(player: Player): Boolean =
+        getQuestStage(player, Quests.DRAGON_SLAYER) != 30 && getQuestStage(player, Quests.DRAGON_SLAYER) != 40
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.NED_918)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.NED_918)
 }

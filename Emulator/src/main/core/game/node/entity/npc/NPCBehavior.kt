@@ -19,9 +19,7 @@ open class NPCBehavior(
         private val defaultBehavior = NPCBehavior()
 
         @JvmStatic
-        fun forId(id: Int): NPCBehavior {
-            return idMap[id] ?: defaultBehavior
-        }
+        fun forId(id: Int): NPCBehavior = idMap[id] ?: defaultBehavior
 
         fun register(
             ids: IntArray,
@@ -36,14 +34,10 @@ open class NPCBehavior(
             z: Int,
             x: Int,
             y: Int,
-        ): Int {
-            return RegionManager.getClippingFlag(z, x, y)
-        }
+        ): Int = RegionManager.getClippingFlag(z, x, y)
     }
 
-    open fun tick(self: NPC): Boolean {
-        return true
-    }
+    open fun tick(self: NPC): Boolean = true
 
     open fun beforeDamageReceived(
         self: NPC,
@@ -100,29 +94,19 @@ open class NPCBehavior(
     open fun shouldIgnoreMultiRestrictions(
         self: NPC,
         victim: Entity,
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     open fun getSwingHandlerOverride(
         self: NPC,
         original: CombatSwingHandler,
-    ): CombatSwingHandler {
-        return original
-    }
+    ): CombatSwingHandler = original
 
-    open fun getPathfinderOverride(self: NPC): Pathfinder? {
-        return null
-    }
+    open fun getPathfinderOverride(self: NPC): Pathfinder? = null
 
-    open fun getClippingSupplier(self: NPC): ClipMaskSupplier? {
-        return StandardClipMaskSupplier
-    }
+    open fun getClippingSupplier(self: NPC): ClipMaskSupplier? = StandardClipMaskSupplier
 
     open fun getXpMultiplier(
         self: NPC,
         attacker: Entity,
-    ): Double {
-        return 1.0
-    }
+    ): Double = 1.0
 }

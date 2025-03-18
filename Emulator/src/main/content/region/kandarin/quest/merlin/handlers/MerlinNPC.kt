@@ -24,15 +24,9 @@ class MerlinNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return MerlinNPC(id, location)
-    }
+    ): AbstractNPC = MerlinNPC(id, location)
 
-    override fun isHidden(player: Player): Boolean {
-        return getQuestStage(player, Quests.MERLINS_CRYSTAL) in 0..99
-    }
+    override fun isHidden(player: Player): Boolean = getQuestStage(player, Quests.MERLINS_CRYSTAL) in 0..99
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MERLIN_213)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
 }

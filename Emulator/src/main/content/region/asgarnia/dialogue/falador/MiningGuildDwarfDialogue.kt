@@ -96,7 +96,5 @@ class MiningGuildDwarfDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DWARF_382)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DWARF_382)
 }

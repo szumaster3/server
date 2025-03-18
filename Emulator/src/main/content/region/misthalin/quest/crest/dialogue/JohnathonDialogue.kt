@@ -160,7 +160,5 @@ class JohnathonDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOHNATHON_668)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOHNATHON_668)
 }

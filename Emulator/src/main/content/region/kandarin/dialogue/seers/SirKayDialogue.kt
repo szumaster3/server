@@ -233,11 +233,7 @@ class SirKayDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SirKayDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SirKayDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_KAY_241)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_KAY_241)
 }

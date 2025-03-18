@@ -954,9 +954,7 @@ class WiseOldManDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WISE_OLD_MAN_2253, NPCs.TORTOISE_3820)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WISE_OLD_MAN_2253, NPCs.TORTOISE_3820)
 
     companion object {
         private val ITEMS = arrayOf(Item(Items.QUEST_POINT_CAPE_9813), Item(Items.QUEST_POINT_HOOD_9814))

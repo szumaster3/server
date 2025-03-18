@@ -370,7 +370,5 @@ class TheDigSite : Quest(Quests.THE_DIG_SITE, 47, 46, 2, 131, 0, 1, 9) {
         setVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_42_3644, 1, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

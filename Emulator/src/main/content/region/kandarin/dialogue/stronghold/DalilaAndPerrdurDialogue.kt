@@ -61,11 +61,7 @@ class DalilaAndPerrdurDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DalilaAndPerrdurDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DalilaAndPerrdurDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DALILA_4588, NPCs.PERRDUR_4587)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DALILA_4588, NPCs.PERRDUR_4587)
 }

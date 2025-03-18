@@ -48,11 +48,7 @@ class SabreenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SabreenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SabreenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SABREEN_960)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SABREEN_960)
 }

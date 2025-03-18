@@ -26,13 +26,9 @@ class RuantunDialogue(
         return false
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RuantunDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RuantunDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUANTUN_1916)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUANTUN_1916)
 }
 
 class RuantunDialogueFile : DialogueBuilderFile() {

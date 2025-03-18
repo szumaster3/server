@@ -41,9 +41,7 @@ enum class Traps(
             override fun canCatch(
                 wrapper: TrapWrapper,
                 npc: NPC,
-            ): Boolean {
-                return false
-            }
+            ): Boolean = false
         },
     ),
     BOX_TRAP(
@@ -186,9 +184,7 @@ enum class Traps(
         return null
     }
 
-    fun getHooks(): List<TrapHook> {
-        return hooks
-    }
+    fun getHooks(): List<TrapHook> = hooks
 
     companion object {
         @JvmStatic

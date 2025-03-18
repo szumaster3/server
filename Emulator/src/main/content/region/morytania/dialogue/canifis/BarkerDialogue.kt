@@ -51,11 +51,7 @@ class BarkerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BarkerDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BarkerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BARKER_1039)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BARKER_1039)
 }

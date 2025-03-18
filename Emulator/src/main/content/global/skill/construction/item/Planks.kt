@@ -32,12 +32,8 @@ enum class Planks(
     companion object {
         private val product = values().associateBy { it.log }
 
-        fun getForLog(item: Int): Planks? {
-            return product[item]
-        }
+        fun getForLog(item: Int): Planks? = product[item]
 
-        fun Planks.spellPrice(): Int {
-            return (this.price * 0.7).toInt()
-        }
+        fun Planks.spellPrice(): Int = (this.price * 0.7).toInt()
     }
 }

@@ -8,21 +8,18 @@ class SkillingBotAssembler {
     fun produce(
         type: Wealth,
         loc: Location,
-    ): AIPlayer {
-        return assembleBot(AIPlayer(loc), type)
-    }
+    ): AIPlayer = assembleBot(AIPlayer(loc), type)
 
     fun assembleBot(
         bot: AIPlayer,
         type: Wealth,
-    ): AIPlayer {
-        return when (type) {
+    ): AIPlayer =
+        when (type) {
             Wealth.TUTORIAL -> equipSet(bot, TUTORIALSETS.random())
             Wealth.POOR -> equipSet(bot, POORSETS.random())
             Wealth.AVERAGE -> equipSet(bot, AVGSETS.random())
             Wealth.RICH -> equipSet(bot, RICHSETS.random())
         }
-    }
 
     fun equipSet(
         bot: AIPlayer,

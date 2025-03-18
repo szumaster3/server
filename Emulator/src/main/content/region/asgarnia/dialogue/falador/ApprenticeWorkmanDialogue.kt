@@ -41,7 +41,5 @@ class ApprenticeWorkmanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.APPRENTICE_WORKMAN_3235)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.APPRENTICE_WORKMAN_3235)
 }

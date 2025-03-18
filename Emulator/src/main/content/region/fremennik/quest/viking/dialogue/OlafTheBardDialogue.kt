@@ -346,7 +346,5 @@ class OlafTheBardDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLAF_THE_BARD_1269)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLAF_THE_BARD_1269)
 }

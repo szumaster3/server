@@ -74,11 +74,7 @@ class HolgartDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HolgartDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HolgartDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOLGART_698)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOLGART_698)
 }

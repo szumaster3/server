@@ -42,11 +42,7 @@ class RandivorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RandivorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RandivorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RANDIVOR_2156)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RANDIVOR_2156)
 }

@@ -49,11 +49,7 @@ class GundikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GundikDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GundikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUNDIK_5796)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GUNDIK_5796)
 }

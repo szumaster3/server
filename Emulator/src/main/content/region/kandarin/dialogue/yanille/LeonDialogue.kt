@@ -255,11 +255,7 @@ class LeonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return LeonDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = LeonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LEON_5111)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LEON_5111)
 }

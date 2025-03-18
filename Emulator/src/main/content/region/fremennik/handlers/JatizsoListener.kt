@@ -90,13 +90,12 @@ class JatizsoListener : InteractionListener {
                         super.stop()
                     }
 
-                    fun getOther(npc: Int): Int {
-                        return when (npc) {
+                    fun getOther(npc: Int): Int =
+                        when (npc) {
                             NPCs.GUARD_5489 -> NPCs.GUARD_5490
                             NPCs.GUARD_5490 -> NPCs.GUARD_5489
                             else -> NPCs.GUARD_5489
                         }
-                    }
                 },
             )
             return@on true

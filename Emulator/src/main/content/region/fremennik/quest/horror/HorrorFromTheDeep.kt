@@ -12,8 +12,7 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class HorrorFromTheDeep :
-    Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34, 0, 1, 10) {
+class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34, 0, 1, 10) {
     override fun drawJournal(
         player: Player,
         stage: Int,
@@ -27,8 +26,21 @@ class HorrorFromTheDeep :
             line(player, "I can start this quest by speaking to !!Larrissa?? at the", line++)
             line(player, "!!Lighthouse?? to the !!North?? of the !!Barbarian Outpost??.", line++)
             line(player, "To complete this quest I need:", line++)
-            line(player, if (hasLevelStat(player, Skills.AGILITY, 35)) "---Level 35 agility/--" else "!!Level 35 agility??", line++,)
-            line(player, if (hasLevelStat(player, Skills.MAGIC, 13)) "---Level 13 or higher magic will be an advantage/--" else "!!Level 13 or higher magic will be an advantage??", line++,)
+            line(player, if (hasLevelStat(player, Skills.AGILITY, 35)) "---Level 35 agility/--" else "!!Level 35 agility??", line++)
+            line(
+                player,
+                if (hasLevelStat(
+                        player,
+                        Skills.MAGIC,
+                        13,
+                    )
+                ) {
+                    "---Level 13 or higher magic will be an advantage/--"
+                } else {
+                    "!!Level 13 or higher magic will be an advantage??"
+                },
+                line++,
+            )
             line(player, "!!I must also be able to defeat strong level 100 enemies??", line++)
             limitScrolling(player, line, true)
             line++
@@ -42,12 +54,27 @@ class HorrorFromTheDeep :
         if (stage >= 1) {
             line(player, "Larrissa is very worried about her boyfriend Jossik.", line++, stage >= 5)
             line(player, "I need to !!repair the bridge?? leading to Rellekka.", line++, bridgeUnlock == 2)
-            line(player, "I also need to get the lighthouse key from her cousin Gunnjorn.", line++, hasAnItem(player, Items.LIGHTHOUSE_KEY_3848).container != null || stage >= 31)
+            line(
+                player,
+                "I also need to get the lighthouse key from her cousin Gunnjorn.",
+                line++,
+                hasAnItem(player, Items.LIGHTHOUSE_KEY_3848).container != null || stage >= 31,
+            )
             line++
         }
         if (stage >= 2) {
-            line(player, "I recovered a !!spare key?? from Larrissa's cousin !!Gunnjorn??", line++, inInventory(player, Items.LIGHTHOUSE_KEY_3848) || stage >= 5)
-            line(player, "and repaired the !!bridge?? to Rellekka with some planks.", line++, getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0) == 2)
+            line(
+                player,
+                "I recovered a !!spare key?? from Larrissa's cousin !!Gunnjorn??",
+                line++,
+                inInventory(player, Items.LIGHTHOUSE_KEY_3848) || stage >= 5,
+            )
+            line(
+                player,
+                "and repaired the !!bridge?? to Rellekka with some planks.",
+                line++,
+                getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0) == 2,
+            )
             line(player, "I also need to use the key I got from Gunnjorn", line++, stage >= 30)
             line(player, "to enter the lighthouse.", line++, stage >= 30)
             line++
@@ -73,7 +100,7 @@ class HorrorFromTheDeep :
             line(player, "cavern, where !!Jossik?? was.", line++, stage >= 55)
             line++
         }
-        if(stage >= 50) {
+        if (stage >= 50) {
             line(player, "I found Jossik in an underground cavern, behind a strange wall", line++, stage >= 55)
             line(player, "where he had been attacked by some sea creatures.", line++, stage >= 55)
             line(player, "I must defeat these sea monsters to save him!", line++, stage >= 60)
@@ -104,7 +131,7 @@ class HorrorFromTheDeep :
             player,
             "You have survived the ${Quests.HORROR_FROM_THE_DEEP}!",
             Components.QUEST_COMPLETE_SCROLL_277,
-            4
+            4,
         )
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.RUSTY_CASKET_3849)
         drawReward(player, "2 Quest Points", ln++)
@@ -129,7 +156,5 @@ class HorrorFromTheDeep :
         )
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

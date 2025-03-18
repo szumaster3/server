@@ -186,9 +186,7 @@ class WysonTheGardenerDialogue(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WYSON_THE_GARDENER_36)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WYSON_THE_GARDENER_36)
 
     companion object {
         private val COINS = arrayOf(Item(995, 15), Item(995, 20))

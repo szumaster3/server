@@ -14,9 +14,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Scenery
 
 class Neitiznot : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(9275), ZoneBorders(2313, 3786, 2331, 3802))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(9275), ZoneBorders(2313, 3786, 2331, 3802))
 
     override fun interactBehavior(
         entity: Entity,

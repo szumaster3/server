@@ -185,7 +185,5 @@ class SasquineHuburnsDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SASQUINE_HUBURNS_7421)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SASQUINE_HUBURNS_7421)
 }

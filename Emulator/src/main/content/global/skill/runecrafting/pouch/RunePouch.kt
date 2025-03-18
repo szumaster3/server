@@ -261,17 +261,11 @@ enum class RunePouch(
         pouch.charge = charge
     }
 
-    fun getDecay(player: Player): Int {
-        return player.getSavedData().globalData.getRcDecay(ordinal - 1)
-    }
+    fun getDecay(player: Player): Int = player.getSavedData().globalData.getRcDecay(ordinal - 1)
 
-    fun getPouchCharge(pouch: Item): Int {
-        return pouch.charge
-    }
+    fun getPouchCharge(pouch: Item): Int = pouch.charge
 
-    fun isFull(item: Item): Boolean {
-        return getEssence(item) >= getCapacity(pouch.asItem())
-    }
+    fun isFull(item: Item): Boolean = getEssence(item) >= getCapacity(pouch.asItem())
 
     fun getAddAmount(
         pouch: Item,
@@ -314,42 +308,26 @@ enum class RunePouch(
     fun getPouchEssenceName(
         item: Item,
         amount: Int,
-    ): String {
-        return getPouchEssenceName(item) + (if (amount > 1) "s" else "")
-    }
+    ): String = getPouchEssenceName(item) + (if (amount > 1) "s" else "")
 
     fun getPouchEssenceName(item: Item): String {
         val charge = getPouchCharge(item)
         return if (charge > NORMAL_BASE) "pure essence" else "normal essence"
     }
 
-    fun getEssenceInPouch(pouch: Item): Item {
-        return if (getPouchEssenceName(pouch) == "pure essence") PURE_ESSENCE else NORMAL_ESSENCE
-    }
+    fun getEssenceInPouch(pouch: Item): Item = if (getPouchEssenceName(pouch) == "pure essence") PURE_ESSENCE else NORMAL_ESSENCE
 
-    fun getEssenceName(essence: Item?): String {
-        return if (essence!!.id == PURE_ESSENCE.id) "pure essence" else "normal essence"
-    }
+    fun getEssenceName(essence: Item?): String = if (essence!!.id == PURE_ESSENCE.id) "pure essence" else "normal essence"
 
-    fun getEssenceBase(item: Item): Int {
-        return if (getPouchEssenceName(item) == "pure essence") PURE_BASE else NORMAL_BASE
-    }
+    fun getEssenceBase(item: Item): Int = if (getPouchEssenceName(item) == "pure essence") PURE_BASE else NORMAL_BASE
 
-    fun isPureEssencePouch(pouch: Item): Boolean {
-        return getPouchEssenceName(pouch) == "pure essence"
-    }
+    fun isPureEssencePouch(pouch: Item): Boolean = getPouchEssenceName(pouch) == "pure essence"
 
-    fun isPureEssence(essence: Item?): Boolean {
-        return essence!!.id == PURE_ESSENCE.id
-    }
+    fun isPureEssence(essence: Item?): Boolean = essence!!.id == PURE_ESSENCE.id
 
-    fun isNormalEssence(essence: Item?): Boolean {
-        return essence!!.id == NORMAL_ESSENCE.id
-    }
+    fun isNormalEssence(essence: Item?): Boolean = essence!!.id == NORMAL_ESSENCE.id
 
-    fun getEssenceType(pouch: Item): Item {
-        return if (getPouchEssenceName(pouch) == "pure essence") PURE_ESSENCE else NORMAL_ESSENCE
-    }
+    fun getEssenceType(pouch: Item): Item = if (getPouchEssenceName(pouch) == "pure essence") PURE_ESSENCE else NORMAL_ESSENCE
 
     fun getEssence(player: Player): Item? {
         if (player.inventory.containsItem(PURE_ESSENCE)) {
@@ -360,13 +338,9 @@ enum class RunePouch(
         return null
     }
 
-    fun hasEssence(player: Player): Boolean {
-        return player.inventory.containsItem(PURE_ESSENCE) || player.inventory.containsItem(NORMAL_ESSENCE)
-    }
+    fun hasEssence(player: Player): Boolean = player.inventory.containsItem(PURE_ESSENCE) || player.inventory.containsItem(NORMAL_ESSENCE)
 
-    fun isEmpty(item: Item): Boolean {
-        return getEssence(item) <= 0
-    }
+    fun isEmpty(item: Item): Boolean = getEssence(item) <= 0
 
     fun getEssence(item: Item): Int {
         if (getPouchCharge(item) == 1000 || getPouchCharge(item) == 2000) {
@@ -375,9 +349,7 @@ enum class RunePouch(
         return getEssenceBase(item) - getPouchCharge(item)
     }
 
-    fun getCapacity(pouch: Item): Int {
-        return capacity - (if (isDecayed(pouch)) decayAmount else 0)
-    }
+    fun getCapacity(pouch: Item): Int = capacity - (if (isDecayed(pouch)) decayAmount else 0)
 
     val decayAmount: Int
         get() =
@@ -389,9 +361,7 @@ enum class RunePouch(
                 1
             }
 
-    fun isDecayed(pouch: Item): Boolean {
-        return pouch.id == decayedPouch.id
-    }
+    fun isDecayed(pouch: Item): Boolean = pouch.id == decayedPouch.id
 
     val isDecayable: Boolean
         get() = this != SMALL
@@ -399,9 +369,7 @@ enum class RunePouch(
     fun hasDecay(
         player: Player,
         pouch: Item,
-    ): Boolean {
-        return getDecay(player) > 0 || isDecayed(pouch)
-    }
+    ): Boolean = getDecay(player) > 0 || isDecayed(pouch)
 
     companion object {
         private val PURE_ESSENCE = Item(7936)

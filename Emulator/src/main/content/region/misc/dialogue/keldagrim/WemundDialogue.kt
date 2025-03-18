@@ -55,11 +55,7 @@ class WemundDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return WemundDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = WemundDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WEMUND_2155)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WEMUND_2155)
 }

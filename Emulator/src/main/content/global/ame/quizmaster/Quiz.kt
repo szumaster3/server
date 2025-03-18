@@ -7,9 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders
 
 class Quiz : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(1954, 4763, 1950, 4770))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(1954, 4763, 1950, 4770))
 
     override fun areaLeave(
         entity: Entity,

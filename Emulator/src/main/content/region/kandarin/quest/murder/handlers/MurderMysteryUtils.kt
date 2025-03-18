@@ -79,21 +79,19 @@ object MurderMysteryUtils {
         setQuestStage(player, Quests.MURDER_MYSTERY, 1)
     }
 
-    fun getGuiltyPerson(player: Player): String? {
-        return when {
+    fun getGuiltyPerson(player: Player): String? =
+        when {
             getAttribute(player, ATTRIBUTE_ELIZABETH, false) -> "Elizabeth"
             getAttribute(player, ATTRIBUTE_ANNA, false) -> "Anna"
             getAttribute(player, ATTRIBUTE_DAVID, false) -> "David"
             else -> null
         }
-    }
 
-    fun getGuiltyColor(player: Player): String? {
-        return when {
+    fun getGuiltyColor(player: Player): String? =
+        when {
             getAttribute(player, ATTRIBUTE_ELIZABETH, false) -> "red"
             getAttribute(player, ATTRIBUTE_ANNA, false) -> "green"
             getAttribute(player, ATTRIBUTE_DAVID, false) -> "blue"
             else -> null
         }
-    }
 }

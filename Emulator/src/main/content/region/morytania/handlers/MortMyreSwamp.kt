@@ -12,9 +12,7 @@ class MortMyreSwamp : MapZone("Mort Myre Swamp", true) {
         register(getRegionBorders(13875))
     }
 
-    fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON)
-    }
+    fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON)
 
     companion object {
         val instance = MortMyreSwamp()

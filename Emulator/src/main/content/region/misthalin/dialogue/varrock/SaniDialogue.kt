@@ -130,11 +130,7 @@ class SaniDialogue(
         openId(player, uid)
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SaniDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SaniDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SMITHING_TUTOR_4905)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SMITHING_TUTOR_4905)
 }

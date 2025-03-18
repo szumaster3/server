@@ -37,11 +37,7 @@ class EudavGethinDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EudavGethinDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EudavGethinDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.EUDAV_2352, NPCs.GETHIN_2357)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.EUDAV_2352, NPCs.GETHIN_2357)
 }

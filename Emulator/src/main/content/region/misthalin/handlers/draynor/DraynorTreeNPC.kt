@@ -23,9 +23,7 @@ class DraynorTreeNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DraynorTreeNPC(id, location)
-    }
+    ): AbstractNPC = DraynorTreeNPC(id, location)
 
     override fun tick() {
         val players = getLocalPlayers(this, 1)
@@ -45,9 +43,7 @@ class DraynorTreeNPC : AbstractNPC {
         super.tick()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.UNDEAD_TREE_5208, NPCs.TREE_5207)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.UNDEAD_TREE_5208, NPCs.TREE_5207)
 
     companion object {
         private val ANIMATION = Animation(73, Priority.HIGH)

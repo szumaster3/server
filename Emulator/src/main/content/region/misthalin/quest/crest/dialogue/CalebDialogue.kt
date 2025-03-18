@@ -311,7 +311,5 @@ class CalebDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CALEB_666)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CALEB_666)
 }

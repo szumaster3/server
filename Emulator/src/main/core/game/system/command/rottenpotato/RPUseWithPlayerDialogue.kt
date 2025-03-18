@@ -12,9 +12,7 @@ class RPUseWithPlayerDialogue(
     var other: Player? = null
     val ID = 38575796
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RPUseWithPlayerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RPUseWithPlayerDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
         other = args[0] as Player
@@ -38,7 +36,5 @@ class RPUseWithPlayerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(ID)
-    }
+    override fun getIds(): IntArray = intArrayOf(ID)
 }

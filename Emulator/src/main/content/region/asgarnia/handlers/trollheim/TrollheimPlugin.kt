@@ -322,7 +322,7 @@ class TrollheimPlugin : OptionHandler() {
                                         3687,
                                         0,
                                     ),
-                                        ->
+                                    ->
                                         ForceMovement.run(
                                             player,
                                             player.location,
@@ -335,7 +335,7 @@ class TrollheimPlugin : OptionHandler() {
                                         3687,
                                         0,
                                     ),
-                                        ->
+                                    ->
                                         ForceMovement.run(
                                             player,
                                             player.location,
@@ -348,7 +348,7 @@ class TrollheimPlugin : OptionHandler() {
                                         3686,
                                         0,
                                     ),
-                                        ->
+                                    ->
                                         ForceMovement.run(
                                             player,
                                             player.location,
@@ -433,7 +433,7 @@ class TrollheimPlugin : OptionHandler() {
 
                             Location.create(2888, 3660, 0),
                             Location.create(2887, 3660, 0),
-                                ->
+                            ->
                                 ForceMovement
                                     .run(
                                         player,
@@ -448,7 +448,7 @@ class TrollheimPlugin : OptionHandler() {
 
                             Location.create(2888, 3662, 0),
                             Location.create(2887, 3662, 0),
-                                ->
+                            ->
                                 ForceMovement
                                     .run(
                                         player,
@@ -753,7 +753,6 @@ class TrollheimPlugin : OptionHandler() {
                 } else {
                     return false
                 }
-
             }
             return super.enter(entity)
         }
@@ -770,9 +769,7 @@ class TrollheimPlugin : OptionHandler() {
         override fun fireEvent(
             identifier: String,
             vararg args: Any?,
-        ): Any? {
-            return null
-        }
+        ): Any? = null
     }
 
     class WarningCutscene : CutscenePlugin {
@@ -781,9 +778,7 @@ class TrollheimPlugin : OptionHandler() {
             this.player = p
         }
 
-        override fun newInstance(p: Player): ActivityPlugin {
-            return WarningCutscene(p)
-        }
+        override fun newInstance(p: Player): ActivityPlugin = WarningCutscene(p)
 
         private fun sendProjectile(npc: NPC) {
             val projectile = Projectile.create(npc, player, 276)
@@ -849,13 +844,9 @@ class TrollheimPlugin : OptionHandler() {
             )
         }
 
-        override fun getMapState(): Int {
-            return 0
-        }
+        override fun getMapState(): Int = 0
 
-        override fun getSpawnLocation(): Location? {
-            return null
-        }
+        override fun getSpawnLocation(): Location? = null
 
         override fun configure() {
             ActivityManager.register(this)

@@ -35,11 +35,7 @@ class OgreGuardNWDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OgreGuardNWDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OgreGuardNWDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OGRE_GUARD_859)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OGRE_GUARD_859)
 }

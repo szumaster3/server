@@ -91,11 +91,7 @@ class AgmundiDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AgmundiDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AgmundiDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AGMUNDI_2161)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGMUNDI_2161)
 }

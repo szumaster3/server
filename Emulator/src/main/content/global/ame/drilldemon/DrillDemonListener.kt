@@ -94,13 +94,10 @@ class DrillDemonListener :
         }
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(DrillDemonUtils.DD_AREA)
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(DrillDemonUtils.DD_AREA)
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> =
+        arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {

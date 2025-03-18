@@ -261,9 +261,7 @@ class HolidayRandoms :
             getEventNpc(player)?.terminate()
         }
 
-        fun getEventNpc(player: Player): HolidayRandomEventNPC? {
-            return getAttribute<HolidayRandomEventNPC?>(player, EVENT_NPC, null)
-        }
+        fun getEventNpc(player: Player): HolidayRandomEventNPC? = getAttribute<HolidayRandomEventNPC?>(player, EVENT_NPC, null)
 
         fun pause(player: Player) {
             val timer = getTimer<HolidayRandoms>(player) ?: return

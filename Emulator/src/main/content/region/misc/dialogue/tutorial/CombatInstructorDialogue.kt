@@ -129,11 +129,7 @@ class CombatInstructorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CombatInstructorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CombatInstructorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMBAT_INSTRUCTOR_944)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COMBAT_INSTRUCTOR_944)
 }

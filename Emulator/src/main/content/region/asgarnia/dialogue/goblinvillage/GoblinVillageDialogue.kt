@@ -160,8 +160,8 @@ class GoblinVillageDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.GOBLIN_4483,
             NPCs.GOBLIN_4488,
             NPCs.GOBLIN_4489,
@@ -176,5 +176,4 @@ class GoblinVillageDialogue(
             NPCs.GOBLIN_4482,
             NPCs.GOBLIN_4480,
         )
-    }
 }

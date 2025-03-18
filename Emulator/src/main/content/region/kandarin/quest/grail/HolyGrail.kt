@@ -13,9 +13,7 @@ import org.rs.consts.Quests
 
 @Initializable
 class HolyGrail : Quest(Quests.HOLY_GRAIL, 76, 75, 1, 5, 0, 1, 10) {
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     companion object {
         val MERLIN_DOOR_ID = 24

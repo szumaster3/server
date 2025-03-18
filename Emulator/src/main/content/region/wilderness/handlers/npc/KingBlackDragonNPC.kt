@@ -45,25 +45,15 @@ class KingBlackDragonNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return KingBlackDragonNPC(id, location)
-    }
+    ): AbstractNPC = KingBlackDragonNPC(id, location)
 
-    override fun getDragonfireProtection(fire: Boolean): Int {
-        return 0x2 or 0x4 or 0x8
-    }
+    override fun getDragonfireProtection(fire: Boolean): Int = 0x2 or 0x4 or 0x8
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KING_BLACK_DRAGON_50)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KING_BLACK_DRAGON_50)
 
-    override fun getSwingHandler(swing: Boolean): CombatSwingHandler {
-        return combatHandler
-    }
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        return super.newInstance(arg)
-    }
+    override fun newInstance(arg: Any?): Plugin<Any> = super.newInstance(arg)
 
     internal class KBDCombatSwingHandler : CombatSwingHandler(CombatStyle.RANGE) {
         private var style = CombatStyle.RANGE
@@ -138,16 +128,12 @@ class KingBlackDragonNPC : AbstractNPC {
             return InteractionType.NO_INTERACT
         }
 
-        override fun getArmourSet(e: Entity?): ArmourSet? {
-            return style.swingHandler.getArmourSet(e)
-        }
+        override fun getArmourSet(e: Entity?): ArmourSet? = style.swingHandler.getArmourSet(e)
 
         override fun getSetMultiplier(
             e: Entity?,
             skillId: Int,
-        ): Double {
-            return style.swingHandler.getSetMultiplier(e, skillId)
-        }
+        ): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
         override fun impact(
             entity: Entity?,

@@ -95,9 +95,7 @@ class LarxusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LARXUS_3050)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LARXUS_3050)
 }
 
 class LarxusDialogueFile(

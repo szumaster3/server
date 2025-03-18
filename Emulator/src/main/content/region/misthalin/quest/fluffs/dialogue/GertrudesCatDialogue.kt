@@ -130,11 +130,7 @@ class GertrudesCatDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GertrudesCatDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GertrudesCatDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GERTRUDES_CAT_2997)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GERTRUDES_CAT_2997)
 }

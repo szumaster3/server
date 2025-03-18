@@ -90,8 +90,10 @@ class PCObjectHandler :
     override fun defineListeners() {
         on(GATES, IntType.SCENERY, "repair") { player, node ->
             val scenery = node as Scenery
-            val session = player.getExtension<PestControlSession>(
-                PestControlSession::class.java) ?: return@on true
+            val session =
+                player.getExtension<PestControlSession>(
+                    PestControlSession::class.java,
+                ) ?: return@on true
             if (!scenery.isActive || !session.barricades.contains(scenery)) {
                 return@on true
             }
@@ -101,8 +103,10 @@ class PCObjectHandler :
 
         on(BARRICADES, IntType.SCENERY, "repair") { player, node ->
             val scenery = node as Scenery
-            val session = player.getExtension<PestControlSession>(
-                PestControlSession::class.java) ?: return@on true
+            val session =
+                player.getExtension<PestControlSession>(
+                    PestControlSession::class.java,
+                ) ?: return@on true
             if (!scenery.isActive || !session.barricades.contains(scenery)) {
                 return@on true
             }
@@ -165,8 +169,10 @@ class PCObjectHandler :
                 }
             }
         }
-        val session = player.getExtension<PestControlSession>(
-            PestControlSession::class.java) ?: return true
+        val session =
+            player.getExtension<PestControlSession>(
+                PestControlSession::class.java,
+            ) ?: return true
         if (scenery.id == 14296) {
             handleTurretTower(player, session, scenery)
             return true

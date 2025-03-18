@@ -331,7 +331,5 @@ class SimonTempletonDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIMON_TEMPLETON_3123)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIMON_TEMPLETON_3123)
 }

@@ -173,7 +173,5 @@ class BettyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BETTY_583)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BETTY_583)
 }

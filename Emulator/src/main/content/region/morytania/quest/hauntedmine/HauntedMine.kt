@@ -78,7 +78,5 @@ class HauntedMine : Quest(Quests.HAUNTED_MINE, 73, 72, 2, Vars.VARP_QUEST_HAUNTE
         addItemOrDrop(player, Items.CRYSTAL_MINE_KEY_4077)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

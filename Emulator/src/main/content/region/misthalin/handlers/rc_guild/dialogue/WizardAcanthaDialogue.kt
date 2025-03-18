@@ -211,7 +211,5 @@ class WizardAcanthaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_ACANTHA_8031)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_ACANTHA_8031)
 }

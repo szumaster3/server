@@ -519,7 +519,5 @@ class PeerTheSeerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PEER_THE_SEER_1288)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PEER_THE_SEER_1288)
 }

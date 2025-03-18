@@ -46,7 +46,5 @@ class AntonDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANTON_4295)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANTON_4295)
 }

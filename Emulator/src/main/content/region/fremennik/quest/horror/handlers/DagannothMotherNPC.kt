@@ -201,9 +201,7 @@ class DagannothMotherNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return DagannothMotherNPC(id, location, null)
-    }
+    ): AbstractNPC = DagannothMotherNPC(id, location, null)
 
     override fun isAttackable(
         entity: Entity,
@@ -225,8 +223,8 @@ class DagannothMotherNPC(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.DAGANNOTH_MOTHER_1351,
             NPCs.DAGANNOTH_MOTHER_1352,
             NPCs.DAGANNOTH_MOTHER_1353,
@@ -234,7 +232,6 @@ class DagannothMotherNPC(
             NPCs.DAGANNOTH_MOTHER_1355,
             NPCs.DAGANNOTH_MOTHER_1356,
         )
-    }
 
     enum class DagannothType(
         var npcId: Int,
@@ -262,9 +259,7 @@ class DagannothMotherNPC(
             dagannoth.getSkills().setLifepoints(oldHp)
         }
 
-        operator fun next(): DagannothType {
-            return values().random()
-        }
+        operator fun next(): DagannothType = values().random()
 
         companion object {
             fun forId(id: Int): DagannothType? {

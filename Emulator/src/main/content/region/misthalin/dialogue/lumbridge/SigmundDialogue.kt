@@ -24,8 +24,13 @@ class SigmundDialogue : Dialogue {
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         interpreter.sendDialogues(npc, FaceAnim.HALF_GUILTY, "Can I help you?")
-        if (player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE)
-                .getStage(player) > 0 && player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE)
+        if (player
+                .getQuestRepository()
+                .getQuest(Quests.THE_LOST_TRIBE)
+                .getStage(player) > 0 &&
+            player
+                .getQuestRepository()
+                .getQuest(Quests.THE_LOST_TRIBE)
                 .getStage(player) < 100
         ) {
             npc("Have you found out what it was?")
@@ -36,24 +41,28 @@ class SigmundDialogue : Dialogue {
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(
+        interfaceId: Int,
+        buttonId: Int,
+    ): Boolean {
         when (stage) {
             0 -> {
                 interpreter.sendOptions("Select an Option", "Do you have any quests for me?", "Who are you?")
                 stage = 1
             }
 
-            1 -> when (buttonId) {
-                1 -> {
-                    interpreter.sendDialogues(player, FaceAnim.HALF_GUILTY, "Do you have any quests for me?")
-                    stage = 10
-                }
+            1 ->
+                when (buttonId) {
+                    1 -> {
+                        interpreter.sendDialogues(player, FaceAnim.HALF_GUILTY, "Do you have any quests for me?")
+                        stage = 10
+                    }
 
-                2 -> {
-                    interpreter.sendDialogues(player, FaceAnim.HALF_GUILTY, "Who are you?")
-                    stage = 20
+                    2 -> {
+                        interpreter.sendDialogues(player, FaceAnim.HALF_GUILTY, "Who are you?")
+                        stage = 20
+                    }
                 }
-            }
 
             20 -> {
                 interpreter.sendDialogues(npc, FaceAnim.HALF_GUILTY, "I'm the Duke's advisor.")
@@ -71,21 +80,26 @@ class SigmundDialogue : Dialogue {
                     FaceAnim.HALF_GUILTY,
                     "I only advise the Duke. But if you want to make",
                     "yourself useful, there are evil goblins to slay on the",
-                    "other side of the river."
+                    "other side of the river.",
                 )
                 stage = 23
             }
 
             23 -> end()
             10 -> {
-                if (player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE) && !player.getQuestRepository()
+                if (player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE) &&
+                    !player
+                        .getQuestRepository()
                         .isComplete(Quests.THE_LOST_TRIBE)
                 ) {
                     npc("No, not right now.")
                     stage = 12
                     return true
                 }
-                if (player.getQuestRepository().isComplete(Quests.GOBLIN_DIPLOMACY) && player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES) && !player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE)) {
+                if (player.getQuestRepository().isComplete(Quests.GOBLIN_DIPLOMACY) &&
+                    player.getQuestRepository().isComplete(Quests.RUNE_MYSTERIES) &&
+                    !player.getQuestRepository().hasStarted(Quests.THE_LOST_TRIBE)
+                ) {
                     npc("There was recently some damage to the castle cellar.", "Part of the wall has collapsed.")
                     stage = 30
                     return true
@@ -95,7 +109,7 @@ class SigmundDialogue : Dialogue {
                     FaceAnim.HALF_GUILTY,
                     "I hear the Duke has a task for an adventurer.",
                     "Otherwise, if you want to make yourself useful, there",
-                    "are always evil monsters to slay."
+                    "are always evil monsters to slay.",
                 )
                 stage = 11
             }
@@ -126,12 +140,10 @@ class SigmundDialogue : Dialogue {
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return SigmundDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = SigmundDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.SIGMUND_2082,
             NPCs.SIGMUND_2083,
             NPCs.SIGMUND_2090,
@@ -146,7 +158,6 @@ class SigmundDialogue : Dialogue {
             NPCs.SIGMUND_4332,
             NPCs.SIGMUND_4333,
             NPCs.SIGMUND_4334,
-            NPCs.SIGMUND_4335
+            NPCs.SIGMUND_4335,
         )
-    }
 }

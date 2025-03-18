@@ -242,7 +242,5 @@ class CommanderMontaiDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COMMANDER_MONTAI_470)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COMMANDER_MONTAI_470)
 }

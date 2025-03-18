@@ -77,7 +77,5 @@ object WaterClipping : ClipMaskSupplier {
         z: Int,
         x: Int,
         y: Int,
-    ): Int {
-        return RegionManager.getWaterClipFlag(z, x, y)
-    }
+    ): Int = RegionManager.getWaterClipFlag(z, x, y)
 }

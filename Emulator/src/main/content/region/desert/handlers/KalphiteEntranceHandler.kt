@@ -31,9 +31,7 @@ class KalphiteEntranceHandler : OptionHandler() {
                     return false
                 }
 
-                override fun newInstance(arg: Any?): Plugin<Any> {
-                    return this
-                }
+                override fun newInstance(arg: Any?): Plugin<Any> = this
             }
 
         UseWithHandler.addHandler(3827, UseWithHandler.OBJECT_TYPE, handler)

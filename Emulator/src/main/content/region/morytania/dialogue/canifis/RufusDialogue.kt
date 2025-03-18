@@ -74,11 +74,7 @@ class RufusDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RufusDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RufusDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUFUS_1038)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUFUS_1038)
 }

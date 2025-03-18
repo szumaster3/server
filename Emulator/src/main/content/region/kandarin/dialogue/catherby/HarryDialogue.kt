@@ -13,19 +13,14 @@ import org.rs.consts.NPCs
 class HarryDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
-    private fun needsFish(): Boolean {
-        return player.inventory.containsAtLeastOneItem(FISHBOWL_SEAWEED)
-    }
+    private fun needsFish(): Boolean = player.inventory.containsAtLeastOneItem(FISHBOWL_SEAWEED)
 
-    private fun needsSeaWeed(): Boolean {
-        return player.inventory.containsAtLeastOneItem(FISHBOWL_WATER)
-    }
+    private fun needsSeaWeed(): Boolean = player.inventory.containsAtLeastOneItem(FISHBOWL_WATER)
 
-    private fun needsFood(): Boolean {
-        return player.inventory.containsAtLeastOneItem(
+    private fun needsFood(): Boolean =
+        player.inventory.containsAtLeastOneItem(
             intArrayOf(FISHBOWL_SEAWEED, FISHBOWL_BLUE, FISHBOWL_GREEN, FISHBOWL_SPINE),
         )
-    }
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
@@ -238,13 +233,9 @@ class HarryDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HarryDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HarryDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HARRY_576)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HARRY_576)
 
     companion object {
         private const val FISHBOWL_EMPTY = Items.FISHBOWL_6667

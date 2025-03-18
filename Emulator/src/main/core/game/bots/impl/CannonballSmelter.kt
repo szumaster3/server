@@ -106,9 +106,7 @@ class CannonballSmelter : Script() {
                         state = State.BANKING
                         bot.pulseManager.run(
                             object : BankingPulse(this, bank) {
-                                override fun pulse(): Boolean {
-                                    return super.pulse()
-                                }
+                                override fun pulse(): Boolean = super.pulse()
                             },
                         )
                     }

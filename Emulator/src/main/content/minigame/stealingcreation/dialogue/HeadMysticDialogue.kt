@@ -29,7 +29,5 @@ class HeadMysticDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HEAD_MYSTIC_8227)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HEAD_MYSTIC_8227)
 }

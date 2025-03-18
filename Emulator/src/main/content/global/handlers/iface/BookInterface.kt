@@ -385,9 +385,7 @@ class BookInterface : InterfaceListener {
         fun isLastPage(
             pageNum: Int,
             totalPages: Int,
-        ): Boolean {
-            return pageNum == totalPages - 1
-        }
+        ): Boolean = pageNum == totalPages - 1
 
         private fun changePageAndCallback(
             player: Player,

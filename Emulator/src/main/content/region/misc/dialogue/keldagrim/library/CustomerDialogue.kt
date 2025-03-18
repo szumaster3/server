@@ -39,11 +39,7 @@ class CustomerDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return CustomerDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = CustomerDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CUSTOMER_2168)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CUSTOMER_2168)
 }

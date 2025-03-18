@@ -41,9 +41,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 15
-        }
+        ): Int = 15
     },
 
     BLAST(1.2) {
@@ -51,9 +49,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 12 + base
-        }
+        ): Int = 12 + base
     },
 
     WAVE(1.3) {
@@ -61,9 +57,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 16 + base
-        }
+        ): Int = 16 + base
     },
 
     RUSH(1.1) {
@@ -71,9 +65,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 14 + base
-        }
+        ): Int = 14 + base
     },
 
     BURST(1.2) {
@@ -81,9 +73,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 18 + base
-        }
+        ): Int = 18 + base
     },
 
     BLITZ(1.3) {
@@ -91,9 +81,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 22 + base
-        }
+        ): Int = 22 + base
     },
 
     BARRAGE(1.4) {
@@ -101,9 +89,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 26 + base
-        }
+        ): Int = 26 + base
     },
 
     CONFUSE(1.15),
@@ -146,9 +132,7 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 10 + (e.getSkills().getLevel(Skills.MAGIC) / 10)
-        }
+        ): Int = 10 + (e.getSkills().getLevel(Skills.MAGIC) / 10)
     },
 
     IBANS_BLAST(1.4) {
@@ -156,13 +140,15 @@ enum class SpellType(
             e: Entity,
             victim: Entity?,
             base: Int,
-        ): Int {
-            return 25
-        }
+        ): Int = 25
     },
 
     STORM_OF_ARMADYL(1.4) {
-        override fun getImpactAmount(e: Entity, victim: Entity?, base: Int): Int {
+        override fun getImpactAmount(
+            e: Entity,
+            victim: Entity?,
+            base: Int,
+        ): Int {
             val level = (e as Player).skills.getLevel(Skills.MAGIC)
 
             val hitRange = (level - 77) * 0.5
@@ -183,7 +169,5 @@ enum class SpellType(
         e: Entity,
         victim: Entity?,
         base: Int,
-    ): Int {
-        return 2
-    }
+    ): Int = 2
 }

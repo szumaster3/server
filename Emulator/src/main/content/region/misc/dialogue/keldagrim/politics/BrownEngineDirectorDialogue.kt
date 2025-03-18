@@ -78,11 +78,7 @@ class BrownEngineDirectorDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BrownEngineDirectorDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BrownEngineDirectorDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROWN_ENGINE_DIRECTOR_2106)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROWN_ENGINE_DIRECTOR_2106)
 }

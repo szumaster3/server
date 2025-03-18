@@ -421,9 +421,7 @@ class TzHaarMejJehDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("tzhaar-mej"), NPCs.TZHAAR_MEJ_JAL_2617)
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("tzhaar-mej"), NPCs.TZHAAR_MEJ_JAL_2617)
 
     companion object {
         private val APPEARANCE_FEE = Item(6529, 8000)

@@ -41,11 +41,7 @@ class AluftGianneJrDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AluftGianneJrDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AluftGianneJrDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GIANNE_JNR_4572)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GIANNE_JNR_4572)
 }

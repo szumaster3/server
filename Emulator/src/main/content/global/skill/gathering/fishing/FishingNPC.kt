@@ -46,11 +46,7 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
         }
     }
 
-    private fun getRandomDelay(): Int {
-        return RandomFunction.random(200, 390)
-    }
+    private fun getRandomDelay(): Int = RandomFunction.random(200, 390)
 
-    private fun getSpot(npc: NPC): FishingSpots? {
-        return getAttribute(npc, "fishing:spot", null)
-    }
+    private fun getSpot(npc: NPC): FishingSpots? = getAttribute(npc, "fishing:spot", null)
 }

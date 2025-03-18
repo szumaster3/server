@@ -21,15 +21,9 @@ class RellekkaCitizenDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return RellekkaCitizenDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = RellekkaCitizenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRIDGEIR_1277, NPCs.OSPAK_1274, NPCs.STYRMIR_1275)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRIDGEIR_1277, NPCs.OSPAK_1274, NPCs.STYRMIR_1275)
 }

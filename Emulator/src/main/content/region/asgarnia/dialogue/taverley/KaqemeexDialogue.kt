@@ -2,7 +2,6 @@ package content.region.asgarnia.dialogue.taverley
 
 import core.api.quest.finishQuest
 import core.api.quest.getQuestStage
-import core.api.quest.isQuestComplete
 import core.api.quest.startQuest
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -67,35 +66,37 @@ class KaqemeexDialogue(
                 }
             }
 
-            1 -> if (questStage == 10) {
-                if (isMaster(player, Skills.HERBLORE)) {
-                    options("Can I buy a Skillcape of Herblore?", "Who are you?", "Did you build this?")
-                    stage = 800
+            1 ->
+                if (questStage == 10) {
+                    if (isMaster(player, Skills.HERBLORE)) {
+                        options("Can I buy a Skillcape of Herblore?", "Who are you?", "Did you build this?")
+                        stage = 800
+                    } else {
+                        options("Who are you?", "Did you build this?")
+                        stage = 500
+                    }
                 } else {
-                    options("Who are you?", "Did you build this?")
-                    stage = 500
-                }
-            } else {
-                options("Who are you?", "I'm in search of a quest.", "Did you build this?")
-                stage = 2
-            }
-
-            2 -> when (buttonId) {
-                1 -> {
-                    player(FaceAnim.ASKING, "Who are you?")
-                    stage = 10
+                    options("Who are you?", "I'm in search of a quest.", "Did you build this?")
+                    stage = 2
                 }
 
-                2 -> {
-                    player(FaceAnim.FRIENDLY, "I'm in search of a quest.")
-                    stage = 20
-                }
+            2 ->
+                when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.ASKING, "Who are you?")
+                        stage = 10
+                    }
 
-                3 -> {
-                    player(FaceAnim.ASKING, "Did you build this?")
-                    stage = 30
+                    2 -> {
+                        player(FaceAnim.FRIENDLY, "I'm in search of a quest.")
+                        stage = 20
+                    }
+
+                    3 -> {
+                        player(FaceAnim.ASKING, "Did you build this?")
+                        stage = 30
+                    }
                 }
-            }
 
             10 -> {
                 npc(
@@ -180,17 +181,18 @@ class KaqemeexDialogue(
                 stage = 24
             }
 
-            24 -> when (buttonId) {
-                1 -> {
-                    player(FaceAnim.HALF_GUILTY, "Ok, I will try and help.")
-                    stage = 26
-                }
+            24 ->
+                when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.HALF_GUILTY, "Ok, I will try and help.")
+                        stage = 26
+                    }
 
-                2 -> {
-                    player(FaceAnim.HALF_GUILTY, "No, that doesn't sound very interesting.")
-                    stage = 25
+                    2 -> {
+                        player(FaceAnim.HALF_GUILTY, "No, that doesn't sound very interesting.")
+                        stage = 25
+                    }
                 }
-            }
 
             25 -> {
                 npc(
@@ -236,47 +238,50 @@ class KaqemeexDialogue(
                 finishQuest(player, Quests.DRUIDIC_RITUAL)
             }
 
-            500 -> when (buttonId) {
-                1 -> {
-                    player(FaceAnim.HALF_ASKING, "Who are you?")
-                    stage = 10
+            500 ->
+                when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.HALF_ASKING, "Who are you?")
+                        stage = 10
+                    }
+
+                    2 -> {
+                        player(FaceAnim.HALF_ASKING, "Did you build this?")
+                        stage = 30
+                    }
                 }
 
-                2 -> {
-                    player(FaceAnim.HALF_ASKING, "Did you build this?")
-                    stage = 30
-                }
-            }
+            501 ->
+                when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.HAPPY, "Can I buy a Skillcape of Herblore?")
+                        stage = 800
+                    }
 
-            501 -> when (buttonId) {
-                1 -> {
-                    player(FaceAnim.HAPPY, "Can I buy a Skillcape of Herblore?")
-                    stage = 800
-                }
+                    2 -> {
+                        player(FaceAnim.ASKING, "Who are you?")
+                        stage = 10
+                    }
 
-                2 -> {
-                    player(FaceAnim.ASKING, "Who are you?")
-                    stage = 10
+                    3 -> {
+                        player(FaceAnim.HALF_ASKING, "Did you build this?")
+                        stage = 30
+                    }
                 }
-
-                3 -> {
-                    player(FaceAnim.HALF_ASKING, "Did you build this?")
-                    stage = 30
-                }
-            }
 
             600 -> {
                 player("Good good!")
                 stage = 601
             }
 
-            601 -> if (isMaster(player, Skills.HERBLORE)) {
-                options("Can I buy a Skillcape of Herblore?", "Who are you?", "Did you build this?")
-                stage = 501
-            } else {
-                options("Who are you?", "Did you build this?")
-                stage = 500
-            }
+            601 ->
+                if (isMaster(player, Skills.HERBLORE)) {
+                    options("Can I buy a Skillcape of Herblore?", "Who are you?", "Did you build this?")
+                    stage = 501
+                } else {
+                    options("Who are you?", "Did you build this?")
+                    stage = 500
+                }
 
             1000 -> {
                 npc(
@@ -378,14 +383,15 @@ class KaqemeexDialogue(
                 stage = 802
             }
 
-            802 -> when (buttonId) {
-                1 -> {
-                    player("Yes, here you go.")
-                    stage = 803
-                }
+            802 ->
+                when (buttonId) {
+                    1 -> {
+                        player("Yes, here you go.")
+                        stage = 803
+                    }
 
-                2 -> end()
-            }
+                    2 -> end()
+                }
 
             803 -> {
                 if (purchase(player, Skills.HERBLORE)) {
@@ -399,7 +405,5 @@ class KaqemeexDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KAQEMEEX_455)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KAQEMEEX_455)
 }

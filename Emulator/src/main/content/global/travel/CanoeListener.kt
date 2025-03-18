@@ -54,8 +54,8 @@ class CanoeListener :
             )
 
         @JvmStatic
-        fun getAxeAnimation(axe: SkillingTool): Animation {
-            return when (axe) {
+        fun getAxeAnimation(axe: SkillingTool): Animation =
+            when (axe) {
                 SkillingTool.BRONZE_AXE -> Animation(Animations.BRONZE_AXE_6744)
                 SkillingTool.IRON_AXE -> Animation(Animations.IRON_AXE_6743)
                 SkillingTool.STEEL_AXE -> Animation(Animations.STEEL_AXE_ALT2_6742)
@@ -66,7 +66,6 @@ class CanoeListener :
                 SkillingTool.DRAGON_AXE -> Animation(Animations.DRAGON_AXE_6745)
                 else -> Animation(axe.animation)
             }
-        }
 
         private fun checkSuccess(
             player: Player,
@@ -261,9 +260,7 @@ class CanoeListener :
                 private val stationRegionMap = CanoeStationLocations.values().associateBy { it.region }
 
                 @JvmStatic
-                fun getCanoeStationbyLocation(location: Location): CanoeStationLocations {
-                    return stationRegionMap[location.regionId]!!
-                }
+                fun getCanoeStationbyLocation(location: Location): CanoeStationLocations = stationRegionMap[location.regionId]!!
             }
         }
     }

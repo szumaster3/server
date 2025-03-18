@@ -72,7 +72,5 @@ class FredTheFarmerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRED_THE_FARMER_758)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRED_THE_FARMER_758)
 }

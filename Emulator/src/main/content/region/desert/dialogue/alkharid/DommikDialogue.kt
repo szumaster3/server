@@ -48,11 +48,7 @@ class DommikDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DommikDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DommikDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DOMMIK_545)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DOMMIK_545)
 }

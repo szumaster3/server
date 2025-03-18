@@ -66,9 +66,7 @@ class SQLiteProvider(
         }
     }
 
-    fun runAsync(closure: (conn: Connection) -> Unit): Job {
-        return coroutineScope.launch { run(closure) }
-    }
+    fun runAsync(closure: (conn: Connection) -> Unit): Job = coroutineScope.launch { run(closure) }
 
     fun run(closure: (conn: Connection) -> Unit) {
         dbRunLock.tryLock(10000L, TimeUnit.MILLISECONDS)

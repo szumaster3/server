@@ -43,9 +43,7 @@ class BarbFishSpotManager :
     }
 }
 
-fun getNewTTL(): Int {
-    return RandomFunction.random(400, 2000)
-}
+fun getNewTTL(): Int = RandomFunction.random(400, 2000)
 
 fun getNewLoc(): Location {
     val possibleLoc = ArrayList<Location>()

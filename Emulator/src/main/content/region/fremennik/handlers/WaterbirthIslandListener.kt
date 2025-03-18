@@ -15,9 +15,7 @@ import org.rs.consts.Scenery
 class WaterbirthIslandListener :
     MapArea,
     InteractionListener {
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(ZoneBorders(2487, 3711, 2565, 3776))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2487, 3711, 2565, 3776))
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)

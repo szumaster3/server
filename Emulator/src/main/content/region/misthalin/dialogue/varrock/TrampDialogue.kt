@@ -58,11 +58,7 @@ class TrampDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TrampDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TrampDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TRAMP_11)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TRAMP_11)
 }

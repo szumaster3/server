@@ -140,11 +140,7 @@ class HassanDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return HassanDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = HassanDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HASSAN_923)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HASSAN_923)
 }

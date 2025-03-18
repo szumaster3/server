@@ -37,7 +37,5 @@ class BrotherCedricDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_CEDRIC_280)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_CEDRIC_280)
 }

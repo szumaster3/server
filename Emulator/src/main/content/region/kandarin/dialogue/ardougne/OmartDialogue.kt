@@ -28,15 +28,9 @@ class OmartDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun newInstance(player: Player?): Dialogue {
-        return OmartDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = OmartDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OMART_350)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OMART_350)
 }

@@ -62,11 +62,7 @@ class ColONiallDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return ColONiallDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = ColONiallDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.COL_ONIALL_4872)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.COL_ONIALL_4872)
 }

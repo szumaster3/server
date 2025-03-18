@@ -76,7 +76,5 @@ class BrotherBraceDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BROTHER_BRACE_954)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BROTHER_BRACE_954)
 }

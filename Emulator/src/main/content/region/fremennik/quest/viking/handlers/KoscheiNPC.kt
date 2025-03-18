@@ -91,9 +91,7 @@ class KoscheiNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return KoscheiNPC(id, location, null)
-    }
+    ): AbstractNPC = KoscheiNPC(id, location, null)
 
     override fun isAttackable(
         entity: Entity,
@@ -115,14 +113,13 @@ class KoscheiNPC(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.KOSCHEI_THE_DEATHLESS_1290,
             NPCs.KOSCHEI_THE_DEATHLESS_1291,
             NPCs.KOSCHEI_THE_DEATHLESS_1292,
             NPCs.KOSCHEI_THE_DEATHLESS_1293,
         )
-    }
 
     enum class KoscheiType(
         var npcId: Int,
@@ -168,9 +165,7 @@ class KoscheiNPC(
             Pulser.submit(KoscheiSpawnPulse(player, koschei))
         }
 
-        operator fun next(): KoscheiType {
-            return values()[ordinal + 1]
-        }
+        operator fun next(): KoscheiType = values()[ordinal + 1]
 
         companion object {
             fun forId(id: Int): KoscheiType? {

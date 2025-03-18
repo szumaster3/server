@@ -8,8 +8,6 @@ import core.cache.def.impl.SceneryDefinition
  * @param id The id for the scenery.
  * @return The name.
  */
-fun getSceneryName(id: Int): String {
-    return SceneryDefinition.forId(id).name
-}
+fun getSceneryName(id: Int): String = SceneryDefinition.forId(id).name
 
 private class SceneryInteractionAPI

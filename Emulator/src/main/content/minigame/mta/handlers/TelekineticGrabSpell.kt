@@ -132,8 +132,8 @@ class TelekineticGrabSpell :
     fun getProjectile(
         entity: Entity,
         item: GroundItem,
-    ): Projectile {
-        return Projectile.create(
+    ): Projectile =
+        Projectile.create(
             entity.location,
             item.location,
             PROJECTILE_ID,
@@ -144,11 +144,8 @@ class TelekineticGrabSpell :
             ANGLE,
             11,
         )
-    }
 
-    fun getDelay(distance: Double): Int {
-        return (2 + distance * 0.5).toInt()
-    }
+    fun getDelay(distance: Double): Int = (2 + distance * 0.5).toInt()
 
     companion object {
         private val ANIMATION = Animation(2310)

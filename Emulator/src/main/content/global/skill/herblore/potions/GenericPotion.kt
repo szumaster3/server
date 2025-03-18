@@ -10,24 +10,22 @@ class GenericPotion(
     val product: Item?,
 ) {
     companion object {
-        fun transform(potion: UnfinishedPotion): GenericPotion {
-            return GenericPotion(
+        fun transform(potion: UnfinishedPotion): GenericPotion =
+            GenericPotion(
                 base = potion.base,
                 ingredient = potion.ingredient,
                 level = potion.level,
                 experience = 0.0,
                 product = potion.potion,
             )
-        }
 
-        fun transform(potion: FinishedPotion): GenericPotion {
-            return GenericPotion(
+        fun transform(potion: FinishedPotion): GenericPotion =
+            GenericPotion(
                 base = potion.unfinished.potion,
                 ingredient = potion.ingredient,
                 level = potion.level,
                 experience = potion.experience,
                 product = potion.potion,
             )
-        }
     }
 }

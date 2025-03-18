@@ -160,7 +160,5 @@ class ElnockInquisitorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ELNOCK_INQUISITOR_6070)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ELNOCK_INQUISITOR_6070)
 }

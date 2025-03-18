@@ -10,9 +10,7 @@ class PoisonKarambwanEffect : ConsumableEffect() {
         }
     }
 
-    override fun getHealthEffectValue(player: Player): Int {
-        return HEALING
-    }
+    override fun getHealthEffectValue(player: Player): Int = HEALING
 
     companion object {
         private const val HEALING = -5

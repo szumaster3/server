@@ -139,11 +139,7 @@ class RoavarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return RoavarDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = RoavarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ROAVAR_1042)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ROAVAR_1042)
 }

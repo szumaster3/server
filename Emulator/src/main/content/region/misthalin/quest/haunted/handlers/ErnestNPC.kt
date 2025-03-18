@@ -15,9 +15,7 @@ class ErnestNPC(
         id: Int,
         location: Location,
         vararg objects: Any?,
-    ): AbstractNPC {
-        return ErnestNPC(id, location)
-    }
+    ): AbstractNPC = ErnestNPC(id, location)
 
     override fun isHidden(player: Player): Boolean {
         val target: Player? = getAttribute("target", null)
@@ -31,7 +29,5 @@ class ErnestNPC(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ERNEST_287)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ERNEST_287)
 }

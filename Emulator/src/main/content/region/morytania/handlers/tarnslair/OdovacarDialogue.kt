@@ -234,13 +234,9 @@ class OdovacarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OdovacarDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OdovacarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ODOVACAR_5383)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ODOVACAR_5383)
 
     override fun defineListeners() {
         on(NPCs.ODOVACAR_5383, IntType.NPC, "bank", "collect") { player, node ->

@@ -53,11 +53,7 @@ class FarmerBrumtyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FarmerBrumtyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FarmerBrumtyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FARMER_BRUMTY_291)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FARMER_BRUMTY_291)
 }

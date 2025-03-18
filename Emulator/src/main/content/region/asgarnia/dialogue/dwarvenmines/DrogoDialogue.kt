@@ -54,11 +54,7 @@ class DrogoDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return DrogoDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = DrogoDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DROGO_DWARF_579)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DROGO_DWARF_579)
 }

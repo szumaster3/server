@@ -63,11 +63,7 @@ class PhillipaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return PhillipaDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = PhillipaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.PHILLIPA_3325)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.PHILLIPA_3325)
 }

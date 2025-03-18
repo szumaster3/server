@@ -109,9 +109,7 @@ class BarrelRoom :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun leave(
         e: Entity,

@@ -116,7 +116,5 @@ class FightArena : Quest(Quests.FIGHT_ARENA, 61, 60, 2, Vars.VARP_QUEST_FIGHT_AR
         addItemOrDrop(player, Items.COINS_995, 1000)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

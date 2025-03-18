@@ -154,11 +154,7 @@ class SanibochDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SanibochDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SanibochDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SANIBOCH_1595)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SANIBOCH_1595)
 }

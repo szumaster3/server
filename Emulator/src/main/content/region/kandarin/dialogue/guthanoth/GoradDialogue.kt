@@ -52,11 +52,7 @@ class GoradDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return GoradDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = GoradDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GORAD_856)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GORAD_856)
 }

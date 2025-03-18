@@ -24,9 +24,7 @@ class IceGiantNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return IceGiantNPC(id, location)
-    }
+    ): AbstractNPC = IceGiantNPC(id, location)
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
@@ -44,13 +42,12 @@ class IceGiantNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.ICE_GIANT_111,
             NPCs.ICE_GIANT_3072,
             NPCs.ICE_GIANT_4685,
             NPCs.ICE_GIANT_4686,
             NPCs.ICE_GIANT_4687,
         )
-    }
 }

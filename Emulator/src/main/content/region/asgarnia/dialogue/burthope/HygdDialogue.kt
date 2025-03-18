@@ -42,7 +42,5 @@ class HygdDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HYGD_1088)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HYGD_1088)
 }

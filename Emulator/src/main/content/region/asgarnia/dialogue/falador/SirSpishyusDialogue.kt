@@ -19,7 +19,5 @@ class SirSpishyusDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIR_SPISHYUS_2282)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIR_SPISHYUS_2282)
 }

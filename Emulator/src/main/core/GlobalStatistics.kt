@@ -20,27 +20,17 @@ object GlobalStatistics {
     }
 
     @JvmStatic
-    fun getDailyGuardPickpockets(): Int {
-        return getGuardPickpocketArchive().getInt("count")
-    }
+    fun getDailyGuardPickpockets(): Int = getGuardPickpocketArchive().getInt("count")
 
     @JvmStatic
-    fun getDailyDeaths(): Int {
-        return getDailyDeathArchive().getInt("players")
-    }
+    fun getDailyDeaths(): Int = getDailyDeathArchive().getInt("players")
 
     @JvmStatic
-    fun getDailyCowDeaths(): Int {
-        return getDailyDeathArchive().getInt("lumbridge-cows")
-    }
+    fun getDailyCowDeaths(): Int = getDailyDeathArchive().getInt("lumbridge-cows")
 
     @JvmStatic
-    private fun getDailyDeathArchive(): JSONObject {
-        return ServerStore.getArchive("daily-deaths-global")
-    }
+    private fun getDailyDeathArchive(): JSONObject = ServerStore.getArchive("daily-deaths-global")
 
     @JvmStatic
-    private fun getGuardPickpocketArchive(): JSONObject {
-        return ServerStore.getArchive("daily-guard-pickpockets")
-    }
+    private fun getGuardPickpocketArchive(): JSONObject = ServerStore.getArchive("daily-guard-pickpockets")
 }

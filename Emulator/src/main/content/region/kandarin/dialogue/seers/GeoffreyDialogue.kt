@@ -126,19 +126,16 @@ class GeoffreyDialogue(
         return lastRewardTime > System.currentTimeMillis()
     }
 
-    private fun hasInventorySpace(): Boolean {
-        return hasSpaceFor(player, Item(Items.FLAX_1780, 1))
-    }
+    private fun hasInventorySpace(): Boolean = hasSpaceFor(player, Item(Items.FLAX_1780, 1))
 
-    private fun determineRewardStage(reward: Int): Int {
-        return when (reward) {
+    private fun determineRewardStage(reward: Int): Int =
+        when (reward) {
             -1 -> 999
             0 -> 100
             1 -> 101
             2 -> 102
             else -> 999
         }
-    }
 
     private fun rewardFlax(
         amount: Int,
@@ -150,11 +147,7 @@ class GeoffreyDialogue(
         stage = 999
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GeoffreyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GeoffreyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GEOFFREY_8590)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GEOFFREY_8590)
 }

@@ -83,7 +83,5 @@ class OgDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OG_853)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OG_853)
 }

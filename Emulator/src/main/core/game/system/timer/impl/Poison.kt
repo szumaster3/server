@@ -89,7 +89,5 @@ class Poison :
         return timer
     }
 
-    private fun getDamageFromSeverity(severity: Int): Int {
-        return (severity + 4) / 5
-    }
+    private fun getDamageFromSeverity(severity: Int): Int = (severity + 4) / 5
 }

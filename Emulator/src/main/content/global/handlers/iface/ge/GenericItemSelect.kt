@@ -15,9 +15,7 @@ class GenericItemSelect : InterfaceListener {
         onOpen(GENERIC_ITEM_SELECT_IFACE) { player, _ ->
             player.pulseManager.run(
                 object : Pulse() {
-                    override fun pulse(): Boolean {
-                        return false
-                    }
+                    override fun pulse(): Boolean = false
 
                     override fun stop() {
                         super.stop()

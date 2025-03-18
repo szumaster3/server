@@ -53,11 +53,7 @@ class TindarDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return TindarDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = TindarDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TINDAR_5795)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TINDAR_5795)
 }

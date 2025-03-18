@@ -20,9 +20,7 @@ class RestlessGhostNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return RestlessGhostNPC(id, location)
-    }
+    ): AbstractNPC = RestlessGhostNPC(id, location)
 
     override fun init() {
         super.init()
@@ -66,7 +64,5 @@ class RestlessGhostNPC(
         return isQuestComplete(player, Quests.THE_RESTLESS_GHOST) || (pl != null && player !== pl)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SKELETON_459, NPCs.RESTLESS_GHOST_457)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKELETON_459, NPCs.RESTLESS_GHOST_457)
 }

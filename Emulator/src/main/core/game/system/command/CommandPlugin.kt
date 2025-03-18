@@ -11,16 +11,12 @@ abstract class CommandPlugin : Plugin<Any?> {
         args: Array<String?>?,
     ): Boolean
 
-    fun validate(player: Player?): Boolean {
-        return true
-    }
+    fun validate(player: Player?): Boolean = true
 
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any {
-        return Unit
-    }
+    ): Any = Unit
 
     fun link(vararg sets: CommandSet) {
         for (set in sets) {
@@ -30,17 +26,14 @@ abstract class CommandPlugin : Plugin<Any?> {
 
     companion object {
         @JvmStatic
-        fun toInteger(string: String): Int {
-            return try {
+        fun toInteger(string: String): Int =
+            try {
                 string.toInt()
             } catch (exception: NumberFormatException) {
                 1
             }
-        }
 
-        fun getArgumentLine(args: Array<String?>): String {
-            return getArgumentLine(args, 1, args.size)
-        }
+        fun getArgumentLine(args: Array<String?>): String = getArgumentLine(args, 1, args.size)
 
         fun getArgumentLine(
             args: Array<String?>,
@@ -61,13 +54,9 @@ abstract class CommandPlugin : Plugin<Any?> {
         fun getTarget(
             name: String?,
             load: Boolean,
-        ): Player? {
-            return Repository.getPlayerByName(name)
-        }
+        ): Player? = Repository.getPlayerByName(name)
 
         @JvmStatic
-        fun getTarget(name: String?): Player? {
-            return Repository.getPlayerByName(name)
-        }
+        fun getTarget(name: String?): Player? = Repository.getPlayerByName(name)
     }
 }

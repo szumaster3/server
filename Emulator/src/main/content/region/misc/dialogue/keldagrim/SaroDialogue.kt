@@ -38,11 +38,7 @@ class SaroDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return SaroDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = SaroDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SARO_2153)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SARO_2153)
 }

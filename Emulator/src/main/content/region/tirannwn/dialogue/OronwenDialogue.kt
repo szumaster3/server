@@ -39,11 +39,7 @@ class OronwenDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return OronwenDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = OronwenDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ORONWEN_2353)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ORONWEN_2353)
 }

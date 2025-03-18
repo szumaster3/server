@@ -90,12 +90,12 @@ class SignpostListener : InteractionListener {
                         "West to Varrock.",
                     ),
                 Location(2734, 3485) to
-                        listOf(
-                            "North to Sinclair Mansion.",
-                            "South to Keep Le Faye.",
-                            "East to Catherby.",
-                            "West to Hemenster.",
-                        ),
+                    listOf(
+                        "North to Sinclair Mansion.",
+                        "South to Keep Le Faye.",
+                        "East to Catherby.",
+                        "West to Hemenster.",
+                    ),
             ),
         )
 

@@ -119,7 +119,5 @@ class MistagLostTribeDialogue(
         }
     }
 
-    override fun npc(vararg msg: String?): Component? {
-        return npc(FaceAnim.OLD_NORMAL, *msg)
-    }
+    override fun npc(vararg msg: String?): Component? = npc(FaceAnim.OLD_NORMAL, *msg)
 }

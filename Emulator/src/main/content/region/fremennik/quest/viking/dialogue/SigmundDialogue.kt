@@ -254,7 +254,5 @@ class SigmundDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SIGMUND_THE_MERCHANT_1282)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SIGMUND_THE_MERCHANT_1282)
 }

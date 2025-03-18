@@ -28,7 +28,5 @@ class CaptainBraindeathDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.CAPTAIN_BRAINDEATH_2827)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.CAPTAIN_BRAINDEATH_2827)
 }

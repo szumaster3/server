@@ -51,12 +51,11 @@ class ArdougneLogShortcut : InteractionListener {
         }
     }
 
-    private fun determineFailParameters(node: Node): Triple<Animation, Location, Boolean> {
-        return when (node.id) {
+    private fun determineFailParameters(node: Node): Triple<Animation, Location, Boolean> =
+        when (node.id) {
             Scenery.LOG_BALANCE_35997 -> Triple(Animation(Animations.FALL_LOG_2582), Location(2603, 3330, 0), true)
             else -> Triple(Animation(Animations.FALL_LOG_2581), Location(2598, 3333, 0), false)
         }
-    }
 
     private fun handleFailure(
         player: Player,
@@ -84,8 +83,8 @@ class ArdougneLogShortcut : InteractionListener {
             object : Pulse(2) {
                 private var counter = 0
 
-                override fun pulse(): Boolean {
-                    return when (counter++) {
+                override fun pulse(): Boolean =
+                    when (counter++) {
                         0 -> {
                             visualize(player, -1, splashGraphics)
                             playAudio(player, Sounds.WATERSPLASH_2496)
@@ -109,7 +108,6 @@ class ArdougneLogShortcut : InteractionListener {
 
                         else -> false
                     }
-                }
             },
         )
     }

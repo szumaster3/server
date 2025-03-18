@@ -50,9 +50,7 @@ enum class Bar(
         }
 
         @JvmStatic
-        fun getAllBars(): MutableList<Item> {
-            return values().map { it.product }.toMutableList()
-        }
+        fun getAllBars(): MutableList<Item> = values().map { it.product }.toMutableList()
 
         @JvmStatic
         fun getAllOres(): MutableList<Item> {

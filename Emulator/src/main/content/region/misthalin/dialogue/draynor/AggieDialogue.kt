@@ -540,9 +540,7 @@ class AggieDialogue(
         return player.inventory.containsItem(BUCKET_OF_WATER) || player.inventory.containsItem(JUG_OF_WATER)
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AGGIE_922)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922)
 
     companion object {
         private val ANIMATION = Animation(4352)

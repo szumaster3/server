@@ -282,9 +282,7 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, Vars.VARBIT_QUEST_IN_
         setVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761, 30, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }
 /*
  * 1 quest point

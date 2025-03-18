@@ -60,7 +60,5 @@ class RustyDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.RUSTY_3239)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.RUSTY_3239)
 }

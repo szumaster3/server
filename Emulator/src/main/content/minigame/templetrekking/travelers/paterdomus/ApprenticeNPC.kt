@@ -17,13 +17,9 @@ class ApprenticeNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ApprenticeNPC(id, location)
-    }
+    ): AbstractNPC = ApprenticeNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.APPRENTICE_1510)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.APPRENTICE_1510)
 
     companion object;
 

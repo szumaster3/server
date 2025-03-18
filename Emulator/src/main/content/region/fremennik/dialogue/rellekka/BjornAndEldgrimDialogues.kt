@@ -53,11 +53,7 @@ class BjornAndEldgrimDialogues(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BjornAndEldgrimDialogues(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BjornAndEldgrimDialogues(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BJORN_1284, NPCs.ELDGRIM_1285)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BJORN_1284, NPCs.ELDGRIM_1285)
 }

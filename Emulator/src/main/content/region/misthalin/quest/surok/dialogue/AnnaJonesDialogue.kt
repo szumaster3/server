@@ -180,11 +180,7 @@ class AnnaJonesDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AnnaJonesDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AnnaJonesDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ANNA_JONES_5837)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ANNA_JONES_5837)
 }

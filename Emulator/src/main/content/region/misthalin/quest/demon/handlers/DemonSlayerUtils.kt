@@ -7,15 +7,17 @@ import java.util.*
 
 object DemonSlayerUtils {
     val INCANTATIONS = arrayOf("Carlem", "Aber", "Purchai", "Camerinthum", "Gabindo")
+
     @JvmField val SILVERLIGHT = Item(2402)
+
     @JvmField val FIRST_KEY = Item(2401)
+
     @JvmField val SECOND_KEY = Item(2400)
+
     @JvmField val THIRD_KEY = Item(2399)
 
     @JvmStatic
-    fun getIncantation(player: Player): String {
-        return player.getAttribute("demon-slayer:incantation", generateIncantation(player))
-    }
+    fun getIncantation(player: Player): String = player.getAttribute("demon-slayer:incantation", generateIncantation(player))
 
     @JvmStatic
     fun generateIncantation(player: Player): String {

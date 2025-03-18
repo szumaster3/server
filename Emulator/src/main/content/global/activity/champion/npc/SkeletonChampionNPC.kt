@@ -29,13 +29,9 @@ class SkeletonChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return SkeletonChampionNPC(id, location)
-    }
+    ): AbstractNPC = SkeletonChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SKELETON_CHAMPION_3065)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SKELETON_CHAMPION_3065)
 
     override fun handleTickActions() {
         super.handleTickActions()

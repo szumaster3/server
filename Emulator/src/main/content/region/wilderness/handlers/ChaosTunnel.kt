@@ -138,9 +138,7 @@ class ChaosTunnel :
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         register(ZoneBorders(3116, 5412, 3362, 5584))
@@ -270,21 +268,15 @@ class ChaosTunnel :
 
         get() = RandomFunction.getRandomElement<Any>(PORTALS.values.toTypedArray()) as Location
 
-    private fun isStained(scenery: Scenery): Boolean {
-        return getStainedTime(scenery) > ticks
-    }
+    private fun isStained(scenery: Scenery): Boolean = getStainedTime(scenery) > ticks
 
     private fun setStainedTime(scenery: Scenery) {
         scenery.attributes.setAttribute("stained", ticks + RandomFunction.random(50, 150))
     }
 
-    private fun getStainedTime(scenery: Scenery): Int {
-        return scenery.attributes.getAttribute("stained", 0)
-    }
+    private fun getStainedTime(scenery: Scenery): Int = scenery.attributes.getAttribute("stained", 0)
 
-    private fun isFixed(player: Player): Boolean {
-        return false
-    }
+    private fun isFixed(player: Player): Boolean = false
 
     fun getLocation(location: Location): Location? {
         val l = PORTALS[location]
@@ -317,9 +309,7 @@ class ChaosTunnel :
 
     companion object {
         @JvmStatic
-        fun getBorkStoreFile(): JSONObject {
-            return getArchive("daily-bork-killed")
-        }
+        fun getBorkStoreFile(): JSONObject = getArchive("daily-bork-killed")
 
         private val ENTRANCE_DATA =
             arrayOf(

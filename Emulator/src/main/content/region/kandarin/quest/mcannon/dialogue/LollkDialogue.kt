@@ -43,7 +43,5 @@ class LollkDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.LOLLK_207)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.LOLLK_207)
 }

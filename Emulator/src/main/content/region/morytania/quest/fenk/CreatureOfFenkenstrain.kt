@@ -118,14 +118,13 @@ class CreatureOfFenkenstrain :
         }
     }
 
-    override fun hasRequirements(player: Player): Boolean {
-        return arrayOf(
+    override fun hasRequirements(player: Player): Boolean =
+        arrayOf(
             hasLevelStat(player, Skills.CRAFTING, 20),
             hasLevelStat(player, Skills.THIEVING, 25),
             isQuestComplete(player, Quests.PRIEST_IN_PERIL),
             isQuestComplete(player, Quests.THE_RESTLESS_GHOST),
         ).all { it }
-    }
 
     override fun reset(player: Player) {
         setVarp(player, Vars.VARP_QUEST_CREATURE_OF_FENKENSTRAIN_PROGRESS_399, 0, true)
@@ -170,7 +169,5 @@ class CreatureOfFenkenstrain :
         }
     }
 
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 }

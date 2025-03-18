@@ -141,7 +141,5 @@ class DonovanDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.DONOVAN_THE_FAMILY_HANDYMAN_806)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.DONOVAN_THE_FAMILY_HANDYMAN_806)
 }

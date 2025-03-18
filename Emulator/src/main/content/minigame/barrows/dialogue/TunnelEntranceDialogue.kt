@@ -56,7 +56,5 @@ class TunnelEntranceDialogue(
         return false
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(DialogueInterpreter.getDialogueKey("barrow_tunnel"))
-    }
+    override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("barrow_tunnel"))
 }

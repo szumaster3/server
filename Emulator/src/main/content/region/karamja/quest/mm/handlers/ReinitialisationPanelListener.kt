@@ -70,7 +70,5 @@ class ReinitialisationPanelListener : InterfaceListener {
     private fun isPuzzleSolved(
         currentPieces: Array<Item?>?,
         puzzlePieces: Array<Item?>?,
-    ): Boolean {
-        return currentPieces.contentEquals(puzzlePieces)
-    }
+    ): Boolean = currentPieces.contentEquals(puzzlePieces)
 }

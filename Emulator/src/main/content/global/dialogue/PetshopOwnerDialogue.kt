@@ -149,13 +149,12 @@ class PetshopOwnerDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(
+    override fun getIds(): IntArray =
+        intArrayOf(
             NPCs.PET_SHOP_OWNER_6750,
             NPCs.PET_SHOP_OWNER_6751,
             NPCs.PET_SHOP_OWNER_6892,
             NPCs.PET_SHOP_OWNER_6893,
             NPCs.PET_SHOP_OWNER_6898,
         )
-    }
 }

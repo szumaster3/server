@@ -397,9 +397,7 @@ class WizardKorvakDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_KORVAK_8029)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_KORVAK_8029)
 
     /**
      * Repairs the player pouches.

@@ -119,7 +119,5 @@ class JungleForesterDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JUNGLE_FORESTER_401, NPCs.JUNGLE_FORESTER_402)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JUNGLE_FORESTER_401, NPCs.JUNGLE_FORESTER_402)
 }

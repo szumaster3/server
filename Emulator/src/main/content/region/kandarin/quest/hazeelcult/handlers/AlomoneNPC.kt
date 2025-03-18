@@ -20,13 +20,9 @@ class AlomoneNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return AlomoneNPC(id, location)
-    }
+    ): AbstractNPC = AlomoneNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALOMONE_891)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALOMONE_891)
 
     override fun handleTickActions() {
         super.handleTickActions()

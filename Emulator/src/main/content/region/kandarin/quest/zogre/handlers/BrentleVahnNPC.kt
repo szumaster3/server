@@ -25,9 +25,7 @@ class BrentleVahnNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return BrentleVahnNPC(id, location)
-    }
+    ): AbstractNPC = BrentleVahnNPC(id, location)
 
     override fun handleTickActions() {
         super.handleTickActions()
@@ -40,9 +38,7 @@ class BrentleVahnNPC(
         }
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ZOMBIE_1826)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ZOMBIE_1826)
 
     companion object {
         fun spawnHumanZombie(player: Player) {

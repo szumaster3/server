@@ -17,24 +17,18 @@ class FOGWaitingZone :
         return this
     }
 
-    override fun enter(e: Entity): Boolean {
-        return super.enter(e)
-    }
+    override fun enter(e: Entity): Boolean = super.enter(e)
 
     override fun interact(
         e: Entity,
         target: Node,
         option: Option,
-    ): Boolean {
-        return super.interact(e, target, option)
-    }
+    ): Boolean = super.interact(e, target, option)
 
     override fun fireEvent(
         identifier: String,
         vararg args: Any,
-    ): Any? {
-        return null
-    }
+    ): Any? = null
 
     override fun configure() {
         super.registerRegion(6487)

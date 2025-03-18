@@ -63,8 +63,8 @@ class SeedlingListener : InteractionListener {
         return if (index != WATERING_CANS.size - 1) WATERING_CANS[index + 1] else Items.WATERING_CAN_5331
     }
 
-    fun getSeedling(id: Int): Int {
-        return when (id) {
+    fun getSeedling(id: Int): Int =
+        when (id) {
             Items.ACORN_5312 -> Items.OAK_SEEDLING_5358
             Items.WILLOW_SEED_5313 -> Items.WILLOW_SEEDLING_5359
             Items.MAPLE_SEED_5314 -> Items.MAPLE_SEEDLING_5360
@@ -81,7 +81,6 @@ class SeedlingListener : InteractionListener {
             Items.SPIRIT_SEED_5317 -> Items.SPIRIT_SEEDLING_5363
             else -> -1
         }
-    }
 
     val TREE_SEEDS =
         intArrayOf(

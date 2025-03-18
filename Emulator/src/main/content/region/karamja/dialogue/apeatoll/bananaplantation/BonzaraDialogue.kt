@@ -47,11 +47,7 @@ class BonzaraDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return BonzaraDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = BonzaraDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BONZARA_1468)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BONZARA_1468)
 }

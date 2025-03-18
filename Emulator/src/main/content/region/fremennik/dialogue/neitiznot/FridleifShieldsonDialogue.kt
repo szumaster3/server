@@ -28,11 +28,7 @@ class FridleifShieldsonDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FridleifShieldsonDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FridleifShieldsonDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FRIDLEIF_SHIELDSON_5505)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FRIDLEIF_SHIELDSON_5505)
 }

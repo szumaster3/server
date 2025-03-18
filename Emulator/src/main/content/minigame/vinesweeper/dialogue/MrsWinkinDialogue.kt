@@ -27,13 +27,9 @@ class MrsWinkinDialogue(
     override fun handle(
         interfaceId: Int,
         buttonId: Int,
-    ): Boolean {
-        return true
-    }
+    ): Boolean = true
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MRS_WINKIN_7132)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.MRS_WINKIN_7132)
 }
 
 class MrsWinkinDialogueFile : FlagsHandler() {

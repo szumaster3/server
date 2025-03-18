@@ -52,11 +52,7 @@ class EdgevilleShopKeeperDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return EdgevilleShopKeeperDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = EdgevilleShopKeeperDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SHOPKEEPER_528, NPCs.SHOP_ASSISTANT_529)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SHOPKEEPER_528, NPCs.SHOP_ASSISTANT_529)
 }

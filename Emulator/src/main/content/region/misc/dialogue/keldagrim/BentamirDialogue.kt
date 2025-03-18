@@ -48,11 +48,7 @@ class BentamirDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BentamirDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BentamirDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BENTAMIR_2192)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BENTAMIR_2192)
 }

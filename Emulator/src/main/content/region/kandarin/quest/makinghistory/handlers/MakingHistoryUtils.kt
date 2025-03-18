@@ -20,12 +20,11 @@ object MakingHistoryUtils {
     const val ATTRIBUTE_DRON_PROGRESS = "/save:mh-dron"
     const val ATTRIBUTE_DROALAK_PROGRESS = "/save:mh-droalak"
 
-    fun checkRequirements(player: Player): Boolean {
-        return getStatLevel(player, Skills.CRAFTING) >= 24 &&
+    fun checkRequirements(player: Player): Boolean =
+        getStatLevel(player, Skills.CRAFTING) >= 24 &&
             getStatLevel(player, Skills.MINING) >= 40 &&
             getStatLevel(player, Skills.SMITHING) >= 40 &&
             isQuestComplete(player, Quests.PRIEST_IN_PERIL)
-    }
 
     fun checkProgress(player: Player) {
         if (getVarbit(player, ERIN_PROGRESS) == 4 &&

@@ -101,11 +101,7 @@ class BabaYagaDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return BabaYagaDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = BabaYagaDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.BABA_YAGA_4513)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.BABA_YAGA_4513)
 }

@@ -16,18 +16,17 @@ import org.rs.consts.Quests
 import org.rs.consts.Scenery
 
 class WitchHouseListener : InteractionListener {
-
-    val items = intArrayOf(
-        Items.NEEDLE_1733,
-        Items.LEATHER_GLOVES_1059,
-        Items.LEATHER_BOOTS_1061,
-        Items.CABBAGE_1965,
-        Items.THREAD_1734
-    )
+    val items =
+        intArrayOf(
+            Items.NEEDLE_1733,
+            Items.LEATHER_GLOVES_1059,
+            Items.LEATHER_BOOTS_1061,
+            Items.CABBAGE_1965,
+            Items.THREAD_1734,
+        )
     private val basementGates = intArrayOf(Scenery.GATE_2865, Scenery.GATE_2866)
 
     override fun defineListeners() {
-
         /*
          * Handles search the plant for key to witch house.
          */
@@ -111,7 +110,8 @@ class WitchHouseListener : InteractionListener {
                 runTask(player, 2) {
                     sendPlayerDialogue(
                         player,
-                        "Strange... I can't see any kind of lock or handle to open this door...", FaceAnim.THINKING
+                        "Strange... I can't see any kind of lock or handle to open this door...",
+                        FaceAnim.THINKING,
                     )
                 }
             }
@@ -126,7 +126,7 @@ class WitchHouseListener : InteractionListener {
             val shed = inBorders(player, 2934, 3459, 2937, 3467)
             val sadness = RegionManager.getLocalPlayers(player, 1)
 
-            if(shed && sadness.isNotEmpty()){
+            if (shed && sadness.isNotEmpty()) {
                 sendPlayerDialogue(player, "I'd better not go in there yet... I think I can hear someone inside!", FaceAnim.THINKING)
                 return@on true
             }
@@ -206,7 +206,7 @@ class WitchHouseListener : InteractionListener {
 
         on(Scenery.FOUNTAIN_2864, IntType.SCENERY, "check") { player, _ ->
             val readBook = getAttribute(player, "readWitchsBook", false)
-            if(freeSlots(player) == 0) {
+            if (freeSlots(player) == 0) {
                 sendMessage(player, "You search the fountain but find nothing.")
                 return@on true
             }
@@ -235,22 +235,26 @@ class WitchHouseListener : InteractionListener {
                 return@on true
             }
 
-            val boxItems = mapOf(
-                Items.NEEDLE_1733 to Pair(
-                    Location.create(2906, 9872, 0),
-                    "You find a sewing needle in the bottom of one of the boxes!"
-                ),
-                Items.THREAD_1734 to Pair(null, "You find some sewing thread in the bottom of one of the boxes!"),
-                Items.LEATHER_GLOVES_1059 to Pair(
-                    Location.create(2905, 9872, 0),
-                    "You find a pair of leather gloves in the bottom of one of the boxes!"
-                ),
-                Items.LEATHER_BOOTS_1061 to Pair(
-                    Location.create(2908, 9873, 0),
-                    "You find a pair of leather boots in the bottom of one of the boxes!"
-                ),
-                Items.CABBAGE_1965 to Pair(null, "You find an old cabbage in the bottom of one of the boxes!")
-            )
+            val boxItems =
+                mapOf(
+                    Items.NEEDLE_1733 to
+                        Pair(
+                            Location.create(2906, 9872, 0),
+                            "You find a sewing needle in the bottom of one of the boxes!",
+                        ),
+                    Items.THREAD_1734 to Pair(null, "You find some sewing thread in the bottom of one of the boxes!"),
+                    Items.LEATHER_GLOVES_1059 to
+                        Pair(
+                            Location.create(2905, 9872, 0),
+                            "You find a pair of leather gloves in the bottom of one of the boxes!",
+                        ),
+                    Items.LEATHER_BOOTS_1061 to
+                        Pair(
+                            Location.create(2908, 9873, 0),
+                            "You find a pair of leather boots in the bottom of one of the boxes!",
+                        ),
+                    Items.CABBAGE_1965 to Pair(null, "You find an old cabbage in the bottom of one of the boxes!"),
+                )
 
             for (item in items) {
                 if (!inInventory(player, item)) {

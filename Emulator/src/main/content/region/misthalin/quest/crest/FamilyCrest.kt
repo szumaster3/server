@@ -21,9 +21,7 @@ import org.rs.consts.Vars
  */
 @Initializable
 class FamilyCrest : Quest(Quests.FAMILY_CREST, 59, 58, 1, Vars.VARP_QUEST_FAMILY_CREST_PROGRESS_148, 0, 1, 11) {
-    override fun newInstance(`object`: Any?): Quest {
-        return this
-    }
+    override fun newInstance(`object`: Any?): Quest = this
 
     override fun drawJournal(
         player: Player,

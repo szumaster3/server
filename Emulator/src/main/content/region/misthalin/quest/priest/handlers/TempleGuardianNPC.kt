@@ -22,13 +22,9 @@ class TempleGuardianNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return TempleGuardianNPC(id, location)
-    }
+    ): AbstractNPC = TempleGuardianNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TEMPLE_GUARDIAN_7711)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TEMPLE_GUARDIAN_7711)
 
     override fun checkImpact(state: BattleState) {
         super.checkImpact(state)

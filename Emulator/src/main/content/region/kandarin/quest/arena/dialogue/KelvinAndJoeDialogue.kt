@@ -88,7 +88,5 @@ class KelvinAndJoeDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KELVIN_260, NPCs.JOE_261)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KELVIN_260, NPCs.JOE_261)
 }

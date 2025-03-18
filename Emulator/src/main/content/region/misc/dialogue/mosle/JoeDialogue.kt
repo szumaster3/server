@@ -100,11 +100,7 @@ class JoeDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return JoeDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = JoeDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.JOE_3163)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.JOE_3163)
 }

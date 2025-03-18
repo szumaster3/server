@@ -81,9 +81,7 @@ enum class FloorTrap(
         fun getFromCoords(
             x: Int,
             y: Int,
-        ): FloorTrap? {
-            return trapMap[Location(x, y)]
-        }
+        ): FloorTrap? = trapMap[Location(x, y)]
     }
 }
 

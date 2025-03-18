@@ -22,9 +22,7 @@ class FlyTrapNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return FlyTrapNPC(id, location)
-    }
+    ): AbstractNPC = FlyTrapNPC(id, location)
 
     override fun tick() {
         val players = getLocalPlayers(this, 1)
@@ -44,7 +42,5 @@ class FlyTrapNPC(
         super.tick()
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FLY_TRAP_151)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FLY_TRAP_151)
 }

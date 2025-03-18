@@ -110,7 +110,6 @@ class CatherbyGrapple : InteractionListener {
         return true
     }
 
-    private fun isPlayerInRangeToGrapple(player: Player): Boolean {
-        return inBorders(player, START_LOCATION.x - 2, START_LOCATION.y - 2, START_LOCATION.x, START_LOCATION.y)
-    }
+    private fun isPlayerInRangeToGrapple(player: Player): Boolean =
+        inBorders(player, START_LOCATION.x - 2, START_LOCATION.y - 2, START_LOCATION.x, START_LOCATION.y)
 }

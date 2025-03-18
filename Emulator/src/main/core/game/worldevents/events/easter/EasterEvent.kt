@@ -102,9 +102,7 @@ class EasterEvent :
         return Pair(name, toReturn)
     }
 
-    override fun checkActive(cal: Calendar): Boolean {
-        return cal.get(Calendar.MONTH) == Calendar.APRIL || ServerConstants.FORCE_EASTER_EVENTS
-    }
+    override fun checkActive(cal: Calendar): Boolean = cal.get(Calendar.MONTH) == Calendar.APRIL || ServerConstants.FORCE_EASTER_EVENTS
 
     private fun onEggBroken(player: Player) {
         val eggsBroken = getAttribute(player, EGGS_BROKEN, 0) + 1
@@ -335,8 +333,8 @@ class EasterEvent :
                 Location.create(2482, 3391, 0),
             )
 
-        fun locationsForName(name: String): Array<Location> {
-            return when (name) {
+        fun locationsForName(name: String): Array<Location> =
+            when (name) {
                 LOC_LUM -> LUMBRIDGE_SPOTS
                 LOC_DRAYNOR -> DRAYNOR_SPOTS
                 LOC_FALADOR -> FALADOR_SPOTS
@@ -344,17 +342,15 @@ class EasterEvent :
                 LOC_EDGE -> EDGEVILLE_SPOTS
                 else -> LUMBRIDGE_SPOTS
             }
-        }
 
-        fun gfxForEgg(egg: Int): Int {
-            return when (egg) {
+        fun gfxForEgg(egg: Int): Int =
+            when (egg) {
                 EGG_A -> GFX_A
                 EGG_B -> GFX_B
                 EGG_C -> GFX_C
                 EGG_D -> GFX_D
                 else -> GFX_A
             }
-        }
 
         fun spawnEggFor(player: Player) {
             val dirs = Direction.values()

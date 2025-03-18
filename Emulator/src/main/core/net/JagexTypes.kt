@@ -27,17 +27,13 @@ fun ByteBuffer.p1(value: Int) {
  * G1 - gets an unsigned byte from the buffer
  * @return value as Int
  */
-fun ByteBuffer.g1(): Int {
-    return get().toInt() and 0xFF
-}
+fun ByteBuffer.g1(): Int = get().toInt() and 0xFF
 
 /**
  * G1s - gets a signed byte from the buffer
  * @return value as Int
  */
-fun ByteBuffer.g1s(): Int {
-    return get().toInt()
-}
+fun ByteBuffer.g1s(): Int = get().toInt()
 
 /**
  * P2 - puts a short to the buffer
@@ -51,25 +47,19 @@ fun ByteBuffer.p2(value: Int) {
  * G2 - gets an unsigned short from the buffer
  * @return value as Int
  */
-fun ByteBuffer.g2(): Int {
-    return short.toInt() and 0xFFFF
-}
+fun ByteBuffer.g2(): Int = short.toInt() and 0xFFFF
 
 /**
  * G2s - gets a signed short from the buffer
  * @return value as Int
  */
-fun ByteBuffer.g2s(): Int {
-    return short.toInt()
-}
+fun ByteBuffer.g2s(): Int = short.toInt()
 
 /**
  * G3 - gets an unsigned medium (3 bytes) from the buffer
  * @return value as Int
  */
-fun ByteBuffer.g3(): Int {
-    return ((get().toInt() and 0xFF) shl 16) + ((get().toInt() and 0xFF) shl 8) + (get().toInt() and 0xFF)
-}
+fun ByteBuffer.g3(): Int = ((get().toInt() and 0xFF) shl 16) + ((get().toInt() and 0xFF) shl 8) + (get().toInt() and 0xFF)
 
 /**
  * P4 - puts an integer to the buffer

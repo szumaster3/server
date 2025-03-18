@@ -33,19 +33,20 @@ class SavedData(
                     is DoubleArray -> value.forEach { buffer.putDouble(it) }
                     is BooleanArray -> value.forEach { buffer.put(if (it) 1 else 0) }
                     is IntArray -> value.forEach { buffer.putInt(it) }
-                    is List<*> -> when {
-                        value.all { it is Int } -> (value as List<Int>).forEach { buffer.putInt(it) }
-                        value.all { it is Double } -> (value as List<Double>).forEach { buffer.putDouble(it) }
-                        value.all { it is Boolean } -> (value as List<Boolean>).forEach { buffer.put(if (it) 1 else 0) }
-                        else -> throw IllegalArgumentException("Unsupported list type: ${value::class}")
-                    }
+                    is List<*> ->
+                        when {
+                            value.all { it is Int } -> (value as List<Int>).forEach { buffer.putInt(it) }
+                            value.all { it is Double } -> (value as List<Double>).forEach { buffer.putDouble(it) }
+                            value.all { it is Boolean } -> (value as List<Boolean>).forEach { buffer.put(if (it) 1 else 0) }
+                            else -> throw IllegalArgumentException("Unsupported list type: ${value::class}")
+                        }
                     else -> throw IllegalArgumentException("Unsupported type: ${value!!::class}")
                 }
             }
         }
 
-        private fun isNonDefault(value: Any?): Boolean {
-            return when (value) {
+        private fun isNonDefault(value: Any?): Boolean =
+            when (value) {
                 is Int -> value != 0
                 is Double -> value != 0.0
                 is Byte -> value != 0.toByte()
@@ -55,15 +56,15 @@ class SavedData(
                 is BooleanArray -> value.any { it }
                 is IntArray -> value.any { it != 0 }
                 is DoubleArray -> value.any { it != 0.0 }
-                is List<*> -> when {
-                    value.all { it is Int } -> (value as List<Int>).any { it != 0 }
-                    value.all { it is Double } -> (value as List<Double>).any { it != 0.0 }
-                    value.all { it is Boolean } -> (value as List<Boolean>).any { it }
-                    else -> false
-                }
+                is List<*> ->
+                    when {
+                        value.all { it is Int } -> (value as List<Int>).any { it != 0 }
+                        value.all { it is Double } -> (value as List<Double>).any { it != 0.0 }
+                        value.all { it is Boolean } -> (value as List<Boolean>).any { it }
+                        else -> false
+                    }
                 else -> value != null
             }
-        }
 
         fun getBoolean(value: Byte): Boolean = value.toInt() == 1
 

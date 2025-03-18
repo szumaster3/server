@@ -22,7 +22,5 @@ object WomTask {
         getAttribute(player, TASK_COUNTER, -1)
     }
 
-    fun setTaskCounter(player: Player) {
-        return player.incrementAttribute(TASK_COUNTER)
-    }
+    fun setTaskCounter(player: Player) = player.incrementAttribute(TASK_COUNTER)
 }

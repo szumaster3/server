@@ -36,9 +36,7 @@ fun cureDisease(entity: Entity) {
  * @param entity The entity to check for poison.
  * @return True if the entity is poisoned, otherwise false.
  */
-fun isPoisoned(entity: Entity): Boolean {
-    return getTimer<Poison>(entity) != null
-}
+fun isPoisoned(entity: Entity): Boolean = getTimer<Poison>(entity) != null
 
 /**
  * Checks if an entity is currently diseased.
@@ -46,9 +44,7 @@ fun isPoisoned(entity: Entity): Boolean {
  * @param entity The entity to check for disease.
  * @return True if the entity is diseased, otherwise false.
  */
-fun isDiseased(entity: Entity): Boolean {
-    return getTimer<Disease>(entity) != null
-}
+fun isDiseased(entity: Entity): Boolean = getTimer<Disease>(entity) != null
 
 /**
  * Checks if an entity is currently stunned.
@@ -56,9 +52,7 @@ fun isDiseased(entity: Entity): Boolean {
  * @param entity The entity to check for stun status.
  * @return True if the entity is stunned, otherwise false.
  */
-fun isStunned(entity: Entity): Boolean {
-    return entity.clocks[Clocks.STUN] >= getWorldTicks()
-}
+fun isStunned(entity: Entity): Boolean = entity.clocks[Clocks.STUN] >= getWorldTicks()
 
 /**
  * Applies a poison effect to an entity, or refreshes the existing poison effect if already active.
@@ -137,8 +131,6 @@ fun updateCredits(
  * @param player The player whose credit balance is being retrieved.
  * @return The player's current credit balance.
  */
-fun getCredits(player: Player): Int {
-    return player.details.accountInfo.credits
-}
+fun getCredits(player: Player): Int = player.details.accountInfo.credits
 
 private class EventAPI

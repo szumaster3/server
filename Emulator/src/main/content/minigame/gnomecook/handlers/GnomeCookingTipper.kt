@@ -50,10 +50,9 @@ object GnomeCookingTipper {
     }
 
     @JvmStatic
-    fun getTip(level: LEVEL): Item {
-        return when (level) {
+    fun getTip(level: LEVEL): Item =
+        when (level) {
             LEVEL.EASY -> RandomFunction.rollWeightedChanceTable(easyTips)
             LEVEL.HARD -> RandomFunction.rollWeightedChanceTable(hardTips)
         }
-    }
 }

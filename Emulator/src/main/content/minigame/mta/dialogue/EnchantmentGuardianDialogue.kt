@@ -115,7 +115,5 @@ class EnchantmentGuardianDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ENCHANTMENT_GUARDIAN_3100)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ENCHANTMENT_GUARDIAN_3100)
 }

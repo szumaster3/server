@@ -290,11 +290,7 @@ class GnomeCoachDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return GnomeCoachDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = GnomeCoachDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GNOME_COACH_2802)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.GNOME_COACH_2802)
 }

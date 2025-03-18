@@ -29,13 +29,9 @@ class ImpChampionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ImpChampionNPC(id, location)
-    }
+    ): AbstractNPC = ImpChampionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.IMP_CHAMPION_3062)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.IMP_CHAMPION_3062)
 
     override fun handleTickActions() {
         super.handleTickActions()

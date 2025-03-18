@@ -116,7 +116,6 @@ class HeroesGuildListener : InteractionListener {
         }
     }
 
-    private fun EnchantedJewellery.canBeRechargedByFamiliar(): Boolean {
-        return this == EnchantedJewellery.AMULET_OF_GLORY || this == EnchantedJewellery.AMULET_OF_GLORY_T
-    }
+    private fun EnchantedJewellery.canBeRechargedByFamiliar(): Boolean =
+        this == EnchantedJewellery.AMULET_OF_GLORY || this == EnchantedJewellery.AMULET_OF_GLORY_T
 }

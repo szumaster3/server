@@ -68,11 +68,7 @@ class FirstMateDaveyBoyDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FirstMateDaveyBoyDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FirstMateDaveyBoyDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIRST_MATE_DAVEY_BOY_4543)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIRST_MATE_DAVEY_BOY_4543)
 }

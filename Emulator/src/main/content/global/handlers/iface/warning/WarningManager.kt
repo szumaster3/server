@@ -56,7 +56,16 @@ object WarningManager {
                     "Component varbit: [$DARK_PURPLE$component</col>] increased to: [$DARK_PURPLE$newStatus</col>].",
                 )
                 if (newStatus == 6) {
-                    val toggleButton = if (component.component == Components.WILDERNESS_WARNING_382) 26 else if (component.component == Components.CWS_WARNING_24_581) 19 else 21
+                    val toggleButton =
+                        if (component.component ==
+                            Components.WILDERNESS_WARNING_382
+                        ) {
+                            26
+                        } else if (component.component == Components.CWS_WARNING_24_581) {
+                            19
+                        } else {
+                            21
+                        }
                     sendInterfaceConfig(player, component.component, toggleButton, false)
                     sendMessage(player, "You can now disable this warning in the settings.")
                 }

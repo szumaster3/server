@@ -137,9 +137,7 @@ object EssenceTeleport {
         )
     }
 
-    fun getStage(player: Player): Int {
-        return getVarp(player, 492)
-    }
+    fun getStage(player: Player): Int = getVarp(player, 492)
 
     val location: Location
         get() {

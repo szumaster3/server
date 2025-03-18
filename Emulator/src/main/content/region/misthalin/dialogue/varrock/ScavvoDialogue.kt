@@ -56,7 +56,5 @@ class ScavvoDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SCAVVO_537)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SCAVVO_537)
 }

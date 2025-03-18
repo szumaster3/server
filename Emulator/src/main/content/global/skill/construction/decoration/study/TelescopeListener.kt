@@ -13,7 +13,6 @@ import org.rs.consts.Scenery
 import java.util.concurrent.TimeUnit
 
 class TelescopeListener : InteractionListener {
-
     private val telescopeSceneryIDs = intArrayOf(Scenery.TELESCOPE_13656, Scenery.TELESCOPE_13657, Scenery.TELESCOPE_13658)
 
     override fun defineListeners() {

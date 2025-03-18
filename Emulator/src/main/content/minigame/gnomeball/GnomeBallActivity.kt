@@ -58,7 +58,5 @@ class GnomeBallActivity :
         return this
     }
 
-    override fun getSpawnLocation(): Location {
-        return Location.create(2383, 3488, 0)
-    }
+    override fun getSpawnLocation(): Location = Location.create(2383, 3488, 0)
 }

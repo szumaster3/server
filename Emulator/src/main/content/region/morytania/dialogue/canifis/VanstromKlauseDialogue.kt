@@ -40,11 +40,7 @@ class VanstromKlauseDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return VanstromKlauseDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = VanstromKlauseDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(2020)
-    }
+    override fun getIds(): IntArray = intArrayOf(2020)
 }

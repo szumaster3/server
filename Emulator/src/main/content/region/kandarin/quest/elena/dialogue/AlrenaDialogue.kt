@@ -270,7 +270,5 @@ class AlrenaDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALRENA_710)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALRENA_710)
 }

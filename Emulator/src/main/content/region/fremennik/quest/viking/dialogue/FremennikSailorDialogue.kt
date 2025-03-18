@@ -134,7 +134,5 @@ class FremennikSailorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.SAILOR_1385)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.SAILOR_1385)
 }

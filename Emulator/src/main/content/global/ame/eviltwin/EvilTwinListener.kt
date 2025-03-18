@@ -19,13 +19,9 @@ class EvilTwinListener :
     private val doorsId = org.rs.consts.Scenery.DOOR_14982
     private val controlPanel = org.rs.consts.Scenery.CONTROL_PANEL_14978
 
-    override fun defineAreaBorders(): Array<ZoneBorders> {
-        return arrayOf(getRegionBorders(EvilTwinUtils.region.id))
-    }
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(EvilTwinUtils.region.id))
 
-    override fun getRestrictions(): Array<ZoneRestriction> {
-        return arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
-    }
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
 
     override fun defineListeners() {
         on(mollyId, IntType.NPC, "talk-to") { player, node ->

@@ -16,9 +16,7 @@ class Compost : PersistTimer(500, "farming:compost", isSoft = true) {
         player = (entity as? Player)!!
     }
 
-    override fun getInitialRunDelay(): Int {
-        return 1
-    }
+    override fun getInitialRunDelay(): Int = 1
 
     override fun run(entity: Entity): Boolean {
         val removeList = ArrayList<CompostBins>()
@@ -35,13 +33,9 @@ class Compost : PersistTimer(500, "farming:compost", isSoft = true) {
         return binMap.isNotEmpty()
     }
 
-    fun getBin(bin: CompostBins): CompostBin {
-        return binMap[bin] ?: (CompostBin(player, bin).also { binMap[bin] = it })
-    }
+    fun getBin(bin: CompostBins): CompostBin = binMap[bin] ?: (CompostBin(player, bin).also { binMap[bin] = it })
 
-    fun getBins(): MutableCollection<CompostBin> {
-        return binMap.values
-    }
+    fun getBins(): MutableCollection<CompostBin> = binMap.values
 
     override fun save(
         root: JSONObject,

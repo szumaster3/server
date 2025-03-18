@@ -152,7 +152,5 @@ class FaladorGrapple : OptionHandler() {
     override fun getDestination(
         moving: Node,
         destination: Node,
-    ): Location? {
-        return if (destination.asScenery().id == 17050) Location.create(3032, 3388, 0) else null
-    }
+    ): Location? = if (destination.asScenery().id == 17050) Location.create(3032, 3388, 0) else null
 }

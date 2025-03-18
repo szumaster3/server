@@ -320,7 +320,5 @@ class DwarfDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AUSTRI_232, NPCs.VESTRI_3679)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AUSTRI_232, NPCs.VESTRI_3679)
 }

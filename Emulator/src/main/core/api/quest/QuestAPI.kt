@@ -13,9 +13,7 @@ import core.game.node.entity.player.link.quest.QuestRequirements
  * @param player The player whose quest points are being retrieved.
  * @return The total quest points the player has earned.
  */
-fun getQuestPoints(player: Player): Int {
-    return player.questRepository.points
-}
+fun getQuestPoints(player: Player): Int = player.questRepository.points
 
 /**
  * Retrieves the current stage of a specific quest for a player.
@@ -27,9 +25,7 @@ fun getQuestPoints(player: Player): Int {
 fun getQuestStage(
     player: Player,
     quest: String,
-): Int {
-    return player.questRepository.getStage(quest)
-}
+): Int = player.questRepository.getStage(quest)
 
 /**
  * Sets the stage of a specific quest for a player.
@@ -70,9 +66,7 @@ fun isQuestInProgress(
     quest: String,
     startStage: Int,
     endStage: Int,
-): Boolean {
-    return player.questRepository.getStage(quest) in startStage..endStage
-}
+): Boolean = player.questRepository.getStage(quest) in startStage..endStage
 
 /**
  * Checks if a quest is complete for a player (stage 100).
@@ -84,9 +78,7 @@ fun isQuestInProgress(
 fun isQuestComplete(
     player: Player,
     quest: String,
-): Boolean {
-    return player.questRepository.getStage(quest) == 100
-}
+): Boolean = player.questRepository.getStage(quest) == 100
 
 /**
  * Retrieves the quest object for a player.
@@ -98,9 +90,7 @@ fun isQuestComplete(
 fun getQuest(
     player: Player,
     quest: String,
-): Quest {
-    return player.questRepository.getQuest(quest)
-}
+): Quest = player.questRepository.getQuest(quest)
 
 /**
  * Starts a quest for a player if they meet the necessary requirements.

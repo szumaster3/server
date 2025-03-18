@@ -1,7 +1,7 @@
 package content.region.asgarnia.quest.rd.handlers.tests
 
-import content.region.asgarnia.quest.rd.handlers.RDUtils.ATTRIBUTE_NPC_SPAWN
 import content.region.asgarnia.quest.rd.RecruitmentDrive
+import content.region.asgarnia.quest.rd.handlers.RDUtils.ATTRIBUTE_NPC_SPAWN
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile

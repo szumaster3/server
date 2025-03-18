@@ -113,8 +113,8 @@ object Login {
         buffer: ByteBuffer,
         exponent: BigInteger,
         modulus: BigInteger,
-    ): ByteBuffer {
-        return try {
+    ): ByteBuffer =
+        try {
             val numBytes = buffer.get().toInt() and 0xFF
             val encryptedBytes = ByteArray(numBytes)
             buffer.get(encryptedBytes)
@@ -124,7 +124,6 @@ object Login {
         } catch (e: BufferUnderflowException) {
             ByteBuffer.wrap(byteArrayOf(-1))
         }
-    }
 
     private fun noop(
         buffer: ByteBuffer,
@@ -164,9 +163,8 @@ object Login {
         }
     }
 
-    private fun canBypassAccountLimitCheck(player: Player): Boolean {
-        return player.rights == Rights.ADMINISTRATOR || player.rights == Rights.PLAYER_MODERATOR
-    }
+    private fun canBypassAccountLimitCheck(player: Player): Boolean =
+        player.rights == Rights.ADMINISTRATOR || player.rights == Rights.PLAYER_MODERATOR
 
     private fun proceedWithAcceptableLogin(
         session: IoSession,

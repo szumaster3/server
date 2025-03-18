@@ -43,11 +43,7 @@ class FullangrDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return FullangrDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = FullangrDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FULLANGR_3934)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FULLANGR_3934)
 }

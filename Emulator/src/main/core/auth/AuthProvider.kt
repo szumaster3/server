@@ -8,9 +8,7 @@ abstract class AuthProvider<T : AccountStorageProvider> {
 
     abstract fun configureFor(provider: T)
 
-    fun canCreateAccountWith(info: UserAccountInfo): Boolean {
-        return !storageProvider.checkUsernameTaken(info.username)
-    }
+    fun canCreateAccountWith(info: UserAccountInfo): Boolean = !storageProvider.checkUsernameTaken(info.username)
 
     abstract fun createAccountWith(info: UserAccountInfo): Boolean
 

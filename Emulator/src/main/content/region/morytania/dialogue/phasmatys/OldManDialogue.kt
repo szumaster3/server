@@ -52,7 +52,5 @@ class OldManDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.OLD_MAN_1696)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.OLD_MAN_1696)
 }

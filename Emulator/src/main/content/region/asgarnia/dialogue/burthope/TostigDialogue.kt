@@ -57,7 +57,5 @@ class TostigDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TOSTIG_1079)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.TOSTIG_1079)
 }

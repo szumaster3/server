@@ -132,11 +132,7 @@ class AliTheLeafletDialogue(
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue {
-        return AliTheLeafletDialogue(player)
-    }
+    override fun newInstance(player: Player?): Dialogue = AliTheLeafletDialogue(player)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ALI_THE_LEAFLET_DROPPER_3680)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.ALI_THE_LEAFLET_DROPPER_3680)
 }

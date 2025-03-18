@@ -169,7 +169,7 @@ class MuseumListener :
          */
 
         on(intArrayOf(Scenery.GATE_24560, Scenery.GATE_24561), IntType.SCENERY, "open") { player, node ->
-            if(player.viewport.region.id == 6483) return@on true
+            if (player.viewport.region.id == 6483) return@on true
             if (!isQuestComplete(player, Quests.THE_DIG_SITE)) {
                 sendMessage(player, "You can't go through there, it's for Dig Site workmen only.")
                 sendChat(findLocalNPC(player, NPCs.MUSEUM_GUARD_5942)!!, "Sorry - workman's gate only.")

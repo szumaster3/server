@@ -10,7 +10,5 @@ class WeightedChanceItem(
 ) {
     constructor(id: Int, amount: Int, weight: Int) : this(id, amount, amount, weight)
 
-    fun getItem(): Item {
-        return Item(id, RandomFunction.random(minimumAmount, maximumAmount))
-    }
+    fun getItem(): Item = Item(id, RandomFunction.random(minimumAmount, maximumAmount))
 }

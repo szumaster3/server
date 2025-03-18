@@ -152,7 +152,5 @@ class HobbesDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOBBES_808)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HOBBES_808)
 }

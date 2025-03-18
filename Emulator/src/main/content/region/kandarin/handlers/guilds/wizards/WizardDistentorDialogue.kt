@@ -62,7 +62,5 @@ class WizardDistentorDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.WIZARD_DISTENTOR_462)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_DISTENTOR_462)
 }

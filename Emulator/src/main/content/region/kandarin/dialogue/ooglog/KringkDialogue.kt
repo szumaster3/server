@@ -92,9 +92,7 @@ class KringkDialogue(
         return true
     }
 
-    override fun newInstance(player: Player): Dialogue {
-        return KringkDialogue(player)
-    }
+    override fun newInstance(player: Player): Dialogue = KringkDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(7099)
 }

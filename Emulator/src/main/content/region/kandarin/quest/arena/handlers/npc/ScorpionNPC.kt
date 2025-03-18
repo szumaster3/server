@@ -23,13 +23,9 @@ class ScorpionNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC {
-        return ScorpionNPC(id, location)
-    }
+    ): AbstractNPC = ScorpionNPC(id, location)
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.KHAZARD_SCORPION_271)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_SCORPION_271)
 
     companion object {
         fun spawnScorpion(player: Player) {

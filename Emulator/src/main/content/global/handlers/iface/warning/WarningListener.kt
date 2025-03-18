@@ -66,10 +66,11 @@ class WarningListener :
                         closeOverlay(player)
                         closeInterface(player)
 
-                        val warnings = mapOf(
-                            Components.CWS_WARNING_24_581 to 3872,
-                            Components.CWS_WARNING_26_627 to 4132
-                        )
+                        val warnings =
+                            mapOf(
+                                Components.CWS_WARNING_24_581 to 3872,
+                                Components.CWS_WARNING_26_627 to 4132,
+                            )
 
                         if (component.id == Components.WILDERNESS_WARNING_382) {
                             player.interfaceManager.close()
@@ -141,7 +142,7 @@ class WarningListener :
                             Components.CWS_WARNING_1_574 -> {
                                 // Dagannoth kings
                                 // if(player.viewport.region.id != 12181) {
-                                    teleport(player, Location.create(2899, 4449, 0))
+                                teleport(player, Location.create(2899, 4449, 0))
                                 // } else {
                                 //     // Icy cavern
                                 //     teleport(player, Location.create(3056, 9555, 0))
@@ -162,12 +163,13 @@ class WarningListener :
                             }
 
                             Components.CWS_WARNING_4_579 -> {
-                                val ladderLocation = when {
-                                    inBorders(player, ZoneBorders(1836, 5174, 1930, 5257)) -> Location.create(2042, 5245, 0)
-                                    inBorders(player, ZoneBorders(1977, 5176, 2066, 5265)) -> Location.create(2123, 5252, 0)
-                                    inBorders(player, ZoneBorders(2090, 5246, 2197, 5336)) -> Location.create(2358, 5215, 0)
-                                    else -> null
-                                }
+                                val ladderLocation =
+                                    when {
+                                        inBorders(player, ZoneBorders(1836, 5174, 1930, 5257)) -> Location.create(2042, 5245, 0)
+                                        inBorders(player, ZoneBorders(1977, 5176, 2066, 5265)) -> Location.create(2123, 5252, 0)
+                                        inBorders(player, ZoneBorders(2090, 5246, 2197, 5336)) -> Location.create(2358, 5215, 0)
+                                        else -> null
+                                    }
                                 climb(player, Animation(Animations.MULTI_BEND_OVER_827), ladderLocation)
                                 WarningManager.increment(player, component.id)
                             }
@@ -428,10 +430,9 @@ class WarningListener :
     private fun shouldWarnCrossing(
         player: Player,
         ditch: core.game.node.scenery.Scenery,
-    ): Boolean {
-        return (ditch.rotation % 2 == 0 && player.location.y <= ditch.location.y) ||
+    ): Boolean =
+        (ditch.rotation % 2 == 0 && player.location.y <= ditch.location.y) ||
             (ditch.rotation % 2 != 0 && player.location.x > ditch.location.x)
-    }
 
     private fun getDitchLocations(
         playerLocation: Location,

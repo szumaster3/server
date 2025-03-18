@@ -44,21 +44,17 @@ class DuelArenaActivity : ActivityPlugin("Duel arena", false, false, true) {
     }
 
     @Throws(Throwable::class)
-    override fun newInstance(p: Player): ActivityPlugin {
-        return this
-    }
+    override fun newInstance(p: Player): ActivityPlugin = this
 
-    override fun getSpawnLocation(): Location? {
-        return null
-    }
+    override fun getSpawnLocation(): Location? = null
 
     override fun continueAttack(
         e: Entity,
         target: Node,
         style: CombatStyle,
         message: Boolean,
-    ): Boolean {
-        return if (e.isPlayer &&
+    ): Boolean =
+        if (e.isPlayer &&
             e
                 .asPlayer()
                 .zoneMonitor.zones.size > 1
@@ -67,7 +63,6 @@ class DuelArenaActivity : ActivityPlugin("Duel arena", false, false, true) {
         } else {
             false
         }
-    }
 
     override fun interact(
         e: Entity,

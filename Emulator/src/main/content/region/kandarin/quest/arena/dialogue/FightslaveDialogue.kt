@@ -35,7 +35,5 @@ class FightslaveDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FIGHTSLAVE_262)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIGHTSLAVE_262)
 }

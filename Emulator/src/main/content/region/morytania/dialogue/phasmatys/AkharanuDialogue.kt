@@ -54,7 +54,5 @@ class AkharanuDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.AK_HARANU_1688, NPCs.AK_HARANU_1689)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.AK_HARANU_1688, NPCs.AK_HARANU_1689)
 }

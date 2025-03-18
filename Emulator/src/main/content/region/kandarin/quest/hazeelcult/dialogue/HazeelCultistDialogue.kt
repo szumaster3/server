@@ -67,7 +67,5 @@ class HazeelCultistDialogue(
         return true
     }
 
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HAZEEL_CULTIST_894)
-    }
+    override fun getIds(): IntArray = intArrayOf(NPCs.HAZEEL_CULTIST_894)
 }
