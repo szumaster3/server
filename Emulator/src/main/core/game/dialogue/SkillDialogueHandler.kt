@@ -11,6 +11,13 @@ import core.net.packet.out.RepositionChild
 import core.tools.StringUtils
 import org.rs.consts.Components
 
+/**
+ * Handles dialogues related to skills and item interactions.
+ *
+ * @param player The player interacting with the dialogue.
+ * @param type The type of skill dialogue to display.
+ * @param data Additional data associated with the dialogue (e.g., items).
+ */
 open class SkillDialogueHandler(
     val player: Player,
     val type: SkillDialogue?,
@@ -18,10 +25,16 @@ open class SkillDialogueHandler(
 ) {
     val data: Array<Any>
 
+    /**
+     * Opens the skill dialogue interface for the player.
+     */
     fun open() {
         player.dialogueInterpreter.open(SKILL_DIALOGUE, this)
     }
 
+    /**
+     * Displays the skill dialogue based on the specified type.
+     */
     fun display() {
         if (type == null) {
             player.debug("Error! Type is null.")
@@ -30,21 +43,57 @@ open class SkillDialogueHandler(
         type.display(player, this)
     }
 
+    /**
+     * Creates a skill dialogue based on the amount and index provided.
+     * Can be overridden in subclasses to handle custom logic.
+     *
+     * @param amount The amount of the item to interact with.
+     * @param index The index of the item to be interacted with.
+     */
     open fun create(
         amount: Int,
         index: Int,
-    ) {}
+    ) {
+    }
 
+    /**
+     * Gets the amount of the specified item in the player's inventory.
+     *
+     * @param index The index of the item in the dialogue data.
+     * @return The amount of the item in the player's inventory.
+     */
     open fun getAll(index: Int): Int = player.inventory.getAmount(data[0] as Item)
 
+    /**
+     * Gets the name of the specified item.
+     *
+     * @param item The item to get the name for.
+     * @return The formatted name of the item.
+     */
     protected open fun getName(item: Item): String = StringUtils.formatDisplayName(item.name.replace("Unfired", ""))
 
+    /**
+     * Represents different types of skill dialogues.
+     *
+     * @param interfaceId The ID of the interface to be used for the dialogue.
+     * @param baseButton The base button ID for the options in the dialogue.
+     * @param length The number of options available in the dialogue.
+     */
     enum class SkillDialogue(
         val interfaceId: Int,
         private val baseButton: Int,
         private val length: Int,
     ) {
+        /**
+         * A one-option skill dialogue with an item.
+         */
         ONE_OPTION(Components.SKILL_MULTI1_309, 5, 1) {
+            /**
+             * Displays the dialogue for one option.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -62,19 +111,34 @@ open class SkillDialogueHandler(
                 repositionChild(player, Components.SKILL_MULTI1_309, 6, 60, 35)
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
-            ): Int =
-                when (buttonId) {
-                    5 -> 1
-                    4 -> 5
-                    3 -> -1
-                    else -> handler.getAll(getIndex(handler, buttonId))
-                }
+            ): Int = when (buttonId) {
+                5 -> 1
+                4 -> 5
+                3 -> -1
+                else -> handler.getAll(getIndex(handler, buttonId))
+            }
         },
 
+        /**
+         * A make set one-option skill dialogue for crafting sets.
+         */
         MAKE_SET_ONE_OPTION(Components.SKILL_MULTI1_SMALL_582, 4, 1) {
+            /**
+             * Displays the dialogue for making a set with one option.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -91,20 +155,32 @@ open class SkillDialogueHandler(
                 repositionChild(player, Components.SKILL_MULTI1_SMALL_582, 5, 60, 35)
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
-            ): Int =
-                when (buttonId) {
-                    5 -> 1
-                    4 -> 1
-                    3 -> 5
-                    2 -> 10
-                    else -> 10
-                }
+            ): Int = when (buttonId) {
+                5 -> 1
+                4 -> 1
+                3 -> 5
+                2 -> 10
+                else -> 10
+            }
         },
 
         TWO_OPTION(Components.SKILL_MAKE_303, 7, 2) {
+            /**
+             * Displays the dialogue for two options.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -125,6 +201,13 @@ open class SkillDialogueHandler(
                 }
             }
 
+            /**
+             * Gets the index for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The index associated with the button.
+             */
             override fun getIndex(
                 handler: SkillDialogueHandler?,
                 buttonId: Int,
@@ -136,6 +219,13 @@ open class SkillDialogueHandler(
                 return 1
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
@@ -151,6 +241,12 @@ open class SkillDialogueHandler(
         },
 
         THREE_OPTION(Components.SKILL_MAKE_304, 8, 3) {
+            /**
+             * Displays the dialogue for three options.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -169,6 +265,13 @@ open class SkillDialogueHandler(
                 }
             }
 
+            /**
+             * Gets the index for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The index associated with the button.
+             */
             override fun getIndex(
                 handler: SkillDialogueHandler?,
                 buttonId: Int,
@@ -181,6 +284,13 @@ open class SkillDialogueHandler(
                 return 1
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
@@ -196,6 +306,12 @@ open class SkillDialogueHandler(
         },
 
         FOUR_OPTION(Components.SKILL_MAKE_305, 9, 4) {
+            /**
+             * Displays the dialogue for four options.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -210,6 +326,13 @@ open class SkillDialogueHandler(
                 }
             }
 
+            /**
+             * Gets the index for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The index associated with the button.
+             */
             override fun getIndex(
                 handler: SkillDialogueHandler?,
                 buttonId: Int,
@@ -223,6 +346,13 @@ open class SkillDialogueHandler(
                 return 0
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
@@ -238,15 +368,20 @@ open class SkillDialogueHandler(
         },
 
         FIVE_OPTION(Components.SKILL_MAKE_306, 7, 5) {
-            private val positions =
-                arrayOf(
-                    intArrayOf(10, 30),
-                    intArrayOf(117, 10),
-                    intArrayOf(217, 20),
-                    intArrayOf(317, 15),
-                    intArrayOf(408, 15),
-                )
+            private val positions = arrayOf(
+                intArrayOf(10, 30),
+                intArrayOf(117, 10),
+                intArrayOf(217, 20),
+                intArrayOf(317, 15),
+                intArrayOf(408, 15),
+            )
 
+            /**
+             * Displays the dialogue for five options.
+             *
+             * @param player The player interacting with the dialogue.
+             * @param handler The skill dialogue handler.
+             */
             override fun display(
                 player: Player,
                 handler: SkillDialogueHandler,
@@ -277,6 +412,13 @@ open class SkillDialogueHandler(
                 repositionChild(player, Components.SKILL_MAKE_306, 1, 431, 15)
             }
 
+            /**
+             * Gets the index for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The index associated with the button.
+             */
             override fun getIndex(
                 handler: SkillDialogueHandler?,
                 buttonId: Int,
@@ -291,6 +433,13 @@ open class SkillDialogueHandler(
                 return 0
             }
 
+            /**
+             * Gets the amount for a button press.
+             *
+             * @param handler The skill dialogue handler.
+             * @param buttonId The ID of the button pressed.
+             * @return The amount associated with the button.
+             */
             override fun getAmount(
                 handler: SkillDialogueHandler,
                 buttonId: Int,
@@ -305,11 +454,25 @@ open class SkillDialogueHandler(
             }
         }, ;
 
+        /**
+         * Displays the skill dialogue for this type.
+         *
+         * @param player The player interacting with the dialogue.
+         * @param handler The skill dialogue handler.
+         */
         open fun display(
             player: Player,
             handler: SkillDialogueHandler,
-        ) {}
+        ) {
+        }
 
+        /**
+         * Gets the amount of items associated with a button press.
+         *
+         * @param handler The skill dialogue handler.
+         * @param buttonId The ID of the button pressed.
+         * @return The amount of items to be handled.
+         */
         open fun getAmount(
             handler: SkillDialogueHandler,
             buttonId: Int,
@@ -333,6 +496,13 @@ open class SkillDialogueHandler(
             return -1
         }
 
+        /**
+         * Gets the index associated with a button press.
+         *
+         * @param handler The skill dialogue handler.
+         * @param buttonId The ID of the button pressed.
+         * @return The index of the button.
+         */
         open fun getIndex(
             handler: SkillDialogueHandler?,
             buttonId: Int,
@@ -353,6 +523,12 @@ open class SkillDialogueHandler(
         }
 
         companion object {
+            /**
+             * Finds the dialogue type for a specific length.
+             *
+             * @param length2 The length of the dialogue options.
+             * @return The corresponding skill dialogue type.
+             */
             fun forLength(length2: Int): SkillDialogue? {
                 for (dial in values()) {
                     if (dial.length == length2) {
