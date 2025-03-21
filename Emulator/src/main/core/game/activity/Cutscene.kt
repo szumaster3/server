@@ -27,21 +27,64 @@ import core.game.world.map.path.Pathfinder
 import core.tools.Log
 import org.rs.consts.Components
 
+/**
+ * An abstract class representing a cutscene that a player experiences in the game.
+ * It controls the setup and progression of a cutscene, handling various events and actions like teleportation,
+ * NPC movements, camera movements, and dialogues.
+ *
+ * @property player The player who is experiencing the cutscene.
+ */
 abstract class Cutscene(
     val player: Player,
 ) {
+    /**
+     * The region in which the cutscene is taking place.
+     */
     lateinit var region: Region
+
+    /**
+     * The base location for the cutscene, typically used for positioning NPCs and other elements.
+     */
     lateinit var base: Location
+
+    /**
+     * The location to which the player will be teleported when the cutscene ends.
+     */
     var exitLocation: Location = player.location.transform(0, 0, 0)
+
+    /**
+     * A flag indicating whether the cutscene has ended.
+     */
     var ended = false
 
+    /**
+     * The camera used to control the player's view during the cutscene.
+     */
     val camera = PlayerCamera(player)
+
+    /**
+     * A map that holds NPCs that have been added to the cutscene, identified by their NPC ID.
+     */
     private val addedNPCs = HashMap<Int, ArrayList<NPC>>()
 
+    /**
+     * Sets up the cutscene. This method should be implemented by subclasses to define the specifics of the cutscene.
+     */
     abstract fun setup()
 
+    /**
+     * Runs the specified stage of the cutscene.
+     *
+     * @param stage The stage to run.
+     */
     abstract fun runStage(stage: Int)
 
+    /**
+     * Loads a new region for the cutscene based on the provided region ID.
+     * Clears any previously added NPCs and logs the region creation.
+     *
+     * @param regionId The ID of the new region.
+     */
     fun loadRegion(regionId: Int) {
         clearNPCs()
         logCutscene("Creating new instance of region $regionId for ${player.username}.")
@@ -50,18 +93,32 @@ abstract class Cutscene(
         base = region.baseLocation
     }
 
+    /**
+     * Fades the player's screen to black, typically used to signify the start of a cutscene.
+     */
     fun fadeToBlack() {
         logCutscene("Fading ${player.username}'s screen to black.")
         player.interfaceManager.closeOverlay()
         player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
     }
 
+    /**
+     * Fades the player's screen from black to normal.
+     */
     fun fadeFromBlack() {
         logCutscene("Fading ${player.username}'s screen from black to normal.")
         player.interfaceManager.closeOverlay()
         player.interfaceManager.openOverlay(Component(Components.FADE_FROM_BLACK_170))
     }
 
+    /**
+     * Teleports an entity (player, NPC, etc.) to a specified location.
+     *
+     * @param entity The entity to teleport.
+     * @param regionX The X-coordinate in the region.
+     * @param regionY The Y-coordinate in the region.
+     * @param plane The plane (height level) of the location. Defaults to 0.
+     */
     fun teleport(
         entity: Entity,
         regionX: Int,
@@ -75,6 +132,13 @@ abstract class Cutscene(
         entity.properties.teleportLocation = newLoc
     }
 
+    /**
+     * Moves an entity (player, NPC, etc.) to a specified location in the region.
+     *
+     * @param entity The entity to move.
+     * @param regionX The X-coordinate in the region.
+     * @param regionY The Y-coordinate in the region.
+     */
     fun move(
         entity: Entity,
         regionX: Int,
@@ -88,6 +152,15 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Updates the dialogue of an NPC during the cutscene.
+     *
+     * @param npcId The ID of the NPC.
+     * @param expression The facial expression of the NPC.
+     * @param message The message to display.
+     * @param onContinue The action to perform when the dialogue is continued.
+     * @param hide Whether to hide the dialogue after it's shown.
+     */
     fun dialogueUpdate(
         npcId: Int,
         expression: FaceAnim,
@@ -100,6 +173,14 @@ abstract class Cutscene(
         player.dialogueInterpreter.addAction { _, _ -> onContinue.invoke() }
     }
 
+    /**
+     * Updates the dialogue with multiple lines for an NPC during the cutscene.
+     *
+     * @param npcId The ID of the NPC.
+     * @param expression The facial expression of the NPC.
+     * @param message The messages to display.
+     * @param onContinue The action to perform when the dialogue is continued.
+     */
     fun dialogueLinesUpdate(
         npcId: Int,
         expression: FaceAnim,
@@ -111,11 +192,20 @@ abstract class Cutscene(
         player.dialogueInterpreter.addAction { _, _ -> onContinue.invoke() }
     }
 
+    /**
+     * Closes the current dialogue.
+     */
     fun dialogueClose() {
         logCutscene("Sending dialogue close.")
         closeDialogue(player)
     }
 
+    /**
+     * Updates the player's dialogue with a standard message during the cutscene.
+     *
+     * @param message The message to display.
+     * @param onContinue The action to perform when the dialogue is continued.
+     */
     fun dialogueUpdate(
         message: String,
         onContinue: () -> Unit = { incrementStage() },
@@ -125,6 +215,13 @@ abstract class Cutscene(
         player.dialogueInterpreter.addAction { _, _ -> onContinue.invoke() }
     }
 
+    /**
+     * Updates the player's dialogue with a message and a facial expression during the cutscene.
+     *
+     * @param expression The facial expression of the player.
+     * @param message The message to display.
+     * @param onContinue The action to perform when the dialogue is continued.
+     */
     fun playerDialogueUpdate(
         expression: FaceAnim,
         message: String,
@@ -135,11 +232,17 @@ abstract class Cutscene(
         player.dialogueInterpreter.addAction { _, _ -> onContinue.invoke() }
     }
 
+    /**
+     * Executes a timed update that will trigger after a set number of ticks.
+     *
+     * @param ticks The number of ticks to wait before triggering the update.
+     * @param newStage The new stage to move to after the update, or -1 to increment the stage.
+     */
     fun timedUpdate(
         ticks: Int,
         newStage: Int = -1,
     ) {
-        logCutscene("Executing timed updated for $ticks ticks.")
+        logCutscene("Executing timed update for $ticks ticks.")
         GameWorld.Pulser.submit(
             object : Pulse(ticks) {
                 override fun pulse(): Boolean {
@@ -154,10 +257,30 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Retrieves an NPC by its ID if it has been added to the cutscene.
+     *
+     * @param id The ID of the NPC.
+     * @return The NPC, or null if it was not added.
+     */
     fun getNPC(id: Int): NPC? = addedNPCs[id]?.firstOrNull()
 
+    /**
+     * Retrieves all NPCs of a given ID that have been added to the cutscene.
+     *
+     * @param id The ID of the NPC.
+     * @return A list of NPCs, possibly empty.
+     */
     fun getNPCs(id: Int): ArrayList<NPC> = addedNPCs[id] ?: ArrayList()
 
+    /**
+     * Retrieves an object in the cutscene by its coordinates.
+     *
+     * @param regionX The X-coordinate in the region.
+     * @param regionY The Y-coordinate in the region.
+     * @param plane The plane (height level) of the location. Defaults to 0.
+     * @return The object at the specified location, or null if not found.
+     */
     fun getObject(
         regionX: Int,
         regionY: Int,
@@ -168,6 +291,15 @@ abstract class Cutscene(
         return obj
     }
 
+    /**
+     * Adds an NPC to the cutscene at the specified coordinates and direction.
+     *
+     * @param id The ID of the NPC.
+     * @param regionX The X-coordinate in the region.
+     * @param regionY The Y-coordinate in the region.
+     * @param direction The direction the NPC should face.
+     * @param plane The plane (height level) of the location. Defaults to 0.
+     */
     fun addNPC(
         id: Int,
         regionX: Int,
@@ -191,10 +323,20 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Starts the cutscene and hides the minimap if requested.
+     *
+     * @param hideMiniMap A flag indicating whether to hide the minimap during the cutscene.
+     */
     fun start() {
         start(true)
     }
 
+    /**
+     * Starts the cutscene with the option to hide the minimap.
+     *
+     * @param hideMiniMap A flag indicating whether to hide the minimap during the cutscene.
+     */
     fun start(hideMiniMap: Boolean) {
         logCutscene("Starting cutscene for ${player.username}.")
         region = RegionManager.forId(player.location.regionId)
@@ -218,6 +360,12 @@ abstract class Cutscene(
         AntiMacro.pause(player)
     }
 
+    /**
+     * Ends the cutscene with a fade effect and optional additional actions.
+     *
+     * @param fade Whether to include a fade effect when ending the cutscene.
+     * @param endActions Additional actions to perform when the cutscene ends.
+     */
     fun end(
         fade: Boolean = true,
         endActions: (() -> Unit)? = null,
@@ -271,6 +419,11 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Ends the cutscene without a fade effect and optional additional actions.
+     *
+     * @param endActions Additional actions to perform when the cutscene ends.
+     */
     fun endWithoutFade(endActions: (() -> Unit)? = null) {
         ended = true
         GameWorld.Pulser.submit(
@@ -316,6 +469,11 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Ends the cutscene, optionally with additional actions.
+     *
+     * @param endActions Additional actions to perform when the cutscene ends.
+     */
     fun end(endActions: (() -> Unit)? = null) {
         ended = true
         fadeToBlack()
@@ -363,6 +521,14 @@ abstract class Cutscene(
         )
     }
 
+    /**
+     * Moves the camera to a specified location during the cutscene.
+     *
+     * @param regionX The X-coordinate in the region to move the camera to.
+     * @param regionY The Y-coordinate in the region to move the camera to.
+     * @param height The height (Z-axis) at which to set the camera. Defaults to 300.
+     * @param speed The speed at which the camera will move. Defaults to 100.
+     */
     fun moveCamera(
         regionX: Int,
         regionY: Int,
@@ -373,6 +539,14 @@ abstract class Cutscene(
         camera.panTo(globalLoc.x, globalLoc.y, height, speed)
     }
 
+    /**
+     * Rotates the camera to a specified location during the cutscene.
+     *
+     * @param regionX The X-coordinate in the region to rotate the camera to.
+     * @param regionY The Y-coordinate in the region to rotate the camera to.
+     * @param height The height (Z-axis) at which to set the camera. Defaults to 300.
+     * @param speed The speed at which the camera will rotate. Defaults to 100.
+     */
     fun rotateCamera(
         regionX: Int,
         regionY: Int,
@@ -383,6 +557,14 @@ abstract class Cutscene(
         camera.rotateTo(globalLoc.x, globalLoc.y, height, speed)
     }
 
+    /**
+     * Rotates the camera by a specified difference during the cutscene.
+     *
+     * @param diffX The difference in the X-axis to rotate the camera by.
+     * @param diffY The difference in the Y-axis to rotate the camera by.
+     * @param diffHeight The difference in the height (Z-axis) to rotate the camera by. Defaults to 300.
+     * @param diffSpeed The speed at which to rotate the camera. Defaults to 100.
+     */
     fun rotateCameraBy(
         diffX: Int,
         diffY: Int,
@@ -392,6 +574,15 @@ abstract class Cutscene(
         camera.rotateBy(diffX, diffY, diffHeight, diffSpeed)
     }
 
+    /**
+     * Shakes the camera with a specified shake type and intensity.
+     *
+     * @param cameraType The type of camera shake to apply.
+     * @param jitter The intensity of the shake's jitter. Defaults to 0.
+     * @param amplitude The amplitude of the shake. Defaults to 0.
+     * @param frequency The frequency of the shake. Defaults to 128.
+     * @param speed The speed at which the shake occurs. Defaults to 2.
+     */
     fun shakeCamera(
         cameraType: CameraShakeType,
         jitter: Int = 0,
@@ -402,35 +593,62 @@ abstract class Cutscene(
         camera.shake(cameraType.ordinal, jitter, amplitude, frequency, speed)
     }
 
+    /**
+     * Resets the camera to its original state.
+     */
     fun resetCamera() {
         camera.reset()
     }
 
+    /**
+     * Sets the exit location of the cutscene.
+     *
+     * @param location The location to set as the exit.
+     */
     fun setExit(location: Location) {
         exitLocation = location
     }
 
+    /**
+     * Loads the current stage of the cutscene and runs the appropriate actions.
+     */
     private fun loadCurrentStage() {
         if (ended) return
         runStage(player.getCutsceneStage())
     }
 
+    /**
+     * Increments the current stage of the cutscene and loads the next stage.
+     */
     fun incrementStage() {
         setAttribute(player, ATTRIBUTE_CUTSCENE_STAGE, player.getCutsceneStage() + 1)
         loadCurrentStage()
     }
 
+    /**
+     * Updates the stage to the specified stage and loads the new stage actions.
+     *
+     * @param newStage The stage number to update to.
+     */
     fun updateStage(newStage: Int) {
         setAttribute(player, ATTRIBUTE_CUTSCENE_STAGE, newStage)
         loadCurrentStage()
     }
 
+    /**
+     * Logs a message related to the cutscene, if cutscene logging is enabled.
+     *
+     * @param message The message to log.
+     */
     fun logCutscene(message: String) {
         if (ServerConstants.LOG_CUTSCENE) {
             log(this::class.java, Log.FINE, "$message")
         }
     }
 
+    /**
+     * Clears all NPCs associated with the cutscene.
+     */
     fun clearNPCs() {
         for (entry in addedNPCs.entries) {
             logCutscene("Clearing ${entry.value.size} NPCs with ID ${entry.key} for ${player.username}.")
