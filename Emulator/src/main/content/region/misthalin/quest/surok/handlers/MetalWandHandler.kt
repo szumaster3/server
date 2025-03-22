@@ -1,6 +1,6 @@
 package content.region.misthalin.quest.surok.handlers
 
-import content.global.skill.runecrafting.scenery.Altar
+import content.global.skill.runecrafting.Altar
 import core.api.*
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler

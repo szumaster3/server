@@ -1,9 +1,9 @@
 package content.region.misthalin.handlers
 
 import content.data.items.SkillingTool
-import content.global.skill.runecrafting.pouch.PouchManager.Pouches
-import content.global.skill.runecrafting.pouch.RunePouch
-import content.global.skill.runecrafting.scenery.Altar
+import content.global.skill.runecrafting.PouchManager.Pouches
+import content.global.skill.runecrafting.RunePouch
+import content.global.skill.runecrafting.Altar
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.api.skill.getTool

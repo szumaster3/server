@@ -58,7 +58,7 @@ public class BrawlingGlovesManager implements LoginListener, PersistPlayer {
             JSONArray bgData = (JSONArray) data.get("brawlingGloves");
             for (Object bg : bgData) {
                 JSONObject glove = (JSONObject) bg;
-                instance.registerGlove(BrawlingGloves.forIndicator(Integer.parseInt(glove.get("gloveId").toString())).getId(), Integer.parseInt(glove.get("charges").toString()));
+                instance.registerGlove(BrawlingGloves.forIndicator(Integer.parseInt(glove.get("gloveId").toString())).id, Integer.parseInt(glove.get("charges").toString()));
             }
         }
     }
@@ -69,7 +69,7 @@ public class BrawlingGlovesManager implements LoginListener, PersistPlayer {
             JSONArray brawlingGloves = new JSONArray();
             getInstance(player).GloveCharges.entrySet().forEach(glove -> {
                 JSONObject bGlove = new JSONObject();
-                bGlove.put("gloveId", Integer.toString(BrawlingGloves.forId(glove.getKey()).getIndicator()));
+                bGlove.put("gloveId", Integer.toString(BrawlingGloves.forId(glove.getKey()).indicator));
                 bGlove.put("charges", Integer.toString(glove.getValue()));
                 brawlingGloves.add(bGlove);
             });
@@ -84,7 +84,7 @@ public class BrawlingGlovesManager implements LoginListener, PersistPlayer {
      */
     public void registerGlove(int id) {
         try {
-            registerGlove(id, Objects.requireNonNull(BrawlingGloves.forId(id)).getCharges());
+            registerGlove(id, Objects.requireNonNull(BrawlingGloves.forId(id)).charges);
         } catch (Exception e) {
             e.printStackTrace();
         }

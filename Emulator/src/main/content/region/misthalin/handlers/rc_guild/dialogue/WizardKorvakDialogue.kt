@@ -1,6 +1,6 @@
 package content.region.misthalin.handlers.rc_guild.dialogue
 
-import content.global.skill.runecrafting.pouch.PouchManager
+import content.global.skill.runecrafting.PouchManager
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

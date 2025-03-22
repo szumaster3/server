@@ -1,6 +1,5 @@
 package content.global.skill.cooking
 
-import content.global.skill.cooking.data.CookableItem
 import core.api.getStatLevel
 import core.api.playAudio
 import core.api.quest.isQuestComplete

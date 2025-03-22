@@ -1,7 +1,7 @@
 package core.game.global.action
 
 import content.data.GodType
-import content.global.skill.runecrafting.pouch.RunePouch
+import content.global.skill.runecrafting.RunePouch
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.event.PickUpEvent

@@ -1,9 +1,5 @@
 package content.global.skill.runecrafting
 
-import content.global.skill.runecrafting.items.Staves
-import content.global.skill.runecrafting.items.TalismanStaves
-import content.global.skill.runecrafting.items.Tiara
-import content.global.skill.runecrafting.scenery.Altar
 import core.api.*
 import core.api.ui.closeDialogue
 import core.game.interaction.IntType

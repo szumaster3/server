@@ -1,6 +1,5 @@
 package content.global.skill.cooking
 
-import content.global.skill.cooking.data.CookableItem
 import core.api.*
 import core.api.ui.repositionChild
 import core.game.dialogue.DialogueFile

@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.npc;
 
 import content.data.consumables.Consumables;
-import content.global.skill.cooking.data.CookableItem;
+import content.global.skill.cooking.CookableItem;
 import content.global.skill.gathering.fishing.Fish;
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;

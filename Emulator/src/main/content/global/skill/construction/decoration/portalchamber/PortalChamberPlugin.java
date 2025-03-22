@@ -2,7 +2,7 @@ package content.global.skill.construction.decoration.portalchamber;
 
 import content.global.skill.construction.Decoration;
 import content.global.skill.construction.Hotspot;
-import content.global.skill.runecrafting.runes.Rune;
+import content.global.skill.runecrafting.Rune;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.dialogue.Dialogue;
 import core.game.dialogue.DialogueInterpreter;

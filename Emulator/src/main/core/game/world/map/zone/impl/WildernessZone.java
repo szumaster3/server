@@ -98,7 +98,7 @@ public final class WildernessZone extends MapZone {
 
         if (RandomFunction.roll(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? cEleGloveRate : normalGloveRate)) {
             byte glove = (byte) RandomFunction.random(1, 14);
-            Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
+            Item reward = new Item(BrawlingGloves.forIndicator(glove).id);
             GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
             sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
         }

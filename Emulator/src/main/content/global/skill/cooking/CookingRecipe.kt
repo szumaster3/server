@@ -1,6 +1,5 @@
 package content.global.skill.cooking
 
-import content.global.skill.cooking.data.Recipe
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler

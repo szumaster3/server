@@ -1,6 +1,6 @@
 package content.region.misthalin.handlers.rc_guild
 
-import content.global.skill.runecrafting.items.Talisman
+import content.global.skill.runecrafting.Talisman
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
