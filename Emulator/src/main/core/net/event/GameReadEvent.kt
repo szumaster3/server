@@ -283,7 +283,7 @@ class GameReadEvent(
         var last = -1
         while (buffer.hasRemaining()) {
             val opcode = buffer.get().toInt() and 0xFF
-            val player = session.player ?: continue
+            val player = session.getPlayer() ?: continue
             val header = PACKET_SIZES[opcode]
             var size = if (header < 0) getPacketSize(buffer, opcode, header, last) else header
             if (size == -1) {

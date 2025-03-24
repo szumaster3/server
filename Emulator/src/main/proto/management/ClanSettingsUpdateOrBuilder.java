@@ -3,10 +3,7 @@
 
 package proto.management;
 
-/**
- * The interface Clan settings update or builder.
- */
 public interface ClanSettingsUpdateOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.ClanSettingsUpdate)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.ClanSettingsUpdate)
+        com.google.protobuf.MessageOrBuilder {
 }

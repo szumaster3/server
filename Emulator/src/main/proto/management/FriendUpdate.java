@@ -7,117 +7,501 @@ package proto.management;
  * Protobuf type {@code management.FriendUpdate}
  */
 public final class FriendUpdate extends
-    com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:management.FriendUpdate)
-    FriendUpdateOrBuilder {
-private static final long serialVersionUID = 0L;
-  // Use FriendUpdate.newBuilder() to construct.
-  private FriendUpdate(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-    super(builder);
-  }
-  private FriendUpdate() {
-    type_ = 0;
-    username_ = "";
-    friend_ = "";
-  }
-
-  @Override
-  @SuppressWarnings({"unused"})
-  protected Object newInstance(
-      UnusedPrivateParameter unused) {
-    return new FriendUpdate();
-  }
-
-  @Override
-  public final com.google.protobuf.UnknownFieldSet
-  getUnknownFields() {
-    return this.unknownFields;
-  }
-  private FriendUpdate(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    this();
-    if (extensionRegistry == null) {
-      throw new NullPointerException();
-    }
-    int mutable_bitField0_ = 0;
-    com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-        com.google.protobuf.UnknownFieldSet.newBuilder();
-    try {
-      boolean done = false;
-      while (!done) {
-        int tag = input.readTag();
-        switch (tag) {
-          case 0:
-            done = true;
-            break;
-          case 8: {
-            int rawValue = input.readEnum();
-              @SuppressWarnings("deprecation")
-            Type value = Type.valueOf(rawValue);
-            if (value == null) {
-              unknownFields.mergeVarintField(1, rawValue);
-            } else {
-              bitField0_ |= 0x00000001;
-              type_ = rawValue;
-            }
-            break;
-          }
-          case 18: {
-            com.google.protobuf.ByteString bs = input.readBytes();
-            bitField0_ |= 0x00000002;
-            username_ = bs;
-            break;
-          }
-          case 26: {
-            com.google.protobuf.ByteString bs = input.readBytes();
-            bitField0_ |= 0x00000004;
-            friend_ = bs;
-            break;
-          }
-          default: {
-            if (!parseUnknownField(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:management.FriendUpdate)
+        FriendUpdateOrBuilder {
+    public static final int TYPE_FIELD_NUMBER = 1;
+    public static final int USERNAME_FIELD_NUMBER = 2;
+    public static final int FRIEND_FIELD_NUMBER = 3;
+    @Deprecated
+    public static final com.google.protobuf.Parser<FriendUpdate>
+            PARSER = new com.google.protobuf.AbstractParser<FriendUpdate>() {
+        @Override
+        public FriendUpdate parsePartialFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws com.google.protobuf.InvalidProtocolBufferException {
+            return new FriendUpdate(input, extensionRegistry);
         }
-      }
-    } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-      throw e.setUnfinishedMessage(this);
-    } catch (java.io.IOException e) {
-      throw new com.google.protobuf.InvalidProtocolBufferException(
-          e).setUnfinishedMessage(this);
-    } finally {
-      this.unknownFields = unknownFields.build();
+    };
+    private static final long serialVersionUID = 0L;
+    // @@protoc_insertion_point(class_scope:management.FriendUpdate)
+    private static final FriendUpdate DEFAULT_INSTANCE;
+
+    static {
+        DEFAULT_INSTANCE = new FriendUpdate();
     }
-  }
+
+    private int bitField0_;
+    private int type_;
+    private volatile Object username_;
+    private volatile Object friend_;
+    private byte memoizedIsInitialized = -1;
+
+    // Use FriendUpdate.newBuilder() to construct.
+    private FriendUpdate(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+    }
+
+    private FriendUpdate() {
+        type_ = 0;
+        username_ = "";
+        friend_ = "";
+    }
+
+    private FriendUpdate(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+            throw new NullPointerException();
+        }
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+                com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+            boolean done = false;
+            while (!done) {
+                int tag = input.readTag();
+                switch (tag) {
+                    case 0:
+                        done = true;
+                        break;
+                    case 8: {
+                        int rawValue = input.readEnum();
+                        @SuppressWarnings("deprecation")
+                        Type value = Type.valueOf(rawValue);
+                        if (value == null) {
+                            unknownFields.mergeVarintField(1, rawValue);
+                        } else {
+                            bitField0_ |= 0x00000001;
+                            type_ = rawValue;
+                        }
+                        break;
+                    }
+                    case 18: {
+                        com.google.protobuf.ByteString bs = input.readBytes();
+                        bitField0_ |= 0x00000002;
+                        username_ = bs;
+                        break;
+                    }
+                    case 26: {
+                        com.google.protobuf.ByteString bs = input.readBytes();
+                        bitField0_ |= 0x00000004;
+                        friend_ = bs;
+                        break;
+                    }
+                    default: {
+                        if (!parseUnknownField(
+                                input, unknownFields, extensionRegistry, tag)) {
+                            done = true;
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+            throw new com.google.protobuf.InvalidProtocolBufferException(
+                    e).setUnfinishedMessage(this);
+        } finally {
+            this.unknownFields = unknownFields.build();
+            makeExtensionsImmutable();
+        }
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+    getDescriptor() {
+        return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
+    }
+
+    public static FriendUpdate parseFrom(
+            java.nio.ByteBuffer data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static FriendUpdate parseFrom(
+            java.nio.ByteBuffer data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static FriendUpdate parseFrom(
+            com.google.protobuf.ByteString data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static FriendUpdate parseFrom(
+            com.google.protobuf.ByteString data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static FriendUpdate parseFrom(byte[] data)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+    }
+
+    public static FriendUpdate parseFrom(
+            byte[] data,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+    }
+
+    public static FriendUpdate parseFrom(java.io.InputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseWithIOException(PARSER, input);
+    }
+
+    public static FriendUpdate parseFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static FriendUpdate parseDelimitedFrom(java.io.InputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static FriendUpdate parseDelimitedFrom(
+            java.io.InputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static FriendUpdate parseFrom(
+            com.google.protobuf.CodedInputStream input)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseWithIOException(PARSER, input);
+    }
+
+    public static FriendUpdate parseFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+                .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+    }
+
+    public static Builder newBuilder(FriendUpdate prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+
+    public static FriendUpdate getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+    }
+
+    public static com.google.protobuf.Parser<FriendUpdate> parser() {
+        return PARSER;
+    }
+
+    @Override
+    @SuppressWarnings({"unused"})
+    protected Object newInstance(
+            UnusedPrivateParameter unused) {
+        return new FriendUpdate();
+    }
+
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+        return this.unknownFields;
+    }
+
+    @Override
+    protected FieldAccessorTable
+    internalGetFieldAccessorTable() {
+        return ManagementProtos.internal_static_management_FriendUpdate_fieldAccessorTable
+                .ensureFieldAccessorsInitialized(
+                        FriendUpdate.class, Builder.class);
+    }
 
     /**
-     * Gets descriptor.
+     * <code>required .management.FriendUpdate.Type type = 1;</code>
      *
-     * @return the descriptor
+     * @return Whether the type field is set.
      */
-    public static final com.google.protobuf.Descriptors.Descriptor
-      getDescriptor() {
-    return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
-  }
+    @Override
+    public boolean hasType() {
+        return ((bitField0_ & 0x00000001) != 0);
+    }
 
-  @Override
-  protected FieldAccessorTable
-      internalGetFieldAccessorTable() {
-    return ManagementProtos.internal_static_management_FriendUpdate_fieldAccessorTable
-        .ensureFieldAccessorsInitialized(
-            FriendUpdate.class, Builder.class);
-  }
+    /**
+     * <code>required .management.FriendUpdate.Type type = 1;</code>
+     *
+     * @return The type.
+     */
+    @Override
+    public Type getType() {
+        @SuppressWarnings("deprecation")
+        Type result = Type.valueOf(type_);
+        return result == null ? Type.ADD : result;
+    }
+
+    /**
+     * <code>required string username = 2;</code>
+     *
+     * @return Whether the username field is set.
+     */
+    @Override
+    public boolean hasUsername() {
+        return ((bitField0_ & 0x00000002) != 0);
+    }
+
+    /**
+     * <code>required string username = 2;</code>
+     *
+     * @return The username.
+     */
+    @Override
+    public String getUsername() {
+        Object ref = username_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+                username_ = s;
+            }
+            return s;
+        }
+    }
+
+    /**
+     * <code>required string username = 2;</code>
+     *
+     * @return The bytes for username.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+    getUsernameBytes() {
+        Object ref = username_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            username_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    /**
+     * <code>required string friend = 3;</code>
+     *
+     * @return Whether the friend field is set.
+     */
+    @Override
+    public boolean hasFriend() {
+        return ((bitField0_ & 0x00000004) != 0);
+    }
+
+    /**
+     * <code>required string friend = 3;</code>
+     *
+     * @return The friend.
+     */
+    @Override
+    public String getFriend() {
+        Object ref = friend_;
+        if (ref instanceof String) {
+            return (String) ref;
+        } else {
+            com.google.protobuf.ByteString bs =
+                    (com.google.protobuf.ByteString) ref;
+            String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+                friend_ = s;
+            }
+            return s;
+        }
+    }
+
+    /**
+     * <code>required string friend = 3;</code>
+     *
+     * @return The bytes for friend.
+     */
+    @Override
+    public com.google.protobuf.ByteString
+    getFriendBytes() {
+        Object ref = friend_;
+        if (ref instanceof String) {
+            com.google.protobuf.ByteString b =
+                    com.google.protobuf.ByteString.copyFromUtf8(
+                            (String) ref);
+            friend_ = b;
+            return b;
+        } else {
+            return (com.google.protobuf.ByteString) ref;
+        }
+    }
+
+    @Override
+    public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasType()) {
+            memoizedIsInitialized = 0;
+            return false;
+        }
+        if (!hasUsername()) {
+            memoizedIsInitialized = 0;
+            return false;
+        }
+        if (!hasFriend()) {
+            memoizedIsInitialized = 0;
+            return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+    }
+
+    @Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+            throws java.io.IOException {
+        if (((bitField0_ & 0x00000001) != 0)) {
+            output.writeEnum(1, type_);
+        }
+        if (((bitField0_ & 0x00000002) != 0)) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 2, username_);
+        }
+        if (((bitField0_ & 0x00000004) != 0)) {
+            com.google.protobuf.GeneratedMessageV3.writeString(output, 3, friend_);
+        }
+        unknownFields.writeTo(output);
+    }
+
+    @Override
+    public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) != 0)) {
+            size += com.google.protobuf.CodedOutputStream
+                    .computeEnumSize(1, type_);
+        }
+        if (((bitField0_ & 0x00000002) != 0)) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, username_);
+        }
+        if (((bitField0_ & 0x00000004) != 0)) {
+            size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, friend_);
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof FriendUpdate)) {
+            return super.equals(obj);
+        }
+        FriendUpdate other = (FriendUpdate) obj;
+
+        if (hasType() != other.hasType()) return false;
+        if (hasType()) {
+            if (type_ != other.type_) return false;
+        }
+        if (hasUsername() != other.hasUsername()) return false;
+        if (hasUsername()) {
+            if (!getUsername()
+                    .equals(other.getUsername())) return false;
+        }
+        if (hasFriend() != other.hasFriend()) return false;
+        if (hasFriend()) {
+            if (!getFriend()
+                    .equals(other.getFriend())) return false;
+        }
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        if (memoizedHashCode != 0) {
+            return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        if (hasType()) {
+            hash = (37 * hash) + TYPE_FIELD_NUMBER;
+            hash = (53 * hash) + type_;
+        }
+        if (hasUsername()) {
+            hash = (37 * hash) + USERNAME_FIELD_NUMBER;
+            hash = (53 * hash) + getUsername().hashCode();
+        }
+        if (hasFriend()) {
+            hash = (37 * hash) + FRIEND_FIELD_NUMBER;
+            hash = (53 * hash) + getFriend().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+    }
+
+    @Override
+    public Builder newBuilderForType() {
+        return newBuilder();
+    }
+
+    @Override
+    public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+                ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @Override
+    protected Builder newBuilderForType(
+            BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+    }
+
+    @Override
+    public com.google.protobuf.Parser<FriendUpdate> getParserForType() {
+        return PARSER;
+    }
+
+    @Override
+    public FriendUpdate getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+    }
 
     /**
      * Protobuf enum {@code management.FriendUpdate.Type}
      */
     public enum Type
-      implements com.google.protobuf.ProtocolMessageEnum {
+            implements com.google.protobuf.ProtocolMessageEnum {
         /**
          * <code>ADD = 0;</code>
          */
@@ -126,7 +510,7 @@ private static final long serialVersionUID = 0L;
          * <code>REMOVE = 1;</code>
          */
         REMOVE(1),
-    ;
+        ;
 
         /**
          * <code>ADD = 0;</code>
@@ -136,755 +520,299 @@ private static final long serialVersionUID = 0L;
          * <code>REMOVE = 1;</code>
          */
         public static final int REMOVE_VALUE = 1;
+        private static final com.google.protobuf.Internal.EnumLiteMap<
+                Type> internalValueMap =
+                new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+                    public Type findValueByNumber(int number) {
+                        return Type.forNumber(number);
+                    }
+                };
+        private static final Type[] VALUES = values();
+        private final int value;
 
-
-    public final int getNumber() {
-      return value;
-    }
+        private Type(int value) {
+            this.value = value;
+        }
 
         /**
-         * Value of type.
-         *
          * @param value The numeric wire value of the corresponding enum entry.
          * @return The enum associated with the given numeric wire value.
          * @deprecated Use {@link #forNumber(int)} instead.
          */
         @Deprecated
-    public static Type valueOf(int value) {
-      return forNumber(value);
-    }
+        public static Type valueOf(int value) {
+            return forNumber(value);
+        }
 
         /**
-         * For number type.
-         *
          * @param value The numeric wire value of the corresponding enum entry.
          * @return The enum associated with the given numeric wire value.
          */
         public static Type forNumber(int value) {
-      switch (value) {
-        case 0: return ADD;
-        case 1: return REMOVE;
-        default: return null;
-      }
-    }
+            switch (value) {
+                case 0:
+                    return ADD;
+                case 1:
+                    return REMOVE;
+                default:
+                    return null;
+            }
+        }
 
-        /**
-         * Internal get value map com . google . protobuf . internal . enum lite map.
-         *
-         * @return the com . google . protobuf . internal . enum lite map
-         */
         public static com.google.protobuf.Internal.EnumLiteMap<Type>
         internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Type> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<Type>() {
-            public Type findValueByNumber(int number) {
-              return Type.forNumber(number);
-            }
-          };
+            return internalValueMap;
+        }
 
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-
-        /**
-         * Gets descriptor.
-         *
-         * @return the descriptor
-         */
         public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return FriendUpdate.getDescriptor().getEnumTypes().get(0);
-    }
+            return FriendUpdate.getDescriptor().getEnumTypes().get(0);
+        }
 
-    private static final Type[] VALUES = values();
-
-        /**
-         * Value of type.
-         *
-         * @param desc the desc
-         * @return the type
-         */
         public static Type valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      return VALUES[desc.getIndex()];
+                com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+            if (desc.getType() != getDescriptor()) {
+                throw new IllegalArgumentException(
+                        "EnumValueDescriptor is not for this type.");
+            }
+            return VALUES[desc.getIndex()];
+        }
+
+        public final int getNumber() {
+            return value;
+        }
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+            return getDescriptor().getValues().get(ordinal());
+        }
+
+        public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+            return getDescriptor();
+        }
+
+        // @@protoc_insertion_point(enum_scope:management.FriendUpdate.Type)
     }
-
-    private final int value;
-
-    private Type(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:management.FriendUpdate.Type)
-  }
-
-  private int bitField0_;
-    /**
-     * The constant TYPE_FIELD_NUMBER.
-     */
-    public static final int TYPE_FIELD_NUMBER = 1;
-  private int type_;
-  /**
-   * <code>required .management.FriendUpdate.Type type = 1;</code>
-   * @return Whether the type field is set.
-   */
-  @Override public boolean hasType() {
-    return ((bitField0_ & 0x00000001) != 0);
-  }
-  /**
-   * <code>required .management.FriendUpdate.Type type = 1;</code>
-   * @return The type.
-   */
-  @Override public Type getType() {
-    @SuppressWarnings("deprecation")
-    Type result = Type.valueOf(type_);
-    return result == null ? Type.ADD : result;
-  }
-
-    /**
-     * The constant USERNAME_FIELD_NUMBER.
-     */
-    public static final int USERNAME_FIELD_NUMBER = 2;
-  private volatile Object username_;
-  /**
-   * <code>required string username = 2;</code>
-   * @return Whether the username field is set.
-   */
-  @Override
-  public boolean hasUsername() {
-    return ((bitField0_ & 0x00000002) != 0);
-  }
-  /**
-   * <code>required string username = 2;</code>
-   * @return The username.
-   */
-  @Override
-  public String getUsername() {
-    Object ref = username_;
-    if (ref instanceof String) {
-      return (String) ref;
-    } else {
-      com.google.protobuf.ByteString bs =
-          (com.google.protobuf.ByteString) ref;
-      String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        username_ = s;
-      }
-      return s;
-    }
-  }
-  /**
-   * <code>required string username = 2;</code>
-   * @return The bytes for username.
-   */
-  @Override
-  public com.google.protobuf.ByteString
-      getUsernameBytes() {
-    Object ref = username_;
-    if (ref instanceof String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (String) ref);
-      username_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-    /**
-     * The constant FRIEND_FIELD_NUMBER.
-     */
-    public static final int FRIEND_FIELD_NUMBER = 3;
-  private volatile Object friend_;
-  /**
-   * <code>required string friend = 3;</code>
-   * @return Whether the friend field is set.
-   */
-  @Override
-  public boolean hasFriend() {
-    return ((bitField0_ & 0x00000004) != 0);
-  }
-  /**
-   * <code>required string friend = 3;</code>
-   * @return The friend.
-   */
-  @Override
-  public String getFriend() {
-    Object ref = friend_;
-    if (ref instanceof String) {
-      return (String) ref;
-    } else {
-      com.google.protobuf.ByteString bs =
-          (com.google.protobuf.ByteString) ref;
-      String s = bs.toStringUtf8();
-      if (bs.isValidUtf8()) {
-        friend_ = s;
-      }
-      return s;
-    }
-  }
-  /**
-   * <code>required string friend = 3;</code>
-   * @return The bytes for friend.
-   */
-  @Override
-  public com.google.protobuf.ByteString
-      getFriendBytes() {
-    Object ref = friend_;
-    if (ref instanceof String) {
-      com.google.protobuf.ByteString b =
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (String) ref);
-      friend_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
-  }
-
-  private byte memoizedIsInitialized = -1;
-  @Override
-  public final boolean isInitialized() {
-    byte isInitialized = memoizedIsInitialized;
-    if (isInitialized == 1) return true;
-    if (isInitialized == 0) return false;
-
-    if (!hasType()) {
-      memoizedIsInitialized = 0;
-      return false;
-    }
-    if (!hasUsername()) {
-      memoizedIsInitialized = 0;
-      return false;
-    }
-    if (!hasFriend()) {
-      memoizedIsInitialized = 0;
-      return false;
-    }
-    memoizedIsInitialized = 1;
-    return true;
-  }
-
-  @Override
-  public void writeTo(com.google.protobuf.CodedOutputStream output)
-                      throws java.io.IOException {
-    if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeEnum(1, type_);
-    }
-    if (((bitField0_ & 0x00000002) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, username_);
-    }
-    if (((bitField0_ & 0x00000004) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, friend_);
-    }
-    unknownFields.writeTo(output);
-  }
-
-  @Override
-  public int getSerializedSize() {
-    int size = memoizedSize;
-    if (size != -1) return size;
-
-    size = 0;
-    if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeEnumSize(1, type_);
-    }
-    if (((bitField0_ & 0x00000002) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, username_);
-    }
-    if (((bitField0_ & 0x00000004) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, friend_);
-    }
-    size += unknownFields.getSerializedSize();
-    memoizedSize = size;
-    return size;
-  }
-
-  @Override
-  public boolean equals(final Object obj) {
-    if (obj == this) {
-     return true;
-    }
-    if (!(obj instanceof FriendUpdate)) {
-      return super.equals(obj);
-    }
-    FriendUpdate other = (FriendUpdate) obj;
-
-    if (hasType() != other.hasType()) return false;
-    if (hasType()) {
-      if (type_ != other.type_) return false;
-    }
-    if (hasUsername() != other.hasUsername()) return false;
-    if (hasUsername()) {
-      if (!getUsername()
-          .equals(other.getUsername())) return false;
-    }
-    if (hasFriend() != other.hasFriend()) return false;
-    if (hasFriend()) {
-      if (!getFriend()
-          .equals(other.getFriend())) return false;
-    }
-    if (!unknownFields.equals(other.unknownFields)) return false;
-    return true;
-  }
-
-  @Override
-  public int hashCode() {
-    if (memoizedHashCode != 0) {
-      return memoizedHashCode;
-    }
-    int hash = 41;
-    hash = (19 * hash) + getDescriptor().hashCode();
-    if (hasType()) {
-      hash = (37 * hash) + TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + type_;
-    }
-    if (hasUsername()) {
-      hash = (37 * hash) + USERNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getUsername().hashCode();
-    }
-    if (hasFriend()) {
-      hash = (37 * hash) + FRIEND_FIELD_NUMBER;
-      hash = (53 * hash) + getFriend().hashCode();
-    }
-    hash = (29 * hash) + unknownFields.hashCode();
-    memoizedHashCode = hash;
-    return hash;
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data the data
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(
-      java.nio.ByteBuffer data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data              the data
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(
-      java.nio.ByteBuffer data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data the data
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(
-      com.google.protobuf.ByteString data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data              the data
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(
-      com.google.protobuf.ByteString data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data the data
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(byte[] data)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param data              the data
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws InvalidProtocolBufferException the invalid protocol buffer exception
-     */
-    public static FriendUpdate parseFrom(
-      byte[] data,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws com.google.protobuf.InvalidProtocolBufferException {
-    return PARSER.parseFrom(data, extensionRegistry);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param input the input
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param input             the input
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-    /**
-     * Parse delimited from friend update.
-     *
-     * @param input the input
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseDelimitedFrom(java.io.InputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input);
-  }
-
-    /**
-     * Parse delimited from friend update.
-     *
-     * @param input             the input
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseDelimitedFrom(
-      java.io.InputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param input the input
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseFrom(
-      com.google.protobuf.CodedInputStream input)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
-  }
-
-    /**
-     * Parse from friend update.
-     *
-     * @param input             the input
-     * @param extensionRegistry the extension registry
-     * @return the friend update
-     * @throws IOException the io exception
-     */
-    public static FriendUpdate parseFrom(
-      com.google.protobuf.CodedInputStream input,
-      com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-      throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
-  }
-
-  @Override
-  public Builder newBuilderForType() { return newBuilder(); }
-
-    /**
-     * New builder builder.
-     *
-     * @return the builder
-     */
-    public static Builder newBuilder() {
-    return DEFAULT_INSTANCE.toBuilder();
-  }
-
-    /**
-     * New builder builder.
-     *
-     * @param prototype the prototype
-     * @return the builder
-     */
-    public static Builder newBuilder(FriendUpdate prototype) {
-    return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-  }
-  @Override
-  public Builder toBuilder() {
-    return this == DEFAULT_INSTANCE
-        ? new Builder() : new Builder().mergeFrom(this);
-  }
-
-  @Override
-  protected Builder newBuilderForType(
-      BuilderParent parent) {
-    Builder builder = new Builder(parent);
-    return builder;
-  }
 
     /**
      * Protobuf type {@code management.FriendUpdate}
      */
     public static final class Builder extends
-      com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:management.FriendUpdate)
-      FriendUpdateOrBuilder {
-        /**
-         * Gets descriptor.
-         *
-         * @return the descriptor
-         */
+            com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+            // @@protoc_insertion_point(builder_implements:management.FriendUpdate)
+            FriendUpdateOrBuilder {
+        private int bitField0_;
+        private int type_ = 0;
+        private Object username_ = "";
+        private Object friend_ = "";
+
+        // Construct using proto.management.FriendUpdate.newBuilder()
+        private Builder() {
+            maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+                BuilderParent parent) {
+            super(parent);
+            maybeForceBuilderInitialization();
+        }
+
         public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
-    }
+            return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
+        }
 
-    @Override
-    protected FieldAccessorTable
+        @Override
+        protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return ManagementProtos.internal_static_management_FriendUpdate_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              FriendUpdate.class, Builder.class);
-    }
+            return ManagementProtos.internal_static_management_FriendUpdate_fieldAccessorTable
+                    .ensureFieldAccessorsInitialized(
+                            FriendUpdate.class, Builder.class);
+        }
 
-    // Construct using proto.management.FriendUpdate.newBuilder()
-    private Builder() {
-      maybeForceBuilderInitialization();
-    }
+        private void maybeForceBuilderInitialization() {
+            if (com.google.protobuf.GeneratedMessageV3
+                    .alwaysUseFieldBuilders) {
+            }
+        }
 
-    private Builder(
-        BuilderParent parent) {
-      super(parent);
-      maybeForceBuilderInitialization();
-    }
-    private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
-      }
-    }
-    @Override
-    public Builder clear() {
-      super.clear();
-      type_ = 0;
-      bitField0_ = (bitField0_ & ~0x00000001);
-      username_ = "";
-      bitField0_ = (bitField0_ & ~0x00000002);
-      friend_ = "";
-      bitField0_ = (bitField0_ & ~0x00000004);
-      return this;
-    }
+        @Override
+        public Builder clear() {
+            super.clear();
+            type_ = 0;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            username_ = "";
+            bitField0_ = (bitField0_ & ~0x00000002);
+            friend_ = "";
+            bitField0_ = (bitField0_ & ~0x00000004);
+            return this;
+        }
 
-    @Override
-    public com.google.protobuf.Descriptors.Descriptor
+        @Override
+        public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
-    }
+            return ManagementProtos.internal_static_management_FriendUpdate_descriptor;
+        }
 
-    @Override
-    public FriendUpdate getDefaultInstanceForType() {
-      return FriendUpdate.getDefaultInstance();
-    }
+        @Override
+        public FriendUpdate getDefaultInstanceForType() {
+            return FriendUpdate.getDefaultInstance();
+        }
 
-    @Override
-    public FriendUpdate build() {
-      FriendUpdate result = buildPartial();
-      if (!result.isInitialized()) {
-        throw newUninitializedMessageException(result);
-      }
-      return result;
-    }
+        @Override
+        public FriendUpdate build() {
+            FriendUpdate result = buildPartial();
+            if (!result.isInitialized()) {
+                throw newUninitializedMessageException(result);
+            }
+            return result;
+        }
 
-    @Override
-    public FriendUpdate buildPartial() {
-      FriendUpdate result = new FriendUpdate(this);
-      int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
-      if (((from_bitField0_ & 0x00000001) != 0)) {
-        to_bitField0_ |= 0x00000001;
-      }
-      result.type_ = type_;
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        to_bitField0_ |= 0x00000002;
-      }
-      result.username_ = username_;
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        to_bitField0_ |= 0x00000004;
-      }
-      result.friend_ = friend_;
-      result.bitField0_ = to_bitField0_;
-      onBuilt();
-      return result;
-    }
+        @Override
+        public FriendUpdate buildPartial() {
+            FriendUpdate result = new FriendUpdate(this);
+            int from_bitField0_ = bitField0_;
+            int to_bitField0_ = 0;
+            if (((from_bitField0_ & 0x00000001) != 0)) {
+                to_bitField0_ |= 0x00000001;
+            }
+            result.type_ = type_;
+            if (((from_bitField0_ & 0x00000002) != 0)) {
+                to_bitField0_ |= 0x00000002;
+            }
+            result.username_ = username_;
+            if (((from_bitField0_ & 0x00000004) != 0)) {
+                to_bitField0_ |= 0x00000004;
+            }
+            result.friend_ = friend_;
+            result.bitField0_ = to_bitField0_;
+            onBuilt();
+            return result;
+        }
 
-    @Override
-    public Builder clone() {
-      return super.clone();
-    }
-    @Override
-    public Builder setField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
-      return super.setField(field, value);
-    }
-    @Override
-    public Builder clearField(
-        com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return super.clearField(field);
-    }
-    @Override
-    public Builder clearOneof(
-        com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return super.clearOneof(oneof);
-    }
-    @Override
-    public Builder setRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, Object value) {
-      return super.setRepeatedField(field, index, value);
-    }
-    @Override
-    public Builder addRepeatedField(
-        com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
-      return super.addRepeatedField(field, value);
-    }
-    @Override
-    public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof FriendUpdate) {
-        return mergeFrom((FriendUpdate)other);
-      } else {
-        super.mergeFrom(other);
-        return this;
-      }
-    }
+        @Override
+        public Builder clone() {
+            return super.clone();
+        }
+
+        @Override
+        public Builder setField(
+                com.google.protobuf.Descriptors.FieldDescriptor field,
+                Object value) {
+            return super.setField(field, value);
+        }
+
+        @Override
+        public Builder clearField(
+                com.google.protobuf.Descriptors.FieldDescriptor field) {
+            return super.clearField(field);
+        }
+
+        @Override
+        public Builder clearOneof(
+                com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+            return super.clearOneof(oneof);
+        }
+
+        @Override
+        public Builder setRepeatedField(
+                com.google.protobuf.Descriptors.FieldDescriptor field,
+                int index, Object value) {
+            return super.setRepeatedField(field, index, value);
+        }
+
+        @Override
+        public Builder addRepeatedField(
+                com.google.protobuf.Descriptors.FieldDescriptor field,
+                Object value) {
+            return super.addRepeatedField(field, value);
+        }
+
+        @Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+            if (other instanceof FriendUpdate) {
+                return mergeFrom((FriendUpdate) other);
+            } else {
+                super.mergeFrom(other);
+                return this;
+            }
+        }
+
+        public Builder mergeFrom(FriendUpdate other) {
+            if (other == FriendUpdate.getDefaultInstance()) return this;
+            if (other.hasType()) {
+                setType(other.getType());
+            }
+            if (other.hasUsername()) {
+                bitField0_ |= 0x00000002;
+                username_ = other.username_;
+                onChanged();
+            }
+            if (other.hasFriend()) {
+                bitField0_ |= 0x00000004;
+                friend_ = other.friend_;
+                onChanged();
+            }
+            this.mergeUnknownFields(other.unknownFields);
+            onChanged();
+            return this;
+        }
+
+        @Override
+        public final boolean isInitialized() {
+            if (!hasType()) {
+                return false;
+            }
+            if (!hasUsername()) {
+                return false;
+            }
+            if (!hasFriend()) {
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        public Builder mergeFrom(
+                com.google.protobuf.CodedInputStream input,
+                com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+                throws java.io.IOException {
+            FriendUpdate parsedMessage = null;
+            try {
+                parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+            } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+                parsedMessage = (FriendUpdate) e.getUnfinishedMessage();
+                throw e.unwrapIOException();
+            } finally {
+                if (parsedMessage != null) {
+                    mergeFrom(parsedMessage);
+                }
+            }
+            return this;
+        }
 
         /**
-         * Merge from builder.
+         * <code>required .management.FriendUpdate.Type type = 1;</code>
          *
-         * @param other the other
-         * @return the builder
+         * @return Whether the type field is set.
          */
-        public Builder mergeFrom(FriendUpdate other) {
-      if (other == FriendUpdate.getDefaultInstance()) return this;
-      if (other.hasType()) {
-        setType(other.getType());
-      }
-      if (other.hasUsername()) {
-        bitField0_ |= 0x00000002;
-        username_ = other.username_;
-        onChanged();
-      }
-      if (other.hasFriend()) {
-        bitField0_ |= 0x00000004;
-        friend_ = other.friend_;
-        onChanged();
-      }
-      this.mergeUnknownFields(other.unknownFields);
-      onChanged();
-      return this;
-    }
-
-    @Override
-    public final boolean isInitialized() {
-      if (!hasType()) {
-        return false;
-      }
-      if (!hasUsername()) {
-        return false;
-      }
-      if (!hasFriend()) {
-        return false;
-      }
-      return true;
-    }
-
-    @Override
-    public Builder mergeFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      FriendUpdate parsedMessage = null;
-      try {
-        parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (FriendUpdate) e.getUnfinishedMessage();
-        throw e.unwrapIOException();
-      } finally {
-        if (parsedMessage != null) {
-          mergeFrom(parsedMessage);
+        @Override
+        public boolean hasType() {
+            return ((bitField0_ & 0x00000001) != 0);
         }
-      }
-      return this;
-    }
-    private int bitField0_;
 
-    private int type_ = 0;
-    /**
-     * <code>required .management.FriendUpdate.Type type = 1;</code>
-     * @return Whether the type field is set.
-     */
-    @Override public boolean hasType() {
-      return ((bitField0_ & 0x00000001) != 0);
-    }
-    /**
-     * <code>required .management.FriendUpdate.Type type = 1;</code>
-     * @return The type.
-     */
-    @Override
-    public Type getType() {
-      @SuppressWarnings("deprecation")
-      Type result = Type.valueOf(type_);
-      return result == null ? Type.ADD : result;
-    }
+        /**
+         * <code>required .management.FriendUpdate.Type type = 1;</code>
+         *
+         * @return The type.
+         */
+        @Override
+        public Type getType() {
+            @SuppressWarnings("deprecation")
+            Type result = Type.valueOf(type_);
+            return result == null ? Type.ADD : result;
+        }
 
         /**
          * <code>required .management.FriendUpdate.Type type = 1;</code>
@@ -893,14 +821,14 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder setType(Type value) {
-      if (value == null) {
-        throw new NullPointerException();
-      }
-      bitField0_ |= 0x00000001;
-      type_ = value.getNumber();
-      onChanged();
-      return this;
-    }
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000001;
+            type_ = value.getNumber();
+            onChanged();
+            return this;
+        }
 
         /**
          * <code>required .management.FriendUpdate.Type type = 1;</code>
@@ -908,55 +836,40 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder clearType() {
-      bitField0_ = (bitField0_ & ~0x00000001);
-      type_ = 0;
-      onChanged();
-      return this;
-    }
-
-    private Object username_ = "";
-    /**
-     * <code>required string username = 2;</code>
-     * @return Whether the username field is set.
-     */
-    public boolean hasUsername() {
-      return ((bitField0_ & 0x00000002) != 0);
-    }
-    /**
-     * <code>required string username = 2;</code>
-     * @return The username.
-     */
-    public String getUsername() {
-      Object ref = username_;
-      if (!(ref instanceof String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          username_ = s;
+            bitField0_ = (bitField0_ & ~0x00000001);
+            type_ = 0;
+            onChanged();
+            return this;
         }
-        return s;
-      } else {
-        return (String) ref;
-      }
-    }
-    /**
-     * <code>required string username = 2;</code>
-     * @return The bytes for username.
-     */
-    public com.google.protobuf.ByteString
-        getUsernameBytes() {
-      Object ref = username_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        username_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
+
+        /**
+         * <code>required string username = 2;</code>
+         *
+         * @return Whether the username field is set.
+         */
+        public boolean hasUsername() {
+            return ((bitField0_ & 0x00000002) != 0);
+        }
+
+        /**
+         * <code>required string username = 2;</code>
+         *
+         * @return The username.
+         */
+        public String getUsername() {
+            Object ref = username_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                if (bs.isValidUtf8()) {
+                    username_ = s;
+                }
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
 
         /**
          * <code>required string username = 2;</code>
@@ -965,27 +878,34 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder setUsername(
-        String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-      username_ = value;
-      onChanged();
-      return this;
-    }
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000002;
+            username_ = value;
+            onChanged();
+            return this;
+        }
 
         /**
          * <code>required string username = 2;</code>
          *
-         * @return This builder for chaining.
+         * @return The bytes for username.
          */
-        public Builder clearUsername() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      username_ = getDefaultInstance().getUsername();
-      onChanged();
-      return this;
-    }
+        public com.google.protobuf.ByteString
+        getUsernameBytes() {
+            Object ref = username_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                username_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
 
         /**
          * <code>required string username = 2;</code>
@@ -994,59 +914,56 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder setUsernameBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-      username_ = value;
-      onChanged();
-      return this;
-    }
-
-    private Object friend_ = "";
-    /**
-     * <code>required string friend = 3;</code>
-     * @return Whether the friend field is set.
-     */
-    public boolean hasFriend() {
-      return ((bitField0_ & 0x00000004) != 0);
-    }
-    /**
-     * <code>required string friend = 3;</code>
-     * @return The friend.
-     */
-    public String getFriend() {
-      Object ref = friend_;
-      if (!(ref instanceof String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          friend_ = s;
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000002;
+            username_ = value;
+            onChanged();
+            return this;
         }
-        return s;
-      } else {
-        return (String) ref;
-      }
-    }
-    /**
-     * <code>required string friend = 3;</code>
-     * @return The bytes for friend.
-     */
-    public com.google.protobuf.ByteString
-        getFriendBytes() {
-      Object ref = friend_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b =
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (String) ref);
-        friend_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
+
+        /**
+         * <code>required string username = 2;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearUsername() {
+            bitField0_ = (bitField0_ & ~0x00000002);
+            username_ = getDefaultInstance().getUsername();
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>required string friend = 3;</code>
+         *
+         * @return Whether the friend field is set.
+         */
+        public boolean hasFriend() {
+            return ((bitField0_ & 0x00000004) != 0);
+        }
+
+        /**
+         * <code>required string friend = 3;</code>
+         *
+         * @return The friend.
+         */
+        public String getFriend() {
+            Object ref = friend_;
+            if (!(ref instanceof String)) {
+                com.google.protobuf.ByteString bs =
+                        (com.google.protobuf.ByteString) ref;
+                String s = bs.toStringUtf8();
+                if (bs.isValidUtf8()) {
+                    friend_ = s;
+                }
+                return s;
+            } else {
+                return (String) ref;
+            }
+        }
 
         /**
          * <code>required string friend = 3;</code>
@@ -1055,27 +972,34 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder setFriend(
-        String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-      friend_ = value;
-      onChanged();
-      return this;
-    }
+                String value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000004;
+            friend_ = value;
+            onChanged();
+            return this;
+        }
 
         /**
          * <code>required string friend = 3;</code>
          *
-         * @return This builder for chaining.
+         * @return The bytes for friend.
          */
-        public Builder clearFriend() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      friend_ = getDefaultInstance().getFriend();
-      onChanged();
-      return this;
-    }
+        public com.google.protobuf.ByteString
+        getFriendBytes() {
+            Object ref = friend_;
+            if (ref instanceof String) {
+                com.google.protobuf.ByteString b =
+                        com.google.protobuf.ByteString.copyFromUtf8(
+                                (String) ref);
+                friend_ = b;
+                return b;
+            } else {
+                return (com.google.protobuf.ByteString) ref;
+            }
+        }
 
         /**
          * <code>required string friend = 3;</code>
@@ -1084,78 +1008,43 @@ private static final long serialVersionUID = 0L;
          * @return This builder for chaining.
          */
         public Builder setFriendBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-      friend_ = value;
-      onChanged();
-      return this;
+                com.google.protobuf.ByteString value) {
+            if (value == null) {
+                throw new NullPointerException();
+            }
+            bitField0_ |= 0x00000004;
+            friend_ = value;
+            onChanged();
+            return this;
+        }
+
+        /**
+         * <code>required string friend = 3;</code>
+         *
+         * @return This builder for chaining.
+         */
+        public Builder clearFriend() {
+            bitField0_ = (bitField0_ & ~0x00000004);
+            friend_ = getDefaultInstance().getFriend();
+            onChanged();
+            return this;
+        }
+
+        @Override
+        public final Builder setUnknownFields(
+                final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.setUnknownFields(unknownFields);
+        }
+
+        @Override
+        public final Builder mergeUnknownFields(
+                final com.google.protobuf.UnknownFieldSet unknownFields) {
+            return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:management.FriendUpdate)
     }
-    @Override
-    public final Builder setUnknownFields(
-        final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFields(unknownFields);
-    }
-
-    @Override
-    public final Builder mergeUnknownFields(
-        final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.mergeUnknownFields(unknownFields);
-    }
-
-
-    // @@protoc_insertion_point(builder_scope:management.FriendUpdate)
-  }
-
-  // @@protoc_insertion_point(class_scope:management.FriendUpdate)
-  private static final FriendUpdate DEFAULT_INSTANCE;
-  static {
-    DEFAULT_INSTANCE = new FriendUpdate();
-  }
-
-    /**
-     * Gets default instance.
-     *
-     * @return the default instance
-     */
-    public static FriendUpdate getDefaultInstance() {
-    return DEFAULT_INSTANCE;
-  }
-
-    /**
-     * The constant PARSER.
-     */
-    @Deprecated public static final com.google.protobuf.Parser<FriendUpdate>
-      PARSER = new com.google.protobuf.AbstractParser<FriendUpdate>() {
-    @Override
-    public FriendUpdate parsePartialFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return new FriendUpdate(input, extensionRegistry);
-    }
-  };
-
-    /**
-     * Parser com . google . protobuf . parser.
-     *
-     * @return the com . google . protobuf . parser
-     */
-    public static com.google.protobuf.Parser<FriendUpdate> parser() {
-    return PARSER;
-  }
-
-  @Override
-  public com.google.protobuf.Parser<FriendUpdate> getParserForType() {
-    return PARSER;
-  }
-
-  @Override
-  public FriendUpdate getDefaultInstanceForType() {
-    return DEFAULT_INSTANCE;
-  }
 
 }
 

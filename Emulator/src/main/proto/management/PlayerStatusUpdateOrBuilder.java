@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Player status update or builder.
- */
 public interface PlayerStatusUpdateOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.PlayerStatusUpdate)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.PlayerStatusUpdate)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string username = 1;</code>
@@ -30,7 +27,7 @@ public interface PlayerStatusUpdateOrBuilder extends
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
-      getUsernameBytes();
+    getUsernameBytes();
 
     /**
      * <code>required int32 world = 2;</code>

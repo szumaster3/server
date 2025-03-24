@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Clan message or builder.
- */
 public interface ClanMessageOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.ClanMessage)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.ClanMessage)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string sender = 1;</code>
@@ -30,7 +27,7 @@ public interface ClanMessageOrBuilder extends
      * @return The bytes for sender.
      */
     com.google.protobuf.ByteString
-      getSenderBytes();
+    getSenderBytes();
 
     /**
      * <code>required string clanName = 2;</code>
@@ -52,7 +49,7 @@ public interface ClanMessageOrBuilder extends
      * @return The bytes for clanName.
      */
     com.google.protobuf.ByteString
-      getClanNameBytes();
+    getClanNameBytes();
 
     /**
      * <code>required string message = 3;</code>
@@ -74,7 +71,7 @@ public interface ClanMessageOrBuilder extends
      * @return The bytes for message.
      */
     com.google.protobuf.ByteString
-      getMessageBytes();
+    getMessageBytes();
 
     /**
      * <code>required int32 rank = 4;</code>

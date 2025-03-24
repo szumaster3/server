@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Send contact info or builder.
- */
 public interface SendContactInfoOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.SendContactInfo)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.SendContactInfo)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string username = 1;</code>
@@ -30,47 +27,35 @@ public interface SendContactInfoOrBuilder extends
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
-      getUsernameBytes();
+    getUsernameBytes();
 
     /**
      * <code>repeated .management.SendContactInfo.Contact contacts = 2;</code>
-     *
-     * @return the contacts list
      */
     java.util.List<SendContactInfo.Contact>
-      getContactsList();
+    getContactsList();
 
     /**
      * <code>repeated .management.SendContactInfo.Contact contacts = 2;</code>
-     *
-     * @param index the index
-     * @return the contacts
      */
     SendContactInfo.Contact getContacts(int index);
 
     /**
      * <code>repeated .management.SendContactInfo.Contact contacts = 2;</code>
-     *
-     * @return the contacts count
      */
     int getContactsCount();
 
     /**
      * <code>repeated .management.SendContactInfo.Contact contacts = 2;</code>
-     *
-     * @return the contacts or builder list
      */
     java.util.List<? extends SendContactInfo.ContactOrBuilder>
-      getContactsOrBuilderList();
+    getContactsOrBuilderList();
 
     /**
      * <code>repeated .management.SendContactInfo.Contact contacts = 2;</code>
-     *
-     * @param index the index
-     * @return the contacts or builder
      */
     SendContactInfo.ContactOrBuilder getContactsOrBuilder(
-      int index);
+            int index);
 
     /**
      * <code>repeated string blocked = 3;</code>
@@ -78,7 +63,7 @@ public interface SendContactInfoOrBuilder extends
      * @return A list containing the blocked.
      */
     java.util.List<String>
-      getBlockedList();
+    getBlockedList();
 
     /**
      * <code>repeated string blocked = 3;</code>
@@ -102,5 +87,5 @@ public interface SendContactInfoOrBuilder extends
      * @return The bytes of the blocked at the given index.
      */
     com.google.protobuf.ByteString
-      getBlockedBytes(int index);
+    getBlockedBytes(int index);
 }

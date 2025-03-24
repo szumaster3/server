@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Private message or builder.
- */
 public interface PrivateMessageOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.PrivateMessage)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.PrivateMessage)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string sender = 1;</code>
@@ -30,7 +27,7 @@ public interface PrivateMessageOrBuilder extends
      * @return The bytes for sender.
      */
     com.google.protobuf.ByteString
-      getSenderBytes();
+    getSenderBytes();
 
     /**
      * <code>required string receiver = 2;</code>
@@ -52,7 +49,7 @@ public interface PrivateMessageOrBuilder extends
      * @return The bytes for receiver.
      */
     com.google.protobuf.ByteString
-      getReceiverBytes();
+    getReceiverBytes();
 
     /**
      * <code>required string message = 3;</code>
@@ -74,7 +71,7 @@ public interface PrivateMessageOrBuilder extends
      * @return The bytes for message.
      */
     com.google.protobuf.ByteString
-      getMessageBytes();
+    getMessageBytes();
 
     /**
      * <code>required int32 rank = 4;</code>

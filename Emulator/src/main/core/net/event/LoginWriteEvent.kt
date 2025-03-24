@@ -9,7 +9,7 @@ import core.net.producer.GameEventProducer
 import java.nio.ByteBuffer
 
 /**
- * The type Login write event.
+ * The Login write event.
  */
 class LoginWriteEvent(
     session: IoSession,
@@ -20,18 +20,19 @@ class LoginWriteEvent(
 
         private fun getWorldResponse(session: IoSession): ByteBuffer {
             val buffer = ByteBuffer.allocate(150)
-            val player: Player = session.player
-            buffer.put(
-                player.details.rights.ordinal
-                    .toByte(),
-            )
+            val player: Player? = session.getPlayer()
+            player?.details?.rights?.ordinal?.toByte()?.let {
+                    buffer.put(
+                        it,
+                    )
+                }
             buffer.put(0)
             buffer.put(0)
             buffer.put(0)
             buffer.put(1)
             buffer.put(0)
             buffer.put(0)
-            buffer.putShort(player.index.toShort())
+            player?.index?.toShort()?.let { buffer.putShort(it) }
             buffer.put(1) // Enable all G.E boxes
             buffer.put(1)
             buffer.flip()
@@ -47,11 +48,14 @@ class LoginWriteEvent(
         val buffer = ByteBuffer.allocate(500)
         buffer.put(response.ordinal.toByte())
         when (response.ordinal) {
-            2 -> { // successful login
+            2 -> {
+                // Successful login
                 buffer.put(getWorldResponse(session))
                 session.producer = GAME_PRODUCER
             }
-            21 -> { // Moving world
+
+            21 -> {
+                // Moving world
                 buffer.put(session.serverKey.toByte())
             }
         }

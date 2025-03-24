@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Clan join notification or builder.
- */
 public interface ClanJoinNotificationOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.ClanJoinNotification)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.ClanJoinNotification)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string username = 1;</code>
@@ -30,7 +27,7 @@ public interface ClanJoinNotificationOrBuilder extends
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
-      getUsernameBytes();
+    getUsernameBytes();
 
     /**
      * <code>required string clanName = 2;</code>
@@ -52,7 +49,7 @@ public interface ClanJoinNotificationOrBuilder extends
      * @return The bytes for clanName.
      */
     com.google.protobuf.ByteString
-      getClanNameBytes();
+    getClanNameBytes();
 
     /**
      * <code>required int32 world = 3;</code>

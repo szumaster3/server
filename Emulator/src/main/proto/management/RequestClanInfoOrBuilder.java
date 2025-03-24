@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Request clan info or builder.
- */
 public interface RequestClanInfoOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.RequestClanInfo)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.RequestClanInfo)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required int32 world = 1;</code>
@@ -44,5 +41,5 @@ public interface RequestClanInfoOrBuilder extends
      * @return The bytes for clanOwner.
      */
     com.google.protobuf.ByteString
-      getClanOwnerBytes();
+    getClanOwnerBytes();
 }

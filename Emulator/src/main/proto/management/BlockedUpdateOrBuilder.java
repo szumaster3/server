@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Blocked update or builder.
- */
 public interface BlockedUpdateOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.BlockedUpdate)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.BlockedUpdate)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .management.BlockedUpdate.Type type = 1;</code>
@@ -44,7 +41,7 @@ public interface BlockedUpdateOrBuilder extends
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
-      getUsernameBytes();
+    getUsernameBytes();
 
     /**
      * <code>required string friend = 3;</code>
@@ -66,5 +63,5 @@ public interface BlockedUpdateOrBuilder extends
      * @return The bytes for friend.
      */
     com.google.protobuf.ByteString
-      getFriendBytes();
+    getFriendBytes();
 }

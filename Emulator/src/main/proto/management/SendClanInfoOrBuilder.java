@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Send clan info or builder.
- */
 public interface SendClanInfoOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.SendClanInfo)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.SendClanInfo)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required string clanOwner = 1;</code>
@@ -30,7 +27,7 @@ public interface SendClanInfoOrBuilder extends
      * @return The bytes for clanOwner.
      */
     com.google.protobuf.ByteString
-      getClanOwnerBytes();
+    getClanOwnerBytes();
 
     /**
      * <code>required bool hasInfo = 2;</code>
@@ -66,7 +63,7 @@ public interface SendClanInfoOrBuilder extends
      * @return The bytes for clanName.
      */
     com.google.protobuf.ByteString
-      getClanNameBytes();
+    getClanNameBytes();
 
     /**
      * <code>optional int32 joinRequirement = 4;</code>
@@ -126,41 +123,29 @@ public interface SendClanInfoOrBuilder extends
 
     /**
      * <code>repeated .management.SendClanInfo.ClanMember members = 8;</code>
-     *
-     * @return the members list
      */
     java.util.List<SendClanInfo.ClanMember>
-      getMembersList();
+    getMembersList();
 
     /**
      * <code>repeated .management.SendClanInfo.ClanMember members = 8;</code>
-     *
-     * @param index the index
-     * @return the members
      */
     SendClanInfo.ClanMember getMembers(int index);
 
     /**
      * <code>repeated .management.SendClanInfo.ClanMember members = 8;</code>
-     *
-     * @return the members count
      */
     int getMembersCount();
 
     /**
      * <code>repeated .management.SendClanInfo.ClanMember members = 8;</code>
-     *
-     * @return the members or builder list
      */
     java.util.List<? extends SendClanInfo.ClanMemberOrBuilder>
-      getMembersOrBuilderList();
+    getMembersOrBuilderList();
 
     /**
      * <code>repeated .management.SendClanInfo.ClanMember members = 8;</code>
-     *
-     * @param index the index
-     * @return the members or builder
      */
     SendClanInfo.ClanMemberOrBuilder getMembersOrBuilder(
-      int index);
+            int index);
 }

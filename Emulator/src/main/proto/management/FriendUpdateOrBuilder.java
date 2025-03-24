@@ -3,12 +3,9 @@
 
 package proto.management;
 
-/**
- * The interface Friend update or builder.
- */
 public interface FriendUpdateOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:management.FriendUpdate)
-    com.google.protobuf.MessageOrBuilder {
+        // @@protoc_insertion_point(interface_extends:management.FriendUpdate)
+        com.google.protobuf.MessageOrBuilder {
 
     /**
      * <code>required .management.FriendUpdate.Type type = 1;</code>
@@ -44,7 +41,7 @@ public interface FriendUpdateOrBuilder extends
      * @return The bytes for username.
      */
     com.google.protobuf.ByteString
-      getUsernameBytes();
+    getUsernameBytes();
 
     /**
      * <code>required string friend = 3;</code>
@@ -66,5 +63,5 @@ public interface FriendUpdateOrBuilder extends
      * @return The bytes for friend.
      */
     com.google.protobuf.ByteString
-      getFriendBytes();
+    getFriendBytes();
 }

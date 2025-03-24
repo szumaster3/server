@@ -40,7 +40,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
-import core.game.world.update.flag.*
+import core.game.world.update.flag.EntityFlag
 import core.game.world.update.flag.context.ChatMessage
 import core.net.amsc.MSPacketRepository
 import core.net.packet.context.PlayerContext
@@ -99,14 +99,14 @@ object PacketProcessor {
             is Packet.UseWithScenery,
             is Packet.UseWithGroundItem,
             is Packet.UseWithPlayer,
-            -> processUseWith(pkt)
+                -> processUseWith(pkt)
 
             is Packet.IfAction -> processIfAction(pkt)
             is Packet.CloseIface -> processCloseIface(pkt)
             is Packet.WorldspaceWalk,
             is Packet.MinimapWalk,
             is Packet.InteractWalk,
-            -> processWalkPacket(pkt)
+                -> processWalkPacket(pkt)
 
             is Packet.AddFriend -> CommunicationInfo.add(pkt.player, pkt.username)
             is Packet.RemoveFriend -> CommunicationInfo.remove(pkt.player, pkt.username, false)
@@ -117,26 +117,23 @@ object PacketProcessor {
             is Packet.ComponentNpcAction,
             is Packet.ComponentSceneryAction,
             is Packet.ComponentGroundItemAction,
-            -> processComponentUseWith(pkt)
+                -> processComponentUseWith(pkt)
 
             is Packet.SlotSwitchSingleComponent,
             is Packet.SlotSwitchMultiComponent,
-            -> processSlotSwitch(pkt)
+                -> processSlotSwitch(pkt)
 
             is Packet.TrackingMouseClick,
             is Packet.TrackingAfkTimeout,
             is Packet.TrackingFocus,
             is Packet.TrackingCameraPos,
             is Packet.TrackingDisplayUpdate,
-            -> processTrackingPacket(pkt)
+                -> processTrackingPacket(pkt)
 
             is Packet.PlayerPrefsUpdate -> {}
             is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
             is Packet.JoinClan -> {
-                if (pkt.clanName.isEmpty() &&
-                    pkt.player.communication.currentClan
-                        .isNotEmpty()
-                ) {
+                if (pkt.clanName.isEmpty() && pkt.player.communication.currentClan.isNotEmpty()) {
                     val builder = LeaveClanRequest.newBuilder()
                     builder.clanName = pkt.player.communication.currentClan
                     builder.username = pkt.player.name
@@ -160,16 +157,15 @@ object PacketProcessor {
                 clan.kick(pkt.player, target)
             }
 
-            is Packet.QuickChat ->
-                QCRepository.sendQC(
-                    pkt.player,
-                    pkt.multiplier,
-                    pkt.offset,
-                    pkt.type,
-                    pkt.indexA,
-                    pkt.indexB,
-                    pkt.forClan,
-                )
+            is Packet.QuickChat -> QCRepository.sendQC(
+                pkt.player,
+                pkt.multiplier,
+                pkt.offset,
+                pkt.type,
+                pkt.indexA,
+                pkt.indexB,
+                pkt.forClan,
+            )
 
             is Packet.InputPromptResponse -> {
                 val script: ((Any) -> Boolean) =
@@ -198,8 +194,7 @@ object PacketProcessor {
                     pkt.player.sendMessage("You can't report yourself!")
                 }
                 core.game.global.report.Rule.forId(pkt.rule)?.let {
-                    core.game.global.report
-                        .AbuseReport(
+                    core.game.global.report.AbuseReport(
                             pkt.player.name,
                             pkt.target,
                             it,
@@ -256,20 +251,16 @@ object PacketProcessor {
                         }
                         return
                     } else if (pkt.message.startsWith("/") && pkt.player.communication.clan != null) {
-                        val messages =
-                            splitChatMessage(
-                                pkt.message.substring(1),
-                                pkt.player.communication.clan.name.length + pkt.player.name.length,
-                                pkt.player.details.rights.ordinal != 0,
-                            )
+                        val messages = splitChatMessage(
+                            pkt.message.substring(1),
+                            pkt.player.communication.clan.name.length + pkt.player.name.length,
+                            pkt.player.details.rights.ordinal != 0,
+                        )
                         for (message in messages) {
                             if (message.isBlank()) continue
                             val builder = ClanMessage.newBuilder()
                             builder.sender = pkt.player.name
-                            builder.clanName =
-                                pkt.player.communication.clan.owner
-                                    .lowercase()
-                                    .replace(" ", "_")
+                            builder.clanName = pkt.player.communication.clan.owner.lowercase().replace(" ", "_")
                             builder.message = message
                             builder.rank = Rights.getChatIcon(pkt.player)
                             ManagementEvents.publish(builder.build())
@@ -310,9 +301,7 @@ object PacketProcessor {
                 player.debug("------------------------")
                 if (player.dialogueInterpreter.dialogue == null) {
                     player.interfaceManager.closeChatbox()
-                    player.dialogueInterpreter.actions
-                        .removeFirstOrNull()
-                        ?.handle(player, pkt.child)
+                    player.dialogueInterpreter.actions.removeFirstOrNull()?.handle(player, pkt.child)
                     val component = player.interfaceManager.getComponent(pkt.iface) ?: return
                     if (!InterfaceListeners.run(player, component, pkt.opcode, pkt.child, pkt.slot, -1)) {
                         component.plugin?.handle(player, component, pkt.opcode, pkt.child, pkt.slot, -1)
@@ -370,9 +359,9 @@ object PacketProcessor {
         when (pkt) {
             is Packet.TrackingFocus -> {}
             is Packet.TrackingDisplayUpdate -> {
-                pkt.player.session.clientInfo.screenWidth = pkt.screenWidth
-                pkt.player.session.clientInfo.screenHeight = pkt.screenHeight
-                pkt.player.session.clientInfo.displayMode = pkt.displayMode
+                pkt.player.session.clientInfo?.screenWidth = pkt.screenWidth
+                pkt.player.session.clientInfo?.screenHeight = pkt.screenHeight
+                pkt.player.session.clientInfo?.displayMode = pkt.displayMode
                 pkt.player.interfaceManager.switchWindowMode(pkt.windowMode)
             }
 
@@ -404,15 +393,11 @@ object PacketProcessor {
                 } else {
                     val tabIndex = BankContainer.getArrayIndex(pkt.destChild)
                     if (tabIndex > -1) {
-                        val secondSlot =
-                            if (tabIndex ==
-                                10
-                            ) {
-                                pkt.player.bank.freeSlot()
-                            } else {
-                                pkt.player.bank.tabStartSlot[tabIndex] +
-                                    pkt.player.bank.getItemsInTab(tabIndex)
-                            }
+                        val secondSlot = if (tabIndex == 10) {
+                            pkt.player.bank.freeSlot()
+                        } else {
+                            pkt.player.bank.tabStartSlot[tabIndex] + pkt.player.bank.getItemsInTab(tabIndex)
+                        }
                         val inSlot: Item = pkt.player.bank.get(pkt.sourceSlot)
                         if (secondSlot == -1 && pkt.player.bank.remove(inSlot)) {
                             pkt.player.bank.add(inSlot)
@@ -451,9 +436,8 @@ object PacketProcessor {
             player = pkt.player
             child = pkt.child
             iface = pkt.iface
-            target =
-                GroundItemManager.get(pkt.itemId, Location.create(pkt.x, pkt.y, player.location.z), player)
-                    ?: return sendClearMinimap(player).also { sendMessage(player, "Too late!") }
+            target = GroundItemManager.get(pkt.itemId, Location.create(pkt.x, pkt.y, player.location.z), player)
+                ?: return sendClearMinimap(player).also { sendMessage(player, "Too late!") }
             targetId = pkt.itemId
             type = SpellListener.GROUND_ITEM
         } else if (pkt is Packet.ComponentPlayerAction) {
@@ -501,13 +485,12 @@ object PacketProcessor {
             SpellListeners.run(child, type, book, player, target)
         }
         when (iface) {
-            430, 192, 193 ->
-                MagicSpell.castSpell(
-                    player,
-                    SpellBookManager.SpellBook.forInterface(iface)!!,
-                    child,
-                    target,
-                )
+            430, 192, 193 -> MagicSpell.castSpell(
+                player,
+                SpellBookManager.SpellBook.forInterface(iface)!!,
+                child,
+                target,
+            )
 
             662 -> {
                 if (player.familiarManager.hasFamiliar()) {
@@ -676,9 +659,8 @@ object PacketProcessor {
             val container = getLikelyContainerForIface(pkt.player, pkt.iface) ?: return
             item = container[pkt.slot] ?: return
             itemId = pkt.usedId
-            node =
-                GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
-                    ?: return
+            node = GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
+                ?: return
             nodeId = pkt.withId
             type = IntType.GROUNDITEM
             player = pkt.player
@@ -717,12 +699,11 @@ object PacketProcessor {
             }
         }
         val flipped = type == IntType.ITEM && item.id < node.id
-        val event =
-            if (flipped) {
-                NodeUsageEvent(player, 0, node, item)
-            } else {
-                NodeUsageEvent(player, 0, item, childNode ?: node)
-            }
+        val event = if (flipped) {
+            NodeUsageEvent(player, 0, node, item)
+        } else {
+            NodeUsageEvent(player, 0, item, childNode ?: node)
+        }
         if (PluginInteractionManager.handle(player, event)) {
             return
         }
@@ -812,9 +793,11 @@ object PacketProcessor {
         player.debug("Loc: ${scenery.location}, Dir: ${scenery.direction}")
         if (hasWrapper) {
             player.debug(
-                "WrapperID: ${scenery.id}, ${scenery.definition.configFile?.let {
-                    "Varbit: ${it.id}"
-                } ?: "Varp: ${scenery.definition.configId}"}",
+                "WrapperID: ${scenery.id}, ${
+                    scenery.definition.configFile?.let {
+                        "Varbit: ${it.id}"
+                    } ?: "Varp: ${scenery.definition.configId}"
+                }",
             )
         }
         player.debug("------------------------------------------------")
@@ -885,13 +868,12 @@ object PacketProcessor {
     private fun getLikelyContainerForIface(
         player: Player,
         iface: Int,
-    ): Container? =
-        when (iface) {
-            Components.INVENTORY_149 -> player.inventory
-            Components.BANK_V2_MAIN_762 -> player.bank
-            Components.EQUIP_SCREEN2_667 -> player.equipment
-            else -> null
-        }
+    ): Container? = when (iface) {
+        Components.INVENTORY_149 -> player.inventory
+        Components.BANK_V2_MAIN_762 -> player.bank
+        Components.EQUIP_SCREEN2_667 -> player.equipment
+        else -> null
+    }
 
     private fun sendClearMinimap(player: Player) {
         PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(player))
@@ -904,12 +886,7 @@ object PacketProcessor {
         insert: Boolean,
         player: Player,
     ) {
-        if (container == null ||
-            slot < 0 ||
-            slot >= container.toArray().size ||
-            secondSlot < 0 ||
-            secondSlot >= container.toArray().size
-        ) {
+        if (container == null || slot < 0 || slot >= container.toArray().size || secondSlot < 0 || secondSlot >= container.toArray().size) {
             return
         }
         val item = container[slot]
