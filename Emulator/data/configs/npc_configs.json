@@ -60837,15 +60837,5 @@
     "examine": "He collects flax.",
     "name": "Geoffrey",
     "id": "8590"
-  },
-  {
-    "examine": "Repairman for hire.",
-    "name": "Chris",
-    "id": "8591"
-  },
-  {
-    "examine": "He returns stuff that you've lost, for a price.",
-    "name": "Perdu",
-    "id": "8592"
   }
 ]

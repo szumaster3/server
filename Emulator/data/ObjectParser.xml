@@ -22,10 +22,6 @@
     <!-- Anvil Object - Near Lumbridge Furnace. -->
     <ObjectAction mode="add" id="2783" x="3229" y="3254" z="0"/>
 
-    <!-- Bank Chest - Barbarian Assault. -->
-    <ObjectAction mode="remove" id="20228" x="2537" y="3573" z="0"/>
-    <ObjectAction mode="add" id="27663" x="2537" y="3573" z="0" direction="w"/>
-
     <!-- Caravan - Swept Away (2008 Halloween event). -->
     <ObjectAction mode="add" id="39237" x="2957" y="3266" z="0" direction="n"/>
 
@@ -105,15 +101,5 @@
     <ObjectAction mode="add" id="41905" x="3503" y="5236" z="0"/>
     <ObjectAction mode="add" id="41906" x="3473" y="5209" z="0"/>
     <ObjectAction mode="add" id="41907" x="3535" y="5242" z="0"/>
-
-    <!--
-        Runecrafting Guild - Bank deposit box.
-        Patch 22 February 2010 (Update):
-        Added a bank deposit box to the Runecrafting Guild.
-    -->
-    <ObjectAction mode="add" id="25937" x="1692" y="5462" z="2" type="10" direction="w"/>
-
-    <!-- Fishing platform bank - Temporary bank chest. -->
-    <ObjectAction mode="add" id="21301" x="2784" y="3279" z="0" type="10" direction="e"/>
 
 </parsing>

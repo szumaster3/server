@@ -131998,46 +131998,6 @@
     "bonuses": "0,0,0,0,0,30,32,27,0,30,7,0,0,0,0"
   },
   {
-    "ge_buy_limit": "8",
-    "turn90cw_anim": "1207",
-    "examine": "An evil one-handed spear.",
-    "walk_anim": "1205",
-    "has_special": "true",
-    "turn90ccw_anim": "1208",
-    "attack_speed": "4",
-    "two_handed": "false",
-    "turn180_anim": "1206",
-    "defence_anim": "2079",
-    "equipment_slot": "3",
-    "attack_anims": "2080,2081,2082,2080",
-    "grand_exchange_price": "2592285",
-    "stand_anim": "813",
-    "tradeable": "true",
-    "run_anim": "1210",
-    "archery_ticket_price": "0",
-    "id": "14638",
-    "stand_turn_anim": "1209",
-    "bonuses": "85,65,65,0,0,13,13,12,0,13,0,75,2,0,0",
-    "requirements": "{0,70}",
-    "durability": null,
-    "weight": "3",
-    "weapon_interface": "14",
-    "equip_audio": "2247",
-    "render_anim": "28",
-    "lendable": "true",
-    "attack_audios": "381,390,390,381",
-    "name": "Zamorakian hasta"
-  },
-  {
-    "ge_buy_limit": "8",
-    "grand_exchange_price": "2592285",
-    "durability": null,
-    "name": "Zamorakian hasta",
-    "tradeable": "true",
-    "archery_ticket_price": "0",
-    "id": "14639"
-  },
-  {
     "destroy_message": "A player can get a new one by talking to any seer around Seer's village.",
     "examine": "A headband with an eye embroidered on it.",
     "durability": null,
@@ -132423,74 +132383,6 @@
   {
     "name": "Black afro",
     "id": "14695"
-  },
-  {
-    "ge_buy_limit": "10",
-    "turn90cw_anim": "1207",
-    "examine": "A battlestaff topped with a powerful orb of Armadyl.",
-    "walk_anim": "1205",
-    "rare_item": "true",
-    "has_special": "true",
-    "turn90ccw_anim": "1208",
-    "attack_speed": "5",
-    "turn180_anim": "1206",
-    "defence_anim": "420",
-    "equipment_slot": "3",
-    "attack_anims": "419,419,419,419",
-    "grand_exchange_price": "368700",
-    "stand_anim": "813",
-    "tradeable": "true",
-    "run_anim": "1210",
-    "archery_ticket_price": "0",
-    "id": "14696",
-    "stand_turn_anim": "1209",
-    "bonuses": "2,3,1,10,0,2,3,1,10,0,0,50,0,0,0",
-    "requirements": "{0,70}-{6,77}",
-    "durability": null,
-    "weight": "2.2",
-    "weapon_interface": "1",
-    "equip_audio": "2247",
-    "render_anim": "28",
-    "attack_audios": "2555,0,0,0",
-    "name": "Armadyl battlestaff"
-  },
-  {
-    "name": "Armadyl battlestaff",
-    "id": "14697"
-  },
-  {
-    "examine": "Useful for creating Armadyl runes.",
-    "name": "Dust of armadyl",
-    "id": "14698"
-  },
-  {
-    "examine": "Useful for creating Armadyl runes.",
-    "name": "Dust of armadyl",
-    "id": "14699"
-  },
-  {
-    "shop_price": "400",
-    "ge_buy_limit": "20000",
-    "examine": "It looks like a strange air rune.",
-    "grand_exchange_price": "2000",
-    "tokkul_price": "40",
-    "durability": null,
-    "name": "Armadyl rune",
-    "tradeable": "true",
-    "archery_ticket_price": "0",
-    "id": "14700"
-  },
-  {
-    "examine": "A tiny part of what was once an orb.",
-    "name": "Shards of Armadyl",
-    "tradeable": "false",
-    "archery_ticket_price": "0",
-    "id": "14701"
-  },
-  {
-    "examine": "Once part of the staff of Armadyl.",
-    "name": "Orb of Armadyl",
-    "id": "14706"
   },
   {
     "shop_price": "1",
