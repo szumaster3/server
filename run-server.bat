@@ -1,5 +1,5 @@
 @echo off
-cd Server
+cd Emulator
 
 if NOT exist hasRan.txt (
     .\mvnw.cmd clean
