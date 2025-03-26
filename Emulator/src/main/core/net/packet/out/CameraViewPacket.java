@@ -37,7 +37,7 @@ public final class CameraViewPacket implements OutgoingPacket<CameraContext> {
                 buffer.putShort(context.getPlayer().getInterfaceManager().getPacketCount(1));
                 break;
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         p.getSession().write(buffer);
     }
 

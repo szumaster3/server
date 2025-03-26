@@ -225,13 +225,13 @@ public class Scenery extends Node {
         if (childs == null && wrapper != null) {
             def = wrapper.getDefinition();
         }
-        if (def.getVarbitID() > -1) {
+        if (def.varbitID > -1) {
             VarbitDefinition config = def.getConfigFile();
             if (config != null) {
-                setVarbit(player, def.getVarbitID(), index);
+                setVarbit(player, def.varbitID, index);
             }
-        } else if (def.getConfigId() > -1) {
-            setVarp(player, def.getConfigId(), index);
+        } else if (def.configId > -1) {
+            setVarp(player, def.configId, index);
         }
     }
 

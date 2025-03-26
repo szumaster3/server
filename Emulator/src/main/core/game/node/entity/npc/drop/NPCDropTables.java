@@ -152,7 +152,7 @@ public final class NPCDropTables {
      * @return the player.
      */
     public Player getLooter(Player player, NPC npc, Item item) {
-        int itemId = item.getDefinition().isUnnoted() ? item.getId() : item.getNoteChange();
+        int itemId = item.getDefinition().isUnnoted ? item.getId() : item.getNoteChange();
         if (player != null && npc.getProperties().isMultiZone() && (item.getDefinition().isTradeable() || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
             Player looter = player;
             List<Player> players = RegionManager.getLocalPlayers(npc, 16);
@@ -213,7 +213,7 @@ public final class NPCDropTables {
      * @return The ratio.
      */
     public double getStabilizerRatio() {
-        return (1 / (1 + def.getCombatLevel())) * 10;
+        return (1 / (1 + def.combatLevel)) * 10;
     }
 
     /**

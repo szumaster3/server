@@ -29,7 +29,7 @@ class MusicConfigLoader {
         val songs = DataMap.get(1351)
         val names = DataMap.get(1345)
 
-        for ((index, songId) in songs!!.dataStore) {
+        for ((index, songId) in songs.dataStore) {
             val entry = MusicEntry(songId as Int, names?.getString(index as Int), index)
             MusicEntry.getSongs().putIfAbsent(songId, entry)
         }
@@ -87,6 +87,6 @@ class MusicConfigLoader {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count music configs.")
+        log(this::class.java, Log.FINE, "Parsed [$count] music configs.")
     }
 }

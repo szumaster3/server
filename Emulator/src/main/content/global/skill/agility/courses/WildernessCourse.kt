@@ -167,7 +167,7 @@ class WildernessCourse
                                 player.teleporter.send(
                                     Location.create(3004, 3947, 0),
                                     TeleportManager.TeleportType.INSTANT,
-                                    TeleportManager.WILDY_TELEPORT,
+                                    TeleportManager.WILDERNESS_TELEPORT,
                                 )
                                 AgilityHandler.forceWalk(
                                     player,
@@ -187,7 +187,7 @@ class WildernessCourse
                                 player.teleporter.send(
                                     Location.create(3004, 3947, 0),
                                     TeleportManager.TeleportType.INSTANT,
-                                    TeleportManager.WILDY_TELEPORT,
+                                    TeleportManager.WILDERNESS_TELEPORT,
                                 )
                                 AgilityHandler.forceWalk(
                                     player,

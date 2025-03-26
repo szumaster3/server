@@ -49,7 +49,7 @@ public class AudioPacket implements OutgoingPacket<DefaultContext> {
             buffer = UpdateAreaPosition.getBuffer(context.getPlayer(), loc.getChunkBase());
         }
         write(buffer, audio, loc);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

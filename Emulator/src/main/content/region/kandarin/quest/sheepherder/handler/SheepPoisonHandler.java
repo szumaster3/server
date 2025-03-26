@@ -20,7 +20,7 @@ public class SheepPoisonHandler extends PluginInteraction {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         setIds(new int[]{SheepHerder.POISON.getId()});
-        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USEWITH);
+        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USE_WITH);
         return null;
     }
 

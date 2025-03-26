@@ -225,7 +225,7 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
-        on(Items.WHITE_COG_20, IntType.GROUNDITEM, "take") { player, groundItem ->
+        on(Items.WHITE_COG_20, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
                 inInventory(
                     player,
@@ -242,7 +242,7 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.GROUNDITEM, Items.BUCKET_OF_WATER_1929, Items.BLACK_COG_21) { player, _, _ ->
+        onUseWith(IntType.GROUND_ITEM, Items.BUCKET_OF_WATER_1929, Items.BLACK_COG_21) { player, _, _ ->
             if (removeItem(player, Items.BUCKET_OF_WATER_1929)) {
                 addItem(player, Items.BUCKET_1925)
                 sendDialogue(player, "You pour water over the cog. It quickly cools down enough to take.")
@@ -251,7 +251,7 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Items.BLACK_COG_21, IntType.GROUNDITEM, "take") { player, groundItem ->
+        on(Items.BLACK_COG_21, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
                 inInventory(
                     player,
@@ -314,7 +314,7 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
-        on(Items.BLUE_COG_22, IntType.GROUNDITEM, "take") { player, groundItem ->
+        on(Items.BLUE_COG_22, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
                 inInventory(
                     player,
@@ -331,7 +331,7 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
-        on(Items.RED_COG_23, IntType.GROUNDITEM, "take") { player, groundItem ->
+        on(Items.RED_COG_23, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
                 inInventory(
                     player,

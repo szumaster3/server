@@ -157,7 +157,7 @@ class HeroesQuestListener : InteractionListener {
             return@on true
         }
 
-        on(Items.FIRE_FEATHER_1583, IntType.GROUNDITEM, "take") { player, groundItem ->
+        on(Items.FIRE_FEATHER_1583, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inEquipment(player, Items.ICE_GLOVES_1580)) {
                 addItem(player, Items.FIRE_FEATHER_1583)
                 removeGroundItem(groundItem as GroundItem)

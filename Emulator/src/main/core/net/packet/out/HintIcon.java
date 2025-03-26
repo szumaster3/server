@@ -24,7 +24,7 @@ public final class HintIcon implements OutgoingPacket<HintIconContext> {
             }
             buffer.putShort(context.getModelId());
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

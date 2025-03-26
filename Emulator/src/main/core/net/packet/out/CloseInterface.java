@@ -15,7 +15,7 @@ public final class CloseInterface implements OutgoingPacket<InterfaceContext> {
         buffer.putShort(context.getPlayer().getInterfaceManager().getPacketCount(1));
         buffer.putShort(context.getWindowId());
         buffer.putShort(context.getComponentId());
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

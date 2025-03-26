@@ -274,7 +274,7 @@ public class RegionChunk {
 				if (stat == null) {
 					continue;
 				}
-				int[] pos = getRotatedPosition(x, y, stat.getDefinition().getSizeX(), stat.getDefinition().getSizeY(), stat.getRotation(), rotation);
+				int[] pos = getRotatedPosition(x, y, stat.getDefinition().sizeX, stat.getDefinition().sizeY, stat.getRotation(), rotation);
 				if (object != null) {
 					object = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
 					LandscapeParser.flagScenery(plane, baseX + pos[0], baseY + pos[1], object, true, true);

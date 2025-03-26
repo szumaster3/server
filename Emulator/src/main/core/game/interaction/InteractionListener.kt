@@ -10,8 +10,8 @@ import core.game.world.map.Location
 interface InteractionListener : ContentInterface {
     val ITEM
         get() = IntType.ITEM
-    val GROUNDITEM
-        get() = IntType.GROUNDITEM
+    val GROUND_ITEM
+        get() = IntType.GROUND_ITEM
     val NPC
         get() = IntType.NPC
     val SCENERY

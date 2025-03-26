@@ -142,7 +142,7 @@ object GameWorld {
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
-        SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
+        SceneryDefinition.definitions.values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
 
         if (ServerConstants.PRELOAD_MAP) {
             (7483..15420).forEach { id -> RegionManager.forId(id).also { Region.load(it) } }

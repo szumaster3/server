@@ -78,7 +78,7 @@ class FiremakingListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.GROUNDITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
+        onUseWith(IntType.GROUND_ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
             player.pulseManager.run(
                 FiremakingPulse(
                     player,

@@ -308,7 +308,7 @@ class ZogreFleshEatersListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Items.CUP_OF_TEA_4838, IntType.GROUNDITEM, "take") { player, node ->
+        on(Items.CUP_OF_TEA_4838, IntType.GROUND_ITEM, "take") { player, node ->
             val cup = node as GroundItem
             if (cup.location == Location(2593, 3103, 1)) {
                 sendNPCDialogue(
@@ -326,7 +326,7 @@ class ZogreFleshEatersListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.GROUNDITEM, ZUtils.STRANGE_POTION, Items.CUP_OF_TEA_4838) { player, used, _ ->
+        onUseWith(IntType.GROUND_ITEM, ZUtils.STRANGE_POTION, Items.CUP_OF_TEA_4838) { player, used, _ ->
             lock(player, 2)
             animate(player, 537)
             replaceSlot(player, used.asItem().index, Item(Items.SAMPLE_BOTTLE_3377))

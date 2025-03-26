@@ -12,7 +12,7 @@ public final class WindowsPane implements OutgoingPacket<WindowsPaneContext> {
     @Override
     public void send(WindowsPaneContext context) {
         IoBuffer buffer = new IoBuffer(145);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         buffer.putLEShortA(context.getWindowId());
         buffer.putS(context.getType());
         buffer.putLEShortA(context.getPlayer().getInterfaceManager().getPacketCount(1));

@@ -47,76 +47,31 @@ public final class Skills {
     /**
      * Skill index constants.
      */
-    public static final int ATTACK = 0, /**
-     * The Defence.
-     */
-    DEFENCE = 1, /**
-     * The Strength.
-     */
-    STRENGTH = 2, /**
-     * The Hitpoints.
-     */
-    HITPOINTS = 3, /**
-     * The Range.
-     */
-    RANGE = 4, /**
-     * The Prayer.
-     */
-    PRAYER = 5, /**
-     * The Magic.
-     */
-    MAGIC = 6, /**
-     * The Cooking.
-     */
-    COOKING = 7, /**
-     * The Woodcutting.
-     */
-    WOODCUTTING = 8, /**
-     * The Fletching.
-     */
-    FLETCHING = 9, /**
-     * The Fishing.
-     */
-    FISHING = 10, /**
-     * The Firemaking.
-     */
-    FIREMAKING = 11, /**
-     * The Crafting.
-     */
-    CRAFTING = 12, /**
-     * The Smithing.
-     */
-    SMITHING = 13, /**
-     * The Mining.
-     */
-    MINING = 14, /**
-     * The Herblore.
-     */
-    HERBLORE = 15, /**
-     * The Agility.
-     */
-    AGILITY = 16, /**
-     * The Thieving.
-     */
-    THIEVING = 17, /**
-     * The Slayer.
-     */
-    SLAYER = 18, /**
-     * The Farming.
-     */
-    FARMING = 19, /**
-     * The Runecrafting.
-     */
-    RUNECRAFTING = 20, /**
-     * The Hunter.
-     */
-    HUNTER = 21, /**
-     * The Construction.
-     */
-    CONSTRUCTION = 22, /**
-     * The Summoning.
-     */
-    SUMMONING = 23;
+    public static final int
+            ATTACK = 0,
+            DEFENCE = 1,
+            STRENGTH = 2,
+            HITPOINTS = 3,
+            RANGE = 4,
+            PRAYER = 5,
+            MAGIC = 6,
+            COOKING = 7,
+            WOODCUTTING = 8,
+            FLETCHING = 9,
+            FISHING = 10,
+            FIREMAKING = 11,
+            CRAFTING = 12,
+            SMITHING = 13,
+            MINING = 14,
+            HERBLORE = 15,
+            AGILITY = 16,
+            THIEVING = 17,
+            SLAYER = 18,
+            FARMING = 19,
+            RUNECRAFTING = 20,
+            HUNTER = 21,
+            CONSTRUCTION = 22,
+            SUMMONING = 23;
 
     /**
      * Total number of skills.
@@ -594,7 +549,7 @@ public final class Skills {
 
     private int calculateCombatLevel() {
         if (entity instanceof NPC) {
-            return ((NPC) entity).getDefinition().getCombatLevel();
+            return ((NPC) entity).getDefinition().combatLevel;
         }
 
         int attackStrength = staticLevels[ATTACK] + staticLevels[STRENGTH];

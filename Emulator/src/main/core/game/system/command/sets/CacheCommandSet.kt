@@ -458,14 +458,14 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val dump = File("varbit_definitions.json")
             val varbits = mutableListOf<Map<String, Any?>>()
 
-            for ((id, varbitDef) in VarbitDefinition.getMapping()) {
+            for ((id, varbitDef) in VarbitDefinition.mapping) {
                 val varbitMap =
                     mapOf(
                         "id" to id,
                         "varpId" to varbitDef.varpId,
                         "startBit" to varbitDef.startBit,
                         "endBit" to varbitDef.endBit,
-                        "mask" to varbitDef.getMask(),
+                        "mask" to varbitDef.mask,
                     )
                 varbits.add(varbitMap)
             }
@@ -553,7 +553,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             val file = File("530_cache_item_values_from_client.csv")
             PrintWriter(file).use { writer ->
                 writer.println("id,name,cost")
-                for (item in ItemDefinition.getDefinitions().values) {
+                for (item in ItemDefinition.definitions.values) {
                     writer.println("${item.id},${item.name},${item.value}")
                 }
             }

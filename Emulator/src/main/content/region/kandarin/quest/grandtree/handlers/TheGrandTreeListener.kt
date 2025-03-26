@@ -153,19 +153,19 @@ class TheGrandTreeListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Items.TWIGS_789, IntType.GROUNDITEM, "take") { player, _ ->
+        on(Items.TWIGS_789, IntType.GROUND_ITEM, "take") { player, _ ->
             setAttribute(player, TheGrandTreeUtils.TWIG_0, false)
             return@on true
         }
-        on(Items.TWIGS_790, IntType.GROUNDITEM, "take") { player, _ ->
+        on(Items.TWIGS_790, IntType.GROUND_ITEM, "take") { player, _ ->
             setAttribute(player, TheGrandTreeUtils.TWIG_1, false)
             return@on true
         }
-        on(Items.TWIGS_791, IntType.GROUNDITEM, "take") { player, _ ->
+        on(Items.TWIGS_791, IntType.GROUND_ITEM, "take") { player, _ ->
             setAttribute(player, TheGrandTreeUtils.TWIG_2, false)
             return@on true
         }
-        on(Items.TWIGS_792, IntType.GROUNDITEM, "take") { player, _ ->
+        on(Items.TWIGS_792, IntType.GROUND_ITEM, "take") { player, _ ->
             setAttribute(player, TheGrandTreeUtils.TWIG_3, false)
             return@on true
         }

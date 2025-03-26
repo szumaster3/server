@@ -43,15 +43,15 @@ class DumpCommand : CommandPlugin() {
         val f = File(System.getProperty("user.dir") + File.separator + "${type}list.txt")
         val writer = f.bufferedWriter()
         when (type) {
-            "item" -> for (i in ItemDefinition.getDefinitions().values) {
+            "item" -> for (i in ItemDefinition.definitions.values) {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
 
-            "object" -> for (i in SceneryDefinition.getDefinitions().values) {
+            "object" -> for (i in SceneryDefinition.definitions.values) {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
 
-            "npc" -> for (i in NPCDefinition.getDefinitions().values) {
+            "npc" -> for (i in NPCDefinition.definitions.values) {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
         }
@@ -72,7 +72,7 @@ class DumpCommand : CommandPlugin() {
         writer.writeLn("<th>Examine Text</th>")
         writer.writeLn("</tr>")
         when (type) {
-            "item" -> for (i in ItemDefinition.getDefinitions().values) {
+            "item" -> for (i in ItemDefinition.definitions.values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td id=\"id\">${i.id}</td>")
@@ -80,7 +80,7 @@ class DumpCommand : CommandPlugin() {
                 writer.writeLn("</tr>")
             }
 
-            "object" -> for (i in SceneryDefinition.getDefinitions().values) {
+            "object" -> for (i in SceneryDefinition.definitions.values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td>${i.id}</td>")
@@ -88,7 +88,7 @@ class DumpCommand : CommandPlugin() {
                 writer.writeLn("</tr>")
             }
 
-            "npc" -> for (i in NPCDefinition.getDefinitions().values) {
+            "npc" -> for (i in NPCDefinition.definitions.values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td>${i.id}</td>")

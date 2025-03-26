@@ -28,7 +28,7 @@ class ConfigParser : Commands {
         ClueRewardParser().load()
     }
 
-    fun reloadConfigs(callback: () -> Unit) {
+    private fun reloadConfigs(callback: () -> Unit) {
         GlobalScope.launch {
             Repository.npcs.toTypedArray().forEach { npc ->
                 npc.isRespawn = false

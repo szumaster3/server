@@ -1825,7 +1825,7 @@ fun getVarbit(
     player: Player,
     def: VarbitDefinition,
 ): Int {
-    val mask = def.getMask()
+    val mask = def.mask
     val current = getVarp(player, def.varpId)
     return (current shr def.startBit) and mask
 }
@@ -1906,7 +1906,7 @@ fun setVarbit(
     value: Int,
     save: Boolean = false,
 ) {
-    val mask = def.getMask()
+    val mask = def.mask
     val current = getVarp(player, def.varpId) and (mask shl def.startBit).inv()
     val newValue = (value and mask) shl def.startBit
     setVarp(player, def.varpId, current or newValue, save)

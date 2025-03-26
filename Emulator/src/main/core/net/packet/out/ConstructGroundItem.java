@@ -31,7 +31,7 @@ public final class ConstructGroundItem implements OutgoingPacket<BuildItemContex
         Player player = context.getPlayer();
         Item item = context.getItem();
         IoBuffer buffer = write(UpdateAreaPosition.getBuffer(player, item.getLocation().getChunkBase()), item);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         player.getDetails().getSession().write(buffer);
     }
 }

@@ -247,4 +247,74 @@ object Util {
             return -1.0
         }
     }
+
+    fun getFormatedMessage(message: String): ByteArray {
+        val i_0_ = message.length
+        val `is` = ByteArray(i_0_)
+        var i_1_ = 0
+        while ((i_1_ xor -0x1) > (i_0_ xor -0x1)
+        ) {
+            val i_2_ = message[i_1_].code
+            if (((i_2_ xor -0x1) >= -1 || i_2_ >= 128)
+                && (i_2_ < 160 || i_2_ > 255)
+            ) {
+                if ((i_2_ xor -0x1) != -8365) {
+                    if ((i_2_ xor -0x1) == -8219) `is`[i_1_] = ((-126).toByte())
+                    else if ((i_2_ xor -0x1) == -403) `is`[i_1_] = ((-125).toByte())
+                    else if (i_2_ == 8222) `is`[i_1_] = (((-124).toByte()))
+                    else if (i_2_ != 8230) {
+                        if ((i_2_ xor -0x1) != -8225) {
+                            if ((i_2_ xor -0x1) != -8226) {
+                                if ((i_2_ xor -0x1) == -711) `is`[i_1_] = ((-120).toByte())
+                                else if (i_2_ == 8240) `is`[i_1_] = ((-119).toByte())
+                                else if ((i_2_ xor -0x1) == -353) `is`[i_1_] = ((-118).toByte())
+                                else if ((i_2_ xor -0x1) != -8250) {
+                                    if (i_2_ == 338) `is`[i_1_] = ((-116).toByte())
+                                    else if (i_2_ == 381) `is`[i_1_] = ((-114).toByte())
+                                    else if ((i_2_ xor -0x1) == -8217) `is`[i_1_] = ((-111).toByte())
+                                    else if (i_2_ == 8217) `is`[i_1_] = ((-110).toByte())
+                                    else if (i_2_ != 8220) {
+                                        if (i_2_ == 8221) `is`[i_1_] = ((-108).toByte())
+                                        else if ((i_2_ xor -0x1)
+                                            == -8227
+                                        ) `is`[i_1_] = ((-107).toByte())
+                                        else if ((i_2_ xor -0x1)
+                                            != -8212
+                                        ) {
+                                            if (i_2_ == 8212) `is`[i_1_] = ((-105).toByte())
+                                            else if ((i_2_ xor -0x1)
+                                                != -733
+                                            ) {
+                                                if (i_2_ != 8482) {
+                                                    if (i_2_ == 353) `is`[i_1_] = ((-102).toByte())
+                                                    else if (i_2_
+                                                        != 8250
+                                                    ) {
+                                                        if ((i_2_
+                                                                    xor -0x1)
+                                                            == -340
+                                                        ) `is`[i_1_] = ((-100).toByte())
+                                                        else if (i_2_
+                                                            != 382
+                                                        ) {
+                                                            if (i_2_
+                                                                == 376
+                                                            ) `is`[i_1_] = ((-97).toByte())
+                                                            else `is`[i_1_] = 63.toByte()
+                                                        } else `is`[i_1_] = ((-98).toByte())
+                                                    } else `is`[i_1_] = ((-101).toByte())
+                                                } else `is`[i_1_] = ((-103).toByte())
+                                            } else `is`[i_1_] = ((-104).toByte())
+                                        } else `is`[i_1_] = ((-106).toByte())
+                                    } else `is`[i_1_] = ((-109).toByte())
+                                } else `is`[i_1_] = ((-117).toByte())
+                            } else `is`[i_1_] = ((-121).toByte())
+                        } else `is`[i_1_] = ((-122).toByte())
+                    } else `is`[i_1_] = ((-123).toByte())
+                } else `is`[i_1_] = ((-128).toByte())
+            } else `is`[i_1_] = i_2_.toByte()
+            i_1_++
+        }
+        return `is`
+    }
 }

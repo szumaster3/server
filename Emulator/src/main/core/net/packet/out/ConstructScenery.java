@@ -30,7 +30,7 @@ public final class ConstructScenery implements OutgoingPacket<BuildSceneryContex
         Player player = context.getPlayer();
         Scenery o = context.getScenery();
         IoBuffer buffer = write(UpdateAreaPosition.getBuffer(player, o.getLocation().getChunkBase()), o);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         player.getSession().write(buffer);
 
     }

@@ -133,7 +133,7 @@ public class BuildRegionChunk extends RegionChunk {
                 for (int y = 0; y < SIZE; y++) {
                     Scenery object = copy[i][x][y];
                     if (object != null) {
-                        int[] pos = getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);
+                        int[] pos = getRotatedPosition(x, y, object.getDefinition().sizeX, object.getDefinition().sizeY, object.getRotation(), rotation);
                         Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
                         if (object instanceof Constructed) {
                             obj = obj.asConstructed();

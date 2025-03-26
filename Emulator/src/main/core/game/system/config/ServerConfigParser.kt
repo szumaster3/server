@@ -45,7 +45,7 @@ object ServerConfigParser {
                 } else if (!jvmString.contains(".")) {
                     ServerConstants.JAVA_VERSION = jvmString.toInt()
                 }
-                log(this::class.java, Log.FINE, "It seems we are in a Java ${ServerConstants.JAVA_VERSION} environment.")
+                log(this::class.java, Log.FINE, "It seems we are in a Java [${ServerConstants.JAVA_VERSION}] environment.")
             } catch (e: java.lang.IllegalStateException) {
                 log(this::class.java, Log.ERR, "Passed config file is not a TOML file. Path: ${confFile.canonicalPath}")
                 log(this::class.java, Log.ERR, "Exception received: $e")
@@ -73,12 +73,10 @@ object ServerConfigParser {
                 isLootshare = false,
                 msAddress = data.getString("server.msip"),
                 default_xp_rate = data.getDouble("world.default_xp_rate"),
-                // allow_slayer_reroll = data.getBoolean("world.allow_slayer_reroll"),
                 enable_default_clan = data.getBoolean("world.enable_default_clan"),
                 enable_bots = data.getBoolean("world.enable_bots"),
                 autostock_ge = data.getBoolean("world.autostock_ge"),
                 allow_token_purchase = data.getBoolean("world.allow_token_purchase"),
-                // skillcape_perks = data.getBoolean("world.skillcape_perks"),
                 increased_door_time = data.getBoolean("world.increased_door_time"),
                 enabled_botting = data.getBoolean("world.enable_botting"),
                 max_adv_bots = data.getLong("world.max_adv_bots").toInt(),

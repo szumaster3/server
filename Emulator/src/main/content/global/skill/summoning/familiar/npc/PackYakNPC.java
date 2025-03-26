@@ -59,7 +59,7 @@ public class PackYakNPC extends BurdenBeast {
             return false;
         }
         Item remove = item;
-        if (!item.getDefinition().isUnnoted()) {
+        if (!item.getDefinition().isUnnoted) {
             remove = new Item(item.getId(), 1);
             item = new Item(item.getNoteChange(), 1);
         }
@@ -67,7 +67,6 @@ public class PackYakNPC extends BurdenBeast {
         if (success) {
             success = removeItem(player, remove, Container.INVENTORY);
             if (!success) {
-                // Add worked, but remove failed. This should never happen (it by definition constitutes an item duplication).
                 boolean recovered = removeItem(player, item, Container.BANK);
                 if (recovered) {
                     PlayerMonitor.log(player, LogType.DUPE_ALERT, "Successfully recovered from potential dupe attempt involving the winter storage scroll");

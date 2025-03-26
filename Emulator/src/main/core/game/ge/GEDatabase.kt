@@ -73,7 +73,7 @@ object GEDatabase {
     private fun populateInitialPriceIndex() {
         run {
             with(it.prepareStatement(PriceIndex.INSERT_QUERY)) {
-                ItemDefinition.getDefinitions().values.forEach { def ->
+                ItemDefinition.definitions.values.forEach { def ->
                     if (def.isTradeable) {
                         setInt(1, def.id)
                         setInt(2, def.getAlchemyValue(true))

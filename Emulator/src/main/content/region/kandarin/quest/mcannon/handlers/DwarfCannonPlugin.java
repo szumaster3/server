@@ -161,7 +161,7 @@ public class DwarfCannonPlugin extends OptionHandler {
                                         }
                                         player.getInventory().remove(new Item(14));
                                         player.sendMessage("The railing is now fixed.");
-                                        setVarbit(player, ((Scenery) node).getDefinition().getVarbitID(), 1, true);
+                                        setVarbit(player, ((Scenery) node).getDefinition().varbitID, 1, true);
                                         if (DwarfCannon.allRailsFixed(player)) {
                                             player.getDialogueInterpreter().sendDialogues(player, null, "I've fixed all these railings now.");
                                         }

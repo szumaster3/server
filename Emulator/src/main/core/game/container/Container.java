@@ -562,7 +562,7 @@ public class Container {
             int id = buffer.getShort() & 0xFFFF;
             int amount = buffer.getInt();
             int charge = buffer.getInt();
-            if (id >= ItemDefinition.getDefinitions().size() || slot >= items.length || slot < 0) {
+            if (id >= ItemDefinition.definitions.size() || slot >= items.length || slot < 0) {
                 continue;
             }
             Item item = items[slot] = new Item(id, amount, charge);
@@ -585,7 +585,7 @@ public class Container {
             int id = Integer.parseInt(i.get("id").toString());
             int amount = Integer.parseInt(i.get("amount").toString());
             int charge = Integer.parseInt(i.get("charge").toString());
-            if (id >= ItemDefinition.getDefinitions().size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
+            if (id >= ItemDefinition.definitions.size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
             } else {
                 Item it = items[slot] = new Item(id, amount, charge);
                 it.setIndex(slot);

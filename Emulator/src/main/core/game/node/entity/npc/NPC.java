@@ -225,8 +225,8 @@ public class NPC extends Entity {
      * Init config.
      */
     public void initConfig() {
-        int defaultLevel = definition.getCombatLevel() / 2;
-        getProperties().setCombatLevel(definition.getCombatLevel());
+        int defaultLevel = definition.combatLevel / 2;
+        getProperties().setCombatLevel(definition.combatLevel);
         getSkills().setStaticLevel(Skills.ATTACK, definition.getConfiguration(NPCConfigParser.ATTACK_LEVEL, defaultLevel));
         getSkills().setStaticLevel(Skills.STRENGTH, definition.getConfiguration(NPCConfigParser.STRENGTH_LEVEL, defaultLevel));
         getSkills().setStaticLevel(Skills.DEFENCE, definition.getConfiguration(NPCConfigParser.DEFENCE_LEVEL, defaultLevel));
@@ -327,7 +327,7 @@ public class NPC extends Entity {
      * Sets default behavior.
      */
     public void setDefaultBehavior() {
-        if (aggressive && definition.getCombatLevel() > 0) {
+        if (aggressive && definition.combatLevel > 0) {
             aggressiveHandler = new AggressiveHandler(this, AggressiveBehavior.DEFAULT);
             aggressiveHandler.setRadius(definition.getConfiguration(NPCConfigParser.AGGRESSIVE_RADIUS, 4));
         }
@@ -570,10 +570,10 @@ public class NPC extends Entity {
         if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getPlayerImpactLog().size() > 1) {
             return;
         }
-        if (definition == null || definition.getDropTables() == null) {
+        if (definition == null || definition.dropTables == null) {
             return;
         }
-        definition.getDropTables().drop(this, killer);
+        definition.dropTables.drop(this, killer);
     }
 
     @Override

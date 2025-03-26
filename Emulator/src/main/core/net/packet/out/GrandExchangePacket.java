@@ -31,7 +31,7 @@ public class GrandExchangePacket implements OutgoingPacket<GrandExchangeContext>
                     putInt(context.completedAmt).putInt(context.totalCoinsExchanged);
         }
         try {
-            buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+            buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
             context.getPlayer().getSession().write(buffer);
         } catch (Exception e) {
         }

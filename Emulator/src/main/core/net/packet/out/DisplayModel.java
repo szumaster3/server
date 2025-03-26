@@ -41,7 +41,7 @@ public final class DisplayModel implements OutgoingPacket<DisplayModelContext> {
             default:
                 return;
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

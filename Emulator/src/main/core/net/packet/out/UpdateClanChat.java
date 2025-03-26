@@ -36,7 +36,7 @@ public final class UpdateClanChat implements OutgoingPacket<ClanContext> {
         } else {
             buffer.putLong(0);
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

@@ -16,7 +16,7 @@ public class StringPacket implements OutgoingPacket<StringContext> {
         buffer.putIntB((context.getInterfaceId() << 16) | context.getLineId());
         buffer.putString(context.getString());
         buffer.putShortA(context.getPlayer().getInterfaceManager().getPacketCount(1));
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getDetails().getSession().write(buffer);
     }
 }

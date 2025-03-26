@@ -197,7 +197,7 @@ class CreatureOfFenkenstrainListener : InteractionListener {
             return@on true
         }
 
-        on(Items.PICKLED_BRAIN_4199, GROUNDITEM, "take") { player, node ->
+        on(Items.PICKLED_BRAIN_4199, GROUND_ITEM, "take") { player, node ->
             if (node.location.equals(3492, 3474, 0)) {
                 openDialogue(player, RoavarDialogueFile(2), findLocalNPC(player, NPCs.ROAVAR_1042)!!)
             } else {

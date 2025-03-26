@@ -88,7 +88,7 @@ public final class WildernessZone extends MapZone {
         if (!(e instanceof NPC)) return;
         if (!(e.getId() == NPCs.CHAOS_ELEMENTAL_3200 || e.asNpc().getName().contains("Revenant"))) return;
 
-        int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().getCombatLevel());
+        int pvpGearRate = getNewDropRate(e.asNpc().getDefinition().combatLevel);
         boolean higherRate = ((Player) killer).getSkullManager().isDeepWilderness() && ((Player) killer).getAttribute("deepwild-value-risk", 0L) > SkullManager.DEEP_WILD_DROP_RISK_THRESHOLD;
         if (higherRate) {
             pvpGearRate /= 2;

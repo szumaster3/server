@@ -17,7 +17,7 @@ public class AccessMask implements OutgoingPacket<AccessMaskContext> {
         buffer.putInt(context.getInterfaceId() << 16 | context.getChildId());
         buffer.putShortA(context.getOffset());
         buffer.putIntA(context.getId());
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 }

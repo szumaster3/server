@@ -133,7 +133,7 @@ public final class ClimbActionHandler {
             sizeY = switcher;
         }
 
-        Direction dir = Direction.forWalkFlag(scenery.getDefinition().getWalkingFlag(), scenery.getRotation());
+        Direction dir = Direction.forWalkFlag(scenery.getDefinition().walkingFlag, scenery.getRotation());
         if (dir != null) {
             return getDestination(scenery, sizeX, sizeY, dir, 0);
         }

@@ -19,9 +19,9 @@ import static core.api.ContentAPIKt.*;
 public class TeleportManager {
 
     /**
-     * The constant WILDY_TELEPORT.
+     * The constant wilderness teleports.
      */
-    public static final int WILDY_TELEPORT = 1 << 16 | 8;
+    public static final int WILDERNESS_TELEPORT = 1 << 16 | 8;
 
     private final static int[] HOME_ANIMATIONS = {1722, 1723, 1724, 1725, 2798, 2799, 2800, 3195, 4643, 4645, 4646, 4847, 4848, 4849, 4850, 4851, 4852, 65535};
 
@@ -75,7 +75,7 @@ public class TeleportManager {
      * @return the boolean
      */
     public boolean send(Location location, TeleportType type, int teleportType) {
-        if (teleportType == WILDY_TELEPORT || type == TeleportType.OBELISK) {
+        if (teleportType == WILDERNESS_TELEPORT || type == TeleportType.OBELISK) {
             if (hasTimerActive(entity, "teleblock")) return false;
         } else {
             if (!entity.getZoneMonitor().teleport(teleportType, null)) {

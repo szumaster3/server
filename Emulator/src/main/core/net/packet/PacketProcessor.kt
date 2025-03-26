@@ -327,7 +327,7 @@ object PacketProcessor {
                 pkt.player.debug("[SCENERY]---------------------")
                 pkt.player.debug("ID: ${pkt.id}")
                 if (def.configFile != null) {
-                    pkt.player.debug("Varbit: ${def.configFile.id}")
+                    pkt.player.debug("Varbit: ${def.configFile!!.id}")
                 }
                 pkt.player.debug("------------------------------")
                 when {
@@ -346,7 +346,7 @@ object PacketProcessor {
                 }
                 pkt.player.debug("------------------------------")
                 when {
-                    tutorialStage < 73 -> sendTutorialMessage(pkt.player, def.examine)
+                    tutorialStage < 73 -> sendTutorialMessage(pkt.player, def.examine!!)
                     else -> pkt.player.sendMessage(def.examine)
                 }
             }
@@ -662,7 +662,7 @@ object PacketProcessor {
             node = GroundItemManager.get(pkt.withId, Location.create(pkt.x, pkt.y, pkt.player.location.z), pkt.player)
                 ?: return
             nodeId = pkt.withId
-            type = IntType.GROUNDITEM
+            type = IntType.GROUND_ITEM
             player = pkt.player
         } else {
             if (pkt !is Packet.UseWithPlayer) return
@@ -726,7 +726,7 @@ object PacketProcessor {
         if (PluginInteractionManager.handle(player, item, option)) {
             return
         }
-        if (InteractionListeners.run(item.id, IntType.GROUNDITEM, option.name, player, item)) {
+        if (InteractionListeners.run(item.id, IntType.GROUND_ITEM, option.name, player, item)) {
             return
         }
         if (InteractionListeners.run(item.id, IntType.ITEM, option.name, player, item)) {

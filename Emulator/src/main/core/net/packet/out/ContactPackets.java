@@ -46,7 +46,7 @@ public final class ContactPackets implements OutgoingPacket<ContactContext> {
                 break;
         }
         if (buffer != null) {
-            buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+            buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
             player.getSession().write(buffer);
         }
     }

@@ -56,11 +56,11 @@ class GroundSpawnLoader {
                 val sw = StringWriter()
                 val pw = PrintWriter(sw)
                 e.printStackTrace(pw)
-                log(this::class.java, Log.ERR, "Error parsing config entry $config: $sw")
+                log(this::class.java, Log.ERR, "Error parsing config entry [$config]: [$sw]")
             }
         }
 
-        log(this::class.java, Log.FINE, "Initialized $count ground items.")
+        log(this::class.java, Log.FINE, "Initialized [$count] ground items.")
     }
 
     class GroundSpawn(

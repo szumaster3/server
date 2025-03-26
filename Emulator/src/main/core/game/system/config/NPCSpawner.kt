@@ -21,10 +21,10 @@ class NPCSpawner {
         val configs = parser.parse(reader) as JSONArray
         for (config in configs) {
             val e = config as JSONObject
-            val datas: Array<String> = e["loc_data"].toString().split("-".toRegex()).toTypedArray()
+            val data: Array<String> = e["loc_data"].toString().split("-".toRegex()).toTypedArray()
             var tokens: Array<String>? = null
             val id = e["npc_id"].toString().toInt()
-            for (d in datas) {
+            for (d in data) {
                 if (d.isEmpty()) {
                     continue
                 }
@@ -54,6 +54,6 @@ class NPCSpawner {
             }
         }
 
-        log(this::class.java, Log.FINE, "Spawned $count NPCs")
+        log(this::class.java, Log.FINE, "Spawned [$count] NPCs.")
     }
 }

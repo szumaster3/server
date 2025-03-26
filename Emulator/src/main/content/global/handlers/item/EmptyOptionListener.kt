@@ -114,7 +114,7 @@ class EmptyOptionListener : InteractionListener {
                     emptyAudioMap.putIfAbsent(item.fullId, item.audioId)
                     emptyItemList.add(item.fullId)
                 }
-                for (item in ItemDefinition.getDefinitions().values) {
+                for (item in ItemDefinition.definitions.values) {
                     if (item.name.contains("potion") ||
                         item.name.contains("brew") ||
                         item.name.contains("poison") ||

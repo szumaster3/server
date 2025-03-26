@@ -2,12 +2,8 @@ package core.game.interaction
 
 enum class IntType {
     ITEM,
-
     SCENERY,
-
     NPC,
-
-    GROUNDITEM,
-
+    GROUND_ITEM,
     PLAYER,
 }

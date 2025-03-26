@@ -20,7 +20,7 @@ import org.rs.consts.Items
 class GarlicPipeInteraction : PluginInteraction() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         setIds(intArrayOf(FishingContest.GARLIC.id, 41))
-        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USEWITH)
+        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USE_WITH)
         PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.OBJECT)
         return this
     }

@@ -22,11 +22,11 @@ class ShopParser {
     fun load() {
         var count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "shops.json")
-        val configlist = parser.parse(reader) as JSONArray
-        for (config in configlist) {
+        val configList = parser.parse(reader) as JSONArray
+        for (config in configList) {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count shops.")
+        log(this::class.java, Log.FINE, "Parsed [$count] shops.")
     }
 }

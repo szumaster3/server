@@ -59,8 +59,8 @@ class NPCConfigParser {
     fun load() {
         var count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "npc_configs.json")
-        val configlist = parser.parse(reader) as JSONArray
-        for (config in configlist) {
+        val configList = parser.parse(reader) as JSONArray
+        for (config in configList) {
             val e = config as JSONObject
             val def = NPCDefinition.forId(e["id"].toString().toInt())
             val configs = def.handlers
@@ -132,13 +132,13 @@ class NPCConfigParser {
                         "water_npc",
                         -> configs[it.key.toString()] = it.value.toString().toBoolean()
 
-                        else -> log(this::class.java, Log.WARN, "Unhandled key for npc config: ${it.key}")
+                        else -> log(this::class.java, Log.WARN, "Unhandled key for npc config: [${it.key}]")
                     }
                 }
             }
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count NPC configurations.")
+        log(this::class.java, Log.FINE, "Parsed [$count] NPC configurations.")
     }
 }

@@ -16,8 +16,8 @@ class ObjectConfigParser {
     fun load() {
         var count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "object_configs.json")
-        val configlist = parser.parse(reader) as JSONArray
-        for (config in configlist) {
+        val configList = parser.parse(reader) as JSONArray
+        for (config in configList) {
             val e = config as JSONObject
             val ids = e["ids"].toString().split(",").map { it.toInt() }
             for (id in ids) {
@@ -27,7 +27,7 @@ class ObjectConfigParser {
                     if (it.value.toString().isNotEmpty() && it.value.toString() != "null") {
                         when (it.key.toString()) {
                             "examine" -> configs[it.key.toString()] = it.value.toString()
-                            "render_anim" -> def.animationId = it.value.toString().toInt()
+                            "render_anim" -> def.addObjectCheck = it.value.toString().toInt()
                         }
                     }
                 }
@@ -35,6 +35,6 @@ class ObjectConfigParser {
             }
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count object configs.")
+        log(this::class.java, Log.FINE, "Parsed [$count] object configs.")
     }
 }

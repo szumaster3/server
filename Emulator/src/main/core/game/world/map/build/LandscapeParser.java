@@ -130,26 +130,26 @@ public final class LandscapeParser {
         int type = scenery.getType();
         if (type == 22) { //Tile
             plane.getFlags().getLandscape()[localX][localY] = true;
-            if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand()) {
+            if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand) {
                 if (def.solid == 1) {
                     plane.getFlags().flagTileObject(localX, localY);
-                    if (def.isProjectileClipped()) {
+                    if (def.isProjectileClipped) {
                         plane.getProjectileFlags().flagTileObject(localX, localY);
                     }
                 }
             }
         } else if (type >= 9) { //Default objects
             if (def.solid != 0) {
-                plane.getFlags().flagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped());
-                if (def.isProjectileClipped()) {
-                    plane.getProjectileFlags().flagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped());
+                plane.getFlags().flagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped);
+                if (def.isProjectileClipped) {
+                    plane.getProjectileFlags().flagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped);
                 }
             }
         } else if (type >= 0 && type <= 3) { //Doors/walls
             if (def.solid != 0) {
-                plane.getFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped());
-                if (def.isProjectileClipped()) {
-                    plane.getProjectileFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped());
+                plane.getFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                if (def.isProjectileClipped) {
+                    plane.getProjectileFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
                 }
             }
         } else {
@@ -201,26 +201,26 @@ public final class LandscapeParser {
         }
         int type = scenery.getType();
         if (type == 22) { //Tile
-            if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand()) {
+            if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand) {
                 if (def.solid == 1) {
                     plane.getFlags().unflagTileObject(localX, localY);
-                    if (def.isProjectileClipped()) {
+                    if (def.isProjectileClipped) {
                         plane.getProjectileFlags().unflagTileObject(localX, localY);
                     }
                 }
             }
         } else if (type >= 9) { //Default objects
             if (def.solid != 0) {
-                plane.getFlags().unflagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped());
-                if (def.isProjectileClipped()) {
-                    plane.getProjectileFlags().unflagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped());
+                plane.getFlags().unflagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped);
+                if (def.isProjectileClipped) {
+                    plane.getProjectileFlags().unflagSolidObject(localX, localY, sizeX, sizeY, def.isProjectileClipped);
                 }
             }
         } else if (type >= 0 && type <= 3) { //Doors/walls
             if (def.solid != 0) {
-                plane.getFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped());
-                if (def.isProjectileClipped()) {
-                    plane.getProjectileFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped());
+                plane.getFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                if (def.isProjectileClipped) {
+                    plane.getProjectileFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
                 }
             }
         }

@@ -9,13 +9,11 @@ import org.json.simple.parser.JSONParser
 import java.io.FileReader
 
 class XteaParser {
-    companion object {
-        val REGION_XTEA = HashMap<Int, IntArray>()
-        val DEFAULT_REGION_KEYS = intArrayOf(14881828, -6662814, 58238456, 146761213)
-
-        fun getRegionXTEA(regionId: Int): IntArray? {
-            return REGION_XTEA[regionId]
-            return DEFAULT_REGION_KEYS
+    companion object{
+        val REGION_XTEA = HashMap<Int,IntArray>()
+        private val DEFAULT_REGION_KEYS = intArrayOf(0, 0, 0, 0)
+        fun getRegionXTEA(regionId: Int): IntArray {
+            return  REGION_XTEA.getOrDefault(regionId, DEFAULT_REGION_KEYS)
         }
     }
 
@@ -26,8 +24,8 @@ class XteaParser {
         var count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "xteas.json")
         val obj = parser.parse(reader) as JSONObject
-        val configlist = obj["xteas"] as JSONArray
-        for (config in configlist) {
+        val configList = obj["xteas"] as JSONArray
+        for (config in configList) {
             val e = config as JSONObject
             val id = e["regionId"].toString().toInt()
             val keys = e["keys"].toString().split(",").map(String::toInt)
@@ -35,6 +33,6 @@ class XteaParser {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count region keys.")
+        log(this::class.java, Log.FINE, "Parsed [$count] region keys.")
     }
 }

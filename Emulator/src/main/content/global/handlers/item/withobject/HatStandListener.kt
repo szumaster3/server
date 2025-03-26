@@ -10,7 +10,7 @@ import org.rs.consts.Scenery
 class HatStandListener : InteractionListener {
     val hats =
         ItemDefinition
-            .getDefinitions()
+            .definitions
             .values
             .filter {
                 it.getConfiguration("equipment_slot", 0) == EquipmentSlot.HEAD.ordinal

@@ -21,7 +21,7 @@ public final class InteractionOption implements OutgoingPacket<InteractionOption
         }
         buffer.put(context.getIndex() + 1);
         buffer.putString(context.getName());
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

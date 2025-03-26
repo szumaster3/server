@@ -31,7 +31,7 @@ class WildernessLeverListener : InteractionListener {
         player: Player,
         location: Location?,
     ) {
-        player.teleporter.send(Location.create(2272, 4680, 0), TeleportType.NORMAL, TeleportManager.WILDY_TELEPORT)
+        player.teleporter.send(Location.create(2272, 4680, 0), TeleportType.NORMAL, TeleportManager.WILDERNESS_TELEPORT)
     }
 
     override fun defineListeners() {
@@ -156,7 +156,7 @@ class WildernessLeverListener : InteractionListener {
                             player.teleporter.send(
                                 Location.create(2272, 4680, 0),
                                 TeleportType.NORMAL,
-                                TeleportManager.WILDY_TELEPORT,
+                                TeleportManager.WILDERNESS_TELEPORT,
                             )
                         }
                     }

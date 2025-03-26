@@ -228,7 +228,7 @@ class TempleOfIkovListener : InteractionListener {
             return@on true
         }
 
-        on(Items.STAFF_OF_ARMADYL_84, IntType.GROUNDITEM, "take") { player, node ->
+        on(Items.STAFF_OF_ARMADYL_84, IntType.GROUND_ITEM, "take") { player, node ->
             if (getQuestStage(player, Quests.TEMPLE_OF_IKOV) >= 6 &&
                 getAttribute(
                     player,

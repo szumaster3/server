@@ -24,7 +24,7 @@ public final class InterfaceSetAngle implements OutgoingPacket<DefaultContext> {
         buffer.putLEShortA(scale);
         buffer.putLEShortA(yaw);
         buffer.putInt(interfaceId << 16 | childId);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 }

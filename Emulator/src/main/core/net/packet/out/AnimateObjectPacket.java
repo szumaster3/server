@@ -35,7 +35,7 @@ public class AnimateObjectPacket implements OutgoingPacket<AnimateObjectContext>
         Player player = context.getPlayer();
         Scenery object = context.getAnimation().getObject();
         IoBuffer buffer = write(UpdateAreaPosition.getBuffer(player, object.getLocation().getChunkBase()), context.getAnimation());
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         player.getSession().write(buffer);
     }
 }

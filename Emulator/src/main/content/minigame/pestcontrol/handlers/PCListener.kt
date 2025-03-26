@@ -75,7 +75,7 @@ class PCListener : InteractionListener {
             when (getUsedOption(player)) {
                 "talk-to" -> {
                     if (session == null) {
-                        val handler = NPCDefinition.getOptionHandlers()[getUsedOption(player)]
+                        val handler = NPCDefinition.optionHandlers[getUsedOption(player)]
                         handler!!.handle(player, node, getUsedOption(player))
                         return@on true
                     } else {

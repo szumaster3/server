@@ -14,7 +14,7 @@ import org.rs.consts.*
 
 class PortSarimListener : InteractionListener {
     override fun defineListeners() {
-        on(Items.AHABS_BEER_6561, IntType.GROUNDITEM, "take") { player, node ->
+        on(Items.AHABS_BEER_6561, IntType.GROUND_ITEM, "take") { player, node ->
             face(player, node)
             animate(player, Animations.HUMAN_MULTI_USE_832)
             player.dialogueInterpreter.open(NPCs.AHAB_2692, findNPC(NPCs.AHAB_2692), false)

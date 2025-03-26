@@ -20,7 +20,7 @@ public class MusicPacket implements OutgoingPacket<MusicContext> {
             buffer = new IoBuffer(4);
             buffer.putLEShortA(context.getMusicId());
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getDetails().getSession().write(buffer);
     }
 

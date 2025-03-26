@@ -11,7 +11,6 @@ import java.io.FileReader
 class DoorConfigLoader {
     companion object {
         @JvmStatic val DOORS = hashMapOf<Int, Door>()
-
         @JvmStatic fun forId(id: Int): Door? = DOORS[id]
     }
 
@@ -41,7 +40,7 @@ class DoorConfigLoader {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count door configs.")
+        log(this::class.java, Log.FINE, "Parsed [$count] door configs.")
     }
 
     class Door(

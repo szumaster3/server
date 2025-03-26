@@ -20,7 +20,7 @@ public class PluginInteractionManager {
                     objectInteractions.putIfAbsent(interaction.ids[i],interaction);
                 }
                 break;
-            case USEWITH:
+            case USE_WITH:
                 for(int i = 0; i < interaction.ids.length; i++){
                     useWithInteractions.putIfAbsent(interaction.ids[i],interaction);
                 }
@@ -77,7 +77,7 @@ public class PluginInteractionManager {
     public enum InteractionType{
         NPC,
         OBJECT,
-        USEWITH,
-        ITEM;
+        USE_WITH,
+        ITEM
     }
 }

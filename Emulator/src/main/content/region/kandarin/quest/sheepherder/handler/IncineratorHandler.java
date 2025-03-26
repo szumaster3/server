@@ -22,7 +22,7 @@ public class IncineratorHandler extends PluginInteraction {
     @Override
     public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
         setIds(new int[]{SheepHerder.RED_SHEEP_BONES.getId(), SheepHerder.GREEN_SHEEP_BONES.getId(), SheepHerder.BLUE_SHEEP_BONES.getId(), SheepHerder.YELLOW_SHEEP_BONES.getId()});
-        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USEWITH);
+        PluginInteractionManager.register(this, PluginInteractionManager.InteractionType.USE_WITH);
         return this;
     }
 

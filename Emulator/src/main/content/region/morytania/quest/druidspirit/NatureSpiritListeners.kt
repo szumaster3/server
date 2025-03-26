@@ -137,14 +137,14 @@ class NatureSpiritListeners : InteractionListener {
             return@on true
         }
 
-        on(WASHING_BOWL, IntType.GROUNDITEM, "take") { player, node ->
+        on(WASHING_BOWL, IntType.GROUND_ITEM, "take") { player, node ->
             log(this::class.java, Log.FINE, "Running listener")
             GroundItemManager.create(Item(MIRROR), node.location, player)
             PickupHandler.take(player, node as GroundItem)
             return@on true
         }
 
-        on(MIRROR, IntType.GROUNDITEM, "take") { player, node ->
+        on(MIRROR, IntType.GROUND_ITEM, "take") { player, node ->
             if (getAttribute(player, MIRROR_TAKEN, false) && (inInventory(player, MIRROR) || inBank(player, MIRROR))) {
                 sendDialogue(player, "I don't need another one of these.")
                 return@on true

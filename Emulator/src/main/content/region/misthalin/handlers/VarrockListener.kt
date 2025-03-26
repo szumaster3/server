@@ -410,7 +410,7 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
-        on(Items.CUP_OF_TEA_712, IntType.GROUNDITEM, "take") { player, node ->
+        on(Items.CUP_OF_TEA_712, IntType.GROUND_ITEM, "take") { player, node ->
             animate(player, Animations.HUMAN_MULTI_USE_832)
             if (node.location == Location.create(3272, 3409, 0) || node.location == Location.create(3271, 3413, 0)) {
                 sendNPCDialogue(

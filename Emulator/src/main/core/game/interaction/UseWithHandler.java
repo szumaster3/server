@@ -204,10 +204,10 @@ public abstract class UseWithHandler implements Plugin<java.lang.Object> {
     }
 
     /**
-     * Get valid children int [ ].
+     * Get valid children int.
      *
      * @param wrapper the wrapper
-     * @return the int [ ]
+     * @return the int.
      */
     public int[] getValidChildren(int wrapper) {
         final SceneryDefinition definition = SceneryDefinition.forId(wrapper);

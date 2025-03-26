@@ -10,8 +10,8 @@ class VarpManager(
     }
 
     fun parse(data: JSONArray) {
-        for (varpobj in data) {
-            val vobj = varpobj as JSONObject
+        for (varpObj in data) {
+            val vobj = varpObj as JSONObject
             val index = vobj["index"].toString().toInt()
             val bits = vobj["bitArray"] as JSONArray
             var total = 0

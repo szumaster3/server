@@ -81,7 +81,7 @@ class Shops :
                     }
                     val item = tokens[0].toInt()
                     if (idsInStock[item] != null) {
-                        log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $item")
+                        log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID [$id] FOR ITEM $item")
                         items.forEach {
                             if (it.itemId == item) {
                                 it.amount += amount.toInt()
@@ -93,7 +93,7 @@ class Shops :
                         idsInStock[item] = true
                     }
                 } catch (e: Exception) {
-                    log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID $id FOR ITEM $it")
+                    log(this::class.java, Log.WARN, "[SHOPS] MALFORMED STOCK IN SHOP ID [$id] FOR ITEM $it")
                     throw e
                 }
             }
@@ -124,7 +124,7 @@ class Shops :
             shopsById[id] = shop
         }
 
-        logShop("Parsed ${shopsById.size} shops.")
+        logShop("Parsed [${shopsById.size}] shops.")
     }
 
     override fun tick() {
@@ -326,7 +326,7 @@ class Shops :
                             Items.CASTLE_WARS_TICKET_4067,
                         ) -> "This shop will not buy that item."
 
-                    else -> "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.lowercase()}."
+                    else -> "${player.inventory[slot].name}: This shop will buy this item for [${price.amount}] [${price.name.lowercase()}]."
                 }
 
             when (opcode) {

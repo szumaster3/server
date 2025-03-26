@@ -262,7 +262,7 @@ object InteractionListeners {
             when (type) {
                 IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
                 IntType.SCENERY -> DestinationFlag.OBJECT
-                IntType.GROUNDITEM -> DestinationFlag.ITEM
+                IntType.GROUND_ITEM -> DestinationFlag.ITEM
                 else -> DestinationFlag.OBJECT
             }
 
@@ -343,7 +343,7 @@ object InteractionListeners {
         val flag =
             when (type) {
                 IntType.PLAYER -> DestinationFlag.ENTITY
-                IntType.GROUNDITEM -> DestinationFlag.ITEM
+                IntType.GROUND_ITEM -> DestinationFlag.ITEM
                 IntType.NPC -> DestinationFlag.ENTITY
                 IntType.SCENERY -> null
                 else -> DestinationFlag.OBJECT

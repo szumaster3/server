@@ -15,7 +15,7 @@ public class AnimateInterface implements OutgoingPacket<AnimateInterfaceContext>
         buffer.putIntB((context.getInterfaceId() << 16) + context.getChildId());
         buffer.putLEShort(context.getAnimationId());
         buffer.putShortA(context.getPlayer().getInterfaceManager().getPacketCount(1));
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getDetails().getSession().write(buffer);
     }
 }

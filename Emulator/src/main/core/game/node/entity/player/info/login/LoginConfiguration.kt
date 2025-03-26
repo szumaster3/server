@@ -28,30 +28,43 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
 
+/**
+ * Handles login configuration, including lobby setup and game world initialization.
+ */
 object LoginConfiguration {
+    /**
+     * List of login-related plugins.
+     */
     var loginPlugins = mutableListOf<Plugin<Any>>()
     private val lobbyPane = Component(Components.TOPLEVEL_FULL_549)
     private val lobbyInterface = Component(Components.WELCOME_SCREEN_378)
-    private val lobbyComponents =
-        intArrayOf(
-            Components.MESSAGE_OF_THE_WEEK_17,
-            Components.MESSAGE_OF_THE_WEEK_18,
-            Components.MESSAGE_OF_THE_WEEK_19,
-            Components.MESSAGE_OF_THE_WEEK_20,
-            Components.BANNER_PADLOCK_KEYS_15,
-            Components.BANNER_ANTI_VIRUS_16,
-            Components.BANNER_SCAMMING_21,
-            Components.BANNER_SECURITY_22,
-            Components.BANNER_XMAS_23,
-            Components.BANNER_POH_405,
-            Components.BANNER_CHATHEADS_447,
-            Components.BANNER_GROUP_622,
-            Components.BANNER_GROUP_ASSIST_623,
-            Components.BANNER_SUMMONING_679,
-            Components.BANNER_EASTER08_715,
-            Components.BANNER_HALLOWEEN_800,
-        )
 
+    /**
+     * Lobby components for UI elements.
+     */
+    private val lobbyComponents = intArrayOf(
+        Components.MESSAGE_OF_THE_WEEK_17,
+        Components.MESSAGE_OF_THE_WEEK_18,
+        Components.MESSAGE_OF_THE_WEEK_19,
+        Components.MESSAGE_OF_THE_WEEK_20,
+        Components.BANNER_PADLOCK_KEYS_15,
+        Components.BANNER_ANTI_VIRUS_16,
+        Components.BANNER_SCAMMING_21,
+        Components.BANNER_SECURITY_22,
+        Components.BANNER_XMAS_23,
+        Components.BANNER_POH_405,
+        Components.BANNER_CHATHEADS_447,
+        Components.BANNER_GROUP_622,
+        Components.BANNER_GROUP_ASSIST_623,
+        Components.BANNER_SUMMONING_679,
+        Components.BANNER_EASTER08_715,
+        Components.BANNER_HALLOWEEN_800,
+    )
+
+    /**
+     * Configures the player's lobby or game world based on their status.
+     * @param player The player to configure.
+     */
     @JvmStatic
     fun configureLobby(player: Player) {
         player.updateSceneGraph(true)
@@ -62,6 +75,10 @@ object LoginConfiguration {
         }
     }
 
+    /**
+     * Displays the lobby screen for the player.
+     * @param player The player to show the lobby screen to.
+     */
     @JvmStatic
     fun sendLobbyScreen(player: Player) {
         val selectedMessageModel = autoSelectMessageModel()
@@ -88,6 +105,10 @@ object LoginConfiguration {
         player.details.lastLogin = System.currentTimeMillis()
     }
 
+    /**
+     * Configures the game world for the player.
+     * @param player The player to configure the game world for.
+     */
     @JvmStatic
     fun configureGameWorld(player: Player) {
         sendGameConfiguration(player)
@@ -112,6 +133,10 @@ object LoginConfiguration {
         setupPrayer(player)
     }
 
+    /**
+     * Sends initial game configuration settings to the player.
+     * @param player The player to configure.
+     */
     @JvmStatic
     fun sendGameConfiguration(player: Player) {
         player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) 746 else 548))
@@ -185,32 +210,35 @@ object LoginConfiguration {
         }
     }
 
-    fun getMessageChild(interfaceId: Int): Int =
-        when (interfaceId) {
-            Components.BANNER_GROUP_622 -> 8
-            Components.BANNER_ANTI_VIRUS_16 -> 6
-            Components.MESSAGE_OF_THE_WEEK_20,
-            Components.BANNER_GROUP_ASSIST_623,
+    fun getMessageChild(interfaceId: Int): Int = when (interfaceId) {
+        Components.BANNER_GROUP_622 -> 8
+        Components.BANNER_ANTI_VIRUS_16 -> 6
+        Components.MESSAGE_OF_THE_WEEK_20,
+        Components.BANNER_GROUP_ASSIST_623,
             -> 5
 
-            Components.BANNER_PADLOCK_KEYS_15,
-            Components.MESSAGE_OF_THE_WEEK_18,
-            Components.MESSAGE_OF_THE_WEEK_19,
-            Components.BANNER_SCAMMING_21,
-            Components.BANNER_SECURITY_22,
-            Components.BANNER_CHATHEADS_447,
-            Components.BANNER_POH_405,
+        Components.BANNER_PADLOCK_KEYS_15,
+        Components.MESSAGE_OF_THE_WEEK_18,
+        Components.MESSAGE_OF_THE_WEEK_19,
+        Components.BANNER_SCAMMING_21,
+        Components.BANNER_SECURITY_22,
+        Components.BANNER_CHATHEADS_447,
+        Components.BANNER_POH_405,
             -> 4
 
-            Components.MESSAGE_OF_THE_WEEK_17,
-            Components.BANNER_XMAS_23, Components.BANNER_HALLOWEEN_800,
+        Components.MESSAGE_OF_THE_WEEK_17,
+        Components.BANNER_XMAS_23, Components.BANNER_HALLOWEEN_800,
             -> 3
 
-            Components.BANNER_EASTER08_715 -> 2
-            Components.BANNER_SUMMONING_679 -> 1
-            else -> 0
-        }
+        Components.BANNER_EASTER08_715 -> 2
+        Components.BANNER_SUMMONING_679 -> 1
+        else -> 0
+    }
 
+    /**
+     * Sends a welcome message and handles player-specific rules or messages.
+     * @param player The player to welcome.
+     */
     private fun autoSelectMessageModel(): Int =
         if (IntStream.of(lobbyComponents.size).anyMatch { it == GameWorld.settings?.message_model }) {
             GameWorld.settings?.message_model ?: lobbyComponents.random()
@@ -218,16 +246,24 @@ object LoginConfiguration {
             lobbyComponents.random()
         }
 
+    /**
+     * Retrieves the last login message for a player.
+     * @param player The player whose last login info is retrieved.
+     * @return A formatted string with the last login time and IP.
+     */
     @JvmStatic
     fun getLastLogin(player: Player): String {
-        var lastIp =
-            player.details.accountInfo.lastUsedIp
-                .ifEmpty { player.details.ipAddress }
+        var lastIp = player.details.accountInfo.lastUsedIp.ifEmpty { player.details.ipAddress }
         player.details.accountInfo.lastUsedIp = player.details.ipAddress
         val timeAgo = calculateTimeAgo(player.details.lastLogin)
         return "You last logged in $timeAgo from: $lastIp"
     }
 
+    /**
+     * Calculates the time difference from the last login to the current time.
+     * @param lastLoginTime The timestamp of the last login.
+     * @return A formatted string representing how long ago the login occurred.
+     */
     private fun calculateTimeAgo(lastLoginTime: Long): String {
         val lastLogin = Date(lastLoginTime)
         val current = Date()
@@ -240,9 +276,16 @@ object LoginConfiguration {
         }
     }
 
-    private fun isTutorialCompleted(player: Player): Boolean = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
+    /**
+     * Determines if the player has completed the tutorial.
+     * @param player The player to check.
+     * @return True if the tutorial is completed, otherwise false.
+     */
+    private fun isTutorialCompleted(player: Player): Boolean =
+        player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
 
-    private fun Player.isNotReconnecting(): Boolean = getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE
+    private fun Player.isNotReconnecting(): Boolean =
+        getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE
 
     private fun checkEmotes(player: Player) {
         if (player.globalData.getPlayerTestStage() == 3 && !player.emoteManager.isUnlocked(Emotes.SAFETY_FIRST)) {
@@ -254,8 +297,11 @@ object LoginConfiguration {
         player.equipment.toArray().forEach { item ->
             if (item != null) {
                 player.equipment.remove(item)
-                if (!InteractionListeners.run(item.id, player, item, true) ||
-                    !player.equipment.add(item, true, false)
+                if (!InteractionListeners.run(item.id, player, item, true) || !player.equipment.add(
+                        item,
+                        true,
+                        false
+                    )
                 ) {
                     player.sendMessage(
                         colorize(
@@ -270,13 +316,17 @@ object LoginConfiguration {
 
     private fun setupSpellBook(player: Player) {
         val currentSpellBook = SpellBookManager.SpellBook.forInterface(player.spellBookManager.spellBook)
-        if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT &&
-            !isQuestComplete(player, Quests.DESERT_TREASURE)
+        if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT && !isQuestComplete(
+                player,
+                Quests.DESERT_TREASURE
+            )
         ) {
             player.sendMessage(colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."))
             player.spellBookManager.spellBook = 0
-        } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR &&
-            !hasRequirement(player, Quests.LUNAR_DIPLOMACY)
+        } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR && !hasRequirement(
+                player,
+                Quests.LUNAR_DIPLOMACY
+            )
         ) {
             player.sendMessage(colorize("%RAs you can no longer use Lunar Magic, you have been set back to Modern."))
             player.spellBookManager.spellBook = 0

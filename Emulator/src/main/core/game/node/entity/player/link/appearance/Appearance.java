@@ -120,25 +120,25 @@ public final class Appearance {
             NPCDefinition def = NPCDefinition.forId(npcId);
             renderAnimationId = def.renderAnimationId;
             setStandAnimation(def.standAnimation);
-            int turn = def.getTurnAnimation();
+            int turn = def.turnAnimation;
             if (turn < 1) {
                 turn = def.walkAnimation;
             }
             setStandTurnAnimation(turn);
             setWalkAnimation(def.walkAnimation);
             setRunAnimation(def.walkAnimation);
-            if (def.getTurn180Animation() > 0) {
-                setTurn180(def.getTurn180Animation());
+            if (def.turn180Animation > 0) {
+                setTurn180(def.turn180Animation);
             } else {
                 setTurn180(turn);
             }
-            if (def.getTurnCWAnimation() > 0) {
-                setTurn90cw(def.getTurnCWAnimation());
+            if (def.turnCWAnimation > 0) {
+                setTurn90cw(def.turnCWAnimation);
             } else {
                 setTurn90cw(turn);
             }
-            if (def.getTurnCCWAnimation() > 0) {
-                setTurn90ccw(def.getTurnCCWAnimation());
+            if (def.turnCCWAnimation > 0) {
+                setTurn90ccw(def.turnCCWAnimation);
             } else {
                 setTurn90ccw(turn);
             }
@@ -658,27 +658,27 @@ public final class Appearance {
     }
 
     /**
-     * Get appearance cache body part [ ].
+     * Get appearance cache body part.
      *
-     * @return the body part [ ]
+     * @return the body part.
      */
     public BodyPart[] getAppearanceCache() {
         return appearanceCache;
     }
 
     /**
-     * Get animation cache int [ ].
+     * Get animation cache int.
      *
-     * @return the int [ ]
+     * @return the int.
      */
     public int[] getAnimationCache() {
         return animationCache;
     }
 
     /**
-     * Get body parts int [ ].
+     * Get body parts int.
      *
-     * @return the int [ ]
+     * @return the int.
      */
     public int[] getBodyParts() {
         return bodyParts;

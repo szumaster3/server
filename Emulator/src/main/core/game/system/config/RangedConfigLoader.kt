@@ -66,7 +66,6 @@ class RangedConfigLoader {
             Ammunition.getAmmunition()[Integer.parseInt(e["itemId"].toString())] = ammo
             count++
         }
-        log(this::class.java, Log.FINE, "Parsed $count ammo configs...")
 
         count = 0
         reader = FileReader(ServerConstants.CONFIG_PATH + "ranged_weapon_configs.json")
@@ -88,6 +87,6 @@ class RangedConfigLoader {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count ranged weapon configs...")
+        log(this::class.java, Log.FINE, "Parsed [$count] ranged weapon configs.")
     }
 }

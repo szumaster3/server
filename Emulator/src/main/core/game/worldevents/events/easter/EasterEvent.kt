@@ -154,7 +154,7 @@ class EasterEvent :
     }
 
     override fun defineListeners() {
-        on(eggs, IntType.GROUNDITEM, "take") { player, node ->
+        on(eggs, IntType.GROUND_ITEM, "take") { player, node ->
             if (node !is GroundItem) return@on true
             queueScript(player, strength = QueueStrength.NORMAL) { stage ->
                 when (stage) {

@@ -168,6 +168,6 @@ class ItemConfigParser {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count item configs.")
+        log(this::class.java, Log.FINE, "Parsed [$count] item configs.")
     }
 }

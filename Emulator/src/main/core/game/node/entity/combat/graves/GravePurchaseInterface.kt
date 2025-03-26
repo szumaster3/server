@@ -12,7 +12,7 @@ import org.rs.consts.Vars
 class GravePurchaseInterface : InterfaceListener {
     val BUTTON_CONFIRM = 34
     val AVAILABLE_GRAVES_BITFIELD = 0xFFF
-    val AVAILABLE_GRAVES_VARBIT = 4191
+    val AVAILABLE_GRAVES_VARBIT = Vars.VARBIT_IFACE_GRAVE_DISPLAY_4191
     val CURRENT_GRAVE_VARBIT = Vars.VARBIT_CURRENT_GRAVE_4190
 
     override fun defineInterfaceListeners() {

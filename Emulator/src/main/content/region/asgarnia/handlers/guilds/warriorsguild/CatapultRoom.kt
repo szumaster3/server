@@ -88,7 +88,7 @@ class CatapultRoom :
                             )
                             return true
                         }
-                        ItemDefinition.getOptionHandlers()["wield"]!!.handle(player, node, option)
+                        ItemDefinition.optionHandlers["wield"]!!.handle(player, node, option)
                         if (player.equipment.getNew(EquipmentContainer.SLOT_SHIELD).id == SHIELD_ID) {
                             player.interfaceManager.removeTabs(2, 3, 5, 6, 7, 11, 12)
                             player.interfaceManager.openTab(4, Component(411))

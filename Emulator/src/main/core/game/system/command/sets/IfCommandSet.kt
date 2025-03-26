@@ -19,38 +19,42 @@ class IfCommandSet : Commands {
             val def = IfaceDefinition.forId(id)
             notify(player, logToConsole = true, message = "Triggers for $def:")
 
-            for (child in def.children) {
-                if (child.scripts == null) continue
+            for (child in def!!.children!!) {
+                if (child!!.scripts == null) continue
                 if (child.triggers == null) continue
 
-                if (child.scripts.onVarpTransmit != null) {
+                if (child.scripts!!.onVarpTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARP]:")
                     notify(
                         player,
                         logToConsole = true,
-                        message = "  Transmit ${child.triggers.varpTriggers.joinToString(
-                            ",",
-                        )} triggers script ${child.scripts.onVarpTransmit.id}",
+                        message = "  Transmit ${
+                            child.triggers!!.varpTriggers!!.joinToString(
+                                ",",
+                            )
+                        } triggers script ${child.scripts!!.onVarpTransmit!!.id}",
                     )
                     notify(
                         player,
                         logToConsole = true,
-                        message = "  Default script args: ${child.scripts.onVarpTransmit.args.joinToString(",")}",
+                        message = "  Default script args: ${child.scripts!!.onVarpTransmit!!.args.joinToString(",")}",
                     )
                 }
-                if (child.scripts.onVarcTransmit != null) {
+                if (child.scripts!!.onVarcTransmit != null) {
                     notify(player, logToConsole = true, message = "$child [VARC]:")
                     notify(
                         player,
                         logToConsole = true,
-                        message = "  Transmit ${child.triggers.varcTriggers.joinToString(
-                            ",",
-                        )} triggers script ${child.scripts.onVarcTransmit.id}",
+                        message = "  Transmit ${
+                            child.triggers!!.varcTriggers!!.joinToString(
+                                ",",
+                            )
+                        } triggers script ${child.scripts!!.onVarcTransmit!!.id}",
                     )
                     notify(
                         player,
                         logToConsole = true,
-                        message = "  Default script args: ${child.scripts.onVarcTransmit.args.joinToString(",")}",
+                        message = "  Default script args: ${child.scripts!!.onVarcTransmit!!.args.joinToString(",")}",
                     )
                 }
             }
@@ -68,8 +72,8 @@ class IfCommandSet : Commands {
             val def = IfaceDefinition.forId(id)
             notify(player, logToConsole = true, message = "Text for $def:")
 
-            for (child in def.children) {
-                if (child.type != ComponentType.TEXT) continue
+            for (child in def!!.children!!) {
+                if (child!!.type != ComponentType.TEXT) continue
                 notify(player, logToConsole = true, message = "$child - ${child.text} - ${child.activeText}")
             }
         }
@@ -86,8 +90,8 @@ class IfCommandSet : Commands {
             val def = IfaceDefinition.forId(id)
             notify(player, logToConsole = true, message = "Models for $def:")
 
-            for (child in def.children) {
-                if (child.type != ComponentType.MODEL) continue
+            for (child in def!!.children!!) {
+                if (child!!.type != ComponentType.MODEL) continue
                 notify(
                     player,
                     logToConsole = true,

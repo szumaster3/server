@@ -64,7 +64,7 @@ public final class ContainerPacket implements OutgoingPacket<ContainerContext> {
                 }
             }
         }
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 

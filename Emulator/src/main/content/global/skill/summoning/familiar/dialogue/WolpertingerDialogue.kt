@@ -1,0 +1,46 @@
+package content.global.skill.summoning.familiar.dialogue
+
+import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.plugin.Initializable
+import core.tools.END_DIALOGUE
+import org.rs.consts.NPCs
+
+/**
+ * The type Wolpertinger dialogue.
+ */
+@Initializable
+class WolpertingerDialogue : Dialogue {
+    override fun newInstance(player: Player): Dialogue {
+        return WolpertingerDialogue(player)
+    }
+
+    /**
+     * Instantiates a new Wolpertinger dialogue.
+     */
+    constructor()
+
+    /**
+     * Instantiates a new Wolpertinger dialogue.
+     *
+     * @param player the player
+     */
+    constructor(player: Player?) : super(player)
+
+    override fun open(vararg args: Any): Boolean {
+        npc = args[0] as NPC
+        npcl(FaceAnim.CHILD_NORMAL, "Raaar! Mewble, whurf whurf.")
+        stage = END_DIALOGUE
+        return true
+    }
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        return true
+    }
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.WOLPERTINGER_6869, NPCs.WOLPERTINGER_6870)
+    }
+}

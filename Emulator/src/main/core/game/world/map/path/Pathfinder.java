@@ -263,7 +263,7 @@ public abstract class Pathfinder {
                     sizeX = scenery.getDefinition().sizeY;
                     sizeY = scenery.getDefinition().sizeX;
                 }
-                int walkingFlag = scenery.getDefinition().getWalkingFlag();
+                int walkingFlag = scenery.getDefinition().walkingFlag;
                 if (rotation != 0) {
                     walkingFlag = (walkingFlag << rotation & 0xf) + (walkingFlag >> 4 - rotation);
                 }

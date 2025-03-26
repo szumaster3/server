@@ -22,9 +22,9 @@ public enum Gender {
     }
 
     /**
-     * Generate cache body part [ ].
+     * Generate cache body part.
      *
-     * @return the body part [ ]
+     * @return the body part.
      */
     public BodyPart[] generateCache() {
         final BodyPart[] cache = new BodyPart[appearanceCache.length];
@@ -35,16 +35,16 @@ public enum Gender {
     }
 
     /**
-     * Get appearance cache body part [ ].
+     * Get appearance cache body part.
      *
-     * @return the body part [ ]
+     * @return the body part
      */
     public BodyPart[] getAppearanceCache() {
         return appearanceCache;
     }
 
     /**
-     * To byte byte.
+     * To byte.
      *
      * @return the byte
      */

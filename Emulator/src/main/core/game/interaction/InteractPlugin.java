@@ -250,7 +250,7 @@ public class InteractPlugin {
         } else if (node instanceof Item) {
             Item item = (Item) node;
             if (item.getLocation() != null) {
-                init(item.getId(), item.getDefinition().getGroundOptions());
+                init(item.getId(), item.getDefinition().groundOptions);
             } else {
                 init(item.getId(), item.getDefinition().getInventoryOptions());
             }

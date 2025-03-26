@@ -16,7 +16,7 @@ public final class RepositionChild implements OutgoingPacket<ChildPositionContex
                 .putLEInt(context.getInterfaceId() << 16 | context.getChildId())
                 .putShort(context.getPosition().x)
                 .putShortA(context.getPosition().y);
-        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());
+        buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().output);
         context.getPlayer().getSession().write(buffer);
     }
 
