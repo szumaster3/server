@@ -67,7 +67,7 @@ class GlobalData {
     private var abyssData: BooleanArray = BooleanArray(4)
     private var travelLogs: BooleanArray = BooleanArray(45)
     private var godBooks: BooleanArray = BooleanArray(3)
-    private var godPages: BooleanArray = BooleanArray(4)
+    var godPages: BooleanArray = BooleanArray(4)
 
     fun parse(data: JSONObject) {
         tutorialStage = data["tutorialStage"].toString().toInt()
@@ -393,12 +393,6 @@ class GlobalData {
 
     fun setDisableNews(disableNews: Boolean) {
         this.disableNews = disableNews
-    }
-
-    fun getGodPages(): BooleanArray = godPages
-
-    fun setGodPages(godPages: BooleanArray) {
-        this.godPages = godPages
     }
 
     fun getOverChargeDelay(): Long = overChargeDelay

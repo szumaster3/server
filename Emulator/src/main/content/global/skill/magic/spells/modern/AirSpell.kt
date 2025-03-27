@@ -17,7 +17,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Air spell.
+ * The Air spell.
  */
 @Initializable
 class AirSpell : CombatSpell {

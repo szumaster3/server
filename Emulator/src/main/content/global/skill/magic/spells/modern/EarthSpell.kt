@@ -17,7 +17,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Earth spell.
+ * The Earth spell.
  */
 @Initializable
 class EarthSpell : CombatSpell {

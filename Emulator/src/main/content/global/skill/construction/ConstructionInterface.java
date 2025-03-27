@@ -56,8 +56,6 @@ public final class ConstructionInterface extends ComponentPlugin {
 
 						if (hotspot.getHotspot() == BuildHotspot.FLATPACK) {
 							deco = Decoration.forInterfaceItemId(itemId);
-							player.sendMessage("Building flatpack: " + itemId);
-							player.sendMessage("Building flatpack: " + deco.name());
 
 							if(debug || checkRequirements(player, deco)) BuildingUtils.createFlatpack(player, deco, debug);
 							break;

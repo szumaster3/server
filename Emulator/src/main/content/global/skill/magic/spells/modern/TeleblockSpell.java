@@ -21,7 +21,7 @@ import org.rs.consts.Sounds;
 import static core.api.ContentAPIKt.*;
 
 /**
- * The type Teleblock spell.
+ * The Teleblock spell.
  */
 @Initializable
 public final class TeleblockSpell extends CombatSpell {

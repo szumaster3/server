@@ -2,10 +2,7 @@ package content.global.skill.magic.spells.modern
 
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
-import core.api.anyInEquipment
-import core.api.playAudio
-import core.api.sendMessage
-import core.api.visualize
+import core.api.*
 import core.game.event.ItemAlchemizationEvent
 import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.Animator
@@ -13,30 +10,22 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
+import org.rs.consts.Graphics
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
+/**
+ * The Alchemy spell.
+ */
 class AlchemySpell : SpellListener("modern") {
     private val lowAlchemySpellAnimation = Animation(9623, Animator.Priority.HIGH)
-    private val lowAlchemyGraphics =
-        core.game.world.update.flag.context.Graphics(
-            org.rs.consts.Graphics.LOW_ALCHEMY_BY_HAND_763,
-        )
-    private val lowAlchemyStaffSpellAnimation =
-        Animation(Animations.HUMAN_CAST_LOW_ALCH_SPELL_9625, Animator.Priority.HIGH)
-    private val lowAlchemyStaffGraphics =
-        core.game.world.update.flag.context.Graphics(
-            org.rs.consts.Graphics.LOW_ALCH_WITH_STAFF_1692,
-        )
+    private val lowAlchemyGraphics = core.game.world.update.flag.context.Graphics(Graphics.LOW_ALCHEMY_BY_HAND_763,)
+    private val lowAlchemyStaffSpellAnimation = Animation(Animations.HUMAN_CAST_LOW_ALCH_SPELL_9625, Animator.Priority.HIGH)
+    private val lowAlchemyStaffGraphics = core.game.world.update.flag.context.Graphics(Graphics.LOW_ALCH_WITH_STAFF_1692,)
     private val highAlchemyAnimation = Animation(9631, Animator.Priority.HIGH)
-    private val highAlchemyGraphics =
-        core.game.world.update.flag.context
-            .Graphics(org.rs.consts.Graphics.ALCH_1691)
+    private val highAlchemyGraphics = core.game.world.update.flag.context.Graphics(Graphics.ALCH_1691)
     private val highAlchemyStaffAnimation = Animation(Animations.ALCH_WITH_STAFF_9633, Animator.Priority.HIGH)
-    private val highAlchemyStaffGraphics =
-        core.game.world.update.flag.context.Graphics(
-            org.rs.consts.Graphics.HIGH_ALCH_WITH_STAFF_1693,
-        )
+    private val highAlchemyStaffGraphics = core.game.world.update.flag.context.Graphics(Graphics.HIGH_ALCH_WITH_STAFF_1693,)
 
     override fun defineListeners() {
         onCast(ModernSpells.LOW_ALCHEMY, ITEM) { player, node ->
@@ -80,7 +69,7 @@ class AlchemySpell : SpellListener("modern") {
         }
 
         val coins = Item(Items.COINS_995, item.definition.getAlchemyValue(high))
-        if (item.amount > 1 && coins.amount > 0 && !player.inventory.hasSpaceFor(coins)) {
+        if (item.amount > 1 && coins.amount > 0 && !hasSpaceFor(player, coins)) {
             sendMessage(player, "Not enough space in your inventory.")
             return false
         }
@@ -101,8 +90,7 @@ class AlchemySpell : SpellListener("modern") {
             )
 
         val explorersRingGraphics =
-            core.game.world.update.flag.context
-                .Graphics(1698)
+            core.game.world.update.flag.context.Graphics(Graphics.EXPLORERS_RING_ALCH_1698)
 
         if (explorersRing) {
             visualize(entity = player, anim = lowAlchemySpellAnimation, gfx = explorersRingGraphics)

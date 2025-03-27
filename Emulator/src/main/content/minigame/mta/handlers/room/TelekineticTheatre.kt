@@ -123,11 +123,11 @@ class TelekineticTheatre
             region = DynamicRegion.create(13463)
             base =
                 Location.create(
-                    region!!.getBorders().southWestX,
-                    region!!.getBorders().southWestY,
+                    region!!.borders!!.southWestX,
+                    region!!.borders!!.southWestY,
                     0,
                 )
-            registerRegion(region!!.getId())
+            registerRegion(region!!.id)
         }
 
         fun setUp() {
@@ -150,7 +150,7 @@ class TelekineticTheatre
             }
             moveStatue(base!!.transform(maze!!.statueLocation))
             guardian = NPC.create(3098, base!!.transform(maze!!.guardianLocation))
-            guardian!!.setWalks(true)
+            guardian!!.isWalks = true
             guardian!!.init()
         }
 
@@ -181,20 +181,20 @@ class TelekineticTheatre
                 "Congratulations! You have received two Telekinetic Pizazz Points!",
             )
             if (solved >= 5) {
-                mazes.addAll(Arrays.asList(*Maze.values()))
+                mazes.addAll(listOf(*Maze.values()))
                 solved = 0
                 points += 8
                 player.getSkills().addExperience(Skills.MAGIC, 1000.0, true)
                 player.inventory.add(Item(563, 10))
-                player.getSavedData().activityData.setSolvedMazes(0)
-                player.dialogueInterpreter.addAction { player, buttonId ->
+                player.getSavedData().activityData.solvedMazes = 0
+                player.dialogueInterpreter.addAction { player, _ ->
                     player.dialogueInterpreter.sendDialogue(
                         "Congratulations on solving five mazes in a row, have 8 bonus points,",
                         "10 law runes and extra magic XP!",
                     )
                 }
             }
-            player.getSavedData().activityData.setSolvedMazes(solved)
+            player.getSavedData().activityData.solvedMazes = solved
             incrementPoints(player, MTAType.TELEKINETIC.ordinal, points)
             this@TelekineticTheatre.update(player)
             player.setAttribute("camera", false)

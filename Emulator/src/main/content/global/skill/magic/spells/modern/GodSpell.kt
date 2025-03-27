@@ -26,7 +26,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 /**
- * The type God spell.
+ * The God spell.
  */
 @Initializable
 class GodSpell : CombatSpell {

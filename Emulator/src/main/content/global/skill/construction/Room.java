@@ -205,7 +205,7 @@ public final class Room {
                                 otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
                                 break;
                             default:
-                                log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
+                                log(this.getClass(), Log.ERR, "Impossible rotation when placing doors.");
                         }
                         int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, scenery);
                         if (replaceId == -1) {

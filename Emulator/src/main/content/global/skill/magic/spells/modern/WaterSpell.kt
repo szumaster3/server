@@ -17,7 +17,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Water spell.
+ * The Water spell.
  */
 @Initializable
 class WaterSpell : CombatSpell {

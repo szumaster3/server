@@ -21,7 +21,7 @@ public class Path {
      * Instantiates a new Path.
      */
     public Path() {
-        // Empty constructor to initialize the path object
+        // Empty
     }
 
     /**
@@ -31,11 +31,11 @@ public class Path {
      */
     public void walk(Entity entity) {
         if (entity.getLocks().isMovementLocked()) {
-            return; // If the entity is locked, it cannot move
+            return;
         }
-        entity.getWalkingQueue().reset(); // Reset walking queue before adding new steps
+        entity.getWalkingQueue().reset();
         for (Point step : points) {
-            entity.getWalkingQueue().addPath(step.getX(), step.getY()); // Add each step to the walking queue
+            entity.getWalkingQueue().addPath(step.getX(), step.getY());
         }
     }
 

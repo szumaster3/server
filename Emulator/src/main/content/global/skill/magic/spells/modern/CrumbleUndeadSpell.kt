@@ -20,7 +20,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 /**
- * The type Crumble undead spell.
+ * The Crumble undead spell.
  */
 @Initializable
 class CrumbleUndeadSpell :

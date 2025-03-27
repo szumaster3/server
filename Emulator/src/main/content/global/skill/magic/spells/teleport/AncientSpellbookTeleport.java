@@ -67,24 +67,15 @@ public final class AncientSpellbookTeleport extends MagicSpell {
 
     @Override
     public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-
-        SpellBook.ANCIENT.register(28, new AncientSpellbookTeleport(0, 0, Location.create(3087, 3495, 0)));
-
-        SpellBook.ANCIENT.register(20, new AncientSpellbookTeleport(54, 64, Location.create(3098, 9882, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.FIRE_RUNE.getId(), 1), new Item(Runes.AIR_RUNE.getId(), 1)));
-
-        SpellBook.ANCIENT.register(21, new AncientSpellbookTeleport(60, 70, Location.create(3320, 3338, 0), new Item(Runes.SOUL_RUNE.getId(), 1), new Item(Runes.LAW_RUNE.getId(), 2)));
-
-        SpellBook.ANCIENT.register(22, new AncientSpellbookTeleport(66, 76, Location.create(3493, 3472, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.BLOOD_RUNE.getId(), 1)));
-
-        SpellBook.ANCIENT.register(23, new AncientSpellbookTeleport(72, 82, Location.create(3003, 3470, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.WATER_RUNE.getId(), 4)));
-
-        SpellBook.ANCIENT.register(24, new AncientSpellbookTeleport(78, 88, Location.create(2966, 3696, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.FIRE_RUNE.getId(), 3), new Item(Runes.AIR_RUNE.getId(), 2)));
-
-        SpellBook.ANCIENT.register(25, new AncientSpellbookTeleport(84, 82, Location.create(3163, 3664, 0), new Item(Runes.SOUL_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
-
-        SpellBook.ANCIENT.register(26, new AncientSpellbookTeleport(90, 100, Location.create(3287, 3883, 0), new Item(Runes.BLOOD_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
-
-        SpellBook.ANCIENT.register(27, new AncientSpellbookTeleport(96, 106, Location.create(2972, 3873, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.WATER_RUNE.getId(), 8)));
+		SpellBook.ANCIENT.register(28, new AncientSpellbookTeleport(0, 0, Location.create(3087, 3495, 0)));
+		SpellBook.ANCIENT.register(20, new AncientSpellbookTeleport(54, 64, Location.create(3098, 9882, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.FIRE_RUNE.getId(), 1), new Item(Runes.AIR_RUNE.getId(), 1)));
+		SpellBook.ANCIENT.register(21, new AncientSpellbookTeleport(60, 70, Location.create(3320, 3338, 0), new Item(Runes.SOUL_RUNE.getId(), 1), new Item(Runes.LAW_RUNE.getId(), 2)));
+		SpellBook.ANCIENT.register(22, new AncientSpellbookTeleport(66, 76, Location.create(3493, 3472, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.BLOOD_RUNE.getId(), 1)));
+		SpellBook.ANCIENT.register(23, new AncientSpellbookTeleport(72, 82, Location.create(3003, 3470, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.WATER_RUNE.getId(), 4)));
+		SpellBook.ANCIENT.register(24, new AncientSpellbookTeleport(78, 88, Location.create(2966, 3696, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.FIRE_RUNE.getId(), 3), new Item(Runes.AIR_RUNE.getId(), 2)));
+		SpellBook.ANCIENT.register(25, new AncientSpellbookTeleport(84, 82, Location.create(3163, 3664, 0), new Item(Runes.SOUL_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
+		SpellBook.ANCIENT.register(26, new AncientSpellbookTeleport(90, 100, Location.create(3287, 3883, 0), new Item(Runes.BLOOD_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
+		SpellBook.ANCIENT.register(27, new AncientSpellbookTeleport(96, 106, Location.create(2972, 3873, 0), new Item(Runes.LAW_RUNE.getId(), 2), new Item(Runes.WATER_RUNE.getId(), 8)));
         return this;
     }
 

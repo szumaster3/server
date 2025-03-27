@@ -15,6 +15,11 @@ import org.rs.consts.Sounds
 
 class LunarGroupTeleport : SpellListener("lunar") {
     override fun defineListeners() {
+
+        /*
+         * Handles moonclan group teleport.
+         */
+
         onCast(LunarSpells.MOONCLAN_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -24,6 +29,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendGroupTeleport(player, 67.0, "Moonclan Island", Location.create(2111, 3916, 0))
         }
+
+        /*
+         * Handles waterbirth group teleport.
+         */
 
         onCast(LunarSpells.WATERBIRTH_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
@@ -35,6 +44,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             sendGroupTeleport(player, 72.0, "Waterbirth Island", Location.create(2527, 3739, 0))
         }
 
+        /*
+         * Handles barbarian group teleport.
+         */
+
         onCast(LunarSpells.BARBARIAN_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -44,6 +57,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendGroupTeleport(player, 77.0, "Barbarian Outpost", Location.create(2544, 3572, 0))
         }
+
+        /*
+         * Handles khazard group teleport.
+         */
 
         onCast(LunarSpells.KHAZARD_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
@@ -55,6 +72,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             sendGroupTeleport(player, 81.0, "Port Khazard", Location.create(2656, 3157, 0))
         }
 
+        /*
+         * Handles fishing guild group teleport.
+         */
+
         onCast(LunarSpells.FISHING_GUILD_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -65,6 +86,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             sendGroupTeleport(player, 90.0, "Fishing Guild", Location.create(2611, 3393, 0))
         }
 
+        /*
+         * Handles catherby group teleport.
+         */
+
         onCast(LunarSpells.CATHERBY_GROUP_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -74,6 +99,10 @@ class LunarGroupTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendGroupTeleport(player, 93.0, "Catherby", Location.create(2804, 3433, 0))
         }
+
+        /*
+         * Handles ice plateau group teleport.
+         */
 
         onCast(LunarSpells.ICE_PLATEAU_GROUP_TELEPORT, NONE) { player, _ ->
             requires(

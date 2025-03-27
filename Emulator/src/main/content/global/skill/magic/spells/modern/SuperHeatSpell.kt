@@ -11,6 +11,9 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
+/**
+ * The Super heat spell.
+ */
 class SuperHeatSpell : SpellListener("modern") {
     override fun defineListeners() {
         onCast(ModernSpells.SUPERHEAT, ITEM) { player, node ->

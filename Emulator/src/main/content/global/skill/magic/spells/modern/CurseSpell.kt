@@ -18,7 +18,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Curse spell.
+ * The Curse spell.
  */
 @Initializable
 class CurseSpell : CombatSpell {

@@ -4,6 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.world.map.Location;
 import core.tools.StringUtils;
+import org.rs.consts.Scenery;
 
 /**
  * The enum House location.
@@ -19,32 +20,32 @@ public enum HouseLocation {
     /**
      * Rimmington house location.
      */
-    RIMMINGTON(15478, Location.create(2953, 3224, 0), 5000, 1),
+    RIMMINGTON(Scenery.PORTAL_15478, Location.create(2953, 3224, 0), 5000, 1),
 
     /**
      * Taverly house location.
      */
-    TAVERLY(15477, Location.create(2893, 3465, 0), 5000, 10),
+    TAVERLY(Scenery.PORTAL_15477, Location.create(2893, 3465, 0), 5000, 10),
 
     /**
      * Pollnivneach house location.
      */
-    POLLNIVNEACH(15479, Location.create(3340, 3003, 0), 7500, 20),
+    POLLNIVNEACH(Scenery.PORTAL_15479, Location.create(3340, 3003, 0), 7500, 20),
 
     /**
      * Rellekka house location.
      */
-    RELLEKKA(15480, Location.create(2670, 3631, 0), 10000, 30),
+    RELLEKKA(Scenery.PORTAL_15480, Location.create(2670, 3631, 0), 10000, 30),
 
     /**
      * Brimhaven house location.
      */
-    BRIMHAVEN(15481, Location.create(2757, 3178, 0), 15000, 40),
+    BRIMHAVEN(Scenery.PORTAL_15481, Location.create(2757, 3178, 0), 15000, 40),
 
     /**
      * Yanille house location.
      */
-    YANILLE(15482, Location.create(2544, 3096, 0), 25000, 50);
+    YANILLE(Scenery.PORTAL_15482, Location.create(2544, 3096, 0), 25000, 50);
 
     private final int portalId;
 

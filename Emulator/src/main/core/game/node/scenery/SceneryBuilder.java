@@ -227,8 +227,8 @@ public final class SceneryBuilder {
      * Remove all boolean.
      *
      * @param objectId  the object id
-     * @param southWest the south west
-     * @param northEast the north east
+     * @param southWest the south-west
+     * @param northEast the north-east
      * @return the boolean
      */
     public static boolean removeAll(int objectId, Location southWest, Location northEast) {

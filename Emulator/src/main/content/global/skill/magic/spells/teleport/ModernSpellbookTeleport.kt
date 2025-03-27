@@ -21,6 +21,11 @@ import org.rs.consts.Quests
 
 class ModernSpellbookTeleport : SpellListener("modern") {
     override fun defineListeners() {
+
+        /*
+         * Handles home teleport.
+         */
+
         onCast(ModernSpells.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
             if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
@@ -30,6 +35,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             }
             setDelay(player, true)
         }
+
+        /*
+         * Handles varrock teleport.
+         */
 
         onCast(ModernSpells.VARROCK_TELEPORT, NONE) { player, _ ->
             requires(
@@ -46,6 +55,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             )
         }
 
+        /*
+         * Handles lumbridge teleport.
+         */
+
         onCast(ModernSpells.LUMBRIDGE_TELEPORT, NONE) { player, _ ->
             requires(
                 player = player,
@@ -59,6 +72,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             )
         }
 
+        /*
+         * Handles falador teleport.
+         */
+
         onCast(ModernSpells.FALADOR_TELEPORT, NONE) { player, _ ->
             requires(
                 player = player,
@@ -71,6 +88,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 location = Location.create(2965, 3378, 0),
             )
         }
+
+        /*
+         * Handles camelot teleport.
+         */
 
         onCast(ModernSpells.CAMELOT_TELEPORT, NONE) { player, _ ->
             requires(
@@ -89,6 +110,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 5)
         }
 
+        /*
+         * Handles ardougne teleport.
+         */
+
         onCast(ModernSpells.ARDOUGNE_TELEPORT, NONE) { player, _ ->
             if (!hasRequirement(player, Quests.PLAGUE_CITY)) {
                 return@onCast
@@ -104,6 +129,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 location = Location.create(2662, 3307, 0),
             )
         }
+
+        /*
+         * Handles watchtower teleport.
+         */
 
         onCast(ModernSpells.WATCHTOWER_TELEPORT, NONE) { player, _ ->
             if (!hasRequirement(player, Quests.WATCHTOWER)) {
@@ -121,6 +150,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             )
         }
 
+        /*
+         * Handles trollheim teleport.
+         */
+
         onCast(ModernSpells.TROLLHEIM_TELEPORT, NONE) { player, _ ->
             if (!hasRequirement(player, Quests.EADGARS_RUSE)) {
                 return@onCast
@@ -136,6 +169,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 location = Location.create(2891, 3678, 0),
             )
         }
+
+        /*
+         * Handles ape atoll teleport.
+         */
 
         onCast(ModernSpells.APE_ATOLL_TELEPORT, NONE) { player, _ ->
             if (!hasRequirement(player, Quests.MONKEY_MADNESS)) {
@@ -156,6 +193,10 @@ class ModernSpellbookTeleport : SpellListener("modern") {
             )
             sendTeleport(player, 74.0, Location.create(2754, 2784, 0))
         }
+
+        /*
+         * Handles poh teleport.
+         */
 
         onCast(ModernSpells.TELEPORT_TO_HOUSE, NONE) { player, _ ->
             requires(

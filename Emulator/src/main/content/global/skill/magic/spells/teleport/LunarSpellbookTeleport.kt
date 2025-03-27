@@ -11,12 +11,22 @@ import org.rs.consts.Items
 import org.rs.consts.Sounds
 
 class LunarSpellbookTeleport : SpellListener("lunar") {
+
     override fun defineListeners() {
+
+        /*
+         * handles home teleport.
+         */
+
         onCast(LunarSpells.HOME_TELEPORT, NONE) { player, _ ->
             requires(player)
             player.teleporter.send(Location.create(2100, 3914, 0), TeleportManager.TeleportType.HOME)
             setDelay(player, true)
         }
+
+        /*
+         * Handles moonclan teleport.
+         */
 
         onCast(LunarSpells.MOONCLAN_TELEPORT, NONE) { player, _ ->
             requires(
@@ -28,6 +38,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             sendTeleport(player, 66.0, Location.create(2111, 3916, 0))
         }
 
+        /*
+         * Handles ourania teleport.
+         */
+
         onCast(LunarSpells.OURANIA_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -37,6 +51,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendTeleport(player, 69.0, Location.create(2469, 3247, 0))
         }
+
+        /*
+         * Handles waterbirth teleport.
+         */
 
         onCast(LunarSpells.WATERBIRTH_TELEPORT, NONE) { player, _ ->
             requires(
@@ -48,6 +66,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             sendTeleport(player, 71.0, Location.create(2527, 3739, 0))
         }
 
+        /*
+         * Handles barbarian teleport.
+         */
+
         onCast(LunarSpells.BARBARIAN_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -57,6 +79,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendTeleport(player, 76.0, Location.create(2544, 3572, 0))
         }
+
+        /*
+         * Handles khazard teleport.
+         */
 
         onCast(LunarSpells.KHAZARD_TELEPORT, NONE) { player, _ ->
             requires(
@@ -68,6 +94,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             sendTeleport(player, 80.0, Location.create(2656, 3157, 0))
         }
 
+        /*
+         * Handles fishing guild teleport.
+         */
+
         onCast(LunarSpells.FISHING_GUILD_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -78,6 +108,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             sendTeleport(player, 89.0, Location.create(2611, 3393, 0))
         }
 
+        /*
+         * Handles catherby teleport.
+         */
+
         onCast(LunarSpells.CATHERBY_TELEPORT, NONE) { player, _ ->
             requires(
                 player,
@@ -87,6 +121,10 @@ class LunarSpellbookTeleport : SpellListener("lunar") {
             if (!player.isTeleBlocked) playGlobalAudio(player.location, Sounds.TP_ALL_200)
             sendTeleport(player, 92.0, Location.create(2804, 3433, 0))
         }
+
+        /*
+         * Handles ice plateau teleport.
+         */
 
         onCast(LunarSpells.ICE_PLATEAU_TELEPORT, NONE) { player, _ ->
             requires(

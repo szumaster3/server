@@ -19,7 +19,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Charge spell.
+ * The Charge spell.
  */
 @Initializable
 class ChargeSpell :

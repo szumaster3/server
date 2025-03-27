@@ -491,7 +491,7 @@ class PlayerSaver(
         globalData["godBooks"] = godBooks
         globalData["disableNews"] = player.savedData.globalData.isDisableNews()
         val godPages = JSONArray()
-        player.savedData.globalData.getGodPages().map {
+        player.savedData.globalData.godPages.map {
             godPages.add(it)
         }
         globalData["godPages"] = godPages

@@ -109,9 +109,9 @@ object ServerConfigParser {
         ServerConstants.DATABASE =
             Database(
                 ServerConstants.DATABASE_ADDRESS + ":" + ServerConstants.DATABASE_PORT,
-                ServerConstants.DATABASE_NAME,
-                ServerConstants.DATABASE_USER,
-                ServerConstants.DATABASE_PASS,
+                ServerConstants.DATABASE_NAME!!,
+                ServerConstants.DATABASE_USER!!,
+                ServerConstants.DATABASE_PASS!!,
             )
         ServerConstants.CACHE_PATH = data.getPath("paths.cache_path")
         ServerConstants.CONFIG_PATH = data.getPath("paths.configs_path")

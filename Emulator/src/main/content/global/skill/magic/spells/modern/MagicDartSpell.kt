@@ -20,7 +20,7 @@ import org.rs.consts.Items
 import org.rs.consts.Sounds
 
 /**
- * The type Magic dart spell.
+ * The Magic dart spell.
  */
 @Initializable
 class MagicDartSpell :

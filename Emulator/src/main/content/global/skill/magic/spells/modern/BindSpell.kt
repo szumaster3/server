@@ -20,7 +20,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The type Bind spell.
+ * The Bind spell.
  */
 @Initializable
 class BindSpell : CombatSpell {

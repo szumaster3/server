@@ -20,7 +20,7 @@ import org.rs.consts.Items
 import org.rs.consts.Sounds
 
 /**
- * The type Iban blast spell.
+ * The Iban blast spell.
  */
 @Initializable
 class IbanBlastSpell :
