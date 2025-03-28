@@ -29,7 +29,7 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
             line(player, "talisman that had been found by one of his subjects.", line++, true)
             line(player, "I agreed to take it to the Wizards' Tower, South West of", line++, true)
             line(player, "Lumbridge for further examination by the wizards.", line++, true)
-            line(player, "I need to find the !!Head Wizard?? and give him the !!Talisman??", line++, true)
+            line(player, "I need to find the !!Head Wizard?? and give him the !!Talisman??", line++, stage == 20)
             line++
         }
         if (getStage(player) == 20) {
@@ -37,9 +37,9 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
             line(player, "talisman that had been found by one of his subjects.", line++, true)
             line(player, "I agreed to take it to the Wizards' Tower, South West of", line++, true)
             line(player, "Lumbridge for further examination by the wizards.", line++, true)
-            line(player, "I gave the Talisman to the Wizard but I didn't want to help", line++, true)
-            line(player, "him in his research right now.", line++, true)
-            line(player, "I should talk to !!Sedridor?? again to continue this quest.", line++, true)
+            line(player, "I gave the Talisman to the Wizard but I didn't want to help", line++, stage == 30)
+            line(player, "him in his research right now.", line++, stage == 30)
+            line(player, "I should talk to !!Sedridor?? again to continue this quest.", line++, stage == 30)
             line++
         }
         if (getStage(player) == 30) {
@@ -49,7 +49,7 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
             line(player, "Lumbridge for further examination by the wizards.", line++, true)
             line(player, "I gave the Talisman to the Head of the Tower and", line++, true)
             line(player, "agreed to help him with his research into rune stones.", line++, true)
-            line(player, "I should take this !!Research Package?? to !!Aubury?? in !!Varrock??", line++, true)
+            line(player, "I should take this !!Research Package?? to !!Aubury?? in !!Varrock??", line++, stage == 40)
             line++
         }
         if (getStage(player) == 40) {
@@ -60,8 +60,8 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
             line(player, "I gave the Talisman to the Head of the Tower and", line++, true)
             line(player, "agreed to help him with his research into rune stones.", line++, true)
             line(player, "I took the research package to Varrock and delivered it.", line++, true)
-            line(player, "I should speak to !!Aubury?? again when he has finished", line++, true)
-            line(player, "examining the !!research package?? I have delivered to him.", line++, true)
+            line(player, "I should speak to !!Aubury?? again when he has finished", line++, stage == 50)
+            line(player, "examining the !!research package?? I have delivered to him.", line++, stage == 50)
             line++
         }
         if (getStage(player) == 50) {
@@ -74,7 +74,7 @@ class RuneMysteries : Quest(Quests.RUNE_MYSTERIES, 27, 26, 1, Vars.VARP_QUEST_RU
             line(player, "I took the research package to Varrock and delivered it.", line++, true)
             line(player, "Aubury was interested in the research package and gave", line++, true)
             line(player, "me his own research notes to deliver to Sedridor.", line++, true)
-            line(player, "I should take the !!notes?? to !!Sedridor?? and see what he says", line++, true)
+            line(player, "I should take the !!notes?? to !!Sedridor?? and see what he says", line++, stage == 100)
             line++
         }
         if (stage == 100) {
