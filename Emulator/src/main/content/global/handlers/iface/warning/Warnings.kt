@@ -30,7 +30,6 @@ enum class Warnings(
     DORGESH_KAAN_TUNNEL_TO_KALPHITES(3868, Components.CWS_WARNING_21_561, 69),
     RANGING_GUILD(3871, Components.CWS_WARNING_23_564, 70), // Complete
     DEATH_PLATEAU(3872, Components.CWS_WARNING_24_581, 71),
-
     // GOD_WARS(3946, Components.CWS_WARNING_25_600, 72), Wilderness component
     DUEL_ARENA(4132, Components.CWS_WARNING_26_627, 73),
     BOUNTY_AREA(4199, Components.BOUNTY_WARNING_657, 74),

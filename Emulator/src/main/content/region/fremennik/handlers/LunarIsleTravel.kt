@@ -10,7 +10,7 @@ object LunarIsleTravel {
     @JvmStatic
     fun sail(
         player: Player,
-        destination: Destinaton,
+        destination: Destination,
     ) {
         lock(player, destination.animation)
         lockInteractions(player, destination.animation)
@@ -32,7 +32,7 @@ object LunarIsleTravel {
     }
 }
 
-enum class Destinaton(
+enum class Destination(
     val destName: String,
     val destination: Location,
     val animation: Int,

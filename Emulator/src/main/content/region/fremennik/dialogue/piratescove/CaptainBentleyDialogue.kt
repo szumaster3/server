@@ -1,6 +1,6 @@
 package content.region.fremennik.dialogue.piratescove
 
-import content.region.fremennik.handlers.Destinaton
+import content.region.fremennik.handlers.Destination
 import content.region.fremennik.handlers.LunarIsleTravel.sail
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
@@ -34,7 +34,7 @@ class CaptainBentleyDialogue(
             0 -> npc("Sure matey!").also { stage++ }
             1 -> {
                 end()
-                sail(player, Destinaton.PIRATES_COVE_TO_MOONCLAN_ISLAND)
+                sail(player, Destination.PIRATES_COVE_TO_MOONCLAN_ISLAND)
             }
             2 -> npc("And you're wanting what now?").also { stage++ }
             3 -> options("Can you take me back to Rellekka please?", "So we're here?").also { stage++ }
@@ -52,7 +52,7 @@ class CaptainBentleyDialogue(
                 }
             6 -> {
                 end()
-                sail(player, Destinaton.MOONCLAN_ISLAND_TO_PIRATES_COVE)
+                sail(player, Destination.MOONCLAN_ISLAND_TO_PIRATES_COVE)
             }
             7 ->
                 npc(
