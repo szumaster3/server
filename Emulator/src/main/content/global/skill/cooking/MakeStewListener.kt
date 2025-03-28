@@ -43,15 +43,6 @@ class MakeStewListener : InteractionListener {
 
     override fun defineListeners() {
         /*
-         * Handles using stew on range.
-         */
-
-        onUseWith(IntType.SCENERY, Items.UNCOOKED_STEW_2001, *range) { player, used, _ ->
-            player.dialogueInterpreter.open(43989, used.id, "stew")
-            return@onUseWith true
-        }
-
-        /*
          * Handles range options.
          */
 

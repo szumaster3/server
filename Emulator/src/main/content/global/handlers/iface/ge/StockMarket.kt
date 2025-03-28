@@ -40,12 +40,12 @@ class StockMarket : InterfaceListener {
             player.interfaceManager.closeSingleTab()
         }
 
-        onOpen(Components.OBJDIALOG_389) { player, _ ->
+        onOpen(Components.EXCHANGE_SEARCH_389) { player, _ ->
             player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
             return@onOpen true
         }
 
-        onClose(Components.OBJDIALOG_389) { player, _ ->
+        onClose(Components.EXCHANGE_SEARCH_389) { player, _ ->
             player.packetDispatch.sendRunScript(5781, "")
             return@onClose true
         }
@@ -101,7 +101,7 @@ class StockMarket : InterfaceListener {
                     }
 
                 190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
-                194 -> player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
+                194 -> player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                 203 -> abortOffer(player, openedOffer)
                 18, 34, 50, 69, 88, 107 -> {
                     openedIndex = (button - 18) shr 4
@@ -127,7 +127,7 @@ class StockMarket : InterfaceListener {
                     openedIndex = (button - 30) shr 4
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex)
-                    player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
+                    player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                 }
 
                 31, 47, 63, 82, 101, 120 -> {
@@ -173,7 +173,7 @@ class StockMarket : InterfaceListener {
                 170 ->
                     sendInputDialogue(player, false, "Enter the amount:") { value ->
                         if (player.interfaceManager.chatbox.id == 389) {
-                            player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
+                            player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
                         s = s.replace("k", "000")
@@ -203,8 +203,8 @@ class StockMarket : InterfaceListener {
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
                 185 ->
                     sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox.id == 389) {
-                            player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
+                        if (player.interfaceManager.chatbox.id == Components.EXCHANGE_SEARCH_389) {
+                            player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
                         updateOfferValue(player, tempOffer, s.toInt())
