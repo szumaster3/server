@@ -16,6 +16,7 @@ import core.game.world.GameWorld.settings
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
+import org.rs.consts.Components
 import org.rs.consts.Vars
 
 /**
@@ -120,11 +121,11 @@ class BankContainer(
             player.bankPinManager.openType(1)
             return
         }
-        player.interfaceManager.openComponent(762).setUncloseEvent { player: Player?, c: Component? ->
+        player.interfaceManager.openComponent(Components.BANK_V2_MAIN_762).setUncloseEvent { player: Player?, c: Component? ->
             this@BankContainer.close()
             true
         }
-        player.interfaceManager.openSingleTab(Component(763))
+        player.interfaceManager.openSingleTab(Component(Components.BANK_V2_SIDE_763))
         super.refresh()
         player.inventory.refresh()
         player.inventory.listeners.add(listener)
@@ -457,12 +458,12 @@ class BankContainer(
             if (c is BankContainer) {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, 762, 64000, 95, event!!.items, false, *event.slots),
+                    ContainerContext(player, Components.BANK_V2_MAIN_762, 64000, 95, event!!.items, false, *event.slots),
                 )
             } else {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, 763, 64000, 93, event!!.items, false, *event.slots),
+                    ContainerContext(player, Components.BANK_V2_SIDE_763, 64000, 93, event!!.items, false, *event.slots),
                 )
             }
             player.bank.setTabConfigurations()
@@ -473,12 +474,12 @@ class BankContainer(
             if (c is BankContainer) {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, 762, 64000, 95, c.toArray(), c.capacity(), false),
+                    ContainerContext(player, Components.BANK_V2_MAIN_762, 64000, 95, c.toArray(), c.capacity(), false),
                 )
             } else {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, 763, 64000, 93, c?.toArray(), 28, false),
+                    ContainerContext(player, Components.BANK_V2_SIDE_763, 64000, 93, c?.toArray(), 28, false),
                 )
             }
             player.bank.setTabConfigurations()
