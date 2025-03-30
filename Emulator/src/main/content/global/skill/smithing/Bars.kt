@@ -6,8 +6,8 @@ import org.rs.consts.Items
 enum class Bars(
     val barType: BarType,
     val smithingType: SmithingType,
-    @JvmField val product: Int,
-    @JvmField val level: Int,
+    val product: Int,
+    val level: Int,
 ) {
     BRONZE_DAGGER(BarType.BRONZE, SmithingType.TYPE_DAGGER, Items.BRONZE_DAGGER_1205, 1),
     BRONZE_AXE(BarType.BRONZE, SmithingType.TYPE_AXE, Items.BRONZE_AXE_1351, 1),
@@ -187,7 +187,6 @@ enum class Bars(
             }
         }
 
-        @JvmStatic
         fun getBars(type: BarType): Array<Bars?> {
             val bars: MutableList<Bars> = ArrayList()
             for (bar in values()) {
@@ -195,11 +194,11 @@ enum class Bars(
                     bars.add(bar)
                 }
             }
-            val barss = arrayOfNulls<Bars>(bars.size)
+            val barsSize = arrayOfNulls<Bars>(bars.size)
             for (i in bars.indices) {
-                barss[i] = bars[i]
+                barsSize[i] = bars[i]
             }
-            return barss
+            return barsSize
         }
 
         fun getItemId(

@@ -1,4 +1,4 @@
-package content.global.skill.smithing.smelting
+package content.global.skill.smithing
 
 import core.game.node.item.Item
 import org.rs.consts.Items
@@ -21,11 +21,7 @@ enum class Bar(
     ;
 
     @JvmField
-    val ores: Array<Item>
-
-    init {
-        this.ores = ores as Array<Item>
-    }
+    val ores: Array<Item> = ores as Array<Item>
 
     companion object {
         @JvmStatic

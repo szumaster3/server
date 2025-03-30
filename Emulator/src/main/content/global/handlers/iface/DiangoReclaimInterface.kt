@@ -30,10 +30,10 @@ class DiangoReclaimInterface : ComponentPlugin() {
         slot: Int,
         itemId: Int,
     ): Boolean {
-        var reclaimables = player.getAttribute<Array<Item?>>("diango-reclaimables", null)
-        if (reclaimables == null) reclaimables = getEligibleItems(player)
+        var reclaimable = player.getAttribute<Array<Item?>>("diango-reclaimables", null)
+        if (reclaimable == null) reclaimable = getEligibleItems(player)
 
-        val reclaimItem = reclaimables[slot]
+        val reclaimItem = reclaimable[slot]
         if (reclaimItem == null) {
             sendMessage(player, "Something went wrong there. Please try again.")
             return true
@@ -45,7 +45,7 @@ class DiangoReclaimInterface : ComponentPlugin() {
                 refresh(player)
             }
 
-            196 -> sendMessage(player, reclaimItem.definition.examine)
+            9 -> sendMessage(player, reclaimItem.definition.examine)
         }
         return false
     }
@@ -106,7 +106,7 @@ class DiangoReclaimInterface : ComponentPlugin() {
                 InterfaceContainer.generateItems(
                     player,
                     reclaimable,
-                    arrayOf("Examine", "Take"),
+                    arrayOf("Take"),
                     Components.DIANGO_RECLAIMABLE_468,
                     2,
                     8,

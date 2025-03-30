@@ -1,7 +1,7 @@
 package core.game.system.command.sets
 
 import content.global.skill.crafting.spinning.Spinning
-import content.global.skill.smithing.smelting.Bar
+import content.global.skill.smithing.Bar
 import content.global.skill.summoning.SummoningPouch
 import core.api.addItem
 import core.api.quest.finishQuest

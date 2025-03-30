@@ -2,7 +2,7 @@ package content.global.skill.magic.spells.modern
 
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
-import content.global.skill.smithing.smelting.Bar
+import content.global.skill.smithing.Bar
 import content.global.skill.smithing.smelting.SmeltingPulse
 import core.api.*
 import core.game.node.entity.player.Player

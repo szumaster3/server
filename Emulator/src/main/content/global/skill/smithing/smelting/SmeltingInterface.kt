@@ -1,12 +1,44 @@
 package content.global.skill.smithing.smelting
 
+import content.global.skill.smithing.Bar
+import core.api.quest.isQuestComplete
 import core.api.sendInputDialogue
+import core.api.sendItemZoomOnInterface
+import core.api.sendString
 import core.api.submitIndividualPulse
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
+import org.rs.consts.Quests
 
 class SmeltingInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
+
+        /*
+         * Handles drawing the components.
+         */
+
+        onOpen(Components.SMELTING_311) { player, _ ->
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 4, Bar.BRONZE.product.id, 150)
+
+            if (isQuestComplete(player, Quests.THE_KNIGHTS_SWORD)) {
+                sendString(player, "<br><br><br><br><col=000000>Blurite", Components.SMELTING_311, 20)
+            }
+
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 5, Bar.BLURITE.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 6, Bar.IRON.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 7, Bar.SILVER.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 8, Bar.STEEL.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 9, Bar.GOLD.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 10, Bar.MITHRIL.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 11, Bar.ADAMANT.product.id, 150)
+            sendItemZoomOnInterface(player, Components.SMELTING_311, 12, Bar.RUNITE.product.id, 150)
+            return@onOpen true
+        }
+
+        /*
+         * Handles options of smelting interface.
+         */
+
         on(Components.SMELTING_311) { player, _, _, buttonID, _, _ ->
             val barType = BarButton.forId(buttonID) ?: return@on true
             if (barType.amount == -1) {

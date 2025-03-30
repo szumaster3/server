@@ -17,16 +17,15 @@ enum class BarType(
     ;
 
     companion object {
-        @JvmStatic
         fun getBarTypeForId(itemId: Int): BarType? {
             when (itemId) {
-                2349 -> return BRONZE
-                2351 -> return IRON
-                2353 -> return STEEL
-                2359 -> return MITHRIL
-                2361 -> return ADAMANT
-                2363 -> return RUNITE
-                9467 -> return BLURITE
+                Items.BRONZE_BAR_2349 -> return BRONZE
+                Items.IRON_BAR_2351 -> return IRON
+                Items.STEEL_BAR_2353 -> return STEEL
+                Items.MITHRIL_BAR_2359 -> return MITHRIL
+                Items.ADAMANTITE_BAR_2361 -> return ADAMANT
+                Items.RUNITE_BAR_2363 -> return RUNITE
+                Items.BLURITE_BAR_9467 -> return BLURITE
             }
             return null
         }

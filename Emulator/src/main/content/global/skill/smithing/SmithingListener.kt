@@ -1,20 +1,23 @@
 package content.global.skill.smithing
 
-import content.global.skill.smithing.smelting.Bar
 import content.global.skill.smithing.special.DragonShieldPulse
 import content.global.skill.smithing.special.DragonfireShieldPulse
 import core.api.*
 import core.api.quest.isQuestComplete
+import core.api.ui.sendInterfaceConfig
+import core.game.component.Component
+import core.game.container.access.InterfaceContainer
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import org.rs.consts.Animations
-import org.rs.consts.Items
-import org.rs.consts.Quests
-import org.rs.consts.Scenery
+import core.game.node.item.Item
+import core.tools.StringUtils.formatDisplayName
+import org.rs.consts.*
 
-class SmithingInteraction : InteractionListener {
+class SmithingListener : InteractionListener {
     override fun defineListeners() {
+
         /*
          * Handles the two shield halves combining at anvil to produce dragon square shield.
          */
@@ -152,19 +155,106 @@ class SmithingInteraction : InteractionListener {
                 sendDialogue(
                     player,
                     "You need a smithing level of at least " + bar.level + " to work " +
-                        getItemName(bar.product.id).lowercase() +
-                        "s.",
+                            getItemName(bar.product.id).lowercase() +
+                            "s.",
                 )
                 return@onUseWith false
             }
 
-            var builder = SmithingBuilder(item!!)
-            builder.build(player)
+            buildComponents(player, item!!)
             return@onUseWith true
         }
     }
 
     companion object {
+        /**
+         * Build components for interface.
+         */
+        fun buildComponents(player: Player, item: Item) {
+            val type = BarType.getBarTypeForId(item.id)
+
+            player.gameAttributes.removeAttribute("smith-type")
+            player.gameAttributes.setAttribute("smith-type", type)
+
+            if (type!!.name == "BLURITE") {
+                val values = intArrayOf(17, 25, 33, 41, 57, 65, 73, 105, 113, 129, 137, 145, 153, 177, 185, 193, 201, 217, 225, 233, 241)
+                for (childId in values) {
+                    sendInterfaceConfig(player, Components.SMITHING_NEW_300, childId, true)
+                }
+            } else {
+                sendInterfaceConfig(player, Components.SMITHING_NEW_300, 267, false)
+            }
+
+            val bars = Bars.getBars(type)
+            for (i in bars.indices) {
+                when (bars[i]!!.smithingType) {
+                    SmithingType.TYPE_GRAPPLE_TIP -> sendInterfaceConfig(
+                        player,
+                        Components.SMITHING_NEW_300,
+                        169,
+                        false
+                    )
+
+                    SmithingType.TYPE_DART_TIP -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 65, false)
+                    SmithingType.TYPE_WIRE -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 81, false)
+                    SmithingType.TYPE_SPIT_IRON -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 89, false)
+                    SmithingType.TYPE_BULLSEYE -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 161, false)
+                    SmithingType.TYPE_CLAWS -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 209, false)
+                    SmithingType.TYPE_OIL_LANTERN -> sendInterfaceConfig(
+                        player,
+                        Components.SMITHING_NEW_300,
+                        161,
+                        false
+                    )
+
+                    SmithingType.TYPE_STUDS -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 97, false)
+                    else -> {
+                        if (type.name == "BLURITE" && (bars[i]!!.smithingType == SmithingType.TYPE_Crossbow_Bolt || bars[i]!!.smithingType == SmithingType.TYPE_Crossbow_Limb)) {
+                            sendInterfaceConfig(player, Components.SMITHING_NEW_300, 249, false)
+                            sendInterfaceConfig(player, Components.SMITHING_NEW_300, 15, true)
+                        }
+                    }
+                }
+
+                var color: String? = ""
+                if (player.getSkills().getLevel(Skills.SMITHING) >= bars[i]!!.level) {
+                    color = "<col=FFFFFF>"
+                }
+
+                player.packetDispatch.sendString(
+                    color + formatDisplayName(
+                        bars[i]!!.smithingType.name.replace("TYPE_", "")
+                    ), Components.SMITHING_NEW_300, bars[i]!!.smithingType.displayName
+                )
+
+                color = if (player.inventory.contains(bars[i]!!.barType.barType, bars[i]!!.smithingType.required)) {
+                    "<col=2DE120>"
+                } else {
+                    null
+                }
+
+                if (color != null) {
+                    val amt = if (bars[i]!!.smithingType.required > 1) "s" else ""
+                    player.packetDispatch.sendString(
+                        color + bars[i]!!.smithingType.required.toString() + " Bar" + amt,
+                        Components.SMITHING_NEW_300,
+                        bars[i]!!.smithingType.displayName + 1
+                    )
+                }
+
+                InterfaceContainer.generateItems(
+                    player, arrayOf(
+                        Item(
+                            bars[i]!!.product, bars[i]!!.smithingType.productAmount
+                        )
+                    ), arrayOf(""), Components.SMITHING_NEW_300, bars[i]!!.smithingType.child - 1
+                )
+            }
+
+            player.packetDispatch.sendString(type.barName, Components.SMITHING_NEW_300, 14)
+            player.interfaceManager.open(Component(Components.SMITHING_NEW_300))
+        }
+
         private val ANVIL =
             intArrayOf(
                 Scenery.ANVIL_2782,

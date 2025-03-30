@@ -6,31 +6,25 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
+import org.rs.consts.Animations;
+import org.rs.consts.Items;
 
 /**
- * The type Godsword dialogue.
+ * The Godsword dialogue.
  */
 @Initializable
 public final class GodswordDialogue extends Dialogue {
 
-    private static final Animation ANIMATION = new Animation(898);
+    private static final Animation ANIMATION = new Animation(Animations.SMITH_HAMMER_898);
 
-    private static final Item BLADE = new Item(11690);
+    private static final Item BLADE = new Item(Items.GODSWORD_BLADE_11690);
 
     private int used;
 
-    /**
-     * Instantiates a new Godsword dialogue.
-     */
     public GodswordDialogue() {
 
     }
 
-    /**
-     * Instantiates a new Godsword dialogue.
-     *
-     * @param player the player
-     */
     public GodswordDialogue(Player player) {
         super(player);
     }
@@ -53,29 +47,29 @@ public final class GodswordDialogue extends Dialogue {
             case 0:
                 boolean passBlade = true;
                 int remove = -1;
-                if (used == 11692 && player.getInventory().contains(11710, 1)) {
+                if (used == Items.GODSWORD_SHARDS_11692 && player.getInventory().contains(Items.GODSWORD_SHARD_1_11710, 1)) {
                     passBlade = false;
-                    remove = 11710;
+                    remove = Items.GODSWORD_SHARD_1_11710;
                 }
-                if (used == 11710 && player.getInventory().containItems(11692)) {
+                if (used == Items.GODSWORD_SHARD_1_11710 && player.getInventory().containItems(Items.GODSWORD_SHARDS_11692)) {
                     passBlade = false;
-                    remove = 11692;
+                    remove = Items.GODSWORD_SHARDS_11692;
                 }
-                if (used == 11688 && player.getInventory().contains(11712, 1)) {
+                if (used == Items.GODSWORD_SHARDS_11688 && player.getInventory().contains(Items.GODSWORD_SHARD_2_11712, 1)) {
                     passBlade = false;
-                    remove = 11712;
+                    remove = Items.GODSWORD_SHARD_2_11712;
                 }
-                if (used == 11712 && player.getInventory().containItems(11688)) {
+                if (used == Items.GODSWORD_SHARD_2_11712 && player.getInventory().containItems(Items.GODSWORD_SHARDS_11688)) {
                     passBlade = false;
-                    remove = 11688;
+                    remove = Items.GODSWORD_SHARDS_11688;
                 }
-                if (used == 11686 && player.getInventory().contains(11714, 1)) {
+                if (used == Items.GODSWORD_SHARDS_11686 && player.getInventory().contains(Items.GODSWORD_SHARD_3_11714, 1)) {
                     passBlade = false;
-                    remove = 11714;
+                    remove = Items.GODSWORD_SHARD_3_11714;
                 }
-                if (used == 11714 && player.getInventory().containItems(11686)) {
+                if (used == Items.GODSWORD_SHARD_3_11714 && player.getInventory().containItems(Items.GODSWORD_SHARDS_11686)) {
                     passBlade = false;
-                    remove = 11686;
+                    remove = Items.GODSWORD_SHARDS_11686;
                 }
                 if (!passBlade) {
                     if (player.getInventory().remove(new Item(used)) && player.getInventory().remove(new Item(remove))) {
@@ -88,25 +82,25 @@ public final class GodswordDialogue extends Dialogue {
                     return true;
                 }
                 int base = -1;
-                if (used == 11710) {
-                    if (player.getInventory().contains(11712, 1)) {
-                        base = 11712;
-                    } else if (player.getInventory().contains(11714, 1)) {
-                        base = 11714;
+                if (used == Items.GODSWORD_SHARD_1_11710) {
+                    if (player.getInventory().contains(Items.GODSWORD_SHARD_2_11712, 1)) {
+                        base = Items.GODSWORD_SHARD_2_11712;
+                    } else if (player.getInventory().contains(Items.GODSWORD_SHARD_3_11714, 1)) {
+                        base = Items.GODSWORD_SHARD_3_11714;
                     }
                 }
-                if (used == 11712) {
-                    if (player.getInventory().contains(11710, 1)) {
-                        base = 11710;
-                    } else if (player.getInventory().contains(11714, 1)) {
-                        base = 11714;
+                if (used == Items.GODSWORD_SHARD_2_11712) {
+                    if (player.getInventory().contains(Items.GODSWORD_SHARD_1_11710, 1)) {
+                        base = Items.GODSWORD_SHARD_1_11710;
+                    } else if (player.getInventory().contains(Items.GODSWORD_SHARD_3_11714, 1)) {
+                        base = Items.GODSWORD_SHARD_3_11714;
                     }
                 }
-                if (used == 11714) {
-                    if (player.getInventory().contains(11712, 1)) {
-                        base = 11712;
-                    } else if (player.getInventory().contains(11710, 1)) {
-                        base = 11710;
+                if (used == Items.GODSWORD_SHARD_3_11714) {
+                    if (player.getInventory().contains(Items.GODSWORD_SHARD_2_11712, 1)) {
+                        base = Items.GODSWORD_SHARD_2_11712;
+                    } else if (player.getInventory().contains(Items.GODSWORD_SHARD_1_11710, 1)) {
+                        base = Items.GODSWORD_SHARD_1_11710;
                     }
                 }
                 if (base == -1) {
@@ -116,13 +110,13 @@ public final class GodswordDialogue extends Dialogue {
                 }
                 if (player.getInventory().remove(new Item(used)) && player.getInventory().remove(new Item(base))) {
                     int shard = -1;
-                    if (used == 11710 && base == 11712 || used == 11712 && base == 11710) {
-                        shard = 11686;
-                    } else if (used == 11710 && base == 11714 || used == 11714 && base == 11710) {
-                        shard = 11688;
+                    if (used == Items.GODSWORD_SHARD_1_11710 && base == Items.GODSWORD_SHARD_2_11712 || used == Items.GODSWORD_SHARD_2_11712 && base == Items.GODSWORD_SHARD_1_11710) {
+                        shard = Items.GODSWORD_SHARDS_11686;
+                    } else if (used == Items.GODSWORD_SHARD_1_11710 && base == Items.GODSWORD_SHARD_3_11714 || used == Items.GODSWORD_SHARD_3_11714 && base == Items.GODSWORD_SHARD_1_11710) {
+                        shard = Items.GODSWORD_SHARDS_11688;
                     }
-                    if (used == 11712 && base == 11714 || used == 11714 && base == 11712) {
-                        shard = 11692;
+                    if (used == Items.GODSWORD_SHARD_2_11712 && base == Items.GODSWORD_SHARD_3_11714 || used == Items.GODSWORD_SHARD_3_11714 && base == Items.GODSWORD_SHARD_2_11712) {
+                        shard = Items.GODSWORD_SHARDS_11692;
                     }
                     player.lock(5);
                     player.animate(ANIMATION);

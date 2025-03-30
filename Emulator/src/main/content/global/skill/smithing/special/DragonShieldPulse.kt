@@ -30,10 +30,6 @@ class DragonShieldPulse(
         return true
     }
 
-    override fun start() {
-        super.start()
-    }
-
     override fun animate() {
     }
 

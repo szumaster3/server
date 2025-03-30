@@ -1,6 +1,6 @@
 package content.minigame.blastfurnace
 
-import content.global.skill.smithing.smelting.Bar
+import content.global.skill.smithing.Bar
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills

@@ -4,8 +4,8 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 
 enum class SmithingType(
-    @JvmField val required: Int,
-    @JvmField val child: Int,
+    val required: Int,
+    val child: Int,
     val displayName: Int,
     val button: IntArray,
     val productAmount: Int,

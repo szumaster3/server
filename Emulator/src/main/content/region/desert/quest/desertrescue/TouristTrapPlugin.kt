@@ -1,6 +1,6 @@
 package content.region.desert.quest.desertrescue
 
-import content.global.skill.smithing.smelting.Bar
+import content.global.skill.smithing.Bar
 import content.region.desert.quest.desertrescue.TouristTrapPlugin.AnnaCartHandler.AnnaCartCutscene
 import content.region.desert.quest.desertrescue.TouristTrapPlugin.BedabinAnvilHandler.AnnaWinchHandler
 import core.api.*

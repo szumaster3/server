@@ -18,37 +18,16 @@ class SmithingInterface : InterfaceListener {
 
         onOpen(Components.SMITHING_NEW_300) { player, _ ->
             if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
-                for (i in intArrayOf(
-                    25,
-                    33,
-                    41,
-                    49,
-                    57,
-                    65,
-                    73,
-                    81,
-                    105,
-                    113,
-                    121,
-                    129,
-                    137,
-                    145,
-                    153,
-                    177,
-                    185,
-                    193,
-                    201,
-                    209,
-                    217,
-                    225,
-                    233,
-                    241,
-                )) {
+                for (i in intArrayOf(25, 33, 41, 49, 57, 65, 73, 81, 105, 113, 121, 129, 137, 145, 153, 177, 185, 193, 201, 209, 217, 225, 233, 241)) {
                     sendInterfaceConfig(player, Components.SMITHING_NEW_300, i, true)
                 }
             }
             return@onOpen true
         }
+
+        /*
+         * Handles interaction with smithing interface components.
+         */
 
         on(Components.SMITHING_NEW_300) { player, _, _, buttonID, _, _ ->
             val item = Bars.getItemId(buttonID, player.gameAttributes.getAttribute<Any>("smith-type") as BarType)
@@ -73,6 +52,11 @@ class SmithingInterface : InterfaceListener {
             submitIndividualPulse(player, SmithingPulse(player, Item(item, amount), Bars.forId(item)!!, amount))
             return@on true
         }
+
+        /*
+         * Handles closing the interface if player is still in tutorial island
+         * and showing the tutorial stage dialogue.
+         */
 
         onClose(Components.SMITHING_NEW_300) { player, _ ->
             if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {

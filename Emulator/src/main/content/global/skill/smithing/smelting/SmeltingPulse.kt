@@ -1,5 +1,6 @@
 package content.global.skill.smithing.smelting
 
+import content.global.skill.smithing.Bar
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.container.impl.EquipmentContainer
@@ -48,89 +49,22 @@ class SmeltingPulse : SkillPulse<Item?> {
         if (getStatLevel(player, Skills.SMITHING) < bar.level) {
             sendMessage(
                 player,
-                "You need a Smithing level of at least " + bar.level + " in order to smelt " +
-                    bar.product.name
-                        .lowercase()
-                        .replace("bar", "") +
-                    ".",
+                "You need a Smithing level of at least ${bar.level} to smelt ${
+                    bar.product.name.lowercase().replace("bar", "")
+                }."
             )
             closeChatBox(player)
             return false
         }
         for (item in bar.ores) {
-            if (!inInventory(player, item.id, item.amount)) {
-                when (bar.product.id) {
-                    Items.BRONZE_BAR_2349 -> {
-                        if (amountInInventory(player, Items.TIN_ORE_438) <
-                            amountInInventory(player, Items.COPPER_ORE_436)
-                        ) {
-                            sendMessage(player, "You don't have enough copper to make any more bronze.")
-                        } else if (amountInInventory(player, Items.TIN_ORE_438) >
-                            amountInInventory(player, Items.COPPER_ORE_436)
-                        ) {
-                            sendMessage(player, "You don't have enough tin to make any more bronze.")
-                        } else {
-                            sendMessage(player, "You smelt the copper and tin together in the furnace.")
-                        }
-                    }
-
-                    Items.IRON_BAR_2351 -> {
-                        if (amountInInventory(player, Items.COAL_453) < 1) {
-                            sendMessage(player, "you have run out of iron ore to smelt.")
-                        } else {
-                            sendMessage(player, "You place the iron into the furnace.")
-                        }
-                    }
-
-                    Items.STEEL_BAR_2353 -> {
-                        if (amountInInventory(player, Items.COAL_453) < 2) {
-                            sendMessage(player, "You don't have enough coal to make any more steel.")
-                        } else {
-                            sendMessage(player, "You place the steel and two heaps of coal into the furnace.")
-                        }
-                    }
-
-                    Items.SILVER_BAR_2355 -> {
-                        if (amountInInventory(player, Items.SILVER_ORE_442) < 1) {
-                            sendMessage(player, "You have run out of silver to smelt.")
-                        } else {
-                            sendMessage(player, "You place the silver into the furnace.")
-                        }
-                    }
-
-                    Items.MITHRIL_BAR_2359 -> {
-                        if (amountInInventory(player, Items.COAL_453) < 4) {
-                            sendMessage(player, "You don't have enough coal to make any more mithril.")
-                        } else {
-                            sendMessage(player, "You place the mithril and four heaps of coal into the furnace.")
-                        }
-                    }
-
-                    Items.ADAMANTITE_BAR_2361 ->
-                        if (amountInInventory(player, Items.COAL_453) < 6) {
-                            sendMessage(player, "You don't have enough coal to make any more adamantite.")
-                        } else {
-                            sendMessage(player, "You place the adamantite and six heaps of coal into the furnace.")
-                        }
-
-                    Items.RUNITE_BAR_2363 ->
-                        if (amountInInventory(player, Items.COAL_453) < 8) {
-                            sendMessage(player, "You don't have enough coal to make any more runite.")
-                        } else {
-                            sendMessage(player, "You place the runite and eight heaps of coal into the furnace.")
-                        }
-
-                    else ->
-                        sendMessage(
-                            player,
-                            "You have run out of ${getItemName(bar.ores.size).lowercase()} to smelt.",
-                        )
-                }
+            if (!player.inventory.contains(item.id, item.amount)) {
+                player.packetDispatch.sendMessage("You do not have the required ores to make this bar.")
                 return false
             }
         }
         return true
     }
+
 
     override fun animate() {
         if (ticks == 0 || ticks % 5 == 0) {
@@ -164,17 +98,13 @@ class SmeltingPulse : SkillPulse<Item?> {
         }
         if (success(player)) {
             var amt =
-                if ((
-                        (
-                            freeSlots(player) != 0 &&
-                                !superHeat &&
-                                withinDistance(player, Location(3107, 3500, 0)) &&
-                                player.inventory.containsItems(*bar.ores)
-                        ) &&
+                if (((freeSlots(player) != 0 && !superHeat && withinDistance(
+                        player,
+                        Location(3107, 3500, 0)
+                    ) && player.inventory.containsItems(*bar.ores)) &&
                             player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.level != -1 &&
                             player.achievementDiaryManager.checkSmithReward(bar) &&
-                            RandomFunction.random(100) <= 10
-                    )
+                            RandomFunction.random(100) <= 10)
                 ) {
                     2
                 } else {
@@ -191,14 +121,7 @@ class SmeltingPulse : SkillPulse<Item?> {
             player.dispatch(ResourceProducedEvent(bar.product.id, 1, player, -1))
             var xp = bar.experience * amt
 
-            if ((
-                    (
-                        player.equipment[EquipmentContainer.SLOT_HANDS] != null &&
-                            player.equipment[EquipmentContainer.SLOT_HANDS].id == Items.GOLDSMITH_GAUNTLETS_776
-                    )
-                ) &&
-                bar.product.id == Items.GOLD_BAR_2357
-            ) {
+            if (((player.equipment[EquipmentContainer.SLOT_HANDS] != null && player.equipment[EquipmentContainer.SLOT_HANDS].id == Items.GOLDSMITH_GAUNTLETS_776)) && bar.product.id == Items.GOLD_BAR_2357) {
                 xp = 56.2 * amt
             }
             rewardXP(player, Skills.SMITHING, xp)
@@ -206,9 +129,9 @@ class SmeltingPulse : SkillPulse<Item?> {
                 sendMessage(
                     player,
                     "You retrieve a bar of " +
-                        bar.product.name
-                            .lowercase()
-                            .replace(" bar", "") + ".",
+                            bar.product.name
+                                .lowercase()
+                                .replace(" bar", "") + ".",
                 )
             }
         } else {
