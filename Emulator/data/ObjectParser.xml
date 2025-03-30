@@ -12,9 +12,6 @@
     <ObjectAction mode="remove" id="37670" x="3292" y="3299" z="0"/>
     <ObjectAction mode="add" id="37304" x="3292" y="3299" z="0"/>
 
-    <!-- Ladders - Mos Le'Harmless Distilleries. -->
-    <ObjectAction mode="add" id="20987" x="3821" y="2996" z="0"/>
-
     <!-- Small Crate - Catherby Pier near Arhein NPC. -->
     <ObjectAction mode="remove" id="356" x="2804" y="3428" z="0"/>
     <ObjectAction mode="add" id="356" x="2804" y="3428" z="0"/>
