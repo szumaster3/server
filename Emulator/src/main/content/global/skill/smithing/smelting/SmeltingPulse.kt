@@ -43,22 +43,24 @@ class SmeltingPulse : SkillPulse<Item?> {
         if (bar == null || player == null) {
             return false
         }
-        if (bar == Bar.BLURITE && !isQuestComplete(player, Quests.THE_KNIGHTS_SWORD)) {
-            return false
-        }
         if (getStatLevel(player, Skills.SMITHING) < bar.level) {
             sendMessage(
                 player,
                 "You need a Smithing level of at least ${bar.level} to smelt ${
-                    bar.product.name.lowercase().replace("bar", "")
-                }."
+                    bar.product.name.lowercase().replace(" bar", ".")
+                }"
             )
-            closeChatBox(player)
             return false
         }
+
+        if (bar == Bar.BLURITE && !isQuestComplete(player, Quests.THE_KNIGHTS_SWORD)) {
+            sendDialogue(player, "You need complete the Knights' Sword to smelt this bar.")
+            return false
+        }
+
         for (item in bar.ores) {
             if (!player.inventory.contains(item.id, item.amount)) {
-                player.packetDispatch.sendMessage("You do not have the required ores to make this bar.")
+                sendMessage(player, "You do not have the required ores to make this bar.")
                 return false
             }
         }
@@ -131,7 +133,7 @@ class SmeltingPulse : SkillPulse<Item?> {
                     "You retrieve a bar of " +
                             bar.product.name
                                 .lowercase()
-                                .replace(" bar", "") + ".",
+                                .replace(" bar", ".")
                 )
             }
         } else {

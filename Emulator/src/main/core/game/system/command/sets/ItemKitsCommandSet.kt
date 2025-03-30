@@ -115,6 +115,7 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
         ) { player, _ ->
             val anvilLocation = Location.create(2919, 3573, 0)
             player.bank.addList(Bar.getAllBars())
+            player.inventory.addList(Bar.getAllBars())
             addItem(player, Items.HAMMER_2347)
             teleport(player, anvilLocation)
             return@define
@@ -132,6 +133,7 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
         ) { player, _ ->
             val furnaceLocation = Location.create(3227, 3255, 0)
             player.bank.addList(Bar.getAllOres())
+            player.inventory.addList(Bar.getAllOres())
             teleport(player, furnaceLocation)
             return@define
         }
@@ -149,6 +151,7 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
             val obeliskLocation = Location.create(2208, 5344, 0)
             finishQuest(player, Quests.WOLF_WHISTLE)
             player.bank.addList(SummoningPouch.getAllPouchItems())
+            player.inventory.addList(SummoningPouch.getAllPouchItems())
             teleport(player, obeliskLocation)
             return@define
         }

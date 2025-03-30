@@ -129,7 +129,7 @@ class SmithingListener : InteractionListener {
                 return@onUseWith false
             }
             if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && used.id == Items.BLURITE_BAR_9467) {
-                sendDialogue(player, "You need complete the Knights' Sword quest to work the metal with.")
+                sendDialogue(player, "You need complete the Knights' Sword to work the metal with.")
                 return@onUseWith false
             }
 
@@ -200,13 +200,7 @@ class SmithingListener : InteractionListener {
                     SmithingType.TYPE_SPIT_IRON -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 89, false)
                     SmithingType.TYPE_BULLSEYE -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 161, false)
                     SmithingType.TYPE_CLAWS -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 209, false)
-                    SmithingType.TYPE_OIL_LANTERN -> sendInterfaceConfig(
-                        player,
-                        Components.SMITHING_NEW_300,
-                        161,
-                        false
-                    )
-
+                    SmithingType.TYPE_OIL_LANTERN -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 161, false)
                     SmithingType.TYPE_STUDS -> sendInterfaceConfig(player, Components.SMITHING_NEW_300, 97, false)
                     else -> {
                         if (type.name == "BLURITE" && (bars[i]!!.smithingType == SmithingType.TYPE_Crossbow_Bolt || bars[i]!!.smithingType == SmithingType.TYPE_Crossbow_Limb)) {

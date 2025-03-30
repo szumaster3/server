@@ -29,7 +29,7 @@ class SmithingPulse(
         }
         player.interfaceManager.close()
         if (getStatLevel(player, Skills.SMITHING) < bar.level) {
-            sendDialogue(player, "You need a Smithing level of " + bar.level + " to make a " + getItemName(bar.product) + ".",)
+            sendDialogue(player, "You need a Smithing level of " + bar.level + " to make a " + getItemName(bar.product) + ".")
             return false
         }
         if (!anyInInventory(player, bar.barType.barType, bar.smithingType.required)) {
@@ -55,6 +55,14 @@ class SmithingPulse(
         }
         if (!isQuestComplete(player, Quests.DEATH_PLATEAU) && bar.smithingType == SmithingType.TYPE_CLAWS) {
             sendDialogue(player, "You need to complete Death Plateau to smith claws.")
+            return false
+        }
+        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && bar.smithingType == SmithingType.TYPE_Crossbow_Bolt) {
+            sendDialogue(player, "You need to complete Knights' Sword to smith bolts.")
+            return false
+        }
+        if (!isQuestComplete(player, Quests.THE_KNIGHTS_SWORD) && bar.smithingType == SmithingType.TYPE_Crossbow_Limb) {
+            sendDialogue(player, "You need to complete Knights' Sword to smith limb.")
             return false
         }
         return true
