@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs.consts.Items
 
 private const val THESSALIA_MALE_COMPONENT = 591
 private const val THESSALIA_FEMALE_COMPONENT = 594
@@ -207,7 +208,7 @@ private val femaleLegIDs =
         F_SHORTS,
     )
 
-private val COINS = Item(995, 1000)
+private val COINS = Item(Items.COINS_995, 1000)
 
 @Initializable
 class ThessaliaInterface : ComponentPlugin() {
@@ -325,7 +326,7 @@ class ThessaliaInterface : ComponentPlugin() {
         }
     }
 
-    fun updateTop(
+    private fun updateTop(
         player: Player,
         button: Int,
         male: Boolean,
@@ -336,7 +337,7 @@ class ThessaliaInterface : ComponentPlugin() {
         player.appearance.sync()
     }
 
-    fun updateLegs(
+    private fun updateLegs(
         player: Player,
         button: Int,
         male: Boolean,
@@ -347,7 +348,7 @@ class ThessaliaInterface : ComponentPlugin() {
         player.appearance.sync()
     }
 
-    fun updateArms(
+    private fun updateArms(
         player: Player,
         button: Int,
         male: Boolean,
@@ -358,7 +359,7 @@ class ThessaliaInterface : ComponentPlugin() {
         player.appearance.sync()
     }
 
-    fun updateColor(
+    private fun updateColor(
         player: Player,
         button: Int,
         male: Boolean,

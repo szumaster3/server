@@ -395,6 +395,19 @@ class WarningListener :
             return@on true
         }
 
+        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open") { player, node ->
+            if (!Warnings.WILDERNESS_DITCH.isDisabled && player.location.y < 9918) {
+                WarningManager.openWarning(
+                    player,
+                    Warnings.WILDERNESS_DITCH,
+                )
+                setAttribute(player, "wildy_gate", node)
+            } else {
+                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            }
+            return@on true
+        }
+
         on(Scenery.WILDERNESS_DITCH_23271, IntType.SCENERY, "cross") { player, node ->
             if (player.location.getDistance(node.location) < 3) {
                 handleDitch(player, node.asScenery())

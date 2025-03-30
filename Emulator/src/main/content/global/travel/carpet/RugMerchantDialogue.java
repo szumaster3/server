@@ -13,10 +13,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import kotlin.Unit;
-import org.rs.consts.Animations;
-import org.rs.consts.Items;
-import org.rs.consts.Quests;
-import org.rs.consts.Sounds;
+import org.rs.consts.*;
 
 import static core.api.ContentAPIKt.*;
 import static core.api.quest.QuestAPIKt.hasRequirement;
@@ -33,7 +30,7 @@ public final class RugMerchantDialogue extends Dialogue {
     /**
      * The ids of the rug merchants.
      */
-    private static final int[] IDS = new int[]{2291, 2292, 2293, 2294, 2296, 2298, 3020};
+    private static final int[] IDS = new int[]{NPCs.RUG_MERCHANT_2291, NPCs.RUG_MERCHANT_2292, NPCs.RUG_MERCHANT_2293, NPCs.RUG_MERCHANT_2294, NPCs.RUG_MERCHANT_2296, NPCs.RUG_MERCHANT_2298, NPCs.RUG_MERCHANT_3020};
 
     /**
      * The floating animation.
@@ -150,7 +147,7 @@ public final class RugMerchantDialogue extends Dialogue {
                 stage = 11;
                 break;
             case 11:
-                if (!player.getInventory().contains(995, actualPrice)) {
+                if (!player.getInventory().contains(Items.COINS_995, actualPrice)) {
                     npc("A travel on one of my rugs costs " + actualPrice + " gold coins.");
                     stage = 20;
                     return;
@@ -166,7 +163,7 @@ public final class RugMerchantDialogue extends Dialogue {
                 if (player.getEquipment().get(EquipmentContainer.SLOT_WEAPON) != null) {
                     player.sendMessage(colorize("%RYou must unequip all your weapons before you can fly on a carpet."));
                 } else {
-                    if (player.getInventory().remove(new Item(995, actualPrice))) {
+                    if (player.getInventory().remove(new Item(Items.COINS_995, actualPrice))) {
                         destination.travel(current, player);
                     }
                 }
@@ -204,15 +201,15 @@ public final class RugMerchantDialogue extends Dialogue {
      */
     public static RugDestination[] getDestination(int npcId) {
         switch (npcId) {
-            case 2291:
+            case NPCs.RUG_MERCHANT_2291:
                 return new RugDestination[]{RugDestination.UZER, RugDestination.BEDABIN_CAMP, RugDestination.NORTH_POLLNIVNEACH};
-            case 2292:
+            case NPCs.RUG_MERCHANT_2292:
                 return new RugDestination[]{RugDestination.SHANTAY_PASS};
-            case 2294:
+            case NPCs.RUG_MERCHANT_2294:
                 return new RugDestination[]{RugDestination.SHANTAY_PASS};
-            case 2293:
+            case NPCs.RUG_MERCHANT_2293:
                 return new RugDestination[]{RugDestination.SHANTAY_PASS};
-            case 3020:
+            case NPCs.RUG_MERCHANT_3020:
                 return new RugDestination[]{RugDestination.NARDAH, RugDestination.SOPHANEM};
             default:
                 return new RugDestination[]{RugDestination.SOUTH_POLLNIVNEACH};
@@ -231,31 +228,31 @@ public final class RugMerchantDialogue extends Dialogue {
         /**
          * The Shantay pass.
          */
-        SHANTAY_PASS(2291, Location.create(3308, 3110, 0), "Shantay Pass"),
+        SHANTAY_PASS(NPCs.RUG_MERCHANT_2291, Location.create(3308, 3110, 0), "Shantay Pass"),
         /**
          * The Bedabin camp.
          */
-        BEDABIN_CAMP(2292, Location.create(3180, 3045, 0), "Bedabin Camp", Location.create(3305, 3107, 0), Location.create(3299, 3107, 0), Location.create(3285, 3088, 0), Location.create(3285, 3073, 0), Location.create(3268, 3073, 0), Location.create(3263, 3068, 0), Location.create(3246, 3068, 0), Location.create(3246, 3057, 0), Location.create(3232, 3057, 0), Location.create(3215, 3057, 0), Location.create(3200, 3057, 0), Location.create(3179, 3057, 0), Location.create(3179, 3047, 0), Location.create(3180, 3045, 0)),
+        BEDABIN_CAMP(NPCs.RUG_MERCHANT_2292, Location.create(3180, 3045, 0), "Bedabin Camp", Location.create(3305, 3107, 0), Location.create(3299, 3107, 0), Location.create(3285, 3088, 0), Location.create(3285, 3073, 0), Location.create(3268, 3073, 0), Location.create(3263, 3068, 0), Location.create(3246, 3068, 0), Location.create(3246, 3057, 0), Location.create(3232, 3057, 0), Location.create(3215, 3057, 0), Location.create(3200, 3057, 0), Location.create(3179, 3057, 0), Location.create(3179, 3047, 0), Location.create(3180, 3045, 0)),
         /**
          * The North pollnivneach.
          */
-        NORTH_POLLNIVNEACH(2294, Location.create(3349, 3003, 0), "North Pollnivneach", new Location(3308, 3096, 0), new Location(3308, 3079, 0), new Location(3308, 3066, 0), new Location(3311, 3057, 0), new Location(3319, 3042, 0), new Location(3332, 3033, 0), new Location(3341, 3020, 0), new Location(3350, 3009, 0), new Location(3351, 3003, 0), new Location(3349, 3003, 0)),
+        NORTH_POLLNIVNEACH(NPCs.RUG_MERCHANT_2294, Location.create(3349, 3003, 0), "North Pollnivneach", new Location(3308, 3096, 0), new Location(3308, 3079, 0), new Location(3308, 3066, 0), new Location(3311, 3057, 0), new Location(3319, 3042, 0), new Location(3332, 3033, 0), new Location(3341, 3020, 0), new Location(3350, 3009, 0), new Location(3351, 3003, 0), new Location(3349, 3003, 0)),
         /**
          * Uzer rug destination.
          */
-        UZER(2293, Location.create(3469, 3113, 0), "Uzer", Location.create(3308, 3105, 0), Location.create(3325, 3105, 0), Location.create(3332, 3105, 0), Location.create(3332, 3080, 0), Location.create(3341, 3080, 0), Location.create(3341, 3082, 0), Location.create(3358, 3082, 0), Location.create(3370, 3082, 0), Location.create(3382, 3082, 0), Location.create(3396, 3082, 0), Location.create(3432, 3082, 0), Location.create(3432, 3093, 0), Location.create(3440, 3093, 0), Location.create(3454, 3107, 0), Location.create(3469, 3107, 0), Location.create(3469, 3113, 0)),
+        UZER(NPCs.RUG_MERCHANT_2293, Location.create(3469, 3113, 0), "Uzer", Location.create(3308, 3105, 0), Location.create(3325, 3105, 0), Location.create(3332, 3105, 0), Location.create(3332, 3080, 0), Location.create(3341, 3080, 0), Location.create(3341, 3082, 0), Location.create(3358, 3082, 0), Location.create(3370, 3082, 0), Location.create(3382, 3082, 0), Location.create(3396, 3082, 0), Location.create(3432, 3082, 0), Location.create(3432, 3093, 0), Location.create(3440, 3093, 0), Location.create(3454, 3107, 0), Location.create(3469, 3107, 0), Location.create(3469, 3113, 0)),
         /**
          * The Nardah.
          */
-        NARDAH(2296, Location.create(3401, 2916, 0), "Nardah", new Location(3351, 2942, 0), new Location(3350, 2936, 0), new Location(3362, 2936, 0), new Location(3380, 2928, 0), new Location(3392, 2920, 0), new Location(3397, 2916, 0), new Location(3401, 2916, 0)),
+        NARDAH(NPCs.RUG_MERCHANT_2296, Location.create(3401, 2916, 0), "Nardah", new Location(3351, 2942, 0), new Location(3350, 2936, 0), new Location(3362, 2936, 0), new Location(3380, 2928, 0), new Location(3392, 2920, 0), new Location(3397, 2916, 0), new Location(3401, 2916, 0)),
         /**
          * Sophanem rug destination.
          */
-        SOPHANEM(2298, Location.create(3285, 2813, 0), "Sophanem", Location.create(3351, 2934, 0), Location.create(3351, 2928, 0), Location.create(3351, 2919, 0), Location.create(3346, 2902, 0), Location.create(3339, 2884, 0), Location.create(3328, 2877, 0), Location.create(3328, 2862, 0), Location.create(3328, 2845, 0), Location.create(3318, 2838, 0), Location.create(3307, 2828, 0), Location.create(3292, 2817, 0), Location.create(3285, 2818, 0), Location.create(3285, 2813, 0)),
+        SOPHANEM(NPCs.RUG_MERCHANT_2298, Location.create(3285, 2813, 0), "Sophanem", Location.create(3351, 2934, 0), Location.create(3351, 2928, 0), Location.create(3351, 2919, 0), Location.create(3346, 2902, 0), Location.create(3339, 2884, 0), Location.create(3328, 2877, 0), Location.create(3328, 2862, 0), Location.create(3328, 2845, 0), Location.create(3318, 2838, 0), Location.create(3307, 2828, 0), Location.create(3292, 2817, 0), Location.create(3285, 2818, 0), Location.create(3285, 2813, 0)),
         /**
          * The South pollnivneach.
          */
-        SOUTH_POLLNIVNEACH(3020, Location.create(3351, 2942, 0), "South Pollnivneach");
+        SOUTH_POLLNIVNEACH(NPCs.RUG_MERCHANT_3020, Location.create(3351, 2942, 0), "South Pollnivneach");
 
         /**
          * The npc id.
@@ -302,7 +299,7 @@ public final class RugMerchantDialogue extends Dialogue {
             player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
             player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
             player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614), EquipmentContainer.SLOT_WEAPON);
-            player.getPacketDispatch().sendInterfaceConfig(548, 69, true);
+            player.getPacketDispatch().sendInterfaceConfig(Components.TOPLEVEL_548, 69, true);
             playAudio(player, Sounds.CARPET_RISE_1196);
             playJingle(player, 132);
 
@@ -345,7 +342,7 @@ public final class RugMerchantDialogue extends Dialogue {
                         case 901:
                             player.getEquipment().replace(null, EquipmentContainer.SLOT_WEAPON);
                             player.getInterfaceManager().restoreTabs();
-                            player.getPacketDispatch().sendInterfaceConfig(548, 69, false);
+                            player.getPacketDispatch().sendInterfaceConfig(Components.TOPLEVEL_548, 69, false);
                             player.getImpactHandler().setDisabledTicks(0);
                             player.unlock();
                             player.animate(new Animation(-1));

@@ -37,7 +37,7 @@ class GodBookOptionListener : InteractionListener {
             node: Node,
             product: Int,
         ) {
-            if (player.skills.getStaticLevel(Skills.PRAYER) < 50) {
+            if (getStatLevel(player, Skills.PRAYER) < 50) {
                 sendMessage(player, "You need a Prayer level of at least 50 in order to do this.")
             } else if (player.skills.prayerPoints < 4) {
                 sendMessage(player, "You need at least 4 prayer points in order to do this.")

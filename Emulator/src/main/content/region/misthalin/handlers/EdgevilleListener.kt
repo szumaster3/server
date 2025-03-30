@@ -2,13 +2,11 @@ package content.region.misthalin.handlers
 
 import core.api.*
 import core.game.global.action.ClimbActionHandler
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
-import org.rs.consts.Components
 import org.rs.consts.Scenery
 
 class EdgevilleListener : InteractionListener {
@@ -58,14 +56,14 @@ class EdgevilleListener : InteractionListener {
             return@on true
         }
 
-        on(26933, IntType.SCENERY, "open") { player, node ->
+        on(Scenery.TRAPDOOR_26933, IntType.SCENERY, "open") { player, node ->
             animate(player, Animations.OPEN_CHEST_536)
             sendMessage(player, "The trapdoor opens...")
             replaceScenery(node.asScenery(), node.id + 1, -1)
             return@on true
         }
 
-        on(26934, IntType.SCENERY, "close", "climb-down") { player, node ->
+        on(Scenery.TRAPDOOR_26934, IntType.SCENERY, "close", "climb-down") { player, node ->
             if (getUsedOption(player) == "close") {
                 animate(player, 535)
                 sendMessage(player, "You close the trapdoor.")
@@ -73,16 +71,6 @@ class EdgevilleListener : InteractionListener {
             } else {
                 sendMessage(player, "You climb down through the trapdoor...")
                 ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-down")
-            }
-            return@on true
-        }
-
-        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open") { player, node ->
-            if (getUsedOption(player) == "open" && player.location.y < 9918) {
-                openInterface(player, Components.WILDERNESS_WARNING_382)
-                setAttribute(player, "wildy-gate", node)
-            } else {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
         }

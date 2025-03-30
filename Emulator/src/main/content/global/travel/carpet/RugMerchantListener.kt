@@ -3,9 +3,10 @@ package content.global.travel.carpet
 import core.api.openDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import org.rs.consts.NPCs
 
 class RugMerchantListener : InteractionListener {
-    private val rugMerchants = intArrayOf(2291, 2292, 2293, 2294, 2296, 2298, 3020)
+    private val rugMerchants = intArrayOf(NPCs.RUG_MERCHANT_2291, NPCs.RUG_MERCHANT_2292, NPCs.RUG_MERCHANT_2293, NPCs.RUG_MERCHANT_2294, NPCs.RUG_MERCHANT_2296, NPCs.RUG_MERCHANT_2298, NPCs.RUG_MERCHANT_3020)
 
     override fun defineListeners() {
         /*

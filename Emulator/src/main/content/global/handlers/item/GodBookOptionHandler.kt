@@ -11,6 +11,7 @@ import core.game.node.item.ItemPlugin
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs.consts.Items
 
 @Initializable
 class GodBookOptionHandler : OptionHandler() {
@@ -80,7 +81,7 @@ class GodBookOptionHandler : OptionHandler() {
         }
     }
 
-    inner class PageHandler : UseWithHandler(3839, 3841, 3843) {
+    inner class PageHandler : UseWithHandler(Items.DAMAGED_BOOK_3839, Items.DAMAGED_BOOK_3841, Items.DAMAGED_BOOK_3843) {
         override fun newInstance(arg: Any?): Plugin<Any?> {
             for (book in GodBook.values()) {
                 for (i in book.pages) {

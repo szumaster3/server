@@ -265,12 +265,12 @@ class BankContainer(
             item.amount = maxCount
             add.amount = maxCount
             if (maxCount < 1) {
-                player.packetDispatch.sendMessage("Not enough space in your inventory.")
+                sendMessage(player, "Not enough space in your inventory.")
                 return
             }
         }
         if (isNoteItems && noteId < 0) {
-            player.packetDispatch.sendMessage("This item can't be withdrawn as a note.")
+            sendMessage(player, "This item can't be withdrawn as a note.")
             add = item
         }
         if (super.remove(item, slot, false)) {
