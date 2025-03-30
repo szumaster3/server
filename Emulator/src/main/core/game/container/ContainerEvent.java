@@ -3,51 +3,50 @@ package core.game.container;
 import core.game.node.item.Item;
 
 /**
- * The type Container event.
+ * Represents an event related to a container, tracking changes to its items.
  */
 public final class ContainerEvent {
 
     /**
-     * The constant NULL_ITEM.
+     * A constant representing a null item.
      */
     public static final Item NULL_ITEM = new Item(0, 0);
 
     private final Item[] items;
-
     private boolean clear;
 
     /**
-     * Instantiates a new Container event.
+     * Constructs a new ContainerEvent with the specified size.
      *
-     * @param size the size
+     * @param size the number of slots in the container
      */
     public ContainerEvent(int size) {
         this.items = new Item[size];
     }
 
     /**
-     * Flag null.
+     * Flags the specified slot as containing a null item.
      *
-     * @param slot the slot
+     * @param slot the slot index to flag as null
      */
     public void flagNull(int slot) {
         items[slot] = NULL_ITEM;
     }
 
     /**
-     * Flag.
+     * Updates the specified slot with a given item.
      *
-     * @param slot the slot
-     * @param item the item
+     * @param slot the slot index to update
+     * @param item the item to place in the slot
      */
     public void flag(int slot, Item item) {
         items[slot] = item;
     }
 
     /**
-     * Gets change count.
+     * Retrieves the number of slots that have been changed.
      *
-     * @return the change count
+     * @return the count of changed slots
      */
     public int getChangeCount() {
         int count = 0;
@@ -60,9 +59,9 @@ public final class ContainerEvent {
     }
 
     /**
-     * Get slots int [ ].
+     * Retrieves the slot indices that have been modified.
      *
-     * @return the int [ ]
+     * @return an array of indices corresponding to changed slots
      */
     public int[] getSlots() {
         int size = 0;
@@ -73,23 +72,21 @@ public final class ContainerEvent {
             }
         }
         int[] slot = new int[size];
-        for (int i = 0; i < size; i++) {
-            slot[i] = slots[i];
-        }
+        System.arraycopy(slots, 0, slot, 0, size);
         return slot;
     }
 
     /**
-     * Get items item [ ].
+     * Retrieves the array of items currently stored in the container.
      *
-     * @return the item [ ]
+     * @return an array of items in the container
      */
     public Item[] getItems() {
         return items;
     }
 
     /**
-     * Flag empty.
+     * Clears the container by setting all slots to null and marking it as cleared.
      */
     public void flagEmpty() {
         this.clear = true;
@@ -99,18 +96,18 @@ public final class ContainerEvent {
     }
 
     /**
-     * Is clear boolean.
+     * Checks if the container has been cleared.
      *
-     * @return the boolean
+     * @return {@code true} if the container is cleared, otherwise {@code false}
      */
     public boolean isClear() {
         return clear;
     }
 
     /**
-     * Sets clear.
+     * Sets the cleared status of the container.
      *
-     * @param clear the clear
+     * @param clear {@code true} to mark the container as cleared, otherwise {@code false}
      */
     public void setClear(boolean clear) {
         this.clear = clear;

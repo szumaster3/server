@@ -19,53 +19,26 @@ import java.util.ArrayList;
 import static core.api.ContentAPIKt.setVarp;
 
 /**
- * The type Equipment container.
+ * Manages a player's equipped items, handling equipment logic such as equipping, unequipping, and stat bonuses.
  */
 public final class EquipmentContainer extends Container {
 
     /**
-     * The constant SLOT_HAT.
+     * The equipment slots corresponding to different gear types.
      */
-    public static final int SLOT_HAT = 0, /**
-     * The Slot cape.
-     */
-    SLOT_CAPE = 1, /**
-     * The Slot amulet.
-     */
-    SLOT_AMULET = 2, /**
-     * The Slot weapon.
-     */
-    SLOT_WEAPON = 3, /**
-     * The Slot chest.
-     */
-    SLOT_CHEST = 4, /**
-     * The Slot shield.
-     */
-    SLOT_SHIELD = 5, /**
-     * The Slot legs.
-     */
-    SLOT_LEGS = 7, /**
-     * The Slot hands.
-     */
-    SLOT_HANDS = 9, /**
-     * The Slot feet.
-     */
-    SLOT_FEET = 10, /**
-     * The Slot ring.
-     */
-    SLOT_RING = 12, /**
-     * The Slot arrows.
-     */
-    SLOT_ARROWS = 13;
+    public static final int SLOT_HAT = 0, SLOT_CAPE = 1, SLOT_AMULET = 2, SLOT_WEAPON = 3, SLOT_CHEST = 4, SLOT_SHIELD = 5, SLOT_LEGS = 7, SLOT_HANDS = 9, SLOT_FEET = 10, SLOT_RING = 12, SLOT_ARROWS = 13;
 
+    /**
+     * Names of different combat and attribute bonuses displayed in the interface.
+     */
     private static final String[] BONUS_NAMES = {"Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Summoning: ", "Strength: ", "Prayer: "};
 
     private final Player player;
 
     /**
-     * Instantiates a new Equipment container.
+     * Creates an EquipmentContainer to manage the player's equipped items.
      *
-     * @param player the player
+     * @param player The player whose equipment is managed.
      */
     public EquipmentContainer(Player player) {
         super(14);
@@ -79,25 +52,25 @@ public final class EquipmentContainer extends Container {
     }
 
     /**
-     * Add boolean.
+     * Attempts to equip an item.
      *
-     * @param item          the item
-     * @param fire          the fire
-     * @param fromInventory the from inventory
-     * @return the boolean
+     * @param item          The item to equip.
+     * @param fire          Whether to trigger event listeners.
+     * @param fromInventory Whether the item is coming from the player's inventory.
+     * @return {@code true} if the item was successfully equipped, otherwise {@code false}.
      */
     public boolean add(Item item, boolean fire, boolean fromInventory) {
         return add(item, player.getInventory().getSlot(item), fire, fromInventory);
     }
 
     /**
-     * Add boolean.
+     * Attempts to equip an item from a specific inventory slot.
      *
-     * @param newItem       the new item
-     * @param inventorySlot the inventory slot
-     * @param fire          the fire
-     * @param fromInventory the from inventory
-     * @return the boolean
+     * @param newItem       The item to equip.
+     * @param inventorySlot The slot in the inventory from which the item is being equipped.
+     * @param fire          Whether to trigger event listeners.
+     * @param fromInventory Whether the item is coming from the player's inventory.
+     * @return {@code true} if the item was successfully equipped, otherwise {@code false}.
      */
     public boolean add(Item newItem, int inventorySlot, boolean fire, boolean fromInventory) {
         int equipmentSlot = newItem.getDefinition().getConfiguration(ItemConfigParser.EQUIP_SLOT, -1);
@@ -143,6 +116,13 @@ public final class EquipmentContainer extends Container {
         return true;
     }
 
+    /**
+     * Determines if an item can be equipped.
+     *
+     * @param newItem The item to check.
+     * @param slot    The slot where the item would be equipped.
+     * @return {@code true} if the item can be equipped, otherwise {@code false}.
+     */
     private boolean isEquippable(Item newItem, int slot) {
         if (slot < 0) {
             return false;
@@ -150,6 +130,11 @@ public final class EquipmentContainer extends Container {
         return newItem.getDefinition().hasRequirement(player, true, true);
     }
 
+    /**
+     * Updates the weapon interface name when a new weapon is equipped.
+     *
+     * @param newItem The weapon item being equipped.
+     */
     private void setWeaponInterfaceWeaponName(Item newItem) {
         if (newItem.getSlot() == SLOT_WEAPON) {
             player.getPacketDispatch().sendString(newItem.getName(), 92, 0);
@@ -215,6 +200,14 @@ public final class EquipmentContainer extends Container {
         return neededSlots;
     }
 
+    /**
+     * Determines if a secondary item needs to be unequipped when equipping the given item.
+     * This applies primarily to two-handed weapons and shields.
+     *
+     * @param newItem       The item being equipped.
+     * @param equipmentSlot The slot where the item is being equipped.
+     * @return The secondary item to unequip if applicable, or {@code null} if none.
+     */
     @Nullable
     private Item getSecondaryEquipIfApplicable(Item newItem, int equipmentSlot) {
         Item secondaryEquipItem = null;
@@ -333,9 +326,9 @@ public final class EquipmentContainer extends Container {
     }
 
     /**
-     * Update bonuses.
+     * Recalculates the player's equipment bonuses based on currently equipped items.
      *
-     * @param player the player
+     * @param player The player whose bonuses should be updated.
      */
     public static void updateBonuses(Player player) {
         int[] bonuses = new int[15];
@@ -364,9 +357,9 @@ public final class EquipmentContainer extends Container {
     }
 
     /**
-     * Update.
+     * Updates the player's equipment-related stats and appearance.
      *
-     * @param player the player
+     * @param player The player whose data is being refreshed.
      */
     public static void update(Player player) {
         if (!player.getInterfaceManager().hasMainComponent(667)) {
