@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.StringUtils
+import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
@@ -126,11 +127,12 @@ class CharterDialogue(
                         if (cost == 0) {
                             destination!!.sail(player)
                         }
-                        if (!player.inventory.containsItem(Item(995, cost))) {
+                        if (!player.inventory.containsItem(Item(Items.COINS_995, cost))) {
+                            player(FaceAnim.HALF_GUILTY, "I don't have the money for that.")
                             end()
                             return true
                         }
-                        if (!player.inventory.remove(Item(995, cost))) {
+                        if (!player.inventory.remove(Item(Items.COINS_995, cost))) {
                             player(FaceAnim.HALF_GUILTY, "I don't have the money for that.")
                             stage = 30002
                             return true
