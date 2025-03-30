@@ -2,6 +2,7 @@ package content.global.handlers.scenery
 
 import core.api.log
 import core.api.quest.hasRequirement
+import core.api.sendDialogueLines
 import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -83,7 +84,7 @@ class TotemPoleListener : InteractionListener {
          */
 
         on(Scenery.TOTEM_POLE_2938, IntType.SCENERY, "look") { player, _ ->
-            player.dialogueInterpreter.sendDialogue(
+            sendDialogueLines(player,
                 "This totem pole is truly awe inspiring.",
                 "It depicts powerful Karamja jungle animals.",
                 "It is very well carved and brings a sense of power",
@@ -97,7 +98,7 @@ class TotemPoleListener : InteractionListener {
          */
 
         on(Scenery.TOTEM_POLE_2937, IntType.SCENERY, "look") { player, _ ->
-            player.dialogueInterpreter.sendDialogue(
+            sendDialogueLines(player,
                 "This totem pole looks very corrupted,",
                 "there is a darkness about it that seems quite unnatural.",
                 "You don't like to look at it for too long.",
@@ -111,7 +112,7 @@ class TotemPoleListener : InteractionListener {
          */
 
         on(Scenery.TOTEM_POLE_2936, IntType.SCENERY, "look") { player, _ ->
-            player.dialogueInterpreter.sendDialogues(
+            sendDialogueLines(player,
                 "You remove the evil totem pole.",
                 "And replace it with the one you carved yourself.",
                 "As you do so, you feel a lightness in the air,",
