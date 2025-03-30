@@ -75,8 +75,8 @@ class WarningListener :
                         if (component.id == Components.WILDERNESS_WARNING_382) {
                             player.interfaceManager.close()
 
-                            player.getAttribute<Scenery>("wildy_ditch")?.let { handleDitch(player) }
-                                ?: player.getAttribute<Scenery>("wildy_gate")?.let { handleGate(player) }
+                            player.getAttribute<core.game.node.scenery.Scenery>("wildy_ditch")?.let { handleDitch(player) }
+                                ?: player.getAttribute<core.game.node.scenery.Scenery>("wildy_gate")?.let { handleGate(player) }
 
                             WarningManager.increment(player, component.id)
                         } else {
