@@ -76,8 +76,10 @@ class WarningListener :
                         if (component.id == Components.WILDERNESS_WARNING_382) {
                             player.interfaceManager.close()
 
-                            player.getAttribute<core.game.node.scenery.Scenery>("wildy_ditch")?.let { handleDitch(player) }
-                                ?: player.getAttribute<core.game.node.scenery.Scenery>("wildy_gate")?.let { handleGate(player) }
+                            player.getAttribute<core.game.node.scenery.Scenery>("wildy_ditch")
+                                ?.let { handleDitch(player) }
+                                ?: player.getAttribute<core.game.node.scenery.Scenery>("wildy_gate")
+                                    ?.let { handleGate(player) }
 
                             WarningManager.increment(player, component.id)
                         } else {
@@ -92,7 +94,7 @@ class WarningListener :
                     }
 
                     20, 28, // 28 for Wilderness warning.
-                    -> WarningManager.toggle(player, component.id)
+                        -> WarningManager.toggle(player, component.id)
 
                     17 -> {
                         closeOverlay(player)
@@ -101,8 +103,9 @@ class WarningListener :
                             Components.CWS_WARNING_30_650 -> {
                                 if (!hasRequirement(player, Quests.SUMMERS_END))
                                     return@on true
-                                if(player.getAttribute("corp-beast-cave-delay",0) <= GameWorld.ticks) {
-                                    player.properties.teleportLocation = player.location.transform(4, 0, 0).also { closeInterface(player) }
+                                if (player.getAttribute("corp-beast-cave-delay", 0) <= GameWorld.ticks) {
+                                    player.properties.teleportLocation =
+                                        player.location.transform(4, 0, 0).also { closeInterface(player) }
                                     player.setAttribute("corp-beast-cave-delay", GameWorld.ticks + 5)
                                 } else {
                                     closeInterface(player)
@@ -144,6 +147,7 @@ class WarningListener :
                                     finishDiaryTask(player, DiaryType.FALADOR, 0, 5)
                                 }
                             }
+
                             Components.CWS_WARNING_1_574 -> {
                                 // Dagannoth kings
                                 // if(player.viewport.region.id != 12181) {
@@ -155,6 +159,7 @@ class WarningListener :
                                 // }
                                 WarningManager.increment(player, component.id)
                             }
+
                             Components.CWS_WARNING_20_580 -> {
                                 val targetScenery =
                                     if (player.location.x > 3443) {
@@ -174,14 +179,17 @@ class WarningListener :
                                             player,
                                             ZoneBorders(1836, 5174, 1930, 5257),
                                         ) -> Location.create(2042, 5245, 0)
+
                                         inBorders(
                                             player,
                                             ZoneBorders(1977, 5176, 2066, 5265),
                                         ) -> Location.create(2123, 5252, 0)
+
                                         inBorders(
                                             player,
                                             ZoneBorders(2090, 5246, 2197, 5336),
                                         ) -> Location.create(2358, 5215, 0)
+
                                         else -> null
                                     }
                                 climb(player, Animation(Animations.MULTI_BEND_OVER_827), ladderLocation)
@@ -265,17 +273,20 @@ class WarningListener :
          */
 
         on(Scenery.STAIRS_25432, IntType.SCENERY, "climb-down") { player, _ ->
-            if (getQuestStage(player, Quests.OBSERVATORY_QUEST) >= 8) {
-                if (!Warnings.OBSERVATORY_STAIRS.isDisabled) {
-                    WarningManager.openWarning(
-                        player,
-                        Warnings.OBSERVATORY_STAIRS,
-                    )
-                } else {
-                    runTask(player, 2) {
-                        teleport(player, Location(2355, 9394, 0))
-                    }
+            if (getQuestStage(player, Quests.OBSERVATORY_QUEST) < 8) {
+                sendPlayerDialogue(player, "I don't think I should try to go down there now.")
+                return@on true
+            }
+            if (!Warnings.OBSERVATORY_STAIRS.isDisabled) {
+                WarningManager.openWarning(
+                    player,
+                    Warnings.OBSERVATORY_STAIRS,
+                )
+            } else {
+                runTask(player, 1) {
+                    teleport(player, Location(2355, 9394, 0))
                 }
+
             }
             return@on true
         }
@@ -289,7 +300,8 @@ class WarningListener :
             IntType.SCENERY,
             "climb-down",
             "climb",
-        ) { player, _ ->
+        )
+        { player, _ ->
             val option = getUsedOption(player)
             when (option) {
                 "climb" -> teleport(player, Location.create(3169, 3173, 0))
@@ -319,7 +331,8 @@ class WarningListener :
          * Handles mort myre gate scenery interaction.
          */
 
-        on(intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507), IntType.SCENERY, "open") { player, node ->
+        on(intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507), IntType.SCENERY, "open")
+        { player, node ->
             if (player.location.y == 3457) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 sendMessage(player, "You skip gladly out of murky Mort Myre.")
@@ -363,7 +376,8 @@ class WarningListener :
             IntType.SCENERY,
             "climb-up",
             "climb-down",
-        ) { player, _ ->
+        )
+        { player, _ ->
             val option = getUsedOption(player)
             when (option) {
                 "climb-up" -> {
@@ -392,7 +406,8 @@ class WarningListener :
             return@on true
         }
 
-        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open") { player, node ->
+        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open")
+        { player, node ->
             if (!Warnings.WILDERNESS_DITCH.isDisabled && player.location.y < 9918) {
                 WarningManager.openWarning(
                     player,
@@ -405,7 +420,8 @@ class WarningListener :
             return@on true
         }
 
-        on(Scenery.WILDERNESS_DITCH_23271, IntType.SCENERY, "cross") { player, node ->
+        on(Scenery.WILDERNESS_DITCH_23271, IntType.SCENERY, "cross")
+        { player, node ->
             if (player.location.getDistance(node.location) < 3) {
                 handleDitch(player, node.asScenery())
                 return@on true
@@ -451,7 +467,7 @@ class WarningListener :
         ditch: core.game.node.scenery.Scenery,
     ): Boolean =
         (ditch.rotation % 2 == 0 && player.location.y <= ditch.location.y) ||
-            (ditch.rotation % 2 != 0 && player.location.x > ditch.location.x)
+                (ditch.rotation % 2 != 0 && player.location.x > ditch.location.x)
 
     private fun getDitchLocations(
         playerLocation: Location,

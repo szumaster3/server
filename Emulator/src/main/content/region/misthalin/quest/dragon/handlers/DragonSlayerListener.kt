@@ -40,11 +40,8 @@ class DragonSlayerListener : InteractionListener {
         }
 
         on(Scenery.HOLE_25154, IntType.SCENERY, "enter") { player, _ ->
-            val animation = Animation(Animations.USE_LADDER_828)
             val location = Location(2833, 9658, 0)
-
-            ClimbActionHandler.climb(player, animation, location)
-
+            ClimbActionHandler.climb(player, null, location)
             return@on true
         }
 

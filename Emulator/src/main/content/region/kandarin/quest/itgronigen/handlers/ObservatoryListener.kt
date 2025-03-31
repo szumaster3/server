@@ -51,6 +51,7 @@ class ObservatoryListener : InteractionListener {
         private val OBSERVATORY_GATES = intArrayOf(Scenery.DOOR_25526, Scenery.DOOR_25527)
         private const val SIGNPOST = Scenery.SIGNPOST_25397
         private const val OBSERVATORY_STAIRS = Scenery.STAIRS_25434
+        const val EXPERIENCE_BLOCKER = Vars.VARBIT_OBSERVATORY_QUEST_REWARD_EXPERIENCE_BLOCKER_3827
         private val STAR_CHART =
             intArrayOf(
                 Scenery.STAR_CHART_25578,

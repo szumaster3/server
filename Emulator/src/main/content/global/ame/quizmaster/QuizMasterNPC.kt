@@ -28,6 +28,7 @@ class QuizMasterNPC(
                 override fun pulse(): Boolean {
                     player.face(findLocalNPC(player, NPCs.QUIZ_MASTER_2477))
                     player.animate(Animation.create(QuizMaster.SIT_ANIMATION))
+                    RandomEvent.hideLogout(player, true)
                     return false
                 }
             },

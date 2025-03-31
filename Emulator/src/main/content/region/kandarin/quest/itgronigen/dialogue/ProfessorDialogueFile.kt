@@ -334,7 +334,7 @@ class ProfessorDialogueFile : DialogueFile() {
             81 -> {
                 end()
                 runTask(player!!, 0) {
-                    animate(player!!, 4540)
+                    animate(player!!, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
                     findLocalNPC(player!!, NPCs.OBSERVATORY_PROFESSOR_488)?.let { animate(it, 4540) }
                 }.also {
                     sendItemDialogue(
@@ -359,7 +359,7 @@ class ProfessorDialogueFile : DialogueFile() {
             85 -> playerl("Yes, here it is. You may as well take this mould too.").also { stage++ }
             86 -> {
                 runTask(player!!, 0) {
-                    animate(player!!, 4540)
+                    animate(player!!, Animations.TAKE_THING_OUT_OF_POCKET_AND_GIVE_IT_4540)
                     findLocalNPC(player!!, NPCs.OBSERVATORY_PROFESSOR_488)?.let { animate(it, 4540) }
                 }
                 npcl("Wonderful, at last I can fix the telescope.").also { stage++ }

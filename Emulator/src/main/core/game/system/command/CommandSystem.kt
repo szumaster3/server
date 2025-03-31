@@ -14,12 +14,6 @@ class CommandSystem {
         val command = CommandMapping.get(arguments[0])
 
         if (command == null && (player.rights != Rights.REGULAR_PLAYER)) {
-            for (set in CommandSet.values()) {
-                if (set.interpret(player, arguments[0], *arguments)) {
-                    player.sendMessage("-->${arguments[0]}: Deprecated command")
-                    return true
-                }
-            }
             player.sendMessage(colorize("-->%R${arguments[0]}: command not found."))
         } else {
             try {
