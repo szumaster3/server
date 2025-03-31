@@ -14,7 +14,7 @@ class Ratpit : MapArea {
         arrayOf(
             getRegionBorders(VARROCK_RAT_PITS_REGION),
             getRegionBorders(PORT_SARIM_RAT_PITS_REGION),
-            getRegionBorders(KELDAGRIM_RAT_PITS_REGION),
+            KELDAGRIM_RAT_PITS_REGION,
             getRegionBorders(ARDOUGNE_RAT_PITS_REGION),
         )
 
@@ -38,7 +38,7 @@ class Ratpit : MapArea {
     companion object {
         const val VARROCK_RAT_PITS_REGION = 11599
         const val PORT_SARIM_RAT_PITS_REGION = 11926
-        const val KELDAGRIM_RAT_PITS_REGION = 7753
+        val KELDAGRIM_RAT_PITS_REGION = ZoneBorders(1920, 4672,1983, 4735, 0, true)
         const val ARDOUGNE_RAT_PITS_REGION = 10646
     }
 }
