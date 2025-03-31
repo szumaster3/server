@@ -5,9 +5,12 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 import core.game.interaction.MovementPulse
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Items
+import org.rs.consts.Quests
 
 @PlayerCompatible
 @ScriptDescription("Start in varrock bank with rune mysteries complete and a pickaxe equipped/in inventory")
@@ -22,6 +25,11 @@ class VarrockEssenceMiner : Script() {
         when (state) {
             State.TO_ESSENCE -> {
                 bot.interfaceManager.close()
+
+                if (bot.bank.getAmount(Items.PURE_ESSENCE_7936) > 500) {
+                    state = State.TELE_GE
+                    return
+                }
                 if (!auburyZone.insideBorder(bot)) {
                     scriptAPI.walkTo(auburyZone.randomLoc)
                 } else {
@@ -103,7 +111,13 @@ class VarrockEssenceMiner : Script() {
 
     override fun newInstance(): Script {
         val script = VarrockEssenceMiner()
-        script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.POOR, bot.startLocation)
+        script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.AVERAGE, bot.startLocation)
         return script
+    }
+
+    init {
+        quests.add(Quests.RUNE_MYSTERIES)
+        equipment.add(Item(Items.BRONZE_PICKAXE_1265))
+        skills[Skills.MINING] = 31
     }
 }
