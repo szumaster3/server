@@ -4,7 +4,6 @@ enum class LoginType(
     type: Int,
 ) {
     NORMAL_LOGIN(16),
-
     RECONNECT_TYPE(18),
     ;
 

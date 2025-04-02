@@ -4,9 +4,22 @@ import core.game.node.Node
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.function.Consumer
 
+/**
+ * Object responsible for managing spell blocks, which prevent specific nodes from being affected by certain spells.
+ */
 object SpellBlocks {
+
+    /**
+     * A mapping of spell IDs to a list of blocked nodes.
+     */
     private val blocks = HashMap<Int, MutableList<Node>?>()
 
+    /**
+     * Registers a node to be blocked by a specific spell.
+     *
+     * @param spellId The ID of the spell that should block the node.
+     * @param toBlock The node to be blocked.
+     */
     @JvmStatic
     fun register(
         spellId: Int,
@@ -21,6 +34,13 @@ object SpellBlocks {
         }
     }
 
+    /**
+     * Checks if a node is blocked by a specific spell.
+     *
+     * @param spellId The ID of the spell to check.
+     * @param node The node to check against the spell's block list.
+     * @return `true` if the node is blocked by the spell, `false` otherwise.
+     */
     @JvmStatic
     fun isBlocked(
         spellId: Int,
@@ -34,7 +54,6 @@ object SpellBlocks {
 
         blocks[spellId]!!.forEach(
             Consumer { n: Node ->
-
                 if (node.name == n.name) {
                     blocked.set(true)
                 }

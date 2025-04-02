@@ -67,7 +67,7 @@ public class UIDInfo {
         player.sendMessage("[----------Info Debug----------]");
         String[] lines = StringUtils.splitIntoLine(format, 60);
         player.sendMessages(lines);
-        player.sendMessage("[-------------------------------]");
+        player.sendMessage("[------------------------------]");
         return format;
     }
 

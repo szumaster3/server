@@ -9,7 +9,17 @@ import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 
+/**
+ * Handles the closing of a trade interface and ensures trade state consistency.
+ */
 class TradeCloseEvent : CloseEvent {
+    /**
+     * Closes the trade interface for the given player and processes trade state cleanup.
+     *
+     * @param player The player closing the trade interface.
+     * @param component The UI component being closed.
+     * @return Always returns `true` to indicate the event was handled.
+     */
     override fun close(
         player: Player,
         component: Component,
@@ -40,6 +50,11 @@ class TradeCloseEvent : CloseEvent {
         return true
     }
 
+    /**
+     * Closes the trade-related interfaces and clears relevant UI elements.
+     *
+     * @param player The player whose interfaces are being closed.
+     */
     private fun closeInterfaces(player: Player) {
         player.removeExtension(TradeModule::class.java)
         player.interfaceManager.closeSingleTab()
@@ -54,11 +69,21 @@ class TradeCloseEvent : CloseEvent {
         player.packetDispatch.sendRunScript(101, "")
     }
 
+    /**
+     * Resets trade-related variables for the player.
+     *
+     * @param player The player whose trade state is being reset.
+     */
     private fun end(player: Player) {
         setVarp(player, 1043, 0)
         setVarp(player, 1042, 0)
     }
 
+    /**
+     * Retains the trade container items by adding them back to the player's inventory.
+     *
+     * @param player The player whose trade container is being retained.
+     */
     private fun retainContainer(player: Player) {
         val module = TradeModule.getExtension(player) ?: return
         if (module.isRetained) return

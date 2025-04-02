@@ -14,9 +14,22 @@ import core.game.world.GameWorld.loginListeners
 import core.game.world.repository.Repository
 import java.util.function.Consumer
 
+/**
+ * Handles the login process for a player, including validation, loading data,
+ * and initializing the player's session in the game world.
+ *
+ * @property details The details of the player attempting to log in.
+ */
 class LoginParser(
     val details: PlayerDetails,
 ) {
+    /**
+     * Initializes the login process for a player, handling validation, loading saved data,
+     * and executing login procedures.
+     *
+     * @param player The player instance being logged in.
+     * @param reconnect Whether the player is reconnecting to an active session.
+     */
     fun initialize(
         player: Player,
         reconnect: Boolean,
@@ -38,7 +51,7 @@ class LoginParser(
             object : Pulse(1) {
                 override fun pulse(): Boolean {
                     try {
-                        if (details.session.isActive()) {
+                        if (details.session.isActive) {
                             player.properties.spawnLocation =
                                 getAttribute(player, "/save:spawnLocation", ServerConstants.HOME_LOCATION)
                             loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) // Execute login hooks
@@ -66,6 +79,12 @@ class LoginParser(
         )
     }
 
+    /**
+     * Handles the reconnection process for a player, ensuring their session
+     * is reinitialized correctly.
+     *
+     * @param player The player instance reconnecting.
+     */
     private fun reconnect(player: Player) {
         Repository.disconnectionQueue.remove(details.username)
         player.initReconnect()
@@ -76,8 +95,15 @@ class LoginParser(
         LoginConfiguration.configureGameWorld(player)
     }
 
+    /**
+     * Validates whether the login request should proceed.
+     * Checks if the session is active, if the game is updating,
+     * or if the account is banned.
+     *
+     * @return `true` if the request is valid, otherwise `false`.
+     */
     private fun validateRequest(): Boolean {
-        if (!details.session.isActive()) {
+        if (!details.session.isActive) {
             return false
         }
         if (SystemManager.isUpdating) {
@@ -90,6 +116,12 @@ class LoginParser(
         }
     }
 
+    /**
+     * Sends an authentication response to the player's session.
+     *
+     * @param response The authentication response to be sent.
+     * @return `true` if the response is `AuthResponse.Success`, otherwise `false`.
+     */
     fun flag(response: AuthResponse): Boolean {
         details.session.write(response, true)
         return response == AuthResponse.Success

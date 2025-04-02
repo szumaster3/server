@@ -20,9 +20,19 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import java.util.function.Consumer
 
+/**
+ * Abstract class representing a Magic Spell in the game.
+ *
+ * @property book The spell book to which the spell belongs.
+ * @property level The required level to cast the spell.
+ * @property experience The experience gained after casting the spell.
+ * @property animation The animation to be played during the spell cast.
+ * @property graphics The graphics to be displayed during the spell cast.
+ * @property audio The audio to be played during the spell cast.
+ * @property castRunes The runes required to cast the spell.
+ */
 abstract class MagicSpell
-@JvmOverloads
-constructor(
+@JvmOverloads constructor(
     val book: SpellBook = SpellBook.MODERN,
     val level: Int = 0,
     @JvmField val experience: Double = 0.0,
@@ -31,17 +41,36 @@ constructor(
     @JvmField val audio: Audio? = null,
     val castRunes: Array<Item?>? = arrayOfNulls(0),
 ) : Plugin<SpellType?> {
+    /**
+     * The ID of the spell.
+     */
     @JvmField
     var spellId: Int = 0
 
+    /**
+     * The casting delay of the spell, in ticks.
+     */
     open val delay: Int
         get() = 3
 
+    /**
+     * Casts the spell on the given target.
+     *
+     * @param entity The entity casting the spell.
+     * @param target The target of the spell.
+     * @return Whether the spell was successfully cast.
+     */
     abstract fun cast(
         entity: Entity,
         target: Node,
     ): Boolean
 
+    /**
+     * Visualizes the spell casting by displaying graphics, animation, and audio.
+     *
+     * @param entity The entity casting the spell.
+     * @param target The target of the spell.
+     */
     open fun visualize(
         entity: Entity,
         target: Node,
@@ -51,6 +80,13 @@ constructor(
         playGlobalAudio(entity.location, audio!!.id, 20)
     }
 
+    /**
+     * Checks if the player is using the correct staff for the rune.
+     *
+     * @param p The player casting the spell.
+     * @param rune The rune used to check for staff compatibility.
+     * @return Whether the player is using the correct staff.
+     */
     fun usingStaff(
         p: Player,
         rune: Int,
@@ -66,6 +102,14 @@ constructor(
         return false
     }
 
+    /**
+     * Checks if the caster meets the requirements to cast the spell.
+     *
+     * @param caster The entity casting the spell.
+     * @param message Whether to send a message if the requirements are not met.
+     * @param remove Whether to remove the runes if the caster meets the requirements.
+     * @return Whether the caster meets the requirements to cast the spell.
+     */
     open fun meetsRequirements(
         caster: Entity,
         message: Boolean,
@@ -120,13 +164,18 @@ constructor(
         return true
     }
 
+    /**
+     * Checks if the caster meets the level requirement for the spell.
+     *
+     * @param caster The entity casting the spell.
+     * @param message Whether to send a message if the level requirement is not met.
+     * @return Whether the caster meets the level requirement for the spell.
+     */
     fun checkLevelRequirement(
         caster: Entity,
         message: Boolean,
     ): Boolean {
-        if (caster is Player &&
-            caster
-                .getSkills()
+        if (caster is Player && caster.getSkills()
                 .getLevel(Skills.MAGIC, if (this is CombatSpell) true else false) < levelRequirement()
         ) {
             if (message && caster is Player) {
@@ -139,6 +188,15 @@ constructor(
         return true
     }
 
+    /**
+     * Checks if the player has the necessary runes to cast the spell.
+     *
+     * @param p The player casting the spell.
+     * @param item The item representing the rune.
+     * @param toRemove The list of runes to be removed from the player's inventory.
+     * @param message Whether to send a message if the player does not have enough runes.
+     * @return Whether the player has the necessary runes to cast the spell.
+     */
     fun hasRune(
         p: Player,
         item: Item?,
@@ -153,10 +211,9 @@ constructor(
                     toRemove.add(Item(item.id, p.inventory.getAmount(item.id)))
                 }
                 var amtRemaining = item.amount - baseAmt
-                val possibleComboRunes =
-                    CombinationRune.eligibleFor(
-                        Runes.forId(item.id)!!,
-                    )
+                val possibleComboRunes = CombinationRune.eligibleFor(
+                    Runes.forId(item.id)!!,
+                )
                 for (r in possibleComboRunes) {
                     if (p.inventory.containsItem(Item(r.id)) && amtRemaining > 0) {
                         val amt = p.inventory.getAmount(r.id)
@@ -182,6 +239,12 @@ constructor(
         return true
     }
 
+    /**
+     * Adds experience to the caster's skills after casting the spell.
+     *
+     * @param entity The entity casting the spell.
+     * @param hit The damage dealt during the spell cast.
+     */
     open fun addExperience(
         entity: Entity,
         hit: Int,
@@ -200,6 +263,11 @@ constructor(
         entity.getSkills().addExperience(Skills.MAGIC, hit * (CombatSwingHandler.EXPERIENCE_MOD), true)
     }
 
+    /**
+     * Returns the level requirement for casting the spell.
+     *
+     * @return The level requirement for the spell.
+     */
     fun levelRequirement(): Int = level
 
     override fun fireEvent(
@@ -207,9 +275,24 @@ constructor(
         vararg args: Any,
     ): Any? = null
 
+    /**
+     * Returns the experience awarded for casting the spell.
+     *
+     * @param player The player casting the spell.
+     * @return The experience awarded for casting the spell.
+     */
     open fun getExperience(player: Player): Double = experience
 
     companion object {
+        /**
+         * Casts a spell on the specified target.
+         *
+         * @param p The player casting the spell.
+         * @param book The spell book containing the spell.
+         * @param spellId The ID of the spell to cast.
+         * @param target The target of the spell.
+         * @return Whether the spell was successfully cast.
+         */
         fun castSpell(
             p: Player,
             book: SpellBook,
