@@ -1,5 +1,10 @@
 package content.region.kandarin.dialogue.stronghold
 
+import content.data.GameAttributes
+import core.api.addItem
+import core.api.freeSlots
+import core.api.getAttribute
+import core.api.hasAnItem
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -37,7 +42,7 @@ class GnomeTrainerDialogue(
                     "human. Go! Go! Go!",
                 ).also {
                     stage =
-                        END_DIALOGUE
+                        11
                 }
 
             3 ->
@@ -58,7 +63,7 @@ class GnomeTrainerDialogue(
                     "than by repeating just one obstacle.",
                 ).also {
                     stage =
-                        END_DIALOGUE
+                        11
                 }
 
             7 ->
@@ -68,14 +73,105 @@ class GnomeTrainerDialogue(
                     "there says training area, not pointless conversation area.",
                 ).also {
                     stage =
-                        END_DIALOGUE
+                        11
                 }
 
             10 ->
                 npc(FaceAnim.OLD_NORMAL, "This is training soldier. If you want fun go make some", "cocktails.").also {
                     stage =
-                        END_DIALOGUE
+                        11
                 }
+
+            11 -> options(
+                "What is this place?",
+                "What's so special about this course, then?",
+                "Can I talk about rewards?",
+                "I'm done for now."
+            ).also { stage++ }
+
+            12 -> when (buttonId) {
+                1 -> player("What is this place?").also { stage++ }
+                2 -> player("What's so special about this course, then?").also { stage = 16 }
+                3 -> player("Can I talk about rewards?").also { stage = 17 }
+                4 -> player("I'm done for now.").also { stage = 21 }
+            }
+
+            13 -> npcl(
+                FaceAnim.OLD_NORMAL,
+                "This, my friend, is where we train and improve our Agility. It's an essential skill."
+            ).also { stage++ }
+
+            14 -> player("It looks easy enough.").also { stage++ }
+            15 -> npcl(
+                FaceAnim.OLD_NORMAL,
+                "If you complete the course, from the slippery log to the end, your Agility will increase more rapidly than by repeating just one obstacle."
+            ).also { stage = END_DIALOGUE }
+
+            16 -> npcl(FaceAnim.OLD_NORMAL, "Well, it's where most people tend to start training.").also {
+                stage = END_DIALOGUE
+            }//We've also made an extension for those who are up for the challenge.
+            17 -> {
+                val count = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_PERFECT_LAPS, 0)
+                val firstTalk = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_GNOME_TALK, false)
+                val completeLaps = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_COURSE_REWARD, false)
+                val hasAgileLegs = hasAnItem(player, 14709).container != null
+
+                when {
+                    completeLaps && !firstTalk && !hasAgileLegs -> {
+                        npcl(
+                            FaceAnim.FRIENDLY,
+                            "Well, it looks like you've completed our challenge! Take this as a reward: some Agile legs. You'll find yourself much lighter than usual while wearing them. They are made from the toughest material we gnomes could find, so it might even protect you in combat."
+                        )
+                        stage = 18
+                    }
+
+                    completeLaps && firstTalk && !hasAgileLegs -> {
+                        npcl(FaceAnim.FRIENDLY, "Of course. How can I help?")
+                        stage = 19
+                    }
+
+                    else -> {
+                        npcl(
+                            FaceAnim.FRIENDLY,
+                            "Well, you've still got work to do. Your lap count is $count. It's 250 successful laps for the reward!"
+                        )
+                        stage = END_DIALOGUE
+                    }
+                }
+            }
+
+            18 -> {
+                end()
+                if (freeSlots(player!!) == 0) {
+                    npc(
+                        FaceAnim.HALF_GUILTY,
+                        "Well, I would give you the reward, but apparently you",
+                        "don't have any room.",
+                    )
+                    return true
+                }
+                addItem(player, 14709)
+                npcl(FaceAnim.OLD_NORMAL, "There you go. Enjoy!")
+            }
+
+            19 -> player("Any chance of some more Agile legs?").also { stage++ }
+            20 -> {
+                end()
+                if (freeSlots(player!!) == 0) {
+                    npc(
+                        FaceAnim.HALF_GUILTY,
+                        "Well, I would give you the reward, but apparently you",
+                        "don't have any room.",
+                    )
+                    return true
+                }
+                addItem(player, 14709)
+                npcl(FaceAnim.OLD_NORMAL, "Here you go, try not to lose them.")
+            }
+
+            21 -> npcl(FaceAnim.OLD_NORMAL, "Bye for now. Come back if you need any assistance.").also {
+                stage = END_DIALOGUE
+            }
         }
         return true
     }

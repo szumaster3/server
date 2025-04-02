@@ -1,5 +1,6 @@
 package content.region.kandarin.dialogue.stronghold
 
+import content.data.GameAttributes
 import core.api.*
 import core.api.quest.setQuestStage
 import core.game.dialogue.Dialogue
@@ -167,14 +168,45 @@ class GunnjornDialogue(
 
             14 -> playerl(FaceAnim.FRIENDLY, "That's all I need for now. Bye.").also { stage++ }
             15 -> npcl(FaceAnim.FRIENDLY, "Bye for now. Come back if you need any help.").also { stage = END_DIALOGUE }
-            16 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "There's no reward for you just yet. Your lap count is only 0. It's 250 successful laps or no reward.",
-                ).also {
-                    stage =
-                        END_DIALOGUE
+            16 -> {
+                val firstTalk = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_GUNNJORN_TALK, false)
+                val perfectLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_PERFECT_LAPS, 0)
+                val completeLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, false)
+                val hasAgileTop = hasAnItem(player, Items.AGILE_TOP_14707).container != null
+
+                when {
+                    completeLaps && !firstTalk && !hasAgileTop -> {
+                        npcl(FaceAnim.FRIENDLY, "Sure, and congratulations, ${player.username}! That took dedication and great dexterity to complete that many laps.")
+                        stage = 17
+                    }
+
+                    completeLaps && firstTalk && !hasAgileTop -> {
+                        npcl(FaceAnim.FRIENDLY, "Of course. How can I help?")
+                        stage = 26
+                    }
+
+                    else -> {
+                        npcl(FaceAnim.FRIENDLY, "There's no reward for you just yet. Your lap count is only $perfectLaps. It's 250 successful laps or no reward.")
+                        stage = END_DIALOGUE
+                    }
                 }
+            }
+            17 -> npcl(FaceAnim.FRIENDLY, "As promised, I'll give you an item you may find useful - an Agile top. You'll find yourself lighter than usual while wearing it.").also { stage++ }
+            18 -> npcl(FaceAnim.FRIENDLY, "We barbarians are tough folks, as you know, so it'll even keep you safe if you get drawn into combat.").also { stage++ }
+            19 -> {
+                end()
+                if (freeSlots(player!!) == 0) {
+                    npc(
+                        FaceAnim.HALF_GUILTY,
+                        "Well, I would give you the reward, but apparently you",
+                        "don't have any room.",
+                    )
+                    return true
+                }
+                npcl (FaceAnim.HAPPY, "There you go. Enjoy!")
+                addItem(player, Items.AGILE_TOP_14707)
+                stage = END_DIALOGUE
+            }
             /*
              * Horror from the deep dialogue.
              */
@@ -210,8 +242,8 @@ class GunnjornDialogue(
                 ).also { stage++ }
 
             25 -> {
+                end()
                 if (freeSlots(player!!) == 0) {
-                    end()
                     npc(
                         FaceAnim.HALF_GUILTY,
                         "Well, I would give you the key, but apparently you",
@@ -219,10 +251,25 @@ class GunnjornDialogue(
                     )
                     return true
                 }
-                end()
-                npc("Sure. Here you go.")
+                npc(FaceAnim.HAPPY, "Sure. Here you go.")
                 addItem(player!!, Items.LIGHTHOUSE_KEY_3848)
                 setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP, 5)
+            }
+
+            26 -> player("Any chance of another Agile top?").also { stage++ }
+            27 -> {
+                end()
+                if (freeSlots(player!!) == 0) {
+                    npc(
+                        FaceAnim.HALF_GUILTY,
+                        "Well, I would give you the reward, but apparently you",
+                        "don't have any room.",
+                    )
+                    return true
+                }
+                npcl(FaceAnim.HAPPY, "Here you go.")
+                addItem(player, Items.AGILE_TOP_14707)
+                stage = END_DIALOGUE
             }
         }
         return true

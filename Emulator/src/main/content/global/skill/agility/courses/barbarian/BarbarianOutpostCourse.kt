@@ -1,5 +1,6 @@
 package content.global.skill.agility.courses.barbarian
 
+import content.data.GameAttributes
 import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import content.region.kandarin.miniquest.barcrawl.BarcrawlManager
@@ -19,6 +20,8 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
+import core.tools.DARK_GREEN
+import core.tools.DARK_ORANGE
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.NPCs
@@ -29,6 +32,7 @@ class BarbarianOutpostCourse
 @JvmOverloads constructor(
     player: Player? = null,
 ) : AgilityCourse(player, 6, 46.2) {
+
     override fun createInstance(player: Player): AgilityCourse = BarbarianOutpostCourse(player)
 
     override fun handle(
@@ -62,6 +66,7 @@ class BarbarianOutpostCourse
                     8.0,
                     "You climb the netting...",
                 )
+                trackLaps(player, true, 20211)
             }
 
             1948 -> {
@@ -69,17 +74,10 @@ class BarbarianOutpostCourse
                     sendMessage(player, "You cannot climb from this side.")
                     return true
                 }
-                val flag = if (node.location == Location(2536, 3553, 0)) {
-                    4
-                } else if (node.location == Location(
-                        2539,
-                        3553,
-                        0,
-                    )
-                ) {
-                    5
-                } else {
-                    6
+                val flag = when (node.location) {
+                    Location(2536, 3553, 0) -> 4
+                    Location(2539, 3553, 0) -> 5
+                    else -> 6
                 }
                 sendMessage(player, "You climb the low wall...")
                 AgilityHandler.forceWalk(
@@ -92,20 +90,11 @@ class BarbarianOutpostCourse
                     13.5,
                     null,
                 )
+                trackLaps(player, true, 1948)
             }
 
             455 -> BarcrawlManager.getInstance(player).read()
-            385 -> {
-                sendMessage(player, "The scorpion stings you!")
-                impact(player, 3, HitsplatType.NORMAL)
-            }
-
-            386 -> {
-                sendMessage(player, "The scorpion stings you!")
-                impact(player, 3, HitsplatType.NORMAL)
-            }
-
-            387 -> {
+            385, 386, 387 -> {
                 sendMessage(player, "The scorpion stings you!")
                 impact(player, 3, HitsplatType.NORMAL)
             }
@@ -125,7 +114,8 @@ class BarbarianOutpostCourse
             sendMessage(player, "The rope is being used.")
             return
         }
-        if (AgilityHandler.hasFailed(player, 1, 0.1)) {
+        val failed = AgilityHandler.hasFailed(player, 1, 0.1)
+        if (failed) {
             AgilityHandler.fail(
                 player,
                 0,
@@ -150,6 +140,7 @@ class BarbarianOutpostCourse
         )
         playAudio(player, Sounds.SWING_ACROSS_2494, 1)
         animateScenery(player, scenery, 497, true)
+        trackLaps(player, !failed, scenery.id)
     }
 
     private fun handleLogBalance(
@@ -181,6 +172,7 @@ class BarbarianOutpostCourse
             GameWorld.Pulser.submit(getSwimPulse(player))
             return
         }
+        trackLaps(player, !failed, scenery.id)
     }
 
     private fun getSwimPulse(player: Player): Pulse {
@@ -228,6 +220,7 @@ class BarbarianOutpostCourse
     ) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.3)
         val end = if (failed) Location.create(2534, 3547, 1) else Location.create(2532, 3547, 1)
+        sendMessage(player, "You put your foot on the ledge and try to edge across...")
         AgilityHandler.walk(
             player,
             if (failed) -1 else 3,
@@ -237,7 +230,6 @@ class BarbarianOutpostCourse
             if (failed) 0.0 else 22.0,
             if (failed) null else "You skillfully edge across the gap.",
         )
-        sendMessage(player, "You put your foot on the ledge and try to edge across..")
         if (failed) {
             AgilityHandler.fail(
                 player,
@@ -249,6 +241,45 @@ class BarbarianOutpostCourse
             )
             return
         }
+        trackLaps(player, !failed, scenery.id)
+    }
+
+    private fun trackLaps(player: Player, passedObstacle: Boolean, obstacleId: Int) {
+        val lastObstacle = getLastObstacle(player)
+
+        if (lastObstacle == obstacleId) {
+            return
+        }
+
+        if (passedObstacle) {
+            setLastObstacle(player, obstacleId)
+
+            val currentPoints = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_LAPS, 0)
+            val pass = currentPoints + 1
+            val perfectLaps = pass / 6
+
+            setAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_LAPS, pass)
+            if (pass % 6 == 0) {
+                setAttribute(player, GameAttributes.BARBARIAN_OUTPOST_PERFECT_LAPS, perfectLaps)
+                player.debug("[BarbarianCourse] ${DARK_ORANGE}Perfect lap+</col> | Total amount: [$perfectLaps]")
+            }
+
+            if (perfectLaps >= 250 && player.attributes[GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD] != true) {
+                setAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, true)
+                sendMessage(
+                    player,
+                    core.tools.RED + "You've completed 250 full laps! Speak to Gunnjorn to collect your reward."
+                )
+            }
+        }
+    }
+
+    private fun getLastObstacle(player: Player): Int {
+        return getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_LAST_OBSTACLE, -1)
+    }
+
+    private fun setLastObstacle(player: Player, obstacleId: Int) {
+        setAttribute(player, GameAttributes.BARBARIAN_OUTPOST_LAST_OBSTACLE, obstacleId)
     }
 
     override fun configure() {
