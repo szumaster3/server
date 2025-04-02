@@ -17331,6 +17331,16 @@
     "id": "1868"
   },
   {
+    "examine": "Mayor of Pollnivneach.",
+    "name": "Ali the Mayor",
+    "id": "1869"
+  },
+  {
+    "examine": "Mayor of Pollnivneach.",
+    "name": "Ali the Mayor",
+    "id": "1870"
+  },
+  {
     "examine": "An old Hag named Alice.",
     "name": "Ali the Hag",
     "id": "1871"
@@ -17369,6 +17379,26 @@
     "name": "Snake",
     "combat_audio": "3609,3608,3610",
     "id": "1875"
+  },
+  {
+    "examine": "Leads the Bandits.",
+    "name": "Bandit Leader",
+    "id": "1878"
+  },
+  {
+    "examine": "A vicious thief.",
+    "name": "Bandit",
+    "id": "1880"
+  },
+  {
+    "examine": "A vicious thief.",
+    "name": "Bandit",
+    "id": "1881"
+  },
+  {
+    "examine": "One of the knights of the Round Table.",
+    "name": "Sir Palomedes",
+    "id": "1882"
   },
   {
     "examine": "One of the knights of the Round Table.",
@@ -17415,6 +17445,56 @@
     "examine": "Probably the weakest bandit in the world ....ever.",
     "name": "Cowardly Bandit",
     "id": "1886"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1887"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1888"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1889"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1890"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1891"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1892"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1893"
+  },
+  {
+    "examine": "Male desert villager.",
+    "name": "Villager",
+    "id": "1894"
+  },
+  {
+    "examine": "Female desert villager.",
+    "name": "Villager",
+    "id": "1895"
+  },
+  {
+    "examine": "Female desert villager.",
+    "name": "Villager",
+    "id": "1896"
   },
   {
     "examine": "Smooth operator.",

@@ -196,6 +196,33 @@ enum class Pickpocket(
         "What do you think you're doing?",
         WeightBasedTable.create(WeightedItem(Items.COINS_995, 18, 18, 1.0, true)),
     ),
+    VILLAGER(
+        intArrayOf(
+            1887,               // Wrapper
+            NPCs.VILLAGER_1888, // Male
+            NPCs.VILLAGER_1889,
+            NPCs.VILLAGER_1890,
+            NPCs.VILLAGER_1891,
+            NPCs.VILLAGER_1892,
+            NPCs.VILLAGER_1893,
+            NPCs.VILLAGER_1894,
+            NPCs.VILLAGER_1895,
+            NPCs.VILLAGER_1896, // Female
+            NPCs.VILLAGER_1897,
+            NPCs.VILLAGER_1898,
+            NPCs.VILLAGER_1899,
+            NPCs.VILLAGER_1900,
+        ),
+        30,
+        74.0,
+        240.0,
+        8.0,
+        2,
+        2,
+        5,
+        "Thief! Thief! Get away from me.",
+        WeightBasedTable.create(WeightedItem(Items.COINS_995, 5, 5, 1.0, true)),
+    ),
     ROGUE(
         intArrayOf(
             NPCs.ROGUE_187,
