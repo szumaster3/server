@@ -11,7 +11,7 @@ import java.util.Deque;
  */
 public class Path {
 
-    private boolean succesful;
+    private boolean successful;
 
     private boolean moveNear;
 
@@ -45,7 +45,7 @@ public class Path {
      * @return the boolean
      */
     public boolean isSuccessful() {
-        return succesful;
+        return successful;
     }
 
     /**
@@ -54,7 +54,7 @@ public class Path {
      * @param successful the successful
      */
     public void setSuccessful(boolean successful) {
-        this.succesful = successful;
+        this.successful = successful;
     }
 
     /**
