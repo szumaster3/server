@@ -19,6 +19,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.prependArticle
 import org.rs.consts.Items
+import org.rs.consts.Quests
 
 class MiningPulse(
     private val player: Player,
@@ -30,6 +31,7 @@ class MiningPulse(
     private var isMiningGranite = false
     private var isMiningSandstone = false
     private var isMiningMagicStone = false
+    private var isMiningObsidian = false
     private var ticks = 0
     private var resetAnimation = true
 
@@ -46,7 +48,11 @@ class MiningPulse(
         type: Int,
     ) {
         if (type == 0) {
-            return sendMessage(player, "You swing your pickaxe at the rock.")
+            return if(resource?.identifier == MiningNode.OBSIDIAN_0.identifier) {
+                sendMessage(player, "You swing your pick at the wall.")
+            } else {
+                sendMessage(player, "You swing your pickaxe at the rock.")
+            }
         }
     }
 
@@ -95,6 +101,9 @@ class MiningPulse(
         if (resource!!.identifier == MiningNode.MAGIC_STONE_0.identifier) {
             isMiningMagicStone = true
         }
+        if (resource!!.identifier == MiningNode.OBSIDIAN_0.identifier) {
+            isMiningObsidian = true
+        }
         if (checkRequirements()) {
             super.start()
             message(player, 0)
@@ -110,58 +119,57 @@ class MiningPulse(
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
+        if(resource!!.identifier == 19.toByte() && !core.api.quest.hasRequirement(player, Quests.TOKTZ_KET_DILL)) {
+            sendDialogue(player, "You do not know the technique to mine stone slabs.")
+            return false
+        }
+
+        if (resource!!.identifier == 19.toByte() && (SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE || SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE2)) {
+            sendDialogue(player, "I don't think I should use the Inferno Adze in here.")
+            return false
+        }
+
         if (freeSlots(player) == 0) {
-            if (resource!!.identifier == 4.toByte()) {
-                sendDialogue(player, "Your inventory is too full to hold any more limestone.")
+            val messages = mapOf(
+                4.toByte()  to "Your inventory is too full to hold any more limestone.",
+                13.toByte() to "Your inventory is too full to hold any more gems.",
+                14.toByte() to "Your inventory is too full to hold any more essence.",
+                15.toByte() to "Your inventory is too full to hold any more sandstone.",
+                16.toByte() to "Your inventory is too full to hold any more granite.",
+                19.toByte() to "Your inventory is too full to hold any more obsidian."
+            )
+
+            val message = messages[resource!!.identifier]
+            if (message != null) {
+                sendDialogue(player, message)
                 return false
             }
-            if (resource!!.identifier == 13.toByte()) {
-                sendDialogue(player, "Your inventory is too full to hold any more gems.")
-                return false
-            }
-            if (resource!!.identifier == 14.toByte()) {
-                sendDialogueLines(player, "Your inventory is too full to hold any more essence.")
-                return false
-            }
-            if (resource!!.identifier == 15.toByte()) {
-                sendDialogue(player, "Your inventory is too full to hold any more sandstone.")
-                return false
-            }
-            if (resource!!.identifier == 16.toByte()) {
-                sendDialogue(player, "Your inventory is too full to hold any more granite.")
-                return false
-            }
+
             if (resource!!.identifier == 18.toByte() && inInventory(player, Items.MAGIC_STONE_4703)) {
                 sendMessage(player, "You have already mined some stone. You don't need any more.")
                 return false
             }
+
             val item = getItemName(resource!!.reward).lowercase()
-            sendDialogue(
-                player,
-                "Your inventory is too full to hold any more $item.",
-            )
+            sendDialogue(player, "Your inventory is too full to hold any more $item.")
             return false
         }
+
         return true
     }
 
     fun animate() {
-        animate(
-            player,
-            (
-                if (resource?.id != 2491 ||
-                    resource?.id != 16684
-                ) {
-                    SkillingTool.getPickaxe(player)!!.animation
-                } else {
-                    SkillingTool
-                        .getPickaxe(
-                            player,
-                        )!!
-                        .animation + 6128
-                }
-            ),
-        )
+        val pickaxe = SkillingTool.getPickaxe(player) ?: return
+        val isEssence = resource?.identifier == 14.toByte()
+        val isObsidian = resource?.identifier == 19.toByte()
+
+        val anim = when {
+            isEssence -> pickaxe.animation + 6128
+            isObsidian -> pickaxe.animation + 9718
+            else -> pickaxe.animation
+        }
+
+        animate(player, anim)
     }
 
     fun reward(): Boolean {
@@ -210,6 +218,8 @@ class MiningPulse(
                 sendMessage(player, "You manage to quarry some sandstone.")
             } else if (isMiningMagicStone) {
                 sendMessage(player, "You manage to mine some stone.")
+            } else if (isMiningObsidian) {
+                sendMessage(player, "You manage to mine some obsidian.")
             } else {
                 sendMessage(player, "You manage to get some ${rewardName.lowercase()}.")
             }
@@ -220,12 +230,12 @@ class MiningPulse(
                 var chance = 282
                 var altered = false
                 val ring = getItemFromEquipment(player, EquipmentSlot.RING)
-                if (ring != null && ring.name.lowercase().contains("ring of wealth")) {
+                if (ring != null && ring.id == Items.RING_OF_WEALTH_2572) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
                 val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
-                if (necklace != null && necklace.id in 1705..1713) {
+                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY4_1713) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
@@ -242,18 +252,37 @@ class MiningPulse(
                 }
             }
 
-            if (resource!!.id == 4030 && !isMiningEssence && resource!!.respawnRate != 0) {
+            /*
+             * Handles limestone respawn.
+             */
+
+            if (resource!!.id == org.rs.consts.Scenery.PILE_OF_ROCK_4030 && !isMiningEssence && resource!!.respawnRate != 0) {
                 removeScenery(node as Scenery)
                 GameWorld.Pulser.submit(
                     object : Pulse(resource!!.respawnDuration, player) {
                         override fun pulse(): Boolean {
-                            SceneryBuilder.add(Scenery(4027, node.location))
+                            SceneryBuilder.add(Scenery(org.rs.consts.Scenery.PILE_OF_ROCK_4027, node.location))
                             return true
                         }
                     },
                 )
-                node.isActive = false
+                node.setActive(false)
                 return false
+            }
+
+            /*
+             * Handles obsidian respawn.
+             */
+
+            if (resource!!.id == org.rs.consts.Scenery.OBSIDIAN_WALL_31229 && !isMiningEssence && resource!!.respawnRate != 0) {
+                SceneryBuilder.replaceWithTempBeforeNew(
+                    node.asScenery(),
+                    node.asScenery().transform(org.rs.consts.Scenery.OBSIDIAN_WALL_31230),
+                    node.asScenery().transform(org.rs.consts.Scenery.OBSIDIAN_WALL_9376),
+                    resource!!.respawnDuration,
+                    true,
+                )
+                return true
             }
 
             if (!isMiningEssence && resource!!.respawnRate != 0) {

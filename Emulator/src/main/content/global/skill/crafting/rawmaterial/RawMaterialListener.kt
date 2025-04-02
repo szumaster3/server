@@ -14,6 +14,40 @@ import kotlin.math.min
 
 class RawMaterialListener : InteractionListener {
     override fun defineListeners() {
+        /*
+         * Handles crafting the stone pillars (TokTzKetDill quest).
+         */
+
+        onUseWith(IntType.ITEM, Items.STONE_SLAB_13245, Items.CHISEL_1755) { player, used, with ->
+            if (getStatLevel(player, Skills.CRAFTING) < 20) {
+                sendDialogue(player, "You need a crafting level of at least 20 to turn the stone slab into a pillar.")
+                return@onUseWith true
+            }
+
+            if(!inInventory(player, Items.HAMMER_2347)) {
+                sendDialogue(player, "You need a hammer to do that.")
+                return@onUseWith true
+            }
+
+            runTask(player, 2) {
+                playAudio(player, Sounds.HAMMER_STONE_2100)
+                animate(player, Animations.USE_HAMMER_CHISEL_11041)
+                if (removeItem(player, used.id)) {
+                    rewardXP(player, Skills.CRAFTING, 20.0)
+                    addItem(player, Items.PILLAR_13246)
+                    sendMessage(
+                        player,
+                        "You craft the stone into a pillar."
+                    )
+                }
+            }
+            return@onUseWith true
+        }
+
+        /*
+         * Handles cutting granite.
+         */
+
         onUseWith(IntType.ITEM, Items.CHISEL_1755, *graniteIDs) { player, _, with ->
             setTitle(player, 2)
             sendDialogueOptions(
@@ -32,6 +66,10 @@ class RawMaterialListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles crafting the limestone bricks.
+         */
 
         onUseWith(IntType.ITEM, Items.LIMESTONE_3211, Items.CHISEL_1755) { player, used, _ ->
             if (!inInventory(player, Items.CHISEL_1755)) {

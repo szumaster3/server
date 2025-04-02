@@ -58940,9 +58940,49 @@
     "attack_level": "30"
   },
   {
+    "examine": "A friendly feline?",
+    "name": "Fluffs",
+    "id": "7742"
+  },
+  {
+    "examine": "A friendly feline?",
+    "name": "Fluffs",
+    "id": "7743"
+  },
+  {
+    "examine": "They look lost.",
+    "name": "Kittens",
+    "id": "7745"
+  },
+  {
+    "examine": "It is some sort of mystic.",
+    "name": "TzHaar-Mej-Malk",
+    "id": "7746"
+  },
+  {
     "examine": "It looks upset.",
     "name": "TzHaar-Xil-Tog",
     "id": "7747"
+  },
+  {
+    "examine": "It looks like a craftsman of some kind.",
+    "name": "TzHaar-Hur-Frok",
+    "id": "7748"
+  },
+  {
+    "examine": "It is guarding a crack in the wall.",
+    "name": "TzHaar-Ket-Grol",
+    "id": "7749"
+  },
+  {
+    "examine": "It guards the mine entrance.",
+    "name": "TzHaar-Ket-Rok",
+    "id": "7750"
+  },
+  {
+    "examine": "It guards the miners.",
+    "name": "TzHaar-Ket-Lurk",
+    "id": "7751"
   },
   {
     "examine": "A TzHaar librarian.",
@@ -58953,6 +58993,56 @@
     "examine": "A TzHaar-Hur stamping stone tablets.",
     "name": "Library assistant",
     "id": "7756"
+  },
+  {
+    "examine": "A Senior citizen TzHaar-Hur.",
+    "name": "TzHaar-Hur-Brekt",
+    "id": "7757"
+  },
+  {
+    "examine": "A Senior citizen TzHaar-Hur.",
+    "name": "TzHaar-Hur-Brekt",
+    "id": "7758"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Ket.",
+    "name": "TzHaar-Ket-Jok",
+    "id": "7759"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Ket.",
+    "name": "TzHaar-Ket-Jok",
+    "id": "7760"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Xil.",
+    "name": "TzHaar-Xil-Mor",
+    "id": "7761"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Xil.",
+    "name": "TzHaar-Xil-Mor",
+    "id": "7762"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Mej.",
+    "name": "TzHaar-Mej-Kol",
+    "id": "7763"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Mej.",
+    "name": "TzHaar-Mej-Kol",
+    "id": "7764"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Hur.",
+    "name": "TzHaar-Hur-Klag",
+    "id": "7765"
+  },
+  {
+    "examine": "A senior citizen TzHaar-Hur.",
+    "name": "TzHaar-Hur-Klag",
+    "id": "7766"
   },
   {
     "examine": "Looks like a craftsman of some kind.",
@@ -59028,7 +59118,7 @@
     "attack_level": "28"
   },
   {
-    "examine": "A monster like many others",
+    "examine": "A monster like many others, but on fire.",
     "combat_style": "2",
     "melee_animation": "9341",
     "range_animation": "0",

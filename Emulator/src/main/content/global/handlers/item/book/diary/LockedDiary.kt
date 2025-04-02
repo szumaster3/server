@@ -32,6 +32,8 @@ class LockedDiary : InteractionListener {
                         BookLine("write a book about my", 63),
                         BookLine("success. Anyway, today", 64),
                         BookLine("I hit on a really great", 65),
+                    ),
+                    Page(
                         BookLine("idea. People are always", 66),
                         BookLine("running out of sand in", 67),
                         BookLine("the sand pits, so I'm", 68),

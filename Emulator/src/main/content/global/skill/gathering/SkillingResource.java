@@ -1956,9 +1956,22 @@ public enum SkillingResource {
     /**
      * The Gem rock 2.
      */
-    GEM_ROCK_2(Scenery.ROCKS_23568, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21298, Skills.MINING);
+    GEM_ROCK_2(Scenery.ROCKS_23568, 40, 0.95, 166 | 175 << 16, 65, 1625, 1, "gem rocks", null, 21298, Skills.MINING),
 
-	private static final Map<Integer, SkillingResource> RESOURCES = new HashMap<>();
+    /**
+     * The Obsidian 0.
+     */
+    OBSIDIAN_0(Scenery.OBSIDIAN_WALL_9376, 41, 0.74, 100 | 200 << 16, 40, 13245, 1, "obsidian rocks", null, 31229, Skills.MINING),
+    /**
+     * The Obsidian 1.
+     */
+    OBSIDIAN_1(Scenery.OBSIDIAN_WALL_31229, 41, 0.74, 100 | 200 << 16, 40, 13245, 1, "obsidian rocks", null, 31230, Skills.MINING),
+    /**
+     * The Obsidian 2.
+     */
+    OBSIDIAN_2(Scenery.OBSIDIAN_WALL_31230, 41, 0.74, 100 | 200 << 16, 40, 13245, 1, "obsidian rocks", null, Scenery.OBSIDIAN_WALL_9376, Skills.MINING);
+
+    private static final Map<Integer, SkillingResource> RESOURCES = new HashMap<>();
 
 	static {
 		for (SkillingResource resource : SkillingResource.values()) {
@@ -1981,7 +1994,7 @@ public enum SkillingResource {
 	private final int skillId;
 	private final boolean farming;
 
-	private SkillingResource(int id, int level, double rate, int respawnRate, double experience, int reward, int rewardAmount, String name, Animation animation, int emptyId, int skillId) {
+	SkillingResource(int id, int level, double rate, int respawnRate, double experience, int reward, int rewardAmount, String name, Animation animation, int emptyId, int skillId) {
 		this.id = id;
 		this.level = level;
 		this.rate = rate;
@@ -1996,7 +2009,7 @@ public enum SkillingResource {
 		this.farming = false;
 	}
 
-	private SkillingResource(int id, int level, double rate, int respawnRate, double experience, int reward, int rewardAmount, String name, Animation animation, int emptyId, int skillId, boolean farming) {
+	SkillingResource(int id, int level, double rate, int respawnRate, double experience, int reward, int rewardAmount, String name, Animation animation, int emptyId, int skillId, boolean farming) {
 		this.id = id;
 		this.level = level;
 		this.rate = rate;

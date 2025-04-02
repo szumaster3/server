@@ -234,11 +234,11 @@ class WoodcuttingPulse(
     private fun calculateRewardAmount(reward: Int): Int {
         var amount = 1
 
-        if (reward == 3239 && RandomFunction.random(100) >= 10) {
+        if (reward == Items.BARK_3239 && RandomFunction.random(100) >= 10) {
             amount = 0
         }
 
-        if (reward == 1511 &&
+        if (reward == Items.LOGS_1511 &&
             isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 1) &&
             player.viewport.region.id == 10806
         ) {
@@ -257,7 +257,7 @@ class WoodcuttingPulse(
         if (player.location.regionId == 10300) {
             return 1.0
         }
-        if (reward == 3239) {
+        if (reward == Items.BARK_3239) {
             if (amount >= 1) {
                 experience = 275.2
             } else {
@@ -265,10 +265,10 @@ class WoodcuttingPulse(
             }
         }
 
-        if (reward == 1517 &&
+        if (reward == Items.MAPLE_LOGS_1517 &&
             player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)!!.isComplete(1) &&
             player.equipment[EquipmentContainer.SLOT_HAT] != null &&
-            player.equipment[EquipmentContainer.SLOT_HAT].id == Items.SEERS_HEADBAND_1_14631
+            player.equipment[EquipmentContainer.SLOT_HAT].id in intArrayOf(Items.SEERS_HEADBAND_1_14631, Items.SEERS_HEADBAND_2_14640, Items.SEERS_HEADBAND_3_14641)
         ) {
             experience *= 1.10
         }

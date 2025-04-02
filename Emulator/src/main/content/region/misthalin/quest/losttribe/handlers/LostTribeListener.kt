@@ -82,7 +82,7 @@ class LostTribeListener : InteractionListener {
                 sendDialogue(player, "'A History of the Goblin Race.' This must be it.")
                 addItemOrDrop(player, Items.GOBLIN_SYMBOL_BOOK_5009)
             } else {
-                sendMessage(player, "You find nothing of interests to you.")
+                sendMessage(player, "You don't find anything that you'd ever want to read.")
             }
             return@on true
         }

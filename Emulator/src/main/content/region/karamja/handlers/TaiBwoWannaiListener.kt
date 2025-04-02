@@ -11,7 +11,7 @@ class TaiBwoWannaiListener : InteractionListener {
             if (node.id in GABOOTY_NPC_WRAPPERS) {
                 when (getUsedOption(player)) {
                     "trade-co-op" -> Shops.openId(player, 226)
-                    "trade-drinks" -> Shops.openId(player, 254)
+                    "trade-drinks" -> Shops.openId(player, 252)
                 }
             }
             return@on true

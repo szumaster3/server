@@ -111,7 +111,7 @@ class NatureSpiritListeners : InteractionListener {
             if (isQuestComplete(player, Quests.NATURE_SPIRIT) && isQuestComplete(player, Quests.WOLF_WHISTLE)) {
                 sendMessage(player, "The wishing well has a number of Summoning items in it.")
                 sendMessage(player, "If you toss in some coins, you can take the items in return.")
-                Shops.openId(player, 241)
+                Shops.openId(player, 239)
             } else {
                 sendMessage(
                     player,

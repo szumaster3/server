@@ -37,7 +37,7 @@ import static core.api.ContentAPIKt.*;
  * The type Tzhaar fight caves plugin.
  */
 @Initializable
-public final class TzhaarFightCavesPlugin extends ActivityPlugin {
+public final class TzhaarFightCavePlugin extends ActivityPlugin {
 
     private static final int[][] WAVES = {{2734, 0}, {2736, 2}, {2739, 6}, {2741, 14}, {2743, 30}, {2745, 62}};
 
@@ -51,7 +51,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
     /**
      * Instantiates a new Tzhaar fight caves plugin.
      */
-    public TzhaarFightCavesPlugin() {
+    public TzhaarFightCavePlugin() {
         this(null);
     }
 
@@ -60,7 +60,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
      *
      * @param player the player
      */
-    public TzhaarFightCavesPlugin(Player player) {
+    public TzhaarFightCavePlugin(Player player) {
         super("fight caves", true, true, true, ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS);
         super.player = player;
     }
@@ -313,7 +313,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 
     @Override
     public ActivityPlugin newInstance(Player p) throws Throwable {
-        return new TzhaarFightCavesPlugin(p);
+        return new TzhaarFightCavePlugin(p);
     }
 
     @Override

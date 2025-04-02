@@ -114357,7 +114357,7 @@
     "examine": "A plank of oak that has been treated to resist fire.",
     "durability": null,
     "name": "Treated plank",
-    "weight": "0.8",
+    "weight": "0.85",
     "archery_ticket_price": "0",
     "id": "13241"
   },
@@ -114369,10 +114369,11 @@
     "id": "13242"
   },
   {
-    "examine": "An old stone slab with writing on it.",
+    "examine": "A list of items carved onto a stone tablet.",
     "durability": null,
     "name": "Stone tablet",
     "archery_ticket_price": "0",
+    "weight": "1",
     "id": "13243"
   },
   {

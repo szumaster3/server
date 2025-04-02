@@ -74,7 +74,7 @@ class SmeltingListener : InteractionListener {
          * Handles furnace options interaction.
          */
 
-        on(FURNACE_IDS, IntType.SCENERY, "smelt", "smelt-ore") { player, node ->
+        on(IntType.SCENERY, "smelt", "smelt-ore") { player, node ->
             if (node.id == Scenery.FURNACE_26814 && !isDiaryComplete(player, DiaryType.VARROCK, 0)) {
                 if (!GameWorld.settings!!.isMembers) {
                     sendNPCDialogue(player, NPCs.JEFFERY_6298, "Keep away from that! It's dangerous!")

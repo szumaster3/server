@@ -38,10 +38,10 @@ class TzhaarMejJalDialogue(
                     1 -> {
                         end()
                         if (!removeItem(player, Item(Items.FIRE_CAPE_6570))) {
-                            npc(FaceAnim.OLD_NORMAL, "You not have firecape, JalYt.")
+                            npc(FaceAnim.CHILD_NORMAL, "You not have firecape, JalYt.")
                             return true
                         } else {
-                            npc(FaceAnim.OLD_NORMAL, "Hand your cape here, young JalYte.")
+                            npc(FaceAnim.CHILD_NORMAL, "Hand your cape here, young JalYte.")
                             Item(Items.TOKKUL_6529).amount = 8000
                             player.inventory.add(Item(Items.TOKKUL_6529))
                             Item(Items.TOKKUL_6529).amount = 1

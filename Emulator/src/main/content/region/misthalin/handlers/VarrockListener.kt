@@ -298,7 +298,7 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
-        on(17985, IntType.SCENERY, "climb-down") { player, _ ->
+        on(Scenery.TRAPDOOR_17985, IntType.SCENERY, "climb-down") { player, _ ->
             ClimbActionHandler.climb(
                 player,
                 ClimbActionHandler.CLIMB_DOWN,
@@ -459,9 +459,7 @@ class VarrockListener : InteractionListener {
                 Scenery.REDBERRY_BUSH_23629,
                 Scenery.REDBERRY_BUSH_23630,
             )
-        private val STRAY_DOGS = intArrayOf(NPCs.STRAY_DOG_5917, NPCs.STRAY_DOG_5918)
         private const val HIDDEN_TRAPDOOR = Scenery.HIDDEN_TRAPDOOR_28094
         private const val SAWMILL_OPERATOR = NPCs.SAWMILL_OPERATOR_4250
-        private const val RASPBERRY_ANIMATION = Animations.RASPBERRY_2110
     }
 }

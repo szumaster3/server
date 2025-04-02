@@ -176,7 +176,7 @@ class GabootyDialogue(
 
             91 -> {
                 end()
-                Shops.openId(player, 227)
+                Shops.openId(player, 252)
             }
         }
         return true

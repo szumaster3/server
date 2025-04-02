@@ -5,6 +5,7 @@ import content.data.items.SkillingTool
 import content.global.activity.shootingstar.StarBonus
 import core.api.*
 import core.api.movement.finishedMoving
+import core.api.quest.hasRequirement
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -24,6 +25,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import core.tools.prependArticle
 import org.rs.consts.Items
+import org.rs.consts.Quests
 
 class MiningListener : InteractionListener {
     private val gemRewards =
@@ -44,6 +46,10 @@ class MiningListener : InteractionListener {
             handler = ::handleMining,
         )
 
+        /*
+         * Handles prospecting the resources.
+         */
+
         on(IntType.SCENERY, "prospect") { player, node ->
             val rock = MiningNode.forId(node.asScenery().id)
 
@@ -54,68 +60,50 @@ class MiningListener : InteractionListener {
 
             sendMessage(player, "You examine the rock for ores...")
 
-            when (MiningNode.forId(node.id)!!.identifier) {
-                13.toByte() -> {
-                    queueScript(player, 3, QueueStrength.SOFT) {
-                        sendMessage(player, "This rock contains gems.")
-                        return@queueScript stopExecuting(player)
-                    }
-                    return@on true
+            val messages = mapOf(
+                13.toByte() to "This rock contains gems.",
+                15.toByte() to "This rock is sandstone.",
+                16.toByte() to "This rock is granite.",
+                18.toByte() to "This rock contains a magical kind of stone.",
+                19.toByte() to "This rock contains obsidian."
+            )
+
+            val identifier = rock.identifier
+            val message = messages[identifier]
+
+            if (message != null) {
+                queueScript(player, 3, QueueStrength.SOFT) {
+                    sendMessage(player, message)
+                    return@queueScript stopExecuting(player)
+                }
+                return@on true
+            }
+
+            val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
+            val resourceName = Item(rock.reward).name.lowercase()
+
+            when (identifier) {
+                2.toByte() -> if (tutorialStage < 71) {
+                    player.dialogueInterpreter.sendBoldInput("This rock contains tin.")
+                } else {
+                    sendMessage(player, "This rock contains $resourceName.")
                 }
 
-                15.toByte() -> {
-                    queueScript(player, 3, QueueStrength.SOFT) {
-                        sendMessage(player, "This rock is sandstone.")
-                        return@queueScript stopExecuting(player)
-                    }
-                    return@on true
+                1.toByte() -> if (tutorialStage < 71) {
+                    player.dialogueInterpreter.sendBoldInput("This rock contains copper.")
+                } else {
+                    sendMessage(player, "This rock contains $resourceName.")
                 }
 
-                16.toByte() -> {
-                    queueScript(player, 3, QueueStrength.SOFT) {
-                        sendMessage(player, "This rock is granite.")
-                        return@queueScript stopExecuting(player)
-                    }
-                    return@on true
-                }
-
-                18.toByte() -> {
-                    queueScript(player, 3, QueueStrength.SOFT) {
-                        sendMessage(player, "This rock contains a magical kind of stone.")
-                        return@queueScript stopExecuting(player)
-                    }
-                    return@on true
-                }
-
-                2.toByte() -> {
-                    val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
-                    if (tutorialStage < 71) {
-                        player.dialogueInterpreter.sendBoldInput("This rock contains tin.")
-                    } else {
-                        sendMessage(player, "This rock contains ${Item(rock.reward).name.lowercase()}.")
-                    }
-                    return@on true
-                }
-
-                1.toByte() -> {
-                    val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
-                    if (tutorialStage < 71) {
-                        player.dialogueInterpreter.sendBoldInput("This rock contains copper.")
-                    } else {
-                        sendMessage(player, "This rock contains ${Item(rock.reward).name.lowercase()}.")
-                    }
-                    return@on true
-                }
-
-                else -> {
-                    queueScript(player, 3, QueueStrength.SOFT) {
-                        sendMessage(player, "This rock contains ${Item(rock.reward).name.lowercase()}.")
-                        return@queueScript stopExecuting(player)
-                    }
-                    return@on true
+                else -> queueScript(player, 3, QueueStrength.SOFT) {
+                    sendMessage(player, "This rock contains $resourceName.")
+                    return@queueScript stopExecuting(player)
                 }
             }
+
+            return@on true
         }
+
     }
 
     /*
@@ -169,11 +157,18 @@ class MiningListener : InteractionListener {
     ): Boolean {
         val resource = MiningNode.forId(node.id)
         val tool = SkillingTool.getPickaxe(player)
-        val isEssence = resource!!.id in intArrayOf(2491, 16684)
+        val isEssence = resource!!.id in intArrayOf(
+            org.rs.consts.Scenery.RUNE_ESSENCE_2491,
+            /*
+             * Lunar essence rock.
+             */
+            org.rs.consts.Scenery.ROCK_16684
+        )
         val isGems = resource.identifier == MiningNode.GEM_ROCK_0.identifier
         val isGranite = resource.identifier == MiningNode.GRANITE.identifier
         val isSandstone = resource.identifier == MiningNode.SANDSTONE.identifier
         val isMagicStone = resource.identifier == MiningNode.MAGIC_STONE_0.identifier
+        val isObsidian = resource.identifier == MiningNode.OBSIDIAN_0.identifier
 
         if (!finishedMoving(player)) {
             return true
@@ -184,8 +179,14 @@ class MiningListener : InteractionListener {
                 player.scripts.reset()
                 return true
             }
+
             if (!isEssence) {
-                sendMessage(player, "You swing your pickaxe at the rock.")
+                val message = if (resource.identifier == MiningNode.OBSIDIAN_0.identifier) {
+                    "You swing your pick at the wall."
+                } else {
+                    "You swing your pickaxe at the rock."
+                }
+                sendMessage(player, message)
             }
 
             anim(player, resource, tool!!)
@@ -223,14 +224,15 @@ class MiningListener : InteractionListener {
                     setAttribute(player, "/save:jewellery-charges:bracelet-of-clay", charges)
                 }
             }
-            val familyCrestZone = ZoneBorders(2728, 9696, 2742, 9681)
-            if (reward == Items.GOLD_ORE_444 && inBorders(player, familyCrestZone)) {
+
+            val witchavenDungeon = ZoneBorders(2728, 9696, 2742, 9681)
+            if (reward == Items.GOLD_ORE_444 && inBorders(player, witchavenDungeon)) {
                 reward = Items.PERFECT_GOLD_ORE_446
             }
 
             val rewardName =
-                if (reward == 446) {
-                    getItemName(444).lowercase()
+                if (reward == Items.PERFECT_GOLD_ORE_446) {
+                    getItemName(Items.GOLD_ORE_444).lowercase()
                 } else {
                     getItemName(reward).lowercase()
                 }
@@ -243,6 +245,8 @@ class MiningListener : InteractionListener {
                 sendMessage(player, "You manage to quarry some sandstone.")
             } else if (isMagicStone) {
                 sendMessage(player, "You manage to mine some stone.")
+            } else if (isObsidian) {
+                sendMessage(player, "You manage to mine some obsidian.")
             } else if (!isEssence) {
                 sendMessage(player, "You manage to mine some ${rewardName.lowercase()}.")
             }
@@ -257,7 +261,7 @@ class MiningListener : InteractionListener {
                     altered = true
                 }
                 val necklace = getItemFromEquipment(player, EquipmentSlot.NECK)
-                if (necklace != null && necklace.id in 1705..1713) {
+                if (necklace != null && necklace.id in Items.AMULET_OF_GLORY_1705..Items.AMULET_OF_GLORY4_1713) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
@@ -275,21 +279,40 @@ class MiningListener : InteractionListener {
             }
         }
 
-        if (resource.id == 4030 && !isEssence && resource.respawnRate != 0) {
+        /*
+         * Handles limestone respawn.
+         */
+
+        if (resource.id == org.rs.consts.Scenery.PILE_OF_ROCK_4030 && !isEssence && resource.respawnRate != 0) {
             removeScenery(node as Scenery)
             GameWorld.Pulser.submit(
                 object : Pulse(resource.respawnDuration, player) {
                     override fun pulse(): Boolean {
-                        SceneryBuilder.add(Scenery(4027, node.location))
+                        SceneryBuilder.add(Scenery(org.rs.consts.Scenery.PILE_OF_ROCK_4027, node.location))
                         return true
                     }
                 },
             )
-            node.isActive = false
+            node.setActive(false)
             return false
         }
 
-        if (resource.id in 9030..9032) {
+        /*
+         * Handles obsidian respawn.
+         */
+
+        if (resource.id == org.rs.consts.Scenery.OBSIDIAN_WALL_31229 && !isEssence && resource.respawnRate != 0) {
+            SceneryBuilder.replaceWithTempBeforeNew(
+                node.asScenery(),
+                node.asScenery().transform(org.rs.consts.Scenery.OBSIDIAN_WALL_31230),
+                node.asScenery().transform(org.rs.consts.Scenery.OBSIDIAN_WALL_9376),
+                resource.respawnDuration,
+                true,
+            )
+            return true
+        }
+
+        if (resource.id in org.rs.consts.Scenery.GEM_ROCK_9030..org.rs.consts.Scenery.GEM_ROCK_9032) {
             SceneryBuilder.replaceWithTempBeforeNew(
                 node.asScenery(),
                 node.asScenery().transform(resource.emptyId + 4),
@@ -376,7 +399,7 @@ class MiningListener : InteractionListener {
             reward += value shl 1
             rewardXP(player, Skills.MINING, value * 10.toDouble())
         } else if (isMiningEssence && getDynLevel(player, Skills.MINING) >= 30) {
-            reward = 7936
+            reward = Items.PURE_ESSENCE_7936
         } else if (isMiningGems) {
             reward = RandomFunction.rollWeightedChanceTable(MiningNode.GEM_ROCK_REWARD).id
         }
@@ -402,12 +425,21 @@ class MiningListener : InteractionListener {
     fun anim(
         player: Player,
         resource: MiningNode?,
-        tool: SkillingTool,
+        tool: SkillingTool
     ) {
-        val isEssence =
-            resource!!.id in intArrayOf(org.rs.consts.Scenery.RUNE_ESSENCE_2491, org.rs.consts.Scenery.ROCK_16684)
+        val isEssence = resource?.identifier == 14.toByte()
+        val isObsidian = resource?.identifier == 19.toByte()
+
+        val baseAnim = tool.animation
+
+        val anim = when {
+            isEssence -> baseAnim + 6128
+            isObsidian -> baseAnim + 9718
+            else -> baseAnim
+        }
+
         if (animationFinished(player)) {
-            animate(player, if (!isEssence) tool.animation else tool.animation + 6128, true)
+            animate(player, anim)
         }
     }
 
@@ -424,14 +456,61 @@ class MiningListener : InteractionListener {
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
-        if (freeSlots(player) == 0) {
-            sendMessage(player, "Your inventory is too full to hold any more ore.")
+        if(resource.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL)) {
+            sendDialogue(player, "You do not know the technique to mine stone slabs.")
             return false
         }
-        if (inInventory(player, Items.MAGIC_STONE_4703)) {
-            sendMessage(player, "You have already mined some stone. You don't need any more.")
+        if (resource.identifier == 19.toByte() && (SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE || SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE2)) {
+            sendDialogue(player, "I don't think I should use the Inferno Adze in here.")
+            return false
+        }
+
+        if (freeSlots(player) == 0) {
+            val messages = mapOf(
+                4.toByte()  to "Your inventory is too full to hold any more limestone.",
+                13.toByte() to "Your inventory is too full to hold any more gems.",
+                14.toByte() to "Your inventory is too full to hold any more essence.",
+                15.toByte() to "Your inventory is too full to hold any more sandstone.",
+                16.toByte() to "Your inventory is too full to hold any more granite.",
+                19.toByte() to "Your inventory is too full to hold any more obsidian."
+            )
+
+            val message = messages[resource.identifier]
+            if (message != null) {
+                sendDialogue(player, message)
+                return false
+            }
+
+            if (resource.identifier == 18.toByte() && inInventory(player, Items.MAGIC_STONE_4703)) {
+                sendMessage(player, "You have already mined some stone. You don't need any more.")
+                return false
+            }
+
+            val item = getItemName(resource.reward).lowercase()
+            sendDialogue(player, "Your inventory is too full to hold any more $item.")
             return false
         }
         return node.isActive
     }
 }
+
+/*
+
+ Essence
+ * Animations.BRONZE_PICKAXE_6753
+ * Animations.IRON_PICKAXE_6754
+ * Animations.STEEL_PICKAXE_ALT3_6755
+ * Animations.ADAMANT_PICKAXE_6756
+ * Animations.MITHRIL_PICKAXE_6757
+ * Animations.DRAGON_PICKAXE_6758
+ * Animations.INFERNO_ADZE_10223
+
+ Obsidian
+ * Animations.BRONZE_PICKAXE_10343
+ * Animations.IRON_PICKAXE_10344
+ * Animations.STEEL_PICKAXE_ALT_10345
+ * Animations.MITHRIL_PICKAXE_10346
+ * Animations.ADAMANT_PICKAXE_10347
+ * Animations.RUNE_PICKAXE_10342
+
+*/

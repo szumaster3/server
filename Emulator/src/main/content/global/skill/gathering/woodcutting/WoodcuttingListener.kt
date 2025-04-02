@@ -35,6 +35,12 @@ import org.rs.consts.Sounds
 import kotlin.streams.toList
 
 class WoodcuttingListener : InteractionListener {
+
+    /*
+     * TODO: Attempting to use the adze to cut trees on Miscellania or Etceteria results in the message:
+     * sendDialogue(player, "I don't think I should use the Inferno Adze in here, since there is a chance I might set the logs on fire.")
+     */
+
     private val woodcuttingSounds =
         intArrayOf(
             Sounds.WOODCUTTING_HIT_3038,
@@ -165,9 +171,9 @@ class WoodcuttingListener : InteractionListener {
         if (resource.respawnRate > 0) {
             if (RandomFunction.roll(8) || listOf(1, 2, 3, 4, 6, 19).contains(resource.identifier.toInt())) {
                 if (resource.isFarming) {
-                    val fPatch = FarmingPatch.forObject(node.asScenery())
-                    if (fPatch != null) {
-                        val patch = fPatch.getPatchFor(player)
+                    val farmingPatch = FarmingPatch.forObject(node.asScenery())
+                    if (farmingPatch != null) {
+                        val patch = farmingPatch.getPatchFor(player)
                         patch.setCurrentState(patch.getCurrentState() + 1)
                     }
                     return true
@@ -201,7 +207,7 @@ class WoodcuttingListener : InteractionListener {
         return hostRatio < clientRatio
     }
 
-    fun animateWoodcutting(player: Player) {
+    private fun animateWoodcutting(player: Player) {
         if (!player.animator.isAnimating) {
             animate(player, SkillingTool.getHatchet(player)!!.animation)
             val playersAroundMe: List<Player> =
@@ -217,7 +223,7 @@ class WoodcuttingListener : InteractionListener {
         }
     }
 
-    fun checkWoodcuttingRequirements(
+    private fun checkWoodcuttingRequirements(
         player: Player,
         resource: WoodcuttingNode,
         node: Node,
@@ -228,26 +234,21 @@ class WoodcuttingListener : InteractionListener {
             openDialogue(player, KjallakOnChopDialogue(), NPC(npc, player.location))
             return false
         }
-        if (player.getSkills().getLevel(Skills.WOODCUTTING) < resource.level) {
-            player.packetDispatch.sendMessage(
+        if (getStatLevel(player, Skills.WOODCUTTING) < resource.level) {
+            sendMessage(player,
                 "You need a woodcutting level of " + resource.level + " to chop this tree.",
             )
             return false
         }
         if (SkillingTool.getHatchet(player) == null) {
-            player.packetDispatch.sendMessage("You do not have an axe to use.")
+            sendMessage(player,"You do not have an axe to use.")
             return false
         }
-        if (player.inventory.freeSlots() < 1 && node.isActive) {
+        if (freeSlots(player) < 1 && node.isActive) {
+            val resourceName = getItemName(resource.reward).lowercase()
             sendMessage(
                 player,
-                "Your inventory is too full to hold any more " +
-                    ItemDefinition
-                        .forId(
-                            resource.reward,
-                        ).name
-                        .lowercase() +
-                    ".",
+                "Your inventory is too full to hold any more $resourceName.",
             )
             return false
         }
@@ -260,11 +261,11 @@ class WoodcuttingListener : InteractionListener {
     ): Int {
         var amount = 1
 
-        if (reward == 3239 && RandomFunction.random(100) >= 10) {
+        if (reward == Items.BARK_3239 && RandomFunction.random(100) >= 10) {
             amount = 0
         }
 
-        if (reward == 1511 &&
+        if (reward == Items.LOGS_1511 &&
             isDiaryComplete(
                 player,
                 DiaryType.SEERS_VILLAGE,
@@ -289,7 +290,7 @@ class WoodcuttingListener : InteractionListener {
             return 1.0
         }
 
-        if (reward == 3239) {
+        if (reward == Items.BARK_3239) {
             if (amount >= 1) {
                 experience = 275.2
             } else {
@@ -297,15 +298,12 @@ class WoodcuttingListener : InteractionListener {
             }
         }
 
-        if (reward == 1517 &&
+        if (reward == Items.MAPLE_LOGS_1517 &&
             player.achievementDiaryManager
                 .getDiary(DiaryType.SEERS_VILLAGE)!!
                 .isComplete(1) &&
             player.equipment.get(EquipmentContainer.SLOT_HAT) != null &&
-            player.equipment
-                .get(
-                    EquipmentContainer.SLOT_HAT,
-                ).id == Items.SEERS_HEADBAND_1_14631
+            player.equipment.get(EquipmentContainer.SLOT_HAT).id in intArrayOf(Items.SEERS_HEADBAND_1_14631, Items.SEERS_HEADBAND_2_14640, Items.SEERS_HEADBAND_3_14641)
         ) {
             experience *= 1.10
         }

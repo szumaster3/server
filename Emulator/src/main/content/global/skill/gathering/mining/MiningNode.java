@@ -1598,10 +1598,25 @@ public enum MiningNode {
     /**
      * Rubium mining node.
      */
-    RUBIUM(Scenery.RUBIUM_29746, Scenery.WALL_29747, (byte) 17);
+    RUBIUM(Scenery.RUBIUM_29746, Scenery.WALL_29747, (byte) 17),
 
     /**
-     * The constant GEM_ROCK_REWARD.
+     * Obsidian mining node 0.
+     */
+    OBSIDIAN_0(Scenery.OBSIDIAN_WALL_9376, Scenery.OBSIDIAN_WALL_31229, (byte) 19),
+
+    /**
+     * Obsidian mining node 1.
+     */
+    OBSIDIAN_1(Scenery.OBSIDIAN_WALL_31229, Scenery.OBSIDIAN_WALL_31230, (byte) 19),
+
+    /**
+     * Obsidian mining node 2.
+     */
+    OBSIDIAN_2(Scenery.OBSIDIAN_WALL_31230, Scenery.OBSIDIAN_WALL_9376, (byte) 19);
+
+    /**
+     * The gem rock reward.
      */
     public static List<WeightedChanceItem> GEM_ROCK_REWARD = new ArrayList<>(20);
 
@@ -1618,23 +1633,29 @@ public enum MiningNode {
     /**
      * The Full.
      */
-    int full, /**
+    int full,
+
+    /**
      * Empty mining node.
      */
-    empty, /**
+    empty,
+    /**
      * Respawn rate mining node.
      */
-    respawnRate, /**
+    respawnRate,
+    /**
      * Reward mining node.
      */
-    reward, /**
+    reward,
+    /**
      * Level mining node.
      */
     level;
     /**
      * The Rate.
      */
-    double rate, /**
+    double rate,
+    /**
      * Experience mining node.
      */
     experience;
@@ -1768,7 +1789,13 @@ public enum MiningNode {
                 reward = 4703;
                 level = 20;
                 break;
-
+            case 19:
+                respawnRate = 100 | 200 << 16;
+                experience = 40.0;
+                rate = 0.74;
+                reward = 13245;
+                level = 41;
+                break;
         }
     }
 

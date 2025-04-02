@@ -20,7 +20,7 @@ import core.tools.RandomFunction;
 import org.rs.consts.NPCs;
 
 /**
- * The type Tzhaar fight cave npc.
+ * The TzHaar Fight cave NPCs.
  */
 public final class TzhaarFightCaveNPC extends AbstractNPC {
     private static final int[] NPC_IDS = {
@@ -41,7 +41,7 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 
     private CombatAction combatAction;
 
-    private TzhaarFightCavesPlugin activity;
+    private TzhaarFightCavePlugin activity;
 
     private boolean spawnedMinions;
 
@@ -52,7 +52,7 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
      * @param location the location
      * @param activity the activity
      */
-    public TzhaarFightCaveNPC(int id, Location location, TzhaarFightCavesPlugin activity) {
+    public TzhaarFightCaveNPC(int id, Location location, TzhaarFightCavePlugin activity) {
         super(id, location);
         this.activity = activity;
     }

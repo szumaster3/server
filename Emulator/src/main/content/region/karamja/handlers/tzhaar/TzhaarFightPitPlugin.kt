@@ -32,7 +32,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class TzhaarFightPitsPlugin : ActivityPlugin("fight pits", false, true, true, ZoneRestriction.CANNON) {
+class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, ZoneRestriction.CANNON) {
     override fun continueAttack(
         e: Entity,
         target: Node,
