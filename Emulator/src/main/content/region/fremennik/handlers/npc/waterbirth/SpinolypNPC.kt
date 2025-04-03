@@ -9,6 +9,7 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.world.map.Location
 import core.tools.RandomFunction
+import org.rs.consts.NPCs
 
 class SpinolypNPC(
     id: Int = 0,
@@ -49,7 +50,7 @@ class SpinolypNPC(
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(2894, 2896)
+    override fun getIds(): IntArray = intArrayOf(NPCs.SPINOLYP_2894, NPCs.SPINOLYP_2896)
 
     class SpinolpySwingHandler :
         MultiSwingHandler(

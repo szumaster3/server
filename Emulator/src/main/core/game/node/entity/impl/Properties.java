@@ -17,6 +17,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import org.rs.consts.Animations;
 
 /**
  * A class that holds various properties related to an entity's combat, equipment, animations, and other settings.
@@ -85,11 +86,11 @@ public final class Properties {
         Container c = ((Player) entity).getEquipment();
         Item item = c.get(EquipmentContainer.SLOT_SHIELD);
         if (item != null) {
-            defenceAnimation = item.getDefinition().getConfiguration(ItemConfigParser.DEFENCE_ANIMATION, Animation.create(1156));
+            defenceAnimation = item.getDefinition().getConfiguration(ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.DEFEND_1156));
         } else if ((item = c.get(EquipmentContainer.SLOT_WEAPON)) != null) {
-            defenceAnimation = item.getDefinition().getConfiguration(ItemConfigParser.DEFENCE_ANIMATION, Animation.create(424));
+            defenceAnimation = item.getDefinition().getConfiguration(ItemConfigParser.DEFENCE_ANIMATION, Animation.create(Animations.DEFEND_UNARMED_424));
         } else {
-            defenceAnimation = Animation.create(397);
+            defenceAnimation = Animation.create(Animations.CLAW_DEFENCE_397);
         }
     }
 

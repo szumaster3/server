@@ -1,10 +1,7 @@
 package content.region.karamja.handlers
 
 import content.region.karamja.handlers.brimhaven.BrimhavenUtils
-import core.api.getAttribute
-import core.api.location
-import core.api.removeAttribute
-import core.api.sendNPCDialogue
+import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
@@ -40,12 +37,12 @@ class BrimhavenDungeonListener : InteractionListener {
             return@on true
         }
 
-        on(STEPPING_STONES, IntType.SCENERY, "jump-from") { player, node ->
+        on(STEPPING_STONE, IntType.SCENERY, "jump-from") { player, node ->
             BrimhavenUtils.handleSteppingStones(player, node.asScenery())
             return@on true
         }
 
-        on(VINES, IntType.SCENERY, "chop-down") { player, node ->
+        on(VINE, IntType.SCENERY, "chop-down") { player, node ->
             BrimhavenUtils.handleVines(player, node.asScenery())
             return@on true
         }
@@ -55,13 +52,13 @@ class BrimhavenDungeonListener : InteractionListener {
             return@on true
         }
 
-        on(LOGS, IntType.SCENERY, "walk-across") { player, node ->
-            if (player.skills.getLevel(Skills.AGILITY) < 30) {
-                player.packetDispatch.sendMessage("You need an agility level of 30 to cross this.")
+        on(LOG_BALANCE, IntType.SCENERY, "walk-across") { player, node ->
+            if (getStatLevel(player, Skills.AGILITY) < 30) {
+                sendMessage(player, "You need an agility level of 30 to cross this.")
                 return@on true
             }
 
-            if (node.id == 5088) {
+            if (node.id == Scenery.LOG_BALANCE_5088) {
                 content.global.skill.agility.AgilityHandler.walk(
                     player,
                     -1,
@@ -90,7 +87,7 @@ class BrimhavenDungeonListener : InteractionListener {
         private const val SANIBOCH_NPC = NPCs.SANIBOCH_1595
         private const val ENTRANCE = Scenery.DUNGEON_ENTRANCE_5083
         private const val EXIT = Scenery.EXIT_5084
-        private val VINES =
+        private val VINE =
             intArrayOf(
                 Scenery.VINES_5103,
                 Scenery.VINES_5104,
@@ -98,7 +95,7 @@ class BrimhavenDungeonListener : InteractionListener {
                 Scenery.VINES_5106,
                 Scenery.VINES_5107,
             )
-        private val STEPPING_STONES =
+        private val STEPPING_STONE =
             intArrayOf(
                 Scenery.STEPPING_STONE_5110,
                 Scenery.STEPPING_STONE_5111,
@@ -110,7 +107,7 @@ class BrimhavenDungeonListener : InteractionListener {
                 Scenery.STAIRS_5097,
                 Scenery.STAIRS_5098,
             )
-        private val LOGS =
+        private val LOG_BALANCE =
             intArrayOf(
                 Scenery.LOG_BALANCE_5088,
                 Scenery.LOG_BALANCE_5090,
