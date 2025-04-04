@@ -46,7 +46,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 magicLevel = 25,
                 runes = arrayOf(Item(Items.FIRE_RUNE_554), Item(Items.AIR_RUNE_556, 3), Item(Items.LAW_RUNE_563)),
             )
-            val alternateTeleport = getAttribute(player, VarrockAchievementDiary.ATTRIBUTE_VARROCK_ALT_TELE, false)
+            val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_VARROCK_ALT_TELE, false)
             val dest = if (alternateTeleport) Location.create(3165, 3472, 0) else Location.create(3213, 3424, 0)
             sendTeleport(
                 player = player,
@@ -99,8 +99,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
                 magicLevel = 45,
                 runes = arrayOf(Item(Items.AIR_RUNE_556, 5), Item(Items.LAW_RUNE_563)),
             )
-            // https://runescape.wiki/w/Camelot_Teleport?oldid=1085906
-            val alternateTeleport = DiaryManager(player).hasHeadband()
+            val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_CAMELOT_ALT_TELE, false)
             val dest = if (alternateTeleport) Location.create(2731, 3485, 0) else Location.create(2758, 3478, 0)
             sendTeleport(
                 player = player,

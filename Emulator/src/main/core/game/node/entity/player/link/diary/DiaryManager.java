@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.rs.consts.Components;
 
 /**
  * The Diary manager.
@@ -55,7 +56,7 @@ public class DiaryManager {
      * Open tab.
      */
     public void openTab() {
-        player.getInterfaceManager().openTab(2, new Component(259));
+        player.getInterfaceManager().openTab(2, new Component(Components.AREA_TASK_259));
         for (Diary diary : diarys) {
             diary.drawStatus(player);
         }

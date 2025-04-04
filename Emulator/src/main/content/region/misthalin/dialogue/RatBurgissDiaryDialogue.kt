@@ -1,6 +1,6 @@
 package content.region.misthalin.dialogue
 
-import content.region.misthalin.handlers.VarrockAchievementDiary
+import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.dialogue.DialogueFile
@@ -17,7 +17,7 @@ class RatBurgissDiaryDialogue : DialogueFile() {
         buttonID: Int,
     ) {
         val easyDiaryComplete = Diary.hasCompletedLevel(player!!, DiaryType.VARROCK, 0)
-        val alternateTeleport = getAttribute(player!!, VarrockAchievementDiary.ATTRIBUTE_VARROCK_ALT_TELE, false)
+        val alternateTeleport = getAttribute(player!!, GameAttributes.ATTRIBUTE_VARROCK_ALT_TELE, false)
         when (stage) {
             0 -> {
                 if (Diary.canClaimLevelRewards(player!!, DiaryType.VARROCK, 0)) {
@@ -146,12 +146,12 @@ class RatBurgissDiaryDialogue : DialogueFile() {
                 )
             101 -> {
                 npcl(FaceAnim.FRIENDLY, "There you are, your Varrock teleport will now take you to the Grand Exchange.")
-                setAttribute(player!!, "/save:diaries:varrock:alttele", true)
+                setAttribute(player!!, GameAttributes.ATTRIBUTE_VARROCK_ALT_TELE, true)
                 stage = 0
             }
             102 -> {
                 npcl(FaceAnim.FRIENDLY, "There you are, your Varrock teleport will now take you to the city square.")
-                setAttribute(player!!, "/save:diaries:varrock:alttele", false)
+                setAttribute(player!!, GameAttributes.ATTRIBUTE_VARROCK_ALT_TELE, false)
                 stage = 0
             }
         }

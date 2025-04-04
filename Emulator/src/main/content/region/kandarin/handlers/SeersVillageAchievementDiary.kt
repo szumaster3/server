@@ -26,6 +26,7 @@ import org.rs.consts.Scenery
 
 class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
     companion object {
+        const val ATTRIBUTE_VARROCK_ALT_TELE =
         private const val ATTRIBUTE_CUT_YEW_COUNT = "diary:seers:cut-yew"
         private const val ATTRIBUTE_BASS_CAUGHT = "diary:seers:bass-caught"
         private const val ATTRIBUTE_SHARK_CAUGHT_COUNT = "diary:seers:shark-caught"

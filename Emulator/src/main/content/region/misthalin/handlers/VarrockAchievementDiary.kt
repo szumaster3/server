@@ -28,7 +28,7 @@ import org.rs.consts.*
 class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     companion object {
         private const val ATTRIBUTE_CRAFT_AIR_BATTLESTAFF = "diary:varrock:craft-air-battlestaff"
-        const val ATTRIBUTE_VARROCK_ALT_TELE = "diaries:varrock:alttele"
+
 
         private val VARROCK_ROOF_AREA = ZoneBorders(3201, 3467, 3225, 3497, 3, true)
         private val SOS_LEVEL_2_AREA = ZoneBorders(2040, 5241, 2046, 5246)

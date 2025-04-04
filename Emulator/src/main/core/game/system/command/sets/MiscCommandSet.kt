@@ -41,6 +41,15 @@ import java.awt.datatransfer.StringSelection
 class MiscCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
         define(
+            name = "heal",
+            privilege = Privilege.ADMIN,
+            usage = "::heal",
+            description = "Full restore health.",
+        ) { player, _ ->
+            player.fullRestore()
+        }
+
+        define(
             name = "debug",
             privilege = Privilege.ADMIN,
             usage = "",
