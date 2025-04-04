@@ -61,6 +61,12 @@ object Event {
     val AttributeRemoved = AttributeRemoveEvent::class.java
 
     @JvmStatic
+    val VarbitSet = VarbitSetEvent::class.java
+
+    @JvmStatic
+    val VarbitRemoved = VarbitRemoveEvent::class.java
+
+    @JvmStatic
     val SpellCast = SpellCastEvent::class.java
 
     @JvmStatic

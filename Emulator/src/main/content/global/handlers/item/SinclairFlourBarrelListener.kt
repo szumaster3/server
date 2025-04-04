@@ -55,8 +55,7 @@ class SinclairFlourBarrelListener : InteractionListener {
         if (!hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, DIARY_TASK_INDEX, DIARY_TASK_ID)) {
             val currentFlourCount = getVarbit(player, Vars.VARBIT_FLOUR_BIN_STORAGE_4920)
             if (currentFlourCount >= MAX_FLOUR_COUNT) {
-                setVarbit(player, Vars.VARBIT_FLOUR_BIN_STORAGE_4920, MAX_FLOUR_COUNT)
-                finishDiaryTask(player, DiaryType.SEERS_VILLAGE, DIARY_TASK_INDEX, DIARY_TASK_ID)
+                setVarbit(player, Vars.VARBIT_FLOUR_BIN_STORAGE_4920, DIARY_TASK_ID)
             } else {
                 setVarbit(player, Vars.VARBIT_FLOUR_BIN_STORAGE_4920, currentFlourCount + 1)
             }

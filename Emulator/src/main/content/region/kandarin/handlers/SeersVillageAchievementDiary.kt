@@ -19,10 +19,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
-import org.rs.consts.Items
-import org.rs.consts.NPCs
-import org.rs.consts.Quests
-import org.rs.consts.Scenery
+import org.rs.consts.*
 
 class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE) {
     companion object {
@@ -389,6 +386,16 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                 player,
                 DiaryLevel.HARD,
                 HardTasks.DIAL_FAIRY_RING_MCGRUBORS_WOOD,
+            )
+        }
+    }
+
+    override fun onVarbitSet(player: Player, event: VarbitSetEvent) {
+        if(event.varbit == Vars.VARBIT_FLOUR_BIN_STORAGE_4920 && event.value == 5) {
+            finishTask(
+                player,
+                DiaryLevel.EASY,
+                EasyTasks.SINCLAIR_MANSION_FILL_5_POTS_WITH_FLOUR,
             )
         }
     }

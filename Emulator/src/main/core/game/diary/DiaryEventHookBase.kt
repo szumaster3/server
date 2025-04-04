@@ -106,6 +106,8 @@ abstract class DiaryEventHookBase(
         player.hook(Event.InterfaceOpened, EventHandler(this, ::onInterfaceOpened))
         player.hook(Event.AttributeSet, EventHandler(this, ::onAttributeSet))
         player.hook(Event.AttributeRemoved, EventHandler(this, ::onAttributeRemoved))
+        player.hook(Event.VarbitSet, EventHandler(this, ::onVarbitSet))
+        player.hook(Event.VarbitRemoved, EventHandler(this, ::onVarbitRemoved))
         player.hook(Event.SpellCast, EventHandler(this, ::onSpellCast))
         player.hook(Event.ItemAlchemized, EventHandler(this, ::onItemAlchemized))
         player.hook(Event.ItemEquipped, EventHandler(this, ::onItemEquipped))
@@ -300,6 +302,8 @@ abstract class DiaryEventHookBase(
     protected open fun onInterfaceClosed(player: Player, event: InterfaceCloseEvent, ) {}
     protected open fun onAttributeSet(player: Player, event: AttributeSetEvent, ) {}
     protected open fun onAttributeRemoved(player: Player, event: AttributeRemoveEvent, ) {}
+    protected open fun onVarbitSet(player: Player, event: VarbitSetEvent, ) {}
+    protected open fun onVarbitRemoved(player: Player, event: VarbitRemoveEvent, ) {}
     protected open fun onSpellCast(player: Player, event: SpellCastEvent, ) {}
     protected open fun onItemAlchemized(player: Player, event: ItemAlchemizationEvent, ) {}
     protected open fun onItemEquipped(player: Player, event: ItemEquipEvent, ) {}
