@@ -7,6 +7,7 @@ import core.game.dialogue.DialogueFile
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.PlayerSaver
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
@@ -70,6 +71,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         define(name = "bank", privilege = Privilege.ADMIN, usage = "", description = "Opens your bank.") { player, _ ->
+            // sendChat(player, "Hey, everyone, I just tried to do something very silly!")
             player.bank.open()
         }
 
