@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.merlin.handlers
 
-import core.api.quest.hasRequirement
+import core.api.quest.getQuestStage
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -23,7 +23,7 @@ class MerlinNPC : AbstractNPC {
         vararg objects: Any,
     ): AbstractNPC = MerlinNPC(id, location)
 
-    override fun isHidden(player: Player): Boolean = !hasRequirement(player, Quests.HOLY_GRAIL, false)
+    override fun isHidden(player: Player): Boolean = getQuestStage(player, Quests.MERLINS_CRYSTAL) in 0..99
 
     override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
 }

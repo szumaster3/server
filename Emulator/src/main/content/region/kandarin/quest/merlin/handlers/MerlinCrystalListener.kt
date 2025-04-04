@@ -60,7 +60,7 @@ class MerlinCrystalListener : InteractionListener {
             return@on true
         }
         on(NPCs.SIR_MORDRED_247, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, SirMordredDialogueFile(), NPCs.MERLIN_249)
+            openDialogue(player, SirMordredDialogueFile(), NPCs.SIR_MORDRED_247)
             return@on true
         }
 

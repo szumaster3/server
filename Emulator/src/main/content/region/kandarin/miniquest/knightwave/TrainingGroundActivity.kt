@@ -1,6 +1,7 @@
 package content.region.kandarin.miniquest.knightwave
 
 import content.data.GameAttributes
+import content.region.kandarin.dialogue.camelot.MerlinDialogue
 import core.api.*
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
@@ -117,7 +118,7 @@ class TrainingGroundActivity :
     override fun newInstance(p: Player?): ActivityPlugin {
         ActivityManager.register(this)
         ClassScanner.definePlugin(KnightWavesNPC())
-        ClassScanner.definePlugin(MerlinNPC())
+        ClassScanner.definePlugin(MerlinKnightWavesNPC())
         return this
     }
 
@@ -243,7 +244,7 @@ class TrainingGroundActivity :
     /**
      * Represents the Merlin NPC that spawns after the final wave of the miniquest.
      */
-    class MerlinNPC(
+    class MerlinKnightWavesNPC(
         id: Int = 0,
         location: Location? = null,
     ) : AbstractNPC(id, location) {
@@ -254,7 +255,7 @@ class TrainingGroundActivity :
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC = MerlinNPC(id, location)
+        ): AbstractNPC = MerlinKnightWavesNPC(id, location)
 
         override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
 
@@ -274,7 +275,7 @@ class TrainingGroundActivity :
              * Spawns Merlin for the final dialogue.
              */
             fun spawnMerlin(player: Player) {
-                val merlin = MerlinNPC(NPCs.MERLIN_213)
+                val merlin = MerlinKnightWavesNPC(NPCs.MERLIN_213)
                 merlin.location = Location.create(2750, 3505, 2)
                 merlin.isWalks = false
                 merlin.isAggressive = false
@@ -287,7 +288,6 @@ class TrainingGroundActivity :
                 Pulser.submit(
                     object : Pulse(1, merlin) {
                         override fun pulse(): Boolean {
-                            player.lock()
                             merlin.init()
                             face(findLocalNPC(player, NPCs.MERLIN_213)!!, player, 3)
                             face(player, findLocalNPC(player, NPCs.MERLIN_213)!!)
@@ -348,7 +348,7 @@ enum class WaveTier(
                                 npc.properties.combatPulse.attack(player)
                             } else {
                                 teleport(player!!, Location.create(2750, 3507, 2).transform(Direction.SOUTH))
-                                TrainingGroundActivity.MerlinNPC.spawnMerlin(player)
+                                TrainingGroundActivity.MerlinKnightWavesNPC.spawnMerlin(player)
                                 npc.clear()
                             }
                             player?.unlock()

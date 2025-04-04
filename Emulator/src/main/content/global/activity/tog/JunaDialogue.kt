@@ -28,6 +28,14 @@ class JunaDialogue(
         val questPointsLeft = TearsOfGuthix.questPointsLeft(player) > 0
         val questStage = getQuestStage(player, Quests.TEARS_OF_GUTHIX)
 
+        if(player.getQuestRepository().points == 0) {
+            npcl(
+                FaceAnim.OLD_DEFAULT,
+                "You need more experience and quest points before entering the Tears of Guthix cave.",
+            )
+            return true
+        }
+
         when {
             daysLeft && xpLeft && questPointsLeft -> {
                 npcl(FaceAnim.OLD_DEFAULT, "You must wait longer before entering the Tears of Guthix cave.")

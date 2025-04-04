@@ -30,7 +30,7 @@ class HolyGrailListener : InteractionListener {
         }
 
         on(NPCs.HIGH_PRIEST_216, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, HighPriestDialogue(), NPCs.FISHERMAN_219)
+            openDialogue(player, HighPriestDialogue(), NPCs.HIGH_PRIEST_216)
             return@on true
         }
 
@@ -216,7 +216,6 @@ class HolyGrailListener : InteractionListener {
 
     private fun spawnGrail(player: Player) {
         val loc = Location.create(2777, 4684, 2)
-
         queueScript(player, 2, QueueStrength.SOFT) { _ ->
             if (GroundItemManager.get(Items.HOLY_GRAIL_19, loc, player) == null) {
                 GroundItemManager.create(GroundItem(Item(Items.HOLY_GRAIL_19, 1), loc, secondsToTicks(60 * 60), player))

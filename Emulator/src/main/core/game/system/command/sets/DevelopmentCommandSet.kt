@@ -96,34 +96,6 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Command for switching Knight Waves stages.
-         */
-
-        define(
-            name = "completekw",
-            privilege = Privilege.ADMIN,
-            usage = "::completekw",
-            description = "Complete the Knight Wave Training mini-quest",
-        ) { player, _ ->
-            setAttribute(player, KnightWaveAttributes.KW_COMPLETE, true)
-        }
-
-        /*
-         * Command test - Spawning merlin.
-         */
-
-        define(
-            name = "spawnmerlin",
-            privilege = Privilege.ADMIN,
-            usage = "::spawnmerlin",
-            description = "Complete the requirements for switching respawn point",
-        ) { player, _ ->
-            setAttribute(player, KnightWaveAttributes.KW_COMPLETE, true)
-            finishQuest(player, Quests.MERLINS_CRYSTAL)
-            finishQuest(player, Quests.HOLY_GRAIL)
-        }
-
-        /*
          * Command to execute CS2 scripts dynamically.
          */
 
