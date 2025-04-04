@@ -25,6 +25,9 @@ import core.plugin.ClassScanner
 import core.plugin.Initializable
 import org.rs.consts.NPCs
 
+/**
+ * Contains constants used throughout the Knight Wave activity.
+ */
 object KnightWaveAttributes {
     const val KW_SPAWN = "knights-training:spawn"
     const val KW_TIER = "knights-training:wave"
@@ -33,6 +36,10 @@ object KnightWaveAttributes {
     const val ACTIVITY = "Knight's training"
 }
 
+/**
+ * Represents the Training Grounds activity for the Knight's Wave miniquest.
+ * Handles area entry, logout, player deaths, and restrictions.
+ */
 @Initializable
 class TrainingGroundActivity :
     ActivityPlugin(KnightWaveAttributes.ACTIVITY, true, false, true),
@@ -44,6 +51,9 @@ class TrainingGroundActivity :
         this.safeRespawn = Location.create(2750, 3507, 2)
     }
 
+    /**
+     * Called when an entity dies inside the area.
+     */
     override fun death(
         entity: Entity,
         killer: Entity,
@@ -55,6 +65,9 @@ class TrainingGroundActivity :
         return false
     }
 
+    /**
+     * Called when an entity leaves the activity area.
+     */
     override fun areaLeave(
         entity: Entity,
         logout: Boolean,
@@ -74,12 +87,18 @@ class TrainingGroundActivity :
         }
     }
 
+    /**
+     * Called when the activity starts.
+     */
     override fun start(
         player: Player?,
         login: Boolean,
         vararg args: Any?,
     ): Boolean = super.start(player, login, *args)
 
+    /**
+     * Called when an entity enters the activity area.
+     */
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
         if (entity is Player) {
@@ -95,6 +114,9 @@ class TrainingGroundActivity :
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2752, 3502, 2764, 3513, 2, false))
 
+    /**
+     * Registers plugins and returns a new instance of this activity.
+     */
     override fun newInstance(p: Player?): ActivityPlugin {
         ActivityManager.register(this)
         ClassScanner.definePlugin(KnightWavesNPC())
@@ -112,6 +134,9 @@ class TrainingGroundActivity :
 
     override fun getSpawnLocation(): Location? = null
 
+    /**
+     * Represents a Knight NPC participating in the wave battles.
+     */
     class KnightWavesNPC : AbstractNPC {
         var type: WaveTier? = null
         private var commenced = false
@@ -128,6 +153,9 @@ class TrainingGroundActivity :
             this.isInvisible = false
         }
 
+        /**
+         * Called every game tick to manage NPC behavior.
+         */
         override fun handleTickActions() {
             super.handleTickActions()
             player?.let {
@@ -141,6 +169,9 @@ class TrainingGroundActivity :
             if (timer++ > 500) poofClear(this)
         }
 
+        /**
+         * Called when the NPC dies to handle transformation to the next wave.
+         */
         override fun finalizeDeath(killer: Entity?) {
             if (killer == player) {
                 this.asNpc().isInvisible = true
@@ -159,6 +190,9 @@ class TrainingGroundActivity :
 
         override fun canSelectTarget(target: Entity): Boolean = target is Player && target == player
 
+        /**
+         * Modifies damage based on combat style and conditions.
+         */
         override fun checkImpact(state: BattleState) {
             super.checkImpact(state)
             if (state.attacker is Player) {
@@ -209,6 +243,9 @@ class TrainingGroundActivity :
         }
     }
 
+    /**
+     * Represents the Merlin NPC that spawns after the final wave of the miniquest.
+     */
     class MerlinNPC(
         id: Int = 0,
         location: Location? = null,
@@ -224,6 +261,9 @@ class TrainingGroundActivity :
 
         override fun getIds(): IntArray = intArrayOf(NPCs.MERLIN_213)
 
+        /**
+         * Auto-cleans attributes and removes Merlin after a delay.
+         */
         override fun handleTickActions() {
             super.handleTickActions()
             if (cleanTime++ > 300) {
@@ -233,6 +273,9 @@ class TrainingGroundActivity :
         }
 
         companion object {
+            /**
+             * Spawns Merlin for the final dialogue.
+             */
             fun spawnMerlin(player: Player) {
                 val merlin = MerlinNPC(NPCs.MERLIN_213)
                 merlin.location = Location.create(2750, 3505, 2)
@@ -261,6 +304,9 @@ class TrainingGroundActivity :
     }
 }
 
+/**
+ * Represents each wave tier in the Knight's Training.
+ */
 enum class WaveTier(
     val id: Int,
 ) {
@@ -275,6 +321,9 @@ enum class WaveTier(
     IX(-1),
     ;
 
+    /**
+     * Transforms the current NPC into the next wave NPC or ends the training.
+     */
     fun transform(
         npc: TrainingGroundActivity.KnightWavesNPC,
         player: Player?,
@@ -315,11 +364,13 @@ enum class WaveTier(
         )
     }
 
+    /**
+     * Gets the next wave tier, or the same if it's the last one.
+     */
     fun next(): WaveTier? = if (ordinal + 1 < knightTypes.size) knightTypes[ordinal + 1] else knightTypes[ordinal]
 
     companion object {
         fun forId(id: Int): WaveTier? = values().find { it.id == id }
-
         private val knightTypes = values()
     }
 }

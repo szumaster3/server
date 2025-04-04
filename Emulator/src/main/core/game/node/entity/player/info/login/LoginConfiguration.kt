@@ -341,9 +341,9 @@ object LoginConfiguration {
 
     private fun setupPrayer(player: Player) {
         if (getAttribute(player, KnightWaveAttributes.KW_COMPLETE, false)) {
-            setVarbit(player, 3909, 8, false)
+            setVarbit(player, 3909, 8, true)
         } else {
-            setVarbit(player, 3909, 0, false)
+            setVarbit(player, 3909, 0, true)
         }
     }
 }

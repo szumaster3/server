@@ -62,10 +62,5 @@ class TrainingGroundListener : InteractionListener {
             )
             return@on true
         }
-
-        on(NPCs.MERLIN_213, IntType.NPC, "talk-to") { player, _ ->
-            sendMessage(player, "Nothing interesting happens.")
-            return@on true
-        }
     }
 }

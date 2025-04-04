@@ -3,6 +3,7 @@ package content.region.kandarin.quest.merlin.handlers
 import content.region.kandarin.quest.merlin.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage
+import core.api.quest.isQuestComplete
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.DropListener
 import core.game.interaction.IntType
@@ -177,8 +178,11 @@ class MerlinCrystalListeners : InteractionListener {
         player: Player,
         wielding: Boolean,
     ) {
+        if(isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
+            sendMessage(player, "You have already freed Merlin from the crystal.")
+        }
         if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 60) {
-            sendDialogueLines(
+            sendMessages(
                 player,
                 "You have already freed Merlin from the crystal.",
                 "Go and see King Arthur for your reward.",

@@ -4,7 +4,9 @@ import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
 import content.region.kandarin.handlers.barbtraining.BarbarianTraining
+import content.region.kandarin.miniquest.knightwave.KnightWaveAttributes
 import core.api.*
+import core.api.quest.finishQuest
 import core.api.ui.closeDialogue
 import core.cache.def.impl.*
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
@@ -22,6 +24,7 @@ import core.tools.RED
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs.consts.Items
+import org.rs.consts.Quests
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
@@ -90,6 +93,34 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             player.houseManager.createNewHouseAt(content.global.skill.construction.HouseLocation.RIMMINGTON)
             sendMessage(player, RED + "The house has been bought.")
             addItem(player, Items.COINS_995, 10000000)
+        }
+
+        /*
+         * Command for switching Knight Waves stages.
+         */
+
+        define(
+            name = "completekw",
+            privilege = Privilege.ADMIN,
+            usage = "::completekw",
+            description = "Complete the Knight Wave Training mini-quest",
+        ) { player, _ ->
+            setAttribute(player, KnightWaveAttributes.KW_COMPLETE, true)
+        }
+
+        /*
+         * Command test - Spawning merlin.
+         */
+
+        define(
+            name = "spawnmerlin",
+            privilege = Privilege.ADMIN,
+            usage = "::spawnmerlin",
+            description = "Complete the requirements for switching respawn point",
+        ) { player, _ ->
+            setAttribute(player, KnightWaveAttributes.KW_COMPLETE, true)
+            finishQuest(player, Quests.MERLINS_CRYSTAL)
+            finishQuest(player, Quests.HOLY_GRAIL)
         }
 
         /*
