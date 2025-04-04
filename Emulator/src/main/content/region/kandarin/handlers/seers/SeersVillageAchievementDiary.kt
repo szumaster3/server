@@ -1,4 +1,4 @@
-package content.region.kandarin.handlers
+package content.region.kandarin.handlers.seers
 
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.ChaliceOnKingArthurListener

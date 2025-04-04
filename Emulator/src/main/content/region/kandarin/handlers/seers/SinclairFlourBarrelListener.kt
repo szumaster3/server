@@ -1,4 +1,4 @@
-package content.global.handlers.item
+package content.region.kandarin.handlers.seers
 
 import core.api.*
 import core.game.interaction.IntType
@@ -45,7 +45,7 @@ class SinclairFlourBarrelListener : InteractionListener {
             return
         }
         lock(player, 3)
-        addItem(player, Items.POT_OF_FLOUR_1933)
+        addItem(player, Items.POT_OF_FLOUR_1933, 1)
         sendMessage(player, "You take some flour from the barrel.")
         updateDiaryProgress(player)
         sendMessage(player, "There's still plenty of flour left.")

@@ -1,6 +1,9 @@
 package content.region.kandarin.handlers.seers
 
 import core.api.MapArea
+import core.api.finishDiaryTask
+import core.api.removeAttribute
+import core.api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -20,29 +23,31 @@ class MysteriousStatue : MapArea {
         if (entity is Player) {
             val player = entity.asPlayer()
 
-            if (player.getAttribute<Any?>("diary:seers:statue-walk-start") != null) {
-                val start = player.getAttribute<Vector3d>("diary:seers:statue-walk-start")
-                val a = player.getAttribute<Vector3d>("diary:seers:statue-walk-a")
-                val b = Vector3d(lastLocation).sub(origin)
+            val statueWalkStart = player.getAttribute<Vector3d>("diary:seers:statue-walk-start")
+            val statueWalkA = player.getAttribute<Vector3d>("diary:seers:statue-walk-a")
 
-                val angle = Vector3d.signedAngle(a, b, n) * 360.0 / 2 / 3.14159265355
+            if (statueWalkStart != null) {
+                val a = statueWalkA ?: Vector3d(0.0, 0.0, 0.0)
+                val b = Vector3d(lastLocation).sub(origin)
+                val angle = Vector3d.signedAngle(a, b, n) * 360.0 / (2 * Math.PI)
 
                 if (angle >= 0) {
-                    player.removeAttribute("diary:seers:statue-walk-start")
-                }
-                if (b.epsilonEquals(start, .001)) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 1)
-                    player.removeAttribute("diary:seers:statue-walk-start")
+                    removeAttribute(player, "diary:seers:statue-walk-start")
                 }
 
-                player.setAttribute("diary:seers:statue-walk-a", b)
+                if (b.epsilonEquals(statueWalkStart, 0.001)) {
+                    finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 0, 1)
+                    removeAttribute(player, "diary:seers:statue-walk-start")
+                }
+
+                setAttribute(player,"diary:seers:statue-walk-a", b)
             } else {
                 val start = Vector3d(player.location).sub(origin)
-                player.setAttribute("diary:seers:statue-walk-start", start)
-                player.setAttribute("diary:seers:statue-walk-a", start)
+                setAttribute(player, "diary:seers:statue-walk-start", start)
+                setAttribute(player,"diary:seers:statue-walk-a", start)
             }
         } else {
-            entity.asPlayer().removeAttribute("diary:seers:statue-walk-start")
+            removeAttribute(entity.asPlayer(), "diary:seers:statue-walk-start")
         }
     }
 
@@ -51,7 +56,7 @@ class MysteriousStatue : MapArea {
         logout: Boolean,
     ) {
         if (entity is Player) {
-            entity.removeAttribute("diary:seers:statue-walk-start")
+            removeAttribute(entity.asPlayer(), "diary:seers:statue-walk-start")
         }
     }
 
