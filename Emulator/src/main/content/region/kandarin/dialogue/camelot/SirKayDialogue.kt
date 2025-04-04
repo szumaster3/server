@@ -47,7 +47,7 @@ class SirKayDialogue(
     ): Boolean {
         // Diary consts.
         val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_CAMELOT_ALT_TELE, false)
-        val hardDiaryComplete = Diary.hasCompletedLevel(player!!, DiaryType.VARROCK, 0)
+        val hardDiaryComplete = Diary.hasCompletedLevel(player!!, DiaryType.SEERS_VILLAGE, 2)
 
         // Quests consts.
         val completeMerlin = isQuestComplete(player, Quests.MERLINS_CRYSTAL)
@@ -78,7 +78,7 @@ class SirKayDialogue(
                     IfTopic(
                         "I'd like to change my teleport point.",
                         100,
-                        isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 2)
+                        hardDiaryComplete
                     ),
                     Topic("Hi! Can you help me out with the Achievement Diary tasks?", 60)
                 )
