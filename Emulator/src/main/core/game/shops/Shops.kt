@@ -28,6 +28,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import java.io.FileReader
 
+/**
+ * A class that handles shop-related logic.
+ */
 class Shops :
     StartupListener,
     TickListener,
@@ -35,17 +38,32 @@ class Shops :
     InterfaceListener,
     Commands {
     companion object {
+        /**
+         * The key used to store personalized shop settings in the server configuration.
+         */
         @JvmStatic
         val personalizedShops = "world.personalized_shops"
 
+        /**
+         * A map of shops indexed by their unique id.
+         */
         @JvmStatic
         val shopsById = HashMap<Int, Shop>()
 
+        /**
+         * A map of shops indexed by the NPC ID associated with the shop.
+         */
         @JvmStatic
         val shopsByNpc = HashMap<Int, Shop>()
 
         private var lastPlayerStockClear = 0
 
+        /**
+         * Opens the shop for the given player by the shop ID.
+         *
+         * @param player The player opening the shop.
+         * @param id The unique identifier of the shop to open.
+         */
         @JvmStatic
         fun openId(
             player: Player,
@@ -54,10 +72,22 @@ class Shops :
             shopsById[id]?.openFor(player)
         }
 
+        /**
+         * Logs a message specific to the shop system.
+         *
+         * @param msg The message to log.
+         */
         fun logShop(msg: String) {
             log(this::class.java, Log.FINE, "[SHOPS] $msg")
         }
 
+        /**
+         * Parses the stock data from a string and converts it into a list of `ShopItem` objects.
+         *
+         * @param stock The raw stock string to parse.
+         * @param id The shop ID to log any potential issues with the stock.
+         * @return A list of `ShopItem` objects representing the parsed stock.
+         */
         fun parseStock(
             stock: String,
             id: Int,
@@ -101,6 +131,9 @@ class Shops :
         }
     }
 
+    /**
+     * Initializes the shops by loading their data from a JSON configuration file.
+     */
     override fun startup() {
         val path = ServerConstants.CONFIG_PATH + "shops.json"
         logShop("Using JSON path: $path")
@@ -127,6 +160,10 @@ class Shops :
         logShop("Parsed ${shopsById.size} shops.")
     }
 
+    /**
+     * Executes every tick. Manages shop restocking and player stock clearing
+     * at defined intervals.
+     */
     override fun tick() {
         shopsById.values.forEach(Shop::restock)
 
@@ -317,14 +354,14 @@ class Shops :
             val valueMsg =
                 when {
                     (price.amount == -1) ||
-                        !def.hasShopCurrencyValue(price.id) ||
-                        def.id in
-                        intArrayOf(
-                            Items.COINS_995,
-                            Items.TOKKUL_6529,
-                            Items.ARCHERY_TICKET_1464,
-                            Items.CASTLE_WARS_TICKET_4067,
-                        ) -> "This shop will not buy that item."
+                            !def.hasShopCurrencyValue(price.id) ||
+                            def.id in
+                            intArrayOf(
+                                Items.COINS_995,
+                                Items.TOKKUL_6529,
+                                Items.ARCHERY_TICKET_1464,
+                                Items.CASTLE_WARS_TICKET_4067,
+                            ) -> "This shop will not buy that item."
 
                     else -> "${player.inventory[slot].name}: This shop will buy this item for [${price.amount}] [${price.name.lowercase()}]."
                 }
@@ -357,6 +394,9 @@ class Shops :
         }
     }
 
+    /**
+     * Registers shop-related commands.
+     */
     override fun defineCommands() {
         define("openshop", Privilege.ADMIN) { player, args ->
             if (args.size < 2) reject(player, "Usage: ::openshop shopId")

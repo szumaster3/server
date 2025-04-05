@@ -24,17 +24,35 @@ import java.lang.Integer.min
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
+/**
+ * Represents a single item in a shop.
+ *
+ * @property itemId The id of the item.
+ * @property amount The amount of the item in stock.
+ * @property restockRate The number of ticks between restocks (Default to 100).
+ */
 data class ShopItem(
     var itemId: Int,
     var amount: Int,
     val restockRate: Int = 100,
 )
 
+/**
+ * A listener for shop container updates, used to send interface updates to the player.
+ *
+ * @property player The player this listener is associated with.
+ */
 class ShopListener(
     val player: Player,
 ) : ContainerListener {
     var enabled = false
 
+    /**
+     * Called when the container changes.
+     *
+     * @param c The container being updated.
+     * @param event The event describing what changed.
+     */
     override fun update(
         c: Container?,
         event: ContainerEvent?,
@@ -45,6 +63,11 @@ class ShopListener(
         )
     }
 
+    /**
+     * Refreshes the entire container.
+     *
+     * @param c The container to refresh.
+     */
     override fun refresh(c: Container?) {
         PacketRepository.send(
             ContainerPacket::class.java,
@@ -53,6 +76,16 @@ class ShopListener(
     }
 }
 
+/**
+ * Represents a shop that can be opened by players to buy and sell items.
+ *
+ * @property title The title of the shop shown in the interface.
+ * @property stock The default stock items available in the shop.
+ * @property general Whether the shop accepts any item from the player as sellable.
+ * @property currency The item ID used as the shop's currency (default: coins).
+ * @property highAlch Whether high alchemy pricing is applied.
+ * @property forceShared Whether to force the shop to use a shared container across all players.
+ */
 class Shop(
     val title: String,
     val stock: Array<ShopItem>,
@@ -61,9 +94,25 @@ class Shop(
     val highAlch: Boolean = false,
     val forceShared: Boolean = false,
 ) {
+
+    /**
+     * Map of player UID or global key to stock containers.
+     */
     val stockInstances = HashMap<Int, Container>()
+
+    /**
+     * Container for general (player-sellable) stock.
+     */
     val playerStock = if (general) generalPlayerStock else Container(40, ContainerType.SHOP)
+
+    /**
+     * Map of players or global key to a flag indicating whether the shop should be restocked.
+     */
     val needsUpdate = HashMap<Int, Boolean>()
+
+    /**
+     * Map of item ids to their restocking rates.
+     */
     val restockRates = HashMap<Int, Int>()
 
     init {
@@ -72,6 +121,11 @@ class Shop(
         }
     }
 
+    /**
+     * Opens the shop interface for the given player.
+     *
+     * @param player The player to open the shop for.
+     */
     fun openFor(player: Player) {
         val cont = getContainer(player)
         sendString(player, title, 620, 22)
@@ -83,6 +137,12 @@ class Shop(
         logShop("Opening shop [Title: $title, Player: ${player.username}]")
     }
 
+    /**
+     * Displays the shop tab (main or player stock).
+     *
+     * @param player The player viewing the shop.
+     * @param main Whether to show the main stock (true) or the player stock (false).
+     */
     fun showTab(
         player: Player,
         main: Boolean,
@@ -144,6 +204,12 @@ class Shop(
         setAttribute(player, "shop-main", main)
     }
 
+    /**
+     * Retrieves the appropriate shop container for a player.
+     *
+     * @param player The player for whom to retrieve the container.
+     * @return The shop container.
+     */
     fun getContainer(player: Player): Container {
         val container =
             if (getServerConfig().getBoolean(Shops.personalizedShops, false) && !forceShared) {
@@ -168,6 +234,11 @@ class Shop(
         return container
     }
 
+    /**
+     * Generates a new container based on the initial stock defined in the shop.
+     *
+     * @return A newly populated stock container.
+     */
     private fun generateStockContainer(): Container {
         val container = Container(40, ContainerType.SHOP)
         for (item in stock) {
@@ -178,6 +249,10 @@ class Shop(
         return container
     }
 
+    /**
+     * Restocks all shop containers that have been flagged for update.
+     * Adjusts item amount to match initial stock over time.
+     */
     fun restock() {
         stockInstances.filter { needsUpdate[it.key] == true }.forEach { (player, cont) ->
             for (i in 0 until cont.capacity()) {
@@ -199,6 +274,13 @@ class Shop(
         }
     }
 
+    /**
+     * Calculates the cost of buying an item from the shop.
+     *
+     * @param player The player attempting to buy the item.
+     * @param slot The slot of the item within the container.
+     * @return An [Item] representing the currency and price required to buy the item. Returns Item(-1, -1) if not found.
+     */
     fun getBuyPrice(
         player: Player,
         slot: Int,
@@ -234,6 +316,14 @@ class Shop(
         return Item(currency, price)
     }
 
+    /**
+     * Calculates the price the shop will pay the player for selling an item.
+     *
+     * @param player The player attempting to sell the item.
+     * @param slot The inventory slot of the item.
+     * @return A [Pair] containing the target container (or null) and the price in currency as an [Item].
+     *         Returns (null, Item(-1, -1)) if the item is invalid or unsellable.
+     */
     fun getSellPrice(
         player: Player,
         slot: Int,
@@ -281,11 +371,11 @@ class Shop(
             when (currency) {
                 Items.TOKKUL_6529 ->
                     (
-                        item.definition.getConfiguration(
-                            ItemConfigParser.TOKKUL_PRICE,
-                            1,
-                        ) / 10.0
-                    ).toInt() // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
+                            item.definition.getConfiguration(
+                                ItemConfigParser.TOKKUL_PRICE,
+                                1,
+                            ) / 10.0
+                            ).toInt() // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
                 Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
                 Items.CASTLE_WARS_TICKET_4067 ->
                     item.definition.getConfiguration(
@@ -303,6 +393,14 @@ class Shop(
         return Pair(if (isPlayerStock) playerStock else shopCont, Item(currency, price))
     }
 
+    /**
+     * Computes the adjusted buy price of an item based on current and stock amounts.
+     *
+     * @param item The item being priced.
+     * @param stockAmount The original stock quantity of the item.
+     * @param currentAmt The current amount of the item in the shop.
+     * @return The computed GP cost for the item.
+     */
     private fun getGPCost(
         item: Item,
         stockAmount: Int,
@@ -327,6 +425,14 @@ class Shop(
         return max(price, 1)
     }
 
+    /**
+     * Computes the amount of GP given to the player when selling an item.
+     *
+     * @param item The item being sold.
+     * @param stockAmount The shop's desired stock quantity.
+     * @param currentAmt The current quantity of the item in the shop.
+     * @return The GP value the shop will give for this item (minimum 1).
+     */
     private fun getGPSell(
         item: Item,
         stockAmount: Int,
@@ -361,9 +467,9 @@ class Shop(
         val cont =
             if (isMainStock) {
                 (
-                    getAttribute<Container?>(player, "shop-cont", null)
-                        ?: return TransactionStatus.Failure("Invalid shop-cont attr")
-                )
+                        getAttribute<Container?>(player, "shop-cont", null)
+                            ?: return TransactionStatus.Failure("Invalid shop-cont attr")
+                        )
             } else {
                 playerStock
             }
@@ -382,12 +488,12 @@ class Shop(
         if (isMainStock &&
             inStock.amount > stock[slot].amount &&
             (
-                !getServerConfig().getBoolean(
-                    Shops.personalizedShops,
-                    false,
-                ) ||
-                    forceShared
-            ) &&
+                    !getServerConfig().getBoolean(
+                        Shops.personalizedShops,
+                        false,
+                    ) ||
+                            forceShared
+                    ) &&
             player.ironmanManager.isIronman
         ) {
             sendDialogue(player, "As an ironman, you cannot buy overstocked items from shops.")
@@ -447,11 +553,13 @@ class Shop(
                         player,
                         "You only had enough money to buy some of the items you requested.",
                     )
+
                 Items.CASTLE_WARS_TICKET_4067 ->
                     sendMessage(
                         player,
                         "You don't have enough castle wars tickets to purchase that.",
                     )
+
                 else -> sendMessage(player, "You don't have enough money.")
             }
             return TransactionStatus.Failure("Not enough money in inventory")
@@ -550,6 +658,13 @@ class Shop(
         return TransactionStatus.Success()
     }
 
+    /**
+     * Determines the stock slot and source (main stock or player stock) for a given item id.
+     *
+     * @param itemId The id of the item to locate in the stock.
+     * @return A [Pair] where the first value is `true` if found in player stock, `false` if in main stock,
+     *         and the second is the slot index where the item was found (or -1 if not found).
+     */
     fun getStockSlot(itemId: Int): Pair<Boolean, Int> {
         var shopSlot: Int = -1
         var isPlayerStock = false
@@ -574,16 +689,36 @@ class Shop(
     }
 
     companion object {
-        // General stores globally share player stock (weird quirk, right?)
+        /**
+         * Shared container used by general stores for storing player-sold items.
+         * This is a globally shared inventory across all general stores.
+         */
         val generalPlayerStock = Container(40, ContainerType.SHOP)
+
+        /**
+         * A map of shop IDs to their corresponding [ShopListener] instances.
+         * Used to track active listeners per shop.
+         */
         val listenerInstances = HashMap<Int, ShopListener>()
     }
 
+    /**
+     * Represents the result of a shop transaction.
+     */
     sealed class TransactionStatus {
-        class Success : TransactionStatus() // Represents a successful transaction
 
+        /**
+         * Indicates that the transaction was completed successfully.
+         */
+        class Success : TransactionStatus()
+
+        /**
+         * Indicates that the transaction failed.
+         *
+         * @param reason The reason why the transaction could not be completed.
+         */
         class Failure(
             val reason: String,
-        ) : TransactionStatus() // Represents a failed transaction with a reason
+        ) : TransactionStatus()
     }
 }
