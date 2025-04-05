@@ -512,6 +512,12 @@ enum class Emotes(
             ),
         )
 
+        /**
+         * Handles the emote button interaction by the player.
+         *
+         * @param player The player performing the emote.
+         * @param buttonId The button id corresponding to the emote clicked.
+         */
         fun handle(
             player: Player,
             buttonId: Int,
@@ -555,11 +561,12 @@ enum class Emotes(
         }
 
         /**
-         * Forces the animation to be played.
+         * Forces the player to perform an emote animation and optionally a graphic.
+         * Locks the emote action for the duration of the animation.
          *
-         * @param player    the player.
-         * @param animation the animation.
-         * @param graphic   the graphic.
+         * @param player The player performing the emote.
+         * @param animation The animation to perform.
+         * @param graphic The graphic to display with the animation.
          */
         private fun forceEmote(player: Player, animation: Animation?, graphic: Graphics) {
             if (animation != null) {
@@ -568,10 +575,21 @@ enum class Emotes(
             }
         }
 
-
+        /**
+         * Retrieves the [Emotes] instance associated with the given button id.
+         *
+         * @param buttonId The button id clicked by the player.
+         * @return The matching [Emotes] instance, or `null` if none found.
+         */
         @JvmStatic
         fun forId(buttonId: Int): Emotes? = values().find { it.buttonId == buttonId }
 
+        /**
+         * Checks if the player is wearing the full chicken outfit.
+         *
+         * @param player The player to check.
+         * @return `True` if the full chicken set is equipped, `false` otherwise.
+         */
         private fun isWearingChickenOutfit(player: Player): Boolean {
             val head = player.equipment[EquipmentContainer.SLOT_HAT]
             val wings = player.equipment[EquipmentContainer.SLOT_CHEST]
@@ -580,6 +598,12 @@ enum class Emotes(
             return head?.id == Items.CHICKEN_HEAD_11021 && wings?.id == Items.CHICKEN_WINGS_11020 && legs?.id == Items.CHICKEN_LEGS_11022 && feet?.id == Items.CHICKEN_FEET_11019
         }
 
+        /**
+         * Checks if the player is eligible to complete the falador task.
+         *
+         * @param player The player to check.
+         * @return `True` if the player meets the requirements.
+         */
         private fun isEligibleForSalute(player: Player): Boolean =
             !player.achievementDiaryManager.hasCompletedTask(DiaryType.FALADOR, 1, 8) && player.location == Location(
                 2997, 3374, 0
@@ -590,6 +614,12 @@ enum class Emotes(
                 Items.INITIATE_CUISSE_5576,
             )
 
+        /**
+         * Checks if the player is eligible for the goblin bow requirement.
+         *
+         * @param player The player to check.
+         * @return True if the player can use it.
+         */
         private fun isEligibleForGoblinBow(player: Player): Boolean =
             player.location.regionId == 13206 && !player.getAttribute("mistag-greeted", false)
     }

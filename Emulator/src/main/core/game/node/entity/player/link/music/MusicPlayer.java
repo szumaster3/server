@@ -14,30 +14,54 @@ import java.util.HashMap;
 import static core.api.ContentAPIKt.setVarp;
 
 /**
- * The type Music player.
+ * Handles the music system for a player.
  */
 public final class MusicPlayer {
 
     /**
-     * The tutorial music.
+     * The ID of the tutorial music track, automatically unlocked on start.
      */
     public static final int TUTORIAL_MUSIC = 62;
+
     /**
-     * The default music id.
+     * The ID of the default music track played if no other is selected.
      */
     public static final int DEFAULT_MUSIC_ID = 76;
+
+    /**
+     * The configuration IDs used to send unlock state to the client interface.
+     */
     private static final int[] CONFIG_IDS = {20, 21, 22, 23, 24, 25, 298, 311, 346, 414, 464, 598, 662, 721, 906, 1009, 1104, 1136, 1180, 1202};
 
+    /**
+     * The player this music player is associated with.
+     */
     private final Player player;
+
+    /**
+     * The map of unlocked music tracks, keyed by their index.
+     */
     private final HashMap<Integer, MusicEntry> unlocked;
+
+    /**
+     * The ID of the currently playing music track.
+     */
     private int currentMusicId;
+
+    /**
+     * Indicates whether a track is currently playing.
+     */
     private boolean playing;
+
+    /**
+     * Indicates whether music looping is enabled.
+     */
     private boolean looping;
 
     /**
-     * Instantiates a new Music player.
+     * Constructs a new {@code MusicPlayer} for the specified player.
      *
-     * @param player the player
+     * @param player the player whose music this class manages
      */
     public MusicPlayer(Player player) {
         this.player = player;
@@ -45,7 +69,8 @@ public final class MusicPlayer {
     }
 
     /**
-     * Init.
+     * Initializes the music system: refreshes unlock states, enables looping if set,
+     * unlocks tutorial music if needed, plays default track, and handles Air Guitar emote.
      */
     public void init() {
         refreshList();
@@ -68,26 +93,26 @@ public final class MusicPlayer {
     }
 
     /**
-     * Clear unlocked.
+     * Clears all unlocked music tracks.
      */
     public void clearUnlocked() {
         this.unlocked.clear();
     }
 
     /**
-     * Has air guitar boolean.
+     * Checks if the player has unlocked the Air Guitar emote.
      *
-     * @return the boolean
+     * @return true if 200 or all tracks are unlocked, false otherwise.
      */
     public boolean hasAirGuitar() {
         return unlocked.size() >= 200 || unlocked.size() == MusicEntry.getSongs().size();
     }
 
     /**
-     * Has unlocked boolean.
+     * Checks if the given music id has been unlocked by the player.
      *
-     * @param musicId the music id
-     * @return the boolean
+     * @param musicId the ID of the track.
+     * @return true if unlocked, false otherwise.
      */
     public boolean hasUnlocked(int musicId) {
         MusicEntry entry = MusicEntry.forId(musicId);
@@ -95,17 +120,17 @@ public final class MusicPlayer {
     }
 
     /**
-     * Has unlocked index boolean.
+     * Checks if a track index has been unlocked.
      *
-     * @param index the index
-     * @return the boolean
+     * @param index the index to check.
+     * @return true if unlocked, false otherwise.
      */
     public boolean hasUnlockedIndex(int index) {
         return unlocked.containsKey(index);
     }
 
     /**
-     * Refresh list.
+     * Refreshes the client music interface with the current unlock state.
      */
     public void refreshList() {
         int[] values = new int[CONFIG_IDS.length];
@@ -123,7 +148,7 @@ public final class MusicPlayer {
     }
 
     /**
-     * Play default.
+     * Plays the default music track.
      */
     public void playDefault() {
         MusicEntry entry = MusicEntry.forId(DEFAULT_MUSIC_ID);
@@ -133,7 +158,7 @@ public final class MusicPlayer {
     }
 
     /**
-     * Replay.
+     * Replays the currently selected music track.
      */
     public void replay() {
         MusicEntry entry = MusicEntry.forId(currentMusicId);
@@ -143,9 +168,9 @@ public final class MusicPlayer {
     }
 
     /**
-     * Play.
+     * Plays the specified music track.
      *
-     * @param entry the entry
+     * @param entry the track to play.
      */
     public void play(MusicEntry entry) {
         if (!looping || currentMusicId != entry.getId()) {
@@ -157,19 +182,10 @@ public final class MusicPlayer {
     }
 
     /**
-     * Unlock.
+     * Unlocks a music track by id and plays it if specified.
      *
-     * @param id the id
-     */
-    public void unlock(int id) {
-        unlock(id, true);
-    }
-
-    /**
-     * Unlock.
-     *
-     * @param id   the id
-     * @param play the play
+     * @param id   the id of the track.
+     * @param play whether to immediately play the track.
      */
     public void unlock(int id, boolean play) {
         MusicEntry entry = MusicEntry.forId(id);
@@ -195,7 +211,16 @@ public final class MusicPlayer {
     }
 
     /**
-     * Tick.
+     * Unlocks a music track by id and plays it.
+     *
+     * @param id the id of the track to unlock.
+     */
+    public void unlock(int id) {
+        unlock(id, true);
+    }
+
+    /**
+     * Called periodically to recheck music playback.
      */
     public void tick() {
         if (GameWorld.getTicks() % 20 == 0) {
@@ -210,28 +235,33 @@ public final class MusicPlayer {
     }
 
     /**
-     * Toggle looping.
+     * Toggles the looping state of music playback.
      */
     public void toggleLooping() {
         looping = !looping;
         setVarp(player, 19, looping ? 1 : 0);
     }
 
+    /**
+     * Checks if music is currently playing.
+     *
+     * @return true if a track is playing, false otherwise
+     */
     private boolean isMusicPlaying() {
         return currentMusicId > 0 && playing;
     }
 
     /**
-     * Gets unlocked.
+     * Gets the map of unlocked music entries.
      *
-     * @return the unlocked
+     * @return the unlocked entries
      */
     public HashMap<Integer, MusicEntry> getUnlocked() {
         return unlocked;
     }
 
     /**
-     * Gets current music id.
+     * Gets the currently playing music track id.
      *
      * @return the current music id
      */
@@ -240,45 +270,45 @@ public final class MusicPlayer {
     }
 
     /**
-     * Sets current music id.
+     * Sets the currently playing music track ID.
      *
-     * @param currentMusicId the current music id
+     * @param currentMusicId the new music ID
      */
     public void setCurrentMusicId(int currentMusicId) {
         this.currentMusicId = currentMusicId;
     }
 
     /**
-     * Is playing boolean.
+     * Checks if a music track is currently playing.
      *
-     * @return the boolean
+     * @return true if a track is playing, false otherwise
      */
     public boolean isPlaying() {
         return playing;
     }
 
     /**
-     * Sets playing.
+     * Sets whether a music track is playing.
      *
-     * @param playing the playing
+     * @param playing true if playing, false if not
      */
     public void setPlaying(boolean playing) {
         this.playing = playing;
     }
 
     /**
-     * Is looping boolean.
+     * Gets the looping state of music playback.
      *
-     * @return the boolean
+     * @return true if looping is enabled, false otherwise
      */
     public boolean isLooping() {
         return looping;
     }
 
     /**
-     * Sets looping.
+     * Sets the looping state of music playback.
      *
-     * @param looping the looping
+     * @param looping true to enable looping, false to disable
      */
     public void setLooping(boolean looping) {
         this.looping = looping;
