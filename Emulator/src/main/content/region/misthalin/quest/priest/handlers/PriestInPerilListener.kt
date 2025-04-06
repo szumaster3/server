@@ -47,15 +47,6 @@ class PriestInPerilListener : InteractionListener {
             return@on true
         }
 
-        on(Scenery.GATE_3445, IntType.SCENERY, "open") { player, node ->
-            if (getQuestStage(player, Quests.PRIEST_IN_PERIL) < 17) {
-                sendMessage(player, "The door is locked shut.")
-                return@on false
-            }
-            DoorActionHandler.handleDoor(player, node.asScenery())
-            return@on true
-        }
-
         /*
          * Handles Paterdomus Temple doors interactions.
          */
