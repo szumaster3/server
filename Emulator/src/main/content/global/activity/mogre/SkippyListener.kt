@@ -8,10 +8,10 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 class SkippyListener : InteractionListener {
-    private val SKIPPY_NPC_WRAPPER_IDS = intArrayOf(2795, 2796, 2797, 2798, 2799)
+    private val skippyNPCs = intArrayOf(2795, 2796, 2797, 2798, 2799)
 
     override fun defineListeners() {
-        on(SKIPPY_NPC_WRAPPER_IDS, IntType.NPC, "sober-up", "talk-to") { player, node ->
+        on(skippyNPCs, IntType.NPC, "sober-up", "talk-to") { player, node ->
             if (inBorders(player, SkippyUtils.TUTORIAL_ISLAND)) {
                 openDialogue(player, SkippyTutorialDialogue())
                 return@on true
@@ -20,7 +20,7 @@ class SkippyListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.FORLORN_BOOT_6663, *SKIPPY_NPC_WRAPPER_IDS) { player, used, _ ->
+        onUseWith(IntType.NPC, Items.FORLORN_BOOT_6663, *skippyNPCs) { player, used, _ ->
             if (removeItem(player, used.asItem())) {
                 sendNPCDialogue(player, NPCs.SKIPPY_2796, "Thanks, now I have two right boots!")
             } else {
@@ -29,7 +29,7 @@ class SkippyListener : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, Items.BUCKET_OF_WATER_1929, *SKIPPY_NPC_WRAPPER_IDS) { player, used, _ ->
+        onUseWith(IntType.NPC, Items.BUCKET_OF_WATER_1929, *skippyNPCs) { player, used, _ ->
             if (getVarbit(player, SkippyUtils.SKIPPY_VARBIT) > 1 && used.id == 1929) {
                 sendPlayerDialogue(
                     player,

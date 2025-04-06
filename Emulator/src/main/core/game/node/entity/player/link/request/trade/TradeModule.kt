@@ -271,13 +271,13 @@ class TradeModule(
             target!!.packetDispatch.sendMessage(
                 "Other player doesn't have enough space in their inventory for this trade.",
             )
-            player!!.packetDispatch.sendMessage("You don't have enough inventory space for this.")
+            player!!.packetDispatch.sendMessage("You don't have enough space in your inventory for this trade.")
             hasSpace = false
         } else if (!target!!.inventory.hasSpaceFor(container)) {
             player!!.packetDispatch.sendMessage(
                 "Other player doesn't have enough space in their inventory for this trade.",
             )
-            target!!.packetDispatch.sendMessage("You don't have enough inventory space for this.")
+            target!!.packetDispatch.sendMessage("You don't have enough space in your inventory for this trade.")
             hasSpace = false
         }
         if (!hasSpace) {

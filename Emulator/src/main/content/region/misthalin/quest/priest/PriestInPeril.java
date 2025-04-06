@@ -173,7 +173,6 @@ public class PriestInPeril extends Quest {
     @Override
     public void finish(Player player) {
         super.finish(player);
-        player.getGameAttributes().removeAttribute("priest-in-peril:rune");
         player.getPacketDispatch().sendString("1 Quest Point", 277, 8 + 2);
         player.getPacketDispatch().sendString("1406 Prayer XP", 277, 9 + 2);
         player.getPacketDispatch().sendString("Wolfbane dagger", 277, 10 + 2);

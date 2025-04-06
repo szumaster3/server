@@ -1,6 +1,6 @@
 package content.region.misc.dialogue.mosle
 
-import core.api.inInventory
+import content.minigame.troublebrewing.MosleUtils
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -8,7 +8,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
@@ -17,7 +16,7 @@ class CharleyDialogue(
 ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+        if (!MosleUtils.canUnderstandPirateLanguage(player)) {
             player(FaceAnim.FRIENDLY, "Hello!")
         } else {
             npc(FaceAnim.FRIENDLY, "I got fish, you got gold?").also { stage = 10 }

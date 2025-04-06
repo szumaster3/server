@@ -8,7 +8,8 @@ const val GREEN = "<col=66ff33>"
 const val BLUE = "<col=0000ff>"
 const val PURPLE = "<col=cc00ff>"
 const val WHITE = "<col=ffffff>"
-
+// TODO Find correct: https://imgur.com/8lI2yBx
+// const val BROWN = "<col=6f501f>"
 const val DARK_RED = "<col=8A0808>"
 const val DARK_ORANGE = "<col=ab7000>"
 const val DARK_YELLOW = "<col=a6a300>"

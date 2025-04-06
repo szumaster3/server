@@ -1,8 +1,9 @@
 package content.region.misthalin.quest.priest.dialogue
 
+import content.data.GameAttributes
 import content.region.morytania.quest.druidspirit.DrezelDialogueFile
-import core.api.hasAnItem
-import core.api.openDialogue
+import core.api.*
+import core.api.quest.finishQuest
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -33,9 +34,7 @@ class DrezelMonumentDialogue(
         }
         if (quest.getStage(player) == 18) {
             stage =
-                if (player.inventory.contains(Items.RUNE_ESSENCE_1436, 1) ||
-                    player.inventory.contains(Items.PURE_ESSENCE_7936, 1)
-                ) {
+                if (anyInInventory(player, Items.RUNE_ESSENCE_1436, Items.PURE_ESSENCE_7936)) {
                     player(FaceAnim.HALF_GUILTY, "I brought you some Rune Essence.")
                     100
                 } else {
@@ -203,7 +202,7 @@ class DrezelMonumentDialogue(
             120 -> {
                 npc(
                     FaceAnim.HALF_GUILTY,
-                    "I need " + player.gameAttributes.getAttribute("priest-in-peril:rune", 50) + " more.",
+                    "I need " + getAttribute(player, "${GameAttributes.QUEST_PRIEST_IN_PERIL}:rune", 50) + " more.",
                 )
                 stage = 121
             }
@@ -215,50 +214,38 @@ class DrezelMonumentDialogue(
             }
 
             101 -> {
-                var amt =
-                    if (player.inventory.contains(
-                            Items.RUNE_ESSENCE_1436,
-                            1,
-                        )
-                    ) {
-                        player.inventory.getAmount(Items.RUNE_ESSENCE_1436)
-                    } else {
-                        player.inventory.getAmount(
-                            Items.PURE_ESSENCE_7936,
-                        )
-                    }
-                player.inventory.remove(
-                    if (player.inventory.contains(
-                            Items.RUNE_ESSENCE_1436,
-                            1,
-                        )
-                    ) {
-                        Item(Items.RUNE_ESSENCE_1436, amt)
-                    } else {
-                        Item(Items.PURE_ESSENCE_7936, amt)
-                    },
-                )
-                val runes = player.gameAttributes.getAttribute("priest-in-peril:rune", 50)
-                if (runes > amt) {
-                    amt = runes - amt
+                val requiredEssences = 50
+                val amountBrought = getAttribute(player, "${GameAttributes.QUEST_PRIEST_IN_PERIL}:rune", 0)
+                val remaining = (requiredEssences - amountBrought).coerceAtLeast(0)
+
+                val runeEssence = player.inventory.getAmount(Items.RUNE_ESSENCE_1436)
+                val pureEssence = player.inventory.getAmount(Items.PURE_ESSENCE_7936)
+                val amount = runeEssence + pureEssence
+
+                if (amount == 0 || remaining == 0) {
+                    return true
                 }
-                if (amt > runes) {
-                    amt = 0
+
+                val left = minOf(remaining, amount)
+                var remove = left
+
+                val removeRune = minOf(runeEssence, remove)
+                val removePure = minOf(pureEssence, remove - removeRune)
+
+                if (removeRune > 0) {
+                    player.inventory.remove(Item(Items.RUNE_ESSENCE_1436, removeRune))
                 }
-                if (amt == runes) {
-                    amt = amt - runes
+                if (removePure > 0) {
+                    player.inventory.remove(Item(Items.PURE_ESSENCE_7936, removePure))
                 }
-                if (amt < 0) {
-                    amt = 0
-                }
-                player.gameAttributes.setAttribute("/save:priest-in-peril:rune", amt)
-                if (player.gameAttributes.getAttribute("priest-in-peril:rune", 50) <= 0) {
-                    npc(
-                        FaceAnim.HAPPY,
-                        "Excellent! That should do it! I will bless these stones",
-                        "and place them within the well, and Misthalin should be",
-                        "protected once more!",
-                    )
+
+                val total = amountBrought + left
+                setAttribute(player, "${GameAttributes.QUEST_PRIEST_IN_PERIL}:rune", total)
+
+                sendMessage(player, "You give the priest your blank runes.")
+
+                if (total >= requiredEssences) {
+                    npc(FaceAnim.HAPPY, "Excellent! That should do it! I will bless these stones", "and place them within the well, and Misthalin should be", "protected once more!")
                     stage = 152
                 } else {
                     end()
@@ -286,7 +273,7 @@ class DrezelMonumentDialogue(
             }
 
             154 -> {
-                quest.finish(player)
+                finishQuest(player, Quests.PRIEST_IN_PERIL)
                 end()
             }
 

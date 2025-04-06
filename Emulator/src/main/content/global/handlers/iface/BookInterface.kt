@@ -5,6 +5,58 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import org.rs.consts.Sounds
 
+/**
+ * Book Interface.
+ *
+ * Example usage:
+ * ```
+ * on(Items.GLASSBLOWING_BOOK_11656, IntType.ITEM, "read") { player, _ ->
+ *             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+ *             return@on true
+ *         }
+ * ```
+ * Example model set:
+ * ```
+ * BookInterface.setModelOnPage(
+ *             player,
+ *             1, // PAGE SET
+ *             BUCKET_MODEL,
+ *             INTERFACE_ID,
+ *             BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[3], // INDEX
+ *             BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[3], // INDEX
+ *             500, // ZOOM
+ *             200, // PITCH
+ *             0    // YAW
+ *         )
+ * ```
+ *
+ * Example colors:
+ * ```
+ * core.tools.[COLOR]
+ *
+ * const val BLACK = "<col=000000>"
+ * const val RED = "<col=ff0000>"
+ * const val ORANGE = "<col=ff6600>"
+ * const val YELLOW = "<col=ffff00>"
+ * const val GREEN = "<col=66ff33>"
+ * const val BLUE = "<col=0000ff>"
+ * const val PURPLE = "<col=cc00ff>"
+ * const val WHITE = "<col=ffffff>"
+ *
+ * const val DARK_RED = "<col=8A0808>"
+ * const val DARK_ORANGE = "<col=ab7000>"
+ * const val DARK_YELLOW = "<col=a6a300>"
+ * const val DARK_GREEN = "<col=007d0c>"
+ * const val DARK_BLUE = "<col=08088A>"
+ * const val DARK_PURPLE = "<col=734a75>"
+ * ```
+ *
+ * In-game command to view models `::models`
+ *
+ * Example book: [Ultimate Guide to Glassblowing][content.global.handlers.item.book.guide.GlassblowingGuide]
+ *
+ * @see [core.game.system.command.sets.ModelViewerCommandSet]
+ */
 class BookInterface : InterfaceListener {
     companion object {
         const val CALLBACK_ATTRIBUTE = "bookInterfaceCallback"
@@ -14,185 +66,52 @@ class BookInterface : InterfaceListener {
         const val FANCY_BOOK_2_27 = 27
         const val FANCY_BOOK_3_49 = 49
 
-        val FANCY_BOOK_26_LINE_IDS =
-            arrayOf(
-                101,
-                65,
-                66,
-                97,
-                68,
-                69,
-                70,
-                71,
-                72,
-                73,
-                74,
-                75,
-                76,
-                77,
-                78,
-                79,
-                80,
-                81,
-                82,
-                83,
-                84,
-                85,
-                86,
-                87,
-                88,
-                89,
-                90,
-                91,
-                92,
-                93,
-                94,
-                95,
-                96,
-            )
-        val FANCY_BOOK_2_27_LINE_IDS =
-            arrayOf(
-                163,
-                5,
-                6,
-                38,
-                39,
-                40,
-                41,
-                42,
-                43,
-                44,
-                45,
-                46,
-                47,
-                48,
-                49,
-                50,
-                51,
-                52,
-                53,
-                54,
-                55,
-                56,
-                57,
-                58,
-                59,
-                60,
-                61,
-                62,
-                63,
-                64,
-                65,
-                66,
-                67,
-            )
-        val FANCY_BOOK_3_49_LINE_IDS =
-            arrayOf(6, 77, 78, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76)
-        val FANCY_BOOK_26_BUTTON_IDS = arrayOf(61, 63)
-        val FANCY_BOOK_2_27_BUTTON_IDS =
-            arrayOf(
-                1,
-                3,
-                159,
-                100,
-                102,
-                104,
-                106,
-                108,
-                110,
-                112,
-                114,
-                116,
-                118,
-                120,
-                122,
-                124,
-                126,
-                128,
-                130,
-                132,
-                134,
-                136,
-                138,
-                140,
-                142,
-                144,
-                146,
-                148,
-                150,
-                152,
-                154,
-                156,
-                158,
-            )
-        val FANCY_BOOK_3_49_BUTTON_IDS = arrayOf(51, 53)
-        val FANCY_BOOK_2_27_IMAGE_ENABLE_DRAW_IDS =
-            arrayOf(
-                9,
-                11,
-                13,
-                15,
-                17,
-                19,
-                21,
-                23,
-                25,
-                27,
-                29,
-                31,
-                33,
-                35,
-                37,
-                69,
-                71,
-                73,
-                75,
-                77,
-                79,
-                81,
-                83,
-                85,
-                87,
-                89,
-                91,
-                93,
-                95,
-                97,
-            )
-        val FANCY_BOOK_2_27_IMAGE_DRAW_IDS =
-            arrayOf(
-                10,
-                12,
-                14,
-                16,
-                18,
-                20,
-                22,
-                24,
-                26,
-                28,
-                30,
-                32,
-                34,
-                36,
-                68,
-                70,
-                72,
-                74,
-                76,
-                78,
-                80,
-                82,
-                84,
-                86,
-                88,
-                90,
-                92,
-                94,
-                96,
-                98,
-            )
+        val FANCY_BOOK_26_LINE_IDS = arrayOf(101, 65, 66, 97, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96)
+        val FANCY_BOOK_2_27_LINE_IDS = arrayOf(163, 5, 6, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67)
 
+        val FANCY_BOOK_26_IMAGE_ENABLE_DRAW_IDS = arrayOf(
+            // Left.  [Index 0-14]
+            1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,
+            // Right. [Index 15-29]
+            31,33,35,37,39,41,43,45,47,49,51,53,55,57,59
+        )
+
+        val FANCY_BOOK_26_IMAGE_DRAW_IDS = arrayOf(
+            // Left.  [Index 0-14]
+            2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
+            // Right. [Index 15-29]
+            32,34,36,38,40,42,44,46,48,50,52,54,56,58,60
+        )
+
+        val FANCY_BOOK_3_49_LINE_IDS = arrayOf(6, 77, 78, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76)
+        val FANCY_BOOK_26_BUTTON_IDS = arrayOf(61, 63)
+        val FANCY_BOOK_2_27_BUTTON_IDS = arrayOf(1, 3, 159, 100, 102, 104, 106, 108, 110, 112, 114, 116, 118, 120, 122, 124, 126, 128, 130, 132, 134, 136, 138, 140, 142, 144, 146, 148, 150, 152, 154, 156, 158)
+        val FANCY_BOOK_3_49_BUTTON_IDS = arrayOf(51, 53)
+
+        val FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS = arrayOf(
+            // Left.  [Index 0-10]
+            7,9,11,13,15,17,19,21,23,25,27,
+            // Right. [Index 11-20]
+            29,31,33,35,37,39,41,43,45,47,49
+        )
+
+        val FANCY_BOOK_3_49_IMAGE_DRAW_IDS = arrayOf(
+            // Left.
+            8,10,12,14,16,18,20,22,24,26,28,
+            // Right.
+            30,32,34,36,38,40,42,44,46,48,50
+        )
+
+        val FANCY_BOOK_2_27_IMAGE_ENABLE_DRAW_IDS = arrayOf(9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97)
+        val FANCY_BOOK_2_27_IMAGE_DRAW_IDS = arrayOf(10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 96, 98)
+
+        /**
+         * Opens a book interface with a given callback for handling pagination or button clicks.
+         *
+         * @param player The player opening the book.
+         * @param bookComponent The book component id.
+         * @param displayCallback Callback invoked to populate or update the book's content.
+         */
         fun openBook(
             player: Player,
             bookComponent: Int,
@@ -211,7 +130,15 @@ class BookInterface : InterfaceListener {
             displayCallback.invoke(player, 0, 0)
         }
 
-        @Suppress("UNUSED_PARAMETER")
+        /**
+         * Sets up the content of a fancy book interface for the current page.
+         *
+         * @param player The player viewing the book.
+         * @param bookComponent The id of the book interface.
+         * @param title The title to be displayed on the book.
+         * @param contents Array of [PageSet] objects representing the pages in the book.
+         * @param hasPagination Whether to show pagination buttons.
+         */
         fun pageSetup(
             player: Player,
             bookComponent: Int,
@@ -222,41 +149,9 @@ class BookInterface : InterfaceListener {
             val currentPage = getAttribute(player, CURRENT_PAGE_ATTRIBUTE, 0)
 
             when (bookComponent) {
-                FANCY_BOOK_26 ->
-                    setupFancyBook(
-                        player,
-                        FANCY_BOOK_26,
-                        FANCY_BOOK_26_LINE_IDS,
-                        FANCY_BOOK_26_BUTTON_IDS,
-                        title,
-                        currentPage,
-                        contents,
-                        hasPagination,
-                    )
-
-                FANCY_BOOK_2_27 ->
-                    setupFancyBook(
-                        player,
-                        FANCY_BOOK_2_27,
-                        FANCY_BOOK_2_27_LINE_IDS,
-                        FANCY_BOOK_2_27_BUTTON_IDS,
-                        title,
-                        currentPage,
-                        contents,
-                        hasPagination,
-                    )
-
-                FANCY_BOOK_3_49 ->
-                    setupFancyBook(
-                        player,
-                        FANCY_BOOK_3_49,
-                        FANCY_BOOK_3_49_LINE_IDS,
-                        FANCY_BOOK_3_49_BUTTON_IDS,
-                        title,
-                        currentPage,
-                        contents,
-                        hasPagination,
-                    )
+                FANCY_BOOK_26 -> setupFancyBook(player, FANCY_BOOK_26, FANCY_BOOK_26_LINE_IDS, FANCY_BOOK_26_BUTTON_IDS, title, currentPage, contents, hasPagination)
+                FANCY_BOOK_2_27 -> setupFancyBook(player, FANCY_BOOK_2_27, FANCY_BOOK_2_27_LINE_IDS, FANCY_BOOK_2_27_BUTTON_IDS, title, currentPage, contents, hasPagination)
+                FANCY_BOOK_3_49 -> setupFancyBook(player, FANCY_BOOK_3_49, FANCY_BOOK_3_49_LINE_IDS, FANCY_BOOK_3_49_BUTTON_IDS, title, currentPage, contents, hasPagination)
             }
         }
 
@@ -276,19 +171,26 @@ class BookInterface : InterfaceListener {
 
             if (hasPagination) {
                 setPagination(
-                    player,
-                    bookComponent,
-                    lineIds,
-                    buttonIds,
-                    currentPage,
-                    contents.size,
-                    contents[currentPage].pages.size == 1,
+                    player = player,
+                    componentId = bookComponent,
+                    bookLineIds = lineIds,
+                    bookButtonIds = buttonIds,
+                    currentPage = currentPage,
+                    totalPages = contents.size,
+                    hasRightPage = contents[currentPage].pages.size == 1,
                 )
             }
 
             setPageContent(player, bookComponent, lineIds, buttonIds, currentPage, contents)
         }
 
+        /**
+         * Clears all the text lines on a book interface.
+         *
+         * @param player The player viewing the book.
+         * @param componentId The component id of the book interface (26,27,49).
+         * @param bookLineIds Array of child IDs representing lines to clear.
+         */
         fun clearBookLines(
             player: Player,
             componentId: Int,
@@ -298,6 +200,13 @@ class BookInterface : InterfaceListener {
             bookLineIds.forEach { player.packetDispatch.sendString("", componentId, it) }
         }
 
+        /**
+         * Clears (hides) all interactive buttons on the book interface.
+         *
+         * @param player The player viewing the book.
+         * @param componentId The interface component id (26,27,49).
+         * @param bookButtonIds The IDs of buttons to hide.
+         */
         fun clearButtons(
             player: Player,
             componentId: Int,
@@ -306,6 +215,14 @@ class BookInterface : InterfaceListener {
             bookButtonIds.forEach { player.packetDispatch.sendInterfaceConfig(componentId, it, true) }
         }
 
+        /**
+         * Sets the book's title on the first line.
+         *
+         * @param player The player viewing the book.
+         * @param componentId The interface id  (26,27,49).
+         * @param bookLineIds Array of text line IDs, where the first is used for the title.
+         * @param title The title string to display.
+         */
         fun setTitle(
             player: Player,
             componentId: Int,
@@ -315,6 +232,17 @@ class BookInterface : InterfaceListener {
             player.packetDispatch.sendString(title, componentId, bookLineIds[0])
         }
 
+        /**
+         * Sets up the page numbers and enables/disables pagination buttons.
+         *
+         * @param player The player viewing the book.
+         * @param componentId The id of the book interface.
+         * @param bookLineIds Text line ids.
+         * @param bookButtonIds Button IDs for pagination.
+         * @param currentPage The current page number.
+         * @param totalPages The total number of available pages.
+         * @param hasRightPage Whether the current page has a right-hand page (single-page scenario).
+         */
         fun setPagination(
             player: Player,
             componentId: Int,
@@ -341,6 +269,16 @@ class BookInterface : InterfaceListener {
             }
         }
 
+        /**
+         * Displays the page content based on the current page.
+         *
+         * @param player The player viewing the book.
+         * @param componentId The book interface component id.
+         * @param bookLineIds The line ids to update with text.
+         * @param bookButtonIds The button ids to enable/show.
+         * @param currentPage The page number being rendered.
+         * @param contents The entire book content, divided by `PageSet`.
+         */
         fun setPageContent(
             player: Player,
             componentId: Int,
@@ -362,6 +300,19 @@ class BookInterface : InterfaceListener {
             }
         }
 
+        /**
+         * Displays a model on a specific book page.
+         *
+         * @param player The player viewing the book.
+         * @param pageSet The page set index the model belongs to.
+         * @param modelId The model id to render.
+         * @param componentId The book interface component id.
+         * @param enableLineId The index of the array line to toggle visibility.
+         * @param drawLineId The index of the array line to draw the model on.
+         * @param zoom Zoom factor of the model.
+         * @param pitch Pitch rotation of the model.
+         * @param yaw Yaw rotation of the model.
+         */
         fun setModelOnPage(
             player: Player,
             pageSet: Int,
@@ -387,6 +338,13 @@ class BookInterface : InterfaceListener {
             totalPages: Int,
         ): Boolean = pageNum == totalPages - 1
 
+        /**
+         * Changes the page by increment and invokes the callback to refresh content.
+         *
+         * @param player The player viewing the book.
+         * @param increment `+1` for next page, `-1` for previous page.
+         * @param buttonId The button id that triggered the change.
+         */
         private fun changePageAndCallback(
             player: Player,
             increment: Int,
@@ -402,44 +360,29 @@ class BookInterface : InterfaceListener {
     }
 
     override fun defineInterfaceListeners() {
+
         on(FANCY_BOOK_26) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                FANCY_BOOK_26_BUTTON_IDS[0] -> {
-                    changePageAndCallback(player, -1, buttonID)
-                }
-
-                FANCY_BOOK_26_BUTTON_IDS[1] -> {
-                    changePageAndCallback(player, 1, buttonID)
-                }
-
+                FANCY_BOOK_26_BUTTON_IDS[0] -> changePageAndCallback(player, -1, buttonID)
+                FANCY_BOOK_26_BUTTON_IDS[1] -> changePageAndCallback(player, 1, buttonID)
                 else -> (changePageAndCallback(player, 0, buttonID))
             }
             return@on true
         }
+
         on(FANCY_BOOK_2_27) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                FANCY_BOOK_2_27_BUTTON_IDS[0] -> {
-                    changePageAndCallback(player, -1, buttonID)
-                }
-
-                FANCY_BOOK_2_27_BUTTON_IDS[1] -> {
-                    changePageAndCallback(player, 1, buttonID)
-                }
-
+                FANCY_BOOK_2_27_BUTTON_IDS[0] -> changePageAndCallback(player, -1, buttonID)
+                FANCY_BOOK_2_27_BUTTON_IDS[1] -> changePageAndCallback(player, 1, buttonID)
                 else -> (changePageAndCallback(player, 0, buttonID))
             }
             return@on true
         }
+
         on(FANCY_BOOK_3_49) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                FANCY_BOOK_3_49_BUTTON_IDS[0] -> {
-                    changePageAndCallback(player, -1, buttonID)
-                }
-
-                FANCY_BOOK_3_49_BUTTON_IDS[1] -> {
-                    changePageAndCallback(player, 1, buttonID)
-                }
-
+                FANCY_BOOK_3_49_BUTTON_IDS[0] -> changePageAndCallback(player, -1, buttonID)
+                FANCY_BOOK_3_49_BUTTON_IDS[1] -> changePageAndCallback(player, 1, buttonID)
                 else -> (changePageAndCallback(player, 0, buttonID))
             }
             return@on true
@@ -447,19 +390,12 @@ class BookInterface : InterfaceListener {
     }
 }
 
-class PageSet(
-    vararg pages: Page,
-) {
+class PageSet(vararg pages: Page) {
     val pages: Array<Page> = pages as Array<Page>
 }
 
-class Page(
-    vararg lines: BookLine,
-) {
+class Page(vararg lines: BookLine) {
     val lines: Array<BookLine> = lines as Array<BookLine>
 }
 
-class BookLine(
-    val message: String,
-    val child: Int,
-)
+class BookLine(val message: String, val child: Int, )

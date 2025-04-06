@@ -11,118 +11,154 @@ import core.game.world.GameWorld
 import org.rs.consts.Items
 
 class GlassblowingGuide : InteractionListener {
+
     /*
-     * The glassblowing book is a book that players can obtain from the
-     * reception at the Observatory north of Castle Wars.
+     * The Glassblowing book is an item that players can obtain from
+     * the reception at the Observatory north of Castle Wars, or from
+     * bookcase on the first floor of the house near Fritz's on Entrana.
      */
 
     companion object {
         private const val TITLE = "Ultimate Guide to Glassblowing"
-        private val CONTENTS =
-            arrayOf(
-                PageSet(
-                    Page(
-                        BookLine("<col=08088A>Ultimate Guide to", 55),
-                        BookLine("<col=08088A>Glassblowing Author:", 56),
-                        BookLine("<col=08088A>Fritz the Glassblower", 57),
-                        BookLine("I can tell you now, the", 59),
-                        BookLine("art of creating glass", 60),
-                        BookLine("has long been a valued", 61),
-                        BookLine("trade in " + GameWorld.settings!!.name + ".", 62),
-                        BookLine("Not many could get by", 63),
-                        BookLine("without the use of some", 64),
-                        BookLine("item made from this", 65),
-                    ),
-                    Page(
-                        BookLine("marvelous substance. It's", 66),
-                        BookLine("within this book that", 67),
-                        BookLine("we cover the basics", 68),
-                        BookLine("of the art, in a hope", 69),
-                        BookLine("to get you hooked on", 70),
-                        BookLine("this popular pass-time", 71),
-                        BookLine("and trade. To start", 72),
-                        BookLine("with, you will need", 73),
-                        BookLine("a few essential items:", 74),
-                        BookLine("An empty bucket.", 76),
-                    ),
+
+        private const val BUCKET_MODEL = 2397
+        private const val GLASSBLOWING_PIPE_MODEL = 2570
+        private const val SEAWEED_MODEL = 2370
+        private const val SODA_ASH_MODEL = 2742
+
+        private val CONTENTS = arrayOf(
+            PageSet(
+                Page(
+                    BookLine("<col=08088A>Ultimate Guide to</col>", 55),
+                    BookLine("<col=08088A>Glassblowing</col>", 56),
+                    BookLine("", 57),
+                    BookLine("Author: Fritz the", 58),
+                    BookLine("Glassblower", 59),
+                    BookLine("", 60),
+                    BookLine("I can tell you now, the", 61),
+                    BookLine("art of creating glass has", 62),
+                    BookLine("long been a valued trade", 63),
+                    BookLine("in ${GameWorld.settings?.name}. Not many", 64),
+                    BookLine("could get by without the", 65),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("These can be purchased", 55),
-                        BookLine("from the majority of", 56),
-                        BookLine("general stores and", 57),
-                        BookLine("are required to carry", 58),
-                        BookLine("the sand you will need", 59),
-                        BookLine("to make glass.", 60),
-                        BookLine("<col=08088A>A glassblowing pipe", 62),
-                        BookLine("found on Entrana or often", 63),
-                        BookLine("just north-west of the", 64),
-                        BookLine("Ranging Guild. As its", 65),
-                    ),
-                    Page(
-                        BookLine("name suggests, this", 66),
-                        BookLine("is used to blow air", 67),
-                        BookLine("into molten glass.", 68),
-                        BookLine("<col=08088A>Seaweed", 70),
-                        BookLine("can be found on the", 71),
-                        BookLine("shore in many places,", 72),
-                        BookLine("but it is also a frequent", 73),
-                        BookLine("find when Fishing with", 74),
-                        BookLine("nets. This you will", 75),
-                        BookLine("need to create soda", 76),
-                    ),
+                Page(
+                    BookLine("use of some item made", 66),
+                    BookLine("from this marvelous", 67),
+                    BookLine("substance.", 68),
+                    BookLine("It's within this book that", 70),
+                    BookLine("we cover the basics of the", 71),
+                    BookLine("art, in a hope to get you", 72),
+                    BookLine("hooked on this popular", 73),
+                    BookLine("pass-time and trade.", 74),
+                    BookLine("To start with, you will", 75),
+                    BookLine("need a few essential", 76),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("ash - an important", 55),
-                        BookLine("ingredient to the process.", 56),
-                        BookLine("<col=08088A>Soda ash", 58),
-                        BookLine("Made by burning", 59),
-                        BookLine("seaweed, you will need", 60),
-                        BookLine("this to make glass.", 61),
-                        BookLine("Other than making it", 62),
-                        BookLine("yourself, you can purchase", 63),
-                        BookLine("from other budding", 64),
-                        BookLine("glassblowers.", 65),
-                    ),
-                    Page(
-                        BookLine("With these items you are", 66),
-                        BookLine("ready to begin! You'll", 67),
-                        BookLine("need to find a sandpit", 68),
-                        BookLine("and there are a few", 69),
-                        BookLine("dotted around " + GameWorld.settings!!.name + ".", 70),
-                        BookLine("Try the isle of Entrana", 71),
-                        BookLine("or Yanille, for example.", 72),
-                        BookLine("Use your bucket on the", 73),
-                        BookLine("sandpit to fill it up.", 74),
-                        BookLine("Next, you need to find", 75),
-                        BookLine("your way to a furnace.", 76),
-                    ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("items:", 55),
+                    /*
+                     * BUCKET MODEL (56-58).
+                     */
+                    BookLine("    <col=08088A>An empty bucket.</col>", 59),
+                    BookLine("", 60),
+                    BookLine("These can be purchased", 61),
+                    BookLine("from the majority of", 62),
+                    BookLine("general stores and are", 63),
+                    BookLine("required to carry the", 64),
+                    BookLine("sand you will need to", 65),
                 ),
-                PageSet(
-                    Page(
-                        BookLine("Turn your seaweed into", 55),
-                        BookLine("soda ash by using it", 56),
-                        BookLine("on a range before using a", 57),
-                        BookLine("bucket of sand or soda", 58),
-                        BookLine("ash on the furnace to", 59),
-                        BookLine("create molten glass. The", 60),
-                        BookLine("last stage is simply", 61),
-                        BookLine("to use the molten glass", 62),
-                        BookLine("wth your glassblowing", 63),
-                        BookLine("pipe and, depending", 64),
-                    ),
-                    Page(
-                        BookLine("on your level of skill,", 66),
-                        BookLine("you can create a variety", 67),
-                        BookLine("of items.", 68),
-                        BookLine("I hope you enjoyed this", 70),
-                        BookLine("guide, and please keep", 71),
-                        BookLine("an eye out for more", 72),
-                        BookLine("of my titles!", 73),
-                    ),
+                Page(
+                    BookLine("make glass.", 66),
+                    /*
+                     * PIPE MODEL (67-69).
+                     */
+                    BookLine("    <col=08088A>A glassblowing pipe</col>", 70),
+                    BookLine("", 71),
+                    BookLine("found on Entrana or", 72),
+                    BookLine("often just north-west of", 73),
+                    BookLine("the Ranging Guild. As it's", 74),
+                    BookLine("name suggests, this is", 75),
+                    BookLine("used to blow air into", 76),
                 ),
-            )
+            ),
+            PageSet(
+                Page(
+                    BookLine("molten glass.", 55),
+                    /*
+                     * SEAWEED MODEL (56-57).
+                     */
+                    BookLine("         <col=08088A>Seaweed</col>", 59),
+                    BookLine("", 60),
+                    BookLine("Seaweed can be found on", 61),
+                    BookLine("the shore in many places,", 62),
+                    BookLine("but it is also a frequent", 63),
+                    BookLine("find when Fishing with", 64),
+                    BookLine("nets. This you will need", 65),
+                ),
+                Page(
+                    BookLine("to create soda ash - an", 66),
+                    BookLine("important ingredient to", 67),
+                    BookLine("the process.", 68),
+                    /*
+                     * SODA ASH MODEL (69-71).
+                     */
+                    BookLine("         <col=08088A>Soda ash</col>", 72),
+                    BookLine("", 73),
+                    BookLine("Made by burning", 74),
+                    BookLine("seaweed, you will need", 75),
+                    BookLine("this to make glass. Other", 76),
+                ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("than making it yourself,", 55),
+                    BookLine("you can purchase it from", 56),
+                    BookLine("other budding", 57),
+                    BookLine("glassblowers.", 58),
+                    BookLine("", 59),
+                    BookLine("With these items you are", 60),
+                    BookLine("ready to begin! You'll", 61),
+                    BookLine("need to find a sandpit,", 62),
+                    BookLine("and there are a few", 63),
+                    BookLine("dotted around", 64),
+                    BookLine("${GameWorld.settings?.name}. Try the", 65),
+                ),
+                Page(
+                    BookLine("island of Entrana or", 66),
+                    BookLine("Yanille, for example. Use", 67),
+                    BookLine("your bucket on the", 68),
+                    BookLine("sandpit to fill it up.", 69),
+                    BookLine("", 70),
+                    BookLine("Next, you need to find", 71),
+                    BookLine("your way to a furnace.", 72),
+                    BookLine("Turn your seaweed into", 73),
+                    BookLine("soda ash by using it on a", 74),
+                    BookLine("range before using the", 75),
+                    BookLine("bucket of sand or soda", 76),
+                ),
+            ),
+            PageSet(
+                Page(
+                    BookLine("ash on the furnace to", 55),
+                    BookLine("create molten glass.", 56),
+                    BookLine("", 57),
+                    BookLine("The last stage is simply", 58),
+                    BookLine("to use the molten glass", 59),
+                    BookLine("with your glassblowing", 60),
+                    BookLine("pipe and, depending on", 61),
+                    BookLine("your level of skill, you", 62),
+                    BookLine("can create a variety of", 63),
+                    BookLine("items.", 64),
+                ),
+                Page(
+                    BookLine("I hope you enjoyed this", 66),
+                    BookLine("guide, and please keep an", 67),
+                    BookLine("eye out for more of my", 68),
+                    BookLine("titles!", 69),
+                ),
+            ),
+        )
     }
 
     @Suppress("UNUSED_PARAMETER")
@@ -132,6 +168,22 @@ class GlassblowingGuide : InteractionListener {
         buttonID: Int,
     ): Boolean {
         BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
+        /*
+         * Bucket model.
+         */
+        BookInterface.setModelOnPage(player, 1, BUCKET_MODEL, BookInterface.FANCY_BOOK_3_49, BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[3], BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[3], 500, 200, 0)
+        /*
+         * Pipe model.
+         */
+        BookInterface.setModelOnPage(player, 1, GLASSBLOWING_PIPE_MODEL, BookInterface.FANCY_BOOK_3_49, BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[13], BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[13], 600, 200, 100)
+        /*
+         * Seaweed model.
+         */
+        BookInterface.setModelOnPage(player, 2, SEAWEED_MODEL, BookInterface.FANCY_BOOK_3_49, BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[2], BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[2], 900, 500, 100)
+        /*
+         * Soda ash model.
+         */
+        BookInterface.setModelOnPage(player, 2, SODA_ASH_MODEL, BookInterface.FANCY_BOOK_3_49, BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[15], BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[15], 600, 500, 100)
         return true
     }
 

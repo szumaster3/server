@@ -1,5 +1,6 @@
 package content.region.misc.dialogue.mosle
 
+import content.minigame.troublebrewing.MosleUtils
 import core.api.inInventory
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue
@@ -27,7 +28,7 @@ class JoeDialogue(
     ): Boolean {
         when (stage) {
             0 ->
-                if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+                if (!MosleUtils.canUnderstandPirateLanguage(player)) {
                     npcl(
                         FaceAnim.FRIENDLY,
                         "Arr? Be ye wantin' te go on account with our gang o' fillibusters?",

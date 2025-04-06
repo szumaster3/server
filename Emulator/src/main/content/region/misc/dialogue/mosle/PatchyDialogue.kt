@@ -1,5 +1,6 @@
 package content.region.misc.dialogue.mosle
 
+import content.minigame.troublebrewing.MosleUtils
 import core.api.inInventory
 import core.api.openInterface
 import core.game.dialogue.Dialogue
@@ -18,7 +19,7 @@ class PatchyDialogue(
 ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+        if (!MosleUtils.canUnderstandPirateLanguage(player)) {
             npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also {
                 stage = 1
             }

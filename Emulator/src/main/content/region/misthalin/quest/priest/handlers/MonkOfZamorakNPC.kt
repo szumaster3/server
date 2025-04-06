@@ -22,18 +22,14 @@ class MonkOfZamorakNPC(
         vararg objects: Any,
     ): AbstractNPC = MonkOfZamorakNPC(id, location)
 
-    override fun tick() {
-        super.tick()
-    }
-
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
         val p = (killer as Player)
         val quest = p.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
-        if (quest.isStarted(p)) {
+        if (quest.isStarted(p) && p.viewport.region.regionId == 13662) {
             GroundItemManager.create(Item(Items.GOLDEN_KEY_2944, 1), getLocation(), p)
         }
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_OF_ZAMORAK_1046)
+    override fun getIds(): IntArray = intArrayOf(NPCs.MONK_OF_ZAMORAK_1046, NPCs.MONK_OF_ZAMORAK_1045, NPCs.MONK_OF_ZAMORAK_1044)
 }

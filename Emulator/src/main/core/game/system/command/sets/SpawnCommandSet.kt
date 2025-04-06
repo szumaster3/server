@@ -20,9 +20,8 @@ import java.io.File
 
 @Initializable
 class SpawnCommandSet : CommandSet(Privilege.ADMIN) {
-    override fun defineCommands() {
-        val npcLocations = mutableMapOf<Int, MutableList<String>>()
 
+    companion object {
         fun readJsonArrayFromFile(
             filePath: String,
             gson: Gson,
@@ -44,6 +43,9 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN) {
             file.parentFile.mkdirs()
             file.writeText(gson.toJson(jsonArray))
         }
+    }
+    override fun defineCommands() {
+        val npcLocations = mutableMapOf<Int, MutableList<String>>()
 
         define(name = "npc", privilege = Privilege.ADMIN, usage = "Spawns a npc with the given ID") { player, args ->
             if (args.size < 2) {
@@ -84,7 +86,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN) {
                 existingData.add(npcLogEntry)
                 writeJsonArrayToFile(filePath, existingData, gson)
 
-                sendMessage(player, "NPC data logged to $filePath.")
+                sendMessage(player, "NPC data saved to [${core.tools.DARK_RED}$filePath</col>].")
             } catch (e: Exception) {
                 reject(player, "An error occurred while logging NPC data: ${e.message}")
             }

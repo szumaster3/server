@@ -1,5 +1,8 @@
 package core.game.global.action
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
 import content.global.skill.summoning.pet.Pets
 import content.minigame.mta.handlers.ProgressHat.thresholds
 import core.api.*
@@ -13,7 +16,9 @@ import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.system.command.sets.SpawnCommandSet
 import core.game.system.config.ItemConfigParser
+import core.tools.SystemLogger
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
@@ -23,9 +28,9 @@ class DropListener : InteractionListener {
     }
 
     companion object {
-        private val DROP_COINS_SOUND = Sounds.EYEGLO_COIN_10
-        private val DROP_ITEM_SOUND = Sounds.PUT_DOWN_2739
-        private val DESTROY_ITEM_SOUND = Sounds.DESTROY_OBJECT_2381
+        private const val DROP_COINS_SOUND = Sounds.EYEGLO_COIN_10
+        private const val DROP_ITEM_SOUND = Sounds.PUT_DOWN_2739
+        private const val DESTROY_ITEM_SOUND = Sounds.DESTROY_OBJECT_2381
 
         @JvmStatic
         fun drop(
@@ -40,6 +45,29 @@ class DropListener : InteractionListener {
             val option = getUsedOption(player)
             var item = node as? Item ?: return false
             if (option == "drop") {
+                if (player.rights == Rights.ADMINISTRATOR) {
+                    val item = item.id
+                    val location = "{1,${player.location.x},${player.location.y},${player.location.z},100}-"
+
+                    val logs = JsonObject().apply {
+                        addProperty("item_id", item.toString())
+                        addProperty("loc_data", location)
+                    }
+
+                    val logPath = "data/logs/ground_spawns.json"
+                    val gson: Gson = GsonBuilder().setPrettyPrinting().create()
+
+                    try {
+                        val data = SpawnCommandSet.readJsonArrayFromFile(logPath, gson)
+                        data.add(logs)
+                        SpawnCommandSet.writeJsonArrayToFile(logPath, data, gson)
+
+                        sendMessage(player, "ground spawn saved to [${core.tools.DARK_RED}$logPath</col>].")
+                    } catch (e: Exception) {
+                        SystemLogger.logMS("An error occurred while logging item drop: ${e.message}")
+                    }
+                }
+
                 if (Pets.forId(item.id) != null) {
                     player.familiarManager.summon(item, true, true)
                     return true

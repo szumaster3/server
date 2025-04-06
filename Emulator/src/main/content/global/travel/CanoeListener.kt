@@ -27,7 +27,9 @@ class CanoeListener :
     companion object {
         const val CANOE_STATION_VARBIT_ATTRIBUTE = "canoeStationVarbit"
         const val CANOE_SELECTED_ATTRIBUTE = "canoeSelected"
-
+        /*
+         * TODO: send 10217 model on background.
+         */
         const val CANOE_SHAPING_INTERFACE = Components.CANOE_52
         const val CANOE_DESTINATION_INTERFACE = Components.CANOE_STATIONS_MAP_53
         const val CANOE_TRAVEL_INTERFACE = Components.CANOE_TRAVEL_758

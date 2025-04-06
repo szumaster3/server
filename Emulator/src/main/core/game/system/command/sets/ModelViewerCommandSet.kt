@@ -61,7 +61,7 @@ class ModelViewerCommandSet : CommandSet(Privilege.ADMIN) {
             // Attach buttons to setAttributes.
             when (buttonID) {
                 114 -> setAttribute(player, ATTRIBUTE_ZOOM, getAttribute(player, ATTRIBUTE_ZOOM, 700) - 100)
-                116 -> setAttribute(player, ATTRIBUTE_PITCH, getAttribute(player, ATTRIBUTE_PITCH, 0) - 100)
+                116 -> if(getAttribute(player, ATTRIBUTE_PITCH, 0) != 0) setAttribute(player, ATTRIBUTE_PITCH, getAttribute(player, ATTRIBUTE_PITCH, 0) - 100)
                 118 -> setAttribute(player, ATTRIBUTE_YAW, getAttribute(player, ATTRIBUTE_YAW, 0) - 100)
                 122 ->
                     setAttribute(

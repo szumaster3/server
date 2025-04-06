@@ -229,4 +229,8 @@ internal object GameAttributes {
     // Achievements alternative teleportation options.
     const val ATTRIBUTE_VARROCK_ALT_TELE = "/save:diaries:varrock:alttele"
     const val ATTRIBUTE_CAMELOT_ALT_TELE = "/save:diaries:camelot:alttele"
+
+    // Priest in Peril quest.
+
+    const val QUEST_PRIEST_IN_PERIL = "/save:priest_in_peril"
 }

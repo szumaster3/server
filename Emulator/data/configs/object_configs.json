@@ -4124,8 +4124,32 @@
     "ids": "3485,3486,3487,3488"
   },
   {
-    "examine": "A monument to a fallen priest.",
-    "ids": "3493,3494,3495,3496,3497,3498,3499"
+    "examine": "Saradomin is the spark that lights the fire in our hearts.",
+    "ids": "3493"
+  },
+  {
+    "examine": "Saradomin is the light that shines throughout our lives.",
+    "ids": "3494"
+  },
+  {
+    "examine": "Saradomin is the vessel that keeps our lives from harm.",
+    "ids": "3495"
+  },
+  {
+    "examine": "Saradomin is the hammer that crushes evil everywhere.",
+    "ids": "3496"
+  },
+  {
+    "examine": "Saradomin is the delicate touch that brushes us with love.",
+    "ids": "3497"
+  },
+  {
+    "examine": "Saradomin is the needle that binds our lives together.",
+    "ids": "3498"
+  },
+  {
+    "examine": "Saradomin is the key that unlocks the mysteries of life.",
+    "ids": "3499"
   },
   {
     "examine": "Not sure if I should sit on that.",

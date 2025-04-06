@@ -5,12 +5,15 @@ import core.api.interaction.openNpcShop
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.NPCs
+import org.rs.consts.Quests
 
 class MosLeHarmlessListener : InteractionListener {
+
     override fun defineListeners() {
         on(NPCs.HONEST_JIMMY_4362, IntType.NPC, "Join-Team") { player, _ ->
             sendMessage(player, "There must be at least 3 people on each team for the game to start.")
@@ -92,8 +95,13 @@ class MosLeHarmlessListener : InteractionListener {
     }
 
     companion object {
-        private val SHOP_OWNERS =
-            intArrayOf(NPCs.MIKE_3166, NPCs.CHARLEY_3161, NPCs.MAMA_3164, NPCs.JOE_3163, NPCs.HONEST_JIMMY_4362)
+        private val SHOP_OWNERS = intArrayOf(
+            NPCs.MIKE_3166,
+            NPCs.CHARLEY_3161,
+            NPCs.MAMA_3164,
+            NPCs.JOE_3163,
+            NPCs.HONEST_JIMMY_4362
+        )
         private const val BERET_AND_MASK = Items.BERET_AND_MASK_11282
     }
 }

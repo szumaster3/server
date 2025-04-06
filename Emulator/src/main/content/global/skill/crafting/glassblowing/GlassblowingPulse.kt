@@ -9,6 +9,18 @@ import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
+/**
+ * Represents Glassblowing pulse.
+ *
+ * @property player the player.
+ * @property product the product.
+ * @property amount the amount.
+ */
+/*
+ * TODO:
+ *  [ ] - Find easter egg sounds.
+ *  [ ] - Find at what point they were used.
+ */
 class GlassblowingPulse(
     private val player: Player,
     private val product: Glass,

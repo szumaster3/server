@@ -223,13 +223,13 @@ class GameBook : InteractionListener {
         pageNum: Int,
         buttonID: Int,
     ): Boolean {
-        BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
+        BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_26, TITLE, CONTENTS)
         return true
     }
 
     override fun defineListeners() {
         on(Items.GAME_BOOK_7681, IntType.ITEM, "read") { player, _ ->
-            BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_26, ::display)
             return@on true
         }
     }

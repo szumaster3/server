@@ -1,5 +1,6 @@
 package content.region.misc.dialogue.mosle
 
+import content.minigame.troublebrewing.MosleUtils
 import core.api.inInventory
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue
@@ -27,7 +28,7 @@ class MamaDialogue(
     ): Boolean {
         when (stage) {
             0 ->
-                if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+                if (!MosleUtils.canUnderstandPirateLanguage(player)) {
                     npcl(FaceAnim.FRIENDLY, "Ar, darlin'! How might ya' Mama help ye?").also { stage++ }
                 } else {
                     npcl(FaceAnim.FRIENDLY, "Hello stranger, you come for a drink?").also { stage = 4 }
