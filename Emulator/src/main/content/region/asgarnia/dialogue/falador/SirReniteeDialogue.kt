@@ -22,6 +22,12 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents Sir Renitee.
+ *
+ * **Relations**
+ * - [Family Crests][content.global.skill.construction.Crests]
+ */
 @Initializable
 class SirReniteeDialogue(
     player: Player? = null,
@@ -47,6 +53,7 @@ class SirReniteeDialogue(
                     1 -> player(FaceAnim.HALF_GUILTY, "I don't know, what can you do for me?").also { stage = 100 }
                     2 -> player(FaceAnim.HALF_GUILTY, "Nothing, thanks.").also { stage = 30 }
                 }
+
             30 -> npc(FaceAnim.HALF_GUILTY, "Mmm, well, see you some other time maybe.").also { stage = END_DIALOGUE }
             100 ->
                 npc(
@@ -58,6 +65,7 @@ class SirReniteeDialogue(
                     stage =
                         110
                 }
+
             110 ->
                 npc(
                     FaceAnim.HALF_GUILTY,
@@ -68,12 +76,14 @@ class SirReniteeDialogue(
                     stage =
                         120
                 }
+
             120 -> options("Can you see if I have a family crest?", "Can I buy a painting?").also { stage = 130 }
             130 ->
                 when (buttonId) {
                     1 -> player(FaceAnim.HALF_GUILTY, "Can you see if I have a family crest?").also { stage = 200 }
                     2 -> player(FaceAnim.HALF_GUILTY, "Can I buy a painting?").also { stage = 500 }
                 }
+
             200 -> npc(FaceAnim.HALF_GUILTY, "What is your name?").also { stage = 210 }
             210 -> player(FaceAnim.HALF_GUILTY, player.username + ".").also { stage = 220 }
             220 -> npc(FaceAnim.HALF_GUILTY, "Mmm, " + player.username + ", let me see...").also { stage = 230 }
@@ -109,8 +119,8 @@ class SirReniteeDialogue(
                             FaceAnim.HALF_GUILTY,
                             "Well, I don't think you have any noble blood,",
                             "but I see that your ancestors came from " +
-                                Util.enumToString(player.houseManager.crest.name) +
-                                ",",
+                                    Util.enumToString(player.houseManager.crest.name) +
+                                    ",",
                             " so $message crest.",
                         )
                     }
@@ -122,13 +132,14 @@ class SirReniteeDialogue(
                     npc(
                         FaceAnim.HALF_GUILTY,
                         "First thing's first, young " + (if (player.appearance.isMale) "man" else "woman") +
-                            "! There is not much point",
+                                "! There is not much point",
                         "in having a family crest if you cannot display it.",
                     ).also {
                         stage =
                             235
                     }
                 }
+
             235 ->
                 npc(
                     FaceAnim.HALF_GUILTY,
@@ -138,6 +149,7 @@ class SirReniteeDialogue(
                     stage =
                         END_DIALOGUE
                 }
+
             240 -> options("I don't like that crest. Can I have a different one?", "Thanks!").also { stage = 250 }
             250 ->
                 when (buttonId) {
@@ -145,8 +157,10 @@ class SirReniteeDialogue(
                         player(FaceAnim.HALF_GUILTY, "I don't like that crest. Can I have a different one?").also {
                             stage = 300
                         }
+
                     2 -> player(FaceAnim.HALF_GUILTY, "Thanks!").also { stage = 260 }
                 }
+
             260 ->
                 npc(
                     FaceAnim.HALF_GUILTY,
@@ -155,12 +169,14 @@ class SirReniteeDialogue(
                     stage =
                         END_DIALOGUE
                 }
+
             300 ->
                 npc(
                     FaceAnim.HALF_GUILTY,
                     "Mmm, very well. Changing your crest will cost",
                     "5,000 coins.",
                 ).also { stage++ }
+
             301 ->
                 if (amountInInventory(player, Items.COINS_995) < 5000) {
                     player(
@@ -177,6 +193,7 @@ class SirReniteeDialogue(
                             310
                     }
                 }
+
             310 -> options("Shield of Arrav", "Asgarnia", "Dorgeshuun Symbol", "Dragon", "More...").also { stage = 320 }
             320 ->
                 when (buttonId) {
@@ -204,6 +221,7 @@ class SirReniteeDialogue(
                             }
                         }
                     }
+
                     2 -> {
                         val c = Crests.ASGARNIA
                         if (c.eligible(player) &&
@@ -222,6 +240,7 @@ class SirReniteeDialogue(
                             npc(FaceAnim.HALF_GUILTY, "[MISSING DIALOGUE - NOT ELIGIBLE]").also { stage = 310 }
                         }
                     }
+
                     3 -> {
                         val c = Crests.DORGESHUUN
                         if (c.eligible(player) &&
@@ -248,6 +267,7 @@ class SirReniteeDialogue(
                             }
                         }
                     }
+
                     4 -> {
                         val c = Crests.DRAGON
                         if (c.eligible(player) &&
@@ -272,6 +292,7 @@ class SirReniteeDialogue(
                             }
                         }
                     }
+
                     5 -> options("Fairy", "Guthix", "HAM", "Horse", "More...").also { stage = 330 }
                 }
 
@@ -295,6 +316,7 @@ class SirReniteeDialogue(
                             npc(FaceAnim.HALF_GUILTY, "[MISSING DIALOGUE - NOT ELIGIBLE]").also { stage = 310 }
                         }
                     }
+
                     2 -> {
                         val c = Crests.GUTHIX
                         if (c.eligible(player) &&
@@ -368,6 +390,7 @@ class SirReniteeDialogue(
                             }
                         }
                     }
+
                     5 -> options("Jogre", "Kandarin", "Misthalin", "Money", "More...").also { stage = 340 }
                 }
 
@@ -420,6 +443,7 @@ class SirReniteeDialogue(
                             npc(FaceAnim.HALF_GUILTY, "[MISSING DIALOGUE - NOT ELIGIBLE]").also { stage = 310 }
                         }
                     }
+
                     4 ->
                         npc(
                             FaceAnim.HALF_GUILTY,
@@ -430,6 +454,7 @@ class SirReniteeDialogue(
                             stage =
                                 341
                         }
+
                     5 -> options("Saradomin", "Skull", "Varrock", "Zamorak", "More...").also { stage = 350 }
                 }
 
@@ -445,6 +470,7 @@ class SirReniteeDialogue(
                             player(FaceAnim.HALF_GUILTY, "All right.").also { stage = 343 }
                         }
                     }
+
                     2 -> player(FaceAnim.HALF_GUILTY, "No way!").also { stage = 344 }
                 }
 
@@ -474,6 +500,7 @@ class SirReniteeDialogue(
                     stage =
                         310
                 }
+
             350 ->
                 when (buttonId) {
                     1 -> {
@@ -523,7 +550,7 @@ class SirReniteeDialogue(
                             npc(
                                 FaceAnim.HALF_GUILTY,
                                 "Of, of course you can have a skull symbol, " +
-                                    (if (player.appearance.isMale) "sir!" else "madam!"),
+                                        (if (player.appearance.isMale) "sir!" else "madam!"),
                             )
                         } else {
                             npc(
@@ -580,6 +607,7 @@ class SirReniteeDialogue(
                             }
                         }
                     }
+
                     5 ->
                         options(
                             "Shield of Arrav",
@@ -589,12 +617,14 @@ class SirReniteeDialogue(
                             "More...",
                         ).also { stage = 320 }
                 }
+
             500 ->
                 npc(
                     FaceAnim.ASKING,
                     "Would you like a portrait or an, mmm, a landscape?",
                     "Or a map, maybe?",
                 ).also { stage++ }
+
             501 -> options("a portrait", "a landscape", "a map").also { stage++ }
             502 ->
                 when (buttonId) {
@@ -605,6 +635,7 @@ class SirReniteeDialogue(
                         ).also {
                             stage++
                         }
+
                     2 ->
                         npcl(
                             FaceAnim.HALF_GUILTY,
@@ -613,6 +644,7 @@ class SirReniteeDialogue(
                             stage =
                                 514
                         }
+
                     3 ->
                         npcl(
                             FaceAnim.HALF_GUILTY,
@@ -622,6 +654,7 @@ class SirReniteeDialogue(
                                 526
                         }
                 }
+
             503 ->
                 options(
                     "King Arthur",
@@ -631,6 +664,7 @@ class SirReniteeDialogue(
                 ).also {
                     stage++
                 }
+
             504 ->
                 when (buttonId) {
                     1 -> {
@@ -667,14 +701,8 @@ class SirReniteeDialogue(
 
                     3 ->
                         if (!hasRequirement(player, Quests.THE_GIANT_DWARF, false)) {
-                            npcl(
-                                FaceAnim.HALF_GUILTY,
-                                "Have you ever been to Keldagrim? I think I'd need you to jog my memory...",
-                            )
-                            sendMessage(
-                                player,
-                                "To buy the portrait of the Giant Dwarf you must have completed The Giant Dwarf.",
-                            )
+                            npcl(FaceAnim.HALF_GUILTY, "Have you ever been to Keldagrim? I think I'd need you to jog my memory...")
+                            sendMessage(player, "To buy the portrait of the Giant Dwarf you must have completed The Giant Dwarf.")
                             stage = 700
                         } else {
                             npcl(FaceAnim.HALF_GUILTY, "That will be, mmm, 1000 coins please.").also { stage = 510 }
@@ -682,14 +710,8 @@ class SirReniteeDialogue(
 
                     4 ->
                         if (!hasRequirement(player, Quests.THRONE_OF_MISCELLANIA, false)) {
-                            npcl(
-                                FaceAnim.HALF_GUILTY,
-                                "Do you have some connection with the prince and princess? I wouldn't want to give out their picture to just anyone?",
-                            )
-                            sendMessage(
-                                player,
-                                "To buy the portrait of the Prince and Princess of Miscellania you must have completed The Throne of Miscellania.",
-                            )
+                            npcl(FaceAnim.HALF_GUILTY, "Do you have some connection with the prince and princess? I wouldn't want to give out their picture to just anyone?")
+                            sendMessage(player, "To buy the portrait of the Prince and Princess of Miscellania you must have completed The Throne of Miscellania.")
                             stage = 700
                         } else {
                             npcl(FaceAnim.HALF_GUILTY, "That will be, mmm, 1000 coins please.").also { stage = 512 }
@@ -699,18 +721,21 @@ class SirReniteeDialogue(
             505 -> options("All right", "No thanks").also { stage++ }
             506 ->
                 when (buttonId) {
-                    1 ->
+                    1 -> {
                         if (freeSlots(player) == 0) {
-                            end()
                             sendDialogue(player, "You don't have enough inventory space for that.")
-                        } else if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
-                            end()
-                            sendMessage(player, "You don't have enough money")
-                        } else {
-                            npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
-                            addItem(player, Items.ARTHUR_PORTRAIT_7995, 1, Container.INVENTORY)
-                            stage = 600
+                            stage = END_DIALOGUE
+                            return true
                         }
+                        if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
+                            sendMessage(player, "You don't have enough money")
+                            stage = END_DIALOGUE
+                            return true
+                        }
+                        npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
+                        addItem(player, Items.ARTHUR_PORTRAIT_7995, 1, Container.INVENTORY)
+                        stage = 600
+                    }
 
                     2 -> end()
                 }
@@ -718,37 +743,42 @@ class SirReniteeDialogue(
             508 -> options("All right", "No thanks").also { stage++ }
             509 ->
                 when (buttonId) {
-                    1 ->
+                    1 -> {
                         if (freeSlots(player) == 0) {
-                            end()
                             sendDialogue(player, "You don't have enough inventory space for that.")
-                        } else if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
-                            end()
-                            sendMessage(player, "You don't have enough money")
-                        } else {
-                            npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
-                            addItem(player, Items.ELENA_PORTRAIT_7996, 1, Container.INVENTORY)
-                            stage = 600
+                            stage = END_DIALOGUE
+                            return true
                         }
-
+                        if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
+                            sendMessage(player, "You don't have enough money")
+                            stage = END_DIALOGUE
+                            return true
+                        }
+                        npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
+                        addItem(player, Items.ELENA_PORTRAIT_7996, 1, Container.INVENTORY)
+                        stage = 600
+                    }
                     2 -> end()
                 }
 
             510 -> options("All right", "No thanks").also { stage++ }
             511 ->
                 when (buttonId) {
-                    1 ->
+                    1 -> {
                         if (freeSlots(player) == 0) {
-                            end()
                             sendDialogue(player, "You don't have enough inventory space for that.")
-                        } else if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
-                            end()
-                            sendMessage(player, "You don't have enough money")
-                        } else {
-                            npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
-                            addItem(player, Items.KELDAGRIM_PORTRAIT_7997, 1, Container.INVENTORY)
-                            stage = 600
+                            stage = END_DIALOGUE
+                            return true
                         }
+                        if (!removeItem(player, Item(Items.COINS_995, 1000), Container.INVENTORY)) {
+                            sendMessage(player, "You don't have enough money")
+                            stage = END_DIALOGUE
+                            return true
+                        }
+                        npcl(FaceAnim.HALF_GUILTY, "There you go. Would you like another painting?")
+                        addItem(player, Items.KELDAGRIM_PORTRAIT_7997, 1, Container.INVENTORY)
+                        stage = 600
+                    }
 
                     2 -> end()
                 }
@@ -816,7 +846,7 @@ class SirReniteeDialogue(
                     3 -> {
                         if (!isQuestComplete(player, Quests.CREATURE_OF_FENKENSTRAIN) ||
                             !hasRequirement(player, Quests.SHADES_OF_MORTTON, false) ||
-                            !isQuestComplete(player, Quests.GHOSTS_AHOY) ||
+                            !hasRequirement(player, Quests.GHOSTS_AHOY, false) ||
                             !hasRequirement(player, Quests.HAUNTED_MINE, false)
                         ) {
                             npcl(
@@ -1073,6 +1103,7 @@ class SirReniteeDialogue(
                             stage =
                                 503
                         }
+
                     2 ->
                         npcl(
                             FaceAnim.HALF_GUILTY,
@@ -1081,6 +1112,7 @@ class SirReniteeDialogue(
                             stage =
                                 514
                         }
+
                     3 ->
                         npcl(
                             FaceAnim.HALF_GUILTY,
@@ -1089,12 +1121,14 @@ class SirReniteeDialogue(
                             stage =
                                 526
                         }
+
                     4 ->
                         npcl(
                             FaceAnim.HALF_GUILTY,
                             "Mmm, well, see you some other time maybe.",
                         ).also { stage = END_DIALOGUE }
                 }
+
             700 -> npcl(FaceAnim.HALF_GUILTY, "Would you like a different painting?").also { stage = 600 }
         }
         return true

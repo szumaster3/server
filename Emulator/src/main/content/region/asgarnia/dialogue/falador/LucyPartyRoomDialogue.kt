@@ -68,7 +68,7 @@ class LucyPartyRoomDialogue(
     override fun getIds(): IntArray = intArrayOf(NPCs.LUCY_662)
 
     companion object {
-        private val COINS = Item(995, 2)
-        private val BEER = Item(1917, 1)
+        private val COINS = Item(Items.COINS_995, 2)
+        private val BEER = Item(Items.BEER_1917, 1)
     }
 }

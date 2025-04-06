@@ -141,12 +141,9 @@ class MakeOverMageDialogue(
                         player,
                         "You need to take off all your equipment before the mage",
                         "can change your appearance.",
-                    ).also {
-                        stage =
-                            END_DIALOGUE
-                    }
+                    )
+                    return true
                 } else {
-                    end()
                     if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) >= 1 && player.isMale) {
                         setAttribute(player, RecruitmentDrive.makeoverTicket, true)
                     }
@@ -174,6 +171,7 @@ class MakeOverMageDialogue(
                 end()
                 if (freeSlots(player) == 0) {
                     sendMessage(player, "You don't have enough inventory space.")
+                    return true
                 }
                 if (!removeItem(player, Item(Items.COINS_995, 100))) {
                     sendMessage(player, "You don't have enough coins.")
