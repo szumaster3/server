@@ -99,6 +99,7 @@ class SkippyTutorialDialogue : DialogueFile() {
                     )
                 } else {
                     lock(player!!, 4)
+                    player!!.dialogueInterpreter.sendPlainMessage(true, "Setting up world.", "Please wait...")
                     submitWorldPulse(
                         object : Pulse() {
                             var counter = 0
@@ -116,7 +117,7 @@ class SkippyTutorialDialogue : DialogueFile() {
                                         player!!.unhook(TutorialUseWithReceiver)
                                         player!!.unhook(TutorialInteractionReceiver)
                                         player!!.unhook(TutorialButtonReceiver)
-
+                                        player!!.setAttribute(GameAttributes.TUTORIAL_STAGE, 73)
                                         if (settings!!.enable_default_clan) {
                                             player!!.communication.currentClan = ServerConstants.SERVER_NAME
                                             val clanJoin = JoinClanRequest.newBuilder()
