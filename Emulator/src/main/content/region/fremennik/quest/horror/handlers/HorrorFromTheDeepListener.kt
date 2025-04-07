@@ -1,8 +1,8 @@
 package content.region.fremennik.quest.horror.handlers
 
 import content.data.GameAttributes
+import content.data.QuestItem
 import content.region.fremennik.quest.horror.JossikLighthouseDialogue
-import content.region.fremennik.quest.horror.handlers.bookcase.LighthouseBookcase
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete
@@ -24,23 +24,38 @@ class HorrorFromTheDeepListener : InteractionListener {
     private val brokenBridge = intArrayOf(Scenery.BROKEN_BRIDGE_4615, Scenery.BROKEN_BRIDGE_4616)
     private val strangeWalls = intArrayOf(Scenery.STRANGE_WALL_4544, Scenery.STRANGE_WALL_4543)
     private val strangeDoors = intArrayOf(Scenery.STRANGE_WALL_4545, Scenery.STRANGE_WALL_4546)
-    private val requiredItems =
-        intArrayOf(
-            Items.BRONZE_ARROW_882,
-            Items.BRONZE_SWORD_1277,
-            Items.AIR_RUNE_556,
-            Items.FIRE_RUNE_554,
-            Items.EARTH_RUNE_557,
-            Items.WATER_RUNE_555,
-        )
+    private val requiredItems = intArrayOf(Items.BRONZE_ARROW_882, Items.BRONZE_SWORD_1277, Items.AIR_RUNE_556, Items.FIRE_RUNE_554, Items.EARTH_RUNE_557, Items.WATER_RUNE_555)
+    private val lighthouseTools = intArrayOf(Items.MOLTEN_GLASS_1775, Items.SWAMP_TAR_1939, Items.TINDERBOX_590)
 
     override fun defineListeners() {
         /*
          * Handles lighthouse bookcase.
          */
 
-        on(Scenery.BOOKCASE_4617, IntType.SCENERY, "search") { player, node ->
-            openDialogue(player, LighthouseBookcase(), node.asScenery())
+        on(Scenery.BOOKCASE_4617, IntType.SCENERY, "search") { player, _ ->
+            if (isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
+                openDialogue(player, QuestItem(Items.MANUAL_3847))
+                return@on true
+            } else {
+                sendDialogue(player, "There are three books here that look important... What would you like to do?")
+                addDialogueAction(player) { _, button ->
+                    if (button > 0) sendDialogueOptions(player, "Select an option", "Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books")
+                    addDialogueAction(player) { _, button ->
+                        val book = arrayOf(Item(Items.MANUAL_3847), Item(Items.DIARY_3846), Item(Items.JOURNAL_3845))
+                        val bookIDs = book.toList()
+                        if (freeSlots(player) < (if (button == 5) bookIDs.size else 1)) {
+                            sendDialogue(player, "You do not have enough room to take ${if (bookIDs.size > 1) "all three" else "that"}.")
+                            return@addDialogueAction
+                        }
+                        when (button) {
+                            2 -> player.inventory.add(book[0])
+                            3 -> player.inventory.add(book[1])
+                            4 -> player.inventory.add(book[2])
+                            5 -> player.inventory.add(*book)
+                        }
+                    }
+                }
+            }
             return@on true
         }
 
@@ -127,43 +142,21 @@ class HorrorFromTheDeepListener : InteractionListener {
         }
 
         /*
-         * Handles first fix for the light mechanism.
+         * Handles the light mechanism fix.
          */
 
-        onUseWith(IntType.SCENERY, Items.SWAMP_TAR_1939, Scenery.LIGHTING_MECHANISM_4588) { player, _, _ ->
+        onUseWith(IntType.SCENERY, lighthouseTools, Scenery.LIGHTING_MECHANISM_4588) { player, used, with ->
+            val totalFixes = getAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 0)
             if (removeItem(player, Items.SWAMP_TAR_1939)) {
                 sendMessage(player, "You use the swamp tar to make the torch flammable again.")
                 setAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 1)
             }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles second fix for the light mechanism.
-         */
-
-        onUseWith(IntType.SCENERY, Items.TINDERBOX_590, Scenery.LIGHTING_MECHANISM_4588) { player, _, _ ->
-            if (getAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 0) < 1) {
-                sendMessage(player, "Nothing interesting happens.")
-            } else {
+            if(totalFixes == 1 && used.id == Items.TINDERBOX_590) {
                 sendMessage(player, "You light the torch with your tinderbox.")
-                player.incrementAttribute(GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM)
+                setAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 2)
             }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles last fix for the light mechanism.
-         */
-
-        onUseWith(
-            IntType.SCENERY,
-            Items.MOLTEN_GLASS_1775,
-            Scenery.LIGHTING_MECHANISM_4588,
-        ) { player, item, mechanism ->
-            if (getAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 0) < 2) return@onUseWith false
-            if (removeItem(player, item.asItem())) {
-                replaceScenery(mechanism.asScenery(), Scenery.LIGHTING_MECHANISM_4587, 80)
+            if(totalFixes == 2 && removeItem(player, Item(Items.MOLTEN_GLASS_1775, 1))) {
+                replaceScenery(with.asScenery(), Scenery.LIGHTING_MECHANISM_4587, 80)
                 setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 40)
                 sendMessage(player, "You use the molten glass to repair the lens.")
                 sendMessage(player, "You have managed to repair the lighthouse torch!")
@@ -177,17 +170,11 @@ class HorrorFromTheDeepListener : InteractionListener {
 
         on(strangeWalls, IntType.SCENERY, "study") { player, _ ->
             when (player.location.y) {
-                4626 -> {
-                    if (getQuestStage(player, Quests.HORROR_FROM_THE_DEEP) >= 50) {
-                        openInterface(player, Components.HORROR_METALDOOR_142)
-                    } else {
-                        openInterface(player, Components.HORROR_METALDOOR_142)
-                        setAttribute(player, GameAttributes.QUEST_HFTD_STRANGE_WALL_DISCOVER, true)
-                    }
+                4626, 10002 -> {
+                    setAttribute(player, GameAttributes.QUEST_HFTD_STRANGE_WALL_DISCOVER, true)
+                    openInterface(player, Components.HORROR_METALDOOR_142)
                 }
-
-                10002 -> openInterface(player, Components.HORROR_METALDOOR_142)
-                4627, 10003 -> sendMessage(player, "You cannot see anything unusual about the wall from this side.")
+                else -> sendMessage(player, "You cannot see anything unusual about the wall from this side.")
             }
             return@on true
         }
