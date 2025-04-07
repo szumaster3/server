@@ -6,6 +6,7 @@ import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
@@ -77,17 +78,14 @@ class WerewolfCourseListeners : InteractionListener {
         on(AGILITY_TRAINER, IntType.NPC, "Give-Stick") { player, _ ->
             if (getAttribute(player, "werewolf-agility-course", false)) return@on true
 
-            if (!inInventory(player, Items.STICK_4179)) {
-                openDialogue(player, AgilityTrainerStickDialogue())
-                return@on true
-            }
-
-            if (amountInInventory(player, Items.STICK_4179) >= 1 || player.inventory.containItems(Items.STICK_4179)) {
-                player.inventory.removeAll(Items.STICK_4179)
+            val amount = amountInInventory(player, Items.STICK_4179)
+            if (amount > 0) {
+                removeAll(player, Item(Items.STICK_4179, amount), Container.INVENTORY)
                 rewardXP(player, Skills.AGILITY, 190.0)
                 sendMessage(player, "You give the stick to the werewolf.")
+            } else {
+                openDialogue(player, AgilityTrainerStickDialogue())
             }
-
             removeAttribute(player, "werewolf-agility-course")
             return@on true
         }
