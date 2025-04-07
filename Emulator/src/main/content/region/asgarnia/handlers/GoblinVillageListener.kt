@@ -12,10 +12,19 @@ import org.rs.consts.Scenery
 
 class GoblinVillageListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles interaction with goblin at Tree gnome village labirynth.
+         */
+
         on(NPCs.GOBLIN_444, IntType.NPC, "Talk-To") { player, _ ->
             sendNPCDialogue(player, NPCs.GOBLIN_444, "Go away, human!", FaceAnim.OLD_ANGRY1)
             return@on true
         }
+
+        /*
+         * Handles showing current population at Gnome Village.
+         */
 
         on(Scenery.SIGNPOST_31301, IntType.SCENERY, "read") { player, _ ->
             var population = 3
