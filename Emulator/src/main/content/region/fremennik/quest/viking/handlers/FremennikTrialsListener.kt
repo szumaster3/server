@@ -405,7 +405,7 @@ class FremennikTrialsListener : InteractionListener {
         val fish: Int,
     ) : Pulse() {
         var counter = 0
-        val npc = NPC(1273, player.location)
+        val npc = NPC(NPCs.FOSSEGRIMEN_1273, player.location)
         val sea_boots =
             intArrayOf(
                 Items.FREMENNIK_SEA_BOOTS_1_14571,
@@ -441,7 +441,7 @@ class FremennikTrialsListener : InteractionListener {
                 5 -> {
                     if (hasring) {
                         when (fish) {
-                            363 -> {
+                            Items.RAW_BASS_363 -> {
                                 finishDiaryTask(player, DiaryType.FREMENNIK, 1, 4)
                                 if (hasboots) {
                                     addItem(player, Items.ENCHANTED_LYRE3_6126)
@@ -453,15 +453,15 @@ class FremennikTrialsListener : InteractionListener {
                     } else {
                         if (hasboots) {
                             when (fish) {
-                                383 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
-                                389 -> addItem(player, Items.ENCHANTED_LYRE5_14590)
-                                395 -> addItem(player, Items.ENCHANTED_LYRE6_14591)
+                                Items.RAW_SHARK_383      -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                                Items.RAW_MANTA_RAY_389  -> addItem(player, Items.ENCHANTED_LYRE5_14590)
+                                Items.RAW_SEA_TURTLE_395 -> addItem(player, Items.ENCHANTED_LYRE6_14591)
                             }
                         } else {
                             when (fish) {
-                                383 -> addItem(player, Items.ENCHANTED_LYRE2_6125)
-                                389 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
-                                395 -> addItem(player, Items.ENCHANTED_LYRE4_6127)
+                                Items.RAW_SHARK_383      -> addItem(player, Items.ENCHANTED_LYRE2_6125)
+                                Items.RAW_MANTA_RAY_389  -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                                Items.RAW_SEA_TURTLE_395 -> addItem(player, Items.ENCHANTED_LYRE4_6127)
                             }
                         }
                     }

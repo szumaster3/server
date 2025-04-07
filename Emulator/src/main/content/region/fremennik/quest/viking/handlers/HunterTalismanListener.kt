@@ -29,7 +29,7 @@ class HunterTalismanListener : InteractionListener {
             }
             val locationComponents = locationString.split(",")
             val draugenLoc =
-                Location(Integer.parseInt(locationComponents.get(0)), Integer.parseInt(locationComponents.get(1)))
+                Location(Integer.parseInt(locationComponents[0]), Integer.parseInt(locationComponents[1]))
 
             if (player.location?.withinDistance(draugenLoc, 5)!!) {
                 sendDialogue(player, "The Draugen is nearby, be careful!")
