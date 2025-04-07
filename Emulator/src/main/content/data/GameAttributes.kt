@@ -93,6 +93,10 @@ internal object GameAttributes {
     const val RE_QUIZ_REWARD = "/save:quiz:random_reward"
     const val RE_QUIZ_SCORE = "/save:quiz:score"
 
+    // Maze random event.
+    const val MAZE_ATTRIBUTE_TICKS_LEFT = "maze:percent-ticks-left"
+    const val MAZE_ATTRIBUTE_CHESTS_OPEN = "/save:maze:chests-opened"
+
     // Sandwich lady random event.
     const val S_LADY_ITEM = "random:sandwich_lady:item"
     const val S_LADY_ITEM_VALUE = "random:sandwich_lady:item_value"
