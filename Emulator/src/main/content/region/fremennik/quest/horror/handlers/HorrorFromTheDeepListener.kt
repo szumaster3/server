@@ -314,12 +314,12 @@ class HorrorFromTheDeepListener : InteractionListener {
          * Handles crossing the bridge from west.
          */
 
-        on(Scenery.BROKEN_BRIDGE_4616, IntType.SCENERY, "cross") { player, node ->
+        on(Scenery.BROKEN_BRIDGE_4616, IntType.SCENERY, "cross") { player, _ ->
             if (getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_BRIDGE, 0) != 2) {
                 sendMessage(player, "I might be able to make it to the other side.")
                 return@on true
             }
-            forceMove(player, node.location, Location(2596, 3608, 0), 0, 120, Direction.WEST, Animations.AGILITY_START_ALT_3277)
+            forceMove(player, player.location, Location(2596, 3608, 0), 0, 120, Direction.WEST, Animations.AGILITY_START_ALT_3277)
             runTask(player, 6) { forceWalk(player, Location.create(2595, 3608, 0), "jeffrey only") }
             return@on true
         }
