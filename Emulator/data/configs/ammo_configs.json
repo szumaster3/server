@@ -1160,6 +1160,14 @@
     "poison_damage": "0"
   },
   {
+    "itemId": "7170",
+    "name": "Mud pie",
+    "start_graphic": "-1,0",
+    "darkbow_graphic": "",
+    "projectile": "27,40,36,32,32,15,0",
+    "poison_damage": "0"
+  },
+  {
     "itemId": "8882",
     "name": "Bone bolts",
     "start_graphic": "-1,0",
