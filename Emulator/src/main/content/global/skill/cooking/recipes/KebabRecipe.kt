@@ -30,9 +30,9 @@ class KebabRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.PITTA_BREAD_1865, Items.KEBAB_MIX_1881) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 40) {
+            if (!hasLevelDyn(player, Skills.COOKING, 40)) {
                 sendMessage(player, "You need a Cooking level of 40 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeKebab(): Boolean {

@@ -34,9 +34,9 @@ class SkeweredRecipe : InteractionListener {
             )
             val (requirements, product) = itemDetails[base.id] ?: return@onUseWith false
 
-            if (getStatLevel(player, Skills.COOKING) < requirements) {
+            if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                 sendMessage(player, "You need a Cooking level of $requirements to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (removeItem(player, Item(used.id, 1), Container.INVENTORY) &&

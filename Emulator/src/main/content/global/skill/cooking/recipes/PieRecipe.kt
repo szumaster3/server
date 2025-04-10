@@ -69,12 +69,12 @@ class PieRecipe : InteractionListener {
                 Items.SALMON_329 -> 70
                 Items.RAW_BEAR_MEAT_2136 -> 85
                 Items.STRAWBERRY_5504 -> 95
-                else -> return@onUseWith false
+                else -> return@onUseWith true
             }
 
-            if (getStatLevel(player, Skills.COOKING) < requirements) {
+            if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                 sendMessage(player, "You need a Cooking level of $requirements to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val products = when (with.id) {
@@ -146,22 +146,22 @@ class PieRecipe : InteractionListener {
                 Items.PART_ADMIRAL_PIE_7192 -> 70
                 Items.PART_WILD_PIE_7202 -> 85
                 Items.PART_SUMMER_PIE_7212 -> 95
-                else -> return@onUseWith false
+                else -> return@onUseWith true
             }
 
-            if (getStatLevel(player, Skills.COOKING) < requirements) {
+            if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                 sendMessage(player, "You need a Cooking level of $requirements to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val product = when {
-                used.id == Items.BUCKET_OF_WATER_1929 && with.id == Items.PART_MUD_PIE_7164 -> Items.PART_MUD_PIE_7166
-                used.id == Items.ONION_1957 && with.id == Items.PART_GARDEN_PIE_7172 -> Items.PART_GARDEN_PIE_7174
-                used.id == Items.COD_339 && with.id == Items.PART_FISH_PIE_7182 -> Items.PART_FISH_PIE_7184
-                used.id == Items.TUNA_361 && with.id == Items.PART_ADMIRAL_PIE_7192 -> Items.PART_ADMIRAL_PIE_7194
-                used.id == Items.RAW_CHOMPY_2876 && with.id == Items.PART_WILD_PIE_7202 -> Items.PART_WILD_PIE_7204
-                used.id == Items.WATERMELON_5982 && with.id == Items.PART_SUMMER_PIE_7212 -> Items.PART_SUMMER_PIE_7214
-                else -> return@onUseWith false
+                used.id == Items.PART_MUD_PIE_7164     && with.id == Items.BUCKET_OF_WATER_1929 -> Items.PART_MUD_PIE_7166
+                used.id == Items.PART_GARDEN_PIE_7172  && with.id == Items.ONION_1957           -> Items.PART_GARDEN_PIE_7174
+                used.id == Items.PART_FISH_PIE_7182    && with.id == Items.COD_339              -> Items.PART_FISH_PIE_7184
+                used.id == Items.PART_ADMIRAL_PIE_7192 && with.id == Items.TUNA_361             -> Items.PART_ADMIRAL_PIE_7194
+                used.id == Items.PART_WILD_PIE_7202    && with.id == Items.RAW_CHOMPY_2876      -> Items.PART_WILD_PIE_7204
+                used.id == Items.PART_SUMMER_PIE_7212  && with.id == Items.WATERMELON_5982      -> Items.PART_SUMMER_PIE_7214
+                else -> return@onUseWith true
             }
 
             val ingredient = with.name.lowercase()
@@ -222,20 +222,20 @@ class PieRecipe : InteractionListener {
                 Items.PART_GARDEN_PIE_7174 -> 34
                 Items.PART_WILD_PIE_7204 -> 85
                 Items.PART_SUMMER_PIE_7214 -> 95
-                else -> return@onUseWith false
+                else -> return@onUseWith true
             }
 
-            if (getStatLevel(player, Skills.COOKING) < requirements) {
+            if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                 sendMessage(player, "You need a Cooking level of $requirements to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val product = when {
-                used.id == Items.PART_MUD_PIE_7166 && with.id == Items.CLAY_434 -> Items.RAW_MUD_PIE_7168
-                used.id == Items.PART_GARDEN_PIE_7174 && with.id == Items.CABBAGE_1965 || with.id == Items.CABBAGE_1967 -> Items.RAW_GARDEN_PIE_7176
-                used.id == Items.PART_WILD_PIE_7204 && with.id == Items.RAW_RABBIT_3226 -> Items.RAW_WILD_PIE_7206
-                used.id == Items.PART_SUMMER_PIE_7214 && with.id == Items.COOKING_APPLE_1955 -> Items.RAW_SUMMER_PIE_7216
-                else -> return@onUseWith false
+                used.id == Items.PART_MUD_PIE_7166      && with.id == Items.CLAY_434 -> Items.RAW_MUD_PIE_7168
+                used.id == Items.PART_GARDEN_PIE_7174   && with.id == Items.CABBAGE_1965 || with.id == Items.CABBAGE_1967 -> Items.RAW_GARDEN_PIE_7176
+                used.id == Items.PART_WILD_PIE_7204     && with.id == Items.RAW_RABBIT_3226 -> Items.RAW_WILD_PIE_7206
+                used.id == Items.PART_SUMMER_PIE_7214   && with.id == Items.COOKING_APPLE_1955 -> Items.RAW_SUMMER_PIE_7216
+                else -> return@onUseWith true
             }
 
             val productName = product.asItem().name.lowercase()
@@ -277,9 +277,9 @@ class PieRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.PART_ADMIRAL_PIE_7194, Items.POTATO_1942) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 70) {
+            if (!hasLevelDyn(player, Skills.COOKING, 70)) {
                 sendMessage(player, "You need a Cooking level of 70 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {
@@ -315,9 +315,9 @@ class PieRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.PART_FISH_PIE_7184, Items.POTATO_1942) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 47) {
+            if (!hasLevelDyn(player, Skills.COOKING, 47)) {
                 sendMessage(player, "You need a Cooking level of 47 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {

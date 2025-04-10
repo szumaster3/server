@@ -26,9 +26,9 @@ class CakeRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.CAKE_TIN_1887, Items.POT_OF_FLOUR_1933, Items.BUCKET_OF_MILK_1927, Items.EGG_1944) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 40) {
+            if (!hasLevelDyn(player, Skills.COOKING, 40)) {
                 sendMessage(player, "You need a Cooking level of 40 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (anyInInventory(player, Items.POT_OF_FLOUR_1933, Items.BUCKET_OF_MILK_1927, Items.EGG_1944) && !allInInventory(player, Items.POT_OF_FLOUR_1933, Items.BUCKET_OF_MILK_1927, Items.EGG_1944)) {
@@ -73,10 +73,11 @@ class CakeRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.CAKE_1891, Items.CHOCOLATE_BAR_1973, Items.CHOCOLATE_DUST_1975) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 50) {
+            if (!hasLevelDyn(player, Skills.COOKING, 50)) {
                 sendMessage(player, "You need a Cooking level of 50 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
+
             if(removeItem(player, Item(used.id, 1)) && removeItem(player, Item(with.id, 1))) {
                 addItem(player, Items.CHOCOLATE_CAKE_1897, 1, Container.INVENTORY)
                 rewardXP(player, Skills.COOKING, 30.0)

@@ -20,9 +20,9 @@ class StewRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.BOWL_OF_WATER_1921, Items.POTATO_1942, Items.COOKED_MEAT_2142) { player, used, ingredient ->
-            if (getStatLevel(player, Skills.COOKING) < 25) {
+            if (!hasLevelDyn(player, Skills.COOKING, 25)) {
                 sendMessage(player, "You need a Cooking level of 25 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val stew = when (ingredient.id) {
@@ -69,9 +69,9 @@ class StewRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, incompleteStew, Items.COOKED_MEAT_2142, Items.POTATO_1942) { player, used, ingredient ->
-            if (getStatLevel(player, Skills.COOKING) < 25) {
+            if (!hasLevelDyn(player, Skills.COOKING, 25)) {
                 sendMessage(player, "You need a Cooking level of 25 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeUncookedStew(): Boolean {
@@ -117,9 +117,9 @@ class StewRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.SPICE_2007, Items.UNCOOKED_STEW_2001) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 60) {
+            if (!hasLevelDyn(player, Skills.COOKING, 60)) {
                 sendMessage(player, "You need a Cooking level of 60 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {
@@ -160,9 +160,9 @@ class StewRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.UNCOOKED_STEW_2001, Items.CURRY_LEAF_5970) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 60) {
+            if (!hasLevelDyn(player, Skills.COOKING, 60)) {
                 sendMessage(player, "You need a Cooking level of 60 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val requiredCurryLeaves = 3

@@ -17,7 +17,7 @@ class PizzaRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.TOMATO_1982, Items.PIZZA_BASE_2283) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 35) {
+            if (!hasLevelDyn(player, Skills.COOKING, 35)) {
                 sendMessage(player, "You need a Cooking level of 35 to make that.")
                 return@onUseWith true
             }
@@ -34,7 +34,7 @@ class PizzaRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.CHEESE_1985, Items.INCOMPLETE_PIZZA_2285) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 35) {
+            if (!hasLevelDyn(player, Skills.COOKING, 35)) {
                 sendMessage(player, "You need a Cooking level of 35 to make that.")
                 return@onUseWith true
             }
@@ -69,7 +69,7 @@ class PizzaRecipe : InteractionListener {
 
             val (product, requirements, experience) = pizzaMap[base.id] ?: return@onUseWith false
 
-            if (getStatLevel(player, Skills.COOKING) < requirements) {
+            if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                 sendMessage(player, "You need a Cooking level of $requirements to make that.")
                 return@onUseWith true
             }

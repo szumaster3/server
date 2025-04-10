@@ -32,9 +32,9 @@ class PotatoRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.BAKED_POTATO_6701, Items.PAT_OF_BUTTER_6697) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 39) {
+            if (!hasLevelDyn(player, Skills.COOKING, 39)) {
                 sendMessage(player, "You need a Cooking level of 39 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {
@@ -92,9 +92,9 @@ class PotatoRecipe : InteractionListener {
             val (product, requirements) = product
 
             onUseWith(IntType.ITEM, Items.POTATO_WITH_BUTTER_6703, ingredient) { player, used, with ->
-                if (getStatLevel(player, Skills.COOKING) < requirements) {
+                if (!hasLevelDyn(player, Skills.COOKING, requirements)) {
                     sendMessage(player, "You need a Cooking level of $requirements to make that.")
-                    return@onUseWith false
+                    return@onUseWith true
                 }
 
                 fun makeDish(): Boolean {

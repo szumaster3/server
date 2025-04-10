@@ -25,9 +25,9 @@ class ToppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.SPICY_SAUCE_7072, Items.MINCED_MEAT_7070, Items.COOKED_MEAT_2142) { player, used, ingredient ->
-            if (getStatLevel(player, Skills.COOKING) < 9) {
+            if (!hasLevelDyn(player, Skills.COOKING, 9)) {
                 sendMessage(player, "You need a Cooking level of 9 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (ingredient.id == Items.MINCED_MEAT_7070 && freeSlots(player) < 1) {
@@ -86,9 +86,9 @@ class ToppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.COOKED_SWEETCORN_5988, Items.CHOPPED_TUNA_7086) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 67) {
+            if (!hasLevelDyn(player, Skills.COOKING, 67)) {
                 sendMessage(player, "You need a Cooking level of 67 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeDish(): Boolean {
@@ -135,10 +135,11 @@ class ToppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.SCRAMBLED_EGG_7078, Items.TOMATO_1982) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 23) {
+            if (!hasLevelDyn(player, Skills.COOKING, 23)) {
                 sendMessage(player, "You need a Cooking level of 23 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
+
             fun makeDish(): Boolean {
                 if (removeItem(player, Item(used.id, 1), Container.INVENTORY) &&
                     removeItem(player, Item(with.id, 1), Container.INVENTORY)
@@ -183,9 +184,9 @@ class ToppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.RAW_OOMLIE_2337, Items.PALM_LEAF_2339) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 50) {
+            if (!hasLevelDyn(player, Skills.COOKING, 50)) {
                 sendMessage(player, "You need a Cooking level of 50 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeDish(): Boolean {
@@ -227,9 +228,9 @@ class ToppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.FRIED_MUSHROOMS_7082, Items.FRIED_ONIONS_7084) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 57) {
+            if (!hasLevelDyn(player, Skills.COOKING, 57)) {
                 sendMessage(player, "You need a Cooking level of 57 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeDish(): Boolean {

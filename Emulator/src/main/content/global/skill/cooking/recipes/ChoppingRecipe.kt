@@ -118,9 +118,9 @@ class ChoppingRecipe : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.CHOPPED_GARLIC_7074, Items.GNOME_SPICE_2169) { player, used, with ->
-            if (getStatLevel(player, Skills.COOKING) < 9) {
+            if (!hasLevelDyn(player, Skills.COOKING, 9)) {
                 sendMessage(player, "You need a Cooking level of 9 to make that.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             fun makeDish(): Boolean {
