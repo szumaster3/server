@@ -79,34 +79,6 @@ enum class MysteriousRuins(
      */
     BLOOD(intArrayOf(2464, 30529, 30530), Location.create(3561, 9779, 0), Location.create(2467, 4889, 1), Talisman.BLOOD, Tiara.BLOOD);
 
-    /**
-     * Retrieves the [Talisman] associated with this mysterious ruin.
-     *
-     * This is usually used for validation when a player attempts to use a talisman to enter the altar.
-     *
-     * @return The [Talisman] used to access this altar.
-     */
-    fun getTalisman(): Talisman {
-        for (talisman in Talisman.values()) {
-            if (talisman.name == name) return talisman
-        }
-        return talisman
-    }
-
-    /**
-     * Retrieves the [Tiara] associated with this mysterious ruin.
-     *
-     * This is usually used when checking whether a player is wearing the correct tiara.
-     *
-     * @return The [Tiara] used to access this altar.
-     */
-    fun getTiara(): Tiara {
-        for (tiara in Tiara.values()) {
-            if (tiara.name == name) return tiara
-        }
-        return tiara
-    }
-
     companion object {
         /**
          * Gets the corresponding [MysteriousRuins] for a given [Scenery] object.
@@ -137,7 +109,7 @@ enum class MysteriousRuins(
          */
         fun forTalisman(talisman: Talisman): MysteriousRuins? {
             for (ruin in values()) {
-                if (ruin.getTalisman() == talisman) {
+                if (ruin.talisman == talisman) {
                     return ruin
                 }
             }
