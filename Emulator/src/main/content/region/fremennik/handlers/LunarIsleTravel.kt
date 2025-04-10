@@ -6,7 +6,16 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs.consts.Components
 
+/**
+ * Handles the lunar isle travel functionality for players.
+ */
 object LunarIsleTravel {
+    /**
+     * Initiates the sailing.
+     *
+     * @param player The player who is initiating the travel.
+     * @param destination The destination to which the player is traveling.
+     */
     @JvmStatic
     fun sail(
         player: Player,
@@ -32,6 +41,13 @@ object LunarIsleTravel {
     }
 }
 
+/**
+ * Represents the travel destinations.
+ *
+ * @property destName The name of the destination.
+ * @property destination The [Location] representing the coordinates of the destination.
+ * @property animation The animation id used during the travel animation.
+ */
 enum class Destination(
     val destName: String,
     val destination: Location,

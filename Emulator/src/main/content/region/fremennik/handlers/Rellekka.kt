@@ -1,6 +1,7 @@
 package content.region.fremennik.handlers
 
 import core.api.MapArea
+import core.api.sendDialogueLines
 import core.api.sendMessage
 import core.game.interaction.Option
 import core.game.node.Node
@@ -33,10 +34,7 @@ class Rellekka : MapArea {
                 }
 
                 Scenery.TRAPDOOR_100 -> {
-                    player.dialogueInterpreter.sendDialogue(
-                        "You try to open the trapdoor but it won't budge! It looks like the",
-                        "trapdoor can only be opened from the other side.",
-                    )
+                    sendDialogueLines(player, "You try to open the trapdoor but it won't budge! It looks like the", "trapdoor can only be opened from the other side.")
                     return true
                 }
 

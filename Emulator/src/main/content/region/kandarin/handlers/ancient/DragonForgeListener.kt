@@ -1,6 +1,7 @@
 package content.region.kandarin.handlers.ancient
 
 import core.api.*
+import core.api.item.allInInventory
 import core.api.quest.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -23,17 +24,17 @@ class DragonForgeListener : InteractionListener {
             }
 
             if (!player.inventory.containsItem(FUSION_HAMMER)) {
-                sendDialogue(player, "You need a hammer to work the metal with.")
+                sendDialogue(player, "You need a fusion hammer to work the metal with.")
                 return@onUseWith false
             }
 
-            if (!anyInInventory(player, *RUINED_PIECES)) {
+            if (anyInInventory(player, *RUINED_PIECES) && !allInInventory(player, *RUINED_PIECES)) {
                 sendDialogue(player, "you do not have the required items.")
                 return@onUseWith false
             }
 
-            lock(player, 1000)
-            lockInteractions(player, 1000)
+            lock(player, 3)
+            lockInteractions(player, 3)
             queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {

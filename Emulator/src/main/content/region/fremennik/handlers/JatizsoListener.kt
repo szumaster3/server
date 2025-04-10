@@ -37,7 +37,7 @@ class JatizsoListener : InteractionListener {
                     replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
                     replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
                 }
-            } else if (SOUTH_GAE_ZONE.insideBorder(player)) {
+            } else if (SOUTH_GATE_ZONE.insideBorder(player)) {
                 if (node.id == GATES_CLOSED.first()) {
                     val other = getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
                     replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
@@ -125,13 +125,15 @@ class JatizsoListener : InteractionListener {
     companion object {
         const val BELL = Scenery.BELL_21394
         const val MAGNUS_NPC = NPCs.MAGNUS_GRAM_5488
-        val GATES_CLOSED = intArrayOf(21403, 21405)
+
+        val GATES_CLOSED = intArrayOf(Scenery.GATE_21403, Scenery.GATE_21405)
+        val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
+        val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
+        val KING_CHEST = intArrayOf(Scenery.CHEST_21299, Scenery.CHEST_21300)
+
         val NORTH_GATE_ZONE = ZoneBorders(2414, 3822, 2417, 3825)
         val WEST_GATE_ZONE = ZoneBorders(2386, 3797, 2390, 3801)
-        val SOUTH_GAE_ZONE = ZoneBorders(2411, 3795, 2414, 3799)
-        val TOWER_GUARDS = intArrayOf(5490, 5489)
-        val GUARDS = intArrayOf(5491, 5492)
-        val KING_CHEST = intArrayOf(21299, 21300)
+        val SOUTH_GATE_ZONE = ZoneBorders(2411, 3795, 2414, 3799)
 
         val LINES =
             arrayOf(

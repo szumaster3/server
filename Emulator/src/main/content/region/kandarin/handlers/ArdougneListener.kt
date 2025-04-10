@@ -21,7 +21,6 @@ import org.rs.consts.Quests
 class ArdougneListener : InteractionListener {
     override fun defineListeners() {
         on(NPCs.GALAHAD_218, IntType.NPC, "talk-to") { player, _ ->
-
             openDialogue(player, GalahadDialogue())
             return@on true
         }
@@ -38,44 +37,19 @@ class ArdougneListener : InteractionListener {
             } else {
                 sendMessage(player, "You pay $amount coins and board the ship.")
                 playJingle(player, 171)
-                sendDialogue(player, "The ship arrives at Brimhaven.")
                 Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player)
             }
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, _ ->
+        onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, npc ->
             if (!hasRequirement(player, Quests.EAGLES_PEAK)) return@onUseWith true
-            openDialogue(
-                player,
-                object : DialogueFile() {
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
-                        npc = NPC(NPCs.CHARLIE_5138)
-                        when (stage) {
-                            START_DIALOGUE ->
-                                playerl(
-                                    FaceAnim.FRIENDLY,
-                                    "Hey, I've got another ferret if you're interested?",
-                                ).also { stage++ }
-
-                            1 ->
-                                npcl(
-                                    FaceAnim.NEUTRAL,
-                                    "Er, oh! Well that's very kind of you, but we don't really need another ferret at the moment, ",
-                                ).also { stage++ }
-
-                            2 ->
-                                npcl(
-                                    FaceAnim.HALF_GUILTY,
-                                    "I'm afraid. We're having enough trouble taming the one we've got.",
-                                ).also { stage = END_DIALOGUE }
-                        }
-                    }
-                },
-            )
+            sendPlayerDialogue(player, "Hey, I've got another ferret if you're interested?")
+            addDialogueAction(player) { player, button ->
+                if(button > 0) {
+                    sendNPCDialogue(player, npc.id, "Er, oh! Well that's very kind of you, but we don't really need another ferret at the moment, I'm afraid. We're having enough trouble taming the one we've got.", FaceAnim.NEUTRAL)
+                }
+            }
             return@onUseWith true
         }
     }

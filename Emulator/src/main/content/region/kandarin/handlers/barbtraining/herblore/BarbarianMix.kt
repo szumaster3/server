@@ -2,6 +2,9 @@ package content.region.kandarin.handlers.barbtraining.herblore
 
 import org.rs.consts.Items
 
+/**
+ * Represents barbarian mixes.
+ */
 enum class BarbarianMix(
     val item: Int,
     val level: Int,
@@ -36,6 +39,12 @@ enum class BarbarianMix(
     ;
 
     companion object {
+        /**
+         * Finds a [BarbarianMix] based on the item ID.
+         *
+         * @param id The item ID of the base potion.
+         * @return The corresponding [BarbarianMix], or `null` if no match is found.
+         */
         fun forId(id: Int): BarbarianMix? = values().find { it.item == id }
     }
 }

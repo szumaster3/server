@@ -12,6 +12,11 @@ class BarbSmithingListener : InteractionListener {
     private val bars = BarbarianWeapon.values().map { it.requiredBar }.toIntArray()
 
     override fun defineListeners() {
+
+        /*
+         * Handles smithing spear and hastae.
+         */
+
         onUseWith(IntType.SCENERY, bars, Scenery.BARBARIAN_ANVIL_25349) { player, used, _ ->
             val weapon = BarbarianWeapon.product[used.id] ?: return@onUseWith true
 

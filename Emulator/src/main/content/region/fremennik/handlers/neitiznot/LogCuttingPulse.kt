@@ -24,7 +24,7 @@ class LogCuttingPulse(
     override fun checkRequirements(): Boolean {
         val tool = SkillingTool.getToolForSkill(player, Skills.WOODCUTTING)
         if (tool == null) {
-            sendMessage(player, "You do not have a pickaxe to use.")
+            sendMessage(player, "You do not have a axe to use.")
             return false
         }
         if (amountInInventory(player, Items.ARCTIC_PINE_LOGS_10810) < 1) {
