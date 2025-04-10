@@ -125,12 +125,12 @@ class ShoeStoreInterface : ComponentPlugin() {
         player: Player,
         button: Int,
     ) {
-        var subtractor = 0
+        var subtract = 0
         when (button) {
-            15, 16, 17, 18, 19, 20 -> subtractor += 15
+            15, 16, 17, 18, 19, 20 -> subtract += 15
         }
         setVarp(player, 261, (button - 14))
-        player.appearance.feet.changeColor(colorId[button - subtractor])
+        player.appearance.feet.changeColor(colorId[button - subtract])
         syncAppearance(player)
     }
 
