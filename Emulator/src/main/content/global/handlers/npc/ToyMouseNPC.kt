@@ -45,7 +45,6 @@ class ToyMouseNPC(
     companion object {
         val mouseMap = mutableMapOf<Int, ToyMouseNPC>()
 
-        @JvmStatic
         fun spawnToyMouse(player: Player) {
             val mouse = ToyMouseNPC(NPCs.TOY_MOUSE_3597)
             mouse.location = Location.getRandomLocation(player.location, 1, true)
@@ -61,6 +60,7 @@ class ToyMouseNPC(
             }
 
             mouse.isActive = true
+            // TODO: Projectile 1608 or 1774
             GameWorld.Pulser.submit(
                 object : Pulse(0, mouse) {
                     override fun pulse(): Boolean {
@@ -78,8 +78,6 @@ class ToyMouseNPC(
             player: Player,
             mouse: NPC,
         ) {
-            val mouseInstance = mouseMap[player.details.uid]
-            val m = findLocalNPC(player, NPCs.TOY_MOUSE_3597)
             mouse.clear()
             mouseMap.remove(player.details.uid)
             return

@@ -12,7 +12,7 @@ class SinewCookingPulse(
     amount: Int,
 ) : CookingPulse(player!!, scenery!!, initial, product, amount) {
     override fun checkRequirements(): Boolean {
-        properties = CookableItem.SINEW
+        properties = CookItem.SINEW
         return super.checkRequirements()
     }
 

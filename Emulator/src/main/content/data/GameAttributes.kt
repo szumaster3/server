@@ -285,5 +285,8 @@ internal object GameAttributes {
     const val QUEST_VIKING_THORVALD_START = "/save:fremtrials:warrior-accepted"
     const val QUEST_VIKING_THORVALD_VOTE = "/save:fremtrials:thorvald-vote"
 
+    // Varrock achievement (Who Ate All the Pie?)
+    const val DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT = "/save:romily-weaklax:pie-amt"
+    const val DIARY_VARROCK_ROMILY_WEAKLAX_PIE_ASSIGN = "/save:romily-weaklax:pie-assigned"
 
 }

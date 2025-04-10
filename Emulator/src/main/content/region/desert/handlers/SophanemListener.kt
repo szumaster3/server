@@ -1,26 +1,17 @@
 package content.region.desert.handlers
 
-import core.api.lock
-import core.api.openInterface
+import content.region.desert.dialogue.sophanem.EmbalmerDialogueFile
+import core.api.*
 import core.api.quest.hasRequirement
-import core.api.runTask
-import core.api.teleport
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import org.rs.consts.Animations
-import org.rs.consts.Components
-import org.rs.consts.Quests
-import org.rs.consts.Scenery
+import org.rs.consts.*
 
 class SophanemListener : InteractionListener {
-    companion object {
-        private const val LADDER_UP = Scenery.LADDER_20277
-        private const val LADDER_DOWN = Scenery.LADDER_20275
-    }
 
     override fun defineListeners() {
         on(LADDER_UP, IntType.SCENERY, "climb-up") { player, _ ->
@@ -42,5 +33,30 @@ class SophanemListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles using Acne potion on Embalmer.
+         */
+
+        onUseWith(IntType.NPC, Items.POTION_195, NPCs.EMBALMER_1980) { player, _, _ ->
+            openDialogue(player, EmbalmerDialogueFile())
+            return@onUseWith true
+        }
+
+        /*
+         * Handles search the spice stall.
+         */
+
+        on(Scenery.SPICE_STALL_20348, IntType.SCENERY, "search") { player, _ ->
+            sendMessage(player, "Nothing interesting happens.")
+            return@on true
+        }
+
     }
+
+    companion object {
+        private const val LADDER_UP = Scenery.LADDER_20277
+        private const val LADDER_DOWN = Scenery.LADDER_20275
+    }
+
 }

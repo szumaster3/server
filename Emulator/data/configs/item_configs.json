@@ -20866,6 +20866,7 @@
     "id": "1996"
   },
   {
+    "examine": "I need to add some meat too.",
     "ge_buy_limit": "200",
     "grand_exchange_price": "177",
     "durability": null,
@@ -20883,6 +20884,7 @@
     "id": "1998"
   },
   {
+    "examine": "I need to add some potato too.",
     "ge_buy_limit": "200",
     "grand_exchange_price": "210",
     "durability": null,
@@ -57797,7 +57799,7 @@
   {
     "shop_price": "50",
     "ge_buy_limit": "1000",
-    "examine": "Raw: A raw spider threaded onto a skewer stick.Cooked: A nicely roasted spider threaded onto a skewer stick.",
+    "examine": "A raw spider threaded onto a skewer stick.",
     "grand_exchange_price": "207",
     "durability": null,
     "name": "Spider on stick",
@@ -57818,7 +57820,7 @@
   {
     "shop_price": "40",
     "ge_buy_limit": "1000",
-    "examine": "A raw spider threaded onto an arrow shaft. (Raw) A nicely roasted spider threaded onto an arrow shaft. (Cooked) A badly burnt spider threaded onto a charred arrow shaft. (Burnt)",
+    "examine": "A raw spider threaded onto an arrow shaft.",
     "grand_exchange_price": "106",
     "durability": null,
     "name": "Spider on shaft",
@@ -57839,7 +57841,7 @@
   {
     "shop_price": "50",
     "ge_buy_limit": "1000",
-    "examine": "Raw: A raw spider threaded onto a skewer stick.Cooked: A nicely roasted spider threaded onto a skewer stick.",
+    "examine": "A nicely roasted spider threaded onto a skewer stick.",
     "grand_exchange_price": "54",
     "durability": null,
     "name": "Spider on stick",
@@ -57860,7 +57862,7 @@
   {
     "shop_price": "40",
     "ge_buy_limit": "1000",
-    "examine": "A raw spider threaded onto an arrow shaft. (Raw) A nicely roasted spider threaded onto an arrow shaft. (Cooked) A badly burnt spider threaded onto a charred arrow shaft. (Burnt)",
+    "examine": "A nicely roasted spider threaded onto an arrow shaft.",
     "grand_exchange_price": "78",
     "durability": null,
     "name": "Spider on shaft",
@@ -57887,7 +57889,7 @@
   },
   {
     "shop_price": "40",
-    "examine": "A raw spider threaded onto an arrow shaft. (Raw) A nicely roasted spider threaded onto an arrow shaft. (Cooked) A badly burnt spider threaded onto a charred arrow shaft. (Burnt)",
+    "examine": "A badly burnt spider threaded onto a charred arrow shaft.",
     "grand_exchange_price": "106",
     "durability": null,
     "name": "Spider on shaft",
@@ -59375,7 +59377,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "A shoot that has been cut from a dying White Tree.",
     "durability": null,
     "name": "White tree shoot",
     "archery_ticket_price": "0",
@@ -59383,7 +59385,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "A young White Tree sapling.",
     "durability": null,
     "name": "White tree shoot",
     "archery_ticket_price": "0",
@@ -59391,15 +59393,15 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Shoot: A shoot that has been cut from a dying White Tree.Plant pot: A young White Tree sapling.Plant pot after watering: This shoot from a White Tree has been watered and will soon grow.",
+    "examine": "This shoot from a White Tree has been watered and will soon grow.",
     "durability": null,
     "name": "White tree shoot",
     "archery_ticket_price": "0",
     "id": "6463"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "A young White Tree sapling",
+    "destroy_message": "You can get another shoot from the dying White Tree.",
+    "examine": "A young White Tree sapling.",
     "durability": null,
     "name": "White tree sapling",
     "tradeable": "false",
@@ -65729,7 +65731,7 @@
   {
     "shop_price": "130",
     "ge_buy_limit": "1000",
-    "examine": "It might look delicious to an ogre.Roasted chompy bird.",
+    "examine": "Roasted chompy bird.",
     "grand_exchange_price": "164",
     "durability": null,
     "name": "Cooked chompy",
@@ -132496,5 +132498,20 @@
     "examine": "You should not have this.",
     "name": "ASDT Slot",
     "id": "14430"
+  },
+  {
+    "examine": "A raw turkey.",
+    "name": "Raw turkey",
+    "id": "14539"
+  },
+  {
+    "examine": "Oh dear, it's totally burnt!",
+    "name": "Burnt turkey",
+    "id": "14541"
+  },
+  {
+    "examine": "Oh dear, it's totally burnt!",
+    "name": "Burnt turkey drumstick",
+    "id": "14544"
   }
 ]

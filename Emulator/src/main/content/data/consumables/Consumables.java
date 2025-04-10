@@ -31,6 +31,15 @@ public enum Consumables {
      */
     COOKED_MEAT(new Food(new int[]{Items.COOKED_MEAT_2142}, new HealingEffect(3))),
     /**
+     * The Cooked turkey.
+     */
+    COOKED_TURKEY(new Food(new int[]{Items.COOKED_TURKEY_14540}, new HealingEffect(2))),
+
+    /**
+     * The Cooked turkey drumstick.
+     */
+    COOKED_TURKEY_DRUMSTICK(new Food(new int[]{Items.COOKED_TURKEY_DRUMSTICK_14543}, new HealingEffect(10), "You eat the turkey drumstick.")),
+    /**
      * The Shrimps.
      */
     SHRIMPS(new Food(new int[]{Items.SHRIMPS_315}, new HealingEffect(3))),
@@ -73,7 +82,7 @@ public enum Consumables {
     /**
      * The Thin snail meat.
      */
-    THIN_SNAIL_MEAT(new Food(new int[]{Items.THIN_SNAIL_MEAT_3369}, new RandomEnergyEffect(5, 7))),
+    THIN_SNAIL_MEAT(new Food(new int[]{Items.THIN_SNAIL_MEAT_3369}, new RandomHealthEffect(5, 7))),
     /**
      * The Trout.
      */
@@ -81,11 +90,11 @@ public enum Consumables {
     /**
      * The Spider on stick.
      */
-    SPIDER_ON_STICK(new Food(new int[]{Items.SPIDER_ON_STICK_6297}, new HealingEffect(7))),
+    SPIDER_ON_STICK(new Food(new int[]{Items.SPIDER_ON_STICK_6297, Items.SKEWER_STICK_6305}, new RandomHealthEffect(7, 10), "You eat the spider. The meat has a silky texture with a delicate web of flavours.")),
     /**
      * The Spider on shaft.
      */
-    SPIDER_ON_SHAFT(new Food(new int[]{Items.SPIDER_ON_SHAFT_6299}, new HealingEffect(7))),
+    SPIDER_ON_SHAFT(new Food(new int[]{Items.SPIDER_ON_SHAFT_6299}, new RandomHealthEffect(7, 10))),
     /**
      * The Roast rabbit.
      */
@@ -93,7 +102,7 @@ public enum Consumables {
     /**
      * The Lean snail meat.
      */
-    LEAN_SNAIL_MEAT(new Food(new int[]{Items.LEAN_SNAIL_MEAT_3371}, new RandomEnergyEffect(6, 8))),
+    LEAN_SNAIL_MEAT(new Food(new int[]{Items.LEAN_SNAIL_MEAT_3371}, new RandomHealthEffect(6, 8))),
     /**
      * The Cod.
      */
@@ -113,7 +122,7 @@ public enum Consumables {
     /**
      * The Fat snail.
      */
-    FAT_SNAIL(new Food(new int[]{Items.FAT_SNAIL_MEAT_3373}, new RandomEnergyEffect(7, 9))),
+    FAT_SNAIL(new Food(new int[]{Items.FAT_SNAIL_MEAT_3373}, new RandomHealthEffect(7, 9))),
     /**
      * The Salmon.
      */
@@ -121,7 +130,7 @@ public enum Consumables {
     /**
      * The Slimy eel.
      */
-    SLIMY_EEL(new Food(new int[]{Items.COOKED_SLIMY_EEL_3381}, new RandomEnergyEffect(7, 9))),
+    SLIMY_EEL(new Food(new int[]{Items.COOKED_SLIMY_EEL_3381}, new RandomHealthEffect(7, 9))),
     /**
      * The Tuna.
      */
@@ -130,6 +139,11 @@ public enum Consumables {
      * The Chopped tuna.
      */
     CHOPPED_TUNA(new Food(new int[]{Items.CHOPPED_TUNA_7086, Items.BOWL_1923}, new HealingEffect(10))),
+
+    /**
+     * The Chopped onion.
+     */
+    CHOPPED_ONION(new Food(new int[]{Items.CHOPPED_ONION_1871, Items.BOWL_1923}, new HealingEffect(1), "It's sad to see a grown man/woman cry.")),
     /**
      * The Cooked karambwan.
      */
@@ -137,7 +151,11 @@ public enum Consumables {
     /**
      * The Cooked chompy.
      */
-    COOKED_CHOMPY(new Food(new int[]{Items.COOKED_CHOMPY_2878}, new HealingEffect(10))),
+    COOKED_CHOMPY(new Food(new int[]{Items.COOKED_CHOMPY_2878}, new HealingEffect(7))),
+    /**
+     * The Cooked roasted chompy (was never made available in-game).
+     */
+    ROASTED_CHOMPY(new Food(new int[]{Items.COOKED_CHOMPY_7228}, new HealingEffect(7))),
     /**
      * The Rainbow fish.
      */
@@ -145,7 +163,7 @@ public enum Consumables {
     /**
      * The Cave eel.
      */
-    CAVE_EEL(new Food(new int[]{Items.CAVE_EEL_5003}, new RandomEnergyEffect(8, 10))),
+    CAVE_EEL(new Food(new int[]{Items.CAVE_EEL_5003}, new RandomHealthEffect(8, 10))),
     /**
      * The Caviar.
      */
@@ -169,7 +187,7 @@ public enum Consumables {
     /**
      * The Lava eel.
      */
-    LAVA_EEL(new Food(new int[]{Items.LAVA_EEL_2149}, new RandomEnergyEffect(9, 11))),
+    LAVA_EEL(new Food(new int[]{Items.LAVA_EEL_2149}, new RandomHealthEffect(9, 11))),
     /**
      * The Monkfish.
      */
@@ -247,6 +265,10 @@ public enum Consumables {
      */
     REDBERRY_PIE(new HalfableFood(new int[]{Items.REDBERRY_PIE_2325, Items.HALF_A_REDBERRY_PIE_2333, Items.PIE_DISH_2313}, new HealingEffect(5))),
     /**
+     * The Minced meat.
+     */
+    MINCED_MEAT(new Food(new int[]{Items.MINCED_MEAT_7070, Items.BOWL_1923}, new HealingEffect(2))),
+    /**
      * The Meat pie.
      */
     MEAT_PIE(new HalfableFood(new int[]{Items.MEAT_PIE_2327, Items.HALF_A_MEAT_PIE_2331, Items.PIE_DISH_2313}, new HealingEffect(6))),
@@ -281,7 +303,7 @@ public enum Consumables {
     /**
      * The White tree fruit.
      */
-    WHITE_TREE_FRUIT(new Food(new int[]{Items.WHITE_TREE_FRUIT_6469}, new MultiEffect(new RandomEnergyEffect(5, 10), new HealingEffect(3)))),
+    WHITE_TREE_FRUIT(new Food(new int[]{Items.WHITE_TREE_FRUIT_6469}, new MultiEffect(new RandomEnergyEffect(5, 10), new HealingEffect(2)))),
     /**
      * The Strange fruit.
      */
@@ -522,6 +544,14 @@ public enum Consumables {
      * The Black mushroom.
      */
     BLACK_MUSHROOM(new FakeConsumable(Items.BLACK_MUSHROOM_4620, new String[]{"Eugh! It tastes horrible, and stains your fingers black."})),
+    /**
+     * The chopped tomato.
+     */
+    CHOPPED_TOMATO(new Food(new int[]{Items.CHOPPED_TOMATO_1869, Items.BOWL_1923}, new HealingEffect(2))),
+    /**
+     * The Onion and tomato.
+     */
+    ONION_AND_TOMATO(new Food(new int[]{Items.ONION_AND_TOMATO_1875, Items.BOWL_1923}, new HealingEffect(2))),
     /**
      * The Potato with cheese.
      */

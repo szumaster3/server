@@ -19,7 +19,7 @@ import org.rs.consts.Sounds
 
 /**
  * `EquipHandler` manages the logic for equipping and unequipping items for players.
- * It handles equipping items to the player’s equipment slots, playing appropriate sound effects,
+ * It handles equipping items to the player's equipment slots, playing appropriate sound effects,
  * and dispatching related events. The class also manages item-specific logic, such as brawling gloves
  * and Slayer equipment flags.
  */

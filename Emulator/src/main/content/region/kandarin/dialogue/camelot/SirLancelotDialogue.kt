@@ -49,7 +49,7 @@ class SirLancelotDialogue(
                 }
                 // Holy Grail: Searching for a quest.
                 if (merlinStage == 100) {
-                    npcl(FaceAnim.NEUTRAL, "Hmmm. I heard you freed Merlin. Either you’re better than you look or you got lucky. I think the latter.").also { stage = END_DIALOGUE }
+                    npcl(FaceAnim.NEUTRAL, "Hmmm. I heard you freed Merlin. Either you're better than you look or you got lucky. I think the latter.").also { stage = END_DIALOGUE }
                 } else {
                     playerl(FaceAnim.HAPPY, "I am questing for the Holy Grail.").also { stage = 11 }
                 }

@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.npc;
 
 import content.data.consumables.Consumables;
-import content.global.skill.cooking.CookableItem;
+import content.global.skill.cooking.CookItem;
 import content.global.skill.gathering.fishing.Fish;
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;
@@ -89,8 +89,8 @@ public class BunyipNPC extends content.global.skill.summoning.familiar.Familiar 
             player.sendMessage("Error: Report to admin.");
             return false;
         }
-        if (player.getSkills().getLevel(Skills.COOKING) < CookableItem.forId(special.getItem().getId()).level) {
-            player.sendMessage("You need a Cooking level of at least " + CookableItem.forId(special.getItem().getId()).level + " in order to do that.");
+        if (player.getSkills().getLevel(Skills.COOKING) < CookItem.forId(special.getItem().getId()).level) {
+            player.sendMessage("You need a Cooking level of at least " + CookItem.forId(special.getItem().getId()).level + " in order to do that.");
             return false;
         }
         if (player.getInventory().remove(special.getItem())) {

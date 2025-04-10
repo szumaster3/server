@@ -109,25 +109,25 @@ class FremennikTrialsListener : InteractionListener {
         onUseWith(IntType.SCENERY, STEW_INGREDIENT_IDS, LALLIS_STEW) { player, stewIngredient, _ ->
             when (stewIngredient.id) {
                 Items.ONION_1957 -> {
-                    sendDialogue(player, "You added an onion to the stew")
+                    sendDialogue(player, "You added an onion to the stew.")
                     setAttribute(player, GameAttributes.QUEST_VIKING_STEW_INGREDIENTS_ONION, true)
                     removeItem(player, stewIngredient)
                 }
 
                 Items.POTATO_1942 -> {
-                    sendDialogue(player, "You added a potato to the stew")
+                    sendDialogue(player, "You added a potato to the stew.")
                     setAttribute(player, GameAttributes.QUEST_VIKING_STEW_INGREDIENTS_POTATO, true)
                     removeItem(player, stewIngredient)
                 }
 
                 Items.CABBAGE_1965 -> {
-                    sendDialogue(player, "You added a cabbage to the stew")
+                    sendDialogue(player, "You added a cabbage to the stew.")
                     setAttribute(player, GameAttributes.QUEST_VIKING_STEW_INGREDIENTS_CABBAGE, true)
                     removeItem(player, stewIngredient)
                 }
 
                 Items.PET_ROCK_3695 -> {
-                    sendDialogue(player, "You added your dear pet rock to the stew")
+                    sendDialogue(player, "You added your dear pet rock to the stew.")
                     setAttribute(player, GameAttributes.QUEST_VIKING_STEW_INGREDIENTS_ROCK, true)
                     removeItem(player, stewIngredient)
                 }
@@ -139,7 +139,7 @@ class FremennikTrialsListener : InteractionListener {
             if (removeItem(player, GOLDEN_FLEECE)) {
                 addItem(player, GOLDEN_WOOL)
                 animate(player, Animations.HUMAN_COOKING_RANGE_896)
-                sendDialogue(player, "You spin the Golden Fleece into a ball of Golden Wool")
+                sendDialogue(player, "You spin the Golden Fleece into a ball of Golden Wool.")
             }
             return@onUseWith true
         }

@@ -56,7 +56,7 @@ class KlenterDialogue(
             0 -> player(FaceAnim.ASKING, "What?").also { stage++ }
             1 -> npc(FaceAnim.ANNOYED, "You heard me, restore what you have stolen from", "my tomb!").also { stage++ }
             2 -> player(FaceAnim.STRUGGLE, "But...").also { stage++ }
-            3 -> npc(forceDialogue.random()).also { stage = END_DIALOGUE }
+            3 -> npcl(FaceAnim.ANNOYED, forceDialogue.random()).also { stage = END_DIALOGUE }
         }
         return true
     }

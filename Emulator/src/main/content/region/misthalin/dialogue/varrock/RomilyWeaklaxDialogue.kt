@@ -1,8 +1,10 @@
 package content.region.misthalin.dialogue.varrock
 
-import core.api.removeAttribute
-import core.api.setAttribute
+import content.data.GameAttributes
+import core.api.*
+import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.npc.NPC
@@ -12,14 +14,19 @@ import core.game.node.item.Item
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Romily Weaklax dialogue.
+ *
+ * Relations:
+ * [Varrock Achievement Diary][content.region.misthalin.handlers.VarrockAchievementDiary]
+ */
 @Initializable
-class RomilyWeaklaxDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RomilyWeaklaxDialogue(player: Player? = null) : Dialogue(player) {
     private var pieId = 0
     private var pieAmt = 0
     private var pieReward: PieReward? = null
@@ -31,159 +38,85 @@ class RomilyWeaklaxDialogue(
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        pieId = player.getAttribute(keyId, 0)
-        pieAmt = player.getAttribute(keyAmt, 0)
+        pieId = getAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_ASSIGN, 0)
+        pieAmt = getAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT, 0)
         pieReward = PieReward.forId(pieId)
-        if (args.size > 1) {
-            val usedWith = args[1] as Item
-            if (usedWith.id == Items.WILD_PIE_7208) {
-                npc("Is that a wild pie for me?")
-                stage = 100
-                return true
-            }
+
+        if (args.size > 1 && (args[1] as Item).id == Items.WILD_PIE_7208) {
+            npc(FaceAnim.HALF_ASKING,"Is that a wild pie for me?")
+            stage = 100
+        } else {
+            npc(FaceAnim.HAPPY,"Hello and welcome to my pie shop, how can I help you?")
+            stage = if (pieId != 0 && pieAmt != 0) 2 else 0
         }
-        npc("Hello and welcome to my pie shop, how can I help you?")
-        stage =
-            if (pieId != 0 && pieAmt != 0) {
-                2
-            } else {
-                0
-            }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            999 -> end()
-            0 -> {
-                options("I'd like to buy some pies.", "Do you need any help?", "I'm good thanks.")
-                stage = 1
+            0 -> options("I'd like to buy some pies.", "Do you need any help?", "I'm good thanks.").also { stage++ }
+
+            1 -> when (buttonId) {
+                1 -> player("I'd like to buy some pies.").also { stage = 10 }
+                2 -> player("Do you need any help?").also { stage = 20 }
+                3 -> player("I'm good thanks.").also { stage = END_DIALOGUE }
             }
 
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        player("I'd like to buy some pies.")
-                        stage = 10
-                    }
+            2 -> options("I'd like to buy some pies.", "I've got those pies you wanted.", "I'm good thanks.").also { stage++ }
 
-                    2 -> {
-                        player("Do you need any help?")
-                        stage = 20
-                    }
-
-                    3 -> {
-                        player("I'm good thanks.")
-                        stage = 999
-                    }
-                }
-
-            2 -> {
-                options("I'd like to buy some pies.", "I've got those pies you wanted.", "I'm good thanks.")
-                stage = 1
+            3 -> when (buttonId) {
+                1 -> player("I'd like to buy some pies.").also { stage = 10 }
+                2 -> player("I've got those pies you wanted.").also { stage = 50 }
+                3 -> player("I'm good thanks.").also { stage = END_DIALOGUE }
             }
 
-            3 ->
-                when (buttonId) {
-                    1 -> {
-                        player("I'd like to buy some pies.")
-                        stage = 10
-                    }
+            10 -> npc("Take a look.").also { stage++ }
+            11 -> end().also { openNpcShop(player, NPCs.ROMILY_WEAKLAX_3205) }
 
-                    2 -> {
-                        player("I've got those pies you wanted.")
-                        stage = 50
-                    }
-
-                    3 -> {
-                        player("I'm good thanks.")
-                        stage = 999
-                    }
-                }
-
-            10 -> {
-                npc("Take a look.")
-                stage++
+            20 -> npc("Actually, I could use help baking pies. Would you help me?").also { stage++ }
+            21 -> options("Sure, what do you need?", "Sorry, I can't help you.").also { stage++ }
+            22 -> when (buttonId) {
+                1 -> player("Sure, what do you need?").also { stage = 60 }
+                2 -> player("Sorry, I can't help you.").also { stage++ }
             }
 
-            11 -> {
-                end()
-                npc.openShop(player)
-            }
-
-            20 -> {
-                npc(
-                    "Actually I could, you see I'm running out of stock and I",
-                    "don't have tme to bake any more pies. would you be",
-                    "willing to bake me some pies? I'll pay you well for them.",
-                )
-                stage = 21
-            }
-
-            21 -> {
-                options("Sure, what do you need?", "Sorry, I can't help you.")
-                stage = 22
-            }
-
-            22 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Sure, what do you need?")
-                        stage = 60
-                    }
-
-                    2 -> {
-                        player("Sorry, I can't help you.")
-                        stage++
-                    }
-                }
-
-            23 -> {
-                npc("Come back if you ever want to bake pies.")
-                stage = 999
-            }
+            23 -> npc("Come back if you ever want to bake pies.").also { stage = END_DIALOGUE }
 
             50 -> {
-                val piesInInventory = player.inventory.getAmount(pieId)
+                val piesInInventory = amountInInventory(player, pieId)
                 val deficit = pieAmt - piesInInventory
-                if (piesInInventory == 0) {
-                    npc(
-                        "Doesn't look like you have any of the",
-                        pieAmt.toString() + " " + Item(pieId).name + "s I requested.",
-                    )
-                    stage = 999
-                } else if (deficit == 0) {
-                    npc("Thank you very much!")
-                    removeAttribute(player, keyAmt)
-                    removeAttribute(player, keyId)
-                } else {
-                    npc("Thank you, if you could bring me the other $deficit that'd", "be great!")
-                    setAttribute(player, "/save:" + keyAmt, deficit)
+                when {
+                    piesInInventory == 0 -> {
+                        npc("Doesn't look like you have the $pieAmt ${Item(pieId).name}s I requested.")
+                        stage = END_DIALOGUE
+                    }
+                    deficit == 0 -> {
+                        npc("Thank you very much!")
+                        removeAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT)
+                        removeAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT)
+                    }
+                    else -> {
+                        npc("Thank you! If you could bring me the other $deficit pies, that'd be great!")
+                        setAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT, deficit)
+                    }
                 }
                 player.inventory.remove(Item(pieId, piesInInventory))
-                player.inventory.add(Item(995, pieReward!!.reward * piesInInventory))
-                stage = 999
+                player.inventory.add(Item(Items.COINS_995, pieReward!!.reward * piesInInventory))
+                stage = END_DIALOGUE
             }
 
             60 -> {
                 pieAmt = RandomFunction.random(1, 28)
                 pieId = PieReward.values()[RandomFunction.nextInt(PieReward.values().size)].id
-                setAttribute(player, "/save:" + keyAmt, pieAmt)
-                setAttribute(player, "/save:" + keyId, pieId)
-                npc("Great, can you bake me " + pieAmt + " " + Item(pieId).name + "s please.")
-                stage = 999
+                setAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT, pieAmt)
+                setAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT, pieId)
+                npc("Great, can you bake me $pieAmt ${Item(pieId).name}s please?")
+                stage = END_DIALOGUE
             }
 
-            100 -> {
-                player("Yes, it is.")
-                stage++
-            }
-
+            100 -> player("Yes, it is.").also { stage++ }
             101 -> {
-                npc("Oh, how splendid! Let me take that from you then.")
+                npc("Oh, how splendid! Let me take that from you.")
                 player.inventory.remove(Item(Items.WILD_PIE_7208))
                 player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 5)
                 stage++
@@ -191,12 +124,7 @@ class RomilyWeaklaxDialogue(
 
             102 -> {
                 npc("Now, was there anything else you needed?")
-                stage =
-                    if (pieId != 0 && pieAmt != 0) {
-                        2
-                    } else {
-                        0
-                    }
+                stage = if (pieId != 0 && pieAmt != 0) 2 else 0
             }
         }
         return true
@@ -204,54 +132,31 @@ class RomilyWeaklaxDialogue(
 
     override fun getIds(): IntArray = intArrayOf(NPCs.ROMILY_WEAKLAX_3205)
 
-    private enum class PieReward(
-        var id: Int,
-        var reward: Int,
-    ) {
+    private enum class PieReward(val id: Int, val reward: Int) {
         APPLE(Items.APPLE_PIE_2323, 84),
-
         REDBERRY(Items.REDBERRY_PIE_2325, 90),
-
         MEAT(Items.MEAT_PIE_2327, 96),
-
         GARDEN(Items.GARDEN_PIE_7178, 112),
-
         FISH(Items.FISH_PIE_7188, 125),
-
-        ADMIRAL(Items.ADMIRAL_PIE_7198, 387),
-        ;
+        ADMIRAL(Items.ADMIRAL_PIE_7198, 387);
 
         companion object {
-            fun forId(id: Int): PieReward? {
-                for (pie in values()) {
-                    if (pie.id == id) {
-                        return pie
-                    }
-                }
-                return null
-            }
+            fun forId(id: Int): PieReward? = values().find { it.id == id }
         }
     }
 
     class RomilyWildPieHandler : UseWithHandler(Items.WILD_PIE_7208) {
         override fun newInstance(arg: Any?): Plugin<Any> {
-            addHandler(3205, NPC_TYPE, this)
+            addHandler(NPCs.ROMILY_WEAKLAX_3205, NPC_TYPE, this)
             return this
         }
 
         override fun handle(event: NodeUsageEvent): Boolean {
-            if (!event.player.achievementDiaryManager
-                    .getDiary(DiaryType.VARROCK)!!
-                    .isComplete(2, 5)
-            ) {
-                event.player.dialogueInterpreter.open(3205, event.usedItem)
+            if (!hasDiaryTaskComplete(event.player, DiaryType.VARROCK, 2, 5)) {
+                openDialogue(event.player, NPCs.ROMILY_WEAKLAX_3205, event.usedItem)
             }
             return true
         }
     }
 
-    companion object {
-        private const val keyAmt = "romily-weaklax:pie-amt"
-        private const val keyId = "romily-weaklax:pie-assigned"
-    }
 }

@@ -16,7 +16,7 @@ class CookingRewrite : InteractionListener {
     init {
         RAW_FOODS =
             intArrayOf(
-                *CookableItem.values().map { it.raw }.toIntArray(),
+                *CookItem.values().map { it.raw }.toIntArray(),
                 Items.COOKED_MEAT_2142,
                 Items.RAW_BEEF_2132,
                 Items.RAW_BEAR_MEAT_2136,
@@ -52,9 +52,9 @@ class CookingRewrite : InteractionListener {
                 player.dialogueInterpreter.open(CookingDialogue(item.id, obj))
             } else {
                 val product =
-                    CookableItem.forId(item.id)?.let {
-                        if (CookableItem.intentionalBurn(item.id)) {
-                            CookableItem.getIntentionalBurn(item.id).id
+                    CookItem.forId(item.id)?.let {
+                        if (CookItem.intentionalBurn(item.id)) {
+                            CookItem.getIntentionalBurn(item.id).id
                         } else {
                             it.cooked
                         }
@@ -195,7 +195,7 @@ class CookingRewrite : InteractionListener {
                 when {
                     foodName.contains("pizza") -> PizzaCookingPulse(player, scenery!!, initial, product, amount)
                     foodName.contains("pie") -> PieCookingPulse(player, scenery!!, initial, product, amount)
-                    CookableItem.intentionalBurn(initial) -> BurnPulse(player, scenery!!, initial, product, amount)
+                    CookItem.intentionalBurn(initial) -> BurnPulse(player, scenery!!, initial, product, amount)
                     else -> CookingPulse(player, scenery!!, initial, product, amount)
                 }
 
