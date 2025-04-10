@@ -1,29 +1,28 @@
 package content.global.skill.summoning.pet;
 
 /**
- * The type Pet details.
+ * The PetDetails class holds the data for a pet's hunger, growth, and individual state.
  */
 public final class PetDetails {
 
     private double hunger = 0.0;
-
     private double growth = 0.0;
-
     private int individual;
 
     /**
-     * Instantiates a new Pet details.
+     * Instantiates a new PetDetails object with a given initial growth value.
      *
-     * @param growth the growth
+     * @param growth the initial growth value of the pet
      */
     public PetDetails(double growth) {
         this.growth = growth;
     }
 
     /**
-     * Update hunger.
+     * Updates the hunger value of the pet by the specified amount.
+     * If the hunger becomes negative, it is reset to zero.
      *
-     * @param amount the amount
+     * @param amount the amount to increase or decrease the hunger by
      */
     public void updateHunger(double amount) {
         hunger += amount;
@@ -33,9 +32,10 @@ public final class PetDetails {
     }
 
     /**
-     * Update growth.
+     * Updates the growth value of the pet by the specified amount.
+     * The growth is clamped between 0.0 and 100.0, meaning it cannot go below 0 or above 100.
      *
-     * @param amount the amount
+     * @param amount the amount to increase or decrease the growth by
      */
     public void updateGrowth(double amount) {
         growth += amount;
@@ -47,36 +47,36 @@ public final class PetDetails {
     }
 
     /**
-     * Gets hunger.
+     * Retrieves the current hunger value of the pet.
      *
-     * @return the hunger
+     * @return the current hunger value
      */
     public double getHunger() {
         return hunger;
     }
 
     /**
-     * Gets growth.
+     * Retrieves the current growth value of the pet.
      *
-     * @return the growth
+     * @return the current growth value
      */
     public double getGrowth() {
         return growth;
     }
 
     /**
-     * Sets individual.
+     * Sets the individual identifier for the pet.
      *
-     * @param individual the individual
+     * @param individual the individual identifier for the pet
      */
     public void setIndividual(int individual) {
         this.individual = individual;
     }
 
     /**
-     * Gets individual.
+     * Retrieves the individual identifier of the pet.
      *
-     * @return the individual
+     * @return the individual identifier
      */
     public int getIndividual() {
         return individual;

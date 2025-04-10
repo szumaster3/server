@@ -5,14 +5,36 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.NPCs
 import java.util.*
 
+/**
+ * Represents a Slayer Master who assigns Slayer tasks.
+ *
+ * Each Slayer Master has specific:
+ * - NPC ID
+ * - Required combat level
+ * - Additional requirements (e.g., Slayer level or quest completion)
+ * - Range of task amounts they can assign
+ * - Task points awarded based on streaks
+ * - A unique list of tasks they can assign
+ *
+ * @property npc The npc id of the Slayer Master.
+ * @property requiredCombat The minimum combat level required to receive tasks.
+ * @property requirements Additional requirement level (e.g., Slayer level or quest req).
+ * @property assignmentCount The possible min and max range of tasks assigned.
+ * @property taskPoints Points awarded per task streak milestone.
+ * @property tasks List of possible Slayer tasks assigned by the master.
+ */
 enum class SlayerMaster(
     var npc: Int,
     var requiredCombat: Int,
     var requirements: Int,
-    var assigmentCount: IntArray,
+    var assignmentCount: IntArray,
     var taskPoints: IntArray,
     vararg tasks: Task,
 ) {
+
+    /**
+     * Turael - beginner Slayer Master with no requirements.
+     */
     TURAEL(
         NPCs.TURAEL_8273,
         0,
@@ -45,6 +67,9 @@ enum class SlayerMaster(
         Task(Tasks.ZOMBIES, 7),
     ),
 
+    /**
+     * Mazchna - requires 20 Combat.
+     */
     MAZCHNA(
         NPCs.MAZCHNA_8274,
         20,
@@ -78,9 +103,12 @@ enum class SlayerMaster(
         Task(Tasks.SKELETONS, 7),
         Task(Tasks.VAMPIRES, 6),
         Task(Tasks.WOLVES, 7),
-        Task(Tasks.ZOMBIES, 7),
+        Task(Tasks.ZOMBIES, 7)
     ),
 
+    /**
+     * Vannaka - mid-tier Slayer Master requiring 40 Combat.
+     */
     VANNAKA(
         NPCs.VANNAKA_1597,
         40,
@@ -141,6 +169,9 @@ enum class SlayerMaster(
         Task(Tasks.WEREWOLFS, 7),
     ),
 
+    /**
+     * Chaeldar - requires 70 Combat, gives higher tier tasks.
+     */
     CHAELDAR(
         NPCs.CHAELDAR_1598,
         70,
@@ -190,6 +221,9 @@ enum class SlayerMaster(
         Task(Tasks.ZYGOMITES, 7),
     ),
 
+    /**
+     * Sumona - requires 90 Combat and 35 Slayer.
+     */
     SUMONA(
         NPCs.SUMONA_7780,
         90,
@@ -227,6 +261,9 @@ enum class SlayerMaster(
         Task(Tasks.VAMPIRES, 10),
     ),
 
+    /**
+     * Duradel - high-level Slayer Master requiring 100 Combat and 50 Slayer.
+     */
     DURADEL(
         NPCs.DURADEL_8275,
         100,
@@ -270,16 +307,31 @@ enum class SlayerMaster(
 
     var tasks: List<Task> = ArrayList(arrayListOf(*tasks))
 
+    /**
+     * Checks if the player meets the combat and slayer level requirements to receive a task from this Slayer Master.
+     *
+     * @param player The player to check against.
+     * @return `True` if the player meets the requirements; `false` otherwise.
+     */
     fun hasRequirements(player: Player): Boolean =
         player.properties.currentCombatLevel >= this.requiredCombat &&
             player.getSkills().getLevel(Skills.SLAYER) >= this.requirements
 
+    /**
+     * Represents a slayer task assigned by a Slayer Master.
+     *
+     * @property task The specific task assigned.
+     * @property weight The weighting used in task assignment randomness.
+     */
     class Task internal constructor(
         var task: Tasks,
         var weight: Int,
     )
 
     companion object {
+        /**
+         * A map used to get a [SlayerMaster] based on their npc id.
+         */
         private val idMap = HashMap<Int, SlayerMaster>()
 
         init {
@@ -288,9 +340,23 @@ enum class SlayerMaster(
             }
         }
 
+        /**
+         * Retrieves a [SlayerMaster] instance by its npc id.
+         *
+         * @param id The npc id of the Slayer Master.
+         * @return The corresponding SlayerMaster instance.
+         * @throws KotlinNullPointerException If no SlayerMaster exists for the given id.
+         */
         @JvmStatic
         fun forId(id: Int): SlayerMaster = idMap[id]!!
 
+        /**
+         * Checks if the player currently has a task assigned by the given Slayer Master.
+         *
+         * @param master The Slayer Master to compare against.
+         * @param player The player whose current task is being checked.
+         * @return `True` if the task matches any task from the master; `false` otherwise.
+         */
         @JvmStatic
         fun hasSameTask(
             master: SlayerMaster,

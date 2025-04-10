@@ -14,7 +14,10 @@ import static core.api.quest.QuestAPIKt.hasRequirement;
 import static core.api.quest.QuestAPIKt.isQuestComplete;
 
 /**
- * The enum Altar.
+ * Represents an altar used in the Runecrafting skill.
+ * <p>
+ * Each altar is associated with a unique scenery object, an exit portal, a rift ID,
+ * its corresponding mysterious ruin, and the rune it produces.
  */
 public enum Altar {
     /**
@@ -101,19 +104,19 @@ public enum Altar {
     }
 
     /**
-     * For scenery altar.
+     * Retrieves the corresponding altar based on the given scenery object.
      *
-     * @param scenery the scenery
-     * @return the altar
+     * @param scenery the scenery object to find the corresponding altar for
+     * @return the Altar associated with the given scenery
      */
     public static Altar forScenery(Scenery scenery) {
         return ALTAR_BY_SCENERY.getOrDefault(scenery.getId(), ALTAR_BY_PORTAL.getOrDefault(scenery.getId(), ALTAR_BY_RIFT_ID.get(scenery.getId())));
     }
 
     /**
-     * Enter rift.
+     * Makes the player enter the rift for the current altar.
      *
-     * @param player the player
+     * @param player the player attempting to enter the rift
      */
     public void enterRift(Player player) {
         switch (this) {
@@ -142,77 +145,77 @@ public enum Altar {
                 break;
         }
         if (ruin != null) {
-            player.getProperties().setTeleportLocation(ruin.getEnd());
+            player.getProperties().setTeleportLocation(ruin.end);
         }
     }
 
     /**
-     * Gets rune.
+     * Gets the rune associated with the current altar.
      *
-     * @return the rune
+     * @return the Rune for the current altar
      */
     public Rune getRune() {
         return rune;
     }
 
     /**
-     * Gets scenery.
+     * Gets the scenery id associated with the current altar.
      *
-     * @return the scenery
+     * @return the scenery id for the current altar
      */
     public int getScenery() {
         return scenery;
     }
 
     /**
-     * Gets exit.
+     * Gets the exit id for the current altar.
      *
-     * @return the exit
+     * @return the exit id for the current altar
      */
     public int getExit() {
         return exit;
     }
 
     /**
-     * Gets rift.
+     * Gets the rift id for the current altar.
      *
-     * @return the rift
+     * @return the rift id for the current altar
      */
     public int getRift() {
         return rift;
     }
 
     /**
-     * Gets ruin.
+     * Gets the ruin associated with the current altar.
      *
-     * @return the ruin
+     * @return the MysteriousRuins for the current altar
      */
     public MysteriousRuins getRuin() {
         return ruin;
     }
 
     /**
-     * Is ourania boolean.
+     * Determines if the current altar is the Ourania altar.
      *
-     * @return the boolean
+     * @return true if the altar is Ourania, false otherwise
      */
     public boolean isOurania() {
         return rune == null;
     }
 
     /**
-     * Gets talisman.
+     * Retrieves the talisman associated with the current altar.
      *
-     * @return the talisman
+     * @return the Talisman corresponding to the current altar
      */
     public Talisman getTalisman() {
         return Arrays.stream(Talisman.values()).filter(talisman -> talisman.name().equalsIgnoreCase(this.name())).findFirst().orElse(null);
     }
 
     /**
-     * Gets tiara.
+     * Retrieves the tiara associated with the current altar.
      *
-     * @return the tiara
+     * @return the Tiara corresponding to the current altar
      */
     public Tiara getTiara() {
         return Arrays.stream(Tiara.values()).filter(tiara -> tiara.name().equalsIgnoreCase(this.name())).findFirst().orElse(null);

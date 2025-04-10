@@ -56,7 +56,7 @@ object SlayerUtils {
         SlayerManager.getInstance(player).master = master
         SlayerManager.getInstance(player).task = task
         SlayerManager.getInstance(player).amount =
-            RandomFunction.random(master.assigmentCount[0], master.assigmentCount[1])
+            RandomFunction.random(master.assignmentCount[0], master.assignmentCount[1])
         if (master == SlayerMaster.DURADEL) {
             player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 2, 8)
         } else if (master == SlayerMaster.VANNAKA) {

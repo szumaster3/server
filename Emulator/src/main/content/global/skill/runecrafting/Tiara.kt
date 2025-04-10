@@ -3,6 +3,12 @@ package content.global.skill.runecrafting
 import core.game.node.item.Item
 import org.rs.consts.Items
 
+/**
+ * Represents the various elemental tiaras used in Runecrafting.
+ *
+ * @property item The [Item] instance representing the tiara.
+ * @property experience The amount of bonus experience awarded when using the tiara during Runecrafting.
+ */
 enum class Tiara(
     val item: Item,
     val experience: Double,
@@ -21,6 +27,11 @@ enum class Tiara(
     BLOOD(Item(Items.BLOOD_TIARA_5549), 52.5),
     ;
 
+    /**
+     * Gets the corresponding [Talisman] for this tiara, if one exists.
+     *
+     * The name of the tiara enum constant is matched against the names of the [Talisman] enum.
+     */
     val talisman: Talisman?
         get() = Talisman.values().find { it.name == name }
 
@@ -33,9 +44,23 @@ enum class Tiara(
             }
         }
 
+        /**
+         * Retrieves the [Tiara] enum constant for the given [Item].
+         *
+         * @param item The item to check.
+         * @return The matching [Tiara], or `null` if no match is found.
+         */
         @JvmStatic
         fun from(item: Item): Tiara? = itemToTiara[item.id]
 
+        /**
+         * Alternative method to retrieve the [Tiara] enum constant for the given [Item].
+         *
+         * This does the same as [from] and is kept for naming flexibility.
+         *
+         * @param item The item to check.
+         * @return The matching [Tiara], or `null` if no match is found.
+         */
         @JvmStatic
         fun forItem(item: Item): Tiara? = itemToTiara[item.id]
     }

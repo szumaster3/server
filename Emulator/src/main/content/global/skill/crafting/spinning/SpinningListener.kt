@@ -8,14 +8,14 @@ import org.rs.consts.Scenery
 
 class SpinningListener : InteractionListener {
     override fun defineListeners() {
-        on(SPINING_WHEEL, IntType.SCENERY, "spin") { player, _ ->
+        on(SPINNING_WHEEL, IntType.SCENERY, "spin") { player, _ ->
             openInterface(player, Components.CRAFTING_SPINNING_459)
             return@on true
         }
     }
 
     companion object {
-        val SPINING_WHEEL =
+        val SPINNING_WHEEL =
             intArrayOf(
                 Scenery.SPINNING_WHEEL_2644,
                 Scenery.SPINNING_WHEEL_4309,

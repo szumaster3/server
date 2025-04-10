@@ -27,7 +27,7 @@ class SlayerListener : InteractionListener {
         private const val CAVE_ENTRANCE = Scenery.CAVE_ENTRANCE_15767
         private val CAVE_EXIT =
             intArrayOf(Scenery.CAVE_15811, Scenery.CAVE_15812, Scenery.CAVE_23157, Scenery.CAVE_23158)
-        private val SVENS_DIG_LOCATIONS =
+        private val SWENS_DIG_LOCATIONS =
             arrayOf(
                 Location(2749, 3733, 0),
                 Location(2748, 3733, 0),
@@ -67,14 +67,7 @@ class SlayerListener : InteractionListener {
 
                 2 -> {
                     playAudio(player, Sounds.STUNNED_2727)
-                    visualize(
-                        player,
-                        NULL,
-                        Graphics(
-                            org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80,
-                            96,
-                        ),
-                    )
+                    visualize(player, NULL, Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
                     sendMessage(player, "...And fall into a dark and slimy pit!")
                     return@queueScript stopExecuting(player)
                 }
@@ -85,7 +78,7 @@ class SlayerListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        for (location in SVENS_DIG_LOCATIONS) {
+        for (location in SWENS_DIG_LOCATIONS) {
             onDig(location) { player: Player ->
                 enterCavern(player)
             }

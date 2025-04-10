@@ -11,32 +11,43 @@ import core.game.node.entity.player.link.quest.QuestRequirements
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import org.rs.consts.Animations
+import org.rs.consts.Items
 
+/**
+ * Represents interactions with the mysterious ruins in the game.
+ */
 class MysteriousRuinsListener : InteractionListener {
     private val sceneryIDs = allRuins()
     private val stavesIDs = Staves.values().map { it.item }.toIntArray()
-    private val talismanIDs =
-        arrayOf(
-            1438,
-            1448,
-            1444,
-            1440,
-            1442,
-            5516,
-            1446,
-            1454,
-            1452,
-            1462,
-            1458,
-            1456,
-            1450,
-            1460,
-        ).toIntArray()
+    private val talismanIDs = arrayOf(
+        Items.AIR_TALISMAN_1438,
+        Items.MIND_TALISMAN_1448,
+        Items.WATER_TALISMAN_1444,
+        Items.EARTH_TALISMAN_1440,
+        Items.FIRE_TALISMAN_1442,
+        Items.ELEMENTAL_TALISMAN_5516,
+        Items.BODY_TALISMAN_1446,
+        Items.COSMIC_TALISMAN_1454,
+        Items.CHAOS_TALISMAN_1452,
+        Items.NATURE_TALISMAN_1462,
+        Items.LAW_TALISMAN_1458,
+        Items.DEATH_TALISMAN_1456,
+        Items.BLOOD_TALISMAN_1450,
+        Items.SOUL_TALISMAN_1460
+    ).toIntArray()
 
     override fun defineListeners() {
+        /*
+         * Handles using a talisman with a scenery object.
+         */
+
         onUseWith(IntType.SCENERY, talismanIDs, *sceneryIDs) { player, used, with ->
             return@onUseWith handleTalisman(player, used, with)
         }
+
+        /*
+         * Handles interaction with scenery.
+         */
 
         on(sceneryIDs, IntType.SCENERY, "enter", "search") { player, node ->
             if (anyInEquipment(player, *stavesIDs)) {
@@ -48,12 +59,25 @@ class MysteriousRuinsListener : InteractionListener {
         }
     }
 
+    /**
+     * Retrieves all the ids for the mysterious ruins.
+     *
+     * @return A list of all ruin object ids.
+     */
     private fun allRuins(): IntArray =
         MysteriousRuins
             .values()
             .flatMap { ruins -> ruins.`object`.asList() }
             .toIntArray()
 
+    /**
+     * Handles the interaction when a talisman is used with a scenery object.
+     *
+     * @param player The player interacting with the object.
+     * @param used The item used in the interaction.
+     * @param with The scenery object interacted with.
+     * @return `true` if the interaction was successful, `false` otherwise.
+     */
     private fun handleTalisman(
         player: Player,
         used: Node,
@@ -72,11 +96,11 @@ class MysteriousRuinsListener : InteractionListener {
         }
         if (talisman == Talisman.ELEMENTAL &&
             (
-                ruin.talisman != Talisman.AIR &&
-                    ruin.talisman != Talisman.WATER &&
-                    ruin.talisman != Talisman.FIRE &&
-                    ruin.talisman != Talisman.EARTH
-            )
+                    ruin.talisman != Talisman.AIR &&
+                            ruin.talisman != Talisman.WATER &&
+                            ruin.talisman != Talisman.FIRE &&
+                            ruin.talisman != Talisman.EARTH
+                    )
         ) {
             sendMessage(player, "Nothing interesting happens.")
             return false
@@ -86,6 +110,13 @@ class MysteriousRuinsListener : InteractionListener {
         return true
     }
 
+    /**
+     * Handles the interaction when the player uses a staff with a scenery object.
+     *
+     * @param player The player interacting with the object.
+     * @param node The scenery object interacted with.
+     * @return `true` if the interaction was successful.
+     */
     private fun handleStaff(
         player: Player,
         node: Node,
@@ -101,6 +132,13 @@ class MysteriousRuinsListener : InteractionListener {
         return true
     }
 
+    /**
+     * Handles the interaction when the player uses a tiara with a scenery object.
+     *
+     * @param player The player interacting with the object.
+     * @param node The scenery object interacted with.
+     * @return `true` if the interaction was successful.
+     */
     private fun handleTiara(
         player: Player,
         node: Node,
@@ -121,6 +159,13 @@ class MysteriousRuinsListener : InteractionListener {
         return true
     }
 
+    /**
+     * Checks if the player has completed the quest required for interacting with the ruin.
+     *
+     * @param player The player whose quest progress is being checked.
+     * @param ruin The ruin the player is interacting with.
+     * @return `true` if the player has completed the quest, `false` otherwise.
+     */
     private fun checkQuestCompletion(
         player: Player,
         ruin: MysteriousRuins,
@@ -131,6 +176,13 @@ class MysteriousRuinsListener : InteractionListener {
             else -> hasRequirement(player, QuestReq(QuestRequirements.RUNE_MYSTERIES), true)
         }
 
+    /**
+     * Teleports the player to the mysterious ruin after using the talisman.
+     *
+     * @param player The player to be teleported.
+     * @param talisman The talisman used to teleport.
+     * @param ruin The ruin the player is being teleported to.
+     */
     private fun teleportToRuinTalisman(
         player: Player,
         talisman: Item,
@@ -142,6 +194,13 @@ class MysteriousRuinsListener : InteractionListener {
         submitTeleportPulse(player, ruin, 3)
     }
 
+    /**
+     * Submits a pulse to teleport the player to the ruin after a short delay.
+     *
+     * @param player The player to be teleported.
+     * @param ruin The ruin the player is being teleported to.
+     * @param delay The delay before teleporting.
+     */
     private fun submitTeleportPulse(
         player: Player,
         ruin: MysteriousRuins,

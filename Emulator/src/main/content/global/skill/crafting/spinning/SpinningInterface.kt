@@ -10,34 +10,6 @@ import org.rs.consts.Components
 
 class SpinningInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
-        onOpen(Components.CRAFTING_SPINNING_459) { player, _ ->
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 14, 243, 86),
-            )
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 15, 237, 136),
-            )
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 20, 113, 86),
-            )
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 21, 103, 134),
-            )
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 25, 361, 130),
-            )
-            PacketRepository.send(
-                RepositionChild::class.java,
-                ChildPositionContext(player, Components.CRAFTING_SPINNING_459, 33, 103, 252),
-            )
-            return@onOpen true
-        }
-
         on(Components.CRAFTING_SPINNING_459) { player, _, opcode, buttonID, _, _ ->
             val spin = Spinning.forId(buttonID) ?: return@on true
             if (!inInventory(player, spin.need, 1)) {
