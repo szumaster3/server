@@ -19,10 +19,16 @@ import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Handles the interaction with pickable doors in the thieving skill.
+ */
 @Initializable
 class PickableDoorsHandler : OptionHandler() {
     var door: PickableDoor? = null
 
+    /**
+     * Initializes the plugin by adding handlers for the pick-lock and open actions for various doors.
+     */
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in DOORS) {
             SceneryDefinition.forId(i).handlers["option:pick-lock"] = this
@@ -45,6 +51,9 @@ class PickableDoorsHandler : OptionHandler() {
         return this
     }
 
+    /**
+     * Handles the interaction for opening or picking the lock on a door.
+     */
     override fun handle(
         player: Player,
         node: Node,
@@ -70,6 +79,9 @@ class PickableDoorsHandler : OptionHandler() {
         return false
     }
 
+    /**
+     * Gets the destination location of a door when it is interacted with.
+     */
     override fun getDestination(
         node: Node,
         n: Node,
@@ -83,6 +95,11 @@ class PickableDoorsHandler : OptionHandler() {
         return null
     }
 
+    /**
+     * Finds a pickable door based on the given location.
+     * @param location The location of the door to search for.
+     * @return The [PickableDoor] object if found, or `null` if not found.
+     */
     private fun forDoor(location: Location): PickableDoor? {
         for (door in pickableDoors) {
             for (l in door.locations) {
@@ -94,6 +111,15 @@ class PickableDoorsHandler : OptionHandler() {
         return null
     }
 
+    /**
+     * Represents a pickable door.
+     *
+     * @param locations The locations where this door exists.
+     * @param level The thieving level required to interact with the door.
+     * @param experience The experience rewarded for interacting with the door.
+     * @param isLockpick Whether a lockpick is required to unlock the door.
+     * @param flipped Whether the door is flipped for a specific interaction logic.
+     */
     inner class PickableDoor(
         val locations: Array<Location>,
         val level: Int,
@@ -101,6 +127,11 @@ class PickableDoorsHandler : OptionHandler() {
         val isLockpick: Boolean = false,
         private val flipped: Boolean = false,
     ) {
+        /**
+         * Opens the door if the player is on the correct side of the door.
+         * @param player The player opening the door.
+         * @param door The door being opened.
+         */
         fun open(
             player: Player,
             door: Scenery,
@@ -113,6 +144,11 @@ class PickableDoorsHandler : OptionHandler() {
             }
         }
 
+        /**
+         * Attempts to pick the lock on the door. If successful, the door is opened.
+         * @param player The player attempting to pick the lock.
+         * @param door The door being unlocked.
+         */
         fun pickLock(
             player: Player,
             door: Scenery,
@@ -146,6 +182,13 @@ class PickableDoorsHandler : OptionHandler() {
             sendMessageWithDelay(player, "You " + (if (success) "manage" else "fail") + " to pick the lock.", 1)
         }
 
+        /**
+         * Checks if the player is on the correct side of the door to interact with it.
+         *
+         * @param player The player interacting with the door.
+         * @param door The door being interacted with.
+         * @return True if the player is inside the door, otherwise false.
+         */
         private fun isInside(
             player: Player,
             door: Scenery,
@@ -164,6 +207,10 @@ class PickableDoorsHandler : OptionHandler() {
         }
     }
 
+    /**
+     * Escapes the player from certain conditions like being in Shantay Jail.
+     * @param player The player escaping.
+     */
     private fun escape(player: Player) {
         if (getAttribute(player, "shantay-jail", false)) {
             removeAttribute(player, "shantay-jail")
@@ -178,40 +225,7 @@ class PickableDoorsHandler : OptionHandler() {
 
     companion object {
         private val LOCK_PICK = Items.LOCKPICK_1523
-
         private val pickableDoors: MutableList<PickableDoor> = ArrayList(20)
-
-        private val DOORS =
-            intArrayOf(
-                2550,
-                2551,
-                2554,
-                2555,
-                2556,
-                2557,
-                2558,
-                2559,
-                5501,
-                7246,
-                9565,
-                13314,
-                13317,
-                13320,
-                13323,
-                13326,
-                13344,
-                13345,
-                13346,
-                13347,
-                13348,
-                13349,
-                15759,
-                34005,
-                34805,
-                34806,
-                34812,
-                40186,
-                42028,
-            )
+        private val DOORS = intArrayOf(2550, 2551, 2554, 2555, 2556, 2557, 2558, 2559, 5501, 7246, 9565, 13314, 13317, 13320, 13323, 13326, 13344, 13345, 13346, 13347, 13348, 13349, 15759, 34005, 34805, 34806, 34812, 40186, 42028)
     }
 }

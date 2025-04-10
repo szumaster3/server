@@ -539,6 +539,9 @@ enum class Pickpocket(
     ;
 
     companion object {
+        /**
+         * * A map that associates object ids with the corresponding [Pickpocket] enum value.
+         */
         val idMap: MutableMap<Int, Pickpocket> = HashMap(Pickpocket.values().size * 5)
 
         init {
@@ -549,9 +552,22 @@ enum class Pickpocket(
             }
         }
 
+        /**
+         * Retrieves the [Pickpocket] enum corresponding to the given [id].
+         *
+         * @param id The object ID to find the corresponding [Pickpocket] enum for.
+         * @return The [Pickpocket] enum associated with the [id], or `null` if no match is found.
+         */
         @JvmStatic
         fun forID(id: Int): Pickpocket? = idMap[id]
     }
 
-    fun getSuccessChance(player: Player): Double = RandomFunction.getSkillSuccessChance(low, high, player.skills.getLevel(Skills.THIEVING))
+    /**
+     * Calculates the success chance of pickpocketing based on the player's thieving skill level.
+     *
+     * @param player The [Player] whose thieving skill level is used to calculate the success chance.
+     * @return A [Double] value representing the success chance of the pickpocket attempt.
+     */
+    fun getSuccessChance(player: Player): Double =
+        RandomFunction.getSkillSuccessChance(low, high, player.skills.getLevel(Skills.THIEVING))
 }

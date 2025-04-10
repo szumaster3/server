@@ -15,7 +15,15 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 import org.rs.consts.Sounds
 
+/**
+ * Object responsible for summoning creation tasks, including handling the pouch and scroll actions,
+ * as well as managing the creation and listing of summoning-related items.
+ */
 object SummoningCreator {
+
+    /**
+     * Parameters for summoning pouches, including the list of actions, levels, and the component configuration.
+     */
     private val POUCH_PARAMS =
         arrayOf(
             "List<col=FF9040>",
@@ -29,6 +37,9 @@ object SummoningCreator {
             669 shl 16 or 15,
         )
 
+    /**
+     * Parameters for summoning scrolls, including the list of actions, levels, and the component configuration.
+     */
     private val SCROLL_PARAMS =
         arrayOf(
             "Transform-X<col=ff9040>",
@@ -41,16 +52,34 @@ object SummoningCreator {
             673 shl 16 or 15,
         )
 
+    /**
+     * The component representing the summoning pouch UI.
+     */
     private val SUMMONING_COMPONENT = Component(669)
 
+    /**
+     * The component representing the summoning scroll UI.
+     */
     private val SCROLL_COMPONENT = Component(673)
 
+    /**
+     * Opens the summoning creation interface for the player, either for pouches or scrolls.
+     *
+     * @param player The player to open the interface for.
+     * @param pouch A boolean indicating whether to open the pouch or scroll interface.
+     */
     @JvmStatic
     fun open(
         player: Player,
         pouch: Boolean,
     ) = configure(player, pouch)
 
+    /**
+     * Configures the summoning interface based on whether the pouch or scroll interface is to be shown.
+     *
+     * @param player The player to configure the interface for.
+     * @param pouch A boolean indicating whether to show the pouch or scroll interface.
+     */
     @JvmStatic
     fun configure(
         player: Player,
@@ -70,6 +99,13 @@ object SummoningCreator {
         player.packetDispatch.sendIfaceSettings(ifaceId, 15, componentId, 0, 78)
     }
 
+    /**
+     * Creates a summoning item for the player, using the specified amount and node.
+     *
+     * @param player The player to create the item for.
+     * @param amount The amount of the item to create.
+     * @param node The node containing the item creation information.
+     */
     @JvmStatic
     fun create(
         player: Player,
@@ -81,6 +117,12 @@ object SummoningCreator {
         }
     }
 
+    /**
+     * Sends a message listing the items in the specified summoning pouch.
+     *
+     * @param player The player to send the message to.
+     * @param pouch The summoning pouch to list.
+     */
     @JvmStatic
     fun list(
         player: Player,
@@ -89,6 +131,10 @@ object SummoningCreator {
         player.packetDispatch.sendMessage(CS2Mapping.forId(1186)?.map?.get(pouch.pouchId) as? String)
     }
 
+    /**
+     * Skill pulse used for creating a summoning item, which handles the animation, requirements check,
+     * item removal, and experience reward.
+     */
     class CreatePulse(
         player: Player?,
         private val type: SummoningNode,
@@ -96,6 +142,11 @@ object SummoningCreator {
     ) : SkillPulse<Item?>(player, null) {
         private val objectIDs = getObject(Location(2209, 5344, 0))
 
+        /**
+         * Checks the requirements for the creation of the summoning item, including level and required items.
+         *
+         * @return True if the requirements are met, false otherwise.
+         */
         override fun checkRequirements(): Boolean {
             closeInterface(player)
             return when {
@@ -105,8 +156,8 @@ object SummoningCreator {
                 }
 
                 type.isPouch &&
-                    type.product.id == Items.PHOENIX_POUCH_14624 &&
-                    !isQuestComplete(player, Quests.IN_PYRE_NEED) -> {
+                        type.product.id == Items.PHOENIX_POUCH_14624 &&
+                        !isQuestComplete(player, Quests.IN_PYRE_NEED) -> {
                     sendMessage(player, "You must complete In Pyre Need to infuse phoenix pouches.")
                     false
                 }
@@ -120,16 +171,27 @@ object SummoningCreator {
             }
         }
 
+        /**
+         * Plays the animation for the creation of the summoning item.
+         */
         override fun animate() {
             lock(player, 3)
             animate(player, Animations.INFUSE_SUMMONING_POUCH_8500)
         }
 
+        /**
+         * Stops the creation pulse and plays the scenery animation.
+         */
         override fun stop() {
             super.stop()
             animateScenery(player, objectIDs!!, 8510, true)
         }
 
+        /**
+         * Rewards the player with the created summoning item and experience.
+         *
+         * @return True if the reward process is complete, false otherwise.
+         */
         override fun reward(): Boolean {
             if (delay == 1) {
                 delay = 4
@@ -154,6 +216,16 @@ object SummoningCreator {
         }
     }
 
+    /**
+     * Data class representing a summoning creation node, containing the base item, required items, product,
+     * experience, and the required level for the creation.
+     *
+     * @property base The base item (either a pouch or scroll).
+     * @property required The items required for the creation.
+     * @property product The product created after the pulse.
+     * @property experience The experience awarded for creating the item.
+     * @property level The level required to create the item.
+     */
     class SummoningNode(
         val base: Any,
         val required: Array<Item>,
@@ -164,6 +236,13 @@ object SummoningCreator {
         val isPouch: Boolean get() = base is SummoningPouch
 
         companion object {
+            /**
+             * Parses a node (either a pouch or scroll) into a [SummoningNode] object.
+             *
+             * @param node The node to parse.
+             * @return The parsed [SummoningNode].
+             * @throws IllegalArgumentException If the node type is invalid.
+             */
             fun parse(node: Any): SummoningNode =
                 when (node) {
                     is SummoningPouch ->
