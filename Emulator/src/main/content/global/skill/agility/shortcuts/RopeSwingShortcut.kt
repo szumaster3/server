@@ -13,6 +13,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
@@ -50,7 +51,7 @@ class RopeSwingShortcut : UseWithHandler() {
                 0,
                 player.location,
                 END_LOCATION,
-                Animation.create(751),
+                Animation.create(Animations.ROPE_SWING_751),
                 50,
                 22.0,
                 "You skillfully swing across.",

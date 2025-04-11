@@ -35,7 +35,7 @@ class RiverLumGrapple : OptionHandler() {
                 Items.KARILS_CROSSBOW_4734,
                 Items.HUNTERS_CROSSBOW_10156,
             )
-        private val grappleId = Items.MITH_GRAPPLE_9419
+        private const val MITHRIL_GRAPPLE = Items.MITH_GRAPPLE_9419
         private val ROPES: MutableList<Scenery> = ArrayList(20)
 
         init {
@@ -162,7 +162,7 @@ class RiverLumGrapple : OptionHandler() {
                         return true
                     }
                 }
-                if (!anyInEquipment(player, *crossbowIds) || !inEquipment(player, grappleId)) {
+                if (!anyInEquipment(player, *crossbowIds) || !inEquipment(player, MITHRIL_GRAPPLE)) {
                     sendMessage(player, "You need a mithril grapple tipped bolt with a rope to do that.")
                     return true
                 }

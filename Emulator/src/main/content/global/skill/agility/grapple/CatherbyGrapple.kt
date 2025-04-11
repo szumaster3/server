@@ -33,7 +33,7 @@ class CatherbyGrapple : InteractionListener {
                 Items.KARILS_CROSSBOW_4734,
                 Items.HUNTERS_CROSSBOW_10156,
             )
-        private val grappleId = Items.MITH_GRAPPLE_9419
+        private const val MITHRIL_GRAPPLE = Items.MITH_GRAPPLE_9419
     }
 
     private var rocks = getScenery(Location.create(2869, 3429, 0))
@@ -48,7 +48,7 @@ class CatherbyGrapple : InteractionListener {
                 return@on true
             }
 
-            if (!inEquipment(player, grappleId) || !anyInEquipment(player, *crossbowIds)) {
+            if (!inEquipment(player, MITHRIL_GRAPPLE) || !anyInEquipment(player, *crossbowIds)) {
                 sendMessage(player, "You need a mithril grapple tipped bolt with a rope to do that.")
                 return@on true
             }

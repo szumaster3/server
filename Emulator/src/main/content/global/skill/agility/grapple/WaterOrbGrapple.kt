@@ -52,7 +52,7 @@ class WaterOrbGrapple : OptionHandler() {
                 Items.KARILS_CROSSBOW_4734,
                 Items.HUNTERS_CROSSBOW_10156,
             )
-        private val grappleId = Items.MITH_GRAPPLE_9419
+        private const val MITHRIL_GRAPPLE = Items.MITH_GRAPPLE_9419
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -66,7 +66,6 @@ class WaterOrbGrapple : OptionHandler() {
         option: String,
     ): Boolean {
         val destination: Location
-        val current = player.location
         val rock = getObject(Location.create(2841, 3426, 0))
         val tree = getObject(Location.create(2841, 3434, 0))
         when (option) {
@@ -78,7 +77,7 @@ class WaterOrbGrapple : OptionHandler() {
                         return true
                     }
                 }
-                if (!anyInEquipment(player, *crossbowIds) || !inEquipment(player, grappleId)) {
+                if (!anyInEquipment(player, *crossbowIds) || !inEquipment(player, MITHRIL_GRAPPLE)) {
                     sendMessage(player, "You need a mithril grapple tipped bolt with a rope to do that.")
                     return true
                 }
