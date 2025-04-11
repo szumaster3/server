@@ -64,7 +64,7 @@ class PhoenixLair : MapArea {
 
                 npc.init()
 
-                registerLogoutListener(player, logoutListener) {
+                registerLogoutListener(player, LOGOUT_LISTENER) {
                     npc.clear()
                     spawnedNPC.remove(npc)
                 }
@@ -85,7 +85,7 @@ class PhoenixLair : MapArea {
         spawnedNPC.clear()
 
         if (logout) {
-            clearLogoutListener(entity.asPlayer(), logoutListener)
+            clearLogoutListener(entity.asPlayer(), LOGOUT_LISTENER)
         }
     }
 
@@ -138,6 +138,6 @@ class PhoenixLair : MapArea {
                 Location.create(3480, 5243, 0),
             )
 
-        private const val logoutListener = "phoenix-lair"
+        private const val LOGOUT_LISTENER = "phoenix-lair"
     }
 }

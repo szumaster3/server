@@ -37,7 +37,7 @@ class RebornWarriorNPC : AbstractNPC {
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if (RandomFunction.random(30) < 3) {
+        if (RandomFunction.random(100) < 3) {
             sendChat(this.asNpc(), forceChat.random())
         }
     }

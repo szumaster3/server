@@ -63,10 +63,7 @@ class PhoenixLairListener : InteractionListener {
 
         on(Scenery.CAVE_ENTRANCE_41900, IntType.SCENERY, "enter") { player, _ ->
             val familiar = player.familiarManager.familiar
-            if (player.familiarManager.hasFamiliar() &&
-                familiar != null &&
-                (familiar.id == NPCs.PHOENIX_8575 || familiar.id == NPCs.PHOENIX_8576)
-            ) {
+            if (player.familiarManager.hasFamiliar() && familiar != null && (familiar.id == NPCs.PHOENIX_8575 || familiar.id == NPCs.PHOENIX_8576)) {
                 sendNPCDialogue(
                     player,
                     familiar.id,
@@ -79,7 +76,7 @@ class PhoenixLairListener : InteractionListener {
                 sendNPCDialogue(
                     player,
                     familiar.id,
-                    " Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.",
+                    "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.",
                     FaceAnim.CHILD_NORMAL
                 )
                 return@on true
@@ -230,11 +227,19 @@ class PhoenixLairListener : InteractionListener {
             val item = treeItemMap[node.id] ?: Items.MASTIC_TWIGS_14610
             if (!player.inventory.contains(item, 1)) {
                 lock(player, 3)
-                animate(player, Animations.PRUNE_WITH_SECATEURS_11088)
-
-                addItemOrDrop(player, item)
-                val twigs = getSceneryName(node.id).lowercase().replace("tree", "twigs")
-                sendMessage(player, "You harvest some $twigs.")
+                queueScript(player, 1, QueueStrength.SOFT) {
+                    animate(
+                        player,
+                        if (inInventory(player, Items.MAGIC_SECATEURS_7409))
+                            Animations.PRUNE_WITH_MAGIC_SECATEURS_11089
+                        else
+                            Animations.PRUNE_WITH_SECATEURS_11088
+                    )
+                    addItemOrDrop(player, item)
+                    val twigs = getSceneryName(node.id).lowercase().replace("tree", "twigs")
+                    sendMessage(player, "You harvest some $twigs.")
+                    return@queueScript stopExecuting(player)
+                }
             } else {
                 sendMessage(player, "You already have ${node.name.lowercase()}.")
             }
@@ -307,6 +312,9 @@ class PhoenixLairListener : InteractionListener {
             return@onUseWith false
         }
 
+        /*
+         * Handles interactions with large egg & hatching.
+         */
 
         on(phoenixEggling, IntType.NPC, "Investigate", "Interact") { player, node ->
             val phoenixEggling = core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567, 5230, 0))

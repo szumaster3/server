@@ -59,7 +59,7 @@ class PhoenixEgglingDialogue : DialogueFile() {
                         setAttribute(player!!, attribute, true)
                         npcl(FaceAnim.NEW_HAPPY, dialogue)
                         sendMessage(
-                            player!!, "The phoenix eggling is now yours! It can be summoned from the pet interface."
+                            player!!, "The phoenix eggling is now yours!"
                         )
                         sendNews("${player!!.username} has found a Phoenix eggling!")
                         stage = END_DIALOGUE
