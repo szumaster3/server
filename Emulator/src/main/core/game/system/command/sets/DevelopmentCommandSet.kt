@@ -162,19 +162,6 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         *
-         */
-
-        define(
-            name = "eggling",
-            privilege = Privilege.ADMIN,
-            usage = "::eggling",
-            description = "In Pyre Need D&D custcene",
-        ) { player, _ ->
-            PhoenixEgglingCutscene(player).start()
-        }
-
-        /*
          * Command for printing the player's current Region ID.
          */
 

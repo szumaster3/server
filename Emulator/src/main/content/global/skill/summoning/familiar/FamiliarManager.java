@@ -134,7 +134,7 @@ public final class FamiliarManager {
             }
         }
         if (player.getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !player.getLocks().isLocked("enable_summoning")) {
-            player.getPacketDispatch().sendMessage("You are standing in a Summoning-free area. You must move out of this area to" + "summon a familiar.");
+            player.getPacketDispatch().sendMessages("You are standing in a Summoning-free area. You must move out of this area to", "summon a familiar.");
             return;
         }
         if (pet) {

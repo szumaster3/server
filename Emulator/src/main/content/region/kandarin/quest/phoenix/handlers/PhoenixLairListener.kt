@@ -50,7 +50,7 @@ class PhoenixLairListener : InteractionListener {
                 Scenery.CEDAR_TREE_41906 to Items.CEDAR_TWIGS_14609,
                 Scenery.MASTIC_TREE_41907 to Items.MASTIC_TWIGS_14610,
             )
-
+        val phoenixEggling = intArrayOf(NPCs.LARGE_EGG_8552,NPCs.PHOENIX_EGGLING_8550)
         val woundedPhoenix: NPC = NPC.create(NPCs.WOUNDED_PHOENIX_8547, Location.create(3534, 5196, 0), Direction.NORTH)
     }
 
@@ -118,7 +118,11 @@ class PhoenixLairListener : InteractionListener {
             val outsideCave = Location.create(2294, 3626, 0)
             val randomRoll = RandomFunction.random(100)
 
-            if (player.location == phoenixChamber) {
+            registerLogoutListener(player, "phoenix-lair") { p ->
+                player.location = outsideCave
+            }
+
+            if (player.location == phoenixChamber || player.location == Location.create(3535, 5186, 0)) {
                 setTitle(player, 2)
                 sendDialogueOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
@@ -150,9 +154,9 @@ class PhoenixLairListener : InteractionListener {
                 return@on true
             }
 
-            if (randomRoll == 0) {
-                val phoenixEggling = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567,5230,0))
-                phoenixEggling.init().also {
+            if (getAttribute(player, "eggling", false)) {
+                val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567,5230,0))
+                largeEgg.init().also {
                     PhoenixEgglingCutscene(player).start()
                 }
                 return@on true
@@ -202,7 +206,7 @@ class PhoenixLairListener : InteractionListener {
                 openInterface(player, Components.FADE_FROM_BLACK_170)
                 teleport(player, Location.create(2294, 3626, 0))
                 if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
-                    player.dialogueInterpreter.open(NPCs.PRIEST_OF_GUTHIX_8555)
+                    player.dialogueInterpreter.open(NPCs.BRIAN_TWITCHER_8556)
                 }
             }
             return@on true
@@ -291,6 +295,25 @@ class PhoenixLairListener : InteractionListener {
             }
             sendMessage(player, "You don't have the required twigs to fletch.")
             return@onUseWith false
+        }
+
+
+        on(phoenixEggling, IntType.NPC, "Investigate", "Interact") { player, node ->
+            val phoenixEggling = core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567,5230,0))
+            if(node.id == NPCs.LARGE_EGG_8552) {
+                lock(player, 3)
+                sendChat(player, "*Gasp!* It's...it's hatching!")
+                sendGraphics(1974, findNPC(NPCs.LARGE_EGG_8552)!!.location)
+                queueScript(player, 2, QueueStrength.SOFT) {
+                    node.asNpc().clear()
+                    phoenixEggling.init()
+                    sendChat(phoenixEggling, "Cheeeep!")
+                    return@queueScript stopExecuting(player)
+                }
+            } else {
+                openDialogue(player, PhoenixEgglingDialogue())
+            }
+            return@on true
         }
     }
 }

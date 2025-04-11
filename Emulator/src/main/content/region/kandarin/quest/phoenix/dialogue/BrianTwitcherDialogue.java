@@ -34,9 +34,7 @@ public class BrianTwitcherDialogue extends Dialogue {
 
     @Override
     public boolean open(Object... args) {
-        npc = (NPC) args[0];
         npcl(FaceAnim.NEUTRAL, "Hail, " + player.getUsername() + "! How are things?");
-        stage++;
         return true;
     }
 
