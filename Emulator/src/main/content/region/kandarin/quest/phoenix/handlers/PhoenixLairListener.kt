@@ -154,7 +154,7 @@ class PhoenixLairListener : InteractionListener {
                 return@on true
             }
 
-            if (getAttribute(player, "eggling", false)) {
+            if (randomRoll == 0) {
                 val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567,5230,0))
                 largeEgg.init().also {
                     PhoenixEgglingCutscene(player).start()
