@@ -290,6 +290,6 @@ internal object GameAttributes {
     const val DIARY_VARROCK_ROMILY_WEAKLAX_PIE_ASSIGN = "/save:romily-weaklax:pie-assigned"
 
     // Phoenix Lair
-    const val PHOENIX_LAIR_EGGLING_0 = "/save:phoenix-familiar:0"
-    const val PHOENIX_LAIR_EGGLING_1 = "/save:phoenix-familiar:1"
+    const val PHOENIX_LAIR_EGGLING_CUTE = "/save:phoenix-familiar:0"
+    const val PHOENIX_LAIR_EGGLING_MEAN = "/save:phoenix-familiar:1"
 }

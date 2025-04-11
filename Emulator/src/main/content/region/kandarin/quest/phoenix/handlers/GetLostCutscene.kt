@@ -7,7 +7,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.NPCs
 
-class PhoenixEgglingCutscene(player: Player) : Cutscene(player) {
+class GetLostCutscene(player: Player) : Cutscene(player) {
 
     override fun setup() {
         setExit(Location.create(3566, 5224, 0))

@@ -253,39 +253,6 @@ EX
 0 -> npc(FacialExpression.CHILD_NORMAL, "Though it seemed it brought fog and ice, t'was a bird of", "good omen!").also { stage++ }
 0 -> playerl(FacialExpression.FRIENDLY, "I get the feeling I'm better off not knowing what it's talking about.").also { stage = END_DIALOGUE }
 
-0 -> playerl(FacialExpression.FRIENDLY, "Hmmm, what have we here?
-0 -> options("Clap at the egg to make it hatch." ,"Kick the egg to make it hatch.").also { stage++ }
-0 -> when(stage){
-				0 -> end(); sendChat(player, "*Gasp!* It's...it's hatching!").also { sendChat(npc, "Cheeeep!") }
-						playerl(FacialExpression.FRIENDLY, "*Gasp!* It's...it's hatching!")
-						npc(FacialExpression.CHILD_NORMAL, "Cheeeep!")
-
-				0 -> end(); sendChat(player, "*Gasp!* It's...it's hatching!").also { sendChat(npc, "Bwaaark!") }
-						playerl(FacialExpression.FRIENDLY, "*Gasp!* It's...it's hatching!")
-						npc(FacialExpression.CHILD_NORMAL, "Bwaaark!")
-				}
-
-0 -> playerl(FacialExpression.FRIENDLY, "*Gasp!* It's...it's hatching!")
-0 -> npc(FacialExpression.CHILD_NORMAL, "Cheeeep!")
-
-0 -> playerl(FacialExpression.FRIENDLY, "*Gasp!* It's...it's hatching!")
-0 -> npc(FacialExpression.CHILD_NORMAL, "Bwaaark!")
-
-0 -> npcl(FacialExpression.CHILD_NORMAL, "Cheep cheep-chirp chirp?", "(Am you my [daddy/mummy]?)").also { stage++ }
-0 -> playerl(FacialExpression.FRIENDLY, "Erm...no.").also { stage++ }
-0 -> npcl(FacialExpression.CHILD_NORMAL, "Chirp chirpy cheep cheepy cheep?", "(Will you feed me anyway?)").also { stage++ }
-
-Select an Option
-Yes, of course.
-
-0 -> The phoenix eggling is now yours! It can be summoned from the pet interface.").also { stage++ }
-0 -> npcl(FacialExpression.CHILD_NORMAL, "Cheeeeeeep! Chir, cheepy cheep chirp?", "(Wheeeee! Now, where am my ashes?)").also { stage++ }
-
-I have enough mouths to feed as it is.
-
-0 -> playerl(FacialExpression.FRIENDLY, "I have enough mouths to feed as it is.").also { stage++ }
-0 -> npcl(FacialExpression.CHILD_NORMAL, "Chiiiirp...", "(Awwwwwwwwwww...)").also { stage = END_DIALOGUE }
-
 Mean
 
 0 -> npcl(FacialExpression.CHILD_NORMAL, "Bwark bwaa bwik bwark!", "(You kicked my egg!)").also { stage++ }

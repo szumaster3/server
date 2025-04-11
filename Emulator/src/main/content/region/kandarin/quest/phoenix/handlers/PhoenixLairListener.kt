@@ -1,9 +1,11 @@
 package content.region.kandarin.quest.phoenix.handlers
 
+import content.data.GameAttributes
 import core.api.*
 import core.api.interaction.getSceneryName
 import core.api.item.allInInventory
 import core.api.quest.isQuestComplete
+import core.api.utils.PlayerCamera
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -50,7 +52,7 @@ class PhoenixLairListener : InteractionListener {
                 Scenery.CEDAR_TREE_41906 to Items.CEDAR_TWIGS_14609,
                 Scenery.MASTIC_TREE_41907 to Items.MASTIC_TWIGS_14610,
             )
-        val phoenixEggling = intArrayOf(NPCs.LARGE_EGG_8552,NPCs.PHOENIX_EGGLING_8550)
+        val phoenixEggling = intArrayOf(NPCs.LARGE_EGG_8552, NPCs.PHOENIX_EGGLING_8550)
         val woundedPhoenix: NPC = NPC.create(NPCs.WOUNDED_PHOENIX_8547, Location.create(3534, 5196, 0), Direction.NORTH)
     }
 
@@ -67,18 +69,26 @@ class PhoenixLairListener : InteractionListener {
             ) {
                 sendNPCDialogue(
                     player,
-                    NPCs.PHOENIX_8575,
+                    familiar.id,
                     "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.",
+                    FaceAnim.CHILD_NORMAL
                 )
                 return@on true
             }
-            if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) < 1 ||
-                !isQuestComplete(player, Quests.IN_PYRE_NEED)
-            ) {
-                sendPlayerDialogue(
+            if(player.familiarManager.hasPet() && familiar.id == NPCs.PHOENIX_EGGLING_8577 || familiar.id == NPCs.PHOENIX_EGGLING_8578) {
+                sendNPCDialogue(
                     player,
-                    "Hey, wait! I have something to ask you before going down there.",
-                    FaceAnim.THINKING,
+                    familiar.id,
+                    " Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.",
+                    FaceAnim.CHILD_NORMAL
+                )
+                return@on true
+            }
+            if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) < 1 || !isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+                sendNPCDialogue(
+                    player,
+                    NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.",
+                    FaceAnim.FRIENDLY,
                 )
                 addDialogueAction(player) { p, button ->
                     if (button > 0) {
@@ -113,7 +123,6 @@ class PhoenixLairListener : InteractionListener {
                     Location.create(3476, 5186, 0),
                     Location.create(3516, 5224, 0), // Authentic
                 )
-
             val phoenixChamber = Location(3566, 5224, 0)
             val outsideCave = Location.create(2294, 3626, 0)
             val randomRoll = RandomFunction.random(100)
@@ -138,6 +147,7 @@ class PhoenixLairListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
                         }
+
                         2 -> {
                             openInterface(player, Components.FADE_TO_BLACK_120)
                             player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
@@ -155,9 +165,9 @@ class PhoenixLairListener : InteractionListener {
             }
 
             if (randomRoll == 0) {
-                val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567,5230,0))
+                val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567, 5230, 0))
                 largeEgg.init().also {
-                    PhoenixEgglingCutscene(player).start()
+                    GetLostCutscene(player).start()
                 }
                 return@on true
             }
@@ -237,7 +247,7 @@ class PhoenixLairListener : InteractionListener {
 
         onUseWith(IntType.SCENERY, weavingRibbons, Scenery.PYRE_41908) { player, _, _ ->
             if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) >= 5) {
-                animate(player, Animations.PRUNE_WITH_SECATEURS_11088)
+                animate(player, if(inInventory(player, Items.MAGIC_SECATEURS_7409)) Animations.PRUNE_WITH_MAGIC_SECATEURS_11089 else Animations.PRUNE_WITH_SECATEURS_11088)
                 sendMessage(
                     player,
                     "You weave a large basket from the five wooden ribbons and add it to the pyre base.",
@@ -299,18 +309,58 @@ class PhoenixLairListener : InteractionListener {
 
 
         on(phoenixEggling, IntType.NPC, "Investigate", "Interact") { player, node ->
-            val phoenixEggling = core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567,5230,0))
-            if(node.id == NPCs.LARGE_EGG_8552) {
-                lock(player, 3)
-                sendChat(player, "*Gasp!* It's...it's hatching!")
-                sendGraphics(1974, findNPC(NPCs.LARGE_EGG_8552)!!.location)
-                queueScript(player, 2, QueueStrength.SOFT) {
-                    node.asNpc().clear()
-                    phoenixEggling.init()
-                    sendChat(phoenixEggling, "Cheeeep!")
-                    return@queueScript stopExecuting(player)
+            val phoenixEggling = core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567, 5230, 0))
+            if (node.id == NPCs.LARGE_EGG_8552) {
+                sendDialogueOptions(
+                    player,
+                    "What would you like to do?",
+                    "Clap at the egg to make it hatch.",
+                    "Kick the egg to make it hatch."
+                )
+                addDialogueAction(player) { _, button ->
+                    if(button > 0)
+                        lock(player, 12)
+                    queueScript(player, 1, QueueStrength.SOFT) { stage : Int ->
+                        when(stage) {
+                            0 -> {
+                                animate(player, if(button == 2) Animations.CLAP_11091 else Animations.KICK_423)
+                                sendChat(player, "*Gasp!* It's...it's hatching!", 2)
+                                return@queueScript delayScript(player, 3)
+                            }
+                            1 -> {
+                                // Camera-independent zoom.
+                                PlayerCamera(player).panTo(3567, 5226, 300, 100)
+                                PlayerCamera(player).rotateTo(3567, 5228, 300, 100)
+                                return@queueScript delayScript(player, 4)
+                            }
+                            2 -> {
+                                sendGraphics(1974, findNPC(NPCs.LARGE_EGG_8552)!!.location)
+                                return@queueScript delayScript(player, 3)
+                            }
+                            3 -> {
+                                node.asNpc().clear()
+                                phoenixEggling.init()
+                                // sendGraphics(0000, phoenixEggling.location)
+                                sendChat(phoenixEggling, if(button == 2) "Cheeeep!" else "Bwaaark!", 2)
+                                return@queueScript delayScript(player, 4)
+                            }
+                            4 -> {
+                                resetCamera(player)
+                                return@queueScript stopExecuting(player)
+                            }
+                            else -> return@queueScript stopExecuting(player)
+                        }
+                    }
                 }
             } else {
+                val cutePet = getAttribute(player, GameAttributes.PHOENIX_LAIR_EGGLING_CUTE, false)
+                val meanPet = getAttribute(player, GameAttributes.PHOENIX_LAIR_EGGLING_MEAN, false)
+                if(cutePet && meanPet) {
+                    sendMessage(player, "You already catch this pet.")
+                    if(findLocalNPC(player, node.id) != null) { runTask(player, 1) { node.asNpc().clear() } }
+                    sendMessage(player, "The phoenix eggling disappears.")
+                    return@on true
+                }
                 openDialogue(player, PhoenixEgglingDialogue())
             }
             return@on true

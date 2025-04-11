@@ -17,6 +17,7 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.rs.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -134,6 +135,7 @@ public final class FamiliarManager {
             }
         }
         if (player.getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !player.getLocks().isLocked("enable_summoning")) {
+            // "Me not coming out in here! Me no want to see you fight mummy!
             player.getPacketDispatch().sendMessages("You are standing in a Summoning-free area. You must move out of this area to", "summon a familiar.");
             return;
         }
