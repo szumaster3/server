@@ -111,9 +111,6 @@ class EasterEvent :
             player.emoteManager.unlock(Emotes.BUNNY_HOP)
             Emotes.BUNNY_HOP.play(player)
             sendMessage(player, colorize("%RYou have unlocked the 'Bunny Hop' emote!"))
-        } else if (eggsBroken == 15) {
-            addItemOrDrop(player, BUN_EARS)
-            sendMessage(player, colorize("%RYou have been given bunny ears!"))
         } else if (eggsBroken % 5 == 0) {
             var trackUnlocked = false
             for (track in tracks) {
@@ -215,7 +212,7 @@ class EasterEvent :
         const val GFX_C = 1042
         const val GFX_D = 1043
         const val STOMP_ANIM = 10017
-        const val BUN_EARS = 14658
+
         const val TRACK_BSB = 502
         const val TRACK_EJ = 273
         const val TRACK_FB = 603

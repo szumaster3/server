@@ -51,7 +51,7 @@ class DraynorWillows : Script() {
                 if (!bankZone.insideBorder(bot)) {
                     scriptAPI.walkTo(bankZone.randomLoc)
                 } else {
-                    val bank = scriptAPI.getNearestNode(2213, true)
+                    val bank = scriptAPI.getNearestNode("Willow", true)
                     if (bank != null) {
                         bot.pulseManager.run(
                             object : MovementPulse(bot, bank, DestinationFlag.OBJECT) {
@@ -71,8 +71,8 @@ class DraynorWillows : Script() {
     }
 
     init {
-        inventory.add(Item(Items.ADAMANT_AXE_1357))
-        skills[Skills.WOODCUTTING] = 40
+        equipment.add(Item(Items.BRONZE_AXE_1351))
+        skills[Skills.WOODCUTTING] = 41
     }
 
     override fun newInstance(): Script {
