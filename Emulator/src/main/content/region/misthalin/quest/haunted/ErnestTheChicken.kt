@@ -55,12 +55,11 @@ class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_Q
 
     override fun finish(player: Player) {
         player.unlock()
-        sendMessage(player, "Ernest hands you 300 coins.")
         super.finish(player)
         var line = 10
         drawReward(player, "4 Quest Points", line++)
-        drawReward(player, "300 coins", line++)
-        drawReward(player, "You have completed the ${Quests.ERNEST_THE_CHICKEN} Quest!", line)
+        drawReward(player, "300 coins", line)
+        sendMessage(player, "Ernest hands you 300 coins.")
 
         removeAttributes(player, "piranhas-killed", "pressure-gauge")
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.FEATHER_314, 230)

@@ -298,13 +298,13 @@ class ProfessorOddensteinDialogue(
                                             npc.faceLocation(FACE_LOCATION)
                                         }
 
-                                        2 -> {
+                                        4 -> {
                                             player.packetDispatch.sendMessage("The machine hums and shakes.")
                                             npc.graphics(WEAKEN_START)
                                             Projectile.create(npc, chicken, 106, 40, 36, 52, 75, 15, 11)
                                         }
 
-                                        4 -> {
+                                        6 -> {
                                             val ernest = NPC.create(NPCs.ERNEST_287, chicken!!.location)
                                             ernest.setAttribute("target", player)
                                             ernest.init()
@@ -314,7 +314,7 @@ class ProfessorOddensteinDialogue(
                                             }
                                         }
 
-                                        5 -> {
+                                        10 -> {
                                             npc.graphics(WEAKEN_END)
                                             return true
                                         }
