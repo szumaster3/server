@@ -20866,8 +20866,8 @@
     "id": "1996"
   },
   {
-    "examine": "I need to add some meat too.",
     "ge_buy_limit": "200",
+    "examine": "I need to add some meat too.",
     "grand_exchange_price": "177",
     "durability": null,
     "name": "Incomplete stew",
@@ -20884,8 +20884,8 @@
     "id": "1998"
   },
   {
-    "examine": "I need to add some potato too.",
     "ge_buy_limit": "200",
+    "examine": "I need to add some potato too.",
     "grand_exchange_price": "210",
     "durability": null,
     "name": "Incomplete stew",
@@ -132116,6 +132116,7 @@
     "id": "14645"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Burgundy afro",
@@ -132128,6 +132129,7 @@
     "id": "14647"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Red afro",
@@ -132140,6 +132142,7 @@
     "id": "14649"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Vermilion afro",
@@ -132152,6 +132155,7 @@
     "id": "14651"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Pink afro",
@@ -132164,6 +132168,7 @@
     "id": "14653"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Orange afro",
@@ -132176,6 +132181,7 @@
     "id": "14655"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Yellow afro",
@@ -132188,6 +132194,7 @@
     "id": "14657"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Peach afro",
@@ -132200,6 +132207,7 @@
     "id": "14659"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Brown afro",
@@ -132212,6 +132220,7 @@
     "id": "14661"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Dark brown afro",
@@ -132224,6 +132233,7 @@
     "id": "14663"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Light brown afro",
@@ -132236,6 +132246,7 @@
     "id": "14665"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Mint green afro",
@@ -132248,6 +132259,7 @@
     "id": "14667"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Green afro",
@@ -132260,6 +132272,7 @@
     "id": "14669"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Dark green afro",
@@ -132272,6 +132285,7 @@
     "id": "14671"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Dark blue afro",
@@ -132284,6 +132298,7 @@
     "id": "14673"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Turquoise afro",
@@ -132296,6 +132311,7 @@
     "id": "14675"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Light blue afro",
@@ -132308,6 +132324,7 @@
     "id": "14677"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Purple afro",
@@ -132320,6 +132337,7 @@
     "id": "14679"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Violet afro",
@@ -132332,6 +132350,7 @@
     "id": "14681"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Indigo afro",
@@ -132344,6 +132363,7 @@
     "id": "14683"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Dark Grey afro",
@@ -132356,6 +132376,7 @@
     "id": "14685"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Military Grey afro",
@@ -132368,6 +132389,7 @@
     "id": "14687"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "White afro",
@@ -132380,6 +132402,7 @@
     "id": "14689"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Light Grey afro",
@@ -132392,6 +132415,7 @@
     "id": "14691"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Taupe afro",
@@ -132404,6 +132428,7 @@
     "id": "14693"
   },
   {
+    "remove_head": "true",
     "destroy_message": "Your item will be destroyed permanently and it may not be reclaimable.",
     "examine": "Perfect for parties!",
     "name": "Black afro",
