@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import core.ServerConstants
 import core.api.*
 import core.api.movement.finishedMoving
+import core.api.ui.closeDialogue
 import core.api.ui.sendInterfaceConfig
 import core.api.ui.setMinimapState
 import core.game.component.Component
@@ -27,8 +28,8 @@ import org.rs.consts.NPCs
 import proto.management.JoinClanRequest
 
 object TutorialStage {
-    val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
-    val TUTORIAL_HINT = "tutorial:hinticon"
+    const val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
+    const val TUTORIAL_HINT = "tutorial:hinticon"
 
     private val STARTER_PACK =
         arrayOf(
@@ -55,14 +56,9 @@ object TutorialStage {
 
     @JvmStatic
     fun rollback(player: Player) {
-        val currentStage = getAttribute(player, TUTORIAL_STAGE, -1)
-        addDialogueAction(player) { p, button ->
-            if (button > 1) {
-                load(p, currentStage)
-            } else {
-                load(p, currentStage)
-            }
-        }
+        val currentStage = getAttribute(player, TUTORIAL_STAGE, 0)
+        closeDialogue(player)
+        load(player, currentStage)
     }
 
     fun load(
