@@ -44,10 +44,10 @@ class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_Q
             line(player, if (player.inventory.containsItem(PRESSURE_GAUGE)) { "<str>1 Pressure Gauge" } else { RED + "1 Pressure Gauge" }, line++)
             line(player, if (player.inventory.containsItem(RUBBER_TUBE)) "<str>1 Rubber Tube" else RED + "1 Rubber Tube", line++)
         } else if (stage == 100) {
-            line(player, "I have spoken to Veronica", line++)
-            line(player, "I have collected all the parts for the machine", line++)
-            line(player, "Dr Oddenstein thanked me for helping fix his machine", line++)
-            line(player, "We turned Ernest back to normal and he rewarded me", line++)
+            line(player, "I have spoken to Veronica", line++, true)
+            line(player, "I have collected all the parts for the machine", line++, true)
+            line(player, "Dr Oddenstein thanked me for helping fix his machine", line++, true)
+            line(player, "We turned Ernest back to normal and he rewarded me", line++, true)
             line++
             line(player, "<col=FF0000>QUEST COMPLETE!</col>", line)
         }
