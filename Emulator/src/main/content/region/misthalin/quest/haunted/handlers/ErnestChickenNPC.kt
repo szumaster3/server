@@ -6,20 +6,33 @@ import core.game.world.map.Location
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the abstract npc class to handle Ernest the Chicken.
+ *
+ * @author Vexia
+ */
 class ErnestChickenNPC(
     id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = ErnestChickenNPC(id, location)
+    location: Location? = null
+) : AbstractNPC(id, location, false) {
 
-    override fun isHidden(player: Player): Boolean {
-        val questStage = player.getQuestRepository().getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player)
-        return questStage == 100 || player.getAttribute("ernest-hide", false)
+    companion object {
+        /**
+         * The NPC ids of NPCs using this plugin.
+         */
+        private val ID = intArrayOf(NPCs.CHICKEN_288)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.CHICKEN_288)
+    override fun construct(id: Int, location: Location?, vararg objects: Any?): AbstractNPC {
+        return ErnestChickenNPC(id, location)
+    }
+
+    override fun isHidden(player: Player): Boolean {
+        return player.questRepository.getQuest(Quests.ERNEST_THE_CHICKEN).getStage(player) == 100 ||
+                player.getAttribute("ernest-hide", false)
+    }
+
+    override fun getIds(): IntArray {
+        return ID
+    }
 }

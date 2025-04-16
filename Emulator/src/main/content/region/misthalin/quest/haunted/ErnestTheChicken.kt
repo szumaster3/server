@@ -16,6 +16,9 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 import org.rs.consts.Vars
 
+/**
+ * Represents the Ernest the Chicken quest.
+ */
 @Initializable
 class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_QUEST_ERNEST_THE_CHICKEN_PROGRESS_32, 0, 1, 3) {
     override fun drawJournal(
@@ -29,39 +32,24 @@ class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_Q
             line(player, "outside !!Draynor Manor??.", line++)
             line(player, "There aren't any requirements for this quest.", line++)
         } else if (stage == 10) {
-            line(player, "I have spoken to Veronica", line++, true)
-            line(player, "I need to find !!Ernest??", line++, true)
-            line(player, "He went into !!Draynor Manor?? and hasn't returned", line++, true)
+            line(player, "I have spoken to Veronica", line++)
+            line(player, "I need to find !!Ernest??", line++)
+            line(player, "He went into !!Draynor Manor?? and hasn't returned", line++)
         } else if (stage == 20) {
-            line(player, "I have spoken to Veronica", line++, true)
-            line(player, "I've spoken to Dr Oddenstein, and discovered Ernest is a", line++, true)
-            line(player, "chicken", line++, true)
+            line(player, "I have spoken to Veronica", line++)
+            line(player, "I've spoken to Dr Oddenstein, and discovered Ernest is a", line++)
+            line(player, "chicken", line++)
             line(player, "I need to bring !!Dr Oddenstein?? parts for his machine", line++)
             line(player, if (player.inventory.containsItem(OIL_CAN)) "<str>1 Oil Can" else RED + "1 Oil Can", line++)
-            line(
-                player,
-                if (player.inventory.containsItem(
-                        PRESSURE_GAUGE,
-                    )
-                ) {
-                    "<str>1 Pressure Gauge"
-                } else {
-                    RED + "1 Pressure Gauge"
-                },
-                line++,
-            )
-            line(
-                player,
-                if (player.inventory.containsItem(RUBBER_TUBE)) "<str>1 Rubber Tube" else RED + "1 Rubber Tube",
-                line++,
-            )
+            line(player, if (player.inventory.containsItem(PRESSURE_GAUGE)) { "<str>1 Pressure Gauge" } else { RED + "1 Pressure Gauge" }, line++)
+            line(player, if (player.inventory.containsItem(RUBBER_TUBE)) "<str>1 Rubber Tube" else RED + "1 Rubber Tube", line++)
         } else if (stage == 100) {
-            line(player, "I have spoken to Veronica", line++, true)
-            line(player, "I have collected all the parts for the machine", line++, true)
-            line(player, "Dr Oddenstein thanked me for helping fix his machine", line++, true)
-            line(player, "We turned Ernest back to normal and he rewarded me", line++, true)
+            line(player, "I have spoken to Veronica", line++)
+            line(player, "I have collected all the parts for the machine", line++)
+            line(player, "Dr Oddenstein thanked me for helping fix his machine", line++)
+            line(player, "We turned Ernest back to normal and he rewarded me", line++)
             line++
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line)
         }
     }
 
@@ -87,9 +75,9 @@ class ErnestTheChicken : Quest(Quests.ERNEST_THE_CHICKEN, 19, 18, 4, Vars.VARP_Q
     }
 
     companion object {
-        private val OIL_CAN = Item(277)
-        private val PRESSURE_GAUGE = Item(271)
-        private val RUBBER_TUBE = Item(276)
-        private val COINS = Item(995, 300)
+        private val OIL_CAN = Item(Items.OIL_CAN_277)
+        private val PRESSURE_GAUGE = Item(Items.PRESSURE_GAUGE_271)
+        private val RUBBER_TUBE = Item(Items.RUBBER_TUBE_276)
+        private val COINS = Item(Items.COINS_995, 300)
     }
 }

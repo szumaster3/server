@@ -7,10 +7,21 @@ import core.game.world.map.Location
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the abstract NPC class to handle Ernest the Chicken.
+ */
 class ErnestNPC(
     id: Int = 0,
     location: Location? = null,
 ) : AbstractNPC(id, location) {
+
+    companion object {
+        /**
+         * The NPC ids of NPCs using this plugin.
+         */
+        private val ID = intArrayOf(NPCs.ERNEST_287)
+    }
+
     override fun construct(
         id: Int,
         location: Location,
@@ -19,15 +30,18 @@ class ErnestNPC(
 
     override fun isHidden(player: Player): Boolean {
         val target: Player? = getAttribute("target", null)
-        if (player != target) {
+
+        if (target == null || player != target) {
             return true
         }
-        if (player == target && isQuestComplete(target, Quests.ERNEST_THE_CHICKEN)) {
+
+        if (isQuestComplete(player, Quests.ERNEST_THE_CHICKEN)) {
             clear()
-            super.isHidden(player)
+            return super.isHidden(player)
         }
-        return true
+
+        return false
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ERNEST_287)
+    override fun getIds(): IntArray = ID
 }
