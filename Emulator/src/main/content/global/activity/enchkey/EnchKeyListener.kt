@@ -311,7 +311,7 @@ class EnchKeyListener :
                         "Location: (${location.x}, ${location.y}, ${location.z}), Rewards: ${treasure.rewards}, Status: [$status]"
                     }.joinToString("\n")
 
-            sendMessage(player, "Treasures founded:\n$message")
+            player.debug("Treasures founded:\n$message")
         }
 
         define(
@@ -324,10 +324,7 @@ class EnchKeyListener :
             val treasures = meetingTreasures(player)
             val firstTreasure = treasures.entries.first()
 
-            sendMessage(
-                player,
-                "[EnchantedKeyTreasureRoll] --> Location=[${firstTreasure.key.x}, ${firstTreasure.key.y}, ${firstTreasure.key.z}]",
-            )
+            player.debug("[EnchantedKeyTreasureRoll] --> Location=[${firstTreasure.key.x}, ${firstTreasure.key.y}, ${firstTreasure.key.z}]",)
         }
     }
 }
