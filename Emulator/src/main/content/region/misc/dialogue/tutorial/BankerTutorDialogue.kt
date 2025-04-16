@@ -1,5 +1,6 @@
 package content.region.misc.dialogue.tutorial
 
+import content.region.misc.handlers.tutorial.TutorialStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -61,7 +62,7 @@ class BankerTutorDialogue(
                             stage =
                                 30
                         }
-                    4 -> player("Goodbye.").also { stage = END_DIALOGUE }
+                    4 -> player("Goodbye.").also { stage = 33 }
                 }
             10 ->
                 npc(
@@ -109,7 +110,7 @@ class BankerTutorDialogue(
                 ).also {
                     stage++
                 }
-            16 -> npc("then withdraw the items you need.").also { stage = END_DIALOGUE }
+            16 -> npc("then withdraw the items you need.").also { stage = 33 }
             20 ->
                 npc(
                     "They look like grey pillars, there's one just over there,",
@@ -127,7 +128,7 @@ class BankerTutorDialogue(
                     "simply fishing or mining etc.",
                 ).also {
                     stage =
-                        END_DIALOGUE
+                        33
                 }
             30 ->
                 npc(
@@ -144,9 +145,9 @@ class BankerTutorDialogue(
                     "So if someone did manage to get your password they",
                     "couldn't steal your items if they were in the bank.",
                 ).also {
-                    stage =
-                        END_DIALOGUE
+                    stage = 33
                 }
+            33 -> TutorialStage.rollback(player!!)
         }
         return true
     }

@@ -158,14 +158,14 @@ class SurvivalExpertDialogue(
                                 2
                         }
 
-                    2 -> npcl(FaceAnim.FRIENDLY, "Light the logs in your backpack to make a fire.").also { stage = 0 }
+                    2 -> npcl(FaceAnim.FRIENDLY, "Light the logs in your backpack to make a fire.").also { stage = 4 }
                     3 ->
                         npcl(
                             FaceAnim.HAPPY,
                             "Whenever you see bubbles in the water, there's probably some good fishing to be had there!",
                         ).also {
                             stage =
-                                0
+                                4
                         }
 
                     4 ->
@@ -187,9 +187,9 @@ class SurvivalExpertDialogue(
                         }
                 }
 
-                2 -> npcl(FaceAnim.FRIENDLY, "For now, right-click the logs and left-click Light.").also { stage = 0 }
-                3 -> npcl(FaceAnim.FRIENDLY, "Then use the shrimp on the fire.").also { stage = 0 }
-                END_DIALOGUE -> TutorialStage.rollback(player!!)
+                2 -> npcl(FaceAnim.FRIENDLY, "For now, right-click the logs and left-click Light.").also { stage = 4 }
+                3 -> npcl(FaceAnim.FRIENDLY, "Then use the shrimp on the fire.").also { stage = 4 }
+                4 -> TutorialStage.rollback(player!!)
             }
         }
         return true

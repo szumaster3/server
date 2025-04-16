@@ -188,7 +188,8 @@ class CombatInstructorDialogue(
                 36 -> npcl(FaceAnim.FRIENDLY, "If you don't wish to end up there, take notice of the warning you will receive when getting near to it.").also { stage++ }
                 37 -> npcl(FaceAnim.FRIENDLY, "Now, was there anything more?").also { stage = 0 }
 
-                38 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage = END_DIALOGUE }
+                38 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage++ }
+                39 -> TutorialStage.rollback(player!!)
 
             }
         }

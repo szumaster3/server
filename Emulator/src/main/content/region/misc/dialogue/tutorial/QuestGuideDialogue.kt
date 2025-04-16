@@ -119,7 +119,8 @@ class QuestGuideDialogue(
                 5 -> sendItemDialogue(player, Items.NULL_5092, "The minimap in the top right corner of the screen has various icons to show different points of interest. Look for the icon to the left to find quest start points.").also { stage++ }
                 6 -> npcl(FaceAnim.FRIENDLY, "The quests themselves can vary greatly from collecting beads to hunting down dragons. Completing quests will reward you with all sorts of things, such as new areas and better weapons!").also { stage++ }
                 7 -> npcl(FaceAnim.FRIENDLY, "There's not a lot more I can tell you about questing. You have to experience the thrill of it yourself to fully understand.").also { stage = END_DIALOGUE }
-                8 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage = END_DIALOGUE }
+                8 -> npcl(FaceAnim.FRIENDLY, "Okay then.").also { stage++ }
+                9 -> TutorialStage.rollback(player!!)
             }
         }
 
