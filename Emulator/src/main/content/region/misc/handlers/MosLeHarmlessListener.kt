@@ -1,5 +1,6 @@
 package content.region.misc.handlers
 
+import content.minigame.troublebrewing.MosleUtils
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.game.dialogue.FaceAnim
@@ -58,8 +59,7 @@ class MosLeHarmlessListener : InteractionListener {
         }
 
         on(SHOP_OWNERS, IntType.NPC, "trade") { player, node ->
-            val pirateBook = hasAnItem(player, Items.BOOK_O_PIRACY_7144).container != null
-            if (!pirateBook) {
+            if (!MosleUtils.canUnderstandPirateLanguage(player)) {
                 player.dialogueInterpreter.open(node.asNpc().id, node)
             } else {
                 openNpcShop(player, node.asNpc().id)
