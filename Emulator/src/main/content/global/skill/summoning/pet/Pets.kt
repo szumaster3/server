@@ -288,7 +288,7 @@ enum class Pets(
         grownItemId = Items.TERRIER_12513,
         overgrownItemId = -1,
         babyNpcId = NPCs.TERRIER_PUPPY_6958,
-        grownNpcId = NPCs.MITHRIL_MINOTAUR_6859,
+        grownNpcId = NPCs.TERRIER_6959,
         overgrownNpcId = -1,
         growthRate = 0.0033333333333333,
         summoningLevel = 4,
