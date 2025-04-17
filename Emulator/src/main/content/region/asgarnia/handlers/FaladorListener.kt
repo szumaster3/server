@@ -109,6 +109,17 @@ class FaladorListener : InteractionListener {
         }
     }
 
+    override fun defineDestinationOverrides() {
+
+        /*
+         * Handles destination to shop NPC.
+         */
+
+        setDest(IntType.NPC, intArrayOf(NPCs.EMILY_736), "talk-to") { _, _ ->
+            return@setDest Location.create(2956, 3372, 0)
+        }
+    }
+
     companion object {
         private const val CUPBOARD_CLOSED = Scenery.CUPBOARD_2271
         private const val CUPBOARD_OPEN = Scenery.CUPBOARD_2272
