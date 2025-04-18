@@ -162,6 +162,7 @@ class ManniDialogue(
 
             103 -> npc("As you wish outerlander; I will drink first, then you will", "drink.").also { stage++ }
             104 -> {
+                sendMessage(player, "The Fremennik drinks his tankard first. He staggers a little bit.")
                 Pulser.submit(DrinkingPulse(player, findLocalNPC(player, npc.id), getAttribute(player, GameAttributes.QUEST_VIKING_MANI_KEG, false)))
                 end()
             }
@@ -312,7 +313,7 @@ class ManniDialogue(
     class DrinkingPulse(
         val player: Player?,
         val npc: NPC?,
-        val lowAlcohol: Boolean? = false,
+        private val lowAlcohol: Boolean? = false,
     ) : Pulse() {
         var counter = 0
 
@@ -333,9 +334,8 @@ class ManniDialogue(
                     3 -> npc?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
                     5 -> {
                         player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                        player?.inventory?.remove(
-                            Item(Items.KEG_OF_BEER_3711),
-                        )
+                        player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
+                        sendMessage(player!!, "You drink from your keg. You feel extremely drunk...")
                     }
 
                     7 ->
@@ -359,8 +359,7 @@ class ManniDialogue(
                         npc?.unlock()
                         player?.face(player)
                         npc?.face(npc)
-                        npc?.isNeverWalks =
-                            false
+                        npc?.isNeverWalks = false
                         return true
                     }
                 }
@@ -380,9 +379,8 @@ class ManniDialogue(
                     3 -> npc?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
                     5 -> {
                         player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                        player?.inventory?.remove(
-                            Item(Items.KEG_OF_BEER_3711),
-                        )
+                        player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
+                        sendMessage(player!!, "You drink from your keg. You don't feel at all drunk.")
                     }
 
                     7 ->
@@ -417,24 +415,14 @@ class ManniDialogue(
                         npc?.unlock()
                         player?.face(player)
                         npc?.face(npc)
-                        npc?.isNeverWalks =
-                            false
-                        removeAttribute(player!!, GameAttributes.QUEST_VIKING_MANI_BOMB)
-                        removeAttribute(
-                            player,
-                            GameAttributes.QUEST_VIKING_MANI_START,
-                        )
-                        removeAttribute(player, GameAttributes.QUEST_VIKING_MANI_KEG)
-                        setAttribute(
-                            player,
-                            GameAttributes.QUEST_VIKING_MANI_VOTE,
-                            true,
-                        )
-                        setAttribute(
-                            player,
-                            GameAttributes.QUEST_VIKING_VOTES,
-                            getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) + 1,
-                        )
+                        npc?.isNeverWalks = false
+                        /*
+                         * End of Revellers trial.
+                         */
+                        removeAttributes(player!!, GameAttributes.QUEST_VIKING_MANI_BOMB, GameAttributes.QUEST_VIKING_MANI_START, GameAttributes.QUEST_VIKING_MANI_KEG)
+                        setAttribute(player, GameAttributes.QUEST_VIKING_MANI_VOTE, true)
+                        setAttribute(player, GameAttributes.QUEST_VIKING_VOTES, getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) + 1)
+                        sendMessage(player, "Congratulations! You have completed the Revellers' trial.")
                         return true
                     }
                 }
