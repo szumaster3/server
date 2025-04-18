@@ -15,6 +15,11 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents Koschei the Deathless NPC used during the Fremennik Trials Warrior's Trial.
+ **
+ * @property session The [KoscheiSession] associated with this encounter.
+ */
 class KoscheiNPC(
     id: Int = 0,
     location: Location? = null,
@@ -31,6 +36,10 @@ class KoscheiNPC(
         type = KoscheiType.forId(id)
     }
 
+    /**
+     * Initializes the Koschei NPC. If the player is in the correct region,
+     * it queues the spawn pulse; otherwise, ends the session.
+     */
     override fun init() {
         super.init()
         if (session?.player?.location?.regionId == 10653) {
@@ -40,6 +49,9 @@ class KoscheiNPC(
         }
     }
 
+    /**
+     * Ensures Koschei continues attacking the player when active and engaged.
+     */
     override fun handleTickActions() {
         super.handleTickActions()
         if (session == null) {
@@ -53,6 +65,11 @@ class KoscheiNPC(
             properties.combatPulse.attack(session.player)
         }
     }
+
+    /**
+     * Handles death logic. If not in fourth form, transforms to the next.
+     * Otherwise, completes the trial and gives the reward.
+     */
 
     override fun startDeath(killer: Entity) {
         if (killer === session!!.player) {
@@ -74,6 +91,9 @@ class KoscheiNPC(
         super.startDeath(killer)
     }
 
+    /**
+     * Handles combat damage behavior. In fourth form, disables prayer if player is nearly dead.
+     */
     override fun sendImpact(state: BattleState?) {
         if (type == KoscheiType.FOURTH_FORM) {
             if (session?.player?.skills?.lifepoints!! < 2) {
@@ -122,6 +142,13 @@ class KoscheiNPC(
             NPCs.KOSCHEI_THE_DEATHLESS_1293,
         )
 
+    /**
+     * Enum representing the transformation phases of Koschei.
+     *
+     * @property npcId The id for the npc form.
+     * @property appearMessage A message shouted when combat starts.
+     * @property appearDialogues Optional intro dialogue before fighting.
+     */
     enum class KoscheiType(
         var npcId: Int,
         var appearMessage: String?,
@@ -151,6 +178,9 @@ class KoscheiNPC(
         ),
         ;
 
+        /**
+         * Transforms the Koschei NPC into the next phase.
+         */
         fun transform(
             koschei: KoscheiNPC,
             player: Player,
@@ -166,9 +196,15 @@ class KoscheiNPC(
             Pulser.submit(KoscheiSpawnPulse(player, koschei))
         }
 
+        /**
+         * Gets the next form of Koschei.
+         */
         operator fun next(): KoscheiType = values()[ordinal + 1]
 
         companion object {
+            /**
+             * Returns the [KoscheiType] matching a given NPC id.
+             */
             fun forId(id: Int): KoscheiType? {
                 for (type in values()) {
                     if (type.npcId == id) {
@@ -180,6 +216,9 @@ class KoscheiNPC(
         }
     }
 
+    /**
+     * Pulse that handles Koschei's spawn intro sequence.
+     */
     class KoscheiSpawnPulse(
         val player: Player?,
         val koschei: KoscheiNPC,
@@ -215,6 +254,9 @@ class KoscheiNPC(
         }
     }
 
+    /**
+     * Pulse that triggers when the fight ends due to player's near-death in fourth form.
+     */
     class FightEndPulse(
         val player: Player?,
         val koschei: KoscheiNPC,

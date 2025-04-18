@@ -36,15 +36,28 @@ import org.rs.consts.Quests
 
 class FremennikTrialsListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles interaction with Fisherman.
+         */
+
         on(FISHERMAN, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, FremennikFishermanDialogue())
             return@on true
         }
 
+        /*
+         * Handles exchange the beer with cherry bomb.
+         */
+
         onUseWith(IntType.NPC, BEER, WORKER) { player, beer, _ ->
             player.dialogueInterpreter.open(CouncilWorkerDialogue(0, true, beer.id), NPC(WORKER))
             return@onUseWith true
         }
+
+        /*
+         * Handles interaction with fossegrimen.
+         */
 
         onUseWith(IntType.SCENERY, FISH, FISH_ALTAR) { player, fish, _ ->
             if (anyInInventory(player, Items.LYRE_3689, Items.ENCHANTED_LYRE_3690)) {
@@ -64,6 +77,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles mix the alcohol.
+         */
 
         onUseWith(IntType.ITEM, LOW_ALC_KEG, KEG) { player, _, _ ->
             if (!getAttribute(player, GameAttributes.QUEST_VIKING_MANI_KEG, false)) {
@@ -85,6 +102,10 @@ class FremennikTrialsListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles lit the cherry bomb.
+         */
+
         onUseWith(IntType.ITEM, TINDERBOX, CHERRY_BOMB) { player, _, _ ->
             if (removeItem(player, CHERRY_BOMB)) {
                 addItem(player, LIT_BOMB)
@@ -92,6 +113,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles creating unstrung lyre.
+         */
 
         onUseWith(IntType.ITEM, KNIFE, TREE_BRANCH) { player, _, _ ->
             if (!player.skills.hasLevel(Skills.CRAFTING, 40)) {
@@ -105,6 +130,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles adding ingredients for Lallis soup.
+         */
 
         onUseWith(IntType.SCENERY, STEW_INGREDIENT_IDS, LALLIS_STEW) { player, stewIngredient, _ ->
             when (stewIngredient.id) {
@@ -135,6 +164,10 @@ class FremennikTrialsListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles creating golden wool.
+         */
+
         onUseWith(IntType.SCENERY, GOLDEN_FLEECE, *SPINNING_WHEEL_IDS) { player, _, _ ->
             if (removeItem(player, GOLDEN_FLEECE)) {
                 addItem(player, GOLDEN_WOOL)
@@ -143,6 +176,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles creating lyre.
+         */
 
         onUseWith(IntType.ITEM, UNSTRUNG_LYRE, GOLDEN_WOOL) { player, _, _ ->
             if (player.getSkills().getLevel(Skills.FLETCHING) < 25) {
@@ -157,6 +194,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles interaction with doors to where we do the concert.
+         */
 
         on(LONGHALL_BACKDOOR, IntType.SCENERY, "open") { player, node ->
             if (player.location == Location.create(2662, 3692, 0) ||
@@ -203,8 +244,17 @@ class FremennikTrialsListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles playing the lyre.
+         */
+
         on(LYRE_IDs, IntType.ITEM, "play") { player, lyre ->
-            if (getAttribute(player, GameAttributes.QUEST_VIKING_PLAYER_ON_STAGE, false) && !getAttribute(player, GameAttributes.QUEST_VIKING_OLAF_CONCERT, false)) {
+            if (getAttribute(player, GameAttributes.QUEST_VIKING_PLAYER_ON_STAGE, false) && !getAttribute(
+                    player,
+                    GameAttributes.QUEST_VIKING_OLAF_CONCERT,
+                    false
+                )
+            ) {
                 Pulser.submit(
                     LyreConcertPulse(
                         player,
@@ -231,6 +281,10 @@ class FremennikTrialsListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with pipe.
+         */
+
         on(PIPE, IntType.SCENERY, "put-inside") { player, _ ->
             if (inInventory(player, LIT_BOMB)) {
                 sendMessage(player, "You stuff the lit object into the pipe.")
@@ -244,6 +298,10 @@ class FremennikTrialsListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles interaction with swensen room portals.
+         */
 
         on(PORTALIDs, IntType.SCENERY, "use") { player, portal ->
             player.properties?.teleportLocation =
@@ -264,12 +322,25 @@ class FremennikTrialsListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with the swensen ladder.
+         */
+
         on(SWENSEN_LADDER, IntType.SCENERY, "climb") { player, _ ->
             if (!getAttribute(player, GameAttributes.QUEST_VIKING_SWENSEN_START, false)) {
-                sendNPCDialogue(player, NPCs.SWENSEN_THE_NAVIGATOR_1283, "Where do you think you're going?", FaceAnim.ANGRY)
+                sendNPCDialogue(
+                    player,
+                    NPCs.SWENSEN_THE_NAVIGATOR_1283,
+                    "Where do you think you're going?",
+                    FaceAnim.ANGRY
+                )
             }
             return@on true
         }
+
+        /*
+         * Handles enter to the warriors trial.
+         */
 
         on(THORVALD_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
             if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) ||
@@ -317,6 +388,10 @@ class FremennikTrialsListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles exit from warriors trial.
+         */
+
         on(THORVALD_LADDER_LOWER, IntType.SCENERY, "climb-up") { player, _ ->
             if (player.getExtension<Any?>(KoscheiSession::class.java) != null) {
                 KoscheiSession.getSession(player).close()
@@ -325,10 +400,18 @@ class FremennikTrialsListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with swaying tree.
+         */
+
         on(SWAYING_TREE, IntType.SCENERY, "cut-branch") { player, node ->
             player.pulseManager.run(WoodcuttingPulse(player, node as Scenery))
             return@on true
         }
+
+        /*
+         * Handles interaction with shop NPCs.
+         */
 
         on(SHOPNPCS, IntType.NPC, "Trade") { player, npc ->
             if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
@@ -337,11 +420,11 @@ class FremennikTrialsListener : InteractionListener {
                 when (npc.id) {
                     NPCs.THORA_THE_BARKEEP_1300 -> sendMessage(player, "Only Fremenniks may buy drinks here.")
                     NPCs.SKULGRIMEN_1303 -> sendMessage(player, "Only Fremenniks may purchase weapons and armour here.")
-                    NPCs.SIGMUND_THE_MERCHANT_1282 ->
-                        sendMessage(
-                            player,
-                            "Only Fremenniks may trade with this merchant.",
-                        )
+                    NPCs.SIGMUND_THE_MERCHANT_1282 -> sendMessage(
+                        player,
+                        "Only Fremenniks may trade with this merchant."
+                    )
+
                     NPCs.YRSA_1301 -> sendMessage(player, "Only Fremenniks may buy clothes here.")
                     NPCs.FISH_MONGER_1315 -> sendMessage(player, "Only Fremenniks may purchase fish here.")
                 }
@@ -350,6 +433,14 @@ class FremennikTrialsListener : InteractionListener {
         }
     }
 
+    /**
+     * Represents a destination room with rectangular bounds.
+     *
+     * @property swx The south-west X coordinate.
+     * @property swy The south-west Y coordinate.
+     * @property nex The north-east X coordinate.
+     * @property ney The north-east Y coordinate.
+     */
     class DestRoom(
         val swx: Int,
         val swy: Int,
@@ -357,8 +448,20 @@ class FremennikTrialsListener : InteractionListener {
         val ney: Int,
     )
 
+    /**
+     * Calculates the center location of the destination room and slightly shifts it.
+     *
+     * @return A [Location] representing the center of this room.
+     */
     fun DestRoom.getCenter(): Location = Location((swx + nex) / 2, (swy + ney) / 2).transform(1, 0, 0)
 
+    /**
+     * Finds a random location from scenery objects in the player's current viewport,
+     * specifically looking for object ID 5138.
+     *
+     * @param player The player to check viewport data for.
+     * @return A random valid [Location] of the specified object.
+     */
     fun getRandomLocation(player: Player?): Location {
         var obj: Scenery? = null
 
@@ -378,6 +481,12 @@ class FremennikTrialsListener : InteractionListener {
         return obj.location
     }
 
+    /**
+     * Checks whether the player has any equippable items in inventory or equipment.
+     *
+     * @param player The player whose items to check.
+     * @return `true` if any equippable item is found, `false` otherwise.
+     */
     fun hasEquippableItems(player: Player?): Boolean {
         val container = arrayOf(player!!.inventory, player.equipment)
         for (c in container) {
@@ -400,6 +509,12 @@ class FremennikTrialsListener : InteractionListener {
         return false
     }
 
+    /**
+     * Handles the spirit offering pulse to the Fossegrimen NPC in the Fremennik Trials.
+     *
+     * @property player The player offering the item.
+     * @property fish The fish item ID being offered.
+     */
     class SpiritPulse(
         val player: Player,
         val fish: Int,
@@ -453,14 +568,14 @@ class FremennikTrialsListener : InteractionListener {
                     } else {
                         if (hasboots) {
                             when (fish) {
-                                Items.RAW_SHARK_383      -> addItem(player, Items.ENCHANTED_LYRE3_6126)
-                                Items.RAW_MANTA_RAY_389  -> addItem(player, Items.ENCHANTED_LYRE5_14590)
+                                Items.RAW_SHARK_383 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                                Items.RAW_MANTA_RAY_389 -> addItem(player, Items.ENCHANTED_LYRE5_14590)
                                 Items.RAW_SEA_TURTLE_395 -> addItem(player, Items.ENCHANTED_LYRE6_14591)
                             }
                         } else {
                             when (fish) {
-                                Items.RAW_SHARK_383      -> addItem(player, Items.ENCHANTED_LYRE2_6125)
-                                Items.RAW_MANTA_RAY_389  -> addItem(player, Items.ENCHANTED_LYRE3_6126)
+                                Items.RAW_SHARK_383 -> addItem(player, Items.ENCHANTED_LYRE2_6125)
+                                Items.RAW_MANTA_RAY_389 -> addItem(player, Items.ENCHANTED_LYRE3_6126)
                                 Items.RAW_SEA_TURTLE_395 -> addItem(player, Items.ENCHANTED_LYRE4_6127)
                             }
                         }
@@ -478,6 +593,12 @@ class FremennikTrialsListener : InteractionListener {
         }
     }
 
+    /**
+     * Handles the pulse for the enchanted lyre concert performance and upgrades the lyre.
+     *
+     * @property player The player performing the concert.
+     * @property Lyre The item ID of the lyre being used.
+     */
     class LyreConcertPulse(
         val player: Player,
         val Lyre: Int,
@@ -584,6 +705,11 @@ class FremennikTrialsListener : InteractionListener {
         }
     }
 
+    /**
+     * Handles the short fletching process to carve a lyre from a branch.
+     *
+     * @property player The player performing the fletching.
+     */
     class BranchFletchingPulse(
         val player: Player,
     ) : Pulse() {
@@ -604,6 +730,11 @@ class FremennikTrialsListener : InteractionListener {
         }
     }
 
+    /**
+     * Pulse for initiating the Koschei the Deathless combat session.
+     *
+     * @property player The player entering the battleground.
+     */
     class KoscheiPulse(
         val player: Player,
     ) : Pulse() {
