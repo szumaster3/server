@@ -16,10 +16,18 @@ import org.rs.consts.Items
 import kotlin.math.abs
 import kotlin.math.atan2
 
+/**
+ * Listener for the Hunter's Talisman item used in the [FremennikTrials][content.region.fremennik.quest.viking.FremennikTrials] quest.
+ * Handles the "locate" interaction which guides the player towards the [DraugenNPC][content.region.fremennik.quest.viking.handlers.DraugenNPC].
+ */
 class HunterTalismanListener : InteractionListener {
     val TALISMAN = Items.HUNTERS_TALISMAN_3696
 
     override fun defineListeners() {
+        /*
+         * Handles option on the Hunter's Talisman.
+         */
+
         on(TALISMAN, IntType.ITEM, "locate") { player, _ ->
             var locationString = getAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_LOCATION, "none")
             if (locationString == "none") {
@@ -36,12 +44,17 @@ class HunterTalismanListener : InteractionListener {
                 Pulser.submit(DraugenPulse(player))
             } else {
                 val neededDirection = draugenLoc.getDirection(player as Entity)
-                sendMessage(player, "The talisman pulls you to the $neededDirection")
+                sendMessage(player, "The talisman pulls you to the $neededDirection.")
             }
             return@on true
         }
     }
 
+    /**
+     * Pulse that delays the spawning of the Draugen NPC.
+     *
+     * @param player The player using the talisman.
+     */
     class DraugenPulse(
         val player: Player,
     ) : Pulse() {
@@ -51,6 +64,7 @@ class HunterTalismanListener : InteractionListener {
             when (count++) {
                 3 -> {
                     if (getAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_SPAWN, false)) return true
+                    sendMessage(player, "The draugen is here! Beware!")
                     DraugenNPC(player).init()
                     setAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_SPAWN, true)
                     return true
@@ -60,7 +74,10 @@ class HunterTalismanListener : InteractionListener {
         }
     }
 
-    val possibleLocations =
+    /**
+     * List of possible locations where the Draugen may spawn.
+     */
+    private val possibleLocations =
         listOf(
             Location(2625, 3608),
             Location(2602, 3628),
@@ -69,6 +86,12 @@ class HunterTalismanListener : InteractionListener {
             Location(2664, 3592),
         )
 
+    /**
+     * Determines the cardinal/intercardinal direction from an entity's location to this location.
+     *
+     * @param entity The entity from which to calculate the direction.
+     * @return A string representing the direction to this location.
+     */
     fun Location.getDirection(entity: Entity): String {
         val loc: Location = this
         val difX: Double = (loc.x - entity.location.x).toDouble()
@@ -109,6 +132,13 @@ class HunterTalismanListener : InteractionListener {
         return "Dunno. $angle"
     }
 
+    /**
+     * Calculates the absolute difference between two angles.
+     *
+     * @param x First angle.
+     * @param y Second angle.
+     * @return The absolute difference between the angles.
+     */
     fun diff(
         x: Double,
         y: Double,
