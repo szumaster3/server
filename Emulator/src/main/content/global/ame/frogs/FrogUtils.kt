@@ -42,7 +42,6 @@ object FrogUtils {
             RandomEvent.save(),
             RandomEvent.logout(),
         )
-        unlock(player)
     }
 
     fun kissTheFrog(
@@ -100,12 +99,10 @@ object FrogUtils {
                             }
 
                         12 -> {
-                            closeInterface(player)
                             npc.reTransform()
                             cleanup(player)
                             reward(player)
-                            openInterface(player, Components.FADE_FROM_BLACK_170)
-                            sendMessage(player, "You've received a random event gift!")
+                            sendMessage(player, "You've received a frog token!")
                         }
                     }
                     return false
