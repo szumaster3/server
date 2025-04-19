@@ -12,16 +12,11 @@ import org.rs.consts.Vars
 class GravePurchaseInterface : InterfaceListener {
     val BUTTON_CONFIRM = 34
     val AVAILABLE_GRAVES_BITFIELD = 0xFFF
-    val AVAILABLE_GRAVES_VARBIT = Vars.VARBIT_IFACE_GRAVE_DISPLAY_4191
-    val CURRENT_GRAVE_VARBIT = Vars.VARBIT_CURRENT_GRAVE_4190
+    val AVAILABLE_GRAVES_VARBIT = 4191
+    val CURRENT_GRAVE_VARBIT = 4190
 
     override fun defineInterfaceListeners() {
         onOpen(Components.GRAVESTONE_SHOP_652) { player, _ ->
-            if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
-                sendMessage(player, "You must complete The Restless Ghost in order to purchase gravestones.")
-                return@onOpen true
-            }
-
             val userType = GraveController.getGraveType(player).ordinal
             setVarbit(player, AVAILABLE_GRAVES_VARBIT, AVAILABLE_GRAVES_BITFIELD)
             setVarbit(player, CURRENT_GRAVE_VARBIT, userType)

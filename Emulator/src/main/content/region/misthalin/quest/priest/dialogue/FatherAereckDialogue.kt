@@ -82,7 +82,6 @@ class FatherAereckDialogue(
                     sendDialogueOptions(
                         player,
                         "What would you like to say?",
-                        "Can you change my gravestone now?",
                         "Who's Saradomin?",
                         "Nice place you've got here.",
                         "I'm looking for a quest.",
@@ -166,15 +165,9 @@ class FatherAereckDialogue(
 
             500 ->
                 when (buttonId) {
-                    1 ->
-                        npc(
-                            "Certainly. All proceeds are donated to the",
-                            "Varrockian Guards' Widows & Orphans Fund.",
-                        ).also { stage = 10 }
-
-                    2 -> npc("Surely you have heard of our god, Saradomin?").also { stage = 20 }
-                    3 -> npc("It is, isn't it? It was built over two centuries ago.").also { stage = END_DIALOGUE }
-                    4 -> player("I'm looking for a quest.").also { stage = 505 }
+                    1 -> npc("Surely you have heard of our god, Saradomin?").also { stage = 20 }
+                    2 -> npc("It is, isn't it? It was built over two centuries ago.").also { stage = END_DIALOGUE }
+                    3 -> player("I'm looking for a quest.").also { stage = 505 }
                 }
 
             505 -> npc("That's lucky, I need someone to do a quest for me.").also { stage++ }
