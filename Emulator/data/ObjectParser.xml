@@ -99,4 +99,7 @@
     <ObjectAction mode="add" id="41906" x="3473" y="5209" z="0"/>
     <ObjectAction mode="add" id="41907" x="3535" y="5242" z="0"/>
 
+    <!-- Bank deposit near Monks of Entrana - Port Sarim docs. -->
+    <ObjectAction mode="add" id="9398" x="3046" y="3237" z="0"/>
+
 </parsing>
