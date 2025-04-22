@@ -3,6 +3,7 @@ package content.region.kandarin.quest.fishingcompo.dialogue
 import content.data.GameAttributes
 import core.api.*
 import core.api.quest.getQuestStage
+import core.api.quest.isQuestComplete
 import core.api.quest.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -29,50 +30,25 @@ class BonzoDialogue(
 ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         val init = args.size < 2
+        val questStage = getQuestStage(player, Quests.FISHING_CONTEST)
         val hasFishingTrophy = hasAnItem(player, Items.FISHING_TROPHY_26).container != null
         val duringContest = getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_CONTEST, false)
 
-        stage = when {
-            /*
-             * With fishing rod.
-             */
-            init && inInventory(player, Items.FISHING_ROD_307) -> {
-                npc("Roll up, roll up! Enter the great Hemenster", "Fishing Contest! Only 5gp entrance fee!")
-                0
-            }
-
-            /*
-             * Without fishing rod.
-             */
-            init -> {
-                npc("Sorry, lad, but you need a fishing", "rod to compete.")
-                100
-            }
-
-            /*
-             * Lost trophy.
-             */
-            getQuestStage(player, Quests.FISHING_CONTEST) == 20 && !hasFishingTrophy -> {
-                npc("Hello champ!")
-                1600
-            }
-
-            /*
-             * During contest.
-             */
-
-            duringContest -> {
-                npc("You've already paid, you don't need to pay me again!")
-                100
-            }
-
-            else -> {
-                /*
-                 * After quest.
-                 */
-                npc("Hello champ! So any hints on how to fish?")
-                1500
-            }
+        if (init && inInventory(player, Items.FISHING_ROD_307)) {
+            npc("Roll up, roll up! Enter the great Hemenster", "Fishing Contest! Only 5gp entrance fee!")
+            stage = 0
+        } else if (init) {
+            npc("Sorry, lad, but you need a fishing", "rod to compete.")
+            stage = 100
+        } else if (questStage in 20..99 && !hasFishingTrophy) {
+            npc("Hello champ!")
+            stage = 1600
+        } else if (questStage in 20..99 && duringContest) {
+            npc("You've already paid, you don't need to pay me again!")
+            stage = 100
+        } else {
+            npc("Hello champ! So any hints on how to fish?")
+            stage = 1500
         }
         return true
     }
