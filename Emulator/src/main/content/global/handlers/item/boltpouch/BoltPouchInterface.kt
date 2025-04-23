@@ -1,8 +1,6 @@
 package content.global.handlers.item.boltpouch
 
-import core.api.EquipmentSlot
-import core.api.freeSlots
-import core.api.sendMessage
+import core.api.*
 import core.api.ui.restoreTabs
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
@@ -10,14 +8,31 @@ import org.rs.consts.Components
 class BoltPouchInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
-        on(Components.XBOWS_POUCH_433) { player, _, _, _, slot, _ ->
+        on(Components.XBOWS_POUCH_433) { player, _, _, _, slot, bolts ->
             val boltItemSlots = intArrayOf(2, 6, 10, 14)
             val wieldBoltSlots = intArrayOf(3, 7, 11, 15)
             val removeBoltSlots = intArrayOf(4, 8, 12, 16)
             val unwieldBoltItemSlot = 18
             val unwieldBoltSlot = 19
 
+            for (i in boltItemSlots) {
+                sendItemOnInterface(player, Components.XBOWS_POUCH_433, i, item = bolts)
+            }
+
+            val boltAmountSlots = intArrayOf(24, 25, 26, 27, 28)
+            val boltNameSlots = intArrayOf(21, 22, 23, 28, 29)
+
             val pouch = player.getAttribute("bolt_pouch", BoltPouch)
+            for (i in boltAmountSlots.indices) {
+                val amount = pouch.getAmount(i)
+                sendItemOnInterface(player, Components.XBOWS_POUCH_433, boltAmountSlots[i], item = bolts, amount)
+            }
+
+            for (i in boltNameSlots.indices) {
+                val boltId = pouch.getBolt(i)
+                val boltName = getItemName(boltId).capitalize()
+                sendString(player, boltName, Components.XBOWS_POUCH_433, i)
+            }
 
             when (slot) {
                 in wieldBoltSlots -> {
