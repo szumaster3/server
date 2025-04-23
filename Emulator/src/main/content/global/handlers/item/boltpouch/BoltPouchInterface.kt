@@ -1,5 +1,6 @@
 package content.global.handlers.item.boltpouch
 
+import content.global.handlers.item.boltpouch.BoltPouch.updateBoltPouchDisplay
 import core.api.*
 import core.api.ui.restoreTabs
 import core.game.interaction.InterfaceListener
@@ -14,25 +15,7 @@ class BoltPouchInterface : InterfaceListener {
          */
 
         onOpen(Components.XBOWS_POUCH_433) { player, _ ->
-            // Handles showing amount of bolts on each slot.
-            val amountSlots = intArrayOf(20, 21, 22, 23, 24)
-            for (i in amountSlots.indices) {
-                val amount = BoltPouch.getAmount(player, i)
-                sendString(player, amount.toString(), Components.XBOWS_POUCH_433, amountSlots[i])
-            }
-            // Handles showing name of bolts on each slot.
-            val boltNameSlots = intArrayOf(25, 26, 27, 28, 29)
-            for (i in boltNameSlots.indices) {
-                val boltId = BoltPouch.getBolt(player, i)
-                val boltName = if (boltId != -1) getItemName(boltId) else "Nothing"
-                sendString(player, boltName, Components.XBOWS_POUCH_433, boltNameSlots[i])
-            }
-            // Handles showing item sprite of bolts on each slot.
-            val spriteSlots = intArrayOf(2, 6, 10, 14, 18)
-            for (i in spriteSlots.indices) {
-                val boltId = BoltPouch.getBolt(player, i)
-                sendItemOnInterface(player, Components.XBOWS_POUCH_433, spriteSlots[i], item = boltId)
-            }
+            updateBoltPouchDisplay(player)
             return@onOpen true
         }
 
@@ -76,19 +59,14 @@ class BoltPouchInterface : InterfaceListener {
                 }
 
                 unwieldBoltSlot -> {
-                    if (player.equipment.getNew(EquipmentSlot.AMMO.ordinal) == null) {
+                    if (!BoltPouch.unwield(player)) {
                         sendMessage(player, "You're not wielding anything.")
                         return@on true
                     }
-                    if (freeSlots(player) == 0) {
-                        sendMessage(player, "You don't have enough space in your inventory to do that.")
-                        return@on true
-                    }
-                    BoltPouch.unwield(player)
                     sendMessage(player, "You place the items you were wielding into your pack.")
                 }
             }
-
+            updateBoltPouchDisplay(player)
             return@on true
         }
 

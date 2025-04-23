@@ -1,10 +1,9 @@
 package content.global.handlers.item.boltpouch
 
-import core.api.EquipmentSlot
-import core.api.getItemName
-import core.api.sendMessage
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import org.rs.consts.Components
 
 /**
  * Object representing the Bolt Pouch.
@@ -203,6 +202,35 @@ object BoltPouch {
 
         sendMessage(player, "You don't have space to store that type of bolt.")
         return false
+    }
+
+    /**
+     * Updates the display of the bolt pouch showing amounts, names, and sprites.
+     *
+     * @param player The player whose bolt pouch is being updated.
+     */
+    fun updateBoltPouchDisplay(player: Player) {
+        // Handles showing amount of bolts on each slot.
+        val amountSlots = intArrayOf(20, 21, 22, 23, 24)
+        for (i in amountSlots.indices) {
+            val amount = getAmount(player, i)
+            sendString(player, amount.toString(), Components.XBOWS_POUCH_433, amountSlots[i])
+        }
+
+        // Handles showing name of bolts on each slot.
+        val boltNameSlots = intArrayOf(25, 26, 27, 28, 29)
+        for (i in boltNameSlots.indices) {
+            val boltId = getBolt(player, i)
+            val boltName = if (boltId != -1) getItemName(boltId) else "Nothing"
+            sendString(player, boltName, Components.XBOWS_POUCH_433, boltNameSlots[i])
+        }
+
+        // Handles showing item sprite of bolts on each slot.
+        val spriteSlots = intArrayOf(2, 6, 10, 14, 18)
+        for (i in spriteSlots.indices) {
+            val boltId = getBolt(player, i)
+            sendItemOnInterface(player, Components.XBOWS_POUCH_433, spriteSlots[i], item = boltId)
+        }
     }
 
     /**
