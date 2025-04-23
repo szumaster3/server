@@ -1,6 +1,5 @@
 package content.region.kandarin.quest.fishingcompo.dialogue
 
-import content.region.kandarin.quest.fishingcompo.FishingContest
 import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC

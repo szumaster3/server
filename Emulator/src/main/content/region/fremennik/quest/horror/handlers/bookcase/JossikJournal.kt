@@ -164,7 +164,7 @@ class JossikJournal : InteractionListener {
                         BookLine("spirits have been lifted", 56),
                         BookLine("greatly in recent times,", 57),
                         BookLine("and it is all down to", 58),
-                        BookLine("a single person ", 59),
+                        BookLine("a single person", 59),
                         BookLine("I encountered", 60),
                         BookLine("while working here! Her", 61),
                         BookLine("name is Larrissa and", 62),
@@ -295,7 +295,7 @@ class JossikJournal : InteractionListener {
                         BookLine("of the lighthouse. Whenever", 73),
                         BookLine("the wind is to the North", 74),
                         BookLine("I can also sometimes", 75),
-                        BookLine("hear a dread - ful ", 76),
+                        BookLine("hear a dread - ful", 76),
                     ),
                 ),
                 PageSet(

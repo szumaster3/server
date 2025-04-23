@@ -32,7 +32,7 @@ class DagannothBossCutscene(
             }
 
             1 -> {
-                move(getNPC(DAGANNOTH_NECK)!!, 17, 37)
+                move(getNPC(DAGANNOTH_NECK)!!, 17, 38)
                 transformNpc(getNPC(DAGANNOTH_NECK)!!, DAGANNOTH_BODY, 10)
                 timedUpdate(1)
             }

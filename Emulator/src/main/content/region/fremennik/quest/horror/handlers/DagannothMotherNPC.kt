@@ -1,8 +1,8 @@
 package content.region.fremennik.quest.horror.handlers
 
-import content.region.fremennik.quest.horror.JossikLighthouseDialogue
 import core.api.*
 import core.api.quest.finishQuest
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -181,16 +181,16 @@ class DagannothMotherNPC(
         if (killer is Player) {
             clearHintIcon(killer)
             val hasCasket = hasAnItem(killer, Items.RUSTY_CASKET_3849).container != null
-            teleport(killer, Location.create(2515, 4625, 1))
-            finishQuest(killer, Quests.HORROR_FROM_THE_DEEP)
-            lock(killer, 10)
-            lockInteractions(killer, 10)
-            if (!hasCasket) {
-                addItemOrDrop(killer, Items.RUSTY_CASKET_3849)
-            }
-            runTask(killer, 5) {
-                closeInterface(killer)
-                openDialogue(killer, JossikLighthouseDialogue())
+
+            queueScript(killer, 1, QueueStrength.SOFT) {
+                teleport(killer, Location.create(2515, 10000, 1))
+                finishQuest(killer, Quests.HORROR_FROM_THE_DEEP)
+                lock(killer, 10)
+                lockInteractions(killer, 10)
+                if (!hasCasket) {
+                    addItemOrDrop(killer, Items.RUSTY_CASKET_3849)
+                }
+                return@queueScript stopExecuting(killer)
             }
         }
         clear()

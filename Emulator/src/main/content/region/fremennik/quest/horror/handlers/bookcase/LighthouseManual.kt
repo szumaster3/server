@@ -11,7 +11,7 @@ import org.rs.consts.Items
 
 class LighthouseManual : InteractionListener {
     /*
-     * Ancient diary located at Lighthouse.
+     * Lighthouse manual founded in bookcase in Lighthouse.
      * Authentic state.
      */
     companion object {

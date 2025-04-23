@@ -25,7 +25,6 @@ class HorrorFromTheDeepListener : InteractionListener {
     private val strangeWalls = intArrayOf(Scenery.STRANGE_WALL_4544, Scenery.STRANGE_WALL_4543)
     private val strangeDoors = intArrayOf(Scenery.STRANGE_WALL_4545, Scenery.STRANGE_WALL_4546)
     private val requiredItems = intArrayOf(Items.BRONZE_ARROW_882, Items.BRONZE_SWORD_1277, Items.AIR_RUNE_556, Items.FIRE_RUNE_554, Items.EARTH_RUNE_557, Items.WATER_RUNE_555)
-    private val lighthouseTools = intArrayOf(Items.MOLTEN_GLASS_1775, Items.SWAMP_TAR_1939, Items.TINDERBOX_590)
 
     override fun defineListeners() {
         /*
@@ -145,19 +144,38 @@ class HorrorFromTheDeepListener : InteractionListener {
          * Handles the light mechanism fix.
          */
 
-        onUseWith(IntType.SCENERY, lighthouseTools, Scenery.LIGHTING_MECHANISM_4588) { player, used, with ->
-            val totalFixes = getAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 0)
-            if (removeItem(player, Items.SWAMP_TAR_1939)) {
+        onUseWith(IntType.SCENERY, Items.SWAMP_TAR_1939, Scenery.LIGHTING_MECHANISM_4588) { player, used, with ->
+            if(getVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_SWAMP_TAR_LIGHTING_MECHANISM_46) == 1) {
+                sendMessage(player, "The torch is already flammable.")
+                return@onUseWith true
+            }
+            if(removeItem(player, used.id)) {
                 sendMessage(player, "You use the swamp tar to make the torch flammable again.")
-                setAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 1)
+                setVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_SWAMP_TAR_LIGHTING_MECHANISM_46, 1, true)
             }
-            if(totalFixes == 1 && used.id == Items.TINDERBOX_590) {
-                sendMessage(player, "You light the torch with your tinderbox.")
-                setAttribute(player, GameAttributes.QUEST_HFTD_LIGHTHOUSE_MECHANISM, 2)
+            return@onUseWith true
+        }
+
+        onUseWith(IntType.SCENERY, Items.TINDERBOX_590, Scenery.LIGHTING_MECHANISM_4588) { player, used, with ->
+            if(getVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_SWAMP_TAR_LIGHTING_MECHANISM_46) == 0) return@onUseWith false
+            if(getVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_LIT_LIGHTING_MECHANISM_48) == 1) {
+                sendMessage(player, "You've already lit the torch.")
+                return@onUseWith false
             }
-            if(totalFixes == 2 && removeItem(player, Item(Items.MOLTEN_GLASS_1775, 1))) {
+            sendMessage(player, "You light the torch with your tinderbox.")
+            setVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_LIT_LIGHTING_MECHANISM_48, 1, true)
+            return@onUseWith true
+        }
+
+        onUseWith(IntType.SCENERY, Items.MOLTEN_GLASS_1775, Scenery.LIGHTING_MECHANISM_4588) { player, used, with ->
+            if(getVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_LIGHTING_MECHANISM_LENS_REPAIRED_47) == 1) {
+                sendMessage(player, "You have already repaired the the lighthouse torch.")
+                return@onUseWith false
+            }
+            if(removeItem(player, used.id)) {
                 replaceScenery(with.asScenery(), Scenery.LIGHTING_MECHANISM_4587, 80)
                 setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 40)
+                setVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_LIGHTING_MECHANISM_LENS_REPAIRED_47, 1, true)
                 sendMessage(player, "You use the molten glass to repair the lens.")
                 sendMessage(player, "You have managed to repair the lighthouse torch!")
             }
@@ -194,8 +212,10 @@ class HorrorFromTheDeepListener : InteractionListener {
 
         on(strangeDoors, IntType.SCENERY, "open") { player, node ->
             val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
+            val destination = DoorActionHandler.getEndLocation(player, node.asScenery(), true)
             if (questStage >= 50) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                DoorActionHandler.open(node.asScenery(), node.asScenery(), node.id + 1, node.id + 1, true, 3, false)
+                forceWalk(player, destination, "")
                 playAudio(player, Sounds.STRANGEDOOR_OPEN_1626)
                 playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 2)
                 if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
