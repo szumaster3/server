@@ -15,6 +15,11 @@ class GemBoltCutPulse(player: Player?, node: Item?, private val gem: GemBolt, pr
      */
     private var ticks = 0
 
+    /**
+     * Represents the cut animations.
+     */
+    private val animation = Gem.forItem(Item(gem.gem))?.animation
+
     override fun checkRequirements(): Boolean {
         if (getStatLevel(player, Skills.FLETCHING) < gem.level) {
             sendDialogue(player, "You need a fletching level of " + gem.level + " or above to do that.")
@@ -31,7 +36,7 @@ class GemBoltCutPulse(player: Player?, node: Item?, private val gem: GemBolt, pr
 
     override fun animate() {
         if (ticks % 6 == 0) {
-            player.animate(Gem.forItem(Item(gem.gem))?.animation)
+            player.animate(animation)
         }
     }
 
