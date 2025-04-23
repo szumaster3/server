@@ -24,8 +24,8 @@ class BoltPouchInterface : InterfaceListener {
          */
 
         on(Components.XBOWS_POUCH_433) { player, _, _, _, slot, _ ->
-            val wieldBoltSlots = intArrayOf(3, 7, 11, 15)
-            val removeBoltSlots = intArrayOf(4, 8, 12, 16)
+            val wieldBoltSlots = listOf(3, 7, 11, 15)
+            val removeBoltSlots = listOf(4, 8, 12, 16)
             val unwieldBoltSlot = 19
 
             when (slot) {
@@ -39,8 +39,9 @@ class BoltPouchInterface : InterfaceListener {
                         sendMessage(player, "You don't have enough space in your inventory to do that.")
                         return@on true
                     }
-                    BoltPouch.wield(player, pouchSlot)
-                    sendMessage(player, "You wield some bolts from your bolt pouch.")
+                    if (BoltPouch.wield(player, pouchSlot)) {
+                        sendMessage(player, "You wield some bolts from your bolt pouch.")
+                    }
                 }
 
                 in removeBoltSlots -> {
@@ -53,26 +54,21 @@ class BoltPouchInterface : InterfaceListener {
                         sendMessage(player, "You don't have enough space in your inventory to do that.")
                         return@on true
                     }
-                    BoltPouch.removeToInventory(player, pouchSlot)
-                    val ordinal = arrayOf("first", "second", "third", "fourth")[pouchSlot]
-                    sendMessage(player, "You remove all the bolts from the $ordinal slot of your bolt pouch.")
+                    if (BoltPouch.removeToInventory(player, pouchSlot)) {
+                        val ordinal = arrayOf("first", "second", "third", "fourth")[pouchSlot]
+                        sendMessage(player, "You remove all the bolts from the $ordinal slot of your bolt pouch.")
+                    }
                 }
 
                 unwieldBoltSlot -> {
-                    if (!BoltPouch.unwield(player)) {
-                        sendMessage(player, "You're not wielding anything.")
-                        return@on true
+                    if (BoltPouch.unwield(player)) {
+                        sendMessage(player, "You place the items you were wielding into your pack.")
                     }
-                    sendMessage(player, "You place the items you were wielding into your pack.")
                 }
             }
+
             updateBoltPouchDisplay(player)
             return@on true
-        }
-
-        onClose(Components.XBOWS_POUCH_433) { player, _ ->
-            restoreTabs(player)
-            return@onClose true
         }
     }
 }

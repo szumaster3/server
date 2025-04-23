@@ -10,87 +10,74 @@ import org.rs.consts.Components
  * Object representing the Bolt Pouch.
  */
 object BoltPouch {
-
-    private const val ATTR_BOLT_IDS = "/save:bolt_pouch_ids"
-    private const val ATTR_BOLT_AMOUNTS = "/save:bolt_pouch_amount"
     const val MAX_PER_SLOT = 255
 
     /**
-     * Retrieves the bolt IDs stored in the player's bolt pouch.
+     * Sets the bolt data (ID and amount) for a specific slot in the bolt pouch.
      *
-     * @param player The player whose bolt pouch data is being accessed.
-     * @return An array of integers representing the bolt IDs stored in the pouch.
+     * @param player The player whose bolt pouch data is being modified.
+     * @param slot The slot to modify (0 to 3).
+     * @param boltId The ID of the bolt to store.
+     * @param amount The amount of bolts to store in the slot.
      */
-    private fun getBoltIds(player: Player): IntArray {
-        return player.getAttribute(ATTR_BOLT_IDS) ?: IntArray(4) { -1 }
+    private fun setBolt(player: Player, slot: Int, boltId: Int, amount: Int) {
+        player.setAttribute("/save:bolt_pouch_id_$slot", boltId)
+        player.setAttribute("/save:bolt_pouch_amount_$slot", amount)
     }
 
     /**
-     * Retrieves the amounts of each bolt stored in the player's bolt pouch.
+     * Clears the bolt data (sets ID to -1 and amount to 0) for a specific slot in the bolt pouch.
      *
-     * @param player The player whose bolt pouch data is being accessed.
-     * @return An array of integers representing the amounts of each bolt type.
+     * @param player The player whose bolt pouch data is being modified.
+     * @param slot The slot to clear (0 to 3).
      */
-    private fun getBoltAmounts(player: Player): IntArray {
-        return player.getAttribute(ATTR_BOLT_AMOUNTS) ?: IntArray(4)
+    private fun clearBolt(player: Player, slot: Int) {
+        setBolt(player, slot, -1, 0)
     }
 
     /**
-     * Sets the bolt IDs and amounts for the player's bolt pouch.
-     *
-     * @param player The player whose bolt pouch data is being set.
-     * @param ids An array of bolt IDs to store in the pouch.
-     * @param amounts An array of amounts corresponding to each bolt ID.
-     */
-    private fun setBoltData(player: Player, ids: IntArray, amounts: IntArray) {
-        player.setAttribute(ATTR_BOLT_IDS, ids)
-        player.setAttribute(ATTR_BOLT_AMOUNTS, amounts)
-    }
-
-    /**
-     * Checks if the player has any bolts in the specified slot of their bolt pouch.
+     * Checks if the player has any bolts in a specific slot.
      *
      * @param player The player whose bolt pouch is being checked.
-     * @param slot The slot to check for bolts.
-     * @return True if the slot contains bolts, false otherwise.
+     * @param slot The slot to check (0 to 3).
+     * @return True if there are bolts in the slot, false otherwise.
      */
     fun hasBolts(player: Player, slot: Int): Boolean {
-        val amounts = getBoltAmounts(player)
-        return (amounts.getOrNull(slot) ?: 0) > 0
+        return getAmount(player, slot) > 0
     }
 
     /**
-     * Retrieves the ID of the bolt in the specified slot.
+     * Gets the ID of the bolt stored in a specific slot of the player's bolt pouch.
      *
-     * @param slot The slot number to retrieve the bolt ID from.
-     * @return The ID of the bolt in the given slot.
+     * @param player The player whose bolt pouch data is being accessed.
+     * @param slot The slot to retrieve the bolt ID from (0 to 3).
+     * @return The bolt ID, or -1 if no bolt is stored in the slot.
      */
-    fun getBolt(player: Player, slot: Int): Int {
-        return getBoltIds(player).getOrNull(slot) ?: -1
+    private fun getBolt(player: Player, slot: Int): Int {
+        return player.getAttribute("bolt_pouch_id_$slot") ?: -1
     }
 
     /**
-     * Retrieves the amount of bolts in the specified slot.
+     * Gets the amount of bolts stored in a specific slot of the player's bolt pouch.
      *
-     * @param slot The slot number to retrieve the bolt amount from.
-     * @return The amount of bolts in the given slot.
+     * @param player The player whose bolt pouch data is being accessed.
+     * @param slot The slot to retrieve the bolt amount from (0 to 3).
+     * @return The amount of bolts stored in the slot.
      */
-    fun getAmount(player: Player, slot: Int): Int {
-        return getBoltAmounts(player).getOrNull(slot) ?: 0
+    private fun getAmount(player: Player, slot: Int): Int {
+        return player.getAttribute("bolt_pouch_amount_$slot") ?: 0
     }
 
     /**
-     * Removes bolts from the specified slot and adds them to the player's inventory.
+     * Removes a specific bolt from the player's bolt pouch and adds it to the player's inventory.
      *
-     * @param player The player performing the action.
-     * @param slot The slot from which to remove the bolts.
-     * @return True if the removal was successful, false if there were no bolts to remove or if the inventory is full.
+     * @param player The player whose bolt pouch is being modified.
+     * @param slot The slot from which the bolt will be removed (0 to 3).
+     * @return True if the bolt was successfully removed and added to the inventory, false otherwise.
      */
     fun removeToInventory(player: Player, slot: Int): Boolean {
-        val ids = getBoltIds(player)
-        val amounts = getBoltAmounts(player)
-        val id = ids[slot]
-        val amt = amounts[slot]
+        val id = getBolt(player, slot)
+        val amt = getAmount(player, slot)
 
         if (amt <= 0) return false
         if (!player.inventory.add(Item(id, amt))) {
@@ -98,24 +85,20 @@ object BoltPouch {
             return false
         }
 
-        ids[slot] = -1
-        amounts[slot] = 0
-        setBoltData(player, ids, amounts)
+        clearBolt(player, slot)
         return true
     }
 
     /**
-     * Wields bolts from the specified slot into the player's equipment.
+     * Wields a specific bolt from the player's bolt pouch, placing it into the equipped ammo slot.
      *
-     * @param player The player performing the action.
-     * @param slot The slot containing the bolts to wield.
-     * @return True if the wielding was successful, false if the slot is empty or if the inventory is full.
+     * @param player The player wielding the bolt.
+     * @param slot The slot from which the bolt will be wielded (0 to 3).
+     * @return True if the bolt was successfully wielded, false otherwise.
      */
     fun wield(player: Player, slot: Int): Boolean {
-        val ids = getBoltIds(player)
-        val amounts = getBoltAmounts(player)
-        val id = ids[slot]
-        val amt = amounts[slot]
+        val id = getBolt(player, slot)
+        val amt = getAmount(player, slot)
 
         if (amt <= 0) {
             sendMessage(player, "There's nothing in that slot to wield.")
@@ -130,18 +113,16 @@ object BoltPouch {
         }
 
         player.equipment.add(Item(id, amt))
-        ids[slot] = -1
-        amounts[slot] = 0
-        setBoltData(player, ids, amounts)
+        clearBolt(player, slot)
         sendMessage(player, "You wield some bolts from your bolt pouch.")
         return true
     }
 
     /**
-     * Unwields the currently equipped bolts and places them back in the player's inventory.
+     * Unwields the current bolts from the player's ammo slot and places them back into the inventory.
      *
-     * @param player The player performing the action.
-     * @return True if the unwielding was successful, false if no bolts are currently equipped.
+     * @param player The player unwielding the bolts.
+     * @return True if the bolts were successfully unwielded, false otherwise.
      */
     fun unwield(player: Player): Boolean {
         val AMMO_SLOT = EquipmentSlot.AMMO.ordinal
@@ -161,11 +142,11 @@ object BoltPouch {
     }
 
     /**
-     * Stores bolts in the bolt pouch if there is space.
+     * Stores a bolt in the player's bolt pouch if space is available and if the bolt is allowed.
      *
-     * @param player The player performing the action.
-     * @param item The bolt item to store in the pouch.
-     * @return True if the bolt was stored successfully, false if there is no space in the pouch.
+     * @param player The player storing the bolt.
+     * @param item The bolt item to store.
+     * @return True if the bolt was successfully stored, false otherwise.
      */
     fun storeBolt(player: Player, item: Item): Boolean {
         if (!isAllowedBolt(item.id)) {
@@ -173,24 +154,23 @@ object BoltPouch {
             return false
         }
 
-        val ids = getBoltIds(player)
-        val amounts = getBoltAmounts(player)
+        for (i in 0..3) {
+            val id = getBolt(player, i)
+            val amount = getAmount(player, i)
 
-        for (i in ids.indices) {
-            if (ids[i] == item.id || ids[i] == -1) {
-                val current = amounts[i]
-                val canStore = (MAX_PER_SLOT - current).coerceAtMost(item.amount)
+            if (id == item.id || id == -1) {
+                val canStore = (MAX_PER_SLOT - amount).coerceAtMost(item.amount)
                 if (canStore <= 0) return false
 
                 if (!player.inventory.remove(Item(item.id, canStore))) return false
 
-                if (ids[i] == -1) ids[i] = item.id
-                amounts[i] += canStore
+                val newAmount = amount + canStore
+                val boltId = if (id == -1) item.id else id
 
-                setBoltData(player, ids, amounts)
+                setBolt(player, i, boltId, newAmount)
 
                 val boltName = getItemName(item.id).lowercase()
-                if (amounts[i] == MAX_PER_SLOT) {
+                if (newAmount == MAX_PER_SLOT) {
                     sendMessage(player, "You completely fill one of the slots in the bolt pouch with $boltName.")
                 } else {
                     sendMessage(player, "You store some $boltName in the bolt pouch.")
