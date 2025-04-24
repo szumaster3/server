@@ -1,4 +1,4 @@
-package content.region.asgarnia.handlers
+package content.region.asgarnia.handlers.entrana
 
 import core.api.*
 import core.game.interaction.IntType
