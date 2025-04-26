@@ -52,7 +52,7 @@ class TeleportCrystalListener : InteractionListener {
         ) {
             val id = item.id
             val newItem = item.id + 1
-            if (id < 6102) {
+            if (id < Items.TP_CRYSTAL_1_6102) {
                 removeItem(player, Item(id, 1))
                 addItem(player, newItem, 1)
                 sendMessage(player, "Your teleportation crystal has degraded from use.")

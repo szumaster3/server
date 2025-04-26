@@ -5,6 +5,7 @@ import core.api.sendMessage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.Scenery
 
@@ -25,11 +26,21 @@ class DoorListener : InteractionListener {
         }
 
         /*
-         * Handles fremennik doors interaction.
+         * Handles fremennik doors (curtains) interaction.
          */
 
         on(Scenery.DOOR_4250, IntType.SCENERY, "open") { _, node ->
-            replaceScenery(node.asScenery(), node.id + 1, -1, node.direction, node.location)
+            when (node.direction) {
+                Direction.NORTH -> {
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH_WEST, node.location)
+                }
+                Direction.EAST -> {
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH, node.location)
+                }
+                else -> {
+                    replaceScenery(node.asScenery(), node.id + 1, -1, node.direction, node.location)
+                }
+            }
             return@on true
         }
     }
