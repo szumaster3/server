@@ -1,12 +1,15 @@
 package content.global.skill.fletching.items.arrow
 
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
+import core.api.getItemName
+import core.api.getStatLevel
 import core.api.hasSpaceFor
 import core.api.sendDialogue
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import org.rs.consts.Items
 
 class ArrowHeadPulse(
     player: Player?,
@@ -15,13 +18,13 @@ class ArrowHeadPulse(
     private var sets: Int,
 ) : SkillPulse<Item?>(player, node) {
     override fun checkRequirements(): Boolean {
-        if (arrow.unfinished == 4160) {
+        if (arrow.unfinished == Items.BROAD_ARROW_4160) {
             if (!getInstance(player).flags.isBroadsUnlocked()) {
                 player.dialogueInterpreter.sendDialogue("You need to unlock the ability to create broad arrows.")
                 return false
             }
         }
-        if (player.getSkills().getLevel(Skills.FLETCHING) < arrow.level) {
+        if (getStatLevel(player, Skills.FLETCHING) < arrow.level) {
             player.dialogueInterpreter.sendDialogue("You need a fletching level of " + arrow.level + " to do this.")
             return false
         }
@@ -42,6 +45,10 @@ class ArrowHeadPulse(
         val tip = Item(arrow.unfinished)
         val tipAmount = player.inventory.getAmount(arrow.unfinished)
         val shaftAmount = player.inventory.getAmount(HEADLESS_ARROW)
+        val name = getItemName(arrow.finished).lowercase()
+
+        player.packetDispatch.sendMessage("You attach $name tips to some of your arrow shafts.")
+
         if (tipAmount >= 15 && shaftAmount >= 15) {
             HEADLESS_ARROW.amount = 15
             tip.amount = 15
@@ -82,6 +89,6 @@ class ArrowHeadPulse(
     }
 
     companion object {
-        private val HEADLESS_ARROW = Item(53)
+        private val HEADLESS_ARROW = Item(Items.HEADLESS_ARROW_53)
     }
 }

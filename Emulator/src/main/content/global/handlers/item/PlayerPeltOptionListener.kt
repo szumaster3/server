@@ -51,6 +51,11 @@ class PlayerPeltOptionListener : InteractionListener {
         val gfx = getPeltableGfx(peltable.id)
 
         val other = node.asPlayer()
+        val name = getItemName(peltable.id).lowercase()
+        if(!inInventory(player, peltable.id)) {
+            sendMessage(player, "You have run out of ${name}s.")
+            return true
+        }
 
         if (!Pathfinder.find(player, other, false, Pathfinder.PROJECTILE).isSuccessful) {
             sendDialogue(player, "You can't reach them!")
@@ -64,6 +69,7 @@ class PlayerPeltOptionListener : InteractionListener {
         if (removeItem(player, peltable, Container.INVENTORY) || removeItem(player, peltable, Container.EQUIPMENT)) {
             lock(player, hitDelay)
             submitWorldPulse(PeltingPulse(player, other, gfx, hitDelay, peltable.id))
+            sendMessage(player, "You pelt ${player.username} with a $name.")
         }
 
         return true
