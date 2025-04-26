@@ -6,10 +6,12 @@ import core.api.quest.isQuestInProgress
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs.consts.Items
 import org.rs.consts.NPCs
+import org.rs.consts.Quests
 
 @Initializable
 class AlomoneNPC(
@@ -31,7 +33,7 @@ class AlomoneNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
-            if (isQuestInProgress(killer, "Hazeel Cult", 3, 4)) {
+            if (isQuestInProgress(killer, Quests.HAZEEL_CULT, 3, 4)) {
                 produceGroundItem(killer, Items.CARNILLEAN_ARMOUR_2405, 1, this.location)
             }
             super.finalizeDeath(killer)

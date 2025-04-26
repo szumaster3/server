@@ -18,26 +18,20 @@ class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_C
         player: Player,
         stage: Int,
     ) {
-        var attributeMahjarrat = getAttribute(player!!, HazeelCultListener.MAHJARRAT, true)
-        var attributeCarnillean = getAttribute(player, HazeelCultListener.CARNILLEAN, true)
-
         super.drawJournal(player, stage)
         var line = 11
-        player
+
+        val attributeMahjarrat = getAttribute(player, HazeelCultListener.MAHJARRAT, false)
+        val attributeCarnillean = getAttribute(player, HazeelCultListener.CARNILLEAN, false)
 
         if (stage >= 0) {
             line(player, "I can start the quest by talking to !!Sir Ceril Carnillean?? at", line++, stage >= 1)
-            line(player, "the house due !!West?? of !!Ardougne Zoo??", line++, stage >= 1)
+            line(player, "the house due !!West?? of !!Ardougne Zoo??.", line++, stage >= 1)
             line++
         }
         if (stage >= 1) {
             line(player, "I spoke to !!Sir Ceril Carnillean?? at his house,", line++, stage >= 2)
-            line(
-                player,
-                "and agreed to help him !!investigate?? the theft of a !!family heirloom??.",
-                line++,
-                stage >= 2,
-            )
+            line(player, "and agreed to help him !!investigate?? the theft of a !!family heirloom??.", line++, stage >= 2)
             line++
         }
         if (stage >= 2) {
@@ -67,8 +61,8 @@ class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_C
             line++
         }
         if (stage == 100 && attributeMahjarrat && !attributeCarnillean) {
-            line(player, "I was rewarded for all of my help", line++, stage == 100)
-            line(player, "in returning !!Hazeel?? to his followers.", line++, stage == 100)
+            line(player, "I was rewarded for all of my help", line++, true)
+            line(player, "in returning !!Hazeel?? to his followers.", line++, true)
             line++
         }
 
@@ -85,12 +79,7 @@ class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_C
             line++
         }
         if (stage >= 4 && attributeCarnillean && !attributeMahjarrat) {
-            line(
-                player,
-                "I returned !!the armour??, but !!Ceril?? didn't believe !!Jones was involved??",
-                line++,
-                stage >= 5,
-            )
+            line(player, "I returned !!the armour??, but !!Ceril?? didn't believe !!Jones was involved??", line++, stage >= 5)
             line(player, "with the cult and was responsible for the theft.", line++, stage >= 5)
             line++
         }
@@ -100,18 +89,17 @@ class HazeelCult : Quest(Quests.HAZEEL_CULT, 74, 73, 1, Vars.VARP_QUEST_HAZEEL_C
             line++
         }
         if (stage == 100 && attributeCarnillean && !attributeMahjarrat) {
-            line(player, "My name was cleared and", line++, stage == 100)
-            line(player, "I graciously accepted the reward for all of my help.", line++, stage == 100)
+            line(player, "My name was cleared and", line++, true)
+            line(player, "I graciously accepted the reward for all of my help.", line++, true)
             line++
         }
         if (stage == 100) {
-            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
         }
     }
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var ln = 10
 
         player.packetDispatch.sendItemZoomOnInterface(Items.COINS_995, 230, 277, 5)
