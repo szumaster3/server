@@ -16,6 +16,12 @@ import org.rs.consts.Scenery
 
 @Initializable
 class SearchOptionHandler : OptionHandler() {
+    /**
+     * Represents different types of searches that can be performed on specific scenery nodes.
+     *
+     * @property scenery The id of the scenery object to be searched.
+     * @property item The item that can be found during the search.
+     */
     enum class Search(
         val scenery: Int,
         val item: Item,
@@ -24,6 +30,12 @@ class SearchOptionHandler : OptionHandler() {
         ;
 
         companion object {
+            /**
+             * Retrieves the corresponding [Search] type based on scenery id.
+             *
+             * @param id The scenery id.
+             * @return The corresponding [Search] type, or null if no match is found.
+             */
             fun forId(id: Int): Search? {
                 for (search in values()) {
                     if (search.scenery == id) {

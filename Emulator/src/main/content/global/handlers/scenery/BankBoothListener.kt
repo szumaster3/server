@@ -19,6 +19,12 @@ import org.rs.consts.NPCs
 import org.rs.consts.Scenery
 
 class BankBoothListener : InteractionListener {
+    /**
+     * Locates a banker NPC adjacent to the given node by checking the four cardinal directions (north, east, south, west).
+     *
+     * @param node The node from which to search for a nearby banker.
+     * @return The adjacent [BankerNPC] if found, or null otherwise.
+     */
     private fun locateAdjacentBankerLinear(node: Node): NPC? {
         for (dir in arrayOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)) {
             Repository.findNPC(node.location.transform(dir))?.let { return it as? BankerNPC }
@@ -26,6 +32,13 @@ class BankBoothListener : InteractionListener {
         return null
     }
 
+    /**
+     * Locates a banker NPC around the given node within a square area of a given size.
+     *
+     * @param node The node from which to search for a nearby banker.
+     * @param size The radius size (in tiles) to search around the node. Default is 1.
+     * @return The nearby [BankerNPC] if found, or null otherwise.
+     */
     private fun locateAdjacentBankerSquare(
         node: Node,
         size: Int = 1,
@@ -38,6 +51,13 @@ class BankBoothListener : InteractionListener {
         return null
     }
 
+    /**
+     * Attempts to start a dialogue with a nearby banker, either by finding one linearly or within a square range.
+     * If a banker supporting dialogue is found, it opens their dialogue; otherwise, defaults to the standard banker dialogue.
+     *
+     * @param player The player initiating the dialogue.
+     * @param node The node from which the banker search begins.
+     */
     private fun tryInvokeBankerDialogue(
         player: Player,
         node: Node,
@@ -54,6 +74,14 @@ class BankBoothListener : InteractionListener {
         }
     }
 
+    /**
+     * Handles a quick bank booth interaction, directly opening the bank if allowed, or invoking a banker dialogue if restricted.
+     *
+     * @param player The player interacting with the bank booth.
+     * @param node The bank booth node being interacted with.
+     * @param state The interaction state, unused in this method.
+     * @return Always returns true to indicate the interaction was processed.
+     */
     private fun quickBankBoothUse(
         player: Player,
         node: Node,
@@ -71,6 +99,14 @@ class BankBoothListener : InteractionListener {
         return true
     }
 
+    /**
+     * Handles a regular bank booth interaction, deciding between quick opening or starting banker dialogue based on server settings.
+     *
+     * @param player The player interacting with the bank booth.
+     * @param node The bank booth node being interacted with.
+     * @param state The interaction state, unused in this method.
+     * @return Always returns true to indicate the interaction was processed.
+     */
     private fun regularBankBoothUse(
         player: Player,
         node: Node,
@@ -88,6 +124,14 @@ class BankBoothListener : InteractionListener {
         return true
     }
 
+    /**
+     * Handles a bank booth interaction specifically for accessing the Grand Exchange collection box.
+     *
+     * @param player The player interacting with the bank booth.
+     * @param node The bank booth node being interacted with.
+     * @param state The interaction state, unused in this method.
+     * @return Always returns true to indicate the interaction was processed.
+     */
     private fun collectBankBoothUse(
         player: Player,
         node: Node,
@@ -102,6 +146,14 @@ class BankBoothListener : InteractionListener {
         return true
     }
 
+    /**
+     * Attempts to convert an item into its noted or unnoted form by using it on a bank booth.
+     *
+     * @param player The player attempting to convert the item.
+     * @param used The item node being used.
+     * @param with The bank booth node with which the item is being used.
+     * @return Always returns true to indicate the interaction was processed.
+     */
     private fun attemptToConvertItems(
         player: Player,
         used: Node,
