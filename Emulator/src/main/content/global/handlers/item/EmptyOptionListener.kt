@@ -12,6 +12,11 @@ import org.rs.consts.Sounds
 
 class EmptyOptionListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles interactions for emptying items.
+         */
+
         on(EmptyItem.emptyItemList.toIntArray(), IntType.ITEM, "empty", "empty bowl", "empty dish") { player, node ->
             if (node.name.contains("brew") ||
                 node.name.contains("potion") ||
@@ -249,6 +254,11 @@ class EmptyOptionListener : InteractionListener {
             Items.VIAL_229,
             "You empty the vial.",
             Sounds.LIQUID_2401
+        ),
+        SANDBAG(
+            Items.SANDBAG_9943,
+            Items.EMPTY_SACK_5418,
+            "You empty the sack of sand.",
         ),
         VIAL_OF_WATER(
             Items.VIAL_OF_WATER_227,
