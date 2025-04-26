@@ -88,7 +88,7 @@ class TotemPoleListener : InteractionListener {
                 "This totem pole is truly awe inspiring.",
                 "It depicts powerful Karamja jungle animals.",
                 "It is very well carved and brings a sense of power",
-                "and spiritual fullfilmentto anyone who looks at it.",
+                "and spiritual fulfillment to anyone who looks at it.",
             )
             return@on true
         }
