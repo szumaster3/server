@@ -17,16 +17,13 @@ class GlassMakePulse(
     private var amount: Int,
 ) : Pulse() {
     companion object {
-        /**
-         * Array of acceptable sand sources for making molten glass.
-         */
         private val SAND_SOURCES = intArrayOf(Items.BUCKET_OF_SAND_1783, Items.SANDBAG_9943)
     }
 
     override fun pulse(): Boolean {
         if (amount < 1) return true
 
-        if (!inInventory(player, Items.SODA_ASH_1781) || !hasAnySand(player)) {
+        if (!inInventory(player, Items.SODA_ASH_1781) || !anyInInventory(player, *SAND_SOURCES)) {
             return true
         }
 
@@ -46,16 +43,6 @@ class GlassMakePulse(
         delay = 3
 
         return false
-    }
-
-    /**
-     * Checks if the player has any valid sand source required for making molten glass.
-     *
-     * @param player The player to check inventory for.
-     * @return `true` if the player has sand, `false` otherwise.
-     */
-    private fun hasAnySand(player: Player): Boolean {
-        return SAND_SOURCES.any { inInventory(player, it) }
     }
 
     /**
