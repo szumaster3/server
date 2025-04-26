@@ -116,9 +116,9 @@ class FletchingPulse(
             val an = if (StringUtils.isPlusN(itemName)) "an" else "a"
 
             return when (fletch) {
-                Fletching.FletchingItems.ARROW_SHAFT -> "You carefully cut the wood into 15 arrow shafts."
-                Fletching.FletchingItems.OGRE_COMPOSITE_BOW -> "You carefully cut the wood into composite ogre bow."
-                else -> "You carefully cut the wood into $an $itemName."
+                Fletching.FletchingItems.ARROW_SHAFT -> "You carefully cut the logs into 15 arrow shafts."
+                Fletching.FletchingItems.OGRE_COMPOSITE_BOW -> "You carefully cut the logs into composite ogre bow."
+                else -> "You carefully cut the logs into $an $itemName."
             }
         }
 }
