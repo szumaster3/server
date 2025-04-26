@@ -8,6 +8,9 @@ import core.game.system.task.Pulse
 import org.rs.consts.Animations
 import org.rs.consts.Items
 
+/**
+ * Represents creating molten glass.
+ */
 class GlassMakePulse(
     private val player: Player,
     val product: Int,

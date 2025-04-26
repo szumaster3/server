@@ -17,31 +17,10 @@ object Fletching {
     const val fletchedShaftId = Items.HEADLESS_ARROW_53
     const val fligtedOgreArrowId = Items.FLIGHTED_OGRE_ARROW_2865
 
-    val featherIds =
-        intArrayOf(
-            Items.BLUE_FEATHER_10089,
-            Items.FEATHER_314,
-            Items.ORANGE_FEATHER_10091,
-            Items.RED_FEATHER_10088,
-            Items.STRIPY_FEATHER_10087,
-            Items.YELLOW_FEATHER_10090,
-        )
+    val featherIds = intArrayOf(Items.FEATHER_314, Items.STRIPY_FEATHER_10087, Items.RED_FEATHER_10088, Items.BLUE_FEATHER_10089, Items.YELLOW_FEATHER_10090, Items.ORANGE_FEATHER_10091)
     val stringIds = intArrayOf(Items.BOW_STRING_1777, Items.CROSSBOW_STRING_9438)
     val kebbitSpikeIds = intArrayOf(Items.KEBBIT_SPIKE_10105, Items.LONG_KEBBIT_SPIKE_10107)
-    val gemIds =
-        intArrayOf(
-            Items.OYSTER_PEARL_411,
-            Items.OYSTER_PEARLS_413,
-            Items.OPAL_1609,
-            Items.JADE_1611,
-            Items.RED_TOPAZ_1613,
-            Items.SAPPHIRE_1607,
-            Items.EMERALD_1605,
-            Items.RUBY_1603,
-            Items.DIAMOND_1601,
-            Items.DRAGONSTONE_1615,
-            Items.ONYX_6573,
-        )
+    val gemIds = intArrayOf(Items.OYSTER_PEARL_411, Items.OYSTER_PEARLS_413, Items.OPAL_1609, Items.JADE_1611, Items.RED_TOPAZ_1613, Items.SAPPHIRE_1607, Items.EMERALD_1605, Items.RUBY_1603, Items.DIAMOND_1601, Items.DRAGONSTONE_1615, Items.ONYX_6573)
 
     val limbIds = Limb.values().map(Limb::limb).toIntArray()
     val stockIds = Limb.values().map(Limb::stock).toIntArray()

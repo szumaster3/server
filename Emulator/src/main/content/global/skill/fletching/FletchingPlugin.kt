@@ -49,15 +49,7 @@ class FletchingPlugin :
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        val feathers =
-            intArrayOf(
-                Items.FEATHER_314,
-                Items.STRIPY_FEATHER_10087,
-                Items.RED_FEATHER_10088,
-                Items.BLUE_FEATHER_10089,
-                Items.YELLOW_FEATHER_10090,
-                Items.ORANGE_FEATHER_10091,
-            )
+        val feathers = Fletching.featherIds
         feathers.forEach { addHandler(it, ITEM_TYPE, this) }
         return this
     }
