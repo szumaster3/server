@@ -6,6 +6,7 @@ import content.global.skill.fletching.items.bow.StringPulse
 import content.global.skill.fletching.items.bow.Strings
 import content.global.skill.fletching.items.crossbow.Limb
 import content.global.skill.fletching.items.crossbow.LimbPulse
+import core.game.dialogue.SkillDialogueHandler.SkillDialogue
 import core.api.*
 import core.api.skill.sendSkillDialogue
 import core.game.dialogue.SkillDialogueHandler
@@ -18,6 +19,46 @@ import kotlin.math.min
 
 class FletchingListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles fletch logs using knife.
+         */
+
+        onUseWith(IntType.ITEM, Items.KNIFE_946,
+            Items.LOGS_1511,
+            Items.OAK_LOGS_1521,
+            Items.WILLOW_LOGS_1519,
+            Items.MAPLE_LOGS_1517,
+            Items.YEW_LOGS_1515,
+            Items.MAGIC_LOGS_1513,
+            Items.ACHEY_TREE_LOGS_2862,
+            Items.MAHOGANY_LOGS_6332,
+            Items.TEAK_LOGS_6333
+        ) { player, _, base ->
+            val items = Fletching.getItems(base.id)!!
+
+            val dialogueType = when (items.size) {
+                2 -> SkillDialogue.TWO_OPTION
+                3 -> SkillDialogue.THREE_OPTION
+                4 -> SkillDialogue.FOUR_OPTION
+                else -> SkillDialogue.ONE_OPTION
+            }
+
+            val handler = object : SkillDialogueHandler(player, dialogueType, *items) {
+                override fun create(amount: Int, index: Int) {
+                    val item = Fletching.getEntries(base.id)?.get(index)
+                    player.pulseManager.run(FletchingPulse(player, base.asItem(), amount, item!!))
+                }
+
+                override fun getAll(index: Int): Int {
+                    return player.inventory.getAmount(base.asItem())
+                }
+            }
+
+            handler.open()
+            return@onUseWith true
+        }
+
         /*
          * Handles attaching a string to an unstrung bow.
          */
