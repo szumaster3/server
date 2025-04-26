@@ -1,5 +1,6 @@
 package content.global.skill.fletching.items.bow
 
+import org.rs.consts.Animations
 import org.rs.consts.Items
 
 /**
@@ -26,7 +27,7 @@ enum class Strings(
         product = Items.SHORTBOW_841,
         level = 5,
         experience = 5.0,
-        animation = 6678,
+        animation = Animations.FLETCH_SHORTBOW_6678,
     ),
     LONG_BOW(
         indicator = 1,
@@ -34,7 +35,7 @@ enum class Strings(
         product = Items.LONGBOW_839,
         level = 10,
         experience = 10.0,
-        animation = 6684,
+        animation = Animations.FLETCH_SHIELDBOW_6684,
     ),
     OAK_SHORTBOW(
         indicator = 1,
@@ -42,7 +43,7 @@ enum class Strings(
         product = Items.OAK_SHORTBOW_843,
         level = 20,
         experience = 16.5,
-        animation = 6679,
+        animation = Animations.FLETCH_OAK_SHORTBOW_6679,
     ),
     OAK_LONGBOW(
         indicator = 1,
@@ -50,7 +51,7 @@ enum class Strings(
         product = Items.OAK_LONGBOW_845,
         level = 25,
         experience = 25.0,
-        animation = 6685,
+        animation = Animations.FLETCH_OAK_SHIELDBOW_6685,
     ),
     COMP_OGRE_BOW(
         indicator = 1,
@@ -58,7 +59,7 @@ enum class Strings(
         product = Items.COMP_OGRE_BOW_4827,
         level = 30,
         experience = 40.0,
-        animation = 6685,
+        animation = Animations.FLETCH_OAK_SHIELDBOW_6685,
     ),
     WILLOW_SHORTBOW(
         indicator = 1,
@@ -66,7 +67,7 @@ enum class Strings(
         product = Items.WILLOW_SHORTBOW_849,
         level = 35,
         experience = 33.3,
-        animation = 6680,
+        animation = Animations.FLETCH_WILLOW_SHORTBOW_6680,
     ),
     WILLOW_LONGBOW(
         indicator = 1,
@@ -74,7 +75,7 @@ enum class Strings(
         product = Items.WILLOW_LONGBOW_847,
         level = 40,
         experience = 41.5,
-        animation = 6686,
+        animation = Animations.FLETCH_WILLOW_SHIELDBOW_6686,
     ),
     MAPLE_SHORTBOW(
         indicator = 1,
@@ -82,7 +83,7 @@ enum class Strings(
         product = Items.MAPLE_SHORTBOW_853,
         level = 50,
         experience = 50.0,
-        animation = 6681,
+        animation = Animations.FLETCH_MAPLE_SHORTBOW_6681,
     ),
     MAPLE_LONGBOW(
         indicator = 1,
@@ -90,7 +91,7 @@ enum class Strings(
         product = Items.MAPLE_LONGBOW_851,
         level = 55,
         experience = 58.3,
-        animation = 6687,
+        animation = Animations.FLETCH_MAPLE_SHIELDBOW_6687,
     ),
     YEW_SHORTBOW(
         indicator = 1,
@@ -98,7 +99,7 @@ enum class Strings(
         product = Items.YEW_SHORTBOW_857,
         level = 65,
         experience = 67.5,
-        animation = 6682,
+        animation = Animations.FLETCH_YEW_SHORTBOW_6682,
     ),
     YEW_LONGBOW(
         indicator = 1,
@@ -106,7 +107,7 @@ enum class Strings(
         product = Items.YEW_LONGBOW_855,
         level = 70,
         experience = 75.0,
-        animation = 6688,
+        animation = Animations.FLETCH_YEW_SHIELDBOW_6688,
     ),
     MAGIC_SHORTBOW(
         indicator = 1,
@@ -114,7 +115,7 @@ enum class Strings(
         product = Items.MAGIC_SHORTBOW_861,
         level = 80,
         experience = 83.3,
-        animation = 6683,
+        animation = Animations.FLETCH_MAGIC_SHORTBOW_6683,
     ),
     MAGIC_LONGBOW(
         indicator = 1,
@@ -122,7 +123,7 @@ enum class Strings(
         product = Items.MAGIC_LONGBOW_859,
         level = 85,
         experience = 91.5,
-        animation = 6689,
+        animation = Animations.FLETCH_MAGIC_SHIELDBOW_6689,
     ),
     BRONZE_CBOW(
         indicator = 2,
@@ -130,7 +131,7 @@ enum class Strings(
         product = Items.BRONZE_CROSSBOW_9174,
         level = 9,
         experience = 6.0,
-        animation = 6671,
+        animation = Animations.FLETCH_BOW_6671,
     ),
     BLURITE_CBOW(
         indicator = 2,
@@ -138,7 +139,7 @@ enum class Strings(
         product = Items.BLURITE_CROSSBOW_9176,
         level = 24,
         experience = 16.0,
-        animation = 6672,
+        animation = Animations.FLETCH_BOW_6672,
     ),
     IRON_CBOW(
         indicator = 2,
@@ -146,7 +147,7 @@ enum class Strings(
         product = Items.IRON_CROSSBOW_9177,
         level = 39,
         experience = 22.0,
-        animation = 6673,
+        animation = Animations.FLETCH_BOW_6673,
     ),
     STEEL_CBOW(
         indicator = 2,
@@ -154,7 +155,7 @@ enum class Strings(
         product = Items.STEEL_CROSSBOW_9179,
         level = 46,
         experience = 27.0,
-        animation = 6674,
+        animation = Animations.FLETCH_BOW_6674,
     ),
     MITHIRIL_CBOW(
         indicator = 2,
@@ -162,7 +163,7 @@ enum class Strings(
         product = Items.MITH_CROSSBOW_9181,
         level = 54,
         experience = 32.0,
-        animation = 6675,
+        animation = Animations.FLETCH_BOW_6675,
     ),
     ADAMANT_CBOW(
         indicator = 2,
@@ -170,7 +171,7 @@ enum class Strings(
         product = Items.ADAMANT_CROSSBOW_9183,
         level = 61,
         experience = 41.0,
-        animation = 6676,
+        animation = Animations.FLETCH_BOW_6676,
     ),
     RUNITE_CBOW(
         indicator = 2,
@@ -178,7 +179,7 @@ enum class Strings(
         product = Items.RUNE_CROSSBOW_9185,
         level = 69,
         experience = 50.0,
-        animation = 6677,
+        animation = Animations.FLETCH_BOW_6677,
     ),
     ;
 
