@@ -82,9 +82,9 @@ public final class CowMilkingPlugin extends OptionHandler {
                 if (player.getInventory().contains(Items.BUCKET_1925, 1) || player.getInventory().contains(Items.BUCKET_OF_MILK_1927, 1)) {
                     player.animate(ANIMATION);
                     playAudio(player, Sounds.MILK_COW_372);
-                    return false;
+                    return true;
                 }
-                return true;
+                return false;
             }
 
             @Override
