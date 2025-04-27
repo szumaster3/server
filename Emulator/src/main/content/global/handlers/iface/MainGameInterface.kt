@@ -107,7 +107,7 @@ class MainGameInterface : InterfaceListener {
         player.packetDispatch.sendRunScript(508, "")
         if (player.details.rights !== Rights.REGULAR_PLAYER) {
             for (i in 0..17) {
-                player.packetDispatch.sendInterfaceConfig(553, i, false)
+                player.packetDispatch.sendInterfaceConfig(Components.SNAPSHOT_MAIN_553, i, false)
             }
         }
     }
@@ -122,7 +122,7 @@ class MainGameInterface : InterfaceListener {
             return
         }
         player.interfaceManager.close()
-        player.interfaceManager.openWindowsPane(Component(755))
+        player.interfaceManager.openWindowsPane(Component(Components.WORLDMAP_755))
         val posHash = player.location.z shl 28 or (player.location.x shl 14) or player.location.y
         player.packetDispatch.sendScriptConfigs(622, posHash, "", 0)
         player.packetDispatch.sendScriptConfigs(674, posHash, "", 0)

@@ -8,9 +8,10 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs.consts.Components
 
-private const val HAIRDRESSER_MALE_COMPONENT_ID = 596
-private const val HAIRDRESSER_FEMALE_COMPONENT_ID = 592
+private const val HAIRDRESSER_MALE_COMPONENT_ID = Components.HAIRDRESSER_MALE_596
+private const val HAIRDRESSER_FEMALE_COMPONENT_ID = Components.HAIRDRESSER_FEMALE_592
 
 private val HAIR_COLORS =
     intArrayOf(20, 19, 10, 18, 4, 5, 15, 7, 0, 6, 21, 9, 22, 17, 8, 16, 11, 24, 23, 3, 2, 1, 14, 13, 12)

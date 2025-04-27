@@ -42,7 +42,10 @@ class SpellBookManager {
     enum class SpellBook(
         val interfaceId: Int,
     ) {
-        MODERN(Components.MAGIC_192), ANCIENT(Components.MAGIC_ZAROS_193), LUNAR(Components.MAGIC_LUNAR_430);
+        MODERN(Components.MAGIC_192),
+        ANCIENT(Components.MAGIC_ZAROS_193),
+        LUNAR(Components.MAGIC_LUNAR_430)
+        ;
 
         /**
          * Stores registered spells for this spellbook, mapped by button ID.

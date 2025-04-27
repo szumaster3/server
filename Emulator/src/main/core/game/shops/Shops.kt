@@ -294,7 +294,7 @@ class Shops :
 
         onOpen(Components.SHOP_TEMPLATE_SIDE_621) { player, _ ->
             val settings = IfaceSettingsBuilder().enableOptions(0 until 9).build()
-            player.packetDispatch.sendIfaceSettings(settings, 0, 621, 0, 28)
+            player.packetDispatch.sendIfaceSettings(settings, 0, Components.SHOP_TEMPLATE_SIDE_621, 0, 28)
             player.packetDispatch.sendRunScript(
                 150,
                 "IviiiIsssssssss",
@@ -312,7 +312,7 @@ class Shops :
                 7,
                 4,
                 93,
-                621 shl 16,
+                Components.SHOP_TEMPLATE_SIDE_621 shl 16,
             )
             return@onOpen true
         }

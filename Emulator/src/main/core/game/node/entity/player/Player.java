@@ -1239,7 +1239,7 @@ public class Player extends Entity {
      * @return the boolean
      */
     public boolean hasModalOpen() {
-        int[] excludedIds = new int[]{372, 421, InterfaceManager.DEFAULT_CHATBOX}; // Excludes plain message, plain message with scrollbar, and normal chatbox
+        int[] excludedIds = new int[]{Components.TUTORIAL_TEXT_372, Components.TUTORIAL_TEXT2_421, InterfaceManager.DEFAULT_CHATBOX}; // Excludes plain message, plain message with scrollbar, and normal chatbox
         Component openedIface = interfaceManager.getOpened();
         Component openChatbox = interfaceManager.chatbox;
 

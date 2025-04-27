@@ -128,7 +128,7 @@ class Shop(
      */
     fun openFor(player: Player) {
         val cont = getContainer(player)
-        sendString(player, title, 620, 22)
+        sendString(player, title, Components.SHOP_TEMPLATE_620, 22)
         setAttribute(player, "shop", this)
         setAttribute(player, "shop-cont", cont)
         openInterface(player, Components.SHOP_TEMPLATE_620)
@@ -186,14 +186,14 @@ class Shop(
             4,
             10,
             92,
-            (620 shl 16) or if (main) 23 else 24,
+            (Components.SHOP_TEMPLATE_620 shl 16) or if (main) 23 else 24,
         )
-        player.packetDispatch.sendInterfaceConfig(620, 23, !main)
-        player.packetDispatch.sendInterfaceConfig(620, 24, main)
-        player.packetDispatch.sendInterfaceConfig(620, 29, !main)
-        player.packetDispatch.sendInterfaceConfig(620, 25, main)
-        player.packetDispatch.sendInterfaceConfig(620, 27, main)
-        player.packetDispatch.sendInterfaceConfig(620, 26, false)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 23, !main)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 24, main)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 29, !main)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 25, main)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 27, main)
+        player.packetDispatch.sendInterfaceConfig(Components.SHOP_TEMPLATE_620, 26, false)
 
         if (!main) {
             playerStock.refresh()

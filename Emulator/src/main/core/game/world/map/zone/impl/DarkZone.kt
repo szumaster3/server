@@ -156,7 +156,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
 
         var overlay = -1
         if (player.interfaceManager.overlay != null) {
-            overlay = player.interfaceManager.overlay.id
+            overlay = player.interfaceManager.overlay!!.id
         }
         if (source == null) {
             if (overlay != DARKNESS_OVERLAY.id) {

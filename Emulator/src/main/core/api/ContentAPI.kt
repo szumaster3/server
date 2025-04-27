@@ -77,6 +77,7 @@ import core.tools.Log
 import core.tools.SystemLogger
 import core.tools.colorize
 import core.tools.cyclesToTicks
+import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 import java.io.PrintWriter
@@ -2977,12 +2978,12 @@ fun sendItemSelect(
     keepAlive: Boolean = false,
     callback: (slot: Int, optionIndex: Int) -> Unit,
 ) {
-    player.interfaceManager.openSingleTab(Component(12))
+    player.interfaceManager.openSingleTab(Component(Components.ITEM_SELECT_12))
     val scriptArgs = arrayOf((12 shl 16) + 18, 93, 4, 7, 0, -1, "", "", "", "", "", "", "", "", "")
     for (i in 0 until min(9, options.size)) scriptArgs[6 + i] = options[i]
     runcs2(player, 150, *scriptArgs)
     val settings = IfaceSettingsBuilder().enableOptions(0 until 9).build()
-    player.packetDispatch.sendIfaceSettings(settings, 18, 12, 0, 28)
+    player.packetDispatch.sendIfaceSettings(settings, 18, Components.ITEM_SELECT_12, 0, 28)
     setAttribute(player, "itemselect-callback", callback)
     setAttribute(player, "itemselect-keepalive", keepAlive)
 }

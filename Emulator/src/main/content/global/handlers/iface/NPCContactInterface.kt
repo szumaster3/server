@@ -18,48 +18,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 class NPCContactInterface : InterfaceListener {
-    private val contactNPCs =
-        arrayOf(
-            NPCs.HONEST_JIMMY_4362,
-            NPCs.BERT_3108,
-            NPCs.ADVISOR_GHRIM_1375,
-            NPCs.TURAEL_8273,
-            NPCs.LANTHUS_1526,
-            NPCs.SUMONA_7780,
-            NPCs.MAZCHNA_8274,
-            NPCs.DURADEL_8275,
-            NPCs.VANNAKA_1597,
-            NPCs.MURPHY_464,
-            NPCs.CHAELDAR_1598,
-            NPCs.CYRISUS_432,
-            NPCs.LARRY_5424,
-        )
+    private val contactNPCs = arrayOf(NPCs.HONEST_JIMMY_4362, NPCs.BERT_3108, NPCs.ADVISOR_GHRIM_1375, NPCs.TURAEL_8273, NPCs.LANTHUS_1526, NPCs.SUMONA_7780, NPCs.MAZCHNA_8274, NPCs.DURADEL_8275, NPCs.VANNAKA_1597, NPCs.MURPHY_464, NPCs.CHAELDAR_1598, NPCs.CYRISUS_432, NPCs.LARRY_5424)
 
-    private val randomDialogue =
-        arrayOf(
-            Blurberry(),
-            EvilBob(),
-            EvilDave(),
-            Camel(),
-            CaptainCain(),
-            Cyrisus(),
-            DrunkenDwarf(),
-            FatherUrhney(),
-            GeneralWartface(),
-            GypsyAris(),
-            Hans(),
-            Homunculus(),
-            KGPAgent(),
-            LumbridgeCow(),
-            LumbridgeGuide(),
-            LumbridgeSheep(),
-            Man(),
-            MyArm(),
-            Osman(),
-            PartyPete(),
-            Romeo(),
-            WiseOldMan(),
-        )
+    private val randomDialogue = arrayOf(Blurberry(), EvilBob(), EvilDave(), Camel(), CaptainCain(), Cyrisus(), DrunkenDwarf(), FatherUrhney(), GeneralWartface(), GypsyAris(), Hans(), Homunculus(), KGPAgent(), LumbridgeCow(), LumbridgeGuide(), LumbridgeSheep(), Man(), MyArm(), Osman(), PartyPete(), Romeo(), WiseOldMan())
 
     override fun defineInterfaceListeners() {
         on(Components.NPC_CONTACT_429) { player, _, _, buttonID, _, _ ->
@@ -105,12 +66,7 @@ class NPCContactInterface : InterfaceListener {
                 0 -> player(FaceAnim.HALF_ASKING, "Hello?").also { stage++ }
                 1 -> npcl(FaceAnim.OLD_NORMAL, "Blurberry here! Can I help?").also { stage++ }
                 2 -> player("He He. Yes you can. I'm looking for", "a Gnome. Gnome Mates.").also { stage++ }
-                3 ->
-                    npcl(
-                        FaceAnim.OLD_NORMAL,
-                        "Okay, I'll ask. Everybody shush! Is there a Gnome Mates here? Did anyone come in with Gnome Mates?",
-                    ).also { stage++ }
-
+                3 -> npcl(FaceAnim.OLD_NORMAL, "Okay, I'll ask. Everybody shush! Is there a Gnome Mates here? Did anyone come in with Gnome Mates?").also { stage++ }
                 4 -> player("You hear laughter in the background.").also { stage++ }
                 5 -> npcl(FaceAnim.OLD_NORMAL, "Ooooh, who is this? I'll get you!").also { stage++ }
                 6 -> player(FaceAnim.LAUGH, "Hahaha.").also { stage = END_DIALOGUE }

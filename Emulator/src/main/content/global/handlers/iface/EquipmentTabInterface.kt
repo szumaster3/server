@@ -119,138 +119,121 @@ class EquipmentTabInterface : ComponentPlugin() {
                 return true
             }
 
-            else ->
-                when (button) {
-                    52 -> {
-                        if (p.interfaceManager.isOpened() &&
-                            p.interfaceManager.opened?.id == Components.ITEMS_LOSE_ON_DEATH_102
-                        ) {
-                            return true
-                        }
-
-                        val zoneType = p.zoneMonitor.type
-
-                        val itemArray = DeathTask.getContainers(p)
-                        val kept = itemArray[0]
-                        val amtKeptOnDeath = kept.itemCount()
-                        if (amtKeptOnDeath > 4 && zoneType == 0) {
-                            log(
-                                this.javaClass,
-                                Log.ERR,
-                                "Items kept on death interface should not contain more than 4 items when not in a safe zone!",
-                            )
-                        }
-
-                        val slot0 = kept.getId(0)
-
-                        val slot1 = kept.getId(1)
-
-                        val slot2 = kept.getId(2)
-
-                        val slot3 = kept.getId(3)
-
-                        val skulled = if (p.skullManager.isSkulled) 1 else 0
-
-                        val hasBoB =
-                            if (p.familiarManager.hasFamiliar()) {
-                                if (p.familiarManager.familiar.isBurdenBeast) {
-                                    if ((p.familiarManager.familiar as content.global.skill.summoning.familiar.BurdenBeast)
-                                            .container.isEmpty
-                                    ) {
-                                        0
-                                    } else {
-                                        1
-                                    }
-                                } else {
-                                    0
-                                }
-                            } else {
-                                0
-                            }
-
-                        val params =
-                            arrayOf<Any>(
-                                hasBoB,
-                                skulled,
-                                slot3,
-                                slot2,
-                                slot1,
-                                slot0,
-                                amtKeptOnDeath,
-                                zoneType,
-                                "You are skulled.",
-                            )
-                        p.packetDispatch.sendRunScript(118, "siiooooii", *params)
-
-                        p.interfaceManager.openComponent(Components.ITEMS_LOSE_ON_DEATH_102)
+            else -> when (button) {
+                52 -> {
+                    if (p.interfaceManager.isOpened() && p.interfaceManager.opened?.id == Components.ITEMS_LOSE_ON_DEATH_102) {
+                        return true
                     }
 
-                    28 ->
-                        if (opcode == 81) {
-                            p.pulseManager.clear()
-                            submitWorldPulse(
-                                object : Pulse(1, p) {
-                                    override fun pulse(): Boolean {
-                                        unequip(p, slot, itemId)
-                                        return true
-                                    }
-                                },
-                            )
-                            return true
-                        }
+                    val zoneType = p.zoneMonitor.type
 
-                    55 -> {
-                        if (p.interfaceManager.isOpened() &&
-                            p.interfaceManager.opened?.id == Components.EQUIP_SCREEN2_667
-                        ) {
-                            return true
-                        }
-                        val listener: ContainerListener =
-                            object : ContainerListener {
-                                override fun update(
-                                    c: Container?,
-                                    e: ContainerEvent?,
-                                ) {
-                                    PacketRepository.send(
-                                        ContainerPacket::class.java,
-                                        ContainerContext(p, -1, -1, 98, e!!.items, false, *e.slots),
-                                    )
-                                }
-
-                                override fun refresh(c: Container?) {
-                                    PacketRepository.send(
-                                        ContainerPacket::class.java,
-                                        ContainerContext(p, -1, -1, 98, c!!, false),
-                                    )
-                                }
-                            }
-                        p.interfaceManager
-                            .openComponent(Components.EQUIP_SCREEN2_667)
-                            ?.setUncloseEvent { player: Player, c: Component? ->
-                                player.removeAttribute("equip_stats_open")
-                                player.interfaceManager.closeSingleTab()
-                                player.inventory.listeners.remove(listener)
-                                true
-                            }
-                        p.setAttribute("equip_stats_open", true)
-                        EquipmentContainer.update(p)
-                        p.interfaceManager.openSingleTab(Component(Components.INVENTORY_WEAR2_670))
-                        InterfaceContainer.generateItems(
-                            p,
-                            p.inventory.toArray(),
-                            arrayOf("Equip"),
-                            Components.INVENTORY_WEAR2_670,
-                            0,
-                            7,
-                            4,
-                            93,
+                    val itemArray = DeathTask.getContainers(p)
+                    val kept = itemArray[0]
+                    val amtKeptOnDeath = kept.itemCount()
+                    if (amtKeptOnDeath > 4 && zoneType == 0) {
+                        log(
+                            this.javaClass,
+                            Log.ERR,
+                            "Items kept on death interface should not contain more than 4 items when not in a safe zone!",
                         )
-                        p.inventory.listeners.add(listener)
-                        p.inventory.refresh()
-                        ItemDefinition.statsUpdate(p)
-                        p.packetDispatch.sendIfaceSettings(1278, 14, Components.EQUIP_SCREEN2_667, 0, 13)
                     }
+
+                    val slot0 = kept.getId(0)
+                    val slot1 = kept.getId(1)
+                    val slot2 = kept.getId(2)
+                    val slot3 = kept.getId(3)
+                    val skulled = if (p.skullManager.isSkulled) 1 else 0
+                    val hasBoB = if (p.familiarManager.hasFamiliar()) {
+                        if (p.familiarManager.familiar.isBurdenBeast) {
+                            if ((p.familiarManager.familiar as content.global.skill.summoning.familiar.BurdenBeast).container.isEmpty) {
+                                0
+                            } else {
+                                1
+                            }
+                        } else {
+                            0
+                        }
+                    } else {
+                        0
+                    }
+
+                    val params = arrayOf<Any>(
+                        hasBoB,
+                        skulled,
+                        slot3,
+                        slot2,
+                        slot1,
+                        slot0,
+                        amtKeptOnDeath,
+                        zoneType,
+                        "You are skulled.",
+                    )
+                    p.packetDispatch.sendRunScript(118, "siiooooii", *params)
+
+                    p.interfaceManager.openComponent(Components.ITEMS_LOSE_ON_DEATH_102)
                 }
+
+                28 -> if (opcode == 81) {
+                    p.pulseManager.clear()
+                    submitWorldPulse(
+                        object : Pulse(1, p) {
+                            override fun pulse(): Boolean {
+                                unequip(p, slot, itemId)
+                                return true
+                            }
+                        },
+                    )
+                    return true
+                }
+
+                55 -> {
+                    if (p.interfaceManager.isOpened() && p.interfaceManager.opened?.id == Components.EQUIP_SCREEN2_667) {
+                        return true
+                    }
+                    val listener: ContainerListener = object : ContainerListener {
+                        override fun update(
+                            c: Container?,
+                            e: ContainerEvent?,
+                        ) {
+                            PacketRepository.send(
+                                ContainerPacket::class.java,
+                                ContainerContext(p, -1, -1, 98, e!!.items, false, *e.slots),
+                            )
+                        }
+
+                        override fun refresh(c: Container?) {
+                            PacketRepository.send(
+                                ContainerPacket::class.java,
+                                ContainerContext(p, -1, -1, 98, c!!, false),
+                            )
+                        }
+                    }
+                    p.interfaceManager.openComponent(Components.EQUIP_SCREEN2_667)
+                        ?.setUncloseEvent { player: Player, c: Component? ->
+                            player.removeAttribute("equip_stats_open")
+                            player.interfaceManager.closeSingleTab()
+                            player.inventory.listeners.remove(listener)
+                            true
+                        }
+                    p.setAttribute("equip_stats_open", true)
+                    EquipmentContainer.update(p)
+                    p.interfaceManager.openSingleTab(Component(Components.INVENTORY_WEAR2_670))
+                    InterfaceContainer.generateItems(
+                        p,
+                        p.inventory.toArray(),
+                        arrayOf("Equip"),
+                        Components.INVENTORY_WEAR2_670,
+                        0,
+                        7,
+                        4,
+                        93,
+                    )
+                    p.inventory.listeners.add(listener)
+                    p.inventory.refresh()
+                    ItemDefinition.statsUpdate(p)
+                    p.packetDispatch.sendIfaceSettings(1278, 14, Components.EQUIP_SCREEN2_667, 0, 13)
+                }
+            }
         }
         return true
     }

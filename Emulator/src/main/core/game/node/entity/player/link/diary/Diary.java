@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.rs.consts.Components;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class Diary {
     /**
      * The diary component.
      */
-    public static final int DIARY_COMPONENT = 275;
+    public static final int DIARY_COMPONENT = Components.QUESTJOURNAL_SCROLL_275;
 
     /**
      * The constant completedLevels.
@@ -143,7 +144,7 @@ public class Diary {
      */
     public void drawStatus(Player player) {
         if (isStarted()) {
-            player.getPacketDispatch().sendString((isComplete() ? GREEN : YELLOW) + type.getName(), 259, type.getChild());
+            player.getPacketDispatch().sendString((isComplete() ? GREEN : YELLOW) + type.getName(), Components.AREA_TASK_259, type.getChild());
             for (int i = 0; i < 3; i++) {
                 player.getPacketDispatch().sendString((isComplete(i) ? GREEN : isStarted(i) ? YELLOW : "<col=FF0000>") + getLevel(i), 259, type.getChild() + (i + 1));
             }

@@ -172,7 +172,7 @@ class StockMarket : InterfaceListener {
 
                 170 ->
                     sendInputDialogue(player, false, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox.id == 389) {
+                        if (player.interfaceManager.chatbox?.id == 389) {
                             player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
@@ -203,7 +203,7 @@ class StockMarket : InterfaceListener {
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
                 185 ->
                     sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox.id == Components.EXCHANGE_SEARCH_389) {
+                        if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
                             player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()

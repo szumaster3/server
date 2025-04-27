@@ -13,9 +13,7 @@ class MagicTabInterface : InterfaceListener {
         SpellBook.values().forEach {
             on(it.interfaceId) { player, _, _, buttonID, _, _ ->
                 if (GameWorld.ticks < getAttribute(player, "magic:delay", -1)) return@on true
-
                 SpellListeners.run(buttonID, SpellListener.NONE, it.name.lowercase(), player)
-
                 return@on MagicSpell.castSpell(player, it, buttonID, player)
             }
         }

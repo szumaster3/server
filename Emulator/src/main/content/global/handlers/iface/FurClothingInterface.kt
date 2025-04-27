@@ -504,7 +504,7 @@ class FurClothingInterface : ComponentPlugin() {
         clothing: FUR_CLOTHING,
         amount: Int,
     ) {
-        val coins = Item(995, clothing.price * amount)
+        val coins = Item(Items.COINS_995, clothing.price * amount)
         val amtFurRequired = clothing.requiredFur.amount * amount
         val requiredFur = Item(clothing.requiredFur.id, amtFurRequired)
 

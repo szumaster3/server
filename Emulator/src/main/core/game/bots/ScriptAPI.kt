@@ -42,6 +42,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import org.rs.consts.Components
 import org.rs.consts.Items
 import java.util.concurrent.CountDownLatch
 import kotlin.math.max
@@ -818,20 +819,20 @@ class ScriptAPI(
         val player: Player,
     ) {
         fun init() {
-            player.interfaceManager.openOverlay(Component(195))
-            player.packetDispatch.sendInterfaceConfig(195, 5, true)
+            player.interfaceManager.openOverlay(Component(Components.MAGICTRAINING_ENCHANT_195))
+            player.packetDispatch.sendInterfaceConfig(Components.MAGICTRAINING_ENCHANT_195, 5, true)
         }
 
         fun setTitle(title: String) {
-            player.packetDispatch.sendString(colorize("%B$title"), 195, 7)
+            player.packetDispatch.sendString(colorize("%B$title"), Components.MAGICTRAINING_ENCHANT_195, 7)
         }
 
         fun setTaskLabel(label: String) {
-            player.packetDispatch.sendString(colorize("%B$label"), 195, 8)
+            player.packetDispatch.sendString(colorize("%B$label"), Components.MAGICTRAINING_ENCHANT_195, 8)
         }
 
         fun setAmount(amount: Int) {
-            player.packetDispatch.sendString(colorize("%B$amount"), 195, 9)
+            player.packetDispatch.sendString(colorize("%B$amount"), Components.MAGICTRAINING_ENCHANT_195, 9)
         }
     }
 }

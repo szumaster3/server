@@ -12,12 +12,13 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
+import org.rs.consts.Components
 import org.rs.consts.Quests
 
 class FairyRingInterface : InterfaceListener {
     companion object {
-        const val RINGS_IFACE = 734
-        const val LOG_IFACE_ID = 735
+        const val RINGS_IFACE = Components.FAIRY_RINGS_734
+        const val LOG_IFACE_ID = Components.FAIRY_TRAVEL_LOG_735
         const val VARP_F_RING = 816
         const val VB_LOG_SORT_ORDER = 4618
         const val VB_RING_1 = 2341

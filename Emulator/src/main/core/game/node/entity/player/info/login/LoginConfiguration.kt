@@ -92,7 +92,7 @@ object LoginConfiguration {
         player.interfaceManager.openWindowsPane(lobbyPane)
         player.interfaceManager.opened = lobbyInterface
 
-        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 2, 378, true))
+        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
         PacketRepository.send(
             Interface::class.java,
             InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true),
@@ -140,7 +140,7 @@ object LoginConfiguration {
      */
     @JvmStatic
     fun sendGameConfiguration(player: Player) {
-        player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) 746 else 548))
+        player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
         player.interfaceManager.openChatbox(Components.CHATDEFAULT_137)
         player.interfaceManager.openDefaultTabs()
         player.interfaceManager.openInfoBars()

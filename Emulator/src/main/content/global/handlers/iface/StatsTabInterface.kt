@@ -17,7 +17,7 @@ class StatsTabInterface : InterfaceListener {
                 removeAttributes(player, "levelup:${config.skillID}")
                 LevelUp.sendFlashingIcons(player, -1)
                 setVarp(player, 1230, ADVANCE_CONFIGS[config.skillID])
-                openInterface(player, 741)
+                openInterface(player, Components.STATS_TAB_741)
             } else {
                 openInterface(player, Components.SKILL_GUIDE_V2_499)
                 setVarp(player, 965, config.configID)

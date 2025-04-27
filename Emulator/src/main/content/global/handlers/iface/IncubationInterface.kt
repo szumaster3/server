@@ -5,6 +5,7 @@ import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
 import core.plugin.Plugin
+import org.rs.consts.Components
 
 private const val GAUGE_UPDATE_SCRIPT = 894
 private const val COLD_OFFSET = 22
@@ -28,7 +29,7 @@ class IncubationInterface : ComponentPlugin() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(717, this)
+        ComponentDefinition.put(Components.INCUBATOR_717, this)
         return this
     }
 }
