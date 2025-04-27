@@ -13,6 +13,12 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Holgart dialogue.
+ *
+ * Relations:
+ * - [Sea Slug quest][content.region.kandarin.quest.seaslug.SeaSlug]
+ */
 @Initializable
 class HolgartDialogue(
     player: Player? = null,
@@ -21,21 +27,9 @@ class HolgartDialogue(
         npc = args[0] as NPC
         when {
             isQuestComplete(player, Quests.SEA_SLUG) -> player("Hello Holgart.").also { stage = 100 }
-            npc.id == NPCs.HOLGART_699 ->
-                player("We'd better get back to the platform so we can see", "what's going on.").also {
-                    stage =
-                        200
-                }
-            getQuestStage(player, Quests.SEA_SLUG) == 50 ->
-                player("Did you get the kid back to shore?").also {
-                    stage =
-                        300
-                }
-            getQuestStage(player, Quests.SEA_SLUG) == 10 ->
-                player("Holgart, something strange is going on here.").also {
-                    stage =
-                        0
-                }
+            npc.id == NPCs.HOLGART_699 -> player("We'd better get back to the platform so we can see", "what's going on.").also { stage = 200 }
+            getQuestStage(player, Quests.SEA_SLUG) == 50 -> player("Did you get the kid back to shore?").also { stage = 300 }
+            getQuestStage(player, Quests.SEA_SLUG) == 10 -> player("Holgart, something strange is going on here.").also { stage = 0 }
             else -> sendDialogue(player, "Holgart seems too busy to talk.").also { stage = END_DIALOGUE }
         }
         return true
@@ -48,11 +42,7 @@ class HolgartDialogue(
         when (stage) {
             0 -> npc("You're telling me, none of the sailors seem to remember", "who I am.").also { stage++ }
             1 -> player("Apparently Kennith's father left for help a couple of", "days ago.").also { stage++ }
-            2 ->
-                npc(
-                    "That's a worry, no-one's heard from him on shore.",
-                    "Come on, we'd better look for him.",
-                ).also { stage++ }
+            2 -> npc("That's a worry, no-one's heard from him on shore.", "Come on, we'd better look for him.").also { stage++ }
             3 -> {
                 end()
                 FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_SMALL_ISLAND)
@@ -77,12 +67,7 @@ class HolgartDialogue(
                 end()
                 FishingPlatform.sail(player!!, FishingPlatform.Travel.SMALL_ISLAND_TO_FISHING_PLATFORM)
             }
-
-            300 ->
-                npc(
-                    "Yes, he's safe and sound with his parents. Your turn to",
-                    "return to land now adventurer.",
-                ).also { stage++ }
+            300 -> npc("Yes, he's safe and sound with his parents. Your turn to", "return to land now adventurer.").also { stage++ }
             301 -> player(FaceAnim.NOD_YES, "Looking forward to it.").also { stage++ }
             302 -> {
                 end()

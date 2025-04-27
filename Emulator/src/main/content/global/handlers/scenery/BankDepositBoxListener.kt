@@ -30,7 +30,7 @@ class BankDepositBoxListener : InteractionListener {
         }
 
         restrictForIronman(player, IronmanMode.ULTIMATE) {
-            player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11)).closeEvent =
+            player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11))?.closeEvent =
                 CloseEvent { p, _ ->
                     p.interfaceManager.openDefaultTabs()
                     return@CloseEvent true

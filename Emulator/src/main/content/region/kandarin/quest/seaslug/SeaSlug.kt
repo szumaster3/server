@@ -13,6 +13,12 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 import org.rs.consts.Vars
 
+/**
+ * Represents the Sea slug quest.
+ *
+ * Sources:
+ * - [YouTube](https://www.youtube.com/watch?v=MlBZXxD5yq4)
+ */
 @Initializable
 class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PROGRESS_159, 0, 1, 13) {
 
@@ -27,66 +33,129 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line(player, "!!of Ardougne??.", line++, false)
             line++
             line(player, "Requirements:", line++, false)
-            line(
-                player,
-                if (hasLevelStat(
-                        player,
-                        Skills.FIREMAKING,
-                        30,
-                    )
-                ) {
-                    "--- You'll need level 30 Firemaking/--"
-                } else {
-                    "You'll need level !!30 Firemaking??"
-                },
-                line++,
-            )
+            line(player, "You'll need level !!30 Firemaking??.", line++)
             line++
         }
 
-        if (stage >= 1) {
-            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, stage > 5)
+        if (stage == 1) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++)
             line++
         }
 
-        if (stage >= 4) {
-            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, stage >= 5)
-            line(player, "to take me to the !!Fishing Platform??.", line++, stage >= 5)
+        if (stage == 5) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++)
+            line(player, "to take me to the !!Fishing Platform??.", line++)
             line++
         }
 
         if (stage == 10) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
+            line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++)
+            line++
+        }
+
+        if (stage == 15) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
             line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++, true)
             line++
+            line(player, "I've found !!Kent?? on a small island", line++)
+            line(player, "Kent has me to help !!Kennith escape??.", line++)
+            line++
         }
 
-        if (stage >= 15) {
+        if (stage == 20) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
+            line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++, true)
+            line++
             line(player, "I've found !!Kent?? on a small island", line++, true)
+            line(player, "Kent has me to help !!Kennith escape??.", line++, true)
             line++
-            line(player, "Kent has me to help !!Kennith escape??.", line++, stage >= 20)
+            line(player, "After speaking to !!Bailey??, I found out that !!Sea Slugs??", line++)
+            line(player, "are afraid of !!heat??.", line++)
             line++
-        }
-
-        if (stage >= 20) {
-            line(player, "After speaking to !!Bailey??, I found out that !!Sea Slugs??", line++, stage >= 25)
-            line(player, "are afraid of !!heat??.", line++, stage >= 25)
-            line++
-            line(player, "I should find a way of lighting this damp torch.", line++, stage >= 25)
+            line(player, "I should find a way of lighting this damp torch.", line++)
             line++
         }
 
-        if (stage >= 25) {
-            line(player, "I've created an opening to let Kennith escape", line++, stage >= 30)
-            line(player, "Kennith can't get downstairs without some help", line++, stage >= 30)
+        if (stage == 25) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
+            line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++, true)
+            line++
+            line(player, "I've found !!Kent?? on a small island", line++, true)
+            line(player, "Kent has me to help !!Kennith escape??.", line++, true)
+            line++
+            line(player, "After speaking to !!Bailey??, I found out that !!Sea Slugs??", line++, true)
+            line(player, "are afraid of !!heat??.", line++, true)
+            line++
+            line(player, "I should find a way of lighting this damp torch.", line++, true)
+            line++
+            line(player, "I've created an opening to let Kennith escape", line++)
+            line(player, "Kennith can't get downstairs without some help", line++)
             line++
         }
 
         if (stage >= 50) {
-            line(player, "I've !!used the Crane?? to lower Kennith into the !!boat??.", line++, stage > 50)
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
+            line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++, true)
+            line++
+            line(player, "I've found !!Kent?? on a small island", line++, true)
+            line(player, "Kent has me to help !!Kennith escape??.", line++, true)
+            line++
+            line(player, "After speaking to !!Bailey??, I found out that !!Sea Slugs??", line++, true)
+            line(player, "are afraid of !!heat??.", line++, true)
+            line++
+            line(player, "I should find a way of lighting this damp torch.", line++, true)
+            line++
+            line(player, "I've created an opening to let Kennith escape", line++, true)
+            line(player, "Kennith can't get downstairs without some help", line++, true)
+            line++
+            line(player, "I've !!used the Crane?? to lower Kennith into the !!boat??.", line++)
             line++
         }
 
         if (stage == 100) {
+            line(player, "I have spoken to !!Caroline?? and agreed to help.", line++, true)
+            line++
+            line(player, "I have !!Holgart?? the !!Swamp Paste?? and his boat is now ready", line++, true)
+            line(player, "to take me to the !!Fishing Platform??.", line++, true)
+            line++
+            line(player, "I've found !!Kennith??, he's !!hiding behind some boxes??.", line++, true)
+            line++
+            line(player, "I've found !!Kent?? on a small island", line++, true)
+            line(player, "Kent has me to help !!Kennith escape??.", line++, true)
+            line++
+            line(player, "After speaking to !!Bailey??, I found out that !!Sea Slugs??", line++, true)
+            line(player, "are afraid of !!heat??.", line++, true)
+            line++
+            line(player, "I should find a way of lighting this damp torch.", line++, true)
+            line++
+            line(player, "I've created an opening to let Kennith escape", line++, true)
+            line(player, "Kennith can't get downstairs without some help", line++, true)
+            line++
+            line(player, "I've !!used the Crane?? to lower Kennith into the !!boat??.", line++, true)
+            line++
             line(player, "I've spoken to !!Caroline?? and she thanked me", line++, true)
             line(player, "for !!rescuing her family?? from the !!Sea Slugs??", line++, true)
             line++
@@ -96,7 +165,6 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var ln = 10
         sendItemOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.SEA_SLUG_1466)
         drawReward(player, "1 Quest Point", ln++)

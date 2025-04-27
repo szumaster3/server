@@ -81,7 +81,7 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
         rewardXP(player, Skills.FISHING, 2437.0)
         removeAttributes(player, GameAttributes.QUEST_FISHINGCOMPO_STASH_GARLIC)
 
-        player.interfaceManager.getComponent(Components.QUEST_COMPLETE_SCROLL_277).closeEvent = CloseEvent { p, _ ->
+        player.interfaceManager.getComponent(Components.QUEST_COMPLETE_SCROLL_277)?.closeEvent = CloseEvent { p, _ ->
             val npcId = getAttribute(player, "temp-npc", 0)
             val isMale = player.isMale
             val gender = if (isMale) "lad" else "lass"

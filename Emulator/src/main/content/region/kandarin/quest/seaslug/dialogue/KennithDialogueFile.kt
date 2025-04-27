@@ -10,6 +10,12 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Kennith dialogue extension.
+ *
+ * Relations:
+ * - [Sea Slug quest][content.region.kandarin.quest.seaslug.SeaSlug]
+ */
 class KennithDialogueFile : DialogueFile() {
     override fun handle(
         componentID: Int,

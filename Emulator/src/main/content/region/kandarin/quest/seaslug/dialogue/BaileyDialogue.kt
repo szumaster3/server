@@ -14,6 +14,12 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Bailey dialogue.
+ *
+ * Relations:
+ * - [Sea Slug quest][content.region.kandarin.quest.seaslug.SeaSlug]
+ */
 @Initializable
 class BaileyDialogue(
     player: Player? = null,

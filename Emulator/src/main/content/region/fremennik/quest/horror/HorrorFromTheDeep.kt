@@ -128,7 +128,7 @@ class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VAR
         rewardXP(player, Skills.MAGIC, 4662.0)
         rewardXP(player, Skills.STRENGTH, 4662.0)
 
-        player.interfaceManager.getComponent(Components.QUEST_COMPLETE_SCROLL_277).closeEvent = CloseEvent { player, _ ->
+        player.interfaceManager.getComponent(Components.QUEST_COMPLETE_SCROLL_277)?.closeEvent = CloseEvent { player, _ ->
             runTask(player, 1) {
                 openDialogue(player, JossikLighthouseDialogue())
             }

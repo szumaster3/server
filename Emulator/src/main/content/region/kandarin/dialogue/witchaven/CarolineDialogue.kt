@@ -12,6 +12,12 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Caroline dialogue.
+ *
+ * Relations:
+ * - [Sea Slug quest][content.region.kandarin.quest.seaslug.SeaSlug]
+ */
 @Initializable
 class CarolineDialogue(
     player: Player? = null,
@@ -20,9 +26,9 @@ class CarolineDialogue(
         npc = args[0] as NPC
         if(!isQuestComplete(player, Quests.SEA_SLUG)) {
             openDialogue(player, CarolineDialogueFile())
-            return true
+        } else {
+            player(FaceAnim.FRIENDLY, "Hello again.")
         }
-        player(FaceAnim.FRIENDLY, "Hello again.")
         return true
     }
 
@@ -33,11 +39,7 @@ class CarolineDialogue(
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
             1 -> player(FaceAnim.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "I'm good. Busy as always looking after Kent and Kennith but no complaints.",
-                ).also { stage = END_DIALOGUE }
+            2 -> npcl(FaceAnim.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints.").also { stage = END_DIALOGUE }
         }
         return true
     }

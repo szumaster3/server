@@ -292,7 +292,7 @@ abstract class CombatSwingHandler(
             val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
             if (comp != null) {
                 entity.interfaceManager.close(comp)
-                entity.interfaceManager.openTab(weapEx)
+                entity.interfaceManager.openTab(weapEx!!)
                 entity.properties.combatPulse.stop()
                 entity.attack(victim)
                 entity.removeAttribute("autocast_component")

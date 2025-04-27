@@ -68,7 +68,7 @@ class BankContainer(
      * Method used to open the deposit box.
      */
     fun openDepositBox() {
-        player.interfaceManager.open(Component(11)).setUncloseEvent { player: Player, c: Component? ->
+        player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11))?.setUncloseEvent { player: Player, c: Component? ->
             player.interfaceManager.openDefaultTabs()
             true
         }
@@ -105,7 +105,7 @@ class BankContainer(
             player.bankPinManager.openType(1)
             return
         }
-        player.interfaceManager.openComponent(Components.BANK_V2_MAIN_762).closeEvent =
+        player.interfaceManager.openComponent(Components.BANK_V2_MAIN_762)?.closeEvent =
             CloseEvent { player: Player?, c: Component? ->
                 this@BankContainer.close()
                 true
@@ -132,7 +132,7 @@ class BankContainer(
             player.bankPinManager.openType(1)
             return
         }
-        player.interfaceManager.openComponent(Components.BANK_V2_MAIN_762).closeEvent =
+        player.interfaceManager.openComponent(Components.BANK_V2_MAIN_762)?.closeEvent =
             CloseEvent { player1: Player?, c: Component? ->
                 this@BankContainer.close()
                 true

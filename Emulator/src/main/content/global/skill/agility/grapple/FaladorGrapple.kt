@@ -130,7 +130,7 @@ class FaladorGrapple : OptionHandler() {
                                 14 -> {
                                     restoreTabs(player)
                                     if (tab != null) {
-                                        player.interfaceManager.openTab(tab)
+                                        player.interfaceManager.openTab(tab!!)
                                     }
                                     setMinimapState(player, 0)
                                     closeOverlay(player)
