@@ -11,10 +11,30 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.tools.Vector3d
 
+/**
+ * Handles the logic for the Mysterious Statue area in Seers' Village.
+ *
+ * Relations:
+ * - [SeersVillageAchievementDiary]
+ */
 class MysteriousStatue : MapArea {
+    /**
+     * Represents the central position of the Mysterious Statue.
+     */
     var origin: Vector3d = Vector3d(2740.5, 3490.5, 0.0)
+
+    /**
+     * Represents the vector used for calculating angles (upwards in Z-axis).
+     */
     var n: Vector3d = Vector3d(0.0, 0.0, 1.0)
 
+    /**
+     * Called when an [Entity] takes a step within the statue's map area.
+     *
+     * @param entity The entity that moved.
+     * @param location The entity's current location.
+     * @param lastLocation The entity's previous location.
+     */
     override fun entityStep(
         entity: Entity,
         location: Location,

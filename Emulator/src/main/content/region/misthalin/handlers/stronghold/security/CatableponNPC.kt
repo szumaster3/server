@@ -1,4 +1,4 @@
-package content.region.misthalin.handlers.sos
+package content.region.misthalin.handlers.stronghold.security
 
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler

@@ -1,4 +1,4 @@
-package content.region.misthalin.handlers.sops
+package content.region.misthalin.handlers.stronghold.playersafety
 
 import content.data.GameAttributes
 import core.api.openInterface

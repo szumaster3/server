@@ -162,4 +162,15 @@ fun hasRequirement(
     return core.api.hasRequirement(player, QuestReq(questReq), message)
 }
 
+/**
+ * Checks if the player has started the given quest.
+ *
+ * @param player The player whose quest status to check.
+ * @param quest The name or identifier of the quest.
+ * @return `true` if the player has started the quest, `false` otherwise.
+ */
+fun hasStarted(player: Player, quest: String): Boolean {
+    return player.getQuestRepository().hasStarted(quest)
+}
+
 private class QuestAPI

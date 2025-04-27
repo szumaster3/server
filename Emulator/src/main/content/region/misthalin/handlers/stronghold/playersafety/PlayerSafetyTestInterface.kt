@@ -1,4 +1,4 @@
-package content.region.misthalin.handlers.sops
+package content.region.misthalin.handlers.stronghold.playersafety
 
 import core.api.*
 import core.game.interaction.InterfaceListener

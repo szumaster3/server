@@ -2,8 +2,8 @@ package content.region.kandarin.handlers.seers
 
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.ChaliceOnKingArthurListener
+import content.region.kandarin.dialogue.seers.ThormacDialogue
 import content.region.kandarin.quest.grail.dialogue.GalahadDialogue
-import content.region.kandarin.quest.scorpcatcher.dialogue.ThormacDialogueFile
 import core.api.hasLevelDyn
 import core.api.inBorders
 import core.api.inEquipment
@@ -324,7 +324,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
                 }
             }
 
-            is ThormacDialogueFile -> {
+            is ThormacDialogue -> {
                 if (isQuestComplete(player, Quests.SCORPION_CATCHER) && event.currentStage == 4) {
                     finishTask(
                         player,

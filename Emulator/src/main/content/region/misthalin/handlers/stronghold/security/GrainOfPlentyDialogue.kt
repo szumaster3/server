@@ -1,4 +1,4 @@
-package content.region.misthalin.handlers.sos
+package content.region.misthalin.handlers.stronghold.security
 
 import core.api.Container
 import core.api.addItem

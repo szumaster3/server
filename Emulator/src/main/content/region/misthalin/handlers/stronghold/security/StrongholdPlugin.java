@@ -1,4 +1,4 @@
-package content.region.misthalin.handlers.sos;
+package content.region.misthalin.handlers.stronghold.security;
 
 import content.global.handlers.iface.warning.Warnings;
 import core.cache.def.impl.SceneryDefinition;
