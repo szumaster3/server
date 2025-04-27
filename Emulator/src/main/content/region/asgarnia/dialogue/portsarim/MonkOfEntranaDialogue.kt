@@ -68,7 +68,7 @@ class MonkOfEntranaDialogue(
             }
 
             23 ->
-                npc(
+                npc(FaceAnim.NEUTRAL,
                     "Do not try and decieve us again. Come back when you",
                     "have liad down your Zamorakian instruments of death.",
                 ).also {
