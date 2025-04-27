@@ -12,43 +12,42 @@ import org.rs.consts.*
 import kotlin.random.Random
 
 /**
- * Represents Fishing platform area.
+ * Represents the Fishing Platform area for the Sea Slug quest.
  */
 class FishingPlatform : MapArea {
+
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
         ZoneBorders(2761, 3275, 2789, 3296, 1, false)
     )
 
     override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
-        if (entity is Player) {
-            val player = entity.asPlayer()
-            // If player has completed the quest, skip.
-            if(isQuestComplete(player, Quests.SEA_SLUG)) return
-            if (getQuestStage(player, Quests.SEA_SLUG) >= 20) {
-                val fisherMan = Repository.findNPC(NPCs.FISHERMAN_703)
-                if (withinDistance(player, fisherMan!!.location, 1)) {
-                    if (Random.nextInt(5) == 0) {// I added this, so it doesn't spam so much.
-                        if (!inInventory(player, Items.LIT_TORCH_594)) {
-                            fishermanAttack(player)
-                        } else {
-                            sendMessage(player, "The fishermen seem afraid of your torch.")
-                        }
+        if (entity !is Player) return
+
+        val player = entity.asPlayer()
+
+        if (isQuestComplete(player, Quests.SEA_SLUG)) return
+
+        if (getQuestStage(player, Quests.SEA_SLUG) >= 20) {
+            val fisherman = Repository.findNPC(NPCs.FISHERMAN_703) ?: return
+
+            if (withinDistance(player, fisherman.location, 1)) {
+                if (Random.nextInt(5) == 0) {
+                    if (!inInventory(player, Items.LIT_TORCH_594)) {
+                        fishermanAttack(player)
+                    } else {
+                        sendMessage(player, "The fishermen seem afraid of your torch.")
                     }
                 }
             }
         }
     }
 
-    private fun fishermanAttack (player : Player) {
+    private fun fishermanAttack(player: Player) {
         playAudio(player, Sounds.SLUG_FISHERMAN_ATTACK_3022)
         sendMessage(player, "The fishermen approach you...")
         sendMessage(player, "and smack you on the head with a fishing rod!")
         sendChat(player, "Ouch!")
-        openInterface(player, Components.FADE_TO_BLACK_115)
-        runTask(player, 3) {
-            openInterface(player, Components.FADE_FROM_BLACK_170)
-            teleport(player, Location.create(2784, 3287, 0))
-        }
+        openInterface(player, Components.FADE_FROM_BLACK_170)
+        teleport(player, Location.create(2784, 3287, 0))
     }
-
 }

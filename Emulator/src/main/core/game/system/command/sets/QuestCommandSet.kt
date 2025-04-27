@@ -4,6 +4,8 @@ import content.region.kandarin.quest.arena.cutscene.JeremyRescueCutscene
 import content.region.kandarin.quest.phoenix.handlers.PhoenixLairListener.Companion.weavingRibbons
 import content.region.kandarin.quest.phoenix.custcene.WoundedPhoenixCutscene
 import content.region.kandarin.quest.phoenix.handlers.allTwigs
+import content.region.kandarin.quest.seaslug.cutscene.HolgartRepairBoatCutscene
+import content.region.kandarin.quest.seaslug.cutscene.SafeAndSoundCutscene
 import core.api.Container
 import core.api.addItem
 import core.api.quest.finishQuest
@@ -19,6 +21,24 @@ import org.rs.consts.Quests
 @Initializable
 class QuestCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
+        define(
+            name = "holgart",
+            privilege = Privilege.ADMIN,
+            usage = "::holgart",
+            description = "Sea slug - Repair boat (Cutscene)",
+        ) { player, _ ->
+            HolgartRepairBoatCutscene(player).start()
+        }
+
+        define(
+            name = "kennith",
+            privilege = Privilege.ADMIN,
+            usage = "::kennith",
+            description = "Sea slug - Saving kennith (Cutscene)",
+        ) { player, _ ->
+            SafeAndSoundCutscene(player).start()
+        }
+
         define(
             name = "phoenix",
             privilege = Privilege.ADMIN,

@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.seaslug.handlers
 
-import content.region.kandarin.quest.seaslug.cutscene.SafeAndSoundCustcene
+import content.region.kandarin.quest.seaslug.cutscene.SafeAndSoundCutscene
 import content.region.kandarin.quest.seaslug.dialogue.KennithDialogueFile
 import core.api.*
 import core.api.quest.getQuestStage
@@ -106,8 +106,7 @@ class SeaSlugListener : InteractionListener {
         on(CRANE, IntType.SCENERY, "rotate") { player, _ ->
             if (getQuestStage(player, Quests.SEA_SLUG) == 30) {
                 playAudio(player, Sounds.SLUG_CRANE_TURN_3021)
-                sendMessage(player, "You rotate the crane around")
-                SafeAndSoundCustcene(player).start()
+                SafeAndSoundCutscene(player).start()
             }
             return@on true
         }
@@ -131,7 +130,7 @@ class SeaSlugListener : InteractionListener {
                 lock(player, 3)
                 animate(player, Animations.USE_LADDER_828)
                 runTask(player, 2) {
-                    teleport(player, location(2784, 3287, 1))
+                    teleport(player, Location.create(2784, 3287, 1))
                     sendMessageWithDelay(player, "The fishermen seem afraid of your torch.", 1)
                 }
             } else {
