@@ -27,6 +27,7 @@ class CarolineDialogueFile : DialogueFile() {
         val questStage = getQuestStage(player!!, Quests.SEA_SLUG)
         npc = NPC(NPCs.CAROLINE_696)
         when (questStage) {
+            // Concerned Caroline.
             in 0..1 -> {
                 when (stage) {
                     0 -> playerl(FaceAnim.FRIENDLY, "Hello there.").also { stage++ }
@@ -60,18 +61,19 @@ class CarolineDialogueFile : DialogueFile() {
                 }
             }
 
+            // Concerned Caroline: Talking to Caroline again.
             in 2..49 -> {
                 when (stage) {
-                    0 -> npcl(
-                        FaceAnim.HAPPY,
-                        "Brave ${player!!.name}, have you any news about my son and his father?",
-                    ).also { stage++ }
-
+                    0 -> npcl(FaceAnim.HAPPY, "Brave ${player!!.name}, have you any news about my son and his father?").also { stage++ }
                     1 -> player(FaceAnim.NEUTRAL, "I'm working on it now Caroline.").also { stage++ }
                     2 -> npcl(FaceAnim.FRIENDLY, "Please bring them back safe and sound.").also { stage++ }
                     3 -> player(FaceAnim.FRIENDLY, "I'll do my best.").also { stage = END_DIALOGUE }
                 }
             }
+
+            /*
+             * Pearls of Wisdom - finish sea slug quest.
+             */
 
             in 50..99 -> {
                 when (stage) {

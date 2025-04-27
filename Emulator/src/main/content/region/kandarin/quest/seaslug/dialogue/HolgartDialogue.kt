@@ -26,10 +26,16 @@ class HolgartDialogue(
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
-            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hello Holgart.").also { stage = 100 }
+            // Something's Strange - Get Me Off of This Thing (Small island).
+            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hey, Holgart.").also { stage = 100 }
             npc.id == NPCs.HOLGART_699 -> player("We'd better get back to the platform so we can see", "what's going on.").also { stage = 200 }
-            getQuestStage(player, Quests.SEA_SLUG) == 50 -> player("Did you get the kid back to shore?").also { stage = 300 }
-            getQuestStage(player, Quests.SEA_SLUG) == 10 -> player("Holgart, something strange is going on here.").also { stage = 0 }
+            // Something's Strange - The Search is On (Fishing platform).
+            getQuestStage(player, Quests.SEA_SLUG) == 10 -> player(FaceAnim.HALF_THINKING, "Holgart, something strange is going on here.").also { stage = 0 }
+            // Let's Go Home - End of the quest (Fishing platform).
+            getQuestStage(player, Quests.SEA_SLUG) == 50 -> player("Did you get the kid back to shore?").also {
+                stage = 300
+            }
+
             else -> sendDialogue(player, "Holgart seems too busy to talk.").also { stage = END_DIALOGUE }
         }
         return true
@@ -40,29 +46,27 @@ class HolgartDialogue(
         buttonId: Int,
     ): Boolean {
         when (stage) {
-            0 -> npc("You're telling me, none of the sailors seem to remember", "who I am.").also { stage++ }
-            1 -> player("Apparently Kennith's father left for help a couple of", "days ago.").also { stage++ }
-            2 -> npc("That's a worry, no-one's heard from him on shore.", "Come on, we'd better look for him.").also { stage++ }
+            0 -> npc(FaceAnim.THINKING, "You're telling me, none of the sailors seem to remember", "who I am.").also { stage++ }
+            1 -> player(FaceAnim.HALF_THINKING, "Apparently Kennith's father left for help a couple of", "days ago.").also { stage++ }
+            2 -> npc(FaceAnim.HALF_THINKING, "That's a worry, no-one's heard from him on shore.", "Come on, we'd better look for him.").also { stage++ }
             3 -> {
                 end()
                 FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_SMALL_ISLAND)
             }
 
-            100 -> npc("Have you had enough of this place yet?", "It's really starting to scare me.").also { stage++ }
+            100 -> npc(FaceAnim.THINKING, "Have you had enough of this place yet?", "It's really starting to scare me.").also { stage++ }
             101 -> options("No, I'm going to stay a while.", "Okay, let's go back.").also { stage++ }
-            102 ->
-                when (buttonId) {
-                    1 -> player("No, I'm going to stay a while.").also { stage++ }
-                    2 -> player("Okay, let's go back.").also { stage = 104 }
-                }
-
+            102 -> when (buttonId) {
+                1 -> player("No, I'm going to stay a while.").also { stage++ }
+                2 -> player("Okay, let's go back.").also { stage = 104 }
+            }
             103 -> npc("Okay... you're the boss.").also { stage = END_DIALOGUE }
             104 -> {
                 end()
                 FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
             }
 
-            200 -> npc("You're right. It all sounds pretty creepy.").also { stage++ }
+            200 -> npc(FaceAnim.THINKING, "You're right. It all sounds pretty creepy.").also { stage++ }
             201 -> {
                 end()
                 FishingPlatform.sail(player!!, FishingPlatform.Travel.SMALL_ISLAND_TO_FISHING_PLATFORM)

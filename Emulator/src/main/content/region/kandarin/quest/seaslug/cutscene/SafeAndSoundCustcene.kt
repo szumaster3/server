@@ -3,7 +3,8 @@ package content.region.kandarin.quest.seaslug.cutscene
 import core.api.animate
 import core.api.interaction.transformNpc
 import core.api.quest.setQuestStage
-import core.api.sendDialogue
+import core.api.sendDialogueLines
+import core.api.sendPlainDialogue
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
@@ -34,6 +35,7 @@ class SafeAndSoundCustcene(
                 fadeFromBlack()
                 teleport(player, 20, 27, 1)
                 teleport(getNPC(NPCs.KENNITH_4864)!!, 14, 24, 1)
+                sendPlainDialogue(player, true, "Kennith scrambles through the broken wall...")
                 timedUpdate(3)
             }
 
@@ -45,7 +47,6 @@ class SafeAndSoundCustcene(
 
             3 -> {
                 animate(player, Animations.SEA_SLUG_USE_CRANE_4795)
-                sendDialogue(player, "Kennith scrambles through the broken wall...")
                 teleport(getNPC(NPCs.KENNITH_4864)!!, 16, 25, 1)
                 transformNpc(getNPC(NPCs.KENNITH_4864)!!, NPCs.KENNITH_6373, 3)
                 timedUpdate(5)
@@ -59,6 +60,7 @@ class SafeAndSoundCustcene(
 
             5 -> {
                 end().also {
+                    sendDialogueLines(player, "Down below, you see Holgart collect the boy from the crane and", "lead him away to safety.")
                     setQuestStage(player, Quests.SEA_SLUG, 50)
                 }
             }

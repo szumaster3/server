@@ -24,9 +24,12 @@ class CarolineDialogue(
 ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+        // Sea slug dialogue.
         if(!isQuestComplete(player, Quests.SEA_SLUG)) {
             openDialogue(player, CarolineDialogueFile())
-        } else {
+        }
+        // Post-Quest Dialogue.
+        else {
             player(FaceAnim.FRIENDLY, "Hello again.")
         }
         return true

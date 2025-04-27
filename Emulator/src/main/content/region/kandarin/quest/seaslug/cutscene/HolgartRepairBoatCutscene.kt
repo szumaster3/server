@@ -53,7 +53,7 @@ class HolgartRepairBoatCutscene(
 
             4 -> {
                 sendChat(getNPC(NPCs.HOLGART_4866)!!, "Huzzah! We've fixed the leaky old tub.")
-                timedUpdate(2)
+                timedUpdate(3)
             }
 
             5 -> {

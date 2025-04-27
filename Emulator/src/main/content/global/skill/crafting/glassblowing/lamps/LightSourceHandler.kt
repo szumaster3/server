@@ -1,9 +1,6 @@
 package content.global.skill.crafting.glassblowing.lamps
 
-import core.api.getItemName
-import core.api.getStatLevel
-import core.api.playAudio
-import core.api.sendMessage
+import core.api.*
 import core.game.container.Container
 import core.game.event.LitLightSourceEvent
 import core.game.interaction.NodeUsageEvent
@@ -11,6 +8,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.map.zone.ZoneBorders
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Items
@@ -66,6 +64,12 @@ class LightSourceHandler : UseWithHandler(Items.TINDERBOX_590, Items.CANDLE_36, 
         val playerLevel = getStatLevel(player, Skills.FIREMAKING)
 
         if (playerLevel < requiredLevel) return false
+
+        // If the player attempts to use the tinderbox on an unlit torch at Fishing platform.
+        if(inBorders(player, 2761, 3275, 2789, 3296)) {
+            sendMessage(player, "Your tinderbox is damp from the sea crossing. It won't light here.")
+            return true
+        }
 
         // Making sure that a lit source cannot be ignited again.
         if (item.id != lightSources.litId) {

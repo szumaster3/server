@@ -2,9 +2,12 @@ package content.region.kandarin.quest.seaslug.dialogue
 
 import content.region.kandarin.handlers.FishingPlatform
 import content.region.kandarin.quest.seaslug.cutscene.HolgartRepairBoatCutscene
-import core.api.*
+import core.api.Container
+import core.api.inInventory
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
+import core.api.removeItem
+import core.api.sendItemDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -27,6 +30,7 @@ class HolgartDialogueFile : DialogueFile() {
         val questStage = getQuestStage(player!!, Quests.SEA_SLUG)
         npc = NPC(NPCs.HOLGART_4866)
         when (questStage) {
+            // Only a Few Holes.
             in 2..3 -> {
                 when (stage) {
                     0 -> player(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
@@ -65,15 +69,11 @@ class HolgartDialogueFile : DialogueFile() {
                 }
             }
 
+            // The Leaky Tub.
             4 -> {
                 when (stage) {
                     0 -> player(FaceAnim.FRIENDLY, "Hello Holgart.").also { stage++ }
-                    1 -> npc(
-                        FaceAnim.HALF_ASKING,
-                        "Hello m'hearty. Did you manage to make some swamp",
-                        "paste?",
-                    ).also { stage++ }
-
+                    1 -> npc(FaceAnim.HALF_ASKING, "Hello m'hearty. Did you manage to make some swamp", "paste?").also { stage++ }
                     2 -> {
                         if (!removeItem(player!!, Items.SWAMP_PASTE_1941, Container.INVENTORY)) {
                             player(FaceAnim.NEUTRAL, "I'm afraid not.").also { stage = END_DIALOGUE }
@@ -81,13 +81,7 @@ class HolgartDialogueFile : DialogueFile() {
                             player(FaceAnim.FRIENDLY, "Yes, I have some here.").also { stage++ }
                         }
                     }
-
-                    3 -> sendItemDialogue(
-                        player!!,
-                        Items.SWAMP_PASTE_1941,
-                        "You give Holgart the swamp paste.",
-                    ).also { stage++ }
-
+                    3 -> sendItemDialogue(player!!, Items.SWAMP_PASTE_1941, "You give Holgart the swamp paste.").also { stage++ }
                     4 -> {
                         end()
                         HolgartRepairBoatCutscene(player!!).start()
@@ -95,21 +89,19 @@ class HolgartDialogueFile : DialogueFile() {
                 }
             }
 
+            // During quest dialogue.
             in 5..99 -> {
                 when (stage) {
                     0 -> player(FaceAnim.FRIENDLY, "Hello Holgart.").also { stage++ }
-                    1 -> npc(
-                        "Hello again land lover. There's some strange goings on, ",
-                        "on that platform, I tell you.",
-                    ).also { stage++ }
+                    1 -> npc(FaceAnim.NEUTRAL, "Hello again land lover. There's some strange goings on,", "on that platform, I tell you.").also { stage++ }
 
                     2 -> options("Will you take me there?", "I'm keeping away from there.").also { stage++ }
                     3 -> when (buttonID) {
-                        1 -> player("Will you take me there?").also { stage++ }
+                        1 -> player(FaceAnim.HALF_ASKING, "Will you take me there?").also { stage++ }
                         2 -> player("I'm keeping away from there.").also { stage = 6 }
                     }
 
-                    4 -> npc("Of course m'hearty. If that's what you want.").also { stage++ }
+                    4 -> npc(FaceAnim.NEUTRAL,"Of course m'hearty. If that's what you want.").also { stage++ }
                     5 -> {
                         end()
                         FishingPlatform.sail(player!!, FishingPlatform.Travel.WITCHAVEN_TO_FISHING_PLATFORM)

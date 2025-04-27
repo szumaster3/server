@@ -1,11 +1,14 @@
 package content.region.kandarin.handlers
 
 import core.api.*
+import core.api.quest.getQuestStage
 import core.api.ui.setMinimapState
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs.consts.Components
+import org.rs.consts.Music
+import org.rs.consts.Quests
 
 object FishingPlatform {
     @JvmStatic
@@ -23,7 +26,9 @@ object FishingPlatform {
 
                 override fun pulse(): Boolean {
                     when (counter++) {
-                        0 -> openOverlay(player, Components.FADE_TO_BLACK_115)
+                        0 -> if(!player.musicPlayer.hasUnlocked(Music.THE_MOLLUSC_MENACE_200)) {
+                            player.musicPlayer.unlock(Music.THE_MOLLUSC_MENACE_200)
+                        }
                         3 -> {
                             setMinimapState(player, 2)
                             openInterface(player, Components.SEASLUG_BOAT_TRAVEL_461)
@@ -32,7 +37,11 @@ object FishingPlatform {
                         4 -> teleport(player, travel.destinationLoc)
                         travel.ticks -> {
                             openInterface(player, Components.FADE_FROM_BLACK_170)
-                            sendDialogue(player, "The boat arrives ${travel.destName}.")
+                            if(getQuestStage(player, Quests.SEA_SLUG) > 50) {
+                                sendDialogue(player, "The boat arrives ${travel.destName}.")
+                            } else {
+                                sendDialogue(player, "You arrive ${travel.destName}.")
+                            }
                             setMinimapState(player, 0)
                             closeInterface(player)
                             closeOverlay(player)

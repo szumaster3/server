@@ -1,7 +1,6 @@
 package content.region.kandarin.quest.seaslug
 
 import core.api.addItemOrDrop
-import core.api.hasLevelStat
 import core.api.rewardXP
 import core.api.sendItemOnInterface
 import core.game.node.entity.player.Player
@@ -17,7 +16,9 @@ import org.rs.consts.Vars
  * Represents the Sea slug quest.
  *
  * Sources:
- * - [YouTube](https://www.youtube.com/watch?v=MlBZXxD5yq4)
+ * - [YouTube #1](https://www.youtube.com/watch?v=MlBZXxD5yq4)
+ * - [YouTube #2](https://youtu.be/FmVIqJFP91Q?si=IiIYFT25jPYwkFUH)
+ * - [YouTube #3](https://www.youtube.com/watch?v=Xh-tE6Bdv1U)
  */
 @Initializable
 class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PROGRESS_159, 0, 1, 13) {
@@ -37,7 +38,7 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line++
         }
 
-        if (stage == 1) {
+        if (stage == 2) {
             line(player, "I have spoken to !!Caroline?? and agreed to help.", line++)
             line++
         }
@@ -131,7 +132,7 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line(player, "I've created an opening to let Kennith escape", line++, true)
             line(player, "Kennith can't get downstairs without some help", line++, true)
             line++
-            line(player, "I've !!used the Crane?? to lower Kennith into the !!boat??.", line++)
+            line(player, "I've !!used the Crane?? to lower !!Kennith?? into the !!boat??.", line++)
             line++
         }
 
@@ -171,7 +172,7 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
         drawReward(player, "7175 Fishing XP", ln++)
         drawReward(player, "Oyster pearls", ln)
         rewardXP(player, Skills.FISHING, 7175.0)
-        addItemOrDrop(player, Items.OYSTER_PEARLS_413)
+        addItemOrDrop(player, Items.OYSTER_PEARLS_413, 1)
     }
 
     override fun newInstance(`object`: Any?): Quest = this
