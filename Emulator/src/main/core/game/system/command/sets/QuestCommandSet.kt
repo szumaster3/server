@@ -4,7 +4,8 @@ import content.region.kandarin.quest.arena.cutscene.JeremyRescueCutscene
 import content.region.kandarin.quest.phoenix.handlers.PhoenixLairListener.Companion.weavingRibbons
 import content.region.kandarin.quest.phoenix.custcene.WoundedPhoenixCutscene
 import content.region.kandarin.quest.phoenix.handlers.allTwigs
-import content.region.kandarin.quest.seaslug.cutscene.HolgartRepairBoatCutscene
+import content.region.kandarin.quest.seaslug.cutscene.HolgartCutscene
+import content.region.kandarin.quest.seaslug.cutscene.KennithCutscene
 import content.region.kandarin.quest.seaslug.cutscene.SafeAndSoundCutscene
 import core.api.Container
 import core.api.addItem
@@ -27,7 +28,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::holgart",
             description = "Sea slug - Repair boat (Cutscene)",
         ) { player, _ ->
-            HolgartRepairBoatCutscene(player).start()
+            HolgartCutscene(player).start()
         }
 
         define(
@@ -36,7 +37,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::kennith",
             description = "Sea slug - Saving kennith (Cutscene)",
         ) { player, _ ->
-            SafeAndSoundCutscene(player).start()
+            KennithCutscene(player).start()
         }
 
         define(

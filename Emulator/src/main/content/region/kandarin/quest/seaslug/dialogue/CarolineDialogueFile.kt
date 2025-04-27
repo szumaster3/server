@@ -38,19 +38,11 @@ class CarolineDialogueFile : DialogueFile() {
                     5 -> player(FaceAnim.ASKING, "Maybe the post was lost!").also { stage++ }
                     6 -> npc(FaceAnim.WORRIED, "Maybe, but no-one's heard from the other fishermen on", "the platform. Their families are becoming quite", "concerned.").also { stage++ }
                     7 -> npc(FaceAnim.ASKING, "Is there any chance you could visit the platform and", "find out what's going on?").also { stage++ }
-                    8 -> if (getStatLevel(player!!, Skills.FIREMAKING) < 30) {
-                        end()
-                        player("I'm sorry, I'm too busy.")
-                        sendMessage(player!!, "You do not have the requirements to start Sea Slug.")
-                    } else {
-                        options("I suppose so, how do I get there?", "I'm sorry, I'm too busy.").also { stage++ }
-                    }
-
+                    8 -> options("I suppose so, how do I get there?", "I'm sorry, I'm too busy.").also { stage++ }
                     9 -> when (buttonID) {
                         1 -> player(FaceAnim.ASKING, "I suppose so, how do I get there?").also { stage++ }
                         2 -> player(FaceAnim.NEUTRAL, "I'm sorry, I'm too busy.").also { stage = END_DIALOGUE }
                     }
-
                     10 -> npc(FaceAnim.HALF_GUILTY, "That's very good of you ${player!!.username}. My friend Holgart", "wil take you there.").also { stage++ }
                     11 -> player("Ok, I'll go and see if they're ok.").also { stage++ }
                     12 -> npc(FaceAnim.HALF_GUILTY, "I'll reward you for your time. It'll give me peace of", "mind to know Kennith and my husband, Kent, are safe.").also { stage++ }

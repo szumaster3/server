@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.seaslug.handlers
 
-import content.region.kandarin.quest.seaslug.cutscene.SafeAndSoundCutscene
+import content.region.kandarin.quest.seaslug.cutscene.KennithCutscene
 import content.region.kandarin.quest.seaslug.dialogue.KennithDialogueFile
 import core.api.*
 import core.api.quest.getQuestStage
@@ -9,6 +9,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
 import org.rs.consts.*
@@ -66,6 +67,12 @@ class SeaSlugListener : InteractionListener {
                 return@on true
             }
 
+            if(getStatLevel(player, Skills.FIREMAKING) < 30) {
+                sendMessage(player, "You rub together the dry sticks but nothing happens.")
+                sendMessage(player, "You need a Firemaking level of 30 or above.")
+                return@on true
+            }
+
             if (removeItem(player, UNLIT_TORCH)) {
                 sendMessage(player, "You rub together the dry sticks and the sticks catch alight.")
                 sendMessageWithDelay(player, "You place the smoulding twigs to your torch.", 1)
@@ -75,6 +82,34 @@ class SeaSlugListener : InteractionListener {
                 setQuestStage(player, Quests.SEA_SLUG, 20)
             }
             return@on true
+        }
+
+        /*
+         * Handles using lit torch on sea slug.
+         */
+
+        onUseWith(IntType.NPC, LIT_TORCH, SEA_SLUG) { player, _, _ ->
+            sendMessage(player, "The sea slug curls up into its shell.")
+            return@onUseWith true
+        }
+
+        /*
+         * Handles using lit torch on fisherman NPCs.
+         */
+
+        onUseWith(IntType.NPC, LIT_TORCH, *FISHERMAN) { player, _, _ ->
+            sendMessage(player, "The fisherman covers his face.")
+            sendMessage(player, "He seems afraid of your torch.")
+            return@onUseWith true
+        }
+
+        /*
+         * Handles using lit torch on ice cube.
+         */
+
+        onUseWith(IntType.NPC, LIT_TORCH, Scenery.ICE_CUBE_18400) { player, _, _ ->
+            sendMessage(player, "Nothing interesting happens.")
+            return@onUseWith true
         }
 
         /*
@@ -106,7 +141,9 @@ class SeaSlugListener : InteractionListener {
         on(CRANE, IntType.SCENERY, "rotate") { player, _ ->
             if (getQuestStage(player, Quests.SEA_SLUG) == 30) {
                 playAudio(player, Sounds.SLUG_CRANE_TURN_3021)
-                SafeAndSoundCutscene(player).start()
+                KennithCutscene(player).start()
+            } else {
+                sendMessage(player, "You rotate the crane around.")
             }
             return@on true
         }
@@ -207,5 +244,7 @@ class SeaSlugListener : InteractionListener {
         private const val POT_OF_FLOUR = Items.POT_OF_FLOUR_1933
         private const val SWAMP_TAR = Items.SWAMP_TAR_1939
         private const val RAW_SWAMP_PASTE = Items.RAW_SWAMP_PASTE_1940
+
+        val FISHERMAN = intArrayOf(NPCs.FISHERMAN_702, NPCs.FISHERMAN_703, NPCs.FISHERMAN_704)
     }
 }

@@ -14,7 +14,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import org.rs.consts.Scenery
 
-class SafeAndSoundCutscene(
+class KennithCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {

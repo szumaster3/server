@@ -85,6 +85,7 @@ class KentDialogue(
                 )
             }
             100 -> npc(FaceAnim.HALF_GUILTY, "Oh my, I must get back to shore.").also { stage = END_DIALOGUE }
+
             200 -> player("Hello again Kent.").also { stage++ }
             201 -> npcl(FaceAnim.FRIENDLY, "I never did get the chance to thank you properly for saving Kennith and myself.").also { stage++ }
             202 -> playerl(FaceAnim.FRIENDLY, "Oh, don't be silly, it was nothing really.").also { stage++ }

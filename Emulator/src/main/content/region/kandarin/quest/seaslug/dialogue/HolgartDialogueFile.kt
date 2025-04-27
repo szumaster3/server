@@ -1,7 +1,7 @@
 package content.region.kandarin.quest.seaslug.dialogue
 
 import content.region.kandarin.handlers.FishingPlatform
-import content.region.kandarin.quest.seaslug.cutscene.HolgartRepairBoatCutscene
+import content.region.kandarin.quest.seaslug.cutscene.HolgartCutscene
 import core.api.Container
 import core.api.inInventory
 import core.api.quest.getQuestStage
@@ -59,7 +59,7 @@ class HolgartDialogueFile : DialogueFile() {
 
                     13 -> {
                         end()
-                        HolgartRepairBoatCutscene(player!!).start()
+                        HolgartCutscene(player!!).start()
                     }
 
                     20 -> {
@@ -84,7 +84,7 @@ class HolgartDialogueFile : DialogueFile() {
                     3 -> sendItemDialogue(player!!, Items.SWAMP_PASTE_1941, "You give Holgart the swamp paste.").also { stage++ }
                     4 -> {
                         end()
-                        HolgartRepairBoatCutscene(player!!).start()
+                        HolgartCutscene(player!!).start()
                     }
                 }
             }

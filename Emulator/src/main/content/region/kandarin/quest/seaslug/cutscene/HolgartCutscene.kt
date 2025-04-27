@@ -12,7 +12,7 @@ import org.rs.consts.Animations
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class HolgartRepairBoatCutscene(
+class HolgartCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {

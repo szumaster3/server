@@ -15186,5 +15186,9 @@
   {
     "examine": "A table with fish on.",
     "ids": "14041"
+  },
+  {
+    "examine": "Ice, ice, baby.",
+    "ids": "18400"
   }
 ]

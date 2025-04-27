@@ -109,7 +109,7 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line(player, "I should find a way of lighting this damp torch.", line++, true)
             line++
             line(player, "I've created an opening to let Kennith escape", line++)
-            line(player, "Kennith can't get downstairs without some help", line++)
+            line(player, "Kennith can't get downstairs without some help.", line++)
             line++
         }
 
@@ -130,7 +130,7 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line(player, "I should find a way of lighting this damp torch.", line++, true)
             line++
             line(player, "I've created an opening to let Kennith escape", line++, true)
-            line(player, "Kennith can't get downstairs without some help", line++, true)
+            line(player, "Kennith can't get downstairs without some help.", line++, true)
             line++
             line(player, "I've !!used the Crane?? to lower !!Kennith?? into the !!boat??.", line++)
             line++
@@ -153,12 +153,12 @@ class SeaSlug : Quest(Quests.SEA_SLUG, 109, 108, 1, Vars.VARP_QUEST_SEA_SLUG_PRO
             line(player, "I should find a way of lighting this damp torch.", line++, true)
             line++
             line(player, "I've created an opening to let Kennith escape", line++, true)
-            line(player, "Kennith can't get downstairs without some help", line++, true)
+            line(player, "Kennith can't get downstairs without some help.", line++, true)
             line++
             line(player, "I've !!used the Crane?? to lower Kennith into the !!boat??.", line++, true)
             line++
             line(player, "I've spoken to !!Caroline?? and she thanked me", line++, true)
-            line(player, "for !!rescuing her family?? from the !!Sea Slugs??", line++, true)
+            line(player, "for !!rescuing her family?? from the !!Sea Slugs??.", line++, true)
             line++
             line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
         }

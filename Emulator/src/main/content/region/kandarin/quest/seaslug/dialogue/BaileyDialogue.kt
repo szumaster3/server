@@ -1,10 +1,12 @@
 package content.region.kandarin.quest.seaslug.dialogue
 
 import core.api.addItemOrDrop
+import core.api.freeSlots
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete
 import core.api.quest.setQuestStage
 import core.api.sendItemDialogue
+import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -33,8 +35,8 @@ class BaileyDialogue(
             // Things Are Heating Up - second talk.
             getQuestStage(player, Quests.SEA_SLUG) >= 20 -> player("I've managed to light the torch.").also { stage = 200 }
             // Post-quest dialogue
-            isQuestComplete(player, Quests.SEA_SLUG) -> player("")
-
+            isQuestComplete(player, Quests.SEA_SLUG) -> player("Hello Bailey.").also { stage = 205 }
+            // Start.
             else -> player("Hello there.")
         }
         return true
@@ -71,17 +73,25 @@ class BaileyDialogue(
             103 -> player("I need to get Kennith off this platform, but I can't get", "past the fishermen.").also { stage++ }
             104 -> npc(FaceAnim.NEUTRAL, "The sea slugs are scared of heat, I figured that out", "when I tried to cook them.").also { stage++ }
             105 -> npc("Here.").also { stage++ }
-            106 -> sendItemDialogue(player, Items.UNLIT_TORCH_596, "Bailey gives you a torch.").also {
-                addItemOrDrop(player, Items.UNLIT_TORCH_596)
-                stage++
+            106 -> {
+                sendItemDialogue(player, Items.UNLIT_TORCH_596, "Bailey gives you a torch.").also {
+                    if(freeSlots(player) == 0) {
+                        sendMessage(player, "The unlit torch is dropped to the ground.")
+                    }
+                    addItemOrDrop(player, Items.UNLIT_TORCH_596)
+                    stage++
+                }
             }
-
             107 -> npc(FaceAnim.NEUTRAL, "I doubt the fishermen will come near you if you can", "get this torch lit.").also { stage++ }
             108 -> npc(FaceAnim.NEUTRAL, "The only problem is all the wood and flint are damp... I", "can't light a thing!").also { stage = END_DIALOGUE }
             200 -> npc("Well done traveller, you'd better get Kennith", "out of here soon.").also { stage++ }
             201 -> npc(FaceAnim.NEUTRAL, "The fishermen are becoming stranger by the minute, ", "and they keep pulling up those blasted sea slugs.").also { stage++ }
             202 -> player("Don't worry I'm working on it.").also { stage++ }
             203 -> npc(FaceAnim.NEUTRAL, "Just be sure to watch your back. The fishermen", "seem to have taken notice of you.").also { stage = END_DIALOGUE }
+
+            205 -> npcl(FaceAnim.HAPPY, "Well hello again ${player.username}. What brings you back out here?").also { stage++ }
+            206 -> player("Just looking around.").also { stage++ }
+            207 -> npc(FaceAnim.NEUTRAL, "Well don't go touching any of those blasted sea slugs.").also { stage = END_DIALOGUE }
         }
         return true
     }
