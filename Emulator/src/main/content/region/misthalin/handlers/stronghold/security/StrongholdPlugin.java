@@ -14,7 +14,6 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -23,9 +22,6 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
-import core.net.packet.PacketRepository;
-import core.net.packet.context.MusicContext;
-import core.net.packet.out.MusicPacket;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -54,12 +50,8 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         ZoneBuilder.configure(this);
-        ClassScanner.definePlugin(new ExplorerDialogue());
         ClassScanner.definePlugin(new StrongholdDialogue());
-        ClassScanner.definePlugin(new GrainOfPlentyDialogue());
-        ClassScanner.definePlugin(new GiftOfPeaceDialogue());
         ClassScanner.definePlugin(new CradleOfLifeDialogue());
-        ClassScanner.definePlugin(new BoxOfHealthDialogue());
         ClassScanner.definePlugin(new OptionHandler() {
             @Override
             public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -138,43 +130,6 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     } else {
                         ClimbActionHandler.climb(player, new Animation(Animations.MULTI_BEND_OVER_827), Location.create(2358, 5215, 0));
                     }
-                    return true;
-                case 16135:// Gift of Peace 1st level
-                    if (player.getSavedData().globalData.hasStrongholdReward(1)) {
-                        sendDialogueLines(player, "You have already claimed your reward from this level.");
-                    } else {
-                        playAudio(player, Sounds.DOOR_CREAK_61);
-                        PacketRepository.send(MusicPacket.class, new MusicContext(player, 157, true));
-                        player.getDialogueInterpreter().open(54678);
-                    }
-                    return true;
-                case 16118:// Box of health 3rd level
-                    if (player.getSavedData().globalData.hasStrongholdReward(3)) {
-                        sendDialogueLines(player, "You have already claimed your reward from this level.");
-                    } else {
-                        playAudio(player, Sounds.DOOR_CREAK_61);
-                        PacketRepository.send(MusicPacket.class, new MusicContext(player, 177, true));
-                        player.getDialogueInterpreter().open(96878);
-                    }
-                    return true;
-                case 16077:// Grain of Plenty 2nd level
-                    if (player.getSavedData().globalData.hasStrongholdReward(2)) {
-                        sendDialogueLines(player, "You have already claimed your reward from this level.");
-                    } else {
-                        playAudio(player, Sounds.DOOR_CREAK_61);
-                        PacketRepository.send(MusicPacket.class, new MusicContext(player, 179, true));
-                        player.getDialogueInterpreter().open(56875);
-                    }
-                    return true;
-                case 16047:// Cradle of Life 4th level
-                    if (!player.getSavedData().globalData.hasStrongholdReward(4)) {
-                        PacketRepository.send(MusicPacket.class, new MusicContext(player, 158, true));
-                    }
-                    playAudio(player, Sounds.SOS_CHOIR_1246);
-                    player.getDialogueInterpreter().open(96873);
-                    return true;
-                case 16152:// skeleton
-                    player.getDialogueInterpreter().open(16152);
                     return true;
                 case 16150:
                 case 16082:
@@ -884,69 +839,6 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
         @Override
         public int[] getIds() {
             return new int[]{DialogueInterpreter.getDialogueKey("strong-hold")};
-        }
-
-    }
-
-    /**
-     * Explorer dialogue.
-     */
-    public static final class ExplorerDialogue extends Dialogue {
-        private static final Item STRONGHOLD_NOTES = new Item(9004);
-        private static final Animation ANIMATION = new Animation(881);
-
-        /**
-         * Instantiates a new Explorer dialogue.
-         *
-         * @param player the player
-         */
-        public ExplorerDialogue(final Player player) {
-            super(player);
-        }
-
-        /**
-         * Instantiates a new Explorer dialogue.
-         */
-        public ExplorerDialogue() {
-
-        }
-
-        @Override
-        public Dialogue newInstance(Player player) {
-            return new ExplorerDialogue(player);
-        }
-
-        @Override
-        public boolean open(Object... args) {
-            player.animate(ANIMATION);
-            if (player.getInventory().containsItem(STRONGHOLD_NOTES) || player.getBank().containsItem(STRONGHOLD_NOTES)) {
-                player.getPacketDispatch().sendMessage("You don't find anything.");
-                end();
-                return true;
-            }
-            interpreter.sendDialogue("You rummage around in the dead explorer's bag.....");
-            stage = 0;
-            return true;
-        }
-
-        @Override
-        public boolean handle(int interfaceId, int buttonId) {
-            switch (stage) {
-                case 0:
-                    interpreter.sendItemMessage(STRONGHOLD_NOTES, "You find a book of hand written notes.");
-                    stage = 1;
-                    break;
-                case 1:
-                    player.getInventory().add(STRONGHOLD_NOTES, player);
-                    end();
-                    break;
-            }
-            return true;
-        }
-
-        @Override
-        public int[] getIds() {
-            return new int[]{16152};
         }
 
     }
