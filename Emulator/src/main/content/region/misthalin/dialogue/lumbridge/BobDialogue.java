@@ -66,7 +66,7 @@ public final class BobDialogue extends Dialogue {
                         stage = 757;
                         break;
                     case 2:
-                        player("On second throughts, no thanks.");
+                        player("On second thoughts, no thanks.");
                         stage = 756;
                         break;
                 }
@@ -204,7 +204,7 @@ public final class BobDialogue extends Dialogue {
                 }
                 break;
             case 110:
-                npc("Ah, well it's a diary that helps you keep track of", "particular achievements you've made in the world of " + GameWorld.getSettings().getName() + ". In Lumbridge and Draynor i can help you", "discover some very useful things indeed.");
+                npcl(FaceAnim.FRIENDLY, "Ah, well it's a diary that helps you keep track of particular achievements you've made in the world of " + GameWorld.getSettings().getName() + ". In Lumbridge and Draynor i can help you discover some very useful things indeed.");
                 stage++;
                 break;
             case 111:
@@ -254,7 +254,7 @@ public final class BobDialogue extends Dialogue {
             case 160:
                 Diary.grantReplacement(player, DiaryType.LUMBRIDGE, level);
                 npc("You better be more careful this time.");
-                stage = -1;
+                stage = 21;
                 break;
         }
 
