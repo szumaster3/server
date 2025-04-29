@@ -132452,7 +132452,7 @@
     "remove_sleeves": "true",
     "name": "Agile top",
     "archery_ticket_price": "0",
-    "id": "14707",
+    "id": "14696",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
@@ -132463,7 +132463,7 @@
     "name": "Agile top",
     "archery_ticket_price": "0",
     "weight": "0.3",
-    "id": "14708",
+    "id": "14697",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "equipment_slot": "4"
@@ -132477,7 +132477,7 @@
     "destroy": "true",
     "archery_ticket_price": "0",
     "weight": "0.3",
-    "id": "14709",
+    "id": "14698",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "equipment_slot": "7"
@@ -132489,7 +132489,7 @@
     "name": "Agile legs",
     "archery_ticket_price": "0",
     "weight": "0.3",
-    "id": "14710",
+    "id": "14699",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "equipment_slot": "7"

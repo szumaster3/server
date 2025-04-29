@@ -59546,5 +59546,19 @@
     "ids": "4440",
     "description": "Stag (level: 15)",
     "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "195,196",
+    "description": "Bandit Camp guards (Level-22)",
+    "main": []
   }
 ]

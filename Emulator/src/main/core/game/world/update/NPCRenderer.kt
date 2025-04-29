@@ -8,7 +8,15 @@ import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
 import java.nio.ByteBuffer
 
+/**
+ * The NPC renderer.
+ * @author Emperor
+ */
 object NPCRenderer {
+    /**
+     * Handles the NPC rendering for a player.
+     * @param player The player.
+     */
     @JvmStatic
     fun render(player: Player) {
         val buffer = IoBuffer(32, PacketHeader.SHORT)
@@ -19,28 +27,17 @@ object NPCRenderer {
         buffer.putBits(8, localNPCs.size)
         val toRemove: MutableList<NPC> = ArrayList()
         val it: Iterator<NPC> = localNPCs.iterator()
-
-        // Loop through current NPCs and determine which need to be removed or updated
         while (it.hasNext()) {
             val npc = it.next()
             val withinDistance = player.location.withinDistance(npc.location)
-
-            // Check if the NPC should be removed or updated
             if (npc.isHidden(player) || !withinDistance || npc.properties.isTeleporting) {
                 buffer.putBits(1, 1).putBits(2, 3)
                 toRemove.add(npc)
-
-                // Remove tolerance if NPC is out of range
                 if (!withinDistance && npc.aggressiveHandler != null) {
                     npc.aggressiveHandler.removeTolerance(player.index)
                 }
             } else if (npc.walkingQueue.runDir != -1) {
-                buffer
-                    .putBits(
-                        1,
-                        1,
-                    ).putBits(2, 2)
-                    .putBits(3, npc.walkingQueue.walkDir)
+                buffer.putBits(1, 1).putBits(2, 2).putBits(3, npc.walkingQueue.walkDir)
                     .putBits(3, npc.walkingQueue.runDir)
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
             } else if (npc.walkingQueue.walkDir != -1) {
@@ -53,11 +50,7 @@ object NPCRenderer {
                 buffer.putBits(1, 0)
             }
         }
-
-        // Remove NPCs that are no longer within range
         localNPCs.removeAll(toRemove)
-
-        // Add any new NPCs to the local NPCs list
         for (npc in RegionManager.getLocalNpcs(player)) {
             if (localNPCs.size >= 255) {
                 break
@@ -65,13 +58,7 @@ object NPCRenderer {
             if (localNPCs.contains(npc) || npc.isHidden(player)) {
                 continue
             }
-
-            // Update NPC info and add to local NPC list
-            buffer
-                .putBits(
-                    15,
-                    npc.index,
-                ).putBits(1, if (npc.properties.isTeleporting) 1 else 0)
+            buffer.putBits(15, npc.index).putBits(1, if (npc.properties.isTeleporting) 1 else 0)
                 .putBits(3, npc.direction.ordinal)
             flagMaskUpdate(player, buffer, maskBuffer, npc, true)
             var offsetX = npc.location.x - player.location.x
@@ -85,15 +72,11 @@ object NPCRenderer {
             buffer.putBits(5, offsetY)
             buffer.putBits(14, npc.id)
             buffer.putBits(5, offsetX)
-
-            // Update NPC aggression tolerance if necessary
             if (npc.aggressiveHandler != null) {
                 npc.aggressiveHandler.playerTolerance[player.index] = GameWorld.ticks
             }
             localNPCs.add(npc)
         }
-
-        // Finalize mask data and send the update
         val masks = maskBuffer.toByteBuffer()
         masks.flip()
         if (masks.hasRemaining()) {
@@ -106,13 +89,12 @@ object NPCRenderer {
         player.session.write(buffer)
     }
 
-    private fun flagMaskUpdate(
-        player: Player,
-        buffer: IoBuffer,
-        maskBuffer: IoBuffer,
-        npc: NPC,
-        sync: Boolean,
-    ) {
+    /**
+     * Sets the mask update flag.
+     * @param buffer The buffer to write on.
+     * @param npc The NPC.
+     */
+    private fun flagMaskUpdate(player: Player, buffer: IoBuffer, maskBuffer: IoBuffer, npc: NPC, sync: Boolean) {
         if (npc.updateMasks.isUpdateRequired) {
             buffer.putBits(1, 1)
             writeMaskUpdates(player, maskBuffer, npc, sync)
@@ -121,12 +103,13 @@ object NPCRenderer {
         }
     }
 
-    fun writeMaskUpdates(
-        player: Player?,
-        maskBuffer: IoBuffer?,
-        npc: NPC,
-        sync: Boolean,
-    ) {
+    /**
+     * Writes the mask updates.
+     * @param maskBuffer The mask buffer to write on.
+     * @param npc The NPC to update.
+     * @param sync If called upon synchronization.
+     */
+    fun writeMaskUpdates(player: Player?, maskBuffer: IoBuffer?, npc: NPC, sync: Boolean) {
         if (sync) {
             npc.updateMasks.writeSynced(player, npc, maskBuffer!!, true)
         } else {

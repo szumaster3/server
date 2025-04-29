@@ -2,11 +2,11 @@ package content.region.kandarin.miniquest.zaros
 
 import content.data.GameAttributes
 import content.global.skill.summoning.familiar.BurdenBeast
-import core.api.*
-import core.game.dialogue.FaceAnim
+import core.api.getAttribute
+import core.api.inBank
+import core.api.inEquipment
+import core.api.inInventory
 import core.game.node.entity.player.Player
-import core.game.world.map.Location
-import org.rs.consts.NPCs
 
 /**
  * The Curse of Zaros (miniquest).

@@ -172,7 +172,7 @@ class GunnjornDialogue(
                 val firstTalk = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_GUNNJORN_TALK, false)
                 val perfectLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_PERFECT_LAPS, 0)
                 val completeLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, false)
-                val hasAgileTop = hasAnItem(player, Items.AGILE_TOP_14707).container != null
+                val hasAgileTop = hasAnItem(player, 14696).container != null
 
                 when {
                     completeLaps && !firstTalk && !hasAgileTop -> {
@@ -204,7 +204,7 @@ class GunnjornDialogue(
                     return true
                 }
                 npcl (FaceAnim.HAPPY, "There you go. Enjoy!")
-                addItem(player, Items.AGILE_TOP_14707)
+                addItem(player, 14696)
                 stage = END_DIALOGUE
             }
             /*
@@ -268,7 +268,7 @@ class GunnjornDialogue(
                     return true
                 }
                 npcl(FaceAnim.HAPPY, "Here you go.")
-                addItem(player, Items.AGILE_TOP_14707)
+                addItem(player, 14696)
                 stage = END_DIALOGUE
             }
         }

@@ -22,25 +22,28 @@ import java.util.Set;
 public final class ZoneMonitor {
 
     /**
-     * The Dragonstone teleport jewellery.
+     * Represents the jewellery that allows teleporting out from the Wilderness at level 30 or below.
      */
-    static final Set<Integer> DRAGONSTONE_TELEPORT_JEWELLERY = Set.of(
-        Items.AMULET_OF_GLORY_1704,
-        Items.AMULET_OF_GLORY1_1706,
-        Items.AMULET_OF_GLORY2_1708,
-        Items.AMULET_OF_GLORY3_1710,
-        Items.AMULET_OF_GLORYT_10362,
-        Items.AMULET_OF_GLORYT1_10360,
-        Items.AMULET_OF_GLORYT2_10358,
-        Items.AMULET_OF_GLORYT3_10356,
-        Items.SKILLS_NECKLACE_11113,
-        Items.SKILLS_NECKLACE1_11111,
-        Items.SKILLS_NECKLACE2_11109,
-        Items.SKILLS_NECKLACE3_11107,
-        Items.COMBAT_BRACELET_11126,
-        Items.COMBAT_BRACELET1_11124,
-        Items.COMBAT_BRACELET2_11122,
-        Items.COMBAT_BRACELET3_11120
+    static final Set<Integer> WILDERNESS_LEVEL_30_TELEPORT_ITEMS = Set.of(
+            Items.AMULET_OF_GLORY_1704,
+            Items.AMULET_OF_GLORY1_1706,
+            Items.AMULET_OF_GLORY2_1708,
+            Items.AMULET_OF_GLORY3_1710,
+            Items.AMULET_OF_GLORYT_10362,
+            Items.AMULET_OF_GLORYT1_10360,
+            Items.AMULET_OF_GLORYT2_10358,
+            Items.AMULET_OF_GLORYT3_10356,
+            Items.SKILLS_NECKLACE_11113,
+            Items.SKILLS_NECKLACE1_11111,
+            Items.SKILLS_NECKLACE2_11109,
+            Items.SKILLS_NECKLACE3_11107,
+            Items.COMBAT_BRACELET_11126,
+            Items.COMBAT_BRACELET1_11124,
+            Items.COMBAT_BRACELET2_11122,
+            Items.COMBAT_BRACELET3_11120,
+            Items.PHARAOHS_SCEPTRE_9044,
+            Items.PHARAOHS_SCEPTRE_9046,
+            Items.PHARAOHS_SCEPTRE_9048
     );
 
     private final Entity entity;
@@ -248,7 +251,7 @@ public final class ZoneMonitor {
     }
 
     private boolean canTeleportByJewellery(int type, Node node) {
-        if (type != 1 || !DRAGONSTONE_TELEPORT_JEWELLERY.contains(node.asItem().getId())) {
+        if (type != 1 || !WILDERNESS_LEVEL_30_TELEPORT_ITEMS.contains(node.asItem().getId())) {
             return false;
         }
         if (entity.timers.getTimer("teleblock") != null)

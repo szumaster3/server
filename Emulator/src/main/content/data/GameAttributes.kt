@@ -300,4 +300,5 @@ internal object GameAttributes {
     // Curse of zaros mini-quest
     const val ZAROS_PATH_SEQUENCE = "/save:zaros:sequence"
     const val ZAROS_COMPLETE = "/save:zaros:complete"
+    const val ZAROS_NPC_TALK = "/save:zaros:npc-talked"
 }

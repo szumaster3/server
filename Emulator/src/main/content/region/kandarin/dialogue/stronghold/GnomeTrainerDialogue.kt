@@ -114,7 +114,7 @@ class GnomeTrainerDialogue(
                 val count = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_PERFECT_LAPS, 0)
                 val firstTalk = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_GNOME_TALK, false)
                 val completeLaps = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_COURSE_REWARD, false)
-                val hasAgileLegs = hasAnItem(player, 14709).container != null
+                val hasAgileLegs = hasAnItem(player, 14698).container != null
 
                 when {
                     completeLaps && !firstTalk && !hasAgileLegs -> {
@@ -150,7 +150,7 @@ class GnomeTrainerDialogue(
                     )
                     return true
                 }
-                addItem(player, 14709)
+                addItem(player, 14698)
                 npcl(FaceAnim.OLD_NORMAL, "There you go. Enjoy!")
             }
 
@@ -165,7 +165,7 @@ class GnomeTrainerDialogue(
                     )
                     return true
                 }
-                addItem(player, 14709)
+                addItem(player, 14698)
                 npcl(FaceAnim.OLD_NORMAL, "Here you go, try not to lose them.")
             }
 
