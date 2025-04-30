@@ -97,8 +97,8 @@ class ElementalWorkshopListeners : InteractionListener {
                 sendItemDialogue(
                     player,
                     Item(Items.SLASHED_BOOK_9715),
-                    "There is a book here titled 'The Elemental Shield'. " +
-                        "It can stay here, as you have a copy in your backpack.",
+                    "There is a book here titled 'The Elemental Shield'. It" +
+                    "can stay here, as you have a copy in your backpack.",
                 )
                 if (player.inventory.addIfDoesntHave(batteredKey)) {
                     sendItemDialogue(player, Item(Items.BATTERED_KEY_2887), "You also find a key.")
