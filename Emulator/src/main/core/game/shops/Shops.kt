@@ -225,7 +225,7 @@ class Shops :
 
         on(NPCs.FUR_TRADER_1316, IntType.NPC, "trade") { player, node ->
             if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "I don't sell to outerlanders.", FaceAnim.ANNOYED)
+                sendMessage(player, "Only Fremenniks may purchase furs here.")
                 return@on true
             }
             shopsByNpc[node.id]?.openFor(player)
