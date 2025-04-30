@@ -647,6 +647,9 @@ public class TeleportManager {
                         if (delay == 0) {
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
                             entity.graphics(new Graphics(308, 100, 50));
+                            if (entity instanceof Player) {
+                                playAudio(entity.asPlayer(), Sounds.TP_ALL_200);
+                            }
                         } else if (delay == 4) {
                             entity.getProperties().setTeleportLocation(Location.create(location));
                             entity.getAnimator().forceAnimation(new Animation(-1));

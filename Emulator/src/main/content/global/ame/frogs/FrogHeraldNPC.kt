@@ -9,7 +9,7 @@ import org.rs.consts.NPCs
 class FrogHeraldNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.FROG_2471) {
-    val phrases =
+    private val phrases =
         arrayOf(
             "@name, the Frog @gender needs your help.",
             "Greetings from the Frog @gender, @name!",

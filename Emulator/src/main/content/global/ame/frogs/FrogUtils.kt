@@ -9,13 +9,9 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
-import org.rs.consts.Animations
-import org.rs.consts.Components
-import org.rs.consts.Items
-import org.rs.consts.NPCs
+import org.rs.consts.*
 
 object FrogUtils {
-    const val ATTRIBUTE_FROG_RANDOM_EVENT = "frog:task"
     const val ATTRIBUTE_FROG_TASK_FAIL = "frog:fail"
 
     const val FROG_NPC = NPCs.FROG_2469
@@ -23,12 +19,12 @@ object FrogUtils {
     const val FROG_PRINCE_NPC = NPCs.FROG_PRINCE_2474
     const val FROG_PRINCESS_NPC = NPCs.FROG_PRINCESS_2475
 
-    const val TRANSFORMATION_ANIM = Animations.GET_INTO_FROG_POSITION_2377
-    const val FIRST_PHASE_TRANSFORM_ANIM = 2374
-    const val SECOND_PHASE_TRANSFORM_ANIM = 2375
-    const val BLOW_KISS_ANIM = 1374
+    const val TRANSFORM_INTO_FROG = Animations.GET_INTO_FROG_POSITION_2377
+    const val TRANSFORM_INTO_HUMAN = 2375
 
-    const val BLOW_KISS_GFX = 1702
+    const val FROG_KISS_ANIM = 2374
+    const val HUMAN_KISS_ANIM = Animations.HUMAN_BLOW_KISS_1374
+    const val HUMAN_KISS_GFX = Graphics.KISS_EMOTE_ORIGINAL_1702
 
     fun cleanup(player: Player) {
         player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
@@ -37,7 +33,6 @@ object FrogUtils {
         clearLogoutListener(player, RandomEvent.logout())
         removeAttributes(
             player,
-            ATTRIBUTE_FROG_RANDOM_EVENT,
             ATTRIBUTE_FROG_TASK_FAIL,
             RandomEvent.save(),
             RandomEvent.logout(),
@@ -60,21 +55,16 @@ object FrogUtils {
                         1 -> {
                             face(player, npc)
                             face(npc, player)
-
-                            animate(player, Animation(TRANSFORMATION_ANIM))
-                            animate(npc, Animation(FIRST_PHASE_TRANSFORM_ANIM))
+                            animate(npc, Animation(FROG_KISS_ANIM))
                         }
 
                         2 -> {
-                            animate(npc, Animation(SECOND_PHASE_TRANSFORM_ANIM))
-                            sendGraphics(org.rs.consts.Graphics.SPELL_SPLASH_85, npc.location)
+                            animate(npc, Animation(TRANSFORM_INTO_HUMAN))
+                            sendGraphics(Graphics.SPELL_SPLASH_85, npc.location)
                         }
 
                         3 -> {
-                            findLocalNPC(
-                                player,
-                                FROG_NPC,
-                            )!!.transform(if (player.isMale) FROG_PRINCESS_NPC else FROG_PRINCE_NPC)
+                            findLocalNPC(player, FROG_NPC)!!.transform(if (player.isMale) FROG_PRINCESS_NPC else FROG_PRINCE_NPC)
                         }
 
                         5 -> {
@@ -87,16 +77,11 @@ object FrogUtils {
                             )
                         }
 
-                        6 -> visualize(npc, BLOW_KISS_ANIM, BLOW_KISS_GFX)
-                        8 -> visualize(npc, BLOW_KISS_ANIM, BLOW_KISS_GFX)
-                        9 ->
-                            visualize(npc, BLOW_KISS_ANIM, BLOW_KISS_GFX).also {
-                                openInterface(
-                                    player,
-                                    Components.FADE_TO_BLACK_120,
-                                )
-                            }
-
+                        6 -> visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX)
+                        8 -> visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX)
+                        9 -> visualize(npc, HUMAN_KISS_ANIM, HUMAN_KISS_GFX).also {
+                            openInterface(player, Components.FADE_TO_BLACK_120)
+                        }
                         12 -> {
                             npc.reTransform()
                             cleanup(player)
