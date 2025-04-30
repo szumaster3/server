@@ -8,6 +8,10 @@ import core.game.world.GameWorld
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Scenery
+import core.game.node.item.Item
+import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
+import core.net.packet.out.ContainerPacket
 
 class BookcaseSpace :
     InteractionListener,
@@ -23,6 +27,17 @@ class BookcaseSpace :
                     55 + index * 2,
                 )
             }
+
+            PacketRepository.send(
+                ContainerPacket::class.java,
+                ContainerContext(
+                    player,
+                    BOOKCASE_INTERFACE,
+                    164, 30,
+                    bookDetails.map { Item(it.first) }.toTypedArray(),
+                    false
+                )
+            )
 
             return@onOpen true
         }
