@@ -23,8 +23,8 @@ class ContactListener : InteractionListener {
 
     override fun defineListeners() {
         on(BLOODY_PARCHMENT, IntType.ITEM, "Read") { player, _ ->
-            openInterface(player, BLOODY_SCROLL).also {
-                sendString(player, PARCHMENT_TEXT.joinToString("<br>"), BLOODY_SCROLL, 1)
+            openInterface(player, BLOODY_SCROLL_HD).also {
+                sendString(player, PARCHMENT_TEXT.joinToString("<br>"), BLOODY_SCROLL_HD, 1)
             }
             return@on true
         }
@@ -32,6 +32,7 @@ class ContactListener : InteractionListener {
 
     companion object {
         private const val BLOODY_PARCHMENT = Items.PARCHMENT_10585
-        private const val BLOODY_SCROLL = Components.CONTACT_SCROLL_BLOOD_498
+        private const val BLOODY_SCROLL_SD = Components.BLOODY_SCROLL_101
+        private const val BLOODY_SCROLL_HD = Components.CONTACT_SCROLL_BLOOD_498
     }
 }

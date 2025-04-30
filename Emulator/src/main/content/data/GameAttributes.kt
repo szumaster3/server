@@ -301,4 +301,8 @@ internal object GameAttributes {
     const val ZAROS_PATH_SEQUENCE = "/save:zaros:sequence"
     const val ZAROS_COMPLETE = "/save:zaros:complete"
     const val ZAROS_NPC_TALK = "/save:zaros:npc-talked"
+
+    // Ancient pages (lore)
+
+    const val LORE_ANCIENT_PAGES_TRANSCRIPT = "/save:ancient_page"
 }
