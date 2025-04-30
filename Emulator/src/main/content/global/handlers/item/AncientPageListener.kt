@@ -6,7 +6,6 @@ import content.global.handlers.iface.BookLine
 import content.global.handlers.iface.Page
 import content.global.handlers.iface.PageSet
 import core.api.*
-import core.game.dialogue.splitLines
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -308,6 +307,43 @@ class AncientPageListener : InteractionListener {
     private val ancientPages = (Items.ANCIENT_PAGE_11341..Items.ANCIENT_PAGE_11366).toIntArray()
     private val BLOODY_SCROLL_SD = Components.BLOODY_SCROLL_101
     private val BLOODY_SCROLL_HD = Components.CONTACT_SCROLL_BLOOD_498
+
+    val CONTENTS = mutableListOf<PageSet>()
+
+    private fun splitText(
+        message: String,
+        perLineLimit: Int = 29,
+    ): Array<String> {
+        val lines = mutableListOf<String>()
+        var currentLine = StringBuilder()
+
+        message.split(" ").forEach { word ->
+            if (currentLine.length + word.length + 1 <= perLineLimit) {
+                if (currentLine.isNotEmpty()) currentLine.append(" ")
+                currentLine.append(word)
+            } else {
+                lines.add(currentLine.toString())
+                currentLine.clear()
+                currentLine.append(word)
+            }
+        }
+        if (currentLine.isNotEmpty()) {
+            lines.add(currentLine.toString())
+        }
+
+        return lines.toTypedArray()
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    private fun display(
+        player: Player,
+        pageNum: Int,
+        buttonID: Int,
+    ): Boolean {
+        BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, "My notes", CONTENTS.toTypedArray())
+        return true
+    }
+
     override fun defineListeners() {
 
         /*
@@ -333,6 +369,68 @@ class AncientPageListener : InteractionListener {
                     sendString(player, pageContent, BLOODY_SCROLL_HD, 1)
                 }
             }
+            return@on true
+        }
+
+        /*
+         * Handles interaction with my notes.
+         */
+
+        on(Items.MY_NOTES_11339, IntType.ITEM, "read") { player, _ ->
+            val ownedPages = mutableSetOf<Int>()
+
+            for (i in 0..25) {
+                if (getAttribute(player, "${GameAttributes.LORE_ANCIENT_PAGES_TRANSCRIPT}:${Items.ANCIENT_PAGE_11341 + i}", false)) {
+                    ownedPages.add(i)
+                }
+            }
+
+            CONTENTS.clear()
+            ancientPageTranscripts // Generate content pages.
+                .mapIndexed { index, lines ->
+                    val cleanedLines = lines.filter { it.isNotBlank() }.map { it.trim() }
+                    val splitLines = cleanedLines.flatMap { line -> splitText(line).toList() }
+
+                    val isPageLeft = index % 2 == 0
+                    var pageID = if (isPageLeft) 55 else 66
+
+                    // Create book lines.
+                    val bookLines = splitLines.mapIndexed { lineIndex, text ->
+                        if (pageID + lineIndex > 76) {
+                            pageID = 55
+                        } else if (pageID + lineIndex > 65) {
+                            pageID = 66
+                        }
+                        BookLine(text, pageID + lineIndex)
+                    }
+
+                    if (bookLines.isNotEmpty()) {
+                        Page(*bookLines.toTypedArray())
+                    } else {
+                        null
+                    }
+                }
+                .filterNotNull()
+                .chunked(2) // Group pages into pairs.
+                .forEachIndexed { setIndex, pages ->
+                    val leftPageID = setIndex * 2 + 1
+                    val rightPageID = leftPageID + 1
+
+                    val leftPage = if (ownedPages.contains(leftPageID)) {
+                        pages.getOrElse(0) { return@forEachIndexed }
+                    } else {
+                        return@forEachIndexed
+                    }
+
+                    val rightPage = if (pages.size > 1 && ownedPages.contains(rightPageID)) {
+                        pages.getOrElse(1) { return@forEachIndexed }
+                    } else {
+                        return@forEachIndexed
+                    }
+                    CONTENTS.add(PageSet(leftPage, rightPage))
+                }
+
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
             return@on true
         }
     }
