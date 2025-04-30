@@ -12,6 +12,9 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 import org.rs.consts.Vars
 
+/**
+ * Represents the Tribal Totem quest.
+ */
 @Initializable
 class TribalTotem : Quest(Quests.TRIBAL_TOTEM, 126, 125, 1, Vars.VARP_QUEST_TRIBAL_TOTEM_PROGRESS_200, 0, 1, 5) {
     class SkillRequirement(

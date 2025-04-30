@@ -1,0 +1,88 @@
+package content.region.karamja.quest.totem.handlers
+
+import core.api.*
+import core.game.interaction.InterfaceListener
+import core.game.world.map.Location
+import org.rs.consts.Components
+
+/**
+ * Represents the Combination lock interface.
+ *
+ * Relations:
+ * - [Tribal Totem quest][content.region.karamja.quest.totem.TribalTotem]
+ */
+class CombinationLockInterface : InterfaceListener {
+    override fun defineInterfaceListeners() {
+        val LETTERS = arrayOf(
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        )
+
+        val LETTERS_BACK = arrayOf(17, 19, 21, 23)
+        val LETTERS_FORWARD = arrayOf(18, 20, 22, 24)
+        val LETTERS_POSITIONS = arrayOf(13, 14, 15, 16)
+
+        val DOORLOCKINTERFACE = Components.COMBI_LOCK_369
+
+        /*
+         * Handles init the letter values when interface is opened.
+         */
+
+        onOpen(DOORLOCKINTERFACE) { player, _ ->
+            for (i in 1..4) setAttribute(player, "tt-letter-$i", 0)
+            return@onOpen true
+        }
+
+        /*
+         * Handles cleanup when the interface is closed.
+         */
+        onClose(DOORLOCKINTERFACE) { player, _ ->
+            for (i in 1..4) removeAttribute(player, "tt-letter-$i")
+            return@onClose true
+        }
+
+        /*
+         * Handle button presses.
+         */
+
+        on(DOORLOCKINTERFACE) { player, _, _, buttonID, _, _ ->
+            val letterIndex = when (buttonID) {
+                in LETTERS_BACK -> LETTERS_BACK.indexOf(buttonID)
+                in LETTERS_FORWARD -> LETTERS_FORWARD.indexOf(buttonID)
+                else -> -1
+            }
+
+            if (letterIndex != -1) {
+                val letterKey = "tt-letter-${letterIndex + 1}"
+                val currentLetter = player.getAttribute(letterKey, 0)
+
+                val newLetter = if (buttonID in LETTERS_BACK) {
+                    (currentLetter - 1 + 26) % 26
+                } else {
+                    (currentLetter + 1) % 26
+                }
+
+                setAttribute(player, letterKey, newLetter)
+                sendString(player, LETTERS[newLetter], DOORLOCKINTERFACE, LETTERS_POSITIONS[letterIndex])
+            }
+
+            if (buttonID == 27) { // Enter button
+                val enteredCode = (1..4).joinToString("") {
+                    LETTERS[player.getAttribute("tt-letter-$it", 0)]
+                }
+
+                if (enteredCode == "KURT") {
+                    setAttribute(player, "/save:TT:DoorUnlocked", true)
+                    sendMessage(player, "You hear a satisfying click, signifying that the door has been unlocked.")
+                    closeInterface(player)
+                } else {
+                    sendMessage(player, "You hear a satisfying click, and then a worrying thunk.")
+                    sendMessage(player, "The floor opens up beneath you sending you plummeting down to the sewers.")
+                    teleport(player, Location.create(2641, 9721, 0))
+                    closeInterface(player)
+                }
+            }
+
+            return@on true
+        }
+    }
+}
