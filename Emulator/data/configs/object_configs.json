@@ -15298,5 +15298,9 @@
   {
     "examine": "A massive, crumbled cave entrance.",
     "ids": "37750"
+  },
+  {
+    "examine": "Apparently there's a lot of paperwork involved in running a Fishing Colony.",
+    "ids": "14971"
   }
 ]

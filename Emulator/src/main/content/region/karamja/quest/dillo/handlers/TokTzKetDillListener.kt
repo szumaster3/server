@@ -18,14 +18,21 @@ class TokTzKetDillListener : InteractionListener {
          */
 
         on(Scenery.BOOKCASE_24282, IntType.SCENERY, "search") { player, _ ->
+            val hasGuide = hasAnItem(player, Items.TZHAAR_TOURIST_GUIDE_13244).container != null
+
             sendMessage(player, "You search the bookcase...")
-            val hasAnBook = hasAnItem(player, Items.TZHAAR_TOURIST_GUIDE_13244).container != null
-            if (!hasAnBook) {
+
+            if (!hasGuide) {
                 sendMessage(player, "You find the TzHaar Tourist Guide.")
-                addItemOrDrop(player, Items.TZHAAR_TOURIST_GUIDE_13244)
+                if (freeSlots(player) == 0) {
+                    sendMessage(player, "...but you don't have enough room to take it.")
+                } else {
+                    addItemOrDrop(player, Items.TZHAAR_TOURIST_GUIDE_13244)
+                }
             } else {
                 sendMessage(player, "You don't find anything that you'd ever want to read.")
             }
+
             return@on true
         }
 

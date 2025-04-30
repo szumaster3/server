@@ -7,6 +7,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.map.Location
 import org.rs.consts.*
 
 class PiscatorisListener : InteractionListener {
@@ -14,11 +15,31 @@ class PiscatorisListener : InteractionListener {
         private const val NET_SCENERY = Scenery.NET_14973
         private const val EMPTY_NET_SCENERY = Scenery.NET_14972
         private const val KATHY_CORKAT = NPCs.KATHY_CORKAT_3831
+        private const val HERMANS_DESK = Scenery.HERMAN_S_DESK_14971
     }
 
     override fun defineListeners() {
         on(KATHY_CORKAT, IntType.NPC, "travel") { player, node ->
             RowingBoat.sail(player, node.asNpc())
+            return@on true
+        }
+
+        on(HERMANS_DESK, IntType.SCENERY, "search") { player, _ ->
+            val hasBook = hasAnItem(player, Items.TZHAAR_TOURIST_GUIDE_13244).container != null
+
+            sendMessage(player, "You search the herman's desk...")
+
+            if (!hasBook) {
+                sendMessage(player, "You find the 'Herman's book'.")
+                if (freeSlots(player) == 0) {
+                    sendMessage(player, "...but you don't have enough room to take it.")
+                } else {
+                    addItemOrDrop(player, Items.HERMANS_BOOK_7951)
+                }
+            } else {
+                sendMessage(player, "You search the herman's desk but find nothing.")
+            }
+
             return@on true
         }
 
@@ -49,6 +70,12 @@ class PiscatorisListener : InteractionListener {
                 },
             )
             return@on true
+        }
+    }
+
+    override fun defineDestinationOverrides() {
+        setDest(IntType.NPC, NPCs.HERMAN_CARANOS_3822) { _, _ ->
+            return@setDest Location.create(2354, 3681, 0)
         }
     }
 }
