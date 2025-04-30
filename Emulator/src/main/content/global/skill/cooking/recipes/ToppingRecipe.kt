@@ -216,7 +216,15 @@ class ToppingRecipe : InteractionListener {
         }
 
         /*
-         * Handles creating Mushroom & onion.
+         * Handles creating Mushroom & Onion by combining fried mushrooms and fried onions.
+         *
+         * Product:
+         *  - Mushroom and Onion
+         *
+         * Required Cooking Level: 57
+         *
+         * Ticks: 2 (1.2 seconds)
+         * Rewards: 120 Cooking XP
          */
 
         onUseWith(IntType.ITEM, FRIED_MUSHROOMS, FRIED_ONIONS) { player, used, with ->

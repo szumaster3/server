@@ -13,6 +13,10 @@ class PizzaRecipe : InteractionListener {
 
         /*
          * Handles creating a incomplete pizza.
+         *
+         * Requirements:
+         *  - Cooking Level:    Level 35 Cooking, +0.0 XP (using Tomato and Pizza Base)
+         *
          */
 
         onUseWith(IntType.ITEM, Items.PIZZA_BASE_2283, Items.TOMATO_1982) { player, used, with ->
@@ -33,6 +37,10 @@ class PizzaRecipe : InteractionListener {
 
         /*
          * Handles creating a uncooked pizza.
+         *
+         * Requirements:
+         *  - Cooking Level:    Level 35 Cooking, +0.0 XP (using Cheese and Incomplete Pizza)
+         *
          */
 
         onUseWith(IntType.ITEM, Items.CHEESE_1985, Items.INCOMPLETE_PIZZA_2285) { player, used, with ->

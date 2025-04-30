@@ -13,7 +13,15 @@ class StewRecipe : InteractionListener {
     override fun defineListeners() {
 
         /*
-         * Handles creating incomplete stews.
+         * Handles creating incomplete stews by combining stew ingredients with a bowl of water.
+         *
+         * Products:
+         *  - Potato Stew
+         *  - Meat Stew
+         *
+         * Required Cooking Level: 25
+         *
+         * Ticks: 2 (1.2 seconds)
          */
 
         onUseWith(IntType.ITEM, stewIngredients, BOWL_OF_WATER) { player, used, with ->
@@ -64,7 +72,14 @@ class StewRecipe : InteractionListener {
         }
 
         /*
-         * Handles creating an uncooked stew.
+         * Handles creating an uncooked stew by combining stew ingredients with incomplete stew.
+         *
+         * Product:
+         *  - Uncooked Stew
+         *
+         * Required Cooking Level: 25
+         *
+         * Ticks: 2 (1.2 seconds)
          */
 
         onUseWith(IntType.ITEM, stewIngredients, *incompleteStew) { player, used, with ->
@@ -110,7 +125,14 @@ class StewRecipe : InteractionListener {
         }
 
         /*
-         * Handles creating an uncooked curry using spice on stew.
+         * Handles creating an uncooked curry by adding spice to an uncooked stew.
+         *
+         * Product:
+         *  - Uncooked Curry
+         *
+         * Required Cooking Level: 60
+         *
+         * Ticks: 2 (1.2 seconds)
          */
 
         onUseWith(IntType.ITEM, UNCOOKED_STEW, SPICE) { player, used, with ->
@@ -152,7 +174,14 @@ class StewRecipe : InteractionListener {
         }
 
         /*
-         * Handles creating an uncooked curry using curry leaves.
+         * Handles creating an uncooked curry by adding curry leaves to an uncooked stew.
+         *
+         * Product:
+         *  - Uncooked Curry
+         *
+         * Required Cooking Level: 60
+         * Required Amount of Curry Leaves: 3
+         *
          */
 
         onUseWith(IntType.ITEM, CURRY_LEAF, UNCOOKED_STEW) { player, used, with ->

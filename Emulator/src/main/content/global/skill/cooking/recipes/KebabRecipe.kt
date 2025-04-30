@@ -114,6 +114,10 @@ class KebabRecipe : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles creating Onion & tomato.
+         */
+
         onUseWith(IntType.ITEM, CHOPPED_TOMATO, ONION) { player, used, with ->
             if (!inInventory(player, KNIFE)) {
                 sendMessage(player, "You need a knife to slice up the onion.")
