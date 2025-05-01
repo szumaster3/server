@@ -28444,6 +28444,11 @@
     "defence_animation": "1340"
   },
   {
+    "examine": "A lazy undertaker.",
+    "name": "Leo",
+    "id": "3508"
+  },
+  {
     "examine": "Chronicler and regaler of your piratical exploits.",
     "name": "Sorin",
     "id": "3509"

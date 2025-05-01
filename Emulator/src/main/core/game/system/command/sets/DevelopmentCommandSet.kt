@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
+import content.global.ame.grave.GravediggerListener
 import content.region.kandarin.handlers.barbtraining.BarbarianTraining
 import core.api.*
 import core.api.ui.closeDialogue
@@ -21,8 +22,10 @@ import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
 import core.tools.RED
+import core.tools.colorize
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.rs.consts.Components
 import org.rs.consts.Items
 
 @Initializable

@@ -112,6 +112,10 @@ internal object GameAttributes {
     const val CERTER_CORRECT = "random:certer_stage"
     const val CERTER_INDEX = "random:certer_index"
 
+    // Gravedigger random event.
+
+    const val GRAVEDIGGER_SCORE = "random:gravedigger:score"
+
     // Drill demon random event.
     const val DRILL_OFFSET = "/save:random:drill_offset"
     const val DRILL_TASK = "/save:random:drill_task"

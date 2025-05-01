@@ -9,6 +9,7 @@ import content.global.ame.eviltwin.MollyNPC
 import content.global.ame.freakyforest.FreakyForesterNPC
 import content.global.ame.frogs.FrogHeraldNPC
 import content.global.ame.genie.GenieNPC
+import content.global.ame.grave.LeoNPC
 import content.global.ame.lostandfound.LostAndFoundNPC
 import content.global.ame.maze.MazeNPC
 import content.global.ame.mime.MimeNPC
@@ -82,6 +83,7 @@ enum class RandomEvents(
     ),
 
     SWARM(npc = SwarmNPC()),
+    GRAVEDIGGER(npc = LeoNPC(), skillIds = intArrayOf(Skills.PRAYER)),
     SECURITY_GUARD(
         npc = SecurityGuardNPC(),
         skillIds =

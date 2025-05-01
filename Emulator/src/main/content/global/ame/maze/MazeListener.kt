@@ -122,12 +122,13 @@ class MazeListener : InteractionListener {
             queueScript(player, 6, QueueStrength.SOFT) {
                 calculateLoot(player)
                 clearLogoutListener(player, RandomEvent.logout())
+                player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
                 removeAttributes(
                     player,
+                    RandomEvent.save(),
                     GameAttributes.MAZE_ATTRIBUTE_TICKS_LEFT,
                     GameAttributes.MAZE_ATTRIBUTE_CHESTS_OPEN
                 )
-                player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
                 closeOverlay(player)
                 return@queueScript stopExecuting(player)
             }
