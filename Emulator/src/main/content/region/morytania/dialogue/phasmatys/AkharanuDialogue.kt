@@ -36,11 +36,10 @@ class AkharanuDialogue(
     ): Boolean {
         when (stage) {
             0 -> options("Why are you, errr, so stiff?", "Do you sell anything?").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("Why are you, errr, so stiff?").also { stage++ }
-                    2 -> player("Do you sell anything?").also { stage = 5 }
-                }
+            1 -> when (buttonId) {
+                1 -> player("Why are you, errr, so stiff?").also { stage++ }
+                2 -> player("Do you sell anything?").also { stage = 5 }
+            }
 
             2 -> npc(FaceAnim.FRIENDLY, "I have extremely severe arthritis. It really sucks.").also { stage++ }
             3 -> player("Oh. Well I'm sorry to hear that.").also { stage++ }

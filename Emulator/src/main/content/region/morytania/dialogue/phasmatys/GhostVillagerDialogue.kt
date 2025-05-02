@@ -14,6 +14,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Ghost Villager dialogue.
+ */
 @Initializable
 class GhostVillagerDialogue(
     player: Player? = null,
@@ -58,6 +61,7 @@ class GhostVillagerDialogue(
                     }
                 }
             }
+
             1 -> sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
         }
         return true

@@ -14,19 +14,11 @@ class AbidorCrankDialogue : DialogueFile() {
         buttonID: Int,
     ) {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.WORRIED,
-                    "Oh this is no good, you surely will not survive here. Let me take you back.",
-                ).also { stage++ }
+            0 -> npcl(FaceAnim.WORRIED, "Oh this is no good, you surely will not survive here. Let me take you back.").also { stage++ }
 
             1 -> {
                 end()
-                visualize(
-                    npc!!,
-                    Animations.CLAP_AND_RAISE_FIST_IN_AIR_1818,
-                    Graphics.TELEOTHER_CAST_343,
-                )
+                visualize(npc!!, Animations.CLAP_AND_RAISE_FIST_IN_AIR_1818, Graphics.TELEOTHER_CAST_343)
                 sendGraphics(Graphics.TELEOTHER_ACCEPT_342, player!!.location)
                 setAttribute(player!!, "teleporting-away", true)
                 queueScript(player!!, 3, QueueStrength.SOFT) {

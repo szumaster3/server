@@ -18,10 +18,7 @@ class WildernessBanditsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean = true
+    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean = true
 
     override fun newInstance(player: Player?): Dialogue = WildernessBanditsDialogue(player)
 
