@@ -169,6 +169,7 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
                     SlayerManager.getInstance(player).clear();
                     player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
                 }
+                playJingle(player, 76);
                 player.getDialogueInterpreter().sendDialogues(NPCs.TZHAAR_MEJ_JAL_2617, FaceAnim.CHILD_GUILTY, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
                 sendNews(player.getUsername() + " has been victorious in defeating TzTok-Jad for a firecape!");
             } else {

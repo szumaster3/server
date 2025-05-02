@@ -2,6 +2,7 @@ package content.global.activity.ttrail
 
 import core.api.IfaceSettingsBuilder
 import core.api.addItemOrDrop
+import core.api.playJingle
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.player.Player
@@ -62,7 +63,7 @@ enum class ClueLevel(
 
                     playerTrails.incrementClues(clueLevel)
                     playerTrails.clearTrail()
-
+                    playJingle(player, 193)
                     player.sendMessage("Well done, you've completed the Treasure Trail!")
                     player.sendMessage(
                         getChatColor(clueLevel) +

@@ -119,6 +119,7 @@ class MazeListener : InteractionListener {
             lock(player, 6)
             faceLocation(player, Location.create(2912, 4576, 0))
             animate(player, Animations.CHEER_862)
+            playJingle(player, 117)
             queueScript(player, 6, QueueStrength.SOFT) {
                 calculateLoot(player)
                 clearLogoutListener(player, RandomEvent.logout())

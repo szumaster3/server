@@ -1,6 +1,6 @@
 package content.region.asgarnia.dialogue.falador
 
-import content.region.asgarnia.quest.rd.handlers.tests.PatienceTest
+import content.region.asgarnia.quest.rd.handlers.SirTinleyPuzzleListener
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -15,7 +15,7 @@ class SirTinleyDialogue(
         interfaceId: Int,
         buttonId: Int,
     ): Boolean {
-        openDialogue(player, PatienceTest(), npc)
+        openDialogue(player, SirTinleyPuzzleListener(), npc)
         return true
     }
 

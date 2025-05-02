@@ -1,7 +1,7 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -14,7 +14,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.NPCs
 
-class PatienceTest(
+class SirTinleyPuzzleListener(
     private val dialogueNum: Int = 0,
 ) : DialogueBuilderFile(),
     MapArea {
@@ -104,7 +104,7 @@ class PatienceTest(
         setAttribute(player, RecruitmentDrive.stagePass, false)
         setAttribute(player, RecruitmentDrive.stageFail, false)
         runTask(player, 3) {
-            FailTest(player).start()
+            FailCutscene(player).start()
             return@runTask
         }
     }
@@ -119,7 +119,7 @@ class PatienceTest(
         if (entity is Player && getAttribute(entity, patience, false)) {
             setAttribute(entity, patience, false)
             setAttribute(entity, RecruitmentDrive.stageFail, true)
-            openDialogue(entity, PatienceTest(2), NPC(NPCs.SIR_TINLEY_2286))
+            openDialogue(entity, SirTinleyPuzzleListener(2), NPC(NPCs.SIR_TINLEY_2286))
         }
     }
 }

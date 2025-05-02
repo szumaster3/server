@@ -98,6 +98,7 @@ class GhoulChampionNPC(
         if (killer is Player) {
             lock(killer, 2)
             runTask(killer, 1) {
+                playJingle(killer.asPlayer(), 85)
                 openInterface(killer, Components.CHAMPIONS_SCROLL_63)
                 sendString(killer, "Well done, you defeated the Ghoul Champion!", Components.CHAMPIONS_SCROLL_63, 2)
                 sendItemZoomOnInterface(killer, Components.CHAMPIONS_SCROLL_63, 3, Items.CHAMPION_SCROLL_6799, 260)

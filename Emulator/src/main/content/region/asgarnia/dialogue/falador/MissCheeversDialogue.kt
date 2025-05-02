@@ -1,6 +1,6 @@
 package content.region.asgarnia.dialogue.falador
 
-import content.region.asgarnia.quest.rd.handlers.tests.MissCheeversDialogueFile
+import content.region.asgarnia.quest.rd.handlers.MissCheeversDialogueFile
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player

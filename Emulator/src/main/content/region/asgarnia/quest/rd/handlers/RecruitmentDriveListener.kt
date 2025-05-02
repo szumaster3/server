@@ -2,9 +2,8 @@ package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.dialogue.falador.KnightNotesDialogue
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
-import content.region.asgarnia.quest.rd.cutscene.FinishTest
-import content.region.asgarnia.quest.rd.handlers.tests.*
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
+import content.region.asgarnia.quest.rd.cutscene.FinishCutscene
 import core.api.*
 import core.api.ui.closeDialogue
 import core.game.dialogue.FaceAnim
@@ -51,6 +50,7 @@ class RecruitmentDriveListener :
             val correctStatue = getAttribute(player, "rd:statues", 0)
             if (node.id == Rooms.statueIDs[correctStatue]) {
                 setAttribute(player, RecruitmentDrive.stagePass, true)
+                playJingle(player, 156)
                 sendNPCDialogueLines(
                     player,
                     NPCs.LADY_TABLE_2283,
@@ -61,7 +61,7 @@ class RecruitmentDriveListener :
                 )
             } else {
                 setAttribute(player, RecruitmentDrive.stageFail, true)
-                openDialogue(player, ObservationTest(2), NPC(NPCs.LADY_TABLE_2283))
+                openDialogue(player, LadyTablePuzzleListener(2), NPC(NPCs.LADY_TABLE_2283))
             }
             return@on true
         }
@@ -90,7 +90,7 @@ class RecruitmentDriveListener :
             sendDialogueOptions(player, "Quit the training grounds?", "YES.", "NO.")
             addDialogueAction(player) { player, buttonID ->
                 if (buttonID == 2) {
-                    FailTest(player).start()
+                    FailCutscene(player).start()
                 } else {
                     closeChatBox(player)
                 }
@@ -112,7 +112,7 @@ class RecruitmentDriveListener :
                 if (currentLevel >= 5) {
                     DoorActionHandler.handleAutowalkDoor(player, with.asScenery())
                     face(player, with.asScenery())
-                    FinishTest(player).start()
+                    FinishCutscene(player).start()
                     return@onUseWith true
                 }
                 val currentStage = getAttribute(player, RecruitmentDrive.stageArray[currentLevel], 0)
@@ -169,7 +169,7 @@ class RecruitmentDriveListener :
                 if (currentLevel >= 5) {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     face(player, node.asScenery())
-                    FinishTest(player).start()
+                    FinishCutscene(player).start()
                     return@on true
                 }
                 val currentStage = getAttribute(player, RecruitmentDrive.stageArray[currentLevel], 0)
@@ -300,12 +300,12 @@ class RecruitmentDriveListener :
         ) {
             when (npc) {
                 NPCs.SIR_SPISHYUS_2282 -> openDialogue(player, SirSpishyusDialogueFile(1), NPC(npc))
-                NPCs.LADY_TABLE_2283 -> openDialogue(player, ObservationTest(1), NPC(npc))
-                NPCs.SIR_KUAM_FERENTSE_2284 -> openDialogue(player, TacticsTest(1), NPC(npc))
-                NPCs.SIR_TINLEY_2286 -> openDialogue(player, PatienceTest(1), NPC(npc))
-                NPCs.SIR_REN_ITCHOOD_2287 -> openDialogue(player, DetailTest(1), NPC(npc))
+                NPCs.LADY_TABLE_2283 -> openDialogue(player, LadyTablePuzzleListener(1), NPC(npc))
+                NPCs.SIR_KUAM_FERENTSE_2284 -> openDialogue(player, SirKuamPuzzleListener(1), NPC(npc))
+                NPCs.SIR_TINLEY_2286 -> openDialogue(player, SirTinleyPuzzleListener(1), NPC(npc))
+                NPCs.SIR_REN_ITCHOOD_2287 -> openDialogue(player, SirReenItchoodPuzzleListener(1), NPC(npc))
                 NPCs.MISS_CHEEVERS_2288 -> openDialogue(player, MissCheeversDialogueFile(1), NPC(npc))
-                NPCs.MS_HYNN_TERPRETT_2289 -> openDialogue(player, WitsTest(1), NPC(npc))
+                NPCs.MS_HYNN_TERPRETT_2289 -> openDialogue(player, HynnTerprettPuzzleListener(1), NPC(npc))
             }
         }
     }

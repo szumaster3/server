@@ -251,6 +251,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                         return true
                     }
                     setAttribute(player, "/save:barrow:looted", true)
+                    playJingle(player, 77)
                     reward(player)
                     PacketRepository.send(
                         CameraViewPacket::class.java,

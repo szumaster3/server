@@ -693,6 +693,7 @@ class FremennikTrialsListener : InteractionListener {
                 }
 
                 14 -> {
+                    player.musicPlayer.play(MusicEntry.forId(163))
                     setAttribute(player, GameAttributes.QUEST_VIKING_OLAF_CONCERT, true)
                     removeAttribute(player, GameAttributes.QUEST_VIKING_LYRE)
                     if (removeItem(player, Lyre)) {

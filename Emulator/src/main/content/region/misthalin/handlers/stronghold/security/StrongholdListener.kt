@@ -64,7 +64,7 @@ class StrongholdListener : InteractionListener {
                     }
 
                     playAudio(player, Sounds.DOOR_CREAK_61)
-                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, music, true))
+                    playJingle(player, music)
                     sendDialogue(player, message)
 
                     addDialogueAction(player) { _, button ->
@@ -86,7 +86,7 @@ class StrongholdListener : InteractionListener {
             } else {
                 // Handle 4th reward (Cradle of Life).
                 if (!player.getSavedData().globalData.hasStrongholdReward(4)) {
-                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 158, true))
+                    playJingle(player, 158)
                 }
                 playAudio(player, Sounds.SOS_CHOIR_1246)
                 player.dialogueInterpreter.open(96873)

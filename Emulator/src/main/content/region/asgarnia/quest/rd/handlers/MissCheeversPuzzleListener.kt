@@ -1,6 +1,5 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
-import content.region.asgarnia.quest.rd.handlers.RDUtils
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -18,7 +17,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
-class ResourcefulnessTest : InteractionListener {
+class MissCheeversPuzzleListener : InteractionListener {
     companion object {
         const val doorVarbit = 686
         const val book = "rd:book"
@@ -363,7 +362,7 @@ private class VialShelfDialogueFile(
                             } else {
                                 setAttribute(
                                     player,
-                                    ResourcefulnessTest.Companion.Vials.vialMap[flaskIdsArray[0]]!!
+                                    MissCheeversPuzzleListener.Companion.Vials.vialMap[flaskIdsArray[0]]!!
                                         .attribute,
                                     true,
                                 )
@@ -378,7 +377,7 @@ private class VialShelfDialogueFile(
                             } else {
                                 setAttribute(
                                     player,
-                                    ResourcefulnessTest.Companion.Vials.vialMap[flaskIdsArray[1]]!!
+                                    MissCheeversPuzzleListener.Companion.Vials.vialMap[flaskIdsArray[1]]!!
                                         .attribute,
                                     true,
                                 )
@@ -394,13 +393,13 @@ private class VialShelfDialogueFile(
                             } else {
                                 setAttribute(
                                     player,
-                                    ResourcefulnessTest.Companion.Vials.vialMap[flaskIdsArray[0]]!!
+                                    MissCheeversPuzzleListener.Companion.Vials.vialMap[flaskIdsArray[0]]!!
                                         .attribute,
                                     true,
                                 )
                                 setAttribute(
                                     player,
-                                    ResourcefulnessTest.Companion.Vials.vialMap[flaskIdsArray[1]]!!
+                                    MissCheeversPuzzleListener.Companion.Vials.vialMap[flaskIdsArray[1]]!!
                                         .attribute,
                                     true,
                                 )
@@ -422,7 +421,7 @@ private class VialShelfDialogueFile(
                             } else {
                                 setAttribute(
                                     player,
-                                    ResourcefulnessTest.Companion.Vials.vialMap[flaskIdsArray[0]]!!
+                                    MissCheeversPuzzleListener.Companion.Vials.vialMap[flaskIdsArray[0]]!!
                                         .attribute,
                                     true,
                                 )
@@ -570,7 +569,7 @@ class MissCheeversDialogueFile(
     }
 
     private fun clearAttributes() {
-        with(ResourcefulnessTest) {
+        with(MissCheeversPuzzleListener) {
             removeAttribute(player!!, book)
             removeAttribute(player!!, magnet)
             removeAttribute(player!!, knife)
@@ -579,9 +578,9 @@ class MissCheeversDialogueFile(
             removeAttribute(player!!, chisel)
             removeAttribute(player!!, wire)
             removeAttribute(player!!, vials)
-            ResourcefulnessTest.Companion.Vials.vialMap
+            MissCheeversPuzzleListener.Companion.Vials.vialMap
                 .forEach { removeAttribute(player!!, it.value.attribute) }
-            ResourcefulnessTest.Companion.DoorVials.doorVialsRequiredMap.forEach {
+            MissCheeversPuzzleListener.Companion.DoorVials.doorVialsRequiredMap.forEach {
                 removeAttribute(
                     player!!,
                     it.value.attribute,

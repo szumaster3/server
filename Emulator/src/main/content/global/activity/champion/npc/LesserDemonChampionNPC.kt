@@ -91,6 +91,7 @@ class LesserDemonChampionNPC(
         if (killer is Player) {
             lock(killer, 2)
             runTask(killer, 1) {
+                playJingle(killer.asPlayer(), 85)
                 openInterface(killer, Components.CHAMPIONS_SCROLL_63)
                 sendString(
                     killer,

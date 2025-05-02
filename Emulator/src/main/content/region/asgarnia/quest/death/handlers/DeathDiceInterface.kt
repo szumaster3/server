@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import org.rs.consts.Components
 
-class DiceGameInterfaceListener : InterfaceListener {
+class DeathDiceInterface : InterfaceListener {
     companion object {
         val GOLDSTACKS = intArrayOf(995, 996, 997, 998, 999, 1000, 1001, 1002, 1003, 1004)
         val GOLDTHRESHOLDS = intArrayOf(1, 2, 3, 4, 5, 25, 100, 250, 1000, 10000)
@@ -165,8 +165,10 @@ class DiceGameInterfaceListener : InterfaceListener {
                         setComponentVisibility(player, Components.DEATH_DICE_99, 9, false)
                     } else {
                         if (player.getAttribute("deathplateau:winstate")) {
+                            playJingle(player, 94)
                             sendString(player, "You win!", Components.DEATH_DICE_99, 13)
                         } else {
+                            playJingle(player, 161)
                             sendString(player, "You lose!", Components.DEATH_DICE_99, 13)
                         }
                         setComponentVisibility(player, Components.DEATH_DICE_99, 11, false)

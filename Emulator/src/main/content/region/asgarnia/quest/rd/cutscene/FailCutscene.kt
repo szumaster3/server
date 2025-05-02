@@ -1,9 +1,7 @@
 package content.region.asgarnia.quest.rd.cutscene
 
+import content.region.asgarnia.quest.rd.handlers.SirKuamPuzzleListener
 import core.api.*
-import core.api.quest.getQuestStage
-import core.api.quest.setQuestStage
-import core.api.ui.closeDialogue
 import core.api.ui.setMinimapState
 import core.game.activity.Cutscene
 import core.game.interaction.QueueStrength
@@ -11,9 +9,8 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import org.rs.consts.NPCs
-import org.rs.consts.Quests
 
-class FinishTest(
+class FailCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {
@@ -23,19 +20,19 @@ class FinishTest(
     override fun runStage(stage: Int) {
         when (stage) {
             0 -> {
-                if (getQuestStage(player, Quests.RECRUITMENT_DRIVE) == 2) {
-                    setQuestStage(player, Quests.RECRUITMENT_DRIVE, 3)
-                }
                 player.lock()
-                closeDialogue(player)
                 fadeToBlack()
                 setMinimapState(player, 2)
                 timedUpdate(6)
             }
 
             1 -> {
+                var clearBoss = getAttribute(player, SirKuamPuzzleListener.spawnSirLeye, NPC(0))
+                if (clearBoss.id != 0) {
+                    clearBoss.clear()
+                }
                 clearInventory(player)
-                queueScript(player, 1, QueueStrength.SOFT) { stage ->
+                queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                     when (stage) {
                         0 -> {
                             fadeFromBlack()
@@ -43,7 +40,7 @@ class FinishTest(
                         }
 
                         1 -> {
-                            openDialogue(player, SirTiffyCashienDialogueFile(), NPC(NPCs.SIR_TIFFY_CASHIEN_2290))
+                            openDialogue(player, SirTiffyCashienFailedDialogueFile(), NPC(NPCs.SIR_TIFFY_CASHIEN_2290))
                             return@queueScript stopExecuting(player)
                         }
 
@@ -53,8 +50,10 @@ class FinishTest(
 
                 endWithoutFade {
                     face(player, findLocalNPC(player, NPCs.SIR_TIFFY_CASHIEN_2290)!!)
-                    player.interfaceManager.restoreTabs()
+                    fadeFromBlack()
                     player.unlock()
+                    player.interfaceManager.restoreTabs()
+                    player.interfaceManager.openDefaultTabs()
                 }
             }
         }

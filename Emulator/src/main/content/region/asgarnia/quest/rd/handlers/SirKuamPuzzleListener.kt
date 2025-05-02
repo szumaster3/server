@@ -1,4 +1,4 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
 import content.region.asgarnia.quest.rd.handlers.RDUtils.ATTRIBUTE_NPC_SPAWN
@@ -17,7 +17,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import org.rs.consts.NPCs
 
-class TacticsTest(
+class SirKuamPuzzleListener(
     private val dialogueNum: Int = 0,
 ) : DialogueBuilderFile() {
     companion object {
@@ -84,8 +84,8 @@ class SirLeyeNPC : NPCBehavior(NPCs.SIR_LEYE_2285) {
         if (killer is Player) {
             clearHintIcon(killer)
             setAttribute(killer, RecruitmentDrive.stagePass, true)
-            openDialogue(killer, TacticsTest(1), NPC(NPCs.SIR_KUAM_FERENTSE_2284))
-            removeAttribute(killer, TacticsTest.spawnSirLeye)
+            openDialogue(killer, SirKuamPuzzleListener(1), NPC(NPCs.SIR_KUAM_FERENTSE_2284))
+            removeAttribute(killer, SirKuamPuzzleListener.spawnSirLeye)
         }
     }
 

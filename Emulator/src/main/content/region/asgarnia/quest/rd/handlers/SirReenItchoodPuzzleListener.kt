@@ -1,7 +1,7 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player
 import org.rs.consts.Components
 import org.rs.consts.NPCs
 
-class DetailTest(
+class SirReenItchoodPuzzleListener(
     private val dialogueNum: Int = 0,
 ) : DialogueBuilderFile() {
     companion object {
@@ -166,7 +166,7 @@ class DetailTest(
                 setAttribute(player, RecruitmentDrive.stagePass, false)
                 setAttribute(player, RecruitmentDrive.stageFail, false)
                 runTask(player, 3) {
-                    FailTest(player).start()
+                    FailCutscene(player).start()
                     return@runTask
                 }
             }
@@ -236,10 +236,11 @@ class CombinationLockInterface : InterfaceListener {
     private fun validateAnswer(player: Player) {
         val answer = lockArray.joinToString("") { getAttribute(player, it, INITIAL_VALUE).toChar().toString() }
         closeInterface(player)
-        if (answers[getAttribute(player, DetailTest.ATTRIBUTE_CLUE, 0)] == answer) {
+        if (answers[getAttribute(player, SirReenItchoodPuzzleListener.ATTRIBUTE_CLUE, 0)] == answer) {
             if (!getAttribute(player, RecruitmentDrive.stageFail, false)) {
                 setAttribute(player, RecruitmentDrive.stagePass, true)
             }
+            playJingle(player, 159)
             sendNPCDialogue(
                 player,
                 NPCs.SIR_REN_ITCHOOD_2287,
@@ -247,7 +248,7 @@ class CombinationLockInterface : InterfaceListener {
             )
         } else {
             setAttribute(player, RecruitmentDrive.stageFail, true)
-            openDialogue(player, DetailTest(2), NPC(NPCs.SIR_REN_ITCHOOD_2287))
+            openDialogue(player, SirReenItchoodPuzzleListener(2), NPC(NPCs.SIR_REN_ITCHOOD_2287))
         }
     }
 

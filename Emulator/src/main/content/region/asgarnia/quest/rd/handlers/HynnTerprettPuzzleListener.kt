@@ -1,7 +1,7 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
 import core.api.*
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile
@@ -9,7 +9,7 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import org.rs.consts.NPCs
 
-class WitsTest(
+class HynnTerprettPuzzleListener(
     private val dialogueNum: Int = 0,
 ) : DialogueBuilderFile() {
     companion object {
@@ -45,7 +45,7 @@ class WitsTest(
                         setAttribute(player, RecruitmentDrive.stagePass, false)
                         setAttribute(player, RecruitmentDrive.stageFail, false)
                         runTask(player, 3) {
-                            FailTest(player).start()
+                            FailCutscene(player).start()
                             return@runTask
                         }
                     }
@@ -102,7 +102,7 @@ class WitsTest(
                                     } else {
                                         setAttribute(player, RecruitmentDrive.stageFail, true)
                                     }
-                                    openDialogue(player, WitsTest(), NPC(NPCs.MS_HYNN_TERPRETT_2289))
+                                    openDialogue(player, HynnTerprettPuzzleListener(), NPC(NPCs.MS_HYNN_TERPRETT_2289))
                                 }
                             }.end()
 
@@ -133,7 +133,7 @@ class WitsTest(
                                     } else {
                                         setAttribute(player, RecruitmentDrive.stageFail, true)
                                     }
-                                    openDialogue(player, WitsTest(), NPC(NPCs.MS_HYNN_TERPRETT_2289))
+                                    openDialogue(player, HynnTerprettPuzzleListener(), NPC(NPCs.MS_HYNN_TERPRETT_2289))
                                 }
                             }.end()
 

@@ -88,6 +88,7 @@ class EvilTwinInterface : InterfaceListener {
                                                 npc.faceLocation(player.location)
                                                 playAudio(player, Sounds.TWIN_CRANE_DROP_2271)
                                                 if (evilTwin) {
+                                                    playJingle(player, 101)
                                                     EvilTwinUtils.removeSuspects(player)
                                                     npc.animate(Animation.create(859))
                                                     runTask(player, 16) { npc.clear() }

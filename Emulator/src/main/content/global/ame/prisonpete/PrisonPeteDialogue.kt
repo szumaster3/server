@@ -61,6 +61,7 @@ class PrisonPeteDialogue(
             } else if (getAttribute(player!!, PrisonPeteUtils.POP_KEY_FALSE, false)) {
                 removeAttribute(player!!, PrisonPeteUtils.POP_KEY_FALSE)
                 setAttribute(player!!, PrisonPeteUtils.POP_KEY, 0)
+                playJingle(player!!, 149)
                 npc(
                     FaceAnim.SAD,
                     "Aww, that was the wrong key! You must have popped",

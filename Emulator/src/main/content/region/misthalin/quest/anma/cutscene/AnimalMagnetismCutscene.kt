@@ -47,6 +47,7 @@ class AnimalMagnetismCutscene(
             }
 
             3 -> {
+                playJingle(player, 235)
                 move(getNPC(FARMER)!!, 44, 10)
                 animate(getNPC(FARMER)!!, ATTEMPT_CATCH)
                 move(getNPC(CHICKEN)!!, 45, 9)

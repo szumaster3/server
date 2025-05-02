@@ -1,7 +1,7 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
 import core.api.*
 import core.api.ui.closeDialogue
 import core.game.dialogue.DialogueBuilder
@@ -21,7 +21,7 @@ import org.rs.consts.Scenery
  * This test requires players to transport a fox, chicken, and grain across a bridge
  * while adhering to specific constraints to complete the puzzle.
  */
-class LogicTest : InteractionListener {
+class SirSpishyusPuzzleListener : InteractionListener {
     companion object {
         /**
          * Map items to varbits.
@@ -50,6 +50,7 @@ class LogicTest : InteractionListener {
         private fun checkFinished(player: Player) {
             if (itemVarbits.values.all { getVarbit(player, it.second) == 1 }) {
                 sendMessage(player, "Congratulations! You have solved this room's puzzle!")
+                playJingle(player, 160)
                 setAttribute(player, RecruitmentDrive.stagePass, 1)
             }
         }
@@ -97,7 +98,7 @@ class LogicTest : InteractionListener {
 
                     checkFail(player) -> {
                         closeDialogue(player)
-                        openDialogue(player, PatienceTest(2), NPCs.SIR_SPISHYUS_2282)
+                        openDialogue(player, SirTinleyPuzzleListener(2), NPCs.SIR_SPISHYUS_2282)
                     }
 
                     else -> {
@@ -189,11 +190,11 @@ class SirSpishyusDialogueFile(
                 "You are not up to the challenge.",
                 "Better luck in the future.",
             ).endWith { _, player ->
-                removeAttribute(player, PatienceTest.patience)
+                removeAttribute(player, SirTinleyPuzzleListener.patience)
                 setAttribute(player, RecruitmentDrive.stagePass, false)
                 setAttribute(player, RecruitmentDrive.stageFail, false)
                 runTask(player, 3) {
-                    FailTest(player).start()
+                    FailCutscene(player).start()
                 }
             }
 

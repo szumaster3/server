@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import core.api.getAttribute
 import core.api.openDialogue
 import core.api.openInterface
+import core.api.playJingle
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -82,6 +83,7 @@ class MordautDialogue(
                                 "Remember, the goal here is to find the pattern. Look for objects that would have a connection to each other.",
                             )
                         } else {
+                            playJingle(player!!, 270)
                             val dialogue =
                                 arrayOf(
                                     "No. No, that's not right at all. Okay, next question.",

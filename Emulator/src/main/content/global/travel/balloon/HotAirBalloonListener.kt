@@ -60,7 +60,7 @@ class HotAirBalloonListener :
             if (inBorders(player, getRegionBorders(13110))) {
                 finishDiaryTask(player, DiaryType.VARROCK, 2, 17)
             }
-
+            playJingle(player, 118)
             animateInterface(player, Components.ZEP_BALLOON_MAP_469, flight.button, flight.flyAnim)
             sendMessage(player, "You board the balloon and fly to ${flight.areaName}.")
 

@@ -1,7 +1,7 @@
-package content.region.asgarnia.quest.rd.handlers.tests
+package content.region.asgarnia.quest.rd.handlers
 
 import content.region.asgarnia.quest.rd.RecruitmentDrive
-import content.region.asgarnia.quest.rd.cutscene.FailTest
+import content.region.asgarnia.quest.rd.cutscene.FailCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -11,7 +11,7 @@ import core.game.world.GameWorld
 import org.rs.consts.Components
 import org.rs.consts.NPCs
 
-class ObservationTest(
+class LadyTablePuzzleListener(
     private val state: Int = 0,
 ) : DialogueFile() {
     override fun handle(
@@ -118,11 +118,11 @@ class ObservationTest(
             1 -> {
                 end()
                 lock(player!!, 10)
-                removeAttribute(player!!, DetailTest.ATTRIBUTE_CLUE)
+                removeAttribute(player!!, SirReenItchoodPuzzleListener.ATTRIBUTE_CLUE)
                 setAttribute(player!!, RecruitmentDrive.stagePass, false)
                 setAttribute(player!!, RecruitmentDrive.stageFail, false)
                 runTask(player!!, 3) {
-                    FailTest(player!!).start()
+                    FailCutscene(player!!).start()
                     return@runTask
                 }
             }

@@ -3,6 +3,7 @@ package content.region.misthalin.quest.dragon.handlers.npc
 import content.region.misthalin.quest.dragon.DragonSlayer
 import core.api.combat.calculateDragonFireMaxHit
 import core.api.inInventory
+import core.api.playJingle
 import core.api.quest.getQuestStage
 import core.api.sendMessage
 import core.game.node.entity.Entity
@@ -74,6 +75,7 @@ class ElvargNPC : AbstractNPC {
                     counter++
                     if (counter == 1) {
                         killer.animate(ANIMATIONS[0])
+                        playJingle(killer.asPlayer(), 267)
                     } else if (counter == 4) {
                         val player = (killer as Player)
                         SceneryBuilder.replace(scenery, scenery.transform(25203))
@@ -116,7 +118,7 @@ class ElvargNPC : AbstractNPC {
         if (entity !is Player) {
             return super.isAttackable(entity, style, message)
         }
-        val player = entity
+        val player = entity.asPlayer()
         if (getQuestStage(player, Quests.DRAGON_SLAYER) == 40 && (inInventory(player, DragonSlayer.ELVARG_HEAD.id))) {
             if (message) {
                 sendMessage(player, "You have already slain the dragon. Now you just need to return to Oziach for")
