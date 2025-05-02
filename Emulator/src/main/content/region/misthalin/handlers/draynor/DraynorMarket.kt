@@ -6,9 +6,7 @@ import core.api.removeAttribute
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders
 
-class DraynorMarket :
-    MapArea,
-    LogoutListener {
+class DraynorMarket : MapArea, LogoutListener {
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(DraynorUtils.draynorMarket)
 
     override fun logout(player: Player) {

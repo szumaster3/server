@@ -38,23 +38,20 @@ class DraynorVillageListener : InteractionListener {
                 return@on true
             }
             when (node.id) {
-                7065 ->
-                    if (!inInventory(player, Items.STRANGE_BOOK_5507)) {
-                        sendMessage(player, "You search the bookcase and find a book named 'Strange Book'.")
-                        addItem(player, Items.STRANGE_BOOK_5507)
-                    }
+                7065 -> if (!inInventory(player, Items.STRANGE_BOOK_5507)) {
+                    sendMessage(player, "You search the bookcase and find a book named 'Strange Book'.")
+                    addItem(player, Items.STRANGE_BOOK_5507)
+                }
 
-                7066 ->
-                    if (!inInventory(player, Items.BOOK_OF_FOLKLORE_5508)) {
-                        sendMessage(player, "You search the bookcase and find a book named 'Book of folklore'.")
-                        addItem(player, Items.BOOK_OF_FOLKLORE_5508)
-                    }
+                7066 -> if (!inInventory(player, Items.BOOK_OF_FOLKLORE_5508)) {
+                    sendMessage(player, "You search the bookcase and find a book named 'Book of folklore'.")
+                    addItem(player, Items.BOOK_OF_FOLKLORE_5508)
+                }
 
-                7068 ->
-                    if (!inInventory(player, Items.BOOK_ON_CHICKENS_7464)) {
-                        sendMessage(player, "You search the bookcase and find a book named 'Book on chickens'.")
-                        addItem(player, Items.BOOK_ON_CHICKENS_7464)
-                    }
+                7068 -> if (!inInventory(player, Items.BOOK_ON_CHICKENS_7464)) {
+                    sendMessage(player, "You search the bookcase and find a book named 'Book on chickens'.")
+                    addItem(player, Items.BOOK_ON_CHICKENS_7464)
+                }
 
                 else -> sendMessage(player, "You search the bookcase and find nothing of interest.")
             }
@@ -63,13 +60,12 @@ class DraynorVillageListener : InteractionListener {
 
         on(DraynorUtils.tree, IntType.SCENERY, "chop down", "talk to") { player, _ ->
             when (getUsedOption(player)) {
-                "chop down" ->
-                    sendNPCDialogue(
-                        player,
-                        NPCs.GUARD_345,
-                        DraynorUtils.treeGuardChat.random(),
-                        FaceAnim.ANNOYED,
-                    )
+                "chop down" -> sendNPCDialogue(
+                    player,
+                    NPCs.GUARD_345,
+                    DraynorUtils.treeGuardChat.random(),
+                    FaceAnim.ANNOYED,
+                )
 
                 "talk to" -> openDialogue(player, TreeGuardDialogue())
             }

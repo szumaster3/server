@@ -67,27 +67,27 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
     private final RecordingPulse recordingPulse = new RecordingPulse();
     private static final NPC[] NPCS = new NPC[]{
 
-        NPC.create(2579, Location.create(2120, 4916, 0), Direction.NORTH),
+            NPC.create(2579, Location.create(2120, 4916, 0), Direction.NORTH),
 
-        NPC.create(2572, Location.create(2117, 4913, 0), Direction.WEST),
+            NPC.create(2572, Location.create(2117, 4913, 0), Direction.WEST),
 
-        NPC.create(2571, Location.create(13, 48, 0), Direction.WEST),
+            NPC.create(2571, Location.create(13, 48, 0), Direction.WEST),
 
-        NPC.create(2575, new Location(2136, 4914, 0), Direction.WEST),
+            NPC.create(2575, new Location(2136, 4914, 0), Direction.WEST),
 
-        NPC.create(2568, new Location(2130, 4909, 0), Direction.EAST),
+            NPC.create(2568, new Location(2130, 4909, 0), Direction.EAST),
 
-        NPC.create(2569, new Location(2130, 4907, 0)),
+            NPC.create(2569, new Location(2130, 4907, 0)),
 
-        NPC.create(2570, new Location(2130, 4906, 0)),
+            NPC.create(2570, new Location(2130, 4906, 0)),
 
-        NPC.create(2578, new Location(2133, 4908, 0)),
+            NPC.create(2578, new Location(2133, 4908, 0)),
 
-        NPC.create(2577, new Location(2134, 4906, 0), Direction.WEST),
+            NPC.create(2577, new Location(2134, 4906, 0), Direction.WEST),
 
-        NPC.create(2576, new Location(2133, 4906, 0), Direction.EAST),
+            NPC.create(2576, new Location(2133, 4906, 0), Direction.EAST),
 
-        NPC.create(2566, new Location(2128, 4915, 0), Direction.SOUTH)};
+            NPC.create(2566, new Location(2128, 4915, 0), Direction.SOUTH)};
 
     /**
      * Instantiates a new Dbr cutscene plugin.
@@ -445,8 +445,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
                     break;
                 case 55:
                     Scenery wall = RegionManager.getObject(base.transform(16, 46, 0));
-                    if (wall != null)
-                        SceneryBuilder.replace(wall, wall.transform(9151, 0, 10));
+                    if (wall != null) SceneryBuilder.replace(wall, wall.transform(9151, 0, 10));
                     if (getWiseOldMan() != null) {
                         getWiseOldMan().getWalkingQueue().reset();
                         getWiseOldMan().getWalkingQueue().addPath(base.getX() + 16, base.getY() + 46);

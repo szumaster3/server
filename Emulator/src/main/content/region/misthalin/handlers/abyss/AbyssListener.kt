@@ -140,40 +140,39 @@ class AbyssListener : InteractionListener {
         }
     }
 
-    private val distractEmotes =
-        intArrayOf(
-            Animations.NOD_HEAD_855,
-            Animations.HUMAN_SHAKE_HEAD_NO_856,
-            Animations.HUMAN_THINK_857,
-            Animations.HUMAN_BOW_858,
-            Animations.HUMAN_ANGRY_859,
-            Animations.HUMAN_CRY_860,
-            Animations.HUMAN_LAUGH_861,
-            Animations.HUMAN_CHEER_862,
-            Animations.HUMAN_WAVE_863,
-            Animations.HUMAN_BECKON_864,
-            Animations.HUMAN_CLAP_865,
-            Animations.HUMAN_DANCE_866,
-            Animations.HUMAN_SHRUG_2113,
-            Animations.HUMAN_JUMP_FOR_JOY_2109,
-            Animations.HUMAN_YAWN_2111,
-            Animations.HUMAN_JIG_2106,
-            Animations.HUMAN_TWIRL_2107,
-            Animations.HUMAN_HEAD_BANG_2108,
-            Animations.HUMAN_PANIC_2105,
-            Animations.HUMAN_BLOW_RASPBERRY_2110,
-            Animations.HUMAN_SALUTE_2112,
-            Animations.HUMAN_GOBLIN_BOW_2127,
-            Animations.HUMAN_GOBLIN_SALUTE_2128,
-            Animations.HUMAN_GLASS_BOX_1131,
-            Animations.HUMAN_CLIMB_ROPE_1130,
-            Animations.HUMAN_LEAN_1129,
-            Animations.HUMAN_GLASS_WALL_1128,
-            Animations.HUMAN_ANGRY_STOMP_1745,
-            Animations.HUMAN_ZOMBIE_WALK_3544,
-            Animations.HUMAN_ZOMBIE_DANCE_3543,
-            Animations.HUMAN_SCARED_2836
-        )
+    private val distractEmotes = intArrayOf(
+        Animations.NOD_HEAD_855,
+        Animations.HUMAN_SHAKE_HEAD_NO_856,
+        Animations.HUMAN_THINK_857,
+        Animations.HUMAN_BOW_858,
+        Animations.HUMAN_ANGRY_859,
+        Animations.HUMAN_CRY_860,
+        Animations.HUMAN_LAUGH_861,
+        Animations.HUMAN_CHEER_862,
+        Animations.HUMAN_WAVE_863,
+        Animations.HUMAN_BECKON_864,
+        Animations.HUMAN_CLAP_865,
+        Animations.HUMAN_DANCE_866,
+        Animations.HUMAN_SHRUG_2113,
+        Animations.HUMAN_JUMP_FOR_JOY_2109,
+        Animations.HUMAN_YAWN_2111,
+        Animations.HUMAN_JIG_2106,
+        Animations.HUMAN_TWIRL_2107,
+        Animations.HUMAN_HEAD_BANG_2108,
+        Animations.HUMAN_PANIC_2105,
+        Animations.HUMAN_BLOW_RASPBERRY_2110,
+        Animations.HUMAN_SALUTE_2112,
+        Animations.HUMAN_GOBLIN_BOW_2127,
+        Animations.HUMAN_GOBLIN_SALUTE_2128,
+        Animations.HUMAN_GLASS_BOX_1131,
+        Animations.HUMAN_CLIMB_ROPE_1130,
+        Animations.HUMAN_LEAN_1129,
+        Animations.HUMAN_GLASS_WALL_1128,
+        Animations.HUMAN_ANGRY_STOMP_1745,
+        Animations.HUMAN_ZOMBIE_WALK_3544,
+        Animations.HUMAN_ZOMBIE_DANCE_3543,
+        Animations.HUMAN_SCARED_2836
+    )
 
     companion object {
 
@@ -275,18 +274,17 @@ class AbyssListener : InteractionListener {
                     override fun pulse(): Boolean {
                         when (count++) {
                             1 -> sendMessage(player, messages[0])
-                            3 ->
-                                return if (RandomFunction.random(100) < getStatLevel(player, skill) + 1) {
-                                    sendMessage(player, colorize("%G${messages[1]}"))
-                                    if (varbitVal != null) {
-                                        setVarbit(player, Vars.VARBIT_SCENERY_ABYSS_OBSTACLES_625, varbitVal)
-                                    }
-                                    false
-                                } else {
-                                    sendMessage(player, colorize("%R${messages[2]}"))
-                                    player.unlock()
-                                    true
+                            3 -> return if (RandomFunction.random(100) < getStatLevel(player, skill) + 1) {
+                                sendMessage(player, colorize("%G${messages[1]}"))
+                                if (varbitVal != null) {
+                                    setVarbit(player, Vars.VARBIT_SCENERY_ABYSS_OBSTACLES_625, varbitVal)
                                 }
+                                false
+                            } else {
+                                sendMessage(player, colorize("%R${messages[2]}"))
+                                player.unlock()
+                                true
+                            }
 
                             5 -> {
                                 if (varbitVal != null) {

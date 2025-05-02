@@ -9,17 +9,16 @@ import org.rs.consts.Scenery
 object DraynorUtils {
     const val feedGuardAttribute = "/save:draynor:feed-tree-guard"
 
-    val treeGuardChat =
-        arrayOf(
-            "Hey - gerroff me!",
-            "You'll blow my cover! I'm meant to be hidden!",
-            "Don't draw attention to me!",
-            "Will you stop that?",
-            "Watch what you're doing with that hatchet, you nit!",
-            "Ooooch!",
-            "Ow! That really hurt!",
-            "Oi!",
-        )
+    val treeGuardChat = arrayOf(
+        "Hey - gerroff me!",
+        "You'll blow my cover! I'm meant to be hidden!",
+        "Don't draw attention to me!",
+        "Will you stop that?",
+        "Watch what you're doing with that hatchet, you nit!",
+        "Ooooch!",
+        "Ow! That really hurt!",
+        "Oi!",
+    )
 
     val draynorMarket = ZoneBorders(3074, 3245, 3086, 3255)
 

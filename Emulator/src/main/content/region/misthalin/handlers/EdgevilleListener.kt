@@ -11,6 +11,7 @@ import org.rs.consts.Scenery
 
 class EdgevilleListener : InteractionListener {
     override fun defineListeners() {
+
         /*
          * Handles enter to safety dungeon.
          */
@@ -18,7 +19,7 @@ class EdgevilleListener : InteractionListener {
         on(Scenery.POSTER_29586, IntType.SCENERY, "pull-back") { player, _ ->
             sendDialogue(player, "There appears to be a tunnel behind this poster.")
             addDialogueAction(player) { player, button ->
-                if(button > 0) {
+                if (button > 0) {
                     teleport(player, Location(3140, 4230, 2))
                 }
             }
