@@ -5,11 +5,7 @@ import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 
 /**
- * Represents the random dialogue of a mysterious ghost
- * when the player does not have the ghostspeak amulet.
- *
- * Relations:
- * - [Curse of Zaros miniquest][CurseOfZaros]
+ * Represents the random dialogue of a mysterious ghost in Curse of zaros miniquest.
  */
 class RandomDialogue : DialogueFile() {
 

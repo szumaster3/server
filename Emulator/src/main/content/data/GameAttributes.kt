@@ -307,7 +307,11 @@ internal object GameAttributes {
     // Curse of zaros mini-quest.
     const val ZAROS_PATH_SEQUENCE = "/save:zaros:sequence"
     const val ZAROS_COMPLETE = "/save:zaros:complete"
-    const val ZAROS_NPC_TALK = "/save:zaros:npc-talked"
+    const val ZAROS_DHALAK_TALK = "/save:zaros:dhalak-talk"
+    const val ZAROS_VALDEZ_TALK = "/save:zaros:valdez-talk"
+    const val ZAROS_LENNISSA_TALK = "/save:zaros:lennissa-talk"
+    const val ZAROS_RENNARD_TALK = "/save:zaros:rennard-talk"
+    const val ZAROS_KHARRIM_TALK = "/save:zaros:kharrim-talk"
 
     // Ancient pages (lore).
     const val LORE_ANCIENT_PAGES_TRANSCRIPT = "/save:ancient_page"

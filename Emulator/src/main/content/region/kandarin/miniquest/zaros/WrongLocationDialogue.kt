@@ -4,7 +4,10 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.tools.END_DIALOGUE
 
-class WrongLocationDialogue() : DialogueFile() {
+/**
+ * Represents the wrong location dialogue of a mysterious ghost in Curse of zaros miniquest.
+ */
+class WrongLocationDialogue : DialogueFile() {
 
     private var branch = -1
 
@@ -12,7 +15,6 @@ class WrongLocationDialogue() : DialogueFile() {
         if (branch == -1) {
             branch = (0..7).random()
         }
-
         when (branch) {
             0 -> when (stage) {
                 0 -> {
@@ -170,7 +172,7 @@ class WrongLocationDialogue() : DialogueFile() {
                     stage = 2
                 }
                 2 -> {
-                    player(FaceAnim.FRIENDLY, "Soooo....", "Invisible ghost haunting the same place for thousands of years, huh?")
+                    player(FaceAnim.FRIENDLY, "Soooo....", "Invisible ghost haunting the same place for", "thousands of years, huh?")
                     stage = 3
                 }
                 3 -> {
@@ -230,7 +232,7 @@ class WrongLocationDialogue() : DialogueFile() {
                     stage = 1
                 }
                 1 -> {
-                    npcl(FaceAnim.NEUTRAL, "The endless tragedy of fate... Why must you torment me so?")
+                    npc(FaceAnim.NEUTRAL, "The endless tragedy of fate...", "Why must you torment me so?")
                     stage = 2
                 }
                 2 -> {
