@@ -187,23 +187,28 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
 
             val isHidden = 166 + (setIndex * 2)
 
-            if (allInInventory(player, *set)) {
-                if (getAttribute(player, "set:$setIndex", false)) {
-                    if (player.inventory.freeSlots() >= set.size) {
-                        set.forEach { addItem(player, it, 1) }
-                        removeAttribute(player, "set:$setIndex")
-                        sendMessage(player, "You take the outfit from the wardrobe.")
-                    } else {
-                        sendMessage(player, "You don't have enough inventory space.")
-                    }
+            if (!allInInventory(player, *set)) {
+                sendMessage(player, "You don't have the necessary items to take the outfit.")
+                return
+            }
+
+            if (getAttribute(player, "set:$setIndex", false)) {
+                if (freeSlots(player) >= set.size) {
+                    set.forEach { addItem(player, it, 1) }
+                    removeAttribute(player, "set:$setIndex")
+                    sendMessage(player, "You take the outfit from the wardrobe.")
                 } else {
+                    sendMessage(player, "You don't have enough inventory space.")
+                }
+            } else {
+                if (allInInventory(player, *set)) {
                     set.forEach { removeItem(player, Item(it, 1)) }
                     setAttribute(player, "/save:set:$setIndex", true)
                     sendInterfaceConfig(player, INTERFACE, isHidden, true)
                     sendMessage(player, "You put your outfit into the wardrobe.")
+                } else {
+                    sendMessage(player, "You need to have the full set to store it.")
                 }
-            } else {
-                sendMessage(player, "You don't have the necessary items to take the outfit.")
             }
         }
     }
