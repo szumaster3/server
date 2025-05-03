@@ -44211,17 +44211,23 @@
     "id": "5987"
   },
   {
+    "examine": "An evil looking griffin.",
+    "name": "Grimgnash",
+    "id": "5989"
+  },
+  {
+    "examine": "A dwarf. He seems to be in his underwear!",
     "name": "Rupert the Beard",
-    "lifepoints": "10",
-    "combat_audio": "498,500,499",
-    "strength_level": "1",
     "id": "5990"
   },
   {
+    "examine": "It's a rickety old drain pipe.",
+    "name": "Drain Pipe",
+    "id": "5991"
+  },
+  {
+    "examine": "A dwarf.",
     "name": "Rupert the Beard",
-    "lifepoints": "10",
-    "combat_audio": "498,500,499",
-    "strength_level": "1",
     "id": "5992"
   },
   {
