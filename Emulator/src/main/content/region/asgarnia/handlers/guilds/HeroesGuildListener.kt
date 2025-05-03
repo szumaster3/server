@@ -24,20 +24,34 @@ import org.rs.consts.Quests
 
 class HeroesGuildListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles access to Heroes guild.
+         */
+
         on(GUILD_GATE, IntType.SCENERY, "open") { player, node ->
             if (!hasRequirement(player, Quests.HEROES_QUEST, false)) {
                 sendMessage(player, "You need to complete the Heroes' Quest.")
-                return@on true
+                return@on false
             }
             handleAutowalkDoor(player, node.asScenery())
+            return@on true
         }
+
+        /*
+         * Handles recharge jewellery.
+         */
 
         onUseWith(IntType.SCENERY, JEWELLERY, FOUNTAIN) { player, used, with ->
             rechargeJewellery(player, used, with)
             return@onUseWith true
         }
 
-        onUseWith(IntType.NPC, SPECIAL, *FAMILIAR) { player, used, with ->
+        /*
+         * Handles recharge jewellery by used it on familiar.
+         */
+
+        onUseWith(IntType.NPC, SPECIAL, NPCs.GEYSER_TITAN_7339, NPCs.GEYSER_TITAN_7340) { player, used, with ->
             rechargeJewellery(player, used, with)
             return@onUseWith true
         }
@@ -46,27 +60,8 @@ class HeroesGuildListener : InteractionListener {
     companion object {
         private val GUILD_GATE = intArrayOf(org.rs.consts.Scenery.DOOR_2624, org.rs.consts.Scenery.DOOR_2625)
         private val FOUNTAIN = org.rs.consts.Scenery.FOUNTAIN_OF_HEROES_36695
-        private val FAMILIAR = intArrayOf(NPCs.GEYSER_TITAN_7339, NPCs.GEYSER_TITAN_7340)
-        private val SPECIAL =
-            intArrayOf(*EnchantedJewellery.AMULET_OF_GLORY.ids, *EnchantedJewellery.AMULET_OF_GLORY_T.ids)
-        private val JEWELLERY =
-            intArrayOf(
-                Items.RING_OF_SLAYING7_13282,
-                Items.RING_OF_SLAYING6_13283,
-                Items.RING_OF_SLAYING5_13284,
-                Items.RING_OF_SLAYING4_13285,
-                Items.RING_OF_SLAYING3_13286,
-                Items.RING_OF_SLAYING2_13287,
-                Items.RING_OF_SLAYING1_13288,
-                Items.AMULET_OF_GLORY3_1710,
-                Items.AMULET_OF_GLORY2_1708,
-                Items.AMULET_OF_GLORY1_1706,
-                Items.AMULET_OF_GLORY_1704,
-                Items.AMULET_OF_GLORYT3_10356,
-                Items.AMULET_OF_GLORYT2_10358,
-                Items.AMULET_OF_GLORYT1_10360,
-                Items.AMULET_OF_GLORYT_10362,
-            )
+        private val SPECIAL = intArrayOf(*EnchantedJewellery.AMULET_OF_GLORY.ids, *EnchantedJewellery.AMULET_OF_GLORY_T.ids)
+        private val JEWELLERY = intArrayOf(Items.RING_OF_SLAYING7_13282, Items.RING_OF_SLAYING6_13283, Items.RING_OF_SLAYING5_13284, Items.RING_OF_SLAYING4_13285, Items.RING_OF_SLAYING3_13286, Items.RING_OF_SLAYING2_13287, Items.RING_OF_SLAYING1_13288, Items.AMULET_OF_GLORY3_1710, Items.AMULET_OF_GLORY2_1708, Items.AMULET_OF_GLORY1_1706, Items.AMULET_OF_GLORY_1704, Items.AMULET_OF_GLORYT3_10356, Items.AMULET_OF_GLORYT2_10358, Items.AMULET_OF_GLORYT1_10360, Items.AMULET_OF_GLORYT_10362)
     }
 
     private fun rechargeJewellery(

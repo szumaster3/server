@@ -37,13 +37,8 @@ class MiningGuildListener : InteractionListener {
             val destination = ladderMap[location] ?: return@on false
 
             if (getDynLevel(player, Skills.MINING) < REQUIRED_MINING_LEVEL) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.DWARF_382,
-                    "Sorry, but you need level 60 Mining to go in there.",
-                    FaceAnim.OLD_NORMAL,
-                )
-                return@on true
+                sendNPCDialogue(player, NPCs.DWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
+                return@on false
             }
 
             climb(player, animation, destination)
@@ -56,13 +51,8 @@ class MiningGuildListener : InteractionListener {
 
         on(Scenery.DOOR_2112, IntType.SCENERY, "open") { player, node ->
             if (getDynLevel(player, Skills.MINING) < REQUIRED_MINING_LEVEL) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.DWARF_382,
-                    "Sorry, but you need level 60 Mining to go in there.",
-                    FaceAnim.OLD_NORMAL,
-                )
-                return@on true
+                sendNPCDialogue(player, NPCs.DWARF_382, "Sorry, but you need level 60 Mining to go in there.", FaceAnim.OLD_NORMAL)
+                return@on false
             }
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true

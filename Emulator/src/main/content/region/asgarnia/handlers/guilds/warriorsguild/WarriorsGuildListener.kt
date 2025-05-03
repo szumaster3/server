@@ -65,13 +65,15 @@ class WarriorsGuildListener : InteractionListener {
                 handleDoor(player, node.asScenery())
                 return@on true
             }
+
             if (canEnter(player)) {
                 player.musicPlayer.unlock(Music.WARRIORS_GUILD_634)
                 handleAutowalkDoor(player, node.asScenery())
+                return@on true
             } else {
                 sendNPCDialogue(player, NPCs.GHOMMAL_4285, "You not pass. You too weedy.")
+                return@on false
             }
-            return@on true
         }
 
         on(NPCs.GAMFRED_4287, IntType.NPC, "claim-shield") { player, node ->
