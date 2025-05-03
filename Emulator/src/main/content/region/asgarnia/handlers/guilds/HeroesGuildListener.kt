@@ -64,6 +64,13 @@ class HeroesGuildListener : InteractionListener {
         private val JEWELLERY = intArrayOf(Items.RING_OF_SLAYING7_13282, Items.RING_OF_SLAYING6_13283, Items.RING_OF_SLAYING5_13284, Items.RING_OF_SLAYING4_13285, Items.RING_OF_SLAYING3_13286, Items.RING_OF_SLAYING2_13287, Items.RING_OF_SLAYING1_13288, Items.AMULET_OF_GLORY3_1710, Items.AMULET_OF_GLORY2_1708, Items.AMULET_OF_GLORY1_1706, Items.AMULET_OF_GLORY_1704, Items.AMULET_OF_GLORYT3_10356, Items.AMULET_OF_GLORYT2_10358, Items.AMULET_OF_GLORYT1_10360, Items.AMULET_OF_GLORYT_10362)
     }
 
+    /**
+     * Recharges a piece of jewellery using a familiar or a fountain.
+     *
+     * @param player The player who is attempting to recharge the jewellery.
+     * @param n The item being used to recharge the jewellery.
+     * @param node The NPC or scenery item being used to recharge the jewellery.
+     */
     private fun rechargeJewellery(
         player: Player,
         n: Node,
@@ -117,6 +124,11 @@ class HeroesGuildListener : InteractionListener {
         }
     }
 
+    /**
+     * Checks if the enchanted jewellery can be recharged by a familiar.
+     *
+     * @return `true` if the jewellery can be recharged by a familiar, otherwise `false`.
+     */
     private fun EnchantedJewellery.canBeRechargedByFamiliar(): Boolean =
         this == EnchantedJewellery.AMULET_OF_GLORY || this == EnchantedJewellery.AMULET_OF_GLORY_T
 }

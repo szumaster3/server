@@ -133,6 +133,10 @@ enum class SpecialLadder(
         ladderLoc = Location.create(3097, 9867, 0),
         destLoc = Location.create(3096, 3468, 0),
     ),
+    FALADOR_NEAR_MINING_STAIRS_F1_DOWN(
+        ladderLoc = Location.create(3019, 3343, 1),
+        destLoc = Location.create(3017, 3343, 0),
+    ),
     FALADOR_MINING_NORTH_UP(
         ladderLoc = Location.create(3019, 9740, 0),
         destLoc = Location.create(3019, 3341, 0),
