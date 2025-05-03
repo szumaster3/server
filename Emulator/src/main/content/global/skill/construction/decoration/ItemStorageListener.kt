@@ -31,9 +31,10 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
                 addItem(player, getBook(setIndex))
             } else if (getAttribute(player, "con:fancy-dress-box", false)) {
                 if (setIndex in DRESS_BOX_CONTENT.indices) {
-                    val c = (166..224 step 2)
-                    val isHidden = 166 + (setIndex * 2)
-                    sendInterfaceConfig(player, INTERFACE, c.first, false)
+                    // val componentID = (166..224 step 2)
+                    // for (i in componentID) {
+                    //     sendInterfaceConfig(player, INTERFACE, i, false)
+                    // }
                     toggleFancyDressSet(player, setIndex)
                 } else {
                     player.debug("Invalid costume set.")
@@ -204,7 +205,7 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
                 if (allInInventory(player, *set)) {
                     set.forEach { removeItem(player, Item(it, 1)) }
                     setAttribute(player, "/save:set:$setIndex", true)
-                    sendInterfaceConfig(player, INTERFACE, isHidden, true)
+                    // sendInterfaceConfig(player, INTERFACE, isHidden, true)
                     sendMessage(player, "You put your outfit into the wardrobe.")
                 } else {
                     sendMessage(player, "You need to have the full set to store it.")
