@@ -2,6 +2,7 @@ package content.global.skill.construction.decoration
 
 import core.api.*
 import core.api.item.allInInventory
+import core.api.ui.sendInterfaceConfig
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -25,22 +26,26 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
          */
 
         on(INTERFACE) { player, _, _, buttonID, _, _ ->
-            val setIndex = (buttonID - 56) / 2
-
             when {
                 getAttribute(player, "con:bookcase", false) -> {
+                    val setIndex = (buttonID - 56) / 2
                     if (setIndex in BOOKCASE_CONTENT.indices) {
                         addItem(player, BOOKCASE_CONTENT[setIndex])
                     } else {
-                        player.debug("Invalid button / book index.")
+                        player.debug("Invalid button / book index: [$buttonID]")
                     }
                 }
 
                 getAttribute(player, "con:fancy-dress-box", false) -> {
-                    if (setIndex in DRESS_BOX_CONTENT.indices) {
+                    val DRESS_BOX_COMPONENT_MAP = DRESS_BOX_COMPONENT_PAIRS.flatMapIndexed { index, (labelId, iconId) ->
+                        listOf(labelId to index, (iconId) to index)
+                    }.toMap()
+
+                    val setIndex = DRESS_BOX_COMPONENT_MAP[buttonID]
+                    if (setIndex != null) {
                         toggleFancyDressSet(player, setIndex)
                     } else {
-                        player.debug("Invalid button / costume set.")
+                        player.debug("Invalid fancy-dress button: [$buttonID]")
                     }
                 }
             }
@@ -84,7 +89,23 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
                     setAttribute(player, "con:fancy-dress-box", true)
                     openInterface(player, INTERFACE).also {
                         PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, INTERFACE, 164, 30, DRESS_BOX_CONTENT, false))
-                        listOf(225 to "Fancy dress box", 55 to "Mime costume", 57 to "Royal frog costume", 59 to "Frog mask", 61 to "Zombie outfit", 63 to "Camo outfit", 65 to "Lederhosen outfit", 67 to "Shade robes").forEach { (id, text) ->
+
+                        DRESS_BOX_COMPONENT_PAIRS.forEachIndexed { setIndex, (labelId, iconId) ->
+                            val hasSet = getAttribute(player, "set:$setIndex", false)
+                            sendInterfaceConfig(player, INTERFACE, labelId, hasSet)
+                            sendInterfaceConfig(player, INTERFACE, iconId+1, hasSet)
+                        }
+
+                        listOf(
+                            225 to "Fancy dress box",
+                            55 to "Mime costume",
+                            57 to "Royal frog costume",
+                            59 to "Frog mask",
+                            61 to "Zombie outfit",
+                            63 to "Camo outfit",
+                            65 to "Lederhosen outfit",
+                            67 to "Shade robes"
+                        ).forEach { (id, text) ->
                             sendString(player, text, INTERFACE, id)
                         }
                     }
@@ -133,6 +154,18 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
         private val BOOKCASE_CONTENT = intArrayOf(Items.ARENA_BOOK_6891, Items.MY_NOTES_11339, Items.CRUMBLING_TOME_4707, Items.PIE_RECIPE_BOOK_7162, Items.GIANNES_COOK_BOOK_2167, Items.GAME_BOOK_7681, Items.STRONGHOLD_NOTES_9004, Items.COCKTAIL_GUIDE_2023, Items.TARNS_DIARY_10587, Items.CONSTRUCTION_GUIDE_8463, Items.GLASSBLOWING_BOOK_11656, Items.BREWIN_GUIDE_8989, Items.SECURITY_BOOK_9003, Items.QUEEN_HELP_BOOK_10562, Items.ABYSSAL_BOOK_5520, Items.EXPLORERS_NOTES_11677, Items.GOBLIN_BOOK_10999, Items.DWARVEN_LORE_4568, Items.BOOK_O_PIRACY_7144, Items.CLOCKWORK_BOOK_10594, Items.SCABARITE_NOTES_11975, Items.TRANSLATION_4655, Items.BOOK_ON_CHEMICALS_711, Items.INSTRUCTION_MANUAL_5, Items.BIRD_BOOK_10173, Items.FEATHERED_JOURNAL_10179, Items.BATTERED_BOOK_2886, Items.BEATEN_BOOK_9717, Items.A_HANDWRITTEN_BOOK_9627, Items.VARMENS_NOTES_4616)
         private val BOOKCASE_RESTRICTED_CONTENT = intArrayOf(Items.HOLY_BOOK_3840, Items.DAMAGED_BOOK_3839, Items.BOOK_OF_BALANCE_3844, Items.DAMAGED_BOOK_3843, Items.UNHOLY_BOOK_3842, Items.DAMAGED_BOOK_3841, Items.STRANGE_BOOK_5507, Items.BOOK_ON_CHICKENS_7464, Items.BOOK_OF_FOLKLORE_5508, Items.PVP_WORLDS_MANUAL_14056)
 
+        // These components are responsible for buttons. Right side id +1 darkens the component area.
+        // Buttons at this point must be dependent because the options for them display together.
+        val DRESS_BOX_COMPONENT_PAIRS = listOf(
+            56 to 165,
+            58 to 167,
+            60 to 169,
+            62 to 171,
+            64 to 173,
+            66 to 175,
+            68 to 177
+        )
+
         private fun toggleFancyDressSet(player: Player, setIndex: Int) {
             val item = DRESS_BOX_CONTENT.getOrNull(setIndex)
             if (item == null) {
@@ -152,12 +185,15 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
             }
 
             val key = "set:$setIndex"
+            val (labelId, iconId) = DRESS_BOX_COMPONENT_PAIRS.getOrNull(setIndex) ?: return
 
             if (getAttribute(player, key, false)) {
                 if (freeSlots(player) >= set.size) {
                     set.forEach { addItem(player, it, 1) }
                     removeAttribute(player, key)
                     sendMessage(player, "You take the outfit from the wardrobe.")
+                    sendInterfaceConfig(player, INTERFACE, labelId, true)
+                    sendInterfaceConfig(player, INTERFACE, iconId + 1, false)
                 } else {
                     sendMessage(player, "You don't have enough inventory space.")
                 }
@@ -166,8 +202,10 @@ class ItemStorageListener : InterfaceListener, InteractionListener {
                     set.forEach { removeItem(player, Item(it, 1)) }
                     setAttribute(player, "/save:$key", true)
                     sendMessage(player, "You put your outfit into the wardrobe.")
+                    sendInterfaceConfig(player, INTERFACE, labelId, false)
+                    sendInterfaceConfig(player, INTERFACE, iconId + 1, true)
                 } else {
-                    sendMessage(player, "That isn't currently stored in the toy box.")
+                    sendMessage(player, "That isn't currently stored in the fancy dress box.")
                 }
             }
         }
