@@ -21,6 +21,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
@@ -161,14 +162,12 @@ class VarrockListener : InteractionListener {
 
             when (node.id) {
                 26810 -> {
-                    if (!inEquipment(player, Items.VARROCK_ARMOUR_3_11758) && player.location.x <= 3143) {
-                        sendNPCDialogue(
-                            player,
-                            NPCs.HEAD_CHEF_847,
-                            "The bank's closed. You just can't get the staff these days.",
-                        )
-                    } else if (getStatLevel(player, Skills.COOKING) == 99) {
-                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    if (player.location.x <= 3143 && (!inEquipment(player, Items.VARROCK_ARMOUR_3_11758) || getStatLevel(player, Skills.COOKING) < 99)) {
+                        if (GameWorld.settings?.isMembers == false) {
+                            sendNPCDialogue(player, NPCs.HEAD_CHEF_847, "The bank's closed. You just can't get the staff these days.")
+                        } else {
+                            sendNPCDialogue(player, NPCs.HEAD_CHEF_847, "You need to have completed the hard Varrock diary and have 99 Cooking to enter.")
+                        }
                     } else {
                         DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     }
@@ -190,10 +189,10 @@ class VarrockListener : InteractionListener {
                             )
                         }
                     } else if (!requiredItems && player.location.y <= 3443) {
-                        sendNPCDialogue(
+                        sendNPCDialogueLines(
                             player,
-                            NPCs.HEAD_CHEF_847,
-                            "You can't come in here unless you're wearing a chef's hat or something like that.",
+                            NPCs.HEAD_CHEF_847,FaceAnim.NEUTRAL,false,
+                            "You can't come in here unless you're wearing a chef's", "hat, or something like that.",
                         )
                     } else {
                         if (inEquipment(player, Items.VARROCK_ARMOUR_3_11758)) {
