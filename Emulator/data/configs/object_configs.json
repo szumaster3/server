@@ -14673,11 +14673,11 @@
   },
   {
     "examine": "A cape rack for you to hang your capes on.",
-    "ids": "18810"
+    "ids": "18766,18767,18768,18769,18770,18771,18810"
   },
   {
     "examine": "Stores a variety of different clothing.",
-    "ids": "18811"
+    "ids": "18784,18785,18786,18787,18788,18789,18790,18791,18792,18793,18794,18795,18796,18797,18811"
   },
   {
     "examine": "Stores holiday items.",
@@ -14685,7 +14685,7 @@
   },
   {
     "examine": "Stores your precious belongings.",
-    "ids": "18813"
+    "ids": "18804,18805,18806,18807,18808,18809,18813"
   },
   {
     "examine": "A box for you to keep clothing.",
@@ -14693,7 +14693,7 @@
   },
   {
     "examine": "A case for you to keep your armour in.",
-    "ids": "18815"
+    "ids": "18815,18778,18779,18780,18781,18782,18783"
   },
   {
     "examine": "An old, sealed mithril door.",
