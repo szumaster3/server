@@ -57,11 +57,14 @@ class DiangoReclaimInterface : ComponentPlugin() {
 
         val HOLIDAY_ITEMS: Array<Item> =
             arrayOf(
+                Item(Items.BUNNY_EARS_10734),
+                Item(Items.SCYTHE_10735),
                 Item(Items.YO_YO_4079),
                 Item(Items.REINDEER_HAT_10507),
                 Item(Items.WINTUMBER_TREE_10508),
                 Item(Items.RUBBER_CHICKEN_4566),
                 Item(Items.ZOMBIE_HEAD_6722),
+                Item(Items.EASTER_RING_7927),
                 Item(Items.BOBBLE_SCARF_6857),
                 Item(Items.BOBBLE_HAT_6856),
                 Item(Items.JESTER_HAT_6858),

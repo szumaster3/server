@@ -14681,7 +14681,7 @@
   },
   {
     "examine": "Stores holiday items.",
-    "ids": "18812"
+    "ids": "18798,18799,18800,18801,18802,18803,18812"
   },
   {
     "examine": "Stores your precious belongings.",
@@ -14689,7 +14689,7 @@
   },
   {
     "examine": "A box for you to keep clothing.",
-    "ids": "18814"
+    "ids": "18772,18773,18774,18775,18776,18777,18814"
   },
   {
     "examine": "A case for you to keep your armour in.",

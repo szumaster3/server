@@ -30,6 +30,9 @@ class MorphItemPlugin : Plugin<Any> {
         with(ItemDefinition.forId(Items.EASTER_RING_7927).handlers) {
             this["equipment"] = this@MorphItemPlugin
         }
+        with(ItemDefinition.forId(Items.EASTER_RING_10729).handlers) {
+            this["equipment"] = this@MorphItemPlugin
+        }
         with(ItemDefinition.forId(Items.RING_OF_STONE_6583).handlers) {
             this["equipment"] = this@MorphItemPlugin
         }
@@ -37,10 +40,7 @@ class MorphItemPlugin : Plugin<Any> {
         return this
     }
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any {
+    override fun fireEvent(identifier: String, vararg args: Any, ): Any {
         val player = args[0] as Player
         val item = args[1] as Item
         return when (identifier) {
@@ -53,10 +53,7 @@ class MorphItemPlugin : Plugin<Any> {
         }
     }
 
-    private fun morph(
-        player: Player,
-        item: Item,
-    ) {
+    private fun morph(player: Player, item: Item, ) {
         val morphId =
             if (item.id == Items.RING_OF_STONE_6583) {
                 NPCs.ROCKS_2626
@@ -86,14 +83,7 @@ class MorphItemPlugin : Plugin<Any> {
             return this
         }
 
-        override fun handle(
-            player: Player,
-            component: Component,
-            opcode: Int,
-            button: Int,
-            slot: Int,
-            itemId: Int,
-        ): Boolean {
+        override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int, ): Boolean {
             player.interfaceManager.closeSingleTab()
             return true
         }
