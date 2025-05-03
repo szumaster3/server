@@ -12,6 +12,7 @@ import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.rs.consts.Components;
 
 import static core.api.ContentAPIKt.setAttribute;
 
@@ -39,7 +40,7 @@ public final class IcePathZone extends MapZone implements Plugin<Object> {
     public boolean enter(Entity e) {
         if (e instanceof Player) {
             final Player player = (Player) e;
-            player.getInterfaceManager().openOverlay(new Component(482));
+            player.getInterfaceManager().openOverlay(new Component(Components.SNOW_OVERLAY_370));
             Pulse pulse = new Pulse(10, player) {
                 @Override
                 public boolean pulse() {

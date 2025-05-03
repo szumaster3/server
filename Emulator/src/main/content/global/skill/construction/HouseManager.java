@@ -555,6 +555,9 @@ public final class HouseManager {
                 chunkY = 7 - chunkY;
                 break;
             }
+            case NORTH: {
+                break;
+            }
             default: {
 
             }

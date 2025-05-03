@@ -30,14 +30,24 @@ class MultiwayCombatZone
             register(ZoneBorders(3072, 3608, 3327, 3647))
             register(ZoneBorders(2624, 2550, 2690, 2619))
             register(ZoneBorders(2371, 5062, 2422, 5117))
-            register(ZoneBorders(2896, 3595, 2927, 3630))
+            register(ZoneBorders(2896, 3595, 2927, 3630)) // Death plateau.
             register(ZoneBorders(2820, 5250, 2955, 5370))
             register(ZoneBorders(2892, 4435, 2932, 4464))
             register(ZoneBorders(2724, 5071, 2747, 5109))
             register(ZoneBorders(2256, 4680, 2287, 4711))
             register(ZoneBorders(3107, 3234, 3134, 3259))
             register(ZoneBorders(2931, 3514, 2940, 3518))
-            register(ZoneBorders(2869, 3687, 2940, 3839))
+            register(TROLLHEIM_GWD_BORDERS)
+            /*
+             * Exception near GWD entrance.
+             * https://youtu.be/gjteOK7HNlU?si=xd3ef6qJ5nzlYDqu&t=267
+             * https://youtu.be/BG1TqWzeZWQ?si=OdhfU47HrJiaquBf&t=171
+             */
+            TROLLHEIM_GWD_BORDERS.addException(ZoneBorders(2913, 3744, 2922, 3751))
+
+            Location.create(2913, 3744, 0)
+            Location.create(2922, 3751, 0)
+
             register(ZoneBorders(1728, 5120, 1791, 5247))
             register(ZoneBorders(3136, 3523, 3328, 3710))
             registerRegion(13105, ZoneBorders(3282, 3159, 3303, 3177))
@@ -70,7 +80,7 @@ class MultiwayCombatZone
             register(ZoneBorders(2685, 2685, 2825, 2825))
             // Necromancer tower +1.
             register(ZoneBorders(2673, 3238, 2666, 3250, 1, false))
-            // Neitiznot
+            // Neitiznot.
             register(ZoneBorders(2381, 3823, 2306, 3843))
         }
 
@@ -149,5 +159,6 @@ class MultiwayCombatZone
             val DESERT_BANDITS_REGION_1 = 11318
             val PHOENIX_LAIR_1 = 13905
             val PHOENIX_LAIR_2 = 14161
+            val TROLLHEIM_GWD_BORDERS = ZoneBorders(2869, 3687, 2940, 3839)
         }
     }

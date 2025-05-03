@@ -15302,5 +15302,13 @@
   {
     "examine": "Apparently there's a lot of paperwork involved in running a Fishing Colony.",
     "ids": "14971"
+  },
+  {
+    "examine": "You might be able to pass this boulder with sufficient strength.",
+    "ids": "26338"
+  },
+  {
+    "examine": "Maybe I can crawl through here.",
+    "ids": "26305"
   }
 ]

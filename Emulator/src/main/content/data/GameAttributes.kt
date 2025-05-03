@@ -11,6 +11,10 @@ internal object GameAttributes {
     // Timers.
     const val TELEBLOCK_TIMER = "teleblock"
 
+    // Location save.
+    const val ORIGINAL_LOCATION = "/save:original-loc"
+    const val LOGOUT = "/save:logout"
+
     // Tutorial island.
     const val TUTORIAL_COMPLETE = "tutorial:complete"
     const val TUTORIAL_STAGE = "tutorial:stage"
