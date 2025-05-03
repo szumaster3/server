@@ -106,15 +106,9 @@ class BarrelRoom :
         return this
     }
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any? = null
+    override fun fireEvent(identifier: String, vararg args: Any, ): Any? = null
 
-    override fun leave(
-        e: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(e: Entity, logout: Boolean, ): Boolean {
         if (e is Player && e.getAttribute("barrel_count", 0) > 0) {
             players.remove(e)
             removeBarrels(e)

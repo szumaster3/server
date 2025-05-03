@@ -25,38 +25,18 @@ import org.rs.consts.Components
 
 @Initializable
 class DummyRoom : OptionHandler() {
-    private enum class Dummy(
-        val scenery: Scenery,
-        val attackStyle: Int,
-        val bonusType: Int,
-    ) {
-        STAB(scenery = Scenery(15629, 2857, 3549, 0, 10, 2), attackStyle = -1, bonusType = WeaponInterface.BONUS_STAB),
-        SLASH(scenery = Scenery(15625, 2858, 3554, 0), attackStyle = -1, bonusType = WeaponInterface.BONUS_SLASH),
-        CRUSH(
-            scenery = Scenery(15628, 2859, 3549, 0, 10, 2),
-            attackStyle = -1,
-            bonusType = WeaponInterface.BONUS_CRUSH,
-        ),
-        CONTROLLED(
-            scenery = Scenery(15627, 2855, 3552, 0, 10, 3),
-            attackStyle = WeaponInterface.STYLE_CONTROLLED,
-            bonusType = -1,
-        ),
-        DEFENCE(
-            scenery = Scenery(15630, 2855, 3550, 0, 10, 3),
-            attackStyle = WeaponInterface.STYLE_DEFENSIVE,
-            bonusType = -1,
-        ),
-        AGGRESSIVE(
-            scenery = Scenery(15626, 2860, 3553, 0, 10, 1),
-            attackStyle = WeaponInterface.STYLE_AGGRESSIVE,
-            bonusType = -1,
-        ),
-        ACCURATE(scenery = Scenery(15624, 2856, 3554, 0), attackStyle = WeaponInterface.STYLE_ACCURATE, bonusType = -1),
+    private enum class Dummy(val scenery: Scenery, val attackStyle: Int, val bonusType: Int, ) {
+        STAB(Scenery(org.rs.consts.Scenery.DUMMY_15629, 2857, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_STAB),
+        SLASH(Scenery(org.rs.consts.Scenery.DUMMY_15625, 2858, 3554, 0), -1, WeaponInterface.BONUS_SLASH),
+        CRUSH(Scenery(org.rs.consts.Scenery.DUMMY_15628, 2859, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_CRUSH),
+        CONTROLLED(Scenery(org.rs.consts.Scenery.DUMMY_15627, 2855, 3552, 0, 10, 3), WeaponInterface.STYLE_CONTROLLED, -1),
+        DEFENCE(Scenery(org.rs.consts.Scenery.DUMMY_15630, 2855, 3550, 0, 10, 3), WeaponInterface.STYLE_DEFENSIVE, -1,),
+        AGGRESSIVE(Scenery(org.rs.consts.Scenery.DUMMY_15626, 2860, 3553, 0, 10, 1), WeaponInterface.STYLE_AGGRESSIVE, -1,),
+        ACCURATE(Scenery(org.rs.consts.Scenery.DUMMY_15624, 2856, 3554, 0), WeaponInterface.STYLE_ACCURATE, -1),
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        SceneryDefinition.forId(15656).handlers["option:view"] = this
+        SceneryDefinition.forId(org.rs.consts.Scenery.INFORMATION_SCROLL_15656).handlers["option:view"] = this
         for (dummy in Dummy.values()) {
             SceneryDefinition.forId(dummy.scenery.id).handlers["option:hit"] = this
         }
@@ -83,20 +63,12 @@ class DummyRoom : OptionHandler() {
                     delay = 4
                     var animation = Animation.create(4164)
                     animation.setObject(dummy!!.scenery)
-                    getRegionChunk(dummy!!.scenery.location).flag(
-                        AnimateSceneryUpdateFlag(
-                            animation,
-                        ),
-                    )
+                    getRegionChunk(dummy!!.scenery.location).flag(AnimateSceneryUpdateFlag(animation),)
                     activeDummy = false
                     if (controlled != null) {
                         animation = Animation.create(4164)
                         animation.setObject(controlled)
-                        getRegionChunk(controlled!!.location).flag(
-                            AnimateSceneryUpdateFlag(
-                                animation,
-                            ),
-                        )
+                        getRegionChunk(controlled!!.location).flag(AnimateSceneryUpdateFlag(animation))
                         controlled = null
                     }
                     return false
@@ -106,13 +78,9 @@ class DummyRoom : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String, ): Boolean {
         val scenery = node as Scenery
-        if (scenery.id == 15656) {
+        if (scenery.id == org.rs.consts.Scenery.INFORMATION_SCROLL_15656) {
             openInterface(player, Components.WARGUILD_DUMMY_412)
             return true
         }
@@ -121,15 +89,9 @@ class DummyRoom : OptionHandler() {
                 sendMessage(player, "You have already hit a dummy this turn.")
                 return true
             }
-            if (player.properties.attackStyle.style != dummy!!.attackStyle &&
-                player.properties.attackStyle.bonusType != dummy!!.bonusType
-            ) {
+            if (player.properties.attackStyle.style != dummy!!.attackStyle && player.properties.attackStyle.bonusType != dummy!!.bonusType) {
                 lock(player, 5)
-                visualize(
-                    player,
-                    player.properties.attackAnimation,
-                    Graphics(80, 96),
-                )
+                visualize(player, player.properties.attackAnimation, Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
                 sendMessage(player, "You whack the dummy with the wrong attack style.")
             } else {
                 player.getSkills().addExperience(Skills.ATTACK, 15.0, true)

@@ -15310,5 +15310,13 @@
   {
     "examine": "Maybe I can crawl through here.",
     "ids": "26305"
+  },
+  {
+    "examine": "This scroll has information about the catapult game.",
+    "ids": "15657"
+  },
+  {
+    "examine": "This scroll has information about the dummy game.",
+    "ids": "15656"
   }
 ]

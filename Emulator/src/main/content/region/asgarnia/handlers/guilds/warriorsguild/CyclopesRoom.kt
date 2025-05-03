@@ -30,15 +30,14 @@ import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
+import org.rs.consts.Items
+import org.rs.consts.NPCs
 
 @Initializable
 class CyclopesRoom :
     MapZone("wg cyclopes", true, ZoneRestriction.RANDOM_EVENTS),
     Plugin<Any> {
-    override fun leave(
-        e: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(e: Entity, logout: Boolean, ): Boolean {
         if (e is Player) {
             leave(e)
             PLAYERS.remove(e)
@@ -50,11 +49,8 @@ class CyclopesRoom :
         return super.leave(e, logout)
     }
 
-    override fun death(
-        e: Entity,
-        killer: Entity,
-    ): Boolean {
-        if (killer is Player && e is NPC && (e.getId() == 4292 || e.getId() == 4291)) {
+    override fun death(e: Entity, killer: Entity, ): Boolean {
+        if (killer is Player && e is NPC && (e.getId() == NPCs.CYCLOPS_4292 || e.getId() == NPCs.CYCLOPS_4291)) {
             var defenderId = getDefenderIndex(killer)
             if (RandomFunction.randomize(50) == 10) {
                 if (++defenderId == DEFENDERS.size) {
@@ -77,8 +73,8 @@ class CyclopesRoom :
         definePlugin(
             object : OptionHandler() {
                 override fun newInstance(arg: Any?): Plugin<Any> {
-                    SceneryDefinition.forId(15641).handlers["option:open"] = this
-                    SceneryDefinition.forId(15644).handlers["option:open"] = this
+                    SceneryDefinition.forId(org.rs.consts.Scenery.DOOR_15641).handlers["option:open"] = this
+                    SceneryDefinition.forId(org.rs.consts.Scenery.DOOR_15644).handlers["option:open"] = this
                     return this
                 }
 
@@ -88,8 +84,8 @@ class CyclopesRoom :
                     option: String,
                 ): Boolean {
                     if (player.location.x <= 2846) {
-                        val tokens = Item(8851, 100)
-                        val tokens10 = Item(8851, 10)
+                        val tokens = Item(Items.WARRIOR_GUILD_TOKEN_8851, 100)
+                        val tokens10 = Item(Items.WARRIOR_GUILD_TOKEN_8851, 10)
                         if (!player.inventory.containsItem(tokens)) {
                             player.dialogueInterpreter.sendItemMessage(
                                 tokens,
@@ -122,10 +118,7 @@ class CyclopesRoom :
         return this
     }
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any? = null
+    override fun fireEvent(identifier: String, vararg args: Any, ): Any? = null
 
     private class KamfreenaCyclopsRoomDialogue : Dialogue {
         private var defenderId = 0
@@ -138,37 +131,34 @@ class CyclopesRoom :
         override fun open(vararg args: Any?): Boolean {
             defenderId = args[0] as Int
             if (defenderId == -1) {
-                npc(4289, "Well, since you haven't shown me a defender to prove", "your prowess as a warrior,")
+                npc(NPCs.KAMFREENA_4289, "Well, since you haven't shown me a defender to prove", "your prowess as a warrior,")
             } else {
-                npc(4289, "Ahh I see that you have one of the defenders already!", "Well done.")
+                npc(NPCs.KAMFREENA_4289, "Ahh I see that you have one of the defenders already!", "Well done.")
             }
             return true
         }
 
-        override fun handle(
-            interfaceId: Int,
-            buttonId: Int,
-        ): Boolean {
+        override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
             when (stage) {
                 0 -> {
                     setAttribute(player, "sent_dialogue", true)
                     if (defenderId == DEFENDERS.size - 1) {
                         npc(
-                            4289,
+                            NPCs.KAMFREENA_4289,
                             "I'll release some cyclopes which might drop the same",
                             "rune defender for you as there isn't any higher! Have",
                             "fun in there.",
                         )
                     } else if (defenderId == -1) {
                         npc(
-                            4289,
+                            NPCs.KAMFREENA_4289,
                             "I'll release some cyclopes which might drop bronze",
                             "defenders for you to start off with, unless you show me",
                             "another. Have fun in there.",
                         )
                     } else {
                         npc(
-                            4289,
+                            NPCs.KAMFREENA_4289,
                             "I'll release some cyclopes which might drop the next",
                             "defender for you. Have fun in there.",
                         )
@@ -199,7 +189,7 @@ class CyclopesRoom :
                         val player = it.next()
                         val current = player.getAttribute("cyclops_ticks", 0) + 5
                         if (current % 100 == 0) {
-                            val tokens = Item(8851, 10)
+                            val tokens = Item(Items.WARRIOR_GUILD_TOKEN_8851, 10)
                             if (!player.inventory.containsItem(tokens)) {
                                 if (!player.locks.isMovementLocked) {
                                     player.pulseManager.clear()
@@ -231,10 +221,7 @@ class CyclopesRoom :
             for (i in DEFENDERS.indices.reversed()) {
                 val id = DEFENDERS[i]
                 if (player.equipment.getNew(EquipmentContainer.SLOT_SHIELD).id == id ||
-                    player.inventory.contains(
-                        id,
-                        1,
-                    )
+                    player.inventory.contains(id, 1)
                 ) {
                     index = i
                     break

@@ -17,11 +17,7 @@ class GoblinVillageNPC(
     private var delay = 0L
     private var green = true
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = GoblinVillageNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = GoblinVillageNPC(id, location)
 
     override fun init() {
         super.init()

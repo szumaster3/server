@@ -28,6 +28,7 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import org.rs.consts.Animations
 import org.rs.consts.Items
+import org.rs.consts.NPCs
 import kotlin.math.ceil
 
 @Initializable
@@ -74,15 +75,11 @@ class ShotPutRoom(
         init {
             definePlugin(
                 object : OptionHandler() {
-                    override fun handle(
-                        player: Player,
-                        node: Node,
-                        option: String,
-                    ): Boolean {
+                    override fun handle(player: Player, node: Node, option: String, ): Boolean {
                         val lowWeight = node.id == 15664
                         if (node is GroundItem) {
                             player.dialogueInterpreter.sendDialogues(
-                                4300,
+                                NPCs.REF_4300,
                                 FaceAnim.FURIOUS,
                                 "Hey! You can't take that, it's guild property. Take one",
                                 "from the pile.",
@@ -127,8 +124,8 @@ class ShotPutRoom(
                     }
 
                     override fun newInstance(arg: Any?): Plugin<Any> {
-                        SceneryDefinition.forId(15664).handlers["option:throw"] = this
-                        SceneryDefinition.forId(15665).handlers["option:throw"] = this
+                        SceneryDefinition.forId(org.rs.consts.Scenery.SHOT_15664).handlers["option:throw"] = this
+                        SceneryDefinition.forId(org.rs.consts.Scenery.SHOT_15665).handlers["option:throw"] = this
                         ItemDefinition.forId(Items.EIGHTEEN_LB_SHOT_8858).handlers["option:take"] = this
                         ItemDefinition.forId(Items.TWENTY_TWO_LB_SHOT_8859).handlers["option:take"] = this
                         return this
@@ -145,7 +142,7 @@ class ShotPutRoom(
         ) {
             player.lock()
             var cost = if (lowWeight) 6 else 12
-            if (player.getAttribute<Boolean>("hand_dust", false)) {
+            if (player.getAttribute("hand_dust", false)) {
                 removeAttribute(player, "hand_dust")
                 cost = 0
             }
@@ -193,19 +190,14 @@ class ShotPutRoom(
                             player.getSavedData().activityData.updateWarriorTokens(tiles + (if (!lowWeight) 2 else 0))
                             player.getSkills().addExperience(Skills.STRENGTH, tiles.toDouble())
                             player.dialogueInterpreter.sendDialogues(
-                                if (lowWeight) 4299 else 4300,
+                                if (lowWeight) NPCs.REF_4299 else NPCs.REF_4300,
                                 FaceAnim.HALF_GUILTY,
                                 "Well done. You threw the shot " + (tiles - 1) + " yard" +
                                     (if (tiles > 2) "s!" else "!"),
                             )
                         }
                         GroundItemManager.create(
-                            GroundItem(
-                                Item(if (lowWeight) Items.EIGHTEEN_LB_SHOT_8858 else Items.TWENTY_TWO_LB_SHOT_8859),
-                                loc,
-                                20,
-                                player,
-                            ),
+                            GroundItem(Item(if (lowWeight) Items.EIGHTEEN_LB_SHOT_8858 else Items.TWENTY_TWO_LB_SHOT_8859), loc, 20, player),
                         )
                         return true
                     }
