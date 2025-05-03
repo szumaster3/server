@@ -11,8 +11,15 @@ import org.rs.consts.*
 
 class FaladorListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Before and after the quest they depict a generic person.
+         * During While Guthix Sleeps they are replaced by wanted
+         * posters which show a picture of the Dark Squall.
+         */
+
         on(POSTER, IntType.SCENERY, "look-at") { player, _ ->
-            sendDialogue(player, "Looks like a generic wanted poster.")
+            openInterface(player, 819)
             return@on true
         }
 
