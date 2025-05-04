@@ -34,18 +34,11 @@ class GodBookOptionHandler : OptionHandler() {
                 "check" -> {
                     val messages = arrayOfNulls<String>(4)
                     for (i in messages.indices) {
-                        messages[i] =
-                            if (book.hasPage(
-                                    player,
-                                    node.asItem(),
-                                    i + 1,
-                                )
-                            ) {
-                                "The " + getNumberName(i + 1) + " page is in the book."
-                            } else {
-                                "The " + getNumberName(i + 1) +
-                                    " page is missing."
-                            }
+                        messages[i] = if (book.hasPage(player, node.asItem(), i + 1)) {
+                            "The " + getNumberName(i + 1) + " page is in the book."
+                        } else {
+                            "The " + getNumberName(i + 1) + " page is missing."
+                        }
                     }
                     player.dialogueInterpreter.sendDialogue(*messages)
                     return true
@@ -68,11 +61,7 @@ class GodBookOptionHandler : OptionHandler() {
             return this
         }
 
-        override fun canPickUp(
-            player: Player,
-            item: GroundItem,
-            type: Int,
-        ): Boolean {
+        override fun canPickUp(player: Player, item: GroundItem, type: Int): Boolean {
             if (player.hasItem(item.asItem())) {
                 player.sendMessage("You do not need more than one incomplete book.")
                 return false
@@ -81,7 +70,8 @@ class GodBookOptionHandler : OptionHandler() {
         }
     }
 
-    inner class PageHandler : UseWithHandler(Items.DAMAGED_BOOK_3839, Items.DAMAGED_BOOK_3841, Items.DAMAGED_BOOK_3843) {
+    inner class PageHandler :
+        UseWithHandler(Items.DAMAGED_BOOK_3839, Items.DAMAGED_BOOK_3841, Items.DAMAGED_BOOK_3843) {
         override fun newInstance(arg: Any?): Plugin<Any?> {
             for (book in GodBook.values()) {
                 for (i in book.pages) {
@@ -102,11 +92,10 @@ class GodBookOptionHandler : OptionHandler() {
         }
     }
 
-    private fun getNumberName(i: Int): String =
-        when (i) {
-            1 -> "first"
-            2 -> "second"
-            3 -> "third"
-            else -> "fourth"
-        }
+    private fun getNumberName(i: Int): String = when (i) {
+        1 -> "first"
+        2 -> "second"
+        3 -> "third"
+        else -> "fourth"
+    }
 }

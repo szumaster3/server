@@ -27,11 +27,10 @@ import org.rs.consts.*
 class PlagueCityListener : InteractionListener {
     companion object {
         const val BUCKET_USES_ATTRIBUTE = "/save:elena:bucket"
-        const val TIED_ROPE_VARBIT = 1787
-        const val MUD_PATCH_VARBIT = 1785
+        const val TIED_ROPE_VARBIT = Vars.VARP_QUEST_PLAGUE_CITY_TIED_ROPE_1787
+        const val MUD_PATCH_VARBIT = Vars.VARP_QUEST_PLAGUE_CITY_MUD_PATCH_1785
         val MANS = intArrayOf(NPCs.MAN_728, NPCs.MAN_729, NPCs.MAN_351)
-        val WOMANS =
-            intArrayOf(NPCs.WOMAN_352, NPCs.WOMAN_353, NPCs.WOMAN_354, NPCs.WOMAN_360, NPCs.WOMAN_362, NPCs.WOMAN_363)
+        val WOMANS = intArrayOf(NPCs.WOMAN_352, NPCs.WOMAN_353, NPCs.WOMAN_354, NPCs.WOMAN_360, NPCs.WOMAN_362, NPCs.WOMAN_363)
     }
 
     override fun defineListeners() {
@@ -243,6 +242,8 @@ class PlagueCityListener : InteractionListener {
             } else if (getQuestStage(player, Quests.PLAGUE_CITY) >= 2) {
                 sendItemDialogue(player, Items.GAS_MASK_1506, "You find a protective mask.")
                 addItem(player, Items.GAS_MASK_1506)
+            } else {
+                sendMessage(player, "You search the wardrobe but you find nothing.")
             }
             return@on true
         }

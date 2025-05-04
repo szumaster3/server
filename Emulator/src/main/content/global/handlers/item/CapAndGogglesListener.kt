@@ -18,14 +18,15 @@ class CapAndGogglesListener : InteractionListener {
                 return@on true
             }
 
-            removeItem(player, Item(capAndGoggles, 1))
-            replaceSlot(
-                player,
-                slot = node.index,
-                item = Item(bomberCap, 1),
-                container = Container.INVENTORY,
-            )
-            addItem(player, gnomeGoggles, 1)
+            if(removeItem(player, Item(capAndGoggles, 1))) {
+                replaceSlot(
+                    player,
+                    slot = node.index,
+                    item = Item(bomberCap, 1),
+                    container = Container.INVENTORY,
+                )
+                addItem(player, gnomeGoggles, 1)
+            }
             return@on true
         }
     }
