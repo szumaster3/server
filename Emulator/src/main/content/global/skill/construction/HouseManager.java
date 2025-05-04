@@ -185,6 +185,9 @@ public final class HouseManager {
      * @param buildingMode the building mode
      */
     public void enter(final Player player, boolean buildingMode) {
+        player.lock();
+        player.getLocks().lockTeleport(6);
+        player.getLocks().lockMovement(6);
         player.getLocks().lockComponent(6);
         player.getInterfaceManager().closeSingleTab();
         preEnter(player, buildingMode);
@@ -217,6 +220,7 @@ public final class HouseManager {
             public boolean pulse() {
                 PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
                 player.getInterfaceManager().close();
+                player.unlock();
                 return true;
             }
         });
