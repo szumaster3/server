@@ -20,6 +20,7 @@ class MazeNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs
         face(player)
         lock(player, 6)
         sendChat("Aha, you'll do ${player.username}!")
+        setAttribute(player, RandomEvent.save(), player.location)
         registerLogoutListener(player, RandomEvent.logout()) { p ->
             p.location = getAttribute(p, RandomEvent.save(), player.location)
         }
