@@ -121,7 +121,7 @@ enum class Emotes(
     HEADBANG(buttonId = 17, animation = Animations.HEADBANG_EMOTE_2108), CRY(
         buttonId = 18, animation = Animations.CRY_860
     ),
-    BLOW_KISS(buttonId = 19, animation = Animations.NULL_1366, graphics = org.rs.consts.Graphics.HEART_574), PANIC(
+    BLOW_KISS(buttonId = 19, animation = Animations.HUMAN_BLOW_KISS_1374, graphics = org.rs.consts.Graphics.HEART_574), PANIC(
         buttonId = 20, animation = Animations.PANIC_2105
     ),
     RASPBERRY(buttonId = 21, animation = Animations.RASPBERRY_2110), CLAP(
