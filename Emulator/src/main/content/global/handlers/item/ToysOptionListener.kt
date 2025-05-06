@@ -9,18 +9,26 @@ import org.rs.consts.*
 
 class ToysOptionListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles interaction with marionettes.
+         */
+
         on(MARIONETTES, IntType.ITEM, "jump", "walk", "bow", "dance") { player, marionette ->
             val index = MARIONETTES.indexOf(marionette.id)
-
             lockInteractions(player, 2)
             when (getUsedOption(player)) {
-                "jump" -> visualize(player, MARIONETTE_JUMP, MARIONETTE_GFX[index][0])
-                "walk" -> visualize(player, MARIONETTE_WALK, MARIONETTE_GFX[index][1])
-                "bow" -> visualize(player, MARIONETTE_BOW, MARIONETTE_GFX[index][2])
+                "jump" -> visualize(player,  MARIONETTE_JUMP, MARIONETTE_GFX[index][0])
+                "walk" -> visualize(player,  MARIONETTE_WALK, MARIONETTE_GFX[index][1])
+                "bow" -> visualize(player,   MARIONETTE_BOW, MARIONETTE_GFX[index][2])
                 "dance" -> visualize(player, MARIONETTE_DANCE, MARIONETTE_GFX[index][3])
             }
             return@on true
         }
+
+        /*
+         * Handles interaction with spinning plate.
+         */
 
         on(Items.SPINNING_PLATE_4613, IntType.ITEM, "spin") { player, _ ->
             lockInteractions(player, 2)
@@ -30,6 +38,10 @@ class ToysOptionListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles interaction with yo-yo.
+         */
 
         on(Items.YO_YO_4079, IntType.ITEM, "play", "loop", "walk", "crazy") { player, _ ->
             val option = getUsedOption(player)
@@ -44,6 +56,10 @@ class ToysOptionListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with rubber chicken.
+         */
+
         on(Items.RUBBER_CHICKEN_4566, IntType.ITEM, "operate", "Dance") { player, _ ->
             lockInteractions(player, 2)
             animate(player, Animations.CHICKEN_DANCE_1835)
@@ -51,6 +67,10 @@ class ToysOptionListener : InteractionListener {
             playAudio(player, Sounds.CHICKEN_ATTACK_355, 100)
             return@on true
         }
+
+        /*
+         * Handles interaction with zombie head.
+         */
 
         on(Items.ZOMBIE_HEAD_6722, IntType.ITEM, "talk-at", "display", "question") { player, _ ->
             val option = getUsedOption(player)
@@ -71,11 +91,19 @@ class ToysOptionListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with reindeer hat.
+         */
+
         on(Items.REINDEER_HAT_10507, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
             visualize(player, Animations.REINDEER_HAT_EMOTE_5059, Graphics.RHUDOLF_EMOTE_GFX_859)
             return@on true
         }
+
+        /*
+         * Handles interaction with snow globe.
+         */
 
         on(Items.SNOW_GLOBE_11949, IntType.ITEM, "shake") { player, _ ->
             lockInteractions(player, 2)
@@ -89,17 +117,29 @@ class ToysOptionListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interaction with chocatrice cape.
+         */
+
         on(Items.CHOCATRICE_CAPE_12645, IntType.ITEM, "operate") { player, _ ->
             lockInteractions(player, 2)
             visualize(player, 8903, Graphics.CHOCATRICE_CAPE_EASTER_EGG_EMOTE_1566)
             return@on true
         }
 
+        /*
+         * Handles interaction with toy kite.
+         */
+
         on(Items.TOY_KITE_12844, IntType.ITEM, "fly", "operate") { player, _ ->
             lockInteractions(player, 2)
             animate(player, TOY_KITE_FLY)
             return@on true
         }
+
+        /*
+         * Handles interaction with toy horsey.
+         */
 
         on(horseyMap.keys.toIntArray(), IntType.ITEM, "play-with") { player, node ->
             stopWalk(player)
@@ -146,24 +186,9 @@ class ToysOptionListener : InteractionListener {
         private val MARIONETTE_DANCE = Animation(Animations.MARIONETTE_DANCE_3006)
         private val MARIONETTE_GFX =
             arrayOf(
-                intArrayOf(
-                    Graphics.JUMP_MARIONETTE_RED_507,
-                    Graphics.WALK_MARIONETTE_RED_508,
-                    Graphics.BOW_MARIONETTE_RED_509,
-                    Graphics.DANCE_MARIONETTE_RED_510,
-                ),
-                intArrayOf(
-                    Graphics.JUMP_MARIONETTE_BLUE_511,
-                    Graphics.WALK_MARIONETTE_BLUE_512,
-                    Graphics.BOW_MARIONETTE_BLUE_513,
-                    Graphics.DANCE_MARIONETTE_BLUE_514,
-                ),
-                intArrayOf(
-                    Graphics.JUMP_MARIONETTE_GREEN_515,
-                    Graphics.WALK_MARIONETTE_GREEN_516,
-                    Graphics.BOW_MARIONETTE_GREEN_517,
-                    Graphics.DANCE_MARIONETTE_GREEN_518,
-                ),
+                intArrayOf(Graphics.JUMP_MARIONETTE_RED_507, Graphics.WALK_MARIONETTE_RED_508, Graphics.BOW_MARIONETTE_RED_509, Graphics.DANCE_MARIONETTE_RED_510),
+                intArrayOf(Graphics.JUMP_MARIONETTE_BLUE_511, Graphics.WALK_MARIONETTE_BLUE_512, Graphics.BOW_MARIONETTE_BLUE_513, Graphics.DANCE_MARIONETTE_BLUE_514),
+                intArrayOf(Graphics.JUMP_MARIONETTE_GREEN_515, Graphics.WALK_MARIONETTE_GREEN_516, Graphics.BOW_MARIONETTE_GREEN_517, Graphics.DANCE_MARIONETTE_GREEN_518),
             )
     }
 }

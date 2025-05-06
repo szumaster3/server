@@ -35,10 +35,19 @@ class SatchelListener : InteractionListener {
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles adding food to satchel.
+         */
+
         onUseWith(IntType.ITEM, SATCHEL_RESOURCES, *SATCHEL_IDS) { player, used, with ->
             add(player, used.asItem(), with.asItem())
             return@onUseWith true
         }
+
+        /*
+         * Handles satchel interaction options.
+         */
 
         on(SATCHEL_IDS, IntType.ITEM, "inspect", "empty", "drop") { player, node ->
             when (getUsedOption(player)) {
@@ -51,6 +60,13 @@ class SatchelListener : InteractionListener {
         }
     }
 
+    /**
+     * Adds a food item to the satchel if it has space and doesn't already contain the item.
+     *
+     * @param player The player attempting to add the item.
+     * @param used The food item being added.
+     * @param satchelItem The satchel to store the item in.
+     */
     private fun add(
         player: Player,
         used: Item,
@@ -78,11 +94,24 @@ class SatchelListener : InteractionListener {
         sendMessage(player, "You add a $itemName to the satchel.")
     }
 
+    /**
+     * Checks if the satchel is full based on current and base charge values.
+     *
+     * @param charges Current charge amount of the satchel.
+     * @param base Base charge constant.
+     * @return `true` if the satchel is full; `false` otherwise.
+     */
     private fun isFull(
         charges: Int,
         base: Int,
     ) = charges >= 10816 + base
 
+    /**
+     * Inspects the satchel and displays its contents to the player in a dialogue.
+     *
+     * @param player The player inspecting the satchel.
+     * @param item The satchel item being inspected.
+     */
     private fun inspect(
         player: Player,
         item: Item,
@@ -101,6 +130,13 @@ class SatchelListener : InteractionListener {
         sendItemDialogue(player, item.id, "The ${getItemName(item.id)}!<br>(Containing: $message)")
     }
 
+    /**
+     * Empties the contents of the satchel into the player's inventory.
+     * Will only empty if there is at least one free inventory slot.
+     *
+     * @param player The player attempting to empty the satchel.
+     * @param item The satchel item being emptied.
+     */
     private fun empty(
         player: Player,
         item: Item,
@@ -120,6 +156,15 @@ class SatchelListener : InteractionListener {
         setCharge(item, 1000)
     }
 
+    /**
+     * Checks if the satchel already contains the specific food item or is at target charge.
+     *
+     * @param item The satchel item to check.
+     * @param charges Current charge amount.
+     * @param targetCharge Calculated target charge.
+     * @param checkId ID of the food item being added.
+     * @return `true` if the item is already present or satchel is at target charge; `false` otherwise.
+     */
     private fun check(
         item: Item,
         charges: Int,
@@ -135,6 +180,12 @@ class SatchelListener : InteractionListener {
         return item.isCharged && (charges == targetCharge || potentialItems.contains(checkId))
     }
 
+    /**
+     * Empties the satchel's contents on the ground when dropped and notifies the player.
+     *
+     * @param player The player who dropped the satchel.
+     * @param satchel The satchel being dropped.
+     */
     private fun drop(
         player: Player,
         satchel: Item,

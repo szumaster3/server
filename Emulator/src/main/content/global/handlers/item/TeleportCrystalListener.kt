@@ -15,6 +15,11 @@ import org.rs.consts.Quests
 
 class TeleportCrystalListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles using teleport crystals.
+         */
+
         on(crystalIDs, IntType.ITEM, "activate") { player, node ->
             if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return@on true
             if (!WildernessZone.checkTeleport(player, 20)) {
@@ -47,6 +52,12 @@ class TeleportCrystalListener : InteractionListener {
                 Items.TP_CRYSTAL_1_6102,
             )
 
+        /**
+         * Handles the degradation of a teleportation crystal when used.
+         *
+         * @param player The player using the teleportation crystal.
+         * @param item The current teleportation crystal item to degrade.
+         */
         private fun degrade(
             player: Player,
             item: Item,

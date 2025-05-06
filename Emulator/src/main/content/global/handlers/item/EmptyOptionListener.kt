@@ -269,11 +269,31 @@ class EmptyOptionListener : InteractionListener {
         ;
 
         companion object {
+            /**
+             * Maps a full item ID (e.g., full potion) to its corresponding empty item ID (e.g., empty vial).
+             */
             var emptyItemMap: MutableMap<Int, Int> = HashMap()
+
+            /**
+             * Maps a full item ID to the message shown when the item is emptied.
+             */
             var emptyMessageMap: MutableMap<Int, String> = HashMap()
+
+            /**
+             * Maps a full item ID to the audio clip played when the item is emptied.
+             */
             var emptyAudioMap: MutableMap<Int, Int> = HashMap()
+
+            /**
+             * List of all full item IDs that can be emptied (e.g., potions, brews, etc.).
+             */
             var emptyItemList: MutableList<Int> = mutableListOf()
 
+            /**
+             * Initializes the maps and list with known emptyable items and known item name patterns.
+             * Adds entries for each enum value (with associated full, empty, message, and audio data),
+             * and includes additional items based on name heuristics.
+             */
             init {
                 for (item in values()) {
                     emptyItemMap.putIfAbsent(item.fullId, item.emptyId)
@@ -295,10 +315,28 @@ class EmptyOptionListener : InteractionListener {
                 }
             }
 
+            /**
+             * Returns the empty version of the given item ID, if applicable.
+             *
+             * @param id The full item ID.
+             * @return The corresponding empty item ID, or `null` if not found.
+             */
             fun getEmpty(id: Int): Int? = emptyItemMap[id]
 
+            /**
+             * Returns the message to display when the given item is emptied.
+             *
+             * @param id The full item ID.
+             * @return The empty message string, or `null` if not found.
+             */
             fun getEmptyMessage(id: Int): String? = emptyMessageMap[id]
 
+            /**
+             * Returns the audio ID to play when the given item is emptied.
+             *
+             * @param id The full item ID.
+             * @return The corresponding audio ID, or `null` if not found.
+             */
             fun getEmptyAudio(id: Int): Int? = emptyAudioMap[id]
         }
     }

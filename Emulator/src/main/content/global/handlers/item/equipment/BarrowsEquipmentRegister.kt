@@ -278,8 +278,5 @@ class BarrowsEquipmentRegister : Plugin<Any> {
         return this
     }
 
-    override fun fireEvent(
-        identifier: String?,
-        vararg args: Any?,
-    ): Any = Unit
+    override fun fireEvent(identifier: String?, vararg args: Any?, ): Any = Unit
 }

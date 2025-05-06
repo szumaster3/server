@@ -8,6 +8,7 @@ import org.rs.consts.Scenery
 
 class ChestListener : InteractionListener {
     override fun defineListeners() {
+
         /*
          * Zanaris chest interaction (Fairy bank).
          */

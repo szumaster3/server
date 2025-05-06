@@ -12,6 +12,10 @@ class TeaflaskListener : InteractionListener {
     val CUP_OF_TEA = intArrayOf(Items.CUP_OF_TEA_712, Items.CUP_OF_TEA_1978)
 
     override fun defineListeners() {
+        /*
+         * Handles interaction with tea flask.
+         */
+
         on(Items.TEA_FLASK_10859, IntType.ITEM, "drink", "look-in") { player, node ->
             val item = node as Item
             val charges = getCharge(item)
@@ -50,6 +54,10 @@ class TeaflaskListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles filling empty cups with tea using tea flask.
+         */
 
         onUseWith(IntType.ITEM, Items.TEA_FLASK_10859, Items.EMPTY_CUP_1980) { player, used, with ->
             val item = used as Item

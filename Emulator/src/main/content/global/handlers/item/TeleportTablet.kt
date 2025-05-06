@@ -121,14 +121,30 @@ enum class TeleportTablet(
     ;
 
     companion object {
+        /**
+         * A map that associates item IDs with their corresponding [TeleportTablet] enum instances.
+         * Used for fast lookup based on the tablet's item ID.
+         */
         val idMap = values().associateBy { it.item }
 
+        /**
+         * Retrieves the [TeleportTablet] associated with the given item ID.
+         *
+         * @param id The item ID of the teleport tablet.
+         * @return The corresponding [TeleportTablet], or `null` if the ID is not mapped.
+         */
         fun forId(id: Int): TeleportTablet? = idMap[id]
     }
+
 }
 
 class TeleportTabletOption : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles interaction with teleport tablets.
+         */
+
         val tabIDs = TeleportTablet.values().map { it.item }.toIntArray()
         on(tabIDs, IntType.ITEM, "break") { player, node ->
             val tab = node.id
@@ -143,10 +159,7 @@ class TeleportTabletOption : InteractionListener {
                 if (inInventory(player, tab)) {
                     if (tab == Items.ARDOUGNE_TP_8011 && !isQuestComplete(player, Quests.PLAGUE_CITY)) return@on true
                     if (tab == Items.ASTRAL_ALTAR_TP_13611 &&
-                        !hasRequirement(
-                            player,
-                            QuestReq(QuestRequirements.LUNAR_DIPLOMACY),
-                        )
+                        !hasRequirement(player, QuestReq(QuestRequirements.LUNAR_DIPLOMACY))
                     ) {
                         return@on true
                     }
@@ -154,18 +167,12 @@ class TeleportTabletOption : InteractionListener {
                         return@on true
                     }
                     if (tab == Items.DEATH_ALTAR_TP_13609 &&
-                        !hasRequirement(
-                            player,
-                            QuestReq(QuestRequirements.MEP_2),
-                        )
+                        !hasRequirement(player, QuestReq(QuestRequirements.MEP_2))
                     ) {
                         return@on true
                     }
                     if (tab == Items.BLOOD_ALTAR_TP_13610 &&
-                        !hasRequirement(
-                            player,
-                            QuestReq(QuestRequirements.SEERGAZE),
-                        )
+                        !hasRequirement(player, QuestReq(QuestRequirements.SEERGAZE))
                     ) {
                         return@on true
                     }

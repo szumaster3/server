@@ -24,11 +24,7 @@ class SnowGlobeHandler : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean = true
+    override fun handle(player: Player, node: Node, option: String, ): Boolean = true
 
     inner class SnowGlobeInterface : ComponentPlugin() {
         override fun newInstance(arg: Any?): Plugin<Any?> {
@@ -36,14 +32,7 @@ class SnowGlobeHandler : OptionHandler() {
             return this
         }
 
-        override fun handle(
-            player: Player,
-            component: Component,
-            opcode: Int,
-            button: Int,
-            slot: Int,
-            itemId: Int,
-        ): Boolean {
+        override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int, ): Boolean {
             when (button) {
                 2 -> {
                     closeInterface(player)

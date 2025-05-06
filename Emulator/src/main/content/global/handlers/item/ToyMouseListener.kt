@@ -12,6 +12,7 @@ import org.rs.consts.NPCs
 
 class ToyMouseListener : InteractionListener {
     override fun defineListeners() {
+
         /*
          * Handles releasing the toy mouse.
          */

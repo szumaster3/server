@@ -11,6 +11,11 @@ import org.rs.consts.Items
 
 class TempleKnightSets : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles unpacking the set from the initiate box.
+         */
+
         on(Items.INITIATE_HARNESS_M_9668, IntType.ITEM, "unpack") { player, node ->
             if (freeSlots(player) < 2) {
                 sendMessage(player, "You don't have enough inventory space for the component parts.")
@@ -22,6 +27,10 @@ class TempleKnightSets : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles unpacking the set from the proselyte box (male).
+         */
+
         on(Items.PROSYTE_HARNESS_M_9666, IntType.ITEM, "unpack") { player, node ->
             if (freeSlots(player) < 2) {
                 sendMessage(player, "You don't have enough inventory space for the component parts.")
@@ -32,6 +41,10 @@ class TempleKnightSets : InteractionListener {
             addItem(player, Items.PROSELYTE_CUISSE_9676)
             return@on true
         }
+
+        /*
+         * Handles unpacking the set from the proselyte box (female).
+         */
 
         on(Items.PROSYTE_HARNESS_F_9670, IntType.ITEM, "unpack") { player, node ->
             if (freeSlots(player) < 2) {
