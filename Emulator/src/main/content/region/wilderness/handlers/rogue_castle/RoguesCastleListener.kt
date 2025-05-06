@@ -120,7 +120,7 @@ class RoguesCastleListener : InteractionListener {
         private const val JAIL_DOORS = 38837
     }
 
-    fun openChest(
+    private fun openChest(
         player: Player,
         scenery: Scenery,
     ) {
@@ -133,7 +133,7 @@ class RoguesCastleListener : InteractionListener {
         )
     }
 
-    fun addLoot(
+    private fun addLoot(
         player: Player,
         item: Item,
     ) {
