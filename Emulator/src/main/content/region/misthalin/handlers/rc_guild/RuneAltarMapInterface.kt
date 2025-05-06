@@ -51,6 +51,15 @@ class RuneAltarMapInterface :
         }
 
         /*
+         * Handles the interaction with the map scenery to open the study interface.
+         */
+
+        on(Scenery.MAP_38422, IntType.SCENERY, "Study") { player, _ ->
+            openInterface(player, Components.RCGUILD_MAP_780)
+            return@on true
+        }
+
+        /*
          * Handles the opening of the study interface.
          */
 
