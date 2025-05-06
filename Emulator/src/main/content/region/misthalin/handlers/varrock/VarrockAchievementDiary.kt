@@ -1,5 +1,6 @@
 package content.region.misthalin.handlers.varrock
 
+import content.data.GameAttributes
 import content.global.handlers.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.prayer.Bones
@@ -445,11 +446,11 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
     ) {
         if (event.spellBook == SpellBookManager.SpellBook.MODERN &&
             event.spellId == 15 &&
-            getStatLevel(
-                player,
-                Skills.MAGIC,
-            ) >= 25
-        ) {
+            getStatLevel(player, Skills.MAGIC) >= 25 &&
+            inInventory(player, Items.FIRE_RUNE_554, 1) &&
+            inInventory(player, Items.LAW_RUNE_563, 1) &&
+            inInventory(player, Items.AIR_RUNE_556, 3) &&
+            !hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
             finishTask(
                 player,
                 DiaryLevel.MEDIUM,

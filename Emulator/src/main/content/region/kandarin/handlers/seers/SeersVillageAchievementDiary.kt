@@ -1,12 +1,11 @@
 package content.region.kandarin.handlers.seers
 
+import content.data.GameAttributes
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.ChaliceOnKingArthurListener
 import content.region.kandarin.dialogue.seers.ThormacDialogue
 import content.region.kandarin.quest.grail.dialogue.GalahadDialogue
-import core.api.hasLevelDyn
-import core.api.inBorders
-import core.api.inEquipment
+import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
@@ -434,12 +433,10 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         event: SpellCastEvent,
     ) {
         if (event.spellBook == SpellBookManager.SpellBook.MODERN &&
-            event.spellId == 26 &&
-            hasLevelDyn(
-                player,
-                Skills.MAGIC,
-                45,
-            )
+            event.spellId == 26 && getStatLevel(player, Skills.MAGIC) >= 45 &&
+            inInventory(player, Items.LAW_RUNE_563, 1) &&
+            inInventory(player, Items.AIR_RUNE_556, 5) &&
+            !hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)
         ) {
             finishTask(
                 player,

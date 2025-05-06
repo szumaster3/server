@@ -1,5 +1,6 @@
 package content.region.misthalin.handlers.lumbridge
 
+import content.data.GameAttributes
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spells.ModernSpells
 import content.region.kandarin.dialogue.ardougne.TownCrierDialogue
@@ -9,9 +10,8 @@ import content.region.misthalin.dialogue.lumbridge.DukeHoracioDialogue
 import content.region.misthalin.dialogue.lumbridge.LumbridgeGuideDialogue
 import content.region.misthalin.quest.dragon.dialogue.DukeDragonSlayerDialogue
 import content.region.misthalin.quest.priest.dialogue.FatherUhrneyDialogue
-import core.api.inBorders
-import core.api.inEquipmentOrInventory
-import core.api.inInventory
+import core.api.*
+import core.api.item.allInInventory
 import core.api.quest.getQuestStage
 import core.game.diary.DiaryAreaTask
 import core.game.diary.DiaryEventHookBase
@@ -20,6 +20,7 @@ import core.game.event.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.Skills
 import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.*
 
@@ -621,11 +622,18 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
     ) {
         when (event.spellId) {
             ModernSpells.LUMBRIDGE_TELEPORT -> {
-                finishTask(
-                    player,
-                    DiaryLevel.MEDIUM,
-                    MediumTasks.CAST_LUMBRIDGE_TELEPORT,
-                )
+                if (getStatLevel(player, Skills.MAGIC) >= 31 &&
+                    inInventory(player, Items.EARTH_RUNE_557, 1) &&
+                    inInventory(player, Items.LAW_RUNE_563, 1) &&
+                    inInventory(player, Items.AIR_RUNE_556, 3) &&
+                    !hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)
+                ) {
+                    finishTask(
+                        player,
+                        DiaryLevel.MEDIUM,
+                        MediumTasks.CAST_LUMBRIDGE_TELEPORT,
+                    )
+                }
             }
         }
     }
