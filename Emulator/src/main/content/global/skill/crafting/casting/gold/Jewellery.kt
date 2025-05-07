@@ -53,7 +53,7 @@ object Jewellery {
         for ((mould, components) in mouldComponentMap) {
             val visible = inInventory(player, mould)
             for (component in components) {
-                sendInterfaceConfig(player, Components.CRAFTING_GOLD_446, component, visible)
+                sendInterfaceConfig(player, Components.CRAFTING_GOLD_446, component, !visible)
             }
         }
 
