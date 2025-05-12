@@ -95,7 +95,6 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
             } ?: return@on true
 
             val puzzle = loadPuzzleState(player, key)?.toMutableList() ?: return@on true
-
             val solution = when (key) {
                 "mm" -> (3904..3950 step 2).toList()
                 "tree" -> (3643..3666).toList()
@@ -104,15 +103,14 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
                 else -> emptyList()
             } + -1
 
-            player.debug("Clicked tile: $slot")
+            if (buttonID == 6 && slot in 0..24) {
+                val offsets = listOf(-1, 1, -5, 5)
+                val targetSlot = offsets
+                    .map { findTargetSlot(puzzle, slot, it) }
+                    .firstOrNull { it != -1 }
 
-            if (buttonID == 6) {
-                val targetSlot =
-                    listOf(1, -1, 5, -5).map { offset -> findTargetSlot(puzzle, slot, offset) }.firstOrNull { it != -1 }
-
-                targetSlot?.let {
-                    val movedTile = puzzle[slot]
-                    puzzle[it] = movedTile
+                if (targetSlot != null) {
+                    puzzle[targetSlot] = puzzle[slot]
                     puzzle[slot] = -1
 
                     savePuzzleStateInSession(player, key, puzzle)
@@ -123,12 +121,22 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
                         savePuzzleStateInAttributes(player, key, puzzle)
                     }
                 }
+
             } else if (buttonID == 0) {
-                sendPuzzle(player, key, solution)
+                val solutionItems = solution.map { Item(it) }.toTypedArray()
+
+                if (!getAttribute(player, "$key:puzzle:done", false)) {
+                    PacketRepository.send(
+                        ContainerPacket::class.java,
+                        ContainerContext(player, -1, -1, 140, solutionItems, 25, false),
+                    )
+                }
             }
+
             return@on true
         }
     }
+
 
     /**
      * Opens a puzzle box, shuffles puzzle pieces, and saves the puzzle state for the player.
