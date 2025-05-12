@@ -326,4 +326,9 @@ internal object GameAttributes {
 
     // Ancient pages (lore).
     const val LORE_ANCIENT_PAGES_TRANSCRIPT = "/save:ancient_page"
+
+    // Clue Scrolls
+
+    const val PUZZLE_BOX = "/save:clue:puzzle-box"
+    const val PUZZLE_BOX_COMPLETE = "/save:clue:puzzle-box-completed"
 }

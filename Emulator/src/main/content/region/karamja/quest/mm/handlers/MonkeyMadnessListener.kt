@@ -7,7 +7,6 @@ import content.region.karamja.quest.mm.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
-import core.game.component.Component
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -19,9 +18,7 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
 import core.net.packet.context.CameraContext
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.CameraViewPacket
-import core.net.packet.out.ContainerPacket
 import org.rs.consts.*
 
 class MonkeyMadnessListener : InteractionListener {
@@ -163,52 +160,6 @@ class MonkeyMadnessListener : InteractionListener {
 
         on(Scenery.CRATE_4746, IntType.SCENERY, "Search") { player, npc ->
             openDialogue(player, HangarCrateDialogue(), npc)
-            return@on true
-        }
-
-        on(Items.SPARE_CONTROLS_4002, IntType.ITEM, "View") { player, _ ->
-            val puzzlePieces: Array<Item?>? = ((3904..3950 step 2).toList().map { Item(it) } + Item(-1)).toTypedArray()
-
-            val settings = IfaceSettingsBuilder().build()
-            player.packetDispatch.sendIfaceSettings(settings, 6, monkeyMadnessPuzzleComponent, 0, 25)
-            player.interfaceManager.open(Component(monkeyMadnessPuzzleComponent))
-            PacketRepository.send(
-                ContainerPacket::class.java,
-                ContainerContext(player, -1, -1, 140, puzzlePieces, 25, false),
-            )
-            return@on true
-        }
-
-        on(Scenery.REINITIALISATION_PANEL_4871, IntType.SCENERY, "Operate") { player, _ ->
-            if (!getAttribute(player, "mm:puzzle:done", false)) {
-                val settings = IfaceSettingsBuilder().enableAllOptions().build()
-                player.packetDispatch.sendIfaceSettings(settings, 6, monkeyMadnessPuzzleComponent, 0, 25)
-                player.interfaceManager.open(Component(monkeyMadnessPuzzleComponent))
-
-                var puzzlePieces: Array<Item?>? =
-                    ((3904..3950 step 2).toList().map { Item(it) } + Item(-1)).toTypedArray()
-
-                if (getAttribute(player, "mm:puzzle", arrayOf(Item())).size == 1) {
-                    val shuffledInitialPuzzle = puzzlePieces?.clone()
-                    shuffledInitialPuzzle?.shuffle()
-
-                    setAttribute(player, "/save:mm:puzzle", shuffledInitialPuzzle)
-
-                    PacketRepository.send(
-                        ContainerPacket::class.java,
-                        ContainerContext(player, -1, -1, 140, shuffledInitialPuzzle, 25, false),
-                    )
-                } else {
-                    puzzlePieces = getAttribute(player, "mm:puzzle", puzzlePieces?.clone())
-                    PacketRepository.send(
-                        ContainerPacket::class.java,
-                        ContainerContext(player, -1, -1, 140, puzzlePieces, 25, false),
-                    )
-                }
-            } else {
-                sendMessage(player, "You have already solved the puzzle.")
-            }
-
             return@on true
         }
 
