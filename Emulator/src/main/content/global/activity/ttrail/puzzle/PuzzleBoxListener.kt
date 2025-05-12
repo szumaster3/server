@@ -18,6 +18,12 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 import kotlin.math.abs
 
+/**
+ * Represents the Treasure trails puzzle boxes.
+ *
+ * Relations
+ * - Monkey Madness quest
+ */
 class PuzzleBoxListener : InteractionListener, InterfaceListener {
 
     private val puzzleSessionState = mutableMapOf<Player, MutableMap<String, List<Int>>>()
@@ -67,6 +73,10 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
             return@on true
         }
 
+        /*
+         * Handles monkey madness puzzle hint.
+         */
+
         on(Scenery.REINITIALISATION_PANEL_4871, IntType.SCENERY, "Operate") { player, _ ->
             if (!getAttribute(player, "mm:puzzle:done", false)) {
                 val settings = IfaceSettingsBuilder().enableAllOptions().build()
@@ -76,7 +86,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
                 val key = "mm"
                 val items = (3904..3950 step 2).toList() + -1
                 if (loadPuzzleState(player, key) == null) {
-                    val shuffled = items.shuffled()
+                    val shuffled = generateSolvablePuzzle(items)
                     savePuzzleStateInSession(player, key, shuffled)
                 }
 
@@ -137,13 +147,8 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
         }
     }
 
-
     /**
-     * Opens a puzzle box, shuffles puzzle pieces, and saves the puzzle state for the player.
-     *
-     * @param player The player interacting with the puzzle.
-     * @param key The identifier for the puzzle (e.g., "tree", "troll").
-     * @param items The list of items representing the puzzle pieces.
+     * Opens and initializes the puzzle if not already completed or in progress.
      */
     private fun handlePuzzleOpen(player: Player, key: String, items: List<Int>) {
         if (!getAttribute(player, "$key:puzzle:done", false)) {
@@ -152,17 +157,8 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
             player.interfaceManager.open(Component(Components.TRAIL_PUZZLE_363))
 
             if (loadPuzzleState(player, key) == null) {
-                val shuffled = items.shuffled()
-
-                val puzzleWithEmptyInBottomRight = shuffled.toMutableList()
-                val emptySlotIndex = puzzleWithEmptyInBottomRight.indexOf(-1)
-
-                if (emptySlotIndex != 24) {
-                    puzzleWithEmptyInBottomRight[emptySlotIndex] = puzzleWithEmptyInBottomRight[24]
-                    puzzleWithEmptyInBottomRight[24] = -1
-                }
-
-                savePuzzleStateInSession(player, key, puzzleWithEmptyInBottomRight)
+                val shuffled = generateSolvablePuzzle(items)
+                savePuzzleStateInSession(player, key, shuffled)
             }
 
             sendPuzzle(player, key)
@@ -172,12 +168,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
     }
 
     /**
-     * Finds a valid target slot to move a puzzle piece to.
-     *
-     * @param puzzle The current puzzle state.
-     * @param slot The index of the tile being moved.
-     * @param offset The offset to check for valid movement.
-     * @return The target slot index, or -1 if no valid target was found.
+     * Checks if the given move offset results in a valid adjacent empty slot.
      */
     private fun findTargetSlot(puzzle: List<Int>, slot: Int, offset: Int): Int {
         val target = slot + offset
@@ -187,35 +178,23 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
     }
 
     /**
-     * Saves the current puzzle state for a player in their session.
-     *
-     * @param player The player whose puzzle state is being saved.
-     * @param key The identifier for the puzzle.
-     * @param puzzle The puzzle state (list of tile IDs).
+     * Saves the current puzzle state in temporary session memory.
      */
-    private fun savePuzzleStateInSession(player: Player, key: String, puzzle: List<Int>) {
+    fun savePuzzleStateInSession(player: Player, key: String, puzzle: List<Int>) {
         puzzleSessionState[player]?.put(key, puzzle) ?: run {
             puzzleSessionState[player] = mutableMapOf(key to puzzle)
         }
     }
 
     /**
-     * Loads the puzzle state for a specific player and puzzle identifier.
-     *
-     * @param player The player whose puzzle state is being loaded.
-     * @param key The identifier for the puzzle.
-     * @return The puzzle state as a list of integers, or null if no state is found.
+     * Loads the current puzzle state from temporary session memory.
      */
-    private fun loadPuzzleState(player: Player, key: String): List<Int>? {
+    fun loadPuzzleState(player: Player, key: String): List<Int>? {
         return puzzleSessionState[player]?.get(key)
     }
 
     /**
-     * Saves the puzzle state to the player's attributes after solving the puzzle.
-     *
-     * @param player The player whose puzzle state is being saved.
-     * @param key The identifier for the puzzle.
-     * @param puzzle The completed puzzle state.
+     * Saves the completed puzzle state in persistent player attributes.
      */
     private fun savePuzzleStateInAttributes(player: Player, key: String, puzzle: List<Int>) {
         val encoded = puzzle.joinToString(",")
@@ -224,11 +203,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
     }
 
     /**
-     * Sends the current puzzle state to the player for display.
-     *
-     * @param player The player to send the puzzle state to.
-     * @param key The identifier for the puzzle.
-     * @param data The puzzle state data (optional).
+     * Sends the current puzzle tile layout to the client interface.
      */
     private fun sendPuzzle(player: Player, key: String, data: List<Int>? = null) {
         val puzzle = data ?: loadPuzzleState(player, key) ?: return
@@ -237,5 +212,32 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
             ContainerPacket::class.java,
             ContainerContext(player, -1, -1, 140, items, 25, false),
         )
+    }
+
+    /**
+     * Checks whether a given puzzle tile configuration is solvable.
+     *
+     * @return true if the tile configuration is solvable in a 5x5 grid.
+     */
+    fun isSolvable(puzzle: List<Int>): Boolean {
+        val flat = puzzle.filter { it != -1 }
+        val inversions = flat.indices.sumOf { i ->
+            (i + 1 until flat.size).count { j -> flat[i] > flat[j] }
+        }
+        return inversions % 2 == 0
+    }
+
+    /**
+     * Generates a shuffled puzzle tile list that is guaranteed to be solvable.
+     *
+     * @return a shuffled and solvable list of puzzle piece IDs.
+     */
+    fun generateSolvablePuzzle(items: List<Int>): List<Int> {
+        while (true) {
+            val shuffled = items.shuffled()
+            if (isSolvable(shuffled)) {
+                return shuffled
+            }
+        }
     }
 }
