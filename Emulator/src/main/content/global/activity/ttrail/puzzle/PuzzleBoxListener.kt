@@ -100,13 +100,13 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
                     sendPuzzle(player, key)
 
                     if (puzzle == solution) {
-                        setAttribute(player, "$key:puzzle:done", true)
+                        setAttribute(player, "/save:$key:puzzle:done", true)
                         savePuzzleStateInAttributes(player, key, puzzle)
                         player.debug("[$key] Puzzle completed.")
 
                         PuzzleBox.fromKey(key)?.let { box ->
                             val item = box.item
-                            adjustCharge(item, 100)
+                            setCharge(item, 1100)
                         }
                     }
                 }
@@ -172,6 +172,15 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
      */
     fun loadPuzzleState(player: Player, key: String): List<Int>? {
         return puzzleSessionState[player]?.get(key)
+    }
+
+    /**
+     * Loads the current puzzle state from attributes.
+     */
+    fun loadPuzzleStateFromAttributes(player: Player, key: String): List<Int>? {
+        val encoded = getAttribute(player, "/save:$key:puzzle:data", "")
+        if (encoded.isEmpty()) return null
+        return encoded.split(",").mapNotNull { it.toIntOrNull() }
     }
 
     /**
