@@ -1,5 +1,6 @@
 package content.global.activity.ttrail;
 
+import content.global.activity.ttrail.anagram.AnagramClue;
 import content.global.activity.ttrail.anagram.AnagramCluePlugin;
 import content.global.skill.agility.AgilityHandler;
 import core.cache.def.impl.ItemDefinition;
@@ -40,8 +41,10 @@ public final class TreasureTrailPlugin extends OptionHandler {
         ItemDefinition.forId(CoordinateClueScroll.SEXTANT.getId()).getHandlers().put("option:look through", this);
         ClassScanner.definePlugin(new MapCluePlugin());
         ClassScanner.definePlugin(new ClueItemPlugin());
+        for (AnagramClue clue : AnagramClue.values()) {
+            ClassScanner.definePlugin(new AnagramCluePlugin(clue));
+        }
         ClassScanner.definePlugin(new EmoteCluePlugin());
-        ClassScanner.definePlugin(new AnagramCluePlugin());
         ClassScanner.definePlugin(new TTrailOptionHandler());
         ClassScanner.definePlugin(new SextantComponentPlugin());
         ClassScanner.definePlugin(new CoordinateCluePlugin());

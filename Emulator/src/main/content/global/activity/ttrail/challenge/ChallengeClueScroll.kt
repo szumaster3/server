@@ -1,5 +1,7 @@
-package content.global.activity.ttrail
+package content.global.activity.ttrail.challenge
 
+import content.global.activity.ttrail.ClueLevel
+import content.global.activity.ttrail.ClueScrollPlugin
 import core.api.interaction.getNPCName
 import core.api.ui.setInterfaceText
 import core.game.interaction.Option
