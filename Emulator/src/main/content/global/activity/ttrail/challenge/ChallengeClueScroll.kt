@@ -14,6 +14,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
+import org.rs.consts.Components
 import org.rs.consts.Items
 
 /**
@@ -35,7 +36,13 @@ abstract class ChallengeClueScroll(
     val npc: Int?,
     val answer: Int?,
     vararg borders: ZoneBorders,
-) : ClueScrollPlugin(name, clueId, level, 345, *borders) {
+) : ClueScrollPlugin(name, clueId, level, Components.TRAIL_MAP09_345, *borders) {
+
+    /**
+     * Shows clue text to the player.
+     *
+     * @param player The player reading the clue.
+     */
     override fun read(player: Player) {
         repeat(8) { index ->
             setInterfaceText(player, "", interfaceId, index + 1)
@@ -46,6 +53,9 @@ abstract class ChallengeClueScroll(
         setInterfaceText(player, "<br><br><br><br><br> Speak to $npc.", interfaceId, 1)
     }
 
+    /**
+     * Handles player interaction with the NPC for this clue.
+     */
     override fun interact(
         e: Entity,
         target: Node,
@@ -60,21 +70,7 @@ abstract class ChallengeClueScroll(
             val answer = (value as? Int) ?: return@sendInputDialogue
 
             if (answer == this.answer) {
-                removeItem(player, clueId)
-                val manager = content.global.activity.ttrail.TreasureTrailManager.getInstance(player)
-
-                sendItemDialogue(player, Items.CASKET_405, "You receive another clue scroll.")
-
-                if (manager.isCompleted) {
-                    sendItemDialogue(player, org.rs.consts.Items.CASKET_405, "You've found a casket!")
-                    manager.clearTrail()
-                    addItem(player, Items.CASKET_405)
-                } else {
-                    val next = this.getClueId()
-                    if (next != null) {
-                        player.inventory.add(Item(next))
-                    }
-                }
+                reward(player)
             }
         }
 
@@ -82,6 +78,9 @@ abstract class ChallengeClueScroll(
     }
 
     companion object {
+        /**
+         * Finds a challenge clue scroll in player's inventory for a given NPC.
+         */
         fun getClueForNpc(player: Player, npc: core.game.node.entity.npc.NPC): ChallengeClueScroll? {
             return player.inventory.toArray()
                 .filterNotNull()

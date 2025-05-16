@@ -24,7 +24,11 @@ abstract class AnagramClueScroll(
     level: ClueLevel?,
     val challenge: Int? = null
 ) : ClueScrollPlugin(name, clueId, level, Components.TRAIL_MAP09_345) {
-
+    /**
+     * Shows clue text to the player.
+     *
+     * @param player The player reading the clue.
+     */
     override fun read(player: Player) {
         repeat(8) { index ->
             setInterfaceText(player, "", interfaceId, index + 1)
@@ -49,68 +53,58 @@ abstract class AnagramClueScroll(
         val puzzle = PuzzleBox.fromItemId(challenge ?: return) ?: return
         val isComplete = PuzzleBox.hasCompletePuzzleBox(player, puzzle.key)
 
-        if (!player.inventory.contains(puzzle.item.id, 1)) {
-            if (player.inventory.remove(Item(clueId, 1))) {
-                player.setAttribute("anagram_clue_active", clueId)
-
-                val msg = listOf(
-                    "Oh, I have a puzzle for you to solve.",
-                    "Oh, I've been expecting you.",
-                    "The solving of this puzzle could be the key to your treasure."
-                ).random()
-
-                sendNPCDialogue(player, npcId, msg, FaceAnim.HALF_GUILTY)
-                player.inventory.add(puzzle.item)
-
-                addDialogueAction(player) { p, btn ->
-                    if (btn > 0) {
-                        sendItemDialogue(p, puzzle.item, "${npc.name} has given you a puzzle box!")
-                    }
-                }
-            }
-            return
+        when {
+            !player.inventory.contains(puzzle.item.id, 1) -> givePuzzleBox(player, npc, puzzle)
+            isComplete -> completePuzzle(player, npc, puzzle)
+            else -> return
         }
-
-        if (isComplete) {
-            if (player.inventory.remove(puzzle.item)) {
-                removeAttribute(player, "${puzzle.key}:puzzle:done")
-                removeAttribute(player, "anagram_clue_active")
-
-                sendNPCDialogue(player, npcId, "Well done, traveller.", FaceAnim.HALF_GUILTY)
-
-                addDialogueAction(player) { _, _ ->
-                    handleClueCompletion(player)
-                }
-            }
-            return
-        }
-
-        sendNPCDialogue(player, npcId, "You still need to solve this puzzle before we continue.", FaceAnim.HALF_GUILTY)
     }
 
     /**
-     * Handles completion of the clue.
-     *
-     * @param player The player who completed the clue.
+     * Gives the puzzle box to the player.
      */
-    private fun handleClueCompletion(player: Player) {
-        val manager = TreasureTrailManager.getInstance(player)
-        val clueScroll = getClueScrolls()[clueId]
-        clueScroll?.reward(player)
+    private fun givePuzzleBox(player: Player, npc: NPC, puzzle: PuzzleBox) {
+        if (!player.inventory.remove(Item(clueId, 1))) return
 
-        val newClue = getClue(clueScroll?.level)
-        if (manager.isCompleted) {
-            sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
-            manager.clearTrail()
+        player.setAttribute("anagram_clue_active", clueId)
+        val messages = listOf(
+            "Oh, I have a puzzle for you to solve.",
+            "Oh, I've been expecting you.",
+            "The solving of this puzzle could be the key to your treasure."
+        )
+        sendNPCDialogue(player, npcId, messages.random(), FaceAnim.HALF_GUILTY)
+        player.inventory.add(puzzle.item)
 
-            newClue?.let {
-                player.inventory.add(it)
-                sendItemDialogue(player, it, "You receive another clue scroll.")
+        addDialogueAction(player) { p, btn ->
+            if (btn > 0) {
+                sendItemDialogue(p, puzzle.item, "${npc.name} has given you a puzzle box!")
             }
-        } else {
-            newClue?.let {
-                player.inventory.add(it)
-                sendItemDialogue(player, it, "You receive another clue scroll.")
+        }
+    }
+
+    /**
+     * Completes the puzzle and rewards the player.
+     */
+    private fun completePuzzle(player: Player, npc: NPC, puzzle: PuzzleBox) {
+        if (!player.inventory.remove(puzzle.item)) return
+
+        removeAttributes(player, "${puzzle.key}:puzzle:done", "${puzzle.key}:puzzle:data", "anagram_clue_active")
+        sendNPCDialogue(player, npcId, "Well done, traveller.", FaceAnim.HALF_GUILTY)
+
+        addDialogueAction(player) { _, _ ->
+            val manager = TreasureTrailManager.getInstance(player)
+            val clueScroll = getClueScrolls()[clueId]
+            clueScroll?.reward(player)
+
+            if (manager.isCompleted) {
+                sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
+                manager.clearTrail()
+            } else {
+                val newClue = getClue(clueScroll?.level)
+                if (newClue != null) {
+                    sendItemDialogue(player, newClue, "You receive another clue scroll.")
+                    player.inventory.add(newClue)
+                }
             }
         }
     }

@@ -128,9 +128,7 @@ class NPCListener : InteractionListener {
         on(IntType.NPC, "talk-to", "talk", "talk to") { player, node ->
             val npc = node.asNpc()
 
-            /*
-             * Handles challenge clues.
-             */
+            // Handles challenge clues.
             val challengeClue = ChallengeClueScroll.getClueForNpc(player, npc)
             if (challengeClue != null) {
                 if (challengeClue.interact(player, npc, Option("talk-to", 0))) {
@@ -138,9 +136,7 @@ class NPCListener : InteractionListener {
                 }
             }
 
-            /*
-             * Handles anagram clues.
-             */
+            // Handles anagram clues.
             val clue = AnagramClueScroll.getClueForNpc(player, npc)
             if (clue != null) {
                 clue.getPuzzle(player, npc)
