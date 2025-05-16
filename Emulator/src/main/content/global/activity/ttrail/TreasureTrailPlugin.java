@@ -4,6 +4,7 @@ import content.global.activity.ttrail.anagram.AnagramClue;
 import content.global.activity.ttrail.challenge.ChallengeClue;
 import content.global.activity.ttrail.coords.CoordinateCluePlugin;
 import content.global.activity.ttrail.coords.CoordinateClueScroll;
+import content.global.activity.ttrail.cryptic.CrypticCluePlugin;
 import content.global.activity.ttrail.emotes.EmoteCluePlugin;
 import content.global.activity.ttrail.map.MapCluePlugin;
 import content.global.skill.agility.AgilityHandler;
@@ -46,6 +47,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
         ClassScanner.definePlugin(new MapCluePlugin());
         ClassScanner.definePlugin(new ClueItemPlugin());
         ClassScanner.definePlugin(new ChallengeClue());
+        ClassScanner.definePlugin(new CrypticCluePlugin());
         ClassScanner.definePlugin(new AnagramClue());
         ClassScanner.definePlugin(new EmoteCluePlugin());
         ClassScanner.definePlugin(new TTrailOptionHandler());
