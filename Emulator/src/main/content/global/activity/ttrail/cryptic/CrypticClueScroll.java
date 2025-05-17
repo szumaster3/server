@@ -14,14 +14,36 @@ import org.rs.consts.Components;
 import org.rs.consts.Items;
 
 /**
- * The Cryptic clue scroll.
+ * A base class for cryptic clue scrolls requiring object interaction or digging at a specific location.
  */
 public abstract class CrypticClueScroll extends ClueScrollPlugin {
 
+    /**
+     * The location associated with the clue.
+     */
     private final Location location;
+
+    /**
+     * The id of the searchable object, or 0 if not used.
+     */
     private final int object;
+
+    /**
+     * The text of the cryptic clue shown to the player.
+     */
     private final String clueText;
 
+    /**
+     * Creates a cryptic clue scroll with a searchable object.
+     *
+     * @param name     the clue name
+     * @param clueId   the clue item id
+     * @param level    the clue scroll difficulty
+     * @param clueText the clue description
+     * @param location the target location
+     * @param object   the object id to search
+     * @param borders  optional zone borders
+     */
     public CrypticClueScroll(String name, int clueId, ClueLevel level, String clueText, Location location, final int object, ZoneBorders... borders) {
         super(name, clueId, level, Components.TRAIL_MAP09_345, borders);
         this.location = location;
@@ -29,6 +51,15 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
         this.clueText = clueText;
     }
 
+    /**
+     * Creates a cryptic clue scroll with no object interaction (dig-only).
+     *
+     * @param name     the clue name
+     * @param clueId   the clue item id
+     * @param level    the clue scroll difficulty
+     * @param clueText the clue description
+     * @param location the dig location
+     */
     public CrypticClueScroll(String name, int clueId, ClueLevel level, String clueText, Location location) {
         this(name, clueId, level, clueText, location, 0);
     }
@@ -61,15 +92,22 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
         for (int i = 1; i <= 8; i++) {
             player.getPacketDispatch().sendString("", interfaceId, i);
         }
-
         player.getPacketDispatch().sendString(clueText, interfaceId, 1);
     }
 
+    /**
+     * Called when the player digs at the correct location.
+     *
+     * @param player the player digging
+     */
     public void dig(Player player) {
         reward(player);
         player.getDialogueInterpreter().sendItemMessage(Items.CASKET_405, "You've found a casket!");
     }
 
+    /**
+     * Handles digging action for this clue.
+     */
     public final class CrypticDigAction implements DigAction {
         @Override
         public void run(Player player) {
@@ -81,18 +119,33 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
         }
     }
 
+    /**
+     * Checks if the player has the clue item.
+     *
+     * @param player the player to check
+     * @return true if they have the clue item
+     */
     public boolean hasRequiredItems(Player player) {
         return player.getInventory().contains(clueId, 1);
     }
 
+    /**
+     * @return the clue's target location
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     * @return the id of the object to search, or 0 if none
+     */
     public int getObject() {
         return object;
     }
 
+    /**
+     * @return the clue text shown to the player
+     */
     public String getClueText() {
         return clueText;
     }

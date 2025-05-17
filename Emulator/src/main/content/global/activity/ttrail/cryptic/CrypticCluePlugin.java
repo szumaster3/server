@@ -11,18 +11,48 @@ import org.rs.consts.Items;
  */
 public final class CrypticCluePlugin extends CrypticClueScroll {
 
+    /**
+     * Constructs a new Cryptic clue plugin.
+     */
     public CrypticCluePlugin() {
         this(null, -1, null, null, null);
     }
 
+    /**
+     * Constructs a cryptic clue with basic parameters.
+     *
+     * @param name     the internal name of the clue scroll
+     * @param clueId   the item id of the clue scroll
+     * @param level    the difficulty level of the clue
+     * @param clueText the text/riddle of the clue
+     * @param location the in-game location to solve the clue
+     */
     public CrypticCluePlugin(String name, int clueId, ClueLevel level, String clueText, Location location) {
         super(name, clueId, level, clueText, location);
     }
 
+    /**
+     * Constructs a cryptic clue with additional object and zone data.
+     *
+     * @param name     the internal name of the clue scroll
+     * @param clueId   the item id of the clue scroll
+     * @param level    the difficulty level of the clue
+     * @param clueText the text/riddle of the clue
+     * @param location the in-game location to solve the clue
+     * @param object   the object id to interact with (if applicable)
+     * @param borders  the zone borders that define the clue's area
+     */
     public CrypticCluePlugin(String name, int clueId, ClueLevel level, String clueText, Location location, int object, ZoneBorders... borders) {
         super(name, clueId, level, clueText, location, object, borders);
     }
 
+    /**
+     * Registers all known cryptic clue scrolls to the game when the plugin is loaded.
+     *
+     * @param arg unused initialization argument
+     * @return the current plugin instance
+     * @throws Throwable if an error occurs during registration
+     */
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         register(new CrypticCluePlugin("etceteria-evergreen", Items.CLUE_SCROLL_10190, ClueLevel.HARD, "And so on, and so on, and so on.<br>Walking from the land of many<br>unimportant things leads to a choice<br>of<br>paths.", Location.create(2591, 3879, 0)));
