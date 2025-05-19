@@ -102,7 +102,7 @@ abstract class ChallengeClueScroll(
                                         sendNPCDialogue(player, npc.id, randomAnswer, facialExpression)
                                         stage = 2
                                     } else {
-                                        sendNPCDialogue(player, npc.id, "That's not the correct answer.", facialExpression)
+                                        sendNPCDialogue(player, npc.id, "That isn't right, keep trying.", facialExpression)
                                         stage = END_DIALOGUE
                                     }
                                 }

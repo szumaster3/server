@@ -1,18 +1,16 @@
 package content.region.asgarnia.handlers
 
-import core.api.getStatLevel
+import core.api.*
 import core.api.interaction.openBankAccount
 import core.api.interaction.openGrandExchangeCollectionBox
 import core.api.interaction.openNpcShop
-import core.api.sendDialogue
-import core.api.sendNPCDialogue
-import core.api.teleport
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Scenery
 
@@ -59,6 +57,33 @@ class BurthopeListener : InteractionListener {
 
         on(BENEDICT, IntType.NPC, "collect") { player, _ ->
             openGrandExchangeCollectionBox(player)
+            return@on true
+        }
+
+        /*
+         * Handles dunstan drawer interaction (Treasure trail).
+         */
+
+        on(Scenery.DRAWERS_350, IntType.SCENERY, "open") { player, node ->
+            val inRoom = inBorders(player, 2920, 3576, 2922, 3578)
+            val hasClue = inInventory(player, Items.CLUE_SCROLL_10236)
+            val hasKey = inInventory(player, Items.KEY_2836)
+
+            if (inRoom && hasClue && hasKey) {
+                if (removeItem(player, Items.KEY_2836)) {
+                    replaceScenery(node.asScenery(), Scenery.DRAWERS_351, 80, node.location)
+                } else {
+                    sendMessage(player, "The chest is locked.")
+                }
+            } else {
+                sendMessage(player, "The chest is locked.")
+            }
+
+            return@on true
+        }
+
+        on(Scenery.DRAWERS_351, IntType.SCENERY, "shut") { _, node ->
+            replaceScenery(node.asScenery(), Scenery.DRAWERS_350, -1)
             return@on true
         }
 

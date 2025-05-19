@@ -117,10 +117,22 @@ class VarrockListener : InteractionListener {
          */
 
         on(Scenery.CLOSED_CHEST_24203, IntType.SCENERY, "open") { player, node ->
-            if (inBorders(player, getRegionBorders(12596))) {
-                replaceScenery(node.asScenery(), Scenery.OPEN_CHEST_24204, -1, node.location)
-            } else {
-                sendMessage(player, "The chest is locked.")
+            val inGuild = inBorders(player, getRegionBorders(CHAMPIONS_GUILD_REGION))
+            val hasClue = inInventory(player, Items.CLUE_SCROLL_10222, 1)
+            val hasKey = inInventory(player, Items.KEY_2834, 1)
+
+            when {
+                inGuild -> {
+                    replaceScenery(node.asScenery(), Scenery.OPEN_CHEST_24204, -1, node.location)
+                }
+                hasClue && hasKey -> {
+                    if (removeItem(player, Items.KEY_2834)) {
+                        replaceScenery(node.asScenery(), Scenery.OPEN_CHEST_24204, 80, node.location)
+                    } else {
+                        sendMessage(player, "The chest is locked.")
+                    }
+                }
+                else -> sendMessage(player, "The chest is locked.")
             }
             return@on true
         }
@@ -464,5 +476,6 @@ class VarrockListener : InteractionListener {
             )
         private const val HIDDEN_TRAPDOOR = Scenery.HIDDEN_TRAPDOOR_28094
         private const val SAWMILL_OPERATOR = NPCs.SAWMILL_OPERATOR_4250
+        private const val CHAMPIONS_GUILD_REGION = 12596
     }
 }

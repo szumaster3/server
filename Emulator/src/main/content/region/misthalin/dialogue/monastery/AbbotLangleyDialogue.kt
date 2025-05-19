@@ -1,14 +1,18 @@
 package content.region.misthalin.dialogue.monastery
 
+import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.TreasureTrailManager.Companion.getInstance
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.Animations
 import org.rs.consts.Graphics
+import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
@@ -24,6 +28,25 @@ class AbbotLangleyDialogue(
                 stage = 23
                 return true
             }
+        }
+        if (inBorders(player, 3053, 3481, 3062, 3500) && inInventory(player, Items.CLUE_SCROLL_10240)) {
+            val manager = getInstance(player)
+            val clueScroll = ClueScrollPlugin.getClueScrolls()[manager.clueId]
+
+            clueScroll?.takeIf { removeItem(player, Item(it.clueId, 1), Container.INVENTORY) }?.let {
+                it.reward(player)
+
+                if (manager.isCompleted) {
+                    sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
+                    manager.clearTrail()
+                } else {
+                    ClueScrollPlugin.getClue(it.level)?.let { newClue ->
+                        sendItemDialogue(player, newClue, "You found another clue scroll.")
+                        player.inventory.add(Item(newClue.id, 1))
+                    }
+                }
+            }
+            return true
         }
         npc("Greetings traveller.")
         stage = 0

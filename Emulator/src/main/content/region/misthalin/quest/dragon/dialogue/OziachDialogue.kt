@@ -1,12 +1,16 @@
 package content.region.misthalin.quest.dragon.dialogue
 
+import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.TreasureTrailManager
 import content.region.misthalin.quest.dragon.DragonSlayer
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
+import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
@@ -18,7 +22,30 @@ class OziachDialogue(
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
-        player.debug("" + quest!!.getStage(player))
+
+        /*
+         * Handles treasure trail interaction.
+         */
+
+        if (inBorders(player, 3066, 3514, 3070, 3518) && inInventory(player, Items.CLUE_SCROLL_10242)) {
+            val manager = TreasureTrailManager.getInstance(player)
+            val clueScroll = ClueScrollPlugin.getClueScrolls()[manager.clueId]
+
+            clueScroll?.takeIf { removeItem(player, Item(it.clueId, 1), Container.INVENTORY) }?.let {
+                it.reward(player)
+
+                if (manager.isCompleted) {
+                    sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
+                    manager.clearTrail()
+                } else {
+                    ClueScrollPlugin.getClue(it.level)?.let { newClue ->
+                        sendItemDialogue(player, newClue, "You found another clue scroll.")
+                        player.inventory.add(Item(newClue.id, 1))
+                    }
+                }
+            }
+            return true
+        }
         when (quest!!.getStage(player)) {
             100 -> {
                 npc("Aye, 'tis a fair day, my mighty dragon-slaying friend.")

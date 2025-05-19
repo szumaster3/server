@@ -39,6 +39,21 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
     private final String clueText;
 
     /**
+     * The key for easy clues required to open locked object.
+     */
+    private final Item KEY_EASY = new Item(Items.KEY_2832);
+
+    /**
+     * The key for medium clues required to open locked object.
+     */
+    private final Item KEY_MEDIUM = new Item(Items.KEY_2834);
+
+    /**
+     * The key for hard clues required to open locked object.
+     */
+    private final Item KEY_HARD = new Item(Items.KEY_2840);
+
+    /**
      * Creates a cryptic clue scroll with a searchable object.
      *
      * @param name     the clue name
@@ -69,11 +84,43 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
         this(name, clueId, level, clueText, location, 0);
     }
 
+    /**
+     * Handles player interaction with fire.
+     */
+    @Override
+    public boolean handleUseWith(Player player, Item used, Node with) {
+        if(player.getInventory().containsItem(new Item(Items.CLUE_SCROLL_10266, 1)) && with.asScenery().getId() == 2732 && inBorders(player, 2968, 2974,2970, 2976)) {
+            TreasureTrailManager manager = TreasureTrailManager.getInstance(player);
+            ClueScrollPlugin clueScroll = getClueScrolls().get(clueId);
+
+            if (clueScroll != null && removeItem(player, clueScroll.getClueId(), Container.INVENTORY)) {
+
+                clueScroll.reward(player);
+
+                if (manager.isCompleted()) {
+                    sendItemDialogue(player, Items.CASKET_405, "You've found a casket!");
+                    manager.clearTrail();
+                } else {
+                    Item newClue = getClue(clueScroll.getLevel());
+                    if (newClue != null) {
+                        sendItemDialogue(player, newClue, "You found another clue scroll.");
+                        player.getInventory().add(new Item(newClue.getId(), 1));
+                    }
+                }
+            }
+            return true;
+        }
+        return super.handleUseWith(player, used, with);
+    }
+
+    /**
+     * Handles player interaction with the npc and objects for this clue.
+     */
     @Override
     public boolean interact(Entity e, Node target, Option option) {
         if (e instanceof Player) {
             Player player = (Player) e;
-            if (target.getId() == object && option.getName().equals("Search")) {
+            if (target.getId() == object && option.getName().equals("Search") || option.getName().equals("Talk-to")) {
                 if (!player.getInventory().contains(clueId, 1) || !target.getLocation().equals(location)) {
                     player.sendMessage("Nothing interesting happens.");
                     return false;

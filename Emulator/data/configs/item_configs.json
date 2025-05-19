@@ -2604,7 +2604,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "A box of fish food / Keeps your pet fish strong and healthy.",
+    "examine": "A box of fish food.",
     "durability": null,
     "name": "Fish food",
     "archery_ticket_price": "0",
@@ -6768,14 +6768,14 @@
     "id": "733"
   },
   {
-    "examine": "These need to be germinated before they can be used. / These are germinated and ready to be planted in fertile soil.",
+    "examine": "These need to be germinated before they can be used.",
     "durability": null,
     "name": "Yommi tree seeds",
     "archery_ticket_price": "0",
     "id": "735"
   },
   {
-    "examine": "These need to be germinated before they can be used. / These are germinated and ready to be planted in fertile soil.",
+    "examine": "These are germinated and ready to be planted in fertile soil.",
     "durability": null,
     "name": "Yommi tree seeds",
     "archery_ticket_price": "0",
@@ -8959,7 +8959,7 @@
   {
     "shop_price": "5",
     "ge_buy_limit": "100",
-    "examine": "A slightly muddy spade. / Popular with farmers and treasure hunters.",
+    "examine": "A slightly muddy spade.",
     "grand_exchange_price": "117",
     "durability": null,
     "name": "Spade",
@@ -19529,7 +19529,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "I need to cook this first / Freshly cooked ugthanki meat.",
+    "examine": "Freshly cooked ugthanki meat.",
     "grand_exchange_price": "687",
     "durability": null,
     "name": "Ugthanki meat",
@@ -24469,7 +24469,7 @@
   },
   {
     "turn90cw_anim": "821",
-    "examine": "The magical sword 'Silverlight'. / The magical sword 'Silverlight', stained black with mushroom ink. (during Shadow of the Storm)",
+    "examine": "The magical sword 'Silverlight'.",
     "walk_anim": "819",
     "durability": null,
     "weight": "1.8",
@@ -28566,12 +28566,26 @@
     "id": "2831"
   },
   {
+    "examine": "A key to some drawers.",
+    "durability": null,
+    "name": "Key",
+    "archery_ticket_price": "0",
+    "id": "2832"
+  },
+  {
     "shop_price": "5000",
     "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
     "id": "2833"
+  },
+  {
+    "examine": "A key to some drawers.",
+    "durability": null,
+    "name": "Key",
+    "archery_ticket_price": "0",
+    "id": "2834"
   },
   {
     "shop_price": "5000",
@@ -28582,6 +28596,13 @@
     "id": "2835"
   },
   {
+    "examine": "A key to some drawers.",
+    "durability": null,
+    "name": "Key",
+    "archery_ticket_price": "0",
+    "id": "2836"
+  },
+  {
     "shop_price": "5000",
     "examine": "A set of instructions to be followed.",
     "durability": null,
@@ -28590,12 +28611,26 @@
     "id": "2837"
   },
   {
+    "examine": "A key to some drawers.",
+    "durability": null,
+    "name": "Key",
+    "archery_ticket_price": "0",
+    "id": "2838"
+  },
+  {
     "shop_price": "5000",
     "examine": "A set of instructions to be followed.",
     "durability": null,
     "name": "Clue scroll",
     "archery_ticket_price": "0",
     "id": "2839"
+  },
+  {
+    "examine": "A key to some drawers.",
+    "durability": null,
+    "name": "Key",
+    "archery_ticket_price": "0",
+    "id": "2840"
   },
   {
     "shop_price": "5000",
@@ -28947,7 +28982,7 @@
     "id": "2887"
   },
   {
-    "examine": "This is an empty stone bowl. / This is a stone bowl full of lava.",
+    "examine": "This is an empty stone bowl.",
     "durability": null,
     "name": "A stone bowl",
     "archery_ticket_price": "0",
@@ -28955,7 +28990,7 @@
     "equipment_slot": "3"
   },
   {
-    "examine": "This is an empty stone bowl. / This is a stone bowl full of lava.",
+    "examine": "This is a stone bowl full of lava.",
     "durability": null,
     "name": "A stone bowl",
     "archery_ticket_price": "0",
@@ -39314,14 +39349,14 @@
     "id": "4252"
   },
   {
-    "examine": "A small wooden ship. / A small wooden ship with a silk flag.",
+    "examine": "A small wooden ship.",
     "durability": null,
     "name": "Model ship",
     "archery_ticket_price": "0",
     "id": "4253"
   },
   {
-    "examine": "A small wooden ship. / A small wooden ship with a silk flag.",
+    "examine": "A small wooden ship with a silk flag.",
     "durability": null,
     "name": "Model ship",
     "archery_ticket_price": "0",
@@ -60926,7 +60961,7 @@
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "A Temple Knight Communication Orb. Top Secret! / Use this to stay in touch with Korasi and Jessika. (A Void Dance version) / Tyr's commorb, given to him by Sir Tiffy. (Tyr's commorb)",
+    "examine": "A Temple Knight Communication Orb. Top Secret!",
     "durability": null,
     "name": "Commorb",
     "weight": "1",
@@ -61042,14 +61077,14 @@
     "id": "6650"
   },
   {
-    "examine": "A newly formed crystal / A warm energy radiates from this crystal.",
+    "examine": "A newly formed crystal.",
     "durability": null,
     "name": "Newly made crystal",
     "archery_ticket_price": "0",
     "id": "6651"
   },
   {
-    "examine": "A newly formed crystal / A warm energy radiates from this crystal.",
+    "examine": "A warm energy radiates from this crystal.",
     "durability": null,
     "name": "Newly made crystal",
     "archery_ticket_price": "0",
@@ -61888,7 +61923,7 @@
     "id": "6744"
   },
   {
-    "examine": "The magical sword 'Silverlight'. / The magical sword 'Silverlight', stained black with mushroom ink. (during Shadow of the Storm)",
+    "examine": "The magical sword 'Silverlight', stained black with mushroom ink.",
     "durability": null,
     "weight": "1.8",
     "attack_speed": "5",
@@ -73397,7 +73432,7 @@
     "bonuses": "0,0,0,-65,-21,207,209,192,-12,205,102,0,0,0,0"
   },
   {
-    "examine": "The magical sword 'Silverlight'. / The magical sword 'Silverlight', stained black with mushroom ink. (during Shadow of the Storm)",
+    "examine": "The magical sword 'Silverlight', stained black with mushroom ink.",
     "durability": null,
     "name": "Silverlight",
     "weight": "1.8",

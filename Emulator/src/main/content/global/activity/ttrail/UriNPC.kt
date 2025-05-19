@@ -16,6 +16,10 @@ import core.plugin.Plugin
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Uri Molotov NPC who delivers the next part of a treasure trail
+ * when the player has completed an emote clue.
+ */
 class UriNPC : AbstractNPC {
     private var clueScroll: ClueScrollPlugin? = null
 
@@ -181,6 +185,11 @@ class UriNPC : AbstractNPC {
                     "This is the last night you'll spend alone.",
                     "(Breathing intensifies)",
                     "Init doe. Lyk, I hope yer reward iz goodd aye?",
+                    "The sudden appearance of a deaf squirrel is most puzzling, comrade.",
+                    "I am the milkman. My milk is delicious.",
+                    "The brown cow flies at midnight.",
+                    "I wear the cheese; it does not wear me.",
+                    "How much hide would a hidey-hole hide if a hidey-hole could hide hide?"
                 )
         }
     }

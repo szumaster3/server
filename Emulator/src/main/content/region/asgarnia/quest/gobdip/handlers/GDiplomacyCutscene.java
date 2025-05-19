@@ -1,6 +1,9 @@
 package content.region.asgarnia.quest.gobdip.handlers;
 
+import content.global.activity.ttrail.ClueScrollPlugin;
+import content.global.activity.ttrail.TreasureTrailManager;
 import content.region.asgarnia.quest.gobdip.dialogue.GrubFoot;
+import core.api.Container;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
@@ -12,6 +15,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.entity.player.link.quest.Quest;
+import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -27,11 +31,13 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import org.rs.consts.Items;
 import org.rs.consts.NPCs;
 import org.rs.consts.Quests;
 
-import static core.api.ContentAPIKt.setAttribute;
-import static core.api.ContentAPIKt.setVarbit;
+import static content.global.activity.ttrail.ClueScrollPlugin.getClue;
+import static content.global.activity.ttrail.ClueScrollPlugin.getClueScrolls;
+import static core.api.ContentAPIKt.*;
 
 /**
  * The type G diplomacy cutscene.
@@ -150,6 +156,35 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
             dialIndex = RandomFunction.random(DIALOGUES.length);
             other = Repository.findNPC(npc.getId() == NPCs.GENERAL_WARTFACE_4494 ? NPCs.GENERAL_BENTNOZE_4493 : NPCs.GENERAL_WARTFACE_4494);
             quest = player.getQuestRepository().getQuest(Quests.GOBLIN_DIPLOMACY);
+
+            /*
+             * Handles treasure trail interaction.
+             */
+
+            TreasureTrailManager manager = TreasureTrailManager.getInstance(player);
+
+            if (npc.getId() == NPCs.GENERAL_BENTNOZE_4493 &&
+                    player.getInventory().containsItem(new Item(Items.CLUE_SCROLL_10252, 1))) {
+
+                ClueScrollPlugin clueScroll = getClueScrolls().get(manager.getClueId());
+
+                if (clueScroll != null && removeItem(player, clueScroll.getClueId(), Container.INVENTORY)) {
+                    clueScroll.reward(player);
+
+                    if (manager.isCompleted()) {
+                        sendItemDialogue(player, Items.CASKET_405, "You've found a casket!");
+                        manager.clearTrail();
+                    } else {
+                        Item newClue = getClue(clueScroll.getLevel());
+                        if (newClue != null) {
+                            sendItemDialogue(player, newClue, "You found another clue scroll.");
+                            player.getInventory().add(new Item(newClue.getId(), 1));
+                        }
+                    }
+                }
+                return true;
+            }
+
             if (player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 43) {
                 player("Have you heard of the Dorgeshuun?");
                 stage = 5000;

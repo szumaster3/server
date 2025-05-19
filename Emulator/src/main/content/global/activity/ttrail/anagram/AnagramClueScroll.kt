@@ -200,10 +200,11 @@ abstract class AnagramClueScroll(
                                     3 -> {
                                         end()
                                         player.setAttribute("anagram_clue_active", challengeId)
+                                        val challengeScroll = getItemName(challengeId).lowercase()
                                         sendItemDialogue(
                                             player,
                                             Item(challengeId, 1),
-                                            "${npc.name} has given you a challenge scroll!"
+                                            "${npc.name} has given you a $challengeScroll!"
                                         )
                                         player.inventory.add(Item(challengeId, 1))
                                     }

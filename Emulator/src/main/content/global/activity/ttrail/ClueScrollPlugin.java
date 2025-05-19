@@ -25,14 +25,14 @@ import static core.api.ContentAPIKt.log;
  *
  * TODO:
  *  [ ] - Anagrams
- *  [ ] - Challenge scrolls
+ *  [x] - Challenge scrolls
  *  [ ] - Simple clues
- *  [ ] - Cryptics
+ *  [x] - Cryptics
  *  [ ] - Chest keys
  *  [ ] - Emote clues
  *  [ ] - Co-ordinates
  *  [ ] - Maps
- *  [ ] - Puzzle boxes
+ *  [x] - Puzzle boxes
  *  [ ] - Puzzles
  */
 public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object> {

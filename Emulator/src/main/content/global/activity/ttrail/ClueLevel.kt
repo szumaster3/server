@@ -25,9 +25,9 @@ enum class ClueLevel(
     val minSteps: Int,
     val maxSteps: Int,
 ) {
-    EASY(Items.CASKET_2714, 1, 5),
-    MEDIUM(Items.CASKET_2717, 1, 6),
-    HARD(Items.CASKET_2720, 1, 8),
+    EASY(Items.CASKET_2714, 2, 5),
+    MEDIUM(Items.CASKET_2717, 2, 5),
+    HARD(Items.CASKET_2720, 4, 8),
     UNKNOWN(0, 0, 0),
     ;
 
