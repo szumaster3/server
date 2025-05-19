@@ -1,12 +1,13 @@
-package content.global.activity.ttrail.challenge
+package content.global.activity.ttrail.clues
 
 import content.global.activity.ttrail.ClueLevel
+import content.global.activity.ttrail.scrolls.ChallengeClueScroll
 import core.plugin.Plugin
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 /**
- * Represents Challenge clue scrolls.
+ * Represents the challenge clues.
  */
 open class ChallengeClue : ChallengeClueScroll {
 
@@ -40,7 +41,7 @@ open class ChallengeClue : ChallengeClueScroll {
      * @param arg optional argument, not used
      * @return this instance of [ChallengeClue]
      */
-    override fun newInstance(arg: Any?): Plugin<Any?>? {
+    override fun newInstance(arg: Any?): Plugin<Any> {
         register(ChallengeClue("zoo_keeper", Items.CHALLENGE_SCROLL_2842, ClueLevel.HARD, "How many animals<br>are in the Ardougne Zoo?", NPCs.ZOO_KEEPER_28, 40))
         register(ChallengeClue("luthas", Items.CHALLENGE_SCROLL_2844, ClueLevel.HARD, "How many banana trees<br>are there in the plantation?", NPCs.LUTHAS_379, 33))
         register(ChallengeClue("king_roald", Items.CHALLENGE_SCROLL_2846, ClueLevel.MEDIUM, "How many bookcases<br>are in the palace library?", NPCs.KING_ROALD_648, 24))

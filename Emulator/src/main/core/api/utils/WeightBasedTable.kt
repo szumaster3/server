@@ -2,7 +2,7 @@ package core.api.utils
 
 import content.data.tables.*
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.handlers.item.equipment.gloves.FOGGlovesListener
 import core.api.inEquipment
 import core.cache.def.impl.ItemDefinition
@@ -102,9 +102,9 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         for (e in weightedItems) {
             val safeItem =
                 when (e.id) {
-                    SLOT_CLUE_EASY -> ClueScrollPlugin.getClue(ClueLevel.EASY)
-                    SLOT_CLUE_MEDIUM -> ClueScrollPlugin.getClue(ClueLevel.MEDIUM)
-                    SLOT_CLUE_HARD -> ClueScrollPlugin.getClue(ClueLevel.HARD)
+                    SLOT_CLUE_EASY -> ClueScroll.getClue(ClueLevel.EASY)
+                    SLOT_CLUE_MEDIUM -> ClueScroll.getClue(ClueLevel.MEDIUM)
+                    SLOT_CLUE_HARD -> ClueScroll.getClue(ClueLevel.HARD)
                     SLOT_RDT -> RareDropTable.retrieve(receiver)
                     SLOT_CELEDT -> CELEMinorTable.retrieve(receiver)
                     SLOT_USDT -> UncommonSeedDropTable.retrieve(receiver)

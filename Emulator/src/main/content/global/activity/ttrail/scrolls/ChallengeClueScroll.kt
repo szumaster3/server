@@ -1,9 +1,8 @@
-package content.global.activity.ttrail.challenge
+package content.global.activity.ttrail.scrolls
 
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
-import content.global.activity.ttrail.anagram.AnagramClueScroll
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -19,7 +18,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 /**
- * Representing a challenge clue scroll.
+ * Represents a challenge clue scroll.
  *
  * @param question  the question associated with the clue.
  * @param npc       the NPC related to the clue.
@@ -31,13 +30,13 @@ import org.rs.consts.NPCs
  */
 abstract class ChallengeClueScroll(
     name: String?,
-    clueId: Int,
+    clueId: Int?,
     level: ClueLevel?,
     val question: String?,
     val npc: Int?,
     val answer: Int?,
     vararg borders: ZoneBorders,
-) : ClueScrollPlugin(name, clueId, level, Components.TRAIL_MAP09_345, *borders) {
+) : ClueScroll(name!!, clueId!!, level!!, Components.TRAIL_MAP09_345, borders) {
 
     /**
      * Shows clue question to the player.
@@ -86,7 +85,8 @@ abstract class ChallengeClueScroll(
             openDialogue(
                 player,
                 object : DialogueFile() {
-                    private val facialExpression = if (npc.id in intArrayOf(NPCs.UGLUG_NAR_2039, NPCs.GNOME_COACH_2802, NPCs.GNOME_BALL_REFEREE_635)) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_ASKING
+                    private val facialExpression = if (npc.id in intArrayOf(NPCs.UGLUG_NAR_2039, NPCs.GNOME_COACH_2802, NPCs.GNOME_BALL_REFEREE_635))
+                        FaceAnim.OLD_DEFAULT else FaceAnim.HALF_ASKING
                     private val randomAnswer = arrayOf("Here is your reward!", "Spot on!").random()
 
                     override fun handle(componentID: Int, buttonID: Int) {
@@ -95,6 +95,7 @@ abstract class ChallengeClueScroll(
                                 sendNPCDialogue(player, npc.id, "Please enter the answer to the question.", facialExpression)
                                 stage = 1
                             }
+
                             1 -> {
                                 sendInputDialogue(player, true, "Enter amount:") { value: Any ->
                                     val answer = (value as? Int) ?: return@sendInputDialogue
@@ -102,11 +103,17 @@ abstract class ChallengeClueScroll(
                                         sendNPCDialogue(player, npc.id, randomAnswer, facialExpression)
                                         stage = 2
                                     } else {
-                                        sendNPCDialogue(player, npc.id, "That isn't right, keep trying.", facialExpression)
+                                        sendNPCDialogue(
+                                            player,
+                                            npc.id,
+                                            "That isn't right, keep trying.",
+                                            facialExpression
+                                        )
                                         stage = END_DIALOGUE
                                     }
                                 }
                             }
+
                             2 -> {
                                 end()
                                 if (freeSlots(player) == 0) {

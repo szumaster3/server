@@ -1,11 +1,10 @@
-package content.global.activity.ttrail.anagram
+package content.global.activity.ttrail.scrolls
 
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
 import content.global.activity.ttrail.puzzle.PuzzleBox
 import core.api.*
-import core.api.ui.setInterfaceText
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.Option
@@ -19,7 +18,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 /**
- * Representing an anagram clue scroll.
+ * Represents an anagram clue scroll.
  *
  * @param anagram    the anagram text hinting the next NPC.
  * @param npcId      the NPC related to the clue.
@@ -35,7 +34,7 @@ abstract class AnagramClueScroll(
     val npcId: Int,
     level: ClueLevel?,
     val challenge: Int? = null
-) : ClueScrollPlugin(name, clueId, level, Components.TRAIL_MAP09_345) {
+) : ClueScroll(name!!, clueId, level!!, Components.TRAIL_MAP09_345) {
 
     /**
      * Handles player interaction with the NPC for this clue.
@@ -53,11 +52,11 @@ abstract class AnagramClueScroll(
      */
     override fun read(player: Player) {
         repeat(8) { index ->
-            setInterfaceText(player, "", interfaceId, index + 1)
+            sendString(player,"", interfaceId, index + 1)
         }
 
         super.read(player)
-        setInterfaceText(
+        sendString(
             player,
             "<br><br><br><br>This anagram reveals<br>who to speak to next:<br><br><br>$anagram",
             interfaceId,
@@ -161,7 +160,7 @@ abstract class AnagramClueScroll(
                                 sendItemDialogue(p, Items.CASKET_405, "You've found a casket!")
                                 manager.clearTrail()
                             } else {
-                                val newClue = getClue(clueScroll?.level)
+                                val newClue = getClue(clueScroll!!.level)
                                 if (newClue != null) {
                                     sendItemDialogue(p, newClue, "You receive another clue scroll.")
                                     p.inventory.add(newClue)

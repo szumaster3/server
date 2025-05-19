@@ -1,6 +1,6 @@
 package content.global.handlers.iface
 
-import core.api.ui.setInterfaceText
+import core.api.sendString
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.interaction.InterfaceListener
@@ -46,7 +46,7 @@ class MainGameInterface : InterfaceListener {
         on(TOPLEVEL_FS) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
                 12 ->
-                    setInterfaceText(
+                    sendString(
                         player,
                         "When you have finished playing " + settings!!.name +
                             ", always use the button below to logout safely.",
@@ -54,7 +54,7 @@ class MainGameInterface : InterfaceListener {
                         0,
                     )
                 49 ->
-                    setInterfaceText(
+                    sendString(
                         player,
                         "Friends List - " + settings!!.name + " " + settings!!.worldId,
                         Components.FRIENDS2_550,

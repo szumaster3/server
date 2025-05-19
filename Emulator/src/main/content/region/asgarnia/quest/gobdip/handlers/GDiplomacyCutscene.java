@@ -1,6 +1,6 @@
 package content.region.asgarnia.quest.gobdip.handlers;
 
-import content.global.activity.ttrail.ClueScrollPlugin;
+import content.global.activity.ttrail.ClueScroll;
 import content.global.activity.ttrail.TreasureTrailManager;
 import content.region.asgarnia.quest.gobdip.dialogue.GrubFoot;
 import core.api.Container;
@@ -35,8 +35,8 @@ import org.rs.consts.Items;
 import org.rs.consts.NPCs;
 import org.rs.consts.Quests;
 
-import static content.global.activity.ttrail.ClueScrollPlugin.getClue;
-import static content.global.activity.ttrail.ClueScrollPlugin.getClueScrolls;
+import static content.global.activity.ttrail.ClueScroll.getClue;
+import static content.global.activity.ttrail.ClueScroll.getClueScrolls;
 import static core.api.ContentAPIKt.*;
 
 /**
@@ -166,7 +166,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
             if (npc.getId() == NPCs.GENERAL_BENTNOZE_4493 &&
                     player.getInventory().containsItem(new Item(Items.CLUE_SCROLL_10252, 1))) {
 
-                ClueScrollPlugin clueScroll = getClueScrolls().get(manager.getClueId());
+                ClueScroll clueScroll = getClueScrolls().get(manager.getClueId());
 
                 if (clueScroll != null && removeItem(player, clueScroll.getClueId(), Container.INVENTORY)) {
                     clueScroll.reward(player);

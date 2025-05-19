@@ -9,23 +9,6 @@ import core.net.packet.out.MinimapState
 import core.net.packet.out.RepositionChild
 
 /**
- * Sets the text of a specified interface component for a player.
- *
- * @param player The player whose interface text is being updated.
- * @param string The text to display in the interface component.
- * @param interfaceID The interface id where the text will be displayed.
- * @param child The child id within the interface where the text will be shown.
- */
-fun setInterfaceText(
-    player: Player,
-    string: String,
-    interfaceID: Int,
-    child: Int,
-) {
-    player.packetDispatch.sendString(string, interfaceID, child)
-}
-
-/**
  * Restores the player's interface tabs to their default state.
  *
  * @param player The player whose interface tabs are being restored.

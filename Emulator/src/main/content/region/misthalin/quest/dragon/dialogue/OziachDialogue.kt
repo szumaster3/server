@@ -1,6 +1,6 @@
 package content.region.misthalin.quest.dragon.dialogue
 
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
 import content.region.misthalin.quest.dragon.DragonSlayer
 import core.api.*
@@ -29,7 +29,7 @@ class OziachDialogue(
 
         if (inBorders(player, 3066, 3514, 3070, 3518) && inInventory(player, Items.CLUE_SCROLL_10242)) {
             val manager = TreasureTrailManager.getInstance(player)
-            val clueScroll = ClueScrollPlugin.getClueScrolls()[manager.clueId]
+            val clueScroll = ClueScroll.getClueScrolls()[manager.clueId]
 
             clueScroll?.takeIf { removeItem(player, Item(it.clueId, 1), Container.INVENTORY) }?.let {
                 it.reward(player)
@@ -38,7 +38,7 @@ class OziachDialogue(
                     sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
                     manager.clearTrail()
                 } else {
-                    ClueScrollPlugin.getClue(it.level)?.let { newClue ->
+                    ClueScroll.getClue(it.level)?.let { newClue ->
                         sendItemDialogue(player, newClue, "You found another clue scroll.")
                         player.inventory.add(Item(newClue.id, 1))
                     }

@@ -1,6 +1,6 @@
 package content.region.kandarin.dialogue.stronghold
 
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
 import core.api.*
 import core.api.interaction.openNpcShop
@@ -18,7 +18,7 @@ import org.rs.consts.NPCs
  * Represents The Heckel Funch dialogue.
  *
  * Relations:
- * [CrypticCluePlugin][content.global.activity.ttrail.cryptic.CrypticCluePlugin]
+ * [CrypticClue][content.global.activity.ttrail.cryptic.CrypticClue]
  */
 @Initializable
 class HeckelFunchDialogue(
@@ -28,7 +28,7 @@ class HeckelFunchDialogue(
         npc = args[0] as NPC
         if (inBorders(player, 2484, 3486, 2493, 3489) && inInventory(player, Items.CLUE_SCROLL_10248)) {
             val manager = TreasureTrailManager.getInstance(player)
-            val clueScroll = ClueScrollPlugin.getClueScrolls()[manager.clueId]
+            val clueScroll = ClueScroll.getClueScrolls()[manager.clueId]
 
             clueScroll?.takeIf { removeItem(player, Item(it.clueId, 1), Container.INVENTORY) }?.let {
                 it.reward(player)
@@ -37,7 +37,7 @@ class HeckelFunchDialogue(
                     sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
                     manager.clearTrail()
                 } else {
-                    ClueScrollPlugin.getClue(it.level)?.let { newClue ->
+                    ClueScroll.getClue(it.level)?.let { newClue ->
                         sendItemDialogue(player, newClue, "You found another clue scroll.")
                         player.inventory.add(Item(newClue.id, 1))
                     }

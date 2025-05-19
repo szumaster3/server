@@ -1,6 +1,6 @@
 package content.region.misthalin.dialogue.monastery
 
-import content.global.activity.ttrail.ClueScrollPlugin
+import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager.Companion.getInstance
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -31,7 +31,7 @@ class AbbotLangleyDialogue(
         }
         if (inBorders(player, 3053, 3481, 3062, 3500) && inInventory(player, Items.CLUE_SCROLL_10240)) {
             val manager = getInstance(player)
-            val clueScroll = ClueScrollPlugin.getClueScrolls()[manager.clueId]
+            val clueScroll = ClueScroll.getClueScrolls()[manager.clueId]
 
             clueScroll?.takeIf { removeItem(player, Item(it.clueId, 1), Container.INVENTORY) }?.let {
                 it.reward(player)
@@ -40,7 +40,7 @@ class AbbotLangleyDialogue(
                     sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
                     manager.clearTrail()
                 } else {
-                    ClueScrollPlugin.getClue(it.level)?.let { newClue ->
+                    ClueScroll.getClue(it.level)?.let { newClue ->
                         sendItemDialogue(player, newClue, "You found another clue scroll.")
                         player.inventory.add(Item(newClue.id, 1))
                     }

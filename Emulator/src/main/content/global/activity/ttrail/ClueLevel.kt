@@ -3,6 +3,7 @@ package content.global.activity.ttrail
 import core.api.IfaceSettingsBuilder
 import core.api.addItemOrDrop
 import core.api.playJingle
+import core.api.sendItemDialogue
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.player.Player
@@ -117,7 +118,7 @@ enum class ClueLevel(
                 return
             }
 
-            val newClue = ClueScrollPlugin.getClue(clueLevel)
+            val newClue = ClueScroll.getClue(clueLevel)
 
             if (casket != null && player.inventory.remove(casket, casket.slot, true)) {
                 player.inventory.replace(newClue, casket.slot)
@@ -126,7 +127,7 @@ enum class ClueLevel(
             }
 
             playerTrails.clueId = newClue!!.id
-            player.dialogueInterpreter.sendItemMessage(newClue, "You've found another clue!")
+            sendItemDialogue(player, newClue, "You've found another clue!")
         }
 
         /**

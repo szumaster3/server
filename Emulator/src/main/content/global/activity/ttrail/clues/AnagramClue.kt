@@ -1,13 +1,14 @@
-package content.global.activity.ttrail.anagram
+package content.global.activity.ttrail.clues
 
 import content.global.activity.ttrail.ClueLevel
+import content.global.activity.ttrail.scrolls.AnagramClueScroll
 import content.global.activity.ttrail.puzzle.PuzzleBox
 import core.plugin.Plugin
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 /**
- * Represents Anagram clue scrolls.
+ * Represents the anagram clues.
  */
 open class AnagramClue : AnagramClueScroll {
 
@@ -41,7 +42,7 @@ open class AnagramClue : AnagramClueScroll {
      * @param arg optional argument, not used
      * @return this instance of [AnagramClue]
      */
-    override fun newInstance(arg: Any?): Plugin<Any?>? {
+    override fun newInstance(arg: Any?): Plugin<Any> {
         register(AnagramClue("a_bas", Items.CLUE_SCROLL_7236, "A BAS", NPCs.SABA_1070, ClueLevel.HARD, PuzzleBox.getRandomPuzzleBox()))
         register(AnagramClue("a_zen_she", Items.CLUE_SCROLL_7238, "A ZEN SHE", NPCs.ZENESHA_589, ClueLevel.HARD, PuzzleBox.getRandomPuzzleBox()))
         register(AnagramClue("ace_match_elm", Items.CLUE_SCROLL_7239, "ACE MATCH ELM", NPCs.CAM_THE_CAMEL_2812, ClueLevel.HARD, PuzzleBox.getRandomPuzzleBox()))

@@ -1,8 +1,7 @@
 package content.global.handlers.npc
 
-import content.global.activity.ttrail.anagram.AnagramClueScroll
-import content.global.activity.ttrail.challenge.ChallengeClue
-import content.global.activity.ttrail.challenge.ChallengeClueScroll
+import content.global.activity.ttrail.scrolls.AnagramClueScroll
+import content.global.activity.ttrail.scrolls.ChallengeClueScroll
 import content.global.ame.RandomEvents
 import content.minigame.gnomecook.dialogue.GnomeCookingDialogue
 import content.minigame.gnomecook.handlers.GC_BASE_ATTRIBUTE
@@ -16,7 +15,6 @@ import core.api.interaction.openDepositBox
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.Option
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.IdleAbstractNPC
 import core.game.node.entity.npc.NPC

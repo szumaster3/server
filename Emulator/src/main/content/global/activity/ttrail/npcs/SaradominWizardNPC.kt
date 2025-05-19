@@ -1,5 +1,6 @@
-package content.global.activity.ttrail
+package content.global.activity.ttrail.npcs
 
+import content.global.activity.ttrail.ClueScroll
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
@@ -14,8 +15,11 @@ import core.game.world.map.RegionManager.getSpawnLocation
 import core.plugin.Plugin
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Saradomin wizard NPC.
+ */
 class SaradominWizardNPC : AbstractNPC {
-    private var clueScroll: ClueScrollPlugin? = null
+    private var clueScroll: ClueScroll? = null
 
     var player: Player? = null
 

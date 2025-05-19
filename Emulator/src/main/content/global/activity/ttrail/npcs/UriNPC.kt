@@ -1,6 +1,7 @@
-package content.global.activity.ttrail
+package content.global.activity.ttrail.npcs
 
-import content.global.activity.ttrail.emotes.EmoteClueScroll
+import content.global.activity.ttrail.ClueScroll
+import content.global.activity.ttrail.scrolls.EmoteClueScroll
 import core.api.removeAttribute
 import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue
@@ -21,7 +22,7 @@ import org.rs.consts.NPCs
  * when the player has completed an emote clue.
  */
 class UriNPC : AbstractNPC {
-    private var clueScroll: ClueScrollPlugin? = null
+    private var clueScroll: ClueScroll? = null
 
     var player: Player? = null
 

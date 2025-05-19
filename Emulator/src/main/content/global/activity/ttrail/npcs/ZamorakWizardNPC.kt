@@ -1,5 +1,6 @@
-package content.global.activity.ttrail
+package content.global.activity.ttrail.npcs
 
+import content.global.activity.ttrail.ClueScroll
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.spell.CombatSpell
@@ -11,8 +12,11 @@ import core.game.world.map.RegionManager.getSpawnLocation
 import core.plugin.Plugin
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Zamorak wizard NPC.
+ */
 class ZamorakWizardNPC : AbstractNPC {
-    var clueScroll: ClueScrollPlugin? = null
+    var clueScroll: ClueScroll? = null
         private set
 
     var player: Player? = null
