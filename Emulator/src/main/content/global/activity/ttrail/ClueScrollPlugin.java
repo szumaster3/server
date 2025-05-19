@@ -51,7 +51,6 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
             4385, 4386, 4387, 4388, 4389, 4390, 4391, 4392, 4393, 4394,
             4395, 4396, 4397, 4398, 4399, 4400, 4401, 4402, 4403, 4404,
             4405, 4406, 4407, 4408, 4409, 4410, 4411, 4412, 4413, 4414,
-            10638
     };
 
     private static final Map<Integer, ClueScrollPlugin> CLUE_SCROLLS = new HashMap<>();
