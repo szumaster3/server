@@ -411,12 +411,12 @@ class PlagueCityListener : InteractionListener {
 
         on(Scenery.BARREL_2530, IntType.SCENERY, "search") { player, _ ->
             animate(player, Animations.SEARCHING_CRATES_6840)
-            if (inInventory(player, Items.A_SMALL_KEY_1507) || freeSlots(player) == 0) {
+            if (inInventory(player, Items.KEY_423) || freeSlots(player) == 0) {
                 sendMessage(player, "You don't find anything interesting.")
                 return@on true
             }
-            sendItemDialogue(player, Items.A_SMALL_KEY_1507, "You find a small key in the barrel.")
-            addItem(player, Items.A_SMALL_KEY_1507)
+            sendItemDialogue(player, Items.KEY_423, "You find a small key in the barrel.")
+            addItem(player, Items.KEY_423)
             return@on true
         }
 
@@ -436,7 +436,7 @@ class PlagueCityListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, Items.A_SMALL_KEY_1507, Scenery.DOOR_2526) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.KEY_423, Scenery.DOOR_2526) { player, _, _ ->
             if (getQuestStage(player, Quests.PLAGUE_CITY) >= 16) {
                 DoorActionHandler.handleAutowalkDoor(player, getScenery(Location(2539, 9672, 0))!!.asScenery())
                 sendMessage(player, "You unlock the door.")

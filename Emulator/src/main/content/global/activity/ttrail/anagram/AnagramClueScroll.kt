@@ -73,7 +73,7 @@ abstract class AnagramClueScroll(
          * @param npc The NPC to match with clue.
          * @return The matching AnagramClueScroll if found, null otherwise.
          */
-        private fun getClueForNpc(player: Player, npc: NPC): AnagramClueScroll? {
+        fun getClueForNpc(player: Player, npc: NPC): AnagramClueScroll? {
             val fromInventory = player.inventory.toArray()
                 .filterNotNull()
                 .mapNotNull { getClueScrolls()[it.id] as? AnagramClueScroll }
@@ -126,6 +126,7 @@ abstract class AnagramClueScroll(
                     val message = when (npc.id) {
                         NPCs.RAMARA_DU_CROISSANT_3827 -> "I've ze puzzle for you to solve."
                         NPCs.UGLUG_NAR_2039 -> "You want puzzle?"
+                        NPCs.GENERAL_BENTNOZE_4493 -> "Human do puzzle for me!"
                         else -> messages.random()
                     }
                     sendNPCDialogue(player, npc.id, message, facialExpression)
@@ -143,12 +144,11 @@ abstract class AnagramClueScroll(
                         "anagram_clue_active"
                     )
                     val randomMessage = arrayOf("Here is your reward!", "Well done, traveller.").random()
-                    val message = if (npc.id == NPCs.RAMARA_DU_CROISSANT_3827)
-                        "Zat's wonderful!"
-                    else if (npc.id == NPCs.UGLUG_NAR_2039) {
-                        "Dere you go!"
-                    } else {
-                        randomMessage
+                    val message = when (npc.id) {
+                        NPCs.RAMARA_DU_CROISSANT_3827 -> "Zat's wonderful!"
+                        NPCs.UGLUG_NAR_2039 -> "Dere you go!"
+                        NPCs.GENERAL_BENTNOZE_4493 -> "Thank you human!"
+                        else -> randomMessage
                     }
                     sendNPCDialogue(player, npc.id, message, facialExpression)
                     addDialogueAction(player) { p, btn ->
@@ -174,31 +174,43 @@ abstract class AnagramClueScroll(
                 return false
             } else {
                 if (!player.inventory.contains(challengeId, 1)) {
-                    openDialogue(player, object : DialogueFile() {
-                        override fun handle(componentID: Int, buttonID: Int) {
-                            when (stage) {
-                                0 -> {
-                                    sendNPCDialogue(player, npc.id, "Ah! Here you go!", facialExpression)
-                                    stage = 1
-                                }
-                                1 -> {
-                                    player("What?")
-                                    stage++
-                                }
-                                2 -> {
-                                    sendNPCDialogue(player, npc.id, "I need you to answer this for me.", facialExpression)
-                                    stage++
-                                }
-                                3 -> {
-                                    end()
-                                    player.setAttribute("anagram_clue_active", challengeId)
-                                    sendItemDialogue(player, Item(challengeId, 1), "${npc.name} has given you a challenge scroll!")
-                                    player.inventory.add(Item(challengeId, 1))
+                        openDialogue(player, object : DialogueFile() {
+                            override fun handle(componentID: Int, buttonID: Int) {
+                                when (stage) {
+                                    0 -> {
+                                        sendNPCDialogue(player, npc.id, "Ah! Here you go!", facialExpression)
+                                        stage = 1
+                                    }
+
+                                    1 -> {
+                                        player("What?")
+                                        stage++
+                                    }
+
+                                    2 -> {
+                                        sendNPCDialogue(
+                                            player,
+                                            npc.id,
+                                            "I need you to answer this for me.",
+                                            facialExpression
+                                        )
+                                        stage++
+                                    }
+
+                                    3 -> {
+                                        end()
+                                        player.setAttribute("anagram_clue_active", challengeId)
+                                        sendItemDialogue(
+                                            player,
+                                            Item(challengeId, 1),
+                                            "${npc.name} has given you a challenge scroll!"
+                                        )
+                                        player.inventory.add(Item(challengeId, 1))
+                                    }
                                 }
                             }
-                        }
-                    })
-                    return true
+                        })
+                        return true
                 }
             }
 

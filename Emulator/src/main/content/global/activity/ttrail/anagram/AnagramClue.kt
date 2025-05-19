@@ -1,7 +1,6 @@
 package content.global.activity.ttrail.anagram
 
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.challenge.ChallengeClue
 import content.global.activity.ttrail.puzzle.PuzzleBox
 import core.plugin.Plugin
 import org.rs.consts.Items

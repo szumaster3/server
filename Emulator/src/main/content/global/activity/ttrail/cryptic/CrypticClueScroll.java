@@ -80,19 +80,27 @@ public abstract class CrypticClueScroll extends ClueScrollPlugin {
         return super.interact(e, target, option);
     }
 
+    /**
+     * Registers the dig location for this clue.
+     */
     @Override
     public void configure() {
         DigSpadeHandler.register(getLocation(), new CrypticDigAction());
         super.configure();
     }
 
+    /**
+     * Displays the clue text to the player.
+     *
+     * @param player the player reading the clue scroll
+     */
     @Override
     public void read(Player player) {
-        super.read(player);
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i < 9; i++) {
             player.getPacketDispatch().sendString("", interfaceId, i);
         }
-        player.getPacketDispatch().sendString(clueText, interfaceId, 1);
+        super.read(player);
+        player.getPacketDispatch().sendString(clueText.replace("<br>", "<br><br>"), interfaceId, 1);
     }
 
     /**
