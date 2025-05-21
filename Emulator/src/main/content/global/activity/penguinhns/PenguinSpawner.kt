@@ -4,7 +4,17 @@ import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import org.rs.consts.NPCs
 
+/**
+ * Represents the spawning penguin NPCs in the world.
+ */
 class PenguinSpawner {
+
+    /**
+     * Spawns a specified number of unique penguins randomly.
+     *
+     * @param amount The number of penguins to spawn.
+     * @return A list of the ordinals of the spawned penguins.
+     */
     fun spawnPenguins(amount: Int): ArrayList<Int> {
         var counter = 0
         val availableOrdinals = (0 until Penguin.values().size).toMutableList()
@@ -24,6 +34,11 @@ class PenguinSpawner {
         return spawnedOrdinals
     }
 
+    /**
+     * Spawns penguins specified by their ordinals.
+     *
+     * @param ordinals List of penguin ordinals to spawn.
+     */
     fun spawnPenguins(ordinals: List<Int>) {
         ordinals.forEach { it ->
             val peng = Penguin.values()[it]
@@ -37,6 +52,13 @@ class PenguinSpawner {
     }
 }
 
+/**
+ * Represents all possible penguins for the Penguin Hunter activity.
+ *
+ * @property id The [NPC] id.
+ * @property hint Text hint describing location of penguin.
+ * @property location The [Location] of the penguin [NPC].
+ */
 enum class Penguin(
     val id: Int,
     val hint: String,
@@ -74,8 +96,17 @@ enum class Penguin(
     ;
 
     companion object {
+        /**
+         * Map to quickly find a Penguin by its location string.
+         */
         private val locationMap = values().associateBy { it.location.toString() }
 
+        /**
+         * Gets the penguin corresponding to a given location.
+         *
+         * @param location The location to search for.
+         * @return The matching Penguin if found, `null` otherwise.
+         */
         fun forLocation(location: Location): Penguin? = locationMap[location.toString()]
     }
 }

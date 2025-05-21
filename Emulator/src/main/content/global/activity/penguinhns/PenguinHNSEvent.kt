@@ -7,9 +7,22 @@ import core.plugin.ClassScanner
 import core.tools.Log
 import org.json.simple.JSONObject
 
+/**
+ * Handles startup initialization for the Penguin Hunter activity.
+ */
 class PenguinHNSEvent : StartupListener {
+    /**
+     * The [PenguinManager] instance managing penguin activity state.
+     */
     val manager = PenguinManager()
 
+    /**
+     * Called on server startup to initialize the Penguin Hunter activity.
+     *
+     * - Rebuilds penguin variables from stored data.
+     * - Registers dialogue plugins related to Larry (activity NPC).
+     * - Logs the successful initialization.
+     */
     override fun startup() {
         manager.rebuildVars()
         ClassScanner.definePlugins(LarryDialogue())
@@ -17,6 +30,11 @@ class PenguinHNSEvent : StartupListener {
     }
 
     companion object {
+        /**
+         * Retrieves the persistent JSON storage file for the Penguin Hunter activity.
+         *
+         * @return The JSON object representing stored activity data.
+         */
         @JvmStatic
         fun getStoreFile(): JSONObject = ServerStore.getArchive("weekly-penguinhns")
     }

@@ -11,6 +11,9 @@ import core.tools.Log
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Larry dialogue.
+ */
 class LarryDialogue(
     player: Player? = null,
 ) : Dialogue(player) {

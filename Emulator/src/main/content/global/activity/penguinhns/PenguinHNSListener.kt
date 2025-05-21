@@ -13,6 +13,9 @@ import core.tools.BLUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the interaction for the Penguin Hunter activity.
+ */
 class PenguinHNSListener : InteractionListener {
     override fun defineListeners() {
         on(sceneryPenguinIDs, IntType.NPC, "spy-on") { player, node ->
@@ -38,24 +41,32 @@ class PenguinHNSListener : InteractionListener {
         }
     }
 
-    private val sceneryPenguinIDs =
-        intArrayOf(
-            NPCs.BARREL_8104,
-            NPCs.BUSH_8105,
-            NPCs.CACTUS_8107,
-            NPCs.CRATE_8108,
-            NPCs.ROCK_8109,
-            NPCs.TOADSTOOL_8110,
-        )
+    /**
+     * The NPC IDs of scenery penguins that can be spied on in the Penguin Hunter activity.
+     */
+    private val sceneryPenguinIDs = intArrayOf(NPCs.BARREL_8104, NPCs.BUSH_8105, NPCs.CACTUS_8107, NPCs.CRATE_8108, NPCs.ROCK_8109, NPCs.TOADSTOOL_8110)
 
+    /**
+     * Represents the pulse of spying on a penguin.
+     *
+     * @property player The player spying on the penguin.
+     * @property npc The penguin NPC being spied on.
+     */
     class SpyPulse(
         val player: Player,
         val npc: NPC,
     ) : Pulse() {
         var stage = 0
+        // The activity score.
         val totalPoints = getAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0)
+        // Animation ID used during spying.
         val animationID = Animation(10355)
 
+        /**
+         * Called on each pulse tick to progress the spying action.
+         *
+         * @return true when the pulse is complete and should stop, false otherwise.
+         */
         override fun pulse(): Boolean {
             when (stage++) {
                 0 -> {
@@ -78,6 +89,9 @@ class PenguinHNSListener : InteractionListener {
             return false
         }
 
+        /**
+         * Called when the pulse is stopped.
+         */
         override fun stop() {
             super.stop()
             unlock(player)
