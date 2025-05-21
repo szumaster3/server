@@ -222,7 +222,7 @@ class WaterbirthDungeon :
                 }
 
                 10230 -> {
-                    if (!Warnings.DAGANNOTH_KINGS_LADDER.isDisabled) {
+                    if (!WarningManager.isDisabled(player, Warnings.DAGANNOTH_KINGS_LADDER)) {
                         WarningManager.openWarning(
                             player,
                             Warnings.DAGANNOTH_KINGS_LADDER,

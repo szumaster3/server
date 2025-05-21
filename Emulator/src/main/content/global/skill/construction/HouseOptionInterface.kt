@@ -11,7 +11,7 @@ class HouseOptionInterface : InterfaceListener {
         on(Components.POH_HOUSE_OPTIONS_398) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
                 14 -> {
-                    if (player.houseManager.isInHouse(player) && !Warnings.PLAYER_OWNED_HOUSES.isDisabled) {
+                    if (player.houseManager.isInHouse(player) && !WarningManager.isDisabled(player, Warnings.PLAYER_OWNED_HOUSES)) {
                         WarningManager.openWarning(
                             player,
                             Warnings.PLAYER_OWNED_HOUSES,

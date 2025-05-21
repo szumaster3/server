@@ -42,12 +42,7 @@ class SewingInterface : InterfaceListener {
     }
 }
 
-enum class PirateClothes(
-    val firstItem: Int,
-    val secondItem: Int,
-    val product: Int,
-    val buttonId: Int,
-) {
+enum class PirateClothes(val firstItem: Int, val secondItem: Int, val product: Int, val buttonId: Int, ) {
     WHITE_RIGHT_EYE(
         firstItem = Items.PIRATE_BANDANA_7112,
         secondItem = Items.EYE_PATCH_1025,
@@ -75,12 +70,7 @@ enum class PirateClothes(
     ORANGE_DOUBLE_EYE(Items.BANDANA_13374, Items.DOUBLE_EYEPATCHES_13353, Items.BANDANA_AND_EYEPATCH_13351, 56),
     ORANGE_LEFT_DOUBLE_EYE(Items.BANDANA_13374, Items.LEFT_EYEPATCH_13355, Items.BANDANA_AND_EYEPATCHES_13352, 80),
     PIRATE_HAT_RIGHT_EYE(Items.PIRATES_HAT_2651, Items.EYE_PATCH_1025, Items.HAT_AND_EYEPATCH_8928, 82),
-    PIRATE_HAT_DOUBLE_EYE(
-        Items.PIRATES_HAT_2651,
-        Items.DOUBLE_EYEPATCHES_13353,
-        Items.PIRATE_HAT_AND_EYEPATCHES_13354,
-        58,
-    ),
+    PIRATE_HAT_DOUBLE_EYE(Items.PIRATES_HAT_2651, Items.DOUBLE_EYEPATCHES_13353, Items.PIRATE_HAT_AND_EYEPATCHES_13354, 58),
     PIRATE_HAT_LEFT_EYE(Items.PIRATES_HAT_2651, Items.LEFT_EYEPATCH_13355, Items.PIRATE_HAT_AND_EYEPATCH_13357, 84),
     DOUBLE_PATCH(Items.LEFT_EYEPATCH_13355, Items.EYE_PATCH_1025, Items.DOUBLE_EYEPATCHES_13353, 86),
     CRAB_HAND(Items.CRAB_CLAW_7537, Items.PIRATES_HOOK_2997, Items.CRABCLAW_AND_HOOK_8929, 88),

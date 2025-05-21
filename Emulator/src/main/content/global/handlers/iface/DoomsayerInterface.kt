@@ -1,10 +1,10 @@
 package content.global.handlers.iface
 
+import content.global.handlers.iface.warning.WarningManager
 import content.global.handlers.iface.warning.Warnings
 import core.api.getVarbit
 import core.api.sendMessage
 import core.api.sendMessages
-import core.api.setVarbit
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
 
@@ -32,10 +32,9 @@ class DoomsayerInterface : InterfaceListener {
                     return@on true
                 }
 
-                val newState = if (warning.isDisabled) 6 else 7
-                setVarbit(player, warning.varbit, newState, true)
-                warning.isDisabled = !warning.isDisabled
-                sendMessage(player, "You have ${if (warning.isDisabled) "disabled" else "enabled"} the warning.")
+                val wasDisabled = WarningManager.isDisabled(player, warning)
+                WarningManager.toggleWarning(player, warning)
+                sendMessage(player, "You have ${if (!wasDisabled) "disabled" else "enabled"} the warning.")
             }
             return@on true
         }

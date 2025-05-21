@@ -1,5 +1,6 @@
 package content.region.misthalin.handlers.stronghold.security;
 
+import content.global.handlers.iface.warning.WarningManager;
 import content.global.handlers.iface.warning.Warnings;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
@@ -111,21 +112,21 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     player.getPacketDispatch().sendMessage("You climb up the ladder to the level above.");
                     return true;
                 case 16149: // Ladder from Level 1 to Level 2 (Flesh crawlers)
-                    if (!Warnings.STRONGHOLD_OF_SECURITY_LADDERS.isDisabled()) {
+                    if (!WarningManager.isDisabled(player, Warnings.STRONGHOLD_OF_SECURITY_LADDERS)) {
                         openComponent(player, Location.create(2042, 5245, 0));
                     } else {
                         ClimbActionHandler.climb(player, new Animation(Animations.USE_LADDER_828), Location.create(2042, 5245, 0));
                     }
                     return true;
                 case 16081: // Ladder from Level 2 to Level 3 (Poison spiders)
-                    if (!Warnings.STRONGHOLD_OF_SECURITY_LADDERS.isDisabled()) {
+                    if (!WarningManager.isDisabled(player, Warnings.STRONGHOLD_OF_SECURITY_LADDERS)) {
                         openComponent(player, Location.create(2123, 5252, 0));
                     } else {
                         ClimbActionHandler.climb(player, new Animation(Animations.USE_LADDER_828), Location.create(2123, 5252, 0));
                     }
                     return true;
                 case 16115: // Ladder from Level 3 to Level 4 (Shades)
-                    if (!Warnings.STRONGHOLD_OF_SECURITY_LADDERS.isDisabled()) {
+                    if (!WarningManager.isDisabled(player, Warnings.STRONGHOLD_OF_SECURITY_LADDERS)) {
                         openComponent(player, Location.create(2358, 5215, 0));
                     } else {
                         ClimbActionHandler.climb(player, new Animation(Animations.USE_LADDER_828), Location.create(2358, 5215, 0));

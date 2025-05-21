@@ -26,6 +26,9 @@ private val WRISTGUARD_MODELS =
         135 to 27709,
     )
 
+/**
+ * Represents the Smithing Emporium.
+ */
 class SmithingEmporiumInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.REINALD_SMITHING_EMPORIUM_593) { player, component ->
@@ -46,6 +49,11 @@ class SmithingEmporiumInterface : InterfaceListener {
         }
     }
 
+    /**
+     * Restores original wrist appearance if payment not made.
+     *
+     * @param player The player closing the interface.
+     */
     private fun handleCloseEvent(player: Player) {
         val originalIndex = getAttribute(player, "wrists-look", if (player.isMale) 34 else 68)
         if (!getAttribute(player, "bracelet-paid", false)) {
@@ -56,6 +64,11 @@ class SmithingEmporiumInterface : InterfaceListener {
         player.toggleWardrobe(false)
     }
 
+    /**
+     * Processes payment for wristguard purchase.
+     *
+     * @param player The player confirming the purchase.
+     */
     private fun confirm(player: Player) {
         if (!removeItem(player, COINS)) {
             sendDialogue(player, "You cannot afford that.")
@@ -65,6 +78,13 @@ class SmithingEmporiumInterface : InterfaceListener {
         }
     }
 
+    /**
+     * Sends wristguard model preview on interface,
+     * updates player appearance accordingly.
+     *
+     * @param id Model ID to display.
+     * @param player The player to update.
+     */
     private fun sendModel(
         id: Int,
         player: Player,
@@ -78,6 +98,13 @@ class SmithingEmporiumInterface : InterfaceListener {
         sendPlayerOnInterface(player, Components.REINALD_SMITHING_EMPORIUM_593, 60)
     }
 
+    /**
+     * Calculates wrist appearance index based on model id and player gender.
+     *
+     * @param id Model id.
+     * @param player The player for gender-specific adjustments.
+     * @return Calculated appearance index.
+     */
     private fun calculateAppearanceIndex(
         id: Int,
         player: Player,

@@ -1,5 +1,6 @@
 package content.region.desert.handlers
 
+import content.global.handlers.iface.warning.WarningManager
 import content.global.handlers.iface.warning.Warnings
 import content.global.skill.agility.AgilityHandler
 import core.api.*
@@ -81,7 +82,7 @@ class ShantayPassListener : InteractionListener {
                     null,
                 )
             } else {
-                if (!Warnings.SHANTAY_PASS.isDisabled) {
+                if (!WarningManager.isDisabled(player, Warnings.SHANTAY_PASS)) {
                     openInterface(player, Components.CWS_WARNING_10_565)
                 } else {
                     if (!removeItem(player, SHANTAY_PASS_TICKET)) {

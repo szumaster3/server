@@ -257,7 +257,7 @@ class WarningListener :
          */
 
         on(intArrayOf(Scenery.PASSAGE_37929, Scenery.PASSAGE_38811), IntType.SCENERY, "go-through") { player, node ->
-            if (player.location.x < node.location.x && !Warnings.CORPOREAL_BEAST_DANGEROUS.isDisabled) {
+            if (player.location.x < node.location.x && !WarningManager.isDisabled(player, Warnings.CORPOREAL_BEAST_DANGEROUS)) {
                 WarningManager.openWarning(
                     player,
                     Warnings.CORPOREAL_BEAST_DANGEROUS,
@@ -277,7 +277,7 @@ class WarningListener :
                 sendPlayerDialogue(player, "I don't think I should try to go down there now.")
                 return@on true
             }
-            if (!Warnings.OBSERVATORY_STAIRS.isDisabled) {
+            if (!WarningManager.isDisabled(player, Warnings.OBSERVATORY_STAIRS)) {
                 WarningManager.openWarning(
                     player,
                     Warnings.OBSERVATORY_STAIRS,
@@ -300,70 +300,68 @@ class WarningListener :
             IntType.SCENERY,
             "climb-down",
             "climb",
-        )
-        { player, _ ->
-            val option = getUsedOption(player)
-            when (option) {
-                "climb" -> teleport(player, Location.create(3169, 3173, 0))
+        ) { player, _ ->
+            when (getUsedOption(player)) {
+                "climb" -> {
+                    teleport(player, Location.create(3169, 3173, 0))
+                    return@on true
+                }
+
                 "climb-down" -> {
                     if (!player.getSavedData().globalData.hasTiedLumbridgeRope()) {
                         sendDialogue(player, "There is a sheer drop below the hole. You will need a rope.")
                         return@on true
                     }
-                    if (!Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE.isDisabled) {
-                        WarningManager.openWarning(
-                            player,
-                            Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE,
-                        )
+
+                    if (!WarningManager.isDisabled(player, Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE)) {
+                        WarningManager.openWarning(player, Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE)
                         return@on true
                     }
+
                     climb(
                         player,
                         Animation(Animations.MULTI_BEND_OVER_827),
                         Location.create(3168, 9572, 0),
                     )
+                    return@on true
                 }
+
+                else -> return@on false
             }
-            return@on true
         }
 
         /*
          * Handles mort myre gate scenery interaction.
          */
 
-        on(intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507), IntType.SCENERY, "open")
-        { player, node ->
+        on(intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507), IntType.SCENERY, "open") { player, node ->
             if (player.location.y == 3457) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 sendMessage(player, "You skip gladly out of murky Mort Myre.")
                 GlobalScope.launch {
                     findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
                 }
-            } else {
-                if (player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
-                    if (!Warnings.MORT_MYRE.isDisabled) {
-                        WarningManager.openWarning(
-                            player,
-                            Warnings.MORT_MYRE,
-                        )
-                    } else {
-                        val targetScenery =
-                            if (player.location.x > 3443) {
-                                getScenery(3444, 3458, 0)!!
-                            } else {
-                                getScenery(3443, 3458, 0)!!
-                            }
-                        DoorActionHandler.handleAutowalkDoor(player, targetScenery)
-                        sendMessageWithDelay(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
-                    }
-                } else {
-                    sendNPCDialogue(
-                        player,
-                        NPCs.ULIZIUS_1054,
-                        "I'm sorry, but I'm afraid it's too dangerous to let you through this gate right now.",
-                    )
-                }
+                return@on true
             }
+
+            if (!player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
+                sendNPCDialogue(
+                    player,
+                    NPCs.ULIZIUS_1054,
+                    "I'm sorry, but I'm afraid it's too dangerous to let you through this gate right now.",
+                )
+                return@on true
+            }
+
+            if (!WarningManager.isDisabled(player, Warnings.MORT_MYRE)) {
+                WarningManager.openWarning(player, Warnings.MORT_MYRE)
+                return@on true
+            }
+
+            val targetX = if (player.location.x > 3443) 3444 else 3443
+            val targetScenery = getScenery(targetX, 3458, 0)!!
+            DoorActionHandler.handleAutowalkDoor(player, targetScenery)
+            sendMessageWithDelay(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
             return@on true
         }
 
@@ -381,7 +379,7 @@ class WarningListener :
             val option = getUsedOption(player)
             when (option) {
                 "climb-up" -> {
-                    if (!Warnings.RANGING_GUILD.isDisabled) {
+                    if (!WarningManager.isDisabled(player, Warnings.RANGING_GUILD)) {
                         WarningManager.openWarning(player, Warnings.RANGING_GUILD)
                     } else {
                         climb(player, Animation(Animations.USE_LADDER_828), Location(2668, 3427, 2))
@@ -406,13 +404,9 @@ class WarningListener :
             return@on true
         }
 
-        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open")
-        { player, node ->
-            if (!Warnings.WILDERNESS_DITCH.isDisabled && player.location.y < 9918) {
-                WarningManager.openWarning(
-                    player,
-                    Warnings.WILDERNESS_DITCH,
-                )
+        on(intArrayOf(Scenery.METAL_DOOR_29319, Scenery.METAL_DOOR_29320), IntType.SCENERY, "open") { player, node ->
+            if (!WarningManager.isDisabled(player, Warnings.WILDERNESS_DITCH) && player.location.y < 9918) {
+                WarningManager.openWarning(player, Warnings.WILDERNESS_DITCH)
                 setAttribute(player, "wildy_gate", node)
             } else {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -446,7 +440,7 @@ class WarningListener :
             val shouldWarn = shouldWarnCrossing(player, ditch)
             if (shouldWarn) {
                 val warning = Warnings.WILDERNESS_DITCH
-                if (!warning.isDisabled) {
+                if (!WarningManager.isDisabled(player, Warnings.WILDERNESS_DITCH)) {
                     WarningManager.openWarning(
                         player,
                         warning,

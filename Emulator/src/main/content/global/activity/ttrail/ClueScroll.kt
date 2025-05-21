@@ -151,6 +151,7 @@ abstract class ClueScroll(
          * @param clueLevel The level of clue to fetch.
          * @return A new clue scroll item, or null if none are registered.
          */
+        @JvmStatic
         fun getClue(clueLevel: ClueLevel): Item? {
             val clues = ORGANIZED[clueLevel]
             if (clues == null) {
@@ -166,6 +167,7 @@ abstract class ClueScroll(
          *
          * @return A map of clue ID to plugin instance.
          */
+        @JvmStatic
         fun getClueScrolls(): Map<Int, ClueScroll> = CLUE_SCROLLS
     }
 }

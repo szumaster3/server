@@ -22,11 +22,8 @@ object WarningManager {
      */
     @JvmStatic
     fun openWarning(player: Player, warning: Warnings) {
-        if (getVarbit(player, warning.varbit) == 7) {
-            warning.isDisabled = true
+        if (isDisabled(player, warning)) {
             return
-        } else {
-            warning.isDisabled = false
         }
 
         player.interfaceManager.open(Component(warning.component))
@@ -78,22 +75,32 @@ object WarningManager {
                 setVarbit(player, warning.varbit, newStatus, true)
                 player.debug("Component varbit: [$DARK_PURPLE$warning</col>] increased to: [$DARK_PURPLE$newStatus</col>].")
                 if (newStatus == 6) {
-                    val toggleButton = when (warning.component) {
-                        Components.WILDERNESS_WARNING_382 -> 26
-                        Components.CWS_WARNING_24_581 -> 19
-                        else -> 21
-                    }
-                    sendInterfaceConfig(player, warning.component, toggleButton, false)
+                    enableToggleButton(player, warning)
                     sendMessage(player, "You can now disable this warning in the settings.")
                 }
             } else if (currentStatus == 6) {
-                val toggleButton = when (warning.component) {
-                    Components.WILDERNESS_WARNING_382 -> 26
-                    Components.CWS_WARNING_24_581 -> 19
-                    else -> 21
-                }
-                sendInterfaceConfig(player, warning.component, toggleButton, false)
+                enableToggleButton(player, warning)
             }
         }
+    }
+
+    /**
+     * Enables the toggle button on the warning interface once threshold is reached.
+     */
+    private fun enableToggleButton(player: Player, warning: Warnings) {
+        val toggleButton = when (warning.component) {
+            Components.WILDERNESS_WARNING_382 -> 26
+            Components.CWS_WARNING_24_581 -> 19
+            else -> 21
+        }
+        sendInterfaceConfig(player, warning.component, toggleButton, false)
+    }
+
+    /**
+     * Checks if the warning is disabled for the player.
+     */
+    @JvmStatic
+    fun isDisabled(player: Player, warning: Warnings): Boolean {
+        return getVarbit(player, warning.varbit) == 7
     }
 }

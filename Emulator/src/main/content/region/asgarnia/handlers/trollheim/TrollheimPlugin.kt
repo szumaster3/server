@@ -746,7 +746,7 @@ class TrollheimPlugin : OptionHandler() {
         override fun enter(entity: Entity): Boolean {
             if (entity is Player) {
                 val player = entity.asPlayer()
-                if (player.walkingQueue.footPrint.y < 3592 && !Warnings.DEATH_PLATEAU.isDisabled) {
+                if (player.walkingQueue.footPrint.y < 3592 && !WarningManager.isDisabled(player, Warnings.DEATH_PLATEAU)) {
                     player.walkingQueue.reset()
                     player.pulseManager.clear()
                     WarningManager.openWarning(player, Warnings.DEATH_PLATEAU)

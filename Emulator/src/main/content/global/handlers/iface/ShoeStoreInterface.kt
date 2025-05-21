@@ -17,23 +17,24 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
+/**
+ * Represents the Yrsa Shoe Store.
+ */
 @Initializable
 class ShoeStoreInterface : ComponentPlugin() {
     private val paymentCheck = "yrsa-paid"
     private val previousColor = "yrsa-previous"
-    private val pictureId =
-        intArrayOf(
-            Items.PICTURE_3680,
-            Items.PICTURE_3681,
-            Items.PICTURE_3682,
-            Items.PICTURE_3683,
-            Items.PICTURE_3684,
-            Items.PICTURE_3685,
-        )
+    private val pictureId = intArrayOf(Items.PICTURE_3680, Items.PICTURE_3681, Items.PICTURE_3682, Items.PICTURE_3683, Items.PICTURE_3684, Items.PICTURE_3685)
     private val selectButtonId = intArrayOf(15, 16, 17, 18, 19, 20)
     private val colorId = intArrayOf(0, 1, 2, 3, 4, 5)
     private val shopInterface = Components.YRSA_SHOE_STORE_200
 
+    /**
+     * Opens the shoe store interface.
+     *
+     * @param player The player opening the interface.
+     * @param component The interface component instance.
+     */
     override fun open(
         player: Player,
         component: Component?,
@@ -76,6 +77,9 @@ class ShoeStoreInterface : ComponentPlugin() {
         removeAttribute(player, previousColor)
     }
 
+    /**
+     * Handles interaction events in the shoe store interface.
+     */
     override fun handle(
         player: Player?,
         component: Component?,
@@ -100,6 +104,11 @@ class ShoeStoreInterface : ComponentPlugin() {
         return true
     }
 
+    /**
+     * Processes the payment for shoe color change.
+     *
+     * @param player The player making the payment.
+     */
     fun pay(player: Player) {
         val newColor = getAttribute(player, previousColor, player.appearance.skin.color)
         if (newColor == player.appearance.feet.color) {
@@ -121,6 +130,12 @@ class ShoeStoreInterface : ComponentPlugin() {
         setVarp(player, 261, 0)
     }
 
+    /**
+     * Updates the player's shoe color based on the selected button.
+     *
+     * @param player The player to update.
+     * @param button The button ID clicked.
+     */
     private fun updateFeet(
         player: Player,
         button: Int,
@@ -134,15 +149,26 @@ class ShoeStoreInterface : ComponentPlugin() {
         syncAppearance(player)
     }
 
+    /**
+     * Synchronizes the player's appearance with the client.
+     *
+     * @param player The player whose appearance to sync.
+     */
     private fun syncAppearance(player: Player) {
         player.appearance.sync()
     }
 
+    /**
+     * Registers the interface plugin.
+     */
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.put(Components.YRSA_SHOE_STORE_200, this)
         return this
     }
 
+    /**
+     * Dialogue shown to player after confirming shoe purchase.
+     */
     class YrsaCloseEventDialogue : DialogueFile() {
         override fun handle(
             componentID: Int,

@@ -120,13 +120,8 @@ class StrongholdListener : InteractionListener {
 
 
     companion object {
-        val DEAD_EXPLORER = Scenery.DEAD_EXPLORER_16152
-        val STRONGHOLD_NOTES = Items.STRONGHOLD_NOTES_9004
-        val STRONGHOLD_TREASURE = intArrayOf(
-            Scenery.GIFT_OF_PEACE_16135,
-            Scenery.GRAIN_OF_PLENTY_16077,
-            Scenery.BOX_OF_HEALTH_16118,
-            Scenery.CRADLE_OF_LIFE_16047
-        )
+        const val DEAD_EXPLORER = Scenery.DEAD_EXPLORER_16152
+        const val STRONGHOLD_NOTES = Items.STRONGHOLD_NOTES_9004
+        val STRONGHOLD_TREASURE = intArrayOf(Scenery.GIFT_OF_PEACE_16135, Scenery.GRAIN_OF_PLENTY_16077, Scenery.BOX_OF_HEALTH_16118, Scenery.CRADLE_OF_LIFE_16047)
     }
 }

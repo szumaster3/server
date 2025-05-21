@@ -6,7 +6,6 @@ enum class Warnings(
     val varbit: Int,
     val component: Int,
     val buttonId: Int,
-    var isDisabled: Boolean = false,
 ) {
     DAGANNOTH_KINGS_LADDER(3851, Components.CWS_WARNING_1_574, 50), // Complete
     LUMBRIDGE_SWAMP_CAVE_ROPE(3863, Components.CWS_WARNING_17_570, 51),
