@@ -22,23 +22,18 @@ class PassageHandler : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val scenery = node as? Scenery ?: return false
-        val passage = Passage.getAllPassages()[scenery.location]
-        if (passage != null) {
-            player.lock(2)
-            queueScript(player, 1, QueueStrength.NORMAL) {
-                player.teleport(passage.destination)
-                return@queueScript stopExecuting(player)
-            }
-            return true
-        } else {
+        val passage = Passage.getAllPassages()[scenery.location] ?: run {
             sendMessage(player, "You can't use this passage.")
             return false
         }
+
+        player.lock(2)
+        queueScript(player, 1, QueueStrength.NORMAL) {
+            player.teleport(passage.destination)
+            return@queueScript stopExecuting(player)
+        }
+        return true
     }
 }

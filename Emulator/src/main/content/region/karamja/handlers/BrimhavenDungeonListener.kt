@@ -1,5 +1,6 @@
 package content.region.karamja.handlers
 
+import content.global.skill.agility.AgilityHandler
 import content.region.karamja.handlers.brimhaven.BrimhavenUtils
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -59,25 +60,9 @@ class BrimhavenDungeonListener : InteractionListener {
             }
 
             if (node.id == Scenery.LOG_BALANCE_5088) {
-                content.global.skill.agility.AgilityHandler.walk(
-                    player,
-                    -1,
-                    player.location,
-                    Location.create(2687, 9506, 0),
-                    Animation.create(155),
-                    0.0,
-                    null,
-                )
+                AgilityHandler.walk(player, -1, player.location, Location.create(2687, 9506, 0), Animation.create(155), 0.0, null)
             } else {
-                content.global.skill.agility.AgilityHandler.walk(
-                    player,
-                    -1,
-                    player.location,
-                    Location.create(2682, 9506, 0),
-                    Animation.create(155),
-                    0.0,
-                    null,
-                )
+                AgilityHandler.walk(player, -1, player.location, Location.create(2682, 9506, 0), Animation.create(155), 0.0, null)
             }
             return@on true
         }
@@ -87,30 +72,9 @@ class BrimhavenDungeonListener : InteractionListener {
         private const val SANIBOCH_NPC = NPCs.SANIBOCH_1595
         private const val ENTRANCE = Scenery.DUNGEON_ENTRANCE_5083
         private const val EXIT = Scenery.EXIT_5084
-        private val VINE =
-            intArrayOf(
-                Scenery.VINES_5103,
-                Scenery.VINES_5104,
-                Scenery.VINES_5105,
-                Scenery.VINES_5106,
-                Scenery.VINES_5107,
-            )
-        private val STEPPING_STONE =
-            intArrayOf(
-                Scenery.STEPPING_STONE_5110,
-                Scenery.STEPPING_STONE_5111,
-            )
-        private val STAIRS =
-            intArrayOf(
-                Scenery.STAIRS_5094,
-                Scenery.STAIRS_5096,
-                Scenery.STAIRS_5097,
-                Scenery.STAIRS_5098,
-            )
-        private val LOG_BALANCE =
-            intArrayOf(
-                Scenery.LOG_BALANCE_5088,
-                Scenery.LOG_BALANCE_5090,
-            )
+        private val VINE = intArrayOf(Scenery.VINES_5103, Scenery.VINES_5104, Scenery.VINES_5105, Scenery.VINES_5106, Scenery.VINES_5107)
+        private val STEPPING_STONE = intArrayOf(Scenery.STEPPING_STONE_5110, Scenery.STEPPING_STONE_5111)
+        private val STAIRS = intArrayOf(Scenery.STAIRS_5094, Scenery.STAIRS_5096, Scenery.STAIRS_5097, Scenery.STAIRS_5098)
+        private val LOG_BALANCE = intArrayOf(Scenery.LOG_BALANCE_5088, Scenery.LOG_BALANCE_5090)
     }
 }

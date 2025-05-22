@@ -32,10 +32,10 @@ class DraynorVillageListener : InteractionListener {
             return@on true
         }
 
-        /**
+        /*
          * Handles searching the bookshelves in Draynor Manor.
-         * Each shelf can contain a specific unique book. The player must have at least one free slot.
          */
+
         on(DraynorUtils.bookshelf, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the bookcase...")
 

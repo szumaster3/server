@@ -56,10 +56,7 @@ class BoneGrinderListener : InteractionListener {
         val bone = getBone(player)
         if ((bone == null) || (bone.bonemealId == null)) {
             if (inInventory(player, Items.MARINATED_J_BONES_3130) ||
-                inInventory(
-                    player,
-                    Items.MARINATED_J_BONES_3133,
-                )
+                inInventory(player, Items.MARINATED_J_BONES_3133)
             ) {
                 sendDialogue(
                     player,

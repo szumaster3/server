@@ -157,14 +157,11 @@ class SweptAwayListener :
 
         on(NPCs.NORMAN_8203, IntType.NPC, "talk-to") { player, _ ->
             sendNPCDialogue(player, NPCs.NORMAN_8203, "Moo-ooooooooooo?", FaceAnim.CHILD_NORMAL)
-            addDialogueAction(player) { p, button ->
-                if (button > 0) {
-                    sendNPCDialogue(
-                        p,
-                        NPCs.MAGGIE_8078,
-                        "I wouldn't pester Norman at the mo - he's a bit on edge, what with Babe being poorly. The sneezing really gets to him!",
-                    )
-                }
+            addDialogueAction(player) { p, _ ->
+                sendNPCDialogue(
+                    p,
+                    NPCs.MAGGIE_8078,
+                    "I wouldn't pester Norman at the mo - he's a bit on edge, what with Babe being poorly. The sneezing really gets to him!",)
             }
             return@on true
         }
@@ -175,14 +172,12 @@ class SweptAwayListener :
 
         on(NPCs.BABE_8204, IntType.NPC, "talk-to") { player, _ ->
             sendNPCDialogue(player, NPCs.BABE_8204, "*Sniff* *sniffle* *snort* Ah-choo!", FaceAnim.CHILD_NORMAL)
-            addDialogueAction(player) { p, button ->
-                if (button > 0) {
-                    sendNPCDialogue(
-                        p,
-                        NPCs.MAGGIE_8078,
-                        "I wouldn't get too close to her if I were you. I gave her a portion of that goulash, so she's on the mend, but she still might be a bit contagious.",
+            addDialogueAction(player) { p, _ ->
+                sendNPCDialogue(
+                    p,
+                    NPCs.MAGGIE_8078,
+                    "I wouldn't get too close to her if I were you. I gave her a portion of that goulash, so she's on the mend, but she still might be a bit contagious.",
                     )
-                }
             }
             return@on true
         }
@@ -202,7 +197,7 @@ class SweptAwayListener :
             animate(player, SweptUtils.STIR_ANIMATION)
 
             sendPlayerDialogue(player, "What was that?", FaceAnim.EXTREMELY_SHOCKED)
-            addDialogueAction(player) { p, button ->
+            addDialogueAction(player) { p, _ ->
                 openDialogue(p, MaggieSceneryInteraction())
             }
             return@on true

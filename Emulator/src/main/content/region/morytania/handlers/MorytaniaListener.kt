@@ -1,5 +1,6 @@
 package content.region.morytania.handlers
 
+import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.api.quest.hasRequirement
 import core.api.ui.setMinimapState
@@ -52,111 +53,52 @@ class MorytaniaListener : InteractionListener {
 
         on(GROTTO_BRIDGE, IntType.SCENERY, "jump") { player, node ->
             val start = node.location
-            var failLand = Location(3438, 3331)
-            var failAnim = Animation(770)
-            var fromGrotto = false
+            val fromGrotto = start.y == 3331
+
+            val failAnim = if (fromGrotto) Animation(771) else Animation(770)
+            val failLand = if (fromGrotto) Location(3438, 3328) else Location(3438, 3331)
 
             lock(player, 10)
-            if (start.y == 3331) {
-                fromGrotto = true
-                failAnim = Animation(771)
-                failLand = Location(3438, 3328)
-            }
-            if (content.global.skill.agility.AgilityHandler
-                    .hasFailed(player, 1, 0.1)
-            ) {
+
+            if (AgilityHandler.hasFailed(player, 1, 0.1)) {
                 val end = if (fromGrotto) FAIL_LOCATION else start
-                content.global.skill.agility.AgilityHandler
-                    .forceWalk(
-                        player,
-                        -1,
-                        start,
-                        end,
-                        failAnim,
-                        15,
-                        0.0,
-                        null,
-                        0,
-                    ).endAnimation =
-                    SWIMMING_ANIMATION
-                content.global.skill.agility.AgilityHandler.forceWalk(
-                    player,
-                    -1,
-                    FAIL_LOCATION,
-                    failLand,
-                    SWIMMING_ANIMATION,
-                    15,
-                    2.0,
-                    null,
-                    3,
-                )
-                submitIndividualPulse(
-                    player,
-                    object : Pulse(2) {
-                        override fun pulse(): Boolean {
-                            sendMessage(player, "You nearly drown in the disgusting swamp.")
-                            visualize(player, failAnim, SPLASH_GFX)
-                            teleport(player, FAIL_LOCATION)
-                            content.global.skill.agility.AgilityHandler.fail(
-                                player,
-                                0,
-                                failLand,
-                                SWIMMING_ANIMATION,
-                                Random.nextInt(1, 7),
-                                "You nearly drown in the disgusting swamp.",
-                            )
-                            return true
-                        }
-                    },
-                )
+
+                AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null, 0).endAnimation = SWIMMING_ANIMATION
+                AgilityHandler.forceWalk(player, -1, FAIL_LOCATION, failLand, SWIMMING_ANIMATION, 15, 2.0, null, 3)
+                submitIndividualPulse(player, object : Pulse(2) {
+                    override fun pulse(): Boolean {
+                        sendMessage(player, "You nearly drown in the disgusting swamp.")
+                        visualize(player, failAnim, SPLASH_GFX)
+                        teleport(player, FAIL_LOCATION)
+                        AgilityHandler.fail(player, 0, failLand, SWIMMING_ANIMATION, Random.nextInt(1, 7), "You nearly drown in the disgusting swamp.")
+                        return true
+                    }
+                })
             } else {
                 val end = if (fromGrotto) start.transform(0, -3, 0) else start.transform(0, 3, 0)
-                content.global.skill.agility.AgilityHandler.forceWalk(
-                    player,
-                    -1,
-                    start,
-                    end,
-                    JUMP_ANIMATION,
-                    15,
-                    15.0,
-                    null,
-                    0,
-                )
+                AgilityHandler.forceWalk(player, -1, start, end, JUMP_ANIMATION, 15, 15.0, null, 0)
             }
             return@on true
         }
 
         on(Scenery.TREE_5005, IntType.SCENERY, "climb up", "climb down") { player, node ->
-            if (node.location == Location(3502, 3431)) {
-                when (getUsedOption(player)) {
-                    "climb up" -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location(3502, 3430, 0))
-                    "climb down" ->
-                        ClimbActionHandler.climb(
-                            player,
-                            ClimbActionHandler.CLIMB_DOWN,
-                            Location(3503, 3431, 0),
-                        )
-                }
-            } else {
-                when (getUsedOption(player)) {
-                    "climb up" -> ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location(3502, 3427, 0))
-                    "climb down" ->
-                        ClimbActionHandler.climb(
-                            player,
-                            ClimbActionHandler.CLIMB_DOWN,
-                            Location(3502, 3425, 0),
-                        )
-                }
+            val isAtFirstLocation = node.location == Location(3502, 3431)
+
+            val (climbType, targetLocation) = when (getUsedOption(player)) {
+                "climb up" -> ClimbActionHandler.CLIMB_UP to
+                        if (isAtFirstLocation) Location(3502, 3430, 0) else Location(3502, 3427, 0)
+                "climb down" -> ClimbActionHandler.CLIMB_DOWN to
+                        if (isAtFirstLocation) Location(3503, 3431, 0) else Location(3502, 3425, 0)
+                else -> return@on false
             }
+
+            ClimbActionHandler.climb(player, climbType, targetLocation)
             return@on true
         }
 
         on(Scenery.ROPE_BRIDGE_5002, IntType.SCENERY, "walk-here") { player, node ->
-            if (node.location == Location(3502, 3428)) {
-                teleport(player, Location(3502, 3430, 0))
-            } else {
-                teleport(player, Location(3502, 3427, 0))
-            }
+            val target = if (node.location == Location(3502, 3428)) Location(3502, 3430, 0) else Location(3502, 3427, 0)
+            teleport(player, target)
             return@on true
         }
     }

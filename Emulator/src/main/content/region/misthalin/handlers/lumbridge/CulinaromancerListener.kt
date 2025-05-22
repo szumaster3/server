@@ -14,6 +14,9 @@ import core.game.world.GameWorld
 import org.rs.consts.Items
 import java.lang.Integer.min
 
+/**
+ * handling player login events related to the Culinaromancer questline.
+ */
 class CulinaromancerListener : LoginListener {
     override fun login(player: Player) {
         if (getQuestPoints(player) >= 18) {
@@ -39,6 +42,12 @@ class CulinaromancerListener : LoginListener {
         private val foodShops = HashMap<Int, Shop>()
         private val gearShops = HashMap<Int, Shop>()
 
+        /**
+         * Opens the Culinaromancer shop.
+         *
+         * @param player the player opening the shop
+         * @param food if true, opens the food shop; otherwise opens the gear shop
+         */
         @JvmStatic
         fun openShop(
             player: Player,
@@ -47,6 +56,13 @@ class CulinaromancerListener : LoginListener {
             getShop(player, food).openFor(player)
         }
 
+        /**
+         * Gets the Culinaromancer shop, creating or updating it if necessary.
+         *
+         * @param player the player
+         * @param food if true, returns the food shop; otherwise returns the gear shop
+         * @return the player's corresponding shop instance
+         */
         fun getShop(
             player: Player,
             food: Boolean,
@@ -70,6 +86,12 @@ class CulinaromancerListener : LoginListener {
             }
         }
 
+        /**
+         * Generates the stock for the food shop based on the player's quest points.
+         *
+         * @param points the player's quest points
+         * @return array of [ShopItem] representing the food stock
+         */
         private fun generateFoodStock(points: Int): Array<ShopItem> {
             val stock = Array(foodStock.size) { ShopItem(0, 0) }
             val maxQty =
@@ -84,6 +106,12 @@ class CulinaromancerListener : LoginListener {
             return stock
         }
 
+        /**
+         * Generates the stock for the gear shop based on the player's quest points.
+         *
+         * @param points the player's quest points
+         * @return array of [ShopItem] representing the gear stock
+         */
         private fun generateGearStock(points: Int): Array<ShopItem> {
             val stock = Array(gearStock.size) { ShopItem(0, 0) }
             val qpTier = (points / 18)
@@ -97,51 +125,14 @@ class CulinaromancerListener : LoginListener {
             return stock
         }
 
-        private val gearStock =
-            arrayOf(
-                Items.GLOVES_7453,
-                Items.GLOVES_7454,
-                Items.GLOVES_7455,
-                Items.GLOVES_7456,
-                Items.GLOVES_7457,
-                Items.GLOVES_7458,
-                Items.GLOVES_7459,
-                Items.GLOVES_7460,
-                Items.GLOVES_7461,
-                Items.GLOVES_7462,
-                Items.WOODEN_SPOON_7433,
-                Items.EGG_WHISK_7435,
-                Items.SPORK_7437,
-                Items.SPATULA_7439,
-                Items.FRYING_PAN_7441,
-                Items.SKEWER_7443,
-                Items.ROLLING_PIN_7445,
-                Items.KITCHEN_KNIFE_7447,
-                Items.MEAT_TENDERISER_7449,
-                Items.CLEAVER_7451,
-            )
+        /**
+         * Represents the gear item ids available in the gear shop.
+         */
+        private val gearStock = arrayOf(Items.GLOVES_7453, Items.GLOVES_7454, Items.GLOVES_7455, Items.GLOVES_7456, Items.GLOVES_7457, Items.GLOVES_7458, Items.GLOVES_7459, Items.GLOVES_7460, Items.GLOVES_7461, Items.GLOVES_7462, Items.WOODEN_SPOON_7433, Items.EGG_WHISK_7435, Items.SPORK_7437, Items.SPATULA_7439, Items.FRYING_PAN_7441, Items.SKEWER_7443, Items.ROLLING_PIN_7445, Items.KITCHEN_KNIFE_7447, Items.MEAT_TENDERISER_7449, Items.CLEAVER_7451)
 
-        private val foodStock =
-            arrayOf(
-                Item(Items.CHOCOLATE_BAR_1973, 1),
-                Item(Items.CHEESE_1985, 1),
-                Item(Items.TOMATO_1982, 1),
-                Item(Items.COOKING_APPLE_1955, 1),
-                Item(Items.GRAPES_1987, 1),
-                Item(Items.POT_OF_FLOUR_1933, 1),
-                Item(Items.PIZZA_BASE_2283, 1),
-                Item(Items.EGG_1944, 1),
-                Item(Items.BUCKET_OF_MILK_1927, 1),
-                Item(Items.POT_OF_CREAM_2130, 1),
-                Item(Items.PAT_OF_BUTTER_6697, 1),
-                Item(Items.SPICE_2007, 1),
-                Item(Items.PIE_DISH_2313, 1),
-                Item(Items.CAKE_TIN_1887, 1),
-                Item(Items.BOWL_1923, 1),
-                Item(Items.JUG_1935, 1),
-                Item(Items.EMPTY_POT_1931, 1),
-                Item(Items.EMPTY_CUP_1980, 1),
-                Item(Items.BUCKET_1925, 1),
-            )
+        /**
+         * Represents the food items available in the food shop.
+         */
+        private val foodStock = arrayOf(Item(Items.CHOCOLATE_BAR_1973, 1), Item(Items.CHEESE_1985, 1), Item(Items.TOMATO_1982, 1), Item(Items.COOKING_APPLE_1955, 1), Item(Items.GRAPES_1987, 1), Item(Items.POT_OF_FLOUR_1933, 1), Item(Items.PIZZA_BASE_2283, 1), Item(Items.EGG_1944, 1), Item(Items.BUCKET_OF_MILK_1927, 1), Item(Items.POT_OF_CREAM_2130, 1), Item(Items.PAT_OF_BUTTER_6697, 1), Item(Items.SPICE_2007, 1), Item(Items.PIE_DISH_2313, 1), Item(Items.CAKE_TIN_1887, 1), Item(Items.BOWL_1923, 1), Item(Items.JUG_1935, 1), Item(Items.EMPTY_POT_1931, 1), Item(Items.EMPTY_CUP_1980, 1), Item(Items.BUCKET_1925, 1))
     }
 }

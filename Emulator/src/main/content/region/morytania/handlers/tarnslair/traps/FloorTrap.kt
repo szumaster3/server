@@ -4,6 +4,15 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.Scenery
 
+/**
+ * Represents a floor trap in Tarn's Lair.
+ *
+ * @property trap The scenery.
+ * @property forceTo The forced destination location when triggered.
+ * @property location The trap's exact location.
+ * @property pushTo The location the player is pushed to.
+ * @property direction The push direction.
+ */
 enum class FloorTrap(
     val trap: TrapScenery,
     val forceTo: Location,
@@ -78,6 +87,13 @@ enum class FloorTrap(
             }
         }
 
+        /**
+         * Returns the FloorTrap at given coordinates or null.
+         *
+         * @param x X coordinate.
+         * @param y Y coordinate.
+         * @return [FloorTrap] or `null` if none found.
+         */
         fun getFromCoords(
             x: Int,
             y: Int,
@@ -85,6 +101,9 @@ enum class FloorTrap(
     }
 }
 
+/**
+ * Represents the scenery object for a trap.
+ */
 data class TrapScenery(
     val id: Int,
     val location: Location,

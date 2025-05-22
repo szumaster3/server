@@ -383,7 +383,7 @@ internal object SweptUtils {
             )
             removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS)
             setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, true)
-            addDialogueAction(player) { p, button ->
+            addDialogueAction(player) { p, _ ->
                 p.dialogueInterpreter.sendDialogue(
                     NPCs.GUS_8205,
                     "Now, you need a newt, right? Feel free to take one",

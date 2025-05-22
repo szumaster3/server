@@ -68,7 +68,7 @@ class ExplorersRingListener : InteractionListener {
             return@on true
         }
 
-        on(RINGS, IntType.ITEM, "cabbage-port") { player, node ->
+        on(RINGS, IntType.ITEM, "cabbage-port") { player, _ ->
             teleport(player)
             return@on true
         }

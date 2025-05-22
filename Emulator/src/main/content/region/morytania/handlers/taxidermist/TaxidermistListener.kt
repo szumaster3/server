@@ -19,51 +19,51 @@ class TaxidermistListener : InteractionListener {
 
         onUseWith(IntType.NPC, itemIDs, NPCs.TAXIDERMIST_4246) { player, used, _ ->
             val stuffed = StuffedItem.product[used.id] ?: return@onUseWith true
-            face(findNPC(NPCs.TAXIDERMIST_4246)!!, player, 3)
-            if (amountInInventory(player, stuffed.dropId) == 1) {
-                openDialogue(
-                    player,
-                    object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
-                            npc = NPC(NPCs.TAXIDERMIST_4246)
-                            when (stage) {
-                                0 -> npc(*splitLines(stuffed.message)).also { stage++ }
-                                1 -> npc("I can preserve that for you for ${stuffed.price} coins.").also { stage++ }
-                                2 -> options("Yes please.", "No thanks.").also { stage++ }
-                                3 ->
-                                    when (buttonID) {
-                                        1 -> {
-                                            end()
-                                            if (!removeItem(
-                                                    player,
-                                                    Item(Items.COINS_995, stuffed.price),
-                                                    Container.INVENTORY,
-                                                )
-                                            ) {
-                                                sendDialogue(player, "You don't have enough coins in order to do that.")
-                                                return
-                                            }
-                                            if (stuffed.dropId != used.id) {
-                                                npc("Don't be silly, I can't preserve that!")
-                                                return
-                                            }
-                                            replaceSlot(player, Item(used.id).slot, Item(stuffed.stuffedId, 1))
-                                            npc("There you go!")
-                                        }
+            val taxidermist = findNPC(NPCs.TAXIDERMIST_4246) ?: return@onUseWith true
+            face(taxidermist, player, 3)
 
-                                        2 -> {
-                                            end()
-                                            npc("All right, come back if you change your mind, eh?")
-                                        }
+            if (amountInInventory(player, stuffed.dropId) != 1) return@onUseWith true
+
+            openDialogue(player, object : DialogueFile() {
+                override fun handle(componentID: Int, buttonID: Int) {
+                    when (stage) {
+                        0 -> {
+                            npc(*splitLines(stuffed.message))
+                            stage++
+                        }
+                        1 -> {
+                            npc("I can preserve that for you for ${stuffed.price} coins.")
+                            stage++
+                        }
+                        2 -> {
+                            options("Yes please.", "No thanks.")
+                            stage++
+                        }
+                        3 -> {
+                            when (buttonID) {
+                                1 -> {
+                                    end()
+                                    if (!removeItem(player, Item(Items.COINS_995, stuffed.price), Container.INVENTORY)) {
+                                        sendDialogue(player, "You don't have enough coins in order to do that.")
+                                        return
                                     }
+                                    if (stuffed.dropId != used.id) {
+                                        npc("Don't be silly, I can't preserve that!")
+                                        return
+                                    }
+                                    replaceSlot(player, Item(used.id).slot, Item(stuffed.stuffedId, 1))
+                                    npc("There you go!")
+                                }
+                                2 -> {
+                                    end()
+                                    npc("All right, come back if you change your mind, eh?")
+                                }
                             }
                         }
-                    },
-                )
-            }
+                    }
+                }
+            })
+
             return@onUseWith true
         }
     }

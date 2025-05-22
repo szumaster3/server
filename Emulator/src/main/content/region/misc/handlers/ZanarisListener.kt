@@ -20,32 +20,23 @@ class ZanarisListener : InteractionListener {
         intArrayOf(org.rs.consts.Scenery.MAGIC_DOOR_12045, org.rs.consts.Scenery.MAGIC_DOOR_12047)
 
     override fun defineListeners() {
+
+        /*
+         * Handles opening the magic doors.
+         */
+
         on(magicDoorIDs, IntType.SCENERY, "open") { player, node ->
-            if ((
-                    node.id == org.rs.consts.Scenery.MAGIC_DOOR_12045 &&
-                        node.location ==
-                        Location(
-                            2469,
-                            4438,
-                            0,
-                        ) &&
-                        player.location.x >= 2470
-                ) ||
-                (
-                    player.location.y < 4434 &&
-                        (
-                            node.id == org.rs.consts.Scenery.MAGIC_DOOR_12045 ||
-                                node.id == org.rs.consts.Scenery.MAGIC_DOOR_12047 &&
-                                node.location ==
-                                Location(
-                                    2465,
-                                    4434,
-                                    0,
-                                )
-                        )
-                ) ||
-                (node.id == org.rs.consts.Scenery.MAGIC_DOOR_12047 && player.location.x >= 2470)
-            ) {
+            val isMagicDoorAAtLocation = node.id == org.rs.consts.Scenery.MAGIC_DOOR_12045 &&
+                    node.location == Location(2469, 4438, 0)
+
+            val isMagicDoorBAtLocation = node.id == org.rs.consts.Scenery.MAGIC_DOOR_12047 &&
+                    node.location == Location(2465, 4434, 0)
+
+            val conditionOne = isMagicDoorAAtLocation && player.location.x >= 2470
+            val conditionTwo = player.location.y < 4434 && (isMagicDoorAAtLocation || isMagicDoorBAtLocation)
+            val conditionThree = node.id == org.rs.consts.Scenery.MAGIC_DOOR_12047 && player.location.x >= 2470
+
+            if (conditionOne || conditionTwo || conditionThree) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
                 player.dialogueInterpreter.open(MagicDoorDialogue.NAME, node)
@@ -53,11 +44,11 @@ class ZanarisListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.RAW_CHICKEN_2138, Items.EGG_1944),
-            org.rs.consts.Scenery.CHICKEN_SHRINE_12093,
-        ) { player, used, _ ->
+        /*
+         * Handles using raw chicken & egg on chicken shrine.
+         */
+
+        onUseWith(IntType.SCENERY, intArrayOf(Items.RAW_CHICKEN_2138, Items.EGG_1944), org.rs.consts.Scenery.CHICKEN_SHRINE_12093) { player, used, _ ->
             if (used.id != Items.RAW_CHICKEN_2138) {
                 sendMessage(player, "Nice idea, but nothing interesting happens.")
                 return@onUseWith false

@@ -43,39 +43,35 @@ class PhasmatysPlugin :
     ): Boolean {
         if (e is Player) {
             val player = e.asPlayer()
-            val option = getUsedOption(player!!)
+            val usedOption = getUsedOption(player)
 
             if (target is NPC) {
                 if (target.id == NPCs.GHOST_BANKER_1702) return false
 
-                if ((
-                        target.name.lowercase().contains("ghost") ||
-                            target.name.equals(
-                                "velorina",
-                                ignoreCase = true,
-                            ) ||
-                            target.name.contains("husband")
-                    ) &&
+                val nameLower = target.name.lowercase()
+                if ((nameLower.contains("ghost") || target.name.equals("velorina", ignoreCase = true) || target.name.contains("husband")) &&
                     !inEquipment(player, Items.GHOSTSPEAK_AMULET_552)
                 ) {
-                    player.dialogueInterpreter.open(target.getId(), target)
+                    player.dialogueInterpreter.open(target.id, target)
                     return true
                 }
             }
 
             when (target.id) {
                 5267 -> {
+                    val scenery = target as Scenery
                     animate(player, Animations.OPEN_CHEST_536)
                     sendMessage(player, "The trapdoor opens...")
-                    SceneryBuilder.replace(target as Scenery, target.transform(5268))
+                    SceneryBuilder.replace(scenery, scenery.transform(5268))
                     return true
                 }
 
                 5268 -> {
-                    if (option == "close") {
+                    val scenery = target as Scenery
+                    if (usedOption == "close") {
                         animate(player, Animations.OPEN_POH_WARDROBE_535)
                         sendMessage(player, "You close the trapdoor.")
-                        SceneryBuilder.replace(target as Scenery, target.transform(5267))
+                        SceneryBuilder.replace(scenery, scenery.transform(5267))
                     } else {
                         sendMessage(player, "You climb down through the trapdoor...")
                         player.properties.teleportLocation = Location.create(3669, 9888, 3)
@@ -83,15 +79,21 @@ class PhasmatysPlugin :
                     return true
                 }
 
-                7434 ->
-                    if (option == "open") {
-                        SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7435))
+                7434 -> {
+                    if (usedOption == "open") {
+                        val scenery = target.asScenery()
+                        SceneryBuilder.replace(scenery, scenery.transform(7435))
+                        return true
                     }
+                }
 
-                7435 ->
-                    if (option == "close") {
-                        SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7434))
+                7435 -> {
+                    if (usedOption == "close") {
+                        val scenery = target.asScenery()
+                        SceneryBuilder.replace(scenery, scenery.transform(7434))
+                        return true
                     }
+                }
 
                 9308 -> {
                     if (getStatLevel(player, Skills.AGILITY) < 58) {

@@ -22,35 +22,25 @@ class TarnsLair : MapArea {
 
     override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON)
 
-    override fun entityStep(
-        entity: Entity,
-        location: Location,
-        lastLocation: Location,
-    ) {
-        if (entity is Player) {
-            val player = entity.asPlayer()
-            val trap = FloorTrap.getFromCoords(player.location.x, player.location.y)
+    override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
+        if (entity !is Player) return
+        val player = entity.asPlayer()
 
-            if (trap != null && player.location == trap.location) {
-                stopWalk(player)
-                animateScenery(Scenery(trap.trap.id, trap.trap.location), 5631)
-                queueScript(player, 1, QueueStrength.SOFT) {
-                    animate(player, 1441)
-                    sendChat(player, "Ouch!")
-                    forceMove(
-                        player,
-                        trap.location,
-                        player.location.transform(Direction.getLogicalDirection(player.location, trap.location), 1),
-                        0,
-                        25,
-                        trap.direction,
-                        1441,
-                    )
-                    impact(player, Random.nextInt(0, 5))
-                    playAudio(player, Sounds.LOTR_LOGTRAP_3318)
-                    return@queueScript stopExecuting(player)
-                }
-            }
+        val trap = FloorTrap.getFromCoords(player.location.x, player.location.y) ?: return
+        if (player.location != trap.location) return
+
+        stopWalk(player)
+        animateScenery(Scenery(trap.trap.id, trap.trap.location), 5631)
+
+        queueScript(player, 1, QueueStrength.SOFT) {
+            animate(player, 1441)
+            sendChat(player, "Ouch!")
+            val direction = Direction.getLogicalDirection(player.location, trap.location)
+            val targetLocation = player.location.transform(direction, 1)
+            forceMove(player, trap.location, targetLocation, 0, 25, trap.direction, 1441)
+            impact(player, Random.nextInt(0, 5))
+            playAudio(player, Sounds.LOTR_LOGTRAP_3318)
+            return@queueScript stopExecuting(player)
         }
     }
 }

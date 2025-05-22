@@ -417,7 +417,7 @@ class TzHaarTouristGuideBook : InteractionListener {
     override fun defineListeners() {
         on(Items.TZHAAR_TOURIST_GUIDE_13244, IntType.ITEM, "read") { player, _ ->
             sendDialogueLines(player, "You open a book and see that there is note stuck to the inside of", "the cover.")
-            addDialogueAction(player) { player, _ ->
+            addDialogueAction(player) { _, _ ->
                 setTitle(player, 2)
                 sendDialogueOptions(player, "What do you want to do?", "Read the book.", "Read the note.")
                 addDialogueAction(player) { player, button ->

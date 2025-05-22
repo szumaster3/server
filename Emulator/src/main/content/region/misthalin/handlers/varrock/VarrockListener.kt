@@ -455,7 +455,7 @@ class VarrockListener : InteractionListener {
                     "cart will take you to Keldagrim."
                 )
 
-                addDialogueAction(player) { _, button ->
+                addDialogueAction(player) { _, _ ->
                     sendDialogueOptions(player, "Select an option", "Travel to Keldagrim.", "Stay here.")
                     addDialogueAction(player) { _, option ->
                         when (option) {

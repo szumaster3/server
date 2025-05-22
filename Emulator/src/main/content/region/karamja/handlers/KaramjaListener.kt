@@ -32,40 +32,37 @@ class KaramjaListener : InteractionListener {
 
     override fun defineListeners() {
         on(JUNGLE_BUSH, IntType.SCENERY, "chop-down") { player, node ->
-            val randomChop = (1..5).random()
-            val chopDown = getAttribute(player, "chop-bush", randomChop)
+            val chopDown = (1..5).random()
+
             if (!checkRequirement(player)) {
                 sendMessage(player, "You need a machete to get through this dense jungle.")
                 return@on false
             }
 
-            MACHETE_ID.indices.forEach { i ->
-                animate(player, getAnimation(i))
-                playAudio(player, Sounds.MACHETE_SLASH_1286)
-            }
+            animate(player, getAnimation(node.id))
+            playAudio(player, Sounds.MACHETE_SLASH_1286)
 
             setAttribute(player, "chop-bush", 0)
-            player.pulseManager.run(
-                object : Pulse() {
-                    var counter = 0
 
-                    override fun pulse(): Boolean {
-                        counter++
-                        if (counter != randomChop) {
-                            animate(player, Animations.SWIPE_WITH_MACHETE_TAI_BWO_WANNAI_CLEANUP_2382)
-                        }
-                        if (counter == chopDown) {
-                            player.walkingQueue.reset()
-                            replaceScenery(node.asScenery(), Scenery.SLASHED_BUSH_2895, 20)
-                            produceGroundItem(player, Items.LOGS_1511, 1, node.location)
-                            rewardXP(player, Skills.WOODCUTTING, 100.0)
-                            removeAttribute(player, "chop-bush")
-                            player.walkingQueue.addPath(node.location.x, node.location.y, true)
-                        }
-                        return counter == chopDown
+            player.pulseManager.run(object : Pulse() {
+                var counter = 0
+
+                override fun pulse(): Boolean {
+                    counter++
+                    if (counter < chopDown) {
+                        animate(player, getAnimation(node.id))
+                    } else {
+                        player.walkingQueue.reset()
+                        replaceScenery(node.asScenery(), Scenery.SLASHED_BUSH_2895, 20)
+                        produceGroundItem(player, Items.LOGS_1511, 1, node.location)
+                        rewardXP(player, Skills.WOODCUTTING, 100.0)
+                        removeAttribute(player, "chop-bush")
+                        player.walkingQueue.addPath(node.location.x, node.location.y, true)
                     }
-                },
-            )
+
+                    return counter >= chopDown
+                }
+            })
             return@on true
         }
 

@@ -10,7 +10,17 @@ import org.rs.consts.Components
 import org.rs.consts.Music
 import org.rs.consts.Quests
 
+/**
+ * Handles the sailing mechanics related to the fishing platform.
+ */
 object FishingPlatform {
+
+    /**
+     * Travel for the [player] to the specified destination.
+     *
+     * @param player the player.
+     * @param travel the travel destination.
+     */
     @JvmStatic
     fun sail(
         player: Player,
@@ -55,7 +65,14 @@ object FishingPlatform {
             },
         )
     }
-
+    /**
+     * Represents a travel route available from or to the fishing platform.
+     *
+     * @property destName the destination name.
+     * @property destinationLoc the destination location.
+     * @property component the component id.
+     * @property ticks the duration.
+     */
     enum class Travel(
         val destName: String,
         val destinationLoc: Location,

@@ -107,7 +107,7 @@ class DropListener : InteractionListener {
                 item.definition.handlers.getOrDefault(ItemConfigParser.DESTROY, false) as Boolean
             ) {
                 player.dialogueInterpreter.sendDestroyItem(item.id, item.name)
-                addDialogueAction(player) { player, button ->
+                addDialogueAction(player) { _, button ->
                     if (button == 3) {
                         if (item.name.contains("progress hat", true)) {
                             val activityData = player.getSavedData().activityData
