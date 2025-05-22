@@ -431,10 +431,8 @@ class BiohazardListener : InteractionListener {
                     "Make good use of it, soon all your strength will be",
                     "needed.",
                 )
-                addDialogueAction(player) { player, button ->
-                    if (button >= 1) {
-                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                    }
+                addDialogueAction(player) { _, _ ->
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 }
             } else {
                 sendDialogueLines(

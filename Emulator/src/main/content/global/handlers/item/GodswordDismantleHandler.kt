@@ -1,5 +1,6 @@
 package content.global.handlers.item
 
+import core.api.addItem
 import core.api.freeSlots
 import core.api.sendMessage
 import core.cache.def.impl.ItemDefinition
@@ -23,22 +24,21 @@ class GodswordDismantleHandler : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val item = node as Item
-        if (item.slot < 0 || player.inventory.getNew(item.slot).id != item.id) {
-            return true
-        }
+
+        if (item.slot < 0 || player.inventory.getNew(item.slot).id != item.id) return true
         if (freeSlots(player) == 0) {
             sendMessage(player, "Not enough space in your inventory.")
             return true
         }
+
         sendMessage(player, "You detach the hilt from the blade.")
         player.inventory.replace(null, item.slot, false)
-        player.inventory.add(bladeId, Item(Items.ARMADYL_HILT_11702 + (item.id - Items.ARMADYL_GODSWORD_11694)))
+
+        val hiltId = Items.ARMADYL_HILT_11702 + (item.id - Items.ARMADYL_GODSWORD_11694)
+        addItem(player, hiltId, 1)
+
         return true
     }
 

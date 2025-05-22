@@ -84,56 +84,24 @@ object PilloryUtils {
         val keys = getAttribute(player, GameAttributes.RE_PILLORY_KEYS, intArrayOf(0, 0, 0))
         val lock = getAttribute(player, GameAttributes.RE_PILLORY_PADLOCK, -1)
         if (keys[buttonID] == lock) {
-            setAttribute(
-                player,
-                GameAttributes.RE_PILLORY_SCORE,
-                getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0) + 1,
-            )
-            if (getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 3) <=
-                getAttribute(player, GameAttributes.RE_PILLORY_SCORE, -1)
-            ) {
+            setAttribute(player, GameAttributes.RE_PILLORY_SCORE, getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0) + 1)
+            if (getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 3) <= getAttribute(player, GameAttributes.RE_PILLORY_SCORE, -1)) {
                 cleanup(player)
                 return
             }
             randomPillory(player)
-            sendPlainDialogue(
-                player,
-                true,
-                "",
-                "Correct!",
-                "" + getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0) + " down, " +
-                    (
-                        getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 3) -
-                            getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0)
-                    ) +
-                    " to go!",
-            )
+            sendPlainDialogue(player, true, "", "Correct!", "" + getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0) + " down, " + (getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 3) - getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 0)) + " to go!",)
             sendInterfaceConfig(player, INTERFACE, 16 + getAttribute(player, GameAttributes.RE_PILLORY_SCORE, 1), false)
         } else {
             closeDialogue(player)
             playAudio(player, Sounds.PILLORY_WRONG_2268)
             if (getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 0) < 6) {
-                setAttribute(
-                    player,
-                    GameAttributes.RE_PILLORY_CORRECT,
-                    getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 0) + 1,
-                )
+                setAttribute(player, GameAttributes.RE_PILLORY_CORRECT, getAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 0) + 1)
             }
             setAttribute(player, GameAttributes.RE_PILLORY_CORRECT, 0)
-            closeInterface(player)
-            sendNPCDialogueLines(
-                player,
-                NPCs.TRAMP_2794,
-                FaceAnim.OLD_ANGRY1,
-                false,
-                "Bah, that's not right.",
-                "Use the key that matches the hole",
-                "in the spinning lock.",
-            )
-            addDialogueAction(player) { player, button ->
-                if (button >= 0) {
-                    openInterface(player, INTERFACE)
-                }
+            sendNPCDialogueLines(player, NPCs.TRAMP_2794, FaceAnim.OLD_ANGRY1, false, "Bah, that's not right.", "Use the key that matches the hole", "in the spinning lock.")
+            addDialogueAction(player) { _, _ ->
+                openInterface(player, INTERFACE)
             }
         }
     }

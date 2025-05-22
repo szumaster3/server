@@ -126,13 +126,12 @@ class NatureSpiritListeners : InteractionListener {
                 player,
                 "Most of the writing is pretty uninteresting, but something inside refers to a nature spirit. The requirements for which are,",
             )
-            addDialogueAction(player) { _, button ->
-                if (button > 0) {
-                    sendDialogue(
-                        player,
-                        "'Something from nature', 'something with faith' and 'something of the spirit-to-become freely given'. It's all pretty vague.",
-                    )
-                }
+            addDialogueAction(player) { _, _ ->
+                sendDialogue(
+                    player,
+                    "'Something from nature', 'something with faith' and 'something of the spirit-to-become freely given'. It's all pretty vague.",
+                )
+
             }
             return@on true
         }

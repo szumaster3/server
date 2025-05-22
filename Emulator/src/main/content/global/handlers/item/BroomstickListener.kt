@@ -7,6 +7,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.item.Item
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
 import org.rs.consts.Graphics
 import org.rs.consts.Items
@@ -14,9 +15,8 @@ import org.rs.consts.Items
 class BroomstickListener : InteractionListener {
     override fun defineListeners() {
         on(Items.BROOMSTICK_14057, IntType.ITEM, "sweep") { player, _ ->
-            stopWalk(player)
-            lock(player, 1)
-            visualize(player, 10532, Graphics.DUST_BROOM_EMOTE_1866)
+            lock(player, 3)
+            visualize(player, Animations.SWEEP_BROOM_10532, Graphics.DUST_BROOM_EMOTE_1866)
             return@on true
         }
 
@@ -31,38 +31,34 @@ class BroomstickListener : InteractionListener {
                 return@on true
             }
 
-            sendDialogueOptions(player, "Select an Option", "Teleport to Sorceress's Garden", "Cancel").also {
-                addDialogueAction(player) { player, button ->
-                    when (button) {
-                        1 -> {
-                            closeInterface(player)
-                            lock(player, 3)
-                            visualize(player, 10538, 1867)
-                            queueScript(player, 3, QueueStrength.SOFT) {
-                                teleport(player, Location.create(2912, 5474, 0))
-                                visualize(player, Animations.BROOMSTICK_TP_T_A_10537, 1867)
-                                return@queueScript stopExecuting(player)
-                            }
-                        }
-                        2 -> {
-                            closeInterface(player)
-                            sendMessage(player, "You decide not to teleport.")
+            sendDialogueOptions(player, "Select an Option", "Teleport to Sorceress's Garden", "Cancel")
+            addDialogueAction(player) { _, option ->
+                when (option) {
+                    2 -> {
+                        closeInterface(player)
+                        lock(player, 3)
+                        visualize(player, Animations.BROOMSTICK_TP_T_B_10538, Graphics.BROOMSTICK_TP_1867)
+                        val animDuration = animationDuration(Animation(Animations.BROOMSTICK_TP_T_B_10538))
+                        queueScript(player, animDuration, QueueStrength.SOFT) {
+                            teleport(player, Location.create(2912, 5474, 0))
+                            visualize(player, Animations.BROOMSTICK_TP_T_A_10537, Graphics.BROOMSTICK_TP_1867)
+                            return@queueScript stopExecuting(player)
                         }
                     }
-                    return@addDialogueAction
+                    else -> {
+                        closeInterface(player)
+                        sendMessage(player, "You decide not to teleport.")
+                    }
                 }
             }
+
             return@on true
         }
 
         onUseWith(IntType.ITEM, Items.BROOM_OINTMENT_14062, Items.BROOMSTICK_14057) { player, used, _ ->
             replaceSlot(player, used.asItem().slot, Item(Items.VIAL_229, 1))
             addItem(player, Items.VIAL_229)
-            sendMessages(
-                player,
-                "You smear the broom ointment onto Maggie's broom and feel it tingle as the",
-                "enchantment permeates the wood.",
-            )
+            sendMessages(player, "You smear the broom ointment onto Maggie's broom and feel it tingle as the", "enchantment permeates the wood.")
             setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_HETTY_ENCH, true)
             return@onUseWith true
         }

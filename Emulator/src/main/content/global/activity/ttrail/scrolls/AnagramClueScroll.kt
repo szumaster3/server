@@ -130,8 +130,8 @@ abstract class AnagramClueScroll(
                     }
                     sendNPCDialogue(player, npc.id, message, facialExpression)
 
-                    addDialogueAction(player) { p, btn ->
-                        if (btn > 0) sendItemDialogue(p, puzzleBox.item, "${npc.name} has given you a puzzle box!")
+                    addDialogueAction(player) { p, _ ->
+                        sendItemDialogue(p, puzzleBox.item, "${npc.name} has given you a puzzle box!")
                     }
                     return true
                 } else if (isComplete) {
@@ -150,21 +150,19 @@ abstract class AnagramClueScroll(
                         else -> randomMessage
                     }
                     sendNPCDialogue(player, npc.id, message, facialExpression)
-                    addDialogueAction(player) { p, btn ->
-                        if (btn > 0) {
-                            val manager = TreasureTrailManager.getInstance(p)
-                            val clueScroll = getClueScrolls()[anagramClue.clueId]
-                            clueScroll?.reward(p)
+                    addDialogueAction(player) { p, _ ->
+                        val manager = TreasureTrailManager.getInstance(p)
+                        val clueScroll = getClueScrolls()[anagramClue.clueId]
+                        clueScroll?.reward(p)
 
-                            if (manager.isCompleted) {
-                                sendItemDialogue(p, Items.CASKET_405, "You've found a casket!")
-                                manager.clearTrail()
-                            } else {
-                                val newClue = clueScroll?.level?.let { getClue(it) }
-                                if (newClue != null) {
-                                    sendItemDialogue(p, newClue, "You receive another clue scroll.")
-                                    addItem(player, newClue.id, 1)
-                                }
+                        if (manager.isCompleted) {
+                            sendItemDialogue(p, Items.CASKET_405, "You've found a casket!")
+                            manager.clearTrail()
+                        } else {
+                            val newClue = clueScroll?.level?.let { getClue(it) }
+                            if (newClue != null) {
+                                sendItemDialogue(p, newClue, "You receive another clue scroll.")
+                                addItem(player, newClue.id, 1)
                             }
                         }
                     }

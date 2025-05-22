@@ -3,6 +3,7 @@ package content.global.handlers.item
 import content.data.GameAttributes
 import core.api.*
 import core.api.quest.hasRequirement
+import core.api.ui.closeDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -32,9 +33,12 @@ class TeleportCrystalListener : InteractionListener {
             }
             sendDialogueOptions(player, "Select an Option", "Teleport to Lletya", "Cancel").also {
                 addDialogueAction(player) { player, button ->
-                    if (button == 1) {
-                        player.teleporter.send(Location(2329, 3172), TeleportType.NORMAL)
-                        degrade(player, Item(node.id))
+                    when(button) {
+                        2 -> {
+                            player.teleporter.send(Location(2329, 3172), TeleportType.NORMAL)
+                            degrade(player, Item(node.id))
+                        }
+                        else -> closeDialogue(player)
                     }
                     return@addDialogueAction
                 }

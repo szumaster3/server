@@ -18,10 +18,9 @@ class Decanting : InteractionListener {
             for (item in toAdd) addItem(player, item.id, item.amount)
 
             sendNPCDialogue(player, node.id, "There you go!")
-            addDialogueAction(player) { p, button ->
-                if (button >= 1) sendPlayerDialogue(p, "Thanks!")
+            addDialogueAction(player) { p, _ ->
+                sendPlayerDialogue(p, "Thanks!")
             }
-
             return@on true
         }
 

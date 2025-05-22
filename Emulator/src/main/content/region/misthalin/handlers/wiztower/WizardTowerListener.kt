@@ -32,12 +32,10 @@ class WizardTowerListener : InteractionListener {
                 "old. Some very strange names... You pick one at random:",
             )
             val bookName = books[RandomFunction.random(books.size)]
-            addDialogueAction(player) { _, buttonID ->
-                if (buttonID >= 0) {
-                    sendDialogue(player, bookName).also {
-                        runTask(player, 3) {
-                            sendPlayerDialogue(player, "Interesting...")
-                        }
+            addDialogueAction(player) { _, _ ->
+                sendDialogue(player, bookName).also {
+                    runTask(player, 3) {
+                        sendPlayerDialogue(player, "Interesting...")
                     }
                 }
             }

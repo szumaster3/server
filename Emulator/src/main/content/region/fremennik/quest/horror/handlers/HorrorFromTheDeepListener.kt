@@ -32,25 +32,24 @@ class HorrorFromTheDeepListener : InteractionListener {
          */
 
         on(Scenery.BOOKCASE_4617, IntType.SCENERY, "search") { player, _ ->
-
-                sendDialogue(player, "There are three books here that look important... What would you like to do?")
+            sendDialogue(player, "There are three books here that look important... What would you like to do?")
+            addDialogueAction(player) { _, _ ->
+                sendDialogueOptions(player, "Select an option", "Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books")
                 addDialogueAction(player) { _, button ->
-                    if (button > 0) sendDialogueOptions(player, "Select an option", "Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books")
-                    addDialogueAction(player) { _, button ->
-                        val book = arrayOf(Item(Items.MANUAL_3847), Item(Items.DIARY_3846), Item(Items.JOURNAL_3845))
-                        val bookIDs = book.toList()
-                        if (freeSlots(player) < (if (button == 5) bookIDs.size else 1)) {
-                            sendDialogue(player, "You do not have enough room to take ${if (bookIDs.size > 1) "all three" else "that"}.")
-                            return@addDialogueAction
-                        }
-                        when (button) {
-                            2 -> player.inventory.add(book[0])
-                            3 -> player.inventory.add(book[1])
-                            4 -> player.inventory.add(book[2])
-                            5 -> player.inventory.add(*book)
-                        }
+                    val book = arrayOf(Item(Items.MANUAL_3847), Item(Items.DIARY_3846), Item(Items.JOURNAL_3845))
+                    val bookIDs = book.toList()
+                    if (freeSlots(player) < (if (button == 5) bookIDs.size else 1)) {
+                        sendDialogue(player, "You do not have enough room to take ${if (bookIDs.size > 1) "all three" else "that"}.")
+                        return@addDialogueAction
+                    }
+                    when (button) {
+                        2 -> player.inventory.add(book[0])
+                        3 -> player.inventory.add(book[1])
+                        4 -> player.inventory.add(book[2])
+                        5 -> player.inventory.add(*book)
                     }
                 }
+            }
 
             return@on true
         }

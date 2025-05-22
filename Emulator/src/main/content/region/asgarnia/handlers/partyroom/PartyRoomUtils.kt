@@ -3,6 +3,7 @@ package content.region.asgarnia.handlers.partyroom
 import content.region.asgarnia.handlers.partyroom.PartyRoomOptionHandler.Companion.balloonManager
 import content.region.asgarnia.handlers.partyroom.PartyRoomOptionHandler.Companion.isDancing
 import core.api.*
+import core.api.ui.closeDialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -32,31 +33,29 @@ object PartyRoomUtils {
             "Nightly Dance (500 coins).",
             "No reward.",
         )
-        addDialogueAction(player) { player, buttonId ->
+        addDialogueAction(player) { _, buttonId ->
             when (buttonId) {
-                2 ->
-                    if (isCluttered) {
-                        sendDialogue(player, "The floor is too cluttered at the moment.")
-                    } else if (balloonManager.isCountingDown) {
-                        sendDialogue(player, "A count down has already begun.")
-                    } else if (inInventory(player, Items.COINS_995, 1000)) {
-                        balloonManager.start()
-                        removeItem(player, Item(Items.COINS_995, 1000))
-                    } else {
-                        sendDialogue(player, "Balloon Bonanza costs 1000 coins.")
-                    }
+                2 -> if (isCluttered) {
+                    sendDialogue(player, "The floor is too cluttered at the moment.")
+                } else if (balloonManager.isCountingDown) {
+                    sendDialogue(player, "A count down has already begun.")
+                } else if (inInventory(player, Items.COINS_995, 1000)) {
+                    balloonManager.start()
+                    removeItem(player, Item(Items.COINS_995, 1000))
+                } else {
+                    sendDialogue(player, "Balloon Bonanza costs 1000 coins.")
+                }
 
-                3 ->
-                    if (isDancing) {
-                        sendDialogue(player, "The party room knights are already here!")
-                    } else if (inInventory(player, Items.COINS_995, 500)) {
-                        commenceDance()
-                        removeItem(player, Item(Items.COINS_995, 500))
-                    } else {
-                        sendDialogue(player, "Nightly Dance costs 500 coins.")
-                    }
+                3 -> if (isDancing) {
+                    sendDialogue(player, "The party room knights are already here!")
+                } else if (inInventory(player, Items.COINS_995, 500)) {
+                    commenceDance()
+                    removeItem(player, Item(Items.COINS_995, 500))
+                } else {
+                    sendDialogue(player, "Nightly Dance costs 500 coins.")
+                }
 
-                else -> {}
+                else -> closeDialogue(player)
             }
         }
     }

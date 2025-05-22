@@ -88,9 +88,7 @@ class ElnockExchangeInterface : InterfaceListener {
                     }
 
                     addDialogueAction(player) { _, button ->
-                        if (button > 1) {
-                            sendNPCDialogue(player, NPCs.ELNOCK_INQUISITOR_6070, "Pleasure doing business with you!")
-                        }
+                        sendNPCDialogue(player, NPCs.ELNOCK_INQUISITOR_6070, "Pleasure doing business with you!")
                     }
                 }
                 return@on true

@@ -31,14 +31,12 @@ class SergeantDamienNPC(
                     if (!player.musicPlayer.hasUnlocked(Music.CORPORAL_PUNISHMENT_418)) {
                         sendDialogueLines(player, RED + "You have unlocked a new music track: Corporal Punishment.")
                         player.musicPlayer.unlock(Music.CORPORAL_PUNISHMENT_418)
-                        addDialogueAction(player) { player, button ->
-                            if (button >= 1) {
-                                openDialogue(
-                                    player,
-                                    SergeantDamienDialogue(isCorrect = true, eventStart = true),
-                                    NPCs.SERGEANT_DAMIEN_2790,
-                                )
-                            }
+                        addDialogueAction(player) { player, _ ->
+                            openDialogue(
+                                player,
+                                SergeantDamienDialogue(isCorrect = true, eventStart = true),
+                                NPCs.SERGEANT_DAMIEN_2790,
+                            )
                         }
                     } else {
                         openDialogue(

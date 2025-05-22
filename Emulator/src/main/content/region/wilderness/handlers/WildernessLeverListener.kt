@@ -44,11 +44,9 @@ class WildernessLeverListener : InteractionListener {
             when (node.id) {
                 Scenery.LEVER_1814 -> {
                     sendDialogue(player, "Warning! Pulling the lever will teleport you deep into the wilderness.")
-                    addDialogueAction(player) { player, button ->
-                        if (button > 0) {
-                            setTitle(player, 2)
-                            sendDialogueOptions(player, "Select an option", "Yes I'm brave.", "Eep! The wilderness... No thank you.")
-                        }
+                    addDialogueAction(player) { _, _ ->
+                        setTitle(player, 2)
+                        sendDialogueOptions(player, "Select an option", "Yes I'm brave.", "Eep! The wilderness... No thank you.")
                         addDialogueAction(player) { player, button ->
                             if (button == 2) {
                                 lock(player, 2)

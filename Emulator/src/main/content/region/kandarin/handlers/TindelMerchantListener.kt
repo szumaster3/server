@@ -89,36 +89,34 @@ class TindelMerchantListener : InteractionListener {
                 "You hand Tindel 100 coins plus the ${getItemName(rustyItemId).lowercase()}."
             )
 
-            addDialogueAction(player) { _, button ->
-                if (button >= 1) {
-                    val smithingLevel = getStatLevel(player, Skills.SMITHING)
-                    val chance = RandomFunction.getSkillSuccessChance(50.0, 100.0, smithingLevel)
-                    val success = RandomFunction.random(0.0, 100.0) < chance
+            addDialogueAction(player) { _, _ ->
+                val smithingLevel = getStatLevel(player, Skills.SMITHING)
+                val chance = RandomFunction.getSkillSuccessChance(50.0, 100.0, smithingLevel)
+                val success = RandomFunction.random(0.0, 100.0) < chance
 
-                    val equipmentType = when (rustyItemId) {
-                        RUSTY_SWORD -> BrokenItem.EquipmentType.SWORDS
-                        RUSTY_SCIMITAR -> BrokenItem.EquipmentType.SCIMITARS
-                        else -> null
-                    }
+                val equipmentType = when (rustyItemId) {
+                    RUSTY_SWORD -> BrokenItem.EquipmentType.SWORDS
+                    RUSTY_SCIMITAR -> BrokenItem.EquipmentType.SCIMITARS
+                    else -> null
+                }
 
-                    if (equipmentType == null) {
-                        sendNPCDialogue(player, TINDEL, "Sorry my friend, but you don't seem to have any swords that need to be identified.", FaceAnim.HALF_GUILTY)
-                        return@addDialogueAction
-                    }
+                if (equipmentType == null) {
+                    sendNPCDialogue(player, TINDEL, "Sorry my friend, but you don't seem to have any swords that need to be identified.", FaceAnim.HALF_GUILTY)
+                    return@addDialogueAction
+                }
 
-                    val rustyItem = Item(rustyItemId, 1)
-                    val repairedItem = BrokenItem.getRepair(equipmentType)
-                    val itemName = getItemName(repairedItem!!.id).lowercase()
+                val rustyItem = Item(rustyItemId, 1)
+                val repairedItem = BrokenItem.getRepair(equipmentType)
+                val itemName = getItemName(repairedItem!!.id).lowercase()
 
-                    removeItem(player, Item(Items.COINS_995, 100))
-                    removeItem(player, rustyItem)
+                removeItem(player, Item(Items.COINS_995, 100))
+                removeItem(player, rustyItem)
 
-                    if (success) {
-                        sendItemDialogue(player, repairedItem.id, "Tindel gives you a $itemName.")
-                        addItem(player, repairedItem.id, 1)
-                    } else {
-                        sendNPCDialogue(player, TINDEL, "Sorry my friend, but the item wasn't worth anything. I've disposed of it for you.", FaceAnim.HALF_GUILTY)
-                    }
+                if (success) {
+                    sendItemDialogue(player, repairedItem.id, "Tindel gives you a $itemName.")
+                    addItem(player, repairedItem.id, 1)
+                } else {
+                    sendNPCDialogue(player, TINDEL, "Sorry my friend, but the item wasn't worth anything. I've disposed of it for you.", FaceAnim.HALF_GUILTY)
                 }
             }
 

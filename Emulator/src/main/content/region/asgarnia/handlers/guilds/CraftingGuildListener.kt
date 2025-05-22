@@ -41,10 +41,8 @@ class CraftingGuildListener : InteractionListener {
                 sendNPCDialogue(player, NPCs.MASTER_CRAFTER_805, "Welcome to the Guild of Master Craftsmen.", FaceAnim.HAPPY)
             } else {
                 sendNPCDialogue(player, NPCs.MASTER_CRAFTER_805, "Where's your brown apron? You can't come in here unless you're wearing one.", FaceAnim.HALF_ASKING)
-                addDialogueAction(player) { _, button ->
-                    if (button > 0) {
-                        sendPlayerDialogue(player, "Err... I haven't got one.", FaceAnim.HALF_THINKING)
-                    }
+                addDialogueAction(player) { _, _ ->
+                    sendPlayerDialogue(player, "Err... I haven't got one.", FaceAnim.HALF_THINKING)
                 }
             }
 

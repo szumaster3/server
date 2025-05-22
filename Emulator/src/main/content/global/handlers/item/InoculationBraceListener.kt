@@ -24,7 +24,7 @@ class InoculationBraceListener :
         }
 
         onEquip(Items.INOCULATION_BRACE_11088) { player, node ->
-            val charges = getCharge(node)
+            var charges = getCharge(node)
 
             if (charges <= 0) {
                 sendMessage(player, "Your inoculation bracelet has no remaining protection and crumbles to dust.")
@@ -35,10 +35,10 @@ class InoculationBraceListener :
             val diseaseTimer = getTimer<Disease>(player)
             if (diseaseTimer != null && isDiseased(player)) {
                 val blockedDamage = min(diseaseTimer.hitsLeft, charges)
-                val remainingCharges = charges - blockedDamage
-                setCharge(node, remainingCharges)
+                charges -= blockedDamage
+                setCharge(node, charges)
 
-                if (remainingCharges <= 0) {
+                if (charges <= 0) {
                     sendMessage(player, "Your bracelet crumbles to dust.")
                     removeItem(player, node, Container.EQUIPMENT)
                 }

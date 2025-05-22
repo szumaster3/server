@@ -18,10 +18,8 @@ class EdgevilleListener : InteractionListener {
 
         on(Scenery.POSTER_29586, IntType.SCENERY, "pull-back") { player, _ ->
             sendDialogue(player, "There appears to be a tunnel behind this poster.")
-            addDialogueAction(player) { player, button ->
-                if (button > 0) {
-                    teleport(player, Location(3140, 4230, 2))
-                }
+            addDialogueAction(player) { _, _ ->
+                teleport(player, Location(3140, 4230, 2))
             }
             return@on true
         }

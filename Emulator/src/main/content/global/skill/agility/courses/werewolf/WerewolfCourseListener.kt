@@ -33,43 +33,21 @@ class WerewolfCourseListener : InteractionListener {
             return@on true
         }
 
-        on(OPEN_TRAPDOOR, IntType.SCENERY, "climb-down") { player, _ ->
+        on(OPEN_TRAPDOOR, IntType.SCENERY, "climb-down") { player, node ->
             findLocalNPC(player, NPCs.WEREWOLF_1665)?.let { face(player, it) }
             findLocalNPC(player, NPCs.WEREWOLF_1665)?.let { face(it, player, 1) }
-            if (!anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465) ||
-                getStatLevel(
-                    player,
-                    Skills.AGILITY,
-                ) < 60
-            ) {
-                sendNPCDialogueLines(
-                    player,
-                    NPCs.WEREWOLF_1665,
-                    FaceAnim.CHILD_NORMAL,
-                    false,
-                    "You can't go down there human. If it wasn't my duty",
-                    "to guard this trapdoor, I would be relieving you of the",
-                    "burden of your life right now.",
-                )
+            if (!anyInEquipment(player, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465) || getStatLevel(player, Skills.AGILITY) < 60) {
+                sendNPCDialogueLines(player, NPCs.WEREWOLF_1665, FaceAnim.CHILD_NORMAL, false, "You can't go down there human. If it wasn't my duty", "to guard this trapdoor, I would be relieving you of the", "burden of your life right now.")
             } else {
-                sendNPCDialogueLines(
-                    player,
-                    NPCs.WEREWOLF_1665,
-                    FaceAnim.CHILD_NORMAL,
-                    false,
-                    "Good luck down there, my friend. Remember, to the",
-                    "west is the main agility course, while to the east is a",
-                    "skullball course.",
-                )
-                addDialogueAction(player) { player, button ->
-                    if (button >= 1) {
-                        sendMessage(player!!, "You climb down through the trapdoor.")
-                        ClimbActionHandler.climb(
-                            player,
-                            Animation(Animations.MULTI_BEND_OVER_827),
-                            Location(3549, 9865, 0),
-                        )
-                    }
+                sendNPCDialogueLines(player, NPCs.WEREWOLF_1665, FaceAnim.CHILD_NORMAL, false, "Good luck down there, my friend. Remember, to the", "west is the main agility course, while to the east is a", "skullball course.")
+                addDialogueAction(player) { _, _ ->
+                    face(player, node)
+                    sendMessage(player, "You climb down through the trapdoor.")
+                    ClimbActionHandler.climb(
+                        player,
+                        Animation(Animations.MULTI_BEND_OVER_827),
+                        Location(3549, 9865, 0),
+                    )
                 }
             }
             return@on true

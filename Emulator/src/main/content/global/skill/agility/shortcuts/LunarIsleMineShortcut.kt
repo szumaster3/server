@@ -26,10 +26,8 @@ class LunarIsleMineShortcut : InteractionListener {
                     "If you leave any items in the cave, they probably won't remain when",
                     "you return!",
                 )
-                addDialogueAction(player) { player, button ->
-                    if (button == 4) {
-                        crawlingStart(player)
-                    }
+                addDialogueAction(player) { _, _ ->
+                    crawlingStart(player)
                     return@addDialogueAction
                 }
             }

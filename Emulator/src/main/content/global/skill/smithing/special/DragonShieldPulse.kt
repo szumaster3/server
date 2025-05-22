@@ -1,6 +1,7 @@
 package content.global.skill.smithing.special
 
 import core.api.*
+import core.api.ui.closeDialogue
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
@@ -54,19 +55,13 @@ class DragonShieldPulse(
                     "eventually it is ready. You have restored the dragon square shield to",
                     "its former glory.",
                 )
-                addDialogueAction(player) { player, button ->
-                    if (button >= 2) {
-                        if (removeItem(player, Items.SHIELD_LEFT_HALF_2366) &&
-                            removeItem(
-                                player,
-                                Items.SHIELD_RIGHT_HALF_2368,
-                            )
-                        ) {
-                            addItem(player, Items.DRAGON_SQ_SHIELD_1187, 1)
-                            rewardXP(player, Skills.SMITHING, 75.0)
-                        }
+                addDialogueAction(player) { player, _ ->
+                    if (removeItem(player, Items.SHIELD_LEFT_HALF_2366) && removeItem(player, Items.SHIELD_RIGHT_HALF_2368)) {
+                        addItem(player, Items.DRAGON_SQ_SHIELD_1187, 1)
+                        rewardXP(player, Skills.SMITHING, 75.0)
+                    } else {
+                        closeDialogue(player)
                     }
-                    return@addDialogueAction
                 }
             }
         }

@@ -6,6 +6,7 @@ import com.google.gson.JsonObject
 import content.global.skill.summoning.pet.Pets
 import content.minigame.mta.handlers.ProgressHat.thresholds
 import core.api.*
+import core.api.ui.closeDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -121,6 +122,8 @@ class DropListener : InteractionListener {
                             playAudio(player, DESTROY_ITEM_SOUND)
                         }
                         return@addDialogueAction
+                    } else {
+                        closeDialogue(player)
                     }
                 }
             }

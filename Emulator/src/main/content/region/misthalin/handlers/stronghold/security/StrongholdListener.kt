@@ -67,20 +67,19 @@ class StrongholdListener : InteractionListener {
                     playJingle(player, music)
                     sendDialogue(player, message)
 
-                    addDialogueAction(player) { _, button ->
-                        if (button > 0) {
-                            if (!addItem(player, Items.COINS_995, rewardCoins, Container.INVENTORY)) {
-                                sendMessage(player, "You don't have enough inventory space.")
-                                return@addDialogueAction
-                            }
-                            player.emoteManager.unlock(emote)
-                            player.getSavedData().globalData.getStrongHoldRewards()[rewardIndex] = true
-                            sendItemDialogue(player, Items.COINS_8898, "...congratulations adventurer, you have been deemed worthy of this reward. $emoteMessage")
-                            if (rewardIndex == 2) {
-                                player.fullRestore()
-                                sendMessage(player, "You feel refreshed and renewed.")
-                            }
+                    addDialogueAction(player) { _, _ ->
+                        if (!addItem(player, Items.COINS_995, rewardCoins, Container.INVENTORY)) {
+                            sendMessage(player, "You don't have enough inventory space.")
+                            return@addDialogueAction
                         }
+                        player.emoteManager.unlock(emote)
+                        player.getSavedData().globalData.getStrongHoldRewards()[rewardIndex] = true
+                        sendItemDialogue(player, Items.COINS_8898, "...congratulations adventurer, you have been deemed worthy of this reward. $emoteMessage")
+                        if (rewardIndex == 2) {
+                            player.fullRestore()
+                            sendMessage(player, "You feel refreshed and renewed.")
+                        }
+
                     }
                 }
             } else {
@@ -107,11 +106,9 @@ class StrongholdListener : InteractionListener {
                 sendMessage(player, "You don't find anything.")
             } else {
                 sendDialogue(player, "You rummage around in the dead explorer's bag.....")
-                addDialogueAction(player) { _, button ->
-                    if (button > 0) {
-                        sendItemDialogue(player, STRONGHOLD_NOTES, "You find a book of hand written notes.")
-                        addItemOrDrop(player, STRONGHOLD_NOTES, 1)
-                    }
+                addDialogueAction(player) { _, _ ->
+                    sendItemDialogue(player, STRONGHOLD_NOTES, "You find a book of hand written notes.")
+                    addItemOrDrop(player, STRONGHOLD_NOTES, 1)
                 }
             }
             return@on true

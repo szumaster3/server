@@ -13,10 +13,19 @@ class EnchantedJewelleryListener : InteractionListener {
     private val ids = EnchantedJewellery.idMap.keys.toIntArray()
 
     override fun defineListeners() {
+        /*
+         * Handles the rub interaction for jewellery items.
+         */
+
         on(ids, IntType.ITEM, "rub") { player, node ->
             handle(player, node, false)
             return@on true
         }
+
+        /*
+         * Handles the "operate" interaction for jewellery items.
+         */
+
         on(ids, IntType.ITEM, "operate") { player, node ->
             handle(player, node, true)
             return@on true
@@ -33,12 +42,15 @@ class EnchantedJewelleryListener : InteractionListener {
         }
 
         val jewellery = EnchantedJewellery.idMap[item.id] ?: return
-        if (jewellery.isLastItemIndex(jewellery.getItemIndex(item)) && !jewellery.crumbled) {
+
+        if (!jewellery.crumbled && jewellery.isLastItemIndex(jewellery.getItemIndex(item))) {
             sendMessage(player, "It will need to be recharged before you can use it again.")
             return
         }
 
-        sendMessage(player, "You rub the ${jewellery.getJewelleryType(item).replace("combat bracelet", "bracelet", true)}...")
+        val typeName = jewellery.getJewelleryType(item).replace("combat bracelet", "bracelet", ignoreCase = true)
+        sendMessage(player, "You rub the $typeName...")
+
         if (jewellery.options.isEmpty()) {
             jewellery.use(player, item, 0, isEquipped)
         } else {

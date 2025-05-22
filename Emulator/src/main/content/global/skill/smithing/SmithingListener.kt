@@ -38,12 +38,10 @@ class SmithingListener : InteractionListener {
                 "You set to work trying to fix the ancient shield. It's seen some",
                 "heavy reward and needs some serious work doing to it.",
             )
-            addDialogueAction(player) { player, button ->
-                if (button >= 3) {
-                    lock(player, 5)
-                    animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
-                    submitIndividualPulse(player, DragonShieldPulse(player, used.asItem()))
-                }
+            addDialogueAction(player) { _, _ ->
+                lock(player, 5)
+                animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
+                submitIndividualPulse(player, DragonShieldPulse(player, used.asItem()))
                 return@addDialogueAction
             }
 
@@ -77,13 +75,11 @@ class SmithingListener : InteractionListener {
                 "You set to work trying to fix the ancient shield. It's seen some",
                 "heavy reward and needs some serious work doing to it.",
             )
-            addDialogueAction(player) { player, button ->
-                if (button >= 3) {
-                    lock(player, 5)
-                    animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
-                    submitIndividualPulse(player, DragonfireShieldPulse(player, used.asItem()))
-                    return@addDialogueAction
-                }
+            addDialogueAction(player) { _, _ ->
+                lock(player, 5)
+                animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
+                submitIndividualPulse(player, DragonfireShieldPulse(player, used.asItem()))
+                return@addDialogueAction
             }
             return@onUseWith true
         }

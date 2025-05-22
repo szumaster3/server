@@ -156,57 +156,55 @@ class PlagueCityListener : InteractionListener {
             if (questStage == 16) {
                 sendPlayerDialogue(player, "I have a warrant from Bravek to enter here.")
                 addDialogueAction(player) { player, button ->
-                    if (button > 0) {
-                        sendNPCDialogue(
-                            player, NPCs.MOURNER_3216, "This is highly irregular. Please wait...", FaceAnim.ANNOYED
-                        )
-                        addDialogueAction(player) { player, button ->
-                            if (button > 0) {
-                                lock(player, 6)
-                                lockInteractions(player, 6)
 
-                                queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
-                                    when (stage) {
-                                        0 -> {
-                                            findLocalNPC(player, NPCs.MOURNER_717)?.apply {
-                                                sendChat("Hey... I got someone here with a warrant from Bravek, what should we do?")
-                                                faceLocation(location(2536, 3273, 0))
-                                            }
-                                            return@queueScript delayScript(player, 1)
-                                        }
-
-                                        1 -> {
-                                            findLocalNPC(player, NPCs.MOURNER_3216)?.apply {
-                                                sendChat("Well, you can't let them in...", 1)
-                                                faceLocation(location(2537, 3273, 0))
-                                            }
-                                            return@queueScript delayScript(player, 1)
-                                        }
-
-                                        2 -> {
-                                            getObject(location(2540, 3273, 0))?.asScenery()?.let {
-                                                DoorActionHandler.handleAutowalkDoor(player, it)
-                                            }
-                                            return@queueScript delayScript(player, 3)
-                                        }
-
-                                        3 -> {
-                                            setQuestStage(player, Quests.PLAGUE_CITY, 17)
-                                            sendDialogueLines(
-                                                player,
-                                                "You wait until the mourner's back is turned and sneak into the building."
-                                            )
-                                            return@queueScript stopExecuting(player)
-                                        }
-
-                                        else -> return@queueScript stopExecuting(player)
+                    sendNPCDialogue(
+                        player, NPCs.MOURNER_3216, "This is highly irregular. Please wait...", FaceAnim.ANNOYED
+                    )
+                    addDialogueAction(player) { _, _ ->
+                        lock(player, 6)
+                        lockInteractions(player, 6)
+                        queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
+                            when (stage) {
+                                0 -> {
+                                    findLocalNPC(player, NPCs.MOURNER_717)?.apply {
+                                        sendChat("Hey... I got someone here with a warrant from Bravek, what should we do?")
+                                        faceLocation(location(2536, 3273, 0))
                                     }
+                                    return@queueScript delayScript(player, 1)
                                 }
+
+                                1 -> {
+                                    findLocalNPC(player, NPCs.MOURNER_3216)?.apply {
+                                        sendChat("Well, you can't let them in...", 1)
+                                        faceLocation(location(2537, 3273, 0))
+                                    }
+                                    return@queueScript delayScript(player, 1)
+                                }
+
+                                2 -> {
+                                    getObject(location(2540, 3273, 0))?.asScenery()?.let {
+                                        DoorActionHandler.handleAutowalkDoor(player, it)
+                                    }
+                                    return@queueScript delayScript(player, 3)
+                                }
+
+                                3 -> {
+                                    setQuestStage(player, Quests.PLAGUE_CITY, 17)
+                                    sendDialogueLines(
+                                        player,
+                                        "You wait until the mourner's back is turned and sneak into the building."
+                                    )
+                                    return@queueScript stopExecuting(player)
+                                }
+
+                                else -> return@queueScript stopExecuting(player)
                             }
                         }
+
                     }
                 }
             }
+
 
             if (questStage in 17..100) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())

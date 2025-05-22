@@ -14,33 +14,31 @@ class RangingGuildListener : InteractionListener {
 
         on(NPCs.RANGING_GUILD_DOORMAN_679, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello there.")
-            addDialogueAction(player) { player, button ->
-                if (button > 0) {
-                    sendNPCDialogueLines(
-                        player,
-                        node.id,
-                        FaceAnim.HALF_GUILTY,
-                        false,
-                        "Greetings. If you are an experienced archer, you may",
-                        "want to visit the guild here...",
-                    )
-                }
+            addDialogueAction(player) { _, _ ->
+                sendNPCDialogueLines(
+                    player,
+                    node.id,
+                    FaceAnim.HALF_GUILTY,
+                    false,
+                    "Greetings. If you are an experienced archer, you may",
+                    "want to visit the guild here...",
+                )
+
             }
             return@on true
         }
 
         on(NPCs.GUARD_678, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello there.")
-            addDialogueAction(player) { player, button ->
-                if (button > 0) {
-                    sendNPCDialogueLines(
-                        player,
-                        node.id,
-                        FaceAnim.HALF_GUILTY,
-                        false,
-                        "Greetings, traveller. Enjoy the time at the Ranging", "Guild.",
-                    )
-                }
+            addDialogueAction(player) { _, _ ->
+                sendNPCDialogueLines(
+                    player,
+                    node.id,
+                    FaceAnim.HALF_GUILTY,
+                    false,
+                    "Greetings, traveller. Enjoy the time at the Ranging", "Guild.",
+                )
+
             }
             return@on true
         }

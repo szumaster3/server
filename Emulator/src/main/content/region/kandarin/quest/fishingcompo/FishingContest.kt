@@ -92,8 +92,7 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
                 "now trust you enough to let you in..."
             )
 
-            addDialogueAction(player) { _, button ->
-                if (button <= 0) return@addDialogueAction
+            addDialogueAction(player) { _, _ ->
                 sendPlayerDialogue(player, "In where?", FaceAnim.HALF_ASKING)
                 addDialogueAction(player) { _, _ ->
                     sendNPCDialogueLines(

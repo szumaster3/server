@@ -203,9 +203,7 @@ class SweptAwayListener :
 
             sendPlayerDialogue(player, "What was that?", FaceAnim.EXTREMELY_SHOCKED)
             addDialogueAction(player) { p, button ->
-                if (button > 1) {
-                    openDialogue(p, MaggieSceneryInteraction())
-                }
+                openDialogue(p, MaggieSceneryInteraction())
             }
             return@on true
         }

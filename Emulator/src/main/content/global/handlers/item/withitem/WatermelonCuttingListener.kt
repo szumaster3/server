@@ -16,19 +16,21 @@ class WatermelonCuttingListener : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.KNIFE_946, Items.WATERMELON_5982) { player, _, _ ->
-            if (inInventory(player, Items.WATERMELON_5982)) {
-                animate(player, Animations.CUT_WATERMELON_2269)
-                queueScript(player, animationDuration(Animation.create(Animations.CUT_WATERMELON_2269))) {
-                    if (removeItem(player, Items.WATERMELON_5982)) {
-                        for (i in 0..2) {
-                            if (!player.inventory.add(Item(Items.WATERMELON_SLICE_5984))) {
-                                GroundItemManager.create(Item(Items.WATERMELON_SLICE_5984), player)
-                            }
+            if (!inInventory(player, Items.WATERMELON_5982)) return@onUseWith true
+
+            animate(player, Animations.CUT_WATERMELON_2269)
+            val duration = animationDuration(Animation.create(Animations.CUT_WATERMELON_2269))
+            queueScript(player, duration) {
+                if (removeItem(player, Items.WATERMELON_5982)) {
+                    repeat(3) {
+                        val slice = Item(Items.WATERMELON_SLICE_5984)
+                        if (!player.inventory.add(slice)) {
+                            GroundItemManager.create(slice, player)
                         }
-                        sendMessage(player, "You slice the watermelon into three slices.")
                     }
-                    return@queueScript stopExecuting(player)
+                    sendMessage(player, "You slice the watermelon into three slices.")
                 }
+                return@queueScript stopExecuting(player)
             }
             return@onUseWith true
         }

@@ -469,7 +469,7 @@ class VarrockListener : InteractionListener {
                 }
             }
 
-            true
+            return@on true
         }
 
         /*

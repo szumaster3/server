@@ -384,15 +384,14 @@ internal object SweptUtils {
             removeAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS)
             setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, true)
             addDialogueAction(player) { p, button ->
-                if (button > 0) {
-                    p.dialogueInterpreter.sendDialogue(
-                        NPCs.GUS_8205,
-                        "Now, you need a newt, right? Feel free to take one",
-                        "from the newts-only create - the other ones aren't",
-                        "apprepriate for ointments and potions.",
-                    )
-                    return@addDialogueAction
-                }
+                p.dialogueInterpreter.sendDialogue(
+                    NPCs.GUS_8205,
+                    "Now, you need a newt, right? Feel free to take one",
+                    "from the newts-only create - the other ones aren't",
+                    "apprepriate for ointments and potions.",
+                )
+                return@addDialogueAction
+
             }
         } else {
             openDialogue(player, GusSupportDialogue())

@@ -41,10 +41,8 @@ class ArdougneListener : InteractionListener {
         onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, npc ->
             if (!hasRequirement(player, Quests.EAGLES_PEAK)) return@onUseWith true
             sendPlayerDialogue(player, "Hey, I've got another ferret if you're interested?")
-            addDialogueAction(player) { player, button ->
-                if(button > 0) {
-                    sendNPCDialogue(player, npc.id, "Er, oh! Well that's very kind of you, but we don't really need another ferret at the moment, I'm afraid. We're having enough trouble taming the one we've got.", FaceAnim.NEUTRAL)
-                }
+            addDialogueAction(player) { _, _ ->
+                sendNPCDialogue(player, npc.id, "Er, oh! Well that's very kind of you, but we don't really need another ferret at the moment, I'm afraid. We're having enough trouble taming the one we've got.", FaceAnim.NEUTRAL)
             }
             return@onUseWith true
         }

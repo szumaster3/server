@@ -105,7 +105,7 @@ class RunecraftingGuildListener : InteractionListener {
 
         on(WIZARD_NPCs, IntType.NPC, "talk-to") { player, _ ->
             sendDialogueOptions(player, "Select an option", "I want to join the orb project!", "Never mind.")
-            addDialogueAction(player) { player, button ->
+            addDialogueAction(player) { _, _ ->
                 closeDialogue(player)
             }
             return@on true

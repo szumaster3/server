@@ -9,6 +9,7 @@ import core.api.*
 import core.api.interaction.getSceneryName
 import core.api.item.allInInventory
 import core.api.quest.isQuestComplete
+import core.api.ui.closeDialogue
 import core.api.utils.PlayerCamera
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
@@ -67,38 +68,22 @@ class PhoenixLairListener : InteractionListener {
 
         on(Scenery.CAVE_ENTRANCE_41900, IntType.SCENERY, "enter") { player, _ ->
             val familiar = player.familiarManager.familiar
-            if (player.familiarManager.hasFamiliar() && familiar != null && (familiar.id == NPCs.PHOENIX_8575 || familiar.id == NPCs.PHOENIX_8576)) {
-                sendNPCDialogue(
-                    player,
-                    familiar.id,
-                    "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.",
-                    FaceAnim.CHILD_NORMAL
-                )
-                return@on true
+
+            if (player.familiarManager.hasFamiliar() && familiar != null) {
+                if (familiar.id == NPCs.PHOENIX_8575 || familiar.id == NPCs.PHOENIX_8576) {
+                    sendNPCDialogue(player, familiar.id, "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.", FaceAnim.CHILD_NORMAL)
+                    return@on true
+                }
+                if (familiar.id == NPCs.PHOENIX_EGGLING_8577 || familiar.id == NPCs.PHOENIX_EGGLING_8578) {
+                    sendNPCDialogue(player, familiar.id, "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.", FaceAnim.CHILD_NORMAL)
+                    return@on true
+                }
             }
-            if(player.familiarManager.hasPet() && familiar.id == NPCs.PHOENIX_EGGLING_8577 || familiar.id == NPCs.PHOENIX_EGGLING_8578) {
-                sendNPCDialogue(
-                    player,
-                    familiar.id,
-                    "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.",
-                    FaceAnim.CHILD_NORMAL
-                )
-                return@on true
-            }
+
             if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) < 1 || !isQuestComplete(player, Quests.IN_PYRE_NEED)) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.",
-                    FaceAnim.FRIENDLY,
-                )
-                addDialogueAction(player) { p, button ->
-                    if (button > 0) {
-                        sendPlayerDialogue(
-                            p,
-                            "Maybe I should see what he has to say before entering this dark, scary, and unreasonably warm cave.",
-                            FaceAnim.THINKING,
-                        )
-                    }
+                sendNPCDialogue(player, NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.", FaceAnim.FRIENDLY)
+                addDialogueAction(player) { p, _ ->
+                    sendPlayerDialogue(p, "Maybe I should see what he has to say before entering this dark, scary, and unreasonably warm cave.", FaceAnim.THINKING)
                 }
             } else {
                 teleport(player, Location.create(3461, 5218, 0), TeleportManager.TeleportType.INSTANT)
@@ -137,7 +122,7 @@ class PhoenixLairListener : InteractionListener {
                 sendDialogueOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
                     when (button) {
-                        1 -> {
+                        2 -> {
                             openInterface(player, Components.FADE_TO_BLACK_120)
                             player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
                             lock(player, 3)
@@ -149,7 +134,7 @@ class PhoenixLairListener : InteractionListener {
                             }
                         }
 
-                        2 -> {
+                        3 -> {
                             openInterface(player, Components.FADE_TO_BLACK_120)
                             player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
                             lock(player, 3)
@@ -160,6 +145,7 @@ class PhoenixLairListener : InteractionListener {
                                 return@queueScript stopExecuting(player)
                             }
                         }
+                        else -> closeDialogue(player)
                     }
                 }
                 return@on true
@@ -330,8 +316,7 @@ class PhoenixLairListener : InteractionListener {
                     "Kick the egg to make it hatch."
                 )
                 addDialogueAction(player) { _, button ->
-                    if(button > 0)
-                        lock(player, 12)
+                    lock(player, 12)
                     queueScript(player, 1, QueueStrength.SOFT) { stage : Int ->
                         when(stage) {
                             0 -> {
