@@ -11,6 +11,9 @@ import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Plugin
 import core.tools.Log
 import core.tools.RandomFunction
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 /**
  * Represents a base class for all clue scroll in the [TreasureTrailPlugin] activity.
@@ -22,9 +25,9 @@ import core.tools.RandomFunction
  * @param borders       (Optional) map zone borders for region-based clues.
  */
 abstract class ClueScroll(
-    name: String,
+    name: String?,
     val clueId: Int,
-    val level: ClueLevel,
+    val level: ClueLevel?,
     val interfaceId: Int,
     private val borders: Array<out ZoneBorders> = emptyArray()
 ) : MapZone(name, true), Plugin<Any> {
@@ -45,7 +48,7 @@ abstract class ClueScroll(
         val clue = player.inventory.getItem(Item(clueId)) ?: return
         nextStage(player, clue)
         if (casket) {
-            player.inventory.replace(Item(level.casketId, 1), clue.slot)
+            player.inventory.replace(level?.let { Item(it.casketId, 1) }, clue.slot)
         } else {
             player.inventory.remove(clue)
         }
@@ -106,7 +109,7 @@ abstract class ClueScroll(
             return
         }
 
-        ORGANIZED.computeIfAbsent(clue.level) { ArrayList(20) }.add(clue)
+        clue.level?.let { ORGANIZED.computeIfAbsent(it) { ArrayList(20) }.add(clue) }
         ZoneBuilder.configure(clue)
         CLUE_SCROLLS[clue.clueId] = clue
     }
@@ -143,7 +146,7 @@ abstract class ClueScroll(
         val WILDERNESS_CAPES = (4315..4414).toIntArray()
 
         private val CLUE_SCROLLS: MutableMap<Int, ClueScroll> = HashMap()
-        private val ORGANIZED: MutableMap<ClueLevel, MutableList<ClueScroll>> = HashMap()
+        private val ORGANIZED: MutableMap<ClueLevel, MutableList<ClueScroll>> = EnumMap(ClueLevel::class.java)
 
         /**
          * Gets a random clue scroll item of the given difficulty level.

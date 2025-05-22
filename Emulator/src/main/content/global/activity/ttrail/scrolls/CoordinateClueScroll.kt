@@ -7,36 +7,36 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
+import org.rs.consts.Components
+import org.rs.consts.Items
+import org.rs.consts.NPCs
 
 /**
  * Represents a coordinate clue scroll.
  */
-abstract class CoordinateClueScroll
-/**
- * Instantiates a new Coordinate clue scroll.
- *
- * @param name     the name
- * @param clueId   the clue id
- * @param level    the level
- * @param location the location
- * @param clue     the clue
- */(
+abstract class CoordinateClueScroll(
     name: String?, clueId: Int, level: ClueLevel?, location: Location?,
+    val clue: String?
+) : MapClueScroll(name, clueId, level, Components.TRAIL_MAP09_345, location, 0) {
+
     /**
-     * Gets clue.
+     * Displays the clue text on the interface when the player reads the clue.
      *
-     * @return the clue
+     * @param player The player reading the clue.
      */
-    val clue: String
-) : MapClueScroll(name, clueId, level, 345, location, 0) {
     override fun read(player: Player) {
         for (i in 1..8) {
             sendString(player,"", interfaceId, i)
         }
         super.read(player)
-        sendString(player,"<br><br><br><br><br>" + clue.replace("<br>", "<br><br>"), interfaceId, 1)
+        sendString(player,"<br><br><br><br><br>" + clue?.replace("<br>", "<br><br>"), interfaceId, 1)
     }
 
+    /**
+     * Handles digging at the clue location.
+     *
+     * @param player The player digging at the clue location.
+     */
     override fun dig(player: Player?) {
         val killedWizardClueId = player!!.getAttribute("killed-wizard", -1)
         if (level == ClueLevel.HARD && (killedWizardClueId == -1 || killedWizardClueId != clueId)) {
@@ -51,8 +51,13 @@ abstract class CoordinateClueScroll
         player.removeAttribute("killed-wizard")
     }
 
+    /**
+     * Spawns a wizard to attack the player as part of a hard clue scroll.
+     *
+     * @param player The player to spawn the wizard for.
+     */
     private fun spawnWizard(player: Player) {
-        val id = if (!player.skullManager.isWilderness) 1264 else 1007
+        val id = if (!player.skullManager.isWilderness) NPCs.SARADOMIN_WIZARD_1264 else NPCs.ZAMORAK_WIZARD_1007
         val wizard = NPC.create(id, player.location.transform(1, 0, 0))
         player.setAttribute("t-wizard", wizard)
         wizard.setAttribute("clue", this)
@@ -60,28 +65,28 @@ abstract class CoordinateClueScroll
         wizard.init()
         wizard.graphics(Graphics.create(86))
         wizard.faceTemporary(player, 1)
-        wizard.sendChat(if (id == 1264) "For Saradomin!" else "Die human!")
+        wizard.sendChat(if (id == NPCs.SARADOMIN_WIZARD_1264) "For Saradomin!" else "Die human!")
         wizard.properties.combatPulse.attack(player)
     }
 
     companion object {
         /**
-         * The constant SEXTANT.
+         * The sextant item used for coordinate clues.
          */
-        val SEXTANT: Item = Item(2574)
+        val SEXTANT: Item = Item(Items.SEXTANT_2574)
 
         /**
-         * The constant WATCH.
+         * The watch item used for coordinate clues.
          */
-        val WATCH: Item = Item(2575)
+        val WATCH: Item = Item(Items.WATCH_2575)
 
         /**
-         * The constant CHART.
+         * The chart item used for coordinate clues.
          */
-        val CHART: Item = Item(2576)
+        val CHART: Item = Item(Items.CHART_2576)
 
         /**
-         * The constant CLOCK_TOWER.
+         * A location used in clue validation (e.g., the clock tower).
          */
         val CLOCK_TOWER: Location = Location(2440, 3161, 0)
     }

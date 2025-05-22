@@ -43,7 +43,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
          */
 
         on(Items.SPARE_CONTROLS_4002, IntType.ITEM, "View") { player, _ ->
-            val puzzlePieces: Array<Item?>? = ((3904..3950 step 2).toList().map { Item(it) } + Item(-1)).toTypedArray()
+            val puzzlePieces: Array<Item?>? = ((Items.SLIDING_BUTTON_3904..Items.SLIDING_BUTTON_3950 step 2).toList().map { Item(it) } + Item(-1)).toTypedArray()
             val settings = IfaceSettingsBuilder().build()
             player.packetDispatch.sendIfaceSettings(settings, 6, Components.TRAIL_PUZZLE_363, 0, 25)
             player.interfaceManager.open(Component(Components.TRAIL_PUZZLE_363))
@@ -64,7 +64,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
                 player.interfaceManager.open(Component(Components.TRAIL_PUZZLE_363))
 
                 val key = "mm"
-                val items = (3904..3950 step 2).toList() + -1
+                val items = (Items.SLIDING_BUTTON_3904..Items.SLIDING_BUTTON_3950 step 2).toList() + -1
                 if (loadPuzzleState(player, key) == null) {
                     val shuffled = generateSolvablePuzzle(items)
                     savePuzzleStateInSession(player, key, shuffled)
@@ -86,7 +86,7 @@ class PuzzleBoxListener : InteractionListener, InterfaceListener {
 
             val puzzle = loadPuzzleState(player, key)?.toMutableList() ?: return@on true
             val solution = PuzzleBox.fromKey(key)?.fullSolution
-                ?: if (key == "mm") (3904..3950 step 2).toList() + -1 else return@on true
+                ?: if (key == "mm") (Items.SLIDING_BUTTON_3904..Items.SLIDING_BUTTON_3950 step 2).toList() + -1 else return@on true
 
             if (buttonID == 6 && slot in 0..24) {
                 val offsets = listOf(-1, 1, -5, 5)

@@ -126,7 +126,7 @@ class TreasureTrailManager :
      */
     fun startTrail(clue: ClueScroll) {
         setClue(clue)
-        trailLength = RandomFunction.random(clue.level.minSteps, clue.level.maxSteps)
+        trailLength = RandomFunction.random(clue.level!!.minSteps, clue.level!!.maxSteps)
         trailStage = 0
     }
 

@@ -18,7 +18,7 @@ import org.rs.consts.NPCs
  * Represents The Heckel Funch dialogue.
  *
  * Relations:
- * [CrypticClue][content.global.activity.ttrail.cryptic.CrypticClue]
+ * - [CrypticClue][content.global.activity.ttrail.clues.CrypticClue]
  */
 @Initializable
 class HeckelFunchDialogue(
@@ -37,9 +37,11 @@ class HeckelFunchDialogue(
                     sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
                     manager.clearTrail()
                 } else {
-                    ClueScroll.getClue(it.level)?.let { newClue ->
-                        sendItemDialogue(player, newClue, "You found another clue scroll.")
-                        player.inventory.add(Item(newClue.id, 1))
+                    it.level?.let { it1 ->
+                        ClueScroll.getClue(it1)?.let { newClue ->
+                            sendItemDialogue(player, newClue, "You found another clue scroll.")
+                            addItem(player, newClue.id, 1)
+                        }
                     }
                 }
             }

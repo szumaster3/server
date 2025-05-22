@@ -41,6 +41,7 @@ open class ChallengeClue : ChallengeClueScroll {
      * @param arg optional argument, not used
      * @return this instance of [ChallengeClue]
      */
+    @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         register(ChallengeClue("zoo_keeper", Items.CHALLENGE_SCROLL_2842, ClueLevel.HARD, "How many animals<br>are in the Ardougne Zoo?", NPCs.ZOO_KEEPER_28, 40))
         register(ChallengeClue("luthas", Items.CHALLENGE_SCROLL_2844, ClueLevel.HARD, "How many banana trees<br>are there in the plantation?", NPCs.LUTHAS_379, 33))

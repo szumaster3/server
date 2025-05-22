@@ -17,9 +17,9 @@ enum class PuzzleBox(
     val item: Item,
     val solutionTiles: List<Int>
 ) {
-    TROLL("troll", Item(Items.PUZZLE_BOX_3571), (3643..3666).toList()),
-    CASTLE("castle", Item(Items.PUZZLE_BOX_2795), (2749..2772).toList()),
-    TREE("tree", Item(Items.PUZZLE_BOX_3565), (3619..3642).toList());
+    TROLL("troll", Item(Items.PUZZLE_BOX_3571), (Items.SLIDING_PIECE_3643..Items.SLIDING_PIECE_3666).toList()),
+    CASTLE("castle", Item(Items.PUZZLE_BOX_2795), (Items.SLIDING_PIECE_2749..Items.SLIDING_PIECE_2772).toList()),
+    TREE("tree", Item(Items.PUZZLE_BOX_3565), (Items.SLIDING_PIECE_3619..Items.SLIDING_PIECE_3642).toList());
 
     companion object {
         /**

@@ -1,7 +1,6 @@
 package content.global.activity.ttrail.clues
 
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.npcs.UriNPC
 import content.global.activity.ttrail.scrolls.EmoteClueScroll
 import core.game.node.entity.player.link.emote.Emotes
@@ -79,7 +78,7 @@ class EmoteClue : EmoteClueScroll {
         emote = Emotes.CHEER
         register(EmoteClue("druid-circle-cheer", Items.CLUE_SCROLL_2684, ClueLevel.EASY, emote, arrayOf(intArrayOf(Items.BOOTS_4310), intArrayOf(Items.WIZARD_HAT_579), intArrayOf(Items.BRONZE_2H_SWORD_1307)), "Cheer at the Druids'<br>Circle.<br>Equip a blue wizard<br>hat, a bronze<br>two-handed sword and<br>HAM boots.", ZoneBorders(2920, 3478, 2930, 3940)))
         register(EmoteClue("games-room-cheer", Items.CLUE_SCROLL_2685, ClueLevel.EASY, emote, arrayOf(), "Cheer at the games<br>room.<br>Have nothing equipped<br>at all when you do.", ZoneBorders(2194, 4946, 2221, 4973)))
-        register(EmoteClue("barb-agility-cheer", Items.CLUE_SCROLL_2686, ClueLevel.MEDIUM, emote, arrayOf(intArrayOf(Items.STEEL_PLATEBODY_1119), intArrayOf(Items.MAPLE_SHORTBOW_853), WILDERNESS_CAPES), "Cheer in the Barbarian<br>Agility Arena.<br>Headbang before you<br>talk to me.<br>Equip a steel plate<br>body, maple shortbow, and a wilderness<br>cape.", ZoneBorders(2550, 3556, 2553, 3559), ZoneBorders(2529, 3542, 2553, 3559)))
+        register(EmoteClue("barb-agility-cheer", Items.CLUE_SCROLL_2686, ClueLevel.MEDIUM, emote, arrayOf(intArrayOf(Items.STEEL_PLATEBODY_1119), intArrayOf(Items.MAPLE_SHORTBOW_853), WILDERNESS_CAPES), "Cheer in the Barbarian<br>Agility Arena.<br>Headbang before you<br>talk to me.<br>Equip a steel platebody,<br>maple shortbow, and a wilderness<br>cape.", ZoneBorders(2550, 3556, 2553, 3559), ZoneBorders(2529, 3542, 2553, 3559)))
         register(EmoteClue("edge-gen-cheer", Items.CLUE_SCROLL_2687, ClueLevel.MEDIUM, emote, Emotes.DANCE, arrayOf(intArrayOf(Items.BROWN_APRON_1757), intArrayOf(Items.LEATHER_BOOTS_1061), intArrayOf(Items.LEATHER_GLOVES_1059)), "Cheer in the Edgeville general<br>store. Dance<br>before you talk to me.<br>Equip a brown apron,<br>leather boots and<br>leather gloves.", ZoneBorders(3076, 3507, 3084, 3513)))
         register(EmoteClue("ogre-pen-cheer", Items.CLUE_SCROLL_2688, ClueLevel.MEDIUM, emote, Emotes.ANGRY, arrayOf(intArrayOf(Items.GREEN_DHIDE_BODY_1135), intArrayOf(Items.GREEN_DHIDE_CHAPS_1099), intArrayOf(Items.STEEL_SQ_SHIELD_1177)), "Cheer in the Ogre Pen<br>in the Training Camp.<br>Show you are angry<br>before you talk to me.<br>Equip a green<br>dragonhide body and<br>chaps and a steel<br>square shield.", ZoneBorders(2523, 3373, 2533, 3377)))
         emote = Emotes.CLAP

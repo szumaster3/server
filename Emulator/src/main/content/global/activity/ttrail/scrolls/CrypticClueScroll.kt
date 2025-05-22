@@ -21,10 +21,10 @@ import org.rs.consts.Scenery
  * Represents a cryptic clue scroll.
  */
 abstract class CrypticClueScroll(
-    name: String,
+    name: String?,
     clueId: Int,
-    level: ClueLevel,
-    val clueText: String,
+    level: ClueLevel?,
+    val clue: String?,
     val location: Location?,
     val obj: Int = 0,
     vararg borders: ZoneBorders?
@@ -96,10 +96,10 @@ abstract class CrypticClueScroll(
             sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
             manager.clearTrail()
         } else {
-            val newClue = getClue(clueScroll.level)
+            val newClue = clueScroll.level?.let { getClue(it) }
             if (newClue != null) {
                 sendItemDialogue(player, newClue, "You found another clue scroll.")
-                addItemOrDrop(player, newClue.id, 1)
+                addItem(player, newClue.id, 1)
             }
         }
         return true
@@ -109,7 +109,7 @@ abstract class CrypticClueScroll(
      * Registers the clue's dig location to be handled by the spade digging system.
      */
     override fun configure() {
-        DigSpadeHandler.register(location!!, CrypticDigAction())
+        location?.let { DigSpadeHandler.register(it, CrypticDigAction()) }
         super.configure()
     }
 
@@ -121,7 +121,7 @@ abstract class CrypticClueScroll(
             sendString(player, "", interfaceId, i)
         }
         super.read(player)
-        sendString(player, clueText.replace("<br>", "<br><br>"), interfaceId, 1)
+        clue?.let { sendString(player, it.replace("<br>", "<br><br>"), interfaceId, 1) }
     }
 
     /**

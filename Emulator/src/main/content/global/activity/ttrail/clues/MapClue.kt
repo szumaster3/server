@@ -56,7 +56,7 @@ class MapClue : MapClueScroll {
      * @param object      the object
      * @param borders     the borders
      */
-    constructor(name: String?, clueId: Int, level: ClueLevel?, interfaceId: Int, location: Location?, `object`: Int, vararg borders: ZoneBorders?) : super(name, clueId, level, interfaceId, location, `object`, *borders.filterNotNull().toTypedArray())
+    constructor(name: String, clueId: Int, level: ClueLevel, interfaceId: Int, location: Location?, `object`: Int, vararg borders: ZoneBorders?) : super(name, clueId, level, interfaceId, location, `object`, *borders.filterNotNull().toTypedArray())
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {

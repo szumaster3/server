@@ -1,9 +1,6 @@
 package content.global.activity.ttrail
 
-import core.api.IfaceSettingsBuilder
-import core.api.addItemOrDrop
-import core.api.playJingle
-import core.api.sendItemDialogue
+import core.api.*
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.player.Player
@@ -78,7 +75,7 @@ enum class ClueLevel(
 
                 player.interfaceManager.open(Component(Components.TRAIL_REWARD_364))
 
-                if (player.inventory.remove(casket)) {
+                if (removeItem(player, casket)) {
                     var rewardValue = 0L
 
                     for (reward in rewards) {
@@ -89,31 +86,12 @@ enum class ClueLevel(
                     playerTrails.incrementClues(clueLevel)
                     playerTrails.clearTrail()
                     playJingle(player, 193)
-                    player.sendMessage("Well done, you've completed the Treasure Trail!")
-                    player.sendMessage(
-                        getChatColor(clueLevel) +
-                            "You have completed " +
-                            playerTrails.getCompletedClues(clueLevel) +
-                            " " +
-                            clueLevel.name.lowercase() +
-                            " clues.",
-                    )
-
-                    player.sendMessage(
-                        "<col=990000>Your clue is worth approximately $rewardValue gold coins!</col>",
-                    )
-
+                    sendMessage(player,"Well done, you've completed the Treasure Trail!")
+                    sendMessage(player, getChatColor(clueLevel) + "You have completed " + playerTrails.getCompletedClues(clueLevel) + " " + clueLevel.name.lowercase() + " clues.")
+                    sendMessage(player,"<col=990000>Your clue is worth approximately $rewardValue gold coins!</col>")
                     val clueIfaceSettings = IfaceSettingsBuilder().enableAllOptions().build()
-                    player.packetDispatch.sendIfaceSettings(clueIfaceSettings, 4, 364, 0, 6)
-                    InterfaceContainer.generateItems(
-                        player,
-                        rewards.toTypedArray(),
-                        arrayOf(""),
-                        364,
-                        4,
-                        3,
-                        3,
-                    )
+                    player.packetDispatch.sendIfaceSettings(clueIfaceSettings, 4, Components.TRAIL_REWARD_364, 0, 6)
+                    InterfaceContainer.generateItems(player, rewards.toTypedArray(), arrayOf(""), Components.TRAIL_REWARD_364, 4, 3, 3)
                 }
                 return
             }
@@ -139,7 +117,7 @@ enum class ClueLevel(
          * @param level the clue difficulty level.
          * @return a list of items rewarded.
          */
-        fun rollLoot(
+        private fun rollLoot(
             player: Player,
             level: ClueLevel,
         ): List<Item> {
@@ -147,7 +125,7 @@ enum class ClueLevel(
             var itemCount = RandomFunction.random(1, 6)
 
             if (level == HARD) {
-                itemCount = Math.max(itemCount, RandomFunction.random(4, 6))
+                itemCount = itemCount.coerceAtLeast(RandomFunction.random(4, 6))
             }
 
             repeat(itemCount) {
@@ -172,7 +150,7 @@ enum class ClueLevel(
          * @param level the clue difficulty level.
          * @return the color code string for chat messages.
          */
-        fun getChatColor(level: ClueLevel): String =
+        private fun getChatColor(level: ClueLevel): String =
             when (level) {
                 HARD -> "<col=ff1a1a>"
                 MEDIUM -> "<col=b38f00>"

@@ -17,7 +17,7 @@ class CrypticClue : CrypticClueScroll {
     /**
      * Constructs a new Cryptic clue plugin.
      */
-    constructor() : this("", -1, null, null, null)
+    constructor() : this(null, -1, null, null, null)
 
     /**
      * Constructs a cryptic clue with basic parameters.
@@ -25,10 +25,10 @@ class CrypticClue : CrypticClueScroll {
      * @param name     the internal name of the clue scroll
      * @param clueId   the item id of the clue scroll
      * @param level    the difficulty level of the clue
-     * @param clueText the text/riddle of the clue
+     * @param clue the text/riddle of the clue
      * @param location the in-game location to solve the clue
      */
-    constructor(name: String, clueId: Int, level: ClueLevel?, clueText: String?, location: Location?) : super(name, clueId, level!!, clueText!!, location)
+    constructor(name: String?, clueId: Int, level: ClueLevel?, clue: String?, location: Location?) : super(name, clueId, level, clue, location)
 
     /**
      * Constructs a cryptic clue with additional object and zone data.
@@ -36,12 +36,12 @@ class CrypticClue : CrypticClueScroll {
      * @param name     the internal name of the clue scroll
      * @param clueId   the item id of the clue scroll
      * @param level    the difficulty level of the clue
-     * @param clueText the text/riddle of the clue
+     * @param clue the text/riddle of the clue
      * @param location the in-game location to solve the clue
      * @param object   the object id to interact with (if applicable)
      * @param borders  the zone borders that define the clue's area
      */
-    constructor(name: String, clueId: Int, level: ClueLevel, clueText: String, location: Location, `object`: Int, vararg borders: ZoneBorders) : super(name, clueId, level, clueText, location, `object`, *borders)
+    constructor(name: String, clueId: Int, level: ClueLevel, clue: String, location: Location, `object`: Int, vararg borders: ZoneBorders) : super(name, clueId, level, clue, location, `object`, *borders)
 
     /**
      * Registers all known cryptic clue scrolls to the game when the plugin is loaded.
@@ -56,12 +56,12 @@ class CrypticClue : CrypticClueScroll {
         register(CrypticClue("elemental-workshop-crates", Items.CLUE_SCROLL_10192, ClueLevel.HARD, "You have all of the elements<br>available to solve this clue.<br>Fortunately you do not have to<br>go so far as to stand in a<br>draft.", Location.create(2723, 9891, 0), Scenery.CRATE_18506, ZoneBorders(2722, 9890, 2724, 9892)))
         register(CrypticClue("east-ardougne-crate", Items.CLUE_SCROLL_10194, ClueLevel.EASY, "<br><br><br>A crate found in the<br>tower of a church is<br>your next stop.", Location.create(2612, 3306, 1), Scenery.CRATE_34585, ZoneBorders(2609, 3304, 2621, 3311, 1)))
         register(CrypticClue("aggie-house-draynor", Items.CLUE_SCROLL_10196, ClueLevel.HARD, "Aggie I see, Lonely and southern I<br>feel, I am neither inside nor outside the<br>house,<br>yet no house would be complete without<br>me. The treasure lies beneath me!", Location.create(3085, 3255, 0)))
-        register(CrypticClue("wilderness-sapphire", Items.CLUE_SCROLL_10198, ClueLevel.HARD, "46 is my number,<br>my body is the colour of burnt orange<br>and crawls among those with eight.<br>Three mouths I have, yet I cannot<br>eat. My blinking blue eye hides my grave.", Location.create(3169, 3885, 0)))
+        register(CrypticClue("wilderness-sapphire", Items.CLUE_SCROLL_10198, ClueLevel.HARD, "46 is my number,<br>my body is the colour of burnt orange<br>and crawls among those with eight.<br>Three mouths I have,<br>yet I cannot eat.<br>My blinking blue eye hides my grave.", Location.create(3169, 3885, 0)))
         register(CrypticClue("almera-house", Items.CLUE_SCROLL_10200, ClueLevel.HARD, "A great view - watch<br>the rapidly drying<br>hides get splashed.<br>Check the box you are sitting on.", Location.create(2523, 3493, 1), Scenery.BOXES_359, ZoneBorders(2522, 3492, 2524, 3494, 1)))
         register(CrypticClue("canifis-clothes-shop", Items.CLUE_SCROLL_10202, ClueLevel.MEDIUM, "A town with a different sort of<br>night-life is your destination.<br>Search for some crates<br>in one of the houses.", Location.create(3498, 3507, 0), Scenery.CRATE_24911, ZoneBorders(3497, 3506, 3500, 3508)))
         register(CrypticClue("nardah-flying-rug", Items.CLUE_SCROLL_10204, ClueLevel.HARD, "As you desert this town,<br>keep an eye out for a set of spines<br>that could ruin nearby rugs:<br>dig carefully around the greenery.", Location.create(3397, 2917, 0)))
         register(CrypticClue("west-ardougne-prison", Items.CLUE_SCROLL_10206, ClueLevel.MEDIUM, "Being this far north has meant<br>that these crates have escaped<br>being battled over.", Location.create(2519, 3259, 0), Scenery.CRATE_40495, ZoneBorders(2517, 3258, 2521, 3260)))
-        register(CrypticClue("sandstone-granite-quarry", Items.CLUE_SCROLL_10208, ClueLevel.MEDIUM, "Brush off the sand and dig in the<br>quarry. There is a wheely handy barrow to<br>the east. Don't worry, it's coal to dig there—in<br>fact, it's all oclay.", Location.create(3175, 2915, 0)))
+        register(CrypticClue("sandstone-granite-quarry", Items.CLUE_SCROLL_10208, ClueLevel.MEDIUM, "Brush off the sand and dig in the<br>quarry.<br>There is a wheely handy<br>barrow to the east.<br>Don't worry, it's coal to dig there-in<br>fact, it's all oclay.", Location.create(3175, 2915, 0)))
         register(CrypticClue("port-phasmatys-tree", Items.CLUE_SCROLL_10210, ClueLevel.MEDIUM, "By the town of the dead,<br>walk south down a rickety bridge,<br>then dig near the slime-covered<br>tree.", Location.create(3644, 3494, 0)))
         register(CrypticClue("edgeville-yew-tree", Items.CLUE_SCROLL_10212, ClueLevel.HARD, "Come to the evil ledge,<br>Yew know yew want to.<br>And try not to get stung.", Location.create(3090, 3469, 0)))
         register(CrypticClue("mortton-circle-shadows", Items.CLUE_SCROLL_10214, ClueLevel.HARD, "Covered in shadows, the centre<br>of the circle is where you will<br>find the answer.", Location.create(3488, 3289, 0)))
@@ -71,7 +71,7 @@ class CrypticClue : CrypticClueScroll {
         register(CrypticClue("varrock-church", Items.CLUE_SCROLL_10222, ClueLevel.MEDIUM, "You'll need to look for<br>a town with a central<br>fountain. Look for a locked<br>chest in the town's chapel.", Location.create(3256, 3487, 0), Scenery.OPEN_CHEST_24204, ZoneBorders(2524, 3435, 2526, 3438)))
         register(CrypticClue("monastery-monks", Items.CLUE_SCROLL_10224, ClueLevel.MEDIUM, "Find a crate close to the<br>monks that like to paaarty!", Location.create(2614, 3204, 0), Scenery.CRATE_354, ZoneBorders(2613, 3203, 2615, 3205)))
         register(CrypticClue("mage-training-bookcase", Items.CLUE_SCROLL_10226, ClueLevel.MEDIUM, "For any aspiring mage,<br>I'm sure searching this bookcase<br>will be a rewarding experience.", Location.create(3366, 3319, 1), Scenery.OLD_BOOKSHELF_10723, ZoneBorders(3365, 3318, 3367, 3320, 1)))
-        register(CrypticClue("lumbridge-windmill", Items.CLUE_SCROLL_10228, ClueLevel.HARD, "Four blades I have yet I draw no blood.<br>But I mash and turn my victims to powder.<br>Search in my head,<br>search in my rafters,<br>Where my blades are louder.", Location.create(3166, 3309, 2), Scenery.CRATE_12963, ZoneBorders(3165, 3308, 3167, 3310, 2)))
+        register(CrypticClue("lumbridge-windmill", Items.CLUE_SCROLL_10228, ClueLevel.HARD, "Four blades I have yet I draw no blood.<br>But I mash andturn my victims to<br>powder.<br>Search in my head,<br>search in my rafters,<br>Where my blades are louder.", Location.create(3166, 3309, 2), Scenery.CRATE_12963, ZoneBorders(3165, 3308, 3167, 3310, 2)))
         register(CrypticClue("lighthouse-drawers", Items.CLUE_SCROLL_10230, ClueLevel.MEDIUM, "Go to this building to be<br>illuminated, and search the<br>drawers while you're there.", Location.create(2512, 3641, 1), Scenery.DRAWERS_351, ZoneBorders(2511, 3639, 2513, 3641, 1)))
         register(CrypticClue("fishing-platform-crate", Items.CLUE_SCROLL_10232, ClueLevel.MEDIUM, "Try not to step on<br>the crates that dot<br>this platform.", Location.create(2764, 3273, 0), Scenery.CRATE_18502, ZoneBorders(2763, 3272, 2765, 3274)))
         register(CrypticClue("lumbridge-crates", Items.CLUE_SCROLL_10234, ClueLevel.HARD, "You will need to under-cook<br>to solve this one.", Location.create(3219, 9617, 0), Scenery.CRATE_357, ZoneBorders(3218, 9616, 3220, 9618)))
@@ -91,7 +91,7 @@ class CrypticClue : CrypticClueScroll {
         register(CrypticClue("braine-death-island-lake", Items.CLUE_SCROLL_10262, ClueLevel.HARD, "You will need to wash the old ash<br>off of your spade when you dig here,<br>but the only water nearby is<br>stagnant.", Location.create(2136, 5166, 0)))
         register(CrypticClue("digsite-doug-deep", Items.CLUE_SCROLL_10264, ClueLevel.HARD, "You'll need to have Doug Deep<br>into the distant<br>past to get to these sacks.", Location.create(3348, 9758, 0), Scenery.SACKS_32049, ZoneBorders(3347, 9757, 3349, 9759)))
         register(CrypticClue("captain-klemfoodle", Items.CLUE_SCROLL_10266, ClueLevel.MEDIUM, "You can cook food on me,<br>but don't cook any foodles -<br>That would be just wrong.", Location.create(2969, 2975, 0), Scenery.FIRE_2732, ZoneBorders(2968, 2974, 2970, 2976)))
-        register(CrypticClue("lubufu-brimhaven", Items.CLUE_SCROLL_10268, ClueLevel.MEDIUM, "The owner of this crate has a hunch that he put more than fish inside.", Location.create(2770, 3172, 0), Scenery.CRATE_366, ZoneBorders(2769, 3171, 2771, 3173)))
+        register(CrypticClue("lubufu-brimhaven", Items.CLUE_SCROLL_10268, ClueLevel.MEDIUM, "The owner of this crate has<br>a hunch that he put more<br>than fish inside.", Location.create(2770, 3172, 0), Scenery.CRATE_366, ZoneBorders(2769, 3171, 2771, 3173)))
         return this
     }
 }

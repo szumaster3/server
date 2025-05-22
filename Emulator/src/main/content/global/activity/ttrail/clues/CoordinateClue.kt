@@ -25,7 +25,7 @@ class CoordinateClue
     level: ClueLevel? = null,
     location: Location? = null,
     clue: String? = null
-) : CoordinateClueScroll(name, clueId, level, location, clue!!) {
+) : CoordinateClueScroll(name, clueId, level, location, clue) {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         register(CoordinateClue("tree-gnome-coord", Items.CLUE_SCROLL_2807, ClueLevel.MEDIUM, Location(2478, 3158, 0), "00 degrees 05 minutes south<br>01 degrees 13 minutes east"))

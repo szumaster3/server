@@ -34,7 +34,7 @@ abstract class AnagramClueScroll(
     val npcId: Int,
     level: ClueLevel?,
     val challenge: Int? = null
-) : ClueScroll(name!!, clueId, level!!, Components.TRAIL_MAP09_345) {
+) : ClueScroll(name, clueId, level, Components.TRAIL_MAP09_345) {
 
     /**
      * Handles player interaction with the NPC for this clue.
@@ -160,10 +160,10 @@ abstract class AnagramClueScroll(
                                 sendItemDialogue(p, Items.CASKET_405, "You've found a casket!")
                                 manager.clearTrail()
                             } else {
-                                val newClue = getClue(clueScroll!!.level)
+                                val newClue = clueScroll?.level?.let { getClue(it) }
                                 if (newClue != null) {
                                     sendItemDialogue(p, newClue, "You receive another clue scroll.")
-                                    p.inventory.add(newClue)
+                                    addItem(player, newClue.id, 1)
                                 }
                             }
                         }

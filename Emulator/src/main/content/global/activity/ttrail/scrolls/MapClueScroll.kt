@@ -16,7 +16,8 @@ import org.rs.consts.Items
 /**
  * Represents an map clue scroll.
  */
-abstract class MapClueScroll(name: String, clueId: Int, level: ClueLevel, interfaceId: Int, val location: Location?, val `object`: Int, vararg borders: ZoneBorders?
+abstract class MapClueScroll(
+    name: String?, clueId: Int, level: ClueLevel?, interfaceId: Int, val location: Location?, val `object`: Int, vararg borders: ZoneBorders?
 ) : ClueScroll(name, clueId, level, interfaceId, borders.filterNotNull().toTypedArray()) {
 
     override fun interact(e: Entity, target: Node, option: Option): Boolean {

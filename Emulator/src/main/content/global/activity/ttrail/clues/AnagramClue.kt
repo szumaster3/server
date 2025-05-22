@@ -42,6 +42,7 @@ open class AnagramClue : AnagramClueScroll {
      * @param arg optional argument, not used
      * @return this instance of [AnagramClue]
      */
+    @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         register(AnagramClue("a_bas", Items.CLUE_SCROLL_7236, "A BAS", NPCs.SABA_1070, ClueLevel.HARD, PuzzleBox.getRandomPuzzleBox()))
         register(AnagramClue("a_zen_she", Items.CLUE_SCROLL_7238, "A ZEN SHE", NPCs.ZENESHA_589, ClueLevel.HARD, PuzzleBox.getRandomPuzzleBox()))

@@ -30,13 +30,13 @@ import org.rs.consts.NPCs
  */
 abstract class ChallengeClueScroll(
     name: String?,
-    clueId: Int?,
+    clueId: Int,
     level: ClueLevel?,
     val question: String?,
     val npc: Int?,
     val answer: Int?,
     vararg borders: ZoneBorders,
-) : ClueScroll(name!!, clueId!!, level!!, Components.TRAIL_MAP09_345, borders) {
+) : ClueScroll(name, clueId, level, Components.TRAIL_MAP09_345, borders) {
 
     /**
      * Shows clue question to the player.
@@ -130,10 +130,10 @@ abstract class ChallengeClueScroll(
                                         sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
                                         manager.clearTrail()
                                     } else {
-                                        val newClue = getClue(clueScroll.level)
+                                        val newClue = clueScroll.level?.let { getClue(it) }
                                         if (newClue != null) {
                                             sendItemDialogue(player, newClue, "You receive another clue scroll.")
-                                            player.inventory.add(newClue)
+                                            addItem(player, newClue.id, 1)
                                         }
                                     }
                                 }

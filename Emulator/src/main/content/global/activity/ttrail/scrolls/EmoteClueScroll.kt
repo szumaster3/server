@@ -23,7 +23,7 @@ abstract class EmoteClueScroll(
     private val clue: String?,
     vararg borders: ZoneBorders?
 ) : ClueScroll(
-    name!!, clueId, level!!, 345, borders.filterNotNull().toTypedArray()
+    name, clueId, level, 345, borders.filterNotNull().toTypedArray()
 ) {
 
     /**
