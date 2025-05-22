@@ -11,7 +11,7 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 import org.rs.consts.Vars
 
-class MuseumDisplays :
+class MuseumDisplayInterface :
     InterfaceListener,
     InteractionListener {
     val interfaceModel = "ifaces:534:model"

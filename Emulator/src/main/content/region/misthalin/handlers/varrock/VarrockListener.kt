@@ -9,7 +9,7 @@ import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.getQuestPoints
 import core.api.quest.getQuestStage
-import core.game.dialogue.DialogueFile
+import core.api.ui.closeDialogue
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
@@ -35,10 +35,18 @@ import org.rs.consts.*
 
 class VarrockListener : InteractionListener {
     override fun defineListeners() {
+        /*
+         * Handles talking to Thessalia.
+         */
+
         on(NPCs.THESSALIA_548, IntType.NPC, "change-clothes") { player, _ ->
             openDialogue(player, NPCs.THESSALIA_548, true, true, true)
             return@on true
         }
+
+        /*
+         * Handles searching the broken cart.
+         */
 
         on(Scenery.BROKEN_CART_23055, IntType.SCENERY, "search") { player, _ ->
             sendDialogueLines(
@@ -49,6 +57,10 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles opening the Hill Giant doors.
+         */
+
         on(Scenery.DOOR_1804, IntType.SCENERY, "open") { player, node ->
             if (player.location == Location.create(3115, 3449, 0) && !inInventory(player, Items.BRASS_KEY_983)) {
                 sendMessage(player, "This door is locked.")
@@ -57,6 +69,10 @@ class VarrockListener : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
         }
+
+        /*
+         * Handles using the brass key on the Hill Giant doors.
+         */
 
         onUseWith(IntType.SCENERY, Items.BRASS_KEY_983, Scenery.DOOR_1804) { player, used, with ->
             if (player.location == Location.create(3115, 3449, 0) && used.id != Items.BRASS_KEY_983) {
@@ -67,30 +83,44 @@ class VarrockListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles opening Guidor's house doors.
+         */
+
         on(Scenery.BEDROOM_DOOR_2032, IntType.SCENERY, "open") { player, node ->
-            if (!anyInEquipment(player, Items.PRIEST_GOWN_426, Items.PRIEST_GOWN_428) &&
-                getQuestStage(player, Quests.BIOHAZARD) >= 11
-            ) {
-                openDialogue(player, GuidorsWifeDialogue())
-            } else if (inEquipment(player, Items.PRIEST_GOWN_426) &&
-                !inEquipment(
-                    player,
-                    Items.PRIEST_GOWN_428,
-                ) &&
-                getQuestStage(player, Quests.BIOHAZARD) >= 11
-            ) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                if (player.location.x == 3282) sendMessage(player, "Guidor's wife allows you to go in.")
-            } else {
+            val questStage = getQuestStage(player, Quests.BIOHAZARD)
+            val hasGownTop = inEquipment(player, Items.PRIEST_GOWN_426)
+            val hasGownBottom = inEquipment(player, Items.PRIEST_GOWN_428)
+            val hasAnyGown = hasGownTop || hasGownBottom
+
+            if (questStage < 11) {
                 sendNPCDialogue(
                     player,
                     NPCs.GUIDORS_WIFE_342,
                     "Please leave my husband alone. He's very sick, and I don't want anyone bothering him.",
-                    FaceAnim.SAD,
+                    FaceAnim.SAD
                 )
+            } else {
+                when {
+                    !hasAnyGown -> openDialogue(player, GuidorsWifeDialogue())
+                    hasGownTop && !hasGownBottom -> {
+                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                        if (player.location.x == 3282) sendMessage(player, "Guidor's wife allows you to go in.")
+                    }
+                    else -> sendNPCDialogue(
+                        player,
+                        NPCs.GUIDORS_WIFE_342,
+                        "Please leave my husband alone. He's very sick, and I don't want anyone bothering him.",
+                        FaceAnim.SAD
+                    )
+                }
             }
             return@on true
         }
+
+        /*
+         * Handles opening the Champion's Guild doors.
+         */
 
         on(Scenery.DOOR_1805, IntType.SCENERY, "open") { player, node ->
             if (getQuestPoints(player) < 32) {
@@ -115,7 +145,7 @@ class VarrockListener : InteractionListener {
         }
 
         /*
-         * Clue scroll (Varrock church)
+         * Handles opening the Champion's Guild chest and the Varrock Chuck clue chest.
          */
 
         on(Scenery.CLOSED_CHEST_24203, IntType.SCENERY, "open") { player, node ->
@@ -139,10 +169,18 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles closing the chest.
+         */
+
         on(Scenery.OPEN_CHEST_24204, IntType.SCENERY, "shut") { _, node ->
             replaceScenery(node.asScenery(), Scenery.CLOSED_CHEST_24203, -1, node.location)
             return@on true
         }
+
+        /*
+         * Handles searching the Champion's Guild chest.
+         */
 
         on(Scenery.OPEN_CHEST_24204, IntType.SCENERY, "search") { player, _ ->
             val randomAmount = RandomFunction.random(5, 20)
@@ -163,25 +201,35 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles knocking at the door.
+         */
+
         on(Scenery.DOOR_24389, IntType.SCENERY, "knock-at") { player, node ->
             openDialogue(player, KnockatDoorDialogue(), node.asScenery())
             return@on true
         }
 
+        /*
+         * Handles opening the Cook's Guild doors.
+         */
         on(intArrayOf(Scenery.DOOR_2712, Scenery.DOOR_26810), IntType.SCENERY, "open") { player, node ->
-            var requiredItems =
-                anyInEquipment(
-                    player,
-                    Items.CHEFS_HAT_1949,
-                    Items.COOKING_CAPE_9801,
-                    Items.COOKING_CAPET_9802,
-                    Items.VARROCK_ARMOUR_3_11758,
-                )
+            val requiredItems = anyInEquipment(
+                player,
+                Items.CHEFS_HAT_1949,
+                Items.COOKING_CAPE_9801,
+                Items.COOKING_CAPET_9802,
+                Items.VARROCK_ARMOUR_3_11758,
+            )
 
             when (node.id) {
                 26810 -> {
-                    if (player.location.x <= 3143 && (!inEquipment(player, Items.VARROCK_ARMOUR_3_11758) || getStatLevel(player, Skills.COOKING) < 99)) {
-                        if (GameWorld.settings?.isMembers == false) {
+                    val hasVarrockArmour = inEquipment(player, Items.VARROCK_ARMOUR_3_11758)
+                    val cookingLevel = getStatLevel(player, Skills.COOKING)
+                    val isMembers = GameWorld.settings?.isMembers ?: true
+
+                    if (player.location.x <= 3143 && (!hasVarrockArmour || cookingLevel < 99)) {
+                        if (!isMembers) {
                             sendNPCDialogue(player, NPCs.HEAD_CHEF_847, "The bank's closed. You just can't get the staff these days.")
                         } else {
                             sendNPCDialogue(player, NPCs.HEAD_CHEF_847, "You need to have completed the hard Varrock diary and have 99 Cooking to enter.")
@@ -192,35 +240,37 @@ class VarrockListener : InteractionListener {
                 }
 
                 2712 -> {
-                    if (getStatLevel(player, Skills.COOKING) < 32) {
-                        if (!requiredItems) {
-                            sendNPCDialogue(
-                                player,
-                                NPCs.HEAD_CHEF_847,
-                                "Sorry. Only the finest chefs are allowed in here. Get your cooking level up to 32 and come back wearing a chef's hat.",
-                            )
-                        } else {
-                            sendNPCDialogue(
-                                player,
-                                NPCs.HEAD_CHEF_847,
-                                "Sorry. Only the finest chefs are allowed in here. Get your cooking level up to 32.",
-                            )
-                        }
-                    } else if (!requiredItems && player.location.y <= 3443) {
-                        sendNPCDialogueLines(
-                            player,
-                            NPCs.HEAD_CHEF_847,FaceAnim.NEUTRAL,false,
-                            "You can't come in here unless you're wearing a chef's", "hat, or something like that.",
-                        )
-                    } else {
-                        if (inEquipment(player, Items.VARROCK_ARMOUR_3_11758)) {
-                            sendNPCDialogue(
-                                player,
-                                NPCs.HEAD_CHEF_847,
-                                "My word! A master explorer of Varrock! Come in, come in! You are more than welcome in here, my friend!",
+                    val cookingLevel = getStatLevel(player, Skills.COOKING)
+                    val hasVarrockArmour = inEquipment(player, Items.VARROCK_ARMOUR_3_11758)
+                    val yPos = player.location.y
+
+                    when {
+                        cookingLevel < 32 -> {
+                            sendNPCDialogue(player, NPCs.HEAD_CHEF_847,
+                                if (requiredItems)
+                                    "Sorry. Only the finest chefs are allowed in here. Get your cooking level up to 32."
+                                else
+                                    "Sorry. Only the finest chefs are allowed in here. Get your cooking level up to 32 and come back wearing a chef's hat."
                             )
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+
+                        !requiredItems && yPos <= 3443 -> {
+                            sendNPCDialogueLines(
+                                player,
+                                NPCs.HEAD_CHEF_847,
+                                FaceAnim.NEUTRAL,
+                                false,
+                                "You can't come in here unless you're wearing a chef's",
+                                "hat, or something like that."
+                            )
+                        }
+
+                        else -> {
+                            if (hasVarrockArmour) {
+                                sendNPCDialogue(player, NPCs.HEAD_CHEF_847, "My word! A master explorer of Varrock! Come in, come in! You are more than welcome in here, my friend!")
+                            }
+                            DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                        }
                     }
                 }
             }
@@ -228,9 +278,16 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
-        on(BERRIES, IntType.SCENERY, "pick-from") { player, node ->
+        /*
+         * Handles picking berries from bushes.
+         */
 
-            if (node.id == Scenery.REDBERRY_BUSH_23630 || node.id == Scenery.CADAVA_BUSH_23627) {
+        on(BERRIES, IntType.SCENERY, "pick-from") { player, node ->
+            val emptyBushes = setOf(Scenery.REDBERRY_BUSH_23630, Scenery.CADAVA_BUSH_23627)
+            val redBerryBushes = setOf(Scenery.REDBERRY_BUSH_23628, Scenery.REDBERRY_BUSH_23629)
+
+
+            if (node.id in emptyBushes) {
                 sendMessage(player, "There are no berries left on this bush.")
                 sendMessage(player, "More berries will grow soon.")
                 return@on true
@@ -241,29 +298,27 @@ class VarrockListener : InteractionListener {
                 return@on true
             }
 
-            stopWalk(player)
-            lock(player, 3)
-            animate(player, Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
+            player.lock(1)
+            runTask(player, 0) {
+                animate(player, Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
+                val berriesId = if (node.id in redBerryBushes) Items.REDBERRIES_1951 else Items.CADAVA_BERRIES_753
+                addItem(player, berriesId)
 
-            if (node.id == Scenery.REDBERRY_BUSH_23628 || node.id == Scenery.REDBERRY_BUSH_23629) {
-                addItem(player, Items.REDBERRIES_1951)
-            } else {
-                addItem(player, Items.CADAVA_BERRIES_753)
-            }
-
-            if (COUNTER == 2) {
-                if (node.id != Scenery.REDBERRY_BUSH_23628 || node.id != Scenery.REDBERRY_BUSH_23629) {
-                    replaceScenery(node.asScenery(), Scenery.REDBERRY_BUSH_23630, 30)
+                if (COUNTER == 2) {
+                    val newSceneryId =
+                        if (node.id in redBerryBushes) Scenery.REDBERRY_BUSH_23630 else Scenery.CADAVA_BUSH_23627
+                    replaceScenery(node.asScenery(), newSceneryId, 30)
+                    COUNTER = 0
                 } else {
-                    replaceScenery(node.asScenery(), Scenery.CADAVA_BUSH_23627, 30)
+                    COUNTER++
                 }
-
-                COUNTER = 0
-                return@on true
             }
-            COUNTER++
             return@on true
         }
+
+        /*
+         * Zone for Varrock Guards to track pickpocket attempts.
+         */
 
         val zone =
             object : MapZone("Varrock Guards", true) {
@@ -290,6 +345,10 @@ class VarrockListener : InteractionListener {
         registerMapZone(zone, ZoneBorders(3180, 3420, 3165, 3435))
         registerMapZone(zone, ZoneBorders(3280, 3422, 3266, 3435))
 
+        /*
+         * Handles reading the signpost about Varrock guards.
+         */
+
         on(Scenery.SIGNPOST_31298, IntType.SCENERY, "read") { player, _ ->
             val pickpocketCount = GlobalStatistics.getDailyGuardPickpockets()
             log(this::class.java, Log.FINE, "Is equal? ${pickpocketCount == 0}")
@@ -315,6 +374,10 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles climbing down the trapdoor.
+         */
+
         on(Scenery.TRAPDOOR_17985, IntType.SCENERY, "climb-down") { player, _ ->
             ClimbActionHandler.climb(
                 player,
@@ -325,6 +388,10 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles using the portal.
+         */
+
         on(Scenery.PORTAL_28780, IntType.SCENERY, "use") { player, _ ->
             visualize(player, -1, Graphics.CURSE_IMPACT_110)
             queueScript(player, 1, QueueStrength.SOFT) {
@@ -334,88 +401,114 @@ class VarrockListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles reading the plaque.
+         */
+
         on(Scenery.PLAQUE_23636, IntType.SCENERY, "read") { player, _ ->
             openInterface(player, Components.SOA_PLAQUE_531)
             return@on true
         }
 
+        /*
+         * Handles climbing down the ladder.
+         */
+
         on(Scenery.LADDER_1749, IntType.SCENERY, "climb-down") { player, _ ->
-            if (player.location.z == 2) {
-                ClimbActionHandler.climb(
-                    player,
-                    Animation(Animations.MULTI_BEND_OVER_827),
-                    Location.create(3097, 3432, 1),
-                )
-            } else {
-                ClimbActionHandler.climb(
-                    player,
-                    Animation(Animations.MULTI_BEND_OVER_827),
-                    Location.create(3096, 3432, 0),
-                )
-            }
+            val location = if (player.location.z == 2) Location.create(3097, 3432, 1) else Location.create(3096, 3432, 0)
+            ClimbActionHandler.climb(player, Animation(Animations.MULTI_BEND_OVER_827), location)
             return@on true
         }
+
+        /*
+         * Handles opening the drawers.
+         */
 
         on(Scenery.DRAWERS_17466, IntType.SCENERY, "open") { _, node ->
             replaceScenery(node.asScenery(), Scenery.DRAWERS_24322, -1)
             return@on true
         }
 
+        /*
+         * Handles closing the drawers.
+         */
+
         on(Scenery.DRAWERS_24322, IntType.SCENERY, "close") { _, node ->
             replaceScenery(node.asScenery(), Scenery.DRAWERS_17466, -1)
             return@on true
         }
 
+        /*
+         * Handles opening the hidden trapdoor at GE.
+         */
+
         on(HIDDEN_TRAPDOOR, IntType.SCENERY, "open") { player, _ ->
-            openDialogue(
-                player,
-                object : DialogueFile() {
-                    val keldagrimVisited = getAttribute(player, "keldagrim-visited", false)
+            val visited = getAttribute(player, "keldagrim-visited", false)
 
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
-                        when (stage) {
-                            0 -> {
-                                if (!keldagrimVisited) {
-                                    end()
-                                    sendMessage(player, "Perhaps I should visit Keldagrim first.")
-                                } else {
-                                    options("Travel to Keldagrim", "Nevermind.").also { stage++ }
-                                }
+            if (!visited) {
+                sendDialogue(player, "You must visit Keldagrim to use this shortcut.")
+            } else {
+                sendDialogueLines(
+                    player,
+                    "This trapdoor leads to a small dwarven mine cart station. The mine",
+                    "cart will take you to Keldagrim."
+                )
+
+                addDialogueAction(player) { _, button ->
+                    sendDialogueOptions(player, "Select an option", "Travel to Keldagrim.", "Stay here.")
+                    addDialogueAction(player) { _, option ->
+                        when (option) {
+                            2 -> {
+                                closeDialogue(player)
+                                MinecartTravel.goToKeldagrim(player)
                             }
-
-                            1 ->
-                                when (buttonID) {
-                                    1 -> MinecartTravel.goToKeldagrim(player).also { end() }
-                                    2 -> end()
-                                }
+                            else -> closeDialogue(player)
                         }
                     }
-                },
-            )
-            return@on true
+                }
+            }
+
+            true
         }
+
+        /*
+         * Handles talking to Sawmill Operator.
+         */
 
         on(SAWMILL_OPERATOR, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, SawmillOperatorDialogue())
             return@on true
         }
 
+        /*
+         * Handles buy planks interaction with Sawmill Operator.
+         */
+
         on(SAWMILL_OPERATOR, IntType.NPC, "buy-plank") { player, _ ->
             openInterface(player, Components.POH_SAWMILL_403)
             return@on true
         }
+
+        /*
+         * Handles trade interaction with Sawmill Operator.
+         */
 
         on(SAWMILL_OPERATOR, IntType.NPC, "trade") { player, _ ->
             openNpcShop(player, SAWMILL_OPERATOR)
             return@on true
         }
 
+        /*
+         * Set destination for all Sawmill Operator interactions
+         */
+
         setDest(IntType.NPC, intArrayOf(SAWMILL_OPERATOR), "talk-to", "buy-plank", "trade") { _, _ ->
             return@setDest Location.create(3302, 3491, 0)
         }
+
+        /*
+         * Handles reading the Varrock Census book
+         */
 
         on(Scenery.VARROCK_CENSUS_37209, IntType.SCENERY, "read") { player, _ ->
             sendPlayerDialogue(player, "Hmm. The Varrock Census - year 160. That means it's nine years out of date.")
@@ -426,6 +519,10 @@ class VarrockListener : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles picking up a cup of tea from the ground.
+         */
 
         on(Items.CUP_OF_TEA_712, IntType.GROUND_ITEM, "take") { player, node ->
             val teaCup = node as GroundItem
@@ -454,6 +551,10 @@ class VarrockListener : InteractionListener {
 
             return@on true
         }
+
+        /*
+         * Handles trading with the Tea Seller NPC.
+         */
 
         on(NPCs.TEA_SELLER_595, IntType.NPC, "trade") { player, node ->
             val npc = node.asNpc()

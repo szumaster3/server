@@ -5,6 +5,10 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.world.map.Location
 
+/**
+ * Represents the special ladder interactions.
+ * TODO: Add to the location of the ladder the possibility of setting direction.
+ */
 enum class SpecialLadder(
     private val ladderLoc: Location,
     private val destLoc: Location,
@@ -592,6 +596,10 @@ enum class SpecialLadder(
     VARROCK_FUR_SHOP_UP(
         ladderLoc = Location.create(3283, 3398, 0),
         destLoc = Location.create(3283, 3399, 1),
+    ),
+    VARROCK_BEHIND_BAR_STAIRS_DOWN(
+        ladderLoc = Location.create(3231, 3401, 0),
+        destLoc = Location.create(3232, 9801, 0),
     ),
     VARROCK_LOWE_STAIRS_UP(
         ladderLoc = Location.create(3233, 3424, 0),
