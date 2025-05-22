@@ -336,4 +336,7 @@ internal object GameAttributes {
 
     // Beehive cleaning.
     const val BEEHIVE_INTERACTION = "cleared-beehives"
+
+    // Balloon base destination.
+    const val BALLOON_ORIGIN = "balloon-origin-location"
 }

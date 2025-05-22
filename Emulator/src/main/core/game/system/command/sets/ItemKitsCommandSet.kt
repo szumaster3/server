@@ -1,9 +1,11 @@
 package core.game.system.command.sets
 
 import content.global.skill.crafting.spinning.Spinning
+import content.global.skill.firemaking.logs
 import content.global.skill.smithing.Bar
 import content.global.skill.summoning.SummoningPouch
 import core.api.addItem
+import core.api.addItemOrBank
 import core.api.quest.finishQuest
 import core.api.sendMessage
 import core.api.teleport
@@ -17,6 +19,23 @@ import org.rs.consts.Quests
 @Initializable
 class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
+
+        /*
+         * Provides 100 of each type of log (noted).
+         */
+
+        define(
+            name = "logkit",
+            privilege = Privilege.ADMIN,
+            usage = "::logkit",
+            description = "Gives 100 of each type of log.",
+        ) { player, _ ->
+            for (item in logs) {
+                addItemOrBank(player, item + 1, 100)
+            }
+            return@define
+        }
+
         /*
          * Provides a set of dyes.
          */
