@@ -18,6 +18,7 @@ class LarryDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
+        setTitle(player, 2)
         sendDialogueOptions(player, "I want to speak to Larry about:", "Cold War", "Penguin Hide and Seek")
         return true
     }
@@ -61,9 +62,17 @@ class LarryDialogue(
             14 -> npcl(FaceAnim.NEUTRAL, "Report back here and I will reward you for your efforts.").also { stage++ }
             15 -> playerl(FaceAnim.FRIENDLY, "Great, I'll get started right away.").also { stage++ }
             16 -> {
-                npc("Hold on, there. Take this notebook.")
-                setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS, true)
-                stage = 34
+                when {
+                    !lostNotebook -> {
+                        npc("Hold on, there. Take this notebook.")
+                        stage = 34
+                    }
+                    !getAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS, false) -> {
+                        setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS, true)
+                        end()
+                    }
+                    else -> end()
+                }
             }
             17 -> {
                 sendItemDialogue(player, Items.SPY_NOTEBOOK_13732, "You receive a penguin spy notebook.")
@@ -89,7 +98,7 @@ class LarryDialogue(
             27 -> options("YES", "NO").also { stage++ }
             28 -> when(buttonId) {
                 1 -> {
-                    if (getAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0) > 0) {
+                    if (points > 0) {
                         npc("Sure thing, what would you like to be", "rewarded with?").also { stage++ }
                     } else {
                         npc("Uh, you don't have any points", "to turn in.").also { stage = END_DIALOGUE }
