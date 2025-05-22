@@ -14,6 +14,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.net.packet.PacketWriteQueue
 import core.net.packet.context.PlayerContext
@@ -28,6 +29,70 @@ import org.rs.consts.Items
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
+
+        /*
+         * Command to send animation on the interface.
+         */
+
+        define(
+            name = "com",
+            privilege = Privilege.ADMIN,
+            usage = "::com [interfaceId] [animationId] [componentId] [loop (optional)]",
+            description = "Send an animation on the interface component. Use optional 'loop' to repeat.",
+        ) { player, args ->
+            if (args.size < 4) {
+                return@define reject(player, "Usage: ::com [interfaceId] [animationId] [componentId] [loop (optional)]")
+            }
+
+            val interfaceId = args[1].toIntOrNull()
+            val animationIdStart = args[2].toIntOrNull()
+            val componentId = args[3].toIntOrNull()
+            val loop = args.getOrNull(4)?.toBooleanStrictOrNull() ?: false
+
+            if (interfaceId == null || animationIdStart == null || componentId == null) {
+                return@define reject(player, "All arguments must be valid integers.")
+            }
+
+            var animationId = animationIdStart
+
+            val pulse = object : Pulse(3) {
+                override fun pulse(): Boolean {
+                    player.packetDispatch.sendAnimationInterface(animationId, interfaceId, componentId)
+                    sendMessage(player, "Played animation [$animationId] on interface [$interfaceId] component [$componentId].")
+
+                    if (loop) {
+                        animationId++
+                        return false
+                    }
+
+                    return true
+                }
+            }
+
+            (player.attributes.remove("com_pulse") as? Pulse)?.stop()
+
+            if (loop) {
+                player.attributes["com_pulse"] = pulse
+            }
+
+            submitWorldPulse(pulse)
+        }
+
+        define(
+            name = "stopcom",
+            privilege = Privilege.ADMIN,
+            usage = "::stopcom",
+            description = "Stops the looped interface animation started with ::com.",
+        ) { player, _ ->
+            val pulse = player.attributes.remove("com_pulse") as? Pulse
+            if (pulse != null) {
+                pulse.stop()
+                sendMessage(player, "Animation loop stopped.")
+            } else {
+                sendMessage(player, "No animation loop was running.")
+            }
+        }
+
         /*
          * Command to spawn all Ancient Pages into the inventory.
          */
