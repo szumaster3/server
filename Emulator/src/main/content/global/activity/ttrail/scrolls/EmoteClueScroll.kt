@@ -99,6 +99,9 @@ abstract class EmoteClueScroll(
         if (doubleAgent) {
             uri.sendChat("I expect you to die!")
             uri.properties.combatPulse.attack(player)
+        } else {
+            uri.animator.animate(
+            Animation.create(Animations.WAVE_863))
         }
     }
 
