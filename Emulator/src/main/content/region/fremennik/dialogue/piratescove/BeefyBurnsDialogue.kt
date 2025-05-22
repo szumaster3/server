@@ -25,11 +25,7 @@ class BeefyBurnsDialogue(
         when (stage) {
             0 -> npc(FaceAnim.LAUGH, "My speciality! What else could I be cooking?").also { stage++ }
             1 -> player(FaceAnim.THINKING, "Ok, and your speciality is...?").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.LAUGH,
-                    "Boiled shark guts with a hint of rosemary and a dash of squid ink.",
-                ).also { stage++ }
+            2 -> npcl(FaceAnim.LAUGH, "Boiled shark guts with a hint of rosemary and a dash of squid ink.").also { stage++ }
             3 -> player(FaceAnim.FRIENDLY, "I think I'll stick to making my own food.").also { stage++ }
             4 -> npc(FaceAnim.FRIENDLY, "Your loss!").also { stage = END_DIALOGUE }
         }

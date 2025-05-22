@@ -39,15 +39,15 @@ class WhiteWolfMountainListener : InteractionListener {
             queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {
-                        replaceScenery(rockScenery, Scenery.ROCKSLIDE_472, 2)
-                        return@queueScript delayScript(player, 2)
-                    }
-                    1 -> {
-                        replaceScenery(rockScenery, Scenery.ROCKSLIDE_473, 2)
+                        replaceScenery(rockScenery, Scenery.ROCKSLIDE_472, 3)
                         return@queueScript delayScript(player, 3)
                     }
+                    1 -> {
+                        replaceScenery(rockScenery, Scenery.ROCKSLIDE_473, 3)
+                        return@queueScript delayScript(player, 2)
+                    }
                     2 -> {
-                        replaceScenery(rockScenery, 476, 2)
+                        replaceScenery(rockScenery, 476, 3)
                         player.walkingQueue.reset()
                         val x = player.location.x
                         val y = player.location.y

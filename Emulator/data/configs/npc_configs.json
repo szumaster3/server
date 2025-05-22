@@ -17835,70 +17835,6 @@
     "attack_level": "64"
   },
   {
-    "examine": "Brrrrr...he must be cold!",
-    "slayer_task": "83",
-    "range_animation": "0",
-    "defence_animation": "0",
-    "weakness": "9",
-    "magic_animation": "0",
-    "name": "Ice troll",
-    "defence_level": "64",
-    "lifepoints": "91",
-    "strength_level": "64",
-    "id": "1939",
-    "range_level": "1",
-    "attack_level": "64"
-  },
-  {
-    "examine": "Brrrrr...he must be cold!",
-    "slayer_task": "83",
-    "range_animation": "0",
-    "respawn_delay": "60",
-    "defence_animation": "0",
-    "weakness": "9",
-    "magic_animation": "0",
-    "name": "Ice troll",
-    "defence_level": "64",
-    "lifepoints": "91",
-    "strength_level": "64",
-    "id": "1940",
-    "aggressive": "true",
-    "range_level": "1",
-    "attack_level": "64"
-  },
-  {
-    "examine": "Brrrrr...he must be cold!",
-    "slayer_task": "83",
-    "range_animation": "0",
-    "respawn_delay": "60",
-    "defence_animation": "0",
-    "weakness": "9",
-    "magic_animation": "0",
-    "name": "Ice troll",
-    "defence_level": "64",
-    "lifepoints": "91",
-    "strength_level": "64",
-    "id": "1941",
-    "aggressive": "true",
-    "range_level": "1",
-    "attack_level": "64"
-  },
-  {
-    "examine": "Brrrrr...he must be cold!",
-    "slayer_task": "83",
-    "range_animation": "0",
-    "defence_animation": "0",
-    "weakness": "9",
-    "magic_animation": "0",
-    "name": "Ice troll",
-    "defence_level": "64",
-    "lifepoints": "91",
-    "strength_level": "64",
-    "id": "1942",
-    "range_level": "1",
-    "attack_level": "64"
-  },
-  {
     "examine": "Not a man's best friend.",
     "melee_animation": "6579",
     "range_animation": "6579",
@@ -34360,16 +34296,6 @@
   {
     "examine": "A farmer's enemy.",
     "name": "Crow",
-    "id": "1754"
-  },
-  {
-    "examine": "A farmer's enemy.",
-    "name": "Crow",
-    "id": "1755"
-  },
-  {
-    "examine": "A farmer's enemy.",
-    "name": "Crow",
     "id": "1756"
   },
   {
@@ -34705,7 +34631,7 @@
     "defence_animation": "0"
   },
   {
-    "examine" : "An unusually aggressive cleric.",
+    "examine": "An unusually aggressive cleric.",
     "name": "Monk",
     "lifepoints": "10",
     "combat_audio": "511,513,512",
@@ -44379,13 +44305,6 @@
     "combat_audio": "498,500,499",
     "strength_level": "1",
     "id": "5999"
-  },
-  {
-    "name": "Rupert the Beard",
-    "lifepoints": "10",
-    "combat_audio": "498,500,499",
-    "strength_level": "1",
-    "id": "6001"
   },
   {
     "examine": "I wish the moon wasn't out!",

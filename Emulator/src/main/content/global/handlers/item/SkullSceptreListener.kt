@@ -34,16 +34,20 @@ class SkullSceptreListener : InteractionListener {
                     return@on true
                 }
 
-                lock(player, 3)
-                animate(player, Animations.HUMAN_USE_SCEPTRE_9601)
-                Graphics.send(
-                    Graphics(org.rs.consts.Graphics.USE_SCEPTRE_1683, 100),
-                    player.location,
-                )
-                submitIndividualPulse(player, object : Pulse(2, player) {
+                lock(player, 7)
+                submitIndividualPulse(player, object : Pulse(1, player) {
+                    var count = 0
                     override fun pulse(): Boolean {
-                        teleport(player, Location.create(3081, 3421, 0), TeleportManager.TeleportType.INSTANT)
-                        return true
+                        when(count++) {
+                            0 -> {
+                                visualize(player, Animations.HUMAN_USE_SCEPTRE_9601, Graphics(org.rs.consts.Graphics.USE_SCEPTRE_1683, 100))
+                            }
+                            6 -> {
+                                teleport(player, Location.create(3081, 3421, 0), TeleportManager.TeleportType.INSTANT)
+                                return true
+                            }
+                        }
+                        return false
                     }
                 })
 
@@ -84,12 +88,7 @@ class SkullSceptreListener : InteractionListener {
         onUseWith(IntType.ITEM, Items.STRANGE_SKULL_9009, Items.RUNED_SCEPTRE_9012) { player, used, with ->
             // The skull fits perfectly atop the Sceptre, you feel there is great magical power at work here.
             if (removeItem(player, used.asItem())) {
-                sendDoubleItemDialogue(
-                    player,
-                    -1,
-                    Items.SKULL_SCEPTRE_9013,
-                    "The skull fits perfectly atop the Sceptre.",
-                )
+                sendDoubleItemDialogue(player, -1, Items.SKULL_SCEPTRE_9013, "The skull fits perfectly atop the Sceptre.")
                 replaceSlot(player, with.asItem().index, Item(Items.SKULL_SCEPTRE_9013, 1))
             }
             return@onUseWith true
