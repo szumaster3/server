@@ -20,6 +20,8 @@ import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.skill.Skills
+import core.game.node.item.GroundItem
+import core.game.node.item.GroundItemManager
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
@@ -228,7 +230,7 @@ class VarrockListener : InteractionListener {
 
         on(BERRIES, IntType.SCENERY, "pick-from") { player, node ->
 
-            if (node.id == 23630 || node.id == 23627) {
+            if (node.id == Scenery.REDBERRY_BUSH_23630 || node.id == Scenery.CADAVA_BUSH_23627) {
                 sendMessage(player, "There are no berries left on this bush.")
                 sendMessage(player, "More berries will grow soon.")
                 return@on true
@@ -243,17 +245,17 @@ class VarrockListener : InteractionListener {
             lock(player, 3)
             animate(player, Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
 
-            if (node.id == 23628 || node.id == 23629) {
+            if (node.id == Scenery.REDBERRY_BUSH_23628 || node.id == Scenery.REDBERRY_BUSH_23629) {
                 addItem(player, Items.REDBERRIES_1951)
             } else {
                 addItem(player, Items.CADAVA_BERRIES_753)
             }
 
             if (COUNTER == 2) {
-                if (node.id != 23628 || node.id != 23629) {
-                    replaceScenery(node.asScenery(), 23630, 30)
+                if (node.id != Scenery.REDBERRY_BUSH_23628 || node.id != Scenery.REDBERRY_BUSH_23629) {
+                    replaceScenery(node.asScenery(), Scenery.REDBERRY_BUSH_23630, 30)
                 } else {
-                    replaceScenery(node.asScenery(), 23627, 30)
+                    replaceScenery(node.asScenery(), Scenery.CADAVA_BUSH_23627, 30)
                 }
 
                 COUNTER = 0
@@ -426,15 +428,30 @@ class VarrockListener : InteractionListener {
         }
 
         on(Items.CUP_OF_TEA_712, IntType.GROUND_ITEM, "take") { player, node ->
-            animate(player, Animations.HUMAN_MULTI_USE_832)
-            if (node.location == Location.create(3272, 3409, 0) || node.location == Location.create(3271, 3413, 0)) {
+            val teaCup = node as GroundItem
+
+            if (freeSlots(player) == 0) {
+                sendMessage(player, "You don't have enough inventory space for that.")
+                return@on true
+            }
+
+            val loc = node.location
+            val restricted = loc == Location(3272, 3409, 0) || loc == Location(3271, 3413, 0)
+
+            if (restricted) {
+                animate(player, Animations.HUMAN_MULTI_USE_832)
                 sendNPCDialogue(
                     player,
                     NPCs.TEA_SELLER_595,
                     "Hey! Put that back! Those are for display only!",
                     FaceAnim.ANNOYED,
                 )
+            } else {
+                if (GroundItemManager.destroy(teaCup) != null) {
+                    addItem(player, node.id, 1)
+                }
             }
+
             return@on true
         }
 
