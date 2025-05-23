@@ -62,6 +62,21 @@ class TindelMerchantListener : InteractionListener {
         private const val FAKE_COINS = Items.COINS_8896
 
         /**
+         * Roll success for rusty weapons exchange.
+         */
+        fun success(player: Player, skill: Int): Boolean {
+            val level = player.getSkills().getLevel(skill).toDouble()
+            val minChance = 50.0
+            val maxChance = 100.0
+            val maxLevel = 99.0
+
+            val successChance = minChance + (level - 1) * (maxChance - minChance) / (maxLevel - 1)
+
+            val roll = RandomFunction.random(0.0, 100.0)
+            return roll < successChance
+        }
+
+        /**
          * Exchanges a rusty items for a random repaired weapon.
          *
          * @param player The player.
@@ -90,10 +105,6 @@ class TindelMerchantListener : InteractionListener {
             )
 
             addDialogueAction(player) { _, _ ->
-                val smithingLevel = getStatLevel(player, Skills.SMITHING)
-                val chance = RandomFunction.getSkillSuccessChance(50.0, 100.0, smithingLevel)
-                val success = RandomFunction.random(0.0, 100.0) < chance
-
                 val equipmentType = when (rustyItemId) {
                     RUSTY_SWORD -> BrokenItem.EquipmentType.SWORDS
                     RUSTY_SCIMITAR -> BrokenItem.EquipmentType.SCIMITARS
@@ -111,6 +122,8 @@ class TindelMerchantListener : InteractionListener {
 
                 removeItem(player, Item(Items.COINS_995, 100))
                 removeItem(player, rustyItem)
+
+                val success = success(player, Skills.SMITHING)
 
                 if (success) {
                     sendItemDialogue(player, repairedItem.id, "Tindel gives you a $itemName.")
