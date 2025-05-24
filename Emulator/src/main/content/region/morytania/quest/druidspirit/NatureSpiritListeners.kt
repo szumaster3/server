@@ -21,32 +21,36 @@ import org.rs.consts.Quests
 import org.rs.consts.Scenery
 
 class NatureSpiritListeners : InteractionListener {
-    val MIRROR_TAKEN = "/save:ns:mirror_taken"
-    val GROTTO_SEARCHED = "/save:ns:grotto_searched"
 
-    private val JOURNAL = Items.JOURNAL_2967
-    private val WASHING_BOWL = Items.WASHING_BOWL_2964
-    private val MIRROR = Items.MIRROR_2966
-    private val SPELLCARD = Items.DRUIDIC_SPELL_2968
-    private val USED_SPELLCARD = Items.A_USED_SPELL_2969
-    private val FUNGUS = Items.MORT_MYRE_FUNGUS_2970
-    private val STEM = Items.MORT_MYRE_STEM_2972
-    private val PEAR = Items.MORT_MYRE_PEAR_2974
-    private val DRUID_POUCH = Items.DRUID_POUCH_2958
-    private val DRUID_POUCH_EMPTY = Items.DRUID_POUCH_2957
+    companion object {
+        val MIRROR_TAKEN = "/save:ns:mirror_taken"
+        val GROTTO_SEARCHED = "/save:ns:grotto_searched"
 
-    private val NATURE_STONE = Scenery.STONE_3527
-    private val FAITH_STONE = Scenery.STONE_3528
-    private val FREELY_GIVEN_STONE = Scenery.STONE_3529
-    private val GROTTO_TREE = Scenery.GROTTO_TREE_3517
-    private val GROTTO_ENTRANCE = Scenery.GROTTO_3516
-    private val GROTTO_EXIT = intArrayOf(Scenery.GROTTO_3525, Scenery.GROTTO_3526)
-    private val GROTTO_ALTAR = Scenery.GROTTO_3520
-    private val NATURE_ALTAR = Scenery.ALTAR_OF_NATURE_3521
-    private val WISHING_WELL = Scenery.WISHING_WELL_28715
+        private val JOURNAL = Items.JOURNAL_2967
+        private val WASHING_BOWL = Items.WASHING_BOWL_2964
+        private val MIRROR = Items.MIRROR_2966
+        private val SPELLCARD = Items.DRUIDIC_SPELL_2968
+        private val USED_SPELLCARD = Items.A_USED_SPELL_2969
+        private val FUNGUS = Items.MORT_MYRE_FUNGUS_2970
+        private val STEM = Items.MORT_MYRE_STEM_2972
+        private val PEAR = Items.MORT_MYRE_PEAR_2974
+        private val DRUID_POUCH = Items.DRUID_POUCH_2958
+        private val DRUID_POUCH_EMPTY = Items.DRUID_POUCH_2957
+        private val DRUID_POUCHES = intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY)
 
-    val stones = intArrayOf(NATURE_STONE, FAITH_STONE, FREELY_GIVEN_STONE)
-    val items = intArrayOf(USED_SPELLCARD, FUNGUS)
+        private val NATURE_STONE = Scenery.STONE_3527
+        private val FAITH_STONE = Scenery.STONE_3528
+        private val FREELY_GIVEN_STONE = Scenery.STONE_3529
+        private val GROTTO_TREE = Scenery.GROTTO_TREE_3517
+        private val GROTTO_ENTRANCE = Scenery.GROTTO_3516
+        private val GROTTO_EXIT = intArrayOf(Scenery.GROTTO_3525, Scenery.GROTTO_3526)
+        private val GROTTO_ALTAR = Scenery.GROTTO_3520
+        private val NATURE_ALTAR = Scenery.ALTAR_OF_NATURE_3521
+        private val WISHING_WELL = Scenery.WISHING_WELL_28715
+
+        val stones = intArrayOf(NATURE_STONE, FAITH_STONE, FREELY_GIVEN_STONE)
+        val items = intArrayOf(USED_SPELLCARD, FUNGUS)
+    }
 
     override fun defineListeners() {
         on(GROTTO_TREE, IntType.SCENERY, "look-at") { player, _ ->
@@ -58,10 +62,9 @@ class NatureSpiritListeners : InteractionListener {
             if (!getAttribute(player, GROTTO_SEARCHED, false) ||
                 !(inInventory(player, JOURNAL) || inBank(player, JOURNAL))
             ) {
-                sendItemDialogue(
-                    player,
+                player.dialogueInterpreter.sendItemMessage(
                     JOURNAL,
-                    "You search the strange rock. You find a knot and inside of it you discover a small tome. The words on the front are a bit vague, but you can make out the words 'Tarlock' and 'journal'.",
+                    "You search the strange rock. You find a knot and", "inside of it you discover a small tome. The words on", "the front are a bit vague, but you can make out the words", "'Tarlock' and 'journal'.",
                 )
                 addItemOrDrop(player, JOURNAL, 1)
                 setAttribute(player, GROTTO_SEARCHED, true)
@@ -71,23 +74,29 @@ class NatureSpiritListeners : InteractionListener {
         }
 
         on(GROTTO_ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
-            val questStage = player.questRepository.getQuest(Quests.NATURE_SPIRIT).getStage(player)
+            val questStage = getQuestStage(player, Quests.NATURE_SPIRIT)
             sendMessage(player, "You prepare to enter the Druid's grotto.")
-            if (questStage < 55) {
-                val npc =
-                    core.game.node.entity.npc.NPC.create(
-                        NPCs.FILLIMAN_TARLOCK_1050,
-                        Location.create(3440, 3336, 0),
-                    )
-                npc.init()
-                sendMessage(player, "The aura of Fillimans camp protects you from the swamp.")
-            } else if (questStage < 60) {
-                player.teleport(Location.create(3442, 9734, 0))
-                sendMessage(player, "You see a beatifully tended small grotto area.")
-            } else if (questStage >= 60) {
-                player.teleport(Location.create(3442, 9734, 1))
-                sendMessage(player, "You see a beatifully tended small grotto area.")
+
+            when {
+                questStage < 55 -> {
+                    val location = Location.create(3440, 3336, 0)
+                    val existing = findNPC(location, NPCs.FILLIMAN_TARLOCK_1050)
+                    if (existing == null) {
+                        val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_1050, location)
+                        npc.init()
+                    }
+                    sendMessage(player, "The aura of Filliman's camp protects you from the swamp.")
+                }
+                questStage in 55..59 -> {
+                    player.teleport(Location.create(3442, 9734, 0))
+                    sendMessage(player, "You see a beautifully tended small grotto area.")
+                }
+                else -> {
+                    player.teleport(Location.create(3442, 9734, 1))
+                    sendMessage(player, "You see a beautifully tended small grotto area.")
+                }
             }
+
             return@on true
         }
 
@@ -165,34 +174,31 @@ class NatureSpiritListeners : InteractionListener {
             return@on true
         }
 
-        on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), IntType.ITEM, "fill") { player, node ->
+        on(DRUID_POUCHES, IntType.ITEM, "fill") { player, node ->
 
-            if (player.questRepository.getStage(Quests.NATURE_SPIRIT) >= 75) {
-                if (amountInInventory(player, PEAR) >= 3) {
-                    if (node.id != Items.DRUID_POUCH_2958) {
-                        removeItem(player, node, Container.INVENTORY)
-                    }
-                    removeItem(player, Item(PEAR, 3), Container.INVENTORY)
-                    addItem(player, Items.DRUID_POUCH_2958, 9)
-                } else if (amountInInventory(player, STEM) >= 3) {
-                    if (node.id != Items.DRUID_POUCH_2958) {
-                        removeItem(player, node, Container.INVENTORY)
-                    }
-                    removeItem(player, Item(STEM, 3), Container.INVENTORY)
-                    addItem(player, Items.DRUID_POUCH_2958, 6)
-                } else if (amountInInventory(player, FUNGUS) >= 3) {
-                    if (node.id != Items.DRUID_POUCH_2958) {
-                        removeItem(player, node, Container.INVENTORY)
-                    }
-                    removeItem(player, Item(FUNGUS, 3), Container.INVENTORY)
-                    addItem(player, Items.DRUID_POUCH_2958, 3)
-                } else {
-                    sendDialogue(player, "You need 3 fungus before you can do that.")
-                }
-            } else {
+            if (getQuestStage(player, Quests.NATURE_SPIRIT) < 75) {
                 sendDialogue(player, "I don't know how to use that yet.")
+                return@on true
             }
 
+            val ingredients = listOf(
+                Triple(PEAR, 3, 9),
+                Triple(STEM, 3, 6),
+                Triple(FUNGUS, 3, 3)
+            )
+
+            for ((itemId, requiredAmount, pouchAmount) in ingredients) {
+                if (amountInInventory(player, itemId) >= requiredAmount) {
+                    if (node.id != Items.DRUID_POUCH_2958) {
+                        removeItem(player, node, Container.INVENTORY)
+                    }
+                    removeItem(player, Item(itemId, requiredAmount), Container.INVENTORY)
+                    addItem(player, Items.DRUID_POUCH_2958, pouchAmount)
+                    return@on true
+                }
+            }
+
+            sendDialogue(player, "You need 3 fungus before you can do that.")
             return@on true
         }
 
