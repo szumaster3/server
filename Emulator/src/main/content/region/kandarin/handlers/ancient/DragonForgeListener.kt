@@ -110,43 +110,51 @@ class DragonForgeListener : InteractionListener {
         /*
          * Handles creating dragonkin key.
          */
-
         onUseWith(IntType.NPC, STRANGE_KEYS, *MITHRIL_DRAGON_NPC) { player, _, with ->
             val npc = with.asNpc()
-            if (player.inventory.containItems(*STRANGE_KEYS) &&
-                player.equipment.containsAtLeastOneItem(REQUIRED_SHIELD)
-            ) {
-                if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
-                    sendMessage(player, "You cannot currently use any items on that dragon.")
-                    return@onUseWith true
+
+            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
+                sendMessage(player, "You cannot currently use any items on that dragon.")
+                return@onUseWith true
+            }
+
+            if (!anyInEquipment(player, *REQUIRED_SHIELD)) {
+                sendMessage(player, "You cannot currently use any items on that dragon.")
+                return@onUseWith true
+            }
+
+            if (!anyInInventory(player, *STRANGE_KEYS)) {
+                return@onUseWith true
+            }
+
+            if (removeAll(player, STRANGE_KEYS, Container.INVENTORY)) {
+                visualize(npc, DRAGON_BREATH_ANIMATION, DRAGON_BREATH_GFX)
+                sendItemDialogue(player, DRAGONKIN_KEY, "The intense heat of the mithril dragon's breath fuses the key halves together.")
+                addItem(player, DRAGONKIN_KEY.id, 1)
+                runTask(player, 1) {
+                    npc.attack(player)
                 }
-                face(npc, player)
-                submitIndividualPulse(player, object : Pulse(1) {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> {
-                                face(player, npc)
-                                visualize(npc, DRAGON_BREATH_ANIMATION, DRAGON_BREATH_GFX)
-                            }
-                            1 -> visualize(player, DRAGON_SHIELD_ABSORB_ANIM, DRAGON_BREATH_ABSORB_GFX)
-                            3 -> {
-                                player.inventory.removeAll(STRANGE_KEYS)
-                                sendItemDialogue(
-                                    player,
-                                    DRAGONKIN_KEY,
-                                    "The intense heat of the mithril dragon's breath fuses the key halves together."
-                                )
-                                player.inventory.add(DRAGONKIN_KEY)
-                            }
-                            6 -> {
-                                npc.attack(player)
-                                return true
-                            }
-                        }
-                        return false
-                    }
-                })
+            }
+
+            return@onUseWith true
+        }
+        onUseWith(IntType.NPC, STRANGE_KEYS, *MITHRIL_DRAGON_NPC) { player, _, with ->
+            val npc = with.asNpc()
+            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
+                sendMessage(player, "You cannot currently use any items on that dragon.")
+                return@onUseWith true
+            }
+            if (!anyInInventory(player, *STRANGE_KEYS) && !anyInEquipment(player, *REQUIRED_SHIELD)) {
+                return@onUseWith true
+            }
+
+            if(removeAll(player, STRANGE_KEYS, Container.INVENTORY)) {
+                visualize(npc, DRAGON_BREATH_ANIMATION, DRAGON_BREATH_GFX)
+                sendItemDialogue(player, DRAGONKIN_KEY, "The intense heat of the mithril dragon's breath fuses the key halves together.")
+                addItem(player, DRAGONKIN_KEY.id, 1)
+                runTask(player, 1) {
+                    npc.attack(player)
+                }
             }
             return@onUseWith true
         }

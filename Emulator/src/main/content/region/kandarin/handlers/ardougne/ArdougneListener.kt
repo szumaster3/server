@@ -27,14 +27,23 @@ class ArdougneListener : InteractionListener {
         }
 
         on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "pay-fare") { player, _ ->
+            val hasCharosRing = inEquipment(player, Items.RING_OF_CHAROSA_6465)
             val amount = if (isDiaryComplete(player, DiaryType.KARAMJA, 0)) 15 else 30
-            if (!removeItem(player, Item(Items.COINS_995, amount))) {
-                sendMessage(player, "You can not afford that.")
-            } else {
-                sendMessage(player, "You pay $amount coins and board the ship.")
+
+            if (hasCharosRing) {
+                sendMessage(player, "You board the ship.")
                 playJingle(player, 171)
                 Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player)
+            } else {
+                if (!removeItem(player, Item(Items.COINS_995, amount))) {
+                    sendMessage(player, "You can not afford that.")
+                } else {
+                    sendMessage(player, "You pay $amount coins and board the ship.")
+                    playJingle(player, 171)
+                    Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player)
+                }
             }
+
             return@on true
         }
 
