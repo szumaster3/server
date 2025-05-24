@@ -1,21 +1,33 @@
 package content.global.travel.balloon
 
+import core.api.getVarbit
+import core.api.rewardXP
+import core.api.sendMessage
+import core.api.setVarbit
+import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import org.rs.consts.Items
+import org.rs.consts.NPCs
 import org.rs.consts.Vars
 
 /**
  * Represents balloon travel data.
  */
-enum class Balloons(val areaName: String, val destination: Location, val logId: Int, val requiredLevel: Int, val varbitId: Int, val componentId: Int, val button: Int, val wrapperId: Int) {
-    ENTRANA("Entrana", Location(2809, 3356), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133),
-    TAVERLEY("Taverley", Location(2940, 3420), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 22, 18, 19135),
-    CRAFT_GUILD("Crafting Guild", Location(2924, 3303), Items.OAK_LOGS_1521, 30, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 20, 16, 19141),
-    VARROCK("Varrock", Location(3298, 3481), Items.WILLOW_LOGS_1519, 40, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 21, 19, 19143),
-    CASTLE_WARS("Castle Wars", Location(2462, 3108), Items.YEW_LOGS_1515, 50, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CASTLE_WARS_BALLOON_2869, 24, 14, 19137),
-    GRAND_TREE("Grand Tree", Location(2480, 3458), Items.MAGIC_LOGS_1513, 60, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 23, 15, 19139);
+enum class Balloons(val areaName: String, val npc : Int, val destination: Location, val logId: Int, val requiredLevel: Int, val varbitId: Int, val componentId: Int, val button: Int, val wrapperId: Int) {
+    ENTRANA("Entrana", NPCs.AUGUSTE_5049, Location(2809, 3356), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133),
+    TAVERLEY("Taverley", NPCs.ASSISTANT_STAN_5057, Location(2940, 3420), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 22, 18, 19135),
+    CRAFT_GUILD("Crafting Guild", NPCs.ASSISTANT_BROCK_5054, Location(2924, 3303), Items.OAK_LOGS_1521, 30, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 20, 16, 19141),
+    VARROCK("Varrock", NPCs.ASSISTANT_SERF_5053, Location(3298, 3481), Items.WILLOW_LOGS_1519, 40, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 21, 19, 19143),
+    CASTLE_WARS("Castle Wars", NPCs.ASSISTANT_MARROW_5055, Location(2462, 3108), Items.YEW_LOGS_1515, 50, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CASTLE_WARS_BALLOON_2869, 24, 14, 19137),
+    GRAND_TREE("Grand Tree", NPCs.ASSISTANT_LE_SMITH_5056, Location(2480, 3458), Items.MAGIC_LOGS_1513, 60, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 23, 15, 19139);
 
     companion object {
+        /**
+         * A map for quick lookup of [Balloons] enum instances by their NPC id.
+         */
+        private val npcMap = values().associateBy { it.npc }
+
         /**
          * A button map id for balloon locations.
          */
@@ -45,6 +57,14 @@ enum class Balloons(val areaName: String, val destination: Location, val logId: 
          * @return the matching [Balloons] instance or null if no match is found
          */
         fun fromSceneryId(id: Int): Balloons? = sceneryToBalloon[id]
+
+        /**
+         * Returns the balloon location to the given npc id.
+         *
+         * @param npcId the ID of the npc
+         * @return the matching [Balloons] instance or null if no match is found
+         */
+        fun fromNpcId(npcId: Int): Balloons? = npcMap[npcId]
 
         /**
          * Animation map.
@@ -98,6 +118,20 @@ enum class Balloons(val areaName: String, val destination: Location, val logId: 
         fun getAnimationId(from: Balloons, to: Balloons): Int {
             return animations[from.ordinal][to.ordinal].takeIf { it != 0 }
                 ?: error("No animation for route [$from] -> [$to]")
+        }
+
+        /**
+         * Unlocks a new destination after a successful navigation from Entrana.
+         */
+        fun unlockDestination(player: Player, destination: Balloons) {
+            if (getVarbit(player, destination.varbitId) != 1) {
+                setVarbit(player, destination.varbitId, 1, true)
+                val xp = 2000
+                if (destination != ENTRANA) {
+                    rewardXP(player, Skills.FIREMAKING, xp.toDouble())
+                }
+                sendMessage(player,"You have unlocked the balloon route to ${destination.areaName}!")
+            }
         }
     }
 }

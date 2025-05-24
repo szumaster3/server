@@ -69,6 +69,10 @@ class AssistantDialogue(player: Player? = null, ) : Dialogue(player) {
         }
         return true
     }
-    override fun getIds(): IntArray = intArrayOf(5050, 5053, 5055, 5056, 5057, 5065)
+    override fun getIds(): IntArray = ID
+
+    companion object {
+        val ID = intArrayOf(5050, 5053, 5054, 5055, 5056, 5057)
+    }
 
 }

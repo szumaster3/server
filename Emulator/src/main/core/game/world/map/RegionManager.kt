@@ -80,6 +80,7 @@ object RegionManager {
         var flag = getFlags(region, projectile)[index]
 
         if (flag == -1) {
+         // val r = forId((regionX shl 8) or regionY)
             val r = forId((regionX shr 8) or regionY)
             if (!r.isLoaded) {
                 Region.load(r)

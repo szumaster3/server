@@ -37,7 +37,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
         /**
          * Represents the assistant npc.
          */
-        private val assistantIds = (5049..5057).toIntArray()
+        private val assistantIds = intArrayOf(5050, 5053, 5054, 5055, 5056, 5057, 5063, 5065)
 
         /**
          * Represents the basket ids.
@@ -48,7 +48,6 @@ class BalloonTravel : InterfaceListener, InteractionListener {
          * Represents assistant npcs and their spawn locations.
          */
         private val assistants = mapOf(
-            NPCs.AUGUSTE_5050 to Location.create(2938, 3424, 0),
             NPCs.ASSISTANT_SERF_5053 to Location.create(3298, 3484, 0),
             NPCs.ASSISTANT_LE_SMITH_5056 to Location.create(2480, 3458, 0),
             NPCs.ASSISTANT_STAN_5057 to Location.create(2938, 3424, 0)
@@ -63,6 +62,9 @@ class BalloonTravel : InterfaceListener, InteractionListener {
             setComponentVisibility(player, Components.ZEP_BALLOON_MAP_469, location.componentId, false)
         }
 
+        /**
+         * Executes the flight.
+         */
         fun executeFlight(player: Player, destination: Balloons) {
             val origin = player.getAttribute<Balloons>(GameAttributes.BALLOON_ORIGIN)
             if (origin == null) {
@@ -131,6 +133,11 @@ class BalloonTravel : InterfaceListener, InteractionListener {
                 return@on true
             }
 
+            if(player.settings.weight > 40.0) {
+                sendDialogue(player, "You are carrying too much to fly in the balloon.")
+                return@on true
+            }
+
             if (destination == Balloons.ENTRANA) {
                 if (!isAdmin && !ItemDefinition.canEnterEntrana(player)) {
                     sendDialogue(player, "You can't take flight with weapons and armour to Entrana.")
@@ -177,13 +184,13 @@ class BalloonTravel : InterfaceListener, InteractionListener {
          * Handles interaction with npc.
          */
 
-        on(assistantIds, IntType.NPC, "fly") { player, node ->
+        on(assistantIds, IntType.NPC, "Fly") { player, node ->
             if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY)) {
                 sendMessage(player, "You must complete ${Quests.ENLIGHTENED_JOURNEY} before you can use it.")
                 return@on true
             }
-            val sceneryId = node.asScenery().wrapper.id
-            val location = Balloons.fromSceneryId(sceneryId)
+
+            val location = Balloons.fromNpcId(node.id)
             if (location != null) {
                 openBalloonInterface(player, location)
             }
