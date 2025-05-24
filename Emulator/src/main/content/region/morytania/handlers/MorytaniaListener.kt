@@ -8,6 +8,7 @@ import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
@@ -61,17 +62,21 @@ class MorytaniaListener : InteractionListener {
 
             if (AgilityHandler.hasFailed(player, 1, 0.1)) {
                 val end = if (fromGrotto) FAIL_LOCATION else start
+
                 AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null, 0).endAnimation = SWIMMING_ANIMATION
-                AgilityHandler.forceWalk(player, -1, FAIL_LOCATION, failLand, SWIMMING_ANIMATION, 15, 2.0, null, 4)
-                queueScript(player, 3, QueueStrength.NORMAL) {
-                    visualize(player, failAnim, SPLASH_GFX)
-                    teleport(player, FAIL_LOCATION)
-                    AgilityHandler.fail(player, 1, failLand, SWIMMING_ANIMATION, Random.nextInt(1, 7), "You nearly drown in the disgusting swamp.")
-                    return@queueScript stopExecuting(player)
-                }
+                AgilityHandler.forceWalk(player, -1, FAIL_LOCATION, failLand, SWIMMING_ANIMATION, 15, 2.0, null, 3)
+                submitIndividualPulse(player, object : Pulse(2) {
+                    override fun pulse(): Boolean {
+                        sendMessage(player, "You nearly drown in the disgusting swamp.")
+                        visualize(player, failAnim, SPLASH_GFX)
+                        teleport(player, FAIL_LOCATION)
+                        AgilityHandler.fail(player, 0, failLand, SWIMMING_ANIMATION, Random.nextInt(1, 7), "You nearly drown in the disgusting swamp.")
+                        return true
+                    }
+                })
             } else {
-                val end = start.transform(0, if (fromGrotto) -2 else 2, 0)
-                AgilityHandler.forceWalk(player, -1, start, end, JUMP_ANIMATION, 15, 15.0, null, 1)
+                val end = start.transform(0, if (fromGrotto) -2 else 2,0)
+                AgilityHandler.forceWalk(player, -1, start, end, JUMP_ANIMATION, 15, 15.0, null, 0)
             }
             return@on true
         }
