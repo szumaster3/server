@@ -1,12 +1,11 @@
 package content.region.karamja.handlers.shilo
 
 import content.region.karamja.dialogue.shilovillage.BlackPrismDialogue
-import content.region.karamja.handlers.shilo.ShiloVillageListener.Companion
 import core.api.*
 import core.api.interaction.getNPCName
 import core.api.quest.hasRequirement
 import core.api.ui.closeDialogue
-import core.game.dialogue.DialogueFile
+import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -14,9 +13,7 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.tools.END_DIALOGUE
 import org.rs.consts.*
 
 val ANTIQUE_ITEMS = AntiqueItem.values().map { it.antique }.toIntArray()
@@ -82,12 +79,12 @@ class ShiloVillageListener : InteractionListener {
          */
 
         on(Scenery.TRAVEL_CART_2230, IntType.SCENERY, "board") { player, _ ->
-            openDialogue(player, CartTravelDialogue(), NPC(NPCs.HAJEDY_510))
+            handleTravelDialogue(player, NPC(NPCs.HAJEDY_510))
             return@on true
         }
 
-        on(NPCs.HAJEDY_510, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, CartTravelDialogue(), NPC(NPCs.HAJEDY_510))
+        on(NPCs.HAJEDY_510, IntType.NPC, "talk-to") { player, node ->
+            handleTravelDialogue(player, node.asNpc())
             return@on true
         }
 
@@ -102,7 +99,7 @@ class ShiloVillageListener : InteractionListener {
         }
 
         on(Scenery.TRAVEL_CART_2265, IntType.SCENERY, "board") { player, _ ->
-            openDialogue(player, CartTravelDialogue(), NPC(NPCs.VIGROY_511))
+            handleTravelDialogue(player, NPC(NPCs.VIGROY_511))
             return@on true
         }
 
@@ -111,8 +108,8 @@ class ShiloVillageListener : InteractionListener {
             return@on true
         }
 
-        on(NPCs.VIGROY_511, IntType.NPC, "talk-to") { player, npc ->
-            openDialogue(player, CartTravelDialogue(), npc)
+        on(NPCs.VIGROY_511, IntType.NPC, "talk-to") { player, node ->
+            handleTravelDialogue(player, node.asNpc())
             return@on true
         }
 
@@ -169,7 +166,7 @@ class ShiloVillageListener : InteractionListener {
          * @param player The player who is traveling.
          * @param npc The NPC id that the player is interacting with.
          */
-        fun quickTravel(player: Player, npc: Int) {
+        private fun quickTravel(player: Player, npc: Int) {
             if (!hasRequirement(player, Quests.SHILO_VILLAGE, true)) return
             val isShilo = npc == NPCs.HAJEDY_510
             val npcName = getNPCName(npc)
@@ -192,30 +189,29 @@ class ShiloVillageListener : InteractionListener {
                 return@queueScript stopExecuting(player)
             }
         }
-    }
-}
 
-class CartTravelDialogue : DialogueFile() {
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ) {
-        if (!hasRequirement(player!!, Quests.SHILO_VILLAGE)) return
-        val shilo = npc?.id == NPCs.HAJEDY_510
-        when (stage) {
-            0 -> npcl("I am offering a cart ride to " + (if (shilo) "Shilo Village" else "Brimhaven") + " if you're interested? It will cost 10 gold coins. Is that Ok?").also { stage++ }
-            1 -> {
-                if (!inInventory(player!!, Items.COINS_995, 10)) {
-                    playerl("Sorry, I don't seem to have enough coins.").also { stage = END_DIALOGUE }
-                } else {
-                    playerl("Yes please, I'd like to go to " + (if (shilo) "Shilo Village" else "Brimhaven") + ".").also { stage++ }
+        /**
+         * Handles the cart travel dialogue.
+         *
+         * @param player The player interacting with the NPC.
+         * @param npc The NPC offering the cart ride. If null, the dialogue will not proceed.
+         */
+        private fun handleTravelDialogue(player: Player, npc: NPC?) {
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return
+            val isShilo = npc?.id == NPCs.HAJEDY_510
+            val destination = if (isShilo) "Shilo Village" else "Brimhaven"
+
+            sendNPCDialogue(player, npc!!.id, "I am offering a cart ride to $destination if you're interested? It will cost 10 gold coins. Is that Ok?")
+
+            addDialogueAction(player) { player, _ ->
+                if (!inInventory(player, Items.COINS_995, 10)) {
+                    closeDialogue(player)
+                    sendPlayerDialogue(player, "Sorry, I don't seem to have enough coins.", FaceAnim.HALF_GUILTY)
+                    return@addDialogueAction
                 }
-            }
-            2 -> npcl("Great! Just hop into the cart then and we'll go!").also { stage++ }
-            3 -> sendDialogue(player!!, "You hop into the cart and the driver urges the horses on. You take a taxing journey through the jungle to " + (if (shilo) "Shilo Village" else "Brimhaven") + ".").also { stage++ }
-            4 -> {
-                end()
-                ShiloVillageListener.quickTravel(player!!, npc!!.id)
+                sendPlayerDialogue(player, "Yes please, I'd like to go to $destination.")
+                sendMessage(player, "You hop into the cart and the driver urges the horses on. You take a taxing journey through the jungle to $destination.")
+                quickTravel(player, npc.id)
             }
         }
     }
