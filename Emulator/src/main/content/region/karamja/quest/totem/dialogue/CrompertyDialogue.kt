@@ -185,7 +185,7 @@ class CrompertyDialogue(
         player: Player,
         npc: NPC,
     ) {
-        val LOCATIONS = arrayOf(Location.create(2649, 3272, 0), Location.create(2642, 3321, 0))
+        val LOCATIONS = arrayOf(Location.create(2649, 3272, 0), Location.create(2638, 3321, 0))
         npc.animate(Animation(Animations.ATTACK_437))
         npc.faceTemporary(player, 1)
         npc.graphics(Graphics(org.rs.consts.Graphics.CURSE_CAST_108))

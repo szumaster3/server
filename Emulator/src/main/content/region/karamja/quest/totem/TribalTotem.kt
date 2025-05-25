@@ -1,6 +1,7 @@
 package content.region.karamja.quest.totem
 
 import core.api.addItemOrDrop
+import core.api.getStatLevel
 import core.api.rewardXP
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -31,11 +32,10 @@ class TribalTotem : Quest(Quests.TRIBAL_TOTEM, 126, 125, 1, Vars.VARP_QUEST_TRIB
         val started = player?.questRepository?.getStage(Quests.TRIBAL_TOTEM)!! > 0
 
         if (!started) {
-            line(player, "I can start this quest by speaking to !!Kangai Mau?? in", line++)
-            line(player, "!!Shrimp & Parrot?? restaurant in Brimhaven.", line++)
-            line += 1
+            line(player, "I can start this quest by speaking to !!Kangai Mau?? in !!the??", line++)
+            line(player, "!!Shrimp & Parrot?? restaurant in !!Brimhaven??.", line++)
             line(player, "To complete this quest I need:", line++)
-            line(player, "!!Level 21 Theiving??", line, player.skills?.getStaticLevel(Skills.THIEVING)!! >= 21)
+            line(player, "!!Level 21 Thieving??", line, getStatLevel(player, Skills.THIEVING) >= 21)
         } else if (started && stage != 100) {
             if (stage >= 10) {
                 line(player, "I agreed to help !!Kangai Mau?? on Brimhaven recover", line++, stage > 15)

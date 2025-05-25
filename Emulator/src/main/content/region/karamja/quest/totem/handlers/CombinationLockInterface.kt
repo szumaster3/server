@@ -73,7 +73,7 @@ class CombinationLockInterface : InterfaceListener {
                 closeInterface(player)
                 if (enteredCode == "KURT") {
                     setAttribute(player, GameAttributes.QUEST_TRIBAL_TOTEM_DOORS, true)
-                    sendMessage(player, "You hear a satisfying click, signifying that the door has been unlocked.")
+                    sendMessage(player, "The combination seems correct!")
                 } else {
                     sendMessage(player, "You hear a satisfying click, and then a worrying thunk.")
                     sendMessage(player, "The floor opens up beneath you sending you plummeting down to the sewers.")
