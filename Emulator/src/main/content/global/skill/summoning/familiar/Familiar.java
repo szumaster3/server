@@ -339,7 +339,12 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         }
         SummoningScroll scroll = SummoningScroll.forPouch(pouchId);
         if (scroll == null) {
-            owner.getPacketDispatch().sendMessage("Invalid scroll for pouch " + pouchId + " - report!");
+            owner.debug("Invalid scroll for pouch " + pouchId + " - report!");
+            return false;
+        }
+        if (owner.getSkills().getLevel(Skills.SUMMONING) < scroll.getLevel()) {
+            owner.getPacketDispatch().sendMessage("You need to have a higher Summoning level to use this scroll.");
+            owner.getPacketDispatch().sendMessage("You must have a Summoning level of at least " + scroll.getLevel() + " to use this scroll.");
             return false;
         }
         if (!owner.getInventory().contains(scroll.getItemId(), 1)) {
