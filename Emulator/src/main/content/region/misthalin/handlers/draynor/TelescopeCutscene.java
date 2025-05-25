@@ -4,6 +4,7 @@ import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
 import core.game.component.Component;
 import core.game.dialogue.Dialogue;
+import core.game.dialogue.FaceAnim;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
@@ -54,7 +55,7 @@ public final class TelescopeCutscene extends CutscenePlugin {
 
     @Override
     public boolean start(final Player player, boolean login, Object... args) {
-        player.animate(TELESCOPE_ANIM, 1);
+        player.animate(TELESCOPE_ANIM, 2);
         player.getDialogueInterpreter().sendPlainMessage(true, "You look through the telescope...");
         return super.start(player, login, args);
     }
@@ -145,7 +146,7 @@ public final class TelescopeCutscene extends CutscenePlugin {
 
         @Override
         public boolean open(Object... args) {
-            player("I see you've got your telescope", "pointing at the Wizard's Tower.");
+            player(FaceAnim.HALF_THINKING, "I see you've got your telescope", "pointing at the Wizard's Tower.");
             return true;
         }
 
@@ -153,7 +154,7 @@ public final class TelescopeCutscene extends CutscenePlugin {
         public boolean handle(int interfaceId, int buttonId) {
             switch (stage) {
                 case 0:
-                    interpreter.sendDialogues(3820, null, "Oh, do I? Well, why does that interest you?");
+                    interpreter.sendDialogues(3820, FaceAnim.HALF_ASKING, "Oh, do I? Well, why does that interest you?");
                     stage = 1;
                     break;
                 case 1:
@@ -161,11 +162,11 @@ public final class TelescopeCutscene extends CutscenePlugin {
                     stage = 2;
                     break;
                 case 2:
-                    interpreter.sendDialogues(3820, null, "No, no, I'm not planning anything like that again.");
+                    interpreter.sendDialogues(3820, FaceAnim.HALF_WORRIED, "No, no, I'm not planning anything like that again.");
                     stage = 3;
                     break;
                 case 3:
-                    player("Well I'll be watching you...");
+                    player(FaceAnim.SUSPICIOUS, "Well I'll be watching you...");
                     stage = 4;
                     break;
                 case 4:

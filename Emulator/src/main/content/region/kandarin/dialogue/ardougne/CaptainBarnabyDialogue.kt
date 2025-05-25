@@ -2,11 +2,13 @@ package content.region.kandarin.dialogue.ardougne
 
 import content.global.travel.charter.Charter
 import core.api.*
+import core.api.quest.isQuestComplete
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.tools.END_DIALOGUE
 import org.rs.consts.Items
+import org.rs.consts.Quests
 
 /**
  * Represents dialogue extension for Captain barnaby who takes players
@@ -18,6 +20,9 @@ class CaptainBarnabyDialogue : DialogueFile() {
         val hasCharosRing = inEquipment(player!!, Items.RING_OF_CHAROSA_6465)
         // Complete diary.
         val amount = if (isDiaryComplete(player!!, DiaryType.KARAMJA, 0)) 15 else 30
+
+        // val quest = isQuestComplete(player!!, Quests.MY_ARMS_BIG_ADVENTURE)
+        // npcl("Oh no, it's you again!")
 
         when (stage) {
             0 -> {
