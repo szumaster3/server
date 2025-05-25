@@ -35,7 +35,7 @@ class KaramjaListener : InteractionListener {
             val chopDown = (1..5).random()
 
             if (!checkRequirement(player)) {
-                sendMessage(player, "You need a machete to get through this dense jungle.")
+                sendDialogue(player, "You need a machete to cut your way through this dense jungle bush.")
                 return@on false
             }
 
@@ -77,7 +77,7 @@ class KaramjaListener : InteractionListener {
         }
 
         on(Scenery.ROCKS_492, IntType.SCENERY, "climb-down") { player, _ ->
-            ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, Location.create(2856, 9567, 0))
+            ClimbActionHandler.climb(player, null, Location.create(2856, 9567, 0))
             sendMessage(player, "You climb down through the pot hole.")
             return@on true
         }

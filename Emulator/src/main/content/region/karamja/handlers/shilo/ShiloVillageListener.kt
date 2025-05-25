@@ -171,22 +171,25 @@ class ShiloVillageListener : InteractionListener {
             val isShilo = npc == NPCs.HAJEDY_510
             val npcName = getNPCName(npc)
 
-            if (!removeItem(player, Item(Items.COINS_995, 10))) {
+            if (!inInventory(player, Items.COINS_995, 10)) {
                 sendMessage(player, "You don't have enough coins.")
                 return
             }
 
-            lock(player, 3)
+            lock(player, 6)
             closeDialogue(player)
-            sendMessage(player, "You pay the fare and hand 10 gold coins to $npcName.")
-            openOverlay(player, Components.FADE_TO_BLACK_120)
-            queueScript(player, 3, QueueStrength.SOFT) {
-                val destination = if (isShilo) Location.create(2834, 2951, 0) else Location.create(2780, 3212, 0)
-                teleport(player, destination)
-                closeOverlay(player)
-                openOverlay(player, Components.FADE_FROM_BLACK_170)
-                sendDialogueLines(player, "You feel tired from the journey, but at least you didn't have to walk", "all that distance.")
-                return@queueScript stopExecuting(player)
+            sendDialogueLines(player, "You pay the fare and hand 10 gold coins to $npcName.")
+            addDialogueAction(player) { _, _ ->
+                removeItem(player, Item(Items.COINS_995, 10))
+                openOverlay(player, Components.FADE_TO_BLACK_120)
+                queueScript(player, 5, QueueStrength.SOFT) {
+                    val destination = if (isShilo) Location.create(2834, 2951, 0) else Location.create(2780, 3212, 0)
+                    teleport(player, destination)
+                    closeOverlay(player)
+                    openOverlay(player, Components.FADE_FROM_BLACK_170)
+                    sendDialogueLines(player, "You feel tired from the journey, but at least you didn't have to walk", "all that distance.")
+                    return@queueScript stopExecuting(player)
+                }
             }
         }
 
@@ -203,15 +206,20 @@ class ShiloVillageListener : InteractionListener {
 
             sendNPCDialogue(player, npc!!.id, "I am offering a cart ride to $destination if you're interested? It will cost 10 gold coins. Is that Ok?")
 
-            addDialogueAction(player) { player, _ ->
-                if (!inInventory(player, Items.COINS_995, 10)) {
+            addDialogueAction(player) { _, _ ->
+                sendDialogueOptions(player, "Select an Option", "Yes please, I'd like to go to $destination.", "No, thanks.")
+                addDialogueAction(player) { player, button ->
                     closeDialogue(player)
-                    sendPlayerDialogue(player, "Sorry, I don't seem to have enough coins.", FaceAnim.HALF_GUILTY)
-                    return@addDialogueAction
+                    if(button == 2) {
+                        if (!inInventory(player, Items.COINS_995, 10)) {
+                            sendPlayerDialogue(player, "Sorry, I don't seem to have enough coins.", FaceAnim.HALF_GUILTY)
+                        }
+                        sendMessage(player, "You hop into the cart and the driver urges the horses on. You take a taxing journey through the jungle to $destination.")
+                        quickTravel(player, npc.id)
+                    } else {
+                        sendPlayerDialogue(player, "No, thanks.")
+                    }
                 }
-                sendPlayerDialogue(player, "Yes please, I'd like to go to $destination.")
-                sendMessage(player, "You hop into the cart and the driver urges the horses on. You take a taxing journey through the jungle to $destination.")
-                quickTravel(player, npc.id)
             }
         }
     }
