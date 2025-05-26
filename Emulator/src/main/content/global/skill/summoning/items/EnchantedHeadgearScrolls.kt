@@ -85,10 +85,11 @@ object EnchantedHeadgearScrolls {
             return
         }
 
-        val builder = StringBuilder("Your headgear contains:\n")
+        val builder = StringBuilder("Your headgear contains: ")
         for ((scrollId, amount) in scrolls) {
             val scrollName = getItemName(scrollId)
             builder.append("${amount}x $scrollName.")
+
         }
 
         sendDialogue(player, builder.toString())
@@ -119,11 +120,22 @@ object EnchantedHeadgearScrolls {
             return
         }
 
+        val key = Pair(player, chargedItemId)
+        val storedScrolls = playerHeadgearScrolls[key]
+
+        if (storedScrolls != null && storedScrolls.isNotEmpty()) {
+            val differentScrolls = storedScrolls.keys.filter { it != scrollId }
+            if (differentScrolls.isNotEmpty()) {
+                sendMessage(player, "Your headgear already contains different scrolls. Remove them first.")
+                return
+            }
+        }
+
         val currentCount = getCurrentScrollCount(player, chargedItemId, scrollId)
         val freeSpace = headgear.scrollCapacity - currentCount
 
         if (freeSpace <= 0) {
-            sendMessage(player, "Your headgear scroll storage is full.")
+            sendMessage(player, "Your headgear is full.")
             return
         }
 
@@ -178,7 +190,21 @@ object EnchantedHeadgearScrolls {
 
         playerHeadgearScrolls.remove(key)
 
-        player.inventory.replace(chargedItemId.asItem(), headgear.enchantedItem.id)
+        var slot = -1
+        for (i in 0 until player.inventory.itemCount()) {
+            val item = player.inventory[i]
+            if (item != null && item.id == chargedItemId) {
+                slot = i
+                break
+            }
+        }
+
+        if (slot == -1) {
+            sendMessage(player, "Could not find the charged headgear in your inventory.")
+            return
+        }
+
+        player.inventory.replace(Item(headgear.enchantedItem.id), slot)
 
         sendMessages(
             player,
