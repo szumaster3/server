@@ -44,7 +44,7 @@ abstract class Forager : BurdenBeast {
      * Constructs a new [Forager] with the default DEFENSIVE attack style.
      */
     constructor(
-        owner: Player,
+        owner: Player?,
         id: Int,
         ticks: Int,
         pouchId: Int,
