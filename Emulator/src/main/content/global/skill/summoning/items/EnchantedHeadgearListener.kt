@@ -70,7 +70,9 @@ class EnchantedHeadgearListener : InteractionListener {
 
             val currentScrolls = getScrolls(player, item)
             val totalStored = currentScrolls.values.sum()
-            if (totalStored >= headgear.scrollCapacity) {
+            val capacityLeft = headgear.scrollCapacity - totalStored
+
+            if (capacityLeft <= 0) {
                 sendMessage(player, "Your headgear cannot hold any more scrolls.")
                 return@onUseWith true
             }
@@ -80,14 +82,19 @@ class EnchantedHeadgearListener : InteractionListener {
                 return@onUseWith true
             }
 
-            addScrollToHeadgear(player, item, scrollItem.id)
-            removeItem(player, scrollItem.id)
+            val scrollsAmount = capacityLeft.coerceAtMost(scrollItem.amount)
+
+            repeat(scrollsAmount) {
+                addScrollToHeadgear(player, item, scrollItem.id)
+            }
+
+            removeItem(player, Item(scrollItem.id, scrollsAmount))
 
             if (item.id != headgear.chargedItem.id) {
                 replaceSlot(player, item.index, headgear.chargedItem)
             }
 
-            sendMessage(player, "You add the scroll to the enchanted headgear.")
+            sendMessage(player, "You add $scrollsAmount scroll${if (scrollsAmount > 1) "s" else ""} to the enchanted headgear.")
             return@onUseWith true
         }
     }
