@@ -17,7 +17,7 @@ class GeneralShadowListener : InteractionListener {
          */
 
         on(Scenery.CRACK_21800, IntType.SCENERY, "Enter") { player, node ->
-            if (GeneralShadow.isQuestComplete(player)) {
+            if (GeneralShadow.isComplete(player)) {
                 teleport(player, Location(1759, 4711, 0))
                 return@on true
             }
