@@ -38,12 +38,13 @@ class BloatedLeechNPC
         curePoison(owner)
         cureDisease(owner)
         for (i in Skills.SKILL_NAME.indices) {
-            if (owner.getSkills().getLevel(i) < owner.getSkills().getStaticLevel(i)) {
-                owner.getSkills().updateLevel(
-                    i,
-                    ceil(owner.getSkills().getStaticLevel(i) * 0.2).toInt(),
-                    owner.getSkills().getStaticLevel(i)
-                )
+            if (i == Skills.PRAYER) continue
+
+            val current = owner.getSkills().getLevel(i)
+            val base = owner.getSkills().getStaticLevel(i)
+            if (current < base) {
+                val restored = ceil(base * 0.2).toInt()
+                owner.getSkills().setLevel(i, minOf(current + restored, base))
             }
         }
         owner.impactHandler.manualHit(owner, RandomFunction.random(1, 5), HitsplatType.NORMAL)
