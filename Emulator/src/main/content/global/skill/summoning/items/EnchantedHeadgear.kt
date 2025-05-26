@@ -36,18 +36,47 @@ enum class EnchantedHeadgear(
     ARMADYL_HELM(Item(Items.ARMADYL_HELMET_11718), Item(Items.ARMADYL_HELMET_E_12670), Item(Items.ARMADYL_HELMET_CHARGED_12671), 120, 60);
 
     companion object {
+        /**
+         * A map of default (unenchanted) headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         */
         private val byDefault = values().associateBy { it.defaultItem.id }
+
+        /**
+         * A map of enchanted (but uncharged) headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         */
         private val byEnchanted = values().associateBy { it.enchantedItem.id }
+
+        /**
+         * A map of charged headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         */
         val byCharged = values().associateBy { it.chargedItem.id }
 
+        /**
+         * Finds the corresponding [EnchantedHeadgear] for headgear item type: default, enchanted, or charged.
+         *
+         * @param item The item to match.
+         * @return The corresponding [EnchantedHeadgear], or `null` if not found.
+         */
         fun forItem(item: Item): EnchantedHeadgear? =
             byDefault[item.id] ?: byEnchanted[item.id] ?: byCharged[item.id]
 
+        /**
+         * Gets the charged item version of the given item, if it corresponds to any [EnchantedHeadgear].
+         *
+         * @param item The item to resolve.
+         * @return The charged [Item], or `null` if the item is not part of the [EnchantedHeadgear] set.
+         */
         fun getChargedItem(item: Item): Item? {
             val headgear = forItem(item) ?: return null
             return headgear.chargedItem
         }
 
+        /**
+         * Resolves the [EnchantedHeadgear] instance associated specifically with an enchanted (uncharged) item.
+         *
+         * @param item The enchanted item to check.
+         * @return The [EnchantedHeadgear], or `null` if the item is not an enchanted variant.
+         */
         fun forEnchanted(item: Item): EnchantedHeadgear? = byEnchanted[item.id]
     }
 }

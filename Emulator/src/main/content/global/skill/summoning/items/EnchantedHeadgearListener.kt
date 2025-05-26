@@ -49,21 +49,15 @@ class EnchantedHeadgearListener : InteractionListener {
 
         on(chargedIDs, IntType.ITEM, "Uncharge") { player, node ->
             val item = node.asItem() ?: return@on true
-            val headgear = EnchantedHeadgear.forItem(item) ?: return@on true
-
-            val (scroll, amount) = EnchantedHeadgearScrolls.decodeCharge(item.charge)
-            if (scroll == null || amount <= 0) {
+            if (!EnchantedHeadgearScrolls.hasScrolls(player, item.id)) {
                 sendDialogue(player, "There are no scrolls stored in this headgear.")
                 return@on true
             }
-
             if (freeSlots(player) == 0) {
                 sendDialogue(player, "You need at least one free inventory slot to remove the scrolls.")
                 return@on true
             }
-
-            EnchantedHeadgearScrolls.uncharge(player, item)
-            replaceSlot(player, item.index, headgear.enchantedItem)
+            EnchantedHeadgearScrolls.unchargeHeadgear(player, item.id)
             return@on true
         }
 
@@ -72,8 +66,7 @@ class EnchantedHeadgearListener : InteractionListener {
          */
 
         on(chargedIDs, IntType.ITEM, "Commune", "Operate") { player, node ->
-            val item = node.asItem() ?: return@on true
-            EnchantedHeadgearScrolls.checkScrolls(player, item)
+            EnchantedHeadgearScrolls.checkHeadgear(player, node.id)
             return@on true
         }
 

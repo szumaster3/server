@@ -9,13 +9,29 @@ import org.rs.consts.Items
  * Handles the storage and retrieval of Summoning scrolls inside enchanted headgear items.
  */
 object EnchantedHeadgearScrolls {
-    private const val MAX_AMOUNT = 0xFFFF
     private val playerHeadgearScrolls = mutableMapOf<Pair<Player, Int>, MutableMap<Int, Int>>()
 
+    /**
+     * Returns the current count of a specific scroll stored in the given charged headgear for a player.
+     *
+     * @param player The player whose headgear is checked.
+     * @param chargedItemId The charged headgear item id.
+     * @param scrollId The scroll item id.
+     * @return The amount of the scroll stored, or 0 if none.
+     */
     fun getCurrentScrollCount(player: Player, chargedItemId: Int, scrollId: Int): Int {
         return playerHeadgearScrolls[Pair(player, chargedItemId)]?.get(scrollId) ?: 0
     }
 
+    /**
+     * Adds a specified amount of a scroll to the player's charged headgear storage.
+     *
+     * @param player The player adding the scroll.
+     * @param chargedItemId The charged headgear item ID.
+     * @param scrollId The scroll item ID.
+     * @param amount The amount of scrolls to add.
+     * @return True if the scrolls were successfully added.
+     */
     fun addScroll(player: Player, chargedItemId: Int, scrollId: Int, amount: Int): Boolean {
         val map = playerHeadgearScrolls.getOrPut(Pair(player, chargedItemId)) { mutableMapOf() }
         val current = map[scrollId] ?: 0
@@ -23,6 +39,22 @@ object EnchantedHeadgearScrolls {
         return true
     }
 
+    /**
+     * Checks if the player's charged headgear contains any stored scrolls.
+     *
+     * @param player The player to check.
+     * @param chargedItemId The charged headgear item ID.
+     * @return True if the headgear has stored scrolls, false otherwise.
+     */
+    fun hasScrolls(player: Player, chargedItemId: Int): Boolean {
+        val key = Pair(player, chargedItemId)
+        val scrolls = playerHeadgearScrolls[key]
+        return !scrolls.isNullOrEmpty()
+    }
+
+    /**
+     * List of allowed scroll item IDs that can be stored in enchanted headgear.
+     */
     val allowedScrollIDs = intArrayOf(
         Items.HOWL_SCROLL_12425, Items.DREADFOWL_STRIKE_SCROLL_12445, Items.SLIME_SPRAY_SCROLL_12459,
         Items.PESTER_SCROLL_12838, Items.ELECTRIC_LASH_SCROLL_12460, Items.FIREBALL_ASSAULT_SCROLL_12839,
@@ -39,20 +71,37 @@ object EnchantedHeadgearScrolls {
         Items.IRON_WITHIN_SCROLL_12828, Items.STEEL_OF_LEGENDS_SCROLL_12825
     )
 
-    private fun isAllowedScroll(scrollId: Int): Boolean = scrollId in allowedScrollIDs
+    /**
+     * Sends a message to the player detailing which scrolls are stored in the charged headgear.
+     *
+     * @param player The player to send the message to.
+     * @param chargedItemId The charged headgear item ID.
+     */
+    fun checkHeadgear(player: Player, chargedItemId: Int) {
+        val scrolls = playerHeadgearScrolls[Pair(player, chargedItemId)]
 
-    private fun encodeCharge(scrollId: Int, amount: Int): Int {
-        val safeAmount = amount.coerceIn(0, MAX_AMOUNT)
-        return (scrollId shl 16) or safeAmount
+        if (scrolls.isNullOrEmpty()) {
+            sendMessage(player, "Your headgear holds no scrolls.")
+            return
+        }
+
+        val builder = StringBuilder("Your headgear contains:\n")
+        for ((scrollId, amount) in scrolls) {
+            val scrollName = getItemName(scrollId)
+            builder.append("${amount}x $scrollName.")
+        }
+
+        sendDialogue(player, builder.toString())
     }
 
-    fun decodeCharge(charge: Int): Pair<Int?, Int> {
-        if (charge == 0) return null to 0
-        val scrollId = (charge ushr 16) and 0xFFFF
-        val amount = charge and 0xFFFF
-        return if (isAllowedScroll(scrollId)) scrollId to amount else null to 0
-    }
-
+    /**
+     * Attempts to add a number of scrolls to the player's charged headgear item, removing them from inventory if successful.
+     *
+     * @param chargedItemId The charged headgear item ID.
+     * @param scrollId The scroll item ID to add.
+     * @param amount The amount of scrolls to add.
+     * @param player The player adding the scrolls.
+     */
     fun addScrollToChargedItem(
         chargedItemId: Int,
         scrollId: Int,
@@ -100,32 +149,41 @@ object EnchantedHeadgearScrolls {
             sendMessage(player, "Failed to add scrolls to your headgear.")
             return
         }
-
-        sendMessage(player, "Added $toAdd scroll(s) to your headgear.")
+        sendMessage(player, "You add $toAdd scroll${if (toAdd > 1) "s" else ""} to the enchanted headgear.")
     }
 
-    fun checkScrolls(player: Player, item: Item) {
-        val (scrollId, amount) = decodeCharge(item.charge)
-        if (scrollId == null || amount <= 0) {
-            sendDialogue(player, "There are no scrolls stored in this headgear.")
-        } else {
-            val scrollName = getItemName(item.id)
-            sendDialogue(player, "The headgear contains: $amount $scrollName${if (amount > 1) "s" else ""}.")
+    /**
+     * Removes all stored scrolls from the charged headgear, returning them to the inventory and replacing the headgear with its uncharged form.
+     *
+     * @param player The player uncharging the headgear.
+     * @param chargedItemId The charged headgear item ID.
+     */
+    fun unchargeHeadgear(player: Player, chargedItemId: Int) {
+        val headgear = EnchantedHeadgear.byCharged[chargedItemId] ?: run {
+            sendMessage(player, "This item cannot be uncharged.")
+            return
         }
-    }
 
-    fun uncharge(player: Player, item: Item) {
-        val (scrollId, amount) = decodeCharge(item.charge)
-        if (scrollId != null && amount > 0) {
+        val key = Pair(player, chargedItemId)
+        val scrolls = playerHeadgearScrolls[key]
+
+        if (scrolls.isNullOrEmpty()) {
+            sendMessage(player, "Your headgear has no scrolls to remove.")
+            return
+        }
+
+        scrolls.forEach { (scrollId, amount) ->
             player.inventory.add(Item(scrollId, amount))
-            item.charge = 0
-            sendMessages(
-                player,
-                "You remove the scrolls. You will need to use a Summoning scroll on it to charge the",
-                "headgear up once more."
-            )
-        } else {
-            sendMessages(player, "There are no scrolls to remove.")
         }
+
+        playerHeadgearScrolls.remove(key)
+
+        player.inventory.replace(chargedItemId.asItem(), headgear.enchantedItem.id)
+
+        sendMessages(
+            player,
+            "You remove the scrolls. You will need to use a Summoning scroll on it to charge the",
+            "headgear up once more.",
+        )
     }
 }
