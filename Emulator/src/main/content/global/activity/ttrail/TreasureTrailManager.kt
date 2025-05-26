@@ -215,6 +215,8 @@ class TreasureTrailManager :
     fun getCompletedClues(level: ClueLevel): Int = completedClues[level.ordinal]
 
     companion object {
+        val idMap = HashMap<Int, Int>()
+
         /**
          * Represents the clue scroll ids.
          */
@@ -307,6 +309,11 @@ class TreasureTrailManager :
             Items.CLUE_SCROLL_13075, Items.CLUE_SCROLL_13076, Items.CLUE_SCROLL_13078, Items.CLUE_SCROLL_13079,
             Items.CLUE_SCROLL_13080
         )
+        init {
+            for (id in clueScrollIds) {
+                idMap[id] = 0
+            }
+        }
 
         /**
          * Gets the instance of [TreasureTrailManager] associated with the player.

@@ -169,6 +169,6 @@ class TreasureTrailPlugin : OptionHandler() {
         /**
          * The array of clue scroll item ids handled by this plugin.
          */
-        private val IDS = TreasureTrailManager.clueScrollIds
+        private val IDS = TreasureTrailManager.idMap.keys.toIntArray()
     }
 }
