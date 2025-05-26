@@ -81,16 +81,16 @@ class KeldagrimListener : InteractionListener {
          */
 
         on(Scenery.BOOKCASE_6091, IntType.SCENERY, "search") { player, _ ->
+            sendMessage(player, "You search the books...")
             when {
                 inInventory(player, Items.EXPLORERS_NOTES_11677) -> {
-                    sendMessage(player, "You search the books...")
                     sendMessageWithDelay(player, "You find nothing of interest to you.", 1)
                 }
-                freeSlots(player) < 1 -> {
+                freeSlots(player) == 0 -> {
                     sendMessage(player, "You need at least one free inventory space to take from the shelves.")
                 }
                 else -> {
-                    sendMessage(player, "You search the bookcase and find a book named 'Explorer's Notes'.")
+                    sendMessage(player, "...and find a book named 'Explorer's Notes'.")
                     addItemOrDrop(player, Items.EXPLORERS_NOTES_11677)
                 }
             }
