@@ -191,7 +191,7 @@ class CyclopesRoom :
                         if (current % 100 == 0) {
                             val tokens = Item(Items.WARRIOR_GUILD_TOKEN_8851, 10)
                             if (!player.inventory.containsItem(tokens)) {
-                                if (!player.locks.isMovementLocked) {
+                                if (!player.locks.isMovementLocked()) {
                                     player.pulseManager.clear()
                                     Pathfinder.find(player.location, Location.create(2847, 3541, 2)).walk(player)
                                     player.lock(50)

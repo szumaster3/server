@@ -266,7 +266,7 @@ object InteractionListeners {
                 else -> DestinationFlag.OBJECT
             }
 
-        if (player.locks.isInteractionLocked) return false
+        if (player.locks.isInteractionLocked()) return false
 
         var flipped = false
 
@@ -295,7 +295,7 @@ object InteractionListeners {
             }
 
         if (type != IntType.ITEM && !isUseWithInstant(method)) {
-            if (player.locks.isMovementLocked) return false
+            if (player.locks.isMovementLocked()) return false
             player.pulseManager.run(
                 object : MovementPulse(player, with, flag, destOverride) {
                     override fun pulse(): Boolean {
@@ -349,7 +349,7 @@ object InteractionListeners {
                 else -> DestinationFlag.OBJECT
             }
 
-        if (player.locks.isInteractionLocked) return false
+        if (player.locks.isInteractionLocked()) return false
 
         val method = get(id, type.ordinal, option) ?: get(option, type.ordinal)
 
@@ -377,7 +377,7 @@ object InteractionListeners {
             )
 
         if (type != IntType.ITEM && !isInstant(method)) {
-            if (player.locks.isMovementLocked) return false
+            if (player.locks.isMovementLocked()) return false
             player.pulseManager.run(
                 object : MovementPulse(player, node, flag, destOverride) {
                     override fun pulse(): Boolean {

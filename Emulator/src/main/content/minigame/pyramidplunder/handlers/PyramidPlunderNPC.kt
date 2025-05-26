@@ -41,7 +41,7 @@ abstract class PyramidPlunderNPC(
         if (ticks > endTime) {
             clear()
         }
-        if (!locks.isMovementLocked) {
+        if (!locks.isMovementLocked()) {
             if (dialoguePlayer == null || !dialoguePlayer.isActive || !dialoguePlayer.interfaceManager.hasChatbox()) {
                 dialoguePlayer = null
             }
@@ -53,7 +53,7 @@ abstract class PyramidPlunderNPC(
             startFollowing()
         }
         if (quotes != null) {
-            if (nextSpeech < ticks && getDialoguePlayer() == null && !locks.isMovementLocked) {
+            if (nextSpeech < ticks && getDialoguePlayer() == null && !locks.isMovementLocked()) {
                 if (count > quotes.size - 1) {
                     return
                 }

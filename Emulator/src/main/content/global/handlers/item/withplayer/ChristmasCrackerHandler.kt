@@ -22,7 +22,7 @@ class ChristmasCrackerHandler : UseWithHandler() {
         val target = event.usedWith as Player
         if (target == null ||
             !target.isActive ||
-            target.locks.isInteractionLocked ||
+            target.locks.isInteractionLocked() ||
             target.interfaceManager.opened != null
         ) {
             event.player.packetDispatch.sendMessage("The other player is currently busy.")

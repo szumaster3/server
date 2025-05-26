@@ -20,7 +20,7 @@ class LightCreatureBehavior : NPCBehavior(NPCs.LIGHT_CREATURE_2021) {
     }
 
     override fun tick(self: NPC): Boolean {
-        if (!self.locks.isMovementLocked) {
+        if (!self.locks.isMovementLocked()) {
             self.isWalks = true
             self.walkRadius = 20
             if (self.isWalks && !self.pulseManager.hasPulseRunning() && self.nextWalk < ticks) {

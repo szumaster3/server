@@ -1699,7 +1699,7 @@ fun lockEquipment(
     entity: Entity,
     duration: Int,
 ) {
-    entity.locks.equipmentLock.lock(duration)
+    entity.locks.equipmentLock!!.lock(duration)
 }
 
 /**
@@ -1709,7 +1709,7 @@ fun lockEquipment(
  * @return `true` if teleportation is locked, `false` otherwise.
  */
 fun lockTeleport(entity: Entity) {
-    entity.locks.isTeleportLocked
+    entity.locks.isTeleportLocked()
 }
 
 /**

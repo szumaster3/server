@@ -174,7 +174,7 @@ object PacketProcessor {
             is Packet.InputPromptResponse -> {
                 val script: ((Any) -> Boolean) =
                     pkt.player.getAttribute<((Any) -> Boolean)?>("runscript", null) ?: return
-                if (pkt.player.locks.isInteractionLocked) {
+                if (pkt.player.locks.isInteractionLocked()) {
                     return
                 }
                 try {
@@ -545,7 +545,7 @@ object PacketProcessor {
         }
 
         var loc = Location.create(x, y, player.location.z)
-        var canWalk = !player.locks.isMovementLocked
+        var canWalk = !player.locks.isMovementLocked()
 
         val vec = Vector.betweenLocs(player.location, loc)
         if (vec.magnitude() > ServerConstants.MAX_PATHFIND_DISTANCE) {
@@ -627,7 +627,7 @@ object PacketProcessor {
         if (player.dialogueInterpreter.dialogue != null && pkt.opcode != 132 && pkt.iface != 64 && pkt.iface != 746) {
             player.dialogueInterpreter.close()
         }
-        if (player.locks.isComponentLocked) {
+        if (player.locks.isComponentLocked()) {
             return
         }
         if (player.zoneMonitor.clickButton(pkt.iface, pkt.child, pkt.slot, pkt.itemId, pkt.opcode)) {
@@ -882,7 +882,7 @@ object PacketProcessor {
             return
         }
         val option = item.interaction[pkt.optIndex] ?: return
-        if (pkt.player.locks.isInteractionLocked) {
+        if (pkt.player.locks.isInteractionLocked()) {
             return
         }
         item.interaction.handleItemOption(pkt.player, option, container)
@@ -959,7 +959,7 @@ object PacketProcessor {
             }
             counter += token.length + 1
         }
-        messages.add(message.substring(0, min(counter, message.length)))
+        messages.add(message.substring(0, counter.coerceAtMost(message.length)))
         if (counter < message.length) {
             messages.add(message.substring(counter, message.length))
         }

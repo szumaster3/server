@@ -660,7 +660,7 @@ class VinesweeperNPC : AbstractNPC {
 
     override fun handleTickActions() {
         val dest = seedDestinations.find { sd -> sd.loc == location }
-        if (locks.isMovementLocked || locks.isInteractionLocked) return
+        if (locks.isMovementLocked() || locks.isInteractionLocked()) return
         if (dest != null) {
             for (npc in RegionManager.getRegionPlane(location).npcs) {
                 if (npc is VinesweeperNPC) {

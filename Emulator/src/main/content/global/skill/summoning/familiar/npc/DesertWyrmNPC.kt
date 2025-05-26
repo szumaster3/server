@@ -80,7 +80,7 @@ class DesertWyrmNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
                 if (!player.familiarManager.isOwner(node as Familiar)) {
                     return true
                 }
-                if ((node as NPC).locks.isMovementLocked) {
+                if ((node as NPC).locks.isMovementLocked()) {
                     return true
                 }
                 if (rock == null) {

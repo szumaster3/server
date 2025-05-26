@@ -155,7 +155,7 @@ class CombatPulse(
         if (type == InteractionType.STILL_INTERACT) {
             return true
         }
-        if (entity == null || victim == null || entity.locks.isMovementLocked) {
+        if (entity == null || victim == null || entity.locks.isMovementLocked()) {
             return false
         }
         movement.updatePath()
@@ -189,7 +189,7 @@ class CombatPulse(
         if (victim == null) {
             return
         }
-        if (entity!!.locks.isInteractionLocked) {
+        if (entity!!.locks.isInteractionLocked()) {
             return
         }
         if (victim === this.victim && isAttacking) {
@@ -232,7 +232,7 @@ class CombatPulse(
                     )
                 }
             }
-            if (!victim.locks.isMovementLocked) {
+            if (!victim.locks.isMovementLocked()) {
                 victim.walkingQueue.reset()
             }
         }

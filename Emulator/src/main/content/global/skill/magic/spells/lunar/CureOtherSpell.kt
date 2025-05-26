@@ -20,7 +20,7 @@ class CureOtherSpell : SpellListener("lunar") {
                     return@onCast
                 }
                 val p = node.asPlayer()
-                if (!p.isActive || p.locks.isInteractionLocked) {
+                if (!p.isActive || p.locks.isInteractionLocked()) {
                     sendMessage(player, "This player is busy.")
                     return@onCast
                 }

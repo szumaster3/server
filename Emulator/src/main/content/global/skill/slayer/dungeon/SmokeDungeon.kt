@@ -45,7 +45,7 @@ class SmokeDungeon :
         private fun isPlayerAffected(player: Player): Boolean =
             !player.interfaceManager.isOpened() &&
                 !player.interfaceManager.hasChatbox() &&
-                !player.locks.isMovementLocked &&
+                !player.locks.isMovementLocked() &&
                 getDelay(player) < GameWorld.ticks &&
                 !isProtected(player)
 

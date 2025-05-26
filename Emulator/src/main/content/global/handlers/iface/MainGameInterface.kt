@@ -117,7 +117,7 @@ class MainGameInterface : InterfaceListener {
             player.packetDispatch.sendMessage("It wouldn't be very wise opening the world map during combat.")
             return
         }
-        if (player.locks.isInteractionLocked || player.locks.isMovementLocked) {
+        if (player.locks.isInteractionLocked() || player.locks.isMovementLocked()) {
             player.packetDispatch.sendMessage("You can't do this right now.")
             return
         }

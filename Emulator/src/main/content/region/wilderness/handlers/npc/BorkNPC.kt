@@ -57,7 +57,7 @@ class BorkNPC : AbstractNPC {
             return
         }
         super.handleTickActions()
-        if (!locks.isMovementLocked && player != null) {
+        if (!locks.isMovementLocked() && player != null) {
             if (!properties.combatPulse.isAttacking) {
                 properties.combatPulse.attack(player)
             }

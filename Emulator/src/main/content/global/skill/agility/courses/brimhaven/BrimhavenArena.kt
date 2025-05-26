@@ -144,7 +144,7 @@ class BrimhavenArena :
         loc: Location,
         dest: Location,
     ): Boolean {
-        if (!e.locks.isMovementLocked && e is Player) {
+        if (!e.locks.isMovementLocked() && e is Player) {
             val hook = LOCATION_TRAPS[loc]
             if (hook != null) {
                 e.setDirection(Direction.getLogicalDirection(loc, dest))
@@ -158,7 +158,7 @@ class BrimhavenArena :
         e: Entity,
         last: Location,
     ) {
-        if (!e.locks.isMovementLocked && e is Player) {
+        if (!e.locks.isMovementLocked() && e is Player) {
             val hook = LOCATION_TRAPS[e.getLocation()]
             if (hook != null) {
                 if (!hook.handle(e, e.getLocation())) {

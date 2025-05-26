@@ -57,9 +57,9 @@ class EquipHandler : InteractionListener {
             }
             val item = player.equipment[slot] ?: return
             val lock = player.locks.equipmentLock
-            if (lock != null && lock.isLocked) {
+            if (lock != null && lock.isLocked()) {
                 if (lock.message != null) {
-                    sendMessage(player, lock.message)
+                    sendMessage(player, lock.message!!)
                 }
                 return
             }
@@ -139,9 +139,9 @@ class EquipHandler : InteractionListener {
             }
 
             val lock = player.locks.equipmentLock
-            if (lock != null && lock.isLocked) {
+            if (lock != null && lock.isLocked()) {
                 if (lock.message != null) {
-                    sendMessage(player, lock.message)
+                    sendMessage(player, lock.message!!)
                 }
                 return
             }

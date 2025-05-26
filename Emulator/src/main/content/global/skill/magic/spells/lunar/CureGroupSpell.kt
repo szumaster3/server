@@ -22,7 +22,7 @@ class CureGroupSpell : SpellListener("lunar") {
             visualizeSpell(player, Animations.LUNAR_CURE_GROUP_4409, 744, 130, Sounds.LUNAR_CURE_GROUP_2882)
             curePoison(player)
             for (acct in RegionManager.getLocalPlayers(player, 1)) {
-                if (!acct.isActive || acct.locks.isInteractionLocked) {
+                if (!acct.isActive || acct.locks.isInteractionLocked()) {
                     continue
                 }
                 if (!acct.settings.isAcceptAid) {

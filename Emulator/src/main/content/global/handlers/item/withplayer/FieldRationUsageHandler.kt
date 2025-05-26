@@ -18,7 +18,7 @@ class FieldRationUsageHandler : UseWithHandler() {
     override fun handle(event: NodeUsageEvent): Boolean {
         val item = event.used as Item
         val target = event.usedWith as Player
-        if (target == null || !target.isActive || target.locks.isInteractionLocked) {
+        if (target == null || !target.isActive || target.locks.isInteractionLocked()) {
             event.player.packetDispatch.sendMessage("The other player is currently busy.")
             return true
         }

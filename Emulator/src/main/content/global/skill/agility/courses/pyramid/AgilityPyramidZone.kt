@@ -34,7 +34,7 @@ class AgilityPyramidZone :
         loc: Location,
         dest: Location,
     ): Boolean {
-        if (!e.locks.isMovementLocked && e is Player) {
+        if (!e.locks.isMovementLocked() && e is Player) {
             val hook = LOCATION_TRAPS[loc]
             if (hook != null) {
                 e.setDirection(Direction.getLogicalDirection(loc, dest))

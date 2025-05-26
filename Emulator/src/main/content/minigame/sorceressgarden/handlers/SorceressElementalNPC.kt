@@ -334,7 +334,7 @@ class SorceressElementalNPC : AbstractNPC {
         for (player in players) {
             if (player == null ||
                 !player.isActive ||
-                player.locks.isInteractionLocked ||
+                player.locks.isInteractionLocked() ||
                 DeathTask.isDead(player) ||
                 !canTeleport(player) ||
                 !isProjectileClipped(this, player, false)

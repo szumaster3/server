@@ -190,8 +190,8 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             val rights = player.rights.ordinal
             if (player.interfaceManager.isOpened() &&
                 player.interfaceManager.opened?.id != Components.QUESTJOURNAL_SCROLL_275 ||
-                player.locks.isMovementLocked ||
-                player.locks.isTeleportLocked
+                player.locks.isMovementLocked() ||
+                player.locks.isTeleportLocked()
             ) {
                 reject(player, "Please finish what you're doing first.")
             }

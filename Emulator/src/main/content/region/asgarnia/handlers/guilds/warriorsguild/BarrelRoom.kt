@@ -59,9 +59,7 @@ class BarrelRoom :
                         player.equipment[EquipmentContainer.SLOT_HANDS] != null ||
                         helmId != currentBarrel
                     ) {
-                        player.dialogueInterpreter.sendDialogue(
-                            "To balance kegs you will need your head and hands free!",
-                        )
+                        player.dialogueInterpreter.sendDialogue("To balance kegs you will need your head and hands free!")
                         return true
                     }
                     var id = currentBarrel + 1
@@ -74,7 +72,7 @@ class BarrelRoom :
                     player.lock(5)
                     player.animate(Animation.create(4180))
                     val lock = Lock("You're too busy balancing barrels to do that!")
-                    lock.lock()
+                    lock.lock(5)
                     player.locks.equipmentLock = lock
                     player.packetDispatch.sendMessage("You pick up the keg and balance it on your head carefully.")
                     Pulser.submit(
@@ -129,7 +127,7 @@ class BarrelRoom :
                     while (it.hasNext()) {
                         val player = it.next()
                         player.settings.updateRunEnergy(5.0)
-                        if (player.locks.isMovementLocked) {
+                        if (player.locks.isMovementLocked()) {
                             continue
                         }
                         val barrels = (player.getAttribute("barrel_count", 8860) - 8859)
@@ -151,7 +149,7 @@ class BarrelRoom :
 
         private fun removeBarrels(player: Player) {
             if (player.locks.equipmentLock != null) {
-                player.locks.equipmentLock.unlock()
+                player.locks.equipmentLock!!.unlock()
             }
             removeAttribute(player, "barrel_count")
             player.walkingQueue.isRunDisabled = false

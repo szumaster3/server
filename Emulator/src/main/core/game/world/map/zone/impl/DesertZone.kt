@@ -129,7 +129,7 @@ class DesertZone :
                         if (!getAttribute(player, TUTORIAL_COMPLETE, false) ||
                             player.interfaceManager.isOpened() ||
                             player.interfaceManager.hasChatbox() ||
-                            player.locks.isMovementLocked
+                            player.locks.isMovementLocked()
                         ) {
                             continue
                         }

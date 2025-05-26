@@ -72,7 +72,7 @@ class BindSpell : CombatSpell {
         } else if (state.spell.spellId == 56) {
             tick = 25
         }
-        if (!victim.locks.isMovementLocked && victim is Player) {
+        if (!victim.locks.isMovementLocked() && victim is Player) {
             victim.packetDispatch.sendMessage("A magical force stops you from moving!")
         }
         victim.walkingQueue.reset()

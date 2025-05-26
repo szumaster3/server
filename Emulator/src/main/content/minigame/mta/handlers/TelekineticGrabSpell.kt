@@ -104,11 +104,11 @@ class TelekineticGrabSpell :
         }
     }
 
-    fun canCast(
+    private fun canCast(
         entity: Entity,
         item: GroundItem?,
     ): Boolean {
-        if (entity.locks.isInteractionLocked || entity.locks.isComponentLocked) {
+        if (entity.locks.isInteractionLocked() || entity.locks.isComponentLocked()) {
             return false
         }
 
@@ -129,7 +129,7 @@ class TelekineticGrabSpell :
         return super.meetsRequirements(entity, true, true)
     }
 
-    fun getProjectile(
+    private fun getProjectile(
         entity: Entity,
         item: GroundItem,
     ): Projectile =
