@@ -11,10 +11,10 @@ import org.rs.consts.Scenery
 class IncubatorListener : InteractionListener {
 
     private val eggIds = IncubatorEgg.values().map { it.egg.id }.toIntArray()
-    private val incubators = intArrayOf(28550, 28352, Scenery.INCUBATOR_28359)
+    private val incubatorIds = intArrayOf(28550, 28352, Scenery.INCUBATOR_28359)
 
     override fun defineListeners() {
-        on(incubators, IntType.SCENERY, "take-egg") { player, _ ->
+        on(incubatorIds, IntType.SCENERY, "take-egg") { player, _ ->
             val region = player.location.regionId
             val activeEgg = IncubatorTimer.getEggFor(player, region) ?: return@on false
 
@@ -37,7 +37,7 @@ class IncubatorListener : InteractionListener {
             return@on true
         }
 
-        on(incubators, IntType.SCENERY, "inspect") { player, _ ->
+        on(incubatorIds, IntType.SCENERY, "inspect") { player, _ ->
             val activeEgg = IncubatorTimer.getEggFor(player, player.location.regionId)
 
             if (activeEgg == null) {
@@ -59,7 +59,7 @@ class IncubatorListener : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, eggIds, *incubators) { player, used, _ ->
+        onUseWith(IntType.SCENERY, eggIds, *incubatorIds) { player, used, _ ->
             val egg = IncubatorEgg.forItem(used.asItem()) ?: return@onUseWith false
             val activeEgg = IncubatorTimer.getEggFor(player, player.location.regionId)
 

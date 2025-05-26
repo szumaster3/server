@@ -101,7 +101,7 @@ public final class FamiliarManager {
             familiar.specialPoints = Integer.parseInt(currentFamiliar.get("specialPoints").toString());
             JSONArray famInv = (JSONArray) currentFamiliar.get("inventory");
             if (famInv != null) {
-                ((BurdenBeast) familiar).container.parse(famInv);
+                ((BurdenBeast) familiar).getContainer().parse(famInv);
             }
             familiar.setAttribute("hp", Integer.parseInt(currentFamiliar.get("lifepoints").toString()));
         }
