@@ -92,6 +92,8 @@ class CrypticClue : CrypticClueScroll {
         register(CrypticClue("digsite-doug-deep", Items.CLUE_SCROLL_10264, ClueLevel.HARD, "You'll need to have Doug Deep<br>into the distant<br>past to get to these sacks.", Location.create(3348, 9758, 0), Scenery.SACKS_32049, ZoneBorders(3347, 9757, 3349, 9759)))
         register(CrypticClue("captain-klemfoodle", Items.CLUE_SCROLL_10266, ClueLevel.MEDIUM, "You can cook food on me,<br>but don't cook any foodles -<br>That would be just wrong.", Location.create(2969, 2975, 0), Scenery.FIRE_2732, ZoneBorders(2968, 2974, 2970, 2976)))
         register(CrypticClue("lubufu-brimhaven", Items.CLUE_SCROLL_10268, ClueLevel.MEDIUM, "The owner of this crate has<br>a hunch that he put more<br>than fish inside.", Location.create(2770, 3172, 0), Scenery.CRATE_366, ZoneBorders(2769, 3171, 2771, 3173)))
+        register(CrypticClue("canifis-archery-shop", Items.CLUE_SCROLL_10270, ClueLevel.EASY, "Search the drawers in<br>Catherby's Archery shop.", Location.create(2825, 3442, 0), Scenery.DRAWERS_33932, ZoneBorders(2824, 3441, 2826, 3443)))
+        register(CrypticClue("yanille-crates", Items.CLUE_SCROLL_10272, ClueLevel.EASY, "Search the crates in a house<br>in Yanille that has a piano.", Location.create(2598, 3105, 0), Scenery.CRATE_357, ZoneBorders(2597, 3104, 2599, 3106)))
         return this
     }
 }
