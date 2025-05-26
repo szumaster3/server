@@ -28,7 +28,7 @@ abstract class Forager : BurdenBeast {
      * @param items the list of items it may forage
      */
     constructor(
-        owner: Player,
+        owner: Player?,
         id: Int,
         ticks: Int,
         pouchId: Int,
