@@ -34,7 +34,7 @@ class HarrallakMenarousDialogue(
                             stage =
                                 53
                         }
-                    2 -> playerl(FaceAnim.HALF_GUILTY, "You any good with a sword?").also { stage = 5 }
+                    2 -> playerl(FaceAnim.HALF_GUILTY, "You any good with a sword?").also { stage = 4 }
                     3 -> playerl(FaceAnim.HALF_GUILTY, "Bye!").also { stage++ }
                 }
             2 ->
@@ -49,7 +49,7 @@ class HarrallakMenarousDialogue(
                     "Am I any good with a sword'? Have you any clue who I",
                     "am?",
                 ).also { stage++ }
-            5 -> npc(FaceAnim.HALF_GUILTY, "Not really, no.").also { stage++ }
+            5 -> player(FaceAnim.HALF_GUILTY, "Not really, no.").also { stage++ }
             6 -> npcl(FaceAnim.HALF_GUILTY, "Why, I could best any person alive in a rapier duel!").also { stage++ }
 
             7 -> playerl(FaceAnim.HALF_GUILTY, "Try me, then!").also { stage++ }
@@ -108,7 +108,7 @@ class HarrallakMenarousDialogue(
                 ).also {
                     stage++
                 }
-            14 -> playerl(FaceAnim.HALF_GUILTY, "Oh? Why?").also { stage = 15 }
+            14 -> playerl(FaceAnim.HALF_GUILTY, "Oh? Why?").also { stage++ }
             15 ->
                 npc(
                     FaceAnim.HALF_GUILTY,
