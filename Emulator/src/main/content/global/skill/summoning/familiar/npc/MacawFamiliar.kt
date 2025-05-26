@@ -3,27 +3,29 @@ package content.global.skill.summoning.familiar.npc
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
+import core.api.item.produceGroundItem
 import core.api.queueScript
 import core.api.sendMessage
 import core.api.stopExecuting
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
-import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Macaw familiar.
+ */
 @Initializable
 class MacawFamiliar(
     owner: Player? = null,
     id: Int = NPCs.MACAW_6851,
-) : Forager(owner, id, 3100, Items.MACAW_POUCH_12071, 12, *HERBS) {
+) : Forager(owner, id, 3100, Items.MACAW_POUCH_12071, 12, *HERBS_IDS) {
     private var specialDelay = 0
 
     override fun construct(
@@ -40,11 +42,11 @@ class MacawFamiliar(
             sendMessage(owner, "The macaw is too tired to fly for herbs. Try again shortly.")
             return false
         }
-        val herb = HERBS[RandomFunction.random(HERBS.size)]
+        val randomHerb = HERBS_IDS.random()
         animate(Animation.create(8013))
         graphics(Graphics.create(1321), 2)
         queueScript(owner, 5, QueueStrength.SOFT) {
-            GroundItemManager.create(herb, getLocation(), owner)
+            produceGroundItem(owner, randomHerb.id, 1, getLocation())
             return@queueScript stopExecuting(owner)
         }
         specialDelay = GameWorld.ticks + 100
@@ -52,7 +54,7 @@ class MacawFamiliar(
     }
 
     companion object {
-        private val HERBS =
+        private val HERBS_IDS =
             arrayOf(
                 Item(Items.GRIMY_GUAM_199),
                 Item(Items.GRIMY_RANARR_207),
