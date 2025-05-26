@@ -17,6 +17,10 @@ import org.rs.consts.NPCs
 
 class EnchantedGemListener : InteractionListener {
     override fun defineListeners() {
+        /*
+         * Handles interaction with enchanted gem.
+         */
+
         on(Items.ENCHANTED_GEM_4155, IntType.ITEM, "activate") { player, _ ->
             openDialogue(player, EnchantedGemDialogue())
             return@on true
@@ -24,6 +28,9 @@ class EnchantedGemListener : InteractionListener {
     }
 }
 
+/**
+ * Represents Enchanted gem dialogue.
+ */
 class EnchantedGemDialogue : DialogueFile() {
     var firstRun = true
 
@@ -48,23 +55,12 @@ class EnchantedGemDialogue : DialogueFile() {
             100 -> {
                 firstRun = false
                 if (!hasSlayerTask(player!!)) {
-                    npcl(
-                        expression,
-                        "You need something new to hunt. Come and see me when you can and I'll give you a new task.",
-                    ).also {
-                        stage =
-                            1
-                    }
+                    npcl(expression, "You need something new to hunt. Come and see me when you can and I'll give you a new task.").also { stage = 1 }
                 } else {
                     if (getSlayerTask(player!!) == Tasks.JAD) {
                         npcl(expression, "You're currently assigned to kill TzTok-Jad!")
                     } else {
-                        npcl(
-                            expression,
-                            "You're currently assigned to kill ${getSlayerTaskName(
-                                player!!,
-                            )}s; only ${getSlayerTaskKillsRemaining(player!!)} more to go.",
-                        )
+                        npcl(expression, "You're currently assigned to kill ${getSlayerTaskName(player!!)}s; only ${getSlayerTaskKillsRemaining(player!!)} more to go.")
                     }
                     setVarp(player!!, 2502, getSlayerTaskFlags(player!!) shr 4)
                     stage = 1
@@ -73,24 +69,12 @@ class EnchantedGemDialogue : DialogueFile() {
 
             200 -> {
                 firstRun = false
-                npcl(
-                    expression,
-                    "My name's ${getSlayerMaster(player!!).name}, I'm the Slayer Master best able to train you.",
-                ).also {
-                    stage =
-                        1
-                }
+                npcl(expression, "My name's ${getSlayerMaster(player!!).name}, I'm the Slayer Master best able to train you.").also { stage = 1 }
             }
 
             300 -> {
                 firstRun = false
-                npcl(
-                    expression,
-                    "You'll find me in ${getSlayerMasterLocation(player!!)}, I'll be here when you need a new task.",
-                ).also {
-                    stage =
-                        1
-                }
+                npcl(expression, "You'll find me in ${getSlayerMasterLocation(player!!)}, I'll be here when you need a new task.").also { stage = 1 }
             }
 
             400 -> {

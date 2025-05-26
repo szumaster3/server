@@ -14,6 +14,11 @@ import org.rs.consts.Items
 
 class IceCoolerListener : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles use the ice cooler on deert lizards.
+         */
+
         onUseWith(IntType.NPC, Items.ICE_COOLER_6696, *Tasks.DESERT_LIZARDS.npcs) { player, used, with ->
             if (getStatLevel(player, Skills.SLAYER) < 22) {
                 sendMessage(player, "You need a Slayer level of at least 22 to do this.")

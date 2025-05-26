@@ -9,7 +9,17 @@ import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
 import org.rs.consts.Items
 
+/**
+ * Utilities for Slayer-related helper functions.
+ */
 object SlayerUtils {
+    /**
+     * Generates a Slayer task for the given player and Slayer master.
+     *
+     * @param player the player to assign a task to
+     * @param master the Slayer master providing the task
+     * @return the assigned [Tasks] or null if no suitable task found
+     */
     fun generate(
         player: Player,
         master: SlayerMaster,
@@ -33,7 +43,13 @@ object SlayerUtils {
         return null
     }
 
-    fun canBeAssigned(
+    /**
+     * Checks whether the given Slayer task can be assigned to the player.
+     * @param player the player to check eligibility for
+     * @param task the Slayer task to check
+     * @return true if the task can be assigned, false otherwise
+     */
+    private fun canBeAssigned(
         player: Player,
         task: Tasks,
     ): Boolean =
@@ -48,6 +64,13 @@ object SlayerUtils {
                 player,
             )
 
+    /**
+     * Assigns a Slayer task to the player from the given Slayer master.
+     *
+     * @param player the player to assign the task to
+     * @param task the Slayer task to assign
+     * @param master the Slayer master assigning the task
+     */
     fun assign(
         player: Player,
         task: Tasks,
@@ -65,6 +88,14 @@ object SlayerUtils {
         setVarp(player, 2502, SlayerManager.getInstance(player).flags.taskFlags shr 4)
     }
 
+    /**
+     * Checks if the player currently has a broad weapon equipped or
+     * is using broad ammunition or the correct spell in the modern spellbook.
+     *
+     * @param player the player whose equipment is checked
+     * @param state the battle state containing weapon, ammunition, and spell info
+     * @return true if a broad weapon, broad ammo, or the specific spell is used; false otherwise
+     */
     @JvmStatic
     fun hasBroadWeaponEquipped(
         player: Player,
