@@ -38,7 +38,7 @@ class ZoneMonitorTests {
                 // level 21 wilderness
                 p.skullManager.level = 21
                 p.location = (Location.create(3067, 3683, 0))
-                Assertions.assertTrue(p.locks.isTeleportLocked)
+                Assertions.assertTrue(p.locks.isTeleportLocked())
                 teleportWithGlory(true, p)
             }
         }
@@ -49,7 +49,7 @@ class ZoneMonitorTests {
                 // level 30 wilderness
                 p.location = (Location.create(3069, 3755, 0))
                 p.skullManager.level = 30
-                Assertions.assertTrue(p.locks.isTeleportLocked)
+                Assertions.assertTrue(p.locks.isTeleportLocked())
                 teleportWithGlory(true, p)
             }
         }
@@ -59,7 +59,7 @@ class ZoneMonitorTests {
             TestUtils.getMockPlayer("").use { p ->
                 // lumbridge
                 p.location = (Location.create(3222, 3218, 0))
-                Assertions.assertFalse(p.locks.isTeleportLocked)
+                Assertions.assertFalse(p.locks.isTeleportLocked())
                 Assertions.assertFalse(hasTimerActive(p, "teleblock"))
                 Assertions.assertFalse(p.zoneMonitor.isRestricted(ZoneRestriction.TELEPORT))
                 teleportWithGlory(true, p)
@@ -82,7 +82,7 @@ class ZoneMonitorTests {
         fun failOnLock() {
             TestUtils.getMockPlayer("").use { p ->
                 p.locks.lockTeleport(100000)
-                Assertions.assertTrue(p.locks.isTeleportLocked)
+                Assertions.assertTrue(p.locks.isTeleportLocked())
                 teleportWithGlory(false, p)
             }
         }
