@@ -41,40 +41,42 @@ class PackYakNPC
     }
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
-        val player = owner
-        var item = Item(special.item.id, 1)
+        val player = owner ?: return false
+        var item = special.item ?: return false
+        item = Item(item.id, 1)
+
         if (item.id == SummoningScroll.WINTER_STORAGE_SCROLL.itemId) {
             return false
         }
+
         if (!item.definition.getConfiguration(ItemConfigParser.BANKABLE, true)) {
             sendMessage(player, "A magical force prevents you from banking this item.")
             return false
         }
-        var remove = item
+
+        val remove = if (!item.definition.isUnnoted()) {
+            Item(item.id, 1)
+        } else {
+            item
+        }
+
         if (!item.definition.isUnnoted()) {
-            remove = Item(item.id, 1)
             item = Item(item.noteChange, 1)
         }
+
         var success = addItem(player, item.id, item.amount, Container.BANK)
         if (success) {
             success = removeItem(player, remove, Container.INVENTORY)
             if (!success) {
                 val recovered = removeItem(player, item, Container.BANK)
                 if (recovered) {
-                    log(
-                        player,
-                        LogType.DUPE_ALERT,
-                        "Successfully recovered from potential dupe attempt involving the winter storage scroll"
-                    )
+                    log(player, LogType.DUPE_ALERT, "Successfully recovered from potential dupe attempt involving the winter storage scroll")
                 } else {
-                    log(
-                        player,
-                        LogType.DUPE_ALERT,
-                        "Failed to recover from potentially successful dupe attempt involving the winter storage scroll"
-                    )
+                    log(player, LogType.DUPE_ALERT, "Failed to recover from potentially successful dupe attempt involving the winter storage scroll")
                 }
             }
         }
+
         if (success) {
             player.dialogueInterpreter.close()
             graphics(Graphics.create(1358))
