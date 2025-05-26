@@ -35,7 +35,7 @@ class GravediggerListener : InteractionListener {
         private val ANIMATION = Animation(Animations.MULTI_BEND_OVER_827)
 
         private val COFFIN_SETS = CoffinSet.values()
-        private val COFFIN_IDS = COFFIN_SETS.map { it.coffinId }.toIntArray()
+        val COFFIN_IDS = COFFIN_SETS.map { it.coffinId }.toIntArray()
         private val GRAVESTONE_IDS = COFFIN_SETS.map { it.gravestoneId }.toIntArray()
         private val GRAVE_IDS = COFFIN_SETS.map { it.graveId }.toIntArray()
         private val EMPTY_GRAVE_IDS = COFFIN_SETS.map { it.emptyGraveId }.toIntArray()

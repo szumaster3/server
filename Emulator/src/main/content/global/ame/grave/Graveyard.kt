@@ -14,31 +14,36 @@ class Graveyard : MapArea {
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
-        if (entity !is Player) return
-        val player = entity.asPlayer()
-        GravediggerListener.init(player)
+        if (entity is Player) {
+            GravediggerListener.init(entity)
+        }
     }
 
     override fun areaLeave(entity: Entity, logout: Boolean) {
         super.areaLeave(entity, logout)
-        val scenery0 = getScenery(Location(1924, 4996, 0))
-        replaceScenery(scenery0!!.asScenery(), 12721, -1)
-        val scenery1 = getScenery(Location(1926, 4999, 0))
-        replaceScenery(scenery1!!.asScenery(), 12722, -1)
-        val scenery2 = getScenery(Location(1928, 4996, 0))
-        replaceScenery(scenery2!!.asScenery(), 12723, -1)
-        val scenery3 = getScenery(Location(1930, 4999, 0))
-        replaceScenery(scenery3!!.asScenery(), 12724, -1)
-        val scenery4 = getScenery(Location(1932, 4996, 0))
-        replaceScenery(scenery4!!.asScenery(), 12725, -1)
+
+        val graveScenery = listOf(
+            Triple(1924, 4996, 12721),
+            Triple(1926, 4999, 12722),
+            Triple(1928, 4996, 12723),
+            Triple(1930, 4999, 12724),
+            Triple(1932, 4996, 12725)
+        )
+
+        for ((x, y, newId) in graveScenery) {
+            val location = Location(x, y, 0)
+            getScenery(location)?.asScenery()?.let {
+                replaceScenery(it, newId, -1)
+            }
+        }
 
         if (entity is Player) {
-            val player = entity.asPlayer()
-            if (anyInInventory(player, *GravediggerListener.COFFIN)) {
-                for (itemId in GravediggerListener.COFFIN) {
-                    removeAll(player, itemId)
-                }
+            val player = entity
+
+            if (anyInInventory(player, *GravediggerListener.COFFIN_IDS)) {
+                GravediggerListener.COFFIN_IDS.forEach { removeAll(player, it) }
             }
+
             GravediggerListener.reset(player)
             removeAttributes(player, "random:talk-to")
         }
