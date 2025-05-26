@@ -1,5 +1,6 @@
 package core.game.node.entity.player.info.login
 
+import content.global.skill.summoning.items.EnchantedHeadgearScrolls
 import core.ServerConstants
 import core.Util
 import core.api.PersistPlayer
@@ -79,6 +80,7 @@ class PlayerSaveParser(
         parseStatistics()
         parseAchievements()
         parsePouches()
+        parseHeadgear()
         parseVersion()
     }
 
@@ -93,6 +95,13 @@ class PlayerSaveParser(
 
     fun parsePouches() {
         if (saveFile!!.containsKey("pouches")) player.pouchManager.parse(saveFile!!["pouches"] as JSONArray)
+    }
+
+    fun parseHeadgear() {
+        if (saveFile!!.containsKey("chargedScrolls")) {
+            val data = saveFile!!["chargedScrolls"] as JSONArray
+            EnchantedHeadgearScrolls.parse(player, data)
+        }
     }
 
     fun parseAttributes() {

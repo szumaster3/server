@@ -2,6 +2,7 @@ package core.game.node.entity.player.info.login
 
 import com.google.gson.GsonBuilder
 import content.global.skill.summoning.familiar.BurdenBeast
+import content.global.skill.summoning.items.EnchantedHeadgearScrolls
 import content.global.skill.summoning.pet.Pet
 import core.ServerConstants
 import core.api.PersistPlayer
@@ -54,6 +55,7 @@ class PlayerSaver(
         saveStatManager(saveFile)
         saveAttributes(saveFile)
         savePouches(saveFile)
+        saveHeadgear(saveFile)
         saveVersion(saveFile)
         contentHooks.forEach { it.savePlayer(player, saveFile) }
         return saveFile
@@ -101,6 +103,10 @@ class PlayerSaver(
 
     fun savePouches(root: JSONObject) {
         player.pouchManager.save(root)
+    }
+
+    fun saveHeadgear(root: JSONObject) {
+        EnchantedHeadgearScrolls.save(player, root)
     }
 
     fun saveVersion(root: JSONObject) {

@@ -3,6 +3,8 @@ package content.global.skill.summoning.items
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import org.json.simple.JSONArray
+import org.json.simple.JSONObject
 import org.rs.consts.Items
 
 /**
@@ -211,5 +213,39 @@ object EnchantedHeadgearScrolls {
             "You remove the scrolls. You will need to use a Summoning scroll on it to charge the",
             "headgear up once more.",
         )
+    }
+
+    fun save(player: Player, root: JSONObject) {
+        val chargedArray = JSONArray()
+
+        val filtered = playerHeadgearScrolls.filterKeys { it.first == player }
+
+        for ((key, scrollMap) in filtered) {
+            val chargedItemId = key.second
+            for ((scrollId, amount) in scrollMap) {
+                val obj = JSONObject()
+                obj["chargedItemId"] = chargedItemId.toString()
+                obj["scrollId"] = scrollId.toString()
+                obj["amount"] = amount.toString()
+                chargedArray.add(obj)
+            }
+        }
+
+        root["chargedScrolls"] = chargedArray
+    }
+
+    fun parse(player: Player, data: JSONArray) {
+        playerHeadgearScrolls.entries.removeIf { it.key.first == player }
+
+        for (e in data) {
+            val obj = e as JSONObject
+            val chargedItemId = obj["chargedItemId"].toString().toInt()
+            val scrollId = obj["scrollId"].toString().toInt()
+            val amount = obj["amount"].toString().toInt()
+
+            val key = Pair(player, chargedItemId)
+            val map = playerHeadgearScrolls.getOrPut(key) { mutableMapOf() }
+            map[scrollId] = amount
+        }
     }
 }
