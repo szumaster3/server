@@ -94,8 +94,8 @@ class GravediggerListener : InteractionListener {
                 sendMessage(player, "You need space in your inventory to take the coffin.")
                 return@on true
             }
-            queueScript(player, 1, QueueStrength.NORMAL) {
-                lock(player, 3)
+            lock(player, 3)
+            queueScript(player, 0, QueueStrength.NORMAL) {
                 player.animate(ANIMATION)
                 addItem(player, coffin.id, 1)
                 replaceScenery(node.asScenery(), set.emptyGraveId, -1)
@@ -112,8 +112,8 @@ class GravediggerListener : InteractionListener {
             player.incrementAttribute(GameAttributes.GRAVEDIGGER_SCORE, 1)
 
             if (removeItem(player, used.asItem())) {
-                queueScript(player, 1, QueueStrength.NORMAL) {
-                    lock(player, 3)
+                lock(player, 3)
+                queueScript(player, 0, QueueStrength.NORMAL) {
                     player.animate(ANIMATION)
                     replaceScenery(target.asScenery(), set.graveId, -1)
                     sendMessage(player, "You put the coffin into the grave.")
