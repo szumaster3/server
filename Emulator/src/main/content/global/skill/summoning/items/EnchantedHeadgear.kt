@@ -1,11 +1,10 @@
 package content.global.skill.summoning.items
 
-import core.game.container.Container
 import core.game.node.item.Item
 import org.rs.consts.Items
 
 /**
- * The enum Enchanted headgear.
+ * Represents the enchanted headgear items for the Summoning skill.
  */
 enum class EnchantedHeadgear(
     val defaultItem: Item,
@@ -37,34 +36,28 @@ enum class EnchantedHeadgear(
 
     companion object {
         /**
-         * A map of default headgear item ids to their corresponding [EnchantedHeadgear] instance.
+         * Maps default items to their headgear enum.
          */
         private val byDefault = values().associateBy { it.defaultItem.id }
 
         /**
-         * A map of enchanted (but uncharged) headgear item ids to their corresponding [EnchantedHeadgear] instance.
+         * Maps enchanted (uncharged) items to their headgear enum.
          */
         private val byEnchanted = values().associateBy { it.enchantedItem.id }
 
         /**
-         * A map of charged headgear item ids to their corresponding [EnchantedHeadgear] instance.
+         * Maps charged items to their headgear enum.
          */
         val byCharged = values().associateBy { it.chargedItem.id }
 
         /**
-         * Finds the corresponding [EnchantedHeadgear] for headgear item type: default, enchanted, or charged.
-         *
-         * @param item The item to match.
-         * @return The corresponding [EnchantedHeadgear], or `null` if not found.
+         * Gets the [EnchantedHeadgear] for the given item (default, enchanted, or charged).
          */
         fun forItem(item: Item): EnchantedHeadgear? =
             byDefault[item.id] ?: byEnchanted[item.id] ?: byCharged[item.id]
 
         /**
-         * Gets the charged item version of the given item, if it corresponds to any [EnchantedHeadgear].
-         *
-         * @param item The item to resolve.
-         * @return The charged [Item], or `null` if the item is not part of the [EnchantedHeadgear] set.
+         * Returns the charged variant of the given item, or `null` if not applicable.
          */
         fun getChargedItem(item: Item): Item? {
             val headgear = forItem(item) ?: return null
@@ -72,10 +65,7 @@ enum class EnchantedHeadgear(
         }
 
         /**
-         * Resolves the [EnchantedHeadgear] instance associated specifically with an enchanted (uncharged) item.
-         *
-         * @param item The enchanted item to check.
-         * @return The [EnchantedHeadgear], or `null` if the item is not an enchanted variant.
+         * Gets the [EnchantedHeadgear] for an enchanted (uncharged) item.
          */
         fun forEnchanted(item: Item): EnchantedHeadgear? = byEnchanted[item.id]
     }

@@ -17,7 +17,6 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.rs.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.HashMap;

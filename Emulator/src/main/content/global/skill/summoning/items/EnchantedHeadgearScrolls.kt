@@ -8,18 +8,13 @@ import org.json.simple.JSONObject
 import org.rs.consts.Items
 
 /**
- * Handles the storage and retrieval of Summoning scrolls inside enchanted headgear items.
+ * Manages Summoning scrolls stored inside enchanted headgear items.
  */
 object EnchantedHeadgearScrolls {
     private val playerHeadgearScrolls = mutableMapOf<Pair<Player, Int>, MutableMap<Int, Int>>()
 
     /**
-     * Returns the current count of a specific scroll stored in the given charged headgear for a player.
-     *
-     * @param player The player whose headgear is checked.
-     * @param chargedItemId The charged headgear item id.
-     * @param scrollId The scroll item id.
-     * @return The amount of the scroll stored, or 0 if none.
+     * Gets the count of a specific scroll stored in a headgear.
      */
     @JvmStatic
     fun getCurrentScrollCount(player: Player, chargedItemId: Int, scrollId: Int): Int {
@@ -27,13 +22,8 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Adds a specified amount of a scroll to the player's charged headgear storage.
-     *
-     * @param player The player adding the scroll.
-     * @param chargedItemId The charged headgear item ID.
-     * @param scrollId The scroll item ID.
-     * @param amount The amount of scrolls to add.
-     * @return True if the scrolls were successfully added.
+     * Adds scrolls to a charged headgear.
+     * @return `true` on success.
      */
     fun addScroll(player: Player, chargedItemId: Int, scrollId: Int, amount: Int): Boolean {
         val map = playerHeadgearScrolls.getOrPut(Pair(player, chargedItemId)) { mutableMapOf() }
@@ -43,11 +33,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Checks if the player's charged headgear contains any stored scrolls.
-     *
-     * @param player The player to check.
-     * @param chargedItemId The charged headgear item ID.
-     * @return True if the headgear has stored scrolls, false otherwise.
+     * Checks if the player headgear contains any scrolls.
      */
     fun hasScrolls(player: Player, chargedItemId: Int): Boolean {
         val key = Pair(player, chargedItemId)
@@ -56,7 +42,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * List of allowed scroll item IDs that can be stored in enchanted headgear.
+     * Allowed scroll item ids for headgear.
      */
     val allowedScrollIDs = intArrayOf(
         Items.HOWL_SCROLL_12425, Items.DREADFOWL_STRIKE_SCROLL_12445, Items.SLIME_SPRAY_SCROLL_12459,
@@ -75,10 +61,7 @@ object EnchantedHeadgearScrolls {
     )
 
     /**
-     * Sends a message to the player detailing which scrolls are stored in the charged headgear.
-     *
-     * @param player The player to send the message to.
-     * @param chargedItemId The charged headgear item ID.
+     * Sends a message listing stored scrolls in the headgear.
      */
     fun checkHeadgear(player: Player, chargedItemId: Int) {
         val scrolls = playerHeadgearScrolls[Pair(player, chargedItemId)]
@@ -98,12 +81,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Attempts to add a number of scrolls to the player's charged headgear item, removing them from inventory if successful.
-     *
-     * @param chargedItemId The charged headgear item ID.
-     * @param scrollId The scroll item ID to add.
-     * @param amount The amount of scrolls to add.
-     * @param player The player adding the scrolls.
+     * Adds scrolls to headgear.
      */
     fun addScrollToChargedItem(
         chargedItemId: Int,
@@ -167,10 +145,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Removes all stored scrolls from the charged headgear, returning them to the inventory and replacing the headgear with its uncharged form.
-     *
-     * @param player The player uncharging the headgear.
-     * @param chargedItemId The charged headgear item ID.
+     * Removes all stored scrolls from headgear.
      */
     fun unchargeHeadgear(player: Player, chargedItemId: Int) {
         val headgear = EnchantedHeadgear.byCharged[chargedItemId] ?: run {
@@ -216,7 +191,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Returns the scroll id and count stored in the headgear, or `null` if none found.
+     * Returns the first stored scroll id and amount for a player, or `null` if none.
      */
     @JvmStatic
     fun getStoredScroll(player: Player): Pair<Int, Int>? {
@@ -230,7 +205,8 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Consume one scroll from the player's headgear. Returns true if successful.
+     * Consumes one scroll from charged headgear.
+     * @return `true` if successful.
      */
     @JvmStatic
     fun removeScroll(player: Player, chargedItemId: Int, scrollId: Int): Boolean {
@@ -247,11 +223,9 @@ object EnchantedHeadgearScrolls {
 
         return true
     }
+
     /**
-     * Gets the id of the charged enchanted headgear currently equip by the player, if any.
-     *
-     * @param player The player to check.
-     * @return The item id of the worn charged headgear, or null if none is worn.
+     * Returns the charged enchanted headgear item id the player is wearing, or null.
      */
     @JvmStatic
     fun getFromEquipment(player: Player): Int? {
@@ -262,9 +236,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Gets total count of scrolls (inventory + from charged item)
-     * @param player The player.
-     * @param scrollId the scroll.
+     * Gets total count of a scroll across inventory and charged headgear.
      */
     fun getTotalScrollCount(player: Player, scrollId: Int): Int {
         val inventoryCount = player.inventory.getAmount(scrollId)
@@ -278,10 +250,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Serializes and saves the player charged headgear scroll data to a JSON object.
-     *
-     * @param player The player whose data should be saved.
-     * @param root The JSON object to store the scroll data in.
+     * Saves player charged scroll data to JSON.
      */
     fun save(player: Player, root: JSONObject) {
         val chargedArray = JSONArray()
@@ -303,10 +272,7 @@ object EnchantedHeadgearScrolls {
     }
 
     /**
-     * Parses and loads the player's charged headgear scroll data from a JSON array.
-     *
-     * @param player The player whose data should be loaded.
-     * @param data The JSON array containing saved scroll data.
+     * Loads player charged scroll data from JSON.
      */
     fun parse(player: Player, data: JSONArray) {
         playerHeadgearScrolls.entries.removeIf { it.key.first == player }

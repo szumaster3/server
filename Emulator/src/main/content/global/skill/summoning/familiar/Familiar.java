@@ -372,7 +372,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             playAudio(owner, Sounds.SPELL_4161);
             visualizeSpecialMove();
             updateSpecialPoints(specialCost);
-            owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
+            owner.getSkills().addExperience(Skills.SUMMONING, scroll.getXp(), true);
         }
         return true;
     }

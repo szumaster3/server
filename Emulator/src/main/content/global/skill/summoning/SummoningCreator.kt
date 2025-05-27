@@ -10,19 +10,15 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
-import org.rs.consts.Animations
-import org.rs.consts.Items
-import org.rs.consts.Quests
-import org.rs.consts.Sounds
+import org.rs.consts.*
 
 /**
- * Object responsible for summoning creation tasks, including handling the pouch and scroll actions,
- * as well as managing the creation and listing of summoning-related items.
+ * Object responsible for summoning creation tasks.
  */
 object SummoningCreator {
 
     /**
-     * Parameters for summoning pouches, including the list of actions, levels, and the component configuration.
+     * Parameters for summoning pouches.
      */
     private val POUCH_PARAMS =
         arrayOf(
@@ -34,11 +30,11 @@ object SummoningCreator {
             "Infuse<col=FF9040>",
             20,
             4,
-            669 shl 16 or 15,
+            Components.SUMMONING_POUCHES_669 shl 16 or 15,
         )
 
     /**
-     * Parameters for summoning scrolls, including the list of actions, levels, and the component configuration.
+     * Parameters for summoning scrolls.
      */
     private val SCROLL_PARAMS =
         arrayOf(
@@ -49,18 +45,18 @@ object SummoningCreator {
             "Transform<col=ff9040>",
             20,
             4,
-            673 shl 16 or 15,
+            Components.SUMMONING_SCROLLS_673 shl 16 or 15,
         )
 
     /**
-     * The component representing the summoning pouch UI.
+     * The component representing the summoning pouch interface.
      */
-    private val SUMMONING_COMPONENT = Component(669)
+    private val SUMMONING_COMPONENT = Component(Components.SUMMONING_POUCHES_669)
 
     /**
-     * The component representing the summoning scroll UI.
+     * The component representing the summoning scroll interface.
      */
-    private val SCROLL_COMPONENT = Component(673)
+    private val SCROLL_COMPONENT = Component(Components.SUMMONING_SCROLLS_673)
 
     /**
      * Opens the summoning creation interface for the player, either for pouches or scrolls.
@@ -69,10 +65,7 @@ object SummoningCreator {
      * @param pouch A boolean indicating whether to open the pouch or scroll interface.
      */
     @JvmStatic
-    fun open(
-        player: Player,
-        pouch: Boolean,
-    ) = configure(player, pouch)
+    fun open(player: Player, pouch: Boolean, ) = configure(player, pouch)
 
     /**
      * Configures the summoning interface based on whether the pouch or scroll interface is to be shown.
@@ -81,10 +74,7 @@ object SummoningCreator {
      * @param pouch A boolean indicating whether to show the pouch or scroll interface.
      */
     @JvmStatic
-    fun configure(
-        player: Player,
-        pouch: Boolean,
-    ) {
+    fun configure(player: Player, pouch: Boolean, ) {
         val component = if (pouch) SUMMONING_COMPONENT else SCROLL_COMPONENT
         val scriptParams = if (pouch) POUCH_PARAMS else SCROLL_PARAMS
         val ifaceId = if (pouch) 190 else 126
@@ -107,11 +97,7 @@ object SummoningCreator {
      * @param node The node containing the item creation information.
      */
     @JvmStatic
-    fun create(
-        player: Player,
-        amount: Int,
-        node: Any?,
-    ) {
+    fun create(player: Player, amount: Int, node: Any?) {
         node?.let {
             player.pulseManager.run(CreatePulse(player, SummoningNode.parse(node), amount))
         }
@@ -124,10 +110,7 @@ object SummoningCreator {
      * @param pouch The summoning pouch to list.
      */
     @JvmStatic
-    fun list(
-        player: Player,
-        pouch: SummoningPouch,
-    ) {
+    fun list(player: Player, pouch: SummoningPouch) {
         player.packetDispatch.sendMessage(CS2Mapping.forId(1186)?.map?.get(pouch.pouchId) as? String)
     }
 
@@ -135,11 +118,7 @@ object SummoningCreator {
      * Skill pulse used for creating a summoning item, which handles the animation, requirements check,
      * item removal, and experience reward.
      */
-    class CreatePulse(
-        player: Player?,
-        private val type: SummoningNode,
-        private val amount: Int,
-    ) : SkillPulse<Item?>(player, null) {
+    class CreatePulse(player: Player?, private val type: SummoningNode, private val amount: Int, ) : SkillPulse<Item?>(player, null) {
         private val objectIDs = getObject(Location(2209, 5344, 0))
 
         /**
@@ -226,13 +205,7 @@ object SummoningCreator {
      * @property experience The experience awarded for creating the item.
      * @property level The level required to create the item.
      */
-    class SummoningNode(
-        val base: Any,
-        val required: Array<Item>,
-        val product: Item,
-        val experience: Double,
-        val level: Int,
-    ) {
+    class SummoningNode(val base: Any, val required: Array<Item>, val product: Item, val experience: Double, val level: Int, ) {
         val isPouch: Boolean get() = base is SummoningPouch
 
         companion object {
@@ -259,7 +232,7 @@ object SummoningCreator {
                             base = node,
                             required = node.items.map { Item(it, 1) }.toTypedArray(),
                             product = Item(node.itemId, 10),
-                            experience = node.experience,
+                            experience = node.xp,
                             level = node.level,
                         )
 
