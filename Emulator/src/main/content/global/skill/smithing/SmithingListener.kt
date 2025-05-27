@@ -39,7 +39,7 @@ class SmithingListener : InteractionListener {
                 "heavy reward and needs some serious work doing to it.",
             )
             addDialogueAction(player) { _, _ ->
-                lock(player, 5)
+                lock(player, 10)
                 animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
                 submitIndividualPulse(player, DragonShieldPulse(player, used.asItem()))
                 return@addDialogueAction

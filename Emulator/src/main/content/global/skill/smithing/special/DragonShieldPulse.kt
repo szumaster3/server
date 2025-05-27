@@ -37,7 +37,6 @@ class DragonShieldPulse(
     override fun reward(): Boolean {
         when (tick++) {
             0 -> {
-                lock(player, 10)
                 animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
                 tick++
             }
