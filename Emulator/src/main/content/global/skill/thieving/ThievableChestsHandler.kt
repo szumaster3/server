@@ -75,31 +75,18 @@ class ThievableChestsHandler : OptionHandler() {
     /**
      * Represents the different types of thievable chests in the game.
      */
-    enum class Chest(
-        val objectIds: IntArray,
-        val level: Int,
-        val experience: Double,
-        val rewards: Array<Item>,
-        val respawn: Int,
-    ) {
+    enum class Chest(val objectIds: IntArray, val level: Int, val experience: Double, val rewards: Array<Item>, val respawn: Int, ) {
         TEN_COIN(2566, 13, 7.8, arrayOf(Item(Items.COINS_995, 10)), 7),
         NATURE_RUNE(2567, 28, 25.0, arrayOf(Item(Items.COINS_995, 3), Item(Items.NATURE_RUNE_561, 1)), 8),
         FIFTY_COIN(2568, 43, 125.0, arrayOf(Item(Items.COINS_995, 50)), 55),
         STEEL_ARROWHEADS(2573, 47, 150.0, arrayOf(Item(41, 5)), 210),
         BLOOD_RUNES(2569, 59, 250.0, arrayOf(Item(Items.COINS_995, 500), Item(Items.BLOOD_RUNE_565, 2)), 135),
         PALADIN(2570, 72, 500.0, arrayOf(Item(Items.COINS_995, 1000), Item(Items.RAW_SHARK_383, 1), Item(Items.ADAMANTITE_ORE_449, 1), Item(Items.UNCUT_SAPPHIRE_1623, 1)), 120),
-
         ;
 
         private var currentRespawn = 0
 
-        constructor(
-            objectId: Int,
-            level: Int,
-            experience: Double,
-            rewards: Array<Item>,
-            respawn: Int,
-        ) : this(intArrayOf(objectId), level, experience, rewards, respawn)
+        constructor(objectId: Int, level: Int, experience: Double, rewards: Array<Item>, respawn: Int, ) : this(intArrayOf(objectId), level, experience, rewards, respawn)
 
         /**
          * Opens the chest and applies the corresponding effects such as trap activation and damage.
@@ -127,10 +114,7 @@ class ThievableChestsHandler : OptionHandler() {
          * @param player The player searching for traps.
          * @param scenery The chest object being searched.
          */
-        fun searchTraps(
-            player: Player,
-            scenery: Scenery,
-        ) {
+        fun searchTraps(player: Player, scenery: Scenery, ) {
             player.faceLocation(scenery.location)
             if (isRespawning) {
                 sendMessage(player, "It looks like this chest has already been looted.")

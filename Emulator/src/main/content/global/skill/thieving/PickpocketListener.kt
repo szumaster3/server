@@ -20,30 +20,6 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 class PickpocketListener : InteractionListener {
-    companion object {
-        val PICKPOCKET_ANIM = Animation(Animations.HUMAN_PICKPOCKETING_881, Animator.Priority.HIGH)
-        val NPC_ANIM = Animation(Animations.PUNCH_422)
-
-        fun pickpocketRoll(
-            player: Player,
-            low: Double,
-            high: Double,
-            table: WeightBasedTable,
-        ): ArrayList<Item>? {
-            var successMod = 0.0
-            if (inInventory(player, Items.GLOVES_OF_SILENCE_10075, 1)) {
-                successMod += 3
-            }
-            val chance = RandomFunction.randomDouble(1.0, 100.0)
-            val failThreshold =
-                RandomFunction.getSkillSuccessChance(low, high, getStatLevel(player, Skills.THIEVING)) + successMod
-            if (chance > failThreshold) {
-                return null
-            } else {
-                return table.roll()
-            }
-        }
-    }
 
     override fun defineListeners() {
         on(IntType.NPC, "pickpocket", "pick-pocket") { player, node ->
@@ -94,11 +70,7 @@ class PickpocketListener : InteractionListener {
 
                 playHurtAudio(player, 20)
                 stun(player, pocketData.stunTime)
-                impact(
-                    player,
-                    RandomFunction.random(pocketData.stunDamageMin, pocketData.stunDamageMax),
-                    ImpactHandler.HitsplatType.NORMAL,
-                )
+                impact(player, RandomFunction.random(pocketData.stunDamageMin, pocketData.stunDamageMax), ImpactHandler.HitsplatType.NORMAL)
                 sendMessage(player, "You feel slightly concussed from the blow.")
                 npc.face(null)
             } else {
@@ -123,19 +95,30 @@ class PickpocketListener : InteractionListener {
                     }
                 }
 
-                sendMessage(
-                    player,
-                    if (npc.id ==
-                        NPCs.CURATOR_HAIG_HALEN_646
-                    ) {
-                        "You steal a tiny key."
-                    } else {
-                        "You pick the $npcName's pocket."
-                    },
-                )
+                sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) { "You steal a tiny key." } else { "You pick the $npcName's pocket." })
                 rewardXP(player, Skills.THIEVING, pocketData.experience)
             }
             return@on true
+        }
+    }
+
+    companion object {
+        val PICKPOCKET_ANIM = Animation(Animations.HUMAN_PICKPOCKETING_881, Animator.Priority.HIGH)
+        val NPC_ANIM = Animation(Animations.PUNCH_422)
+
+        fun pickpocketRoll(player: Player, low: Double, high: Double, table: WeightBasedTable, ): ArrayList<Item>? {
+            var successMod = 0.0
+            if (inInventory(player, Items.GLOVES_OF_SILENCE_10075, 1)) {
+                successMod += 3
+            }
+            val chance = RandomFunction.randomDouble(1.0, 100.0)
+            val failThreshold =
+                RandomFunction.getSkillSuccessChance(low, high, getStatLevel(player, Skills.THIEVING)) + successMod
+            if (chance > failThreshold) {
+                return null
+            } else {
+                return table.roll()
+            }
         }
     }
 }

@@ -120,22 +120,13 @@ class PickableDoorsHandler : OptionHandler() {
      * @param isLockpick Whether a lockpick is required to unlock the door.
      * @param flipped Whether the door is flipped for a specific interaction logic.
      */
-    inner class PickableDoor(
-        val locations: Array<Location>,
-        val level: Int,
-        val experience: Double,
-        val isLockpick: Boolean = false,
-        private val flipped: Boolean = false,
-    ) {
+    inner class PickableDoor(val locations: Array<Location>, val level: Int, val experience: Double, val isLockpick: Boolean = false, private val flipped: Boolean = false, ) {
         /**
          * Opens the door if the player is on the correct side of the door.
          * @param player The player opening the door.
          * @param door The door being opened.
          */
-        fun open(
-            player: Player,
-            door: Scenery,
-        ) {
+        fun open(player: Player, door: Scenery, ) {
             if (isInside(player, door) != flipped) {
                 handleAutowalkDoor(player, door.asScenery())
                 sendMessage(player, "You go through the door.")

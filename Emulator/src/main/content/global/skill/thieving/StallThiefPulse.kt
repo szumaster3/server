@@ -20,11 +20,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class StallThiefPulse(
-    player: Player?,
-    node: Scenery?,
-    private val stall: Stall?,
-) : SkillPulse<Scenery?>(player, node) {
+class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?, ) : SkillPulse<Scenery?>(player, node) {
     private var ticks = 0
 
     override fun start() {
@@ -41,34 +37,19 @@ class StallThiefPulse(
             return false
         }
         if (getStatLevel(player, Skills.THIEVING) < stall.level) {
-            sendDialogue(
-                player,
-                "You need to be level " + stall.level + " to steal from the " + node!!.name.lowercase() + ".",
-            )
+            sendDialogue(player, "You need to be level " + stall.level + " to steal from the " + node!!.name.lowercase() + ".")
             return false
         }
         if (freeSlots(player) == 0) {
             sendMessage(player, "You don't have enough inventory space.")
             return false
         }
-        if (inBorders(player, getRegionBorders(10553)) &&
-            !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) &&
-            stall.fullIDs.contains(4278)
-        ) {
-            sendDialogue(
-                player,
-                "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.",
-            )
+        if (inBorders(player, getRegionBorders(10553)) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.fullIDs.contains(4278)) {
+            sendDialogue(player, "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
             return false
         }
-        if (inBorders(player, getRegionBorders(10553)) &&
-            !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) &&
-            stall.fullIDs.contains(4277)
-        ) {
-            sendDialogue(
-                player,
-                "The fishmonger is staring at you suspiciously. You cannot steal from his stall while he distrusts you.",
-            )
+        if (inBorders(player, getRegionBorders(10553)) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.fullIDs.contains(4277)) {
+            sendDialogue(player, "The fishmonger is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
             return false
         }
         return true
@@ -121,19 +102,7 @@ class StallThiefPulse(
             if (stall == Stall.FISH_STALL) {
                 finishDiaryTask(player, DiaryType.FREMENNIK, 1, 4)
             }
-            player.packetDispatch.sendMessage(
-                "You steal " + (
-                    if (StringUtils.isPlusN(
-                            item.name,
-                        )
-                    ) {
-                        "an "
-                    } else {
-                        "a "
-                    }
-                ) + getItemName(item.id).lowercase() +
-                    ".",
-            )
+            player.packetDispatch.sendMessage("You steal " + (if (StringUtils.isPlusN(item.name)) { "an " } else { "a " }) + getItemName(item.id).lowercase() + ".")
             player.dispatch(ResourceProducedEvent(item.id, item.amount, node!!, 0))
         }
         return true

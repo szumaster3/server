@@ -158,24 +158,6 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Provides all summoning pouches.
-         */
-
-        define(
-            name = "summoningkit",
-            privilege = Privilege.ADMIN,
-            usage = "::summoningkit",
-            description = "Provides all pouches to the bank and teleports to the obelisk.",
-        ) { player, _ ->
-            val obeliskLocation = Location.create(2208, 5344, 0)
-            finishQuest(player, Quests.WOLF_WHISTLE)
-            player.bank.addList(SummoningPouch.getAllPouchItems())
-            player.inventory.addList(SummoningPouch.getAllPouchItems())
-            teleport(player, obeliskLocation)
-            return@define
-        }
-
-        /*
          * Provides all required items to making a tea.
          */
 
