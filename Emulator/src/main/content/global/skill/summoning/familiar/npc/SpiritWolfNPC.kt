@@ -41,7 +41,7 @@ class SpiritWolfNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
      */
     init {
         if (owner != null) {
-            cutscene = owner.getAttribute<Any>("in-cutscene", null) as CutscenePlugin
+            cutscene = owner.getAttribute<Any>("in-cutscene", null) as? CutscenePlugin
         }
     }
 

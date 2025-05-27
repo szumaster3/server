@@ -37,17 +37,17 @@ enum class EnchantedHeadgear(
 
     companion object {
         /**
-         * A map of default (unenchanted) headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         * A map of default headgear item ids to their corresponding [EnchantedHeadgear] instance.
          */
         private val byDefault = values().associateBy { it.defaultItem.id }
 
         /**
-         * A map of enchanted (but uncharged) headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         * A map of enchanted (but uncharged) headgear item ids to their corresponding [EnchantedHeadgear] instance.
          */
         private val byEnchanted = values().associateBy { it.enchantedItem.id }
 
         /**
-         * A map of charged headgear item IDs to their corresponding [EnchantedHeadgear] instance.
+         * A map of charged headgear item ids to their corresponding [EnchantedHeadgear] instance.
          */
         val byCharged = values().associateBy { it.chargedItem.id }
 

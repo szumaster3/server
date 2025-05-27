@@ -1,6 +1,5 @@
 package content.global.skill.summoning.items
 
-import content.global.skill.summoning.SummoningScroll
 import content.region.asgarnia.dialogue.taverley.PikkupstixDialogueExtension
 import core.api.*
 import core.api.quest.isQuestComplete
@@ -10,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Graphics
-import core.tools.Log
 import org.rs.consts.Animations
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
@@ -28,7 +26,7 @@ class EnchantedHeadgearListener : InteractionListener {
                 return@on true
             }
 
-            if (!anyInInventory(player, *enchantIDs)) {
+            if (!anyInInventory(player, *normalItemIDs)) {
                 sendNPCDialogue(player, NPCs.PIKKUPSTIX_6970, "You do not have items that can be enchanted.")
                 return@on true
             }
@@ -112,7 +110,7 @@ class EnchantedHeadgearListener : InteractionListener {
         /**
          * IDs of headgear items that can be enchanted.
          */
-        private val enchantIDs = EnchantedHeadgear.values().map { it.defaultItem.id }.toIntArray()
+        private val normalItemIDs = EnchantedHeadgear.values().map { it.defaultItem.id }.toIntArray()
 
         /**
          * IDs of already enchanted headgear items.

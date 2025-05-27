@@ -1,5 +1,6 @@
 package content.global.skill.summoning.familiar;
 
+import content.global.skill.summoning.items.EnchantedHeadgearScrolls;
 import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.SummoningScroll;
 import content.global.skill.summoning.pet.Pet;
@@ -31,7 +32,6 @@ import core.tools.Log;
 import core.tools.RandomFunction;
 import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -347,7 +347,14 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             owner.getPacketDispatch().sendMessage("You must have a Summoning level of at least " + scroll.getLevel() + " to use this scroll.");
             return false;
         }
-        if (!owner.getInventory().contains(scroll.getItemId(), 1)) {
+        int scrollId = scroll.getItemId();
+        Integer chargedItemId = EnchantedHeadgearScrolls.getFromEquipment(owner);
+
+        boolean hasInInventory = owner.getInventory().contains(scroll.getItemId(), 1);
+        boolean hasInHeadgear = chargedItemId != null &&
+                EnchantedHeadgearScrolls.getCurrentScrollCount(owner, chargedItemId, scrollId) > 0;
+
+        if (!hasInInventory && !hasInHeadgear) {
             owner.getPacketDispatch().sendMessage("You do not have enough scrolls left to do this special move.");
             return false;
         }
@@ -357,7 +364,11 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         }
         if (specialMove(special)) {
             setAttribute("special-delay", GameWorld.getTicks() + 3);
-            owner.getInventory().remove(new Item(scroll.getItemId()));
+            if (hasInInventory) {
+                owner.getInventory().remove(new Item(scroll.getItemId()));
+            } else if (chargedItemId != null) {
+                EnchantedHeadgearScrolls.removeScroll(owner, chargedItemId, scroll.getItemId());
+            }
             playAudio(owner, Sounds.SPELL_4161);
             visualizeSpecialMove();
             updateSpecialPoints(specialCost);
