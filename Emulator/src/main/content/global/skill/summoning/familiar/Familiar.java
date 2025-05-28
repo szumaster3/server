@@ -342,11 +342,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             owner.debug("Invalid scroll for pouch " + pouchId + " - report!");
             return false;
         }
+        /*
         if (owner.getSkills().getLevel(Skills.SUMMONING) < scroll.getLevel()) {
             owner.getPacketDispatch().sendMessage("You need to have a higher Summoning level to use this scroll.");
             owner.getPacketDispatch().sendMessage("You must have a Summoning level of at least " + scroll.getLevel() + " to use this scroll.");
             return false;
         }
+        */
         int scrollId = scroll.getItemId();
         Integer chargedItemId = EnchantedHeadgearScrolls.getFromEquipment(owner);
 
