@@ -8,6 +8,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.system.timer.impl.Disease
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.Items
@@ -23,7 +24,7 @@ class BloatedLeechNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         curePoison(owner)
-        removeTimer(owner, "disease")
+        removeTimer<Disease>(owner)
 
         for (i in Skills.SKILL_NAME.indices) {
             if (i == Skills.PRAYER) continue
