@@ -1,7 +1,6 @@
 package content.region.misthalin.dialogue.monastery
 
 import core.api.*
-import core.api.quest.hasRequirement
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic
@@ -14,7 +13,6 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
-import org.rs.consts.Quests
 
 @Initializable
 class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
@@ -68,25 +66,40 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
             13 -> when (buttonId) {
                 1 -> {
                     end()
+
                     val sigil = getSigil(player)
                     if (sigil == null) {
                         end()
                         return true
                     }
+
                     val itemName = getItemName(sigil.id).lowercase()
-                    val productID = getItemName(getShield(sigil)!!.id)
-                    if (player.inventory.remove(sigil, Item(Items.COINS_995, 1500000), Item(Items.BLESSED_SPIRIT_SHIELD_13736))) {
-                        sendItemDialogue(player, "Bordiss skillfully attaches the $itemName to the blessed", "spirit shield and creates a $productID.")
-                        player.inventory.add(getShield(sigil))
+                    val shieldItem = getShield(sigil)
+                    val productID = getItemName(shieldItem!!.id)
+
+                    val coins = Item(Items.COINS_995, 1500000)
+                    val blessedShield = Item(Items.BLESSED_SPIRIT_SHIELD_13736, 1)
+
+                    if (!player.inventory.contains(sigil.id, 1) || !player.inventory.containsItem(coins) || !player.inventory.contains(blessedShield.id, 1)) {
+                        player.sendMessage("You don't have the required items to combine.")
                         return true
                     }
+
+                    player.inventory.remove(sigil)
+                    player.inventory.remove(coins)
+                    player.inventory.remove(blessedShield)
+
+                    sendItemDialogue(player, "Bordiss skillfully attaches the $itemName to the blessed", "spirit shield and creates a $productID.")
+                    player.inventory.add(shieldItem)
+
+                    return true
                 }
                 2 -> player("Oh no, that is way too expensive.").also { stage = 14 }
             }
             14 -> npcl(FaceAnim.OLD_NORMAL, "That's a shame, then.").also { stage = END_DIALOGUE }
             15 -> npcl(FaceAnim.OLD_DEFAULT, "No, I suppose I never did get a chance to explain it. It's something I learned from the druids of Guthix. It's about the balance of the atmosphere.").also { stage++ }
             16 -> npcl(FaceAnim.OLD_DEFAULT, "Sunlight causes the world to heat up but, normally, excess heat radiates upwards into the sky and away from ${GameWorld.settings!!.name}.").also { stage++ }
-            17 -> npc(FaceAnim.OLD_NORMAL, "So, the land remains at a constant temperature.").also { stage = 14 }
+            17 -> npcl(FaceAnim.OLD_NORMAL, "So, the land remains at a constant temperature.").also { stage = 14 }
             18 -> npcl(FaceAnim.OLD_DEFAULT, "Different gases trap heat more or less well. The smoke from the dragon power station trapped heat very well, more so than normal air.").also { stage++ }
             19 -> npcl(FaceAnim.OLD_DEFAULT, "You've had a taste of what would happen if the gases increased. Plants would die - except it wouldn't just be Monastery roses, it would be crops people needed to eat.").also { stage++ }
             20 -> npcl(FaceAnim.OLD_DEFAULT, "Creatures would lose their habitat and go extinct - not just vulnerable icefiends, but all sorts of creatures.").also { stage++ }
@@ -108,23 +121,23 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
                 )
             }
             27 -> sendItemDialogue(player!!, Items.LETTER_13229, "Brother Bordiss reads the letter with growing anger.").also { stage++ }
-            28 -> npc(FaceAnim.OLD_ANGRY1, "Zamorak's fiery hooves!").also { stage++ }
+            28 -> npcl(FaceAnim.OLD_ANGRY1, "Zamorak's fiery hooves!").also { stage++ }
             29 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "Brother Bordiss! Your vow of silence!").also { stage++ }
-            30 -> npc(FaceAnim.OLD_ANGRY1, "It's Drorkar! First he builds his great Zamorakian smoke-machine, and now he's sent me this letter taunting me about it! That filthy little-").also { stage++ }
+            30 -> npcl(FaceAnim.OLD_ANGRY1, "It's Drorkar! First he builds his great Zamorakian smoke-machine, and now he's sent me this letter taunting me about it! That filthy little-").also { stage++ }
             31 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "Bordiss! Language!").also { stage++ }
-            32 -> npc(FaceAnim.OLD_ANGRY1, "Look what he's written! 'My coal-dragon power station is now running at full capacity. You said this could never be done, but I have proved to be the better dwarf.'").also { stage++ }
-            33 -> npc(FaceAnim.OLD_ANGRY1, "Lies! I didn't say it couldn't be done, I said it shouldn't be done! This power station will be a disaster for dwarves and everyone else.").also { stage++ }
+            32 -> npcl(FaceAnim.OLD_ANGRY1, "Look what he's written! 'My coal-dragon power station is now running at full capacity. You said this could never be done, but I have proved to be the better dwarf.'").also { stage++ }
+            33 -> npcl(FaceAnim.OLD_ANGRY1, "Lies! I didn't say it couldn't be done, I said it shouldn't be done! This power station will be a disaster for dwarves and everyone else.").also { stage++ }
             34 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "Brother, you are letting Zamorak's anger overtake you. You have been such a pious servant of Saradomin; do not stray from the path now.").also { stage++ }
-            35 -> npc(FaceAnim.OLD_ANGRY1, "I...I am sorry, Brother Althric. I will renew my vow of silence.").also { stage++ }
+            35 -> npcl(FaceAnim.OLD_ANGRY1, "I...I am sorry, Brother Althric. I will renew my vow of silence.").also { stage++ }
             36 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "I am sorry for my brother's outburst. The path of the Saradominist monk is a demanding one and Brother Bordiss is one of our newest acolytes, so I am sure you will forgive him.").also { stage++ }
             37 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "Once my brother has achieved true peace and serenity he will never make similar- Great Saradomin!").also { stage++ }
-            38 -> player(FaceAnim.HALF_ASKING, "What's the matter?").also { stage++ }
+            38 -> playerl(FaceAnim.HALF_ASKING, "What's the matter?").also { stage++ }
             39 -> sendNPCDialogue(player, NPCs.BROTHER_ALTHRIC_2588, "My roses! Look! They're dying!").also { stage = END_DIALOGUE }
 
             40 -> npc(FaceAnim.OLD_DEFAULT, " ").also { stage++ }
-            41 -> player(FaceAnim.HALF_ASKING, "How's that working out for you?").also { stage++ }
+            41 -> playerl(FaceAnim.HALF_ASKING, "How's that working out for you?").also { stage++ }
             42 -> npc(FaceAnim.OLD_DEFAULT, " ").also { stage++ }
-            43 -> player(FaceAnim.HALF_ASKING, "Well, I suppose I'll leave you to it, then.").also { stage++ }
+            43 -> playerl(FaceAnim.HALF_ASKING, "Well, I suppose I'll leave you to it, then.").also { stage++ }
             44 -> npc(FaceAnim.OLD_DEFAULT, " ").also { stage = END_DIALOGUE }
 
             45 -> npc(FaceAnim.OLD_DEFAULT, " ").also { stage++ }

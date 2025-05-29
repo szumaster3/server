@@ -1,5 +1,6 @@
 package content.global.handlers.iface
 
+import core.api.playAudio
 import core.api.ui.restoreTabs
 import core.game.component.Component
 import core.game.interaction.InterfaceListener
@@ -15,6 +16,7 @@ class UnmorphInterface : InterfaceListener {
                     return@setUncloseEvent true
                 }.also {
                     player.unlock()
+                    playAudio(player, 1521)
                     player.appearance.transformNPC(-1)
                     restoreTabs(player)
                 }
