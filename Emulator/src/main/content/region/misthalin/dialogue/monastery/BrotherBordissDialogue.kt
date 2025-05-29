@@ -36,14 +36,14 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 showTopics(
                     Topic("I still don't understand why Ice Mountain was heating up.", 15),
-                    Topic("How is the windmill doing?", 22),
+                    Topic("How is the windmill doing?", 23),
                 )
             }
             1 -> {
                 showTopics(
                     IfTopic("A blessed spirit shield and a sigil.", 2, getSigil(player) != null && inInventory(player, Items.BLESSED_SPIRIT_SHIELD_13736, 1)),
                     Topic("I still don't understand why Ice Mountain was heating up.", 15),
-                    Topic("How is the windmill doing?", 22),
+                    Topic("How is the windmill doing?", 23),
                 )
             }
             2 -> npc(FaceAnim.OLD_DEFAULT, "This is very impressive. You know, back before I", "became a monk, I used to do a fair bit of smithing. If", "you want, I could attach a sigil to that shield of yours.").also { stage++ }
@@ -99,7 +99,7 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
             14 -> npcl(FaceAnim.OLD_NORMAL, "That's a shame, then.").also { stage = END_DIALOGUE }
             15 -> npcl(FaceAnim.OLD_DEFAULT, "No, I suppose I never did get a chance to explain it. It's something I learned from the druids of Guthix. It's about the balance of the atmosphere.").also { stage++ }
             16 -> npcl(FaceAnim.OLD_DEFAULT, "Sunlight causes the world to heat up but, normally, excess heat radiates upwards into the sky and away from ${GameWorld.settings!!.name}.").also { stage++ }
-            17 -> npcl(FaceAnim.OLD_NORMAL, "So, the land remains at a constant temperature.").also { stage = 14 }
+            17 -> npcl(FaceAnim.OLD_NORMAL, "So, the land remains at a constant temperature.").also { stage++ }
             18 -> npcl(FaceAnim.OLD_DEFAULT, "Different gases trap heat more or less well. The smoke from the dragon power station trapped heat very well, more so than normal air.").also { stage++ }
             19 -> npcl(FaceAnim.OLD_DEFAULT, "You've had a taste of what would happen if the gases increased. Plants would die - except it wouldn't just be Monastery roses, it would be crops people needed to eat.").also { stage++ }
             20 -> npcl(FaceAnim.OLD_DEFAULT, "Creatures would lose their habitat and go extinct - not just vulnerable icefiends, but all sorts of creatures.").also { stage++ }
