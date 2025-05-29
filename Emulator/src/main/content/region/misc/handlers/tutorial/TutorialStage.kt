@@ -11,7 +11,9 @@ import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.HintIconManager
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -1266,51 +1268,62 @@ object TutorialStage {
     }
 
     fun completeTutorial(player: Player) {
-        // Mark tutorial as complete.
-        setAttribute(player, "/save:tutorial:complete", true)
-        setVarbit(player, 3756, 0)
-        setVarp(player, 281, 1000, true)
-        closeOverlay(player)
+        if (player.rights != Rights.ADMINISTRATOR) {
+            queueScript(player, 1, QueueStrength.SOFT) {
+                setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 71)
+                load(player, 71)
+                player.teleporter.send(Location.create(3141, 3089, 0))
+                return@queueScript stopExecuting(player)
+            }
+        } else {
+            // Mark tutorial as complete.
+            setAttribute(player, "/save:tutorial:complete", true)
+            setVarbit(player, 3756, 0)
+            setVarp(player, 281, 1000, true)
+            closeOverlay(player)
 
-        // Clear storages.
-        player.inventory.clear()
-        player.bank.clear()
-        player.equipment.clear()
+            // Clear storages.
+            player.inventory.clear()
+            player.bank.clear()
+            player.equipment.clear()
 
-        // Restore default interfaces.
-        player.interfaceManager.restoreTabs()
-        player.interfaceManager.setViewedTab(3)
+            // Restore default interfaces.
+            player.interfaceManager.restoreTabs()
+            player.interfaceManager.setViewedTab(3)
 
-        // Add starter items to inventory and bank.
-        player.inventory.add(*STARTER_PACK)
-        player.bank.add(STARTER_BANK)
+            // Add starter items to inventory and bank.
+            player.inventory.add(*STARTER_PACK)
+            player.bank.add(STARTER_BANK)
 
-        // Unhook all tutorial-related event receivers.
-        player.unhook(TutorialCompletionReceiver)
-        player.unhook(TutorialKillReceiver)
-        player.unhook(TutorialFireReceiver)
-        player.unhook(TutorialResourceReceiver)
-        player.unhook(TutorialUseWithReceiver)
-        player.unhook(TutorialInteractionReceiver)
-        player.unhook(TutorialButtonReceiver)
+            // Unhook all tutorial-related event receivers.
+            player.unhook(TutorialCompletionReceiver)
+            player.unhook(TutorialKillReceiver)
+            player.unhook(TutorialFireReceiver)
+            player.unhook(TutorialResourceReceiver)
+            player.unhook(TutorialUseWithReceiver)
+            player.unhook(TutorialInteractionReceiver)
+            player.unhook(TutorialButtonReceiver)
 
-        // Auto-join default clan (if enabled).
-        if (GameWorld.settings!!.enable_default_clan) {
-            player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
+            // Auto-join default clan (if enabled).
+            if (GameWorld.settings!!.enable_default_clan) {
+                player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
 
-            val clanJoin = JoinClanRequest.newBuilder()
-                .setClanName(ServerConstants.SERVER_NAME.toLowerCase())
-                .setUsername(player.name)
-                .build()
+                val clanJoin = JoinClanRequest.newBuilder()
+                    .setClanName(ServerConstants.SERVER_NAME.toLowerCase())
+                    .setUsername(player.name)
+                    .build()
 
-            ManagementEvents.publish(clanJoin)
-        }
+                ManagementEvents.publish(clanJoin)
 
-        // Show welcome dialogue and stop script execution.
-        queueScript(player, 18, QueueStrength.SOFT) {
-            openDialogue(player, WelcomeMessage())
-            setAttribute(player, "close_c_", true)
-            return@queueScript stopExecuting(player)
+            }
+
+            player.teleporter.send(Location.create(3233, 3230, 0))
+            // Show welcome dialogue and stop script execution.
+            queueScript(player, 5, QueueStrength.SOFT) {
+                openDialogue(player, WelcomeMessage())
+                setAttribute(player, "close_c_", true)
+                return@queueScript stopExecuting(player)
+            }
         }
     }
 
