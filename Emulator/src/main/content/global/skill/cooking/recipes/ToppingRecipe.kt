@@ -5,7 +5,6 @@ import core.api.skill.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import org.rs.consts.Items
 
 class ToppingRecipe : InteractionListener {

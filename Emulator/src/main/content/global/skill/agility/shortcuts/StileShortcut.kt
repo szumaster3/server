@@ -2,7 +2,6 @@ package content.global.skill.agility.shortcuts
 
 import core.api.animationCycles
 import core.api.forceMove
-import core.api.playAudio
 import core.api.queueScript
 import core.api.stopExecuting
 import core.api.utils.Vector
@@ -14,7 +13,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.Animations
-import org.rs.consts.Sounds
 
 class StileShortcut : InteractionListener {
     val ids = intArrayOf(993, 3730, 7527, 12982, 19222, 22302, 29460, 33842, 34776, 39508, 39509, 39510)

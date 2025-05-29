@@ -20,7 +20,6 @@ import core.game.system.command.sets.STATS_BASE
 import core.game.system.command.sets.STATS_FISH
 import core.game.world.GameWorld
 import core.game.world.map.path.Pathfinder
-import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs

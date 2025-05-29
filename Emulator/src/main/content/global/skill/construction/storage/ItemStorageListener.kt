@@ -7,7 +7,6 @@ import content.global.skill.construction.storage.box.ToyBoxItem
 import core.api.*
 import core.api.item.allInInventory
 import core.api.ui.sendInterfaceConfig
-import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item

@@ -1,8 +1,8 @@
 package content.global.skill.summoning.familiar;
 
-import content.global.skill.summoning.items.EnchantedHeadgearScrolls;
 import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.SummoningScroll;
+import content.global.skill.summoning.items.EnchantedHeadgearScrolls;
 import content.global.skill.summoning.pet.Pet;
 import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.MovementPulse;
@@ -32,6 +32,7 @@ import core.tools.Log;
 import core.tools.RandomFunction;
 import org.rs.consts.Animations;
 import org.rs.consts.Sounds;
+
 import java.util.ArrayList;
 import java.util.List;
 

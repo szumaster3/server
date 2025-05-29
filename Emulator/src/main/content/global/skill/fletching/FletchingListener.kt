@@ -6,10 +6,10 @@ import content.global.skill.fletching.items.bow.StringPulse
 import content.global.skill.fletching.items.bow.Strings
 import content.global.skill.fletching.items.crossbow.Limb
 import content.global.skill.fletching.items.crossbow.LimbPulse
-import core.game.dialogue.SkillDialogueHandler.SkillDialogue
 import core.api.*
 import core.api.skill.sendSkillDialogue
 import core.game.dialogue.SkillDialogueHandler
+import core.game.dialogue.SkillDialogueHandler.SkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills

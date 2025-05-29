@@ -17,7 +17,10 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import org.rs.consts.*
+import org.rs.consts.Components
+import org.rs.consts.NPCs
+import org.rs.consts.Quests
+import org.rs.consts.Scenery
 
 /**
  * Handles the balloon travel system.

@@ -3,7 +3,6 @@ package content.global.travel
 import core.api.*
 import core.api.ui.closeDialogue
 import core.cache.def.impl.SceneryDefinition
-import core.game.dialogue.DialogueFile
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player

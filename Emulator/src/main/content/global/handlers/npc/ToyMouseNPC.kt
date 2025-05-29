@@ -1,7 +1,6 @@
 package content.global.handlers.npc
 
 import content.data.GameAttributes
-import core.api.findLocalNPC
 import core.api.sendMessage
 import core.api.setAttribute
 import core.game.interaction.InteractPlugin

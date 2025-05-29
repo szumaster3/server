@@ -1,7 +1,9 @@
 package content.global.skill.fletching.items.bolts
 
 import content.global.skill.crafting.casting.Gem
-import core.api.*
+import core.api.getStatLevel
+import core.api.hasSpaceFor
+import core.api.sendDialogue
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills

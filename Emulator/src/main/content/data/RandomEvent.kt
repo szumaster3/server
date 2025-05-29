@@ -1,9 +1,5 @@
 package content.data
 
-import core.api.ui.sendInterfaceConfig
-import core.game.node.entity.player.Player
-import org.rs.consts.Components
-
 object RandomEvent {
     /**
      * Returns the event path for logging out.

@@ -6,7 +6,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.world.map.Location
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Scenery

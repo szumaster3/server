@@ -1,8 +1,8 @@
 package content.global.handlers.item.boltpouch
 
 import content.global.handlers.item.boltpouch.BoltPouch.updateBoltPouchDisplay
-import core.api.*
-import core.api.ui.restoreTabs
+import core.api.freeSlots
+import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
 

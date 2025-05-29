@@ -3,12 +3,8 @@ package content.global.skill.agility.shortcuts
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.skill.Skills
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds

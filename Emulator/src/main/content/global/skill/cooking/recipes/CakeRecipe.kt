@@ -8,7 +8,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.rs.consts.Items
-import kotlin.math.min
 
 class CakeRecipe : InteractionListener {
 

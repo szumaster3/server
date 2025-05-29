@@ -16,7 +16,6 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Animations
-import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 /**
