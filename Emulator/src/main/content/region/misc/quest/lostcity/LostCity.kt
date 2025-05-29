@@ -29,7 +29,6 @@ class LostCity : Quest(Quests.LOST_CITY, 83, 82, 3, Vars.VARP_QUEST_LOST_CITY_PR
         var line = 11
 
         if (stage == 0) {
-
             line(player, "I can start this quest by speaking to the !!Adventurers?? in", line++)
             line(player, "the !!Swamp?? just south of !!Lumbridge??.", line++)
             drawQuestRequirements(player)

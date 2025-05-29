@@ -21918,8 +21918,8 @@
     "id": "2580"
   },
   {
-    "examine": "Queen Ellamaria of Varrock.",
-    "name": "Ellamaria",
+    "examine": "A holy man.",
+    "name": "Brother Althric",
     "id": "2588"
   },
   {
@@ -59281,9 +59281,34 @@
     "aggressive": "true"
   },
   {
+    "examine": "A frantic gnome.",
+    "name": "Professor Arblenap",
+    "id": "7717"
+  },
+  {
+    "examine": "A holy dwarf.",
+    "name": "Brother Bordiss",
+    "id": "7718"
+  },
+  {
+    "examine": "A holy man.",
+    "name": "Brother Althric",
+    "id": "7719"
+  },
+  {
+    "examine": "He looks like he's in charge.",
+    "name": "Drorkar",
+    "id": "7720"
+  },
+  {
     "examine": "He looks like he's in charge.",
     "name": "Drorkar",
     "id": "7723"
+  },
+  {
+    "examine": "A holy dwarf.",
+    "name": "Brother Bordiss",
+    "id": "7724"
   },
   {
     "examine": "A holy man.",

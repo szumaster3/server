@@ -114406,6 +114406,14 @@
     "id": "13227"
   },
   {
+    "destroy_message": "Drorkar can give you another copy.",
+    "examine": "You should deliver this to Brother Bordiss in the Monastery near Ice Mountain.",
+    "destroy": "true",
+    "durability": null,
+    "name": "Letter",
+    "id": "13229",
+  },
+  {
     "destroy_message": "You can get another net from Professor Arblenap on Ice Mountain.",
     "examine": "Professor Arblenap gave you this net to catch the baby icefiends on Ice Mountain.",
     "durability": null,
