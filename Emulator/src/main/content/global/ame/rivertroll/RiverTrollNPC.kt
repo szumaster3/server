@@ -10,7 +10,7 @@ import java.lang.Integer.max
 class RiverTrollNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.RIVER_TROLL_391) {
-    val ids = (391..396).toList()
+    val ids = (NPCs.RIVER_TROLL_391..NPCs.RIVER_TROLL_396).toList()
 
     override fun init() {
         super.init()
@@ -38,5 +38,7 @@ class RiverTrollNPC(
         }
     }
 
-    override fun talkTo(npc: NPC) {}
+    override fun talkTo(npc: NPC) {
+        // Empty
+    }
 }

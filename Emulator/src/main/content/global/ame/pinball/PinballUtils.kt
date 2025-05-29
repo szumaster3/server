@@ -27,31 +27,28 @@ object PinballUtils {
     val PINBALL_EVENT_GUARD_NPCs = intArrayOf(NPCs.FLIPPA_3912, NPCs.TILT_3913)
     val PINBALL_EVENT_MYSTERIOUS_OLD_MAN = NPC(NPCs.MYSTERIOUS_OLD_MAN_410, Location.create(1971, 5046, 0))
 
-    val PINBALL_REWARD =
-        intArrayOf(
-            Items.UNCUT_DIAMOND_1618,
-            Items.UNCUT_RUBY_1620,
-            Items.UNCUT_EMERALD_1622,
-            Items.UNCUT_SAPPHIRE_1624,
-        )
+    val PINBALL_REWARD = intArrayOf(
+        Items.UNCUT_DIAMOND_1618,
+        Items.UNCUT_RUBY_1620,
+        Items.UNCUT_EMERALD_1622,
+        Items.UNCUT_SAPPHIRE_1624,
+    )
 
-    private val PILLAR_MAP =
-        arrayOf(
-            Scenery(15001, Location(1967, 5046, 0)),
-            Scenery(15003, Location(1969, 5049, 0)),
-            Scenery(15005, Location(1972, 5050, 0)),
-            Scenery(15007, Location(1975, 5049, 0)),
-            Scenery(15009, Location(1977, 5046, 0)),
-        )
+    private val PILLAR_MAP = arrayOf(
+        Scenery(15001, Location(1967, 5046, 0)),
+        Scenery(15003, Location(1969, 5049, 0)),
+        Scenery(15005, Location(1972, 5050, 0)),
+        Scenery(15007, Location(1975, 5049, 0)),
+        Scenery(15009, Location(1977, 5046, 0)),
+    )
 
-    private val SCENERY_REPLACEMENTS =
-        arrayOf(
-            Pair(15000, Location(1967, 5046, 0)),
-            Pair(15002, Location(1969, 5049, 0)),
-            Pair(15004, Location(1972, 5050, 0)),
-            Pair(15006, Location(1975, 5049, 0)),
-            Pair(15008, Location(1977, 5046, 0)),
-        )
+    private val SCENERY_REPLACEMENTS = arrayOf(
+        Pair(15000, Location(1967, 5046, 0)),
+        Pair(15002, Location(1969, 5049, 0)),
+        Pair(15004, Location(1972, 5050, 0)),
+        Pair(15006, Location(1975, 5049, 0)),
+        Pair(15008, Location(1977, 5046, 0)),
+    )
 
     fun generateTag(player: Player): Boolean {
         val score = getAttribute(player, GameAttributes.RE_PINBALL_OBJ, -1)

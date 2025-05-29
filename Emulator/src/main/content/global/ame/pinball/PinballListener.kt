@@ -14,9 +14,7 @@ import core.tools.BLUE
 import org.rs.consts.Animations
 import org.rs.consts.Components
 
-class PinballListener :
-    InteractionListener,
-    MapArea {
+class PinballListener : InteractionListener, MapArea {
     init {
         PinballUtils.PINBALL_EVENT_MYSTERIOUS_OLD_MAN.init()
         PinballUtils.PINBALL_EVENT_MYSTERIOUS_OLD_MAN.isWalks = false
@@ -105,12 +103,11 @@ class PinballListener :
         }
     }
 
-    override fun getRestrictions(): Array<ZoneRestriction> =
-        arrayOf(
-            ZoneRestriction.CANNON,
-            ZoneRestriction.FOLLOWERS,
-            ZoneRestriction.FIRES,
-        )
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(
+        ZoneRestriction.CANNON,
+        ZoneRestriction.FOLLOWERS,
+        ZoneRestriction.FIRES,
+    )
 
     override fun areaLeave(
         entity: Entity,

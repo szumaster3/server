@@ -26,14 +26,13 @@ class PinballDialogue : DialogueFile() {
                 }
             }
 
-            1 ->
-                npc(
-                    "Don't tag the ones that do not have rings around the",
-                    "base, as that will reset your points, and don't try and",
-                    "get past those trolls until you are done!",
-                ).also {
-                    stage++
-                }
+            1 -> npc(
+                "Don't tag the ones that do not have rings around the",
+                "base, as that will reset your points, and don't try and",
+                "get past those trolls until you are done!",
+            ).also {
+                stage++
+            }
 
             2 -> npc("See you later!").also { stage++ }
             3 -> playerl(FaceAnim.SCARED, "Wait, I didn't ask to play this game!").also { stage++ }

@@ -10,7 +10,7 @@ import kotlin.math.max
 class RockGolemNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.ROCK_GOLEM_413) {
-    val ids = (413..418).toList()
+    val ids = (NPCs.ROCK_GOLEM_413..NPCs.ROCK_GOLEM_418).toList()
 
     override fun init() {
         super.init()
@@ -38,5 +38,7 @@ class RockGolemNPC(
         }
     }
 
-    override fun talkTo(npc: NPC) {}
+    override fun talkTo(npc: NPC) {
+        // Empty
+    }
 }

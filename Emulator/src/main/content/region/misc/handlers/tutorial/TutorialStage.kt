@@ -3,7 +3,6 @@ package content.region.misc.handlers.tutorial
 import content.data.GameAttributes
 import core.ServerConstants
 import core.api.*
-import core.api.movement.finishedMoving
 import core.api.ui.closeDialogue
 import core.api.ui.sendInterfaceConfig
 import core.api.ui.setMinimapState

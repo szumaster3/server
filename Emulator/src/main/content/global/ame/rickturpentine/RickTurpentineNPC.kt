@@ -1,10 +1,14 @@
 package content.global.ame.rickturpentine
 
 import content.global.ame.RandomEventNPC
+import core.api.addItemOrDrop
 import core.api.getWorldTicks
 import core.api.openDialogue
+import core.api.sendNPCDialogue
 import core.api.utils.WeightBasedTable
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
+import core.game.system.timer.impl.AntiMacro
 import org.rs.consts.NPCs
 
 class RickTurpentineNPC(
@@ -34,6 +38,11 @@ class RickTurpentineNPC(
     override fun talkTo(npc: NPC) {
         attackDelay = getWorldTicks() + 10
         this.pulseManager.clear()
-        openDialogue(player, RickTurpentineDialogue(), this.asNpc())
+        sendNPCDialogue(player, NPCs.RICK_TURPENTINE_2476,
+            "Today is your lucky day, " + (if (player.isMale) "sirrah!" else "madam!") +
+                    " I am donating to the victims of crime to atone for my past actions!", FaceAnim.NEUTRAL
+        )
+        AntiMacro.rollEventLoot(player).forEach { addItemOrDrop(player, it.id, it.amount) }
+        AntiMacro.terminateEventNpc(player)
     }
 }

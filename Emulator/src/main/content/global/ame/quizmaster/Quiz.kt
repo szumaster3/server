@@ -21,7 +21,6 @@ class Quiz : MapArea {
             removeAttribute(player, QuizMasterDialogue.QUIZMASTER_ATTRIBUTE_RETURN_LOC)
             removeAttribute(player, QuizMasterDialogue.QUIZMASTER_ATTRIBUTE_QUESTIONS_CORRECT)
             removeAttribute(player, QuizMasterDialogue.QUIZMASTER_ATTRIBUTE_RANDOM_ANSWER)
-            RandomEvent.hideLogout(player, false)
         }
     }
 

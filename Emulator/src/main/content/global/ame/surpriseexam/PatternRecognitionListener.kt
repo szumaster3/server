@@ -12,8 +12,6 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 class PatternRecognitionListener : InteractionListener {
-    val MORDAUT = NPCs.MR_MORDAUT_6117
-    val BOOK_OF_KNOWLEDGE = Items.BOOK_OF_KNOWLEDGE_11640
 
     override fun defineListeners() {
         on(MORDAUT, IntType.NPC, "talk-to") { player, node ->
@@ -57,5 +55,10 @@ class PatternRecognitionListener : InteractionListener {
         setDest(IntType.NPC, MORDAUT) { _, _ ->
             return@setDest Location.create(1886, 5025, 0)
         }
+    }
+
+    companion object {
+        private const val MORDAUT = NPCs.MR_MORDAUT_6117
+        private const val BOOK_OF_KNOWLEDGE = Items.BOOK_OF_KNOWLEDGE_11640
     }
 }

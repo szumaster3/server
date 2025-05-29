@@ -53,7 +53,6 @@ class QuizMasterDialogue : DialogueFile() {
             player.packetDispatch.sendAngleOnInterface(QUIZMASTER_INTERFACE, 6, 512, 0, 0)
             player.packetDispatch.sendAngleOnInterface(QUIZMASTER_INTERFACE, 7, 512, 0, 0)
             player.packetDispatch.sendAngleOnInterface(QUIZMASTER_INTERFACE, 8, 512, 0, 0)
-            RandomEvent.hideLogout(player, true)
             return correctButton
         }
     }

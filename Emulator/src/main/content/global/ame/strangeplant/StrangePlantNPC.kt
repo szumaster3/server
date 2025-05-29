@@ -94,5 +94,6 @@ class StrangePlantNPC(
     }
 
     override fun talkTo(npc: NPC) {
+        // Empty
     }
 }

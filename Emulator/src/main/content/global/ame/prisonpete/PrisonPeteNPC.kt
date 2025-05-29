@@ -19,5 +19,7 @@ class PrisonPeteNPC(
         sendMessage(player, "Welcome to ScapeRune.")
     }
 
-    override fun talkTo(npc: NPC) {}
+    override fun talkTo(npc: NPC) {
+        // Empty
+    }
 }

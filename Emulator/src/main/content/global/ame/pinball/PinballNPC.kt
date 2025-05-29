@@ -25,18 +25,17 @@ class PinballNPC(
 
                 override fun pulse(): Boolean {
                     when (counter++) {
-                        0 ->
-                            sendChat(
-                                "Good day, ${
-                                    player.username.replaceFirstChar {
-                                        if (it.isLowerCase()) {
-                                            it.titlecase()
-                                        } else {
-                                            it.toString()
-                                        }
+                        0 -> sendChat(
+                            "Good day, ${
+                                player.username.replaceFirstChar {
+                                    if (it.isLowerCase()) {
+                                        it.titlecase()
+                                    } else {
+                                        it.toString()
                                     }
-                                }, care for a quick game?",
-                            )
+                                }
+                            }, care for a quick game?",
+                        )
 
                         3 -> {
                             setAttribute(player, RandomEvent.save(), player.location)

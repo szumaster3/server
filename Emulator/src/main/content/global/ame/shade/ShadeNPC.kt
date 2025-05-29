@@ -11,9 +11,11 @@ import kotlin.math.min
 class ShadeNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.SHADE_425) {
-    val ids = (425..430).toList()
+    val ids = (NPCs.SHADE_425..NPCs.SHADE_430).toList()
 
-    override fun talkTo(npc: NPC) {}
+    override fun talkTo(npc: NPC) {
+        // Empty
+    }
 
     override fun init() {
         super.init()

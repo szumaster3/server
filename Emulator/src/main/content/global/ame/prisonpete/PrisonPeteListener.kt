@@ -89,9 +89,7 @@ class PrisonPeteListener : InteractionListener, MapArea {
     override fun defineAreaBorders() = arrayOf(PrisonPeteUtils.PRISON_ZONE)
 
     override fun getRestrictions() = arrayOf(
-        ZoneRestriction.RANDOM_EVENTS,
-        ZoneRestriction.CANNON,
-        ZoneRestriction.FOLLOWERS
+        ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS
     )
 
     override fun defineDestinationOverrides() {
