@@ -50,7 +50,7 @@ class BrotherBordissDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("No, thanks.").also { stage = 14 }
             }
             5 -> npc(FaceAnim.OLD_DEFAULT, "I'm afraid I must ask you for a small payment, though.", "You have done so much for me already, so I don't", "really feel comfortable doing so, but I am in need of", "money for upkeep of the power station. As you may").also { stage++ }
-            6 -> npc(FaceAnim.OLD_DEFAULT, "already be aware, building materials in Keldagrim aren't", "exacly cheap.").also { stage++ }
+            6 -> npc(FaceAnim.OLD_DEFAULT, "already be aware, building materials in Keldagrim aren't", "exactly cheap.").also { stage++ }
             7 -> player(FaceAnim.HALF_ASKING, "So, how much are we talking here?").also { stage++ }
             8 -> npc(FaceAnim.OLD_DEFAULT, "I think 1,500,000 coins should be enough.").also { stage++ }
             9 -> options("Yes, that shouldn't be a problem.", "Oh no, that is way too expensive.").also { stage++ }
