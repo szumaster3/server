@@ -189,8 +189,10 @@ class PlagueCityListener : InteractionListener {
          */
 
         on(Items.A_SCRUFFY_NOTE_1508, IntType.ITEM, "read") { player, _ ->
+            val instruction = "Got a bncket of nnilk<br>Tlen grind sorne lhoculate<br>vnith a pestal and rnortar<br>ald the grourd dlocolate to tho milt<br>finales add 5cme snape gras5"
+            openInterface(player, Components.BLANK_SCROLL_222)
+            sendString(player, instruction, Components.BLANK_SCROLL_222, 4)
             sendMessage(player, "You guess it really says something slightly different.")
-            openInterface(player, Components.BLANK_SCROLL_222).also { scruffyNote(player) }
             return@on true
         }
 
@@ -580,17 +582,6 @@ class PlagueCityListener : InteractionListener {
             }
             return@on true
         }
-    }
-
-    private fun scruffyNote(player: Player) {
-        val scruffynotes = arrayOf(
-            "Got a bncket of nnilk",
-            "Tlen grind sorne lhoculate",
-            "vnith a pestal and rnortar",
-            "ald the grourd dlocolate to tho milt",
-            "finales add 5cme snape gras5",
-        )
-        sendString(player, scruffynotes.joinToString("<br>"), Components.BLANK_SCROLL_222, 5)
     }
 
     override fun defineDestinationOverrides() {

@@ -1,10 +1,8 @@
 package content.global.skill.agility.shortcuts
 
-import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.api.lock
-import core.api.playAudio
-import core.api.sendMessage
+import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
@@ -12,6 +10,7 @@ import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.ticksToCycles
 import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
@@ -41,91 +40,60 @@ class PipeShortcut : AgilityShortcut {
         option: String,
         failed: Boolean,
     ) {
-        GameWorld.Pulser.submit(
-            object : Pulse(1, player) {
-                override fun pulse(): Boolean {
-                    when (obj.id) {
-                        2290, 9293 -> {
-                            player.lock(7)
-                            AgilityHandler.forceWalk(
-                                player,
-                                -1,
-                                player.location,
-                                pipeDestination(player, obj, 6),
-                                Animation.create(10580),
-                                10,
-                                0.0,
-                                null,
-                            )
-                            player.animate(Animation(Animations.CRAWL_844), 3)
-                            player.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), 5)
-                            playAudio(player, Sounds.SQUEEZE_OUT_2490, 5)
-                            return true
-                        }
+        val lockTime: Int
+        val interactionTime: Int
+        val soundDelay: Int
 
-                        5099, 5100 -> {
-                            player.lock(5)
-                            AgilityHandler.forceWalk(
-                                player,
-                                -1,
-                                player.location,
-                                pipeDestination(player, obj, 7),
-                                Animation.create(10580),
-                                10,
-                                0.0,
-                                null,
-                            )
-                            player.animate(Animation(Animations.CRAWL_844), 4)
-                            player.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), 6)
-                            playAudio(player, Sounds.SQUEEZE_OUT_2490, 6)
-                            return true
-                        }
-
-                        20210 -> {
-                            if (player.location.x != 2552) {
-                                sendMessage(player, "I can't get into this pipe at that angle.")
-                                return true
-                            }
-                            lock(player, 3)
-                            AgilityHandler.forceWalk(
-                                player,
-                                -1,
-                                player.location,
-                                pipeDestination(player, obj, 3),
-                                Animation.create(10580),
-                                15,
-                                0.0,
-                                null,
-                            )
-                            return true
-                        }
-
-                        29370 -> {
-                            if (player.location.y != 9906) {
-                                sendMessage(player, "I can't get into this pipe at that angle.")
-                                return true
-                            }
-                            lock(player, 7)
-                            AgilityHandler.forceWalk(
-                                player,
-                                -1,
-                                player.location,
-                                pipeDestination(player, obj, 6),
-                                Animation.create(10580),
-                                10,
-                                0.0,
-                                null,
-                            )
-                            player.animate(Animation(Animations.CRAWL_844), 3)
-                            player.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), 5)
-                            playAudio(player, Sounds.SQUEEZE_OUT_2490, 5)
-                            return true
-                        }
-                    }
-                    return false
+        when (obj.id) {
+            YANILLE_DUNGEON, TAVERLEY_DUNGEON -> {
+                lockTime = 6
+                interactionTime = 6
+                soundDelay = 5
+            }
+            BRIMHAVEN_DRAGONS, BRIMHAVEN_GIANTS -> {
+                lockTime = 7
+                interactionTime = 7
+                soundDelay = 6
+            }
+            BARBARIAN_OUTPOST -> {
+                if (player.location.x != 2552) {
+                    sendMessage(player, "I can't get into this pipe at that angle.")
+                    return
                 }
-            },
-        )
+                lockTime = 3
+                interactionTime = 0
+                soundDelay = 2
+            }
+            EDGEVILLE_DUNGEON -> {
+                if (player.location.y != 9906) {
+                    sendMessage(player, "I can't get into this pipe at that angle.")
+                    return
+                }
+                lockTime = 6
+                interactionTime = 6
+                soundDelay = 5
+            }
+            else -> return
+        }
+
+        lock(player, lockTime)
+        queueScript(player, 1, QueueStrength.SOFT) {
+            forceMove(
+                player,
+                player.location,
+                pipeDestination(player, obj, interactionTime),
+                0,
+                ticksToCycles(lockTime),
+                null,
+                if (obj.id == BARBARIAN_OUTPOST) Animations.CLIMB_THROUGH_OBSTACLE_10580 else Animations.CLIMB_INTO_OBSTACLE_10578
+            )
+            if (interactionTime > 0) {
+                player.animate(Animation(Animations.HUMAN_TURNS_INVISIBLE_2590), interactionTime - 2)
+                player.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), interactionTime)
+            }
+            playAudio(player, Sounds.SQUEEZE_OUT_2490, soundDelay)
+            return@queueScript stopExecuting(player)
+        }
     }
 
     companion object {
