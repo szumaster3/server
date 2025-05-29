@@ -8,6 +8,7 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
+import kotlin.math.min
 
 class SkeweredRecipe : InteractionListener {
 
@@ -83,12 +84,29 @@ class SkeweredRecipe : InteractionListener {
                 }
                 animate(player, PIERCE_ANIMATION)
                 playAudio(player, Sounds.TBCU_SPIDER_STICK_1280)
-                addItem(player, SPIDER_ON_STICK, 1, Container.INVENTORY)
+                addItem(player, SPIDER_ON_STICK, 1)
                 sendMessage(player, "You pierce the spider carcass with the skewer stick.")
                 return true
             }
 
-            process()
+            val baseAmount = amountInInventory(player, used.id)
+            val withAmount = amountInInventory(player, with.id)
+
+            if (baseAmount == 1 || withAmount == 1) {
+                process()
+                return@onUseWith true
+            }
+
+            sendSkillDialogue(player) {
+                withItems(SPIDER_ON_STICK)
+                create { _, amount ->
+                    runTask(player, 2, amount) {
+                        if (amount > 0) process()
+                    }
+                }
+                calculateMaxAmount { min(baseAmount, withAmount) }
+            }
+
             return@onUseWith true
         }
 
@@ -109,7 +127,25 @@ class SkeweredRecipe : InteractionListener {
                 return true
             }
 
-            process()
+
+            val baseAmount = amountInInventory(player, used.id)
+            val withAmount = amountInInventory(player, with.id)
+
+            if (baseAmount == 1 || withAmount == 1) {
+                process()
+                return@onUseWith true
+            }
+
+            sendSkillDialogue(player) {
+                withItems(SPIDER_ON_SHAFT)
+                create { _, amount ->
+                    runTask(player, 2, amount) {
+                        if (amount > 0) process()
+                    }
+                }
+                calculateMaxAmount { min(baseAmount, withAmount) }
+            }
+
             return@onUseWith true
         }
     }
