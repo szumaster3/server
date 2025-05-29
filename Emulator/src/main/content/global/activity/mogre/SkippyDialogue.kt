@@ -226,7 +226,7 @@ class SkippyDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
             97 -> {
-                TutorialStage.completeTutorial(player!!)
+                TutorialStage.completeTutorial(player)
             }
         }
         return true

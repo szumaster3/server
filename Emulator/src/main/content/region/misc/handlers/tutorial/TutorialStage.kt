@@ -1262,7 +1262,46 @@ object TutorialStage {
             }
 
             73 -> {
-                completeTutorial(player)
+                setAttribute(player, "/save:tutorial:complete", true)
+                setVarbit(player, FLASHING_ICON, 0)
+                setVarp(player, 281, 1000, true)
+                closeOverlay(player)
+
+                player.inventory.clear()
+                player.bank.clear()
+                player.equipment.clear()
+
+                player.interfaceManager.restoreTabs()
+                player.interfaceManager.setViewedTab(3)
+
+                player.inventory.add(*STARTER_PACK)
+                player.bank.add(STARTER_BANK)
+
+                player.unhook(TutorialCompletionReceiver)
+                player.unhook(TutorialKillReceiver)
+                player.unhook(TutorialFireReceiver)
+                player.unhook(TutorialResourceReceiver)
+                player.unhook(TutorialUseWithReceiver)
+                player.unhook(TutorialInteractionReceiver)
+                player.unhook(TutorialButtonReceiver)
+
+                if (settings!!.enable_default_clan) {
+                    player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
+
+                    val clanJoin = JoinClanRequest.newBuilder()
+                        .setClanName(ServerConstants.SERVER_NAME.toLowerCase())
+                        .setUsername(player.name)
+                        .build()
+
+                    ManagementEvents.publish(clanJoin)
+
+                }
+                player.teleporter.send(Location.create(3233, 3230, 0))
+                queueScript(player, 5, QueueStrength.SOFT) {
+                    openDialogue(player, WelcomeMessage())
+                    setAttribute(player, "close_c_", true)
+                    return@queueScript stopExecuting(player)
+                }
             }
         }
     }
@@ -1276,27 +1315,22 @@ object TutorialStage {
                 return@queueScript stopExecuting(player)
             }
         } else {
-            // Mark tutorial as complete.
             setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 73)
             setAttribute(player, "/save:tutorial:complete", true)
             setVarbit(player, 3756, 0)
             setVarp(player, 281, 1000, true)
             closeOverlay(player)
 
-            // Clear storages.
             player.inventory.clear()
             player.bank.clear()
             player.equipment.clear()
 
-            // Restore default interfaces.
             player.interfaceManager.restoreTabs()
             player.interfaceManager.setViewedTab(3)
 
-            // Add starter items to inventory and bank.
             player.inventory.add(*STARTER_PACK)
             player.bank.add(STARTER_BANK)
 
-            // Unhook all tutorial-related event receivers.
             player.unhook(TutorialCompletionReceiver)
             player.unhook(TutorialKillReceiver)
             player.unhook(TutorialFireReceiver)
@@ -1305,8 +1339,7 @@ object TutorialStage {
             player.unhook(TutorialInteractionReceiver)
             player.unhook(TutorialButtonReceiver)
 
-            // Auto-join default clan (if enabled).
-            if (GameWorld.settings!!.enable_default_clan) {
+            if (settings!!.enable_default_clan) {
                 player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
 
                 val clanJoin = JoinClanRequest.newBuilder()
@@ -1319,7 +1352,6 @@ object TutorialStage {
             }
 
             player.teleporter.send(Location.create(3233, 3230, 0))
-            // Show welcome dialogue and stop script execution.
             queueScript(player, 5, QueueStrength.SOFT) {
                 openDialogue(player, WelcomeMessage())
                 setAttribute(player, "close_c_", true)
