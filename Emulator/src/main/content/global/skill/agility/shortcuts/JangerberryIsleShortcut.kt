@@ -16,7 +16,7 @@ import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
 /**
- * Handles the rope swing shortcut on the island west of Yanille (Jangerberry Isle)
+ * Handles the rope swing shortcut on the island west of Yanille (Jangerberry Isle).
  */
 class JangerberryIsleShortcut : InteractionListener {
 
@@ -27,46 +27,23 @@ class JangerberryIsleShortcut : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.BRANCH_2326) { player, used, with ->
-            val target = Location(2501, 3087, 0)
-
-            submitIndividualPulse(player, object : Pulse(0, player) {
-                private var state = 0
-                private var moving = true
-
-                override fun pulse(): Boolean {
-                    if (moving) {
-                        if (player.location != target) {
-                            forceWalk(player, target, "smart")
-                            return false
-                        }
-                        moving = false
-                    }
-
-                    val branch = with.asScenery()
-
-                    return when (++state) {
-                        1 -> {
-                            if (!removeItem(player, used.asItem())) {
-                                sendMessage(player, "You need a rope to do that.")
-                                return true
-                            }
-
-                            playAudio(player, Sounds.TIGHTROPE_2495)
-                            animate(player, Animations.SUMMON_ROPE_SWING_775)
-
-                            if (branch.isActive) SceneryBuilder.replace(branch, branch.transform(Scenery.ROPESWING_2325))
-                            sendMessage(player, "You tie the rope to the tree...")
-                            false
-                        }
-
-                        2 -> {
-                            ropeSwing(player, branch)
-                            true
-                        }
-                        else -> false
-                    }
+            walkThen(player, Location(2501, 3087, 0)) {
+                val branch = with.asScenery()
+                if (!removeItem(player, used.asItem())) {
+                    sendMessage(player, "You need a rope to do that.")
+                    return@walkThen
                 }
-            })
+
+                playAudio(player, Sounds.TIGHTROPE_2495)
+                animate(player, Animations.SUMMON_ROPE_SWING_775)
+                sendMessage(player, "You tie the rope to the tree...")
+
+                if (branch.isActive) {
+                    SceneryBuilder.replace(branch, branch.transform(Scenery.ROPESWING_2325))
+                }
+
+                ropeSwing(player, branch)
+            }
 
             return@onUseWith true
         }
@@ -76,31 +53,14 @@ class JangerberryIsleShortcut : InteractionListener {
          */
 
         on(Scenery.ROPESWING_2324, IntType.SCENERY, "swing-on") { player, node ->
-            val target = Location(2511, 3092, 0)
+            if (!player.location.withinDistance(node.location, 2)) {
+                sendMessage(player, "You cannot do that from here.")
+                return@on true
+            }
 
-            submitIndividualPulse(player, object : Pulse(0, player) {
-                private var state = 0
-                private var moving = true
-
-                override fun pulse(): Boolean {
-                    if (moving) {
-                        if (player.location != target) {
-                            forceWalk(player, target, "smart")
-                            return false
-                        }
-                        moving = false
-                    }
-
-                    return when (++state) {
-                        1 -> {
-                            ropeSwing(player, node)
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            })
-
+            walkThen(player, Location(2511, 3092, 0)) {
+                ropeSwing(player, node)
+            }
             return@on true
         }
 
@@ -117,6 +77,34 @@ class JangerberryIsleShortcut : InteractionListener {
 
     companion object {
         /**
+         * Pulse helper that walks to a location before interaction start.
+         */
+        private fun walkThen(player: Player, target: Location, afterWalk: () -> Unit) {
+            submitIndividualPulse(player, object : Pulse(1, player) {
+                private var state = 0
+                private var moving = true
+
+                override fun pulse(): Boolean {
+                    if (moving) {
+                        if (player.location != target) {
+                            forceWalk(player, target, "smart")
+                            return false
+                        }
+                        moving = false
+                    }
+
+                    return when (++state) {
+                        1 -> {
+                            afterWalk()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+            })
+        }
+
+        /**
          * Moves the player across the rope swing.
          */
         private fun ropeSwing(player: Player, node: Node) {
@@ -125,14 +113,15 @@ class JangerberryIsleShortcut : InteractionListener {
                 return
             }
 
-            val destination = if (node.location != Location(2511, 3090, 0)) Location(2505, 3087, 0) else Location(2511, 3096, 0)
+            val destination = if (node.location != Location(2511, 3090, 0)) Location(2505, 3087, 0)
+            else Location(2511, 3096, 0)
 
             lock(player, 3)
             faceLocation(player, destination)
-
-            playAudio(player, Sounds.SWING_ACROSS_2494)
-            animateScenery(player, node.asScenery(), 497, true)
-
+            runTask(player, 0) {
+                playAudio(player, Sounds.SWING_ACROSS_2494)
+                animateScenery(player, node.asScenery(), 497, true)
+            }
             AgilityHandler.forceWalk(player, -1, player.location, destination, Animation.create(Animations.ROPE_SWING_751), 20, 22.0, "You skillfully swing across.")
         }
 
