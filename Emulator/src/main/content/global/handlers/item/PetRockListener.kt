@@ -30,12 +30,18 @@ class PetRockListener : InteractionListener {
 }
 
 class PetRockDialogue : DialogueFile() {
+
+    var randomDialogue: Int? = null
+
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             0 -> options("Talk", "Stroke", "Feed", "Fetch", "Stay").also { stage++ }
             1 -> when (buttonID) {
                 1 -> {
-                    val randomDialogue = RandomFunction.random(0, 6)
+                    if (randomDialogue == null) {
+                        randomDialogue = RandomFunction.random(0, 6)
+                    }
+
                     when (randomDialogue) {
                         0 -> when (stage) {
                             0 -> playerl(FaceAnim.FRIENDLY, "Good day, rock!").also { stage++ }
@@ -90,11 +96,13 @@ class PetRockDialogue : DialogueFile() {
                 }
                 2 -> {
                     end()
+                    val animDuration = animationDuration(Animation(Animations.HUMAN_STROKE_PET_ROCK_1333))
+                    lock(player!!, animDuration)
                     sendMessage(player!!, "You stroke your pet rock.")
                     animate(player!!, Animations.HUMAN_STROKE_PET_ROCK_1333, false)
                     queueScript(
                         player!!,
-                        animationDuration(Animation(Animations.HUMAN_STROKE_PET_ROCK_1333)),
+                        animDuration,
                         QueueStrength.SOFT
                     ) {
                         sendMessage(player!!, "Your rock seems much happier.")
