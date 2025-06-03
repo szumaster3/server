@@ -18,7 +18,10 @@ import static core.api.ContentAPIKt.animate;
 import static core.api.ContentAPIKt.playAudio;
 
 /**
- * The type Object manager plugin.
+ * Plugin used for handling the opening and closing
+ * of (double) door & gates & fences.
+ *
+ * @author Emperor
  */
 @Initializable
 public final class ObjectManagerPlugin extends OptionHandler {

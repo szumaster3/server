@@ -20,10 +20,7 @@ import org.rs.consts.Scenery
 
 class BankBoothListener : InteractionListener {
     /**
-     * Locates a banker NPC adjacent to the given node by checking the four cardinal directions (north, east, south, west).
-     *
-     * @param node The node from which to search for a nearby banker.
-     * @return The adjacent [BankerNPC] if found, or null otherwise.
+     * Finds a banker NPC next to the given node (N/E/S/W).
      */
     private fun locateAdjacentBankerLinear(node: Node): NPC? {
         for (dir in arrayOf(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST)) {
@@ -33,11 +30,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Locates a banker NPC around the given node within a square area of a given size.
-     *
-     * @param node The node from which to search for a nearby banker.
-     * @param size The radius size (in tiles) to search around the node. Default is 1.
-     * @return The nearby [BankerNPC] if found, or null otherwise.
+     * Finds a banker around the node in a square radius.
      */
     private fun locateAdjacentBankerSquare(
         node: Node,
@@ -52,11 +45,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Attempts to start a dialogue with a nearby banker, either by finding one linearly or within a square range.
-     * If a banker supporting dialogue is found, it opens their dialogue; otherwise, defaults to the standard banker dialogue.
-     *
-     * @param player The player initiating the dialogue.
-     * @param node The node from which the banker search begins.
+     * Tries to start a dialogue with a nearby banker.
      */
     private fun tryInvokeBankerDialogue(
         player: Player,
@@ -75,12 +64,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Handles a quick bank booth interaction, directly opening the bank if allowed, or invoking a banker dialogue if restricted.
-     *
-     * @param player The player interacting with the bank booth.
-     * @param node The bank booth node being interacted with.
-     * @param state The interaction state, unused in this method.
-     * @return Always returns true to indicate the interaction was processed.
+     * Handles quick-use bank booth interaction.
      */
     private fun quickBankBoothUse(
         player: Player,
@@ -100,12 +84,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Handles a regular bank booth interaction, deciding between quick opening or starting banker dialogue based on server settings.
-     *
-     * @param player The player interacting with the bank booth.
-     * @param node The bank booth node being interacted with.
-     * @param state The interaction state, unused in this method.
-     * @return Always returns true to indicate the interaction was processed.
+     * Handles regular-use bank booth interaction.
      */
     private fun regularBankBoothUse(
         player: Player,
@@ -125,12 +104,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Handles a bank booth interaction specifically for accessing the Grand Exchange collection box.
-     *
-     * @param player The player interacting with the bank booth.
-     * @param node The bank booth node being interacted with.
-     * @param state The interaction state, unused in this method.
-     * @return Always returns true to indicate the interaction was processed.
+     * Handles bank booth interaction for GE collection.
      */
     private fun collectBankBoothUse(
         player: Player,
@@ -147,12 +121,7 @@ class BankBoothListener : InteractionListener {
     }
 
     /**
-     * Attempts to convert an item into its noted or unnoted form by using it on a bank booth.
-     *
-     * @param player The player attempting to convert the item.
-     * @param used The item node being used.
-     * @param with The bank booth node with which the item is being used.
-     * @return Always returns true to indicate the interaction was processed.
+     * Handles noting/unnoting an item on bank booth.
      */
     private fun attemptToConvertItems(
         player: Player,
@@ -211,47 +180,7 @@ class BankBoothListener : InteractionListener {
     }
 
     companion object {
-        val INOPERABLE_BANK_BOOTHS =
-            intArrayOf(
-                Scenery.BANK_BOOTH_12800,
-                Scenery.BANK_BOOTH_12801,
-                Scenery.BANK_BOOTH_36262,
-                Scenery.BANK_BOOTH_35648,
-            )
-        val BANK_BOOTHS =
-            intArrayOf(
-                Scenery.BANK_BOOTH_2213,
-                Scenery.BANK_BOOTH_2214,
-                Scenery.BANK_BOOTH_3045,
-                Scenery.BANK_BOOTH_5276,
-                Scenery.BANK_BOOTH_6084,
-                Scenery.BANK_BOOTH_10517,
-                Scenery.BANK_BOOTH_11338,
-                Scenery.BANK_BOOTH_11402,
-                Scenery.BANK_BOOTH_11758,
-                Scenery.BANK_BOOTH_12798,
-                Scenery.BANK_BOOTH_12799,
-                Scenery.BANK_BOOTH_14367,
-                Scenery.BANK_BOOTH_14368,
-                Scenery.BANK_BOOTH_16700,
-                Scenery.BANK_BOOTH_18491,
-                Scenery.BANK_BOOTH_19230,
-                Scenery.BANK_BOOTH_20325,
-                Scenery.BANK_BOOTH_20326,
-                Scenery.BANK_BOOTH_20327,
-                Scenery.BANK_BOOTH_20328,
-                Scenery.BANK_BOOTH_22819,
-                Scenery.BANK_BOOTH_24914,
-                Scenery.BANK_BOOTH_25808,
-                Scenery.BANK_BOOTH_26972,
-                Scenery.BANK_BOOTH_29085,
-                Scenery.BANK_BOOTH_30015,
-                Scenery.BANK_BOOTH_30016,
-                Scenery.BANK_BOOTH_34205,
-                Scenery.BANK_BOOTH_34752,
-                Scenery.BANK_BOOTH_35647,
-                Scenery.BANK_BOOTH_36786,
-                Scenery.BANK_BOOTH_37474,
-            )
+        val INOPERABLE_BANK_BOOTHS = intArrayOf(Scenery.BANK_BOOTH_12800, Scenery.BANK_BOOTH_12801, Scenery.BANK_BOOTH_36262, Scenery.BANK_BOOTH_35648)
+        val BANK_BOOTHS = intArrayOf(Scenery.BANK_BOOTH_2213, Scenery.BANK_BOOTH_2214, Scenery.BANK_BOOTH_3045, Scenery.BANK_BOOTH_5276, Scenery.BANK_BOOTH_6084, Scenery.BANK_BOOTH_10517, Scenery.BANK_BOOTH_11338, Scenery.BANK_BOOTH_11402, Scenery.BANK_BOOTH_11758, Scenery.BANK_BOOTH_12798, Scenery.BANK_BOOTH_12799, Scenery.BANK_BOOTH_14367, Scenery.BANK_BOOTH_14368, Scenery.BANK_BOOTH_16700, Scenery.BANK_BOOTH_18491, Scenery.BANK_BOOTH_19230, Scenery.BANK_BOOTH_20325, Scenery.BANK_BOOTH_20326, Scenery.BANK_BOOTH_20327, Scenery.BANK_BOOTH_20328, Scenery.BANK_BOOTH_22819, Scenery.BANK_BOOTH_24914, Scenery.BANK_BOOTH_25808, Scenery.BANK_BOOTH_26972, Scenery.BANK_BOOTH_29085, Scenery.BANK_BOOTH_30015, Scenery.BANK_BOOTH_30016, Scenery.BANK_BOOTH_34205, Scenery.BANK_BOOTH_34752, Scenery.BANK_BOOTH_35647, Scenery.BANK_BOOTH_36786, Scenery.BANK_BOOTH_37474)
     }
 }

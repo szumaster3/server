@@ -12,9 +12,8 @@ import core.net.packet.out.ContainerPacket;
 import org.rs.consts.Components;
 
 /**
- * A listener that manages inventory-related updates and synchronization for a player.
- * It listens for changes in the player's inventory container and ensures that the UI
- * and player state remain consistent.
+ * Handles the inventory container listening.
+ * @author Emperor
  */
 public final class InventoryListener implements ContainerListener {
 

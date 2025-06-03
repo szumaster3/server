@@ -29,6 +29,7 @@ import org.rs.consts.Components
 
 /**
  * A utility class for making cutscenes.
+ *
  * @author Ceikry
  */
 abstract class Cutscene(

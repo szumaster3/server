@@ -19,26 +19,30 @@ import java.util.ArrayList;
 import static core.api.ContentAPIKt.setVarp;
 
 /**
- * Manages a player's equipped items, handling equipment logic such as equipping, unequipping, and stat bonuses.
+ * Represents the equipment container.
+ *
+ * @author Emperor
  */
 public final class EquipmentContainer extends Container {
-
     /**
-     * The equipment slots corresponding to different gear types.
+     * The equipment slots.
      */
     public static final int SLOT_HAT = 0, SLOT_CAPE = 1, SLOT_AMULET = 2, SLOT_WEAPON = 3, SLOT_CHEST = 4, SLOT_SHIELD = 5, SLOT_LEGS = 7, SLOT_HANDS = 9, SLOT_FEET = 10, SLOT_RING = 12, SLOT_ARROWS = 13;
 
     /**
-     * Names of different combat and attribute bonuses displayed in the interface.
+     * The bonus names.
      */
     private static final String[] BONUS_NAMES = {"Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Stab: ", "Slash: ", "Crush: ", "Magic: ", "Ranged: ", "Summoning: ", "Strength: ", "Prayer: "};
 
+    /**
+     * The player.
+     */
     private final Player player;
 
     /**
-     * Creates an EquipmentContainer to manage the player's equipped items.
+     * Constructs a new {@code EquipmentContainer} {@code Object}.
      *
-     * @param player The player whose equipment is managed.
+     * @param player The player.
      */
     public EquipmentContainer(Player player) {
         super(14);
@@ -52,25 +56,25 @@ public final class EquipmentContainer extends Container {
     }
 
     /**
-     * Attempts to equip an item.
+     * Adds an item to the equipment container.
      *
-     * @param item          The item to equip.
-     * @param fire          Whether to trigger event listeners.
-     * @param fromInventory Whether the item is coming from the player's inventory.
-     * @return {@code true} if the item was successfully equipped, otherwise {@code false}.
+     * @param item          The item to add.
+     * @param fire          If we should refresh.
+     * @param fromInventory If the item is being equipped from the inventory.
+     * @return {@code True} if succesful, {@code false} if not.
      */
     public boolean add(Item item, boolean fire, boolean fromInventory) {
         return add(item, player.getInventory().getSlot(item), fire, fromInventory);
     }
 
     /**
-     * Attempts to equip an item from a specific inventory slot.
+     * Adds an item to the equipment container.
      *
-     * @param newItem       The item to equip.
-     * @param inventorySlot The slot in the inventory from which the item is being equipped.
-     * @param fire          Whether to trigger event listeners.
-     * @param fromInventory Whether the item is coming from the player's inventory.
-     * @return {@code true} if the item was successfully equipped, otherwise {@code false}.
+     * @param newItem       The item to add.
+     * @param inventorySlot The inventory slot of the item to add.
+     * @param fire          If we should refresh.
+     * @param fromInventory If the item is being equipped from the inventory.
+     * @return {@code True} if succesful, {@code false} if not.
      */
     public boolean add(Item newItem, int inventorySlot, boolean fire, boolean fromInventory) {
         int equipmentSlot = newItem.getDefinition().getConfiguration(ItemConfigParser.EQUIP_SLOT, -1);
@@ -106,7 +110,7 @@ public final class EquipmentContainer extends Container {
 
             if (!successfullyRemovedAll) {
                 if (fromInventory)
-                    player.getInventory().add(newItem);
+                    player.getInventory().add(newItem); //add the item back in case we weren't able to remove the currently equipped item(s)
                 return false;
             }
         }
@@ -149,7 +153,7 @@ public final class EquipmentContainer extends Container {
         boolean hasSpaceForUnequippedItems = freeSlots >= neededSlots;
 
         if (!hasSpaceForUnequippedItems) {
-            player.getPacketDispatch().sendMessage("Not enough space in your inventory.");
+            player.getPacketDispatch().sendMessage("Not enough space in your inventory!");
             return false;
         }
 
@@ -175,6 +179,7 @@ public final class EquipmentContainer extends Container {
 
         if (listenersSayWeCanUnequip && allRemoved && allAdded) return true;
         else {
+            //put things back if we couldn't remove everything
             for (Item item : current) {
                 if (!containsItem(item)) {
                     add(item);
@@ -256,14 +261,22 @@ public final class EquipmentContainer extends Container {
         replace(transferItem, slot);
     }
 
+    /**
+     * Listens to the equipment container.
+     *
+     * @author Emperor
+     */
     private static class EquipmentListener implements ContainerListener {
 
+        /**
+         * The player.
+         */
         private final Player player;
 
         /**
-         * Instantiates a new Equipment listener.
+         * Constructs a new {@code EquipmentContainer} {@code Object}.
          *
-         * @param player the player
+         * @param player The player.
          */
         public EquipmentListener(Player player) {
             this.player = player;
@@ -306,9 +319,9 @@ public final class EquipmentContainer extends Container {
         }
 
         /**
-         * Update.
+         * Updates the bonuses, weight, animations.
          *
-         * @param c the c
+         * @param c The container.
          */
         public void update(Container c) {
             if (c.getNew(SLOT_SHIELD).getId() != 11283 && player.getAttribute("dfs_spec", false)) {
@@ -326,9 +339,9 @@ public final class EquipmentContainer extends Container {
     }
 
     /**
-     * Recalculates the player's equipment bonuses based on currently equipped items.
+     * Updates the bonuses.
      *
-     * @param player The player whose bonuses should be updated.
+     * @param player The player.
      */
     public static void updateBonuses(Player player) {
         int[] bonuses = new int[15];
@@ -343,6 +356,7 @@ public final class EquipmentContainer extends Container {
                 }
             }
         }
+
         Item shield = player.getEquipment().get(SLOT_SHIELD);
         if (shield != null && shield.getId() == 11283) {
             int increase = shield.getCharge() / 20;
@@ -352,14 +366,15 @@ public final class EquipmentContainer extends Container {
             bonuses[9] += increase;
             bonuses[10] += increase;
         }
+
         player.getProperties().setBonuses(bonuses);
         update(player);
     }
 
     /**
-     * Updates the player's equipment-related stats and appearance.
+     * Updates the equipment stats interface.
      *
-     * @param player The player whose data is being refreshed.
+     * @param player The player to update for.
      */
     public static void update(Player player) {
         if (!player.getInterfaceManager().hasMainComponent(667)) {

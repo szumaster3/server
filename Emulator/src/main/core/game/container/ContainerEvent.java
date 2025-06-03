@@ -3,50 +3,59 @@ package core.game.container;
 import core.game.node.item.Item;
 
 /**
- * Represents an event related to a container, tracking changes to its items.
+ * Represents a container event.
+ *
+ * @author Emperor
  */
 public final class ContainerEvent {
 
     /**
-     * A constant representing a null item.
+     * Represents a null item.
      */
     public static final Item NULL_ITEM = new Item(0, 0);
 
+    /**
+     * The array of changed items.
+     */
     private final Item[] items;
+
+    /**
+     * Clears the container.
+     */
     private boolean clear;
 
     /**
-     * Constructs a new ContainerEvent with the specified size.
+     * Constructs a new {@code ContainerEvent} {@code Object}.
      *
-     * @param size the number of slots in the container
+     * @param size The container size.
      */
     public ContainerEvent(int size) {
         this.items = new Item[size];
     }
 
     /**
-     * Flags the specified slot as containing a null item.
+     * Flags a null item on the given slot.
      *
-     * @param slot the slot index to flag as null
+     * @param slot The slot.
      */
     public void flagNull(int slot) {
         items[slot] = NULL_ITEM;
     }
 
     /**
-     * Updates the specified slot with a given item.
+     * Flags an item on the given slot.
      *
-     * @param slot the slot index to update
-     * @param item the item to place in the slot
+     * @param slot The slot.
+     * @param item The item.
      */
     public void flag(int slot, Item item) {
         items[slot] = item;
     }
 
     /**
-     * Retrieves the number of slots that have been changed.
+     * Gets the amount of item slots changed.
      *
-     * @return the count of changed slots
+     * @return The amount of item slots that have changed.
      */
     public int getChangeCount() {
         int count = 0;
@@ -59,9 +68,9 @@ public final class ContainerEvent {
     }
 
     /**
-     * Retrieves the slot indices that have been modified.
+     * Gets the updated slots.
      *
-     * @return an array of indices corresponding to changed slots
+     * @return The slots array.
      */
     public int[] getSlots() {
         int size = 0;
@@ -72,21 +81,23 @@ public final class ContainerEvent {
             }
         }
         int[] slot = new int[size];
-        System.arraycopy(slots, 0, slot, 0, size);
+        for (int i = 0; i < size; i++) {
+            slot[i] = slots[i];
+        }
         return slot;
     }
 
     /**
-     * Retrieves the array of items currently stored in the container.
+     * Gets the items.
      *
-     * @return an array of items in the container
+     * @return The items.
      */
     public Item[] getItems() {
         return items;
     }
 
     /**
-     * Clears the container by setting all slots to null and marking it as cleared.
+     * Flags an empty container.
      */
     public void flagEmpty() {
         this.clear = true;
@@ -96,18 +107,18 @@ public final class ContainerEvent {
     }
 
     /**
-     * Checks if the container has been cleared.
+     * Gets the clear.
      *
-     * @return {@code true} if the container is cleared, otherwise {@code false}
+     * @return The clear.
      */
     public boolean isClear() {
         return clear;
     }
 
     /**
-     * Sets the cleared status of the container.
+     * Sets the clear flag.
      *
-     * @param clear {@code true} to mark the container as cleared, otherwise {@code false}
+     * @param clear The container is cleared.
      */
     public void setClear(boolean clear) {
         this.clear = clear;
