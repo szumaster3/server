@@ -346,4 +346,25 @@ internal object GameAttributes {
 
     // Plague City quest.
     const val ARDOUGNE_TELEPORT = "/save:ardougne_teleport"
+
+    // Watchtower relics.
+    const val WATCHTOWER_RELIC_1 = "/save:quest:watchtower:relic_1"
+    const val WATCHTOWER_RELIC_2 = "/save:quest:watchtower:relic_2"
+    const val WATCHTOWER_RELIC_3 = "/save:quest:watchtower:relic_3"
+
+    const val WATCHTOWER_TOBAN_GOLD = "/save:quest:watchtower:gold_bar"
+    const val WATCHTOWER_TOBAN_KEY = "/save:quest:watchtower:toban_key"
+    const val WATCHTOWER_GORAD_TOOTH = "/save:quest:watchtower:ogre_tooth"
+    const val WATCHTOWER_DRAGON_BONES = "/save:quest:watchtower:dragon_bones"
+    const val WATCHTOWER_ROCK_CAKE = "/save:quest:watchtower:rock_cake"
+    const val WATCHTOWER_RIDDLE = "/save:quest:watchtower:ogre_riddle"
+
+    const val WATCHTOWER_GATE_UNLOCK = "/save:quest:watchtower:ogre_gate"
+    const val WATCHTOWER_BRING_GOLD = "/save:quest:watchtower:bring_gold_to_the_guard"
+    const val WATCHTOWER_GOLD_GATE_UNLOCK = "/save:quest:watchtower:ogre_gold_gate"
+    const val WATCHTOWER_DARK_AREA = "quest:watchtower:dark_section"
+    const val WATCHTOWER_SKAVID_UPSET = "quest:watchtower:upset_skavid"
+
+    // Watchtower quest.
+    const val WATCHTOWER_TELEPORT = "/save:watchtower_teleport"
 }

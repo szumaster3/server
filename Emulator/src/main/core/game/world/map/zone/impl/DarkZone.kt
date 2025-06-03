@@ -42,6 +42,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         register(ZoneBorders(3223, 9487, 3211, 9506))
         register(ZoneBorders(3306, 9661, 3222, 9600))
         register(ZoneBorders(3717, 9473, 3841, 9346))
+        register(ZoneBorders(2496, 9408, 2559, 9471)) // Skavid caves.
     }
 
     /**

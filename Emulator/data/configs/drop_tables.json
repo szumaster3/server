@@ -13335,7 +13335,7 @@
       }
     ],
     "ids": "870",
-    "description": "",
+    "description": "Enclave Guard",
     "main": [
       {
         "minAmount": "1",
@@ -13401,6 +13401,24 @@
         "minAmount": "1",
         "weight": "100.0",
         "id": "0",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "10977",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
+        "id": "10976",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "60.0",
+        "id": "7842",
         "maxAmount": "1"
       }
     ]
@@ -39735,7 +39753,14 @@
     ]
   },
   {
-    "default": [],
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
     "charm": [
       {
         "minAmount": "1",

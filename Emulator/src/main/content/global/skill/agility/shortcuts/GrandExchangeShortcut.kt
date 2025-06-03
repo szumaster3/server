@@ -36,7 +36,10 @@ class GrandExchangeShortcut : InteractionListener {
 
     override fun defineListeners() {
         on(SHORTCUTS.keys.toIntArray(), IntType.SCENERY, "climb-into") { player, node ->
-            if (!canUseShortcut(player)) return@on true
+            if (!hasLevelDyn(player, Skills.AGILITY, 21)) {
+                sendMessage(player, "You need an agility level of at least 21 to do this.")
+                return@on true
+            }
 
             player.locks.lockComponent(4)
             val scenery = node as Scenery
@@ -46,14 +49,6 @@ class GrandExchangeShortcut : InteractionListener {
             handleShortcut(player, path)
             return@on true
         }
-    }
-
-    private fun canUseShortcut(player: Player): Boolean {
-        if (!hasLevelDyn(player, Skills.AGILITY, 21)) {
-            sendMessage(player, "You need an agility level of at least 21 to do this.")
-            return false
-        }
-        return true
     }
 
     private fun initiateForceMovement(

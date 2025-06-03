@@ -1,6 +1,5 @@
 package content.global.skill.herblore
 
-import content.global.skill.herblore.potions.GenericPotion
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.node.entity.player.Player
@@ -12,13 +11,9 @@ import org.rs.consts.Items
 import org.rs.consts.Quests
 import org.rs.consts.Sounds
 
-class HerblorePulse(
-    player: Player?,
-    node: Item?,
-    var amount: Int,
-    private val potion: GenericPotion,
-) : SkillPulse<Item?>(player, node) {
-    private val initialAmount: Int = amount
+class HerblorePulse(player: Player?, node: Item?, private var amount: Int, private val potion: GenericPotion) : SkillPulse<Item?>(player, node) {
+
+    private val initialAmount = amount
     private var cycles = 0
 
     override fun checkRequirements(): Boolean {
@@ -26,89 +21,84 @@ class HerblorePulse(
             sendMessage(player, "You must complete the ${Quests.DRUIDIC_RITUAL} quest before you can use Herblore.")
             return false
         }
+
         if (getDynLevel(player, Skills.HERBLORE) < potion.level) {
-            sendMessage(player, "You need a Herblore level of at least " + potion.level + " in order to do this.")
+            sendMessage(player, "You need a Herblore level of at least ${potion.level} in order to do this.")
             return false
         }
-        return inInventory(player, potion.base!!.id) && inInventory(player, potion.ingredient!!.id)
+
+        val watchtowerPotions = intArrayOf(Items.VIAL_2389, Items.VIAL_2390, Items.POTION_2394)
+        potion.product?.let {
+            if (watchtowerPotions.contains(it) && !isQuestComplete(player, Quests.WATCHTOWER)) {
+                sendMessage(player, "Hmmm...perhaps I shouldn't try to mix these items together.")
+                sendMessage(player, "It might have unpredictable results...")
+                return false
+            }
+        }
+
+        return inInventory(player, potion.base ?: return false) && inInventory(player, potion.ingredient ?: return false)
     }
 
     override fun animate() {}
 
     override fun reward(): Boolean {
-        if (potion.base!!.id == VIAL_OF_WATER.id) {
-            if (initialAmount == 1 && delay == 1) {
-                animate(player, ANIMATION)
-                delay = 3
-                return false
-            }
-            handleUnfinished()
-        } else {
-            if (initialAmount == 1 && delay == 1) {
-                animate(player, ANIMATION)
-                delay = 3
-                return false
-            }
-            if (delay == 1) {
-                delay = 3
-                animate(player, ANIMATION)
-                return false
-            }
-            handleFinished()
+        val isUnfinished = potion.base == VIAL_OF_WATER
+
+        if (initialAmount == 1 && delay == 1) {
+            animate(player, ANIMATION)
+            delay = 3
+            return false
         }
-        amount--
-        return amount == 0
+
+        if (!isUnfinished && delay == 1) {
+            animate(player, ANIMATION)
+            delay = 3
+            return false
+        }
+
+        if (isUnfinished) handleUnfinished() else handleFinished()
+        return --amount == 0
     }
 
-    fun handleUnfinished() {
-        if (cycles == 0) {
-            animate(player, ANIMATION)
-        }
-        if (inInventory(player, potion.base!!.id) &&
-            inInventory(
-                player,
-                potion.ingredient!!.id,
-            ) &&
-            player.inventory.remove(potion.base, potion.ingredient)
-        ) {
-            val item = potion.product
-            addItem(player, item!!.id)
-            sendMessage(
-                player,
-                "You put the" +
-                    getItemName(potion.ingredient.id)
-                        .lowercase()
-                        .replace("clean", "") + " leaf into the vial of water.",
-            )
+    private fun handleUnfinished() {
+        val base = potion.base ?: return
+        val ingredient = potion.ingredient ?: return
+        val product = potion.product ?: return
+
+        if (cycles == 0) animate(player, ANIMATION)
+
+        if (inInventory(player, base) && inInventory(player, ingredient) && player.inventory.remove(base.asItem(), ingredient.asItem())) {
+            addItem(player, product)
+            val herb = getItemName(ingredient).lowercase().replace("clean", "").trim()
+            sendMessage(player, "You put the $herb into the vial of water.")
             playAudio(player, Sounds.GRIND_2608)
-            if (cycles++ == 3) {
+
+            if (++cycles == 4) {
                 animate(player, ANIMATION)
                 cycles = 0
             }
         }
     }
 
-    fun handleFinished() {
-        if (inInventory(player, potion.base!!.id) &&
-            inInventory(
-                player,
-                potion.ingredient!!.id,
-            ) &&
-            player.inventory.remove(potion.base, potion.ingredient)
-        ) {
-            var item = potion.product
-            addItem(player, item!!.id)
+    private fun handleFinished() {
+        val base = potion.base ?: return
+        val ingredient = potion.ingredient ?: return
+        val product = potion.product ?: return
+
+        if (inInventory(player, base) && inInventory(player, ingredient) && player.inventory.remove(base.asItem(), ingredient.asItem())) {
+            addItem(player, product)
             rewardXP(player, Skills.HERBLORE, potion.experience)
-            sendMessage(player, "You mix the " + potion.ingredient.name.lowercase() + " into your potion.")
+                val item =  getItemName(ingredient).lowercase()
+            sendMessage(player, "You mix the $item into your potion.")
+
             playAudio(player, Sounds.GRIND_2608)
             animate(player, ANIMATION)
         }
     }
 
     companion object {
-        @JvmField val VIAL_OF_WATER = Item(Items.VIAL_OF_WATER_227)
-
-        @JvmField val COCONUT_MILK = Item(Items.COCONUT_MILK_5935)
+        const val VIAL_OF_WATER = Items.VIAL_OF_WATER_227
+        const val COCONUT_MILK = Items.COCONUT_MILK_5935
         private const val ANIMATION = Animations.MIX_POTION_363
     }
 }

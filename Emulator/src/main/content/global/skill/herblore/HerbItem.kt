@@ -1,4 +1,4 @@
-package content.global.skill.herblore.herbs
+package content.global.skill.herblore
 
 import core.game.node.item.Item
 import org.rs.consts.Items
@@ -6,7 +6,7 @@ import org.rs.consts.Items
 /**
  * Represents types of herbs.
  */
-enum class Herbs(@JvmField val herb: Item, val experience: Double, val level: Int, @JvmField val product: Item, ) {
+enum class HerbItem(@JvmField val herb: Item, val experience: Double, val level: Int, @JvmField val product: Item, ) {
     GUAM(Item(Items.GRIMY_GUAM_199), 2.5, 3, Item(Items.CLEAN_GUAM_249)),
     MARRENTILL(Item(Items.GRIMY_MARRENTILL_201), 3.8, 5, Item(Items.CLEAN_MARRENTILL_251)),
     TARROMIN(Item(Items.GRIMY_TARROMIN_203), 5.0, 11, Item(Items.CLEAN_TARROMIN_253)),
@@ -31,19 +31,19 @@ enum class Herbs(@JvmField val herb: Item, val experience: Double, val level: In
 
     companion object {
         /**
-         * A map of herb IDs to their respective [Herbs] enum values.
+         * A map of herb IDs to their respective [HerbItem] enum values.
          */
         private val herbMap =
-            HashMap<Int, Herbs>().apply {
+            HashMap<Int, HerbItem>().apply {
                 values().forEach { herbData -> put(herbData.herb.id, herbData) }
             }
 
         /**
-         * Finds the [Herbs] enum value for the given [Item].
+         * Finds the [HerbItem] enum value for the given [Item].
          *
          * @param item The [Item] representing the herb.
-         * @return The corresponding [Herbs] enum value or null if no match is found.
+         * @return The corresponding [HerbItem] enum value or null if no match is found.
          */
-        fun forItem(item: Item): Herbs? = herbMap[item.id]
+        fun forItem(item: Item): HerbItem? = herbMap[item.id]
     }
 }

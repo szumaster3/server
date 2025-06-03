@@ -7,7 +7,6 @@ import core.game.world.map.Location
 
 /**
  * Represents the special ladder interactions.
- * TODO: Add to the location of the ladder the possibility of setting direction.
  */
 enum class SpecialLadder(
     private val ladderLoc: Location,
@@ -328,6 +327,10 @@ enum class SpecialLadder(
     MOVARIO_LADDER_UP(
         ladderLoc = Location.create(2036, 4379, 0),
         destLoc = Location.create(2502, 3255, 0),
+    ),
+    MYREQUE_INN_BASEMENT_UP(
+        ladderLoc = Location.create(3477, 9846, 0),
+        destLoc = Location.create(3496, 3465, 0),
     ),
     NEITIZNOT_STAIRS_UP(
         ladderLoc = Location.create(2363, 3799, 0),

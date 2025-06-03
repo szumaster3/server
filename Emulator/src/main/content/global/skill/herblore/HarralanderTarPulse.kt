@@ -1,4 +1,4 @@
-package content.global.skill.herblore.herbs
+package content.global.skill.herblore
 
 import core.api.*
 import core.api.quest.isQuestComplete
@@ -10,10 +10,10 @@ import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Quests
 
-class HerbTarPulse(
+class HarralanderTarPulse(
     player: Player?,
     node: Item?,
-    val tar: Tars,
+    val tar: TarItem,
     private var amount: Int,
 ) : SkillPulse<Item?>(player, node) {
     override fun checkRequirements(): Boolean {

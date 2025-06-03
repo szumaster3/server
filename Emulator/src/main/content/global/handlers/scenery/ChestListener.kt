@@ -10,7 +10,7 @@ class ChestListener : InteractionListener {
     override fun defineListeners() {
 
         /*
-         * Zanaris chest interaction (Fairy bank).
+         * Handles Zanaris chests.
          */
 
         on(Scenery.OPEN_CHEST_12121, IntType.SCENERY, "shut") { _, node ->
@@ -24,7 +24,7 @@ class ChestListener : InteractionListener {
         }
 
         /*
-         * Fred farm house chest interaction.
+         * Handles Fred farm house chests.
          */
 
         on(Scenery.CLOSED_CHEST_37009, IntType.SCENERY, "open") { _, node ->
@@ -39,6 +39,20 @@ class ChestListener : InteractionListener {
 
         on(Scenery.OPEN_CHEST_37010, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the chest but find nothing.")
+            return@on true
+        }
+
+        /*
+         * Handles Heroes' Guild chests.
+         */
+
+        on(Scenery.CHEST_2632, IntType.SCENERY, "open") { _, node ->
+            replaceScenery(node as core.game.node.scenery.Scenery, Scenery.CHEST_2633, -1)
+            return@on true
+        }
+
+        on(Scenery.CHEST_2633, IntType.SCENERY, "close") { _, node ->
+            replaceScenery(node as core.game.node.scenery.Scenery, Scenery.CHEST_2632, -1)
             return@on true
         }
     }

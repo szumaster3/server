@@ -1,6 +1,6 @@
 package content.region.karamja.quest.junglepotion.handlers;
 
-import content.global.skill.herblore.herbs.Herbs;
+import content.global.skill.herblore.HerbItem;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
@@ -18,7 +18,7 @@ public enum JungleObjective {
     /**
      * The Jungle vine.
      */
-    JUNGLE_VINE(2575, Herbs.SNAKE_WEED, 10, "It grows near vines in an area to the south west where", "the ground turns soft and the water kisses your feet.") {
+    JUNGLE_VINE(2575, HerbItem.SNAKE_WEED, 10, "It grows near vines in an area to the south west where", "the ground turns soft and the water kisses your feet.") {
         @Override
         public void search(final Player player, final Scenery scenery) {
             final Animation animation = Animation.create(2094);
@@ -42,19 +42,19 @@ public enum JungleObjective {
     /**
      * The Palm tree.
      */
-    PALM_TREE(2577, Herbs.ARDRIGAL, 20, "You are looking for Ardrigal. It is related to the palm", "and grows in its brothers shady profusion."),
+    PALM_TREE(2577, HerbItem.ARDRIGAL, 20, "You are looking for Ardrigal. It is related to the palm", "and grows in its brothers shady profusion."),
     /**
      * The Sito foil.
      */
-    SITO_FOIL(2579, Herbs.SITO_FOIL, 30, "You are looking for Sito Foil, and it grows best where", "the ground has been blackened by the living flame."),
+    SITO_FOIL(2579, HerbItem.SITO_FOIL, 30, "You are looking for Sito Foil, and it grows best where", "the ground has been blackened by the living flame."),
     /**
      * The Volencia moss.
      */
-    VOLENCIA_MOSS(2581, Herbs.VOLENCIA_MOSS, 40, "You are looking for Volencia Moss. It clings to rocks", "for its existence. It is difficult to see, so you must", "search for it well."),
+    VOLENCIA_MOSS(2581, HerbItem.VOLENCIA_MOSS, 40, "You are looking for Volencia Moss. It clings to rocks", "for its existence. It is difficult to see, so you must", "search for it well."),
     /**
      * The Rogues purse.
      */
-    ROGUES_PURSE(32106, Herbs.ROGUES_PUSE, 50, "It inhabits the darkness of the underground, and grows", "in the caverns to the north. A secret entrance to the", "caverns is set into the northern cliffs, be careful Bwana.") {
+    ROGUES_PURSE(32106, HerbItem.ROGUES_PUSE, 50, "It inhabits the darkness of the underground, and grows", "in the caverns to the north. A secret entrance to the", "caverns is set into the northern cliffs, be careful Bwana.") {
         @Override
         public void search(final Player player, final Scenery scenery) {
             final Animation animation = Animation.create(2097);
@@ -77,13 +77,13 @@ public enum JungleObjective {
 
     private final int objectId;
 
-    private final Herbs herb;
+    private final HerbItem herb;
 
     private final int stage;
 
     private final String[] clue;
 
-    JungleObjective(int objectId, Herbs herb, int stage, final String... clue) {
+    JungleObjective(int objectId, HerbItem herb, int stage, final String... clue) {
         this.objectId = objectId;
         this.herb = herb;
         this.stage = stage;
@@ -175,7 +175,7 @@ public enum JungleObjective {
      *
      * @return the herb
      */
-    public Herbs getHerb() {
+    public HerbItem getHerb() {
         return herb;
     }
 

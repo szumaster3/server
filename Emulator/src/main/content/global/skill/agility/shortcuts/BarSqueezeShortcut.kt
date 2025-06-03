@@ -14,56 +14,45 @@ import core.plugin.Plugin
 import org.rs.consts.Quests
 
 @Initializable
-class BarSqueezeShortcut : AgilityShortcut {
-    constructor() : super(intArrayOf(9334, 9337), 66, 1.0, "squeeze-through")
+class BarSqueezeShortcut : AgilityShortcut(intArrayOf(9334, 9337, 2186), 66, 1.0, "squeeze-through") {
 
-    constructor(ids: IntArray, level: Int, exp: Double, option: String) : super(ids, level, exp, option)
+    override fun newInstance(arg: Any?): Plugin<Any> = this
 
-    override fun newInstance(arg: Any?): Plugin<Any> =
-        super.newInstance(arg).apply {
-            configure(BarSqueezeShortcut(intArrayOf(2186), 1, 0.0, "squeeze-through"))
+    override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
+        val direction = when (obj.id) {
+            9334 -> Direction.WEST
+            9337 -> if (player.location.y < obj.location.y) Direction.NORTH else Direction.SOUTH
+            2186 -> if (player.location.y >= 3161) Direction.SOUTH else Direction.getLogicalDirection(player.location, obj.location)
+            else -> Direction.getLogicalDirection(player.location, obj.location)
         }
 
-    override fun run(
-        player: Player,
-        obj: Scenery,
-        option: String,
-        failed: Boolean,
-    ) {
-        val logicalDirection = Direction.getLogicalDirection(player.location, obj.location)
-        val (dir, start) =
-            when {
-                obj.id == 9334 && logicalDirection == Direction.NORTH ->
-                    Direction.WEST to
-                        Location.create(3424, 3476, 0)
-                obj.id == 9337 && logicalDirection == Direction.NORTH ->
-                    if (player.location.y <
-                        obj.location.y
-                    ) {
-                        Direction.NORTH to player.location
-                    } else {
-                        Direction.SOUTH to player.location
-                    }
-                obj.id == 2186 && player.location.y >= 3161 -> Direction.SOUTH to player.location
-                else -> logicalDirection to player.location
-            }
+        val start = when (obj.id) {
+            9334 -> Location(3424, 3476, 0)
+            else -> player.location
+        }
+
         AgilityHandler.forceWalk(
             player,
             -1,
             start,
-            player.location.transform(dir, 1),
-            Animation.create(2240),
+            start.transform(direction, 1),
+            Animation(2240),
             10,
             0.0,
             null,
+            1
         )
     }
 
-    override fun checkRequirements(player: Player): Boolean =
-        if (!isQuestComplete(player, Quests.PRIEST_IN_PERIL) && player.location.y !in 3159..3161) {
+    override fun checkRequirements(player: Player): Boolean {
+        val inTempleTunnel = player.location.y in 3159..3161
+        val questComplete = isQuestComplete(player, Quests.PRIEST_IN_PERIL)
+
+        if (!questComplete && !inTempleTunnel) {
             sendDialogue(player, "You need to have completed Priest in Peril in order to do this.")
-            false
-        } else {
-            super.checkRequirements(player)
+            return false
         }
+
+        return super.checkRequirements(player)
+    }
 }

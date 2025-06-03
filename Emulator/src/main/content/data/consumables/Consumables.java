@@ -678,7 +678,7 @@ public enum Consumables {
     /**
      * The Jangerberries.
      */
-    JANGERBERRIES(new Food(new int[]{Items.FLOWERS_2470}, new MultiEffect(new SkillEffect(Skills.ATTACK, 2.0, 0.0), new SkillEffect(Skills.STRENGTH, 1.0, 0.0), new PrayerEffect(1.0, 0.0), new SkillEffect(Skills.DEFENCE, -1.0, 0.0)), "You eat the jangerberries.", "They taste very bitter.")),
+    JANGERBERRIES(new Food(new int[]{Items.JANGERBERRIES_247}, new MultiEffect(new SkillEffect(Skills.ATTACK, 2.0, 0.0), new SkillEffect(Skills.STRENGTH, 1.0, 0.0), new PrayerEffect(1.0, 0.0), new SkillEffect(Skills.DEFENCE, -1.0, 0.0)), "You eat the jangerberries.", "They taste very bitter.")),
     /**
      * The Strawberry.
      */

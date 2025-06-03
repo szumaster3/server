@@ -1,10 +1,12 @@
 package content.global.skill.agility.shortcuts
 
+import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds
@@ -17,21 +19,15 @@ class DwarvenMineCreviceShortcut : InteractionListener {
                 return@on true
             }
 
-            val destination =
-                if (player.location == Location(3035, 9806, 0)) {
-                    Location(3028, 9806, 0)
-                } else {
-                    Location(3035, 9806, 0)
-                }
+            val destination = if (player.location == Location(3035, 9806, 0)) Location(3028, 9806, 0) else Location(3035, 9806, 0)
 
-            lock(player, 8)
-            face(player, node)
-            animate(player, Animations.DUCK_UNDER_2240)
+            faceLocation(player, destination)
+            animate(player, Animations.DUCK_UNDER_2240, true)
             playAudio(player, Sounds.SQUEEZE_THROUGH_ROCKS_1310)
-            forceMove(player, player.location, destination, 0, 240, null, Animations.HUMAN_TURNS_INVISIBLE_2590)
-            runTask(player, 7) {
-                animate(player, Animations.DUCK_UNDER_2240)
-            }
+
+            AgilityHandler.forceWalk(player, -1, player.location, destination, Animation.create(Animations.HUMAN_TURNS_INVISIBLE_2590), 10, 0.0, null, 1)
+                .endAnimation = Animation(Animations.DUCK_UNDER_2240)
+
             return@on true
         }
     }

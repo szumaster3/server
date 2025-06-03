@@ -1,6 +1,6 @@
 package content.minigame.pestcontrol.handlers;
 
-import content.global.skill.herblore.herbs.Herbs;
+import content.global.skill.herblore.HerbItem;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -401,7 +401,7 @@ public final class PCRewardInterface extends ComponentPlugin {
         /**
          * The Herb pack.
          */
-        HERB_PACK("Herb Pack", 30, new Item[]{Herbs.HARRALANDER.herb, Herbs.RANARR.herb, Herbs.TOADFLAX.herb, Herbs.IRIT.herb, Herbs.AVANTOE.herb, Herbs.KWUARM.herb, Herbs.GUAM.herb, Herbs.MARRENTILL.herb}, new int[]{32, 45}) {
+        HERB_PACK("Herb Pack", 30, new Item[]{HerbItem.HARRALANDER.herb, HerbItem.RANARR.herb, HerbItem.TOADFLAX.herb, HerbItem.IRIT.herb, HerbItem.AVANTOE.herb, HerbItem.KWUARM.herb, HerbItem.GUAM.herb, HerbItem.MARRENTILL.herb}, new int[]{32, 45}) {
             @Override
             public boolean checkItemRequirement(final Player player, final int option) {
                 if (player.getSkills().getLevel(Skills.HERBLORE) < 25) {

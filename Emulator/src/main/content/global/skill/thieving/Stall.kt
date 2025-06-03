@@ -24,7 +24,7 @@ enum class Stall(full: Array<Int>, empty: Array<Int>, var level: Int, var reward
     GENERAL_STALL(arrayOf(org.rs.consts.Scenery.GENERAL_STALL_4876), arrayOf(org.rs.consts.Scenery.BAMBOO_DESK_4797), 5, arrayOf(Item(Items.EMPTY_POT_1931, 1), Item(Items.HAMMER_2347, 1), Item(Items.TINDERBOX_590, 1)), 16.0, 12, "goods",),
     FOOD_STALL(arrayOf(org.rs.consts.Scenery.FOOD_STALL_4875), arrayOf(org.rs.consts.Scenery.BAMBOO_DESK_4797), 5, arrayOf(Item(Items.BANANA_1963, 1)), 16.0, 12, "food",),
     CANDLES(arrayOf(org.rs.consts.Scenery.CANDLES_19127), arrayOf(org.rs.consts.Scenery.CANDLES_19127), 20, arrayOf(Item(Items.CANDLE_36, 1)), 20.0, 0, "candles",),
-    COUNTER(arrayOf(org.rs.consts.Scenery.COUNTER_2793), arrayOf(org.rs.consts.Scenery.COUNTER_2791), 15, arrayOf(Item(Items.ROCK_CAKE_2379, 1)), 6.5, 6, "rocks",),
+    COUNTER(arrayOf(org.rs.consts.Scenery.COUNTER_2793), arrayOf(org.rs.consts.Scenery.COUNTER_2791), 15, arrayOf(Item(Items.ROCK_CAKE_2379, 1)), 6.5, 12, "rocks",),
     ;
 
     var fullIDs: List<Int> = ArrayList(listOf(*full))

@@ -93,7 +93,7 @@ class EnchantSpellListener : InteractionListener {
                                 if (removeItem(player, node.id) && (removeItem(player, item.id))) {
                                     addItem(player, product)
                                     playAudio(player, Sounds.POH_TABLET_BREAK_TP_965)
-                                    animate(player, Animations.BREAK_SPELL_TABLET_A_4069, true)
+                                    visualize(player, Animations.BREAK_SPELL_TABLET_A_4069, Graphics.BLUE_GLOW_678)
                                     break
                                 }
                             }

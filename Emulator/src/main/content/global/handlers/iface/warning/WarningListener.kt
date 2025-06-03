@@ -1,9 +1,11 @@
 package content.global.handlers.iface.warning
 
 import content.global.skill.agility.AgilityHandler
+import content.region.kandarin.quest.itwatchtower.cutscene.EnclaveCutscene
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.hasRequirement
+import core.api.quest.isQuestComplete
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.DoorActionHandler
@@ -45,6 +47,7 @@ class WarningListener :
             Components.CWS_WARNING_1_574,
             Components.CWS_WARNING_24_581,
             Components.CWS_WARNING_26_627,
+            Components.CWS_WARNING_13_572
         )
 
     override fun defineInterfaceListeners() {
@@ -212,6 +215,15 @@ class WarningListener :
                                             }
                                         sendChat(n, "The $dir tower is occupied, get them!")
                                     }
+                                }
+                                WarningManager.increment(player, component.id)
+                            }
+
+                            Components.CWS_WARNING_13_572 -> {
+                                if(isQuestComplete(player, Quests.WATCHTOWER)) {
+                                    teleport(player, Location.create(2588, 9410, 0))
+                                } else {
+                                    EnclaveCutscene(player).start(true)
                                 }
                                 WarningManager.increment(player, component.id)
                             }

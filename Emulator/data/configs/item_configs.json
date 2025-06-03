@@ -24375,9 +24375,9 @@
     "id": "2388"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "This item will likely break if you put it down here, and you will have to go looking for another.",
     "shop_price": "5",
-    "examine": "An empty glass vial.",
+    "examine": "An infusion of water and jangerberries.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Vial",
@@ -24386,9 +24386,9 @@
     "id": "2389"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
+    "destroy_message": "This item will likely break if you put it down here, and you will have to go looking for another.",
     "shop_price": "5",
-    "examine": "An empty glass vial.",
+    "examine": "A mixture of jangerberries and a guam leaf in a vial.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Vial",
@@ -24427,8 +24427,8 @@
     "id": "2393"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "This is meant to be good for spots.",
+    "destroy_message": "This item will likely break if you put it down here, and you will have to go looking for another.",
+    "examine": "A strange brew.",
     "grand_exchange_price": "157",
     "durability": null,
     "name": "Potion",
@@ -82527,6 +82527,13 @@
     "id": "9720"
   },
   {
+    "examine": "A scroll with some writing on it.",
+    "durability": null,
+    "name": "Scroll",
+    "archery_ticket_price": "0",
+    "id": "9721"
+  },
+  {
     "examine": "A pipe that belongs in a cannon stand.",
     "durability": null,
     "name": "Pipe",
@@ -93837,8 +93844,8 @@
     "equipment_slot": "3",
     "destroy_message": "You can get another one by visiting the cave near the Fishing guild. A friendly ghost will replace it for you. You must be wearing a Ring of visibility, or you cannot get it back.",
     "stand_anim": "7047",
-    "name": "Shadow sword",
     "attack_audios": "3414,3412,3413,3414",
+    "name": "Shadow sword",
     "tradeable": "false",
     "run_anim": "7039",
     "archery_ticket_price": "0",
@@ -114408,10 +114415,10 @@
   {
     "destroy_message": "Drorkar can give you another copy.",
     "examine": "You should deliver this to Brother Bordiss in the Monastery near Ice Mountain.",
-    "destroy": "true",
     "durability": null,
     "name": "Letter",
-    "id": "13229",
+    "destroy": "true",
+    "id": "13229"
   },
   {
     "destroy_message": "You can get another net from Professor Arblenap on Ice Mountain.",

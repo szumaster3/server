@@ -162,6 +162,10 @@ class TeleportTabletOption : InteractionListener {
                         sendDialogue(player, "You haven't learnt how to use this yet.")
                         return@on true
                     }
+                    if(tab == Items.WATCHTOWER_TPORT_8012 && !getAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, false)){
+                        sendDialogue(player, "You haven't learnt how to use this yet.")
+                        return@on true
+                    }
                     if (tab == Items.ASTRAL_ALTAR_TP_13611 &&
                         !hasRequirement(player, QuestReq(QuestRequirements.LUNAR_DIPLOMACY))
                     ) {

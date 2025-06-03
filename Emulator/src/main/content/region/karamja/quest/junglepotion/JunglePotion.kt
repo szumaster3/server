@@ -1,6 +1,6 @@
 package content.region.karamja.quest.junglepotion
 
-import content.global.skill.herblore.herbs.Herbs
+import content.global.skill.herblore.HerbItem
 import content.region.karamja.quest.junglepotion.dialogue.JogreCavernDialogue
 import content.region.karamja.quest.junglepotion.dialogue.TrufitusDialogue
 import content.region.karamja.quest.junglepotion.handlers.JungleObjective
@@ -73,7 +73,7 @@ class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNG
         super.finish(player)
         sendString(player, "1 Quest Point", 277, 8 + 2)
         sendString(player, "775 Herblore XP", 277, 9 + 2)
-        player.packetDispatch.sendItemZoomOnInterface(Herbs.VOLENCIA_MOSS.product.id, 235, 277, 3 + 2)
+        player.packetDispatch.sendItemZoomOnInterface(HerbItem.VOLENCIA_MOSS.product.id, 235, 277, 3 + 2)
         player.getSkills().addExperience(Skills.HERBLORE, 775.0)
         player.getQuestRepository().syncronizeTab(player)
         setVarbit(player, 897, 2)

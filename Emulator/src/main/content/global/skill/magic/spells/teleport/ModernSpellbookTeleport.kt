@@ -133,7 +133,8 @@ class ModernSpellbookTeleport : SpellListener("modern") {
          */
 
         onCast(ModernSpells.WATCHTOWER_TELEPORT, NONE) { player, _ ->
-            if (!hasRequirement(player, Quests.WATCHTOWER)) {
+            if (!getAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, false)) {
+                sendDialogue(player, "You haven't learnt how to cast this spell yet.")
                 return@onCast
             }
             requires(

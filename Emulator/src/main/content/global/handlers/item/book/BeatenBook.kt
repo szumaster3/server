@@ -123,11 +123,11 @@ class BeatenBook : InteractionListener {
     override fun defineListeners() {
         on(Items.BEATEN_BOOK_9717, IntType.ITEM, "read") { player, _ ->
             if (getAttribute(player, EW2Utils.foundBook, 0) == 1) {
-                addItemOrDrop(player, Items.SPELL_SCROLL_2396)
-                sendMessage(player, " The book has two parts; an introduction and an instruction section.")
+                addItemOrDrop(player, Items.SCROLL_9721)
+                sendMessage(player, "The book has two parts; an introduction and an instruction section.")
                 sendMessage(player, "You flip the book open to the introduction and start reading.")
                 player.dialogueInterpreter.sendItemMessage(
-                    Items.SPELL_SCROLL_2396,
+                    Items.SCROLL_9721,
                     "You find a slip of paper that has been used for a",
                     "bookmark. You put it in your pack to study later.",
                 )

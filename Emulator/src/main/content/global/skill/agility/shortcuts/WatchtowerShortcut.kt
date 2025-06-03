@@ -28,7 +28,9 @@ class WatchtowerShortcut : InteractionListener {
         on(Scenery.LADDER_2833, IntType.SCENERY, "climb-up") { player, _ ->
             if (getQuestStage(player, Quests.WATCHTOWER) >= 1) {
                 sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "It is the wizards' helping hand - let 'em up.", FaceAnim.FRIENDLY)
-                ClimbActionHandler.climb(player, Animation(Animations.USE_LADDER_828), Location.create(2544, 3112, 1))
+                addDialogueAction(player) { _, _ ->
+                    ClimbActionHandler.climb(player, Animation(Animations.USE_LADDER_828), Location.create(2544, 3112, 1))
+                }
             } else {
                 sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "You can't go up there. That's private, that is.", FaceAnim.ANNOYED)
             }

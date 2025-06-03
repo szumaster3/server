@@ -1,4 +1,4 @@
-package content.global.skill.herblore.herbs
+package content.global.skill.herblore
 
 import core.api.addItem
 import core.api.amountInInventory
@@ -11,12 +11,12 @@ import core.game.node.item.Item
 import org.rs.consts.Components
 import org.rs.consts.Items
 
-class HerbTarListener : InteractionListener {
-    val tar = Tars.values().map(Tars::ingredient).toIntArray()
+class HarralanderTarListener : InteractionListener {
+    val tar = TarItem.values().map(TarItem::ingredient).toIntArray()
 
     override fun defineListeners() {
         onUseWith(IntType.ITEM, tar, Items.SWAMP_TAR_1939) { player, used, _ ->
-            var tar = Tars.forId(used.id)
+            var tar = TarItem.forId(used.id)
             val handler: SkillDialogueHandler =
                 object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(tar!!.product)) {
                     override fun create(
@@ -24,7 +24,7 @@ class HerbTarListener : InteractionListener {
                         index: Int,
                     ) {
                         player.pulseManager.run(
-                            tar?.let { HerbTarPulse(player, null, it, amount) },
+                            tar?.let { HarralanderTarPulse(player, null, it, amount) },
                         )
                     }
 

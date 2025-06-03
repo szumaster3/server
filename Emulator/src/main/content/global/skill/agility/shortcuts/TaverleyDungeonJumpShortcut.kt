@@ -20,58 +20,42 @@ class TaverleyDungeonJumpShortcut : InteractionListener {
                 sendMessage(player, "You need an agility level of at least 80 to do this.")
                 return@on true
             }
-            lock(player, 6)
-            AgilityHandler.forceWalk(
-                player,
-                -1,
-                if (player.location.x >= 2880) Location.create(2881, 9813, 0) else Location.create(2877, 9813, 0),
-                if (player.location.x >= 2880) Location.create(2877, 9813, 0) else Location.create(2881, 9813, 0),
-                Animation(1995),
-                13,
-                0.0,
-                null,
-                0,
-            )
-            submitIndividualPulse(
-                player,
-                object : Pulse(1, player) {
-                    var counter = 0
 
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> player.animator.forceAnimation(Animation(Animations.RUNNING_OSRS_STYLE_1995))
-                            1 -> {
-                                playAudio(player, Sounds.JUMP_2461)
-                                player.animator.forceAnimation(Animation(Animations.JUMP_WEREWOLF_1603))
-                                if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-                                    playAudio(player, Sounds.FLOOR_SPIKES_1383)
-                                    playAudio(player, Sounds.JUMP_BLADES_2464)
-                                    animateScenery(node.asScenery(), 1111)
-                                    AgilityHandler.fail(
-                                        player,
-                                        0,
-                                        if (player.location.x >= 2880) {
-                                            Location.create(
-                                                2877,
-                                                9813,
-                                                0,
-                                            )
-                                        } else {
-                                            Location.create(2881, 9813, 0)
-                                        },
-                                        Animation(1603),
-                                        Random.nextInt(1, 7),
-                                        null,
-                                    )
-                                    sendMessage(player, "You trigger the trap as you jump over it.")
-                                    return true
-                                }
+            val fromLeft = player.location.x < 2880
+            val start = Location.create(if (fromLeft) 2877 else 2881, 9813, 0)
+            val end = Location.create(if (fromLeft) 2881 else 2877, 9813, 0)
+
+            lock(player, 6)
+            AgilityHandler.forceWalk(player, -1, start, end, Animation(Animations.RUNNING_OSRS_STYLE_1995), 13, 0.0, null, 0)
+
+            submitIndividualPulse(player, object : Pulse(1, player) {
+                var counter = 0
+                var fail = AgilityHandler.hasFailed(player, 1, 0.1)
+                override fun pulse(): Boolean {
+                    when (counter++) {
+                        0 -> animate(player, Animations.RUNNING_OSRS_STYLE_1995)
+                        1 -> {
+                            playAudio(player, Sounds.JUMP_2461)
+                            animate(player, Animations.JUMP_WEREWOLF_1603, true)
+                            if (fail) {
+                                playAudio(player, Sounds.FLOOR_SPIKES_1383)
+                                playAudio(player, Sounds.JUMP_BLADES_2464)
+                                animateScenery(node.asScenery(), 1111)
+                                AgilityHandler.fail(
+                                    player,
+                                    0,
+                                    end,
+                                    Animation(1603),
+                                    Random.nextInt(1, 7),
+                                    "You trigger the trap as you jump over it."
+                                )
+                                return true
                             }
                         }
-                        return false
                     }
-                },
-            )
+                    return false
+                }
+            })
             return@on true
         }
     }

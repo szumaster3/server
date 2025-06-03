@@ -1,4 +1,4 @@
-package content.global.skill.herblore.assistance
+package content.global.skill.herblore
 
 import content.data.consumables.Consumables
 import core.api.*
@@ -10,7 +10,8 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
-class Decanting : InteractionListener {
+class DecantingListener : InteractionListener {
+
     override fun defineListeners() {
         on(IntType.NPC, "decant") { player, node ->
             val (toRemove, toAdd) = decantContainer(player.inventory)

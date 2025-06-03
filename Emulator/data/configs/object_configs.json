@@ -2769,14 +2769,18 @@
   },
   {
     "examine": "Use this to swing across gaps.",
-    "ids": "2322,2323,2324"
+    "ids": "2322,2323"
+  },
+  {
+    "examine": "I wonder who put that rope there.",
+    "ids": "2324"
   },
   {
     "examine": "I can swing on this tree.",
     "ids": "2325"
   },
   {
-    "examine": "A branch protrudes here.",
+    "examine": "It has a branch ideal for trying ropes to.",
     "ids": "2326"
   },
   {
@@ -15330,5 +15334,9 @@
   {
     "examine": "An empty barrel.",
     "ids": "16886"
+  },
+  {
+    "examine": "I wonder where this leads...",
+    "ids": "2823,2824"
   }
 ]

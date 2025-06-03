@@ -131,16 +131,6 @@ class HeroesQuestListener : InteractionListener {
             return@onUseWith true
         }
 
-        on(Scenery.CHEST_2632, IntType.SCENERY, "open") { _, node ->
-            replaceScenery(node as core.game.node.scenery.Scenery, Scenery.CHEST_2633, -1)
-            return@on true
-        }
-
-        on(Scenery.CHEST_2633, IntType.SCENERY, "close") { _, node ->
-            replaceScenery(node as core.game.node.scenery.Scenery, Scenery.CHEST_2632, -1)
-            return@on true
-        }
-
         on(Scenery.CHEST_2633, IntType.SCENERY, "search") { player, _ ->
             if (inInventory(player, Items.PETES_CANDLESTICK_1577)) {
                 sendMessage(player, "You search the chest but find nothing.")
@@ -167,14 +157,6 @@ class HeroesQuestListener : InteractionListener {
                 sendMessage(player, "It is too hot to take. You need something cold to pick it up with.")
             }
             return@on true
-        }
-
-        onUseWith(IntType.ITEM, Items.HARRALANDER_POTIONUNF_97, Items.BLAMISH_SNAIL_SLIME_1581) { player, used, with ->
-            if (removeItem(player, used) && removeItem(player, with)) {
-                sendMessage(player, "You mix the slime into your potion.")
-                addItemOrDrop(player, Items.BLAMISH_OIL_1582)
-            }
-            return@onUseWith true
         }
     }
 }

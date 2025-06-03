@@ -2,13 +2,9 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import core.api.hasLevelDyn
-import core.api.queueScript
 import core.api.sendDialogue
-import core.api.stopExecuting
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.QueueStrength
-import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Direction
 import core.game.world.update.flag.context.Animation
@@ -22,25 +18,24 @@ class DraynorManorShortcut : InteractionListener {
                 sendDialogue(player, "You need an agility level of at least 28 to do this.")
                 return@on true
             }
-            handleShortcut(player)
-            return@on true
-        }
-    }
 
-    private fun handleShortcut(player: Player) {
-        queueScript(player, 1, QueueStrength.SOFT) {
             val direction = if (player.location.x >= 3086) Direction.WEST else Direction.EAST
+            val animation = Animation(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844)
+
             AgilityHandler.forceWalk(
                 player,
                 -1,
                 player.location,
                 player.location.transform(direction, 1),
-                Animation(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844),
+                animation,
                 5,
                 0.0,
                 "You squeeze through the loose railing.",
+                1
             )
-            return@queueScript stopExecuting(player)
+
+            return@on true
         }
     }
+
 }

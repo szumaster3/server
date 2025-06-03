@@ -12,23 +12,13 @@ import core.plugin.Initializable
 
 @Initializable
 class AlkharidPitShortcut : AgilityShortcut(intArrayOf(9331, 9332), 38, 0.0, "climb") {
-    companion object {
-        private val ANIMATION = Animation(1148)
-        private val SCALE = Animation(740)
-    }
 
-    override fun run(
-        player: Player,
-        scenery: Scenery,
-        option: String,
-        failed: Boolean,
-    ) {
-        val destination =
-            when (scenery.id) {
-                9331 -> Location.create(3303, 3315, 0)
-                9332 -> Location.create(3307, 3315, 0)
-                else -> return
-            }
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean, ) {
+        val destination = when (scenery.id) {
+            9331 -> Location.create(3303, 3315, 0)
+            9332 -> Location.create(3307, 3315, 0)
+            else -> return
+        }
 
         val animation = if (scenery.id == 9331) ANIMATION else SCALE
         ForceMovement.run(player, player.location, destination, animation, animation, Direction.EAST, 13).apply {
@@ -36,8 +26,12 @@ class AlkharidPitShortcut : AgilityShortcut(intArrayOf(9331, 9332), 38, 0.0, "cl
         }
     }
 
-    override fun getDestination(
-        node: Node,
-        n: Node,
-    ): Location? = (n as? Scenery)?.takeIf { it.id == 9331 }?.location?.transform(1, 0, 0)
+    override fun getDestination(node: Node, n: Node, ): Location? =
+        (n as? Scenery)?.takeIf { it.id == 9331 }?.location?.transform(1, 0, 0)
+
+    companion object {
+        private val ANIMATION = Animation(1148)
+        private val SCALE = Animation(740)
+    }
+
 }

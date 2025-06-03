@@ -1,4 +1,4 @@
-package content.global.skill.herblore.herbs
+package content.global.skill.herblore
 
 import core.api.*
 import core.api.quest.requireQuest
@@ -8,12 +8,12 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.rs.consts.Quests
 
-class HerbCleaning : InteractionListener {
+class HerbCleaningListener : InteractionListener {
     override fun defineListeners() {
         on(IntType.ITEM, "clean") { player, node ->
             lock(player, 1)
             if (!requireQuest(player, Quests.DRUIDIC_RITUAL, "before you can use Herblore.")) return@on true
-            val herb: Herbs = Herbs.forItem(node as Item) ?: return@on true
+            val herb: HerbItem = HerbItem.forItem(node as Item) ?: return@on true
 
             if (getDynLevel(player, Skills.HERBLORE) < herb.level) {
                 sendMessage(

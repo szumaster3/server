@@ -10,7 +10,9 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 
 class CoconutListener : InteractionListener {
+
     override fun defineListeners() {
+
         onUseWith(IntType.ITEM, Items.COCONUT_5974, Items.HAMMER_2347) { player, used, _ ->
             val itemSlot = used.asItem().index
             if (removeItem(player, Item(used.id, 1))) {

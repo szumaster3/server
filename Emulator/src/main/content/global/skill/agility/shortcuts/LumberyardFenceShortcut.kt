@@ -1,7 +1,6 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
-import core.api.lock
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.map.Direction
@@ -16,7 +15,7 @@ class LumberyardFenceShortcut : InteractionListener {
 
     override fun defineListeners() {
         on(brokenFence, IntType.SCENERY, "squeeze-under") { player, _ ->
-            lock(player, 1)
+
             AgilityHandler.forceWalk(
                 player,
                 0,
@@ -26,22 +25,15 @@ class LumberyardFenceShortcut : InteractionListener {
                 15,
                 0.0,
                 null,
+                1
             )
             return@on true
         }
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.SCENERY, intArrayOf(brokenFence), "squeeze-under") { player, node ->
-            if (player.location.x > 3295) {
-                return@setDest Location.create(3296, 3498, 0)
-            } else {
-                Location.create(
-                    3295,
-                    3498,
-                    0,
-                )
-            }
+        setDest(IntType.SCENERY, intArrayOf(brokenFence), "squeeze-under") { player, _ ->
+            return@setDest Location(if (player.location.x > 3295) 3296 else 3295, 3498, 0)
         }
     }
 }

@@ -23,12 +23,7 @@ class TunnelShortcut : AgilityShortcut {
 
     constructor() : super(intArrayOf(), 0, 0.0)
 
-    constructor(ids: IntArray, level: Int, experience: Double, offset: Int, vararg options: String) : super(
-        ids,
-        level,
-        experience,
-        *options,
-    ) {
+    constructor(ids: IntArray, level: Int, experience: Double, offset: Int, vararg options: String) : super(ids, level, experience, *options,) {
         this.offset = offset
     }
 
@@ -39,12 +34,7 @@ class TunnelShortcut : AgilityShortcut {
         return this
     }
 
-    override fun run(
-        player: Player,
-        obj: Scenery,
-        option: String,
-        failed: Boolean,
-    ) {
+    override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
         if (obj.id == 14922 && !hasRequirement(player, Quests.SWAN_SONG)) {
             return
         }
@@ -60,69 +50,56 @@ class TunnelShortcut : AgilityShortcut {
             object : Pulse(1, player) {
                 private var count = 0
 
-                override fun pulse(): Boolean =
-                    when (++count) {
-                        1 -> {
-                            player.lock(6)
-                            player.locks.lockMovement(6)
-                            false
-                        }
-
-                        2 -> {
-                            player.animate(Animation.create(Animations.CRAWL_UNDER_WALL_B_2590))
-                            player.properties.teleportLocation = start.transform(direction, 2 + offset)
-                            false
-                        }
-
-                        3 -> {
-                            ForceMovement.run(
-                                player,
-                                player.location,
-                                start.transform(direction, 4 + offset),
-                                Animation.create(Animations.CRAWL_UNDER_WALL_C_2591),
-                                19,
-                            )
-                            false
-                        }
-
-                        4 -> {
-                            player.animate(ForceMovement.WALK_ANIMATION)
-                            if ((obj.id == 9309 || obj.id == 9310) &&
-                                !player.achievementDiaryManager
-                                    .getDiary(DiaryType.FALADOR)!!
-                                    .isComplete(1, 1)
-                            ) {
-                                player.achievementDiaryManager
-                                    .getDiary(DiaryType.FALADOR)!!
-                                    .updateTask(player, 1, 1, true)
-                            }
-                            true
-                        }
-
-                        else -> false
+                override fun pulse(): Boolean = when (++count) {
+                    1 -> {
+                        player.lock(6)
+                        player.locks.lockMovement(6)
+                        false
                     }
+
+                    2 -> {
+                        player.animate(Animation.create(Animations.CRAWL_UNDER_WALL_B_2590))
+                        player.properties.teleportLocation = start.transform(direction, 2 + offset)
+                        false
+                    }
+
+                    3 -> {
+                        ForceMovement.run(
+                            player,
+                            player.location,
+                            start.transform(direction, 4 + offset),
+                            Animation.create(Animations.CRAWL_UNDER_WALL_C_2591),
+                            19,
+                        )
+                        false
+                    }
+
+                    4 -> {
+                        player.animate(ForceMovement.WALK_ANIMATION)
+                        if ((obj.id == 9309 || obj.id == 9310) && !player.achievementDiaryManager.getDiary(DiaryType.FALADOR)!!
+                                .isComplete(1, 1)
+                        ) {
+                            player.achievementDiaryManager.getDiary(DiaryType.FALADOR)!!.updateTask(player, 1, 1, true)
+                        }
+                        true
+                    }
+
+                    else -> false
+                }
             },
         )
     }
 
-    override fun getDestination(
-        node: Node,
-        n: Node,
-    ): Location =
-        if (n.id == 14922) {
-            n.location.transform(getObjectDirection(n.asScenery().direction), 1)
-        } else {
-            getStart(n.location, n.direction)
-        }
+    override fun getDestination(node: Node, n: Node): Location = if (n.id == 14922) {
+        n.location.transform(getObjectDirection(n.asScenery().direction), 1)
+    } else {
+        getStart(n.location, n.direction)
+    }
 
-    private fun getStart(
-        location: Location,
-        dir: Direction,
-    ): Location =
-        when (dir) {
-            Direction.NORTH, Direction.SOUTH -> location
-            Direction.EAST -> location.transform(0, if (location.y == 3111) 1 else -1, 0)
-            Direction.WEST -> location.transform(0, 1, 0)
-            else -> location
-        }
+    private fun getStart(location: Location, dir: Direction): Location = when (dir) {
+        Direction.NORTH, Direction.SOUTH -> location
+        Direction.EAST -> location.transform(0, if (location.y == 3111) 1 else -1, 0)
+        Direction.WEST -> location.transform(0, 1, 0)
+        else -> location
+    }
 }

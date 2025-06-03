@@ -27,7 +27,7 @@ class AccessScroll : InteractionListener {
     override fun defineListeners() {
         on(Items.SCROLL_7968, IntType.ITEM, "read") { player, _ ->
             openInterface(player, MESSAGE_SCROLL)
-            sendString(player, crumpledScrollContent.joinToString("<br>"), MESSAGE_SCROLL, 8)
+            sendString(player, "I, King Vargas, proclaim that the bearer of this<br>scroll is the Regent of Miscellania.", MESSAGE_SCROLL, 3)
             return@on true
         }
     }

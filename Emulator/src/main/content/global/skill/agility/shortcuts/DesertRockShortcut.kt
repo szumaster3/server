@@ -1,6 +1,9 @@
 package content.global.skill.agility.shortcuts
 
-import core.api.*
+import core.api.animate
+import core.api.location
+import core.api.setVarbit
+import core.api.teleport
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.system.task.Pulse
@@ -22,8 +25,6 @@ class DesertRockShortcut : InteractionListener {
         }
 
         on(ROCK, IntType.SCENERY, "climb down") { player, _ ->
-            lock(player, 1000)
-            lockInteractions(player, 1000)
             GameWorld.Pulser.submit(
                 object : Pulse() {
                     var counter = 0

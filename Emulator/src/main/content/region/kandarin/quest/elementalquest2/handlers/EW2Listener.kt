@@ -27,7 +27,7 @@ class EW2Listener : InteractionListener {
             sendString(player, ew2Scroll.joinToString("<br>"), EW2Utils.BlankScroll, 1)
         }
 
-        on(Items.SPELL_SCROLL_2396, IntType.ITEM, "read") { player, _ ->
+        on(Items.SCROLL_9721, IntType.ITEM, "read") { player, _ ->
             openInterface(player, EW2Utils.BlankScroll).also { eW2scroll(player) }
             setQuestStage(player, Quests.ELEMENTAL_WORKSHOP_II, 3)
             return@on true
