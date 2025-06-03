@@ -575,10 +575,9 @@ public class Container {
     }
 
     /**
-     * Parse int.
+     * Parses the given JSON array of items.
      *
-     * @param buffer the buffer
-     * @return the int
+     * @param itemArray the JSON array containing item data
      */
     public void parse(JSONArray itemArray) {
         AtomicInteger total = new AtomicInteger(0);
