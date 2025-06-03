@@ -22,6 +22,7 @@ import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
 import core.tools.RED
+import core.tools.colorize
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs.consts.Items
@@ -29,6 +30,35 @@ import org.rs.consts.Items
 @Initializable
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
+        /*
+         * Command to lock (block) random events for the player.
+         */
+
+        define(
+            name = "relock",
+            privilege = Privilege.ADMIN,
+            usage = "::relock",
+            description = "Lock random events from triggering.",
+        ) { player, _ ->
+            player.setAttribute(GameAttributes.RE_LOCK, true)
+            player.debug(colorize("%RRandom events have been locked (blocked)."))
+            return@define
+        }
+
+        /*
+         * Command to unlock (allow) random events for the player.
+         */
+
+        define(
+            name = "reunlock",
+            privilege = Privilege.ADMIN,
+            usage = "::reunlock",
+            description = "Allow random events to triggering.",
+        ) { player, _ ->
+            player.removeAttribute(GameAttributes.RE_LOCK)
+            player.debug(colorize("%GRandom events have been unlocked (allowed)."))
+            return@define
+        }
 
         /*
          * Command to send animation on the interface.

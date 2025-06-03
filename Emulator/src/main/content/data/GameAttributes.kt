@@ -43,7 +43,9 @@ internal object GameAttributes {
     // Basic random event attributes.
     const val RE = "random"
     const val RE_PAUSE = "random:pause"
+    const val RE_LOCK = "random:locked"
     const val RE_REWARD = "random:reward"
+
 
     // Prison pete random event.
     const val RE_PRISON_1 = "/save:random:prison_pete_start"

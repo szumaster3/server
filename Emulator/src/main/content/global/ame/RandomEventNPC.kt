@@ -12,6 +12,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
+import core.tools.colorize
 import core.tools.secondsToTicks
 import core.tools.ticksToCycles
 import org.rs.consts.Sounds
@@ -93,6 +94,12 @@ abstract class RandomEventNPC(
     }
 
     override fun init() {
+        // Check if random is locked.
+        if (player.getAttribute<Boolean>(GameAttributes.RE_LOCK, false)) {
+            player.debug(colorize("%RRandom event locked."))
+            terminate()
+            return
+        }
         initialized = true
         finalized = false
         timerPaused = false

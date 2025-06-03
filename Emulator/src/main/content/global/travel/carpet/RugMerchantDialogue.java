@@ -1,5 +1,6 @@
 package content.global.travel.carpet;
 
+import content.data.GameAttributes;
 import content.global.skill.agility.AgilityHandler;
 import core.api.Container;
 import core.game.container.impl.EquipmentContainer;
@@ -296,6 +297,7 @@ public final class RugMerchantDialogue extends Dialogue {
         public void travel(final RugDestination current, final Player player) {
             player.lock();
             setVarp(player, 499, 0);
+            setAttribute(player, GameAttributes.RE_LOCK, true);
             player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
             player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
             player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614), EquipmentContainer.SLOT_WEAPON);
@@ -305,6 +307,7 @@ public final class RugMerchantDialogue extends Dialogue {
 
             registerLogoutListener(player, "magic-carpet", (pl) -> {
                 removeItem(pl, Items.MAGIC_CARPET_5614, Container.EQUIPMENT);
+                removeAttribute(player, GameAttributes.RE_LOCK);
                 return Unit.INSTANCE;
             });
 
@@ -344,6 +347,7 @@ public final class RugMerchantDialogue extends Dialogue {
                             player.getInterfaceManager().restoreTabs();
                             player.getPacketDispatch().sendInterfaceConfig(Components.TOPLEVEL_548, 69, false);
                             player.getImpactHandler().setDisabledTicks(0);
+                            removeAttribute(player, GameAttributes.RE_LOCK);
                             player.unlock();
                             player.animate(new Animation(-1));
                             setVarp(player, 499, 0);
