@@ -12,7 +12,7 @@ import core.game.world.update.flag.context.Graphics
  * Represents a possible attack the entity can switch to.
  * @author Emperor
  */
-class SwitchAttack @JvmOverloads constructor(
+open class SwitchAttack @JvmOverloads constructor(
     handler: CombatSwingHandler?,
     animation: Animation?,
     startGraphic: Graphics? = null,
@@ -86,7 +86,7 @@ class SwitchAttack @JvmOverloads constructor(
      * @param state the state.
      * @return `True` if selected.
      */
-    fun canSelect(entity: Entity?, victim: Entity?, state: BattleState?): Boolean {
+    open fun canSelect(entity: Entity?, victim: Entity?, state: BattleState?): Boolean {
         return true
     }
 
