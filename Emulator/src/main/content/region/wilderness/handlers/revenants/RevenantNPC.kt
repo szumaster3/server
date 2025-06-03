@@ -26,7 +26,7 @@ import org.rs.consts.Sounds
 import kotlin.math.abs
 
 @Initializable
-class RevenantsNPC
+class RevenantNPC
     @JvmOverloads
     constructor(
         id: Int = -1,
@@ -111,7 +111,7 @@ class RevenantsNPC
             id: Int,
             location: Location,
             vararg objects: Any,
-        ): AbstractNPC = RevenantsNPC(id, location, null)
+        ): AbstractNPC = RevenantNPC(id, location, null)
 
         override fun setNextWalk() {
             nextWalk = ticks + RandomFunction.random(7, 15)

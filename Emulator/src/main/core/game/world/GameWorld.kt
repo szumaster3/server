@@ -27,31 +27,52 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
 
+/**
+ * Represents the game world.
+ * @author Ceikry
+ */
 object GameWorld {
     @JvmStatic
     val worldPersists = ArrayList<PersistWorld>()
 
+    /**
+     * The major update worker.
+     */
     @JvmStatic
     val majorUpdateWorker = MajorUpdateWorker()
 
+    /**
+     * Login listeners
+     */
     @JvmStatic
     val loginListeners = ArrayList<LoginListener>()
 
+    /**
+     * Logout listeners
+     */
     @JvmStatic
     val logoutListeners = ArrayList<LogoutListener>()
 
+    /**
+     * Tick listeners
+     */
     @JvmStatic
     val tickListeners = ArrayList<TickListener>()
 
+    /**
+     * Startup Listeners
+     */
     @JvmStatic
     val startupListeners = ArrayList<StartupListener>()
 
+    /**
+     * Shutdown Listeners
+     */
     @JvmStatic
     val shutdownListeners = ArrayList<ShutdownListener>()
 
     @JvmStatic
     val STARTUP_PLUGINS: List<StartupPlugin> = ArrayList()
-
     private val configParser = ConfigParser()
 
     @JvmStatic
@@ -63,6 +84,9 @@ object GameWorld {
     @JvmStatic
     var PCiBotsSpawned = false
 
+    /**
+     * The game settings to use.
+     */
     @JvmStatic
     var settings: GameSettings? = null
 
@@ -74,12 +98,20 @@ object GameWorld {
     val accountStorage: AccountStorageProvider
         get() = Auth.storageProvider
 
+    /**
+     * The current amount of (600ms) cycles elapsed.
+     */
     @JvmStatic
     var ticks = 0
 
     @JvmStatic
     var Pulser = PulseRunner()
 
+    /**
+     * Submits a pulse.
+     *
+     * @param pulse the pulse.
+     */
     @Deprecated("", ReplaceWith("Pulser.submit(pulse!!)", "core.game.world.GameWorld.Pulser"))
     fun submit(pulse: Pulse?) {
         Pulser.submit(pulse!!)
@@ -91,13 +123,9 @@ object GameWorld {
             TaskExecutor.execute {
                 val player = Repository.players
                 try {
-                    player
-                        .stream()
-                        .filter { obj: Player? -> Objects.nonNull(obj) }
-                        .filter { p: Player ->
-                            !p.isArtificial &&
-                                p.isPlaying
-                        }.forEach { p: Player? -> Repository.disconnectionQueue.save(p!!, false) }
+                    player.stream().filter { obj: Player? -> Objects.nonNull(obj) }
+                        .filter { p: Player -> !p.isArtificial && p.isPlaying }
+                        .forEach { p: Player? -> Repository.disconnectionQueue.save(p!!, false) }
                 } catch (t: Throwable) {
                     t.printStackTrace()
                 }
@@ -110,24 +138,41 @@ object GameWorld {
         return weeklySdf.format(Date()).toInt()
     }
 
+    /**
+     * Prompts the [GameWorld] to begin it's initialization.
+     *
+     * @param directory the directory to the properties.
+     * @throws Throwable when the exception occurs.
+     */
     @Throws(Throwable::class)
     fun prompt(directory: String?) {
         prompt(true, directory)
     }
 
+    /**
+     * Prompts the game world.
+     *
+     * @param running if running.
+     * @throws Throwable the throwable.
+     */
     @Throws(Throwable::class)
     @JvmStatic
     fun prompt(running: Boolean) {
         prompt(running, "server.properties")
     }
 
+    /**
+     * Prompts the [GameWorld] to begin its initialization.
+     *
+     * @param run       If the server should be running.
+     * @param directory the path to the dir.
+     * @throws Throwable When an exception occurs.
+     */
     @Throws(Throwable::class)
-    fun prompt(
-        run: Boolean,
-        directory: String?,
-    ) {
+    fun prompt(run: Boolean, directory: String?) {
         log(GameWorld::class.java, Log.FINE, "Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
+        // Go overboard with checks to make sure dev mode authenticator never triggers on live.
         Auth.configure()
         ConfigParser().prePlugin()
         ClassScanner.scanClasspath()
@@ -151,11 +196,21 @@ object GameWorld {
         System.gc()
     }
 
+    /**
+     * Called when the server shuts down.
+     *
+     * @throws Throwable When an exception occurs.
+     */
     @Throws(Throwable::class)
     fun shutdown() {
         SystemManager.flag(SystemState.TERMINATED)
     }
 
+    /**
+     * Checks if its the economy world.
+     *
+     * @return `True` if so.
+     */
     @JvmStatic
     val isEconomyWorld: Boolean
         get() = false
@@ -167,8 +222,6 @@ object GameWorld {
         }
         return if (RegionManager.getObject(random_location) != null) {
             generateLocation()
-        } else {
-            random_location
-        }
+        } else random_location
     }
 }

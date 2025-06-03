@@ -4,25 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type World statistics.
+ * Holds information of a certain game world.
+ *
+ * @author Emperor
  */
 public final class WorldStatistics {
 
+    /**
+     * The world id.
+     */
     private final int id;
 
+    /**
+     * The list of players connected to this world.
+     */
     private final List<String> players = new ArrayList<>(20);
 
     /**
-     * Instantiates a new World statistics.
+     * Constructs a new {@code WorldStatistics} {@Code Object}
      *
-     * @param id the id
+     * @param id The world id.
      */
     public WorldStatistics(int id) {
         this.id = id;
     }
 
     /**
-     * Gets players.
+     * Gets the players.
      *
      * @return the players
      */
@@ -31,7 +39,7 @@ public final class WorldStatistics {
     }
 
     /**
-     * Gets id.
+     * Gets the id.
      *
      * @return the id
      */

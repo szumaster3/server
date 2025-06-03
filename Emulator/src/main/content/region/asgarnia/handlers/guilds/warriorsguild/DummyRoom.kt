@@ -15,7 +15,7 @@ import core.game.world.GameWorld.ticks
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
 import core.game.world.map.RegionManager.getRegionChunk
-import core.game.world.update.flag.chunk.AnimateSceneryUpdateFlag
+import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
@@ -63,12 +63,12 @@ class DummyRoom : OptionHandler() {
                     delay = 4
                     var animation = Animation.create(4164)
                     animation.setObject(dummy!!.scenery)
-                    getRegionChunk(dummy!!.scenery.location).flag(AnimateSceneryUpdateFlag(animation),)
+                    getRegionChunk(dummy!!.scenery.location).flag(AnimateObjectUpdateFlag(animation),)
                     activeDummy = false
                     if (controlled != null) {
                         animation = Animation.create(4164)
                         animation.setObject(controlled)
-                        getRegionChunk(controlled!!.location).flag(AnimateSceneryUpdateFlag(animation))
+                        getRegionChunk(controlled!!.location).flag(AnimateObjectUpdateFlag(animation))
                         controlled = null
                     }
                     return false

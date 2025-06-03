@@ -6,26 +6,43 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * The type Node list iterator.
+ * An implementation of an iterator for a node list.
  *
- * @param <E> the type parameter
+ * @param <E> The type of node.
+ * @author Graham Edgecombe
+ * @author Emperor
  */
 public class NodeListIterator<E extends Node> implements Iterator<E> {
 
+    /**
+     * The nodes.
+     */
     private Node[] nodes;
 
+    /**
+     * The entity list.
+     */
     private NodeList<E> entityList;
 
+    /**
+     * The previous index.
+     */
     private int lastIndex = -1;
 
+    /**
+     * The current index.
+     */
     private int cursor = 0;
 
+    /**
+     * The size of the list.
+     */
     private int size;
 
     /**
-     * Instantiates a new Node list iterator.
+     * Creates an node list iterator.
      *
-     * @param nodeList the node list
+     * @param nodeList The node list.
      */
     public NodeListIterator(NodeList<E> nodeList) {
         this.entityList = nodeList;

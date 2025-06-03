@@ -20,14 +20,14 @@ class RevenantController :
     TickListener,
     Commands {
     companion object {
-        private val trackedRevenants = ArrayList<RevenantsNPC>()
-        private val taskTimeRemaining = HashMap<RevenantsNPC, Int>()
-        private val currentTask = HashMap<RevenantsNPC, RevenantTask>()
+        private val trackedRevenants = ArrayList<RevenantNPC>()
+        private val taskTimeRemaining = HashMap<RevenantNPC, Int>()
+        private val currentTask = HashMap<RevenantNPC, RevenantTask>()
         private var expectedRevAmount: Int = ServerConstants.REVENANT_POPULATION
-        private var groupPatrolQueue = ArrayList<RevenantsNPC>()
+        private var groupPatrolQueue = ArrayList<RevenantNPC>()
 
         @JvmStatic
-        fun registerRevenant(revenantNPC: RevenantsNPC) {
+        fun registerRevenant(revenantNPC: RevenantNPC) {
             trackedRevenants.add(revenantNPC)
             taskTimeRemaining[revenantNPC] = 0
             currentTask[revenantNPC] = RevenantTask.NONE
@@ -36,7 +36,7 @@ class RevenantController :
 
         @JvmStatic
         fun unregisterRevenant(
-            revenantNPC: RevenantsNPC,
+            revenantNPC: RevenantNPC,
             removeRender: Boolean = true,
         ) {
             trackedRevenants.remove(revenantNPC)
@@ -247,7 +247,7 @@ class RevenantController :
 
     private fun getRandomSpawnLocation(): Location = spawnLocations.random()
 
-    private fun assignRandomTask(npc: RevenantsNPC): RevenantTask = RevenantTask.values().random().also { it.assign(npc) }
+    private fun assignRandomTask(npc: RevenantNPC): RevenantTask = RevenantTask.values().random().also { it.assign(npc) }
 
     override fun defineCommands() {
         define("setrevcap", Privilege.ADMIN) { _, strings ->
@@ -270,13 +270,13 @@ class RevenantController :
 
     enum class RevenantTask {
         NONE {
-            override fun execute(revenantNPC: RevenantsNPC) {}
+            override fun execute(revenantNPC: RevenantNPC) {}
         },
 
         RANDOM_ROAM {
             private val MAX_ROAM_TICKS: Int = 250
 
-            override fun execute(revenantNPC: RevenantsNPC) {
+            override fun execute(revenantNPC: RevenantNPC) {
                 if (!canMove(revenantNPC)) return
 
                 val nextLoc = getNextLocation(revenantNPC)
@@ -290,17 +290,17 @@ class RevenantController :
                 )
             }
 
-            override fun assign(revenantNPC: RevenantsNPC) {
+            override fun assign(revenantNPC: RevenantNPC) {
                 taskTimeRemaining[revenantNPC] = RandomFunction.random(MAX_ROAM_TICKS)
             }
 
-            fun canMove(revenantNPC: RevenantsNPC): Boolean =
+            fun canMove(revenantNPC: RevenantNPC): Boolean =
                 !revenantNPC.walkingQueue.isMoving &&
                     !revenantNPC.pulseManager.hasPulseRunning() &&
                     !revenantNPC.properties.combatPulse.isAttacking &&
                     !revenantNPC.properties.combatPulse.isInCombat
 
-            fun getNextLocation(revenantNPC: RevenantsNPC): Location {
+            fun getNextLocation(revenantNPC: RevenantNPC): Location {
                 val nextX = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
                 val nextY = RandomFunction.random(-revenantNPC.walkRadius, revenantNPC.walkRadius)
                 return revenantNPC.location.transform(nextX, nextY, 0)
@@ -310,7 +310,7 @@ class RevenantController :
         PATROLLING_ROUTE {
             private val MAXIMUM_GROUP_PATROL_LEVEL = 105
 
-            override fun assign(revenantNPC: RevenantsNPC) {
+            override fun assign(revenantNPC: RevenantNPC) {
                 if (canGroup(revenantNPC)) {
                     addToPatrolGroup(revenantNPC)
                 } else {
@@ -319,7 +319,7 @@ class RevenantController :
                 }
             }
 
-            private fun addToPatrolGroup(revenantNPC: RevenantsNPC) {
+            private fun addToPatrolGroup(revenantNPC: RevenantNPC) {
                 revenantNPC.setAttribute("group", true)
                 groupPatrolQueue.add(revenantNPC)
 
@@ -333,10 +333,10 @@ class RevenantController :
                 }
             }
 
-            private fun canGroup(revenantNPC: RevenantsNPC) =
+            private fun canGroup(revenantNPC: RevenantNPC) =
                 revenantNPC.properties.currentCombatLevel <= MAXIMUM_GROUP_PATROL_LEVEL && RandomFunction.nextBool()
 
-            override fun execute(revenantNPC: RevenantsNPC) {
+            override fun execute(revenantNPC: RevenantNPC) {
                 val isGroup = revenantNPC.getAttribute("group", false)
                 val route = revenantNPC.getAttribute<Array<Location>>("route", null)
                 val routeIdx = revenantNPC.getAttribute("routeidx", -1)
@@ -387,7 +387,7 @@ class RevenantController :
                 }
             }
 
-            fun canMove(revenantNPC: RevenantsNPC): Boolean =
+            fun canMove(revenantNPC: RevenantNPC): Boolean =
                 !revenantNPC.walkingQueue.isMoving &&
                     !revenantNPC.pulseManager.hasPulseRunning() &&
                     !revenantNPC.properties.combatPulse.isAttacking &&
@@ -396,8 +396,8 @@ class RevenantController :
                     !revenantNPC.getAttribute("done", false)
         }, ;
 
-        abstract fun execute(revenantNPC: RevenantsNPC)
+        abstract fun execute(revenantNPC: RevenantNPC)
 
-        open fun assign(revenantNPC: RevenantsNPC) {}
+        open fun assign(revenantNPC: RevenantNPC) {}
     }
 }

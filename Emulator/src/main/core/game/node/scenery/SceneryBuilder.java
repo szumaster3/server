@@ -7,7 +7,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.LandscapeParser;
-import core.game.world.update.flag.chunk.SceneryUpdateFlag;
+import core.game.world.update.flag.chunk.ObjectUpdateFlag;
 
 /**
  * The type Scenery builder.
@@ -65,8 +65,8 @@ public final class SceneryBuilder {
     }
 
     private static boolean replaceClientSide(final Scenery remove, final Scenery construct, int restoreTicks) {
-        RegionManager.getRegionChunk(remove.getLocation()).flag(new SceneryUpdateFlag(remove, true));
-        RegionManager.getRegionChunk(construct.getLocation()).flag(new SceneryUpdateFlag(construct, false));
+        RegionManager.getRegionChunk(remove.getLocation()).flag(new ObjectUpdateFlag(remove, true));
+        RegionManager.getRegionChunk(construct.getLocation()).flag(new ObjectUpdateFlag(construct, false));
         if (restoreTicks > 0) {
             GameWorld.getPulser().submit(new Pulse(restoreTicks) {
                 @Override
@@ -297,7 +297,7 @@ public final class SceneryBuilder {
             if (o == null) {
                 continue;
             }
-            RegionManager.getRegionChunk(o.getLocation()).flag(new SceneryUpdateFlag(o, !o.isActive()));
+            RegionManager.getRegionChunk(o.getLocation()).flag(new ObjectUpdateFlag(o, !o.isActive()));
         }
     }
 }

@@ -6,17 +6,30 @@ import core.game.node.entity.player.info.login.PlayerParser
 import core.game.system.task.TaskExecutor
 import core.game.world.GameWorld
 import core.tools.Log
+import core.tools.secondsToTicks
 
+/**
+ * Handles disconnecting players queuing.
+ * @author Emperor
+ */
 class DisconnectionQueue {
+    /**A
+     * The pending disconnections queue.
+     */
     private val queue = HashMap<String, DisconnectionEntry?>()
     private val queueTimers = HashMap<String, Int>()
 
+    /**
+     * Updates all entries.
+     */
     fun update() {
         if (queue.isEmpty() || GameWorld.ticks % 3 != 0) {
             return
         }
+        //make a copy of current entries as to avoid concurrency exceptions
         val entries = ArrayList(queue.entries)
 
+        //loop through entries and disconnect each
         entries.forEach {
             if (finish(it.value, false)) {
                 queue.remove(it.key)
@@ -38,12 +51,17 @@ class DisconnectionQueue {
         }
     }
 
-    fun isEmpty(): Boolean = queue.isEmpty()
 
-    private fun finish(
-        entry: DisconnectionEntry?,
-        force: Boolean,
-    ): Boolean {
+    fun isEmpty(): Boolean{
+        return queue.isEmpty()
+    }
+
+    /**
+     * Finishes a disconnection.
+     * @param entry The entry.
+     * @param force If finalization should be forced.
+     */
+    private fun finish(entry: DisconnectionEntry?, force: Boolean): Boolean {
         val player = entry!!.player
         if (!force && !player.allowRemoval()) {
             return false
@@ -52,9 +70,8 @@ class DisconnectionQueue {
         player.finishClear()
         Repository.removePlayer(player)
         try {
-            if (player.communication.clan != null) {
+            if(player.communication.clan != null)
                 player.communication.clan.leave(player, false)
-            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -74,11 +91,19 @@ class DisconnectionQueue {
         return true
     }
 
+    /**
+     * Gets a queued player.
+     * @param name The player name.
+     * @return The player instance.
+     */
     operator fun get(name: String?): Player? {
         val entry = queue[name]
         return entry?.player
     }
 
+    /**
+     * Clears the queue.
+     */
     fun clear() {
         for (entry in queue.values.toTypedArray()) {
             finish(entry, true)
@@ -87,31 +112,29 @@ class DisconnectionQueue {
     }
 
     @JvmOverloads
-    fun add(
-        player: Player,
-        clear: Boolean = false,
-    ) {
-        if (queue[player.name] != null) return
+    fun add(player: Player, clear: Boolean = false) {
+        if(queue[player.name] != null) return
         queue[player.name] = DisconnectionEntry(player, clear)
         log(this::class.java, Log.INFO, "Queueing ${player.name} for disconnection.")
     }
 
-    operator fun contains(name: String?): Boolean = queue.containsKey(name)
+    operator fun contains(name: String?): Boolean {
+        return queue.containsKey(name)
+    }
 
     fun remove(name: String?) {
         queue.remove(name)
         queueTimers.remove(name)
     }
 
-    internal data class DisconnectionEntry(
-        val player: Player,
-        var isClear: Boolean,
-    )
+    internal data class DisconnectionEntry(val player: Player, var isClear: Boolean) {}
 
-    fun save(
-        player: Player,
-        sql: Boolean,
-    ): Boolean {
+    /**
+     * Saves the player.
+     * @param player The player to be saved.
+     * @param sql If the sql database should be updated.
+     */
+    fun save(player: Player, sql: Boolean): Boolean {
         try {
             PlayerParser.saveImmediately(player)
         } catch (t: Throwable) {

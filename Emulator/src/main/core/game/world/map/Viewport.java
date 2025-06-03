@@ -8,144 +8,158 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Viewport.
+ * Represents an entity's viewport.
+ *
+ * @author Emperor
  */
 public final class Viewport {
 
     /**
-     * The constant CHUNK_SIZE.
+     * The amount of chunks in a viewport.
      */
     public static final int CHUNK_SIZE = 5;
 
-	private Region region;
-
-	private RegionChunk[][] chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
-
-	private RegionPlane currentPlane;
-
-	private List<RegionPlane> viewingPlanes = new LinkedList<>();
+    /**
+     * The region region.
+     */
+    private Region region;
 
     /**
-     * Instantiates a new Viewport.
+     * The region chunks.
+     */
+    private RegionChunk[][] chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
+
+    /**
+     * The region region plane.
+     */
+    private RegionPlane currentPlane;
+
+    /**
+     * The region planes the entity can see.
+     */
+    private List<RegionPlane> viewingPlanes = new LinkedList<>();
+
+    /**
+     * Constructs a new {@code Viewport} {@code Object}.
      */
     public Viewport() {
-
-	}
+        /*
+         * empty.
+         */
+    }
 
     /**
-     * Update viewport.
+     * Updates the entity's viewport.
      *
-     * @param entity the entity
+     * @param entity The entity.
      */
     public void updateViewport(Entity entity) {
-		RegionChunk chunk = RegionManager.getRegionChunk(entity.getLocation());
-		int center = chunks.length >> 1;
-		if (chunks[center][center] == chunk) {
-			return;
-		}
-		int offset = center * -8;
-		Location l = chunk.getCurrentBase();
-		for (int x = 0; x < chunks.length; x++) {
-			for (int y = 0; y < chunks[x].length; y++) {
-				chunks[x][y] = RegionManager.getRegionChunk(l.transform(offset + (8 * x), offset + (8 * y), 0));
-			}
-		}
-	}
+        RegionChunk chunk = RegionManager.getRegionChunk(entity.getLocation());
+        int center = chunks.length >> 1;
+        if (chunks[center][center] == chunk) {
+            return;
+        }
+        int offset = center * -8;
+        Location l = chunk.getCurrentBase();
+        for (int x = 0; x < chunks.length; x++) {
+            for (int y = 0; y < chunks[x].length; y++) {
+                chunks[x][y] = RegionManager.getRegionChunk(l.transform(offset + (8 * x), offset + (8 * y), 0));
+            }
+        }
+    }
 
     /**
-     * Remove.
+     * Removes the entity from the viewingPlanes.
      *
-     * @param entity the entity
+     * @param entity The entity.
      */
     public void remove(Entity entity) {
-		if (region == null) {
-			return;
-		}
-		if (entity instanceof Player) {
-			region.remove((Player) entity);
-			Region region = null;
-			for (RegionPlane r : viewingPlanes) {
-				if (region != r.getRegion()) {
-					region = r.getRegion();
-					region.decrementViewAmount();
-					region.checkInactive();
-				}
-			}
-		} else {
-			region.remove((NPC) entity);
-		}
-	}
+        if (region == null) {
+            return;
+        }
+        if (entity instanceof Player) {
+            region.remove((Player) entity);
+            Region region = null;
+            for (RegionPlane r : viewingPlanes) {
+                if (region != r.getRegion()) {
+                    region = r.getRegion();
+                    region.decrementViewAmount();
+                    region.checkInactive();
+                }
+            }
+        } else {
+            region.remove((NPC) entity);
+        }
+    }
 
     /**
-     * Gets region.
+     * Gets the region.
      *
-     * @return the region
+     * @return The region.
      */
     public Region getRegion() {
-		return region;
-	}
+        return region;
+    }
 
     /**
-     * Sets region.
+     * Sets the region.
      *
-     * @param region the region
+     * @param region The region to set.
      */
     public void setRegion(Region region) {
-		this.region = region;
-	}
+        this.region = region;
+    }
 
     /**
-     * Get chunks region chunk [ ] [ ].
+     * Gets the chunks.
      *
-     * @return the region chunk [ ] [ ]
+     * @return The chunks.
      */
     public RegionChunk[][] getChunks() {
-		return chunks;
-	}
+        return chunks;
+    }
 
     /**
-     * Sets chunks.
+     * Sets the chunks.
      *
-     * @param chunks the chunks
+     * @param chunks The chunks to set.
      */
     public void setChunks(RegionChunk[][] chunks) {
-		this.chunks = chunks;
-	}
+        this.chunks = chunks;
+    }
 
     /**
-     * Gets viewing planes.
+     * Gets the viewingPlanes.
      *
-     * @return the viewing planes
+     * @return The viewingPlanes.
      */
     public List<RegionPlane> getViewingPlanes() {
-		return viewingPlanes;
-	}
+        return viewingPlanes;
+    }
 
     /**
-     * Sets viewing planes.
-     *
-     * @param regions the regions
+     * Sets the viewingPlanes.
      */
     public void setViewingPlanes(List<RegionPlane> regions) {
-		this.viewingPlanes = regions;
-	}
+        this.viewingPlanes = regions;
+    }
 
     /**
-     * Gets current plane.
+     * Gets the currentPlane.
      *
-     * @return the current plane
+     * @return The currentPlane.
      */
     public RegionPlane getCurrentPlane() {
-		return currentPlane;
-	}
+        return currentPlane;
+    }
 
     /**
-     * Sets current plane.
+     * Sets the currentPlane.
      *
-     * @param currentPlane the current plane
+     * @param currentPlane The currentPlane to set.
      */
     public void setCurrentPlane(RegionPlane currentPlane) {
-		this.currentPlane = currentPlane;
-	}
+        this.currentPlane = currentPlane;
+    }
 
 }

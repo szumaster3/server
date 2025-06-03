@@ -11,17 +11,18 @@ import core.game.world.map.RegionPlane;
 import java.nio.ByteBuffer;
 
 /**
- * The type Landscape parser.
+ * A utility class used for parsing landscapes.
+ *
+ * @author Emperor
  */
 public final class LandscapeParser {
 
     /**
-     * Parse.
+     * Parses the landscape.
      *
-     * @param r            the r
-     * @param mapscape     the mapscape
-     * @param buffer       the buffer
-     * @param storeObjects the store objects
+     * @param r            The region.
+     * @param mapscape     The mapscape data.
+     * @param storeObjects If all objects should be stored (rather than just the objects with options).
      */
     public static void parse(Region r, byte[][][] mapscape, ByteBuffer buffer, boolean storeObjects) {
         int objectId = -1;
@@ -52,8 +53,8 @@ public final class LandscapeParser {
                         z--;
                     }
                     if (z >= 0 && z <= 3) {
-                        Scenery scenery = new Scenery(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
-                        flagScenery(r.getPlanes()[z], x, y, scenery, true, storeObjects);
+                        Scenery object = new Scenery(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
+                        flagScenery(r.getPlanes()[z], x, y, object, true, storeObjects);
                     }
                 }
             }
@@ -61,73 +62,61 @@ public final class LandscapeParser {
     }
 
     /**
-     * Add scenery.
+     * Adds a scenery temporarily.
      *
-     * @param scenery the scenery
+     * @param object The object to add.
      */
-    public static void addScenery(Scenery scenery) {
-        addScenery(scenery, false);
+    public static void addScenery(Scenery object) {
+        addScenery(object, false);
     }
 
     /**
-     * Add scenery.
+     * Adds a scenery.
      *
-     * @param scenery   the scenery
-     * @param landscape the landscape
+     * @param object    The object to add.
+     * @param landscape If the object should be added permanent.
      */
-    public static void addScenery(Scenery scenery, boolean landscape) {
-        Location l = scenery.getLocation();
-        flagScenery(RegionManager.getRegionPlane(l), l.getLocalX(), l.getLocalY(), scenery, landscape, false);
+    public static void addScenery(Scenery object, boolean landscape) {
+        Location l = object.getLocation();
+        flagScenery(RegionManager.getRegionPlane(l), l.getLocalX(), l.getLocalY(), object, landscape, false);
     }
 
     /**
-     * Flag scenery.
+     * Flags a scenery on the plane's clipping flags.
      *
-     * @param plane        the plane
-     * @param localX       the local x
-     * @param localY       the local y
-     * @param scenery      the scenery
-     * @param landscape    the landscape
-     * @param storeObjects the store objects
+     * @param plane        The plane.
+     * @param object       The object.
+     * @param landscape    If we are adding this scenery permanent.
+     * @param storeObjects If all objects should be stored (rather than just the objects with options).
      */
-    public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery scenery, boolean landscape, boolean storeObjects) {
+    public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery object, boolean landscape, boolean storeObjects) {
         Region.load(plane.getRegion());
-        SceneryDefinition def = scenery.getDefinition();
-        scenery.setActive(true);
+        SceneryDefinition def = object.getDefinition();
+        object.setActive(true);
         boolean add = storeObjects || !landscape || def.getChildObject(null).hasActions();
         if (add) {
-            addPlaneObject(plane, scenery, localX, localY, landscape, storeObjects);
+            addPlaneObject(plane, object, localX, localY, landscape, storeObjects);
         }
 
-        if (!applyClippingFlagsFor(plane, localX, localY, scenery))
-            return;
+        if (!applyClippingFlagsFor(plane, localX, localY, object)) return;
 
         if (!storeObjects && !add && (!def.getChildObject(null).getName().equals("null"))) {
-            addPlaneObject(plane, scenery, localX, localY, landscape, false);
+            addPlaneObject(plane, object, localX, localY, landscape, false);
         }
     }
 
-    /**
-     * Apply clipping flags for boolean.
-     *
-     * @param plane   the plane
-     * @param localX  the local x
-     * @param localY  the local y
-     * @param scenery the scenery
-     * @return the boolean
-     */
-    public static boolean applyClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery scenery) {
-        SceneryDefinition def = scenery.getDefinition();
+    public static boolean applyClippingFlagsFor(RegionPlane plane, int localX, int localY, Scenery object) {
+        SceneryDefinition def = object.getDefinition();
         int sizeX;
         int sizeY;
-        if (scenery.getRotation() % 2 == 0) {
+        if (object.getRotation() % 2 == 0) {
             sizeX = def.sizeX;
             sizeY = def.sizeY;
         } else {
             sizeX = def.sizeY;
             sizeY = def.sizeX;
         }
-        int type = scenery.getType();
+        int type = object.getType();
         if (type == 22) { //Tile
             plane.getFlags().getLandscape()[localX][localY] = true;
             if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand) {
@@ -147,9 +136,9 @@ public final class LandscapeParser {
             }
         } else if (type >= 0 && type <= 3) { //Doors/walls
             if (def.solid != 0) {
-                plane.getFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                plane.getFlags().flagDoorObject(localX, localY, object.getRotation(), type, def.isProjectileClipped);
                 if (def.isProjectileClipped) {
-                    plane.getProjectileFlags().flagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                    plane.getProjectileFlags().flagDoorObject(localX, localY, object.getRotation(), type, def.isProjectileClipped);
                 }
             }
         } else {
@@ -158,48 +147,57 @@ public final class LandscapeParser {
         return true;
     }
 
-    private static void addPlaneObject(RegionPlane plane, Scenery scenery, int localX, int localY, boolean landscape, boolean storeAll) {
+    /**
+     * Adds an object to the region plane.
+     *
+     * @param plane     The region plane.
+     * @param object    The object to add.
+     * @param localX    The local x-coordinate.
+     * @param localY    The local y-coordinate.
+     * @param landscape The landscape.
+     */
+    private static void addPlaneObject(RegionPlane plane, Scenery object, int localX, int localY, boolean landscape, boolean storeAll) {
         if (landscape && !storeAll) {
             Scenery current = plane.getObjects()[localX][localY];
-            if (current != null && current.getDefinition().getChildObject(null).hasOptions(!scenery.getDefinition().getChildObject(null).hasOptions(false))) {
+            if (current != null && current.getDefinition().getChildObject(null).hasOptions(!object.getDefinition().getChildObject(null).hasOptions(false))) {
                 return;
             }
         }
-        plane.add(scenery, localX, localY, landscape && !storeAll);
+        plane.add(object, localX, localY, landscape && !storeAll);
     }
 
     /**
-     * Remove scenery scenery.
+     * Removes a scenery.
      *
-     * @param scenery the scenery
-     * @return the scenery
+     * @param object The object.
+     * @return The removed scenery.
      */
-    public static Scenery removeScenery(Scenery scenery) {
-        if (!scenery.isRenderable()) {
+    public static Scenery removeScenery(Scenery object) {
+        if (!object.isRenderable()) {
             return null;
         }
-        RegionPlane plane = RegionManager.getRegionPlane(scenery.getLocation());
+        RegionPlane plane = RegionManager.getRegionPlane(object.getLocation());
         Region.load(plane.getRegion());
-        int localX = scenery.getLocation().getLocalX();
-        int localY = scenery.getLocation().getLocalY();
-        Scenery current = plane.getChunkObject(localX, localY, scenery.getId());
-        if (current == null || current.getId() != scenery.getId()) {
+        int localX = object.getLocation().getLocalX();
+        int localY = object.getLocation().getLocalY();
+        Scenery current = plane.getChunkObject(localX, localY, object.getId());
+        if (current == null || current.getId() != object.getId()) {
             return null;
         }
         current.setActive(false);
-        scenery.setActive(false);
-        plane.remove(localX, localY, scenery.getId());
-        SceneryDefinition def = scenery.getDefinition();
+        object.setActive(false);
+        plane.remove(localX, localY, object.getId());
+        SceneryDefinition def = object.getDefinition();
         int sizeX;
         int sizeY;
-        if (scenery.getRotation() % 2 == 0) {
+        if (object.getRotation() % 2 == 0) {
             sizeX = def.sizeX;
             sizeY = def.sizeY;
         } else {
             sizeX = def.sizeY;
             sizeY = def.sizeX;
         }
-        int type = scenery.getType();
+        int type = object.getType();
         if (type == 22) { //Tile
             if (def.interactive != 0 || def.solid == 1 || def.isBlocksLand) {
                 if (def.solid == 1) {
@@ -218,9 +216,9 @@ public final class LandscapeParser {
             }
         } else if (type >= 0 && type <= 3) { //Doors/walls
             if (def.solid != 0) {
-                plane.getFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                plane.getFlags().unflagDoorObject(localX, localY, object.getRotation(), type, def.isProjectileClipped);
                 if (def.isProjectileClipped) {
-                    plane.getProjectileFlags().unflagDoorObject(localX, localY, scenery.getRotation(), type, def.isProjectileClipped);
+                    plane.getProjectileFlags().unflagDoorObject(localX, localY, object.getRotation(), type, def.isProjectileClipped);
                 }
             }
         }

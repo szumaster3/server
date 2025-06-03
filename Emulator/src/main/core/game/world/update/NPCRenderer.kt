@@ -2,11 +2,12 @@ package core.game.world.update
 
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.world.GameWorld
 import core.game.world.map.RegionManager
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
+import core.game.world.GameWorld
 import java.nio.ByteBuffer
+import java.util.*
 
 /**
  * The NPC renderer.
@@ -37,8 +38,7 @@ object NPCRenderer {
                     npc.aggressiveHandler.removeTolerance(player.index)
                 }
             } else if (npc.walkingQueue.runDir != -1) {
-                buffer.putBits(1, 1).putBits(2, 2).putBits(3, npc.walkingQueue.walkDir)
-                    .putBits(3, npc.walkingQueue.runDir)
+                buffer.putBits(1, 1).putBits(2, 2).putBits(3, npc.walkingQueue.walkDir).putBits(3, npc.walkingQueue.runDir)
                 flagMaskUpdate(player, buffer, maskBuffer, npc, false)
             } else if (npc.walkingQueue.walkDir != -1) {
                 buffer.putBits(1, 1).putBits(2, 1).putBits(3, npc.walkingQueue.walkDir)
@@ -58,8 +58,7 @@ object NPCRenderer {
             if (localNPCs.contains(npc) || npc.isHidden(player)) {
                 continue
             }
-            buffer.putBits(15, npc.index).putBits(1, if (npc.properties.isTeleporting) 1 else 0)
-                .putBits(3, npc.direction.ordinal)
+            buffer.putBits(15, npc.index).putBits(1, if (npc.properties.isTeleporting) 1 else 0).putBits(3, npc.direction.ordinal)
             flagMaskUpdate(player, buffer, maskBuffer, npc, true)
             var offsetX = npc.location.x - player.location.x
             var offsetY = npc.location.y - player.location.y

@@ -5,36 +5,36 @@ import core.game.node.entity.player.Player
 import core.game.world.update.flag.UpdateFlag
 import core.net.packet.IoBuffer
 
-class ProjectileUpdateFlag(
-    context: Projectile,
-) : UpdateFlag<Projectile>(context) {
-    override fun write(buffer: IoBuffer) {
-        val projectile = context
-        val start = projectile.sourceLocation
-        val target = projectile.victim
-        val end = if (projectile.isLocationBased) projectile.endLocation else target?.location
+/**
+ * Handles the projectile updating.
+ * @author Emperor
+ */
+class ProjectileUpdateFlag(projectile: Projectile?) : UpdateFlag<Projectile?>(projectile) {
 
-        buffer
-            .put(16)
+    override fun write(buffer: IoBuffer) {
+        val p = context!!
+        val start = p.sourceLocation
+        val target = p.victim
+        val end = if (p.isLocationBased) p.endLocation else target!!.location
+        buffer.put(16.toByte().toInt()) //opcode
             .put((start.chunkOffsetX shl 4) or (start.chunkOffsetY and 0x7))
-            .put(end!!.x - start.x)
+            .put(end.x - start.x)
             .put(end.y - start.y)
-            .putShort(
-                when (target) {
-                    null -> -1
-                    is Player -> -(target.index + 1)
-                    else -> (target.index + 1)
-                },
-            ).putShort(projectile.projectileId)
-            .put(projectile.startHeight)
-            .put(projectile.endHeight)
-            .putShort(projectile.startDelay)
-            .putShort(projectile.speed)
-            .put(projectile.angle)
-            .put(projectile.distance)
+            .putShort(if (target != null) (if (target is Player) -(target.getIndex() + 1) else (target.index + 1)) else -1)
+            .putShort(p.projectileId)
+            .put(p.startHeight)
+            .put(p.endHeight)
+            .putShort(p.startDelay)
+            .putShort(p.speed)
+            .put(p.angle)
+            .put(p.distance)
     }
 
-    override fun data(): Int = 0
+    override fun data(): Int {
+        return 0
+    }
 
-    override fun ordinal(): Int = 2
+    override fun ordinal(): Int {
+        return 2
+    }
 }

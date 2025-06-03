@@ -5,41 +5,52 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.GraphicUpdateFlag;
 
 /**
- * The type Graphics.
+ * Represents a graphic.
+ *
+ * @author Emperor
  */
 public class Graphics {
 
+    /**
+     * The graphic id.
+     */
     private final int id;
 
+    /**
+     * The graphic height.
+     */
     private final int height;
 
+    /**
+     * The graphic height.
+     */
     private final int delay;
 
     /**
-     * Instantiates a new Graphics.
+     * Constructs a new {@code Graphics} {@code Object}.
      *
-     * @param id the id
+     * @param id The graphics id.
      */
     public Graphics(int id) {
         this(id, 0, 0);
     }
 
     /**
-     * Instantiates a new Graphics.
+     * Constructs a new {@code Graphics} {@code Object}.
      *
-     * @param id     the id
-     * @param height the height
+     * @param id     The graphics id.
+     * @param height The graphics height.
      */
     public Graphics(int id, int height) {
         this(id, height, 0);
     }
 
     /**
-     * Instantiates a new Graphics.
+     * Constructs a new {@code Graphics} {@code Object}.
      *
-     * @param id     the id
-     * @param height the height
-     * @param delay  the delay
+     * @param id     The graphics id.
+     * @param height The graphics height.
+     * @param delay  The graphics delay.
      */
     public Graphics(int id, int height, int delay) {
         this.id = id;
@@ -48,58 +59,58 @@ public class Graphics {
     }
 
     /**
-     * Create graphics.
+     * Constructs a new graphic.
      *
-     * @param id the id
-     * @return the graphics
+     * @param id The graphic id.
+     * @return The graphics instance.
      */
     public static Graphics create(int id) {
         return new Graphics(id, 0, 0);
     }
 
     /**
-     * Create graphics.
+     * Constructs a new graphic.
      *
-     * @param id     the id
-     * @param height the height
-     * @return the graphics
+     * @param id     The graphic id.
+     * @param height The graphic height.
+     * @return The graphics instance.
      */
     public static Graphics create(int id, int height) {
         return new Graphics(id, height, 0);
     }
 
     /**
-     * Send.
+     * Sends a graphic on a location.
      *
-     * @param graphics the graphics
-     * @param l        the l
+     * @param graphic The graphic.
+     * @param l       The location.
      */
-    public static void send(Graphics graphics, Location l) {
-        RegionManager.getRegionChunk(l).flag(new GraphicUpdateFlag(graphics, l));
+    public static void send(Graphics graphic, Location l) {
+        RegionManager.getRegionChunk(l).flag(new GraphicUpdateFlag(graphic, l));
     }
 
     /**
-     * Gets id.
+     * Get the graphic id.
      *
-     * @return the id
+     * @return The graphic id.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Gets height.
+     * Get the graphic height.
      *
-     * @return the height
+     * @return The graphic height.
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     * Gets delay.
+     * Gets the delay.
      *
-     * @return the delay
+     * @return The delay.
      */
     public int getDelay() {
         return delay;

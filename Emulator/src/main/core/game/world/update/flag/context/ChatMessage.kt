@@ -3,21 +3,37 @@ package core.game.world.update.flag.context
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 
-class ChatMessage(
-    player: Player,
-    text: String,
-    effects: Int,
-    numChars: Int,
-) {
+/**
+ * Represents a chat message.
+ * @author Emperor
+ *
+ * @param player The player.
+ * @param text The chat text.
+ * @param effects The chat effects.
+ * @param numChars The num chars.
+ */
+class ChatMessage(player: Player, text: String, effects: Int, numChars: Int) {
+    /**
+     * The player reference.
+     */
     var player: Player = player
         private set
 
+    /**
+     * The chat text.
+     */
     var text: String = text
         private set
 
+    /**
+     * The effects.
+     */
     var effects = effects
         private set
 
+    /**
+     * The numChars.
+     */
     var numChars = numChars
         private set
 

@@ -6,67 +6,62 @@ import kotlin.Pair;
 import static java.lang.Math.max;
 
 /**
- * The type Region flags.
+ * Holds a region's flags like clipping flags, members, ...
+ *
+ * @author Emperor
  */
 public final class RegionFlags {
 
-    /**
-     * The constant TILE_OBJECT.
-     */
     public static final int TILE_OBJECT = 0x40000;
-
-    /**
-     * The constant EMPTY_TILE.
-     */
     public static final int EMPTY_TILE = 0;
-
-    /**
-     * The constant SOLID_TILE.
-     */
     public static final int SOLID_TILE = 0x200000;
-
-    /**
-     * The constant OBJ_10_PROJECTILE.
-     */
     public static final int OBJ_10_PROJECTILE = 0x20000;
-
-    /**
-     * The constant OBJ_10.
-     */
     public static final int OBJ_10 = 0x100;
-
+    /**
+     * The plane.
+     */
     private final int plane;
 
+    /**
+     * If the region is members only.
+     */
     private boolean members;
 
+    /**
+     * The base x-coordinate.
+     */
     private final int baseX;
 
+    /**
+     * The base y-coordinate.
+     */
     private final int baseY;
 
-    private int[][] clippingFlags;
-
+    /**
+     * The landscape data.
+     */
     private boolean[][] landscape;
 
+    /**
+     * If the flags are set for projectile clipping
+     */
     private final boolean projectile;
 
     /**
-     * Instantiates a new Region flags.
+     * Constructs a new {@code RegionFlags} {@code Object}.
      *
-     * @param plane the plane
-     * @param x     the x
-     * @param y     the y
+     * @param x The base x-coordinate (absolute).
+     * @param y The base y-coordinate (absolute).
      */
     public RegionFlags(int plane, int x, int y) {
         this(plane, x, y, false);
     }
 
     /**
-     * Instantiates a new Region flags.
+     * Constructs a new {@code RegionFlags} {@code Object}.
      *
-     * @param plane      the plane
-     * @param x          the x
-     * @param y          the y
-     * @param projectile the projectile
+     * @param x The base x-coordinate (absolute).
+     * @param y The base y-coordinate (absolute).
      */
     public RegionFlags(int plane, int x, int y, boolean projectile) {
         this.plane = plane;
@@ -76,53 +71,47 @@ public final class RegionFlags {
     }
 
     /**
-     * Flag solid tile.
+     * Flags a solid tile.
      *
-     * @param x the x
-     * @param y the y
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
      */
     public void flagSolidTile(int x, int y) {
         flag(x, y, SOLID_TILE);
     }
 
-    /**
-     * Flag empty tile.
-     *
-     * @param x the x
-     * @param y the y
-     */
     public void flagEmptyTile(int x, int y) {
         flag(x, y, EMPTY_TILE);
     }
 
     /**
-     * Flag tile object.
+     * Flags a tile object (object type 22).
      *
-     * @param x the x
-     * @param y the y
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
      */
     public void flagTileObject(int x, int y) {
         flag(x, y, TILE_OBJECT);
     }
 
     /**
-     * Unflag tile object.
+     * Unflags a tile object.
      *
-     * @param x the x
-     * @param y the y
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
      */
     public void unflagTileObject(int x, int y) {
         unflag(x, y, TILE_OBJECT);
     }
 
     /**
-     * Flag solid object.
+     * Flags a solid object (type 10/11).
      *
-     * @param x                 the x
-     * @param y                 the y
-     * @param sizeX             the size x
-     * @param sizeY             the size y
-     * @param projectileClipped the projectile clipped
+     * @param x                 The x-coordinate
+     * @param y                 The y-coordinate.
+     * @param sizeX             The x-size of the object.
+     * @param sizeY             The y-size of the object.
+     * @param projectileClipped If the object is solid.
      */
     public void flagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
         int clipdata = OBJ_10;
@@ -137,11 +126,11 @@ public final class RegionFlags {
     }
 
     /**
-     * Flag.
+     * Adds a flag.
      *
-     * @param x        the x
-     * @param y        the y
-     * @param clipdata the clipdata
+     * @param x        The x-coordinate.
+     * @param y        The y-coordinate.
+     * @param clipdata The clip data.
      */
     public void flag(int x, int y, int clipdata) {
         if (x > -1 && x < 64 && y > -1 && y < 64) {
@@ -152,13 +141,13 @@ public final class RegionFlags {
     }
 
     /**
-     * Unflag solid object.
+     * Unflags a solid object (type 10/11).
      *
-     * @param x                 the x
-     * @param y                 the y
-     * @param sizeX             the size x
-     * @param sizeY             the size y
-     * @param projectileClipped the projectile clipped
+     * @param x                 The x-coordinate
+     * @param y                 The y-coordinate.
+     * @param sizeX             The x-size of the object.
+     * @param sizeY             The y-size of the object.
+     * @param projectileClipped If the object is solid.
      */
     public void unflagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
         int clipdata = OBJ_10;
@@ -173,11 +162,11 @@ public final class RegionFlags {
     }
 
     /**
-     * Unflag.
+     * Removes a flag.
      *
-     * @param x        the x
-     * @param y        the y
-     * @param clipdata the clipdata
+     * @param x        The x-coordinate.
+     * @param y        The y-coordinate.
+     * @param clipdata The clip data.
      */
     public void unflag(int x, int y, int clipdata) {
         if (x > -1 && x < 64 && y > -1 && y < 64) {
@@ -191,38 +180,17 @@ public final class RegionFlags {
         return new Pair<>(((baseX >> 6) << 8) | (baseY >> 6), (plane * 64 * 64) + (x * 64) + y);
     }
 
-    /**
-     * Gets flag.
-     *
-     * @param x the x
-     * @param y the y
-     * @return the flag
-     */
     public int getFlag(int x, int y) {
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
         return RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()];
     }
 
-    /**
-     * Add flag.
-     *
-     * @param x        the x
-     * @param y        the y
-     * @param clipdata the clipdata
-     */
     public void addFlag(int x, int y, int clipdata) {
         int current = getFlag(x, y);
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
         RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = max(0, current) | clipdata;
     }
 
-    /**
-     * Remove flag.
-     *
-     * @param x        the x
-     * @param y        the y
-     * @param clipdata the clipdata
-     */
     public void removeFlag(int x, int y, int clipdata) {
         int current = getFlag(x, y);
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
@@ -232,36 +200,24 @@ public final class RegionFlags {
         RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = current;
     }
 
-    /**
-     * Clear flag.
-     *
-     * @param x the x
-     * @param y the y
-     */
     public void clearFlag(int x, int y) {
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
         RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = 0;
     }
 
-    /**
-     * Invalidate flag.
-     *
-     * @param x the x
-     * @param y the y
-     */
     public void invalidateFlag(int x, int y) {
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
         RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = -1;
     }
 
     /**
-     * Flag door object.
+     * Flags a door object (type 0-3).
      *
-     * @param x                 the x
-     * @param y                 the y
-     * @param rotation          the rotation
-     * @param type              the type
-     * @param projectileClipped the projectile clipped
+     * @param x                 The x-coordinate
+     * @param y                 The y-coordinate.
+     * @param rotation          The rotation.
+     * @param type              The type.
+     * @param projectileClipped If the door is solid.
      */
     public void flagDoorObject(int x, int y, int rotation, int type, boolean projectileClipped) {
         switch (type) {
@@ -403,13 +359,13 @@ public final class RegionFlags {
     }
 
     /**
-     * Unflag door object.
+     * Unlags a door object (type 0-3).
      *
-     * @param x                 the x
-     * @param y                 the y
-     * @param rotation          the rotation
-     * @param type              the type
-     * @param projectileClipped the projectile clipped
+     * @param x                 The x-coordinate
+     * @param y                 The y-coordinate.
+     * @param rotation          The rotation.
+     * @param type              The type.
+     * @param projectileClipped If the door is solid.
      */
     public void unflagDoorObject(int x, int y, int rotation, int type, boolean projectileClipped) {
         switch (type) {
@@ -551,70 +507,45 @@ public final class RegionFlags {
     }
 
     /**
-     * Unload.
-     */
-    public void unload() {
-        clippingFlags = null;
-    }
-
-    /**
-     * Is members boolean.
+     * Gets the members.
      *
-     * @return the boolean
+     * @return The members.
      */
     public boolean isMembers() {
         return members;
     }
 
     /**
-     * Sets members.
+     * Sets the members.
      *
-     * @param members the members
+     * @param members The members to set.
      */
     public void setMembers(boolean members) {
         this.members = members;
     }
 
     /**
-     * Get clipping flags int [ ] [ ].
+     * Gets the plane.
      *
-     * @return the int [ ] [ ]
-     */
-    public int[][] getClippingFlags() {
-        return clippingFlags;
-    }
-
-    /**
-     * Sets clipping flags.
-     *
-     * @param clippingFlags the clipping flags
-     */
-    public void setClippingFlags(int[][] clippingFlags) {
-        this.clippingFlags = clippingFlags;
-    }
-
-    /**
-     * Gets plane.
-     *
-     * @return the plane
+     * @return The plane.
      */
     public int getPlane() {
         return plane;
     }
 
     /**
-     * Get landscape boolean [ ] [ ].
+     * Gets the landscape.
      *
-     * @return the boolean [ ] [ ]
+     * @return The landscape.
      */
     public boolean[][] getLandscape() {
         return landscape;
     }
 
     /**
-     * Sets landscape.
+     * Sets the landscape.
      *
-     * @param landscape the landscape
+     * @param landscape The landscape to set.
      */
     public void setLandscape(boolean[][] landscape) {
         this.landscape = landscape;

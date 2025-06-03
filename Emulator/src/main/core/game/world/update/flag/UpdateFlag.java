@@ -4,54 +4,55 @@ import core.game.node.entity.Entity;
 import core.net.packet.IoBuffer;
 
 /**
- * The type Update flag.
+ * Represents an update flag, which holds the data the update mask
+ * uses to write.
  *
- * @param <T> the type parameter
+ * @author Emperor
  */
 public abstract class UpdateFlag<T> implements Comparable<UpdateFlag<?>> {
 
     /**
-     * The Context.
+     * The context.
      */
     protected T context;
 
     /**
-     * Instantiates a new Update flag.
+     * Constructs a new {@code UpdateFlag} {@code Object}.
      *
-     * @param context the context
+     * @param context The context.
      */
     public UpdateFlag(T context) {
         this.context = context;
     }
 
     /**
-     * Write.
+     * Writes the data on the buffer.
      *
-     * @param buffer the buffer
+     * @param buffer The buffer.
      */
     public abstract void write(IoBuffer buffer);
 
     /**
-     * Write dynamic.
+     * Writes the data on the buffer.
      *
-     * @param buffer the buffer
-     * @param e      the e
+     * @param buffer The buffer.
+     * @param e      The entity to write for.
      */
     public void writeDynamic(IoBuffer buffer, Entity e) {
         write(buffer);
     }
 
     /**
-     * Data int.
+     * Gets the update mask data for this update flag.
      *
-     * @return the int
+     * @return The update mask data.
      */
     public abstract int data();
 
     /**
-     * Ordinal int.
+     * The ordinal.
      *
-     * @return the int
+     * @return The update mask ordinal.
      */
     public abstract int ordinal();
 
@@ -75,7 +76,7 @@ public abstract class UpdateFlag<T> implements Comparable<UpdateFlag<?>> {
     }
 
     /**
-     * Gets context.
+     * Get the context.
      *
      * @return the context
      */
@@ -84,9 +85,7 @@ public abstract class UpdateFlag<T> implements Comparable<UpdateFlag<?>> {
     }
 
     /**
-     * Sets context.
-     *
-     * @param context the context
+     * @param context the context to set
      */
     public void setContext(T context) {
         this.context = context;

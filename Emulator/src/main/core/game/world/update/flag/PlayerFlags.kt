@@ -11,11 +11,17 @@ import java.nio.charset.StandardCharsets
 import kotlin.math.max
 import kotlin.reflect.typeOf
 
+/**
+ * Player update flags for syncing player state.
+ */
 sealed class PlayerFlags(
     p: Int,
     o: Int,
     f: EntityFlag,
 ) : EFlagProvider(530, EFlagType.Player, p, o, f) {
+    /**
+     * Sends a chat message update.
+     */
     class Chat : PlayerFlags(0x80, 0, EntityFlag.Chat) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -47,6 +53,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends primary hit damage info.
+     */
     class PrimaryHit : PlayerFlags(0x1, 1, EntityFlag.PrimaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -69,6 +78,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends animation update.
+     */
     class Animate : PlayerFlags(0x8, 2, EntityFlag.Animate) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -83,6 +95,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends player appearance data.
+     */
     class Appearance : PlayerFlags(0x4, 3, EntityFlag.Appearance) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -163,6 +178,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends the entity the player is facing.
+     */
     class FaceEntity : PlayerFlags(0x2, 4, EntityFlag.FaceEntity) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -180,6 +198,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends forced movement data for the player.
+     */
     class ForceMove : PlayerFlags(0x400, 5, EntityFlag.ForceMove) {
         override fun writeToDynamic(
             buffer: IoBuffer,
@@ -205,6 +226,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends forced chat text for the player.
+     */
     class ForceChat : PlayerFlags(0x20, 6, EntityFlag.ForceChat) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -218,6 +242,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends secondary hit damage info.
+     */
     class SecondaryHit : PlayerFlags(0x200, 7, EntityFlag.SecondaryHit) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -232,6 +259,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends animation sequence update.
+     */
     class AnimationSequence : PlayerFlags(0x800, 8, EntityFlag.AnimSeq) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -246,6 +276,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends spot animation data.
+     */
     class SpotAnim : PlayerFlags(0x100, 9, EntityFlag.SpotAnim) {
         override fun writeTo(
             buffer: IoBuffer,
@@ -260,6 +293,9 @@ sealed class PlayerFlags(
         }
     }
 
+    /**
+     * Sends location the player is facing.
+     */
     class FaceLocation : PlayerFlags(0x40, 10, EntityFlag.FaceLocation) {
         override fun writeTo(
             buffer: IoBuffer,

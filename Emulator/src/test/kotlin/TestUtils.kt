@@ -59,7 +59,7 @@ object TestUtils {
         p.playerFlags.lastSceneGraph = p.location ?: ServerConstants.HOME_LOCATION
         Repository.addPlayer(p)
         // Update sequence has a separate list of players for some reason...
-        UpdateSequence.rendererPlayers.add(p)
+        UpdateSequence.renderablePlayers.add(p)
         p.details.rights = rights
         return p
     }
@@ -205,7 +205,7 @@ class MockPlayer(
 
     override fun close() {
         Repository.removePlayer(this)
-        UpdateSequence.rendererPlayers.remove(this)
+        UpdateSequence.renderablePlayers.remove(this)
         finishClear()
     }
 

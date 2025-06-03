@@ -64,7 +64,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.game.world.repository.Repository
 import core.game.world.update.flag.EntityFlag
-import core.game.world.update.flag.chunk.AnimateSceneryUpdateFlag
+import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.ForceMoveCtx
 import core.game.world.update.flag.context.Graphics
@@ -846,7 +846,7 @@ fun animateScenery(
     val animation = Animation(animationId)
     animation.setObject(obj)
     getRegionChunk(obj.location).flag(
-        AnimateSceneryUpdateFlag(
+        AnimateObjectUpdateFlag(
             animation,
         ),
     )

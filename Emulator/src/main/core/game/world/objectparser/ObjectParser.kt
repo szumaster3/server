@@ -16,11 +16,16 @@ class ObjectParser : StartupListener {
         if (!f.exists()) {
             return
         }
+
         try {
             val factory = DocumentBuilderFactory.newInstance()
             val builder = factory.newDocumentBuilder()
             val doc = builder.parse(f)
+
             val parseList = doc.getElementsByTagName("ObjectAction")
+
+
+
             for (i in 0 until parseList.length) {
                 val parseNode = parseList.item(i)
                 if (parseNode.nodeType == Node.ELEMENT_NODE) {
@@ -48,16 +53,7 @@ class ObjectParser : StartupListener {
                                 "se" -> dir = 7
                                 "s" -> dir = 6
                             }
-                            LandscapeParser.addScenery(
-                                Scenery(
-                                    id,
-                                    x,
-                                    y,
-                                    z,
-                                    objType,
-                                    dir,
-                                ),
-                            )
+                            LandscapeParser.addScenery(Scenery(id, x, y, z, objType, dir))
                         }
 
                         "remove" -> {
@@ -66,14 +62,7 @@ class ObjectParser : StartupListener {
                             val y = parseElement.getAttribute("y").toInt()
                             val z = parseElement.getAttribute("z").toInt()
                             val objType = 10
-                            LandscapeParser.removeScenery(
-                                Scenery(
-                                    id,
-                                    x,
-                                    y,
-                                    z,
-                                ),
-                            )
+                            LandscapeParser.removeScenery(Scenery(id, x, y, z))
                         }
                     }
                 }

@@ -1,135 +1,155 @@
 package core.game.world.map;
 
 /**
- * The type Point.
+ * Represents a point.
+ *
+ * @author Emperor
  */
 public final class Point {
 
-	private final int x;
-
-	private final int y;
-
-	private final int diffX;
-
-	private final int diffY;
-
-	private final Direction direction;
-
-	private boolean runDisabled;
+    /**
+     * The x-coordinate.
+     */
+    private final int x;
 
     /**
-     * Instantiates a new Point.
+     * The y-coordinate.
+     */
+    private final int y;
+
+    /**
+     * The difference x between previous and current point.
+     */
+    private final int diffX;
+
+    /**
+     * The difference y between previous and current point.
+     */
+    private final int diffY;
+
+    /**
+     * The direction for the next point.
+     */
+    private final Direction direction;
+
+    /**
+     * If we can't run during this point.
+     */
+    private boolean runDisabled;
+
+    /**
+     * Constructs a new {@code Point} {@code Object}.
      *
-     * @param x the x
-     * @param y the y
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
      */
     public Point(int x, int y) {
-		this(x, y, null, 0, 0);
-	}
+        this(x, y, null, 0, 0);
+    }
 
     /**
-     * Instantiates a new Point.
+     * Constructs a new {@code Point} {@code Object}.
      *
-     * @param x         the x
-     * @param y         the y
-     * @param direction the direction
+     * @param x         The x-coordinate.
+     * @param y         The y-coordinate.
+     * @param direction The direction.
      */
     public Point(int x, int y, Direction direction) {
-		this(x, y, direction, 0, 0);
-	}
+        this(x, y, direction, 0, 0);
+    }
 
     /**
-     * Instantiates a new Point.
+     * Constructs a new {@code Point} {@code Object}.
      *
-     * @param x         the x
-     * @param y         the y
-     * @param direction the direction
-     * @param diffX     the diff x
-     * @param diffY     the diff y
+     * @param x         The x-coordinate.
+     * @param y         The y-coordinate.
+     * @param direction The direction.
+     * @param diffX     The difference x between previous and current point.
+     * @param diffY     The difference y between previous and current point.
      */
     public Point(int x, int y, Direction direction, int diffX, int diffY) {
-		this.x = x;
-		this.y = y;
-		this.direction = direction;
-		this.diffX = diffX;
-		this.diffY = diffY;
-	}
+        this.x = x;
+        this.y = y;
+        this.direction = direction;
+        this.diffX = diffX;
+        this.diffY = diffY;
+    }
 
     /**
-     * Instantiates a new Point.
+     * Constructs a new {@code Point} {@code Object}.
      *
-     * @param x           the x
-     * @param y           the y
-     * @param direction   the direction
-     * @param diffX       the diff x
-     * @param diffY       the diff y
-     * @param runDisabled the run disabled
+     * @param x           The x-coordinate.
+     * @param y           The y-coordinate.
+     * @param direction   The direction.
+     * @param diffX       The difference x between previous and current point.
+     * @param diffY       The difference y between previous and current point.
+     * @param runDisabled If running is disabled for this walking point.
      */
     public Point(int x, int y, Direction direction, int diffX, int diffY, boolean runDisabled) {
-		this(x, y, direction, diffX, diffY);
-		this.runDisabled = runDisabled;
-	}
+        this(x, y, direction, diffX, diffY);
+        this.runDisabled = runDisabled;
+    }
 
     /**
-     * Gets x.
+     * Gets the x.
      *
-     * @return the x
+     * @return The x.
      */
     public int getX() {
-		return x;
-	}
+        return x;
+    }
 
     /**
-     * Gets y.
+     * Gets the y.
      *
-     * @return the y
+     * @return The y.
      */
     public int getY() {
-		return y;
-	}
+        return y;
+    }
 
     /**
-     * Gets direction.
+     * Gets the direction.
      *
-     * @return the direction
+     * @return The direction.
      */
     public Direction getDirection() {
-		return direction;
-	}
+        return direction;
+    }
 
     /**
-     * Gets diff x.
+     * Gets the diffX.
      *
-     * @return the diff x
+     * @return The diffX.
      */
     public int getDiffX() {
-		return diffX;
-	}
+        return diffX;
+    }
 
     /**
-     * Gets diff y.
+     * Gets the diffY.
      *
-     * @return the diff y
+     * @return The diffY.
      */
     public int getDiffY() {
-		return diffY;
-	}
+        return diffY;
+    }
 
     /**
-     * Is run disabled boolean.
+     * Gets the runDisabled.
      *
-     * @return the boolean
+     * @return The runDisabled.
      */
     public boolean isRunDisabled() {
-		return runDisabled;
-	}
+        return runDisabled;
+    }
 
     /**
-     * Sets run disabled.
+     * Sets the runDisabled.
      *
-     * @param runDisabled the run disabled
+     * @param runDisabled The runDisabled to set.
      */
     public void setRunDisabled(boolean runDisabled) {
-		this.runDisabled = runDisabled;
-	}
+        this.runDisabled = runDisabled;
+    }
 }

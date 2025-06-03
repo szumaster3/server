@@ -1,7 +1,9 @@
 package core.game.world.update.flag;
 
 /**
- * The interface Flag context.
+ * Represents an update flag context.
+ *
+ * @author Emperor
  */
 public interface FlagContext {
 

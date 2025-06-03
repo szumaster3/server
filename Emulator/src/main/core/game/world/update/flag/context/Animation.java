@@ -5,70 +5,85 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.scenery.Scenery;
 
 /**
- * The type Animation.
+ * Represents an animation.
+ *
+ * @author Emperor
  */
 public class Animation {
 
     /**
-     * The constant RESET.
+     * The reset animation.
      */
     public static final Animation RESET = new Animation(-1, Priority.VERY_HIGH);
 
+    /**
+     * The priority.
+     */
     private Priority priority;
 
+    /**
+     * The animation id.
+     */
     private int id;
 
+    /**
+     * The animation delay.
+     */
     private final int delay;
 
+    /**
+     * The animation definitions.
+     */
     private AnimationDefinition definition;
 
-    private Scenery scenery;
+    /**
+     * The object to animate.
+     */
+    private Scenery object;
 
     /**
-     * Instantiates a new Animation.
+     * Constructs a new {@code Animation} {@code Object}.
      *
-     * @param id the id
+     * @param id The animation id.
      */
     public Animation(int id) {
         this(id, 0, Priority.MID);
     }
 
     /**
-     * Create animation.
+     * Constructs a new {@code Animation}.
      *
-     * @param id the id
-     * @return the animation
+     * @param id the id.
+     * @return
      */
     public static Animation create(int id) {
         return new Animation(id, 0, Priority.MID);
     }
 
     /**
-     * Instantiates a new Animation.
+     * Constructs a new {@code Animation} {@code Object}.
      *
-     * @param id       the id
-     * @param priority the priority
+     * @param id The animation id.
      */
     public Animation(int id, Priority priority) {
         this(id, 0, priority);
     }
 
     /**
-     * Instantiates a new Animation.
+     * Constructs a new {@code Animation} {@code Object}.
      *
-     * @param id    the id
-     * @param delay the delay
+     * @param id    The animation id.
+     * @param delay The animation delay.
      */
     public Animation(int id, int delay) {
         this(id, delay, Priority.MID);
     }
 
     /**
-     * Instantiates a new Animation.
+     * Constructs a new {@code Animation} {@code Object}.
      *
-     * @param id       the id
-     * @param delay    the delay
-     * @param priority the priority
+     * @param id    The animation id.
+     * @param delay The animation delay.
      */
     public Animation(int id, int delay, Priority priority) {
         this.id = id;
@@ -77,9 +92,9 @@ public class Animation {
     }
 
     /**
-     * Gets definition.
+     * Gets the animation definitions of this animation.
      *
-     * @return the definition
+     * @return The animation definitions.
      */
     public AnimationDefinition getDefinition() {
         if (definition == null) {
@@ -89,9 +104,9 @@ public class Animation {
     }
 
     /**
-     * Gets duration.
+     * The duration of the animation.
      *
-     * @return the duration
+     * @return The duration in ticks.
      */
     public int getDuration() {
         AnimationDefinition def = getDefinition();
@@ -99,7 +114,7 @@ public class Animation {
     }
 
     /**
-     * Gets id.
+     * Get the id.
      *
      * @return the id
      */
@@ -108,7 +123,7 @@ public class Animation {
     }
 
     /**
-     * Gets delay.
+     * Get the delay.
      *
      * @return the delay
      */
@@ -117,45 +132,43 @@ public class Animation {
     }
 
     /**
-     * Sets id.
+     * Sets the id.
      *
-     * @param id the id
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Gets priority.
-     *
-     * @return the priority
+     * @return the priority.
      */
     public Priority getPriority() {
         return priority;
     }
 
     /**
-     * Gets object.
+     * Gets the object.
      *
-     * @return the object
+     * @return The object.
      */
     public Scenery getObject() {
-        return scenery;
+        return object;
     }
 
     /**
-     * Sets object.
+     * Sets the object.
      *
-     * @param scenery the scenery
+     * @param object The object to set.
      */
-    public void setObject(Scenery scenery) {
-        this.scenery = scenery;
+    public void setObject(Scenery object) {
+        this.object = object;
     }
 
     /**
-     * Sets priority.
+     * Sets the priority.
      *
-     * @param priority the priority
+     * @param priority The priority.
      */
     public void setPriority(Priority priority) {
         this.priority = priority;

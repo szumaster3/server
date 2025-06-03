@@ -10,47 +10,57 @@ import core.net.packet.out.ConstructGroundItem;
 import core.net.packet.out.UpdateGroundItemAmount;
 
 /**
- * The type Item update flag.
+ * Handles an item update flag.
+ *
+ * @author Emperor
  */
 public final class ItemUpdateFlag extends UpdateFlag<Object> {
 
     /**
-     * The constant CONSTRUCT_TYPE.
+     * The construct update type.
      */
     public static final int CONSTRUCT_TYPE = 0;
 
     /**
-     * The constant REMOVE_TYPE.
+     * The remove update type.
      */
     public static final int REMOVE_TYPE = 1;
 
     /**
-     * The constant UPDATE_AMOUNT_TYPE.
+     * The update amount update type.
      */
     public static final int UPDATE_AMOUNT_TYPE = 2;
 
+    /**
+     * The ground item to update.
+     */
     private final GroundItem item;
 
+    /**
+     * The update type
+     */
     private final int type;
 
+    /**
+     * The old amount.
+     */
     private int oldAmount;
 
     /**
-     * Instantiates a new Item update flag.
+     * Constructs a new {@code ItemContext} {@code Object}.
      *
-     * @param item the item
-     * @param type the type
+     * @param item The ground item to update.
+     * @param type The update type.
      */
     public ItemUpdateFlag(GroundItem item, int type) {
         this(item, type, 0);
     }
 
     /**
-     * Instantiates a new Item update flag.
+     * Constructs a new {@code ItemContext} {@code Object}.
      *
-     * @param item      the item
-     * @param type      the type
-     * @param oldAmount the old amount
+     * @param item The ground item to update.
+     * @param type The update type.
      */
     public ItemUpdateFlag(GroundItem item, int type, int oldAmount) {
         super(null);
@@ -79,27 +89,27 @@ public final class ItemUpdateFlag extends UpdateFlag<Object> {
     }
 
     /**
-     * Is remove boolean.
+     * Checks if we're removing the ground item.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public boolean isRemove() {
         return type == REMOVE_TYPE;
     }
 
     /**
-     * Is construct boolean.
+     * Checks if we're constructing the ground item.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public boolean isConstruct() {
         return type == CONSTRUCT_TYPE;
     }
 
     /**
-     * Is amount update boolean.
+     * Checks if we're removing the ground item.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public boolean isAmountUpdate() {
         return type == UPDATE_AMOUNT_TYPE;

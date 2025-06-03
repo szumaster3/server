@@ -7,30 +7,39 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * The type Node list.
+ * A class which represents a list of nodes.
  *
- * @param <E> the type parameter
+ * @param <E> The type of Node.
+ * @author Graham Edgecombe
+ * @author Emperor
  */
 public class NodeList<E extends Node> implements Collection<E>, Iterable<E> {
 
+    /**
+     * Internal nodes array.
+     */
     private Node[] nodes;
 
+    /**
+     * Current size.
+     */
     private int size = 0;
 
     /**
-     * Instantiates a new Node list.
+     * Creates a Node list with the specified capacity.
      *
-     * @param capacity the capacity
+     * @param capacity The capacity.
      */
     public NodeList(int capacity) {
         nodes = new Node[capacity + 1]; // do not use idx 0
     }
 
     /**
-     * Get e.
+     * Gets an Node.
      *
-     * @param index the index
-     * @return the e
+     * @param index The index.
+     * @return The Node.
+     * @throws IndexOutOufBoundException if the index is out of bounds.
      */
     @SuppressWarnings("unchecked")
     public E get(int index) {
@@ -43,15 +52,19 @@ public class NodeList<E extends Node> implements Collection<E>, Iterable<E> {
     }
 
     /**
-     * Index of int.
+     * Gets the index of an Node.
      *
-     * @param node the node
-     * @return the int
+     * @return The index in the list.
      */
     public int indexOf(Node node) {
         return node.getIndex();
     }
 
+    /**
+     * Gets the next free id.
+     *
+     * @return The next free id.
+     */
     private int getNextId() {
         for (int i = 1; i < nodes.length; i++) {
             if (nodes[i] == null) {
@@ -132,10 +145,10 @@ public class NodeList<E extends Node> implements Collection<E>, Iterable<E> {
     }
 
     /**
-     * Remove boolean.
+     * Removes the node on this index.
      *
-     * @param index the index
-     * @return the boolean
+     * @param index The index.
+     * @return {@code True} if a node got removed.
      */
     public boolean remove(int index) {
         synchronized (this) {
@@ -197,11 +210,6 @@ public class NodeList<E extends Node> implements Collection<E>, Iterable<E> {
         return size;
     }
 
-    /**
-     * Length int.
-     *
-     * @return the int
-     */
     public int length() {
         return nodes.length;
     }

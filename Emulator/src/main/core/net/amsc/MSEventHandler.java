@@ -13,12 +13,14 @@ import java.util.concurrent.Executors;
 import static core.api.ContentAPIKt.log;
 
 /**
- * The type Ms event handler.
+ * Handles the management server events.
+ *
+ * @author Emperor
  */
 public final class MSEventHandler extends IoEventHandler {
 
     /**
-     * Instantiates a new Ms event handler.
+     * Constructs a new {@Code MSEventHandler} {@Code Object}
      */
     public MSEventHandler() {
         super(Executors.newSingleThreadExecutor());

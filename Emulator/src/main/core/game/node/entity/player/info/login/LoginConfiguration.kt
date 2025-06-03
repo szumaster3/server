@@ -117,7 +117,7 @@ object LoginConfiguration {
         Repository.lobbyPlayers.remove(player)
         player.isPlaying = true
 
-        UpdateSequence.rendererPlayers.add(player)
+        UpdateSequence.renderablePlayers.add(player)
         RegionManager.move(player)
         player.musicPlayer.init()
         player.updateAppearance()

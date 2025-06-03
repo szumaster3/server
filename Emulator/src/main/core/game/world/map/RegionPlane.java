@@ -21,424 +21,440 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * The type Region plane.
+ * Represents one of the 4 planes of a region.
+ *
+ * @author Emperor
  */
 public final class RegionPlane {
 
     /**
-     * The constant REGION_SIZE.
+     * The region size.
      */
     public static final int REGION_SIZE = 64;
 
     /**
-     * The constant CHUNK_SIZE.
+     * The amount of chunks in this plane.
      */
     public static final int CHUNK_SIZE = REGION_SIZE >> 3;
 
     /**
-     * The constant NULL_OBJECT.
+     * Represents a removed scenery.
      */
     public static final Scenery NULL_OBJECT = new Scenery(0, Location.create(0, 0, 0));
 
-	private final int plane;
-
-	private final Region region;
-
-	private final RegionFlags flags;
-
-	private final RegionFlags projectileFlags;
-
-	private final RegionChunk[][] chunks;
-
-	private final List<NPC> npcs;
-
-	private final List<Player> players;
-
-	private Scenery[][] objects;
+    /**
+     * The plane.
+     */
+    private final int plane;
 
     /**
-     * Instantiates a new Region plane.
+     * The region.
+     */
+    private final Region region;
+
+    /**
+     * The region flags.
+     */
+    private final RegionFlags flags;
+
+    /**
+     * The region projectile flags.
+     */
+    private final RegionFlags projectileFlags;
+
+    /**
+     * The region chunks.
+     */
+    private final RegionChunk[][] chunks;
+
+    /**
+     * The list of NPCs in this region.
+     */
+    private final List<NPC> npcs;
+
+    /**
+     * The list of players in this region.
+     */
+    private final List<Player> players;
+
+    /**
+     * The scenerys.
+     */
+    private Scenery[][] objects;
+
+    /**
+     * Constructs a new {@code RegionPlane} {@code Object}.
      *
-     * @param region the region
-     * @param plane  the plane
+     * @param region The region.
+     * @param plane  The plane.
      */
     public RegionPlane(Region region, int plane) {
-		this.plane = plane;
-		this.region = region;
-		this.players = new CopyOnWriteArrayList<Player>();
-		this.npcs = new CopyOnWriteArrayList<NPC>();
-		Location base = region.getBaseLocation();
-		this.flags = new RegionFlags(plane, base.getX(), base.getY());
-		this.projectileFlags = new RegionFlags(plane, base.getX(), base.getY(), true);
-		this.objects = new Scenery[REGION_SIZE][REGION_SIZE];
-		this.chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
-	}
+        this.plane = plane;
+        this.region = region;
+        this.players = new CopyOnWriteArrayList<Player>();
+        this.npcs = new CopyOnWriteArrayList<NPC>();
+        Location base = region.getBaseLocation();
+        this.flags = new RegionFlags(plane, base.getX(), base.getY());
+        this.projectileFlags = new RegionFlags(plane, base.getX(), base.getY(), true);
+        this.objects = new Scenery[REGION_SIZE][REGION_SIZE];
+        this.chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
+    }
 
     /**
-     * Pulse.
+     * Called at the end of the update sequence, if the region is active.
      */
     public void pulse() {
-		Arrays.stream(chunks).forEach(regionChunks -> {Arrays.stream(regionChunks).filter(Objects::nonNull).forEach(RegionChunk::resetFlags);});
-	}
+        Arrays.stream(chunks).forEach(regionChunks -> {
+            Arrays.stream(regionChunks).filter(Objects::nonNull).forEach(RegionChunk::resetFlags);
+        });
+    }
 
     /**
-     * Add.
+     * Adds a scenery.
      *
-     * @param object    the object
-     * @param x         the x
-     * @param y         the y
-     * @param landscape the landscape
+     * @param object    The object to add.
+     * @param x         The x-coordinate.
+     * @param y         The y-coordinate.
+     * @param landscape If this object is added through landscape parsing.
      */
     public void add(Scenery object, int x, int y, boolean landscape) {
-		setChunkObject(x, y, object);
-		if (landscape) {
-			objects[x][y] = object;
-		}
-		if (object != null) {
-			object.setRenderable(true);
-		}
-	}
+        setChunkObject(x, y, object);
+        if (landscape) {
+            objects[x][y] = object;
+        }
+        if (object != null) {
+            object.setRenderable(true);
+        }
+    }
 
     /**
-     * Gets region chunk.
+     * Gets the region chunk.
      *
-     * @param chunkX the chunk x
-     * @param chunkY the chunk y
-     * @return the region chunk
+     * @param chunkX The chunk base x-coordinate.
+     * @param chunkY The chunk base y-coordinate.
+     * @return The region chunk.
      */
     public RegionChunk getRegionChunk(int chunkX, int chunkY) {
-		RegionChunk r = chunks[chunkX][chunkY];
-		if (r != null) {
-			return r;
-		}
-		if (region.isBuild()) {
-			return chunks[chunkX][chunkY] = new BuildRegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
-		}
-		return chunks[chunkX][chunkY] = new RegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
-	}
+        RegionChunk r = chunks[chunkX][chunkY];
+        if (r != null) {
+            return r;
+        }
+        if (region.isBuild()) {
+            return chunks[chunkX][chunkY] = new BuildRegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
+        }
+        return chunks[chunkX][chunkY] = new RegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
+    }
 
-    /**
-     * Sets region chunk.
-     *
-     * @param chunkX the chunk x
-     * @param chunkY the chunk y
-     * @param chunk  the chunk
-     */
     public void setRegionChunk(int chunkX, int chunkY, RegionChunk chunk) {
-		chunks[chunkX][chunkY] = chunk;
-	}
+        chunks[chunkX][chunkY] = chunk;
+    }
 
     /**
-     * Remove.
+     * Removes a scenery.
      *
-     * @param x the x
-     * @param y the y
+     * @param x The x-coordinate.
+     * @param y The y-coordinate.
      */
     public void remove(int x, int y) {
-		remove(x, y, -1);
-	}
+        remove(x, y, -1);
+    }
 
     /**
-     * Remove.
+     * Removes a scenery.
      *
-     * @param x        the x
-     * @param y        the y
-     * @param objectId the object id
+     * @param x        The x-coordinate.
+     * @param y        The y-coordinate.
+     * @param objectId The object id.
      */
     public void remove(int x, int y, int objectId) {
-		int chunkX = x / CHUNK_SIZE;
-		int chunkY = y / CHUNK_SIZE;
-		int offsetX = x - chunkX * CHUNK_SIZE;
-		int offsetY = y - chunkY * CHUNK_SIZE;
-		RegionChunk chunk = getRegionChunk(chunkX, chunkY);
-		Scenery remove = new Scenery(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
-		remove.setRenderable(false);
-		if (chunk instanceof BuildRegionChunk) {
-			int index = ((BuildRegionChunk) chunk).getIndex(offsetX, offsetY, objectId);
-			((BuildRegionChunk) chunk).getObjects(index)[offsetX][offsetY] = remove;
-			return;
-		}
-		chunk.getObjects()[offsetX][offsetY] = remove;
-	}
-
-	private void setChunkObject(int x, int y, Scenery object) {
-		int chunkX = x / CHUNK_SIZE;
-		int chunkY = y / CHUNK_SIZE;
-		int offsetX = x - chunkX * CHUNK_SIZE;
-		int offsetY = y - chunkY * CHUNK_SIZE;
-		RegionChunk r = getRegionChunk(chunkX, chunkY);
-		if (r instanceof BuildRegionChunk) {
-			((BuildRegionChunk) r).store(object);
-			return;
-		}
-		r.getObjects()[offsetX][offsetY] = object;
-	}
+        int chunkX = x / CHUNK_SIZE;
+        int chunkY = y / CHUNK_SIZE;
+        int offsetX = x - chunkX * CHUNK_SIZE;
+        int offsetY = y - chunkY * CHUNK_SIZE;
+        RegionChunk chunk = getRegionChunk(chunkX, chunkY);
+        Scenery remove = new Scenery(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
+        remove.setRenderable(false);
+        if (chunk instanceof BuildRegionChunk) {
+            int index = ((BuildRegionChunk) chunk).getIndex(offsetX, offsetY, objectId);
+            ((BuildRegionChunk) chunk).getObjects(index)[offsetX][offsetY] = remove;
+            return;
+        }
+        chunk.getObjects()[offsetX][offsetY] = remove;
+    }
 
     /**
-     * Get objects scenery [ ] [ ].
+     * Sets an object on a chunk.
      *
-     * @return the scenery [ ] [ ]
+     * @param x      The regional x-coordinate.
+     * @param y      The regional y-coordinate.
+     * @param object The object to set.
+     */
+    private void setChunkObject(int x, int y, Scenery object) {
+        int chunkX = x / CHUNK_SIZE;
+        int chunkY = y / CHUNK_SIZE;
+        int offsetX = x - chunkX * CHUNK_SIZE;
+        int offsetY = y - chunkY * CHUNK_SIZE;
+        RegionChunk r = getRegionChunk(chunkX, chunkY);
+        if (r instanceof BuildRegionChunk) {
+            ((BuildRegionChunk) r).store(object);
+            return;
+        }
+        r.getObjects()[offsetX][offsetY] = object;
+    }
+
+    /**
+     * Gets the scenerys.
+     *
+     * @return The scenerys.
      */
     public Scenery[][] getObjects() {
-		return objects;
-	}
+        return objects;
+    }
 
-    /**
-     * Gets object list.
-     *
-     * @return the object list
-     */
     public List<Scenery> getObjectList() {
-            ArrayList<Scenery> list = new ArrayList();
-            for (int x = 0; x < REGION_SIZE; x++) {
-                for (int y = 0; y < REGION_SIZE; y++) {
-                    if (objects[x][y] != null)
-                        list.add(objects[x][y]);
-                }
+        ArrayList<Scenery> list = new ArrayList();
+        for (int x = 0; x < REGION_SIZE; x++) {
+            for (int y = 0; y < REGION_SIZE; y++) {
+                if (objects[x][y] != null) list.add(objects[x][y]);
             }
-            return list;
         }
+        return list;
+    }
 
     /**
-     * Clear.
+     * Clears this region plane.
      */
     public void clear() {
-		for (RegionChunk[] c : chunks) {
-			for (RegionChunk chunk : c) {
-				if (chunk != null) {
-					chunk.clear();
-				}
-			}
-		}
-		if (region instanceof DynamicRegion && objects != null) {
-			for (int x = 0; x < REGION_SIZE; x++) {
-				for (int y = 0; y < REGION_SIZE; y++) {
-					objects[x][y] = null;
-				}
-			}
-			objects = null;
-		}
-	}
+        for (RegionChunk[] c : chunks) {
+            for (RegionChunk chunk : c) {
+                if (chunk != null) {
+                    chunk.clear();
+                }
+            }
+        }
+        if (region instanceof DynamicRegion && objects != null) {
+            for (int x = 0; x < REGION_SIZE; x++) {
+                for (int y = 0; y < REGION_SIZE; y++) {
+                    objects[x][y] = null;
+                }
+            }
+            objects = null;
+        }
+    }
 
     /**
-     * Add.
+     * Adds an NPC to this region.
      *
-     * @param npc the npc
+     * @param npc The NPC to add.
      */
     public void add(NPC npc) {
-		npcs.add(npc);
-	}
+        npcs.add(npc);
+    }
 
     /**
-     * Add.
+     * Adds a player to this region.
      *
-     * @param player the player
+     * @param player The player.
      */
     public void add(Player player) {
-		players.add(player);
-	}
+        players.add(player);
+    }
 
     /**
-     * Add.
+     * Adds an item to this region.
      *
-     * @param item the item
+     * @param item The item.
      */
     public void add(GroundItem item) {
-		Location l = item.getLocation();
-		RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
-		if (!c.getItems().add(item)) {
-			return;
-		}
-		GroundItem g = (GroundItem) item;
-		if (g.isPrivate()) {
-			if (g.getDropper() != null) {
-				PacketRepository.send(ConstructGroundItem.class, new BuildItemContext(g.getDropper(), item));
-			}
-			return;
-		}
-		c.flag(new ItemUpdateFlag(g, ItemUpdateFlag.CONSTRUCT_TYPE));
-	}
+        Location l = item.getLocation();
+        RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
+        if (!c.getItems().add(item)) {
+            return;
+        }
+        GroundItem g = (GroundItem) item;
+        if (g.isPrivate()) {
+            if (g.getDropper() != null) {
+                PacketRepository.send(ConstructGroundItem.class, new BuildItemContext(g.getDropper(), item));
+            }
+            return;
+        }
+        c.flag(new ItemUpdateFlag(g, ItemUpdateFlag.CONSTRUCT_TYPE));
+    }
 
     /**
-     * Remove.
+     * Removes an NPC from this region.
      *
-     * @param npc the npc
+     * @param npc The NPC.
      */
     public void remove(NPC npc) {
-		npcs.remove(npc);
-	}
+        npcs.remove(npc);
+    }
 
     /**
-     * Remove.
+     * Removes a player from this region.
      *
-     * @param player the player
+     * @param player The player.
      */
     public void remove(Player player) {
-		players.remove(player);
-	}
+        players.remove(player);
+    }
 
     /**
-     * Remove.
+     * Removes an item from this region.
      *
-     * @param item the item
+     * @param item The ground item.
      */
     public void remove(GroundItem item) {
-		Location l = item.getLocation();
-		RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
-		if (!c.getItems().remove(item)) {
-			return;
-		}
-		if (item.isPrivate()) {
-			if (item.getDropper() != null && item.getDropper().isPlaying() && item.getDropper().getLocation().withinDistance(l)) {
-				PacketRepository.send(ClearGroundItem.class, new BuildItemContext(item.getDropper(), item));
-			}
-			return;
-		}
-		c.flag(new ItemUpdateFlag(item, ItemUpdateFlag.REMOVE_TYPE));
-	}
+        Location l = item.getLocation();
+        RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
+        if (!c.getItems().remove(item)) {
+            return;
+        }
+        if (item.isPrivate()) {
+            if (item.getDropper() != null && item.getDropper().isPlaying() && item.getDropper().getLocation().withinDistance(l)) {
+                PacketRepository.send(ClearGroundItem.class, new BuildItemContext(item.getDropper(), item));
+            }
+            return;
+        }
+        c.flag(new ItemUpdateFlag(item, ItemUpdateFlag.REMOVE_TYPE));
+    }
 
     /**
-     * Gets flags.
+     * Gets the region flags.
      *
-     * @return the flags
+     * @return The flags.
      */
     public RegionFlags getFlags() {
-		return flags;
-	}
+        return flags;
+    }
 
     /**
-     * Gets projectile flags.
+     * Gets the projectileFlags.
      *
-     * @return the projectile flags
+     * @return The projectileFlags.
      */
     public RegionFlags getProjectileFlags() {
-		return projectileFlags;
-	}
+        return projectileFlags;
+    }
 
     /**
-     * Gets npcs.
+     * Gets the npcs.
      *
-     * @return the npcs
+     * @return The npcs.
      */
     public List<NPC> getNpcs() {
-		return npcs;
-	}
+        return npcs;
+    }
+
+    public List<Node> getEntities() {
+        List<Node> entities = new ArrayList<>(npcs);
+        Arrays.stream(getObjects()).forEach(o -> entities.addAll(Arrays.asList(o)));
+        return entities;
+    }
 
     /**
-     * Gets entities.
+     * Gets the players.
      *
-     * @return the entities
-     */
-    public List<Node> getEntities()
-	{
-	    List<Node> entities = new ArrayList<>(npcs);
-		Arrays.stream(getObjects()).forEach(o -> entities.addAll(Arrays.asList(o)));
-	    return  entities;
-	}
-
-    /**
-     * Gets players.
-     *
-     * @return the players
+     * @return The players.
      */
     public List<Player> getPlayers() {
-		return players;
-	}
+        return players;
+    }
 
     /**
-     * Gets plane.
+     * Gets the plane.
      *
-     * @return the plane
+     * @return The plane.
      */
     public int getPlane() {
-		return plane;
-	}
+        return plane;
+    }
 
     /**
-     * Gets region.
+     * Gets the region.
      *
-     * @return the region
+     * @return The region.
      */
     public Region getRegion() {
-		return region;
-	}
+        return region;
+    }
 
     /**
-     * Gets chunk object.
+     * Gets an object from a region chunk.
      *
-     * @param x the x
-     * @param y the y
-     * @return the chunk object
+     * @param x The region x-coordinate.
+     * @param y The region y-coordinate.
+     * @return The scenery.
      */
     public Scenery getChunkObject(int x, int y) {
-		return getChunkObject(x, y, -1);
-	}
+        return getChunkObject(x, y, -1);
+    }
 
     /**
-     * Gets chunk object.
+     * Gets an object from a region chunk.
      *
-     * @param x        the x
-     * @param y        the y
-     * @param objectId the object id
-     * @return the chunk object
+     * @param x        The region x-coordinate.
+     * @param y        The region y-coordinate.
+     * @param objectId The object id.
+     * @return The scenery.
      */
     public Scenery getChunkObject(int x, int y, int objectId) {
-		int chunkX = x / CHUNK_SIZE;
-		int chunkY = y / CHUNK_SIZE;
-		int offsetX = x - chunkX * CHUNK_SIZE;
-		int offsetY = y - chunkY * CHUNK_SIZE;
-		RegionChunk chunk = getRegionChunk(chunkX, chunkY);
-		if (chunk instanceof BuildRegionChunk) {
-			BuildRegionChunk brc = (BuildRegionChunk) chunk;
-			return brc.get(offsetX, offsetY, brc.getIndex(offsetX, offsetY, objectId));
-		}
-		return getRegionChunk(chunkX, chunkY).getObjects()[offsetX][offsetY];
-	}
+        int chunkX = x / CHUNK_SIZE;
+        int chunkY = y / CHUNK_SIZE;
+        int offsetX = x - chunkX * CHUNK_SIZE;
+        int offsetY = y - chunkY * CHUNK_SIZE;
+        RegionChunk chunk = getRegionChunk(chunkX, chunkY);
+        if (chunk instanceof BuildRegionChunk) {
+            BuildRegionChunk brc = (BuildRegionChunk) chunk;
+            return brc.get(offsetX, offsetY, brc.getIndex(offsetX, offsetY, objectId));
+        }
+        return getRegionChunk(chunkX, chunkY).getObjects()[offsetX][offsetY];
+    }
 
     /**
-     * Gets chunk items.
+     * Gets an object from a region chunk.
      *
-     * @param x the x
-     * @param y the y
-     * @return the chunk items
+     * @param x The region x-coordinate.
+     * @param y The region y-coordinate.
+     * @return The scenery.
      */
     public List<GroundItem> getChunkItems(int x, int y) {
-		int chunkX = x / CHUNK_SIZE;
-		int chunkY = y / CHUNK_SIZE;
-		return getRegionChunk(chunkX, chunkY).getItems();
-	}
+        int chunkX = x / CHUNK_SIZE;
+        int chunkY = y / CHUNK_SIZE;
+        return getRegionChunk(chunkX, chunkY).getItems();
+    }
 
     /**
-     * Gets item.
+     * Gets a ground item from this plane.
      *
-     * @param itemId the item id
-     * @param l      the l
-     * @param player the player
-     * @return the item
+     * @param itemId The item id.
+     * @param l      The location.
+     * @param player The player.
+     * @return The item.
      */
     public GroundItem getItem(int itemId, Location l, Player player) {
-		GroundItem groundItem = null;
-		for (Item item : getChunkItems(l.getLocalX(), l.getLocalY())) {
-			GroundItem g = (GroundItem) item;
-			if (g.getId() == itemId && l.equals(g.getLocation()) && !g.isRemoved()) {
-				if (groundItem != null && (!g.isPrivate() || player == null)) {
-					continue;
-				}
-				if ((!g.isPrivate() || player == null || g.droppedBy(player))) {
-					groundItem = g;
-				}
-			}
-		}
-		return groundItem;
-	}
+        GroundItem groundItem = null;
+        for (Item item : getChunkItems(l.getLocalX(), l.getLocalY())) {
+            GroundItem g = (GroundItem) item;
+            if (g.getId() == itemId && l.equals(g.getLocation()) && !g.isRemoved()) {
+                if (groundItem != null && (!g.isPrivate() || player == null)) {
+                    continue;
+                }
+                if ((!g.isPrivate() || player == null || g.droppedBy(player))) {
+                    groundItem = g;
+                }
+            }
+        }
+        return groundItem;
+    }
 
     /**
-     * Get chunks region chunk [ ] [ ].
+     * Gets the region chunks.
      *
-     * @return the region chunk [ ] [ ]
+     * @return The chunks.
      */
     public RegionChunk[][] getChunks() {
-		return chunks;
-	}
+        return chunks;
+    }
 
 }

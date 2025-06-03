@@ -6,6 +6,10 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.util.*
 
+/**
+ * Represents the game settings used for this game instance.
+ * @author Vexia
+ */
 class GameSettings internal constructor(
     var name: String,
     var isBeta: Boolean,
@@ -39,9 +43,17 @@ class GameSettings internal constructor(
     val isHosted: Boolean
         get() = !isDevMode
 
-    override fun toString(): String = "GameSettings [name=$name, debug=$isBeta, devMode=$isDevMode, gui=$isGui, worldId=$worldId]"
+    override fun toString(): String =
+        "GameSettings [name=$name, debug=$isBeta, devMode=$isDevMode, gui=$isGui, worldId=$worldId]"
 
     companion object {
+        /**
+         * Parses a JSONObject and creates a new GameSettings object from it.
+         * @author Ceikry
+         *
+         * @param data the JSONObject to parse.
+         * @return the settings object.
+         */
         fun parse(data: JSONObject): GameSettings {
             val name = ServerConstants.SERVER_NAME
             val debug = data["debug"] as Boolean
@@ -101,6 +113,11 @@ class GameSettings internal constructor(
             )
         }
 
+        /**
+         * Gets the properties.
+         * @param path the path.
+         * @return the properties.
+         */
         private fun getProperties(path: String): Properties {
             val properties = Properties()
             try {

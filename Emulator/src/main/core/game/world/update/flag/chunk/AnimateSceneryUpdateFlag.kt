@@ -5,14 +5,21 @@ import core.game.world.update.flag.context.Animation
 import core.net.packet.IoBuffer
 import core.net.packet.out.AnimateObjectPacket
 
-class AnimateSceneryUpdateFlag(
-    context: Animation,
-) : UpdateFlag<Animation>(context) {
+/**
+ * The animate object update flag.
+ * @author Emperor
+ */
+class AnimateObjectUpdateFlag(context: Animation?) : UpdateFlag<Animation?>(context) {
+
     override fun write(buffer: IoBuffer) {
-        AnimateObjectPacket.write(buffer, context)
+        AnimateObjectPacket.write(buffer, context!!)
     }
 
-    override fun data(): Int = 0
+    override fun data(): Int {
+        return 0
+    }
 
-    override fun ordinal(): Int = 0
+    override fun ordinal(): Int {
+        return 0
+    }
 }

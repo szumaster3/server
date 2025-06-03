@@ -15,6 +15,8 @@ import java.util.*
  * conditions and initialization logic.
  *
  * @property name The name of the world event.
+ *
+ * @author Ceikry
  */
 abstract class WorldEvent(
     var name: String,

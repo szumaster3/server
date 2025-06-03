@@ -5,8 +5,18 @@ import core.game.world.map.RegionChunk
 import core.net.packet.PacketRepository
 import core.net.packet.context.ClearChunkContext
 import core.net.packet.out.ClearRegionChunk
+import java.util.*
 
+/**
+ * Handles the rendering of the player's surrounding map chunks.
+ * @author Emperor
+ */
 object MapChunkRenderer {
+    /**
+     * Sends the map chunk rendering packet.
+     *
+     * @param player The player.
+     */
     @JvmStatic
     fun render(player: Player) {
         val v = player.viewport
@@ -19,10 +29,7 @@ object MapChunkRenderer {
             for (y in 0 until sizeY) {
                 val previous = last[x][y] ?: continue
                 if (!containsChunk(current, previous)) {
-                    PacketRepository.send(
-                        ClearRegionChunk::class.java,
-                        ClearChunkContext(player, previous),
-                    )
+                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
                 } else {
                     updated.add(previous)
                 }
@@ -43,10 +50,14 @@ object MapChunkRenderer {
         }
     }
 
-    private fun containsChunk(
-        list: Array<Array<RegionChunk>>,
-        c: RegionChunk,
-    ): Boolean {
+    /**
+     * Checks if the chunks list contains the specified region chunk.
+     *
+     * @param list The list to search.
+     * @param c The region chunk.
+     * @return `True` if so.
+     */
+    private fun containsChunk(list: Array<Array<RegionChunk>>, c: RegionChunk): Boolean {
         val sizeList = list.size
         for (x in 0 until sizeList) {
             val chunkSize: Int = list[x].size

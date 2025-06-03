@@ -5,72 +5,86 @@ import core.game.world.map.RegionChunk;
 import core.game.world.map.Viewport;
 
 /**
- * The type Player flag.
+ * A class holding a player's updating flags.
+ *
+ * @author Emperor
  */
 public final class PlayerFlag {
 
+    /**
+     * If the scene graph has been updated during this tick.
+     */
     private boolean updateSceneGraph;
 
+    /**
+     * The last viewport.
+     */
     private RegionChunk[][] lastViewport = new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE];
 
+    /**
+     * The location the player was standing on when last scene graph update
+     * occured.
+     */
     private Location lastSceneGraph;
 
     /**
-     * Instantiates a new Player flag.
+     * Constructs a new {@code PlayerFlags} {@code Object}.
      */
     public PlayerFlag() {
-
+        /*
+         * empty.
+         */
     }
 
     /**
-     * Is update scene graph boolean.
+     * Gets the updateSceneGraph.
      *
-     * @return the boolean
+     * @return The updateSceneGraph.
      */
     public boolean isUpdateSceneGraph() {
         return updateSceneGraph;
     }
 
     /**
-     * Sets update scene graph.
+     * Sets the updateSceneGraph.
      *
-     * @param updateSceneGraph the update scene graph
+     * @param updateSceneGraph The updateSceneGraph to set.
      */
     public void setUpdateSceneGraph(boolean updateSceneGraph) {
         this.updateSceneGraph = updateSceneGraph;
     }
 
     /**
-     * Gets last scene graph.
+     * Gets the lastSceneGraph.
      *
-     * @return the last scene graph
+     * @return The lastSceneGraph.
      */
     public Location getLastSceneGraph() {
         return lastSceneGraph;
     }
 
     /**
-     * Sets last scene graph.
+     * Sets the lastSceneGraph.
      *
-     * @param lastSceneGraph the last scene graph
+     * @param lastSceneGraph The lastSceneGraph to set.
      */
     public void setLastSceneGraph(Location lastSceneGraph) {
         this.lastSceneGraph = lastSceneGraph;
     }
 
     /**
-     * Get last viewport region chunk [ ] [ ].
+     * Gets the lastViewport.
      *
-     * @return the region chunk [ ] [ ]
+     * @return The lastViewport.
      */
     public RegionChunk[][] getLastViewport() {
         return lastViewport;
     }
 
     /**
-     * Sets last viewport.
+     * Sets the lastViewport.
      *
-     * @param lastViewport the last viewport
+     * @param lastViewport The lastViewport to set.
      */
     public void setLastViewport(RegionChunk[][] lastViewport) {
         this.lastViewport = lastViewport;

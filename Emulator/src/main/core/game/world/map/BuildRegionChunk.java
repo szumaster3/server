@@ -1,5 +1,6 @@
 package core.game.world.map;
 
+
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.scenery.Constructed;
@@ -17,37 +18,34 @@ import java.util.ArrayList;
 import static core.api.ContentAPIKt.log;
 
 /**
- * The type Build region chunk.
+ * A region chunk, used for easily modifying objects.
+ *
+ * @author Emperor
  */
 public class BuildRegionChunk extends RegionChunk {
 
     /**
-     * The constant ARRAY_SIZE.
+     * The maximum amount of objects to be stored on one tile in the chunk.
      */
     public static final int ARRAY_SIZE = 10;
 
+    /**
+     * The list of changes made.
+     */
     private final Scenery[][][] objects;
 
     /**
-     * Instantiates a new Build region chunk.
+     * Constructs a new {@code BuildRegionChunk} {@code Object}
      *
-     * @param base     the base
-     * @param rotation the rotation
-     * @param plane    the plane
+     * @param base     The base location.
+     * @param rotation The rotation.
+     * @param plane    The region plane.
      */
     public BuildRegionChunk(Location base, int rotation, RegionPlane plane) {
         super(base, rotation, plane);
         this.objects = new Scenery[ARRAY_SIZE][8][8];
     }
 
-    /**
-     * Instantiates a new Build region chunk.
-     *
-     * @param base     the base
-     * @param rotation the rotation
-     * @param plane    the plane
-     * @param objects  the objects
-     */
     public BuildRegionChunk(Location base, int rotation, RegionPlane plane, Scenery[][] objects) {
         this(base, rotation, plane);
         for (int x = 0; x < SIZE; x++) {
@@ -197,9 +195,9 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Remove.
+     * Removes the scenery.
      *
-     * @param object the object
+     * @param object The object to remove.
      */
     public void remove(Scenery object) {
         int chunkX = object.getLocation().getChunkOffsetX();
@@ -224,9 +222,9 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Add.
+     * Adds the scenery.
      *
-     * @param object the object
+     * @param object The object to add.
      */
     public void add(Scenery object) {
         int chunkX = object.getLocation().getChunkOffsetX();
@@ -253,9 +251,9 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Store.
+     * Stores an object on the region chunk.
      *
-     * @param object the object
+     * @param object The object.
      */
     public void store(Scenery object) {
         if (object == null) {
@@ -284,12 +282,11 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Gets index.
+     * Gets the objects index for the given object id.
      *
-     * @param x        the x
-     * @param y        the y
-     * @param objectId the object id
-     * @return the index
+     * @param x        The x-coordinate on the region chunk.
+     * @param y        The y-coordinate on the region chunk.
+     * @param objectId The object id.
      */
     public int getIndex(int x, int y, int objectId) {
         for (int i = 0; i < objects.length; i++) {
@@ -302,12 +299,12 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Get scenery.
+     * Gets a scenery.
      *
-     * @param x     the x
-     * @param y     the y
-     * @param index the index
-     * @return the scenery
+     * @param x     The chunk x-coordinate.
+     * @param y     The chunk y-coordinate.
+     * @param index The index (0 = default).
+     * @return The object.
      */
     public Scenery get(int x, int y, int index) {
         return objects[index][x][y];
@@ -323,10 +320,10 @@ public class BuildRegionChunk extends RegionChunk {
     }
 
     /**
-     * Get objects scenery [ ] [ ].
+     * Gets the objects.
      *
-     * @param index the index
-     * @return the scenery [ ] [ ]
+     * @param index The index.
+     * @return The objects array.
      */
     public Scenery[][] getObjects(int index) {
         return objects[index];

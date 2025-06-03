@@ -7,7 +7,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.EntityFlag;
-import core.game.world.update.flag.chunk.AnimateSceneryUpdateFlag;
+import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
@@ -435,7 +435,7 @@ public final class PacketDispatch {
     public void sendSceneryAnimation(Scenery scenery, Animation animation) {
         animation = new Animation(animation.getId(), animation.getDelay(), animation.getPriority());
         animation.setObject(scenery);
-        RegionManager.getRegionChunk(scenery.getLocation()).flag(new AnimateSceneryUpdateFlag(animation));
+        RegionManager.getRegionChunk(scenery.getLocation()).flag(new AnimateObjectUpdateFlag(animation));
     }
 
     /**

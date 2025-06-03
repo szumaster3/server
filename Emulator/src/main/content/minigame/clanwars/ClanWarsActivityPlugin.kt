@@ -25,7 +25,7 @@ import core.game.world.map.zone.RegionZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneType
 import core.game.world.map.zone.impl.MultiwayCombatZone
-import core.game.world.update.flag.chunk.AnimateSceneryUpdateFlag
+import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -82,7 +82,7 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
                             val anim = Animation.create(7386 + (scenery.id - 28174) % 3)
                             anim.setObject(scenery)
                             getRegionChunk(l).flag(
-                                AnimateSceneryUpdateFlag(
+                                AnimateObjectUpdateFlag(
                                     anim,
                                 ),
                             )

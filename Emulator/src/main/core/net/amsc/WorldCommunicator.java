@@ -14,21 +14,46 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * The type World communicator.
+ * Handles world communication.
+ *
+ * @author Emperor
  */
 public final class WorldCommunicator {
 
+    /**
+     * The handshake events producer.
+     */
     private static final EventProducer HANDSHAKE_PRODUCER = new MSHSEventProducer();
-    private static final WorldStatistics[] WORLDS = new WorldStatistics[10];
-    private static final Map<String, LoginParser> loginAttempts = new ConcurrentHashMap<>();
+
+    /**
+     * The current state.
+     */
     private static ManagementServerState state = ManagementServerState.CONNECTING;
+
+    /**
+     * The I/O session.
+     */
     private static IoSession session;
+
+    /**
+     * The world information.
+     */
+    private static final WorldStatistics[] WORLDS = new WorldStatistics[10];
+
+    /**
+     * The current login attempts.
+     */
+    private static final Map<String, LoginParser> loginAttempts = new ConcurrentHashMap<>();
+
+    /**
+     * The NIO reactor.
+     */
     private static NioReactor reactor;
 
     /**
-     * Register.
+     * Registers a new world.
      *
-     * @param session the session
+     * @param session The session.
      */
     public static void register(IoSession session) {
         WorldCommunicator.session = session;
@@ -39,12 +64,15 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Connect.
+     * Attempts to connect to the management server.
      */
     public static void connect() {
         try {
             setState(ManagementServerState.CONNECTING);
-
+			/*if (isLocallyHosted()) {
+				SystemLogger.log("Management server is hosted on local machine!");
+				reactor = NioReactor.connect(GameWorld.getSettings().getMsAddress(), 5555);
+			} else {*/
             reactor = NioReactor.connect(GameWorld.getSettings().getMsAddress(), 5555);
             //}
             reactor.start();
@@ -54,6 +82,12 @@ public final class WorldCommunicator {
         }
     }
 
+    /**
+     * Checks if the Management server is locally hosted.
+     *
+     * @return {@code True} if so.
+     * @throws IOException When an I/O exception occurs.
+     */
     private static boolean isLocallyHosted() throws IOException {
         InetAddress address = InetAddress.getByName(GameWorld.getSettings().getMsAddress());
         if (address.isAnyLocalAddress() || address.isLoopbackAddress()) {
@@ -63,7 +97,7 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Terminate.
+     * Terminates the world communicator.
      */
     public static void terminate() {
         setState(ManagementServerState.NOT_AVAILABLE);
@@ -74,29 +108,29 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Finish login attempt login parser.
+     * Gets and removes the login attempt for the given username.
      *
-     * @param username the username
-     * @return the login parser
+     * @param username The username.
+     * @return The login attempt.
      */
     public static LoginParser finishLoginAttempt(String username) {
         return loginAttempts.remove(username);
     }
 
     /**
-     * Gets local world.
+     * Gets the local world.
      *
-     * @return the local world
+     * @return The world statistics of this world server.
      */
     public static WorldStatistics getLocalWorld() {
         return WORLDS[GameWorld.getSettings().getWorldId() - 1];
     }
 
     /**
-     * Gets world.
+     * Gets the id of the world the player is connected to.
      *
-     * @param playerName the player name
-     * @return the world
+     * @param playerName The player's name.
+     * @return The world id, or -1 if the player wasn't connected.
      */
     public static int getWorld(String playerName) {
         for (int i = 0; i < WORLDS.length; i++) {
@@ -108,17 +142,17 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Gets world.
+     * Gets the world statistics for the given index.
      *
-     * @param id the id
-     * @return the world
+     * @param id The world id.
+     * @return The world statistics.
      */
     public static WorldStatistics getWorld(int id) {
         return WORLDS[id - 1];
     }
 
     /**
-     * Gets session.
+     * Gets the session.
      *
      * @return the session
      */
@@ -127,25 +161,25 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Is enabled boolean.
+     * Checks if this world is connected to the Management server.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public static boolean isEnabled() {
         return state == ManagementServerState.AVAILABLE;
     }
 
     /**
-     * Gets login attempts.
+     * Gets the login attempts mapping.
      *
-     * @return the login attempts
+     * @return The login attempts mapping.
      */
     public static Map<String, LoginParser> getLoginAttempts() {
         return loginAttempts;
     }
 
     /**
-     * Gets state.
+     * Gets the state.
      *
      * @return the state
      */
@@ -154,9 +188,9 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Sets state.
+     * Sets the state.
      *
-     * @param state the state
+     * @param state the state to set.
      */
     public static void setState(ManagementServerState state) {
         if (WorldCommunicator.state != state) {
@@ -166,7 +200,7 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Gets reactor.
+     * Gets the reactor.
      *
      * @return the reactor
      */
@@ -175,9 +209,9 @@ public final class WorldCommunicator {
     }
 
     /**
-     * Sets reactor.
+     * Sets the reactor.
      *
-     * @param reactor the reactor
+     * @param reactor the reactor to set.
      */
     public static void setReactor(NioReactor reactor) {
         WorldCommunicator.reactor = reactor;

@@ -6,9 +6,21 @@ import core.game.world.map.RegionManager
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
 
+/**
+ * Handles the player rendering.
+ * @author Emperor
+ */
 object PlayerRenderer {
+    /**
+     * The maximum amount of players to add per cycle.
+     */
     private const val MAX_ADD_COUNT = 10
 
+    /**
+     * Handles the player rendering for a player.
+     *
+     * @param player The player.
+     */
     @JvmStatic
     fun render(player: Player) {
         val buffer = IoBuffer(225, PacketHeader.SHORT)
@@ -17,15 +29,9 @@ object PlayerRenderer {
         updateLocalPosition(player, buffer, flags)
         buffer.putBits(8, info.localPlayers.size)
         val it = info.localPlayers.iterator()
-
-        // Loop through current local players and update or remove them
         while (it.hasNext()) {
             val other = it.next()
-            if (!other.isActive ||
-                !other.location.withinDistance(player.location) ||
-                other.properties.isTeleporting ||
-                other.isInvisible
-            ) {
+            if (!other.isActive || !other.location.withinDistance(player.location) || other.properties.isTeleporting || other.isInvisible) {
                 buffer.putBits(1, 1)
                 buffer.putBits(2, 3)
                 it.remove()
@@ -33,8 +39,6 @@ object PlayerRenderer {
             }
             renderLocalPlayer(player, other, buffer, flags)
         }
-
-        // Add new players that are in range but not yet local
         var count = 0
         for (other in RegionManager.getLocalPlayers(player, 15)) {
             if (other === player || !other.isActive || info.localPlayers.contains(other) || other.isInvisible) {
@@ -45,8 +49,6 @@ object PlayerRenderer {
             }
             addLocalPlayer(player, other, info, buffer, flags)
         }
-
-        // Finalize and send the update
         val masks = flags.toByteBuffer()
         masks.flip()
         if (masks.hasRemaining()) {
@@ -59,12 +61,15 @@ object PlayerRenderer {
         player.details.session.write(buffer)
     }
 
-    private fun renderLocalPlayer(
-        player: Player,
-        other: Player,
-        buffer: IoBuffer,
-        flags: IoBuffer,
-    ) {
+    /**
+     * Renders a local player.
+     *
+     * @param player The player we're updating for.
+     * @param other The player.
+     * @param buffer The buffer.
+     * @param flags The update flags buffer.
+     */
+    private fun renderLocalPlayer(player: Player, other: Player, buffer: IoBuffer, flags: IoBuffer) {
         if (other.walkingQueue.runDir != -1) {
             buffer.putBits(1, 1) // Updating
             buffer.putBits(2, 2) // Sub opcode for running
@@ -86,13 +91,16 @@ object PlayerRenderer {
         }
     }
 
-    private fun addLocalPlayer(
-        player: Player,
-        other: Player,
-        info: RenderInfo,
-        buffer: IoBuffer,
-        flags: IoBuffer,
-    ) {
+    /**
+     * Adds a local player.
+     *
+     * @param player The player.
+     * @param other The player to add.
+     * @param info The render info of the player.
+     * @param buffer The buffer.
+     * @param flags The flag based buffer.
+     */
+    private fun addLocalPlayer(player: Player, other: Player, info: RenderInfo, buffer: IoBuffer, flags: IoBuffer) {
         buffer.putBits(11, other.index)
         var offsetX = other.location.x - player.location.x
         var offsetY = other.location.y - player.location.y
@@ -122,11 +130,14 @@ object PlayerRenderer {
         }
     }
 
-    private fun updateLocalPosition(
-        local: Player,
-        buffer: IoBuffer,
-        flags: IoBuffer,
-    ) {
+    /**
+     * Updates the local player's client position.
+     *
+     * @param local The local player.
+     * @param buffer The i/o buffer.
+     * @param flags The update flags buffer.
+     */
+    private fun updateLocalPosition(local: Player, buffer: IoBuffer, flags: IoBuffer) {
         if (local.playerFlags.isUpdateSceneGraph || local.properties.isTeleporting) {
             buffer.putBits(1, 1) // Updating position
             buffer.putBits(2, 3) // Sub opcode for teleport
@@ -140,13 +151,19 @@ object PlayerRenderer {
         }
     }
 
+    /**
+     * Sets the update mask flag.
+     *
+     * @param local The local player.
+     * @param player The player to update.
+     * @param buffer The packet buffer.
+     * @param maskBuffer The mask buffer.
+     * @param sync If we should use the synced buffer.
+     * @param appearance If appearance update mask should be used in the synced
+     * buffer.
+     */
     private fun flagMaskUpdate(
-        local: Player,
-        player: Player,
-        buffer: IoBuffer,
-        maskBuffer: IoBuffer,
-        sync: Boolean,
-        appearance: Boolean,
+        local: Player, player: Player, buffer: IoBuffer, maskBuffer: IoBuffer, sync: Boolean, appearance: Boolean
     ) {
         if (player.updateMasks.isUpdateRequired) {
             buffer.putBits(1, 1)
@@ -156,13 +173,16 @@ object PlayerRenderer {
         }
     }
 
-    private fun writeMaskUpdates(
-        local: Player,
-        player: Player,
-        flags: IoBuffer,
-        appearance: Boolean,
-        sync: Boolean,
-    ) {
+    /**
+     * Updates the player flags.
+     *
+     * @param local The local player.
+     * @param player The player to update.
+     * @param flags The flags buffer.
+     * @param appearance If we should force appearance.
+     * @param sync If we should use the synced buffer.
+     */
+    private fun writeMaskUpdates(local: Player, player: Player, flags: IoBuffer, appearance: Boolean, sync: Boolean) {
         if (sync) {
             player.updateMasks.writeSynced(local, player, flags, appearance)
         } else if (player.updateMasks.isUpdateRequired) {

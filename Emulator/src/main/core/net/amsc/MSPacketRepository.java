@@ -6,18 +6,19 @@ import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
 
 /**
- * The type Ms packet repository.
+ * The Management server packet repository.
+ *
+ * @author Emperor
  */
 public final class MSPacketRepository {
-
     /**
-     * Send contact update.
+     * Sends a contact update.
      *
-     * @param username the username
-     * @param contact  the contact
-     * @param remove   the remove
-     * @param block    the block
-     * @param rank     the rank
+     * @param username The username.
+     * @param contact  The contact's username.
+     * @param remove   If we're removing the contact from the list.
+     * @param block    If the contact list is for the blocked players.
+     * @param rank     The new clan rank (or null when not updating clan rank!).
      */
     public static void sendContactUpdate(String username, String contact, boolean remove, boolean block, ClanRank rank) {
         IoBuffer buffer = new IoBuffer(block ? 5 : 4, PacketHeader.BYTE);
@@ -33,10 +34,10 @@ public final class MSPacketRepository {
     }
 
     /**
-     * Send clan rename.
+     * Sends the clan rename packet.
      *
-     * @param player   the player
-     * @param clanName the clan name
+     * @param player   The player.
+     * @param clanName The clan name.
      */
     public static void sendClanRename(Player player, String clanName) {
         IoBuffer buffer = new IoBuffer(7, PacketHeader.BYTE);
@@ -46,11 +47,11 @@ public final class MSPacketRepository {
     }
 
     /**
-     * Sets clan setting.
+     * Sets a clan setting.
      *
-     * @param player the player
-     * @param type   the type
-     * @param rank   the rank
+     * @param player The player.
+     * @param type   The setting type.
+     * @param rank   The rank to set.
      */
     public static void setClanSetting(Player player, int type, ClanRank rank) {
         if (!WorldCommunicator.isEnabled()) {
@@ -66,10 +67,10 @@ public final class MSPacketRepository {
     }
 
     /**
-     * Send clan kick.
+     * Sends the kicking a clan member packet.
      *
-     * @param username the username
-     * @param name     the name
+     * @param username The player's username.
+     * @param name     The name.
      */
     public static void sendClanKick(String username, String name) {
         IoBuffer buffer = new IoBuffer(9, PacketHeader.BYTE);
@@ -79,12 +80,12 @@ public final class MSPacketRepository {
     }
 
     /**
-     * Send chat setting.
+     * Sends the chat settings.
      *
-     * @param player         the player
-     * @param publicSetting  the public setting
-     * @param privateSetting the private setting
-     * @param tradeSetting   the trade setting
+     * @param player         The player.
+     * @param publicSetting  The public chat setting.
+     * @param privateSetting The private chat setting.
+     * @param tradeSetting   The trade setting.
      */
     public static void sendChatSetting(Player player, int publicSetting, int privateSetting, int tradeSetting) {
         IoBuffer buffer = new IoBuffer(13, PacketHeader.BYTE);
