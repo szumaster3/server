@@ -220,18 +220,6 @@ public final class RegionFlags {
         Pair<Integer, Integer> indices = getFlagIndex(x, y);
         RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = -1;
     }
-    /**
-     * Adds a clipping flag at the specified position within the given region plane.
-     *
-     * @param plane         the region plane where the clipping is set
-     * @param x             the X coordinate of the tile to set the clipping on
-     * @param y             the Y coordinate of the tile to set the clipping on
-     * @param clippingFlag  the bitwise flag representing the type of blockage (e.g., NPC)
-     */
-    public void addNpcClipping(RegionPlane plane, int x, int y, int clippingFlag) {
-        int[][] clippingFlags = plane.getFlags().clippingFlags;
-        clippingFlags[x][y] |= clippingFlag;
-    }
 
     /**
      * Flags a door object (type 0-3).

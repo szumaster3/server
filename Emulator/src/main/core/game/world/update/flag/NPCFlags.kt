@@ -162,17 +162,6 @@ sealed class NPCFlags(
      * Expects [Animation] context.
      */
     class AnimationSequence : NPCFlags(0x100, 7, EntityFlag.AnimSeq) {
-        override fun writeTo(
-            buffer: IoBuffer,
-            context: Any?,
-        ) {
-            if (context !is Animation) {
-                logInvalidType(context, typeOf<Animation>())
-                return
-            }
-            buffer.p2(context.id)
-            buffer.p1(context.delay)
-        }
     }
 
     /**
