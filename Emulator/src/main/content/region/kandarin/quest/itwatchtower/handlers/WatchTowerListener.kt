@@ -472,7 +472,7 @@ class WatchTowerListener : InteractionListener {
                 dialogueLine("You memorise what is written on the scroll."),
                 onComplete = {
                     removeItem(player, node.asItem(), Container.INVENTORY)
-                    sendDialogueLines(player, "You can now cast the Watchtower teleport spell... ...Provided you", "have the requiired runes and magic level.")
+                    sendDialogueLines(player, "You can now cast the Watchtower teleport spell... ...Provided you", "have the required runes and magic level.")
                     setAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, true)
                     sendMessage(player, "The scroll crumbles to dust.")
                 }
