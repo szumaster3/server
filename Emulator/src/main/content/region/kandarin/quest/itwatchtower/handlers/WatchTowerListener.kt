@@ -656,39 +656,52 @@ class WatchTowerListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles pulling the lever.
+         */
 
         on(Scenery.LEVER_2794, IntType.SCENERY, "pull") { player, node ->
             val npc = NPC(NPCs.WATCHTOWER_WIZARD_872)
             sendMessage(player,"You pull the lever...")
 
-            if(isQuestComplete(player, Quests.WATCHTOWER)) {
+            if(isQuestComplete(player, Quests.WATCHTOWER) || getQuestStage(player, Quests.WATCHTOWER) == 0) {
                 val message = when(node.location) {
                     Location.create(2927, 4715, 2) -> "The lever is stuck in the down position."
                     else -> "It had no effect."
                 }
                 sendMessage(player, message)
+                return@on true
             }
 
-            for (i in (3027..3030)){
-                if (getVarbit(player, i) == 1){
-                    teleport(player,Location.create(2928, 4715, 2))
-                    sendMessage(player, "The magic force field activates.")
-                    sendSequenceDialogue(player,
-                        npcLine(npc, FaceAnim.HAPPY, "Marvellous!, It works! The town will now be safe."),
-                        npcLine(npc, FaceAnim.HAPPY, "Your help was invaluable. Take this payment as a token", "of my gratitude."),
-                        npcLine(npc, FaceAnim.HAPPY, "Also, let me improve your Magic level for you."),
-                        npcLine(npc, FaceAnim.HAPPY, "Here is a special item for you - it's a new spell. Read", "the scroll and you will be able to teleport yourself here."),
-                        onComplete = {
-                            finishQuest(player, Quests.WATCHTOWER)
-                        }
-                    )
-                } else {
-                    sendMessage(player,"You need to put the crystals on the correct pillars before the shield will work.")
-                    sendMessage(player,"All that happens now is a rather unsatisfying clunking noise.")
-                }
+            for (i in (3027..3030)) if (getVarbit(player, i) != 1) {
+                sendMessage(player,"You need to put the crystals on the correct pillars before the shield will work.")
+                sendMessage(player,"All that happens now is a rather unsatisfying clunking noise.")
+                return@on true
             }
+
+            teleport(player, Location.create(2928, 4715, 2))
+            sendMessage(player, "The magic force field activates.")
+            sendSequenceDialogue(player,
+                npcLine(npc, FaceAnim.HAPPY, "Marvellous!, It works! The town will now be safe."),
+                npcLine(npc, FaceAnim.HAPPY, "Your help was invaluable. Take this payment as a token", "of my gratitude."),
+                npcLine(npc, FaceAnim.HAPPY, "Also, let me improve your Magic level for you."),
+                npcLine(npc, FaceAnim.HAPPY, "Here is a special item for you - it's a new spell. Read", "the scroll and you will be able to teleport yourself here."),
+                onComplete = {
+                    finishQuest(player, Quests.WATCHTOWER)
+                }
+            )
             return@on true
         }
+
+        /*
+         * Handles exit from ogres enclave.
+         */
+
+        on(Scenery.CAVE_EXIT_32494, IntType.SCENERY, "exit") { player, _ ->
+            teleport(player, Location.create(2541, 3054, 0))
+            return@on true
+        }
+
     }
 
     private fun searchBush(player: Player, item: Pair<Int, String>?): Boolean {
