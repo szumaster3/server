@@ -36,6 +36,7 @@ class CombinationLockInterface : InterfaceListener {
         /*
          * Handles cleanup when the interface is closed.
          */
+
         onClose(DOORLOCKINTERFACE) { player, _ ->
             for (i in 1..4) removeAttribute(player, "tt-letter-$i")
             return@onClose true
