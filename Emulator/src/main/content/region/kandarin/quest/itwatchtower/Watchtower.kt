@@ -61,13 +61,17 @@ class Watchtower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTO
         }
 
         if (stage == 60) {
-            line(player, "I used some cave nightshade to distract the enclave guard.", line++, true)
-            line(player, "I need to defeat the ogre shamans and find the other crystals.", line++)
+            line(player, "I used some cave nightshade to distract", line++, true)
+            line(player, "the enclave guard.", line++, true)
+            line(player, "I need to defeat the ogre shamans", line++)
+            line(player, "and find the other !!crystals??.", line++)
         }
 
         if(stage == 70) {
-            line(player, "I tried to defeat the shamans, but they are protected by powerful magics!", line++)
-            line(player, "I should speak with the Watchtower wizard to see if he has any advice for me.", line++)
+            line(player, "I tried to defeat the shamans, but they are", line++)
+            line(player, "protected by powerful magics!", line++)
+            line(player, "I should speak with the !!Watchtower wizard?? to see if", line++)
+            line(player, "he has any advice for me.", line++)
         }
 
         if(stage == 80) {
@@ -81,7 +85,7 @@ class Watchtower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTO
 
         if(stage == 90) {
             line(player, "I killed all the ogre shamans.", line++, true)
-            line(player, "I need to return all the crystals to the Watchtower wizard.", line++)
+            line(player, "I need to return all the crystals to the !!Watchtower wizard??.", line++)
         }
 
         if (stage == 100) {
@@ -106,6 +110,7 @@ class Watchtower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTO
         drawReward(player, "5000 coins", ln)
         rewardXP(player, Skills.MAGIC, 15250.0)
         addItemOrDrop(player, Items.COINS_995, 5000)
+        addItem(player, Items.SPELL_SCROLL_2396, 1)
         removeAttributes(player, GameAttributes.WATCHTOWER_ROCK_CAKE)
     }
 

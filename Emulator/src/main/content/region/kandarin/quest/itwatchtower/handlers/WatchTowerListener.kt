@@ -618,6 +618,7 @@ class WatchTowerListener : InteractionListener {
                 return@on true
             }
 
+            animate(player, SkillingTool.getPickaxe(player)!!.animation)
             sendItemDialogue(player, Items.CRYSTAL_2383, "A crack appears in the rock and you prise a crystal out.")
             addItem(player, Items.CRYSTAL_2383, 1)
             return@on true
@@ -671,6 +672,10 @@ class WatchTowerListener : InteractionListener {
                             finishQuest(player, Quests.WATCHTOWER)
                         }
                     )
+                } else {
+                    sendMessage(player,"You pull the lever...")
+                    sendMessage(player,"You need to put the crystals on the correct pillars before the shield will work.")
+                    sendMessage(player,"All that happens now is a rather unsatisfying clunking noise.")
                 }
             }
             return@on true
