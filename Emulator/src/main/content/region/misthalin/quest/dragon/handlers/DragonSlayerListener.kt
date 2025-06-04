@@ -121,7 +121,7 @@ class DragonSlayerListener : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, mapPieces, *mapPieces) { player, _, _ ->
-            if (!anyInInventory(player, Items.MAP_PART_1537, Items.MAP_PART_1536, Items.MAP_PART_1535)) {
+            if (!anyInInventory(player, *mapPieces)) {
                 sendMessage(player, "You don't have all the map pieces yet.")
                 return@onUseWith false
             }
@@ -140,20 +140,27 @@ class DragonSlayerListener : InteractionListener {
          * Handles interaction for each map pieces.
          */
 
-        on(mapPieces + Items.CRANDOR_MAP_1538, IntType.ITEM, "study") { player, node ->
-            val itemDialogues = mapOf(
-                Items.MAP_PART_1535 to "This is a piece of map that you found in Melzar's Maze. You will need to join it to the other two map pieces before you can see the route to Crandor.",
-                Items.MAP_PART_1536 to "This is a piece of map that you got from Wormbrain, the goblin thief. You will need to join it to the other two map pieces before you can see the route to Crandor.",
-                Items.MAP_PART_1537 to "This is a piece of map that you found in a secret chest in the Dwarven Mine. You will need to join it to the other two map pieces before you can see the route to Crandor."
-            )
-
-            itemDialogues[node.id]?.let { dialogue ->
-                sendItemDialogue(player, node.id, dialogue)
-            } ?: run {
-                openInterface(player, Components.DRAGON_SLAYER_QIP_MAP_547)
+        on(mapPieces, IntType.ITEM, "study") { player, node ->
+            val dialogue = when (node.id) {
+                Items.MAP_PART_1535 -> "This is a piece of map that you found in Melzar's Maze. You will need to join it to the other two map pieces before you can see the route to Crandor."
+                Items.MAP_PART_1536 -> "This is a piece of map that you got from Wormbrain, the goblin thief. You will need to join it to the other two map pieces before you can see the route to Crandor."
+                Items.MAP_PART_1537 -> "This is a piece of map that you found in a secret chest in the Dwarven Mine. You will need to join it to the other two map pieces before you can see the route to Crandor."
+                else -> " "
             }
+
+            sendItemDialogue(player, node.id, dialogue)
             return@on true
         }
+
+        /*
+         * Handles opening crandor map.
+         */
+
+        on(Items.CRANDOR_MAP_1538, IntType.ITEM, "study") { player, _ ->
+            openInterface(player, Components.DRAGON_SLAYER_QIP_MAP_547)
+            return@on true
+        }
+
     }
 
     companion object {
