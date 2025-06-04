@@ -657,8 +657,18 @@ class WatchTowerListener : InteractionListener {
         }
 
 
-        on(Scenery.LEVER_2794, IntType.SCENERY, "pull") { player, _ ->
+        on(Scenery.LEVER_2794, IntType.SCENERY, "pull") { player, node ->
             val npc = NPC(NPCs.WATCHTOWER_WIZARD_872)
+            sendMessage(player,"You pull the lever...")
+
+            if(isQuestComplete(player, Quests.WATCHTOWER)) {
+                val message = when(node.location) {
+                    Location.create(2927, 4715, 2) -> "The lever is stuck in the down position."
+                    else -> "It had no effect."
+                }
+                sendMessage(player, message)
+            }
+
             for (i in (3027..3030)){
                 if (getVarbit(player, i) == 1){
                     teleport(player,Location.create(2928, 4715, 2))
@@ -673,7 +683,6 @@ class WatchTowerListener : InteractionListener {
                         }
                     )
                 } else {
-                    sendMessage(player,"You pull the lever...")
                     sendMessage(player,"You need to put the crystals on the correct pillars before the shield will work.")
                     sendMessage(player,"All that happens now is a rather unsatisfying clunking noise.")
                 }
@@ -684,7 +693,7 @@ class WatchTowerListener : InteractionListener {
 
     private fun searchBush(player: Player, item: Pair<Int, String>?): Boolean {
         when {
-            item == null -> sendPlayerDialogue(player, "Hmmm, nothing here.", FaceAnim.NEUTRAL)
+            item == null || getQuestStage(player, Quests.WATCHTOWER) < 1 -> sendPlayerDialogue(player, "Hmmm, nothing here.", FaceAnim.NEUTRAL)
             !inInventory(player, item.first) -> {
                 sendPlayerDialogue(player, item.second, FaceAnim.NEUTRAL)
                 addItem(player, item.first)

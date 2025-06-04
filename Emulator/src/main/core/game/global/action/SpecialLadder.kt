@@ -468,6 +468,10 @@ enum class SpecialLadder(
         ladderLoc = Location.create(2914, 10188, 0),
         destLoc = Location.create(1943, 4705, 1),
     ),
+    REVIVED_WATCHTOWER_LADDER_DOWN(
+        ladderLoc = Location.create(2933, 4711, 2),
+        destLoc = Location.create(2549, 3112, 1),
+    ),
     SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_DOWN(
         ladderLoc = Location.create(2715, 3472, 3),
         destLoc = Location.create(2714, 3472, 1),
