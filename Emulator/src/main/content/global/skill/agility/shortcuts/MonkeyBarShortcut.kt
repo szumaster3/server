@@ -44,12 +44,11 @@ class MonkeyBarShortcut : AgilityShortcut {
                 direct = Direction.SOUTH
             }
         } else if (scenery.id == 2321) {
-            direct =
-                if (player.location.y >= 9494) {
-                    Direction.SOUTH
-                } else {
-                    Direction.NORTH
-                }
+            direct = if (player.location.y >= 9494) {
+                Direction.SOUTH
+            } else {
+                Direction.NORTH
+            }
         }
 
         val start = player.location
@@ -143,16 +142,15 @@ class MonkeyBarShortcut : AgilityShortcut {
     }
 
     companion object {
-        private val MBAR_LOCATIONS =
-            arrayOf(
-                arrayOf(Location(3120, 9969, 0), Location.create(3121, 9969, 0)),
-                arrayOf(Location(3119, 9969, 0), Location.create(3120, 9969, 0)),
-                arrayOf(Location(3120, 9964, 0), Location.create(3121, 9964, 0)),
-                arrayOf(Location.create(3120, 9963, 0), Location.create(3120, 9964, 0)),
-                arrayOf(Location(2598, 9489, 0), Location(2597, 9488, 0)),
-                arrayOf(Location(2598, 9489, 0), Location(2600, 9488, 0)),
-                arrayOf(Location(2598, 9494, 0), Location(2597, 9495, 0)),
-                arrayOf(Location(2599, 9494, 0), Location(2600, 9495, 0)),
-            )
+        private val MBAR_LOCATIONS = arrayOf(
+            arrayOf(Location(3120, 9969, 0), Location.create(3121, 9969, 0)),
+            arrayOf(Location(3119, 9969, 0), Location.create(3120, 9969, 0)),
+            arrayOf(Location(3120, 9964, 0), Location.create(3121, 9964, 0)),
+            arrayOf(Location.create(3120, 9963, 0), Location.create(3120, 9964, 0)),
+            arrayOf(Location(2598, 9489, 0), Location(2597, 9488, 0)),
+            arrayOf(Location(2598, 9489, 0), Location(2600, 9488, 0)),
+            arrayOf(Location(2598, 9494, 0), Location(2597, 9495, 0)),
+            arrayOf(Location(2599, 9494, 0), Location(2600, 9495, 0)),
+        )
     }
 }

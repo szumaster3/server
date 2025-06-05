@@ -12,10 +12,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 
 class PressurePad : MovementHook {
-    override fun handle(
-        e: Entity,
-        dest: Location,
-    ): Boolean {
+
+    override fun handle(e: Entity, dest: Location): Boolean {
         val dir = e.direction
         val player = e as Player
         val start = dest.transform(-dir.stepX, -dir.stepY, 0)
@@ -40,8 +38,7 @@ class PressurePad : MovementHook {
                         if (hit < 2) {
                             hit = 2
                         }
-                        AgilityHandler
-                            .failWalk(
+                        AgilityHandler.failWalk(
                                 player,
                                 1,
                                 player.location,

@@ -1,6 +1,7 @@
 package content.global.skill.agility.courses
 
 import content.data.GameAttributes
+import content.global.skill.agility.AgilityCourse
 import core.api.getAttribute
 import core.api.playAudio
 import core.api.sendMessage
@@ -18,16 +19,9 @@ import core.tools.DARK_GREEN
 import org.rs.consts.Sounds
 
 @Initializable
-class GnomeStrongholdCourse
-@JvmOverloads
-constructor(
-    player: Player? = null,
-) : content.global.skill.agility.AgilityCourse(player, 7, 39.0) {
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+class GnomeStrongholdCourse @JvmOverloads constructor(player: Player? = null) : AgilityCourse(player!!, 7, 39.0) {
+
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         getCourse(player)
         val scenery = node as Scenery
         when (scenery.id) {
@@ -204,10 +198,9 @@ constructor(
                 return Location.create(x, n.getLocation().y - 1, 0)
             }
 
-            4058, 154 ->
-                if (n.getLocation().y == 3431) {
-                    return n.getLocation().transform(0, -1, 0)
-                }
+            4058, 154 -> if (n.getLocation().y == 3431) {
+                return n.getLocation().transform(0, -1, 0)
+            }
         }
         return null
     }

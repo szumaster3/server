@@ -1,12 +1,10 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
-import content.region.misthalin.handlers.varrock.VarrockAchievementDiary.Companion.MediumTasks
 import core.api.finishDiaryTask
 import core.api.teleport
 import core.api.unlock
 import core.api.visualize
-import core.game.diary.DiaryLevel
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player

@@ -12,10 +12,8 @@ import core.game.world.map.RegionManager.getObject
 import core.game.world.update.flag.context.Animation
 
 class BladeTrap : MovementHook {
-    override fun handle(
-        e: Entity,
-        l: Location,
-    ): Boolean {
+
+    override fun handle(e: Entity, l: Location): Boolean {
         if (BrimhavenArena.sawBladeActive) {
             val dir = e.direction
             val player = e as Player
@@ -38,18 +36,17 @@ class BladeTrap : MovementHook {
                             direction = s
                         }
                         val loc = player.location
-                        AgilityHandler
-                            .failWalk(
-                                player,
-                                1,
-                                loc,
-                                loc.transform(direction),
-                                loc.transform(direction),
-                                Animation.create(846),
-                                10,
-                                3,
-                                "You were hit by the saw blade!",
-                            ).direction = d
+                        AgilityHandler.failWalk(
+                            player,
+                            1,
+                            loc,
+                            loc.transform(direction),
+                            loc.transform(direction),
+                            Animation.create(846),
+                            10,
+                            3,
+                            "You were hit by the saw blade!",
+                        ).direction = d
                         player.logoutListeners.remove("blade-trap")
                         return true
                     }

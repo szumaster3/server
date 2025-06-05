@@ -17,10 +17,8 @@ import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 
 class DartTrap : MovementHook {
-    override fun handle(
-        e: Entity,
-        l: Location,
-    ): Boolean {
+
+    override fun handle(e: Entity, l: Location): Boolean {
         val dir = e.direction
         val player = e as Player
         val start = l.transform(-dir.stepX, -dir.stepY, 0)
@@ -63,18 +61,17 @@ class DartTrap : MovementHook {
                                 CameraViewPacket::class.java,
                                 CameraContext(player, CameraContext.CameraType.ROTATION, l.x, l.y, 350, 1, 100),
                             )
-                            Projectile
-                                .create(
-                                    startProj,
-                                    l.transform(-dir.stepX * 4, -dir.stepY * 4, 0),
-                                    270,
-                                    0,
-                                    0,
-                                    46,
-                                    200,
-                                    5,
-                                    11,
-                                ).send()
+                            Projectile.create(
+                                startProj,
+                                l.transform(-dir.stepX * 4, -dir.stepY * 4, 0),
+                                270,
+                                0,
+                                0,
+                                46,
+                                200,
+                                5,
+                                11,
+                            ).send()
                         }
                     } else if (count == 2) {
                         if (failed) {
@@ -83,18 +80,17 @@ class DartTrap : MovementHook {
                                 hit = 2
                             }
                             delay = 1
-                            AgilityHandler
-                                .failWalk(
-                                    player,
-                                    1,
-                                    l,
-                                    start,
-                                    start,
-                                    Animation.create(1114),
-                                    10,
-                                    hit,
-                                    null,
-                                ).direction = dir
+                            AgilityHandler.failWalk(
+                                player,
+                                1,
+                                l,
+                                start,
+                                start,
+                                Animation.create(1114),
+                                10,
+                                hit,
+                                null,
+                            ).direction = dir
                         } else {
                             if (dir.toInteger() % 2 != 0) {
                                 val mod = if (dir == Direction.WEST) -1 else 1

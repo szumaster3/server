@@ -2,9 +2,11 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.api.*
+import core.api.animate
+import core.api.playAudio
+import core.api.runTask
+import core.api.sendMessage
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -21,12 +23,7 @@ class FaladorMineCreviceShortcut : AgilityShortcut(intArrayOf(30868), 42, 0.0, "
     private val westExit = Location.create(3028, 9806, 0)
     private val eastExit = Location.create(3035, 9806, 0)
 
-    override fun run(player: Player, scenery: Scenery, option: String?, failed: Boolean) {
-        if (!hasLevelDyn(player, Skills.AGILITY, level)) {
-            sendDialogue(player, "You need an agility level of at least $level to do this.")
-            return
-        }
-
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         val destination = if (player.location == eastExit) westExit else eastExit
 
         playAudio(player, Sounds.SQUEEZE_THROUGH_ROCKS_1310)

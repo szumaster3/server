@@ -3,9 +3,7 @@ package content.global.skill.agility.shortcuts
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
 import core.api.*
-import core.game.node.Node
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -19,14 +17,9 @@ import kotlin.random.Random
  * Represents the Strange floor shortcut between the entrance and the Poison spider area.
  */
 @Initializable
-class TaverleyDungeonJumpShortcut : AgilityShortcut(intArrayOf(9294), 80, 0.0, "jump-over") {
+class TaverleyStrangeFloorShortcut : AgilityShortcut(intArrayOf(9294), 80, 12.5, "jump-over") {
 
-    override fun run(player: Player, scenery: Scenery, option: String?, failed: Boolean) {
-        if (!hasLevelDyn(player, Skills.AGILITY, 80)) {
-            sendMessage(player, "You need an agility level of at least 80 to do this.")
-            return
-        }
-
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         val fromLeft = player.location.x < 2880
         val start = Location.create(if (fromLeft) 2877 else 2881, 9813, 0)
         val end = Location.create(if (fromLeft) 2881 else 2877, 9813, 0)
@@ -63,11 +56,5 @@ class TaverleyDungeonJumpShortcut : AgilityShortcut(intArrayOf(9294), 80, 0.0, "
                 return false
             }
         })
-    }
-
-    override fun getDestination(node: Node, n: Node): Location {
-        val player = node.asPlayer()
-        val fromLeft = player.location.x < 2880
-        return Location.create(if (fromLeft) 2881 else 2877, 9813, 0)
     }
 }

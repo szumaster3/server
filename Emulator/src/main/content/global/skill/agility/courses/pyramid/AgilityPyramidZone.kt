@@ -11,9 +11,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Plugin
 
-class AgilityPyramidZone :
-    MapZone("agility pyramid", true),
-    Plugin<Any?> {
+class AgilityPyramidZone : MapZone("agility pyramid", true), Plugin<Any?> {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any?> {
         ZoneBuilder.configure(this)

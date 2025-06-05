@@ -18,11 +18,8 @@ import core.plugin.Plugin
 
 @Initializable
 class BrimhavenCourse : OptionHandler() {
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val scenery = node as Scenery
         var dir = scenery.direction
         var start = player.location
@@ -31,18 +28,17 @@ class BrimhavenCourse : OptionHandler() {
                 start = scenery.location.transform(dir.stepX shl 1, dir.stepY shl 1, 0)
                 val end = scenery.location.transform(-dir.stepX * 3, -dir.stepY * 3, 0)
                 if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-                    AgilityHandler
-                        .failWalk(
-                            player,
-                            2,
-                            start,
-                            start.transform(-dir.stepX, -dir.stepY, 0),
-                            player.location.transform(0, 0, -3),
-                            Animation.create(1105),
-                            26,
-                            getHitAmount(player),
-                            "You missed the rope!",
-                        ).endAnimation = Animation.RESET
+                    AgilityHandler.failWalk(
+                        player,
+                        2,
+                        start,
+                        start.transform(-dir.stepX, -dir.stepY, 0),
+                        player.location.transform(0, 0, -3),
+                        Animation.create(1105),
+                        26,
+                        getHitAmount(player),
+                        "You missed the rope!",
+                    ).endAnimation = Animation.RESET
                     return true
                 }
                 AgilityHandler.forceWalk(player, -1, start, end, Animation.create(751), 25, getExp(player, 20.0), null)
@@ -249,32 +245,30 @@ class BrimhavenCourse : OptionHandler() {
                         } else if (count == 6) {
                             player.appearance.setAnimations()
                             player.appearance.sync()
-                            AgilityHandler
-                                .forceWalk(
-                                    player,
-                                    -1,
-                                    last,
-                                    last.transform(dir),
-                                    Animation.create(1120 + m),
-                                    5,
-                                    getExp(player, 22.0),
-                                    null,
-                                ).direction = faceDirection
+                            AgilityHandler.forceWalk(
+                                player,
+                                -1,
+                                last,
+                                last.transform(dir),
+                                Animation.create(1120 + m),
+                                5,
+                                getExp(player, 22.0),
+                                null,
+                            ).direction = faceDirection
                             player.logoutListeners.remove("brimcourse")
                             return true
                         }
                         player.logoutListeners.remove("brimcourse")
-                        AgilityHandler
-                            .forceWalk(
-                                player,
-                                -1,
-                                last,
-                                last.transform(dir).also { last = it },
-                                Animation.create(1118 + m),
-                                5,
-                                0.0,
-                                null,
-                            ).direction = faceDirection
+                        AgilityHandler.forceWalk(
+                            player,
+                            -1,
+                            last,
+                            last.transform(dir).also { last = it },
+                            Animation.create(1118 + m),
+                            5,
+                            0.0,
+                            null,
+                        ).direction = faceDirection
                         return false
                     }
                 },

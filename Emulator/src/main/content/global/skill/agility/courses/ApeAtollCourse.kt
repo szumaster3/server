@@ -21,8 +21,8 @@ class ApeAtollCourse
     @JvmOverloads
     constructor(
         player: Player? = null,
-    ) : AgilityCourse(player, 6, 450.0) {
-        override fun createInstance(player: Player?): AgilityCourse = ApeAtollCourse(player)
+    ) : AgilityCourse(player!!, 6, 450.0) {
+        override fun createInstance(player: Player): AgilityCourse = ApeAtollCourse(player)
 
         override fun handle(
             player: Player,

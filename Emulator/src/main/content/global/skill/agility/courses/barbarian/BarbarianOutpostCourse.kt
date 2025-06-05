@@ -27,10 +27,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 @Initializable
-class BarbarianOutpostCourse
-@JvmOverloads constructor(
-    player: Player? = null,
-) : AgilityCourse(player, 6, 46.2) {
+class BarbarianOutpostCourse @JvmOverloads constructor(player: Player? = null) : AgilityCourse(player!!, 6, 46.2) {
 
     override fun createInstance(player: Player): AgilityCourse = BarbarianOutpostCourse(player)
 
@@ -267,8 +264,7 @@ class BarbarianOutpostCourse
             if (perfectLaps >= 250 && player.attributes[GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD] != true) {
                 setAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, true)
                 sendMessage(
-                    player,
-                    core.tools.RED + "You've completed 250 full laps! Speak to Gunnjorn to collect your reward."
+                    player, core.tools.RED + "You've completed 250 full laps! Speak to Gunnjorn to collect your reward."
                 )
             }
         }

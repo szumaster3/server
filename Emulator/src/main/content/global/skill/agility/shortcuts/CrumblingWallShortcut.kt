@@ -16,6 +16,7 @@ import org.rs.consts.Animations
 class CrumblingWallShortcut : AgilityShortcut(intArrayOf(11844), 5, 0.0, "climb-over") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
+
         ForceMovement.run(
             player,
             if (player.location.x >= 2936) LOCATIONS[0] else LOCATIONS[1],

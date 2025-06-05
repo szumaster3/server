@@ -30,7 +30,7 @@ class TunnelShortcut : AgilityShortcut {
         this.offset = offset
     }
 
-    override fun newInstance(arg: Any?): Plugin<Any?> {
+    override fun newInstance(arg: Any?): Plugin<Any> {
         configure(TunnelShortcut(intArrayOf(9309, 9310), 26, 0.0, 0, "climb-into"))
         configure(TunnelShortcut(intArrayOf(9302, 9301), 16, 0.0, 1, "climb-into", "climb-under"))
         configure(TunnelShortcut(intArrayOf(14922), 1, 0.0, 1, "enter"))

@@ -22,7 +22,7 @@ import org.rs.consts.Sounds
 @Initializable
 class ZanarisSqueezeShortcut : AgilityShortcut(intArrayOf(Scenery.JUTTING_WALL_12127), 0, 0.0, "squeeze-past") {
 
-    override fun run(player: Player, scenery: core.game.node.scenery.Scenery, option: String?, failed: Boolean) {
+    override fun run(player: Player, scenery: core.game.node.scenery.Scenery, option: String, failed: Boolean) {
         val sc = scenery.asScenery()
         val direction = Direction.getLogicalDirection(player.location, sc.location)
         val end = player.location.transform(direction.stepX * 2, direction.stepY * 2, 0)

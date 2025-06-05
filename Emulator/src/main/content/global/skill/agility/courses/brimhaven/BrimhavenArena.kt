@@ -33,9 +33,8 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 
 @Initializable
-class BrimhavenArena :
-    MapZone("Brimhaven agility arena", true),
-    Plugin<Any?> {
+class BrimhavenArena : MapZone("Brimhaven agility arena", true), Plugin<Any?> {
+
     private fun setDispenser(player: Player) {
         if (!player.getAttribute("brim-tagged", false)) {
             setAttribute(player, "brim-tagcount", 0)

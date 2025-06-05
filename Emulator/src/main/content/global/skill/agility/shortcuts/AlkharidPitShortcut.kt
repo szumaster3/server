@@ -9,9 +9,10 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import org.rs.consts.Animations
 
 /**
- * Represents the al Kharid pit climbing shortcut.
+ * Handles shortcut for climbing the pit in Al Kharid.
  */
 @Initializable
 class AlkharidPitShortcut : AgilityShortcut(intArrayOf(9331, 9332), 38, 0.0, "climb") {
@@ -33,8 +34,8 @@ class AlkharidPitShortcut : AgilityShortcut(intArrayOf(9331, 9332), 38, 0.0, "cl
         (n as? Scenery)?.takeIf { it.id == 9331 }?.location?.transform(1, 0, 0)
 
     companion object {
-        private val ANIMATION = Animation(1148)
-        private val SCALE = Animation(740)
+        private val ANIMATION = Animation(Animations.WALK_BACKWARDS_CLIMB_1148)
+        private val SCALE = Animation(Animations.CLIMB_DOWN_B_740)
     }
 
 }

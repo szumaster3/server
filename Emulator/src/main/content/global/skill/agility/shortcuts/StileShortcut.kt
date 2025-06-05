@@ -1,9 +1,6 @@
 package content.global.skill.agility.shortcuts
 
-import core.api.animationCycles
-import core.api.forceMove
-import core.api.queueScript
-import core.api.stopExecuting
+import core.api.*
 import core.api.utils.Vector
 import core.game.activity.ActivityManager
 import core.game.interaction.IntType
@@ -47,6 +44,7 @@ class StileShortcut : InteractionListener {
                 if (n.id == FALCONRY_STILE) {
                     handleFalconry(p, endLoc)
                 }
+                sendMessage(p, "You climb over the stile.")
                 return@queueScript stopExecuting(p)
             }
             return@on true

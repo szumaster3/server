@@ -23,9 +23,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class WerewolfCourse constructor(
-    player: Player? = null,
-) : AgilityCourse(player, 5, 0.0) {
+class WerewolfCourse constructor(player: Player? = null) : AgilityCourse(player!!, 5, 0.0) {
     override fun handle(
         p: Player,
         node: Node,
@@ -35,18 +33,15 @@ class WerewolfCourse constructor(
         val n = node as Scenery
         when (n.id) {
             org.rs.consts.Scenery.STEPPING_STONE_35996 -> steppingStoneObstacle(p, n)
-            org.rs.consts.Scenery.HURDLE_5133, org.rs.consts.Scenery.HURDLE_5134, org.rs.consts.Scenery.HURDLE_5135 ->
-                jumpHurdleObstacle(
-                    p,
-                    n,
-                )
+            org.rs.consts.Scenery.HURDLE_5133, org.rs.consts.Scenery.HURDLE_5134, org.rs.consts.Scenery.HURDLE_5135 -> jumpHurdleObstacle(
+                p, n
+            )
+
             org.rs.consts.Scenery.PIPE_5152 -> squeezeThroughPipeObstacle(p, n)
             org.rs.consts.Scenery.SKULL_SLOPE_5136 -> climbSkullSlopeObstacle(p, n)
-            org.rs.consts.Scenery.ZIP_LINE_5139, org.rs.consts.Scenery.ZIP_LINE_5140, org.rs.consts.Scenery.ZIP_LINE_5141 ->
-                zipLineObstacle(
-                    p,
-                    n,
-                )
+            org.rs.consts.Scenery.ZIP_LINE_5139, org.rs.consts.Scenery.ZIP_LINE_5140, org.rs.consts.Scenery.ZIP_LINE_5141 -> zipLineObstacle(
+                p, n
+            )
         }
         return true
     }
@@ -245,13 +240,12 @@ class WerewolfCourse constructor(
         }
         if (scenery.location.y in intArrayOf(9893, 9896, 9899)) {
             when (scenery.id) {
-                org.rs.consts.Scenery.HURDLE_5133, org.rs.consts.Scenery.HURDLE_5135 ->
-                    return scenery.location
-                        .transform(
-                            1,
-                            -1,
-                            0,
-                        )
+                org.rs.consts.Scenery.HURDLE_5133, org.rs.consts.Scenery.HURDLE_5135 -> return scenery.location.transform(
+                    1,
+                    -1,
+                    0,
+                )
+
                 org.rs.consts.Scenery.HURDLE_5134 -> return if (scenery.location.x == 3543) {
                     scenery.location.transform(
                         -1,

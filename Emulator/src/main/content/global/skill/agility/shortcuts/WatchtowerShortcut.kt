@@ -2,7 +2,6 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
 import core.api.*
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
@@ -20,7 +19,7 @@ class WatchtowerShortcut : AgilityShortcut(intArrayOf(20056), 18, 31.0, "climb-u
     private val end = Location.create(2548, 3117, 1)
     private val animation = Animation.create(Animations.HUMAN_CLIMB_STAIRS_828)
 
-    override fun run(player: Player, scenery: Scenery, option: String?, failed: Boolean) {
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         if (!hasLevelDyn(player, Skills.AGILITY, 18)) {
             sendDialogue(player, "You need an agility level of at least 18 to negotiate this obstacle.")
             return
@@ -36,9 +35,5 @@ class WatchtowerShortcut : AgilityShortcut(intArrayOf(20056), 18, 31.0, "climb-u
             rewardXP(player, Skills.AGILITY, 31.0)
             stopExecuting(player)
         }
-    }
-
-    override fun getDestination(node: Node, n: Node): Location {
-        return end
     }
 }

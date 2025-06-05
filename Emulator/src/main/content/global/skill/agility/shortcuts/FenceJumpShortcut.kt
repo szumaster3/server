@@ -2,7 +2,6 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
 import core.api.submitIndividualPulse
-import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -19,7 +18,7 @@ import org.rs.consts.Animations
 @Initializable
 class FenceJumpShortcut : AgilityShortcut(intArrayOf(9300), 13, 0.0, "jump-over") {
 
-    override fun run(player: Player, scenery: Scenery, option: String?, failed: Boolean, ) {
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         player.faceLocation(scenery.location)
         submitIndividualPulse(player, object : Pulse(1, player) {
                 override fun pulse(): Boolean {
@@ -36,14 +35,6 @@ class FenceJumpShortcut : AgilityShortcut(intArrayOf(9300), 13, 0.0, "jump-over"
             runningAnim,
             18,
         )
-    }
-
-    override fun getDestination(
-        node: Node,
-        n: Node,
-    ): Location {
-        val player = node.asPlayer()
-        return if (player.location.y >= 3335) locations[1] else locations[0]
     }
 
     companion object {

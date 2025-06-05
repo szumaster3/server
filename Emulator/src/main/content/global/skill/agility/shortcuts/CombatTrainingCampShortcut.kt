@@ -2,10 +2,8 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
-import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
@@ -32,10 +30,5 @@ class CombatTrainingCampShortcut : AgilityShortcut(intArrayOf(LOOSE_RAILING_1917
             null,
             1
         )
-    }
-
-    override fun getDestination(node: Node, n: Node): Location? {
-        return if (node.location.x <= 2522) node.location.transform(1, 0, 0)
-        else node.location.transform(-1, 0, 0)
     }
 }

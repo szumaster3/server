@@ -4,6 +4,7 @@ import content.global.skill.agility.AgilityShortcut
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
+import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -16,12 +17,7 @@ import org.rs.consts.Sounds
 @Initializable
 class RockPassageShortcut : AgilityShortcut(intArrayOf(29099), 29, 0.0, "squeeze-through") {
 
-    override fun run(player: Player, scenery: core.game.node.scenery.Scenery, option: String, failed: Boolean) {
-        if (failed) {
-            sendMessage(player, "You need an agility level of at least 29 to do this.")
-            return
-        }
-
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         lock(player, 3)
         animate(player, Animation(Animations.GO_INTO_OBSTACLE_PIPE_4855))
         playAudio(player, Sounds.SQUEEZE_THROUGH_ROCKS_1310, 1)
@@ -37,7 +33,7 @@ class RockPassageShortcut : AgilityShortcut(intArrayOf(29099), 29, 0.0, "squeeze
                 teleport(player, destination)
             }
 
-            stopExecuting(player)
+            return@queueScript stopExecuting(player)
         }
     }
 }

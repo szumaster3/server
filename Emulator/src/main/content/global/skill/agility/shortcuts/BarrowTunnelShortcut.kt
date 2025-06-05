@@ -2,7 +2,6 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
 import core.api.teleport
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
@@ -21,13 +20,5 @@ class BarrowTunnelShortcut : AgilityShortcut(intArrayOf(30261, 30262, 30265), 1,
             else -> null
         }
         destination?.let { teleport(player, it) }
-    }
-
-    override fun getDestination(node: Node, n: Node): Location? {
-        return when (node.location) {
-            Location(3509, 3447) -> Location(3509, 3448)
-            Location(3500, 9811) -> Location(3500, 9812)
-            else -> null
-        }
     }
 }
