@@ -1,36 +1,34 @@
 package content.global.skill.agility.shortcuts
 
-import content.global.skill.agility.AgilityHandler
-import core.api.hasLevelDyn
-import core.api.sendMessage
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListener
-import core.game.node.entity.skill.Skills
+import content.global.skill.agility.AgilityShortcut
+import core.game.node.Node
+import core.game.node.entity.impl.ForceMovement
+import core.game.node.entity.player.Player
 import core.game.world.map.Direction
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import core.plugin.Initializable
 import org.rs.consts.Animations
-import org.rs.consts.Scenery
 
-class LowFenceShortcut : InteractionListener {
-    override fun defineListeners() {
-        on(Scenery.LOW_FENCE_12776, IntType.SCENERY, "jump-over") { player, _ ->
-            if (!hasLevelDyn(player, Skills.AGILITY, 25)) {
-                sendMessage(player, "You need an agility level of at least 25 to do this.")
-                return@on true
-            }
+@Initializable
+class LowFenceShortcut : AgilityShortcut(intArrayOf(12776), 25, 0.0, "jump-over") {
 
-            AgilityHandler.forceWalk(
-                player,
-                -1,
-                player.location,
-                player.location.transform(if (player.location.x == 3473) Direction.EAST else Direction.WEST, 1),
-                Animation(Animations.JUMP_OVER_OBSTACLE_6132),
-                10,
-                0.0,
-                null,
-                1
-            )
-            return@on true
-        }
+    override fun run(player: Player, scenery: core.game.node.scenery.Scenery, option: String?, failed: Boolean) {
+        val direction = if (player.location.x == 3473) Direction.EAST else Direction.WEST
+        val destination = player.location.transform(direction, 1)
+
+        ForceMovement.run(
+            player,
+            player.location,
+            destination,
+            Animation(Animations.JUMP_OVER_OBSTACLE_6132),
+            ForceMovement.WALKING_SPEED
+        )
+    }
+
+    override fun getDestination(node: Node, n: Node): Location {
+        val player = node.asPlayer()
+        val direction = if (player.location.x == 3473) Direction.EAST else Direction.WEST
+        return player.location.transform(direction, 1)
     }
 }

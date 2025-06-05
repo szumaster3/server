@@ -22,6 +22,7 @@ import core.game.dialogue.SequenceDialogue.npcLine
 import core.game.dialogue.SequenceDialogue.options
 import core.game.dialogue.SequenceDialogue.playerLine
 import core.game.dialogue.SequenceDialogue.sendSequenceDialogue
+import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -51,6 +52,35 @@ class WatchTowerListener : InteractionListener {
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles try to climb the ladder.
+         */
+
+        on(Scenery.LADDER_2833, IntType.SCENERY, "climb-up") { player, _ ->
+            if (getQuestStage(player, Quests.WATCHTOWER) >= 1) {
+                sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "It is the wizards' helping hand - let 'em up.", FaceAnim.FRIENDLY)
+                addDialogueAction(player) { _, _ ->
+                    ClimbActionHandler.climb(player, Animation(Animations.USE_LADDER_828), Location.create(2544, 3112, 1))
+                }
+            } else {
+                sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "You can't go up there. That's private, that is.", FaceAnim.ANNOYED)
+            }
+            return@on true
+        }
+
+        /*
+         * Handles talking to Tower guards.
+         */
+
+        on(NPCs.TOWER_GUARD_877, IntType.NPC, "talk-to") { player, _ ->
+            sendPlayerDialogue(player, "Hello. What are you doing here?", FaceAnim.HALF_ASKING)
+            addDialogueAction(player) { _, _ ->
+                sendNPCDialogue(player, NPCs.TOWER_GUARD_877, "We are the tower guards - our business is our own!", FaceAnim.ANNOYED)
+            }
+            return@on true
+        }
+
         val bushes =
             mapOf(
                 Scenery.BUSH_2798 to null,
