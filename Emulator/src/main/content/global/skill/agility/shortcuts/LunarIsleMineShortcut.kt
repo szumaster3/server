@@ -15,6 +15,7 @@ import org.rs.consts.Components
 import org.rs.consts.Scenery
 
 class LunarIsleMineShortcut : InteractionListener {
+
     override fun defineListeners() {
         on(Scenery.CAVE_ENTRANCE_11399, IntType.SCENERY, "crawl-through") { player, _ ->
             if (player.location.x != 2335) {

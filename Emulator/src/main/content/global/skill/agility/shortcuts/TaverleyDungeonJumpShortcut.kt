@@ -15,6 +15,9 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 import kotlin.random.Random
 
+/**
+ * Represents the Strange floor shortcut between the entrance and the Poison spider area.
+ */
 @Initializable
 class TaverleyDungeonJumpShortcut : AgilityShortcut(intArrayOf(9294), 80, 0.0, "jump-over") {
 

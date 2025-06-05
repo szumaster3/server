@@ -16,6 +16,9 @@ import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 import kotlin.random.Random
 
+/**
+ * Represents the Log balance shortcut near Sinclair Mansion.
+ */
 @Initializable
 class SinclairMansionLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANCE_9322, Scenery.LOG_BALANCE_9324), 48, 0.0, "walk-across") {
 

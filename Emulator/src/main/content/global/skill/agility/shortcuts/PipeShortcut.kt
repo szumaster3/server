@@ -13,11 +13,13 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * Represents the pipe shortcuts.
+ * Represents the various Pipe shortcuts.
  */
 @Initializable
 class PipeShortcut : AgilityShortcut {
+
     constructor() : super(intArrayOf(), 0, 0.0, "")
+
     constructor(ids: IntArray?, level: Int, experience: Double, vararg options: String?) : super(ids, level, experience, *options,)
 
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -68,7 +70,7 @@ class PipeShortcut : AgilityShortcut {
         }
 
         lock(player, lockTime)
-        queueScript(player, 1, QueueStrength.SOFT) {
+        queueScript(player, 0, QueueStrength.SOFT) {
             forceMove(
                 player,
                 player.location,
@@ -79,7 +81,7 @@ class PipeShortcut : AgilityShortcut {
                 if (obj.id == BARBARIAN_OUTPOST) Animations.CLIMB_THROUGH_OBSTACLE_10580 else Animations.CLIMB_INTO_OBSTACLE_10578
             )
             if (interactionTime > 0) {
-                player.animate(Animation(Animations.HUMAN_TURNS_INVISIBLE_2590), interactionTime - 2)
+                player.animate(Animation(Animations.HUMAN_TURNS_INVISIBLE_2590), 2)
                 player.animate(Animation(Animations.CLIMB_OUT_OF_OBSTACLE_10579), interactionTime)
             }
             playAudio(player, Sounds.SQUEEZE_OUT_2490, soundDelay)

@@ -16,6 +16,9 @@ import core.tools.RandomUtils
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
+/**
+ * Represents the Jutting wall shortcut.
+ */
 @Initializable
 class ZanarisSqueezeShortcut : AgilityShortcut(intArrayOf(Scenery.JUTTING_WALL_12127), 0, 0.0, "squeeze-past") {
 

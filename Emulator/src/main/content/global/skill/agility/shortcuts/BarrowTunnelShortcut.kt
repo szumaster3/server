@@ -8,13 +8,11 @@ import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.plugin.Initializable
 
+/**
+ * Represents the barrows tunnel shortcut.
+ */
 @Initializable
-class BarrowTunnelShortcut : AgilityShortcut(
-    intArrayOf(
-        30261, // WOODEN_DOORS_30261
-        30262, // WOODEN_DOORS_30262
-        30265  // WOODEN_DOORS_30265
-    ), 1, 0.0, "open") {
+class BarrowTunnelShortcut : AgilityShortcut(intArrayOf(30261, 30262, 30265), 1, 0.0, "open") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         val destination = when (scenery.id) {

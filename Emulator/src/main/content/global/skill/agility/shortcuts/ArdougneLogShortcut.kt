@@ -3,24 +3,23 @@ package content.global.skill.agility.shortcuts
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
 import core.api.*
-import core.game.node.Node
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.plugin.Initializable
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 import kotlin.random.Random
 
-class ArdougneLogShortcut : AgilityShortcut(
-    intArrayOf(Scenery.LOG_BALANCE_35997, Scenery.LOG_BALANCE_35999),
-    33,
-    0.0,
-    "walk-across"
-) {
+/**
+ * Represents the log balance shortcut in ardougne.
+ */
+@Initializable
+class ArdougneLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANCE_35997, Scenery.LOG_BALANCE_35999), 33, 0.0, "walk-across") {
+
     private val logBalanceAnimation = Animation(Animations.BALANCE_WALK_ACROSS_LOG_9908)
     private val swimmingAnimation = Animation(Animations.SWIMMING_6988)
     private val swimmingLoopAnimation = Animation(Animations.SWIMMING_LOOP_6989)

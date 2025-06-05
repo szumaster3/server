@@ -15,6 +15,9 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Animations
 
+/**
+ * Represents the climb through desert wall shortcut.
+ */
 @Initializable
 class DesertWallShortcut : OptionHandler() {
 

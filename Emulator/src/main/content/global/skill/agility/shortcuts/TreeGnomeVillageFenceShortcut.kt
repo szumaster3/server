@@ -1,7 +1,8 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
-import core.api.*
+import core.api.sendMessage
+import core.api.unlock
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
@@ -14,6 +15,9 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the squeeze through the loose railing shortcut.
+ */
 @Initializable
 class TreeGnomeVillageFenceShortcut : AgilityShortcut(intArrayOf(2186), 0, 0.0, "squeeze-through") {
 

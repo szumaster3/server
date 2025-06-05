@@ -15,6 +15,9 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the squeeze through fence shortcut.
+ */
 @Initializable
 class DraynorManorShortcut : AgilityShortcut(intArrayOf(37703), 28, 0.0, "squeeze-through") {
 
@@ -26,14 +29,14 @@ class DraynorManorShortcut : AgilityShortcut(intArrayOf(37703), 28, 0.0, "squeez
 
         val direction = if (player.location.x >= 3086) Direction.WEST else Direction.EAST
         val destination = player.location.transform(direction, 1)
-        val animation = Animation(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844)
+        val animation = Animation.create(Animations.SIDE_STEP_TO_CRAWL_THROUGH_MCGRUBOR_S_WOODS_FENCE_3844)
 
         ForceMovement.run(
             player,
             player.location,
             destination,
             animation,
-            5,
+            5
         )
     }
 

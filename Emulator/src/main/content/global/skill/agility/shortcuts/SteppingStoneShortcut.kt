@@ -15,6 +15,9 @@ import core.plugin.Plugin
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 
+/**
+ * Represents the Stepping stone shortcuts.
+ */
 @Initializable
 class SteppingStoneShortcut : OptionHandler() {
     private val stones = mutableMapOf<Location, SteppingStoneInstance>()

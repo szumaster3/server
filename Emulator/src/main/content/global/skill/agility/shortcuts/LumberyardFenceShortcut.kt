@@ -1,7 +1,7 @@
 package content.global.skill.agility.shortcuts
 
-import content.global.skill.agility.AgilityShortcut
 import content.global.skill.agility.AgilityHandler
+import content.global.skill.agility.AgilityShortcut
 import core.api.animationCycles
 import core.api.face
 import core.api.lock
@@ -10,9 +10,14 @@ import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import core.plugin.Initializable
 import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
+/**
+ * Represents the lumberyard squeeze under shortcut.
+ */
+@Initializable
 class LumberyardFenceShortcut : AgilityShortcut(intArrayOf(31149), 0, 0.0, "squeeze-under") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {

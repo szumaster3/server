@@ -17,6 +17,9 @@ import core.plugin.Plugin
 import org.rs.consts.Animations
 import org.rs.consts.Quests
 
+/**
+ * Represents the Underwall tunnel shortcuts.
+ */
 @Initializable
 class TunnelShortcut : AgilityShortcut {
     private var offset: Int = 0

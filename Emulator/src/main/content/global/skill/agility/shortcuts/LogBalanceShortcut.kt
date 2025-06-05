@@ -12,6 +12,9 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Sounds
 
+/**
+ * Represents the log balance shortcuts.
+ */
 @Initializable
 class LogBalanceShortcut : AgilityShortcut {
 

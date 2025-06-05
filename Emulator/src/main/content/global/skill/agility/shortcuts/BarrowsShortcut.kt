@@ -13,6 +13,9 @@ import core.plugin.Initializable
 import org.rs.consts.Animations
 import org.rs.consts.Quests
 
+/**
+ * Represents the barrows shortcut.
+ */
 @Initializable
 class BarrowsShortcut : AgilityShortcut(intArrayOf(18411), 1, 0.0, "climb-over") {
 

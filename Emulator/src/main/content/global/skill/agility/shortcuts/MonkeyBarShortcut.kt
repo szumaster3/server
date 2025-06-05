@@ -15,6 +15,10 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
 
+/**
+ * Represents the monkey bar shortcut.
+ * @author Vexia
+ */
 @Initializable
 class MonkeyBarShortcut : AgilityShortcut {
     constructor() : super(intArrayOf(29375), 1, 14.0, "swing across")

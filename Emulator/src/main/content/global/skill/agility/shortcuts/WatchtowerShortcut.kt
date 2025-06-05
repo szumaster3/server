@@ -4,13 +4,16 @@ import content.global.skill.agility.AgilityShortcut
 import core.api.*
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import core.game.node.entity.skill.Skills
 import org.rs.consts.Animations
 
+/**
+ * Represents the Trellis shortcut.
+ */
 @Initializable
 class WatchtowerShortcut : AgilityShortcut(intArrayOf(20056), 18, 31.0, "climb-up") {
 

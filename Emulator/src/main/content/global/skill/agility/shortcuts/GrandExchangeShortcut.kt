@@ -1,10 +1,16 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
-import core.api.*
+import content.region.misthalin.handlers.varrock.VarrockAchievementDiary.Companion.MediumTasks
+import core.api.finishDiaryTask
+import core.api.teleport
+import core.api.unlock
+import core.api.visualize
+import core.game.diary.DiaryLevel
 import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
@@ -13,6 +19,9 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the grand exchange underwall tunnel shortcut.
+ */
 @Initializable
 class GrandExchangeShortcut : AgilityShortcut(intArrayOf(9311, 9312), 21, 0.0, "climb-into") {
 
@@ -48,6 +57,7 @@ class GrandExchangeShortcut : AgilityShortcut(intArrayOf(9311, 9312), 21, 0.0, "
                     }
                     3 -> {
                         ForceMovement.run(player, path[1], path[2], CLIMB_UP)
+                        finishDiaryTask(player, DiaryType.VARROCK, 1, 8)
                         unlock(player)
                         true
                     }

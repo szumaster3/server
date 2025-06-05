@@ -8,15 +8,16 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the fence jump shortcut.
+ */
 @Initializable
 class FenceJumpShortcut : AgilityShortcut(intArrayOf(9300), 13, 0.0, "jump-over") {
-
 
     override fun run(player: Player, scenery: Scenery, option: String?, failed: Boolean, ) {
         player.faceLocation(scenery.location)

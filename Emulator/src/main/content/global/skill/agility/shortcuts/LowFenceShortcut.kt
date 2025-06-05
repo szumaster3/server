@@ -10,6 +10,9 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the jump over low fence shortcut.
+ */
 @Initializable
 class LowFenceShortcut : AgilityShortcut(intArrayOf(12776), 25, 0.0, "jump-over") {
 

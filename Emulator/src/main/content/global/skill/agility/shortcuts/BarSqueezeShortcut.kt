@@ -13,6 +13,9 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Quests
 
+/**
+ * Represents the various bar squeeze shortcuts.
+ */
 @Initializable
 class BarSqueezeShortcut : AgilityShortcut(intArrayOf(9334, 9337, 2186), 66, 1.0, "squeeze-through") {
 

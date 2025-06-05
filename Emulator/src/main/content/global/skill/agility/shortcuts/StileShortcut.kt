@@ -14,6 +14,10 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.Animations
 
+/**
+ * Represents the stile	shortcuts.
+ * @author Ceikry
+ */
 class StileShortcut : InteractionListener {
     val ids = intArrayOf(993, 3730, 7527, 12982, 19222, 22302, 29460, 33842, 34776, 39508, 39509, 39510)
     private val FALCONRY_STILE = 19222

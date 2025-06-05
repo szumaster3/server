@@ -19,6 +19,9 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
+/**
+ * Represents the Tree swing shortcut to Grew island.
+ */
 @Initializable
 class RopeSwingShortcut : OptionHandler() {
 

@@ -1,6 +1,8 @@
 package content.global.skill.agility.shortcuts
 
-import core.api.*
+import core.api.getStatLevel
+import core.api.sendMessage
+import core.api.submitIndividualPulse
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills

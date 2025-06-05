@@ -1,7 +1,10 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.handlers.item.seaBoots
-import core.api.*
+import core.api.animationCycles
+import core.api.anyInEquipment
+import core.api.forceMove
+import core.api.sendMessage
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -12,6 +15,9 @@ import core.plugin.Plugin
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 
+/**
+ * Represents the broken pier shortcut.
+ */
 @Initializable
 class MiscellaniaShortcut : OptionHandler() {
 
@@ -36,7 +42,7 @@ class MiscellaniaShortcut : OptionHandler() {
             player.location,
             Location.create(2573, 3862, 0),
             0,
-            animationCycles(Animations.JUMP_BRIDGE_769),
+            60,
             null,
             Animations.JUMP_BRIDGE_769
         )
@@ -45,7 +51,7 @@ class MiscellaniaShortcut : OptionHandler() {
             player,
             Location.create(2573, 3862, 0),
             Location.create(2576, 3862, 0),
-            animationCycles(Animations.JUMP_BRIDGE_769),
+            90,
             animationCycles(Animations.JUMP_OVER_OBSTACLE_6132),
             null,
             Animations.JUMP_OVER_OBSTACLE_6132

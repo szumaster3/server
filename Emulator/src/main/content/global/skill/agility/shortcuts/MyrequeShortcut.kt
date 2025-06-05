@@ -3,7 +3,6 @@ package content.global.skill.agility.shortcuts
 import core.api.sendMessage
 import core.api.sendMessageWithDelay
 import core.api.teleport
-import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -11,6 +10,7 @@ import core.game.world.map.Location
 import org.rs.consts.Scenery
 
 class MyrequeShortcut : InteractionListener {
+
     override fun defineListeners() {
         on(Scenery.TRAPDOOR_5055, IntType.SCENERY, "open") { player, _ ->
             teleport(player, Location(3477, 9845))

@@ -11,6 +11,9 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the squeeze-through loose railings shortcut.
+ */
 @Initializable
 class McGruborShortcut : AgilityShortcut(intArrayOf(51), 1, 0.0, "squeeze-through") {
 

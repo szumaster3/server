@@ -6,7 +6,9 @@ import core.game.node.entity.skill.Skills;
 import core.plugin.Plugin;
 
 /**
- * The type Agility course.
+ * An abstract base class representing an agility course consisting of multiple obstacles.
+ *
+ * @author Emperor
  */
 public abstract class AgilityCourse extends OptionHandler {
     private final Player player;
@@ -14,11 +16,11 @@ public abstract class AgilityCourse extends OptionHandler {
     private final double completionExperience;
 
     /**
-     * Instantiates a new Agility course.
+     * Constructs a new {@code AgilityCourse}.
      *
-     * @param player               the player
-     * @param size                 the size
-     * @param completionExperience the completion experience
+     * @param player               the player completing the course
+     * @param size                 the number of obstacles in the course
+     * @param completionExperience the amount of Agility experience awarded upon completion
      */
     public AgilityCourse(Player player, int size, double completionExperience) {
         this.player = player;
@@ -41,23 +43,23 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Configure.
+     * Performs any course-specific configuration, such as registering obstacle interactions.
      */
     public abstract void configure();
 
     /**
-     * Create instance agility course.
+     * Creates a new instance of the agility course for the given player.
      *
      * @param player the player
-     * @return the agility course
+     * @return a new instance of the course
      */
     public abstract AgilityCourse createInstance(Player player);
 
     /**
-     * Gets course.
+     * Gets the active course instance for the specified player, creating one if necessary.
      *
      * @param player the player
-     * @return the course
+     * @return the agility course instance
      */
     public AgilityCourse getCourse(Player player) {
         AgilityCourse course = player.getExtension(AgilityCourse.class);
@@ -72,7 +74,7 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Finish.
+     * Marks the course as completed if all obstacles were passed and awards experience.
      */
     public void finish() {
         if (isCompleted()) {
@@ -82,9 +84,9 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Is completed boolean.
+     * Checks whether all obstacles in the course have been successfully completed.
      *
-     * @return the boolean
+     * @return {@code true} if the course is complete, {@code false} otherwise
      */
     public boolean isCompleted() {
         for (boolean b : obstaclesPassed) {
@@ -96,7 +98,7 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Reset.
+     * Resets all obstacle progress for this course.
      */
     public void reset() {
         for (int i = 0; i < obstaclesPassed.length; i++) {
@@ -105,9 +107,9 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Flag.
+     * Flags a specific obstacle as completed. If it's the final obstacle, the course is finished.
      *
-     * @param index the index
+     * @param index the index of the completed obstacle
      */
     public void flag(int index) {
         obstaclesPassed[index] = true;
@@ -117,21 +119,18 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Gets hit amount.
+     * Calculates the damage to take when failing an obstacle, based on the player's health.
      *
      * @param player the player
-     * @return the hit amount
+     * @return the damage amount
      */
     protected static int getHitAmount(Player player) {
         int hit = player.getSkills().getLifepoints() / 12;
-        if (hit < 2) {
-            hit = 2;
-        }
-        return hit;
+        return Math.max(hit, 2);
     }
 
     /**
-     * Gets player.
+     * Returns the player associated with this course.
      *
      * @return the player
      */
@@ -140,12 +139,11 @@ public abstract class AgilityCourse extends OptionHandler {
     }
 
     /**
-     * Get passed obstacles boolean [ ].
+     * Returns the array indicating which obstacles have been passed.
      *
-     * @return the boolean [ ]
+     * @return a boolean array of passed obstacle flags
      */
     public boolean[] getPassedObstacles() {
         return obstaclesPassed;
     }
-
 }

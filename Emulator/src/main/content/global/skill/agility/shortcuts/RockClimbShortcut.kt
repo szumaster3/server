@@ -20,15 +20,13 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 
+/**
+ * Represents the Climbing rocks (Various area) shortcuts.
+ */
 @Initializable
-class RockClimbShortcut :
-    AgilityShortcut(intArrayOf(9335, 9336, 2231, 26327, 26328, 26324, 26323, 19849, 9296, 9297), 1, 0.0, "climb") {
-    override fun run(
-        player: Player,
-        scenery: Scenery,
-        option: String,
-        failed: Boolean,
-    ) {
+class RockClimbShortcut : AgilityShortcut(intArrayOf(9335, 9336, 2231, 26327, 26328, 26324, 26323, 19849, 9296, 9297), 1, 0.0, "climb") {
+
+    override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean, ) {
         val scalingAnim = Animation(Animations.CLIMB_DOWN_B_740)
         val req = determineRequirement(player.location)
 

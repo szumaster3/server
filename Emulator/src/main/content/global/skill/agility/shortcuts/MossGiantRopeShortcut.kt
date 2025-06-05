@@ -2,18 +2,24 @@ package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
 import content.global.skill.agility.AgilityShortcut
-import core.api.*
+import core.api.animateScenery
+import core.api.finishDiaryTask
+import core.api.getStatLevel
+import core.api.playAudio
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs.consts.Animations
 import org.rs.consts.Sounds
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.node.entity.skill.Skills
 
+/**
+ * Represents the Rope swing shortcut.
+ */
 @Initializable
 class MossGiantRopeShortcut : AgilityShortcut(intArrayOf(2322, 2323), 10, 0.0, "swing-on") {
 

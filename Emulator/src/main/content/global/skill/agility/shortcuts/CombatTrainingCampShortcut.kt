@@ -1,9 +1,8 @@
 package content.global.skill.agility.shortcuts
 
-import content.global.skill.agility.AgilityShortcut
 import content.global.skill.agility.AgilityHandler
+import content.global.skill.agility.AgilityShortcut
 import core.game.node.Node
-import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
@@ -12,13 +11,11 @@ import core.plugin.Initializable
 import org.rs.consts.Animations
 import org.rs.consts.Scenery.LOOSE_RAILING_19171
 
+/**
+ * Represents the combat training area shortcut.
+ */
 @Initializable
-class CombatTrainingCampShortcut : AgilityShortcut(
-    intArrayOf(LOOSE_RAILING_19171),
-    1,
-    1.0,
-    "squeeze-through"
-) {
+class CombatTrainingCampShortcut : AgilityShortcut(intArrayOf(LOOSE_RAILING_19171), 1, 1.0, "squeeze-through") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         val start = if (player.location.x <= 2522) scenery.location else scenery.location.transform(1, 0, 0)

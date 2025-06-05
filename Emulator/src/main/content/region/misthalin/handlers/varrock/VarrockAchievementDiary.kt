@@ -287,15 +287,6 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                     )
                 }
 
-            12598 ->
-                if (event.target.id == Scenery.UNDERWALL_TUNNEL_9312 && hasLevelStat(player, Skills.AGILITY, 21)) {
-                    finishTask(
-                        player,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.USE_GE_UNDER_WALL_SHORTCUT,
-                    )
-                }
-
             12698 ->
                 if (event.target.id == Scenery.PIPE_29370 && hasLevelStat(player, Skills.AGILITY, 51)) {
                     finishTask(
