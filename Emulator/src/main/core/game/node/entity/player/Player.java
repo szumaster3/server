@@ -386,7 +386,7 @@ public class Player extends Entity {
         }
         Repository.getDisconnectionQueue().remove(getName());
         Repository.getDisconnectionQueue().add(this, true);
-        updateDetails(this.details);
+        // updateDetails(this.details);
         details.save();
     }
 
@@ -984,6 +984,7 @@ public class Player extends Entity {
      *
      * @param details the details
      */
+    @Deprecated
     public void updateDetails(PlayerDetails details) {
         if (this.details != null) {
             details.setBanTime(this.details.getBanTime());
