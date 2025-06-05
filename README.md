@@ -1,6 +1,8 @@
-This project is a **fork of [2009scape](https://gitlab.com/2009scape/2009scape)**.
+This project is a fork of [2009scape](https://gitlab.com/2009scape/2009scape).
 
-Download full package at https://szumaster3.github.io/530-content/
+Download: The latest [single-player](https://github.com/szumaster3/530-windows/zipball/releases) zipball.
+
+___
 
 #### Requirements
 
@@ -32,7 +34,6 @@ _For Windows users_ - Enable developer mode in Windows settings first.
   git config --global user.name "Your Name"
   git config --global user.email "your_email@example.com"
   ```
-
 
 #### Build
 
