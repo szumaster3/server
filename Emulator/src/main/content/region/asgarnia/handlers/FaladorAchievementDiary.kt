@@ -32,7 +32,6 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val PARK_POND_AREA = ZoneBorders(2987, 3381, 2994, 3386)
         private val WAYNES_CHAINS_AREA = ZoneBorders(2969, 3310, 2975, 3314)
         private val SARAHS_FARMING_SHOP_AREA = ZoneBorders(3021, 3285, 3040, 3296)
-        private val FALADOR_GENERAL_AREA = ZoneBorders(2934, 3399, 3399, 3307)
         private val CHEMIST_AREA = ZoneBorders(2929, 3213, 2936, 3207)
         private val PORT_SARIM_FLOWER_PATCH_AREA = ZoneBorders(3053, 3306, 3056, 3309)
 
@@ -52,7 +51,6 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                 Scenery.PARTY_BALLOON_122,
             )
         private val PARK_DUCKS = intArrayOf(NPCs.DUCK_46, NPCs.DUCK_2693)
-        private val FALADOR_GUARD = intArrayOf(NPCs.GUARD_9, NPCs.GUARD_3230, NPCs.GUARD_3228, NPCs.GUARD_3229)
         private val SKELETAL_WYVERNS =
             intArrayOf(
                 NPCs.SKELETAL_WYVERN_3068,
