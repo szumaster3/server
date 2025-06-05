@@ -1,6 +1,6 @@
 package content.region.morytania.dialogue.phasmatys
 
-import content.region.morytania.handlers.phasmatys.EnergyBarrierUtils
+import content.region.morytania.handlers.phasmatys.EnergyBarrier
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -14,35 +14,36 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GhostGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GhostGuardDialogue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val isGhostsAhoyComplete = isQuestComplete(player, Quests.GHOSTS_AHOY)
         val hasGhostspeakAmulet = inEquipment(player, Items.GHOSTSPEAK_AMULET_552)
         val hasBedsheet = inEquipment(player, Items.BEDSHEET_4285)
 
-        // If quest is complete and the player is wearing the bedsheet.
-        if (isGhostsAhoyComplete && hasGhostspeakAmulet && hasBedsheet) {
-            sendDialogue(player, "You can't pass the barriers of Port Phasmatys while wearing the bedsheet.")
+        when {
+            isGhostsAhoyComplete && hasGhostspeakAmulet && hasBedsheet -> {
+                sendDialogue(player, "You can't pass the barriers of Port Phasmatys while wearing the bedsheet.")
+                return true
+            }
+            isGhostsAhoyComplete && hasGhostspeakAmulet -> {
+                findLocalNPC(player, NPCs.GHOST_GUARD_1706)?.let { face(player, it, 1) }
+                npc(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of 2 Ectotokens. However, you have done the ghosts of our town a service that surpasses all value, so you may pass without charge.")
+                stage = 3
+                return true
+            }
+            !hasGhostspeakAmulet -> {
+                sendDialogue(player, "The ghostly guards wail at you incomprehensibly, and though you cannot understand their exact words, you understand their meaning - you may not pass the barriers of Port Phasmatys.")
+                stage = END_DIALOGUE
+                return true
+            }
+            else -> {
+                npc(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of", "2 Ectotokens.")
+                stage = 1
+                return true
+            }
         }
-        // If quest is complete, player has Ghostspeak Amulet but not the bedsheet.
-        else if (isGhostsAhoyComplete && hasGhostspeakAmulet && !hasBedsheet) {
-            findLocalNPC(player, NPCs.GHOST_GUARD_1706)?.let { face(player, it, 1) }
-            npc(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of 2 Ectotokens. ", "However, you have done the ghosts of our town a service that surpasses all value, so you may pass without charge.")
-            stage = 3
-        }
-        // If the player is not wearing the Ghostspeak Amulet.
-        else if (!hasGhostspeakAmulet) {
-            sendDialogue(player, "The ghostly guards wail at you incomprehensibly, and though you cannot understand their exact words, you understand their meaning - you may not pass the barriers of Port Phasmatys.")
-            stage = END_DIALOGUE
-        } else {
-            npcl(FaceAnim.FRIENDLY, "All visitors to Port Phasmatys must pay a toll charge of 2 Ectotokens.")
-            stage = 1
-        }
-
-        return true
     }
 
     override fun handle(
@@ -67,7 +68,7 @@ class GhostGuardDialogue(
             }
             3 -> {
                 end()
-                EnergyBarrierUtils.passGateByTalk(player, npc)
+                EnergyBarrier.passGateByTalk(player, npc)
             }
             4 -> npc("Sorry - it's Town Policy.").also { stage = END_DIALOGUE }
             5 -> npc("You need to go to the Temple and earn some.", "Talk to the disciples - they will tell you how.").also { stage = END_DIALOGUE }

@@ -27,20 +27,15 @@ import org.rs.consts.Sounds
 import java.util.*
 
 @Initializable
-class PhasmatysPlugin :
-    MapZone("Port phasmatys", true),
-    Plugin<Any?> {
+class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
+
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any?> {
         ZoneBuilder.configure(this)
         return this
     }
 
-    override fun interact(
-        e: Entity,
-        target: Node,
-        option: Option,
-    ): Boolean {
+    override fun interact(e: Entity, target: Node, option: Option, ): Boolean {
         if (e is Player) {
             val player = e.asPlayer()
             val usedOption = getUsedOption(player)
@@ -93,24 +88,6 @@ class PhasmatysPlugin :
                         SceneryBuilder.replace(scenery, scenery.transform(7434))
                         return true
                     }
-                }
-
-                9308 -> {
-                    if (getStatLevel(player, Skills.AGILITY) < 58) {
-                        sendMessage(player, "You need an agility level of at least 58 to climb down this wall.")
-                        return true
-                    }
-                    player.properties.teleportLocation = Location.create(3671, 9888, 2)
-                    return true
-                }
-
-                9307 -> {
-                    if (getStatLevel(player, Skills.AGILITY) < 58) {
-                        sendMessage(player, "You need an agility level of at least 58 to climb up this wall.")
-                        return true
-                    }
-                    player.properties.teleportLocation = Location.create(3670, 9888, 3)
-                    return true
                 }
 
                 5264 -> {

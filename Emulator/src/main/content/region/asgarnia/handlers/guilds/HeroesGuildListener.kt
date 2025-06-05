@@ -6,13 +6,13 @@ import content.global.skill.summoning.familiar.Familiar
 import core.api.animate
 import core.api.lock
 import core.api.quest.hasRequirement
+import core.api.quest.isQuestComplete
 import core.api.replaceSlot
 import core.api.sendMessage
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -43,7 +43,7 @@ class HeroesGuildListener : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, JEWELLERY, FOUNTAIN) { player, used, with ->
-            rechargeJewellery(player, used, with)
+            rechargeJewellery(player, used.asItem(), with)
             return@onUseWith true
         }
 
@@ -65,71 +65,47 @@ class HeroesGuildListener : InteractionListener {
     }
 
     /**
-     * Recharges a piece of jewellery using a familiar or a fountain.
-     *
-     * @param player The player who is attempting to recharge the jewellery.
-     * @param n The item being used to recharge the jewellery.
-     * @param node The NPC or scenery item being used to recharge the jewellery.
+     * Recharges jewellery using a fountain or familiar.
      */
-    private fun rechargeJewellery(
-        player: Player,
-        n: Node,
-        node: Node,
-    ) {
+    private fun rechargeJewellery(player: Player, n: Node, node: Node) {
         val usedItem = n as? Item ?: return
-        val usedWith = when (node) {
-            is Scenery -> node
-            is NPC -> node
-            else -> return
-        }
+        val usedWith = (node as? Scenery) ?: (node as? Familiar ?: return)
 
         val jewellery = idMap[usedItem.id] ?: return
-        if (!hasRequirement(player, Quests.HEROES_QUEST)) return
+        if (!isQuestComplete(player, Quests.HEROES_QUEST)) return
 
-        if (usedWith is NPC) {
-            val familiar = usedWith as? Familiar ?: return
-            if (!jewellery.canBeRechargedByFamiliar()) return
-            if (!player.familiarManager.isOwner(familiar)) return
-
-            familiar.animate(Animation.create(7882))
+        if (usedWith is Familiar) {
+            if (!jewellery.canBeRechargedByFamiliar() || !player.familiarManager.isOwner(usedWith)) return
+            usedWith.animate(Animation.create(7882))
         }
 
         lock(player, 1)
         animate(player, Animations.HUMAN_BURYING_BONES_827)
+        val recharged = Item(jewellery.ids[0])
+        replaceSlot(player, usedItem.slot, recharged)
 
-        val rechargedItem = Item(jewellery.ids[0])
-        replaceSlot(player, usedItem.slot, rechargedItem)
-
-        val jewelleryName = jewellery.getJewelleryName(rechargedItem).lowercase()
-        val item = when {
-            "amulet" in jewelleryName -> "amulet"
-            "bracelet" in jewelleryName -> "bracelet"
-            "ring" in jewelleryName -> "ring"
-            "necklace" in jewelleryName -> "necklace"
-            else -> jewellery.getJewelleryName(rechargedItem)
-        }
+        val name = jewellery.getJewelleryName(recharged).lowercase()
+        val type = listOf("amulet", "bracelet", "ring", "necklace").find { it in name } ?: name
 
         when (usedWith) {
             is Scenery -> {
-                if (usedItem.name.contains("glory", ignoreCase = true)) {
+                if ("glory" in usedItem.name.lowercase()) {
                     player.dialogueInterpreter.sendItemMessage(
                         Items.AMULET_OF_GLORY_1704,
                         "You feel a power emanating from the fountain as it",
                         "recharges your amulet. You can now rub the amulet to",
-                        "teleport and wear it to get more gems whilst mining.",
+                        "teleport and wear it to get more gems whilst mining."
                     )
                 } else {
-                    sendMessage(player, "You dip the $item in the fountain...")
+                    sendMessage(player, "You dip the $type in the fountain...")
                 }
             }
-            is NPC -> sendMessage(player, "Your titan recharges the glory.")
+            is Familiar -> sendMessage(player, "Your titan recharges the glory.")
         }
     }
 
     /**
-     * Checks if the enchanted jewellery can be recharged by a familiar.
-     *
-     * @return `true` if the jewellery can be recharged by a familiar, otherwise `false`.
+     * Checks if the jewellery can be recharged by a familiar.
      */
     private fun EnchantedJewellery.canBeRechargedByFamiliar(): Boolean =
         this == EnchantedJewellery.AMULET_OF_GLORY || this == EnchantedJewellery.AMULET_OF_GLORY_T

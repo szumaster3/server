@@ -1375,7 +1375,7 @@ object TutorialStage {
 
             player.teleporter.send(Location.create(3233, 3230, 0))
 
-            queueScript(player, 4, QueueStrength.SOFT) {
+            queueScript(player, 3, QueueStrength.SOFT) {
                 player.dialogueInterpreter.sendDialogues(
                     "Welcome to Lumbridge! To get more help, simply click on the",
                     "Lumbridge Guide or one of the Tutors - these can be found by",

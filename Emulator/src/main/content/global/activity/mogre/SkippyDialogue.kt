@@ -4,6 +4,7 @@ import content.region.misc.handlers.tutorial.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -18,6 +19,7 @@ import org.rs.consts.Sounds
 @Initializable
 class SkippyDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
 
         /*
          * Handles tutorial island dialogue.
@@ -230,6 +232,7 @@ class SkippyDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
             97 -> {
+                end()
                 TutorialStage.completeTutorial(player)
             }
         }
