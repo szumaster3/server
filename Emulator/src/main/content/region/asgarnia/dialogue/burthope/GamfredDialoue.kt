@@ -16,27 +16,19 @@ import org.rs.consts.NPCs
  * Represents the Gamfred dialoue.
  */
 @Initializable
-class GamfredDialoue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GamfredDialoue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size > 1) {
             player(FaceAnim.ASKING, "May I have a shield please?").also { stage = 13 }
             return true
         }
-        npc(
-            FaceAnim.CHILD_NORMAL,
-            "Ello there. I'm Gamfred, the engineer in this here guild.",
-            "Have you seen my catapult?",
-        )
+        npc(FaceAnim.CHILD_NORMAL, "Ello there. I'm Gamfred, the engineer in this here guild.", "Have you seen my catapult?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
         when (stage) {
             0 ->
                 options(

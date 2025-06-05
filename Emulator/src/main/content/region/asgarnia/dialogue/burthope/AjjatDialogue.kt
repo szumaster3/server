@@ -16,22 +16,15 @@ import org.rs.consts.NPCs
  * Represents the Ajjat dialogue.
  */
 @Initializable
-class AjjatDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AjjatDialogue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(
-            "Greetings, fellow warrior. I am Ajjat, former Black Knight",
-            "and now training officer here in the Warriors' Guild.",
-        )
+        npc("Greetings, fellow warrior. I am Ajjat, former Black Knight", "and now training officer here in the Warriors' Guild.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
         when (stage) {
             0 ->
                 options(

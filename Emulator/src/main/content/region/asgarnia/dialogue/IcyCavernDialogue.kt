@@ -20,19 +20,12 @@ class IcyCavernDialogue : Dialogue {
     override fun newInstance(player: Player?): Dialogue = IcyCavernDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
-        sendDialogueLines(
-            player,
-            "STOP! The creatures in this cave are VERY Dangerous. Are you",
-            "sure you want to enter?",
-        )
+        sendDialogueLines(player, "STOP! The creatures in this cave are VERY Dangerous. Are you", "sure you want to enter?")
         stage = 0
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
         when (stage) {
             0 -> {
                 options("Yes, I'm not afraid of death!", "No thanks, I don't want to die!")

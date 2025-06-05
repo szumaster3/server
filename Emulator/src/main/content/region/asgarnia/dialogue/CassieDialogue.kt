@@ -9,10 +9,12 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Cassie dialogue.
+ */
 @Initializable
-class CassieDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CassieDialogue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HAPPY, "I buy and sell shields; do you want to trade?")

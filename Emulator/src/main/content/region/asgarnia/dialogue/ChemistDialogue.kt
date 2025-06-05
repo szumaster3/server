@@ -16,36 +16,22 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Chemist dialogue.
+ *
+ * Relations
+ * - [Biohazard quest][content.region.kandarin.quest.biohazard.Biohazard]
+ * - [Falador Achievements][content.region.asgarnia.handlers.FaladorAchievementDiary]
+ */
 @Initializable
-class ChemistDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ChemistDialogue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         setTitle(player, 4)
         if (!isQuestComplete(player, Quests.BIOHAZARD) && isQuestInProgress(player, Quests.BIOHAZARD, 10, 99)) {
-            sendDialogueOptions(
-                player,
-                "Do you want to talk about lamps?",
-                "Yes.",
-                "Your quest.",
-                "Impling jars.",
-                "Falador Achievement Diary.",
-            ).also {
-                stage =
-                    1
-            }
+            sendDialogueOptions(player, "Do you want to talk about lamps?", "Yes.", "Your quest.", "Impling jars.", "Falador Achievement Diary.").also { stage = 1 }
         } else {
-            sendDialogueOptions(
-                player,
-                "Do you want to talk about lamps?",
-                "Yes.",
-                "No.",
-                "Impling jars.",
-                "Falador Achievement Diary.",
-            ).also {
-                stage =
-                    0
-            }
+            sendDialogueOptions(player, "Do you want to talk about lamps?", "Yes.", "No.", "Impling jars.", "Falador Achievement Diary.")
         }
         return true
     }
