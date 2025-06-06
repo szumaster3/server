@@ -13,7 +13,7 @@ import org.rs.consts.Animations
  * Represents the jump over low fence shortcut.
  */
 @Initializable
-class LowFenceShortcut : AgilityShortcut(intArrayOf(12776), 25, 0.0, "jump-over") {
+class BurghDeRottFenceShortcut : AgilityShortcut(intArrayOf(12776), 25, 0.0, "jump-over") {
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
         val direction = if (player.location.x == 3473) Direction.EAST else Direction.WEST

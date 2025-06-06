@@ -35,7 +35,6 @@ class SinclairMansionLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANC
         val failLocation = Location(if (fromSouth) 2723 else 2721, 3594)
         val failLand = Location(if (fromSouth) 2726 else 2718, 3596)
 
-        lock(player, 10)
         face(player, scenery)
         playAudio(player, Sounds.LOG_BALANCE_2470)
 
@@ -46,7 +45,6 @@ class SinclairMansionLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANC
             if (!player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)!!.isComplete(1, 0)) {
                 player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)!!.updateTask(player, 1, 0, true)
             }
-            unlock(player)
         }
     }
 
@@ -66,7 +64,6 @@ class SinclairMansionLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANC
                     }
                     1 -> {
                         AgilityHandler.fail(player, 1, failLand, swimmingAnimation, Random.nextInt(1, 7), null)
-                        unlock(player)
                         return true
                     }
                 }

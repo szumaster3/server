@@ -20,19 +20,12 @@ class WatchtowerShortcut : AgilityShortcut(intArrayOf(20056), 18, 31.0, "climb-u
     private val animation = Animation.create(Animations.HUMAN_CLIMB_STAIRS_828)
 
     override fun run(player: Player, scenery: Scenery, option: String, failed: Boolean) {
-        if (!hasLevelDyn(player, Skills.AGILITY, 18)) {
-            sendDialogue(player, "You need an agility level of at least 18 to negotiate this obstacle.")
-            return
-        }
-
-        lock(player, 2)
-        sendMessage(player, "You climb up the wall...")
-        sendMessageWithDelay(player, "...and squeeze in through the window.", 1)
         animate(player, animation)
-
+        sendMessage(player, "You climb up the wall...")
         queueScript(player, 2) {
             teleport(player, end)
             rewardXP(player, Skills.AGILITY, 31.0)
+            sendMessage(player, "...and squeeze in through the window.")
             return@queueScript stopExecuting(player)
         }
     }

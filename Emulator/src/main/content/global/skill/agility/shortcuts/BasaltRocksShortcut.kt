@@ -18,7 +18,7 @@ import core.plugin.Plugin
  * Represents the basalt Rock shortcut.
  */
 @Initializable
-class BasaltRockShortcut : AgilityShortcut {
+class BasaltRocksShortcut : AgilityShortcut {
     constructor() : super(intArrayOf(), 0, 0.0, "")
 
     constructor(ids: IntArray?, level: Int, experience: Double, vararg options: String?) : super(ids, level, experience, *options)
@@ -44,7 +44,7 @@ class BasaltRockShortcut : AgilityShortcut {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         paths.forEach {
-            configure(BasaltRockShortcut(intArrayOf(it.id), 1, 0.0, it.option))
+            configure(BasaltRocksShortcut(intArrayOf(it.id), 1, 0.0, it.option))
         }
         return this
     }
