@@ -43,11 +43,6 @@ class GoblinDiplomacyListener : InteractionListener {
             }
         }
 
-        on(Items.WHITE_GOBLIN_MAIL_11791, IntType.ITEM, "wear") { player, _ ->
-            sendMessage(player, "That armour is to small for a human.")
-            return@on true
-        }
-
         for (crateId in CRATES) {
             on(crateId, IntType.SCENERY, "search") { player, _ ->
                 if (player.getAttribute("crate:$crateId", 0) < ticks) {
