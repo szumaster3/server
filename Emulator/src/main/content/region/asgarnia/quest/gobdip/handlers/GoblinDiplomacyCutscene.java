@@ -40,23 +40,23 @@ import static content.global.activity.ttrail.ClueScroll.getClueScrolls;
 import static core.api.ContentAPIKt.*;
 
 /**
- * The type G diplomacy cutscene.
+ * Represents the goblin diplomacy cutscene plugin.
+ *
+ * @author Vexia
  */
-public final class GDiplomacyCutscene extends CutscenePlugin {
+public final class GoblinDiplomacyCutscene extends CutscenePlugin {
 
     /**
-     * Instantiates a new G diplomacy cutscene.
+     * Constructs a new {@code GoblinDiplomacyCutscene} {@code Object}.
      */
-    public GDiplomacyCutscene() {
+    public GoblinDiplomacyCutscene() {
         this(null);
     }
 
     /**
-     * Instantiates a new G diplomacy cutscene.
-     *
-     * @param player the player
+     * Constructs a new {@code GoblinDiplomacyCutscene} {@code Object}.
      */
-    public GDiplomacyCutscene(final Player player) {
+    public GoblinDiplomacyCutscene(final Player player) {
         super("Goblin Diplomacy Cutscene");
         this.player = player;
     }
@@ -107,33 +107,67 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 
     @Override
     public ActivityPlugin newInstance(Player p) throws Throwable {
-        return new GDiplomacyCutscene(p);
+        return new GoblinDiplomacyCutscene(p);
     }
 
     /**
      * The type Goblin general dialogue.
      */
     public static final class GoblinGeneralDialogue extends Dialogue {
+
+        /**
+         * Represents an array of dialogues to send.
+         */
         private static final String[][] DIALOGUES = new String[][]{{"@base (@color) armour best.", "@other No it has to be @ocolor.", "@base Go away human, we busy."}, {"@base I tell all goblins in village to wear @color armour now!", "@other They not listen to you! I already tell them wear @ocolor /n armour!", "@base They listen to me not you! They know me bigger /n general!", "@other Me bigger general! They listen to me!", "@base Human! What colour armour they wearing out there?", "@player Half of them wearing red and half of them green.", "@base Shut up human! They wearing green armour really! /n Human lying because he scared of you!", "@other Human scared of me not you! THen you think me /n bigger general!", "@base What? Me mean...", "@base Shut up! Me bigger general!"}, {"@base All goblins should wear @color armour!", "@other Not @ocolor! @ocolor make you look fat.", "@base Everything make YOU look fat!", "@other Shut up!", "@base Fatty!", "@other SHUT UP!", "@base Even this human think you look fat! Don't you, human?", "@player Um...", "@player No, he doesn't look fat.", "@base Shut up human! @oname fat and human stupid!", "@other Shut up @bname"}, {"@other (@ocolor) armour best.", "@base No no @color every time.", "@other Go away human, we busy."},};
-        private GDiplomacyCutscene cutscene;
+
+        /**
+         * Represents the cutscene.
+         */
+        private GoblinDiplomacyCutscene cutscene;
+
+        /**
+         * Represents the instanced quest.
+         */
         private Quest quest;
+
+        /**
+         * Represents the other general.
+         */
         private NPC other;
+
+        /**
+         * Represents the grubfoot npc.
+         */
         private NPC grubfoot;
+
+        /**
+         * Represents the dialogue index we're at.
+         */
         private int dialIndex;
+
+        /**
+         * Represents the dialogue index we're at.
+         */
         private int index;
+
+        /**
+         * The current grubfoot type.
+         */
         private GrubFoot type;
 
         /**
-         * Instantiates a new Goblin general dialogue.
+         * Constructs a new {@code GoblinGeneralDialogue} {@code Object}.
          */
         public GoblinGeneralDialogue() {
-
+            /*
+             * Empty.
+             */
         }
 
         /**
-         * Instantiates a new Goblin general dialogue.
+         * Constructs a new {@code GoblinGeneralDialogue} {@code Object}.
          *
-         * @param player the player
+         * @param player the player.
          */
         public GoblinGeneralDialogue(Player player) {
             super(player);
@@ -146,7 +180,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 
         @Override
         public Component npc(String... messages) {
-            return npc(null, messages);
+            return npc(FaceAnim.OLD_NORMAL, messages);
         }
 
         @Override
@@ -163,8 +197,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 
             TreasureTrailManager manager = TreasureTrailManager.getInstance(player);
 
-            if (npc.getId() == NPCs.GENERAL_BENTNOZE_4493 &&
-                    player.getInventory().containsItem(new Item(Items.CLUE_SCROLL_10252, 1))) {
+            if (npc.getId() == NPCs.GENERAL_BENTNOZE_4493 && player.getInventory().containsItem(new Item(Items.CLUE_SCROLL_10252, 1))) {
 
                 ClueScroll clueScroll = getClueScrolls().get(manager.getClueId());
 
@@ -421,15 +454,13 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 
         @Override
         public int[] getIds() {
-            return new int[]{
-                4494,
-                4493};
+            return new int[]{NPCs.GENERAL_WARTFACE_4494, NPCs.GENERAL_BENTNOZE_4493};
         }
 
         /**
-         * Parse dialogue.
+         * Method used to parse the dialogue.
          *
-         * @param dialogue the dialogue
+         * @param dialogue the dialogue.
          */
         public void parseDialogue(String[] dialogue) {
             if (index == DIALOGUES.length - 1) {
@@ -465,9 +496,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
         }
 
         /**
-         * Default options.
-         *
-         * @param buttonId the button id
+         * Handles the default options for each stage.
          */
         public void defaultOptions(int buttonId) {
             switch (stage) {
@@ -575,9 +604,9 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
         }
 
         /**
-         * Handle default.
+         * Handles the default started quest dialogue.
          *
-         * @param buttonId the button id
+         * @param buttonId the buttonId.
          */
         public void handleDefault(int buttonId) {
             if (stage > 99) {
@@ -635,9 +664,12 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
             }
         }
 
+        /**
+         * Sets up the cutscene.
+         */
         private void setUpCutScene(Object... args) {
             player.lock();
-            cutscene = (GDiplomacyCutscene) args[1];
+            cutscene = (GoblinDiplomacyCutscene) args[1];
             other = cutscene.getNPCS().get(2);
             grubfoot = cutscene.getNPCS().get(0);
             npc(FaceAnim.OLD_NORMAL, "Grubfoot!");
@@ -646,10 +678,10 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
         }
 
         /**
-         * Send grub foot.
+         * Sends the new grubfoot.
          *
-         * @param grubFoot the grub foot
-         * @param endStage the end stage
+         * @param grubFoot the grubfoot.
+         * @param endStage the end stage.
          */
         public void sendGrubFoot(final GrubFoot grubFoot, final int endStage) {
             Pathfinder.find(grubfoot, grubfoot.getLocation().transform(-4, 0, 0)).walk(grubfoot);
@@ -689,6 +721,11 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
             });
         }
 
+        /**
+         * Handles the starting of the quest.
+         *
+         * @param buttonId the buttonId.
+         */
         private void handleStart(int buttonId) {
             switch (stage) {
                 case 0:
@@ -753,6 +790,9 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
             }
         }
 
+        /**
+         * Handles the finishing dialogues.
+         */
         private void handleFinishDialogues() {
             if (stage == 120) {
                 if (player.getInventory().remove(type.getMail())) {
@@ -853,40 +893,40 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
         }
 
         /**
-         * Gets speaker.
+         * Gets the speaker of the dialogue.
          *
-         * @param line the line
-         * @return the speaker
+         * @param line the line.
+         * @return the entity speaker.
          */
         public Entity getSpeaker(final String line) {
             return line.contains("@player") ? player : line.contains("@base") ? npc : other;
         }
 
         /**
-         * Gets color.
+         * Gets the color of the base entity.
          *
-         * @param line the line
-         * @return the color
+         * @param line the line.
+         * @return the color.
          */
         public String getColor(final String line) {
             return npc.getId() == NPCs.GENERAL_WARTFACE_4494 ? "green" : "red";
         }
 
         /**
-         * Gets other color.
+         * Gets the other color of the general.
          *
-         * @param line the line
-         * @return the other color
+         * @param line the line.
+         * @return the other color.
          */
         public String getOtherColor(final String line) {
             return other.getId() == NPCs.GENERAL_BENTNOZE_4493 ? "red" : "green";
         }
 
         /**
-         * Get lines string [ ].
+         * Gets the lines of the dialogue.
          *
-         * @param line the line
-         * @return the string [ ]
+         * @param line the line.
+         * @return the lines.
          */
         public String[] getLines(final String line) {
             return line.split("/n");

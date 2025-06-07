@@ -1,8 +1,7 @@
 package content.region.asgarnia.quest.gobdip
 
 import content.region.asgarnia.quest.gobdip.dialogue.GrubfootDialogue
-import content.region.asgarnia.quest.gobdip.handlers.GDiplomacyCutscene
-import content.region.asgarnia.quest.gobdip.handlers.GoblinDiplomacyPlugin
+import content.region.asgarnia.quest.gobdip.handlers.GoblinDiplomacyCutscene
 import core.api.addItemOrDrop
 import core.api.inInventory
 import core.api.quest.updateQuestTab
@@ -100,7 +99,7 @@ class GoblinDiplomacy : Quest(Quests.GOBLIN_DIPLOMACY, 20, 19, 5, Vars.VARP_QUES
     }
 
     override fun newInstance(`object`: Any?): Quest {
-        definePlugins(GDiplomacyCutscene(), GoblinDiplomacyPlugin(), GrubfootDialogue())
+        definePlugins(GoblinDiplomacyCutscene(), GrubfootDialogue())
         return this
     }
 
