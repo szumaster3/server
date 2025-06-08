@@ -229,11 +229,11 @@ object SequenceDialogue {
     /**
      * Creates a double-item dialogue line with messages.
      */
-    fun doubleItemLine(firstItem: Int, secondItem: Int, vararg messages: String): DialogueLine.DoubleItemLine {
-        require(firstItem > 0) { "First item ID must be positive and non-zero." }
-        require(secondItem > 0) { "Second item ID must be positive and non-zero." }
+    fun doubleItemLine(firstId: Int, secondId: Int, vararg messages: String): DialogueLine.DoubleItemLine {
+        require(firstId > 0) { "First item ID must be positive and non-zero." }
+        require(secondId > 0) { "Second item ID must be positive and non-zero." }
         require(messages.isNotEmpty()) { "Empty dialogue line. At least one message is required." }
-        return DialogueLine.DoubleItemLine(firstItem, secondItem, messages)
+        return DialogueLine.DoubleItemLine(firstId, secondId, messages)
     }
 
     /**
