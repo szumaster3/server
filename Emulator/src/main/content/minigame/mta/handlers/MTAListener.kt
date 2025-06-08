@@ -18,11 +18,11 @@ class MTAListener : InteractionListener {
 
         on(ProgressHat.hats, IntType.ITEM, "talk-to", "destroy") { player, node ->
             val option = getUsedOption(player)
-            openDialogue(
-                player,
-                NPCs.PIZZAZ_HAT_3096,
-                *if (option == "destroy") arrayOf(node, true, true) else arrayOf(),
-            )
+            if (option == "destroy") {
+                openDialogue(player, NPCs.PIZZAZ_HAT_3096, node, true, true)
+            } else {
+                openDialogue(player, NPCs.PIZZAZ_HAT_3096)
+            }
             return@on true
         }
 

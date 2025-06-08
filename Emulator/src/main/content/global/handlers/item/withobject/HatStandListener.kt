@@ -3,9 +3,9 @@ package content.global.handlers.item.withobject
 import core.api.EquipmentSlot
 import core.api.sendMessage
 import core.cache.def.impl.ItemDefinition
-import core.game.global.action.DropListener
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.item.GroundItemManager
 import org.rs.consts.Items
 import org.rs.consts.Scenery
 
@@ -38,8 +38,10 @@ class HatStandListener : InteractionListener {
                 return@onUseWith true
             }
 
-            sendMessage(player, "Oops – it fell off the hatstand!")
-            DropListener.drop(player, used.asItem())
+            if(player.inventory.remove(used.asItem())) {
+                GroundItemManager.create(used.asItem(), player.location, player)
+                sendMessage(player, "Oops - it fell off the hatstand!")
+            }
 
             return@onUseWith true
         }
