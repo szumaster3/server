@@ -1,6 +1,6 @@
-package content.region.kandarin.dialogue.guthanoth
+package content.region.kandarin.dialogue.gutanoth
 
-import content.region.kandarin.handlers.guthanoth.BogrogPlugin
+import content.region.kandarin.handlers.gutanoth.BogrogPlugin
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

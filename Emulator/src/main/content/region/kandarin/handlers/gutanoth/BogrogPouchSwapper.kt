@@ -1,4 +1,4 @@
-package content.region.kandarin.handlers.guthanoth
+package content.region.kandarin.handlers.gutanoth
 
 import content.global.skill.summoning.SummoningPouch
 import content.global.skill.summoning.SummoningScroll

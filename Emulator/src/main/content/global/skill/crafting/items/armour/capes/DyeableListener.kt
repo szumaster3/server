@@ -1,9 +1,6 @@
 package content.global.skill.crafting.items.armour.capes
 
-import core.api.inInventory
-import core.api.removeItem
-import core.api.replaceSlot
-import core.api.sendMessage
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -14,6 +11,7 @@ import org.rs.consts.Items
 import java.util.*
 
 class DyeableListener : InteractionListener {
+
     companion object {
         private val DYES = Dyes.values().map { it.item.id }.toIntArray()
         private val CAPE = Capes.values().map { it.cape.id }.toIntArray()
@@ -66,8 +64,12 @@ class DyeableListener : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, DYES, *GOBLIN_MAIL) { player, used, with ->
-            val result = dyeGoblinMail(player, used.asItem(), with.asItem())
-            return@onUseWith result
+            if (with.id == Items.GOBLIN_MAIL_288) {
+                dyeGoblinMail(player, used.asItem(), with.asItem())
+            } else {
+                player.sendMessage("That item is already dyed.")
+            }
+            return@onUseWith true
         }
 
         on(GOBLIN_MAIL, IntType.ITEM, "wear") { player, _ ->
@@ -106,6 +108,7 @@ class DyeableListener : InteractionListener {
             return
         }
 
+        player.lock(1)
         player.animate(anim)
         player.inventory.remove(primary.item)
         player.inventory.remove(secondary.item)

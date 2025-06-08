@@ -1,6 +1,6 @@
-package content.region.kandarin.handlers.guthanoth;
+package content.region.kandarin.handlers.gutanoth;
 
-import content.region.kandarin.dialogue.guthanoth.BogrogDialogue;
+import content.region.kandarin.dialogue.gutanoth.BogrogDialogue;
 import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;

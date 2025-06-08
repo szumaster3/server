@@ -31,6 +31,7 @@ enum class Dyes(val item: Item) {
          * @param item the item
          * @return the dyes
          */
+        @JvmStatic
         fun forItem(item: Item): Dyes? {
             return itemToDyeMap[item.id]
         }

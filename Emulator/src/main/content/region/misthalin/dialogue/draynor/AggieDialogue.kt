@@ -14,15 +14,10 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import org.rs.consts.Components
-import org.rs.consts.Music
-import org.rs.consts.NPCs
-import org.rs.consts.Quests
+import org.rs.consts.*
 
 @Initializable
-class AggieDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AggieDialogue(player: Player? = null, ) : Dialogue(player) {
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -312,7 +307,7 @@ class AggieDialogue(
                     player.inventory.remove(COINS)
                     player.inventory.remove(WOAD_LEAVES)
                     player.inventory.add(BLUE_DYE)
-                    make(1767)
+                    make(BLUE_DYE.id)
                     sendItemDialogue(
                         player,
                         BLUE_DYE,
@@ -343,7 +338,7 @@ class AggieDialogue(
                     player.inventory.remove(COINS)
                     player.inventory.remove(ONIONS)
                     player.inventory.add(YELLOW_DYE)
-                    make(1765)
+                    make(YELLOW_DYE.id)
                     sendItemDialogue(
                         player,
                         YELLOW_DYE,
@@ -371,7 +366,7 @@ class AggieDialogue(
                     player.inventory.remove(COINS)
                     player.inventory.remove(REDBERRIES)
                     player.inventory.add(RED_DYE)
-                    make(1763)
+                    make(RED_DYE.id)
                     sendItemDialogue(
                         player,
                         RED_DYE,
@@ -390,7 +385,7 @@ class AggieDialogue(
             }
 
             31 -> {
-                val item = Item(995, 20)
+                val item = Item(Items.COINS_995, 20)
                 stage =
                     if (player.inventory.remove(item)) {
                         sendItemDialogue(
@@ -492,7 +487,7 @@ class AggieDialogue(
             809 -> npc("Okay, hold on to your hat!").also { stage++ }
             810 -> {
                 end()
-                lock(player, 4)
+                lock(player, 6)
                 GameWorld.Pulser.submit(
                     object : Pulse() {
                         var counter = 0
@@ -503,11 +498,10 @@ class AggieDialogue(
                                 1 ->
                                     teleport(
                                         player,
-                                        Location.create(3291, 4514, 0),
+                                        Location(3291, 4514, 0),
                                         TeleportManager.TeleportType.NORMAL,
                                     )
                                 6 -> {
-                                    unlock(player)
                                     openInterface(player, Components.FADE_FROM_BLACK_170)
                                     if (!player.musicPlayer.hasUnlocked(Music.MAGIC_AND_MYSTERY_572)) {
                                         player.musicPlayer.unlock(Music.MAGIC_AND_MYSTERY_572)
@@ -525,9 +519,9 @@ class AggieDialogue(
     }
 
     fun make(dye: Int) {
-        stopWalk(npc!!)
-        npc.animate(ANIMATION)
+        npc.walkingQueue.reset()
         npc.faceLocation(CAULDRON_LOCATION)
+        npc.animate(ANIMATION)
     }
 
     private fun hasIngredients(player: Player): Boolean {
@@ -543,21 +537,21 @@ class AggieDialogue(
     override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922)
 
     companion object {
-        private val ANIMATION = Animation(4352)
-        private val ASHES = Item(592)
-        private val POT_OF_FLOUR = Item(1933)
-        private val REDBERRIES_SINGLE = Item(1951)
+        private val ANIMATION = Animation(Animations.AGGIE_MIXING_DYE_4352)
+        private val ASHES = Item(Items.ASHES_592)
+        private val POT_OF_FLOUR = Item(Items.POT_OF_FLOUR_1933)
+        private val REDBERRIES_SINGLE = Item(Items.REDBERRIES_1951)
         private val PASTE_SOLID_INGREDIENTS = arrayOf(ASHES, REDBERRIES_SINGLE, POT_OF_FLOUR)
-        private val BUCKET_OF_WATER = Item(1929)
-        private val JUG_OF_WATER = Item(1937)
+        private val BUCKET_OF_WATER = Item(Items.BUCKET_OF_WATER_1929)
+        private val JUG_OF_WATER = Item(Items.JUG_OF_WATER_1937)
         private val CAULDRON_LOCATION = Location.create(3085, 3258, 0)
-        private val COINS = Item(995, 5)
-        private val WOAD_LEAVES = Item(1793, 2)
-        private val ONIONS = Item(1957, 2)
-        private val REDBERRIES = Item(1951, 3)
-        private val PASTE = Item(2424)
-        private val BLUE_DYE = Item(1767)
-        private val YELLOW_DYE = Item(1765)
-        private val RED_DYE = Item(1763)
+        private val COINS = Item(Items.COINS_995, 5)
+        private val WOAD_LEAVES = Item(Items.WOAD_LEAF_1793, 2)
+        private val ONIONS = Item(Items.ONION_1957, 2)
+        private val REDBERRIES = Item(Items.REDBERRIES_1951, 3)
+        private val PASTE = Item(Items.PASTE_2424)
+        private val BLUE_DYE = Item(Items.BLUE_DYE_1767)
+        private val YELLOW_DYE = Item(Items.YELLOW_DYE_1765)
+        private val RED_DYE = Item(Items.RED_DYE_1763)
     }
 }

@@ -1,6 +1,7 @@
 package core.game.dialogue
 
 import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 
 /**
@@ -107,14 +108,14 @@ object SequenceDialogue {
                 }
 
                 is DialogueLine.OptionsLine -> {
-                    require(entry.options.size in 2..5) {
-                        "OptionsLine at index $i must have between 2 and 5 options (was: ${entry.options.size})"
+                    require(entry.options.size <= 5) {
+                        "OptionsLine at index $i has more than 5 options (was: ${entry.options.size})"
                     }
                     player.dialogueInterpreter.sendOptions(entry.title, *entry.options)
                     player.dialogueInterpreter.addAction { _, selected ->
                         val optionIndex = selected - OPTION_INDEX_OFFSET
                         if (optionIndex in entry.options.indices) {
-                            entry.onSelect(optionIndex)
+                            entry.onSelect(optionIndex + 1)
                         }
                         sendAt(i + 1)
                     }
@@ -142,7 +143,7 @@ object SequenceDialogue {
      * @throws IllegalArgumentException if no messages are provided
      */
     fun playerLine(expression: FaceAnim?, vararg messages: String): DialogueLine.SpeechLine {
-        require(messages.isNotEmpty()) { "Player speech must contain at least one message line." }
+        require(messages.isNotEmpty()) { "Player dialogue must not be empty." }
         return DialogueLine.SpeechLine(null, expression, messages)
     }
 
@@ -156,10 +157,7 @@ object SequenceDialogue {
      * Creates a plain text dialogue line (no actor or animation).
      */
     fun dialogueLine(vararg messages: String): DialogueLine.TextLine {
-        require(messages.isNotEmpty()) {
-            "dialogueLine(vararg messages: String) failed: " +
-                    "Empty dialogue line. At least one message is required."
-        }
+        require(messages.isNotEmpty()) { "Dialogue must not be empty." }
         return DialogueLine.TextLine(messages)
     }
 
@@ -238,16 +236,24 @@ object SequenceDialogue {
             lines += dialogueLine(text)
         }
 
-        fun player(expression: FaceAnim?, vararg text: String) {
-            lines += playerLine(expression, *text)
+        fun player(text: String) {
+            lines += playerLine(FaceAnim.HALF_GUILTY, text)
         }
 
         fun player(expression: FaceAnim?, text: String) {
             lines += playerLine(expression, text)
         }
 
+        fun player(expression: FaceAnim?, vararg text: String) {
+            lines += playerLine(expression, *text)
+        }
+
         fun player(vararg text: String) {
             lines += playerLine(FaceAnim.HALF_GUILTY, *text)
+        }
+
+        fun npc(npc: Entity, text: String) {
+            lines += npcLine(npc, FaceAnim.HALF_GUILTY, text)
         }
 
         fun npc(npc: Entity, expression: FaceAnim?, vararg text: String) {
@@ -256,6 +262,10 @@ object SequenceDialogue {
 
         fun npc(npc: Entity, expression: FaceAnim?, text: String) {
             lines += npcLine(npc, expression, text)
+        }
+
+        fun npc(npcId: Int, expression: FaceAnim?, vararg text: String) {
+            lines += npcLine(NPC(npcId), expression, *text)
         }
 
         fun npc(npc: Entity, vararg text: String) {
@@ -270,11 +280,12 @@ object SequenceDialogue {
             lines += itemLine(itemId, text)
         }
 
-        fun options(title: String, vararg options: String, onSelect: (Int) -> Unit) {
-            lines += SequenceDialogue.options(title, *options, onSelect = onSelect)
+        fun options(title: String?, vararg options: String, onSelect: (Int) -> Unit) {
+            val realTitle = title ?: "Select an Option"
+            lines += SequenceDialogue.options(realTitle, *options, onSelect = onSelect)
         }
 
-        fun done(callback: () -> Unit) {
+        fun end(callback: () -> Unit) {
             onComplete = callback
         }
     }

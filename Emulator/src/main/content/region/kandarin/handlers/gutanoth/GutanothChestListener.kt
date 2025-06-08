@@ -1,4 +1,4 @@
-package content.region.kandarin.handlers.guthanoth
+package content.region.kandarin.handlers.gutanoth
 
 import core.api.*
 import core.game.interaction.IntType
@@ -72,6 +72,7 @@ class GutanothChestListener : InteractionListener {
                     "/save:gutanoth-chest-delay",
                     System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(15),
                 )
+                sendMessage(player, "You have already searched this chest.")
             } else {
                 sendMessage(player, "You open the chest and find nothing.")
                 return

@@ -1,4 +1,4 @@
-package content.region.kandarin.handlers.guthanoth
+package content.region.kandarin.handlers.gutanoth
 
 import core.api.getStatLevel
 import core.api.sendItemSelect

@@ -17,11 +17,7 @@ import core.api.quest.isQuestComplete
 import core.api.quest.setQuestStage
 import core.api.ui.closeDialogue
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogueLine
-import core.game.dialogue.SequenceDialogue.npcLine
-import core.game.dialogue.SequenceDialogue.options
-import core.game.dialogue.SequenceDialogue.playerLine
-import core.game.dialogue.SequenceDialogue.sendSequenceDialogue
+import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -34,6 +30,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.*
 
@@ -131,14 +128,13 @@ class WatchTowerListener : InteractionListener {
                 return@on true
             }
 
-            sendSequenceDialogue(
-                player,
-                dialogueLine("If your light source goes out down there you'll be in trouble! Are", "you sure you want to go in without a tinderbox?"),
-                options("Select an Option", "I'll be fine without a tinderbox.", "I'll come back with a tinderbox.") { selected ->
+            dialogue(player) {
+                message("If your light source goes out down there you'll be in trouble! Are", "you sure you want to go in without a tinderbox?")
+                options(null, "I'll be fine without a tinderbox.", "I'll come back with a tinderbox.") { selected ->
                     when (selected) {
                         1 -> {
                             if (location != null) {
-                                if(!LightSource.hasActiveLightSource(player)){
+                                if (!LightSource.hasActiveLightSource(player)) {
                                     teleport(player, Location(2498, 9451, 0), TeleportManager.TeleportType.INSTANT)
                                     registerLogoutListener(player, "skavid_cave") {
                                         removeAttribute(player, GameAttributes.WATCHTOWER_DARK_AREA)
@@ -152,7 +148,7 @@ class WatchTowerListener : InteractionListener {
                         2 -> closeDialogue(player)
                     }
                 }
-            )
+            }
             return@on true
         }
 
@@ -199,8 +195,8 @@ class WatchTowerListener : InteractionListener {
             sendMessage(player, "You uncover a tunnel entrance.")
             lock(player, 3)
             runTask(player, 2) {
-                sendPlayerDialogue(player, "Phew! At last I'm out..." + "Next time I will take some light!")
                 teleport(player, Location(2554, 3054, 0), TeleportManager.TeleportType.INSTANT)
+                sendPlayerDialogue(player, "Phew! At last I'm out..." + "Next time I will take some light!", FaceAnim.HALF_GUILTY)
                 removeAttribute(player, GameAttributes.WATCHTOWER_DARK_AREA)
             }
             return@on true
@@ -380,17 +376,16 @@ class WatchTowerListener : InteractionListener {
                 sendMessage(player, "You give the guard a rock cake.")
             }
 
-            sendSequenceDialogue(
-                player,
-                playerLine(FaceAnim.HALF_THINKING, "How about this?"),
-                npcLine(npc, FaceAnim.OLD_DEFAULT, "Well, well, look at this. My favourite: rock cake! Okay,", "we will let it through."),
-                onComplete = {
+            dialogue(player) {
+                player(FaceAnim.HALF_THINKING, "How about this?")
+                npc(npc, FaceAnim.OLD_DEFAULT, "Well, well, look at this. My favourite: rock cake! Okay,", "we will let it through.")
+                end {
                     val startLocation = Location.create(2506, 3012, 0)
                     val endLocation = Location.create(2508, 3012, 0)
                     forceMove(player, startLocation, endLocation, 60, 150, null, Animations.CLIMB_OVER_THING_5038)
                     sendMessage(player, "You climb over the low wall.")
                 }
-            )
+            }
             return@onUseWith true
         }
 
@@ -409,45 +404,47 @@ class WatchTowerListener : InteractionListener {
 
         on(Scenery.GAP_2830, IntType.SCENERY, "jump-over") { player, _ ->
             val npc = NPC(NPCs.OGRE_GUARD_861)
-            sendSequenceDialogue(
-                player,
-                npcLine(npc, FaceAnim.OLD_DEFAULT, "Oi! Little thing. If you want to cross here, you must", "pay me 20 gold pieces first!"),
-                playerLine(FaceAnim.HALF_ASKING, "You want me to give you 20 gold pieces to let me", "jump off a bridge?"),
-                npcLine(npc, FaceAnim.OLD_DEFAULT, "That's what I said, like it or lump it."),
-                options("Select an Option", "Okay, I'll pay it.", "Forget it, I'm not paying.") { selected ->
+
+            dialogue(player) {
+                npc(npc, FaceAnim.OLD_DEFAULT, "Oi! Little thing. If you want to cross here, you must", "pay me 20 gold pieces first!")
+                player(FaceAnim.HALF_ASKING, "You want me to give you 20 gold pieces to let me", "jump off a bridge?")
+                npc(npc, FaceAnim.OLD_DEFAULT, "That's what I said, like it or lump it.")
+                options(null, "Okay, I'll pay it.", "Forget it, I'm not paying.") { selected ->
                     when (selected) {
                         1 -> {
                             if (inInventory(player, Items.COINS_995, 20)) {
                                 removeItem(player, Item(Items.COINS_995, 20))
-                                sendSequenceDialogue(
-                                    player,
-                                    playerLine(FaceAnim.HALF_ASKING, "Okay, I'll pay it."),
-                                    npcLine(npc, FaceAnim.OLD_DEFAULT, "A wise choice, little thing."),
-                                ) {
-                                    sendPlayerDialogue(player, "Phew! I just made it.")
-                                    sendMessage(player, "You daringly jump across the chasm.")
-                                    forceMove(player, player.location, Location.create(2530, 3029, 0), 0, 120, null, Animations.CLIMB_JUMP_UP_5352) // Animations.JUMP_OBSTACLE_5355
+                                dialogue(player) {
+                                    player(FaceAnim.HALF_ASKING, "Okay, I'll pay it.")
+                                    npc(npc, FaceAnim.OLD_DEFAULT, "A wise choice, little thing.")
+                                    end {
+                                        val dx = if (player.location.x >= 2531) -1 else 1
+                                        forceMove(player, player.location, player.location.transform(dx, 3, 0), 0, 90, null, Animations.JUMP_OBSTACLE_5355) {
+                                            sendPlayerDialogue(player, "Phew! I just made it.")
+                                            sendMessage(player, "You daringly jump across the chasm.")
+                                        }
+                                    }
                                 }
                             } else {
-                                sendSequenceDialogue(
-                                    player,
-                                    npcLine(npc, FaceAnim.OLD_DEFAULT, "You don't have enough gold pieces!")
-                                )
+                                dialogue(player) {
+                                    npc(npc, FaceAnim.OLD_DEFAULT, "You don't have enough gold pieces!")
+                                }
                             }
                         }
+
                         2 -> {
-                            sendSequenceDialogue(
-                                player,
-                                playerLine(FaceAnim.HALF_ASKING, "Forget it, I'm not paying."),
-                                npcLine(npc, FaceAnim.OLD_DEFAULT, "In that case you're not crossing."),
-                                onComplete = {
+                            dialogue(player) {
+                                player(FaceAnim.HALF_ASKING, "Forget it, I'm not paying.")
+                                npc(npc, FaceAnim.OLD_DEFAULT, "In that case you're not crossing.")
+                                end {
                                     sendMessage(player, "The guard blocks your path.")
                                 }
-                            )
+                            }
                         }
                     }
                 }
-            )
+            }
+
             return@on true
         }
 
@@ -456,9 +453,11 @@ class WatchTowerListener : InteractionListener {
          */
 
         on(Scenery.GAP_2831, IntType.SCENERY, "jump-over") { player, _ ->
-            sendMessage(player, "You daringly jump across the chasm.")
-            sendPlayerDialogue(player, "I'm glad that was easier on the way back!")
-            forceMove(player, player.location, Location.create(2530, 3026, 0), 0, 120, null, Animations.CLIMB_JUMP_UP_5352) // Animations.JUMP_OBSTACLE_5355
+            val dx = if (player.location.x >= 2531) -1 else 1
+            forceMove(player, player.location, player.location.transform(dx, -3, 0), 0, 90, null, Animations.JUMP_OBSTACLE_5355) {
+                sendPlayerDialogue(player, "I'm glad that was easier on the way back!")
+                sendMessage(player, "You daringly jump across the chasm.")
+            }
             return@on true
         }
 
@@ -466,10 +465,25 @@ class WatchTowerListener : InteractionListener {
          * Handles talking to ogre trader near rock cake stall.
          */
 
-        on(NPCs.OGRE_TRADER_875, IntType.NPC, "talk-to", "trade") { player, node ->
-            val npc = node.asNpc()
-            sendNPCDialogue(player, npc.id, "Arr, small thing wants my food, does it? I'll teach you to deal with ogres!", FaceAnim.OLD_ANGRY1).also {
-                npc.attack(player)
+        on(NPCs.OGRE_TRADER_875, IntType.NPC, "talk-to") { player, node ->
+            // sendNPCDialogue(player, node.id, "Grr! get your hands off those cakes!", FaceAnim.OLD_DEFAULT)
+            sendNPCDialogue(player, node.id, "Arr, small thing wants my food, does it?", FaceAnim.OLD_DEFAULT)
+            return@on true
+        }
+
+
+        /*
+         * Handles talking to ogre chieftain.
+         */
+
+        on(NPCs.OGRE_CHIEFTAIN_852, IntType.NPC, "talk-to") { player, node ->
+            dialogue(player) {
+                npc(node.id, FaceAnim.OLD_DEFAULT, "Arr, small thing wants my food, does it?")
+                end {
+                    sendNPCDialogue(player, node.id, "I'll teach you to deal with ogres!", FaceAnim.OLD_DEFAULT)
+                    RegionManager.getLocalNpcs(player).firstOrNull { it.id == node.id }?.attack(player)
+                    sendMessage(player, "You are under attack!")
+                }
             }
             return@on true
         }
@@ -499,15 +513,15 @@ class WatchTowerListener : InteractionListener {
         on(Items.SPELL_SCROLL_2396, IntType.ITEM, "read") { player, node ->
             if(!inInventory(player, Items.SPELL_SCROLL_2396)) return@on true
             animate(player, Animations.READING_SCROLL_DISPLACED_WATCH_TOWER_5354)
-            sendSequenceDialogue(player,
-                dialogueLine("You memorise what is written on the scroll."),
-                onComplete = {
+            dialogue(player) {
+                message("You memorise what is written on the scroll.")
+                end {
                     removeItem(player, node.asItem(), Container.INVENTORY)
                     sendDialogueLines(player, "You can now cast the Watchtower teleport spell... ...Provided you", "have the required runes and magic level.")
                     setAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, true)
                     sendMessage(player, "The scroll crumbles to dust.")
                 }
-            )
+            }
             return@on true
         }
 
@@ -525,17 +539,17 @@ class WatchTowerListener : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.CAVE_NIGHTSHADE_2398, NPCs.ENCLAVE_GUARD_870) { player, _, with ->
-            sendSequenceDialogue(player,
-                npcLine(with.asNpc(), FaceAnim.OLD_DEFAULT, "What is this? Arrrrgh! I cannot stand this plant! Argh,", "it burns! It burns!"),
-                onComplete = {
-                    if (!WarningManager.isDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE)) {
+            dialogue(player) {
+                npc(with.asNpc(), FaceAnim.OLD_DEFAULT, "What is this? Arrrrgh! I cannot stand this plant! Argh,", "it burns! It burns!")
+                end {
+                    if (!WarningManager.isDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE) || isQuestComplete(player, Quests.WATCHTOWER)) {
                         WarningManager.openWarning(player, Warnings.WATCHTOWER_SHAMAN_CAVE)
                     } else {
                         EnclaveCutscene(player).start(true)
                     }
                     sendMessage(player, "You run past the guard while he's busy.")
                 }
-            )
+            }
             return@onUseWith true
         }
 
@@ -556,12 +570,20 @@ class WatchTowerListener : InteractionListener {
          * Handles using Ogre potion on Watchtower wizard after the quest.
          */
 
-        onUseWith(IntType.NPC, OGRE_POTIONS, NPCs.WATCHTOWER_WIZARD_872) { player, _, with ->
-            sendSequenceDialogue(player,
-                npcLine(with.asNpc(), FaceAnim.HALF_ASKING, "Another potion? Ooo no, I don't think so..."),
-                npcLine(with.asNpc(), FaceAnim.NOD_NO, "I can't let you use this anymore, it is just too dangerous", "I'd better take it from you before you injure yourself.")
-            )
-            return@onUseWith true
+        onUseWith(IntType.NPC, OGRE_POTIONS, NPCs.WATCHTOWER_WIZARD_872) { player, used, with ->
+            if (isQuestComplete(player, Quests.WATCHTOWER)) {
+                dialogue(player) {
+                    npc(with.asNpc(), FaceAnim.HALF_ASKING, "Another potion? Ooo no, I don't think so...")
+                    npc(with.asNpc(), FaceAnim.NOD_NO, "I can't let you use this anymore, it is just too dangerous", "I'd better take it from you before you injure yourself.")
+                    end {
+                        if (inInventory(player, used.id)) {
+                            removeItem(player, used.asItem())
+                        }
+                    }
+                }
+                return@onUseWith true
+            }
+            return@onUseWith false
         }
 
         /*
@@ -712,15 +734,15 @@ class WatchTowerListener : InteractionListener {
 
             teleport(player, Location.create(2928, 4715, 2))
             sendMessage(player, "The magic force field activates.")
-            sendSequenceDialogue(player,
-                npcLine(npc, FaceAnim.HAPPY, "Marvellous!, It works! The town will now be safe."),
-                npcLine(npc, FaceAnim.HAPPY, "Your help was invaluable. Take this payment as a token", "of my gratitude."),
-                npcLine(npc, FaceAnim.HAPPY, "Also, let me improve your Magic level for you."),
-                npcLine(npc, FaceAnim.HAPPY, "Here is a special item for you - it's a new spell. Read", "the scroll and you will be able to teleport yourself here."),
-                onComplete = {
+            dialogue(player) {
+                npc(npc, FaceAnim.HAPPY, "Marvellous!, It works! The town will now be safe.")
+                npc(npc, FaceAnim.HAPPY, "Your help was invaluable. Take this payment as a token", "of my gratitude.")
+                npc(npc, FaceAnim.HAPPY, "Also, let me improve your Magic level for you.")
+                npc(npc, FaceAnim.HAPPY, "Here is a special item for you - it's a new spell. Read", "the scroll and you will be able to teleport yourself here.")
+                end {
                     finishQuest(player, Quests.WATCHTOWER)
                 }
-            )
+            }
             return@on true
         }
 

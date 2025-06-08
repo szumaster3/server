@@ -14,6 +14,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
@@ -272,14 +273,13 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
 
             100 -> npc("You'll have to speak with the Watchtower Wizard", "about that.").also { stage = END_DIALOGUE }
             200 -> npc("Complaining? Complaining!").also { stage++ }
-            201 -> npcl(FaceAnim.ANNOYED, "What folks these days don't realise is that if it weren't for us wizards, this entire world would be overrun with every creature you could possibly imagine. And some you couldn't even conceive of!",).also { stage = END_DIALOGUE }
+            201 -> npcl(FaceAnim.ANNOYED, "What folks these days don't realise is that if it weren't for us wizards, this entire world would be overrun with every creature you could possibly imagine. And some you couldn't even conceive of!").also { stage = END_DIALOGUE }
             300 -> npcl(FaceAnim.NEUTRAL, "That's typical, nowadays. It's left to us wizards to do all the work.").also { stage = END_DIALOGUE }
             400 -> npc("Hmph! Suit yourself.").also { stage = END_DIALOGUE }
             500 -> npcl(FaceAnim.NEUTRAL, "Won't bother? Won't bother! Perhaps this quest is too hard for you?").also { stage = END_DIALOGUE }
 
             600 -> npc(FaceAnim.HAPPY, "Excellent! That seems to be all the pieces. Now I can", "assemble it...").also {
-                // Need gfx or wrong anim.
-                animate(findLocalNPC(player, npc.id)!!, 4379)
+                animate(findLocalNPC(player, npc.id)!!, Animations.CLIMB_JUMP_UP_5352)
                 stage++
             }
             601 -> {
