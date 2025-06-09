@@ -49,7 +49,9 @@ class FrogHeraldDialogue(
                 START_DIALOGUE -> npcl(FaceAnim.OLD_NORMAL, "Hey, ${player!!.username}, The Frog " + (if (player!!.isMale) "Princess" else "Prince") + " needs your help!").also { stage++ }
                 1 -> {
                     queueScript(player!!, 1, QueueStrength.SOFT) {
-                        setAttribute(player!!, RandomEvent.save(), player!!.location)
+                        registerLogoutListener(player!!, RandomEvent.logout()) { p ->
+                            p.location = getAttribute(p, RandomEvent.save(), player!!.location)
+                        }
                         teleport(player!!, Location.create(2463, 4781, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                         removeTabs(player!!, 0, 1, 2, 3, 4, 5, 6, 7, 14)
                         openDialogue(player!!, FrogHeraldDialogue(true))

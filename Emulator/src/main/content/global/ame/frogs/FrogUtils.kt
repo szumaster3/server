@@ -34,12 +34,7 @@ object FrogUtils {
         restoreTabs(player)
         player.appearance.transformNPC(-1)
         clearLogoutListener(player, RandomEvent.logout())
-        removeAttributes(
-            player,
-            ATTRIBUTE_FROG_TASK_FAIL,
-            RandomEvent.save(),
-            RandomEvent.logout(),
-        )
+        removeAttributes(player, ATTRIBUTE_FROG_TASK_FAIL)
     }
 
     fun kissTheFrog(
