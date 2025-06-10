@@ -44,6 +44,7 @@ object TutorialStage {
             player.hook(Event.UsedWith, TutorialUseWithReceiver)
             player.hook(Event.FireLit, TutorialFireReceiver)
             player.hook(Event.NPCKilled, TutorialKillReceiver)
+            player.hook(Event.SpellCast, TutorialCastReceiver)
             openOverlay(player, Components.TUTORIAL_PROGRESS_371)
             sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
             player.musicPlayer.play(MusicEntry.forId(Music.NEWBIE_MELODY_62))
@@ -1015,7 +1016,7 @@ object TutorialStage {
 
             58 -> {
                 hideTabs(player, login)
-                registerHintIcon(player, Location.create(3127, 3124, 0), 100)
+                registerHintIcon(player, Repository.findNPC(NPCs.FINANCIAL_ADVISOR_947)!!)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -1031,7 +1032,6 @@ object TutorialStage {
             59 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3129, 3124, 0), 100)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -1047,7 +1047,7 @@ object TutorialStage {
             60 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3129, 3106, 0), 125)
+                registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(

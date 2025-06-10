@@ -8,6 +8,7 @@ import core.api.getAttribute
 import core.api.setAttribute
 import core.game.event.*
 import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import org.rs.consts.Components
@@ -347,17 +348,11 @@ object TutorialKillReceiver : EventHook<NPCKillEvent> {
                     setAttribute(player, TutorialStage.TUTORIAL_STAGE, 55)
                     TutorialStage.load(player, 55)
                 }
-
-            70 ->
-                if (event.npc.id == NPCs.CHICKEN_41) {
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 71)
-                    TutorialStage.load(player, 71)
-                }
         }
     }
 }
 
-object TutorialCompletionReceiver : EventHook<SpellCastEvent> {
+object TutorialCastReceiver : EventHook<SpellCastEvent> {
     override fun process(
         entity: Entity,
         event: SpellCastEvent,
@@ -365,10 +360,10 @@ object TutorialCompletionReceiver : EventHook<SpellCastEvent> {
         if (entity !is Player) return
         val player = entity.asPlayer()
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
-            72 ->
-                if (event.spellId == 0 && event.spellBook == SpellBookManager.SpellBook.MODERN) {
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 73)
-                    TutorialStage.load(player, 73)
+            70 ->
+                if (event.spellId == 1 && event.spellBook == SpellBookManager.SpellBook.MODERN && event.target == NPC(NPCs.CHICKEN_41)) {
+                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 71)
+                    TutorialStage.load(player, 71)
                 }
         }
     }

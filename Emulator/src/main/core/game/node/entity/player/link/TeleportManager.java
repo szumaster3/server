@@ -898,6 +898,7 @@ public class TeleportManager {
         setAttribute(player, "/save:tutorial:complete", true);
         setAttribute(player, "/save:tutorial:stage", 73);
 
+        player.unhook(content.region.misc.handlers.tutorial.TutorialCastReceiver.INSTANCE);
         player.unhook(content.region.misc.handlers.tutorial.TutorialKillReceiver.INSTANCE);
         player.unhook(content.region.misc.handlers.tutorial.TutorialFireReceiver.INSTANCE);
         player.unhook(content.region.misc.handlers.tutorial.TutorialResourceReceiver.INSTANCE);
