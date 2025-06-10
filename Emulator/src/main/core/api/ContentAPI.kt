@@ -1113,38 +1113,6 @@ fun sendDialogue(
 }
 
 /**
- * Sends a tutorial NPC dialogue to the player.
- *
- * @param player The player to send the dialogue to.
- * @param npc The ID of the NPC initiating the dialogue.
- * @param message The dialogue messages.
- */
-fun sendTutorialNPCDialogue(
-    player: Player,
-    npc: Int,
-    vararg message: String,
-) {
-    Component.setUnclosable(player, player.dialogueInterpreter.sendDialogues(npc, FaceAnim.FRIENDLY, *message))
-}
-
-/**
- * Sends a tutorial NPC dialogue to the player with an optional facial expression.
- *
- * @param player The player to send the dialogue to.
- * @param npc The ID of the NPC initiating the dialogue.
- * @param expr The facial expression of the NPC. Defaults to FaceAnim.FRIENDLY.
- * @param message The dialogue messages.
- */
-fun sendTutorialNPCDialogue(
-    player: Player,
-    npc: Int,
-    expr: FaceAnim = FaceAnim.FRIENDLY,
-    vararg message: String,
-) {
-    Component.setUnclosable(player, player.dialogueInterpreter.sendDialogues(npc, expr, *message))
-}
-
-/**
  * Sends a dialogue for destroying an item, with an optional message.
  *
  * @param player The player to send the dialogue to.

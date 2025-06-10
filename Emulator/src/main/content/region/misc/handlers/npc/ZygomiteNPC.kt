@@ -28,23 +28,16 @@ class ZygomiteNPC :
                 sendMessage(player, "Zygomite is Slayer monster that require a Slayer level of 57 to kill.")
                 return@on true
             }
-            lock(player, 1)
+            lock(player, 3)
             animate(player, FIRST_ANIMATION)
             submitWorldPulse(
                 object : Pulse() {
-                    var counter = 0
-
                     override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> {
                                 animate(entity = fungi, anim = SECOND_ANIMATION)
                                 transformNpc(fungi, fungi.id + 2, 500)
                                 fungi.impactHandler.disabledTicks = 1
                                 fungi.attack(player)
-                                return true
-                            }
-                        }
-                        return false
+                        return true
                     }
                 },
             )

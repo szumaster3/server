@@ -1,6 +1,5 @@
 package content.global.activity.mogre
 
-import content.region.misc.handlers.tutorial.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
@@ -10,8 +9,10 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
+import org.rs.consts.Vars
 
 /**
  * Represents the Skippy dialogue.
@@ -43,19 +44,20 @@ class SkippyDialogueFile : DialogueFile() {
             0 -> {
                 /*
                  * Handles tutorial island dialogue.
-                 */
+                 *
 
                 if (inBorders(player!!, SkippyUtils.TUTORIAL_ISLAND)) {
                     npcl(FaceAnim.HALF_ASKING, "Do you wanna skip the Tutorial?")
                     stage = 88
                     return
                 }
+                */
 
                 /*
                  * Handles activity dialogue.
                  */
 
-                when (getVarbit(player!!, SkippyUtils.SKIPPY_VARBIT)) {
+                when (getVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_AND_SKIPPY_1344)) {
                     0 -> {
                         stage = END_DIALOGUE
                         val message = if (!inInventory(player!!, Items.BUCKET_OF_WATER_1929)) {
@@ -87,13 +89,13 @@ class SkippyDialogueFile : DialogueFile() {
             }
             2 -> npc("What?").also { stage++ }
             3 -> {
-                val duration = animationDuration(Animation(SkippyUtils.ANIMATION_THROW_BUCKET))
+                val duration = animationDuration(Animation(Animations.USE_BUCKET_ALT_4255))
                 if(!removeItem(player!!, Items.BUCKET_OF_WATER_1929)) return
                 submitIndividualPulse(
                     player!!,
                     object : Pulse(duration) {
                         override fun pulse(): Boolean {
-                            animate(player!!, SkippyUtils.ANIMATION_THROW_BUCKET)
+                            animate(player!!, Animations.USE_BUCKET_ALT_4255)
                             playAudio(player!!, Sounds.SKIPPY_BUCKET_1399)
                             addItem(player!!, Items.BUCKET_1925)
                             npc("Ahhhhhhhhhhgh! That's cold! Are you trying to kill me?")
@@ -109,7 +111,7 @@ class SkippyDialogueFile : DialogueFile() {
             8 -> npcl(FaceAnim.NEUTRAL, "Nettle for preference. Just make sure it's hot.").also { stage++ }
             9 -> npcl(FaceAnim.NEUTRAL, "And don't throw it at me!").also { stage++ }
             10 -> player(FaceAnim.FRIENDLY, "What's your problem? You're all clean now.").also { stage++ }
-            11 -> end().also { setVarbit(player!!, SkippyUtils.SKIPPY_VARBIT, 1, true) }
+            11 -> end().also { setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_AND_SKIPPY_1344, 1, true) }
             12 -> npc("Gaah! Don't drench me again!").also { stage++ }
             13 -> player("Hey! I only did that once! Try not to be such a big", "baby!").also { stage++ }
             14 -> npc("So what are you here for then?").also { stage++ }
@@ -151,7 +153,7 @@ class SkippyDialogueFile : DialogueFile() {
             25 -> player("Wait... is this cure a bucket of chocolate milk and snape", "grass?").also { stage++ }
             26 -> npc("Yes!, That's the stuff!").also { stage++ }
             27 -> player("Ahhh. Yes, I've made some of that stuff before. I should", "be able to get you some, no problem.").also { stage++ }
-            28 -> end().also { setVarbit(player!!, SkippyUtils.SKIPPY_VARBIT, 2, true) }
+            28 -> end().also { setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_AND_SKIPPY_1344, 2, true) }
             29 -> npc("Well, I'm still wet, still cold and still", "waiting on that nettle tea.").also { stage = END_DIALOGUE }
             30 -> npcl(FaceAnim.HALF_GUILTY, "Egad! Don't you know not to shout around a guy with a hangover?").also { stage++ }
             31 -> npcl(FaceAnim.HALF_GUILTY, "Ahhhhhg...No more shouting for me...").also { stage++ }
@@ -211,7 +213,7 @@ class SkippyDialogueFile : DialogueFile() {
             73 -> playerl(FaceAnim.HALF_ASKING, "The mudskipper-eating monsters are to be found at Mudskipper point?").also { stage++ }
             74 -> player("Shock!").also { stage++ }
             75 -> player("Thanks. I'll be careful.").also { stage++ }
-            76 -> end().also { setVarbit(player!!, SkippyUtils.SKIPPY_VARBIT, 3, true) }
+            76 -> end().also { setVarbit(player!!, Vars.VARBIT_MINI_QUEST_MOGRE_AND_SKIPPY_1344, 3, true) }
             77 -> npcl(FaceAnim.HALF_GUILTY, "Hey you!").also { stage++ }
             78 -> playerl(FaceAnim.HALF_GUILTY, "How do I annoy the Mogres again?").also { stage++ }
             79 -> npcl(FaceAnim.HALF_GUILTY, "Go south to Mudskipper Point and lob a Fishing Explosive into the sea. You can grab them from the Slayer masters.").also { stage++ }
@@ -226,7 +228,7 @@ class SkippyDialogueFile : DialogueFile() {
 
             /*
              * Tutorial island dialogue extension.
-             */
+             *
 
             88 -> {
                 setTitle(player!!, 4)
@@ -254,9 +256,8 @@ class SkippyDialogueFile : DialogueFile() {
 
             97 -> {
                 end()
-                TutorialStage.completeTutorial(player!!)
             }
+            */
         }
     }
-
 }

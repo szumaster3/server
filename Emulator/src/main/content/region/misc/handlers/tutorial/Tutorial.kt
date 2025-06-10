@@ -28,7 +28,7 @@ class Tutorial :
             } else {
                 p.locks.unlockTeleport()
             }
-            if (getAttribute(p, TutorialStage.TUTORIAL_STAGE, -1) >= 72) {
+            if (getAttribute(p, TutorialStage.TUTORIAL_STAGE, -1) == 72) {
                 Component.setUnclosable(
                     p,
                     p.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -53,7 +53,7 @@ class Tutorial :
             val player = entity.asPlayer()
             val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1)
 
-            if (stage >= 72) {
+            if (stage == 72) {
                 player.locks.unlockTeleport()
                 Component.setUnclosable(
                     player,
@@ -70,7 +70,7 @@ class Tutorial :
     }
 
     override fun logout(player: Player) {
-        if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1) >= 72) {
+        if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1) == 72) {
             Component.setUnclosable(
                 player,
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(

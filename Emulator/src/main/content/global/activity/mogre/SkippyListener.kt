@@ -5,6 +5,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import org.rs.consts.Items
 import org.rs.consts.NPCs
+import org.rs.consts.Vars
 
 /**
  * Handles interaction for lore activity that teaches players how to fight mogre npc.
@@ -42,7 +43,7 @@ class SkippyListener : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.BUCKET_OF_WATER_1929, *SKIPPY_NPC) { player, _, _ ->
-            if (getVarbit(player, SkippyUtils.SKIPPY_VARBIT) > 1) {
+            if (getVarbit(player, Vars.VARBIT_MINI_QUEST_MOGRE_AND_SKIPPY_1344) > 1) {
                 sendPlayerDialogue(player, "I think he's sober enough. And I don't want to use another bucket of water.")
             } else {
                 sendMessage(player, "I can't do that.")

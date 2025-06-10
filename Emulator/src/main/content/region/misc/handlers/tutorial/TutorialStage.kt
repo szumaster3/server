@@ -1,17 +1,14 @@
 package content.region.misc.handlers.tutorial
 
 import content.data.GameAttributes
-import core.ServerConstants
 import core.api.*
 import core.api.ui.closeDialogue
 import core.api.ui.sendInterfaceConfig
 import core.api.ui.setMinimapState
 import core.game.component.Component
-import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.item.Item
@@ -21,17 +18,15 @@ import core.game.world.GameWorld.settings
 import core.game.world.map.Location
 import core.game.world.repository.Repository
 import core.tools.BLUE
-import core.worker.ManagementEvents
 import org.rs.consts.*
-import proto.management.JoinClanRequest
 
 object TutorialStage {
     const val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
     const val TUTORIAL_HINT = "tutorial:hinticon"
     const val FLASHING_ICON = Vars.VARBIT_FLASHING_TAB_ICON_3756
 
-    private val STARTER_PACK = arrayOf(Item(Items.BRONZE_AXE_1351, 1), Item(Items.TINDERBOX_590, 1), Item(Items.SMALL_FISHING_NET_303, 1), Item(Items.SHRIMPS_315, 1), Item(Items.BUCKET_1925, 1), Item(Items.EMPTY_POT_1931, 1), Item(Items.BREAD_2309, 1), Item(Items.BRONZE_PICKAXE_1265, 1), Item(Items.BRONZE_DAGGER_1205, 1), Item(Items.BRONZE_SWORD_1277, 1), Item(Items.WOODEN_SHIELD_1171, 1), Item(Items.SHORTBOW_841, 1), Item(Items.BRONZE_ARROW_882, 25), Item(Items.AIR_RUNE_556, 25), Item(Items.MIND_RUNE_558, 15), Item(Items.WATER_RUNE_555, 6), Item(Items.EARTH_RUNE_557, 4), Item(Items.BODY_RUNE_559, 2))
-    private val STARTER_BANK = Item(Items.COINS_995, 25)
+    @JvmField val STARTER_BANK = Item(Items.COINS_995, 25)
+    @JvmField val STARTER_PACK = arrayOf(Item(Items.BRONZE_AXE_1351, 1), Item(Items.TINDERBOX_590, 1), Item(Items.SMALL_FISHING_NET_303, 1), Item(Items.SHRIMPS_315, 1), Item(Items.BUCKET_1925, 1), Item(Items.EMPTY_POT_1931, 1), Item(Items.BREAD_2309, 1), Item(Items.BRONZE_PICKAXE_1265, 1), Item(Items.BRONZE_DAGGER_1205, 1), Item(Items.BRONZE_SWORD_1277, 1), Item(Items.WOODEN_SHIELD_1171, 1), Item(Items.SHORTBOW_841, 1), Item(Items.BRONZE_ARROW_882, 25), Item(Items.AIR_RUNE_556, 25), Item(Items.MIND_RUNE_558, 15), Item(Items.WATER_RUNE_555, 6), Item(Items.EARTH_RUNE_557, 4), Item(Items.BODY_RUNE_559, 2))
 
     @JvmStatic
     fun rollback(player: Player) {
@@ -49,7 +44,6 @@ object TutorialStage {
             player.hook(Event.UsedWith, TutorialUseWithReceiver)
             player.hook(Event.FireLit, TutorialFireReceiver)
             player.hook(Event.NPCKilled, TutorialKillReceiver)
-            player.hook(Event.SpellCast, TutorialCompletionReceiver)
             openOverlay(player, Components.TUTORIAL_PROGRESS_371)
             sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
             player.musicPlayer.play(MusicEntry.forId(Music.NEWBIE_MELODY_62))
@@ -1257,134 +1251,6 @@ object TutorialStage {
                         "be cast once every 30 minutes.",
                     ),
                 )
-            }
-
-            73 -> {
-                lock(player, 18)
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                        "You have almost completed the tutorial!",
-                        "",
-                        "Just click on the first spell, Home Teleport, in your Magic",
-                        "Spellbook. This spell doesn't require any runes, but can only",
-                        "be cast once every 30 minutes.",
-                    ),
-                )
-                submitWorldPulse(
-                    object : Pulse() {
-                        var counter = 0
-
-                        override fun pulse(): Boolean {
-                            when (counter++) {
-                                0 -> {
-                                    setVarbit(player, FLASHING_ICON, 0)
-                                    setVarp(player, 281, 1000, true)
-                                    setAttribute(player, "/save:tutorial:complete", true)
-                                    player.unhook(TutorialCompletionReceiver)
-                                    player.unhook(TutorialKillReceiver)
-                                    player.unhook(TutorialFireReceiver)
-                                    player.unhook(TutorialResourceReceiver)
-                                    player.unhook(TutorialUseWithReceiver)
-                                    player.unhook(TutorialInteractionReceiver)
-                                    player.unhook(TutorialButtonReceiver)
-
-                                    if (settings!!.enable_default_clan) {
-                                        player.communication.currentClan = ServerConstants.SERVER_NAME
-                                        val clanJoin = JoinClanRequest.newBuilder()
-                                        clanJoin.clanName = ServerConstants.SERVER_NAME
-                                        clanJoin.username = player.name
-                                        ManagementEvents.publish(clanJoin.build())
-                                    }
-                                }
-
-                                18 -> {
-                                    closeOverlay(player)
-                                    player.inventory.clear()
-                                    player.bank.clear()
-                                    player.equipment.clear()
-                                    player.inventory.add(*STARTER_PACK)
-                                    player.bank.add(STARTER_BANK)
-                                    player.interfaceManager.restoreTabs()
-                                    player.interfaceManager.setViewedTab(3)
-                                    player.interfaceManager.openDefaultTabs()
-                                    player.dialogueInterpreter.sendDialogues(
-                                        "Welcome to Lumbridge! To get more help, simply click on the",
-                                        "Lumbridge Guide or one of the Tutors - these can be found by",
-                                        "looking for the question mark icon on your minimap. If you find you",
-                                        "are lost at any time, look for a signpost or use the Lumbridge Home",
-                                        "Teleport spell.",
-                                    )
-                                    setAttribute(player, "close_c_", true)
-                                    return true
-                                }
-                            }
-                            return false
-                        }
-                    },
-                )
-            }
-        }
-    }
-
-    fun completeTutorial(player: Player) {
-        if (player.rights != Rights.ADMINISTRATOR) {
-            queueScript(player, 1, QueueStrength.SOFT) {
-                setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 71)
-                load(player, 71)
-                player.teleporter.send(Location.create(3141, 3089, 0))
-                return@queueScript stopExecuting(player)
-            }
-        } else {
-            setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 73)
-            setAttribute(player, "/save:tutorial:complete", true)
-            setVarbit(player, FLASHING_ICON, 0)
-            setVarp(player, 281, 1000, true)
-            closeOverlay(player)
-
-            player.inventory.clear()
-            player.bank.clear()
-            player.equipment.clear()
-
-            player.interfaceManager.restoreTabs()
-            player.interfaceManager.setViewedTab(3)
-            player.interfaceManager.openDefaultTabs()
-
-            player.inventory.add(*STARTER_PACK)
-            player.bank.add(STARTER_BANK)
-
-            player.unhook(TutorialCompletionReceiver)
-            player.unhook(TutorialKillReceiver)
-            player.unhook(TutorialFireReceiver)
-            player.unhook(TutorialResourceReceiver)
-            player.unhook(TutorialUseWithReceiver)
-            player.unhook(TutorialInteractionReceiver)
-            player.unhook(TutorialButtonReceiver)
-
-            if (settings!!.enable_default_clan) {
-                player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
-
-                val clanJoin = JoinClanRequest.newBuilder()
-                    .setClanName(ServerConstants.SERVER_NAME.toLowerCase())
-                    .setUsername(player.name)
-                    .build()
-
-                ManagementEvents.publish(clanJoin)
-
-            }
-
-            player.teleporter.send(Location.create(3233, 3230, 0))
-
-            queueScript(player, 3, QueueStrength.SOFT) {
-                player.dialogueInterpreter.sendDialogues(
-                    "Welcome to Lumbridge! To get more help, simply click on the",
-                    "Lumbridge Guide or one of the Tutors - these can be found by",
-                    "looking for the question mark icon on your minimap. If you find you",
-                    "are lost at any time, look for a signpost or use the Lumbridge Home",
-                    "Teleport spell.",
-                )
-                setAttribute(player, "close_c_", true)
-                return@queueScript stopExecuting(player)
             }
         }
     }

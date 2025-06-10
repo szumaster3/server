@@ -23,9 +23,7 @@ class SurvivalExpertDialogue(
         // Not so close, please. I don't want you to burn me!
         when (tutStage) {
             4 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    NPCs.SURVIVAL_EXPERT_943,
+                npc(
                     "Hello there, newcomer. My name is Brynna. My job is",
                     "to teach you a few survival tips and tricks. First off",
                     "we're going to start with the most basic survival skill of",
@@ -33,9 +31,7 @@ class SurvivalExpertDialogue(
                 )
 
             11 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    NPCs.SURVIVAL_EXPERT_943,
+                npc(
                     "Well done! Next we need to get some food in our",
                     "bellies. We'll need something to cook. There are shrimp",
                     "in the pond there, so let's catch and cook some.",
@@ -70,9 +66,7 @@ class SurvivalExpertDialogue(
                     )
                     addItem(player, Items.SMALL_FISHING_NET_303)
                 } else {
-                    sendTutorialNPCDialogue(
-                        player,
-                        NPCs.SURVIVAL_EXPERT_943,
+                    npc(
                         "Well done! Next we need to get some food in our",
                         "bellies. We'll need something to cook. There are shrimp",
                         "in the pond there, so let's catch and cook some.",

@@ -1,7 +1,6 @@
 package content.region.misc.dialogue.tutorial
 
 import content.region.misc.handlers.tutorial.TutorialStage
-import core.api.sendTutorialNPCDialogue
 import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -18,10 +17,7 @@ class RSGuideDialogue(
         npc = args[0] as NPC
         val tutStage = player?.getAttribute(TutorialStage.TUTORIAL_STAGE, 0) ?: 0
         if (tutStage == 39) {
-            sendTutorialNPCDialogue(
-                player,
-                npc.id,
-                FaceAnim.HAPPY,
+            npc(FaceAnim.HAPPY,
                 "Greetings! I see you are a new arrival to this land. My",
                 "job is to welcome all new visitors. So welcome!",
             )
@@ -29,23 +25,21 @@ class RSGuideDialogue(
             return true
         }
         if (tutStage == 2) {
-            sendTutorialNPCDialogue(player, npc.id, FaceAnim.NEUTRAL, "I'm glad you're making progress!")
+            npc(FaceAnim.NEUTRAL, "I'm glad you're making progress!")
             stage = 6
             return true
         }
         if (tutStage < 2) {
             end()
-            sendTutorialNPCDialogue(
-                player,
-                npc.id,
-                FaceAnim.NEUTRAL,
+            npc(FaceAnim.NEUTRAL,
                 "You will notice a flashing icon of a spanner; please click",
                 "on this to continue the tutorial.",
             )
             return false
         } else {
             end()
-            sendTutorialNPCDialogue(player, npc.id, FaceAnim.HALF_GUILTY, "Please follow the onscreen instructions!")
+            npc(FaceAnim.HALF_GUILTY, "Please follow the onscreen instructions!")
+            TutorialStage.load(player, tutStage)
             return false
         }
     }
@@ -56,9 +50,7 @@ class RSGuideDialogue(
     ): Boolean {
         when (stage) {
             0 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
+                npc(
                     FaceAnim.NEUTRAL,
                     "You have already learned the first thing needed to",
                     "succeed in this world: talking to other people!",
@@ -66,10 +58,7 @@ class RSGuideDialogue(
                     stage++
                 }
             1 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
-                    FaceAnim.NEUTRAL,
+                npc(FaceAnim.NEUTRAL,
                     "You will find many inhabitants of this world have useful",
                     "things to say to you. By clicking on them with your",
                     "mouse you can talk to them.",
@@ -77,10 +66,7 @@ class RSGuideDialogue(
                     stage++
                 }
             2 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
-                    FaceAnim.NEUTRAL,
+                npc(FaceAnim.NEUTRAL,
                     "I would also suggest reading through some of the",
                     "supporting information on the website. There you can",
                     "find the Game Guide, which contain all the additional",
@@ -89,19 +75,13 @@ class RSGuideDialogue(
                     stage++
                 }
             3 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
-                    FaceAnim.NEUTRAL,
+                npc(FaceAnim.NEUTRAL,
                     "maps and helpful tips to help you on your journey.",
                 ).also {
                     stage++
                 }
             4 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
-                    FaceAnim.HAPPY,
+                npc(FaceAnim.HAPPY,
                     "You will notice a flashing icon of a spanner; please click",
                     "on this to continue the tutorial.",
                 ).also {
@@ -113,10 +93,7 @@ class RSGuideDialogue(
                 TutorialStage.load(player, 1)
             }
             6 ->
-                sendTutorialNPCDialogue(
-                    player,
-                    npc.id,
-                    FaceAnim.NEUTRAL,
+                npc(FaceAnim.NEUTRAL,
                     "To continue the tutorial go through that door over",
                     "there and speak to your first instructor!",
                 ).also {
