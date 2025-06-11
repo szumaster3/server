@@ -21,7 +21,7 @@ private const val CHEST = org.rs.consts.Scenery.CHEST_2827
 /**
  * Handles interactions with the Gutanoth chest.
  */
-class GutanothChest : InteractionListener {
+class GutanothChestPlugin : InteractionListener {
     override fun defineListeners() {
         on(CHEST, IntType.SCENERY, "open") { player, node ->
             val delay = getAttribute(player, "gutanoth-chest-delay", 0L)

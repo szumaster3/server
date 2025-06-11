@@ -16,7 +16,7 @@ import kotlin.math.floor
  * Utility object to handle swapping Summoning Pouches for Spirit Shards via Bogrog.
  * @author Ceikry
  */
-object BogrogPouchSwapper {
+object BogrogPouchUtils {
     private const val OP_VALUE = 0
     private const val OP_SWAP_1 = 1
     private const val OP_SWAP_5 = 2
@@ -28,11 +28,7 @@ object BogrogPouchSwapper {
     private const val SPIRIT_SHARD = Items.SPIRIT_SHARDS_12183
 
     @JvmStatic
-    fun handle(
-        player: Player,
-        optionIndex: Int,
-        slot: Int,
-    ): Boolean {
+    fun handle(player: Player, optionIndex: Int, slot: Int): Boolean {
         val item = player.inventory.get(slot) ?: return false
         return when (optionIndex) {
             OP_VALUE -> sendValue(item.id, player)
@@ -44,6 +40,7 @@ object BogrogPouchSwapper {
                     swap(player, value as Int, item.id)
                 }
             }
+
             OP_SWAP_ALL -> swap(player, item.amount, item.id)
             EXAMINE -> {
                 val examine = item.definition?.let {
@@ -52,6 +49,7 @@ object BogrogPouchSwapper {
                 sendMessage(player, "$examine")
                 false
             }
+
             else -> false
         }
     }
@@ -60,14 +58,11 @@ object BogrogPouchSwapper {
      * Swaps the given amount of summoning pouches for spirit shards.
      */
     @JvmStatic
-    private fun swap(
-        player: Player,
-        amount: Int,
-        itemID: Int,
-    ): Boolean {
+    private fun swap(player: Player, amount: Int, itemID: Int): Boolean {
         var amt = amount
         val value = getValue(itemID)
         if (value == 0.0) {
+            sendMessage(player, "This item cannot be exchanged here.")
             return false
         }
         val inInventory = player.inventory.getAmount(itemID)
@@ -82,17 +77,17 @@ object BogrogPouchSwapper {
         val shardsReceived = floor(value * amt).toInt()
 
         player.inventory.add(Item(SPIRIT_SHARD, shardsReceived))
-        sendMessage(player, "You swapped $amt pouch${if (amt != 1) "es" else ""} and received $shardsReceived shard${if (shardsReceived != 1) "s" else ""}.")
+        sendMessage(
+            player,
+            "You swapped $amt pouch${if (amt != 1) "es" else ""} and received $shardsReceived shard${if (shardsReceived != 1) "s" else ""}."
+        )
         return true
     }
 
     /**
      * Show exchange values.
      */
-    private fun sendValue(
-        itemID: Int,
-        player: Player,
-    ): Boolean {
+    private fun sendValue(itemID: Int, player: Player, ): Boolean {
         val value = getValue(itemID)
         if (value == 0.0) {
             return false

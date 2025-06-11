@@ -50,7 +50,7 @@ class BogrogListener : InteractionListener {
                 "Examine",
                 keepAlive = true
             ) { slot, index ->
-                BogrogPouchSwapper.handle(player, index, slot)
+                BogrogPouchUtils.handle(player, index, slot)
             }
         }
     }

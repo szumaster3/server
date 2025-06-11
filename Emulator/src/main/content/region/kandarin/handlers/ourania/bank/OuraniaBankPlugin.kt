@@ -1,4 +1,4 @@
-package content.region.kandarin.handlers.feldip
+package content.region.kandarin.handlers.ourania.bank
 
 import core.api.*
 import core.api.interaction.openBankAccount
@@ -14,7 +14,7 @@ import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
-class OuraniaListener : InteractionListener, InterfaceListener {
+class OuraniaBankPlugin : InteractionListener, InterfaceListener {
 
     override fun defineListeners() {
 

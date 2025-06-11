@@ -8,6 +8,9 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.tools.Log
 
+/**
+ * Handles the Generic Item Select interface in the Grand Exchange.
+ */
 class GenericItemSelect : InterfaceListener {
     val GENERIC_ITEM_SELECT_IFACE = 12
 
@@ -38,27 +41,27 @@ class GenericItemSelect : InterfaceListener {
         }
     }
 
-    private fun processResponse(
-        player: Player,
-        opcode: Int,
-        slot: Int,
-    ) {
+    private fun processResponse(player: Player, opcode: Int, slot: Int, ) {
         val callback = getAttribute<((Int, Int) -> Unit)?>(player, "itemselect-callback", null)
         if (callback == null) {
             log(this::class.java, Log.WARN, "${player.name} is trying to use an item select prompt with no callback!")
             return
         }
 
-        val optionIndex =
-            when (opcode) {
-                155 -> 0
-                196 -> 1
-                124 -> 2
-                199 -> 3
-                234 -> 4
-                9 -> 10
-                else -> -1
-            }
+        val optionIndex = when (opcode) {
+            155 -> 0
+            196 -> 1
+            124 -> 2
+            199 -> 3
+            234 -> 4
+            168 -> 5
+            166 -> 6
+            64 -> 7
+            53 -> 8
+            9 -> 9
+            10 -> 10
+            else -> -1
+        }
         if (optionIndex == -1) {
             log(
                 this::class.java,
