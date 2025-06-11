@@ -1,8 +1,6 @@
 package content.region.misthalin.handlers.varrock
 
-import content.data.GameAttributes
 import content.region.kandarin.quest.biohazard.dialogue.GuidorsWifeDialogue
-import content.region.misc.handlers.MinecartTravel
 import content.region.misthalin.dialogue.varrock.KnockatDoorDialogue
 import content.region.misthalin.dialogue.varrock.SawmillOperatorDialogue
 import core.GlobalStatistics
@@ -10,7 +8,6 @@ import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.getQuestPoints
 import core.api.quest.getQuestStage
-import core.api.ui.closeDialogue
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
