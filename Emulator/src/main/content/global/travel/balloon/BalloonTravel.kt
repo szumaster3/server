@@ -59,7 +59,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
         /**
          * Opens the interface.
          */
-        private fun openBalloonInterface(player: Player, location: Balloons) {
+        private fun openBalloonInterface(player: Player, location: Balloon) {
             player.setAttribute(GameAttributes.BALLOON_ORIGIN, location)
             openInterface(player, Components.ZEP_BALLOON_MAP_469)
             setComponentVisibility(player, Components.ZEP_BALLOON_MAP_469, location.componentId, false)
@@ -68,8 +68,8 @@ class BalloonTravel : InterfaceListener, InteractionListener {
         /**
          * Executes the flight.
          */
-        fun executeFlight(player: Player, destination: Balloons) {
-            val origin = player.getAttribute<Balloons>(GameAttributes.BALLOON_ORIGIN)
+        fun flightPulse(player: Player, destination: Balloon) {
+            val origin = player.getAttribute<Balloon>(GameAttributes.BALLOON_ORIGIN)
             if (origin == null) {
                 player.debug("null location.")
                 return
@@ -78,7 +78,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
             lock(player, 7)
             lockInteractions(player, 7)
 
-            val animationId = Balloons.getAnimationId(origin, destination)
+            val animationId = Balloon.getAnimationId(origin, destination)
             val animationTime = Animation(animationId).duration
 
             playJingle(player, 118)
@@ -115,7 +115,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
 
     override fun defineInterfaceListeners() {
         on(Components.ZEP_BALLOON_MAP_469) { player, _, _, buttonID, _, _ ->
-            val destination = Balloons.fromButtonId(buttonID) ?: return@on true
+            val destination = Balloon.fromButtonId(buttonID) ?: return@on true
             val isAdmin = player.rights == Rights.ADMINISTRATOR
 
             //TODO: You can open new locations from Entrana.
@@ -125,7 +125,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            val origin = player.getAttribute<Balloons>(GameAttributes.BALLOON_ORIGIN)
+            val origin = player.getAttribute<Balloon>(GameAttributes.BALLOON_ORIGIN)
             if (origin == destination) {
                 sendDialogue(player, "You can't fly to the same location.")
                 return@on true
@@ -141,7 +141,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            if (destination == Balloons.ENTRANA) {
+            if (destination == Balloon.ENTRANA) {
                 if (!isAdmin && !ItemDefinition.canEnterEntrana(player)) {
                     sendDialogue(player, "You can't take flight with weapons and armour to Entrana.")
                     return@on true
@@ -151,13 +151,13 @@ class BalloonTravel : InterfaceListener, InteractionListener {
             }
 
             if (isAdmin) {
-                executeFlight(player, destination)
+                flightPulse(player, destination)
                 return@on true
             }
 
             if (removeItem(player, Item(destination.logId, 1))) {
-                executeFlight(player, destination)
-                if (destination == Balloons.VARROCK) {
+                flightPulse(player, destination)
+                if (destination == Balloon.VARROCK) {
                     finishDiaryTask(player, DiaryType.VARROCK, 2, 17)
                 }
             } else {
@@ -176,7 +176,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
 
         on(basketIds, IntType.SCENERY, "use") { player, node ->
             val sceneryId = node.asScenery().wrapper.id
-            val location = Balloons.fromSceneryId(sceneryId)
+            val location = Balloon.fromSceneryId(sceneryId)
             if (location != null) {
                 openBalloonInterface(player, location)
             }
@@ -193,7 +193,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            val location = Balloons.fromNpcId(node.id)
+            val location = Balloon.fromNpcId(node.id)
             if (location != null) {
                 openBalloonInterface(player, location)
             }

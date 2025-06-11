@@ -9,9 +9,8 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class GliderListener :
-    InteractionListener,
-    InterfaceListener {
+class GliderListener : InteractionListener, InterfaceListener {
+
     private val GNOME_PILOTS =
         intArrayOf(
             NPCs.CAPTAIN_DALBUR_3809,
@@ -21,6 +20,11 @@ class GliderListener :
         )
 
     override fun defineListeners() {
+
+        /*
+         * Handles option for glider transportation.
+         */
+
         on(GNOME_PILOTS, IntType.NPC, "glider") { player, _ ->
             if (!isQuestComplete(player, Quests.THE_GRAND_TREE)) {
                 sendMessage(player, "You must complete The Grand Tree Quest to access the gnome glider.")
@@ -32,6 +36,11 @@ class GliderListener :
     }
 
     override fun defineInterfaceListeners() {
+
+        /*
+         * Handles glider interface.
+         */
+
         onOpen(Components.GLIDERMAP_138) { player, _ ->
             setVarp(player, 153, 0)
             return@onOpen true

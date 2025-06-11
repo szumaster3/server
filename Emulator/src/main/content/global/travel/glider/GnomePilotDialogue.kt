@@ -12,10 +12,12 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
+/**
+ * Represents the Gnome pilots.
+ */
 @Initializable
-class GnomePilotDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GnomePilotDialogue(player: Player? = null, ) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "What do you want human?")
@@ -48,6 +50,6 @@ class GnomePilotDialogue(
             NPCs.GNORMADIUM_AVLAFRIM_1800,
             NPCs.CAPTAIN_DALBUR_3809,
             NPCs.CAPTAIN_BLEEMADGE_3810,
-            NPCs.CAPTAIN_KLEMFOODLE_3812,
+            NPCs.CAPTAIN_KLEMFOODLE_3812
         )
 }

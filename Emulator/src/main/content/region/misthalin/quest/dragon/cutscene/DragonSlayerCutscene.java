@@ -92,7 +92,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
     public void end() {
         super.end();
         this.getBobinPulse().stop();
-        player.getProperties().setTeleportLocation(Charter.PORT_SARIM_TO_CRANDOR.location);
+        player.getProperties().setTeleportLocation(Charter.PORT_SARIM_TO_CRANDOR.getLocation());
         player.getInterfaceManager().close();
         player.animate(ANIMATION);
         player.getDialogueInterpreter().close();
@@ -439,8 +439,8 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                             stage = 512;
                             break;
                         case 512:
-                            setAttribute(player, "real-end", Charter.PORT_SARIM_TO_CRANDOR.location);
-                            setAttribute(player, "cutscene:original-loc", Charter.PORT_SARIM_TO_CRANDOR.location);
+                            setAttribute(player, "real-end", Charter.PORT_SARIM_TO_CRANDOR.getLocation());
+                            setAttribute(player, "cutscene:original-loc", Charter.PORT_SARIM_TO_CRANDOR.getLocation());
                             PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.SHAKE, 4, 4, 1200, 4, 4));
                             player.getDialogueInterpreter().sendPlainMessage(true, "<col=8A0808>CRASH!");
                             cutscene.stop(true);
