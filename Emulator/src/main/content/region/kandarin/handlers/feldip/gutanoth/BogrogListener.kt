@@ -9,6 +9,9 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import org.rs.consts.NPCs
 
+/**
+ * Handles Bogrog npc.
+ */
 class BogrogListener : InteractionListener {
     override fun defineListeners() {
 
@@ -17,6 +20,7 @@ class BogrogListener : InteractionListener {
          */
 
         on(NPCs.BOGROG_4472, IntType.NPC, "swap") { player, _ ->
+            sendMessage(player, "Pick the pouches and scrolls you wish to trade for shards.")
             openSwap(player)
             return@on true
         }
@@ -35,10 +39,18 @@ class BogrogListener : InteractionListener {
                 return
             }
 
-            sendItemSelect(player, "Value", "Swap 1", "Swap 5", "Swap 10", "Swap X") { slot: Int?, index: Int? ->
-                if (slot != null && index != null) {
-                    BogrogPouchSwapper.handle(player, index, slot)
-                }
+            sendItemSelect(
+                player,
+                "Value",
+                "Swap 1",
+                "Swap 5",
+                "Swap 10",
+                "Swap X",
+                "Swap All",
+                "Examine",
+                keepAlive = true
+            ) { slot, index ->
+                BogrogPouchSwapper.handle(player, index, slot)
             }
         }
     }

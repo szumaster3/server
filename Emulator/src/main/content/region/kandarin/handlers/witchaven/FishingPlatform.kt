@@ -16,10 +16,7 @@ import org.rs.consts.Quests
 object FishingPlatform {
 
     /**
-     * Travel for the [player] to the specified destination.
-     *
-     * @param player the player.
-     * @param travel the travel destination.
+     * Handles travel pulse.
      */
     @JvmStatic
     fun sail(
@@ -66,19 +63,9 @@ object FishingPlatform {
         )
     }
     /**
-     * Represents a travel route available from or to the fishing platform.
-     *
-     * @property destName the destination name.
-     * @property destinationLoc the destination location.
-     * @property component the component id.
-     * @property ticks the duration.
+     * Represents a fishing platform travel routes.
      */
-    enum class Travel(
-        val destName: String,
-        val destinationLoc: Location,
-        val component: Int,
-        val ticks: Int,
-    ) {
+    enum class Travel(val destName: String, val destinationLoc: Location, val component: Int, val ticks: Int, ) {
         WITCHAVEN_TO_FISHING_PLATFORM("at the fishing platform", Location.create(2782, 3273, 0), 10, 8),
         FISHING_PLATFORM_TO_WITCHAVEN("at Witchaven", Location.create(2719, 3301, 0), 11, 12),
         FISHING_PLATFORM_TO_SMALL_ISLAND("on a small island", Location.create(2800, 3320, 0), 12, 12),

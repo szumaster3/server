@@ -2,6 +2,7 @@ package content.region.kandarin.handlers.feldip.gutanoth
 
 import content.global.skill.summoning.SummoningPouch
 import content.global.skill.summoning.SummoningScroll
+import core.api.getItemName
 import core.api.sendInputDialogue
 import core.api.sendMessage
 import core.game.dialogue.InputType
@@ -13,6 +14,7 @@ import kotlin.math.floor
 
 /**
  * Utility object to handle swapping Summoning Pouches for Spirit Shards via Bogrog.
+ * @author Ceikry
  */
 object BogrogPouchSwapper {
     private const val OP_VALUE = 0
@@ -20,16 +22,11 @@ object BogrogPouchSwapper {
     private const val OP_SWAP_5 = 2
     private const val OP_SWAP_10 = 3
     private const val OP_SWAP_X = 4
+    private const val OP_SWAP_ALL = 5
+    private const val EXAMINE = 6
+
     private const val SPIRIT_SHARD = Items.SPIRIT_SHARDS_12183
 
-    /**
-     * Processes a pouch swap or value check request based on the option selected.
-     *
-     * @param player the player.
-     * @param optionIndex the option.
-     * @param slot the inventory slot containing the pouch item.
-     * @return `true` if the action was successful, `false` otherwise.
-     */
     @JvmStatic
     fun handle(
         player: Player,
@@ -42,24 +39,25 @@ object BogrogPouchSwapper {
             OP_SWAP_1 -> swap(player, 1, item.id)
             OP_SWAP_5 -> swap(player, 5, item.id)
             OP_SWAP_10 -> swap(player, 10, item.id)
-            OP_SWAP_X ->
-                true.also {
-                    sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                        swap(player, value as Int, item.id)
-                    }
+            OP_SWAP_X -> true.also {
+                sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
+                    swap(player, value as Int, item.id)
                 }
-
+            }
+            OP_SWAP_ALL -> swap(player, item.amount, item.id)
+            EXAMINE -> {
+                val examine = item.definition?.let {
+                    player.packetDispatch.sendMessage(it.examine)
+                }
+                sendMessage(player, "$examine")
+                false
+            }
             else -> false
         }
     }
 
     /**
      * Swaps the given amount of summoning pouches for spirit shards.
-     *
-     * @param player the player.
-     * @param amount the pouches amount to exchange.
-     * @param itemID the pouch id to exchange.
-     * @return `true` if the swap succeeded, `false` otherwise.
      */
     @JvmStatic
     private fun swap(
@@ -73,20 +71,23 @@ object BogrogPouchSwapper {
             return false
         }
         val inInventory = player.inventory.getAmount(itemID)
-        if (amount > inInventory) {
+        if (amt > inInventory) {
             amt = inInventory
         }
+        if (amt == 0) {
+            sendMessage(player, "You don't have any pouches to swap.")
+            return false
+        }
         player.inventory.remove(Item(itemID, amt))
-        player.inventory.add(Item(SPIRIT_SHARD, floor(value * amt).toInt()))
+        val shardsReceived = floor(value * amt).toInt()
+
+        player.inventory.add(Item(SPIRIT_SHARD, shardsReceived))
+        sendMessage(player, "You swapped $amt pouch${if (amt != 1) "es" else ""} and received $shardsReceived shard${if (shardsReceived != 1) "s" else ""}.")
         return true
     }
 
     /**
-     * Sends a message to the player showing the shard value of a pouch.
-     *
-     * @param itemID the id of the pouch item.
-     * @param player the player to send the message to.
-     * @return `true` if the value was successfully retrieved and message sent, `false` otherwise.
+     * Show exchange values.
      */
     private fun sendValue(
         itemID: Int,
@@ -97,15 +98,14 @@ object BogrogPouchSwapper {
             return false
         }
 
-        sendMessage(player, "Bogrog will give you ${floor(value).toInt()} shards for that.")
+        val count = floor(value).toInt()
+        val amount = if (count == 1) "shard" else "shards"
+        sendMessage(player, "You'll receive $count $amount for ${getItemName(itemID)}.")
         return true
     }
 
     /**
      * Calculates the shard value of a pouch item.
-     *
-     * @param itemID the item id.
-     * @return the shard value as a Double; returns 0.0 if no valid pouch found
      */
     private fun getValue(itemID: Int): Double {
         var item = SummoningPouch.get(itemID)
