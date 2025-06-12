@@ -1,6 +1,6 @@
 package content.region.kandarin.quest.seaslug.dialogue
 
-import content.region.kandarin.witchaven.plugin.FishingPlatform
+import content.region.islands.fishing_platform.plugin.FishingPlatform
 import content.region.kandarin.quest.seaslug.cutscene.HolgartCutscene
 import core.api.Container
 import core.api.inInventory

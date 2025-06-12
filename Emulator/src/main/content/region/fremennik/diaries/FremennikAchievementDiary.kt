@@ -2,7 +2,8 @@ package content.region.fremennik.diaries
 
 import content.global.handlers.iface.FairyRing
 import content.minigame.barbassault.dialogue.CaptainCainDialogue
-import content.region.fremennik.jatizso.dialogue.TowerGuardDialogue
+import content.region.fremennik.quests.viking.dialogue.ChieftanBrundtDialogue
+import content.region.islands.jatizso.dialogue.TowerGuardDialogue
 import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue
 import core.api.getStatLevel
 import core.api.inBorders
@@ -146,7 +147,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
                 }
             }
 
-            is content.region.fremennik.quest.viking.dialogue.ChieftanBrundtDialogue -> {
+            is ChieftanBrundtDialogue -> {
                 if (event.currentStage == 615) {
                     finishTask(
                         player,

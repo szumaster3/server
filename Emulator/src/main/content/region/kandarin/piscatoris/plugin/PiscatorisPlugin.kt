@@ -1,6 +1,6 @@
 package content.region.kandarin.piscatoris.plugin
 
-import content.global.travel.RowingBoat
+import content.region.kandarin.eagles_peak.RowingBoat
 import core.api.*
 import core.api.quest.hasRequirement
 import core.game.interaction.IntType

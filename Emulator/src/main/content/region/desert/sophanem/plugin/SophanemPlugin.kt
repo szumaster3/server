@@ -3,12 +3,15 @@ package content.region.desert.sophanem.plugin
 import content.region.desert.sophanem.dialogue.EmbalmerDialogueFile
 import core.api.*
 import core.api.quest.hasRequirement
+import core.game.dialogue.FaceAnim
+import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import core.tools.END_DIALOGUE
 import org.rs.consts.*
 
 class SophanemPlugin : InteractionListener {
@@ -38,8 +41,14 @@ class SophanemPlugin : InteractionListener {
          * Handles using Acne potion on Embalmer.
          */
 
-        onUseWith(IntType.NPC, Items.POTION_195, NPCs.EMBALMER_1980) { player, _, _ ->
-            openDialogue(player, EmbalmerDialogueFile())
+        onUseWith(IntType.NPC, Items.POTION_195, NPCs.EMBALMER_1980) { player, _, with ->
+            val npc  = with.asNpc()
+            dialogue(player) {
+                npc(npc, FaceAnim.SUSPICIOUS, "What are you doing?")
+                player(FaceAnim.FRIENDLY,"I have this potion which I thought might help ease your itching.")
+                npc(npc, FaceAnim.NEUTRAL, "If I thought that these spots could be cured by some potion, I would have mixed up one for myself before now.")
+                player(FaceAnim.HALF_GUILTY, "Sorry... I was just trying to help.")
+            }
             return@onUseWith true
         }
 

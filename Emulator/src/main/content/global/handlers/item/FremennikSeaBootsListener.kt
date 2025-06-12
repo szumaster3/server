@@ -1,6 +1,6 @@
 package content.global.handlers.item
 
-import content.global.travel.LyreTeleport
+import content.region.fremennik.rellekka.plugin.LyreTeleport
 import core.ServerStore.Companion.getBoolean
 import core.api.*
 import core.game.dialogue.DialogueFile

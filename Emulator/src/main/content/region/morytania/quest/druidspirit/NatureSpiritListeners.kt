@@ -1,6 +1,6 @@
 package content.region.morytania.quest.druidspirit
 
-import content.region.morytania.handlers.mortmyre.GhastNPC
+import content.region.morytania.mort_myre_swamp.plugin.GhastNPC
 import core.api.*
 import core.api.item.produceGroundItem
 import core.api.quest.getQuestStage

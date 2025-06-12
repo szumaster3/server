@@ -1,6 +1,5 @@
 package content.region.asgarnia.burthope.dialogue
 
-import content.region.asgarnia.dialogue.ClaimTokenDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

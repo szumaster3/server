@@ -1,6 +1,6 @@
 package content.region.desert.pollnivneach.plugin
 
-import content.region.desert.pollnivneach.dialogue.AliTheBarmanDialogue
+import content.region.desert.pollnivneach.shops.AliTheBarmanDialogue
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

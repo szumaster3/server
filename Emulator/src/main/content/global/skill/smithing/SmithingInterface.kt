@@ -1,7 +1,7 @@
 package content.global.skill.smithing
 
 import content.data.GameAttributes
-import content.region.misc.tutorial.TutorialStage
+import content.region.islands.tutorial_island.plugin.TutorialStage
 import core.api.getAttribute
 import core.api.sendInputDialogue
 import core.api.submitIndividualPulse

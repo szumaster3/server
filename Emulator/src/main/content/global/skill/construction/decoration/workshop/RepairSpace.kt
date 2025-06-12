@@ -3,7 +3,7 @@ package content.global.skill.construction.decoration.workshop
 import content.data.items.BrokenItem
 import content.data.items.BrokenItem.getRepair
 import content.data.items.RepairItem
-import content.region.misthalin.dialogue.lumbridge.BobDialogue
+import content.region.misthalin.lumbridge.shops.BobDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.interaction.NodeUsageEvent

@@ -101,7 +101,6 @@
 | Elf Camp                              | `tirannwn.elf_camp`     | [tirannwn.elf_camp](content.region.tirannwn.elf_camp)         |
 | Isafdar                               | `tirannwn.isafdar`      | [tirannwn.isafdar](content.region.tirannwn.isafdar)           |
 | Lletya                                | `tirannwn.lletya`       | [tirannwn.lletya](content.region.tirannwn.lletya)             |
-| Prifddinas **(c)** *(Not accessible)* | `tirannwn.prifddinas`   | [tirannwn.prifddinas](content.region.tirannwn.prifddinas)     |
 | Tyras Camp                            | `tirannwn.tyras_camp`   | [tirannwn.tyras_camp](content.region.tirannwn.tyras_camp)     |
 | Port Tyras                            | `tirannwn.port_tyras`   | [tirannwn.port_tyras](content.region.tirannwn.port_tyras)     |
 

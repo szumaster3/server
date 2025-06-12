@@ -1,6 +1,6 @@
 package core.game.bots;
 
-import content.region.misc.tutorial.CharacterDesign;
+import content.region.islands.tutorial_island.plugin.CharacterDesign;
 import core.ServerConstants;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.DestinationFlag;

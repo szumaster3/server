@@ -1,8 +1,8 @@
 package content.global.handlers.iface
 
 import content.data.GameAttributes
-import content.region.misc.tutorial.TutorialStage
-import content.region.misc.tutorial.TutorialStage.TUTORIAL_STAGE
+import content.region.islands.tutorial_island.plugin.TutorialStage
+import content.region.islands.tutorial_island.plugin.TutorialStage.TUTORIAL_STAGE
 import core.api.getAttribute
 import core.api.getVarbit
 import core.api.setVarbit

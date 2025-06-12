@@ -1,6 +1,6 @@
 package content.global.handlers.iface
 
-import content.region.misc.tutorial.CharacterDesign
+import content.region.islands.tutorial_island.plugin.CharacterDesign
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
 

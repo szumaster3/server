@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.global.handlers.iface.FairyRing
 import content.global.handlers.item.withnpc.ChaliceOnKingArthurListener
 import content.region.kandarin.quest.grail.dialogue.GalahadDialogue
-import content.region.kandarin.seers.dialogue.ThormacDialogue
+import content.region.kandarin.seers_village.dialogue.ThormacDialogue
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.diary.DiaryEventHookBase

@@ -1,6 +1,6 @@
 package content.region.misthalin.quest.vampire.handlers
 
-import content.region.misthalin.handlers.draynor.DraynorUtils
+import content.region.misthalin.draynor_village.plugin.DraynorUtils
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete

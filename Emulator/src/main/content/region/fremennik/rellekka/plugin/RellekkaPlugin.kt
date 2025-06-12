@@ -1,8 +1,8 @@
 package content.region.fremennik.rellekka.plugin
 
 import content.global.skill.agility.AgilityHandler
-import content.region.fremennik.waterbirthisland.plugin.TravelDestination
-import content.region.fremennik.waterbirthisland.plugin.WaterbirthUtils
+import content.region.islands.waterbirth_island.plugin.TravelDestination
+import content.region.islands.waterbirth_island.plugin.WaterbirthUtils
 import core.api.*
 import core.api.quest.requireQuest
 import core.game.interaction.IntType

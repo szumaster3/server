@@ -3,7 +3,7 @@ package content.region.misthalin.dialogue
 import content.minigame.allfiredup.dialogue.KingRoaldAFUDialogue
 import content.region.misthalin.quest.firedup.dialogue.KingRoaldDialogueFile
 import content.region.misthalin.quest.phoenixgang.dialogue.KingRoaldDialogue
-import content.region.misthalin.quest.priest.dialogue.KingRoaldPriestInPerilDialogue
+import content.region.misthalin.paterdomus.quests.priest.dialogue.KingRoaldPriestInPerilDialogue
 import core.api.getAttribute
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete

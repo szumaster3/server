@@ -1,14 +1,17 @@
 package content.global.skill.summoning.items
 
-import content.region.asgarnia.dialogue.taverley.PikkupstixDialogueExtension
 import core.api.*
 import core.api.quest.isQuestComplete
+import core.game.dialogue.FaceAnim
+import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Graphics
+import core.tools.END_DIALOGUE
 import org.rs.consts.Animations
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
@@ -143,11 +146,15 @@ class EnchantedHeadgearListener : InteractionListener {
             animate(findLocalNPC(player, NPCs.PIKKUPSTIX_6970)!!, Animations.CAST_SPELL_711)
             sendGraphics(Graphics(434, 100), player.location)
 
+            val npc = NPC(NPCs.PIKKUPSTIX_6971)
             return when {
                 slot.id == item.defaultItem.id -> {
                     removeItem(player, item.defaultItem.id)
                     addItem(player, item.enchantedItem.id)
-                    openDialogue(player, PikkupstixDialogueExtension())
+                    dialogue(player) {
+                        npc(npc, FaceAnim.NEUTRAL, "Good choice. Here you go, you can now store spells on", "it.")
+                        player(FaceAnim.CALM_TALK, "Excellent. Thank you!")
+                    }
                     true
                 }
 

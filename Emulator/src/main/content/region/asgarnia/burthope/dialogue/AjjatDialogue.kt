@@ -1,6 +1,5 @@
 package content.region.asgarnia.burthope.dialogue
 
-import content.region.asgarnia.dialogue.ClaimTokenDialogue
 import core.api.getStatLevel
 import core.api.openDialogue
 import core.game.dialogue.Dialogue

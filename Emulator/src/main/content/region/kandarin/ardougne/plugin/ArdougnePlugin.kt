@@ -1,7 +1,7 @@
 package content.region.kandarin.ardougne.plugin
 
 import content.global.travel.charter.Charter
-import content.region.kandarin.ardougne.dialogue.CaptainBarnabyDialogue
+import content.region.kandarin.ardougne.east.docks.CaptainBarnabyDialogue
 import content.region.kandarin.quest.grail.dialogue.GalahadDialogue
 import core.api.*
 import core.api.quest.hasRequirement

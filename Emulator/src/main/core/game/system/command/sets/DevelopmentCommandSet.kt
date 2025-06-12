@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
-import content.region.kandarin.plugin.barbariantraining.BarbarianTraining
+import content.region.fremennik.barbarian_outpost.barbarian_training.BarbarianTraining
 import core.api.*
 import core.api.ui.closeDialogue
 import core.cache.def.impl.NPCDefinition
@@ -675,11 +675,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::barbfm",
             description = "Completes barbarian fm training.",
         ) { player: Player, _ ->
-            if (getAttribute(player, content.region.kandarin.plugin.barbariantraining.BarbarianTraining.FM_FULL, false)) {
-                removeAttribute(player, content.region.kandarin.plugin.barbariantraining.BarbarianTraining.FM_FULL)
+            if (getAttribute(player, BarbarianTraining.FM_FULL, false)) {
+                removeAttribute(player, BarbarianTraining.FM_FULL)
                 notify(player, "Barbarian firemaking method:%R Disabled.")
             } else {
-                setAttribute(player, content.region.kandarin.plugin.barbariantraining.BarbarianTraining.FM_FULL, true)
+                setAttribute(player, BarbarianTraining.FM_FULL, true)
                 notify(player, "Barbarian firemaking method:%DP Enabled.")
             }
         }
