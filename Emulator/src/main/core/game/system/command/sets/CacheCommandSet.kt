@@ -449,6 +449,59 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(
+            name = "dumpvarbitsall",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpvarbitsall",
+            description = "Dumps all varbit definitions to a .json file.",
+        ) { p, _ ->
+            val gson = GsonBuilder().setPrettyPrinting().create()
+            val dump = File("varbit_definitions.json")
+            val varbits = mutableListOf<Map<String, Any?>>()
+
+            val maxVarbitId = Cache.getIndexCapacity(CacheIndex.CONFIGURATION)
+
+            for (varbitId in 0 until maxVarbitId) {
+                val varbitDef =
+                    try {
+                        VarbitDefinition.forId(varbitId)
+                    } catch (e: Exception) {
+                        println("Error loading varbit ID $varbitId: ${e.message}")
+                        null
+                    } ?: continue
+
+                try {
+                    val varbitMap =
+                        varbitDef::class
+                            .memberProperties
+                            .filter { prop ->
+                                prop.returnType.classifier !in
+                                        listOf(
+                                            VarbitDefinition::class,
+                                            List::class,
+                                            Map::class,
+                                        )
+                            }.associate { prop ->
+                                prop.isAccessible = true
+                                prop.name to (prop.getter.call(varbitDef) ?: "null")
+                            }
+
+                    if (varbitMap.isNotEmpty()) {
+                        varbits.add(varbitMap)
+                    }
+                } catch (e: Exception) {
+                    println("Error processing varbit ID $varbitId: ${e.message}")
+                }
+            }
+
+            dump.writeText(gson.toJson(varbits))
+            p.debug("Varbit definitions have been successfully dumped to $dump.")
+        }
+
+        /*
+         * Dumps the varbit definitions into a .json file.
+         */
+
+        define(
             name = "dumpvarbits",
             privilege = Privilege.ADMIN,
             usage = "::dumpvarbits",

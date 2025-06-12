@@ -1,8 +1,8 @@
 package content.region.other.dorgesh_kaan.dialogue
 
-import content.region.misthalin.quest.dttd.dialogue.MistagDialogueFile
-import content.region.misthalin.quest.losttribe.dialogue.MistagLostTribeDialogue
-import content.region.misthalin.quest.losttribe.handlers.GoblinFollower
+import content.region.other.dorgesh_kaan.quest.dttd.dialogue.MistagDialogueFile
+import content.region.misthalin.lumbridge.quest.losttribe.dialogue.MistagLostTribeDialogue
+import content.region.misthalin.lumbridge.quest.losttribe.plugin.GoblinFollower
 import core.api.getAttribute
 import core.api.inInventory
 import core.api.openDialogue

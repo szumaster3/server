@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.quest.rd.handlers.SirKuamPuzzleListener
+import content.region.asgarnia.quest.rd.plugin.SirKuamPuzzleListener
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player

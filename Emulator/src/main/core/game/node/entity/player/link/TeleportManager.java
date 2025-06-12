@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link;
 
-import content.region.islands.tutorial_island.plugin.TutorialStage;
-import content.region.islands.tutorial_island.plugin.*;
+import content.region.island.tutorial_island.plugin.TutorialStage;
+import content.region.island.tutorial_island.plugin.*;
 import content.region.misc.tutorial.*;
 import core.ServerConstants;
 import core.game.node.entity.Entity;

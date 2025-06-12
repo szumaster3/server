@@ -1,7 +1,7 @@
 package content.global.handlers.iface
 
 import content.data.GameAttributes
-import content.region.islands.tutorial_island.plugin.TutorialStage
+import content.region.island.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.skill.LevelUp

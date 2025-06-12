@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.quest.rd.handlers.SirTinleyPuzzleListener
+import content.region.asgarnia.quest.rd.plugin.SirTinleyPuzzleListener
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player

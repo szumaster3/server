@@ -1,7 +1,6 @@
 package content.region.asgarnia.rimmington.dialogue
 
-import content.region.asgarnia.falador.diaries.ChemistDiaryDialogue
-import content.region.kandarin.quest.biohazard.dialogue.ChemistDialogue
+import content.region.asgarnia.falador.diary.ChemistDiaryDialogue
 import core.api.addItemOrDrop
 import core.api.openDialogue
 import core.api.quest.isQuestComplete

@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor_village.wizard_tower.dialogue
 
-import content.region.misthalin.quest.imp.ImpCatcher
+import content.region.misthalin.draynor_village.wizard_tower.quest.imp.ImpCatcher
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.item.allInInventory

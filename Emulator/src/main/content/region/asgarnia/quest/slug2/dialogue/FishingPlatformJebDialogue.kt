@@ -1,6 +1,6 @@
 package content.region.asgarnia.quest.slug2.dialogue
 
-import content.region.islands.fishing_platform.plugin.FishingPlatform
+import content.region.island.fishing_platform.FishingPlatform
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

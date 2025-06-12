@@ -1,7 +1,7 @@
 package content.region.fremennik.rellekka.dialogue
 
-import content.region.fremennik.quests.viking.dialogue.CouncilWorkerDialogue
-import content.region.misthalin.dialogue.CouncilWorkmanDiaryDialogue
+import content.region.fremennik.quest.viking.dialogue.CouncilWorkerDialogue
+import content.region.misthalin.diary.CouncilWorkmanDiaryDialogue
 import core.api.openDialogue
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue

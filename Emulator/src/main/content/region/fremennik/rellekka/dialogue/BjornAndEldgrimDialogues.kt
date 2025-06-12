@@ -1,6 +1,6 @@
 package content.region.fremennik.rellekka.dialogue
 
-import content.region.fremennik.quests.viking.FremennikTrials
+import content.region.fremennik.quest.viking.FremennikTrials
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

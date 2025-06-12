@@ -1,6 +1,6 @@
 package content.region.morytania.canifis.dialogue
 
-import content.region.morytania.quest.route.dialogue.VanstromKlauseQuestDialogue
+import content.region.morytania.canifis.quest.route.dialogue.VanstromKlauseQuestDialogue
 import core.api.openDialogue
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue

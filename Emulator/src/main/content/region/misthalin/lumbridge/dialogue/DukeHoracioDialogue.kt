@@ -1,9 +1,9 @@
 package content.region.misthalin.lumbridge.dialogue
 
-import content.region.misthalin.quest.dragon.DragonSlayer
-import content.region.misthalin.quest.dragon.dialogue.DukeDragonSlayerDialogue
-import content.region.misthalin.quest.losttribe.dialogue.DukeHoracioLostTribeDialogue
-import content.region.misthalin.quest.runemysteries.DukeHoracioRMDialogue
+import content.region.misthalin.varrock.quest.dragon.DragonSlayer
+import content.region.misthalin.varrock.quest.dragon.dialogue.DukeDragonSlayerDialogue
+import content.region.misthalin.lumbridge.quest.losttribe.dialogue.DukeHoracioLostTribeDialogue
+import content.region.misthalin.lumbridge.quest.runemysteries.DukeHoracioRMDialogue
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

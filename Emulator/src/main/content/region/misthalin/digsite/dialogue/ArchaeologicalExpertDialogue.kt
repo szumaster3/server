@@ -1,6 +1,6 @@
 package content.region.misthalin.digsite.dialogue
 
-import content.region.misthalin.quest.itexam.handlers.ExpertListener
+import content.region.misthalin.digsite.quest.itexam.plugin.ExpertPlugin
 import core.api.addItemOrDrop
 import core.api.sendDialogue
 import core.game.dialogue.DialogueFile
@@ -12,7 +12,7 @@ import org.rs.consts.Items
 class ArchaeologicalExpertDialogue(
     val it: Int,
 ) : DialogueFile() {
-    var i = ExpertListener()
+    var i = ExpertPlugin()
     var n = NPC(i.archy)
     var itemUsed = it
 

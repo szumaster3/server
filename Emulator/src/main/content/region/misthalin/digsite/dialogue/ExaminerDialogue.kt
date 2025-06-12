@@ -1,6 +1,6 @@
 package content.region.misthalin.digsite.dialogue
 
-import content.region.misthalin.quest.itexam.TheDigSite
+import content.region.misthalin.digsite.quest.itexam.TheDigSite
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage

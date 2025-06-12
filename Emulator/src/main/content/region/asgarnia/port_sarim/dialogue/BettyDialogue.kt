@@ -1,7 +1,7 @@
 package content.region.asgarnia.port_sarim.dialogue
 
 import content.data.GameAttributes
-import content.region.kandarin.quest.swept.handlers.SweptUtils
+import content.region.misthalin.draynor_village.quests.swept.handlers.SweptUtils
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.getQuestStage

@@ -1,6 +1,6 @@
 package content.global.handlers.npc
 
-import content.region.misthalin.quest.sheep.SheepShearer
+import content.region.misthalin.lumbridge.quest.sheep.SheepShearer
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

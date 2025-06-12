@@ -1,8 +1,8 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.data.GameAttributes
-import content.region.kandarin.quest.swept.handlers.SweptUtils
-import content.region.misthalin.quest.anma.dialogue.OldCroneAnimalDialogue
+import content.region.misthalin.draynor_village.quests.swept.handlers.SweptUtils
+import content.region.misthalin.draynor_village.quests.anma.dialogue.OldCroneAnimalDialogue
 import content.region.morytania.quest.ahoy.dialogue.OldCroneAhoyDialogueFile
 import core.api.*
 import core.api.quest.getQuestStage

@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.dialogue
 
-import content.region.misthalin.quest.sheep.dialogue.FredTheFarmerDialogue
+import content.region.misthalin.lumbridge.quest.sheep.FredTheFarmerDialogue
 import core.api.openDialogue
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue

@@ -1,6 +1,6 @@
 package content.global.handlers.item
 
-import content.region.morytania.quest.druidspirit.NSUtils.castBloom
+import content.region.morytania.mortmyre.quest.druidspirit.NSUtils.castBloom
 import core.api.*
 import core.api.quest.getQuestStage
 import core.game.interaction.IntType

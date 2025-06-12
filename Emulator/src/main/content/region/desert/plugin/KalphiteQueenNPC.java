@@ -1,6 +1,6 @@
 package content.region.desert.plugin;
 
-import content.region.kandarin.quest.mcannon.handlers.DMCHandler;
+import content.region.kandarin.seersvillage.quest.mcannon.plugin.DMCHandler;
 import core.api.utils.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;

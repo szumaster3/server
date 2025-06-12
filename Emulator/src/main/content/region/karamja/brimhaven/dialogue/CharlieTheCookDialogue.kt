@@ -1,6 +1,6 @@
 package content.region.karamja.brimhaven.dialogue
 
-import content.region.asgarnia.quest.hero.HeroesQuest
+import content.region.asgarnia.burthope.quest.hero.HeroesQuest
 import core.api.openDialogue
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage

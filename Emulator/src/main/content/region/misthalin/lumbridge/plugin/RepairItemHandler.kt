@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.plugin
 
 import content.data.items.RepairItem
-import content.region.misthalin.lumbridge.shops.BobDialogue
+import content.region.misthalin.lumbridge.dialogue.BobDialogue
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.plugin.Initializable

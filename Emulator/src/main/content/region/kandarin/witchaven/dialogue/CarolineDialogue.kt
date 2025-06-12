@@ -1,6 +1,6 @@
 package content.region.kandarin.witchaven.dialogue
 
-import content.region.kandarin.quest.seaslug.dialogue.CarolineDialogueFile
+import content.region.kandarin.witchaven.quest.seaslug.dialogue.CarolineDialogueFile
 import core.api.openDialogue
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue

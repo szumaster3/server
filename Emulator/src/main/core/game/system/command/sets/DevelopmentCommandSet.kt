@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
-import content.region.fremennik.barbarian_outpost.barbarian_training.BarbarianTraining
+import content.region.fremennik.barbarian_outpost.barbtraining.plugin.BarbarianTraining
 import core.api.*
 import core.api.ui.closeDialogue
 import core.cache.def.impl.NPCDefinition

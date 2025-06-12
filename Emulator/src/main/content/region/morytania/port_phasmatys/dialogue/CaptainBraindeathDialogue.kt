@@ -1,6 +1,6 @@
 package content.region.morytania.port_phasmatys.dialogue
 
-import content.region.morytania.quest.deal.dialogue.CaptainBrainDeathDialogueFile
+import content.region.morytania.port_phasmatys.quest.deal.dialogue.CaptainBrainDeathDialogueFile
 import core.api.openDialogue
 import core.api.quest.getQuestStage
 import core.api.sendDialogue

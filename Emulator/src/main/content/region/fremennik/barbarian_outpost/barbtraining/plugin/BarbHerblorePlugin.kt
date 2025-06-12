@@ -1,0 +1,115 @@
+package content.region.fremennik.barbarian_outpost.barbtraining.plugin
+
+import core.api.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.node.Node
+import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
+import org.rs.consts.Animations
+import org.rs.consts.Items
+
+class BarbHerblorePlugin : InteractionListener {
+    override fun defineListeners() {
+
+        for (potion in BarbarianMix.values()) {
+            if (potion.both) {
+
+                /*
+                 * Handle cases where both items are needed.
+                 */
+
+                onUseWith(IntType.ITEM, potion.item, Items.ROE_11324) { player, used, with ->
+                    handle(player, used, with)
+                    return@onUseWith true
+                }
+            }
+
+            /*
+             * Handle cases where one of the items is caviar.
+             */
+
+            onUseWith(IntType.ITEM, potion.item, Items.CAVIAR_11326) { player, used, with ->
+                handle(player, used, with)
+                return@onUseWith true
+            }
+        }
+    }
+
+    /*
+     * Handles the potion mixing process.
+     */
+    private fun handle(player: Player, inputPotion: Node, egg: Node, ): Boolean {
+        val potion = BarbarianMix.forId(inputPotion.id) ?: return false
+        if (!getAttribute(player, BarbarianTraining.HERBLORE_START, false)) {
+            sendMessage(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
+            return true
+        }
+        if (!hasLevelStat(player, Skills.HERBLORE, potion.level)) {
+            sendMessage(player, "You need a Herblore level of ${potion.level} to make this mix.")
+            return true
+        }
+        if (!removeItem(player, potion.item)) {
+            return false
+        }
+
+        if (!removeItem(player, egg.id)) {
+            addItem(player, potion.item)
+            return false
+        }
+
+        animate(player, Animations.PESTLE_MORTAR_364)
+        addItem(player, potion.product)
+        rewardXP(player, Skills.HERBLORE, potion.exp)
+        sendMessage(player, "You combine your potion with the ${getItemName(egg.id).lowercase()}.")
+
+        if (getAttribute(player, BarbarianTraining.HERBLORE_BASE, false)) {
+            removeAttribute(player, BarbarianTraining.HERBLORE_BASE)
+            setAttribute(player, BarbarianTraining.HERBLORE_FULL, true)
+            sendDialogueLines(
+                player,
+                "You feel you have learned more of barbarian ways. Otto might wish",
+                "to talk to you more."
+            )
+        }
+        return true
+    }
+}
+
+/**
+ * Represents barbarian mixes.
+ */
+private enum class BarbarianMix(val item: Int, val level: Int, val product: Int, val exp: Double, val both: Boolean, ) {
+    ATTACK_POTION(Items.ATTACK_POTION2_123, 4, Items.ATTACK_MIX2_11429, 8.0, true),
+    ANTI_POISON_POTION(Items.ANTIPOISON2_177, 6, Items.ANTIPOISON_MIX2_11433, 12.0, true),
+    RELIC(Items.RELICYMS_BALM2_4846, 9, Items.RELICYMS_MIX2_11437, 14.0, true),
+    STRENGTH_POTION(Items.STRENGTH_POTION2_117, 14, Items.STRENGTH_MIX2_11443, 17.0, true),
+    RESTORE_POTION(Items.RESTORE_POTION2_129, 24, Items.RESTORE_MIX2_11449, 21.0, true),
+    ENERGY_POTION(Items.ENERGY_POTION2_3012, 29, Items.ENERGY_MIX2_11453, 23.0, false),
+    DEFENCE_POTION(Items.DEFENCE_POTION2_135, 33, Items.DEFENCE_MIX2_11457, 25.0, false),
+    AGILITY_POTION(Items.AGILITY_POTION2_3036, 37, Items.AGILITY_MIX2_11461, 27.0, false),
+    COMBAT_POTION(Items.COMBAT_POTION2_9743, 40, Items.COMBAT_MIX2_11445, 28.0, false),
+    PRAYER_POTION(Items.PRAYER_POTION2_141, 42, Items.PRAYER_MIX2_11465, 29.0, false),
+    SUPER_ATTACK_POTION(Items.SUPER_ATTACK2_147, 47, Items.SUPERATTACK_MIX2_11469, 33.0, false),
+    SUPER_ANTI_POISON_POTION(Items.SUPER_ANTIPOISON2_183, 51, Items.ANTI_P_SUPERMIX2_11473, 35.0, false),
+    FISHING_POTION(Items.FISHING_POTION2_153, 53, Items.FISHING_MIX2_11477, 38.0, false),
+    SUPER_ENERGY_POTION(Items.SUPER_ENERGY2_3020, 56, Items.SUP_ENERGY_MIX2_11481, 39.0, false),
+    HUNTER_POTION(Items.HUNTER_POTION2_10002, 58, Items.HUNTING_MIX2_11517, 40.0, false),
+    SUPER_STRENGTH_POTION(Items.SUPER_STRENGTH2_159, 59, Items.SUP_STR_MIX2_11485, 42.0, false),
+    MAGIC_ESSENCE_POTION(Items.MAGIC_ESSENCE2_9023, 61, Items.MAGIC_ESS_MIX2_11489, 43.0, false),
+    SUPER_RESTORE(Items.SUPER_RESTORE2_3028, 67, Items.SUP_RESTORE_MIX2_11493, 48.0, false),
+    SUPER_DEFENCE_POTION(Items.SUPER_DEFENCE2_165, 71, Items.SUP_DEF_MIX2_11497, 50.0, false),
+    ANTIDOTE_PLUS(Items.ANTIPOISON_PLUS2_5947, 74, Items.ANTIDOTE_PLUS_MIX2_11501, 52.0, false),
+    ANTIFIRE_POTION(Items.ANTIFIRE_POTION2_2456, 75, Items.ANTIFIRE_MIX2_11505, 53.0, false),
+    RANGING_POTION(Items.RANGING_POTION2_171, 80, Items.RANGING_MIX2_11509, 54.0, false),
+    MAGIC_POTION(Items.MAGIC_POTION2_3044, 83, Items.MAGIC_MIX2_11513, 57.0, false),
+    ZAMORAK_BREW(Items.ZAMORAK_BREW2_191, 85, Items.ZAMORAK_MIX2_11521, 58.0, false),
+    ;
+
+    companion object {
+        /**
+         * Get a [BarbarianMix] based on the item id.
+         */
+        fun forId(id: Int): BarbarianMix? = values().find { it.item == id }
+    }
+}

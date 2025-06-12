@@ -1,6 +1,6 @@
 package content.region.kandarin.witchaven.dialogue
 
-import content.region.islands.fishing_platform.plugin.FishingPlatform
+import content.region.island.fishing_platform.FishingPlatform
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

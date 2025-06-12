@@ -1,6 +1,6 @@
 package content.region.morytania.canifis.dialogue
 
-import content.region.morytania.quest.fenk.dialogue.RoavarDialogueFile
+import content.region.morytania.canifis.quest.fenk.dialogue.RoavarDialogueFile
 import core.api.*
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue

@@ -2,7 +2,7 @@ package content.region.misthalin.varrock.plugin
 
 import content.region.kandarin.quest.biohazard.dialogue.GuidorsWifeDialogue
 import content.region.misthalin.varrock.dialogue.KnockatDoorDialogue
-import content.region.misthalin.varrock.shops.SawmillOperatorDialogue
+import content.region.misthalin.varrock.dialogue.SawmillOperatorDialogue
 import core.GlobalStatistics
 import core.api.*
 import core.api.interaction.openNpcShop

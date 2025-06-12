@@ -1,8 +1,8 @@
 package content.region.misthalin.draynor_village.dialogue
 
 import content.region.desert.quest.rescue.dialogue.NedDialogueFile
-import content.region.misthalin.lumbridge.diaries.NedDiaryDialogue
-import content.region.misthalin.quest.dragon.dialogue.NedDialogue
+import content.region.misthalin.diary.NedDiaryDialogue
+import content.region.misthalin.varrock.quest.dragon.dialogue.NedDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.IfTopic

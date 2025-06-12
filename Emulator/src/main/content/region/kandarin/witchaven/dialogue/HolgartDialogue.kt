@@ -1,7 +1,7 @@
 package content.region.kandarin.witchaven.dialogue
 
-import content.region.islands.fishing_platform.plugin.FishingPlatform
-import content.region.kandarin.quest.seaslug.dialogue.HolgartDialogueFile
+import content.region.island.fishing_platform.FishingPlatform
+import content.region.kandarin.witchaven.quest.seaslug.dialogue.HolgartDialogueFile
 import core.api.openDialogue
 import core.api.quest.isQuestComplete
 import core.api.quest.isQuestInProgress
