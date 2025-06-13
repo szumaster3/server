@@ -19,8 +19,8 @@ internal object GameAttributes {
     const val TUTORIAL_COMPLETE = "tutorial:complete"
     const val TUTORIAL_STAGE = "tutorial:stage"
 
-    // Knight's waves activity.
-    const val PRAYER_LOCK = "/save:prayer:lock"
+    // Prayer lock.
+    const val PRAYER_LOCK = "prayer:lock"
 
     // Construction skill.
     const val CON = "con"
@@ -384,5 +384,9 @@ internal object GameAttributes {
     const val LABEL_SCORPION_OUTPOST = "/save:quest:scorpcatcher:outpost"
     const val LABEL_SCORPION_MONASTERY = "/save:scorpcatcher:monastery"
     const val LABEL_THORMAC_INTERACTION = "/save:scorpcatcher:thormac_talk_label"
+
+    // Champions challenge.
+    const val ACTIVITY_CHAMPION_CHALLENGE = "championsarena:start"
+    const val ACTIVITY_CHAMPION_BOSS_CHALLENGE = "championsarena:boss"
 
 }
