@@ -10,9 +10,8 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class AfflictedDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AfflictedDialogue(player: Player? = null, ) : Dialogue(player) {
+
     private val forceChat = arrayOf(
         "ughugh",
         "knows'is",

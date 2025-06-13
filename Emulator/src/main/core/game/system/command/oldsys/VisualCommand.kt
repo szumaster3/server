@@ -1,6 +1,6 @@
 package core.game.system.command.oldsys
 
-import content.region.island.tutorial_island.plugin.CharacterDesign
+import content.region.island.tutorial.plugin.CharacterDesign
 import core.api.sendMessage
 import core.api.setVarp
 import core.api.submitWorldPulse

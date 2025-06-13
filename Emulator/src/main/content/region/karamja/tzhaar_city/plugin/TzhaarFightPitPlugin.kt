@@ -33,12 +33,8 @@ import org.rs.consts.NPCs
 
 @Initializable
 class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, ZoneRestriction.CANNON) {
-    override fun continueAttack(
-        e: Entity,
-        target: Node,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+
+    override fun continueAttack(e: Entity, target: Node, style: CombatStyle, message: Boolean, ): Boolean {
         if (target is Player && !WAR_PLAYERS.contains(target)) {
             return false
         }
@@ -108,11 +104,7 @@ class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, Zon
         return false
     }
 
-    override fun start(
-        player: Player,
-        login: Boolean,
-        vararg args: Any,
-    ): Boolean {
+    override fun start(player: Player, login: Boolean, vararg args: Any, ): Boolean {
         player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 0, 8)
         if (!login) {
             setAttribute(player, "fight_pits", true)

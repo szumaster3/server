@@ -1,12 +1,18 @@
 package content.region.asgarnia.taverley.plugin
 
 import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class SylasNPC : NPCBehavior(NPCs.SYLAS_5987) {
+@Initializable
+class SylasNPC(
+    id: Int = 0,
+    location: Location? = null
+) : AbstractNPC(id, location) {
+
     private val forceChat = arrayOf(
         "Selling Magic Beans!",
         "You there, you look like you could use some beans!",
@@ -15,23 +21,22 @@ class SylasNPC : NPCBehavior(NPCs.SYLAS_5987) {
         "Selling bags of Magic Beans!",
     )
 
-    override fun onCreation(self: NPC) {
-        self.walkRadius = 5
+    private var chatDelay = randomDelay()
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = SylasNPC(id, location)
+
+    override fun getIds(): IntArray = intArrayOf(NPCs.SYLAS_5987)
+
+    override fun handleTickActions() {
+        if (!isPlayerNearby(15)) return
+
+        if (--chatDelay <= 0) {
+            if (RandomFunction.roll(8)) {
+                sendChat(this, forceChat.random())
+            }
+            chatDelay = randomDelay()
+        }
     }
 
-    private var nextChat = 0L
-
-    override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextChat || !self.isPlayerNearby(15)) {
-            return true
-        }
-
-        if (RandomFunction.roll(8)) {
-            sendChat(self, forceChat.random())
-            nextChat = now + 15000L
-        }
-
-        return true
-    }
+    private fun randomDelay() = RandomFunction.random(10, 30)
 }

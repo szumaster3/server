@@ -1,7 +1,7 @@
 package core.game.system.command.sets
 
 import content.global.handlers.item.SpadeDigUtils
-import content.region.island.tutorial_island.plugin.CharacterDesign
+import content.region.island.tutorial.plugin.CharacterDesign
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.combat.ImpactHandler

@@ -4,6 +4,7 @@ import content.global.skill.prayer.Bones
 import content.global.skill.prayer.Bones.Companion.forBoneMeal
 import core.api.*
 import core.game.global.action.ClimbActionHandler
+import core.game.global.action.EquipHandler
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -104,6 +105,21 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
         return super.interact(e, target, option)
     }
 
+    override fun leave(e: Entity?, logout: Boolean): Boolean {
+        val player = e as? Player ?: return false
+
+        val outside = !inBorders(player, 3673, 9955, 3685, 9964) && !inBorders(player, 3650, 3456, 3689, 3508)
+
+        if (outside && inEquipment(player, Items.BEDSHEET_4285)) {
+            EquipHandler.unequip(player, 0, itemId = Items.BEDSHEET_4285)
+            player.logoutListeners.remove("bedsheet-uniform")
+            player.appearance.transformNPC(-1)
+            player.appearance.sync()
+        }
+
+        return true
+    }
+
     private fun worship(player: Player?) {
         var bone: Bones? = null
         for (i in player!!.inventory.toArray()) {
@@ -145,10 +161,9 @@ class PhasmatysPlugin : MapZone("Port phasmatys", true), Plugin<Any?> {
     override fun configure() {
         register(ZoneBorders(3583, 3456, 3701, 3552))
         register(ZoneBorders(3667, 9873, 3699, 9914))
+        register(ZoneBorders.forRegion(14646))
+        register(ZoneBorders.forRegion(14747))
     }
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any? = null
+    override fun fireEvent(identifier: String, vararg args: Any, ): Any? = null
 }

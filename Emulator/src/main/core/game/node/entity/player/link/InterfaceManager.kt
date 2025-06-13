@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link
 
 import content.data.GameAttributes
-import content.region.island.tutorial_island.plugin.TutorialStage.hideTabs
+import content.region.island.tutorial.plugin.TutorialStage.hideTabs
 import core.api.log
 import core.api.quest.isQuestComplete
 import core.api.setVarp

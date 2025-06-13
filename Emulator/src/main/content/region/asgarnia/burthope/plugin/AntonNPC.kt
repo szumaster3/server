@@ -9,36 +9,32 @@ import org.rs.consts.NPCs
 @Initializable
 class AntonNPC(
     id: Int = 0,
-    location: Location? = null,
+    location: Location? = null
 ) : AbstractNPC(id, location) {
 
-    private val forceChat: Array<String> = arrayOf(
+    private val forceChat = arrayOf(
         "Armour and axes to suit your needs.",
         "Imported weapons from the finest smithys around the lands!",
-        "Ow, my toe! That armour is heavy.",
+        "Ow, my toe! That armour is heavy."
     )
 
-    private var nextActionTime = 0L
+    private var chatDelay = randomDelay()
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = AntonNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        AntonNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.ANTON_4295)
 
-    override fun tick() {
-        super.tick()
+    override fun handleTickActions() {
+        if (!isPlayerNearby(10)) return
 
-        val now = System.currentTimeMillis()
-        if (now < nextActionTime) {
-            return
-        }
-
-        if (isPlayerNearby(15) && RandomFunction.random(35) == 5) {
-            sendChat(forceChat.random())
-            nextActionTime = now + 5000L
+        if (--chatDelay <= 0) {
+            if (RandomFunction.random(5) == 0) {
+                sendChat(forceChat.random())
+            }
+            chatDelay = randomDelay()
         }
     }
+
+    private fun randomDelay() = RandomFunction.random(10, 30)
 }

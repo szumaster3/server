@@ -1,24 +1,40 @@
 package content.global.handlers.npc
 
 import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class CowNPC : NPCBehavior(NPCs.COW_81, NPCs.COW_397, NPCs.COW_955, NPCs.COW_1767, NPCs.COW_3309) {
+@Initializable
+class CowNPC(
+    id: Int = 0,
+    location: Location? = null
+) : AbstractNPC(id, location) {
 
-    private var nextChat = 0L
+    private var chatDelay = randomDelay()
 
-    override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextChat) return true
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        CowNPC(id, location)
+
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.COW_81,
+        NPCs.COW_397,
+        NPCs.COW_955,
+        NPCs.COW_1767,
+        NPCs.COW_3309
+    )
+
+    override fun handleTickActions() {
+        if (--chatDelay > 0) return
 
         if (RandomFunction.roll(20)) {
-            sendChat(self, "Moo")
-            nextChat = now + 5000L
+            sendChat(this, "Moo")
         }
 
-        return true
+        chatDelay = randomDelay()
     }
+
+    private fun randomDelay() = RandomFunction.random(10, 20)
 }

@@ -8,6 +8,7 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneRestriction
 
 class MortMyreSwamp : MapZone("Mort Myre Swamp", true) {
+
     override fun configure() {
         register(getRegionBorders(13621))
         register(getRegionBorders(13877))

@@ -1,15 +1,24 @@
 package content.region.other.keldagrim.plugin
 
+import content.data.GameAttributes
 import content.region.other.keldagrim.dialogue.BlastFusionHammerDialogue
 import core.api.*
+import core.api.quest.isQuestComplete
+import core.api.ui.closeDialogue
+import core.api.ui.setMinimapState
+import core.game.dialogue.SequenceDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
+import core.game.system.task.Pulse
+import core.game.world.map.Direction
 import core.game.world.map.Location
-import org.rs.consts.Components
-import org.rs.consts.Items
-import org.rs.consts.NPCs
-import org.rs.consts.Scenery
+import core.tools.RandomFunction
+import org.rs.consts.*
+import kotlin.random.Random
 
 class KeldagrimPlugin : InteractionListener {
 
@@ -25,7 +34,178 @@ class KeldagrimPlugin : InteractionListener {
         addScenery(Scenery.TRAIN_CART_7028, Location.create(2924, 10175, 0), 0, 10)
     }
 
+    companion object {
+        // Scenery.
+        private val ENTRANCE = intArrayOf(Scenery.CAVE_ENTRANCE_5973, Scenery.ENTRANCE_5998)
+        private const val DOORWAY_1 = Scenery.DOORWAY_23286
+        private const val DOORWAY_2 = Scenery.DOORWAY_23287
+        private const val REINALD = NPCs.REINALD_2194
+        private const val FUSION_HAMMER = Items.BLAST_FUSION_HAMMER_14478
+        private const val FOREMAN = NPCs.BLAST_FURNACE_FOREMAN_2553
+        private const val TUNNEL = Scenery.TUNNEL_5014
+        private const val INN_KEEPER = NPCs.INN_KEEPER_2176
+
+        // Cart travel system.
+        private val optionsWithQuest = arrayOf("To the Grand Exchange", "To Ice Mountain", "To White Wolf Mountain", "Stay here")
+        private val optionsWithoutQuest = arrayOf("To the Grand Exchange", "To Ice Mountain", "Stay here")
+
+        private val CART_SCENERY = intArrayOf(
+            Scenery.HIDDEN_TRAPDOOR_28094,
+            Scenery.TRAIN_CART_7028,
+            Scenery.TRAIN_CART_7029,
+            Scenery.TRAIN_CART_7030
+        )
+        private val destinations = arrayOf(
+            Location.create(3140, 3507, 0), // Grand Exchange
+            Location.create(2997, 9837, 0), // Ice Mountain
+            Location.create(2875, 9871, 0)  // White Wolf Mountain
+        )
+
+        private fun startTravelToKeldagrim(player: Player) {
+            if (core.api.quest.hasRequirement(player, Quests.THE_GIANT_DWARF)) {
+                submitWorldPulse(TravelToKeldagrimPulse(player))
+            }
+        }
+
+        private fun startTravelFromKeldagrim(player: Player, dest: Location) {
+            if (core.api.quest.hasRequirement(player, Quests.THE_GIANT_DWARF)) {
+                submitWorldPulse(TravelFromKeldagrimPulse(player, dest))
+            }
+        }
+
+        private class TravelFromKeldagrimPulse(
+            val player: Player,
+            val dest: Location
+        ) : Pulse() {
+            private var counter = 0
+
+            override fun pulse(): Boolean {
+                when (counter++) {
+                    0 -> startTravel()
+                    4 -> player.teleportWithCart(Location.create(2911, 10171, 0), true)
+                    5 -> player.moveCartTo(2936, 10171)
+                    6 -> fadeToNormal()
+                    14 -> fadeToBlack()
+                    21 -> player.teleportWithCart(dest, false)
+                    23 -> fadeToNormal()
+                    25 -> return finishTravel()
+                }
+                return false
+            }
+
+            private fun startTravel() {
+                lock(player, 25)
+                openInterface(player, Components.FADE_TO_BLACK_120)
+                setMinimapState(player, 2)
+            }
+
+            private fun fadeToNormal() {
+                closeInterface(player)
+                openInterface(player, Components.FADE_FROM_BLACK_170)
+            }
+
+            private fun fadeToBlack() {
+                openInterface(player, Components.FADE_TO_BLACK_120)
+            }
+
+            private fun finishTravel(): Boolean {
+                unlock(player)
+                setMinimapState(player, 0)
+                closeInterface(player)
+                return true
+            }
+        }
+
+        private class TravelToKeldagrimPulse(val player: Player) : Pulse() {
+            private var counter = 0
+            private val cartNPC = NPC(NPCs.MINE_CART_1544)
+
+            override fun pulse(): Boolean {
+                when (counter++) {
+                    0 -> startTravel()
+                    6 -> player.teleportWithCart(Location.create(2943, 10170, 0), true)
+                    7 -> player.moveCartTo(2939, 10173)
+                    8 -> player.moveCartTo(2914, 10173)
+                    10 -> fadeToNormal()
+                    23 -> finalizeTravel()
+                    33 -> {
+                        cartNPC.clear()
+                        return true
+                    }
+                }
+                return false
+            }
+
+            private fun startTravel() {
+                lock(player, 20)
+                openInterface(player, Components.FADE_TO_BLACK_115)
+                setMinimapState(player, 2)
+            }
+
+            private fun fadeToNormal() {
+                closeInterface(player)
+                openInterface(player, Components.FADE_FROM_BLACK_170)
+            }
+
+            private fun finalizeTravel() {
+                closeInterface(player)
+                setMinimapState(player, 0)
+                unlock(player)
+                player.appearance.rideCart(false)
+                cartNPC.location = player.location
+                cartNPC.direction = Direction.WEST
+                cartNPC.init()
+                player.properties.teleportLocation = player.location.transform(0, 1, 0)
+            }
+        }
+
+        private fun Player.teleportWithCart(location: Location, ride: Boolean) {
+            properties.teleportLocation = location
+            appearance.rideCart(ride)
+        }
+
+        private fun Player.moveCartTo(x: Int, y: Int) {
+            walkingQueue.reset()
+            walkingQueue.addPath(x, y)
+        }
+    }
+
     override fun defineListeners() {
+        on(CART_SCENERY, IntType.SCENERY, "open", "ride") { player, node ->
+            val questDone = isQuestComplete(player, Quests.FISHING_CONTEST)
+            val options = if (questDone) optionsWithQuest else optionsWithoutQuest
+
+            if (!getAttribute(player, GameAttributes.MINECART_TRAVEL_UNLOCK, false)) {
+                sendMessage(player, "You must visit Keldagrim to use this shortcut.")
+                return@on true
+            }
+
+            SequenceDialogue.dialogue(player) {
+                if (node.id == Scenery.HIDDEN_TRAPDOOR_28094) {
+                    message(
+                        "This trapdoor leads to a small dwarven mine cart station. The mine",
+                        "cart will take you to Keldagrim."
+                    )
+                }
+                if (node.id == Scenery.TRAIN_CART_7028) {
+                    options("What would you like to do?", *options) { choice ->
+                        when {
+                            choice == options.size -> closeDialogue(player)
+                            choice == 1 -> startTravelFromKeldagrim(player, destinations[0])
+                            choice == 2 -> startTravelFromKeldagrim(player, destinations[1])
+                            questDone && choice == 3 -> startTravelFromKeldagrim(player, destinations[2])
+                            else -> closeDialogue(player)
+                        }
+                    }
+                } else {
+                    options("What would you like to do?", "Travel to Keldagrim", "Stay here") { choice ->
+                        if (choice == 1) startTravelToKeldagrim(player) else closeDialogue(player)
+                    }
+                }
+            }
+            return@on true
+        }
+
         /*
          * Handles entering through doorway.
          */
@@ -116,15 +296,76 @@ class KeldagrimPlugin : InteractionListener {
             return@setDest Location.create(2843, 10193, 1)
         }
     }
+}
 
-    companion object {
-        private val ENTRANCE = intArrayOf(Scenery.CAVE_ENTRANCE_5973, Scenery.ENTRANCE_5998)
-        private const val DOORWAY_1 = Scenery.DOORWAY_23286
-        private const val DOORWAY_2 = Scenery.DOORWAY_23287
-        private const val REINALD = NPCs.REINALD_2194
-        private const val FUSION_HAMMER = Items.BLAST_FUSION_HAMMER_14478
-        private const val FOREMAN = NPCs.BLAST_FURNACE_FOREMAN_2553
-        private const val TUNNEL = Scenery.TUNNEL_5014
-        private const val INN_KEEPER = NPCs.INN_KEEPER_2176
+private class CartConductorNPC : NPCBehavior(NPCs.CART_CONDUCTOR_2182, NPCs.CART_CONDUCTOR_2183) {
+
+    private val forceChat =
+        arrayOf(
+            "Grand Exchange carts departing from all tracks!",
+            "Ice Mountain carts departing from all tracks!",
+            "White Wolf Mountain carts departing from all tracks!",
+            "Ice Mountain carts departing from all tracks!",
+            "Grand Exchange carts departing from all tracks!",
+            "Mind the cart!",
+            "Careful!",
+        )
+
+    private val secondChat = arrayOf(
+        "Tickets! Tickets!",
+        "Buy your tickets here!",
+        "Selling tickets!"
+    )
+
+    private var tickDelay = 100
+
+    override fun tick(self: NPC): Boolean {
+        if (!isPlayerNearby(self)) return true
+
+        if (--tickDelay > 0) return true
+        tickDelay = 100
+
+        if (RandomFunction.random(2) == 0) {
+            when (self.id) {
+                NPCs.CART_CONDUCTOR_2182 -> sendChat(self, forceChat.random())
+                NPCs.CART_CONDUCTOR_2183 -> sendChat(self, secondChat.random())
+            }
+        }
+
+        return true
     }
+}
+
+private class TradeRefeeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
+
+    private val forceChats = listOf(
+        "Stay inside your triangle!",
+        "Who's next?",
+        "Next bid please!",
+        "Need an offer, now!",
+        "Keep the goods flowing!",
+        "Keep it civil!",
+        "Come on, come on!",
+        "Go again please.",
+        "Keep the goods flowing!",
+        "Hold on there!"
+    )
+
+    private var tickDelay = nextDelay()
+
+    override fun onCreation(self: NPC) {
+        self.walkRadius = 6
+    }
+
+    override fun tick(self: NPC): Boolean {
+        if (!isPlayerNearby(self)) return true
+
+        if (--tickDelay > 0) return true
+        tickDelay = nextDelay()
+
+        sendChat(self, forceChats.random())
+        return true
+    }
+
+    private fun nextDelay() = Random.nextInt(30, 100)
 }

@@ -5,7 +5,7 @@ import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
 import content.global.skill.magic.SpellUtils
 import content.global.skill.summoning.familiar.FamiliarSpecial
-import content.region.island.tutorial_island.plugin.TutorialStage
+import content.region.island.tutorial.plugin.TutorialStage
 import core.ServerConstants
 import core.api.*
 import core.api.utils.Vector

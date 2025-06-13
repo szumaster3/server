@@ -30,15 +30,14 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
         val CLIMB_OVER_DURATION = animationCycles(Animations.CLIMB_OBJECT_839)
     }
 
-    override fun defineAreaBorders(): Array<ZoneBorders> =
-        arrayOf(
-            ZoneBorders.forRegion(10822),
-            ZoneBorders.forRegion(11077),
-            ZoneBorders.forRegion(11078),
-            ZoneBorders.forRegion(11079),
-            ZoneBorders.forRegion(10821),
-            ZoneBorders.forRegion(10822),
-        )
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
+        ZoneBorders.forRegion(10822),
+        ZoneBorders.forRegion(11077),
+        ZoneBorders.forRegion(11078),
+        ZoneBorders.forRegion(11079),
+        ZoneBorders.forRegion(10821),
+        ZoneBorders.forRegion(10822),
+    )
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
@@ -61,6 +60,7 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
                 11079 -> if (!musicPlayer.hasUnlocked(Music.DEEP_DOWN_278)) {
                     musicPlayer.unlock(Music.DEEP_DOWN_278)
                 }
+
                 11078 -> if (!musicPlayer.hasUnlocked(Music.CHAMBER_282)) {
                     musicPlayer.unlock(Music.CHAMBER_282)
                 }
@@ -183,23 +183,20 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
 
         on(MINE, IntType.SCENERY, "crawl-down") { player, node ->
             lock(player, 3)
-            val entrance =
-                when (node.id) {
-                    Scenery.CART_TUNNEL_4913 -> Location.create(3436, 9637, 0)
-                    Scenery.CART_TUNNEL_4914 -> Location.create(3405, 9631, 0)
-                    Scenery.CART_TUNNEL_4915 -> Location.create(3409, 9623, 0)
-                    else -> null
-                }
+            val entrance = when (node.id) {
+                Scenery.CART_TUNNEL_4913 -> Location.create(3436, 9637, 0)
+                Scenery.CART_TUNNEL_4914 -> Location.create(3405, 9631, 0)
+                Scenery.CART_TUNNEL_4915 -> Location.create(3409, 9623, 0)
+                else -> null
+            }
 
             animate(player, Animations.CRAWLING_2796)
 
-            if (node.id == 4915 &&
-                player.location != Location.create(3428, 3225, 0) ||
-                (
-                    node.id == 4914 &&
-                        player.location != Location.create(3429, 3233, 0) ||
-                        (node.id == 4913 && player.location != Location.create(3441, 3232, 0))
-                )
+            if (node.id == 4915 && player.location != Location.create(
+                    3428, 3225, 0
+                ) || (node.id == 4914 && player.location != Location.create(
+                    3429, 3233, 0
+                ) || (node.id == 4913 && player.location != Location.create(3441, 3232, 0)))
             ) {
                 return@on false
             }
@@ -215,13 +212,12 @@ class AbandonedMinePlugin : InteractionListener, MapArea {
         }
 
         on(EXIT, IntType.SCENERY, "crawl-through") { player, node ->
-            val exit =
-                when (node.id) {
-                    Scenery.CART_TUNNEL_4920 -> Location.create(3441, 3232, 0)
-                    Scenery.CART_TUNNEL_4921 -> Location.create(3429, 3233, 0)
-                    Scenery.CART_TUNNEL_20524 -> Location.create(3428, 3225, 0)
-                    else -> null
-                }
+            val exit = when (node.id) {
+                Scenery.CART_TUNNEL_4920 -> Location.create(3441, 3232, 0)
+                Scenery.CART_TUNNEL_4921 -> Location.create(3429, 3233, 0)
+                Scenery.CART_TUNNEL_20524 -> Location.create(3428, 3225, 0)
+                else -> null
+            }
             stopWalk(player)
             animate(player, Animations.CRAWLING_2796)
             queueScript(player, 3, QueueStrength.SOFT) {

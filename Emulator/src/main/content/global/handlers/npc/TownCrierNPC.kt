@@ -3,37 +3,46 @@ package content.global.handlers.npc
 import core.api.animate
 import core.api.sendChat
 import core.api.stopWalk
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.Animations
 import org.rs.consts.NPCs
 
-class TownCrierNPC : NPCBehavior(*ID) {
+@Initializable
+class TownCrierNPC(
+    id: Int = 0,
+    location: Location? = null
+) : AbstractNPC(id, location) {
 
     private val forceChatAnimation = listOf(
         "The Duke of Lumbridge needs a hand." to Animations.TOWN_CRIER_RING_BELL_6865,
         "The squirrels! The squirrels are coming! Noooo, get them out of my head!" to Animations.TOWN_CRIER_SCRATCHES_HEAD_6863
     )
 
-    private var nextChat = 0L
+    private var chatDelay = randomDelay()
 
-    override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextChat) return super.tick(self)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        TownCrierNPC(id, location)
+
+    override fun getIds(): IntArray = ID
+
+    override fun handleTickActions() {
+        if (--chatDelay > 0) return
 
         if (RandomFunction.random(300) == 5) {
             val (chat, animation) = forceChatAnimation.random()
-
-            stopWalk(self)
-            animate(self, animation)
-            sendChat(self, chat)
-
-            nextChat = now + 7000L
+            stopWalk(this)
+            animate(this, animation)
+            sendChat(this, chat)
+            chatDelay = randomDelay()
+        } else {
+            chatDelay = randomDelay()
         }
-
-        return super.tick(self)
     }
+
+    private fun randomDelay() = RandomFunction.random(50, 150)
 
     companion object {
         private val ID = intArrayOf(

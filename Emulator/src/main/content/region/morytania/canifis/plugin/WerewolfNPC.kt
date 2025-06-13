@@ -13,12 +13,15 @@ import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.Items
 
+private val HUMAN_NPCS = (6026..6045).toIntArray()
+private val WEREWOLF_NPCS = (6006..6025).toIntArray()
+private val HUMAN_OUT_ANIMATION = Animation(6554)
+private val WEREWOLF_IN_ANIMATION = Animation(6543)
+private val WEREWOLF_IN_GFXS = (1079..1098).toIntArray()
+
 class WerewolfNPC : NPCBehavior(*HUMAN_NPCS) {
-    override fun afterDamageReceived(
-        self: NPC,
-        attacker: Entity,
-        state: BattleState,
-    ) {
+
+    override fun afterDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
         if (DeathTask.isDead(self)) {
             return
         }
@@ -58,17 +61,5 @@ class WerewolfNPC : NPCBehavior(*HUMAN_NPCS) {
             self.reTransform()
         }
         super.onRespawn(self)
-    }
-
-    companion object {
-        private val HUMAN_NPCS = (6026..6045).toIntArray()
-
-        private val WEREWOLF_NPCS = (6006..6025).toIntArray()
-
-        private val HUMAN_OUT_ANIMATION = Animation(6554)
-
-        private val WEREWOLF_IN_ANIMATION = Animation(6543)
-
-        private val WEREWOLF_IN_GFXS = (1079..1098).toIntArray()
     }
 }

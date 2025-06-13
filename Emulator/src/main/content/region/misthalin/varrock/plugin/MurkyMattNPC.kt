@@ -1,12 +1,18 @@
 package content.region.misthalin.varrock.plugin
 
 import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class MurkyMattNPC : NPCBehavior(NPCs.MURKY_MATT_RUNES_6525) {
+@Initializable
+class MurkyMattNPC(
+    id: Int = 0,
+    location: Location? = null
+) : AbstractNPC(id, location) {
+
     private val forceChat = arrayOf(
         "Sure be a busy place, today.",
         "Yarrr! I'm gonna be rich, I tell ye!",
@@ -15,24 +21,23 @@ class MurkyMattNPC : NPCBehavior(NPCs.MURKY_MATT_RUNES_6525) {
         "No! Me prices, they be goin' down!",
     )
 
-    override fun onCreation(self: NPC) {
-        self.isWalks = false
-        self.isNeverWalks = true
+    private var chatDelay = randomDelay()
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        MurkyMattNPC(id, location)
+
+    override fun getIds(): IntArray = intArrayOf(NPCs.MURKY_MATT_RUNES_6525)
+
+    override fun handleTickActions() {
+        if (!isPlayerNearby(15)) return
+
+        if (--chatDelay <= 0) {
+            if (RandomFunction.roll(8)) {
+                sendChat(this, forceChat.random())
+            }
+            chatDelay = randomDelay()
+        }
     }
 
-    private var nextChat = 0L
-
-    override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextChat || !self.isPlayerNearby(15)) {
-            return true
-        }
-
-        if (RandomFunction.roll(8)) {
-            sendChat(self, forceChat.random())
-            nextChat = now + 15000L
-        }
-
-        return true
-    }
+    private fun randomDelay() = RandomFunction.random(20, 40)
 }

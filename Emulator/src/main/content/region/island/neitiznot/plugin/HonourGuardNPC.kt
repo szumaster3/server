@@ -8,46 +8,35 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class HonourGuardNPC : AbstractNPC {
+class HonourGuardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
 
-    constructor() : super(NPCs.HONOUR_GUARD_5514, null, true)
+    private var attackDelay = randomDelay()
 
-    private constructor(id: Int, location: Location) : super(id, location)
-
-    private var nextAttack = 0L
-
-    override fun construct(id: Int, location: Location, vararg objects: Any?, ): AbstractNPC =
-        HonourGuardNPC(id, location)
-
-    override fun tick() {
-        val now = System.currentTimeMillis()
-
-        if (isActive && !inCombat() && now >= nextAttack) {
-            if (RandomFunction.roll(10)) {
-                val localTrolls = findLocalNPCs(this, trollIDs)
-                for (troll in localTrolls) {
-                    if (troll.location.withinDistance(location, 6)) {
-                        attack(troll)
-                        nextAttack = now + 5000L
-                        break
-                    }
-                }
-            } else {
-                nextAttack = now + 3000L
-            }
-        }
-
-        if (!isActive) {
-            properties.combatPulse.stop()
-        }
-
-        super.tick()
-    }
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = HonourGuardNPC(id, location)
 
     override fun getIds(): IntArray = ID
 
+    override fun handleTickActions() {
+        if (!isActive || inCombat()) return
+
+        if (--attackDelay <= 0) {
+            if (RandomFunction.roll(10)) {
+                val localTrolls = findLocalNPCs(this, TROLL_ID)
+                val target = localTrolls.firstOrNull { it.location.withinDistance(location, 6) }
+                if (target != null) {
+                    attack(target)
+                    attackDelay = randomDelay(5, 10)
+                    return
+                }
+            }
+            attackDelay = randomDelay(3, 6)
+        }
+    }
+
+    private fun randomDelay(min: Int = 5, max: Int = 15) = RandomFunction.random(min, max)
+
     companion object {
-        private val trollIDs = intArrayOf(
+        private val TROLL_ID = intArrayOf(
             NPCs.ICE_TROLL_FEMALE_5523,
             NPCs.ICE_TROLL_MALE_5522,
             NPCs.ICE_TROLL_RUNT_5521,

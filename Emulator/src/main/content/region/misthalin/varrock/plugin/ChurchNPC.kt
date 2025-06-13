@@ -1,34 +1,38 @@
 package content.region.misthalin.varrock.plugin
 
 import core.api.visualize
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class ChurchNPC : NPCBehavior(*ID) {
+@Initializable
+class ChurchNPC(
+    id: Int = 0,
+    location: Location? = null
+) : AbstractNPC(id, location) {
 
-    override fun onCreation(self: NPC) {
-        self.isWalks = false
-    }
+    private var snoreDelay = randomDelay()
 
-    private var nextSnore = 0L
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        ChurchNPC(id, location)
 
-    override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextSnore || !self.isPlayerNearby(15)) {
-            return true
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.MARTINA_SCORSBY_3326,
+        NPCs.JEREMY_CLERKSIN_3327
+    )
+
+    override fun handleTickActions() {
+        if (!isPlayerNearby(15)) return
+
+        if (--snoreDelay <= 0) {
+            if (RandomFunction.roll(8)) {
+                visualize(this,-1, 1056)
+            }
+            snoreDelay = randomDelay()
         }
-
-        if (RandomFunction.roll(8)) {
-            visualize(self, -1, 1056)
-            nextSnore = now + 9999L
-        }
-
-        return true
     }
 
-    companion object {
-        private val ID = intArrayOf(NPCs.MARTINA_SCORSBY_3326, NPCs.JEREMY_CLERKSIN_3327)
-    }
+    private fun randomDelay() = RandomFunction.random(100, 200)
 }

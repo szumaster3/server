@@ -37,16 +37,13 @@ class GnomeCoachNPC : NPCBehavior(NPCs.GNOME_COACH_2802) {
     }
 
     override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < nextAction || !self.isPlayerNearby(15)) {
-            return true
+        if (nextAction > 0) {
+            nextAction--
         }
-
         if (RandomFunction.random(15) == 5) {
             sendChat(self, forceChat.random())
-            nextAction = now + 5000L
+            nextAction = 500
         }
-
         return true
     }
 }

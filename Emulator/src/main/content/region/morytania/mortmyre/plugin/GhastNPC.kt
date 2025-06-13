@@ -2,7 +2,7 @@ package content.region.morytania.mortmyre.plugin
 
 import content.data.consumables.Consumables
 import content.global.handlers.item.SatchelListener
-import content.region.morytania.mortmyre.quest.druidspirit.NSUtils
+import content.region.morytania.mortmyre.quest.druidspirit.plugin.NSUtils
 import core.api.*
 import core.game.consumable.Food
 import core.game.interaction.MovementPulse
@@ -47,17 +47,14 @@ class GhastNPC : AbstractNPC {
 
         if (id == ids[0] && RandomFunction.roll(35) && playersInRange.isNotEmpty()) {
             val player = playersInRange.random()
-            submitIndividualPulse(
-                this,
-                object : MovementPulse(this, player) {
-                    override fun pulse(): Boolean {
-                        playAudio(player, Sounds.GHAST_APPEAR_432)
-                        animate(Animation(1093))
-                        attemptLifeSiphon(player)
-                        return true
-                    }
+            submitIndividualPulse(this, object : MovementPulse(this, player) {
+                override fun pulse(): Boolean {
+                    playAudio(player, Sounds.GHAST_APPEAR_432)
+                    animate(Animation(1093))
+                    attemptLifeSiphon(player)
+                    return true
                 }
-            )
+            })
         } else {
             val ticksTransformed = getWorldTicks() - getAttribute(this, "woke", 0)
             if (!inCombat() && ticksTransformed > 10) {
@@ -67,7 +64,8 @@ class GhastNPC : AbstractNPC {
 
         val currentTick = getWorldTicks()
         for (player in playersInRange) {
-            val hasSickle = inInventory(player, Items.SILVER_SICKLEB_2963) || inEquipment(player, Items.SILVER_SICKLEB_2963)
+            val hasSickle =
+                inInventory(player, Items.SILVER_SICKLEB_2963) || inEquipment(player, Items.SILVER_SICKLEB_2963)
             if (!hasSickle) continue
 
             val lastRepel = getAttribute(player, "lastRepelTick", 0)
@@ -89,11 +87,10 @@ class GhastNPC : AbstractNPC {
         val inventoryItems = player.inventory.toArray().filterNotNull()
 
         GlobalScope.launch {
-            val foodInInventory =
-                inventoryItems.firstOrNull { item ->
-                    val consumable = Consumables.getConsumableById(item.id)
-                    consumable?.consumable is Food
-                }
+            val foodInInventory = inventoryItems.firstOrNull { item ->
+                val consumable = Consumables.getConsumableById(item.id)
+                consumable?.consumable is Food
+            }
 
             if (foodInInventory != null) {
                 playAudio(player, Sounds.FOOD_ROT_1494)
@@ -103,17 +100,15 @@ class GhastNPC : AbstractNPC {
                 return@launch
             }
 
-            val foodInSatchel =
-                inventoryItems.firstOrNull { item ->
-                    item.id in SatchelListener.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
-                }
+            val foodInSatchel = inventoryItems.firstOrNull { item ->
+                item.id in SatchelListener.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
+            }
 
             if (foodInSatchel != null) {
                 val chargesAmount = getCharge(foodInSatchel)
-                val foodFound =
-                    SatchelListener.SATCHEL_RESOURCES.firstOrNull { foodId ->
-                        chargesAmount >= (foodId + BASE_CHARGE_AMOUNT)
-                    }
+                val foodFound = SatchelListener.SATCHEL_RESOURCES.firstOrNull { foodId ->
+                    chargesAmount >= (foodId + BASE_CHARGE_AMOUNT)
+                }
 
                 if (foodFound != null) {
                     addItem(player, Items.ROTTEN_FOOD_2959, 1)

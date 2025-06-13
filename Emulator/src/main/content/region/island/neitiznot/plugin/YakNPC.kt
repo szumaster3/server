@@ -11,17 +11,11 @@ import org.rs.consts.NPCs
 
 class YakNPC : NPCBehavior(NPCs.YAK_5529), InteractionListener {
 
-    private var nextChat = 0L
-
     override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-
-        if (now >= nextChat && RandomFunction.random(20) == 0) {
+        if (RandomFunction.random(15) == 5) {
             sendChat(self, "Moo")
-            nextChat = now + 15000L
         }
-
-        return super.tick(self)
+        return true
     }
 
     override fun defineListeners() {

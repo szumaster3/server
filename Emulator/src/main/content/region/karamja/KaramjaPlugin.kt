@@ -19,6 +19,14 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.*
 
 class KaramjaPlugin : InteractionListener {
+
+    companion object {
+        private val PINEAPPLE_PLANT = intArrayOf(Scenery.PINEAPPLE_PLANT_1408, Scenery.PINEAPPLE_PLANT_1409, Scenery.PINEAPPLE_PLANT_1410, Scenery.PINEAPPLE_PLANT_1411, Scenery.PINEAPPLE_PLANT_1412, Scenery.PINEAPPLE_PLANT_1413)
+        private val CUSTOM_OFFICERS = intArrayOf(NPCs.CUSTOMS_OFFICER_380, NPCs.CUSTOMS_OFFICER_381)
+        private val MACHETE_ID = intArrayOf(Items.MACHETE_975, Items.JADE_MACHETE_6315, Items.OPAL_MACHETE_6313, Items.RED_TOPAZ_MACHETE_6317)
+        private val JUNGLE_BUSH = intArrayOf(Scenery.JUNGLE_BUSH_2892, Scenery.JUNGLE_BUSH_2893)
+    }
+
     private fun checkRequirement(player: Player): Boolean = anyInEquipment(player, *MACHETE_ID) || anyInInventory(player, *MACHETE_ID)
 
     private fun getAnimation(item: Int): Animation =
@@ -190,34 +198,5 @@ class KaramjaPlugin : InteractionListener {
             openNpcShop(player, NPCs.TIADECHE_1164)
             return@on true
         }
-    }
-
-    companion object {
-        private val PINEAPPLE_PLANT =
-            intArrayOf(
-                Scenery.PINEAPPLE_PLANT_1408,
-                Scenery.PINEAPPLE_PLANT_1409,
-                Scenery.PINEAPPLE_PLANT_1410,
-                Scenery.PINEAPPLE_PLANT_1411,
-                Scenery.PINEAPPLE_PLANT_1412,
-                Scenery.PINEAPPLE_PLANT_1413,
-            )
-        private val CUSTOM_OFFICERS =
-            intArrayOf(
-                NPCs.CUSTOMS_OFFICER_380,
-                NPCs.CUSTOMS_OFFICER_381,
-            )
-        private val MACHETE_ID =
-            intArrayOf(
-                Items.MACHETE_975,
-                Items.JADE_MACHETE_6315,
-                Items.OPAL_MACHETE_6313,
-                Items.RED_TOPAZ_MACHETE_6317,
-            )
-        private val JUNGLE_BUSH =
-            intArrayOf(
-                Scenery.JUNGLE_BUSH_2892,
-                Scenery.JUNGLE_BUSH_2893,
-            )
     }
 }

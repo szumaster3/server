@@ -24,6 +24,16 @@ import org.rs.consts.*
 import kotlin.random.Random
 
 class MorytaniaPlugin : InteractionListener, MapArea {
+
+    companion object {
+        private val SWAMP_BOAT = intArrayOf(Scenery.SWAMP_BOATY_6970, Scenery.SWAMP_BOATY_6969)
+        private const val GROTTO_BRIDGE = Scenery.BRIDGE_3522
+        private val SWIMMING_ANIMATION = Animation(Animations.SWIMMING_6988)
+        private val JUMP_ANIMATION = Animation(Animations.JUMP_OBSTACLE_5355)
+        private val FAIL_LOCATION = Location(3439, 3330)
+        private val SPLASH_GFX = Graphics(org.rs.consts.Graphics.WATER_SPLASH_68)
+    }
+
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3426, 3191, 3715, 3588))
 
     override fun areaEnter(entity: Entity) {
@@ -149,14 +159,5 @@ class MorytaniaPlugin : InteractionListener, MapArea {
             teleport(player, target)
             return@on true
         }
-    }
-
-    companion object {
-        private val SWAMP_BOAT = intArrayOf(Scenery.SWAMP_BOATY_6970, Scenery.SWAMP_BOATY_6969)
-        private const val GROTTO_BRIDGE = Scenery.BRIDGE_3522
-        private val SWIMMING_ANIMATION = Animation(Animations.SWIMMING_6988)
-        private val JUMP_ANIMATION = Animation(Animations.JUMP_OBSTACLE_5355)
-        private val FAIL_LOCATION = Location(3439, 3330)
-        private val SPLASH_GFX = Graphics(org.rs.consts.Graphics.WATER_SPLASH_68)
     }
 }
