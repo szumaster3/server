@@ -1,9 +1,9 @@
 package core.game.system.command.sets
 
 import content.global.activity.ttrail.TreasureTrailManager
-import content.global.handlers.iface.BookInterface
-import content.global.handlers.iface.Page
-import content.global.handlers.iface.PageSet
+import content.global.plugin.iface.BookInterface
+import content.global.plugin.iface.Page
+import content.global.plugin.iface.PageSet
 import content.global.skill.slayer.SlayerManager
 import core.api.setAttribute
 import core.api.utils.BossKillCounter

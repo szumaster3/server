@@ -90,7 +90,7 @@ object RDUtils {
             animate(player, Animation(Animations.POUR_VIAL_2259))
             playAudio(player, Sounds.VIALPOUR_2613)
 
-            val doorVial = MissCheeversPuzzleListener.Companion.DoorVials.doorVialsMap[used.id]
+            val doorVial = MissCheeversPlugin.Companion.DoorVials.doorVialsMap[used.id]
             if (doorVial != null) {
                 setAttribute(player, doorVial.attribute, true)
                 sendMessage(player, "You pour the vial onto the flat part of the spade.")
@@ -102,7 +102,7 @@ object RDUtils {
             sendMessage(player, "You do not have the vial to use.")
         }
 
-        if (MissCheeversPuzzleListener.Companion.DoorVials.doorVialsRequiredMap.all {
+        if (MissCheeversPlugin.Companion.DoorVials.doorVialsRequiredMap.all {
                 getAttribute(player, it.value.attribute, false)
             }
         ) {
@@ -110,7 +110,7 @@ object RDUtils {
             playAudio(player, Sounds.VIALPOUR_2613)
             sendMessage(player, "Something caused a reaction when mixed!")
             sendMessage(player, "The spade gets hotter, and expands slightly.")
-            setVarbit(player, MissCheeversPuzzleListener.doorVarbit, 2)
+            setVarbit(player, MissCheeversPlugin.doorVarbit, 2)
         }
     }
 
@@ -118,19 +118,19 @@ object RDUtils {
         lock(player, 3)
         lockInteractions(player, 3)
 
-        if (MissCheeversPuzzleListener.Companion.DoorVials.doorVialsRequiredMap.all
+        if (MissCheeversPlugin.Companion.DoorVials.doorVialsRequiredMap.all
                 {
                     getAttribute(player, it.value.attribute, false)
                 }
         ) {
             sendMessage(player, "You pull on the spade...")
             sendMessage(player, "It works as a handle, and you swing the stone door open.")
-            setVarbit(player, MissCheeversPuzzleListener.doorVarbit, 3)
+            setVarbit(player, MissCheeversPlugin.doorVarbit, 3)
         } else {
             sendMessage(player, "You pull on the spade...")
             sendMessage(player, "It comes loose, and slides out of the hole in the stone.")
             addItemOrDrop(player, Items.METAL_SPADE_5587)
-            setVarbit(player, MissCheeversPuzzleListener.doorVarbit, 0)
+            setVarbit(player, MissCheeversPlugin.doorVarbit, 0)
         }
     }
 

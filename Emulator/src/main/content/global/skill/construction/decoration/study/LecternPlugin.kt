@@ -1,6 +1,6 @@
 package content.global.skill.construction.decoration.study
 
-import content.global.handlers.item.TeleportTablet
+import content.global.plugin.item.TeleportTablet
 import content.global.skill.construction.Decoration
 import core.api.*
 import core.cache.def.impl.SceneryDefinition

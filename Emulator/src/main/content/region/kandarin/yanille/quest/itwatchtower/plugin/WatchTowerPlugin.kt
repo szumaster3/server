@@ -3,8 +3,8 @@ package content.region.kandarin.yanille.quest.itwatchtower.plugin
 import content.data.GameAttributes
 import content.data.LightSource
 import content.data.items.SkillingTool
-import content.global.handlers.iface.warning.WarningManager
-import content.global.handlers.iface.warning.Warnings
+import content.global.plugin.iface.warning.WarningManager
+import content.global.plugin.iface.warning.Warnings
 import content.region.kandarin.yanille.quest.itwatchtower.cutscene.EnclaveCutscene
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.BattlementDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.CityGuardDialogue

@@ -1,8 +1,8 @@
 package core.game.node.entity.skill;
 
 import content.data.GameAttributes;
-import content.global.handlers.item.equipment.gloves.BrawlingGloves;
-import content.global.handlers.item.equipment.gloves.BrawlingGlovesManager;
+import content.global.plugin.item.equipment.gloves.BrawlingGloves;
+import content.global.plugin.item.equipment.gloves.BrawlingGlovesManager;
 import core.game.event.DynamicSkillLevelChangeEvent;
 import core.game.event.XPGainEvent;
 import core.game.node.entity.Entity;

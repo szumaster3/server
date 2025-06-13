@@ -16,6 +16,38 @@ import org.rs.consts.Sounds
 
 class JatizsoPlugin : InteractionListener {
 
+    companion object {
+        const val BELL = Scenery.BELL_21394
+        const val MAGNUS_NPC = NPCs.MAGNUS_GRAM_5488
+
+        val GATES_CLOSED = intArrayOf(Scenery.GATE_21403, Scenery.GATE_21405)
+        val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
+        val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
+        val KING_CHEST = intArrayOf(Scenery.CHEST_21299, Scenery.CHEST_21300)
+
+        val NORTH_GATE_ZONE = ZoneBorders(2414, 3822, 2417, 3825)
+        val WEST_GATE_ZONE = ZoneBorders(2386, 3797, 2390, 3801)
+        val SOUTH_GATE_ZONE = ZoneBorders(2411, 3795, 2414, 3799)
+
+        val LINES = arrayOf(
+            arrayOf(
+                "YOU WOULDN'T KNOW HOW TO FIGHT A TROLL IF IT CAME UP AND BIT YER ARM OFF",
+                "YAK LOVERS",
+                "CALL THAT A TOWN? I'VE SEEN BETTER HAMLETS!",
+                "AND YOUR FATHER SMELLED OF WINTERBERRIES!",
+                "WOODEN BRIDGES ARE RUBBISH!",
+                "OUR KING'S BETTER THAN YOUR BURGHER!"
+            ),
+            arrayOf(
+                "YOU WOULDN'T KNOW HOW TO SHAVE A YAK IF YOUR LIFE DEPENDED ON IT",
+                "MISERABLE LOSERS",
+                "YOUR MOTHER WAS A HAMSTER!",
+                "AT LEAST WE HAVE SOMETHING OTHER THAN SMELLY FISH!",
+                "AT LEAST WE CAN COOK!"
+            ),
+        )
+    }
+
     override fun defineListeners() {
         on(GATES_CLOSED, IntType.SCENERY, "open") { player, node ->
             if (NORTH_GATE_ZONE.insideBorder(player)) {
@@ -120,38 +152,5 @@ class JatizsoPlugin : InteractionListener {
         setDest(IntType.NPC, MAGNUS_NPC) { _, _ ->
             return@setDest Location.create(2416, 3801, 0)
         }
-    }
-
-    companion object {
-        const val BELL = Scenery.BELL_21394
-        const val MAGNUS_NPC = NPCs.MAGNUS_GRAM_5488
-
-        val GATES_CLOSED = intArrayOf(Scenery.GATE_21403, Scenery.GATE_21405)
-        val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
-        val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
-        val KING_CHEST = intArrayOf(Scenery.CHEST_21299, Scenery.CHEST_21300)
-
-        val NORTH_GATE_ZONE = ZoneBorders(2414, 3822, 2417, 3825)
-        val WEST_GATE_ZONE = ZoneBorders(2386, 3797, 2390, 3801)
-        val SOUTH_GATE_ZONE = ZoneBorders(2411, 3795, 2414, 3799)
-
-        val LINES =
-            arrayOf(
-                arrayOf(
-                    "YOU WOULDN'T KNOW HOW TO FIGHT A TROLL IF IT CAME UP AND BIT YER ARM OFF",
-                    "YAK LOVERS",
-                    "CALL THAT A TOWN? I'VE SEEN BETTER HAMLETS!",
-                    "AND YOUR FATHER SMELLED OF WINTERBERRIES!",
-                    "WOODEN BRIDGES ARE RUBBISH!",
-                    "OUR KING'S BETTER THAN YOUR BURGHER!",
-                ),
-                arrayOf(
-                    "YOU WOULDN'T KNOW HOW TO SHAVE A YAK IF YOUR LIFE DEPENDED ON IT",
-                    "MISERABLE LOSERS",
-                    "YOUR MOTHER WAS A HAMSTER!",
-                    "AT LEAST WE HAVE SOMETHING OTHER THAN SMELLY FISH!",
-                    "AT LEAST WE CAN COOK!",
-                ),
-            )
     }
 }

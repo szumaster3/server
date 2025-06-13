@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.quest.firedup.dialogue
 
-import content.minigame.allfiredup.handlers.BeaconState
+import content.minigame.allfiredup.plugin.BeaconState
 import core.api.setVarbit
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC

@@ -1,6 +1,6 @@
 package core.game.node.entity.player;
 
-import content.global.handlers.item.equipment.EquipmentDegrade;
+import content.global.plugin.item.equipment.EquipmentDegrade;
 import content.global.skill.construction.HouseManager;
 import content.global.skill.runecrafting.PouchManager;
 import content.global.skill.summoning.familiar.FamiliarManager;

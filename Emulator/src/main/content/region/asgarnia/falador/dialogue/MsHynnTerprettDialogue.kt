@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.quest.rd.plugin.HynnTerprettPuzzleListener
+import content.region.asgarnia.falador.quest.rd.plugin.HynnTerprettPlugin
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -15,7 +15,7 @@ class MsHynnTerprettDialogue(
         interfaceId: Int,
         buttonId: Int,
     ): Boolean {
-        openDialogue(player, HynnTerprettPuzzleListener(), npc)
+        openDialogue(player, HynnTerprettPlugin(), npc)
         return true
     }
 

@@ -1,6 +1,6 @@
 package content.global.skill.runecrafting
 
-import content.global.handlers.item.equipment.gloves.FOGGlovesListener.Companion.updateCharges
+import content.global.plugin.item.equipment.gloves.FOGGlovesListener.Companion.updateCharges
 import content.global.skill.runecrafting.Talisman.Companion.forName
 import core.ServerConstants
 import core.api.*

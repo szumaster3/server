@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link;
 
-import content.global.handlers.iface.ge.StockMarket;
+import content.global.plugin.iface.ge.StockMarket;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.ge.ExchangeHistory;

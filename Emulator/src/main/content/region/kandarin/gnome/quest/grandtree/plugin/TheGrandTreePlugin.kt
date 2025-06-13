@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome.quest.grandtree.plugin
 
-import content.global.handlers.iface.ScrollInterface
+import content.global.plugin.iface.ScrollInterface
 import content.region.kandarin.gnome.quest.grandtree.cutscene.GloughsPetCutscene
 import content.region.kandarin.gnome.quest.grandtree.dialogue.KingNarnodeUnderGroundDialogue
 import content.region.kandarin.gnome.quest.grandtree.dialogue.ShipyardWorkerDialogueFile

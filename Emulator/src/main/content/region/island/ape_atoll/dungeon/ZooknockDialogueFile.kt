@@ -1,6 +1,6 @@
 package content.region.island.ape_atoll.dungeon
 
-import content.global.handlers.item.withnpc.ItemsOnZooknockListener
+import content.global.plugin.item.withnpc.ItemsOnZooknockListener
 import content.region.karamja.quest.mm.cutscene.DungeonPlanCutscene
 import core.api.*
 import core.api.quest.setQuestStage

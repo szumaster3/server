@@ -1,6 +1,6 @@
 package content.region.fremennik.diary
 
-import content.global.handlers.iface.FairyRing
+import content.global.plugin.iface.FairyRing
 import content.minigame.barbassault.dialogue.CaptainCainDialogue
 import content.region.island.jatizso.dialogue.TowerGuardDialogue
 import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue

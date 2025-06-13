@@ -1,7 +1,7 @@
 package content.region.misthalin.barbarian_village.plugin;
 
-import content.global.handlers.iface.warning.WarningManager;
-import content.global.handlers.iface.warning.Warnings;
+import content.global.plugin.iface.warning.WarningManager;
+import content.global.plugin.iface.warning.Warnings;
 import content.region.misthalin.barbarian_village.dialogue.CradleOfLifeDialogue;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;

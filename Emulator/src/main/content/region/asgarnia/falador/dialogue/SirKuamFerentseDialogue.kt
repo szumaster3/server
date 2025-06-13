@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.quest.rd.plugin.SirKuamPuzzleListener
+import content.region.asgarnia.falador.quest.rd.plugin.SirKuamPlugin
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -15,7 +15,7 @@ class SirKuamFerentseDialogue(
         interfaceId: Int,
         buttonId: Int,
     ): Boolean {
-        openDialogue(player, SirKuamPuzzleListener(), npc)
+        openDialogue(player, SirKuamPlugin(), npc)
         return true
     }
 

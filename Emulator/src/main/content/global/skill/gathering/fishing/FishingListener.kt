@@ -1,7 +1,7 @@
 package content.global.skill.gathering.fishing
 
 import content.data.GameAttributes
-import content.global.handlers.item.equipment.gloves.FOGGlovesListener
+import content.global.plugin.item.equipment.gloves.FOGGlovesListener
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.api.movement.finishedMoving

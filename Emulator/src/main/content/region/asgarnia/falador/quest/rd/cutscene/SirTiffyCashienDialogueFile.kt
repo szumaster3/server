@@ -2,8 +2,8 @@ package content.region.asgarnia.falador.quest.rd.cutscene
 
 import content.region.asgarnia.falador.quest.rd.RecruitmentDrive
 import content.region.asgarnia.falador.quest.rd.plugin.RDUtils
-import content.region.asgarnia.falador.quest.rd.plugin.RecruitmentDriveListener
-import content.region.asgarnia.falador.quest.rd.plugin.RecruitmentDriveListener.Companion.initRoomStage
+import content.region.asgarnia.falador.quest.rd.plugin.RecruitmentDrivePlugin
+import content.region.asgarnia.falador.quest.rd.plugin.RecruitmentDrivePlugin.Companion.initRoomStage
 import core.api.*
 import core.api.quest.finishQuest
 import core.api.quest.getQuestStage
@@ -258,7 +258,7 @@ class InitTest(
     override fun setup() {
         val currentStage = getAttribute(player, RecruitmentDrive.stageArray[0], 0)
         setExit(
-            RecruitmentDriveListener.Companion.Rooms.index[currentStage]!!
+            RecruitmentDrivePlugin.Companion.Rooms.index[currentStage]!!
                 .location,
         )
     }
@@ -301,7 +301,7 @@ class InitTest(
                 clearInventory(player)
                 endWithoutFade {
                     val currentStage = getAttribute(player, RecruitmentDrive.stageArray[0], 0)
-                    val firstStage = RecruitmentDriveListener.Companion.Rooms.index[currentStage]!!
+                    val firstStage = RecruitmentDrivePlugin.Companion.Rooms.index[currentStage]!!
                     queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->
                         when (stage) {
                             0 -> {

@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.quest.rd.cutscene
 
-import content.region.asgarnia.falador.quest.rd.plugin.SirKuamPuzzleListener
+import content.region.asgarnia.falador.quest.rd.plugin.SirKuamPlugin
 import core.api.*
 import core.api.ui.setMinimapState
 import core.game.activity.Cutscene
@@ -27,7 +27,7 @@ class FailCutscene(
             }
 
             1 -> {
-                var clearBoss = getAttribute(player, SirKuamPuzzleListener.spawnSirLeye, NPC(0))
+                var clearBoss = getAttribute(player, SirKuamPlugin.spawnSirLeye, NPC(0))
                 if (clearBoss.id != 0) {
                     clearBoss.clear()
                 }

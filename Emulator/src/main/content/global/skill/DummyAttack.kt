@@ -1,6 +1,6 @@
 package content.global.skill
 
-import content.global.handlers.npc.NPCListener
+import content.global.plugin.npc.NPCListener
 import core.api.sendMessage
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler

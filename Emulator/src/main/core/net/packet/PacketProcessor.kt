@@ -1,6 +1,6 @@
 package core.net.packet
 
-import content.global.handlers.iface.ge.StockMarket
+import content.global.plugin.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
 import content.global.skill.magic.SpellUtils

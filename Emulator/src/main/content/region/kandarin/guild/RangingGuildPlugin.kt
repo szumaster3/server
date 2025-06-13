@@ -1,7 +1,7 @@
 package content.region.kandarin.guild
 
-import content.global.handlers.iface.warning.WarningManager
-import content.global.handlers.iface.warning.Warnings
+import content.global.plugin.iface.warning.WarningManager
+import content.global.plugin.iface.warning.Warnings
 import content.global.skill.crafting.Tanning
 import core.api.*
 import core.api.interaction.openNpcShop

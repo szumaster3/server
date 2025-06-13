@@ -1,7 +1,7 @@
 package content.region.island.waterbirth_island.plugin
 
-import content.global.handlers.iface.warning.WarningManager
-import content.global.handlers.iface.warning.Warnings
+import content.global.plugin.iface.warning.WarningManager
+import content.global.plugin.iface.warning.Warnings
 import core.api.quest.isQuestComplete
 import core.api.sendMessage
 import core.api.teleport

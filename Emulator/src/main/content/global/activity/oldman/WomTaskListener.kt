@@ -1,6 +1,6 @@
 package content.global.activity.oldman
 
-import content.global.handlers.iface.ScrollInterface
+import content.global.plugin.iface.ScrollInterface
 import core.api.getAttribute
 import core.api.openInterface
 import core.api.sendNPCDialogue

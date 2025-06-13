@@ -1,9 +1,9 @@
 package content.region.kandarin.gnome.quest.makinghistory.book
 
-import content.global.handlers.iface.BookInterface
-import content.global.handlers.iface.BookLine
-import content.global.handlers.iface.Page
-import content.global.handlers.iface.PageSet
+import content.global.plugin.iface.BookInterface
+import content.global.plugin.iface.BookLine
+import content.global.plugin.iface.Page
+import content.global.plugin.iface.PageSet
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

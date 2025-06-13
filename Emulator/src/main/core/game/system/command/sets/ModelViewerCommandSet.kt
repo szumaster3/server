@@ -1,6 +1,6 @@
 package core.game.system.command.sets
 
-import content.global.handlers.iface.BookInterface
+import content.global.plugin.iface.BookInterface
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.node.entity.player.Player

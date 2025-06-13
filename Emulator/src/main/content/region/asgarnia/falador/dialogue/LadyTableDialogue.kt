@@ -1,6 +1,5 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.quest.rd.plugin.LadyTablePuzzleListener
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -15,7 +14,7 @@ class LadyTableDialogue(
         interfaceId: Int,
         buttonId: Int,
     ): Boolean {
-        openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTablePuzzleListener(), npc)
+        openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTablePlugin(), npc)
         return true
     }
 

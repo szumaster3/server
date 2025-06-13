@@ -1,6 +1,6 @@
 package core.game.system.command.sets
 
-import content.global.handlers.item.SpadeDigUtils
+import content.global.plugin.item.SpadeDigUtils
 import content.region.island.tutorial.plugin.CharacterDesign
 import core.api.*
 import core.game.dialogue.DialogueFile

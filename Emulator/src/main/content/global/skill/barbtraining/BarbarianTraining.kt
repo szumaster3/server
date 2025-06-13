@@ -1,0 +1,26 @@
+package content.global.skill.barbtraining
+
+object BarbarianTraining {
+    val BARBARIAN_TRAINING = "/save:barbtraining:start"
+    val FM_START = "/save:barbtraining:firemaking-start"
+    val FM_BASE = "/save:barbtraining:firemaking-training"
+    val FM_FULL = "/save:barbtraining:firemaking-learnt"
+    val FISHING_START = "/save:barbtraining:fishing-start"
+    val FISHING_BASE = "/save:barbtraining:fishing-training"
+    val FISHING_FULL = "/save:barbtraining:fishing-learnt"
+    val FISH_BARE_START = "/save:barbtraining:barehand-start"
+    val FISH_BARE_BASE = "/save:barbtraining:barehand-training"
+    val FISH_BARE_FULL = "/save:barbtraining:barehand-learnt"
+    val HERBLORE_START = "/save:barbtraining:herblore-start"
+    val HERBLORE_BASE = "/save:barbtraining:herblore-training"
+    val HERBLORE_FULL = "/save:barbtraining:herblore-learnt"
+    val PYRESHIP_START = "/save:barbtraining:ancients-start"
+    val PYRESHIP_BASE = "/save:barbtraining:ancients-training"
+    val PYRESHIP_FULL = "/save:barbtraining:ancients-learnt"
+    val SPEAR_START = "/save:barbtraining:spear-start"
+    val SPEAR_BASE = "/save:barbtraining:spear-training"
+    val SPEAR_FULL = "/save:barbtraining:spear-learnt"
+    val HASTA_START = "/save:barbtraining:hasta-start"
+    val HASTA_BASE = "/save:barbtraining:hasta-training"
+    val HASTA_FULL = "/save:barbtraining:hasta-learnt"
+}

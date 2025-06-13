@@ -1,6 +1,6 @@
 package core.game.global.action
 
-import content.global.handlers.item.equipment.gloves.BrawlingGlovesManager
+import content.global.plugin.item.equipment.gloves.BrawlingGlovesManager
 import content.global.skill.slayer.SlayerEquipmentFlags
 import core.api.playAudio
 import core.api.sendMessage

@@ -1,7 +1,7 @@
 package content.global.activity.oldman
 
-import content.global.handlers.iface.ScrollInterface
-import content.global.handlers.iface.ScrollLine
+import content.global.plugin.iface.ScrollInterface
+import content.global.plugin.iface.ScrollLine
 import core.api.setAttribute
 import core.game.node.entity.player.Player
 import org.rs.consts.Components

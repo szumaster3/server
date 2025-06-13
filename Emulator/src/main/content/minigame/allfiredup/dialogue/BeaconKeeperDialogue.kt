@@ -1,8 +1,7 @@
 package content.minigame.allfiredup.dialogue
 
-import content.minigame.allfiredup.handlers.AFUBeacon
-import content.minigame.allfiredup.handlers.AFUSession
-import content.minigame.allfiredup.handlers.BeaconState
+import content.minigame.allfiredup.plugin.AFUBeacon
+import content.minigame.allfiredup.plugin.AFUSession
 import core.api.getStatLevel
 import core.api.sendDialogueOptions
 import core.api.sendMessage

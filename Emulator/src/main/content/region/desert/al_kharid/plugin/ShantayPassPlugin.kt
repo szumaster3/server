@@ -1,7 +1,7 @@
 package content.region.desert.al_kharid.plugin
 
-import content.global.handlers.iface.warning.WarningManager
-import content.global.handlers.iface.warning.Warnings
+import content.global.plugin.iface.warning.WarningManager
+import content.global.plugin.iface.warning.Warnings
 import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.dialogue.FaceAnim

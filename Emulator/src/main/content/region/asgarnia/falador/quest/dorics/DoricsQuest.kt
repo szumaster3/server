@@ -18,7 +18,6 @@ class DoricsQuest : Quest(Quests.DORICS_QUEST, 17, 16, 1, Vars.VARP_QUEST_DORICS
         stage: Int,
     ) {
         super.drawJournal(player, stage)
-        player ?: return
         var line = 11
         if (stage == 0) {
             line(player, "I can start this quest by speaking to !!Doric?? who is !!North of??", line++)
@@ -46,7 +45,6 @@ class DoricsQuest : Quest(Quests.DORICS_QUEST, 17, 16, 1, Vars.VARP_QUEST_DORICS
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var line = 10
 
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.STEEL_PICKAXE_1269)

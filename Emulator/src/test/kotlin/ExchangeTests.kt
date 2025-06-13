@@ -1,4 +1,4 @@
-import content.global.handlers.iface.ge.StockMarket
+import content.global.plugin.iface.ge.StockMarket
 import core.game.ge.GEDatabase
 import core.game.ge.GrandExchange
 import core.game.ge.GrandExchangeOffer

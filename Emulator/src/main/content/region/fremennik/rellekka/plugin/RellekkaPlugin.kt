@@ -1,10 +1,14 @@
 package content.region.fremennik.rellekka.plugin
 
 import content.global.skill.agility.AgilityHandler
+import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import content.region.island.waterbirth_island.plugin.TravelDestination
 import content.region.island.waterbirth_island.plugin.WaterbirthUtils
 import core.api.*
+import core.api.interaction.openNpcShop
+import core.api.quest.isQuestComplete
 import core.api.quest.requireQuest
+import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.Option
@@ -15,6 +19,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
+import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import org.rs.consts.Scenery
@@ -93,6 +98,16 @@ class RellekkaPlugin : InteractionListener, MapArea {
         on(NPCs.SAILOR_1304, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
             WaterbirthUtils.sail(player, TravelDestination.MISCELLANIA_TO_RELLEKKA)
+            return@on true
+        }
+
+        on(NPCs.FISH_MONGER_1315, IntType.NPC, "talk-to", "trade") { player, node ->
+            if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                sendNPCDialogue(player, node.id, "I don't sell to outerlanders.", FaceAnim.ANNOYED)
+            } else {
+                sendNPCDialogue(player, node.id, "Hello there, ${FremennikTrials.getFremennikName(player)}. Looking for fresh fish?")
+                openNpcShop(player, NPCs.FISH_MONGER_1315)
+            }
             return@on true
         }
     }

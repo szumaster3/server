@@ -1,6 +1,6 @@
 package core.game.world.map.zone.impl;
 
-import content.global.handlers.item.equipment.gloves.BrawlingGloves;
+import content.global.plugin.item.equipment.gloves.BrawlingGloves;
 import content.global.skill.summoning.familiar.Familiar;
 import core.game.component.Component;
 import core.game.interaction.Option;

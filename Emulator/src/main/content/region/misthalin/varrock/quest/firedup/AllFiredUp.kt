@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.quest.firedup
 
-import content.minigame.allfiredup.handlers.AFUBeacon
+import content.minigame.allfiredup.plugin.AFUBeacon
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.api.quest.updateQuestTab

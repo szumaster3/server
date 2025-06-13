@@ -1,7 +1,7 @@
 package content.region.kandarin.ardougne.west.plugin
 
-import content.global.handlers.item.withnpc.grownCatItemIds
-import content.global.handlers.item.withnpc.kittenItemIds
+import content.global.plugin.item.withnpc.grownCatItemIds
+import content.global.plugin.item.withnpc.kittenItemIds
 import core.api.replaceSlot
 import core.api.sendItemDialogue
 import core.api.sendNPCDialogue

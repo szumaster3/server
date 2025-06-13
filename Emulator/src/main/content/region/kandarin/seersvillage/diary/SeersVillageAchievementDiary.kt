@@ -1,8 +1,8 @@
 package content.region.kandarin.seersvillage.diary
 
 import content.data.GameAttributes
-import content.global.handlers.iface.FairyRing
-import content.global.handlers.item.withnpc.ChaliceOnKingArthurListener
+import content.global.plugin.iface.FairyRing
+import content.global.plugin.item.withnpc.ChaliceOnKingArthurListener
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import content.region.kandarin.seersvillage.dialogue.ThormacDialogue
 import core.api.*

@@ -1,7 +1,7 @@
 package content.minigame.duelarena.handlers
 
-import content.global.handlers.iface.warning.WarningManager
-import content.global.handlers.iface.warning.Warnings
+import content.global.plugin.iface.warning.WarningManager
+import content.global.plugin.iface.warning.Warnings
 import content.global.skill.summoning.familiar.Familiar
 import core.api.inBorders
 import core.api.setAttribute

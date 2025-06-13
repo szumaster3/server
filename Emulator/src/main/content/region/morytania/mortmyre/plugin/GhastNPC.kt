@@ -1,7 +1,7 @@
 package content.region.morytania.mortmyre.plugin
 
 import content.data.consumables.Consumables
-import content.global.handlers.item.SatchelListener
+import content.global.plugin.item.SatchelListener
 import content.region.morytania.mortmyre.quest.druidspirit.plugin.NSUtils
 import core.api.*
 import core.game.consumable.Food

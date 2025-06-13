@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.quest.rd.plugin.SirReenItchoodPuzzleListener
+import content.region.asgarnia.falador.quest.rd.plugin.SirReenItchoodPlugin
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -15,7 +15,7 @@ class SirRenItchwoodDialogue(
         interfaceId: Int,
         buttonId: Int,
     ): Boolean {
-        openDialogue(player, SirReenItchoodPuzzleListener(), npc)
+        openDialogue(player, SirReenItchoodPlugin(), npc)
         return true
     }
 

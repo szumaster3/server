@@ -1,6 +1,6 @@
 package content.global.dialogue
 
-import content.global.handlers.npc.BankerNPC
+import content.global.plugin.npc.BankerNPC
 import core.api.amountInBank
 import core.api.amountInInventory
 import core.api.hasIronmanRestriction

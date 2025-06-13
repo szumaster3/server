@@ -1,7 +1,7 @@
 package core.game.event
 
 import content.global.activity.jobs.JobType
-import content.global.handlers.iface.FairyRing
+import content.global.plugin.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
 import core.game.component.Component
 import core.game.dialogue.Dialogue

@@ -19,6 +19,27 @@ import core.game.world.update.flag.context.Graphics
 import org.rs.consts.*
 
 class EntranaPlugin : InteractionListener, MapArea {
+
+    companion object {
+        const val ENTRANA_BOOKCASE = Scenery.BOOKCASE_33964
+        const val GLASSBLOWING_BOOK = Items.GLASSBLOWING_BOOK_11656
+        const val CAVE_MONK = NPCs.CAVE_MONK_656
+        const val MAGIC_DOOR = Scenery.MAGIC_DOOR_2407
+    }
+
+    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
+        getRegionBorders(11060), getRegionBorders(11316)
+    )
+
+    override fun areaEnter(entity: Entity) {
+        if (entity is Player && entity !is AIPlayer && entity.details.rights != Rights.ADMINISTRATOR) {
+            // Checking items made on the island.
+            if (!ItemDefinition.canEnterEntrana(entity)) {
+                kickThemOut(entity)
+            }
+        }
+    }
+
     override fun defineListeners() {
 
         /*
@@ -63,27 +84,7 @@ class EntranaPlugin : InteractionListener, MapArea {
         }
     }
 
-    companion object {
-        const val ENTRANA_BOOKCASE = Scenery.BOOKCASE_33964
-        const val GLASSBLOWING_BOOK = Items.GLASSBLOWING_BOOK_11656
-        const val CAVE_MONK = NPCs.CAVE_MONK_656
-        const val MAGIC_DOOR = Scenery.MAGIC_DOOR_2407
-    }
-
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
-        getRegionBorders(11060), getRegionBorders(11316)
-    )
-
-    override fun areaEnter(entity: Entity) {
-        if (entity is Player && entity !is AIPlayer && entity.details.rights != Rights.ADMINISTRATOR) {
-            // Checking items made on the island.
-            if (!ItemDefinition.canEnterEntrana(entity)) {
-                enforceIslandRestrictions(entity)
-            }
-        }
-    }
-
-    private fun enforceIslandRestrictions(entity: Player) {
+    private fun kickThemOut(entity: Player) {
         val monk = core.game.node.entity.npc.NPC(NPCs.MONK_4608).apply {
             isNeverWalks = true
             isWalks = false
