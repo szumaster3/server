@@ -1,7 +1,7 @@
 package content.region.kandarin.feldip.jiggig.dialogue
 
-import content.region.feldiphills.quest.zogre.dialogue.GrishFinishDialogue
-import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.dialogue.GrishFinishDialogue
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue

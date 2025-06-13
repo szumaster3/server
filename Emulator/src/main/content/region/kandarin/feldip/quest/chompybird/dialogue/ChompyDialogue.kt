@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.chompybird.dialogue
 
-import content.region.feldiphills.quest.chompybird.BigChompyBirdHunting
+import content.region.kandarin.feldip.quest.chompybird.BigChompyBirdHunting
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

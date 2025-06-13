@@ -1,9 +1,9 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
 import content.global.skill.thieving.PickpocketListener
-import content.region.feldiphills.quest.zogre.plugin.BrentleVahnNPC.Companion.spawnHumanZombie
-import content.region.feldiphills.quest.zogre.plugin.SlashBashNPC.Companion.spawnSlashBash
-import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.plugin.BrentleVahnNPC.Companion.spawnHumanZombie
+import content.region.kandarin.feldip.quest.zogre.plugin.SlashBashNPC.Companion.spawnSlashBash
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

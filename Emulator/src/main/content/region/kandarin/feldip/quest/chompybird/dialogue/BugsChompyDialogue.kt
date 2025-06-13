@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.chompybird.dialogue
 
-import content.region.feldiphills.quest.chompybird.BigChompyBirdHunting
+import content.region.kandarin.feldip.quest.chompybird.BigChompyBirdHunting
 import core.api.getAttribute
 import core.api.getItemName
 import core.api.setAttribute
@@ -74,10 +74,7 @@ class BugsChompyDialogueFile(
         }
     }
 
-    private fun handleIngredientDialogue(
-        player: Player?,
-        buttonId: Int,
-    ) {
+    private fun handleIngredientDialogue(player: Player?, buttonId: Int, ) {
         val bugsIngredient = getAttribute(player!!, BigChompyBirdHunting.ATTR_ING_BUGS, -1)
         when (stage) {
             0 -> npcl(

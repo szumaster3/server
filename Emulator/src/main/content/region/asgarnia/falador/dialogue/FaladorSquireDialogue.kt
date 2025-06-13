@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.diary.FaladorSquireDiaryDialogue
+import content.region.asgarnia.falador.diary.SquireDiaryDialogue
 import core.api.*
 import core.api.quest.finishQuest
 import core.api.quest.getQuestStage
@@ -34,7 +34,7 @@ class FaladorSquireDialogue(
         buttonId: Int,
     ): Boolean {
         if ((stage == -1 && buttonId == 2) || Diary.canReplaceReward(player, DiaryType.FALADOR, 2)) {
-            openDialogue(player, FaladorSquireDiaryDialogue(), npc)
+            openDialogue(player, SquireDiaryDialogue(), npc)
         } else {
             when (getQuestStage(player, Quests.THE_KNIGHTS_SWORD)) {
                 100 ->

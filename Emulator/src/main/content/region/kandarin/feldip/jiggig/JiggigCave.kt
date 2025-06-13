@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.jiggig
 
-import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.api.ui.closeDialogue
 import core.api.utils.PlayerCamera

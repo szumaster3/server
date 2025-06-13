@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.zogre.dialogue
 
-import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

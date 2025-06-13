@@ -1,7 +1,7 @@
 package content.region.kandarin.feldip.quest.zogre.plugin
 
-import content.region.feldiphills.quest.zogre.dialogue.*
-import content.region.feldiphills.quest.zogre.plugin.ZavisticRarveNPC.Companion.spawnWizard
+import content.region.kandarin.feldip.quest.zogre.dialogue.*
+import content.region.kandarin.feldip.quest.zogre.plugin.ZavisticRarveNPC.Companion.spawnWizard
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.item.removeGroundItem

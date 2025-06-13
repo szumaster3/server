@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.zogre
 
-import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.node.entity.player.Player

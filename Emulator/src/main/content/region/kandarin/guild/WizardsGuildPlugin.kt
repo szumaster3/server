@@ -1,8 +1,8 @@
 package content.region.kandarin.guild
 
 import content.global.travel.EssenceTeleport
-import content.region.feldiphills.quest.zogre.dialogue.ZavisticRarveDefaultDialogue
-import content.region.feldiphills.quest.zogre.dialogue.ZavisticRarveDialogueFiles
+import content.region.kandarin.feldip.quest.zogre.dialogue.ZavisticRarveDefaultDialogue
+import content.region.kandarin.feldip.quest.zogre.dialogue.ZavisticRarveDialogueFiles
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.isQuestComplete

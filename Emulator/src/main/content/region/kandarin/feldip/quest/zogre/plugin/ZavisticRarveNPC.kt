@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.zogre.plugin
 
-import content.region.feldiphills.quest.zogre.dialogue.ZavisticRarveDialogueFiles
+import content.region.kandarin.feldip.quest.zogre.dialogue.ZavisticRarveDialogueFiles
 import core.api.openDialogue
 import core.api.poofClear
 import core.api.removeAttribute

@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.ooglog.plugin
 
-import content.region.feldiphills.ooglog.dialogue.GrimechinDialogue
+import content.region.kandarin.feldip.ooglog.dialogue.GrimechinDialogue
 import core.api.openDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

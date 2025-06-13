@@ -1,6 +1,7 @@
 package content.region.kandarin.feldip.quest.zogre.dialogue
 
 import content.region.feldiphills.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.api.quest.finishQuest
 import core.game.dialogue.DialogueFile
