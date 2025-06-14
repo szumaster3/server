@@ -22,28 +22,27 @@ class PhantuwtiFanstuwiFarsightDialogue(
         buttonId: Int,
     ): Boolean {
         when (stage) {
-            0 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.ASKING, "Hello, what is this place?")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player(FaceAnim.HALF_ASKING, "What do you do here?")
-                        stage = 20
-                    }
-
-                    3 -> {
-                        player(FaceAnim.HALF_ASKING, "Do you have any quests?")
-                        stage = 30
-                    }
-
-                    4 -> {
-                        player(FaceAnim.NEUTRAL, "Ok, thanks.")
-                        stage = 40
-                    }
+            0 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.ASKING, "Hello, what is this place?")
+                    stage = 10
                 }
+
+                2 -> {
+                    player(FaceAnim.HALF_ASKING, "What do you do here?")
+                    stage = 20
+                }
+
+                3 -> {
+                    player(FaceAnim.HALF_ASKING, "Do you have any quests?")
+                    stage = 30
+                }
+
+                4 -> {
+                    player(FaceAnim.NEUTRAL, "Ok, thanks.")
+                    stage = 40
+                }
+            }
 
             10 -> {
                 npc(

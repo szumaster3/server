@@ -3,19 +3,23 @@ package content.region.kandarin.witchaven.plugin
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete
+import core.game.dialogue.FaceAnim
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.repository.Repository
+import core.tools.END_DIALOGUE
 import org.rs.consts.*
 import kotlin.random.Random
 
 /**
  * Represents the Fishing Platform area for the Sea Slug quest.
  */
-class FishingPlatform : MapArea {
+class FishingPlatform : InteractionListener, MapArea {
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(
         ZoneBorders(2761, 3275, 2789, 3296, 1, false)
@@ -56,4 +60,25 @@ class FishingPlatform : MapArea {
         }
     }
 
+    override fun defineListeners() {
+
+        /*
+         * Handles talking to NPC.
+         */
+
+        on(NPCs.KIMBERLY_7168, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Hello there.", FaceAnim.CHILD_SAD)
+            return@on true
+        }
+
+        on(NPCs.MAYOR_HOBB_4874, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Well hello there; welcome to our little village. Pray, stay awhile.")
+            return@on true
+        }
+
+        on(NPCs.BROTHER_MALEDICT_4878, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "The blessings of Saradomin be with you child.")
+            return@on true
+        }
+    }
 }

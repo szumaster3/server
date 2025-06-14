@@ -47,44 +47,41 @@ class CaveMonkDialogue(
     ): Boolean {
         when (stage) {
             100 -> npc("None of your business.").also { stage = END_DIALOGUE }
-            0 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "so our prayers seem to have less effect down there. Oh,",
-                    "also, you won't be able to come back this way - This",
-                    "ladder only goes one way!",
-                ).also {
-                    stage++
+            0 -> npc(
+                FaceAnim.HALF_GUILTY,
+                "so our prayers seem to have less effect down there. Oh,",
+                "also, you won't be able to come back this way - This",
+                "ladder only goes one way!",
+            ).also {
+                stage++
+            }
+
+            1 -> npc(
+                FaceAnim.HALF_GUILTY,
+                "The only exit from the caves below is a portal which",
+                "leads only to the deepest wilderness!",
+            ).also {
+                stage++
+            }
+
+            2 -> options(
+                "I don't think I'm strong enough to enter then.",
+                "Well that is a risk I will have to take.",
+            ).also {
+                stage++
+            }
+
+            3 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "I don't think I'm strong enough to enter then.").also {
+                    stage = END_DIALOGUE
                 }
-            1 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "The only exit from the caves below is a portal which",
-                    "leads only to the deepest wilderness!",
-                ).also {
-                    stage++
-                }
-            2 ->
-                options(
-                    "I don't think I'm strong enough to enter then.",
-                    "Well that is a risk I will have to take.",
-                ).also {
-                    stage++
-                }
-            3 ->
-                when (buttonId) {
-                    1 ->
-                        player(FaceAnim.HALF_GUILTY, "I don't think I'm strong enough to enter then.").also {
-                            stage =
-                                END_DIALOGUE
-                        }
-                    2 -> player(FaceAnim.HALF_GUILTY, "Well that is a risk I will have to take.").also { stage = 20 }
-                }
+
+                2 -> player(FaceAnim.HALF_GUILTY, "Well that is a risk I will have to take.").also { stage = 20 }
+            }
 
             20 -> {
                 if (getStatLevel(player, Skills.PRAYER) > 2 && player.getSkills().prayerPoints > 2) {
-                    player
-                        .getSkills()
+                    player.getSkills()
                         .decrementPrayerPoints((player.getSkills().getLevel(Skills.PRAYER) - 2).toDouble())
                 }
                 player.properties.teleportLocation = DUNGEON

@@ -1,6 +1,6 @@
 package content.region.asgarnia.quest.slug2.dialogue
 
-import content.region.island.fishing_platform.FishingPlatform
+import content.region.kandarin.witchaven.plugin.PlatformHelper
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -36,7 +36,7 @@ class FishingPlatformJebDialogue(
             4 -> npc("Then board the rowing boat.").also { stage++ }
             5 -> {
                 end()
-                FishingPlatform.sail(player, FishingPlatform.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
+                PlatformHelper.sail(player, PlatformHelper.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
             }
         }
         return true

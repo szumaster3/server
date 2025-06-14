@@ -25,7 +25,7 @@ class CarolineDialogue(
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         // Sea slug dialogue.
-        if(!isQuestComplete(player, Quests.SEA_SLUG)) {
+        if (!isQuestComplete(player, Quests.SEA_SLUG)) {
             openDialogue(player, CarolineDialogueFile())
         }
         // Post-Quest Dialogue.
@@ -42,10 +42,13 @@ class CarolineDialogue(
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
             1 -> player(FaceAnim.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }
-            2 -> npcl(FaceAnim.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints.").also { stage = END_DIALOGUE }
+            2 -> npcl(
+                FaceAnim.FRIENDLY, "I'm good. Busy as always looking after Kent and Kennith but no complaints."
+            ).also { stage = END_DIALOGUE }
         }
         return true
     }
+
     override fun newInstance(player: Player?): Dialogue = CarolineDialogue(player)
     override fun getIds(): IntArray = intArrayOf(NPCs.CAROLINE_696)
 }

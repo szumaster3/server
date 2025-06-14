@@ -1030,7 +1030,7 @@ class AugusteDialogue(
     override fun getIds(): IntArray = intArrayOf(NPCs.AUGUSTE_5049)
 }
 
-class AugusteDialogueFile : DialogueFile() {
+private class AugusteDialogueFile : DialogueFile() {
     override fun handle(
         componentID: Int,
         buttonID: Int,

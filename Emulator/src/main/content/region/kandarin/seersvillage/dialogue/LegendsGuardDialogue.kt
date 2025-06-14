@@ -29,17 +29,15 @@ class LegendsGuardDialogue(
     ): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Legends Guild Member Approaching").also { stage++ }
-            1 ->
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "Welcome " + gender() + "!",
-                    "I hope you enjoy your time in the Legends Guild.",
-                ).also { stage = END_DIALOGUE }
+            1 -> npc(
+                FaceAnim.FRIENDLY,
+                "Welcome " + gender() + "!",
+                "I hope you enjoy your time in the Legends Guild.",
+            ).also { stage = END_DIALOGUE }
 
-            10 ->
-                npc(FaceAnim.FRIENDLY, "I hope the quest is going well " + gender() + ".").also {
-                    stage = END_DIALOGUE
-                }
+            10 -> npc(FaceAnim.FRIENDLY, "I hope the quest is going well " + gender() + ".").also {
+                stage = END_DIALOGUE
+            }
 
             20 -> npc(FaceAnim.FRIENDLY, "Legends Guild Member Approaching!").also { stage = END_DIALOGUE }
         }

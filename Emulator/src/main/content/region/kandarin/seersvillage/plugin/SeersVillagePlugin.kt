@@ -31,5 +31,10 @@ class SeersVillagePlugin : InteractionListener {
             openInterface(player, Components.RANGING_GUILD_TICKET_EXCHANGE_278)
             return@on true
         }
+
+        on(NPCs.FORESTER_231, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "He doesn't seem interested in talking to you.")
+            return@on true
+        }
     }
 }

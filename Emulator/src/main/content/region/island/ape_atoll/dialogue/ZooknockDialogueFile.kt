@@ -1,4 +1,4 @@
-package content.region.island.ape_atoll.dungeon
+package content.region.island.ape_atoll.dialogue
 
 import content.global.plugin.item.withnpc.ItemsOnZooknockListener
 import content.region.karamja.quest.mm.cutscene.DungeonPlanCutscene

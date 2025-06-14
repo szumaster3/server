@@ -9,7 +9,7 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MurphyDialogue(player: Player? = null, ) : Dialogue(player) {
+class MurphyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -17,7 +17,7 @@ class MurphyDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Well hello my brave adventurer.").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "What are you up to?").also { stage++ }

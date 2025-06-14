@@ -1,6 +1,6 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
-import content.region.island.fishing_platform.FishingPlatform
+import content.region.kandarin.witchaven.plugin.PlatformHelper
 import content.region.kandarin.witchaven.quest.seaslug.cutscene.HolgartCutscene
 import core.api.Container
 import core.api.inInventory
@@ -104,7 +104,7 @@ class HolgartDialogueFile : DialogueFile() {
                     4 -> npc(FaceAnim.NEUTRAL,"Of course m'hearty. If that's what you want.").also { stage++ }
                     5 -> {
                         end()
-                        FishingPlatform.sail(player!!, FishingPlatform.Travel.WITCHAVEN_TO_FISHING_PLATFORM)
+                        PlatformHelper.sail(player!!, PlatformHelper.Travel.WITCHAVEN_TO_FISHING_PLATFORM)
                     }
 
                     6 -> npc("Fair enough m'hearty.").also { stage = END_DIALOGUE }

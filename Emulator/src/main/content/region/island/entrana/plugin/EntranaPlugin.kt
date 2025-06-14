@@ -1,8 +1,11 @@
 package content.region.island.entrana.plugin
 
 import core.api.*
+import core.api.interaction.openNpcShop
 import core.cache.def.impl.ItemDefinition
 import core.game.bots.AIPlayer
+import core.game.dialogue.FaceAnim
+import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
@@ -80,6 +83,54 @@ class EntranaPlugin : InteractionListener, MapArea {
         on(MAGIC_DOOR, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "You feel the world around you dissolve...")
             teleport(player, Location(3093, 3224, 0), TeleportManager.TeleportType.ENTRANA_MAGIC_DOOR)
+            return@on true
+        }
+
+        /*
+         * Handles talking to NPC.
+         */
+
+        on(NPCs.MONK_222, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Greetings traveller.")
+            return@on true
+        }
+
+        val dialogues = listOf(
+            "Nice weather we're having today!",
+            "Please leave me alone, a parrot stole my banana."
+        )
+
+        on(NPCs.MAZION_3114, IntType.NPC, "talk-to") { player, node ->
+            val randomDialogue = (1..3).random()
+            when (randomDialogue) {
+                1 -> sendNPCDialogue(player, node.id, dialogues[0])
+                2 -> sendNPCDialogue(player, node.id, "Hello ${player.name}, fine day today!")
+                3 -> sendNPCDialogue(player, node.id, dialogues[1])
+            }
+            return@on true
+        }
+
+        on(NPCs.FRINCOS_578, IntType.NPC, "talk-to") { player, node ->
+            dialogue(player) {
+                npc(node.id, FaceAnim.HALF_GUILTY, "Hello, how can I help you?")
+                options(null, "What are you selling?", "You can't; I'm beyond help.", "I'm okay, thank you.") { selected ->
+                    when (selected) {
+                        1 -> player(FaceAnim.HALF_GUILTY, "What are you selling?").also {
+                            openNpcShop(player, node.id)
+                        }
+                        2 -> player(FaceAnim.HALF_GUILTY, "You can't; I'm beyond help.")
+                        3 -> player(FaceAnim.HALF_GUILTY, "I'm okay, thank you.")
+                    }
+                }
+            }
+            return@on true
+        }
+
+        on(NPCs.CRONE_217, IntType.NPC, "talk-to") { player, node ->
+            dialogue(player) {
+                npc(node.id, FaceAnim.HALF_GUILTY, "Hello deary.")
+                player(FaceAnim.HALF_GUILTY, "Um... hello.")
+            }
             return@on true
         }
     }

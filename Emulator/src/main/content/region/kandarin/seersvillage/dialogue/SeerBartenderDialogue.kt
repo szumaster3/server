@@ -14,7 +14,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SeerBartenderDialogue(player: Player? = null, ) : Dialogue(player) {
+class SeerBartenderDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_GUILTY, "Good morning, what would you like?")
@@ -27,6 +27,7 @@ class SeerBartenderDialogue(player: Player? = null, ) : Dialogue(player) {
                 options("What do you have?", "Beer please.", "I don't really want anything thanks.")
                 stage = 1
             }
+
             1 -> when (buttonId) {
                 1 -> {
                     player(FaceAnim.HALF_GUILTY, "What do you have?")
@@ -46,7 +47,11 @@ class SeerBartenderDialogue(player: Player? = null, ) : Dialogue(player) {
 
             67 -> end()
             30 -> {
-                npc(FaceAnim.HALF_GUILTY, "Well we have beer, or if you want some food, we have", "our home made stew and meat pies.")
+                npc(
+                    FaceAnim.HALF_GUILTY,
+                    "Well we have beer, or if you want some food, we have",
+                    "our home made stew and meat pies."
+                )
                 stage = 31
             }
 
@@ -57,7 +62,12 @@ class SeerBartenderDialogue(player: Player? = null, ) : Dialogue(player) {
 
             10 -> end()
             31 -> {
-                options("Beer please.", "I'll try the meat pie.", "Could I have some stew please?", "I don't really want anything thanks.")
+                options(
+                    "Beer please.",
+                    "I'll try the meat pie.",
+                    "Could I have some stew please?",
+                    "I don't really want anything thanks."
+                )
                 stage = 32
             }
 
@@ -125,7 +135,7 @@ class SeerBartenderDialogue(player: Player? = null, ) : Dialogue(player) {
         if (freeSlots(player) == 0) {
             player(FaceAnim.HALF_GUILTY, "I don't seem to have room, sorry.")
         }
-        if(!removeItem(player, Item(Items.COINS_995, price))) {
+        if (!removeItem(player, Item(Items.COINS_995, price))) {
             player(FaceAnim.HALF_GUILTY, "Sorry, I don't seem to have enough coins.")
         } else {
             addItem(player, item, 1)

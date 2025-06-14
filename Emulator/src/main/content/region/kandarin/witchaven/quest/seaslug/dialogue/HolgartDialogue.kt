@@ -1,6 +1,6 @@
 package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
-import content.region.island.fishing_platform.FishingPlatform
+import content.region.kandarin.witchaven.plugin.PlatformHelper
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete
 import core.api.sendDialogue
@@ -51,7 +51,7 @@ class HolgartDialogue(
             2 -> npc(FaceAnim.HALF_THINKING, "That's a worry, no-one's heard from him on shore.", "Come on, we'd better look for him.").also { stage++ }
             3 -> {
                 end()
-                FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_SMALL_ISLAND)
+                PlatformHelper.sail(player!!, PlatformHelper.Travel.FISHING_PLATFORM_TO_SMALL_ISLAND)
             }
 
             100 -> npc(FaceAnim.THINKING, "Have you had enough of this place yet?", "It's really starting to scare me.").also { stage++ }
@@ -63,19 +63,19 @@ class HolgartDialogue(
             103 -> npc("Okay... you're the boss.").also { stage = END_DIALOGUE }
             104 -> {
                 end()
-                FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
+                PlatformHelper.sail(player!!, PlatformHelper.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
             }
 
             200 -> npc(FaceAnim.THINKING, "You're right. It all sounds pretty creepy.").also { stage++ }
             201 -> {
                 end()
-                FishingPlatform.sail(player!!, FishingPlatform.Travel.SMALL_ISLAND_TO_FISHING_PLATFORM)
+                PlatformHelper.sail(player!!, PlatformHelper.Travel.SMALL_ISLAND_TO_FISHING_PLATFORM)
             }
             300 -> npc("Yes, he's safe and sound with his parents. Your turn to", "return to land now adventurer.").also { stage++ }
             301 -> player(FaceAnim.NOD_YES, "Looking forward to it.").also { stage++ }
             302 -> {
                 end()
-                FishingPlatform.sail(player!!, FishingPlatform.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
+                PlatformHelper.sail(player!!, PlatformHelper.Travel.FISHING_PLATFORM_TO_WITCHAVEN)
             }
         }
         return true

@@ -25,32 +25,30 @@ class IgnatiusVulcanDialogue(
         buttonId: Int,
     ): Boolean {
         when (stage) {
-            0 ->
-                if (isMaster(player, Skills.FIREMAKING)) {
-                    options("Who are you?", "Could I buy a Skillcape of Firemaking?", "No, thanks.")
-                    stage = 100
-                } else {
-                    options("Who are you?", "What is that cape you're wearing?", "No, thanks.")
-                    stage = 1
+            0 -> if (isMaster(player, Skills.FIREMAKING)) {
+                options("Who are you?", "Could I buy a Skillcape of Firemaking?", "No, thanks.")
+                stage = 100
+            } else {
+                options("Who are you?", "What is that cape you're wearing?", "No, thanks.")
+                stage = 1
+            }
+
+            100 -> when (buttonId) {
+                1 -> {
+                    player("Who are you?")
+                    stage = 10
                 }
 
-            100 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Who are you?")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player("Could I buy a Skillcape of Firemaking?")
-                        stage = 101
-                    }
-
-                    3 -> {
-                        player("No, thanks.")
-                        stage = 30
-                    }
+                2 -> {
+                    player("Could I buy a Skillcape of Firemaking?")
+                    stage = 101
                 }
+
+                3 -> {
+                    player("No, thanks.")
+                    stage = 30
+                }
+            }
 
             101 -> {
                 npc("Certainly! Right when you give me 99000 coins.")
@@ -62,15 +60,14 @@ class IgnatiusVulcanDialogue(
                 stage = 103
             }
 
-            103 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Okay, here you go.")
-                        stage = 104
-                    }
-
-                    2 -> end()
+            103 -> when (buttonId) {
+                1 -> {
+                    player("Okay, here you go.")
+                    stage = 104
                 }
+
+                2 -> end()
+            }
 
             104 -> {
                 if (purchase(player, Skills.FIREMAKING)) {
@@ -80,23 +77,22 @@ class IgnatiusVulcanDialogue(
             }
 
             105 -> end()
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Who are you?")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player("What is that cape you're wearing?")
-                        stage = 20
-                    }
-
-                    3 -> {
-                        player("No, thanks.")
-                        stage = 30
-                    }
+            1 -> when (buttonId) {
+                1 -> {
+                    player("Who are you?")
+                    stage = 10
                 }
+
+                2 -> {
+                    player("What is that cape you're wearing?")
+                    stage = 20
+                }
+
+                3 -> {
+                    player("No, thanks.")
+                    stage = 30
+                }
+            }
 
             10 -> {
                 npc(

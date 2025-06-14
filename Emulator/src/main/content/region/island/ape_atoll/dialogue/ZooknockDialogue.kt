@@ -1,4 +1,4 @@
-package content.region.island.ape_atoll.dungeon
+package content.region.island.ape_atoll.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

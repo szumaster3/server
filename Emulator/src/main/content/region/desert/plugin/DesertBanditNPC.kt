@@ -18,71 +18,72 @@ class DesertBanditNPC(
     id: Int = NPCs.BANDIT_1926,
     location: Location? = null,
 ) : AbstractNPC(id, location) {
+
     companion object {
-        private val saradominSet = mutableSetOf<Int>()
-        private val zamorakSet = mutableSetOf<Int>()
-        private val godSet = mutableSetOf<Int>()
-        private val nonAffiliatedSet = mutableSetOf<Int>()
+        private val SARADOMIN_ITEMS = God.SARADOMIN.validItems.toSet()
+        private val ZAMORAK_ITEMS = God.ZAMORAK.validItems.toSet()
+        private val NON_AFFILIATED_ITEMS = setOf(
+            Items.INITIATE_CUISSE_5576,
+            Items.INITIATE_HAUBERK_5575,
+            Items.INITIATE_SALLET_5574,
+            Items.PROSELYTE_CUISSE_9676,
+            Items.PROSELYTE_HAUBERK_9674,
+            Items.PROSELYTE_SALLET_9672,
+            Items.PROSELYTE_TASSET_9678,
+            Items.WHITE_BOOTS_6619,
+            Items.WHITE_CHAINBODY_6615,
+            Items.WHITE_FULL_HELM_6623,
+            Items.WHITE_GLOVES_6629,
+            Items.WHITE_KITESHIELD_6633,
+            Items.WHITE_PLATEBODY_6617,
+            Items.WHITE_PLATESKIRT_6627,
+            Items.WHITE_SQ_SHIELD_6631,
+        )
 
         private const val SARADOMIN_FORCE_CHAT = "Time to die, Saradominist filth!"
         private const val ZAMORAK_FORCE_CHAT = "Prepare to suffer, Zamorakian scum!"
         private const val ALLY_ATTACKED_CHAT = "You chose the wrong place to start trouble!"
-
-        init {
-            val zamorakProvideProtectionItems = God.ZAMORAK.validItems
-            val saradominProvideProtectionItems = God.SARADOMIN.validItems
-            val nonAffiliatedItems =
-                intArrayOf(
-                    Items.INITIATE_CUISSE_5576,
-                    Items.INITIATE_HAUBERK_5575,
-                    Items.INITIATE_SALLET_5574,
-                    Items.PROSELYTE_CUISSE_9676,
-                    Items.PROSELYTE_HAUBERK_9674,
-                    Items.PROSELYTE_SALLET_9672,
-                    Items.PROSELYTE_TASSET_9678,
-                    Items.WHITE_BOOTS_6619,
-                    Items.WHITE_CHAINBODY_6615,
-                    Items.WHITE_FULL_HELM_6623,
-                    Items.WHITE_GLOVES_6629,
-                    Items.WHITE_KITESHIELD_6633,
-                    Items.WHITE_PLATEBODY_6617,
-                    Items.WHITE_PLATESKIRT_6627,
-                    Items.WHITE_SQ_SHIELD_6631,
-                )
-
-            zamorakSet.addAll(zamorakProvideProtectionItems.toList())
-            saradominSet.addAll(saradominProvideProtectionItems.toList())
-            godSet.addAll(zamorakProvideProtectionItems.toList() + saradominProvideProtectionItems.toList())
-            nonAffiliatedSet.addAll(nonAffiliatedItems.toList())
-        }
     }
 
     private val supportRange = 10
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = DesertBanditNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        DesertBanditNPC(id, location)
+
+    private fun checkPlayerEquipment(player: Player): Int {
+        /*
+         *  0 = none,
+         *  1 = Saradomin,
+         *  2 = Zamorak,
+         * -1 = non-affiliated found.
+         */
+        val eq = player.equipment
+        for (slot in 0 until eq.capacity()) {
+            val item = eq[slot] ?: continue
+            when {
+                NON_AFFILIATED_ITEMS.contains(item.id) -> return -1
+                SARADOMIN_ITEMS.contains(item.id) -> return 1
+                ZAMORAK_ITEMS.contains(item.id) -> return 2
+            }
+        }
+        return 0
+    }
 
     override fun tick() {
         if (!inCombat()) {
             val players = RegionManager.getLocalPlayers(this, 5)
-            for (player in players) {
+            loop@ for (player in players) {
                 if (player.inCombat()) continue
-                if (isWieldingValuableItem(player)) {
-                    when {
-                        hasGodItem(player, God.SARADOMIN) -> {
-                            sendChat(SARADOMIN_FORCE_CHAT)
-                            attack(player)
-                            break
-                        }
-
-                        hasGodItem(player, God.ZAMORAK) -> {
-                            sendChat(ZAMORAK_FORCE_CHAT)
-                            attack(player)
-                            break
-                        }
+                when (checkPlayerEquipment(player)) {
+                    1 -> {
+                        sendChat(SARADOMIN_FORCE_CHAT)
+                        attack(player)
+                        break@loop
+                    }
+                    2 -> {
+                        sendChat(ZAMORAK_FORCE_CHAT)
+                        attack(player)
+                        break@loop
                     }
                 }
             }
@@ -90,24 +91,7 @@ class DesertBanditNPC(
         super.tick()
     }
 
-    private fun isWieldingValuableItem(player: Player): Boolean {
-        val container: Container = player.equipment
-        for (slot in 0 until container.capacity()) {
-            val item = container[slot] ?: continue
-            if (godSet.contains(item.id)) {
-                return true
-            }
-            if (nonAffiliatedSet.contains(item.id)) {
-                return false
-            }
-        }
-        return false
-    }
-
-    override fun onImpact(
-        entity: Entity?,
-        state: BattleState?,
-    ) {
+    override fun onImpact(entity: Entity?, state: BattleState?) {
         if (entity is Player) {
             RegionManager.getLocalNpcs(this, supportRange).forEach { npc ->
                 if (npc.id == NPCs.BANDIT_1926 && !npc.properties.combatPulse.isAttacking && npc != this) {
@@ -119,38 +103,32 @@ class DesertBanditNPC(
         super.onImpact(entity, state)
     }
 
-    override fun canSelectTarget(target: Entity?): Boolean =
-        if (target is Player) isWieldingValuableItem(target) else super.canSelectTarget(target)
-
-    override fun isAggressive(): Boolean {
-        val check = super.isAggressive()
-        val target = properties.combatPulse.entity
+    override fun canSelectTarget(target: Entity?): Boolean {
         if (target is Player) {
-            val container: Container = target.equipment
-            for (slot in 0 until container.capacity()) {
-                val item = container[slot] ?: continue
-                when {
-                    saradominSet.contains(item.id) -> {
-                        sendChat(SARADOMIN_FORCE_CHAT)
-                        return true
-                    }
-
-                    zamorakSet.contains(item.id) -> {
-                        sendChat(ZAMORAK_FORCE_CHAT)
-                        return true
-                    }
-
-                    nonAffiliatedSet.contains(item.id) -> {
-                        return false
-                    }
-                }
-            }
+            val check = checkPlayerEquipment(target)
+            return check == 1 || check == 2
         }
-        return check
+        return super.canSelectTarget(target)
     }
 
-    override fun finalizeDeath(killer: Entity?) {
-        super.finalizeDeath(killer)
+    override fun isAggressive(): Boolean {
+        val baseAggressive = super.isAggressive()
+        val target = properties.combatPulse.entity
+        if (target is Player) {
+            return when (checkPlayerEquipment(target)) {
+                1 -> {
+                    sendChat(SARADOMIN_FORCE_CHAT)
+                    true
+                }
+                2 -> {
+                    sendChat(ZAMORAK_FORCE_CHAT)
+                    true
+                }
+                -1 -> false
+                else -> baseAggressive
+            }
+        }
+        return baseAggressive
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.BANDIT_1926)

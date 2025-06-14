@@ -22,33 +22,38 @@ import org.rs.consts.Quests
  * - Battlestaff enchanting.
  */
 @Initializable
-class ThormacDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class ThormacDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+
         /*
          * Represents the headband, when a player owns, receives a discount.
          */
         val hasHeadband = DiaryManager(player).hasHeadband()
 
         when (stage) {
+
             /*
              * Scorpion Catcher dialogue.
              */
-            0 -> if(!isQuestComplete(player, Quests.SCORPION_CATCHER)) {
+            0 -> if (!isQuestComplete(player, Quests.SCORPION_CATCHER)) {
                 openDialogue(player, ThormacRequestDialogue())
             } else {
                 npcl(FaceAnim.NEUTRAL, "Thank you for rescuing my scorpions.").also { stage++ }
             }
+
             1 -> options("That's okay.", "You said you'd enchant my battlestaff for me.").also { stage++ }
             2 -> when (buttonId) {
                 1 -> playerl(FaceAnim.NEUTRAL, "That's okay.").also { stage = END_DIALOGUE }
                 2 -> playerl(FaceAnim.NEUTRAL, "You said you'd enchant my battlestaff for me.").also { stage++ }
             }
-            3 -> npc(FaceAnim.NEUTRAL, "Yes, although it'll cost you " + (if (hasHeadband) "27,000" else "40,000") + " coins for the", "materials. What kind of staff did you want enchanting?").also { stage++ }
+
+            3 -> npc(
+                FaceAnim.NEUTRAL,
+                "Yes, although it'll cost you " + (if (hasHeadband) "27,000" else "40,000") + " coins for the",
+                "materials. What kind of staff did you want enchanting?"
+            ).also { stage++ }
+
             4 -> {
                 end()
                 openInterface(player!!, Components.STAFF_ENCHANT_332)

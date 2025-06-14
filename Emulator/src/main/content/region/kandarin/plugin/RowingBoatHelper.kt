@@ -10,7 +10,7 @@ import core.game.world.map.Location
 import org.rs.consts.Components
 import org.rs.consts.NPCs
 
-object RowingBoat {
+object RowingBoatHelper {
     @JvmStatic
     fun sail(player: Player, npc: NPC): Boolean {
         player.lock()
