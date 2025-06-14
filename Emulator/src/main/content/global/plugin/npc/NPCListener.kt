@@ -4,10 +4,10 @@ import content.global.activity.ttrail.scrolls.AnagramClueScroll
 import content.global.activity.ttrail.scrolls.ChallengeClueScroll
 import content.global.ame.RandomEvents
 import content.minigame.gnomecook.dialogue.GnomeCookingDialogue
-import content.minigame.gnomecook.handlers.GC_BASE_ATTRIBUTE
-import content.minigame.gnomecook.handlers.GC_JOB_COMPLETE
-import content.minigame.gnomecook.handlers.GC_JOB_ORDINAL
-import content.minigame.gnomecook.handlers.GnomeCookingTask
+import content.minigame.gnomecook.plugin.GC_BASE_ATTRIBUTE
+import content.minigame.gnomecook.plugin.GC_JOB_COMPLETE
+import content.minigame.gnomecook.plugin.GC_JOB_ORDINAL
+import content.minigame.gnomecook.plugin.GnomeCookingTask
 import content.region.kandarin.miniquest.barcrawl.BarcrawlManager
 import content.region.kandarin.miniquest.barcrawl.BarcrawlType
 import core.api.*

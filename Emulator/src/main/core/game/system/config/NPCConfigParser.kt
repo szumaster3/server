@@ -92,10 +92,8 @@ class NPCConfigParser {
                                     .map { v -> v.toInt() }
                                     .toIntArray()
 
-                        "force_talk" -> {
-                            val list = it.value as? List<String> ?: emptyList()
-                            configs[it.key.toString()] = list.toTypedArray()
-                        }
+                        "force_talk" -> configs[it.key.toString()] = it.value.toString()
+
                         "spawn_animation",
                         "id",
                         "lifepoints",

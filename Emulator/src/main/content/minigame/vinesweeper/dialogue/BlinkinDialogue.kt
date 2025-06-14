@@ -1,6 +1,6 @@
 package content.minigame.vinesweeper.dialogue
 
-import content.minigame.vinesweeper.handlers.FlagsHandler
+import content.minigame.vinesweeper.plugin.FlagsHandler
 import core.api.openDialogue
 import core.api.sendInputDialogue
 import core.game.dialogue.Dialogue

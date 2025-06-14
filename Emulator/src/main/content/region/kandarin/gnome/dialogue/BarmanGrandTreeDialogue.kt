@@ -1,6 +1,5 @@
 package content.region.kandarin.gnome.dialogue
 
-import content.minigame.gnomecook.handlers.*
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue

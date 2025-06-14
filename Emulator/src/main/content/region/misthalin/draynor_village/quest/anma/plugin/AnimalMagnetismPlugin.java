@@ -199,7 +199,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                             sendMessage(player, "You don't have the required axe in order to do that.");
                             return true;
                         }
-                        Animation animation = getAnimation(tool.animation);
+                        Animation animation = getAnimation(tool.getAnimation());
                         player.animate(animation, 2);
                         if (quest.getStage(player) == 28) {
                             quest.setStage(player, 29);

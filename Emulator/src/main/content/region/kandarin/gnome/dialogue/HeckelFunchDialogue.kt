@@ -2,7 +2,6 @@ package content.region.kandarin.gnome.dialogue
 
 import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
-import content.minigame.gnomecook.handlers.*
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.game.dialogue.Dialogue

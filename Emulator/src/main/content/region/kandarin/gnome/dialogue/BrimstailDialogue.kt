@@ -1,8 +1,6 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.global.travel.EssenceTeleport
-import content.minigame.gnomecook.handlers.*
-import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

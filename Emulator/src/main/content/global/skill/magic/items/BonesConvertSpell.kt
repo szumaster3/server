@@ -3,7 +3,7 @@ package content.global.skill.magic.items
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
 import content.global.skill.prayer.Bones
-import content.minigame.mta.handlers.room.CreatureGraveyard
+import content.minigame.mta.plugin.CreatureGraveyardPlugin
 import core.api.playAudio
 import core.api.sendMessage
 import core.game.node.entity.impl.Animator
@@ -85,7 +85,7 @@ class BonesConvertSpell : SpellListener("modern") {
             if (isInMTA) {
                 if (bones.contains(item.id)) {
                     val inInventory = player.inventory.getAmount(item.id)
-                    val amount = inInventory * (CreatureGraveyard.BoneType.forItem(Item(item.id))!!.ordinal + 1)
+                    val amount = inInventory * (CreatureGraveyardPlugin.BoneType.forItem(Item(item.id))!!.ordinal + 1)
                     if (amount > 0) {
                         player.inventory.remove(Item(item.id, inInventory))
                         player.inventory.add(Item(if (bananas) Items.BANANA_1963 else Items.PEACH_6883, amount))

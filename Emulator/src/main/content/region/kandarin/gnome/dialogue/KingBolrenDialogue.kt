@@ -1,6 +1,5 @@
 package content.region.kandarin.gnome.dialogue
 
-import content.minigame.gnomecook.handlers.*
 import content.region.kandarin.gnome.quest.tree.dialogue.KingBolrenDialogueFile
 import core.api.*
 import core.api.quest.isQuestComplete

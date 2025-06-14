@@ -1,7 +1,7 @@
 package content.minigame.sorceressgarden.dialogue
 
 import content.data.GameAttributes
-import content.minigame.sorceressgarden.handlers.SorceressGarden.SeasonDefinitions
+import content.minigame.sorceressgarden.plugin.SorceressGardenPlugin.SeasonDefinitions
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC

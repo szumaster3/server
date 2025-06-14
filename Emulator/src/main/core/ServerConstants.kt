@@ -1,6 +1,6 @@
 package core
 
-import content.minigame.castlewars.handlers.CastleWars
+import content.minigame.castlewars.plugin.CastleWars
 import core.game.system.SystemShutdownHook
 import core.game.world.map.Location
 import core.integration.mysql.Database

@@ -1,7 +1,7 @@
 package content.minigame.gnomecook.dialogue
 
-import content.minigame.gnomecook.handlers.*
-import content.minigame.gnomecook.handlers.GnomeCookingTipper.getTip
+import content.minigame.gnomecook.plugin.*
+import content.minigame.gnomecook.plugin.GnomeCookingTipper.getTip
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

@@ -1,6 +1,6 @@
 package content.minigame.pyramidplunder.dialogue
 
-import content.minigame.pyramidplunder.handlers.PyramidPlunderMinigame
+import content.minigame.pyramidplunder.plugin.PyramidPlunderMinigame
 import core.api.sendDialogueOptions
 import core.api.setAttribute
 import core.game.dialogue.Dialogue

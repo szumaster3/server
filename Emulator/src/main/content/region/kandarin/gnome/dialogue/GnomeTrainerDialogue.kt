@@ -1,7 +1,6 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.data.GameAttributes
-import content.minigame.gnomecook.handlers.*
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

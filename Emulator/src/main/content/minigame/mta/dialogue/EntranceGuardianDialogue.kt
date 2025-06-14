@@ -1,6 +1,6 @@
 package content.minigame.mta.dialogue
 
-import content.minigame.mta.handlers.ProgressHat
+import content.minigame.mta.plugin.ProgressHat
 import core.api.addItem
 import core.api.hasAnItem
 import core.game.dialogue.Dialogue

@@ -1,6 +1,6 @@
 package content.minigame.vinesweeper.dialogue
 
-import content.minigame.vinesweeper.handlers.VinesweeperListener
+import content.minigame.vinesweeper.plugin.VinesweeperPlugin
 import core.api.interaction.openNpcShop
 import core.api.openInterface
 import core.game.dialogue.Dialogue
@@ -120,7 +120,7 @@ class ToolLeprechaunDialogue(
 
             30 -> {
                 end()
-                VinesweeperListener.Companion.VinesweeperTeleport.teleport(npc!!, player!!)
+                VinesweeperPlugin.Companion.VinesweeperTeleport.teleport(npc!!, player!!)
             }
         }
         return true
@@ -211,7 +211,7 @@ class ToolLeprechaunGothDialogue(
 
             30 -> {
                 end()
-                VinesweeperListener.Companion.VinesweeperTeleport.teleport(npc!!, player!!)
+                VinesweeperPlugin.Companion.VinesweeperTeleport.teleport(npc!!, player!!)
             }
         }
         return true

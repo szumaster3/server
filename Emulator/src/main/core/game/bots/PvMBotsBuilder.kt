@@ -1,7 +1,7 @@
 package core.game.bots
 
-import content.minigame.pestcontrol.handlers.bots.PestControlIntermediateBot
-import content.minigame.pestcontrol.handlers.bots.PestControlNoviceBot
+import content.minigame.pestcontrol.plugin.bots.PestControlIntermediateBot
+import content.minigame.pestcontrol.plugin.bots.PestControlNoviceBot
 import core.game.world.map.Location
 
 class PvMBotsBuilder {

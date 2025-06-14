@@ -31,7 +31,7 @@ class WarriorsGuildPlugin: InteractionListener {
 
         onEquip(Items.DEFENSIVE_SHIELD_8856) { player, node ->
             if (node is Item) {
-                if (player.location != CatapultRoom.TARGET) {
+                if (player.location != CatapultRoomPlugin.TARGET) {
                     sendMessage(player,
                         "You may not equip this shield outside the target area in the Warrior's Guild.",
                     )

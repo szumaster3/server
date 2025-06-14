@@ -1,6 +1,6 @@
 package content.minigame.mta.dialogue
 
-import content.minigame.mta.handlers.room.TelekineticTheatre
+import content.minigame.mta.plugin.TelekineticTheatrePlugin
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -49,7 +49,7 @@ class MazeGuardianDialogue(
             4 -> npc(FaceAnim.OLD_NORMAL, "Very well, I shall teleport you.").also { stage++ }
             5 -> {
                 npc.clear()
-                TelekineticTheatre.getZone(player).setUp()
+                TelekineticTheatrePlugin.getZone(player).setUp()
                 end()
             }
         }
