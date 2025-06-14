@@ -453,7 +453,7 @@ public class NPC extends Entity {
                 return;
             }
         }
-        if (forceTalk != null && getAttribute("lastForceTalk", 0) < GameWorld.getTicks()) {
+        if (forceTalk != null && forceTalk.length > 0 && getAttribute("lastForceTalk", 0) < GameWorld.getTicks()) {
             int index = RandomFunction.random(forceTalk.length);
             sendChat(forceTalk[index]);
             setAttribute("lastForceTalk", GameWorld.getTicks() + RandomFunction.random(15, 30));
