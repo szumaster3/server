@@ -27,16 +27,8 @@ class PendaDialogue(
             when (stage) {
                 START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage = random }
                 1 -> npcl(FaceAnim.HAPPY, "I heard about what you did, thank you!").also { stage = END_DIALOGUE }
-                2 ->
-                    npcl(FaceAnim.WORRIED, "The White Knights are still going to take over.").also {
-                        stage =
-                            END_DIALOGUE
-                    }
-                3 ->
-                    npcl(FaceAnim.PANICKED, "I hear the Imperial Guard are preparing an attack!").also {
-                        stage =
-                            END_DIALOGUE
-                    }
+                2 -> npcl(FaceAnim.WORRIED, "The White Knights are still going to take over.").also { stage = END_DIALOGUE }
+                3 -> npcl(FaceAnim.PANICKED, "I hear the Imperial Guard are preparing an attack!").also { stage = END_DIALOGUE }
                 4 -> npcl(FaceAnim.HAPPY, "Thank you so much!").also { stage = END_DIALOGUE }
                 5 -> npcl(FaceAnim.HAPPY, "Surely we are safe now!").also { stage = END_DIALOGUE }
             }
