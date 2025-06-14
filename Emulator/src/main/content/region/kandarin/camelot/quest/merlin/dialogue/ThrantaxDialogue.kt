@@ -1,7 +1,7 @@
-package content.region.kandarin.seersvillage.quest.merlin.dialogue
+package content.region.kandarin.camelot.quest.merlin.dialogue
 
 import content.data.GameAttributes
-import content.region.kandarin.seersvillage.quest.merlin.plugin.ThrantaxTheMightyNPC
+import content.region.kandarin.camelot.quest.merlin.plugin.ThrantaxTheMightyNPC
 import core.api.quest.setQuestStage
 import core.api.sendDialogue
 import core.api.sendDialogueOptions

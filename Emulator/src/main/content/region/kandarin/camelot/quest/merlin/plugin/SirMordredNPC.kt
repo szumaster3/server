@@ -1,7 +1,7 @@
-package content.region.kandarin.seersvillage.quest.merlin.plugin
+package content.region.kandarin.camelot.quest.merlin.plugin
 
 import content.data.GameAttributes
-import content.region.kandarin.seersvillage.quest.merlin.dialogue.MorganLeFayeDialogue
+import content.region.kandarin.camelot.quest.merlin.dialogue.MorganLeFayeDialogue
 import core.api.openDialogue
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle

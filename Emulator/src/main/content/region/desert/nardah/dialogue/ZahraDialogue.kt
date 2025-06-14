@@ -33,19 +33,16 @@ class ZahraDialogue(
             1 -> player("You don't look too happy.").also { stage++ }
             2 -> npc("True. We've not fallen on the best of times here.").also { stage++ }
             3 -> player("Any way that I can help?").also { stage++ }
-            4 ->
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Possibly. I'd go talk to Awusah the Mayor of Nardah. He's in the big house on the east side of the town square.",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
-            5 ->
-                npcl(FaceAnim.HALF_GUILTY, "Much better thanks to you. We're all very impressed.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            4 -> npcl(
+                FaceAnim.HALF_GUILTY,
+                "Possibly. I'd go talk to Awusah the Mayor of Nardah. He's in the big house on the east side of the town square.",
+            ).also {
+                stage = END_DIALOGUE
+            }
+
+            5 -> npcl(FaceAnim.HALF_GUILTY, "Much better thanks to you. We're all very impressed.").also {
+                stage = END_DIALOGUE
+            }
         }
         return true
     }

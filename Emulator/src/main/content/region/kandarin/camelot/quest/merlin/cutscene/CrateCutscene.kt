@@ -1,4 +1,4 @@
-package content.region.kandarin.seersvillage.quest.merlin.cutscene
+package content.region.kandarin.camelot.quest.merlin.cutscene
 
 import core.api.addScenery
 import core.api.ui.setMinimapState

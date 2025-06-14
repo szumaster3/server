@@ -1,4 +1,4 @@
-package content.region.kandarin.seersvillage.quest.merlin
+package content.region.kandarin.camelot.quest.merlin
 
 import content.data.GameAttributes
 import core.api.inInventory

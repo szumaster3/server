@@ -3,7 +3,7 @@ package content.region.kandarin.camelot.dialogue
 import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
-import content.region.kandarin.seersvillage.quest.merlin.dialogue.MerlinDialogueFile
+import content.region.kandarin.camelot.quest.merlin.dialogue.MerlinDialogueFile
 import core.ServerConstants
 import core.api.*
 import core.api.quest.getQuestStage
@@ -25,8 +25,8 @@ import org.rs.consts.Quests
  * Represents the Merlin dialogue.
  *
  * **Relations:**
- * - [Merlin's Crystal][content.region.kandarin.quest.merlin.MerlinCrystal]
- * - [Holy Grail][content.region.kandarin.quest.grail.HolyGrail]
+ * - [Merlin's Crystal][content.region.kandarin.camelot.quest.merlin.MerlinCrystal]
+ * - [Holy Grail][content.region.kandarin.camelot.quest.grail.HolyGrail]
  * - [Training Ground Activity][content.region.kandarin.miniquest.knightwave.TrainingGroundActivity]
  */
 @Initializable

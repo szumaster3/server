@@ -14,8 +14,8 @@ import org.rs.consts.Quests
  * Represents Sir Pelleas dialogue.
  *
  * **Related quests:**
- * - [Merlin's Crystal][content.region.kandarin.quest.merlin.MerlinCrystal]
- * - [Holy Grail][content.region.kandarin.quest.grail.HolyGrail]
+ * - [Merlin's Crystal][content.region.kandarin.camelot.quest.merlin.MerlinCrystal]
+ * - [Holy Grail][content.region.kandarin.camelot.quest.grail.HolyGrail]
  * - [TODO Kings Ransom][content.region.kandarin.quest.kr.KingsRansom]
  */
 @Initializable

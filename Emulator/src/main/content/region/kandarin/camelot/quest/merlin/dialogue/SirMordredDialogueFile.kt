@@ -1,4 +1,4 @@
-package content.region.kandarin.seersvillage.quest.merlin.dialogue
+package content.region.kandarin.camelot.quest.merlin.dialogue
 
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

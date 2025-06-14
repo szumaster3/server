@@ -1,7 +1,7 @@
-package content.region.kandarin.seersvillage.quest.merlin.dialogue
+package content.region.kandarin.camelot.quest.merlin.dialogue
 
 import content.data.GameAttributes
-import content.region.kandarin.seersvillage.quest.merlin.plugin.BeggarNPC
+import content.region.kandarin.camelot.quest.merlin.plugin.BeggarNPC
 import core.api.sendDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

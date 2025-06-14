@@ -1,4 +1,4 @@
-package content.region.kandarin.seersvillage.quest.merlin.dialogue
+package content.region.kandarin.camelot.quest.merlin.dialogue
 
 import content.data.GameAttributes
 import core.api.sendDialogue

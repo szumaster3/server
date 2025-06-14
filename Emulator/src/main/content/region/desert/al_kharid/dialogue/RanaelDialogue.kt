@@ -29,19 +29,17 @@ class RanaelDialogue(
     ): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thank you, that's not my scene.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.RANAEL_544)
-                    }
-
-                    2 ->
-                        player(
-                            FaceAnim.HALF_GUILTY,
-                            "No, thank you, that's not my scene.",
-                        ).also { stage = END_DIALOGUE }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.RANAEL_544)
                 }
+
+                2 -> player(
+                    FaceAnim.HALF_GUILTY,
+                    "No, thank you, that's not my scene.",
+                ).also { stage = END_DIALOGUE }
+            }
         }
         return true
     }

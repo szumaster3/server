@@ -1,6 +1,7 @@
-package content.region.kandarin.seersvillage.quest.merlin.plugin
+package content.region.kandarin.camelot.quest.merlin.plugin
 
 import content.data.GameAttributes
+import content.region.kandarin.camelot.quest.merlin.dialogue.*
 import content.region.kandarin.seersvillage.quest.merlin.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage

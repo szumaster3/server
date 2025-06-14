@@ -1,4 +1,4 @@
-package content.region.kandarin.seersvillage.quest.merlin.plugin
+package content.region.kandarin.camelot.quest.merlin.plugin
 
 import content.data.GameAttributes
 import core.game.node.entity.npc.AbstractNPC

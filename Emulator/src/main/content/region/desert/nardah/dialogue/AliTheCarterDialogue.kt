@@ -28,19 +28,17 @@ class AliTheCarterDialogue(
         when (stage) {
             0 -> npc("Hello, friend! Welcome to Nardah.", "Do you happen to be in need of water?").also { stage++ }
             1 -> options("Yes I am!", "No thank you I'm good.").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> player("Yes I am!").also { stage++ }
-                    2 -> player("No thank you.").also { stage = END_DIALOGUE }
-                }
+            2 -> when (buttonId) {
+                1 -> player("Yes I am!").also { stage++ }
+                2 -> player("No thank you.").also { stage = END_DIALOGUE }
+            }
 
             3 -> npc("It'll be 1000 coins for a full waterskin.").also { stage++ }
             4 -> options("Oh, wow. Um, sure.", "Oh my! No thank you.").also { stage++ }
-            5 ->
-                when (buttonId) {
-                    1 -> player("Oh, wow. Um, sure.").also { stage++ }
-                    2 -> player("Oh my! No thank you.").also { stage = END_DIALOGUE }
-                }
+            5 -> when (buttonId) {
+                1 -> player("Oh, wow. Um, sure.").also { stage++ }
+                2 -> player("Oh my! No thank you.").also { stage = END_DIALOGUE }
+            }
 
             6 -> {
                 if (!removeItem(player, Item(Items.COINS_995, 1000))) {

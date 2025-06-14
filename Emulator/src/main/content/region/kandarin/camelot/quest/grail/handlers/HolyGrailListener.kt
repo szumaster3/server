@@ -4,6 +4,7 @@ import content.region.kandarin.camelot.quest.grail.HolyGrail
 import content.region.kandarin.camelot.quest.grail.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage
+import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -39,13 +40,13 @@ class HolyGrailListener : InteractionListener {
             return@on true
         }
 
-        on(NPCs.PEASANT_214, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, DiseasedPeasantDialogue(), NPCs.PEASANT_214)
+        on(NPCs.PEASANT_214, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Woe is me! Our crops are all failing... how shall I feed myself this winter?", FaceAnim.HALF_ASKING)
             return@on true
         }
 
-        on(NPCs.PEASANT_215, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, HealthyPeasantDialogue(), NPCs.PEASANT_215)
+        on(NPCs.PEASANT_215, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Oh happy day! Suddenly our crops are growing again! It'll be a bumper harvest this year!", FaceAnim.HAPPY)
             return@on true
         }
 
@@ -72,12 +73,7 @@ class HolyGrailListener : InteractionListener {
 
             var dest = Location.create(2962, 3505, 0)
             var direction =
-                "to the " +
-                    Direction
-                        .getDirection(player.location, dest)
-                        .toString()
-                        .lowercase()
-                        .replace("_", " ")
+                "to the " + Direction.getDirection(player.location, dest).toString().lowercase().replace("_", " ")
 
             var zoneInBuilding = ZoneBorders(Location.create(2959, 3504, 0), Location.create(2962, 3507, 0))
 
@@ -96,9 +92,7 @@ class HolyGrailListener : InteractionListener {
             var zoneIsDiseased = ZoneBorders(Location.create(2741, 4650, 0), Location.create(2811, 4742, 0))
             var zoneIsHealthy = ZoneBorders(Location.create(2614, 4661, 0), Location.create(2698, 4746, 0))
 
-            if (!zoneCanTeleport.insideBorder(player) &&
-                !zoneIsDiseased.insideBorder(player) &&
-                !zoneIsHealthy.insideBorder(
+            if (!zoneCanTeleport.insideBorder(player) && !zoneIsDiseased.insideBorder(player) && !zoneIsHealthy.insideBorder(
                     player,
                 )
             ) {
@@ -176,7 +170,7 @@ class HolyGrailListener : InteractionListener {
                 sendMessage(player, "The door won't open.")
                 return@on false
             }
-            if(getQuestStage(player, Quests.HOLY_GRAIL) >= 10) {
+            if (getQuestStage(player, Quests.HOLY_GRAIL) >= 10) {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
             return@on true
