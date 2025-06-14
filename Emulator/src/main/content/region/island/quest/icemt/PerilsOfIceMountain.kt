@@ -1,13 +1,13 @@
 package content.region.island.quest.icemt
 
 import core.api.*
-import org.rs.consts.Vars
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.Quests
+import org.rs.consts.Vars
 
 // @Initializable
 class PerilsOfIceMountain :

@@ -2,12 +2,10 @@ package content.global.skill.herblore
 
 import core.api.amountInInventory
 import core.api.asItem
-import core.api.ui.repositionChild
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
-import org.rs.consts.Components
 import org.rs.consts.Items
 
 class UnfinishedPotionListener : InteractionListener {

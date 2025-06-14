@@ -1,6 +1,5 @@
 package content.global.skill.barbtraining
 
-import content.global.skill.barbtraining.BarbarianTraining
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

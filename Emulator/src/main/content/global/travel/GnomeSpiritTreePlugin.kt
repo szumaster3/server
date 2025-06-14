@@ -14,10 +14,10 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs.consts.Animations
-import org.rs.consts.Graphics as Gfx
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import org.rs.consts.Scenery
+import org.rs.consts.Graphics as Gfx
 
 /**
  * Handles Gnome Spirit Tree transportation system.

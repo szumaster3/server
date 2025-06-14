@@ -10,7 +10,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.tools.END_DIALOGUE
 import org.rs.consts.*
 
 class SophanemPlugin : InteractionListener {

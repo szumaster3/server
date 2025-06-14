@@ -14,7 +14,6 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Animations
-import kotlin.random.Random
 
 /**
  * Handles dungeon pipes shortcuts include one pipe from barbarian outpost.

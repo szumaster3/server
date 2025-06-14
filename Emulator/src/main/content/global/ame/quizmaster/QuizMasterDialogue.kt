@@ -1,6 +1,5 @@
 package content.global.ame.quizmaster
 
-import content.data.RandomEvent
 import core.ServerConstants
 import core.api.*
 import core.game.dialogue.DialogueFile

@@ -1,12 +1,12 @@
 package content.region.other.dorgeshkaan.quest.lotg
 
-import org.rs.consts.Vars
 import core.api.rewardXP
 import core.api.setVarbit
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
+import org.rs.consts.Vars
 
 // @Initializable
 class LandOfTheGoblins :

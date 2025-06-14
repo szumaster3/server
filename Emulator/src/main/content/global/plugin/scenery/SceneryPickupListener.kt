@@ -1,6 +1,9 @@
 package content.global.plugin.scenery
 
-import core.api.*
+import core.api.addItem
+import core.api.freeSlots
+import core.api.replaceScenery
+import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import org.rs.consts.Items

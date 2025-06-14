@@ -13,7 +13,6 @@ import content.global.ame.grave.LeoNPC
 import content.global.ame.lostandfound.LostAndFoundNPC
 import content.global.ame.maze.MazeNPC
 import content.global.ame.mime.MimeNPC
-import content.global.ame.pillory.PilloryNPC
 import content.global.ame.pinball.PinballNPC
 import content.global.ame.quizmaster.QuizMasterNPC
 import content.global.ame.rickturpentine.RickTurpentineNPC

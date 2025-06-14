@@ -1,14 +1,9 @@
 package content.global.activity.ttrail
 
-import content.global.activity.ttrail.clues.Anagram
-import content.global.activity.ttrail.clues.ChallengeScroll
-import content.global.activity.ttrail.clues.CoordinateClue
-import content.global.activity.ttrail.scrolls.CoordinateClueScroll
-import content.global.activity.ttrail.clues.CrypticClue
-import content.global.activity.ttrail.clues.EmoteClue
-import content.global.activity.ttrail.clues.MapClue
+import content.global.activity.ttrail.clues.*
 import content.global.activity.ttrail.npcs.SaradominWizardNPC
 import content.global.activity.ttrail.npcs.ZamorakWizardNPC
+import content.global.activity.ttrail.scrolls.CoordinateClueScroll
 import core.api.sendMessage
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.OptionHandler

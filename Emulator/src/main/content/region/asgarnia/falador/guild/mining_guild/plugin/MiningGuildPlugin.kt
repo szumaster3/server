@@ -1,6 +1,7 @@
 package content.region.asgarnia.falador.guild.mining_guild.plugin
 
-import core.api.*
+import core.api.getDynLevel
+import core.api.sendNPCDialogue
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.DoorActionHandler

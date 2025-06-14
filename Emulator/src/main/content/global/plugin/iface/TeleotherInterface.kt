@@ -1,6 +1,9 @@
 package content.global.plugin.iface
 
-import core.api.*
+import core.api.getAttribute
+import core.api.lock
+import core.api.teleport
+import core.api.visualize
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import org.rs.consts.Animations

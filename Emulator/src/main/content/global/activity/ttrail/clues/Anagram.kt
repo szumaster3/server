@@ -1,8 +1,8 @@
 package content.global.activity.ttrail.clues
 
 import content.global.activity.ttrail.ClueLevel
-import content.global.activity.ttrail.scrolls.AnagramClueScroll
 import content.global.activity.ttrail.puzzle.PuzzleBox
+import content.global.activity.ttrail.scrolls.AnagramClueScroll
 import core.plugin.Plugin
 import org.rs.consts.Items
 import org.rs.consts.NPCs

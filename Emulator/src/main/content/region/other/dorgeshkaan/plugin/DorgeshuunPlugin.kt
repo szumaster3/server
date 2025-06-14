@@ -8,10 +8,7 @@ import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.Location
-import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests

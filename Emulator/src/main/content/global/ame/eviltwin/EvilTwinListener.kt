@@ -13,7 +13,6 @@ import core.game.world.map.zone.ZoneRestriction
 import core.net.packet.PacketRepository
 import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
-import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 /**

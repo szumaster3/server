@@ -3,7 +3,6 @@ package content.global.ame.rickturpentine
 import content.global.ame.RandomEventNPC
 import core.api.addItemOrDrop
 import core.api.getWorldTicks
-import core.api.openDialogue
 import core.api.sendNPCDialogue
 import core.api.utils.WeightBasedTable
 import core.game.dialogue.FaceAnim

@@ -8,11 +8,7 @@ import core.api.movement.finishedMoving
 import core.api.utils.Vector
 import core.cache.def.impl.SceneryDefinition
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.npcLine
-import core.game.dialogue.SequenceDialogue.playerLine
-import core.game.dialogue.SequenceDialogue.sendSequenceDialogue
 import core.game.node.Node
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery

@@ -1,7 +1,7 @@
 package content.region.island.waterbirth_island.dialogue
 
-import content.region.island.waterbirth_island.plugin.BardurPlugin
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
+import content.region.island.waterbirth_island.plugin.BardurPlugin
 import core.api.anyInInventory
 import core.api.quest.isQuestComplete
 import core.api.sendDialogue

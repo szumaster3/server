@@ -1,7 +1,5 @@
 package content.global.ame.eviltwin
 
-import content.data.GameAttributes
-import content.data.RandomEvent
 import core.api.*
 import core.api.ui.restoreTabs
 import core.api.ui.setMinimapState

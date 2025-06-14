@@ -2,7 +2,6 @@ package content.global.activity.ttrail
 
 import core.api.openInterface
 import core.api.sendMessage
-import core.game.component.Component
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener

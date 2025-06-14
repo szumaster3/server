@@ -1,9 +1,5 @@
 package content.global.travel
 
-import core.api.getVarbit
-import core.api.rewardXP
-import core.api.sendMessage
-import core.api.setVarbit
 import content.data.GameAttributes
 import core.api.*
 import core.api.quest.isQuestComplete
