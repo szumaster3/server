@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RemsaiDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RemsaiDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inInventory(player!!, Items.ORBS_OF_PROTECTION_588) ||

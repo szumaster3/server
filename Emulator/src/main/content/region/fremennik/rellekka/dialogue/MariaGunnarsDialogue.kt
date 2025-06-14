@@ -54,10 +54,7 @@ class MariaGunnarsDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options(
                 "Tell me about your husband.",

@@ -18,9 +18,8 @@ import org.rs.consts.NPCs
  * ```
  */
 @Initializable
-class VillagerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VillagerDialogue(player: Player? = null) : Dialogue(player) {
+
 
     private val randomDialogue = arrayOf(
         "I'm very well thank you.",

@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class YellowFortuneDirectorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class YellowFortuneDirectorDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player.isMale) {

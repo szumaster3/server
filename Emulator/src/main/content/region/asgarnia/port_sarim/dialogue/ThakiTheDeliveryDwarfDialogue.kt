@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ThakiTheDeliveryDwarfDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ThakiTheDeliveryDwarfDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Arrr!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HAPPY, "Hi little fellow.").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "What did you just say to me!?").also { stage++ }

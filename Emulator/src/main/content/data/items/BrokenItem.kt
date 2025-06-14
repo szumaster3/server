@@ -92,11 +92,12 @@ object BrokenItem {
     }
 
     /**
-     * Returns a repaired item of a specific type.
+     * Returns a repaired item of the given equipment type, or null if none found.
      *
-     * @param type The [EquipmentType] representing the type of equipment to repair.
-     * @return The repaired [Item], or `null` if no repairable item is found.
+     * @param type The equipment type to repair.
+     * @return The repaired item, or null if not found.
      */
+    @JvmStatic
     fun getRepair(type: EquipmentType): Item? =
         when (type) {
             EquipmentType.ARROWS -> RandomFunction.rollWeightedChanceTable(brokenArrows)

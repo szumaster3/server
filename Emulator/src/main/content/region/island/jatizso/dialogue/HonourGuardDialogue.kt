@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class HonourGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HonourGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val name = FremennikTrials.getFremennikName(player)
@@ -50,10 +49,7 @@ class HonourGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> player("Good day! How are you doing?").also { stage++ }
             2 -> npc("Pretty good. It's nice to have a day off from troll-", "killing duty.").also { stage++ }

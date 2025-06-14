@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FemiDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FemiDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inBorders(player!!, 2456, 3406, 2462, 3410)) {
@@ -35,10 +34,7 @@ class FemiDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Hi!").also { stage++ }
             1 ->

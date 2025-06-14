@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CarolDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CarolDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.MURDER_MYSTERY)) {
@@ -28,10 +27,7 @@ class CarolDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val threadColor = MurderMysteryUtils.getGuiltyColor(player)
         val questStage = getQuestStage(player!!, Quests.MURDER_MYSTERY)
         when (questStage) {

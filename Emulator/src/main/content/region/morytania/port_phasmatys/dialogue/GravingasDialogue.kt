@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GravingasDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GravingasDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             // If the player has the bedsheet and has completed the quest.
@@ -43,10 +42,7 @@ class GravingasDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogue(player!!, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
             1 -> player("I'm sorry, I don't really think I should get involved.").also { stage++ }

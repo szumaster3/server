@@ -25,9 +25,8 @@ import core.game.world.map.Location
  * [The Grand Tree][content.region.kandarin.quest.grandtree.TheGrandTree]
  */
 @Initializable
-class ShipyardWorkerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShipyardWorkerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

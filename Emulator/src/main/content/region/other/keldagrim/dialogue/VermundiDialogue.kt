@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class VermundiDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VermundiDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "Welcome to my clothes stall, can I help you", "with anything?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, what clothes do you have in stock?", "No, I'm just browsing.").also { stage++ }
             1 ->

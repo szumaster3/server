@@ -58,7 +58,7 @@ class PyreSitePlugin : OptionHandler() {
             return true
         }
 
-        val tool = SkillingTool.getHatchet(player)
+        val tool = SkillingTool.getAxe(player)
         if (tool == null) {
             player.sendMessage("You need an axe in order to do this.")
             return true
@@ -95,7 +95,7 @@ class PyreSitePlugin : OptionHandler() {
         scenery: Scenery,
     ): Pulse {
         val logType = player.getAttribute("logType", LogType.NORMAL)
-        val tool = SkillingTool.getHatchet(player)
+        val tool = SkillingTool.getAxe(player)
         val bones =
             if (player.inventory.containsItem(CHEWED_BONES)) {
                 player.inventory.getItem(CHEWED_BONES)

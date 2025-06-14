@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class PhilipeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PhilipeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

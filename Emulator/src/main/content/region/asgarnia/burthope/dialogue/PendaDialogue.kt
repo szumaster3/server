@@ -15,13 +15,9 @@ import org.rs.consts.Quests
  * Represents the Penda dialogue.
  */
 @Initializable
-class PendaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class PendaDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val random = RandomFunction.random(1, 5)
         if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when (stage) {

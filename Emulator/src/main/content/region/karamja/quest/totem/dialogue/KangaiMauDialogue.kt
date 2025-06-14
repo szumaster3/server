@@ -32,10 +32,7 @@ class KangaiMauDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("And what are you doing here in Brimhaven?", "I'm in search of adventure!", "Who are the Rantuki tribe?").also { stage++ }
             1 -> when (buttonId) {

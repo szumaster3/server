@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CrateGoblinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CrateGoblinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Excuse me, I need to deliver this.").also { stage = END_DIALOGUE }

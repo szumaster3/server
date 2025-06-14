@@ -8,9 +8,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AlmeraDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         stage =
@@ -24,10 +23,7 @@ class AlmeraDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         when (stage) {
             0 ->

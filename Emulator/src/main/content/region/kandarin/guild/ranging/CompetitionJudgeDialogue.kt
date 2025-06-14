@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
  * Competition judge dialogue.
  */
 @Initializable
-class CompetitionJudgeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (player.inventory.getAmount(Items.ARCHERY_TICKET_1464) >= 1000 &&
             !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 1, 7)
@@ -50,10 +49,7 @@ class CompetitionJudgeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             999 -> end()
             -1 ->

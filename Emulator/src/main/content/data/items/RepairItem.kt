@@ -45,10 +45,10 @@ enum class RepairItem(
 
     companion object {
         /**
-         * Finds a [RepairItem] by its item id.
+         * Finds a [RepairItem] by item id.
          *
-         * @param id The item id.
-         * @return The repaired item, or `null` if not found.
+         * @param id Item id.
+         * @return The repaired item or null if not found.
          */
         @JvmStatic
         fun forId(id: Int): RepairItem? = values().find { it.item.id == id }

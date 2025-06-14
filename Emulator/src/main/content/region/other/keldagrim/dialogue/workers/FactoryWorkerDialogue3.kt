@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FactoryWorkerDialogue3(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class FactoryWorkerDialogue3(player: Player? = null) : Dialogue(player) {
+    
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "What are you dwarves doing in this factory?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_ANGRY1, "Working of course, can't you see that?").also { stage++ }

@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
  * Represents the Martin Thwait dialogue.
  */
 @Initializable
-class MartinThwaitDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MartinThwaitDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -32,10 +31,7 @@ class MartinThwaitDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (getStatLevel(player, Skills.THIEVING) == 99) {

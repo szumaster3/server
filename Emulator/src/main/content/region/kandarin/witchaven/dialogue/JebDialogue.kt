@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JebDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JebDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.SEA_SLUG)) {
@@ -25,10 +24,7 @@ class JebDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Yes, we can do that.").also { stage++ }
             1 -> player("Will you take me please?").also { stage++ }

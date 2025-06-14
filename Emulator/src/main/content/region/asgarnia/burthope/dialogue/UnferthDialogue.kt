@@ -12,13 +12,9 @@ import org.rs.consts.NPCs
  * Represents the Unferth dialogue.
  */
 @Initializable
-class UnferthDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class UnferthDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         /*
          * when (stage) {
          * START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi Unferth. How are you doing?").also { stage++ }

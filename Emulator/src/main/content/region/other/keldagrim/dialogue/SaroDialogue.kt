@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SaroDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SaroDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Welcome to my store, human! Are you interested", "in buying anything?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, I'm looking for some armour.", "No thanks.").also { stage++ }
             1 ->

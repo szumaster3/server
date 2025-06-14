@@ -8,13 +8,9 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class MsHynnTerprettDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class MsHynnTerprettDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, HynnTerprettPlugin(), npc)
         return true
     }

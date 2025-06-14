@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class VelrakDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VelrakDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (inInventory(player, Items.DUSTY_KEY_1590)) {
             playerl(FaceAnim.HALF_THINKING, "Are you still here?").also { stage = 100 }
@@ -24,10 +23,7 @@ class VelrakDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

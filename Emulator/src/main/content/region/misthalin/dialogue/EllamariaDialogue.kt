@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class EllamariaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EllamariaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(
@@ -23,10 +22,7 @@ class EllamariaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

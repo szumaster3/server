@@ -10,9 +10,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class HeadChefDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HeadChefDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         var door = false
@@ -50,10 +49,7 @@ class HeadChefDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> end()
             1 -> {

@@ -15,19 +15,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RestlessGhostDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hello ghost, how are you?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552, 1)) {

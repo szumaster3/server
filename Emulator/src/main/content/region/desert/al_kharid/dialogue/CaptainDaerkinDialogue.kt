@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CaptainDaerkinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainDaerkinDialogue(player: Player? = null) : Dialogue(player) {
+
     /*
      * He is found on the viewing walls of the Duel Arena near Jadid.
      */
@@ -21,10 +20,7 @@ class CaptainDaerkinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(
                 FaceAnim.FRIENDLY,

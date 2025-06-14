@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JarvaldDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size > 1) {
@@ -38,10 +37,7 @@ class JarvaldDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Where is your chieftain?", "What Jarvald is doing.", "Nothing").also { stage++ }
             1 ->

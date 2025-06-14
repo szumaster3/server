@@ -14,19 +14,15 @@ import org.rs.consts.NPCs
  * Represents the Lilly dialogue.
  */
 @Initializable
-class LillyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LillyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "Uh..... hi... didn't see you there. Can.... I help?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "Umm... do you sell potions?").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "Erm... yes. When I'm not drinking them.").also { stage++ }

@@ -8,9 +8,8 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 @Initializable
-class RandomChildrenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RandomChildrenDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((1..5).random()) {
@@ -28,10 +27,7 @@ class RandomChildrenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "Yes...").also { stage++ }
             1 ->

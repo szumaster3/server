@@ -24,9 +24,8 @@ import org.rs.consts.Quests
  * - [Sea Slug quest][content.region.kandarin.witchaven.quest.seaslug.SeaSlug]
  */
 @Initializable
-class BaileyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BaileyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -42,10 +41,7 @@ class BaileyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.SCARED, "What? Who are you? Come inside quickly!").also { stage++ }
             1 -> npc(FaceAnim.SCARED, "What are you doing here?").also { stage++ }

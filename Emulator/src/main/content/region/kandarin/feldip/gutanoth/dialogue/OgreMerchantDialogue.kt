@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class OgreMerchantDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OgreMerchantDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_CALM_TALK2, "Does the little creature want to buy sumfin'?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes I do.", "No I don't.").also { stage++ }
             1 ->

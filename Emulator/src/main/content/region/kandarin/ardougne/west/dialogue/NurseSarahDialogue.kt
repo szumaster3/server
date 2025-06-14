@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class NurseSarahDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestInProgress(player, Quests.BIOHAZARD, 6, 7)) {
@@ -27,10 +26,7 @@ class NurseSarahDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (isQuestComplete(player, Quests.PLAGUE_CITY)) {

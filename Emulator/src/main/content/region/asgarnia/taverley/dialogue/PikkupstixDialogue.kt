@@ -100,10 +100,7 @@ class PikkupstixDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             0 -> when (stage) {
                 0 -> {

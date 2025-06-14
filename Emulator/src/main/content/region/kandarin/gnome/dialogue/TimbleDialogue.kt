@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TimbleDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TimbleDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_NORMAL, "Good day. How can I help you?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.FRIENDLY, "I was just wondering what you were up to.").also { stage++ }
             1 ->

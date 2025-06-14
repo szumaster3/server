@@ -9,9 +9,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FatherLawrenceDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FatherLawrenceDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
@@ -48,10 +47,7 @@ class FatherLawrenceDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         when (stage) {
             0 -> {

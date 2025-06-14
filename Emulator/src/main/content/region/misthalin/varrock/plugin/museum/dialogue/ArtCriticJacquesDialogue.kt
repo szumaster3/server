@@ -9,19 +9,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class ArtCriticJacquesDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ArtCriticJacquesDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "I sit in the sky like a sphinx misunderstood")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 npc(

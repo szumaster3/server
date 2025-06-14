@@ -18,19 +18,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class BettyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BettyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Welcome to the magic emporium.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {

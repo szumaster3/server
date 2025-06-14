@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ApothecaryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ApothecaryDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player.getQuestRepository().getQuest(Quests.ROMEO_JULIET).getStage(player) == 40) {
@@ -53,10 +52,7 @@ class ApothecaryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> {
                 options(

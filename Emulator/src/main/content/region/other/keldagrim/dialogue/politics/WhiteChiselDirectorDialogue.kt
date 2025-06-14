@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WhiteChiselDirectorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WhiteChiselDirectorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         sendDialogue("White Chisel Director is too important to talk to you.").also { stage = END_DIALOGUE }

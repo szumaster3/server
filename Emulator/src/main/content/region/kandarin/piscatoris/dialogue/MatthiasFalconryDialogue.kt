@@ -14,9 +14,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class MatthiasFalconryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MatthiasFalconryDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val quickOption = args.size == 2
 
@@ -44,10 +43,7 @@ class MatthiasFalconryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Greetings. Can I help you at all?").also { stage++ }
             1 ->

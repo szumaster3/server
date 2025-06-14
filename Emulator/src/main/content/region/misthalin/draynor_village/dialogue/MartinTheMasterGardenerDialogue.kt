@@ -10,19 +10,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class MartinTheMasterGardenerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MartinTheMasterGardenerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         options("Skillcape of Farming.", "Talk about farming problems and fairies.", "Vampire slayer")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

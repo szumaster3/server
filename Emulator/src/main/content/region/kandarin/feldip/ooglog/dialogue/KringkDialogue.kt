@@ -14,13 +14,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KringkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class KringkDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         npc = NPC(NPCs.KRINGK_7058)
         when (stage) {
             START_DIALOGUE -> {

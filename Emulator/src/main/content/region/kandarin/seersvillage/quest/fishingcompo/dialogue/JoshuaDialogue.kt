@@ -13,19 +13,15 @@ import org.rs.consts.NPCs
  * - [Fishing Contest][content.region.kandarin.quest.fishingcompo.FishingContest]
  */
 @Initializable
-class JoshuaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JoshuaDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Yeah? What do you want?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options(

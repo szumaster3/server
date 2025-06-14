@@ -12,19 +12,15 @@ import org.rs.consts.NPCs
  * Tribal weapon salesman dialogue.
  */
 @Initializable
-class TribalWeaponSalesmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Greetings, traveller. Are you interested in any throwing", "weapons?").also { stage++ }
             1 -> options("Yes I am.", "Not really.").also { stage++ }

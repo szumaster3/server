@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class RikiTheSculptorsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RikiTheSculptorsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "I'm glad I don't have to talk to you anymore!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_DEFAULT, "Hrm.").also { stage = END_DIALOGUE }
         }

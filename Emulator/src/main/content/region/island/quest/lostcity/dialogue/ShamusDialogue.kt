@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ShamusDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShamusDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npcl(
             FaceAnim.OLD_ANGRY1,
@@ -22,10 +21,7 @@ class ShamusDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getQuestStage(player, Quests.LOST_CITY)) {
             0 ->
                 when (stage++) {

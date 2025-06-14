@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class DalilaAndPerrdurDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DalilaAndPerrdurDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_NORMAL, "Ooh, lovely view, dear.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendNPCDialogue(player, NPCs.PERRDUR_4587, "Yes dear.", FaceAnim.OLD_NORMAL).also { stage++ }
             1 -> npcl(FaceAnim.OLD_NORMAL, "I hope the food's better here than it was last time.").also { stage++ }

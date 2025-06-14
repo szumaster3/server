@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FairyQueenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FairyQueenDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.FAIRYTALE_II_CURE_A_QUEEN)) {
@@ -24,10 +23,7 @@ class FairyQueenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

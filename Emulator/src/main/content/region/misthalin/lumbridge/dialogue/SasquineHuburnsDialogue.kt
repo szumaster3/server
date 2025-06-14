@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SasquineHuburnsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SasquineHuburnsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getAttribute(player, "gnomecopter:unlocked", false)) {
@@ -27,10 +26,7 @@ class SasquineHuburnsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("What's Gnomecopter Tours?").also { stage++ }
             1 ->

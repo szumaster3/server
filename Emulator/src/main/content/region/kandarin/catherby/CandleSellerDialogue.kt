@@ -12,19 +12,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class CandleSellerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CandleSellerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Do you want a lit candle for 1000 gold?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options("Yes please.", "One thousand gold?!", "No thanks, I'd rather curse the darkness.")

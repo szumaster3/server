@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class BlaninDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BlaninDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val dronProgress = getVarbit(player, MakingHistoryUtils.DRON_PROGRESS)
@@ -36,10 +35,7 @@ class BlaninDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

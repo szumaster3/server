@@ -9,19 +9,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class GaiusDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GaiusDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.FRIENDLY, "Welcome to my two-handed sword shop.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Let's trade.", "Thanks, but not today.").also { stage++ }
             1 ->

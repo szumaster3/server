@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RedbeardFrankDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
+
     private var replacementReward = false
     private val level = 0
     private var quest: Quest? = null
@@ -32,10 +31,7 @@ class RedbeardFrankDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (quest!!.getStage(player) == 20 &&

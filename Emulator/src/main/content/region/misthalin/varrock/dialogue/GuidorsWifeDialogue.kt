@@ -10,9 +10,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GuidorsWifeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GuidorsWifeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (getQuestStage(player, Quests.BIOHAZARD) >= 16) {
             player("Hello again.").also { stage = 2 }
@@ -22,10 +21,7 @@ class GuidorsWifeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

@@ -13,19 +13,15 @@ import org.rs.consts.NPCs
  * - [Fishing Contest][content.region.kandarin.quest.fishingcompo.FishingContest]
  */
 @Initializable
-class BigDaveDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BigDaveDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Hey lad! Always nice to see a fresh face!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options(

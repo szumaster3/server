@@ -12,9 +12,8 @@ import core.game.node.entity.player.link.quest.Quest
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class CaptainRovinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainRovinDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -29,10 +28,7 @@ class CaptainRovinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             else -> defaultDialogue(buttonId)
         }

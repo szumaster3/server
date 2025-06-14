@@ -32,9 +32,8 @@ import org.rs.consts.NPCs
 import kotlin.math.ceil
 
 @Initializable
-class ShotPutRoom(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShotPutRoom(player: Player? = null) : Dialogue(player) {
+
     private var lowWeight = false
 
     override fun open(vararg args: Any?): Boolean {
@@ -43,10 +42,7 @@ class ShotPutRoom(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (buttonId) {
             1 -> {
                 animate(player, Animation.create(Animations.HIT_WITH_DRAGON_PICKAXE_4181))

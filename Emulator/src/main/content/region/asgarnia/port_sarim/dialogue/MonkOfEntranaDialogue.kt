@@ -15,9 +15,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MonkOfEntranaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MonkOfEntranaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id in intArrayOf(NPCs.MONK_OF_ENTRANA_2730, NPCs.MONK_OF_ENTRANA_658, NPCs.MONK_OF_ENTRANA_2731)) {
@@ -36,10 +35,7 @@ class MonkOfEntranaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("No, not right now.", "Yes, okay, I'm ready to go.").also { stage++ }
             1 ->

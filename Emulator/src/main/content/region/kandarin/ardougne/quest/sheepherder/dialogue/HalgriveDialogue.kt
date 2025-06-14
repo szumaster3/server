@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class HalgriveDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HalgriveDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (getQuestStage(player, Quests.SHEEP_HERDER) < 10) {
             player("Hello. How are you?")
@@ -28,10 +27,7 @@ class HalgriveDialogue(
         }
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 npc("I've been better.")

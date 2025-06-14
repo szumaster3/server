@@ -12,13 +12,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CaptainBraindeathDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class CaptainBraindeathDialogue(player: Player? = null) : Dialogue(player) {
+    
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = getQuestStage(player, Quests.RUM_DEAL)
         if (getQuestStage(player, Quests.RUM_DEAL) >= 1) {
             openDialogue(player, CaptainBrainDeathDialogueFile(quest))

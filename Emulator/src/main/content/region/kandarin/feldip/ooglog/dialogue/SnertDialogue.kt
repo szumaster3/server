@@ -12,19 +12,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SnertDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SnertDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.CHILD_FRIENDLY, "Hi, human.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val rand = RandomFunction.random(0, 8)
         if (hasRequirement(player, Quests.AS_A_FIRST_RESORT)) {
             when (stage) {

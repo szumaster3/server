@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FactoryManagerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class FactoryManagerDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_ANGRY1, "Don't bother me, can't you see I'm busy?").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "No, I can't... can I go into the factory?").also { stage++ }

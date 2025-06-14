@@ -17,10 +17,7 @@ class UliziusDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "What... Oh, don't creep up on me like that... I thought", "you were a Ghast!").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Can I go through the gate please?").also { stage++ }

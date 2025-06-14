@@ -13,19 +13,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GaussDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GaussDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "I say, I say, a toast to this fine human!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("What? I mean, err... why?").also { stage++ }
             1 -> npc(FaceAnim.OLD_DEFAULT, "Why not!").also { stage++ }

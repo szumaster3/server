@@ -15,19 +15,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BartenderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BartenderDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_ASKING, "What can I get you?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("What's on the menu?").also { stage++ }
             1 -> npc("Dragon Bitter and Greenman's Ale, oh and some cheap beer.").also { stage++ }

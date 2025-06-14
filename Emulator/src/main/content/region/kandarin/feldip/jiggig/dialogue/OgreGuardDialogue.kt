@@ -14,9 +14,8 @@ import org.rs.consts.Sounds
 import org.rs.consts.Vars
 
 @Initializable
-class OgreGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) in 1..12) {
@@ -44,10 +43,7 @@ class OgreGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 player(

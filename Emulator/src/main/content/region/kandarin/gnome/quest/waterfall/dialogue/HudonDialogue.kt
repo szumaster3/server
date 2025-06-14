@@ -6,15 +6,11 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import org.rs.consts.Quests
 
-class HudonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HudonDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("hudon_dialogue"), 305)
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         when (stage) {
             100 -> end()

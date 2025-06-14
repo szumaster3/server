@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
  * Represents the Guard dialogue.
  */
 @Initializable
-class GuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val hasRead = player.savedData.globalData.hasReadPlaques()
         if (!hasRead) {
@@ -32,10 +31,7 @@ class GuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "I'd like to go up to the training centre, please.").also { stage++ }
             1 -> npc(FaceAnim.ANNOYED, "Sorry, citizen, you can't go up there.").also { stage++ }

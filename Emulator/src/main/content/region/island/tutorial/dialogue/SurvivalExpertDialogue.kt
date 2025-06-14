@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SurvivalExpertDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val tutStage = player?.getAttribute("tutorial:stage", 0) ?: 0
@@ -91,10 +90,7 @@ class SurvivalExpertDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (player?.getAttribute(TutorialStage.TUTORIAL_STAGE, 0)) {
             4 ->
                 when (stage) {

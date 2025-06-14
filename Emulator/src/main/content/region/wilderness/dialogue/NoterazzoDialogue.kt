@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
  * Represents the Noterazzo dialogue.
  */
 @Initializable
-class NoterazzoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NoterazzoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_ASKING, "Hey, wanna trade? I'll give the best deals you can find.")

@@ -13,13 +13,9 @@ import org.rs.consts.NPCs
  * Represents the Tostig dialogue.
  */
 @Initializable
-class TostigDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class TostigDialogue(player: Player? = null) : Dialogue(player) {
+    
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.FRIENDLY, "Hi, what ales are you serving?").also { stage++ }
             1 ->

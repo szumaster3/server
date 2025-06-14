@@ -15,13 +15,9 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 @Initializable
-class DwarvenBoatmanForthDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DwarvenBoatmanForthDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!getAttribute(player, GameAttributes.MINECART_TRAVEL_UNLOCK, false)) {
             when (stage) {
                 START_DIALOGUE -> npcl(FaceAnim.OLD_HAPPY, "Ho there, human!").also { stage++ }

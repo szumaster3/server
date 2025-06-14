@@ -11,19 +11,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ReloboBlinyoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ReloboBlinyoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hey there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.HALF_GUILTY, "Why hello to you too, my friend.").also { stage++ }
             1 ->

@@ -11,19 +11,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class MaligniusMortiferDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MaligniusMortiferDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("So, " + player.username + ", your curiosity leads you to speak to me?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options(

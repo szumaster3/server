@@ -10,13 +10,9 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class AgmundiDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class AgmundiDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NOT_INTERESTED, "Oh no, not another human... what do you want then?").also { stage++ }
             1 -> player(FaceAnim.ASKING, "Oh, do you get humans here often?").also { stage++ }

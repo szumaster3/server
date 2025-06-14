@@ -13,9 +13,8 @@ import org.rs.consts.Graphics
 import org.rs.consts.NPCs
 
 @Initializable
-class EdgevilleMonkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EdgevilleMonkDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size >= 1) {
             if (args[0] is NPC) {
@@ -34,10 +33,7 @@ class EdgevilleMonkDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

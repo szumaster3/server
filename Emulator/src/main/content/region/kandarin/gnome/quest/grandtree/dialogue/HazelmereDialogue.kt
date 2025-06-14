@@ -23,13 +23,9 @@ import org.rs.consts.Quests
  * [The Grand Tree][content.region.kandarin.quest.grandtree.TheGrandTree]
  */
 @Initializable
-class HazelmereDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HazelmereDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             10 -> {
                 if (player!!.hasItem(Item(Items.BARK_SAMPLE_783))) {

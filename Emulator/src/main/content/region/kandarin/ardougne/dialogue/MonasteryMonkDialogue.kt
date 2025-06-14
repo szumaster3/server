@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MonasteryMonkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MonasteryMonkDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.MONKS_FRIEND) < 1) {
@@ -26,10 +25,7 @@ class MonasteryMonkDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> end()
         }

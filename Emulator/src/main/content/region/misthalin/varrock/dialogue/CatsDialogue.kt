@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CatsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CatsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER) &&
@@ -34,10 +33,7 @@ class CatsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.CHILD_NEUTRAL, "It wasn't all that difficult to understand.").also { stage++ }
             1 -> playerl(FaceAnim.HALF_GUILTY, "Really? I was, no actually am, still confused.").also { stage++ }

@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class RunvastrDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class RunvastrDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_DEFAULT, "Oh, leave an old dwarf in peace will you?").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Why, what's wrong?").also { stage++ }

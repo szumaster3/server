@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class EagleEyeShultzDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EagleEyeShultzDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(
@@ -21,10 +20,7 @@ class EagleEyeShultzDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

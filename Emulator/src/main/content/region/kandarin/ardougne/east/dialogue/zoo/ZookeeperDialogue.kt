@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ZookeeperDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZookeeperDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hi!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Welcome to the Ardougne Zoo! How can I help you?").also { stage++ }
             1 -> options("Do you have any quests for me?", "Where did you get the animals from?").also { stage++ }

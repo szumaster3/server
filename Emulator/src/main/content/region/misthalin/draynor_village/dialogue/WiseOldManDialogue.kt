@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
  * Represents the Wise Old Man dialogue.
  */
 @Initializable
-class WiseOldManDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         // Halloween world. Should be enabled during event.
@@ -34,10 +33,7 @@ class WiseOldManDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (getAttribute(player, "reclaim-qp-cape", false) || getAttribute(player, "reclaim-qp-hood", false)) {

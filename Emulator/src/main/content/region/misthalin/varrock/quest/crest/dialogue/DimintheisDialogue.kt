@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DimintheisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DimintheisDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val questStage = getQuestStage(player, Quests.FAMILY_CREST)
@@ -57,10 +56,7 @@ class DimintheisDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 options(

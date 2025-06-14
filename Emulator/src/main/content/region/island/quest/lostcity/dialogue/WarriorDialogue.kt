@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class WarriorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WarriorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when (getQuestStage(player, Quests.LOST_CITY)) {
             10 ->
@@ -35,10 +34,7 @@ class WarriorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 showTopics(

@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 @Initializable
-class ThessaliaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size == 3) {
             if (player.equipment.isEmpty) {
@@ -45,10 +44,7 @@ class ThessaliaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (inInventory(player, Items.FROG_TOKEN_6183)) {

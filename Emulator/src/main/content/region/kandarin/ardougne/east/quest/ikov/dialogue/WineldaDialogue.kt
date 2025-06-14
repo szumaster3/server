@@ -17,15 +17,11 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class WineldaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WineldaDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun newInstance(player: Player?): Dialogue = WineldaDialogue(player)
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, WineldaDialogueFile(), npc)
         return false
     }

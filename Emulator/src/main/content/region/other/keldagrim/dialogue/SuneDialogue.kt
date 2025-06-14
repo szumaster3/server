@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SuneDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class SuneDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 npcl(FaceAnim.OLD_ANGRY1, "Can you leave me alone please? I'm trying to get a bit of rest.").also {

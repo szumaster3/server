@@ -16,9 +16,8 @@ import org.rs.consts.Quests
  * Represents the Eohric dialogue.
  */
 @Initializable
-class EohricDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EohricDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.DEATH_PLATEAU)) {
@@ -29,10 +28,7 @@ class EohricDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.ASKING, "Hello. Can I help?").also { stage++ }
             1 -> options("What is this place?", "That's quite an outfit.", "Goodbye.").also { stage++ }

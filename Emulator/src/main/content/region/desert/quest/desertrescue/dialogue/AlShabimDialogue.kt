@@ -9,9 +9,8 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item
 import org.rs.consts.Quests
 
-class AlShabimDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AlShabimDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -23,10 +22,7 @@ class AlShabimDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             54 ->
                 when (stage) {

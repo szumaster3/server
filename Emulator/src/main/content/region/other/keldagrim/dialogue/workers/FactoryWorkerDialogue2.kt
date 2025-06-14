@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FactoryWorkerDialogue2(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class FactoryWorkerDialogue2(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Are you okay?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_ANGRY1, "Don't I look okay?").also { stage++ }

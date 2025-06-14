@@ -17,13 +17,9 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class LarrissaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class LarrissaDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val questStage = getQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP)
         when (questStage) {
             0 -> when (stage) {

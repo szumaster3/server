@@ -15,19 +15,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class KalebParamayaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KalebParamayaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Hello, Bwana, what can I do for you today?").also { stage++ }
             1 ->

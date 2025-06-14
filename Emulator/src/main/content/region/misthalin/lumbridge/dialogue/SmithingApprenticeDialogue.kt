@@ -14,9 +14,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SmithingApprenticeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SmithingApprenticeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getStatLevel(player, Skills.SMITHING)) {
@@ -27,10 +26,7 @@ class SmithingApprenticeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getStatLevel(player, Skills.SMITHING)) {
             in 1..14 ->
                 when (stage) {

@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class GreasycheeksDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GreasycheeksDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NORMAL, "Shush! I'm concentrating.").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Oh, sorry.").also { stage = END_DIALOGUE }

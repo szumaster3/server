@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KaqemeexDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size >= 2) {
@@ -30,10 +29,7 @@ class KaqemeexDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL)
         when (stage) {
             0 -> {

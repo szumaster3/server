@@ -8,19 +8,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SilasDahcsnuDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SilasDahcsnuDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Can't you see that I'm busy here?").also { stage++ }
             1 -> player("Oh, Sorry, you don't look very busy.").also { stage++ }

@@ -16,13 +16,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KjutDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class KjutDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(
                 FaceAnim.OLD_DEFAULT,

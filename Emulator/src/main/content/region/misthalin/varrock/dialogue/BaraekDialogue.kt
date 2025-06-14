@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class BaraekDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BaraekDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         showTopics(
@@ -39,10 +38,7 @@ class BaraekDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Sh sh sh, not so loud! You don't want to get me in", "trouble!").also { stage++ }
             1 -> player("So DO you know where they are?").also { stage++ }

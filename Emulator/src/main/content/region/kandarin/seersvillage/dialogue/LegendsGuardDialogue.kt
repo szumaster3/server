@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LegendsGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LegendsGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     fun gender(
         male: String = "sir",
         female: String = "madam",
@@ -23,10 +22,7 @@ class LegendsGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Legends Guild Member Approaching").also { stage++ }
             1 -> npc(

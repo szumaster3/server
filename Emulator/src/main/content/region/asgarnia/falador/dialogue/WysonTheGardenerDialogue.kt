@@ -15,9 +15,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class WysonTheGardenerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WysonTheGardenerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         var birdNest = anyInInventory(player, Items.MOLE_CLAW_7416, Items.MOLE_SKIN_7418)
@@ -43,10 +42,7 @@ class WysonTheGardenerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please, I need woad leaves.", "Sorry, but I'm not interested.").also { stage++ }
             1 ->

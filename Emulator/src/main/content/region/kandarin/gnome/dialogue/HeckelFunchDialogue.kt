@@ -22,9 +22,8 @@ import org.rs.consts.NPCs
  * - [CrypticClue][content.global.activity.ttrail.clues.CrypticClue]
  */
 @Initializable
-class HeckelFunchDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HeckelFunchDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inBorders(player, 2484, 3486, 2493, 3489) && inInventory(player, Items.CLUE_SCROLL_10248)) {
@@ -52,10 +51,7 @@ class HeckelFunchDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

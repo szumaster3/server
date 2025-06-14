@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SabotageDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SabotageDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size == 2) {
             sendNPCDialogueLines(
@@ -43,10 +42,7 @@ class SabotageDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 sendNPCDialogue(

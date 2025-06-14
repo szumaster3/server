@@ -8,13 +8,9 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class OddOldManDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class OddOldManDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player!!, OddOldManDialogueFile(), npc)
         return true
     }

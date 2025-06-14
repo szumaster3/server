@@ -19,19 +19,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SilverMerchantDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Silver! Silver! Best prices for buying and selling in all", "Kandarin!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasKey = hasAnItem(player, Items.ENCHANTED_KEY_6754).container != null
         val hasJournal = hasAnItem(player, Items.JOURNAL_6755).container == player.inventory
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)

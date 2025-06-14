@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GoblinVillageDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GoblinVillageDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val rand = RandomFunction.random(4)
@@ -38,10 +37,7 @@ class GoblinVillageDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Happy new century!", "What is the goblin new century?").also { stage++ }
             1 ->

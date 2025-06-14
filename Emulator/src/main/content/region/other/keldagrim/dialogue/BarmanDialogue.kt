@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BarmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BarmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (amountInInventory(player, Items.COINS_995) > 2000) {
@@ -29,10 +28,7 @@ class BarmanDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

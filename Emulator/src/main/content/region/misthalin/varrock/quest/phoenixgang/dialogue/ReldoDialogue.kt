@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class ReldoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ReldoDialogue(player: Player? = null) : Dialogue(player) {
+
     private var knightSword: Quest? = null
     private var shieldArrav: Quest? = null
     private var isDiary = false
@@ -40,10 +39,7 @@ class ReldoDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (isDiary) {
             when (stage) {
                 999 -> end()

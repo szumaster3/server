@@ -21,13 +21,9 @@ import org.rs.consts.Quests
  * [The Grand Tree][content.region.kandarin.quest.grandtree.TheGrandTree]
  */
 @Initializable
-class AnitaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class AnitaDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             0 -> sendDialogue(player!!, "Anita seems too busy to talk.").also { stage = END_DIALOGUE }
             60 -> {

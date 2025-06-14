@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class MasterChefDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
+
     val bucket = Item(Items.BUCKET_1925, 1)
     val pot = Item(Items.EMPTY_POT_1931, 1)
 
@@ -32,10 +31,7 @@ class MasterChefDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             18 -> when (stage) {
                 0 -> npc(

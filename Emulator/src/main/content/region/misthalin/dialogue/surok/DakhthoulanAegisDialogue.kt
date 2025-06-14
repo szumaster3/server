@@ -8,19 +8,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class DakhthoulanAegisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DakhthoulanAegisDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hi there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Hello, you one. What brings you to our humble", "dwelling?").also { stage++ }
             1 -> player("I was wondering what this place was?").also { stage++ }

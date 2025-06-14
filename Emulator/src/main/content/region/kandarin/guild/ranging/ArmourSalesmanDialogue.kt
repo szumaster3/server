@@ -16,19 +16,15 @@ import org.rs.consts.NPCs
  * Armour salesman dialogue.
  */
 @Initializable
-class ArmourSalesmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Good day to you.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("And to you. Can I help you?").also { stage++ }
             1 ->

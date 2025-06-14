@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class HallaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HallaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -24,10 +23,7 @@ class HallaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.ASKING, "Can I help you with anything, your Royal Highness?").also { stage++ }
             1 ->

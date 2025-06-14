@@ -9,13 +9,9 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class AmbassadorAlvijarDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class AmbassadorAlvijarDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (RandomFunction.random(0, 5)) {
             0 ->
                 npcl(

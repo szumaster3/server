@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RobinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RobinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -28,10 +27,7 @@ class RobinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.FRIENDLY, "Leave me be, peasant - I am relaxing.").also { stage++ }
             2 -> playerl(FaceAnim.FRIENDLY, "Well, that's nice!").also { stage++ }

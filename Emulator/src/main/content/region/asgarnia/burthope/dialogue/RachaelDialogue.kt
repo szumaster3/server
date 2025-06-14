@@ -14,13 +14,9 @@ import org.rs.consts.NPCs
  * Represents the Rachael dialogue.
  */
 @Initializable
-class RachaelDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class RachaelDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.FRIENDLY, "Welcome to the Burthorpe Games Rooms!").also { stage++ }
             1 ->

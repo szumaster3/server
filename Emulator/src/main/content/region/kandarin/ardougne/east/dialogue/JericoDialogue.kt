@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JericoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JericoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestInProgress(player, Quests.BIOHAZARD, 1, 100)) {
@@ -29,10 +28,7 @@ class JericoDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.NEUTRAL, "Can I help you?").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Just passing by.").also { stage = END_DIALOGUE }

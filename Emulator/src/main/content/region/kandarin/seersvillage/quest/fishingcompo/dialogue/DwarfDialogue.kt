@@ -23,9 +23,8 @@ import org.rs.consts.Quests
  * - [Fishing Contest][content.region.kandarin.quest.fishingcompo.FishingContest]
  */
 @Initializable
-class DwarfDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DwarfDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
@@ -78,10 +77,7 @@ class DwarfDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options(

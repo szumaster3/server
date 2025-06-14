@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MinerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MinerDialogue(player: Player? = null) : Dialogue(player) {
+
     val stages = intArrayOf(0, 100, 200, 300, 400, 500)
 
     override fun open(vararg args: Any?): Boolean {
@@ -19,10 +18,7 @@ class MinerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

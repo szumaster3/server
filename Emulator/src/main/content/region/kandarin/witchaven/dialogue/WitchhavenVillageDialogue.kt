@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WitchhavenVillageDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WitchhavenVillageDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hello there.").also { stage = conversations.random() }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogue("Their eyes are staring vacantly into space.").also { stage++ }
             1 -> npc(FaceAnim.NEUTRAL, "Ye mariners all, as ye pass by,").also { stage++ }

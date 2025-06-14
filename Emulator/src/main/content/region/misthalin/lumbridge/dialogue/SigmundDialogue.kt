@@ -41,10 +41,7 @@ class SigmundDialogue : Dialogue {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 interpreter.sendOptions("Select an Option", "Do you have any quests for me?", "Who are you?")

@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class EblisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EblisDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id in NPCs.EBLIS_1924..NPCs.EBLIS_1925) {
@@ -56,10 +55,7 @@ class EblisDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> {
                 npcl(

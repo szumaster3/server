@@ -123,7 +123,7 @@ fun sendSkillDialogue(
 fun getTool(
     player: Player,
     pickaxe: Boolean,
-): SkillingTool? = if (pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getHatchet(player)
+): SkillingTool? = if (pickaxe) SkillingTool.getPickaxe(player) else SkillingTool.getAxe(player)
 
 /**
  * Delays an entity's clock by a specified number of ticks.

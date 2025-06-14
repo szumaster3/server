@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CaptainNintoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainNintoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_DEFAULT, "Hello, what are you doing here, so far from home?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.DRUNK, "I'm enjoyn' the local hoschpitalieee. hee hee.").also { stage++ }
             1 ->

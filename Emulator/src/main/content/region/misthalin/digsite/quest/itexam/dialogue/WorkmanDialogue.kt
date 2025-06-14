@@ -21,10 +21,7 @@ class WorkmanDialogue(
     player: Player? = null,
 ) : Dialogue(player),
     InteractionListener {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         npc!!
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }

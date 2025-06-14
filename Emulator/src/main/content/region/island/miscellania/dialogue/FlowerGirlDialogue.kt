@@ -12,19 +12,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FlowerGirlDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FlowerGirlDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.NEUTRAL, "Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.ASKING, "Good day. What are you doing?").also { stage++ }
             1 -> npc(FaceAnim.NEUTRAL, "I'm selling flowers, 15gp for three. Would you like some?").also { stage++ }

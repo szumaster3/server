@@ -13,19 +13,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class MawnisBurowgarDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MawnisBurowgarDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("It makes me proud to know that the helm of my", "ancestors will be worn in battle.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("I thank you on behalf of all my kinsmen Talvald.").also { stage++ }
             1 -> {

@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ButlerJonesDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ButlerJonesDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(componentID: Int, buttonID: Int, ): Boolean {
         val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT)
 

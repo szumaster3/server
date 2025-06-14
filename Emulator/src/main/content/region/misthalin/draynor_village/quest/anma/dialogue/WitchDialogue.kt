@@ -11,9 +11,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class WitchDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WitchDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -42,10 +41,7 @@ class WitchDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             25 ->
                 when (stage) {

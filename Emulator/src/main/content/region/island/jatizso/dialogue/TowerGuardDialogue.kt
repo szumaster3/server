@@ -11,19 +11,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TowerGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TowerGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.HALF_ASKING, "What are you doing here?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "I'M ON SHOUTING DUTY!").also { stage++ }
             1 -> playerl(FaceAnim.HALF_THINKING, "No need to shout.").also { stage++ }

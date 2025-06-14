@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JohnathonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JohnathonDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
@@ -42,10 +41,7 @@ class JohnathonDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npc("That... I am...").also { stage++ }
             2 -> player("I am here to retrieve your fragment ", "of the Fitzharmon family crest.").also { stage++ }

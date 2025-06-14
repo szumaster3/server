@@ -9,9 +9,8 @@ import core.game.node.item.Item
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class CaptainLawgofDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainLawgofDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -30,10 +29,7 @@ class CaptainLawgofDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             0 ->
                 when (stage) {

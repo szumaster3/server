@@ -11,9 +11,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class NurmofDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NurmofDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(
@@ -23,10 +22,7 @@ class NurmofDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

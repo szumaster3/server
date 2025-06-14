@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SethGroatsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SethGroatsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_GUILTY, "M'arnin'... going to milk me cowsies!").also { stage = END_DIALOGUE }

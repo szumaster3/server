@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class VolfOlasfsonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VolfOlasfsonDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
@@ -37,10 +36,7 @@ class VolfOlasfsonDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "Yes I am. You have a lovely yurt.").also { stage++ }
             1 -> npc(FaceAnim.FRIENDLY, "Thanks! I exercise it regularly.").also { stage = END_DIALOGUE }

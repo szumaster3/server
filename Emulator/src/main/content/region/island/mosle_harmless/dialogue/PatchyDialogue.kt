@@ -12,9 +12,8 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 @Initializable
-class PatchyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PatchyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!MosleUtils.canUnderstandPirateLanguage(player)) {
@@ -27,10 +26,7 @@ class PatchyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 npcl(

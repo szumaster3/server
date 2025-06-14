@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CarlaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CarlaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Hello there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.SAD, "Oh, hello.").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "You seem upset... What's wrong?").also { stage++ }

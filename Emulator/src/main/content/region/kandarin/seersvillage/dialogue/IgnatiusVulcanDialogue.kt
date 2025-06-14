@@ -11,19 +11,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class IgnatiusVulcanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class IgnatiusVulcanDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Can I help you at all?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> if (isMaster(player, Skills.FIREMAKING)) {
                 options("Who are you?", "Could I buy a Skillcape of Firemaking?", "No, thanks.")

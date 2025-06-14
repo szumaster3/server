@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class LumbridgeCookDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LumbridgeCookDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player?.questRepository?.getQuest(Quests.THE_LOST_TRIBE)?.getStage(player) == 10) {
@@ -62,10 +61,7 @@ class LumbridgeCookDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (getQuestStage(player, Quests.THE_LOST_TRIBE) == 10) {
             when (stage) {
                 0 ->

@@ -14,9 +14,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SilkMerchantDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SilkMerchantDialogue(player: Player? = null) : Dialogue(player) {
+    
     private val silk = Item(950)
     private val notedSilk = Item(951)
 
@@ -52,10 +51,7 @@ class SilkMerchantDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (player.inventory.containsItem(silk)) {

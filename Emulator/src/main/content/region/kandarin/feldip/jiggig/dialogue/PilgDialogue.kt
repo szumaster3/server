@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class PilgDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PilgDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_DEFAULT, "Dey got me in da belly, mees gutsies feel like had a dead dead dog dinner.").also {

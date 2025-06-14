@@ -10,9 +10,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class RSGuideDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RSGuideDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val tutStage = player?.getAttribute(TutorialStage.TUTORIAL_STAGE, 0) ?: 0
@@ -44,10 +43,7 @@ class RSGuideDialogue(
         }
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

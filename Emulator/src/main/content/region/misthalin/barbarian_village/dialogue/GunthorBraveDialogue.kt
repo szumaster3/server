@@ -8,9 +8,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class GunthorBraveDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GunthorBraveDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((0..5).random()) {
@@ -24,10 +23,7 @@ class GunthorBraveDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> end().also { npc.attack(player) }
             1 -> player(FaceAnim.HALF_ASKING, "What are you offering?").also { stage++ }

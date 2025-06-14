@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MilliRehnisonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MilliRehnisonDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.PLAGUE_CITY) == 9) {

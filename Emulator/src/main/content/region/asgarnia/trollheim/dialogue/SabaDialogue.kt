@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SabaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SabaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.DEATH_PLATEAU)) {
@@ -29,10 +28,7 @@ class SabaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.ANNOYED, "Why won't people leave me alone?!").also { stage = END_DIALOGUE }
             1 -> npcl(FaceAnim.HALF_ASKING, "Have you got rid of those pesky trolls yet?").also { stage++ }

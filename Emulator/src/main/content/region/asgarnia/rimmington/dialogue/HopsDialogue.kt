@@ -14,13 +14,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class HopsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HopsDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> {
                 end()

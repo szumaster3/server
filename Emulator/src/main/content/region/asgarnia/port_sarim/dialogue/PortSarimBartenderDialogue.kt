@@ -12,19 +12,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class PortSarimBartenderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PortSarimBartenderDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Good day to you!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HAPPY, "Hello there!").also { stage++ }
             1 ->

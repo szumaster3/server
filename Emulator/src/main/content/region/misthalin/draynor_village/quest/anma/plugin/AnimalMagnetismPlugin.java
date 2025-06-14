@@ -194,7 +194,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                 public boolean handle(Player player, Node node, String option) {
                     Quest quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM);
                     if (quest.getStage(player) <= 28) {
-                        SkillingTool tool = SkillingTool.getHatchet(player);
+                        SkillingTool tool = SkillingTool.getAxe(player);
                         if (tool == null || tool.ordinal() < 4) {
                             sendMessage(player, "You don't have the required axe in order to do that.");
                             return true;

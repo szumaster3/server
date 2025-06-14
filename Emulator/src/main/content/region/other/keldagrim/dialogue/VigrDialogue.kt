@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class VigrDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VigrDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "What do you want, human?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_ASKING, "Ehm, anything on offer?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "Can you wield a warhammer?", "If not, then go away.").also { stage++ }

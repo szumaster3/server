@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
  * Wizard Acantha dialogue.
  */
 @Initializable
-class WizardAcanthaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WizardAcanthaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("You look slightly more intelligent than the rest of", "these goons. Will you help me?")
@@ -22,10 +21,7 @@ class WizardAcanthaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, I'll help.", "No.", "Help with what?").also { stage++ }
             1 ->

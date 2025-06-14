@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GloughDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GloughDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.THE_GRAND_TREE) >= 40) {
@@ -26,10 +25,7 @@ class GloughDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.OLD_NORMAL, "You shouldn't be here human!").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "What do you mean?").also { stage++ }

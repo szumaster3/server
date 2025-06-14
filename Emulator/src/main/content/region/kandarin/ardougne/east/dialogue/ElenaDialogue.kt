@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ElenaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ElenaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestComplete(player, Quests.PLAGUE_CITY) && isQuestInProgress(player, Quests.BIOHAZARD, 0, 100)) {

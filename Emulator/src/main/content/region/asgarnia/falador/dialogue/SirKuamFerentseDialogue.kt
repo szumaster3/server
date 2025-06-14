@@ -8,13 +8,9 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class SirKuamFerentseDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class SirKuamFerentseDialogue(player: Player? = null) : Dialogue(player) {
+    
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, SirKuamPlugin(), npc)
         return true
     }

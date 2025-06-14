@@ -26,10 +26,7 @@ class LonghallBouncerDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.PANICKED, "But I'm a Bard!").also { stage++ }
             1 ->

@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GertrudesCatDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GertrudesCatDialogue(player: Player? = null) : Dialogue(player) {
+
     private val BEND_DOWN = Animation.create(Animations.MULTI_BEND_OVER_827)
 
     override fun open(vararg args: Any?): Boolean {
@@ -27,10 +26,7 @@ class GertrudesCatDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = getQuestStage(player, Quests.GERTRUDES_CAT)
         when (stage) {
             545 -> end()

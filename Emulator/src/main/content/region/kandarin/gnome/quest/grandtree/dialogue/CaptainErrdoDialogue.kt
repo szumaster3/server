@@ -21,13 +21,9 @@ import org.rs.consts.Quests
  * [The Grand Tree][content.region.kandarin.quest.grandtree.TheGrandTree]
  */
 @Initializable
-class CaptainErrdoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class CaptainErrdoDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             55 -> {
                 if (player!!.location.regionId == 11567) {

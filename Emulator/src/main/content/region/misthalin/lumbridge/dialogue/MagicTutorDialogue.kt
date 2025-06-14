@@ -15,9 +15,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MagicTutorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MagicTutorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.isEmpty() || args[0] !is NPC) {
             throw IllegalArgumentException("Invalid arguments provided. Expected an NPC as the first argument.")
@@ -83,10 +82,7 @@ class MagicTutorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             69 -> {
                 if (inInventory(player, AIR_RUNE.id) || inBank(player, AIR_RUNE.id)) {

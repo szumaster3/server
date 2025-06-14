@@ -14,19 +14,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BarmanGrandTreeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BarmanGrandTreeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_NORMAL, "Good day to you. What can I get you to drink?").also { stage = 0 }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("What do you have?", "Nothing thanks.", "Can I buy some ingredients?").also { stage++ }
             1 ->

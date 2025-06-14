@@ -22,9 +22,8 @@ import org.rs.consts.Vars
  * - [Land of the Goblins][content.region.misthalin.quest.lotg.LandOfTheGoblins]
  */
 @Initializable
-class MorrisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MorrisDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         /*
@@ -51,10 +50,7 @@ class MorrisDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 player(FaceAnim.HALF_GUILTY, "I don't have one of them.")

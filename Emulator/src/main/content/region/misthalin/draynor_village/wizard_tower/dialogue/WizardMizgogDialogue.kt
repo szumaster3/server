@@ -23,9 +23,8 @@ import org.rs.consts.*
  * Relations: [Imp Catcher quest][content.region.misthalin.quest.imp.ImpCatcher]
  */
 @Initializable
-class WizardMizgogDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
+
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -37,10 +36,7 @@ class WizardMizgogDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> showTopics(
                 IfTopic(FaceAnim.HAPPY, "Give me a quest!", 1, getQuestStage(player, Quests.IMP_CATCHER) == 0),

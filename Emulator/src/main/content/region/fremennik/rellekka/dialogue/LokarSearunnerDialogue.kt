@@ -18,9 +18,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class LokarSearunnerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
@@ -43,10 +42,7 @@ class LokarSearunnerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
             NPCs.LOKAR_SEARUNNER_4536 ->
                 when (stage) {

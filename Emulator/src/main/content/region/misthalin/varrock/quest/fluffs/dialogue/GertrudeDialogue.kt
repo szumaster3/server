@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GertrudeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT)
@@ -35,10 +34,7 @@ class GertrudeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.GERTRUDES_CAT)
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Do I look ok? Those kids drive me crazy.").also { stage++ }

@@ -8,18 +8,14 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class OrlandoSmithDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OrlandoSmithDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HALF_GUILTY, "G'day there, mate.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 playerl(FaceAnim.FRIENDLY, "Good day. Are you alright? You look a little lost.")

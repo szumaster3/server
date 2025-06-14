@@ -27,13 +27,9 @@ import org.rs.consts.Quests
  * [The Grand Tree][content.region.kandarin.quest.grandtree.TheGrandTree]
  */
 @Initializable
-class CharlieDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class CharlieDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getQuestStage(player!!, Quests.THE_GRAND_TREE)) {
             46 -> {
                 when (stage) {

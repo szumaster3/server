@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class OlafTheBardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.STURDY_BOOTS_3700, 1) -> {
@@ -71,10 +70,7 @@ class OlafTheBardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Are you a member of the council?").also { stage++ }
             1 ->

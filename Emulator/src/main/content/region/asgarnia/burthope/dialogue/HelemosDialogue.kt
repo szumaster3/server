@@ -13,19 +13,15 @@ import org.rs.consts.NPCs
  * Represents the Helemos dialogue.
  */
 @Initializable
-class HelemosDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HelemosDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.FRIENDLY, "Greetings. Welcome to the Heroes' Guild.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("So do you sell anything here?", "So what can I do here?").also { stage++ }
             1 ->

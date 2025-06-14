@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GnomeWaiterDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GnomeWaiterDialogue(player: Player? = null) : Dialogue(player) {
+
     private val gnomeFood =
         intArrayOf(
             Items.PREMADE_WM_BATTA_2219,
@@ -39,10 +38,7 @@ class GnomeWaiterDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

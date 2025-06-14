@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ErnestDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ErnestDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -26,10 +25,7 @@ class ErnestDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> player(FaceAnim.HALF_GUILTY, "Well a cash reward is always nice...").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "Of course, of course.").also { stage++ }

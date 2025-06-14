@@ -21,13 +21,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class LadyOfTheLakeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class LadyOfTheLakeDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         var canSeekSword = getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40
         var missingSword = !player!!.hasItem(Item(Items.EXCALIBUR_35, 1))
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {

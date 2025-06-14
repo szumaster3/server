@@ -16,19 +16,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class HarlanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HarlanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         options("Can you tell me about different weapon types I can use?", "Please tell me about Skillcapes.", "Bye.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

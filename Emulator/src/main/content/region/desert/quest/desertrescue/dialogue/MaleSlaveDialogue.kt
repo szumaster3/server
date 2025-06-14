@@ -11,9 +11,8 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import org.rs.consts.Quests
 
-class MaleSlaveDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MaleSlaveDialogue(player: Player? = null) : Dialogue(player) {
+    
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -47,10 +46,7 @@ class MaleSlaveDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.getShownNPC(player).id) {
             4985, 825 ->
                 when (quest!!.getStage(player)) {

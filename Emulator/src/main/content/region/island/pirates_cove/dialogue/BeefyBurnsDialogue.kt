@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class BeefyBurnsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BeefyBurnsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_ASKING, "What are you cooking?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.LAUGH, "My speciality! What else could I be cooking?").also { stage++ }
             1 -> player(FaceAnim.THINKING, "Ok, and your speciality is...?").also { stage++ }

@@ -15,9 +15,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class FortressGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FortressGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size == 2) {
@@ -45,10 +44,7 @@ class FortressGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "Yes, but I work here!").also { stage++ }
             1 ->

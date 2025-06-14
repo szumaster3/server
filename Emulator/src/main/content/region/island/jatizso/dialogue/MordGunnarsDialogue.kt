@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MordGunnarsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MordGunnarsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id == NPCs.MORD_GUNNARS_5481) {
@@ -26,10 +25,7 @@ class MordGunnarsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thanks.").also { stage++ }
             1 ->

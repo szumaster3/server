@@ -8,13 +8,9 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class MissCheeversDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class MissCheeversDialogue(player: Player? = null) : Dialogue(player) {
+    
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, MissCheeversDialogueFile(), npc)
         return true
     }

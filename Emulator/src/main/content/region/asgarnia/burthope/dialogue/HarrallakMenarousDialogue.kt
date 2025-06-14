@@ -12,19 +12,15 @@ import org.rs.consts.NPCs
  * Represents the Harrallak Menarous dialogue.
  */
 @Initializable
-class HarrallakMenarousDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HarrallakMenarousDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "Welcome to my humble guild, " + player.username + ".")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Quite a place you've got here.", "You any good with a sword?", "Bye!").also { stage++ }
             1 ->

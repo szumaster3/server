@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ArheinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ArheinDialogue(player: Player? = null) : Dialogue(player) {
+
     private val limits = mapOf(Items.PINEAPPLE_2114 to 40, Items.SEAWEED_401 to 80)
     val period = "daily"
     private var goods = Items.PINEAPPLE_2114
@@ -82,10 +81,7 @@ class ArheinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> showTopics(
                 Topic("Yes.", 7),

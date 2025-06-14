@@ -16,13 +16,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class DwarvenFerrymanBackDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DwarvenFerrymanBackDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_DEFAULT, "Hello there, want a ride?").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "A ride, where to?").also { stage++ }

@@ -11,9 +11,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class HaeraDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HaeraDialogue(player: Player? = null) : Dialogue(player) {
+
     private val forceChat =
         arrayOf(
             "That's the last straw!",
@@ -30,10 +29,7 @@ class HaeraDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("I just came to ask you a question.").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "Hegir, why did you let this human into our home?").also { stage++ }

@@ -11,19 +11,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MurkyMattDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MurkyMattDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "A pirate!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Arrrr, How'd ye be guessing that, me-lad?").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "You're kidding, right?").also { stage++ }

@@ -9,13 +9,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class DrunkenDwarfDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DrunkenDwarfDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello there! Are you alright?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_DRUNK_RIGHT, "Of courshe! Why why why *hic* why shouldn't I be?").also { stage++ }

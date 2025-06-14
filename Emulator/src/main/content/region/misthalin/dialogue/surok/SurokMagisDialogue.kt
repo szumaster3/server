@@ -13,9 +13,8 @@ import org.rs.consts.Music
 import org.rs.consts.NPCs
 
 @Initializable
-class SurokMagisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SurokMagisDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc(player.username + "! The meddling adventurer.")
         if (getVarbit(player, 3524) >= 1) {
@@ -24,10 +23,7 @@ class SurokMagisDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Surok! What are you doing here?", "How did you-").also { stage++ }
             1 -> npc("Escape from Varrock Palace Library? That cruel", "imprisonment you left me in?").also { stage++ }

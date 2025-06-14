@@ -9,19 +9,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class KazgarDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KazgarDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         npc(FaceAnim.OLD_NORMAL, "Hello, surface-dweller.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Who are you?", "Can you show me the way to the mine?").also { stage++ }
             1 ->

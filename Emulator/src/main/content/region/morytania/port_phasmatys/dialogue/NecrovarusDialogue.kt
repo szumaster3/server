@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class NecrovarusDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NecrovarusDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
             core.api.sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
@@ -41,10 +40,7 @@ class NecrovarusDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

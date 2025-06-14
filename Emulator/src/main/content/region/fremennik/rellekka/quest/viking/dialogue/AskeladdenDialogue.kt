@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AskeladdenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AskeladdenDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.PROMISSORY_NOTE_3709, 1) -> {
@@ -58,10 +57,7 @@ class AskeladdenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.CHILD_LOUDLY_LAUGHING, "HAHAHA! Yeah, that Lalli... what a maroon!").also { stage++ }
             1 -> player("So how did you manage to get the wool?").also { stage++ }

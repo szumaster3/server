@@ -20,19 +20,15 @@ import core.plugin.Initializable
  * - [Fishing Contest][content.region.kandarin.quest.fishingcompo.FishingContest]
  */
 @Initializable
-class SinisterStrangerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SinisterStrangerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("...")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             // Meeting the Competition.
             0 -> options("...?", "Who are you?", "So... you like fishing?").also { stage++ }

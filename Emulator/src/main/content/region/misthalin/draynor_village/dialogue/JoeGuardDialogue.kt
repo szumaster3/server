@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JoeGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JoeGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -42,10 +41,7 @@ class JoeGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (quest!!.getStage(player) > 50) {
             when (stage) {
                 0 -> player("Hi friend, I am just checking out things here.").also { stage = 1 }

@@ -19,19 +19,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SedridorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SedridorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Welcome adventurer, to the world renowned", "Wizards' Tower. How may I help you?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
         when (stage) {
             0 -> {

@@ -17,13 +17,9 @@ import org.rs.consts.NPCs
 /**
  * Represents the Jade dialogue.
  */
-class JadeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class JadeDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {

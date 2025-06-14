@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SigliTheHuntsmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.CUSTOM_BOW_STRING_3702, 1) -> {
@@ -73,10 +72,7 @@ class SigliTheHuntsmanDialogue(
     }
 
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Are you a member of the council?").also { stage++ }
             1 ->

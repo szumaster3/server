@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
  * Represents the crew of the Lady Zay dialogues.
  */
 @Initializable
-class LadyZayDialogues(
-    player: Player? = null,
-) : Dialogue(player) {
+class LadyZayDialogues(player: Player? = null) : Dialogue(player) {
+
 
     private var random = -1
 

@@ -11,9 +11,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class HegirDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HegirDialogue(player: Player? = null) : Dialogue(player) {
+
     private val forceChat =
         arrayOf(
             "No need to shout!",
@@ -31,10 +30,7 @@ class HegirDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 sendNPCDialogue(

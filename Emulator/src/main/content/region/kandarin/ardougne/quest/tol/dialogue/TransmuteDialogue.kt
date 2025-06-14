@@ -12,9 +12,8 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TransmuteDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TransmuteDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

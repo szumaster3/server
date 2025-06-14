@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DrezelMonumentDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DrezelMonumentDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         var quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
@@ -74,10 +73,7 @@ class DrezelMonumentDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
         when (stage) {
             400 -> {

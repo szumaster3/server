@@ -11,9 +11,8 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 
 @Initializable
-class MithrilSeedsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MithrilSeedsDialogue(player: Player? = null) : Dialogue(player) {
+
     private var flower: Scenery? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -22,10 +21,7 @@ class MithrilSeedsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (interfaceId) {
             228 ->
                 when (buttonId) {

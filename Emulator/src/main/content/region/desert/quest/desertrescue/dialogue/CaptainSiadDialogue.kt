@@ -6,9 +6,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import org.rs.consts.Quests
 
-class CaptainSiadDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainSiadDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -23,10 +22,7 @@ class CaptainSiadDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             52 ->
                 when (stage) {

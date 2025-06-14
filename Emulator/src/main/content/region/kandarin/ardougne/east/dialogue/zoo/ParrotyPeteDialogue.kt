@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ParrotyPeteDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ParrotyPeteDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.FRIENDLY, "Good day, good day. Come to admire the new parrot aviary have we?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("It's very nice.", "When did you add it?", "What do you feed them?").also { stage++ }
             1 ->

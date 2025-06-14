@@ -11,9 +11,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheLeafletDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheLeafletDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(
@@ -23,10 +22,7 @@ class AliTheLeafletDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

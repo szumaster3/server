@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class InnKeeperDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class InnKeeperDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.CHILD_NEUTRAL, "Welcome to the King's Axe inn!", "What can I help you with?").also { stage++ }
             1 -> player(FaceAnim.ASKING, "Can I have some beer please?").also { stage++ }

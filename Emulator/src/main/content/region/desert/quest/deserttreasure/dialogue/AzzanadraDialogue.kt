@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AzzanadraDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.DESERT_TREASURE) == 10) {
@@ -29,10 +28,7 @@ class AzzanadraDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> {
                 npcl(FaceAnim.OLD_DEFAULT, "Well done, soldier, tell me, how goes the battle?")

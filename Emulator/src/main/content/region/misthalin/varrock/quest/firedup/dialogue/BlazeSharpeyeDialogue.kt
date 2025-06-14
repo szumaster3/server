@@ -9,9 +9,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class BlazeSharpeyeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BlazeSharpeyeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage(Quests.ALL_FIRED_UP) ?: -1
@@ -42,10 +41,7 @@ class BlazeSharpeyeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             100 ->
                 npc(

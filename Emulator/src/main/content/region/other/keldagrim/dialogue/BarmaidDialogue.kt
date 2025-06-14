@@ -15,13 +15,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BarmaidDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class BarmaidDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 npcl(

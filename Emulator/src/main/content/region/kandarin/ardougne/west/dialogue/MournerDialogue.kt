@@ -13,9 +13,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MournerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MournerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (npc.id) {
@@ -32,10 +31,7 @@ class MournerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.NEUTRAL, "Nothing.").also { stage++ }
             1 -> npcl(FaceAnim.THINKING, "I don't trust you.").also { stage++ }

@@ -16,9 +16,8 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class GrishDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GrishDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getAttribute(player, ZogreUtils.TALK_WITH_SITHIK_OGRE_DONE, false) || inInventory(
@@ -37,10 +36,7 @@ class GrishDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(
                 FaceAnim.OLD_DEFAULT,

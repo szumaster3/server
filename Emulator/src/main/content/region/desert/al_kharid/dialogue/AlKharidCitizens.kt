@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class AlKharidCitizens(
-    player: Player? = null,
-) : Dialogue(player) {
+class AlKharidCitizens(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val randomDialogue = (1..15).random()
@@ -46,10 +45,7 @@ class AlKharidCitizens(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             2 -> playerl(FaceAnim.FRIENDLY, "Me neither.").also { stage = END_DIALOGUE }
             4 -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }

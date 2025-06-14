@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WildernessBanditsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WildernessBanditsDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         sendDialogue(player, "${npc.name} is not interested in talking.").also { stage = END_DIALOGUE }

@@ -22,9 +22,8 @@ import core.net.packet.out.CameraViewPacket
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class GypsyArisDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GypsyArisDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
     private var wally: NPC? = null
     private var cutscene: CutscenePlugin? = null
@@ -64,10 +63,7 @@ class GypsyArisDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             100 ->
                 when (stage) {

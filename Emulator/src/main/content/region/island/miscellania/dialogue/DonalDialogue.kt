@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class DonalDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DonalDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "What do you want?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.THINKING, "Just wondering if you were still here.").also { stage++ }
             1 -> npc(FaceAnim.OLD_DEFAULT, "Of course I'm still here.").also { stage++ }

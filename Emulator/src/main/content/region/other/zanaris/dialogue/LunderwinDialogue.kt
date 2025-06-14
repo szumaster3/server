@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class LunderwinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LunderwinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -27,10 +26,7 @@ class LunderwinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (!inInventory(player, Items.CABBAGE_1965)) {

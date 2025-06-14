@@ -11,19 +11,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class HicktonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HicktonDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Welcome to Hickton's Archery Emporium. Do you", "want to see my wares?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> stage = if (isMaster(player, Skills.FLETCHING)) {
                 options(

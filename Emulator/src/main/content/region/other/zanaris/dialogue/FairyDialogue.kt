@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FairyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FairyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((0..6).random()) {
@@ -69,10 +68,7 @@ class FairyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             10 -> player(FaceAnim.THINKING, "No, no idea at all.").also { stage++ }
             11 ->

@@ -8,18 +8,14 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LaunaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LaunaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         player("Hi there.").also { stage++ }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.SAD, "Hello.").also { stage++ }
             1 -> player("What's this big hole in the ground all about?").also { stage++ }

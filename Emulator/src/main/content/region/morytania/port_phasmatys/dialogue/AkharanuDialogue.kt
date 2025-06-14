@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AkharanuDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inInventory(player!!, Items.SIGNED_OAK_BOW_4236) || getQuestStage(player, Quests.GHOSTS_AHOY) >= 5) {

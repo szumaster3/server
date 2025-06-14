@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AvanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AvanDialogue(player: Player? = null) : Dialogue(player) {
+
     val crestAvan: Item = Item(Items.CREST_PART_779)
 
     override fun open(vararg args: Any?): Boolean {
@@ -61,10 +60,7 @@ class AvanDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> player("Well, sooooorry...").also { stage = 1000 }
             2 ->

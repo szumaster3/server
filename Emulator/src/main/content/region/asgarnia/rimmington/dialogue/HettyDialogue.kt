@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class HettyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HettyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WITCHS_POTION)
         if (quest.isCompleted(player)) {
@@ -61,10 +60,7 @@ class HettyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WITCHS_POTION)
         when (stage) {
             0 -> {

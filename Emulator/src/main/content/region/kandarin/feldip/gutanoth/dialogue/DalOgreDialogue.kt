@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class DalOgreDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DalOgreDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "What the human be wantin'?").also { stage = END_DIALOGUE }

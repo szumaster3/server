@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class KlenterDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KlenterDialogue(player: Player? = null) : Dialogue(player) {
+
     val forceChat = arrayOf("Agghhh!", "Aieee!", "Waghhhh!", "Wooo!")
     val forceDialogue =
         arrayOf(
@@ -48,10 +47,7 @@ class KlenterDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.ASKING, "What?").also { stage++ }
             1 -> npc(FaceAnim.ANNOYED, "You heard me, restore what you have stolen from", "my tomb!").also { stage++ }

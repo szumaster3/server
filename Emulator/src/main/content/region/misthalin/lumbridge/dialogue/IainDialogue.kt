@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class IainDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class IainDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         sendDialogue(player, "Iain seems too busy to talk.").also { stage = END_DIALOGUE }

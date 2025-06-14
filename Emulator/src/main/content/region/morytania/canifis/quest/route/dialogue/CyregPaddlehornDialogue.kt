@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CyregPaddlehornDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CyregPaddlehornDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.IN_SEARCH_OF_THE_MYREQUE) == 1) {

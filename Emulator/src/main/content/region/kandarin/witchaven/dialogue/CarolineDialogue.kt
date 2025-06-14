@@ -19,9 +19,8 @@ import org.rs.consts.Quests
  * - [Sea Slug quest][content.region.kandarin.witchaven.quest.seaslug.SeaSlug]
  */
 @Initializable
-class CarolineDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CarolineDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         // Sea slug dialogue.
@@ -35,10 +34,7 @@ class CarolineDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hello traveller, how are you?").also { stage++ }
             1 -> player(FaceAnim.FRIENDLY, "Not bad thanks, yourself?").also { stage++ }

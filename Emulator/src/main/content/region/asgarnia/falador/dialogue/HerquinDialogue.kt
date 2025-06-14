@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class HerquinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HerquinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         options("Do you wish to trade?", "Sorry, I don't want to talk to you, actually.").also { stage = 0 }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "Do you wish to trade?").also { stage = 3 }
             1 -> player(FaceAnim.HALF_GUILTY, "Sorry, I don't want to talk to you, actually.").also { stage++ }

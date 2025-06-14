@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class NaturalHistorianDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NaturalHistorianDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_GUILTY, "Hello there and welcome to the Natural History exhibit of the Varrock Museum!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 playerl(FaceAnim.HALF_GUILTY, "Hello. So what is it you do here?")

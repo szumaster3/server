@@ -11,9 +11,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class BrotherBraceDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BrotherBraceDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
@@ -37,10 +36,7 @@ class BrotherBraceDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             60 ->
                 when (stage++) {

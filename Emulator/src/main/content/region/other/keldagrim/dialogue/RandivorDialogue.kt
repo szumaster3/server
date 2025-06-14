@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class RandivorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RandivorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -23,10 +22,7 @@ class RandivorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Sounds delicious!", "I think I'll pass.").also { stage++ }
             1 ->

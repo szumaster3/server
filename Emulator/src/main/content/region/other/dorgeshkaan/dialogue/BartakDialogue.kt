@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class BartakDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BartakDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DISTRESSED, "Oh no! What's broken?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.ASKING, "What? Nothing's broken?").also { stage++ }
             1 -> npc(FaceAnim.OLD_DISTRESSED, "I'm sorry. I'm just a bit jumpy.").also { stage++ }

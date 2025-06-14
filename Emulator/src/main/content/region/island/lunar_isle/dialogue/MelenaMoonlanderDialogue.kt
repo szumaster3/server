@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MelenaMoonlanderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MelenaMoonlanderDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hello there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Hi. Welcome to the general store. How might I help you?").also { stage++ }
             1 -> options("What can you sell me?", "I have a question...", "I'm good thanks, bye.").also { stage++ }

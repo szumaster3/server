@@ -14,13 +14,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class LumbridgeGuideDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class LumbridgeGuideDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val ironman = player.ironmanManager.isIronman
         val sheepShearerComplete = isQuestComplete(player, Quests.SHEEP_SHEARER)
         val cooksAssistantComplete = isQuestComplete(player, Quests.COOKS_ASSISTANT)

@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class EdmondDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EdmondDialogue(player: Player? = null) : Dialogue(player) {
+
     val value = 0
 
     override fun open(vararg args: Any?): Boolean {

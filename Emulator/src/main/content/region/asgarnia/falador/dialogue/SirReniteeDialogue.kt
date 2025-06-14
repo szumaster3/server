@@ -29,9 +29,8 @@ import org.rs.consts.Quests
  * - [Family Crests][content.global.skill.construction.Crests]
  */
 @Initializable
-class SirReniteeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -42,10 +41,7 @@ class SirReniteeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("I don't know, what can you do for me?", "Nothing, thanks").also { stage++ }
             1 ->

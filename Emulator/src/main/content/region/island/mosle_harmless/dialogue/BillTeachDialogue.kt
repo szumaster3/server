@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BillTeachDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BillTeachDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
@@ -26,10 +25,7 @@ class BillTeachDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 when (buttonId) {

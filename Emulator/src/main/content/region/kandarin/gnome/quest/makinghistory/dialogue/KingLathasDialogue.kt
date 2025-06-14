@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KingLathasDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val questStage = getQuestStage(player, Quests.BIOHAZARD)
@@ -51,10 +50,7 @@ class KingLathasDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         npc = NPC(NPCs.KING_LATHAS_364)
         when (stage) {
             1 -> options("Jorral and the outpost", "West Ardougne").also { stage++ }

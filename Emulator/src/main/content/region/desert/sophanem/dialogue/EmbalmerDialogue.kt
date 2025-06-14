@@ -9,9 +9,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class EmbalmerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EmbalmerDialogue(player: Player? = null) : Dialogue(player) {
+
     private var item = 0
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -19,10 +18,7 @@ class EmbalmerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0  -> npcl(FaceAnim.HAPPY, "Hello.").also { stage++ }
             1  -> playerl(FaceAnim.FRIENDLY, "You seem to be fairly happy for someone so spotty.").also { stage++ }

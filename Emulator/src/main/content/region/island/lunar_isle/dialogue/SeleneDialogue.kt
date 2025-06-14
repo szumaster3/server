@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SeleneDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SeleneDialogue(player: Player? = null) : Dialogue(player) {
+
     private val Rellekka = Location.create(2663, 3644, 0)
     private var teled = false
 
@@ -37,10 +36,7 @@ class SeleneDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val borders = inBorders(player, getRegionBorders(8253)) || inBorders(player, getRegionBorders(8252))
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Ok. Like what?").also { stage++ }

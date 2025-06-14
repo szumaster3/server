@@ -9,13 +9,9 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 @Initializable
-class ReinaldDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class ReinaldDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

@@ -8,19 +8,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheOperatorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheOperatorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hello, good sir.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.ANNOYED, "What do you want?").also { stage++ }
             1 -> player(FaceAnim.HALF_ASKING, "I'm just new in town and have a few questions.").also { stage++ }

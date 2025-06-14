@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class TenzingDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TenzingDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 20, 29)) {
@@ -29,10 +28,7 @@ class TenzingDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npc(FaceAnim.FRIENDLY, "Hello traveler. What can I do for you?").also { stage++ }
             2 ->

@@ -8,19 +8,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class MagicStoreOwnerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MagicStoreOwnerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please.", "No thank you.").also { stage++ }
             1 ->

@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MernikDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MernikDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when ((1..5).random()) {
@@ -56,10 +55,7 @@ class MernikDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 npc(FaceAnim.OLD_NORMAL, "I'm sure you look just as funny to the surface-dweller!").also {

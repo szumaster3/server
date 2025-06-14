@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class CombatInstructorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
@@ -45,10 +44,7 @@ class CombatInstructorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             44 ->
                 when (stage) {

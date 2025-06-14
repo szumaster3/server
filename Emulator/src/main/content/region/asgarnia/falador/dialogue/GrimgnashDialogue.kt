@@ -15,19 +15,15 @@ import core.tools.END_DIALOGUE
  * - scenery id: 24839
  */
 @Initializable
-class GrimgnashDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GrimgnashDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "What you want, little human? Grimgnash hungry. Want", "tasty morsel like you!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "Like me? Why?", "Who are you?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "I Grimngnash and I hungry! Perhaps I eat you!").also { stage++ }

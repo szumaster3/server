@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class RecruiterDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RecruiterDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(
@@ -22,10 +21,7 @@ class RecruiterDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendNPCDialogue(player, NPCs.MAN_726, "Plague bringer!").also { stage++ }
             1 -> sendNPCDialogue(player, NPCs.MAN_726, "King Tyras is scum!").also { stage++ }

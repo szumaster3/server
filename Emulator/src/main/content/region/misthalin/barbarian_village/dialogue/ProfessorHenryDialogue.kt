@@ -19,13 +19,9 @@ import org.rs.consts.NPCs
  * Represents the Professor Henry dialogue.
  */
 @Initializable
-class ProfessorHenryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class ProfessorHenryDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> {
                 if (player.savedData.globalData.getTestStage() == 2 && inInventory(player, Items.TEST_PAPER_12626)) {

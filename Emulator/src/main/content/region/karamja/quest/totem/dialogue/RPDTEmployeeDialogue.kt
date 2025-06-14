@@ -10,9 +10,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RPDTEmployeeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RPDTEmployeeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HAPPY, "Welcome to R.P.D.T.!")
         stage =
@@ -24,10 +23,7 @@ class RPDTEmployeeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.HAPPY, "Thank you very much.").also { stage = 7 }
             5 -> playerl(FaceAnim.ASKING, "So, when are you going to deliver this crate?").also { stage++ }

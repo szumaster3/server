@@ -14,19 +14,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SanfewDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SanfewDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_GUILTY, "What can I do for you young 'un?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val questStage = getQuestStage(player, Quests.DRUIDIC_RITUAL)
         when (stage) {
             0 -> {

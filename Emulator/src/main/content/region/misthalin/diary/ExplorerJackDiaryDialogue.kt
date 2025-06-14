@@ -11,9 +11,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ExplorerJackDiaryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ExplorerJackDiaryDialogue(player: Player? = null) : Dialogue(player) {
+
     private val level = 0
 
     override fun open(vararg args: Any?): Boolean {
@@ -22,10 +21,7 @@ class ExplorerJackDiaryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             -1 -> {
                 if (Diary.canClaimLevelRewards(player, DiaryType.LUMBRIDGE, 0)) {

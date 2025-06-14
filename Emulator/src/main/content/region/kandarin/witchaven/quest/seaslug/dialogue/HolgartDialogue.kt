@@ -20,9 +20,8 @@ import org.rs.consts.Quests
  * - [Sea Slug quest][content.region.kandarin.witchaven.quest.seaslug.SeaSlug]
  */
 @Initializable
-class HolgartDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HolgartDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -41,10 +40,7 @@ class HolgartDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.THINKING, "You're telling me, none of the sailors seem to remember", "who I am.").also { stage++ }
             1 -> player(FaceAnim.HALF_THINKING, "Apparently Kennith's father left for help a couple of", "days ago.").also { stage++ }

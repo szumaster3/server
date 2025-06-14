@@ -17,13 +17,9 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class DrFenkenstrainDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DrFenkenstrainDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, DrFenkenstrainDialogueFile(), npc)
         return true
     }

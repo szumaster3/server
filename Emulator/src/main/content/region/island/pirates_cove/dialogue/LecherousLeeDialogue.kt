@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LecherousLeeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LecherousLeeDialogue(player: Player? = null) : Dialogue(player) {
+
     private val conversations = arrayOf(0, 10, 13, 17, 21, 27, 31, 36, 43, 52)
 
     override fun open(vararg args: Any?): Boolean {
@@ -20,10 +19,7 @@ class LecherousLeeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.FRIENDLY, "So how's life as a pirate?").also { stage++ }
             1 ->

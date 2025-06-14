@@ -10,9 +10,8 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.world.map.Location
 import org.rs.consts.Quests
 
-class MercenaryCaptainDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MercenaryCaptainDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -25,10 +24,7 @@ class MercenaryCaptainDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             11 ->
                 when (stage) {

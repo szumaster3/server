@@ -18,9 +18,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KathyCorkatDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KathyCorkatDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.SWAN_SONG)) {
@@ -46,10 +45,7 @@ class KathyCorkatDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.FRIENDLY, "Oh dear?").also { stage++ }
             1 -> npcl(FaceAnim.WORRIED, "It's terrible!").also { stage++ }

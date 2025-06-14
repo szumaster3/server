@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class KhazardGuard2Dialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KhazardGuard2Dialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestComplete(player, Quests.FIGHT_ARENA)) {
@@ -32,10 +31,7 @@ class KhazardGuard2Dialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "I've never seen you around here before!").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Long live General Khazard!").also { stage++ }

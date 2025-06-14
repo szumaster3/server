@@ -12,13 +12,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class PiratePeteDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!hasRequirement(player!!, Quests.RUM_DEAL)) {
             sendDialogue(player, "The Pirate Pete is too busy to talk.").also { stage = END_DIALOGUE }
         } else {

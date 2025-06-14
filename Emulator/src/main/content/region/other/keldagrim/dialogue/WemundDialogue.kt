@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WemundDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WemundDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "What can I interest you in? Need any pipes?", "I make very sturdy pipes.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_ASKING, "No, not really... what kind of shop is this anyway?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "Why, it's Wemund's Wrench Warehouse.", "Wemund, that's me.").also { stage++ }

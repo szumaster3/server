@@ -13,9 +13,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TeaSellerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TeaSellerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player.getSavedData().globalData.getTeaSteal() > System.currentTimeMillis()) {
@@ -41,10 +40,7 @@ class TeaSellerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thanks.", "What are you selling?").also { stage++ }
             1 ->

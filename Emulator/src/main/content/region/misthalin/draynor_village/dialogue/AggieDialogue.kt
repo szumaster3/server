@@ -37,10 +37,7 @@ class AggieDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (quest!!.getStage(player) == 20 ||

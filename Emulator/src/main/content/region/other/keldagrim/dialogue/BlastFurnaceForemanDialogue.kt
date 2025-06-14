@@ -18,13 +18,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BlastFurnaceForemanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class BlastFurnaceForemanDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 npcl(FaceAnim.OLD_ANGRY1, "You! Get to work!")

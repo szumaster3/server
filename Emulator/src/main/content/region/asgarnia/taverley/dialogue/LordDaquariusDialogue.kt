@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LordDaquariusDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LordDaquariusDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hello")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("What want you, with the Lord of the Kinshra?", "Speak!").also { stage++ }
             1 -> player("I am here on behalf of the White Knights...").also { stage++ }

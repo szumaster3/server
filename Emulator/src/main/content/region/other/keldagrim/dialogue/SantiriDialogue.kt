@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SantiriDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SantiriDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.CHILD_NORMAL, "Welcome, human, to the Quality Weapons Shop!", "Can I interest you in a purchase?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, I'm looking for some weapons.", "No thanks.").also { stage++ }
             1 ->

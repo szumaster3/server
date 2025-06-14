@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
  * Represents the Burthorpe Soldiers dialogue.
  */
 @Initializable
-class BurthorpeSoldierDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BurthorpeSoldierDialogue(player: Player? = null) : Dialogue(player) {
+
     companion object {
         val latinInsults =
             arrayOf(
@@ -48,10 +47,7 @@ class BurthorpeSoldierDialogue(
         val randomStages = arrayOf(10, 20, 30, 40, 50)
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
             1 -> npcl(FaceAnim.ANGRY, latinInsults.random()).also { stage = randomStages.random() }

@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AliTheHagDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheHagDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestComplete(player, Quests.SWEPT_AWAY) && getDynLevel(player, Skills.MAGIC) > 33 && inInventory(
@@ -37,10 +36,7 @@ class AliTheHagDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.LAUGH, "Old hag indeed! I have a name you know!").also { stage++ }
             1 -> player(FaceAnim.THINKING, "Let me guess it wouldn't be Ali would it?").also { stage++ }

@@ -13,9 +13,8 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class GnomeTrainerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val rand = RandomFunction.random(0, 3)
@@ -28,10 +27,7 @@ class GnomeTrainerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

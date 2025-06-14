@@ -14,13 +14,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class OrdanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class OrdanDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Can you un-note any of my items?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_DEFAULT, "I can un-note Tin, Copper, Iron, Coal, and Mithril.").also { stage++ }

@@ -8,9 +8,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheCamelManDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc("Welcome to my discount camel store.", "Can I help you with anything?")
         return true

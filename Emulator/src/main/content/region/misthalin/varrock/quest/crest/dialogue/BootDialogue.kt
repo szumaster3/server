@@ -10,9 +10,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class BootDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BootDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
@@ -28,10 +27,7 @@ class BootDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> options("Hello short person.", "Why are you called Boot?").also { stage = 10 }
             2 ->

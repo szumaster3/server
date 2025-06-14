@@ -10,9 +10,8 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs.consts.Items
 
-class TzhaarMejJalDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TzhaarMejJalDialogue(player: Player? = null) : Dialogue(player) {
+
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -21,10 +20,7 @@ class TzhaarMejJalDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 sendDialogueOptions(

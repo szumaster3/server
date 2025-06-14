@@ -19,9 +19,8 @@ import org.rs.consts.Quests
  * Represents the Boy dialogue in Witches' House quest.
  */
 @Initializable
-class BoyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BoyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val quest = getQuestStage(player, Quests.WITCHS_HOUSE)
 
@@ -48,10 +47,7 @@ class BoyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> {
                 sendDialogue("The boy sobs.")

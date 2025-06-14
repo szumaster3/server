@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MorganDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MorganDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getQuestStage(player, Quests.VAMPIRE_SLAYER) > 1) {
@@ -29,10 +28,7 @@ class MorganDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> player(FaceAnim.HALF_GUILTY, "What's the problem?").also { stage++ }
             1 ->

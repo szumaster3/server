@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SylasDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SylasDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.GRIM_TALES)) {
@@ -24,10 +23,7 @@ class SylasDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.HALF_GUILTY, "Can't talk! Things to collect, magic beans to plant!").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Uh...okay, goodbye.").also { stage = END_DIALOGUE }

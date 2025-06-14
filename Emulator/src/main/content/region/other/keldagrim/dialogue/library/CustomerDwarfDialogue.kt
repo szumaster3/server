@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CustomerDwarfDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CustomerDwarfDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Hello, can you help me?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.OLD_NORMAL, "Ssshhh, don't talk...").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "But I just want to ask you something.").also { stage++ }

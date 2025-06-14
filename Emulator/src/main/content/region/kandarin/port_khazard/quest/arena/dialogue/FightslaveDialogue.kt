@@ -11,19 +11,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class FightslaveDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FightslaveDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Do you know of a Justin or Jeremy in this arena?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (allInEquipment(player, Items.KHAZARD_HELMET_74, Items.KHAZARD_ARMOUR_75)) {

@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class TrackerGnomeDialogue2(
-    player: Player? = null,
-) : Dialogue(player) {
+class TrackerGnomeDialogue2(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

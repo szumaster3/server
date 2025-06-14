@@ -11,19 +11,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class VarrockCookDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VarrockCookDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HALF_GUILTY, "What do you want? I'm busy!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 setTitle(player, 3)

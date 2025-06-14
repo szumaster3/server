@@ -12,19 +12,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SilkTraderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SilkTraderDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Do you want to buy any fine silks?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("How much are they?", "No, silk doesn't suit me.").also { stage++ }
             1 ->

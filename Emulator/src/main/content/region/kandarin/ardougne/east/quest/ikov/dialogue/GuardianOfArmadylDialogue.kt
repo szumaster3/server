@@ -18,15 +18,11 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GuardianOfArmadylDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GuardianOfArmadylDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun newInstance(player: Player?): Dialogue = GuardianOfArmadylDialogue(player)
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, GuardianOfArmadylDialogueFile(), npc)
         return false
     }

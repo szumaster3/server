@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class HuraDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HuraDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_DEFAULT, "'Ello " + player.username + ".")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "Hello, what's that you've got there?").also { stage++ }
             1 -> npc(FaceAnim.OLD_DEFAULT, "A crossbow, are you interested?").also { stage++ }

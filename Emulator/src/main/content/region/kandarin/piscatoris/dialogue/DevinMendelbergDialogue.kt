@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DevinMendelbergDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DevinMendelbergDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.SWAN_SONG) && npc.id == 3828) {
@@ -26,10 +25,7 @@ class DevinMendelbergDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.HALF_CRYING, "Sorry, but this is NOT a good morning!").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Why, what's the matter?").also { stage++ }

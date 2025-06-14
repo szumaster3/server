@@ -27,9 +27,8 @@ import org.rs.consts.Quests
  * - [Ghosts Ahoy][content.region.morytania.quest.ahoy.GhostsAhoy]
  */
 @Initializable
-class OldCroneDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val npc = args.getOrNull(0) as? NPC ?: return false
         this.npc = npc
@@ -82,10 +81,7 @@ class OldCroneDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "I lived here when this was all just fields, you know.").also {
                 stage = END_DIALOGUE

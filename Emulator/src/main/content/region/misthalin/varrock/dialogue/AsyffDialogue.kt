@@ -12,19 +12,15 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 @Initializable
-class AsyffDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AsyffDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Now you look like someone who goes to", "a lot of fancy dress parties.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.ASKING, "Err...what are you saying exactly?").also { stage++ }
             1 ->

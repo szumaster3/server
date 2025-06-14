@@ -11,19 +11,15 @@ import org.rs.consts.NPCs
  * Bow arrow salesman dialogue.
  */
 @Initializable
-class BowArrowSalesmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello.").also { stage = 0 }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("A fair day, traveller. Would you like to see my wares?").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }

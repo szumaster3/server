@@ -13,9 +13,8 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class SirPyrsinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SirPyrsinDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
     private var id = 0
 
@@ -51,10 +50,7 @@ class SirPyrsinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             30 ->
                 when (stage) {

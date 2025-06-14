@@ -18,9 +18,8 @@ import core.game.world.map.RegionManager.getNpc
 import core.plugin.Plugin
 import org.rs.consts.Quests
 
-class AnaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AnaDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun init() {
@@ -70,10 +69,7 @@ class AnaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             98 ->
                 when (stage) {

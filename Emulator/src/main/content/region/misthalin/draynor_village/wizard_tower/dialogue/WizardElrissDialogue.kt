@@ -33,9 +33,8 @@ import org.rs.consts.NPCs
  * exchange for Runecrafting guild tokens.
  */
 @Initializable
-class WizardElrissDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
+
     /**
      * Experience reward for each shown talisman.
      */
@@ -79,10 +78,7 @@ class WizardElrissDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         /**
          * Amount of tokens.
          */

@@ -22,9 +22,8 @@ import org.rs.consts.NPCs
  * - [CrypticClue][content.global.activity.ttrail.clues.CrypticClue]
  */
 @Initializable
-class AbbotLangleyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AbbotLangleyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size >= 1) {
             if (args[0] is NPC) {
@@ -61,10 +60,7 @@ class AbbotLangleyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (player.getSavedData().globalData.isJoinedMonastery()) {

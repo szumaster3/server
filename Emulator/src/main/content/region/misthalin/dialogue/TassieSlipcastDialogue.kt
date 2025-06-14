@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TassieSlipcastDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TassieSlipcastDialogue(player: Player? = null) : Dialogue(player) {
+
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -19,10 +18,7 @@ class TassieSlipcastDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.HALF_GUILTY, "And make sure you tidy up after yourself!").also { stage = END_DIALOGUE }
         }

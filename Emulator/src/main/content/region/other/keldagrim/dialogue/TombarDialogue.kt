@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TombarDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TombarDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_ASKING, "Say, aren't you a bit tall for a dwarf?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NORMAL, "Was there anything in particular you wanted?").also { stage++ }
             1 -> options("I'd like a quest please.", "No, I just like talking to strangers.").also { stage++ }

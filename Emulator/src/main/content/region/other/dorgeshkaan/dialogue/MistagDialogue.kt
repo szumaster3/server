@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MistagDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MistagDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val ltStage = getQuestStage(player, Quests.THE_LOST_TRIBE)
@@ -50,10 +49,7 @@ class MistagDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             -100 ->
                 npc(

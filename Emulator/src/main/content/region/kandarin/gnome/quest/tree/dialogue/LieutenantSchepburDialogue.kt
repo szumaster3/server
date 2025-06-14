@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LieutenantSchepburDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LieutenantSchepburDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_DEFAULT, "Move into position lads! eh? Who are you and what do you want?").also { stage++ }

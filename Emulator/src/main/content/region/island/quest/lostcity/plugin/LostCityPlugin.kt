@@ -41,7 +41,7 @@ class LostCityPlugin : InteractionListener {
     }
 
     private fun handleShamusTree(player: Player): Boolean {
-        if (SkillingTool.getHatchet(player) == null) {
+        if (SkillingTool.getAxe(player) == null) {
             sendMessage(player, "You do not have an axe which you have the level to use.")
             return true
         }
@@ -75,7 +75,7 @@ class LostCityPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(org.rs.consts.Scenery.TREE_2409, IntType.SCENERY, "chop") { player, _ ->
-            if (SkillingTool.getHatchet(player) == null) {
+            if (SkillingTool.getAxe(player) == null) {
                 sendMessage(player, "You do not have an axe which you have the level to use.")
                 return@on true
             }
@@ -124,7 +124,7 @@ class LostCityPlugin : InteractionListener {
 
         on(org.rs.consts.Scenery.DRAMEN_TREE_1292, IntType.SCENERY, "chop down") { player, node ->
             val questStage = getQuestStage(player, Quests.LOST_CITY)
-            if (SkillingTool.getHatchet(player) == null) {
+            if (SkillingTool.getAxe(player) == null) {
                 sendMessage(player, "You do not have an axe which you have the level to use.")
                 return@on true
             }

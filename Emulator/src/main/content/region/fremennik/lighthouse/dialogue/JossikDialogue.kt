@@ -30,10 +30,7 @@ class JossikDialogue : Dialogue {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options("Can I see your wares?", "Have you found any prayerbooks?")

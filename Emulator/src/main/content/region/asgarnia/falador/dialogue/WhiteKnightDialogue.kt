@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WhiteKnightDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WhiteKnightDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         sendDialogue(player, "He is too busy dancing to talk!").also { stage = END_DIALOGUE }
         return true

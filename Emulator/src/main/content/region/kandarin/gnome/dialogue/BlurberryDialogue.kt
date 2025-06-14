@@ -16,9 +16,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BlurberryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BlurberryDialogue(player: Player? = null) : Dialogue(player) {
+
     private var tutorialProgress = -1
     private var tutorialComplete = false
 
@@ -41,10 +40,7 @@ class BlurberryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Yes! What is it I need to do?").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "Well, I'd like to show you how to make", "a drink.").also { stage++ }

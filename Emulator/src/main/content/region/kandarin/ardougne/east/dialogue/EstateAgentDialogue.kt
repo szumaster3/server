@@ -23,9 +23,8 @@ import org.rs.consts.NPCs
  * @author Woah
  */
 @Initializable
-class EstateAgentDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EstateAgentDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Hello. Welcome to the " + settings!!.name + " Housing Agency! What", "can I do for you?")
@@ -33,10 +32,7 @@ class EstateAgentDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> {
                 if (player.houseManager.hasHouse()) {

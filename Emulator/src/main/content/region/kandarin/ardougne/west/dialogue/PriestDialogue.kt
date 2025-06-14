@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class PriestDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PriestDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.PLAGUE_CITY)) {
@@ -30,10 +29,7 @@ class PriestDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(FaceAnim.FRIENDLY, "I wish there was more I could do for these people.").also {

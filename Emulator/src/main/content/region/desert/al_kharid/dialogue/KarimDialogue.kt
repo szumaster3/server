@@ -15,19 +15,15 @@ import org.rs.consts.NPCs
  * Represents the Karim dialogue.
  */
 @Initializable
-class KarimDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KarimDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_ASKING, "Would you like to buy a nice kebab? Only one gold.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options(
                 "I think I'll give it a miss.", "Yes please.", "What do you think of Ali Morrisane?"

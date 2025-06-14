@@ -18,9 +18,8 @@ import org.rs.consts.Quests
  * - [Scorpion Catcher quest][content.region.kandarin.quest.scorpcatcher.ScorpionCatcher]
  */
 @Initializable
-class PeksaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PeksaDialogue(player: Player? = null) : Dialogue(player) {
+    
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -28,10 +27,7 @@ class PeksaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> if (isQuestInProgress(player, Quests.SCORPION_CATCHER, 10, 99)) {
                 options("I could be, yes.", "No, I'll pass on that.", "I've heard you have a small scorpion in your possession.").also { stage++ }

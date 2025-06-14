@@ -12,19 +12,15 @@ import org.rs.consts.NPCs
  * Represents the Reff dialogue.
  */
 @Initializable
-class ReffDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ReffDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Greetings " + (if (player.appearance.isMale) "Sir" else "Madam") + ".")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

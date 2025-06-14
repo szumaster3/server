@@ -22,9 +22,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class RomeoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RomeoDialogue(player: Player? = null) : Dialogue(player) {
+
     private var cutscene: RomeoAndJulietCutscene? = null
     private var phill: NPC? = null
 
@@ -107,10 +106,7 @@ class RomeoDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         when (stage) {
             0 -> {

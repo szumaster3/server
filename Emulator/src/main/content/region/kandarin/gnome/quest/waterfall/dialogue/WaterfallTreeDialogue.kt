@@ -8,15 +8,11 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 
-class WaterfallTreeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WaterfallTreeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun getIds(): IntArray = intArrayOf(DialogueInterpreter.getDialogueKey("waterfall_tree_dialogue"))
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             100 -> end()
             0 -> {

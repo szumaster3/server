@@ -12,19 +12,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class HirkoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HirkoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Hello there!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasBoltPouch = hasAnItem(player, Items.BOLT_POUCH_9433).container != null
         when (stage) {
             0 -> player(FaceAnim.HALF_ASKING, "Hello, what's in those boxes?").also { stage++ }

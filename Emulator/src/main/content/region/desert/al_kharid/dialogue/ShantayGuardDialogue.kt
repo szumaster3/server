@@ -18,9 +18,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class ShantayGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShantayGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args[0] != null && args[0] is NPC) {
             npc = (args[0] as NPC)
@@ -40,10 +39,7 @@ class ShantayGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "What can I do for you?").also { stage++ }
             1 -> options("I'd like to go into the desert please.", "Nothing thanks.").also { stage++ }

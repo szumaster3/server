@@ -23,9 +23,8 @@ private const val RESTING_CONDUCTOR = NPCs.CART_CONDUCTOR_2184
  * Represents Cart conductor dialogues.
  */
 @Initializable
-class CartConductorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CartConductorDialogue(player: Player? = null) : Dialogue(player) {
+
 
     private var visitedKeldagrim = false
 
@@ -47,10 +46,7 @@ class CartConductorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 showTopics(

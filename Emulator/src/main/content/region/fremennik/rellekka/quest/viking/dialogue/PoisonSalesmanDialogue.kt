@@ -16,19 +16,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class PoisonSalesmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PoisonSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         options("Talk about the Murder Mystery Quest", "Talk about the Fremennik Trials")
         stage = START_DIALOGUE
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val murderMysteryStage = getQuestStage(player, Quests.MURDER_MYSTERY)
         val fremennikTrialsStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
         when (stage) {

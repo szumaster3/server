@@ -18,9 +18,8 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class TraibornDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TraibornDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -45,10 +44,7 @@ class TraibornDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             20 ->
                 when (stage) {

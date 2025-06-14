@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SmellytoesDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SmellytoesDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hi there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NORMAL, "Hey, ids me matesh!").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Sorry, have we met?").also { stage++ }

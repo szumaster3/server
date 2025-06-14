@@ -11,19 +11,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class DwarfDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DwarfDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Welcome to the Mining Guild.", "Can I help you with anything?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0, 11 -> {
                 sendDialogueOptions(

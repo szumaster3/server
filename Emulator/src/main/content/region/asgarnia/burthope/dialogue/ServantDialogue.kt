@@ -12,13 +12,9 @@ import org.rs.consts.NPCs
  * Represents the Servant dialogue.
  */
 @Initializable
-class ServantDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class ServantDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
             1 -> npcl(FaceAnim.HALF_GUILTY, "Hi").also { stage++ }

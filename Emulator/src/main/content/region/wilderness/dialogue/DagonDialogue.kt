@@ -6,9 +6,8 @@ import core.game.dialogue.DialogueInterpreter
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 
-class DagonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DagonDialogue(player: Player? = null) : Dialogue(player) {
+
     private var cutscene: BorkCutscene? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -22,10 +21,7 @@ class DagonDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 val played = player.getSavedData().activityData.hasKilledBork()

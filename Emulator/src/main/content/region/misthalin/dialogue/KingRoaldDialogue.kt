@@ -17,9 +17,8 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class KingRoaldDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KingRoaldDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getAttribute(player, "afu-mini:ring", false) ||
@@ -57,10 +56,7 @@ class KingRoaldDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             DIALOGUE_INITIAL_OPTIONS_HANDLE -> {
                 player("Greetings, your Majesty.")

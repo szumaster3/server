@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class RellekkaCitizenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RellekkaCitizenDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.ANNOYED, "Shhh! I'm waiting for the show!").also { stage = END_DIALOGUE }

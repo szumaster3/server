@@ -20,9 +20,8 @@ import org.rs.consts.Quests
  * Represents Sir Kay dialogue.
  */
 @Initializable
-class SirKayDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SirKayDialogue(player: Player? = null) : Dialogue(player) {
+
 
     private var diaryLevel = 2
 
@@ -32,10 +31,7 @@ class SirKayDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         // Diary consts.
         val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_CAMELOT_ALT_TELE, false)
         val hardDiaryComplete = Diary.hasCompletedLevel(player!!, DiaryType.SEERS_VILLAGE, diaryLevel)

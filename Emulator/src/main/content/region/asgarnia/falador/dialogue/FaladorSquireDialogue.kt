@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FaladorSquireDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         sendDialogueOptions(player, "What do you want to do?", "Chat", "Talk about the Falador Achievement Diary")
@@ -29,10 +28,7 @@ class FaladorSquireDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if ((stage == -1 && buttonId == 2) || Diary.canReplaceReward(player, DiaryType.FALADOR, 2)) {
             openDialogue(player, SquireDiaryDialogue(), npc)
         } else {

@@ -7,13 +7,9 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class LadyTableDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class LadyTableDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTablePlugin(), npc)
         return true
     }

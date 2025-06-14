@@ -9,28 +9,17 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class FaladorWomenParkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FaladorWomenParkDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Greetings! Have you come to gaze in rapture at the",
-                    "natural beauty of Falador's parkland?",
-                ).also {
-                    stage++
-                }
+            0 -> npc(FaceAnim.HALF_GUILTY, "Greetings! Have you come to gaze in rapture at the", "natural beauty of Falador's parkland?").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Um, yes, very nice. Lots of.... trees and stuff.").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "Trees! I do so love trees! And flowers! And squirrels.").also { stage++ }
             3 -> player(FaceAnim.HALF_GUILTY, "Sorry, I have a strange urge to be somewhere else.").also { stage++ }

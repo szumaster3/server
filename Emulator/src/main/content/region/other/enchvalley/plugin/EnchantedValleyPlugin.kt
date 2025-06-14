@@ -96,7 +96,7 @@ class EnchantedValleyPlugin : InteractionListener {
          */
 
         on(ENCHANTED_V_TREE, IntType.SCENERY, "chop-down") { player, _ ->
-            val tool = SkillingTool.getHatchet(player)
+            val tool = SkillingTool.getAxe(player)
             if (tool == null) {
                 sendMessage(player, "You lack an axe which you have the Woodcutting level to use.")
                 return@on true

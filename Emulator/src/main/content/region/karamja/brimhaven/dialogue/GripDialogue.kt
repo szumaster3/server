@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GripDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GripDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         openDialogue(player, GripDialogueFile(), npc)

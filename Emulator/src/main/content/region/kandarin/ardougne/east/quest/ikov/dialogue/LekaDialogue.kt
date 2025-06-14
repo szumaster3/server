@@ -10,15 +10,11 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class LekaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LekaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun newInstance(player: Player?): Dialogue = LekaDialogue(player)
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.ANGRY, "Who dares to enter the Temple of Ikov!").also { stage++ }
             1 ->

@@ -8,18 +8,14 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MortenHoldstromDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MortenHoldstromDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.NEUTRAL, "Good day to you.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.ASKING, "Hello. What are you up to?").also { stage++ }
             1 ->

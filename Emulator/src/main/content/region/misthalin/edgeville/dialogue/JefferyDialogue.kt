@@ -14,19 +14,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class JefferyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JefferyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.HALF_ASKING, "Keep it quick. What do you want?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Who was that love poem for?", "I want to use the furnace.", "Er, nothing.").also { stage++ }
             1 ->

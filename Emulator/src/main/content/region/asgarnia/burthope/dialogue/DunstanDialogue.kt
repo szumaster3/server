@@ -17,13 +17,9 @@ import org.rs.consts.Quests
  * Represents the Dunstan dialogue.
  */
 @Initializable
-class DunstanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DunstanDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         /*
          * When Troll Stronghold is complete
          */

@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class SirAmikVarzeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SirAmikVarzeDialogue(player: Player? = null) : Dialogue(player) {
+    
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -35,10 +34,7 @@ class SirAmikVarzeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             100 ->
                 when (stage) {

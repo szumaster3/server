@@ -13,19 +13,15 @@ import org.rs.consts.NPCs
  * Tower advisor dialogue.
  */
 @Initializable
-class TowerAdvisorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello there, what do you do here?").also { stage++ }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Hi. We are in charge of this practice area.").also { stage++ }
             1 -> player("This is a practice area?").also { stage++ }

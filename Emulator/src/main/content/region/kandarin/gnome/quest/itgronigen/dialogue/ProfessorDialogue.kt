@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ProfessorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ProfessorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
@@ -38,10 +37,7 @@ class ProfessorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             -1 -> options("Talk about Treasure Trails.", "I'm just passing through.").also { stage = 1 }
             0 -> options("Talk about the Observatory Quest.", "Talk about Treasure Trails.").also { stage++ }

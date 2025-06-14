@@ -8,9 +8,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class ElissaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ElissaDialogue(player: Player? = null) : Dialogue(player) {
+
     var qb = 2
 
     override fun open(vararg args: Any?): Boolean {
@@ -19,10 +18,7 @@ class ElissaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> (options("What do you do here?", "What is this place?")).also { stage++ }
             1 ->

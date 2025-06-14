@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CaveMonkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaveMonkDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -41,10 +40,7 @@ class CaveMonkDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             100 -> npc("None of your business.").also { stage = END_DIALOGUE }
             0 -> npc(

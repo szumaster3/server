@@ -13,18 +13,14 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class ThakkradYakDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ThakkradYakDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         options("Cure my yak-hide, please.", "Nothing, thanks.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

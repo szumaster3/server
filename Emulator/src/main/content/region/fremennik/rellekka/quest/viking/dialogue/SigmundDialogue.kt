@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SigmundDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SigmundDialogue(player: Player? = null) : Dialogue(player) {
+
     private val questItems = intArrayOf(
         Items.FREMENNIK_BALLAD_3699,
         Items.EXOTIC_FLOWER_3698,
@@ -75,10 +74,7 @@ class SigmundDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.NEUTRAL, "Hello outlander.").also { stage++ }
             2 -> playerl(FaceAnim.NEUTRAL, "Are you a member of the council?").also { stage++ }

@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MelinaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MelinaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val droalakProgress = getVarbit(player, MakingHistoryUtils.DROALAK_PROGRESS)
@@ -41,10 +40,7 @@ class MelinaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
             1 -> npcl(FaceAnim.FRIENDLY, "Oh why did he leave me? Did he truly love me?").also { stage++ }

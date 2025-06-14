@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CitizenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CitizenDialogue(player: Player? = null) : Dialogue(player) {
+
     val stages = intArrayOf(0, 100, 200, 300)
 
     override fun open(vararg args: Any?): Boolean {
@@ -19,10 +18,7 @@ class CitizenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.NEUTRAL, "It's a bit grey round here, isn't it?").also { stage++ }
             1 ->

@@ -46,10 +46,7 @@ class GhostGuardDialogue(player: Player? = null, ) : Dialogue(player) {
         }
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> if (amountInInventory(player, Items.ECTO_TOKEN_4278) >= 2) {
                 options(

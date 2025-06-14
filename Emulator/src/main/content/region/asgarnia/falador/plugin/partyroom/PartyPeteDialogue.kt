@@ -14,19 +14,15 @@ import org.rs.consts.Animations
 import org.rs.consts.NPCs
 
 @Initializable
-class PartyPeteDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PartyPeteDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_GUILTY, "Hi!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Hi! I'm, Party Pete. Welcome to the Party Room!").also { stage++ }
             1 ->

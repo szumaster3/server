@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class YrsaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class YrsaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -64,10 +63,7 @@ class YrsaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasBoots = player!!.equipment.get(EquipmentContainer.SLOT_FEET)
         when (stage) {
             1 ->

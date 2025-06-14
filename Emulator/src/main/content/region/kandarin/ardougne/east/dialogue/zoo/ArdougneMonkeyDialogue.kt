@@ -11,9 +11,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class ArdougneMonkeyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ArdougneMonkeyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!inEquipment(player, Items.MSPEAK_AMULET_4021, 1)) {
@@ -41,10 +40,7 @@ class ArdougneMonkeyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             10 -> player(FaceAnim.JOLLY, "Arr!").also { stage++ }
             11 -> npc(FaceAnim.OLD_LAUGH1, "Arr!").also { stage++ }

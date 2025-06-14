@@ -16,9 +16,8 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class GunnjornDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GunnjornDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getVarbit(player, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34) >= 1 &&
@@ -47,10 +46,7 @@ class GunnjornDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 when (buttonId) {

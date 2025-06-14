@@ -11,19 +11,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BellemordeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BellemordeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello puss.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (!anyInEquipment(player, Items.CATSPEAK_AMULET_4677, Items.CATSPEAK_AMULETE_6544)) {

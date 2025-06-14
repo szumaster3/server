@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ZahraDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZahraDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!hasRequirement(player, Quests.SPIRITS_OF_THE_ELID)) {
@@ -24,10 +23,7 @@ class ZahraDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
             1 -> player("You don't look too happy.").also { stage++ }

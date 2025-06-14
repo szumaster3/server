@@ -14,19 +14,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class PenguinKeeperDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PenguinKeeperDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.HALF_ASKING, "Hello there. How are the penguins doing today?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasPenguinEgg = hasAnItem(player, Items.PENGUIN_EGG_12483).container != null
         when (stage) {
             0 ->

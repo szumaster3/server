@@ -19,13 +19,9 @@ import org.rs.consts.NPCs
  * Represents the Emerald benedict dialogue.
  */
 @Initializable
-class EmeraldBenedictDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class EmeraldBenedictDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {

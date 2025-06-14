@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 
 @Initializable
-class AlTheCamelDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AlTheCamelDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val rand = RandomFunction.random(0, 1)
@@ -33,10 +32,7 @@ class AlTheCamelDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 end()

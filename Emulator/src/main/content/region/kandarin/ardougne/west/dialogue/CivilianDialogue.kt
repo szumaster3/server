@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class CivilianDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CivilianDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (allInEquipment(player, *hasMournerSet)) {
@@ -29,10 +28,7 @@ class CivilianDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Good day to you, traveller.").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "What are you up to?").also { stage++ }

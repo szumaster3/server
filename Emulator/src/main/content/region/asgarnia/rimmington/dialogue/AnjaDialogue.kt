@@ -12,19 +12,15 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class AnjaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AnjaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Hello sir. What are you doing in my house?").also { stage++ }
             1 ->

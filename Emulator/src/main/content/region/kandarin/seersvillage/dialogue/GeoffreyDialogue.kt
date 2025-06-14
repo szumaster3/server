@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GeoffreyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GeoffreyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val diary = player?.achievementDiaryManager?.getDiary(DiaryType.SEERS_VILLAGE)
         if (diary?.levelRewarded?.isNotEmpty() == true) {
@@ -31,10 +30,7 @@ class GeoffreyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(
                 "Yes, I am very busy. Picking GLORIOUS flax.",

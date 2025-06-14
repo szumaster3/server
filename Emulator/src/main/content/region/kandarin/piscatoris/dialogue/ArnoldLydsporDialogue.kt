@@ -18,13 +18,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
-class ArnoldLydsporDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class ArnoldLydsporDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 npcl(

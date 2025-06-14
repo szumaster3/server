@@ -22,10 +22,7 @@ class FishermanDialogue(player: Player? = null, ) : Dialogue(player) {
         }
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogue(player!!, "His eyes are staring vacantly into space.").also { stage++ }
             1 -> npcl(FaceAnim.DRUNK, "Lost to us... She is Lost to us...").also { stage++ }

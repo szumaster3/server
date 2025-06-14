@@ -12,9 +12,8 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheCamelDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheCamelDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val phrase = RandomFunction.random(0, 2)
         when (phrase) {
@@ -31,10 +30,7 @@ class AliTheCamelDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 player.lock()

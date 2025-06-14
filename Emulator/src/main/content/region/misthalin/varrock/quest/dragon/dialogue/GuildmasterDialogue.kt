@@ -9,9 +9,8 @@ import core.game.node.item.GroundItemManager
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class GuildmasterDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GuildmasterDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -30,10 +29,7 @@ class GuildmasterDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             30 -> end()
             40 -> end()

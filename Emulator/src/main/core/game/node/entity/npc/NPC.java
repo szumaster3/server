@@ -87,7 +87,6 @@ public class NPC extends Entity {
     private Tasks task;
     private boolean neverWalks;
     private String[] forceTalk;
-    int randomTalk = RandomFunction.random(forceTalk.length);
     /**
      * The Behavior.
      */

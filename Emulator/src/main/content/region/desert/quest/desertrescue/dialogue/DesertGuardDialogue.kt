@@ -17,9 +17,8 @@ import core.tools.RandomFunction
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class DesertGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DesertGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun init() {
@@ -66,10 +65,7 @@ class DesertGuardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
             5001 ->
                 when (quest!!.getStage(player)) {

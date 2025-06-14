@@ -2,7 +2,7 @@ package content.global.skill.gathering.woodcutting
 
 import content.data.GameAttributes
 import content.data.items.SkillingTool
-import content.data.items.SkillingTool.Companion.getHatchet
+import content.data.items.SkillingTool.Companion.getAxe
 import content.data.tables.BirdNestDropTable.Companion.drop
 import content.data.tables.BirdNestDropTable.Companion.getRandomNest
 import content.global.skill.farming.FarmingPatch.Companion.forObject
@@ -87,7 +87,7 @@ class WoodcuttingPulse(
             sendMessage(player, "You need a woodcutting level of " + resource!!.level + " to chop this tree.")
             return false
         }
-        if (getHatchet(player) == null) {
+        if (getAxe(player) == null) {
             sendMessage(player, "You do not have an axe to use.")
             return false
         }
@@ -103,7 +103,7 @@ class WoodcuttingPulse(
 
     fun animate() {
         if (!player.animator.isAnimating) {
-            animate(player, getHatchet(player)!!.animation)
+            animate(player, getAxe(player)!!.animation)
             val playersAroundMe =
                 getLocalPlayers(player, 2)
                     .stream()
@@ -135,11 +135,11 @@ class WoodcuttingPulse(
             )
             return true
         }
-        if (!checkReward(getHatchet(player))) {
+        if (!checkReward(getAxe(player))) {
             return false
         }
 
-        if (getHatchet(player)!!.id == Items.INFERNO_ADZE_13661 && RandomFunction.random(100) < 25) {
+        if (getAxe(player)!!.id == Items.INFERNO_ADZE_13661 && RandomFunction.random(100) < 25) {
             sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
             Projectile
                 .create(

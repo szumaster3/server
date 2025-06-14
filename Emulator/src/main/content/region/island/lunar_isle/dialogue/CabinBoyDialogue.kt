@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class CabinBoyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CabinBoyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inInventory(player, Items.EMERALD_LENS_9066, 1) || player.bank.contains(Items.EMERALD_LENS_9066, 1)) {
@@ -30,10 +29,7 @@ class CabinBoyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.CHILD_FRIENDLY, "That I did, that I did!").also { stage++ }
             1 -> player(FaceAnim.ASKING, "And?").also { stage++ }

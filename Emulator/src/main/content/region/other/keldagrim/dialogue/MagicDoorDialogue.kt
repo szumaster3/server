@@ -14,9 +14,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MagicDoorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MagicDoorDialogue(player: Player? = null) : Dialogue(player) {
+
     private var door: Scenery? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -25,10 +24,7 @@ class MagicDoorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("So how much is the tax?").also { stage++ }
             1 -> npc(FaceAnim.OLD_CALM_TALK1, "The cost is one diamond.").also { stage++ }

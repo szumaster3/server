@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class TiadecheDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TiadecheDialogue(player: Player? = null) : Dialogue(player) {
+
     private val randomConversation =
         arrayOf(
             "Just leave a depressed fish hunter alone...",
@@ -32,10 +31,7 @@ class TiadecheDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.FRIENDLY, "Hello, Bwana! Would you like to buy some Karambwan?").also { stage++ }
             1 -> options("Yes", "No.").also { stage++ }

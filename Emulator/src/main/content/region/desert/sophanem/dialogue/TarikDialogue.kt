@@ -11,19 +11,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TarikDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TarikDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.WORRIED, "Ouch!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.HALF_WORRIED, "Are you alright?").also { stage++ }
             1 -> npcl(FaceAnim.FRIENDLY, "I'm fine, I'm fine. Just a scratch.").also { stage++ }

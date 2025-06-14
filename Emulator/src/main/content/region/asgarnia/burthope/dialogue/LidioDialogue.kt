@@ -12,19 +12,15 @@ import org.rs.consts.NPCs
  * Represents the Lidio dialogue.
  */
 @Initializable
-class LidioDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LidioDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.ASKING, "Greetings, warrior, how can I fill your stomach today?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.NEUTRAL, "With food preferable.").also { stage++ }
             1 -> {

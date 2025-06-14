@@ -13,13 +13,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class HighPriestEntranaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HighPriestEntranaDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> {
                 npcl(FaceAnim.FRIENDLY, "Many greetings. Welcome to our fair island.").also {

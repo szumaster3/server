@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WydinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WydinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         var door = false
         if (args.size == 2) door = args[1] as Boolean
@@ -38,10 +37,7 @@ class WydinDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (player.getSavedData().globalData.isWydinEmployee()) {
             when (stage) {
                 0 -> {

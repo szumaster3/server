@@ -9,9 +9,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class CaptainBentleyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CaptainBentleyDialogue(player: Player? = null) : Dialogue(player) {
+
     private var onIsle = false
 
     override fun open(vararg args: Any?): Boolean {
@@ -26,10 +25,7 @@ class CaptainBentleyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Sure matey!").also { stage++ }
             1 -> {

@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class HazeelCultistDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HazeelCultistDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

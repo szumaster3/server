@@ -12,9 +12,8 @@ import core.game.world.map.RegionManager.getObject
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class BedabinNomadDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BedabinNomadDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -36,10 +35,7 @@ class BedabinNomadDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (npc.id) {
             NPCs.BEDABIN_NOMAD_GUARD_834 -> when (quest!!.getStage(player)) {
                 54 -> when (stage) {

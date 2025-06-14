@@ -19,9 +19,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class AvaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AvaDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun newInstance(player: Player?): Dialogue = AvaDialogue(player)
@@ -126,10 +125,7 @@ class AvaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             0 ->
                 when (stage) {

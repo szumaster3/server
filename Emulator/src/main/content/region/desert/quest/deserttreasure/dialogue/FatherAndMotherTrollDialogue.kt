@@ -18,13 +18,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FatherTrollDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class FatherTrollDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (DTUtils.getSubStage(player, DesertTreasure.iceStage) == 3 &&
             getVarbit(player, DesertTreasure.varbitFrozenFather) == 1 &&
             getVarbit(player, DesertTreasure.varbitFrozenMother) == 1
@@ -85,13 +81,9 @@ class FatherTrollDialogue(
 }
 
 @Initializable
-class MotherTrollDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class MotherTrollDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         println(
             getQuestStage(player, Quests.DESERT_TREASURE) == 9 &&
                 DTUtils.getSubStage(player, DesertTreasure.iceStage) >= 5,

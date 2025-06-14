@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class StreetUrchinDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         sendDialogue(player, "This child doesn't seem interested in you.").also { stage = END_DIALOGUE }
         return true

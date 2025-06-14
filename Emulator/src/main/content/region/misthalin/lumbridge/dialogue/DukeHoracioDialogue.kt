@@ -18,9 +18,8 @@ import org.rs.consts.Quests
  * Represents the Duke Horacio dialogues.
  * @author Ceikry
  */
-class DukeHoracioDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DukeHoracioDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if ((
@@ -52,10 +51,7 @@ class DukeHoracioDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             DIALOGUE_INITIAL_OPTIONS_HANDLE -> {
                 npc("Greetings. Welcome to my castle.")

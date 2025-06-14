@@ -11,9 +11,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class AliceHusbandDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
+    
     private lateinit var quest: Quest
 
     override fun open(vararg args: Any?): Boolean {
@@ -88,10 +87,7 @@ class AliceHusbandDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!player.equipment.containsAtLeastOneItem(Items.GHOSTSPEAK_AMULET_552)) {
             end()
             return true

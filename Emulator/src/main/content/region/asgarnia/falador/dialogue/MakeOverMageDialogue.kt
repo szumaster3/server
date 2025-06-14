@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class MakeOverMageDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MakeOverMageDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size == 2) {
@@ -44,10 +43,7 @@ class MakeOverMageDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasAnMakeover = hasAnItem(player, Items.YIN_YANG_AMULET_7803).container != null
         when (stage) {
             0 ->

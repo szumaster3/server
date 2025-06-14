@@ -18,9 +18,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GertrudesChildrenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GertrudesChildrenDialogue(player: Player? = null) : Dialogue(player) {
+
     private var id = 0
     private var switchId = if (id == NPCs.SHILOP_781) NPCs.WILOUGH_783 else NPCs.SHILOP_781
 
@@ -57,10 +56,7 @@ class GertrudesChildrenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 sendNPCDialogueLines(

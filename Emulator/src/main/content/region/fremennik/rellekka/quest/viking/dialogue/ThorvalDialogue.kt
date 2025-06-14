@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ThorvalDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.CHAMPIONS_TOKEN_3706, 1) -> {
@@ -76,10 +75,7 @@ class ThorvalDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

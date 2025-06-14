@@ -17,13 +17,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GardenerGhostDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class GardenerGhostDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val gardenerGhost = npc as GardenerGhostNPC
         if (gardenerGhost.target == player) {
             if (gardenerGhost.location.withinDistance(gardenerGhost.graveLocation, 5)) {

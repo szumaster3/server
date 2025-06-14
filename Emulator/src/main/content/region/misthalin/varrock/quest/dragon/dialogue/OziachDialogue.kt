@@ -21,9 +21,8 @@ import org.rs.consts.Quests
  * - [CrypticClue][content.global.activity.ttrail.clues.CrypticClue]
  * - [DragonSlayer]
  */
-class OziachDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OziachDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -94,10 +93,7 @@ class OziachDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             30, 20 ->
                 if (stage == -1) {

@@ -7,9 +7,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class IffieDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class IffieDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc(
             "Sorry, dearie, if I stop to chat I'll lose count.",

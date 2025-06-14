@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ZeneshaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZeneshaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.SUSPICIOUS, "Hello there! I sell plate armour. Are you interested?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("I may be interested.", "Sorry, I'm not interested.").also { stage++ }
             1 ->

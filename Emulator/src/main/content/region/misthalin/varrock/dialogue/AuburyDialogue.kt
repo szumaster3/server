@@ -22,9 +22,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class AuburyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AuburyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
@@ -47,10 +46,7 @@ class AuburyDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = getQuestStage(player, Quests.RUNE_MYSTERIES)
         when (stage) {
             0 -> {

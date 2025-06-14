@@ -24,9 +24,8 @@ import org.rs.consts.Quests
  * - [Fishing Contest][content.region.kandarin.quest.fishingcompo.FishingContest]
  */
 @Initializable
-class BonzoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BonzoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val init = args.size < 2
         val questStage = getQuestStage(player, Quests.FISHING_CONTEST)
@@ -52,10 +51,7 @@ class BonzoDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options("I'll enter the competition please.", "No thanks, I'll just watch the fun.")

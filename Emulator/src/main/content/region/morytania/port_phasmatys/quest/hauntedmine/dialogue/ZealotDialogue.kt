@@ -7,9 +7,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class ZealotDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZealotDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello there.")

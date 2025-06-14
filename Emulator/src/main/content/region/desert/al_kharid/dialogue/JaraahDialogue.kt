@@ -14,19 +14,15 @@ import org.rs.consts.Animations
 import org.rs.consts.NPCs
 
 @Initializable
-class JaraahDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JaraahDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.FRIENDLY, "Hi!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.ANNOYED, "What? Can't you see I'm busy?!").also { stage++ }
             1 ->

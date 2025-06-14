@@ -11,9 +11,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MonkeyMinderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MonkeyMinderDialogue(player: Player? = null) : Dialogue(player) {
+
     private val talkbefore = "/save:monkeyminder:talk"
 
     override fun open(vararg args: Any?): Boolean {
@@ -29,10 +28,7 @@ class MonkeyMinderDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.NEUTRAL, "Hello, sir.").also { stage++ }
             1 -> player(FaceAnim.FRIENDLY, "I haven't seen Monkey Minders here before...").also { stage++ }

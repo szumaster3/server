@@ -26,9 +26,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class JulietDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JulietDialogue(player: Player? = null) : Dialogue(player) {
+    
     private var quest: Quest? = null
     private var cutscene: JulietCutscene? = null
 
@@ -123,10 +122,7 @@ class JulietDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.ROMEO_JULIET)
         val phil = if (cutscene != null) cutscene!!.phillipia else findNPC(3325)!!
         val dad = if (cutscene != null) cutscene!!.npcs[2] else findNPC(3324)!!

@@ -15,9 +15,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheSnakeCharmerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheSnakeCharmerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size > 0) {
             player("Wow a snake charmer. Can I have a go? Please?").also { stage = 5 }
@@ -27,10 +26,7 @@ class AliTheSnakeCharmerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 sendDialogue(

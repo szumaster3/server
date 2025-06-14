@@ -17,13 +17,9 @@ import core.tools.START_DIALOGUE
 import org.rs.consts.Items
 
 @Initializable
-class GardenerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class GardenerDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val patches = Farmers.forId(npc.id)!!.patches
         when (stage) {
             START_DIALOGUE -> {

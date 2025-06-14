@@ -8,18 +8,14 @@ import core.game.world.GameWorld.settings
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
-class HadleyDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HadleyDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         player(FaceAnim.HALF_GUILTY, "Hello there.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (player.inventory.contains(292, 1)) {

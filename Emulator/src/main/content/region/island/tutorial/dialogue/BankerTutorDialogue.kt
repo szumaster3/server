@@ -7,19 +7,15 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import org.rs.consts.NPCs
 
-class BankerTutorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BankerTutorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Good day, would you like to access your bank account?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

@@ -14,9 +14,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class TzHaarHurFrokDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TzHaarHurFrokDialogue(player: Player? = null) : Dialogue(player) {
+
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -24,10 +23,7 @@ class TzHaarHurFrokDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Can you treat these oak planks for me?", "No, not yet.").also { stage++ }
             1 -> when (buttonId) {

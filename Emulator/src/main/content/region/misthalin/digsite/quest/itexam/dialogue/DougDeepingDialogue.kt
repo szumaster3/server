@@ -12,19 +12,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class DougDeepingDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DougDeepingDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Hello.").also { stage = 1 }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.FRIENDLY, "Well, well... I have a visitor. What are you doing here?").also { stage++ }
             2 ->

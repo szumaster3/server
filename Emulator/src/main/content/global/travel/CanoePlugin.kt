@@ -287,7 +287,7 @@ class CanoePlugin :
     override fun defineListeners() {
         on(CanoeStationSceneries.stationIdArray, IntType.SCENERY, "chop-down") { player, node ->
             val canoeStation = CanoeStationLocations.getCanoeStationbyLocation(node.location)
-            val axe: SkillingTool? = SkillingTool.getHatchet(player)
+            val axe: SkillingTool? = SkillingTool.getAxe(player)
             val stationVarbit = node.asScenery().definition.configFile
             if (getStatLevel(player, Skills.WOODCUTTING) < 12) {
                 sendMessage(player, "You need a woodcutting level of at least 12 to chop down this tree.")
@@ -387,7 +387,7 @@ class CanoePlugin :
             closeInterface(player)
             val canoe = Canoes.indexMap[CANOE_SHAPING_BUTTONS.indexOf(buttonID)]!!
             val stationVarbit = getAttribute(player, CANOE_STATION_VARBIT_ATTRIBUTE, 1839)
-            val axe: SkillingTool? = SkillingTool.getHatchet(player)
+            val axe: SkillingTool? = SkillingTool.getAxe(player)
             if (axe == null) {
                 sendMessage(player, "You do not have an axe which you have the woodcutting level to use.")
                 return@on true

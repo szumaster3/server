@@ -13,19 +13,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class DurgokDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DurgokDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npcl(FaceAnim.OLD_NORMAL, "Frogburger! There's nothing like grilled frog in a bun. Do you want one? Only 10gp!")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thanks.").also { stage++ }
             1 ->

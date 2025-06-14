@@ -13,13 +13,9 @@ import org.rs.consts.NPCs
  * Represents the Wistan dialogue.
  */
 @Initializable
-class WistanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class WistanDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi!").also { stage++ }
             1 ->

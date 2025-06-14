@@ -11,19 +11,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class GrandExchangeClerkDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GrandExchangeClerkDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         player(FaceAnim.HALF_GUILTY, "Hi there.")
         stage = 1
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npc("Good day to you, sir, How can I help?").also { stage++ }
             2 ->

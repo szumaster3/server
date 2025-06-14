@@ -8,9 +8,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class ZahurDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZahurDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(
@@ -21,10 +20,7 @@ class ZahurDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes", "No").also { stage++ }
             1 ->

@@ -17,9 +17,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class ShantayDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShantayDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args[0] != null && args[0] is NPC) {
             npc = args[0] as NPC
@@ -38,10 +37,7 @@ class ShantayDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

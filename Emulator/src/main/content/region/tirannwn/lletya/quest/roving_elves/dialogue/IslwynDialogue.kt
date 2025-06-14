@@ -16,9 +16,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class IslwynDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class IslwynDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.ROVING_ELVES)
         val waterfall = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
@@ -41,10 +40,7 @@ class IslwynDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             500 -> end()
             1000 -> {

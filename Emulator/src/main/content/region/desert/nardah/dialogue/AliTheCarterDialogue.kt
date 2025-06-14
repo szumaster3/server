@@ -12,19 +12,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheCarterDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheCarterDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("Hello")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("Hello, friend! Welcome to Nardah.", "Do you happen to be in need of water?").also { stage++ }
             1 -> options("Yes I am!", "No thank you I'm good.").also { stage++ }

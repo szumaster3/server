@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CommanderVeldabanDDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CommanderVeldabanDDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(
         componentID: Int,
         buttonID: Int,

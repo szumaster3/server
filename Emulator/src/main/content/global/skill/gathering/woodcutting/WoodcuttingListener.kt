@@ -69,7 +69,7 @@ class WoodcuttingListener : InteractionListener {
         state: Int,
     ): Boolean {
         val resource = WoodcuttingNode.forId(node.id)
-        val tool = SkillingTool.getHatchet(player)
+        val tool = SkillingTool.getAxe(player)
 
         if (!finishedMoving(player)) {
             return restartScript(player)
@@ -208,7 +208,7 @@ class WoodcuttingListener : InteractionListener {
 
     private fun animateWoodcutting(player: Player) {
         if (!player.animator.isAnimating) {
-            animate(player, SkillingTool.getHatchet(player)!!.animation)
+            animate(player, SkillingTool.getAxe(player)!!.animation)
             val playersAroundMe: List<Player> =
                 RegionManager
                     .getLocalPlayers(player, 2)
@@ -239,7 +239,7 @@ class WoodcuttingListener : InteractionListener {
             )
             return false
         }
-        if (SkillingTool.getHatchet(player) == null) {
+        if (SkillingTool.getAxe(player) == null) {
             sendMessage(player,"You do not have an axe to use.")
             return false
         }

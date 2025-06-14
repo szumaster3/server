@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class AwusahTheMayorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AwusahTheMayorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         sendDialogue(player, "The mayor doesn't seem interested in talking to you right now.").also {

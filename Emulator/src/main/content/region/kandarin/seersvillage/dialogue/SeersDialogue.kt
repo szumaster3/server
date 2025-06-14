@@ -23,19 +23,15 @@ import org.rs.consts.Quests
  * - [Seers Achievement Diary][content.region.kandarin.handlers.seers.SeersVillageAchievementDiary]
  */
 @Initializable
-class SeersDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SeersDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         options("Talk about something else.", "Talk about achievement diary.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
 
             /*

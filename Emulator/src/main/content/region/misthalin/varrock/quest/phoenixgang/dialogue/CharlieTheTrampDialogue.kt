@@ -13,9 +13,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class CharlieTheTrampDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CharlieTheTrampDialogue(player: Player? = null) : Dialogue(player) {
+
     var q = "Shield of Arrav"
 
     override fun open(vararg args: Any?): Boolean {
@@ -24,10 +23,7 @@ class CharlieTheTrampDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

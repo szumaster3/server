@@ -7,9 +7,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class GillieGroatsDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GillieGroatsDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         var milk = false
         if (args.size == 2) milk = true
@@ -23,10 +22,7 @@ class GillieGroatsDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Who are you?", "Can you tell me how to milk a cow?", "I'm fine, thanks.").also { stage++ }
             1 ->

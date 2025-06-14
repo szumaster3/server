@@ -9,19 +9,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class WayneDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WayneDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.HAPPY, "Welcome to Wayne's Chains. Do you wanna buy or", "sell some chain mail?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please.", "No thanks.").also { stage++ }
             1 ->

@@ -19,9 +19,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (inBorders(player, MurderMysteryUtils.MANSION_ROAD_ZONE)) {

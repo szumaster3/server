@@ -8,19 +8,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class PhantuwtiFanstuwiFarsightDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PhantuwtiFanstuwiFarsightDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         options("Hello, what is this place?", "What do you do here?", "Do you have any quests?", "Ok, thanks.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> when (buttonId) {
                 1 -> {

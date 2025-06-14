@@ -17,9 +17,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SkulgrimenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -69,10 +68,7 @@ class SkulgrimenDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.THINKING, "Aye, I have a few in stock. What would an outerlander be wanting with equipment like that?").also { stage++ }
             2 -> playerl(FaceAnim.HAPPY, "It's for Sigli. It needs to be weighted precisely to suit his hunting bow.").also { stage++ }

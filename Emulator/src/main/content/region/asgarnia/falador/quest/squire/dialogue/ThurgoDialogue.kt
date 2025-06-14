@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ThurgoDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ThurgoDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         quest = player.getQuestRepository().getQuest(Quests.THE_KNIGHTS_SWORD)
@@ -33,10 +32,7 @@ class ThurgoDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (stage == 0 && buttonId == 1 || player.getAttribute("thurgo:1", false)) {
             when (stage) {
                 0 ->

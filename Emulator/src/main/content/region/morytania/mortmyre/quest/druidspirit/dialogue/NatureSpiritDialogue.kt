@@ -16,9 +16,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class NatureSpiritDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NatureSpiritDialogue(player: Player? = null) : Dialogue(player) {
+
     val questStage = player?.questRepository?.getStage(Quests.NATURE_SPIRIT) ?: 0
 
     override fun open(vararg args: Any?): Boolean {

@@ -18,19 +18,15 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GarvDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GarvDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         openDialogue(player, GarvDialogueFile(), npc)
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Can I go in there?", "I want for nothing!").also { stage++ }
             1 -> when (buttonId) {

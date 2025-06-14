@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class KatrineDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KatrineDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -64,10 +63,7 @@ class KatrineDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (quest!!.getStage(player) == 60 && stage >= 200) {
             when (stage) {
                 200 ->

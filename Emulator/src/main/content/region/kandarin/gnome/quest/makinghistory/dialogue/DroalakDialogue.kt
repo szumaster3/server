@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DroalakDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DroalakDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean =
         when {
             !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> {
@@ -92,10 +91,7 @@ class DroalakDialogue(
             else -> true
         }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogue(player, "You cannot understand the ghost").also { stage = END_DIALOGUE }
             1 ->

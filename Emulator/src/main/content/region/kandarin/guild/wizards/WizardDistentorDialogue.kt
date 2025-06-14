@@ -14,9 +14,8 @@ import org.rs.consts.Quests
  * Wizard Distentor dialogue.
  */
 @Initializable
-class WizardDistentorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WizardDistentorDialogue(player: Player? = null) : Dialogue(player) {
+    
     /*
      * Info: leader of the Wizards' Guild in Yanille.
      * Due to his proximity to a bank, he is considered to be one
@@ -29,10 +28,7 @@ class WizardDistentorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("Hello there.").also { stage++ }
             1 -> npc("What can I do for you?").also { stage++ }

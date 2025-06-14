@@ -12,13 +12,9 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GundikDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class GundikDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_NORMAL, "You want some Bat shish? Just 10gp.").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }

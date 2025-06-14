@@ -18,9 +18,8 @@ import org.rs.consts.Quests
 import kotlin.random.Random
 
 @Initializable
-class ChieftanBrundtDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.TRACKING_MAP_3701, 1) -> {
@@ -77,10 +76,7 @@ class ChieftanBrundtDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 options("What is this place?", "Why will no-one talk to me?", "Do you have any quests?", "Nice hat!")

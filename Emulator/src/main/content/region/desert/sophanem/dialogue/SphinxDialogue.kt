@@ -11,9 +11,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SphinxDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SphinxDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (player.familiarManager.hasPet() &&
@@ -27,10 +26,7 @@ class SphinxDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc("You have the feel of a cat person", "about you. Do you look after one?").also { stage++ }
             1 ->

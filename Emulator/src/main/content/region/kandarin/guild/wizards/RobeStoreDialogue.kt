@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
  * Robe store dialogue.
  */
 @Initializable
-class RobeStoreDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
+
     /*
      * Info: Sells mystic equipment in the Wizards' Guild through
      * the Mystic Robes store. He is located on the 1st floor of
@@ -33,10 +32,7 @@ class RobeStoreDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please.", "No thank you.").also { stage++ }
             1 ->

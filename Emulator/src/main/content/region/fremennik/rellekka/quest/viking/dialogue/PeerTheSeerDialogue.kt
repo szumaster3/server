@@ -18,9 +18,8 @@ import org.rs.consts.Quests
 import kotlin.random.Random
 
 @Initializable
-class PeerTheSeerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
+    
     val predictionOne = arrayOf("one", "two", "three", "four", "five", "six", "seven", "eight", "ten")
     val predictionTwo = arrayOf("black", "blue", "brown", "cyan", "green", "pink", "purple", "red", "yellow")
     val predictionThree = arrayOf("fire giant", "ghosts", "giant", "goblin", "green dragon", "hobgoblin", "lesser demon", "moss giant", "ogre", "zombie")
@@ -91,10 +90,7 @@ class PeerTheSeerDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.ANNOYED, "Er.... Yes, because I AM the Fremennik Seer.").also { stage++ }
             2 -> playerl(FaceAnim.ASKING, "Can I have a weather forecast then please?").also { stage++ }

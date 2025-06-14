@@ -10,9 +10,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SquireFyreDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SquireFyreDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player.questRepository.getQuest(Quests.ALL_FIRED_UP).getStage(player)
@@ -29,10 +28,7 @@ class SquireFyreDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             100 ->
                 npc(

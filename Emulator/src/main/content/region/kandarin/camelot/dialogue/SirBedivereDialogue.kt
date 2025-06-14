@@ -14,13 +14,9 @@ import org.rs.consts.Quests
  * Represents Sir Bedivere dialogue.
  */
 @Initializable
-class SirBedivereDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class SirBedivereDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 ->

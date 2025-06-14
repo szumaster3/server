@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class LeelaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LeelaDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
     private var itemCount = 0
 
@@ -61,10 +60,7 @@ class LeelaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             60, 100 -> end()
             50, 40 ->

@@ -10,9 +10,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class JatixDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JatixDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun newInstance(player: Player?): Dialogue = JatixDialogue(player)
 
     override fun open(vararg args: Any?): Boolean {
@@ -21,10 +20,7 @@ class JatixDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

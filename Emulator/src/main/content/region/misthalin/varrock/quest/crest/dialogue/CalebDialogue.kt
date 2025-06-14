@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CalebDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CalebDialogue(player: Player? = null) : Dialogue(player) {
+
     val CREST_PIECE: Item = Item(780)
 
     override fun open(vararg args: Any?): Boolean {
@@ -38,10 +37,7 @@ class CalebDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 options(

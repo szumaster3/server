@@ -15,13 +15,9 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
-class SirsalBankerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class SirsalBankerDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE ->
                 if (hasSealOfPassage(player)) {

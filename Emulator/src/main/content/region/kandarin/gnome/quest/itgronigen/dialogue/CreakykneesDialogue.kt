@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CreakykneesDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CreakykneesDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_ASKING, "Where did you get that lens?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NORMAL, "From that strange metal thing up on the hill.").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "You should give that back!").also { stage++ }

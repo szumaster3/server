@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class NathifaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class NathifaDialogue(player: Player? = null) : Dialogue(player) {
+
 
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HAPPY, "Hello! You must be the adventurer that helped us get out of Menaphos. Thank you.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.HAPPY, "Don't mention it.").also { stage++ }
             1 -> options(

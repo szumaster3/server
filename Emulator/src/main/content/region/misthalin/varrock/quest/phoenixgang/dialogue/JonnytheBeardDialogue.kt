@@ -9,9 +9,8 @@ import core.game.node.entity.player.Player
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
-class JonnytheBeardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JonnytheBeardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (ShieldofArrav.isPhoenixMission(player)) {
@@ -24,10 +23,7 @@ class JonnytheBeardDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "No, I don't think I will.").also { stage = END_DIALOGUE }
         }

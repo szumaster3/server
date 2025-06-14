@@ -9,9 +9,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class GardenSupplierDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GardenSupplierDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc("Hello, I sell many plants. Would you like", "to see what I have?")
         return true

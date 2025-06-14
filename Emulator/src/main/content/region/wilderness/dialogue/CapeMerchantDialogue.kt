@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class CapeMerchantDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CapeMerchantDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Hello there, are you interested in buying one of my", "special capes?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("What's so special about your capes?", "Yes please!", "No thanks.").also { stage++ }
             1 -> when (buttonId) {

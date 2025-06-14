@@ -122,7 +122,7 @@ object BrimhavenUtils {
             sendMessage(player, "You need a woodcutting level of $level to chop down this vine.")
             return
         }
-        val tool = SkillingTool.getHatchet(player)
+        val tool = SkillingTool.getAxe(player)
         if (tool == null) {
             sendMessage(player, "You don't have an axe to cut these vines.")
             return

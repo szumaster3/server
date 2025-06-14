@@ -10,9 +10,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class RangedTutorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RangedTutorDialogue(player: Player? = null) : Dialogue(player) {
+
     private val BOW = Item(9705)
     private val ARROW = Item(9706)
 
@@ -81,10 +80,7 @@ class RangedTutorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             230 -> {
                 val arrows = Item(ARROW.id, 25)

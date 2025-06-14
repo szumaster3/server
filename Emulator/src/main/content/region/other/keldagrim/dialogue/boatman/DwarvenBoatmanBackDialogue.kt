@@ -14,13 +14,9 @@ import org.rs.consts.Components
 import org.rs.consts.NPCs
 
 @Initializable
-class DwarvenBoatmanBackDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DwarvenBoatmanBackDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.OLD_HAPPY, "Want me to take you back to the mines?").also { stage++ }
             1 ->

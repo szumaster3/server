@@ -13,19 +13,15 @@ import org.rs.consts.NPCs
  * Represents the Shanomi dialogue.
  */
 @Initializable
-class ShanomiDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ShanomiDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Greetings " + player.username + ". Welcome you are in the test of", "combat.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 options(

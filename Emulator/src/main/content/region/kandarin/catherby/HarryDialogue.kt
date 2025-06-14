@@ -10,9 +10,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class HarryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class HarryDialogue(player: Player? = null) : Dialogue(player) {
+
     private fun needsFish(): Boolean = player.inventory.containsAtLeastOneItem(FISHBOWL_SEAWEED)
 
     private fun needsSeaWeed(): Boolean = player.inventory.containsAtLeastOneItem(FISHBOWL_WATER)
@@ -39,10 +38,7 @@ class HarryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             999 -> end()
             0 -> {

@@ -15,13 +15,9 @@ import org.rs.consts.Quests
  * Represents the Hild dialogue.
  */
 @Initializable
-class HildDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HildDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val random = RandomFunction.random(1, 3)
         if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when (stage) {

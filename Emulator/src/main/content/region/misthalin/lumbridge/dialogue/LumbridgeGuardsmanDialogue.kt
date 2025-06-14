@@ -10,9 +10,8 @@ import core.tools.RandomUtils
 import org.rs.consts.NPCs
 
 @Initializable
-class LumbridgeGuardsmanDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class LumbridgeGuardsmanDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc == null) return false
@@ -21,10 +20,7 @@ class LumbridgeGuardsmanDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 val randomResponse =

@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class BanditDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BanditDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc(FaceAnim.ANNOYED, "Go away.").also { stage = END_DIALOGUE }
         return true

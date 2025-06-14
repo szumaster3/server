@@ -11,19 +11,15 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class ZandarHorfyreDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ZandarHorfyreDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player(FaceAnim.HALF_THINKING, "Who are you?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

@@ -7,13 +7,9 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class TradeRefereeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class TradeRefereeDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when ((0..4).random()) {
             0 -> npc("Talk to the secretaries, not to me!").also { stage = END_DIALOGUE }
             1 -> npc("Clear out!").also { stage = END_DIALOGUE }

@@ -14,13 +14,9 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class StudentGreenDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class StudentGreenDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, StudentGreenDialogueFile(), npc)
         return true
     }
@@ -148,13 +144,9 @@ class StudentGreenDialogueFile : DialogueBuilderFile() {
 }
 
 @Initializable
-class StudentPurpleDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class StudentPurpleDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, StudentPurpleDialogueFile(), npc)
         return true
     }
@@ -342,13 +334,9 @@ class StudentPurpleDialogueFile : DialogueBuilderFile() {
 }
 
 @Initializable
-class StudentBrownDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class StudentBrownDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         openDialogue(player, StudentBrownDialogueFile(), npc)
         return true
     }

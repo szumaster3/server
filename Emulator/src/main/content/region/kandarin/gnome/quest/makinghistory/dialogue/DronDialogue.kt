@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DronDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DronDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val dronProgress = getVarbit(player, MakingHistoryUtils.DRON_PROGRESS)
@@ -37,10 +36,7 @@ class DronDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> npcl(FaceAnim.HALF_ASKING, "Why should I?").also { stage++ }
             2 ->

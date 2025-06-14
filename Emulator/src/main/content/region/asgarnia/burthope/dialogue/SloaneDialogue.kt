@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
  * Represents the Sloane dialogue.
  */
 @Initializable
-class SloaneDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SloaneDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isMaster(player, Skills.STRENGTH)) {
@@ -28,10 +27,7 @@ class SloaneDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

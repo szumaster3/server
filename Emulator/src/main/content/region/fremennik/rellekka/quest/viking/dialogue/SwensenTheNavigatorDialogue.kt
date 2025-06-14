@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class SwensenTheNavigatorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SwensenTheNavigatorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.WEATHER_FORECAST_3705, 1) -> {
@@ -73,10 +72,7 @@ class SwensenTheNavigatorDialogue(
     }
 
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 player(

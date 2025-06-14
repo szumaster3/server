@@ -8,18 +8,14 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class MuseumGuardDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MuseumGuardDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc(FaceAnim.HALF_GUILTY, "Hello there. Come to see the new museum?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 player(FaceAnim.HALF_GUILTY, "Yes, how do I get in?")

@@ -10,18 +10,14 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class AliTheDyerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AliTheDyerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         playerl(FaceAnim.AMAZED, "Wow! look at this place, it's so colourful.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npcl(FaceAnim.HALF_GUILTY, "Why thank you. Can I help you with anything?").also { stage++ }
             1 ->

@@ -16,9 +16,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class MagicInstructorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
@@ -63,10 +62,7 @@ class MagicInstructorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             67 -> when (stage++) {
                 0 -> npc(

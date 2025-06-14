@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class ElunedDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ElunedDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (getQuestStage(player, Quests.ROVING_ELVES) == 10) {
             player(
@@ -32,10 +31,7 @@ class ElunedDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             500 -> end()
             1000 -> {

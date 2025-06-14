@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class BlasidarTheSculptorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BlasidarTheSculptorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "The new statue looks beautiful, don't you agree?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.NEUTRAL, "Oh yes, quite.").also { stage++ }
             1 -> npc(FaceAnim.OLD_NORMAL, "My finest piece of work, without a doubt.").also { stage++ }

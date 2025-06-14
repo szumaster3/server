@@ -15,9 +15,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class StankersDiaryDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class StankersDiaryDialogue(player: Player? = null) : Dialogue(player) {
+
     var diaryLevel = 1
 
     override fun open(vararg args: Any?): Boolean {
@@ -26,10 +25,7 @@ class StankersDiaryDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Are these your trucks?", "Hello Stankers.", "Talk about Achievement Diary.").also { stage++ }
             1 -> when (buttonId) {

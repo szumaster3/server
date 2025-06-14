@@ -18,9 +18,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class JorralDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class JorralDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val progress = getVarbit(player, MakingHistoryUtils.PROGRESS)

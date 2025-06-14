@@ -21,9 +21,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class DrHarlowDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DrHarlowDialogue(player: Player? = null) : Dialogue(player) {
+
     val ITEMS = arrayOf(Item(Items.STAKE_1549), Item(Items.BEER_1917, 1))
 
     override fun open(vararg args: Any?): Boolean {
@@ -32,10 +31,7 @@ class DrHarlowDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (getQuestStage(player, Quests.VAMPIRE_SLAYER) == 10) {

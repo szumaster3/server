@@ -12,9 +12,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class FinanceAdvisorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
@@ -24,10 +23,7 @@ class FinanceAdvisorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             58 ->
                 when (stage++) {

@@ -11,9 +11,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class GnomeCoachDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GnomeCoachDialogue(player: Player? = null) : Dialogue(player) {
+
     val clue = Items.CLUE_SCROLL_7282
 
     override fun open(vararg args: Any?): Boolean {
@@ -23,10 +22,7 @@ class GnomeCoachDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.HALF_GUILTY, "Excuse me?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_NORMAL, "Oh, sorry, I didn't notice you there.").also { stage++ }

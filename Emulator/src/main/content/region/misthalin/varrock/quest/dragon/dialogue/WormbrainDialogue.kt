@@ -11,9 +11,8 @@ import core.game.node.item.Item
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class WormbrainDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WormbrainDialogue(player: Player? = null) : Dialogue(player) {
+
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -29,10 +28,7 @@ class WormbrainDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
             20 -> {
                 when (stage) {

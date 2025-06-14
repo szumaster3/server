@@ -12,9 +12,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class BarlakDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BarlakDialogue(player: Player? = null) : Dialogue(player) {
+    
     private var curItem = 0
 
     val sets =
@@ -72,10 +71,7 @@ class BarlakDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npcl(

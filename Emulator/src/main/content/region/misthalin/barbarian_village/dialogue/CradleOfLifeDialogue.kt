@@ -13,9 +13,8 @@ import org.rs.consts.Items
 /**
  * Represents the Cradle of life dialogue.
  */
-class CradleOfLifeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class CradleOfLifeDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (player.getSavedData().globalData.getStrongHoldRewards()[3] &&
             player.getSavedData().globalData.getStrongHoldRewards()[2] &&
@@ -52,10 +51,7 @@ class CradleOfLifeDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 sendDialogue(player, "....welcome adventurer... you have a choice....")

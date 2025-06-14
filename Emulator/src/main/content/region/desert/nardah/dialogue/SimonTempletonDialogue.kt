@@ -10,9 +10,8 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class SimonTempletonDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SimonTempletonDialogue(player: Player? = null) : Dialogue(player) {
+
     val ARTIFACTS =
         arrayOf(
             arrayOf(Item(Items.POTTERY_SCARAB_9032), Item(Items.POTTERY_STATUETTE_9036), Item(Items.IVORY_COMB_9026)),
@@ -38,10 +37,7 @@ class SimonTempletonDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         var hasArtefacts = false
         var hasPyramidTopper = false
         val goldReward = (1000 + getStatLevel(player, 16) / 99.0 * 9000).toInt()

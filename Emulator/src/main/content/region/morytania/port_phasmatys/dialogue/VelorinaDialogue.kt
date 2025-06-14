@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class VelorinaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
 
@@ -49,10 +48,7 @@ class VelorinaDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasEctophial = hasAnItem(player, Items.ECTOPHIAL_4251, Items.ECTOPHIAL_4252).container != null
         when (stage) {
             0 ->

@@ -11,19 +11,15 @@ import org.rs.consts.NPCs
  * Represents the Kamfreena dialogue.
  */
 @Initializable
-class KamfreenaDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KamfreenaDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Why hello there! I'm Kamfreena. Like the look of my pets?", "I think they're eyeing you up.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player("That was a really bad pun.").also { stage++ }
             1 ->

@@ -12,9 +12,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class OmartDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OmartDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (isQuestInProgress(player, Quests.BIOHAZARD, 2, 100)) {

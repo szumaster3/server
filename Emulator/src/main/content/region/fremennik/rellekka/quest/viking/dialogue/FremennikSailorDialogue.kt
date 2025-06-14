@@ -15,9 +15,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class FremennikSailorDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         when {
             !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
@@ -66,10 +65,7 @@ class FremennikSailorDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 ->
                 npcl(

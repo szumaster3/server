@@ -11,9 +11,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class GemTraderDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GemTraderDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
@@ -27,10 +26,7 @@ class GemTraderDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> options(
                 "Yes, please.",

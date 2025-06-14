@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class BlackJackSellerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class BlackJackSellerDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HALF_GUILTY, "Hello. Could I interest you in a blackjack?")
         return true

@@ -18,13 +18,9 @@ import org.rs.consts.Quests
  * Represents the Harold dialogue.
  */
 @Initializable
-class HaroldDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HaroldDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (isQuestInProgress(player!!, Quests.DEATH_PLATEAU, 10, 29)) {
             openDialogue(player!!, HaroldDialogue(), npc)
             return true

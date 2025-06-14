@@ -8,13 +8,9 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs.consts.NPCs
 
-class OgressBankerDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class OgressBankerDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             START_DIALOGUE -> npcl(FaceAnim.CHILD_NORMAL, "...").also { stage++ }
             1 -> playerl(FaceAnim.NEUTRAL, "Excuse me, can I get some service here, please?").also { stage++ }

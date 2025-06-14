@@ -7,9 +7,8 @@ import core.plugin.Initializable
 import org.rs.consts.NPCs
 
 @Initializable
-class EdWoodDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class EdWoodDialogue(player: Player? = null) : Dialogue(player) {
+    
     val forceChat =
         arrayOf(
             "Can't stop. Too busy.",
@@ -20,10 +19,7 @@ class EdWoodDialogue(
             "Ouch! That was my finger!",
         )
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         sendChat(npc, forceChat.random())
         return true
     }

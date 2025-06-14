@@ -15,19 +15,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class TzHaarMejJehDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class TzHaarMejJehDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.CHILD_GUILTY, "You want help JalYt-Ket-" + player.username + "?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (settings!!.jad_practice_enabled) {

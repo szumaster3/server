@@ -10,19 +10,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class OsvaldDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class OsvaldDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.FRIENDLY, "Welcome to the Miscellania food store.", "We've only opened recently.")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "Would you like to buy anything,", "your Royal Highness?").also { stage++ }
             1 ->

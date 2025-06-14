@@ -8,9 +8,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class WizardGrayzagDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class WizardGrayzagDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc("Not now, I'm trying to concentrate on a", "very difficult spell!").also { stage = END_DIALOGUE }

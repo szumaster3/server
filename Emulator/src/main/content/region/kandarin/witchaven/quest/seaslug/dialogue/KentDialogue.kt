@@ -24,9 +24,8 @@ import org.rs.consts.Sounds
  * - [Sea Slug quest][content.region.kandarin.witchaven.quest.seaslug.SeaSlug]
  */
 @Initializable
-class KentDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KentDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when {
@@ -39,10 +38,7 @@ class KentDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "Your wife sent me out to find you and your boy.", "Kennith's fine by the way, he's on the platform.").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "I knew the row boat wasn't sea worthy. I couldn't risk", "bringing him along but you must get him off that", "platform.").also { stage++ }

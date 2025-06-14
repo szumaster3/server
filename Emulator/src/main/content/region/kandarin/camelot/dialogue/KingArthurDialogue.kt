@@ -21,15 +21,11 @@ import org.rs.consts.Quests
  * Represents King Arthur dialogue.
  */
 @Initializable
-class KingArthurDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
+
     val STAGE_MERLIN_FINISH = 20
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 -> {

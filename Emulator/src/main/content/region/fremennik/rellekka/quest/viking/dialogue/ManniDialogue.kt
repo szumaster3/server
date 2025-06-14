@@ -22,9 +22,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class ManniDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ManniDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
 
@@ -89,10 +88,7 @@ class ManniDialogue(
         }
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 npc(

@@ -10,18 +10,14 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class AdvisorGhrimDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class AdvisorGhrimDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npcl(FaceAnim.HALF_GUILTY, "Greetings, ${if (player.isMale) "Sir" else "Madam"}").also { stage = 0 }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("How do I make peace with Etceteria?", "About the Achievement Diary...").also { stage++ }
             1 ->

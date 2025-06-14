@@ -14,9 +14,8 @@ import org.rs.consts.NPCs
  * Represents the Ghommal dialogue.
  */
 @Initializable
-class GhommalDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class GhommalDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getStatLevel(player, Skills.ATTACK) + getStatLevel(player, Skills.STRENGTH) >= 130 ||
@@ -30,10 +29,7 @@ class GhommalDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "What? But I'm a warrior!").also { stage++ }
             1 ->

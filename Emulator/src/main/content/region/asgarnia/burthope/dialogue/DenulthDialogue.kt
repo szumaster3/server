@@ -19,13 +19,9 @@ import org.rs.consts.Quests
  * Represents the Denulth dialogue.
  */
 @Initializable
-class DenulthDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class DenulthDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         /*
          * When Troll Stronghold is complete.
          */

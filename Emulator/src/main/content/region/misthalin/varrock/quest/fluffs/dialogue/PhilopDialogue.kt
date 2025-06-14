@@ -9,19 +9,15 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class PhilopDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PhilopDialogue(player: Player? = null) : Dialogue(player) {
+    
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.HALF_GUILTY, "Hello, what's your name?")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.CHILD_NORMAL, "Gwwrr!").also { stage++ }
             1 -> playerl(FaceAnim.HALF_GUILTY, "Err, hello there. What's that you have there?").also { stage++ }

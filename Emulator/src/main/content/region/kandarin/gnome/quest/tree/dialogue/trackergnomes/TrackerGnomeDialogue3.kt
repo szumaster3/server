@@ -13,9 +13,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class TrackerGnomeDialogue3(
-    player: Player? = null,
-) : Dialogue(player) {
+class TrackerGnomeDialogue3(player: Player? = null) : Dialogue(player) {
+
     private val xcoordMap =
         mapOf(
             1 to "Less than my hands.",
