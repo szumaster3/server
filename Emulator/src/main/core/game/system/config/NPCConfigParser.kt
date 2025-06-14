@@ -93,11 +93,9 @@ class NPCConfigParser {
                                     .toIntArray()
 
                         "force_talk" -> {
-                            @Suppress("UNCHECKED_CAST")
-                            val list = it.value as? List<String> ?: emptyList()
-                            configs[it.key.toString()] = list.toTypedArray()
+                            val list = it.value as? List<*> ?: emptyList<Any>()
+                            configs[it.key.toString()] = list.filterIsInstance<String>().toTypedArray()
                         }
-
                         "spawn_animation",
                         "id",
                         "lifepoints",
