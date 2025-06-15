@@ -2,6 +2,7 @@ package core.game.node.entity.player;
 
 import content.global.plugin.item.equipment.EquipmentDegrade;
 import content.global.skill.construction.HouseManager;
+import content.global.plugin.item.boltpouch.BoltPouchManager;
 import content.global.skill.runecrafting.PouchManager;
 import content.global.skill.summoning.familiar.FamiliarManager;
 import content.global.skill.summoning.item.EnchantedHeadgearManager;
@@ -143,6 +144,11 @@ public class Player extends Entity {
      * Manages enchanted gear for storing scrolls.
      */
     public EnchantedHeadgearManager enchgearManager = new EnchantedHeadgearManager(this);
+
+    /**
+     * Manages bolt pouch for storing bolts.
+     */
+    public BoltPouchManager boltPouchManager = new BoltPouchManager(this);
 
     /**
      * Manages variable persistence for the player.

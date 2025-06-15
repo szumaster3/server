@@ -106,6 +106,11 @@ class PlayerSaver(
         player.enchgearManager.save(root)
     }
 
+    fun saveBoltPouch(root: JSONObject) {
+        player.boltPouchManager.save(root)
+    }
+
+
     fun saveVersion(root: JSONObject) {
         root["version"] = player.version
     }

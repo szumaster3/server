@@ -9,7 +9,7 @@ import org.rs.consts.Items
 
 class BoltPouchListener : InteractionListener {
 
-    val bolts = intArrayOf(
+    private val ALLOWED_BOLT_IDS = intArrayOf(
         Items.ADAMANT_BOLTSP_PLUS_9297,
         Items.ADAMANT_BOLTSP_PLUS_PLUS_9304,
         Items.ADAMANT_BOLTS_9143,
@@ -70,30 +70,22 @@ class BoltPouchListener : InteractionListener {
     )
 
     override fun defineListeners() {
-
-        /*
-         * Handles opening bolt pouch interface.
-         */
-
         on(Items.BOLT_POUCH_9433, IntType.ITEM, "open") { player, _ ->
             openInterface(player, Components.XBOWS_POUCH_433)
             return@on true
         }
 
-        /*
-         * Handles adding bolts to the pouch.
-         */
-
-        onUseWith(IntType.ITEM, bolts, Items.BOLT_POUCH_9433) { player, item, otherItem ->
+        onUseWith(IntType.ITEM, ALLOWED_BOLT_IDS, Items.BOLT_POUCH_9433) { player, item, otherItem ->
             val pouchItem = if (item.id == Items.BOLT_POUCH_9433) item else otherItem
             val boltItem = if (pouchItem == item) otherItem else item
 
-            val success = BoltPouch.storeBolt(player, boltItem.asItem())
-
-            if (!success) {
-                sendMessage(player, "You don't have space to store that type of bolt.")
+            val addedAmount = player.boltPouchManager.addBolts(pouchItem.id, boltItem.id, boltItem.asItem().amount)
+            if (addedAmount <= 0) {
+                sendMessage(player, "You can't add that type of bolt or your pouch is full.")
+            } else {
+                sendMessage(player, "Added $addedAmount bolts to the pouch.")
+                player.inventory.remove(boltItem.asItem())
             }
-
             return@onUseWith true
         }
     }

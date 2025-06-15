@@ -79,6 +79,7 @@ class PlayerSaveParser(
         parseAchievements()
         parsePouches()
         parseHeadgear()
+        parseBoltPouch()
         parseVersion()
     }
 
@@ -97,6 +98,10 @@ class PlayerSaveParser(
 
     fun parseHeadgear() {
         if (saveFile!!.containsKey("headgear")) player.pouchManager.parse(saveFile!!["headgear"] as JSONArray)
+    }
+
+    fun parseBoltPouch() {
+        if (saveFile!!.containsKey("boltpouch")) player.pouchManager.parse(saveFile!!["boltpouch"] as JSONArray)
     }
 
     fun parseAttributes() {
