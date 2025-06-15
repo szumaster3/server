@@ -2,7 +2,7 @@ package content.global.skill.summoning.familiar;
 
 import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.SummoningScroll;
-import content.global.skill.summoning.item.EnchantedGearManager;
+import content.global.skill.summoning.item.EnchantedHeadgearManager;
 import content.global.skill.summoning.pet.Pet;
 import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.MovementPulse;
@@ -364,12 +364,12 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 
         int scrollId = scroll.getItemId();
 
-        EnchantedGearManager enchantedGearManager = new EnchantedGearManager(owner);
-        Integer chargedItemId = enchantedGearManager.getFromEquipment();
+        EnchantedHeadgearManager enchantedHeadgearManager = new EnchantedHeadgearManager(owner);
+        Integer chargedItemId = enchantedHeadgearManager.getFromEquipment();
 
         boolean hasInInventory = owner.getInventory().contains(scrollId, 1);
         boolean hasInHeadgear = chargedItemId != null &&
-                enchantedGearManager.getCurrentScrollCount(chargedItemId, scrollId) > 0;
+                enchantedHeadgearManager.getCurrentScrollCount(chargedItemId, scrollId) > 0;
 
         if (!hasInInventory && !hasInHeadgear) {
             owner.getPacketDispatch().sendMessage("You do not have enough scrolls left to do this special move.");
@@ -384,7 +384,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             if (hasInInventory) {
                 owner.getInventory().remove(new Item(scrollId));
             } else if (chargedItemId != null) {
-                enchantedGearManager.removeScroll(chargedItemId, scrollId);
+                enchantedHeadgearManager.removeScroll(chargedItemId, scrollId);
             }
             playAudio(owner, Sounds.SPELL_4161);
             visualizeSpecialMove();

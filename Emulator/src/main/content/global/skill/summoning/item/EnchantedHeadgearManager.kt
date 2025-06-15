@@ -7,7 +7,7 @@ import core.game.node.item.Item
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 
-class EnchantedGearManager(val player: Player) {
+class EnchantedHeadgearManager(val player: Player) {
 
     val enchantedGear: MutableMap<Int, ChargedHeadgear> = mutableMapOf()
 
@@ -19,7 +19,7 @@ class EnchantedGearManager(val player: Player) {
 
         val freeSlots = chargedGear.container.freeSlots()
         if (freeSlots <= 0) {
-            sendMessage(player, "Your enchanted gear is full of scrolls.")
+            sendMessage(player, "You already have charged headgear.")
             return
         }
 
@@ -28,15 +28,11 @@ class EnchantedGearManager(val player: Player) {
     }
 
     fun withdrawScrolls(chargedItemId: Int, itemId: Int, amount: Int) {
-        val chargedGear = enchantedGear[chargedItemId] ?: run {
-            sendMessage(player, "This item cannot be uncharged.")
-            return
-        }
+        val chargedGear = enchantedGear[chargedItemId] ?: return
+
 
         val containedAmount = chargedGear.container.getAmount(itemId)
-        if (containedAmount < amount) {
-            return
-        }
+        if (containedAmount < amount) return
 
         chargedGear.container.remove(Item(itemId, amount))
         chargedGear.container.shift()
@@ -44,31 +40,16 @@ class EnchantedGearManager(val player: Player) {
     }
 
     fun withdrawAllScrolls(chargedItemId: Int) {
-        val chargedGear = enchantedGear[chargedItemId] ?: run {
-            return
-        }
-
+        val chargedGear = enchantedGear[chargedItemId] ?: return
         val scrolls = chargedGear.container.toArray().filterNotNull()
-        if (scrolls.isEmpty()) {
-            sendMessage(player, "Your headgear has no scrolls to remove.")
-            return
-        }
-
-        if (freeSlots(player) == 0) {
-            sendMessage(player, "You need at least ${scrolls.size} free inventory slots to remove the scrolls.")
-            return
-        }
 
         scrolls.forEach { item ->
             chargedGear.container.remove(item)
             addItem(player, item.id, item.amount)
         }
+
         chargedGear.container.shift()
-        sendMessages(
-            player,
-            "You remove the scrolls. You will need to use a Summoning scroll on it to charge the",
-            "headgear up once more.",
-        )
+        sendMessages(player, "You remove the scrolls. You will need to use a Summoning scroll on it to charge the", "headgear up once more.")
     }
 
     fun hasScrolls(chargedItemId: Int): Boolean {
