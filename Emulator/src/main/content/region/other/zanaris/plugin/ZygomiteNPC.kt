@@ -13,9 +13,9 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import Animations
-import Items
-import NPCs
+import org.rs.consts.Animations
+import org.rs.consts.Items
+import org.rs.consts.NPCs
 import kotlin.math.max
 
 class ZygomiteNPC :
