@@ -70,14 +70,14 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
             31 -> npcl(FaceAnim.FRIENDLY,"We are helping King Vallance rule the kingdom as he is getting old and tired.")
 
             // Distraction.
-            39 -> playerl(FaceAnim.HALF_ASKING, "while I distract you, so that my friend over there can do something while you're busy being distracted by me?").also { stage++ }
-            40 -> npcl(FaceAnim.ASKING,"... ...what?").also { stage++ }
-            41 -> npcl(FaceAnim.HALF_THINKING,"I'm... not sure what you're asking me... you want to join the White Knights?").also { stage++ }
-            42 -> playerl(FaceAnim.FRIENDLY, "Nope. I'm just trying to distract you.").also { stage++ }
-            43 -> npc(FaceAnim.THINKING, "... ...you are very odd.").also { stage++ }
-            44 -> player(FaceAnim.HALF_ASKING,"So can I distract you some more?").also { stage++ }
-            45 -> npcl(FaceAnim.NEUTRAL,"... ...I don't think I want to talk to you anymore.").also { stage++ }
-            46 -> player(FaceAnim.HALF_GUILTY, "Ok. My work here is done. 'Bye!").also { stage = END_DIALOGUE }
+            40 -> playerl(FaceAnim.HALF_ASKING, "while I distract you, so that my friend over there can do something while you're busy being distracted by me?").also { stage++ }
+            41 -> npcl(FaceAnim.ASKING,"... ...what?").also { stage++ }
+            42 -> npcl(FaceAnim.HALF_THINKING,"I'm... not sure what you're asking me... you want to join the White Knights?").also { stage++ }
+            43 -> playerl(FaceAnim.FRIENDLY, "Nope. I'm just trying to distract you.").also { stage++ }
+            44 -> npc(FaceAnim.THINKING, "... ...you are very odd.").also { stage++ }
+            45 -> player(FaceAnim.HALF_ASKING,"So can I distract you some more?").also { stage++ }
+            46 -> npcl(FaceAnim.NEUTRAL,"... ...I don't think I want to talk to you anymore.").also { stage++ }
+            47 -> player(FaceAnim.HALF_GUILTY, "Ok. My work here is done. 'Bye!").also { stage = END_DIALOGUE }
         }
         return true
     }
