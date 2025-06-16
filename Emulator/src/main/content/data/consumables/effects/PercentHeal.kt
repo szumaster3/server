@@ -21,14 +21,7 @@ class PercentHeal(
         val maxHp = player.getSkills().maximumLifepoints
         val curHp = player.getSkills().lifepoints
         var amount = floor(maxHp * percent).toInt()
-        amount =
-            (
-                base +
-                    min(
-                        amount.toDouble(),
-                        ((1.0 + percent) * maxHp.toDouble() - curHp.toDouble()).toInt().toDouble(),
-                    )
-            ).toInt()
+        amount = (base + min(amount.toDouble(), ((1.0 + percent) * maxHp.toDouble() - curHp.toDouble()).toInt().toDouble())).toInt()
         player.getSkills().healNoRestrictions(amount)
     }
 }
