@@ -1,7 +1,7 @@
 package content.region.island.jatizso.dialogue
 
-import content.region.island.waterbirth_island.plugin.TravelDestination
-import content.region.island.waterbirth_island.plugin.WaterbirthUtils
+import content.region.island.waterbirth.plugin.TravelDestination
+import content.region.island.waterbirth.plugin.WaterbirthUtils
 import core.api.quest.requireQuest
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

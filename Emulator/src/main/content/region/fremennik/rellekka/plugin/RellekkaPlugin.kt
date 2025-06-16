@@ -2,8 +2,8 @@ package content.region.fremennik.rellekka.plugin
 
 import content.global.skill.agility.AgilityHandler
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
-import content.region.island.waterbirth_island.plugin.TravelDestination
-import content.region.island.waterbirth_island.plugin.WaterbirthUtils
+import content.region.island.waterbirth.plugin.TravelDestination
+import content.region.island.waterbirth.plugin.WaterbirthUtils
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.isQuestComplete
@@ -19,7 +19,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
-import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import org.rs.consts.Scenery

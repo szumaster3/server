@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.dialogue
 
-import content.region.wilderness.rogues_castle.dialogue.RogueCastleDialogue
+import content.region.wilderness.roguescastle.dialogue.RogueCastleDialogue
 import core.api.inBorders
 import core.api.openDialogue
 import core.api.quest.hasRequirement

@@ -1,7 +1,7 @@
 package content.minigame.sorceressgarden.dialogue
 
 import content.data.GameAttributes
-import content.region.misthalin.draynor_village.quest.swept.plugin.SweptUtils
+import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils
 import core.api.*
 import core.api.quest.hasRequirement
 import core.api.quest.isQuestComplete

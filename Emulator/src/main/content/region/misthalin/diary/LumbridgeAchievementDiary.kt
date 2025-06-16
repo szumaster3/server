@@ -4,11 +4,11 @@ import content.data.GameAttributes
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spells.ModernSpells
 import content.region.kandarin.ardougne.east.dialogue.market.TownCrierDialogue
-import content.region.misthalin.draynor_village.dialogue.WiseOldManDialogue
+import content.region.misthalin.draynor.dialogue.WiseOldManDialogue
 import content.region.misthalin.lumbridge.dialogue.DoomsayerDialogue
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import content.region.misthalin.lumbridge.dialogue.LumbridgeGuideDialogue
-import content.region.misthalin.draynor_village.plugin.TelescopeCutscene.EndDialogue
+import content.region.misthalin.draynor.plugin.TelescopeCutscene.EndDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.DukeDragonSlayerDialogue
 import content.region.misthalin.lumbridge.quest.restless.dialogue.FatherUhrneyDialogue
 import core.api.*

@@ -1,7 +1,7 @@
 package content.region.island.miscellania.dialogue
 
-import content.region.island.waterbirth_island.plugin.TravelDestination
-import content.region.island.waterbirth_island.plugin.WaterbirthUtils.sail
+import content.region.island.waterbirth.plugin.TravelDestination
+import content.region.island.waterbirth.plugin.WaterbirthUtils.sail
 import core.api.inBorders
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

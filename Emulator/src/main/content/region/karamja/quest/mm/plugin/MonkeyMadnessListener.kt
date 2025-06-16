@@ -1,8 +1,8 @@
 package content.region.karamja.quest.mm.plugin
 
-import content.region.island.ape_atoll.dialogue.ZooknockAfterBattleDialogueFile
-import content.region.island.ape_atoll.dialogue.ZooknockDialogue
-import content.region.island.ape_atoll.dialogue.ZooknockDialogueFile
+import content.region.island.apeatoll.dialogue.ZooknockAfterBattleDialogueFile
+import content.region.island.apeatoll.dialogue.ZooknockDialogue
+import content.region.island.apeatoll.dialogue.ZooknockDialogueFile
 import content.region.karamja.quest.mm.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage

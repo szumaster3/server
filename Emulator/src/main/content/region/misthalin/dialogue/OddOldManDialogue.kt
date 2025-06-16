@@ -1,6 +1,6 @@
 package content.region.misthalin.dialogue
 
-import content.region.misthalin.paterdomus.quest.rag.dialogue.OddOldManDialogueFile
+import content.region.misthalin.silvarea.quest.rag.dialogue.OddOldManDialogueFile
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
