@@ -7,6 +7,7 @@ import core.api.quest.getQuestStage
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler.climb
 import core.game.global.action.ClimbActionHandler.climbLadder
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
@@ -17,12 +18,9 @@ import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Quests
 
-class BlackKnightsFortressListener : InteractionListener {
+class BKFortressPlugin : InteractionListener {
     companion object {
-        private fun determineDestination(
-            scenery: Scenery?,
-            id: Int,
-        ): Location? =
+        private fun determineDestination(scenery: Scenery?, id: Int, ): Location? =
             when (id) {
                 17160 ->
                     when (scenery?.location) {
@@ -53,6 +51,45 @@ class BlackKnightsFortressListener : InteractionListener {
     }
 
     override fun defineListeners() {
+        on(intArrayOf(74, 73), IntType.SCENERY, "open") { player, node ->
+            if (player.location.x == 3008) {
+                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            } else {
+                sendMessage(player, "You can't open this door.")
+            }
+            return@on true
+        }
+
+        on(2337, IntType.SCENERY, "open") { player, node ->
+            when (player.location.y) {
+                3514 -> {
+                    if (allInEquipment(player, Items.BRONZE_MED_HELM_1139, Items.IRON_CHAINBODY_1101)) {
+                        DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    } else {
+                        player.dialogueInterpreter.open(4605, findNPC(4604), true)
+                    }
+                }
+                3515 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            }
+            return@on true
+        }
+
+        on(2338, IntType.SCENERY, "open") { player, node ->
+            if (player.location.x > 3019) {
+                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            } else {
+                player.dialogueInterpreter.open(4605, findNPC(4605), true, true)
+            }
+            return@on true
+        }
+
+
+        on(2341, IntType.SCENERY, "push") { player, node ->
+            sendMessage(player, "You push against the wall. You find a secret passage.")
+            DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            return@on true
+        }
+
         onUseWith(IntType.SCENERY, intArrayOf(Items.CABBAGE_1965, Items.CABBAGE_1967), 2336) { player, used, _ ->
             if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS) >= 20) {
                 if (used.id == Items.CABBAGE_1967) {
@@ -109,16 +146,7 @@ class BlackKnightsFortressListener : InteractionListener {
             return@on true
         }
 
-        on(
-            intArrayOf(
-                org.rs.consts.Scenery.LADDER_17160,
-                org.rs.consts.Scenery.LADDER_17149,
-                org.rs.consts.Scenery.LADDER_17148,
-            ),
-            IntType.SCENERY,
-            "climb-up",
-            "climb-down",
-        ) { player, node ->
+        on(intArrayOf(org.rs.consts.Scenery.LADDER_17160, org.rs.consts.Scenery.LADDER_17149, org.rs.consts.Scenery.LADDER_17148), IntType.SCENERY, "climb-up", "climb-down",) { player, node ->
             val dest: Location? = determineDestination(node.asScenery(), node.id)
             val option = getUsedOption(player)
             if (dest != null) {

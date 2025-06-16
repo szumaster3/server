@@ -9,9 +9,8 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs.consts.NPCs
 
-class DoricCutscene(
-    player: Player,
-) : Cutscene(player) {
+class DoricCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
         setExit(Location(2952, 3450))
         loadRegion(11829)
@@ -46,10 +45,7 @@ class DoricCutscene(
             }
 
             4 -> {
-                sendChat(
-                    getNPC(NPCs.DORIC_284)!!,
-                    "I guess your mother never taught you manners. Lucky for you, I'll do just that!",
-                )
+                sendChat(getNPC(NPCs.DORIC_284)!!, "I guess your mother never taught you manners. Lucky for you, I'll do just that!")
                 timedUpdate(5)
             }
 
@@ -91,10 +87,7 @@ class DoricCutscene(
             }
 
             12 -> {
-                sendChat(
-                    getNPC(NPCs.DORIC_284)!!,
-                    "That's what I thought. Watch your mouth the next time you speak to me.",
-                )
+                sendChat(getNPC(NPCs.DORIC_284)!!, "That's what I thought. Watch your mouth the next time you speak to me.")
                 timedUpdate(3)
             }
 

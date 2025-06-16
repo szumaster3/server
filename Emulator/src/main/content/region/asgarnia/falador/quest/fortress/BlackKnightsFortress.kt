@@ -2,10 +2,11 @@ package content.region.asgarnia.falador.quest.fortress
 
 import content.data.GameAttributes
 import content.region.asgarnia.falador.quest.fortress.dialogue.SirAmikVarzeDialogue
-import content.region.asgarnia.falador.quest.fortress.handlers.BlackKnightsFortressPlugin
+import content.region.asgarnia.falador.quest.fortress.handlers.BKFortressPlugin
 import core.api.getAttribute
 import core.api.removeAttribute
 import core.api.sendItemZoomOnInterface
+import core.api.sendString
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.plugin.ClassScanner.definePlugins
@@ -16,12 +17,9 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 @Initializable
-class BlackKnightsFortress :
-    Quest(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, Vars.VARP_QUEST_BLACK_KNIGHTS_FORTRESS_PROGRESS_130, 0, 1, 4) {
-    override fun drawJournal(
-        player: Player,
-        stage: Int,
-    ) {
+class BlackKnightsFortress : Quest(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, Vars.VARP_QUEST_BLACK_KNIGHTS_FORTRESS_PROGRESS_130, 0, 1, 4) {
+
+    override fun drawJournal(player: Player, stage: Int, ) {
         super.drawJournal(player, stage)
         var line = 12
 
@@ -39,30 +37,10 @@ class BlackKnightsFortress :
         }
 
         if (stage >= 10) {
-            line(
-                player,
-                "!!Sir Amik Varze?? has asked me to investigate the !!Black??",
-                line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
-            )
-            line(
-                player,
-                "!!Knights' Fortress?? which is located on !!Ice Mountain??.",
-                line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
-            )
-            line(
-                player,
-                "I need to disguise myself to gain entry to the !!Black??",
-                line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
-            )
-            line(
-                player,
-                "!!Knights' Fortress??.",
-                line++,
-                getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false),
-            )
+            line(player, "!!Sir Amik Varze?? has asked me to investigate the !!Black??", line++, getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false))
+            line(player, "!!Knights' Fortress?? which is located on !!Ice Mountain??.", line++, getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false))
+            line(player, "I need to disguise myself to gain entry to the !!Black??", line++, getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false))
+            line(player, "!!Knights' Fortress??.", line++, getAttribute(player, GameAttributes.QUEST_BKF_DOSSIER_INTER, false))
         }
 
         if (stage >= 20) {
@@ -104,11 +82,7 @@ class BlackKnightsFortress :
     override fun finish(player: Player) {
         super.finish(player)
         var line = 10
-        player.packetDispatch.sendString(
-            "You have completed the Black Knights' Fortress!",
-            Components.QUEST_COMPLETE_SCROLL_277,
-            4,
-        )
+        sendString(player, "You have completed the Black Knights' Fortress!", Components.QUEST_COMPLETE_SCROLL_277, 4)
         drawReward(player, "3 Quests Points", line++)
         drawReward(player, "2500 Coins", line)
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.BROKEN_CAULDRON_9591, 240)
@@ -116,7 +90,7 @@ class BlackKnightsFortress :
     }
 
     override fun newInstance(`object`: Any?): Quest {
-        definePlugins(BlackKnightsFortressPlugin(), SirAmikVarzeDialogue())
+        definePlugins(SirAmikVarzeDialogue())
         return this
     }
 }
