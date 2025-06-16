@@ -20,11 +20,8 @@ import org.rs.consts.Items
 /**
  * A pulse that handles the fishing skill.
  */
-class FishingPulse(
-    player: Player?,
-    npc: NPC,
-    private val option: FishingOption?,
-) : SkillPulse<NPC?>(player, npc) {
+class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?, ) : SkillPulse<NPC?>(player, npc) {
+
     /**
      * The specific type of fish being caught during this pulse.
      */

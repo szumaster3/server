@@ -30,13 +30,10 @@ enum class FishingSpots(vararg val locations: Location, ) {
         private val locs: ArrayList<Location> = ArrayList()
 
         /**
-         * A map linking each fishing spot location to its corresponding [FishingSpots] enum value.
+         * A map linking each fishing spot location.
          */
         private val locMap: HashMap<Location, FishingSpots> = HashMap()
 
-        /**
-         * Initializes the maps with all locations from each [FishingSpots] value.
-         */
         init {
             for (value in values()) {
                 for (loc in value.locations) {
@@ -47,10 +44,7 @@ enum class FishingSpots(vararg val locations: Location, ) {
         }
 
         /**
-         * Retrieves the [FishingSpots] associated with the given location.
-         *
-         * @param loc The [Location] to look up.
-         * @return The [FishingSpots] for the location, or [TUTORIAL_ISLAND] as a fallback.
+         * Retrieves the [FishingSpots] to the given location.
          */
         @JvmStatic
         fun forLocation(loc: Location): FishingSpots? =

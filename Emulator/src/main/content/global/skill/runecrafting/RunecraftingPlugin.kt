@@ -28,6 +28,7 @@ import org.rs.consts.Quests
 
 @Initializable
 class RunecraftingPlugin : OptionHandler() {
+
     override fun newInstance(arg: Any?): Plugin<Any?> {
         addNodes()
         definePlugin(RunePouchPlugin())

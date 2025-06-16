@@ -49,8 +49,8 @@ class TrapCreatePulse(
         if (player.skills.getStaticLevel(Skills.HUNTER) < trap.settings.level) {
             player.sendMessage(
                 "You need a Hunter level of at least " + trap.settings.level + " in order to setup a " +
-                    node!!.name.lowercase() +
-                    ".",
+                        node!!.name.lowercase() +
+                        ".",
             )
             return false
         }
@@ -76,9 +76,9 @@ class TrapCreatePulse(
 
     override fun reward(): Boolean {
         if (++ticks % (
-                trap.settings.setupAnimation.definition
-                    .getDurationTicks()
-            ) != 0
+                    trap.settings.setupAnimation.definition
+                        .getDurationTicks()
+                    ) != 0
         ) {
             return false
         }

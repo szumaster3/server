@@ -43,40 +43,40 @@ object Pitfall {
     val pitJumpSpots =
         hashMapOf(
             Location.create(2766, 3010) to
-                hashMapOf(
-                    Location.create(2766, 3009) to Direction.NORTH,
-                    Location.create(2767, 3009) to Direction.NORTH,
-                    Location.create(2766, 3012) to Direction.SOUTH,
-                    Location.create(2767, 3012) to Direction.SOUTH,
-                ),
+                    hashMapOf(
+                        Location.create(2766, 3009) to Direction.NORTH,
+                        Location.create(2767, 3009) to Direction.NORTH,
+                        Location.create(2766, 3012) to Direction.SOUTH,
+                        Location.create(2767, 3012) to Direction.SOUTH,
+                    ),
             Location.create(2762, 3005) to
-                hashMapOf(
-                    Location.create(2762, 3004) to Direction.NORTH,
-                    Location.create(2763, 3004) to Direction.NORTH,
-                    Location.create(2762, 3007) to Direction.SOUTH,
-                    Location.create(2763, 3007) to Direction.SOUTH,
-                ),
+                    hashMapOf(
+                        Location.create(2762, 3004) to Direction.NORTH,
+                        Location.create(2763, 3004) to Direction.NORTH,
+                        Location.create(2762, 3007) to Direction.SOUTH,
+                        Location.create(2763, 3007) to Direction.SOUTH,
+                    ),
             Location.create(2771, 3004) to
-                hashMapOf(
-                    Location.create(2770, 3004) to Direction.EAST,
-                    Location.create(2770, 3005) to Direction.EAST,
-                    Location.create(2773, 3004) to Direction.WEST,
-                    Location.create(2773, 3005) to Direction.WEST,
-                ),
+                    hashMapOf(
+                        Location.create(2770, 3004) to Direction.EAST,
+                        Location.create(2770, 3005) to Direction.EAST,
+                        Location.create(2773, 3004) to Direction.WEST,
+                        Location.create(2773, 3005) to Direction.WEST,
+                    ),
             Location.create(2777, 3001) to
-                hashMapOf(
-                    Location.create(2777, 3000) to Direction.NORTH,
-                    Location.create(2778, 3000) to Direction.NORTH,
-                    Location.create(2777, 3003) to Direction.SOUTH,
-                    Location.create(2778, 3003) to Direction.SOUTH,
-                ),
+                    hashMapOf(
+                        Location.create(2777, 3000) to Direction.NORTH,
+                        Location.create(2778, 3000) to Direction.NORTH,
+                        Location.create(2777, 3003) to Direction.SOUTH,
+                        Location.create(2778, 3003) to Direction.SOUTH,
+                    ),
             Location.create(2784, 3001) to
-                hashMapOf(
-                    Location.create(2783, 3002) to Direction.EAST,
-                    Location.create(2783, 3001) to Direction.EAST,
-                    Location.create(2786, 3002) to Direction.WEST,
-                    Location.create(2786, 3001) to Direction.WEST,
-                ),
+                    hashMapOf(
+                        Location.create(2783, 3002) to Direction.EAST,
+                        Location.create(2783, 3001) to Direction.EAST,
+                        Location.create(2786, 3002) to Direction.WEST,
+                        Location.create(2786, 3001) to Direction.WEST,
+                    ),
         )
 
     fun pitJumpSpots(loc: Location): HashMap<Location, Direction>? {

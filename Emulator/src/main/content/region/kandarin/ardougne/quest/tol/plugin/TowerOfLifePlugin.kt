@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.quest.tol.plugin
 
-import content.global.skill.thieving.PickpocketListener
+import content.global.skill.thieving.PickpocketPlugin
 import core.api.*
 import core.api.quest.hasRequirement
 import core.api.utils.WeightBasedTable
@@ -52,7 +52,7 @@ class TowerOfLifePlugin : InteractionListener {
 
         on(npcIDs, IntType.NPC, "pickpocket") { player, node ->
             val lootTable =
-                PickpocketListener.pickpocketRoll(
+                PickpocketPlugin.pickpocketRoll(
                     player,
                     50.0,
                     240.0,

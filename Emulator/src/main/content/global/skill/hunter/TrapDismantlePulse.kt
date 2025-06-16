@@ -58,8 +58,8 @@ class TrapDismantlePulse(
         if (player.inventory.freeSlots() < itemCount) {
             player.packetDispatch.sendMessage(
                 "You don't have enough inventory space. You need " + difference + " more free slot" +
-                    (if (difference > 1) "s" else "") +
-                    ".",
+                        (if (difference > 1) "s" else "") +
+                        ".",
             )
             return false
         }
@@ -74,9 +74,9 @@ class TrapDismantlePulse(
 
     override fun reward(): Boolean {
         if (++ticks % (
-                trap.settings.dismantleAnimation.definition
-                    .getDurationTicks() + 1
-            ) != 0
+                    trap.settings.dismantleAnimation.definition
+                        .getDurationTicks() + 1
+                    ) != 0
         ) {
             return false
         }
@@ -95,9 +95,9 @@ class TrapDismantlePulse(
             0 -> {
                 val ticks =
                     wrapper.ticks + (
-                        wrapper.type.settings.dismantleAnimation.definition
-                            .getDurationTicks()
-                    ) + 1
+                            wrapper.type.settings.dismantleAnimation.definition
+                                .getDurationTicks()
+                            ) + 1
                 wrapper.ticks = ticks
                 wrapper.busyTicks = ticks
             }

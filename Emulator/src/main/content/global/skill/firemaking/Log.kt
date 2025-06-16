@@ -25,23 +25,14 @@ enum class Log(val logId: Int, val defaultLevel: Int, val barbarianLevel: Int, v
     ;
 
     companion object {
-        /**
-         * Log id to [Log].
-         */
-        var logMap: HashMap<Int, Log> = HashMap()
+        private var logMap: HashMap<Int, Log> = HashMap()
 
-        /**
-         * Builds [logMap].
-         */
         init {
             for (log in values()) {
                 logMap[log.logId] = log
             }
         }
 
-        /**
-         * Gets [Log] by ids.
-         */
         @JvmStatic
         fun forId(id: Int): Log? = logMap[id]
     }

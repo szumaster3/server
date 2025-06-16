@@ -22,16 +22,7 @@ import org.rs.consts.*
  */
 object EssenceTeleport {
 
-    private val LOCATIONS = listOf(
-        Location.create(2911, 4832, 0),
-        Location.create(2913, 4837, 0),
-        Location.create(2930, 4850, 0),
-        Location.create(2894, 4811, 0),
-        Location.create(2896, 4845, 0),
-        Location.create(2922, 4820, 0),
-        Location.create(2931, 4813, 0),
-    )
-
+    private val LOCATIONS = listOf(Location.create(2911, 4832, 0), Location.create(2913, 4837, 0), Location.create(2930, 4850, 0), Location.create(2894, 4811, 0), Location.create(2896, 4845, 0), Location.create(2922, 4820, 0), Location.create(2931, 4813, 0))
     private const val CURSE_PROJECTILE = org.rs.consts.Graphics.CURSE_PROJECTILE_109
     private val ANIMATION = Animation(Animations.ATTACK_437)
     private val OLD_ANIMATION = Animation(Animations.BALLER_CLAP_198)
@@ -39,10 +30,7 @@ object EssenceTeleport {
     private val TELEPORT_GFX = Graphics(org.rs.consts.Graphics.CURSE_IMPACT_110, 150)
 
     /**
-     * Teleports the player to the Rune Essence mine via NPC.
-     *
-     * @param npc The npc who teleport.
-     * @param player The player being teleported.
+     * Teleports to the Rune Essence mine via NPC.
      */
     fun teleport(npc: NPC, player: Player) {
         if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
@@ -84,9 +72,6 @@ object EssenceTeleport {
 
     /**
      * Teleports from essence mine.
-     *
-     * @param player The player to teleport.
-     * @param node The node representing the origin of the teleport effect.
      */
     fun home(player: Player, node: Node) {
         val wizard = Wizard.forNPC(player.savedData.globalData.getEssenceTeleporter())
@@ -118,10 +103,6 @@ object EssenceTeleport {
      *
      * Relations:
      * - [RuneMysteries quest][content.region.misthalin.quest.runemysteries.RuneMysteries]
-     *
-     * @param player The player possessing the scrying orb.
-     * @param npc The NPC involved in the teleport.
-     *
      */
     private fun handleScryingOrb(player: Player, npc: NPC) {
         if (getStage(player) != 2) return
@@ -144,9 +125,6 @@ object EssenceTeleport {
 
     /**
      * Gets the current Rune Mysteries quest data.
-     *
-     * @param player The player.
-     * @return The stage number.
      */
     fun getStage(player: Player): Int = getVarp(player, 492)
 
@@ -157,13 +135,9 @@ object EssenceTeleport {
         get() = LOCATIONS.random()
 
     /**
-     * Represents a wizards available teleporting the player to the essence mine.
-     *
-     * @property npc The NPC id of the wizard.
-     * @property mask The bitmask used for quest data tracking.
-     * @property location The wizard's world location.
+     * Represents a wizards available teleports.
      */
-    enum class Wizard(val npc: Int, val mask: Int, val location: Location) {
+    private enum class Wizard(val npc: Int, val mask: Int, val location: Location) {
         BRIMSTAIL(NPCs.BRIMSTAIL_171, 0x1, Location.create(2409, 9815, 0)),
         AUBURY(NPCs.AUBURY_553, 0x2, Location(3253, 3401, 0)),
         SEDRIDOR(NPCs.SEDRIDOR_300, 0x4, Location(3107, 9573, 0)),
@@ -173,9 +147,6 @@ object EssenceTeleport {
         companion object {
             /**
              * Gets the [Wizard] enum constant for the given npc id.
-             *
-             * @param npc The npc id.
-             * @return The corresponding [Wizard], or [AUBURY] if not found.
              */
             fun forNPC(npc: Int): Wizard =
                 values().find { it.npc == npc || (npc == 844 && it == CROMPERTY) } ?: AUBURY

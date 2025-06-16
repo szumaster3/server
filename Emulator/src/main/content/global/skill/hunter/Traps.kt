@@ -16,27 +16,14 @@ enum class Traps(
     vararg nodes: TrapNode,
 ) {
     BIRD_SNARE(
-        TrapSetting(
-            10006,
-            intArrayOf(19175),
-            intArrayOf(),
-            "lay",
-            19174,
-            Animation.create(5208),
-            Animation.create(5207),
-            1,
-        ),
+        TrapSetting(10006, intArrayOf(19175), intArrayOf(), "lay", 19174, Animation.create(5208), Animation.create(5207), 1),
         TrapNode(intArrayOf(5073), 1, 34.0, intArrayOf(19179, 19180), arrayOf(Item(10088, 8), Item(9978), Item(526))),
         TrapNode(intArrayOf(5075), 5, 48.0, intArrayOf(19183, 19184), arrayOf(Item(10090, 8), Item(9978), Item(526))),
         TrapNode(intArrayOf(5076), 9, 61.0, intArrayOf(19185, 19186), arrayOf(Item(10091, 8), Item(9978), Item(526))),
         TrapNode(intArrayOf(5074), 11, 64.7, intArrayOf(19181, 19182), arrayOf(Item(10089, 8), Item(9978), Item(526))),
         TrapNode(intArrayOf(5072), 19, 95.2, intArrayOf(19177, 19178), arrayOf(Item(10087, 8), Item(9978), Item(526))),
         object : TrapNode(
-            intArrayOf(7031),
-            39,
-            167.0,
-            intArrayOf(28931, 28930),
-            arrayOf(Item(11525, 8), Item(9978), Item(526)),
+            intArrayOf(7031), 39, 167.0, intArrayOf(28931, 28930), arrayOf(Item(11525, 8), Item(9978), Item(526))
         ) {
             override fun canCatch(
                 wrapper: TrapWrapper,
@@ -45,16 +32,7 @@ enum class Traps(
         },
     ),
     BOX_TRAP(
-        TrapSetting(
-            10008,
-            intArrayOf(19187),
-            intArrayOf(1963, 12579, 1869, 9996, 5972, 12535),
-            "lay",
-            19192,
-            Animation.create(5208),
-            Animation(9726),
-            27,
-        ),
+        TrapSetting(10008, intArrayOf(19187), intArrayOf(1963, 12579, 1869, 9996, 5972, 12535), "lay", 19192, Animation.create(5208), Animation(9726), 27),
         BoxTrapNode(intArrayOf(5081), 27, 100.0, arrayOf(Item(10092)), 1),
         BoxTrapNode(intArrayOf(6918, 7289, 7290, 7291, 7292), 27, 100.0, arrayOf(Item(12184)), 10),
         BoxTrapNode(intArrayOf(1487), 27, 100.0, arrayOf(Item(4033, 1)), 95),
@@ -65,10 +43,7 @@ enum class Traps(
         BoxTrapNode(intArrayOf(7012, 7014), 66, 400.0, arrayOf(Item(12535)), 1),
         BoxTrapNode(intArrayOf(8654), 73, 315.0, arrayOf(Item(14861)), 1),
         object : BoxTrapNode(intArrayOf(7010, 7011), 77, 0.0, arrayOf(Item(12539, 1)), 1) {
-            override fun canCatch(
-                wrapper: TrapWrapper,
-                npc: NPC,
-            ): Boolean {
+            override fun canCatch(wrapper: TrapWrapper, npc: NPC, ): Boolean {
                 wrapper.player.sendMessage(
                     "Note: Giving 0 xp for grenwalls until this area and its requirements are implemented.",
                 )
@@ -77,16 +52,7 @@ enum class Traps(
         },
     ),
     RABBIT_SNARE(
-        TrapSetting(
-            10031,
-            intArrayOf(19333),
-            intArrayOf(),
-            "lay",
-            -1,
-            Animation.create(5208),
-            Animation.create(9726),
-            27,
-        ),
+        TrapSetting(10031, intArrayOf(19333), intArrayOf(), "lay", -1, Animation.create(5208), Animation.create(9726), 27),
     ),
     IMP_BOX(
         MagicBoxSetting(),
@@ -107,8 +73,7 @@ enum class Traps(
         TrapNode(intArrayOf(6921), 29, 152.0, intArrayOf(), arrayOf(Item(12130))),
         TrapNode(intArrayOf(5115), 59, 272.0, intArrayOf(), arrayOf(Item(10147))),
         TrapNode(intArrayOf(5116), 67, 304.0, intArrayOf(), arrayOf(Item(10148))),
-    ),
-    ;
+    ), ;
 
     private val hooks: MutableList<TrapHook> = ArrayList(5)
 
@@ -212,12 +177,7 @@ enum class Traps(
                 }
                 if (trap == NET_TRAP) {
                     for (net in NetTrap.values()) {
-                        if (net.original == node.id ||
-                            net.failed == node.id ||
-                            net.net == node.id ||
-                            net.bent == node.id ||
-                            net.caught == node.id
-                        ) {
+                        if (net.original == node.id || net.failed == node.id || net.net == node.id || net.bent == node.id || net.caught == node.id) {
                             return trap
                         }
                     }

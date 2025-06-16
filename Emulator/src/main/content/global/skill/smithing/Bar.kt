@@ -3,12 +3,7 @@ package content.global.skill.smithing
 import core.game.node.item.Item
 import org.rs.consts.Items
 
-enum class Bar(
-    val level: Int,
-    val experience: Double,
-    @JvmField val product: Item,
-    vararg ores: Item,
-) {
+enum class Bar(val level: Int, val experience: Double, @JvmField val product: Item, vararg ores: Item, ) {
     BRONZE(1, 6.2, Item(Items.BRONZE_BAR_2349, 1), Item(Items.COPPER_ORE_436, 1), Item(Items.TIN_ORE_438, 1)),
     BLURITE(8, 8.0, Item(Items.BLURITE_BAR_9467, 1), Item(Items.BLURITE_ORE_668, 1)),
     IRON(15, 12.5, Item(Items.IRON_BAR_2351, 1), Item(Items.IRON_ORE_440)),
@@ -25,10 +20,7 @@ enum class Bar(
 
     companion object {
         /**
-         * Returns the [Bar] corresponding to the given product item id.
-         *
-         * @param id the item id of the bar product
-         * @return the matching [Bar], or null if none found
+         * Gets the [Bar] for given product item id.
          */
         @JvmStatic
         fun forId(id: Int): Bar? {
@@ -41,10 +33,7 @@ enum class Bar(
         }
 
         /**
-         * Returns the [Bar] that uses the given ore item id.
-         *
-         * @param id the item id of the ore
-         * @return the matching [Bar], or null if none found
+         * Gets the [Bar] that uses the given ore item id.
          */
         fun forOre(id: Int): Bar? {
             for (bar in values()) {
@@ -60,7 +49,7 @@ enum class Bar(
         /**
          * Returns a list of all bar product items.
          *
-         * @return a mutable list of all bar products
+         * @return all bar products
          */
         @JvmStatic
         fun getAllBars(): MutableList<Item> = values().map { it.product }.toMutableList()
@@ -68,7 +57,7 @@ enum class Bar(
         /**
          * Returns a list of all ore items required for any bar.
          *
-         * @return a mutable list of all ores used in bars
+         * @return all ores used in bars
          */
         @JvmStatic
         fun getAllOres(): MutableList<Item> {

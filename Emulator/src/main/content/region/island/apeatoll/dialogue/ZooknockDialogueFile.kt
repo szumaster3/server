@@ -1,6 +1,6 @@
 package content.region.island.apeatoll.dialogue
 
-import content.global.plugin.item.withnpc.ItemsOnZooknockListener
+import content.global.plugin.item.withnpc.ItemsOnZooknockPlugin
 import content.region.karamja.quest.mm.cutscene.DungeonPlanCutscene
 import core.api.*
 import core.api.quest.setQuestStage
@@ -24,7 +24,7 @@ class ZooknockAfterBattleDialogueFile : DialogueFile() {
 }
 
 class ZooknockDialogueFile(val it: Int) : DialogueFile() {
-    var i = ItemsOnZooknockListener()
+    var i = ItemsOnZooknockPlugin()
     var n = NPC(i.zooknockNPC)
     var itemUsed = it
 

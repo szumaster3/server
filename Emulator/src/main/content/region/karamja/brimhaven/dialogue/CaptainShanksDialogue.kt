@@ -1,6 +1,6 @@
 package content.region.karamja.brimhaven.dialogue
 
-import content.global.travel.charter.Charter
+import content.global.travel.ship.Charter
 import core.api.*
 import core.api.quest.hasRequirement
 import core.game.dialogue.Dialogue

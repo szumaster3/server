@@ -17,6 +17,7 @@ import core.tools.Log
 import core.tools.RandomFunction
 
 class ImplingNPC : NPCBehavior(*Implings.getIds()) {
+
     override fun onCreation(self: NPC) {
         self.isWalks = true
         self.isNeverWalks = false
@@ -93,5 +94,6 @@ class ImplingNPC : NPCBehavior(*Implings.getIds()) {
 
     override fun getClippingSupplier(self: NPC): ClipMaskSupplier = ImplingClipper
 
-    private fun isPuroImpling(self: NPC): Boolean = self.id in intArrayOf(6055, 6057, 6058, 6059, 6060, 6063, 6064, 6061, 7846)
+    private fun isPuroImpling(self: NPC): Boolean =
+        self.id in intArrayOf(6055, 6057, 6058, 6059, 6060, 6063, 6064, 6061, 7846)
 }

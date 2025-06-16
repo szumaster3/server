@@ -9,9 +9,7 @@ import org.rs.consts.Components
 import org.rs.consts.Items
 
 @Initializable
-class DairyChurnDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         val hasMilk = player.inventory.contains(Items.BUCKET_OF_MILK_1927, 1)
@@ -29,10 +27,7 @@ class DairyChurnDialogue(
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (interfaceId) {
 
             /*

@@ -86,7 +86,8 @@ class ImplingController :
             }
         }
 
-        fun getTicksBeforeNextCycleToDespawn(): Int = ceil(activeImplings.size / implingsClearedPerTick.toDouble()).toInt()
+        fun getTicksBeforeNextCycleToDespawn(): Int =
+            ceil(activeImplings.size / implingsClearedPerTick.toDouble()).toInt()
 
         fun deregister(
             impling: NPC,

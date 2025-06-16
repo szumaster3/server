@@ -1,6 +1,6 @@
 package content.region.asgarnia.portsarim.dialogue
 
-import content.global.travel.charter.Charter
+import content.global.travel.ship.Charter
 import core.api.finishDiaryTask
 import core.api.hasDiaryTaskComplete
 import core.api.sendDialogue

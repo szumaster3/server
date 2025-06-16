@@ -1,8 +1,8 @@
 package core
 
 import TestUtils
-import content.global.skill.gathering.GatheringListener
-import content.global.skill.gathering.woodcutting.WoodcuttingListener
+import content.global.skill.gathering.GatheringPlugin
+import content.global.skill.gathering.woodcutting.WoodcuttingPlugin
 import core.api.log
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.*
@@ -23,8 +23,8 @@ class PathfinderTests {
     companion object {
         init {
             TestUtils.preTestSetup()
-            GatheringListener().defineListeners()
-            WoodcuttingListener().defineListeners()
+            GatheringPlugin().defineListeners()
+            WoodcuttingPlugin().defineListeners()
         }
 
         val NPC_TEST_LOC = ServerConstants.HOME_LOCATION!!.transform(2, 10, 0)

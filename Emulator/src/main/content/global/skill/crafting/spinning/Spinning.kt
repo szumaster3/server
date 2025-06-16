@@ -4,138 +4,20 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 
 /**
- * Enum representing different spinning activities in the game.
- *
- * Each entry contains details about the spinning activity, such as the button ID, the required item,
- * the produced item, the required level, and the experience gained.
+ * Enum representing different spinning activities.
  */
-enum class Spinning(
-    val button: Int,
-    val need: Int,
-    val product: Int,
-    val level: Int,
-    val exp: Double,
-) {
-    /**
-     * Spinning Wool into Ball of Wool.
-     */
-    WOOL(
-        button = 19,
-        need = Items.WOOL_1737,
-        product = Items.BALL_OF_WOOL_1759,
-        level = 1,
-        exp = 2.5,
-    ),
-
-    /**
-     * Spinning Flax into Bow String.
-     */
-    FLAX(
-        button = 17,
-        need = Items.FLAX_1779,
-        product = Items.BOW_STRING_1777,
-        level = 10,
-        exp = 15.0,
-    ),
-
-    /**
-     * Spinning Magic Roots into Magic String.
-     */
-    ROOT(
-        button = 23,
-        need = Items.MAGIC_ROOTS_6051,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Oak Roots into Magic String.
-     */
-    ROOT_OAK(
-        button = 23,
-        need = Items.OAK_ROOTS_6043,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Willow Roots into Magic String.
-     */
-    ROOT_WILLOW(
-        button = 23,
-        need = Items.WILLOW_ROOTS_6045,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Maple Roots into Magic String.
-     */
-    ROOT_MAPLE(
-        button = 23,
-        need = Items.MAPLE_ROOTS_6047,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Yew Roots into Magic String.
-     */
-    ROOT_YEW(
-        button = 23,
-        need = Items.YEW_ROOTS_6049,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Spirit Roots into Magic String.
-     */
-    ROOT_SPIRIT(
-        button = 23,
-        need = Items.SPIRIT_ROOTS_6053,
-        product = Items.MAGIC_STRING_6038,
-        level = 19,
-        exp = 30.0,
-    ),
-
-    /**
-     * Spinning Sinew into Crossbow String.
-     */
-    SINEW(
-        button = 27,
-        need = Items.SINEW_9436,
-        product = Items.CROSSBOW_STRING_9438,
-        level = 10,
-        exp = 15.0,
-    ),
-
-    /**
-     * Spinning Oak Roots into Crossbow String.
-     */
-    TREE_ROOTS(
-        button = 31,
-        need = Items.OAK_ROOTS_6043,
-        product = Items.CROSSBOW_STRING_9438,
-        level = 10,
-        exp = 15.0,
-    ),
-
-    /**
-     * Spinning Yak Hair into Rope.
-     */
-    YAK(
-        button = 35,
-        need = Items.HAIR_10814,
-        product = Items.ROPE_954,
-        level = 30,
-        exp = 25.0,
-    ),
+enum class Spinning(val button: Int, val need: Int, val product: Int, val level: Int, val exp: Double, ) {
+    WOOL(19, Items.WOOL_1737, Items.BALL_OF_WOOL_1759, 1, 2.5),
+    FLAX(17, Items.FLAX_1779, Items.BOW_STRING_1777, 10, 15.0),
+    ROOT(23, Items.MAGIC_ROOTS_6051, Items.MAGIC_STRING_6038, 19, 30.0),
+    ROOT_OAK(23, Items.OAK_ROOTS_6043, Items.MAGIC_STRING_6038, 19, 30.0),
+    ROOT_WILLOW(23, Items.WILLOW_ROOTS_6045, Items.MAGIC_STRING_6038, 19, 30.0),
+    ROOT_MAPLE(23, Items.MAPLE_ROOTS_6047, Items.MAGIC_STRING_6038, 19, 30.0),
+    ROOT_YEW(23, Items.YEW_ROOTS_6049, Items.MAGIC_STRING_6038, 19, 30.0),
+    ROOT_SPIRIT(23, Items.SPIRIT_ROOTS_6053, Items.MAGIC_STRING_6038, 19, 30.0),
+    SINEW(27, Items.SINEW_9436, Items.CROSSBOW_STRING_9438, 10, 15.0),
+    TREE_ROOTS(31, Items.OAK_ROOTS_6043, Items.CROSSBOW_STRING_9438, 10, 15.0),
+    YAK(35, Items.HAIR_10814, Items.ROPE_954, 30, 25.0),
     ;
 
     companion object {

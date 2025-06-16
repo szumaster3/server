@@ -15,8 +15,6 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
 
     /**
      * Called when the NPC is created.
-     *
-     * Sets the fishing spot type and initializes the movement delay attribute.
      */
     override fun onCreation(self: NPC) {
         setAttribute(self, "fishing:spot", FishingSpots.forLocation(self.location))
@@ -25,10 +23,6 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
 
     /**
      * Called on every game tick.
-     *
-     * Handles spot movement logic based on delay and visibility state.
-     *
-     * @return Always returns false as this behavior does not block other actions.
      */
     override fun tick(self: NPC): Boolean {
         if (getSpot(self) == null) {
@@ -43,8 +37,6 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
 
     /**
      * Moves the fishing spot to a different location within its defined list.
-     *
-     * Also handles toggling visibility if no valid spot is found.
      */
     private fun moveSpot(self: NPC) {
         when (val spot = getSpot(self)) {
@@ -71,16 +63,11 @@ class FishingNPC : NPCBehavior(*fishingSpots) {
 
     /**
      * Generates a random delay in ticks for the next spot movement.
-     *
-     * @return A random number between 200 and 390.
      */
     private fun getRandomDelay(): Int = RandomFunction.random(200, 390)
 
     /**
-     * Retrieves the [FishingSpots] enum value assigned to the NPC.
-     *
-     * @param npc The fishing spot NPC.
-     * @return The assigned [FishingSpots] or null if not set.
+     * Gets the [FishingSpots] enum value assigned to the NPC.
      */
     private fun getSpot(npc: NPC): FishingSpots? = getAttribute(npc, "fishing:spot", null)
 }

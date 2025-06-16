@@ -7,54 +7,18 @@ import core.game.world.map.build.RegionFlags
 import core.game.world.map.path.ClipMaskSupplier
 import org.rs.consts.NPCs
 
-enum class Implings(
-    val npcId: Int,
-    val puroId: Int,
-) {
-    BABY(
-        npcId = NPCs.BABY_IMPLING_1028,
-        puroId = NPCs.BABY_IMPLING_6055,
-    ),
-    YOUNG(
-        npcId = NPCs.YOUNG_IMPLING_1029,
-        puroId = NPCs.YOUNG_IMPLING_6056,
-    ),
-    GOURMET(
-        npcId = NPCs.GOURMET_IMPLING_1030,
-        puroId = NPCs.GOURMET_IMPLING_6057,
-    ),
-    EARTH(
-        npcId = NPCs.EARTH_IMPLING_1031,
-        puroId = NPCs.EARTH_IMPLING_6058,
-    ),
-    ESSENCE(
-        npcId = NPCs.ESSENCE_IMPLING_1032,
-        puroId = NPCs.ESSENCE_IMPLING_6059,
-    ),
-    ECLECTIC(
-        npcId = NPCs.ECLECTIC_IMPLING_1033,
-        puroId = NPCs.ECLECTIC_IMPLING_6060,
-    ),
-    NINJA(
-        npcId = NPCs.NINJA_IMPLING_6053,
-        puroId = NPCs.NINJA_IMPLING_6063,
-    ),
-    NATURE(
-        npcId = NPCs.NATURE_IMPLING_1034,
-        puroId = NPCs.NATURE_IMPLING_6061,
-    ),
-    MAGPIE(
-        npcId = NPCs.MAGPIE_IMPLING_1035,
-        puroId = NPCs.MAGPIE_IMPLING_6062,
-    ),
-    PIRATE(
-        npcId = NPCs.PIRATE_IMPLING_7845,
-        puroId = NPCs.PIRATE_IMPLING_7846,
-    ),
-    DRAGON(
-        npcId = NPCs.DRAGON_IMPLING_6054,
-        puroId = NPCs.DRAGON_IMPLING_6064,
-    ),
+enum class Implings(val npcId: Int, val puroId: Int) {
+    BABY(NPCs.BABY_IMPLING_1028, NPCs.BABY_IMPLING_6055),
+    YOUNG(NPCs.YOUNG_IMPLING_1029, NPCs.YOUNG_IMPLING_6056),
+    GOURMET(NPCs.GOURMET_IMPLING_1030, NPCs.GOURMET_IMPLING_6057),
+    EARTH(NPCs.EARTH_IMPLING_1031, NPCs.EARTH_IMPLING_6058),
+    ESSENCE(NPCs.ESSENCE_IMPLING_1032, NPCs.ESSENCE_IMPLING_6059),
+    ECLECTIC(NPCs.ECLECTIC_IMPLING_1033, NPCs.ECLECTIC_IMPLING_6060),
+    NINJA(NPCs.NINJA_IMPLING_6053, NPCs.NINJA_IMPLING_6063),
+    NATURE(NPCs.NATURE_IMPLING_1034, NPCs.NATURE_IMPLING_6061),
+    MAGPIE(NPCs.MAGPIE_IMPLING_1035, NPCs.MAGPIE_IMPLING_6062),
+    PIRATE(NPCs.PIRATE_IMPLING_7845, NPCs.PIRATE_IMPLING_7846),
+    DRAGON(NPCs.DRAGON_IMPLING_6054, NPCs.DRAGON_IMPLING_6064),
     ;
 
     companion object {
@@ -69,10 +33,7 @@ enum class Implings(
     }
 }
 
-enum class ImplingSpawner(
-    val npcId: Int,
-    val table: WeightedTable<Implings>,
-) {
+enum class ImplingSpawner(val npcId: Int, val table: WeightedTable<Implings>) {
     LOW_TIER(
         npcId = NPCs.VAMPIRE_1024,
         WeightedTable.create(
@@ -151,30 +112,22 @@ enum class ImplingSpawner(
     }
 }
 
-enum class ImplingSpawnTypes(
-    val table: WeightedTable<ImplingSpawner>,
-    val spawnRolls: Int,
-) {
+enum class ImplingSpawnTypes(val table: WeightedTable<ImplingSpawner>, val spawnRolls: Int) {
     DEFAULT_ONLY(
-        table =
-            WeightedTable.create(
-                Pair(ImplingSpawner.LOW_TIER, 14.0),
-                Pair(ImplingSpawner.MID_TIER, 7.0),
-                Pair(ImplingSpawner.HIGH_TIER, 4.0),
-                Pair(ImplingSpawner.NULL, 75.0),
-            ),
-        spawnRolls = 3,
+        WeightedTable.create(
+            Pair(ImplingSpawner.LOW_TIER, 14.0),
+            Pair(ImplingSpawner.MID_TIER, 7.0),
+            Pair(ImplingSpawner.HIGH_TIER, 4.0),
+            Pair(ImplingSpawner.NULL, 75.0)
+        ), 3,
     ),
-    LOW_TIER_ONLY(table = WeightedTable.create(Pair(ImplingSpawner.LOW_TIER, 100.0)), spawnRolls = 1),
-    MID_TIER_ONLY(table = WeightedTable.create(Pair(ImplingSpawner.MID_TIER, 100.0)), spawnRolls = 1),
-    HIGH_TIER_ONLY(table = WeightedTable.create(Pair(ImplingSpawner.HIGH_TIER, 100.0)), spawnRolls = 1),
-    PURO_HIGH_TIER_ONLY(table = WeightedTable.create(Pair(ImplingSpawner.PURO_HIGH_TIER, 100.0)), spawnRolls = 1),
+    LOW_TIER_ONLY(WeightedTable.create(Pair(ImplingSpawner.LOW_TIER, 100.0)), 1),
+    MID_TIER_ONLY(WeightedTable.create(Pair(ImplingSpawner.MID_TIER, 100.0)), 1),
+    HIGH_TIER_ONLY(WeightedTable.create(Pair(ImplingSpawner.HIGH_TIER, 100.0)), 1),
+    PURO_HIGH_TIER_ONLY(WeightedTable.create(Pair(ImplingSpawner.PURO_HIGH_TIER, 100.0)), 1),
 }
 
-enum class ImplingSpawnLocations(
-    val type: ImplingSpawnTypes,
-    vararg val locations: Location,
-) {
+enum class ImplingSpawnLocations(val type: ImplingSpawnTypes, vararg val locations: Location) {
     DEFAULT_SPAWN(
         ImplingSpawnTypes.DEFAULT_ONLY,
         Location.create(2204, 3232, 0),
@@ -224,13 +177,8 @@ enum class ImplingSpawnLocations(
 }
 
 object ImplingClipper : ClipMaskSupplier {
-    override fun getClippingFlag(
-        z: Int,
-        x: Int,
-        y: Int,
-    ): Int {
+    override fun getClippingFlag(z: Int, x: Int, y: Int): Int {
         var flag = RegionManager.getClippingFlag(z, x, y)
-
         return flag and (RegionFlags.SOLID_TILE.inv()) and (RegionFlags.TILE_OBJECT.inv())
     }
 }

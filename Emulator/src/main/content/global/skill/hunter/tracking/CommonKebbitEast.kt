@@ -16,46 +16,46 @@ class CommonKebbitEast : HunterTracking() {
         initialMap =
             hashMapOf(
                 19439 to
-                    arrayListOf(
-                        TrailDefinition(
-                            varbit = 2974,
-                            type = TrailType.LINKING,
-                            inverted = false,
-                            startLocation = Location.create(2354, 3595, 0),
-                            endLocation = Location.create(2360, 3602, 0),
+                        arrayListOf(
+                            TrailDefinition(
+                                varbit = 2974,
+                                type = TrailType.LINKING,
+                                inverted = false,
+                                startLocation = Location.create(2354, 3595, 0),
+                                endLocation = Location.create(2360, 3602, 0),
+                            ),
+                            TrailDefinition(
+                                varbit = 2975,
+                                type = TrailType.LINKING,
+                                inverted = false,
+                                startLocation = Location.create(2354, 3595, 0),
+                                endLocation = Location.create(2355, 3601, 0),
+                            ),
+                            TrailDefinition(
+                                varbit = 2976,
+                                type = TrailType.LINKING,
+                                inverted = false,
+                                startLocation = Location.create(2354, 3594, 0),
+                                endLocation = Location.create(2349, 3604, 0),
+                            ),
                         ),
-                        TrailDefinition(
-                            varbit = 2975,
-                            type = TrailType.LINKING,
-                            inverted = false,
-                            startLocation = Location.create(2354, 3595, 0),
-                            endLocation = Location.create(2355, 3601, 0),
-                        ),
-                        TrailDefinition(
-                            varbit = 2976,
-                            type = TrailType.LINKING,
-                            inverted = false,
-                            startLocation = Location.create(2354, 3594, 0),
-                            endLocation = Location.create(2349, 3604, 0),
-                        ),
-                    ),
                 19440 to
-                    arrayListOf(
-                        TrailDefinition(
-                            varbit = 2980,
-                            type = TrailType.LINKING,
-                            inverted = true,
-                            startLocation = Location.create(2361, 3611, 0),
-                            endLocation = Location.create(2360, 3602, 0),
+                        arrayListOf(
+                            TrailDefinition(
+                                varbit = 2980,
+                                type = TrailType.LINKING,
+                                inverted = true,
+                                startLocation = Location.create(2361, 3611, 0),
+                                endLocation = Location.create(2360, 3602, 0),
+                            ),
+                            TrailDefinition(
+                                varbit = 2981,
+                                type = TrailType.LINKING,
+                                inverted = true,
+                                startLocation = Location.create(2360, 3612, 0),
+                                endLocation = Location.create(2357, 3607, 0),
+                            ),
                         ),
-                        TrailDefinition(
-                            varbit = 2981,
-                            type = TrailType.LINKING,
-                            inverted = true,
-                            startLocation = Location.create(2360, 3612, 0),
-                            endLocation = Location.create(2357, 3607, 0),
-                        ),
-                    ),
             )
 
         linkingTrails =

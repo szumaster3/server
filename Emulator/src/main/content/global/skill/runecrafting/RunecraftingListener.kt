@@ -11,6 +11,7 @@ import org.rs.consts.Items
 import org.rs.consts.Vars
 
 class RunecraftingListener : InteractionListener {
+
     private val pouchIDs = (5509..5515).toIntArray()
     private val tiara = IntArray(Tiara.values().size) { Tiara.values()[it].item.id }
     private val staves = IntArray(Staves.values().size) { Staves.values()[it].item }
@@ -27,6 +28,7 @@ class RunecraftingListener : InteractionListener {
     }
 
     override fun defineListeners() {
+
         on(pouchIDs, IntType.ITEM, "fill", "empty", "check", "drop") { player, node ->
             val option = getUsedOption(player)
             val runeEssenceAmount = amountInInventory(player, Items.RUNE_ESSENCE_1436)
@@ -46,7 +48,7 @@ class RunecraftingListener : InteractionListener {
             return@on true
         }
 
-        TalismanStaves.values().forEach { item ->
+        TalismanStaff.values().forEach { item ->
             val altar = map(item)
             altar?.let {
                 onUseWith(IntType.SCENERY, item.items.id, it.scenery) { player, used, _ ->
@@ -78,20 +80,20 @@ class RunecraftingListener : InteractionListener {
         }
     }
 
-    fun map(staff: TalismanStaves): Altar? =
+    fun map(staff: TalismanStaff): Altar? =
         when (staff) {
-            TalismanStaves.AIR -> Altar.AIR
-            TalismanStaves.MIND -> Altar.MIND
-            TalismanStaves.WATER -> Altar.WATER
-            TalismanStaves.EARTH -> Altar.EARTH
-            TalismanStaves.FIRE -> Altar.FIRE
-            TalismanStaves.BODY -> Altar.BODY
-            TalismanStaves.COSMIC -> Altar.COSMIC
-            TalismanStaves.CHAOS -> Altar.CHAOS
-            TalismanStaves.NATURE -> Altar.NATURE
-            TalismanStaves.LAW -> Altar.LAW
-            TalismanStaves.DEATH -> Altar.DEATH
-            TalismanStaves.BLOOD -> Altar.BLOOD
+            TalismanStaff.AIR -> Altar.AIR
+            TalismanStaff.MIND -> Altar.MIND
+            TalismanStaff.WATER -> Altar.WATER
+            TalismanStaff.EARTH -> Altar.EARTH
+            TalismanStaff.FIRE -> Altar.FIRE
+            TalismanStaff.BODY -> Altar.BODY
+            TalismanStaff.COSMIC -> Altar.COSMIC
+            TalismanStaff.CHAOS -> Altar.CHAOS
+            TalismanStaff.NATURE -> Altar.NATURE
+            TalismanStaff.LAW -> Altar.LAW
+            TalismanStaff.DEATH -> Altar.DEATH
+            TalismanStaff.BLOOD -> Altar.BLOOD
             else -> null
         }
 
@@ -110,7 +112,7 @@ class RunecraftingListener : InteractionListener {
         player: Player,
         itemId: Item,
         buttonId: Int,
-        product: TalismanStaves,
+        product: TalismanStaff,
     ) {
         closeDialogue(player)
         removeItem(player, if (buttonId == 3) Items.RUNECRAFTING_STAFF_13629 else Items.TIARA_5525)

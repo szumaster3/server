@@ -53,16 +53,16 @@ class BNetPulse(
             sendMessage(
                 player,
                 "You need to be wielding a butterfly net to catch " +
-                    (if (type is ImplingNode) "implings" else "butterflies") +
-                    ".",
+                        (if (type is ImplingNode) "implings" else "butterflies") +
+                        ".",
             )
             return false
         } else if (!type.hasJar(player)) {
             sendMessage(
                 player,
                 "You need to have a" + (if (StringUtils.isPlusN(type.jar!!.name)) "n" else "") + " " +
-                    type.jar!!.name.lowercase() +
-                    ".",
+                        type.jar!!.name.lowercase() +
+                        ".",
             )
             return false
         }

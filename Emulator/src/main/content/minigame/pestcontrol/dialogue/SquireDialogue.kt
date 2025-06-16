@@ -1,6 +1,6 @@
 package content.minigame.pestcontrol.dialogue
 
-import content.global.travel.charter.Charter
+import content.global.travel.ship.Charter
 import core.api.playJingle
 import core.api.sendDialogueLines
 import core.api.sendNPCDialogueLines

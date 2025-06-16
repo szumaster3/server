@@ -4,7 +4,7 @@ import content.global.skill.hunter.NetTrapSetting.NetTrap
 import content.global.skill.hunter.Traps.Companion.forNode
 import content.global.skill.hunter.bnet.BNetTypes
 import content.global.skill.hunter.bnet.ImplingNode
-import content.global.skill.hunter.falconry.FalconryActivityPlugin
+import content.global.skill.hunter.falcon.FalconryPlugin
 import core.api.addItem
 import core.api.removeItem
 import core.api.sendMessage
@@ -38,7 +38,7 @@ class HunterPlugin : OptionHandler() {
             for (nodeId in trap.settings.nodeIds) {
                 definition =
                     if (trap.settings.isObjectTrap) SceneryDefinition.forId(nodeId) else ItemDefinition.forId(nodeId)
-                definition!!.handlers["option:" + trap.settings.option] = this
+                definition.handlers["option:" + trap.settings.option] = this
             }
             if (trap.settings.failId != -1) {
                 definition = SceneryDefinition.forId(trap.settings.failId)
@@ -71,7 +71,7 @@ class HunterPlugin : OptionHandler() {
         definePlugin(HunterNPC())
         definePlugin(HunterNetPlugin())
         definePlugin(HunterItemPlugin())
-        definePlugin(FalconryActivityPlugin())
+        definePlugin(FalconryPlugin())
         definePlugin(HuntingItemUseWithHandler())
         return this
     }
@@ -237,11 +237,11 @@ class HunterPlugin : OptionHandler() {
                 sendMessage(
                     player,
                     "You release the " + item.name.lowercase(Locale.getDefault()) + (if (multiple) "s" else "") +
-                        " and " +
-                        (if (multiple) "they" else "it") +
-                        " bound" +
-                        (if (!multiple) "s" else "") +
-                        " away.",
+                            " and " +
+                            (if (multiple) "they" else "it") +
+                            " bound" +
+                            (if (!multiple) "s" else "") +
+                            " away.",
                 )
             }
 

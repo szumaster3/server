@@ -21,10 +21,8 @@ import core.tools.prependArticle
 import org.rs.consts.Items
 import org.rs.consts.Quests
 
-class MiningPulse(
-    private val player: Player,
-    private val node: Node,
-) : Pulse(1, player, node) {
+class MiningPulse(private val player: Player, private val node: Node, ) : Pulse(1, player, node) {
+
     private var resource: MiningNode? = null
     private var isMiningEssence = false
     private var isMiningGems = false

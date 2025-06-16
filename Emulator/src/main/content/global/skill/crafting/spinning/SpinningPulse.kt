@@ -12,12 +12,10 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs.consts.Sounds
 
-class SpinningPulse(
-    player: Player?,
-    node: Item?,
-    var amount: Int,
-    val type: Spinning,
-) : SkillPulse<Item?>(player, node) {
+/**
+ * Handles spinning pulse.
+ */
+class SpinningPulse(player: Player?, node: Item?, var amount: Int, val type: Spinning, ) : SkillPulse<Item?>(player, node) {
     var ticks = 0
 
     override fun checkRequirements(): Boolean {
@@ -43,10 +41,10 @@ class SpinningPulse(
     override fun reward(): Boolean {
         var tickThreshold = 4
         if ((
-                player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)!!.isComplete(2) &&
-                    withinDistance(player, Location(2711, 3471, 1)) &&
-                    player.equipment[EquipmentContainer.SLOT_HAT] != null
-            ) &&
+                    player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)!!.isComplete(2) &&
+                            withinDistance(player, Location(2711, 3471, 1)) &&
+                            player.equipment[EquipmentContainer.SLOT_HAT] != null
+                    ) &&
             DiaryManager(player).getHeadband() == 2
         ) {
             tickThreshold = 2

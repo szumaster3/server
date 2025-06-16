@@ -240,11 +240,11 @@ abstract class HunterTracking : OptionHandler() {
                 } else {
                     if (currentTrail.triggerObjectLocation == node.location ||
                         (
-                            currentIndex == trail.lastIndex &&
-                                currentTrail.endLocation.equals(
-                                    node.location,
+                                currentIndex == trail.lastIndex &&
+                                        currentTrail.endLocation.equals(
+                                            node.location,
+                                        )
                                 )
-                        )
                     ) {
                         if (currentIndex == trail.lastIndex) {
                             sendDialogue(player, "It looks like something is moving around in there.")

@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.east.dialogue
 
-import content.global.travel.charter.Charter
+import content.global.travel.ship.Charter
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.player.link.diary.DiaryType

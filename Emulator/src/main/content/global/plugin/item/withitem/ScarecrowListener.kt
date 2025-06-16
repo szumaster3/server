@@ -8,6 +8,7 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 
 class ScarecrowListener : InteractionListener {
+
     override fun defineListeners() {
 
         /*

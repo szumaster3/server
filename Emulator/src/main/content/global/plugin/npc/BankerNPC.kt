@@ -1,6 +1,6 @@
 package content.global.plugin.npc
 
-import content.global.plugin.scenery.BankBoothListener
+import content.global.plugin.scenery.BankBoothPlugin
 import core.api.getScenery
 import core.api.hasSealOfPassage
 import core.api.interaction.openBankAccount
@@ -72,7 +72,7 @@ class BankerNPC : AbstractNPC, InteractionListener {
             val boothLocation = location.transform(side)
             val sceneryObject = getScenery(boothLocation)
 
-            if (sceneryObject != null && sceneryObject.id in BankBoothListener.BANK_BOOTHS) {
+            if (sceneryObject != null && sceneryObject.id in BankBoothPlugin.BANK_BOOTHS) {
                 return Pair(side, boothLocation.transform(side, 1))
             }
         }

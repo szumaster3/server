@@ -107,7 +107,8 @@ class NetTrapSetting :
     override fun buildObject(
         player: Player,
         node: Node,
-    ): core.game.node.scenery.Scenery = (node as core.game.node.scenery.Scenery).transform(NetTrap.forId(node.getId())!!.bent)
+    ): core.game.node.scenery.Scenery =
+        (node as core.game.node.scenery.Scenery).transform(NetTrap.forId(node.getId())!!.bent)
 
     override fun createHook(wrapper: TrapWrapper): TrapHook = TrapHook(wrapper, arrayOf(wrapper.secondary.location))
 

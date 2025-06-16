@@ -13,6 +13,7 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.Animations
+import org.rs.consts.Items
 import org.rs.consts.Scenery
 
 /**
@@ -32,7 +33,7 @@ class MiscellaniaShortcut : OptionHandler() {
             return true
         }
 
-        if (!anyInEquipment(player, *seaBoots)) {
+        if (!anyInEquipment(player, Items.FREMENNIK_SEA_BOOTS_1_14571, Items.FREMENNIK_SEA_BOOTS_2_14572, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
             sendMessage(player, "You need to claim the reward for the medium Fremennik diary to use this shortcut.")
             return true
         }

@@ -1,6 +1,6 @@
 package content.region.kandarin.piscatoris.dialogue
 
-import content.global.skill.hunter.falconry.FalconryActivityPlugin
+import content.global.skill.hunter.falcon.FalconryPlugin
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -267,7 +267,7 @@ class MatthiasFalconryDialogue(player: Player? = null) : Dialogue(player) {
 
             31 -> {
                 end()
-                FalconryActivityPlugin.removeItems(player)
+                FalconryPlugin.removeItems(player)
                 sendMessage(player, "You give the falcon and glove back to Matthias.")
             }
         }

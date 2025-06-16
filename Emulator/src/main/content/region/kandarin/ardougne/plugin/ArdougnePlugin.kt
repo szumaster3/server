@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.plugin
 
-import content.global.travel.charter.Charter
+import content.global.travel.ship.Charter
 import content.region.kandarin.ardougne.east.dialogue.CaptainBarnabyDialogue
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import core.api.*

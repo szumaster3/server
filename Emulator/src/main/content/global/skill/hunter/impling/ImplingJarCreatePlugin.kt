@@ -11,18 +11,18 @@ import core.plugin.Plugin
 import org.rs.consts.Items
 
 @Initializable
-class ImplingJarCreatePlugin :
-    UseWithHandler(
-        Items.SIEVE_6097,
-        Items.ANCHOVY_OIL_11264,
-        Items.SWAMP_TAR_1939,
-        Items.OIL_LAMP_4525,
-        Items.OIL_LANTERN_4535,
-        Items.BULLSEYE_LANTERN_4546,
-        Items.SAPPHIRE_LANTERN_4700,
-        Items.IMP_REPELLENT_11262,
-        Items.BUTTERFLY_JAR_10012,
-    ) {
+class ImplingJarCreatePlugin : UseWithHandler(
+    Items.SIEVE_6097,
+    Items.ANCHOVY_OIL_11264,
+    Items.SWAMP_TAR_1939,
+    Items.OIL_LAMP_4525,
+    Items.OIL_LANTERN_4535,
+    Items.BULLSEYE_LANTERN_4546,
+    Items.SAPPHIRE_LANTERN_4700,
+    Items.IMP_REPELLENT_11262,
+    Items.BUTTERFLY_JAR_10012
+) {
+
     private val FLOWERS = (Items.FLOWERS_2460..Items.FLOWERS_2477).toIntArray()
 
     override fun newInstance(arg: Any?): Plugin<Any> {

@@ -2,7 +2,7 @@ package content.region.kandarin.seersvillage.diary
 
 import content.data.GameAttributes
 import content.global.plugin.iface.FairyRing
-import content.global.plugin.item.withnpc.ChaliceOnKingArthurListener
+import content.global.plugin.item.withnpc.ChaliceOnKingPlugin
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import content.region.kandarin.seersvillage.dialogue.ThormacDialogue
 import core.api.*
@@ -313,7 +313,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         event: DialogueOptionSelectionEvent,
     ) {
         when (event.dialogue) {
-            is ChaliceOnKingArthurListener.PoisonChaliceOnKingArthurDialogue -> {
+            is ChaliceOnKingPlugin.PoisonChaliceOnKingArthurDialogue -> {
                 if (event.currentStage == 4) {
                     finishTask(
                         player,

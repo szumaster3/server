@@ -15,7 +15,7 @@ class EnchantedHeadgearManager(private val player: Player) {
      * Adds scrolls to the enchanted headgear if valid.
      */
     fun addScrolls(chargedItemId: Int, scrollId: Int, amount: Int) {
-        if (scrollId !in EnchantedHeadgearListener.allowedScrolls) {
+        if (scrollId !in EnchantedHeadgearPlugin.allowedScrolls) {
             sendMessage(player, "You cannot add this scroll to the headgear.")
             return
         }

@@ -1,6 +1,6 @@
 package content.region.desert.quest.golem
 
-import content.global.skill.thieving.PickpocketListener
+import content.global.skill.thieving.PickpocketPlugin
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
@@ -492,7 +492,7 @@ class TheGolemListeners :
             if (getAttribute(player, "the-golem:varmen-notes-read", false)) {
                 lock(player, 1000)
                 val lootTable =
-                    PickpocketListener.pickpocketRoll(
+                    PickpocketPlugin.pickpocketRoll(
                         player = player,
                         low = 90.0,
                         high = 240.0,

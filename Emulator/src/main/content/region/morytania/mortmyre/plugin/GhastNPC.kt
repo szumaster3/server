@@ -1,7 +1,7 @@
 package content.region.morytania.mortmyre.plugin
 
 import content.data.consumables.Consumables
-import content.global.plugin.item.SatchelListener
+import content.global.plugin.item.SatchelPlugin
 import content.region.morytania.mortmyre.quest.druidspirit.plugin.NSUtils
 import core.api.*
 import core.game.consumable.Food
@@ -101,12 +101,12 @@ class GhastNPC : AbstractNPC {
             }
 
             val foodInSatchel = inventoryItems.firstOrNull { item ->
-                item.id in SatchelListener.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
+                item.id in SatchelPlugin.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
             }
 
             if (foodInSatchel != null) {
                 val chargesAmount = getCharge(foodInSatchel)
-                val foodFound = SatchelListener.SATCHEL_RESOURCES.firstOrNull { foodId ->
+                val foodFound = SatchelPlugin.SATCHEL_RESOURCES.firstOrNull { foodId ->
                     chargesAmount >= (foodId + BASE_CHARGE_AMOUNT)
                 }
 

@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
-import content.global.skill.thieving.PickpocketListener
+import content.global.skill.thieving.PickpocketPlugin
 import content.region.kandarin.feldip.quest.zogre.plugin.BrentleVahnNPC.Companion.spawnHumanZombie
 import content.region.kandarin.feldip.quest.zogre.plugin.SlashBashNPC.Companion.spawnSlashBash
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
@@ -191,7 +191,7 @@ class GutanothPlugin : InteractionListener {
             submitIndividualPulse(
                 player,
                 object : Pulse(2) {
-                    var table = PickpocketListener.pickpocketRoll(
+                    var table = PickpocketPlugin.pickpocketRoll(
                         player,
                         84.0,
                         240.0,
