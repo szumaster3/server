@@ -1,11 +1,11 @@
 package content.global.activity.shootingstar
 
+import content.global.bots.ShootingStarBot
 import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
 import core.ServerStore.Companion.getString
 import core.api.sendDialogueLines
 import core.api.sendNews
-import core.game.bots.impl.ShootingStarBot
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery

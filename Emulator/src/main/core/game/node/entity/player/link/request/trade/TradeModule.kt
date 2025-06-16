@@ -3,7 +3,7 @@ package core.game.node.entity.player.link.request.trade
 import core.api.sendString
 import core.api.setVarp
 import core.game.bots.AIRepository
-import core.game.bots.impl.DoublingMoney
+import content.global.bots.DoublingMoney
 import core.game.component.Component
 import core.game.container.Container
 import core.game.container.ContainerType

@@ -1,9 +1,9 @@
 package content.global.bots
 
+import content.global.bots.Adventurer.Companion.lumbridge
 import core.ServerConstants
 import core.game.bots.AIRepository
 import core.game.bots.Script
-import core.game.bots.impl.Adventurer.Companion.lumbridge
 import core.game.container.Container
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
