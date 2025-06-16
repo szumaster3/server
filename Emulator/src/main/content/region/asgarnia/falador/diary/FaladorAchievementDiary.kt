@@ -39,6 +39,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         private val PROSELYTE_FULL_ARMOR_FEMALE = intArrayOf(Items.PROSELYTE_SALLET_9672, Items.PROSELYTE_HAUBERK_9674, Items.PROSELYTE_TASSET_9678)
         private val PARTY_BALLOONS = intArrayOf(Scenery.PARTY_BALLOON_115, Scenery.PARTY_BALLOON_116, Scenery.PARTY_BALLOON_117, Scenery.PARTY_BALLOON_118, Scenery.PARTY_BALLOON_119, Scenery.PARTY_BALLOON_120, Scenery.PARTY_BALLOON_121, Scenery.PARTY_BALLOON_122)
         private val PARK_DUCKS = intArrayOf(NPCs.DUCK_46, NPCs.DUCK_2693)
+        private val BLACK_KNIGHTS = intArrayOf(NPCs.BLACK_KNIGHT_178, NPCs.BLACK_KNIGHT_179, NPCs.BLACK_KNIGHT_2698, NPCs.BLACK_KNIGHT_2777, NPCs.BLACK_KNIGHT_6189, NPCs.ELITE_BLACK_KNIGHT_8324, NPCs.ELITE_BLACK_KNIGHT_8325, NPCs.ELITE_BLACK_KNIGHT_8326, NPCs.ELITE_BLACK_KNIGHT_8327, NPCs.ELITE_BLACK_KNIGHT_8330)
         private val SKELETAL_WYVERNS = intArrayOf(NPCs.SKELETAL_WYVERN_3068, NPCs.SKELETAL_WYVERN_3069, NPCs.SKELETAL_WYVERN_3070, NPCs.SKELETAL_WYVERN_3071)
         private val ICE_GIANTS = intArrayOf(NPCs.ICE_GIANT_111, NPCs.ICE_GIANT_3072, NPCs.ICE_GIANT_4685, NPCs.ICE_GIANT_4686, NPCs.ICE_GIANT_4687)
         private val CAPES = intArrayOf(Items.BLACK_CAPE_1019, Items.RED_CAPE_1007, Items.BLUE_CAPE_1021, Items.YELLOW_CAPE_1023, Items.GREEN_CAPE_1027, Items.PURPLE_CAPE_1029, Items.ORANGE_CAPE_1031)
@@ -206,6 +207,14 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         player: Player,
         event: NPCKillEvent,
     ) {
+        if(event.npc.id in BLACK_KNIGHTS) {
+            finishTask(
+                player,
+                DiaryLevel.MEDIUM,
+                MediumTasks.INCREASE_WHITE_KNIGHT_REPUTATION,
+            )
+        }
+
         when (player.viewport.region.id) {
             11828 ->
                 if (event.npc.id in PARK_DUCKS && inBorders(event.npc, PARK_POND_AREA)) {
@@ -215,24 +224,18 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
                         EasyTasks.PARK_KILL_A_DUCK,
                     )
                 }
-
-            12181 -> {
-                if (event.npc.id in SKELETAL_WYVERNS) {
-                    finishTask(
-                        player,
-                        DiaryLevel.HARD,
-                        HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN,
-                    )
-                }
-                if (event.npc.id in ICE_GIANTS) {
-                    finishTask(
-                        player,
-                        DiaryLevel.MEDIUM,
-                        MediumTasks.ICE_DUNGEON_KILL_ICE_GIANT,
-                    )
-                }
+            12181 -> when (event.npc.id) {
+                in SKELETAL_WYVERNS -> finishTask(
+                    player,
+                    DiaryLevel.HARD,
+                    HardTasks.ICE_DUNGEON_KILL_SKELETAL_WYVERN,
+                )
+                in ICE_GIANTS -> finishTask(
+                    player,
+                    DiaryLevel.MEDIUM,
+                    MediumTasks.ICE_DUNGEON_KILL_ICE_GIANT,
+                )
             }
-
         }
     }
 
