@@ -33,9 +33,9 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
             ).also { stage++ }
 
             2 -> when (buttonId) {
-                1 -> player("Do you have anything to trade?").also { stage = 10 }
-                2 -> player("Why are there so many knights in this city?").also { stage = 30 }
-                3 -> player("Can I just talk to you very slowly for a few minutes, while I distract you, so that my friend over there can do something while you're busy being distracted by me?").also { stage = 40 }
+                1 -> playerl(FaceAnim.HALF_ASKING, "Do you have anything to trade?").also { stage = 10 }
+                2 -> playerl(FaceAnim.HALF_ASKING, "Why are there so many knights in this city?").also { stage = 30 }
+                3 -> playerl(FaceAnim.FRIENDLY, "Can I just talk to you very slowly for a few minutes, while I distract you, so that my friend over there can do something while you're busy being distracted by me?").also { stage = 40 }
             }
 
             // Trade.
@@ -43,21 +43,21 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
                 when {
                     !hasRequirement(player, Quests.WANTED) -> npc("No, I'm sorry.").also { stage = END_DIALOGUE }
                     rank == WhiteKnightRank.UNRANKED -> {
-                        npc("Well, maybe I do, but you need to prove yourself worthy as a White Knight before I will sell you anything.")
+                        npcl(FaceAnim.NEUTRAL,"Well, maybe I do, but you need to prove yourself worthy as a White Knight before I will sell you anything.")
                         stage++
                     }
                     else -> {
-                        npc("Well, of course! I AM the White Knights armourer after all!")
+                        npc(FaceAnim.HAPPY,"Well, of course!", "I AM the White Knights armourer after all!")
                         stage = 15
                     }
                 }
             }
-            11 -> player("And how can I do that?").also { stage++ }
-            12 -> npc("Kill Black Knights and make sure you don’t kill any White Knights!").also { stage++ }
-            13 -> player("Well, okay then.").also { stage = END_DIALOGUE }
+            11 -> playerl(FaceAnim.ASKING, "And how can I do that?").also { stage++ }
+            12 -> npcl(FaceAnim.HALF_GUILTY,"Kill Black Knights and make sure you don’t kill any White Knights!").also { stage++ }
+            13 -> playerl(FaceAnim.HALF_GUILTY,"Well, okay then.").also { stage = END_DIALOGUE }
 
             15 -> {
-                npc(getRankDialogue(rank))
+                npcl(FaceAnim.HAPPY, getRankDialogue(rank))
                 stage++
             }
             16 -> {
@@ -72,11 +72,11 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
             // Distraction.
             40 -> npcl(FaceAnim.ASKING,"... ...what?").also { stage++ }
             41 -> npcl(FaceAnim.HALF_THINKING,"I'm... not sure what you're asking me... you want to join the White Knights?").also { stage++ }
-            42 -> player("Nope. I'm just trying to distract you.").also { stage++ }
+            42 -> playerl(FaceAnim.FRIENDLY, "Nope. I'm just trying to distract you.").also { stage++ }
             43 -> npc(FaceAnim.THINKING, "... ...you are very odd.").also { stage++ }
             44 -> player(FaceAnim.HALF_ASKING,"So can I distract you some more?").also { stage++ }
             45 -> npcl(FaceAnim.NEUTRAL,"... ...I don't think I want to talk to you anymore.").also { stage++ }
-            46 -> player("Ok. My work here is done. 'Bye!").also { stage = END_DIALOGUE }
+            46 -> player(FaceAnim.HALF_GUILTY, "Ok. My work here is done. 'Bye!").also { stage = END_DIALOGUE }
         }
         return true
     }
