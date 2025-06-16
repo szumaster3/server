@@ -123,7 +123,7 @@ class LarryDialogue(player: Player? = null, ) : Dialogue(player) {
                 npc(FaceAnim.HAPPY, "Well done finding those penguins. Keep up the hard", "work, they'll keep moving around.")
             }
             31 -> {
-                val hint = Penguin.values()[PenguinManager.penguins.random()].hint
+                val hint = PenguinLocation.values()[PenguinManager.penguins.random()].hint
                 npcl(FaceAnim.FRIENDLY, "I've heard there's a penguin $hint.")
                 stage = 18
             }
