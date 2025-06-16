@@ -1,7 +1,7 @@
 package content.activity.blastfurnace
 
-import content.minigame.blastfurnace.BlastState
-import content.minigame.blastfurnace.BlastUtils
+import content.minigame.blastfurnace.plugin.BlastState
+import content.minigame.blastfurnace.plugin.BlastUtils
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

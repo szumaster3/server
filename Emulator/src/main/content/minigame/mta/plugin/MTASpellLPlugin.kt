@@ -2,6 +2,7 @@ package content.minigame.mta.plugin
 
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
+import content.minigame.mta.plugin.room.AlchemistPlaygroundPlugin
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item

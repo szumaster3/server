@@ -1,6 +1,7 @@
 package content.minigame.mta.plugin
 
 import content.global.skill.agility.AgilityHandler
+import content.minigame.mta.plugin.room.TelekineticTheatrePlugin
 import core.api.hasLevelStat
 import core.api.openDialogue
 import core.api.openInterface

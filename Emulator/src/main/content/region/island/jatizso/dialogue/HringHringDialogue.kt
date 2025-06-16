@@ -20,11 +20,10 @@ class HringHringDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("I'll have a look.", "Not right now.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("I'll have a look.").also { stage++ }
-                    2 -> player("Not right now.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> player("I'll have a look.").also { stage++ }
+                2 -> player("Not right now.").also { stage = END_DIALOGUE }
+            }
             2 -> {
                 end()
                 openNpcShop(player, NPCs.HRING_HRING_5483)

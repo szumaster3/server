@@ -22,18 +22,8 @@ class EagleEyeShultzDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "All sorts! Hide and seek, pin the patch on the pirate, walk the plank!",
-                ).also { stage++ }
-            1 ->
-                playerl(
-                    FaceAnim.WORRIED,
-                    "What a life! Wait a minute. 'Walk the plank'? Surely that's a bit dangerous?",
-                ).also {
-                    stage++
-                }
+            0 -> npcl(FaceAnim.FRIENDLY, "All sorts! Hide and seek, pin the patch on the pirate, walk the plank!").also { stage++ }
+            1 -> playerl(FaceAnim.WORRIED, "What a life! Wait a minute. 'Walk the plank'? Surely that's a bit dangerous?").also { stage++ }
             2 -> npcl(FaceAnim.LAUGH, "Well of course, but where's the fun without a few deaths?").also { stage++ }
             3 -> player(FaceAnim.HALF_THINKING, "I think I'll stick to Runelink.").also { stage = END_DIALOGUE }
         }

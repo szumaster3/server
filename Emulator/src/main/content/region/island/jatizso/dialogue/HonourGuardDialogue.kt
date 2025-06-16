@@ -41,7 +41,10 @@ class HonourGuardDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
-        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) || inBorders(player, ZoneBorders(2342, 3795, 2329, 3811))) {
+        if (isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) || inBorders(
+                player, ZoneBorders(2342, 3795, 2329, 3811)
+            )
+        ) {
             npc("Hail, $name}!").also { stage = 1 }
         } else {
             npc("Can't talk now, I'm on duty.").also { stage = END_DIALOGUE }

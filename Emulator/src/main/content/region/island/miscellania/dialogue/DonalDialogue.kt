@@ -22,15 +22,7 @@ class DonalDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player(FaceAnim.THINKING, "Just wondering if you were still here.").also { stage++ }
             1 -> npc(FaceAnim.OLD_DEFAULT, "Of course I'm still here.").also { stage++ }
             2 -> npc(FaceAnim.OLD_DISTRESSED, "I'm not going near that crack in the wall again.").also { stage++ }
-            3 ->
-                npc(
-                    FaceAnim.OLD_DISTRESSED,
-                    "Rock falls and so on are fine, ",
-                    "but sea monsters in caves - never!",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            3 -> npc(FaceAnim.OLD_DISTRESSED, "Rock falls and so on are fine, ", "but sea monsters in caves - never!").also { stage = END_DIALOGUE }
         }
         return true
     }

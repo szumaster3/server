@@ -1,7 +1,7 @@
 package content.region.other.keldagrim.plugin
 
 import content.data.GameAttributes
-import content.region.other.keldagrim.dialogue.BlastFusionHammerDialogue
+import content.minigame.blastfurnace.dialogue.BlastFusionHammerDialogue
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.api.ui.closeDialogue

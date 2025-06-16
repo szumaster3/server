@@ -3,7 +3,7 @@ package content.global.skill.magic.items
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
 import content.global.skill.prayer.Bones
-import content.minigame.mta.plugin.CreatureGraveyardPlugin
+import content.minigame.mta.plugin.room.CreatureGraveyardPlugin
 import core.api.playAudio
 import core.api.sendMessage
 import core.game.node.entity.impl.Animator

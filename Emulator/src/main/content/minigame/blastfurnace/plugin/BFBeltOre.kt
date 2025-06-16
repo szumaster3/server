@@ -1,4 +1,4 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
 import core.api.animate
 import core.api.queueScript

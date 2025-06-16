@@ -18,19 +18,9 @@ class AnnaIsaaksonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                player(
-                    "Better than expected. Its a lot...nicer...here than I was",
-                    "expecting. Everyone seems pretty happy.",
-                ).also {
-                    stage++
-                }
+            0 -> player("Better than expected. Its a lot...nicer...here than I was", "expecting. Everyone seems pretty happy.").also { stage++ }
             1 -> npc("Of course, the Burgher is strong and wise, and looks", "after us well").also { stage++ }
-            2 ->
-                player("I think some of those Jatizso citizens have got", "the wrong idea about this place.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            2 -> player("I think some of those Jatizso citizens have got", "the wrong idea about this place.").also { stage = END_DIALOGUE }
         }
         return true
     }

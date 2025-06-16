@@ -20,22 +20,13 @@ class BonzaraDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes", "No").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.WORRIED, "I ... uh ... yes.").also { stage = 10 }
-                    2 -> playerl(FaceAnim.ASKING, "No thank you. Who are you by the way?").also { stage = 20 }
-                }
-            10 -> npc(FaceAnim.OLD_DEFAULT, "Right you are.").also { stage++ }
-            11 -> {
-                end()
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.WORRIED, "I ... uh ... yes.").also { stage = 10 }
+                2 -> playerl(FaceAnim.ASKING, "No thank you. Who are you by the way?").also { stage = 20 }
             }
-            20 ->
-                npcl(
-                    FaceAnim.OLD_DEFAULT,
-                    "Never mind that child. You should worry more about who you are and the nature of the forces that have driven you here.",
-                ).also {
-                    stage++
-                }
+            10 -> npc(FaceAnim.OLD_DEFAULT, "Right you are.").also { stage++ }
+            11 -> end()
+            20 -> npcl(FaceAnim.OLD_DEFAULT, "Never mind that child. You should worry more about who you are and the nature of the forces that have driven you here.").also { stage++ }
             21 -> player(FaceAnim.THINKING, "I'll ... keep that in mind, thanks.").also { stage++ }
             22 -> npc(FaceAnim.OLD_DEFAULT, "We WILL meet again, " + player.name + ".").also { stage++ }
             23 -> player(FaceAnim.SUSPICIOUS, "Ok...").also { stage = END_DIALOGUE }

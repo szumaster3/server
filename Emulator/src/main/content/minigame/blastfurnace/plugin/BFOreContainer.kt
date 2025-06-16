@@ -1,9 +1,9 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
 import content.global.skill.smithing.Bar
-import content.minigame.blastfurnace.BlastFurnace.Companion.getBarForOreId
-import content.minigame.blastfurnace.BlastFurnace.Companion.getNeededCoal
-import content.minigame.blastfurnace.BlastUtils.BAR_LIMIT
+import content.minigame.blastfurnace.plugin.BlastFurnace.Companion.getBarForOreId
+import content.minigame.blastfurnace.plugin.BlastFurnace.Companion.getNeededCoal
+import content.minigame.blastfurnace.plugin.BlastUtils.BAR_LIMIT
 import core.game.node.item.Item
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject

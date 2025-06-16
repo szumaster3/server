@@ -20,21 +20,11 @@ class FullangrDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("What are you doing down here?", "Good day.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.FRIENDLY, "What are you doing down here?").also { stage++ }
-                    2 -> player(FaceAnim.NEUTRAL, "Good day.").also { stage = END_DIALOGUE }
-                }
-            2 ->
-                npc(
-                    FaceAnim.OLD_DEFAULT,
-                    "I'm working on the digging, of course.",
-                    "It's a small excavation, so only two of us ",
-                    "can work on it at a time.",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.FRIENDLY, "What are you doing down here?").also { stage++ }
+                2 -> player(FaceAnim.NEUTRAL, "Good day.").also { stage = END_DIALOGUE }
+            }
+            2 -> npc(FaceAnim.OLD_DEFAULT, "I'm working on the digging, of course.", "It's a small excavation, so only two of us ", "can work on it at a time.").also { stage = END_DIALOGUE }
         }
         return true
     }

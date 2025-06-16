@@ -1,4 +1,4 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
 import core.api.resetAnimator
 import core.api.teleport

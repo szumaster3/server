@@ -1,4 +1,4 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
 import content.global.skill.smithing.Bar
 import core.api.*

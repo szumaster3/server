@@ -1,5 +1,7 @@
-package content.minigame.mta.plugin
+package content.minigame.mta.plugin.room
 
+import content.minigame.mta.plugin.MTAType
+import content.minigame.mta.plugin.MTAZone
 import core.api.removeAttribute
 import core.api.sendDialogue
 import core.api.sendString

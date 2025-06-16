@@ -27,37 +27,21 @@ class BillTeachDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            1 ->
-                when (buttonId) {
-                    1 -> end()
-                    2 ->
-                        if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
-                            playerl(FaceAnim.SAD, "Cap'n, I lost that book you gave me.").also { stage = 2 }
-                        } else {
-                            npc("If yer after a lift go to the ship and I'll take ye where ye", " want to go.").also {
-                                stage =
-                                    END_DIALOGUE
-                            }
-                        }
+            1 -> when (buttonId) {
+                1 -> end()
+                2 -> if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+                    playerl(FaceAnim.SAD, "Cap'n, I lost that book you gave me.").also { stage = 2 }
+                } else {
+                    npc("If yer after a lift go to the ship and I'll take ye where ye", " want to go.").also { stage = END_DIALOGUE }
                 }
-            2 ->
-                npc(
-                    FaceAnim.NEUTRAL,
-                    "Ye'll notice I'm not fallin' to the floor in shock right",
-                    "now.",
-                ).also { stage++ }
-            3 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Look, if I gives ye another copy will ye keep a better",
-                    "eye on it?",
-                ).also { stage++ }
+            }
+            2 -> npc(FaceAnim.NEUTRAL, "Ye'll notice I'm not fallin' to the floor in shock right", "now.").also { stage++ }
+            3 -> npc(FaceAnim.HALF_GUILTY, "Look, if I gives ye another copy will ye keep a better", "eye on it?").also { stage++ }
             4 -> player(FaceAnim.HAPPY, "Aye Cap'n!").also { stage++ }
-            5 ->
-                npc(FaceAnim.NEUTRAL, "Then here, have this other copy I dug up.").also {
-                    addItemOrDrop(player, Items.BOOK_O_PIRACY_7144)
-                    stage = END_DIALOGUE
-                }
+            5 -> npc(FaceAnim.NEUTRAL, "Then here, have this other copy I dug up.").also {
+                addItemOrDrop(player, Items.BOOK_O_PIRACY_7144)
+                stage = END_DIALOGUE
+            }
         }
         return true
     }

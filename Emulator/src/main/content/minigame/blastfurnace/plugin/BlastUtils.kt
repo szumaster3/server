@@ -1,4 +1,4 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
 import core.game.world.map.Location
 import org.rs.consts.Scenery

@@ -1,5 +1,6 @@
 package content.minigame.mta.plugin
 
+import content.minigame.mta.plugin.room.EnchantmentChamberPlugin
 import core.api.inZone
 import core.api.playAudio
 import core.api.removeItem

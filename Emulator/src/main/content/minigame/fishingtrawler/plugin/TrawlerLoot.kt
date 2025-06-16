@@ -1,4 +1,4 @@
-package content.minigame.fishingtrawler
+package content.minigame.fishingtrawler.plugin
 
 import content.global.skill.gathering.fishing.Fish
 import core.game.dialogue.splitLines
@@ -75,11 +75,7 @@ object TrawlerLoot {
     }
 
     @JvmStatic
-    fun getLoot(
-        fishLevel: Int,
-        rolls: Int,
-        skipJunk: Boolean,
-    ): ArrayList<Item> {
+    fun getLoot(fishLevel: Int, rolls: Int, skipJunk: Boolean, ): ArrayList<Item> {
         val loot = ArrayList<Item>()
         for (i in 0 until rolls) {
             val item = RandomFunction.rollWeightedChanceTable(listOf(*lootTable))
@@ -93,12 +89,7 @@ object TrawlerLoot {
     }
 
     @JvmStatic
-    fun addLootAndMessage(
-        player: Player,
-        fishLevel: Int,
-        rolls: Int,
-        skipJunk: Boolean,
-    ) {
+    fun addLootAndMessage(player: Player, fishLevel: Int, rolls: Int, skipJunk: Boolean, ) {
         if (rolls < 1) return
         val frequencyList = listOf<MutableMap<String, Int>>(HashMap(), HashMap(), HashMap())
         getLoot(fishLevel, rolls, skipJunk).forEach {

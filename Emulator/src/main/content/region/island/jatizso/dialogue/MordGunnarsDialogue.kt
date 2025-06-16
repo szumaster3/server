@@ -28,11 +28,10 @@ class MordGunnarsDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Yes, please!").also { stage++ }
-                    2 -> playerl(FaceAnim.FRIENDLY, "No, thank you.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> playerl(FaceAnim.FRIENDLY, "Yes, please!").also { stage++ }
+                2 -> playerl(FaceAnim.FRIENDLY, "No, thank you.").also { stage = END_DIALOGUE }
+            }
 
             2 -> {
                 end()
@@ -41,9 +40,7 @@ class MordGunnarsDialogue(player: Player? = null) : Dialogue(player) {
                 } else {
                     WaterbirthUtils.sail(
                         player,
-                        if (npc.id ==
-                            NPCs.MORD_GUNNARS_5481
-                        ) {
+                        if (npc.id == NPCs.MORD_GUNNARS_5481) {
                             TravelDestination.RELLEKKA_TO_JATIZSO
                         } else {
                             TravelDestination.JATIZSO_TO_RELLEKKA

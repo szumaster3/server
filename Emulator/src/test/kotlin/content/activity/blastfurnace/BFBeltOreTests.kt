@@ -1,8 +1,8 @@
 package content.activity.blastfurnace
 
 import TestUtils
-import content.minigame.blastfurnace.BFBeltOre
-import content.minigame.blastfurnace.BlastFurnace
+import content.minigame.blastfurnace.plugin.BFBeltOre
+import content.minigame.blastfurnace.plugin.BlastFurnace
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.rs.consts.Items

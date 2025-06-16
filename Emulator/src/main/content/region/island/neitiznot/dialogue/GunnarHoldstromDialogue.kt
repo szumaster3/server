@@ -20,18 +20,8 @@ class GunnarHoldstromDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.ASKING, "It's not bad. What puts you in such a good mood?").also { stage++ }
-            1 ->
-                npcl(
-                    FaceAnim.HAPPY,
-                    "Oh, I just love my job. The smell of the sea breeze, the smell of the arctic pine sap, the smell of the yaks. I find it all so bracing.",
-                ).also {
-                    stage++
-                }
-            2 ->
-                playerl(FaceAnim.ASKING, "Bracing? Hmmm. I think I might have chosen a different word.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            1 -> npcl(FaceAnim.HAPPY, "Oh, I just love my job. The smell of the sea breeze, the smell of the arctic pine sap, the smell of the yaks. I find it all so bracing.").also { stage++ }
+            2 -> playerl(FaceAnim.ASKING, "Bracing? Hmmm. I think I might have chosen a different word.").also { stage = END_DIALOGUE }
         }
         return true
     }

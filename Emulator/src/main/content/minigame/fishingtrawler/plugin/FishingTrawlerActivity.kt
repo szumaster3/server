@@ -1,4 +1,4 @@
-package content.minigame.fishingtrawler
+package content.minigame.fishingtrawler.plugin
 
 import core.api.MapArea
 import core.game.activity.ActivityManager

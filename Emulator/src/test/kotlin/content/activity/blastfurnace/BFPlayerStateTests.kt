@@ -2,7 +2,7 @@ package content.activity.blastfurnace
 
 import TestUtils
 import content.global.skill.smithing.Bar
-import content.minigame.blastfurnace.BlastFurnace
+import content.minigame.blastfurnace.plugin.BlastFurnace
 import core.api.addItem
 import core.api.amountInInventory
 import org.junit.jupiter.api.Assertions

@@ -1,6 +1,6 @@
-package content.minigame.blastfurnace
+package content.minigame.blastfurnace.plugin
 
-import content.region.other.keldagrim.dialogue.BlastFurnaceDoorDialogue
+import content.minigame.blastfurnace.dialogue.BlastFurnaceDoorDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.Topic
@@ -16,7 +16,7 @@ import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 
-class BlastFurnaceListeners : InteractionListener {
+class BlastFurnacePlugin : InteractionListener {
     companion object {
         var initialized = false
         val PUMP_LOC = Location.create(1950, 4961, 0)

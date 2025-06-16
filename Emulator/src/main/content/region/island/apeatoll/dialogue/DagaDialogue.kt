@@ -35,23 +35,13 @@ class DagaDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 openNpcShop(player, NPCs.DAGA_1434)
             }
-
-            30 -> npcl(
-                FaceAnim.OLD_DEFAULT,
-                "It just so happens I recently got a fresh delivery, do you want to buy one?",
-            ).also {
-                stage++
-            }
-
+            30 -> npcl(FaceAnim.OLD_DEFAULT, "It just so happens I recently got a fresh delivery, do you want to buy one?").also { stage++ }
             31 -> options("Yes, please.", "No, thanks.").also { stage++ }
             32 -> when (buttonId) {
                 1 -> {
+                    end()
                     if (!removeItem(player, Item(Items.COINS_995, 100000))) {
-                        end()
-                        npcl(
-                            FaceAnim.OLD_NORMAL,
-                            "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.",
-                        )
+                        npcl(FaceAnim.OLD_NORMAL, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.")
                     } else {
                         addItem(player, Items.DRAGON_SCIMITAR_4587, 1)
                     }

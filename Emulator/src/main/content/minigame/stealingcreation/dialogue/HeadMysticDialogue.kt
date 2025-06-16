@@ -9,13 +9,9 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class HeadMysticDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+class HeadMysticDialogue(player: Player? = null) : Dialogue(player) {
+
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 if (!GameWorld.settings!!.isMembers) {

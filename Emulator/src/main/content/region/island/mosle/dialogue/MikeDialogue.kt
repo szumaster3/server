@@ -23,33 +23,21 @@ class MikeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                if (!MosleUtils.canUnderstandPirateLanguage(player)) {
-                    npcl(
-                        FaceAnim.FRIENDLY,
-                        "Arr? Be ye wantin' te go on account with our gang o' fillibusters?",
-                    ).also { stage++ }
-                } else {
-                    npcl(FaceAnim.HALF_ASKING, "Wanna buy some clothes? Good quality, none of yer rags.").also {
-                        stage = 4
-                    }
+            0 -> if (!MosleUtils.canUnderstandPirateLanguage(player)) {
+                npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
+            } else {
+                npcl(FaceAnim.HALF_ASKING, "Wanna buy some clothes? Good quality, none of yer rags.").also {
+                    stage = 4
                 }
+            }
 
-            1 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "The powder monkey be takin' a caulk after gettin' rowdy on bumboo, so there be plenty of room for ye.",
-                ).also {
-                    stage++
-                }
+            1 -> npcl(FaceAnim.FRIENDLY, "The powder monkey be takin' a caulk after gettin' rowdy on bumboo, so there be plenty of room for ye.").also { stage++ }
             2 -> player(FaceAnim.STRUGGLE, "Riiiiight...").also { stage++ }
             3 -> playerl(FaceAnim.STRUGGLE, "I'll just be over here if you need me.").also { stage = END_DIALOGUE }
             4 -> options("I'll take a look.", "No thanks.").also { stage++ }
-            5 -> {
-                when (buttonId) {
-                    1 -> player("I'll take a look.").also { stage = 7 }
-                    2 -> player("No thanks.").also { stage = 6 }
-                }
+            5 -> when (buttonId) {
+                1 -> player("I'll take a look.").also { stage = 7 }
+                2 -> player("No thanks.").also { stage = 6 }
             }
             6 -> npcl(FaceAnim.ANNOYED, "Then what are you doin' in my shop? Move along.").also { stage = END_DIALOGUE }
             7 -> {

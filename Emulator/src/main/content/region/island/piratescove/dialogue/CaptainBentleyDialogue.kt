@@ -34,30 +34,16 @@ class CaptainBentleyDialogue(player: Player? = null) : Dialogue(player) {
             }
             2 -> npc("And you're wanting what now?").also { stage++ }
             3 -> options("Can you take me back to Rellekka please?", "So we're here?").also { stage++ }
-            4 ->
-                when (buttonId) {
-                    1 -> player("Can you take me back to Rellekka please?").also { stage++ }
-                    2 -> player("So we're here?").also { stage = 7 }
-                }
-            5 ->
-                npc(
-                    "I'll take you as far as Pirates' Cove. You'll have to find",
-                    "the rest of the way back yourself.",
-                ).also {
-                    stage++
-                }
+            4 -> when (buttonId) {
+                1 -> player("Can you take me back to Rellekka please?").also { stage++ }
+                2 -> player("So we're here?").also { stage = 7 }
+            }
+            5 -> npc("I'll take you as far as Pirates' Cove. You'll have to find", "the rest of the way back yourself.").also { stage++ }
             6 -> {
                 end()
                 sail(player, Destination.MOONCLAN_ISLAND_TO_PIRATES_COVE)
             }
-            7 ->
-                npc(
-                    "Yep. You're free to explore the island. Be careful though, ",
-                    "the Moon Clan are very powerful, it wouldn't be wise to",
-                    "wrong them.",
-                ).also {
-                    stage++
-                }
+            7 -> npc("Yep. You're free to explore the island. Be careful though, ", "the Moon Clan are very powerful, it wouldn't be wise to", "wrong them.").also { stage++ }
             8 -> player("Thanks, i'll keep that seal of passage close.").also { stage++ }
             9 -> end()
         }

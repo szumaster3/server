@@ -6,7 +6,7 @@ import content.global.plugin.iface.Page
 import content.global.plugin.iface.PageSet
 import content.global.skill.farming.timers.Compost
 import content.global.skill.farming.timers.CropGrowth
-import content.minigame.fishingtrawler.TrawlerLoot
+import content.minigame.fishingtrawler.plugin.TrawlerLoot
 import core.ServerConstants
 import core.api.*
 import core.cache.def.impl.NPCDefinition

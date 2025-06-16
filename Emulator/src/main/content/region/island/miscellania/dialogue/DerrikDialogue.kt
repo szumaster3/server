@@ -20,12 +20,10 @@ class DerrikDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Can I use your anvil?", "Nothing, thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.ASKING, "Can I use your anvil?").also { stage++ }
-                    2 -> player(FaceAnim.NEUTRAL, "Nothing, thanks.").also { stage = END_DIALOGUE }
-                }
-
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.ASKING, "Can I use your anvil?").also { stage++ }
+                2 -> player(FaceAnim.NEUTRAL, "Nothing, thanks.").also { stage = END_DIALOGUE }
+            }
             2 -> npc(FaceAnim.NEUTRAL, "You may.").also { stage = END_DIALOGUE }
         }
         return true

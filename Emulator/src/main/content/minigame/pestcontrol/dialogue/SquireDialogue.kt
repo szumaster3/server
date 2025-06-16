@@ -14,9 +14,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class SquireDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SquireDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
         if (args.size == 3) {
             val type = args[1] as Int
@@ -25,11 +24,13 @@ class SquireDialogue(
                     playJingle(player, 144)
                     sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HALF_GUILTY, false, "The Void Knight was killed, another of our Order has", "fallen and that Island is lost.").also { stage = END_DIALOGUE }
                 }
+
                 1 -> {
                     val points = args[2] as String
                     playJingle(player, 145)
                     sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HAPPY, false, "Congratulations! You managed to destroy all the portals!", "We've awarded you $points Void Knight Commendation", "points. Please also accept these coins as a reward.").also { stage = 17 }
                 }
+
                 else -> {
                     playJingle(player, 145)
                     sendNPCDialogueLines(player, NPCs.SQUIRE_3781, FaceAnim.HALF_GUILTY, false, "Congratulations! You managed to destroy all the portals!", "However, you did not succeed in reaching the required", "amount of damage dealt we cannot grant you a reward.").also { stage = END_DIALOGUE }
@@ -48,7 +49,7 @@ class SquireDialogue(
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 if (npc.id == NPCs.SQUIRE_3781) {
@@ -57,22 +58,26 @@ class SquireDialogue(
                     options("Who are you?", "Where does this ship go?", "I'd like to go to your outpost.", "I'm fine thanks.").also { stage = 2 }
                 }
             }
+
             1 -> when (buttonId) {
                 1 -> player("I'd like to go back to Port Sarim please.").also { stage = 3 }
                 2 -> player("I'm fine thanks.").also { stage = END_DIALOGUE }
 
             }
+
             2 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Who are you?").also { stage = 5 }
                 2 -> player(FaceAnim.HALF_GUILTY, "Where does this ship go?").also { stage = 8 }
                 3 -> player(FaceAnim.HALF_GUILTY, "I'd like to go to your outpost.").also { stage = 11 }
                 4 -> player(FaceAnim.HALF_GUILTY, "I'm fine thanks.").also { stage = END_DIALOGUE }
             }
+
             3 -> npc("Ok, but please come back soon and help us.").also { stage++ }
             4 -> {
                 end()
                 Charter.PEST_TO_PORT_SARIM.sail(player)
             }
+
             5 -> npc(FaceAnim.HALF_GUILTY, "I'm a Squire for the Void Knights.").also { stage++ }
             6 -> npc(FaceAnim.HALF_GUILTY, "The who?").also { stage++ }
             7 -> npc(FaceAnim.HALF_GUILTY, "The Void Knights, they are great warriors of balance", "who do Guthix's work here in " + settings!!.name + ".").also { stage = END_DIALOGUE }

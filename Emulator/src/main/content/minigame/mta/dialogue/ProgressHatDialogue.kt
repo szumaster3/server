@@ -33,16 +33,13 @@ class ProgressHatDialogue(
             "Sorry, but do you think you could tell me my Pizazz Points?",
         ),
         listOf(
-            "Can't you see I'm busy?",
-            "But you're just a hat? Can you tell me my Pizazz Point totals?"
+            "Can't you see I'm busy?", "But you're just a hat? Can you tell me my Pizazz Point totals?"
         ),
         listOf(
-            "What do you want?",
-            "Do you think you could tell me my Pizazz Points?"
+            "What do you want?", "Do you think you could tell me my Pizazz Points?"
         ),
         listOf(
-            "I suppose you want to know your Pizazz Points.",
-            "That would be nice, yes."
+            "I suppose you want to know your Pizazz Points.", "That would be nice, yes."
         ),
     )
 
@@ -66,10 +63,12 @@ class ProgressHatDialogue(
                 npc(FaceAnim.OLD_NORMAL, *splitLines(response[0]))
                 stage = 1
             }
+
             1 -> {
                 player(FaceAnim.HALF_ASKING, *splitLines(response[1]))
                 stage = 2
             }
+
             2 -> {
                 npc(
                     FaceAnim.OLD_NORMAL,
@@ -80,14 +79,17 @@ class ProgressHatDialogue(
                 )
                 stage = 3
             }
+
             3 -> {
                 player("Thank you!")
                 stage = END_DIALOGUE
             }
+
             4 -> {
                 sendDialogueOptions(player, "Destroy Hat?", "Yes", "No")
                 stage = 5
             }
+
             5 -> {
                 when (buttonId) {
                     1 -> {
@@ -105,6 +107,7 @@ class ProgressHatDialogue(
                         stage = END_DIALOGUE
                         return true
                     }
+
                     2 -> {
                         npc(FaceAnim.OLD_NORMAL, "I think so too!")
                         stage = END_DIALOGUE

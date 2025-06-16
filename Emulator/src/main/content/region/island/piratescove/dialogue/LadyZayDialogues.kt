@@ -116,15 +116,14 @@ class LadyZayDialogues(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = LadyZayDialogues(player)
 
-    override fun getIds(): IntArray =
-        intArrayOf(
-            NPCs.BIRDS_EYE_JACK_4544,
-            NPCs.BEDREAD_THE_BOLD_4547,
-            NPCs.TOMMY_2_TIMES_4549,
-            NPCs.MURKY_PAT_4550,
-            NPCs.JACK_SAILS_4551,
-            NPCs.BEEDY_EYE_JONES_4554,
-            NPCs.JENNY_BLADE_4555,
-            NPCs.STICKY_SANDERS_4557,
-        )
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.BIRDS_EYE_JACK_4544,
+        NPCs.BEDREAD_THE_BOLD_4547,
+        NPCs.TOMMY_2_TIMES_4549,
+        NPCs.MURKY_PAT_4550,
+        NPCs.JACK_SAILS_4551,
+        NPCs.BEEDY_EYE_JONES_4554,
+        NPCs.JENNY_BLADE_4555,
+        NPCs.STICKY_SANDERS_4557
+    )
 }

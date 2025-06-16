@@ -1,9 +1,9 @@
 package content.activity.blastfurnace
 
 import TestUtils
-import content.minigame.blastfurnace.BlastFurnace
-import content.minigame.blastfurnace.BlastFurnaceListeners
-import content.minigame.blastfurnace.BlastUtils
+import content.minigame.blastfurnace.plugin.BlastFurnace
+import content.minigame.blastfurnace.plugin.BlastFurnacePlugin
+import content.minigame.blastfurnace.plugin.BlastUtils
 import core.ServerConstants
 import core.api.addItem
 import core.api.amountInInventory
@@ -241,7 +241,7 @@ class BlastFurnaceAreaTests {
     companion object {
         init {
             TestUtils.preTestSetup()
-            BlastFurnaceListeners().defineListeners()
+            BlastFurnacePlugin().defineListeners()
         }
     }
 }

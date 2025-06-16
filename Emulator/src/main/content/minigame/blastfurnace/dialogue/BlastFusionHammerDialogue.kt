@@ -1,4 +1,4 @@
-package content.region.other.keldagrim.dialogue
+package content.minigame.blastfurnace.dialogue
 
 import core.api.*
 import core.game.dialogue.DialogueFile

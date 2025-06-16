@@ -20,21 +20,12 @@ class JariDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("What are you doing down here?", "Good day.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.FRIENDLY, "What are you doing down here?").also { stage++ }
-                    2 -> player(FaceAnim.NEUTRAL, "Good day.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.FRIENDLY, "What are you doing down here?").also { stage++ }
+                2 -> player(FaceAnim.NEUTRAL, "Good day.").also { stage = END_DIALOGUE }
+            }
             2 -> npc(FaceAnim.OLD_DEFAULT, "I'm waiting to work on the digging.").also { stage++ }
-            3 ->
-                npc(
-                    FaceAnim.OLD_HAPPY,
-                    "It's the first excavation I've worked on, ",
-                    "and I'm looking forward to it.",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            3 -> npc(FaceAnim.OLD_HAPPY, "It's the first excavation I've worked on, ", "and I'm looking forward to it.").also { stage = END_DIALOGUE }
         }
         return true
     }

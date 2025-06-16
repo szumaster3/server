@@ -10,24 +10,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class RechargeDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class RechargeDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         usedSceptre = args[0] as Item
         sendMessage(player, "" + args[0])
-        sendNPCDialogueLines(
-            player, NPCs.GUARDIAN_MUMMY_4476, FaceAnim.OLD_NOT_INTERESTED,false,
-            "Mrrrh, how do you have this? You shouldn't.",
-            "Nevertheless, I can recharge this for you.",
-        )
+        sendNPCDialogueLines(player, NPCs.GUARDIAN_MUMMY_4476, FaceAnim.OLD_NOT_INTERESTED, false, "Mrrrh, how do you have this? You shouldn't.", "Nevertheless, I can recharge this for you.")
         return true
     }
 
-    override fun handle(
-        dialogId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(dialogId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 setTitle(player, 2)
@@ -36,13 +27,7 @@ class RechargeDialogue(
             1 -> when (buttonId) {
                 1 -> {
                     setTitle(player, 3)
-                    sendDialogueOptions(
-                        player,
-                        "Recharge with?",
-                        "Clay/Ivory Artefacts(24)",
-                        "Stone Artefacts(12)",
-                        "Gold Artefacts(6)",
-                    ).also { stage = 20 }
+                    sendDialogueOptions(player, "Recharge with?", "Clay/Ivory Artefacts(24)", "Stone Artefacts(12)", "Gold Artefacts(6)").also { stage = 20 }
                 }
 
                 2 -> stage = 100

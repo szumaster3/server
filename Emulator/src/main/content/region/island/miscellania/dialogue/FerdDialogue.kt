@@ -24,14 +24,7 @@ class FerdDialogue(player: Player? = null) : Dialogue(player) {
             2 -> player(FaceAnim.ASKING, "What does that do?").also { stage++ }
             3 -> npc(FaceAnim.OLD_DEFAULT, "Stops them falling down.").also { stage++ }
             4 -> player(FaceAnim.ASKING, "Oh, I see.").also { stage++ }
-            5 ->
-                npc(
-                    FaceAnim.OLD_NOT_INTERESTED,
-                    "Aye.",
-                    "If you want to chatter, you'd better talk to ",
-                    "Thorodin over there. I'm working.",
-                ).also { stage++ }
-
+            5 -> npc(FaceAnim.OLD_NOT_INTERESTED, "Aye.", "If you want to chatter, you'd better talk to ", "Thorodin over there. I'm working.").also { stage++ }
             6 -> player(FaceAnim.ASKING, "Okay then.").also { stage = END_DIALOGUE }
         }
         return true

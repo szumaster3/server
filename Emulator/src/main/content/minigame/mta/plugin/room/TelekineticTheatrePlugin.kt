@@ -1,5 +1,7 @@
-package content.minigame.mta.plugin
+package content.minigame.mta.plugin.room
 
+import content.minigame.mta.plugin.MTAType
+import content.minigame.mta.plugin.MTAZone
 import core.api.sendMessage
 import core.api.sendString
 import core.game.interaction.Option
