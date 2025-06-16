@@ -1,6 +1,5 @@
 package content.global.skill.agility.shortcuts
 
-import content.global.plugin.item.seaBoots
 import core.api.animationCycles
 import core.api.anyInEquipment
 import core.api.forceMove

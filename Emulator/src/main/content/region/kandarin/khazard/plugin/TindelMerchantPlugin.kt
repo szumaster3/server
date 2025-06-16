@@ -1,6 +1,7 @@
 package content.region.kandarin.khazard.plugin
 
 import content.data.items.BrokenItem
+import content.region.kandarin.khazard.dialogue.TindelMerchantDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
