@@ -50,13 +50,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
                     return false
                 }
             }
-
-            71 -> npc(
-                FaceAnim.FRIENDLY,
-                "Well you're all finished here now. I'll give you a",
-                "reasonable number of runes when you leave.",
-            )
-
+            71 -> npc(FaceAnim.FRIENDLY, "Well you're all finished here now. I'll give you a", "reasonable number of runes when you leave.")
             else -> return false
         }
         return true

@@ -19,21 +19,9 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
-            27 -> npc(
-                FaceAnim.FRIENDLY,
-                "Ah. Welcome, adventurer. I'm here to tell you all about",
-                "quests. Lets start by opening the Quest List.",
-            )
-
-            28 -> npc(
-                FaceAnim.FRIENDLY,
-                "Now you have the journal open. I'll tell you a bit about",
-                "it At the moment all the quests are shown in red, which",
-                "means you have not started them yet.",
-            )
-
+            27 -> npc(FaceAnim.FRIENDLY, "Ah. Welcome, adventurer. I'm here to tell you all about", "quests. Lets start by opening the Quest List.")
+            28 -> npc(FaceAnim.FRIENDLY, "Now you have the journal open. I'll tell you a bit about", "it At the moment all the quests are shown in red, which", "means you have not started them yet.")
             in 29..72 -> npc(FaceAnim.HALF_ASKING, "Would you like to hear about quests again?")
-
             else -> return false
         }
         return true
@@ -42,45 +30,15 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             27 -> {
-                sendUnclosablePlainDialogue(
-                    player,
-                    true,
-                    "${core.tools.BLUE}Open the Quest Journal.",
-                    "",
-                    "Click on the flashing icon next to your inventory.",
-                )
+                sendUnclosablePlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
                 TutorialStage.removeHintIcon(player)
                 setVarbit(player, 3756, 3)
                 player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
             }
-
             28 -> when (stage) {
-                0 -> npc(
-                    "When you start a quest it will change colour to yellow,",
-                    "and to green when you've finished. This is so you can",
-                    "easily see what's complete, what's started and what's left",
-                    "to begin.",
-                ).also {
-                    stage++
-                }
-
-                1 -> npc(
-                    "The start of quests are easy to find. Look out for the",
-                    "star icons on the minimap, just like the one you should",
-                    "see marking my house.",
-                ).also {
-                    stage++
-                }
-
-                2 -> npc(
-                    "There's not a lot more I can tell you about questing.",
-                    "You have to experience the thrill of it yourself to fully",
-                    "understand. You may find some adventure in the caves",
-                    "under my house.",
-                ).also {
-                    stage++
-                }
-
+                0 -> npc("When you start a quest it will change colour to yellow,", "and to green when you've finished. This is so you can", "easily see what's complete, what's started and what's left", "to begin.").also { stage++ }
+                1 -> npc("The start of quests are easy to find. Look out for the", "star icons on the minimap, just like the one you should", "see marking my house.").also { stage++ }
+                2 -> npc("There's not a lot more I can tell you about questing.", "You have to experience the thrill of it yourself to fully", "understand. You may find some adventure in the caves", "under my house.").also { stage++ }
                 3 -> {
                     end()
                     setAttribute(player, TutorialStage.TUTORIAL_STAGE, 29)
