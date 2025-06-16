@@ -10,93 +10,89 @@ import kotlin.math.min
 class PoisonWeaponPlugin : InteractionListener {
 
     private val poisonsId = intArrayOf(Items.WEAPON_POISON_187, Items.WEAPON_POISON_PLUS_5937, Items.WEAPON_POISON_PLUS_PLUS_5940)
-    private val regularWeapon = PoisonSets.itemMap.keys.toIntArray()
-    private val poisonedWeapon = PoisonSets.itemMap.values.toIntArray()
-    private val regWeapon = KarambwanPoisonSets.regularWeaponsMap.values.map { it.base }.toIntArray()
-    private val kpWeapon = KarambwanPoisonSets.poisonWeaponMap.values.map { it.kp }.toIntArray()
+    private val regularWeapons = PoisonSets.itemMap.keys.toIntArray()
+    private val poisonedWeapons = PoisonSets.itemMap.values.toIntArray()
+    private val regularKarambwanWeapons = KarambwanPoisonSets.regularWeaponsMap.values.map { it.base }.toIntArray()
+    private val karambwanPoisonedWeapons = KarambwanPoisonSets.poisonWeaponMap.values.map { it.kp }.toIntArray()
 
     override fun defineListeners() {
 
-        onUseWith(IntType.ITEM, poisonsId, *regularWeapon) { player, used, with ->
+        onUseWith(IntType.ITEM, poisonsId, *regularWeapons) { player, used, with ->
             val index = poisonsId.indexOf(used.id)
-            val product = PoisonSets.itemMap[with.id]!![index]
-            val amt = min(5, with.asItem().amount)
+            val product = PoisonSets.itemMap[with.id]?.get(index) ?: return@onUseWith true
+            val item = with.asItem()
+            val amt = min(5, item.amount)
 
-            if (removeItem(player, Item(with.id, amt))) {
-                replaceSlot(player, used.asItem().index, Item(Items.VIAL_229, 1))
+            if (removeItem(player, Item(item.id, amt))) {
                 addItemOrDrop(player, product, amt)
+                replaceSlot(player, used.asItem().index, Item(Items.VIAL_229, 1))
                 sendMessage(player, "You poison the ${with.name.lowercase()}.")
             }
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.KARAMBWAN_PASTE_3153, *regWeapon) { player, used, with ->
-            val product = KarambwanPoisonSets.regularWeaponsMap[with.id] ?: return@onUseWith true
+        onUseWith(IntType.ITEM, Items.KARAMBWAN_PASTE_3153, *regularKarambwanWeapons) { player, used, with ->
+            val item = with.asItem()
+            val product = KarambwanPoisonSets.regularWeaponsMap[item.id] ?: return@onUseWith true
+
             if (removeItem(player, used.asItem())) {
-                replaceSlot(player, with.asItem().slot, Item(product.kp, 1))
-                sendMessage(
-                    player,
-                    "You smear the poisonous Karambwan paste over the " +
-                            "${if (!product.name.contains("spear", true)) "hasta" else "spear"}.",
-                )
+                replaceSlot(player, item.index, Item(product.kp, 1))
+                val weaponType = if (product.name.contains("spear", ignoreCase = true)) "spear" else "hasta"
+                sendMessage(player, "You smear the poisonous Karambwan paste over the $weaponType.")
             }
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *kpWeapon) { player, _, with ->
-            val product = KarambwanPoisonSets.poisonWeaponMap[with.id] ?: return@onUseWith true
-            replaceSlot(player, with.asItem().slot, Item(product.base, 1))
+        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *poisonedWeapons) { player, _, with ->
+            val item = with.asItem()
+            val base = PoisonSets.getBase(item.id) ?: return@onUseWith false
+            val amt = min(5, item.amount)
+
+            if (removeItem(player, Item(item.id, amt))) {
+                replaceSlot(player, item.index, Item(base, amt))
+            }
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *poisonedWeapon) { player, _, with ->
-            val base = PoisonSets.getBase(with.id) ?: return@onUseWith false
-            val amt = min(5, with.asItem().amount)
-            removeItem(player, Item(with.id, amt))
-            addItemOrDrop(player, base, amt)
+        onUseWith(IntType.ITEM, Items.CLEANING_CLOTH_3188, *karambwanPoisonedWeapons) { player, _, with ->
+            val item = with.asItem()
+            val base = KarambwanPoisonSets.getBase(item.id) ?: return@onUseWith false
+            val amt = min(5, item.amount)
+
+            if (removeItem(player, Item(item.id, amt))) {
+                replaceSlot(player, item.index, Item(base, amt))
+            }
             return@onUseWith true
         }
     }
 
-    internal enum class KarambwanPoisonSets(
-        val base: Int,
-        val kp: Int,
-    ) {
-        BRONZE_SPEAR(Items.BRONZE_SPEAR_1237, Items.BRONZE_SPEARKP_3170),
-        IRON_SPEAR(Items.IRON_SPEAR_1239, Items.IRON_SPEARKP_3171),
-        STEEL_SPEAR(Items.STEEL_SPEAR_1241, Items.STEEL_SPEARKP_3172),
-        BLACK_SPEAR(Items.BLACK_SPEAR_4580, Items.BLACK_SPEARKP_4584),
-        MITHRIL_SPEAR(Items.MITHRIL_SPEAR_1243, Items.MITHRIL_SPEARKP_3173),
-        ADAMANT_SPEAR(Items.ADAMANT_SPEAR_1245, Items.ADAMANT_SPEARKP_3174),
-        RUNE_SPEAR(Items.RUNE_SPEAR_1247, Items.RUNE_SPEARKP_3175),
-        DRAGON_SPEAR(Items.DRAGON_SPEAR_1249, Items.DRAGON_SPEARKP_3176),
-        BRONZE_HASTA(Items.BRONZE_HASTA_11367, Items.BRONZE_HASTAKP_11381),
-        IRON_HASTA(Items.IRON_HASTA_11369, Items.IRON_HASTAKP_11388),
-        STEEL_HASTA(Items.STEEL_HASTA_11371, Items.STEEL_HASTAKP_11395),
-        MITHRIL_HASTA(Items.MITHRIL_HASTA_11373, Items.MITHRIL_HASTAKP_11402),
-        ADAMANT_HASTA(Items.ADAMANT_HASTA_11375, Items.ADAMANT_HASTAKP_11409),
-        RUNE_HASTA(Items.RUNE_HASTA_11377, Items.RUNE_HASTAKP_11416),
-        ;
+    internal enum class KarambwanPoisonSets(val base: Int, val kp: Int) {
+        BRONZE_SPEAR(base = Items.BRONZE_SPEAR_1237, kp = Items.BRONZE_SPEARKP_3170),
+        IRON_SPEAR(base = Items.IRON_SPEAR_1239, kp = Items.IRON_SPEARKP_3171),
+        STEEL_SPEAR(base = Items.STEEL_SPEAR_1241, kp = Items.STEEL_SPEARKP_3172),
+        BLACK_SPEAR(base = Items.BLACK_SPEAR_4580, kp = Items.BLACK_SPEARKP_4584),
+        MITHRIL_SPEAR(base = Items.MITHRIL_SPEAR_1243, kp = Items.MITHRIL_SPEARKP_3173),
+        ADAMANT_SPEAR(base = Items.ADAMANT_SPEAR_1245, kp = Items.ADAMANT_SPEARKP_3174),
+        RUNE_SPEAR(base = Items.RUNE_SPEAR_1247, kp = Items.RUNE_SPEARKP_3175),
+        DRAGON_SPEAR(base = Items.DRAGON_SPEAR_1249, kp = Items.DRAGON_SPEARKP_3176),
+        BRONZE_HASTA(base = Items.BRONZE_HASTA_11367, kp = Items.BRONZE_HASTAKP_11381),
+        IRON_HASTA(base = Items.IRON_HASTA_11369, kp = Items.IRON_HASTAKP_11388),
+        STEEL_HASTA(base = Items.STEEL_HASTA_11371, kp = Items.STEEL_HASTAKP_11395),
+        MITHRIL_HASTA(base = Items.MITHRIL_HASTA_11373, kp = Items.MITHRIL_HASTAKP_11402),
+        ADAMANT_HASTA(base = Items.ADAMANT_HASTA_11375, kp = Items.ADAMANT_HASTAKP_11409),
+        RUNE_HASTA(base = Items.RUNE_HASTA_11377, kp = Items.RUNE_HASTAKP_11416);
 
         companion object {
-            val regularWeaponsMap = HashMap<Int, KarambwanPoisonSets>()
-            val poisonWeaponMap = HashMap<Int, KarambwanPoisonSets>()
+            val regularWeaponsMap = values().associateBy { it.base }
+            val poisonWeaponMap = values().associateBy { it.kp }
 
-            init {
-                for (product in values()) {
-                    regularWeaponsMap[product.base] = product
-                    poisonWeaponMap[product.kp] = product
-                }
+            fun getBase(poisonedId: Int): Int? {
+                return poisonWeaponMap[poisonedId]?.base
             }
         }
     }
 
-    internal enum class PoisonSets(
-        val base: Int,
-        val p: Int,
-        val pp: Int,
-        val ppp: Int,
-    ) {
+    internal enum class PoisonSets(val base: Int, val p: Int, val pp: Int, val ppp: Int) {
         BRONZE_ARROW(
             base = Items.BRONZE_ARROW_882,
             p = Items.BRONZE_ARROWP_883,
