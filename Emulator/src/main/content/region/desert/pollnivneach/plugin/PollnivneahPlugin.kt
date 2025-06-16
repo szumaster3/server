@@ -30,11 +30,6 @@ class PollnivneahPlugin : InteractionListener {
             return@on true
         }
 
-        on(BANDIT, IntType.NPC, "talk-to") { player, _ ->
-            openDialogue(player, BANDIT)
-            return@on true
-        }
-
         on(BARMAN, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, AliTheBarmanDialogue())
             return@on true
