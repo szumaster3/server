@@ -1,4 +1,4 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.plugin.barbtraining
 
 import content.global.plugin.iface.BookInterface
 import content.global.plugin.iface.BookLine
@@ -755,8 +755,8 @@ class BarbarianBook : InteractionListener {
             return@on true
         }
     }
-}
 
-enum class GuideType {
-    FISH_BASE, FISH_FULL, FM_BASE, FM_FULL, H_BASE, H_FULL, FISH_FM_FULL, FISH_FM_H_FULL, SMITH_N_REQS, SMITH_M_REQS, SMITH_S_FULL, SMITH_H_BASE, SMITH_H_FULL, PS_BASE, PS_FULL, BARE_H_BASE, BARE_H_FULL, DEFAULT,
+    private enum class GuideType {
+        FISH_BASE, FISH_FULL, FM_BASE, FM_FULL, H_BASE, H_FULL, FISH_FM_FULL, FISH_FM_H_FULL, SMITH_N_REQS, SMITH_M_REQS, SMITH_S_FULL, SMITH_H_BASE, SMITH_H_FULL, PS_BASE, PS_FULL, BARE_H_BASE, BARE_H_FULL, DEFAULT,
+    }
 }

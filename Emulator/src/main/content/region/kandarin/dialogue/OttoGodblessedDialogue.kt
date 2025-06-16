@@ -1,5 +1,6 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.dialogue
 
+import content.region.kandarin.plugin.barbtraining.BarbarianTraining
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -13,7 +14,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 @Initializable
-class OttoGodblessedDialogue(player: Player? = null, ) : Dialogue(player) {
+class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -39,7 +40,7 @@ class OttoGodblessedDialogue(player: Player? = null, ) : Dialogue(player) {
         return true
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options(
                 "I really don't think I am related to any barbarian.",

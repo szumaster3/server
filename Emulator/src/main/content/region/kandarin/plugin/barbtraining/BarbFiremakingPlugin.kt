@@ -1,4 +1,4 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.plugin.barbtraining
 
 import content.data.items.SkillingTool
 import content.global.skill.firemaking.Log

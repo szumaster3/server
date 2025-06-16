@@ -1,4 +1,4 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.plugin.barbtraining
 
 import core.api.*
 import core.api.skill.sendSkillDialogue

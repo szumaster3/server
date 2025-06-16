@@ -1,8 +1,8 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.plugin.barbtraining
 
-import content.global.skill.barbtraining.BarbFishSpotManager.Companion.getNewLoc
-import content.global.skill.barbtraining.BarbFishSpotManager.Companion.getNewTTL
-import content.global.skill.barbtraining.BarbFishSpotManager.Companion.usedLocations
+import content.region.kandarin.plugin.barbtraining.BarbFishSpotManager.Companion.getNewLoc
+import content.region.kandarin.plugin.barbtraining.BarbFishSpotManager.Companion.getNewTTL
+import content.region.kandarin.plugin.barbtraining.BarbFishSpotManager.Companion.usedLocations
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

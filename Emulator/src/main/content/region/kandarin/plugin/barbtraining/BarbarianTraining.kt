@@ -1,4 +1,4 @@
-package content.global.skill.barbtraining
+package content.region.kandarin.plugin.barbtraining
 
 object BarbarianTraining {
     val BARBARIAN_TRAINING = "/save:barbtraining:start"
