@@ -15342,5 +15342,13 @@
   {
     "examine": "The door is shut.",
     "ids": "31838"
+  },
+  {
+    "examine": "I wonder what they're making?",
+    "ids": "17161"
+  },
+  {
+    "examine": "It seems to be a bit broken.",
+    "ids": "17162"
   }
 ]
