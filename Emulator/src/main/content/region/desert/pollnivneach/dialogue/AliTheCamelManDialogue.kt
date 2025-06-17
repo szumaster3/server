@@ -43,7 +43,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                 "Yes- a great idea - selling camels at discounted",
                 "prices so that the common man can experience",
                 "the joys of owning a camel too. They're not just",
-                "a source of kebab meat you know!",
+                "a source of kebab meat you know!"
             ).also { stage++ }
 
             21 -> sendDialogueOptions(
@@ -53,7 +53,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                 "Yes camels are beautiful creatures.",
                 "Filthy animals all they do is spit and...",
                 "Actually I think I was a camel in a previous existence.",
-                "So is business good then?",
+                "So is business good then?"
             ).also { stage++ }
 
             22 -> when (buttonId) {
@@ -88,7 +88,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.DISGUSTED,
                     "I would never sell to the likes of you,",
                     "they are beautiful majestic creatures not sandwich",
-                    "fillers! Get ouf my shop.",
+                    "fillers! Get ouf my shop."
                 )
                 stage = 100
             }
@@ -98,7 +98,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.LAUGH,
                     "Ah, wondrous creatures, ships of the desert, far",
                     "more useful than any horse or donkey.",
-                    "A man's best friend.",
+                    "A man's best friend."
                 )
                 stage = 25
             }
@@ -113,7 +113,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                     player,
                     "Select one.",
                     "Well yes actually I'd like to ask about something else.",
-                    "No but thanks for your time.",
+                    "No but thanks for your time."
                 )
                 stage = 27
             }
@@ -135,7 +135,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.ANGRY,
                     "Pah! You just do not know how to treat them.",
                     "If you abuse them and treat them badly of",
-                    "course they are going to spit and bite.",
+                    "course they are going to spit and bite."
                 )
                 stage = 25
             }
@@ -145,7 +145,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.LAUGH,
                     "You're teasing me now! You rogue! Everyone has",
                     "a laugh at my expense, I'm just more",
-                    "enlightened than you!",
+                    "enlightened than you!"
                 )
                 stage = 25
             }

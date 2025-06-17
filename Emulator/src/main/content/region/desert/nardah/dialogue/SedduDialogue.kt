@@ -20,15 +20,14 @@ class SedduDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please", "No, thanks").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.SEDDU_3038)
-                    }
-
-                    2 -> player("No, thanks.").also { stage = END_DIALOGUE }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.SEDDU_3038)
                 }
+
+                2 -> player("No, thanks.").also { stage = END_DIALOGUE }
+            }
         }
         return true
     }

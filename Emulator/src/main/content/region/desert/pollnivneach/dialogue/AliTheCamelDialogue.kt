@@ -18,13 +18,7 @@ class AliTheCamelDialogue(player: Player? = null) : Dialogue(player) {
         val phrase = RandomFunction.random(0, 2)
         when (phrase) {
             0 -> player(FaceAnim.AFRAID, "That beast would probably bite my fingers off", "if I tried to pet it")
-            1 -> player(
-                FaceAnim.DISGUSTED,
-                "I'm not going to pet that! I might get fleas",
-                "or something else that nasty creature",
-                "might have.",
-            )
-
+            1 -> player(FaceAnim.DISGUSTED, "I'm not going to pet that! I might get fleas", "or something else that nasty creature", "might have.")
             2 -> player(FaceAnim.THINKING, "Mmmm... Won't you make the nicest kebab?")
         }
         return true

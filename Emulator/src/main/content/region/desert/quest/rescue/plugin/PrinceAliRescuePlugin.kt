@@ -29,47 +29,37 @@ class PrinceAliRescuePlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
-        val id =
-            if (node is Scenery) {
-                node.getId()
-            } else if (node is NPC) {
-                node.id
-            } else {
-                0
-            }
+        val id = if (node is Scenery) {
+            node.getId()
+        } else if (node is NPC) {
+            node.id
+        } else {
+            0
+        }
         when (id) {
             NPCs.BORDER_GUARD_7912 -> openDialogue(player, NPCs.BORDER_GUARD_7912, node.asNpc())
-            2881 ->
-                when (quest.getStage(player)) {
-                    60 -> handleAutowalkDoor(player, node as Scenery)
-                    50 ->
-                        if (player.getAttribute("keli-gone", 0) > ticks) {
-                            if (inInventory(player, Items.BRONZE_KEY_2418, 1)) {
-                                sendMessage(player, "You unlock the door.")
-                                handleAutowalkDoor(player, node as Scenery)
-                            } else {
-                                sendMessage(player, "The door is locked.")
-                            }
-                        } else {
-                            sendMessage(player, "You'd better get rid of Lady Keli before trying to go through there.")
-                        }
-
-                    else -> sendMessage(player, "You'd better get rid of Lady Keli before trying to go through there.")
+            2881 -> when (quest.getStage(player)) {
+                60 -> handleAutowalkDoor(player, node as Scenery)
+                50 -> if (player.getAttribute("keli-gone", 0) > ticks) {
+                    if (inInventory(player, Items.BRONZE_KEY_2418, 1)) {
+                        sendMessage(player, "You unlock the door.")
+                        handleAutowalkDoor(player, node as Scenery)
+                    } else {
+                        sendMessage(player, "The door is locked.")
+                    }
+                } else {
+                    sendMessage(player, "You'd better get rid of Lady Keli before trying to go through there.")
                 }
+
+                else -> sendMessage(player, "You'd better get rid of Lady Keli before trying to go through there.")
+            }
         }
         return true
     }
 
-    override fun getDestination(
-        node: Node,
-        n: Node,
-    ): Location? {
+    override fun getDestination(node: Node, n: Node): Location? {
         if (n is NPC) {
             val npc = n
             if (npc.location == Location(3268, 3226, 0)) {
@@ -86,12 +76,11 @@ class PrinceAliRescuePlugin : OptionHandler() {
     }
 
     companion object {
-        var locs: Array<Location> =
-            arrayOf(
-                Location(3268, 3227, 0),
-                Location.create(3268, 3228, 0),
-                Location.create(3267, 3228, 0),
-                Location.create(3267, 3227, 0),
-            )
+        var locs: Array<Location> = arrayOf(
+            Location(3268, 3227, 0),
+            Location.create(3268, 3228, 0),
+            Location.create(3267, 3228, 0),
+            Location.create(3267, 3227, 0),
+        )
     }
 }

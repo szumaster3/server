@@ -56,11 +56,7 @@ class RowdySlaveNPC : AbstractNPC {
                     return this
                 }
 
-                override fun handle(
-                    player: Player,
-                    node: Node,
-                    option: String,
-                ): Boolean {
+                override fun handle(player: Player, node: Node, option: String): Boolean {
                     (node as NPC).sendChat(CHATS[RandomFunction.random(CHATS.size)])
                     node.attack(player)
                     return true
@@ -73,11 +69,10 @@ class RowdySlaveNPC : AbstractNPC {
     override fun getIds(): IntArray = intArrayOf(NPCs.ROWDY_SLAVE_827)
 
     companion object {
-        private val CHATS =
-            arrayOf(
-                "Oi! Are you looking at me?",
-                "I'm going to teach you some respect!",
-                "Hey, you're in for a good beating!",
-            )
+        private val CHATS = arrayOf(
+            "Oi! Are you looking at me?",
+            "I'm going to teach you some respect!",
+            "Hey, you're in for a good beating!",
+        )
     }
 }

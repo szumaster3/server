@@ -15,20 +15,16 @@ import core.game.world.map.zone.ZoneBuilder
 import core.plugin.Plugin
 import org.rs.consts.Quests
 
-class MiningCampZone :
-    MapZone("mining camp", true),
-    Plugin<Any> {
-    override fun newInstance(arg: Any?): Plugin<Any> {
+class MiningCampZone : MapZone("mining camp", true), Plugin<Any> {
+
+        override fun newInstance(arg: Any?): Plugin<Any> {
         ZoneBuilder.configure(this)
         return this
     }
 
     override fun enter(entity: Entity): Boolean = super.enter(entity)
 
-    override fun leave(
-        e: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(e: Entity, logout: Boolean, ): Boolean {
         if (!logout && e is Player) {
             if (checkAnna(e)) {
                 return false
@@ -37,11 +33,7 @@ class MiningCampZone :
         return super.leave(e, logout)
     }
 
-    override fun interact(
-        e: Entity,
-        node: Node,
-        option: Option,
-    ): Boolean {
+    override fun interact(e: Entity, node: Node, option: Option, ): Boolean {
         when (option.name) {
             "Equip", "Wear" -> {
                 val player = e as Player
@@ -60,18 +52,14 @@ class MiningCampZone :
         return super.interact(e, node, option)
     }
 
-    override fun teleport(
-        entity: Entity,
-        type: Int,
-        node: Node,
-    ): Boolean =
+    override fun teleport(entity: Entity, type: Int, node: Node, ): Boolean =
         if (entity is Player && type != -1) {
             !checkAnna(entity)
         } else {
             super.teleport(entity, type, node)
         }
 
-    fun checkAnna(p: Player): Boolean {
+    private fun checkAnna(p: Player): Boolean {
         val quest = p.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
         if (p.getAttribute("ana-delay", 0) > ticks) {
             return false
@@ -93,8 +81,5 @@ class MiningCampZone :
         register(ZoneBorders(3260, 9408, 3331, 9472))
     }
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any? = null
+    override fun fireEvent(identifier: String, vararg args: Any, ): Any? = null
 }

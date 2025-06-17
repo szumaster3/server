@@ -12,11 +12,7 @@ class ZahurDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(
-            "I can combine your potion vials to try and make",
-            "the potions fit into fewer vials. This service is free.",
-            "Would you like to do this?",
-        )
+        npc("I can combine your potion vials to try and make", "the potions fit into fewer vials. This service is free.", "Would you like to do this?")
         return true
     }
 

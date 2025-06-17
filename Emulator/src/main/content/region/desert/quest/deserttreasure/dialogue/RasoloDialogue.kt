@@ -23,8 +23,7 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) in 1..2 &&
-            getQuestStage(
+        if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) in 1..2 && getQuestStage(
                 player,
                 Quests.DESERT_TREASURE,
             ) >= 9
@@ -41,10 +40,13 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
             stage = 59
             return true
         }
-        if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) >= 3 &&
-            getQuestStage(player, Quests.DESERT_TREASURE) >= 9 ||
-            getQuestStage(player, Quests.DESERT_TREASURE) >= 10 ||
-            isQuestComplete(player, Quests.DESERT_TREASURE)
+        if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) >= 3 && getQuestStage(
+                player,
+                Quests.DESERT_TREASURE
+            ) >= 9 || getQuestStage(player, Quests.DESERT_TREASURE) >= 10 || isQuestComplete(
+                player,
+                Quests.DESERT_TREASURE
+            )
         ) {
             npcl(
                 FaceAnim.HAPPY,
@@ -59,16 +61,15 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                showTopics(
-                    Topic("Yes", 2),
-                    Topic("No", 3),
-                    IfTopic(
-                        "Ask about the Diamonds of Azzanadra",
-                        5,
-                        getQuestStage(player, Quests.DESERT_TREASURE) >= 9,
-                    ),
-                )
+            0 -> showTopics(
+                Topic("Yes", 2),
+                Topic("No", 3),
+                IfTopic(
+                    "Ask about the Diamonds of Azzanadra",
+                    5,
+                    getQuestStage(player, Quests.DESERT_TREASURE) >= 9,
+                ),
+            )
 
             2 -> {
                 end()
@@ -268,19 +269,18 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
 
-            35 ->
-                when (buttonId) {
-                    1 -> {
-                        playerl(FaceAnim.FRIENDLY, "Not a problem. I'll be back with your cross before you know it.")
-                        DTUtils.setSubStage(player, DesertTreasure.shadowStage, 1)
-                        stage = END_DIALOGUE
-                    }
-
-                    2 -> {
-                        playerl(FaceAnim.NEUTRAL, "Sounds like too much effort to me. I'll find this Damis by myself.")
-                        stage++
-                    }
+            35 -> when (buttonId) {
+                1 -> {
+                    playerl(FaceAnim.FRIENDLY, "Not a problem. I'll be back with your cross before you know it.")
+                    DTUtils.setSubStage(player, DesertTreasure.shadowStage, 1)
+                    stage = END_DIALOGUE
                 }
+
+                2 -> {
+                    playerl(FaceAnim.NEUTRAL, "Sounds like too much effort to me. I'll find this Damis by myself.")
+                    stage++
+                }
+            }
 
             36 -> {
                 npc("As you wish.")
@@ -288,8 +288,7 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             37 -> {
-                if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) == 2 &&
-                    inInventory(
+                if (DTUtils.getSubStage(player, DesertTreasure.shadowStage) == 2 && inInventory(
                         player,
                         Items.GILDED_CROSS_4674,
                     )
@@ -312,12 +311,11 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
 
-            40 ->
-                when (buttonId) {
-                    1 -> player("Where can I find Laheeb?").also { stage++ }
-                    2 -> player("Can't I just buy your ring?").also { stage = 54 }
-                    3 -> player("Is Damis near here, then?").also { stage = 55 }
-                }
+            40 -> when (buttonId) {
+                1 -> player("Where can I find Laheeb?").also { stage++ }
+                2 -> player("Can't I just buy your ring?").also { stage = 54 }
+                3 -> player("Is Damis near here, then?").also { stage = 55 }
+            }
 
             41 -> {
                 npcl(FaceAnim.NEUTRAL, "Well, as a travelling merchant I have roamed these lands for many years...")
@@ -422,11 +420,10 @@ class RasoloDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
 
-            58 ->
-                if (removeItem(player, Items.GILDED_CROSS_4674)) {
-                    DTUtils.setSubStage(player, DesertTreasure.shadowStage, 3)
-                    addItemOrDrop(player, Items.RING_OF_VISIBILITY_4657)
-                }
+            58 -> if (removeItem(player, Items.GILDED_CROSS_4674)) {
+                DTUtils.setSubStage(player, DesertTreasure.shadowStage, 3)
+                addItemOrDrop(player, Items.RING_OF_VISIBILITY_4657)
+            }
 
             59 -> {
                 player("Not yet...")

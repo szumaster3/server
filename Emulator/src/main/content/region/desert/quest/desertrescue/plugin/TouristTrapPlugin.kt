@@ -136,278 +136,259 @@ class TouristTrapPlugin : OptionHandler() {
         val quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
         val id = node.id
         when (option) {
-            "read" ->
-                sendDialogueLines(
+            "read" -> sendDialogueLines(
+                player,
+                "The plans look very technical! But you can see that this item will",
+                "require a bronze bar and at least 10 feathers.",
+            )
+
+            "watch" -> when (id) {
+                2676, 2675 -> sendDialogueLines(
                     player,
-                    "The plans look very technical! But you can see that this item will",
-                    "require a bronze bar and at least 10 feathers.",
+                    "You watch the doors for some time. You notice that only slaves seem",
+                    "to do down there. You might be able to sneak down if you pass as a",
+                    "slave.",
                 )
 
-            "watch" ->
-                when (id) {
-                    2676, 2675 ->
-                        sendDialogueLines(
-                            player,
-                            "You watch the doors for some time. You notice that only slaves seem",
-                            "to do down there. You might be able to sneak down if you pass as a",
-                            "slave.",
-                        )
+                else -> sendDialogueLines(
+                    player,
+                    "You watch the Mercenary Captain for some time. He has a large",
+                    "metal key attached to his belt. You notice that he usually gets his",
+                    "men to do his dirty work.",
+                )
+            }
 
-                    else ->
-                        sendDialogueLines(
-                            player,
-                            "You watch the Mercenary Captain for some time. He has a large",
-                            "metal key attached to his belt. You notice that he usually gets his",
-                            "men to do his dirty work.",
-                        )
-                }
-
-            "walk through" ->
-                when (id) {
-                    2698, 2699 -> {
-                        if (quest.getStage(player) < 60) {
-                            sendNPCDialogue(player, 5001, "Hey you! You're not allowed in there.")
-                        }
-                        if (!TouristTrap.hasSlaveClothes(player)) {
-                            sendNPCDialogue(player, 5001, "Hey you're not a slave!")
-                        }
-                        player.properties.teleportLocation =
-                            player.location.transform(if (player.location.x >= 3284) -4 else 4, 0, 0)
-                        player.packetDispatch.sendMessages(
-                            "You walk into the darkness of the cavern...",
-                            "... and emerge in a different part of this huge underground complex.",
-                        )
+            "walk through" -> when (id) {
+                2698, 2699 -> {
+                    if (quest.getStage(player) < 60) {
+                        sendNPCDialogue(player, 5001, "Hey you! You're not allowed in there.")
                     }
+                    if (!TouristTrap.hasSlaveClothes(player)) {
+                        sendNPCDialogue(player, 5001, "Hey you're not a slave!")
+                    }
+                    player.properties.teleportLocation =
+                        player.location.transform(if (player.location.x >= 3284) -4 else 4, 0, 0)
+                    player.packetDispatch.sendMessages(
+                        "You walk into the darkness of the cavern...",
+                        "... and emerge in a different part of this huge underground complex.",
+                    )
                 }
+            }
 
             "look" -> sendNPCDialogue(player, 823, "Let me out of here, I feel sick!")
             "drop" -> sendNPCDialogue(player, 823, "Don't let me out!")
-            "open" ->
-                when (id) {
-                    2688, 2687 -> {
-                        if (!player.inventory.containsItem(TouristTrap.WROUGHT_IRON_KEY)) {
-                            player.packetDispatch.sendMessage("This gate looks like it needs a key to open it.")
-                        }
-                        DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+            "open" -> when (id) {
+                2688, 2687 -> {
+                    if (!player.inventory.containsItem(TouristTrap.WROUGHT_IRON_KEY)) {
+                        player.packetDispatch.sendMessage("This gate looks like it needs a key to open it.")
                     }
-
-                    2686, 2685 ->
-                        sendNPCDialogue(
-                            player,
-                            4999,
-                            "Hey, move away from the gate. There's nothing interesting for you here.",
-                        )
-
-                    2677 -> {
-                        if (!player.inventory.containsItem(TouristTrap.BEDABIN_KEY)) {
-                            player.packetDispatch.sendMessage("This chest needs a key to unlock it.")
-                        }
-                        if (quest.getStage(player) <= 54 && quest.getStage(player) != 53) {
-                            player.packetDispatch.sendMessage(
-                                "The captain spots you before you manage to open the chest...",
-                            )
-                            player.lock(3)
-                            Pulser.submit(
-                                object : Pulse(2, player) {
-                                    override fun pulse(): Boolean {
-                                        player.dialogueInterpreter.open(831, getNpc(player, 831)!!)
-                                        return true
-                                    }
-                                },
-                            )
-                        } else if (quest.getStage(player) == 53) {
-                            if (!player.hasItem(TouristTrap.TECHNICAL_PLANS)) {
-                                player.dialogueInterpreter.sendItemMessage(
-                                    TouristTrap.TECHNICAL_PLANS,
-                                    "While the Captain's distracted, you quickly unlock the",
-                                    "chest with the Bedabins' copy of the key. You take out",
-                                    "the plans.",
-                                )
-                                player.inventory.add(TouristTrap.TECHNICAL_PLANS, player)
-                            }
-                        }
-                    }
-
-                    2690, 2691 -> {
-                        setAttribute(player, "ana-delay", ticks + 2)
-                        player.properties.teleportLocation = Location.create(3301, 3035, 0)
-                    }
-
-                    2676, 2675 -> {
-                        if (!TouristTrap.hasSlaveClothes(player)) {
-                            sendNPCDialogue(player, 4997, "Watch it! Only slaves can travel into the mine.")
-                        }
-                        setAttribute(player, "ana-delay", ticks + 2)
-                        player.properties.teleportLocation = Location.create(3278, 9427, 0)
-                        player.dialogueInterpreter.sendDialogue(
-                            "The huge doors open into a dark, dank and smelly tunnel. The",
-                            "associated smells of a hundred sweaty miners greets your nostrils.",
-                            "And your ears ring with the 'CLANG CLANG CLANG' as metal hits",
-                            "rock.",
-                        )
-                    }
-
-                    2674, 2673 -> {
-                        if (quest.getStage(player) > 60 &&
-                            quest.getStage(player) < 98 &&
-                            player.inventory.containsItem(TouristTrap.ANNA_BARREL)
-                        ) {
-                            player.lock()
-                            sendNPCDialogue(player, 4999, "Would you like me to take that heavy barrel for you?")
-                            Pulser.submit(
-                                object : Pulse(4, player) {
-                                    var counter: Int = 0
-
-                                    override fun pulse(): Boolean {
-                                        when (++counter) {
-                                            1 -> sendPlayerDialogue(player, "No, please don't.")
-                                            2 -> {
-                                                player.dialogueInterpreter.close()
-                                                player.packetDispatch.sendMessage("The guards search you!")
-                                            }
-
-                                            3 ->
-                                                player.packetDispatch.sendMessage(
-                                                    "You are roughed up by the guards and manhandled into a cell.",
-                                                )
-                                            4 -> {
-                                                player.unlock()
-                                                player.inventory.remove(TouristTrap.ANNA_BARREL)
-                                                TouristTrap.addConfig(player, (1 shl 4))
-                                                quest.setStage(player, 61)
-                                                player.properties.teleportLocation = Location.create(3285, 3034, 0)
-                                                return true
-                                            }
-                                        }
-                                        return false
-                                    }
-                                },
-                            )
-                            return true
-                        }
-                        if (node.location.withinDistance(Location(3273, 3028, 0)) && player.location.x < 3274) {
-                            if (!player.inventory.containsItem(TouristTrap.METAL_KEY)) {
-                                player.packetDispatch.sendMessage("The gate needs a key in order to be opened.")
-                                return true
-                            }
-                            DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
-                            player.packetDispatch.sendMessage(
-                                "The guards search you thoroughly as you go through the gates.",
-                            )
-                            return true
-                        }
-                        DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
-                    }
-
-                    2689 -> {
-                        if (!player.inventory.containsItem(TouristTrap.CELL_DOOR_KEY)) {
-                            player.packetDispatch.sendMessage("The door seems to be pretty locked.")
-                        }
-                        DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
-                    }
-
-                    1528 -> SceneryBuilder.replace(node as Scenery, node.transform(1529))
+                    DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
                 }
 
-            "close" ->
-                if (id == 1529) {
-                    SceneryBuilder.replace(node as Scenery, node.transform(1528))
-                }
+                2686, 2685 -> sendNPCDialogue(
+                    player,
+                    4999,
+                    "Hey, move away from the gate. There's nothing interesting for you here.",
+                )
 
-            "look-in", "look in" ->
-                when (id) {
-                    2681, 18962, 18963 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "This looks like an empty mining barrel. Slaves use this to load up the",
-                            "rocks and stones that they're mining.",
-                        )
-
-                    2680 -> player.dialogueInterpreter.sendDialogue("You search the full barrel... It's full of rocks.")
-                }
-
-            "use" ->
-                if (id == 18951) {
-                    player.dialogueInterpreter.open("winch dialogue")
-                }
-
-            "search" ->
-                when (id) {
-                    2688, 2687 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "These wrought iron gates look like they're designed to keep people out.",
-                            "it looks like you'll need a key to get past these.",
-                        )
-
-                    2686, 2685 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "It looks as if this is where very difficult prisoners are sent as a",
-                            "punishment.",
-                        )
-
-                    2681, 18962, 18963 -> player.dialogueInterpreter.open("barrel dialogue", node)
-                    2680 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "This looks like a full mining barrel. Slaves use this to load up the",
-                            "rocks and stones that they're mining. This barrel is full of rocks.",
-                        )
-
-                    2684 -> player.dialogueInterpreter.open("cart dialogue", node)
-                    2678 -> {
-                        if (quest.getStage(player) == 51) {
-                            quest.setStage(player, 52)
-                        }
-                        player.dialogueInterpreter.sendItemMessage(
-                            9904,
-                            "You notice several books on the subject of sailing.",
-                        )
+                2677 -> {
+                    if (!player.inventory.containsItem(TouristTrap.BEDABIN_KEY)) {
+                        player.packetDispatch.sendMessage("This chest needs a key to unlock it.")
                     }
-
-                    2673, 2674 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "You see what looks like a mining compound. There seems to be people",
-                            "mining rocks. They look as if they're chained to the rocks and they're",
-                            "being watched over by the guards. It's not a very happy place.",
-                        )
-
-                    18958, 18959 -> {
-                        if (quest.getStage(player) == 90) {
-                            player.dialogueInterpreter.open("ana cart dialogue")
-                        }
+                    if (quest.getStage(player) <= 54 && quest.getStage(player) != 53) {
                         player.packetDispatch.sendMessage(
-                            "This looks like a mine cart which takes barrels out of the encampment to Al Kharid.",
+                            "The captain spots you before you manage to open the chest...",
                         )
-                    }
-
-                    18899, 18898, 18878, 18879 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "You search the footsteps more closely. You can see that there are",
-                            "five sets of footprints. One set of footprints seem lighter than the",
-                            "others. The four other footsteps were made by heavier people",
-                            "with boots.",
+                        player.lock(3)
+                        Pulser.submit(
+                            object : Pulse(2, player) {
+                                override fun pulse(): Boolean {
+                                    player.dialogueInterpreter.open(831, getNpc(player, 831)!!)
+                                    return true
+                                }
+                            },
                         )
-
-                    18902 -> {
-                        if (hasItem(player, TouristTrap.CELL_DOOR_KEY)) {
-                            player.inventory.add(TouristTrap.CELL_DOOR_KEY, player)
+                    } else if (quest.getStage(player) == 53) {
+                        if (!player.hasItem(TouristTrap.TECHNICAL_PLANS)) {
                             player.dialogueInterpreter.sendItemMessage(
-                                TouristTrap.CELL_DOOR_KEY,
-                                "You find a cell door key.",
+                                TouristTrap.TECHNICAL_PLANS,
+                                "While the Captain's distracted, you quickly unlock the",
+                                "chest with the Bedabins' copy of the key. You take out",
+                                "the plans.",
                             )
-                        } else if (hasItem(player, TouristTrap.WROUGHT_IRON_KEY) &&
-                            player
-                                .getQuestRepository()
-                                .isComplete(Quests.THE_TOURIST_TRAP)
-                        ) {
-                            player.inventory.add(TouristTrap.WROUGHT_IRON_KEY, player)
-                            player.dialogueInterpreter.sendItemMessage(
-                                TouristTrap.WROUGHT_IRON_KEY,
-                                "You find the key to the main gate.",
-                            )
+                            player.inventory.add(TouristTrap.TECHNICAL_PLANS, player)
                         }
-                        player.packetDispatch.sendMessage("You search the captains desk while he's not looking...")
-                        player.packetDispatch.sendMessage("...but you find nothing of interest.")
                     }
                 }
+
+                2690, 2691 -> {
+                    setAttribute(player, "ana-delay", ticks + 2)
+                    player.properties.teleportLocation = Location.create(3301, 3035, 0)
+                }
+
+                2676, 2675 -> {
+                    if (!TouristTrap.hasSlaveClothes(player)) {
+                        sendNPCDialogue(player, 4997, "Watch it! Only slaves can travel into the mine.")
+                    }
+                    setAttribute(player, "ana-delay", ticks + 2)
+                    player.properties.teleportLocation = Location.create(3278, 9427, 0)
+                    player.dialogueInterpreter.sendDialogue(
+                        "The huge doors open into a dark, dank and smelly tunnel. The",
+                        "associated smells of a hundred sweaty miners greets your nostrils.",
+                        "And your ears ring with the 'CLANG CLANG CLANG' as metal hits",
+                        "rock.",
+                    )
+                }
+
+                2674, 2673 -> {
+                    if (quest.getStage(player) > 60 && quest.getStage(player) < 98 && player.inventory.containsItem(
+                            TouristTrap.ANNA_BARREL
+                        )
+                    ) {
+                        player.lock()
+                        sendNPCDialogue(player, 4999, "Would you like me to take that heavy barrel for you?")
+                        Pulser.submit(
+                            object : Pulse(4, player) {
+                                var counter: Int = 0
+
+                                override fun pulse(): Boolean {
+                                    when (++counter) {
+                                        1 -> sendPlayerDialogue(player, "No, please don't.")
+                                        2 -> {
+                                            player.dialogueInterpreter.close()
+                                            player.packetDispatch.sendMessage("The guards search you!")
+                                        }
+
+                                        3 -> player.packetDispatch.sendMessage(
+                                            "You are roughed up by the guards and manhandled into a cell.",
+                                        )
+
+                                        4 -> {
+                                            player.unlock()
+                                            player.inventory.remove(TouristTrap.ANNA_BARREL)
+                                            TouristTrap.addConfig(player, (1 shl 4))
+                                            quest.setStage(player, 61)
+                                            player.properties.teleportLocation = Location.create(3285, 3034, 0)
+                                            return true
+                                        }
+                                    }
+                                    return false
+                                }
+                            },
+                        )
+                        return true
+                    }
+                    if (node.location.withinDistance(Location(3273, 3028, 0)) && player.location.x < 3274) {
+                        if (!player.inventory.containsItem(TouristTrap.METAL_KEY)) {
+                            player.packetDispatch.sendMessage("The gate needs a key in order to be opened.")
+                            return true
+                        }
+                        DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                        player.packetDispatch.sendMessage(
+                            "The guards search you thoroughly as you go through the gates.",
+                        )
+                        return true
+                    }
+                    DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                }
+
+                2689 -> {
+                    if (!player.inventory.containsItem(TouristTrap.CELL_DOOR_KEY)) {
+                        player.packetDispatch.sendMessage("The door seems to be pretty locked.")
+                    }
+                    DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
+                }
+
+                1528 -> SceneryBuilder.replace(node as Scenery, node.transform(1529))
+            }
+
+            "close" -> if (id == 1529) {
+                SceneryBuilder.replace(node as Scenery, node.transform(1528))
+            }
+
+            "look-in", "look in" -> when (id) {
+                2681, 18962, 18963 -> player.dialogueInterpreter.sendDialogue(
+                    "This looks like an empty mining barrel. Slaves use this to load up the",
+                    "rocks and stones that they're mining.",
+                )
+
+                2680 -> player.dialogueInterpreter.sendDialogue("You search the full barrel... It's full of rocks.")
+            }
+
+            "use" -> if (id == 18951) {
+                player.dialogueInterpreter.open("winch dialogue")
+            }
+
+            "search" -> when (id) {
+                2688, 2687 -> player.dialogueInterpreter.sendDialogue(
+                    "These wrought iron gates look like they're designed to keep people out.",
+                    "it looks like you'll need a key to get past these.",
+                )
+
+                2686, 2685 -> player.dialogueInterpreter.sendDialogue(
+                    "It looks as if this is where very difficult prisoners are sent as a",
+                    "punishment.",
+                )
+
+                2681, 18962, 18963 -> player.dialogueInterpreter.open("barrel dialogue", node)
+                2680 -> player.dialogueInterpreter.sendDialogue(
+                    "This looks like a full mining barrel. Slaves use this to load up the",
+                    "rocks and stones that they're mining. This barrel is full of rocks.",
+                )
+
+                2684 -> player.dialogueInterpreter.open("cart dialogue", node)
+                2678 -> {
+                    if (quest.getStage(player) == 51) {
+                        quest.setStage(player, 52)
+                    }
+                    player.dialogueInterpreter.sendItemMessage(
+                        9904,
+                        "You notice several books on the subject of sailing.",
+                    )
+                }
+
+                2673, 2674 -> player.dialogueInterpreter.sendDialogue(
+                    "You see what looks like a mining compound. There seems to be people",
+                    "mining rocks. They look as if they're chained to the rocks and they're",
+                    "being watched over by the guards. It's not a very happy place.",
+                )
+
+                18958, 18959 -> {
+                    if (quest.getStage(player) == 90) {
+                        player.dialogueInterpreter.open("ana cart dialogue")
+                    }
+                    player.packetDispatch.sendMessage(
+                        "This looks like a mine cart which takes barrels out of the encampment to Al Kharid.",
+                    )
+                }
+
+                18899, 18898, 18878, 18879 -> player.dialogueInterpreter.sendDialogue(
+                    "You search the footsteps more closely. You can see that there are",
+                    "five sets of footprints. One set of footprints seem lighter than the",
+                    "others. The four other footsteps were made by heavier people",
+                    "with boots.",
+                )
+
+                18902 -> {
+                    if (hasItem(player, TouristTrap.CELL_DOOR_KEY)) {
+                        player.inventory.add(TouristTrap.CELL_DOOR_KEY, player)
+                        player.dialogueInterpreter.sendItemMessage(
+                            TouristTrap.CELL_DOOR_KEY,
+                            "You find a cell door key.",
+                        )
+                    } else if (hasItem(player, TouristTrap.WROUGHT_IRON_KEY) && player.getQuestRepository()
+                            .isComplete(Quests.THE_TOURIST_TRAP)
+                    ) {
+                        player.inventory.add(TouristTrap.WROUGHT_IRON_KEY, player)
+                        player.dialogueInterpreter.sendItemMessage(
+                            TouristTrap.WROUGHT_IRON_KEY,
+                            "You find the key to the main gate.",
+                        )
+                    }
+                    player.packetDispatch.sendMessage("You search the captains desk while he's not looking...")
+                    player.packetDispatch.sendMessage("...but you find nothing of interest.")
+                }
+            }
 
             "operate" -> {
                 if (quest.getStage(player) != 71) {
@@ -416,53 +397,47 @@ class TouristTrapPlugin : OptionHandler() {
                 ActivityManager.start(player, "winch cutscene", false)
             }
 
-            "look at" ->
-                when (id) {
-                    18888 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "This looks like a winch, it probably brings rocks up from",
-                            "underground.",
-                        )
+            "look at" -> when (id) {
+                18888 -> player.dialogueInterpreter.sendDialogue(
+                    "This looks like a winch, it probably brings rocks up from",
+                    "underground.",
+                )
 
-                    18951 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "This looks like a lift of some sort. You see barrels of rocks being",
-                            "placed on the lift and they're hauled up to the surface.",
-                        )
+                18951 -> player.dialogueInterpreter.sendDialogue(
+                    "This looks like a lift of some sort. You see barrels of rocks being",
+                    "placed on the lift and they're hauled up to the surface.",
+                )
 
-                    2684 -> {
-                        if (node.location.x == 3318) {
-                            player.dialogueInterpreter.sendDialogue(
-                                "This mine cart is being loaded up with new rocks and stone.",
-                                "It gets sent to a different section of the mine for unloading.",
-                            )
-                        }
+                2684 -> {
+                    if (node.location.x == 3318) {
                         player.dialogueInterpreter.sendDialogue(
-                            "This cart is being unloaded into this section of the mine. Before being",
-                            "sent back to another section for another load.",
+                            "This mine cart is being loaded up with new rocks and stone.",
+                            "It gets sent to a different section of the mine for unloading.",
                         )
                     }
-
-                    18958, 18959 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "A sturdy looking cart for carrying barrels of rocks out of ",
-                            "the mining camp.",
-                        )
-
-                    18900, 18899, 18898, 18887, 18886, 18885, 18884, 18883, 18882, 18881, 18880, 18879, 18878, 18877 ->
-                        player.dialogueInterpreter.sendDialogue(
-                            "This looks like some disturbed sand. Footsteps seem to be heading off",
-                            "towards the South.",
-                        )
+                    player.dialogueInterpreter.sendDialogue(
+                        "This cart is being unloaded into this section of the mine. Before being",
+                        "sent back to another section for another load.",
+                    )
                 }
 
-            "talk-to" ->
-                when (id) {
-                    5002 -> (node as NPC).sendChat("Move along please, don't want any trouble today!")
-                    36748 -> sendPlayerDialogue(player, "Mmm... looks like that camel would make a nice kebab.")
+                18958, 18959 -> player.dialogueInterpreter.sendDialogue(
+                    "A sturdy looking cart for carrying barrels of rocks out of ",
+                    "the mining camp.",
+                )
 
-                    4975, 4977, 4978, 4976 -> (node as NPC).sendChat("Hey leave me alone, can't you see that i'm busy?")
-                }
+                18900, 18899, 18898, 18887, 18886, 18885, 18884, 18883, 18882, 18881, 18880, 18879, 18878, 18877 -> player.dialogueInterpreter.sendDialogue(
+                    "This looks like some disturbed sand. Footsteps seem to be heading off",
+                    "towards the South.",
+                )
+            }
+
+            "talk-to" -> when (id) {
+                5002 -> (node as NPC).sendChat("Move along please, don't want any trouble today!")
+                36748 -> sendPlayerDialogue(player, "Mmm... looks like that camel would make a nice kebab.")
+
+                4975, 4977, 4978, 4976 -> (node as NPC).sendChat("Hey leave me alone, can't you see that i'm busy?")
+            }
 
             "bend" -> {
                 player.animate(Animation.create(5037))
@@ -513,54 +488,51 @@ class TouristTrapPlugin : OptionHandler() {
                 )
             }
 
-            "climb-up" ->
-                if (id == 18923) {
-                    if (player.location.x <= 3278) {
-                        return true
-                    }
-                    player.animate(Animation.create(5039))
-                    Pulser.submit(
-                        object : Pulse(6, player) {
-                            override fun pulse(): Boolean {
-                                player.animator.reset()
-                                player.properties.teleportLocation = Location.create(3278, 3037, 0)
-                                return true
-                            }
-                        },
-                    )
+            "climb-up" -> if (id == 18923) {
+                if (player.location.x <= 3278) {
+                    return true
                 }
+                player.animate(Animation.create(5039))
+                Pulser.submit(
+                    object : Pulse(6, player) {
+                        override fun pulse(): Boolean {
+                            player.animator.reset()
+                            player.properties.teleportLocation = Location.create(3278, 3037, 0)
+                            return true
+                        }
+                    },
+                )
+            }
 
-            "inspect" ->
-                if (id == 18875) {
-                    player.dialogueInterpreter.sendDialogue(
-                        "You remember that Irena mentioned something about Ana wearing a red scarf before she left for the desert.",
-                    )
-                }
+            "inspect" -> if (id == 18875) {
+                player.dialogueInterpreter.sendDialogue(
+                    "You remember that Irena mentioned something about Ana wearing a red scarf before she left for the desert.",
+                )
+            }
 
-            "climb-down" ->
-                if (id == 18924) {
-                    if (player.location.x <= 3273) {
-                        return true
-                    }
-                    content.global.skill.agility.AgilityHandler.forceWalk(
-                        player,
-                        0,
-                        player.location,
-                        Location.create(3270, 3039, 0),
-                        Animation.create(5040),
-                        20,
-                        0.0,
-                        null,
-                    )
-                    Pulser.submit(
-                        object : Pulse(3, player) {
-                            override fun pulse(): Boolean {
-                                player.animator.reset()
-                                return true
-                            }
-                        },
-                    )
+            "climb-down" -> if (id == 18924) {
+                if (player.location.x <= 3273) {
+                    return true
                 }
+                content.global.skill.agility.AgilityHandler.forceWalk(
+                    player,
+                    0,
+                    player.location,
+                    Location.create(3270, 3039, 0),
+                    Animation.create(5040),
+                    20,
+                    0.0,
+                    null,
+                )
+                Pulser.submit(
+                    object : Pulse(3, player) {
+                        override fun pulse(): Boolean {
+                            player.animator.reset()
+                            return true
+                        }
+                    },
+                )
+            }
         }
         return true
     }
@@ -721,18 +693,17 @@ class TouristTrapPlugin : OptionHandler() {
                 }
 
                 0 -> options("What is this thing?", "Can I use this?").also { stage++ }
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            player("What is this thing?")
-                            stage = 10
-                        }
-
-                        2 -> {
-                            player("Can I use this?")
-                            stage = 20
-                        }
+                1 -> when (buttonId) {
+                    1 -> {
+                        player("What is this thing?")
+                        stage = 10
                     }
+
+                    2 -> {
+                        player("Can I use this?")
+                        stage = 20
+                    }
+                }
 
                 10 -> {
                     interpreter.sendDialogues(
@@ -885,23 +856,22 @@ class TouristTrapPlugin : OptionHandler() {
             }
 
             companion object {
-                private val PATHS =
+                private val PATHS = arrayOf(
                     arrayOf(
-                        arrayOf(
-                            Location.create(3315, 9417, 0),
-                            Location.create(3317, 9417, 0),
-                            Location.create(3318, 9418, 0),
-                            Location.create(3318, 9428, 0),
-                        ),
-                        arrayOf(
-                            Location.create(3318, 9430, 0),
-                            Location.create(3318, 9418, 0),
-                            Location.create(3317, 9417, 0),
-                            Location.create(3316, 9417, 0),
-                            Location.create(3314, 9417, 0),
-                            Location.create(3303, 9417, 0),
-                        ),
-                    )
+                        Location.create(3315, 9417, 0),
+                        Location.create(3317, 9417, 0),
+                        Location.create(3318, 9418, 0),
+                        Location.create(3318, 9428, 0),
+                    ),
+                    arrayOf(
+                        Location.create(3318, 9430, 0),
+                        Location.create(3318, 9418, 0),
+                        Location.create(3317, 9417, 0),
+                        Location.create(3316, 9417, 0),
+                        Location.create(3314, 9417, 0),
+                        Location.create(3303, 9417, 0),
+                    ),
+                )
             }
         }
     }
@@ -924,15 +894,14 @@ class TouristTrapPlugin : OptionHandler() {
                     stage++
                 }
 
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            interpreter.sendDialogue("You decide to climb onto the cart.")
-                            stage++
-                        }
-
-                        2 -> end()
+                1 -> when (buttonId) {
+                    1 -> {
+                        interpreter.sendDialogue("You decide to climb onto the cart.")
+                        stage++
                     }
+
+                    2 -> end()
+                }
 
                 2 -> {
                     player.lock()
@@ -944,19 +913,16 @@ class TouristTrapPlugin : OptionHandler() {
                             override fun pulse(): Boolean {
                                 when (counter++) {
                                     1 -> player.interfaceManager.openOverlay(Component(115))
-                                    4 ->
-                                        player.dialogueInterpreter.sendDialogue(
-                                            "As soon as you get on the cart, it starts to move.",
-                                            "Before too long you are past the gates. You jump off",
-                                            "the cart taking Ana with you.",
-                                        )
+                                    4 -> player.dialogueInterpreter.sendDialogue(
+                                        "As soon as you get on the cart, it starts to move.",
+                                        "Before too long you are past the gates. You jump off",
+                                        "the cart taking Ana with you.",
+                                    )
 
                                     6 -> {
                                         player.unlock()
                                         player.interfaceManager.closeOverlay()
-                                        player
-                                            .getQuestRepository()
-                                            .getQuest(Quests.THE_TOURIST_TRAP)
+                                        player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
                                             .setStage(player, 95)
                                         player.interfaceManager.close()
                                         player.properties.teleportLocation = Location.create(3258, 3029, 0)
@@ -1017,15 +983,14 @@ class TouristTrapPlugin : OptionHandler() {
                     stage++
                 }
 
-                2 ->
-                    when (buttonId) {
-                        1 -> {
-                            end()
-                            enterCart(player)
-                        }
-
-                        2 -> end()
+                2 -> when (buttonId) {
+                    1 -> {
+                        end()
+                        enterCart(player)
                     }
+
+                    2 -> end()
+                }
             }
             return true
         }
@@ -1144,26 +1109,24 @@ class TouristTrapPlugin : OptionHandler() {
             }
 
             val path: Array<Location>
-
                 get() = PATHS[index]
 
             companion object {
-                private val PATHS =
+                private val PATHS = arrayOf(
                     arrayOf(
-                        arrayOf(
-                            Location.create(3303, 9417, 0),
-                            Location.create(3316, 9417, 0),
-                            Location.create(3317, 9417, 0),
-                            Location.create(3318, 9418, 0),
-                            Location.create(3318, 9430, 0),
-                        ),
-                        arrayOf(
-                            Location.create(3318, 9430, 0),
-                            Location.create(3318, 9418, 0),
-                            Location.create(3317, 9417, 0),
-                            Location.create(3303, 9417, 0),
-                        ),
-                    )
+                        Location.create(3303, 9417, 0),
+                        Location.create(3316, 9417, 0),
+                        Location.create(3317, 9417, 0),
+                        Location.create(3318, 9418, 0),
+                        Location.create(3318, 9430, 0),
+                    ),
+                    arrayOf(
+                        Location.create(3318, 9430, 0),
+                        Location.create(3318, 9418, 0),
+                        Location.create(3317, 9417, 0),
+                        Location.create(3303, 9417, 0),
+                    ),
+                )
             }
         }
 
@@ -1235,9 +1198,7 @@ class TouristTrapPlugin : OptionHandler() {
         override fun open(vararg args: Any?): Boolean {
             barrel = args[0] as Scenery
             quest = player.getQuestRepository().getQuest(Quests.THE_TOURIST_TRAP)
-            if ((quest!!.getStage(player) == 70 || quest!!.getStage(player) == 72) &&
-                !player.hasItem(TouristTrap.ANNA_BARREL)
-            ) {
+            if ((quest!!.getStage(player) == 70 || quest!!.getStage(player) == 72) && !player.hasItem(TouristTrap.ANNA_BARREL)) {
                 interpreter.sendDialogue("You search the barrels and find Ana.")
                 stage = 400
                 return true
@@ -1280,18 +1241,17 @@ class TouristTrapPlugin : OptionHandler() {
                     stage++
                 }
 
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            interpreter.sendItemMessage(
-                                TouristTrap.BARREL,
-                                "You take the barrel, it's not heavy, just awkward.",
-                            )
-                            stage = 3
-                        }
-
-                        2 -> end()
+                1 -> when (buttonId) {
+                    1 -> {
+                        interpreter.sendItemMessage(
+                            TouristTrap.BARREL,
+                            "You take the barrel, it's not heavy, just awkward.",
+                        )
+                        stage = 3
                     }
+
+                    2 -> end()
+                }
 
                 3 -> {
                     end()
@@ -1440,15 +1400,14 @@ class TouristTrapPlugin : OptionHandler() {
                         stage++
                     }
 
-                    1 ->
-                        when (buttonId) {
-                            1 -> {
-                                end()
-                                player.pulseManager.run(ProtoTypePulse(player))
-                            }
-
-                            2 -> end()
+                    1 -> when (buttonId) {
+                        1 -> {
+                            end()
+                            player.pulseManager.run(ProtoTypePulse(player))
                         }
+
+                        2 -> end()
+                    }
                 }
                 return true
             }

@@ -8,7 +8,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import org.rs.consts.Items
 
-class PrinceAliRescueListener : InteractionListener {
+class PrinceAliRescueListener: InteractionListener {
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.YELLOW_DYE_1765, Items.WIG_2421) { player, used, with ->
             val itemUsed = used.asItem()

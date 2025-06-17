@@ -21,9 +21,7 @@ class NathifaDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> playerl(FaceAnim.HAPPY, "Don't mention it.").also { stage++ }
             1 -> options(
-                "What do you have for sale?",
-                "What were things like in Menaphos?",
-                "I'd better get going."
+                "What do you have for sale?", "What were things like in Menaphos?", "I'd better get going."
             ).also { stage++ }
 
             2 -> when (buttonId) {
@@ -52,8 +50,7 @@ class NathifaDialogue(player: Player? = null) : Dialogue(player) {
 
             9 -> playerl(FaceAnim.HALF_ASKING, "I guess not everyone was as lucky?").also { stage++ }
             10 -> npcl(
-                FaceAnim.SAD,
-                "No. Many didn't have anywhere to go. Violence broke out in some parts of the city."
+                FaceAnim.SAD, "No. Many didn't have anywhere to go. Violence broke out in some parts of the city."
             ).also { stage++ }
 
             11 -> npcl(
@@ -72,8 +69,7 @@ class NathifaDialogue(player: Player? = null) : Dialogue(player) {
             ).also { stage++ }
 
             14 -> npcl(
-                FaceAnim.HAPPY,
-                "Anyway, let's not talk any more of this. Is there anything else I can do for you?"
+                FaceAnim.HAPPY, "Anyway, let's not talk any more of this. Is there anything else I can do for you?"
             ).also { stage = 1 }
 
             15 -> npcl(FaceAnim.FRIENDLY, "Until next time.").also { stage = END_DIALOGUE }

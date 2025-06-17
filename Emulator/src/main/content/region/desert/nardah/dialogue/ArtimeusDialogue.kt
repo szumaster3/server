@@ -19,9 +19,7 @@ class ArtimeusDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> options("What kind of items do you stock?", "I'm not in the market for Hunter equipment right now, thanks.").also {
-                stage++
-            }
+            0 -> options("What kind of items do you stock?", "I'm not in the market for Hunter equipment right now, thanks.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> player("What kind of items do you stock?").also { stage++ }
                 2 -> player("I'm not in the market for Hunter equipment", "right now, thanks.").also { stage = END_DIALOGUE }

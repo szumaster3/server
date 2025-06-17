@@ -34,18 +34,22 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 npcl(FaceAnim.OLD_DEFAULT, "Well done, soldier, tell me, how goes the battle?")
                 stage++
             }
+
             2 -> {
                 playerl(FaceAnim.THINKING, "Battle?")
                 stage++
             }
+
             3 -> {
                 npcl(FaceAnim.OLD_DEFAULT, "You do not know of the battle?")
                 stage++
             }
+
             4 -> {
                 npcl(FaceAnim.OLD_DEFAULT, "More time must have passed than I had thought...")
                 stage++
             }
+
             5 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -53,14 +57,17 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             6 -> {
                 player("Uh...", "Sorry, I've never heard of them...")
                 stage++
             }
+
             7 -> {
                 npcl(FaceAnim.OLD_SAD, "No!")
                 stage++
             }
+
             8 -> {
                 npcl(
                     FaceAnim.OLD_SAD,
@@ -68,6 +75,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             9 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -75,6 +83,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             10 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -82,6 +91,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             11 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -89,6 +99,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             12 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -96,6 +107,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             13 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -103,6 +115,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             14 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -110,6 +123,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             15 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -117,6 +131,7 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
+
             16 -> {
                 npcl(
                     FaceAnim.OLD_DEFAULT,
@@ -124,8 +139,8 @@ class AzzanadraDialogue(player: Player? = null) : Dialogue(player) {
                 )
                 stage++
             }
-            17 -> {
-                /*
+
+            17 -> {/*
                  * Finish quest and apply changes to the player.
                  */
                 end()

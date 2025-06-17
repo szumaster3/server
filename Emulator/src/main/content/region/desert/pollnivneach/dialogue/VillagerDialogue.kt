@@ -75,7 +75,7 @@ class VillagerDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = VillagerDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
-        1887,               // Wrapper
+        1887, // Wrapper
         NPCs.VILLAGER_1888, // Male
         NPCs.VILLAGER_1889,
         NPCs.VILLAGER_1890,

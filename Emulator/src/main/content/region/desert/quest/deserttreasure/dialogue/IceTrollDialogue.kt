@@ -18,14 +18,7 @@ class IceTrollDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.OLD_LAUGH1,
-                    "You should beware of the icy wind that runs through",
-                    "this valley, it will bring a fleshy like you to a cold end",
-                    "indeed!",
-                )
-
+            0 -> npc(FaceAnim.OLD_LAUGH1, "You should beware of the icy wind that runs through", "this valley, it will bring a fleshy like you to a cold end", "indeed!")
             1 -> end()
         }
         return true

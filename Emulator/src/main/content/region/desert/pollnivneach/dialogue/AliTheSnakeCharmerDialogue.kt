@@ -33,11 +33,7 @@ class AliTheSnakeCharmerDialogue(player: Player? = null) : Dialogue(player) {
             6 -> player(FaceAnim.JOLLY, "Wow a snake charmer. Can I have a go? Please?").also { stage++ }
             7 -> {
                 end()
-                if (!anyInInventory(player, Items.SNAKE_CHARM_4605, Items.SNAKE_BASKET_4606) && !inBank(
-                        player,
-                        Items.SNAKE_CHARM_4605
-                    ) && !inBank(player, Items.SNAKE_BASKET_4606)
-                ) {
+                if (!anyInInventory(player, Items.SNAKE_CHARM_4605, Items.SNAKE_BASKET_4606) && !inBank(player, Items.SNAKE_CHARM_4605) && !inBank(player, Items.SNAKE_BASKET_4606)) {
                     if (freeSlots(player) >= 2) {
                         addItem(player, Items.SNAKE_CHARM_4605)
                         addItem(player, Items.SNAKE_BASKET_4606)

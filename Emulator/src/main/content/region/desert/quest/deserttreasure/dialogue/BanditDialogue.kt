@@ -18,8 +18,7 @@ class BanditDialogue(player: Player? = null) : Dialogue(player) {
             getQuestStage(player, Quests.DESERT_TREASURE) == 100 -> {
                 npc(
                     FaceAnim.HAPPY,
-                    "So you're the one who freed Azzanadra from his prison? Thank you, kind " +
-                        if (!player.isMale) "lady" else "sir" + "!",
+                    "So you're the one who freed Azzanadra from his prison? Thank you, kind " + if (!player.isMale) "lady" else "sir" + "!",
                 )
                 stage = 1
             }
@@ -40,48 +39,39 @@ class BanditDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> end()
-            2 ->
-                options(
-                    "I'm here on an archaeological expedition for the Museum of Varrock. I believe there may be some interesting artefacts in the area.",
-                    "What do you want from me?",
-                ).also { stage++ }
+            2 -> options("I'm here on an archaeological expedition for the Museum of Varrock. I believe there may be some interesting artefacts in the area.", "What do you want from me?").also { stage++ }
+            3 -> when (buttonId) {
+                1 -> {
+                    val randomResponse = (0..4).random()
+                    when (randomResponse) {
+                        0 -> npc(
+                            "You are a crazy " + if (!player.isMale) {
+                                "woman"
+                            } else {
+                                "man" + ". The only thing you will find out here in the desert is your death."
+                            },
+                        )
 
-            3 -> {
-                when (buttonId) {
-                    1 -> {
-                        val randomResponse = (0..4).random()
-                        when (randomResponse) {
-                            0 ->
-                                npc(
-                                    "You are a crazy " +
-                                        if (!player.isMale) {
-                                            "woman"
-                                        } else {
-                                            "man" +
-                                                ". The only thing you will find out here in the desert is your death."
-                                        },
-                                )
-                            1 ->
-                                npc(
-                                    "I have no interest in the world that betrayed my people. Search where you will, you will find nothing.",
-                                )
-                            2 ->
-                                npc(
-                                    "The gods forsake us, and drove us to this place. Anything of worth has been long gone.",
-                                )
-                            3 ->
-                                npc(
-                                    "I'm sure there are many secrets buried beneath the sands here. The thing about this being a desert, is that they're likely to stay that way.",
-                                )
-                            4 -> npc("Do I look like I care who you are or where you came from?")
-                        }
-                        stage = 1
-                    }
+                        1 -> npc(
+                            "I have no interest in the world that betrayed my people. Search where you will, you will find nothing.",
+                        )
 
-                    2 -> {
-                        npc("Do I look like I care who you are or where you came from?")
-                        stage = 1
+                        2 -> npc(
+                            "The gods forsake us, and drove us to this place. Anything of worth has been long gone.",
+                        )
+
+                        3 -> npc(
+                            "I'm sure there are many secrets buried beneath the sands here. The thing about this being a desert, is that they're likely to stay that way.",
+                        )
+
+                        4 -> npc("Do I look like I care who you are or where you came from?")
                     }
+                    stage = 1
+                }
+
+                2 -> {
+                    npc("Do I look like I care who you are or where you came from?")
+                    stage = 1
                 }
             }
         }
