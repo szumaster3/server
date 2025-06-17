@@ -931,6 +931,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
                     options(
                         "Tell me about summoning familiars.",
                         "Tell me about special moves.",
+                        "Tell me about charged items.",
                         "Tell me about pets.",
                     )
                     stage = 107
@@ -938,33 +939,106 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
 
                 107 -> when (buttonId) {
                     1 -> {
-                        npc(
-                            "Summoned familiars are at the very core of Summoning.",
-                            "Each familiar is different, and the more powerful the",
-                            "summoner, the more powerful the familiar they can",
-                            "summon.",
-                        )
-                        stage = 20001
+                        npc("Summoned familiars are at the very core of Summoning.", "Each familiar is different, and the more powerful the", "summoner, the more powerful the familiar they can", "summon.")
+                        stage = 108
                     }
 
                     2 -> {
-                        npc(
-                            "Well, if a Summoning pouch is split apart at an obelisk,",
-                            "then the energy it contained will reconstitute itself -",
-                            "transform - into a scroll. This scroll can then be used to",
-                            "make your familiar perform its special move.",
-                        )
-                        stage = 2001
+                        npc("Well, if a Summoning pouch is split apart at an obelisk,", "then the energy it contained will reconstitute itself -", "transform - into a scroll. This scroll can then be used to", "make your familiar perform its special move.")
+                        stage = 129
                     }
 
                     3 -> {
-                        npc(
-                            "Well, these are not really an element of the skill, as such,",
-                            "but more like a side-effect of training.",
-                        )
-                        stage = 2001
+                        npcl(FaceAnim.FRIENDLY, "Charged items are very simple to create, if you have the correct Crafting level.")
+                        stage = 148
+                    }
+
+                    4 -> {
+                        npc("Well, these are not really an element of the skill, as such,", "but more like a side-effect of training.")
+                        stage = 168
                     }
                 }
+                // Tell me about summoning familiars.
+                108 -> npcl(FaceAnim.FRIENDLY, "The animals themselves are not real, in the sense that you or I are real; they are spirits drawn from the spirit plane.").also { stage++ }
+                109 -> npcl(FaceAnim.FRIENDLY, "As a result, they have powers that the animals they resemble do not.").also { stage++ }
+                110 -> npcl(FaceAnim.FRIENDLY, "They cannot remain in this world indefinitely; they require a constant supply of energy to maintain their link to the spirit plane.").also { stage++ }
+                111 -> npcl(FaceAnim.FRIENDLY, "This energy is drained from your Summoning skill points.").also { stage++ }
+                112 -> npcl(FaceAnim.FRIENDLY, "Your level of the Summoning skill is not drained, and you can refresh your points back up to your maximum level at an obelisk whenever you wish.").also { stage++ }
+                113 -> playerl(FaceAnim.NEUTRAL, "So, my Summoning skill points are like food to them?").also { stage++ }
+                114 -> npcl(FaceAnim.FRIENDLY, "Yes, that is an appropriate analogy.").also { stage++ }
+                115 -> npcl(FaceAnim.FRIENDLY, "The more powerful the familiar, the more it must 'feed' and the more 'food' it will need to be satisfied.").also { stage++ }
+                116 -> npcl(FaceAnim.FRIENDLY, "As a result, only the most powerful summoners are able to maintain a link from a familiar to the spirit plane, since they are able to provide more 'food' with each Summoning level they gain.").also { stage++ }
+                117 -> playerl(FaceAnim.NEUTRAL, "I'm starting to get a little hungry now.").also { stage++ }
+                118 -> npcl(FaceAnim.FRIENDLY, "As you gain mastery of the skill you will be able to have familiars out for the full time they exist. And still have some points over to re-summon them afterwards, if you wish.").also { stage++ }
+                119 -> npcl(FaceAnim.FRIENDLY, "This is because you are able to feed them the energy they need and have leftovers to spare!").also { stage++ }
+                120 -> playerl(FaceAnim.NEUTRAL, "Great!").also { stage++ }
+                121 -> playerl(FaceAnim.NEUTRAL, "So, what can these familiars do?").also { stage++ }
+                122 -> npcl(FaceAnim.FRIENDLY, "Why not ask me to count every blade of grass on a lawn?").also { stage++ }
+                123 -> npcl(FaceAnim.FRIENDLY, "The familiars each have unique abilities and even the most experienced summoner will not know them all.").also { stage++ }
+                124 -> playerl(FaceAnim.NEUTRAL, "Well, can you give me some hints?").also { stage++ }
+                125 -> npcl(FaceAnim.FRIENDLY, "Well, some familiars are able to fight with you in combat. They will keep an eye out to see if you are fighting and will intervene, if they can.").also { stage++ }
+                126 -> npcl(FaceAnim.FRIENDLY, "Other familiars will not fight, for various reasons, but they may provide bonuses in other tasks. Some will even carry your items for you, if you need them to.").also { stage++ }
+                127 -> playerl(FaceAnim.NEUTRAL, "Amazing!").also { stage++ }
+                128 -> npcl(FaceAnim.FRIENDLY, "Would you like to know anything else about Summoning?").also { stage = 106 }
+                // Tell me about special moves.
+                129 -> npcl(FaceAnim.FRIENDLY, "Well, if a Summoning pouch is split apart at an obelisk, then the energy it contained will reconstitute itself - transform - into a scroll.").also { stage++ }
+                130 -> npcl(FaceAnim.FRIENDLY, "This scroll can then be used to make your familiar perform its special move.").also { stage++ }
+                131 -> npcl(FaceAnim.FRIENDLY, "For example, spirit wolves are able to Howl, scaring away an opponent for a short period of time.").also { stage++ }
+                132 -> playerl(FaceAnim.NEUTRAL, "Or longer, in the case of that giant wolpertinger.").also { stage++ }
+                133 -> npcl(FaceAnim.FRIENDLY, "Indeed!").also { stage++ }
+                134 -> npcl(FaceAnim.FRIENDLY, "Well, each familiar has its own special move, and you can only use scrolls on the familiar that it applies to.").also { stage++ }
+                135 -> npcl(FaceAnim.FRIENDLY, "For example, a spirit wolf will only look at you oddly if you wish it to perform a dreadfowl special move.").also { stage++ }
+                136 -> playerl(FaceAnim.NEUTRAL, "So, what sort of special moves are there?").also { stage++ }
+                137 -> npcl(FaceAnim.FRIENDLY, "The special moves are as varied as the familiars themselves.").also { stage++ }
+                138 -> npcl(FaceAnim.FRIENDLY, "A good rule of thumb is that if a familiar helps you in combat, then its special move is likely to damage attackers when you use a scroll.").also { stage++ }
+                139 -> npcl(FaceAnim.FRIENDLY, "On the other hand, if a familiar is more peaceful by nature, then its special move might heal or provide means to train your other skills - that sort of thing.").also { stage++ }
+                140 -> playerl(FaceAnim.NEUTRAL, "Are the familiar's special moves similar to its normal abilities?").also { stage++ }
+                141 -> npcl(FaceAnim.FRIENDLY, "In general, no. But some familiars' special moves can be a more powerful version of their normal ability.").also { stage++ }
+                142 -> npcl(FaceAnim.FRIENDLY, "Take the spirit wolf, for example. Its special move and its normal ability are essentially the same.").also { stage++ }
+                143 -> npcl(FaceAnim.FRIENDLY, "However, the special move can be used on any nearby opponent, while the normal ability only works on those opponents you are currently fighting.").also { stage++ }
+                144 -> npcl(FaceAnim.FRIENDLY, "If your familiar is fighting with you, it will use its normal ability whenever it can.").also { stage++ }
+                145 -> npcl(FaceAnim.FRIENDLY, "It won't however, use its special move unless you have expressly asked it to, by activating a scroll.").also { stage++ }
+                146 -> playerl(FaceAnim.NEUTRAL, "I see. Thanks for the information.").also { stage++ }
+                147 -> npcl(FaceAnim.FRIENDLY, "Would you like to know anything else about Summoning?").also { stage = 106 }
+                // Tell me about charged items.
+                149 -> npcl(FaceAnim.FRIENDLY, "If not, then you can simply buy a set of antlers or a lizard skull from me. You can take an item that can be charged, usually a headdress, and attach scrolls to them.").also { stage++ }
+                150 -> npcl(FaceAnim.FRIENDLY, "The scrolls are then stored in the headdress. Aggressive combat scrolls, however, are the only ones that can be used in this way.").also { stage++ }
+                151 -> playerl(FaceAnim.NEUTRAL, "Why is that?").also { stage++ }
+                152 -> npcl(FaceAnim.FRIENDLY, "Well, a scroll in a charged item will only be activated when it is hit with enough power.").also { stage++ }
+                153 -> npcl(FaceAnim.FRIENDLY, "Since this can only happen from the impact of combat, it makes sense that only combat-based scrolls can be stored here.").also { stage++ }
+                154 -> npcl(FaceAnim.FRIENDLY, "The activated scroll will then be sensed by your familiar, and it will defend you.").also { stage++ }
+                155 -> playerl(FaceAnim.NEUTRAL, "What sort of impact are we talking about here?").also { stage++ }
+                156 -> npcl(FaceAnim.FRIENDLY, "Oh, nothing too serious: stabbings, explosions, arrows to the torso - that sort of thing.").also { stage++ }
+                157 -> playerl(FaceAnim.NEUTRAL, "What?").also { stage++ }
+                158 -> npcl(FaceAnim.FRIENDLY, "Oh, come now; a strapping lad like you will barely feel it. Your opponent, however, will certainly feel the power of your retaliation!").also { stage++ }
+                159 -> npcl(FaceAnim.FRIENDLY, "Anyway, one impact is not enough; it will take a series of strikes to activate the power in the charged item.").also { stage++ }
+                160 -> playerl(FaceAnim.NEUTRAL, "So, will this allow familiars to perform the special moves of other familiars? Or will it work if I have no familiar out?").also { stage++ }
+                161 -> npcl(FaceAnim.FRIENDLY, "No. As with the normal method of instigating a special move, the correct scroll is required for the correct familiar.").also { stage++ }
+                162 -> npcl(FaceAnim.FRIENDLY, "Even if some dreadfowl scroll power was hanging in the air, a spirit wolf would not be able to do anything with it.").also { stage++ }
+                163 -> playerl(FaceAnim.NEUTRAL, "What happens when the item runs out of charge? Do they disintegrate or something?").also { stage++ }
+                164 -> npcl(FaceAnim.FRIENDLY, "Only if you've made them shoddily!").also { stage++ }
+                165 -> npcl(FaceAnim.FRIENDLY, "The items should be useful for a long time. When you run out of charges, you simply need to attach more scrolls.").also { stage++ }
+                166 -> playerl(FaceAnim.NEUTRAL, "That's a relief.").also { stage++ }
+                167 -> npcl(FaceAnim.FRIENDLY, "Would you like to know anything else about Summoning?").also { stage = 106 }
+                // Tell me about pets.
+                168 -> npcl(FaceAnim.FRIENDLY, "Essentially, the higher the Summoning level an adventurer has, the more they become in tune with nature.").also { stage++ }
+                169 -> npcl(FaceAnim.FRIENDLY, "As a result, they can approach animals that would otherwise run away from them.").also { stage++ }
+                170 -> npcl(FaceAnim.FRIENDLY, "This means that you will be able to befriend and raise various animals from around the world.").also { stage++ }
+                171 -> playerl(FaceAnim.NEUTRAL, "So, what will I need to do to raise these pets?").also { stage++ }
+                172 -> npcl(FaceAnim.FRIENDLY, "Oh, most of them will be quite content to follow you around. You just have to feed them and make sure they are generally healthy.").also { stage++ }
+                173 -> npcl(FaceAnim.FRIENDLY, "It is the goal of every summoner to be able to raise a dragon, yet few have been able to perform this feat.").also { stage++ }
+                174 -> playerl(FaceAnim.NEUTRAL, "Wow! Imagine riding around on a dragon - even fighting with it!").also { stage++ }
+                175 -> npcl(FaceAnim.FRIENDLY, "That's not the right attitude at all!").also { stage++ }
+                176 -> playerl(FaceAnim.NEUTRAL, "What?").also { stage++ }
+                177 -> npcl(FaceAnim.FRIENDLY, "When you raise a pet it becomes your responsibility - your friend.").also { stage++ }
+                178 -> npcl(FaceAnim.FRIENDLY, "You can't ride into battle on your friend, or make them fight for you. These are not spiritual familiars: if they die, they die!").also { stage++ }
+                179 -> playerl(FaceAnim.NEUTRAL, "I didn't realise.").also { stage++ }
+                180 -> npcl(FaceAnim.FRIENDLY, "Well, now you know.").also { stage++ }
+                181 -> npcl(FaceAnim.FRIENDLY, "Pets do not fight for you, cast spells or have strange abilities, and you may certainly not ride around on them.").also { stage++ }
+                182 -> npcl(FaceAnim.FRIENDLY, "They are animals you raise from birth to follow you wherever you go.").also { stage++ }
+                183 -> npcl(FaceAnim.FRIENDLY, "Remember that and take good care of them.").also { stage++ }
+                184 -> playerl(FaceAnim.NEUTRAL, "I will!").also { stage++ }
+                185 -> npcl(FaceAnim.FRIENDLY, "Would you like to know anything else about Summoning?").also { stage = 106 }
 
                 2001 -> end()
                 2000 -> {
@@ -978,6 +1052,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 20001 -> end()
+
                 34 -> {
                     npc("If you like! It's good to see you training.")
                     stage = 35
