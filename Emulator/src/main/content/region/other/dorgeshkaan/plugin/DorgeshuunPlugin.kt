@@ -5,6 +5,7 @@ import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -46,40 +47,24 @@ class DorgeshuunPlugin : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.MISTAG_2084) { player, used, _ ->
+        onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.MISTAG_2084) { player, used, npc ->
             val randomReward = arrayOf(Items.MINING_HELMET_5013, Items.MINING_HELMET_5014).random()
-            if (isQuestComplete(player, Quests.THE_LOST_TRIBE) &&
-                !removeItem(player, used.asItem(), Container.INVENTORY)
-            ) {
+
+            if (!isQuestComplete(player, Quests.THE_LOST_TRIBE) || !removeItem(player, used.asItem(), Container.INVENTORY)) {
                 sendMessage(player, "Nothing interesting happens.")
                 return@onUseWith true
-            } else {
-                openDialogue(
-                    player,
-                    object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
-                            npc = core.game.node.entity.npc.NPC(NPCs.MISTAG_2084)
-                            when (stage) {
-                                0 -> playerl(FaceAnim.HALF_ASKING, "Is this your brooch?").also { stage++ }
-                                1 ->
-                                    npc(
-                                        FaceAnim.OLD_NORMAL,
-                                        "Yes! I thought I'd lost it. Thank you. Have one of these",
-                                        "helmets. It will be useful if you want to work in the mine.",
-                                    ).also { stage++ }
+            }
 
-                                2 -> {
-                                    end()
-                                    addItemOrDrop(player, randomReward, 1)
-                                    sendItemDialogue(player, randomReward, "Mistag hands you a Mining helmet.")
-                                }
-                            }
-                        }
-                    },
+            dialogue(player) {
+                player(FaceAnim.HALF_ASKING, "Is this your brooch?")
+                npc(npc.id, FaceAnim.OLD_NORMAL,
+                    "Yes! I thought I'd lost it. Thank you. Have one of these",
+                    "helmets. It will be useful if you want to work in the mine."
                 )
+                end {
+                    addItemOrDrop(player, randomReward, 1)
+                    sendItemDialogue(player, randomReward, "Mistag hands you a Mining helmet.")
+                }
             }
             return@onUseWith true
         }
