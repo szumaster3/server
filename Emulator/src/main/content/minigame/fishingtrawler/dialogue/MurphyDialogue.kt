@@ -1,7 +1,7 @@
 package content.minigame.fishingtrawler.dialogue
 
-import content.global.activity.ttrail.plugin.CoordinateClue
-import core.api.hasAnItem
+import core.api.addItem
+import core.api.freeSlots
 import core.api.inInventory
 import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue
@@ -17,14 +17,12 @@ class MurphyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val coordClue = CoordinateClue().clueId
-        val sextant = hasAnItem(player, Items.SEXTANT_2574).container != null
-        if(inInventory(player, coordClue) && !sextant) {
+        if(!inInventory(player, Items.SEXTANT_2574)) {
             player(FaceAnim.FRIENDLY, "Ahoy there!")
             stage = 30
         } else {
-        playerl(FaceAnim.FRIENDLY, "Good day to you Sir.")
-            }
+            playerl(FaceAnim.FRIENDLY, "Good day to you Sir.")
+        }
         return true
     }
 
@@ -88,10 +86,20 @@ class MurphyDialogue(player: Player? = null) : Dialogue(player) {
             36 -> npcl(FaceAnim.FRIENDLY, "Aye.").also { stage++ }
             37 -> player("Could I have it?").also { stage++ }
             38 -> npcl(FaceAnim.FRIENDLY, "Aye.").also { stage++ }
-            39 -> sendItemDialogue(player, Items.SEXTANT_2574, "Murphy has given you his old sextant.").also { stage++ }
-            40 -> player(FaceAnim.THINKING, "Don't youstill need it?").also { stage++ }
-            41 -> npc(FaceAnim.FRIENDLY, "I can tell from the taste of the sea spray where I am,", "m'hearty!").also { stage++ }
-            42 -> player(FaceAnim.HAPPY, "Wow!").also { stage++ }
+            39 -> {
+                if (freeSlots(player) == 0) {
+                    npcl(FaceAnim.NEUTRAL, "You don't have enough space for the sextant. Come back to me when you do.")
+                    return true
+                }
+                sendItemDialogue(player, Items.SEXTANT_2574, "Murphy has given you his old sextant.").also { stage++ }
+            }
+            40 -> {
+                end()
+                addItem(player, Items.SEXTANT_2574, 1)
+            }
+            41 -> player(FaceAnim.THINKING, "Don't youstill need it?").also { stage++ }
+            42 -> npc(FaceAnim.FRIENDLY, "I can tell from the taste of the sea spray where I am,", "m'hearty!").also { stage++ }
+            43 -> player(FaceAnim.HAPPY, "Wow!").also { stage = 50 }
 
             50 -> end()
         }

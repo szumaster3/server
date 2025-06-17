@@ -75,12 +75,7 @@ class ProfessorDialogue(player: Player? = null) : Dialogue(player) {
             17 -> npcl(FaceAnim.FRIENDLY, "I've got plenty of charts myself; just come back here when you've got the sextant and watch, and I'll give you one and teach you how to use them.").also { stage++ }
             18 -> playerl(FaceAnim.FRIENDLY, "Thanks, I'll see you later.").also { stage = 22 }
             19 -> {
-                val chart = hasAnItem(player, Items.CHART_2576).container != null
-                if (freeSlots(player) == 0) {
-                    npcl(FaceAnim.NEUTRAL, "You don't have enough space for the chart. Come back to me when you do.")
-                    return true
-                }
-                if (!chart) {
+                if (!inInventory(player, Items.CHART_2576)) {
                     player("I've lost my chart.")
                     stage = 20
                 } else {
@@ -89,7 +84,13 @@ class ProfessorDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            20 -> npcl(FaceAnim.HAPPY, "That's not a problem, I've got lots of copies.").also { stage++ }
+            20 -> {
+                if (freeSlots(player) == 0) {
+                    npcl(FaceAnim.NEUTRAL, "You don't have enough space for the chart. Come back to me when you do.")
+                    return true
+                }
+                npcl(FaceAnim.HAPPY, "That's not a problem, I've got lots of copies.").also { stage++ }
+            }
             21 -> {
                 end()
                 sendItemDialogue(player, Items.CHART_2576, "The professor has given you a navigation chart.")
