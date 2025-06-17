@@ -41,7 +41,7 @@ class ZombieHalloweenPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.ZOMBIE_2866, IntType.NPC, "scare") { player,node ->
+        on(NPCs.ZOMBIE_2869, IntType.NPC, "scare") { player,node ->
             dialogue(player) {
                 npc(node.id, "Traaa laaa laaa...")
                 player("Oogaboogabooga!")
