@@ -373,6 +373,7 @@ class EasterEvent :
                 WeightedItem(Items.ESS_IMPLING_JAR_11246, 1, 1, 0.025),
                 WeightedItem(Items.NATURE_IMPLING_JAR_11250, 1, 1, 0.015),
                 WeightedItem(Items.NINJA_IMPLING_JAR_11254, 1, 1, 0.015),
+                WeightedItem(Items.PIRATE_IMPLING_JAR_13337, 1, 1, 0.010),
                 WeightedItem(Items.DRAGON_IMPLING_JAR_11256, 1, 1, 0.005),
             )
     }
