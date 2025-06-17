@@ -1,0 +1,15 @@
+package content.region.kandarin.gnome.quest.makinghistory
+
+import org.rs.consts.Vars
+
+object MHUtils {
+    const val PROGRESS = Vars.VARBIT_MAKING_HISTORY_PROGRESS_1383
+    const val ERIN_PROGRESS = Vars.VARBIT_MAKING_HISTORY_ERIN_PROGRESS_1384
+    const val DRON_PROGRESS = Vars.VARBIT_MAKING_HISTORY_DRON_PROGRESS_1385
+    const val DROALAK_PROGRESS = Vars.VARBIT_MAKING_HISTORY_DROALAK_PROGRESS_1386
+    const val MELINA_DISAPPEARED = Vars.VARBIT_MAKING_HISTORY_MELINA_DISAPPEARED_1387
+    const val DROALAK_DISAPPEARED = Vars.VARBIT_MAKING_HISTORY_DROALAK_DISAPPEARED_1388
+    const val ATTRIBUTE_ERIN_PROGRESS = "/save:mh-erin"
+    const val ATTRIBUTE_DRON_PROGRESS = "/save:mh-dron"
+    const val ATTRIBUTE_DROALAK_PROGRESS = "/save:mh-droalak"
+}

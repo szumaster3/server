@@ -1,12 +1,12 @@
 package content.region.kandarin.gnome.quest.makinghistory.plugin
 
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils
 import content.region.kandarin.gnome.quest.makinghistory.book.HistoryoftheOutpost
 import content.region.kandarin.gnome.quest.makinghistory.book.TheMysteriousAdventurer
 import core.api.*
 import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
 import org.rs.consts.Components
@@ -15,32 +15,31 @@ import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
 class MakingHistoryPlugin : InteractionListener {
-    private fun outpostScroll(player: Player) {
-        val outpostScroll =
-            arrayOf(
-                "",
-                "<col=8A0808>Timeline of the Ardougne Outpost</col>",
-                "",
-                "",
-                "Start of Fifth age: Outpost built",
-                "",
-                "+ 65 Years: The dreaded Years of Tragedy'",
-                "",
-                "+ 68 Years: The Great Battle'",
-                "",
-                "+ 71 Years: Survivors of battle start a new line of",
-                "",
-                "kings of Ardougne and the Equal Trade Market.",
-                "",
-            )
-        sendString(player, outpostScroll.joinToString("<br>"), Components.BLANK_SCROLL_222, 2)
-    }
 
     override fun defineListeners() {
         on(Items.SCROLL_6758, IntType.ITEM, "read") { player, _ ->
-            openInterface(player, Components.BLANK_SCROLL_222).also { outpostScroll(player) }
+            val outpostScroll =
+                arrayOf(
+                    "",
+                    "<col=8A0808>Timeline of the Ardougne Outpost</col>",
+                    "",
+                    "",
+                    "Start of Fifth age: Outpost built",
+                    "",
+                    "+ 65 Years: The dreaded Years of Tragedy'",
+                    "",
+                    "+ 68 Years: The Great Battle'",
+                    "",
+                    "+ 71 Years: Survivors of battle start a new line of",
+                    "",
+                    "kings of Ardougne and the Equal Trade Market.",
+                    "",
+                )
+            openInterface(player, Components.BLANK_SCROLL_222)
+            sendString(player, outpostScroll.joinToString("<br>"), Components.BLANK_SCROLL_222, 2)
             return@on true
         }
+
         on(Scenery.SHIELD_DISPLAY_10267, IntType.SCENERY, "study") { player, _ ->
             sendMessage(player, "A shield worn by Fremennik warriors.")
             return@on true
@@ -48,11 +47,11 @@ class MakingHistoryPlugin : InteractionListener {
 
         onDig(Location(2440, 3145, 0)) { player ->
             if (inInventory(player, Items.ENCHANTED_KEY_6754) &&
-                getVarbit(player, MakingHistoryUtils.ERIN_PROGRESS) >= 1
+                getVarbit(player, MHUtils.ERIN_PROGRESS) >= 1
             ) {
                 sendDialogue(player, "You use the spade and find a chest. Wonder what's inside?")
                 addItemOrDrop(player, Items.CHEST_6759)
-                setVarbit(player, MakingHistoryUtils.ERIN_PROGRESS, 2, true)
+                setVarbit(player, MHUtils.ERIN_PROGRESS, 2, true)
             }
             return@onDig
         }
@@ -65,8 +64,8 @@ class MakingHistoryPlugin : InteractionListener {
                     "the chest.",
                 )
                 addItemOrDrop(player, Items.JOURNAL_6755)
-                setVarbit(player, MakingHistoryUtils.ERIN_PROGRESS, 4, true)
-                setAttribute(player, MakingHistoryUtils.ATTRIBUTE_ERIN_PROGRESS, true)
+                setVarbit(player, MHUtils.ERIN_PROGRESS, 4, true)
+                setAttribute(player, MHUtils.ATTRIBUTE_ERIN_PROGRESS, true)
             }
             return@onUseWith true
         }

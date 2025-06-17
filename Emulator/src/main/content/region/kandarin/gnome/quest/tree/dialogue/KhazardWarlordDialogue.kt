@@ -6,10 +6,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.Quests
 
 class KhazardWarlordDialogue : DialogueFile() {
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ) {
+
+    override fun handle(componentID: Int, buttonID: Int) {
         val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         if (questStage == 31) {
             when (stage) {
@@ -23,16 +21,12 @@ class KhazardWarlordDialogue : DialogueFile() {
                 0 -> playerl("You there, stop!").also { stage++ }
                 1 -> npcl("Go back to your pesky little green friends.").also { stage++ }
                 2 -> playerl("I've come for the orbs.").also { stage++ }
-                3 ->
-                    npcl(
-                        "You're out of your depth traveller. These orbs are part of a much larger picture.",
-                    ).also { stage++ }
+                3 -> npcl("You're out of your depth traveller. These orbs are part of a much larger picture.").also { stage++ }
                 4 -> playerl("They're stolen goods, now give them here!").also { stage++ }
-                5 ->
-                    npcl("Ha, you really think you stand a chance? I'll crush you.").also {
-                        npc!!.attack(player!!)
-                        stage = END_DIALOGUE
-                    }
+                5 -> npcl("Ha, you really think you stand a chance? I'll crush you.").also {
+                    end()
+                    npc!!.attack(player!!)
+                }
             }
         }
     }

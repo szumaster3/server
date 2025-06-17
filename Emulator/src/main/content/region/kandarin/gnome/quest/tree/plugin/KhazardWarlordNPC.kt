@@ -27,10 +27,7 @@ class KhazardWarlordNPC(
 
     override fun finalizeDeath(killer: Entity?) {
         if (getQuestStage(killer as Player, Quests.TREE_GNOME_VILLAGE) == 40) {
-            sendDialogue(
-                killer,
-                "As the warlord falls to the ground, a ghostly vapour floats upwards from his battle-worn armour. You search his satchel and find the orbs of protection.",
-            )
+            sendDialogue(killer, "As the warlord falls to the ground, a ghostly vapour floats upwards from his battle-worn armour. You search his satchel and find the orbs of protection.")
             addItemOrDrop(killer, Items.ORBS_OF_PROTECTION_588)
         }
         super.finalizeDeath(killer)

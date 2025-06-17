@@ -22,11 +22,7 @@ class CreakykneesDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc(FaceAnim.OLD_NORMAL, "From that strange metal thing up on the hill.").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "You should give that back!").also { stage++ }
             2 -> npcl(FaceAnim.OLD_NORMAL, "Even if it's cracked?").also { stage++ }
-            3 ->
-                player(FaceAnim.HALF_GUILTY, "Ah, well, I suppose it's of no use. But, still.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            3 -> player(FaceAnim.HALF_GUILTY, "Ah, well, I suppose it's of no use. But, still.").also { stage = END_DIALOGUE }
         }
         return true
     }

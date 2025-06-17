@@ -12,54 +12,51 @@ class AlmeraDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
-        stage =
-            if (quest.getStage(player) == 100) {
-                player(FaceAnim.HALF_GUILTY, "Hello Almera.")
-                7
-            } else {
-                player(FaceAnim.NEUTRAL, "Hello.")
-                0
-            }
+        stage = if (quest.getStage(player) == 100) {
+            player(FaceAnim.HALF_GUILTY, "Hello Almera.")
+            7
+        } else {
+            player(FaceAnim.NEUTRAL, "Hello.")
+            0
+        }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
         when (stage) {
-            0 ->
-                if (quest.getStage(player) == 0) {
-                    npc(
-                        FaceAnim.ASKING,
-                        "Ah, hello there. Nice to see an outsider for a change,",
-                        "are you busy? I have a problem.",
-                    )
-                    stage = 1
-                } else if (quest.getStage(player) == 10) {
-                    npc(FaceAnim.JOLLY, "Hello brave adventurer, have you seen my boy yet?")
-                    stage = 200
-                } else if (quest.getStage(player) >= 20) {
-                    npc(FaceAnim.JOLLY, "Well hello, you're still around then.")
-                    stage = 202
-                } else {
-                }
+            0 -> if (quest.getStage(player) == 0) {
+                npc(
+                    FaceAnim.ASKING,
+                    "Ah, hello there. Nice to see an outsider for a change,",
+                    "are you busy? I have a problem.",
+                )
+                stage = 1
+            } else if (quest.getStage(player) == 10) {
+                npc(FaceAnim.JOLLY, "Hello brave adventurer, have you seen my boy yet?")
+                stage = 200
+            } else if (quest.getStage(player) >= 20) {
+                npc(FaceAnim.JOLLY, "Well hello, you're still around then.")
+                stage = 202
+            } else {
+            }
 
             1 -> {
                 options("I'm afraid I'm in a rush.", "How can I help?")
                 stage = 2
             }
 
-            2 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HALF_GUILTY, "I'm afraid I am in a rush.")
-                        stage = 99
-                    }
-
-                    2 -> {
-                        player(FaceAnim.HALF_GUILTY, "How can I help?")
-                        stage = 3
-                    }
+            2 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HALF_GUILTY, "I'm afraid I am in a rush.")
+                    stage = 99
                 }
+
+                2 -> {
+                    player(FaceAnim.HALF_GUILTY, "How can I help?")
+                    stage = 3
+                }
+            }
 
             3 -> {
                 npc(

@@ -25,7 +25,8 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 import org.rs.consts.Scenery
 
-class TreeGnomeVillagePlugin: InteractionListener {
+class TreeGnomeVillagePlugin : InteractionListener {
+
     override fun defineDestinationOverrides() {
         setDest(IntType.NPC, intArrayOf(NPCs.TRACKER_GNOME_2_482), "talk-to") { _, _ ->
             return@setDest Location.create(2524, 3256, 0)
@@ -37,12 +38,7 @@ class TreeGnomeVillagePlugin: InteractionListener {
     }
 
     override fun defineListeners() {
-        on(
-            intArrayOf(Scenery.LADDER_5250, Scenery.LADDER_5251),
-            IntType.SCENERY,
-            "climb-down",
-            "climb-up",
-        ) { player, _ ->
+        on(intArrayOf(Scenery.LADDER_5250, Scenery.LADDER_5251), IntType.SCENERY, "climb-down", "climb-up",) { player, _ ->
             when (getUsedOption(player)) {
                 "climb-down" -> ClimbActionHandler.climb(player, Animation(827), Location(2533, 9556, 0))
                 else -> ClimbActionHandler.climb(player, Animation(828), Location(2533, 3156, 0))
@@ -122,58 +118,39 @@ class TreeGnomeVillagePlugin: InteractionListener {
     private class ClimbWall : DialogueFile() {
         val climbAnimation = Animation(839)
 
-        override fun handle(
-            componentID: Int,
-            buttonID: Int,
-        ) {
+        override fun handle(componentID: Int, buttonID: Int) {
             if (inBorders(player!!, 2507, 3254, 2512, 3259)) {
                 return sendMessage(player!!, "I can't get over the wall from this side.")
             }
             if (getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE) > 30) {
                 when (stage) {
-                    0 ->
-                        sendDialogue(
-                            player!!,
-                            "The wall has been reduced to rubble. It should be possible to climb over the remains",
-                        ).also { stage++ }
+                    0 -> sendDialogue(player!!, "The wall has been reduced to rubble. It should be possible to climb over the remains").also { stage++ }
+                    1 -> AgilityHandler.forceWalk(player!!, -1, player!!.location, player!!.location.transform(Direction.NORTH, 2), climbAnimation, 15, 0.0, null).also {
+                        end()
+                        val lowerGuard: NPC =
+                            RegionManager.getNpc(player!!.location, NPCs.KHAZARD_COMMANDER_478, 10) ?: return
+                        lock(player!!, 4)
+                        GameWorld.Pulser.submit(
+                            object : Pulse(1) {
+                                var count = 0
 
-                    1 ->
-                        AgilityHandler
-                            .forceWalk(
-                                player!!,
-                                -1,
-                                player!!.location,
-                                player!!.location.transform(Direction.NORTH, 2),
-                                climbAnimation,
-                                15,
-                                0.0,
-                                null,
-                            ).also {
-                                end()
-                                val lowerGuard: NPC =
-                                    RegionManager.getNpc(player!!.location, NPCs.KHAZARD_COMMANDER_478, 10) ?: return
-                                lock(player!!, 4)
-                                GameWorld.Pulser.submit(
-                                    object : Pulse(1) {
-                                        var count = 0
-
-                                        override fun pulse(): Boolean {
-                                            when (count) {
-                                                0 -> sendChat(lowerGuard, "What? How did you manage to get in here.")
-                                                2 -> sendChat(player!!, "I've come for the orb.")
-                                                3 -> {
-                                                    sendChat(lowerGuard, "I'll never let you take it.")
-                                                    lowerGuard.attack(player)
-                                                    unlock(player!!)
-                                                    return true
-                                                }
-                                            }
-                                            count++
-                                            return false
+                                override fun pulse(): Boolean {
+                                    when (count) {
+                                        0 -> sendChat(lowerGuard, "What? How did you manage to get in here.")
+                                        2 -> sendChat(player!!, "I've come for the orb.")
+                                        3 -> {
+                                            sendChat(lowerGuard, "I'll never let you take it.")
+                                            lowerGuard.attack(player)
+                                            unlock(player!!)
+                                            return true
                                         }
-                                    },
-                                )
-                            }
+                                    }
+                                    count++
+                                    return false
+                                }
+                            },
+                        )
+                    }
                 }
             }
         }

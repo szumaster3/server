@@ -23,10 +23,9 @@ class TreeGnomeVillage : Quest(Quests.TREE_GNOME_VILLAGE, 125, 124, 2, Vars.VARP
     ) {
         super.drawJournal(player, stage)
         var line = 12
-        player ?: return
         if (stage == 0) {
-            line(player, "You can start this quest by speaking to !!King Bolren?? in the", line++, stage > 0)
-            line(player, "!!Tree Gnome Village??.", line++, stage > 0)
+            line(player, "You can start this quest by speaking to !!King Bolren?? in the", line++, true)
+            line(player, "!!Tree Gnome Village??.", line++, true)
             line++
         }
         if (stage >= 10) {
@@ -83,7 +82,6 @@ class TreeGnomeVillage : Quest(Quests.TREE_GNOME_VILLAGE, 125, 124, 2, Vars.VARP
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var ln = 10
         player.packetDispatch.sendItemZoomOnInterface(Items.GNOME_AMULET_589, 230, 277, 5)
         drawReward(player, "2 Quest Points", ln++)

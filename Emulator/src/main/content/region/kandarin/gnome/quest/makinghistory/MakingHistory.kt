@@ -1,7 +1,10 @@
 package content.region.kandarin.gnome.quest.makinghistory
 
 import content.global.activity.enchkey.EnchKeyTreasure
-import content.region.kandarin.gnome.quest.makinghistory.plugin.MakingHistoryUtils
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils.DROALAK_PROGRESS
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils.DRON_PROGRESS
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils.ERIN_PROGRESS
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils.PROGRESS
 import core.api.*
 import core.api.quest.isQuestComplete
 import core.game.node.entity.player.Player
@@ -28,12 +31,7 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
             line(player, "!!North West of West Ardougne??.", line++, false)
             line += 1
             line(player, "Minimum requirements:", line++, false)
-            line(
-                player,
-                "!!I must have completed the ${Quests.PRIEST_IN_PERIL} Quest??",
-                line++,
-                isQuestComplete(player, Quests.PRIEST_IN_PERIL),
-            )
+            line(player, "!!I must have completed the ${Quests.PRIEST_IN_PERIL} Quest??", line++, isQuestComplete(player, Quests.PRIEST_IN_PERIL))
             line(player, "It will be easier with", line++, false)
             line(player, "!!Crafting lvl 24??", line++, getStatLevel(player, Skills.CRAFTING) >= 24)
             line(player, "!!Smithing lvl 40??", line++, getStatLevel(player, Skills.SMITHING) >= 40)
@@ -46,7 +44,7 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
             line++
         }
 
-        if (getVarbit(player, MakingHistoryUtils.PROGRESS) >= 3) {
+        if (getVarbit(player, MHUtils.PROGRESS) >= 3) {
             line(player, "I have gathered the parts of history. I have been given a letter.", line++)
             line++
         }
@@ -87,11 +85,26 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
         setVarbit(player, 1390, 1, true)
         removeAttributes(
             player,
-            MakingHistoryUtils.ATTRIBUTE_ERIN_PROGRESS,
-            MakingHistoryUtils.ATTRIBUTE_DROALAK_PROGRESS,
-            MakingHistoryUtils.ATTRIBUTE_DRON_PROGRESS,
+            MHUtils.ATTRIBUTE_ERIN_PROGRESS,
+            MHUtils.ATTRIBUTE_DROALAK_PROGRESS,
+            MHUtils.ATTRIBUTE_DRON_PROGRESS,
         )
     }
 
     override fun newInstance(`object`: Any?): Quest = this
+
+    fun checkRequirements(player: Player): Boolean =
+            getStatLevel(player, Skills.CRAFTING) >= 24 &&
+            getStatLevel(player, Skills.MINING) >= 40 &&
+            getStatLevel(player, Skills.SMITHING) >= 40 &&
+            isQuestComplete(player, Quests.PRIEST_IN_PERIL)
+
+    fun checkProgress(player: Player) {
+        if (getVarbit(player, ERIN_PROGRESS) == 4 &&
+            getVarbit(player, DROALAK_PROGRESS) in 5..6 &&
+            getVarbit(player, DRON_PROGRESS) == 4
+        ) {
+            setVarbit(player, PROGRESS, 3, true)
+        }
+    }
 }

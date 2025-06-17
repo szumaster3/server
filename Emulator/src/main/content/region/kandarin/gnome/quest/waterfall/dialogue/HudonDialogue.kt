@@ -19,11 +19,10 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
                 end()
             }
 
-            0 ->
-                if (quest.getStage(player) == 10) {
-                    interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "It looks like you need the help.")
-                    stage = 1
-                }
+            0 -> if (quest.getStage(player) == 10) {
+                interpreter.sendDialogues(305, FaceAnim.CHILD_NORMAL, "It looks like you need the help.")
+                stage = 1
+            }
 
             1 -> {
                 player(FaceAnim.HALF_GUILTY, "Your mum sent me to find you.")
@@ -72,12 +71,11 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
                     FaceAnim.CHILD_NORMAL,
                     "I'll find that treasure soon, just you wait and see.",
                 )
-                stage =
-                    if (quest.getStage(player) == 100) {
-                        21
-                    } else {
-                        100
-                    }
+                stage = if (quest.getStage(player) == 100) {
+                    21
+                } else {
+                    100
+                }
             }
 
             21 -> {
@@ -119,14 +117,13 @@ class HudonDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         val quest = player.getQuestRepository().getQuest(Quests.WATERFALL_QUEST)
-        stage =
-            if (quest.getStage(player) >= 20) {
-                player(FaceAnim.HALF_GUILTY, "So you're still here.")
-                20
-            } else {
-                player(FaceAnim.HALF_GUILTY, "Hello son, are you okay? You need help?")
-                0
-            }
+        stage = if (quest.getStage(player) >= 20) {
+            player(FaceAnim.HALF_GUILTY, "So you're still here.")
+            20
+        } else {
+            player(FaceAnim.HALF_GUILTY, "Hello son, are you okay? You need help?")
+            0
+        }
         return true
     }
 }

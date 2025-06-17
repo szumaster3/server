@@ -18,10 +18,9 @@ class BallistaDialogue : DialogueFile() {
         val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         if (questStage > 30) {
             when (stage) {
-                0 ->
-                    sendDialogue(player!!, "The Khazard stronghold has already been breached.").also {
-                        stage = END_DIALOGUE
-                    }
+                0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also {
+                    stage = END_DIALOGUE
+                }
             }
         } else if (questStage != 30) {
             return
@@ -33,31 +32,18 @@ class BallistaDialogue : DialogueFile() {
 
         if (tracker1 && tracker2 && tracker3) {
             when (stage) {
-                0 ->
-                    playerl(
-                        "That tracker gnome was a bit vague about the x coordinate! What could it be?",
-                    ).also { stage++ }
+                0 -> playerl("That tracker gnome was a bit vague about the x coordinate! What could it be?").also { stage++ }
+
                 1 -> {
                     setTitle(player!!, 4)
-                    sendDialogueOptions(
-                        player!!,
-                        "Enter the x-coordinate of the stronghold",
-                        "0001",
-                        "0002",
-                        "0003",
-                        "0004",
-                    ).also { stage++ }
+                    sendDialogueOptions(player!!, "Enter the x-coordinate of the stronghold", "0001", "0002", "0003", "0004").also { stage++ }
                 }
-
                 2 -> {
                     sendDialogue(player!!, "You entered the height and y coordinates you got from the tracker gnomes.")
                     val answer = getAttribute(player!!, "treegnome:xcoord", 1)
                     when (buttonID) {
                         answer -> {
-                            sendDialogue(
-                                player!!,
-                                "The huge spear flies through the air and screams down directly into the Khazard stronghold. A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.",
-                            )
+                            sendDialogue(player!!, "The huge spear flies through the air and screams down directly into the Khazard stronghold. A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.")
                             setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 31)
                         }
 
@@ -70,12 +56,7 @@ class BallistaDialogue : DialogueFile() {
             when (stage) {
                 0 -> sendDialogue(player!!, "You enter some random coordinates.").also { stage++ }
                 1 -> sendDialogue(player!!, "The huge spear completely misses the Khazard stronghold!").also { stage++ }
-                2 ->
-                    playerl(
-                        "I've got no hope of hitting the stronghold without knowing any of the coordinates. Maybe I should ask Montai's tracker gnomes for more coordinates.",
-                    ).also {
-                        stage = END_DIALOGUE
-                    }
+                2 -> playerl("I've got no hope of hitting the stronghold without knowing any of the coordinates. Maybe I should ask Montai's tracker gnomes for more coordinates.").also { stage = END_DIALOGUE }
             }
         }
     }
