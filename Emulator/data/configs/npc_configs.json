@@ -24169,27 +24169,18 @@
     "id": "2861"
   },
   {
-    "slayer_exp": "30",
+    "examine": "A zombie. He looks pretty dead.",
     "name": "Zombie",
-    "lifepoints": "40",
-    "combat_audio": "931,923,922",
-    "strength_level": "1",
     "id": "2863"
   },
   {
-    "slayer_exp": "30",
+    "examine": "A zombie, with a bit of a bald spot.",
     "name": "Zombie",
-    "lifepoints": "40",
-    "combat_audio": "931,923,922",
-    "strength_level": "1",
     "id": "2866"
   },
   {
-    "slayer_exp": "30",
+    "examine": "A zombie, with a bit of a bald spot.",
     "name": "Zombie",
-    "lifepoints": "40",
-    "combat_audio": "931,923,922",
-    "strength_level": "1",
     "id": "2869"
   },
   {
