@@ -28,19 +28,9 @@ class OldManDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Shipwreck?!? Not shipwreck, surely not! Just in port, that's all!",
-                ).also { stage++ }
-
+            0 -> npcl(FaceAnim.HALF_GUILTY, "Shipwreck?!? Not shipwreck, surely not! Just in port, that's all!").also { stage++ }
             1 -> player("Don't be silly - half the ship's missing!").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "No no no - the captain's just waiting for the wind to change, then we're off!",
-                ).also { stage++ }
-
+            2 -> npcl(FaceAnim.HALF_GUILTY, "No no no - the captain's just waiting for the wind to change, then we're off!").also { stage++ }
             3 -> player("You mean the skeleton sitting here in this chair?").also { stage++ }
             4 -> npcl(FaceAnim.HALF_GUILTY, "You must show more respect to the Captain.").also { stage = END_DIALOGUE }
             5 -> npcl(FaceAnim.HAPPY, "Wonderful, wonderful! Mother's coming to get me!").also { stage = END_DIALOGUE }

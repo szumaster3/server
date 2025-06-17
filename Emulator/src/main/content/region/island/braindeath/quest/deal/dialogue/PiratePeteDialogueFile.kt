@@ -1,6 +1,6 @@
 package content.region.island.braindeath.quest.deal.dialogue
 
-import content.region.morytania.phasmatys.quest.deal.cutscene.MysteriousTeleportCutscene
+import content.region.island.braindeath.quest.deal.cutscene.TeleportCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -35,7 +35,6 @@ class PiratePeteDialogueFile : DialogueFile() {
                 1 -> player(FaceAnim.NEUTRAL, "Yes! Your uncorroborated sob story has touched my", "heart. When do we set off?").also { stage += 3 }
                 2 -> player("No, I don't think I'll help you out this time.").also { stage++ }
             }
-
             14 -> npc(FaceAnim.SAD, "Look, I think I'll wait here for someone a little", "more... you know...").also { stage++ }
             15 -> npc(FaceAnim.SAD, "...heroic.").also { stage = END_DIALOGUE }
             16 -> npc(FaceAnim.HAPPY, "You'll help! Wonderful!").also { stage++ }
@@ -60,7 +59,6 @@ class PiratePeteDialogueFile : DialogueFile() {
                 1 -> player(FaceAnim.HAPPY, "Nonsense! Keep the money! I will dispose of this evil", "half-brother of yours and leave you what little money is", "left to feed your family.").also { stage += 2 }
                 2 -> player("Great, I'll take the cash in used coins please.").also { stage++ }
             }
-
             32 -> npc("Er...").also { stage = 14 }
             33 -> npc(FaceAnim.HAPPY, "Wonderful! Just pick up your diversion and we'll leave!").also { stage++ }
             34 -> player(FaceAnim.HALF_ASKING, "What diversion?").also {
@@ -80,12 +78,9 @@ class PiratePeteDialogueFile : DialogueFile() {
                     player!!,
                     object : Pulse(3) {
                         override fun pulse(): Boolean {
-                            sendGraphics(
-                                Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96),
-                                player!!.location,
-                            )
+                            sendGraphics(Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96), player!!.location)
                             playAudio(player!!, Sounds.STUNNED_2727, 1)
-                            MysteriousTeleportCutscene(player!!).start()
+                            TeleportCutscene(player!!).start()
                             return true
                         }
                     },

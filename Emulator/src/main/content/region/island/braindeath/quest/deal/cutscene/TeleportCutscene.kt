@@ -1,6 +1,6 @@
-package content.region.morytania.phasmatys.quest.deal.cutscene
+package content.region.island.braindeath.quest.deal.cutscene
 
-import content.region.morytania.phasmatys.quest.deal.dialogue.CaptainBrainDeathDialogueFile
+import content.region.island.braindeath.quest.deal.dialogue.CaptainBraindeathDialogue
 import core.api.*
 import core.api.ui.setMinimapState
 import core.game.activity.Cutscene
@@ -12,9 +12,8 @@ import core.game.world.update.flag.context.Graphics
 import org.rs.consts.Music
 import org.rs.consts.NPCs
 
-class MysteriousTeleportCutscene(
-    player: Player,
-) : Cutscene(player) {
+class TeleportCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
         setExit(Location(2144, 5108, 1))
         if (player.settings.isRunToggled) {
@@ -86,12 +85,9 @@ class MysteriousTeleportCutscene(
 
             13 -> {
                 endWithoutFade()
-                openDialogue(player, CaptainBrainDeathDialogueFile(1))
+                openDialogue(player, CaptainBraindeathDialogue(1))
                 sendGraphics(
-                    Graphics(
-                        org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80,
-                        96,
-                    ),
+                    Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96),
                     player.location,
                 )
             }

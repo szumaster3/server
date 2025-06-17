@@ -1,4 +1,4 @@
-package content.region.morytania.phasmatys.quest.deal
+package content.region.island.braindeath.quest.deal
 
 import core.api.*
 import core.api.quest.isQuestComplete
@@ -10,66 +10,20 @@ import org.rs.consts.Quests
 import org.rs.consts.Vars
 
 class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PROGRESS_600, 0, 1, 19) {
-    override fun drawJournal(
-        player: Player,
-        stage: Int,
-    ) {
+    override fun drawJournal(player: Player, stage: Int, ) {
         super.drawJournal(player, stage)
         var line = 12
-        player ?: return
         if (stage == 0) {
             line(player, "I need to speak to !!Pirate Pete?? in Port Phasmatys.", line++, false)
             line++
             line(player, "To complete this quest I need:", line++, false)
-            line(
-                player,
-                if (getStatLevel(player, Skills.FARMING) >=
-                    40
-                ) {
-                    "---40 Farming/--"
-                } else {
-                    "!!40 Farming??"
-                },
-                line++,
-            )
-            line(
-                player,
-                if (getStatLevel(player, Skills.FISHING) >=
-                    50
-                ) {
-                    "---50 Fishing/--"
-                } else {
-                    "!!50 Fishing??"
-                },
-                line++,
-            )
-            line(player, if (getStatLevel(player, Skills.PRAYER) >= 47) "---47 Prayer/--" else "!!47 Prayer??", line++)
-            line(
-                player,
-                if (getStatLevel(player, Skills.CRAFTING) >=
-                    42
-                ) {
-                    "---42 Crafting/--"
-                } else {
-                    "!!42 Crafting??"
-                },
-                line++,
-            )
-            line(player, if (getStatLevel(player, Skills.SLAYER) >= 42) "---42 Slayer/--" else "!!42 Slayer??", line++)
-            line(
-                player,
-                if (!isQuestComplete(
-                        player,
-                        Quests.ZOGRE_FLESH_EATERS,
-                    )
-                ) {
-                    "---I must have completed Zogre Flesh Eaters/--"
-                } else {
-                    "!!I must have completed Zogre Flesh Eaters??"
-                },
-                line++,
-            )
-            line(player, "!!To be able to defeat a level 150 Monster", line++)
+            line(player, "!!40 Farming??" ,line++, hasLevelStat(player, Skills.FARMING, 40))
+            line(player, "!!50 Fishing??" ,line++, hasLevelStat(player, Skills.FISHING, 50))
+            line(player, "!!47 Prayer??" ,line++, hasLevelStat(player, Skills.PRAYER, 47))
+            line(player, "!!42 Crafting??" ,line++, hasLevelStat(player, Skills.CRAFTING, 42))
+            line(player, "!!42 Slayer??" ,line++, hasLevelStat(player, Skills.SLAYER, 42))
+            line(player, "!!I must have completed Zogre Flesh Eaters??", line++, isQuestComplete(player, Quests.ZOGRE_FLESH_EATERS))
+            line(player, "!!To be able to defeat a level 150 Monster??", line++)
         }
 
         if (stage >= 1) {
@@ -92,12 +46,7 @@ class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PRO
 
         if (stage >= 3) {
             line(player, "Captain Braindeath recommended that I try and intimidate the", line++, stage >= 4)
-            line(
-                player,
-                "!!Swabs?? guarding the Herb Patch if I want them to !!stop attacking me??.",
-                line++,
-                stage >= 4,
-            )
+            line(player, "!!Swabs?? guarding the Herb Patch if I want them to !!stop attacking me??.", line++, stage >= 4)
             line++
         }
 
@@ -131,9 +80,7 @@ class RumDeal : Quest(Quests.RUM_DEAL, 107, 106, 2, Vars.VARP_QUEST_RUM_DEAL_PRO
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
         var ln = 10
-        sendMessage(player, "Congratulations!! Quest complete!")
         sendItemZoomOnInterface(player, 277, 5, Items.HOLY_WRENCH_6714, 230)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "Holy Wrench", ln++)

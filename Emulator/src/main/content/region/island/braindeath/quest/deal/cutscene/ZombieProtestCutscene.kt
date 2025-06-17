@@ -1,6 +1,6 @@
-package content.region.morytania.phasmatys.quest.deal.cutscene
+package content.region.island.braindeath.quest.deal.cutscene
 
-import content.region.morytania.phasmatys.quest.deal.dialogue.CaptainBrainDeathDialogueFile
+import content.region.island.braindeath.quest.deal.dialogue.CaptainBraindeathDialogue
 import core.api.openDialogue
 import core.api.openOverlay
 import core.api.ui.setMinimapState
@@ -11,7 +11,7 @@ import core.game.world.map.Location
 import org.rs.consts.Components
 import org.rs.consts.NPCs
 
-class ZombiePirateProtestingCutscene(
+class ZombieProtestCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {
@@ -67,7 +67,7 @@ class ZombiePirateProtestingCutscene(
             5 -> {
                 end()
                 setMinimapState(player, 0)
-                openDialogue(player, CaptainBrainDeathDialogueFile(2))
+                openDialogue(player, CaptainBraindeathDialogue(2))
             }
         }
     }
