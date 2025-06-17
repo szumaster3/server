@@ -1,4 +1,4 @@
-package content.region.morytania.phasmatys.quest.deal.plugin
+package content.region.island.braindeath.plugin
 
 import core.api.registerTimer
 import core.api.spawnTimer

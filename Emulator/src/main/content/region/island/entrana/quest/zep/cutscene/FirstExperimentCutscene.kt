@@ -50,13 +50,7 @@ class FirstExperimentCutscene(
             4 -> {
                 Projectile
                     .create(player, null, Graphics.BALLOON_FLOATING_881, 45, 45, 1, 70, 0)
-                    .transform(
-                        player,
-                        player.location.transform(Direction.SOUTH, player.direction.ordinal + 1),
-                        false,
-                        70,
-                        140,
-                    ).send()
+                    .transform(player, player.location.transform(Direction.SOUTH, player.direction.ordinal + 1), false, 70, 140).send()
                 timedUpdate(3)
             }
 

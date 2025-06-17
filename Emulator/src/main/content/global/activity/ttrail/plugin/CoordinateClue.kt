@@ -85,6 +85,7 @@ class CoordinateClue
         register(CoordinateClue("pirates-hideout-coord", Items.CLUE_SCROLL_3522, ClueLevel.HARD, Location(3040, 3961, 0), "24 degrees 58 minutes north<br>18 degrees 43 minutes east"))
         register(CoordinateClue("agility-wildy-coord", Items.CLUE_SCROLL_3524, ClueLevel.HARD, Location(2987, 3964, 0), "25 degrees 03 minutes north<br>17 degrees 05 minutes east"))
         register(CoordinateClue("axe-hut-coord", Items.CLUE_SCROLL_3525, ClueLevel.HARD, Location(3190, 3963, 0), "25 degrees 03 minutes north<br>23 degrees 24 minutes east"))
+        register(CoordinateClue("web-chasm-coord", Items.CLUE_SCROLL_3530, ClueLevel.HARD, Location(3249,3739, 0), "18 degrees 3 minutes north<br>25 degrees 16 minutes east"))
         return this
     }
 }
