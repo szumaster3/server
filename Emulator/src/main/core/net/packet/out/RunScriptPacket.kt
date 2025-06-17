@@ -32,18 +32,33 @@ class RunScriptPacket : OutgoingPacket<RunScriptContext> {
      *  }
      */
     override fun send(context: RunScriptContext?) {
-        val types = context?.string
-        val objects = context?.objects
+        if (context == null) return
+
+        val types = context.string
+        val objects = context.objects
         val buffer = IoBuffer(115, PacketHeader.SHORT)
-        buffer.putShort(context!!.player.interfaceManager.getPacketCount(1))
+        buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
         buffer.putString(types)
-        for ((j, i) in ((types!!.length - 1) downTo 0).withIndex()) {
-            if (types[i] == 's') {
-                buffer.putString(objects?.get(j) as String)
-            } else {
-                buffer.putInt((objects?.get(j) as Int))
+
+        var j = 0
+        for (i in types.length - 1 downTo 0) {
+            val obj = objects?.getOrNull(j)
+            when (types[i]) {
+                's' -> {
+                    val value = obj as? String ?: ""
+                    buffer.putString(value)
+                }
+                else -> {
+                    val value = when (obj) {
+                        is Int -> obj
+                        is Number -> obj.toInt()
+                        else -> 0 // Fallback.
+                    }
+                    buffer.putInt(value)
+                }
             }
+            j++
         }
 
         buffer.putInt(context.id)
