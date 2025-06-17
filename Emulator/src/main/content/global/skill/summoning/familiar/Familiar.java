@@ -333,6 +333,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         ticks = maximumTicks;
     }
 
+    /**
+     * Sends the remaining time to the client by setting appropriate varbits.
+     */
     private void sendTimeRemaining() {
         int minutes = ticks / 100;
         int centiminutes = ticks % 100;
@@ -340,6 +343,10 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         setVarbit(owner, 4290, centiminutes > 49 ? 1 : 0);
     }
 
+    /**
+     * Returns the total count of a scroll the player has, including
+     * inventory and equipped headgear.
+     */
     public static int getTotalScrollCount(Player player, int scrollId) {
         int inventoryCount = player.getInventory().getAmount(scrollId);
         EnchantedHeadgearManager manager = player.enchgearManager;
@@ -352,7 +359,9 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         return inventoryCount + headgearCount;
     }
 
-
+    /**
+     * Execute the special move of the familiar.
+     */
     public boolean executeSpecialMove(FamiliarSpecial special) {
         if (special.getNode() == this) {
             return false;
