@@ -123,16 +123,6 @@ class EnchantedHeadgearManager(private val player: Player) {
     }
 
     /**
-     * Gets total amount of scrolls player has (inventory + equipped enchanted headgear).
-     */
-    fun getTotalScrollCount(scrollId: Int): Int {
-        val inventoryCount = player.inventory.getAmount(scrollId)
-        val equippedHeadgearId = getFromEquipment()
-        val headgearCount = equippedHeadgearId?.let { getCurrentScrollCount(it, scrollId) } ?: 0
-        return inventoryCount + headgearCount
-    }
-
-    /**
      * Gets enchanted headgear item ID from player's equipment (head slot).
      */
     fun getFromEquipment(): Int? {
@@ -144,7 +134,10 @@ class EnchantedHeadgearManager(private val player: Player) {
      * Removes a single scroll from enchanted headgear.
      */
     fun removeScroll(chargedItemId: Int, scrollId: Int): Boolean {
-        val chargedGear = enchantedGear[chargedItemId] ?: return false
+        val chargedGear = enchantedGear.getOrPut(chargedItemId) {
+            val capacity = EnchantedHeadgear.byCharged[chargedItemId]?.scrollCapacity ?: 40
+            ChargedHeadgear(chargedItemId, Container(capacity))
+        }
         val container = chargedGear.container
         val amount = container.getAmount(scrollId)
         if (amount <= 0) return false

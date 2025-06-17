@@ -340,6 +340,19 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
         setVarbit(owner, 4290, centiminutes > 49 ? 1 : 0);
     }
 
+    public static int getTotalScrollCount(Player player, int scrollId) {
+        int inventoryCount = player.getInventory().getAmount(scrollId);
+        EnchantedHeadgearManager manager = player.enchgearManager;
+        Integer chargedItemId = manager.getFromEquipment();
+
+        int headgearCount = 0;
+        if (chargedItemId != null) {
+            headgearCount = manager.getCurrentScrollCount(chargedItemId, scrollId);
+        }
+        return inventoryCount + headgearCount;
+    }
+
+
     public boolean executeSpecialMove(FamiliarSpecial special) {
         if (special.getNode() == this) {
             return false;
@@ -348,49 +361,45 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             owner.getPacketDispatch().sendMessage("Your familiar does not have enough special move points left.");
             return false;
         }
+
         SummoningScroll scroll = SummoningScroll.forPouch(pouchId);
         if (scroll == null) {
             owner.debug("Invalid scroll for pouch " + pouchId + " - report!");
             return false;
         }
 
-        /*
-         if (owner.getSkills().getLevel(Skills.SUMMONING) < scroll.getLevel()) {
-             owner.getPacketDispatch().sendMessage("You need to have a higher Summoning level to use this scroll.");
-             owner.getPacketDispatch().sendMessage("You must have a Summoning level of at least " + scroll.getLevel() + " to use this scroll.");
-             return false;
-         }
-        */
-
         int scrollId = scroll.getItemId();
+        int totalScrollCount = getTotalScrollCount(owner, scrollId);
 
-        EnchantedHeadgearManager enchantedHeadgearManager = new EnchantedHeadgearManager(owner);
-        Integer chargedItemId = enchantedHeadgearManager.getFromEquipment();
-
-        boolean hasInInventory = owner.getInventory().contains(scrollId, 1);
-        boolean hasInHeadgear = chargedItemId != null &&
-                enchantedHeadgearManager.getCurrentScrollCount(chargedItemId, scrollId) > 0;
-
-        if (!hasInInventory && !hasInHeadgear) {
+        if (totalScrollCount < 1) {
             owner.getPacketDispatch().sendMessage("You do not have enough scrolls left to do this special move.");
             return false;
         }
+
         if (owner.getLocation().getDistance(getLocation()) > 15) {
             owner.getPacketDispatch().sendMessage("Your familiar is too far away to use that scroll, or it cannot see you.");
             return false;
         }
+
         if (specialMove(special)) {
             setAttribute("special-delay", GameWorld.getTicks() + 3);
-            if (hasInInventory) {
-                owner.getInventory().remove(new Item(scrollId));
-            } else if (chargedItemId != null) {
-                enchantedHeadgearManager.removeScroll(chargedItemId, scrollId);
+
+            if (owner.getInventory().getAmount(scrollId) > 0) {
+                owner.getInventory().remove(new Item(scrollId, 1));
+            } else {
+                EnchantedHeadgearManager manager = owner.enchgearManager;
+                Integer chargedItemId = manager.getFromEquipment();
+                if (chargedItemId != null) {
+                    manager.removeScroll(chargedItemId, scrollId);
+                }
             }
+
             playAudio(owner, Sounds.SPELL_4161);
             visualizeSpecialMove();
             updateSpecialPoints(specialCost);
             owner.getSkills().addExperience(Skills.SUMMONING, scroll.getXp(), true);
         }
+
         return true;
     }
 
