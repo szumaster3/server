@@ -26,31 +26,9 @@ class KnightGWDDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    "My name is...Sir Gerry. I am...a member of a",
-                    "secret...society of knights. My time is short and I",
-                    "need...your help.",
-                ).also {
-                    stage++
-                }
-            1 ->
-                player(
-                    "A secret society of knights? What a surprise! Is there",
-                    "an old charter or decree that says if you're a knight",
-                    "you have to belong to a secret order?",
-                ).also {
-                    stage++
-                }
-            2 ->
-                npc(
-                    "I'm sorry, my friend... I do not understand your",
-                    "meaning. Please, time is short... Take this scroll to Sir",
-                    "Tiffy. You will find him in Falador park... You should",
-                    "not...read it... It contains information for his eyes only.",
-                ).also {
-                    stage++
-                }
+            0 -> npc("My name is...Sir Gerry. I am...a member of a", "secret...society of knights. My time is short and I", "need...your help.").also { stage++ }
+            1 -> player("A secret society of knights? What a surprise! Is there", "an old charter or decree that says if you're a knight", "you have to belong to a secret order?").also { stage++ }
+            2 -> npc("I'm sorry, my friend... I do not understand your", "meaning. Please, time is short... Take this scroll to Sir", "Tiffy. You will find him in Falador park... You should", "not...read it... It contains information for his eyes only.").also { stage++ }
             3 -> {
                 end()
                 if (player.inventory.add(Item(Items.KNIGHTS_NOTES_11734))) {
@@ -58,8 +36,7 @@ class KnightGWDDialogue(player: Player? = null) : Dialogue(player) {
                     setVarbit(player, 3936, 1, true)
                 } else {
                     sendDialogue(player, "The knight tries to give you something, but your inventory is full.").also {
-                        stage =
-                            END_DIALOGUE
+                        stage = END_DIALOGUE
                     }
                 }
             }

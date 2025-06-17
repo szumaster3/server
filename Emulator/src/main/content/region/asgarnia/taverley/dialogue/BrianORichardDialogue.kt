@@ -22,41 +22,25 @@ class BrianORichardDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, actually, what've you got?", "What is this place?", "No thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HALF_GUILTY, "Yes actually, what've you got?").also { stage = 10 }
-                    2 -> player(FaceAnim.HALF_GUILTY, "What is this place?").also { stage = 20 }
-                    3 -> player(FaceAnim.HALF_GUILTY, "No thanks.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "Yes actually, what've you got?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_GUILTY, "What is this place?").also { stage = 20 }
+                3 -> player(FaceAnim.HALF_GUILTY, "No thanks.").also { stage = END_DIALOGUE }
+            }
 
-            10 ->
-                if (getStatLevel(player, Skills.THIEVING) < 50) {
-                    end()
-                    npc(
-                        FaceAnim.HALF_GUILTY,
-                        "Shame, I don't think I have anything for you. Train up",
-                        "your Thieving skill to at least 50 and I might be able to",
-                        "help you out.",
-                    )
-                } else {
-                    end()
-                }
-            20 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Ah welcome to my humble home, well actually it belongs",
-                    "to mummies but she's getting on a bit so I look after",
-                    "the place for her.",
-                ).also {
-                    stage++
-                }
+            10 -> if (getStatLevel(player, Skills.THIEVING) < 50) {
+                end()
+                npc(FaceAnim.HALF_GUILTY, "Shame, I don't think I have anything for you. Train up", "your Thieving skill to at least 50 and I might be able to", "help you out.")
+            } else {
+                end()
+            }
+            20 -> npc(FaceAnim.HALF_GUILTY, "Ah welcome to my humble home, well actually it belongs", "to mummies but she's getting on a bit so I look after", "the place for her.").also { stage++ }
             21 -> npc(FaceAnim.HALF_GUILTY, "So are you interested in a challenge?").also { stage++ }
             22 -> options("Yes actually, what've you got?", "No thanks.").also { stage++ }
-            23 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HALF_GUILTY, "Yes actually, what've you got?").also { stage = 10 }
-                    2 -> player(FaceAnim.HALF_GUILTY, "No, thanks.").also { stage = END_DIALOGUE }
-                }
+            23 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "Yes actually, what've you got?").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_GUILTY, "No, thanks.").also { stage = END_DIALOGUE }
+            }
         }
         return true
     }

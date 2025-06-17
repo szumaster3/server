@@ -36,18 +36,13 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 100
             }
 
-            40 ->
-                if (args.size == 2) {
-                    sendDialogueLines(
-                        player,
-                        "You drink from the cauldron, it tastes horrible! You feel yourself",
-                        "imbued with power.",
-                    )
-                    stage = 41
-                } else {
-                    npc(FaceAnim.HALF_GUILTY, "Well are you going to drink the potion or not?")
-                    stage = 500
-                }
+            40 -> if (args.size == 2) {
+                sendDialogueLines(player, "You drink from the cauldron, it tastes horrible! You feel yourself", "imbued with power.")
+                stage = 41
+            } else {
+                npc(FaceAnim.HALF_GUILTY, "Well are you going to drink the potion or not?")
+                stage = 500
+            }
         }
         if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
             player("Hello there. Maggie sent me to ask for you help in", "enchanting her broom.")
@@ -74,18 +69,17 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 12
             }
 
-            12 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.NEUTRAL, "I am in search of a quest.")
-                        stage = 13
-                    }
-
-                    2 -> {
-                        player(FaceAnim.NEUTRAL, "I've heard that you are a witch.")
-                        stage = 20
-                    }
+            12 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.NEUTRAL, "I am in search of a quest.")
+                    stage = 13
                 }
+
+                2 -> {
+                    player(FaceAnim.NEUTRAL, "I've heard that you are a witch.")
+                    stage = 20
+                }
+            }
 
             13 -> {
                 npc(FaceAnim.HAPPY, "Hmmm... Maybe I can think of something for you.")
@@ -102,18 +96,17 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 16
             }
 
-            16 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HAPPY, "Yes help me become one with my darker side.")
-                        stage = 30
-                    }
-
-                    2 -> {
-                        player(FaceAnim.NEUTRAL, "No I have my principles and honour.")
-                        stage = 17
-                    }
+            16 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HAPPY, "Yes help me become one with my darker side.")
+                    stage = 30
                 }
+
+                2 -> {
+                    player(FaceAnim.NEUTRAL, "No I have my principles and honour.")
+                    stage = 17
+                }
+            }
 
             17 -> npc(FaceAnim.HALF_GUILTY, "Suit yourself, but you're missing out.").also { stage = END_DIALOGUE }
             20 -> {
@@ -162,14 +155,13 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 end()
             }
 
-            100 ->
-                if (!player.inventory.containItems(1957, 300, 2146, 221)) {
-                    player(FaceAnim.HALF_GUILTY, "I'm afraid I don't have all of them yet.")
-                    stage = 101
-                } else {
-                    player(FaceAnim.HAPPY, "Yes I have everything!")
-                    stage = 110
-                }
+            100 -> if (!player.inventory.containItems(1957, 300, 2146, 221)) {
+                player(FaceAnim.HALF_GUILTY, "I'm afraid I don't have all of them yet.")
+                stage = 101
+            } else {
+                player(FaceAnim.HAPPY, "Yes I have everything!")
+                stage = 110
+            }
 
             110 -> {
                 npc(FaceAnim.HAPPY, "Excellent, can I have them then?")
@@ -190,12 +182,11 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 113
             }
 
-            113 ->
-                if (player.inventory.remove(Item(1957), Item(300), Item(2146), Item(221))) {
-                    quest.setStage(player, 40)
-                    npc(FaceAnim.HAPPY, "Ok, now drink from the cauldron.")
-                    stage = 114
-                }
+            113 -> if (player.inventory.remove(Item(1957), Item(300), Item(2146), Item(221))) {
+                quest.setStage(player, 40)
+                npc(FaceAnim.HAPPY, "Ok, now drink from the cauldron.")
+                stage = 114
+            }
 
             114 -> end()
             101 -> {
@@ -216,49 +207,49 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 updateQuestTab(player)
             }
 
-            200 ->
-                npc(
-                    "Ah, brewing up a cauldron of her infamous 'good",
-                    "stuff' is she? Well of course I'll help.",
-                ).also {
-                    stage++
-                }
-            201 ->
-                npc(
-                    "I think this calls for one of my specialties: my famous",
-                    "theurgical broom ointment.",
-                ).also { stage++ }
-            202 ->
-                npc(
-                    "Now, I can provide you with the ointment; all you'll",
-                    "need to do is apply the ointment to the broom.",
-                ).also {
-                    stage++
-                }
+            200 -> npc(
+                "Ah, brewing up a cauldron of her infamous 'good",
+                "stuff' is she? Well of course I'll help.",
+            ).also {
+                stage++
+            }
+
+            201 -> npc(
+                "I think this calls for one of my specialties: my famous",
+                "theurgical broom ointment.",
+            ).also { stage++ }
+
+            202 -> npc(
+                "Now, I can provide you with the ointment; all you'll",
+                "need to do is apply the ointment to the broom.",
+            ).also {
+                stage++
+            }
+
             203 -> player("Excellent!").also { stage++ }
             204 -> npc("But, first, I'll need a newt.").also { stage++ }
             205 -> player("A newt?").also { stage++ }
-            206 ->
-                npc(
-                    "Yes, a newt. Now, if you'll just pop down to my cellar,",
-                    "through that trapdoor out back, I've just had a recent",
-                    "delivery of newts and toads.",
-                ).also {
-                    stage++
-                }
-            207 ->
-                npc(
-                    "The delivery ghoul is still here - I can't think what",
-                    "could be taking him so long.",
-                ).also { stage++ }
-            208 ->
-                npc(
-                    "In any case, once the crates are unloaded, just bring",
-                    "me a newt from the newt crate and I'll set you up with",
-                    "the ointment.",
-                ).also {
-                    stage++
-                }
+            206 -> npc(
+                "Yes, a newt. Now, if you'll just pop down to my cellar,",
+                "through that trapdoor out back, I've just had a recent",
+                "delivery of newts and toads.",
+            ).also {
+                stage++
+            }
+
+            207 -> npc(
+                "The delivery ghoul is still here - I can't think what",
+                "could be taking him so long.",
+            ).also { stage++ }
+
+            208 -> npc(
+                "In any case, once the crates are unloaded, just bring",
+                "me a newt from the newt crate and I'll set you up with",
+                "the ointment.",
+            ).also {
+                stage++
+            }
+
             209 -> player("Okay, will do.").also { stage = END_DIALOGUE }
 
             210 -> player("Yes, it's right here.").also { stage++ }
@@ -268,6 +259,7 @@ class HettyDialogue(player: Player? = null) : Dialogue(player) {
                 npc("That should do it. Just rub this ointment on the broom;", "that should suit Maggie's purposes.")
                 stage++
             }
+
             213 -> player("Wonderful, thanks.").also { stage = END_DIALOGUE }
         }
         return true

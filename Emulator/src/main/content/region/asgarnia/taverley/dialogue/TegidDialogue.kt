@@ -7,10 +7,8 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 class TegidDialogue : DialogueFile() {
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ) {
+
+    override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.TEGID_1213)
         when (stage) {
             0 -> player(FaceAnim.HALF_GUILTY, "So, you're doing laundry, eh?").also { stage++ }

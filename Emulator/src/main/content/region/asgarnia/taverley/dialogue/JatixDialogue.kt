@@ -22,19 +22,16 @@ class JatixDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                options(
-                    "What are you selling?",
-                    "You can't; I'm beyond help.",
-                    "I'm okay, thank you.",
-                ).also { stage++ }
-
-            1 ->
-                when (buttonId) {
-                    1 -> end().also { openNpcShop(player, NPCs.JATIX_587) }
-                    2 -> player(FaceAnim.NEUTRAL, "You can't; I'm beyond help.").also { stage = END_DIALOGUE }
-                    3 -> player("I'm okay, thank you.").also { stage = END_DIALOGUE }
-                }
+            0 -> options(
+                "What are you selling?",
+                "You can't; I'm beyond help.",
+                "I'm okay, thank you.",
+            ).also { stage++ }
+            1 -> when (buttonId) {
+                1 -> end().also { openNpcShop(player, NPCs.JATIX_587) }
+                2 -> player(FaceAnim.NEUTRAL, "You can't; I'm beyond help.").also { stage = END_DIALOGUE }
+                3 -> player("I'm okay, thank you.").also { stage = END_DIALOGUE }
+            }
         }
         return true
     }

@@ -34,7 +34,7 @@ enum class SpecialLadder(private val location: Location, private val destination
     BLACK_KNIGHTS_LADDER_DOWN_6(Location.create(3021, 3510, 1), Location.create(3022, 3510, 0)),
     BLACK_KNIGHTS_LADDER_UP_6(Location.create(3021, 3510, 0), Location.create(3022, 3510, 1)),
     BLACK_KNIGHTS_BASEMENT_LADDER_DOWN(Location.create(3016, 3519, 0), Location.create(1867, 4243, 0)),
-    BLACK_KNIGHTS_BASEMENT_LADDER_UP(Location.create(1867, 4244, 1), Location.create(3016, 3518, 0)),
+    BLACK_KNIGHTS_BASEMENT_LADDER_UP(Location.create(1867, 4244, 0), Location.create(3016, 3518, 0)),
     BLACK_KNIGHT_CATACOMBS_LADDER_UP(Location.create(3017, 9922, 1), Location.create(1869, 4237, 0)),
     CATHERBY_BLACK_DRAGONS_LADDER_UP(Location.create(2841, 9824, 0), Location.create(2842, 3423, 0)),
     TRAVERLEY_DUNGEON_LADDER_UP(Location.create(2884, 9797, 0), Location.create(2884, 3398, 0)),

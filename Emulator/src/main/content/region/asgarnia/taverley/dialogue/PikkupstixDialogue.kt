@@ -17,7 +17,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class PikkupstixDialogue(player: Player? = null, ) : Dialogue(player) {
+class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -1084,9 +1084,16 @@ class PikkupstixDialogue(player: Player? = null, ) : Dialogue(player) {
 
     companion object {
         private var quest: Quest? = null
-        private val ITEMS = arrayOf(Item(Items.SUMMONING_CAPE_12169), Item(Items.SUMMONING_CAPET_12170), Item(Items.SUMMONING_HOOD_12171))
+        private val ITEMS = arrayOf(
+            Item(Items.SUMMONING_CAPE_12169), Item(Items.SUMMONING_CAPET_12170), Item(Items.SUMMONING_HOOD_12171)
+        )
         private val BONES = Item(Items.WOLF_BONES_2859, 2)
-        private val WOLF_ITEMS = arrayOf(Item(Items.GOLD_CHARM_12158, 2), Item(Items.POUCH_12155, 2), Item(Items.SPIRIT_SHARDS_12183, 14), Item(Items.TRAPDOOR_KEY_12528))
+        private val WOLF_ITEMS = arrayOf(
+            Item(Items.GOLD_CHARM_12158, 2),
+            Item(Items.POUCH_12155, 2),
+            Item(Items.SPIRIT_SHARDS_12183, 14),
+            Item(Items.TRAPDOOR_KEY_12528)
+        )
         private val HOWL_SCROLL = Item(Items.HOWL_SCROLL_12425)
         private val WOLF_POUCH = Item(Items.SPIRIT_WOLF_POUCH_12047)
     }

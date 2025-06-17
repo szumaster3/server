@@ -32,33 +32,15 @@ class SabaDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npcl(FaceAnim.ANNOYED, "Why won't people leave me alone?!").also { stage = END_DIALOGUE }
             1 -> npcl(FaceAnim.HALF_ASKING, "Have you got rid of those pesky trolls yet?").also { stage++ }
-            2 -> {
-                if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 1) {
-                    playerl(FaceAnim.HALF_GUILTY, "I'm afraid there's been some trouble...").also { stage = 5 }
-                } else {
-                    playerl(
-                        FaceAnim.HALF_GUILTY,
-                        "They will be gone soon! The Imperial Guard will use a secret way that starts from the back of the Sherpa's hut to destroy the troll camp!",
-                    ).also {
-                        stage++
-                    }
-                }
+            2 -> if (getQuestStage(player, Quests.TROLL_STRONGHOLD) >= 1) {
+                playerl(FaceAnim.HALF_GUILTY, "I'm afraid there's been some trouble...").also { stage = 5 }
+            } else {
+                playerl(FaceAnim.HALF_GUILTY, "They will be gone soon! The Imperial Guard will use a secret way that starts from the back of the Sherpa's hut to destroy the troll camp!").also { stage++ }
             }
             3 -> npcl(FaceAnim.ANNOYED, "I shall have peace again at last!").also { stage++ }
-            4 ->
-                npcl(
-                    FaceAnim.ANNOYED,
-                    "If those pesky humans don't start trampling all over Death Plateau again that is!",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            4 -> npcl(FaceAnim.ANNOYED, "If those pesky humans don't start trampling all over Death Plateau again that is!").also { stage = END_DIALOGUE }
             5 -> npcl(FaceAnim.ANNOYED, "You told me you'd get rid of the trolls!").also { stage++ }
-            6 ->
-                playerl(
-                    FaceAnim.HALF_GUILTY,
-                    "I'm sure the Imperial Guard will deal with them in due course.",
-                ).also { stage++ }
+            6 -> playerl(FaceAnim.HALF_GUILTY, "I'm sure the Imperial Guard will deal with them in due course.").also { stage++ }
             7 -> npcl(FaceAnim.ANNOYED, "Hmph! They'd better!").also { stage = END_DIALOGUE }
         }
         return true

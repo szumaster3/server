@@ -20,11 +20,10 @@ class GaiusDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Let's trade.", "Thanks, but not today.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> end().also { openNpcShop(player, npc.id) }
-                    2 -> end()
-                }
+            1 -> when (buttonId) {
+                1 -> end().also { openNpcShop(player, npc.id) }
+                2 -> end()
+            }
         }
         return true
     }
