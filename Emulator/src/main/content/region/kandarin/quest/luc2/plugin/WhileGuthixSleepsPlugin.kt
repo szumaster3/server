@@ -2,10 +2,12 @@ package content.region.kandarin.quest.luc2.plugin
 
 import content.region.kandarin.quest.luc2.dialogue.KhazardLaundererDialogue
 import core.api.*
+import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import org.rs.consts.*
 
 class WhileGuthixSleepsPlugin : InteractionListener {
@@ -69,6 +71,28 @@ class WhileGuthixSleepsPlugin : InteractionListener {
                     )
                 }
             }
+            return@on true
+        }
+
+        /*
+         * Handles interaction with tile at black knights fortress basement.
+         */
+
+        on(Scenery.TILE_40994, IntType.SCENERY, "look-at", "search") { player, _ ->
+            val op = getUsedOption(player)
+            when(op) {
+                "look-at" -> sendMessages(player, "It appears to be an everyday sort of tile for decorating the floor, but it has some", "strange markings.")
+                "search"  -> sendDialogueLines(player, "On closer examination, you notice an orb symbol carved into the tile.")
+            }
+            return@on true
+        }
+
+        /*
+         * Handles climb down to the black knight Catacombs.
+         */
+
+        on(Scenery.TRAPDOOR_40995, IntType.SCENERY, "climb-down") { player, _ ->
+            ClimbActionHandler.climb(player, Animation(Animations.MULTI_BEND_OVER_827), Location(3017, 9923, 1))
             return@on true
         }
     }
