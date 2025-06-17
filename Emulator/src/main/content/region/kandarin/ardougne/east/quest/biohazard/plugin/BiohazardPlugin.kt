@@ -1,7 +1,10 @@
 package content.region.kandarin.ardougne.east.quest.biohazard.plugin
 
 import content.global.skill.agility.AgilityHandler
-import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.*
+import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.ChancyDialogue
+import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.ChancyVarrockDialogueFile
+import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.GuidorDialogue
+import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.HopsVarrockDialogue
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.isQuestComplete

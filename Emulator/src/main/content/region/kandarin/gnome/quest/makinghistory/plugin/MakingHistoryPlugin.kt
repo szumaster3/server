@@ -3,14 +3,12 @@ package content.region.kandarin.gnome.quest.makinghistory.plugin
 import content.region.kandarin.gnome.quest.makinghistory.book.HistoryoftheOutpost
 import content.region.kandarin.gnome.quest.makinghistory.book.TheMysteriousAdventurer
 import core.api.*
-import core.game.dialogue.DialogueFile
 import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.tools.END_DIALOGUE
 import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.Scenery

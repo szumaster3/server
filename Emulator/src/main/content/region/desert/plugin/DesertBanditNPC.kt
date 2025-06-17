@@ -1,8 +1,6 @@
 package content.region.desert.plugin
 
 import content.data.God
-import core.api.hasGodItem
-import core.game.container.Container
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.npc.AbstractNPC

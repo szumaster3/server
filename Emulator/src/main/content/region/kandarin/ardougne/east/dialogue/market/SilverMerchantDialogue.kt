@@ -44,46 +44,48 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.SILVER_MERCHANT_569)
-                    }
-                    2 -> player(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.SILVER_MERCHANT_569)
                 }
 
-            2 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.SILVER_MERCHANT_569)
-                    }
-                    2 -> player(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
-                    3 -> {
-                        end()
-                        when {
-                            questStage < 2 -> openDialogue(player, SilverMerchantDialogueExtension(0))
-                            erinProgress == 1 || !hasKey -> openDialogue(player, SilverMerchantDialogueExtension(13))
-                            inInventory(
-                                player,
-                                Items.CHEST_6759,
-                            ) -> openDialogue(player, SilverMerchantDialogueExtension(19))
-                            erinProgress in 1..3 && !hasJournal ->
-                                player(
-                                    "I found a chest, but I lost it and any contents",
-                                    "it had.",
-                                ).also {
-                                    stage++
-                                }
-                            inInventory(
-                                player,
-                                Items.JOURNAL_6755,
-                            ) -> openDialogue(player, SilverMerchantDialogueExtension(21))
-                            else -> npc("Hello, I hope Jorral was pleased with that Journal.").also { stage = 4 }
+                2 -> player(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
+            }
+
+            2 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.SILVER_MERCHANT_569)
+                }
+
+                2 -> player(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
+                3 -> {
+                    end()
+                    when {
+                        questStage < 2 -> openDialogue(player, SilverMerchantDialogueExtension(0))
+                        erinProgress == 1 || !hasKey -> openDialogue(player, SilverMerchantDialogueExtension(13))
+                        inInventory(
+                            player,
+                            Items.CHEST_6759,
+                        ) -> openDialogue(player, SilverMerchantDialogueExtension(19))
+
+                        erinProgress in 1..3 && !hasJournal -> player(
+                            "I found a chest, but I lost it and any contents",
+                            "it had.",
+                        ).also {
+                            stage++
                         }
+
+                        inInventory(
+                            player,
+                            Items.JOURNAL_6755,
+                        ) -> openDialogue(player, SilverMerchantDialogueExtension(21))
+
+                        else -> npc("Hello, I hope Jorral was pleased with that Journal.").also { stage = 4 }
                     }
                 }
+            }
 
             3 -> npc("Well I suggest you go back to where you found it.").also { stage = END_DIALOGUE }
             4 -> npc("I'm sure it's been a valuable find.").also { stage = END_DIALOGUE }
@@ -102,20 +104,12 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
                     player("What I came to ask was: I lost that key you gave me.").also { stage++ }
                 }
             }
-
-            7 ->
-                npc(
-                    "Oh dear, luckily I found it, but it'll cost you 500gp",
-                    "as I know it's valuable.",
-                ).also { stage++ }
+            7 -> npc("Oh dear, luckily I found it, but it'll cost you 500gp", "as I know it's valuable.").also { stage++ }
             8 -> options("Yes please.", "No thanks.").also { stage++ }
-
-            9 ->
-                when (buttonId) {
-                    1 -> player("Yes please.").also { stage++ }
-                    2 -> player("No thanks.").also { stage = END_DIALOGUE }
-                }
-
+            9 -> when (buttonId) {
+                1 -> player("Yes please.").also { stage++ }
+                2 -> player("No thanks.").also { stage = END_DIALOGUE }
+            }
             10 -> {
                 end()
                 if (freeSlots(player!!) < 0) {
@@ -130,6 +124,7 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
                     addItemOrDrop(player!!, Items.ENCHANTED_KEY_6754, 1)
                 }
             }
+
             11 -> npc("Yes?").also { stage++ }
             12 -> player("It dissolved!").also { stage++ }
             13 -> npc("Really? I suppose it served its purpose.").also { stage = END_DIALOGUE }

@@ -1,7 +1,7 @@
 package content.region.kandarin.gnome.quest.itgronigen.plugin
 
-import content.region.kandarin.gnome.quest.itgronigen.dialogue.*
 import content.region.kandarin.gnome.quest.itgronigen.cutscene.ObservatoryCutscene
+import content.region.kandarin.gnome.quest.itgronigen.dialogue.*
 import content.region.kandarin.gnome.quest.itgronigen.plugin.GoblinGuardNPC.Companion.spawnGoblinGuard
 import content.region.kandarin.gnome.quest.itgronigen.plugin.PoisonSpiderNPC.Companion.spawnPoisonSpider
 import core.api.*

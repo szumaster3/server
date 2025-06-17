@@ -22,49 +22,13 @@ class HighPriestEntranaDialogue(player: Player? = null) : Dialogue(player) {
                     stage = if (hasSilverPot()) 6 else 1
                 }
             }
-
-            1 -> npcl(
-                FaceAnim.FRIENDLY,
-                "You are standing on the holy island of Entrana. It was here that Saradomin first stepped upon Gielinor.",
-            ).also {
-                stage++
-            }
-
-            2 -> npcl(
-                FaceAnim.FRIENDLY,
-                "In homage to Saradomin's first arrival, we have built a great church, and devoted the island to those who wish peace for the world.",
-            ).also {
-                stage++
-            }
-
-            3 -> npcl(
-                FaceAnim.FRIENDLY,
-                "The inhabitants of this island are mostly monks who spend their time meditating on Saradomin's ways.",
-            ).also {
-                stage++
-            }
-
-            4 -> npcl(
-                FaceAnim.FRIENDLY,
-                "Of course, there are now more pilgrims to this holy site, since Saradomin defeated Zamorak in the battle of Lumbridge.",
-            ).also {
-                stage++
-            }
-
-            5 -> npcl(FaceAnim.FRIENDLY, "It is good that so many see Saradomin's true glory!").also {
-                stage = END_DIALOGUE
-            }
-
+            1 -> npcl(FaceAnim.FRIENDLY, "You are standing on the holy island of Entrana. It was here that Saradomin first stepped upon Gielinor.").also { stage++ }
+            2 -> npcl(FaceAnim.FRIENDLY, "In homage to Saradomin's first arrival, we have built a great church, and devoted the island to those who wish peace for the world.").also { stage++ }
+            3 -> npcl(FaceAnim.FRIENDLY, "The inhabitants of this island are mostly monks who spend their time meditating on Saradomin's ways.").also { stage++ }
+            4 -> npcl(FaceAnim.FRIENDLY, "Of course, there are now more pilgrims to this holy site, since Saradomin defeated Zamorak in the battle of Lumbridge.").also { stage++ }
+            5 -> npcl(FaceAnim.FRIENDLY, "It is good that so many see Saradomin's true glory!").also { stage = END_DIALOGUE }
             6 -> playerl(FaceAnim.FRIENDLY, "Hi, I was wondering, can you quickly bless this for me?").also { stage++ }
-            7 -> npc(
-                FaceAnim.FRIENDLY,
-                "A somewhat strange request, but I see no harm in it.",
-                "There you go.",
-                "May Saradomin walk with you.",
-            ).also {
-                stage++
-            }
-
+            7 -> npc(FaceAnim.FRIENDLY, "A somewhat strange request, but I see no harm in it.", "There you go.", "May Saradomin walk with you.").also { stage++ }
             8 -> {
                 end()
                 handleBlessing()

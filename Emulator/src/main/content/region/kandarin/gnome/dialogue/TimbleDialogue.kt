@@ -20,19 +20,9 @@ class TimbleDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> playerl(FaceAnim.FRIENDLY, "I was just wondering what you were up to.").also { stage++ }
-            1 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "I work for Aluft Aloft Gnome Food Delivery Service. It's a growing business you know. We get more customers every day!",
-                ).also {
-                    stage++
-                }
+            1 -> npcl(FaceAnim.OLD_NORMAL, "I work for Aluft Aloft Gnome Food Delivery Service. It's a growing business you know. We get more customers every day!").also { stage++ }
             2 -> playerl(FaceAnim.HALF_ASKING, "So do you have any spare jobs then?").also { stage++ }
-            3 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "Aluft Gianne jnr. is in charge - he'll be able to help you.",
-                ).also { stage++ }
+            3 -> npcl(FaceAnim.OLD_NORMAL, "Aluft Gianne jnr. is in charge - he'll be able to help you.").also { stage++ }
             4 -> playerl(FaceAnim.FRIENDLY, "Thanks.").also { stage++ }
             5 -> npcl(FaceAnim.OLD_NORMAL, "Have a nice day.").also { stage = END_DIALOGUE }
         }

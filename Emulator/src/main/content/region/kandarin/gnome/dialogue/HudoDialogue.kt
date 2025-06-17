@@ -20,19 +20,12 @@ class HudoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "Hello there, traveller. Would you like some groceries? I have a large selection.",
-                ).also { stage++ }
-
+            0 -> npcl(FaceAnim.OLD_NORMAL, "Hello there, traveller. Would you like some groceries? I have a large selection.").also { stage++ }
             1 -> options("I'll take a look.", "No, thank you.").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "I'll take a look.").also { stage++ }
-                    2 -> playerl(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
-                }
-
+            2 -> when (buttonId) {
+                1 -> playerl(FaceAnim.FRIENDLY, "I'll take a look.").also { stage++ }
+                2 -> playerl(FaceAnim.NEUTRAL, "No, thank you.").also { stage = END_DIALOGUE }
+            }
             3 -> npcl(FaceAnim.OLD_NORMAL, "Great stuff.").also { stage++ }
             4 -> end().also { openNpcShop(player, NPCs.HUDO_600) }
         }

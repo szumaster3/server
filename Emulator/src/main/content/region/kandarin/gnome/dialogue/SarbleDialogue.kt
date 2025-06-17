@@ -20,27 +20,11 @@ class SarbleDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "La la la, toadies in their holeys... Oh hello, I didn't notice you.",
-                ).also { stage++ }
+            0 -> npcl(FaceAnim.OLD_NORMAL, "La la la, toadies in their holeys... Oh hello, I didn't notice you.").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Hello, What do you do here?").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "I look after the toads and worms. They are very useful in gnome cooking, don't you know.",
-                ).also {
-                    stage++
-                }
+            2 -> npcl(FaceAnim.OLD_NORMAL, "I look after the toads and worms. They are very useful in gnome cooking, don't you know.").also { stage++ }
             3 -> playerl(FaceAnim.NEUTRAL, "Does singing to the toads help them grow?").also { stage++ }
-            4 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "Don't be silly, I just sing to pass the time while looking after them!",
-                ).also {
-                    stage++
-                }
+            4 -> npcl(FaceAnim.OLD_NORMAL, "Don't be silly, I just sing to pass the time while looking after them!").also { stage++ }
             5 -> playerl(FaceAnim.FRIENDLY, "Of course...").also { stage = END_DIALOGUE }
         }
         return true

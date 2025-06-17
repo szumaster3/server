@@ -1,7 +1,10 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.data.GameAttributes
-import core.api.*
+import core.api.addItem
+import core.api.freeSlots
+import core.api.getAttribute
+import core.api.hasAnItem
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -28,81 +31,27 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.OLD_NORMAL,
-                    "This isn't a grannies' tea party, let's see some sweat",
-                    "human. Go! Go! Go!",
-                ).also {
-                    stage =
-                        11
-                }
-
-            3 ->
-                npc(
-                    FaceAnim.OLD_NORMAL,
-                    "This, my friend, is where we train. Here we improve",
-                    "out agility. It's an essential skill.",
-                ).also {
-                    stage++
-                }
-
+            // Hello there.
+            0 -> npc(FaceAnim.OLD_NORMAL, "This isn't a grannies' tea party, let's see some sweat", "human. Go! Go! Go!").also { stage = 11 }
+            // Hello, what is this place?
+            3 -> npc(FaceAnim.OLD_NORMAL, "This, my friend, is where we train. Here we improve", "out agility. It's an essential skill.").also { stage++ }
             4 -> player(FaceAnim.HALF_GUILTY, "It looks easy enough.").also { stage++ }
-            5 ->
-                npc(
-                    FaceAnim.OLD_NORMAL,
-                    "If you complete the course in order from the slippery",
-                    "log to the end, your agility will increase much faster",
-                    "than by repeating just one obstacle.",
-                ).also {
-                    stage =
-                        11
-                }
-
-            7 ->
-                npc(
-                    FaceAnim.OLD_NORMAL,
-                    "I'm amazed by how much humans chat. The sign over",
-                    "there says training area, not pointless conversation area.",
-                ).also {
-                    stage =
-                        11
-                }
-
-            10 ->
-                npc(FaceAnim.OLD_NORMAL, "This is training soldier. If you want fun go make some", "cocktails.").also {
-                    stage =
-                        11
-                }
-
-            11 -> options(
-                "What is this place?",
-                "What's so special about this course, then?",
-                "Can I talk about rewards?",
-                "I'm done for now."
-            ).also { stage++ }
-
+            5 -> npc(FaceAnim.OLD_NORMAL, "If you complete the course in order from the slippery", "log to the end, your agility will increase much faster", "than by repeating just one obstacle.").also { stage = 11 }
+            // Hello how are you?
+            7 -> npc(FaceAnim.OLD_NORMAL, "I'm amazed by how much humans chat. The sign over", "there says training area, not pointless conversation area.").also { stage = 11 }
+            // This is fun!
+            10 -> npc(FaceAnim.OLD_NORMAL, "This is training soldier. If you want fun go make some", "cocktails.").also { stage = 11 }
+            11 -> options("What is this place?", "What's so special about this course, then?", "Can I talk about rewards?", "I'm done for now.").also { stage++ }
             12 -> when (buttonId) {
                 1 -> player("What is this place?").also { stage++ }
                 2 -> player("What's so special about this course, then?").also { stage = 16 }
                 3 -> player("Can I talk about rewards?").also { stage = 17 }
                 4 -> player("I'm done for now.").also { stage = 21 }
             }
-
-            13 -> npcl(
-                FaceAnim.OLD_NORMAL,
-                "This, my friend, is where we train and improve our Agility. It's an essential skill."
-            ).also { stage++ }
-
+            13 -> npcl(FaceAnim.OLD_NORMAL, "This, my friend, is where we train and improve our Agility. It's an essential skill.").also { stage++ }
             14 -> player("It looks easy enough.").also { stage++ }
-            15 -> npcl(
-                FaceAnim.OLD_NORMAL,
-                "If you complete the course, from the slippery log to the end, your Agility will increase more rapidly than by repeating just one obstacle."
-            ).also { stage = END_DIALOGUE }
-
-            16 -> npcl(FaceAnim.OLD_NORMAL, "Well, it's where most people tend to start training.").also {
-                stage = END_DIALOGUE
-            }//We've also made an extension for those who are up for the challenge.
+            15 -> npcl(FaceAnim.OLD_NORMAL, "If you complete the course, from the slippery log to the end, your Agility will increase more rapidly than by repeating just one obstacle.").also { stage = END_DIALOGUE }
+            16 -> npcl(FaceAnim.OLD_NORMAL, "Well, it's where most people tend to start training.").also { stage = END_DIALOGUE }
             17 -> {
                 val count = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_PERFECT_LAPS, 0)
                 val firstTalk = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_GNOME_TALK, false)
@@ -124,10 +73,7 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     else -> {
-                        npcl(
-                            FaceAnim.FRIENDLY,
-                            "Well, you've still got work to do. Your lap count is $count. It's 250 successful laps for the reward!"
-                        )
+                        npcl(FaceAnim.FRIENDLY, "Well, you've still got work to do. Your lap count is $count. It's 250 successful laps for the reward!")
                         stage = END_DIALOGUE
                     }
                 }
@@ -136,11 +82,7 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
             18 -> {
                 end()
                 if (freeSlots(player!!) == 0) {
-                    npc(
-                        FaceAnim.HALF_GUILTY,
-                        "Well, I would give you the reward, but apparently you",
-                        "don't have any room.",
-                    )
+                    npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
                 addItem(player, 14698)
@@ -151,11 +93,7 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
             20 -> {
                 end()
                 if (freeSlots(player!!) == 0) {
-                    npc(
-                        FaceAnim.HALF_GUILTY,
-                        "Well, I would give you the reward, but apparently you",
-                        "don't have any room.",
-                    )
+                    npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
                 addItem(player, 14698)

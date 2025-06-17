@@ -3,17 +3,13 @@ package content.region.kandarin.khazard.plugin
 import content.data.items.BrokenItem
 import content.region.kandarin.khazard.dialogue.TindelMerchantDialogue
 import core.api.*
-import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.Topic
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import org.rs.consts.Items
 import org.rs.consts.NPCs

@@ -20,23 +20,14 @@ class RomettiDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "Hello, traveller. Have a look at my latest range of gnome fashion. Rometti is the ultimate label in gnome high-society.",
-                ).also {
-                    stage++
-                }
-
+            0 -> npcl(FaceAnim.OLD_NORMAL, "Hello, traveller. Have a look at my latest range of gnome fashion. Rometti is the ultimate label in gnome high-society.").also { stage++ }
             1 -> playerl(FaceAnim.FRIENDLY, "Really.").also { stage++ }
             2 -> npcl(FaceAnim.OLD_NORMAL, "Pastels are all the rage this season.").also { stage++ }
             3 -> options("Okay then, let's have a look.", "I've no time for fashion.").also { stage++ }
-            4 ->
-                when (buttonId) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Okay then, let's have a look.").also { stage = 6 }
-                    2 -> playerl(FaceAnim.NEUTRAL, "I've no time for fashion.").also { stage = 5 }
-                }
-
+            4 -> when (buttonId) {
+                1 -> playerl(FaceAnim.FRIENDLY, "Okay then, let's have a look.").also { stage = 6 }
+                2 -> playerl(FaceAnim.NEUTRAL, "I've no time for fashion.").also { stage = 5 }
+            }
             5 -> npcl(FaceAnim.OLD_NORMAL, "Hmm...I did wonder.").also { stage = END_DIALOGUE }
             6 -> end().also { openNpcShop(player, NPCs.ROMETTI_601) }
         }

@@ -17,16 +17,9 @@ class LocalGnomesDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ): Boolean {
+    override fun handle(componentID: Int, buttonID: Int, ): Boolean {
         when (stage) {
-            0 ->
-                npcl(FaceAnim.OLD_NORMAL, "Little man stronger than big man. Hee hee, lardi dee, lardi da.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            0 -> npcl(FaceAnim.OLD_NORMAL, "Little man stronger than big man. Hee hee, lardi dee, lardi da.").also { stage = END_DIALOGUE }
         }
         return true
     }

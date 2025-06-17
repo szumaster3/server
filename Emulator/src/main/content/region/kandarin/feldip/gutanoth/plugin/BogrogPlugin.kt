@@ -1,12 +1,9 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
 import core.api.getStatLevel
-import core.api.interaction.openNpcShop
 import core.api.openDialogue
 import core.api.sendItemSelect
 import core.api.sendMessage
-import core.game.dialogue.DialogueFile
-import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

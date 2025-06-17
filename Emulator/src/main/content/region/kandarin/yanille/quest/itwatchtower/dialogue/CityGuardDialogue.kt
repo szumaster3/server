@@ -9,7 +9,6 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
-import core.game.world.map.RegionManager
 import core.tools.END_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs

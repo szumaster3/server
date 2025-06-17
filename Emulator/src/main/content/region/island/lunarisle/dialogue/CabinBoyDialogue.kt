@@ -62,8 +62,7 @@ class CabinBoyDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue =
-        content.region.island.lunarisle.dialogue.CabinBoyDialogue(player)
+    override fun newInstance(player: Player?): Dialogue = CabinBoyDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.CABIN_BOY_4539)
 }

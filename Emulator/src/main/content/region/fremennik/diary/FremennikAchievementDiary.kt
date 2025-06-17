@@ -2,9 +2,9 @@ package content.region.fremennik.diary
 
 import content.global.plugin.iface.FairyRing
 import content.minigame.barbassault.dialogue.CaptainCainDialogue
-import content.region.island.jatizso.dialogue.TowerGuardDialogue
 import content.region.fremennik.rellekka.dialogue.HuntingExpertRellekkaDialogue
 import content.region.fremennik.rellekka.quest.viking.dialogue.ChieftanBrundtDialogue
+import content.region.island.jatizso.dialogue.TowerGuardDialogue
 import core.api.getStatLevel
 import core.api.inBorders
 import core.api.inEquipment

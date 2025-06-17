@@ -1,7 +1,8 @@
 package content.region.kandarin.gnome.dialogue
 
-import content.minigame.gnomecook.plugin.*
-import core.api.*
+import content.minigame.gnomecook.plugin.GC_BASE_ATTRIBUTE
+import content.minigame.gnomecook.plugin.GC_TUT_PROG
+import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

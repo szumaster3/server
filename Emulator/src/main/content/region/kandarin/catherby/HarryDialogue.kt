@@ -22,12 +22,7 @@ class HarryDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(
-            FaceAnim.HAPPY,
-            "Welcome! You can buy Fishing equipment at my store.",
-            "We'll also give you a good price for any fish that you",
-            "catch.",
-        )
+        npc(FaceAnim.HAPPY, "Welcome! You can buy Fishing equipment at my store.", "We'll also give you a good price for any fish that you", "catch.")
         stage = if (needsFish() || needsSeaWeed()) {
             10
         } else if (needsFood()) {

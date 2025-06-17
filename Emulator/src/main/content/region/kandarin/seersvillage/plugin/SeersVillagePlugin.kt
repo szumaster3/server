@@ -1,12 +1,16 @@
 package content.region.kandarin.seersvillage.plugin
 
-import core.api.*
+import core.api.openInterface
+import core.api.sendMessage
+import core.api.sendNPCDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.shops.Shops.Companion.openId
-import org.rs.consts.*
+import org.rs.consts.Components
+import org.rs.consts.NPCs
+import org.rs.consts.Scenery
 
 class SeersVillagePlugin : InteractionListener {
     companion object {

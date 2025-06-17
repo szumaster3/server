@@ -50,15 +50,7 @@ class BlurberryDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npc(FaceAnim.OLD_NORMAL, "Here's everything you need.").also { stage++ }
             6 -> {
                 end()
-                val items =
-                    arrayOf(
-                        Item(Items.KNIFE_946),
-                        Item(Items.COCKTAIL_SHAKER_2025),
-                        Item(Items.COCKTAIL_GLASS_2026),
-                        Item(Items.PINEAPPLE_2114),
-                        Item(Items.LEMON_2102, 2),
-                        Item(Items.ORANGE_2108),
-                    )
+                val items = arrayOf(Item(Items.KNIFE_946), Item(Items.COCKTAIL_SHAKER_2025), Item(Items.COCKTAIL_GLASS_2026), Item(Items.PINEAPPLE_2114), Item(Items.LEMON_2102, 2), Item(Items.ORANGE_2108))
                 if (player.inventory.hasSpaceFor(*items)) {
                     player.inventory.add(*items)
                     setAttribute(player, "/save:$GC_BASE_ATTRIBUTE:$GC_TUT_PROG", 20)

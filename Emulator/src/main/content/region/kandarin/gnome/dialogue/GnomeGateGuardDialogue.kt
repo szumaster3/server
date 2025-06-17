@@ -9,10 +9,8 @@ import core.game.node.entity.npc.NPC
 import org.rs.consts.NPCs
 
 class GnomeGateGuardDialogue : DialogueFile() {
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ) {
+
+    override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.GNOME_GUARD_163)
         when (stage) {
             0 -> npcl(FaceAnim.OLD_DEFAULT, "I'm afraid that we have orders not to let you in.").also { stage++ }

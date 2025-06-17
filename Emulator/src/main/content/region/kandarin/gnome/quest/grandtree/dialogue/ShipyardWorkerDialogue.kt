@@ -1,22 +1,22 @@
 package content.region.kandarin.gnome.quest.grandtree.dialogue
 
+import core.api.face
+import core.api.getAttribute
 import core.api.openDialogue
 import core.api.quest.getQuestStage
+import core.api.setAttribute
 import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.scenery.Scenery
+import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
-import core.api.face
-import core.api.getAttribute
-import core.api.setAttribute
-import core.game.dialogue.DialogueFile
-import core.game.global.action.DoorActionHandler
-import core.game.node.scenery.Scenery
-import core.game.world.map.Location
 
 /**
  * Represents the Shipyard Worker dialogue.

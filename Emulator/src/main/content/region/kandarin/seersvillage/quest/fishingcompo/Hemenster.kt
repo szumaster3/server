@@ -1,7 +1,9 @@
 package content.region.kandarin.seersvillage.quest.fishingcompo
 
 import content.data.GameAttributes
-import core.api.*
+import core.api.MapArea
+import core.api.getAttribute
+import core.api.removeAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders
