@@ -40,6 +40,7 @@ class BeaconKeeperDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         index = getIndexOf((args[0] as NPC).originalId, listOf(npc.id))
+        val faceExpression = getFaceExpression()
         if (index == AFUBeacon.GWD.ordinal && getStatLevel(player, Skills.SUMMONING) < 81) {
             npc(faceExpression, "Awwf uurrrhur", "(You need 81 Summoning to communicate with Nanuq.)").also { stage = 15 }
             return true
@@ -56,6 +57,7 @@ class BeaconKeeperDialogue(player: Player? = null) : Dialogue(player) {
         val beacon = AFUBeacon.values()[index]
         val logs = getLogs(player, 5)
         val session: AFUSession? = player.getAttribute("afu-session", null)
+        val faceExpression = getFaceExpression()
         when (stage) {
             0 -> if (!GameWorld.settings!!.isMembers) {
                 end()
@@ -124,6 +126,12 @@ class BeaconKeeperDialogue(player: Player? = null) : Dialogue(player) {
             }
         }
         return Item(logId, amount)
+    }
+
+    private fun getFaceExpression(): FaceAnim = when (npc?.id) {
+        NPCs.STUBTHUMB_8054, NPCs.CRATE_8059, NPCs.NANUQ_8063 -> FaceAnim.OLD_ANGRY2
+        NPCs.DORONBOL_8057 -> FaceAnim.CHILD_NEUTRAL
+        else -> FaceAnim.ANNOYED
     }
 
     override fun getIds(): IntArray = intArrayOf(
