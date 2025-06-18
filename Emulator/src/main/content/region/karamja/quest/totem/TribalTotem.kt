@@ -31,29 +31,33 @@ class TribalTotem : Quest(Quests.TRIBAL_TOTEM, 126, 125, 1, Vars.VARP_QUEST_TRIB
             line(player, "!!Shrimp & Parrot?? restaurant in !!Brimhaven??.", line++)
             line(player, "To complete this quest I need:", line++)
             line(player, "!!Level 21 Thieving??", line, thievingLevel >= 21)
-        } else if (started && stage != 100) {
-            if (stage >= 10) {
-                line(player, "I agreed to help !!Kangai Mau?? on Brimhaven recover", line++, stage > 15)
-                line(player, "the tribal totem stolen from his village by", line++, stage > 15)
-                line(player, "!!Lord Handelmort??.", line++, stage > 10)
-            }
+        }
+
+        if (stage in 1..100) {
+            line(player, "I agreed to help !!Kangai Mau?? in Brimhaven recover", line++, stage >= 10)
+            line(player, "the tribal totem stolen from his village by", line++, stage >= 10)
+            line(player, "!!Lord Handelmort??.", line++, stage >= 10)
+
             if (stage >= 20) {
-                line(player, "I found a package due for delivery to !!Lord Handelmort??", line++, stage > 25)
-                line(player, "at the !!G.P.D.T. Depot??, and swapped the label for the", line++, stage > 25)
-                line(player, "!!Wizard Cromperty's?? experimental teleport block.", line++, stage > 25)
+                line(player, "I found a package for !!Lord Handelmort?? at the", line++, stage >= 20)
+                line(player, "!!G.P.D.T. Depot?? and swapped the label for", line++, stage >= 20)
+                line(player, "!!Wizard Cromperty's?? experimental teleport block.", line++, stage >= 20)
             }
+
             if (stage >= 30) {
-                line(player, "I got the !!G.P.D.T.?? men to deliver the teleport block to", line++, stage > 35)
-                line(player, "!!Lord Handelmort?? and teleported myself inside.", line, stage > 35)
+                line(player, "I tricked the !!G.P.D.T.?? men into delivering the", line++, stage >= 30)
+                line(player, "teleport block to !!Lord Handelmort?? and used it", line++, stage >= 30)
+                line(player, "to teleport myself inside the mansion.", line++, stage >= 30)
             }
-        } else if (stage == 100) {
-            if (stage == 100) {
-                line(player, "After bypassing the traps and security inside the mansion I was able", line++)
-                line(player, "to reclaim the totem, and take it back to !!Kangai Mau??, who rewarded", line++)
-                line(player, "me for all of my help.", line++)
-                line++
-                line(player, "<col=FF0000>QUEST COMPLETE!</col>", line)
-            }
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "After bypassing the traps and security inside the mansion,", line++)
+            line(player, "I reclaimed the totem and returned it to Kangai Mau,", line++)
+            line(player, "who rewarded me for my efforts.", line++)
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line)
         }
     }
 
