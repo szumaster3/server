@@ -11,7 +11,7 @@ import core.game.system.task.Pulse
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
 
-class CrateListener : InteractionListener {
+class CratePlugin : InteractionListener {
     private val monkeyAmuletMouldCrate = Scenery.CRATE_4724
     private val threadCrate = Scenery.CRATE_4718
     private val monkeyTalkingDentures = Scenery.CRATE_4715

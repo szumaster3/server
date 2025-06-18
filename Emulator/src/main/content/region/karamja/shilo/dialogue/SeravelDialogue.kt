@@ -23,19 +23,13 @@ class SeravelDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    "Hello Bwana. Are you interested in buying a ticket",
-                    "for the 'Lady of the Waves'?",
-                ).also { stage++ }
-
+            0 -> npc("Hello Bwana. Are you interested in buying a ticket", "for the 'Lady of the Waves'?").also { stage++ }
             1 -> options("Yes, that sounds great!", "No thanks.", "Tell me more about the ship.").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> player("Yes, that sounds great!").also { stage = 10 }
-                    2 -> player("No thanks.").also { stage = 20 }
-                    3 -> player("Tell me more about the ship.").also { stage = 30 }
-                }
+            2 -> when (buttonId) {
+                1 -> player("Yes, that sounds great!").also { stage = 10 }
+                2 -> player("No thanks.").also { stage = 20 }
+                3 -> player("Tell me more about the ship.").also { stage = 30 }
+            }
             10 -> {
                 end()
                 if (freeSlots(player) == 0) {
@@ -50,14 +44,7 @@ class SeravelDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
             20 -> npc("Fair enough Bwana, let me know if you change your", "mind.").also { stage = END_DIALOGUE }
-            30 ->
-                npc(
-                    "It's a ship that can take you to either Port Sarim",
-                    "or Port Khazard. The ship lies west of Shilo Village",
-                    "and south of Cairn Island.",
-                ).also {
-                    stage++
-                }
+            30 -> npc("It's a ship that can take you to either Port Sarim", "or Port Khazard. The ship lies west of Shilo Village", "and south of Cairn Island.").also { stage++ }
             31 -> npc("The tickets cost 25 Gold Pieces. Would you like to", "purchase a ticket Bwana?").also { stage++ }
             32 -> options("Yes, that sounds great!", "No thanks.").also { stage = 1 }
         }

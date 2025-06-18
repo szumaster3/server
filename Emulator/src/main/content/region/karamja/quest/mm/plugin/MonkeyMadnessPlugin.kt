@@ -7,6 +7,7 @@ import content.region.karamja.quest.mm.dialogue.*
 import core.api.*
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
+import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -21,7 +22,7 @@ import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import org.rs.consts.*
 
-class MonkeyMadnessListener : InteractionListener {
+class MonkeyMadnessPlugin : InteractionListener {
     companion object {
         val mspeakAmuletUnstrung = Items.MSPEAK_AMULET_4022
         val monkeyMadnessPuzzleComponent = Components.TRAIL_PUZZLE_363
@@ -58,12 +59,7 @@ class MonkeyMadnessListener : InteractionListener {
                 player.equipment.containsAtLeastOneItem(IntArray(4022 - 4021 + 1) { it + 4021 }) &&
                 getQuestStage(player, Quests.MONKEY_MADNESS) == 33
             ) {
-                openDialogue(
-                    player,
-                    content.region.karamja.quest.mm.dialogue
-                        .MonkeyDialogue(),
-                    npc,
-                )
+                openDialogue(player, MonkeyDialogue(), npc,)
             }
             return@on true
         }
@@ -84,7 +80,7 @@ class MonkeyMadnessListener : InteractionListener {
             if (player.equipment.containsItem(Item(Items.MSPEAK_AMULET_4022))) {
                 openDialogue(player, MonkeyChildFirstDialogue(), npc)
             } else {
-                openDialogue(player, MonkeyChildWithoutAmuletDialogue(), npc)
+                sendNPCDialogue(player, npc.id, "How dare you come near my farmhouse! Guards! Guards! Remove this human!", FaceAnim.OLD_DEFAULT)
             }
             return@on true
         }

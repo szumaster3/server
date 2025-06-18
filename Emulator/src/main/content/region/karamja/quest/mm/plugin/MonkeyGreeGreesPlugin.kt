@@ -10,7 +10,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
-class MonkeyGreeGreesListener :
+class MonkeyGreeGreesPlugin :
     InteractionListener,
     MapArea {
     companion object {
@@ -24,27 +24,13 @@ class MonkeyGreeGreesListener :
         private const val SMALL_ZOMBIE_MONKEY = Items.MONKEY_GREEGREE_4029
         private const val LARGE_ZOMBIE_MONKEY = Items.MONKEY_GREEGREE_4030
         private const val MONKEY_GREEGREE = Items.MONKEY_GREEGREE_4031
-
-        private val ALL_STAFFS =
-            intArrayOf(
-                SMALL_NINJA_MONKEY,
-                MEDIUM_NINJA_MONKEY,
-                GORILLA_GREEGREE,
-                BEARDED_GORILLA_GREEGREE,
-                ANCIENT_MONKEY,
-                SMALL_ZOMBIE_MONKEY,
-                LARGE_ZOMBIE_MONKEY,
-                MONKEY_GREEGREE,
-            )
+        private val ALL_STAFFS = intArrayOf(SMALL_NINJA_MONKEY, MEDIUM_NINJA_MONKEY, GORILLA_GREEGREE, BEARDED_GORILLA_GREEGREE, ANCIENT_MONKEY, SMALL_ZOMBIE_MONKEY, LARGE_ZOMBIE_MONKEY, MONKEY_GREEGREE)
         private val AIR_BLAST_ANIMATION = Graphics(359, 96)
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(APE_ATOLL_ZONE)
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         super.areaLeave(entity, logout)
 
         if (entity is Player && !entity.isArtificial) {

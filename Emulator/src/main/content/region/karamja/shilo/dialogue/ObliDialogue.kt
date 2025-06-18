@@ -21,11 +21,10 @@ class ObliDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please!", "No, but thanks for the offer.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.FRIENDLY, "Yes, please.").also { stage++ }
-                    2 -> player(FaceAnim.FRIENDLY, "No, but thanks for the offer.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.FRIENDLY, "Yes, please.").also { stage++ }
+                2 -> player(FaceAnim.FRIENDLY, "No, but thanks for the offer.").also { stage = END_DIALOGUE }
+            }
 
             2 -> {
                 end()
