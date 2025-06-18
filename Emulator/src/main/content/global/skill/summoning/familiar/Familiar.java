@@ -344,22 +344,6 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
     }
 
     /**
-     * Returns the total count of a scroll the player has, including
-     * inventory and equipped headgear.
-     */
-    public static int getTotalScrollCount(Player player, int scrollId) {
-        int inventoryCount = player.getInventory().getAmount(scrollId);
-        EnchantedHeadgearManager manager = player.enchgearManager;
-        Integer chargedItemId = manager.getFromEquipment();
-
-        int headgearCount = 0;
-        if (chargedItemId != null) {
-            headgearCount = manager.getCurrentScrollCount(chargedItemId, scrollId);
-        }
-        return inventoryCount + headgearCount;
-    }
-
-    /**
      * Execute the special move of the familiar.
      */
     public boolean executeSpecialMove(FamiliarSpecial special) {
@@ -370,45 +354,27 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
             owner.getPacketDispatch().sendMessage("Your familiar does not have enough special move points left.");
             return false;
         }
-
         SummoningScroll scroll = SummoningScroll.forPouch(pouchId);
         if (scroll == null) {
-            owner.debug("Invalid scroll for pouch " + pouchId + " - report!");
+            owner.getPacketDispatch().sendMessage("Invalid scroll for pouch " + pouchId + " - report!");
             return false;
         }
-
-        int scrollId = scroll.getItemId();
-        int totalScrollCount = getTotalScrollCount(owner, scrollId);
-
-        if (totalScrollCount < 1) {
+        if (!owner.getInventory().contains(scroll.getItemId(), 1)) {
             owner.getPacketDispatch().sendMessage("You do not have enough scrolls left to do this special move.");
             return false;
         }
-
         if (owner.getLocation().getDistance(getLocation()) > 15) {
             owner.getPacketDispatch().sendMessage("Your familiar is too far away to use that scroll, or it cannot see you.");
             return false;
         }
-
         if (specialMove(special)) {
             setAttribute("special-delay", GameWorld.getTicks() + 3);
-
-            if (owner.getInventory().getAmount(scrollId) > 0) {
-                owner.getInventory().remove(new Item(scrollId, 1));
-            } else {
-                EnchantedHeadgearManager manager = owner.enchgearManager;
-                Integer chargedItemId = manager.getFromEquipment();
-                if (chargedItemId != null) {
-                    manager.removeScroll(chargedItemId, scrollId);
-                }
-            }
-
+            owner.getInventory().remove(new Item(scroll.getItemId(), 1));
             playAudio(owner, Sounds.SPELL_4161);
             visualizeSpecialMove();
             updateSpecialPoints(specialCost);
             owner.getSkills().addExperience(Skills.SUMMONING, scroll.getXp(), true);
         }
-
         return true;
     }
 
