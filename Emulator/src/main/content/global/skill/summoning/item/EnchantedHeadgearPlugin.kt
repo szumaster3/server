@@ -30,7 +30,7 @@ class EnchantedHeadgearPlugin : InteractionListener {
                 return@on true
             }
 
-            if (!anyInInventory(player, *defaultIDs)) {
+            if (!anyInInventory(player, *DEFAULT_ID)) {
                 sendNPCDialogue(player, NPCs.PIKKUPSTIX_6970, "You do not have items that can be enchanted.")
                 return@on true
             }
@@ -49,7 +49,7 @@ class EnchantedHeadgearPlugin : InteractionListener {
          * Handles uncharging the headgear.
          */
 
-        on(chargedIDs, IntType.ITEM, "Uncharge") { player, node ->
+        on(CHARGED_ID, IntType.ITEM, "Uncharge") { player, node ->
             val item = node.asItem() ?: return@on true
             val enchManager = player.enchgearManager
 
@@ -63,25 +63,17 @@ class EnchantedHeadgearPlugin : InteractionListener {
                 return@on true
             }
 
-            val enchantedGear = enchManager.enchantedGear[item.id]
-            if (enchantedGear == null) {
+            val enchantedGear = enchManager.enchantedGear[item.id] ?: run {
                 sendMessage(player, "Could not find the charged headgear in your inventory.")
                 return@on true
             }
 
-            val containerItems = enchantedGear.container.toArray()
-            if (containerItems.all { it == null }) {
-                sendMessage(player, "Could not find the charged headgear in your inventory.")
+            val firstScroll = enchantedGear.container.toArray().firstOrNull { it != null } ?: run {
+                sendMessage(player, "No scrolls found in the headgear.")
                 return@on true
             }
 
-            val firstScroll = containerItems.firstOrNull { it != null } ?: run {
-                sendMessage(player, "Could not find the charged headgear in your inventory.")
-                return@on true
-            }
-
-            val success = enchManager.withdrawScrolls(enchantedGear.chargedItemId, firstScroll.id, firstScroll.amount)
-
+            val success = enchManager.withdrawScrolls(item.id, firstScroll.id, firstScroll.amount)
             if (success) {
                 sendMessages(player,
                     "You remove the scrolls. You will need to use a Summoning scroll on it to charge the",
@@ -90,7 +82,6 @@ class EnchantedHeadgearPlugin : InteractionListener {
             } else {
                 player.debug("Failed to remove the scrolls.")
             }
-
             return@on true
         }
 
@@ -98,7 +89,7 @@ class EnchantedHeadgearPlugin : InteractionListener {
          * Handles checking stored scrolls in charged headgear.
          */
 
-        on(chargedIDs, IntType.ITEM, "Commune", "Operate") { player, node ->
+        on(CHARGED_ID, IntType.ITEM, "Commune", "Operate") { player, node ->
             val item = node.asItem() ?: return@on true
             val enchManager = player.enchgearManager
             enchManager.checkHeadgear(item.id)
@@ -109,23 +100,22 @@ class EnchantedHeadgearPlugin : InteractionListener {
          * Handles using a scroll on enchanted gear to charge it.
          */
 
-        onUseWith(IntType.ITEM, enchantedIDs, *allowedScrolls) { player, used, with ->
+        onUseWith(IntType.ITEM, ENCHANTED_ID, *ALLOWED_SCROLL_ID) { player, used, with ->
             val enchantedItem = used.asItem() ?: return@onUseWith true
             val scrollItem = with.asItem() ?: return@onUseWith true
 
-            val headgear = EnchantedHeadgear.forEnchanted(enchantedItem) ?: return@onUseWith true
+            val (headgear, type) = EnchantedHeadgear.itemMap[enchantedItem.id] ?: return@onUseWith true
+            if (type != EnchantedHeadgear.HeadgearType.ENCHANTED) return@onUseWith true
 
             if (getStatLevel(player, Skills.SUMMONING) < headgear.requiredLevel) {
                 sendMessage(player, "You need Summoning level ${headgear.requiredLevel} to enchant this headgear.")
                 return@onUseWith true
             }
 
-            val chargedItem = EnchantedHeadgear.getChargedItem(enchantedItem) ?: return@onUseWith true
-
+            val chargedItem = headgear.chargedItem
             val enchManager = player.enchgearManager
-            enchManager.addScrolls(chargedItem.id, scrollItem.id, scrollItem.amount)
 
-            removeItem(player, scrollItem)
+            enchManager.addScrolls(chargedItem.id, scrollItem.id, scrollItem.amount)
 
             val slot = enchantedItem.index
             if (slot >= 0) {
@@ -136,11 +126,11 @@ class EnchantedHeadgearPlugin : InteractionListener {
     }
 
     companion object {
-        private val defaultIDs = EnchantedHeadgear.values().map { it.defaultItem.id }.toIntArray()
-        private val enchantedIDs = EnchantedHeadgear.values().map { it.enchantedItem.id }.toIntArray()
-        private val chargedIDs = EnchantedHeadgear.values().map { it.chargedItem.id }.toIntArray()
+        private val DEFAULT_ID = EnchantedHeadgear.values().map { it.defaultItem.id }.toIntArray()
+        private val ENCHANTED_ID = EnchantedHeadgear.values().map { it.enchantedItem.id }.toIntArray()
+        private val CHARGED_ID = EnchantedHeadgear.values().map { it.chargedItem.id }.toIntArray()
 
-        val allowedScrolls = intArrayOf(
+        val ALLOWED_SCROLL_ID = intArrayOf(
             Items.HOWL_SCROLL_12425,
             Items.DREADFOWL_STRIKE_SCROLL_12445,
             Items.SLIME_SPRAY_SCROLL_12459,
@@ -182,33 +172,46 @@ class EnchantedHeadgearPlugin : InteractionListener {
         )
 
         fun enchant(player: Player, item: Item, option: Int): Boolean {
-            val headgear = EnchantedHeadgear.forItem(item) ?: return false
+            val (headgear, type) = EnchantedHeadgear.itemMap[item.id] ?: return false
 
-            if (getStatLevel(player, Skills.SUMMONING) < headgear.requiredLevel) return false
-
-            if (item.id != headgear.defaultItem.id && item.id != headgear.enchantedItem.id && item.id != headgear.chargedItem.id) {
-                sendMessage(player, "This item cannot be charged.")
+            if (getStatLevel(player, Skills.SUMMONING) < headgear.requiredLevel) {
+                sendMessage(player, "You need a Summoning level of ${headgear.requiredLevel} to do this.")
                 return true
             }
 
             if (option == 1) {
-                if (item.id == headgear.chargedItem.id && player.enchgearManager.hasScrolls(item.id)) {
-                    sendMessage(player, "Your headgear already contains different scrolls. Remove them first.")
-                    return true
-                }
-
+                val npc = findLocalNPC(player, NPCs.PIKKUPSTIX_6970) ?: return false
                 lock(player, 1)
-                animate(findLocalNPC(player, NPCs.PIKKUPSTIX_6970) ?: return false, Animations.CAST_SPELL_711)
+                animate(npc, Animations.CAST_SPELL_711)
                 sendGraphics(Graphics(434, 100), player.location)
 
-                removeItem(player, item.id)
-                addItem(player, headgear.enchantedItem.id)
+                when (type) {
+                    EnchantedHeadgear.HeadgearType.DEFAULT -> {
+                        removeItem(player, item.id)
+                        addItem(player, headgear.enchantedItem.id)
+                        dialogue(player) {
+                            npc(NPCs.PIKKUPSTIX_6971, FaceAnim.NEUTRAL, "Good choice. Here you go, you can now store spells on", "it.")
+                            player(FaceAnim.CALM_TALK, "Excellent. Thank you!")
+                        }
+                        return true
+                    }
 
-                dialogue(player) {
-                    npc(NPCs.PIKKUPSTIX_6971, FaceAnim.NEUTRAL, "Good choice. Here you go, you can now store spells on", "it.")
-                    player(FaceAnim.CALM_TALK, "Excellent. Thank you!")
+                    EnchantedHeadgear.HeadgearType.ENCHANTED -> {
+                        if (player.enchgearManager.hasScrolls(headgear.chargedItem.id)) {
+                            sendMessage(player, "Remove the stored scrolls from the headgear first.")
+                            return true
+                        }
+
+                        removeItem(player, item.id)
+                        addItem(player, headgear.defaultItem.id)
+                        return true
+                    }
+
+                    EnchantedHeadgear.HeadgearType.CHARGED -> {
+                        sendMessage(player, "Remove the stored scrolls first before reverting this item.")
+                        return true
+                    }
                 }
-                return true
             }
             return false
         }

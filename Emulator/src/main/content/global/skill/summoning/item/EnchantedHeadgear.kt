@@ -6,13 +6,7 @@ import org.rs.consts.Items
 /**
  * Represents the enchanted headgear items for the Summoning skill.
  */
-enum class EnchantedHeadgear(
-    val defaultItem: Item,
-    val enchantedItem: Item,
-    val chargedItem: Item,
-    val scrollCapacity: Int,
-    val requiredLevel: Int
-) {
+enum class EnchantedHeadgear(val defaultItem: Item, val enchantedItem: Item, val chargedItem: Item, val scrollCapacity: Int, val requiredLevel: Int) {
     ANTLERS(Item(Items.ANTLERS_12204), Item(Items.ANTLERS_12204), Item(Items.ANTLERS_CHARGED_12206), 40, 10),
     ADAMANT_FULL_HELM(Item(Items.ADAMANT_FULL_HELM_1161), Item(Items.ADAMANT_FULL_HELM_E_12658), Item(Items.ADAMANT_FULL_HELM_CHARGED_12659), 50, 20),
     SLAYER_HELMET(Item(Items.SLAYER_HELMET_13263), Item(Items.SLAYER_HELMET_E_14636), Item(Items.SLAYER_HELMET_CHARGED_14637), 50, 20),
@@ -36,37 +30,25 @@ enum class EnchantedHeadgear(
 
     companion object {
         /**
-         * Maps default items to their headgear enum.
+         * All item ids to headgear and type.
          */
-        private val byDefault = values().associateBy { it.defaultItem.id }
+        val itemMap = hashMapOf<Int, Pair<EnchantedHeadgear, HeadgearType>>()
 
-        /**
-         * Maps enchanted (uncharged) items to their headgear enum.
-         */
-        private val byEnchanted = values().associateBy { it.enchantedItem.id }
-
-        /**
-         * Maps charged items to their headgear enum.
-         */
-        val byCharged = values().associateBy { it.chargedItem.id }
-
-        /**
-         * Gets the [EnchantedHeadgear] for the given item (default, enchanted, or charged).
-         */
-        fun forItem(item: Item): EnchantedHeadgear? =
-            byDefault[item.id] ?: byEnchanted[item.id] ?: byCharged[item.id]
-
-        /**
-         * Returns the charged variant of the given item, or `null` if not applicable.
-         */
-        fun getChargedItem(item: Item): Item? {
-            val headgear = forItem(item) ?: return null
-            return headgear.chargedItem
+        init {
+            values().forEach { headgear ->
+                itemMap[headgear.defaultItem.id] = headgear to HeadgearType.DEFAULT
+                itemMap[headgear.enchantedItem.id] = headgear to HeadgearType.ENCHANTED
+                itemMap[headgear.chargedItem.id] = headgear to HeadgearType.CHARGED
+            }
         }
 
         /**
-         * Gets the [EnchantedHeadgear] for an enchanted (uncharged) item.
+         * Gets the [EnchantedHeadgear] and its type for the given item.
          */
-        fun forEnchanted(item: Item): EnchantedHeadgear? = byEnchanted[item.id]
+        fun forItem(item: Item): Pair<EnchantedHeadgear, HeadgearType>? = itemMap[item.id]
+    }
+
+    enum class HeadgearType {
+        DEFAULT, ENCHANTED, CHARGED
     }
 }
