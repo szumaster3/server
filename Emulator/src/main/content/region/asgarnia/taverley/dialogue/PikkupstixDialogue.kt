@@ -250,7 +250,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
                 11 -> options("In general.", "Tell me about summoning familiars.", "Tell me about special moves.", "Tell me about pets.").also { stage++ }
                 12 -> when (buttonId) {
                     1 -> npc("Well, you already know about Summoning in general;", "otherwise, we would not be having this conversation!").also { stage = 100 }
-                    2 -> npc("Well, if a Summoning pouch is split apart at an obelisk,", "then the energy it contained will reconstitute itself -", "transform - into a scroll. This scroll can then be used to", "make your familiar perform its special move.").also { stage = 129 }
+                    2 -> npc("Summoned familiars are at the very core of Summoning.", "Each familiar is different, and the more powerful the", "summoner, the more powerful the familiar they can", "summon.").also { stage = 108 }
                     3 -> npc("Well, if a Summoning pouch is split apart at an obelisk,", "then the energy it contained will reconstitute itself -", "transform - into a scroll. This scroll can then be used to", "make your familiar perform its special move.").also { stage = 129 }
                     4 -> npc("Well, these are not really an element of the skill, as such,", "but more like a side-effect of training.").also { stage = 168 }
                 }
@@ -264,7 +264,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
                 107 -> when (buttonId) {
                     1 -> npc("Summoned familiars are at the very core of Summoning.", "Each familiar is different, and the more powerful the", "summoner, the more powerful the familiar they can", "summon.").also { stage++ }
                     2 -> npc("Well, if a Summoning pouch is split apart at an obelisk,", "then the energy it contained will reconstitute itself -", "transform - into a scroll. This scroll can then be used to", "make your familiar perform its special move.").also { stage = 129 }
-                    3 -> npcl(FaceAnim.FRIENDLY, "Charged items are very simple to create, if you have the correct Crafting level.").also { stage = 148 }
+                    3 -> npcl(FaceAnim.FRIENDLY, "Charged items are very simple to create, if you have the correct Crafting level.").also { stage = 149 }
                     4 -> npc("Well, these are not really an element of the skill, as such,", "but more like a side-effect of training.").also { stage = 168 }
                 }
                 // Tell me about summoning familiars.
