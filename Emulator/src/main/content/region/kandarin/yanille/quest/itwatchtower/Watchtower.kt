@@ -89,12 +89,12 @@ class Watchtower : Quest(Quests.WATCHTOWER, 131, 130, 4, Vars.VARP_QUEST_WATCHTO
 
         if (stage == 100) {
             line(player, "I helped the wizards in Yanille, and rescued the lost crystals.", line++, true)
-            line(player, "I defeated the ogres and their minions.", line++)
+            line(player, "I defeated the ogres and their minions.", line++, true)
             line(player, "I read the scroll and gained a new teleport spell.", line++, getAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, false))
             line++
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
+            line(player, "I can return to the !!Watchtower?? at any time. My task here is done.", line++)
             line++
-            line(player, "I can return to the Watchtower at any time. My task here is done.", line++)
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
             limitScrolling(player, line, false)
         }
     }

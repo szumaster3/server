@@ -34,20 +34,22 @@ class TribalTotem : Quest(Quests.TRIBAL_TOTEM, 126, 125, 1, Vars.VARP_QUEST_TRIB
         }
 
         if (stage in 1..100) {
-            line(player, "I agreed to help !!Kangai Mau?? in Brimhaven recover", line++, stage >= 10)
-            line(player, "the tribal totem stolen from his village by", line++, stage >= 10)
-            line(player, "!!Lord Handelmort??.", line++, stage >= 10)
+            line(player, "I agreed to help !!Kangai Mau?? in Brimhaven recover the tribal", line++, stage >= 10)
+            line(player, "totem stolen from his village by!!Lord Handelmort??.", line++, stage >= 10)
+            line++
 
             if (stage >= 20) {
-                line(player, "I found a package for !!Lord Handelmort?? at the", line++, stage >= 20)
-                line(player, "!!G.P.D.T. Depot?? and swapped the label for", line++, stage >= 20)
-                line(player, "!!Wizard Cromperty's?? experimental teleport block.", line++, stage >= 20)
+                line++
+                line(player, "I found a package for !!Lord Handelmort?? at the !!G.P.D.T.??", line++, stage >= 20)
+                line(player, "!!Depot?? and swapped the label for !!Wizard Cromperty's??", line++, stage >= 20)
+                line(player, "experimental teleport block.", line++, stage >= 20)
             }
 
             if (stage >= 30) {
-                line(player, "I tricked the !!G.P.D.T.?? men into delivering the", line++, stage >= 30)
-                line(player, "teleport block to !!Lord Handelmort?? and used it", line++, stage >= 30)
-                line(player, "to teleport myself inside the mansion.", line++, stage >= 30)
+                line++
+                line(player, "I tricked the !!G.P.D.T.?? men into delivering the teleport", line++, stage >= 30)
+                line(player, "block to !!Lord Handelmort?? and used it to teleport", line++, stage >= 30)
+                line(player, "myself inside the mansion.", line++, stage >= 30)
             }
         }
 
