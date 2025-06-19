@@ -9,20 +9,15 @@ import org.rs.consts.Items
 
 @Initializable
 class WaterSkinPlugin :
-    UseWithHandler(
-        Items.WATERSKIN3_1825,
-        Items.WATERSKIN2_1827,
-        Items.WATERSKIN1_1829,
-        Items.WATERSKIN0_1831,
-    ) {
+    UseWithHandler(Items.WATERSKIN3_1825, Items.WATERSKIN2_1827, Items.WATERSKIN1_1829, Items.WATERSKIN0_1831) {
+
     private val waterSkinId = Item(Items.WATERSKIN4_1823)
-    private val data =
-        arrayOf(
-            intArrayOf(Items.JUG_OF_WATER_1937, Items.JUG_1935),
-            intArrayOf(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925),
-            intArrayOf(Items.BOWL_OF_WATER_1921, Items.BOWL_1923),
-            intArrayOf(Items.VIAL_OF_WATER_227, Items.VIAL_229),
-        )
+    private val data = arrayOf(
+        intArrayOf(Items.JUG_OF_WATER_1937, Items.JUG_1935),
+        intArrayOf(Items.BUCKET_OF_WATER_1929, Items.BUCKET_1925),
+        intArrayOf(Items.BOWL_OF_WATER_1921, Items.BOWL_1923),
+        intArrayOf(Items.VIAL_OF_WATER_227, Items.VIAL_229)
+    )
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (i in data.indices) {
@@ -36,9 +31,7 @@ class WaterSkinPlugin :
         val vessil = if (!event.usedItem.name.contains("skin")) event.usedItem else event.baseItem
         if (event.player.inventory.remove(waterSkin)) {
             event.player.inventory.add(
-                if (vessil.id ==
-                    Items.VIAL_OF_WATER_227
-                ) {
+                if (vessil.id == Items.VIAL_OF_WATER_227) {
                     Item(waterSkin.id - 2)
                 } else {
                     waterSkinId

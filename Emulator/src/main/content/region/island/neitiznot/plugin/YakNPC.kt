@@ -15,7 +15,7 @@ class YakNPC : NPCBehavior(NPCs.YAK_5529) {
         if (self.properties.combatPulse.isAttacking || DeathTask.isDead(self)) {
             return true
         }
-        if (RandomFunction.random(100) < 10) {
+        if (RandomFunction.random(45) == 5) {
             sendChat(self, "Moo")
         }
         return super.tick(self)

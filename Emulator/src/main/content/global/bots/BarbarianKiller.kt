@@ -11,7 +11,7 @@ class BarbarianKiller : Script() {
 
     override fun tick() {
         when (state) {
-            State.KILLING -> scriptAPI.attackNpcInRadius(bot, "Barbarian", 16)
+            State.KILLING -> scriptAPI.attackNpcInRadius(bot, "Barbarian", 8)
         }
     }
 

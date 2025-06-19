@@ -12,7 +12,7 @@ import org.rs.consts.NPCs
 class CowNPC : NPCBehavior(NPCs.COW_81, NPCs.COW_397, NPCs.COW_955, NPCs.COW_1767, NPCs.COW_3309) {
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(100) < 15) {
+        if (RandomFunction.random(45) == 5) {
             sendChat(self, "Moo")
         }
         return true

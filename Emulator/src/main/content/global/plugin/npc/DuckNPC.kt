@@ -13,7 +13,7 @@ class DuckNPC : NPCBehavior(NPCs.DUCK_46, NPCs.DUCK_2693, NPCs.DUCK_6113) {
     private val forceChat = listOf("Eep!", "Quack!")
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(100) < 15) {
+        if (RandomFunction.random(45) == 5) {
             sendChat(self, forceChat.random())
         }
         return true

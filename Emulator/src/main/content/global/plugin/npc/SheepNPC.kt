@@ -66,7 +66,7 @@ class SheepNPC : NPCBehavior(*sheepIds), InteractionListener {
             return true
         }
 
-        if (RandomFunction.random(100) < 15) {
+        if (RandomFunction.random(35) == 5) {
             sendChat(self, "Baa!")
         }
 
@@ -123,11 +123,7 @@ class SheepNPC : NPCBehavior(*sheepIds), InteractionListener {
         }
     }
 
-    fun sheepBackAway(
-        player: Player,
-        sheep: NPC,
-        messagePlayer: String,
-    ) {
+    private fun sheepBackAway(player: Player, sheep: NPC, messagePlayer: String, ) {
         val playerLocation = player.location
         val sheepLocation = sheep.location
         val sheepDirection = Direction.getDirection(sheepLocation, playerLocation)

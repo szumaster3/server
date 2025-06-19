@@ -152,11 +152,7 @@ class WaterbirthDungeon :
         return super.move(e, from, to)
     }
 
-    override fun interact(
-        e: Entity,
-        target: Node,
-        option: Option,
-    ): Boolean {
+    override fun interact(e: Entity, target: Node, option: Option, ): Boolean {
         if (e is Player) {
             val player = e
             when (target.id) {
@@ -171,7 +167,7 @@ class WaterbirthDungeon :
                 }
 
                 10177 -> {
-                    when (option.name) {
+                    when (option.name.lowercase()) {
                         "Climb" -> {
                             player.dialogueInterpreter.sendOptions("Select an Option", "Climb Up.", "Climb Down.")
                             player.dialogueInterpreter.addAction { player, buttonId ->

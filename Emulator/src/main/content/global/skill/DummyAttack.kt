@@ -1,6 +1,5 @@
 package content.global.skill
 
-import content.global.plugin.npc.NPCListener
 import core.api.sendMessage
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
@@ -10,13 +9,15 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs.consts.Scenery
 
 @Initializable
 class DummyAttack : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        for (i in intArrayOf(*NPCListener.DUMMY_ID)) {
+        for (i in intArrayOf(Scenery.DUMMY_2038, Scenery.DUMMY_15624, Scenery.DUMMY_15625, Scenery.DUMMY_15626, Scenery.DUMMY_15627, Scenery.DUMMY_15628, Scenery.DUMMY_15629, Scenery.DUMMY_15630, Scenery.DUMMY_18238, Scenery.DUMMY_25648, Scenery.DUMMY_PAWYA_CORPSE_28912, Scenery.DUMMY_823, Scenery.DUMMY_23921)) {
             SceneryDefinition.forId(i).handlers["option:attack"] = this
+            SceneryDefinition.forId(i).handlers["option:hit"] = this
         }
         return this
     }

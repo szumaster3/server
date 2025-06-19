@@ -1,15 +1,17 @@
 package content.region.other.keldagrim.plugin
 
-import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
 /**
- * Handles the TradeRefereeNPC.
+ * Handles the CartConductorNPC.
  */
-class TradeRefereeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
+@Initializable
+class TradeRefereeNPC
+@JvmOverloads constructor(id: Int = NPCs.TRADE_REFEREE_2127, location: Location? = null) : AbstractNPC(id, location) {
     private val forceChat =
         arrayOf(
             "Stay inside your triangle!",
@@ -23,15 +25,17 @@ class TradeRefereeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
             "Keep the goods flowing!",
             "Hold on there!",
         )
-
-    override fun onCreation(self: NPC) {
-        self.walkRadius = 6
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
+        return TradeRefereeNPC(id, location)
     }
 
-    override fun tick(self: NPC): Boolean {
+    override fun tick() {
         if (RandomFunction.random(100) < 15) {
-            sendChat(self, forceChat.random())
+            sendChat(forceChat.random())
         }
-        return true
+    }
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.TRADE_REFEREE_2127)
     }
 }

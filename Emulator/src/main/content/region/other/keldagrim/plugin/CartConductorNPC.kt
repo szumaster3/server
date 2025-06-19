@@ -15,7 +15,7 @@ class CartConductorNPC : NPCBehavior(NPCs.CART_CONDUCTOR_2182, NPCs.CART_CONDUCT
     private val secondChat = arrayOf("Tickets! Tickets!", "Buy your tickets here!", "Selling tickets!")
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(99) == 0) {
+        if (RandomFunction.random(100) < 15) {
             val chat = when (self.id) {
                 NPCs.CART_CONDUCTOR_2182 -> forceChat.random()
                 NPCs.CART_CONDUCTOR_2183 -> secondChat.random()

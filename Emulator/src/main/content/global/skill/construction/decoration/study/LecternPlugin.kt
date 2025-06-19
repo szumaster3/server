@@ -107,11 +107,7 @@ class LecternPlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String, ): Boolean {
         val id = node.asScenery().id
         setAttribute(player, "ttb:objectid", id)
         GameWorld.Pulser.submit(

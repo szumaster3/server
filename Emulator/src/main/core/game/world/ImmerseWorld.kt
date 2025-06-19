@@ -1,10 +1,10 @@
 package core.game.world
 
+import content.global.bots.*
 import core.api.StartupListener
 import core.game.bots.CombatBotAssembler
 import core.game.bots.GeneralBotCreator
 import core.game.bots.SkillingBotAssembler
-import content.global.bots.*
 import core.game.node.entity.combat.CombatStyle
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -108,6 +108,14 @@ class ImmerseWorld : StartupListener {
 
         fun immerseBarbarianVillage() {
             GeneralBotCreator(
+                BarbarianKiller(),
+                CombatBotAssembler().produce(
+                    CombatBotAssembler.Type.values().random(),
+                    CombatBotAssembler.Tier.MED,
+                    Location.create(3082, 3423, 0)
+                ),
+            )
+            GeneralBotCreator(
                 BarbarianSalmon(),
                 skillingBotAssembler.produce(
                     SkillingBotAssembler.Wealth.values().random(),
@@ -119,6 +127,13 @@ class ImmerseWorld : StartupListener {
                 skillingBotAssembler.produce(
                     SkillingBotAssembler.Wealth.values().random(),
                     Location.create(3105, 3434, 0),
+                ),
+            )
+            GeneralBotCreator(
+                BarbarianSalmon(),
+                skillingBotAssembler.produce(
+                    SkillingBotAssembler.Wealth.values().random(),
+                    Location.create(3103, 3433, 0),
                 ),
             )
             GeneralBotCreator(

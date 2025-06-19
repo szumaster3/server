@@ -14,10 +14,7 @@ class FOGGlovesListener : InteractionListener {
         private val FOG_GLOVES = (Items.IRIT_GLOVES_12856..Items.EARTH_RUNECRAFTING_GLOVES_12865).toIntArray()
 
         @JvmStatic
-        fun updateCharges(
-            player: Player,
-            charges: Int = 1,
-        ): Int {
+        fun updateCharges(player: Player, charges: Int = 1): Int {
             val gloves = getItemFromEquipment(player, EquipmentSlot.HANDS) ?: return 0
             gloves.charge = min(gloves.charge, MAX_CHARGES[gloves.id - Items.IRIT_GLOVES_12856])
             if (gloves.charge - charges <= 0) {

@@ -27,28 +27,22 @@ class BeerOnAliPlugin : InteractionListener {
                     when (random) {
                         0 -> sendChat(with.asNpc(), "I've got a lovely bunch of coconuts, doobidy doo.")
                         1 -> sendNPCDialogue(player, NPCs.DRUNKEN_ALI_1863, "Thank you my friend - now if you don't mind I'm having a conversation with my imaginary friend Bob here.")
-
                         2 -> {
-                            sendChat(with.asNpc(), "Did you hear the one about the man who walked into a bar?").also {
-                                runTask(player, 2) { sendChat(with.asNpc(), "He hurt his foot! Hah!") }
-                            }
+                            sendChat(with.asNpc(), "Did you hear the one about the man who walked into a bar?")
+                            sendChat(with.asNpc(), "He hurt his foot! Hah!", 2)
                         }
 
                         3 -> {
-                            sendChat(with.asNpc(), "Wha'? Are you lookin' at me? Are you lookin' at me?").also {
-                                runTask(player, 2) {
-                                    sendChat(with.asNpc(), "You know something? You're drunk, you are.")
-                                }
-                            }
+                            sendChat(with.asNpc(), "Wha'? Are you lookin' at me? Are you lookin' at me?")
+                            sendChat(with.asNpc(), "You know something? You're drunk, you are.", 2)
                         }
 
                         4 -> sendChat(with.asNpc(), "Why does nobody like me?")
                         5 -> sendChat(with.asNpc(), "Cheers for the beers!")
                         6 -> sendChat(with.asNpc(), "What you looking at.")
                         7 -> {
-                            sendChat(with.asNpc(), "Did you hear the one where the camel walks into the bar and orders a pint?.").also {
-                                runTask(player, 2) { sendChat(with.asNpc(), "The barman asks 'Why the long face!'") }
-                            }
+                            sendChat(with.asNpc(), "Did you hear the one where the camel walks into the bar and orders a pint?.")
+                            sendChat(with.asNpc(), "The barman asks 'Why the long face!'", 2)
                         }
                     }
                 }

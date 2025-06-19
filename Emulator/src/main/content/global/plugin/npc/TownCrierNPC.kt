@@ -19,7 +19,7 @@ class TownCrierNPC : NPCBehavior(NPCs.TOWN_CRIER_6135, NPCs.TOWN_CRIER_6136, NPC
     private val forceChat = forceChatAnimation.entries.toList()
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(100) < 15) {
+        if (RandomFunction.random(100) == 5) {
             self.walkingQueue.reset()
             val (chat, animation) = forceChat.random()
             animate(self, animation)

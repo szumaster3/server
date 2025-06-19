@@ -15,10 +15,8 @@ import core.api.interaction.openDepositBox
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.IdleAbstractNPC
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.skill.Skills
 import core.game.system.timer.impl.AntiMacro
 import core.game.worldevents.events.HolidayRandomEventNPC
 import core.game.worldevents.events.HolidayRandomEvents
@@ -26,12 +24,11 @@ import core.game.worldevents.events.HolidayRandoms
 import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.NPCs
-import org.rs.consts.Scenery
 
 class NPCListener : InteractionListener {
+
     val PEER_THE_SEER = NPCs.PEER_THE_SEER_1288
     val BARCRAWL_NPC = intArrayOf(NPCs.BARTENDER_733, NPCs.BLURBERRY_848, NPCs.BARTENDER_735, NPCs.BARTENDER_739, NPCs.BARTENDER_737, NPCs.BARTENDER_738, NPCs.BARTENDER_731, NPCs.ZAMBO_568, NPCs.KAYLEE_3217, NPCs.EMILY_736, NPCs.BARTENDER_734)
-    val DUMMY_ID = intArrayOf(Scenery.DUMMY_2038, Scenery.DUMMY_15624, Scenery.DUMMY_15625, Scenery.DUMMY_15626, Scenery.DUMMY_15627, Scenery.DUMMY_15628, Scenery.DUMMY_15629, Scenery.DUMMY_15630, Scenery.DUMMY_18238, Scenery.DUMMY_25648, Scenery.DUMMY_PAWYA_CORPSE_28912, Scenery.DUMMY_823, Scenery.DUMMY_23921)
 
     override fun defineListeners() {
 
@@ -45,50 +42,12 @@ class NPCListener : InteractionListener {
         }
 
         /*
-         * Handles interaction with dummies.
-         */
-
-        on(DUMMY_ID, IntType.SCENERY, "attack", "hit") { player, _ ->
-            lock(player, 3)
-            animate(player, player.properties.attackAnimation)
-            if (player.properties.currentCombatLevel < 8) {
-                var experience = 5.0
-                when (player.properties.attackStyle.style) {
-                    WeaponInterface.STYLE_ACCURATE -> rewardXP(player, Skills.ATTACK, experience)
-                    WeaponInterface.STYLE_AGGRESSIVE -> rewardXP(player, Skills.STRENGTH, experience)
-                    WeaponInterface.STYLE_DEFENSIVE -> rewardXP(player, Skills.DEFENCE, experience)
-                    WeaponInterface.STYLE_CONTROLLED -> {
-                        experience /= 3.0
-                        rewardXP(player, Skills.ATTACK, experience)
-                        rewardXP(player, Skills.STRENGTH, experience)
-                        rewardXP(player, Skills.DEFENCE, experience)
-                    }
-                }
-            } else {
-                sendMessage(player, "You swing at the dummy.")
-                sendMessage(player, "There is nothing more you can learn from hitting a dummy.")
-            }
-            return@on true
-        }
-
-        /*
          * Handles banking interaction with Peer the seer NPC.
          */
 
         on(PEER_THE_SEER, IntType.NPC, "deposit") { player, _ ->
-            if (!anyInEquipment(
-                    player,
-                    Items.FREMENNIK_SEA_BOOTS_1_14571,
-                    Items.FREMENNIK_SEA_BOOTS_2_14572,
-                    Items.FREMENNIK_SEA_BOOTS_3_14573,
-                )
-            ) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.PEER_THE_SEER_1288,
-                    "Do not pester me, outerlander! I will only deposit items into the banks of those who have earned Fremennik sea boots!",
-                    FaceAnim.ANNOYED,
-                )
+            if (!anyInEquipment(player, Items.FREMENNIK_SEA_BOOTS_1_14571, Items.FREMENNIK_SEA_BOOTS_2_14572, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
+                sendNPCDialogue(player, NPCs.PEER_THE_SEER_1288, "Do not pester me, outerlander! I will only deposit items into the banks of those who have earned Fremennik sea boots!", FaceAnim.ANNOYED)
                 return@on true
             }
 

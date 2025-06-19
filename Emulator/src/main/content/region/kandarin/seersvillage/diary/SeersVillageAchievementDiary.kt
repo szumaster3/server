@@ -40,35 +40,11 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         private val SEERS_COURTHOUSE_AREA = ZoneBorders(2732, 3467, 2739, 3471)
         private val RANGING_GUILD_LOCATION = Location(2657, 3439)
 
-        private val COMBAT_BRACELETS =
-            arrayOf(
-                Items.COMBAT_BRACELET_11126,
-                Items.COMBAT_BRACELET4_11118,
-                Items.COMBAT_BRACELET3_11120,
-                Items.COMBAT_BRACELET2_11122,
-                Items.COMBAT_BRACELET1_11124,
-            )
-
-        private val RANGING_GUILD_ARCHERS =
-            arrayOf(NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689, NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691)
-        private val WORKSHOP_ELEMENTALS =
-            arrayOf(
-                NPCs.FIRE_ELEMENTAL_1019,
-                NPCs.EARTH_ELEMENTAL_1020,
-                NPCs.AIR_ELEMENTAL_1021,
-                NPCs.WATER_ELEMENTAL_1022,
-            )
-
+        private val COMBAT_BRACELETS = arrayOf(Items.COMBAT_BRACELET_11126, Items.COMBAT_BRACELET4_11118, Items.COMBAT_BRACELET3_11120, Items.COMBAT_BRACELET2_11122, Items.COMBAT_BRACELET1_11124)
+        private val RANGING_GUILD_ARCHERS = arrayOf(NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689, NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691)
+        private val WORKSHOP_ELEMENTALS = arrayOf(NPCs.FIRE_ELEMENTAL_1019, NPCs.EARTH_ELEMENTAL_1020, NPCs.AIR_ELEMENTAL_1021, NPCs.WATER_ELEMENTAL_1022)
         private val CHURN_PRODUCT = arrayOf(Items.CHEESE_1985, Items.POT_OF_CREAM_2130, Items.PAT_OF_BUTTER_6697)
-        private val RANGING_GUILD_STOCK =
-            arrayOf(
-                Items.BARB_BOLTTIPS_47,
-                Items.RUNE_ARROW_892,
-                Items.GREEN_DHIDE_BODY_1135,
-                Items.ADAMANT_JAVELIN_829,
-                Items.STUDDED_BODY_1133,
-                Items.COIF_1169,
-            )
+        private val RANGING_GUILD_STOCK = arrayOf(Items.BARB_BOLTTIPS_47, Items.RUNE_ARROW_892, Items.GREEN_DHIDE_BODY_1135, Items.ADAMANT_JAVELIN_829, Items.STUDDED_BODY_1133, Items.COIF_1169)
 
         object EasyTasks {
             const val PICK_5_FLAX = 0
@@ -313,16 +289,6 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         event: DialogueOptionSelectionEvent,
     ) {
         when (event.dialogue) {
-            is ChaliceOnKingPlugin.PoisonChaliceOnKingArthurDialogue -> {
-                if (event.currentStage == 4) {
-                    finishTask(
-                        player,
-                        DiaryLevel.EASY,
-                        EasyTasks.TAKE_POISON_TO_KING_ARTHUR,
-                    )
-                }
-            }
-
             is ThormacDialogue -> {
                 if (isQuestComplete(player, Quests.SCORPION_CATCHER) && event.currentStage == 4) {
                     finishTask(
