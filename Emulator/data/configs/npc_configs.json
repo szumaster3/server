@@ -59676,6 +59676,21 @@
     "attack_level": "17"
   },
   {
+    "examine": "A slayer slain.",
+    "name": "Catolax",
+    "id": "7782"
+  },
+  {
+    "examine": "A slayer slain.",
+    "name": "Catolax",
+    "id": "7783"
+  },
+  {
+    "examine": "A slayer slain.",
+    "name": "Catolax",
+    "id": "7784"
+  },
+  {
     "examine": "A big, scary hand!",
     "melee_animation": "1802",
     "attack_speed": "6",

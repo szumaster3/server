@@ -102,21 +102,21 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
             "necklace" in name -> "necklace's"
             else -> "amulet's"
         }
-        val jewelleryUsesStr = nextID.name.replace("[^\\d-]|-(?=\\D)".toRegex(), "")
+
+        val j = nextID.name.replace("[^\\d-]|-(?=\\D)".toRegex(), "")
+        val message = if (j.isNotEmpty() && nextID.id != Items.RING_OF_SLAYING1_13288) {
+            "Your ${getJewelleryType(item)} has ${Util.convert(j.toInt())} uses left."
+        } else {
+            "You use your $jewelleryName last charge."
+        }
 
         if (isLastItemIndex(itemIndex)) {
             if (crumbled) crumbleJewellery(player, item, isEquipped)
         } else {
             replaceJewellery(player, item, nextID, isEquipped)
         }
-
-        val message = if (jewelleryUsesStr.isNotEmpty()) {
-            "Your ${getJewelleryType(item)} has ${Util.convert(jewelleryUsesStr.toInt())} uses left."
-        } else {
-            "You use your $jewelleryName last charge."
-        }
-        sendMessage(player, message)
         unlock(player)
+        sendMessage(player, message)
         player.dispatch(TeleportEvent(TeleportManager.TeleportType.NORMAL, TeleportMethod.JEWELRY, item, location))
     }
 
@@ -134,7 +134,7 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
     /**
      * Crumbles the jewellery item and removes it from the inventory.
      */
-    private fun crumbleJewellery(player: Player, item: Item, isEquipped: Boolean, ) {
+    private fun crumbleJewellery(player: Player, item: Item, isEquipped: Boolean) {
         if (isEquipped) {
             removeItem(player, item, Container.EQUIPMENT)
         } else {
