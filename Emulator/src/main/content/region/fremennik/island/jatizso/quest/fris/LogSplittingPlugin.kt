@@ -1,4 +1,4 @@
-package content.region.fremennik.island.neitiznot.plugin
+package content.region.fremennik.island.jatizso.quest.fris
 
 import content.data.items.SkillingTool
 import core.api.*
@@ -19,27 +19,35 @@ class LogSplittingPlugin : InteractionListener {
     override fun defineListeners() {
 
         /*
-         * Handles split arctic pine logs & creating fremennik shield.
+         * Handles cut option on the woodcutting stump.
          */
 
         on(Scenery.WOODCUTTING_STUMP_21305, IntType.SCENERY, "cut-wood") { player, _ ->
             logCutting(player)
             return@on true
         }
-        onUseWith(IntType.SCENERY, ARCTIC_PINE_LOG, Scenery.WOODCUTTING_STUMP_21305) { player, used, _ ->
+
+        /*
+         * Handles using arctic pine log on the woodcutting stump.
+         */
+
+        onUseWith(IntType.SCENERY, ARCTIC_PINE_LOG, Scenery.WOODCUTTING_STUMP_21305) { player, _, _ ->
             logCutting(player)
             return@onUseWith true
         }
     }
 
+    /**
+     * Log cutting & shield crafting pulse.
+     */
     private fun logCutting(player: Player) {
         if (getStatLevel(player, Skills.WOODCUTTING) < 54) {
-            sendMessage(player, "You need a woodcutting level of 54 in order to do this.")
+            sendMessage(player, "You need a Woodcutting level of 54 to do this.")
             return
         }
 
-        if (!inInventory(player, Items.ARCTIC_PINE_LOGS_10810)) {
-            sendMessage(player, "You don't have required items in your inventory.")
+        if (!inInventory(player, ARCTIC_PINE_LOG)) {
+            sendMessage(player, "You don't have the required items in your inventory.")
             return
         }
 
@@ -48,11 +56,10 @@ class LogSplittingPlugin : InteractionListener {
             create { id, amount ->
                 submitIndividualPulse(
                     player,
-                    if (id == FREMENNIK_SHIELD) {
-                        FremennikShieldPulse(player, Item(ARCTIC_PINE_LOG), amount)
-                    } else {
-                        LogCuttingPulse(player, Item(ARCTIC_PINE_LOG), amount)
-                    },
+                    when (id) {
+                        FREMENNIK_SHIELD -> FremennikShieldPulse(player, Item(ARCTIC_PINE_LOG), amount)
+                        else -> LogCuttingPulse(player, Item(ARCTIC_PINE_LOG), amount)
+                    }
                 )
             }
 
@@ -69,12 +76,15 @@ class LogSplittingPlugin : InteractionListener {
     }
 }
 
-
+/**
+ * Handles split pine pulse.
+ */
 private class LogCuttingPulse(
     player: Player?,
     node: Item?,
     var amount: Int,
 ) : SkillPulse<Item?>(player, null) {
+
     private val arcticPineLog = Items.ARCTIC_PINE_LOGS_10810
     private val splitLog: Item = Item(Items.SPLIT_LOG_10812)
     private val splittingAnimation = Animation(Animations.HUMAN_SPLIT_LOGS_5755)
@@ -115,6 +125,9 @@ private class LogCuttingPulse(
     }
 }
 
+/**
+ * Handles creating round shield pulse.
+ */
 private class FremennikShieldPulse(
     player: Player?,
     node: Item,

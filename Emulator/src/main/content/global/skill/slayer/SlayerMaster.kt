@@ -50,6 +50,7 @@ enum class SlayerMaster(
         Task(Tasks.SPIDERS, 6),
         Task(Tasks.WOLVES, 7),
         Task(Tasks.ZOMBIES, 7),
+      //Task(Tasks.ICE_TROLLS, 8),
     ),
 
     /**
@@ -202,6 +203,7 @@ enum class SlayerMaster(
         Task(Tasks.SPIRTUAL_MAGES, 4),
         Task(Tasks.STEEL_DRAGONS, 9),
         Task(Tasks.TROLLS, 11),
+        Task(Tasks.ICE_TROLLS, 11),
         Task(Tasks.TUROTHS, 10),
         Task(Tasks.ZYGOMITES, 7),
     ),
@@ -242,6 +244,7 @@ enum class SlayerMaster(
         Task(Tasks.SPIRTUAL_MAGES, 10),
         Task(Tasks.SPIRTUAL_WARRIORS, 10),
         Task(Tasks.TROLLS, 10),
+        Task(Tasks.ICE_TROLLS, 10),
         Task(Tasks.TUROTHS, 15),
         Task(Tasks.VAMPIRES, 10),
     ),

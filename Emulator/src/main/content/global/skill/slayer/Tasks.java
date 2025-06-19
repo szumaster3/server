@@ -210,6 +210,10 @@ public enum Tasks {
      */
     ICE_GIANTS(50, new int[]{NPCs.ICE_GIANT_111, NPCs.ICE_GIANT_3072, NPCs.ICE_GIANT_4685, NPCs.ICE_GIANT_4686, NPCs.ICE_GIANT_4687}, new String[]{"Ice Giants often wield large weapons, learn to recognise", "what kind of weapon it is, and act accordingly"}, 1, false, false),
     /**
+     * The Ice trolls.
+     */
+    ICE_TROLLS(60, new int[]{ NPCs.ICE_TROLL_RUNT_5473, NPCs.ICE_TROLL_RUNT_5521, NPCs.ICE_TROLL_RUNT_5525, NPCs.ICE_TROLL_MALE_5474, NPCs.ICE_TROLL_MALE_5522, NPCs.ICE_TROLL_MALE_5526, NPCs.ICE_TROLL_FEMALE_5475, NPCs.ICE_TROLL_FEMALE_5523, NPCs.ICE_TROLL_FEMALE_5527, NPCs.ICE_TROLL_GRUNT_5476, NPCs.ICE_TROLL_GRUNT_5524, NPCs.ICE_TROLL_GRUNT_5528}, new String[]{"Trolls have a crushing attack, it's bets to wear a high crushing defence."}, 1, false, false),
+    /**
      * The Ice warrior.
      */
     ICE_WARRIOR(45, new int[]{NPCs.ICE_WARRIOR_125, NPCs.ICE_WARRIOR_145, NPCs.ICE_WARRIOR_3073}, new String[]{"Ice warriors, are cold majestic creatures."}, 1, false, false),

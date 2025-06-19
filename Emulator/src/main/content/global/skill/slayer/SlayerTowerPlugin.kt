@@ -20,7 +20,6 @@ class SlayerTowerPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-
         on(sceneryIDs, IntType.SCENERY, "open", "close") { player, node ->
             when (node.id) {
                 Scenery.DOOR_4490, Scenery.DOOR_4487 ->

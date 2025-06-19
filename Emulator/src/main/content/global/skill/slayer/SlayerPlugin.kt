@@ -16,8 +16,8 @@ import org.rs.consts.Scenery
 import org.rs.consts.Sounds
 
 class SlayerPlugin : InteractionListener {
+
     companion object {
-        val NULL = -1
         private const val FADE_START = Components.FADE_TO_BLACK_115
         private const val FADE_END = Components.FADE_FROM_BLACK_170
         private const val TRAPDOOR = Scenery.TRAPDOOR_8783
@@ -25,19 +25,8 @@ class SlayerPlugin : InteractionListener {
         private const val STAIRS = Scenery.STAIRS_96
         private const val STAIRS_2 = Scenery.STAIRS_35121
         private const val CAVE_ENTRANCE = Scenery.CAVE_ENTRANCE_15767
-        private val CAVE_EXIT =
-            intArrayOf(Scenery.CAVE_15811, Scenery.CAVE_15812, Scenery.CAVE_23157, Scenery.CAVE_23158)
-        private val SWENS_DIG_LOCATIONS =
-            arrayOf(
-                Location(2749, 3733, 0),
-                Location(2748, 3733, 0),
-                Location(2747, 3733, 0),
-                Location(2747, 3734, 0),
-                Location(2747, 3735, 0),
-                Location(2747, 3736, 0),
-                Location(2748, 3736, 0),
-                Location(2749, 3736, 0),
-            )
+        private val CAVE_EXIT = intArrayOf(Scenery.CAVE_15811, Scenery.CAVE_15812, Scenery.CAVE_23157, Scenery.CAVE_23158)
+        private val SWENS_DIG_LOCATIONS = arrayOf(Location(2749, 3733, 0), Location(2748, 3733, 0), Location(2747, 3733, 0), Location(2747, 3734, 0), Location(2747, 3735, 0), Location(2747, 3736, 0), Location(2748, 3736, 0), Location(2749, 3736, 0))
     }
 
     override fun defineDestinationOverrides() {
@@ -50,29 +39,23 @@ class SlayerPlugin : InteractionListener {
     }
 
     private fun enterCavern(player: Player) {
-        queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
+        lock(player, 6)
+        sendMessage(player, "You dig a hole...")
+        openOverlay(player, FADE_START)
+        queueScript(player, 5, QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
-                    sendMessage(player, "You dig a hole...")
-                    openOverlay(player, FADE_START)
-                    return@queueScript delayScript(player, 3)
-                }
-
-                1 -> {
-                    closeOverlay(player)
-                    openInterface(player, FADE_END)
                     teleport(player, Location(2697, 10119, 0), TeleportManager.TeleportType.INSTANT)
-                    return@queueScript keepRunning(player)
+                    openInterface(player, FADE_END)
+                    keepRunning(player)
                 }
-
-                2 -> {
+                1 -> {
                     playAudio(player, Sounds.STUNNED_2727)
-                    visualize(player, NULL, Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
+                    sendGraphics(Graphics(80, 96), player.location)
                     sendMessage(player, "...And fall into a dark and slimy pit!")
-                    return@queueScript stopExecuting(player)
+                    stopExecuting(player)
                 }
-
-                else -> return@queueScript stopExecuting(player)
+                else -> stopExecuting(player)
             }
         }
     }
@@ -111,20 +94,11 @@ class SlayerPlugin : InteractionListener {
         }
 
         on(CAVE_EXIT, IntType.SCENERY, "exit") { player, node ->
-            when (node.id) {
-                Scenery.CAVE_23157, Scenery.CAVE_23158 ->
-                    teleport(
-                        player,
-                        Location(2729, 3733, 0),
-                        TeleportManager.TeleportType.INSTANT,
-                    )
-                else ->
-                    teleport(
-                        player,
-                        Location(3749, 2973, 0),
-                        TeleportManager.TeleportType.INSTANT,
-                    )
+            val destination = when (node.id) {
+                Scenery.CAVE_23157, Scenery.CAVE_23158 -> Location(2729, 3733, 0)
+                else -> Location(3749, 2973, 0)
             }
+            teleport(player, destination, TeleportManager.TeleportType.INSTANT)
             return@on true
         }
     }

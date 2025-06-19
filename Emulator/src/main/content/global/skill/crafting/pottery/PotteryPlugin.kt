@@ -1,6 +1,7 @@
 package content.global.skill.crafting.pottery
 
 import core.api.*
+import core.api.quest.isQuestComplete
 import core.cache.def.impl.SceneryDefinition
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.NodeUsageEvent
@@ -18,7 +19,9 @@ import core.plugin.Plugin
 import core.tools.StringUtils
 import org.rs.consts.Animations
 import org.rs.consts.Items
+import org.rs.consts.Quests
 import org.rs.consts.Scenery
+import java.util.*
 
 @Initializable
 class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
@@ -97,6 +100,13 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
 
             override fun handle(event: NodeUsageEvent): Boolean {
                 val player = event.player
+                val scenery = event.usedWith
+
+                if (scenery.id == Scenery.POTTERY_OVEN_4308 && isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    sendMessage(player, "Only Fremenniks may use this ${scenery.name.lowercase(Locale.getDefault())}.")
+                    return false
+                }
+
                 getSkillHandler(player).open()
                 return true
             }

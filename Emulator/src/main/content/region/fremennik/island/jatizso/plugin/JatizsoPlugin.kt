@@ -27,23 +27,26 @@ class JatizsoPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(GATES_CLOSED, IntType.SCENERY, "open") { _, node ->
-            DoorActionHandler.open(node.asScenery(), node.asScenery(), node.id + 1, node.id + 1, true, 500, false)
+        on(GATES_CLOSED, IntType.SCENERY, "open") { player, node ->
+            val scenery = node.asScenery()
+            DoorActionHandler.getSecondDoor(scenery, player)?.let { second ->
+                DoorActionHandler.open(scenery, second, scenery.id + 1, second.id + 1, true, 500, false)
+            }
             return@on true
         }
 
         on(GUARDS, IntType.NPC, "talk-to") { player, _ ->
             dialogue(player) {
-                npc(NPCs.GUARD_5491, FaceAnim.NEUTRAL, "Are you all right? Leftie?")
+                npc(NPCs.GUARD_5491, "Are you all right? Leftie?")
                 npc(NPCs.GUARD_5492, "No, I'm on the left.")
-                npc(NPCs.GUARD_5491, FaceAnim.NEUTRAL, "Only from your perspective. Someone entering the gate should call you Rightie, right Leftie?")
+                npc(NPCs.GUARD_5491, "Only from your perspective. Someone entering the gate should call you Rightie, right Leftie?")
                 npc(NPCs.GUARD_5492, "Right, Rightie. So you'd be Leftie not Rightie, right?")
-                npc(NPCs.GUARD_5491, FaceAnim.NEUTRAL, "That's right Leftie, that's right.")
+                npc(NPCs.GUARD_5491, "That's right Leftie, that's right.")
                 npc(NPCs.GUARD_5492, "Rightie-oh Rightie, or should I call you Leftie?")
-                npc(NPCs.GUARD_5491, FaceAnim.NEUTRAL, "No, Rightie's fine Leftie.")
+                npc(NPCs.GUARD_5491, "No, Rightie's fine Leftie.")
                 player(FaceAnim.ANGRY, "Aaagh! Enough! If either of you mention left or right in my presence I'll have to scream! Can I come through the gate?")
                 npc(NPCs.GUARD_5492, "Don't let us stop you.")
-                npc(NPCs.GUARD_5491, FaceAnim.NEUTRAL, "Yes, head right on in, sir.")
+                npc(NPCs.GUARD_5491, "Yes, head right on in, sir.")
                 player(FaceAnim.ANGRY, "You said it! You said it! ARRRRRRRRGH!")
             }
             return@on true

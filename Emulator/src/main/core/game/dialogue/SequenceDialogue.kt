@@ -304,15 +304,15 @@ object SequenceDialogue {
         }
 
         fun message(text: String) {
-            lines += dialogueLine(text)
+            lines += dialogueLine(*splitLines(text))
         }
 
         fun player(text: String) {
-            lines += playerLine(FaceAnim.HALF_GUILTY, text)
+            lines += playerLine(FaceAnim.HALF_GUILTY, *splitLines(text))
         }
 
         fun player(expression: FaceAnim?, text: String) {
-            lines += playerLine(expression, text)
+            lines += playerLine(expression, *splitLines(text))
         }
 
         fun player(expression: FaceAnim?, vararg text: String) {
@@ -324,19 +324,20 @@ object SequenceDialogue {
         }
 
         fun npc(npc: Entity, text: String) {
-            lines += npcLine(npc, FaceAnim.HALF_GUILTY, text)
+            lines += npcLine(npc, FaceAnim.HALF_GUILTY, *splitLines(text))
+        }
+
+        fun npc(npc: Entity, expression: FaceAnim?, text: String) {
+            lines += npcLine(npc, expression, *splitLines(text))
         }
 
         fun npc(npc: Entity, expression: FaceAnim?, vararg text: String) {
             lines += npcLine(npc, expression, *text)
         }
 
-        fun npc(npc: Entity, expression: FaceAnim?, text: String) {
-            lines += npcLine(npc, expression, text)
-        }
-
         fun npc(npcId: Int, expression: FaceAnim?, vararg text: String) {
-            lines += npcLine(NPC(npcId), expression, *text)
+            val split = text.flatMap { splitLines(it).toList() }.toTypedArray()
+            lines += npcLine(NPC(npcId), expression, *split)
         }
 
         fun npc(npc: Entity, vararg text: String) {
@@ -361,7 +362,7 @@ object SequenceDialogue {
         }
 
         fun item(itemId: Int, text: String) {
-            lines += itemLine(itemId, text)
+            lines += itemLine(itemId, *splitLines(text))
         }
 
         fun doubleItem(itemId1: Int, itemId2: Int, vararg text: String) {
@@ -369,7 +370,7 @@ object SequenceDialogue {
         }
 
         fun doubleItem(itemId1: Int, itemId2: Int, text: String) {
-            lines += doubleItemLine(itemId1, itemId2, text)
+            lines += doubleItemLine(itemId1, itemId2, *splitLines(text))
         }
 
         fun input(numeric: Boolean, prompt: String, handler: (Any, (Boolean) -> Unit) -> Unit) {

@@ -36,40 +36,24 @@ class RellekkaPlugin : InteractionListener, MapArea {
         private val DOWN2B: Location? = Location.create(2727, 3805, 1)
 
         private val STAIRS = intArrayOf(Scenery.STEPS_19690, Scenery.STEPS_19691)
-
         private const val TUNNEL = Scenery.TUNNEL_5008
         private const val ROCKSLIDE = Scenery.ROCKSLIDE_5847
         private const val LADDER = Scenery.LADDER_15116
+
+        private val OBJECTS = intArrayOf(Scenery.ANVIL_4306, Scenery.POTTER_S_WHEEL_4310, Scenery.SPINNING_WHEEL_4309, Scenery.FURNACE_4304, Scenery.POTTERY_OVEN_4308)
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
 
-    override fun onInteraction(entity: Entity, node: Node, option: Option): Boolean {
-        if (entity !is Player) return false
-        val player = entity.asPlayer()
-
-        when (node.id) {
-            Scenery.ANVIL_4306,
-            Scenery.POTTER_S_WHEEL_4310,
-            Scenery.SPINNING_WHEEL_4309,
-            Scenery.FURNACE_4304,
-            Scenery.POTTERY_OVEN_4308 -> {
-                sendMessage(player, "Only Fremenniks may use this ${node.name.lowercase(Locale.getDefault())}.")
-                return true
-            }
-
-            Scenery.TRAPDOOR_100 -> {
-                sendDialogueLines(player, "You try to open the trapdoor but it won't budge! It looks like the", "trapdoor can only be opened from the other side.")
-                return true
-            }
-        }
-
-        return false
-    }
 
     override fun defineListeners() {
         on(LADDER, IntType.SCENERY, "climb-down") { player, _ ->
             teleport(player, Location.create(2509, 10245, 0), TeleportManager.TeleportType.INSTANT)
+            return@on true
+        }
+
+        on(Scenery.TRAPDOOR_100, IntType.SCENERY, "open") { player, _ ->
+            sendDialogueLines(player, "You try to open the trapdoor but it won't budge! It looks like the", "trapdoor can only be opened from the other side.")
             return@on true
         }
 

@@ -61,26 +61,6 @@ interface MapArea : ContentInterface {
      */
     fun entityStep(entity: Entity, location: Location, lastLocation: Location) {}
 
-    /**
-     * Called when an entity interacts with a target in the area.
-     *
-     * @param entity The acting entity.
-     * @param node The target node.
-     * @param option The selected interaction option.
-     * @return True if the interaction was handled.
-     */
-    fun onInteraction(entity: Entity, node: Node, option: Option): Boolean = false
-
-    /**
-     * Called when a player uses an item with another node in the area.
-     *
-     * @param player The player performing the action.
-     * @param used The used item.
-     * @param with The target node.
-     * @return True if the action was handled.
-     */
-    fun onUseWith(player: Player?, used: Item?, with: Node?): Boolean = false
-
     companion object {
         /**
          * A map storing zone data for all map areas.
