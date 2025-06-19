@@ -12,7 +12,7 @@ import org.rs.consts.NPCs
 
 @Initializable
 class DwarfDialogue(player: Player? = null) : Dialogue(player) {
-    
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.OLD_NORMAL, "Welcome to the Mining Guild.", "Can I help you with anything?")
@@ -33,28 +33,27 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HALF_GUILTY, "What have you got in the guild?")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player(FaceAnim.HALF_GUILTY, "What do you dwarves do with the ore you mine?")
-                        stage = 20
-                    }
-
-                    3 -> {
-                        player(FaceAnim.HALF_GUILTY, "Can you tell me about your skillcape?")
-                        stage = 40
-                    }
-
-                    4 -> {
-                        player(FaceAnim.HALF_GUILTY, "No thanks, I'm fine.")
-                        stage = 30
-                    }
+            1 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HALF_GUILTY, "What have you got in the guild?")
+                    stage = 10
                 }
+
+                2 -> {
+                    player(FaceAnim.HALF_GUILTY, "What do you dwarves do with the ore you mine?")
+                    stage = 20
+                }
+
+                3 -> {
+                    player(FaceAnim.HALF_GUILTY, "Can you tell me about your skillcape?")
+                    stage = 40
+                }
+
+                4 -> {
+                    player(FaceAnim.HALF_GUILTY, "No thanks, I'm fine.")
+                    stage = 30
+                }
+            }
 
             20 -> {
                 npc(
@@ -114,34 +113,32 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 41
             }
 
-            41 ->
-                if (player.getSkills().getStaticLevel(Skills.MINING) < 99) {
-                    sendDialogueOptions(
-                        player,
-                        "What would you like to say?",
-                        "What have you got in the Guild?",
-                        "What do you dwarves do with the ore you mine?",
-                        "Can you tell me about your skillcape?",
-                        "No thanks, I'm fine.",
-                    )
-                    stage = 1
-                } else {
-                    options("I'd like to buy a Skillcape of Mining.", "Goodbye.")
-                    stage = 43
+            41 -> if (player.getSkills().getStaticLevel(Skills.MINING) < 99) {
+                sendDialogueOptions(
+                    player,
+                    "What would you like to say?",
+                    "What have you got in the Guild?",
+                    "What do you dwarves do with the ore you mine?",
+                    "Can you tell me about your skillcape?",
+                    "No thanks, I'm fine.",
+                )
+                stage = 1
+            } else {
+                options("I'd like to buy a Skillcape of Mining.", "Goodbye.")
+                stage = 43
+            }
+
+            43 -> when (buttonId) {
+                1 -> {
+                    player("I'd like to buy a Skillcape of Mining.")
+                    stage = 45
                 }
 
-            43 ->
-                when (buttonId) {
-                    1 -> {
-                        player("I'd like to buy a Skillcape of Mining.")
-                        stage = 45
-                    }
-
-                    2 -> {
-                        player("Goodbye.")
-                        stage = 44
-                    }
+                2 -> {
+                    player("Goodbye.")
+                    stage = 44
                 }
+            }
 
             45 -> {
                 npc(FaceAnim.OLD_NORMAL, "It will cost you 99,000 gold coins, are you sure?")
@@ -153,15 +150,14 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 47
             }
 
-            47 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Yes.")
-                        stage = 48
-                    }
-
-                    2 -> end()
+            47 -> when (buttonId) {
+                1 -> {
+                    player("Yes.")
+                    stage = 48
                 }
+
+                2 -> end()
+            }
 
             48 -> {
                 if (!player.inventory.containsItem(COINS)) {
@@ -178,8 +174,9 @@ class DwarfDialogue(player: Player? = null) : Dialogue(player) {
                     end()
                     return true
                 }
-                if (player.inventory.remove(COINS) &&
-                    player.inventory.add(ITEMS[if (player.getSkills().masteredSkills > 1) 1 else 0], ITEMS[2])
+                if (player.inventory.remove(COINS) && player.inventory.add(
+                        ITEMS[if (player.getSkills().masteredSkills > 1) 1 else 0], ITEMS[2]
+                    )
                 ) {
                     npc(FaceAnim.OLD_NORMAL, "Thanks!")
                     stage = 49

@@ -16,28 +16,12 @@ import org.rs.consts.NPCs
 class KlenterDialogue(player: Player? = null) : Dialogue(player) {
 
     val forceChat = arrayOf("Agghhh!", "Aieee!", "Waghhhh!", "Wooo!")
-    val forceDialogue = arrayOf(
-        "You worm! May the Devourer take your soul.",
-        "Give me my guts back, thief.",
-        "You pathetic excuse for a thief.",
-        "Return what is mine.",
-        "Grave defiler.",
-        "Thief.",
-        "Evil doer.",
-        "Spawn of evil.",
-        "Graverobber.",
-        "Organ snatcher.",
-    )
+    private val forceDialogue = arrayOf("You worm! May the Devourer take your soul.", "Give me my guts back, thief.", "You pathetic excuse for a thief.", "Return what is mine.", "Grave defiler.", "Thief.", "Evil doer.", "Spawn of evil.", "Graverobber.", "Organ snatcher.")
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
-            sendDialogue(
-                player,
-                "The spirit tries to converse with you, but it makes no sense. All you can understand from him is his deepest anger which is directed towards you.",
-            ).also {
-                stage = END_DIALOGUE
-            }
+            sendDialogue(player, "The spirit tries to converse with you, but it makes no sense. All you can understand from him is his deepest anger which is directed towards you.").also { stage = END_DIALOGUE }
         } else {
             npc(FaceAnim.ANGRY, "You foul thief, return what is mine.")
         }

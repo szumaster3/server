@@ -21,14 +21,7 @@ class WorkmanDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npc(FaceAnim.ANNOYED, "What do you want? I've got work to do!").also { stage++ }
             1 -> player(FaceAnim.ASKING, "Can you teach me anything?").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.ANNOYED,
-                    "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            2 -> npcl(FaceAnim.ANNOYED, "No - I've got one lousy apprentice already, and that's quite enough hassle! Go away!").also { stage = END_DIALOGUE }
         }
         return true
     }

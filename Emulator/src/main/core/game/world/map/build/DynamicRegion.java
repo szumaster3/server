@@ -284,7 +284,6 @@ public final class DynamicRegion extends Region {
 
     /**
      * Rotates the region 90% clockwise.
-     * TODO: Finish this
      */
     public void rotate() {
         for (int z = 0; z < 4; z++) {
@@ -293,7 +292,7 @@ public final class DynamicRegion extends Region {
                 for (int y = 0; y < 8; y++) {
                     RegionChunk r = chunks[z][x][y] = c[8 - y - 1][x];
                     if (r != null) {
-                        r.setRotation(r.getRotation() + 1);
+                        r.setRotation((r.getRotation() + 1) % 4);
                     }
                 }
             }

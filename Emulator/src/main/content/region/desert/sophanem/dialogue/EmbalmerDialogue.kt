@@ -11,7 +11,6 @@ import org.rs.consts.NPCs
 @Initializable
 class EmbalmerDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var item = 0
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         playerl(FaceAnim.FRIENDLY, "Hi.")

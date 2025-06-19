@@ -20,15 +20,13 @@ class WayneDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes please.", "No thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.WAYNE_581)
-                    }
-
-                    2 -> end()
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.WAYNE_581)
                 }
+                2 -> end()
+            }
         }
         return true
     }

@@ -16,17 +16,14 @@ class GardenSupplierDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        componentId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(componentId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> sendDialogueOptions(player, "Select one", "Yes, please!", "No, thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("Yes, please!").also { stage++ }
-                    2 -> player("No, thanks.").also { stage = END_DIALOGUE }
-                }
+            1 -> when (buttonId) {
+                1 -> player("Yes, please!").also { stage++ }
+                2 -> player("No, thanks.").also { stage = END_DIALOGUE }
+            }
+
             2 -> {
                 end()
                 openNpcShop(player, NPCs.GARDEN_SUPPLIER_4251)

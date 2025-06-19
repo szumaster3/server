@@ -23,11 +23,10 @@ class SarahFarmingDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player(FaceAnim.HALF_GUILTY, "Hi!").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "Would you like to see what I have in stock?").also { stage++ }
             2 -> options("Yes please.", "No, thank you.").also { stage++ }
-            3 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HALF_GUILTY, "Yes please.").also { stage++ }
-                    2 -> player(FaceAnim.HALF_GUILTY, "No, thank you.").also { stage = END_DIALOGUE }
-                }
+            3 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "Yes please.").also { stage++ }
+                2 -> player(FaceAnim.HALF_GUILTY, "No, thank you.").also { stage = END_DIALOGUE }
+            }
             4 -> {
                 end()
                 openNpcShop(player, NPCs.SARAH_2304)

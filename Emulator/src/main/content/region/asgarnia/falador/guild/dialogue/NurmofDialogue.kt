@@ -15,49 +15,32 @@ class NurmofDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(
-            FaceAnim.OLD_NORMAL,
-            "Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?",
-        )
+        npcl(FaceAnim.OLD_NORMAL, "Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                options(
-                    "Yes, please.",
-                    "No, thank you.",
-                    "Are your pickaxes better than other pickaxes, then?",
-                ).also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.NURMOF_594)
-                    }
-                    2 -> player(FaceAnim.FRIENDLY, "No thank you.").also { stage = 99 }
-                    3 ->
-                        player(FaceAnim.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also {
-                            stage =
-                                10
-                        }
+            0 -> options("Yes, please.", "No, thank you.", "Are your pickaxes better than other pickaxes, then?").also { stage++ }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.NURMOF_594)
                 }
+                2 -> player(FaceAnim.FRIENDLY, "No thank you.").also { stage = 13 }
+                3 -> player(FaceAnim.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also { stage = 10 }
+            }
+            10 -> npcl(FaceAnim.OLD_NORMAL, "Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
+                if (!getAttribute(player, "pre-dq:said-hi", true)) {
+                    stage++
+                } else {
+                    stage = 13
+                }
+            }
 
-            10 ->
-                npcl(
-                    FaceAnim.OLD_NORMAL,
-                    "Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.",
-                ).also {
-                    if (!getAttribute(player, "pre-dq:said-hi", true)) {
-                        stage++
-                    } else {
-                        stage = 99
-                    }
-                }
             11 -> playerl(FaceAnim.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
-            12 -> npcl(FaceAnim.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 99 }
-            99 -> {
+            12 -> npcl(FaceAnim.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 13 }
+            13 -> {
                 setAttribute(player, "pre-dq:said-hi", true)
                 end()
             }

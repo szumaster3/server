@@ -34,50 +34,32 @@ class RisingSunInnBartenderDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             START_DIALOGUE -> {
                 if (hasAnyBeerGlasses()) {
-                    showTopics(
-                        Topic(FaceAnim.ASKING, "What ales are you serving?", 10),
-                        Topic(FaceAnim.HAPPY, "I've got some beer glasses...", 20),
-                    )
+                    showTopics(Topic(FaceAnim.ASKING, "What ales are you serving?", 10), Topic(FaceAnim.HAPPY, "I've got some beer glasses...", 20))
                 } else {
                     playerl(FaceAnim.ASKING, "What ales are you serving?").also { stage = 10 }
                 }
             }
-            10 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Well, we've got Asgarnian Ale, Wizard's Mind Bomb and Dwarven Stout. " + "Each for only 3 coins.",
-                ).also { stage++ }
-            11 ->
-                showTopics(
-                    Topic(FaceAnim.HAPPY, "One Asgarnian Ale, please.", 12),
-                    Topic(FaceAnim.HAPPY, "I'll try the Mind Bomb.", 13),
-                    Topic(FaceAnim.ASKING, "Can I have a Dwarven Stout?", 14),
-                    Topic(FaceAnim.NEUTRAL, "I don't feel like any of those.", END_DIALOGUE),
-                )
-            12 ->
-                if (ensureHasMoney()) {
-                    purchaseBrew(Items.ASGARNIAN_ALE_1905)
-                }
-            13 ->
-                if (ensureHasMoney()) {
-                    purchaseBrew(Items.WIZARDS_MIND_BOMB_1907)
-                }
-            14 ->
-                if (ensureHasMoney()) {
-                    purchaseBrew(Items.DWARVEN_STOUT_1913)
-                }
-            20 ->
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Oh, we will buy those from you if you're interested. We offer 2 coins for each glass.",
-                ).also {
-                    stage++
-                }
-            21 ->
-                showTopics(
-                    Topic(FaceAnim.HAPPY, "Yes, please!", 22),
-                    Topic(FaceAnim.NEUTRAL, "No thanks, I like my empty beer glasses.", END_DIALOGUE),
-                )
+            10 -> npcl(FaceAnim.FRIENDLY, "Well, we've got Asgarnian Ale, Wizard's Mind Bomb and Dwarven Stout. " + "Each for only 3 coins.").also { stage++ }
+            11 -> showTopics(
+                Topic(FaceAnim.HAPPY, "One Asgarnian Ale, please.", 12),
+                Topic(FaceAnim.HAPPY, "I'll try the Mind Bomb.", 13),
+                Topic(FaceAnim.ASKING, "Can I have a Dwarven Stout?", 14),
+                Topic(FaceAnim.NEUTRAL, "I don't feel like any of those.", END_DIALOGUE),
+            )
+            12 -> if (ensureHasMoney()) {
+                purchaseBrew(Items.ASGARNIAN_ALE_1905)
+            }
+            13 -> if (ensureHasMoney()) {
+                purchaseBrew(Items.WIZARDS_MIND_BOMB_1907)
+            }
+            14 -> if (ensureHasMoney()) {
+                purchaseBrew(Items.DWARVEN_STOUT_1913)
+            }
+            20 -> npcl(FaceAnim.HALF_GUILTY, "Oh, we will buy those from you if you're interested. We offer 2 coins for each glass.").also { stage++ }
+            21 -> showTopics(
+                Topic(FaceAnim.HAPPY, "Yes, please!", 22),
+                Topic(FaceAnim.NEUTRAL, "No thanks, I like my empty beer glasses.", END_DIALOGUE),
+            )
             22 -> {
                 trySellAllBeerGlasses()
                 npcl(FaceAnim.FRIENDLY, "There you go!").also { stage = END_DIALOGUE }
@@ -87,12 +69,9 @@ class RisingSunInnBartenderDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray =
-        intArrayOf(
-            NPCs.EMILY_736,
-            NPCs.KAYLEE_3217,
-            NPCs.TINA_3218
-        )
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.EMILY_736, NPCs.KAYLEE_3217, NPCs.TINA_3218
+    )
 
     /**
      * Checks whether the player has at least 3 coins.
@@ -138,7 +117,8 @@ class RisingSunInnBartenderDialogue(player: Player? = null) : Dialogue(player) {
      *
      * @return true if they have either regular or noted beer glasses.
      */
-    private fun hasAnyBeerGlasses() = inInventory(player, Items.BEER_GLASS_1919) || inInventory(player, Items.BEER_GLASS_1920)
+    private fun hasAnyBeerGlasses() =
+        inInventory(player, Items.BEER_GLASS_1919) || inInventory(player, Items.BEER_GLASS_1920)
 
     /**
      * Attempts to sell all beer glasses from inventory.
