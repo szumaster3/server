@@ -14,9 +14,10 @@ import org.json.simple.JSONObject
 import org.rs.consts.Animations
 import org.rs.consts.Items
 
-class LyreTeleport(
-    val player: Player,
-) : Pulse() {
+/**
+ * Handles teleport using lyre.
+ */
+class LyreTeleport(val player: Player, ) : Pulse() {
     companion object {
         const val LYRE_TELEPORT_ALT = "/save:lyre-waterbirth-tp"
         val waterBirthIsland = Location(2544, 3759, 0)
@@ -48,8 +49,11 @@ class LyreTeleport(
             }
 
             6 -> {
-                if (inEquipment(player, Items.FREMENNIK_SEA_BOOTS_3_14573) &&
-                    getAttribute(player, LYRE_TELEPORT_ALT, false)
+                if (inEquipment(player, Items.FREMENNIK_SEA_BOOTS_3_14573) && getAttribute(
+                        player,
+                        LYRE_TELEPORT_ALT,
+                        false
+                    )
                 ) {
                     player.properties.teleportLocation = waterBirthIsland
                 } else {

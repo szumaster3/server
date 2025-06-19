@@ -228,7 +228,7 @@ class FremennikTrialsPlugin : InteractionListener {
                     sendNPCDialogue(
                         player,
                         NPCs.LONGHALL_BOUNCER_1278,
-                        "Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.",
+                        "Yeah you're good to go through. Olaf tells me you're some kind of Outlander bard here on tour. I doubt you're worse than Olaf is.",
                     )
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 }
@@ -356,7 +356,7 @@ class FremennikTrialsPlugin : InteractionListener {
                 player.dialogueInterpreter?.sendDialogues(
                     NPCs.THORVALD_THE_WARRIOR_1289,
                     FaceAnim.ANGRY,
-                    "Outerlander... do not test my patience. I do not take",
+                    "Outlander... do not test my patience. I do not take",
                     "kindly to people wandering in here and acting as though",
                     "they own the place.",
                 )

@@ -110,7 +110,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             13 ->
                 npcl(
                     FaceAnim.THINKING,
-                    "You need this to become a Fremennik, right? Well, you seem okay for an outerlander, it would be a shame to see you fail. You know Askeladden?",
+                    "You need this to become a Fremennik, right? Well, you seem okay for an Outlander, it would be a shame to see you fail. You know Askeladden?",
                 ).also { stage++ }
 
             14 -> playerl(FaceAnim.THINKING, "That kid outside? Sure.").also { stage++ }
@@ -197,7 +197,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             37 ->
                 npcl(
                     FaceAnim.SAD,
-                    "I know it is our custom to shun outerlanders and their ways, but I didn't find them as bad as the stories say.",
+                    "I know it is our custom to shun outlanders and their ways, but I didn't find them as bad as the stories say.",
                 ).also { stage++ }
 
             38 ->
@@ -209,7 +209,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             39 ->
                 npcl(
                     FaceAnim.SAD,
-                    "and that WE are the outerlanders, out here on the edge of the world...",
+                    "and that WE are the outlanders, out here on the edge of the world...",
                 ).also { stage++ }
 
             40 ->
@@ -221,7 +221,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             41 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "I wish you all the best of luck with your trials, outerlander.",
+                    "I wish you all the best of luck with your trials, Outlander.",
                 ).also { stage++ }
 
             42 ->
@@ -254,13 +254,13 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             60 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Hello yourself, outerlander. A little out of the way up here, aren't you?",
+                    "Hello yourself, Outlander. A little out of the way up here, aren't you?",
                 ).also { stage++ }
 
             61 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "I would love to stop and chat with you, but unfortunately we have a custom that no Fremennik may speak with the outerlanders without the permission of our chieftain. Don't take it personally.",
+                    "I would love to stop and chat with you, but unfortunately we have a custom that no Fremennik may speak with the outlanders without the permission of our chieftain. Don't take it personally.",
                 ).also { stage++ }
 
             62 ->
@@ -279,7 +279,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
             65 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Not a problem, outerlander. It's always nice to see a new face in the long hall; it happens so rarely.",
+                    "Not a problem, Outlander. It's always nice to see a new face in the long hall; it happens so rarely.",
                 ).also { stage = 1000 }
 
             66 -> {

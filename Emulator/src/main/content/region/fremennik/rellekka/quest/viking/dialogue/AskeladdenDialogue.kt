@@ -264,14 +264,14 @@ class AskeladdenDialogue(player: Player? = null) : Dialogue(player) {
             55 ->
                 npcl(
                     FaceAnim.CHILD_FRIENDLY,
-                    "Hey there, buddy. You're an outerlander, huh? I'm not really supposed to talk to you.",
+                    "Hey there, buddy. You're an Outlander, huh? I'm not really supposed to talk to you.",
                 ).also { stage++ }
 
             56 -> playerl(FaceAnim.ASKING, "Why not?").also { stage++ }
             57 ->
                 npcl(
                     FaceAnim.CHILD_THINKING,
-                    "I dunno buddy. Some stupid tradition or other. We're always told not to talk to outerlanders unless the Chieftain has allowed it.",
+                    "I dunno buddy. Some stupid tradition or other. We're always told not to talk to outlanders unless the Chieftain has allowed it.",
                 ).also { stage++ }
 
             58 -> playerl(FaceAnim.ASKING, "The Chieftain? Who is that?").also { stage++ }

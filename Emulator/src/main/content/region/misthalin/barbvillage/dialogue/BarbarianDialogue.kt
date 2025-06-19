@@ -13,7 +13,7 @@ class BarbarianDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.HALF_GUILTY, "What do you want, outerlander?")
+        npc(FaceAnim.HALF_GUILTY, "What do you want, Outlander?")
         return true
     }
 

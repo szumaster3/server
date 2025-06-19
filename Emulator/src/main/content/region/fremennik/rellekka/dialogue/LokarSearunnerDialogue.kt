@@ -50,7 +50,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
                         if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
                             npcl(
                                 FaceAnim.ANNOYED,
-                                "Don't talk to me outerlander! I don't have time for the likes of you!",
+                                "Don't talk to me Outlander! I don't have time for the likes of you!",
                             )
                             stage = 40
                         } else {
@@ -243,7 +243,7 @@ class LokarSearunnerDialogue(player: Player? = null) : Dialogue(player) {
                         if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
                             npcl(
                                 FaceAnim.ANNOYED,
-                                "Don't talk to me outerlander! I don't have time for the likes of you!",
+                                "Don't talk to me Outlander! I don't have time for the likes of you!",
                             )
                             stage = 41
                         } else {

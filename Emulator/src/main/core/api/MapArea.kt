@@ -65,11 +65,11 @@ interface MapArea : ContentInterface {
      * Called when an entity interacts with a target in the area.
      *
      * @param entity The acting entity.
-     * @param target The target node.
+     * @param node The target node.
      * @param option The selected interaction option.
      * @return True if the interaction was handled.
      */
-    fun entityInteraction(entity: Entity, target: Node, option: Option): Boolean = false
+    fun onInteraction(entity: Entity, node: Node, option: Option): Boolean = false
 
     /**
      * Called when a player uses an item with another node in the area.
@@ -79,7 +79,7 @@ interface MapArea : ContentInterface {
      * @param with The target node.
      * @return True if the action was handled.
      */
-    fun entityUseWith(player: Player?, used: Item?, with: Node?): Boolean = false
+    fun onUseWith(player: Player?, used: Item?, with: Node?): Boolean = false
 
     companion object {
         /**

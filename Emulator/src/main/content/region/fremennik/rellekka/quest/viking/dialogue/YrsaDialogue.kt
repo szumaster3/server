@@ -1,7 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
 import content.data.GameAttributes
-import content.region.fremennik.diary.YrsaDiaryDialogue
+import content.region.fremennik.diary.RellekkaYrsaDiaryDialogue
 import core.api.*
 import core.api.interaction.openNpcShop
 import core.api.quest.isQuestComplete
@@ -100,7 +100,7 @@ class YrsaDialogue(player: Player? = null) : Dialogue(player) {
             10 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Yes I do outerlander. Only the Chieftain may permit such a thing. Talk to him.",
+                    "Yes I do Outlander. Only the Chieftain may permit such a thing. Talk to him.",
                 ).also { stage = END_DIALOGUE }
 
             15 ->
@@ -154,7 +154,7 @@ class YrsaDialogue(player: Player? = null) : Dialogue(player) {
                             "and then give me the 500 coins.",
                         ).also { stage = 33 }
 
-                    3 -> openDialogue(player, YrsaDiaryDialogue()).also { stage = END_DIALOGUE }
+                    3 -> openDialogue(player, RellekkaYrsaDiaryDialogue()).also { stage = END_DIALOGUE }
                     4 -> playerl(FaceAnim.HAPPY, "Nothing, thanks.").also { stage++ }
                 }
 
@@ -177,7 +177,7 @@ class YrsaDialogue(player: Player? = null) : Dialogue(player) {
             35 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "I'm sorry outerlander, I cannot sell you any clothes. Our customs forbid it.",
+                    "I'm sorry Outlander, I cannot sell you any clothes. Our customs forbid it.",
                 ).also { stage = END_DIALOGUE }
 
             36 -> {

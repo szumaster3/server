@@ -70,13 +70,13 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            1 -> npcl(FaceAnim.THINKING, "Aye, I have a few in stock. What would an outerlander be wanting with equipment like that?").also { stage++ }
+            1 -> npcl(FaceAnim.THINKING, "Aye, I have a few in stock. What would an Outlander be wanting with equipment like that?").also { stage++ }
             2 -> playerl(FaceAnim.HAPPY, "It's for Sigli. It needs to be weighted precisely to suit his hunting bow.").also { stage++ }
             3 -> npcl(FaceAnim.HAPPY, "For Sigli eh? Well, I made his bow in the first place, so I'll be able to select the right string for you... just one small problem.").also { stage++ }
             4 -> playerl(FaceAnim.THINKING, "What's that?").also { stage++ }
             5 -> npcl(FaceAnim.THINKING, "This string you'll be wanting... Very special it is. Take a lot of time to recreate. Not sure you have the cash for it.").also { stage++ }
             6 -> playerl(FaceAnim.THINKING, "Then maybe you'll accept something else...?").also { stage++ }
-            7 -> npcl(FaceAnim.HAPPY, "Heh. Good thinking outerlander. Well, it's true, there is more to life than just making money. Making weapons is good money, but it's not why I do it. I'll tell you what.").also { stage++ }
+            7 -> npcl(FaceAnim.HAPPY, "Heh. Good thinking Outlander. Well, it's true, there is more to life than just making money. Making weapons is good money, but it's not why I do it. I'll tell you what.").also { stage++ }
             8 -> npcl(FaceAnim.HAPPY, "I heard a rumour that one of the fishermen down by the docks caught some weird looking fish as they were fishing the other day. From what I hear this fish is unique.").also { stage++ }
             9 -> npcl(FaceAnim.HAPPY, "From what I hear this fish is unique. Nobody's ever seen its like before. This intrigues me. I'd like to have it for myself.").also { stage++ }
 
@@ -88,7 +88,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
             15 -> npcl(FaceAnim.EXTREMELY_SHOCKED, "What? There's another one?").also { stage++ }
             16 -> playerl(FaceAnim.ANNOYED, "Er... no, it's the one for you that I'm looking for...").also { stage++ }
             17 -> npcl(FaceAnim.ANNOYED, "Ah. I see. I already told you. Some guy down by the docks was bragging. Best ask there, I reckon.").also { stage = END_DIALOGUE }
-            20 -> npcl(FaceAnim.HAPPY, "Ohh... That's a nice fish. Very pleased. Here. Take the bowstring. You fulfilled agreement. Only fair I do same. Good work outerlander.").also {
+            20 -> npcl(FaceAnim.HAPPY, "Ohh... That's a nice fish. Very pleased. Here. Take the bowstring. You fulfilled agreement. Only fair I do same. Good work Outlander.").also {
                 removeItem(player, Items.UNUSUAL_FISH_3703)
                 addItemOrDrop(player, Items.CUSTOM_BOW_STRING_3702, 1)
                 stage++
@@ -98,7 +98,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
             25 -> npcl(FaceAnim.HAPPY, "Not hard. Just a trick to it. Takes skill to learn, but when learnt, easy. Sigli will be happy. Finest bowstring on continent. Will suit his needs perfectly.").also { stage = END_DIALOGUE }
             26 -> npcl(FaceAnim.ANNOYED, "Not for me, I'm afraid.").also { stage = END_DIALOGUE }
 
-            100 -> npcl(FaceAnim.HAPPY, "Sorry. I can't sell weapons to outerlanders. Wouldn't be right. Against our beliefs.").also { stage = END_DIALOGUE }
+            100 -> npcl(FaceAnim.HAPPY, "Sorry. I can't sell weapons to outlanders. Wouldn't be right. Against our beliefs.").also { stage = END_DIALOGUE }
 
             101 -> {
                 if (anyInInventory(player, Items.DAGANNOTH_HIDE_6155, Items.ROCK_SHELL_CHUNK_6157, Items.ROCK_SHELL_SHARD_6159, Items.ROCK_SHELL_SPLINTER_6161)) {

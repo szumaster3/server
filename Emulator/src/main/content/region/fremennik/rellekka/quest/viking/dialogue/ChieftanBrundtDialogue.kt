@@ -48,22 +48,22 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) >= 7 -> {
-                npcl(FaceAnim.HAPPY, "Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
+                npcl(FaceAnim.HAPPY, "Greetings again Outlander! How goes your attempts to gain votes with the council of elders?")
                 stage = 545
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) in 3..6 -> {
-                npcl(FaceAnim.HAPPY, "Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
+                npcl(FaceAnim.HAPPY, "Greetings again Outlander! How goes your attempts to gain votes with the council of elders?")
                 stage = 540
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) == 1 -> {
-                npcl(FaceAnim.HAPPY, "Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
+                npcl(FaceAnim.HAPPY, "Greetings again Outlander! How goes your attempts to gain votes with the council of elders?")
                 stage = 535
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, -1) == 0 -> {
-                npcl(FaceAnim.HAPPY, "Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
+                npcl(FaceAnim.HAPPY, "Greetings again Outlander! How goes your attempts to gain votes with the council of elders?")
                 stage = 530
             }
 
@@ -94,7 +94,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             2 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "This place? Why, this is Relleka! Homeland of all Fremennik! I do not recognise your face outerlander; Where do you come from?",
+                    "This place? Why, this is Relleka! Homeland of all Fremennik! I do not recognise your face Outlander; Where do you come from?",
                 ).also {
                     stage++
                 }
@@ -102,7 +102,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             3 ->
                 playerl(
                     FaceAnim.HAPPY,
-                    "Hmmm... I will not press the issue then outerlander. How may my tribe and I help you?",
+                    "Hmmm... I will not press the issue then Outlander. How may my tribe and I help you?",
                 ).also {
                     stage =
                         0
@@ -111,16 +111,16 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             5 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Do not take it personally, outerlander! We are a simple people, and it is our experience that keeping ourselves to ourselves is best.",
+                    "Do not take it personally, Outlander! We are a simple people, and it is our experience that keeping ourselves to ourselves is best.",
                 ).also {
                     stage++
                 }
 
-            6 -> npcl(FaceAnim.HAPPY, "This is why speaking to outerlanders is forbidden.").also { stage++ }
+            6 -> npcl(FaceAnim.HAPPY, "This is why speaking to outlanders is forbidden.").also { stage++ }
             7 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "We do not wish to enter war with the outerlanders and their strange magics, so we limit all unauthorised communication.",
+                    "We do not wish to enter war with the outlanders and their strange magics, so we limit all unauthorised communication.",
                 ).also {
                     stage++
                 }
@@ -149,7 +149,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             15 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "Don't mock me outerlander; this helm has saved my life more times than I care to recall right now.",
+                    "Don't mock me Outlander; this helm has saved my life more times than I care to recall right now.",
                 ).also {
                     stage =
                         END_DIALOGUE
@@ -165,7 +165,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             301 -> {
-                npc("No, you would not be interested. Forget I said", "anything, outerlander.")
+                npc("No, you would not be interested. Forget I said", "anything, Outlander.")
                 stage++
             }
 
@@ -190,7 +190,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             310 -> {
                 npc(
                     "You would? These are unusual sentiments to hear from",
-                    "an outerlander! My suggestion was going to be that if",
+                    "an Outlander! My suggestion was going to be that if",
                     "you crave adventure and battle,",
                 )
                 stage++
@@ -278,7 +278,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
 
             320 -> {
                 npc(
-                    "As I say outerlander, you must find and speak to the",
+                    "As I say Outlander, you must find and speak to the",
                     "twelve members of the council of elders, and see what",
                     "tasks they might set you.",
                 )
@@ -294,12 +294,12 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
                 startQuest(player, Quests.THE_FREMENNIK_TRIALS)
             }
 
-            322 -> npc("Well, that's what I expect from an outerlander.").also { stage = END_DIALOGUE }
+            322 -> npc("Well, that's what I expect from an Outlander.").also { stage = END_DIALOGUE }
             340 -> TODO("Not implemented yet")
             500 ->
                 npcl(
                     FaceAnim.THINKING,
-                    "A reduction on sales taxes? Why, I am the only one in the Fremennik who may authorise such a thing. What does an outerlander want with that?",
+                    "A reduction on sales taxes? Why, I am the only one in the Fremennik who may authorise such a thing. What does an Outlander want with that?",
                 ).also {
                     stage++
                 }
@@ -369,7 +369,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             510 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "Ah, outerlander... if you wish to become a Fremennik you should try and pay more attention to what people tell you... ",
+                    "Ah, Outlander... if you wish to become a Fremennik you should try and pay more attention to what people tell you... ",
                 ).also {
                     stage++
                 }
@@ -386,7 +386,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             515 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Excellent work outerlander! And so quickly, too! Here, you may take my financial report promising reduced sales taxes on all goods.",
+                    "Excellent work Outlander! And so quickly, too! Here, you may take my financial report promising reduced sales taxes on all goods.",
                 ).also {
                     removeItem(player, Items.TRACKING_MAP_3701)
                     addItemOrDrop(player, Items.FISCAL_STATEMENT_3708, 1)
@@ -396,7 +396,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             520 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Not at all outerlander; now that we have Sigli's map we can increase the amount of hunts we run, and make up any shortfall that way.",
+                    "Not at all Outlander; now that we have Sigli's map we can increase the amount of hunts we run, and make up any shortfall that way.",
                 ).also {
                     stage =
                         END_DIALOGUE
@@ -442,7 +442,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             541 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Hmmm... you are doing very well so far, outerlander. Keep up the good work!",
+                    "Hmmm... you are doing very well so far, Outlander. Keep up the good work!",
                 ).also {
                     stage =
                         537
@@ -459,7 +459,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             546 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "I know outerlander, for I have been closely monitoring your progress so far!",
+                    "I know Outlander, for I have been closely monitoring your progress so far!",
                 ).also {
                     stage++
                 }
@@ -495,7 +495,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             560 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "From this day onward, you are outerlander no more! In honour of your acceptance into the Fremennik, you gain a new name: ${
+                    "From this day onward, you are Outlander no more! In honour of your acceptance into the Fremennik, you gain a new name: ${
                         FremennikTrials.getFremennikName(player)
                     }.",
                 ).also {
@@ -563,7 +563,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
                 options(
                     "Tell me of the finding of Koschei",
                     "Tell me of the lands to the North",
-                    "Tell me of the outerlanders",
+                    "Tell me of the outlanders",
                     "Don't tell me anything",
                 ).also {
                     stage++
@@ -591,7 +591,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
                     3 ->
                         playerl(
                             FaceAnim.HAPPY,
-                            "I would like to hear a little of the history between the Fremenniks and the outerlanders.",
+                            "I would like to hear a little of the history between the Fremenniks and the outlanders.",
                         ).also {
                             stage =
                                 645
@@ -637,7 +637,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             624 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "We could not leave someone to the cold death of the ocean, even an outerlander, so we fished him aboard. He muttered continually, but his words made no sense.",
+                    "We could not leave someone to the cold death of the ocean, even an Outlander, so we fished him aboard. He muttered continually, but his words made no sense.",
                 ).also {
                     stage++
                 }
@@ -767,7 +767,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             645 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Ah, now that is something I know a great deal about. Believe it or not, all outerlanders were once orginally Fremenniks.",
+                    "Ah, now that is something I know a great deal about. Believe it or not, all outlanders were once orginally Fremenniks.",
                 ).also {
                     stage++
                 }
@@ -895,7 +895,7 @@ class ChieftanBrundtDialogue(player: Player? = null) : Dialogue(player) {
             661 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "This is the tale of how the outerlanders came about; through stealing from the gods, and from betraying our ideals. This is why we show them no trust.",
+                    "This is the tale of how the outlanders came about; through stealing from the gods, and from betraying our ideals. This is why we show them no trust.",
                 ).also {
                     stage++
                 }

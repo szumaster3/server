@@ -104,7 +104,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             5 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Do not fret, outerlander; it is a fairly simple matter. I require a bodyguard for protection. Find someone willing to offer me this service.",
+                    "Do not fret, Outlander; it is a fairly simple matter. I require a bodyguard for protection. Find someone willing to offer me this service.",
                 ).also { stage++ }
 
             6 -> playerl(FaceAnim.ASKING, "That's all?").also { stage++ }
@@ -117,13 +117,13 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             10 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "If I did, then I would simply have asked them myself now, wouldn't I, outerlander?",
+                    "If I did, then I would simply have asked them myself now, wouldn't I, Outlander?",
                 ).also { stage = 1000 }
 
             15 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "I have already told you outerlander; You may have a reading from me when I have a signed contract from a warrior guaranteeing my protection.",
+                    "I have already told you Outlander; You may have a reading from me when I have a signed contract from a warrior guaranteeing my protection.",
                 ).also { stage++ }
 
             16 ->
@@ -142,10 +142,10 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             18 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "You may take this forecast with my blessing outerlander. You have offered me the greatest security I can imagine.",
+                    "You may take this forecast with my blessing Outlander. You have offered me the greatest security I can imagine.",
                 ).also { stage = 1000 }
 
-            20 -> npcl(FaceAnim.THINKING, "Yes, outerlander?").also { stage++ }
+            20 -> npcl(FaceAnim.THINKING, "Yes, Outlander?").also { stage++ }
             21 ->
                 playerl(
                     FaceAnim.ASKING,
@@ -155,7 +155,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             22 ->
                 npcl(
                     FaceAnim.THINKING,
-                    "That is not true, outerlander. Although I see glimpses of the future all of the time, using my powers brings the attention of the gods to me.",
+                    "That is not true, Outlander. Although I see glimpses of the future all of the time, using my powers brings the attention of the gods to me.",
                 ).also { stage++ }
 
             23 ->
@@ -169,7 +169,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             26 -> npcl(FaceAnim.ANNOYED, "Not me, I'm afraid.").also { stage++ }
 
             50 -> npcl(FaceAnim.AMAZED, "!").also { stage++ }
-            51 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello outerlander. What do you want?").also { stage++ }
+            51 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello Outlander. What do you want?").also { stage++ }
             52 ->
                 playerl(
                     FaceAnim.ASKING,
@@ -179,7 +179,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             53 ->
                 npcl(
                     FaceAnim.THINKING,
-                    "Are you now? Well that is interesting. Usually outerlanders do not concern themselves with our ways like that.",
+                    "Are you now? Well that is interesting. Usually outlanders do not concern themselves with our ways like that.",
                 ).also { stage++ }
 
             54 ->
@@ -205,7 +205,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             59 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "That is the opinion that outerlanders usually hold of my people, it is true. But that is because people often confuse knowledge with wisdom.",
+                    "That is the opinion that outlanders usually hold of my people, it is true. But that is because people often confuse knowledge with wisdom.",
                 ).also { stage++ }
 
             60 ->
@@ -225,13 +225,13 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             64 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "That is correct outerlander. Everything you need to complete the puzzle you will find inside the building. Nothing more.",
+                    "That is correct Outlander. Everything you need to complete the puzzle you will find inside the building. Nothing more.",
                 ).also { stage++ }
 
             65 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "So what say you outerlander? You think you have the wit to earn yourself my vote?",
+                    "So what say you Outlander? You think you have the wit to earn yourself my vote?",
                 ).also { stage++ }
 
             66 -> options("Yes", "No").also { stage++ }
@@ -256,23 +256,23 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
 
-            68 -> npcl(FaceAnim.HAPPY, "As you wish, outerlander.").also { stage = 1000 }
+            68 -> npcl(FaceAnim.HAPPY, "As you wish, Outlander.").also { stage = 1000 }
 
-            70 -> npcl(FaceAnim.ASKING, "Yes outerlander?").also { stage++ }
+            70 -> npcl(FaceAnim.ASKING, "Yes Outlander?").also { stage++ }
             71 ->
                 playerl(
                     FaceAnim.THINKING,
                     "Well... you say I can bring nothing with me when I enter your house...",
                 ).also { stage++ }
 
-            72 -> npcl(FaceAnim.ANNOYED, "Yes outerlander??").also { stage++ }
+            72 -> npcl(FaceAnim.ANNOYED, "Yes Outlander??").also { stage++ }
             73 -> playerl(FaceAnim.THINKING, "Well...").also { stage++ }
-            74 -> npcl(FaceAnim.ANGRY, "Yes, outerlander???").also { stage++ }
+            74 -> npcl(FaceAnim.ANGRY, "Yes, Outlander???").also { stage++ }
             75 -> playerl(FaceAnim.ASKING, "Where is the nearest bank?").also { stage++ }
             76 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Ah, I see your problem outerlander. The nearest bank to here is the place known to outerlanders as the Seers Village.",
+                    "Ah, I see your problem Outlander. The nearest bank to here is the place known to outlanders as the Seers Village.",
                 ).also { stage++ }
 
             77 ->
@@ -294,21 +294,21 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                     "This will tax what little magic I possess however, so you will have to travel to the bank to withdraw them again.",
                 ).also { stage++ }
 
-            81 -> npcl(FaceAnim.HAPPY, "What say you outerlander? Do you wish me to do this for you?").also { stage++ }
+            81 -> npcl(FaceAnim.HAPPY, "What say you Outlander? Do you wish me to do this for you?").also { stage++ }
             82 -> options("Yes", "No").also { stage++ }
             83 ->
                 when (buttonId) {
                     1 -> {
                         val slotAmount = player.inventory.itemCount() + player.equipment.itemCount()
                         if (slotAmount < player.bank.freeSlots()) {
-                            npcl(FaceAnim.HAPPY, "The task is done. I wish you luck with your test, outerlander.")
+                            npcl(FaceAnim.HAPPY, "The task is done. I wish you luck with your test, Outlander.")
                             dumpContainer(player, player.inventory)
                             dumpContainer(player, player.equipment)
                             stage = 1000
                         } else {
                             npcl(
                                 FaceAnim.SAD,
-                                "I am sorry outerlander, the spell is not working. I believe you may have some objects that you cannot bank with you",
+                                "I am sorry Outlander, the spell is not working. I believe you may have some objects that you cannot bank with you",
                             )
                             stage = 1000
                         }
@@ -320,7 +320,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             84 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "As you wish, outerlander. You may attempt my little task when you have deposited your equipment in the bank",
+                    "As you wish, Outlander. You may attempt my little task when you have deposited your equipment in the bank",
                 ).also {
                     stage = 1000
                 }
@@ -328,18 +328,18 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             90 ->
                 npcl(
                     FaceAnim.SAD,
-                    "I am sorry outerlander, the spell is not working. I believe you may have some objects that you cannot bank with you",
+                    "I am sorry Outlander, the spell is not working. I believe you may have some objects that you cannot bank with you",
                 ).also {
                     stage = 1000
                 }
 
             100 -> npcl(FaceAnim.AMAZED, "!").also { stage++ }
-            101 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello outerlander. What do you want?").also { stage++ }
+            101 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello Outlander. What do you want?").also { stage++ }
             102 -> playerl(FaceAnim.ASKING, "So I can bring nothing with me when I enter your house?").also { stage++ }
             103 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "That is correct outerlander, but as I say, I can use my small skill in magic to send your items directly into your bank account from here.",
+                    "That is correct Outlander, but as I say, I can use my small skill in magic to send your items directly into your bank account from here.",
                 ).also { stage++ }
 
             104 ->
@@ -351,11 +351,11 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             105 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Would you like me to perform this small spell upon you, outerlander?",
+                    "Would you like me to perform this small spell upon you, Outlander?",
                 ).also { stage = 82 }
 
             110 -> npcl(FaceAnim.AMAZED, "!").also { stage++ }
-            111 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello outerlander. What do you want?").also { stage++ }
+            111 -> npcl(FaceAnim.HAPPY, "Ahem, sorry about that. Hello Outlander. What do you want?").also { stage++ }
             112 ->
                 playerl(
                     FaceAnim.ASKING,
@@ -365,7 +365,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             113 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "That is correct outerlander. Be warned it is not as easy as it may at first sound...",
+                    "That is correct Outlander. Be warned it is not as easy as it may at first sound...",
                 ).also { stage = 1000 }
 
             120 -> npcl(FaceAnim.AMAZED, "!").also { stage++ }
@@ -374,7 +374,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             123 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Absolutely, outerlander. Your wisdom in passing my test marks you as worthy in my eyes.",
+                    "Absolutely, Outlander. Your wisdom in passing my test marks you as worthy in my eyes.",
                 ).also { stage = 1000 }
 
             150 -> npcl(FaceAnim.AMAZED, "!").also { stage++ }
@@ -457,7 +457,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             301 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Ahem, sorry about that. I have no interest in talking to you just now outerlander.",
+                    "Ahem, sorry about that. I have no interest in talking to you just now Outlander.",
                 ).also { stage = END_DIALOGUE }
 
             1000 -> end()

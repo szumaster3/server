@@ -160,7 +160,7 @@ class KoscheiNPC(
             NPCs.KOSCHEI_THE_DEATHLESS_1291,
             "This is only the beginning; you can't beat me!",
             "It seems you have some idea of combat after all,",
-            "outerlander! I will not hold back so much this time!",
+            "Outlander! I will not hold back so much this time!",
         ),
 
         THIRD_FORM(

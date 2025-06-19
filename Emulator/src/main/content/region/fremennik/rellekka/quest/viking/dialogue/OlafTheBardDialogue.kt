@@ -58,7 +58,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
-                npc("Hello? Yes? You want something outerlander?")
+                npc("Hello? Yes? You want something Outlander?")
                 stage = 0
             }
 
@@ -75,7 +75,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player("Are you a member of the council?").also { stage++ }
             1 ->
                 npc(
-                    "Why, indeed I am, outerlander! My talents as an",
+                    "Why, indeed I am, Outlander! My talents as an",
                     "exemplary musician made it difficult for them not to",
                     "accept me! Why do you wish to know this?",
                 ).also { stage++ }
@@ -102,7 +102,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
                     "of your own creation!",
                 ).also { stage++ }
 
-            6 -> npc("So what say you outerlander? Are you up for the", "challenge?").also { stage++ }
+            6 -> npc("So what say you Outlander? Are you up for the", "challenge?").also { stage++ }
             7 -> options("Yes", "No").also { stage++ }
             8 ->
                 when (buttonId) {
@@ -117,7 +117,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
 
             9 ->
                 npc(
-                    "That is great news outerlander! We always need more",
+                    "That is great news Outlander! We always need more",
                     "music lovers here!",
                 ).also {
                     stage++
@@ -207,7 +207,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
                     "the council of elders.",
                 ).also { stage++ }
 
-            28 -> npc("Is that clear enough, outerlander? Would you like me", "to repeat anything?").also { stage++ }
+            28 -> npc("Is that clear enough, Outlander? Would you like me", "to repeat anything?").also { stage++ }
             29 -> player("No thanks. I think I've got it.").also { stage = 1000 }
             40 ->
                 npcl(
@@ -269,13 +269,13 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
             60 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "I'm sorry outerlander... If I did, I would not trouble you to go and find them for me, would I?",
+                    "I'm sorry Outlander... If I did, I would not trouble you to go and find them for me, would I?",
                 ).also { stage = 1000 }
 
             65 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "That depends outerlander... Do you have some new boots for me? My feet get so tired roaming the land...",
+                    "That depends Outlander... Do you have some new boots for me? My feet get so tired roaming the land...",
                 ).also { stage++ }
 
             66 ->
@@ -294,7 +294,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
             70 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Ahhh.... outerlander... it is the most beautiful romantic ballad I have ever been inspired to write...",
+                    "Ahhh.... Outlander... it is the most beautiful romantic ballad I have ever been inspired to write...",
                 ).also { stage++ }
 
             71 ->
@@ -340,7 +340,7 @@ class OlafTheBardDialogue(player: Player? = null) : Dialogue(player) {
             150 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "I am afraid I cannot speak to outerlanders. Besides, I am busy composing an epic.",
+                    "I am afraid I cannot speak to outlanders. Besides, I am busy composing an epic.",
                 ).also { stage = 1000 }
 
             1000 -> end()

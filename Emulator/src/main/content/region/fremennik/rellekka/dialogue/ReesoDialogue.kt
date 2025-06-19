@@ -17,7 +17,7 @@ class ReesoDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-            npcl(FaceAnim.ANNOYED, "Please do not disturb me, outerlander. I have much to do.").also { stage = END_DIALOGUE }
+            npcl(FaceAnim.ANNOYED, "Please do not disturb me, Outlander. I have much to do.").also { stage = END_DIALOGUE }
         } else {
             npcl(FaceAnim.STRUGGLE, "Sorry, ${FremennikTrials.getFremennikName(player)}, I must get on with my work.").also { stage = END_DIALOGUE }
         }

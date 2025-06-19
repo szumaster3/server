@@ -8,7 +8,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs.consts.Components
 
 /**
- * Utilities for travel by ship between Fremennik and Waterbirth Island.
+ * Utilities for travel between Rellekka and Waterbirth island.
  */
 object RellekkaShip {
 
@@ -17,20 +17,18 @@ object RellekkaShip {
      */
     @JvmStatic
     fun sail(player: Player, travel: TravelDestination) {
+        closeAllInterfaces(player)
         val anim = animationDuration(Animation(travel.animation))
         if (!TravelDestination.values().contains(travel)) {
             return
         }
-
         lock(player, anim)
         lockInteractions(player, anim)
-        sendMessage(player, "You board the longship...")
         openOverlay(player, Components.FADE_TO_BLACK_115)
+        sendMessage(player, "You board the longship...")
         openInterface(player, Components.MISC_SHIPJOURNEY_224)
         animateInterface(player, Components.MISC_SHIPJOURNEY_224, 7, travel.animation)
-
         player.teleporter.send(travel.location)
-
         submitWorldPulse(
             object : Pulse(anim) {
                 override fun pulse(): Boolean {

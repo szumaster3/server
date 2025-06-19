@@ -67,7 +67,7 @@ class FremennikFishermanDialogue : DialogueFile() {
 
             1 -> npcl(
                 FaceAnim.AMAZED,
-                "Ah, so even outerlanders have heard of my amazing catch the other day!"
+                "Ah, so even outlanders have heard of my amazing catch the other day!"
             ).also { stage++ }
 
             2 -> playerl(FaceAnim.THINKING, "You have it? Can I trade you something for it?").also { stage++ }
@@ -83,7 +83,7 @@ class FremennikFishermanDialogue : DialogueFile() {
             5 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Indeed it is, outerlander. The only reason I sit out here in the cold all day long is so I don't have to pay his outrageous prices.",
+                    "Indeed it is, Outlander. The only reason I sit out here in the cold all day long is so I don't have to pay his outrageous prices.",
                 ).also { stage++ }
 
             6 ->
@@ -107,14 +107,14 @@ class FremennikFishermanDialogue : DialogueFile() {
             15 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Great work outerlander! With this, I can finally catch enough fish to make an honest living from it! Here, have the stupid fish.",
+                    "Great work Outlander! With this, I can finally catch enough fish to make an honest living from it! Here, have the stupid fish.",
                 ).also {
                     removeItem(player!!, Items.SEA_FISHING_MAP_3704)
                     addItemOrDrop(player!!, Items.UNUSUAL_FISH_3703, 1)
                     stage = 1000
                 }
 
-            16 -> npcl(FaceAnim.ANNOYED, "Me neither, outerlander. That is why I gave it to you.").also { stage = 1000 }
+            16 -> npcl(FaceAnim.ANNOYED, "Me neither, Outlander. That is why I gave it to you.").also { stage = 1000 }
             17 -> npcl(FaceAnim.ANNOYED, "I don't think so.").also { stage = 1000 }
             100 ->
                 npc(
@@ -129,7 +129,7 @@ class FremennikFishermanDialogue : DialogueFile() {
             200 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "Don't talk to me outerlander. Anything you have to say to me, you can say to the Chieftain. Goodbye.",
+                    "Don't talk to me Outlander. Anything you have to say to me, you can say to the Chieftain. Goodbye.",
                 ).also { stage = END_DIALOGUE }
 
             1000 -> end()

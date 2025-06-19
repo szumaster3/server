@@ -16,7 +16,7 @@ class LonghallBouncerDialogue(player: Player? = null, ) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-            npcl(FaceAnim.ANNOYED, "Hey, outerlander. You can't go through there. Talent only, backstage.").also { stage = END_DIALOGUE }
+            npcl(FaceAnim.ANNOYED, "Hey, Outlander. You can't go through there. Talent only, backstage.").also { stage = END_DIALOGUE }
         } else {
             npcl(FaceAnim.ANNOYED, "You can't go through there. Talent only, backstage.")
         }

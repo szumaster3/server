@@ -113,7 +113,7 @@ class FremennikTrials :
 
     companion object {
         fun getFremennikName(player: Player): String {
-            return player.getAttribute("fremennikname", "fremmyname") ?: "outerlander"
+            return player.getAttribute("fremennikname", "fremmyname") ?: "Outlander"
         }
     }
 

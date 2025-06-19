@@ -19,7 +19,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         when {
             inInventory(player, Items.CUSTOM_BOW_STRING_3702, 1) -> {
-                npcl(FaceAnim.HAPPY, "Greetings outerlander.")
+                npcl(FaceAnim.HAPPY, "Greetings Outlander.")
                 stage = 165
             }
 
@@ -34,12 +34,12 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_SIGMUND_PROGRESS, 0) == 6 -> {
-                npcl(FaceAnim.HAPPY, "Greetings outerlander.")
+                npcl(FaceAnim.HAPPY, "Greetings Outlander.")
                 stage = 160
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_SIGMUND_PROGRESS, 0) == 5 -> {
-                npcl(FaceAnim.HAPPY, "Greetings outerlander.")
+                npcl(FaceAnim.HAPPY, "Greetings Outlander.")
                 stage = 150
             }
 
@@ -49,7 +49,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_KILL, false) -> {
-                npc("I saw the entire hunt. Let me take that talisman from", "you, I would be honored to speak out for you to our", "council of elders after such a hunt, outerlander.")
+                npc("I saw the entire hunt. Let me take that talisman from", "you, I would be honored to speak out for you to our", "council of elders after such a hunt, Outlander.")
                 stage = 100
             }
 
@@ -59,12 +59,12 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
-                npc("What do you want outerlander?")
+                npc("What do you want Outlander?")
                 stage = 0
             }
 
             else -> {
-                npcl(FaceAnim.HAPPY, "I do not speak to outerlanders. If you have anything of import to say, go and speak to the Chieftain.")
+                npcl(FaceAnim.HAPPY, "I do not speak to outlanders. If you have anything of import to say, go and speak to the Chieftain.")
                 stage = 1000
             }
         }
@@ -91,7 +91,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             3 ->
                 npc(
                     "You? ... well... I am not totally against the idea",
-                    "outerlander. If you can demonstrate some hunting skills",
+                    "Outlander. If you can demonstrate some hunting skills",
                     "then perhaps I may offer my vote.",
                 ).also { stage++ }
 
@@ -113,7 +113,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             8 -> player("Not... Giant Rats?!?!").also { stage++ }
             9 ->
                 npc(
-                    "I suspect you are mocking me outerlander. You will",
+                    "I suspect you are mocking me Outlander. You will",
                     "need to prove your skill as a hunter to me by tracking",
                     "and defeating... The Draugen.",
                 ).also { stage++ }
@@ -154,7 +154,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
 
             16 ->
                 npc(
-                    "Well outerlander, should you accept my challenge I will",
+                    "Well Outlander, should you accept my challenge I will",
                     "show you a special hunter's trick that will help you. Do",
                     "you accept the challenge?",
                 ).also { stage++ }
@@ -173,7 +173,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
 
             19 ->
                 npc(
-                    "Not at all outerlander. The Draugen is indeed",
+                    "Not at all Outlander. The Draugen is indeed",
                     "impossible to kill but that is not the same as being",
                     "impossible to fight against.",
                 ).also { stage++ }
@@ -225,7 +225,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             151 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Well, of course I do. I wouldn't be much of a huntsman if I didn't know where to find my prey now, would I outerlander?",
+                    "Well, of course I do. I wouldn't be much of a huntsman if I didn't know where to find my prey now, would I Outlander?",
                 ).also { stage++ }
 
             152 -> playerl(FaceAnim.ASKING, "No, I guess not. So can I have it?").also { stage++ }
@@ -283,13 +283,13 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
             166 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Well met, outerlander. I see some hunting potential within you. Here, take my map, I was getting too dependent on it for my skill anyway.",
+                    "Well met, Outlander. I see some hunting potential within you. Here, take my map, I was getting too dependent on it for my skill anyway.",
                 ).also { stage = 1000 }
 
             170 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "No outerlander... it is hard to explain. That map makes my role as huntsman too easy. I fear my skills are becoming dulled.",
+                    "No Outlander... it is hard to explain. That map makes my role as huntsman too easy. I fear my skills are becoming dulled.",
                 ).also { stage++ }
 
             171 ->
@@ -298,7 +298,7 @@ class SigliTheHuntsmanDialogue(player: Player? = null) : Dialogue(player) {
                     "Now I must track my prey once more. To begin again from scratch... I feel this may keep me sharp.",
                 ).also { stage = 1000 }
 
-            175 -> npcl(FaceAnim.ANNOYED, "Not the one I want, outerlander.").also { stage = 1000 }
+            175 -> npcl(FaceAnim.ANNOYED, "Not the one I want, Outlander.").also { stage = 1000 }
             180 ->
                 npcl(
                     FaceAnim.HAPPY,

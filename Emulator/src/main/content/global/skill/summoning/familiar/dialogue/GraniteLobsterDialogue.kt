@@ -53,7 +53,7 @@ class GraniteLobsterDialogue : Dialogue {
             4 -> {
                 npcl(
                     FaceAnim.CHILD_NORMAL,
-                    "Clonkclonk clonk grind clonk. (Keep walking, outerlander. We have nothing to discuss.)",
+                    "Clonkclonk clonk grind clonk. (Keep walking, Outlander. We have nothing to discuss.)",
                 )
                 stage = 7
             }
@@ -67,7 +67,7 @@ class GraniteLobsterDialogue : Dialogue {
     ): Boolean {
         when (stage) {
             0 -> {
-                playerl(FaceAnim.FRIENDLY, "The outerlanders have insulted our heritage for the last time!")
+                playerl(FaceAnim.FRIENDLY, "The outlanders have insulted our heritage for the last time!")
                 stage++
             }
 
@@ -112,7 +112,7 @@ class GraniteLobsterDialogue : Dialogue {
             8 -> {
                 npcl(
                     FaceAnim.CHILD_NORMAL,
-                    "Clonkclonkclonk grind clonk grind? (It's nothing personal, you're just an outerlander, you know?)",
+                    "Clonkclonkclonk grind clonk grind? (It's nothing personal, you're just an Outlander, you know?)",
                 )
                 stage = END_DIALOGUE
             }

@@ -12,7 +12,6 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
@@ -45,17 +44,17 @@ class RellekkaPlugin : InteractionListener, MapArea {
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
 
-    override fun entityInteraction(entity: Entity, target: Node, option: Option): Boolean {
+    override fun onInteraction(entity: Entity, node: Node, option: Option): Boolean {
         if (entity !is Player) return false
         val player = entity.asPlayer()
 
-        when (target.id) {
+        when (node.id) {
             Scenery.ANVIL_4306,
             Scenery.POTTER_S_WHEEL_4310,
             Scenery.SPINNING_WHEEL_4309,
             Scenery.FURNACE_4304,
             Scenery.POTTERY_OVEN_4308 -> {
-                sendMessage(player, "Only Fremenniks may use this ${target.name.lowercase(Locale.getDefault())}.")
+                sendMessage(player, "Only Fremenniks may use this ${node.name.lowercase(Locale.getDefault())}.")
                 return true
             }
 
@@ -74,6 +73,10 @@ class RellekkaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles interaction with cave entrance to Keldagrim.
+         */
+
         on(TUNNEL, IntType.SCENERY, "enter") { player, _ ->
             teleport(player, Location.create(2773, 10162, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
@@ -85,28 +88,25 @@ class RellekkaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles interaction with snow stairs in hunter area.
+         */
+
         on(STAIRS, IntType.SCENERY, "ascend", "descend") { player, _ ->
-            if (player.location.y < 3802) {
-                player.properties.teleportLocation =
-                    when (player.location.x) {
-                        2715 -> DOWN1A
-                        2716 -> DOWN1B
-                        2726 -> DOWN2A
-                        2727 -> DOWN2B
-                        else -> player.location
-                    }
-            } else {
-                player.properties.teleportLocation =
-                    when (player.location.x) {
-                        2715 -> UP1A
-                        2716 -> UP1B
-                        2726 -> UP2A
-                        2727 -> UP2B
-                        else -> player.location
-                    }
+            val up = player.location.y >= 3802
+            player.properties.teleportLocation = when (player.location.x) {
+                2715 -> if (up) UP1A else DOWN1A
+                2716 -> if (up) UP1B else DOWN1B
+                2726 -> if (up) UP2A else DOWN2A
+                2727 -> if (up) UP2B else DOWN2B
+                else -> player.location
             }
             return@on true
         }
+
+        /*
+         * Handles the ferry travel option from Rellekka to Neitiznot.
+         */
 
         on(NPCs.MARIA_GUNNARS_5508, IntType.NPC, "ferry-neitiznot") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
@@ -114,10 +114,18 @@ class RellekkaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles the ferry travel option from Neitiznot to Rellekka.
+         */
+
         on(NPCs.MARIA_GUNNARS_5507, IntType.NPC, "ferry-rellekka") { player, _ ->
             RellekkaShip.sail(player, TravelDestination.NEITIZNOT_TO_RELLEKKA)
             return@on true
         }
+
+        /*
+         * Handles the ferry travel option from Rellekka to Jatizso.
+         */
 
         on(NPCs.MORD_GUNNARS_5481, IntType.NPC, "ferry-jatizso") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
@@ -125,10 +133,18 @@ class RellekkaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles the ferry travel option from Jatizso to Rellekka.
+         */
+
         on(NPCs.MORD_GUNNARS_5482, IntType.NPC, "ferry-rellekka") { player, _ ->
             RellekkaShip.sail(player, TravelDestination.JATIZSO_TO_RELLEKKA)
             return@on true
         }
+
+        /*
+         * Handles the ship travel option from Rellekka to Miscellania.
+         */
 
         on(NPCs.SAILOR_1385, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
@@ -136,15 +152,23 @@ class RellekkaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles the ship travel option from Miscellania to Rellekka.
+         */
+
         on(NPCs.SAILOR_1304, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
             RellekkaShip.sail(player, TravelDestination.MISCELLANIA_TO_RELLEKKA)
             return@on true
         }
 
+        /*
+         * Handles the dialogue interaction with the Fish Monger NPC in Rellekka.
+         */
+
         on(NPCs.FISH_MONGER_1315, IntType.NPC, "talk-to") { player, node ->
             if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                sendNPCDialogue(player, node.id, "I don't sell to outerlanders.", FaceAnim.ANNOYED)
+                sendNPCDialogue(player, node.id, "I don't sell to outlanders.", FaceAnim.ANNOYED)
             } else {
                 sendNPCDialogue(player, node.id, "Hello there, ${FremennikTrials.getFremennikName(player)}. Looking for fresh fish?")
                 openNpcShop(player, NPCs.FISH_MONGER_1315)

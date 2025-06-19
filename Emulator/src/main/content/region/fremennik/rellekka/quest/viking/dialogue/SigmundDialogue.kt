@@ -51,7 +51,7 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             getAttribute(player, GameAttributes.QUEST_VIKING_SIGMUND_RETURN, false) && !anyInInventory(player, *questItems) -> {
-                npcl(FaceAnim.ASKING, "So... how goes it outerlander? Did you manage to obtain my flower for me yet? Or do you lack the necessary merchanting skills?")
+                npcl(FaceAnim.ASKING, "So... how goes it Outlander? Did you manage to obtain my flower for me yet? Or do you lack the necessary merchanting skills?")
                 stage = 35
             }
 
@@ -100,7 +100,7 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             7 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Calm yourself outerlander. It is but a small task really... I simply require a flower.",
+                    "Calm yourself Outlander. It is but a small task really... I simply require a flower.",
                 ).also { stage++ }
 
             8 -> playerl(FaceAnim.ASKING, "A flower? What's the catch?").also { stage++ }
@@ -141,7 +141,7 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             15 ->
                 npcl(
                     FaceAnim.THINKING,
-                    "Ah, well outerlander, if I knew where to start looking I would simply do it myself!",
+                    "Ah, well Outlander, if I knew where to start looking I would simply do it myself!",
                 ).also { stage++ }
 
             16 -> playerl(FaceAnim.ANNOYED, "No help at ALL?").also { stage++ }
@@ -160,7 +160,7 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             25 ->
                 npcl(
                     FaceAnim.ASKING,
-                    "So... how goes it outerlander? Did you manage to obtain my flower for me yet? Or do you lack the necessary merchanting skills?",
+                    "So... how goes it Outlander? Did you manage to obtain my flower for me yet? Or do you lack the necessary merchanting skills?",
                 ).also { stage++ }
 
             26 ->
@@ -212,14 +212,14 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             40 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Hello again outerlander! I am amazed once more at your apparent skill at merchanting!",
+                    "Hello again Outlander! I am amazed once more at your apparent skill at merchanting!",
                 ).also { stage++ }
 
             41 -> playerl(FaceAnim.HAPPY, "So I can count on your vote at the council of elders?").also { stage++ }
             42 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Absolutely, outerlander. Your merchanting skills will be a real boon to the Fremennik.",
+                    "Absolutely, Outlander. Your merchanting skills will be a real boon to the Fremennik.",
                 ).also { stage = 1000 }
 
             50 ->
@@ -250,11 +250,11 @@ class SigmundDialogue(player: Player? = null) : Dialogue(player) {
             60 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Hello outerlander. By the laws of our tribe, I am afraid I may not speak to you without the express permission of the chieftain.",
+                    "Hello Outlander. By the laws of our tribe, I am afraid I may not speak to you without the express permission of the chieftain.",
                 ).also { stage++ }
 
             61 -> playerl(FaceAnim.ASKING, "Where would I find him?").also { stage++ }
-            62 -> npcl(FaceAnim.HAPPY, "In the longhall, outerlander.").also { stage = 1000 }
+            62 -> npcl(FaceAnim.HAPPY, "In the longhall, Outlander.").also { stage = 1000 }
             1000 -> end()
         }
         return true

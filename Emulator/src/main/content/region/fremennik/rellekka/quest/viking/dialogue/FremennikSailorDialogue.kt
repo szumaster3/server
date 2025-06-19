@@ -22,7 +22,7 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
             !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
                 npcl(
                     FaceAnim.ANNOYED,
-                    "Don't talk to me outerlander. I need to fix this longboat. Go talk to the chieftain.",
+                    "Don't talk to me Outlander. I need to fix this longboat. Go talk to the chieftain.",
                 ).also { stage = END_DIALOGUE }
             }
 
@@ -70,14 +70,14 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
             1 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Ah! Even the outerlanders have heard of my mysterious flower! I found it in a country far far away from here!",
+                    "Ah! Even the outlanders have heard of my mysterious flower! I found it in a country far far away from here!",
                 ).also { stage++ }
 
             2 -> playerl(FaceAnim.ASKING, "Can I buy it from you?").also { stage++ }
             3 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "I'm afraid not, outerlander. There is a woman in this village whose heart I seek to capture, and I think giving her this strange flower might be my best bet with her.",
+                    "I'm afraid not, Outlander. There is a woman in this village whose heart I seek to capture, and I think giving her this strange flower might be my best bet with her.",
                 ).also { stage++ }
 
             4 ->
@@ -89,7 +89,7 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
             5 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Hmm... that is not a totally stupid idea outerlander. I know she is a lover of music, and a romantic ballad might be just the thing with which to woo her.",
+                    "Hmm... that is not a totally stupid idea Outlander. I know she is a lover of music, and a romantic ballad might be just the thing with which to woo her.",
                 ).also { stage++ }
 
             6 ->
@@ -105,7 +105,7 @@ class FremennikSailorDialogue(player: Player? = null) : Dialogue(player) {
                 ).also { stage++ }
 
             8 ->
-                npcl(FaceAnim.HAPPY, "That sounds like a fair deal to me, outerlander.").also {
+                npcl(FaceAnim.HAPPY, "That sounds like a fair deal to me, Outlander.").also {
                     player.incrementAttribute(GameAttributes.QUEST_VIKING_SIGMUND_PROGRESS, 1)
                     stage = END_DIALOGUE
                 }

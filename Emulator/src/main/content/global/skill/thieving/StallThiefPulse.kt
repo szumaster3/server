@@ -5,7 +5,6 @@ import core.api.quest.isQuestComplete
 import core.game.event.ResourceProducedEvent
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
@@ -19,7 +18,15 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
-class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?, ) : SkillPulse<Scenery?>(player, node) {
+/**
+ * A pulse that handles the interaction logic for stealing from a stall.
+ */
+class StallThiefPulse(
+    player: Player?,
+    node: Scenery?,
+    private val stall: Stall?
+) : SkillPulse<Scenery?>(player, node) {
+
     private var ticks = 0
 
     override fun start() {
@@ -43,23 +50,18 @@ class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?
             sendMessage(player, "You don't have enough inventory space.")
             return false
         }
-        if (inBorders(player, getRegionBorders(10553)) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.fullIDs.contains(4278)) {
-            sendDialogue(player, "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
-            return false
-        }
-        if (inBorders(player, getRegionBorders(10553)) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) && stall.fullIDs.contains(4277)) {
-            sendDialogue(player, "The fishmonger is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
+        if (inBorders(player, getRegionBorders(10553)) && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+            sendDialogue(player, "The ${if (stall.fullIDs.contains(4278)) "fur trader" else "fishmonger"} is staring at you suspiciously. You cannot steal from his stall while he distrusts you.")
             return false
         }
         return true
     }
 
-    override fun hasInactiveNode(): Boolean =
-        if (player.getAttribute("thieveDelay", 0) <= GameWorld.ticks) {
-            false
-        } else {
-            super.hasInactiveNode()
-        }
+    override fun hasInactiveNode(): Boolean = if (player.getAttribute("thieveDelay", 0) <= GameWorld.ticks) {
+        false
+    } else {
+        super.hasInactiveNode()
+    }
 
     override fun animate() {}
 
@@ -69,7 +71,7 @@ class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?
         if (ticks == 0) {
             animate(player, ANIMATION)
             lockInteractions(player, 2)
-            if(node?.id != 2793) {
+            if (node?.id != 2793) {
                 sendMessage(player, "You attempt to steal some $goods from the stall.")
             }
         }
@@ -96,17 +98,20 @@ class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?
                 sendMessage(player, "You steal grapes from the grape stall.")
                 return true
             }
-            if(item.id == Items.ROCK_CAKE_2379) {
+            if (item.id == Items.ROCK_CAKE_2379) {
                 sendMessage(player, "You cautiously grab a cake from the stall.")
                 return true
             }
             if (stall == Stall.CANDLES) {
                 return true
             }
-            if (stall == Stall.FISH_STALL) {
-                finishDiaryTask(player, DiaryType.FREMENNIK, 1, 4)
-            }
-            player.packetDispatch.sendMessage("You steal " + (if (StringUtils.isPlusN(item.name)) { "an " } else { "a " }) + getItemName(item.id).lowercase() + ".")
+            sendMessage(
+                player, "You steal " + (if (StringUtils.isPlusN(item.name)) {
+                    "an "
+                } else {
+                    "a "
+                }) + getItemName(item.id).lowercase() + "."
+            )
             player.dispatch(ResourceProducedEvent(item.id, item.amount, node!!, 0))
         }
         return true
@@ -128,9 +133,7 @@ class StallThiefPulse(player: Player?, node: Scenery?, private val stall: Stall?
                 return false
             }
             for (npc in getLocalNpcs(player.location, 8)) {
-                if (!npc.properties.combatPulse.isAttacking &&
-                    (npc.id == NPCs.GUARD_32 || npc.id == NPCs.MARKET_GUARD_2236)
-                ) {
+                if (!npc.properties.combatPulse.isAttacking && (npc.id == NPCs.GUARD_32 || npc.id == NPCs.MARKET_GUARD_2236)) {
                     npc.sendChat("Hey! Get your hands off there!")
                     npc.properties.combatPulse.attack(player)
                     return false

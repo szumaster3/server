@@ -43,7 +43,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             args.size > 1 -> {
-                npcl(FaceAnim.FRIENDLY, "Hahaha! Well fought outerlander! Now come down from there, you have passed my trial with flying colours!")
+                npcl(FaceAnim.FRIENDLY, "Hahaha! Well fought Outlander! Now come down from there, you have passed my trial with flying colours!")
                 stage = 150
             }
 
@@ -58,7 +58,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             !player.questRepository.hasStarted(Quests.THE_FREMENNIK_TRIALS) -> {
-                npcl(FaceAnim.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.").also { stage = END_DIALOGUE }
+                npcl(FaceAnim.ANNOYED, "Leave me be, Outlander. I have nothing to say to the likes of you.").also { stage = END_DIALOGUE }
             }
 
             !getAttribute(player, GameAttributes.QUEST_VIKING_THORVALD_VOTE, false) -> {
@@ -86,7 +86,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             60 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Hello yourself, outerlander. What brings you to dare speak to a mighty Fremennik warrior such as myself?",
+                    "Hello yourself, Outlander. What brings you to dare speak to a mighty Fremennik warrior such as myself?",
                 ).also { stage++ }
 
             61 -> playerl(FaceAnim.HALF_ASKING, "Erm... are you a member of the council?").also { stage++ }
@@ -96,7 +96,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
                     "The Fremennik council of elders? Why, of course I am. I am recognised as one the clans mightiest warriors.",
                 ).also { stage++ }
 
-            63 -> npcl(FaceAnim.HALF_ASKING, "What is it to you outerlander?").also { stage++ }
+            63 -> npcl(FaceAnim.HALF_ASKING, "What is it to you Outlander?").also { stage++ }
             64 ->
                 playerl(
                     FaceAnim.NEUTRAL,
@@ -106,13 +106,13 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             65 ->
                 npcl(
                     FaceAnim.LAUGH,
-                    "An outerlander wishes to become a Fremennik!?!? Ha! That is priceless!",
+                    "An Outlander wishes to become a Fremennik!?!? Ha! That is priceless!",
                 ).also { stage++ }
 
             66 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Well, let us say that I am not totally against this concept. As a warrior, I appreciate the value of brave and powerful warriors to our clan, and even though you may be an outerlander,",
+                    "Well, let us say that I am not totally against this concept. As a warrior, I appreciate the value of brave and powerful warriors to our clan, and even though you may be an Outlander,",
                 ).also { stage++ }
 
             67 ->
@@ -130,7 +130,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             69 ->
                 npcl(
                     FaceAnim.LOUDLY_LAUGHING,
-                    "Hahahahaha! You certainly show some spirit for an outerlander!",
+                    "Hahahahaha! You certainly show some spirit for an Outlander!",
                 ).also { stage++ }
 
             70 ->
@@ -148,7 +148,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             72 ->
                 npcl(
                     FaceAnim.HALF_ASKING,
-                    "So what say you, outerlander? Are you prepared for the battle?",
+                    "So what say you, Outlander? Are you prepared for the battle?",
                 ).also { stage++ }
 
             73 -> options("Yes", "No").also { stage++ }
@@ -170,7 +170,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
                         ).also { stage = 90 }
                 }
 
-            80 -> npcl(FaceAnim.LAUGH, "Hahahahaha! I'm beginning to like you already, outerlander!").also { stage++ }
+            80 -> npcl(FaceAnim.LAUGH, "Hahahahaha! I'm beginning to like you already, Outlander!").also { stage++ }
             81 ->
                 npcl(
                     FaceAnim.NEUTRAL,
@@ -211,7 +211,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             90 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Hmm, not so brave after all, outerlander? Perhaps it is for the best. I doubt you have what it takes to pass my challenge.",
+                    "Hmm, not so brave after all, Outlander? Perhaps it is for the best. I doubt you have what it takes to pass my challenge.",
                 ).also { stage = END_DIALOGUE }
 
             100 ->
@@ -326,14 +326,14 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             140 ->
                 npcl(
                     FaceAnim.FRIENDLY,
-                    "Yes of course outerlander! If you bring me five raw sardines then I will vote for you instead!",
+                    "Yes of course Outlander! If you bring me five raw sardines then I will vote for you instead!",
                 ).also { stage++ }
 
             141 -> playerl(FaceAnim.EXTREMELY_SHOCKED, "REALLY?!?!?").also { stage++ }
             142 ->
                 npcl(
                     FaceAnim.LOUDLY_LAUGHING,
-                    "HAHAHAHAHAHA! No, of course not! You are stupid, even by outerlander standards!",
+                    "HAHAHAHAHAHA! No, of course not! You are stupid, even by Outlander standards!",
                 ).also { stage++ }
 
             143 ->
@@ -351,7 +351,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             151 ->
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "I did not say you had to, outerlander! All I asked was that you fought to the death! And you did! The death was your own!",
+                    "I did not say you had to, Outlander! All I asked was that you fought to the death! And you did! The death was your own!",
                 ).also { stage++ }
 
             152 ->
@@ -381,7 +381,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             200 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "Know you not who I am outerlander? There are none more brave or powerful than me amongst all the Fremennik!",
+                    "Know you not who I am Outlander? There are none more brave or powerful than me amongst all the Fremennik!",
                 ).also { stage++ }
 
             201 ->
@@ -394,7 +394,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             203 ->
                 npcl(
                     FaceAnim.ANNOYED,
-                    "There is but one way outerlander. Since I was steeled in battle, I have dreamt of earning my place at the Champions Table in the Long Hall.",
+                    "There is but one way Outlander. Since I was steeled in battle, I have dreamt of earning my place at the Champions Table in the Long Hall.",
                 ).also { stage++ }
 
             204 ->
@@ -445,11 +445,11 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
                     "You will need to persuade one of the revellers in the Long Hall to give up their token, and their place, in deference to my own worthiness somehow.",
                 ).also { stage = END_DIALOGUE }
 
-            214 -> npcl(FaceAnim.ANNOYED, "I'm afraid not, outerlander.").also { stage = END_DIALOGUE }
+            214 -> npcl(FaceAnim.ANNOYED, "I'm afraid not, Outlander.").also { stage = END_DIALOGUE }
             215 ->
                 npcl(
                     FaceAnim.ANGRY,
-                    "Oh you would, would you outerlander? I have already told you, I will not demean myself with such a baby sitting job until I can sit in the Longhall with pride.",
+                    "Oh you would, would you Outlander? I have already told you, I will not demean myself with such a baby sitting job until I can sit in the Longhall with pride.",
                 ).also { stage++ }
 
             216 ->
@@ -467,7 +467,7 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             218 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Here outerlander, I can suffer the indignity of playing babysitter if it means that I can then revel with my warrior equals in the Long Hall afterwards!",
+                    "Here Outlander, I can suffer the indignity of playing babysitter if it means that I can then revel with my warrior equals in the Long Hall afterwards!",
                 ).also {
                     removeItem(player, Items.CHAMPIONS_TOKEN_3706)
                     addItemOrDrop(player, Items.WARRIORS_CONTRACT_3710, 1)
@@ -477,13 +477,13 @@ class ThorvalDialogue(player: Player? = null) : Dialogue(player) {
             219 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "Here outerlander, take this contract; I will fulfill it to my utmost.",
+                    "Here Outlander, take this contract; I will fulfill it to my utmost.",
                 ).also { stage = END_DIALOGUE }
 
             220 ->
                 npcl(
                     FaceAnim.HAPPY,
-                    "You misunderstand, outerlander. Normally I will only battle for a noble cause, but have never been recognised as a true champion here.",
+                    "You misunderstand, Outlander. Normally I will only battle for a noble cause, but have never been recognised as a true champion here.",
                 ).also { stage++ }
 
             221 ->
