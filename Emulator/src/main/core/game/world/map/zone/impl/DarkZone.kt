@@ -47,33 +47,14 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         register(ZoneBorders(2496, 9408, 2559, 9471)) // Skavid caves.
     }
 
-    /**
-     * Determines whether a player or entity should continue attacking another target
-     * in the Dark Zone.
-     *
-     * @param entity The entity attempting the attack.
-     * @param target The target entity being attacked.
-     * @param style The combat style used in the attack.
-     * @param message Whether a message should be displayed.
-     * @return Boolean indicating whether the attack should proceed.
-     */
-    override fun continueAttack(
-        entity: Entity,
-        target: Node,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    override fun continueAttack(entity: Entity, target: Node, style: CombatStyle, message: Boolean, ): Boolean {
         if (entity is Player) {
             return entity.interfaceManager.overlay != DARKNESS_OVERLAY
         }
         return true
     }
 
-    override fun interact(
-        entity: Entity,
-        target: Node,
-        option: Option,
-    ): Boolean {
+    override fun interact(entity: Entity, target: Node, option: Option, ): Boolean {
         if (target is Item) {
             val s = forProductId(target.id)
             if (s != null) {
@@ -116,10 +97,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         return true
     }
 
-    override fun leave(
-        entity: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(entity: Entity, logout: Boolean, ): Boolean {
         if (entity is Player) {
             entity.interfaceManager.closeOverlay()
         }
@@ -156,17 +134,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         }
     }
 
-    /**
-     * Handles the processing of the 'UsedWith' event, specifically for the Tinderbox item
-     * used in the Dark Zone.
-     *
-     * @param entity The entity performing the action.
-     * @param event The 'UsedWith' event to be processed.
-     */
-    override fun process(
-        entity: Entity,
-        event: UseWithEvent,
-    ) {
+    override fun process(entity: Entity, event: UseWithEvent, ) {
         val isTinderbox = getItemName(event.used) == "Tinderbox" || getItemName(event.with) == "Tinderbox"
 
         if (isTinderbox && entity is Player) {
@@ -242,7 +210,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         /**
          * Checks if the player is in a dark area and will update accordingly.
          *
-         * @param p The player.
+         * @param player The player.
          */
         fun checkDarkArea(player: Player): Boolean {
             for (r in player.zoneMonitor.zones) {

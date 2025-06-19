@@ -15,7 +15,7 @@ import org.rs.consts.Quests
  * Represents the Peksa dialogue.
  *
  * Relations:
- * - [Scorpion Catcher quest][content.region.kandarin.quest.scorpcatcher.ScorpionCatcher]
+ * - [Scorpion Catcher quest][content.region.kandarin.seersvillage.quest.scorpcatcher.ScorpionCatcherPlugin]
  */
 @Initializable
 class PeksaDialogue(player: Player? = null) : Dialogue(player) {
@@ -34,7 +34,6 @@ class PeksaDialogue(player: Player? = null) : Dialogue(player) {
             } else {
                 options("I could be, yes.", "No, I'll pass on that.").also { stage++ }
             }
-
             1 -> when (buttonId) {
                 1 -> end().also { openNpcShop(player, NPCs.PEKSA_538) }
                 2 -> player(FaceAnim.HALF_GUILTY, "No, I'll pass on that.").also { stage++ }

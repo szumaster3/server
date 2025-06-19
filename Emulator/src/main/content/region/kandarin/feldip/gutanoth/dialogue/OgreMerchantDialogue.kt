@@ -21,12 +21,10 @@ class OgreMerchantDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes I do.", "No I don't.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("Yes I do.").also { stage = 3 }
-                    2 -> player("No I don't.").also { stage++ }
-                }
-
+            1 -> when (buttonId) {
+                1 -> player("Yes I do.").also { stage = 3 }
+                2 -> player("No I don't.").also { stage++ }
+            }
             2 -> npcl(FaceAnim.OLD_CALM_TALK2, "Suit yourself.").also { stage = END_DIALOGUE }
             3 -> npc(FaceAnim.OLD_CALM_TALK2, "Welcome to Grud's Herblore Stall.").also { stage++ }
             4 -> {

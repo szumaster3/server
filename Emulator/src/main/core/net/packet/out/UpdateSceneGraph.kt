@@ -7,30 +7,46 @@ import core.net.packet.PacketHeader
 import core.net.packet.context.SceneGraphContext
 
 /**
- * The update scene graph outgoing packet.
+ * Sends an update scene graph packet, including region XTEA keys and player position,
+ * to synchronize the client's view with the server.
+ *
  * @author Emperor
  */
 class UpdateSceneGraph : OutgoingPacket<SceneGraphContext> {
     override fun send(context: SceneGraphContext) {
         val buffer = IoBuffer(162, PacketHeader.SHORT)
         val player = context.player
+        val location = player.location
+
         buffer.cypherOpcode(player.session.isaacPair.output)
-        player.playerFlags.lastSceneGraph = player.location
-        buffer.putShortA(player.location.sceneX)
-        for (regionX in (player.location.regionX - 6) / 8..((player.location.regionX + 6) / 8)) {
-            for (regionY in (player.location.regionY - 6) / 8..((player.location.regionY + 6) / 8)) {
-                val keys = getRegionXTEA(regionX shl 8 or regionY)
-                for (i in 0..3) {
-                    if (keys != null) buffer.putIntB(keys[i])
-                    else buffer.putIntB(0)
+        player.playerFlags.lastSceneGraph = location
+
+        buffer.putShortA(location.sceneX)
+
+        val regionX = location.regionX
+        val regionY = location.regionY
+
+        for (x in (regionX - RADIUS) / REGION_SIZE..(regionX + RADIUS) / REGION_SIZE) {
+            for (y in (regionY - RADIUS) / REGION_SIZE..(regionY + RADIUS) / REGION_SIZE) {
+                val keys = getRegionXTEA(x shl 8 or y)
+                repeat(PLANE_COUNT) { plane ->
+                    val key = keys?.getOrNull(plane) ?: 0
+                    buffer.putIntB(key)
                 }
             }
         }
 
-        buffer.putS(player.location.z)
-        buffer.putShort(player.location.regionX)
-        buffer.putShortA(player.location.regionY)
-        buffer.putShortA(player.location.sceneY)
+        buffer.putS(location.z)
+        buffer.putShort(location.regionX)
+        buffer.putShortA(location.regionY)
+        buffer.putShortA(location.sceneY)
+
         player.details.session.write(buffer)
+    }
+
+    private companion object {
+        private const val RADIUS = 6
+        private const val REGION_SIZE = 8
+        private const val PLANE_COUNT = 4
     }
 }

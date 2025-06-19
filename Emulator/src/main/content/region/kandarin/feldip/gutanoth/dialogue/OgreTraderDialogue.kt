@@ -21,11 +21,10 @@ class OgreTraderDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Can I see what you are selling?", "I don't need anything.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("Can I see what you are selling?").also { stage = 3 }
-                    2 -> player("I don't need anything.").also { stage++ }
-                }
+            1 -> when (buttonId) {
+                1 -> player("Can I see what you are selling?").also { stage = 3 }
+                2 -> player("I don't need anything.").also { stage++ }
+            }
 
             2 -> npcl(FaceAnim.OLD_CALM_TALK2, "As you wish.").also { stage = END_DIALOGUE }
             3 -> npc(FaceAnim.OLD_CALM_TALK2, "I suppose so.").also { stage++ }

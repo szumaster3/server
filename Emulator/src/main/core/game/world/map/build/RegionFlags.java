@@ -563,6 +563,14 @@ public final class RegionFlags {
     }
 
     /**
+     * Gets the clippingFlags.
+     * @return The clippingFlags.
+     */
+    public int[][] getClippingFlags() {
+        return clippingFlags;
+    }
+
+    /**
      * Sets the clipping.
      *
      * @param clipping The clipping to set.

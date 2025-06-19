@@ -12,9 +12,8 @@ import org.rs.consts.Components
  * Handles the snow zone.
  * @author szu
  */
-class SnowZone :
-    MapZone("snow", true),
-    MapArea {
+class SnowZone : MapZone("snow", true), MapArea {
+
     override fun configure() {
         register(BASE_ZONE)
         register(MIDDLE_ZONE)
@@ -34,13 +33,9 @@ class SnowZone :
             getRegionBorders(11068),
         )
 
-    override fun entityStep(
-        entity: Entity,
-        location: Location,
-        lastLocation: Location,
-    ) {
+    override fun entityStep(entity: Entity, location: Location, lastLocation: Location, ) {
         if (entity is Player) {
-            SnowZone.openSnowOverlay(entity.asPlayer())
+            openSnowOverlay(entity.asPlayer())
         }
     }
 

@@ -5,20 +5,26 @@ import core.net.packet.OutgoingPacket
 import core.net.packet.context.PlayerContext
 
 /**
- * Updates the random.dat file for the player.
+ * Sends an update to the client's random.dat file, typically used for unique client identification.
+ * This may include a generated UID and reserved values.
+ *
  * @author Emperor
  */
 class UpdateRandomFile : OutgoingPacket<PlayerContext> {
     override fun send(context: PlayerContext) {
-        val buffer = IoBuffer(211)
-        buffer.putInt(1) // Let's assume this is UID.
+        val buffer = IoBuffer(UPDATE_RANDOM_FILE_OPCODE)
+        buffer.putInt(1) // Assumed UID value.
         buffer.put(0)
         buffer.put(0)
         buffer.put(0)
         buffer.put(0)
-        for (i in 0..3) {
+        repeat(4) { i ->
             buffer.putInt(i + 100)
         }
-        // TODO context.getPlayer().getSession().write(buffer);
+        context.player.session.write(buffer)
+    }
+
+    private companion object {
+        private const val UPDATE_RANDOM_FILE_OPCODE = 211
     }
 }

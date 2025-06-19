@@ -10,50 +10,58 @@ import core.net.packet.PacketHeader
 import core.net.packet.context.DynamicSceneContext
 
 /**
- * Represents the build dynamic scene.
+ * Handles sending region and chunk data with rotation and plane information.
+ *
  * @author Emperor
  */
 class BuildDynamicScene : OutgoingPacket<DynamicSceneContext> {
     override fun send(context: DynamicSceneContext) {
-        val buffer = IoBuffer(214, PacketHeader.SHORT)
-        val regionIds: MutableList<Int> = ArrayList(20)
         val player = context.player
-        buffer.putLEShortA(player.location.sceneX)
-        buffer.putLEShortA(player.location.regionX)
-        buffer.putS(player.location.z)
-        buffer.putLEShortA(player.location.sceneY)
+        val location = player.location
+        val buffer = IoBuffer(DYNAMIC_SCENE_OPCODE, PacketHeader.SHORT)
+        val regionIds = mutableListOf<Int>()
+
+        buffer.putLEShortA(location.sceneX)
+        buffer.putLEShortA(location.regionX)
+        buffer.putS(location.z)
+        buffer.putLEShortA(location.sceneY)
         buffer.setBitAccess()
-        var r = player.viewport.region
-        val chunks = Array(4) { Array(13) { arrayOfNulls<RegionChunk>(13) } }
-        val baseX = player.location.regionX - 6
-        val baseY = player.location.regionY - 6
-        for (z in 0..3) {
-            for (x in baseX..player.location.regionX + 6) {
-                for (y in baseY..player.location.regionY + 6) {
-                    r = forId((x shr 3) shl 8 or (y shr 3))
-                    if (r is DynamicRegion) {
-                        val dr = r
-                        chunks[z][x - baseX][y - baseY] = dr.chunks[z][x - (dr.x shl 3)][y - (dr.y shl 3)]
+
+        val chunks = Array(PLANE_COUNT) { Array(CHUNK_SIZE) { arrayOfNulls<RegionChunk>(CHUNK_SIZE) } }
+        val baseX = location.regionX - REGION_RADIUS
+        val baseY = location.regionY - REGION_RADIUS
+
+        for (z in 0 until PLANE_COUNT) {
+            for (x in baseX..location.regionX + REGION_RADIUS) {
+                for (y in baseY..location.regionY + REGION_RADIUS) {
+                    val region = forId((x shr 3) shl 8 or (y shr 3))
+                    if (region is DynamicRegion) {
+                        val chunk = region.chunks[z][x - (region.x shl 3)][y - (region.y shl 3)]
+                        chunks[z][x - baseX][y - baseY] = chunk
                     }
                 }
             }
         }
-        for (plane in 0..3) {
-            for (offsetX in 0..12) {
-                for (offsetY in 0..12) {
-                    val c = chunks[plane][offsetX][offsetY]
-                    if (c == null || c.base.x < 0 || c.base.y < 0) {
+
+        for (plane in 0 until PLANE_COUNT) {
+            for (offsetX in 0 until CHUNK_SIZE) {
+                for (offsetY in 0 until CHUNK_SIZE) {
+                    val chunk = chunks[plane][offsetX][offsetY]
+                    if (chunk == null || chunk.base.x < 0 || chunk.base.y < 0) {
                         buffer.putBits(1, 0)
                         continue
                     }
-                    val realRegionX = c.base.regionX
-                    val realRegionY = c.base.regionY
-                    val realPlane = c.base.z
-                    val rotation = c.rotation
-                    val id = (realRegionX shr 3) shl 8 or (realRegionY shr 3)
-                    if (!regionIds.contains(id)) {
-                        regionIds.add(id)
+
+                    val realRegionX = chunk.base.regionX
+                    val realRegionY = chunk.base.regionY
+                    val realPlane = chunk.base.z
+                    val rotation = chunk.rotation
+                    val regionId = (realRegionX shr 3) shl 8 or (realRegionY shr 3)
+
+                    if (regionId !in regionIds) {
+                        regionIds.add(regionId)
                     }
+
                     buffer.putBits(1, 1)
                     buffer.putBits(
                         26,
@@ -62,14 +70,23 @@ class BuildDynamicScene : OutgoingPacket<DynamicSceneContext> {
                 }
             }
         }
+
         buffer.setByteAccess()
-        for (id in regionIds) {
-            val keys = getRegionXTEA(id)
-            buffer.putIntB(keys[0]).putIntB(keys[1]).putIntB(keys[2]).putIntB(keys[3])
+        for (regionId in regionIds) {
+            val keys = getRegionXTEA(regionId)
+            keys.forEach { buffer.putIntB(it) }
         }
-        buffer.putShort(player.location.regionY)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
-        context.player.session.write(buffer)
-        player.playerFlags.lastSceneGraph = player.location
+
+        buffer.putShort(location.regionY)
+        buffer.cypherOpcode(player.session.isaacPair.output)
+        player.session.write(buffer)
+        player.playerFlags.lastSceneGraph = location
+    }
+
+    private companion object {
+        private const val DYNAMIC_SCENE_OPCODE = 214
+        private const val PLANE_COUNT = 4
+        private const val CHUNK_SIZE = 13
+        private const val REGION_RADIUS = 6
     }
 }
