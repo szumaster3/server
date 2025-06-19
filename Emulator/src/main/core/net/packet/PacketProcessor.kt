@@ -351,8 +351,8 @@ object PacketProcessor {
                 val def = NPCDefinition.forId(pkt.id)
                 pkt.player.debug("[NPC]-------------------------")
                 pkt.player.debug("ID: ${pkt.id}")
-                if (def.configFileId != -1) {
-                    pkt.player.debug("Varbit: ${def.configFileId}")
+                if (def.varpId != -1) {
+                    pkt.player.debug("Varbit: ${def.varpId}")
                 }
                 pkt.player.debug("------------------------------")
                 when {
@@ -861,7 +861,7 @@ object PacketProcessor {
         pkt.player.debug("Option: ${option.name}[${option.index}]")
         pkt.player.debug("SpawnLoc: ${npc.properties.spawnLocation}")
         if (hasWrapper) {
-            pkt.player.debug("WrapperID: ${npc.id}, Varbit: ${npc.definition.configFileId}")
+            pkt.player.debug("WrapperID: ${npc.id}, Varbit: ${npc.definition.varpId}")
         }
         pkt.player.debug("---------------------------------")
 
