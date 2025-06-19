@@ -1,30 +1,36 @@
 package content.region.misthalin.varrock.plugin.ge
 
-import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class MurkyMattNPC : NPCBehavior(NPCs.MURKY_MATT_RUNES_6525) {
-    private val forceChat =
-        arrayOf(
-            "Sure be a busy place, today.",
-            "Yarrr! I'm gonna be rich, I tell ye!",
-            "I'm lovin' this Grand Exchange! Arrr!",
-            "Arrr! Another good sale!",
-            "No! Me prices, they be goin' down!",
-        )
+/**
+ * Handles the Murky Matt NPC.
+ */
+@Initializable
+class MurkyMattNPC @JvmOverloads constructor(id: Int = NPCs.MURKY_MATT_RUNES_6525, location: Location? = null) : AbstractNPC(id, location) {
 
-    override fun onCreation(self: NPC) {
-        self.isWalks = false
-        self.isNeverWalks = true
+    private val forceChat = arrayOf(
+        "Sure be a busy place, today.",
+        "Yarrr! I'm gonna be rich, I tell ye!",
+        "I'm lovin' this Grand Exchange! Arrr!",
+        "Arrr! Another good sale!",
+        "No! Me prices, they be goin' down!"
+    )
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
+        return MurkyMattNPC(id, location)
     }
 
-    override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
-            sendChat(self, forceChat.random())
+    override fun tick() {
+        if (RandomFunction.random(100) < 15) {
+            sendChat(forceChat.random())
         }
-        return true
+    }
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.MURKY_MATT_RUNES_6525)
     }
 }

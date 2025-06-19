@@ -1,30 +1,36 @@
 package content.region.misthalin.varrock.plugin.ge
 
-import core.api.sendChat
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.npc.NPCBehavior
+import core.game.node.entity.npc.AbstractNPC
+import core.game.world.map.Location
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class BobBarterNPC : NPCBehavior(NPCs.BOB_BARTER_HERBS_6524) {
-    private val forceChat =
-        arrayOf(
-            "Now, what should I buy?",
-            "I'm in the money!",
-            "I could have sworn that would have worked.",
-            "Hope this item sells well.",
-            "Please, please, please work.",
-        )
+/**
+ * Handles the Bob Barter NPC.
+ */
+@Initializable
+class BobBarterNPC @JvmOverloads constructor(id: Int = NPCs.BOB_BARTER_HERBS_6524, location: Location? = null) : AbstractNPC(id, location) {
 
-    override fun onCreation(self: NPC) {
-        self.isWalks = false
-        self.isNeverWalks = true
+    private val forceChat = arrayOf(
+        "Now, what should I buy?",
+        "I'm in the money!",
+        "I could have sworn that would have worked.",
+        "Hope this item sells well.",
+        "Please, please, please work."
+    )
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC {
+        return BobBarterNPC(id, location)
     }
 
-    override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
-            sendChat(self, forceChat.random())
+    override fun tick() {
+        if (RandomFunction.random(100) < 15) {
+            sendChat(forceChat.random())
         }
-        return true
+    }
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.BOB_BARTER_HERBS_6524)
     }
 }

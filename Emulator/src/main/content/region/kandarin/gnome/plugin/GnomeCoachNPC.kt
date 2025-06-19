@@ -8,6 +8,9 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the Gnome Coach NPC.
+ */
 class GnomeCoachNPC : NPCBehavior(NPCs.GNOME_COACH_2802) {
     private val forceChat =
         arrayOf(
@@ -35,7 +38,7 @@ class GnomeCoachNPC : NPCBehavior(NPCs.GNOME_COACH_2802) {
     }
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(1, 15) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return true

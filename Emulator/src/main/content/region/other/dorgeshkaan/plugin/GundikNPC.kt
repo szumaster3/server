@@ -6,6 +6,9 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the Gundik NPC.
+ */
 class GundikNPC : NPCBehavior(NPCs.GUNDIK_5796) {
     private val forceChat =
         arrayOf(
@@ -17,7 +20,7 @@ class GundikNPC : NPCBehavior(NPCs.GUNDIK_5796) {
         )
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 1) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return super.tick(self)

@@ -6,6 +6,9 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the Zenkog NPC.
+ */
 class ZenkogNPC : NPCBehavior(NPCs.ZENKOG_5797) {
     private val forceChat =
         arrayOf(
@@ -17,7 +20,7 @@ class ZenkogNPC : NPCBehavior(NPCs.ZENKOG_5797) {
         )
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return super.tick(self)

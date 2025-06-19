@@ -6,11 +6,11 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the ShanomiNPC.
+ */
 @Initializable
-class ShanomiNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
+class ShanomiNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, location) {
     private val forceChat: Array<String> =
         arrayOf(
             "Those things which cannot be seen, perceive them.",
@@ -25,16 +25,12 @@ class ShanomiNPC(
             "Judgment and understanding for everything develop you must.",
         )
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = ShanomiNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = ShanomiNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.SHANOMI_4290)
 
     override fun tick() {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(forceChat[RandomFunction.random(forceChat.size)])
         }
         super.tick()

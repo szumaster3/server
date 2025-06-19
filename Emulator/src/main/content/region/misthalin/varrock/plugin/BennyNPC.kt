@@ -6,7 +6,11 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the BennyNPC.
+ */
 class BennyNPC : NPCBehavior(NPCs.BENNY_5925) {
+
     private val forceChat =
         arrayOf(
             "Read all about it!",
@@ -23,7 +27,7 @@ class BennyNPC : NPCBehavior(NPCs.BENNY_5925) {
     }
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return true

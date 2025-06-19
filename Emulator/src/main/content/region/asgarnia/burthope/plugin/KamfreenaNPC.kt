@@ -6,6 +6,9 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the Kamfreena NPC.
+ */
 @Initializable
 class KamfreenaNPC(
     id: Int = 0,
@@ -29,7 +32,7 @@ class KamfreenaNPC(
     override fun getIds(): IntArray = intArrayOf(NPCs.KAMFREENA_4289)
 
     override fun tick() {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(forceChat[RandomFunction.random(forceChat.size)])
         }
         super.tick()

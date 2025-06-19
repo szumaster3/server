@@ -3,11 +3,12 @@ package content.region.misthalin.varrock.plugin.ge
 import core.api.sendChat
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
-import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-@Initializable
+/**
+ * Handles the Relobo Blinyo NPC.
+ */
 class ReloboBlinyoNPC : NPCBehavior(NPCs.RELOBO_BLINYO_LOGS_6526) {
 
     private val forceChat = arrayOf(
@@ -24,7 +25,7 @@ class ReloboBlinyoNPC : NPCBehavior(NPCs.RELOBO_BLINYO_LOGS_6526) {
     }
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return true

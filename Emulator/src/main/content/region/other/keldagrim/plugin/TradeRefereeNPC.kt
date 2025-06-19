@@ -6,7 +6,10 @@ import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class TradeRefeeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
+/**
+ * Handles the TradeRefereeNPC.
+ */
+class TradeRefereeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
     private val forceChat =
         arrayOf(
             "Stay inside your triangle!",
@@ -26,7 +29,7 @@ class TradeRefeeNPC : NPCBehavior(NPCs.TRADE_REFEREE_2127) {
     }
 
     override fun tick(self: NPC): Boolean {
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, forceChat.random())
         }
         return true

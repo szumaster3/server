@@ -56,6 +56,9 @@ private val sheepIds =
         NPCs.GOLDEN_SHEEP_5173,
     )
 
+/**
+ * Handles the SheepNPC.
+ */
 class SheepNPC : NPCBehavior(*sheepIds), InteractionListener {
 
     override fun tick(self: NPC): Boolean {
@@ -63,7 +66,7 @@ class SheepNPC : NPCBehavior(*sheepIds), InteractionListener {
             return true
         }
 
-        if (RandomFunction.random(35) == 5) {
+        if (RandomFunction.random(100) < 15) {
             sendChat(self, "Baa!")
         }
 

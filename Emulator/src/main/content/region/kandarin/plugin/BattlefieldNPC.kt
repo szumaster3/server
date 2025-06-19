@@ -9,11 +9,11 @@ import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
+/**
+ * Handles the BattlefieldNPC.
+ */
 @Initializable
-class BattlefieldNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
+class BattlefieldNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, location) {
     private var nextActionTime = 0L
     private var isGnome = false
 
@@ -31,7 +31,7 @@ class BattlefieldNPC(
 
         if (!properties.combatPulse.isAttacking) {
             findAndAttackEnemy()
-        } else if (RandomFunction.random(1, 3) == 1) {
+        } else if (RandomFunction.random(300) < 15) {
             chatDuringCombat()
         }
 
