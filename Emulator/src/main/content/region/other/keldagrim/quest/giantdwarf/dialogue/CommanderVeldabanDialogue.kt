@@ -1,4 +1,4 @@
-package content.region.island.quest.giantdwarf.dialogue
+package content.region.other.keldagrim.quest.giantdwarf.dialogue
 
 import core.api.quest.getQuestStage
 import core.game.dialogue.Dialogue
@@ -10,7 +10,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Quests
 
 @Initializable
-class CommanderVeldabanDDialogue(player: Player? = null) : Dialogue(player) {
+class CommanderVeldabanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
         when (getQuestStage(player!!, Quests.THE_GIANT_DWARF)) {

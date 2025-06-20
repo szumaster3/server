@@ -1,4 +1,4 @@
-package content.region.island.quest.lostcity.plugin
+package content.region.other.zanaris.quest.lostcity.plugin
 
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
@@ -22,7 +22,7 @@ class TreeSpiritNPC(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC = content.region.island.quest.lostcity.plugin.TreeSpiritNPC(id, location)
+    ): AbstractNPC = TreeSpiritNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.TREE_SPIRIT_655)
 

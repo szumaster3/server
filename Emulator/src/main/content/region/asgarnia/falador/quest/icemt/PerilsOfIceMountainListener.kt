@@ -1,4 +1,4 @@
-package content.region.island.quest.icemt
+package content.region.asgarnia.falador.quest.icemt
 
 import core.api.sendDialogueLines
 import core.game.interaction.IntType

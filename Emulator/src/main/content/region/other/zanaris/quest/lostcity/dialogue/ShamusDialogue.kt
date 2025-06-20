@@ -1,6 +1,6 @@
-package content.region.island.quest.lostcity.dialogue
+package content.region.other.zanaris.quest.lostcity.dialogue
 
-import content.region.island.quest.lostcity.plugin.LostCityPlugin
+import content.region.other.zanaris.quest.lostcity.plugin.LostCityPlugin
 import core.api.quest.getQuestStage
 import core.api.quest.setQuestStage
 import core.game.dialogue.Dialogue

@@ -1,4 +1,4 @@
-package content.region.island.quest.icemt
+package content.region.asgarnia.falador.quest.icemt
 
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
@@ -10,7 +10,7 @@ class BrotherBordissNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
         BrotherBordissNPC(id, location)
 
-    override fun getIds(): IntArray = BrotherBordissNPC.Companion.ID
+    override fun getIds(): IntArray = ID
 
     companion object {
         private val ID = intArrayOf(NPCs.BROTHER_BORDISS_7724)

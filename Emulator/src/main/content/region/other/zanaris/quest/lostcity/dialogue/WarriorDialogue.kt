@@ -1,4 +1,4 @@
-package content.region.island.quest.lostcity.dialogue
+package content.region.other.zanaris.quest.lostcity.dialogue
 
 import core.api.quest.getQuestStage
 import core.api.quest.startQuest

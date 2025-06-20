@@ -1,4 +1,4 @@
-package content.region.island.quest.lostcity.plugin
+package content.region.other.zanaris.quest.lostcity.plugin
 
 import core.api.hasLevelStat
 import core.api.sendItemZoomOnInterface

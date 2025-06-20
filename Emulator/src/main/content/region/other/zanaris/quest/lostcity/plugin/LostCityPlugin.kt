@@ -1,4 +1,4 @@
-package content.region.island.quest.lostcity.plugin
+package content.region.other.zanaris.quest.lostcity.plugin
 
 import content.data.items.SkillingTool
 import content.global.skill.gathering.woodcutting.WoodcuttingPulse
@@ -135,7 +135,7 @@ class LostCityPlugin : InteractionListener {
                 if (player.getAttribute("treeSpawned", false)) {
                     return@on true
                 }
-                val spirit = content.region.island.quest.lostcity.plugin.TreeSpiritNPC(
+                val spirit = TreeSpiritNPC(
                     NPCs.TREE_SPIRIT_655,
                     Location(2862, 9734, 0)
                 )
