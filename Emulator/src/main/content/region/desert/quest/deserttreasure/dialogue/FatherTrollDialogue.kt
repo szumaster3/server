@@ -38,7 +38,7 @@ class FatherTrollDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.ICE_TROLL_1943)
 }
 
-private class ChatFatherAndMotherTrollDialogueFile : DialogueFile() {
+class ChatFatherAndMotherTrollDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
@@ -95,7 +95,7 @@ private class ChatFatherAndMotherTrollDialogueFile : DialogueFile() {
     }
 }
 
-private class ChatFatherAndMotherTrollAfterDialogueFile : DialogueFile() {
+class ChatFatherAndMotherTrollAfterDialogueFile : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {

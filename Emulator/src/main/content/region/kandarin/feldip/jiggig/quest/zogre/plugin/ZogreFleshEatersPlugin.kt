@@ -1,7 +1,6 @@
 package content.region.kandarin.feldip.jiggig.quest.zogre.plugin
 
 import content.region.kandarin.feldip.jiggig.quest.zogre.dialogue.*
-import content.region.kandarin.feldip.quest.zogre.dialogue.*
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZavisticRarveNPC.Companion.spawnWizard
 import core.api.*
 import core.api.interaction.openNpcShop

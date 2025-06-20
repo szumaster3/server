@@ -1,7 +1,6 @@
 package content.region.desert.alkharid.quest.desertrescue;
 
 import content.region.desert.alkharid.quest.desertrescue.dialogue.*;
-import content.region.desert.quest.desertrescue.dialogue.*;
 import content.region.desert.alkharid.quest.desertrescue.plugin.MineSlaveNPC;
 import content.region.desert.alkharid.quest.desertrescue.plugin.MiningCampZone;
 import content.region.desert.alkharid.quest.desertrescue.plugin.RowdySlaveNPC;

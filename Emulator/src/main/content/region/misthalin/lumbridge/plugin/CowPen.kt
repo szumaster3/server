@@ -20,7 +20,10 @@ class CowPen : MapZone("lumbridge cows", true), Plugin<Any?> {
         super.register(COW_PEN_AREA)
     }
 
-    override fun newInstance(arg: Any?): Plugin<Any?> { ZoneBuilder.configure(this)return this }
+    override fun newInstance(arg: Any?): Plugin<Any?> {
+        ZoneBuilder.configure(this)
+        return this
+    }
 
     override fun death(e: Entity, killer: Entity): Boolean {
         if (killer is Player && e is NPC) {

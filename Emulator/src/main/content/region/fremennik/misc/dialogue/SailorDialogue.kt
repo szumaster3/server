@@ -1,7 +1,7 @@
 package content.region.fremennik.misc.dialogue
 
-import content.region.fremennik.rellekka.plugin.TravelDestination
-import content.region.fremennik.rellekka.plugin.RellekkaShip.sail
+import content.region.fremennik.plugin.FremennikTransportation.sail
+import content.region.fremennik.plugin.Travel
 import core.api.inBorders
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -26,9 +26,9 @@ class SailorDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> {
                     end()
                     if (inBorders(player, 2580, 3844, 2584, 3847)) {
-                        sail(player!!, TravelDestination.MISCELLANIA_TO_RELLEKKA)
+                        sail(player!!, Travel.MISC_TO_RELLEKKA)
                     } else {
-                        sail(player!!, TravelDestination.RELLEKA_TO_MISCELLANIA)
+                        sail(player!!, Travel.RELLEKKA_TO_MISC)
                     }
                 }
 

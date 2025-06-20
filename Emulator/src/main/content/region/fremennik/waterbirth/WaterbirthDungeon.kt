@@ -1,7 +1,10 @@
 package content.region.fremennik.waterbirth
 
+import core.api.getUsedOption
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
+import core.game.global.action.ClimbActionHandler
+import core.game.interaction.Option
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity

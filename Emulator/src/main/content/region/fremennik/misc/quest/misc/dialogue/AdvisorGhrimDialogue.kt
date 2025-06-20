@@ -1,6 +1,6 @@
 package content.region.fremennik.misc.quest.misc.dialogue
 
-import content.region.fremennik.island.miscellania.dialogue.AdvisorDialogue
+import content.region.fremennik.misc.dialogue.AdvisorDialogue
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
