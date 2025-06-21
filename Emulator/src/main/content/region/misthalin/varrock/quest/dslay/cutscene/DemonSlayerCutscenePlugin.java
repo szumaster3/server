@@ -23,10 +23,9 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
-import core.net.packet.context.MinimapStateContext;
+import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
 import org.rs.consts.Quests;
@@ -100,8 +99,8 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
         for (NPC n : npcs) {
             n.animate(WIZARD_ANIM);
         }
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX(), player.getLocation().getY(), 450, 1, 100));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() - 15, player.getLocation().getY() + -55, 450, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, player.getLocation().getX(), player.getLocation().getY(), 450, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, player.getLocation().getX() - 15, player.getLocation().getY() + -55, 450, 1, 100));
         player.lock();
         player.getDialogueInterpreter().open(4662, npcs.get(3), this);
     }
@@ -454,8 +453,8 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                     player.getProperties().setTeleportLocation(cutscene.getBase().transform(28, 35, 0));
                     cutscene.stoneTable = new Scenery(17437, cutscene.getBase().transform(27, 41, 0));
                     SceneryBuilder.add(cutscene.stoneTable);
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() + 2, 380, 1, 98));
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 19, player.getLocation().getY() - 55, 380, 1, 98));
+                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() + 2, 380, 1, 98));
+                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, player.getLocation().getX() + 19, player.getLocation().getY() - 55, 380, 1, 98));
                     interpreter.sendPlainMessage(true, "The wizards cast an evil spell...");
                     GameWorld.getPulser().submit(new Pulse(1, player) {
                         int counter = 0;
@@ -470,8 +469,8 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                                     cutscene.delrith.animate(ANIMATION);
                                     player.getProperties().setTeleportLocation(cutscene.getBase().transform(26, 48, 0));
                                     player.setLocation(cutscene.getBase().transform(26, 48, 0));
-                                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() - 3, 390, 1, 100));
-                                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 30, player.getLocation().getY() - 55, 390, 1, 100));
+                                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() - 3, 390, 1, 100));
+                                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.ROTATION, player.getLocation().getX() + 30, player.getLocation().getY() - 55, 390, 1, 100));
                                     setVarp(player, 222, 14194946, true);
                                     SceneryBuilder.replace(cutscene.stoneTable, cutscene.stoneTable.transform(17438));
                                     npc("Ha ha ha! At last you are free, my demonic brother!", "Rest now, and then have your revenge on this pitiful", "city!");
@@ -513,8 +512,8 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                     player.unlock();
                     player.getInterfaceManager().restoreTabs();
                     player.getInterfaceManager().close();
-                    PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, player.getLocation().getX(), player.getLocation().getY(), 390, 1, 100));
+                    PacketRepository.send(MinimapState.class, new OutgoingContext.MinimapState(player, 0));
+                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, player.getLocation().getX(), player.getLocation().getY(), 390, 1, 100));
                     for (NPC n : cutscene.getNPCS()) {
                         n.clear();
                     }
@@ -528,7 +527,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                         n.setWalks(true);
                         n.unlock();
                     }
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, 0, 0, 0));
+                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, 0, 0, 0, 0, 0));
                     cutscene.getNPCS().get(0).getProperties().getCombatPulse().attack(player);
                     setAttribute(player, "cutscene", cutscene);
                     break;

@@ -3,9 +3,9 @@ package core.net.packet.out
 import core.game.bots.AIPlayer
 import core.game.node.entity.player.Player
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.MessageContext
 import core.tools.StringUtils.encryptPlayerChat
 import core.tools.StringUtils.stringToLong
 import java.util.*
@@ -15,14 +15,14 @@ import java.util.*
  *
  * @author Emperor
  */
-class CommunicationMessage : OutgoingPacket<MessageContext> {
-    override fun send(context: MessageContext) {
+class CommunicationMessage : OutgoingPacket<OutgoingContext.MessageContext> {
+    override fun send(context: OutgoingContext.MessageContext) {
         val buffer = IoBuffer(context.opcode, PacketHeader.BYTE)
         val message = context.message
         val player = context.player
         val other = context.other
         when (context.opcode) {
-            MessageContext.SEND_MESSAGE -> {
+            OutgoingContext.MessageContext.SEND_MESSAGE -> {
                 val bytes = ByteArray(256)
                 val length = encryptPlayerChat(bytes, 0, 0, message.length, message.toByteArray())
                 buffer.putLong(stringToLong(other))
@@ -30,7 +30,7 @@ class CommunicationMessage : OutgoingPacket<MessageContext> {
                 buffer.putBytes(bytes, 0, length)
             }
 
-            MessageContext.RECEIVE_MESSAGE -> {
+            OutgoingContext.MessageContext.RECEIVE_MESSAGE -> {
                 val bytes = ByteArray(256)
                 bytes[0] = message.length.toByte()
                 val length = 1 + encryptPlayerChat(bytes, 0, 1, message.length, message.toByteArray())
@@ -39,7 +39,7 @@ class CommunicationMessage : OutgoingPacket<MessageContext> {
                     .put(context.chatIcon.toByte().toInt()).putBytes(bytes, 0, length)
             }
 
-            MessageContext.CLAN_MESSAGE -> {
+            OutgoingContext.MessageContext.CLAN_MESSAGE -> {
                 val clan = player.communication.clan ?: return
                 val bytes = ByteArray(256)
                 bytes[0] = context.message.length.toByte()

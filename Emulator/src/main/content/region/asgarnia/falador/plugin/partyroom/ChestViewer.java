@@ -9,8 +9,8 @@ import core.game.container.ContainerType;
 import core.game.container.SortType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
 import static core.api.ContentAPIKt.setVarp;
@@ -69,15 +69,15 @@ public final class ChestViewer {
             switch (type) {
                 case 0:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", BEING_DROPPED);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 92, PartyRoomPlugin.chestQueue.toArray(), 10, false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 92, PartyRoomPlugin.chestQueue.toArray(), 10, false));
                     break;
                 case 1:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", READY_TO_DROP);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 91, PartyRoomPlugin.chestQueue.toArray(), 10, false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 91, PartyRoomPlugin.chestQueue.toArray(), 10, false));
                     break;
                 case 2:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, new Item[]{new Item(4151, 2), new Item(11694, 2), new Item(4012, 2000)}, 10, false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 90, new Item[]{new Item(4151, 2), new Item(11694, 2), new Item(4012, 2000)}, 10, false));
                     break;
             }
         }
@@ -93,7 +93,7 @@ public final class ChestViewer {
         }
         PartyRoomPlugin.chestQueue.addAll(getContainer());
         getContainer().clear();
-        PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, new Item[]{}, 10, false));
+        PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 90, new Item[]{}, 10, false));
         PartyRoomPlugin.update(0, null);
         PartyRoomPlugin.update(1, null);
     }
@@ -167,7 +167,7 @@ public final class ChestViewer {
             player.getInventory().getListeners().add(listener);
             player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
             player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
-            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, new Item[]{}, 10, false));
+            PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 90, new Item[]{}, 10, false));
             return this;
         }
 
@@ -251,7 +251,7 @@ public final class ChestViewer {
             }
             if (super.remove(item)) {
                 player.getInventory().add(add);
-                PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 94, player.getInventory(), false));
+                PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 94, player.getInventory(), false));
             }
             PartyRoomPlugin.update(0, null);
             PartyRoomPlugin.update(1, null);
@@ -275,8 +275,8 @@ public final class ChestViewer {
                 if (c instanceof DepositContainer) {
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, c.toArray(), 10, false));
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 94, player.getInventory(), false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 90, c.toArray(), 10, false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 94, player.getInventory(), false));
                     player.getPacketDispatch().sendIfaceSettings(1278, 0, 648, 0, 28);
                 }
             }
@@ -287,7 +287,7 @@ public final class ChestViewer {
                     player.getPacketDispatch().sendIfaceSettings(1278, 0, 648, 0, 28);
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", INV_OPTIONS);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 94, player.getInventory(), false));
+                    PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, 94, player.getInventory(), false));
                 }
 
             }

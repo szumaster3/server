@@ -9,9 +9,8 @@ import core.game.node.entity.player.info.Rights;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ClanContext;
-import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.UpdateClanChat;
 import core.worker.ManagementEvents;
@@ -172,7 +171,16 @@ public final class ClanRepository {
             ClanEntry entry = it.next();
             Player p = entry.getPlayer();
             if (p != null) {
-                PacketRepository.send(CommunicationMessage.class, new MessageContext(p, player, MessageContext.CLAN_MESSAGE, message));
+                PacketRepository.send(
+                        CommunicationMessage.class,
+                        new OutgoingContext.MessageContext(
+                                p,
+                                player.getName(),
+                                Rights.getChatIcon(player),
+                                OutgoingContext.MessageContext.CLAN_MESSAGE,
+                                message
+                        )
+                );
             }
         }
     }
@@ -202,7 +210,16 @@ public final class ClanRepository {
             return;
         }
         for (ClanEntry e : players) {
-            PacketRepository.send(CommunicationMessage.class, new MessageContext(e.getPlayer(), player, MessageContext.CLAN_MESSAGE, "[Attempting to kick/ban " + target.getUsername() + " from this Clan Chat.]"));
+            PacketRepository.send(
+                    CommunicationMessage.class,
+                    new OutgoingContext.MessageContext(
+                            e.getPlayer(),
+                            player.getName(),
+                            Rights.getChatIcon(player),
+                            OutgoingContext.MessageContext.CLAN_MESSAGE,
+                            "[Attempting to kick/ban " + target.getUsername() + " from this Clan Chat.]"
+                    )
+            );
         }
         leave(target, true, "You have been kicked from the channel.:clan:");
         target.getCommunication().setClan(null);
@@ -234,7 +251,7 @@ public final class ClanRepository {
                 banned.clear();
             }
         }
-        PacketRepository.send(UpdateClanChat.class, new ClanContext(player, this, true));
+        PacketRepository.send(UpdateClanChat.class, new OutgoingContext.Clan(player, this, true));
         player.getPacketDispatch().sendMessage(message);
         if (clanWar != null && !isDefault()) {
             clanWar.fireEvent("leavefc", player);
@@ -272,7 +289,7 @@ public final class ClanRepository {
         for (Iterator<ClanEntry> it = players.iterator(); it.hasNext(); ) {
             ClanEntry e = it.next();
             if (e.getWorldId() == GameWorld.getSettings().getWorldId() && e.getPlayer() != null) {
-                PacketRepository.send(UpdateClanChat.class, new ClanContext(e.getPlayer(), this, false));
+                PacketRepository.send(UpdateClanChat.class, new OutgoingContext.Clan(e.getPlayer(), this, false));
             }
         }
     }

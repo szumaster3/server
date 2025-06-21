@@ -6,8 +6,8 @@ import core.api.ui.sendInterfaceConfig
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs.consts.Animations
 import org.rs.consts.Scenery
@@ -58,7 +58,7 @@ class FancyDressBoxPlugin : InteractionListener {
                     openInterface(player, INTERFACE).also {
                         PacketRepository.send(
                             ContainerPacket::class.java,
-                            ContainerContext(player, INTERFACE, 164, 30, contentId, false)
+                            OutgoingContext.Container(player, INTERFACE, 164, 30, contentId, false)
                         )
                         FancyDress.values().forEachIndexed { index, item ->
                             val key = "set:$index"

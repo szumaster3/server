@@ -3,15 +3,15 @@ package core.net.packet.out;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.world.map.Location;
 import core.net.packet.IoBuffer;
+import core.net.packet.OutgoingContext;
 import core.net.packet.OutgoingPacket;
-import core.net.packet.context.DefaultContext;
 
  /**
  * Sends an audio packet.
   *
  * @author Vexia
  */
-public class AudioPacket implements OutgoingPacket<DefaultContext> {
+public class AudioPacket implements OutgoingPacket<OutgoingContext.Default> {
 
     /**
      * Write io buffer.
@@ -41,7 +41,7 @@ public class AudioPacket implements OutgoingPacket<DefaultContext> {
     //4 music
     //172 sound effect
     @Override
-    public void send(DefaultContext context) {
+    public void send(OutgoingContext.Default context) {
         final Audio audio = (Audio) context.getObjects()[0];
         final Location loc = (Location) context.getObjects()[1];
         IoBuffer buffer;

@@ -3,8 +3,8 @@ package core.game.container.access;
 import core.api.IfaceSettingsBuilder;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
 /**
@@ -40,7 +40,7 @@ public class InterfaceContainer {
         player.getPacketDispatch().sendRunScript(CLIENT_SCRIPT_INDEX, generateScriptArguments(options.length), populateScript(clientScript, options, interfaceIndex << 16 | childIndex, x, y, key));
         int settings = new IfaceSettingsBuilder().enableAllOptions().build();
         player.getPacketDispatch().sendIfaceSettings(settings, childIndex, interfaceIndex, 0, itemArray.length);
-        PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, key, itemArray, itemArray.length, false));
+        PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, key, itemArray, itemArray.length, false));
         return increment();
     }
 

@@ -6,9 +6,9 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.repository.Repository;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
+import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import org.rs.consts.Quests;
 
@@ -42,8 +42,8 @@ public class WallyCutscenePlugin extends CutscenePlugin {
     @Override
     public void open() {
         player.lock();
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 305, 1, 35));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 10, player.getLocation().getY() + 12, 305, 1, 35));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 305, 1, 35));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, player.getLocation().getX() + 10, player.getLocation().getY() + 12, 305, 1, 35));
         player.getDialogueInterpreter().open(882, Repository.findNPC(882), this);
     }
 

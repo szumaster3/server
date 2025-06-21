@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.PositionedGraphicContext
 
 /**
  * The positioned graphic outgoing packet.
  *
  * @author Emperor
  */
-class PositionedGraphic : OutgoingPacket<PositionedGraphicContext> {
-    override fun send(context: PositionedGraphicContext) {
+class PositionedGraphic : OutgoingPacket<OutgoingContext.PositionedGraphic> {
+    override fun send(context: OutgoingContext.PositionedGraphic) {
         val l = context.location
         val g = context.graphic
         val offsetHash = (context.offsetX shl 4) or context.offsetY

@@ -68,10 +68,8 @@ import core.game.world.update.flag.PlayerFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.IoSession;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.DynamicSceneContext;
-import core.net.packet.context.SceneGraphContext;
-import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
@@ -589,7 +587,7 @@ public class Player extends Entity {
         playerFlag.setUpdateSceneGraph(false);
         renderInfo.updateInformation();
         if (getSkills().isLifepointsUpdate()) {
-            PacketRepository.send(SkillLevel.class, new SkillContext(this, Skills.HITPOINTS));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext(this, Skills.HITPOINTS));
             getSkills().setLifepointsUpdate(false);
         }
         if (getAttribute("flagged-for-save", false)) {
@@ -893,9 +891,9 @@ public class Player extends Entity {
     public void updateSceneGraph(boolean login) {
         Region region = getViewport().getRegion();
         if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
-            PacketRepository.send(BuildDynamicScene.class, new DynamicSceneContext(this, login));
+            PacketRepository.send(BuildDynamicScene.class, new OutgoingContext.DynamicScene(this, login));
         } else {
-            PacketRepository.send(UpdateSceneGraph.class, new SceneGraphContext(this, login));
+            PacketRepository.send(UpdateSceneGraph.class, new OutgoingContext.SceneGraph(this, login));
         }
     }
 

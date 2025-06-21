@@ -2,8 +2,8 @@ package core.net.packet.out
 
 import core.game.node.scenery.Scenery
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.BuildSceneryContext
 
 /**
  * The outgoing packet for constructing scenery in the player's scene.
@@ -11,8 +11,8 @@ import core.net.packet.context.BuildSceneryContext
  *
  * @author Emperor
  */
-class ConstructScenery : OutgoingPacket<BuildSceneryContext> {
-    override fun send(context: BuildSceneryContext) {
+class ConstructScenery : OutgoingPacket<OutgoingContext.BuildScenery> {
+    override fun send(context: OutgoingContext.BuildScenery) {
         val player = context.player
         val o = context.scenery
         val buffer = write(UpdateAreaPosition.getBuffer(player, o.location.chunkBase), o)
@@ -25,7 +25,7 @@ class ConstructScenery : OutgoingPacket<BuildSceneryContext> {
          * Writes the construct scenery data to the given buffer.
          *
          * @param buffer The buffer to write to.
-         * @param scenery The scenery to construct.
+         * @param object The scenery to construct.
          * @return The buffer with the written data.
          */
         @JvmStatic

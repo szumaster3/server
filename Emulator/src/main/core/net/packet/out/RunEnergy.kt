@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.PlayerContext
 
 /**
  * The run energy outgoing packet.
  *
  * @author Emperor
  */
-class RunEnergy : OutgoingPacket<PlayerContext> {
-    override fun send(context: PlayerContext) {
+class RunEnergy : OutgoingPacket<OutgoingContext.PlayerContext> {
+    override fun send(context: OutgoingContext.PlayerContext) {
         val buffer = IoBuffer(234)
         buffer.put(context.player.settings.runEnergy.toInt().toByte().toInt())
         buffer.cypherOpcode(context.player.session.isaacPair.output)

@@ -1,16 +1,17 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.ConfigContext
 
 /**
  * The config outgoing packet.
  *
  * @author Emperor
  */
-class Config : OutgoingPacket<ConfigContext> {
-    override fun send(context: ConfigContext) {
+class Config : OutgoingPacket<OutgoingContext.Config> {
+
+    override fun send(context: OutgoingContext.Config) {
         val buffer: IoBuffer
         if (context.value < Byte.MIN_VALUE || context.value > Byte.MAX_VALUE) {
             buffer = IoBuffer(226)

@@ -2,8 +2,8 @@ package core.net.packet.out
 
 import core.game.node.entity.skill.Skills
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.SkillContext
 import kotlin.math.ceil
 
 /**
@@ -11,8 +11,9 @@ import kotlin.math.ceil
  *
  * @author Emperor
  */
-class SkillLevel : OutgoingPacket<SkillContext> {
-    override fun send(context: SkillContext) {
+class SkillLevel : OutgoingPacket<OutgoingContext.SkillContext> {
+
+    override fun send(context: OutgoingContext.SkillContext) {
         val buffer = IoBuffer(38)
         buffer.cypherOpcode(context.player.session.isaacPair.output)
         val skills = context.player.getSkills()

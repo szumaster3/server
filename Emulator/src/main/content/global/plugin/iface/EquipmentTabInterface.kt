@@ -18,8 +18,8 @@ import core.game.interaction.InteractionListeners.run
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -198,12 +198,12 @@ class EquipmentTabInterface : ComponentPlugin() {
                         override fun update(c: Container?, e: ContainerEvent?, ) {
                             PacketRepository.send(
                                 ContainerPacket::class.java,
-                                ContainerContext(p, -1, -1, 98, e!!.items, false, *e.slots),
+                                OutgoingContext.Container(p, -1, -1, 98, e!!.items, false, *e.slots),
                             )
                         }
 
                         override fun refresh(c: Container?) {
-                            PacketRepository.send(ContainerPacket::class.java, ContainerContext(p, -1, -1, 98, c!!, false),)
+                            PacketRepository.send(ContainerPacket::class.java, OutgoingContext.Container(p, -1, -1, 98, c!!, false),)
                         }
                     }
                     p.interfaceManager.openComponent(Components.EQUIP_SCREEN2_667)

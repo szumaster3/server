@@ -7,8 +7,8 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs.consts.Components
 import org.rs.consts.Items
@@ -45,12 +45,13 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
          */
 
         on(Items.SPARE_CONTROLS_4002, IntType.ITEM, "View") { player, _ ->
-            val puzzlePieces: Array<Item?>? = ((Items.SLIDING_BUTTON_3904..Items.SLIDING_BUTTON_3950 step 2).toList().map { Item(it) } + Item(-1)).toTypedArray()
+            val puzzlePieces: Array<Item> = ((Items.SLIDING_BUTTON_3904..Items.SLIDING_BUTTON_3950 step 2).map { Item(it) } + Item(-1)).toTypedArray()
             val settings = IfaceSettingsBuilder().build()
             player.packetDispatch.sendIfaceSettings(settings, 6, Components.TRAIL_PUZZLE_363, 0, 25)
             player.interfaceManager.open(Component(Components.TRAIL_PUZZLE_363))
             PacketRepository.send(
-                ContainerPacket::class.java, ContainerContext(player, -1, -1, 140, puzzlePieces, 25, false)
+                ContainerPacket::class.java,
+                OutgoingContext.Container(player, -1, -1, 140, puzzlePieces, 25, false)
             )
             return@on true
         }
@@ -118,7 +119,7 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
                 if (!getAttribute(player, "$key:puzzle:done", false)) {
                     PacketRepository.send(
                         ContainerPacket::class.java,
-                        ContainerContext(player, -1, -1, 140, solutionItems, 25, false),
+                        OutgoingContext.Container(player, -1, -1, 140, solutionItems, 25, false),
                     )
                 }
             }
@@ -193,7 +194,7 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
         val items = puzzle.map { Item(it) }.toTypedArray()
         PacketRepository.send(
             ContainerPacket::class.java,
-            ContainerContext(player, -1, -1, 140, items, 25, false),
+            OutgoingContext.Container(player, -1, -1, 140, items, 25, false),
         )
     }
 

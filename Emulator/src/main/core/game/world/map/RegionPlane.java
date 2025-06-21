@@ -9,8 +9,8 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.RegionFlags;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.BuildItemContext;
 import core.net.packet.out.ClearGroundItem;
 import core.net.packet.out.ConstructGroundItem;
 
@@ -274,7 +274,7 @@ public final class RegionPlane {
         GroundItem g = (GroundItem) item;
         if (g.isPrivate()) {
             if (g.getDropper() != null) {
-                PacketRepository.send(ConstructGroundItem.class, new BuildItemContext(g.getDropper(), item));
+                PacketRepository.send(ConstructGroundItem.class, new OutgoingContext.BuildItem(g.getDropper(), item, 0));
             }
             return;
         }
@@ -312,7 +312,7 @@ public final class RegionPlane {
         }
         if (item.isPrivate()) {
             if (item.getDropper() != null && item.getDropper().isPlaying() && item.getDropper().getLocation().withinDistance(l)) {
-                PacketRepository.send(ClearGroundItem.class, new BuildItemContext(item.getDropper(), item));
+                PacketRepository.send(ClearGroundItem.class, new OutgoingContext.BuildItem(item.getDropper(), item, 0));
             }
             return;
         }

@@ -18,9 +18,9 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
+import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import org.rs.consts.Music;
 import org.rs.consts.Quests;
@@ -121,8 +121,8 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
                 case 5835:
                     if (player.getAttribute("can-arrest", false)) {
                         Location loc = base.transform(9, 34, 0);
-                        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, loc.getX(), loc.getY(), 450, 1, 100));
-                        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, loc.getX(), loc.getY(), 450, 1, 100));
+                        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.POSITION, loc.getX(), loc.getY(), 450, 1, 100));
+                        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.ROTATION, loc.getX(), loc.getY(), 450, 1, 100));
                         zaff.face(surok);
                         surok.face(zaff);
                         player.lock();
@@ -256,8 +256,8 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
      * @param speed  the speed
      */
     public void sendCamera(int x1, int y1, int x2, int y2, int height, int speed) {
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() + x1, player.getLocation().getY() + y1, height, 1, speed));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + x2, player.getLocation().getY() + y2, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.POSITION, player.getLocation().getX() + x1, player.getLocation().getY() + y1, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.ROTATION, player.getLocation().getX() + x2, player.getLocation().getY() + y2, height, 1, speed));
     }
 
     /**
@@ -281,7 +281,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
      * Reset.
      */
     public void reset() {
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, 0, 0, 0));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, 0, 0, 0, 0, 0));
     }
 
     @Override

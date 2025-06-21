@@ -14,8 +14,7 @@ import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
+import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -87,8 +86,8 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
     }
 
     private static void camera(final Player player, int x, int y, int xRot, int yRot, int height, int speed) {
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, x, y, height, 1, speed));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.POSITION, x, y, height, 1, speed));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.ROTATION, x + xRot, y + yRot, height, 1, speed));
     }
 
     private void camera(int x, int y, int xRot, int yRot, int height, int speed) {
@@ -204,7 +203,7 @@ public final class GrandExchangeCutscene extends CutscenePlugin {
                     stage = 102;
                     break;
                 case 102:
-                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, 580, 1, 100));
+                    PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, 0, 0, 580, 1, 100));
                     final CutscenePlugin cutscene = player.getAttribute("ge-cutscene", null);
                     cutscene.stop(false);
                     player.getSavedData().globalData.setGeTutorial(true);

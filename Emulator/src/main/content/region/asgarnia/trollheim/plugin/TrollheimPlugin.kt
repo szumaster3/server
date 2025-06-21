@@ -28,8 +28,8 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import core.game.world.repository.Repository.findNPC
 import core.game.world.update.flag.context.Animation
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
@@ -790,9 +790,9 @@ class TrollheimPlugin : OptionHandler() {
             val loc = Location.create(2849, 3597, 0)
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(
+                OutgoingContext.Camera(
                     player,
-                    CameraContext.CameraType.POSITION,
+                    OutgoingContext.CameraType.POSITION,
                     loc.x - 2,
                     loc.y,
                     1300,
@@ -802,9 +802,9 @@ class TrollheimPlugin : OptionHandler() {
             )
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(
+                OutgoingContext.Camera(
                     player,
-                    CameraContext.CameraType.ROTATION,
+                    OutgoingContext.CameraType.ROTATION,
                     loc.x + 22,
                     loc.y + 10,
                     1300,
@@ -829,7 +829,7 @@ class TrollheimPlugin : OptionHandler() {
                                 this@WarningCutscene.stop(false)
                                 PacketRepository.send(
                                     CameraViewPacket::class.java,
-                                    CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 1300, 1, 30),
+                                    OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 0, 0, 1300, 1, 30),
                                 )
                                 return true
                             }

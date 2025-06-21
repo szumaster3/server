@@ -11,10 +11,8 @@ import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.Item;
 import core.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.InterfaceConfigContext;
-import core.net.packet.context.InterfaceContext;
-import core.net.packet.context.StringContext;
 import core.net.packet.out.Interface;
 import core.net.packet.out.InterfaceConfig;
 import core.net.packet.out.StringPacket;
@@ -168,7 +166,7 @@ public final class WeaponInterface extends Component {
     private void open() {
         ComponentDefinition definition = ComponentDefinition.forId(Components.WEAPON_FISTS_SEL_92);
         boolean resizable = player.getInterfaceManager().isResizable();
-        PacketRepository.send(Interface.class, new InterfaceContext(player, definition.getWindowPaneId(resizable), definition.getChildId(resizable), id, definition.isWalkable()));
+        PacketRepository.send(Interface.class, new OutgoingContext.InterfaceContext(player, definition.getWindowPaneId(resizable), definition.getChildId(resizable), id, definition.isWalkable()));
         int slot = ensureStyleIndex(player, player.getSettings().getAttackStyleIndex());
         if (slot != player.getSettings().getAttackStyleIndex()) {
             player.getSettings().toggleAttackStyleIndex(slot);
@@ -262,9 +260,9 @@ public final class WeaponInterface extends Component {
         }
         if (current != WeaponInterfaces.STAFF) {
             selectAutoSpell(-1, false);
-            PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, id, getConfig(current.getAttackStyles().length, current.getInterfaceId()), !specialBar));
+            PacketRepository.send(InterfaceConfig.class, new OutgoingContext.InterfaceConfigContext(player, id, getConfig(current.getAttackStyles().length, current.getInterfaceId()), !specialBar));
         } else { //if staff
-            PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, id, 87, !specialBar));
+            PacketRepository.send(InterfaceConfig.class, new OutgoingContext.InterfaceConfigContext(player, id, 87, !specialBar));
         }
         if (!canAutocast(false)) {
             if (current == WeaponInterfaces.STAFF && player.getAttribute("autocast_select", false)) {
@@ -272,7 +270,7 @@ public final class WeaponInterface extends Component {
             }
             selectAutoSpell(-1, true);
         }
-        PacketRepository.send(StringPacket.class, new StringContext(player, name, id, 0));
+        PacketRepository.send(StringPacket.class, new OutgoingContext.StringContext(player, name, id, 0));
         if (player.getSettings().isSpecialToggled()) {
             player.getSettings().toggleSpecialBar();
         }

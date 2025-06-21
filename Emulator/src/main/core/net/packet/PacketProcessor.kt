@@ -43,7 +43,6 @@ import core.game.world.repository.Repository
 import core.game.world.update.flag.EntityFlag
 import core.game.world.update.flag.context.ChatMessage
 import core.net.amsc.MSPacketRepository
-import core.net.packet.context.PlayerContext
 import core.net.packet.`in`.Packet
 import core.net.packet.`in`.RunScript
 import core.net.packet.out.ClearMinimapFlag
@@ -905,7 +904,7 @@ object PacketProcessor {
         }
 
     private fun sendClearMinimap(player: Player) {
-        PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(player))
+        PacketRepository.send(ClearMinimapFlag::class.java, OutgoingContext.PlayerContext(player))
     }
 
     fun switchItem(

@@ -8,8 +8,8 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.tools.StringUtils
 import org.rs.consts.Items
@@ -273,14 +273,14 @@ enum class BarcrawlType {
             } else {
                 PacketRepository.send(
                     CameraViewPacket::class.java,
-                    CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1, 4, 4),
+                    OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 4, 4, 1, 4, 4),
                 )
                 Pulser.submit(
                     object : Pulse(3, player) {
                         override fun pulse(): Boolean {
                             PacketRepository.send(
                                 CameraViewPacket::class.java,
-                                CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4),
+                                OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 4, 4, 1, 4, 4),
                             )
                             return true
                         }

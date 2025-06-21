@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.AccessMaskContext
 
 /**
  * The access mask outgoing packet.
  *
  * @author Emperor
  */
-class AccessMask : OutgoingPacket<AccessMaskContext> {
-    override fun send(context: AccessMaskContext) {
+class AccessMask : OutgoingPacket<OutgoingContext.AccessMask> {
+    override fun send(context: OutgoingContext.AccessMask) {
         val buffer = IoBuffer(165)
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putLEShort(context.length)

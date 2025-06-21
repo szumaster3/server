@@ -6,8 +6,8 @@ import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.DisplayModelContext
 import core.net.packet.out.DisplayModel
 import core.plugin.Plugin
 import core.tools.RandomFunction
@@ -122,9 +122,9 @@ class BarrowsPuzzle private constructor(
             for (i in puzzle.questionModels.indices) {
                 PacketRepository.send(
                     DisplayModel::class.java,
-                    DisplayModelContext(
+                    OutgoingContext.DisplayModel(
                         player,
-                        DisplayModelContext.ModelType.MODEL,
+                        OutgoingContext.DisplayModel.ModelType.MODEL,
                         puzzle.questionModels[i],
                         0,
                         25,
@@ -135,9 +135,9 @@ class BarrowsPuzzle private constructor(
             for (i in puzzle.answerModels.indices) {
                 PacketRepository.send(
                     DisplayModel::class.java,
-                    DisplayModelContext(
+                    OutgoingContext.DisplayModel(
                         player,
-                        DisplayModelContext.ModelType.MODEL,
+                        OutgoingContext.DisplayModel.ModelType.MODEL,
                         puzzle.answerModels[i] and 0xFFFF,
                         0,
                         25,
@@ -147,9 +147,9 @@ class BarrowsPuzzle private constructor(
             }
             PacketRepository.send(
                 DisplayModel::class.java,
-                DisplayModelContext(
+                OutgoingContext.DisplayModel(
                     player,
-                    DisplayModelContext.ModelType.MODEL,
+                    OutgoingContext.DisplayModel.ModelType.MODEL,
                     puzzle.answerModels[2] and 0xFFFF,
                     0,
                     25,

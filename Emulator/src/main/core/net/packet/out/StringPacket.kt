@@ -1,17 +1,17 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.StringContext
 
 /**
  * The outgoing set component string packet.
  *
  * @author Emperor
  */
-class StringPacket : OutgoingPacket<StringContext> {
-    override fun send(context: StringContext) {
+class StringPacket : OutgoingPacket<OutgoingContext.StringContext> {
+    override fun send(context: OutgoingContext.StringContext) {
         val buffer = IoBuffer(171, PacketHeader.SHORT)
         buffer.putIntB((context.interfaceId shl 16) or context.lineId)
         buffer.putString(context.string)

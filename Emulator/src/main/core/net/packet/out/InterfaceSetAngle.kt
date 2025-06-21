@@ -1,18 +1,18 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.DefaultContext
 
 /**
  * Sends a packet to set the camera angle for a interface component.
  */
-class InterfaceSetAngle : OutgoingPacket<DefaultContext> {
+class InterfaceSetAngle : OutgoingPacket<OutgoingContext.Default> {
 
     /**
      * Sends the angle, pitch, scale, and yaw settings for the interface component.
      */
-    override fun send(context: DefaultContext) {
+    override fun send(context: OutgoingContext.Default) {
         val player = context.player
         val objects = context.objects
         val pitch = objects[0] as Int

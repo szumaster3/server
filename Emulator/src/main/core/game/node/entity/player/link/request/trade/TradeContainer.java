@@ -10,8 +10,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
 import static core.api.ContentAPIKt.sendMessage;
@@ -199,16 +199,16 @@ public final class TradeContainer extends Container {
 
         @Override
         public void update(Container c, ContainerEvent event) {//type 541 - loaning
-            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, 64212, 90, c.toArray(), c.capacity(), false));
+            PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, 64212, 90, c.toArray(), c.capacity(), false));
             if (TradeModule.getExtension(player) != null && TradeModule.getExtension(TradeModule.getExtension(player).getTarget()) != null) {
-                PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 60981, -2, 91, TradeModule.getExtension(TradeModule.getExtension(player).getTarget()).getContainer().toArray(), 27, false));
+                PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, 60981, -2, 91, TradeModule.getExtension(TradeModule.getExtension(player).getTarget()).getContainer().toArray(), 27, false));
             }
             checkAlert();
         }
 
         @Override
         public void refresh(Container c) {
-            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, 64209, 93, player.getInventory(), false));
+            PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, 64209, 93, player.getInventory(), false));
         }
 
     }

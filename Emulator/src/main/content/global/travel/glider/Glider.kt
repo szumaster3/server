@@ -8,8 +8,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import org.rs.consts.Components
 import org.rs.consts.NPCs
@@ -84,7 +84,7 @@ class GliderPulse(
         } else if (count == 2 && crash) {
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1200, 4, 4),
+                OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 4, 4, 1200, 4, 4),
             )
             sendMessage(player, "The glider almost gets blown from its path as it withstands heavy winds.")
         }

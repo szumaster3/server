@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.CSConfigContext
 
 /**
  * The outgoing packet for client script configs.
  *
  * @author Snickerize
  */
-class CSConfigPacket : OutgoingPacket<CSConfigContext> {
-    override fun send(context: CSConfigContext) {
+class CSConfigPacket : OutgoingPacket<OutgoingContext.CSConfig> {
+    override fun send(context: OutgoingContext.CSConfig) {
         val buffer = IoBuffer(65)
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putC(context.value.toByte().toInt())

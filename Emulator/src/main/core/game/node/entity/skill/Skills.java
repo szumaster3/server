@@ -13,8 +13,8 @@ import core.game.node.entity.player.link.request.assist.AssistSessionPulse;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.SkillContext;
 import core.net.packet.out.SkillLevel;
 import core.plugin.type.ExperiencePlugins;
 import kotlin.Pair;
@@ -293,7 +293,7 @@ public final class Skills {
             }
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, slot));
             entity.dispatch(new XPGainEvent(slot, experienceAdd));
         }
         if (GameWorld.getTicks() - lastUpdate >= 200) {
@@ -468,7 +468,7 @@ public final class Skills {
         }
         Player player = (Player) entity;
         for (int i = 0; i < 24; i++) {
-            PacketRepository.send(SkillLevel.class, new SkillContext(player, i));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext(player, i));
         }
         LevelUp.sendFlashingIcons(player, -1);
     }
@@ -633,7 +633,7 @@ public final class Skills {
         dynamicLevels[slot] = level;
 
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, slot));
             entity.dispatch(new DynamicSkillLevelChangeEvent(slot, previousLevel, level));
         }
     }
@@ -779,7 +779,7 @@ public final class Skills {
     public void rechargePrayerPoints() {
         prayerPoints = staticLevels[PRAYER];
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -797,7 +797,7 @@ public final class Skills {
         // prayerPoints = staticLevels[PRAYER];
         // }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -815,7 +815,7 @@ public final class Skills {
             prayerPoints = staticLevels[PRAYER];
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -827,7 +827,7 @@ public final class Skills {
     public void setPrayerPoints(double amount) {
         prayerPoints = amount;
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -853,7 +853,7 @@ public final class Skills {
             dynamicLevels[skill] = maximum;
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, skill));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, skill));
         }
         return left;
     }
@@ -891,7 +891,7 @@ public final class Skills {
     public void setStaticLevel(int skill, int level) {
         experience[skill] = getExperienceByLevel(staticLevels[skill] = dynamicLevels[skill] = level);
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, skill));
+            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, skill));
         }
     }
 

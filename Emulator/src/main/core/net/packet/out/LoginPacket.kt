@@ -1,8 +1,8 @@
 package core.net.packet.out
 
 import core.game.node.entity.player.info.Rights
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.PlayerContext
 import java.nio.ByteBuffer
 
 /**
@@ -10,8 +10,8 @@ import java.nio.ByteBuffer
  *
  * @author Emperor
  */
-class LoginPacket : OutgoingPacket<PlayerContext> {
-    override fun send(context: PlayerContext) {
+class LoginPacket : OutgoingPacket<OutgoingContext.PlayerContext> {
+    override fun send(context: OutgoingContext.PlayerContext) {
         val p = context.player
         val buffer = ByteBuffer.allocate(9)
         val right =

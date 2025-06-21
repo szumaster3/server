@@ -13,8 +13,8 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs.consts.Components
 import org.rs.consts.Items
@@ -106,7 +106,7 @@ class WorkbenchPlugin :
     ) {
         val BUILD_INDEXES = intArrayOf(0, 2, 4, 6, 1, 3, 5)
         player.interfaceManager.open(Component(396))
-        val items = arrayOfNulls<Item>(7)
+        val tempItems: Array<Item?> = arrayOfNulls(7)
 
         var c261Value = 0
 
@@ -124,18 +124,21 @@ class WorkbenchPlugin :
                 continue
             }
 
-            val decoration = hotspot.decorations[menuIndex]
-            items[BUILD_INDEXES[menuIndex]] = Item(decoration.interfaceItem)
+            val decoration = hotspot.decorations[menuIndex]!!
+
+            tempItems[BUILD_INDEXES[menuIndex]] = Item(decoration.interfaceItem)
+
             player.packetDispatch.sendString(
                 getItemName(decoration.interfaceItem),
                 Components.POH_BUILD_FURNITURE_396,
                 itemsStringOffset,
             )
-            var hasRequirements =
-                min(
-                    player.skills.getLevel(22),
-                    player.getAttribute(GameAttributes.CON_FLATPACK_TIER, 0),
-                ) >= decoration.level
+
+            var hasRequirements = min(
+                player.skills.getLevel(22),
+                player.getAttribute(GameAttributes.CON_FLATPACK_TIER, 0)
+            ) >= decoration.level
+
             for (j in 0..3) {
                 if (j >= decoration.items.size) {
                     if (j == decoration.items.size && decoration.nailAmount > 0) {
@@ -160,6 +163,7 @@ class WorkbenchPlugin :
                     player.packetDispatch.sendString(s, Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j)
                 }
             }
+
             if (hasRequirements) {
                 c261Value += (1 shl (menuIndex + 1))
             }
@@ -172,9 +176,11 @@ class WorkbenchPlugin :
         }
 
         setVarp(player, 261, c261Value)
+        val items: Array<Item> = tempItems.map { it ?: Item(-1) }.toTypedArray()
+
         PacketRepository.send(
             ContainerPacket::class.java,
-            ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
+            OutgoingContext.Container(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
         )
     }
 }

@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.ClearChunkContext
 
 /**
  * Handles the clear region chunk outgoing packet.
  *
  * @author Emperor
  */
-class ClearRegionChunk : OutgoingPacket<ClearChunkContext> {
-    override fun send(context: ClearChunkContext) {
+class ClearRegionChunk : OutgoingPacket<OutgoingContext.ClearChunk> {
+    override fun send(context: OutgoingContext.ClearChunk) {
         val l = context.player.playerFlags.lastSceneGraph
         val x = context.chunk.currentBase.getSceneX(l)
         val y = context.chunk.currentBase.getSceneY(l)

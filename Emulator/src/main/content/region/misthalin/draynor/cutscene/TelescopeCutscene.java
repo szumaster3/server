@@ -11,9 +11,8 @@ import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
 import kotlin.Unit;
@@ -72,13 +71,13 @@ public final class TelescopeCutscene extends CutscenePlugin {
         int x = 3104;
         int y = 3175;
         int height = 900;
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, x, y, height, 1, 100));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, x + 1, y - 30, height, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y, height, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x + 1, y - 30, height, 1, 100));
         x = 3111;
         y = 3172;
         height = 700;
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, x, y, height, 1, 2));
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, x - 1, y + 230, height, 1, 1));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y, height, 1, 2));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x - 1, y + 230, height, 1, 1));
         player.getInterfaceManager().open(INTERFACE);
         GameWorld.getPulser().submit(new Pulse(22, player) {
             @Override

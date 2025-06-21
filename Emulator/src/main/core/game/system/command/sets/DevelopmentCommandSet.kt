@@ -17,8 +17,8 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketWriteQueue
-import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
@@ -405,7 +405,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(name = "testpacket", Privilege.ADMIN) { player, _ ->
-            PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
+            PacketWriteQueue.write(ResetInterface(), OutgoingContext.PlayerContext(player))
         }
 
         /*

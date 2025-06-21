@@ -27,8 +27,8 @@ import core.game.world.map.RegionManager.getRegionPlayers
 import core.game.world.map.RegionManager.getTeleportLocation
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Graphics
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
@@ -256,7 +256,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                     reward(player)
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        CameraContext(player, CameraContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
+                        OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
                     )
                     return true
                 }

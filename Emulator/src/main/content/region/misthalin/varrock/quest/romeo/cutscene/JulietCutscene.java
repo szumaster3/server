@@ -10,9 +10,8 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.ClassScanner;
 import core.plugin.Initializable;
@@ -62,13 +61,13 @@ public final class JulietCutscene extends CutscenePlugin {
     public void open() {
         int x = player.getLocation().getX();
         int y = player.getLocation().getY();
-        CameraContext rot = null;
-        CameraContext pos = null;
+        OutgoingContext.Camera rot = null;
+        OutgoingContext.Camera pos = null;
         int height = 390;
         int speed = 100;
         int other = 1;
-        pos = new CameraContext(player, CameraType.POSITION, x, y - 4, height, other, speed);
-        rot = new CameraContext(player, CameraType.ROTATION, x, y - 4, height, other, speed);
+        pos = new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y - 4, height, other, speed);
+        rot = new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x, y - 4, height, other, speed);
         PacketRepository.send(CameraViewPacket.class, pos);
         PacketRepository.send(CameraViewPacket.class, rot);
         for (NPC npc : npcs) {

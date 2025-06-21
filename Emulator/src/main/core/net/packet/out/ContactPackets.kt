@@ -1,9 +1,9 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.ContactContext
 import core.tools.StringUtils.stringToLong
 
 /**
@@ -11,13 +11,13 @@ import core.tools.StringUtils.stringToLong
  *
  * @author Emperor
  */
-class ContactPackets : OutgoingPacket<ContactContext> {
-    override fun send(context: ContactContext) {
+class ContactPackets : OutgoingPacket<OutgoingContext.Contact> {
+    override fun send(context: OutgoingContext.Contact) {
         var buffer: IoBuffer? = null
         val player = context.player
         when (context.type) {
-            ContactContext.UPDATE_STATE_TYPE -> buffer = IoBuffer(197).put(2) //always put the AVAILABLE state.
-            ContactContext.IGNORE_LIST_TYPE -> {
+            OutgoingContext.Contact.UPDATE_STATE_TYPE -> buffer = IoBuffer(197).put(2) //always put the AVAILABLE state.
+            OutgoingContext.Contact.IGNORE_LIST_TYPE -> {
                 buffer = IoBuffer(126, PacketHeader.SHORT)
                 for (string in player.communication.blocked) {
                     if (string.length == 0) {
@@ -27,9 +27,9 @@ class ContactPackets : OutgoingPacket<ContactContext> {
                 }
             }
 
-            ContactContext.UPDATE_FRIEND_TYPE -> {
+            OutgoingContext.Contact.UPDATE_FRIEND_TYPE -> {
                 buffer = IoBuffer(62, PacketHeader.BYTE)
-                buffer.putLong(stringToLong(context.name))
+                context.name?.let { stringToLong(it) }?.let { buffer.putLong(it) }
                 buffer.putShort(context.worldId)
                 val c = player.communication.contacts[context.name]
                 if (c != null) {
@@ -37,7 +37,7 @@ class ContactPackets : OutgoingPacket<ContactContext> {
                 } else {
                     buffer.put(0.toByte().toInt())
                 }
-                if (context.isOnline) {
+                if (context.isOnline()) {
                     buffer.putString("World " + context.worldId)
                 }
             }

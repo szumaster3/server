@@ -19,8 +19,8 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.map.path.Pathfinder
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 import org.rs.consts.Components
@@ -106,7 +106,7 @@ class TelekineticTheatrePlugin
                     if (player.getAttribute("camera", false)) {
                         PacketRepository.send(
                             CameraViewPacket::class.java,
-                            CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
+                            OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 0, 0, 400, 1, 20),
                         )
                         player.setAttribute("camera", false)
                         return true
@@ -199,7 +199,7 @@ class TelekineticTheatrePlugin
             player.setAttribute("camera", false)
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
+                OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 0, 0, 400, 1, 20),
             )
             val mazeGuard = NPC.create(NPCs.MAZE_GUARDIAN_3102, base!!.transform(maze!!.endLocation))
             mazeGuard.init()
@@ -246,7 +246,7 @@ class TelekineticTheatrePlugin
             if (player.getAttribute("camera", false)) {
                 PacketRepository.send(
                     CameraViewPacket::class.java,
-                    CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 400, 1, 20),
+                    OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 0, 0, 400, 1, 20),
                 )
                 player.setAttribute("camera", false)
                 return
@@ -266,21 +266,21 @@ class TelekineticTheatrePlugin
                 height = 799
                 PacketRepository.send(
                     CameraViewPacket::class.java,
-                    CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed),
+                    OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed),
                 )
                 PacketRepository.send(
                     CameraViewPacket::class.java,
-                    CameraContext(player, CameraContext.CameraType.ROTATION, x - 55, y - 25, height, 1, speed),
+                    OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x - 55, y - 25, height, 1, speed),
                 )
                 return
             }
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed),
+                OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x + xInc, y + yInc, height, 1, speed),
             )
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                CameraContext(player, CameraContext.CameraType.ROTATION, x + xInc, y + yInc, height, 1, speed),
+                OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x + xInc, y + yInc, height, 1, speed),
             )
         }
 

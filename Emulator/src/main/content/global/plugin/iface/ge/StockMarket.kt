@@ -8,9 +8,8 @@ import core.game.ge.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ConfigContext
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.Config
 import core.net.packet.out.ContainerPacket
 import core.tools.Log
@@ -417,7 +416,7 @@ class StockMarket : InterfaceListener {
             if (offer != null) {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false),
+                    OutgoingContext.Container(player, -1, -1757, 523 + offer.index, offer.withdraw as core.game.container.Container, false)
                 )
             }
         }
@@ -493,8 +492,8 @@ class StockMarket : InterfaceListener {
          * @param player The player returning to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Config::class.java, ConfigContext(player, 1112, -1))
-            PacketRepository.send(Config::class.java, ConfigContext(player, 1112, -1))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
             player.interfaceManager.closeChatbox()
             player.interfaceManager.closeSingleTab()
             player.setAttribute("ge-index", -1)

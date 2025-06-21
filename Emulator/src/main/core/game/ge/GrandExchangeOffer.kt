@@ -6,9 +6,8 @@ import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.repository.Repository
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
-import core.net.packet.context.GrandExchangeContext
 import core.net.packet.out.ContainerPacket
 import core.net.packet.out.GrandExchangePacket
 import java.sql.ResultSet
@@ -154,7 +153,7 @@ class GrandExchangeOffer {
         player ?: return
         PacketRepository.send(
             GrandExchangePacket::class.java,
-            GrandExchangeContext(
+            OutgoingContext.GrandExchange(
                 player,
                 index.toByte(),
                 offerState.ordinal.toByte(),
@@ -166,9 +165,10 @@ class GrandExchangeOffer {
                 totalCoinExchange,
             ),
         )
+        val withdrawItems: Array<Item> = withdraw.filterNotNull().toTypedArray()
         PacketRepository.send(
             ContainerPacket::class.java,
-            ContainerContext(player, -1, -1757, 523 + index, withdraw, false),
+            OutgoingContext.Container(player, -1, -1757, 523 + index, withdrawItems, false)
         )
     }
 

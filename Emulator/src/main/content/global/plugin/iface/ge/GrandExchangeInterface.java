@@ -13,8 +13,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -185,7 +185,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
                     player.getPacketDispatch().sendMessage("You successfully traded your item components for a set!");
                 }
                 playAudio(player, Sounds.GE_TRADE_OK_4044);
-                PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.getInventory(), false));
+                PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, -2, player.getAttribute("container-key", 93), player.getInventory(), false));
                 break;
             case 155:
                 CS2Mapping mapping = CS2Mapping.forId(1089);

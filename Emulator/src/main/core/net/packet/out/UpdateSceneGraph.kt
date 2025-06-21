@@ -2,16 +2,16 @@ package core.net.packet.out
 
 import core.game.system.config.XteaParser.Companion.getRegionXTEA
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.SceneGraphContext
 
 /**
  * The update scene graph outgoing packet.
  * @author Emperor
  */
-class UpdateSceneGraph : OutgoingPacket<SceneGraphContext> {
-    override fun send(context: SceneGraphContext) {
+class UpdateSceneGraph : OutgoingPacket<OutgoingContext.SceneGraph> {
+    override fun send(context: OutgoingContext.SceneGraph) {
         val buffer = IoBuffer(162, PacketHeader.SHORT)
         val player = context.player
         buffer.cypherOpcode(player.session.isaacPair.output)

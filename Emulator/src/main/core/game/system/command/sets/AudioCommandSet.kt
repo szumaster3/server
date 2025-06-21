@@ -6,8 +6,8 @@ import core.game.node.entity.player.link.music.MusicEntry
 import core.game.system.command.Privilege
 import core.game.world.map.Location
 import core.game.world.repository.Repository
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
 
@@ -45,7 +45,7 @@ class AudioCommandSet : CommandSet(Privilege.ADMIN) {
             if (id == null) {
                 reject(player, "Please use a valid integer for the jingle id.")
             }
-            PacketRepository.send(MusicPacket::class.java, MusicContext(player, id!!, true))
+            PacketRepository.send(MusicPacket::class.java, OutgoingContext.Music(player, id!!, true))
             notify(player, "Now playing jingle $id")
         }
 
@@ -53,7 +53,7 @@ class AudioCommandSet : CommandSet(Privilege.ADMIN) {
             if (arg.size < 2) reject(player, "Needs more args.")
             val id = arg[1].toIntOrNull()
             if (id != null) {
-                PacketRepository.send(MusicPacket::class.java, MusicContext(player, id))
+                PacketRepository.send(MusicPacket::class.java, OutgoingContext.Music(player, id))
                 notify(player, "Now playing song $id")
             }
         }

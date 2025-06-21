@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.RunScriptContext
 
 /**
  * The run script outgoing packet.
  *
  * @author Snickerize
  */
-class RunScriptPacket : OutgoingPacket<RunScriptContext> {
+class RunScriptPacket : OutgoingPacket<OutgoingContext.RunScript> {
     /*
      *  @Override
      *  public void send(RunScriptContext context) {
@@ -32,7 +32,7 @@ class RunScriptPacket : OutgoingPacket<RunScriptContext> {
      *      context.getPlayer().getDetails().getSession().write(buffer);
      *  }
      */
-    override fun send(context: RunScriptContext?) {
+    override fun send(context: OutgoingContext.RunScript?) {
         val types = context?.string
         val objects = context?.objects
         val buffer = IoBuffer(115, PacketHeader.SHORT)

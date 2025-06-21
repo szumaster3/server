@@ -2,9 +2,8 @@ package core.api.ui
 
 import core.game.component.Component
 import core.game.node.entity.player.Player
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ChildPositionContext
-import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 import core.net.packet.out.RepositionChild
 
@@ -37,7 +36,7 @@ fun openSingleTab(
 fun setMinimapState(
     player: Player,
     state: Int,
-) = PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, state))
+) = PacketRepository.send(MinimapState::class.java, OutgoingContext.MinimapState(player, state))
 
 /**
  * Sends an interface configuration update to the player.
@@ -73,7 +72,7 @@ fun repositionChild(
     positionY: Int,
 ) = PacketRepository.send(
     RepositionChild::class.java,
-    ChildPositionContext(player, interfaceId, childId, positionX, positionY),
+    OutgoingContext.ChildPosition(player, interfaceId, childId, positionX, positionY),
 )
 
 private class InterfaceAPI

@@ -1,19 +1,19 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.VarcUpdateContext
 
 /**
  * Represents an outgoing packet responsible
  * for updating a's variable client-side.
  */
-class VarcUpdate : OutgoingPacket<VarcUpdateContext> {
+class VarcUpdate : OutgoingPacket<OutgoingContext.VarcUpdate> {
 
     /**
      * Sends a varc update to client.
      */
-    override fun send(varcUpdateContext: VarcUpdateContext) {
+    override fun send(varcUpdateContext: OutgoingContext.VarcUpdate) {
         val player = varcUpdateContext.player
         if (varcUpdateContext.value <= 255) {
             val buffer = IoBuffer(65)

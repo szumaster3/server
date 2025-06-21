@@ -6,9 +6,8 @@ import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.CameraContext;
-import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 
 /**
@@ -100,7 +99,7 @@ public final class RemoteViewer {
     private void reset() {
         familiar.call();
         player.unlock();
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.RESET, 0, 0, HEIGHT, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, 0, 0, HEIGHT, 1, 100));
     }
 
     private void sendCamera(int xOffset, int yOffset, final int xRot, final int yRot) {
@@ -108,9 +107,9 @@ public final class RemoteViewer {
         final int x = location.getX() + xOffset;
         final int y = location.getY() + yOffset;
 
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, x, y, HEIGHT, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y, HEIGHT, 1, 100));
 
-        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, x + xRot, y + yRot, HEIGHT, 1, 90));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x + xRot, y + yRot, HEIGHT, 1, 90));
     }
 
     /**

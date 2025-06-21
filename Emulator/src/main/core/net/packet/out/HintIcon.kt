@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.HintIconContext
 
 /**
  * Handles the Hint icon outgoing packet.
  *
  * @author Emperor
  */
-class HintIcon : OutgoingPacket<HintIconContext> {
-    override fun send(context: HintIconContext) {
+class HintIcon : OutgoingPacket<OutgoingContext.HintIcon> {
+    override fun send(context: OutgoingContext.HintIcon) {
         val buffer = IoBuffer(217)
         buffer.put(context.slot shl 6 or context.targetType).put(context.arrowId)
         if (context.arrowId > 0) {

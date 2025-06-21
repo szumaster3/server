@@ -3,8 +3,8 @@ package core.game.node.entity.player.link;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.HintIconContext;
 import core.net.packet.out.HintIcon;
 
 /**
@@ -32,7 +32,7 @@ public final class HintIconManager {
      */
     public static final int ARROW_CIRCLE_MODEL = 40497;
 
-    private final HintIconContext[] hintIcons = new HintIconContext[MAXIMUM_SIZE];
+    private final OutgoingContext.HintIcon[] hintIcons = new OutgoingContext.HintIcon[MAXIMUM_SIZE];
 
     /**
      * Instantiates a new Hint icon manager.
@@ -139,7 +139,7 @@ public final class HintIconManager {
             return -1;
         }
         HintIconManager manager = player.getHintIconManager();
-        HintIconContext icon = new HintIconContext(player, slot, arrowId, targetType, target, modelId, height);
+        OutgoingContext.HintIcon icon = new OutgoingContext.HintIcon(player, slot, arrowId, targetType, target, modelId, height);
         PacketRepository.send(HintIcon.class, icon);
         manager.hintIcons[slot] = icon;
         return slot;
@@ -156,7 +156,7 @@ public final class HintIconManager {
             return;
         }
         HintIconManager manager = player.getHintIconManager();
-        HintIconContext icon = manager.hintIcons[slot];
+        OutgoingContext.HintIcon icon = manager.hintIcons[slot];
         if (icon != null) {
             icon.setTargetType(0);
             PacketRepository.send(HintIcon.class, icon);
@@ -195,7 +195,7 @@ public final class HintIconManager {
      * @param slot the slot
      * @return the icon
      */
-    public HintIconContext getIcon(int slot) {
+    public OutgoingContext.HintIcon getIcon(int slot) {
         return hintIcons[slot];
     }
 

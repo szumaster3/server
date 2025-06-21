@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.InterfaceConfigContext
 
 /**
  * The outgoing interface configuration packet.
  *
  * @author Emperor
  */
-class InterfaceConfig : OutgoingPacket<InterfaceConfigContext> {
-    override fun send(context: InterfaceConfigContext) {
+class InterfaceConfig : OutgoingPacket<OutgoingContext.InterfaceConfigContext> {
+    override fun send(context: OutgoingContext.InterfaceConfigContext) {
         val buffer = IoBuffer(21)
         buffer.putC(if (context.isHidden) 1 else 0)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))

@@ -5,17 +5,17 @@ import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager.forId
 import core.game.world.map.build.DynamicRegion
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
-import core.net.packet.context.DynamicSceneContext
 
 /**
  * Represents the build dynamic scene.
  *
  * @author Emperor
  */
-class BuildDynamicScene : OutgoingPacket<DynamicSceneContext> {
-    override fun send(context: DynamicSceneContext) {
+class BuildDynamicScene : OutgoingPacket<OutgoingContext.DynamicScene> {
+    override fun send(context: OutgoingContext.DynamicScene) {
         val buffer = IoBuffer(214, PacketHeader.SHORT)
         val regionIds: MutableList<Int> = ArrayList(20)
         val player = context.player

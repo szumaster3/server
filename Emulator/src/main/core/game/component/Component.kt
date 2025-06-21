@@ -6,8 +6,8 @@ import core.game.interaction.InterfaceListeners.runClose
 import core.game.interaction.InterfaceListeners.runOpen
 import core.game.interaction.InterfaceListeners.runSlotSwitch
 import core.game.node.entity.player.Player
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.InterfaceContext
 import core.net.packet.out.Interface
 
 /**
@@ -83,7 +83,7 @@ open class Component {
         if (definition == null) {
             PacketRepository.send(
                 Interface::class.java,
-                InterfaceContext(
+                OutgoingContext.InterfaceContext(
                     player,
                     manager.windowPaneId,
                     manager.defaultChildId,
@@ -102,7 +102,7 @@ open class Component {
         if (definition.type == InterfaceType.TAB) {
             PacketRepository.send(
                 Interface::class.java,
-                InterfaceContext(
+                OutgoingContext.InterfaceContext(
                     player,
                     definition.getWindowPaneId(manager.isResizable),
                     definition.getChildId(manager.isResizable) + definition.tabIndex,
@@ -116,7 +116,7 @@ open class Component {
 
         PacketRepository.send(
             Interface::class.java,
-            InterfaceContext(
+            OutgoingContext.InterfaceContext(
                 player,
                 definition.getWindowPaneId(manager.isResizable),
                 definition.getChildId(manager.isResizable),

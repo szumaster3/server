@@ -6,8 +6,8 @@ import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import core.tools.YELLOW
 import org.rs.consts.Animations
@@ -32,7 +32,7 @@ class BookcasePlugin : InteractionListener {
                 val books = Bookcase.values()
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, INTERFACE, 164, 30, books.map { Item(it.takeId) }.toTypedArray(), false)
+                    OutgoingContext.Container(player, INTERFACE, 164, 30, books.map { Item(it.takeId) }.toTypedArray(), false)
                 )
                 books.forEach { book ->
                     val itemName = getItemName(book.takeId)

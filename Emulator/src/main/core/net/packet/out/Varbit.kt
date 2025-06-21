@@ -1,14 +1,14 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.VarbitContext
 
 /**
  * Sends a varbit update to the client.
  */
-class Varbit : OutgoingPacket<VarbitContext> {
-    override fun send(varbitContext: VarbitContext) {
+class Varbit : OutgoingPacket<OutgoingContext.Varbit> {
+    override fun send(varbitContext: OutgoingContext.Varbit) {
         val buffer: IoBuffer
         if (varbitContext.value > 255) {
             buffer = IoBuffer(84)

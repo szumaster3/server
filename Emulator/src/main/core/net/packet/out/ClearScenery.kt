@@ -2,20 +2,21 @@ package core.net.packet.out
 
 import core.game.node.scenery.Scenery
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.BuildSceneryContext
 
 /**
  * The outgoing packet for clearing scenery.
+ * Uses OutgoingContext sealed class.
  *
  * @author Emperor
  */
-class ClearScenery : OutgoingPacket<BuildSceneryContext> {
-    override fun send(context: BuildSceneryContext) {
-        val player = context.player
-        val o = context.scenery
-        val buffer = write(UpdateAreaPosition.getBuffer(player, o.location.chunkBase), o)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+class ClearScenery : OutgoingPacket<OutgoingContext.BuildScenery> {
+    override fun send(context: OutgoingContext.BuildScenery) {
+        val player = context.getPlayer()
+        val scenery = context.scenery
+        val buffer = write(UpdateAreaPosition.getBuffer(player, scenery.location.chunkBase), scenery)
+        buffer.cypherOpcode(player.session.isaacPair.output)
         player.session.write(buffer)
     }
 
@@ -28,12 +29,11 @@ class ClearScenery : OutgoingPacket<BuildSceneryContext> {
          * @return The buffer with the written data.
          */
         @JvmStatic
-        fun write(buffer: IoBuffer, `object`: Scenery): IoBuffer {
-            val l = `object`.location
-            buffer.put(195) // Opcode
-                .putC((`object`.type shl 2) + (`object`.rotation and 3))
-                .put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7))
-            return buffer
+        fun write(buffer: IoBuffer, scenery: Scenery): IoBuffer {
+            val location = scenery.location
+            return buffer.put(195) // Opcode
+                .putC((scenery.type shl 2) + (scenery.rotation and 3))
+                .put((location.chunkOffsetX shl 4) or (location.chunkOffsetY and 0x7))
         }
     }
 }

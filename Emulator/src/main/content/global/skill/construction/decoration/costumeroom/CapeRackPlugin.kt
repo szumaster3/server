@@ -6,8 +6,8 @@ import core.api.ui.sendInterfaceConfig
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs.consts.Scenery
 
@@ -28,7 +28,7 @@ class CapeRackPlugin : InteractionListener {
                 val storedItems = Cape.values().map { Item(it.displayId) }.toTypedArray()
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    ContainerContext(player, INTERFACE, 164, 30, storedItems, false)
+                    OutgoingContext.Container(player, INTERFACE, 164, 30, storedItems, false)
                 )
                 Cape.values().forEachIndexed { index, item ->
                     val itemName = getItemName(item.displayId)

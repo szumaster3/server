@@ -1,16 +1,16 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.InterfaceContext
 
 /**
  * Sends a reset interface packet to the client.
  *
  * @author Emperor
  */
-class ResetInterface : OutgoingPacket<InterfaceContext> {
-    override fun send(ic: InterfaceContext) {
+class ResetInterface : OutgoingPacket<OutgoingContext.InterfaceContext> {
+    override fun send(ic: OutgoingContext.InterfaceContext) {
         val buffer = IoBuffer(149)
         buffer.putShort(ic.player.interfaceManager.getPacketCount(1))
         buffer.putInt(ic.interfaceId)

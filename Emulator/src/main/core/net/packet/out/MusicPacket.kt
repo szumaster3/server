@@ -1,18 +1,18 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.MusicContext
 
 /**
  * Outgoing music packet.
  *
  * @author SonicForce41
  */
-class MusicPacket : OutgoingPacket<MusicContext> {
-    override fun send(context: MusicContext) {
+class MusicPacket : OutgoingPacket<OutgoingContext.Music> {
+    override fun send(context: OutgoingContext.Music) {
         var buffer: IoBuffer? = null
-        if (context.isSecondary) {
+        if (context.secondary) {
             buffer = IoBuffer(208)
             buffer.putTri(255)
             buffer.putLEShort(context.musicId)

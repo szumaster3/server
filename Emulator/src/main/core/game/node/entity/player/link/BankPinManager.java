@@ -6,9 +6,8 @@ import core.game.component.Component;
 import core.game.ge.ExchangeHistory;
 import core.game.node.entity.player.Player;
 import core.game.world.GameWorld;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.ChildPositionContext;
-import core.net.packet.context.StringContext;
 import core.net.packet.out.RepositionChild;
 import core.net.packet.out.StringPacket;
 import core.tools.RandomFunction;
@@ -414,9 +413,9 @@ public class BankPinManager {
             int child = (i > 2 ? i + 1 : i) + 11;
             int positionX = 37 + ((i % 3) * 95) + RandomFunction.random(2, 45);
             int positionY = 157 + ((i / 3) * 70) - RandomFunction.random(3, 48);
-            PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, 13, child, positionX, positionY));
+            PacketRepository.send(RepositionChild.class, new OutgoingContext.ChildPosition(player, 13, child, positionX, positionY));
         }
-        PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, 13, 14, 308 + RandomFunction.random(2, 45), 155 - RandomFunction.random(3, 45)));
+        PacketRepository.send(RepositionChild.class, new OutgoingContext.ChildPosition(player, 13, 14, 308 + RandomFunction.random(2, 45), 155 - RandomFunction.random(3, 45)));
     }
 
     private void setPin() {

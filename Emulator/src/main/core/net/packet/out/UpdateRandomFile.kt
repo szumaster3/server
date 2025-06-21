@@ -1,15 +1,15 @@
 package core.net.packet.out
 
 import core.net.packet.IoBuffer
+import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
-import core.net.packet.context.PlayerContext
 
 /**
  * Updates the random.dat file for the player.
  * @author Emperor
  */
-class UpdateRandomFile : OutgoingPacket<PlayerContext> {
-    override fun send(context: PlayerContext) {
+class UpdateRandomFile : OutgoingPacket<OutgoingContext.PlayerContext> {
+    override fun send(context: OutgoingContext.PlayerContext) {
         val buffer = IoBuffer(211)
         buffer.putInt(1) // Let's assume this is UID.
         buffer.put(0)

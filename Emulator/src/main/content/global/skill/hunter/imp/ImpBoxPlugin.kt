@@ -5,8 +5,8 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.item.Item
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import org.rs.consts.Items
 
@@ -44,7 +44,7 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
         onOpen(impBoxComponent) { player, _ ->
             PacketRepository.send(
                 ContainerPacket::class.java,
-                ContainerContext(player, impBoxComponent, 61, 91, player.inventory, true),
+                OutgoingContext.Container(player, impBoxComponent, 61, 91, player.inventory, true),
             )
             return@onOpen true
         }

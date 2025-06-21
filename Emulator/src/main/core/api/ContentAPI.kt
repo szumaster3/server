@@ -68,9 +68,8 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.ForceMoveCtx
 import core.game.world.update.flag.context.Graphics
+import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.context.DefaultContext
-import core.net.packet.context.MusicContext
 import core.net.packet.out.AudioPacket
 import core.net.packet.out.MusicPacket
 import core.tools.Log
@@ -762,7 +761,7 @@ fun playJingle(
     player: Player,
     jingleId: Int,
 ) {
-    PacketRepository.send(MusicPacket::class.java, MusicContext(player, jingleId, true))
+    PacketRepository.send(MusicPacket::class.java, OutgoingContext.Music(player, jingleId, true))
 }
 
 /**
@@ -1260,7 +1259,7 @@ fun playAudio(
 ) {
     PacketRepository.send(
         AudioPacket::class.java,
-        DefaultContext(player, Audio(id, delay, loops, radius), location),
+        location?.let { OutgoingContext.Default(player, Audio(id, delay, loops, radius), it) },
     )
 }
 
@@ -1285,7 +1284,7 @@ fun playGlobalAudio(
     for (player in nearbyPlayers) {
         PacketRepository.send(
             AudioPacket::class.java,
-            DefaultContext(player, Audio(id, delay, loops, radius), location),
+            OutgoingContext.Default(player, Audio(id, delay, loops, radius), location),
         )
     }
 }

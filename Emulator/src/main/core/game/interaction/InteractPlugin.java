@@ -10,8 +10,8 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
 import core.tools.Log;
 
@@ -48,7 +48,7 @@ public class InteractPlugin {
         if (!(node instanceof Player)) {
             return;
         }
-        PacketRepository.send(InteractionOption.class, new InteractionOptionContext((Player) node, index, name, false));
+        PacketRepository.send(InteractionOption.class, new OutgoingContext.InteractionOptionContext((Player) node, index, name, false));
     }
 
     /**
