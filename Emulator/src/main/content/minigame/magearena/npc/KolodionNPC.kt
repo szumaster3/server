@@ -16,11 +16,8 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs.consts.NPCs
 
-class KolodionNPC(
-    id: Int = 0,
-    location: Location? = null,
-    session: KolodionSession? = null,
-) : AbstractNPC(id, location) {
+class KolodionNPC(id: Int = 0, location: Location? = null, session: KolodionSession? = null) : AbstractNPC(id, location) {
+
     val session: KolodionSession?
     var type: KolodionType?
     var isCommenced: Boolean = false
@@ -73,11 +70,7 @@ class KolodionNPC(
         vararg objects: Any,
     ): AbstractNPC = KolodionNPC(id, location, null)
 
-    override fun isAttackable(
-        entity: Entity,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         if (style != CombatStyle.MAGIC) {
             return false
         }
@@ -102,12 +95,7 @@ class KolodionNPC(
     override fun getIds(): IntArray =
         intArrayOf(NPCs.KOLODION_907, NPCs.KOLODION_908, NPCs.KOLODION_909, NPCs.KOLODION_910, NPCs.KOLODION_911)
 
-    enum class KolodionType(
-        val npcId: Int,
-        val appearAnimation: Animation?,
-        val graphcId: Int,
-        val appearMessage: String?,
-    ) {
+    enum class KolodionType(val npcId: Int, val appearAnimation: Animation?, val graphcId: Int, val appearMessage: String?) {
         HUMAN(NPCs.KOLODION_907, Animation(6941), -1, "You must prove yourself... now!"),
         OGRE(NPCs.KOLODION_908, Animation(6941), 188, "This is only the beginning; you can't beat me!"),
         SPIDER(NPCs.KOLODION_909, Animation(5324), 190, "Foolish mortal; I am unstoppable."),
@@ -116,10 +104,7 @@ class KolodionNPC(
         END(NPCs.KOLODION_906, Animation(6941), 188, null),
         ;
 
-        fun transform(
-            kolodion: KolodionNPC,
-            player: Player,
-        ) {
+        fun transform(kolodion: KolodionNPC, player: Player) {
             val newType = next()
             kolodion.lock()
             kolodion.pulseManager.clear()

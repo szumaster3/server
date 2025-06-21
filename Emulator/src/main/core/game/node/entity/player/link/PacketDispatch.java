@@ -12,7 +12,6 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
-import core.net.packet.context.*;
 import core.net.packet.out.*;
 import core.tools.Log;
 
@@ -288,7 +287,8 @@ public final class PacketDispatch {
      * @param yaw         the yaw
      */
     public void sendAngleOnInterface(int interfaceId, int childId, int zoom, int pitch, int yaw) {
-        PacketRepository.send(InterfaceSetAngle.class, new OutgoingContext.Default(player, pitch, zoom, yaw, interfaceId, childId));
+        PacketRepository.send(InterfaceSetAngle.class, new OutgoingContext.Default(player, new Object[]{pitch, zoom, yaw, interfaceId, childId})
+);
     }
 
     /**

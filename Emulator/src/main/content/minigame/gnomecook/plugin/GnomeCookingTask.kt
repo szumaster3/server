@@ -2,11 +2,7 @@ package content.minigame.gnomecook.plugin
 
 import org.rs.consts.NPCs
 
-enum class GnomeCookingTask(
-    val level: GnomeCookingTipper.LEVEL,
-    val npc_id: Int,
-    val tip: String,
-) {
+enum class GnomeCookingTask(val level: GnomeCookingTipper.LEVEL, val npc_id: Int, val tip: String, ) {
     CPT_ERRDO(GnomeCookingTipper.LEVEL.EASY, NPCs.CAPTAIN_ERRDO_3811, "at the top level of the Grand Tree."),
     DALILAH(GnomeCookingTipper.LEVEL.EASY, NPCs.DALILA_4588, "sitting in the Gnome Restaurant."),
     GULLUCK(GnomeCookingTipper.LEVEL.EASY, NPCs.GULLUCK_602, "on the third level of the Grand Tree."),
@@ -19,11 +15,7 @@ enum class GnomeCookingTask(
     BLEEMADGE(GnomeCookingTipper.LEVEL.HARD, NPCs.CAPTAIN_BLEEMADGE_3810, "at the top of White Wolf Mountain."),
     DALBUR(GnomeCookingTipper.LEVEL.HARD, NPCs.CAPTAIN_DALBUR_3809, "by the gnome glider in Al Kharid"),
     BOLREN(GnomeCookingTipper.LEVEL.HARD, NPCs.KING_BOLREN_469, "next to the Spirit Tree in Tree Gnome Village"),
-    SCHEPBUR(
-        GnomeCookingTipper.LEVEL.HARD,
-        NPCs.LIEUTENANT_SCHEPBUR_3817,
-        "in the battlefield of Khazar, south of the river.",
-    ),
+    SCHEPBUR(GnomeCookingTipper.LEVEL.HARD, NPCs.LIEUTENANT_SCHEPBUR_3817, "in the battlefield of Khazar, south of the river."),
     IMBLEWYN(GnomeCookingTipper.LEVEL.HARD, NPCs.PROFESSOR_IMBLEWYN_4586, "on the ground floor of the Magic Guild."),
     ONGLEWIP(GnomeCookingTipper.LEVEL.HARD, NPCs.PROFESSOR_ONGLEWIP_4585, "in the Wizard's Tower south of Draynor."),
     // https://runescape.wiki/w/Captain_Ninto

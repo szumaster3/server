@@ -13,6 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
 import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;

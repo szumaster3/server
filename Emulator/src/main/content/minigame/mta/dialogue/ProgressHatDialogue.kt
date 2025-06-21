@@ -14,9 +14,7 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
 @Initializable
-class ProgressHatDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
 
     private var progressHat: Item? = null
 

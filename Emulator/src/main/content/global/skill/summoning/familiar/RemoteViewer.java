@@ -99,7 +99,7 @@ public final class RemoteViewer {
     private void reset() {
         familiar.call();
         player.unlock();
-        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, CameraType.RESET, 0, 0, HEIGHT, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.RESET, 0, 0, HEIGHT, 1, 100));
     }
 
     private void sendCamera(int xOffset, int yOffset, final int xRot, final int yRot) {

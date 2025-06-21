@@ -16,49 +16,115 @@ import org.rs.consts.Items
 import org.rs.consts.Scenery
 
 class GnomeCookingListener : InteractionListener {
-    private val sceneryIDs = intArrayOf(Scenery.GNOME_COOKER_17131, Scenery.RANGE_2728)
 
-    // Crunchy cooking process items.
+    private val sceneryIDs = intArrayOf(
+        Scenery.GNOME_COOKER_17131, Scenery.RANGE_2728
+    )
 
-    private val halfCrunchy =
-        intArrayOf(
-            Items.HALF_MADE_CRUNCHY_9577,
-            Items.HALF_MADE_CRUNCHY_9579,
-            Items.HALF_MADE_CRUNCHY_9581,
-            Items.HALF_MADE_CRUNCHY_9583,
-            Items.RAW_CRUNCHIES_2202,
-        )
+    /*
+     * Maps raw bowl items to their cooked/processed variants.
+     */
 
-    // Gnome cooking recipe ingredients.
+    private val bowlCookingMap = mapOf(
+        Items.RAW_GNOMEBOWL_2178 to Items.HALF_BAKED_BOWL_2177,
+        Items.HALF_MADE_BOWL_9558 to Items.UNFINISHED_BOWL_9560,
+        Items.HALF_MADE_BOWL_9559 to Items.TANGLED_TOADS_LEGS_2187,
+        Items.HALF_MADE_BOWL_9561 to Items.UNFINISHED_BOWL_9562,
+        Items.HALF_MADE_BOWL_9563 to Items.UNFINISHED_BOWL_9564,
+    )
 
-    private val gnomeItems =
-        arrayOf(
-            Items.FRUIT_BATTA_2277,
-            Items.TOAD_BATTA_2255,
-            Items.CHEESE_PLUSTOM_BATTA_2259,
-            Items.WORM_BATTA_2253,
-            Items.VEGETABLE_BATTA_2281,
-            Items.CHOCOLATE_BOMB_2185,
-            Items.VEG_BALL_2195,
-            Items.TANGLED_TOADS_LEGS_2187,
-            Items.WORM_HOLE_2191,
-            Items.TOAD_CRUNCHIES_2217,
-            Items.WORM_CRUNCHIES_2205,
-            Items.CHOCCHIP_CRUNCHIES_2209,
-            Items.SPICY_CRUNCHIES_2213,
-        )
+    /*
+     * Maps pairs of bowl items and garnishes to their final products.
+     */
+
+    private val bowlGarnishMap = mapOf(
+        Pair(Items.UNFINISHED_BOWL_9562, Items.EQUA_LEAVES_2128) to Items.VEG_BALL_2195,
+        Pair(Items.UNFINISHED_BOWL_9564, Items.EQUA_LEAVES_2128) to Items.WORM_HOLE_2191,
+        Pair(Items.UNFINISHED_BOWL_9560, Items.POT_OF_CREAM_2130) to Items.CHOCOLATE_BOMB_2185,
+        Pair(Items.UNFINISHED_BOWL_9560, Items.CHOCOLATE_DUST_1975) to Items.CHOCOLATE_BOMB_2185
+    )
+
+    /*
+     * IDs of crunchy items that can be cooked.
+     */
+
+    private val halfCrunchy = intArrayOf(
+        Items.HALF_MADE_CRUNCHY_9577,
+        Items.HALF_MADE_CRUNCHY_9579,
+        Items.HALF_MADE_CRUNCHY_9581,
+        Items.HALF_MADE_CRUNCHY_9583,
+        Items.RAW_CRUNCHIES_2202
+    )
+
+    /*
+     * List of all gnome cooking food items.
+     */
+
+    private val gnomeItems = arrayOf(
+        Items.FRUIT_BATTA_2277,
+        Items.TOAD_BATTA_2255,
+        Items.CHEESE_PLUSTOM_BATTA_2259,
+        Items.WORM_BATTA_2253,
+        Items.VEGETABLE_BATTA_2281,
+        Items.CHOCOLATE_BOMB_2185,
+        Items.VEG_BALL_2195,
+        Items.TANGLED_TOADS_LEGS_2187,
+        Items.WORM_HOLE_2191,
+        Items.TOAD_CRUNCHIES_2217,
+        Items.WORM_CRUNCHIES_2205,
+        Items.CHOCCHIP_CRUNCHIES_2209,
+        Items.SPICY_CRUNCHIES_2213
+    )
+
+    /*
+     * Preparation interfaces mapped by item to interface ID.
+     */
+
+    private val preparationItems = mapOf(
+        Items.HALF_BAKED_BATTA_2249 to 434,
+        Items.HALF_BAKED_BOWL_2177 to 435,
+        Items.HALF_BAKED_CRUNCHY_2201 to 437
+    )
+
+    /*
+     * Maps raw items to cooked/unfinished variants in the cooking process.
+     */
+
+    private val cookingMap = mapOf(
+        Items.RAW_BATTA_2250 to Items.HALF_BAKED_BATTA_2249,
+        Items.HALF_MADE_BATTA_9478 to Items.UNFINISHED_BATTA_9479,
+        Items.HALF_MADE_BATTA_9480 to Items.UNFINISHED_BATTA_9481,
+        Items.HALF_MADE_BATTA_9483 to Items.UNFINISHED_BATTA_9484,
+        Items.HALF_MADE_BATTA_9485 to Items.UNFINISHED_BATTA_9486,
+        Items.HALF_MADE_BATTA_9482 to Items.TOAD_BATTA_2255,
+        Items.HALF_MADE_CRUNCHY_9577 to Items.UNFINISHED_CRUNCHY_9578,
+        Items.HALF_MADE_CRUNCHY_9579 to Items.UNFINISHED_CRUNCHY_9580,
+        Items.HALF_MADE_CRUNCHY_9581 to Items.UNFINISHED_CRUNCHY_9582,
+        Items.HALF_MADE_CRUNCHY_9583 to Items.UNFINISHED_CRUNCHY_9584,
+        Items.RAW_CRUNCHIES_2202 to Items.HALF_BAKED_CRUNCHY_2201
+    )
+
+    /*
+     * Maps garnish pairs to their final cooked products.
+     */
+
+    private val garnishMap = mapOf(
+        Pair(Items.UNFINISHED_BATTA_9486, Items.EQUA_LEAVES_2128) to Items.WORM_BATTA_2253,
+        Pair(Items.UNFINISHED_BATTA_9484, Items.EQUA_LEAVES_2128) to Items.VEGETABLE_BATTA_2281,
+        Pair(Items.UNFINISHED_BATTA_9479, Items.EQUA_LEAVES_2128) to Items.CHEESE_PLUSTOM_BATTA_2259,
+        Pair(Items.UNFINISHED_BATTA_9481, Items.GNOME_SPICE_2169) to Items.FRUIT_BATTA_2277,
+        Pair(Items.UNFINISHED_CRUNCHY_9578, Items.CHOCOLATE_DUST_1975) to Items.CHOCCHIP_CRUNCHIES_2209,
+        Pair(Items.UNFINISHED_CRUNCHY_9584, Items.GNOME_SPICE_2169) to Items.WORM_CRUNCHIES_2205,
+        Pair(Items.UNFINISHED_CRUNCHY_9580, Items.GNOME_SPICE_2169) to Items.SPICY_CRUNCHIES_2213,
+        Pair(Items.UNFINISHED_CRUNCHY_9582, Items.EQUA_LEAVES_2128) to Items.TOAD_CRUNCHIES_2217,
+    )
 
     override fun defineListeners() {
+
         /*
-         * Handles all interfaces.
+         * Handles opening preparation interfaces.
          */
 
-        val preparationItems =
-            mapOf(
-                Items.HALF_BAKED_BATTA_2249 to 434,
-                Items.HALF_BAKED_BOWL_2177 to 435,
-                Items.HALF_BAKED_CRUNCHY_2201 to 437,
-            )
         preparationItems.forEach { (item, interfaceId) ->
             on(item, IntType.ITEM, "prepare") { player, _ ->
                 openInterface(player, interfaceId)
@@ -66,36 +132,55 @@ class GnomeCookingListener : InteractionListener {
             }
         }
 
-        // Map of raw and cooked items for the cooking process.
-        val cookingMap =
-            mapOf(
-                Items.RAW_BATTA_2250 to Items.HALF_BAKED_BATTA_2249,
-                Items.HALF_MADE_BATTA_9478 to Items.UNFINISHED_BATTA_9479,
-                Items.HALF_MADE_BATTA_9480 to Items.UNFINISHED_BATTA_9481,
-                Items.HALF_MADE_BATTA_9483 to Items.UNFINISHED_BATTA_9484,
-                Items.HALF_MADE_BATTA_9485 to Items.UNFINISHED_BATTA_9486,
-                Items.HALF_MADE_BATTA_9482 to Items.TOAD_BATTA_2255,
-                Items.HALF_MADE_CRUNCHY_9577 to Items.UNFINISHED_CRUNCHY_9578,
-                Items.HALF_MADE_CRUNCHY_9579 to Items.UNFINISHED_CRUNCHY_9580,
-                Items.HALF_MADE_CRUNCHY_9581 to Items.UNFINISHED_CRUNCHY_9582,
-                Items.HALF_MADE_CRUNCHY_9583 to Items.UNFINISHED_CRUNCHY_9584,
-                Items.RAW_CRUNCHIES_2202 to Items.HALF_BAKED_CRUNCHY_2201,
-            )
+        /*
+         * Handles cooking bowls on scenery objects.
+         */
 
-        val garnishMap =
-            mapOf(
-                Pair(Items.UNFINISHED_BATTA_9486, Items.EQUA_LEAVES_2128) to Items.WORM_BATTA_2253,
-                Pair(Items.UNFINISHED_BATTA_9484, Items.EQUA_LEAVES_2128) to Items.VEGETABLE_BATTA_2281,
-                Pair(Items.UNFINISHED_BATTA_9479, Items.EQUA_LEAVES_2128) to Items.CHEESE_PLUSTOM_BATTA_2259,
-                Pair(Items.UNFINISHED_BATTA_9481, Items.GNOME_SPICE_2169) to Items.FRUIT_BATTA_2277,
-                Pair(Items.UNFINISHED_CRUNCHY_9578, Items.CHOCOLATE_DUST_1975) to Items.CHOCCHIP_CRUNCHIES_2209,
-                Pair(Items.UNFINISHED_CRUNCHY_9584, Items.GNOME_SPICE_2169) to Items.WORM_CRUNCHIES_2205,
-                Pair(Items.UNFINISHED_CRUNCHY_9580, Items.GNOME_SPICE_2169) to Items.SPICY_CRUNCHIES_2213,
-                Pair(Items.UNFINISHED_CRUNCHY_9582, Items.EQUA_LEAVES_2128) to Items.TOAD_CRUNCHIES_2217,
-            )
+        bowlCookingMap.forEach { (raw, cooked) ->
+            onUseWith(IntType.SCENERY, raw, *sceneryIDs) { player, used, _ ->
+                if (!inInventory(player, used.id)) return@onUseWith false
+                lock(player, 2)
+                animate(player, Animations.HUMAN_MAKE_PIZZA_883)
+                queueScript(player, 2, QueueStrength.SOFT) {
+                    removeItem(player, used)
+                    addItem(player, cooked, 1)
+                    if (cooked > 2180) {
+                        addItem(player, Items.GNOMEBOWL_MOULD_2166, 1)
+                    }
+                    rewardXP(player, Skills.COOKING, 30.0)
+                    return@queueScript stopExecuting(player)
+                }
+                return@onUseWith true
+            }
+        }
 
         /*
-         * Handles cooking raw items and turning them into cooked items.
+         * Handles combining garnish items with unfinished bowls.
+         */
+
+        bowlGarnishMap.forEach { (pair, product) ->
+            onUseWith(IntType.ITEM, pair.first, pair.second) { player, used, with ->
+                if (product == Items.CHOCOLATE_BOMB_2185) {
+                    val reqCream = Item(Items.POT_OF_CREAM_2130, 2)
+                    val reqChoc = Item(Items.CHOCOLATE_DUST_1975)
+
+                    if (!inInventory(player, reqChoc.id) || !player.inventory.containsItem(reqCream)) {
+                        sendDialogue(player, "You don't have enough ingredients to finish that.")
+                        return@onUseWith true
+                    }
+                    removeItem(player, reqCream)
+                    removeItem(player, reqChoc)
+                }
+
+                removeItem(player, used.asItem())
+                removeItem(player, with.asItem())
+                addItem(player, product, 1)
+                return@onUseWith true
+            }
+        }
+
+        /*
+         * Handles cooking raw and unfinished items on scenery.
          */
 
         cookingMap.forEach { (raw, cooked) ->
@@ -118,7 +203,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles combining garnish items.
+         * Handles combining garnish items with unfinished batta and crunchy items.
          */
 
         garnishMap.forEach { (pair, result) ->
@@ -132,7 +217,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Listens for crunchy items being cooked in the scenery.
+         * Handles cooking crunchy items on scenery.
          */
 
         onUseWith(IntType.SCENERY, halfCrunchy, *sceneryIDs) { player, used, _ ->
@@ -150,7 +235,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles making raw gnome bowls from dough and mold.
+         * Handles combining dough with mold to create raw gnome bowls.
          */
 
         onUseWith(IntType.ITEM, Items.GIANNE_DOUGH_2171, Items.GNOMEBOWL_MOULD_2166) { player, used, with ->
@@ -161,7 +246,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles making raw batta from dough and batta tin.
+         * Handles combining dough with batta tin to create raw batta.
          */
 
         onUseWith(IntType.ITEM, Items.GIANNE_DOUGH_2171, Items.BATTA_TIN_2164) { player, used, with ->
@@ -172,7 +257,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles making raw crunchy items from dough and crunchy tray
+         * Handles combining dough with crunchy tray to create raw crunchy items.
          */
 
         onUseWith(IntType.ITEM, Items.GIANNE_DOUGH_2171, Items.CRUNCHY_TRAY_2165) { player, used, with ->
@@ -183,12 +268,11 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles checking the player current job and delivery status.
+         * Handles check interaction on the Aluft Aloft box to display current job and delivery status.
          */
 
         on(Items.ALUFT_ALOFT_BOX_9477, IntType.ITEM, "check") { player, _ ->
             val jobId = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_JOB_ORDINAL", -1)
-
             if (jobId == -1) {
                 sendDialogueLines(player, "You do not currently have a job.")
             } else {
@@ -205,7 +289,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles check option on the GC Reward Token item.
+         * Handles check interaction on the Gnome Cooking Reward Token to show redeemable charges.
          */
 
         on(Items.REWARD_TOKEN_9474, IntType.ITEM, "check") { player, _ ->
@@ -215,7 +299,7 @@ class GnomeCookingListener : InteractionListener {
         }
 
         /*
-         * Handles activate option on the GC Reward Token item.
+         * Handles activate interaction on the Gnome Cooking Reward Token to choose how many charges to redeem.
          */
 
         on(Items.REWARD_TOKEN_9474, IntType.ITEM, "activate") { player, _ ->
@@ -231,43 +315,32 @@ class GnomeCookingListener : InteractionListener {
         }
     }
 
-    /*
-     * Handles the delivery of redeemed food charges.
+    /**
+     * Handles redeeming charges and delivering items to the player.
      */
-
-    private fun sendCharges(
-        amount: Int,
-        player: Player,
-    ) {
+    private fun sendCharges(amount: Int, player: Player) {
         val playerCharges = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
         if (playerCharges < amount) {
             sendDialogue(player, "You don't have that many charges.")
             return
         }
-
         if (freeSlots(player) < amount) {
             sendDialogue(player, "You don't have enough space in your inventory.")
             return
         }
-
         val itemList = ArrayList<Item>()
-        for (charge in 0 until amount) {
+        repeat(amount) {
             itemList.add(Item(gnomeItems.random()))
         }
-
         sendDialogue(player, "You put in for delivery of $amount items. Wait a bit...")
         GameWorld.Pulser.submit(DeliveryPulse(player, itemList))
         setAttribute(player, "/save:$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", playerCharges - amount)
     }
 
-    /*
-     * Handles the pulse of the delivery process.
+    /**
+     * Represents the delivery pulse for gc items.
      */
-
-    class DeliveryPulse(
-        val player: Player,
-        val items: ArrayList<Item>,
-    ) : Pulse(RandomFunction.random(15, 30)) {
+    class DeliveryPulse(val player: Player, val items: ArrayList<Item>) : Pulse(RandomFunction.random(15, 30)) {
         override fun pulse(): Boolean {
             player.inventory.add(*items.toTypedArray())
             sendDialogue(player, "Your food delivery has arrived!")

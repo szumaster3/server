@@ -15,7 +15,7 @@ import java.nio.BufferUnderflowException
  *
  * @author Ceikry
  */
-enum class Decoders530(val opcode: Int, ) {
+enum class Decoders530(val opcode: Int) {
     ITEM_ACTION_1(156) {
         override fun decode(
             player: Player,

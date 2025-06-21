@@ -1259,7 +1259,10 @@ fun playAudio(
 ) {
     PacketRepository.send(
         AudioPacket::class.java,
-        location?.let { OutgoingContext.Default(player, Audio(id, delay, loops, radius), it) },
+        OutgoingContext.Default(
+            player,
+            arrayOf(Audio(id, delay, loops, radius), location)
+        )
     )
 }
 
@@ -1284,7 +1287,7 @@ fun playGlobalAudio(
     for (player in nearbyPlayers) {
         PacketRepository.send(
             AudioPacket::class.java,
-            OutgoingContext.Default(player, Audio(id, delay, loops, radius), location),
+            OutgoingContext.Default(player, arrayOf(Audio(id, delay, loops, radius), location)),
         )
     }
 }

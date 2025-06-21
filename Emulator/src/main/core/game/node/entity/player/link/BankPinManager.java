@@ -143,7 +143,7 @@ public class BankPinManager {
             if (message == null) {
                 continue;
             }
-            PacketRepository.send(StringPacket.class, new StringContext(player, message, 14, 42 + i));
+            PacketRepository.send(StringPacket.class, new OutgoingContext.StringContext(player, message, 14, 42 + i));
         }
         status.draw(this, player);
         PinStatus.drawString(player, "Messages", 41);

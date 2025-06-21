@@ -5,9 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 
-class KolodionSession(
-    val player: Player,
-) {
+class KolodionSession(val player: Player) {
     private val kolodion =
         KolodionNPC(
             KolodionNPC.KolodionType.values()[player.getSavedData().activityData.kolodionBoss].npcId,
@@ -61,7 +59,6 @@ class KolodionSession(
 
     companion object {
         fun create(player: Player): KolodionSession = KolodionSession(player)
-
         fun getSession(player: Player): KolodionSession = getSession(player)
     }
 }
