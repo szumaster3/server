@@ -4,206 +4,148 @@ import core.api.*
 import core.api.skill.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.rs.consts.Items
 
+/**
+ * Handles stew-related cooking recipes.
+ */
 class StewRecipePlugin : InteractionListener {
 
     override fun defineListeners() {
 
-        /*
-         * Handles creating incomplete stews by combining stew ingredients with a bowl of water.
-         *
-         * Products:
-         *  - Potato Stew
-         *  - Meat Stew
-         *
-         * Required Cooking Level: 25
-         *
-         * Ticks: 2 (1.2 seconds)
+        /**
+         * Registers a recipe handler.
          */
-
-        onUseWith(IntType.ITEM, STEW_INGREDIENTS, BOWL_OF_WATER) { player, used, with ->
-            if (!hasLevelDyn(player, Skills.COOKING, 25)) {
-                sendDialogue(player, "You need an Cooking level of at least 25 to make that.")
-                return@onUseWith true
-            }
-
-            val stew = when (used.id) {
-                POTATO -> POTATO_STEW
-                COOKED_MEAT -> MEAT_STEW
-                else -> return@onUseWith true
-            }
-            val ingredientName = used.name.lowercase()
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
+        fun registerRecipe(
+            requiredLevel: Int,
+            used: Int,
+            with: Int,
+            output: Int,
+            ingredientName: (Item) -> String = { it.name.lowercase() },
+            successMessage: (Item) -> String,
+            onProcess: (Player, Item, Item) -> Boolean
+        ) {
+            onUseWith(IntType.ITEM, used, with) { player, used, with ->
+                if (!hasLevelDyn(player, Skills.COOKING, requiredLevel)) {
+                    sendDialogue(player, "You need an Cooking level of at least $requiredLevel to make that.")
+                    return@onUseWith true
                 }
-                addItem(player, stew, 1, Container.INVENTORY)
-                sendMessage(player, "You cut up the $ingredientName and put it into the bowl.")
-                return true
-            }
 
-            val amountUsed = amountInInventory(player, used.id)
-            val amountWith = amountInInventory(player, with.id)
-
-            if (amountUsed == 1 || amountWith == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(stew)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
+                fun process(): Boolean {
+                    if (!onProcess(player, used.asItem(), with.asItem())) {
+                        sendMessage(player, "You don't have the required ingredients.")
+                        return false
                     }
-                }
-                calculateMaxAmount {
-                    minOf(amountUsed, amountWith)
-                }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating an uncooked stew by combining stew ingredients with incomplete stew.
-         *
-         * Product:
-         *  - Uncooked Stew
-         *
-         * Required Cooking Level: 25
-         *
-         * Ticks: 2 (1.2 seconds)
-         */
-
-        onUseWith(IntType.ITEM, STEW_INGREDIENTS, *INCOMPLETE_STEW) { player, used, with ->
-            if (!hasLevelDyn(player, Skills.COOKING, 25)) {
-                sendDialogue(player, "You need an Cooking level of at least 25 to make that.")
-                return@onUseWith true
-            }
-
-            fun process(): Boolean {
-                val success = removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(
-                    player, with.asItem(), Container.INVENTORY
-                )
-                if (success) {
-                    addItem(player, UNCOOKED_STEW, 1, Container.INVENTORY)
-                    val ingredientName = used.name.lowercase().replace("cooked", "").trim()
-                    sendMessage(player, "You cut up the $ingredientName and put it into the stew.")
+                    sendMessage(player, successMessage(used.asItem()))
                     return true
                 }
-                return false
-            }
 
-            val amountUsed = amountInInventory(player, used.id)
-            val amountWith = amountInInventory(player, with.id)
+                val amountUsed = amountInInventory(player, used.id)
+                val amountWith = amountInInventory(player, with.id)
 
-            if (amountUsed == 1 || amountWith == 1) {
-                process()
+                if (amountUsed == 1 || amountWith == 1) {
+                    process()
+                    return@onUseWith true
+                }
+
+                sendSkillDialogue(player) {
+                    withItems(output)
+                    create { _, amount -> runTask(player, 2, amount) { process() } }
+                    calculateMaxAmount { minOf(amountUsed, amountWith) }
+                }
                 return@onUseWith true
             }
-
-            sendSkillDialogue(player) {
-                withItems(UNCOOKED_STEW)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        process()
-                    }
-                }
-                calculateMaxAmount {
-                    minOf(amountWith, amountUsed)
-                }
-            }
-
-            return@onUseWith true
         }
 
         /*
-         * Handles creating an uncooked curry by adding spice to an uncooked stew.
-         *
-         * Product:
-         *  - Uncooked Curry
-         *
-         * Required Cooking Level: 60
-         *
-         * Ticks: 2 (1.2 seconds)
+         * Handles creating incomplete stew.
          */
 
-        onUseWith(IntType.ITEM, UNCOOKED_STEW, SPICE) { player, used, with ->
-            if (!hasLevelDyn(player, Skills.COOKING, 60)) {
-                sendDialogue(player, "You need an Cooking level of at least 60 to make that.")
-                return@onUseWith true
-            }
-
-            if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {
-                val success = removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)
-                if (success) {
-                    addItem(player, UNCOOKED_CURRY, 1, Container.INVENTORY)
-                    sendMessage(player, "You mix the spice with the stew.")
+        listOf(POTATO, COOKED_MEAT).forEach { ingredient ->
+            registerRecipe(
+                requiredLevel = 25,
+                used = ingredient,
+                with = BOWL_OF_WATER,
+                output = 0,
+                ingredientName = { it.name.lowercase() },
+                successMessage = { item -> "You cut up the ${item.name.lowercase()} and put it into the bowl." }
+            ) { player, used, with ->
+                val stew = when (used.id) {
+                    POTATO -> POTATO_STEW
+                    COOKED_MEAT -> MEAT_STEW
+                    else -> return@registerRecipe false
                 }
-                return@onUseWith true
+                if (!removeItem(player, used) || !removeItem(player, with)) return@registerRecipe false
+                addItem(player, stew, 1, Container.INVENTORY)
+                return@registerRecipe true
             }
-
-            sendSkillDialogue(player) {
-                withItems(UNCOOKED_CURRY)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount < 1) return@runTask
-                        val success = removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(
-                            player, with.asItem(), Container.INVENTORY
-                        )
-                        if (success) {
-                            addItem(player, UNCOOKED_CURRY, 1, Container.INVENTORY)
-                            sendMessage(player, "You mix the spice with the stew.")
-                        }
-                    }
-                }
-
-                calculateMaxAmount { _ ->
-                    minOf(amountInInventory(player, with.id), amountInInventory(player, used.id))
-                }
-            }
-
-            return@onUseWith true
         }
 
         /*
-         * Handles creating an uncooked curry by adding curry leaves to an uncooked stew.
-         *
-         * Product:
-         *  - Uncooked Curry
-         *
-         * Required Cooking Level: 60
-         * Required Amount of Curry Leaves: 3
+         * Handles creating Uncooked stew.
          */
 
-        onUseWith(IntType.ITEM, CURRY_LEAF, UNCOOKED_STEW) { player, used, with ->
+        STEW_INGREDIENTS.forEach { ingredient ->
+            INCOMPLETE_STEW.forEach { incompleteStew ->
+                registerRecipe(
+                    requiredLevel = 25,
+                    used = ingredient,
+                    with = incompleteStew,
+                    output = UNCOOKED_STEW,
+                    ingredientName = { it.name.lowercase().replace("cooked", "").trim() },
+                    successMessage = { item -> "You cut up the ${item.name.lowercase().replace("cooked", "").trim()} and put it into the stew." }
+                ) { player, used, with ->
+                    if (!removeItem(player, used, Container.INVENTORY) || !removeItem(player, with, Container.INVENTORY)) return@registerRecipe false
+                    addItem(player, UNCOOKED_STEW, 1, Container.INVENTORY)
+                    return@registerRecipe true
+                }
+            }
+        }
+
+        /*
+         * Handles creating Uncooked curry.
+         */
+
+        registerRecipe(
+            requiredLevel = 60,
+            used = UNCOOKED_STEW,
+            with = SPICE,
+            output = UNCOOKED_CURRY,
+            successMessage = { _ -> "You mix the spice with the stew." }
+        ) { player, used, with ->
+            if (!removeItem(player, used, Container.INVENTORY) || !removeItem(player, with, Container.INVENTORY)) return@registerRecipe false
+            addItem(player, UNCOOKED_CURRY, 1, Container.INVENTORY)
+            return@registerRecipe true
+        }
+
+        /*
+         * Handles creating Uncooked curry.
+         */
+
+        onUseWith(IntType.ITEM, CURRY_LEAF, UNCOOKED_STEW) { player, usedNode, withNode ->
             if (!hasLevelDyn(player, Skills.COOKING, 60)) {
                 sendDialogue(player, "You need an Cooking level of at least 60 to make that.")
                 return@onUseWith true
             }
 
             val requiredAmount = 3
-            val amount = amountInInventory(player, used.id)
+            val amount = amountInInventory(player, usedNode.id)
 
             if (amount < requiredAmount) {
                 sendMessage(player, "You need ${requiredAmount - amount} curry leaves to mix with the stew.")
                 return@onUseWith true
             }
 
-            if (removeItem(player, Item(used.id, requiredAmount), Container.INVENTORY) && removeItem(player, Item(with.id, 1), Container.INVENTORY)) {
+            if (removeItem(player, Item(usedNode.id, requiredAmount), Container.INVENTORY) &&
+                removeItem(player, Item(withNode.id, 1), Container.INVENTORY)) {
                 addItem(player, UNCOOKED_CURRY, 1, Container.INVENTORY)
                 sendMessage(player, "You mix the curry leaves with the stew.")
             }
-
             return@onUseWith true
         }
-
     }
 
     companion object {
@@ -216,7 +158,8 @@ class StewRecipePlugin : InteractionListener {
         private const val POTATO_STEW    = Items.INCOMPLETE_STEW_1997
         private const val MEAT_STEW      = Items.INCOMPLETE_STEW_1999
         private const val COOKED_MEAT    = Items.COOKED_MEAT_2142
-        private val STEW_INGREDIENTS     = intArrayOf(Items.COOKED_MEAT_2142, Items.POTATO_1942)
-        private val INCOMPLETE_STEW      = intArrayOf(Items.INCOMPLETE_STEW_1997, Items.INCOMPLETE_STEW_1999)
+
+        private val STEW_INGREDIENTS = intArrayOf(COOKED_MEAT, POTATO)
+        private val INCOMPLETE_STEW  = intArrayOf(POTATO_STEW, MEAT_STEW)
     }
 }

@@ -7,6 +7,9 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
 
+/**
+ * Handles potato recipes.
+ */
 class PotatoRecipePlugin : InteractionListener {
 
     override fun defineListeners() {

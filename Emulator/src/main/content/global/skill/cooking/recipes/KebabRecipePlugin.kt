@@ -8,6 +8,9 @@ import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
 import org.rs.consts.Items
 
+/**
+ * Handles kebab-related cooking recipes.
+ */
 class KebabRecipePlugin : InteractionListener {
     override fun defineListeners() {
         registerRecipe(CHOPPED_ONION, TOMATO, ONION_AND_TOMATO)

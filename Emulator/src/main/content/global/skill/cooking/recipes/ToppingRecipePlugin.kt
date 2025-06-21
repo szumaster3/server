@@ -8,6 +8,9 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.Items
 import kotlin.math.min
 
+/**
+ * Handles recipes for adding toppings to food items.
+ */
 class ToppingRecipePlugin : InteractionListener {
 
     override fun defineListeners() {

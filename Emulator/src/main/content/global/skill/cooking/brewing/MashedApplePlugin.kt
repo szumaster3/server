@@ -17,7 +17,6 @@ import org.rs.consts.Scenery
 class MashedApplePlugin : InteractionListener {
 
     override fun defineListeners() {
-
         onUseWith(IntType.SCENERY, Items.COOKING_APPLE_1955, Scenery.APPLE_BARREL_7403) { player, _, _ ->
             if (getStatLevel(player, Skills.COOKING) < 14) {
                 sendMessage(player, "You need a cooking level of 14 in order to do that.")

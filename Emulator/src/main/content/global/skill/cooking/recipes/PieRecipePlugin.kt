@@ -4,11 +4,132 @@ import core.api.*
 import core.api.skill.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import org.rs.consts.Items
+import kotlin.math.min
 
+/**
+ * Handles pie cooking recipes.
+ */
 class PieRecipePlugin : InteractionListener {
+
+    override fun defineListeners() {
+
+        /*
+         * Handles creating a pie shell from pastry dough and a pie dish.
+         */
+
+        onUseWith(IntType.ITEM, Items.PASTRY_DOUGH_1953, Items.PIE_DISH_2313) { player, used, _ ->
+            if (removeItem(player, used.asItem())) {
+                addItem(player, Items.PIE_SHELL_2315, 1)
+                sendMessage(player, "You put the pastry dough into the pie dish to make a pie shell.")
+            }
+            return@onUseWith true
+        }
+
+        /*
+         * Handles combining a pie shell with ingredients to create first part pies.
+         */
+
+        onUseWith(IntType.ITEM, PieShellRecipe.allIngredientIds, Items.PIE_SHELL_2315) { player, used, with ->
+            val recipe = PieShellRecipe.byIngredientId[used.id] ?: return@onUseWith false
+            handlePieRecipe(
+                player, used.asItem(), with.asItem(), recipe.requiredLevel, recipe.productId,
+                "You fill the pie with ${used.name.lowercase()}.",
+                returnsBucket = (used.id == Items.COMPOST_6032)
+            )
+            return@onUseWith true
+        }
+
+        /*
+         * Handles combining part pies with ingredients to create second part pies.
+         */
+
+        onUseWith(IntType.ITEM, PieSecondPartRecipe.byPair.keys.map { it.second }.toIntArray(), *PieSecondPartRecipe.firstParts) { player, used, with ->
+            val recipe = PieSecondPartRecipe.byPair[with.id to used.id]
+                ?: PieSecondPartRecipe.byPair[used.id to with.id] ?: return@onUseWith true
+            handlePieRecipe(
+                player, used.asItem(), with.asItem(), recipe.requiredLevel, recipe.productId,
+                "You fill the pie with ${used.name.lowercase()}.",
+                returnsBucket = recipe.returnsBucket
+            )
+            return@onUseWith true
+        }
+
+        /*
+         * Handles combining second part pies with ingredients to create raw pies.
+         */
+
+        onUseWith(IntType.ITEM, RawPieRecipe.byPair.keys.map { it.second }.toIntArray(), *RawPieRecipe.secondParts) { player, used, with ->
+            val recipe = RawPieRecipe.byPair[with.id to used.id]
+                ?: RawPieRecipe.byPair[used.id to with.id] ?: return@onUseWith true
+            handlePieRecipe(
+                player, used.asItem(), with.asItem(), recipe.requiredLevel, recipe.productId,
+                "You fill the pie with ${used.name.lowercase()}."
+            )
+            return@onUseWith true
+        }
+
+        /*
+         * Handles creating raw admiral pie.
+         */
+
+        onUseWith(IntType.ITEM, Items.PART_ADMIRAL_PIE_7194, Items.POTATO_1942) { player, used, with ->
+            handlePieRecipe(player, used.asItem(), with.asItem(), 70, Items.RAW_ADMIRAL_PIE_7196, "You prepare an admiral pie.")
+            return@onUseWith true
+        }
+
+        /*
+         * Handles creating raw fish pie.
+         */
+
+        onUseWith(IntType.ITEM, Items.PART_FISH_PIE_7184, Items.POTATO_1942) { player, used, with ->
+            handlePieRecipe(player, used.asItem(), with.asItem(), 47, Items.RAW_FISH_PIE_7186, "You prepare a fish pie.")
+            return@onUseWith true
+        }
+    }
+
+    /**
+     * Handle pie cooking steps.
+     */
+    private fun handlePieRecipe(player: Player, used: Item, with: Item, requiredLevel: Int, productId: Int, message: String, returnsBucket: Boolean = false): Boolean {
+        if (!hasLevelDyn(player, Skills.COOKING, requiredLevel)) {
+            sendDialogue(player, "You need a Cooking level of at least $requiredLevel to make that.")
+            return true
+        }
+
+        val maxAmount = min(amountInInventory(player, used.id), amountInInventory(player, with.id))
+
+        val process = {
+            if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
+                sendMessage(player, "You don't have the required ingredients.")
+                false
+            } else {
+                if (returnsBucket) addItemOrDrop(player, Items.BUCKET_1925, 1)
+                addItem(player, productId, 1)
+                sendMessage(player, message)
+                true
+            }
+        }
+
+        if (maxAmount == 1) {
+            process()
+        } else {
+            sendSkillDialogue(player) {
+                withItems(productId)
+                create { _, amount ->
+                    runTask(player, 2, amount) {
+                        if (amount > 0) process()
+                    }
+                }
+                calculateMaxAmount { maxAmount }
+            }
+        }
+        return true
+    }
+
     enum class PieShellRecipe(val ingredientId: Int, val requiredLevel: Int, val productId: Int) {
         REDBERRY(Items.REDBERRIES_1951, 10, Items.UNCOOKED_BERRY_PIE_2321),
         MEAT_1(Items.COOKED_MEAT_2142, 20, Items.UNCOOKED_MEAT_PIE_2319),
@@ -52,230 +173,6 @@ class PieRecipePlugin : InteractionListener {
         companion object {
             val byPair = values().associateBy { it.secondPartId to it.ingredientId }
             val secondParts = values().map { it.secondPartId }.toIntArray()
-        }
-    }
-
-    override fun defineListeners() {
-
-        /*
-         * Handles creating a pie shell from pastry dough and a pie dish.
-         */
-
-        onUseWith(IntType.ITEM, Items.PASTRY_DOUGH_1953, Items.PIE_DISH_2313) { player, used, with ->
-            if (removeItem(player, Item(used.id, 1))) {
-                addItem(player, Items.PIE_SHELL_2315, 1)
-                sendMessage(player, "You put the pastry dough into the pie dish to make a pie shell.")
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles combining a pie shell with ingredients to create first part pies.
-         */
-
-        onUseWith(IntType.ITEM, PieShellRecipe.allIngredientIds, Items.PIE_SHELL_2315) { player, used, with ->
-            val recipe = PieShellRecipe.byIngredientId[used.id] ?: return@onUseWith false
-
-            if (!hasLevelDyn(player, Skills.COOKING, recipe.requiredLevel)) {
-                sendDialogue(player, "You need an Cooking level of at least ${recipe.requiredLevel} to make that.")
-                return@onUseWith true
-            }
-
-            val maxAmount = minOf(amountInInventory(player, used.id), amountInInventory(player, with.id))
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
-                }
-                if (used.id == Items.COMPOST_6032) addItemOrDrop(player, Items.BUCKET_1925, 1)
-                addItem(player, recipe.productId, 1)
-                sendMessage(player, "You fill the pie with ${used.name.lowercase()}.")
-                return true
-            }
-
-            if (maxAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(recipe.productId)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { maxAmount }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles combining a part pies with ingredients to create second part pies.
-         */
-
-        onUseWith(IntType.ITEM, PieSecondPartRecipe.byPair.keys.map { it.second }.toIntArray(), *PieSecondPartRecipe.firstParts) { player, used, with ->
-            val recipe = PieSecondPartRecipe.byPair[with.id to used.id] ?: PieSecondPartRecipe.byPair[used.id to with.id] ?: return@onUseWith true
-            if (!hasLevelDyn(player, Skills.COOKING, recipe.requiredLevel)) {
-                sendDialogue(player, "You need an Cooking level of at least ${recipe.requiredLevel} to make that.")
-                return@onUseWith true
-            }
-
-            val maxAmount = minOf(amountInInventory(player, used.id), amountInInventory(player, with.id))
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
-                }
-                if (recipe.returnsBucket) addItemOrDrop(player, Items.BUCKET_1925, 1)
-                addItem(player, recipe.productId, 1)
-                sendMessage(player, "You fill the pie with ${used.name.lowercase()}.")
-                return true
-            }
-
-            if (maxAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(recipe.productId)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { maxAmount }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles combining a second part pies with ingredients to create raw pies.
-         */
-
-        onUseWith(IntType.ITEM, RawPieRecipe.byPair.keys.map { it.second }.toIntArray(), *RawPieRecipe.secondParts) { player, used, with ->
-            val recipe = RawPieRecipe.byPair[with.id to used.id] ?: RawPieRecipe.byPair[used.id to with.id] ?: return@onUseWith true
-
-            if (!hasLevelDyn(player, Skills.COOKING, recipe.requiredLevel)) {
-                sendDialogue(player, "You need an Cooking level of at least ${recipe.requiredLevel} to make that.")
-                return@onUseWith true
-            }
-
-            val maxAmount = minOf(amountInInventory(player, used.id), amountInInventory(player, with.id))
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
-                }
-                addItem(player, recipe.productId, 1, Container.INVENTORY)
-                sendMessage(player, "You fill the pie with ${used.name.lowercase()}.")
-                return true
-            }
-
-            if (maxAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(recipe.productId)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { maxAmount }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating raw admiral pie.
-         */
-
-        onUseWith(IntType.ITEM, Items.PART_ADMIRAL_PIE_7194, Items.POTATO_1942) { player, used, with ->
-            if (!hasLevelDyn(player, Skills.COOKING, 70)) {
-                sendDialogue(player, "You need a Cooking level of at least 70 to make that.")
-                return@onUseWith true
-            }
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
-                }
-                addItem(player, Items.RAW_ADMIRAL_PIE_7196, 1, Container.INVENTORY)
-                sendMessage(player, "You prepare an admiral pie.")
-                return true
-            }
-
-            val baseAmount = amountInInventory(player, used.id)
-            val withAmount = amountInInventory(player, with.id)
-
-            if (baseAmount == 1 || withAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(Items.RAW_ADMIRAL_PIE_7196)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { minOf(baseAmount, withAmount) }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating a raw fish pie.
-         */
-
-        onUseWith(IntType.ITEM, Items.PART_FISH_PIE_7184, Items.POTATO_1942) { player, used, with ->
-            if (!hasLevelDyn(player, Skills.COOKING, 47)) {
-                sendDialogue(player, "You need a Cooking level of at least 47 to make that.")
-                return@onUseWith true
-            }
-
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return false
-                }
-                addItem(player, Items.RAW_FISH_PIE_7186, 1, Container.INVENTORY)
-                sendMessage(player, "You prepare a fish pie.")
-                return true
-            }
-
-            val baseAmount = amountInInventory(player, used.id)
-            val withAmount = amountInInventory(player, with.id)
-
-            if (baseAmount == 1 || withAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(Items.RAW_FISH_PIE_7186)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { minOf(baseAmount, withAmount) }
-            }
-
-            return@onUseWith true
         }
     }
 }

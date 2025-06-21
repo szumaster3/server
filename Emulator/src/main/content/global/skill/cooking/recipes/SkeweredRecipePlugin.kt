@@ -4,26 +4,22 @@ import core.api.*
 import core.api.skill.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import org.rs.consts.Animations
 import org.rs.consts.Items
 import org.rs.consts.Sounds
 import kotlin.math.min
 
+/**
+ * Handles cooking recipes related to skewered foods.
+ */
 class SkeweredRecipePlugin : InteractionListener {
 
     override fun defineListeners() {
 
         /*
          * Handles creating skewered food with a spit.
-         *
-         * Products:
-         *  - Skewered Bird Meat    (Required: Level 11 Cooking)
-         *  - Skewered Rabbit:      (Required: Level 16 Cooking)
-         *  - Skewered Beast Meat:  (Required: Level 21 Cooking)
-         *  - Skewered Chompy:      (Required: Level 30 Cooking)
-         *
-         * Ticks: 2 (1.2 seconds)
          */
 
         val spitRecipes = mapOf(
@@ -36,30 +32,67 @@ class SkeweredRecipePlugin : InteractionListener {
         onUseWith(IntType.ITEM, RAW_INGREDIENTS, IRON_SPIT) { player, used, with ->
             val (requiredLevel, productID) = spitRecipes[used.id] ?: return@onUseWith false
             if (!hasLevelDyn(player, Skills.COOKING, requiredLevel)) {
-                sendDialogue(player, "You need an Cooking level of at least $requiredLevel to make that.")
+                sendDialogue(player, "You need a Cooking level of at least $requiredLevel to make that.")
                 return@onUseWith true
             }
 
             val ingredientName = used.name.lowercase()
-            val amountUsed = amountInInventory(player, used.id)
-            val amountWith = amountInInventory(player, with.id)
-            val maxAmount = minOf(amountUsed, amountWith)
+            val maxAmount = min(amountInInventory(player, used.id), amountInInventory(player, with.id))
 
-            fun process(): Boolean {
+            val process = {
                 if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
                     sendMessage(player, "You don't have the required ingredients to make that.")
-                    return false
+                    false
+                } else {
+                    addItem(player, productID, 1)
+                    sendMessage(player, "You pierce the $ingredientName with the iron spit.")
+                    true
                 }
-                addItem(player, productID, 1)
-                sendMessage(player, "You pierce the $ingredientName with the iron spit.")
-                return true
             }
 
-            if (amountUsed == 1 || amountWith == 1) {
-                process()
-                return@onUseWith true
+            handleMultiItemProcess(player, maxAmount, productID, process)
+            true
+        }
+
+        /*
+         * Handles creating a spider on a stick using a skewer stick and a spider carcass.
+         */
+
+        handleSpiderRecipe(SPIDER_CARCASS, SKEWER_STICK, SPIDER_ON_STICK, Sounds.TBCU_SPIDER_STICK_1280)
+
+        /*
+         * Handles creating a spider on a shaft using an arrow shaft and a spider carcass.
+         */
+
+        handleSpiderRecipe(SPIDER_CARCASS, ARROW_SHAFT, SPIDER_ON_SHAFT, Sounds.TBCU_SPIDER_1279)
+    }
+
+    private fun handleSpiderRecipe(ingredient: Int, tool: Int, result: Int, sound: Int) {
+        onUseWith(IntType.ITEM, ingredient, tool) { player, used, with ->
+            val maxAmount = min(amountInInventory(player, used.id), amountInInventory(player, with.id))
+
+            val process = {
+                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
+                    sendMessage(player, "You don't have the required ingredients to make that.")
+                    false
+                } else {
+                    animate(player, PIERCE_ANIMATION)
+                    playAudio(player, sound)
+                    addItem(player, result, 1)
+                    sendMessage(player, "You pierce the spider carcass with the ${getItemName(tool).lowercase()}.")
+                    true
+                }
             }
 
+            handleMultiItemProcess(player, maxAmount, result, process)
+            return@onUseWith true
+        }
+    }
+
+    private fun handleMultiItemProcess(player: Player, maxAmount: Int, productID: Int, process: () -> Boolean) {
+        if (maxAmount == 1) {
+            process()
+        } else {
             sendSkillDialogue(player) {
                 withItems(productID)
                 create { _, amount ->
@@ -69,84 +102,6 @@ class SkeweredRecipePlugin : InteractionListener {
                 }
                 calculateMaxAmount { maxAmount }
             }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating a spider on a stick using a skewer stick and a spider carcass.
-         */
-
-        onUseWith(IntType.ITEM, SPIDER_CARCASS, SKEWER_STICK) { player, used, with ->
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients to make that.")
-                    return false
-                }
-                animate(player, PIERCE_ANIMATION)
-                playAudio(player, Sounds.TBCU_SPIDER_STICK_1280)
-                addItem(player, SPIDER_ON_STICK, 1)
-                sendMessage(player, "You pierce the spider carcass with the skewer stick.")
-                return true
-            }
-
-            val baseAmount = amountInInventory(player, used.id)
-            val withAmount = amountInInventory(player, with.id)
-
-            if (baseAmount == 1 || withAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(SPIDER_ON_STICK)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { min(baseAmount, withAmount) }
-            }
-
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating a spider on a shaft using an arrow shaft and a spider carcass.
-         */
-
-        onUseWith(IntType.ITEM, SPIDER_CARCASS, ARROW_SHAFT) { player, used, with ->
-            fun process(): Boolean {
-                if (!removeItem(player, used.asItem()) || !removeItem(player, with.asItem())) {
-                    sendMessage(player, "You don't have the required ingredients to make that.")
-                    return false
-                }
-                animate(player, PIERCE_ANIMATION)
-                playAudio(player, Sounds.TBCU_SPIDER_1279)
-                addItem(player, SPIDER_ON_SHAFT, 1, Container.INVENTORY)
-                sendMessage(player, "You pierce the spider carcass with the arrow shaft.")
-                return true
-            }
-
-
-            val baseAmount = amountInInventory(player, used.id)
-            val withAmount = amountInInventory(player, with.id)
-
-            if (baseAmount == 1 || withAmount == 1) {
-                process()
-                return@onUseWith true
-            }
-
-            sendSkillDialogue(player) {
-                withItems(SPIDER_ON_SHAFT)
-                create { _, amount ->
-                    runTask(player, 2, amount) {
-                        if (amount > 0) process()
-                    }
-                }
-                calculateMaxAmount { min(baseAmount, withAmount) }
-            }
-
-            return@onUseWith true
         }
     }
 

@@ -10,6 +10,9 @@ import core.game.node.item.Item
 import org.rs.consts.Items
 import kotlin.math.min
 
+/**
+ * Handles potato-related cooking recipes.
+ */
 class CakeRecipePlugin : InteractionListener {
 
     override fun defineListeners() {

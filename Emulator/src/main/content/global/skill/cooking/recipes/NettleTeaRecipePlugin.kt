@@ -5,94 +5,42 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import org.rs.consts.Items
 
+/**
+ * Handles nettle tea related cooking recipes.
+ */
 class NettleTeaRecipePlugin : InteractionListener {
 
     override fun defineListeners() {
 
-        /*
-         * Handles putting nettles into a bowl of water.
-         */
+        val recipes = arrayOf(
+            Recipe(NETTLES, BOWL_OF_WATER, NETTLE_WATER),
+            Recipe(BUCKET_OF_MILK, BOWL_OF_NETTLE_TEA, BOWL_OF_NETTLE_TEA_MILKY, EMPTY_BUCKET),
+            Recipe(BUCKET_OF_MILK, PORCELAIN_CUP_OF_NETTLE_TEA, PORCELAIN_CUP_OF_NETTLE_TEA_MILKY, EMPTY_BUCKET),
+            Recipe(BOWL_OF_NETTLE_TEA, EMPTY_CUP, CUP_OF_NETTLE_TEA, EMPTY_BOWL),
+            Recipe(BOWL_OF_NETTLE_TEA_MILKY, EMPTY_CUP, CUP_OF_NETTLE_TEA_MILKY, EMPTY_BOWL),
+            Recipe(BOWL_OF_NETTLE_TEA, EMPTY_PORCELAIN_CUP, PORCELAIN_CUP_OF_NETTLE_TEA, EMPTY_BOWL),
+            Recipe(BOWL_OF_NETTLE_TEA_MILKY, EMPTY_PORCELAIN_CUP, PORCELAIN_CUP_OF_NETTLE_TEA_MILKY, EMPTY_BOWL)
+        )
 
-        onUseWith(IntType.ITEM, NETTLES, BOWL_OF_WATER) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItem(player, NETTLE_WATER, 1)
-                sendMessage(player, "You place the nettles into the bowl of water.")
+        recipes.forEach { recipe ->
+            onUseWith(IntType.ITEM, recipe.itemUsed, recipe.itemWith) { player, used, with ->
+                if (removeItem(player, used.asItem(), Container.INVENTORY) &&
+                    removeItem(player, with.asItem(), Container.INVENTORY)) {
+                    recipe.returnItem?.let { addItemOrDrop(player, it, 1) }
+                    addItem(player, recipe.product, 1)
+                    sendMessage(player, "You combine the items.")
+                }
+                return@onUseWith true
             }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles creating nettle tea (Milk).
-         */
-
-        onUseWith(IntType.ITEM, BUCKET_OF_MILK, BOWL_OF_NETTLE_TEA) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BUCKET, 1)
-                addItem(player, BOWL_OF_NETTLE_TEA_MILKY, 1)
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles adding milk to cup of tea.
-         */
-
-        onUseWith(IntType.ITEM, BUCKET_OF_MILK, PORCELAIN_CUP_OF_NETTLE_TEA) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BUCKET, 1)
-                addItem(player, PORCELAIN_CUP_OF_NETTLE_TEA_MILKY, 1)
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles filling an empty cup with nettle tea.
-         */
-
-        onUseWith(IntType.ITEM, BOWL_OF_NETTLE_TEA, EMPTY_CUP) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BOWL, 1)
-                addItem(player, CUP_OF_NETTLE_TEA, 1)
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles filling an empty porcelain cup with nettle tea.
-         */
-
-        onUseWith(IntType.ITEM, BOWL_OF_NETTLE_TEA_MILKY, EMPTY_CUP) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BOWL, 1)
-                addItem(player, CUP_OF_NETTLE_TEA_MILKY, 1)
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles filling a porcelain cup with nettle tea.
-         */
-
-        onUseWith(IntType.ITEM, BOWL_OF_NETTLE_TEA, EMPTY_PORCELAIN_CUP) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BOWL, 1)
-                addItem(player, PORCELAIN_CUP_OF_NETTLE_TEA, 1)
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles filling a porcelain cup with nettle tea.
-         */
-
-        onUseWith(IntType.ITEM, BOWL_OF_NETTLE_TEA_MILKY, EMPTY_PORCELAIN_CUP) { player, used, with ->
-            if (removeItem(player, used.asItem(), Container.INVENTORY) && removeItem(player, with.asItem(), Container.INVENTORY)) {
-                addItemOrDrop(player, EMPTY_BOWL, 1)
-                addItem(player, PORCELAIN_CUP_OF_NETTLE_TEA_MILKY, 1)
-            }
-            return@onUseWith true
         }
     }
+
+    private data class Recipe(
+        val itemUsed: Int,
+        val itemWith: Int,
+        val product: Int,
+        val returnItem: Int? = null
+    )
 
     companion object {
         private const val EMPTY_BUCKET = Items.BUCKET_1925

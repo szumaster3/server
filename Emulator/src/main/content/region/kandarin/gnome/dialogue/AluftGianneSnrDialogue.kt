@@ -131,8 +131,8 @@ class AluftGianneSnrDialogue(player: Player? = null) : Dialogue(player) {
             300 -> options("I'd like to take on a hard job.", "I'd like an easy job please.").also { stage++ }
             301 -> end().also {
                 when (buttonId) {
-                    1 -> getJob(GnomeCookingTipper.LEVEL.HARD)
-                    2 -> getJob(GnomeCookingTipper.LEVEL.EASY)
+                    1 -> getJob(GnomeTipper.LEVEL.HARD)
+                    2 -> getJob(GnomeTipper.LEVEL.EASY)
                 }
             }
             else -> player("Uhhhh, good.").also { stage = END_DIALOGUE }
@@ -144,7 +144,7 @@ class AluftGianneSnrDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(NPCs.ALUFT_GIANNE_SNR_850)
 
-    private fun getJob(level: GnomeCookingTipper.LEVEL) {
+    private fun getJob(level: GnomeTipper.LEVEL) {
         if (!player.inventory.containsItem(ALUFT_ALOFT_BOX) && !player.bank.containsItem(ALUFT_ALOFT_BOX)) {
             player.inventory.add(ALUFT_ALOFT_BOX)
         }
@@ -152,9 +152,9 @@ class AluftGianneSnrDialogue(player: Player? = null) : Dialogue(player) {
             sendDialogue(player, "You already have a job.")
         } else {
             GlobalScope.launch {
-                var job = GnomeCookingTask.values().random()
+                var job = GnomeCookingJob.values().random()
                 while (job.level != level) {
-                    job = GnomeCookingTask.values().random()
+                    job = GnomeCookingJob.values().random()
                 }
                 val item = Item(gnomeItems.random())
                 setAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_JOB_ORDINAL", job.ordinal)
@@ -167,7 +167,7 @@ class AluftGianneSnrDialogue(player: Player? = null) : Dialogue(player) {
                 GameWorld.Pulser.submit(
                     GnomeRestaurantPulse(
                         player,
-                        if (level == GnomeCookingTipper.LEVEL.HARD) {
+                        if (level == GnomeTipper.LEVEL.HARD) {
                             11L
                         } else {
                             6L

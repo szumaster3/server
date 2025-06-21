@@ -9,6 +9,9 @@ import core.game.node.entity.skill.Skills
 import org.rs.consts.Animations
 import org.rs.consts.Items
 
+/**
+ * Handles chopping-related cooking recipes.
+ */
 class ChoppingRecipePlugin : InteractionListener {
 
     override fun defineListeners() {

@@ -61,6 +61,4 @@ object GnomeTipper {
             LEVEL.HARD -> RandomFunction.rollWeightedChanceTable(hardTips)
         }
     }
-
-
 }
