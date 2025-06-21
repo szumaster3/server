@@ -1,7 +1,9 @@
 package content.minigame.mta.dialogue
 
+import content.minigame.mta.plugin.MTAZone
 import content.minigame.mta.plugin.ProgressHat
 import core.api.addItem
+import core.api.getVarbit
 import core.api.hasAnItem
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -12,6 +14,9 @@ import core.tools.END_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Entrance guardian dialogue.
+ */
 @Initializable
 class EntranceGuardianDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -82,7 +87,7 @@ class EntranceGuardianDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("Can you tell me about this place again?").also { stage = 3 }
                 2 -> player("Can you explain the different portals?").also { stage = 50 }
                 3 -> {
-                    val hasHat = hasAnItem(player, *ProgressHat.hats).container != null
+                    val hasHat = hasAnItem(player, *ProgressHat.hatIds).container != null
                     if (!hasHat) {
                         npc(FaceAnim.OLD_NORMAL, "You want another one don't you.").also { stage = 110 }
                     } else {
@@ -97,7 +102,8 @@ class EntranceGuardianDialogue(player: Player? = null) : Dialogue(player) {
             103 -> npc(FaceAnim.OLD_NORMAL, "points.").also { stage = 30 }
             110 -> player("Sorry, can I?").also { stage++ }
             111 -> {
-                if (player.getSavedData().activityData.getPizazzPoints(0) < 300) {
+                val points = getVarbit(player, MTAZone.pizazzVarbitIds[0])
+                if (points < 300) {
                     addItem(player, Items.PROGRESS_HAT_6885)
                 } else {
                     ProgressHat.progress(player)
