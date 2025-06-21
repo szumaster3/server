@@ -102,7 +102,7 @@ class EntranceGuardianDialogue(player: Player? = null) : Dialogue(player) {
             103 -> npc(FaceAnim.OLD_NORMAL, "points.").also { stage = 30 }
             110 -> player("Sorry, can I?").also { stage++ }
             111 -> {
-                val points = getVarbit(player, MTAZone.pizazzVarbitIds[0])
+                val points = MTAZone.getTotalPoints(player)
                 if (points < 300) {
                     addItem(player, Items.PROGRESS_HAT_6885)
                 } else {

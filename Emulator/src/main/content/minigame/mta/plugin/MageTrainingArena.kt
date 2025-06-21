@@ -18,6 +18,9 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs.consts.*
 
+/**
+ * Handles interactions and initialization related to the Magic Training Arena (MTA).
+ */
 @Initializable
 class MageTrainingArena : OptionHandler() {
 

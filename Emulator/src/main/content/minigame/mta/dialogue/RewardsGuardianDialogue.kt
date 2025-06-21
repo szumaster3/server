@@ -14,6 +14,9 @@ import org.rs.consts.Components
 import org.rs.consts.Items
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Rewards guardian dialogue.
+ */
 @Initializable
 class RewardsGuardianDialogue(player: Player? = null) : Dialogue(player) {
 

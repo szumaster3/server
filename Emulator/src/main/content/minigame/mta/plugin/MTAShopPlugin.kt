@@ -19,24 +19,16 @@ import org.rs.consts.Items
  */
 class MTAShopPlugin : InterfaceListener {
     private val container = Container(ITEMS.size, ContainerType.SHOP)
-
     private val viewers: MutableList<Player> = ArrayList(100)
-
-    /**
-     * Array of varbit ids corresponding to pizazz slots.
-     */
-    private val pizazzVarbitIds = intArrayOf(1485, 1489, 1488, 1486)
-
 
     private val component: Component =
         Component(Components.MAGICTRAINING_SHOP_197).setUncloseEvent(
-            CloseEvent { player, c ->
-                if (player == null) {
-                    return@CloseEvent true
+            CloseEvent { player, _ ->
+                if (player != null) {
+                    viewers.remove(player)
                 }
-                viewers.remove(player)
                 true
-            },
+            }
         )
 
     init {
@@ -44,19 +36,16 @@ class MTAShopPlugin : InterfaceListener {
         Pulser.submit(
             object : Pulse(100) {
                 override fun pulse(): Boolean {
-                    for (i in container.toArray().indices) {
-                        val main = true
-                        val item = container.toArray()[i] ?: continue
-                        if (main) {
-                            if (item.amount < 100) {
-                                item.amount += 1
-                            }
-                            this@MTAShopPlugin.update()
+                    for (item in container.toArray()) {
+                        if (item == null) continue
+                        if (item.amount < 100) {
+                            item.amount += 1
                         }
                     }
+                    update()
                     return false
                 }
-            },
+            }
         )
     }
 
@@ -64,32 +53,25 @@ class MTAShopPlugin : InterfaceListener {
      * Updates the shop display for all active viewers.
      */
     private fun update() {
-        for (p in viewers) {
-            if (p == null || !p.isActive) {
-                continue
-            }
+        for (player in viewers) {
+            if (!player.isActive) continue
             InterfaceContainer.generateItems(
-                p,
+                player,
                 container.toArray(),
                 arrayOf("Buy", "Value"),
                 Components.MAGICTRAINING_SHOP_197,
                 16,
                 4,
-                7,
+                7
             )
         }
     }
 
     /**
      * Handles the purchase of an item by a player.
-     *
-     * @param player The player attempting to buy an item.
-     * @param item The item being purchased.
-     * @param slot The slot in the shop container from which the item is bought.
      */
     fun buy(player: Player, item: Item, slot: Int) {
-        var item = item
-        val prices = PRICES[slot]
+        val prices = PRICES.getOrNull(slot) ?: return
 
         if (item.id == Items.ARENA_BOOK_6891) {
             if (!removeItem(player, Item(Items.COINS_995, 200))) {
@@ -104,23 +86,28 @@ class MTAShopPlugin : InterfaceListener {
             sendMessage(player, "The shop has run out of stock.")
             return
         }
-        item = Item(item.id, 1)
-        if (!hasSpaceFor(player, item)) {
+
+        val purchaseItem = Item(item.id, 1)
+
+        if (!hasSpaceFor(player, purchaseItem)) {
             sendMessage(player, "You don't have enough inventory space.")
             return
         }
+
         for (i in prices.indices) {
-            if (getPoints(player, i) < prices[i]) {
+            if (MTAZone.getPoints(player, i) < prices[i]) {
                 sendMessage(player, "You cannot afford that item.")
                 return
             }
         }
+
         if (item.id == Items.BONES_TO_PEACHES_6926 && player.getSavedData().activityData.isBonesToPeaches) {
             sendMessage(player, "You already unlocked that spell.")
             return
         }
+
         var itemToRemove: ContainerisedItem? = null
-        if (slot >= 1 && slot <= 3) {
+        if (slot in 1..3) {
             val required = ITEMS[slot - 1]
             itemToRemove = hasAnItem(player, required.id)
             if (!itemToRemove.exists() && !player.hasItem(Item(Items.MASTER_WAND_6914, 1))) {
@@ -128,180 +115,55 @@ class MTAShopPlugin : InterfaceListener {
                 return
             }
         }
-        if (container.getAmount(item) - 1 <= 0) {
+
+        if (container.getAmount(purchaseItem) - 1 <= 0) {
             container[slot].amount = 0
         } else {
-            container.remove(item)
+            container.remove(purchaseItem)
         }
+
         if (item.id == Items.BONES_TO_PEACHES_6926) {
             player.getSavedData().activityData.isBonesToPeaches = true
             sendDialogue(player, "The Guardian teaches you how to use the Bones to Peaches spell!")
         } else {
             if (itemToRemove == null || itemToRemove.remove()) {
-                player.inventory.add(item)
+                player.inventory.add(purchaseItem)
             }
         }
+
         for (i in prices.indices) {
-            decrementPoints(player, i, prices[i])
+            MTAZone.decrementPoints(player, i, prices[i])
         }
-        updatePoints(player)
+        MTAZone.updatePoints(player)
         update()
     }
 
     /**
      * Displays the value (cost) of an item to the player.
-     *
-     * @param player The player requesting item price information.
-     * @param item The item being valued.
-     * @param slot The slot of the item in the shop container.
      */
     fun value(player: Player, item: Item, slot: Int) {
-        val prices = PRICES[slot]
+        val prices = PRICES.getOrNull(slot) ?: return
+
         if (item.id != Items.ARENA_BOOK_6891) {
-            sendMessage(
-                player,
-                "The " + item.name + " costs " + prices[0] + " Telekinetic, " + prices[1] + " Alchemist,",
-            )
-            sendMessage(player, prices[2].toString() + " Enchantment and " + prices[3] + " Graveyard Pizazz Points.")
+            sendMessage(player, "The ${item.name} costs ${prices[0]} Telekinetic, ${prices[1]} Alchemist,")
+            sendMessage(player, "${prices[2]} Enchantment and ${prices[3]} Graveyard Pizazz Points.")
         } else {
             sendMessage(player, "The arena book costs 200 gold coins.")
         }
-    }
-
-    /**
-     * Updates the displayed points for a player on the shop interface.
-     *
-     * @param player The player whose points are being updated.
-     */
-    fun updatePoints(player: Player) {
-        for ((i, varbitId) in pizazzVarbitIds.withIndex()) {
-            setVarbit(player, varbitId, getPoints(player, i), true)
-        }
-    }
-
-    /**
-     * Increments a player points of the specified type.
-     *
-     * @param player The player whose points to increase.
-     * @param index The type of Pizazz points to increment.
-     * @param increment The amount to add.
-     */
-    fun incrementPoints(player: Player, index: Int, increment: Int) {
-        val varbitId = pizazzVarbitIds[index]
-        val current = getVarbit(player, varbitId)
-        setVarbit(player, varbitId, current + increment)
-        updatePoints(player)
-    }
-
-    /**
-     * Decrements a player points of the specified type.
-     *
-     * @param player The player whose points to decrease.
-     * @param index The type of Pizazz points to decrement.
-     * @param decrement The amount to subtract.
-     */
-    private fun decrementPoints(player: Player, index: Int, decrement: Int) {
-        val varbitId = pizazzVarbitIds[index]
-        val current = getVarbit(player, varbitId)
-        val newValue = (current - decrement).coerceAtLeast(0)
-        setVarbit(player, varbitId, newValue)
-        updatePoints(player)
-    }
-
-    /**
-     * Gets the amount of points a player has for the specified type.
-     *
-     * @param player The player whose points are queried.
-     * @param index The type of Pizazz points.
-     * @return The number of points the player has.
-     */
-    fun getPoints(player: Player, index: Int): Int {
-        val varbitId = pizazzVarbitIds[index]
-        return getVarbit(player, varbitId)
-    }
-
-    companion object {
-        /**
-         * An array of items available in the shop.
-         */
-        @JvmStatic
-        val ITEMS: Array<Item> =
-            arrayOf(
-                Item(Items.BEGINNER_WAND_6908, 100),
-                Item(Items.APPRENTICE_WAND_6910, 100),
-                Item(Items.TEACHER_WAND_6912, 100),
-                Item(Items.MASTER_WAND_6914, 100),
-                Item(Items.INFINITY_TOP_6916, 100),
-                Item(Items.INFINITY_HAT_6918, 100),
-                Item(Items.INFINITY_BOOTS_6920, 100),
-                Item(Items.INFINITY_GLOVES_6922, 100),
-                Item(Items.INFINITY_BOTTOMS_6924, 100),
-                Item(Items.MAGES_BOOK_6889, 100),
-                Item(Items.BONES_TO_PEACHES_6926, 100),
-                Item(Items.BATTLESTAFF_1391, 100),
-                Item(Items.MIST_RUNE_4695, 100),
-                Item(Items.DUST_RUNE_4696, 100),
-                Item(Items.SMOKE_RUNE_4697, 100),
-                Item(Items.MUD_RUNE_4698, 100),
-                Item(Items.STEAM_RUNE_4694, 100),
-                Item(Items.LAVA_RUNE_4699, 100),
-                Item(Items.COSMIC_RUNE_564, 100),
-                Item(Items.CHAOS_RUNE_562, 100),
-                Item(Items.NATURE_RUNE_561, 100),
-                Item(Items.DEATH_RUNE_560, 100),
-                Item(Items.LAW_RUNE_563, 100),
-                Item(Items.SOUL_RUNE_566, 100),
-                Item(Items.BLOOD_RUNE_565, 100),
-                Item(Items.ARENA_BOOK_6891, 1),
-            )
-
-        /**
-         * An array of prices for items.
-         */
-        @JvmStatic
-        val PRICES: Array<IntArray> =
-            arrayOf(
-                intArrayOf(30, 30, 300, 30),
-                intArrayOf(60, 60, 600, 60),
-                intArrayOf(150, 200, 1500, 150),
-                intArrayOf(240, 240, 2400, 240),
-                intArrayOf(400, 450, 4000, 400),
-                intArrayOf(350, 400, 3000, 350),
-                intArrayOf(120, 120, 1200, 120),
-                intArrayOf(175, 225, 1500, 175),
-                intArrayOf(450, 500, 5000, 450),
-                intArrayOf(500, 550, 6000, 500),
-                intArrayOf(200, 300, 2000, 200),
-                intArrayOf(1, 2, 20, 2),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(1, 1, 15, 1),
-                intArrayOf(0, 0, 5, 0),
-                intArrayOf(0, 1, 5, 1),
-                intArrayOf(0, 1, 0, 1),
-                intArrayOf(2, 1, 20, 1),
-                intArrayOf(2, 0, 0, 0),
-                intArrayOf(2, 2, 25, 2),
-                intArrayOf(2, 2, 25, 2),
-                intArrayOf(0, 0, 0, 0),
-            )
     }
 
     override fun defineInterfaceListeners() {
         onOpen(Components.MAGICTRAINING_SHOP_197) { player, _ ->
             viewers.add(player)
             update()
-            updatePoints(player)
+            MTAZone.updatePoints(player)
             Pulser.submit(
                 object : Pulse(1, player) {
                     override fun pulse(): Boolean {
-                        updatePoints(player)
+                        MTAZone.updatePoints(player)
                         return true
                     }
-                },
+                }
             )
             return@onOpen true
         }
@@ -314,15 +176,75 @@ class MTAShopPlugin : InterfaceListener {
 
         on(Components.MAGICTRAINING_SHOP_197) { player, _, opcode, _, slot, _ ->
             val item = container[slot] ?: return@on true
-            if (opcode == 155) {
-                value(player, item, slot)
-            } else if (opcode == 196) {
-                buy(player, item, slot)
-            } else {
-                sendMessage(player, item.definition.examine)
+            when (opcode) {
+                155 -> value(player, item, slot)
+                196 -> buy(player, item, slot)
+                else -> sendMessage(player, item.definition.examine)
             }
             update()
             return@on true
         }
+    }
+
+    companion object {
+        @JvmStatic
+        val ITEMS = arrayOf(
+            Item(Items.BEGINNER_WAND_6908, 100),
+            Item(Items.APPRENTICE_WAND_6910, 100),
+            Item(Items.TEACHER_WAND_6912, 100),
+            Item(Items.MASTER_WAND_6914, 100),
+            Item(Items.INFINITY_TOP_6916, 100),
+            Item(Items.INFINITY_HAT_6918, 100),
+            Item(Items.INFINITY_BOOTS_6920, 100),
+            Item(Items.INFINITY_GLOVES_6922, 100),
+            Item(Items.INFINITY_BOTTOMS_6924, 100),
+            Item(Items.MAGES_BOOK_6889, 100),
+            Item(Items.BONES_TO_PEACHES_6926, 100),
+            Item(Items.BATTLESTAFF_1391, 100),
+            Item(Items.MIST_RUNE_4695, 100),
+            Item(Items.DUST_RUNE_4696, 100),
+            Item(Items.SMOKE_RUNE_4697, 100),
+            Item(Items.MUD_RUNE_4698, 100),
+            Item(Items.STEAM_RUNE_4694, 100),
+            Item(Items.LAVA_RUNE_4699, 100),
+            Item(Items.COSMIC_RUNE_564, 100),
+            Item(Items.CHAOS_RUNE_562, 100),
+            Item(Items.NATURE_RUNE_561, 100),
+            Item(Items.DEATH_RUNE_560, 100),
+            Item(Items.LAW_RUNE_563, 100),
+            Item(Items.SOUL_RUNE_566, 100),
+            Item(Items.BLOOD_RUNE_565, 100),
+            Item(Items.ARENA_BOOK_6891, 1),
+        )
+
+        @JvmStatic
+        val PRICES = arrayOf(
+            intArrayOf(30, 30, 300, 30),
+            intArrayOf(60, 60, 600, 60),
+            intArrayOf(150, 200, 1500, 150),
+            intArrayOf(240, 240, 2400, 240),
+            intArrayOf(400, 450, 4000, 400),
+            intArrayOf(350, 400, 3000, 350),
+            intArrayOf(120, 120, 1200, 120),
+            intArrayOf(175, 225, 1500, 175),
+            intArrayOf(450, 500, 5000, 450),
+            intArrayOf(500, 550, 6000, 500),
+            intArrayOf(200, 300, 2000, 200),
+            intArrayOf(1, 2, 20, 2),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(1, 1, 15, 1),
+            intArrayOf(0, 0, 5, 0),
+            intArrayOf(0, 1, 5, 1),
+            intArrayOf(0, 1, 0, 1),
+            intArrayOf(2, 1, 20, 1),
+            intArrayOf(2, 0, 0, 0),
+            intArrayOf(2, 2, 25, 2),
+            intArrayOf(2, 2, 25, 2),
+            intArrayOf(0, 0, 0, 0),
+        )
     }
 }

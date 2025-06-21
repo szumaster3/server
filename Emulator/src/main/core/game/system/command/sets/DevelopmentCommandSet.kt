@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
+import content.minigame.mta.plugin.MTAZone
 import content.region.kandarin.plugin.barbtraining.BarbarianTraining
 import core.api.*
 import core.api.ui.closeDialogue
@@ -197,26 +198,28 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::mtahat",
             description = "MTA points manager.",
         ) { player, _ ->
-            val activityData = player.getSavedData().activityData
-            sendDialogueOptions(player, "devops", "add pizzaz points", "check points", "close")
+            sendDialogueOptions(player, "devops", "add pizzazz points", "check points", "close")
             addDialogueAction(player) { _, button ->
                 when (button) {
-                    2 -> arrayOf(0, 1, 2, 3).forEach { type -> activityData.incrementPizazz(type, 10000) }
-                    3 ->
+                    2 -> {
+                        (0..3).forEach { type ->
+                            MTAZone.incrementPoints(player, type, 10000)
+                        }
+                        sendMessage(player, "Added 10,000 pizzazz points to all categories.")
+                    }
+                    3 -> {
+                        val g = MTAZone.pizazzVarbitIds[0] // Max 1808
+                        val t = MTAZone.pizazzVarbitIds[1] // Max 1808
+                        val a = MTAZone.pizazzVarbitIds[2] // ~unlimited
+                        val e = MTAZone.pizazzVarbitIds[3] // ~unlimited
                         sendMessage(
                             player,
-                            "MTA: G: [$DARK_BLUE${activityData.getPizazzPoints(
-                                0,
-                            )}</col>] A: [$DARK_BLUE${activityData.getPizazzPoints(
-                                2,
-                            )}</col>] T: [$DARK_BLUE${activityData.getPizazzPoints(
-                                1,
-                            )}</col>] E: [$DARK_BLUE${activityData.getPizazzPoints(3)}</col>]",
+                            "MTA: G: [$DARK_BLUE$g</col>] A: [$DARK_BLUE$a</col>] T: [$DARK_BLUE$t</col>] E: [$DARK_BLUE$e</col>]"
                         )
+                    }
                     4 -> closeDialogue(player)
                 }
             }
-            return@define
         }
 
         /*

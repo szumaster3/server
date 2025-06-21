@@ -13,7 +13,7 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneRestriction
 import core.game.world.map.zone.ZoneType
 
-open class MTAZone(name: String?, val items: Array<Item>, ) : MapZone(name, false, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.FOLLOWERS) {
+open class MTAZone(name: String?, val items: Array<Item>) : MapZone(name, false, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.FOLLOWERS) {
 
     var type: MTAType? = null
 
@@ -90,27 +90,22 @@ open class MTAZone(name: String?, val items: Array<Item>, ) : MapZone(name, fals
      * Increment player points stored via varbits for the current MTA type.
      */
     fun incrementPoints(player: Player, index: Int, amount: Int) {
-        val varbitId = pizazzVarbitIds[index]
-        val current = getVarbit(player, varbitId)
-        setVarbit(player, varbitId, current + amount)
-        updatePoints(player)
+        Companion.incrementPoints(player, index, amount)
+        Companion.updatePoints(player)
     }
 
     /**
      * Update points display for the player based on varbits.
      */
     fun updatePoints(player: Player) {
-        for ((i, varbitId) in pizazzVarbitIds.withIndex()) {
-            setVarbit(player, varbitId, getPoints(player, i), true)
-        }
+        Companion.updatePoints(player)
     }
 
     /**
      * Get points from varbit for player.
      */
     fun getPoints(player: Player, index: Int): Int {
-        val varbitId = pizazzVarbitIds[index]
-        return getVarbit(player, varbitId)
+        return Companion.getPoints(player, index)
     }
 
     /**
@@ -129,5 +124,33 @@ open class MTAZone(name: String?, val items: Array<Item>, ) : MapZone(name, fals
          * Map indexes of pizazz points to varbit ids.
          */
         val pizazzVarbitIds = intArrayOf(1485, 1489, 1488, 1486)
+
+        fun incrementPoints(player: Player, index: Int, amount: Int) {
+            val varbitId = pizazzVarbitIds[index]
+            val current = getVarbit(player, varbitId)
+            setVarbit(player, varbitId, current + amount)
+        }
+
+        fun decrementPoints(player: Player, index: Int, amount: Int) {
+            val varbitId = pizazzVarbitIds[index]
+            val current = getVarbit(player, varbitId)
+            val newValue = (current - amount).coerceAtLeast(0)
+            setVarbit(player, varbitId, newValue)
+        }
+
+        fun updatePoints(player: Player) {
+            for ((i, varbitId) in pizazzVarbitIds.withIndex()) {
+                setVarbit(player, varbitId, getPoints(player, i), true)
+            }
+        }
+
+        fun getPoints(player: Player, index: Int): Int {
+            val varbitId = pizazzVarbitIds[index]
+            return getVarbit(player, varbitId)
+        }
+
+        fun getTotalPoints(player: Player): Int {
+            return pizazzVarbitIds.indices.sumOf { getPoints(player, it) }
+        }
     }
 }

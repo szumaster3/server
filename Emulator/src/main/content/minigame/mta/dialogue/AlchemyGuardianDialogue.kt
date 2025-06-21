@@ -8,6 +8,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Alchemy guardian dialogue.
+ */
 @Initializable
 class AlchemyGuardianDialogue(player: Player? = null) : Dialogue(player) {
 

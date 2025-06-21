@@ -1,6 +1,8 @@
 package content.minigame.mta.dialogue
 
+import content.minigame.mta.plugin.MTAZone
 import content.minigame.mta.plugin.ProgressHat
+import core.api.getVarbit
 import core.api.hasAnItem
 import core.api.removeItem
 import core.api.sendDialogueOptions
@@ -13,6 +15,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
 
+/**
+ * Represents the Progress hat dialogue.
+ */
 @Initializable
 class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -25,18 +30,18 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
         "Mr Progress Hat? Hello?",
     )
 
-    private val responses = listOf(
-        listOf(
+    private val responses = arrayOf(
+        arrayOf(
             "That's me, why are you bothering me human?",
             "Sorry, but do you think you could tell me my Pizazz Points?",
         ),
-        listOf(
+        arrayOf(
             "Can't you see I'm busy?", "But you're just a hat? Can you tell me my Pizazz Point totals?"
         ),
-        listOf(
+        arrayOf(
             "What do you want?", "Do you think you could tell me my Pizazz Points?"
         ),
-        listOf(
+        arrayOf(
             "I suppose you want to know your Pizazz Points.", "That would be nice, yes."
         ),
     )
@@ -71,8 +76,8 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
                 npc(
                     FaceAnim.OLD_NORMAL,
                     "Ok, I suppose it's my job. You have:",
-                    "${getPoints(0)} Telekinetic, ${getPoints(1)} Alchemist,",
-                    "${getPoints(2)} Enchantment, and ${getPoints(3)} Graveyard Pizazz",
+                    "${MTAZone.getPoints(player,0)} Telekinetic, ${MTAZone.getPoints(player, 1)} Alchemist,",
+                    "${MTAZone.getPoints(player, 2)} Enchantment, and ${MTAZone.getPoints(player, 3)} Graveyard Pizazz",
                     "Points."
                 )
                 stage = 3
@@ -91,7 +96,7 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
             5 -> {
                 when (buttonId) {
                     1 -> {
-                        val hasHat = hasAnItem(player, *ProgressHat.hats).container != null
+                        val hasHat = hasAnItem(player, *ProgressHat.hatIds).container != null
                         if (!hasHat) {
                             return true
                         }
@@ -115,8 +120,6 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
         }
         return true
     }
-
-    private fun getPoints(index: Int): Int = player.getSavedData().activityData.getPizazzPoints(index)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.PIZZAZ_HAT_3096)
 }

@@ -653,11 +653,6 @@ class PlayerSaver(
                 .toString()
         activityData["startedMta"] = player.savedData.activityData.isStartedMta
         activityData["lostCannon"] = player.savedData.activityData.isLostCannon
-        val pizazzPoints = JSONArray()
-        player.savedData.activityData.pizazzPoints.map {
-            pizazzPoints.add(it.toString())
-        }
-        activityData["pizazzPoints"] = pizazzPoints
         activityData["bonesToPeaches"] = player.savedData.activityData.isBonesToPeaches
         activityData["solvedMazes"] =
             player.savedData.activityData.solvedMazes
