@@ -13,13 +13,14 @@ public class ZoneBuilder implements StartupListener {
 
     @Override
     public void startup() {
-        configure(WildernessZone.getInstance());
+        configure(WildernessZone.Companion.getInstance());
         configure(MultiwayCombatZone.Companion.getInstance());
         configure(new ModeratorZone());
         configure(new DarkZone());
         configure(new KaramjaZone());
         configure(new BankZone());
-        configure(new SnowZone());
+        configure(new TutorialZone());
+        configure(new SnowZone().getZone());
     }
 
     /**
