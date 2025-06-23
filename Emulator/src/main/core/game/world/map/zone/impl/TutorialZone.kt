@@ -6,6 +6,7 @@ import core.api.*
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.game.world.GameWorld.settings
 import core.game.world.map.zone.MapZone
 import core.worker.ManagementEvents.publish
@@ -22,15 +23,17 @@ class TutorialZone : MapZone("tutorial island", true) {
         }
     }
 
-    override fun teleport(entity: Entity, type: Int, node: Node): Boolean {
+    override fun teleport(entity: Entity, type: Int, node: Node?): Boolean {
         if (entity is Player) {
             val p = entity
-            if (p.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) < 72)
-            {
-                lockTeleport(p)
+            val a = Rights.ADMINISTRATOR
+            if (p.rights == a) {
+                return super.teleport(entity, type, node)
             }
-            else
-            {
+
+            if (p.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) < 72) {
+                lockTeleport(p)
+            } else {
                 completeTutorial(p)
             }
         }

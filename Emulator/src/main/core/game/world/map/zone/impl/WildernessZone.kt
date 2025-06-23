@@ -236,6 +236,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
          *
          * @param p The player entering the wilderness.
          */
+        @JvmStatic
         fun show(p: Player) {
             if (p.skullManager.isWildernessDisabled) return
             openOverlay(p, Components.WILDERNESS_OVERLAY_381)
@@ -244,7 +245,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
             if (settings!!.wild_pvp_enabled) p.interaction.set(Option._P_ATTACK)
             p.skullManager.isWilderness = true
         }
-
+        @JvmStatic
         fun checkTeleport(p: Player, level: Int): Boolean {
             if (p.skullManager.level > level && !p.skullManager.isWildernessDisabled) {
                 sendMessage(p, "A mysterious force blocks your teleport spell!")
@@ -254,13 +255,17 @@ class WildernessZone(vararg val borders: ZoneBorders) :
             return true
         }
 
+        @JvmStatic
         fun isInZone(e: Entity): Boolean = instance.borders.any { it.insideBorder(e) }
+
+        @JvmStatic
         fun isInZone(l: Location): Boolean = instance.borders.any { it.insideBorder(l) }
 
         /**
          * Calculates the wilderness level of the given entity based on its location.
          * @see [clientscript,wilderness_level_update]
          */
+        @JvmStatic
         fun getWilderness(e: Entity): Int {
             val y = e.location.y
             return if (y > 6400) ((y - 9920) / 8) + 1 else ((y - 3520) / 8) + 1

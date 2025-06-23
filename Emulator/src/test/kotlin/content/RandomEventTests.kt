@@ -119,7 +119,7 @@ class RandomEventTests {
             TestUtils.advanceTicks(5, false)
 
             // Wilderness is Random Event restricted
-            WildernessZone.getInstance().configure()
+            WildernessZone.instance.configure()
             val loc = Location.create(3131, 3595)
             p.location = loc
 

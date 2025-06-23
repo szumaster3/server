@@ -191,7 +191,7 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "",
             description = "Allows you to change your appearance.",
         ) { player, _ ->
-            CharacterDesign.reopen(player)
+            CharacterDesign.open(player)
         }
 
         define(
