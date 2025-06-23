@@ -2,52 +2,19 @@ package content.region.island.tutorial.plugin
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.ui.closeDialogue
 import core.game.component.Component
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.Entity
-import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.game.world.map.zone.ZoneBorders
 import core.game.world.repository.Repository
 import org.rs.consts.*
 
-class TutorialPlugin : InteractionListener, MapArea {
-
-    override fun defineAreaBorders(): Array<ZoneBorders> =
-        arrayOf(getRegionBorders(12079), getRegionBorders(12180), getRegionBorders(12592), getRegionBorders(12436), getRegionBorders(12335), getRegionBorders(12336))
-
-    override fun areaEnter(entity: Entity) {
-        if (entity is Player) {
-            val p = entity.asPlayer()
-            if (getAttribute(p, TutorialStage.TUTORIAL_STAGE, 0) != 72) {
-                lockTeleport(p)
-            } else {
-                p.locks.unlockTeleport()
-            }
-            if (getAttribute(p, TutorialStage.TUTORIAL_STAGE, -1) == 72) {
-                Component.setUnclosable(p, p.dialogueInterpreter.sendPlaneMessageWithBlueTitle("You have almost completed the tutorial!", "", "Just click on the first spell, Home Teleport, in your Magic", "Spellbook. This spell doesn't require any runes, but can only", "be cast once every 30 minutes."),)
-            }
-        }
-    }
-
-    override fun entityStep(entity: Entity, location: Location, lastLocation: Location, ) {
-        if (entity is Player) {
-            val player = entity.asPlayer()
-            val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1)
-
-            if (stage == 72) {
-                player.locks.unlockTeleport()
-                Component.setUnclosable(player, player.dialogueInterpreter.sendPlaneMessageWithBlueTitle("You have almost completed the tutorial!", "", "Just click on the first spell, Home Teleport, in your Magic", "Spellbook. This spell doesn't require any runes, but can only", "be cast once every 30 minutes."),)
-            }
-        }
-    }
+class TutorialPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(RS_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->

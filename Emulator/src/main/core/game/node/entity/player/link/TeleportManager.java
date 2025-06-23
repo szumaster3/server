@@ -379,10 +379,6 @@ public class TeleportManager {
                     @Override
                     public void stop() {
                         super.stop();
-                        if (player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) == 72) {
-                            Player p = entity.asPlayer();
-                            completeTutorial(p);
-                        }
                         entity.getAnimator().forceAnimation(new Animation(-1));
                         player.graphics(new Graphics(-1));
                     }
@@ -888,50 +884,5 @@ public class TeleportManager {
         this.teleportType = teleportType;
     }
 
-    /**
-     * Completes the tutorial.
-     *
-     * @param player the player for whom the tutorial complete.
-     */
-    public static void completeTutorial(Player player) {
-        setVarbit(player, TutorialStage.FLASHING_ICON, 0);
-        setVarp(player, 281, 1000, true);
-        setAttribute(player, "/save:tutorial:complete", true);
-        setAttribute(player, "/save:tutorial:stage", 73);
-
-        player.unhook(TutorialCastReceiver.INSTANCE);
-        player.unhook(TutorialKillReceiver.INSTANCE);
-        player.unhook(TutorialFireReceiver.INSTANCE);
-        player.unhook(TutorialResourceReceiver.INSTANCE);
-        player.unhook(TutorialUseWithReceiver.INSTANCE);
-        player.unhook(TutorialInteractionReceiver.INSTANCE);
-        player.unhook(TutorialButtonReceiver.INSTANCE);
-
-        if (GameWorld.getSettings() != null && GameWorld.getSettings().getEnable_default_clan()) {
-            player.getCommunication().setCurrentClan(ServerConstants.SERVER_NAME);
-            JoinClanRequest.Builder clanJoin = JoinClanRequest.newBuilder();
-            clanJoin.setClanName(ServerConstants.SERVER_NAME);
-            clanJoin.setUsername(player.getName());
-            ManagementEvents.publish(clanJoin.build());
-        }
-
-        closeOverlay(player);
-        player.getInventory().clear();
-        player.getBank().clear();
-        player.getEquipment().clear();
-        player.getInventory().add(TutorialStage.STARTER_PACK);
-        player.getBank().add(TutorialStage.STARTER_BANK);
-        player.getInterfaceManager().restoreTabs();
-        player.getInterfaceManager().setViewedTab(3);
-        player.getInterfaceManager().openDefaultTabs();
-        player.getDialogueInterpreter().sendDialogues(
-                "Welcome to Lumbridge! To get more help, simply click on the",
-                "Lumbridge Guide or one of the Tutors - these can be found by",
-                "looking for the question mark icon on your minimap. If you find you",
-                "are lost at any time, look for a signpost or use the Lumbridge Home",
-                "Teleport spell."
-        );
-        setAttribute(player, "close_c_", true);
-    }
 }
 
