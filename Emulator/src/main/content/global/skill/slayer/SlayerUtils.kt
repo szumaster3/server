@@ -100,19 +100,19 @@ object SlayerUtils {
     fun hasBroadWeaponEquipped(
         player: Player,
         state: BattleState,
-    ): Boolean =
-        (
-            state.weapon != null &&
-                state.weapon.id == Items.LEAF_BLADED_SPEAR_4158 ||
-                state.weapon != null &&
-                state.weapon.id == Items.LEAF_BLADED_SWORD_13290 ||
-                state.ammunition != null &&
-                (
-                    state.ammunition.itemId == Items.BROAD_ARROW_4160 ||
-                        state.ammunition.itemId == Items.BROAD_TIPPED_BOLTS_13280
-                ) ||
-                state.spell != null &&
-                state.spell.spellId == 31 &&
-                player.spellBookManager.spellBook == SpellBook.MODERN.interfaceId
-        )
+    ): Boolean {
+        val weaponId = state.weapon?.id
+        val ammoId = state.ammunition?.itemId
+        val spellId = state.spell?.spellId
+        val spellBook = player.spellBookManager.spellBook
+
+        return when {
+            weaponId == Items.LEAF_BLADED_SPEAR_4158 -> true
+            weaponId == Items.LEAF_BLADED_SWORD_13290 -> true
+            ammoId == Items.BROAD_ARROW_4160 -> true
+            ammoId == Items.BROAD_TIPPED_BOLTS_13280 -> true
+            spellId == 31 && spellBook == SpellBook.MODERN.interfaceId -> true
+            else -> false
+        }
+    }
 }
