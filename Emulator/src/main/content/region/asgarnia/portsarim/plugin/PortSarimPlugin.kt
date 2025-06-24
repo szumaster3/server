@@ -136,7 +136,7 @@ class PortSarimPlugin : InteractionListener {
             lock(player, 2)
             sendChat((node as NPC), forceChat[RandomFunction.random(forceChat.size)])
             queueScript(player, 1, QueueStrength.SOFT) {
-                sendDialogue(player, "Maybe I should let him sleep.")
+                sendPlayerDialogue(player, "Maybe I should let him sleep.")
                 return@queueScript stopExecuting(player)
             }
             return@on true
