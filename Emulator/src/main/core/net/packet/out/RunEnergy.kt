@@ -13,7 +13,7 @@ class RunEnergy : OutgoingPacket<OutgoingContext.PlayerContext> {
     override fun send(context: OutgoingContext.PlayerContext) {
         val buffer = IoBuffer(234)
         buffer.put(context.player.settings.runEnergy.toInt().toByte().toInt())
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

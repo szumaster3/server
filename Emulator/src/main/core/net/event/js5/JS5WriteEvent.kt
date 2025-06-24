@@ -9,51 +9,41 @@ import java.nio.ByteBuffer
 import kotlin.math.min
 
 class JS5WriteEvent(
-    session: IoSession?,
-    context: Any?,
+    session: IoSession,
+    context: Any,
 ) : IoWriteEvent(session, context) {
-    override fun write(
-        session: IoSession,
-        context: Any,
-    ) {
+
+    override fun write(session: IoSession, context: Any) {
         val request = context as Triple<*, *, *>
         val index = request.first as Int
         val archive = request.second as Int
         val priority = request.third as Boolean
-        val data =
-            data(index, archive) ?: return SystemLogger.processLogEntry(
+
+        val data = data(index, archive) ?: run {
+            SystemLogger.processLogEntry(
                 this::class.java,
                 Log.WARN,
-                "Unable to fulfill request $index $archive $priority.",
+                "Unable to fulfill request $index $archive $priority."
             )
-        if (index == 255 && archive == 255) {
-            val buffer = serve255(data)
-            session.queue(buffer)
-        } else {
-            val buffer = serve(index, archive, data, priority)
-            session.queue(buffer)
+            return
         }
-        return
+
+        val buffer = if (index == 255 && archive == 255) {
+            serve255(data)
+        } else {
+            serve(index, archive, data, priority)
+        }
+        session.queue(buffer)
     }
 
     /**
      * @return data for an [index]'s [archive] file or [versionTable] when index and archive are both 255
      */
-    fun data(
-        index: Int,
-        archive: Int,
-    ): ByteArray? {
-        if (index == 255 && archive == 255) {
-            return versionTable
-        }
-        return provider.data(index, archive)
-    }
+    private fun data(index: Int, archive: Int): ByteArray? =
+        if (index == 255 && archive == 255) versionTable else provider.data(index, archive)
 
     /**
-     * Serve255 - Prepares a buffer to send the version table data
-     *
-     * @param data - The binary data retrieved from the cache
-     * @return buffer containing version table information
+     * Prepares a buffer to send the version table data
      */
     private fun serve255(data: ByteArray): ByteBuffer {
         val buffer = ByteBuffer.allocate(8 + data.size)
@@ -66,18 +56,19 @@ class JS5WriteEvent(
         return buffer
     }
 
-    fun serve(
+    private fun serve(
         index: Int,
         archive: Int,
         data: ByteArray,
         prefetch: Boolean,
     ): ByteBuffer {
         val compression = data[0].toInt()
-        val size = getInt(data[1], data[2], data[3], data[4]) + if (compression != 0) 8 else 4 // 9 : 5?
-        val buffer = ByteBuffer.allocate((size + 5) + (size / 512) + 10)
+        val size = getInt(data[1], data[2], data[3], data[4]) + if (compression != 0) 8 else 4
+        val buffer = ByteBuffer.allocate(size + 5 + size / 512 + 10)
+
         buffer.p1(index)
         buffer.p2(archive)
-        buffer.p1((if (prefetch) compression or 0x80 else compression))
+        buffer.p1(if (prefetch) compression or 0x80 else compression)
 
         var length = min(size, SPLIT - HEADER)
         buffer.put(data, OFFSET, length)
@@ -94,12 +85,11 @@ class JS5WriteEvent(
     }
 
     companion object {
-        private fun getInt(
-            b1: Byte,
-            b2: Byte,
-            b3: Byte,
-            b4: Byte,
-        ) = b1.toInt() shl 24 or (b2.toInt() and 0xff shl 16) or (b3.toInt() and 0xff shl 8) or (b4.toInt() and 0xff)
+        private fun getInt(b1: Byte, b2: Byte, b3: Byte, b4: Byte): Int =
+            (b1.toInt() shl 24) or
+                    ((b2.toInt() and 0xff) shl 16) or
+                    ((b3.toInt() and 0xff) shl 8) or
+                    (b4.toInt() and 0xff)
 
         private const val SEPARATOR = 255
         private const val HEADER = 4

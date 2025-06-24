@@ -15,7 +15,7 @@ class AnimateInterface : OutgoingPacket<OutgoingContext.AnimateInterface> {
         buffer.putIntB((context.interfaceId shl 16) + context.childId)
         buffer.putLEShort(context.animationId)
         buffer.putShortA(context.player.interfaceManager.getPacketCount(1))
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

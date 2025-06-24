@@ -15,7 +15,7 @@ class ConstructGroundItem : OutgoingPacket<OutgoingContext.BuildItem> {
         val player = context.player
         val item = context.item
         val buffer = write(UpdateAreaPosition.getBuffer(player, item.location.chunkBase), item)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         player.details.session.write(buffer)
     }
 

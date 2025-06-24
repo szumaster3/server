@@ -15,7 +15,7 @@ class CloseInterface : OutgoingPacket<OutgoingContext.InterfaceContext> {
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putShort(context.windowId)
         buffer.putShort(context.componentId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

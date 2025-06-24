@@ -1,14 +1,14 @@
 package core.net.event
 
-import core.tools.Log
+import core.api.log
 import core.net.IoReadEvent
 import core.net.IoSession
 import core.net.packet.IoBuffer
 import core.net.packet.PacketProcessor
-import java.nio.ByteBuffer
-import core.api.log
 import core.net.packet.`in`.Decoders530
 import core.net.packet.`in`.Packet
+import core.tools.Log
+import java.nio.ByteBuffer
 
 /**
  * Handles game packet reading.
@@ -50,11 +50,11 @@ class GameReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(sessio
         )
     }
 
-    override fun read(session: IoSession?, buffer: ByteBuffer) {
+    override fun read(session: IoSession, buffer: ByteBuffer) {
         var last = -1
         while (buffer.hasRemaining()) {
             val opcode = buffer.get().toInt() and 0xFF
-            if (session == null || session.player == null) {
+            if (session?.getPlayer() == null) {
                 continue
             }
             val header = PACKET_SIZES[opcode]
@@ -63,7 +63,7 @@ class GameReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(sessio
                 size = getPacketSize(buffer, opcode, header, last, session)
             }
             if (size == -1) {
-                session.player!!.incrementInvalidPacketCount()
+                session.getPlayer()!!.incrementInvalidPacketCount()
                 break
             }
             if (buffer.remaining() < size) {
@@ -77,16 +77,16 @@ class GameReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(sessio
             val data = ByteArray(size)
             buffer.get(data)
             val buf = IoBuffer(opcode, null, ByteBuffer.wrap(data))
-            session.lastPing = System.currentTimeMillis()
+            session.setLastPing(System.currentTimeMillis())
             last = opcode
 
             // Authentic per-player per-tick limit on inbound packets
-            if (session.player!!.opCounts[opcode]++ >= 10) {
+            if (session.getPlayer()!!.opCounts[opcode]++ >= 10) {
                 log(this::class.java, Log.FINE, "Skipping packet $opcode because already received more than 10!")
                 return
             }
 
-            val processed = Decoders530.process(session.player!!, opcode, buf)
+            val processed = Decoders530.process(session.getPlayer()!!, opcode, buf)
             when (processed) {
                 is Packet.UnhandledOp -> log(this::class.java, Log.WARN, "Unhandled opcode: $opcode")
                 is Packet.DecodingError -> log(this::class.java, Log.ERR, processed.message)
@@ -96,9 +96,6 @@ class GameReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(sessio
         }
     }
 
-    /**
-     * Gets the packet size for the given opcode.
-     */
     private fun getPacketSize(buffer: ByteBuffer, opcode: Int, header: Int, last: Int, session: IoSession): Int {
         return when (header) {
             -1 -> {

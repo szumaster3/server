@@ -15,7 +15,7 @@ class UpdateSceneGraph : OutgoingPacket<OutgoingContext.SceneGraph> {
     override fun send(context: OutgoingContext.SceneGraph) {
         val buffer = IoBuffer(162, PacketHeader.SHORT)
         val player = context.player
-        buffer.cypherOpcode(player.session.isaacPair.output)
+        buffer.cypherOpcode(player.session.getIsaacPair()!!.output)
         player.playerFlags.lastSceneGraph = player.location
         buffer.putShortA(player.location.sceneX)
         for (regionX in (player.location.regionX - 6) / 8..((player.location.regionX + 6) / 8)) {

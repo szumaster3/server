@@ -38,8 +38,8 @@ class RunScriptPacket : OutgoingPacket<OutgoingContext.RunScript> {
         val buffer = IoBuffer(115, PacketHeader.SHORT)
         buffer.putShort(context!!.player.interfaceManager.getPacketCount(1))
 
-        buffer.putString(types)
-        for ((j, i) in ((types!!.length - 1) downTo 0).withIndex()) {
+        buffer.putString(types!!)
+        for ((j, i) in ((types.length - 1) downTo 0).withIndex()) {
             if (types[i] == 's') {
                 buffer.putString(objects?.get(j) as String)
             } else {
@@ -48,7 +48,7 @@ class RunScriptPacket : OutgoingPacket<OutgoingContext.RunScript> {
         }
 
         buffer.putInt(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

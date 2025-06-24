@@ -51,12 +51,12 @@ class LoginParser(
             object : Pulse(1) {
                 override fun pulse(): Boolean {
                     try {
-                        if (details.session.isActive) {
+                        if (details.session.isActive()) {
                             player.properties.spawnLocation =
                                 getAttribute(player, "/save:spawnLocation", ServerConstants.HOME_LOCATION)
                             loginListeners.forEach(Consumer { listener: LoginListener -> listener.login(player) }) // Execute login hooks
                             parser.runContentHooks()
-                            player.details.session.`object` = (player)
+                            player.details.session.setObject(player)
 
                             if (reconnect) {
                                 reconnect(player)
@@ -103,7 +103,7 @@ class LoginParser(
      * @return `true` if the request is valid, otherwise `false`.
      */
     private fun validateRequest(): Boolean {
-        if (!details.session.isActive) {
+        if (!details.session.isActive()) {
             return false
         }
         if (SystemManager.isUpdating) {

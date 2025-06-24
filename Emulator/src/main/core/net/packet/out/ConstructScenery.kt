@@ -15,7 +15,7 @@ class ConstructScenery : OutgoingPacket<OutgoingContext.BuildScenery> {
         val player = context.player
         val o = context.scenery
         val buffer = write(UpdateAreaPosition.getBuffer(player, o.location.chunkBase), o)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         player.session.write(buffer)
     }
 

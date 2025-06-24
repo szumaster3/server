@@ -12,7 +12,7 @@ import core.net.packet.OutgoingPacket
 class Interface : OutgoingPacket<OutgoingContext.InterfaceContext> {
     override fun send(context: OutgoingContext.InterfaceContext) {
         val buffer = IoBuffer(155)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         buffer.put(if (context.walkable) 1 else 0)
         buffer.putIntB(context.windowId shl 16 or context.componentId)
             .putShortA(context.player.interfaceManager.getPacketCount(1)).putShort(context.interfaceId)

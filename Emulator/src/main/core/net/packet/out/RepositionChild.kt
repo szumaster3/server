@@ -16,7 +16,7 @@ class RepositionChild : OutgoingPacket<OutgoingContext.ChildPosition> {
             .putLEInt(context.interfaceId shl 16 or context.childId)
             .putShort(context.position.x)
             .putShortA(context.position.y)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

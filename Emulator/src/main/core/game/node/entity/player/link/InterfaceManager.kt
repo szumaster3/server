@@ -547,8 +547,8 @@ class InterfaceManager(
      * @param windowMode The desired window mode.
      */
     fun switchWindowMode(windowMode: Int) {
-        if (windowMode != player.session.clientInfo.windowMode) {
-            player.session.clientInfo.windowMode = windowMode
+        if (windowMode != player.session.getClientInfo()!!.windowMode) {
+            player.session.getClientInfo()!!.windowMode = windowMode
             openWindowsPane(Component(if (isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
             if (!player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
                 hideTabs(player, false)
@@ -693,10 +693,10 @@ class InterfaceManager(
      */
     val isResizable: Boolean
         get() {
-            if (player.session.clientInfo == null) {
+            if (player.session.getClientInfo() == null) {
                 return false
             }
-            return player.session.clientInfo.isResizable
+            return player.session.getClientInfo()!!.isResizable
         }
 
     /**

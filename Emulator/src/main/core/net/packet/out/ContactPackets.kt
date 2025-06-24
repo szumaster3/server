@@ -43,7 +43,7 @@ class ContactPackets : OutgoingPacket<OutgoingContext.Contact> {
             }
         }
         if (buffer != null) {
-            buffer.cypherOpcode(context.player.session.isaacPair.output)
+            buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
             player.session.write(buffer)
         }
     }

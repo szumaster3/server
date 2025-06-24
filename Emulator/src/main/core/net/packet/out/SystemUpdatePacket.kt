@@ -12,7 +12,7 @@ import core.net.packet.OutgoingPacket
 class SystemUpdatePacket : OutgoingPacket<OutgoingContext.SystemUpdate> {
     override fun send(context: OutgoingContext.SystemUpdate) {
         val buffer = IoBuffer(85).putShort(context.time)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

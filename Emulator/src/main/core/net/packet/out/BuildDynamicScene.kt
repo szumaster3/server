@@ -69,7 +69,7 @@ class BuildDynamicScene : OutgoingPacket<OutgoingContext.DynamicScene> {
             buffer.putIntB(keys[0]).putIntB(keys[1]).putIntB(keys[2]).putIntB(keys[3])
         }
         buffer.putShort(player.location.regionY)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
         player.playerFlags.lastSceneGraph = player.location
     }

@@ -12,7 +12,7 @@ import core.net.packet.OutgoingPacket
 class ClearMinimapFlag : OutgoingPacket<OutgoingContext.PlayerContext> {
     override fun send(context: OutgoingContext.PlayerContext) {
         val buffer = IoBuffer(153)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

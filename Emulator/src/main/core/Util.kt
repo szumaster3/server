@@ -63,12 +63,12 @@ object Util {
      * Example: "1 hour" or "2 hours".
      */
     @JvmStatic
-    fun getTimeUnitString(count: Long, singular: String, plural: String, ): String = if (count == 1L) "$count $singular" else "$count $plural"
+    fun getTimeUnitString(count: Long, singular: String, plural: String): String = if (count == 1L) "$count $singular" else "$count $plural"
 
     /**
      * Returns a random integer between 0 and [i], inclusive.
      */
-    fun random(random: Random, i: Int, ): Int = random.nextInt(i + 1)
+    fun random(random: Random, i: Int): Int = random.nextInt(i + 1)
 
     /**
      * Returns a random integer between 0 and [i], inclusive, using the default random.
@@ -121,12 +121,12 @@ object Util {
     /**
      * Clamps [input] to the range of [min] and [max] for [Double] values.
      */
-    fun clamp(input: Double, min: Double, max: Double, ): Double = kotlin.math.max(kotlin.math.min(input, max), min)
+    fun clamp(input: Double, min: Double, max: Double): Double = kotlin.math.max(kotlin.math.min(input, max), min)
 
     /**
      * Clamps [input] to the range of [min] and [max] for [Int] values.
      */
-    fun clamp(input: Int, min: Int, max: Int, ): Int =
+    fun clamp(input: Int, min: Int, max: Int): Int =
         kotlin.math
             .max(kotlin.math.min(input.toDouble(), max.toDouble()), min.toDouble())
             .toInt()
@@ -168,7 +168,7 @@ object Util {
     /**
      * Returns a random integer between [min] and [max], inclusive.
      */
-    fun random(random: Random, min: Int, max: Int, ): Int {
+    fun random(random: Random, min: Int, max: Int): Int {
         val n = abs((max - min).toDouble()).toInt()
         return (kotlin.math.min(min.toDouble(), max.toDouble()) + (if (n == 0) 0 else random(random, n))).toInt()
     }
@@ -176,12 +176,12 @@ object Util {
     /**
      * Returns a random integer between [min] and [max], inclusive, using the default random.
      */
-    fun random(min: Int, max: Int, ): Int = random(random, min, max)
+    fun random(min: Int, max: Int): Int = random(random, min, max)
 
     /**
      * Calculates the Euclidean distance between two points.
      */
-    fun getDistance(coordX1: Int, coordY1: Int, coordX2: Int, coordY2: Int, ): Int {
+    fun getDistance(coordX1: Int, coordY1: Int, coordX2: Int, coordY2: Int): Int {
         val deltaX = coordX2 - coordX1
         val deltaY = coordY2 - coordY1
         return (sqrt(deltaX.toDouble().pow(2.0) + deltaY.toDouble().pow(2.0)).toInt())
@@ -278,12 +278,12 @@ object Util {
     /**
      * Compares two objects [a] and [b] for equality, handling nulls safely.
      */
-    fun equals(a: Any?, b: Any, ): Boolean = (a === b) || (a != null && a == b)
+    fun equals(a: Any?, b: Any): Boolean = (a === b) || (a != null && a == b)
 
     /**
      * Rounds a [Double] to [places] decimal places.
      */
-    fun round(value: Double, places: Int, ): Double {
+    fun round(value: Double, places: Int): Double {
         require(places >= 0)
         try {
             var bd = BigDecimal(value)

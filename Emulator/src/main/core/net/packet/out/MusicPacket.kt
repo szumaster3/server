@@ -20,7 +20,7 @@ class MusicPacket : OutgoingPacket<OutgoingContext.Music> {
             buffer = IoBuffer(4)
             buffer.putLEShortA(context.musicId)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

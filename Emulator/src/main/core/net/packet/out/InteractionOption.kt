@@ -21,7 +21,7 @@ class InteractionOption : OutgoingPacket<OutgoingContext.InteractionOptionContex
         }
         buffer.put(context.index + 1)
         buffer.putString(context.name)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

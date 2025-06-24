@@ -12,7 +12,7 @@ import core.net.packet.OutgoingPacket
 class WindowsPane : OutgoingPacket<OutgoingContext.WindowsPane> {
     override fun send(context: OutgoingContext.WindowsPane) {
         val buffer = IoBuffer(145)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         buffer.putLEShortA(context.windowId)
         buffer.putS(context.type)
         buffer.putLEShortA(context.player.interfaceManager.getPacketCount(1))

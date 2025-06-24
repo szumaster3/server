@@ -22,7 +22,7 @@ class Config : OutgoingPacket<OutgoingContext.Config> {
             buffer.putShortA(context.id)
             buffer.putC(context.value)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         if (!context.player.isArtificial) {
             context.player.details.session.write(buffer)
         }

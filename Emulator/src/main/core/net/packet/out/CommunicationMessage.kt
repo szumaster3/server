@@ -56,7 +56,7 @@ class CommunicationMessage : OutgoingPacket<OutgoingContext.MessageContext> {
         if (player.isArtificial) {
             (player as AIPlayer).handleIncomingChat(context)
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         player.session.write(buffer)
     }
 

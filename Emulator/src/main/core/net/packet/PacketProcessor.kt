@@ -129,7 +129,7 @@ object PacketProcessor {
             -> processTrackingPacket(pkt)
 
             is Packet.PlayerPrefsUpdate -> {}
-            is Packet.Ping -> pkt.player.session.lastPing = System.currentTimeMillis()
+            is Packet.Ping -> pkt.player.session.setLastPing(System.currentTimeMillis())
             is Packet.JoinClan -> {
                 if (pkt.clanName.isEmpty() &&
                     pkt.player.communication.currentClan
@@ -368,11 +368,11 @@ object PacketProcessor {
         when (pkt) {
             is Packet.TrackingFocus -> {}
             is Packet.TrackingDisplayUpdate -> {
-                pkt.player.session.clientInfo
+                pkt.player.session.getClientInfo()
                     ?.screenWidth = pkt.screenWidth
-                pkt.player.session.clientInfo
+                pkt.player.session.getClientInfo()
                     ?.screenHeight = pkt.screenHeight
-                pkt.player.session.clientInfo
+                pkt.player.session.getClientInfo()
                     ?.displayMode = pkt.displayMode
                 pkt.player.interfaceManager.switchWindowMode(pkt.windowMode)
             }

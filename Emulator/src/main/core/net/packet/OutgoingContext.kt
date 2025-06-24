@@ -13,6 +13,9 @@ import core.game.world.map.RegionChunk
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 
+/**
+ * Base sealed class for outgoing contexts related to a player.
+ */
 sealed class OutgoingContext(override val player: Player, open val login: Boolean = false) : Context {
     data class PlayerContext(override val player: Player) : OutgoingContext(player)
     data class AccessMask(override val player: Player, val id: Int, val childId: Int, val interfaceId: Int, val offset: Int, val length: Int) : OutgoingContext(player)
@@ -92,7 +95,15 @@ sealed class OutgoingContext(override val player: Player, open val login: Boolea
     }
     data class Default(override val player: Player, val objects: Array<Any?>) : OutgoingContext(player)
     data class Music(override val player: Player, val musicId: Int, var secondary: Boolean = false) : OutgoingContext(player)
-    data class DisplayModel(override val player: Player, val type: ModelType = ModelType.PLAYER, val nodeId: Int = -1, var amount: Int = 0, val interfaceId: Int, val childId: Int, var zoom: Int = 0, ) : OutgoingContext(player) {
+    data class DisplayModel(
+        override val player: Player,
+        val type: ModelType = ModelType.PLAYER,
+        val nodeId: Int = -1,
+        var amount: Int = 0,
+        val interfaceId: Int,
+        val childId: Int,
+        var zoom: Int = 0,
+    ) : OutgoingContext(player) {
         enum class ModelType {
             PLAYER, NPC, ITEM, MODEL
         }
@@ -146,11 +157,17 @@ sealed class OutgoingContext(override val player: Player, open val login: Boolea
     }
 
     data class MinimapState(override val player: Player, val state: Int) : OutgoingContext(player)
-    data class PositionedGraphic(override val player: Player, val graphic: Graphics, val location: Location, val offsetX: Int, val offsetY: Int, ) : OutgoingContext(player) {
+    data class PositionedGraphic(
+        override val player: Player,
+        val graphic: Graphics,
+        val location: Location,
+        val offsetX: Int,
+        val offsetY: Int,
+    ) : OutgoingContext(player) {
         val sceneX: Int = location.getSceneX(player.playerFlags.lastSceneGraph)
         val sceneY: Int = location.getSceneY(player.playerFlags.lastSceneGraph)
     }
-    data class RunScript(override var player: Player, val id: Int, val string: String, val objects: Array<Any>, ) : OutgoingContext(player) {
+    data class RunScript(override var player: Player, val id: Int, val string: String, val objects: Array<Any>) : OutgoingContext(player) {
         fun setPlayer(player: Player): RunScript {
             return copy(player = player)
         }

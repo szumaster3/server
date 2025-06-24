@@ -15,7 +15,7 @@ class CSConfigPacket : OutgoingPacket<OutgoingContext.CSConfig> {
         buffer.putLEShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putC(context.value.toByte().toInt())
         buffer.putLEShortA(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

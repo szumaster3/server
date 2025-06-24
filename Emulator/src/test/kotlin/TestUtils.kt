@@ -257,7 +257,7 @@ class MockSession : IoSession(null, null) {
         val payload: ByteArray,
     )
 
-    override fun getRemoteAddress(): String? = "127.0.0.1"
+    override fun getRemoteAddress(): String = "127.0.0.1"
 
     override fun write(
         context: Any,

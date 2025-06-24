@@ -15,7 +15,7 @@ class SkillLevel : OutgoingPacket<OutgoingContext.SkillContext> {
 
     override fun send(context: OutgoingContext.SkillContext) {
         val buffer = IoBuffer(38)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         val skills = context.player.getSkills()
         if (context.skillId == Skills.PRAYER) {
             buffer.putA(ceil(skills.prayerPoints).toInt())

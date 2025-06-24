@@ -15,7 +15,7 @@ class ClearScenery : OutgoingPacket<OutgoingContext.BuildScenery> {
         val player = context.player
         val scenery = context.scenery
         val buffer = write(UpdateAreaPosition.getBuffer(player, scenery.location.chunkBase), scenery)
-        buffer.cypherOpcode(player.session.isaacPair.output)
+        buffer.cypherOpcode(player.session.getIsaacPair()!!.output)
         player.session.write(buffer)
     }
 

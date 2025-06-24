@@ -17,7 +17,7 @@ class AccessMask : OutgoingPacket<OutgoingContext.AccessMask> {
         buffer.putInt(context.interfaceId shl 16 or context.childId)
         buffer.putShortA(context.offset)
         buffer.putIntA(context.id)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

@@ -16,7 +16,7 @@ class StringPacket : OutgoingPacket<OutgoingContext.StringContext> {
         buffer.putIntB((context.interfaceId shl 16) or context.lineId)
         buffer.putString(context.string)
         buffer.putShortA(context.player.interfaceManager.getPacketCount(1))
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

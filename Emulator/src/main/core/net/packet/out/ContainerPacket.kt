@@ -62,7 +62,7 @@ class ContainerPacket : OutgoingPacket<OutgoingContext.Container> {
                 }
             }
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

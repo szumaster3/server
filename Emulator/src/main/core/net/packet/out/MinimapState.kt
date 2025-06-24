@@ -12,7 +12,7 @@ import core.net.packet.OutgoingPacket
 class MinimapState : OutgoingPacket<OutgoingContext.MinimapState> {
     override fun send(context: OutgoingContext.MinimapState) {
         val buffer = IoBuffer(192).put(context.state)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.details.session.write(buffer)
     }
 }

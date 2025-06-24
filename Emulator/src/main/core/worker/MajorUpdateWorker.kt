@@ -46,8 +46,8 @@ class MajorUpdateWorker {
                 }
 
                 for (player in Repository.players.filter { !it.isArtificial }) {
-                    if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
-                        player?.session?.lastPing = Long.MAX_VALUE
+                    if (System.currentTimeMillis() - player.session.getLastPing() > 20000L) {
+                        player?.session?.setLastPing(Long.MAX_VALUE)
                         player?.session?.disconnect()
                     }
                     if (!player.isActive &&

@@ -16,7 +16,7 @@ class ClearRegionChunk : OutgoingPacket<OutgoingContext.ClearChunk> {
         val y = context.chunk.currentBase.getSceneY(l)
         if (x >= 0 && y >= 0 && x < 96 && y < 96) {
             val buffer = IoBuffer(112).put(x).putC(y)
-            buffer.cypherOpcode(context.player.session.isaacPair.output)
+            buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
             context.player.session.write(buffer)
         }
     }

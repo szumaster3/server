@@ -15,7 +15,7 @@ class InterfaceConfig : OutgoingPacket<OutgoingContext.InterfaceConfigContext> {
         buffer.putC(if (context.isHidden) 1 else 0)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         buffer.putLEInt(context.interfaceId shl 16 or context.childId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

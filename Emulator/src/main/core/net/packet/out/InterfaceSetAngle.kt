@@ -26,7 +26,7 @@ class InterfaceSetAngle : OutgoingPacket<OutgoingContext.Default> {
         buffer.putLEShortA(scale)
         buffer.putLEShortA(yaw)
         buffer.putInt(interfaceId shl 16 or childId)
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         context.player.session.write(buffer)
     }
 }

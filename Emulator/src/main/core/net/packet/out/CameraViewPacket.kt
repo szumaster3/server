@@ -34,7 +34,7 @@ class CameraViewPacket : OutgoingPacket<OutgoingContext.Camera> {
 
             OutgoingContext.CameraType.RESET -> buffer.putShort(context.player.interfaceManager.getPacketCount(1))
         }
-        buffer.cypherOpcode(context.player.session.isaacPair.output)
+        buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         p.session.write(buffer)
     }
 }
