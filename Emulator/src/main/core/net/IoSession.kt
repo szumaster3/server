@@ -34,7 +34,7 @@ open class IoSession(
     /**
      * The currently queued writing data.
      */
-    private val writingQueue: MutableList<ByteBuffer> = ArrayList(20)
+    private val writingQueue = ArrayList<ByteBuffer>(20)
 
     /**
      * The currently queued reading data.
@@ -110,18 +110,15 @@ open class IoSession(
      * @param instant if true, the writing happens immediately; otherwise, it is queued
      * @throws IllegalStateException if the context is null
      */
-    open fun write(context: Any, instant: Boolean) {
-        if (context == null) {
-            throw IllegalStateException("Invalid writing context!")
-        }
+    open fun write(context: Any, instant: Boolean = false) {
         if (context !is AuthResponse && producer is LoginEventProducer) {
             return
         }
         if (instant) {
             producer.produceWriter(this, context).run()
-            return
+        } else {
+            service?.execute(producer.produceWriter(this, context))
         }
-        service!!.execute(producer.produceWriter(this, context))
     }
 
     /**
