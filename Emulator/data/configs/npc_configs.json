@@ -903,7 +903,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -921,7 +921,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -1514,7 +1514,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5567",
     "combat_audio": "931,923,922",
     "attack_speed": "4",
@@ -1534,7 +1534,7 @@
     "attack_level": "8"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -1556,7 +1556,7 @@
     "attack_level": "13"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -1578,7 +1578,7 @@
     "attack_level": "19"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "combat_audio": "931,923,922",
     "attack_speed": "4",
@@ -6140,7 +6140,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Elena",
     "defence_level": "1",
     "safespot": null,
@@ -7604,7 +7604,7 @@
     "attack_level": "130"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -7624,7 +7624,7 @@
     "attack_level": "5"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -7644,7 +7644,7 @@
     "attack_level": "10"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -7664,7 +7664,7 @@
     "attack_level": "15"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -7684,7 +7684,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -7704,7 +7704,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "931,923,922",
@@ -8881,7 +8881,7 @@
     "attack_level": "7"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -8899,7 +8899,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -8917,7 +8917,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -8929,7 +8929,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -8941,7 +8941,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -8959,7 +8959,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -11475,7 +11475,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "melee_animation": "64",
     "attack_speed": "4",
     "magic_level": "60",
@@ -12221,7 +12221,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Elena",
     "defence_level": "1",
     "safespot": null,
@@ -14710,7 +14710,7 @@
     "attack_level": "17"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "64",
     "attack_speed": "4",
     "magic_level": "1",
@@ -15907,7 +15907,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -17158,7 +17158,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -20431,7 +20431,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -22771,7 +22771,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -24720,7 +24720,7 @@
     "attack_level": "6"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24732,7 +24732,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24744,7 +24744,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24756,7 +24756,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24768,7 +24768,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24780,7 +24780,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24792,7 +24792,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24804,7 +24804,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24816,7 +24816,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24828,7 +24828,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24840,7 +24840,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24852,7 +24852,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24864,7 +24864,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24876,7 +24876,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24888,7 +24888,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24900,7 +24900,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24912,7 +24912,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24924,7 +24924,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24936,7 +24936,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -24948,7 +24948,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dummy",
     "defence_level": "1",
     "safespot": null,
@@ -25931,7 +25931,7 @@
     "attack_level": "58"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -25955,7 +25955,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -25967,7 +25967,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -25979,7 +25979,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -27235,7 +27235,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "range_animation": "8569",
     "combat_audio": "547,550,549",
@@ -27258,7 +27258,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "range_animation": "0",
     "combat_audio": "547,550,549",
@@ -27282,7 +27282,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "range_animation": "0",
     "combat_audio": "547,550,549",
@@ -27306,7 +27306,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "range_animation": "0",
     "combat_audio": "547,550,549",
@@ -27330,7 +27330,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "combat_audio": "547,550,549",
     "attack_speed": "4",
@@ -27350,7 +27350,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "8569",
     "combat_audio": "547,550,549",
     "attack_speed": "4",
@@ -28643,7 +28643,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -28655,7 +28655,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "A commonly found tree.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -28667,7 +28667,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "A healthy young tree.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -28679,7 +28679,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28691,7 +28691,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28703,7 +28703,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28715,7 +28715,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28727,7 +28727,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28739,7 +28739,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28751,7 +28751,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28763,7 +28763,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28775,7 +28775,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28787,7 +28787,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dead tree",
     "defence_level": "1",
     "safespot": null,
@@ -28961,7 +28961,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -28979,7 +28979,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -29015,7 +29015,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -29033,7 +29033,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -29327,7 +29327,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5849",
     "range_animation": "5849",
     "combat_audio": "366,368,367",
@@ -29370,7 +29370,7 @@
     "attack_level": "2"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5849",
     "range_animation": "5849",
     "combat_audio": "366,368,367",
@@ -30337,7 +30337,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -33554,7 +33554,7 @@
     "attack_level": "72"
   },
   {
-    "examine": "An ogre shaman{{sic",
+    "examine": "An ogre shaman",
     "name": "Grish",
     "defence_level": "1",
     "safespot": null,
@@ -33566,7 +33566,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An ogre shaman {{sic",
+    "examine": "An ogre shaman ",
     "name": "Uglug Nar",
     "defence_level": "1",
     "safespot": null,
@@ -34299,7 +34299,7 @@
     "attack_level": "5"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -34312,7 +34312,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "attack_speed": "4",
@@ -34331,7 +34331,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -34404,7 +34404,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -35512,7 +35512,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -35530,7 +35530,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -35578,7 +35578,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Looks like a human traveler{{sic",
+    "examine": "Looks like a human traveler",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -35596,7 +35596,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Looks like a human traveler{{sic",
+    "examine": "Looks like a human traveler",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -36232,7 +36232,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -36250,7 +36250,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36262,7 +36262,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36274,7 +36274,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36286,7 +36286,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36298,7 +36298,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36310,7 +36310,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36322,7 +36322,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36334,7 +36334,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36346,7 +36346,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36358,7 +36358,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36370,7 +36370,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -36923,7 +36923,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It's just like that dream I use{{sic",
+    "examine": "It's just like that dream I use",
     "name": "Thing under the bed",
     "defence_level": "5",
     "safespot": null,
@@ -37747,7 +37747,7 @@
     "defence_animation": ""
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5849",
     "range_animation": "5849",
     "combat_audio": "366,368,367",
@@ -38063,7 +38063,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -38390,7 +38390,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -38408,7 +38408,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_style": "2",
     "melee_animation": "0",
     "range_animation": "0",
@@ -39468,7 +39468,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Door-support",
     "defence_level": "1",
     "safespot": null,
@@ -39505,7 +39505,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "attack_speed": "0",
@@ -39548,7 +39548,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Door-support",
     "defence_level": "1",
     "safespot": null,
@@ -41083,7 +41083,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -41095,7 +41095,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -41107,7 +41107,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Dwarven Miner",
     "defence_level": "1",
     "safespot": null,
@@ -41305,7 +41305,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -41317,7 +41317,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -41329,7 +41329,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -42605,7 +42605,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -42617,7 +42617,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -42629,7 +42629,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -42641,7 +42641,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -42653,7 +42653,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -42665,7 +42665,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Nice but dim.{{sic",
+    "examine": "Nice but dim.",
     "name": "Unferth",
     "defence_level": "1",
     "safespot": null,
@@ -43652,7 +43652,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -45729,7 +45729,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -45768,7 +45768,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -45807,7 +45807,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -45834,7 +45834,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Clearly someones better half.{{sic",
+    "examine": "Clearly someones better half.",
     "name": "Other Half-Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -45918,7 +45918,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -46652,7 +46652,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A docile warrior{{Sic",
+    "examine": "A docile warrior",
     "name": "Blanin",
     "defence_level": "1",
     "safespot": null,
@@ -47866,7 +47866,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An elemental water spirit.{{sic",
+    "examine": "An elemental water spirit.",
     "name": "Nirrie",
     "defence_level": "1",
     "safespot": null,
@@ -47878,7 +47878,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An elemental waterspirit.{{sic",
+    "examine": "An elemental waterspirit.",
     "name": "Tirrie",
     "defence_level": "1",
     "safespot": null,
@@ -47890,7 +47890,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An elemental waterspirit.{{sic",
+    "examine": "An elemental waterspirit.",
     "name": "Hallak",
     "defence_level": "1",
     "safespot": null,
@@ -48845,7 +48845,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Assassin",
     "defence_level": "1",
     "safespot": null,
@@ -49338,7 +49338,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Prison Pete",
     "defence_level": "1",
     "safespot": null,
@@ -50368,7 +50368,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -50386,7 +50386,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -50404,7 +50404,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "pUre A cHaOs of crEatuRe!&lt;!-- {{sic",
+    "examine": "pUre A cHaOs of crEatuRe!&lt;!-- ",
     "start_gfx": "556",
     "melee_animation": "3146",
     "attack_speed": "4",
@@ -50548,7 +50548,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Elena",
     "defence_level": "1",
     "safespot": null,
@@ -50626,7 +50626,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Elena",
     "defence_level": "1",
     "safespot": null,
@@ -51914,7 +51914,7 @@
     "attack_level": "30"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -51932,7 +51932,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Engineering assistant",
     "defence_level": "1",
     "safespot": null,
@@ -53567,7 +53567,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|examine2 = A drunken dwarven father figure!",
+    "examine": "A drunken dwarven father figure!",
     "name": "Rohak",
     "defence_level": "1",
     "safespot": null,
@@ -56731,7 +56731,7 @@
     "attack_level": "80"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -56872,7 +56872,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Launa",
     "defence_level": "1",
     "safespot": null,
@@ -56884,7 +56884,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Launa",
     "defence_level": "1",
     "safespot": null,
@@ -58035,7 +58035,7 @@
     "attack_level": "47"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -58081,7 +58081,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -58094,7 +58094,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -58107,7 +58107,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -58120,7 +58120,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -58133,7 +58133,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -59960,7 +59960,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A Gnome Arrow-chucker {{sic",
+    "examine": "A Gnome Arrow-chucker ",
     "combat_style": "1",
     "melee_animation": "190",
     "range_animation": "0",
@@ -60930,7 +60930,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -60942,7 +60942,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -60954,7 +60954,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -60966,7 +60966,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -60978,7 +60978,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -60990,7 +60990,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61002,7 +61002,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61014,7 +61014,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61026,7 +61026,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61038,7 +61038,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61050,7 +61050,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61062,7 +61062,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61074,7 +61074,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61086,7 +61086,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61098,7 +61098,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61110,7 +61110,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61122,7 +61122,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61134,7 +61134,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61146,7 +61146,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -61158,7 +61158,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Molly",
     "defence_level": "1",
     "safespot": null,
@@ -66576,7 +66576,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -66615,7 +66615,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -66628,7 +66628,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -66641,7 +66641,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -66654,7 +66654,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -66667,7 +66667,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -67586,7 +67586,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "range_animation": "5568",
     "combat_audio": "918,923,922",
@@ -67609,7 +67609,7 @@
     "attack_level": "24"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -67632,7 +67632,7 @@
     "attack_level": "35"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -68691,7 +68691,7 @@
     "attack_level": "9"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Bogrog",
     "defence_level": "1",
     "safespot": null,
@@ -71309,7 +71309,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "King Healthorg",
     "defence_level": "1",
     "safespot": null,
@@ -73515,7 +73515,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -73533,7 +73533,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Stray dog",
     "defence_level": "1",
     "safespot": null,
@@ -73903,7 +73903,7 @@
     "attack_level": "42"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -73915,7 +73915,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -73927,7 +73927,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -73941,7 +73941,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -73953,7 +73953,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -73965,7 +73965,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "range_animation": "0",
     "magic_level": "1",
     "defence_animation": "0",
@@ -73981,7 +73981,7 @@
     "attack_level": "90"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanescula Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -73993,7 +73993,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanescula Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -74005,7 +74005,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanescula Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -74017,7 +74017,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanescula Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -74977,7 +74977,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Vanstrom Klause",
     "defence_level": "1",
     "safespot": null,
@@ -75151,7 +75151,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Brother Maledict",
     "defence_level": "1",
     "safespot": null,
@@ -75163,7 +75163,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -75181,7 +75181,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Brother Maledict",
     "defence_level": "1",
     "safespot": null,
@@ -76472,7 +76472,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Drunken dwarf's leg",
     "defence_level": "1",
     "safespot": null,
@@ -79525,7 +79525,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -79561,7 +79561,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Cow1337killr",
     "defence_level": "1",
     "safespot": null,
@@ -80211,7 +80211,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -80223,7 +80223,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -80241,7 +80241,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -80253,7 +80253,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -80421,7 +80421,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Coenus",
     "defence_level": "1",
     "safespot": null,
@@ -80573,7 +80573,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80592,7 +80592,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80611,7 +80611,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80630,7 +80630,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80649,7 +80649,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80668,7 +80668,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80687,7 +80687,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80706,7 +80706,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80725,7 +80725,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80744,7 +80744,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80763,7 +80763,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80782,7 +80782,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80801,7 +80801,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "range_animation": "5568",
     "combat_audio": "931,923,922",
@@ -80824,7 +80824,7 @@
     "attack_level": "11"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80843,7 +80843,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "range_animation": "5568",
     "combat_audio": "931,923,922",
@@ -80866,7 +80866,7 @@
     "attack_level": "11"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80885,7 +80885,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "range_animation": "5571",
     "combat_audio": "931,923,922",
@@ -80908,7 +80908,7 @@
     "attack_level": "15"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80927,7 +80927,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80946,7 +80946,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80965,7 +80965,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -80984,7 +80984,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81003,7 +81003,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81022,7 +81022,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81041,7 +81041,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81060,7 +81060,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81079,7 +81079,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "range_animation": "5571",
     "combat_audio": "931,923,922",
@@ -81102,7 +81102,7 @@
     "attack_level": "15"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "range_animation": "5571",
     "combat_audio": "931,923,922",
@@ -81125,7 +81125,7 @@
     "attack_level": "18"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "range_animation": "5571",
     "combat_audio": "931,923,922",
@@ -81148,7 +81148,7 @@
     "attack_level": "18"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "range_animation": "5571",
     "combat_audio": "931,923,922",
@@ -81170,7 +81170,7 @@
     "attack_level": "20"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81189,7 +81189,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81208,7 +81208,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81227,7 +81227,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81246,7 +81246,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81265,7 +81265,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81284,7 +81284,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81303,7 +81303,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -81322,7 +81322,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -82236,7 +82236,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "range_animation": "5568",
     "combat_audio": "918,923,922",
@@ -82259,7 +82259,7 @@
     "attack_level": "25"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "range_animation": "5568",
     "combat_audio": "918,923,922",
@@ -82282,7 +82282,7 @@
     "attack_level": "25"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -82305,7 +82305,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -82328,7 +82328,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -82351,7 +82351,7 @@
     "attack_level": "47"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5578",
     "range_animation": "5578",
     "combat_audio": "918,923,922",
@@ -82625,7 +82625,7 @@
     "attack_level": "52"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -82644,7 +82644,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82659,7 +82659,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82674,7 +82674,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82689,7 +82689,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82704,7 +82704,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82719,7 +82719,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82734,7 +82734,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82749,7 +82749,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82764,7 +82764,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82779,7 +82779,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82794,7 +82794,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5568",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -82813,7 +82813,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82828,7 +82828,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82843,7 +82843,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82858,7 +82858,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82873,7 +82873,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -82888,7 +82888,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -83222,7 +83222,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -83234,7 +83234,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -83246,7 +83246,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -83258,7 +83258,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -83270,7 +83270,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -83282,7 +83282,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard{{sic",
+    "examine": "* 'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -83570,7 +83570,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "One of the most common trees in Gielinor. '''OR''' A commonly found tree. '''OR''' A healthy young tree. ''([[Ardougne Zoo]])''",
+    "examine": "One of the most common trees in Gielinor.",
     "name": "Tree",
     "defence_level": "1",
     "safespot": null,
@@ -85025,7 +85025,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -85043,7 +85043,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Homunculus",
     "defence_level": "1",
     "safespot": null,
@@ -85055,7 +85055,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Homunculus",
     "defence_level": "1",
     "safespot": null,
@@ -87852,7 +87852,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -87870,7 +87870,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -88678,7 +88678,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An archeologist. {{sic",
+    "examine": "An archeologist. ",
     "name": "Anna Jones",
     "defence_level": "1",
     "safespot": null,
@@ -89769,7 +89769,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -89781,7 +89781,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -89841,7 +89841,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -89859,7 +89859,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Stray dog",
     "defence_level": "1",
     "safespot": null,
@@ -91681,7 +91681,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "A traveling{{sic",
+    "examine": "A traveling",
     "melee_animation": "422",
     "combat_audio": "511,513,512",
     "attack_speed": "5",
@@ -92861,7 +92861,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -92880,7 +92880,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "5571",
     "combat_audio": "931,923,922",
     "magic_level": "1",
@@ -93421,7 +93421,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "combat_audio": "931,923,922",
     "magic_level": "1",
     "slayer_exp": "30",
@@ -94332,7 +94332,7 @@
     "attack_level": "55"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -94344,7 +94344,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -95412,7 +95412,7 @@
   },
   {
     "agg_radius": "64",
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "6964",
     "range_animation": "6964",
     "attack_speed": "2",
@@ -100201,7 +100201,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -100213,7 +100213,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map =",
+    "examine": "",
     "name": "Charley the Cleaner",
     "defence_level": "1",
     "safespot": null,
@@ -109475,7 +109475,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|examine2 = He's sleeping, snoring heavily. Shave his belly with a rusty razor!",
+    "examine": "He's sleeping, snoring heavily. Shave his belly with a rusty razor!",
     "name": "Drunken sailor",
     "defence_level": "1",
     "safespot": null,
@@ -109487,7 +109487,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|examine2 = He's sleeping, snoring heavily. Shave his belly with a rusty razor!",
+    "examine": "He's sleeping, snoring heavily. Shave his belly with a rusty razor!",
     "name": "Drunken sailor",
     "defence_level": "1",
     "safespot": null,
@@ -114216,7 +114216,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -114228,7 +114228,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -114748,7 +114748,7 @@
     "attack_level": "30"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "range_animation": "0",
     "magic_level": "1",
     "defence_animation": "0",
@@ -116515,7 +116515,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Fiara",
     "defence_level": "1",
     "safespot": null,
@@ -116575,7 +116575,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -118161,7 +118161,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Drorkar",
     "defence_level": "1",
     "safespot": null,
@@ -118197,7 +118197,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Drorkar",
     "defence_level": "1",
     "safespot": null,
@@ -118295,7 +118295,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|examine2 = He works at the Lumber Yard.",
+    "examine": "He works at the Lumber Yard.",
     "name": "Will",
     "defence_level": "1",
     "safespot": null,
@@ -118307,7 +118307,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|examine2 = He works at the Lumber Yard.",
+    "examine": "He works at the Lumber Yard.",
     "name": "Will",
     "defence_level": "1",
     "safespot": null,
@@ -119003,7 +119003,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119015,7 +119015,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119027,7 +119027,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119039,7 +119039,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119361,7 +119361,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119373,7 +119373,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119385,7 +119385,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -119397,7 +119397,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -120505,7 +120505,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120517,7 +120517,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120529,7 +120529,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120541,7 +120541,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120553,7 +120553,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120565,7 +120565,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120577,7 +120577,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "|map = No",
+    "examine": " No",
     "name": "Barricade guard",
     "defence_level": "1",
     "safespot": null,
@@ -120873,7 +120873,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sigmund",
     "defence_level": "1",
     "safespot": null,
@@ -123120,7 +123120,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -123132,7 +123132,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -123144,7 +123144,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -123156,7 +123156,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
@@ -123426,7 +123426,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sharathteerk",
     "defence_level": "1",
     "safespot": null,
@@ -123439,7 +123439,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Sharathteerk",
     "defence_level": "1",
     "safespot": null,
@@ -126269,7 +126269,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Assassin",
     "defence_level": "1",
     "safespot": null,
@@ -126281,7 +126281,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "{{*",
+    "examine": "",
     "name": "Assassin",
     "defence_level": "1",
     "safespot": null,
