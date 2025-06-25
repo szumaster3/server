@@ -2,21 +2,25 @@ package content.region.kandarin.feldip.gutanoth.dialogue
 
 import content.region.kandarin.feldip.gutanoth.plugin.BogrogPlugin
 import core.api.interaction.openNpcShop
-import core.game.dialogue.DialogueFile
+import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.plugin.Initializable
 import org.rs.consts.NPCs
 
-class BogrogDialogue : DialogueFile() {
+/**
+ * Represents the Bogrog dialogue.
+ */
+@Initializable
+class BogrogDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun handle(componentID: Int, buttonID: Int) {
-        npc = NPC(NPCs.BOGROG_4472)
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.CHILD_NORMAL, "Hello da yooman, you tell bogrog what trade to", "shardies.").also { stage++ }
             1 -> options("So, what's Summoning all about, then?", "Can I buy some summoning supplies?", "Are you interested in buying pouch pouches or scrolls?").also { stage = 10 }
 
             // Summoning.
-            10 -> when (buttonID) {
+            10 -> when (buttonId) {
                 1 -> npc(FaceAnim.CHILD_NORMAL, "Whatchoo talkin' about, yooman?").also { stage = 11 }
                 2 -> player(FaceAnim.HALF_ASKING,"Can I buy some summoning supplies?").also { stage = 59 }
                 3 -> player(FaceAnim.HALF_ASKING,"Are you interested in buying pouch pouches or scrolls?").also { stage = 61 }
@@ -35,7 +39,7 @@ class BogrogDialogue : DialogueFile() {
             21 -> options("Tell me about Summoning familiars.", "Tell me about special moves.", "Tell me about pets.").also { stage++ }
 
             // Familiars.
-            22 -> when (buttonID) {
+            22 -> when (buttonId) {
                 1 -> npcl(FaceAnim.CHILD_NORMAL, "Summoned familiars are da main ting in Summonin', as if yooman didn't be guessing. There's all kinds of tings yooman can summon. Der bigger der yooman's summonyness, der bigger der tings yooman can summon.").also { stage++ }
                 2 -> npcl(FaceAnim.CHILD_NORMAL, "If you cuts up one of dem Summonin' pouches, over at der obelisk, den da energy gets mushed up real good, transformin' into a big stack of scrolls.").also { stage = 35 }
                 3 -> npcl(FaceAnim.CHILD_NORMAL, "Der petties? Well dey's not real summony stuffs, but if yooman trains hard, then yooman gets to be friends wiv dem. Der summonier der yooman gets, der more like nature der yooman gets, so da little petties like yooman better.").also { stage = 47 }
@@ -89,5 +93,12 @@ class BogrogDialogue : DialogueFile() {
             61 -> npcl(FaceAnim.CHILD_NORMAL, "Des other ogres's stealin' Bogrog's stock. Gimmie pouches and scrolls and yooman gets da shardies.").also { stage++ }
             62 -> end().also { BogrogPlugin.openSwap(player!!) }
         }
+        return true
+    }
+    override fun newInstance(player: Player?): Dialogue = BogrogDialogue(player)
+
+
+    override fun getIds(): IntArray {
+        return intArrayOf(NPCs.BOGROG_4472)
     }
 }

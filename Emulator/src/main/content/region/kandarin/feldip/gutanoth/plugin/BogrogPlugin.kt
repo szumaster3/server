@@ -1,7 +1,6 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
 import core.api.getStatLevel
-import core.api.openDialogue
 import core.api.sendItemSelect
 import core.api.sendMessage
 import core.game.interaction.IntType
@@ -25,16 +24,6 @@ class BogrogPlugin : InteractionListener {
             openSwap(player)
             return@on true
         }
-
-        /*
-         * Handles talking to Bogrog NPC.
-         */
-
-        on(NPCs.BOGROG_4472, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, node.id, node)
-            return@on true
-        }
-
     }
 
     companion object {

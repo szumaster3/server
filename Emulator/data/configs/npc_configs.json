@@ -4521,6 +4521,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "He checks the entrants to the Fishing Contest.",
+    "name": "Morris",
+    "defence_level": "1",
+    "safespot": null,
+    "strength_level": "1",
+    "id": "227",
+    "aggressive": "false",
+    "magic_level": "1",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
     "examine": "I can see how he got his name.",
     "name": "Big Dave",
     "defence_level": "1",
@@ -5614,6 +5626,24 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Farmer Brumty",
+    "safespot": null,
+    "id": "293"
+  },
+  {
+    "examine": "",
+    "name": "Farmer Brumty",
+    "safespot": null,
+    "id": "294"
+  },
+  {
+    "examine": "",
+    "name": "Farmer Brumty",
+    "safespot": null,
+    "id": "295"
   },
   {
     "examine": "He tries to keep order around here.",
@@ -7870,6 +7900,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cyrisus",
+    "safespot": null,
+    "id": "432"
+  },
+  {
     "examine": "I hope he's not dead!",
     "name": "Cyrisus",
     "defence_level": "1",
@@ -8544,6 +8580,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "32"
+  },
+  {
+    "examine": "",
+    "name": "Remsai",
+    "safespot": null,
+    "id": "474"
   },
   {
     "examine": "It's one of General Khazard's warriors.",
@@ -12921,6 +12963,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Kittens",
+    "safespot": null,
+    "id": "760"
+  },
+  {
     "examine": "A friendly little pet.",
     "name": "Kitten",
     "defence_level": "1",
@@ -17062,6 +17110,24 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Vampire",
+    "safespot": null,
+    "id": "1025"
+  },
+  {
+    "examine": "",
+    "name": "Vampire",
+    "safespot": null,
+    "id": "1026"
+  },
+  {
+    "examine": "",
+    "name": "Vampire",
+    "safespot": null,
+    "id": "1027"
+  },
+  {
     "examine": "A baby impling. Ahhh.",
     "name": "Baby Impling",
     "defence_level": "1",
@@ -17348,6 +17414,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Monk of Zamorak",
+    "safespot": null,
+    "id": "1048"
   },
   {
     "examine": "* A holy man.",
@@ -25057,6 +25129,36 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Hiylik Myna",
+    "safespot": null,
+    "id": "1516"
+  },
+  {
+    "examine": "",
+    "name": "Hiylik Myna",
+    "safespot": null,
+    "id": "1517"
+  },
+  {
+    "examine": "",
+    "name": "Hiylik Myna",
+    "safespot": null,
+    "id": "1518"
+  },
+  {
+    "examine": "",
+    "name": "Hiylik Myna",
+    "safespot": null,
+    "id": "1519"
+  },
+  {
+    "examine": "",
+    "name": "Hiylik Myna",
+    "safespot": null,
+    "id": "1520"
+  },
+  {
     "examine": "A huge nail beast. Its nails are very sharp.",
     "melee_animation": "5989",
     "range_animation": "0",
@@ -27876,6 +27978,30 @@
   },
   {
     "examine": "",
+    "name": "Werewolf",
+    "safespot": null,
+    "id": "1667"
+  },
+  {
+    "examine": "",
+    "name": "Werewolf",
+    "safespot": null,
+    "id": "1668"
+  },
+  {
+    "examine": "",
+    "name": "Werewolf",
+    "safespot": null,
+    "id": "1669"
+  },
+  {
+    "examine": "",
+    "name": "Dr Fenkenstrain",
+    "safespot": null,
+    "id": "1670"
+  },
+  {
+    "examine": "",
     "name": "Fenkenstrain's Monster",
     "defence_level": "1",
     "safespot": null,
@@ -27885,6 +28011,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Dr Fenkenstrain",
+    "safespot": null,
+    "id": "1672"
+  },
+  {
+    "examine": "",
+    "name": "Fenkenstrain's Monster",
+    "safespot": null,
+    "id": "1673"
   },
   {
     "examine": "A hideous mix of human flesh.",
@@ -28126,6 +28264,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "2"
+  },
+  {
+    "examine": "",
+    "name": "Ak-Haranu",
+    "safespot": null,
+    "id": "1690"
   },
   {
     "examine": "It's an undead cow.",
@@ -28809,6 +28953,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Dramen tree",
+    "safespot": null,
+    "id": "1733"
   },
   {
     "examine": "The tree shimmers with a magical force.",
@@ -30541,6 +30691,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Dondakan the Dwarf",
+    "safespot": null,
+    "id": "1837"
+  },
+  {
     "examine": "A short, old and gold loving guy.",
     "name": "Dondakan the Dwarf",
     "defence_level": "1",
@@ -31063,6 +31219,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Ali the Mayor",
+    "safespot": null,
+    "id": "1870"
+  },
+  {
     "examine": "An old Hag named Alice.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -31173,6 +31335,18 @@
   },
   {
     "examine": "",
+    "name": "Snake",
+    "safespot": null,
+    "id": "1877"
+  },
+  {
+    "examine": "",
+    "name": "Bandit Leader",
+    "safespot": null,
+    "id": "1878"
+  },
+  {
+    "examine": "",
     "name": "Bandit",
     "defence_level": "1",
     "safespot": null,
@@ -31182,6 +31356,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Bandit",
+    "safespot": null,
+    "id": "1880"
   },
   {
     "examine": "",
@@ -31285,6 +31465,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "1888"
+  },
+  {
     "examine": "Male desert villager.",
     "name": "Villager",
     "defence_level": "1",
@@ -31319,6 +31505,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "1892"
   },
   {
     "examine": "Male desert villager.",
@@ -31357,6 +31549,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "1896"
+  },
+  {
     "examine": "Male desert villager.",
     "name": "Villager",
     "defence_level": "1",
@@ -31391,6 +31589,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "1900"
+  },
+  {
+    "examine": "",
+    "name": "Menaphite Leader",
+    "safespot": null,
+    "id": "1901"
   },
   {
     "examine": "Smooth operator.",
@@ -31501,6 +31711,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Broken clay golem",
+    "safespot": null,
+    "id": "1908"
   },
   {
     "examine": "",
@@ -31735,6 +31951,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Eblis",
+    "safespot": null,
+    "id": "1923"
+  },
+  {
     "examine": "A very distinguished looking man.",
     "name": "Eblis",
     "defence_level": "1",
@@ -31745,6 +31967,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Eblis",
+    "safespot": null,
+    "id": "1925"
   },
   {
     "examine": "A tough-looking criminal.",
@@ -31844,6 +32072,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Troll child",
+    "safespot": null,
+    "id": "1933"
   },
   {
     "examine": "A little ice troll.",
@@ -32501,6 +32735,12 @@
     "attack_level": "70"
   },
   {
+    "examine": "",
+    "name": "Azzanadra",
+    "safespot": null,
+    "id": "1971"
+  },
+  {
     "examine": "A travelling merchant.",
     "name": "Rasolo",
     "defence_level": "1",
@@ -32723,6 +32963,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Siamun",
+    "safespot": null,
+    "id": "1985"
+  },
+  {
+    "examine": "",
+    "name": "High Priest",
+    "safespot": null,
+    "id": "1986"
   },
   {
     "examine": "",
@@ -32995,6 +33247,24 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Scarab swarm",
+    "safespot": null,
+    "id": "2003"
+  },
+  {
+    "examine": "",
+    "name": "Scarab swarm",
+    "safespot": null,
+    "id": "2004"
+  },
+  {
+    "examine": "",
+    "name": "Wanderer",
+    "safespot": null,
+    "id": "2005"
+  },
+  {
     "examine": "A red-headed woman.",
     "name": "Wanderer",
     "defence_level": "1",
@@ -33067,6 +33337,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Icthlarin",
+    "safespot": null,
+    "id": "2012"
+  },
+  {
     "examine": "A rather transparent character.",
     "name": "Klenter",
     "defence_level": "1",
@@ -33077,6 +33353,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Klenter",
+    "safespot": null,
+    "id": "2014"
   },
   {
     "examine": "This mummy looks like it means business!",
@@ -34313,6 +34595,18 @@
   },
   {
     "examine": "",
+    "name": "Cave goblin miner",
+    "safespot": null,
+    "id": "2080"
+  },
+  {
+    "examine": "",
+    "name": "Cave goblin miner",
+    "safespot": null,
+    "id": "2081"
+  },
+  {
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "attack_speed": "4",
@@ -34366,6 +34660,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Kazgar",
+    "safespot": null,
+    "id": "2086"
   },
   {
     "examine": "He's the head of the Dorgeshuun Council.",
@@ -34987,6 +35287,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Trader",
+    "safespot": null,
+    "id": "2124"
+  },
+  {
     "examine": "A trader for the Purple Pewter mining company.",
     "name": "Trader",
     "defence_level": "1",
@@ -34997,6 +35303,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Trader",
+    "safespot": null,
+    "id": "2126"
   },
   {
     "examine": "He is regulating the flow of goods on the trade floor and maintaining order.",
@@ -35270,6 +35582,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Riki the sculptor's model",
+    "safespot": null,
+    "id": "2143"
   },
   {
     "examine": "Models for sculptures.",
@@ -36966,6 +37284,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Nolar",
+    "safespot": null,
+    "id": "2258"
+  },
+  {
     "examine": "A Disciple of Zamorak.",
     "name": "Mage of Zamorak",
     "defence_level": "1",
@@ -36988,6 +37312,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Agmundi",
+    "safespot": null,
+    "id": "2261"
   },
   {
     "examine": "An initiate of Zamorak.",
@@ -37618,6 +37948,12 @@
   },
   {
     "examine": "",
+    "name": "Gauss",
+    "safespot": null,
+    "id": "2296"
+  },
+  {
+    "examine": "",
     "name": "Rug Merchant",
     "defence_level": "1",
     "safespot": null,
@@ -37627,6 +37963,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Kjut",
+    "safespot": null,
+    "id": "2298"
   },
   {
     "examine": "A man who deals in rugs.",
@@ -37639,6 +37981,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Rug Station Attendant",
+    "safespot": null,
+    "id": "2300"
   },
   {
     "examine": "Perhaps our oldest relatives?",
@@ -37671,6 +38019,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Monkey",
+    "safespot": null,
+    "id": "2303"
   },
   {
     "examine": "She sells Farming equipment.",
@@ -38659,6 +39013,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Gnome",
+    "safespot": null,
+    "id": "2371"
+  },
+  {
     "examine": "A Mourner showing his true identity.",
     "melee_animation": "",
     "range_animation": "",
@@ -38720,6 +39080,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Eluned",
+    "safespot": null,
+    "id": "2376"
   },
   {
     "examine": "The sheep looks distinctly unwell and has a slight red tinge.",
@@ -39088,6 +39454,42 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Mysterious ghost",
+    "safespot": null,
+    "id": "2404"
+  },
+  {
+    "examine": "",
+    "name": "Mysterious ghost",
+    "safespot": null,
+    "id": "2405"
+  },
+  {
+    "examine": "",
+    "name": "Mysterious ghost",
+    "safespot": null,
+    "id": "2406"
+  },
+  {
+    "examine": "",
+    "name": "Mysterious ghost",
+    "safespot": null,
+    "id": "2407"
+  },
+  {
+    "examine": "",
+    "name": "Mysterious ghost",
+    "safespot": null,
+    "id": "2408"
+  },
+  {
+    "examine": "",
+    "name": "Cart conductor",
+    "safespot": null,
+    "id": "2409"
   },
   {
     "examine": "",
@@ -40217,6 +40619,36 @@
     "magic_level": "1",
     "range_level": "61",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Giant bat",
+    "safespot": null,
+    "id": "2484"
+  },
+  {
+    "examine": "",
+    "name": "Giant bat",
+    "safespot": null,
+    "id": "2485"
+  },
+  {
+    "examine": "",
+    "name": "Giant bat",
+    "safespot": null,
+    "id": "2486"
+  },
+  {
+    "examine": "",
+    "name": "Giant bat",
+    "safespot": null,
+    "id": "2487"
+  },
+  {
+    "examine": "",
+    "name": "Giant bat",
+    "safespot": null,
+    "id": "2488"
   },
   {
     "examine": "A slithering serpent that likes to hide in the bush.",
@@ -41533,6 +41965,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Billy, a guard of Falador",
+    "safespot": null,
+    "id": "2586"
+  },
+  {
     "examine": "Shame his pension's going to waste.",
     "name": "Bob, another guard of Falador",
     "defence_level": "1",
@@ -42603,6 +43041,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Neite",
+    "safespot": null,
+    "id": "2653"
   },
   {
     "examine": "Nice but dim.",
@@ -44338,6 +44782,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2757"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2758"
+  },
+  {
     "examine": "She can look after my money.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -44354,6 +44810,102 @@
     "aggressive": "true",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2760"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2761"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2762"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2763"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2764"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2765"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2766"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2767"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2768"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2769"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2770"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2771"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2772"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2773"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2774"
+  },
+  {
+    "examine": "",
+    "name": "Mage of Zamorak",
+    "safespot": null,
+    "id": "2775"
   },
   {
     "examine": "One of Gielinor's many citizens.",
@@ -44564,6 +45116,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Thorgel",
+    "safespot": null,
+    "id": "2789"
   },
   {
     "examine": "Drill Sergeant from heck!",
@@ -44955,6 +45513,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Alice the Camel",
+    "safespot": null,
+    "id": "2814"
+  },
+  {
     "examine": "A camel who wants to see the world.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -44983,6 +45547,30 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Neferti the Camel",
+    "safespot": null,
+    "id": "2817"
+  },
+  {
+    "examine": "",
+    "name": "Neferti the Camel",
+    "safespot": null,
+    "id": "2818"
+  },
+  {
+    "examine": "",
+    "name": "Neferti the Camel",
+    "safespot": null,
+    "id": "2819"
+  },
+  {
+    "examine": "",
+    "name": "Ali the Smith",
+    "safespot": null,
+    "id": "2820"
   },
   {
     "examine": "",
@@ -46293,6 +46881,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Spinolyp",
+    "safespot": null,
+    "id": "2898"
+  },
+  {
+    "examine": "",
+    "name": "Father Reen",
+    "safespot": null,
+    "id": "2899"
+  },
+  {
     "examine": "Looks a bit lost.",
     "name": "Father Reen",
     "defence_level": "1",
@@ -46315,6 +46915,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Father Badden",
+    "safespot": null,
+    "id": "2902"
   },
   {
     "examine": "He looks very pious.",
@@ -46387,6 +46993,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Evil Dave",
+    "safespot": null,
+    "id": "2909"
   },
   {
     "examine": "He seems to like wearing black.",
@@ -46527,6 +47139,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Sand storm",
+    "safespot": null,
+    "id": "2921"
+  },
+  {
     "examine": "An animated clay statue with a lot of clay missing.",
     "name": "Clay golem",
     "defence_level": "1",
@@ -46537,6 +47155,36 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "2923"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "2924"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "2925"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "2926"
+  },
+  {
+    "examine": "",
+    "name": "Clay golem",
+    "safespot": null,
+    "id": "2927"
   },
   {
     "examine": "An animated clay statue with a lot of clay missing.",
@@ -46562,6 +47210,12 @@
     "magic_level": "18",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "2930"
   },
   {
     "examine": "Eeek! A ghost!",
@@ -46604,6 +47258,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Melina",
+    "safespot": null,
+    "id": "2934"
+  },
+  {
     "examine": "Sullen looking Ghost Woman.",
     "name": "Melina",
     "defence_level": "1",
@@ -46626,6 +47286,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Droalak",
+    "safespot": null,
+    "id": "2937"
   },
   {
     "examine": "Not a happy ghost.",
@@ -47148,6 +47814,36 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Rat",
+    "safespot": null,
+    "id": "2975"
+  },
+  {
+    "examine": "",
+    "name": "Rat",
+    "safespot": null,
+    "id": "2976"
+  },
+  {
+    "examine": "",
+    "name": "Rat",
+    "safespot": null,
+    "id": "2977"
+  },
+  {
+    "examine": "",
+    "name": "Rat",
+    "safespot": null,
+    "id": "2978"
+  },
+  {
+    "examine": "",
+    "name": "Rat",
+    "safespot": null,
+    "id": "2979"
   },
   {
     "examine": "A popular dwarven delicacy.",
@@ -48258,6 +48954,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "Not the smartest of butlers.",
+    "name": "Larxus",
+    "safespot": null,
+    "id": "3050"
+  },
+  {
     "examine": "A mysterious watcher...",
     "melee_animation": "0",
     "range_animation": "0",
@@ -48806,6 +49508,12 @@
   },
   {
     "examine": "",
+    "name": "Dead Monk",
+    "safespot": null,
+    "id": "3077"
+  },
+  {
+    "examine": "",
     "name": "High Priest",
     "defence_level": "1",
     "safespot": null,
@@ -48988,6 +49696,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Hooded Stranger",
+    "safespot": null,
+    "id": "3092"
   },
   {
     "examine": "The book moves by itself!",
@@ -49278,6 +49992,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3111"
+  },
+  {
+    "examine": "",
+    "name": "Sandy",
+    "safespot": null,
+    "id": "3112"
+  },
+  {
     "examine": "*Angry and stressed, he doesn't seem to have time for anything other than sand.",
     "name": "Sandy",
     "defence_level": "1",
@@ -49489,6 +50215,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Boneguard",
+    "safespot": null,
+    "id": "3129"
+  },
+  {
     "examine": "These used to be alive.",
     "name": "Pile of bones",
     "defence_level": "1",
@@ -49523,6 +50255,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Crust of ice",
+    "safespot": null,
+    "id": "3133"
   },
   {
     "examine": "",
@@ -49569,6 +50307,12 @@
     "attack_level": "70"
   },
   {
+    "examine": "",
+    "name": "Enakhra",
+    "safespot": null,
+    "id": "3137"
+  },
+  {
     "examine": "A dangerous and vindictive Mahjarrat.",
     "name": "Enakhra",
     "defence_level": "70",
@@ -49592,6 +50336,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Boneguard",
+    "safespot": null,
+    "id": "3140"
   },
   {
     "examine": "A Zarosian Mahjarrat of the desert.",
@@ -49630,6 +50380,30 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3144"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3145"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3146"
+  },
+  {
+    "examine": "",
+    "name": "Lazim",
+    "safespot": null,
+    "id": "3147"
   },
   {
     "examine": "A dangerous and vindictive Mahjarrat.",
@@ -52065,6 +52839,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Chicken",
+    "safespot": null,
+    "id": "3290"
+  },
+  {
     "examine": "Could do with gaining a few pounds.",
     "melee_animation": "5485",
     "range_animation": "0",
@@ -52434,6 +53214,30 @@
     "magic_level": "1",
     "range_level": "41",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3315"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3316"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3317"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3318"
   },
   {
     "examine": "An animated shrub.",
@@ -53216,6 +54020,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Sir Amik Varze",
+    "safespot": null,
+    "id": "3374"
+  },
+  {
     "examine": "A fowl beast.",
     "melee_animation": "2299",
     "range_animation": "0",
@@ -53304,6 +54114,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Evil Dave",
+    "safespot": null,
+    "id": "3380"
+  },
+  {
     "examine": "One of Gielinor's many citizens.",
     "name": "Doris",
     "defence_level": "1",
@@ -53345,6 +54161,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3384"
+  },
+  {
+    "examine": "",
+    "name": "Gypsy",
+    "safespot": null,
+    "id": "3385"
   },
   {
     "examine": "",
@@ -53556,6 +54384,12 @@
   },
   {
     "examine": "",
+    "name": "Culinaromancer",
+    "safespot": null,
+    "id": "3400"
+  },
+  {
+    "examine": "",
     "name": "An old Dwarf",
     "defence_level": "1",
     "safespot": null,
@@ -53565,6 +54399,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "An old Dwarf",
+    "safespot": null,
+    "id": "3402"
   },
   {
     "examine": "A drunken dwarven father figure!",
@@ -53595,6 +54435,12 @@
     "aggressive": "false",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Rohak",
+    "safespot": null,
+    "id": "3405"
   },
   {
     "examine": "A small ice demon.",
@@ -54619,6 +55465,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3470"
+  },
+  {
+    "examine": "",
+    "name": "Ogre boat",
+    "safespot": null,
+    "id": "3471"
+  },
+  {
     "examine": "Rantz's boat, operated by his kids Fycie and Bugs.",
     "name": "Ogre boat",
     "defence_level": "1",
@@ -54724,6 +55582,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "King Awowogei",
+    "safespot": null,
+    "id": "3480"
   },
   {
     "examine": "He sees no evil.",
@@ -55176,6 +56040,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Wiskit",
+    "safespot": null,
+    "id": "3511"
+  },
+  {
     "examine": "An initiate Vampyre juvinate.",
     "name": "Vampyre Juvinate",
     "defence_level": "1",
@@ -55187,6 +56057,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3513"
   },
   {
     "examine": "An initiate Vampyre juvinate.",
@@ -55232,6 +56108,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "42"
+  },
+  {
+    "examine": "",
+    "name": "Gadderanks",
+    "safespot": null,
+    "id": "3517"
   },
   {
     "examine": "A human supporter of the Vampyric overlords.",
@@ -55902,6 +56784,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3567"
+  },
+  {
+    "examine": "",
+    "name": "Cornelius",
+    "safespot": null,
+    "id": "3568"
   },
   {
     "examine": "* A citizen of Burgh de Rott.",
@@ -56758,6 +57652,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Smiddi Ryak",
+    "safespot": null,
+    "id": "3624"
+  },
+  {
     "examine": "An old, lonely man.",
     "name": "Rolayne Twickit",
     "defence_level": "1",
@@ -56768,6 +57668,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Rolayne Twickit",
+    "safespot": null,
+    "id": "3626"
   },
   {
     "examine": "A Burgh de Rott militia volunteer.",
@@ -56782,6 +57688,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Jayene Kliyn",
+    "safespot": null,
+    "id": "3628"
+  },
+  {
     "examine": "A Burgh de Rott male milita volunteer.",
     "name": "Valantay Eppel",
     "defence_level": "1",
@@ -56794,6 +57706,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Valantay Eppel",
+    "safespot": null,
+    "id": "3630"
+  },
+  {
     "examine": "A retired but dangerous looking man. He seems to be hanging around.",
     "name": "Dalcian Fang",
     "defence_level": "1",
@@ -56804,6 +57722,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Dalcian Fang",
+    "safespot": null,
+    "id": "3632"
   },
   {
     "examine": "A retired but dangerous looking female soldier.",
@@ -56882,6 +57806,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Launa",
+    "safespot": null,
+    "id": "3639"
   },
   {
     "examine": "",
@@ -59436,6 +60366,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Arthur",
+    "safespot": null,
+    "id": "3779"
+  },
+  {
     "examine": "Squire to the Knights of the Round Table.",
     "name": "Squire",
     "defence_level": "1",
@@ -59446,6 +60382,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Squire",
+    "safespot": null,
+    "id": "3781"
   },
   {
     "examine": "A powerful knight of balance.",
@@ -59824,6 +60766,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Fishing spot",
+    "safespot": null,
+    "id": "3804"
+  },
+  {
     "examine": "Posts things.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -59960,6 +60908,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "null",
+    "safespot": null,
+    "id": "3813"
+  },
+  {
     "examine": "A Gnome Arrow-chucker ",
     "combat_style": "1",
     "melee_animation": "190",
@@ -60087,6 +61041,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Wise Old Man",
+    "safespot": null,
+    "id": "3821"
+  },
+  {
     "examine": "Founder and Director of the Piscatoris Fishing Colony.",
     "name": "Herman Caranos",
     "defence_level": "1",
@@ -60171,6 +61131,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Kathy Corkat",
+    "safespot": null,
+    "id": "3829"
+  },
+  {
+    "examine": "",
+    "name": "Kathy Corkat",
+    "safespot": null,
+    "id": "3830"
+  },
+  {
     "examine": "Carries supplies to the Piscatoris Fishing Colony.",
     "name": "Kathy Corkat",
     "defence_level": "1",
@@ -60194,6 +61166,18 @@
     "magic_level": "70",
     "range_level": "70",
     "attack_level": "70"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3833"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "3834"
   },
   {
     "agg_radius": "64",
@@ -65170,6 +66154,12 @@
   },
   {
     "examine": "",
+    "name": "Maid",
+    "safespot": null,
+    "id": "4237"
+  },
+  {
+    "examine": "",
     "name": "Cook",
     "defence_level": "1",
     "safespot": null,
@@ -65179,6 +66169,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Cook",
+    "safespot": null,
+    "id": "4239"
   },
   {
     "examine": "He knows how to buttle.",
@@ -65191,6 +66187,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Butler",
+    "safespot": null,
+    "id": "4241"
   },
   {
     "examine": "Blimey, a Demon Butler!",
@@ -65381,6 +66383,24 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4254"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4255"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4256"
   },
   {
     "examine": "",
@@ -66422,6 +67442,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Dartog",
+    "safespot": null,
+    "id": "4314"
+  },
+  {
     "examine": "Loves mining.",
     "name": "Dwarf",
     "defence_level": "1",
@@ -66511,6 +67537,12 @@
     "magic_level": "47",
     "range_level": "47",
     "attack_level": "47"
+  },
+  {
+    "examine": "",
+    "name": "Zanik",
+    "safespot": null,
+    "id": "4322"
   },
   {
     "examine": "The site manager.",
@@ -66724,6 +67756,12 @@
     "magic_level": "47",
     "range_level": "47",
     "attack_level": "47"
+  },
+  {
+    "examine": "",
+    "name": "Zanik",
+    "safespot": null,
+    "id": "4339"
   },
   {
     "examine": "The site manager.",
@@ -67210,6 +68248,36 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4366"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4367"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4368"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4369"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4370"
   },
   {
     "examine": "",
@@ -68200,6 +69268,84 @@
     "attack_level": "60"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4421"
+  },
+  {
+    "examine": "",
+    "name": "Fairy",
+    "safespot": null,
+    "id": "4422"
+  },
+  {
+    "examine": "",
+    "name": "Fairy",
+    "safespot": null,
+    "id": "4423"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4424"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4425"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4426"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4427"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4428"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4429"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4430"
+  },
+  {
+    "examine": "",
+    "name": "Fairy Nuff",
+    "safespot": null,
+    "id": "4431"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4432"
+  },
+  {
+    "examine": "",
+    "name": "Fairy Godfather",
+    "safespot": null,
+    "id": "4433"
+  },
+  {
     "examine": "A healing fairy.",
     "name": "Fairy Nuff",
     "defence_level": "1",
@@ -68222,6 +69368,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4436"
   },
   {
     "examine": "Looks otherworldly...&lt;br />Looks otherworldly.",
@@ -68457,6 +69609,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4454"
   },
   {
     "examine": "Fairy ring maintenance division.",
@@ -68701,6 +69859,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Bogrog",
+    "safespot": null,
+    "id": "4472"
   },
   {
     "examine": "One of Gielinor's many citizens.",
@@ -69126,6 +70290,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Grubfoot",
+    "safespot": null,
+    "id": "4496"
   },
   {
     "examine": "* Smaller than the average goblin.",
@@ -70880,6 +72050,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Brimstail",
+    "safespot": null,
+    "id": "4610"
+  },
+  {
     "examine": "All you see is a glimmer of light and the suggestion of shadow.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -70922,6 +72098,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4614"
+  },
+  {
     "examine": "What is that thing?",
     "melee_animation": "0",
     "range_animation": "0",
@@ -70954,6 +72136,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4617"
+  },
+  {
     "examine": "What is that thing?",
     "name": "Evil creature",
     "defence_level": "1",
@@ -70977,6 +72165,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4620"
   },
   {
     "examine": "What is that thing?",
@@ -71004,6 +72198,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4623"
+  },
+  {
     "examine": "What is that thing?",
     "name": "Evil creature",
     "defence_level": "1",
@@ -71029,6 +72229,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4626"
+  },
+  {
     "examine": "What is that thing?",
     "name": "Evil creature",
     "defence_level": "1",
@@ -71052,6 +72258,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "4629"
   },
   {
     "examine": "What is that thing?",
@@ -72702,6 +73914,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4712"
+  },
+  {
+    "examine": "",
+    "name": "Safalaan",
+    "safespot": null,
+    "id": "4713"
+  },
+  {
     "examine": "* She looks important.",
     "name": "Sarius Guile",
     "defence_level": "1",
@@ -72712,6 +73936,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Sarius Guile",
+    "safespot": null,
+    "id": "4715"
   },
   {
     "examine": "A flea-infested black market trader.",
@@ -74947,6 +76177,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Mayor Hobb",
+    "safespot": null,
+    "id": "4854"
+  },
+  {
+    "examine": "",
+    "name": "Brother Maledict",
+    "safespot": null,
+    "id": "4855"
+  },
+  {
     "examine": "Smells a bit fishy.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -74975,6 +76217,30 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Witchaven villager",
+    "safespot": null,
+    "id": "4858"
+  },
+  {
+    "examine": "",
+    "name": "Witchaven villager",
+    "safespot": null,
+    "id": "4859"
+  },
+  {
+    "examine": "",
+    "name": "Jeb",
+    "safespot": null,
+    "id": "4860"
+  },
+  {
+    "examine": "",
+    "name": "Sarius Guile",
+    "safespot": null,
+    "id": "4861"
   },
   {
     "examine": "",
@@ -75023,6 +76289,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Holgart",
+    "safespot": null,
+    "id": "4866"
   },
   {
     "examine": "A very good sailor.",
@@ -75164,6 +76436,12 @@
   },
   {
     "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4877"
+  },
+  {
+    "examine": "",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -75203,6 +76481,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4881"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4882"
   },
   {
     "examine": "A down on his luck villager.",
@@ -75339,6 +76629,12 @@
     "magic_level": "0",
     "range_level": "0",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Giant lobster",
+    "safespot": null,
+    "id": "4892"
   },
   {
     "examine": "An extremely vicious lobster.",
@@ -75674,6 +76970,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Jig cart",
+    "safespot": null,
+    "id": "4913"
   },
   {
     "examine": "",
@@ -76340,6 +77642,48 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4951"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4952"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4953"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4954"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4955"
+  },
+  {
+    "examine": "",
+    "name": "My Arm",
+    "safespot": null,
+    "id": "4956"
+  },
+  {
+    "examine": "",
+    "name": "My Arm",
+    "safespot": null,
+    "id": "4957"
+  },
+  {
     "examine": "* Trollish.",
     "name": "My Arm",
     "defence_level": "1",
@@ -76461,6 +77805,12 @@
   },
   {
     "examine": "",
+    "name": "Flies",
+    "safespot": null,
+    "id": "4967"
+  },
+  {
+    "examine": "",
     "name": "Unnamed troll child",
     "defence_level": "1",
     "safespot": null,
@@ -76563,7 +77913,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It looks like he's been here a long time.&lt;br>[[Tourist trap]] slave after being given Desert robes: He's making a break for it!",
+    "examine": "It looks like he's been here a long time.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -76581,7 +77931,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It looks like he's been here a long time.&lt;br>[[Tourist trap]] slave after being given Desert robes: He's making a break for it!",
+    "examine": "It looks like he's been here a long time.",
     "name": "Male slave",
     "defence_level": "1",
     "safespot": null,
@@ -76694,6 +78044,30 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4985"
+  },
+  {
+    "examine": "",
+    "name": "Irena",
+    "safespot": null,
+    "id": "4986"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "4987"
+  },
+  {
+    "examine": "",
+    "name": "Irena",
+    "safespot": null,
+    "id": "4988"
   },
   {
     "examine": "He looks a bit aggressive.",
@@ -76978,6 +78352,90 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5004"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5005"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5006"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5007"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5008"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5009"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5010"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5011"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5012"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5013"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5014"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5015"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5016"
+  },
+  {
+    "examine": "",
+    "name": "Gublinch",
+    "safespot": null,
+    "id": "5017"
+  },
+  {
     "examine": "A sweaty gublinch.",
     "name": "Gublinch",
     "defence_level": "1",
@@ -77012,6 +78470,24 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5021"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5022"
+  },
+  {
+    "examine": "",
+    "name": "Jack",
+    "safespot": null,
+    "id": "5023"
   },
   {
     "examine": "A happy child, now that she has been freed.",
@@ -77600,6 +79076,30 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5063"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5064"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5065"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5066"
+  },
+  {
     "examine": "I'd better be careful eating this.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -77652,6 +79152,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5071"
   },
   {
     "examine": "It blends in very well with its surroundings.",
@@ -77755,6 +79261,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5078"
   },
   {
     "examine": "Handle with care.",
@@ -77963,6 +79475,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5091"
+  },
+  {
+    "examine": "",
+    "name": "Matthias",
+    "safespot": null,
+    "id": "5092"
+  },
+  {
     "examine": "He's wearing a single glove; how strange.",
     "name": "Matthias",
     "defence_level": "1",
@@ -78096,6 +79620,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5102"
+  },
+  {
     "examine": "It's just like a big, white, furry, deadly can opener.",
     "melee_animation": "5228",
     "range_animation": "5228",
@@ -78171,6 +79701,24 @@
     "aggressive": "false",
     "range_level": "1",
     "attack_level": "20"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5107"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5108"
+  },
+  {
+    "examine": "",
+    "name": "Artimeus",
+    "safespot": null,
+    "id": "5109"
   },
   {
     "examine": "He acts as if he owns the place.",
@@ -78320,6 +79868,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5119"
+  },
+  {
     "examine": "A very large",
     "melee_animation": "0",
     "range_animation": "0",
@@ -78384,6 +79938,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Nickolaus",
+    "safespot": null,
+    "id": "5125"
+  },
+  {
+    "examine": "",
+    "name": "Nickolaus",
+    "safespot": null,
+    "id": "5126"
   },
   {
     "examine": "He looks a bit worse for wear, but he seems cheerful enough.",
@@ -78504,6 +80070,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5135"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5136"
   },
   {
     "examine": "",
@@ -79482,6 +81060,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Alice's husband",
+    "safespot": null,
+    "id": "5202"
+  },
+  {
     "examine": "Alice's Husband, Passed on.",
     "name": "Alice's husband",
     "defence_level": "1",
@@ -79535,6 +81119,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Tree",
+    "safespot": null,
+    "id": "5207"
   },
   {
     "examine": "Its bark is worse than its swipe.",
@@ -80283,6 +81873,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Stonemason",
+    "safespot": null,
+    "id": "5262"
+  },
+  {
     "examine": "The baker.",
     "name": "Nathifa",
     "defence_level": "1",
@@ -80293,6 +81889,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Nathifa",
+    "safespot": null,
+    "id": "5264"
   },
   {
     "examine": "Dagger seller.",
@@ -80307,6 +81909,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Urbi",
+    "safespot": null,
+    "id": "5266"
+  },
+  {
     "examine": "Runs the craft stall.",
     "name": "Jamila",
     "defence_level": "1",
@@ -80317,6 +81925,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Jamila",
+    "safespot": null,
+    "id": "5268"
   },
   {
     "examine": "A guard of Sophanem.",
@@ -80361,6 +81975,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Sophanem guard",
+    "safespot": null,
+    "id": "5272"
+  },
+  {
     "examine": "A guard of Sophanem.",
     "name": "Sophanem guard",
     "defence_level": "1",
@@ -80401,6 +82021,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Sophanem guard",
+    "safespot": null,
+    "id": "5276"
   },
   {
     "examine": "A guard of Menaphos.",
@@ -80457,6 +82083,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Maisa",
+    "safespot": null,
+    "id": "5281"
+  },
+  {
     "examine": "Spymaster of Al Kharid.",
     "name": "Osman",
     "defence_level": "1",
@@ -80467,6 +82099,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5283"
+  },
+  {
+    "examine": "",
+    "name": "Osman",
+    "safespot": null,
+    "id": "5284"
   },
   {
     "examine": "Spymaster of Al Kharid.",
@@ -83138,6 +84782,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Larry",
+    "safespot": null,
+    "id": "5424"
+  },
+  {
     "examine": "A naturalist.",
     "name": "Larry",
     "defence_level": "1",
@@ -83172,6 +84822,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Penguin",
+    "safespot": null,
+    "id": "5428"
   },
   {
     "examine": "",
@@ -83312,6 +84968,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "KGP Agent",
+    "safespot": null,
+    "id": "5440"
+  },
+  {
+    "examine": "",
+    "name": "KGP Agent",
+    "safespot": null,
+    "id": "5441"
+  },
+  {
     "examine": "Killer Gentoo Penguin.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -83340,6 +85008,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Noodle",
+    "safespot": null,
+    "id": "5444"
   },
   {
     "examine": "",
@@ -84769,6 +86443,36 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Autumn Elemental",
+    "safespot": null,
+    "id": "5534"
+  },
+  {
+    "examine": "",
+    "name": "Autumn Elemental",
+    "safespot": null,
+    "id": "5535"
+  },
+  {
+    "examine": "",
+    "name": "Autumn Elemental",
+    "safespot": null,
+    "id": "5536"
+  },
+  {
+    "examine": "",
+    "name": "Autumn Elemental",
+    "safespot": null,
+    "id": "5537"
+  },
+  {
+    "examine": "",
+    "name": "Autumn Elemental",
+    "safespot": null,
+    "id": "5538"
+  },
+  {
     "examine": "A spring elemental.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -84785,6 +86489,48 @@
     "aggressive": "true",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5540"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5541"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5542"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5543"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5544"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5545"
+  },
+  {
+    "examine": "",
+    "name": "Spring Elemental",
+    "safespot": null,
+    "id": "5546"
   },
   {
     "examine": "A summer elemental.",
@@ -84805,6 +86551,36 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Summer Elemental",
+    "safespot": null,
+    "id": "5548"
+  },
+  {
+    "examine": "",
+    "name": "Summer Elemental",
+    "safespot": null,
+    "id": "5549"
+  },
+  {
+    "examine": "",
+    "name": "Summer Elemental",
+    "safespot": null,
+    "id": "5550"
+  },
+  {
+    "examine": "",
+    "name": "Summer Elemental",
+    "safespot": null,
+    "id": "5551"
+  },
+  {
+    "examine": "",
+    "name": "Summer Elemental",
+    "safespot": null,
+    "id": "5552"
+  },
+  {
     "examine": "A winter elemental.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -84821,6 +86597,42 @@
     "aggressive": "true",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Winter Elemental",
+    "safespot": null,
+    "id": "5554"
+  },
+  {
+    "examine": "",
+    "name": "Winter Elemental",
+    "safespot": null,
+    "id": "5555"
+  },
+  {
+    "examine": "",
+    "name": "Winter Elemental",
+    "safespot": null,
+    "id": "5556"
+  },
+  {
+    "examine": "",
+    "name": "Winter Elemental",
+    "safespot": null,
+    "id": "5557"
+  },
+  {
+    "examine": "",
+    "name": "Winter Elemental",
+    "safespot": null,
+    "id": "5558"
+  },
+  {
+    "examine": "",
+    "name": "Osman",
+    "safespot": null,
+    "id": "5559"
   },
   {
     "examine": "Spymaster of Al Kharid.",
@@ -84862,6 +86674,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Del-Monty",
+    "safespot": null,
+    "id": "5563"
   },
   {
     "examine": "Postie Pete's worst nightmare.",
@@ -84999,6 +86817,36 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5574"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5575"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5576"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5577"
+  },
+  {
+    "examine": "",
+    "name": "Effigy",
+    "safespot": null,
+    "id": "5578"
   },
   {
     "examine": "He knows anything is possible.",
@@ -85310,6 +87158,30 @@
     "attack_level": "30"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5599"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5600"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5601"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5602"
+  },
+  {
     "examine": "Half unicorn, half cow.",
     "melee_animation": "5849",
     "range_animation": "0",
@@ -85365,6 +87237,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Clockwork cat",
+    "safespot": null,
+    "id": "5607"
   },
   {
     "examine": "Holier than thou.",
@@ -86490,6 +88368,72 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Brother Tranquility",
+    "safespot": null,
+    "id": "5668"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5669"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5670"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5671"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5672"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5673"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5674"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5675"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5676"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5677"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5678"
   },
   {
     "examine": "He is one, but he's not alright.",
@@ -88036,6 +89980,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5788"
+  },
+  {
     "examine": "A connoisseur of exotic foods from outside Dorgesh-Kaan.",
     "name": "Gourmet",
     "defence_level": "1",
@@ -88626,6 +90576,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5831"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5832"
   },
   {
     "examine": "A travelling trader.",
@@ -89238,6 +91200,12 @@
     "attack_level": "47"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5870"
+  },
+  {
     "examine": "An ugly green creature...But don't say that to his face!",
     "name": "Sergeant Mossfists",
     "defence_level": "1",
@@ -89504,6 +91472,42 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5888"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5889"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5890"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5891"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5892"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5893"
+  },
+  {
     "examine": "I hope he's not dead!",
     "name": "Cyrisus",
     "defence_level": "1",
@@ -89575,6 +91579,18 @@
     "magic_level": "1",
     "range_level": "70",
     "attack_level": "70"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5900"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5901"
   },
   {
     "examine": "Are you good enough to fight?",
@@ -91111,6 +93127,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "5998"
+  },
+  {
     "examine": "A dwarf.",
     "name": "Rupert the Beard",
     "defence_level": "1",
@@ -92413,6 +94435,24 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6068"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6069"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6070"
+  },
+  {
     "examine": "An impling",
     "name": "Immenizz",
     "defence_level": "1",
@@ -92490,6 +94530,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6076"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6077"
   },
   {
     "examine": "A one-eyed man eater.",
@@ -92598,6 +94650,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6083"
+  },
+  {
+    "examine": "",
+    "name": "Captain Ned",
+    "safespot": null,
+    "id": "6084"
   },
   {
     "examine": "His job is to keep the ship in tip-top condition.",
@@ -93267,6 +95331,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6120"
+  },
+  {
+    "examine": "",
+    "name": "Observatory professor",
+    "safespot": null,
+    "id": "6121"
   },
   {
     "examine": "Sleeping like an ugly baby.",
@@ -94241,6 +96317,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Morgan Le Faye",
+    "safespot": null,
+    "id": "6187"
+  },
+  {
     "examine": "He isn't very friendly.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -94313,6 +96395,42 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6192"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6193"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6194"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6195"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6196"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6197"
   },
   {
     "examine": "The name isn't just for show.",
@@ -96697,6 +98815,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Cute creature",
+    "safespot": null,
+    "id": "6311"
+  },
+  {
     "examine": "What is that thing?",
     "name": "Evil creature",
     "defence_level": "1",
@@ -96804,6 +98928,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Spirit tree",
+    "safespot": null,
+    "id": "6320"
   },
   {
     "examine": "An ancient sentient tree.",
@@ -97961,6 +100091,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6387"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6388"
+  },
+  {
     "examine": "Flies like a rock.",
     "melee_animation": "9454",
     "range_animation": "1516",
@@ -98052,6 +100194,12 @@
     "attack_level": "47"
   },
   {
+    "examine": "",
+    "name": "Zanik",
+    "safespot": null,
+    "id": "6395"
+  },
+  {
     "examine": "The site manager.",
     "name": "Zanik",
     "defence_level": "47",
@@ -98063,6 +100211,12 @@
     "magic_level": "47",
     "range_level": "47",
     "attack_level": "47"
+  },
+  {
+    "examine": "",
+    "name": "Zanik",
+    "safespot": null,
+    "id": "6397"
   },
   {
     "examine": "The site manager.",
@@ -98078,6 +100232,12 @@
     "attack_level": "47"
   },
   {
+    "examine": "",
+    "name": "Zanik",
+    "safespot": null,
+    "id": "6399"
+  },
+  {
     "examine": "A magical scientist.",
     "name": "Oldak",
     "defence_level": "1",
@@ -98088,6 +100248,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Oldak",
+    "safespot": null,
+    "id": "6401"
   },
   {
     "examine": "An ugly green creature.",
@@ -99351,6 +101517,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Grubfoot",
+    "safespot": null,
+    "id": "6481"
+  },
+  {
     "examine": "Priest of the Ekeleshuun tribe.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -99739,6 +101911,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Registrar 1",
+    "safespot": null,
+    "id": "6506"
   },
   {
     "examine": "Registers players for tournaments: Rank Cap 2499.",
@@ -100289,6 +102467,84 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6545"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6546"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6547"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6548"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6549"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6550"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6551"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6552"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6553"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6554"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6555"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6556"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6557"
+  },
+  {
     "examine": "Tapping his feet and looking very bored.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -100305,6 +102561,12 @@
     "aggressive": "false",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6559"
   },
   {
     "examine": "A huge war chief. ",
@@ -100326,6 +102588,36 @@
     "bonuses": "300,300,300,300,300,300,150,300,300,250,43,96,43,30,0",
     "range_level": "200",
     "attack_level": "250"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6561"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6562"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6563"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6564"
+  },
+  {
+    "examine": "",
+    "name": "Grave marker",
+    "safespot": null,
+    "id": "6565"
   },
   {
     "examine": "",
@@ -103845,6 +106137,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Bulldog",
+    "safespot": null,
+    "id": "6752"
   },
   {
     "examine": "",
@@ -108008,6 +110306,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "6989"
+  },
+  {
+    "examine": "",
+    "name": "Giant wolpertinger",
+    "safespot": null,
+    "id": "6990"
+  },
+  {
     "examine": "I wonder if it uses the 'Crane' technique.",
     "name": "Ibis",
     "defence_level": "1",
@@ -108196,6 +110506,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Dark Squall",
+    "safespot": null,
+    "id": "7001"
+  },
+  {
     "examine": "A powerful wizard.",
     "name": "Surok Magis",
     "defence_level": "1",
@@ -108286,6 +110602,24 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7007"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7008"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7009"
   },
   {
     "examine": "A spiny creature.",
@@ -108612,6 +110946,42 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7033"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7034"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7035"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7036"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7037"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7038"
+  },
+  {
     "examine": "A shy creature with a toxic bite.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -108640,6 +111010,30 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7041"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7042"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7043"
+  },
+  {
+    "examine": "",
+    "name": "Fishing spot",
+    "safespot": null,
+    "id": "7044"
   },
   {
     "examine": "",
@@ -108786,6 +111180,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7056"
+  },
+  {
+    "examine": "",
+    "name": "Snurgh",
+    "safespot": null,
+    "id": "7057"
+  },
+  {
     "examine": "She wields a comb as if it were a weapon.",
     "name": "Kringk",
     "defence_level": "1",
@@ -108880,6 +111286,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7066"
+  },
+  {
+    "examine": "",
+    "name": "Snert",
+    "safespot": null,
+    "id": "7067"
   },
   {
     "examine": "On the scrawny side...for an ogre child.",
@@ -109231,6 +111649,84 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7092"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7093"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7094"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7095"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7096"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7097"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7098"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7099"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7100"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7101"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7102"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7103"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7104"
   },
   {
     "examine": "A crazy, evil druid.",
@@ -110303,6 +112799,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "7164"
+  },
+  {
     "examine": "Male desert villager.",
     "name": "Villager",
     "defence_level": "1",
@@ -110453,6 +112955,48 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7177"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7178"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7179"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7180"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7181"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7182"
+  },
+  {
+    "examine": "",
+    "name": "Villager",
+    "safespot": null,
+    "id": "7183"
+  },
+  {
     "examine": "Smells a bit fishy.",
     "name": "Ezekial Lovecraft",
     "defence_level": "1",
@@ -110535,6 +113079,42 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7191"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7192"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7193"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7194"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7195"
+  },
+  {
+    "examine": "",
+    "name": "Rabbit hole",
+    "safespot": null,
+    "id": "7196"
   },
   {
     "examine": "The Easter Bunny's lazy son.",
@@ -117044,6 +119624,18 @@
     "attack_level": "40"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7638"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7639"
+  },
+  {
     "examine": "A giant, skeletal hand. I don't think I should offer to shake hands.",
     "melee_animation": "9125",
     "range_animation": "9125",
@@ -117732,6 +120324,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7689"
+  },
+  {
     "examine": "* A holy man.",
     "name": "Drezel",
     "defence_level": "1",
@@ -118008,6 +120606,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7709"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7710"
+  },
+  {
     "examine": "Looks like a big ugly dog.",
     "melee_animation": "6565",
     "range_animation": "0",
@@ -118275,6 +120885,48 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7729"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7730"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7731"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7732"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7733"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7734"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7735"
   },
   {
     "examine": "A little baby icefiend.",
@@ -118952,6 +121604,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Ali Cat",
+    "safespot": null,
+    "id": "7785"
   },
   {
     "examine": "Not the best of vocalists.",
@@ -119874,6 +122532,18 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7859"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7860"
+  },
+  {
     "examine": "He's probably a handful for his parents (Past A).",
     "name": "Jack",
     "defence_level": "1",
@@ -120425,6 +123095,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "General Wartface",
+    "safespot": null,
+    "id": "7895"
+  },
+  {
     "examine": "An ugly green creature.",
     "name": "General Bentnoze",
     "defence_level": "1",
@@ -120438,6 +123114,12 @@
   },
   {
     "examine": "",
+    "name": "General Bentnoze",
+    "safespot": null,
+    "id": "7897"
+  },
+  {
+    "examine": "",
     "name": "Loar Shadow",
     "defence_level": "1",
     "safespot": null,
@@ -120447,6 +123129,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7899"
+  },
+  {
+    "examine": "",
+    "name": "Loar Shadow",
+    "safespot": null,
+    "id": "7900"
   },
   {
     "examine": "A shadowy sort of entity",
@@ -121350,6 +124044,30 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7973"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7974"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "7975"
+  },
+  {
+    "examine": "",
+    "name": "Spirit",
+    "safespot": null,
+    "id": "7976"
+  },
+  {
     "examine": "The ghost of a dead monk.",
     "name": "Spirit",
     "defence_level": "1",
@@ -121456,6 +124174,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Summer Bonde",
+    "safespot": null,
+    "id": "7986"
   },
   {
     "examine": "The ghost of a dead monk.",
@@ -121639,6 +124363,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Jack",
+    "safespot": null,
+    "id": "8002"
   },
   {
     "examine": "She sells Farming equipment.",
@@ -121875,6 +124605,12 @@
   {
     "examine": "",
     "name": "Yellow orb",
+    "safespot": null,
+    "id": "8022"
+  },
+  {
+    "examine": "",
+    "name": "Yellow orb",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
@@ -121907,6 +124643,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Green orb",
+    "safespot": null,
+    "id": "8026"
   },
   {
     "examine": "",
@@ -122385,6 +125127,72 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8066"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8067"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8068"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8069"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8070"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8071"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8072"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8073"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8074"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8075"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8076"
+  },
+  {
     "examine": "Happy Halloween.",
     "name": "Pumpkin",
     "defence_level": "1",
@@ -122539,6 +125347,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Rock",
+    "safespot": null,
+    "id": "8090"
   },
   {
     "examine": "A shiny, happy star sprite.",
@@ -122805,6 +125619,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Summer Bonde",
+    "safespot": null,
+    "id": "8113"
+  },
+  {
     "examine": "The spirit of a small girl.",
     "name": "Summer Bonde",
     "defence_level": "1",
@@ -122925,6 +125745,18 @@
     "magic_level": "30",
     "range_level": "0",
     "attack_level": "22"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8124"
+  },
+  {
+    "examine": "",
+    "name": "Tormented wraith",
+    "safespot": null,
+    "id": "8125"
   },
   {
     "examine": "A small being of dark energy.",
@@ -123134,6 +125966,12 @@
   {
     "examine": "",
     "name": "Zombie",
+    "safespot": null,
+    "id": "8142"
+  },
+  {
+    "examine": "",
+    "name": "Zombie",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
@@ -123192,6 +126030,12 @@
     "magic_level": "70",
     "range_level": "70",
     "attack_level": "70"
+  },
+  {
+    "examine": "",
+    "name": "Zemouregal",
+    "safespot": null,
+    "id": "8148"
   },
   {
     "examine": "|id1 = 8154, 8155, 8156, 8157, 8158",
@@ -123452,6 +126296,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Sharathteerk",
+    "safespot": null,
+    "id": "8167"
+  },
+  {
     "examine": "He has seen better, happier days.",
     "name": "Arrav",
     "defence_level": "65",
@@ -123645,6 +126495,18 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8184"
+  },
+  {
+    "examine": "",
+    "name": "Acrobat",
+    "safespot": null,
+    "id": "8185"
   },
   {
     "examine": "",
@@ -124059,6 +126921,48 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8220"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8221"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8222"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8223"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8224"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8225"
+  },
+  {
+    "examine": "",
+    "name": "Guardian of Armadyl",
+    "safespot": null,
+    "id": "8226"
+  },
+  {
     "examine": "He has blindfolded himself in order to better see into the spirit world.",
     "name": "Head mystic",
     "defence_level": "1",
@@ -124409,6 +127313,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Resource NPC",
+    "safespot": null,
+    "id": "8256"
+  },
+  {
     "examine": "Guild Master.",
     "name": "Harrallak Menarous",
     "defence_level": "1",
@@ -124419,6 +127329,72 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8258"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8259"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8260"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8261"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8262"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8263"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8264"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8265"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8266"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8267"
+  },
+  {
+    "examine": "",
+    "name": "Harrallak Menarous",
+    "safespot": null,
+    "id": "8268"
   },
   {
     "examine": "He looks like a strong warrior.",
@@ -124433,6 +127409,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Yadech Strongarm",
+    "safespot": null,
+    "id": "8270"
+  },
+  {
     "examine": "He looks dangerous!",
     "name": "Turael",
     "defence_level": "1",
@@ -124443,6 +127425,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8272"
   },
   {
     "examine": "He looks dangerous!",
@@ -124491,6 +127479,24 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8277"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8278"
+  },
+  {
+    "examine": "",
+    "name": "Cyrisus",
+    "safespot": null,
+    "id": "8279"
   },
   {
     "examine": "He looks like a strong warrior.",
@@ -124894,6 +127900,36 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Elite Dark Warrior",
+    "safespot": null,
+    "id": "8312"
+  },
+  {
+    "examine": "",
+    "name": "Elite Dark Warrior",
+    "safespot": null,
+    "id": "8313"
+  },
+  {
+    "examine": "",
+    "name": "Elite Dark Warrior",
+    "safespot": null,
+    "id": "8314"
+  },
+  {
+    "examine": "",
+    "name": "Elite Dark Warrior",
+    "safespot": null,
+    "id": "8315"
+  },
+  {
+    "examine": "",
+    "name": "Elite Dark Ranger",
+    "safespot": null,
+    "id": "8316"
+  },
+  {
     "examine": "An elite dark ranger with lots of combat experience.",
     "name": "Elite Dark Ranger",
     "defence_level": "70",
@@ -125232,6 +128268,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Guardian of Armadyl",
+    "safespot": null,
+    "id": "8343"
+  },
+  {
     "examine": "A guard who has devoted their life to Armadyl.",
     "name": "Guardian of Armadyl",
     "defence_level": "1",
@@ -125257,6 +128299,12 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "Local thug",
+    "safespot": null,
+    "id": "8346"
+  },
+  {
     "examine": "A dedicated servant of a dark and powerful lord.",
     "name": "Local mage",
     "defence_level": "1",
@@ -125267,6 +128315,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Local mage",
+    "safespot": null,
+    "id": "8348"
   },
   {
     "examine": "Lucien must be incredibly powerful if he can bind such demons to his will.",
@@ -125748,6 +128802,66 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8368"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8369"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8370"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8371"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8372"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8373"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8374"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8375"
+  },
+  {
+    "examine": "",
+    "name": "",
+    "safespot": null,
+    "id": "8376"
+  },
+  {
+    "examine": "",
+    "name": "Undead troll",
+    "safespot": null,
+    "id": "8377"
   },
   {
     "examine": "Going by how trolls are named, this one's probably changed its name to 'Braiiins'.",
@@ -126282,6 +129396,24 @@
   },
   {
     "examine": "",
+    "name": "Broav",
+    "safespot": null,
+    "id": "8421"
+  },
+  {
+    "examine": "",
+    "name": "Assassin",
+    "defence_level": "1",
+    "safespot": null,
+    "strength_level": "1",
+    "id": "8422",
+    "aggressive": "false",
+    "magic_level": "1",
+    "range_level": "1",
+    "attack_level": "1"
+  },
+  {
+    "examine": "",
     "name": "Assassin",
     "defence_level": "1",
     "safespot": null,
@@ -126732,12 +129864,17 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "null",
+    "id": "8460"
+  },
+  {
     "examine": "He looks dangerous!",
     "name": "Turael",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
-    "id": "8460",
+    "id": "8461",
     "aggressive": "false",
     "magic_level": "1",
     "range_level": "1",
@@ -126816,12 +129953,92 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "null",
+    "id": "8468"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8469"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8470"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8471"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8472"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8473"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8474"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8475"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8476"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8477"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8478"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8479"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8480"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8481"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8482"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8483"
+  },
+  {
     "examine": "The small, squat, but very tough looking door man.",
     "name": "Laidee Gnonock",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
-    "id": "8468",
+    "id": "8484",
     "aggressive": "false",
     "magic_level": "1",
     "range_level": "1",
@@ -126874,6 +130091,12 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "Hazelmere",
+    "safespot": null,
+    "id": "8489"
   },
   {
     "examine": "An ancient looking gnome.",
@@ -127267,6 +130490,76 @@
     "attack_level": "1"
   },
   {
+    "examine": "",
+    "name": "null",
+    "id": "8522"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8523"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8524"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8525"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8526"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8527"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8528"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8529"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8530"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8531"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8532"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8533"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8534"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8535"
+  },
+  {
     "examine": "Small, blue and mischievous - it's a snow imp all right.",
     "name": "Snow imp",
     "defence_level": "1",
@@ -127494,6 +130787,11 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
+  },
+  {
+    "examine": "",
+    "name": "null",
+    "id": "8554"
   },
   {
     "examine": "A worshipper of Guthix.",
@@ -127774,6 +131072,11 @@
     "attack_level": "49"
   },
   {
+    "examine": "",
+    "name": "Greater reborn warrior",
+    "id": "8570"
+  },
+  {
     "examine": "A ranger that died and was reborn through the phoenix's power.",
     "name": "Lesser reborn ranger",
     "defence_level": "49",
@@ -127787,6 +131090,11 @@
     "attack_level": "36"
   },
   {
+    "examine": "",
+    "name": "Greater reborn ranger",
+    "id": "8572"
+  },
+  {
     "examine": "A mage that died and was reborn through the phoenix's power.",
     "name": "Lesser reborn mage",
     "defence_level": "49",
@@ -127798,6 +131106,16 @@
     "magic_level": "49",
     "range_level": "0",
     "attack_level": "36"
+  },
+  {
+    "examine": "",
+    "name": "Greater reborn mage",
+    "id": "8574"
+  },
+  {
+    "examine": "",
+    "name": "Phoenix",
+    "id": "8575"
   },
   {
     "examine": "A baby phoenix and it's as cute as buttons!",
