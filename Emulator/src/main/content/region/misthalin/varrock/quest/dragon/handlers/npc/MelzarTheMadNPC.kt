@@ -24,7 +24,7 @@ class MelzarTheMadNPC : AbstractNPC {
 
     private constructor(id: Int, location: Location) : super(id, location)
 
-    override fun construct(id: Int, location: Location, vararg objects: Any, ): AbstractNPC = MelzarTheMadNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = MelzarTheMadNPC(id, location)
 
     override fun init() {
         super.init()
@@ -52,11 +52,11 @@ class MelzarTheMadNPC : AbstractNPC {
 
     inner class MelzarSwingHandler : CombatSwingHandler(CombatStyle.MAGIC) {
         private var style = CombatStyle.MAGIC
-        private val SPELL_IDS = intArrayOf(8, 2, 7, 11)
+        private val spellIDs = intArrayOf(8, 2, 7, 11)
 
-        override fun canSwing(entity: Entity, victim: Entity, ): InteractionType? = type!!.swingHandler.canSwing(entity, victim)
+        override fun canSwing(entity: Entity, victim: Entity): InteractionType? = type!!.swingHandler.canSwing(entity, victim)
 
-        override fun swing(entity: Entity?, victim: Entity?, state: BattleState?, ): Int {
+        override fun swing(entity: Entity?, victim: Entity?, state: BattleState?): Int {
             style =
                 if (RandomFunction.random(5) == 3) {
                     CombatStyle.MELEE
@@ -66,17 +66,13 @@ class MelzarTheMadNPC : AbstractNPC {
             return 2
         }
 
-        override fun visualize(entity: Entity, victim: Entity?, state: BattleState?, ) {
+        override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
             if (style == CombatStyle.MAGIC) {
                 state!!.spell = combatSpell
                 for (i in 0..1) {
                     val l = getLocation().transform(RandomFunction.random(1, 5), RandomFunction.random(1, 5), 0)
                     if (isTeleportPermitted(l) &&
-                        GroundItemManager.get(
-                            CABBAGE.id,
-                            l,
-                            null,
-                        ) == null &&
+                        GroundItemManager.get(CABBAGE.id, l, null) == null &&
                         l.y <= 9651 &&
                         l.y >= 9644
                     ) {
@@ -88,30 +84,30 @@ class MelzarTheMadNPC : AbstractNPC {
             style.swingHandler.visualize(entity, victim, state)
         }
 
-        override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?, ) {
+        override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?) {
             style.swingHandler.visualizeImpact(entity, victim, state)
         }
 
-        override fun adjustBattleState(entity: Entity, victim: Entity, state: BattleState, ) {
+        override fun adjustBattleState(entity: Entity, victim: Entity, state: BattleState) {
             style.swingHandler.adjustBattleState(entity, victim, state)
         }
 
         override fun calculateAccuracy(entity: Entity?): Int = style.swingHandler.calculateAccuracy(entity)
 
-        override fun calculateDefence(victim: Entity?, attacker: Entity?, ): Int = style.swingHandler.calculateDefence(victim, attacker)
+        override fun calculateDefence(victim: Entity?, attacker: Entity?): Int = style.swingHandler.calculateDefence(victim, attacker)
 
-        override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double, ): Int = style.swingHandler.calculateHit(entity, victim, modifier)
+        override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int = style.swingHandler.calculateHit(entity, victim, modifier)
 
-        override fun impact(entity: Entity?, victim: Entity?, state: BattleState?, ) {
+        override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
             style.swingHandler.impact(entity, victim, state)
         }
 
         override fun getArmourSet(e: Entity?): ArmourSet? = style.swingHandler.getArmourSet(e)
 
-        override fun getSetMultiplier(e: Entity?, skillId: Int, ): Double = style.swingHandler.getSetMultiplier(e, skillId)
+        override fun getSetMultiplier(e: Entity?, skillId: Int): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
-        val combatSpell: CombatSpell?
-            get() = (SpellBookManager.SpellBook.MODERN.getSpell(SPELL_IDS[RandomFunction.random(SPELL_IDS.size)],) as CombatSpell?)
+        private val combatSpell: CombatSpell?
+            get() = (SpellBookManager.SpellBook.MODERN.getSpell(spellIDs[RandomFunction.random(spellIDs.size)]) as CombatSpell?)
     }
 
     companion object {
