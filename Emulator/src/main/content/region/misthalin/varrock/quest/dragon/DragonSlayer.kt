@@ -3,7 +3,6 @@ package content.region.misthalin.varrock.quest.dragon
 import content.global.skill.agility.AgilityHandler
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import content.region.misthalin.varrock.quest.dragon.cutscene.DragonSlayerCutscene
-import content.region.misthalin.varrock.quest.dragon.dialogue.ChestDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.GuildmasterDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.OziachDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.WormbrainDialogue
@@ -30,10 +29,9 @@ import core.plugin.Initializable
 import org.rs.consts.*
 
 @Initializable
-class DragonSlayer :
-    Quest(Quests.DRAGON_SLAYER, 18, 17, 2, Vars.VARP_QUEST_DRAGON_SLAYER_PROGRESS_176, 0, 1, 10),
-    LoginListener {
-    override fun newInstance(`object`: Any?): Quest {
+class DragonSlayer : Quest(Quests.DRAGON_SLAYER, 18, 17, 2, Vars.VARP_QUEST_DRAGON_SLAYER_PROGRESS_176, 0, 1, 10), LoginListener {
+
+    override fun newInstance(`object`: Any): Quest {
         definePlugins(
             DragonSlayerPlugin(),
             MagicDoorPlugin(),

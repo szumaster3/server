@@ -4068,7 +4068,7 @@
     "attack_level": "29"
   },
   {
-    "examine": "* Wears a stylish suit of armour.",
+    "examine": "Wears a stylish suit of armour.",
     "name": "Lord Daquarius",
     "defence_level": "1",
     "safespot": null,
@@ -5102,7 +5102,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Before/during quest:''' It's tragic to see a lady cry.&lt;br />",
+    "examine": "It's tragic to see a lady cry.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -5598,7 +5598,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "There's a sadness in his eyes. &lt;br> A farmer who's seen happier times.",
+    "examine": "There's a sadness in his eyes.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -5628,13 +5628,13 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A farmer who's seen happier times.",
     "name": "Farmer Brumty",
     "safespot": null,
     "id": "293"
   },
   {
-    "examine": "",
+    "examine": "A farmer who's seen happier times.",
     "name": "Farmer Brumty",
     "safespot": null,
     "id": "294"
@@ -5810,7 +5810,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "(1) It's a tree gnome. (2) No longer locked in his own cage. (3) He shields his eyes in the sunlight.",
+    "examine": "It's a tree gnome.",
     "name": "Golrie",
     "defence_level": "1",
     "safespot": null,
@@ -11034,7 +11034,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''When alive:''' A tearful damsel, maybe I can help her? '''When assumed dead:''' Probably not dead. Although Romeo is none the wiser.",
+    "examine": "A tearful damsel, maybe I can help her?",
     "name": "Juliet",
     "defence_level": "1",
     "safespot": null,
@@ -11304,7 +11304,7 @@
     "prj_height": "3"
   },
   {
-    "examine": "Looks otherworldly...&lt;br />Looks otherworldly.",
+    "examine": "Looks otherworldly.",
     "name": "Fairy Queen",
     "defence_level": "1",
     "safespot": null,
@@ -12139,7 +12139,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Master of Imps.",
+    "examine": "Master of Imps.",
     "name": "Wizard Grayzag",
     "defence_level": "1",
     "safespot": null,
@@ -13879,7 +13879,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "It looks like he's been here a long time.&lt;br>[[Tourist trap]] slave after being given Desert robes: He's making a break for it!",
+    "examine": "It looks like he's been here a long time.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -14890,7 +14890,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* The family's future lies with this boy.",
+    "examine": "The family's future lies with this boy.",
     "combat_audio": "511,513,512",
     "magic_level": "1",
     "name": "Philipe Carnillean",
@@ -15364,7 +15364,7 @@
     "attack_level": "41"
   },
   {
-    "examine": "* An agent of Al Kharid.",
+    "examine": "An agent of Al Kharid.",
     "name": "Leela",
     "defence_level": "1",
     "safespot": null,
@@ -15734,7 +15734,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Must be related to [[Elvarg]].",
+    "examine": "Must be related to Elvarg.",
     "melee_animation": "80",
     "range_animation": "80",
     "combat_audio": "408,410,409",
@@ -17404,7 +17404,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A holy man.",
+    "examine": "A holy man.",
     "name": "Drezel",
     "defence_level": "1",
     "safespot": null,
@@ -17422,7 +17422,7 @@
     "id": "1048"
   },
   {
-    "examine": "* A holy man.",
+    "examine": "A holy man.",
     "name": "Drezel",
     "defence_level": "1",
     "safespot": null,
@@ -21923,7 +21923,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* One of Rellekka's many citizens.",
+    "examine": "One of Rellekka's many citizens.",
     "melee_animation": "422",
     "magic_level": "1",
     "respawn_delay": "60",
@@ -22933,7 +22933,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A warrior of [[Miscellania]] / [[Etceteria]].",
+    "examine": "A warrior of Miscellania.",
     "melee_animation": "401",
     "attack_speed": "4",
     "magic_level": "0",
@@ -22951,7 +22951,7 @@
     "attack_level": "4"
   },
   {
-    "examine": "A warrior of [[Miscellania]] / [[Etceteria]].",
+    "examine": "A warrior of Etceteria.",
     "melee_animation": "395",
     "attack_speed": "4",
     "magic_level": "0",
@@ -23017,7 +23017,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "*'''Throne of Miscellania:''' The Princess of Miscellania.",
+    "examine": "The Princess of Miscellania.",
     "name": "Princess Astrid",
     "defence_level": "1",
     "safespot": null,
@@ -23029,7 +23029,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He's in no state to rule a kingdom.",
+    "examine": "He's in no state to rule a kingdom.",
     "name": "King Vargas",
     "defence_level": "1",
     "safespot": null,
@@ -23269,7 +23269,7 @@
     "attack_level": "4"
   },
   {
-    "examine": "A warrior of [[Miscellania]] / [[Etceteria]].",
+    "examine": "A warrior of Miscellania.",
     "melee_animation": "395",
     "attack_speed": "4",
     "magic_level": "0",
@@ -23305,7 +23305,7 @@
     "attack_level": "4"
   },
   {
-    "examine": "A warrior of [[Miscellania]] / [[Etceteria]].",
+    "examine": "A warrior of Etceteria.",
     "melee_animation": "395",
     "attack_speed": "4",
     "magic_level": "0",
@@ -25935,7 +25935,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Looks like the leader of the Myreque.",
+    "examine": "Looks like the leader of the Myreque.",
     "name": "Veliaf Hurtz",
     "defence_level": "1",
     "safespot": null,
@@ -26438,7 +26438,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* She looks dangerous!",
+    "examine": "She looks dangerous!",
     "name": "Chaeldar",
     "defence_level": "1",
     "safespot": null,
@@ -28152,7 +28152,7 @@
     "attack_level": "25"
   },
   {
-    "examine": "(1) It's a tree gnome. (2) No longer locked in his own cage. (3) He shields his eyes in the sunlight.",
+    "examine": "No longer locked in his own cage.",
     "name": "Golrie",
     "defence_level": "1",
     "safespot": null,
@@ -28385,7 +28385,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A spooky [[ghost]] villager.",
+    "examine": "A spooky ghost villager.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "436,439,438",
@@ -37008,7 +37008,7 @@
     "attack_level": "3"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -37026,7 +37026,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -37044,7 +37044,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "name": "Piglet",
     "defence_level": "1",
     "safespot": null,
@@ -38123,7 +38123,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Puppy:''' This little puppy is very quiet.",
+    "examine": "Come by! Come by!",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -38261,7 +38261,7 @@
     "attack_level": "3"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -38279,7 +38279,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -38297,7 +38297,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* I shall name him, Mini Pig.",
+    "examine": "I shall name him, Mini Pig.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -39602,7 +39602,7 @@
     "attack_level": "65"
   },
   {
-    "examine": "* Seems intelligent... for an ogre.",
+    "examine": "Seems intelligent... for an ogre.",
     "name": "Grunsh",
     "defence_level": "1",
     "safespot": null,
@@ -42439,7 +42439,7 @@
     "attack_level": "70"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42459,7 +42459,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42479,7 +42479,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42499,7 +42499,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42519,7 +42519,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42539,7 +42539,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42559,7 +42559,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42663,7 +42663,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "name": "TzHaar-Ket",
     "defence_level": "62",
     "safespot": null,
@@ -42676,7 +42676,7 @@
     "attack_level": "62"
   },
   {
-    "examine": "*''Attackable'': Must be a guard or something.",
+    "examine": "Must be a guard or something.",
     "name": "TzHaar-Ket",
     "defence_level": "62",
     "safespot": null,
@@ -44683,7 +44683,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Wears a stylish suit of armour.",
+    "examine": "Wears a stylish suit of armour.",
     "name": "Lord Daquarius",
     "defence_level": "1",
     "safespot": null,
@@ -44721,7 +44721,7 @@
     "attack_level": "22"
   },
   {
-    "examine": "* Wears a stylish suit of armour.",
+    "examine": "Wears a stylish suit of armour.",
     "name": "Lord Daquarius",
     "defence_level": "1",
     "safespot": null,
@@ -45196,7 +45196,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks angry and smells drunk.",
+    "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "defence_level": "1",
     "safespot": null,
@@ -45208,7 +45208,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks angry and smells drunk.",
+    "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "defence_level": "1",
     "safespot": null,
@@ -45220,7 +45220,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks angry and smells drunk.",
+    "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "defence_level": "1",
     "safespot": null,
@@ -45232,7 +45232,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks angry and smells drunk.",
+    "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "defence_level": "1",
     "safespot": null,
@@ -45244,7 +45244,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks angry and smells drunk.",
+    "examine": "He looks angry and smells drunk.",
     "name": "Skippy",
     "defence_level": "1",
     "safespot": null,
@@ -51178,7 +51178,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "pUre A cHaOs of crEatuRe!&lt;!-- ",
+    "examine": "pUre A cHaOs of crEatuRe!",
     "start_gfx": "556",
     "melee_animation": "3146",
     "attack_speed": "4",
@@ -51206,7 +51206,7 @@
     "attack_level": "69"
   },
   {
-    "examine": "'''Idle:''' A ball of electrical energy.&lt;br>",
+    "examine": "A ball of electrical energy.",
     "attack_speed": "3",
     "magic_level": "1",
     "respawn_delay": "60",
@@ -51222,7 +51222,7 @@
     "attack_level": "30"
   },
   {
-    "examine": "'''Idle:''' A ball of electrical energy.&lt;br>",
+    "examine": "A ball of electrical energy.",
     "attack_speed": "3",
     "magic_level": "1",
     "respawn_delay": "60",
@@ -52736,7 +52736,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -52754,7 +52754,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -52766,7 +52766,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -52778,7 +52778,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -52796,7 +52796,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "name": "Raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -52808,7 +52808,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -56450,7 +56450,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Looks like the leader of the Myreque.",
+    "examine": "Looks like the leader of the Myreque.",
     "name": "Veliaf Hurtz",
     "defence_level": "1",
     "safespot": null,
@@ -56510,7 +56510,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Sergiu",
     "defence_level": "1",
     "safespot": null,
@@ -56558,7 +56558,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Valeria",
     "defence_level": "1",
     "safespot": null,
@@ -56702,7 +56702,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Mihail",
     "defence_level": "1",
     "safespot": null,
@@ -56750,7 +56750,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Razvan",
     "defence_level": "1",
     "safespot": null,
@@ -56774,7 +56774,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A citizen of Burgh de Rott.",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Cornelius",
     "defence_level": "1",
     "safespot": null,
@@ -56798,7 +56798,7 @@
     "id": "3568"
   },
   {
-    "examine": "* A citizen of Burgh de Rott.",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Cornelius",
     "defence_level": "1",
     "safespot": null,
@@ -59126,7 +59126,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -62262,7 +62262,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "*'''Throne of Miscellania:''' The Princess of Miscellania.",
+    "examine": "The Princess of Miscellania.",
     "name": "Princess Astrid",
     "defence_level": "1",
     "safespot": null,
@@ -67037,7 +67037,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Used to be a black knight.&lt;br />",
+    "examine": "Used to be a black knight.",
     "name": "Ajjat",
     "defence_level": "1",
     "safespot": null,
@@ -69358,7 +69358,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Looks otherworldly...&lt;br />Looks otherworldly.",
+    "examine": "Looks otherworldly...",
     "name": "Fairy Queen",
     "defence_level": "1",
     "safespot": null,
@@ -69376,7 +69376,7 @@
     "id": "4436"
   },
   {
-    "examine": "Looks otherworldly...&lt;br />Looks otherworldly.",
+    "examine": "Looks otherworldly.",
     "name": "Fairy Queen",
     "defence_level": "1",
     "safespot": null,
@@ -70280,7 +70280,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -70298,7 +70298,7 @@
     "id": "4496"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -70310,7 +70310,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -70571,7 +70571,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* An old woman who lives in a very strange house.",
+    "examine": "An old woman who lives in a very strange house.",
     "name": "Baba Yaga",
     "defence_level": "1",
     "safespot": null,
@@ -70631,7 +70631,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''During Lunar Diplomacy:''' She will tan your suqah hides. &lt;br/> '''After Lunar Diplomacy:''' Not a single hair on her head. But one or two warts.",
+    "examine": "She will tan your suqah hides.",
     "name": "Rimae Sirsalis",
     "defence_level": "1",
     "safespot": null,
@@ -72279,8 +72279,8 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Outside:''' Ahhh. Isn't it cute?",
-    "name": "fluffie",
+    "examine": "Ahhh. Isn't it cute?",
+    "name": "Fluffie",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
@@ -72291,8 +72291,8 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Outside:''' Ahhh. Isn't it cute?",
-    "name": "fluffie",
+    "examine": "Ahhh. Isn't it cute?",
+    "name": "Fluffie",
     "defence_level": "1",
     "safespot": null,
     "strength_level": "1",
@@ -73110,7 +73110,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Must be related to [[Elvarg]].",
+    "examine": "Must be related to Elvarg.",
     "melee_animation": "80",
     "range_animation": "80",
     "combat_audio": "408,410,409",
@@ -73135,7 +73135,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "Must be related to [[Elvarg]].",
+    "examine": "Must be related to Elvarg.",
     "melee_animation": "80",
     "range_animation": "80",
     "combat_audio": "408,410,409",
@@ -73160,7 +73160,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "Must be related to [[Elvarg]].",
+    "examine": "Must be related to Elvarg.",
     "melee_animation": "80",
     "range_animation": "80",
     "combat_audio": "408,410,409",
@@ -73185,7 +73185,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "Must be related to [[Elvarg]].",
+    "examine": "Must be related to Elvarg.",
     "melee_animation": "80",
     "range_animation": "80",
     "combat_audio": "408,410,409",
@@ -73926,7 +73926,7 @@
     "id": "4713"
   },
   {
-    "examine": "* She looks important.",
+    "examine": "She looks important.",
     "name": "Sarius Guile",
     "defence_level": "1",
     "safespot": null,
@@ -75259,7 +75259,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks haughty and arrogant.",
+    "examine": "He looks haughty and arrogant.",
     "name": "Ranis Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -75271,7 +75271,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks haughty and arrogant.",
+    "examine": "He looks haughty and arrogant.",
     "name": "Ranis Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -75283,7 +75283,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks haughty and arrogant.",
+    "examine": "He looks haughty and arrogant.",
     "name": "Ranis Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -75295,7 +75295,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks haughty and arrogant.",
+    "examine": "He looks haughty and arrogant.",
     "name": "Ranis Drakan",
     "defence_level": "1",
     "safespot": null,
@@ -76207,7 +76207,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* She looks important.",
+    "examine": "She looks important.",
     "name": "Sarius Guile",
     "defence_level": "1",
     "safespot": null,
@@ -76255,7 +76255,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -76267,7 +76267,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -76808,7 +76808,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Yauchomi, follower of [[Saradomin]].",
+    "examine": "Yauchomi, follower of Saradomin.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -77588,7 +77588,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -77606,7 +77606,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "name": "My Arm",
     "defence_level": "1",
     "safespot": null,
@@ -77618,7 +77618,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "name": "My Arm",
     "defence_level": "1",
     "safespot": null,
@@ -77630,7 +77630,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "name": "My Arm",
     "defence_level": "1",
     "safespot": null,
@@ -77684,7 +77684,7 @@
     "id": "4957"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "name": "My Arm",
     "defence_level": "1",
     "safespot": null,
@@ -77696,7 +77696,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Trollish.",
+    "examine": "Trollish.",
     "name": "My Arm",
     "defence_level": "1",
     "safespot": null,
@@ -84878,7 +84878,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -84890,7 +84890,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -84902,7 +84902,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -84914,7 +84914,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -84926,7 +84926,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Ping",
     "defence_level": "1",
     "safespot": null,
@@ -84938,7 +84938,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* 'Berg bard",
+    "examine": "'Berg bard",
     "name": "Pong",
     "defence_level": "1",
     "safespot": null,
@@ -84998,7 +84998,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A Macaroni penguin.",
+    "examine": "A Macaroni penguin.",
     "name": "Noodle",
     "defence_level": "1",
     "safespot": null,
@@ -85912,7 +85912,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A dwarven trader from [[Keldagrim]].",
+    "examine": "A dwarven trader from Keldagrim.",
     "melee_animation": "422",
     "range_animation": "422",
     "combat_audio": "511,513,512",
@@ -85931,7 +85931,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A dwarven trader from Keldagrim.",
+    "examine": "A dwarven trader from Keldagrim.",
     "name": "Grundt",
     "defence_level": "1",
     "safespot": null,
@@ -90506,7 +90506,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He's here to guard the wizard.",
+    "examine": "He's here to guard the wizard.",
     "name": "Darve",
     "defence_level": "1",
     "safespot": null,
@@ -96489,7 +96489,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A servant of the god [[Zamorak]].",
+    "examine": "A servant of the god Zamorak.",
     "name": "K'ril Tsutsaroth",
     "defence_level": "1",
     "safespot": null,
@@ -96501,7 +96501,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A servant of the god [[Zamorak]].",
+    "examine": "A servant of the god Zamorak.",
     "melee_animation": "6945",
     "attack_speed": "6",
     "poisonous": "true",
@@ -99849,7 +99849,7 @@
     "attack_level": "19"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -101493,7 +101493,7 @@
     "attack_level": "19"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -101505,7 +101505,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* Smaller than the average goblin.",
+    "examine": "Smaller than the average goblin.",
     "name": "Grubfoot",
     "defence_level": "1",
     "safespot": null,
@@ -108851,7 +108851,7 @@
     "attack_level": "39"
   },
   {
-    "examine": "The only creature with a mouth big enough to hold a [[cannonball]].",
+    "examine": "The only creature with a mouth big enough to hold a cannonball.",
     "melee_animation": "7260",
     "range_animation": "0",
     "attack_speed": "7",
@@ -108872,7 +108872,7 @@
     "attack_level": "60"
   },
   {
-    "examine": "The only creature with a mouth big enough to hold a [[cannonball]].",
+    "examine": "The only creature with a mouth big enough to hold a cannonball.",
     "melee_animation": "7260",
     "range_animation": "0",
     "attack_speed": "7",
@@ -108947,7 +108947,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* It's lively and energetic.",
+    "examine": "It's lively and energetic.",
     "name": "Terrier",
     "defence_level": "1",
     "safespot": null,
@@ -109007,7 +109007,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "The man of the pet shop.",
     "name": "Pet shop owner",
     "defence_level": "1",
     "safespot": null,
@@ -109129,7 +109129,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Young but still dangerous.",
     "name": "Baby dragon",
     "defence_level": "1",
     "safespot": null,
@@ -109143,7 +109143,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "name": "Baby penguin",
     "defence_level": "1",
     "safespot": null,
@@ -109155,7 +109155,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -109167,7 +109167,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -109179,7 +109179,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -109191,7 +109191,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -109215,7 +109215,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "name": "Raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -109227,7 +109227,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -109239,7 +109239,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -109269,7 +109269,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -109281,7 +109281,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -109293,7 +109293,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -109323,7 +109323,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109347,7 +109347,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109371,7 +109371,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109395,7 +109395,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109419,7 +109419,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109443,7 +109443,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109467,7 +109467,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109491,7 +109491,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109515,7 +109515,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109539,7 +109539,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, colour-coordinated lizard!",
     "name": "Baby chameleon",
     "defence_level": "1",
     "safespot": null,
@@ -109563,7 +109563,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's a tiny, cheeky monkey.",
     "name": "Baby monkey",
     "defence_level": "1",
     "safespot": null,
@@ -109577,7 +109577,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Perhaps our oldest relatives?",
+    "examine": "Hide the bananas!",
     "combat_audio": "629,631,630",
     "attack_speed": "4",
     "magic_level": "1",
@@ -109592,7 +109592,7 @@
     "attack_level": "6"
   },
   {
-    "examine": "It's a tiny",
+    "examine": "It's a tiny, cheeky monkey.",
     "melee_animation": "0",
     "range_animation": "0",
     "combat_audio": "629,631,630",
@@ -109611,7 +109611,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A baby vulture.",
     "name": "Vulture chick",
     "defence_level": "1",
     "safespot": null,
@@ -109623,7 +109623,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "If you see them circling, run.",
+    "examine": "An adult vulture.",
     "name": "Vulture",
     "defence_level": "38",
     "safespot": null,
@@ -109636,7 +109636,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "",
+    "examine": "Little nipper.",
     "name": "Baby giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -109648,7 +109648,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -109660,7 +109660,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A fluffy chick.",
     "name": "Saradomin chick",
     "defence_level": "1",
     "safespot": null,
@@ -109672,7 +109672,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Lovely blue plumage.",
     "name": "Saradomin bird",
     "defence_level": "1",
     "safespot": null,
@@ -109684,7 +109684,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Chick:'' A fluffy chick.&lt;br />''Bird:'' Lovely blue plumage.&lt;br />''Owl:'' A fantastic saradomin owl.",
+    "examine": "A fantastic saradomin owl.",
     "name": "Saradomin owl",
     "defence_level": "1",
     "safespot": null,
@@ -109696,7 +109696,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A fluffy chick.",
     "name": "Zamorak chick",
     "defence_level": "1",
     "safespot": null,
@@ -109708,7 +109708,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Lovely red plumage.",
     "name": "Zamorak bird",
     "defence_level": "1",
     "safespot": null,
@@ -109720,7 +109720,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Chick:''' A fluffy chick.&lt;br>'''Bird:''' Lovely red plumage.&lt;br>'''Hawk:''' A stately Zamorak hawk.",
+    "examine": "A stately Zamorak hawk.",
     "name": "Zamorak hawk",
     "defence_level": "1",
     "safespot": null,
@@ -109732,7 +109732,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A fluffy chick.",
     "name": "Guthix chick",
     "defence_level": "1",
     "safespot": null,
@@ -109744,7 +109744,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Lovely green plumage.",
     "name": "Guthix bird",
     "defence_level": "1",
     "safespot": null,
@@ -109756,7 +109756,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Chick:''' A fluffy chick.&lt;br />'''Bird:''' Lovely green plumage.&lt;br />'''Raptor:''' An impressive Guthix raptor.",
+    "examine": "An impressive Guthix raptor.",
     "name": "Guthix raptor",
     "defence_level": "1",
     "safespot": null,
@@ -109780,7 +109780,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* It's lively and energetic.",
+    "examine": "It's lively and energetic.",
     "name": "Terrier",
     "defence_level": "1",
     "safespot": null,
@@ -109876,7 +109876,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Puppy:''' This little puppy is very quiet.",
+    "examine": "Come by! Come by!",
     "name": "Sheepdog",
     "defence_level": "1",
     "safespot": null,
@@ -109900,7 +109900,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "One proud little puppy.",
     "combat_style": "2",
     "melee_animation": "8304",
     "attack_speed": "5",
@@ -110494,7 +110494,7 @@
     "attack_level": "90"
   },
   {
-    "examine": "I can't see his face.&lt;br />Who is that?&lt;br />A mage of incredible power and awesome presence.",
+    "examine": "I can't see his face. Who is that? A mage of incredible power and awesome presence.",
     "name": "Dark Squall",
     "defence_level": "1",
     "safespot": null,
@@ -110506,7 +110506,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "I can't see his face. Who is that? A mage of incredible power and awesome presence.",
     "name": "Dark Squall",
     "safespot": null,
     "id": "7001"
@@ -112841,7 +112841,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A little girl. &lt;br/> She looks terrified.",
+    "examine": "A little girl.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -112859,7 +112859,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A little girl. &lt;br/> She looks terrified.",
+    "examine": "She looks terrified.",
     "name": "Kimberly",
     "defence_level": "1",
     "safespot": null,
@@ -112871,7 +112871,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A little girl. &lt;br/> She looks terrified.",
+    "examine": "A little girl.",
     "name": "Kimberly",
     "defence_level": "1",
     "safespot": null,
@@ -112883,7 +112883,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -112895,7 +112895,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -112907,7 +112907,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -112919,7 +112919,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -112931,7 +112931,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He looks very scared.",
+    "examine": "He looks very scared.",
     "name": "Kennith",
     "defence_level": "1",
     "safespot": null,
@@ -113741,7 +113741,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* It's lively and energetic.",
+    "examine": "It's lively and energetic.",
     "name": "Terrier",
     "defence_level": "1",
     "safespot": null,
@@ -113765,7 +113765,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* It's lively and energetic.",
+    "examine": "It's lively and energetic.",
     "name": "Terrier",
     "defence_level": "1",
     "safespot": null,
@@ -113933,7 +113933,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Puppy:''' This little puppy is very quiet.",
+    "examine": "Come by! Come by!",
     "name": "Sheepdog",
     "defence_level": "1",
     "safespot": null,
@@ -113957,7 +113957,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Puppy:''' This little puppy is very quiet.",
+    "examine": "Come by! Come by!",
     "name": "Sheepdog",
     "defence_level": "1",
     "safespot": null,
@@ -114017,7 +114017,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -114029,7 +114029,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -114041,7 +114041,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -114053,7 +114053,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -114065,7 +114065,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -114077,7 +114077,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -114089,7 +114089,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -114101,7 +114101,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -114113,7 +114113,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A raven chick.",
     "name": "Raven chick",
     "defence_level": "1",
     "safespot": null,
@@ -114125,7 +114125,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Chick:''' A raven chick.",
+    "examine": "An adult raven.",
     "name": "Raven",
     "defence_level": "1",
     "safespot": null,
@@ -114137,7 +114137,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A stripy little baby raccoon.",
     "name": "Baby raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -114149,7 +114149,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "name": "Raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -114161,7 +114161,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A stripy little baby raccoon.",
     "name": "Baby raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -114173,7 +114173,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' A stripy little baby raccoon. &lt;br /> '''Adult:''' He can run with us.",
+    "examine": "He can run with us.",
     "name": "Raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -114203,7 +114203,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A stripy little baby raccoon.",
     "name": "Baby raccoon",
     "defence_level": "1",
     "safespot": null,
@@ -114215,7 +114215,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114227,7 +114227,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114239,7 +114239,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114251,7 +114251,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114263,7 +114263,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114275,7 +114275,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114287,7 +114287,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114299,7 +114299,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114329,7 +114329,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114341,7 +114341,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114353,7 +114353,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "It's so adorably tiny!",
     "name": "Baby gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114365,7 +114365,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114377,7 +114377,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114389,7 +114389,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114401,7 +114401,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* '''Baby:''' It's so adorably tiny!",
+    "examine": "How cute!",
     "name": "Gecko",
     "defence_level": "1",
     "safespot": null,
@@ -114413,7 +114413,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Little nipper.",
     "name": "Baby giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114425,7 +114425,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114437,7 +114437,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Little nipper.",
     "name": "Baby giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114449,7 +114449,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114461,7 +114461,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Little nipper.",
     "name": "Baby giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114473,7 +114473,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114485,7 +114485,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Little nipper.",
     "name": "Baby giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114497,7 +114497,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -114509,7 +114509,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114521,7 +114521,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114533,7 +114533,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114545,7 +114545,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114557,7 +114557,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114569,7 +114569,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114581,7 +114581,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114593,7 +114593,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "''Adult:'' An experienced nut-thief.&lt;br>''Baby:'' A tiny nut-thief.",
+    "examine": "An experienced nut-thief.",
     "name": "Squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114605,7 +114605,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114617,7 +114617,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114629,7 +114629,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114641,7 +114641,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A tiny nut-thief.",
     "name": "Baby squirrel",
     "defence_level": "1",
     "safespot": null,
@@ -114653,7 +114653,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "name": "Baby penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114665,7 +114665,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114677,7 +114677,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114689,7 +114689,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Can't fly and can barely walk, but adorable nonetheless.",
     "name": "Baby penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114701,7 +114701,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114713,7 +114713,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Emperor of all he surveys.",
     "name": "Penguin",
     "defence_level": "1",
     "safespot": null,
@@ -114725,7 +114725,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A baby vulture.",
     "name": "Vulture chick",
     "defence_level": "1",
     "safespot": null,
@@ -114737,7 +114737,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "If you see them circling, run.",
+    "examine": "An adult vulture.",
     "name": "Vulture",
     "defence_level": "38",
     "safespot": null,
@@ -114750,7 +114750,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "",
+    "examine": "A baby vulture.",
     "name": "Vulture chick",
     "defence_level": "1",
     "safespot": null,
@@ -114762,7 +114762,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "If you see them circling, run.",
+    "examine": "An adult vulture.",
     "name": "Vulture",
     "defence_level": "38",
     "safespot": null,
@@ -114775,7 +114775,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "",
+    "examine": "A baby vulture.",
     "name": "Vulture chick",
     "defence_level": "1",
     "safespot": null,
@@ -114787,7 +114787,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "If you see them circling, run.",
+    "examine": "An adult vulture.",
     "name": "Vulture",
     "defence_level": "38",
     "safespot": null,
@@ -114800,7 +114800,7 @@
     "attack_level": "38"
   },
   {
-    "examine": "",
+    "examine": "A baby vulture.",
     "name": "Vulture chick",
     "defence_level": "1",
     "safespot": null,
@@ -114812,7 +114812,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "If you see them circling, run.",
+    "examine": "An adult vulture.",
     "name": "Vulture",
     "defence_level": "38",
     "safespot": null,
@@ -116169,7 +116169,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A citizen of Burgh de Rott.",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Cornelius",
     "defence_level": "1",
     "safespot": null,
@@ -116223,7 +116223,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Sergiu",
     "defence_level": "1",
     "safespot": null,
@@ -116271,7 +116271,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Valeria",
     "defence_level": "1",
     "safespot": null,
@@ -116355,7 +116355,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Mihail",
     "defence_level": "1",
     "safespot": null,
@@ -116391,7 +116391,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A citizen of [[Burgh de Rott]].",
+    "examine": "A citizen of Burgh de Rott.",
     "name": "Razvan",
     "defence_level": "1",
     "safespot": null,
@@ -120312,7 +120312,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A holy man.",
+    "examine": "A holy man.",
     "name": "Drezel",
     "defence_level": "1",
     "safespot": null,
@@ -120330,7 +120330,7 @@
     "id": "7689"
   },
   {
-    "examine": "* A holy man.",
+    "examine": "A holy man.",
     "name": "Drezel",
     "defence_level": "1",
     "safespot": null,
@@ -120582,7 +120582,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A holy man.",
+    "examine": "A holy man.",
     "name": "Drezel",
     "defence_level": "1",
     "safespot": null,
@@ -120735,7 +120735,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A frantic gnome.",
+    "examine": "A frantic gnome.",
     "name": "Professor Arblenap",
     "defence_level": "1",
     "safespot": null,
@@ -120831,7 +120831,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A frantic gnome.",
+    "examine": "A frantic gnome.",
     "name": "Professor Arblenap",
     "defence_level": "1",
     "safespot": null,
@@ -122172,7 +122172,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "'''Baby:''' Little nipper. &lt;br> '''Adult:''' Bigger nipper.",
+    "examine": "Bigger nipper.",
     "name": "Giant crab",
     "defence_level": "1",
     "safespot": null,
@@ -123844,7 +123844,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Yauchomi, follower of [[Saradomin]].",
+    "examine": "Yauchomi, follower of Saradomin.",
     "name": "Prayer Tutor",
     "defence_level": "1",
     "safespot": null,
@@ -129636,7 +129636,7 @@
     "attack_level": "55"
   },
   {
-    "examine": "I can't see his face.&lt;br />Who is that?&lt;br />A mage of incredible power and awesome presence.",
+    "examine": "I can't see his face. Who is that? A mage of incredible power and awesome presence.",
     "name": "Dark Squall",
     "defence_level": "1",
     "safespot": null,
@@ -129744,7 +129744,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He's here to guard the wizard.",
+    "examine": "He's here to guard the wizard.",
     "name": "Darve",
     "defence_level": "1",
     "safespot": null,
@@ -129780,7 +129780,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* He's here to guard the wizard.",
+    "examine": "He's here to guard the wizard.",
     "name": "Darve",
     "defence_level": "1",
     "safespot": null,
@@ -130123,7 +130123,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A dragonkin, creators of dragonkind.",
+    "examine": "A dragonkin, creators of dragonkind.",
     "name": "Sithaph",
     "defence_level": "1",
     "safespot": null,
@@ -130135,7 +130135,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A dragonkin, creators of dragonkind.",
+    "examine": "A dragonkin, creators of dragonkind.",
     "name": "Sithaph",
     "defence_level": "1",
     "safespot": null,
@@ -130147,7 +130147,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A dragonkin, creators of dragonkind.",
+    "examine": "A dragonkin, creators of dragonkind.",
     "name": "Strisath",
     "defence_level": "1",
     "safespot": null,
@@ -130159,7 +130159,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A dragonkin, creators of dragonkind.",
+    "examine": "A dragonkin, creators of dragonkind.",
     "name": "Sakirth",
     "defence_level": "1",
     "safespot": null,
@@ -130430,7 +130430,7 @@
     "attack_level": "45"
   },
   {
-    "examine": "* The rebellious teenage son of the Queen of Snow. Interesting outfit!",
+    "examine": "The rebellious teenage son of the Queen of Snow. Interesting outfit!",
     "name": "Jack Frost",
     "defence_level": "1",
     "safespot": null,
@@ -130442,7 +130442,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* The rebellious teenage son of the Queen of Snow. Interesting outfit!",
+    "examine": "The rebellious teenage son of the Queen of Snow. Interesting outfit!",
     "name": "Jack Frost",
     "defence_level": "1",
     "safespot": null,
@@ -130454,7 +130454,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* The rebellious teenage son of the Queen of Snow. Interesting outfit!",
+    "examine": "The rebellious teenage son of the Queen of Snow. Interesting outfit!",
     "name": "Jack Frost",
     "defence_level": "1",
     "safespot": null,
@@ -130466,7 +130466,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* The rebellious teenage son of the Queen of Snow. Interesting outfit!",
+    "examine": "The rebellious teenage son of the Queen of Snow. Interesting outfit!",
     "name": "Jack Frost",
     "defence_level": "1",
     "safespot": null,
@@ -130608,7 +130608,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "* A jolly distributor of presents.",
+    "examine": "A jolly distributor of presents.",
     "name": "Santa Claus",
     "defence_level": "1",
     "safespot": null,
@@ -130705,7 +130705,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Goodness, gracious, great bird of fire!&lt;br />'''Wounded:''' The phoenix is mortally wounded.",
+    "examine": "Goodness, gracious, great bird of fire!",
     "name": "Phoenix",
     "defence_level": "60",
     "safespot": null,
@@ -130718,7 +130718,7 @@
     "attack_level": "60"
   },
   {
-    "examine": "Goodness, gracious, great bird of fire!&lt;br />'''Wounded:''' The phoenix is mortally wounded.",
+    "examine": "Goodness, gracious, great bird of fire!",
     "melee_animation": "11076",
     "range_animation": "11076",
     "attack_speed": "6",
