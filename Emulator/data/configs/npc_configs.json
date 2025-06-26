@@ -3829,7 +3829,7 @@
     "attack_speed": "4",
     "magic_level": "25",
     "end_gfx": "101",
-    "respawn_delay": "60",
+    "respawn_delay": "150",
     "defence_animation": "404",
     "weakness": "5",
     "magic_animation": "711",

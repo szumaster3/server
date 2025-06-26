@@ -23,25 +23,26 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Plugin
 import org.rs.consts.Sounds
 
+/**
+ * Represents the Telekinetic grab spell.
+ */
 class TelekineticGrabSpell :
     MagicSpell(
-        SpellBookManager.SpellBook.MODERN,
-        33,
-        43.0,
-        ANIMATION,
-        START_Graphics,
-        SOUND,
-        arrayOf(Item(Runes.AIR_RUNE.id), Item(Runes.LAW_RUNE.id, 1)),
+        book = SpellBookManager.SpellBook.MODERN,
+        level = 33,
+        experience = 43.0,
+        animation = ANIMATION,
+        graphics = START_Graphics,
+        audio = SOUND,
+        castRunes = arrayOf(Item(Runes.AIR_RUNE.id), Item(Runes.LAW_RUNE.id, 1))
     ) {
-    override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
+
+        override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
         SpellBookManager.SpellBook.MODERN.register(SPELL_ID, this)
         return this
     }
 
-    override fun cast(
-        entity: Entity,
-        target: Node,
-    ): Boolean {
+    override fun cast(entity: Entity, target: Node): Boolean {
         if (target !is GroundItem) return false
         if (!canCast(entity, target)) {
             return false
@@ -52,19 +53,13 @@ class TelekineticGrabSpell :
         return true
     }
 
-    override fun visualize(
-        entity: Entity,
-        target: Node,
-    ) {
+    override fun visualize(entity: Entity, target: Node) {
         super.visualize(entity, target)
         entity.faceLocation(target.location)
         getProjectile(entity, target as GroundItem).send()
     }
 
-    private fun getGrabPulse(
-        entity: Entity,
-        ground: GroundItem,
-    ): Pulse {
+    private fun getGrabPulse(entity: Entity, ground: GroundItem): Pulse {
         return object : Pulse(getDelay(ground.location.getDistance(entity.location)), entity) {
             override fun pulse(): Boolean {
                 val player = if (entity is Player) entity else null
@@ -77,25 +72,20 @@ class TelekineticGrabSpell :
                     openDialogue(player, 2692, findNPC(2692)!!, true)
                     return true
                 }
-                if (player == null) {
+                val teleZone = inZone(player, "Telekinetic Theatre") && g.id == 6888
+                if (!g.isActive) {
+                    sendMessage(player, "Too late!")
                     return true
                 }
-                val teleZone = inZone(player, "Telekinetic Theatre") && g.id == 6888
-                if (player != null) {
-                    if (g == null || !g.isActive) {
-                        sendMessage(player, "Too late!")
-                        return true
-                    }
-                    playAudio(player, Sounds.VULNERABILITY_IMPACT_3008)
-                    if (!teleZone) {
-                        player.inventory.add(Item(g.id, g.amount, g.charge))
-                    } else {
-                        val zone: TelekineticTheatrePlugin = TelekineticTheatrePlugin.getZone(player)
-                        zone.moveStatue()
-                        player.lock(delay)
-                    }
-                    sendGraphics(END_Graphics, ground.location)
+                playAudio(player, Sounds.VULNERABILITY_IMPACT_3008)
+                if (!teleZone) {
+                    player.inventory.add(Item(g.id, g.amount, g.charge))
+                } else {
+                    val zone: TelekineticTheatrePlugin = TelekineticTheatrePlugin.getZone(player)
+                    zone.moveStatue()
+                    player.lock(delay)
                 }
+                sendGraphics(END_Graphics, ground.location)
                 if (!teleZone) {
                     GroundItemManager.destroy(g)
                 }
@@ -104,16 +94,13 @@ class TelekineticGrabSpell :
         }
     }
 
-    private fun canCast(
-        entity: Entity,
-        item: GroundItem?,
-    ): Boolean {
+    private fun canCast(entity: Entity, item: GroundItem?): Boolean {
         if (entity.locks.isInteractionLocked() || entity.locks.isComponentLocked()) {
             return false
         }
 
         if (entity is Player) {
-            val player = entity
+            val player = entity.asPlayer()
             if (!player.inventory.hasSpaceFor(item as Item?)) {
                 sendMessage(player, "You don't have enough inventory space.")
                 return false
@@ -126,29 +113,16 @@ class TelekineticGrabSpell :
             sendDialogue(entity.asPlayer(), "You can't do that.")
             return false
         }
-        return super.meetsRequirements(entity, true, true)
+        return super.meetsRequirements(entity, message = true, remove = true)
     }
 
-    private fun getProjectile(
-        entity: Entity,
-        item: GroundItem,
-    ): Projectile =
-        Projectile.create(
-            entity.location,
-            item.location,
-            PROJECTILE_ID,
-            START_HEIGHT,
-            END_HEIGHT,
-            START_DELAY,
-            Projectile.getSpeed(entity, item.location),
-            ANGLE,
-            11,
-        )
+    private fun getProjectile(entity: Entity, item: GroundItem): Projectile =
+        Projectile.create(entity.location, item.location, PROJECTILE_ID, START_HEIGHT, END_HEIGHT, START_DELAY, Projectile.getSpeed(entity, item.location), ANGLE, 11)
 
     fun getDelay(distance: Double): Int = (2 + distance * 0.5).toInt()
 
     companion object {
-        private val ANIMATION = Animation(2310)
+        private val ANIMATION = Animation(727)
         private val START_Graphics = Graphics(org.rs.consts.Graphics.BOUNTY_LOCATE_CAST_142, 88, 15)
         private val END_Graphics = Graphics(org.rs.consts.Graphics.BOUNTY_LOCATE_IMPACT_144)
         private val SOUND = Audio(Sounds.TELEGRAB_HIT_3007, 10, 1)

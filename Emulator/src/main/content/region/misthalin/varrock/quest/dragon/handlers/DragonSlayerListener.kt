@@ -145,7 +145,7 @@ class DragonSlayerListener : InteractionListener {
                 Items.MAP_PART_1535 -> "This is a piece of map that you found in Melzar's Maze. You will need to join it to the other two map pieces before you can see the route to Crandor."
                 Items.MAP_PART_1536 -> "This is a piece of map that you got from Wormbrain, the goblin thief. You will need to join it to the other two map pieces before you can see the route to Crandor."
                 Items.MAP_PART_1537 -> "This is a piece of map that you found in a secret chest in the Dwarven Mine. You will need to join it to the other two map pieces before you can see the route to Crandor."
-                else -> " "
+                else -> return@on false
             }
 
             sendItemDialogue(player, node.id, dialogue)
