@@ -1,6 +1,7 @@
 package content.global.activity.champion.dialogue
 
 import content.data.GameAttributes
+import content.global.activity.champion.plugin.ChampionScrollsDropHandler
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
@@ -12,8 +13,6 @@ import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
 import org.rs.consts.Items
 import org.rs.consts.NPCs
-
-private val scrolls = intArrayOf(Items.CHAMPION_SCROLL_6798, Items.CHAMPION_SCROLL_6799, Items.CHAMPION_SCROLL_6800, Items.CHAMPION_SCROLL_6801, Items.CHAMPION_SCROLL_6802, Items.CHAMPION_SCROLL_6803, Items.CHAMPION_SCROLL_6804, Items.CHAMPION_SCROLL_6805, Items.CHAMPION_SCROLL_6806, Items.CHAMPION_SCROLL_6807)
 
 /**
  * Represents the dialogue plugin used for the Larxus NPC.
@@ -45,7 +44,7 @@ class LarxusDialogue(player: Player? = null, ) : Dialogue(player) {
                     npcl(FaceAnim.NEUTRAL, "Is there something I can help you with?").also { stage++ }
                 }
 
-                1 -> if (anyInInventory(player, *scrolls)) {
+                1 -> if (anyInInventory(player, *ChampionScrollsDropHandler.SCROLLS)) {
                     options("I was given a challenge, what now?", "What is this place?", "Nothing thanks.").also { stage = 2 }
                 } else {
                     options("What is this place?", "Nothing thanks.").also { stage = 6 }
