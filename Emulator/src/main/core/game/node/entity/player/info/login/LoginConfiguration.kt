@@ -205,7 +205,7 @@ object LoginConfiguration {
         }
     }
 
-    fun getMessageChild(interfaceId: Int): Int =
+    private fun getMessageChild(interfaceId: Int): Int =
         when (interfaceId) {
             Components.BANNER_GROUP_622 -> 8
             Components.BANNER_ANTI_VIRUS_16 -> 6
@@ -232,8 +232,7 @@ object LoginConfiguration {
         }
 
     /**
-     * Sends a welcome message and handles player-specific rules or messages.
-     * @param player The player to welcome.
+     * Sends a welcome message.
      */
     private fun autoSelectMessageModel(): Int =
         if (IntStream.of(lobbyComponents.size).anyMatch { it == GameWorld.settings?.message_model }) {
@@ -243,9 +242,7 @@ object LoginConfiguration {
         }
 
     /**
-     * Retrieves the last login message for a player.
-     * @param player The player whose last login info is retrieved.
-     * @return A formatted string with the last login time and IP.
+     * Gets the last login message for a player.
      */
     @JvmStatic
     fun getLastLogin(player: Player): String {
@@ -314,18 +311,12 @@ object LoginConfiguration {
     private fun setupSpellBook(player: Player) {
         val currentSpellBook = SpellBookManager.SpellBook.forInterface(player.spellBookManager.spellBook)
         if (currentSpellBook == SpellBookManager.SpellBook.ANCIENT &&
-            !isQuestComplete(
-                player,
-                Quests.DESERT_TREASURE,
-            )
+            !isQuestComplete(player, Quests.DESERT_TREASURE)
         ) {
             player.sendMessage(colorize("%RAs you can no longer use Ancient Magic, you have been set back to Modern."))
             player.spellBookManager.spellBook = 0
         } else if (currentSpellBook == SpellBookManager.SpellBook.LUNAR &&
-            !hasRequirement(
-                player,
-                Quests.LUNAR_DIPLOMACY,
-            )
+            !hasRequirement(player, Quests.LUNAR_DIPLOMACY)
         ) {
             player.sendMessage(colorize("%RAs you can no longer use Lunar Magic, you have been set back to Modern."))
             player.spellBookManager.spellBook = 0

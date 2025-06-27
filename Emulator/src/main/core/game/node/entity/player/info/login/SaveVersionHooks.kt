@@ -14,10 +14,7 @@ import org.rs.consts.Quests
 class SaveVersionHooks : LoginListener {
     override fun login(player: Player) {
         if (player.version < ServerConstants.CURRENT_SAVEFILE_VERSION) {
-            sendMessage(
-                player,
-                "<col=CC6600>Migrating save file version [${player.version}] to current save file version [${ServerConstants.CURRENT_SAVEFILE_VERSION}].</col>",
-            )
+            sendMessage(player, "<col=CC6600>Migrating save file version [${player.version}] to current save file version [${ServerConstants.CURRENT_SAVEFILE_VERSION}].</col>")
 
             if (player.version < 1) {
                 var hasHoods = 0
@@ -35,10 +32,7 @@ class SaveVersionHooks : LoginListener {
                 }
                 val need = hasCapes - hasHoods
                 if (need > 0) {
-                    sendMessage(
-                        player,
-                        "<col=CC6600>You are being given $need crafting hood(s), because we think you bought $need crafting cape(s) when the hoods were still unobtainable.</col>",
-                    )
+                    sendMessage(player, "<col=CC6600>You are being given $need crafting hood(s), because we think you bought $need crafting cape(s) when the hoods were still unobtainable.</col>")
                     addItemOrBank(player, Items.CRAFTING_HOOD_9782, need)
                 }
 

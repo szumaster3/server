@@ -45,7 +45,6 @@ class SystemConfig {
     fun validLogin(player: Player?): Boolean = true
 
     val isDoubleExp: Boolean
-
         get() {
             val date = getConfig<Date?>("dxp", null) ?: return false
             return date.after(Date())
@@ -61,12 +60,7 @@ class SystemConfig {
             return split
         }
         val split: MutableList<String> = ArrayList(20)
-        val tokens =
-            data
-                .trim { it <= ' ' }
-                .split(regex.toRegex())
-                .dropLastWhile { it.isEmpty() }
-                .toTypedArray()
+        val tokens = data.trim { it <= ' ' }.split(regex.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         for (s in tokens) {
             split.add(s)
         }
@@ -75,12 +69,11 @@ class SystemConfig {
 
     fun isBetaUser(name: String): Boolean = betaUsers.contains(name)
 
-    fun <T> getConfig(key: String): T? =
-        if (!configs.containsKey(key)) {
-            null
-        } else {
-            configs[key] as T?
-        }
+    fun <T> getConfig(key: String): T? = if (!configs.containsKey(key)) {
+        null
+    } else {
+        configs[key] as T?
+    }
 
     fun <T> getConfig(
         string: String,

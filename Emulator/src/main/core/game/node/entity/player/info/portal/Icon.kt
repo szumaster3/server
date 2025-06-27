@@ -1,9 +1,6 @@
 package core.game.node.entity.player.info.portal
 
-enum class Icon(
-    val id: Int,
-    val index: Int,
-) {
+enum class Icon(val id: Int, val index: Int) {
     NOTHING(0, 0),
     GREEN(1, 5),
     RED(2, 6),

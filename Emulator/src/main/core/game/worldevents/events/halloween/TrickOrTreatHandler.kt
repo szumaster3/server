@@ -54,15 +54,13 @@ class TrickOrTreatHandler : InteractionListener {
                         buttonID: Int,
                     ) {
                         when (stage) {
-                            0 ->
-                                playerl(FaceAnim.FRIENDLY, "Trick or treat!").also {
-                                    if (RandomFunction.roll(20)) {
-                                        stage =
-                                            10
-                                    } else {
-                                        stage++
-                                    }
+                            0 -> playerl(FaceAnim.FRIENDLY, "Trick or treat!").also {
+                                if (RandomFunction.roll(20)) {
+                                    stage = 10
+                                } else {
+                                    stage++
                                 }
+                            }
 
                             1 -> npcl(FaceAnim.FRIENDLY, "Very well, then, here you are my friend.").also { stage++ }
 
@@ -77,6 +75,7 @@ class TrickOrTreatHandler : InteractionListener {
                                         )
                                         addItemOrDrop(player, Items.POPCORN_BALL_14082, 1)
                                     }
+
                                     1 -> {
                                         sendItemDialogue(
                                             player,
@@ -85,6 +84,7 @@ class TrickOrTreatHandler : InteractionListener {
                                         )
                                         addItemOrDrop(player, Items.CHOCOLATE_DROP_14083, 1)
                                     }
+
                                     2 -> {
                                         sendItemDialogue(
                                             player,
@@ -99,41 +99,39 @@ class TrickOrTreatHandler : InteractionListener {
                                 stage = END_DIALOGUE
                             }
 
-                            10 ->
-                                npcl(FaceAnim.EVIL_LAUGH, "I CHOOSE TRICK!").also {
-                                    player.lock()
-                                    Pulser.submit(
-                                        object : Pulse() {
-                                            var counter = 0
+                            10 -> npcl(FaceAnim.EVIL_LAUGH, "I CHOOSE TRICK!").also {
+                                player.lock()
+                                Pulser.submit(
+                                    object : Pulse() {
+                                        var counter = 0
 
-                                            override fun pulse(): Boolean {
-                                                when (counter++) {
-                                                    0 ->
-                                                        visualize(
-                                                            npc!!,
-                                                            Animations.CAST_SPELL_1979,
-                                                            Graphics.DEATH_BLACK_SKULL_SWIRL_1898,
-                                                        ).also {
-                                                            faceLocation(npc!!, player.location)
-                                                        }
-
-                                                    2 -> closeDialogue(player)
-                                                    5 -> openOverlay(player, Components.FADE_TO_BLACK_120)
-                                                    8 -> teleport(player, Location.create(3106, 3382, 0))
-                                                    12 -> {
-                                                        closeOverlay(player)
-                                                        openOverlay(player, Components.FADE_FROM_BLACK_170)
-                                                        registerNpc(player, npc!!)
-                                                    }
-
-                                                    15 -> closeOverlay(player).also { unlock(player) }
-                                                    16 -> return true
+                                        override fun pulse(): Boolean {
+                                            when (counter++) {
+                                                0 -> visualize(
+                                                    npc!!,
+                                                    Animations.CAST_SPELL_1979,
+                                                    Graphics.DEATH_BLACK_SKULL_SWIRL_1898,
+                                                ).also {
+                                                    faceLocation(npc!!, player.location)
                                                 }
-                                                return false
+
+                                                2 -> closeDialogue(player)
+                                                5 -> openOverlay(player, Components.FADE_TO_BLACK_120)
+                                                8 -> teleport(player, Location.create(3106, 3382, 0))
+                                                12 -> {
+                                                    closeOverlay(player)
+                                                    openOverlay(player, Components.FADE_FROM_BLACK_170)
+                                                    registerNpc(player, npc!!)
+                                                }
+
+                                                15 -> closeOverlay(player).also { unlock(player) }
+                                                16 -> return true
                                             }
-                                        },
-                                    )
-                                }
+                                            return false
+                                        }
+                                    },
+                                )
+                            }
                         }
                     }
                 },
@@ -147,9 +145,11 @@ class TrickOrTreatHandler : InteractionListener {
         ServerStore.getArchive("daily-tot-total")[player.username.lowercase()] = getDailyTrickOrTreats(player) + 1
     }
 
-    fun getDailyTrickOrTreats(player: Player): Int = ServerStore.getArchive("daily-tot-total").getInt(player.username.lowercase())
+    fun getDailyTrickOrTreats(player: Player): Int =
+        ServerStore.getArchive("daily-tot-total").getInt(player.username.lowercase())
 
-    fun getTrickOrTreatedNPCs(player: Player): String = ServerStore.getArchive("daily-tot-npcs").getString(player.username.lowercase())
+    fun getTrickOrTreatedNPCs(player: Player): String =
+        ServerStore.getArchive("daily-tot-npcs").getString(player.username.lowercase())
 
     fun registerNpc(
         player: Player,

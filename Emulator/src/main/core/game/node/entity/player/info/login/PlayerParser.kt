@@ -7,13 +7,12 @@ import java.io.FileOutputStream
 
 object PlayerParser {
     @JvmStatic
-    fun parse(player: Player): PlayerSaveParser? =
-        try {
-            PlayerSaveParser(player).apply { parse() }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            null
-        }
+    fun parse(player: Player): PlayerSaveParser? = try {
+        PlayerSaveParser(player).apply { parse() }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 
     @JvmStatic
     fun save(player: Player) {

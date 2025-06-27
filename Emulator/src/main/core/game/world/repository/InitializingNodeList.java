@@ -16,7 +16,7 @@ public final class InitializingNodeList<T extends Node> extends ArrayList<T> {
     /**
      * The serial UID.
      */
-    private static final long serialVersionUID = 7727358901001709156L;
+    private static final long serialVersionUID = 1219549609130206429L;
 
     /**
      * The queue.

@@ -10,11 +10,8 @@ import core.tools.colorize
 import org.rs.consts.Items
 
 class CandyRewardPlugin : ExperiencePlugin() {
-    override fun run(
-        player: Player,
-        skill: Int,
-        amount: Double,
-    ) {
+
+    override fun run(player: Player, skill: Int, amount: Double) {
         val awardCandy = RandomFunction.random(1, 200) == 55
         val candy = Item(Items.WRAPPED_CANDY_14084)
 
@@ -26,8 +23,5 @@ class CandyRewardPlugin : ExperiencePlugin() {
         }
     }
 
-    override fun fireEvent(
-        identifier: String?,
-        vararg args: Any?,
-    ): Any = Unit
+    override fun fireEvent(identifier: String?, vararg args: Any?): Any = Unit
 }

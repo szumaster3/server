@@ -24,9 +24,8 @@ import java.lang.Math.ceil
 import java.util.*
 import javax.script.ScriptEngineManager
 
-class PlayerSaver(
-    val player: Player,
-) {
+class PlayerSaver(val player: Player) {
+
     companion object {
         val contentHooks = ArrayList<PersistPlayer>()
     }
@@ -59,45 +58,40 @@ class PlayerSaver(
         return saveFile
     }
 
-    fun save() =
-        runBlocking {
-            if (!player.details.saveParsed) return@runBlocking
-            val json: String
-            if (ServerConstants.JAVA_VERSION < 11) {
-                val manager = ScriptEngineManager()
-                val scriptEngine = manager.getEngineByName("JavaScript")
-                if (scriptEngine == null) {
-                    log(
-                        this::class.java,
-                        Log.ERR,
-                        "Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!",
-                    )
-                    return@runBlocking
-                }
-                scriptEngine.put("jsonString", populate().toJSONString())
-                scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, 2)")
-                json = scriptEngine["result"] as String
-            } else {
-                json = GsonBuilder().setPrettyPrinting().create().toJson(populate())
+    fun save() = runBlocking {
+        if (!player.details.saveParsed) return@runBlocking
+        val json: String
+        if (ServerConstants.JAVA_VERSION < 11) {
+            val manager = ScriptEngineManager()
+            val scriptEngine = manager.getEngineByName("JavaScript")
+            if (scriptEngine == null) {
+                log(this::class.java, Log.ERR, "Cannot save: Failed to load ScriptEngineManager, this is a known issue on non Java-11 versions. Set your Java version to 11 to avoid further bugs!")
+                return@runBlocking
             }
-
-            try {
-                if (!File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").exists()) {
-                    File("${ServerConstants.PLAYER_SAVE_PATH}").mkdirs()
-                    withContext(Dispatchers.IO) {
-                        File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").createNewFile()
-                    }
-                }
-                withContext(Dispatchers.IO) {
-                    FileWriter("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").use { file ->
-                        file.write(json)
-                        file.flush()
-                    }
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
+            scriptEngine.put("jsonString", populate().toJSONString())
+            scriptEngine.eval("result = JSON.stringify(JSON.parse(jsonString), null, 2)")
+            json = scriptEngine["result"] as String
+        } else {
+            json = GsonBuilder().setPrettyPrinting().create().toJson(populate())
         }
+
+        try {
+            if (!File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").exists()) {
+                File("${ServerConstants.PLAYER_SAVE_PATH}").mkdirs()
+                withContext(Dispatchers.IO) {
+                    File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").createNewFile()
+                }
+            }
+            withContext(Dispatchers.IO) {
+                FileWriter("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json").use { file ->
+                    file.write(json)
+                    file.flush()
+                }
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 
     fun savePouches(root: JSONObject) {
         player.pouchManager.save(root)
@@ -123,24 +117,22 @@ class PlayerSaver(
                 value ?: continue
                 val isExpirable = player.gameAttributes.keyExpirations.containsKey(key)
                 val attr = JSONObject()
-                val type =
-                    when (value) {
-                        is Int -> "int"
-                        is Boolean -> "bool"
-                        is Long -> "long"
-                        is Short -> "short"
-                        is String -> "str"
-                        is Byte -> "byte"
-                        is Location -> "location"
-                        else ->
-                            "null".also {
-                                log(
-                                    this::class.java,
-                                    Log.WARN,
-                                    "Invalid attribute type for key: $key in PlayerSaver.kt Line 115",
-                                )
-                            }
+                val type = when (value) {
+                    is Int -> "int"
+                    is Boolean -> "bool"
+                    is Long -> "long"
+                    is Short -> "short"
+                    is String -> "str"
+                    is Byte -> "byte"
+                    is Location -> "location"
+                    else -> "null".also {
+                        log(
+                            this::class.java,
+                            Log.WARN,
+                            "Invalid attribute type for key: $key in PlayerSaver.kt Line 115",
+                        )
                     }
+                }
                 attr["type"] = type
                 attr["key"] = key
                 if (value is Byte) {
@@ -177,9 +169,7 @@ class PlayerSaver(
 
     fun saveIronManData(root: JSONObject) {
         if (player.ironmanManager.mode != IronmanMode.NONE) {
-            root["ironManMode"] =
-                player.ironmanManager.mode.ordinal
-                    .toString()
+            root["ironManMode"] = player.ironmanManager.mode.ordinal.toString()
         }
     }
 
@@ -220,18 +210,12 @@ class PlayerSaver(
         houseData["style"] = manager.style.ordinal.toString()
         if (manager.hasServant()) {
             val servant = JSONObject()
-            servant["type"] =
-                manager.servant.type.ordinal
-                    .toString()
+            servant["type"] = manager.servant.type.ordinal.toString()
             servant["uses"] = manager.servant.uses.toString()
             if (manager.servant.item != null) {
                 val item = JSONObject()
-                item["id"] =
-                    manager.servant.item.id
-                        .toString()
-                item["amount"] =
-                    manager.servant.item.amount
-                        .toString()
+                item["id"] = manager.servant.item.id.toString()
+                item["amount"] = manager.servant.item.amount.toString()
                 servant["item"] = item
             }
             servant["greet"] = manager.servant.isGreet
@@ -282,13 +266,9 @@ class PlayerSaver(
         }
         bankPinManager["longRecovery"] = player.bankPinManager.isLongRecovery
         if (player.bankPinManager.status.ordinal != 0) {
-            bankPinManager["status"] =
-                player.bankPinManager.status.ordinal
-                    .toString()
+            bankPinManager["status"] = player.bankPinManager.status.ordinal.toString()
         }
-        if (player.bankPinManager.pendingDelay != -1L &&
-            player.bankPinManager.pendingDelay > System.currentTimeMillis()
-        ) {
+        if (player.bankPinManager.pendingDelay != -1L && player.bankPinManager.pendingDelay > System.currentTimeMillis()) {
             bankPinManager["pendingDelay"] = player.bankPinManager.pendingDelay.toString()
         }
         if (player.bankPinManager.tryDelay > System.currentTimeMillis()) {
@@ -325,18 +305,10 @@ class PlayerSaver(
             familiarManager["currentPet"] = (player.familiarManager.familiar as Pet).getItemIdHash().toString()
         } else if (player.familiarManager.hasFamiliar()) {
             val familiar = JSONObject()
-            familiar["originalId"] =
-                player.familiarManager.familiar.originalId
-                    .toString()
-            familiar["ticks"] =
-                player.familiarManager.familiar.ticks
-                    .toString()
-            familiar["specialPoints"] =
-                player.familiarManager.familiar.specialPoints
-                    .toString()
-            if (player.familiarManager.familiar.isBurdenBeast &&
-                !(player.familiarManager.familiar as BurdenBeast).container.isEmpty
-            ) {
+            familiar["originalId"] = player.familiarManager.familiar.originalId.toString()
+            familiar["ticks"] = player.familiarManager.familiar.ticks.toString()
+            familiar["specialPoints"] = player.familiarManager.familiar.specialPoints.toString()
+            if (player.familiarManager.familiar.isBurdenBeast && !(player.familiarManager.familiar as BurdenBeast).container.isEmpty) {
                 val familiarInventory = saveContainer((player.familiarManager.familiar as BurdenBeast).container)
                 familiar["inventory"] = familiarInventory
             }
@@ -357,12 +329,8 @@ class PlayerSaver(
     fun saveAutocast(root: JSONObject) {
         player.properties.autocastSpell ?: return
         val spell = JSONObject()
-        spell["book"] =
-            player.properties.autocastSpell.book.ordinal
-                .toString()
-        spell["spellId"] =
-            player.properties.autocastSpell.spellId
-                .toString()
+        spell["book"] = player.properties.autocastSpell!!.book.ordinal.toString()
+        spell["spellId"] = player.properties.autocastSpell!!.spellId.toString()
         root["autocastSpell"] = spell
     }
 
@@ -374,20 +342,11 @@ class PlayerSaver(
 
     fun saveGlobalData(root: JSONObject) {
         val globalData = JSONObject()
-        globalData["tutorialStage"] =
-            player.savedData.globalData
-                .getTutorialStage()
-                .toString()
-        globalData["homeTeleportDelay"] =
-            player.savedData.globalData
-                .getHomeTeleportDelay()
-                .toString()
+        globalData["tutorialStage"] = player.savedData.globalData.getTutorialStage().toString()
+        globalData["homeTeleportDelay"] = player.savedData.globalData.getHomeTeleportDelay().toString()
         globalData["lumbridgeRope"] = player.savedData.globalData.hasTiedLumbridgeRope()
         globalData["apprentice"] = player.savedData.globalData.hasSpokenToApprentice()
-        globalData["assistTime"] =
-            player.savedData.globalData
-                .getAssistTime()
-                .toString()
+        globalData["assistTime"] = player.savedData.globalData.getAssistTime().toString()
         val assistExperience = JSONArray()
         player.savedData.globalData.getAssistExperience().map {
             assistExperience.add(it.toString())
@@ -398,69 +357,30 @@ class PlayerSaver(
             strongholdRewards.add(it)
         }
         globalData["strongHoldRewards"] = strongholdRewards
-        globalData["chatPing"] =
-            player.savedData.globalData
-                .getChatPing()
-                .toString()
-        globalData["tutorClaim"] =
-            player.savedData.globalData
-                .getTutorClaim()
-                .toString()
+        globalData["chatPing"] = player.savedData.globalData.getChatPing().toString()
+        globalData["tutorClaim"] = player.savedData.globalData.getTutorClaim().toString()
         globalData["luthasTask"] = player.savedData.globalData.isLuthasTask()
-        globalData["karamjaBananas"] =
-            player.savedData.globalData
-                .getKaramjaBananas()
-                .toString()
-        globalData["silkSteal"] =
-            player.savedData.globalData
-                .getSilkSteal()
-                .toString()
-        globalData["teaSteal"] =
-            player.savedData.globalData
-                .getTeaSteal()
-                .toString()
-        globalData["zafAmount"] =
-            player.savedData.globalData
-                .getZaffAmount()
-                .toString()
-        globalData["zafTime"] =
-            player.savedData.globalData
-                .getZaffTime()
-                .toString()
+        globalData["karamjaBananas"] = player.savedData.globalData.getKaramjaBananas().toString()
+        globalData["silkSteal"] = player.savedData.globalData.getSilkSteal().toString()
+        globalData["teaSteal"] = player.savedData.globalData.getTeaSteal().toString()
+        globalData["zafAmount"] = player.savedData.globalData.getZaffAmount().toString()
+        globalData["zafTime"] = player.savedData.globalData.getZaffTime().toString()
         globalData["fritzGlass"] = player.savedData.globalData.isFritzGlass()
         globalData["wydinEmployee"] = player.savedData.globalData.isWydinEmployee()
         globalData["draynorRecording"] = player.savedData.globalData.isDraynorRecording()
         globalData["geTutorial"] = player.savedData.globalData.isGeTutorial()
-        globalData["essenceTeleporter"] =
-            player.savedData.globalData
-                .getEssenceTeleporter()
-                .toString()
-        globalData["recoilDamage"] =
-            player.savedData.globalData
-                .getRecoilDamage()
-                .toString()
-        globalData["doubleExpDelay"] =
-            player.savedData.globalData
-                .getDoubleExpDelay()
-                .toString()
+        globalData["essenceTeleporter"] = player.savedData.globalData.getEssenceTeleporter().toString()
+        globalData["recoilDamage"] = player.savedData.globalData.getRecoilDamage().toString()
+        globalData["doubleExpDelay"] = player.savedData.globalData.getDoubleExpDelay().toString()
         globalData["joinedMonastery"] = player.savedData.globalData.isJoinedMonastery()
         val readPlaques = JSONArray()
         player.savedData.globalData.readPlaques.map {
             readPlaques.add(it)
         }
         globalData["readPlaques"] = readPlaques
-        globalData["forgingUses"] =
-            player.savedData.globalData
-                .getForgingUses()
-                .toString()
-        globalData["ectoCharges"] =
-            player.savedData.globalData
-                .getEctoCharges()
-                .toString()
-        globalData["dropDelay"] =
-            player.savedData.globalData
-                .getDropDelay()
-                .toString()
+        globalData["forgingUses"] = player.savedData.globalData.getForgingUses().toString()
+        globalData["ectoCharges"] = player.savedData.globalData.getEctoCharges().toString()
+        globalData["dropDelay"] = player.savedData.globalData.getDropDelay().toString()
         val abyssData = JSONArray()
         player.savedData.globalData.getAbyssData().map {
             abyssData.add(it)
@@ -472,14 +392,8 @@ class PlayerSaver(
         }
         globalData["rcDecays"] = rcDecays
         globalData["disableDeathScreen"] = player.savedData.globalData.isDeathScreenDisabled()
-        globalData["playerTestStage"] =
-            player.savedData.globalData
-                .getTestStage()
-                .toString()
-        globalData["charmingDelay"] =
-            player.savedData.globalData
-                .getCharmingDelay()
-                .toString()
+        globalData["playerTestStage"] = player.savedData.globalData.getTestStage().toString()
+        globalData["charmingDelay"] = player.savedData.globalData.getCharmingDelay().toString()
         val travelLogs = JSONArray()
         player.savedData.globalData.getTravelLogs().map {
             travelLogs.add(it)
@@ -496,74 +410,27 @@ class PlayerSaver(
             godPages.add(it)
         }
         globalData["godPages"] = godPages
-        globalData["overChargeDelay"] =
-            player.savedData.globalData
-                .getOverChargeDelay()
-                .toString()
+        globalData["overChargeDelay"] = player.savedData.globalData.getOverChargeDelay().toString()
         val bossCounters = JSONArray()
         player.savedData.globalData.getBossCounters().map {
             bossCounters.add(it.toString())
         }
         globalData["bossCounters"] = bossCounters
-        globalData["barrowsLoots"] =
-            player.savedData.globalData
-                .getBarrowsLoots()
-                .toString()
-        globalData["lootSharePoints"] =
-            player.savedData.globalData
-                .getLootSharePoints()
-                .toString()
-        globalData["lootShareDelay"] =
-            player.savedData.globalData
-                .getLootShareDelay()
-                .toString()
-        globalData["doubleExp"] =
-            player.savedData.globalData
-                .getDoubleExp()
-                .toString()
-        globalData["globalTeleporterDelay"] =
-            player.savedData.globalData
-                .getGlobalTeleporterDelay()
-                .toString()
-        globalData["starSpriteDelay"] =
-            player.savedData.globalData.starSpriteDelay
-                .toString()
-        globalData["runReplenishDelay"] =
-            player.savedData.globalData
-                .getRunReplenishDelay()
-                .toString()
-        globalData["runReplenishCharges"] =
-            player.savedData.globalData
-                .getRunReplenishCharges()
-                .toString()
-        globalData["lowAlchemyCharges"] =
-            player.savedData.globalData
-                .getLowAlchemyCharges()
-                .toString()
-        globalData["lowAlchemyDelay"] =
-            player.savedData.globalData
-                .getLowAlchemyDelay()
-                .toString()
-        globalData["magicSkillCapeDelay"] =
-            player.savedData.globalData
-                .getMagicSkillCapeDelay()
-                .toString()
-        globalData["hunterCapeDelay"] =
-            player.savedData.globalData
-                .getHunterCapeDelay()
-                .toString()
-        globalData["hunterCapeCharges"] =
-            player.savedData.globalData
-                .getHunterCapeCharges()
-                .toString()
-        globalData["taskAmount"] =
-            player.savedData.globalData
-                .getTaskAmount()
-                .toString()
-        globalData["taskPoints"] =
-            player.savedData.globalData
-                .getTaskPoints()
-                .toString()
+        globalData["barrowsLoots"] = player.savedData.globalData.getBarrowsLoots().toString()
+        globalData["lootSharePoints"] = player.savedData.globalData.getLootSharePoints().toString()
+        globalData["lootShareDelay"] = player.savedData.globalData.getLootShareDelay().toString()
+        globalData["doubleExp"] = player.savedData.globalData.getDoubleExp().toString()
+        globalData["globalTeleporterDelay"] = player.savedData.globalData.getGlobalTeleporterDelay().toString()
+        globalData["starSpriteDelay"] = player.savedData.globalData.starSpriteDelay.toString()
+        globalData["runReplenishDelay"] = player.savedData.globalData.getRunReplenishDelay().toString()
+        globalData["runReplenishCharges"] = player.savedData.globalData.getRunReplenishCharges().toString()
+        globalData["lowAlchemyCharges"] = player.savedData.globalData.getLowAlchemyCharges().toString()
+        globalData["lowAlchemyDelay"] = player.savedData.globalData.getLowAlchemyDelay().toString()
+        globalData["magicSkillCapeDelay"] = player.savedData.globalData.getMagicSkillCapeDelay().toString()
+        globalData["hunterCapeDelay"] = player.savedData.globalData.getHunterCapeDelay().toString()
+        globalData["hunterCapeCharges"] = player.savedData.globalData.getHunterCapeCharges().toString()
+        globalData["taskAmount"] = player.savedData.globalData.getTaskAmount().toString()
+        globalData["taskPoints"] = player.savedData.globalData.getTaskPoints().toString()
         globalData["macroDisabled"] = player.savedData.globalData.getMacroDisabled()
         root["globalData"] = globalData
     }
@@ -580,9 +447,7 @@ class PlayerSaver(
             dslayer.add(it)
         }
         questData["dragonSlayer"] = dslayer
-        questData["dragonSlayerPlanks"] =
-            player.savedData.questData.dragonSlayerPlanks
-                .toString()
+        questData["dragonSlayerPlanks"] = player.savedData.questData.dragonSlayerPlanks.toString()
         val demonSlayer = JSONArray()
         player.savedData.questData.demonSlayer.map {
             demonSlayer.add(it)
@@ -603,65 +468,39 @@ class PlayerSaver(
             desertTreasureNode.add(item)
         }
         questData["desertTreasureNode"] = desertTreasureNode
-        questData["witchsExperimentStage"] =
-            player.savedData.questData.witchsExperimentStage
-                .toString()
+        questData["witchsExperimentStage"] = player.savedData.questData.witchsExperimentStage.toString()
         questData["witchsExperimentKilled"] = player.savedData.questData.isWitchsExperimentKilled
         root["questData"] = questData
     }
 
     fun saveActivityData(root: JSONObject) {
         val activityData = JSONObject()
-        activityData["pestPoints"] =
-            player.savedData.activityData.pestPoints
-                .toString()
-        activityData["warriorGuildTokens"] =
-            player.savedData.activityData.warriorGuildTokens
-                .toString()
-        activityData["bountyHunterRate"] =
-            player.savedData.activityData.bountyHunterRate
-                .toString()
-        activityData["bountyRogueRate"] =
-            player.savedData.activityData.bountyRogueRate
-                .toString()
-        activityData["barrowKills"] =
-            player.savedData.activityData.barrowKills
-                .toString()
+        activityData["pestPoints"] = player.savedData.activityData.pestPoints.toString()
+        activityData["warriorGuildTokens"] = player.savedData.activityData.warriorGuildTokens.toString()
+        activityData["bountyHunterRate"] = player.savedData.activityData.bountyHunterRate.toString()
+        activityData["bountyRogueRate"] = player.savedData.activityData.bountyRogueRate.toString()
+        activityData["barrowKills"] = player.savedData.activityData.barrowKills.toString()
         val barrowBrothers = JSONArray()
         player.savedData.activityData.barrowBrothers.map {
             barrowBrothers.add(it)
         }
         activityData["barrowBrothers"] = barrowBrothers
-        activityData["barrowTunnelIndex"] =
-            player.savedData.activityData.barrowTunnelIndex
-                .toString()
-        activityData["kolodionStage"] =
-            player.savedData.activityData.kolodionStage
-                .toString()
+        activityData["barrowTunnelIndex"] = player.savedData.activityData.barrowTunnelIndex.toString()
+        activityData["kolodionStage"] = player.savedData.activityData.kolodionStage.toString()
         val godCasts = JSONArray()
         player.savedData.activityData.godCasts.map {
             godCasts.add(it.toString())
         }
         activityData["godCasts"] = godCasts
-        activityData["kolodionBoss"] =
-            player.savedData.activityData.kolodionBoss
-                .toString()
+        activityData["kolodionBoss"] = player.savedData.activityData.kolodionBoss.toString()
         activityData["elnockSupplies"] = player.savedData.activityData.isElnockSupplies
-        activityData["lastBorkBattle"] =
-            player.savedData.activityData.lastBorkBattle
-                .toString()
+        activityData["lastBorkBattle"] = player.savedData.activityData.lastBorkBattle.toString()
         activityData["startedMta"] = player.savedData.activityData.isStartedMta
         activityData["lostCannon"] = player.savedData.activityData.isLostCannon
         activityData["bonesToPeaches"] = player.savedData.activityData.isBonesToPeaches
-        activityData["solvedMazes"] =
-            player.savedData.activityData.solvedMazes
-                .toString()
-        activityData["fogRating"] =
-            player.savedData.activityData.fogRating
-                .toString()
-        activityData["borkKills"] =
-            player.savedData.activityData.borkKills
-                .toString()
+        activityData["solvedMazes"] = player.savedData.activityData.solvedMazes.toString()
+        activityData["fogRating"] = player.savedData.activityData.fogRating.toString()
+        activityData["borkKills"] = player.savedData.activityData.borkKills.toString()
         activityData["hardcoreDeath"] = player.savedData.activityData.hardcoreDeath
         activityData["topGrabbed"] = player.savedData.activityData.isTopGrabbed
         root["activityData"] = activityData
@@ -673,10 +512,7 @@ class PlayerSaver(
 
     fun saveAppearance(root: JSONObject) {
         val appearance = JSONObject()
-        appearance["gender"] =
-            player.appearance.gender
-                .toByte()
-                .toString()
+        appearance["gender"] = player.appearance.gender.toByte().toString()
         val appearanceCache = JSONArray()
         player.appearance.appearanceCache.map {
             val bodyPart = JSONObject()

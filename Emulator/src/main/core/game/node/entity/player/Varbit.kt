@@ -6,7 +6,4 @@ package core.game.node.entity.player
  * @property value The current value of the varbit.
  * @property offset The offset or position of the varbit.
  */
-class Varbit(
-    var value: Int,
-    val offset: Int,
-)
+class Varbit(var value: Int, val offset: Int)

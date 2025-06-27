@@ -1,14 +1,10 @@
 package core.game.node.entity.player.info;
 
-import content.data.GameAttributes;
 import core.auth.UserAccountInfo;
-import core.game.node.entity.player.Player;
 import core.game.system.communication.CommunicationInfo;
 import core.game.world.GameWorld;
 import core.net.IoSession;
 import org.jetbrains.annotations.NotNull;
-
-import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 /**

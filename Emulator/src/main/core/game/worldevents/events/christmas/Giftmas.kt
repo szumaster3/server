@@ -20,11 +20,7 @@ import core.tools.colorize
 import org.json.simple.JSONObject
 import org.rs.consts.Items
 
-class Giftmas :
-    Commands,
-    StartupListener,
-    LoginListener,
-    InteractionListener {
+class Giftmas : Commands, StartupListener, LoginListener, InteractionListener {
     override fun startup() {
         if (checkActive()) {
             init()
@@ -55,8 +51,7 @@ class Giftmas :
         } catch (ignored: Exception) {
         }
 
-        for (player in Repository.players)
-            player.hook(Event.XpGained, XpGainHook)
+        for (player in Repository.players) player.hook(Event.XpGained, XpGainHook)
     }
 
     fun cleanup() {
@@ -145,44 +140,39 @@ class Giftmas :
             colorize("%RYou have reached your daily limit of presents from combat!")
         private val MESSAGE_PRESENT_GRANTED = colorize("%GYou find a present while training!")
 
-        val MBOX_LOOT =
-            WeightBasedTable
-                .create(
-                    WeightedItem(Items.TOY_HORSEY_2520, 1, 1, 0.025),
-                    WeightedItem(Items.TOY_HORSEY_2522, 1, 1, 0.025),
-                    WeightedItem(Items.TOY_HORSEY_2524, 1, 1, 0.025),
-                    WeightedItem(Items.TOY_HORSEY_2526, 1, 1, 0.025),
-                    WeightedItem(Items.TOY_KITE_12844, 1, 1, 0.025),
-                    WeightedItem(Items.COAL_453, 1, 1, 0.025),
-                    WeightedItem(Items.MOLTEN_GLASS_1776, 25, 50, 0.25),
-                    WeightedItem(Items.FLAX_1780, 15, 70, 0.25),
-                    WeightedItem(Items.BOW_STRING_1778, 10, 50, 0.15),
-                    WeightedItem(Items.UNCUT_SAPPHIRE_1624, 1, 5, 0.15),
-                    WeightedItem(Items.UNCUT_EMERALD_1622, 1, 5, 0.15),
-                    WeightedItem(Items.UNCUT_RUBY_1620, 1, 5, 0.15),
-                    WeightedItem(Items.UNCUT_DIAMOND_1618, 1, 5, 0.15),
-                    WeightedItem(Items.UNCUT_SAPPHIRE_1624, 100, 100, 0.0015),
-                    WeightedItem(Items.UNCUT_EMERALD_1622, 100, 100, 0.0015),
-                    WeightedItem(Items.UNCUT_RUBY_1620, 100, 100, 0.0015),
-                    WeightedItem(Items.UNCUT_DIAMOND_1618, 100, 100, 0.0015),
-                    WeightedItem(Items.PURE_ESSENCE_7937, 1, 50, 0.15),
-                    WeightedItem(Items.PURE_ESSENCE_7937, 1000, 1000, 0.0015),
-                    WeightedItem(Items.RANARR_SEED_5295, 1, 3, 0.065),
-                    WeightedItem(Items.SNAPDRAGON_SEED_5300, 1, 3, 0.065),
-                    WeightedItem(Items.GOLD_CHARM_12158, 1, 15, 0.15),
-                    WeightedItem(Items.CRIMSON_CHARM_12160, 1, 15, 0.15),
-                    WeightedItem(Items.BLUE_CHARM_12163, 1, 15, 0.15),
-                    WeightedItem(Items.GREEN_CHARM_12159, 1, 15, 0.15),
-                    WeightedItem(Items.PURPLE_SWEETS_10476, 1, 15, 0.25),
-                    WeightedItem(Items.COINS_995, 100, 1000, 0.15),
-                    WeightedItem(Items.COINS_995, 50000, 100000, 0.0015),
-                    WeightedItem(Items.COINS_995, 1000000, 1000000, 0.0005),
-                    WeightedItem(Items.NATURE_RUNE_561, 1, 10, 0.15),
-                    WeightedItem(Items.ABYSSAL_WHIP_4151, 1, 1, 0.00005),
-                    WeightedItem(Items.SANTA_HAT_1050, 1, 1, 0.00005),
-                ).insertEasyClue(0.015)
-                .insertMediumClue(0.010)
-                .insertHardClue(0.005)
-                .insertRDTRoll(0.015)
+        val MBOX_LOOT = WeightBasedTable.create(
+                WeightedItem(Items.TOY_HORSEY_2520, 1, 1, 0.025),
+                WeightedItem(Items.TOY_HORSEY_2522, 1, 1, 0.025),
+                WeightedItem(Items.TOY_HORSEY_2524, 1, 1, 0.025),
+                WeightedItem(Items.TOY_HORSEY_2526, 1, 1, 0.025),
+                WeightedItem(Items.TOY_KITE_12844, 1, 1, 0.025),
+                WeightedItem(Items.COAL_453, 1, 1, 0.025),
+                WeightedItem(Items.MOLTEN_GLASS_1776, 25, 50, 0.25),
+                WeightedItem(Items.FLAX_1780, 15, 70, 0.25),
+                WeightedItem(Items.BOW_STRING_1778, 10, 50, 0.15),
+                WeightedItem(Items.UNCUT_SAPPHIRE_1624, 1, 5, 0.15),
+                WeightedItem(Items.UNCUT_EMERALD_1622, 1, 5, 0.15),
+                WeightedItem(Items.UNCUT_RUBY_1620, 1, 5, 0.15),
+                WeightedItem(Items.UNCUT_DIAMOND_1618, 1, 5, 0.15),
+                WeightedItem(Items.UNCUT_SAPPHIRE_1624, 100, 100, 0.0015),
+                WeightedItem(Items.UNCUT_EMERALD_1622, 100, 100, 0.0015),
+                WeightedItem(Items.UNCUT_RUBY_1620, 100, 100, 0.0015),
+                WeightedItem(Items.UNCUT_DIAMOND_1618, 100, 100, 0.0015),
+                WeightedItem(Items.PURE_ESSENCE_7937, 1, 50, 0.15),
+                WeightedItem(Items.PURE_ESSENCE_7937, 1000, 1000, 0.0015),
+                WeightedItem(Items.RANARR_SEED_5295, 1, 3, 0.065),
+                WeightedItem(Items.SNAPDRAGON_SEED_5300, 1, 3, 0.065),
+                WeightedItem(Items.GOLD_CHARM_12158, 1, 15, 0.15),
+                WeightedItem(Items.CRIMSON_CHARM_12160, 1, 15, 0.15),
+                WeightedItem(Items.BLUE_CHARM_12163, 1, 15, 0.15),
+                WeightedItem(Items.GREEN_CHARM_12159, 1, 15, 0.15),
+                WeightedItem(Items.PURPLE_SWEETS_10476, 1, 15, 0.25),
+                WeightedItem(Items.COINS_995, 100, 1000, 0.15),
+                WeightedItem(Items.COINS_995, 50000, 100000, 0.0015),
+                WeightedItem(Items.COINS_995, 1000000, 1000000, 0.0005),
+                WeightedItem(Items.NATURE_RUNE_561, 1, 10, 0.15),
+                WeightedItem(Items.ABYSSAL_WHIP_4151, 1, 1, 0.00005),
+                WeightedItem(Items.SANTA_HAT_1050, 1, 1, 0.00005),
+            ).insertEasyClue(0.015).insertMediumClue(0.010).insertHardClue(0.005).insertRDTRoll(0.015)
     }
 }

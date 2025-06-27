@@ -1,8 +1,6 @@
 package core.game.node.entity.player.info.login
 
-enum class Response(
-    private val opcode: Int,
-) {
+enum class Response(private val opcode: Int) {
     UNEXPECTED_RESPONSE(0),
     COULD_NOT_DISPLAY_AD(1),
     SUCCESSFUL(2),

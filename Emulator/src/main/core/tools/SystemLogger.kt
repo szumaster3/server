@@ -21,11 +21,7 @@ object SystemLogger {
     private fun getTime(): String = "[" + formatter.format(Date(System.currentTimeMillis())) + "]"
 
     @JvmStatic
-    fun processLogEntry(
-        clazz: Class<*>,
-        log: Log,
-        message: String,
-    ) {
+    fun processLogEntry(clazz: Class<*>, log: Log, message: String) {
         when (log) {
             Log.DEBUG -> {
                 if (GameWorld.settings?.isDevMode != true) {

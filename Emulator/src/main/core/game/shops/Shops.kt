@@ -31,12 +31,7 @@ import java.io.FileReader
 /**
  * A class that handles shop-related logic.
  */
-class Shops :
-    StartupListener,
-    TickListener,
-    InteractionListener,
-    InterfaceListener,
-    Commands {
+class Shops : StartupListener, TickListener, InteractionListener, InterfaceListener, Commands {
     companion object {
         /**
          * The key used to store personalized shop settings in the server configuration.
@@ -99,12 +94,7 @@ class Shops :
             }
             stock.split('-').map {
                 try {
-                    val tokens =
-                        it
-                            .replace("{", "")
-                            .replace("}", "")
-                            .split(",".toRegex())
-                            .toTypedArray()
+                    val tokens = it.replace("{", "").replace("}", "").split(",".toRegex()).toTypedArray()
                     var amount = tokens[1].trim()
                     if (amount == "inf") {
                         amount = "-1"
@@ -263,30 +253,27 @@ class Shops :
             val price = shop.getBuyPrice(player, slot)
 
             when (opcode) {
-                opValue ->
-                    sendMessage(
-                        player,
-                        "${
-                            getItemName(
-                                if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id,
-                            )
-                        }: This item currently costs ${price.amount} ${price.name.lowercase()}.",
-                    )
+                opValue -> sendMessage(
+                    player,
+                    "${
+                        getItemName(
+                            if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id,
+                        )
+                    }: This item currently costs ${price.amount} ${price.name.lowercase()}.",
+                )
 
                 buyOne -> shop.buy(player, slot, 1)
                 buyFive -> shop.buy(player, slot, 5)
                 buyTen -> shop.buy(player, slot, 10)
-                buyX ->
-                    sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:") { value ->
-                        val amt = value as Int
-                        shop.buy(player, slot, amt)
-                    }
+                buyX -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to buy:") { value ->
+                    val amt = value as Int
+                    shop.buy(player, slot, amt)
+                }
 
-                opExamine ->
-                    sendMessage(
-                        player,
-                        itemDefinition(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id).examine,
-                    )
+                opExamine -> sendMessage(
+                    player,
+                    itemDefinition(if (isMainStock) shop.stock[slot].itemId else shop.playerStock[slot].id).examine,
+                )
             }
 
             return@on true
@@ -321,8 +308,7 @@ class Shops :
             val shop = getAttribute<Shop?>(player, "shop", null) ?: return@onClose true
             val listener = Shop.listenerInstances[player.details.uid] ?: return@onClose true
 
-            if (getServerConfig().getBoolean(personalizedShops, false)
-            ) {
+            if (getServerConfig().getBoolean(personalizedShops, false)) {
                 shop.stockInstances[player.details.uid]?.listeners?.remove(listener)
             } else {
                 shop.stockInstances[ServerConstants.SERVER_NAME.hashCode()]!!.listeners.remove(listener)
@@ -351,31 +337,26 @@ class Shops :
             val (_, price) = shop.getSellPrice(player, slot)
             val def = itemDefinition(player.inventory[slot].id)
 
-            val valueMsg =
-                when {
-                    (price.amount == -1) ||
-                            !def.hasShopCurrencyValue(price.id) ||
-                            def.id in
-                            intArrayOf(
-                                Items.COINS_995,
-                                Items.TOKKUL_6529,
-                                Items.ARCHERY_TICKET_1464,
-                                Items.CASTLE_WARS_TICKET_4067,
-                            ) -> "This shop will not buy that item."
+            val valueMsg = when {
+                (price.amount == -1) || !def.hasShopCurrencyValue(price.id) || def.id in intArrayOf(
+                    Items.COINS_995,
+                    Items.TOKKUL_6529,
+                    Items.ARCHERY_TICKET_1464,
+                    Items.CASTLE_WARS_TICKET_4067,
+                ) -> "This shop will not buy that item."
 
-                    else -> "${player.inventory[slot].name}: This shop will buy this item for [${price.amount}] [${price.name.lowercase()}]."
-                }
+                else -> "${player.inventory[slot].name}: This shop will buy this item for [${price.amount}] [${price.name.lowercase()}]."
+            }
 
             when (opcode) {
                 opValue -> sendMessage(player, valueMsg)
                 sellOne -> shop.sell(player, slot, 1)
                 sellFive -> shop.sell(player, slot, 5)
                 sellTen -> shop.sell(player, slot, 10)
-                sellX ->
-                    sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to sell:") { value ->
-                        val amt = value as Int
-                        shop.sell(player, slot, amt)
-                    }
+                sellX -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount to sell:") { value ->
+                    val amt = value as Int
+                    shop.sell(player, slot, amt)
+                }
             }
 
             return@on true

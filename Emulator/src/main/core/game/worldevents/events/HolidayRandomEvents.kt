@@ -3,79 +3,21 @@ package core.game.worldevents.events
 import core.game.worldevents.events.christmas.randoms.*
 import core.game.worldevents.events.halloween.randoms.*
 
-enum class HolidayRandomEvents(
-    val npc: HolidayRandomEventNPC,
-    val type: String,
-) {
-    BLACK_CAT(
-        npc = BlackCatHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    SPIDER(
-        npc = SpiderHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    GHOST(
-        npc = GhostHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    ZOMBIE(
-        npc = ZombieHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    WITCH(
-        npc = WitchHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    DEATH(
-        npc = DeathHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    VAMPIRE(
-        npc = VampireHolidayRandomNPC(),
-        "halloween",
-    ),
-
-    CHOIR(
-        npc = ChoirHolidayRandomNPC(),
-        "christmas",
-    ),
-
-    SANTA(
-        npc = SantaHolidayRandomNPC(),
-        "christmas",
-    ),
-
-    SNOWMAN_FIGHT(
-        npc = SnowmanFightHolidayRandom(),
-        "christmas",
-    ),
-
-    JACK_FROST(
-        npc = JackFrostHolidayRandomNPC(),
-        "christmas",
-    ),
-
-    SNOWMAN(
-        npc = SnowmanHolidayRandomNPC(),
-        "christmas",
-    ),
-
-    SNOWSTORM(
-        npc = SnowStormHolidayRandomNPC(),
-        "christmas",
-    ),
-
-    COOK(
-        npc = CookHolidayRandomNPC(),
-        "christmas",
-    ),
+enum class HolidayRandomEvents(val npc: HolidayRandomEventNPC, val type: String) {
+    BLACK_CAT(npc = BlackCatHolidayRandomNPC(), "halloween"),
+    SPIDER(npc = SpiderHolidayRandomNPC(), "halloween"),
+    GHOST(npc = GhostHolidayRandomNPC(), "halloween"),
+    ZOMBIE(npc = ZombieHolidayRandomNPC(), "halloween"),
+    WITCH(npc = WitchHolidayRandomNPC(), "halloween"),
+    DEATH(npc = DeathHolidayRandomNPC(), "halloween"),
+    VAMPIRE(npc = VampireHolidayRandomNPC(), "halloween"),
+    CHOIR(npc = ChoirHolidayRandomNPC(), "christmas"),
+    SANTA(npc = SantaHolidayRandomNPC(), "christmas"),
+    SNOWMAN_FIGHT(npc = SnowmanFightHolidayRandom(), "christmas"),
+    JACK_FROST(npc = JackFrostHolidayRandomNPC(), "christmas"),
+    SNOWMAN(npc = SnowmanHolidayRandomNPC(), "christmas"),
+    SNOWSTORM(npc = SnowStormHolidayRandomNPC(), "christmas"),
+    COOK(npc = CookHolidayRandomNPC(), "christmas"),
     ;
 
     companion object {

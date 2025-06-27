@@ -10,10 +10,6 @@ import java.util.*
 
 /**
  * Represents a world event that can occur in the game world.
- *
- * World events can have their own plugins and provide custom activation
- * conditions and initialization logic.
- *
  * @property name The name of the world event.
  *
  * @author Ceikry
@@ -29,8 +25,6 @@ abstract class WorldEvent(
 
     /**
      * Checks if the event is currently active, based on the given [Calendar] instance.
-     *
-     * Override this method to define custom activation logic.
      *
      * @param cal The calendar instance used to evaluate the current time/date.
      * @return `true` if the event is active, `false` otherwise.

@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * The type Render info.
+ * The Render info.
  */
 public final class RenderInfo {
 

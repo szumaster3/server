@@ -237,21 +237,21 @@ public final class SceneryBuilder {
     }
 
     /**
-     * Removes all objects within a box
-     * @param objectId - the object id to remove
-     * @param southWest
-     * @param northEast
-     * @return
+     * Removes all objects with the given [objectId] within the defined rectangular area.
+     *
+     * @param objectId  the ID of the object to remove
+     * @param southWest the south-west corner of the rectangular area
+     * @param northEast the north-east corner of the rectangular area
+     * @return the number of objects removed
      */
     public static boolean removeAll(int objectId, Location southWest, Location northEast) {
-        if (southWest.getX() > northEast.getX() || southWest.getY() > northEast.getY())
-            return false;
+        if (southWest.getX() > northEast.getX() || southWest.getY() > northEast.getY()) return false;
 
         int differenceX = northEast.getX() - southWest.getX();
         int differenceY = northEast.getY() - southWest.getY();
 
         for (int x = 0; x <= differenceX; x++) {
-            for (int y = 0; y <= differenceY; y++){
+            for (int y = 0; y <= differenceY; y++) {
                 Scenery object = new Scenery(objectId, Location.create(southWest.getX() + x, southWest.getY() + y, southWest.getZ()));
                 remove(object);
             }
