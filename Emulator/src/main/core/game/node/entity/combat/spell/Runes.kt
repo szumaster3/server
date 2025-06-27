@@ -7,9 +7,7 @@ import org.rs.consts.Items
  * Represents the constants of runes.
  * @author Vexia
  */
-enum class Runes(
-    val id: Int,
-) {
+enum class Runes(val id: Int, ) {
     AIR_RUNE(Items.AIR_RUNE_556),
     WATER_RUNE(Items.WATER_RUNE_555),
     EARTH_RUNE(Items.EARTH_RUNE_557),

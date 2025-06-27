@@ -165,7 +165,7 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
     ): Double = style.swingHandler.getSetMultiplier(e, skillId)
 
     private fun checkStyle(e: Entity?) {
-        val index = e!!.properties.attackStyle.style
+        val index = e!!.properties.attackStyle!!.style
         style =
             when (index) {
                 WeaponInterface.STYLE_DEFENSIVE_CAST -> CombatStyle.MAGIC

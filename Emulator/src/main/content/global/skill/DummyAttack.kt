@@ -32,7 +32,7 @@ class DummyAttack : OptionHandler() {
         if (player.properties.currentCombatLevel < 8) {
             val p = player
             var experience = 5.0
-            when (p.properties.attackStyle.style) {
+            when (p.properties.attackStyle!!.style) {
                 WeaponInterface.STYLE_ACCURATE -> p.skills.addExperience(Skills.ATTACK, experience)
                 WeaponInterface.STYLE_AGGRESSIVE -> p.skills.addExperience(Skills.STRENGTH, experience)
                 WeaponInterface.STYLE_DEFENSIVE -> p.skills.addExperience(Skills.DEFENCE, experience)

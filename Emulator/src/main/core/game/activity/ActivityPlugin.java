@@ -144,7 +144,7 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
             e.getProperties().setSpawnLocation(l);
         }
         e.getProperties().setSafeZone(safe);
-        e.getProperties().safeRespawn = this.safeRespawn;
+        e.getProperties().setSafeRespawn(this.safeRespawn);
         e.setAttribute("activity", this);
         return super.enter(e);
     }
@@ -159,7 +159,7 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
             e.setLocation(l);
         }
         e.getProperties().setSafeZone(false);
-        e.getProperties().safeRespawn = ServerConstants.HOME_LOCATION;
+        e.getProperties().setSafeRespawn(ServerConstants.HOME_LOCATION);
         e.removeAttribute("activity");
         return super.leave(e, logout);
     }

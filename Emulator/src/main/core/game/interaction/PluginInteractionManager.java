@@ -8,7 +8,7 @@ import core.game.node.scenery.Scenery;
 import java.util.HashMap;
 
 /**
- * Manages interactions between players and various game entities (NPCs, objects, items, etc.).
+ * Handles registration and dispatching of entity interaction plugins.
  */
 public class PluginInteractionManager {
     private static final HashMap<Integer, PluginInteraction> npcInteractions = new HashMap<>();

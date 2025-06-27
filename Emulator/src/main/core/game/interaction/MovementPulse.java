@@ -26,7 +26,7 @@ import static core.api.ContentAPIKt.registerHintIcon;
 import static core.api.movement.PathfindingAPIKt.truncateLoc;
 
 /**
- * The type Movement pulse.
+ * Handles movement pulse.
  */
 public abstract class MovementPulse extends Pulse {
 

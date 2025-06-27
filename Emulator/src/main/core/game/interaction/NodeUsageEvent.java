@@ -5,25 +5,21 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
 /**
- * The type Node usage event.
+ * Event triggered when a node is used on another node.
  */
 public final class NodeUsageEvent {
 
     private final Player player;
-
     private final int componentId;
-
-    private final Node used;
-
-    private final Node with;
+    private final Node used, with;
 
     /**
-     * Instantiates a new Node usage event.
+     * Creates a new usage event.
      *
-     * @param player      the player
-     * @param componentId the component id
-     * @param used        the used
-     * @param with        the with
+     * @param player      the player using the item.
+     * @param componentId interface component id.
+     * @param used        the node being used.
+     * @param with        the target node.
      */
     public NodeUsageEvent(Player player, int componentId, Node used, Node with) {
         this.player = player;
@@ -33,26 +29,6 @@ public final class NodeUsageEvent {
     }
 
     /**
-     * Gets base item.
-     *
-     * @return the base item
-     */
-    public Item getBaseItem() {
-        return with instanceof Item ? (Item) with : null;
-    }
-
-    /**
-     * Gets used item.
-     *
-     * @return the used item
-     */
-    public Item getUsedItem() {
-        return used instanceof Item ? (Item) used : null;
-    }
-
-    /**
-     * Gets player.
-     *
      * @return the player
      */
     public Player getPlayer() {
@@ -60,30 +36,37 @@ public final class NodeUsageEvent {
     }
 
     /**
-     * Gets component id.
-     *
-     * @return the component id
+     * @return the interface component id.
      */
     public int getComponentId() {
         return componentId;
     }
 
     /**
-     * Gets used.
-     *
-     * @return the used
+     * @return the node being used.
      */
     public Node getUsed() {
         return used;
     }
 
     /**
-     * Gets used with.
-     *
-     * @return the used with
+     * @return the target node.
      */
     public Node getUsedWith() {
         return with;
     }
 
+    /**
+     * @return the used node as item, or null if not an item.
+     */
+    public Item getUsedItem() {
+        return used instanceof Item ? (Item) used : null;
+    }
+
+    /**
+     * @return the target node as item, or null if not an item.
+     */
+    public Item getBaseItem() {
+        return with instanceof Item ? (Item) with : null;
+    }
 }

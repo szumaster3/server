@@ -10,15 +10,11 @@ import core.game.world.update.flag.context.Graphics
 
 /**
  * Represents a possible attack the entity can switch to.
+ *
  * @author Emperor
  */
-open class SwitchAttack @JvmOverloads constructor(
-    handler: CombatSwingHandler?,
-    animation: Animation?,
-    startGraphic: Graphics? = null,
-    endGraphic: Graphics? = null,
-    projectile: Projectile? = null
-) {
+open class SwitchAttack @JvmOverloads constructor(handler: CombatSwingHandler?, animation: Animation?, startGraphic: Graphics? = null, endGraphic: Graphics? = null, projectile: Projectile? = null) {
+
     /**
      * The combat swing handler.
      */
@@ -58,6 +54,7 @@ open class SwitchAttack @JvmOverloads constructor(
 
     /**
      * Constructs a new `SwitchAttack` `Object`
+     *
      * @param handler the handler.
      * @param projectile the projectile.
      */
@@ -67,6 +64,7 @@ open class SwitchAttack @JvmOverloads constructor(
 
     /**
      * Constructs a new `SwitchAttack` `Object`
+     *
      * @param style the style.
      */
     constructor(style: CombatStyle) : this(style.swingHandler, null, null, null)
@@ -81,6 +79,7 @@ open class SwitchAttack @JvmOverloads constructor(
 
     /**
      * Checks if this attack can be selected.
+     *
      * @param entity the entity.
      * @param victim the victim.
      * @param state the state.
@@ -93,12 +92,14 @@ open class SwitchAttack @JvmOverloads constructor(
     val style: CombatStyle?
         /**
          * Gets the style.
+         *
          * @return The style.
          */
         get() = handler!!.type
 
     /**
      * Sets the useHandler.
+     *
      * @param useHandler The useHandler to set.
      * @return This instance, for chaining.
      */
@@ -109,6 +110,7 @@ open class SwitchAttack @JvmOverloads constructor(
 
     /**
      * Sets the maximumHit value.
+     *
      * @param maximumHit The maximumHit to set.
      */
     fun setMaximumHit(maximumHit: Int): SwitchAttack {

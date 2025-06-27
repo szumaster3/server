@@ -17,8 +17,10 @@ import java.util.List;
 
 import static core.api.ContentAPIKt.setVarbit;
 import static core.api.ContentAPIKt.setVarp;
+
 /**
  * Represents a scenery.
+ *
  * @author Emperor
  */
 public class Scenery extends Node {

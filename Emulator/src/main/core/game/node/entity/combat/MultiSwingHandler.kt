@@ -7,19 +7,15 @@ import core.tools.RandomFunction
 
 /**
  * Handles combat swings with switching combat styles.
- * @author Emperor
- * @author Ceikry, Kotlin conversion
+ *
+ * @author Emperor, Ceikry, Kotlin conversion
  */
-open class MultiSwingHandler(
-    meleeDistance: Boolean,
-    vararg attacks: SwitchAttack,
-) : CombatSwingHandler(CombatStyle.RANGE) {
+open class MultiSwingHandler(meleeDistance: Boolean, vararg attacks: SwitchAttack) :
+    CombatSwingHandler(CombatStyle.RANGE) {
+
     val attacks: Array<SwitchAttack>
-
     val isMeleeDistance: Boolean
-
     protected var current: SwitchAttack
-
     protected var next: SwitchAttack
 
     constructor(vararg attacks: SwitchAttack) : this(true, *attacks)
@@ -27,12 +23,11 @@ open class MultiSwingHandler(
     override fun canSwing(
         entity: Entity,
         victim: Entity,
-    ): InteractionType? =
-        if (isMeleeDistance) {
-            CombatStyle.RANGE.swingHandler.canSwing(entity, victim)
-        } else {
-            next.handler!!.canSwing(entity, victim)
-        }
+    ): InteractionType? = if (isMeleeDistance) {
+        CombatStyle.RANGE.swingHandler.canSwing(entity, victim)
+    } else {
+        next.handler!!.canSwing(entity, victim)
+    }
 
     override fun swing(
         entity: Entity?,
@@ -40,9 +35,10 @@ open class MultiSwingHandler(
         state: BattleState?,
     ): Int {
         current = next
-        if (isMeleeDistance &&
-            current.style == CombatStyle.MELEE &&
-            CombatStyle.MELEE.swingHandler.canSwing(entity!!, victim!!) != InteractionType.STILL_INTERACT
+        if (isMeleeDistance && current.style == CombatStyle.MELEE && CombatStyle.MELEE.swingHandler.canSwing(
+                entity!!,
+                victim!!
+            ) != InteractionType.STILL_INTERACT
         ) {
             for (attack in attacks) {
                 if (attack.style != CombatStyle.MELEE) {
@@ -61,18 +57,13 @@ open class MultiSwingHandler(
         }
         var ticks = 1
         if (style != CombatStyle.MELEE) {
-            ticks +=
-                Math
-                    .ceil(
-                        entity!!.location.getDistance(victim!!.location) *
-                            if (type ==
-                                CombatStyle.MAGIC
-                            ) {
-                                0.5
-                            } else {
-                                0.3
-                            },
-                    ).toInt()
+            ticks += Math.ceil(
+                    entity!!.location.getDistance(victim!!.location) * if (type == CombatStyle.MAGIC) {
+                        0.5
+                    } else {
+                        0.3
+                    },
+                ).toInt()
         }
         var hit = 0
         if (isAccurateImpact(entity, victim, style)) {
@@ -96,15 +87,12 @@ open class MultiSwingHandler(
         }
         entity.visualize(current.animation, current.startGraphic)
         if (current.projectile != null) {
-            current.projectile!!
-                .transform(
+            current.projectile!!.transform(
                     entity,
                     victim,
                     entity is NPC,
                     46,
-                    if (current.style ==
-                        CombatStyle.MAGIC
-                    ) {
+                    if (current.style == CombatStyle.MAGIC) {
                         10
                     } else {
                         5
@@ -176,12 +164,11 @@ open class MultiSwingHandler(
         entity: Entity?,
         victim: Entity?,
         modifier: Double,
-    ): Int =
-        if (current.maximumHit > -1) {
-            current.maximumHit
-        } else {
-            current.handler!!.calculateHit(entity, victim, modifier)
-        }
+    ): Int = if (current.maximumHit > -1) {
+        current.maximumHit
+    } else {
+        current.handler!!.calculateHit(entity, victim, modifier)
+    }
 
     override fun calculateDefence(
         victim: Entity?,

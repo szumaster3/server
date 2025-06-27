@@ -277,7 +277,7 @@ public class NPC extends Entity {
             this.setWalkRadius(definition.getConfiguration("movement_radius"));
         }
         if (definition.getConfiguration("death_gfx") != null) {
-            getProperties().deathGfx = new Graphics(definition.getConfiguration("death_gfx"));
+            getProperties().setDeathGfx(new Graphics(definition.getConfiguration("death_gfx")));
         }
     }
 

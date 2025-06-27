@@ -405,7 +405,7 @@ class InterfaceManager(
         openTab(13, Component(Components.MUSIC_V3_187))
         openTab(14, Component(Components.LOGOUT_182))
         if (player.properties.autocastSpell != null) {
-            inter!!.selectAutoSpell(inter!!.getAutospellId(player.properties.autocastSpell.spellId), true)
+            inter!!.selectAutoSpell(inter!!.getAutospellId(player.properties.autocastSpell!!.spellId), true)
         }
     }
 

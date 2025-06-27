@@ -7,6 +7,7 @@ import core.plugin.Plugin
 
 /**
  * Handles equipment degrading.
+ *
  * @author Emperor
  */
 abstract class DegradableEquipment(

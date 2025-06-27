@@ -237,9 +237,9 @@ class LumbridgePlugin : InteractionListener {
                     prayer += entity.prayer.getSkillBonus(Skills.RANGE)
                 }
                 var cumulativeStr = floor(level * prayer)
-                if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) {
+                if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_RANGE_ACCURATE) {
                     cumulativeStr += 3.0
-                } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) {
+                } else if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_LONG_RANGE) {
                     cumulativeStr += 1.0
                 }
                 cumulativeStr *= 1.0

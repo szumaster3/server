@@ -38,15 +38,12 @@ class GrandExchange : StartupListener, Commands {
                 var offer = pendingOffers.takeFirst()
                 offer.writeNew()
                 offer = getOfferByUid(offer.uid) ?: continue
-                selectPotentialMatches(offer)
-                    .asSequence()
-                    .sortedBy { if (offer.sell) -it.offeredValue else it.offeredValue }
-                    .filter {
+                selectPotentialMatches(offer).asSequence()
+                    .sortedBy { if (offer.sell) -it.offeredValue else it.offeredValue }.filter {
                         if (offer.sell) {
                             it.offeredValue >= offer.offeredValue
                         } else {
-                            it.offeredValue <=
-                                offer.offeredValue
+                            it.offeredValue <= offer.offeredValue
                         }
                     }.forEach { match -> exchange(offer, match) }
                 if (!offer.isBot && offer.amountLeft > 0 && !offer.sell) {
@@ -115,7 +112,8 @@ class GrandExchange : StartupListener, Commands {
     companion object {
         val pendingOffers = LinkedBlockingDeque<GrandExchangeOffer>()
         private val GET_SPECIFIC_OFFER_BY_UID = "SELECT * FROM player_offers WHERE uid = ?;"
-        private val GET_MATCHES_FROM_PLAYER_OFFERS = "SELECT * FROM player_offers WHERE item_id = ? AND is_sale = ? AND offer_state < 4 AND NOT offer_state = 2;"
+        private val GET_MATCHES_FROM_PLAYER_OFFERS =
+            "SELECT * FROM player_offers WHERE item_id = ? AND is_sale = ? AND offer_state < 4 AND NOT offer_state = 2;"
         private val GET_MATCH_FROM_BOT_OFFERS = "SELECT * FROM bot_offers WHERE item_id = ?;"
 
         private fun getOfferByUid(uid: Long): GrandExchangeOffer? {
@@ -142,11 +140,10 @@ class GrandExchange : StartupListener, Commands {
             return base
         }
 
-        private fun getItemDefPrice(itemID: Int): Int =
-            max(
-                itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0,
-                itemDefinition(itemID).value,
-            )
+        private fun getItemDefPrice(itemID: Int): Int = max(
+            itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0,
+            itemDefinition(itemID).value,
+        )
 
         @JvmStatic
         fun getOfferStats(
@@ -164,10 +161,9 @@ class GrandExchange : StartupListener, Commands {
                 if (!sale) {
                     var botAmt = 0
                     var botPrice = 0
-                    val player_offers =
-                        stmt.executeQuery(
-                            "SELECT * from player_offers where item_id = $itemID AND is_sale = 1 AND offer_state < 4 AND NOT offer_state = 2",
-                        )
+                    val player_offers = stmt.executeQuery(
+                        "SELECT * from player_offers where item_id = $itemID AND is_sale = 1 AND offer_state < 4 AND NOT offer_state = 2",
+                    )
 
                     while (player_offers.next()) {
                         val o = GrandExchangeOffer.fromQuery(player_offers)
@@ -193,10 +189,9 @@ class GrandExchange : StartupListener, Commands {
                     sb.append("</col><br>Bot Stock: <col=FFFFFF>$botAmt  ")
                     sb.append("</col>  Bot Price: <col=FFFFFF>$botPrice")
                 } else {
-                    val buy_offers =
-                        stmt.executeQuery(
-                            "SELECT * from player_offers where item_id = $itemID AND is_sale = 0 AND offer_state < 4 AND NOT offer_state = 2",
-                        )
+                    val buy_offers = stmt.executeQuery(
+                        "SELECT * from player_offers where item_id = $itemID AND is_sale = 0 AND offer_state < 4 AND NOT offer_state = 2",
+                    )
 
                     while (buy_offers.next()) {
                         val o = GrandExchangeOffer.fromQuery(buy_offers)
@@ -313,13 +308,11 @@ class GrandExchange : StartupListener, Commands {
 
             seller.addWithdrawItem(
                 Items.COINS_995,
-                amount *
-                    if (sellerBias) {
-                        buyer.offeredValue
-                    } else {
-                        seller
-                            .offeredValue
-                    },
+                amount * if (sellerBias) {
+                    buyer.offeredValue
+                } else {
+                    seller.offeredValue
+                },
             )
             buyer.addWithdrawItem(seller.itemID, amount)
 

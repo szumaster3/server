@@ -10,7 +10,6 @@ import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
 import core.net.packet.out.Interface
 
-
 /**
  * Represents a UI component that can be opened, closed, and interacted with by a player.
  */
@@ -18,14 +17,12 @@ open class Component {
     /**
      * The unique identifier of this component.
      */
-    @JvmField
-    var id: Int
+    @JvmField var id: Int
 
     /**
      * The child identifier of this component.
      */
-    @JvmField
-    var childId: Int = -1
+    @JvmField var childId: Int = -1
 
     private val slots: MutableList<Slot> = ArrayList()
 
@@ -136,9 +133,7 @@ open class Component {
      * @param player The player closing the component.
      * @return `true` if the component was closed successfully, otherwise `false`.
      */
-    fun close(player: Player?): Boolean {
-        return (closeEvent == null || closeEvent!!.close(player, this)) && runClose(player!!, this)
-    }
+    open fun close(player: Player): Boolean = (closeEvent == null || closeEvent!!.close(player, this)) && runClose(player, this)
 
     /**
      * Handles slot switching within the component.
@@ -180,7 +175,7 @@ open class Component {
      * @param closeEvent The close event to set.
      * @return This component instance.
      */
-    fun setCloseEvent(closeEvent: CloseEvent?): Component? {
+    fun setUncloseEvent(closeEvent: CloseEvent?): Component {
         this.closeEvent = closeEvent
         return this
     }
@@ -192,9 +187,15 @@ open class Component {
          * @param player    The player for whom the component should be unclosable.
          * @param component The component to mark as unclosable.
          */
-        fun setUnclosable(p: Player, c: Component) {
-            p.setAttribute("close_c_", true)
-            c.setCloseEvent { player, c -> !player.getAttribute("close_c_", false) }
+        @JvmStatic
+        fun setUnclosable(
+            player: Player,
+            component: Component,
+        ) {
+            player.setAttribute("close_c_", true)
+            component.setUncloseEvent { player, _ ->
+                !player.getAttribute("close_c_", false)
+            }
         }
     }
 }

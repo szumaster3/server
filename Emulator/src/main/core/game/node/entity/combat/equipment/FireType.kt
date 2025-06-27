@@ -15,6 +15,7 @@ import org.rs.consts.Graphics
 
 /**
  * The fire types.
+ *
  * @author Emperor
  */
 enum class FireType(

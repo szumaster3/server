@@ -21,8 +21,8 @@ import kotlin.math.floor
 
 /**
  * Handles a melee combat swing.
- * @author Emperor
- * @author Ceikry, Kotlin conversion + cleanup
+ *
+ * @author Emperor, Ceikry, Kotlin conversion + cleanup
  */
 open class MeleeSwingHandler(
     vararg flags: SwingHandlerFlag,
@@ -171,9 +171,9 @@ open class MeleeSwingHandler(
             effectiveAttackLevel =
                 floor(effectiveAttackLevel + (entity.prayer.getSkillBonus(Skills.ATTACK) * effectiveAttackLevel))
         }
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) {
+        if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_ACCURATE) {
             effectiveAttackLevel += 3
-        } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) {
+        } else if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_CONTROLLED) {
             effectiveAttackLevel += 1
         }
         effectiveAttackLevel += 8
@@ -181,7 +181,7 @@ open class MeleeSwingHandler(
         effectiveAttackLevel = floor(effectiveAttackLevel)
 
         if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY)) {
-            effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+            effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle!!.bonusType] + 64)
         } else {
             effectiveAttackLevel *= 64
         }
@@ -228,9 +228,9 @@ open class MeleeSwingHandler(
             prayer += entity.prayer.getSkillBonus(Skills.STRENGTH)
         }
         var cumulativeStr = floor(level * prayer)
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_AGGRESSIVE) {
+        if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_AGGRESSIVE) {
             cumulativeStr += 3.0
-        } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) {
+        } else if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_CONTROLLED) {
             cumulativeStr += 1.0
         }
 
@@ -267,9 +267,9 @@ open class MeleeSwingHandler(
                 var effectiveDefenceLevel = victim.skills.getLevel(Skills.DEFENCE).toDouble()
                 effectiveDefenceLevel =
                     floor(effectiveDefenceLevel + (victim.prayer.getSkillBonus(Skills.DEFENCE) * effectiveDefenceLevel))
-                if (victim.properties.attackStyle.style == WeaponInterface.STYLE_DEFENSIVE) {
+                if (victim.properties.attackStyle!!.style == WeaponInterface.STYLE_DEFENSIVE) {
                     effectiveDefenceLevel += 3
-                } else if (victim.properties.attackStyle.style ==
+                } else if (victim.properties.attackStyle!!.style ==
                     WeaponInterface.STYLE_CONTROLLED
                 ) {
                     effectiveDefenceLevel += 1
@@ -278,13 +278,13 @@ open class MeleeSwingHandler(
                 effectiveDefenceLevel = floor(effectiveDefenceLevel)
                 return floor(
                     effectiveDefenceLevel *
-                        (victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64),
+                        (victim.properties.bonuses[attacker.properties.attackStyle!!.bonusType + 5] + 64),
                 ).toInt()
             }
 
             is NPC -> {
                 val defLevel = victim.skills.getLevel(Skills.DEFENCE)
-                val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64
+                val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle!!.bonusType + 5] + 64
                 return defLevel * styleDefenceBonus
             }
         }

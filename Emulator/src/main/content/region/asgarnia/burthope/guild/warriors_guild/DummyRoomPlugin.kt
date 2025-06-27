@@ -89,7 +89,7 @@ class DummyRoomPlugin : OptionHandler() {
                 sendMessage(player, "You have already hit a dummy this turn.")
                 return true
             }
-            if (player.properties.attackStyle.style != dummy!!.attackStyle && player.properties.attackStyle.bonusType != dummy!!.bonusType) {
+            if (player.properties.attackStyle!!.style != dummy!!.attackStyle && player.properties.attackStyle!!.bonusType != dummy!!.bonusType) {
                 lock(player, 5)
                 visualize(player, player.properties.attackAnimation, Graphics(org.rs.consts.Graphics.STUN_BIRDIES_ABOVE_HEAD_80, 96))
                 sendMessage(player, "You whack the dummy with the wrong attack style.")

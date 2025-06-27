@@ -56,7 +56,7 @@ class AIRepository {
             bot.setAttribute("tracked", true)
             player.debug("[Bot: ${bot.username}][${pulse.botScript::class.simpleName}]=================")
             player.debug(
-                "PM Pulse Running? ${if (bot.pulseManager.hasPulseRunning()) bot.pulseManager.getCurrent()::class.java.name else "No"}",
+                "PM Pulse Running? ${if (bot.pulseManager.hasPulseRunning()) bot.pulseManager.current!!::class.java.name else "No"}",
             )
             player.debug(
                 "Interaction Running? ${bot.scripts.getActiveScript() != null} ${

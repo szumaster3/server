@@ -316,6 +316,15 @@ public abstract class Node {
     }
 
     /**
+     * Get size.
+     *
+     * @return size.
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
      * Gets the renderable.
      *
      * @return The renderable.

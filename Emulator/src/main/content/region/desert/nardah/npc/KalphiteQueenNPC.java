@@ -300,8 +300,7 @@ public final class KalphiteQueenNPC extends AbstractNPC {
             CombatStyle.MAGIC.getSwingHandler().adjustBattleState(e, victim, s);
             victim.getImpactHandler().handleImpact(e, s.getEstimatedHit(), CombatStyle.MAGIC, s);
             CombatStyle.MAGIC.getSwingHandler().onImpact(e, victim, s);
-            while (++index < targets.length && (s = targets[index]) == null)
-                ;
+            while (++index < targets.length && (s = targets[index]) == null) ;
             if (s == null || index >= targets.length) {
                 return;
             }

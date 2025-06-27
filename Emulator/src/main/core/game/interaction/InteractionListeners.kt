@@ -11,19 +11,7 @@ object InteractionListeners {
     private val listeners = HashMap<String, (Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(1000)
     private val useAnyWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(10)
-    private val useWithWildcardListeners =
-        HashMap<
-            Int,
-            ArrayList<
-                Pair<
-                    (
-                        Int,
-                        Int,
-                    ) -> Boolean,
-                    (Player, Node, Node) -> Boolean,
-                >,
-            >,
-        >(10)
+    private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int, ) -> Boolean, (Player, Node, Node) -> Boolean, >, >, >(10)
     private val destinationOverrides = HashMap<String, (Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String, (Player, Node) -> Boolean>(10)
     private val interactions = HashMap<String, InteractionListener.InteractionMetadata>()
@@ -258,41 +246,38 @@ object InteractionListeners {
         type: IntType,
         player: Player,
     ): Boolean {
-        val flag =
-            when (type) {
-                IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
-                IntType.SCENERY -> DestinationFlag.OBJECT
-                IntType.GROUND_ITEM -> DestinationFlag.ITEM
-                else -> DestinationFlag.OBJECT
-            }
+        val flag = when (type) {
+            IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
+            IntType.SCENERY -> DestinationFlag.OBJECT
+            IntType.GROUND_ITEM -> DestinationFlag.ITEM
+            else -> DestinationFlag.OBJECT
+        }
 
         if (player.locks.isInteractionLocked()) return false
 
         var flipped = false
 
-        val method =
-            if (with is Player) {
-                get(-1, used.id, 4) ?: return false
+        val method = if (with is Player) {
+            get(-1, used.id, 4) ?: return false
+        } else {
+            get(used.id, with.id, type.ordinal) ?: if (type == IntType.ITEM) {
+                get(with.id, used.id, type.ordinal).also { flipped = true } ?: return false
             } else {
-                get(used.id, with.id, type.ordinal) ?: if (type == IntType.ITEM) {
-                    get(with.id, used.id, type.ordinal).also { flipped = true } ?: return false
-                } else {
-                    return false
-                }
+                return false
             }
+        }
 
-        val destOverride =
-            if (flipped) {
-                getOverride(type.ordinal, used.id, "use") ?: getOverride(type.ordinal, with.id) ?: getOverride(
-                    type.ordinal,
-                    "use",
-                )
-            } else {
-                getOverride(type.ordinal, with.id, "use") ?: getOverride(type.ordinal, used.id) ?: getOverride(
-                    type.ordinal,
-                    "use",
-                )
-            }
+        val destOverride = if (flipped) {
+            getOverride(type.ordinal, used.id, "use") ?: getOverride(type.ordinal, with.id) ?: getOverride(
+                type.ordinal,
+                "use",
+            )
+        } else {
+            getOverride(type.ordinal, with.id, "use") ?: getOverride(type.ordinal, used.id) ?: getOverride(
+                type.ordinal,
+                "use",
+            )
+        }
 
         if (type != IntType.ITEM && !isUseWithInstant(method)) {
             if (player.locks.isMovementLocked()) return false
@@ -340,14 +325,13 @@ object InteractionListeners {
         player: Player,
         node: Node,
     ): Boolean {
-        val flag =
-            when (type) {
-                IntType.PLAYER -> DestinationFlag.ENTITY
-                IntType.GROUND_ITEM -> DestinationFlag.ITEM
-                IntType.NPC -> DestinationFlag.ENTITY
-                IntType.SCENERY -> null
-                else -> DestinationFlag.OBJECT
-            }
+        val flag = when (type) {
+            IntType.PLAYER -> DestinationFlag.ENTITY
+            IntType.GROUND_ITEM -> DestinationFlag.ITEM
+            IntType.NPC -> DestinationFlag.ENTITY
+            IntType.SCENERY -> null
+            else -> DestinationFlag.OBJECT
+        }
 
         if (player.locks.isInteractionLocked()) return false
 
@@ -357,9 +341,8 @@ object InteractionListeners {
         player.dispatch(InteractionEvent(node, option.lowercase()))
 
         if (method == null) {
-            val inter =
-                interactions["${type.ordinal}:$id:${option.lowercase()}"]
-                    ?: interactions["${type.ordinal}:${option.lowercase()}"] ?: return false
+            val inter = interactions["${type.ordinal}:$id:${option.lowercase()}"]
+                ?: interactions["${type.ordinal}:${option.lowercase()}"] ?: return false
             val script = Interaction(inter.handler, inter.distance, inter.persist)
             player.scripts.setInteractionScript(node, script)
             player.pulseManager.run(
@@ -370,11 +353,10 @@ object InteractionListeners {
             return true
         }
 
-        val destOverride =
-            getOverride(type.ordinal, id, option) ?: getOverride(type.ordinal, node.id) ?: getOverride(
-                type.ordinal,
-                option.lowercase(),
-            )
+        val destOverride = getOverride(type.ordinal, id, option) ?: getOverride(type.ordinal, node.id) ?: getOverride(
+            type.ordinal,
+            option.lowercase(),
+        )
 
         if (type != IntType.ITEM && !isInstant(method)) {
             if (player.locks.isMovementLocked()) return false

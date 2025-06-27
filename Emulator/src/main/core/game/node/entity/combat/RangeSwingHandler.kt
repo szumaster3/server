@@ -25,14 +25,11 @@ import kotlin.math.floor
 
 /**
  * Handles the range combat swings.
- * @author Emperor
- * @author Ceikry, conversion to Kotlin + cleanup
+ *
+ * @author Emperor, Ceikry, conversion to Kotlin + cleanup
  */
 open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandler(CombatStyle.RANGE, *flags) {
-    override fun canSwing(
-        entity: Entity,
-        victim: Entity,
-    ): InteractionType? {
+    override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         if (!isProjectileClipped(entity, victim, false)) {
             return InteractionType.NO_INTERACT
         }
@@ -40,7 +37,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         if (entity is Player && (entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface).weaponInterface?.interfaceId == 91) {
             distance -= 2
         }
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) {
+        if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_LONG_RANGE) {
             distance += 2
         }
         if (entity is Player) {
@@ -72,11 +69,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         return InteractionType.NO_INTERACT
     }
 
-    override fun swing(
-        entity: Entity?,
-        victim: Entity?,
-        state: BattleState?,
-    ): Int {
+    override fun swing(entity: Entity?, victim: Entity?, state: BattleState?): Int {
         configureRangeData(entity, state)
         if (state!!.weapon == null || !hasAmmo(entity, state)) {
             entity!!.properties.combatPulse.stop()
@@ -110,10 +103,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         return 1 + ceil(entity.location.getDistance(victim.location) * 0.3).toInt()
     }
 
-    fun configureRangeData(
-        entity: Entity?,
-        state: BattleState?,
-    ) {
+    fun configureRangeData(entity: Entity?, state: BattleState?) {
         state!!.style = CombatStyle.RANGE
         val w: Weapon?
         if (entity is Player) {
@@ -136,11 +126,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         state.weapon = w
     }
 
-    override fun adjustBattleState(
-        entity: Entity,
-        victim: Entity,
-        state: BattleState,
-    ) {
+    override fun adjustBattleState(entity: Entity, victim: Entity, state: BattleState) {
         if (state.ammunition != null && entity is Player) {
             val damage = state.ammunition.poisonDamage
             if (state.estimatedHit > 0 && damage > 8 && RandomFunction.random(10) < 4) {
@@ -150,11 +136,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         super.adjustBattleState(entity, victim, state)
     }
 
-    override fun visualize(
-        entity: Entity,
-        victim: Entity?,
-        state: BattleState?,
-    ) {
+    override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
         var start: Graphics? = null
         if (state!!.ammunition != null) {
             start = state.ammunition.startGraphics
@@ -185,11 +167,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         entity.visualize(entity.properties.attackAnimation, start)
     }
 
-    override fun impact(
-        entity: Entity?,
-        victim: Entity?,
-        state: BattleState?,
-    ) {
+    override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
         if (state!!.ammunition != null && state.ammunition.effect != null && state.ammunition!!.effect!!.canFire(state)) {
             state.ammunition!!.effect!!.impact(state)
         }
@@ -208,11 +186,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         }
     }
 
-    override fun visualizeImpact(
-        entity: Entity?,
-        victim: Entity?,
-        state: BattleState?,
-    ) {
+    override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?) {
         victim!!.animate(victim.properties.defenceAnimation)
     }
 
@@ -223,12 +197,12 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
             effectiveRangedLevel =
                 floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
         }
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
+        if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
         effectiveRangedLevel += 8
         effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
         effectiveRangedLevel = floor(effectiveRangedLevel)
         if (!flags.contains(SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY)) {
-            effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+            effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle!!.bonusType] + 64)
         } else {
             effectiveRangedLevel *= 64
         }
@@ -236,11 +210,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         return floor(effectiveRangedLevel).toInt()
     }
 
-    override fun calculateHit(
-        entity: Entity?,
-        victim: Entity?,
-        modifier: Double,
-    ): Int {
+    override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
         val level = entity!!.skills.getLevel(Skills.RANGE)
         val bonus = entity.properties.bonuses[14]
         var prayer = 1.0
@@ -248,7 +218,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
             prayer += entity.prayer.getSkillBonus(Skills.RANGE)
         }
         var cumulativeStr = floor(level * prayer)
-        if (entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) {
+        if (entity.properties.attackStyle!!.style == WeaponInterface.STYLE_RANGE_ACCURATE) {
             cumulativeStr += 3.0
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.RANGE)
@@ -263,22 +233,16 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
         // return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
     }
 
-    override fun calculateDefence(
-        victim: Entity?,
-        attacker: Entity?,
-    ): Int {
+    override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
         victim ?: return 0
         attacker ?: return 0
 
         val defLevel = victim.skills.getLevel(Skills.DEFENCE)
-        val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64
+        val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle!!.bonusType + 5] + 64
         return defLevel * styleDefenceBonus
     }
 
-    override fun getSetMultiplier(
-        e: Entity?,
-        skillId: Int,
-    ): Double {
+    override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
         if (skillId == Skills.RANGE) {
             if (e is Player && e.isWearingVoid(CombatStyle.RANGE)) {
                 return 1.1
@@ -294,10 +258,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
     }
 
     companion object {
-        fun hasAmmo(
-            e: Entity?,
-            state: BattleState?,
-        ): Boolean {
+        fun hasAmmo(e: Entity?, state: BattleState?): Boolean {
             if (e !is Player) {
                 return true
             }
@@ -322,11 +283,7 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
             return false
         }
 
-        fun useAmmo(
-            e: Entity,
-            state: BattleState,
-            location: Location?,
-        ) {
+        fun useAmmo(e: Entity, state: BattleState, location: Location?) {
             var dropLocation = location
             if (e !is Player) {
                 return

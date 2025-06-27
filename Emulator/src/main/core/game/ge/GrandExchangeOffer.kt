@@ -15,6 +15,7 @@ import kotlin.math.min
 
 /**
  * The outgoing packet used for updating a player's grand exchange data.
+ *
  * @author Emperor, Vexia, Angle
  */
 class GrandExchangeOffer {
@@ -110,11 +111,7 @@ class GrandExchangeOffer {
      * Returns true if the offer is still active (not completed, aborted, or removed).
      */
     val isActive: Boolean
-        get() =
-            offerState != OfferState.ABORTED &&
-                offerState != OfferState.PENDING &&
-                offerState != OfferState.COMPLETED &&
-                offerState != OfferState.REMOVED
+        get() = offerState != OfferState.ABORTED && offerState != OfferState.PENDING && offerState != OfferState.COMPLETED && offerState != OfferState.REMOVED
 
     /**
      * Adds an item to the withdraw list of this offer.
@@ -167,8 +164,7 @@ class GrandExchangeOffer {
         )
         val withdrawItems: Array<Item> = withdraw.filterNotNull().toTypedArray()
         PacketRepository.send(
-            ContainerPacket::class.java,
-            OutgoingContext.Container(player, -1, -1757, 523 + index, withdrawItems, false)
+            ContainerPacket::class.java, OutgoingContext.Container(player, -1, -1757, 523 + index, withdrawItems, false)
         )
     }
 
@@ -184,10 +180,9 @@ class GrandExchangeOffer {
                 stmt.executeUpdate()
                 stmt.close()
             } else {
-                val stmt =
-                    conn.prepareStatement(
-                        "UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ?, slot_index = ? WHERE uid = ?",
-                    )
+                val stmt = conn.prepareStatement(
+                    "UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ?, slot_index = ? WHERE uid = ?",
+                )
                 stmt.setInt(1, completedAmount)
                 stmt.setInt(2, offerState.ordinal)
                 stmt.setInt(3, totalCoinExchange)
@@ -220,23 +215,19 @@ class GrandExchangeOffer {
             } else {
                 val stmt = conn.createStatement()
                 stmt.executeUpdate(
-                    "INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale, slot_index) " +
-                        "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if (sell) 1 else 0}, $index)",
+                    "INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale, slot_index) " + "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if (sell) 1 else 0}, $index)",
                 )
                 val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
                 uid = nowuid.getLong(1)
-                ExchangeHistory.getInstance(player).offerRecords[index] =
-                    ExchangeHistory.OfferRecord(uid, index)
+                ExchangeHistory.getInstance(player).offerRecords[index] = ExchangeHistory.OfferRecord(uid, index)
                 visualize(player)
                 stmt.close()
 
-                val username =
-                    if (getAttribute(player ?: return@run, "ge-exclude", false)) {
-                        "?????"
-                    } else {
-                        player?.username
-                            ?: "?????"
-                    }
+                val username = if (getAttribute(player ?: return@run, "ge-exclude", false)) {
+                    "?????"
+                } else {
+                    player?.username ?: "?????"
+                }
 
                 // Discord.postNewOffer(sell, itemID, offeredValue, amount, username)
             }
@@ -277,24 +268,7 @@ class GrandExchangeOffer {
      * @return A string describing the offer.
      */
     override fun toString(): String =
-        "[name=" + ItemDefinition.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount +
-            ", completedAmount=" +
-            completedAmount +
-            ", offeredValue=" +
-            offeredValue +
-            ", index=" +
-            index +
-            ", sell=" +
-            sell +
-            ", state=" +
-            offerState +
-            ", withdraw=" +
-            withdraw.contentToString() +
-            ", totalCoinExchange=" +
-            totalCoinExchange +
-            ", playerUID=" +
-            playerUID +
-            "]"
+        "[name=" + ItemDefinition.forId(itemID).name + ", itemId=" + itemID + ", amount=" + amount + ", completedAmount=" + completedAmount + ", offeredValue=" + offeredValue + ", index=" + index + ", sell=" + sell + ", state=" + offerState + ", withdraw=" + withdraw.contentToString() + ", totalCoinExchange=" + totalCoinExchange + ", playerUID=" + playerUID + "]"
 
     companion object {
         /**

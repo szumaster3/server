@@ -49,7 +49,7 @@ class ImmerseWorld : StartupListener {
                     immerseFishingGuild()
                     immerseAdventurer()
                     immerseFalador()
-                    // immerseGE()
+                    immerseGE()
                 }
             }
         }

@@ -18,8 +18,7 @@ import java.util.*
  */
 class ExchangeHistory(
     private val player: Player? = null,
-) : PersistPlayer,
-    LoginListener {
+) : PersistPlayer, LoginListener {
     // Stores the player's history of completed Grand Exchange offers (maximum 5 records).
     var history = arrayOfNulls<GrandExchangeOffer>(5)
 
@@ -60,10 +59,9 @@ class ExchangeHistory(
 
         GEDatabase.run { conn ->
             val stmt = conn.createStatement()
-            val offer_records =
-                stmt.executeQuery(
-                    "SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6",
-                )
+            val offer_records = stmt.executeQuery(
+                "SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6",
+            )
 
             while (offer_records.next()) {
                 val offer = GrandExchangeOffer.fromQuery(offer_records)
@@ -212,9 +210,19 @@ class ExchangeHistory(
                 continue
             }
             sendString(player!!, if (o.sell) "You sold" else "You bought", Components.EXCHANGE_HISTORY_643, 25 + i)
-            sendString(player, NumberFormat.getNumberInstance(Locale.US).format(o.completedAmount.toLong()), Components.EXCHANGE_HISTORY_643, 30 + i)
+            sendString(
+                player,
+                NumberFormat.getNumberInstance(Locale.US).format(o.completedAmount.toLong()),
+                Components.EXCHANGE_HISTORY_643,
+                30 + i
+            )
             sendString(player, ItemDefinition.forId(o.itemID).name, Components.EXCHANGE_HISTORY_643, 35 + i)
-            sendString(player, NumberFormat.getNumberInstance(Locale.US).format(o.totalCoinExchange.toLong()) + " gp", Components.EXCHANGE_HISTORY_643, 40 + i)
+            sendString(
+                player,
+                NumberFormat.getNumberInstance(Locale.US).format(o.totalCoinExchange.toLong()) + " gp",
+                Components.EXCHANGE_HISTORY_643,
+                40 + i
+            )
         }
     }
 

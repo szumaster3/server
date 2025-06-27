@@ -99,13 +99,7 @@ class Grave : AbstractNPC {
         )
     }
 
-    fun setupFromJsonParams(
-        playerUid: Int,
-        ticks: Int,
-        location: Location,
-        items: Array<Item>,
-        username: String,
-    ) {
+    fun setupFromJsonParams(playerUid: Int, ticks: Int, location: Location, items: Array<Item>, username: String) {
         this.ownerUid = playerUid
         this.ticksRemaining = ticks
         this.location = location

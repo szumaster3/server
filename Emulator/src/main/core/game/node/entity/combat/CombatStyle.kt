@@ -4,6 +4,7 @@ import core.game.node.entity.player.link.prayer.PrayerType
 
 /**
  * Represents the different styles of combat.
+ *
  * @author Emperor
  */
 enum class CombatStyle(

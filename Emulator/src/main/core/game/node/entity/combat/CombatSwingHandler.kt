@@ -222,7 +222,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         }
 
         val comp = entity.getAttribute("autocast_component", null) as Component?
-        if ((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell.spellId == 0) && entity is Player) {
+        if ((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell!!.spellId == 0) && entity is Player) {
             val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
             if (comp != null) {
                 entity.interfaceManager.close(comp)
@@ -488,7 +488,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             }
 
             is Player -> {
-                player = entity; attStyle = entity.properties.attackStyle.style
+                player = entity; attStyle = entity.properties.attackStyle!!.style
             }
 
             else -> return

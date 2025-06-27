@@ -188,8 +188,7 @@ object GuidePrices {
             }
             for (item in items) {
                 player.packetDispatch.sendString(
-                    "" + getRecommendedPrice(item.item, false) + " gp", COMPONENT.id,
-                    item.childData[0]
+                    "" + getRecommendedPrice(item.item, false) + " gp", COMPONENT.id, item.childData[0]
                 )
             }
         }

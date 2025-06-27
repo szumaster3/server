@@ -19,19 +19,7 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Plugin
 import java.util.function.Consumer
 
-/**
- * Abstract class representing a Magic Spell in the game.
- *
- * @property book The spell book to which the spell belongs.
- * @property level The required level to cast the spell.
- * @property experience The experience gained after casting the spell.
- * @property animation The animation to be played during the spell cast.
- * @property graphics The graphics to be displayed during the spell cast.
- * @property audio The audio to be played during the spell cast.
- * @property castRunes The runes required to cast the spell.
- */
-abstract class MagicSpell
-@JvmOverloads constructor(
+abstract class MagicSpell @JvmOverloads constructor(
     val book: SpellBook = SpellBook.MODERN,
     val level: Int = 0,
     @JvmField val experience: Double = 0.0,
@@ -40,291 +28,150 @@ abstract class MagicSpell
     @JvmField val audio: Audio? = null,
     val castRunes: Array<Item?>? = arrayOfNulls(0),
 ) : Plugin<SpellType?> {
-    /**
-     * The ID of the spell.
-     */
+
     @JvmField
     var spellId: Int = 0
 
-    /**
-     * The casting delay of the spell, in ticks.
-     */
-    open val delay: Int
-        get() = 3
+    open val delay: Int get() = 3
 
-    /**
-     * Casts the spell on the given target.
-     *
-     * @param entity The entity casting the spell.
-     * @param target The target of the spell.
-     * @return Whether the spell was successfully cast.
-     */
-    abstract fun cast(
-        entity: Entity,
-        target: Node,
-    ): Boolean
+    abstract fun cast(entity: Entity, target: Node): Boolean
 
-    /**
-     * Visualizes the spell casting by displaying graphics, animation, and audio.
-     *
-     * @param entity The entity casting the spell.
-     * @param target The target of the spell.
-     */
-    open fun visualize(
-        entity: Entity,
-        target: Node,
-    ) {
+    open fun visualize(entity: Entity, target: Node) {
         entity.graphics(graphics)
         entity.animate(animation)
         playGlobalAudio(entity.location, audio!!.id, 20)
     }
 
-    /**
-     * Checks if the player is using the correct staff for the rune.
-     *
-     * @param p The player casting the spell.
-     * @param rune The rune used to check for staff compatibility.
-     * @return Whether the player is using the correct staff.
-     */
-    fun usingStaff(
-        p: Player,
-        rune: Int,
-    ): Boolean {
+    fun usingStaff(p: Player, rune: Int): Boolean {
         val weapon = p.equipment[3] ?: return false
         val staff = forId(rune) ?: return false
-        val staves = staff.staves
-        for (id in staves) {
-            if (weapon.id == id) {
-                return true
-            }
-        }
-        return false
+        return staff.staves.contains(weapon.id)
     }
 
-    /**
-     * Checks if the caster meets the requirements to cast the spell.
-     *
-     * @param caster The entity casting the spell.
-     * @param message Whether to send a message if the requirements are not met.
-     * @param remove Whether to remove the runes if the caster meets the requirements.
-     * @return Whether the caster meets the requirements to cast the spell.
-     */
-    open fun meetsRequirements(
-        caster: Entity,
-        message: Boolean,
-        remove: Boolean,
-    ): Boolean {
-        if (!checkLevelRequirement(caster, message)) {
-            return false
-        }
+    open fun meetsRequirements(caster: Entity, message: Boolean, remove: Boolean): Boolean {
+        if (!checkLevelRequirement(caster, message)) return false
+
         if (caster is Player) {
             val spell = caster.properties.autocastSpell
-            if (spell != null) {
-                val slayer = caster.equipment[3].name.contains("layer's staff")
-                val voidKnight = caster.equipment[3].name.contains("knight mace")
+            val weapon = caster.equipment[3]
+            if (spell != null && weapon != null) {
+                val slayer = weapon.name.contains("layer's staff")
+                val voidKnight = weapon.name.contains("knight mace")
                 if ((spell.spellId == 31 && !slayer) || (spell.spellId == 42 && !voidKnight)) {
                     caster.packetDispatch.sendMessage("You need the proper staff to autocast this spell.")
                     return false
                 }
             }
-        }
-        if ((spellId == 12 || spellId == 30 || spellId == 56) && caster is Player) {
-            if (caster.getAttribute("entangleDelay", 0) > ticks) {
-                caster.asPlayer().sendMessage("You have recently cast a binding spell.")
+
+            if ((spellId == 12 || spellId == 30 || spellId == 56) && caster.getAttribute("entangleDelay", 0) > ticks) {
+                caster.sendMessage("You have recently cast a binding spell.")
                 return false
             }
-        }
-        if (caster is Player) {
-            val p = caster
-            if (castRunes == null) {
-                return true
-            }
-            val toRemove: MutableList<Item?> = ArrayList(20)
+
+            if (castRunes == null) return true
+
+            val toRemove = mutableListOf<Item?>()
             for (item in castRunes) {
-                if (!hasRune(p, item, toRemove, message)) {
-                    return false
-                }
+                if (!hasRune(caster, item, toRemove, message)) return false
             }
-            if (remove) {
-                toRemove.forEach(
-                    Consumer { i: Item? ->
-                        p.inventory.remove(i)
-                    },
-                )
-            }
-            return true
+            if (remove) toRemove.forEach { caster.inventory.remove(it) }
         }
         return true
     }
 
-    /**
-     * Checks if the caster meets the level requirement for the spell.
-     *
-     * @param caster The entity casting the spell.
-     * @param message Whether to send a message if the level requirement is not met.
-     * @return Whether the caster meets the level requirement for the spell.
-     */
-    fun checkLevelRequirement(
-        caster: Entity,
-        message: Boolean,
-    ): Boolean {
-        if (caster is Player && caster.getSkills()
-                .getLevel(Skills.MAGIC, if (this is CombatSpell) true else false) < levelRequirement()
-        ) {
-            if (message && caster is Player) {
-                caster.packetDispatch.sendMessage(
-                    "You need a Magic level of " + levelRequirement() + " to cast this spell.",
-                )
-            }
+    fun checkLevelRequirement(caster: Entity, message: Boolean): Boolean {
+        if (caster is Player && caster.getSkills().getLevel(Skills.MAGIC, this is CombatSpell) < level) {
+            if (message) caster.packetDispatch.sendMessage("You need a Magic level of $level to cast this spell.")
             return false
         }
         return true
     }
 
-    /**
-     * Checks if the player has the necessary runes to cast the spell.
-     *
-     * @param p The player casting the spell.
-     * @param item The item representing the rune.
-     * @param toRemove The list of runes to be removed from the player's inventory.
-     * @param message Whether to send a message if the player does not have enough runes.
-     * @return Whether the player has the necessary runes to cast the spell.
-     */
-    fun hasRune(
-        p: Player,
-        item: Item?,
-        toRemove: MutableList<Item?>,
-        message: Boolean,
-    ): Boolean {
-        if (!usingStaff(p, item!!.id)) {
-            val hasBaseRune = p.inventory.contains(item.id, item.amount)
-            if (!hasBaseRune) {
-                val baseAmt = p.inventory.getAmount(item.id)
-                if (baseAmt > 0) {
-                    toRemove.add(Item(item.id, p.inventory.getAmount(item.id)))
-                }
-                var amtRemaining = item.amount - baseAmt
-                val possibleComboRunes = CombinationRune.eligibleFor(
-                    Runes.forId(item.id)!!,
-                )
-                for (r in possibleComboRunes) {
-                    if (p.inventory.containsItem(Item(r.id)) && amtRemaining > 0) {
-                        val amt = p.inventory.getAmount(r.id)
-                        if (amtRemaining < amt) {
-                            toRemove.add(Item(r.id, amtRemaining))
-                            amtRemaining = 0
-                            continue
-                        }
-                        amtRemaining -= p.inventory.getAmount(r.id)
-                        toRemove.add(Item(r.id, p.inventory.getAmount(r.id)))
-                    }
-                }
-                if (amtRemaining <= 0) {
-                    return true
-                } else {
-                    p.packetDispatch.sendMessage("You don't have enough " + item.name + "s to cast this spell.")
-                    return false
-                }
-            }
+    fun hasRune(p: Player, item: Item?, toRemove: MutableList<Item?>, message: Boolean): Boolean {
+        if (usingStaff(p, item!!.id)) return true
+
+        val hasBase = p.inventory.contains(item.id, item.amount)
+        if (hasBase) {
             toRemove.add(item)
             return true
         }
-        return true
+
+        val baseAmt = p.inventory.getAmount(item.id)
+        if (baseAmt > 0) toRemove.add(Item(item.id, baseAmt))
+
+        var amtRemaining = item.amount - baseAmt
+        val combos = CombinationRune.eligibleFor(Runes.forId(item.id)!!)
+
+        for (r in combos) {
+            if (amtRemaining <= 0) break
+            val amt = p.inventory.getAmount(r.id)
+            if (amt > 0) {
+                val toTake = amtRemaining.coerceAtMost(amt)
+                toRemove.add(Item(r.id, toTake))
+                amtRemaining -= toTake
+            }
+        }
+
+        if (amtRemaining <= 0) return true
+
+        if (message) p.packetDispatch.sendMessage("You don't have enough ${item.name}s to cast this spell.")
+        return false
     }
 
-    /**
-     * Adds experience to the caster's skills after casting the spell.
-     *
-     * @param entity The entity casting the spell.
-     * @param hit The damage dealt during the spell cast.
-     */
-    open fun addExperience(
-        entity: Entity,
-        hit: Int,
-    ) {
+    open fun addExperience(entity: Entity, hit: Int) {
         entity.getSkills().addExperience(Skills.MAGIC, experience, true)
-        if (entity !is Player || hit < 1) {
-            return
-        }
+        if (entity !is Player || hit < 1) return
+
         entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-        if (entity.getProperties().attackStyle.style == WeaponInterface.STYLE_DEFENSIVE_CAST) {
-            val baseXpReward = (CombatSwingHandler.EXPERIENCE_MOD * hit) / 2.0
-            entity.getSkills().addExperience(Skills.DEFENCE, baseXpReward, true)
-            entity.getSkills().addExperience(Skills.MAGIC, baseXpReward, true)
-            return
+        if (entity.getProperties().attackStyle!!.style == WeaponInterface.STYLE_DEFENSIVE_CAST) {
+            val xp = (CombatSwingHandler.EXPERIENCE_MOD * hit) / 2.0
+            entity.getSkills().addExperience(Skills.DEFENCE, xp, true)
+            entity.getSkills().addExperience(Skills.MAGIC, xp, true)
+        } else {
+            entity.getSkills().addExperience(Skills.MAGIC, hit * CombatSwingHandler.EXPERIENCE_MOD, true)
         }
-        entity.getSkills().addExperience(Skills.MAGIC, hit * (CombatSwingHandler.EXPERIENCE_MOD), true)
     }
 
-    /**
-     * Returns the level requirement for casting the spell.
-     *
-     * @return The level requirement for the spell.
-     */
     fun levelRequirement(): Int = level
 
-    override fun fireEvent(
-        identifier: String,
-        vararg args: Any,
-    ): Any? = null
+    override fun fireEvent(identifier: String, vararg args: Any): Any? = null
 
-    /**
-     * Returns the experience awarded for casting the spell.
-     *
-     * @param player The player casting the spell.
-     * @return The experience awarded for casting the spell.
-     */
     open fun getExperience(player: Player): Double = experience
 
     companion object {
-        /**
-         * Casts a spell on the specified target.
-         *
-         * @param p The player casting the spell.
-         * @param book The spell book containing the spell.
-         * @param spellId The ID of the spell to cast.
-         * @param target The target of the spell.
-         * @return Whether the spell was successfully cast.
-         */
-        fun castSpell(
-            p: Player,
-            book: SpellBook,
-            spellId: Int,
-            target: Node,
-        ): Boolean {
-            if (p.getAttribute("magic-delay", 0) > ticks) {
-                return false
-            }
+        fun castSpell(p: Player, book: SpellBook, spellId: Int, target: Node): Boolean {
+            if (p.getAttribute("magic-delay", 0) > ticks) return false
+
             val spell = book.getSpell(spellId) ?: return false
-            if (spell.book != book || p.spellBookManager.spellBook != book.interfaceId) {
-                return false
-            }
-            if (target.location != null && target !== p) {
-                if (!target.location.withinDistance(p.location, 15)) {
-                    return false
-                }
-                p.faceLocation(target.location)
-            }
-            val combatSpell = spell is CombatSpell
-            if (!combatSpell && target is Entity) {
+            if (spell.book != book || p.spellBookManager.spellBook != book.interfaceId) return false
+
+            if (target !== p && target.location != null && !target.location.withinDistance(p.location, 15)) return false
+            p.faceLocation(target.location)
+
+            if (spell is CombatSpell) {
+                // do nothing
+            } else if (target is Entity) {
                 p.faceTemporary(target, 1)
             }
-            if (spell.cast(p, target)) {
-                if (book != SpellBook.LUNAR && p.getAttribute("spell:swap", 0) != 0) {
-                    p.removeAttribute("spell:swap")
-                    p.spellBookManager.setSpellBook(SpellBook.LUNAR)
-                    p.interfaceManager.openTab(Component(SpellBook.LUNAR.interfaceId))
-                }
-                if (!combatSpell) {
-                    p.getSkills().addExperience(Skills.MAGIC, spell.getExperience(p), true)
-                }
-                if (p.getAttribute("magic-delay", 0) <= ticks) {
-                    p.setAttribute("magic-delay", ticks + spell.delay)
-                }
-                p.dispatch(SpellCastEvent(book, spellId, target))
-                return true
+
+            if (!spell.cast(p, target)) return false
+
+            if (book != SpellBook.LUNAR && p.getAttribute("spell:swap", 0) != 0) {
+                p.removeAttribute("spell:swap")
+                p.spellBookManager.setSpellBook(SpellBook.LUNAR)
+                p.interfaceManager.openTab(Component(SpellBook.LUNAR.interfaceId))
             }
-            return false
+
+            if (spell !is CombatSpell) {
+                p.getSkills().addExperience(Skills.MAGIC, spell.getExperience(p), true)
+            }
+
+            if (p.getAttribute("magic-delay", 0) <= ticks) {
+                p.setAttribute("magic-delay", ticks + spell.delay)
+            }
+
+            p.dispatch(SpellCastEvent(book, spellId, target))
+            return true
         }
     }
 }

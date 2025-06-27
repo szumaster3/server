@@ -12,8 +12,8 @@ import kotlin.math.floor
 
 /**
  * Handles the magic combat swings.
- * @author Emperor
- * @author Ceikry, Kotlin conversion + cleanup
+ *
+ * @author Emperor, Ceikry, Kotlin conversion + cleanup
  */
 open class MagicSwingHandler(
     vararg flags: SwingHandlerFlag,
@@ -178,9 +178,9 @@ open class MagicSwingHandler(
         var spellRequirement = baseLevel
         if (entity is Player) {
             if (entity.getProperties().spell != null) {
-                spellRequirement = entity.getProperties().spell.level
+                spellRequirement = entity.getProperties().spell!!.level
             } else if (entity.getProperties().autocastSpell != null) {
-                spellRequirement = entity.getProperties().autocastSpell.level
+                spellRequirement = entity.getProperties().autocastSpell!!.level
             }
         }
         var spellBonus = 0.0

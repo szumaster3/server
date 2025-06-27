@@ -73,7 +73,7 @@ class GeneralBotCreator {
                         lastBotMoveTicks = getWorldTicks()
                     }
                     if (lastBotLocation == botScript.bot.location && getWorldTicks() - lastBotMoveTicks > 5) {
-                        botScript.bot.pulseManager.current
+                        (botScript.bot.pulseManager.current as MovementPulse)
                             .stop()
                     }
                 }

@@ -9,61 +9,56 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 
 /**
- * The type Option.
+ * Represents a option on a node.
  */
 public final class Option {
 
     /**
-     * The constant _P_ATTACK.
+     * Player attack option.
      */
     public static final Option _P_ATTACK = new Option("Attack", 0);
 
     /**
-     * The constant _P_FOLLOW.
+     * Player follow option.
      */
     public static final Option _P_FOLLOW = new Option("Follow", 2);
 
     /**
-     * The constant _P_TRADE.
+     * Player trade option.
      */
     public static final Option _P_TRADE = new Option("Trade with", 3);
 
     /**
-     * The constant _P_GIVETO.
+     * Player give-to option.
      */
     public static final Option _P_GIVETO = new Option("Give-to", 3);
 
     /**
-     * The constant _P_PICKPOCKET.
+     * Player pickpocket option.
      */
     public static final Option _P_PICKPOCKET = new Option("Pickpocket", 4);
 
     /**
-     * The constant _P_EXAMINE.
+     * Player examine option.
      */
     public static final Option _P_EXAMINE = new Option("Examine", 7);
 
     /**
-     * The constant _P_ASSIST.
+     * Player assist request option.
      */
     public static final Option _P_ASSIST = new Option("Req Assist", 6);
 
     /**
-     * The constant NULL.
+     * Null fallback option.
      */
     public static final Option NULL = new Option("null", 0);
 
     private final String name;
-
     private final int index;
-
     private OptionHandler handler;
 
     /**
-     * Instantiates a new Option.
-     *
-     * @param name  the name
-     * @param index the index
+     * Creates a new Option with the given name and index.
      */
     public Option(String name, int index) {
         this.name = name;
@@ -71,60 +66,39 @@ public final class Option {
     }
 
     /**
-     * Default handler option handler.
-     *
-     * @param node   the node
-     * @param nodeId the node id
-     * @param name   the name
-     * @return the option handler
+     * Gets the default handler for a node and option name.
      */
     public static OptionHandler defaultHandler(Node node, int nodeId, String name) {
         name = name.toLowerCase();
-        if (node instanceof NPC) {
-            return NPCDefinition.getOptionHandler(nodeId, name);
-        }
-        if (node instanceof Scenery) {
-            return SceneryDefinition.getOptionHandler(nodeId, name);
-        }
-        if (node instanceof Item) {
-            return ItemDefinition.getOptionHandler(nodeId, name);
-        }
-
+        if (node instanceof NPC) return NPCDefinition.getOptionHandler(nodeId, name);
+        if (node instanceof Scenery) return SceneryDefinition.getOptionHandler(nodeId, name);
+        if (node instanceof Item) return ItemDefinition.getOptionHandler(nodeId, name);
         return null;
     }
 
     /**
-     * Gets name.
-     *
-     * @return the name
+     * Gets the option name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets index.
-     *
-     * @return the index
+     * Gets the option index.
      */
     public int getIndex() {
         return index;
     }
 
     /**
-     * Gets handler.
-     *
-     * @return the handler
+     * Gets the assigned handler.
      */
     public OptionHandler getHandler() {
         return handler;
     }
 
     /**
-     * Sets handler.
-     *
-     * @param handler the handler
-     * @return the handler
+     * Sets and returns the handler.
      */
     public Option setHandler(OptionHandler handler) {
         this.handler = handler;

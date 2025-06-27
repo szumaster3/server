@@ -56,7 +56,7 @@ public final class DeathTask extends NodeTask {
             }
         }
         e.graphics(Animator.RESET_G);
-        e.visualize(e.getProperties().getDeathAnimation(), e.getProperties().deathGfx);
+        e.visualize(e.getProperties().getDeathAnimation(), e.getProperties().getDeathGfx());
         e.getAnimator().forceAnimation(e.getProperties().getDeathAnimation());
         e.commenceDeath(killer);
         e.getImpactHandler().setDisabledTicks(50);
@@ -78,7 +78,7 @@ public final class DeathTask extends NodeTask {
         Entity killer = n.length > 0 ? (Entity) n[0] : e;
         e.removeAttribute("state:death");
         e.removeAttribute("tick:death");
-        Location spawn = e.getProperties().isSafeZone() ? e.getProperties().safeRespawn : e.getProperties().getSpawnLocation();
+        Location spawn = e.getProperties().isSafeZone() ? e.getProperties().getSafeRespawn() : e.getProperties().getSpawnLocation();
         e.getAnimator().forceAnimation(Animator.RESET_A);
         e.getProperties().setTeleportLocation(spawn);
         e.unlock();

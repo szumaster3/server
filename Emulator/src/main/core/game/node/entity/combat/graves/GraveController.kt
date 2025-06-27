@@ -30,11 +30,8 @@ import org.rs.consts.Sounds
 import java.util.Map
 import kotlin.math.min
 
-class GraveController :
-    PersistWorld,
-    TickListener,
-    InteractionListener,
-    Commands {
+class GraveController : PersistWorld, TickListener, InteractionListener, Commands {
+
     override fun defineListeners() {
         on(GraveType.ids, IntType.NPC, "read", handler = this::onGraveReadOption)
         on(GraveType.ids, IntType.NPC, "bless", handler = this::onGraveBlessed)
@@ -99,10 +96,7 @@ class GraveController :
         return true
     }
 
-    private fun onGraveBlessed(
-        player: Player,
-        node: Node,
-    ): Boolean {
+    private fun onGraveBlessed(player: Player, node: Node): Boolean {
         val g = node as? Grave ?: return false
 
         if (getAttribute(g, "blessed", false)) {
@@ -139,10 +133,7 @@ class GraveController :
         return true
     }
 
-    private fun onGraveRepaired(
-        player: Player,
-        node: Node,
-    ): Boolean {
+    private fun onGraveRepaired(player: Player, node: Node): Boolean {
         val g = node as? Grave ?: return false
 
         if (getAttribute(g, "repaired", false)) {
@@ -168,10 +159,7 @@ class GraveController :
         return true
     }
 
-    private fun onGraveDemolished(
-        player: Player,
-        node: Node,
-    ): Boolean {
+    private fun onGraveDemolished(player: Player, node: Node): Boolean {
         val g = node as? Grave ?: return false
 
         if (player.details.uid != g.ownerUid) {

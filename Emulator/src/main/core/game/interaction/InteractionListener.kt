@@ -35,7 +35,7 @@ interface InteractionListener : ContentInterface {
         InteractionListeners.add(ids, type.ordinal, option, handler)
     }
 
-    @Deprecated("Don't use")
+    @Deprecated("Don't use", ReplaceWith("InteractionListeners.add(option, type.ordinal, handler)"))
     fun on(
         option: String,
         type: IntType,

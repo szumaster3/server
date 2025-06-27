@@ -3,10 +3,7 @@ package core.game.ge
 import core.game.node.item.Item
 import org.rs.consts.Items
 
-enum class ItemSet(
-    val itemId: Int,
-    vararg val components: Int,
-) {
+enum class ItemSet(val itemId: Int, vararg val components: Int) {
     /*
      * Standard armour sets.
      */
@@ -134,8 +131,7 @@ enum class ItemSet(
         Items.DRAGON_PLATESKIRT_4585,
     ),
 
-    PLACEHOLDER_2(-1, -1, -1, -1),
-    PLACEHOLDER_3(-1, -1, -1, -1),
+    PLACEHOLDER_2(-1, -1, -1, -1), PLACEHOLDER_3(-1, -1, -1, -1),
 
     /*
      * Barrows armour sets.
@@ -184,10 +180,9 @@ enum class ItemSet(
         Items.VERACS_FLAIL_4755,
     ),
 
-    PLACEHOLDER_4(-1, -1, -1, -1),
-    PLACEHOLDER_5(-1, -1, -1, -1),
-    PLACEHOLDER_6(-1, -1, -1, -1),
-    PLACEHOLDER_7(-1, -1, -1, -1),
+    PLACEHOLDER_4(-1, -1, -1, -1), PLACEHOLDER_5(-1, -1, -1, -1), PLACEHOLDER_6(-1, -1, -1, -1), PLACEHOLDER_7(
+        -1, -1, -1, -1
+    ),
 
     /*
      * Third-Age armour sets.
@@ -215,13 +210,10 @@ enum class ItemSet(
         Items.THIRD_AGE_AMULET_10344,
     ),
 
-    PLACEHOLDER_8(-1, -1, -1, -1),
-    PLACEHOLDER_9(-1, -1, -1, -1),
-    PLACEHOLDER_10(-1, -1, -1, -1),
-    PLACEHOLDER_11(-1, -1, -1, -1),
-    PLACEHOLDER_12(-1, -1, -1, -1),
-    PLACEHOLDER_13(-1, -1, -1, -1),
-    PLACEHOLDER_14(-1, -1, -1, -1),
+    PLACEHOLDER_8(-1, -1, -1, -1), PLACEHOLDER_9(-1, -1, -1, -1), PLACEHOLDER_10(-1, -1, -1, -1), PLACEHOLDER_11(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_12(-1, -1, -1, -1), PLACEHOLDER_13(-1, -1, -1, -1), PLACEHOLDER_14(-1, -1, -1, -1),
 
     /*
      * Dragonhide armour sets.
@@ -252,12 +244,10 @@ enum class ItemSet(
         Items.BLACK_DHIDE_VAMB_2491,
     ),
 
-    PLACEHOLDER_15(-1, -1, -1, -1),
-    PLACEHOLDER_16(-1, -1, -1, -1),
-    PLACEHOLDER_17(-1, -1, -1, -1),
-    PLACEHOLDER_18(-1, -1, -1, -1),
-    PLACEHOLDER_19(-1, -1, -1, -1),
-    PLACEHOLDER_20(-1, -1, -1, -1),
+    PLACEHOLDER_15(-1, -1, -1, -1), PLACEHOLDER_16(-1, -1, -1, -1), PLACEHOLDER_17(-1, -1, -1, -1), PLACEHOLDER_18(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_19(-1, -1, -1, -1), PLACEHOLDER_20(-1, -1, -1, -1),
 
     /*
      * Magical armour sets.
@@ -304,10 +294,9 @@ enum class ItemSet(
         Items.SPLITBARK_BOOTS_3393,
     ),
 
-    PLACEHOLDER_21(-1, -1, -1, -1),
-    PLACEHOLDER_22(-1, -1, -1, -1),
-    PLACEHOLDER_23(-1, -1, -1, -1),
-    PLACEHOLDER_24(-1, -1, -1, -1),
+    PLACEHOLDER_21(-1, -1, -1, -1), PLACEHOLDER_22(-1, -1, -1, -1), PLACEHOLDER_23(-1, -1, -1, -1), PLACEHOLDER_24(
+        -1, -1, -1, -1
+    ),
     PLACEHOLDER_25(-1, -1, -1, -1),
 
     /*
@@ -402,14 +391,12 @@ enum class ItemSet(
         Items.RUNE_KITESHIELD_G_2621,
     ),
 
-    PLACEHOLDER_26(-1, -1, -1, -1),
-    PLACEHOLDER_27(-1, -1, -1, -1),
-    PLACEHOLDER_28(-1, -1, -1, -1),
-    PLACEHOLDER_29(-1, -1, -1, -1),
-    PLACEHOLDER_30(-1, -1, -1, -1),
-    PLACEHOLDER_31(-1, -1, -1, -1),
-    PLACEHOLDER_32(-1, -1, -1, -1),
-    PLACEHOLDER_33(-1, -1, -1, -1),
+    PLACEHOLDER_26(-1, -1, -1, -1), PLACEHOLDER_27(-1, -1, -1, -1), PLACEHOLDER_28(-1, -1, -1, -1), PLACEHOLDER_29(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_30(-1, -1, -1, -1), PLACEHOLDER_31(-1, -1, -1, -1), PLACEHOLDER_32(-1, -1, -1, -1), PLACEHOLDER_33(
+        -1, -1, -1, -1
+    ),
 
     /*
      * Magical armour sets.
@@ -434,13 +421,10 @@ enum class ItemSet(
         Items.BLUE_SKIRT_G_7386,
     ),
 
-    PLACEHOLDER_34(-1, -1, -1, -1),
-    PLACEHOLDER_35(-1, -1, -1, -1),
-    PLACEHOLDER_36(-1, -1, -1, -1),
-    PLACEHOLDER_37(-1, -1, -1, -1),
-    PLACEHOLDER_38(-1, -1, -1, -1),
-    PLACEHOLDER_39(-1, -1, -1, -1),
-    PLACEHOLDER_40(-1, -1, -1, -1),
+    PLACEHOLDER_34(-1, -1, -1, -1), PLACEHOLDER_35(-1, -1, -1, -1), PLACEHOLDER_36(-1, -1, -1, -1), PLACEHOLDER_37(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_38(-1, -1, -1, -1), PLACEHOLDER_39(-1, -1, -1, -1), PLACEHOLDER_40(-1, -1, -1, -1),
 
     /*
      * Blessed ranged armour sets.
@@ -561,8 +545,7 @@ enum class ItemSet(
         Items.GILDED_KITESHIELD_3488,
     ),
 
-    PLACEHOLDER_42(-1, -1, -1, -1),
-    PLACEHOLDER_43(-1, -1, -1, -1),
+    PLACEHOLDER_42(-1, -1, -1, -1), PLACEHOLDER_43(-1, -1, -1, -1),
 
     /*
      * Fremennik armour sets.
@@ -593,13 +576,10 @@ enum class ItemSet(
         Items.SKELETAL_BOOTS_6147,
     ),
 
-    PLACEHOLDER_44(-1, -1, -1, -1),
-    PLACEHOLDER_45(-1, -1, -1, -1),
-    PLACEHOLDER_46(-1, -1, -1, -1),
-    PLACEHOLDER_47(-1, -1, -1, -1),
-    PLACEHOLDER_48(-1, -1, -1, -1),
-    PLACEHOLDER_49(-1, -1, -1, -1),
-    PLACEHOLDER_50(-1, -1, -1, -1),
+    PLACEHOLDER_44(-1, -1, -1, -1), PLACEHOLDER_45(-1, -1, -1, -1), PLACEHOLDER_46(-1, -1, -1, -1), PLACEHOLDER_47(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_48(-1, -1, -1, -1), PLACEHOLDER_49(-1, -1, -1, -1), PLACEHOLDER_50(-1, -1, -1, -1),
 
     /*
      * Dwarf cannon set.
@@ -613,14 +593,12 @@ enum class ItemSet(
         Items.CANNON_FURNACE_12,
     ),
 
-    PLACEHOLDER_51(-1, -1, -1, -1),
-    PLACEHOLDER_52(-1, -1, -1, -1),
-    PLACEHOLDER_53(-1, -1, -1, -1),
-    PLACEHOLDER_54(-1, -1, -1, -1),
-    PLACEHOLDER_55(-1, -1, -1, -1),
-    PLACEHOLDER_56(-1, -1, -1, -1),
-    PLACEHOLDER_57(-1, -1, -1, -1),
-    PLACEHOLDER_58(-1, -1, -1, -1),
+    PLACEHOLDER_51(-1, -1, -1, -1), PLACEHOLDER_52(-1, -1, -1, -1), PLACEHOLDER_53(-1, -1, -1, -1), PLACEHOLDER_54(
+        -1, -1, -1, -1
+    ),
+    PLACEHOLDER_55(-1, -1, -1, -1), PLACEHOLDER_56(-1, -1, -1, -1), PLACEHOLDER_57(-1, -1, -1, -1), PLACEHOLDER_58(
+        -1, -1, -1, -1
+    ),
     PLACEHOLDER_59(-1, -1, -1, -1),
 
     /*
@@ -638,8 +616,7 @@ enum class ItemSet(
         Items.ELITE_BLACK_FULL_HELM_14494,
         Items.ELITE_BLACK_PLATEBODY_14492,
         Items.ELITE_BLACK_PLATELEGS_14490,
-    ),
-    ;
+    ), ;
 
     companion object {
         private val ITEM_SETS = mutableMapOf<Int, ItemSet>()

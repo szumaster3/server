@@ -32,9 +32,8 @@ import org.rs.consts.Components
  *
  * @author Ceikry
  */
-abstract class Cutscene(
-    val player: Player,
-) {
+abstract class Cutscene(val player: Player) {
+
     /**
      * The region in which the cutscene is taking place.
      */

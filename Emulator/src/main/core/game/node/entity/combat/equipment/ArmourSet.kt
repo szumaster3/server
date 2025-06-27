@@ -13,9 +13,9 @@ import org.rs.consts.NPCs
 
 /**
  * Represents the types of armour sets.
+ *
  * @author Emperor
  */
-
 enum class ArmourSet(private val endGraphics: Graphics?, set: Array<IntArray>) {
 
     /**

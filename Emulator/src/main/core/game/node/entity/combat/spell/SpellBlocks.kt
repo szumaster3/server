@@ -17,14 +17,11 @@ object SpellBlocks {
     /**
      * Registers a node to be blocked by a specific spell.
      *
-     * @param spellId The ID of the spell that should block the node.
+     * @param spellId The id of the spell that should block the node.
      * @param toBlock The node to be blocked.
      */
     @JvmStatic
-    fun register(
-        spellId: Int,
-        toBlock: Node,
-    ) {
+    fun register(spellId: Int, toBlock: Node) {
         if (blocks[spellId] != null) {
             blocks[spellId]!!.add(toBlock)
         } else {
@@ -37,15 +34,12 @@ object SpellBlocks {
     /**
      * Checks if a node is blocked by a specific spell.
      *
-     * @param spellId The ID of the spell to check.
+     * @param spellId The id of the spell to check.
      * @param node The node to check against the spell's block list.
      * @return `true` if the node is blocked by the spell, `false` otherwise.
      */
     @JvmStatic
-    fun isBlocked(
-        spellId: Int,
-        node: Node,
-    ): Boolean {
+    fun isBlocked(spellId: Int, node: Node): Boolean {
         val blocked = AtomicBoolean(false)
 
         if (blocks[spellId] == null) {
