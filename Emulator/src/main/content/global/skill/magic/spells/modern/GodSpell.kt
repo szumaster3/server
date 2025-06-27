@@ -99,7 +99,8 @@ class GodSpell private constructor(
             return false
         }
 
-        val hasCorrectStaff = staffId == data.staffId || (data == GodSpellDefinition.GUTHIX && staffId == Items.VOID_KNIGHT_MACE_8841)
+        val hasCorrectStaff =
+            staffId == data.staffId || (data == GodSpellDefinition.GUTHIX && staffId == Items.VOID_KNIGHT_MACE_8841)
         if (!hasCorrectStaff) {
             if (message) {
                 caster.packetDispatch.sendMessage("You need to wear a ${ItemDefinition.forId(data.staffId).name} to cast this spell.")
@@ -115,9 +116,8 @@ class GodSpell private constructor(
     }
 
     override fun newInstance(type: SpellType?): Plugin<SpellType?> {
-        val buttons = intArrayOf(41, 42, 43)
-        for (i in buttons.indices) {
-            SpellBook.MODERN.register(buttons[i], GodSpell(GOD_SPELLS[i]))
+        GodSpellDefinition.values().forEach {
+            SpellBook.MODERN.register(it.buttonId, GodSpell(GOD_SPELLS[it.buttonId]))
         }
         return this
     }

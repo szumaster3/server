@@ -64,12 +64,8 @@ class BindSpell(
     @Throws(Throwable::class)
     override fun newInstance(type: SpellType?): Plugin<SpellType?> {
         BindSpellDefinition.values().forEach {
-            SpellBook.MODERN.register(it.level, BindSpell(it))
+            SpellBook.MODERN.register(it.buttonId, BindSpell(it))
         }
         return this
-    }
-
-    companion object {
-        private val ANIMATION = Animation(Animations.CAST_SPELL_WISE_OLD_710, Priority.HIGH)
     }
 }

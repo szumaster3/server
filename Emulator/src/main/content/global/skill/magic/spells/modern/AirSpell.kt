@@ -34,7 +34,7 @@ class AirSpell(
 
     override fun newInstance(type: SpellType?): Plugin<SpellType?> {
         AirSpellDefinition.values().forEach {
-            SpellBook.MODERN.register(it.level, AirSpell(it))
+                SpellBook.MODERN.register(it.button, AirSpell(it))
         }
         return this
     }

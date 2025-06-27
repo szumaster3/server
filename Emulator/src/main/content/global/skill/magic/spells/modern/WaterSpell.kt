@@ -19,7 +19,7 @@ class WaterSpell private constructor(
     data.type,
     SpellBook.MODERN,
     data.level,
-    data.baseExperience,
+    data.xp,
     data.sound,
     data.sound + 1,
     SpellProjectile.ANIMATION,

@@ -39,11 +39,12 @@ class MagicDartSpell : CombatSpell(
 ) {
 
     override fun cast(entity: Entity, target: Node): Boolean {
+        if (entity !is Player) return false
         if (entity.getSkills().getLevel(Skills.SLAYER) < 55) {
-            (entity as Player).packetDispatch.sendMessage("You need a Slayer level of 55 to cast this spell.")
+            entity.packetDispatch.sendMessage("You need a Slayer level of 55 to cast this spell.")
             return false
         }
-        if ((entity as Player).equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != Items.SLAYERS_STAFF_4170) {
+        if (entity.equipment.getNew(EquipmentContainer.SLOT_WEAPON).id != Items.SLAYERS_STAFF_4170) {
             entity.packetDispatch.sendMessage("You need to wear a Slayer's staff to cast this spell.")
             return false
         }
