@@ -5,6 +5,11 @@ import core.game.node.entity.Entity
 import org.json.simple.JSONObject
 import kotlin.reflect.full.createInstance
 
+/**
+ * A timer implementation with support for saving and loading arbitrary data.
+ *
+ * @see RSTimer
+ **/
 abstract class PersistTimer(
     runInterval: Int,
     identifier: String,
