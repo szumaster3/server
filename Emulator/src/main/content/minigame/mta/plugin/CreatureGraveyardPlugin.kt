@@ -1,7 +1,5 @@
-package content.minigame.mta.plugin.room
+package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.MTAType
-import content.minigame.mta.plugin.MTAZone
 import core.api.*
 import core.game.interaction.Option
 import core.game.node.Node

@@ -1,7 +1,5 @@
-package content.minigame.mta.plugin.room
+package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.MTAType
-import content.minigame.mta.plugin.MTAZone
 import core.api.getVarbit
 import core.api.playAudio
 import core.api.sendMessage

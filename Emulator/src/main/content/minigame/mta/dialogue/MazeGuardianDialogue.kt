@@ -1,6 +1,6 @@
 package content.minigame.mta.dialogue
 
-import content.minigame.mta.plugin.room.TelekineticTheatrePlugin
+import content.minigame.mta.plugin.TelekineticTheatrePlugin
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

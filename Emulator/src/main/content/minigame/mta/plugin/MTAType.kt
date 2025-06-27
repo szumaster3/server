@@ -1,9 +1,5 @@
 package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.room.AlchemistPlaygroundPlugin
-import content.minigame.mta.plugin.room.CreatureGraveyardPlugin
-import content.minigame.mta.plugin.room.EnchantmentChamberPlugin
-import content.minigame.mta.plugin.room.TelekineticTheatrePlugin
 import core.api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player

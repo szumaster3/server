@@ -1,6 +1,5 @@
 package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.room.EnchantmentChamberPlugin
 import core.api.*
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -67,7 +66,7 @@ enum class EnchantSpellDefinition(
         ),
         runes = arrayOf(Item(Runes.COSMIC_RUNE.id, 1), Item(Runes.EARTH_RUNE.id, 10))
     ),
-    DRAGONSTONE(
+    DRAGON(
         51, 68, 78.0,
         jewellery = mapOf(
             Items.DRAGONSTONE_RING_1645 to Item(Items.RING_OF_WEALTH_2572),

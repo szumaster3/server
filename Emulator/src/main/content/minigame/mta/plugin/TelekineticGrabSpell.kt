@@ -1,6 +1,5 @@
 package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.room.TelekineticTheatrePlugin
 import core.api.*
 import core.game.global.action.PickupHandler.canTake
 import core.game.node.Node

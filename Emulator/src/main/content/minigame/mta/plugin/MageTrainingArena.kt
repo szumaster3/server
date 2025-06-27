@@ -1,6 +1,5 @@
 package content.minigame.mta.plugin
 
-import content.minigame.mta.plugin.room.TelekineticTheatrePlugin
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
