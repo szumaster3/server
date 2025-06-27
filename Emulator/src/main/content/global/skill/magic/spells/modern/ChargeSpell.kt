@@ -19,29 +19,26 @@ import org.rs.consts.Animations
 import org.rs.consts.Sounds
 
 /**
- * The Charge spell.
+ * Represents the Charge spell.
  */
 @Initializable
-class ChargeSpell :
-    MagicSpell(
-        SpellBook.MODERN,
-        80,
-        180.0,
-        Animation.create(Animations.NS_CHARGE_SPELL_811),
-        Graphics(6, 96),
-        Audio(Sounds.CHARGE_1651),
-        arrayOf(Runes.FIRE_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3)),
-    ) {
+class ChargeSpell : MagicSpell(
+    SpellBook.MODERN,
+    80,
+    180.0,
+    Animation(Animations.NS_CHARGE_SPELL_811),
+    Graphics(6, 96),
+    Audio(Sounds.CHARGE_1651),
+    arrayOf(Runes.FIRE_RUNE.getItem(3), Runes.BLOOD_RUNE.getItem(3), Runes.AIR_RUNE.getItem(3))
+) {
+
     @Throws(Throwable::class)
     override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
         SpellBook.MODERN.register(58, this)
         return this
     }
 
-    override fun cast(
-        entity: Entity,
-        target: Node,
-    ): Boolean {
+    override fun cast(entity: Entity, target: Node): Boolean {
         val p = entity as Player
         if (p.locks.isLocked("charge_cast")) {
             p.packetDispatch.sendMessage("You need to wait for the spell to recharge.")

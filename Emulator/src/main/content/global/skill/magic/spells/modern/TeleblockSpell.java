@@ -22,7 +22,7 @@ import org.rs.consts.Sounds;
 import static core.api.ContentAPIKt.*;
 
 /**
- * The Teleblock spell.
+ * Represents the Teleblock spell.
  */
 @Initializable
 public final class TeleblockSpell extends CombatSpell {

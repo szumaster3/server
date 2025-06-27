@@ -18,7 +18,7 @@ import core.plugin.Plugin;
 import org.rs.consts.Sounds;
 
 /**
- * The Teleport other spell.
+ * Represents the Teleport other spell.
  */
 @Initializable
 public final class TeleportOtherSpell extends MagicSpell {

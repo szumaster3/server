@@ -12,7 +12,7 @@ import org.rs.consts.Items
 import org.rs.consts.Sounds
 
 /**
- * The Super heat spell.
+ * Represents the Super heat spell.
  */
 class SuperHeatSpell : SpellListener("modern") {
 
