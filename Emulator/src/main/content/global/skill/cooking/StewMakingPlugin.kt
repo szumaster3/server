@@ -1,4 +1,4 @@
-package content.global.skill.cooking.recipes
+package content.global.skill.cooking
 
 import core.api.*
 import core.api.skill.sendSkillDialogue
@@ -12,7 +12,7 @@ import org.rs.consts.Items
 /**
  * Handles stew-related cooking recipes.
  */
-class StewRecipePlugin : InteractionListener {
+class StewMakingPlugin : InteractionListener {
 
     override fun defineListeners() {
 
