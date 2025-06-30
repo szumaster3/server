@@ -15,6 +15,7 @@ import kotlin.math.min
 class CookingRecipePlugin : InteractionListener {
 
     companion object {
+
         /**
          * Handles cooking recipes processing logic.
          */
@@ -49,21 +50,9 @@ class CookingRecipePlugin : InteractionListener {
             }
 
             if (maxAmount == 1) {
-                val ingredientSlot = player.inventory.getAddSlot(ingredient)
-                val secondarySlot = player.inventory.getAddSlot(secondary)
-
-                if (ingredientSlot == -1 || secondarySlot == -1) {
-                    sendMessage(player, "You don't have the required ingredients.")
-                    return true
-                }
-
-                val replaced = replaceSlot(player, ingredientSlot, Item(65535, 0), ingredient, Container.INVENTORY) != null
-                val removed = removeItem(player, secondary, Container.INVENTORY)
-
-                if (replaced && removed) {
+                if (removeItem(player, ingredient.asItem()) && removeItem(player, secondary.asItem())) {
                     return process()
                 }
-
                 sendMessage(player, "You don't have the required ingredients.")
                 return true
             }
@@ -72,24 +61,15 @@ class CookingRecipePlugin : InteractionListener {
                 recipe.productId?.let { withItems(it) }
                 create { _, amount ->
                     runTask(player, 2, amount) {
-                        val removedIngredient = removeItem(player, ingredient.asItem())
-                        val removedSecondary = removeItem(player, secondary.asItem())
-
-                        if (!removedIngredient) {
-                            sendMessage(player, "You don't have more ${getItemName(ingredient.id).lowercase()}.")
+                        if (!removeItem(player, ingredient.asItem()) || !removeItem(player, secondary.asItem())) {
+                            sendMessage(player, "You don't have the required ingredients.")
                             return@runTask
                         }
-                        if (!removedSecondary) {
-                            sendMessage(player, "You don't have more ${getItemName(secondary.id).lowercase()}.")
-                            return@runTask
-                        }
-                        
                         process()
                     }
                 }
                 calculateMaxAmount { maxAmount }
             }
-
             return true
         }
     }
