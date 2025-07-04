@@ -17,14 +17,14 @@ import org.rs.consts.Quests
 class BardurPlugin : InteractionListener {
 
     override fun defineListeners() {
+        ClassScanner.definePlugin(BardurDialogue())
+        ClassScanner.definePlugin(BardurNPC())
 
         /*
          * Handles interaction with Bardur NPCs.
          */
 
         onUseWith(IntType.NPC, exchangeItemIDs, NPCs.BARDUR_2879) { player, node, _ ->
-            ClassScanner.definePlugin(BardurDialogue())
-            ClassScanner.definePlugin(BardurNPC())
 
             val npc = node.asNpc()
             if (npc.inCombat()) {
