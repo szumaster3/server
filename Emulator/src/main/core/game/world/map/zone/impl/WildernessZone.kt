@@ -196,7 +196,8 @@ class WildernessZone(vararg val borders: ZoneBorders) :
         return true
     }
 
-    override fun locationUpdate(e: Entity, last: Location) {
+    override fun locationUpdate(e: Entity, last: Location?) {
+        if (last == null) return
         if (e is Player && !e.isArtificial) {
             e.skullManager.level = getWilderness(e)
         }
