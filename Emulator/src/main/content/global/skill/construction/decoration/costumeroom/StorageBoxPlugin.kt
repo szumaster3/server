@@ -134,7 +134,7 @@ class StorageBoxPlugin : OptionHandler() {
                         Obj.MAGIC_WARDROBE_18791 -> StorageBoxInterface.openStorage(player, CostumeRoomStorage.Type.FOUR_SETS_OF_ARMOUR)
                         Obj.MAGIC_WARDROBE_18793 -> StorageBoxInterface.openStorage(player, CostumeRoomStorage.Type.FIVE_SETS_OF_ARMOUR)
                         Obj.MAGIC_WARDROBE_18795 -> StorageBoxInterface.openStorage(player, CostumeRoomStorage.Type.SIX_SETS_OF_ARMOUR)
-                        Obj.MAGIC_WARDROBE_18797 -> StorageBoxInterface.openStorage(player, CostumeRoomStorage.Type.SIX_SETS_OF_ARMOUR)
+                        Obj.MAGIC_WARDROBE_18797 -> StorageBoxInterface.openStorage(player, CostumeRoomStorage.Type.ALL_SETS_OF_ARMOUR)
                     }
                 }
             }
