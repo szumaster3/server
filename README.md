@@ -1,6 +1,7 @@
 This project is a fork of [2009scape](https://gitlab.com/2009scape/2009scape).
 
-Download: [Latest release](https://github.com/szumaster3/530-singleplayer/archive/refs/heads/master.zip)
+Download: [Latest release](https://github.com/szumaster3/530-singleplayer/archive/refs/heads/master.zip) [**Status**: unplayable]
+
 ___
 
 #### Requirements
