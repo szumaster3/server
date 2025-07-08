@@ -32,18 +32,18 @@ class RunScriptPacket : OutgoingPacket<OutgoingContext.RunScript> {
      *      context.getPlayer().getDetails().getSession().write(buffer);
      *  }
      */
-    override fun send(context: OutgoingContext.RunScript?) {
-        val types = context?.string
-        val objects = context?.objects
+    override fun send(context: OutgoingContext.RunScript) {
+        val types = context.string
+        val objects = context.objects
         val buffer = IoBuffer(115, PacketHeader.SHORT)
-        buffer.putShort(context!!.player.interfaceManager.getPacketCount(1))
+        buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
-        buffer.putString(types!!)
+        buffer.putString(types)
         for ((j, i) in ((types.length - 1) downTo 0).withIndex()) {
             if (types[i] == 's') {
-                buffer.putString(objects?.get(j) as String)
+                buffer.putString(objects[j] as String)
             } else {
-                buffer.putInt((objects?.get(j) as Int))
+                buffer.putInt((objects[j] as Int))
             }
         }
 

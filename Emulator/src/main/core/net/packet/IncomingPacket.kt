@@ -1,14 +1,13 @@
-package core.net.packet;
+package core.net.packet
 
-import core.game.node.entity.player.Player;
+import core.game.node.entity.player.Player
 
 /**
  * Represents an incoming packet.
  *
  * @author Emperor
  */
-public interface IncomingPacket {
-
+interface IncomingPacket {
     /**
      * Decodes the incoming packet.
      *
@@ -16,6 +15,5 @@ public interface IncomingPacket {
      * @param opcode The opcode.
      * @param buffer The buffer.
      */
-    public void decode(Player player, int opcode, IoBuffer buffer);
-
+    fun decode(player: Player?, opcode: Int, buffer: IoBuffer?)
 }

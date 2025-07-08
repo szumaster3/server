@@ -23,29 +23,17 @@ import java.util.*;
  * The type Clan repository.
  */
 public final class ClanRepository {
-
     private static final int MAX_MEMBERS = 100;
-
     private static final Map<String, ClanRepository> CLAN_REPOSITORY = new HashMap<>();
-
     private final String owner;
-
     private String name = "Chat disabled";
-
     private ClanRank joinRequirement = ClanRank.ANY_FRIEND;
-
     private ClanRank messageRequirement = ClanRank.ANYONE;
-
     private ClanRank kickRequirement = ClanRank.ONLY_ME;
-
     private ClanRank lootRequirement = ClanRank.NO_ONE;
-
     private final Map<String, ClanRank> ranks = new HashMap<>();
-
     private final Map<String, Long> banned = new HashMap<>();
-
     private List<ClanEntry> players = new ArrayList<>(MAX_MEMBERS);
-
     private ActivityPlugin clanWar;
 
     /**
@@ -370,7 +358,7 @@ public final class ClanRepository {
         }
         CLAN_REPOSITORY.put(owner, clan = new ClanRepository(owner));
         for (Contact c : details.getCommunication().getContacts().values()) {
-            clan.ranks.put(c.getUsername(), c.getRank());
+            clan.ranks.put(c.username, c.rank);
         }
         clan.name = name;
         clan.joinRequirement = details.getCommunication().getJoinRequirement();

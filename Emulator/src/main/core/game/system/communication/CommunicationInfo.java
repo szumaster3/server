@@ -30,31 +30,17 @@ import static core.api.ContentAPIKt.setVarp;
  */
 public final class CommunicationInfo {
 
-    /**
-     * The constant MAX_LIST_SIZE.
-     */
     public static final int MAX_LIST_SIZE = 200;
-
     private Map<String, Contact> contacts = new HashMap<>();
-
     private final List<String> blocked = new ArrayList<>(20);
-
     private String clanName = "";
-
     private String currentClan = "";
-
     private ClanRank joinRequirement = ClanRank.ANY_FRIEND;
-
     private ClanRank messageRequirement = ClanRank.ANYONE;
-
     private ClanRank kickRequirement = ClanRank.ONLY_ME;
-
     private ClanRank lootRequirement = ClanRank.NO_ONE;
-
     private boolean lootShare;
-
     private ClanRepository clan = null;
-
     private Pulse lootSharePulse;
 
     /**
@@ -77,7 +63,7 @@ public final class CommunicationInfo {
         }
         int count = 0;
         for (Entry<String, Contact> entry : this.contacts.entrySet()) {
-            contacts += "{" + entry.getKey() + "," + entry.getValue().getRank().ordinal() + "}" + (count == this.contacts.size() - 1 ? "" : "~");
+            contacts += "{" + entry.getKey() + "," + entry.getValue().rank.ordinal() + "}" + (count == this.contacts.size() - 1 ? "" : "~");
             count++;
         }
         table.getColumn("blocked").updateValue(blocked);
@@ -105,7 +91,7 @@ public final class CommunicationInfo {
                         continue;
                     }
                     contact = new Contact(tokens[0]);
-                    contact.setRank(ClanRank.values()[Integer.valueOf(tokens[1])]);
+                    contact.rank = ClanRank.values()[Integer.valueOf(tokens[1])];
                     this.contacts.put(tokens[0], contact);
                 }
             }
@@ -192,7 +178,7 @@ public final class CommunicationInfo {
         for (int i = 0; i < size; i++) {
             String name = ByteBufferUtils.getString(buffer);
             Contact contact = new Contact(name);
-            contact.setRank(ClanRank.ANY_FRIEND);
+            contact.rank = ClanRank.ANY_FRIEND;
             contacts.put(name, contact);
         }
         size = buffer.get() & 0xFF;
@@ -351,14 +337,14 @@ public final class CommunicationInfo {
             log(CommunicationInfo.class, Log.ERR, "Could not find contact " + contact + " to update clan rank!");
             return;
         }
-        c.setRank(clanRank);
+        c.rank = clanRank;
         ClanRepository clan = ClanRepository.get(player.getName());
         if (clan != null) {
             clan.rank(contact, clanRank);
         }
         int worldId = 0;
         if (CommunicationInfo.showActive(player, contact)) {
-            worldId = c.getWorldId();
+            worldId = c.worldId;
         }
         PacketRepository.send(ContactPackets.class, new OutgoingContext.Contact(player, contact, worldId));
     }
@@ -658,7 +644,7 @@ public final class CommunicationInfo {
                     continue;
                 }
                 contact = new Contact(tokens[0]);
-                contact.setRank(ClanRank.values()[Integer.parseInt(tokens[1])]);
+                contact.rank = ClanRank.values()[Integer.parseInt(tokens[1])];
                 theseContacts.put(tokens[0], contact);
             }
         }
@@ -677,9 +663,9 @@ public final class CommunicationInfo {
         int index = 0;
         for (Contact contact : contacts.values()) {
             sb.append("{");
-            sb.append(contact.getUsername());
+            sb.append(contact.username);
             sb.append(",");
-            sb.append(contact.getRank().ordinal());
+            sb.append(contact.rank.ordinal());
             sb.append("}");
             if (index++ < contacts.size() - 1) sb.append("~");
         }
