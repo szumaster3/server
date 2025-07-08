@@ -1,79 +1,81 @@
 package content.global.skill.construction.decoration.costumeroom
 
-import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 
 class StorageContainer {
-    private val maxSize = 30
-    val storedItems = mutableListOf<Storable>()
-    var currentPage = 0
-    val pageSize = 30
+    private val stored: MutableMap<Storable.Type, MutableList<Int>> = mutableMapOf()
+    private val currentPage: MutableMap<Storable.Type, Int> = mutableMapOf()
 
-    fun addItem(item: Storable): Boolean {
-        if (storedItems.size >= maxSize) return false
-        if (!storedItems.contains(item)) storedItems.add(item)
-        return true
+    val storedItems: List<Int>
+        get() = stored.values.flatten()
+
+    fun addItem(type: Storable.Type, itemId: Int) {
+        stored.getOrPut(type) { mutableListOf() }.add(itemId)
     }
 
-    fun removeItem(item: Storable): Boolean {
-        return storedItems.remove(item)
+    fun withdraw(type: Storable.Type, item: Storable) {
+        val id = item.takeIds.firstOrNull() ?: item.displayId
+        stored[type]?.remove(id)
     }
 
-    fun hasItem(item: Storable): Boolean {
-        return storedItems.contains(item)
+    fun contains(type: Storable.Type, itemId: Int): Boolean {
+        return stored[type]?.contains(itemId) == true
     }
 
-    fun store(item: Storable): Boolean = addItem(item)
-
-    fun withdraw(item: Storable): Boolean = removeItem(item)
-
-    fun nextPage() {
-        if ((currentPage + 1) * pageSize < Storable.values().size) currentPage++
+    fun getItems(type: Storable.Type): List<Int> {
+        return stored[type]?.toList() ?: emptyList()
     }
 
-    fun prevPage() {
-        if (currentPage > 0) currentPage--
+    fun getPageIndex(type: Storable.Type): Int = currentPage.getOrDefault(type, 0)
+
+    fun nextPage(type: Storable.Type, totalItems: Int, pageSize: Int) {
+        val page = currentPage.getOrDefault(type, 0)
+        if ((page + 1) * pageSize < totalItems) {
+            currentPage[type] = page + 1
+        }
     }
 
-    fun getPageItems(): List<Storable> {
-        val start = currentPage * pageSize
-        val end = (start + pageSize).coerceAtMost(storedItems.size)
-        if (start >= storedItems.size) return emptyList()
-        return storedItems.subList(start, end)
+    fun prevPage(type: Storable.Type) {
+        val page = currentPage.getOrDefault(type, 0)
+        if (page > 0) {
+            currentPage[type] = page - 1
+        }
+    }
+
+    fun resetPage(type: Storable.Type) {
+        currentPage[type] = 0
+    }
+
+    fun hasNextPage(type: Storable.Type, pageSize: Int): Boolean {
+        val total = getItems(type).size
+        return (getPageIndex(type) + 1) * pageSize < total
+    }
+
+    fun hasPrevPage(type: Storable.Type): Boolean {
+        return getPageIndex(type) > 0
+    }
+
+    fun store(type: Storable.Type, storable: Storable) {
+        val id = storable.takeIds.firstOrNull() ?: storable.displayId
+        stored.getOrPut(type) { mutableListOf() }.add(id)
     }
 
     fun toJson(): JSONObject {
-        val root = JSONObject()
-        val itemsArray = JSONArray()
-        for (item in storedItems) {
-            val itemObj = JSONObject()
-            itemObj["name"] = item.name
-            itemObj["displayId"] = item.displayId
-            itemObj["takeIds"] = JSONArray().apply { item.takeIds.forEach { add(it.toString()) } }
-            itemObj["type"] = item.type.name
-            itemsArray.add(itemObj)
+        val obj = JSONObject()
+        for ((type, list) in stored) {
+            obj[type.name.lowercase()] = list
         }
-        root["items"] = itemsArray
-        return root
+        return obj
     }
 
     companion object {
-        fun fromJson(root: JSONObject): StorageContainer {
+        fun fromJson(json: JSONObject): StorageContainer {
             val container = StorageContainer()
-            val itemsArray = root["items"] as? JSONArray ?: JSONArray()
-            for (i in 0 until itemsArray.size) {
-                val itemObj = itemsArray[i] as JSONObject
-                val name = itemObj["name"].toString()
-                val itemEnum = try {
-                    Storable.valueOf(name)
-                } catch (e: Exception) {
-                    null
-                }
-                if (itemEnum != null) {
-                    container.storedItems.add(itemEnum)
-                }
+            for (key in json.keys) {
+                val type = Storable.Type.valueOf((key as String).uppercase())
+                val list = json[key] as List<Long>
+                container.stored[type] = list.map { it.toInt() }.toMutableList()
             }
-            container.currentPage = 0
             return container
         }
     }
