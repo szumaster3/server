@@ -294,8 +294,7 @@ object PlayerMonitor {
     }
 
     private const val CHAT_LOG_INSERT = "INSERT INTO chat_logs(player,uid,type,message,timestamp) VALUES (?,?,?,?,?);"
-    private const val TRADE_LOG_INSERT =
-        "INSERT INTO trade_logs(player_a,player_b,uid_a,uid_b,items_a,items_b,timestamp) VALUES (?,?,?,?,?,?,?);"
+    private const val TRADE_LOG_INSERT = "INSERT INTO trade_logs(player_a,player_b,uid_a,uid_b,items_a,items_b,timestamp) VALUES (?,?,?,?,?,?,?);"
     private const val MISC_LOG_INSERT = "INSERT INTO misc_logs(player,uid,type,details,timestamp) VALUES (?,?,?,?,?);"
     private const val WEALTH_LOG_INSERT = "INSERT INTO wealth_logs(player,uid,total,diff,timestamp) VALUES (?,?,?,?,?);"
 }

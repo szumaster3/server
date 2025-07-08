@@ -28,9 +28,6 @@ object DialogueUtils {
 /**
  * Automatically splits a long string into multiple comma-separated lines based on a character limit per line.
  *
- * This function ensures that tags are preserved and does not break words between lines. If the split doesn't work out, it
- * falls back to standard methods for NPC and player dialogue.
- *
  * @param message The message to split into lines.
  * @param perLineLimit The maximum number of characters allowed per line (default is 54).
  * @return An array of strings, each representing a line of dialogue.
@@ -62,7 +59,6 @@ fun splitLines(
 
     /**
      * Helper function to push the current line to the lines array.
-     * It also processes and ensures tags are correctly placed in each line.
      */
     fun pushLine() {
         if (line.isEmpty()) return

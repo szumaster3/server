@@ -22,13 +22,10 @@ import org.rs.consts.Sounds
 
 /**
  * The `PickupHandler` object manages the logic for picking up ground items by players.
- * It checks for conditions like item validity, space in inventory, and whether the player is allowed to pick up the item.
  */
 object PickupHandler {
     /**
      * Handles the action of a player picking up a ground item.
-     * It checks for validity, if the item still exists, and if the player has enough space and permissions to pick it up.
-     * If successful, the item is added to the player's inventory, and the item is removed from the ground.
      *
      * @param player The player attempting to pick up the item.
      * @param item The ground item the player wants to pick up.
@@ -106,7 +103,6 @@ object PickupHandler {
 
     /**
      * Determines if a player is allowed to pick up a specific ground item.
-     * This method checks various conditions, such as if the player has the necessary restrictions or if the item is special.
      *
      * @param player The player attempting to pick up the item.
      * @param item The ground item being considered for pickup.

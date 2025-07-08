@@ -196,7 +196,7 @@ class WarningListener : InteractionListener, InterfaceListener {
 
                                         else -> null
                                     }
-                                climb(player, Animation(Animations.MULTI_BEND_OVER_827), ladderLocation)
+                                climb(player, Animation(Animations.MULTI_BEND_OVER_827), ladderLocation!!)
                                 WarningManager.increment(player, component.id)
                             }
 

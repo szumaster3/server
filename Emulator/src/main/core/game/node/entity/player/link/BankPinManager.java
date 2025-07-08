@@ -57,29 +57,17 @@ public class BankPinManager {
     CANCEL_PENDING = 65;
 
     private final Player player;
-
     private final List<Integer> digits = new ArrayList<>(20);
-
     private String pin;
-
     private boolean unlocked;
-
     private boolean longRecovery;
-
     private PinStatus status = PinStatus.NO_PIN;
-
     private String tempPin;
-
     private long pendingDelay = -1;
-
     private int openId;
-
     private int tries;
-
     private int changeState;
-
     private boolean deleting;
-
     private long tryDelay;
 
     /**

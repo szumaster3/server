@@ -13,23 +13,14 @@ import java.util.List;
  * The Render info.
  */
 public final class RenderInfo {
-
     private final Player player;
-
     private List<Player> localPlayers = new LinkedList<Player>();
-
     private List<NPC> localNpcs = new LinkedList<NPC>();
-
     private final long[] appearanceStamps = new long[ServerConstants.MAX_PLAYERS];
-
     private Entity[] maskUpdates = new Entity[256];
-
     private int maskUpdateCount;
-
     private Location lastLocation;
-
     private boolean onFirstCycle = true;
-
     private boolean preparedAppearance;
 
     /**

@@ -19,15 +19,9 @@ import org.rs.consts.Sounds
 
 /**
  * `EquipHandler` manages the logic for equipping and unequipping items for players.
- * It handles equipping items to the player's equipment slots, playing appropriate sound effects,
- * and dispatching related events. The class also manages item-specific logic, such as brawling gloves
- * and Slayer equipment flags.
  */
 class EquipHandler : InteractionListener {
-    /**
-     * Defines listeners for item-related interactions like equipping, wielding, wearing, or holding an item.
-     * These listeners trigger the respective methods to handle item equipping.
-     */
+
     override fun defineListeners() {
         on(IntType.ITEM, "equip", "wield", "wear", "hold") { player, node ->
             handleEquip(player, node)
@@ -37,10 +31,7 @@ class EquipHandler : InteractionListener {
 
     companion object {
         /**
-         * Unequips an item from the player's equipment. It first checks for valid conditions such as
-         * ensuring the item is in the player's equipment, the player is not locked from unequipping, and
-         * there is enough space in the inventory. If successful, the item is removed from the equipment
-         * and added to the player's inventory.
+         * Unequips an item from the player equipment.
          *
          * @param player The player who is unequipping the item.
          * @param slot The equipment slot where the item is equipped.
@@ -104,10 +95,7 @@ class EquipHandler : InteractionListener {
         }
 
         /**
-         * Handles equipping an item to the player. It performs various checks, including ensuring the
-         * player has the item in their inventory, that they are allowed to equip it (through plugin logic),
-         * and that there are no locks on equipping. If successful, the item is added to the player's equipment.
-         * It also handles special item logic, such as brawling gloves and Slayer equipment flags.
+         * Handles equipping an item to the player.
          *
          * @param player The player who is equipping the item.
          * @param node The item node representing the item to equip.

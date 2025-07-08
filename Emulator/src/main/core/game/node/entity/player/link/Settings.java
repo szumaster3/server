@@ -14,45 +14,25 @@ import static core.api.ContentAPIKt.setVarp;
  * The type Settings.
  */
 public final class Settings {
-
     private final Player player;
-
     private double runEnergy = 100.0;
-
     private double weight;
-
     private int brightness = 2;
-
     private int musicVolume;
-
     private int soundEffectVolume;
-
     private int areaSoundVolume;
-
     private boolean singleMouseButton;
-
     private boolean disableChatEffects;
-
     private boolean splitPrivateChat;
-
     private boolean acceptAid;
-
     private boolean runToggled;
-
     private int publicChatSetting = 0;
-
     private int privateChatSetting = 0;
-
     private int clanChatSetting = 0;
-
     private int tradeSetting = 0;
-
     private int assistSetting = 0;
-
     private boolean specialToggled;
-
     private int specialEnergy = 100;
-
     private int attackStyleIndex = 0;
 
     /**

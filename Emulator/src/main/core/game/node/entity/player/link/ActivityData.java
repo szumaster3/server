@@ -7,48 +7,25 @@ import org.json.simple.JSONObject;
  * The type Activity data.
  */
 public final class ActivityData {
-
     private int pestPoints;
-
     private int warriorGuildTokens;
-
     private int bountyHunterRate;
-
     private int bountyRogueRate;
-
     private boolean[] barrowBrothers = new boolean[6];
-
     private int barrowKills;
-
     private int barrowTunnelIndex;
-
     private int kolodionStage;
-
     private int[] godCasts = new int[3];
-
     private int kolodionBoss;
-
     private boolean elnockSupplies;
-
     private long lastBorkBattle;
-
     private byte borkKills;
-
     private boolean lostCannon;
-
     private boolean startedMta;
-
     private boolean bonesToPeaches;
-
     private int solvedMazes;
-
     private int fogRating;
-
     private boolean hardcoreDeath;
-
-    /**
-     * The Top grabbed.
-     */
     boolean topGrabbed;
 
     /**

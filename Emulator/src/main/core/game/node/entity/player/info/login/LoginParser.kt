@@ -15,8 +15,7 @@ import core.game.world.repository.Repository
 import java.util.function.Consumer
 
 /**
- * Handles the login process for a player, including validation, loading data,
- * and initializing the player's session in the game world.
+ * Handles the login process for a player.
  *
  * @property details The details of the player attempting to log in.
  */
@@ -24,8 +23,7 @@ class LoginParser(
     val details: PlayerDetails,
 ) {
     /**
-     * Initializes the login process for a player, handling validation, loading saved data,
-     * and executing login procedures.
+     * Initializes the login process.
      *
      * @param player The player instance being logged in.
      * @param reconnect Whether the player is reconnecting to an active session.
@@ -80,8 +78,7 @@ class LoginParser(
     }
 
     /**
-     * Handles the reconnection process for a player, ensuring their session
-     * is reinitialized correctly.
+     * Handles the reconnection process.
      *
      * @param player The player instance reconnecting.
      */
@@ -97,8 +94,6 @@ class LoginParser(
 
     /**
      * Validates whether the login request should proceed.
-     * Checks if the session is active, if the game is updating,
-     * or if the account is banned.
      *
      * @return `true` if the request is valid, otherwise `false`.
      */

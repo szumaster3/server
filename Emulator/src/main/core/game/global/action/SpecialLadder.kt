@@ -185,7 +185,6 @@ enum class SpecialLadder(private val location: Location, private val destination
     ;
 
     companion object {
-
         /**
          * Map of ladder locations to their destinations.
          */
