@@ -64,7 +64,7 @@ class BunyipNPC : Familiar {
             return false
         }
 
-        val consumable: Consumable? = Consumables.getConsumableById(special.item!!.id + 2).consumable
+        val consumable: Consumable? = Consumables.getConsumableById(special.item!!.id + 2)?.consumable
         if (consumable == null) {
             player.sendMessage("Error: Report to admin.")
             return false

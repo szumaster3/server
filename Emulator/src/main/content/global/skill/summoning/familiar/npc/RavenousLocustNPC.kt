@@ -32,7 +32,7 @@ class RavenousLocustNPC @JvmOverloads constructor(owner: Player? = null, id: Int
                 if (item == null) {
                     continue
                 }
-                val consumable = Consumables.getConsumableById(item.id).consumable
+                val consumable = Consumables.getConsumableById(item.id)?.consumable
                 if (consumable != null) {
                     p.inventory.remove(item)
                     break

@@ -23,8 +23,9 @@ class Cake(
         val initialLifePoints = player.getSkills().lifepoints
         Consumables
             .getConsumableById(item.id)
-            .consumable.effect
-            .activate(player)
+            ?.consumable
+            ?.effect
+            ?.activate(player)
         sendMessages(player, initialLifePoints, item, messages)
     }
 

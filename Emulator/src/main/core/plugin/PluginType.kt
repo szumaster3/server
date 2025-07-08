@@ -1,11 +1,10 @@
-package core.plugin;
+package core.plugin
 
 /**
  * Represents the plugin types.
  * @author Emperor
  */
-public enum PluginType {
-
+enum class PluginType {
     /**
      * Action plugin type.
      */
