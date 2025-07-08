@@ -269,6 +269,26 @@ class EmptyOptionPlugin: InteractionListener {
             "You empty the vial.",
             Sounds.LIQUID_2401
         ),
+        GOLD_BOWL(
+            Items.GOLDEN_BOWL_723,
+            Items.GOLD_BOWL_721,
+            "You empty the contents of the bowl onto the floor."
+        ),
+        BLESSED_GOLDEN_BOWL(
+            Items.GOLDEN_BOWL_724,
+            Items.BLESSED_GOLD_BOWL_722,
+            "You empty the contents of the bowl onto the floor."
+        ),
+        GOLDEN_BOWL(
+            Items.GOLDEN_BOWL_725,
+            Items.GOLD_BOWL_721,
+            "You empty the contents of the bowl onto the floor."
+        ),
+        GOLDEN_BOWL_2(
+            Items.GOLDEN_BOWL_726,
+            Items.GOLD_BOWL_721,
+            "You empty the contents of the bowl onto the floor."
+        ),
         ;
 
         companion object {
