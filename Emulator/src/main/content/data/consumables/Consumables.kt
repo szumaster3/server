@@ -344,7 +344,7 @@ enum class Consumables {
     HUNTING_MIX(BarbarianMix(intArrayOf(Items.HUNTING_MIX2_11517, Items.HUNTING_MIX1_11519), MultiEffect(SkillEffect(Skills.HUNTER, 3.0, 0.0), HealingEffect(6)))),
     SUPER_STR_MIX(BarbarianMix(intArrayOf(Items.SUP_STR_MIX2_11485, Items.SUP_STR_MIX1_11487), MultiEffect(SkillEffect(Skills.STRENGTH, 5.0, 0.15), HealingEffect(6)))),
     ANTIDOTE_PLUS_MIX(BarbarianMix(intArrayOf(Items.ANTIDOTE_PLUS_MIX2_11501, Items.ANTIDOTE_PLUS_MIX1_11503), MultiEffect(AddTimerEffect("poison:immunity", minutesToTicks(9)), RandomHealthEffect(3, 7)))),
-    ANTIFIRE_MIX(BarbarianMix(intArrayOf(11505, 11507), MultiEffect(AddTimerEffect("dragonfire:immunity", 600, true), RandomHealthEffect(3, 7)))),
+    ANTIFIRE_MIX(BarbarianMix(intArrayOf(Items.ANTIFIRE_MIX2_11505, Items.ANTIFIRE_MIX1_11507), MultiEffect(AddTimerEffect("dragonfire:immunity", 600, true), RandomHealthEffect(3, 7)))),
     ANTIP_SUPERMIX(BarbarianMix(intArrayOf(Items.ANTI_P_SUPERMIX2_11473, Items.ANTI_P_SUPERMIX1_11475), MultiEffect(AddTimerEffect("poison:immunity", minutesToTicks(6)), RandomHealthEffect(3, 7)))),
     SC_PRAYER(Potion(intArrayOf(Items.PRAYER_POTION5_14207, Items.PRAYER_POTION4_14209, Items.PRAYER_POTION3_14211, Items.PRAYER_POTION2_14213, Items.PRAYER_POTION1_14215), PrayerEffect(7.0, 0.25))),
     SC_ENERGY(Potion(intArrayOf(Items.ENERGY_POTION_5_14217, Items.ENERGY_POTION_4_14219, Items.ENERGY_POTION_3_14221, Items.ENERGY_POTION_2_14223, Items.ENERGY_POTION_1_14225), EnergyEffect(20))),
