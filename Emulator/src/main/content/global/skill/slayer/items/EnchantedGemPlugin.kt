@@ -48,8 +48,8 @@ private class EnchantedGemDialogue : DialogueFile() {
                     Topic(FaceAnim.HALF_ASKING, "Who are you?", 200),
                     Topic(FaceAnim.HALF_ASKING, "Where are you?", 300),
                     Topic(FaceAnim.FRIENDLY, "Got any tips for me?", 400),
-                    IfTopic(FaceAnim.FRIENDLY, "Nothing really.", END_DIALOGUE, firstRun),
-                    IfTopic(FaceAnim.HAPPY, "That's all thanks.", END_DIALOGUE, !firstRun),
+                    IfTopic(FaceAnim.FRIENDLY, "Nothing really.", END_DIALOGUE, firstRun, true),
+                    IfTopic(FaceAnim.HAPPY, "That's all thanks.", END_DIALOGUE, !firstRun, true),
                 )
 
             100 -> {
