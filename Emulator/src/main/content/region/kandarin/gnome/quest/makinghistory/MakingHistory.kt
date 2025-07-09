@@ -1,10 +1,6 @@
 package content.region.kandarin.gnome.quest.makinghistory
 
-import content.global.activity.enchkey.EnchKeyTreasure
-import content.region.kandarin.gnome.quest.makinghistory.MHUtils.DROALAK_PROGRESS
-import content.region.kandarin.gnome.quest.makinghistory.MHUtils.DRON_PROGRESS
-import content.region.kandarin.gnome.quest.makinghistory.MHUtils.ERIN_PROGRESS
-import content.region.kandarin.gnome.quest.makinghistory.MHUtils.PROGRESS
+import content.global.activity.enchkey.EnchKeyUtils
 import core.api.*
 import core.api.isQuestComplete
 import core.game.node.entity.player.Player
@@ -59,12 +55,12 @@ class MakingHistory : Quest(Quests.MAKING_HISTORY, 86, 85, 3, Vars.VARBIT_QUEST_
             line++
             line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
             line++
-            if (getAttribute(player, EnchKeyTreasure.ENCHANTED_KEY_ATTR, -1) >= 0) {
+            if (getAttribute(player, EnchKeyUtils.ENCHANTED_KEY_ATTR, -1) >= 0) {
                 line(
                     player,
                     "I Should see what else I can find with the help of the key.",
                     line,
-                    getAttribute(player, EnchKeyTreasure.ENCHANTED_KEY_ATTR, -1) >= 10,
+                    getAttribute(player, EnchKeyUtils.ENCHANTED_KEY_ATTR, -1) >= 10,
                 )
             }
         }

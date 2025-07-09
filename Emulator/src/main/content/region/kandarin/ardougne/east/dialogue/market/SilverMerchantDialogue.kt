@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.east.dialogue.market
 
-import content.global.activity.enchkey.EnchKeyTreasure
+import content.global.activity.enchkey.EnchKeyUtils
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
 import core.api.*
 import core.api.openNpcShop
@@ -99,7 +99,7 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
                         "You know you can use that enchanted key you have on",
                         "your keyring all over Gielinor. Who knows what you might find?",
                     )
-                } else if (getAttribute(player!!, EnchKeyTreasure.ENCHANTED_KEY_ATTR, 0) == 11) {
+                } else if (getAttribute(player!!, EnchKeyUtils.ENCHANTED_KEY_ATTR, 0) == 11) {
                     player("Oh, You know that key you gave me?").also { stage = 11 }
                 } else {
                     player("What I came to ask was: I lost that key you gave me.").also { stage++ }
@@ -121,7 +121,7 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
                     npc("You don't have enough money, sorry.")
                 } else {
                     npc("Thank you, enjoy!")
-                    setAttribute(player!!, EnchKeyTreasure.ENCHANTED_KEY_ATTR, 0)
+                    setAttribute(player!!, EnchKeyUtils.ENCHANTED_KEY_ATTR, 0)
                     addItemOrDrop(player!!, Items.ENCHANTED_KEY_6754, 1)
                 }
             }

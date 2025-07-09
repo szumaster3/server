@@ -8,13 +8,13 @@ import org.rs.consts.Items
  * Represents a session for the Enchanted Key activity.
  * @author szu
  */
-class EnchKeySession : LogoutListener {
+class EnchantedKeySession : LogoutListener {
 
     /**
      * Called when a player logs out.
      */
     override fun logout(player: Player) {
-        val session = player.getAttribute<EnchKeySession>("enchanted-key", null) ?: return
+        val session = player.getAttribute<EnchantedKeySession>("enchanted-key", null) ?: return
         removeAttribute(player, session.toString())
         clearLogoutListener(player, "enchanted-key")
     }

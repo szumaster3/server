@@ -6,7 +6,7 @@ import core.game.world.map.Location
  * Contains constant values and treasure locations used in the Enchanted Key activity.
  * @author szu
  */
-object EnchKeyTreasure {
+object EnchKeyUtils {
 
     /**
      * Attribute key for tracking progress with the first Enchanted Key.
