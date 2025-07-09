@@ -46,7 +46,9 @@ class PenguinManager {
             player: Player,
             location: Location,
         ) {
-            val ordinal = PenguinLocation.forLocation(location)?.ordinal ?: -1
+            val penguin = PenguinLocation.forLocation(location) ?: return
+            val ordinal = penguin.ordinal
+
             val list = tagMapping[ordinal] ?: JSONArray()
 
             list.add(player.username.lowercase())

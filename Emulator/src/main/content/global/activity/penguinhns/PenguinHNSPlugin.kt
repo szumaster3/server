@@ -18,6 +18,11 @@ import org.rs.consts.NPCs
  */
 class PenguinHNSPlugin : InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles spying the penguin NPCs.
+         */
+
         on(sceneryPenguinIDs, IntType.NPC, "spy-on") { player, node ->
             val npc = node.asNpc()
             if (!getAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS, false)) {
@@ -33,6 +38,10 @@ class PenguinHNSPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles read the spy notebook.
+         */
 
         on(Items.SPY_NOTEBOOK_13732, IntType.ITEM, "read") { player, _ ->
             val total = getAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, 0)
@@ -75,10 +84,15 @@ class PenguinHNSPlugin : InteractionListener {
                 }
 
                 2 -> {
-                    sendMessage(player, "You manage to spy on the penguin.").also {
-                        setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, totalPoints + 1)
-                        PenguinManager.registerTag(player, npc.location)
+                    sendMessage(player, "You manage to spy on the penguin.")
+                    val rand = (1..100).random()
+                    val awardedPoints = when {
+                        rand <= 2 -> 3    // 2% chance for 3 points.
+                        rand <= 7 -> 2    // 5% chance for 2 points.
+                        else -> 1         // 93% chance for 1 point.
                     }
+                    setAttribute(player, GameAttributes.ACTIVITY_PENGUINS_HNS_SCORE, totalPoints + awardedPoints)
+                    PenguinManager.registerTag(player, npc.location)
                 }
 
                 3 -> {
