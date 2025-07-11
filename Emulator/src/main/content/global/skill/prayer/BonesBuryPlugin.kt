@@ -1,8 +1,6 @@
 package content.global.skill.prayer
 
 import core.api.*
-import core.api.clockReady
-import core.api.delayClock
 import core.game.event.BoneBuryEvent
 import core.game.interaction.Clocks
 import core.game.interaction.IntType

@@ -2,8 +2,6 @@ package content.global.ame.grave
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.unlockEmote
-import core.api.hasEmote
 import core.game.component.Component
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

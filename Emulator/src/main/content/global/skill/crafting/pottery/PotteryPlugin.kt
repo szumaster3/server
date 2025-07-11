@@ -1,7 +1,6 @@
 package content.global.skill.crafting.pottery
 
 import core.api.*
-import core.api.isQuestComplete
 import core.cache.def.impl.SceneryDefinition
 import core.game.dialogue.SkillDialogueHandler
 import core.game.interaction.NodeUsageEvent

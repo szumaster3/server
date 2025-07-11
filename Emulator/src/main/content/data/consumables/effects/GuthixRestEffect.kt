@@ -1,7 +1,7 @@
 package content.data.consumables.effects
 
-import core.api.isPoisoned
 import core.api.heal
+import core.api.isPoisoned
 import core.api.sendMessage
 import core.game.consumable.ConsumableEffect
 import core.game.node.entity.player.Player

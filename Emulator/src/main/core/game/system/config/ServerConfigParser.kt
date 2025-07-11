@@ -7,9 +7,9 @@ import core.api.parseEnumEntry
 import core.game.world.GameSettings
 import core.game.world.GameWorld
 import core.game.world.map.Location
-import core.tools.mysql.Database
 import core.tools.Log
 import core.tools.LogLevel
+import core.tools.mysql.Database
 import java.io.File
 import java.net.URL
 import kotlin.system.exitProcess

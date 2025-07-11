@@ -1,10 +1,6 @@
 package content.global.skill.crafting.pottery
 
-import core.api.amountInInventory
-import core.api.faceLocation
-import core.api.inInventory
-import core.api.openDialogue
-import core.api.sendSkillDialogue
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import org.rs.consts.Items

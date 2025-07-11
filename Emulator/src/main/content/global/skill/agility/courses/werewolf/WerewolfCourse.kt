@@ -3,8 +3,6 @@ package content.global.skill.agility.courses.werewolf
 import content.global.skill.agility.AgilityCourse
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.api.produceGroundItem
-import core.api.finishedMoving
 import core.api.utils.Vector
 import core.cache.def.impl.SceneryDefinition
 import core.game.dialogue.FaceAnim

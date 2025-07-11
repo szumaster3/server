@@ -1,11 +1,11 @@
 package core.net.packet
 
+import core.api.log
 import core.game.bots.AIPlayer
 import core.net.packet.out.*
 import core.tools.Log
 import java.io.PrintWriter
 import java.io.StringWriter
-import core.api.log
 
 /**
  * The packet repository.

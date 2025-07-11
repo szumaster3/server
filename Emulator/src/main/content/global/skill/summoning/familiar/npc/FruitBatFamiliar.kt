@@ -7,7 +7,6 @@ import content.global.skill.summoning.familiar.Forager
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item

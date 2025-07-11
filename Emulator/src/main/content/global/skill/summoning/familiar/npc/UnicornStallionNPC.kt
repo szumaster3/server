@@ -2,14 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
-import core.api.cureDisease
-import core.api.curePoison
-import core.api.isDiseased
-import core.api.isPoisoned
-import core.api.getStatLevel
-import core.api.playAudio
-import core.api.sendMessage
-import core.api.visualize
+import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node

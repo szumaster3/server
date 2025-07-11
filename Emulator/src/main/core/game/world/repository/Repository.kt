@@ -7,7 +7,6 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.UpdateSequence
-import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**

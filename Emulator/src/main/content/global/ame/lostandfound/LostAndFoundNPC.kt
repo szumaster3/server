@@ -3,7 +3,6 @@ package content.global.ame.lostandfound
 import content.data.RandomEvent
 import content.global.ame.RandomEventNPC
 import core.api.*
-import core.api.setMinimapState
 import core.api.utils.WeightBasedTable
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC

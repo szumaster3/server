@@ -2,7 +2,6 @@ package content.global.skill.crafting.casting.gold
 
 import content.global.skill.slayer.SlayerManager
 import core.api.*
-import core.api.isQuestComplete
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener

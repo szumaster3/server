@@ -2,12 +2,11 @@ package core.game.world.update
 
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.world.GameWorld
 import core.game.world.map.RegionManager
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
-import core.game.world.GameWorld
 import java.nio.ByteBuffer
-import java.util.*
 
 /**
  * The NPC renderer.

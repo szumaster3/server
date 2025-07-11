@@ -7,13 +7,11 @@ import content.global.activity.jobs.JobManager
 import content.minigame.mta.plugin.MTAZone
 import content.region.kandarin.plugin.barbtraining.BarbarianTraining
 import core.api.*
-import core.api.closeDialogue
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
-import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse

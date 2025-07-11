@@ -1,7 +1,6 @@
 package content.global.skill.smithing.special
 
 import core.api.*
-import core.api.closeDialogue
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills

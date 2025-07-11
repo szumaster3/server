@@ -4,10 +4,6 @@ import content.data.GameAttributes
 import content.data.GlobalStore
 import core.ServerConstants
 import core.api.*
-import core.api.hasRequirement
-import core.api.isQuestComplete
-import core.api.unlockEmote
-import core.api.hasEmote
 import core.game.component.Component
 import core.game.interaction.InteractionListeners
 import core.game.node.entity.player.Player

@@ -3,7 +3,6 @@ package core.game.node.entity.combat.graves
 import content.data.GameAttributes
 import core.ServerStore
 import core.api.*
-import core.api.itemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node

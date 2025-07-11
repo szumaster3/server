@@ -2,7 +2,6 @@ package core.game.world.map.zone.impl
 
 import content.global.plugin.item.equipment.gloves.BrawlingGloves
 import core.api.*
-import core.api.produceGroundItem
 import core.game.component.Component
 import core.game.interaction.Option
 import core.game.node.Node

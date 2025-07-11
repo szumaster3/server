@@ -2,12 +2,10 @@ package core.game.world.map.zone.impl
 
 import core.api.amountInInventory
 import core.api.removeAll
-import core.api.removeItem
 import core.api.sendMessage
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.map.zone.MapZone
 import org.rs.consts.Items
 

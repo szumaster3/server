@@ -8,7 +8,6 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs.consts.Items
-import org.rs.consts.NPCs
 
 /**
  * The type Bug swarm npc.

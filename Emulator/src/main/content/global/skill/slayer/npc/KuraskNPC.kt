@@ -7,7 +7,6 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
-import org.rs.consts.NPCs
 
 /**
  * The type Kurask npc.

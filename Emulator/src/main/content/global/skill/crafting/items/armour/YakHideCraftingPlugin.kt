@@ -2,7 +2,6 @@ package content.global.skill.crafting.items.armour
 
 import content.global.skill.crafting.items.leather.ThreadUtils
 import core.api.*
-import core.api.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

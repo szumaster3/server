@@ -4,7 +4,6 @@ import core.ServerStore
 import core.ServerStore.Companion.getInt
 import core.ServerStore.Companion.getString
 import core.api.*
-import core.api.closeDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

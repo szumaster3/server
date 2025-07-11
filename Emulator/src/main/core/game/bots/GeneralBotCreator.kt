@@ -1,9 +1,9 @@
 package core.game.bots
 
+import content.global.bots.Idler
 import core.Server
 import core.api.TickListener
 import core.api.getWorldTicks
-import content.global.bots.Idler
 import core.game.interaction.MovementPulse
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse

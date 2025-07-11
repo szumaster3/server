@@ -1,7 +1,6 @@
 package content.global.skill.crafting.items.weapon
 
 import core.api.*
-import core.api.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.diary.DiaryType

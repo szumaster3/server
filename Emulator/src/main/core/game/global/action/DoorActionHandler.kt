@@ -1,7 +1,6 @@
 package core.game.global.action
 
 import core.api.*
-import core.api.hasRequirement
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType

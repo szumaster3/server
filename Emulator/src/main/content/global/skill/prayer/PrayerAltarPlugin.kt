@@ -1,7 +1,6 @@
 package content.global.skill.prayer
 
 import core.api.*
-import core.api.hasRequirement
 import core.game.event.PrayerPointsRechargeEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

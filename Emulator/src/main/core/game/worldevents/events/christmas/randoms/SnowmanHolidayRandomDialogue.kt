@@ -1,8 +1,6 @@
 package core.game.worldevents.events.christmas.randoms
 
 import core.api.*
-import core.api.unlockEmote
-import core.api.hasEmote
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.QueueStrength

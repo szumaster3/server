@@ -1,8 +1,6 @@
 package content.global.skill.agility.grapple
 
 import core.api.*
-import core.api.restoreTabs
-import core.api.setMinimapState
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.interaction.OptionHandler

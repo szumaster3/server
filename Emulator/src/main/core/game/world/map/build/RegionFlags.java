@@ -1,7 +1,6 @@
 package core.game.world.map.build;
 
 import core.game.world.map.RegionManager;
-import core.game.world.map.RegionPlane;
 import kotlin.Pair;
 
 import static java.lang.Math.max;

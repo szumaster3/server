@@ -7,7 +7,6 @@ import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
-import org.rs.consts.NPCs
 
 /**
  * The type Basilisk npc.

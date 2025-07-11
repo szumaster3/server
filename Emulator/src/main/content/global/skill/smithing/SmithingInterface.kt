@@ -4,8 +4,8 @@ import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.getAttribute
 import core.api.sendInputDialogue
-import core.api.submitIndividualPulse
 import core.api.sendInterfaceConfig
+import core.api.submitIndividualPulse
 import core.game.interaction.InterfaceListener
 import core.game.node.item.Item
 import org.rs.consts.Components

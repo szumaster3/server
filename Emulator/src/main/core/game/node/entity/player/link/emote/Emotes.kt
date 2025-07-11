@@ -2,8 +2,6 @@ package core.game.node.entity.player.link.emote
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.unlockEmote
-import core.api.hasEmote
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights

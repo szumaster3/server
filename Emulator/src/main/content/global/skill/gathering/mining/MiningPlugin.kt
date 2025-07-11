@@ -4,8 +4,6 @@ import content.data.GameAttributes
 import content.data.items.SkillingTool
 import content.global.activity.shootingstar.ShootingStarBonus
 import core.api.*
-import core.api.finishedMoving
-import core.api.hasRequirement
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

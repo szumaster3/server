@@ -2,8 +2,6 @@ package content.global.skill.slayer.dungeon
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.api.restoreTabs
-import core.api.setMinimapState
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.Option
 import core.game.interaction.OptionHandler

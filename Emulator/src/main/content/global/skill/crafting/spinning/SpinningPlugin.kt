@@ -1,21 +1,12 @@
 package content.global.skill.crafting.spinning
 
 import core.api.*
-import core.game.container.impl.EquipmentContainer
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryManager
-import core.game.node.entity.player.link.diary.DiaryType
-import core.game.node.entity.skill.SkillPulse
-import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
 import org.rs.consts.Components
 import org.rs.consts.Scenery
-import org.rs.consts.Sounds
 
 class SpinningPlugin : InteractionListener, InterfaceListener {
 

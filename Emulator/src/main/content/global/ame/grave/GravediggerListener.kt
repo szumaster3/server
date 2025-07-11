@@ -3,7 +3,6 @@ package content.global.ame.grave
 import content.data.GameAttributes
 import content.data.RandomEvent
 import core.api.*
-import core.api.setMinimapState
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength

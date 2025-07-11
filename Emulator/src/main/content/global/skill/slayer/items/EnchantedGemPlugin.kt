@@ -2,8 +2,6 @@ package content.global.skill.slayer.items
 
 import content.global.skill.slayer.Tasks
 import core.api.*
-import core.api.openDialogue
-import core.api.setVarp
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic

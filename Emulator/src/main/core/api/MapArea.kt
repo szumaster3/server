@@ -1,10 +1,6 @@
 package core.api
 
-import core.game.interaction.Option
-import core.game.node.Node
 import core.game.node.entity.Entity
-import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders

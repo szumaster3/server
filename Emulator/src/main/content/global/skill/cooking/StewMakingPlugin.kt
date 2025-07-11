@@ -1,7 +1,6 @@
 package content.global.skill.cooking
 
 import core.api.*
-import core.api.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

@@ -3,9 +3,6 @@ package content.global.ame.pillory
 import content.data.GameAttributes
 import content.data.RandomEvent
 import core.api.*
-import core.api.closeDialogue
-import core.api.restoreTabs
-import core.api.sendInterfaceConfig
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.game.system.timer.impl.AntiMacro

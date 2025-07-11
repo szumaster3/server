@@ -2,7 +2,6 @@ package content.global.ame.frogs
 
 import content.data.RandomEvent
 import core.api.*
-import core.api.restoreTabs
 import core.game.dialogue.FaceAnim
 import core.game.node.Node
 import core.game.node.entity.npc.NPC

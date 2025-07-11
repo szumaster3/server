@@ -1,11 +1,7 @@
 package content.global.skill.smithing.smelting
 
 import content.global.skill.smithing.Bar
-import core.api.isQuestComplete
-import core.api.sendInputDialogue
-import core.api.sendItemZoomOnInterface
-import core.api.sendString
-import core.api.submitIndividualPulse
+import core.api.*
 import core.game.interaction.InterfaceListener
 import org.rs.consts.Components
 import org.rs.consts.Quests

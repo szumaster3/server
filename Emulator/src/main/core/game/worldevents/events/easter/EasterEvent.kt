@@ -3,7 +3,6 @@ package core.game.worldevents.events.easter
 import content.data.GameAttributes
 import core.ServerConstants
 import core.api.*
-import core.api.unlockEmote
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import core.game.event.EventHook

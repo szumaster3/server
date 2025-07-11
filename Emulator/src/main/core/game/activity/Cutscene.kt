@@ -2,8 +2,6 @@ package core.game.activity
 
 import core.ServerConstants
 import core.api.*
-import core.api.closeDialogue
-import core.api.setMinimapState
 import core.api.utils.CameraShakeType
 import core.api.utils.PlayerCamera
 import core.game.component.Component

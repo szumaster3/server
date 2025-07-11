@@ -1,7 +1,6 @@
 package core.game.node.entity.player.link.request.assist
 
 import core.api.*
-import core.api.restoreTabs
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.node.entity.player.Player

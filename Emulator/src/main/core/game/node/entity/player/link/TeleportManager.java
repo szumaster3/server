@@ -1,7 +1,5 @@
 package core.game.node.entity.player.link;
 
-import content.region.island.tutorial.plugin.TutorialStage;
-import content.region.island.tutorial.plugin.*;
 import core.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
@@ -11,9 +9,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.worker.ManagementEvents;
 import org.rs.consts.Sounds;
-import proto.management.JoinClanRequest;
 
 import static core.api.ContentAPIKt.*;
 

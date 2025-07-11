@@ -1,10 +1,12 @@
 package core.game.world.map.zone.impl
 
-import core.api.*
+import core.api.MapArea
+import core.api.getRegionBorders
+import core.api.inBorders
+import core.api.openOverlay
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
-import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import org.rs.consts.Components
 

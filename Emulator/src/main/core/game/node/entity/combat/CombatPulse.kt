@@ -1,7 +1,9 @@
 package core.game.node.entity.combat
 
 import content.global.ame.RandomEventNPC
-import core.api.*
+import core.api.hasTimerActive
+import core.api.playGlobalAudio
+import core.api.playHurtAudio
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.MovementPulse
 import core.game.node.Node
@@ -14,7 +16,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import core.game.system.timer.impl.*
+import core.game.system.timer.impl.AntiMacro
+import core.game.system.timer.impl.Miasmic
 import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction

@@ -3,7 +3,6 @@ package content.global.ame.mime
 import content.data.GameAttributes
 import content.data.RandomEvent
 import core.api.*
-import core.api.restoreTabs
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.emote.Emotes

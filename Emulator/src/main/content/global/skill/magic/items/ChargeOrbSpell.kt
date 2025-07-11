@@ -3,7 +3,6 @@ package content.global.skill.magic.items
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
 import core.api.*
-import core.api.sendSkillDialogue
 import core.game.event.ResourceProducedEvent
 import core.game.node.Node
 import core.game.node.entity.impl.Animator
@@ -14,8 +13,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs.consts.Items
 import org.rs.consts.Scenery
-import org.rs.consts.Graphics as Gfx
 import org.rs.consts.Sounds
+import org.rs.consts.Graphics as Gfx
 
 class ChargeOrbSpell : SpellListener("modern") {
     private val chargeOrbSpellAnimation = Animation(726, Animator.Priority.HIGH)

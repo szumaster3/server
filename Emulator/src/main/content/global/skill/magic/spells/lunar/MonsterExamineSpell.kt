@@ -3,9 +3,9 @@ package content.global.skill.magic.spells.lunar
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.LunarSpells
 import core.api.faceLocation
+import core.api.openSingleTab
 import core.api.sendMessage
 import core.api.sendString
-import core.api.openSingleTab
 import core.game.node.item.Item
 import core.game.system.config.NPCConfigParser
 import org.rs.consts.*

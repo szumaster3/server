@@ -2,7 +2,6 @@ package content.global.skill.summoning
 
 import content.global.skill.summoning.familiar.npc.IbisNPC
 import core.api.*
-import core.api.isQuestComplete
 import core.game.event.SummoningPointsRechargeEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

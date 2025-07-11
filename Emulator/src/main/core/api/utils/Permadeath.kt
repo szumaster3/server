@@ -1,8 +1,8 @@
 package core.api.utils
 
 import core.api.isUsingSecondaryBankAccount
-import core.api.toggleBankAccount
 import core.api.teleport
+import core.api.toggleBankAccount
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.VarpManager
 import core.game.node.entity.player.info.login.PlayerSaver

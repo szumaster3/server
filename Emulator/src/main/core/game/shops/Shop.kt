@@ -2,7 +2,6 @@ package core.game.shops
 
 import core.ServerConstants
 import core.api.*
-import core.api.itemDefinition
 import core.game.component.Component
 import core.game.container.Container
 import core.game.container.ContainerEvent

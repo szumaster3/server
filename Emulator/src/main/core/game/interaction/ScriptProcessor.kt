@@ -1,8 +1,6 @@
 package core.game.interaction
 
 import core.api.*
-import core.api.isStunned
-import core.api.finishedMoving
 import core.game.bots.AIPlayer
 import core.game.node.Node
 import core.game.node.entity.Entity

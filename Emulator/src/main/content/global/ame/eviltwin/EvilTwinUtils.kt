@@ -1,8 +1,6 @@
 package content.global.ame.eviltwin
 
 import core.api.*
-import core.api.restoreTabs
-import core.api.setMinimapState
 import core.api.utils.PlayerCamera
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity

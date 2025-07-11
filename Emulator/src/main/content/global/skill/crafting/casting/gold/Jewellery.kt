@@ -1,8 +1,6 @@
 package content.global.skill.crafting.casting.gold
 
 import core.api.*
-import core.api.allInInventory
-import core.api.sendInterfaceConfig
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills

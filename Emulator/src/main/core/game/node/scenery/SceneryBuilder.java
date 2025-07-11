@@ -2,16 +2,12 @@ package core.game.node.scenery;
 
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.tools.Log;
-import core.tools.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.LandscapeParser;
 import core.game.world.update.flag.chunk.ObjectUpdateFlag;
-
-import static core.api.ContentAPIKt.log;
 
 /**
  * An aiding class for object constructing/removing.
