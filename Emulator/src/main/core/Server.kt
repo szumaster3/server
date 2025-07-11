@@ -7,8 +7,10 @@ import core.game.system.SystemState
 import core.game.system.config.ServerConfigParser
 import core.game.world.GameWorld
 import core.net.NioReactor
+import core.net.amsc.WorldCommunicator
 import core.tools.Log
 import core.tools.NetworkReachability
+import core.tools.RSAKeyGen
 import core.tools.TimeStamp
 import kotlinx.coroutines.*
 import java.io.File
@@ -84,7 +86,8 @@ object Server {
             throw e
         }
 
-        AutoStock.autostock()
+        // AutoStock.autostock()
+        // WorldCommunicator.connect()
 
         log(this::class.java, Log.INFO, "${GameWorld.settings?.name} flags ${GameWorld.settings?.toString()}")
         log(this::class.java, Log.INFO, "${GameWorld.settings?.name} started in ${t.duration(false, "")} milliseconds.")
