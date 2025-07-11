@@ -8,23 +8,38 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 
 object InteractionListeners {
+    // Maps interaction keys to handler functions.
     private val listeners = HashMap<String, (Player, Node) -> Boolean>(1000)
+
+    // Maps use-with combinations to handlers.
     private val useWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(1000)
+
+    // Handlers that match any "used" item with a specific "with" item.
     private val useAnyWithListeners = HashMap<String, (Player, Node, Node) -> Boolean>(10)
-    private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int, ) -> Boolean, (Player, Node, Node) -> Boolean, >, >, >(10)
+
+    // Wildcard handlers based on predicates.
+    private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int) -> Boolean, (Player, Node, Node) -> Boolean>>>(10)
+
+    // Overrides destination logic for specific interactions.
     private val destinationOverrides = HashMap<String, (Entity, Node) -> Location>(100)
+
+    // Equipment-related handlers.
     private val equipListeners = HashMap<String, (Player, Node) -> Boolean>(10)
+
+    // Metadata for interaction scripting.
     private val interactions = HashMap<String, InteractionListener.InteractionMetadata>()
+
+    // Metadata for use-with scripting.
     private val useWithInteractions = HashMap<String, InteractionListener.UseWithMetadata>()
+
+    // Class names of handlers that should be executed instantly.
     val instantClasses = HashSet<String>()
 
+    /**
+     * Adds a basic interaction listener.
+     */
     @JvmStatic
-    fun add(
-        id: Int,
-        type: Int,
-        option: Array<out String>,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun add(id: Int, type: Int, option: Array<out String>, method: (Player, Node) -> Boolean) {
         for (opt in option) {
             val key = "$id:$type:${opt.lowercase()}"
             if (!validate(key)) {
@@ -38,24 +53,21 @@ object InteractionListeners {
 
     private fun validate(key: String): Boolean = !listeners.containsKey(key) && !useWithListeners.containsKey(key)
 
+    /**
+     * Adds a listener for multiple ids.
+     */
     @JvmStatic
-    fun add(
-        ids: IntArray,
-        type: Int,
-        option: Array<out String>,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun add(ids: IntArray, type: Int, option: Array<out String>, method: (Player, Node) -> Boolean) {
         for (id in ids) {
             add(id, type, option, method)
         }
     }
 
+    /**
+     * Adds a fallback interaction by option and type.
+     */
     @JvmStatic
-    fun add(
-        option: String,
-        type: Int,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun add(option: String, type: Int, method: (Player, Node) -> Boolean) {
         val key = "$type:${option.lowercase()}"
         if (!validate(key)) {
             throw IllegalStateException(
@@ -65,24 +77,21 @@ object InteractionListeners {
         listeners[key] = method
     }
 
+    /**
+     * Adds fallback listeners for multiple options.
+     */
     @JvmStatic
-    fun add(
-        options: Array<out String>,
-        type: Int,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun add(options: Array<out String>, type: Int, method: (Player, Node) -> Boolean) {
         for (opt in options) {
             add(opt.lowercase(), type, method)
         }
     }
 
+    /**
+     * Adds a use-with listener for two specific items.
+     */
     @JvmStatic
-    fun add(
-        used: Int,
-        with: Int,
-        type: Int,
-        method: (Player, Node, Node) -> Boolean,
-    ) {
+    fun add(used: Int, with: Int, type: Int, method: (Player, Node, Node) -> Boolean) {
         val key = "$used:$with:$type"
         val altKey = "$with:$used:$type"
         if (!validate(key) || !validate(altKey)) {
@@ -93,58 +102,60 @@ object InteractionListeners {
         useWithListeners[key] = method
     }
 
+    /**
+     * Adds use-with listeners for one item used with multiple others.
+     */
     @JvmStatic
-    fun add(
-        type: Int,
-        used: Int,
-        with: IntArray,
-        method: (Player, Node, Node) -> Boolean,
-    ) {
+    fun add(type: Int, used: Int, with: IntArray, method: (Player, Node, Node) -> Boolean) {
         for (id in with) {
             add(used = used, with = id, type = type, method = method)
         }
     }
 
+    /**
+     * Adds a wildcard use-with handler with predicate filter.
+     */
     @JvmStatic
-    fun addWildcard(
-        type: Int,
-        predicate: (used: Int, with: Int) -> Boolean,
-        handler: (player: Player, used: Node, with: Node) -> Boolean,
-    ) {
+    fun addWildcard(type: Int, predicate: (used: Int, with: Int) -> Boolean, handler: (player: Player, used: Node, with: Node) -> Boolean) {
         if (!useWithWildcardListeners.containsKey(type)) {
-            useWithWildcardListeners.put(type, ArrayList())
+            useWithWildcardListeners[type] = ArrayList()
         }
         useWithWildcardListeners[type]!!.add(Pair(predicate, handler))
     }
 
+    /**
+     * Adds equip handler for an item.
+     */
     @JvmStatic
-    fun addEquip(
-        id: Int,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun addEquip(id: Int, method: (Player, Node) -> Boolean) {
         equipListeners["equip:$id"] = method
     }
 
+    /**
+     * Adds unequip handler for an item.
+     */
     @JvmStatic
-    fun addUnequip(
-        id: Int,
-        method: (Player, Node) -> Boolean,
-    ) {
+    fun addUnequip(id: Int, method: (Player, Node) -> Boolean) {
         equipListeners["unequip:$id"] = method
     }
 
+    /**
+     * Returns equip handler for an item.
+     */
     @JvmStatic
     fun getEquip(id: Int): ((Player, Node) -> Boolean)? = equipListeners["equip:$id"]
 
+    /**
+     * Returns unequip handler for an item.
+     */
     @JvmStatic
     fun getUnequip(id: Int): ((Player, Node) -> Boolean)? = equipListeners["unequip:$id"]
 
+    /**
+     * Gets a use-with handler for two items.
+     */
     @JvmStatic
-    fun get(
-        used: Int,
-        with: Int,
-        type: Int,
-    ): ((Player, Node, Node) -> Boolean)? {
+    fun get(used: Int, with: Int, type: Int): ((Player, Node, Node) -> Boolean)? {
         val method = useWithListeners["$used:$with:$type"] ?: useAnyWithListeners["$with:$type"]
         if (method != null) {
             return method
@@ -158,46 +169,41 @@ object InteractionListeners {
         return null
     }
 
+    /**
+     * Gets a handler for a specific node interaction.
+     */
     @JvmStatic
-    fun get(
-        id: Int,
-        type: Int,
-        option: String,
-    ): ((Player, Node) -> Boolean)? = listeners["$id:$type:${option.lowercase()}"]
+    fun get(id: Int, type: Int, option: String): ((Player, Node) -> Boolean)? = listeners["$id:$type:${option.lowercase()}"]
 
+    /**
+     * Gets a fallback handler for an interaction type and option.
+     */
     @JvmStatic
-    fun get(
-        option: String,
-        type: Int,
-    ): ((Player, Node) -> Boolean)? = listeners["$type:${option.lowercase()}"]
+    fun get(option: String, type: Int): ((Player, Node) -> Boolean)? = listeners["$type:${option.lowercase()}"]
 
+    /**
+     * Adds destination override for a type + id.
+     */
     @JvmStatic
-    fun addDestOverride(
-        type: Int,
-        id: Int,
-        method: (Entity, Node) -> Location,
-    ) {
+    fun addDestOverride(type: Int, id: Int, method: (Entity, Node) -> Location) {
         destinationOverrides["$type:$id"] = method
     }
 
+    /**
+     * Adds destination overrides by string options.
+     */
     @JvmStatic
-    fun addDestOverrides(
-        type: Int,
-        options: Array<out String>,
-        method: (Entity, Node) -> Location,
-    ) {
+    fun addDestOverrides(type: Int, options: Array<out String>, method: (Entity, Node) -> Location) {
         for (opt in options) {
             destinationOverrides["$type:${opt.lowercase()}"] = method
         }
     }
 
+    /**
+     * Adds destination overrides for multiple ids and options.
+     */
     @JvmStatic
-    fun addDestOverrides(
-        type: Int,
-        ids: IntArray,
-        options: Array<out String>,
-        method: (Entity, Node) -> Location,
-    ) {
+    fun addDestOverrides(type: Int, ids: IntArray, options: Array<out String>, method: (Entity, Node) -> Location, ) {
         for (id in ids) {
             for (opt in options) {
                 destinationOverrides["$type:$id:${opt.lowercase()}"] = method
@@ -205,32 +211,29 @@ object InteractionListeners {
         }
     }
 
+    /**
+     * Gets override for specific type, id, and option.
+     */
     @JvmStatic
-    fun getOverride(
-        type: Int,
-        id: Int,
-        option: String,
-    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id:${option.lowercase()}"]
+    fun getOverride(type: Int, id: Int, option: String): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id:${option.lowercase()}"]
 
+    /**
+     * Gets override for specific type and id.
+     */
     @JvmStatic
-    fun getOverride(
-        type: Int,
-        id: Int,
-    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id"]
+    fun getOverride(type: Int, id: Int): ((Entity, Node) -> Location)? = destinationOverrides["$type:$id"]
 
+    /**
+     * Gets override for specific type and string option.
+     */
     @JvmStatic
-    fun getOverride(
-        type: Int,
-        option: String,
-    ): ((Entity, Node) -> Location)? = destinationOverrides["$type:$option"]
+    fun getOverride(type: Int, option: String): ((Entity, Node) -> Location)? = destinationOverrides["$type:$option"]
 
+    /**
+     * Runs equip or unequip logic.
+     */
     @JvmStatic
-    fun run(
-        id: Int,
-        player: Player,
-        node: Node,
-        isEquip: Boolean,
-    ): Boolean {
+    fun run(id: Int, player: Player, node: Node, isEquip: Boolean): Boolean {
         player.dispatch(InteractionEvent(node, if (isEquip) "equip" else "unequip"))
         if (isEquip) {
             return equipListeners["equip:$id"]?.invoke(player, node) ?: true
@@ -239,13 +242,11 @@ object InteractionListeners {
         }
     }
 
+    /**
+     * Runs a use-with interaction between two nodes.
+     */
     @JvmStatic
-    fun run(
-        used: Node,
-        with: Node,
-        type: IntType,
-        player: Player,
-    ): Boolean {
+    fun run(used: Node, with: Node, type: IntType, player: Player): Boolean {
         val flag = when (type) {
             IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.SCENERY -> DestinationFlag.OBJECT
@@ -317,14 +318,11 @@ object InteractionListeners {
         return true
     }
 
+    /**
+     * Runs a standard interaction on a node.
+     */
     @JvmStatic
-    fun run(
-        id: Int,
-        type: IntType,
-        option: String,
-        player: Player,
-        node: Node,
-    ): Boolean {
+    fun run(id: Int, type: IntType, option: String, player: Player, node: Node): Boolean {
         val flag = when (type) {
             IntType.PLAYER -> DestinationFlag.ENTITY
             IntType.GROUND_ITEM -> DestinationFlag.ITEM
@@ -376,12 +374,10 @@ object InteractionListeners {
         return true
     }
 
-    fun add(
-        type: Int,
-        used: IntArray,
-        with: IntArray,
-        handler: (Player, Node, Node) -> Boolean,
-    ) {
+    /**
+     * Adds use-with handler for multiple pairs.
+     */
+    fun add(type: Int, used: IntArray, with: IntArray, handler: (Player, Node, Node) -> Boolean) {
         for (u in used) {
             for (w in with) {
                 useWithListeners["$u:$w:$type"] = handler
@@ -389,32 +385,35 @@ object InteractionListeners {
         }
     }
 
-    fun add(
-        type: Int,
-        with: IntArray,
-        handler: (Player, Node, Node) -> Boolean,
-    ) {
+    /**
+     * Adds a use-with handler for any "used" item with given "with" items.
+     */
+    fun add(type: Int, with: IntArray, handler: (Player, Node, Node) -> Boolean) {
         for (w in with) {
             useAnyWithListeners["$w:$type"] = handler
         }
     }
 
+    /**
+     * Returns true if the handler is marked as instant.
+     */
     fun isInstant(handler: (Player, Node) -> Boolean): Boolean {
         val className = handler.javaClass.name.substringBefore("$")
         return instantClasses.contains(className)
     }
 
+    /**
+     * Returns true if the use-with handler is marked as instant.
+     */
     fun isUseWithInstant(handler: (player: Player, used: Node, with: Node) -> Boolean): Boolean {
         val className = handler.javaClass.name.substringBefore("$")
         return instantClasses.contains(className)
     }
 
-    fun addMetadata(
-        ids: IntArray,
-        type: IntType,
-        options: Array<out String>,
-        metadata: InteractionListener.InteractionMetadata,
-    ) {
+    /**
+     * Adds metadata for interactions.
+     */
+    fun addMetadata(ids: IntArray, type: IntType, options: Array<out String>, metadata: InteractionListener.InteractionMetadata) {
         for (id in ids) {
             for (opt in options) {
                 interactions["${type.ordinal}:$id:${opt.lowercase()}"] = metadata
@@ -422,43 +421,36 @@ object InteractionListeners {
         }
     }
 
-    fun addMetadata(
-        id: Int,
-        type: IntType,
-        options: Array<out String>,
-        metadata: InteractionListener.InteractionMetadata,
-    ) {
+    /**
+     * Adds metadata for interactions for one id.
+     */
+    fun addMetadata(id: Int, type: IntType, options: Array<out String>, metadata: InteractionListener.InteractionMetadata) {
         for (opt in options) {
             interactions["${type.ordinal}:$id:${opt.lowercase()}"] = metadata
         }
     }
 
-    fun addGenericMetadata(
-        options: Array<out String>,
-        type: IntType,
-        metadata: InteractionListener.InteractionMetadata,
-    ) {
+    /**
+     * Adds generic metadata for multiple options.
+     */
+    fun addGenericMetadata(options: Array<out String>, type: IntType, metadata: InteractionListener.InteractionMetadata) {
         for (opt in options) {
             interactions["${type.ordinal}:$opt"] = metadata
         }
     }
 
-    fun addMetadata(
-        used: Int,
-        with: IntArray,
-        type: IntType,
-        metadata: InteractionListener.UseWithMetadata,
-    ) {
+    /**
+     * Adds metadata for a use-with interaction.
+     */
+    fun addMetadata(used: Int, with: IntArray, type: IntType, metadata: InteractionListener.UseWithMetadata) {
         for (id in with) {
             useWithInteractions["${type.ordinal}:$used:$with"] = metadata
         }
     }
 
-    fun addMetadata(
-        used: Int,
-        with: Int,
-        type: IntType,
-        metadata: InteractionListener.UseWithMetadata,
-    ) {
+    /**
+     * Adds metadata for a specific use-with pair.
+     */
+    fun addMetadata(used: Int, with: Int, type: IntType, metadata: InteractionListener.UseWithMetadata) {
     }
 }

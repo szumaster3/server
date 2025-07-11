@@ -365,7 +365,7 @@ class ScriptProcessor(
             }
             targetDestination =
                 when (interactTarget) {
-                    is NPC -> DestinationFlag.ENTITY.getDestination(entity, interactTarget)
+                    is NPC -> DestinationFlag.ENTITY.getDestination(entity, interactTarget!!)
                     is Scenery -> {
                         val basicPath = Pathfinder.find(entity, interactTarget)
                         val path = basicPath.points.lastOrNull()
@@ -380,7 +380,7 @@ class ScriptProcessor(
                         Location.create(path.x, path.y, entity.location.z)
                     }
 
-                    is GroundItem -> DestinationFlag.ITEM.getDestination(entity, interactTarget)
+                    is GroundItem -> DestinationFlag.ITEM.getDestination(entity, interactTarget!!)
                     else -> target.location
                 }
         }
