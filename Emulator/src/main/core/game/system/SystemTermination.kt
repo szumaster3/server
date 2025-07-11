@@ -17,7 +17,13 @@ import core.tools.Log
 import java.io.File
 import java.util.function.Consumer
 
-class SystemTermination constructor() {
+/**
+ * Manages server termination and data saving.
+ */
+class SystemTermination {
+    /**
+     * Runs the termination sequence: stops networking, bots, saves players and world data.
+     */
     fun terminate() {
         log(this.javaClass, Log.INFO, "Initializing termination sequence - do not shutdown!")
         try {
@@ -28,10 +34,8 @@ class SystemTermination constructor() {
             Server.reactor!!.terminate()
             log(this.javaClass, Log.INFO, "Stopping all pulses...")
             majorUpdateWorker.stop()
-            val it: Iterator<Player> = players.iterator()
-            while (it.hasNext()) {
+            for (p in players) {
                 try {
-                    val p = it.next()
                     if (p != null && !p.isArtificial) {
                         p.details.save()
                         p.clear()
@@ -40,18 +44,18 @@ class SystemTermination constructor() {
                     e.printStackTrace()
                 }
             }
-            shutdownListeners.forEach(Consumer { obj: ShutdownListener -> obj.shutdown() })
+            shutdownListeners.forEach(Consumer { it.shutdown() })
             flushRemainingEventsImmediately()
-            var s: ServerStore? = null
+            var serverStore: ServerStore? = null
             for (wld in worldPersists) {
                 if (wld is ServerStore) {
-                    s = wld
+                    serverStore = wld
                 } else {
                     wld.save()
                 }
             }
-            // ServerStore should always save last.
-            s?.save()
+            // Save ServerStore last
+            serverStore?.save()
             if (ServerConstants.DATA_PATH != null) save(ServerConstants.DATA_PATH!!)
         } catch (e: Throwable) {
             e.printStackTrace()
@@ -59,9 +63,13 @@ class SystemTermination constructor() {
         log(this.javaClass, Log.INFO, "Server successfully terminated!")
     }
 
+    /**
+     * Saves data to the specified directory and processes disconnection queue.
+     * @param directory Path to save data.
+     */
     fun save(directory: String) {
         val file = File(directory)
-        log(this.javaClass, Log.INFO, "Saving data [dir=" + file.absolutePath + "]...")
+        log(this.javaClass, Log.INFO, "Saving data [dir=${file.absolutePath}]...")
         if (!file.isDirectory) {
             file.mkdirs()
         }

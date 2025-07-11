@@ -13,7 +13,7 @@ import kotlin.math.floor
 /**
  * Handles the magic combat swings.
  *
- * @author Emperor, Ceikry, Kotlin conversion + cleanup
+ * @author Emperor
  */
 open class MagicSwingHandler(
     vararg flags: SwingHandlerFlag,
@@ -27,17 +27,15 @@ open class MagicSwingHandler(
         }
         var distance = 10
         var type = InteractionType.STILL_INTERACT
-        var goodRange =
-            victim.centerLocation.withinDistance(
-                entity.centerLocation,
-                getCombatDistance(entity, victim, distance),
-            )
+        var goodRange = victim.centerLocation.withinDistance(
+            entity.centerLocation,
+            getCombatDistance(entity, victim, distance),
+        )
         if (victim.walkingQueue.isMoving && !goodRange) {
-            goodRange =
-                victim.centerLocation.withinDistance(
-                    entity.centerLocation,
-                    getCombatDistance(entity, victim, ++distance),
-                )
+            goodRange = victim.centerLocation.withinDistance(
+                entity.centerLocation,
+                getCombatDistance(entity, victim, ++distance),
+            )
             type = InteractionType.MOVE_INTERACT
         }
         if (goodRange && isAttackable(entity, victim) != InteractionType.NO_INTERACT) {
@@ -96,11 +94,8 @@ open class MagicSwingHandler(
             ticks++
         }
         if (state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
-        if (state.estimatedHit + state.secondaryHit >
-            victim.skills.lifepoints
-        ) {
-            state.secondaryHit -=
-                ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
+        if (state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) {
+            state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
         }
         return ticks
     }
@@ -142,7 +137,9 @@ open class MagicSwingHandler(
     ) {
         if (state!!.targets == null) {
             if (state.estimatedHit > -1) {
-                victim!!.impactHandler.handleImpact(entity, state.estimatedHit, CombatStyle.MAGIC, state) // Handle impact for the victim
+                victim!!.impactHandler.handleImpact(
+                    entity, state.estimatedHit, CombatStyle.MAGIC, state
+                ) // Handle impact for the victim
             }
             return
         }
@@ -194,15 +191,14 @@ open class MagicSwingHandler(
         }
         val additional = getSetMultiplier(entity, Skills.MAGIC)
         val effective = floor(level * prayer * additional + spellBonus)
-        val bonus =
-            if (!flags.contains(
-                    SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY,
-                )
-            ) {
-                entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
-            } else {
-                0
-            }
+        val bonus = if (!flags.contains(
+                SwingHandlerFlag.IGNORE_STAT_BOOSTS_ACCURACY,
+            )
+        ) {
+            entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
+        } else {
+            0
+        }
         return floor((effective + 8) * (bonus + 64) / 10).toInt()
     }
 
@@ -219,9 +215,7 @@ open class MagicSwingHandler(
             val level = entity!!.skills.getLevel(Skills.MAGIC, true)
             val bonus = entity.properties.bonuses[if (entity is Player) 14 else 13]
             val cumulativeStr = level.toDouble()
-            return 1 +
-                ((14 + cumulativeStr + bonus.toDouble() / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() /
-                10
+            return 1 + ((14 + cumulativeStr + bonus.toDouble() / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() / 10
         }
         var levelMod = 1.0
         val entityMod = entity!!.getLevelMod(entity, victim)
@@ -270,10 +264,9 @@ open class MagicSwingHandler(
         super.addExperience(entity, victim, state)
     }
 
-    override fun getArmourSet(e: Entity?): ArmourSet? =
-        if (ArmourSet.AHRIM.isUsing(e)) {
-            ArmourSet.AHRIM
-        } else {
-            super.getArmourSet(e)
-        }
+    override fun getArmourSet(e: Entity?): ArmourSet? = if (ArmourSet.AHRIM.isUsing(e)) {
+        ArmourSet.AHRIM
+    } else {
+        super.getArmourSet(e)
+    }
 }

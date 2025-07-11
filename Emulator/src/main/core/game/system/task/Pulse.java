@@ -3,48 +3,51 @@ package core.game.system.task;
 import core.game.node.Node;
 
 /**
- * The type Pulse.
+ * Represents a scheduled repeating task that runs every {@code delay} ticks.
  */
 public abstract class Pulse implements Runnable {
 
     /**
-     * The Running.
+     * Indicates whether this pulse is currently running.
      */
-    public boolean running = true;
+    private boolean running = true;
 
+    /**
+     * Number of ticks between executions.
+     */
     private int delay;
 
     /**
-     * The Ticks passed.
+     * Number of ticks passed since last execution.
      */
-    int ticksPassed;
+    private int ticksPassed;
 
     /**
-     * The Checks.
+     * Nodes monitored by this pulse; pulse stops if any become inactive.
      */
     protected Node[] checks;
 
     /**
-     * Instantiates a new Pulse.
+     * Creates a Pulse with default delay of 1 tick.
      */
     public Pulse() {
         this(1);
     }
 
     /**
-     * Instantiates a new Pulse.
+     * Creates a Pulse with the specified delay.
      *
-     * @param delay the delay
+     * @param delay Number of ticks between pulse executions.
      */
     public Pulse(int delay) {
         this.delay = delay;
     }
 
     /**
-     * Instantiates a new Pulse.
+     * Creates a Pulse with specified delay and associated nodes.
      *
-     * @param delay  the delay
-     * @param checks the checks
+     * @param delay  Number of ticks between pulse executions.
+     * @param checks Nodes to monitor for activity.
      */
     public Pulse(int delay, Node... checks) {
         this.delay = delay;
@@ -53,15 +56,13 @@ public abstract class Pulse implements Runnable {
 
     @Override
     public void run() {
-        if (update()) {
-            //GameWorld.TASKS.remove(this);
-        }
+        update();
     }
 
     /**
-     * Update boolean.
+     * Updates the pulse state; executes pulse logic if delay elapsed.
      *
-     * @return the boolean
+     * @return {@code true} if the pulse has stopped and should be removed; {@code false} otherwise.
      */
     public boolean update() {
         if (hasInactiveNode()) {
@@ -71,6 +72,7 @@ public abstract class Pulse implements Runnable {
         if (!isRunning()) {
             return true;
         }
+
         if (++ticksPassed >= delay) {
             ticksPassed = 0;
             try {
@@ -83,22 +85,19 @@ public abstract class Pulse implements Runnable {
                 stop();
                 return true;
             }
-            return !isRunning();
         }
-        return false;
+        return !isRunning();
     }
 
     /**
-     * Has inactive node boolean.
+     * Checks whether any monitored nodes are inactive.
      *
-     * @return the boolean
+     * @return {@code true} if any node is inactive; {@code false} otherwise.
      */
     public boolean hasInactiveNode() {
         if (checks != null) {
-            int size = checks.length;
-            for (int i = 0; i < size; i++) {
-                Node n = checks[i];
-                if (n != null && !n.isActive()) {
+            for (Node node : checks) {
+                if (node != null && !node.isActive()) {
                     return true;
                 }
             }
@@ -107,103 +106,103 @@ public abstract class Pulse implements Runnable {
     }
 
     /**
-     * Pulse boolean.
+     * The logic executed each time the pulse triggers.
      *
-     * @return the boolean
+     * @return {@code true} to stop the pulse; {@code false} to continue.
      */
     public abstract boolean pulse();
 
     /**
-     * Remove for boolean.
+     * Determines if the pulse should be removed for a given reason.
      *
-     * @param pulse the pulse
-     * @return the boolean
+     * @param reason The removal reason.
+     * @return {@code true} if the pulse should be removed; otherwise {@code false}.
      */
-    public boolean removeFor(String pulse) {
+    public boolean removeFor(String reason) {
         return true;
     }
 
     /**
-     * Add node check.
+     * Replaces the node checked at the given index.
      *
-     * @param index the index
-     * @param n     the n
+     * @param index Index of the node to replace.
+     * @param node  New node to set.
      */
-    public void addNodeCheck(int index, Node n) {
-        checks[index] = n;
+    public void addNodeCheck(int index, Node node) {
+        checks[index] = node;
     }
 
     /**
-     * Gets node check.
+     * Gets the node at the specified index.
      *
-     * @param index the index
-     * @return the node check
+     * @param index The index of the node.
+     * @return The node at the specified index.
      */
     public Node getNodeCheck(int index) {
         return checks[index];
     }
 
     /**
-     * Stop.
+     * Stops the pulse from running.
      */
     public void stop() {
         running = false;
     }
 
     /**
-     * Start.
+     * Starts or resumes the pulse.
      */
     public void start() {
         running = true;
     }
 
     /**
-     * Restart.
+     * Resets the pulse tick counter.
      */
     public void restart() {
         ticksPassed = 0;
     }
 
     /**
-     * Is running boolean.
+     * Checks if the pulse is currently running.
      *
-     * @return the boolean
+     * @return {@code true} if running, {@code false} otherwise.
      */
     public boolean isRunning() {
         return running;
     }
 
     /**
-     * Gets delay.
+     * Gets the delay between pulse executions.
      *
-     * @return the delay
+     * @return The delay in ticks.
      */
     public int getDelay() {
         return delay;
     }
 
     /**
-     * Sets delay.
+     * Sets the delay between pulse executions.
      *
-     * @param delay the delay
+     * @param delay The delay in ticks.
      */
     public void setDelay(int delay) {
         this.delay = delay;
     }
 
     /**
-     * Sets ticks passed.
+     * Sets the number of ticks that have passed since last execution.
      *
-     * @param ticks the ticks
+     * @param ticks The number of ticks.
      */
     public void setTicksPassed(int ticks) {
         this.ticksPassed = ticks;
     }
 
     /**
-     * Gets ticks passed.
+     * Gets the number of ticks passed since the last execution.
      *
-     * @return the ticks passed
+     * @return The number of ticks passed.
      */
     public int getTicksPassed() {
         return ticksPassed;

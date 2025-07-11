@@ -13,9 +13,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The type Message log.
+ * Logs messages with optional timestamping and capacity limit.
+ * Supports writing logs to a file in a custom binary format.
  */
 public class MessageLog {
+
+    private static final int MAX_MESSAGE_SIZE = 16055;
 
     private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -23,113 +26,131 @@ public class MessageLog {
 
     private final int capacity;
 
-    private boolean uniqueLogging;
+    private final boolean uniqueLogging;
 
     /**
-     * Instantiates a new Message log.
+     * Creates a MessageLog with unlimited capacity and no unique logging.
      */
     public MessageLog() {
         this(-1, false);
     }
 
     /**
-     * Instantiates a new Message log.
+     * Creates a MessageLog with specified capacity and no unique logging.
      *
-     * @param capacity the capacity
+     * @param capacity maximum number of stored messages; -1 means unlimited
      */
     public MessageLog(int capacity) {
         this(capacity, false);
     }
 
     /**
-     * Instantiates a new Message log.
+     * Creates a MessageLog with specified capacity and unique logging option.
      *
-     * @param capacity      the capacity
-     * @param uniqueLogging the unique logging
+     * @param capacity      maximum number of stored messages; -1 means unlimited
+     * @param uniqueLogging if true, duplicate messages are ignored
      */
     public MessageLog(int capacity, boolean uniqueLogging) {
         this.capacity = capacity;
-        this.messages = new ArrayList<>(20);
+        this.messages = new ArrayList<>();
         this.uniqueLogging = uniqueLogging;
     }
 
     /**
-     * Log.
+     * Adds a message to the log, optionally prepending a timestamp.
+     * If capacity is exceeded, oldest message is removed.
+     * If uniqueLogging is enabled, duplicate messages are ignored.
      *
-     * @param message   the message
-     * @param timeStamp the time stamp
+     * @param message   the message to log
+     * @param timeStamp whether to prepend a timestamp
      */
     public void log(String message, boolean timeStamp) {
-        if (messages.size() == capacity) {
-            messages.remove(0);
-        }
         if (uniqueLogging && messages.contains(message)) {
             return;
         }
-        if (timeStamp) {
-            StringBuilder sb = new StringBuilder(dateFormat.format(new Date()));
-            message = sb.append(": ").append(message).toString();
+
+        if (capacity > 0 && messages.size() == capacity) {
+            messages.remove(0);
         }
+
+        if (timeStamp) {
+            String timestamp = dateFormat.format(new Date());
+            message = timestamp + ": " + message;
+        }
+
         messages.add(message);
     }
 
     /**
-     * Write.
+     * Writes all stored messages to the specified file.
+     * The messages are written with a custom binary format:
+     * - First, a short with the number of messages
+     * - Then each message as a string followed by a newline byte
+     * - Finally, a short with value -1 to mark the end
+     * <p>
+     * Appends to the file just before the last two bytes (if file exists).
+     * <p>
+     * Clears the message list after writing.
      *
-     * @param fileName the file name
+     * @param fileName path to the file where logs will be saved
      */
     public void write(String fileName) {
         if (messages.isEmpty()) {
             return;
         }
+
         int size = messages.size();
-        ByteBuffer buffer = ByteBuffer.allocate(size * 16055);
+        ByteBuffer buffer = ByteBuffer.allocate(size * MAX_MESSAGE_SIZE);
         buffer.putShort((short) size);
+
         for (String message : messages) {
             ByteBufferUtils.putString(message, buffer);
             buffer.put((byte) '\n');
         }
+
         buffer.putShort((short) -1);
         buffer.flip();
-        try (RandomAccessFile raf = new RandomAccessFile(fileName, "rw")) {
-            FileChannel channel = raf.getChannel();
-            long pos = channel.size() - 2l;
-            if (pos < 1) {
+
+        try (RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
+             FileChannel channel = raf.getChannel()) {
+
+            long pos = channel.size() - 2L;
+            if (pos < 0) {
                 pos = 0;
             }
             channel.write(buffer, pos);
-            raf.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         messages.clear();
     }
 
     /**
-     * Gets messages.
+     * Gets the list of stored messages.
      *
-     * @return the messages
+     * @return list of messages
      */
     public List<String> getMessages() {
         return messages;
     }
 
     /**
-     * Sets messages.
+     * Replaces the current message list with the provided list.
      *
-     * @param messages the messages
+     * @param messages new list of messages
      */
     public void setMessages(List<String> messages) {
         this.messages = messages;
     }
 
     /**
-     * Gets capacity.
+     * Gets the maximum capacity of stored messages.
      *
-     * @return the capacity
+     * @return capacity or -1 if unlimited
      */
     public int getCapacity() {
         return capacity;
     }
-
 }

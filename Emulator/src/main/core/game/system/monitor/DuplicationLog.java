@@ -3,22 +3,24 @@ package core.game.system.monitor;
 import core.ServerConstants;
 
 /**
- * The type Duplication log.
+ * Tracks duplication-related flags and logs for a player.
+ * Supports priority-based log writing depending on flag severity.
  */
 public final class DuplicationLog extends MessageLog {
 
     /**
-     * The constant LOGGING_DURATION.
+     * Duration (in milliseconds) for which an increase flag is considered active.
+     * Currently set to 5 days.
      */
-    public static long LOGGING_DURATION = 5 * 24 * 60 * 60_000;
+    public static final long LOGGING_DURATION = 5 * 24 * 60 * 60_000L;
 
     /**
-     * The constant DUPE_TALK.
+     * Flag indicating duplication-related chat activity.
      */
     public static final int DUPE_TALK = 0x1;
 
     /**
-     * The constant NW_INCREASE.
+     * Flag indicating suspicious increase in item/note count.
      */
     public static final int NW_INCREASE = 0x8;
 
@@ -27,12 +29,18 @@ public final class DuplicationLog extends MessageLog {
     private long lastIncreaseFlag;
 
     /**
-     * Instantiates a new Duplication log.
+     * Creates a DuplicationLog with unlimited capacity and no unique logging.
      */
     public DuplicationLog() {
         super(-1, false);
     }
 
+    /**
+     * Writes the log to a file based on the current duplication priority.
+     * The path uses player's name and priority category (high, mid, low).
+     *
+     * @param playerName name of the player associated with this log
+     */
     @Override
     public void write(String playerName) {
         String priority = "low";
@@ -42,14 +50,17 @@ public final class DuplicationLog extends MessageLog {
                 break;
             case 2:
                 priority = "mid";
+                break;
+            default:
+                priority = "low";
         }
         super.write(ServerConstants.LOGS_PATH + "duplicationflags/" + priority + "prior/" + playerName + ".log");
     }
 
     /**
-     * Gets probability.
+     * Computes the duplication suspicion probability based on set flags.
      *
-     * @return the probability
+     * @return an integer probability value (0 to 3)
      */
     public int getProbability() {
         int probability = 0;
@@ -63,18 +74,19 @@ public final class DuplicationLog extends MessageLog {
     }
 
     /**
-     * Is logging flagged boolean.
+     * Determines whether logging is currently flagged due to recent suspicious increase.
      *
-     * @return the boolean
+     * @return true if increase flag is active within LOGGING_DURATION, false otherwise
      */
     public boolean isLoggingFlagged() {
         return (flag & NW_INCREASE) != 0 && (System.currentTimeMillis() - lastIncreaseFlag) < LOGGING_DURATION;
     }
 
     /**
-     * Flag.
+     * Adds a flag to this log's internal flag bitmask.
+     * If the flag is NW_INCREASE, updates the timestamp.
      *
-     * @param flag the flag
+     * @param flag the flag bit(s) to add
      */
     public void flag(int flag) {
         this.flag |= flag;
@@ -84,30 +96,29 @@ public final class DuplicationLog extends MessageLog {
     }
 
     /**
-     * Gets flag.
+     * Returns the current flag bitmask.
      *
-     * @return the flag
+     * @return the current flag integer
      */
     public int getFlag() {
         return flag;
     }
 
     /**
-     * Gets last increase flag.
+     * Returns the timestamp of the last NW_INCREASE flag set.
      *
-     * @return the last increase flag
+     * @return timestamp in milliseconds
      */
     public long getLastIncreaseFlag() {
         return lastIncreaseFlag;
     }
 
     /**
-     * Sets last increase flag.
+     * Sets the timestamp for the last NW_INCREASE flag.
      *
-     * @param lastIncreaseFlag the last increase flag
+     * @param lastIncreaseFlag timestamp in milliseconds
      */
     public void setLastIncreaseFlag(long lastIncreaseFlag) {
         this.lastIncreaseFlag = lastIncreaseFlag;
     }
-
 }

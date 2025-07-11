@@ -7,29 +7,20 @@ import java.lang.Long.max
 import java.sql.*
 
 /**
- * Provides SQL-based storage for user accounts.
+ * SQL-based implementation of [AccountStorageProvider].
  */
 class SQLStorageProvider : AccountStorageProvider {
     var connectionString = ""
     var connectionUsername = ""
     var connectionPassword = ""
 
-    /**
-     * Establishes a connection to the database.
-     * @return A [Connection] object.
-     */
+    /** Returns a database connection. */
     fun getConnection(): Connection {
         Class.forName("com.mysql.cj.jdbc.Driver")
         return DriverManager.getConnection(connectionString, connectionUsername, connectionPassword)
     }
 
-    /**
-     * Configures database connection parameters.
-     * @param host Database host.
-     * @param databaseName Name of the database.
-     * @param username Database username.
-     * @param password Database password.
-     */
+    /** Sets database connection parameters. */
     fun configure(
         host: String,
         databaseName: String,
@@ -41,11 +32,7 @@ class SQLStorageProvider : AccountStorageProvider {
         connectionPassword = password
     }
 
-    /**
-     * Checks if a given username is already taken.
-     * @param username The username to check.
-     * @return `true` if the username exists, otherwise `false`.
-     */
+    /** Returns true if the username exists. */
     override fun checkUsernameTaken(username: String): Boolean {
         val conn = getConnection()
         conn.use {
@@ -56,165 +43,136 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /**
-     * Retrieves account information for a given username.
-     * @param username The username to retrieve information for.
-     * @return A [UserAccountInfo] object containing user details.
-     */
+    /** Loads account info or returns default if not found. */
     override fun getAccountInfo(username: String): UserAccountInfo {
         val conn = getConnection()
         conn.use { con ->
-            val compiledAccountInfoQuery = con.prepareStatement(accountInfoQuery)
-            compiledAccountInfoQuery.setString(1, username.lowercase())
-            val result = compiledAccountInfoQuery.executeQuery()
+            val query = con.prepareStatement(accountInfoQuery)
+            query.setString(1, username.lowercase())
+            val result = query.executeQuery()
             if (result.next()) {
-                val userData = UserAccountInfo.createDefault()
-                userData.username = username
-
-                result.getString(2)?.let { userData.password = it }
-                result.getInt(3).let { userData.uid = it }
-                result.getInt(4).let { userData.rights = it }
-                result.getInt(5).let { userData.credits = it }
-                result.getString(6)?.let { userData.ip = it }
-                result.getString(7)?.let { userData.lastUsedIp = it }
-                result.getLong(8).let { userData.muteEndTime = max(0L, it) }
-                result.getLong(9).let { userData.banEndTime = max(0L, it) }
-                result.getString(10)?.let { userData.contacts = it }
-                result.getString(11)?.let { userData.blocked = it }
-                result.getString(12)?.let { userData.clanName = it }
-                result.getString(13)?.let { userData.currentClan = it }
-                result.getString(14)?.let { userData.clanReqs = it }
-                result.getLong(15).let { userData.timePlayed = max(0L, it) }
-                result.getLong(16).let { userData.lastLogin = max(0L, it) }
-                result.getBoolean(17).let { userData.online = it }
-                result.getTimestamp(18).let { userData.joinDate = it ?: Timestamp(System.currentTimeMillis()) }
-
-                userData.setInitialReferenceValues()
-                return userData
-            } else {
-                return UserAccountInfo.createDefault()
+                val user = UserAccountInfo.createDefault().apply {
+                    this.username = username
+                    password = result.getString(2) ?: password
+                    uid = result.getInt(3)
+                    rights = result.getInt(4)
+                    credits = result.getInt(5)
+                    ip = result.getString(6) ?: ip
+                    lastUsedIp = result.getString(7) ?: lastUsedIp
+                    muteEndTime = max(0L, result.getLong(8))
+                    banEndTime = max(0L, result.getLong(9))
+                    contacts = result.getString(10) ?: contacts
+                    blocked = result.getString(11) ?: blocked
+                    clanName = result.getString(12) ?: clanName
+                    currentClan = result.getString(13) ?: currentClan
+                    clanReqs = result.getString(14) ?: clanReqs
+                    timePlayed = max(0L, result.getLong(15))
+                    lastLogin = max(0L, result.getLong(16))
+                    online = result.getBoolean(17)
+                    joinDate = result.getTimestamp(18) ?: Timestamp(System.currentTimeMillis())
+                }
+                user.setInitialReferenceValues()
+                return user
             }
+            return UserAccountInfo.createDefault()
         }
     }
 
+    /** Stores new account info. */
     override fun store(info: UserAccountInfo) {
         val conn = getConnection()
         conn.use {
-            val compiledInsertInfoQuery = it.prepareStatement(insertInfoQuery, Statement.RETURN_GENERATED_KEYS)
-            val emptyInfo = UserAccountInfo.createDefault()
-            if (info == emptyInfo) {
-                throw IllegalStateException("Tried to store empty data!")
-            }
-            emptyInfo.username = info.username
-            if (info == emptyInfo) {
-                throw IllegalStateException("Tried to store empty data!")
-            }
+            val stmt = it.prepareStatement(insertInfoQuery, Statement.RETURN_GENERATED_KEYS)
+            val empty = UserAccountInfo.createDefault().apply { username = info.username }
 
-            if (checkUsernameTaken(info.username)) {
-                throw SQLDataException("Account already exists!")
-            }
-            compiledInsertInfoQuery.setString(1, info.username)
-            compiledInsertInfoQuery.setString(2, info.password)
-            compiledInsertInfoQuery.setInt(3, info.rights)
-            compiledInsertInfoQuery.setInt(4, info.credits)
-            compiledInsertInfoQuery.setString(5, info.ip)
-            compiledInsertInfoQuery.setString(6, info.lastUsedIp)
-            compiledInsertInfoQuery.setLong(7, info.muteEndTime)
-            compiledInsertInfoQuery.setLong(8, info.banEndTime)
-            compiledInsertInfoQuery.setString(9, info.contacts)
-            compiledInsertInfoQuery.setString(10, info.blocked)
-            compiledInsertInfoQuery.setString(11, info.clanName)
-            compiledInsertInfoQuery.setString(12, info.currentClan)
-            compiledInsertInfoQuery.setString(13, info.clanReqs)
-            compiledInsertInfoQuery.setLong(14, info.timePlayed)
-            compiledInsertInfoQuery.setLong(15, info.lastLogin)
-            compiledInsertInfoQuery.setBoolean(16, info.online)
-            compiledInsertInfoQuery.setTimestamp(17, info.joinDate)
-            compiledInsertInfoQuery.execute()
-            val result = compiledInsertInfoQuery.generatedKeys
-            if (result.next()) {
-                info.uid = result.getInt(1)
-            }
+            if (info == empty) throw IllegalStateException("Tried to store empty data!")
+            if (checkUsernameTaken(info.username)) throw SQLDataException("Account already exists!")
+
+            stmt.setString(1, info.username)
+            stmt.setString(2, info.password)
+            stmt.setInt(3, info.rights)
+            stmt.setInt(4, info.credits)
+            stmt.setString(5, info.ip)
+            stmt.setString(6, info.lastUsedIp)
+            stmt.setLong(7, info.muteEndTime)
+            stmt.setLong(8, info.banEndTime)
+            stmt.setString(9, info.contacts)
+            stmt.setString(10, info.blocked)
+            stmt.setString(11, info.clanName)
+            stmt.setString(12, info.currentClan)
+            stmt.setString(13, info.clanReqs)
+            stmt.setLong(14, info.timePlayed)
+            stmt.setLong(15, info.lastLogin)
+            stmt.setBoolean(16, info.online)
+            stmt.setTimestamp(17, info.joinDate)
+            stmt.execute()
+
+            val result = stmt.generatedKeys
+            if (result.next()) info.uid = result.getInt(1)
             info.setInitialReferenceValues()
         }
     }
 
+    /** Updates changed fields for an account. */
     override fun update(info: UserAccountInfo) {
-        val (updatedFields, rawData) = info.getChangedFields()
-        val updateQueryString = buildUpdateInfoQuery(updatedFields)
+        val (fields, data) = info.getChangedFields()
+        if (fields.isEmpty()) return
+
         val conn = getConnection()
+        val query = buildUpdateInfoQuery(fields)
 
         conn.use {
-            val compiledUpdateInfoQuery = it.prepareStatement(updateQueryString)
-            val emptyInfo = UserAccountInfo.createDefault()
-            if (info == emptyInfo) {
-                throw IllegalStateException("Tried to store empty data!")
-            }
-            emptyInfo.username = info.username
-            if (info == emptyInfo) {
-                throw IllegalStateException("Tried to store empty data!")
-            }
-            emptyInfo.password = info.password
-            if (info == emptyInfo) {
-                throw IllegalStateException("Tried to store empty data!")
-            }
-            if (updatedFields.isEmpty()) return
-
-            var fieldIndex = 1
-            for (updatedFieldIndex in updatedFields) {
-                when (val data = rawData[updatedFieldIndex]) {
-                    is String -> compiledUpdateInfoQuery.setString(fieldIndex++, data)
-                    is Int -> compiledUpdateInfoQuery.setInt(fieldIndex++, data)
-                    is Boolean -> compiledUpdateInfoQuery.setBoolean(fieldIndex++, data)
-                    is Long -> compiledUpdateInfoQuery.setLong(fieldIndex++, data)
+            val stmt = it.prepareStatement(query)
+            var index = 1
+            for (i in fields) {
+                when (val value = data[i]) {
+                    is String -> stmt.setString(index++, value)
+                    is Int -> stmt.setInt(index++, value)
+                    is Boolean -> stmt.setBoolean(index++, value)
+                    is Long -> stmt.setLong(index++, value)
                 }
             }
-            compiledUpdateInfoQuery.setInt(fieldIndex, info.uid)
-            compiledUpdateInfoQuery.execute()
-
-            info.initialValues = rawData
+            stmt.setInt(index, info.uid)
+            stmt.execute()
+            info.initialValues = data
         }
     }
 
+    /** Deletes account by username. */
     override fun remove(info: UserAccountInfo) {
         val conn = getConnection()
         conn.use {
-            val compiledRemoveInfoQuery = it.prepareStatement(removeInfoQuery)
-            compiledRemoveInfoQuery.setString(1, info.username)
-            compiledRemoveInfoQuery.execute()
+            val stmt = it.prepareStatement(removeInfoQuery)
+            stmt.setString(1, info.username)
+            stmt.execute()
         }
     }
 
+    /** Returns online friends for the given user. */
     override fun getOnlineFriends(username: String): List<String> {
-        val friends = ArrayList<String>()
-        var fTokens = ""
         val conn = getConnection()
+        var tokens = ""
         conn.use {
-            val friendsQuery = it.prepareStatement(GET_ALL_FRIENDS_QUERY)
-            friendsQuery.setString(1, username)
-            val f = friendsQuery.executeQuery()
-            if (f.next()) {
-                fTokens = f.getString(1)
-            }
+            val stmt = it.prepareStatement(GET_ALL_FRIENDS_QUERY)
+            stmt.setString(1, username)
+            val res = stmt.executeQuery()
+            if (res.next()) tokens = res.getString(1)
         }
-        val contacts = CommunicationInfo.parseContacts(fTokens)
-        for ((friendName, _) in contacts) if (Repository.getPlayerByName(friendName) != null) friends.add(friendName)
-
-        return friends
+        return CommunicationInfo.parseContacts(tokens)
+            .mapNotNull { (name, _) -> if (Repository.getPlayerByName(name) != null) name else null }
     }
 
+    /** Returns usernames linked to the given IP. */
     override fun getUsernamesWithIP(ip: String): List<String> {
         val conn = getConnection()
-        val res = ArrayList<String>()
+        val result = ArrayList<String>()
         conn.use {
-            val query = it.prepareStatement(accountsByIPQuery)
-            query.setString(1, ip)
-            val r = query.executeQuery()
-            while (r.next()) {
-                res.add(r.getString(1))
-            }
+            val stmt = it.prepareStatement(accountsByIPQuery)
+            stmt.setString(1, ip)
+            val res = stmt.executeQuery()
+            while (res.next()) result.add(res.getString(1))
         }
-        return res
+        return result
     }
 
     companion object {
@@ -222,67 +180,43 @@ class SQLStorageProvider : AccountStorageProvider {
         private const val removeInfoQuery = "DELETE FROM members WHERE username = ?;"
         private const val accountsByIPQuery = "SELECT username FROM members WHERE lastGameIp = ?;"
         private const val accountInfoQuery =
-            "SELECT " + "username," + "password," + "UID," + "rights," + "credits," + "ip," + "lastGameIp," +
-                "muteTime," +
-                "banTime," +
-                "contacts," +
-                "blocked," +
-                "clanName," +
-                "currentClan," +
-                "clanReqs," +
-                "timePlayed," +
-                "lastLogin," +
-                "online," +
-                "joined_date" +
-                " FROM members WHERE username = ?;"
+            "SELECT username,password,UID,rights,credits,ip,lastGameIp," +
+                    "muteTime,banTime,contacts,blocked,clanName,currentClan,clanReqs," +
+                    "timePlayed,lastLogin,online,joined_date FROM members WHERE username = ?;"
         private const val insertInfoQuery =
-            "INSERT INTO members (" + "username," + "password," + "rights," + "credits," + "ip," + "lastGameIp," +
-                "muteTime," +
-                "banTime," +
-                "contacts," +
-                "blocked," +
-                "clanName," +
-                "currentClan," +
-                "clanReqs," +
-                "timePlayed," +
-                "lastLogin," +
-                "online," +
-                "joined_date" +
-                ") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+            "INSERT INTO members (username,password,rights,credits,ip,lastGameIp," +
+                    "muteTime,banTime,contacts,blocked,clanName,currentClan,clanReqs," +
+                    "timePlayed,lastLogin,online,joined_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);"
+
+        private val GET_ALL_FRIENDS_QUERY = "SELECT contacts FROM players WHERE username = ?;"
 
         private fun buildUpdateInfoQuery(updatedIndices: ArrayList<Int>): String {
             val sb = StringBuilder("UPDATE members SET ")
-            val validIndices = updatedIndices.filter { it in UPDATE_QUERY_FIELDS.keys }
-            for ((index, updatedIndex) in validIndices.withIndex()) {
-                sb.append(UPDATE_QUERY_FIELDS[updatedIndex] ?: continue)
-                sb.append(" = ?")
-                if (index < validIndices.size - 1) {
-                    sb.append(",")
-                }
+            val valid = updatedIndices.filter { it in UPDATE_QUERY_FIELDS }
+            valid.forEachIndexed { i, field ->
+                sb.append("${UPDATE_QUERY_FIELDS[field]} = ?")
+                if (i < valid.size - 1) sb.append(",")
             }
             sb.append(" WHERE uid = ?;")
             return sb.toString()
         }
 
-        private val UPDATE_QUERY_FIELDS =
-            mapOf(
-                0 to "username",
-                1 to "password",
-                3 to "rights",
-                4 to "credits",
-                6 to "lastGameIp",
-                7 to "muteTime",
-                8 to "banTime",
-                9 to "contacts",
-                10 to "blocked",
-                11 to "clanName",
-                12 to "currentClan",
-                13 to "clanReqs",
-                14 to "timePlayed",
-                15 to "lastLogin",
-                16 to "online",
-            )
-
-        private val GET_ALL_FRIENDS_QUERY = "SELECT contacts FROM players WHERE username = ?;"
+        private val UPDATE_QUERY_FIELDS = mapOf(
+            0 to "username",
+            1 to "password",
+            3 to "rights",
+            4 to "credits",
+            6 to "lastGameIp",
+            7 to "muteTime",
+            8 to "banTime",
+            9 to "contacts",
+            10 to "blocked",
+            11 to "clanName",
+            12 to "currentClan",
+            13 to "clanReqs",
+            14 to "timePlayed",
+            15 to "lastLogin",
+            16 to "online",
+        )
     }
 }

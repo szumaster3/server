@@ -11,10 +11,9 @@ object EntityFlags {
     /**
      * Map of tokens to flag providers.
      */
-    lateinit var flagProviders: HashMap<Int, EFlagProvider>
+    private var flagProviders: HashMap<Int, EFlagProvider> = HashMap()
 
     init {
-        flagProviders = HashMap()
         registerFlagProviders(PlayerFlags::class)
         registerFlagProviders(NPCFlags::class)
     }
@@ -22,7 +21,7 @@ object EntityFlags {
     /**
      * Registers all [EFlagProvider] subclasses from the given sealed class.
      */
-    fun registerFlagProviders(parent: KClass<*>) {
+    private fun registerFlagProviders(parent: KClass<*>) {
         val clazzes = parent.sealedSubclasses
         for (clazz in clazzes) {
             val p = clazz.primaryConstructor?.call() as? EFlagProvider ?: continue

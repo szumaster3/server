@@ -153,7 +153,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     }
 
     /**
-     * Returns the shop container for the given player.
+     * Gets the shop container.
      */
     fun getContainer(player: Player): Container {
         val container = if (getServerConfig().getBoolean(Shops.personalizedShops, false) && !forceShared) {
@@ -251,7 +251,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     }
 
     /**
-     * Determines the shop payment and target container when a player sells an item.
+     * Gets the shop payment and target container when a player sells an item.
      */
     fun getSellPrice(player: Player, slot: Int, ): Pair<Container?, Item> {
         val shopCont = getAttribute<Container?>(player, "shop-cont", null) ?: return Pair(null, Item(-1, -1))
@@ -556,7 +556,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         val generalPlayerStock = Container(40, ContainerType.SHOP)
 
         /**
-         * Maps shop IDs to their active ShopListener instances.
+         * Maps shop ids to their active ShopListener instances.
          */
         val listenerInstances = HashMap<Int, ShopListener>()
     }

@@ -2,22 +2,21 @@ package core.game.system.communication;
 
 import core.game.node.entity.player.Player;
 import core.game.world.GameWorld;
+import java.util.Objects;
 
 /**
- * The type Clan entry.
+ * Represents an entry of a player in a clan.
  */
 public class ClanEntry {
 
     private final String name;
-
     private Player player;
-
     private int worldId;
 
     /**
-     * Instantiates a new Clan entry.
+     * Constructs a new ClanEntry for the given player.
      *
-     * @param player the player
+     * @param player the player instance
      */
     public ClanEntry(Player player) {
         this.player = player;
@@ -26,10 +25,10 @@ public class ClanEntry {
     }
 
     /**
-     * Instantiates a new Clan entry.
+     * Constructs a new ClanEntry for the given player name and world ID.
      *
-     * @param name    the name
-     * @param worldId the world id
+     * @param name    the player's name
+     * @param worldId the world ID where the player is located
      */
     public ClanEntry(String name, int worldId) {
         this.name = name;
@@ -38,25 +37,30 @@ public class ClanEntry {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
-        ClanEntry e = (ClanEntry) o;
-        if (name != null && !name.equals(e.name)) {
-            return false;
-        }
-        return e.player == player;
+        if (this == o) return true;
+        if (!(o instanceof ClanEntry)) return false;
+        ClanEntry that = (ClanEntry) o;
+        return worldId == that.worldId &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(player, that.player);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, player, worldId);
     }
 
     /**
-     * Gets name.
+     * Gets the player name.
      *
-     * @return the name
+     * @return the player name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets player.
+     * Sets the player instance.
      *
      * @param player the player
      */
@@ -65,7 +69,7 @@ public class ClanEntry {
     }
 
     /**
-     * Gets player.
+     * Gets the player instance.
      *
      * @return the player
      */
@@ -74,7 +78,7 @@ public class ClanEntry {
     }
 
     /**
-     * Gets world id.
+     * Gets the world id.
      *
      * @return the world id
      */
@@ -83,7 +87,7 @@ public class ClanEntry {
     }
 
     /**
-     * Sets world id.
+     * Sets the world id.
      *
      * @param worldId the world id
      */

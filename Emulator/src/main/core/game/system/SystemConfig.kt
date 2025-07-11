@@ -5,87 +5,81 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+/**
+ * Stores and manages system configuration settings.
+ */
 class SystemConfig {
     private val configs: MutableMap<String, Any?> = HashMap()
     val betaUsers: List<String> = ArrayList(20)
 
+    /**
+     * Parses config data
+     */
     fun parse() {}
 
-    private fun parseConfig(
-        key: String,
-        value: String?,
-        dataType: String?,
-    ) {
+    private fun parseConfig(key: String, value: String?, dataType: String?) {
         if (dataType == null) {
             configs[key] = value
             return
         }
-        if (value == null || value === "") {
-            return
-        }
+        if (value.isNullOrEmpty()) return
+
         when (dataType) {
-            "int" -> configs[key] = Integer.valueOf(value)
-            "double" -> {}
-            "boolean" -> {}
+            "int" -> configs[key] = value.toIntOrNull()
+            "double" -> {} // not implemented
+            "boolean" -> {} // not implemented
             "date" -> {
                 val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                var parsed: Date? = null
-                try {
-                    parsed = format.parse(value)
+                configs[key] = try {
+                    format.parse(value)
                 } catch (e: ParseException) {
                     e.printStackTrace()
+                    null
                 }
-                configs[key] = parsed
             }
-
             else -> configs[key] = value
         }
     }
 
+    /**
+     * Checks if player login is valid (always true).
+     */
     fun validLogin(player: Player?): Boolean = true
 
+    /**
+     * Check if double experience event is active.
+     */
     val isDoubleExp: Boolean
         get() {
             val date = getConfig<Date?>("dxp", null) ?: return false
             return date.after(Date())
         }
 
-    fun split(
-        data: String,
-        regex: String,
-    ): List<String> {
-        if (!data.contains(regex)) {
-            val split: MutableList<String> = ArrayList(20)
-            split.add(data)
-            return split
-        }
-        val split: MutableList<String> = ArrayList(20)
-        val tokens = data.trim { it <= ' ' }.split(regex.toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        for (s in tokens) {
-            split.add(s)
-        }
-        return split
+    /**
+     * Splits a string by [regex], returning a list.
+     */
+    fun split(data: String, regex: String): List<String> {
+        if (!data.contains(regex)) return listOf(data)
+        return data.trim().split(regex.toRegex()).filter { it.isNotEmpty() }
     }
 
+    /**
+     * Checks if a username is in beta users list.
+     */
     fun isBetaUser(name: String): Boolean = betaUsers.contains(name)
 
-    fun <T> getConfig(key: String): T? = if (!configs.containsKey(key)) {
-        null
-    } else {
-        configs[key] as T?
-    }
+    /**
+     * Gets config value by [key], or null if missing.
+     */
+    fun <T> getConfig(key: String): T? = configs[key] as? T
 
-    fun <T> getConfig(
-        string: String,
-        fail: T,
-    ): T {
-        val `object` = configs[string]
-        return if (`object` != null) {
-            `object` as T
-        } else {
-            fail
-        }
-    }
+    /**
+     * Gets config value by [string], or returns [fail] if missing.
+     */
+    fun <T> getConfig(string: String, fail: T): T = configs[string] as? T ?: fail
 
+    /**
+     * Gets all config key-value pairs.
+     */
     fun getConfigs(): Map<String, Any?> = configs
 }

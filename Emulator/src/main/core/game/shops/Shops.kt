@@ -50,7 +50,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         private var lastPlayerStockClear = 0
 
         /**
-         * Opens the shop for the given player by the shop ID.
+         * Opens the shop for the given player by the shop id.
          *
          * @param player The player opening the shop.
          * @param id The unique identifier of the shop to open.
@@ -76,7 +76,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
          * Parses the stock data from a string and converts it into a list of `ShopItem` objects.
          *
          * @param stock The raw stock string to parse.
-         * @param id The shop ID to log any potential issues with the stock.
+         * @param id The shop id to log any potential issues with the stock.
          * @return A list of `ShopItem` objects representing the parsed stock.
          */
         fun parseStock(

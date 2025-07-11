@@ -4,16 +4,16 @@ import core.game.node.entity.Entity;
 import core.game.world.map.Location;
 
 /**
- * The interface Movement hook.
+ * Hook for custom movement handling logic.
  */
 public interface MovementHook {
 
     /**
-     * Handle boolean.
+     * Invoked when an entity moves to a specific location.
      *
-     * @param e the e
-     * @param l the l
-     * @return the boolean
+     * @param e The moving entity.
+     * @param l The target location.
+     * @return {@code true} to allow movement, {@code false} to block it.
      */
     boolean handle(Entity e, Location l);
 

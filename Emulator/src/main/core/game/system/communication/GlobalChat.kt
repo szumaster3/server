@@ -8,7 +8,14 @@ import core.game.system.command.Privilege
 import core.game.world.repository.Repository
 import core.tools.colorize
 
+/**
+ * Handles the global chat commands and message broadcasting.
+ */
 class GlobalChat : Commands {
+
+    /**
+     * Defines the commands related to global chat.
+     */
     override fun defineCommands() {
         define(
             name = "muteglobal",
@@ -24,8 +31,18 @@ class GlobalChat : Commands {
     }
 
     companion object {
+        /**
+         * Attribute key to track global chat mute status per player
+         */
         val ATTR_GLOBAL_MUTE = "/save:globalmute"
 
+        /**
+         * Sends a global chat message to all players who are not muted.
+         *
+         * @param sender The username of the message sender.
+         * @param message The message content.
+         * @param rights The sender's rights level (used for icon display).
+         */
         fun process(
             sender: String,
             message: String,
@@ -42,6 +59,15 @@ class GlobalChat : Commands {
             }
         }
 
+        /**
+         * Prepares the formatted chat message depending on interface type and rights.
+         *
+         * @param sender The username of the sender.
+         * @param message The chat message.
+         * @param isResizable Whether the player's interface is resizable.
+         * @param rights The sender's rights level.
+         * @return The formatted and colorized message string.
+         */
         private fun prepare(
             sender: String,
             message: String,

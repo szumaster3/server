@@ -1,73 +1,64 @@
 package core.game.system.communication
 
 /**
- * The enum Clan rank.
+ * Represents the different ranks within a clan.
+ *
+ * @property value The numeric value associated with the rank.
+ * @property info A user-friendly description of the rank.
  */
 enum class ClanRank(
-    /**
-     * Gets value.
-     *
-     * @return the value
-     */
     val value: Int,
-    /**
-     * Gets info.
-     *
-     * @return the info
-     */
     val info: String
 ) {
     /**
-     * Anyone clan rank.
+     * Rank for anyone.
      */
     ANYONE(-1, "Anyone"),
 
     /**
-     * The Any friend.
+     * Rank for any friends.
      */
     ANY_FRIEND(0, "Any friends"),
 
     /**
-     * Recruit clan rank.
+     * Recruit rank and above.
      */
     RECRUIT(1, "Recruit+"),
 
     /**
-     * Corporal clan rank.
+     * Corporal rank and above.
      */
     CORPORAL(2, "Corporal+"),
 
     /**
-     * Sergeant clan rank.
+     * Sergeant rank and above.
      */
     SERGEANT(3, "Sergeant+"),
 
     /**
-     * Lieutenant clan rank.
+     * Lieutenant rank and above.
      */
     LIEUTENANT(4, "Lieutenant+"),
 
     /**
-     * Captain clan rank.
+     * Captain rank and above.
      */
     CAPTAIN(5, "Captain+"),
 
     /**
-     * General clan rank.
+     * General rank and above.
      */
     GENERAL(6, "General+"),
 
     /**
-     * The Only me.
+     * Rank for only the player themselves.
      */
     ONLY_ME(7, "Only me"),
 
     /**
-     * No one clan rank.
+     * Rank for no one.
      */
     NO_ONE(127, "No-one");
 
-    override fun toString(): String {
-        return "Rank=[$name], Info=[$info]"
-    }
+    override fun toString(): String = "Rank=[$name], Info=[$info]"
 }

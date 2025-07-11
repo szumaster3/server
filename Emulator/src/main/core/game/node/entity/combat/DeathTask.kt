@@ -23,6 +23,7 @@ import core.game.world.GameWorld.ticks
  * @author Emperor
  */
 class DeathTask private constructor() : NodeTask(1) {
+
     override fun start(node: Node, vararg n: Node) {
         val e = node as Entity
         e.walkingQueue.reset()
@@ -75,11 +76,6 @@ class DeathTask private constructor() : NodeTask(1) {
     }
 
     companion object {
-        /**
-         * Gets the singleton.
-         *
-         * @return The singleton.
-         */
         /**
          * The death task singleton.
          */

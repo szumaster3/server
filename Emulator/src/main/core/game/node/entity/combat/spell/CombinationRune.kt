@@ -5,7 +5,7 @@ import org.rs.consts.Items
 /**
  * Represents a combination rune, which substitutes multiple elemental or catalytic runes.
  *
- * @property id The item ID of the combination rune.
+ * @property id The item id of the combination rune.
  * @property types The runes this combination rune can substitute.
  */
 enum class CombinationRune(var id: Int, vararg types: Runes) {

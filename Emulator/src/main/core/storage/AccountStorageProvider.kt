@@ -3,60 +3,28 @@ package core.storage
 import core.auth.UserAccountInfo
 
 /**
- * Defines the contract for a user account storage provider.
- * Implementations of this interface handle storing, retrieving, and managing user accounts.
+ * Interface for user account storage.
  */
 interface AccountStorageProvider {
-    /**
-     * Checks if a username is already taken.
-     *
-     * @param username The username to check.
-     * @return `true` if the username is already in use, `false` otherwise.
-     */
+
+    /** Returns true if the username exists. */
     fun checkUsernameTaken(username: String): Boolean
 
-    /**
-     * Retrieves the account information associated with a given username.
-     *
-     * @param username The username whose account information is to be retrieved.
-     * @return The [UserAccountInfo] object for the given username.
-     */
+    /** Returns account info for the given username. */
     fun getAccountInfo(username: String): UserAccountInfo
 
-    /**
-     * Retrieves a list of usernames associated with a specific IP address.
-     *
-     * @param ip The IP address to search for.
-     * @return A list of usernames linked to the given IP address.
-     */
+    /** Returns usernames associated with the given IP. */
     fun getUsernamesWithIP(ip: String): List<String>
 
-    /**
-     * Stores the provided user account information.
-     *
-     * @param info The user account information to store.
-     */
+    /** Stores account info. */
     fun store(info: UserAccountInfo)
 
-    /**
-     * Updates the stored user account information for an existing username.
-     *
-     * @param info The updated user account information.
-     */
+    /** Updates account info. */
     fun update(info: UserAccountInfo)
 
-    /**
-     * Removes the specified user account from storage.
-     *
-     * @param info The user account to remove.
-     */
+    /** Removes account info. */
     fun remove(info: UserAccountInfo)
 
-    /**
-     * Retrieves a list of online friends for a given username.
-     *
-     * @param username The username for which to retrieve online friends.
-     * @return A list of online friends.
-     */
+    /** Returns a list of online friends. */
     fun getOnlineFriends(username: String): List<String>
 }

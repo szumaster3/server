@@ -65,6 +65,7 @@ import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.game.world.map.Point
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.getRegionChunk
 import core.game.world.map.path.Pathfinder
@@ -3833,7 +3834,7 @@ fun repositionChild(
     positionY: Int,
 ) = PacketRepository.send(
     RepositionChild::class.java,
-    OutgoingContext.ChildPosition(player, interfaceId, childId, positionX, positionY),
+    OutgoingContext.ChildPosition(player, interfaceId, childId, Point(positionX, positionY)),
 )
 
 /**

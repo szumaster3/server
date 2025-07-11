@@ -5,6 +5,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.EntityFlag;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
@@ -44,7 +45,7 @@ public final class PacketDispatch {
      * @param value the value
      */
     public void sendVarp(int index, int value) {
-        PacketRepository.send(Config.class, new OutgoingContext.Config(player, index, value));
+        PacketRepository.send(Config.class, new OutgoingContext.Config(player, index, value, false));
     }
 
     /**
@@ -578,7 +579,7 @@ public final class PacketDispatch {
      * @param y         the y
      */
     public void sendRepositionOnInterface(int id, int component, int x, int y) {
-        PacketRepository.send(RepositionChild.class, new OutgoingContext.ChildPosition(player, id, component, x, y));
+        PacketRepository.send(RepositionChild.class, new OutgoingContext.ChildPosition(player, id, component, new Point(x, y)));
     }
 
 }

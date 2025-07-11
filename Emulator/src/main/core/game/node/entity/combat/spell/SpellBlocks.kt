@@ -10,7 +10,7 @@ import java.util.function.Consumer
 object SpellBlocks {
 
     /**
-     * A mapping of spell IDs to a list of blocked nodes.
+     * A mapping of spell ids to a list of blocked nodes.
      */
     private val blocks = HashMap<Int, MutableList<Node>?>()
 

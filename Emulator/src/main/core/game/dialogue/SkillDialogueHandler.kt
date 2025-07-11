@@ -5,6 +5,7 @@ import core.api.sendItemZoomOnInterface
 import core.api.sendString
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.world.map.Point
 import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
 import core.net.packet.out.RepositionChild
@@ -405,9 +406,7 @@ open class SkillDialogueHandler(
                         OutgoingContext.ChildPosition(
                             player,
                             Components.SKILL_MAKE_306,
-                            2 + i,
-                            positions[i][0],
-                            positions[i][1],
+                            2 + i, Point(positions[i][0], positions[i][1])
                         ),
                     )
                 }

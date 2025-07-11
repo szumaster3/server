@@ -1,50 +1,45 @@
 package core.game.system.mysql;
 
 /**
- * The type Sql column.
+ * Represents a SQL column and its associated metadata.
  */
 public final class SQLColumn {
 
     private final String name;
-
     private final Class<?> type;
-
     private final boolean neverUpdate;
-
     private Object value;
-
     private boolean changed;
-
     private boolean parse;
 
     /**
-     * Instantiates a new Sql column.
+     * Creates a SQL column.
      *
-     * @param name the name
-     * @param type the type
+     * @param name Column name.
+     * @param type Column data type.
      */
     public SQLColumn(String name, Class<?> type) {
         this(name, type, false, true);
     }
 
     /**
-     * Instantiates a new Sql column.
+     * Creates a SQL column.
      *
-     * @param name  the name
-     * @param type  the type
-     * @param parse the parse
+     * @param name  Column name.
+     * @param type  Column data type.
+     * @param parse Whether to parse the value.
      */
     public SQLColumn(String name, Class<?> type, boolean parse) {
         this(name, type, false, parse);
     }
 
     /**
-     * Instantiates a new Sql column.
+     * Creates a SQL column.
      *
-     * @param name        the name
-     * @param type        the type
-     * @param neverUpdate the never update
-     * @param parse       the parse
+     * @param name        Column name.
+     * @param type        Column data type.
+     * @param neverUpdate Whether the column should be excluded from updates.
+     * @param parse       Whether to parse the value.
      */
     public SQLColumn(String name, Class<?> type, boolean neverUpdate, boolean parse) {
         this.name = name;
@@ -53,93 +48,69 @@ public final class SQLColumn {
         this.parse = parse;
     }
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
+    /** @return Column name. */
     public String getName() {
         return name;
     }
 
     /**
-     * Update value.
+     * Updates the value and sets changed if different.
      *
-     * @param value the value
+     * @param value New value.
      */
     public void updateValue(Object value) {
         this.changed = value != this.value;
         this.value = value;
     }
 
-    /**
-     * Gets value.
-     *
-     * @return the value
-     */
+    /** @return Current value. */
     public Object getValue() {
         return value;
     }
 
     /**
-     * Sets value.
+     * Sets the value without marking it as changed.
      *
-     * @param value the value
+     * @param value Value to set.
      */
     public void setValue(Object value) {
         this.value = value;
         this.changed = false;
     }
 
-    /**
-     * Is changed boolean.
-     *
-     * @return the boolean
-     */
+    /** @return Whether the value has changed. */
     public boolean isChanged() {
         return changed;
     }
 
     /**
-     * Sets changed.
+     * Sets the changed flag.
      *
-     * @param changed the changed
+     * @param changed Whether the value is changed.
      */
     public void setChanged(boolean changed) {
         this.changed = changed;
     }
 
-    /**
-     * Gets type.
-     *
-     * @return the type
-     */
+    /** @return Column data type. */
     public Class<?> getType() {
         return type;
     }
 
-    /**
-     * Is never update boolean.
-     *
-     * @return the boolean
-     */
+    /** @return True if excluded from updates. */
     public boolean isNeverUpdate() {
         return neverUpdate;
     }
 
-    /**
-     * Is parse boolean.
-     *
-     * @return the boolean
-     */
+    /** @return Whether parsing is enabled. */
     public boolean isParse() {
         return parse;
     }
 
     /**
-     * Sets parse.
+     * Sets the parse flag.
      *
-     * @param parse the parse
+     * @param parse Whether to parse.
      */
     public void setParse(boolean parse) {
         this.parse = parse;

@@ -27,7 +27,7 @@ import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 import java.util.stream.Collectors
 
-class WoodcuttingPulse(private val player: Player, private val node: Scenery, ) : Pulse(1, player, node) {
+class WoodcuttingPulse(private val player: Player, private val node: Scenery) : Pulse(1, player, node) {
 
     private val woodcuttingSounds = intArrayOf(
         Sounds.WOODCUTTING_HIT_3038,

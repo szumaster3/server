@@ -4,7 +4,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 
 /**
- * Represents varp manager.
+ * Represents Varp manager.
  */
 class VarpManager(val player: Player) {
 

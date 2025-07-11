@@ -6,10 +6,8 @@ import org.json.simple.JSONObject
 import kotlin.reflect.full.createInstance
 
 /**
- * A timer implementation with support for saving and loading arbitrary data.
- *
- * @see RSTimer
- **/
+ * Abstract timer with support for persistence (saving and loading state).
+ */
 abstract class PersistTimer(
     runInterval: Int,
     identifier: String,
@@ -17,6 +15,13 @@ abstract class PersistTimer(
     isAuto: Boolean = false,
     flags: Array<TimerFlag> = arrayOf(),
 ) : RSTimer(runInterval, identifier, isSoft, isAuto, flags) {
+
+    /**
+     * Saves timer state into the given JSON object.
+     *
+     * @param root JSON object to save data into.
+     * @param entity The entity this timer is associated with.
+     */
     open fun save(
         root: JSONObject,
         entity: Entity,
@@ -24,6 +29,12 @@ abstract class PersistTimer(
         root["ticksLeft"] = (nextExecution - getWorldTicks()).toString()
     }
 
+    /**
+     * Parses timer state from the given JSON object.
+     *
+     * @param root JSON object containing saved timer data.
+     * @param entity The entity this timer is associated with.
+     */
     open fun parse(
         root: JSONObject,
         entity: Entity,
@@ -31,5 +42,10 @@ abstract class PersistTimer(
         runInterval = root["ticksLeft"].toString().toInt()
     }
 
+    /**
+     * Gets a new instance of this timer type.
+     *
+     * @return A fresh instance of the timer.
+     */
     override fun retrieveInstance(): RSTimer = this::class.createInstance()
 }
