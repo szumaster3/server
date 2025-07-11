@@ -5,6 +5,7 @@ import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
 import content.minigame.mta.plugin.MTAZone
+import content.region.island.tutorial.plugin.TutorialStage
 import content.region.kandarin.plugin.barbtraining.BarbarianTraining
 import core.api.*
 import core.cache.def.impl.NPCDefinition
@@ -16,7 +17,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.game.world.map.zone.impl.TutorialZone
 import core.net.packet.OutgoingContext
 import core.net.packet.PacketWriteQueue
 import core.net.packet.out.ResetInterface
@@ -38,7 +38,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(name = "exit", Privilege.ADMIN) { p, _ ->
-            TutorialZone.completeTutorial(p)
+            TutorialStage.completeTutorial(p)
             p.teleporter.send(Location.create(3233, 3230, 0))
         }
 

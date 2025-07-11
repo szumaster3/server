@@ -1,13 +1,16 @@
 package content.region.island.tutorial.plugin
 
 import content.data.GameAttributes
+import core.ServerConstants
 import core.api.*
 import core.api.sendInterfaceConfig
 import core.api.setMinimapState
 import core.game.component.Component
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.item.Item
@@ -17,7 +20,9 @@ import core.game.world.GameWorld.settings
 import core.game.world.map.Location
 import core.game.world.repository.Repository
 import core.tools.BLUE
+import core.worker.ManagementEvents
 import org.rs.consts.*
+import proto.management.JoinClanRequest
 
 object TutorialStage {
     const val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
@@ -1326,5 +1331,67 @@ object TutorialStage {
             TUTORIAL_HINT,
             HintIconManager.registerHintIcon(player, location, 1, -1, player.hintIconManager.freeSlot(), height, 3),
         )
+    }
+
+    fun completeTutorial(player: Player) {
+        if (player.rights != Rights.ADMINISTRATOR) {
+            queueScript(player, 1, QueueStrength.SOFT) {
+                setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 71)
+                load(player, 71)
+                player.teleporter.send(Location.create(3141, 3089, 0))
+                return@queueScript stopExecuting(player)
+            }
+        } else {
+            setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 73)
+            setAttribute(player, "/save:tutorial:complete", true)
+            setVarbit(player, FLASHING_ICON, 0)
+            setVarp(player, 281, 1000, true)
+            closeOverlay(player)
+
+            player.inventory.clear()
+            player.bank.clear()
+            player.equipment.clear()
+
+            player.interfaceManager.restoreTabs()
+            player.interfaceManager.setViewedTab(3)
+            player.interfaceManager.openDefaultTabs()
+
+            player.inventory.add(*STARTER_PACK)
+            player.bank.add(STARTER_BANK)
+
+            player.unhook(TutorialCastReceiver)
+            player.unhook(TutorialKillReceiver)
+            player.unhook(TutorialFireReceiver)
+            player.unhook(TutorialResourceReceiver)
+            player.unhook(TutorialUseWithReceiver)
+            player.unhook(TutorialInteractionReceiver)
+            player.unhook(TutorialButtonReceiver)
+
+            if (settings!!.enable_default_clan) {
+                player.communication.currentClan = ServerConstants.SERVER_NAME.toLowerCase()
+
+                val clanJoin = JoinClanRequest.newBuilder()
+                    .setClanName(ServerConstants.SERVER_NAME.toLowerCase())
+                    .setUsername(player.name)
+                    .build()
+
+                ManagementEvents.publish(clanJoin)
+
+            }
+
+            player.teleporter.send(Location.create(3233, 3230, 0))
+
+            queueScript(player, 3, QueueStrength.SOFT) {
+                player.dialogueInterpreter.sendDialogues(
+                    "Welcome to Lumbridge! To get more help, simply click on the",
+                    "Lumbridge Guide or one of the Tutors - these can be found by",
+                    "looking for the question mark icon on your minimap. If you find you",
+                    "are lost at any time, look for a signpost or use the Lumbridge Home",
+                    "Teleport spell.",
+                )
+                setAttribute(player, "close_c_", true)
+                return@queueScript stopExecuting(player)
+            }
+        }
     }
 }

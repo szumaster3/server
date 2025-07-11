@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link;
 
+import content.region.island.tutorial.plugin.*;
 import core.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
@@ -9,7 +10,9 @@ import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.worker.ManagementEvents;
 import org.rs.consts.Sounds;
+import proto.management.JoinClanRequest;
 
 import static core.api.ContentAPIKt.*;
 
@@ -348,6 +351,10 @@ public class TeleportManager {
                     public boolean pulse() {
                         if (count == 18) {
                             player.getProperties().setTeleportLocation(location);
+                            if (player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) == 72) {
+                                Player p = entity.asPlayer();
+                                completeTutorial(p);
+                            }
                             return true;
                         } else {
                             playGlobalAudio(entity.getLocation(), getAudio(count));
@@ -892,6 +899,52 @@ public class TeleportManager {
                 return TeleportType.LUNAR;
         }
         return TeleportType.NORMAL;
+    }
+
+    /**
+     * Completes the tutorial.
+     *
+     * @param player the player for whom the tutorial complete.
+     */
+    public static void completeTutorial(Player player) {
+        setVarbit(player, TutorialStage.FLASHING_ICON, 0);
+        setVarp(player, 281, 1000, true);
+        setAttribute(player, "/save:tutorial:complete", true);
+        setAttribute(player, "/save:tutorial:stage", 73);
+
+        player.unhook(TutorialCastReceiver.INSTANCE);
+        player.unhook(TutorialKillReceiver.INSTANCE);
+        player.unhook(TutorialFireReceiver.INSTANCE);
+        player.unhook(TutorialResourceReceiver.INSTANCE);
+        player.unhook(TutorialUseWithReceiver.INSTANCE);
+        player.unhook(TutorialInteractionReceiver.INSTANCE);
+        player.unhook(TutorialButtonReceiver.INSTANCE);
+
+        if (GameWorld.getSettings() != null && GameWorld.getSettings().getEnable_default_clan()) {
+            player.getCommunication().setCurrentClan(ServerConstants.SERVER_NAME);
+            JoinClanRequest.Builder clanJoin = JoinClanRequest.newBuilder();
+            clanJoin.setClanName(ServerConstants.SERVER_NAME);
+            clanJoin.setUsername(player.getName());
+            ManagementEvents.publish(clanJoin.build());
+        }
+
+        closeOverlay(player);
+        player.getInventory().clear();
+        player.getBank().clear();
+        player.getEquipment().clear();
+        player.getInventory().add(TutorialStage.STARTER_PACK);
+        player.getBank().add(TutorialStage.STARTER_BANK);
+        player.getInterfaceManager().restoreTabs();
+        player.getInterfaceManager().setViewedTab(3);
+        player.getInterfaceManager().openDefaultTabs();
+        player.getDialogueInterpreter().sendDialogues(
+                "Welcome to Lumbridge! To get more help, simply click on the",
+                "Lumbridge Guide or one of the Tutors - these can be found by",
+                "looking for the question mark icon on your minimap. If you find you",
+                "are lost at any time, look for a signpost or use the Lumbridge Home",
+                "Teleport spell."
+        );
+        setAttribute(player, "close_c_", true);
     }
 
     /**

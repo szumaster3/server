@@ -1,5 +1,6 @@
 package content.global.activity.mogre
 
+import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
@@ -41,14 +42,13 @@ class SkippyDialogueFile : DialogueFile() {
             0 -> {
                 /*
                  * Handles tutorial island dialogue.
-                 *
+                 */
 
-                if (inBorders(player!!, SkippyUtils.TUTORIAL_ISLAND)) {
+                if (player!!.zoneMonitor.isInZone("tutorial")) {
                     npcl(FaceAnim.HALF_ASKING, "Do you wanna skip the Tutorial?")
                     stage = 88
                     return
                 }
-                */
 
                 /*
                  * Handles activity dialogue.
@@ -225,7 +225,7 @@ class SkippyDialogueFile : DialogueFile() {
 
             /*
              * Tutorial island dialogue extension.
-             *
+             */
 
             88 -> {
                 setTitle(player!!, 4)
@@ -253,8 +253,8 @@ class SkippyDialogueFile : DialogueFile() {
 
             97 -> {
                 end()
+                TutorialStage.completeTutorial(player!!)
             }
-            */
         }
     }
 }
