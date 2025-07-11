@@ -338,10 +338,10 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
                     Items.COINS_995,
                     Items.TOKKUL_6529,
                     Items.ARCHERY_TICKET_1464,
-                    Items.CASTLE_WARS_TICKET_4067,
+                    Items.CASTLE_WARS_TICKET_4067
                 ) -> "This shop will not buy that item."
 
-                else -> "${player.inventory[slot].name}: This shop will buy this item for [${price.amount}] [${price.name.lowercase()}]."
+                else -> "${player.inventory[slot].name}: This shop will buy this item for ${price.amount} ${price.name.lowercase()}."
             }
 
             when (opcode) {

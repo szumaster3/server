@@ -26,18 +26,18 @@ import kotlin.math.roundToInt
 /**
  * Represents a single item in a shop.
  */
-data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100, )
+data class ShopItem(var itemId: Int, var amount: Int, val restockRate: Int = 100)
 
 /**
  * A listener for shop container updates, used to send interface updates to the player.
  */
-class ShopListener(val player: Player, ) : ContainerListener {
+class ShopListener(val player: Player) : ContainerListener {
     var enabled = false
 
     /**
      * Called when the container changes.
      */
-    override fun update(c: Container?, event: ContainerEvent?, ) {
+    override fun update(c: Container?, event: ContainerEvent?) {
         PacketRepository.send(ContainerPacket::class.java, OutgoingContext.Container(player, -1, -1, 92, event!!.items, false, *event.slots))
     }
 
@@ -97,7 +97,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     /**
      * Shows the main or player stock tab in the shop for the player.
      */
-    fun showTab(player: Player, main: Boolean, ) {
+    fun showTab(player: Player, main: Boolean) {
         val cont = if (main) getAttribute<Container?>(player, "shop-cont", null) ?: return else playerStock
 
         if (!main) {
@@ -221,7 +221,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     /**
      * Gets the cost in currency for a player to buy an item from the shop.
      */
-    fun getBuyPrice(player: Player, slot: Int, ): Item {
+    fun getBuyPrice(player: Player, slot: Int): Item {
         val isMainStock = getAttribute(player, "shop-main", true)
         val cont =
             if (isMainStock) getAttribute<Container?>(player, "shop-cont", null) ?: return Item(-1, -1) else playerStock
@@ -253,7 +253,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     /**
      * Gets the shop payment and target container when a player sells an item.
      */
-    fun getSellPrice(player: Player, slot: Int, ): Pair<Container?, Item> {
+    fun getSellPrice(player: Player, slot: Int): Pair<Container?, Item> {
         val shopCont = getAttribute<Container?>(player, "shop-cont", null) ?: return Pair(null, Item(-1, -1))
         val item = player.inventory[slot]
 
@@ -291,16 +291,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
 
         val price = when (currency) {
-            Items.TOKKUL_6529 -> (item.definition.getConfiguration(
-                ItemConfigParser.TOKKUL_PRICE,
-                1,
-            ) / 10.0).toInt() // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
+            Items.TOKKUL_6529 -> (item.definition.getConfiguration(ItemConfigParser.TOKKUL_PRICE, 1,) / 10.0).toInt() // selling items authentically return 10x less tokkul (floored/truncated) than the item's shop price
             Items.ARCHERY_TICKET_1464 -> item.definition.getConfiguration(ItemConfigParser.ARCHERY_TICKET_PRICE, 1)
-            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(
-                ItemConfigParser.CASTLE_WARS_TICKET_PRICE,
-                1,
-            )
-
+            Items.CASTLE_WARS_TICKET_4067 -> item.definition.getConfiguration(ItemConfigParser.CASTLE_WARS_TICKET_PRICE, 1,)
             else -> getGPSell(Item(shopItemId, 1), stockAmt, currentAmt)
         }
 
@@ -314,7 +307,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     /**
      * Calculates the adjusted buy price of an item based on stock levels.
      */
-    private fun getGPCost(item: Item, stockAmount: Int, currentAmt: Int, ): Int {
+    private fun getGPCost(item: Item, stockAmount: Int, currentAmt: Int): Int {
         var mod: Int
         mod = if (stockAmount == 0) {
             100
@@ -352,7 +345,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         return price
     }
 
-    fun buy(player: Player, slot: Int, amount: Int, ): TransactionStatus {
+    fun buy(player: Player, slot: Int, amount: Int): TransactionStatus {
         if (amount !in 1..Integer.MAX_VALUE) return TransactionStatus.Failure("Invalid amount: $amount")
         val isMainStock = getAttribute(player, "shop-main", false)
         if (!isMainStock && player.ironmanManager.isIronman) {
@@ -387,10 +380,7 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
         }
         val cost = getBuyPrice(player, slot)
         if (cost.id == -1) {
-            sendMessage(
-                player,
-                "This shop cannot sell that item.",
-            ).also { return TransactionStatus.Failure("Shop cannot sell this item") }
+            sendMessage(player, "This shop cannot sell that item.",).also { return TransactionStatus.Failure("Shop cannot sell this item") }
         }
         if (currency == Items.COINS_995) {
             var amt = item.amount
