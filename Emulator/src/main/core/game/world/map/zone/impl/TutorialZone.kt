@@ -7,6 +7,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
+import core.game.system.task.Pulse
 import core.game.world.GameWorld.settings
 import core.game.world.map.zone.MapZone
 import core.worker.ManagementEvents.publish
@@ -30,11 +31,23 @@ class TutorialZone : MapZone("tutorial island", true) {
             if (p.rights == a) {
                 return super.teleport(entity, type, node)
             }
-
             if (p.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) < 72) {
                 lockTeleport(p)
             } else {
-                completeTutorial(p)
+                submitWorldPulse(
+                    object : Pulse() {
+                        var counter = 0
+
+                        override fun pulse(): Boolean {
+                            when (counter++) {
+                                18 -> {
+                                    completeTutorial(p)
+                                    return true
+                                }
+                            }
+                            return false
+                        }
+                    })
             }
         }
         return super.teleport(entity, type, node)
