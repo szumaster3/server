@@ -122,7 +122,7 @@ class ForgeRegentNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
                         player.getSkills().addExperience(Skills.FIREMAKING, log.xp + 10)
                         familiar.faceLocation(`object`.getFaceLocation(familiar.location))
                         SceneryBuilder.add(`object`, log.life, FiremakingPulse.getAsh(player, log, `object`))
-                        if (player.viewport.region.id == 10806) {
+                        if (player.viewport.region!!.id == 10806) {
                             finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 9)
                         }
                         return true

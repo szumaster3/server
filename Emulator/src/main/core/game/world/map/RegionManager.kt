@@ -59,7 +59,7 @@ object RegionManager {
     fun pulse() {
         if (LOCK.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
             for (r in REGION_CACHE.values) {
-                if (r.isActive) {
+                if (r.active) {
                     for (p in r.planes) {
                         p.pulse()
                     }
@@ -156,8 +156,8 @@ object RegionManager {
 
         if (flag == -1) {
             val r = forId((regionX shr 8) or regionY)
-            if (!r.isLoaded) Region.load(r)
-            if (!r.isHasFlags) return -1
+            if (!r.loaded) Region.load(r)
+            if (!r.hasFlags) return -1
             flag = getFlags(region, projectile)[index]
         }
 
@@ -222,12 +222,12 @@ object RegionManager {
         var y = y
         val region = forId(((x shr 6) shl 8) or (y shr 6))
         Region.load(region)
-        if (!region.isHasFlags || region.planes[z].flags.landscape == null) {
+        if (!region.hasFlags || region.planes[z].flags.landscape == null) {
             return false
         }
         x -= x shr 6 shl 6
         y -= y shr 6 shl 6
-        return region.planes[z].flags.landscape[x][y]
+        return region.planes[z].flags.landscape!![x][y]
     }
 
     /**
@@ -244,7 +244,7 @@ object RegionManager {
         var y = y
         val region = forId(((x shr 6) shl 8) or (y shr 6))
         Region.load(region)
-        if (!region.isHasFlags) {
+        if (!region.hasFlags) {
             return
         }
         x -= (x shr 6) shl 6
@@ -270,7 +270,7 @@ object RegionManager {
         var y = y
         val region = forId(((x shr 6) shl 8) or (y shr 6))
         Region.load(region)
-        if (!region.isHasFlags) {
+        if (!region.hasFlags) {
             return
         }
         x -= (x shr 6) shl 6

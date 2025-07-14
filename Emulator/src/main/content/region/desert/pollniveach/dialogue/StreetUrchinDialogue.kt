@@ -1,5 +1,8 @@
 package content.region.desert.pollniveach.dialogue
 
+import content.region.desert.alkharid.quest.feud.dialogue.StreetUrchinFeudDialogue
+import core.api.getVarbit
+import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -7,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import org.rs.consts.NPCs
+import org.rs.consts.Vars
 
 /**
  * Represents the Street Urchin dialogue.
@@ -16,7 +20,13 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player("Hello there little fellow.")
+        val theFeud = getVarbit(player, Vars.VARBIT_THE_FEUD_PROGRESS_334)
+        if(theFeud >= 2) {
+            end()
+            openDialogue(player, StreetUrchinFeudDialogue())
+        } else {
+            player("Hello there little fellow.")
+        }
         stage = 0
         return true
     }
@@ -127,5 +137,5 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun newInstance(player: Player?): Dialogue = StreetUrchinDialogue(player)
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.STREET_URCHIN_6357)
+    override fun getIds(): IntArray = intArrayOf(NPCs.STREET_URCHIN_1868)
 }

@@ -162,7 +162,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
         if (overlay.id == Components.WILDERNESS_OVERLAY_381) {
             closeOverlay(p)
         }
-        p.interaction.remove(Option._P_ATTACK)
+        p.interaction.remove(Option.P_ATTACK)
         p.skullManager.run {
             isWilderness = false
             level = 0
@@ -242,7 +242,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
             openOverlay(p, Components.WILDERNESS_OVERLAY_381)
             p.skullManager.level = getWilderness(p)
             sendString(p, "Level: ${p.skullManager.level}", Components.WILDERNESS_OVERLAY_381, 1)
-            if (settings!!.wild_pvp_enabled) p.interaction.set(Option._P_ATTACK)
+            if (settings!!.wild_pvp_enabled) p.interaction.set(Option.P_ATTACK)
             p.skullManager.isWilderness = true
         }
         @JvmStatic

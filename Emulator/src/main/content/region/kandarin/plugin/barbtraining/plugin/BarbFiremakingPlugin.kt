@@ -194,7 +194,7 @@ private class BarbFiremakingPulse(player: Player, node: Item, groundItem: Ground
         player.faceLocation(scenery.getFaceLocation(player.location))
         player.getSkills().addExperience(Skills.FIREMAKING, fire.xp)
 
-        val playerRegion = player.viewport.region.id
+        val playerRegion = player.viewport.region!!.id
 
         setLastFire()
         player.dispatch(LitFireEvent(fire.logId))

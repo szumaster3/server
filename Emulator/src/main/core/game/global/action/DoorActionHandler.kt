@@ -152,7 +152,7 @@ object DoorActionHandler {
                             finishDiaryTask(player, DiaryType.FALADOR, 2, 6)
                         }
 
-                        if (scenery.id == 35549 || scenery.id == 35551 && player.viewport.region.id == 13106) {
+                        if (scenery.id == 35549 || scenery.id == 35551 && player.viewport.region!!.id == 13106) {
                             finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 4)
                         }
 

@@ -183,7 +183,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         player: Player,
         event: ResourceProducedEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12341 ->
                 when (event.itemId) {
                     Items.RAW_TROUT_335 ->
@@ -277,7 +277,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         player: Player,
         event: InteractionEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12342 ->
                 if (event.target.id == Scenery.TRAPDOOR_26934) {
                     finishTask(
@@ -421,7 +421,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
             Components.THESSALIA_CLOTHES_MALE_591,
             Components.THESSALIA_CLOTHES_FEMALE_594,
             ->
-                if (player.viewport.region.id == 12853) {
+                if (player.viewport.region!!.id == 12853) {
                     finishTask(
                         player,
                         DiaryLevel.EASY,

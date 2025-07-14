@@ -109,7 +109,7 @@ class MazeListener : InteractionListener {
         }
 
         on(Scenery.CHEST_3636, IntType.SCENERY, "search") { player, _ ->
-            if(player.viewport.region.id == 11591) {
+            if(player.viewport.region!!.id == 11591) {
                 sendMessage(player, "You find nothing of interest.")
             }
             return@on true

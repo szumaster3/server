@@ -40,9 +40,9 @@ object MapChunkRenderer {
             for (y in 0 until sizeY) {
                 val chunk = current[x][y]
                 if (!updated.contains(chunk)) {
-                    chunk.synchronize(player)
+                    chunk!!.synchronize(player)
                 } else {
-                    chunk.update(player)
+                    chunk!!.update(player)
                 }
                 last[x][y] = current[x][y]
             }
@@ -56,7 +56,7 @@ object MapChunkRenderer {
      * @param c The region chunk.
      * @return `True` if so.
      */
-    private fun containsChunk(list: Array<Array<RegionChunk>>, c: RegionChunk): Boolean {
+    private fun containsChunk(list: Array<Array<RegionChunk?>>, c: RegionChunk): Boolean {
         val sizeList = list.size
         for (x in 0 until sizeList) {
             val chunkSize: Int = list[x].size

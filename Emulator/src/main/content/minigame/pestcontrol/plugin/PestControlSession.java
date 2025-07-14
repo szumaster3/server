@@ -59,7 +59,7 @@ public final class PestControlSession {
      * @return the boolean
      */
     public boolean update() {
-        if (!region.isActive()) {
+        if (!region.getActive()) {
             return true;
         }
         if (squire != null && !squire.isActive()) {

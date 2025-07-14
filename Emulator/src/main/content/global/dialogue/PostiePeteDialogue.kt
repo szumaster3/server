@@ -28,7 +28,7 @@ class PostiePeteDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             11679 -> when (stage) {
                 0 -> npcl(FaceAnim.OLD_NORMAL, "4 pints of your finest please.").also { stage++ }
                 1 -> sendNPCDialogue(player, NPCs.BARMAID_2178, "4 pints coming right up. Are you expecting guests?", FaceAnim.OLD_NORMAL).also { stage++ }

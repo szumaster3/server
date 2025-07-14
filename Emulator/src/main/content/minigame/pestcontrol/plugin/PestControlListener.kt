@@ -21,7 +21,7 @@ class PestControlListener : InteractionListener {
         on(VOID_SEAL, IntType.ITEM, "rub", "operate") { player, node ->
             val operate = getUsedOption(player) == "operate"
 
-            if (player.viewport.region.regionId != 10536) {
+            if (player.viewport.region!!.regionId != 10536) {
                 sendMessage(player, "You can only use the seal in Pest Control.")
                 return@on true
             }

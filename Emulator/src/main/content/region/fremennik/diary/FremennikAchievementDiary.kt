@@ -152,7 +152,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         player: Player,
         event: ResourceProducedEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10553 ->
                 if (event.source.id in FISHING_SPOTS) {
                     finishTask(
@@ -180,7 +180,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         player: Player,
         event: NPCKillEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10042, 10554 ->
                 if (event.npc.id in ROCK_CRABS) {
                     progressIncrementalTask(
@@ -245,7 +245,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         player: Player,
         event: PickUpEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10810 ->
                 if (event.itemId == Items.SEAWEED_401) {
                     progressIncrementalTask(
@@ -276,7 +276,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         player: Player,
         event: SummoningPointsRechargeEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10552 ->
                 if (event.obelisk.id == Scenery.SMALL_OBELISK_29944) {
                     finishTask(
@@ -294,7 +294,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
     ) {
         when (event.component.id) {
             Components.YRSA_SHOE_STORE_200 ->
-                if (player.viewport.region.id == 10297) {
+                if (player.viewport.region!!.id == 10297) {
                     finishTask(
                         player,
                         DiaryLevel.MEDIUM,
@@ -308,7 +308,7 @@ class FremennikAchievementDiary : DiaryEventHookBase(DiaryType.FREMENNIK) {
         player: Player,
         event: InteractionEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             9377 ->
                 if (event.target.id == Scenery.ROCK_16684 && event.option == "mine") {
                     finishTask(

@@ -174,7 +174,7 @@ class SorceressElementalNPC : AbstractNPC {
 
     override fun tick() {
         super.tick()
-        val players = viewport.currentPlane.players
+        val players = viewport.currentPlane!!.players
         for (player in players) {
             if (player == null ||
                 !player.isActive ||

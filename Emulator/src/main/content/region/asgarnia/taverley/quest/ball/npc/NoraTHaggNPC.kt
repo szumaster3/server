@@ -118,7 +118,7 @@ class NoraTHaggNPC : AbstractNPC {
 
     override fun tick() {
         super.tick()
-        val players = viewport.currentPlane.players
+        val players = viewport.currentPlane!!.players
         if (getLocation().x == 2930) {
             walkdir = false
         } else if (getLocation().x == 2904) {

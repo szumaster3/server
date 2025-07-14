@@ -173,7 +173,7 @@ public class NPC extends Entity {
         initConfig();
         Repository.getNpcs().add(this);
         RegionManager.move(this);
-        if (getViewport().getRegion().isActive()) {
+        if (getViewport().getRegion().getActive()) {
             Repository.addRenderableNPC(this);
         }
         interactPlugin.setDefault();
@@ -376,7 +376,7 @@ public class NPC extends Entity {
 
     @Override
     public void tick() {
-        if (!getViewport().getRegion().isActive()) {
+        if (!getViewport().getRegion().getActive()) {
             onRegionInactivity();
             return;
         }

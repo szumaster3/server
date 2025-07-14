@@ -188,7 +188,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
                 return@on true
             }
 
-            val destination = if (player.viewport.region.regionId == 12337) {
+            val destination = if (player.viewport.region!!.regionId == 12337) {
                 Location.create(1696, 5461, 2)
             } else {
                 Location.create(3106, 3160, 1)
@@ -257,7 +257,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
 
     override fun defineDestinationOverrides() {
         setDest(IntType.SCENERY, intArrayOf(Scenery.PORTAL_38279), "enter") { player, node ->
-            if (player.viewport.region.regionId == 12337) {
+            if (player.viewport.region!!.regionId == 12337) {
                 return@setDest node.asScenery().location
             } else {
                 return@setDest Location.create(1696, 5461, 2)

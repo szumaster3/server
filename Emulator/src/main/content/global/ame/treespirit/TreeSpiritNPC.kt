@@ -36,7 +36,7 @@ class TreeSpiritNPC(
             this.terminate()
         }
         super.tick()
-        if (!player.viewport.currentPlane.npcs
+        if (!player.viewport.currentPlane!!.npcs
                 .contains(this)
         ) {
             this.clear()

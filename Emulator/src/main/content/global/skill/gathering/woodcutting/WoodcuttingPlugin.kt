@@ -130,11 +130,9 @@ class WoodcuttingPlugin : InteractionListener {
                 }
 
                 if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                    player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
+                    sendMessage(player,"You cut a branch from the Dramen tree.")
                 } else {
-                    player.packetDispatch.sendMessage(
-                        "You get some " + ItemDefinition.forId(reward).name.lowercase() + ".",
-                    )
+                    sendMessage(player, "You get some " + ItemDefinition.forId(reward).name.lowercase() + ".",)
                 }
 
                 player.inventory.add(Item(reward, rewardAmount))
@@ -267,7 +265,7 @@ class WoodcuttingPlugin : InteractionListener {
                 DiaryType.SEERS_VILLAGE,
                 1,
             ) &&
-            player.viewport.region.id == 10806
+            player.viewport.region!!.id == 10806
         ) {
             amount = 2
         }

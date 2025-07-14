@@ -40,7 +40,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         e: Entity,
         last: Location,
     ) {
-        if (e is Player && e.getViewport().region.id == 14231) {
+        if (e is Player && e.getViewport().region!!.id == 14231) {
             var tunnel = false
             for (border in MINI_TUNNELS) {
                 if (border.insideBorder(e)) {

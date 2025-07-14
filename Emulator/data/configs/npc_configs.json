@@ -31213,14 +31213,14 @@
     "attack_level": "1"
   },
   {
-    "examine": "An axe expert.",
+    "examine": "A market stall keeper.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
     "defence_animation": "0",
     "magic_animation": "0",
     "death_animation": "0",
-    "name": "Brian",
+    "name": "Market Seller",
     "defence_level": "1",
     "safespot": null,
     "lifepoints": "10",
@@ -86882,30 +86882,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5574"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5575"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5576"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5577"
-  },
-  {
     "examine": "He knows anything is possible.",
     "name": "Effigy",
     "safespot": null,
@@ -87219,30 +87195,6 @@
     "magic_level": "41",
     "range_level": "0",
     "attack_level": "30"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5599"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5600"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5601"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5602"
   },
   {
     "examine": "Half unicorn, half cow.",
@@ -88437,66 +88389,6 @@
     "name": "Brother Tranquility",
     "safespot": null,
     "id": "5668"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5669"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5670"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5671"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5672"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5673"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5674"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5675"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5676"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5677"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5678"
   },
   {
     "examine": "He is one, but he's not alright.",
@@ -90043,12 +89935,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5788"
-  },
-  {
     "examine": "A connoisseur of exotic foods from outside Dorgesh-Kaan.",
     "name": "Gourmet",
     "defence_level": "1",
@@ -90639,18 +90525,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5831"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5832"
   },
   {
     "examine": "A travelling trader.",
@@ -91269,12 +91143,6 @@
     "attack_level": "47"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5870"
-  },
-  {
     "examine": "An ugly green creature...But don't say that to his face!",
     "name": "Sergeant Mossfists",
     "defence_level": "1",
@@ -91541,42 +91409,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5888"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5889"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5890"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5891"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5892"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5893"
-  },
-  {
     "examine": "I hope he's not dead!",
     "name": "Cyrisus",
     "defence_level": "1",
@@ -91648,18 +91480,6 @@
     "magic_level": "1",
     "range_level": "70",
     "attack_level": "70"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5900"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5901"
   },
   {
     "examine": "Are you good enough to fight?",
@@ -93196,12 +93016,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "5998"
-  },
-  {
     "examine": "A dwarf.",
     "name": "Rupert the Beard",
     "defence_level": "1",
@@ -94504,24 +94318,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6068"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6069"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6070"
-  },
-  {
     "examine": "An impling",
     "name": "Immenizz",
     "defence_level": "1",
@@ -94599,18 +94395,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6076"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6077"
   },
   {
     "examine": "A one-eyed man eater.",
@@ -94719,18 +94503,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6083"
-  },
-  {
-    "examine": "",
-    "name": "Captain Ned",
-    "safespot": null,
-    "id": "6084"
   },
   {
     "examine": "His job is to keep the ship in tip-top condition.",
@@ -95402,13 +95174,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6120"
-  },
-  {
-    "examine": "",
+    "examine": "A man, learned in the ways of the stars.",
     "name": "Observatory professor",
     "safespot": null,
     "id": "6121"
@@ -96464,42 +96230,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6192"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6193"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6194"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6195"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6196"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6197"
   },
   {
     "examine": "The name isn't just for show.",
@@ -100160,18 +99890,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6387"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6388"
-  },
-  {
     "examine": "Flies like a rock.",
     "melee_animation": "9454",
     "range_animation": "1516",
@@ -102536,84 +102254,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6545"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6546"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6547"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6548"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6549"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6550"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6551"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6552"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6553"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6554"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6555"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6556"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6557"
-  },
-  {
     "examine": "Tapping his feet and looking very bored.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -102630,12 +102270,6 @@
     "aggressive": "false",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6559"
   },
   {
     "examine": "A huge war chief. ",
@@ -102657,30 +102291,6 @@
     "bonuses": "300,300,300,300,300,300,150,300,300,250,43,96,43,30,0",
     "range_level": "200",
     "attack_level": "250"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6561"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6562"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6563"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6564"
   },
   {
     "examine": "",
@@ -110376,12 +109986,6 @@
   },
   {
     "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "6989"
-  },
-  {
-    "examine": "",
     "name": "Giant wolpertinger",
     "safespot": null,
     "id": "6990"
@@ -110671,24 +110275,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7007"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7008"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7009"
   },
   {
     "examine": "A spiny creature.",
@@ -111015,42 +110601,6 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7033"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7034"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7035"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7036"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7037"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7038"
-  },
-  {
     "examine": "A shy creature with a toxic bite.",
     "melee_animation": "0",
     "range_animation": "0",
@@ -111079,24 +110629,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7041"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7042"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7043"
   },
   {
     "examine": "",
@@ -111250,12 +110782,6 @@
   },
   {
     "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7056"
-  },
-  {
-    "examine": "",
     "name": "Snurgh",
     "safespot": null,
     "id": "7057"
@@ -111355,12 +110881,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7066"
   },
   {
     "examine": "",
@@ -111718,84 +111238,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7092"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7093"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7094"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7095"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7096"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7097"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7098"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7099"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7100"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7101"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7102"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7103"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7104"
   },
   {
     "examine": "A crazy, evil druid.",
@@ -113025,42 +112467,6 @@
   },
   {
     "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7177"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7178"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7179"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7180"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7181"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7182"
-  },
-  {
-    "examine": "",
     "name": "Villager",
     "safespot": null,
     "id": "7183"
@@ -113148,36 +112554,6 @@
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7191"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7192"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7193"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7194"
-  },
-  {
-    "examine": "",
-    "name": "",
-    "safespot": null,
-    "id": "7195"
   },
   {
     "examine": "",

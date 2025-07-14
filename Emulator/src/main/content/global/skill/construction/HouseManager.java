@@ -760,7 +760,7 @@ public final class HouseManager {
      * @return the boolean
      */
     public boolean isLoaded() {
-        return (houseRegion != null && houseRegion.isActive()) || (dungeonRegion != null && dungeonRegion.isActive());
+        return (houseRegion != null && houseRegion.getActive() || (dungeonRegion != null && dungeonRegion.getActive()));
     }
 
     /**

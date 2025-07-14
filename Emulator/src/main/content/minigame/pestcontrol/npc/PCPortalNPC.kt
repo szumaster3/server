@@ -73,7 +73,7 @@ class PCPortalNPC(
         val r = RandomFunction.RANDOM
         var amount = index + 1
         if (viewport.currentPlane != null) {
-            amount += viewport.currentPlane.players.size / 10
+            amount += viewport.currentPlane!!.players.size / 10
         }
         if (difficultyIndex == 0) {
             amount += (difficultyIndex + 1) * 3 / 2

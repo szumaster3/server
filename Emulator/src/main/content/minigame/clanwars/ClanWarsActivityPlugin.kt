@@ -375,7 +375,7 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
         val y = base.y + 20
         val multi = RegionZone(MultiwayCombatZone.instance, ZoneBorders(x, y, x + 63, y + 88))
         for (r in regions) {
-            r.isMulticombat = true
+            r.multicombat = true
             r.regionZones.add(multi)
             r.setRegionTimeOut(250)
             r.setMusicId(442)

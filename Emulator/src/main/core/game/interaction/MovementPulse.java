@@ -185,7 +185,7 @@ public abstract class MovementPulse extends Pulse {
 
     @Override
     public boolean update() {
-        if (!mover.getViewport().getRegion().isActive())
+        if (!mover.getViewport().getRegion().getActive())
             return false;
 
         if (!isRunning()) return true;

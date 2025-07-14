@@ -92,7 +92,7 @@ class CombatPulse(val entity: Entity?) : Pulse(1, entity, null) {
         val e = entity ?: return true
         val v = victim ?: return true
         if (DeathTask.isDead(e) || DeathTask.isDead(v)) return true
-        if (!e.viewport.region.isActive || !v.viewport.region.isActive) return true
+        if (!e.viewport.region!!.active || !v.viewport.region!!.active) return true
 
         if (!interactable()) {
             return if (e.walkingQueue.isMoving) false

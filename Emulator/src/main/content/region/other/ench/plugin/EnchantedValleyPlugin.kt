@@ -56,7 +56,7 @@ class EnchantedValleyPlugin : InteractionListener {
                 sendDialogue(player, "You need a small net to catch these fish.")
                 return@on true
             }
-            if (player.viewport.region.id == 12102) {
+            if (player.viewport.region!!.id == 12102) {
                 spawnEvent(player, getNpcFor(player, RIVER_TROLL_IDS)) { npc ->
                     visualize(npc, Animations.NET_FISHING_621, Graphics.RANDOM_EVENT_PUFF_OF_SMOKE_86)
                     val message = if (hasRequirement(player, Quests.SWAN_SONG)) {

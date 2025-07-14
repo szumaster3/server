@@ -41,7 +41,7 @@ class MazeNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs
     }
 
     override fun talkTo(npc: NPC) {
-        if (npc.viewport.region.id == 11591) {
+        if (npc.viewport.region!!.id == 11591) {
             openDialogue(player, MazeDialogue())
         }
     }

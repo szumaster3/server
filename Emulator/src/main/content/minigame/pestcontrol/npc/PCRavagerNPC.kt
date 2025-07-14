@@ -80,7 +80,7 @@ class PCRavagerNPC : AbstractNPC {
                     Pulser.submit(
                         object : Pulse(1, this, o) {
                             override fun pulse(): Boolean {
-                                if (viewport.region.isActive && session!!.barricades.remove(o)) {
+                                if (viewport.region!!.active && session!!.barricades.remove(o)) {
                                     session!!.barricades.add(newTarget)
                                     SceneryBuilder.replace(o, newTarget)
                                 }

@@ -101,7 +101,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             )
             notify(
                 player,
-                "Region: [id=" + l.regionId + ", active=" + r.isActive + ", instanced=" + (r is DynamicRegion) +
+                "Region: [id=" + l.regionId + ", active=" + r!!.active + ", instanced=" + (r is DynamicRegion) +
                     "], obj=" +
                     RegionManager.getObject(l) +
                     ".",

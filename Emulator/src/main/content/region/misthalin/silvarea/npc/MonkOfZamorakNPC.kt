@@ -26,7 +26,7 @@ class MonkOfZamorakNPC(
         if (killer is Player) {
             val player = killer.asPlayer()
             val quest = player.getQuestRepository().getQuest(Quests.PRIEST_IN_PERIL)
-            if (quest.isStarted(player) && player.viewport.region.regionId == 13662) {
+            if (quest.isStarted(player) && player.viewport.region!!.regionId == 13662) {
                 GroundItemManager.create(Item(Items.GOLDEN_KEY_2944, 1), getLocation(), player)
             }
         }

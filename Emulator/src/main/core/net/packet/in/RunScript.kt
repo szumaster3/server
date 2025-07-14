@@ -31,7 +31,7 @@ object RunScript {
             input = value.toString().lowercase()
 
             if (!input.matches(Regex("^(\\d+)(k+|m+)?$"))) {
-                sendDialogue(player, "That doesn't look right. Please try again.")
+                sendMessage(player, "That doesn't look right. Please try again.")
                 return
             }
 
@@ -45,9 +45,9 @@ object RunScript {
         try {
             script(input)
         } catch (_: NumberFormatException) {
-            sendDialogue(player, "That number's a bit large, don't you think?")
+            sendMessage(player, "That number's a bit large, don't you think?")
         } catch (_: ClassCastException) {
-            sendDialogue(player, "Something went wrong here. Try again.")
+            sendMessage(player, "Something went wrong here. Try again.")
         } finally {
             removeAttribute(player, "runscript")
             removeAttribute(player, "input-type")

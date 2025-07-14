@@ -149,7 +149,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
             }
         }
 
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10802 ->
                 if (event.itemId == Items.GOLD_ORE_444) {
                     finishTask(
@@ -219,7 +219,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
         player: Player,
         event: NPCKillEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10899, 10900 ->
                 if (event.npc.id in METAL_DRAGONS) {
                     finishTask(
@@ -282,7 +282,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
         player: Player,
         event: InteractionEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10644 ->
                 if (event.target.id == Scenery.STAIRS_5097 && event.option == "walk-up") {
                     finishTask(

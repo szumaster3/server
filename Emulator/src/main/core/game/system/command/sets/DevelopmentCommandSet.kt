@@ -313,7 +313,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::region",
             description = "Prints your current Region ID.",
         ) { player, _ ->
-            sendMessage(player, "Region ID: ${player.viewport.region.regionId}")
+            sendMessage(player, "Region ID: ${player.viewport.region!!.regionId}")
         }
 
         /*

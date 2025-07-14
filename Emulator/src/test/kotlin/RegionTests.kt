@@ -101,7 +101,7 @@ class RegionTests {
         val borders = DynamicRegion.reserveArea(8, 8)
         val dynamic = DynamicRegion(-1, borders.southWestX shr 6, borders.southWestY shr 6)
         dynamic.borders = borders
-        dynamic.isUpdateAllPlanes = true
+        dynamic.updateAllPlanes = true
         RegionManager.addRegion(dynamic.id, dynamic)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
         val replacement = base.planes[0].getRegionChunk(2, 2)
@@ -118,7 +118,7 @@ class RegionTests {
         val borders = DynamicRegion.reserveArea(8, 8)
         val dynamic = DynamicRegion(-1, borders.southWestX shr 6, borders.southWestY shr 6)
         dynamic.borders = borders
-        dynamic.isUpdateAllPlanes = true
+        dynamic.updateAllPlanes = true
         RegionManager.addRegion(dynamic.id, dynamic)
         val targetLoc = dynamic.baseLocation.transform(23, 17, 0)
         val replacement = base.planes[0].getRegionChunk(2, 2)

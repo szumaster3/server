@@ -138,7 +138,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: ResourceProducedEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12439 ->
                 if (event.itemId == Items.STEEL_LONGSWORD_1295) {
                     finishTask(
@@ -314,7 +314,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: NPCKillEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12593, 12849 ->
                 if (event.npc.id == NPCs.GIANT_RAT_86) {
                     finishTask(
@@ -355,7 +355,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: LitFireEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12593, 12849 ->
                 if (event.logId == Items.LOGS_1511) {
                     finishTask(
@@ -382,7 +382,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: InteractionEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12337 ->
                 if (event.target.id == Scenery.RAILING_37668 && event.option == "taunt-through") {
                     finishTask(
@@ -566,7 +566,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: PickUpEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12850, 12851 -> {
                 if (event.itemId == Items.COWHIDE_1739) {
                     if (inBorders(player, COW_PEN_AREA_1) || inBorders(player, COW_PEN_AREA_2)) {
@@ -585,7 +585,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: InterfaceOpenEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12338 ->
                 if (event.component.id == Components.BANK_V2_MAIN_762) {
                     finishTask(
@@ -641,7 +641,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: JobAssignmentEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12849 ->
                 if (event.employerNpc.id == NPCs.FISHING_TUTOR_4901) {
                     finishTask(
@@ -657,7 +657,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
         player: Player,
         event: UseWithEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             12595 ->
                 if (event.used == Items.EMPTY_POT_1931 && event.with == Scenery.FLOUR_BIN_36878) {
                     finishTask(

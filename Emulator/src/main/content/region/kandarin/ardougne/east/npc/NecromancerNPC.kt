@@ -49,7 +49,7 @@ class NecromancerNPC : NPCBehavior(NPCs.INVRIGAR_THE_NECROMANCER_173, NPCs.NECRO
      */
     override fun afterDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
         if (attacker is Player) {
-            val thresh = self.getSkills().maximumLifepoints * (0.3 + (self.viewport.currentPlane.players.size * 0.05))
+            val thresh = self.getSkills().maximumLifepoints * (0.3 + (self.viewport.currentPlane!!.players.size * 0.05))
             if (forceZombieRoll || self.getSkills().lifepoints < thresh) {
                 rollZombieSpawn(self, this, attacker)
                 forceZombieRoll = false

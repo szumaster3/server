@@ -32,7 +32,7 @@ class SwarmNPC(
         if (!withinDistance(player, this.location, 8)) {
             this.terminate()
         }
-        if (!player.viewport.currentPlane.npcs
+        if (!player.viewport.currentPlane!!.npcs
                 .contains(this)
         ) {
             this.clear()

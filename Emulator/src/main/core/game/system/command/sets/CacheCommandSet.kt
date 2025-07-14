@@ -610,82 +610,52 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(
-            name = "dumpvarbitsall",
-            privilege = Privilege.ADMIN,
-            usage = "::dumpvarbitsall",
-            description = "Dumps all varbit definitions to a .json file.",
-        ) { p, _ ->
-            val gson = GsonBuilder().setPrettyPrinting().create()
-            val dump = File("varbit_definitions.json")
-            val varbits = mutableListOf<Map<String, Any?>>()
-
-            val maxVarbitId = Cache.getIndexCapacity(CacheIndex.CONFIGURATION)
-
-            for (varbitId in 0 until maxVarbitId) {
-                val varbitDef =
-                    try {
-                        VarbitDefinition.forId(varbitId)
-                    } catch (e: Exception) {
-                        println("Error loading varbit ID $varbitId: ${e.message}")
-                        null
-                    } ?: continue
-
-                try {
-                    val varbitMap =
-                        varbitDef::class
-                            .memberProperties
-                            .filter { prop ->
-                                prop.returnType.classifier !in
-                                        listOf(
-                                            VarbitDefinition::class,
-                                            List::class,
-                                            Map::class,
-                                        )
-                            }.associate { prop ->
-                                prop.isAccessible = true
-                                prop.name to (prop.getter.call(varbitDef) ?: "null")
-                            }
-
-                    if (varbitMap.isNotEmpty()) {
-                        varbits.add(varbitMap)
-                    }
-                } catch (e: Exception) {
-                    println("Error processing varbit ID $varbitId: ${e.message}")
-                }
-            }
-
-            dump.writeText(gson.toJson(varbits))
-            p.debug("Varbit definitions have been successfully dumped to $dump.")
-        }
-
-        /*
-         * Dumps the varbit definitions into a .json file.
-         */
-
-        define(
             name = "dumpvarbits",
             privilege = Privilege.ADMIN,
             usage = "::dumpvarbits",
-            description = "Dumps varbit definitions data to a .json file.",
+            description = "Dumps all varbit definitions to a .json file.",
         ) { p, _ ->
             val gson = GsonBuilder().setPrettyPrinting().create()
-            val dump = File("varbit_definitions.json")
             val varbits = mutableListOf<Map<String, Any?>>()
+            val dump = File("varbit_definitions.json")
+            val maxId = Cache.getIndexCapacity(CacheIndex.CONFIGURATION)
 
-            for ((id, varbitDef) in VarbitDefinition.mapping) {
-                val varbitMap =
+            var startId: Int? = null
+            var last: VarbitDefinition? = null
+
+            fun addGroup(start: Int, end: Int, def: VarbitDefinition) {
+                val group = if (start != end)
                     mapOf(
-                        "id" to id,
-                        "varpId" to varbitDef.varpId,
-                        "startBit" to varbitDef.startBit,
-                        "endBit" to varbitDef.endBit,
-                        "mask" to varbitDef.mask,
+                        "idRange" to listOf(start, end),
+                        "varpId" to def.varpId,
+                        "startBit" to VarbitDefinition.forId(start).startBit,
+                        "endBit" to VarbitDefinition.forId(end).endBit
                     )
-                varbits.add(varbitMap)
+                else
+                    mapOf(
+                        "id" to start,
+                        "varpId" to def.varpId,
+                        "startBit" to def.startBit,
+                        "endBit" to def.endBit
+                    )
+                varbits.add(group)
             }
 
+            for (id in 0 until maxId) {
+                val def = runCatching { VarbitDefinition.forId(id) }.getOrNull() ?: continue
+                if (last != null && def.varpId == last.varpId && def.startBit == last.endBit + 1 && def.endBit == def.startBit) {
+                    last = def
+                } else {
+                    if (startId != null && last != null) addGroup(startId, id - 1, last)
+                    startId = id
+                    last = def
+                }
+            }
+
+            if (startId != null && last != null) addGroup(startId, maxId - 1, last)
+
             dump.writeText(gson.toJson(varbits))
-            p.debug("Varbit data has been successfully dumped to $dump.")
+            p.debug("Varbit definitions have been successfully dumped to $dump.")
         }
 
         /*

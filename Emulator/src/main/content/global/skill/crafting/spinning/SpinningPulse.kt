@@ -55,7 +55,7 @@ class SpinningPulse(player: Player?, node: Item?, var amount: Int, val type: Spi
             player.inventory.add(item)
             rewardXP(player, Skills.CRAFTING, type.exp)
 
-            if (player.viewport.region.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
+            if (player.viewport.region!!.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
                 if (player.getAttribute("diary:seers:bowstrings-spun", 0) >= 4) {
                     setAttribute(player, "/save:diary:seers:bowstrings-spun", 5)
                     finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 0, 4)

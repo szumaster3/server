@@ -94,7 +94,7 @@ public final class RegionPlane {
         this.players = new CopyOnWriteArrayList<Player>();
         this.npcs = new CopyOnWriteArrayList<NPC>();
         Location base = region.getBaseLocation();
-        this.flags = new RegionFlags(plane, base.getX(), base.getY());
+        this.flags = new RegionFlags(plane, base.getX(), base.getY(),false);
         this.projectileFlags = new RegionFlags(plane, base.getX(), base.getY(), true);
         this.objects = new Scenery[REGION_SIZE][REGION_SIZE];
         this.chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
@@ -139,7 +139,7 @@ public final class RegionPlane {
         if (r != null) {
             return r;
         }
-        if (region.isBuild()) {
+        if (region.getBuild()) {
             return chunks[chunkX][chunkY] = new BuildRegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
         }
         return chunks[chunkX][chunkY] = new RegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);

@@ -55,7 +55,7 @@ class SecurityGuardNPC(
             AntiMacro.terminateEventNpc(player)
         }
         super.tick()
-        if (!player.viewport.currentPlane.npcs
+        if (!player.viewport.currentPlane!!.npcs
                 .contains(this)
         ) {
             this.clear()

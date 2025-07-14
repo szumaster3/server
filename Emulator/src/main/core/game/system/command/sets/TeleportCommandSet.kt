@@ -214,7 +214,7 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN) {
 
             GlobalScope.launch {
                 for (plane in region.planes) {
-                    for (objects in plane.objects.filterNotNull()) {
+                    for (objects in plane.objects!!.filterNotNull()) {
                         for (parent in objects.filterNotNull()) {
                             if (parent.id in sceneryId..sceneryIdEnd) {
                                 println(parent.location)

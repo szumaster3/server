@@ -112,7 +112,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
             )
         }
 
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10805 ->
                 if (event.itemId == Items.FLAX_1779) {
                     progressIncrementalTask(
@@ -202,7 +202,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         player: Player,
         event: NPCKillEvent,
     ) {
-        when (player.viewport.region.id) {
+        when (player.viewport.region!!.id) {
             10906 ->
                 if (event.npc.id in WORKSHOP_ELEMENTALS) {
                     progressFlaggedTask(
@@ -361,7 +361,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         player: Player,
         event: ItemShopPurchaseEvent,
     ) {
-        if (event.itemId == Items.CANDLE_36 && player.viewport.region.id == 11061) {
+        if (event.itemId == Items.CANDLE_36 && player.viewport.region!!.id == 11061) {
             finishTask(
                 player,
                 DiaryLevel.EASY,
@@ -382,7 +382,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
         player: Player,
         event: PrayerPointsRechargeEvent,
     ) {
-        if (player.viewport.region.id == 10806) {
+        if (player.viewport.region!!.id == 10806) {
             if (event.altar.id == Scenery.ALTAR_409 || event.altar.id == Scenery.ALTAR_19145) {
                 finishTask(
                     player,
