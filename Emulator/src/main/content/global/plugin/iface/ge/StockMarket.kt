@@ -15,6 +15,7 @@ import core.net.packet.out.ContainerPacket
 import core.tools.Log
 import core.tools.SystemLogger
 import org.rs.consts.Components
+import org.rs.consts.Items
 import org.rs.consts.Sounds
 import kotlin.math.min
 
@@ -105,7 +106,7 @@ class StockMarket : InterfaceListener {
                 18, 34, 50, 69, 88, 107 -> {
                     openedIndex = (button - 18) shr 4
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
-                    if (op == 205) {
+                    if (op == 196) {
                         abortOffer(player, openedOffer)
                     } else {
                         updateVarbits(player, openedOffer, openedIndex)
@@ -157,7 +158,7 @@ class StockMarket : InterfaceListener {
 
                 170 ->
                     sendInputDialogue(player, false, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox?.id == 389) {
+                        if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
                             player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
@@ -270,7 +271,7 @@ class StockMarket : InterfaceListener {
         if (offer.sell) {
             offer.addWithdrawItem(offer.itemID, offer.amountLeft)
         } else {
-            offer.addWithdrawItem(995, offer.amountLeft * offer.offeredValue)
+            offer.addWithdrawItem(Items.COINS_995, offer.amountLeft * offer.offeredValue)
         }
         offer.update()
         offer.visualize(player)
@@ -337,12 +338,12 @@ class StockMarket : InterfaceListener {
             }
         } else {
             val total = offer.amount * offer.offeredValue
-            if (!inInventory(player, 995, total)) {
+            if (!inInventory(player, Items.COINS_995, total)) {
                 playAudio(player, Sounds.GE_TRADE_ERROR_4039)
                 sendMessage(player, "You do not have enough coins to cover the offer.")
                 return OfferConfirmResult.NotEnoughItemsOrCoins
             }
-            if (GrandExchange.dispatch(player, offer) && removeItem(player, Item(995, total))) {
+            if (GrandExchange.dispatch(player, offer) && removeItem(player, Item(Items.COINS_995, total))) {
                 player.removeAttribute("ge-temp")
             }
         }
@@ -501,8 +502,8 @@ class StockMarket : InterfaceListener {
          * @param player The player returning to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1, true))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1, true))
             player.interfaceManager.closeChatbox()
             player.interfaceManager.closeSingleTab()
             player.setAttribute("ge-index", -1)
