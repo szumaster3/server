@@ -8,7 +8,6 @@ import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
-import core.game.world.map.Location
 import core.tools.colorize
 import org.rs.consts.Items
 
@@ -39,10 +38,10 @@ class DraynorWillows : Script(){
                 if (!willowZone.insideBorder(bot))
                     scriptAPI.walkTo(willowZone.randomLoc)
                 else {
-                    val willowtree = scriptAPI.getNearestNode("willow", true)
+                    val willowtree = scriptAPI.getNearestNode(5553, true)
                     bot.interfaceManager.close()
                     willowtree?.let { InteractionListeners.run(willowtree.id,
-                        IntType.SCENERY,"chop down",bot,willowtree) }
+                        IntType.SCENERY,"Chop down",bot,willowtree) }
                     if (bot.inventory.isFull)
                         state = State.BANKING
                 }
@@ -62,7 +61,7 @@ class DraynorWillows : Script(){
                                 logCount += logs
                                 bot.inventory.remove(Item(Items.WILLOW_LOGS_1519,logs))
                                 bot.bank.add(Item(Items.WILLOW_LOGS_1519,logs))
-                                bot.inventory.add(Item(Items.ADAMANT_AXE_1357))
+                                bot.inventory.add(Item(Items.ADAMANT_AXE_1357,1))
                                 state = State.CHOPPING
                                 return true
                             }
@@ -70,9 +69,6 @@ class DraynorWillows : Script(){
                     }
                 }
             }
-
-
-
         }
     }
 
@@ -82,8 +78,7 @@ class DraynorWillows : Script(){
     }
 
     override fun newInstance(): Script {
-        val script = DraynorFisher()
-        script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.POOR, Location.create(3095, 3246, 0))
+        val script = DraynorWillows()
         return script
     }
 
