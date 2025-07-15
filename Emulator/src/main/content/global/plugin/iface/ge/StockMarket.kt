@@ -40,13 +40,8 @@ class StockMarket : InterfaceListener {
             player.interfaceManager.closeSingleTab()
         }
 
-        onOpen(Components.EXCHANGE_SEARCH_389) { player, _ ->
-            player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
-            return@onOpen true
-        }
-
         onClose(Components.EXCHANGE_SEARCH_389) { player, _ ->
-            player.packetDispatch.sendRunScript(5781, "")
+            player.packetDispatch.sendRunScript(571, "")
             return@onClose true
         }
 
@@ -128,6 +123,9 @@ class StockMarket : InterfaceListener {
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex)
                     player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
+                    if(player.interfaceManager.chatbox!!.id == 389) {
+                        player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
+                    }
                 }
 
                 31, 47, 63, 82, 101, 120 -> {
@@ -502,8 +500,8 @@ class StockMarket : InterfaceListener {
          * @param player The player returning to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1, true))
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1, true))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
+            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1113, -1))
             player.interfaceManager.closeChatbox()
             player.interfaceManager.closeSingleTab()
             player.setAttribute("ge-index", -1)
