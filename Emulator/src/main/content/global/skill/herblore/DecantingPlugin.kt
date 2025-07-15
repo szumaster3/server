@@ -6,6 +6,7 @@ import core.api.decantContainer
 import core.game.consumable.Potion
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.item.Item
 import org.rs.consts.Items
 import org.rs.consts.Sounds
@@ -15,13 +16,21 @@ class DecantingPlugin : InteractionListener {
     override fun defineListeners() {
         on(IntType.NPC, "decant") { player, node ->
             val (toRemove, toAdd) = decantContainer(player.inventory)
-            for (item in toRemove) removeItem(player, item)
-            for (item in toAdd) addItem(player, item.id, item.amount)
+            lock(player, 1)
+            sendPlainDialogue(player, true, "Searching...")
 
-            sendNPCDialogue(player, node.id, "There you go!")
-            addDialogueAction(player) { p, _ ->
-                sendPlayerDialogue(p, "Thanks!")
+            queueScript(player, 1, QueueStrength.SOFT) {
+                face(player, node.asNpc())
+                if (toRemove.isEmpty() || toAdd.isEmpty() || freeSlots(player) == 0) {
+                    sendNPCDialogue(player, node.id, "You don't seem to have anything I can decant.")
+                } else {
+                    for (item in toRemove) removeItem(player, item)
+                    for (item in toAdd) addItem(player, item.id, item.amount)
+                    sendNPCDialogue(player, node.id, "There you go, chum.")
+                }
+                return@queueScript stopExecuting(player)
             }
+
             return@on true
         }
 
