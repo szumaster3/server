@@ -68,3 +68,6 @@ pyvenv.cfg
 share/
 logs.txt
 Tools/cache_location.txt
+
+nullmain_file_cache.dat2
+nullmain_file_cache.idx255
