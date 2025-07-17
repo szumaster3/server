@@ -27,20 +27,30 @@ class AFURepairPlugin : InteractionListener {
     private val itemIDs = intArrayOf(Items.HAMMER_2347, Items.IRON_BAR_2351, Items.PLANK_960)
 
     override fun defineListeners() {
-        // TODO
+        /*
+         * Handles option of repairable scenery.
+         */
         on(repairIDs, IntType.SCENERY, "repair") { player, _ ->
-            if (!hasRequirement(player, Quests.ALL_FIRED_UP)) return@on false
+            if (!requireQuest(player, Quests.ALL_FIRED_UP, "")) return@on false
             val rco = getClimbingObject(player) ?: return@on false
             repair(player, rco)
             return@on true
         }
 
+        /*
+         * Handles using items on repairable scenery.
+         */
+
         onUseWith(IntType.SCENERY, itemIDs, *repairIDs) { player, used, with ->
-            if (!hasRequirement(player, Quests.ALL_FIRED_UP)) return@onUseWith false
+            if (!requireQuest(player, Quests.ALL_FIRED_UP, "")) return@onUseWith false
             val rco = getClimbingObject(player) ?: return@onUseWith false
             repair(player, rco)
             return@onUseWith true
         }
+
+        /*
+         * Handles climbable scenery option.
+         */
 
         on(climbIDs, IntType.SCENERY, "climb") { player, node ->
             val rco = getClimbingObject(player) ?: return@on false
