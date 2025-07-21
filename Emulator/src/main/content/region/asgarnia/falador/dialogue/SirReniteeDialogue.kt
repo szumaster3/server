@@ -1,7 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
 import content.data.GameAttributes
-import content.global.skill.construction.Crests
+import content.global.skill.construction.CrestType
 import core.ServerConstants
 import core.Util
 import core.api.*
@@ -23,7 +23,7 @@ import org.rs.consts.Quests
  * Represents Sir Renitee.
  *
  * **Relations**
- * - [Family Crests][content.global.skill.construction.Crests]
+ * - [Family Crests][content.global.skill.construction.CrestType]
  */
 @Initializable
 class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
@@ -65,18 +65,18 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                     )
                 } else {
                     val c = RandomFunction.random(4)
-                    val crests = arrayOf(Crests.VARROCK, Crests.ASGARNIA, Crests.KANDARIN, Crests.MISTHALIN)
+                    val crests = arrayOf(CrestType.VARROCK, CrestType.ASGARNIA, CrestType.KANDARIN, CrestType.MISTHALIN)
                     val crest = crests[c]
                     player.houseManager.crest = crest
                     setAttribute(player, "/save:sir-renitee-assigned-crest", true)
                     when (crest) {
-                        Crests.ASGARNIA -> setAttribute(player, GameAttributes.FAMILY_CREST, 2)
-                        Crests.KANDARIN -> setAttribute(player, GameAttributes.FAMILY_CREST, 10)
-                        Crests.MISTHALIN -> setAttribute(player, GameAttributes.FAMILY_CREST, 11)
+                        CrestType.ASGARNIA -> setAttribute(player, GameAttributes.FAMILY_CREST, 2)
+                        CrestType.KANDARIN -> setAttribute(player, GameAttributes.FAMILY_CREST, 10)
+                        CrestType.MISTHALIN -> setAttribute(player, GameAttributes.FAMILY_CREST, 11)
                         else -> setAttribute(player, GameAttributes.FAMILY_CREST, 15)
                     }
                     var message = "that can be your"
-                    if (crest == Crests.VARROCK) {
+                    if (crest == CrestType.VARROCK) {
                         message = "you can use that city's"
                     }
                     npc(FaceAnim.HALF_GUILTY, "Well, I don't think you have any noble blood,", "but I see that your ancestors came from " + Util.enumToString(player.houseManager.crest.name) + ",", " so $message crest.")
@@ -105,7 +105,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             310 -> options("Shield of Arrav", "Asgarnia", "Dorgeshuun Symbol", "Dragon", "More...").also { stage = 320 }
             320 -> when (buttonId) {
                 1 -> {
-                    val c = Crests.ARRAV
+                    val c = CrestType.ARRAV
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -118,7 +118,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    val c = Crests.ASGARNIA
+                    val c = CrestType.ASGARNIA
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -131,7 +131,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    val c = Crests.DORGESHUUN
+                    val c = CrestType.DORGESHUUN
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -144,7 +144,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 4 -> {
-                    val c = Crests.DRAGON
+                    val c = CrestType.DRAGON
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -161,7 +161,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
 
             330 -> when (buttonId) {
                 1 -> {
-                    val c = Crests.FAIRY
+                    val c = CrestType.FAIRY
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -174,7 +174,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    val c = Crests.GUTHIX
+                    val c = CrestType.GUTHIX
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -189,7 +189,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    val c = Crests.HAM
+                    val c = CrestType.HAM
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -202,7 +202,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 4 -> {
-                    val c = Crests.HORSE
+                    val c = CrestType.HORSE
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -219,7 +219,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
 
             340 -> when (buttonId) {
                 1 -> {
-                    val c = Crests.JOGRE
+                    val c = CrestType.JOGRE
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -232,7 +232,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    val c = Crests.KANDARIN
+                    val c = CrestType.KANDARIN
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -245,7 +245,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    val c = Crests.MISTHALIN
+                    val c = CrestType.MISTHALIN
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -262,7 +262,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             341 -> options("All right.", "No way!").also { stage++ }
             342 -> when (buttonId) {
                 1 -> {
-                    val c = Crests.MONEY
+                    val c = CrestType.MONEY
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) < c.cost) {
                         end()
                         sendMessage(player, "You don't have enough money")
@@ -274,7 +274,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             343 -> {
-                val c = Crests.MONEY
+                val c = CrestType.MONEY
                 if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                     end()
                     player.houseManager.crest = c
@@ -288,7 +288,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             344 -> npc(FaceAnim.HALF_GUILTY, "Well we can't have just any pauper using a money-bag", "as a symbol, can we? You'll have to choose a", "different symbol.").also { stage = 310 }
             350 -> when (buttonId) {
                 1 -> {
-                    val c = Crests.SARADOMIN
+                    val c = CrestType.SARADOMIN
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -308,7 +308,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 2 -> {
-                    val c = Crests.SKULL
+                    val c = CrestType.SKULL
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -323,7 +323,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 3 -> {
-                    val c = Crests.VARROCK
+                    val c = CrestType.VARROCK
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c
@@ -336,7 +336,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 4 -> {
-                    val c = Crests.ZAMORAK
+                    val c = CrestType.ZAMORAK
                     if (c.eligible(player) && amountInInventory(player, Items.COINS_995) > c.cost && removeItem(player, Item(Items.COINS_995, c.cost))) {
                         end()
                         player.houseManager.crest = c

@@ -1,7 +1,7 @@
 package content.global.skill.magic.spells.lunar
 
-import content.global.skill.construction.items.Planks
-import content.global.skill.construction.items.Planks.Companion.spellPrice
+import content.global.skill.construction.items.PlankType
+import content.global.skill.construction.items.PlankType.Companion.spellPrice
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.LunarSpells
 import core.api.*
@@ -24,7 +24,7 @@ class PlankMakeSpell : SpellListener("lunar") {
                 ),
             )
 
-            val planks = Planks.getForLog(node!!.id)
+            val planks = PlankType.getForLog(node!!.id)
             if (planks == null) {
                 sendMessage(player, "You need to use this spell on logs.")
                 return@onCast

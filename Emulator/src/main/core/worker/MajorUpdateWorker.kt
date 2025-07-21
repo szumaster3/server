@@ -22,7 +22,7 @@ import kotlin.system.exitProcess
 
 class MajorUpdateWorker {
     companion object {
-        private const val ENABLE_DEBUG_LOGGING = true
+        private const val ENABLE_DEBUG_LOGGING = false
         private const val CYCLE_TIME_NANOSECONDS = 600_000_000L
         private const val SPINWAIT_TIME_NANOSECONDS = 20_000_000L
         private const val ONE_MILLISECOND_IN_NANOSECONDS = 1_000_000L

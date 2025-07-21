@@ -23,7 +23,7 @@ public final class Servant extends NPC {
      * @param type the type of the servant (determines its NPC ID and behavior)
      */
     public Servant(ServantType type) {
-        super(type.getNpcId());
+        super(type.getId());
         this.type = type;
     }
 

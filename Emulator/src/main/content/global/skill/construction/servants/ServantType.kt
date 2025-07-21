@@ -5,7 +5,7 @@ import org.rs.consts.Items
 import org.rs.consts.NPCs
 
 enum class ServantType(
-    val npcId: Int,
+    val id: Int,
     val cost: Int,
     val capacity: Int,
     val level: Int,
@@ -13,21 +13,21 @@ enum class ServantType(
     vararg val food: Item?,
 ) {
     NONE(
-        npcId = -1,
+        id = -1,
         cost = -1,
         capacity = -1,
         level = -1,
         timer = -1,
     ),
     RICK(
-        npcId = NPCs.RICK_4235,
+        id = NPCs.RICK_4235,
         cost = 500,
         capacity = 6,
         level = 20,
         timer = 60,
     ),
     MAID(
-        npcId = NPCs.MAID_4237,
+        id = NPCs.MAID_4237,
         cost = 1000,
         capacity = 10,
         level = 25,
@@ -35,7 +35,7 @@ enum class ServantType(
         Item(Items.STEW_2003),
     ),
     COOK(
-        npcId = NPCs.COOK_4239,
+        id = NPCs.COOK_4239,
         cost = 3000,
         capacity = 16,
         level = 30,
@@ -43,7 +43,7 @@ enum class ServantType(
         Item(Items.PINEAPPLE_PIZZA_2301), Item(Items.AMULET_OF_GLORY4_1712),
     ),
     BUTLER(
-        npcId = NPCs.BUTLER_4241,
+        id = NPCs.BUTLER_4241,
         cost = 5000,
         capacity = 20,
         level = 40,
@@ -51,7 +51,7 @@ enum class ServantType(
         Item(Items.CHOCOLATE_CAKE_1897), Item(Items.CUP_OF_TEA_712),
     ),
     DEMON_BUTLER(
-        npcId = NPCs.DEMON_BUTLER_4243,
+        id = NPCs.DEMON_BUTLER_4243,
         cost = 10000,
         capacity = 26,
         level = 50,
@@ -61,6 +61,6 @@ enum class ServantType(
 
     companion object {
         @JvmStatic
-        fun forId(id: Int): ServantType? = values().find { it.npcId == id }
+        fun forId(id: Int): ServantType? = values().find { it.id == id }
     }
 }

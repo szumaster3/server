@@ -28,7 +28,7 @@ private val CREST_SYMBOLS =
         "ZAMORAK" to "the symbol of Zamorak",
     )
 
-enum class Crests(
+enum class CrestType(
     val cost: Int = 5000,
 ) : CrestRequirement {
     ARRAV {
@@ -74,4 +74,8 @@ enum class Crests(
     }, ;
 
     fun getSymbol(): String = CREST_SYMBOLS[this.name] ?: "unknown crest"
+}
+
+interface CrestRequirement {
+    fun eligible(player: Player) = true
 }

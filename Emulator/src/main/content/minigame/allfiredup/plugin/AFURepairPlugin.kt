@@ -1,8 +1,7 @@
 package content.minigame.allfiredup.plugin
 
-import content.global.skill.construction.items.Nails
+import content.global.skill.construction.items.NailType
 import core.api.*
-import core.api.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.impl.ForceMovement
@@ -89,7 +88,7 @@ class AFURepairPlugin : InteractionListener {
             }
 
             if (hasConstruction && hasHammer && hasPlanks) {
-                Nails.get(player, 4)?.let { nails ->
+                NailType.get(player, 4)?.let { nails ->
                     val nailItem = Item(nails.itemId, 4)
                     if (inventory.contains(nails.itemId, 4) &&
                         inventory.remove(Item(Items.PLANK_960, 2)) &&
@@ -143,7 +142,7 @@ class AFURepairPlugin : InteractionListener {
         }
 
         if (rco == RepairClimbObject.DEATH_PLATEAU) {
-            Nails.get(player, 4)?.let { nails ->
+            NailType.get(player, 4)?.let { nails ->
                 val nailItem = Item(nails.itemId, 4)
                 if (!inventory.contains(nails.itemId, 4)) {
                     sendDialogue(player, "You need 4 nails for this.")
