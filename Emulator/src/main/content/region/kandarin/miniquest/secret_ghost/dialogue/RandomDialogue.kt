@@ -1,4 +1,4 @@
-package content.region.kandarin.miniquest.secret_ghost
+package content.region.kandarin.miniquest.secret_ghost.dialogue
 
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

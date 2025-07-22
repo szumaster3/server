@@ -1,4 +1,4 @@
-package content.region.kandarin.miniquest.secret_ghost
+package content.region.kandarin.miniquest.secret_ghost.dialogue
 
 import content.data.GameAttributes
 import core.api.*
