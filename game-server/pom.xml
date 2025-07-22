@@ -15,7 +15,7 @@
     </parent>
 
     <groupId>org.rsps</groupId>
-    <artifactId>emulator</artifactId>
+    <artifactId>game-server</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
@@ -74,7 +74,7 @@
         </dependency>
         <dependency>
             <groupId>org.rsps</groupId>
-            <artifactId>530-Consts</artifactId>
+            <artifactId>game-constants</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>

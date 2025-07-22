@@ -10,8 +10,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>530-Consts</module>
-        <module>Emulator</module>
+        <module>game-constants</module>
+        <module>game-server</module>
     </modules>
 
     <properties>

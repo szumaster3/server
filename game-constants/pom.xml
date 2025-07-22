@@ -12,11 +12,11 @@
     </parent>
 
     <groupId>org.rsps</groupId>
-    <artifactId>530-Consts</artifactId>
+    <artifactId>game-constants</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>530-Consts</name>
+    <name>game-constants</name>
 
     <properties>
         <kotlin.version>1.8.20</kotlin.version>
