@@ -12,6 +12,7 @@
     <modules>
         <module>constants</module>
         <module>server</module>
+        <module>game-config-editor</module>
     </modules>
 
     <properties>
