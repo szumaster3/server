@@ -25,7 +25,7 @@ enum class FireType(
 ) {
     FIERY_BREATH(
         Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
-        Graphics.KBD_RED_PROJECTILE_393,
+        Graphics.KBD_FIERY_PROJECTILE_393,
         object : NodeTask(0) {
             override fun exec(
                 node: Node,
@@ -36,7 +36,7 @@ enum class FireType(
 
     SHOCKING_BREATH(
         Animation(84, Priority.HIGH),
-        Graphics.KBD_BLUE_PROJECTILE_396,
+        Graphics.KBD_SHOCKING_PROJECTILE_396,
         object : NodeTask(0) {
             override fun exec(
                 node: Node,
@@ -55,7 +55,7 @@ enum class FireType(
 
     TOXIC_BREATH(
         Animation(82, Priority.HIGH),
-        Graphics.KBD_GREEN_PROJECTILE_394,
+        Graphics.KBD_TOXIC_PROJECTILE_394,
         object : NodeTask(0) {
             override fun exec(
                 node: Node,
@@ -69,7 +69,7 @@ enum class FireType(
 
     ICY_BREATH(
         Animation(83, Priority.HIGH),
-        Graphics.KBD_WHITE_PROJECTILE_395,
+        Graphics.KBD_ICY_PROJECTILE_395,
         object : NodeTask(0) {
             override fun exec(
                 node: Node,

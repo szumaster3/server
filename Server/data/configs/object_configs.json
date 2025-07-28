@@ -15358,5 +15358,9 @@
   {
     "examine": "All that remains of a loyal follower of Saradomin.",
     "ids": "14523"
+  },
+  {
+    "examine": "Contains traces of Summoning energy.",
+    "ids": "42004"
   }
 ]

@@ -7,9 +7,6 @@ import core.game.world.map.Location
 import core.tools.StringUtils
 import org.rs.consts.Scenery
 
-/**
- * Enum representing house locations.
- */
 enum class HouseLocation(
     val portalId: Int,
     val exitLocation: Location?,
@@ -24,19 +21,8 @@ enum class HouseLocation(
     BRIMHAVEN(Scenery.PORTAL_15481, Location.create(2757, 3178, 0), 15000, 40),
     YANILLE(Scenery.PORTAL_15482, Location.create(2544, 3096, 0), 25000, 50);
 
-    /**
-     * Checking if the player has the required level.
-     *
-     * @param player The player.
-     * @return boolean.
-     */
     fun hasLevel(player: Player): Boolean =
         getStatLevel(player, Skills.CONSTRUCTION) >= levelRequirement
 
-    /**
-     * Get a formatted name.
-     *
-     * @return The name.
-     */
     fun getName(): String = StringUtils.formatDisplayName(name.lowercase())
 }
