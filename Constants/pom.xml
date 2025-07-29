@@ -11,7 +11,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.rsps</groupId>
     <artifactId>Constants</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
