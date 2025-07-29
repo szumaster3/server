@@ -338,7 +338,77 @@ object DoorActionHandler {
     }
 
     /**
-     * Handles fence & gate interactions.
+     * Handles close interaction.
+     *
+     * @param scenery The primary door object to open.
+     * @param second The second door object, if any.
+     * @param replaceId The id of the replacement object for the primary door.
+     * @param secondReplaceId The id of the replacement object for the second door.
+     * @param clip Whether to apply clipping on the door.
+     * @param restoreTicks Ticks after which the door should restore to its original state.
+     * @param fence True if the door is a fence gate, which uses a different open method.
+     */
+    @JvmStatic
+    fun close(
+        scenery: Scenery,
+        second: Scenery?,
+        originalId: Int,
+        secondOriginalId: Int,
+        clip: Boolean,
+        restoreTicks: Int,
+        fence: Boolean
+    ) {
+        var `object` = scenery
+        var second = second
+        var originalId = originalId
+        `object` = `object`.wrapper
+        val mod = if (`object`.type == 9) -1 else 1
+        var firstDir = (`object`.rotation - ((mod + 4) % 4) + 4) % 4
+        val p = getRotationPoint(`object`.rotation)
+        var firstLoc = `object`.location.transform(-(p!!.x * mod), -(p.y * mod), 0)
+
+        if (second == null) {
+            if (originalId == 4578) {
+                originalId = 4577
+                firstDir = 1
+                firstLoc = firstLoc.transform(0, -1, 0)
+            }
+            SceneryBuilder.replace(`object`, `object`.transform(originalId, firstDir, firstLoc), restoreTicks, clip)
+            return
+        }
+
+        second = second.wrapper
+
+        if (fence) {
+            closeFence(`object`, second, originalId, secondOriginalId, clip, restoreTicks)
+            return
+        }
+
+        val offset = Direction.getDirection(second.location.x - `object`.location.x, second.location.y - `object`.location.y)
+        var secondDir = (second.rotation - mod + 4) % 4
+
+        if (firstDir == 3 && offset == Direction.NORTH) {
+            firstDir = 1
+        } else if (firstDir == 0 && offset == Direction.EAST) {
+            firstDir = 2
+        } else if (firstDir == 1 && offset == Direction.SOUTH) {
+            firstDir = 3
+        } else if (firstDir == 2 && offset == Direction.WEST) {
+            firstDir = 0
+        }
+
+        if (firstDir == secondDir) {
+            secondDir = (secondDir + 2) % 4
+        }
+
+        val secondLoc = second.location.transform(-p.x, -p.y, 0)
+
+        SceneryBuilder.replace(`object`, `object`.transform(originalId, firstDir, firstLoc), restoreTicks, clip)
+        SceneryBuilder.replace(second, second.transform(secondOriginalId, secondDir, secondLoc), restoreTicks, clip)
+    }
+
+    /**
+     * Handles open fence & gate interactions.
      *
      * @param scenery The primary fence door.
      * @param second The second fence door.
@@ -392,6 +462,76 @@ object DoorActionHandler {
             SceneryBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip)
         }
     }
+
+    /**
+     * Handles close fence & gate interactions.
+     *
+     * @param scenery The primary fence door.
+     * @param second The second fence door.
+     * @param replaceId replacement id for the primary door.
+     * @param secondReplaceId replacement id for the second door.
+     * @param clip Whether clipping should be applied.
+     * @param restoreTicks Ticks before restoring original state.
+     */
+    @JvmStatic
+    private fun closeFence(
+        scenery: Scenery,
+        second: Scenery,
+        originalId: Int,
+        secondOriginalId: Int,
+        clip: Boolean,
+        restoreTicks: Int
+    ) {
+        var originalId = originalId
+        var secondOriginalId = secondOriginalId
+        val offset = Direction.getDirection(
+            second.location.x - scenery.location.x,
+            second.location.y - scenery.location.y
+        )
+        var firstDir = (scenery.rotation + 1) % 4
+        val p = getRotationPoint(scenery.rotation)
+        var firstLoc: Location?
+        var secondDir = (second.rotation + 1) % 4
+
+        if (offset == Direction.WEST || offset == Direction.SOUTH) {
+            firstLoc = second.location.transform(-p!!.x, -p.y, 0)
+            val temp = originalId
+            originalId = secondOriginalId
+            secondOriginalId = temp
+        } else {
+            firstLoc = scenery.location.transform(-p!!.x, -p.y, 0)
+        }
+
+        if (scenery.rotation == 3 || scenery.rotation == 2) {
+            firstDir = (firstDir + 2) % 4
+            secondDir = (secondDir + 2) % 4
+        }
+
+        val secondLoc = firstLoc.transform(-p.x, -p.y, 0)
+
+        if ((scenery.id == 36919 || scenery.id == 36917)) {
+            when (scenery.direction) {
+                Direction.SOUTH -> {
+                    SceneryBuilder.replace(scenery, scenery.transform(36917, firstDir, firstLoc), restoreTicks, true)
+                    SceneryBuilder.replace(second, second.transform(36919, secondDir, secondLoc), restoreTicks, true)
+                }
+
+                Direction.EAST -> {
+                    SceneryBuilder.replace(scenery, scenery.transform(36919, firstDir, firstLoc), restoreTicks, true)
+                    SceneryBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true)
+                }
+
+                else -> {
+                    SceneryBuilder.replace(scenery, scenery.transform(36917, firstDir, firstLoc), restoreTicks, true)
+                    SceneryBuilder.replace(second, second.transform(36919, secondDir, secondLoc), restoreTicks, true)
+                }
+            }
+        } else {
+            SceneryBuilder.replace(scenery, scenery.transform(originalId, firstDir, firstLoc), restoreTicks, clip)
+            SceneryBuilder.replace(second, second.transform(secondOriginalId, secondDir, secondLoc), restoreTicks, clip)
+        }
+    }
+
 
     /**
      * Handles autowalking through a fence gate.

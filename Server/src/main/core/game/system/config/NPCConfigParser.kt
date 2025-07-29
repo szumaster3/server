@@ -139,6 +139,6 @@ class NPCConfigParser {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count NPC configurations.")
+        log(this::class.java, Log.DEBUG, "Parsed $count NPC configurations.")
     }
 }

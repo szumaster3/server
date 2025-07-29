@@ -90,11 +90,11 @@ public enum BuildHotspot {
     MAP(Scenery.MAP_SPACE_15396, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.SMALL_MAP, Decoration.MEDIUM_MAP, Decoration.LARGE_MAP),
     BOOKCASE2(Scenery.BOOKCASE_SPACE_15397, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
 
-    OBELISK(44911, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MINI_OBELISK),
-    PET_FEEDER(44910, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_FEEDER, Decoration.TEAK_PET_FEEDER, Decoration.MAHOGANY_PET_FEEDER),
-    PET_HOUSE(44909, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_HOUSE, Decoration.TEAK_PET_HOUSE, Decoration.MAHOGANY_PET_HOUSE, Decoration.CONSECRATED_PET_HOUSE, Decoration.DESECRATED_PET_HOUSE, Decoration.NATURAL_PET_HOUSE),
-    HABITAT_1(44907, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
-    HABITAT_2(44908, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
+    // OBELISK(44911, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MINI_OBELISK),
+    // PET_FEEDER(44910, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_FEEDER, Decoration.TEAK_PET_FEEDER, Decoration.MAHOGANY_PET_FEEDER),
+    // PET_HOUSE(44909, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_HOUSE, Decoration.TEAK_PET_HOUSE, Decoration.MAHOGANY_PET_HOUSE, Decoration.CONSECRATED_PET_HOUSE, Decoration.DESECRATED_PET_HOUSE, Decoration.NATURAL_PET_HOUSE),
+    // HABITAT_1(44907, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
+    // HABITAT_2(44908, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
 
     WALL_DECORATION2(Scenery.DECORATION_SPACE_15297, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECORATION, Decoration.TEAK_DECORATION, Decoration.GILDED_DECORATION),
     STORAGE_SPACE(Scenery.STORAGE_SPACE_15296, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.GLOVE_RACK, Decoration.WEAPONS_RACK, Decoration.EXTRA_WEAPONS_RACK),
@@ -201,7 +201,7 @@ public enum BuildHotspot {
     STAIRS_DOWN(Scenery.STAIR_SPACE_15381, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_LOW_ANIM, Decoration.OAK_STAIRS_DOWN, Decoration.TEAK_STAIRS_DOWN, Decoration.SPIRAL_STAIRS_DOWN, Decoration.MARBLE_STAIRS_DOWN, Decoration.MARBLE_SPIRAL_DOWN),
     STAIRS_DOWN2(Scenery.STAIR_SPACE_15391, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_LOW_ANIM, Decoration.OAK_STAIRS_DOWN, Decoration.TEAK_STAIRS_DOWN, Decoration.SPIRAL_STAIRS_DOWN, Decoration.MARBLE_STAIRS_DOWN, Decoration.MARBLE_SPIRAL_DOWN),
 
-    WINDOW(Scenery.WINDOW_13830, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_WINDOW, Decoration.WHITEWASHED_STONE_WINDOW, Decoration.FREMENNIK_WINDOW, Decoration.TROPICAL_WOOD_WINDOW, Decoration.FANCY_STONE_WINDOW),
+    WINDOW(Scenery.WINDOW_13830, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_WINDOW, Decoration.WHITEWASHED_STONE_WINDOW, Decoration.FREMENNIK_WINDOW, Decoration.TROPICAL_WOOD_WINDOW, Decoration.FANCY_STONE_WINDOW),
 
     FLATPACK(38427, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK),
     ;

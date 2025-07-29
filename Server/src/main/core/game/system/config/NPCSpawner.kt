@@ -54,6 +54,6 @@ class NPCSpawner {
             }
         }
 
-        log(this::class.java, Log.FINE, "Spawned $count NPCs.")
+        log(this::class.java, Log.DEBUG, "Spawned $count NPC spawns.")
     }
 }

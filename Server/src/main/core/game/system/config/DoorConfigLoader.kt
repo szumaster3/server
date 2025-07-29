@@ -41,7 +41,7 @@ class DoorConfigLoader {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count door configs.")
+        log(this::class.java, Log.DEBUG, "Parsed $count door configs.")
     }
 
     class Door(

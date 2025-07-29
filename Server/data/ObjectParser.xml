@@ -91,4 +91,182 @@
     <ObjectAction mode="remove" id="5347" x="2078" y="4468" z="0"/>
     <ObjectAction mode="remove" id="5347" x="2085" y="4472" z="0"/>
     <ObjectAction mode="remove" id="5348" x="2078" y="4464" z="0"/>
+
+    <!-- Aggie Puzzle area - Swept Away quest -->
+    <ObjectAction mode="add" id="39363" x="3294" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39364" x="3295" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39365" x="3296" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39366" x="3297" y="4515" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39367" x="3298" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39368" x="3299" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39369" x="3300" y="4515" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39370" x="3301" y="4515" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39371" x="3293" y="4514" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39372" x="3292" y="4514" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39373" x="3292" y="4513" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39374" x="3294" y="4514" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39375" x="3295" y="4514" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39376" x="3295" y="4513" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39377" x="3297" y="4514" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39378" x="3296" y="4514" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39379" x="3296" y="4513" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39380" x="3298" y="4514" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39381" x="3299" y="4514" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39382" x="3299" y="4513" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39383" x="3301" y="4514" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39384" x="3300" y="4514" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39385" x="3300" y="4513" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39386" x="3292" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39387" x="3293" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39388" x="3294" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39389" x="3295" y="4512" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39390" x="3296" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39391" x="3297" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39392" x="3298" y="4512" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39393" x="3299" y="4512" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39394" x="3291" y="4511" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39395" x="3290" y="4511" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39396" x="3290" y="4510" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39397" x="3292" y="4511" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39398" x="3293" y="4511" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39399" x="3293" y="4510" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39400" x="3295" y="4511" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39401" x="3294" y="4511" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39402" x="3294" y="4510" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39403" x="3296" y="4511" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39404" x="3297" y="4511" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39405" x="3297" y="4510" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39406" x="3299" y="4511" z="0" type="22" direction="s"/>
+    <ObjectAction mode="add" id="39407" x="3298" y="4511" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39408" x="3298" y="4510" z="0" type="22" direction="n"/>
+    <ObjectAction mode="add" id="39409" x="3290" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39410" x="3291" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39411" x="3292" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39412" x="3293" y="4509" z="0" type="22" direction="w"/>
+    <ObjectAction mode="add" id="39413" x="3294" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39414" x="3295" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39415" x="3296" y="4509" z="0" type="22" direction="e"/>
+    <ObjectAction mode="add" id="39416" x="3297" y="4509" z="0" type="22" direction="w"/>
+
+    <!-- Construction house. - Temporary for tests scenery. -->
+    <ObjectAction mode="add" id="10816" x="1954" y="5096" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1957" y="5096" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1959" y="5098" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1959" y="5101" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1957" y="5103" z="0" type="0" direction="sw"/>
+    <ObjectAction mode="add" id="10816" x="1954" y="5103" z="0" type="0" direction="sw"/>
+
+    <ObjectAction mode="add" id="10816" x="1952" y="5101" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1952" y="5098" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="13016" x="1952" y="5100" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="13015" x="1952" y="5099" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="13016" x="1955" y="5096" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="13015" x="1956" y="5096" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="13015" x="1959" y="5100" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="13016" x="1959" y="5099" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1949" y="5095" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1946" y="5095" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1944" y="5093" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1944" y="5090" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="13015" x="1944" y="5091" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="13016" x="1944" y="5092" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="10816" x="1946" y="5088" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1949" y="5088" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="13015" x="1948" y="5088" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="13016" x="1947" y="5088" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1951" y="5090" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1951" y="5093" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="13015" x="1951" y="5092" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="13016" x="1951" y="5091" z="0" type="0" direction="ne"/>
+
+
+    <ObjectAction mode="add" id="10816" x="1936" y="5101" z="0" type="0" direction="nw"/>
+    <ObjectAction mode="add" id="10816" x="1936" y="5098" z="0" type="0" direction="nw"/>
+
+    <ObjectAction mode="add" id="10816" x="1943" y="5098" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1943" y="5101" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1941" y="5103" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1938" y="5103" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1935" y="5106" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1935" y="5109" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1933" y="5111" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1930" y="5111" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1928" y="5109" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1928" y="5106" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="10816" x="1930" y="5104" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1933" y="5104" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1927" y="5101" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1927" y="5098" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1925" y="5103" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1922" y="5103" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1920" y="5101" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1920" y="5098" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="10816" x="1922" y="5096" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1925" y="5096" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1928" y="5093" z="0" type="0" direction="nw"/>
+    <ObjectAction mode="add" id="10816" x="1928" y="5090" z="0" type="0" direction="nw"/>
+
+    <ObjectAction mode="add" id="10816" x="1930" y="5088" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1933" y="5088" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1935" y="5090" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1935" y="5093" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1933" y="5095" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1930" y="5095" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1936" y="5114" z="0" type="0" direction="nw"/>
+    <ObjectAction mode="add" id="10816" x="1936" y="5117" z="0" type="0" direction="nw"/>
+
+    <ObjectAction mode="add" id="10816" x="1938" y="5112" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1941" y="5112" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1943" y="5114" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1943" y="5117" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1941" y="5119" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1938" y="5119" z="0" type="0" direction="n"/>
+
+    <ObjectAction mode="add" id="10816" x="1944" y="5109" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1944" y="5106" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="10816" x="1946" y="5104" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1949" y="5104" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1951" y="5106" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1951" y="5109" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1952" y="5101" z="0" type="0" direction="e"/>
+    <ObjectAction mode="add" id="10816" x="1952" y="5098" z="0" type="0" direction="e"/>
+
+    <ObjectAction mode="add" id="10816" x="1954" y="5096" z="0" type="0" direction="w"/>
+    <ObjectAction mode="add" id="10816" x="1957" y="5096" z="0" type="0" direction="w"/>
+
+    <ObjectAction mode="add" id="10816" x="1959" y="5098" z="0" type="0" direction="ne"/>
+    <ObjectAction mode="add" id="10816" x="1959" y="5101" z="0" type="0" direction="ne"/>
+
+    <ObjectAction mode="add" id="10816" x="1957" y="5103" z="0" type="0" direction="n"/>
+    <ObjectAction mode="add" id="10816" x="1954" y="5103" z="0" type="0" direction="n"/>
 </parsing>

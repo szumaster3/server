@@ -48,7 +48,7 @@ class DropTableParser {
             }
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count drop tables.")
+        log(this::class.java, Log.DEBUG, "Parsed $count drop tables.")
     }
 
     private fun parseTable(

@@ -662,6 +662,69 @@ object RegionManager {
     }
 
     /**
+     * Gets a list of scenery objects around the given entity within a specified distance.
+     *
+     * @param entity The entity to get scenery near.
+     * @param distance The maximum distance from the entity to search.
+     * @return A list of scenery objects within the given distance.
+     */
+    @JvmStatic
+    fun getLocalScenery(entity: Entity, distance: Int): List<Scenery> {
+        return getLocalScenery(entity.location, distance)
+    }
+    /**
+     * Gets a list of scenery objects around the given entity within a default distance.
+     *
+     * @param entity The entity to get scenery near.
+     * @return A list of scenery objects within the default distance.
+     */
+    @JvmStatic
+    fun getLocalScenery(entity: Entity): List<Scenery> {
+        val defaultDistance = 15
+        return getLocalScenery(entity.location, defaultDistance)
+    }
+
+    /**
+     * Gets a list of scenery objects around a specified location within a given distance.
+     *
+     * @param location The center location to search around.
+     * @param distance The radius distance to search within.
+     * @return A list of scenery objects within the specified distance.
+     */
+    @JvmStatic
+    fun getLocalScenery(location: Location, distance: Int): List<Scenery> {
+        val sceneries = LinkedList<Scenery>()
+
+
+        for (dx in -distance..distance) {
+            for (dy in -distance..distance) {
+                val checkLoc = location.transform(dx, dy, 0)
+                val scenery = RegionManager.getObject(checkLoc)
+                if (scenery != null && scenery.location.withinDistance(location, distance)) {
+                    sceneries.add(scenery)
+                }
+            }
+        }
+        return sceneries
+    }
+
+    /**
+     * Gets a list of scenery objects surrounding the given node within a specified distance,
+     * optionally ignoring certain scenery objects.
+     *
+     * @param node The node around which to search for scenery.
+     * @param distance The radius distance to search within (default is 2).
+     * @param ignore Optional scenery objects to exclude from the result.
+     * @return A filtered list of surrounding scenery objects.
+     */
+    @JvmStatic
+    fun getSurroundingScenery(node: Node, distance: Int = 2, vararg ignore: Scenery): List<Scenery> {
+        val allScenery = getLocalScenery(node.location, distance)
+        val ignoreSet = ignore.toSet()
+        return allScenery.filter { it !in ignoreSet }
+    }
+
+    /**
      * Gets a random teleport location in the radius around the given location.
      * @param location The centre location.
      * @param radius The radius.

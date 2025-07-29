@@ -93,7 +93,7 @@ class MusicConfigLoader {
                 }
                 count++
             }
-            log(this::class.java, Log.FINE, "Parsed $count music configs.")
+            log(this::class.java, Log.DEBUG, "Parsed $count music configs.")
         }
     }
 }

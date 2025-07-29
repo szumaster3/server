@@ -11,25 +11,25 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionChunk;
 import core.plugin.Initializable;
+import core.tools.Log;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents the build room dialogue.
  */
 @Initializable
 public final class BuildRoomDialogue extends Dialogue {
-
+    private List<Scenery> boundaries = new ArrayList<>();
     private Scenery door;
-
     private Direction[] directions;
-
     private boolean[] exits;
-
     private int index;
-    private List<Scenery> boundaries = new ArrayList<>(20);
     private Room room;
     private int roomX;
     private int roomY;
@@ -117,8 +117,8 @@ public final class BuildRoomDialogue extends Dialogue {
             }
         }
         options("Rotate clockwise", "Rotate anticlockwise", "Build", "Cancel");
-        stage = 1;
         drawGhostRoom();
+        stage = 1;
         return true;
     }
 
@@ -136,8 +136,8 @@ public final class BuildRoomDialogue extends Dialogue {
 
     @Override
     public boolean close() {
-        for (Scenery scenery : boundaries) {
-            SceneryBuilder.remove(scenery);
+        for (Scenery object : boundaries) {
+            SceneryBuilder.remove(object);
         }
         boundaries.clear();
         return super.close();
@@ -150,8 +150,8 @@ public final class BuildRoomDialogue extends Dialogue {
                 switch (buttonId) {
                     case 1:
                     case 2:
-                        rotate(buttonId == 2);
                         options("Rotate clockwise", "Rotate anticlockwise", "Build", "Cancel");
+                        rotate(buttonId == 2);
                         return true;
                     case 3:
                         if (player.getInventory().remove(new Item(995, room.getProperties().getCost()))) {
@@ -180,29 +180,60 @@ public final class BuildRoomDialogue extends Dialogue {
     }
 
     private void rotate(boolean counter) {
-        Direction direction = null;
-        while ((direction = directions[index = (index + (counter ? 3 : 1)) % 4]) == null) {
-        }
+        final int totalDirections = directions.length;
+        int attempts = 0;
+
+        do {
+            index = (index + (counter ? -1 : 1) + totalDirections) % totalDirections;
+            attempts++;
+            if (attempts > totalDirections) {
+                log(this.getClass(), Log.DEBUG, "Direction = [null] Cannot rotate.");
+                return;
+            }
+        } while (directions[index] == null);
+        Direction direction = directions[index];
         room.setRotation(direction);
         drawGhostRoom();
     }
 
+    /**
+     * Draws the current boundaries of the room to build.
+     */
     private void drawGhostRoom() {
         for (Scenery scenery : boundaries) {
             SceneryBuilder.remove(scenery);
         }
-        int rotation = directions[index].toInteger();
         boundaries.clear();
-        Location base = player.getViewport().getRegion().getBaseLocation().transform(roomX << 3, roomY << 3, player.getLocation().getZ());
+
+        int rotation = directions[index].toInteger();
+        Location base = player.getViewport().getRegion().getBaseLocation()
+                .transform(roomX << 3, roomY << 3, player.getLocation().getZ());
+
+        Scenery[][] objects = room.getChunk().getObjects();
+
+        int plane = roomZ;
+
+        if (plane < 0 || plane >= objects.length) {
+            plane = 0;
+        }
+
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
-                Scenery[] sceneries = room.getChunk().getObjects(x, y);
-                for (Scenery scenery : sceneries) {
-                    if (scenery != null && scenery.getDefinition().hasAction("build")) {
-                        int[] pos = RegionChunk.getRotatedPosition(x, y, scenery.getDefinition().sizeX, scenery.getDefinition().sizeY, scenery.getRotation(), rotation);
-                        Scenery obj = scenery.transform(scenery.getId(), (scenery.getRotation() + rotation) % 4, base.transform(pos[0], pos[1], 0));
-                        boundaries.add(SceneryBuilder.add(obj));
-                    }
+                Scenery scenery = objects[x][y];
+                if (scenery != null && scenery.getDefinition().hasAction("build")) {
+                    int[] pos = RegionChunk.getRotatedPosition(
+                            x, y,
+                            scenery.getDefinition().sizeX,
+                            scenery.getDefinition().sizeY,
+                            scenery.getRotation(),
+                            rotation
+                    );
+                    Scenery obj = scenery.transform(
+                            scenery.getId(),
+                            (scenery.getRotation() + rotation) % 4,
+                            base.transform(pos[0], pos[1], 0)
+                    );
+                    boundaries.add(SceneryBuilder.add(obj));
                 }
             }
         }

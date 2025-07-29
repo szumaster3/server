@@ -38,6 +38,6 @@ class InterfaceConfigParser {
             count++
         }
 
-        log(this::class.java, Log.FINE, "Parsed $count interface configs.")
+        log(this::class.java, Log.DEBUG, "Parsed $count interface configs.")
     }
 }

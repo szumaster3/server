@@ -32,6 +32,41 @@ import org.rs.consts.Items
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+        define(
+            name = "setdeco",
+            privilege = Privilege.ADMIN,
+            usage = "::setdeco <hotspotIndex> <decorationIndex>",
+            description = "Sets decoration index for a hotspot in your current room."
+        ) { player, args ->
+
+            if (args.size < 3) {
+                player.sendMessage("Usage: ::setdeco <hotspotIndex> <decorationIndex>")
+                return@define
+            }
+
+            val hotspotIndex = args[1].toIntOrNull()
+            val decorationIndex = args[2].toIntOrNull()
+
+            if (hotspotIndex == null || decorationIndex == null) {
+                player.sendMessage("Both hotspotIndex and decorationIndex must be numbers.")
+                return@define
+            }
+
+            val room = player.houseManager.getRoom(player.location)
+            if (room == null) {
+                player.sendMessage("You are not currently in a room.")
+                return@define
+            }
+
+            val hotspots = room.hotspots
+            if (hotspotIndex !in hotspots.indices) {
+                player.sendMessage("Invalid hotspot index. Valid range: 0 to ${hotspots.size - 1}.")
+                return@define
+            }
+
+            hotspots[hotspotIndex].decorationIndex = decorationIndex
+            player.sendMessage("Decoration index of hotspot $hotspotIndex set to $decorationIndex.")
+        }
 
         /*
          * Command to complete tutorial.

@@ -17,7 +17,7 @@ class UpdateSceneGraph : OutgoingPacket<OutgoingContext.SceneGraph> {
         val player = context.player
         buffer.cypherOpcode(player.session.getIsaacPair()!!.output)
         player.playerFlags.lastSceneGraph = player.location
-        buffer.putShortA(player.location.getSceneX())
+        buffer.putShortA(player.location.sceneX)
         for (regionX in (player.location.regionX - 6) / 8..((player.location.regionX + 6) / 8)) {
             for (regionY in (player.location.regionY - 6) / 8..((player.location.regionY + 6) / 8)) {
                 val keys = getRegionXTEA(regionX shl 8 or regionY)
@@ -31,7 +31,7 @@ class UpdateSceneGraph : OutgoingPacket<OutgoingContext.SceneGraph> {
         buffer.putS(player.location.z)
         buffer.putShort(player.location.regionX)
         buffer.putShortA(player.location.regionY)
-        buffer.putShortA(player.location.getSceneY())
+        buffer.putShortA(player.location.sceneY)
         player.details.session.write(buffer)
     }
 }

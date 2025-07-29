@@ -31,15 +31,15 @@ class RemovalDialogue : Dialogue {
         sendDialogueOptions(
             player,
             "Remove the " + (
-                if (room != null) {
-                    room!!
-                        .properties.name
-                        .lowercase()
-                        .replace("_", " ")
-                } else {
-                    "room"
-                }
-            ) + "?",
+                    if (room != null) {
+                        room!!
+                            .properties.name
+                            .lowercase()
+                            .replace("_", " ")
+                    } else {
+                        "room"
+                    }
+                    ) + "?",
             "Yes",
             "No",
         )

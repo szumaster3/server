@@ -48,13 +48,13 @@ class DoorPlugin : OptionHandler() {
         val second = DoorActionHandler.getSecondDoor(node)
 
         if (second != null) {
-            DoorActionHandler.open(
+              DoorActionHandler.open(
                 node.asScenery(),
                 second,
                 getReplaceId(node.asScenery()),
                 getReplaceId(second),
                 true,
-                500,
+                -1,
                 false,
             )
         }
@@ -73,6 +73,8 @@ class DoorPlugin : OptionHandler() {
     companion object {
         val REPLACEMENT =
             arrayOf(
+                intArrayOf(13100, 13104),
+                intArrayOf(13103, 13102),
                 intArrayOf(13100, 13102),
                 intArrayOf(13101, 13103),
                 intArrayOf(13006, 13008),
