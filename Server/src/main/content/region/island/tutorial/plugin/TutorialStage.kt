@@ -30,6 +30,8 @@ object TutorialStage {
     @JvmField val STARTER_BANK = Item(Items.COINS_995, 25)
     @JvmField val STARTER_PACK = arrayOf(Item(Items.BRONZE_AXE_1351, 1), Item(Items.TINDERBOX_590, 1), Item(Items.SMALL_FISHING_NET_303, 1), Item(Items.SHRIMPS_315, 1), Item(Items.BUCKET_1925, 1), Item(Items.EMPTY_POT_1931, 1), Item(Items.BREAD_2309, 1), Item(Items.BRONZE_PICKAXE_1265, 1), Item(Items.BRONZE_DAGGER_1205, 1), Item(Items.BRONZE_SWORD_1277, 1), Item(Items.WOODEN_SHIELD_1171, 1), Item(Items.SHORTBOW_841, 1), Item(Items.BRONZE_ARROW_882, 25), Item(Items.AIR_RUNE_556, 25), Item(Items.MIND_RUNE_558, 15), Item(Items.WATER_RUNE_555, 6), Item(Items.EARTH_RUNE_557, 4), Item(Items.BODY_RUNE_559, 2))
 
+    // TODO: CLEAN & REPLACE WITH keepDialogueAlive
+
     @JvmStatic
     fun rollback(player: Player) {
         val stage = getAttribute(player, TUTORIAL_STAGE, -1)

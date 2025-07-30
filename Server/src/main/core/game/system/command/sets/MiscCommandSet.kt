@@ -264,51 +264,85 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
-        fun showCommandsBook(player: Player, page: Int = 0) {
-            val allCommands = CommandMapping.getCommands()
-                .filter { it.privilege.ordinal <= player.rights.ordinal }
-
-            if (allCommands.isEmpty()) {
-                sendMessage(player, "You have no available commands.")
-                return
-            }
-
-            val chunked = allCommands.chunked(15)
-            if (page < 0 || page >= chunked.size) {
-                sendMessage(player, "Invalid page number. Use ::commands ${page.coerceIn(1, chunked.size)}")
-                return
-            }
-
-            val entries = chunked[page]
-            val leftLines = ArrayList<String>()
-            val rightLines = ArrayList<String>()
-
-            for (command in entries) {
-                val icon = if (command.privilege.ordinal > 0) "<img=${command.privilege.ordinal - 1}> " else ""
-                val title = "$icon::${command.name}"
-                val usage = if (command.usage.isNotBlank()) "Usage: ${command.usage}" else ""
-                val desc = if (command.description.isNotBlank()) command.description else "No description."
-
-                leftLines.add(title + if (usage.isNotBlank()) "\n$usage" else "")
-                rightLines.add(desc)
-            }
-
-            showGeBook(
-                player,
-                "Commands (${page + 1}/${chunked.size})",
-                leftLines,
-                rightLines
-            )
-        }
-
         define(
             name = "commands",
             privilege = Privilege.ADMIN,
-            usage = "::commands <page>",
-            description = "Displays a list of all available commands.",
+            usage = "::commands <lt>page<gt>",
+            description = "Lists all the commands.",
         ) { player, args ->
             val page = if (args.size > 1) (args[1].toIntOrNull() ?: 1) - 1 else 0
-            showCommandsBook(player, page)
+            var lineid = 11
+            var pages = CommandMapping.getPageIndices(player.rights.ordinal)
+            var end = if (page < (pages.size - 1)) pages[page + 1] else CommandMapping.getCommands().size
+
+            player.interfaceManager.close()
+
+            if (page < 0) {
+                reject(player, "Usage: ::commands <lt>page<gt>")
+            }
+
+            if (page > pages.size) {
+                reject(player, "That page number is too high, you don't have access to that many.")
+            }
+
+            for (i in 0..310) {
+                sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, i)
+            }
+
+            sendString(
+                player,
+                "Commands" +
+                        if (pages.size >
+                            1
+                        ) {
+                            " (${page + 1}/${pages.size})"
+                        } else {
+                            ""
+                        },
+                Components.QUESTJOURNAL_SCROLL_275,
+                2,
+            )
+
+            for (i in pages[page] until end) {
+                var command = CommandMapping.getCommands()[i]
+                var title = command.name
+                var rights = command.privilege.ordinal
+                var icon = rights - 1
+
+                if (rights > player.rights.ordinal) continue
+
+                if (rights > 0) {
+                    title = "(<img=$icon>) $title"
+                }
+
+                sendString(player, title, Components.QUESTJOURNAL_SCROLL_275, lineid++)
+
+                if (command.usage.isNotEmpty()) {
+                    sendString(player, "Usage: ${command.usage}", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                }
+
+                if (command.description.isNotEmpty()) {
+                    sendString(player, command.description, Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                }
+
+                sendString(
+                    player,
+                    "<str>-------------------------------</str>",
+                    Components.QUESTJOURNAL_SCROLL_275,
+                    lineid++,
+                )
+
+                if (lineid > 306) {
+                    sendString(
+                        player,
+                        "To view the next page, use ::commands ${page + 2}",
+                        Components.QUESTJOURNAL_SCROLL_275,
+                        lineid,
+                    )
+                    break
+                }
+            }
+            openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
         }
 
         define(
