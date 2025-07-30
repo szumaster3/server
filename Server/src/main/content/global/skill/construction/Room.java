@@ -53,7 +53,7 @@ public final class Room {
 	/**
 	 * The current rotation of the room.
 	 */
-	private Direction rotation = Direction.NORTH;
+	private Integer rotation = 0;
 	
 	/**
 	 * Constructs a new {@code Room} {@code Object}.
@@ -147,13 +147,13 @@ public final class Room {
 				else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
 					chunk.add(object.transform(house.getStyle().getWindow().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
 				}
-				int[] pos = RegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
+				int[] pos = RegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation);
 				spot.setCurrentX(pos[0]);
 				spot.setCurrentY(pos[1]);
 			}
 		}
-		if (rotation != Direction.NORTH && chunk.getRotation() == 0) {
-			chunk.rotate(rotation);
+		if (chunk.getRotation() == 0 && rotation >= 1 && rotation <= 3) {
+			//chunk.rotate(Direction.get(rotation));
 		}
 		if (!house.isBuildingMode()) {
 			placeDoors(housePlane, house, chunk);
@@ -316,11 +316,11 @@ public final class Room {
 	 * Gets the exit directions.
 	 * @return The directions at which you can exit the room (0=east, 1=south, 2=west, 3=north).
 	 */
-	public boolean[] getExits(Direction rotation) {
+	public boolean[] getExits(Integer rotation) {
 		boolean[] exits = properties.getExits();
-		if (chunk.getRotation() != rotation.toInteger()) {
+		if (chunk.getRotation() != rotation) {
 			boolean[] exit = new boolean[exits.length];
-			int offset = rotation.toInteger() - chunk.getRotation();
+			int offset = rotation - chunk.getRotation();
 			for (int i = 0; i < 4; i++) {
 				exit[(i + offset) % 4] = exits[i];
 			}
@@ -409,15 +409,16 @@ public final class Room {
 	 * Sets the room rotation.
 	 * @param rotation The rotation.
 	 */
-	public void setRotation(Direction rotation) {
+	public void setRotation(Integer rotation) {
 		this.rotation = rotation;
 	}
 
 	/**
 	 * Gets the rotation.
+	 *
 	 * @return The rotation.
 	 */
-	public Direction getRotation() {
+	public Integer getRotation() {
 		return rotation;
 	}
 	

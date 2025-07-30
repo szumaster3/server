@@ -106,7 +106,7 @@ public final class BuildRoomDialogue extends Dialogue {
             return true;
         }
         this.room = Room.create(player, props);
-        this.exits = room.getExits(Direction.NORTH);
+        this.exits = room.getExits();
         this.index = 0;
         this.directions = BuildingUtils.getAvailableRotations(player, exits, roomZ, roomX, roomY);
         while (directions[index] == null) {
@@ -155,7 +155,7 @@ public final class BuildRoomDialogue extends Dialogue {
                         return true;
                     case 3:
                         if (player.getInventory().remove(new Item(995, room.getProperties().getCost()))) {
-                            room.setRotation(directions[index]);
+                            room.setRotation(directions[index].toInteger());
                             boolean[] exit = new boolean[exits.length];
                             for (int i = 0; i < exit.length; i++) {
                                 exit[(i + index) % exit.length] = exits[i];
@@ -191,7 +191,7 @@ public final class BuildRoomDialogue extends Dialogue {
                 return;
             }
         } while (directions[index] == null);
-        Direction direction = directions[index];
+        Integer direction = directions[index].toInteger();
         room.setRotation(direction);
         drawGhostRoom();
     }

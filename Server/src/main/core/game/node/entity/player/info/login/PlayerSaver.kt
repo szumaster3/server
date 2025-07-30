@@ -223,7 +223,7 @@ class PlayerSaver(val player: Player) {
                         r.addProperty("x", x.toString())
                         r.addProperty("y", y.toString())
                         r.addProperty("properties", yr.properties.ordinal.toString())
-                        r.addProperty("rotation", yr.rotation.toInteger().toString())
+                        r.addProperty("rotation", yr.rotation.toString())
                         val hotspots = JsonArray()
                         var hotspotIndex = 0
                         yr.hotspots.forEach {

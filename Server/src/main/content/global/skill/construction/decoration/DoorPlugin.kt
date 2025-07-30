@@ -35,13 +35,11 @@ class DoorPlugin : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         val `object` = node as Scenery
         val second = DoorActionHandler.getSecondDoor(`object`)
-        if(option == "close") {
-            if(second != null)
-            DoorActionHandler.close(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
-        } else {
-            if(second != null)
-        DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
-        }
+        if(second != null && option == "open")
+            DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, -1, false)
+         else
+             DoorActionHandler.close(`object`, second, getReplaceId(`object`), getReplaceId(second!!.asScenery().wrapper), true, -1, false)
+
         return true
     }
 

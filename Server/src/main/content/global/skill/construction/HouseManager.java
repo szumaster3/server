@@ -129,7 +129,7 @@ public final class HouseManager {
 
             Room room = rooms[z][x][y] = new Room(RoomProperties.values()[rm.get("properties").getAsInt()]);
             room.configure(style);
-            room.setRotation(Direction.get(rm.get("rotation").getAsInt()));
+            room.setRotation(rm.get("rotation").getAsInt());
 
             JsonArray hotspots = rm.getAsJsonArray("hotspots");
             for (JsonElement hElem : hotspots) {
@@ -528,27 +528,27 @@ public final class HouseManager {
         }
         int chunkX = object.getLocation().getChunkOffsetX();
         int chunkY = object.getLocation().getChunkOffsetY();
-        switch(room.getRotation()){
-            case WEST: {
+        switch (room.getRotation()) {
+            case 3: { // WEST
                 int tempChunk = chunkY;
                 chunkY = 7 - chunkX;
                 chunkX = tempChunk;
                 break;
             }
-            case EAST: {
-                //x = y, y = x, x = 7 - y
+            case 1: { // EAST
                 int tempChunk = chunkX;
                 chunkX = 7 - chunkY;
                 chunkY = tempChunk;
                 break;
             }
-            case SOUTH: {
+            case 2: { // SOUTH
                 chunkX = 7 - chunkX;
                 chunkY = 7 - chunkY;
                 break;
             }
             default: {
 
+                break;
             }
         }
         for (Hotspot h : room.getHotspots()) {

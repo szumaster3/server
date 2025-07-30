@@ -288,8 +288,8 @@ public final class StaircasePlugin extends OptionHandler {
                                 Room r = Room.create(player, RoomProperties.OUBILETTE);
                                 Direction[] dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                                 for (Direction d : dirs) {
-                                    if (d == room.getRotation()) {
-                                        r.setRotation(d);
+                                    if (d.toInteger() == room.getRotation()) {
+                                        r.setRotation(d.toInteger());
                                         Hotspot stairs = room.getStairs();
                                         int index = stairs != null ? stairs.getDecorationIndex() : -1;
                                         BuildingUtils.buildRoom(player, r, plane, roomX, roomY, r.getExits(), true);
@@ -324,8 +324,8 @@ public final class StaircasePlugin extends OptionHandler {
                     Room r = Room.create(player, props);
                     Direction[] dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                     for (Direction d : dirs) {
-                        if (d == room.getRotation()) {
-                            r.setRotation(d);
+                        if (d.toInteger() == room.getRotation()) {
+                            r.setRotation(d.toInteger());
                             Hotspot stairs = room.getStairs();
                             int index = stairs != null ? stairs.getDecorationIndex() : -1;
                             r.getStairs().setDecorationIndex(index);
@@ -343,8 +343,8 @@ public final class StaircasePlugin extends OptionHandler {
                             r = Room.create(player, RoomProperties.DUNGEON_STAIRS);
                             dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                             for (Direction d : dirs) {
-                                if (d == room.getRotation()) {
-                                    r.setRotation(d);
+                                if (d.toInteger() == room.getRotation()) {
+                                    r.setRotation(d.toInteger());
                                     Hotspot stairs = room.getStairs();
                                     int index = stairs != null ? stairs.getDecorationIndex() : -1;
                                     BuildingUtils.buildRoom(player, r, plane, roomX, roomY, r.getExits(), true);
@@ -374,8 +374,8 @@ public final class StaircasePlugin extends OptionHandler {
                             r = Room.create(player, RoomProperties.THRONE_ROOM);
                             dirs = BuildingUtils.getAvailableRotations(player, r.getExits(), plane, roomX, roomY);
                             for (Direction d : dirs) {
-                                if (d == room.getRotation()) {
-                                    r.setRotation(d);
+                                if (d.toInteger() == room.getRotation()) {
+                                    r.setRotation(d.toInteger());
                                     Hotspot stairs = room.getStairs();
                                     int index = stairs != null ? stairs.getDecorationIndex() : -1;
                                     BuildingUtils.buildRoom(player, r, plane, roomX, roomY, r.getExits(), true);
