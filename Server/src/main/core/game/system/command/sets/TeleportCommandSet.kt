@@ -9,6 +9,9 @@ import core.game.world.repository.Repository
 import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @Initializable
 class TeleportCommandSet : CommandSet(Privilege.ADMIN) {
@@ -205,23 +208,44 @@ class TeleportCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::findobjs <lt>REGION ID<gt> <lt>SCENERY ID<gt>",
             description = "Finds all locations of scenery objects of id.",
         ) { player, args ->
-            if (args.size < 4) reject(player, "Usage: region_id scenery_id")
+            if (args.size < 4) reject(player, "Usage: region_id from scenery_id to scenery_id")
             val regionId = args[1].toInt()
             val sceneryId = args[2].toInt()
             val sceneryIdEnd = args[3].toInt()
 
             val region = RegionManager.forId(regionId)
+            val exportDir = File("dumps")
+            if (!exportDir.exists()) exportDir.mkdirs()
+
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM_HH-mm"))
+            val filename = "region_${regionId}_obj_dumps_${sceneryId}-${sceneryIdEnd}_$timestamp.txt"
+            val dump = File(exportDir, filename)
 
             GlobalScope.launch {
-                for (plane in region.planes) {
-                    for (objects in plane.objects!!.filterNotNull()) {
-                        for (parent in objects.filterNotNull()) {
-                            if (parent.id in sceneryId..sceneryIdEnd) {
-                                println(parent.location)
+                val writer = dump.bufferedWriter()
+                for (plane in region.planes)
+                {
+                    for (objects in plane.objects!!.filterNotNull())
+                    {
+                        for (parent in objects.filterNotNull())
+                        {
+                            if (parent.id in sceneryId..sceneryIdEnd)
+                            {
+                                val loc = parent.location
+                                val text = buildString {
+                                    appendLine("id=${parent.id}, name=${parent.name}")
+                                    appendLine("wrapper=${parent.wrapper}")
+                                    appendLine("chunkX=${loc.chunkX}, chunkY=${loc.chunkY}")
+                                    appendLine("config=${parent.definition.configFile}, varbit=${parent.definition.varbitID}")
+                                    appendLine()
+                                }
+                                writer.write(text)
                             }
                         }
                     }
                 }
+                writer.close()
+                player.debug("Saved: ${dump.path}")
             }
         }
     }
