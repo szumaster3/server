@@ -294,6 +294,8 @@ object Graphics {
     const val UNICORN_STALLION_SPECIAL_MOVE_1298 = 1298
     const val WOLPERTINGER_SPECIAL_MOVE_1306 = 1306
     const val WAR_TORTOISE_SPECIAL_MOVE_1310 = 1310
+    const val SUMMON_FAMILIAR_SMALL_1314 = 1314
+    const val SUMMON_FAMILIAR_LARGE_1315 = 1315
 
     /*
      * Not sorted.

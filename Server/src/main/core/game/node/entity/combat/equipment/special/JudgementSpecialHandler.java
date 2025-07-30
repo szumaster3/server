@@ -26,7 +26,7 @@ public final class JudgementSpecialHandler extends MeleeSwingHandler implements 
 
     private static final int SPECIAL_ENERGY = 50;
     private static final Animation ANIMATION = new Animation(7074, Priority.HIGH);
-    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.ARMADYL_GODSWORD_SPECIAL_ATTACK_1222);
+    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.ARMADYL_GODSWORD_SPECIAL_1222);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

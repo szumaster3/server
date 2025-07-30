@@ -28,7 +28,7 @@ public final class HealingBladeSpecialHandler extends MeleeSwingHandler implemen
 
     private static final Animation ANIMATION = new Animation(7071, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.SARADOMIN_GODSWORD_SPECIAL_ATTACK_1220);
+    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.SARADOMIN_GODSWORD_SPECIAL_1220);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

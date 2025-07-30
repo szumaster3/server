@@ -28,7 +28,7 @@ public final class IceCleaveSpecialHandler extends MeleeSwingHandler implements 
 
     private static final Animation ANIMATION = new Animation(7070, Priority.HIGH);
 
-    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.ZAMORAK_GODSWORD_SPECIAL_ATTACK_1221);
+    private static final Graphics GRAPHICS = new Graphics(org.rs.consts.Graphics.ZAMORAK_GODSWORD_SPECIAL_1221);
 
     @Override
     public Object fireEvent(String identifier, Object... args) {

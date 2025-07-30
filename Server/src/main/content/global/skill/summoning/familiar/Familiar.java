@@ -46,11 +46,11 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
     /**
      * The constant small summon graphics.
      */
-    protected static final Graphics SMALL_SUMMON_GRAPHICS = Graphics.create(org.rs.consts.Graphics.SMALL_BLUE_SUMMON_FAMILIAR_GRAPHIC_1314);
+    protected static final Graphics SMALL_SUMMON_GRAPHICS = Graphics.create(org.rs.consts.Graphics.SUMMON_FAMILIAR_SMALL_1314);
     /**
      * The constant large summon graphics.
      */
-    protected static final Graphics LARGE_SUMMON_GRAPHICS = Graphics.create(org.rs.consts.Graphics.BIG_BLUE_SUMMON_FAMILIAR_GRAPHIC_1315);
+    protected static final Graphics LARGE_SUMMON_GRAPHICS = Graphics.create(org.rs.consts.Graphics.SUMMON_FAMILIAR_LARGE_1315);
     /**
      * The constant special animation.
      */
