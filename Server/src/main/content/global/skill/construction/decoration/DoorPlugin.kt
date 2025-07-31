@@ -37,9 +37,17 @@ class DoorPlugin : OptionHandler() {
         val second = DoorActionHandler.getSecondDoor(`object`)
         if(second != null && option == "open")
             DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, -1, false)
-         else
-             DoorActionHandler.close(`object`, second, getReplaceId(`object`), getReplaceId(second!!.asScenery().wrapper), true, -1, false)
-
+         else if(second != null && option == "close") {
+            DoorActionHandler.close(
+                `object`,
+                second,
+                getReplaceId(`object`),
+                getReplaceId(second.asScenery().wrapper),
+                true,
+                -1,
+                false
+            )
+        }
         return true
     }
 

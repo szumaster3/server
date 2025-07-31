@@ -153,7 +153,7 @@ public final class Room {
 			}
 		}
 		if (chunk.getRotation() == 0 && rotation >= 1 && rotation <= 3) {
-			//chunk.rotate(Direction.get(rotation));
+			chunk.rotate(Direction.get(rotation));
 		}
 		if (!house.isBuildingMode()) {
 			placeDoors(housePlane, house, chunk);
