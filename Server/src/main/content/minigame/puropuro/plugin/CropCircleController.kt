@@ -6,12 +6,15 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.node.scenery.Scenery
+import core.game.world.GameWorld
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import org.rs.consts.Sounds
 
 class CropCircleController :
     TickListener,
     InteractionListener {
+    private val activeScenery = mutableMapOf<Location, Scenery>()
     override fun tick() {
         if (getWorldTicks() < nextCircle) return
         deconstructOldCircle()
@@ -19,7 +22,8 @@ class CropCircleController :
         val (name, loc) = possibleLocations.random()
         constructCircle(loc)
         sendNews("A crop circle has appeared near $name.")
-        nextCircle = getWorldTicks() + 1500
+        val ticks = if(GameWorld.settings!!.isDevMode) 100 else 1500
+        nextCircle = getWorldTicks() + ticks
         currentLocName = name
     }
 
@@ -55,16 +59,21 @@ class CropCircleController :
     }
 
     private fun constructCircle(location: Location) {
-        activeSceneries.add(addScenery(center, location, rotation = 0, type = 10))
+        RegionManager.getObject(location)?.let { activeScenery[location] = it }
+        addScenery(center, Location(location.x, location.y, location.z), rotation = 0, type = 10)
 
         for ((index, tile) in location.getSurroundingTiles().withIndex()) {
-            activeSceneries.add(addScenery(surrounding[index % 4], tile, rotation = (index / 4) * 2, type = 10))
+            RegionManager.getObject(tile)?.let { activeScenery[tile] = it }
+            addScenery(surrounding[index % 4], Location(tile.x, tile.y, tile.z), rotation = (index / 4) * 2, type = 10)
         }
     }
 
     private fun deconstructOldCircle() {
-        for (scenery in activeSceneries) removeScenery(scenery)
-        activeSceneries.clear()
+        for ((loc, originalScenery) in activeScenery) {
+            RegionManager.getObject(loc)?.let { removeScenery(it) }
+            addScenery(originalScenery.id, Location(loc.x, loc.y, loc.z), rotation = originalScenery.rotation, type = originalScenery.type)
+        }
+        activeScenery.clear()
     }
 
     private fun hasImpBox(player: Player): Boolean = inInventory(player, 10025) || inInventory(player, 10027) || inInventory(player, 10028)
@@ -83,7 +92,6 @@ class CropCircleController :
                 Pair("Southern Varrock", Location.create(3218, 3348, 0)),
                 Pair("Northern Ardougne", Location.create(2644, 3350, 0)),
             )
-        val activeSceneries = ArrayList<Scenery>()
         val surrounding = arrayOf(24984, 24985, 24986, 24987)
         val center = 24991
         val puroExit = 25014

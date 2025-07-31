@@ -15362,5 +15362,13 @@
   {
     "examine": "Contains traces of Summoning energy.",
     "ids": "42004"
+  },
+  {
+    "examine": "Mysteriously flattened wheat.",
+    "ids": "24984,24985,24986,24987"
+  },
+  {
+    "examine": "The mysterious centre of a crop circle.",
+    "ids": "24991"
   }
 ]
