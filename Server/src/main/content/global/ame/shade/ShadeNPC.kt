@@ -2,6 +2,7 @@ package content.global.ame.shade
 
 import content.global.ame.RandomEventNPC
 import core.api.utils.WeightBasedTable
+import core.api.withinDistance
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import org.rs.consts.NPCs
@@ -17,18 +18,14 @@ class ShadeNPC(
 ) : RandomEventNPC(NPCs.SHADE_425) {
     val ids = (NPCs.SHADE_425..NPCs.SHADE_430).toList()
 
-    override fun talkTo(npc: NPC) {
-        // Empty
-    }
-
     override fun init() {
         super.init()
-        val index = max(0, min(ids.size, (player.properties.combatLevel / 20) - 1))
+        val index = max(0, min(ids.size - 1, (player.properties.combatLevel / 20) - 1))
         val id = ids[index]
         this.transform(id)
+        this.setAttribute("no-spawn-return", true)
         this.attack(player)
         sendChat("Leave this place!")
-        this.isRespawn = false
     }
 
     override fun finalizeDeath(killer: Entity?) {
@@ -36,14 +33,19 @@ class ShadeNPC(
     }
 
     override fun tick() {
-        if (!player.location.withinDistance(this.location, 8)) {
+        super.tick()
+        if (!this.inCombat()) {
+            this.attack(player)
+        }
+        if (!withinDistance(player, this.location, 8)) {
             this.terminate()
         }
-        super.tick()
         if (!player.viewport.currentPlane!!.npcs
                 .contains(this)
         ) {
             this.clear()
         }
     }
+
+    override fun talkTo(npc: NPC) {}
 }

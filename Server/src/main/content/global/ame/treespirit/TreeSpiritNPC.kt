@@ -7,6 +7,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import org.rs.consts.NPCs
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * Handles the Tree Spirit event whilst cutting trees.
@@ -15,16 +16,16 @@ import kotlin.math.max
 class TreeSpiritNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.TREE_SPIRIT_438) {
-    val ids = (438..443).toList()
+    val ids = (NPCs.TREE_SPIRIT_438..NPCs.TREE_SPIRIT_443).toList()
 
     override fun init() {
         super.init()
-        val index = max(0, (player.properties.combatLevel / 20) - 1)
-        val id = ids.toList()[index]
+        val index = max(0, min(ids.size - 1, (player.properties.combatLevel / 20) - 1))
+        val id = ids[index]
         this.transform(id)
+        this.setAttribute("no-spawn-return", true)
         this.attack(player)
         sendChat("Leave these woods and never return!")
-        this.isRespawn = false
     }
 
     override fun finalizeDeath(killer: Entity?) {
@@ -32,10 +33,13 @@ class TreeSpiritNPC(
     }
 
     override fun tick() {
+        super.tick()
+        if (!this.inCombat()) {
+            this.attack(player)
+        }
         if (!withinDistance(player, this.location, 8)) {
             this.terminate()
         }
-        super.tick()
         if (!player.viewport.currentPlane!!.npcs
                 .contains(this)
         ) {
