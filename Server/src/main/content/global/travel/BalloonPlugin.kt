@@ -43,88 +43,76 @@ enum class Balloon(
 
     companion object {
         /**
-         * A map for quick lookup of [Balloon] enum instances by their NPC id.
+         * Maps NPC id to [Balloon].
          */
-        private val npcMap = values().associateBy { it.npc }
+        private val npcMap: Map<Int, Balloon> by lazy {
+            values().associateBy { it.npc }
+        }
 
         /**
-         * A button map id for balloon locations.
+         * Maps interface button to [Balloon].
          */
         private val buttonToBalloon: Map<Int, Balloon> by lazy {
             values().associateBy { it.button }
         }
 
         /**
-         * Returns the balloon location to the given interface button id.
-         *
-         * @param buttonId the ID of the interface button
-         * @return the matching [Balloon] instance or null if no match is found
+         * Gets [Balloon] for given button.
          */
         fun fromButtonId(buttonId: Int): Balloon? = buttonToBalloon[buttonId]
 
         /**
-         * A map that associates scenery object id with their balloon locations.
+         * Maps scenery to [Balloon].
          */
         private val sceneryToBalloon: Map<Int, Balloon> by lazy {
             values().associateBy { it.wrapperId }
         }
 
         /**
-         * Returns the balloon location to the given scenery id.
-         *
-         * @param id the ID of the scenery object
-         * @return the matching [Balloon] instance or null if no match is found
+         * Gets [Balloon] for given scenery.
          */
         fun fromSceneryId(id: Int): Balloon? = sceneryToBalloon[id]
 
         /**
-         * Returns the balloon location to the given npc id.
-         *
-         * @param npcId the ID of the npc
-         * @return the matching [Balloon] instance or null if no match is found
+         * Gets [Balloon] for given NPC.
          */
         fun fromNpcId(npcId: Int): Balloon? = npcMap[npcId]
 
         /**
-         * Animation map.
+         * Animation ids for balloon travel routes.
          */
-        private val size = values().size
-
-        /**
-         * Represents animation ids for balloon travel routes.
-         */
-        private val animations: Array<IntArray> = Array(size) { IntArray(size) { 0 } }.apply {
-            this[ENTRANA.ordinal][TAVERLEY.ordinal] = 5110
-            this[TAVERLEY.ordinal][ENTRANA.ordinal] = 5111
-            this[ENTRANA.ordinal][CRAFT_GUILD.ordinal] = 5112
-            this[CRAFT_GUILD.ordinal][ENTRANA.ordinal] = 5113
-            this[ENTRANA.ordinal][VARROCK.ordinal] = 5114
-            this[VARROCK.ordinal][ENTRANA.ordinal] = 5115
-            this[ENTRANA.ordinal][GRAND_TREE.ordinal] = 5116
-            this[GRAND_TREE.ordinal][ENTRANA.ordinal] = 5117
-            this[ENTRANA.ordinal][CASTLE_WARS.ordinal] = 5118
-            this[CASTLE_WARS.ordinal][ENTRANA.ordinal] = 5119
-            this[VARROCK.ordinal][CRAFT_GUILD.ordinal] = 5120
-            this[CRAFT_GUILD.ordinal][VARROCK.ordinal] = 5121
-            this[VARROCK.ordinal][TAVERLEY.ordinal] = 5122
-            this[TAVERLEY.ordinal][VARROCK.ordinal] = 5123
-            this[TAVERLEY.ordinal][CRAFT_GUILD.ordinal] = 5124
-            this[CRAFT_GUILD.ordinal][TAVERLEY.ordinal] = 5125
-            this[TAVERLEY.ordinal][CASTLE_WARS.ordinal] = 5126
-            this[CASTLE_WARS.ordinal][TAVERLEY.ordinal] = 5127
-            this[CRAFT_GUILD.ordinal][CASTLE_WARS.ordinal] = 5128
-            this[CASTLE_WARS.ordinal][CRAFT_GUILD.ordinal] = 5129
-            this[VARROCK.ordinal][CASTLE_WARS.ordinal] = 5130
-            this[CASTLE_WARS.ordinal][VARROCK.ordinal] = 5131
-            this[GRAND_TREE.ordinal][CASTLE_WARS.ordinal] = 5132
-            this[CASTLE_WARS.ordinal][GRAND_TREE.ordinal] = 5133
-            this[GRAND_TREE.ordinal][CRAFT_GUILD.ordinal] = 5134
-            this[CRAFT_GUILD.ordinal][GRAND_TREE.ordinal] = 5135
-            this[TAVERLEY.ordinal][GRAND_TREE.ordinal] = 5136
-            this[GRAND_TREE.ordinal][TAVERLEY.ordinal] = 5137
-            this[VARROCK.ordinal][GRAND_TREE.ordinal] = 5138
-            this[GRAND_TREE.ordinal][VARROCK.ordinal] = 5139
-        }
+        private val animations: Map<Pair<Balloon, Balloon>, Int> = mapOf(
+            ENTRANA to TAVERLEY to 5110,
+            TAVERLEY to ENTRANA to 5111,
+            ENTRANA to CRAFT_GUILD to 5112,
+            CRAFT_GUILD to ENTRANA to 5113,
+            ENTRANA to VARROCK to 5114,
+            VARROCK to ENTRANA to 5115,
+            ENTRANA to GRAND_TREE to 5116,
+            GRAND_TREE to ENTRANA to 5117,
+            ENTRANA to CASTLE_WARS to 5118,
+            CASTLE_WARS to ENTRANA to 5119,
+            VARROCK to CRAFT_GUILD to 5120,
+            CRAFT_GUILD to VARROCK to 5121,
+            VARROCK to TAVERLEY to 5122,
+            TAVERLEY to VARROCK to 5123,
+            TAVERLEY to CRAFT_GUILD to 5124,
+            CRAFT_GUILD to TAVERLEY to 5125,
+            TAVERLEY to CASTLE_WARS to 5126,
+            CASTLE_WARS to TAVERLEY to 5127,
+            CRAFT_GUILD to CASTLE_WARS to 5128,
+            CASTLE_WARS to CRAFT_GUILD to 5129,
+            VARROCK to CASTLE_WARS to 5130,
+            CASTLE_WARS to VARROCK to 5131,
+            GRAND_TREE to CASTLE_WARS to 5132,
+            CASTLE_WARS to GRAND_TREE to 5133,
+            GRAND_TREE to CRAFT_GUILD to 5134,
+            CRAFT_GUILD to GRAND_TREE to 5135,
+            TAVERLEY to GRAND_TREE to 5136,
+            GRAND_TREE to TAVERLEY to 5137,
+            VARROCK to GRAND_TREE to 5138,
+            GRAND_TREE to VARROCK to 5139
+        )
 
         /**
          * Gets the animation id for traveling from one balloon location to another.
@@ -135,7 +123,7 @@ enum class Balloon(
          * @throws IllegalStateException if no animation exists for the given route.
          */
         fun getAnimationId(from: Balloon, to: Balloon): Int {
-            return animations[from.ordinal][to.ordinal].takeIf { it != 0 }
+            return animations[from to to].takeIf { it != 0 }
                 ?: error("No animation for route [$from] -> [$to]")
         }
 
@@ -212,7 +200,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
             lockInteractions(player, 7)
 
             val animationId = Balloon.getAnimationId(origin, destination)
-            val animationTime = Animation(animationId).duration
+            val animationTime = 5
 
             playJingle(player, 118)
 
