@@ -18,7 +18,7 @@ class GWDEntranceRopePlugin : InteractionListener {
             if (!removeItem(player, used)) {
                 return@onUseWith false
             }
-            setVarbit(player, 3932, 1, true)
+            setVarbit(player, 3932, 1)
             return@onUseWith true
         }
     }
