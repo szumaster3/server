@@ -58,7 +58,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 return@define
             }
 
-            val exportDir = File("components")
+            val exportDir = File("dumps/components")
             if (!exportDir.exists()) exportDir.mkdirs()
             val dump = File(exportDir, "$ifaceId.txt")
 
@@ -188,7 +188,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps all interface definitions to a .json file.",
         ) { p, _ ->
             val gson = GsonBuilder().setPrettyPrinting().create()
-            val dump = File("interface_definitions.json")
+            val dump = File("dumps/interface_definitions.json")
             val interfaces = mutableListOf<Map<String, Any?>>()
 
             for (interfaceId in 0 until Cache.getIndexCapacity(CacheIndex.COMPONENTS)) {
@@ -240,7 +240,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         ) { p, _ ->
             val length = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.IDK_TYPE)
 
-            val dump = File("identity_kits.csv")
+            val dump = File("dumps/identity_kits.csv")
             val headers = listOf("id", "bodyPartId", "bodyModelIds", "isSelectable", "headModelIds")
 
             if (dump.exists()) {
@@ -274,7 +274,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps item definitions data to a .json file.",
         ) { p, _ ->
             val gson = GsonBuilder().setPrettyPrinting().create()
-            val dump = File("item_definitions.json")
+            val dump = File("dumps/dumps/item_definitions.json")
             val items = mutableListOf<Map<String, Any?>>()
 
             for (itemId in 0 until Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
@@ -311,7 +311,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::dumpcs2",
             description = "Dumps CS2 mapping data to a .csv file.",
         ) { p, _ ->
-            val dump = File("clientscripts.csv")
+            val dump = File("dumps/clientscripts.csv")
             val gson = GsonBuilder().disableHtmlEscaping().create()
 
             try {
@@ -367,7 +367,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps structs data to a .csv file.",
         ) { player, _ ->
             try {
-                val dump = File("structs.csv")
+                val dump = File("dumps/structs.csv")
                 val headers = listOf("id", "data")
                 if (dump.exists()) {
                     dump.delete()
@@ -403,7 +403,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps data maps configurations to a JSON file.",
         ) { player, _ ->
             try {
-                val dump = File("datamaps.json")
+                val dump = File("dumps/datamaps.json")
                 val gson = GsonBuilder().setPrettyPrinting().create()
                 val dataMapsList = mutableListOf<Map<String, Any>>()
                 val archiveIds = Cache.getIndexCapacity(CacheIndex.CONFIGURATION)
@@ -475,7 +475,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     .excludeFieldsWithModifiers(Modifier.TRANSIENT)
                     .create()
 
-            val dump = File("npc_definitions.json")
+            val dump = File("dumps/npc_definitions.json")
             val items = mutableListOf<Map<String, Any?>>()
 
             val excludedFields = setOf("handlers")
