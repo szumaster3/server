@@ -1,15 +1,19 @@
 package content.minigame.puropuro.plugin
 
 import core.api.*
+import core.api.utils.Vector
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
+import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.scenery.Scenery
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.tools.Log
 import org.rs.consts.Items
+import org.rs.consts.Music
 import org.rs.consts.Sounds
 import org.rs.consts.Scenery as Objects
 
@@ -24,6 +28,7 @@ class CropCircleController :
         val (name, loc) = possibleLocations.random()
         constructCircle(loc)
         sendNews("A crop circle has appeared near $name.")
+        log(this.javaClass, Log.DEBUG, "Crop circle spawned at $loc [$name].")
         val ticks = if(GameWorld.settings!!.isDevMode) 500 else 1500
         nextCircle = getWorldTicks() + ticks
         currentLocName = name
@@ -38,6 +43,23 @@ class CropCircleController :
                 )
                 return@on true
             }
+
+            val ticks = nextCircle - getWorldTicks()
+            val nearCenter = player.location.withinDistance(node.centerLocation, 1)
+
+            if (ticks in 5..10 && nearCenter) {
+                lock(player, 1)
+                sendMessage(player, "The wheat here seems unusually stubborn. You cannot push through.")
+                return@on true
+            }
+
+            val diff = Vector.betweenLocs(player.location, node.location)
+            val distance = diff.magnitude()
+            if (distance <= 8) {
+                val musicEntry = MusicEntry(Music.IMPETUOUS_349, "Impetuous", 474)
+                player.musicPlayer.play(musicEntry)
+            }
+
             lock(player, 1)
             runTask(player, 0) {
                 forceWalk(player, node.centerLocation, "")

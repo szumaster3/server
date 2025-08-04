@@ -814,9 +814,11 @@ object PacketProcessor {
         }
 
         val hasWrapper = wrapperChild.id != scenery.id
+        val pluginClass = option.handler?.javaClass?.simpleName ?: "Unknown"
 
         player.debug("[SCENERY INTERACT]------------------------------")
         player.debug("ID: ${wrapperChild.id}, Option: ${option.name}[${option.index}]")
+        player.debug("Plugin: $pluginClass")
         player.debug("Loc: ${scenery.location}, Dir: ${scenery.direction}")
         if (hasWrapper) {
             player.debug(

@@ -87,4 +87,10 @@ public final class MusicEntry {
     public static Map<Integer, MusicEntry> getSongs() {
         return SONGS;
     }
+
+
+    @Override
+    public String toString() {
+        return "MusicEntry[id=" + id + ", name='" + name + "', index=" + index + "]";
+    }
 }

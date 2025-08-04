@@ -5,10 +5,9 @@ import core.cache.Cache
 import core.cache.CacheArchive
 import core.cache.CacheIndex
 import core.cache.def.impl.*
-//import core.cache.def.type.*
-import core.game.component.ComponentDefinition
 import core.game.system.command.Privilege
 import core.plugin.Initializable
+import kotlinx.coroutines.launch
 import java.io.*
 import java.lang.reflect.Modifier
 import kotlin.reflect.full.memberProperties
@@ -18,6 +17,74 @@ import kotlin.reflect.jvm.isAccessible
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        /*
+         * Show icons.
+         */
+
+        define(
+            name = "dumpicons",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpicons",
+            description = "Shows all icons available with ids.",
+        ) { p, _ ->
+            val maxIconId = 4
+            for (iconId in 0..maxIconId) {
+                p.debug("Icon sprite: <img=$iconId> Icon ID: $iconId")
+            }
+        }
+
+        /*
+         * Dumps detailed info about all interface.
+         */
+
+        define(
+            name = "dumpalliface",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpalliface",
+            description = "Dumps all interface definitions to a JSON file."
+        ) { player, _ ->
+
+            kotlinx.coroutines.GlobalScope.launch {
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val exportDir = File("dumps")
+                if (!exportDir.exists()) exportDir.mkdirs()
+                val dump = File(exportDir, "all_interfaces.json")
+
+                val interfacesList = mutableListOf<Map<String, Any?>>()
+
+                val maxInterfaceId = Cache.getIndexCapacity(CacheIndex.COMPONENTS) - 1
+
+                for (ifaceId in 0..maxInterfaceId) {
+                    val ifaceDef = try {
+                        IfaceDefinition.forId(ifaceId)
+                    } catch (e: Exception) {
+                        null
+                    } ?: continue
+
+                    val children = ifaceDef.children ?: emptyArray()
+
+                    val childrenMaps = children.filterNotNull().map { child ->
+                        child::class.memberProperties.filter { prop ->
+                            val cls = prop.returnType.classifier
+                            cls != List::class && cls != Map::class
+                        }.associate { prop ->
+                            prop.isAccessible = true
+                            prop.name to (prop.getter.call(child) ?: "null")
+                        }
+                    }
+
+                    val ifaceMap = mapOf(
+                        "interfaceId" to ifaceId,
+                        "children" to childrenMaps
+                    )
+                    interfacesList.add(ifaceMap)
+                }
+
+                dump.writeText(gson.toJson(interfacesList))
+                player.debug("All interface definitions have been dumped to $dump.")
+            }
+        }
 
         /*
          * Dumps detailed info about interface.

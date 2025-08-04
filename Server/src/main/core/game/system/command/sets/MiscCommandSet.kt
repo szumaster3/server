@@ -318,11 +318,11 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
                 sendString(player, title, Components.QUESTJOURNAL_SCROLL_275, lineid++)
 
                 if (command.usage.isNotEmpty()) {
-                    sendString(player, "<col=aaaaaa> Usage:</col> <col=ffffff>${command.usage}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                    sendString(player, "<col=454545> Usage:</col> <img=3> <col=ffffff>${command.usage}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
                 }
 
                 if (command.description.isNotEmpty()) {
-                    sendString(player, "<col=aaaaaa> Info:</col> <col=ffffff>${command.description}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                    sendString(player, "<col=454545> Info:</col> <img=3> <col=ffffff>${command.description}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
                 }
 
                 sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, lineid++)
