@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import content.global.skill.firemaking.FiremakingPulse
+import content.global.skill.firemaking.FireMakingPulse
 import content.global.skill.firemaking.Log
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
@@ -121,7 +121,7 @@ class ForgeRegentNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
                         GroundItemManager.destroy(ground)
                         player.getSkills().addExperience(Skills.FIREMAKING, log.xp + 10)
                         familiar.faceLocation(`object`.getFaceLocation(familiar.location))
-                        SceneryBuilder.add(`object`, log.life, FiremakingPulse.getAsh(player, log, `object`))
+                        SceneryBuilder.add(`object`, log.life, FireMakingPulse.getAsh(player, log, `object`))
                         if (player.viewport.region!!.id == 10806) {
                             finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 9)
                         }

@@ -16,7 +16,11 @@ class FiremakingHandler : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         submitIndividualPulse(
             player,
-            FiremakingPulse(player, (node as Item), (node as GroundItem)), type = PulseType.STANDARD
+            FireMakingPulse(
+                player,
+                (node as Item),
+                (node as GroundItem)
+            ), type = PulseType.STANDARD
         )
         return true
     }

@@ -2985,6 +2985,7 @@ object Animations {
     const val TEEN_GIRL_IDLE_10570 = 10570
     const val TEEN_GIRL_WALK_10571 = 10571
     const val TELEPORT_TABLET_4731 = 4731
+    const val TELEBLOCK_CAST_10503 = 10503
     const val TELESCOPE_POH_3649 = 3649
     const val TELETAB_4071 = 4071
     const val TENSE_AGITATED_4546 = 4546

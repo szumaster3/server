@@ -14,6 +14,7 @@ import core.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import org.rs.consts.Animations;
 import org.rs.consts.Items;
 
 import static core.api.ContentAPIKt.inInventory;
@@ -22,9 +23,9 @@ import static core.api.ContentAPIKt.replaceSlot;
 /**
  * Represents making fire plugin.
  */
-public final class FiremakingPulse extends SkillPulse<Item> {
+public final class FireMakingPulse extends SkillPulse<Item> {
 
-    private static final Animation ANIMATION = new Animation(733);
+    private static final Animation ANIMATION = new Animation(Animations.TINDERBOX_733);
 
     private static final Item TINDERBOX = new Item(Items.TINDERBOX_590);
 
@@ -41,7 +42,7 @@ public final class FiremakingPulse extends SkillPulse<Item> {
      * @param node       the node
      * @param groundItem the ground item
      */
-    public FiremakingPulse(Player player, Item node, GroundItem groundItem) {
+    public FireMakingPulse(Player player, Item node, GroundItem groundItem) {
         super(player, node);
         this.fire = Log.forId(node.getId());
         if (groundItem == null) {
@@ -131,15 +132,19 @@ public final class FiremakingPulse extends SkillPulse<Item> {
         if (!groundItem.isActive()) {
             return;
         }
-
+        final Scenery object = RegionManager.getObject(player.getLocation());
         final Scenery scenery = new Scenery(fire.getFireId(), player.getLocation());
-        SceneryBuilder.add(scenery, fire.getLife(), getAsh(player, fire, scenery));
+        SceneryBuilder.add(scenery, fire.getLife(), () -> {
+            GroundItemManager.create(getAsh(player, fire, scenery));
+            if (object != null) {
+                SceneryBuilder.add(object);
+            }
+        });
+
         GroundItemManager.destroy(groundItem);
         player.moveStep();
         player.faceLocation(scenery.getFaceLocation(player.getLocation()));
         player.getSkills().addExperience(Skills.FIREMAKING, fire.getXp());
-
-        int playerRegion = player.getViewport().getRegion().getId();
 
         setLastFire();
         player.dispatch(new LitFireEvent(fire.getLogId()));

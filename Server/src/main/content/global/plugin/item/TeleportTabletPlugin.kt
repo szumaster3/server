@@ -74,11 +74,11 @@ class TeleportTabletOption : InteractionListener {
 
                 if (inInventory(player, tab)) {
                     if (tab == Items.ARDOUGNE_TP_8011 && !getAttribute(player, GameAttributes.ARDOUGNE_TELEPORT, false)){
-                        sendDialogue(player, "You haven't learnt how to use this yet.")
+                        sendMessage(player, "You haven't learnt how to use this yet.")
                         return@on true
                     }
                     if(tab == Items.WATCHTOWER_TPORT_8012 && !getAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, false)){
-                        sendDialogue(player, "You haven't learnt how to use this yet.")
+                        sendMessage(player, "You haven't learnt how to use this yet.")
                         return@on true
                     }
                     if (tab == Items.ASTRAL_ALTAR_TP_13611 &&

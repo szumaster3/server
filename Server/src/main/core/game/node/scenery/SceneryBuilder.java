@@ -237,6 +237,40 @@ public final class SceneryBuilder {
 	}
 
 	/**
+	 * Adds a scenery with a custom callback after it expires.
+	 *
+	 * @param object  The scenery object to add.
+	 * @param ticks   The lifetime in game ticks.
+	 * @param onDecay The callback to run after the object expires.
+	 * @return The constructed object.
+	 */
+	public static Constructed add(Scenery object, int ticks, Runnable onDecay) {
+		final Scenery wrapped = object.getWrapper();
+		final Constructed constructed = wrapped.asConstructed();
+		LandscapeParser.addScenery(constructed);
+		update(constructed);
+
+		if (ticks > -1) {
+			GameWorld.getPulser().submit(new Pulse(ticks, wrapped) {
+				@Override
+				public boolean pulse() {
+					remove(constructed);
+					if (onDecay != null) {
+						try {
+							onDecay.run();
+						} catch (Exception e) {
+							log(this.getClass(), Log.ERR, "Failed to run scenery decay callback for: " + wrapped);
+						}
+					}
+					return true;
+				}
+			});
+		}
+
+		return constructed;
+	}
+
+	/**
 	 * Removes all objects within a box
 	 * @param objectId - the object id to remove
 	 * @param southWest

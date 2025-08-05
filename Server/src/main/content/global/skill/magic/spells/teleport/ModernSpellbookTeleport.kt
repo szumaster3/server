@@ -118,7 +118,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
 
         onCast(ModernSpells.ARDOUGNE_TELEPORT, NONE) { player, _ ->
             if (!getAttribute(player, GameAttributes.ARDOUGNE_TELEPORT, false)) {
-                sendDialogue(player, "You haven't learnt how to cast this spell yet.")
+                sendMessage(player, "You haven't learnt how to cast this spell yet.")
                 return@onCast
             }
             requires(
@@ -139,7 +139,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
 
         onCast(ModernSpells.WATCHTOWER_TELEPORT, NONE) { player, _ ->
             if (!getAttribute(player, GameAttributes.WATCHTOWER_TELEPORT, false)) {
-                sendDialogue(player, "You haven't learnt how to cast this spell yet.")
+                sendMessage(player, "You haven't learnt how to cast this spell yet.")
                 return@onCast
             }
             requires(

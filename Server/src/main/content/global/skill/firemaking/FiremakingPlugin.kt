@@ -27,12 +27,24 @@ class FiremakingPlugin : InteractionListener {
 
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
-            player.pulseManager.run(FiremakingPulse(player, with.asItem(), null))
+            player.pulseManager.run(
+                FireMakingPulse(
+                    player,
+                    with.asItem(),
+                    null
+                )
+            )
             return@onUseWith true
         }
 
         onUseWith(IntType.GROUND_ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
-            player.pulseManager.run(FiremakingPulse(player, with.asItem(), with as GroundItem))
+            player.pulseManager.run(
+                FireMakingPulse(
+                    player,
+                    with.asItem(),
+                    with as GroundItem
+                )
+            )
             return@onUseWith true
         }
 

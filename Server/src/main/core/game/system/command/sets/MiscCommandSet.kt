@@ -322,7 +322,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
                 }
 
                 if (command.description.isNotEmpty()) {
-                    sendString(player, "<col=454545> Info:</col> <img=3> <col=ffffff>${command.description}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
+                    sendString(player, "<col=454545> Info:</col> <img=2> <col=ffffff>${command.description}</col>", Components.QUESTJOURNAL_SCROLL_275, lineid++)
                 }
 
                 sendString(player, "", Components.QUESTJOURNAL_SCROLL_275, lineid++)
