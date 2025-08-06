@@ -23,6 +23,7 @@ import org.rs.consts.Items;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static core.api.ContentAPIKt.*;
 
@@ -308,7 +309,8 @@ public final class BuildingUtils {
         Location l = object.getLocation();
         HousingStyle style = player.getHouseManager().getStyle();
         int decIndex = hotspot.getHotspot().getDecorationIndex(deco);
-        switch(hotspot.getHotspot().getType()) {
+
+        switch (hotspot.getHotspot().getType()) {
             case STAIRCASE:
                 int z = l.getZ();
                 if (region == player.getHouseManager().getDungeonRegion()) {
@@ -326,17 +328,17 @@ public final class BuildingUtils {
                                 continue;
                             }
                             BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-                            Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+                            List<Scenery> objects = chunk.getObjects(l.getChunkX(), l.getChunkY());
                             for (Scenery o : objects) {
                                 if (o != null && o.getType() == object.getType()) {
-                                    SceneryBuilder.replace(o, o.transform(h.getHotspot().getDecorations()[decIndex].getObjectId(style)));
+                                    int newObjectId = h.getHotspot().getDecorations()[decIndex].getObjectId(style);
+                                    SceneryBuilder.replace(o, o.transform(newObjectId));
                                     if (plane == 1) {
                                         if (r.getProperties() == RoomProperties.SKILL_HALL) {
                                             r.updateProperties(player, RoomProperties.SKILL_HALL_2);
                                         } else if (r.getProperties() == RoomProperties.QUEST_HALL) {
                                             r.updateProperties(player, RoomProperties.QUEST_HALL_2);
-                                        }
-                                        else {
+                                        } else {
                                             break;
                                         }
                                         player.getHouseManager().reload(player, true);
@@ -368,7 +370,8 @@ public final class BuildingUtils {
                             int objectId = hotspot.getHotspot().getObjectId(style);
                             Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
                             if (o != null && objectId == o.getId()) {
-                                SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
+                                int decoObjectId = hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style);
+                                SceneryBuilder.replace(o, o.transform(decoObjectId));
                             }
                         }
                     }
@@ -386,7 +389,8 @@ public final class BuildingUtils {
                                 int objectId = bh.getObjectId(style);
                                 Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
                                 if (o != null && objectId == o.getId()) {
-                                    SceneryBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
+                                    int decoObjectId = bh.getDecorations()[decIndex].getObjectId(style);
+                                    SceneryBuilder.replace(o, o.transform(decoObjectId));
                                 }
                             }
                         }
@@ -461,10 +465,11 @@ public final class BuildingUtils {
                                 continue;
                             }
                             BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-                            Scenery[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+                            List<Scenery> objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
                             for (Scenery o : objects) {
                                 if (o != null && o.getType() == object.getType()) {
-                                    SceneryBuilder.replace(o, o.transform(h.getHotspot().getObjectId(style)));
+                                    int baseObjectId = h.getHotspot().getObjectId(style);
+                                    SceneryBuilder.replace(o, o.transform(baseObjectId));
                                     break;
                                 }
                             }
@@ -476,11 +481,9 @@ public final class BuildingUtils {
                 if (l.getZ() == 1) {
                     if (room.getProperties() == RoomProperties.SKILL_HALL_2) {
                         room.updateProperties(player, RoomProperties.SKILL_HALL);
-                    }
-                    else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
+                    } else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
                         room.updateProperties(player, RoomProperties.QUEST_HALL);
-                    }
-                    else {
+                    } else {
                         break;
                     }
                     player.getHouseManager().reload(player, true);
@@ -501,7 +504,8 @@ public final class BuildingUtils {
                             Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
                             h.setDecorationIndex(-1);
                             if (o != null && objectId == o.getId()) {
-                                SceneryBuilder.replace(o, o.transform(hotspot.getHotspot().getObjectId(style)));
+                                int baseObjectId = hotspot.getHotspot().getObjectId(style);
+                                SceneryBuilder.replace(o, o.transform(baseObjectId));
                             }
                         }
                     }
@@ -519,7 +523,8 @@ public final class BuildingUtils {
                                 Scenery o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
                                 h.setDecorationIndex(-1);
                                 if (o != null && objectId == o.getId()) {
-                                    SceneryBuilder.replace(o, o.transform(bh.getObjectId(style)));
+                                    int baseObjectId = bh.getObjectId(style);
+                                    SceneryBuilder.replace(o, o.transform(baseObjectId));
                                 }
                             }
                         }

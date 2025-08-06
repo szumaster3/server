@@ -6,9 +6,9 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.communication.ClanRepository
+import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Location
 import core.game.world.map.Point
-import core.game.world.map.RegionChunk
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 
@@ -35,7 +35,7 @@ sealed class OutgoingContext(override val player: Player, open val login: Boolea
     data class CSConfig(override val player: Player, val id: Int, val value: Int, val types: String, val parameters: Array<Any>) : OutgoingContext(player)
     data class Default(override val player: Player, val objects: Array<Any?>) : OutgoingContext(player)
     data class Music(override val player: Player, val musicId: Int, var secondary: Boolean = false) : OutgoingContext(player)
-    data class ClearChunk(override val player: Player, val chunk: RegionChunk) : OutgoingContext(player)
+    data class ClearChunk(override val player: Player, val chunk: BuildRegionChunk) : OutgoingContext(player)
     data class Config(override var player: Player, val id: Int, val value: Int, val cs2: Boolean = false) : OutgoingContext(player)
     data class GameMessage(override val player: Player, val message: String) : OutgoingContext(player)
     data class IntegerContext(override val player: Player, var integer: Int) : OutgoingContext(player)
@@ -55,7 +55,7 @@ sealed class OutgoingContext(override val player: Player, open val login: Boolea
         constructor(player: Player, interfaceId: Int, childId: Int, containerId: Int, ids: IntArray) : this(player, interfaceId, childId, containerId, items = null, ids = ids, length = ids.size, split = false, slots = null, clear = false)
         constructor(player: Player, interfaceId: Int, childId: Int, containerId: Int, items: Array<Item>, split: Boolean, vararg slots: Int) : this(player, interfaceId, childId, containerId, items = items, ids = null, length = items.size, split = split, slots = if (slots.isNotEmpty()) slots else null, clear = false)
     }
-    data class DisplayModel(override val player: Player, val type: ModelType = ModelType.PLAYER, val nodeId: Int = -1, var amount: Int = 0, val interfaceId: Int, val childId: Int, var zoom: Int = 0, ) : OutgoingContext(player) {
+    data class DisplayModel(override val player: Player, val type: ModelType = ModelType.PLAYER, val nodeId: Int = -1, var amount: Int = 0, val interfaceId: Int, val childId: Int, var zoom: Int = 0) : OutgoingContext(player) {
         enum class ModelType { PLAYER, NPC, ITEM, MODEL }
     }
     data class HintIcon(override val player: Player, val slot: Int, var arrowId: Int, var targetType: Int, val modelId: Int, val height: Int = 0, val index: Int, val location: Location?) : OutgoingContext(player) {
@@ -82,7 +82,7 @@ sealed class OutgoingContext(override val player: Player, open val login: Boolea
             const val CLAN_MESSAGE = 54
         }
     }
-    data class PositionedGraphic(override val player: Player, val graphic: Graphics, val location: Location, val offsetX: Int, val offsetY: Int, ) : OutgoingContext(player) {
+    data class PositionedGraphic(override val player: Player, val graphic: Graphics, val location: Location, val offsetX: Int, val offsetY: Int) : OutgoingContext(player) {
         val sceneX: Int = location.getSceneX(player.playerFlags.lastSceneGraph)
         val sceneY: Int = location.getSceneY(player.playerFlags.lastSceneGraph)
     }

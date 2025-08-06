@@ -16,14 +16,16 @@ class FungicideSprayPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.FUNGICIDE_7432, *(Items.FUNGICIDE_SPRAY_10_7421..Items.FUNGICIDE_SPRAY_0_7431).toIntArray()) { player, used, with ->
-            if (with.id in Items.FUNGICIDE_SPRAY_10_7421..Items.FUNGICIDE_SPRAY_1_7430) {
-                sendMessage(player, "You don't need reload right now.")
+            if (with.id in Items.FUNGICIDE_SPRAY_1_7430 downTo Items.FUNGICIDE_SPRAY_10_7421) {
+                sendMessage(player, "You don't need to reload right now.")
                 return@onUseWith false
             }
+
             if (removeItem(player, used.asItem())) {
                 replaceSlot(player, with.asItem().slot, Item(Items.FUNGICIDE_SPRAY_10_7421))
                 return@onUseWith true
             }
+
             return@onUseWith false
         }
     }

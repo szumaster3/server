@@ -388,7 +388,7 @@ public final class HouseManager {
 
     private DynamicRegion getPreparedRegion() {
         ZoneBorders borders = DynamicRegion.reserveArea(8,8);
-        DynamicRegion region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
+        DynamicRegion region = new DynamicRegion(7503, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
         region.setBorders(borders);
         region.setUpdateAllPlanes(true);
         region.setBuild(true);
@@ -440,8 +440,8 @@ public final class HouseManager {
     private void prepareHouseChunks(HousingStyle style, DynamicRegion target, boolean buildingMode, Room[][][] rooms) {
         Region from = RegionManager.forId(style.getRegionId());
         Region.load(from, true);
-        RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
-        RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
+        BuildRegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
+        BuildRegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
 
         RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, rooms);
         RegionSpecification spec = new RegionSpecification(
@@ -464,7 +464,7 @@ public final class HouseManager {
     private void prepareDungeonChunks(HousingStyle style, DynamicRegion target, DynamicRegion house, boolean buildingMode, Room[][] rooms) {
         Region from = RegionManager.forId(style.getRegionId());
         Region.load(from, true);
-        RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
+        BuildRegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(3, 0);
 
         RoomLoadContract loadRooms = new RoomLoadContract(this, buildingMode, new Room[][][]{rooms});
         RegionSpecification spec = new RegionSpecification(

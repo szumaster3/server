@@ -65,7 +65,7 @@ public final class RegionPlane {
     /**
      * The region chunks.
      */
-    private final RegionChunk[][] chunks;
+    private final BuildRegionChunk[][] chunks;
 
     /**
      * The list of NPCs in this region.
@@ -91,22 +91,27 @@ public final class RegionPlane {
     public RegionPlane(Region region, int plane) {
         this.plane = plane;
         this.region = region;
-        this.players = new CopyOnWriteArrayList<Player>();
-        this.npcs = new CopyOnWriteArrayList<NPC>();
+        this.players = new CopyOnWriteArrayList<>();
+        this.npcs = new CopyOnWriteArrayList<>();
         Location base = region.getBaseLocation();
         this.flags = new RegionFlags(plane, base.getX(), base.getY(), false);
         this.projectileFlags = new RegionFlags(plane, base.getX(), base.getY(), true);
         this.objects = new Scenery[REGION_SIZE][REGION_SIZE];
-        this.chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
+        this.chunks = new BuildRegionChunk[CHUNK_SIZE][CHUNK_SIZE];
     }
 
     /**
      * Called at the end of the update sequence, if the region is active.
      */
     public void pulse() {
-        Arrays.stream(chunks).forEach(regionChunks -> {
-            Arrays.stream(regionChunks).filter(Objects::nonNull).forEach(RegionChunk::resetFlags);
-        });
+        for (BuildRegionChunk[] regionChunks : chunks) {
+            if (regionChunks == null) continue;
+            for (BuildRegionChunk chunk : regionChunks) {
+                if (chunk != null) {
+                    chunk.resetFlags();
+                }
+            }
+        }
     }
 
     /**
@@ -124,7 +129,6 @@ public final class RegionPlane {
         }
         if (object != null) {
             object.setRenderable(true);
-
         }
     }
 
@@ -135,18 +139,18 @@ public final class RegionPlane {
      * @param chunkY The chunk base y-coordinate.
      * @return The region chunk.
      */
-    public RegionChunk getRegionChunk(int chunkX, int chunkY) {
-        RegionChunk r = chunks[chunkX][chunkY];
+    public BuildRegionChunk getRegionChunk(int chunkX, int chunkY) {
+        BuildRegionChunk r = chunks[chunkX][chunkY];
         if (r != null) {
             return r;
         }
-        if (region.isBuild()) {
-            return chunks[chunkX][chunkY] = new BuildRegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
-        }
-        return chunks[chunkX][chunkY] = new RegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
+
+        BuildRegionChunk newChunk = new BuildRegionChunk(region.getBaseLocation().transform(chunkX << 3, chunkY << 3, plane), 0, this);
+        chunks[chunkX][chunkY] = newChunk;
+        return newChunk;
     }
 
-    public void setRegionChunk(int chunkX, int chunkY, RegionChunk chunk) {
+    public void setRegionChunk(int chunkX, int chunkY, BuildRegionChunk chunk) {
         chunks[chunkX][chunkY] = chunk;
     }
 
@@ -170,35 +174,27 @@ public final class RegionPlane {
     public void remove(int x, int y, int objectId) {
         int chunkX = x / CHUNK_SIZE;
         int chunkY = y / CHUNK_SIZE;
-        int offsetX = x - chunkX * CHUNK_SIZE;
-        int offsetY = y - chunkY * CHUNK_SIZE;
-        RegionChunk chunk = getRegionChunk(chunkX, chunkY);
+        int offsetX = x % CHUNK_SIZE;
+        int offsetY = y % CHUNK_SIZE;
 
-        Scenery oldObject;
-        if (chunk instanceof BuildRegionChunk) {
-            int index = ((BuildRegionChunk) chunk).getIndex(offsetX, offsetY, objectId);
-            oldObject = ((BuildRegionChunk) chunk).getObjects(index)[offsetX][offsetY];
-            Scenery remove = new Scenery(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
-            remove.setRenderable(false);
-
-            if (oldObject != null) {
-
-            }
-
-            ((BuildRegionChunk) chunk).getObjects(index)[offsetX][offsetY] = remove;
+        BuildRegionChunk chunk = getRegionChunk(chunkX, chunkY);
+        if (chunk == null) {
             return;
         }
 
-        oldObject = chunk.getObjects()[offsetX][offsetY];
-        Scenery remove = new Scenery(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
-        remove.setRenderable(false);
-
-        if (oldObject != null) {
-
+        List<Scenery> objects = chunk.getObjects(offsetX, offsetY);
+        if (objects == null || objects.isEmpty()) {
+            return;
         }
 
-        chunk.getObjects()[offsetX][offsetY] = remove;
+        for (Scenery s : objects) {
+            if (s != null && s.getId() == objectId) {
+                chunk.remove(s);
+                break;
+            }
+        }
     }
+
 
     /**
      * Sets an object on a chunk.
@@ -212,12 +208,8 @@ public final class RegionPlane {
         int chunkY = y / CHUNK_SIZE;
         int offsetX = x - chunkX * CHUNK_SIZE;
         int offsetY = y - chunkY * CHUNK_SIZE;
-        RegionChunk r = getRegionChunk(chunkX, chunkY);
-        if (r instanceof BuildRegionChunk) {
-            ((BuildRegionChunk) r).store(object);
-            return;
-        }
-        r.getObjects()[offsetX][offsetY] = object;
+        BuildRegionChunk r = getRegionChunk(chunkX, chunkY);
+        r.store(object);
     }
 
     /**
@@ -230,7 +222,7 @@ public final class RegionPlane {
     }
 
     public List<Scenery> getObjectList() {
-        ArrayList<Scenery> list = new ArrayList();
+        ArrayList<Scenery> list = new ArrayList<>();
         for (int x = 0; x < REGION_SIZE; x++) {
             for (int y = 0; y < REGION_SIZE; y++) {
                 if (objects[x][y] != null) list.add(objects[x][y]);
@@ -243,8 +235,9 @@ public final class RegionPlane {
      * Clears this region plane.
      */
     public void clear() {
-        for (RegionChunk[] c : chunks) {
-            for (RegionChunk chunk : c) {
+        for (BuildRegionChunk[] c : chunks) {
+            if (c == null) continue;
+            for (BuildRegionChunk chunk : c) {
                 if (chunk != null) {
                     chunk.clear();
                 }
@@ -285,11 +278,11 @@ public final class RegionPlane {
      */
     public void add(GroundItem item) {
         Location l = item.getLocation();
-        RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
+        BuildRegionChunk c = getRegionChunk(l.getLocalX() / CHUNK_SIZE, l.getLocalY() / CHUNK_SIZE);
         if (!c.getItems().add(item)) {
             return;
         }
-        GroundItem g = (GroundItem) item;
+        GroundItem g = item;
         if (g.isPrivate()) {
             if (g.getDropper() != null) {
                 PacketRepository.send(ConstructGroundItem.class, new OutgoingContext.BuildItem(g.getDropper(), item, 0));
@@ -324,7 +317,7 @@ public final class RegionPlane {
      */
     public void remove(GroundItem item) {
         Location l = item.getLocation();
-        RegionChunk c = getRegionChunk(l.getLocalX() / RegionChunk.SIZE, l.getLocalY() / RegionChunk.SIZE);
+        BuildRegionChunk c = getRegionChunk(l.getLocalX() / CHUNK_SIZE, l.getLocalY() / CHUNK_SIZE);
         if (!c.getItems().remove(item)) {
             return;
         }
@@ -367,7 +360,9 @@ public final class RegionPlane {
 
     public List<Node> getEntities() {
         List<Node> entities = new ArrayList<>(npcs);
-        Arrays.stream(getObjects()).forEach(o -> entities.addAll(Arrays.asList(o)));
+        for (Scenery[] o : getObjects()) {
+            entities.addAll(Arrays.asList(o));
+        }
         return entities;
     }
 
@@ -422,12 +417,8 @@ public final class RegionPlane {
         int chunkY = y / CHUNK_SIZE;
         int offsetX = x - chunkX * CHUNK_SIZE;
         int offsetY = y - chunkY * CHUNK_SIZE;
-        RegionChunk chunk = getRegionChunk(chunkX, chunkY);
-        if (chunk instanceof BuildRegionChunk) {
-            BuildRegionChunk brc = (BuildRegionChunk) chunk;
-            return brc.get(offsetX, offsetY, brc.getIndex(offsetX, offsetY, objectId));
-        }
-        return getRegionChunk(chunkX, chunkY).getObjects()[offsetX][offsetY];
+        BuildRegionChunk chunk = getRegionChunk(chunkX, chunkY);
+        return chunk.get(offsetX, offsetY, chunk.getIndex(offsetX, offsetY, objectId));
     }
 
     /**
@@ -472,7 +463,7 @@ public final class RegionPlane {
      *
      * @return The chunks.
      */
-    public RegionChunk[][] getChunks() {
+    public BuildRegionChunk[][] getChunks() {
         return chunks;
     }
 

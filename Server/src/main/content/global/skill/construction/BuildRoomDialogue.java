@@ -7,9 +7,9 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
+import core.game.world.map.BuildRegionChunk;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
-import core.game.world.map.RegionChunk;
 import core.plugin.Initializable;
 import core.tools.Log;
 
@@ -229,9 +229,6 @@ public final class BuildRoomDialogue extends Dialogue {
         drawGhostRoom();
     }
 
-    /**
-     * Draws the current boundaries of the room to build.
-     */
     private void drawGhostRoom() {
         for (Scenery object : boundaries) {
             SceneryBuilder.remove(object);
@@ -241,10 +238,10 @@ public final class BuildRoomDialogue extends Dialogue {
         Location base = player.getViewport().getRegion().getBaseLocation().transform(roomX << 3, roomY << 3, player.getLocation().getZ());
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
-                Scenery[] objects = room.getChunk().getObjects(x, y);
-                for (Scenery object : objects) {
+                List<Scenery> objects = room.getChunk().getObjects(x, y);
+                for (Scenery object : new ArrayList<>(objects)) {
                     if (object != null && object.getDefinition().hasAction("build")) {
-                        int[] pos = RegionChunk.getRotatedPosition(x, y, object.getDefinition().sizeX, object.getDefinition().sizeY, object.getRotation(), rotation);
+                        int[] pos = BuildRegionChunk.getRotatedPosition(x, y, object.getDefinition().sizeX, object.getDefinition().sizeY, object.getRotation(), rotation);
                         Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, base.transform(pos[0], pos[1], 0));
                         boundaries.add(SceneryBuilder.add(obj));
                     }

@@ -1,8 +1,8 @@
 package core.api.regionspec
 
 import core.api.regionspec.contracts.*
+import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Region
-import core.game.world.map.RegionChunk
 import core.game.world.map.build.DynamicRegion
 
 class RegionSpecification(
@@ -19,9 +19,9 @@ class RegionSpecification(
     }
 }
 
-fun fillWith(chunk: RegionChunk?): FillChunkContract = FillChunkContract(chunk)
+fun fillWith(chunk: BuildRegionChunk?): FillChunkContract = FillChunkContract(chunk)
 
-fun fillWith(delegate: (Int, Int, Int, Region) -> RegionChunk?): FillChunkContract = FillChunkContract(delegate)
+fun fillWith(delegate: (Int, Int, Int, Region) -> BuildRegionChunk?): FillChunkContract = FillChunkContract(delegate)
 
 fun copyOf(regionId: Int): RegionSpecContract = CloneRegionContract(regionId)
 

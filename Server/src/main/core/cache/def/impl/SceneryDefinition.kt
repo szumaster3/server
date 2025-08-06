@@ -30,6 +30,7 @@ class SceneryDefinition : Definition<Scenery?>() {
     @JvmField val anInt3834: Int = 0
     @JvmField var anInt3835: Int = -1
     private val aByte3837: Byte = 0
+    @JvmField var options = arrayOfNulls<String?>(5)
     @JvmField var anInt3838: Int = -1
     @JvmField var mirrored: Boolean
     @JvmField var contrast: Int
@@ -250,11 +251,12 @@ class SceneryDefinition : Definition<Scenery?>() {
      * @return the child object at index
      */
     fun getChildObjectAtIndex(index: Int): SceneryDefinition {
-        if (childrenIds == null || childrenIds!!.size < 1) {
+        if (childrenIds == null || childrenIds!!.isEmpty()) {
             return this
         }
-        if (index < 0 || index >= childrenIds!!.size - 1 || childrenIds!![index] == -1) {
-            val objectId = childrenIds!![childrenIds!!.size - 1]
+        if (index < 0 || index >= childrenIds!!.size || childrenIds!![index] == -1) {
+            val lastIndex = childrenIds!!.lastIndex
+            val objectId = if (lastIndex >= 0) childrenIds!![lastIndex] else -1
             if (objectId != -1) {
                 return forId(objectId)
             }
@@ -360,8 +362,6 @@ class SceneryDefinition : Definition<Scenery?>() {
      * @return the boolean
      */
     fun isaBoolean3853(): Boolean = aBoolean3853
-
-    override fun getOptions(): Array<String> = options
 
     /**
      * Isa boolean 3866 boolean.

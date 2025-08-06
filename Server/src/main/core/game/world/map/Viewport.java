@@ -27,10 +27,10 @@ public final class Viewport {
     /**
      * The region chunks.
      */
-    private RegionChunk[][] chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
+    private BuildRegionChunk[][] chunks = new BuildRegionChunk[CHUNK_SIZE][CHUNK_SIZE];
 
     /**
-     * The region region plane.
+     * The region plane.
      */
     private RegionPlane currentPlane;
 
@@ -54,7 +54,7 @@ public final class Viewport {
      * @param entity The entity.
      */
     public void updateViewport(Entity entity) {
-        RegionChunk chunk = RegionManager.getRegionChunk(entity.getLocation());
+        BuildRegionChunk chunk = RegionManager.getRegionChunk(entity.getLocation());
         int center = chunks.length >> 1;
         if (chunks[center][center] == chunk) {
             return;
@@ -115,7 +115,7 @@ public final class Viewport {
      *
      * @return The chunks.
      */
-    public RegionChunk[][] getChunks() {
+    public BuildRegionChunk[][] getChunks() {
         return chunks;
     }
 
@@ -124,7 +124,7 @@ public final class Viewport {
      *
      * @param chunks The chunks to set.
      */
-    public void setChunks(RegionChunk[][] chunks) {
+    public void setChunks(BuildRegionChunk[][] chunks) {
         this.chunks = chunks;
     }
 

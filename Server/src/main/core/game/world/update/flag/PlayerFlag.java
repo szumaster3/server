@@ -1,7 +1,7 @@
 package core.game.world.update.flag;
 
+import core.game.world.map.BuildRegionChunk;
 import core.game.world.map.Location;
-import core.game.world.map.RegionChunk;
 import core.game.world.map.Viewport;
 
 /**
@@ -19,7 +19,7 @@ public final class PlayerFlag {
     /**
      * The last viewport.
      */
-    private RegionChunk[][] lastViewport = new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE];
+    private BuildRegionChunk[][] lastViewport = new BuildRegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE];
 
     /**
      * The location the player was standing on when last scene graph update
@@ -77,7 +77,7 @@ public final class PlayerFlag {
      *
      * @return The lastViewport.
      */
-    public RegionChunk[][] getLastViewport() {
+    public BuildRegionChunk[][] getLastViewport() {
         return lastViewport;
     }
 
@@ -86,7 +86,7 @@ public final class PlayerFlag {
      *
      * @param lastViewport The lastViewport to set.
      */
-    public void setLastViewport(RegionChunk[][] lastViewport) {
+    public void setLastViewport(BuildRegionChunk[][] lastViewport) {
         this.lastViewport = lastViewport;
     }
 

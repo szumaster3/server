@@ -1,10 +1,7 @@
 package content.global.skill.construction;
 
 import core.game.node.scenery.Scenery;
-import core.game.world.map.Direction;
-import core.game.world.map.Region;
-import core.game.world.map.RegionChunk;
-import core.game.world.map.RegionManager;
+import core.game.world.map.*;
 
 /**
  * Represents the room properties.
@@ -925,7 +922,7 @@ public enum RoomProperties {
 	public boolean[] getExits() {
 		Region region = RegionManager.forId(7503);
 		Region.load(region, true);
-		RegionChunk chunk = region.getPlanes()[0].getRegionChunk(chunkX, chunkY);
+		BuildRegionChunk chunk = region.getPlanes()[0].getRegionChunk(chunkX, chunkY);
 		return new boolean[] { isExit(chunk, 7, 3), isExit(chunk, 3, 0), isExit(chunk, 0, 3), isExit(chunk, 3, 7) };
 
 	}
@@ -934,8 +931,8 @@ public enum RoomProperties {
 	 * Checks if the object on the given chunk coordinates is a door.
 	 * @return {@code True} if so.
 	 */
-	private boolean isExit(RegionChunk chunk, int x, int y) {
-		for (Scenery object : chunk.getObjects(x, y)) {
+	private boolean isExit(BuildRegionChunk chunk, int x, int y) {
+		for (Scenery object : chunk.getCoods(x, y)) {
 			if (object != null && (object.getId() == 15313 || object.getId() == 15314 || object.getId() == 15317)) {
 				return true;
 			}

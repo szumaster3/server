@@ -2,20 +2,19 @@ package core.api.regionspec.contracts
 
 import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Region
-import core.game.world.map.RegionChunk
 import core.game.world.map.build.DynamicRegion
 
 open class FillChunkContract(
-    var chunk: RegionChunk? = null,
+    var chunk: BuildRegionChunk? = null,
 ) : ChunkSpecContract {
-    constructor(chunk: (Int, Int, Int, Region) -> RegionChunk?) : this(null) {
+    constructor(chunk: (Int, Int, Int, Region) -> BuildRegionChunk?) : this(null) {
         this.chunkDelegate = chunk
     }
 
     lateinit var sourceRegion: Region
     var planes: IntArray = intArrayOf(0)
     var replaceCondition: (Int, Int, Int) -> Boolean = { _, _, _ -> true }
-    var chunkDelegate: (Int, Int, Int, Region) -> RegionChunk? = { _, _, _, _ -> chunk }
+    var chunkDelegate: (Int, Int, Int, Region) -> BuildRegionChunk? = { _, _, _, _ -> chunk }
 
     override fun populateChunks(dyn: DynamicRegion) {
         for (plane in planes) {

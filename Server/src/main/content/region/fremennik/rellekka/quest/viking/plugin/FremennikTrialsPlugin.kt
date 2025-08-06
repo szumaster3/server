@@ -467,21 +467,30 @@ class FremennikTrialsPlugin : InteractionListener {
     fun getRandomLocation(player: Player?): Location {
         var obj: Scenery? = null
 
+        val chunks = player?.viewport?.chunks ?: return Location(0,0,0)
+
         while (obj?.id != 5138) {
-            val objects =
-                player
-                    ?.viewport
-                    ?.chunks
-                    ?.random()
-                    ?.random()
-                    ?.objects
-            obj = objects?.random()?.random()
-            if (obj == null || obj.location?.equals(Location(0, 0, 0))!!) {
+            val chunkRow = chunks.randomOrNull() ?: continue
+            val chunk = chunkRow.randomOrNull() ?: continue
+
+            val sizeX = 8
+            val sizeY = 8
+
+            val x = (0 until sizeX).random()
+            val y = (0 until sizeY).random()
+
+            val objectsAtCoord = chunk.getObjects(x, y)
+
+            obj = objectsAtCoord.randomOrNull()
+
+            if (obj == null || obj.location == Location(0, 0, 0)) {
                 continue
             }
         }
+
         return obj.location
     }
+
 
     /**
      * Checks whether the player has any equippable items in inventory or equipment.

@@ -115,6 +115,11 @@ public final class SceneryBuilder {
 		if (!clip) {
 			return replaceClientSide(remove, construct, restoreTicks);
 		}
+
+		if (remove.isTemporary()) {
+			throw new IllegalStateException("Can't temporarily replace an already temporary object!");
+		}
+
 		remove = remove.getWrapper();
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
@@ -133,6 +138,7 @@ public final class SceneryBuilder {
 		}
 		final Constructed constructed = construct.asConstructed();
 		constructed.setReplaced(current);
+		constructed.setTemporary(true);
 		LandscapeParser.addScenery(constructed);
 		update(current, constructed);
 		if (restoreTicks < 0) {

@@ -71,7 +71,12 @@ public class Scenery extends Node {
 	 * The scenery wrapper (used for object configurations).
 	 */
 	private Scenery wrapper;
-	
+
+	/**
+	 * The object is a temporary replacement.
+	 */
+	private boolean temporary = false;
+
 	/**
 	 * Constructs a new scenery.
 	 * @param id The object id.
@@ -81,6 +86,24 @@ public class Scenery extends Node {
 	 */
 	public Scenery(int id, int x, int y, int z) {
 		this(id, Location.create(x, y, z), 10, 0);
+	}
+
+	/**
+	 * Returns whether this scenery is temporary.
+	 *
+	 * @return true if temporary, false otherwise.
+	 */
+	public boolean isTemporary() {
+		return temporary;
+	}
+
+	/**
+	 * Sets the temporary status of this scenery.
+	 *
+	 * @param temporary true if temporary, false otherwise.
+	 */
+	public void setTemporary(boolean temporary) {
+		this.temporary = temporary;
 	}
 
 	/**

@@ -7,6 +7,9 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.*;
 import core.tools.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static core.api.ContentAPIKt.log;
 
 /**
@@ -43,7 +46,7 @@ public final class Room {
 	/**
 	 * The region chunk.
 	 */
-	private RegionChunk chunk;
+	private BuildRegionChunk chunk;
 
 	/**
 	 * The hotspots.
@@ -133,33 +136,45 @@ public final class Room {
 			if (spot.getHotspot() == null) {
 				continue;
 			}
-			int index = chunk.getIndex(x, y, spot.getHotspot().getObjectId(house.getStyle()));
-			Scenery[][] objects = chunk.getObjects(index);
-			Scenery object = objects[x][y];
-			if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
-				if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
-					int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
-					if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
-						id += house.getCrest().ordinal();
-					}
-					SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+			int objectId = spot.getHotspot().getObjectId(house.getStyle());
+			List<Scenery> list = chunk.getObjects(x, y);
+			Scenery object = null;
+
+			for (Scenery s : list) {
+				if (s.getId() == objectId) {
+					object = s;
+					break;
 				}
-				else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
-					chunk.add(object.transform(house.getStyle().getWindow().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
-				}
-				int[] pos = RegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
-				spot.setCurrentX(pos[0]);
-				spot.setCurrentY(pos[1]);
 			}
+
+			if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
+					if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
+						int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
+						if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
+							id += house.getCrest().ordinal();
+						}
+						SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+					}
+					else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) ||
+							(!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
+						chunk.add(object.transform(house.getStyle().getWindow().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
+					}
+					int[] pos = BuildRegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
+					spot.setCurrentX(pos[0]);
+					spot.setCurrentY(pos[1]);
+				}
 		}
+
 		if (rotation != Direction.NORTH && chunk.getRotation() == 0) {
 			chunk.rotate(rotation);
 		}
+
 		if (!house.isBuildingMode()) {
 			placeDoors(housePlane, house, chunk);
 			removeHotspots(housePlane, house, chunk);
 		}
 	}
+
 
 	/**
 	 * Removes the building hotspots from the room.
@@ -169,68 +184,59 @@ public final class Room {
 	 */
 	private void removeHotspots(int housePlane, HouseManager house, BuildRegionChunk chunk) {
 		if (properties.isRoof()) return;
+
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
-					Scenery object = chunk.get(x, y, i);
-					if (object != null) {
-						boolean isBuilt = object instanceof Constructed;
-						boolean isWall  = object.getId() == 13065 || object.getId() == house.getStyle().getWallId();
-						boolean isDoor  = object.getId() == house.getStyle().getDoorId() || object.getId() == house.getStyle().getSecondDoorId();
-						if (!isBuilt && !isWall && !isDoor) {
-							SceneryBuilder.remove(object);
-							chunk.remove(object);
-						}
+				List<Scenery> original = chunk.getObjects(x, y);
+				if (original.isEmpty()) continue;
+
+				List<Scenery> copy = new ArrayList<>(original);
+
+				for (Scenery object : copy) {
+					if (object == null) continue;
+
+					boolean isBuilt = object instanceof Constructed;
+					boolean isWall  = object.getId() == 13065 || object.getId() == house.getStyle().getWallId();
+					boolean isDoor  = object.getId() == house.getStyle().getDoorId() || object.getId() == house.getStyle().getSecondDoorId();
+
+					if (!isBuilt && !isWall && !isDoor) {
+						SceneryBuilder.remove(object);
+						original.remove(object);
 					}
 				}
 			}
 		}
 	}
 
-	/**
-	 * Replaces the door hotspots with doors, walls, or passageways as needed.
-	 * TODO: it is believed that doors authentically remember their open/closed state for the usual duration (see e.g. https://www.youtube.com/watch?v=nRGux739h8s 1:00 vs 1:55), but this is not possible with the current HouseManager approach, which deallocates the instance as soon as the player leaves.
-	 * @param housePlane The room's plane in house.
-	 * @param house The house manager.
-	 * @param chunk The region chunk used.
-	 */
+
 	private void placeDoors(int housePlane, HouseManager house, BuildRegionChunk chunk) {
 		Room[][][] rooms = house.getRooms();
 		int rx = chunk.getCurrentBase().getChunkX();
 		int ry = chunk.getCurrentBase().getChunkY();
-		for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Scenery object = chunk.get(x, y, i);
-					if (object != null && BuildingUtils.isDoorHotspot(object)) {
-						boolean edge = false;
-						Room otherRoom = null;
-						switch (object.getRotation()) {
-							case 0: //east
-								edge = rx == 0;
-								otherRoom = edge ? null : rooms[housePlane][rx - 1][ry];
-								break;
-							case 1: //south
-								edge = ry == 7;
-								otherRoom = edge ? null : rooms[housePlane][rx][ry + 1];
-								break;
-							case 2: //west
-								edge = rx == 7;
-								otherRoom = edge ? null : rooms[housePlane][rx + 1][ry];
-								break;
-							case 3: //north
-								edge = ry == 0;
-								otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
-								break;
-							default:
-								log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
-						}
-						int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
-						if (replaceId == -1) {
+
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				List<Scenery> list = chunk.getObjects(x, y);
+				for (Scenery object : new ArrayList<>(list)) {
+					if (object == null || !BuildingUtils.isDoorHotspot(object)) continue;
+
+					boolean edge = false;
+					Room otherRoom = null;
+
+					switch (object.getRotation()) {
+						case 0: edge = rx == 0;      otherRoom = edge ? null : rooms[housePlane][rx - 1][ry]; break; // east
+						case 1: edge = ry == 7;      otherRoom = edge ? null : rooms[housePlane][rx][ry + 1]; break; // south
+						case 2: edge = rx == 7;      otherRoom = edge ? null : rooms[housePlane][rx + 1][ry]; break; // west
+						case 3: edge = ry == 0;      otherRoom = edge ? null : rooms[housePlane][rx][ry - 1]; break; // north
+						default:
+							log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
 							continue;
-						}
-						SceneryBuilder.replace(object, object.transform(replaceId));
 					}
+
+					int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
+					if (replaceId == -1) continue;
+
+					SceneryBuilder.replace(object, object.transform(replaceId));
 				}
 			}
 		}
@@ -369,7 +375,7 @@ public final class Room {
 	 * Gets the chunk.
 	 * @return The chunk.
 	 */
-	public RegionChunk getChunk() {
+	public BuildRegionChunk getChunk() {
 		return chunk;
 	}
 
@@ -377,7 +383,7 @@ public final class Room {
 	 * Sets the chunk.
 	 * @param chunk The chunk to set.
 	 */
-	public void setChunk(RegionChunk chunk) {
+	public void setChunk(BuildRegionChunk chunk) {
 		this.chunk = chunk;
 	}
 

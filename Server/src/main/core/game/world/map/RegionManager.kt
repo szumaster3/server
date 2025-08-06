@@ -414,9 +414,9 @@ object RegionManager {
      * @return The region chunk.
      */
     @JvmStatic
-    fun getRegionChunk(l: Location): RegionChunk {
+    fun getRegionChunk(l: Location): BuildRegionChunk {
         val plane = getRegionPlane(l)
-        return plane.getRegionChunk(l.localX / RegionChunk.SIZE, l.localY / RegionChunk.SIZE)
+        return plane.getRegionChunk(l.localX / BuildRegionChunk.SIZE, l.localY / BuildRegionChunk.SIZE)
     }
 
     /**

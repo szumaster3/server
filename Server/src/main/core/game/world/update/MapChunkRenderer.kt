@@ -1,7 +1,7 @@
 package core.game.world.update
 
 import core.game.node.entity.player.Player
-import core.game.world.map.RegionChunk
+import core.game.world.map.BuildRegionChunk
 import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
 import core.net.packet.out.ClearRegionChunk
@@ -20,7 +20,7 @@ object MapChunkRenderer {
     fun render(player: Player) {
         val v = player.viewport
         val last = player.playerFlags.lastViewport
-        val updated: MutableList<RegionChunk> = ArrayList()
+        val updated: MutableList<BuildRegionChunk> = ArrayList()
         val current = v.chunks
         var sizeX = last.size
         for (x in 0 until sizeX) {
@@ -56,7 +56,7 @@ object MapChunkRenderer {
      * @param c The region chunk.
      * @return `True` if so.
      */
-    private fun containsChunk(list: Array<Array<RegionChunk?>>, c: RegionChunk): Boolean {
+    private fun containsChunk(list: Array<Array<BuildRegionChunk?>>, c: BuildRegionChunk): Boolean {
         val sizeList = list.size
         for (x in 0 until sizeList) {
             val chunkSize: Int = list[x].size

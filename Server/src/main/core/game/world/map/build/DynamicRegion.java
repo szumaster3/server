@@ -37,7 +37,7 @@ public final class DynamicRegion extends Region {
     /**
      * The region chunks.
      */
-    private final RegionChunk[][][] chunks;
+    private final BuildRegionChunk[][][] chunks;
 
     /**
      * The zone borders.
@@ -76,7 +76,7 @@ public final class DynamicRegion extends Region {
     public DynamicRegion(int regionId, int x, int y) {
         super(x, y);
         this.regionId = regionId;
-        this.chunks = new RegionChunk[4][SIZE >> 3][SIZE >> 3];
+        this.chunks = new BuildRegionChunk[4][SIZE >> 3][SIZE >> 3];
         RegionManager.resetFlags(getId());
     }
 
@@ -155,9 +155,9 @@ public final class DynamicRegion extends Region {
         return regions.toArray(new DynamicRegion[regions.size()]);
     }
 
+
     /**
      * Finds and reserves borders for a new dynamic region area.
-     *
      * @param sizeX The x-size of the region (in chunks).
      * @param sizeY The y-size of the region (in chunks).
      * @return The zone borders.
@@ -170,7 +170,6 @@ public final class DynamicRegion extends Region {
 
     /**
      * Finds free borders for a new dynamic region area.
-     *
      * @param sizeX The x-size of the region (in chunks).
      * @param sizeY The y-size of the region (in chunks).
      * @return The zone borders.
@@ -212,9 +211,8 @@ public final class DynamicRegion extends Region {
 
     /**
      * Copies (but does not initialize) a region.
-     *
      * @param regionId The id of the region to copy.
-     * @param to       The location to copy the region to.
+     * @param to The location to copy the region to.
      * @return The {@code DynamicRegion} object.
      */
     public static DynamicRegion copy(int regionId, Location to) {
@@ -228,9 +226,9 @@ public final class DynamicRegion extends Region {
                 int x = regionX + (offsetX << 3);
                 int y = regionY + (offsetY << 3);
                 for (int plane = 0; plane < 4; plane++) {
-                    RegionChunk c = base.getPlanes()[plane].getRegionChunk(offsetX, offsetY);
+                    BuildRegionChunk c = base.getPlanes()[plane].getRegionChunk(offsetX, offsetY);
                     if (c == null) {
-                        region.chunks[plane][offsetX][offsetY] = c = new RegionChunk(Location.create(0, 0, 0), 0, region.getPlanes()[plane]);
+                        region.chunks[plane][offsetX][offsetY] = c = new BuildRegionChunk(Location.create(0, 0, 0), 0, region.getPlanes()[plane]);
                     } else {
                         region.replaceChunk(plane, offsetX, offsetY, (c = c.copy(region.getPlanes()[plane])), base);
                     }
@@ -244,11 +242,10 @@ public final class DynamicRegion extends Region {
 
     /**
      * Links regions with this region as parent region.
-     *
      * @param regions The regions to link.
      * @warning This region will be flagged as active!
      */
-    public void link(DynamicRegion... regions) {
+    public void link(DynamicRegion...regions) {
         for (DynamicRegion r : regions) {
             r.parentRegion = this;
         }
@@ -261,7 +258,7 @@ public final class DynamicRegion extends Region {
      */
     public void toggleMulticombat() {
         if (multicombat) {
-            for (Iterator<RegionZone> it = getRegionZones().iterator(); it.hasNext(); ) {
+            for (Iterator<RegionZone> it = getRegionZones().iterator(); it.hasNext();) {
                 if (it.next().getZone() == MultiwayCombatZone.getInstance()) {
                     it.remove();
                 }
@@ -275,7 +272,6 @@ public final class DynamicRegion extends Region {
 
     /**
      * Sets the music id for this region.
-     *
      * @param musicId The music id.
      */
     public void setMusicId(int musicId) {
@@ -288,10 +284,10 @@ public final class DynamicRegion extends Region {
      */
     public void rotate() {
         for (int z = 0; z < 4; z++) {
-            RegionChunk[][] c = Arrays.copyOf(chunks[z], 8);
+            BuildRegionChunk[][] c = Arrays.copyOf(chunks[z], 8);
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
-                    RegionChunk r = chunks[z][x][y] = c[8 - y - 1][x];
+                    BuildRegionChunk r = chunks[z][x][y] = c[8 - y - 1][x];
                     if (r != null) {
                         r.setRotation(r.getRotation() + 1);
                     }
@@ -302,13 +298,12 @@ public final class DynamicRegion extends Region {
 
     /**
      * Sets a region chunk (without setting objects/clipping flags).
-     *
-     * @param z     The plane.
-     * @param x     The chunk x (0-8).
-     * @param y     The chunk y (0-8).
+     * @param z The plane.
+     * @param x The chunk x (0-8).
+     * @param y The chunk y (0-8).
      * @param chunk The chunk to set.
      */
-    public void setChunk(int z, int x, int y, RegionChunk chunk) {
+    public void setChunk(int z, int x, int y, BuildRegionChunk chunk) {
         chunks[z][x][y] = chunk;
         getPlanes()[z].getChunks()[x][y] = chunk;
         if (chunk != null) {
@@ -318,14 +313,13 @@ public final class DynamicRegion extends Region {
 
     /**
      * Replaces a region chunk.
-     *
-     * @param z          The plane.
-     * @param x          The x-coordinate of the chunk. (0-7)
-     * @param y          The y-coordinate of the chunk. (0-7)
-     * @param chunk      The chunk to replace with.
+     * @param z The plane.
+     * @param x The x-coordinate of the chunk. (0-7)
+     * @param y The y-coordinate of the chunk. (0-7)
+     * @param chunk The chunk to replace with.
      * @param fromRegion The region the chunk is copied from.
      */
-    public void replaceChunk(int z, int x, int y, RegionChunk chunk, Region fromRegion) {
+    public void replaceChunk(int z, int x, int y, BuildRegionChunk chunk, Region fromRegion) {
         Region.load(DynamicRegion.this);
         RegionPlane p = getPlanes()[z];
         chunks[z][x][y] = chunk;
@@ -366,7 +360,7 @@ public final class DynamicRegion extends Region {
                     }
                 }
             }
-            if (!super.flagInactive(force)) {
+            if(!super.flagInactive(force)) {
                 return false;
             }
             for (RegionPlane plane : getPlanes()) {
@@ -374,10 +368,10 @@ public final class DynamicRegion extends Region {
                     NPC npc = plane.getNpcs().get(0);
                     npc.clear();
                 }
-                for (RegionChunk[] chunks : getChunks()[plane.getPlane()]) {
-                    for (RegionChunk chunk : chunks) {
+                for (BuildRegionChunk[] chunks : getChunks()[plane.getPlane()]) {
+                    for (BuildRegionChunk chunk : chunks) {
                         if (chunk != null) {
-                            for (Iterator<GroundItem> it = chunk.getItems().iterator(); it.hasNext(); ) {
+                            for (Iterator<GroundItem> it = chunk.getItems().iterator(); it.hasNext();) {
                                 GroundItemManager.getItems().remove(it.next());
                             }
                         }
@@ -400,6 +394,7 @@ public final class DynamicRegion extends Region {
         }
     }
 
+
     @Override
     public int getRegionId() {
         return regionId;
@@ -410,7 +405,7 @@ public final class DynamicRegion extends Region {
      *
      * @return The chunks.
      */
-    public RegionChunk[][][] getChunks() {
+    public BuildRegionChunk[][][] getChunks() {
         return chunks;
     }
 

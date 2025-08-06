@@ -15,6 +15,7 @@ import core.game.world.GameWorld.ticks
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
 import core.game.world.map.RegionManager.getRegionChunk
+import core.game.world.map.build.LandscapeParser
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
@@ -25,13 +26,13 @@ import org.rs.consts.Components
 
 @Initializable
 class DummyRoomPlugin : OptionHandler() {
-    private enum class Dummy(val scenery: Scenery, val attackStyle: Int, val bonusType: Int, ) {
+    private enum class Dummy(val scenery: Scenery, val attackStyle: Int, val bonusType: Int) {
         STAB(Scenery(org.rs.consts.Scenery.DUMMY_15629, 2857, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_STAB),
         SLASH(Scenery(org.rs.consts.Scenery.DUMMY_15625, 2858, 3554, 0), -1, WeaponInterface.BONUS_SLASH),
         CRUSH(Scenery(org.rs.consts.Scenery.DUMMY_15628, 2859, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_CRUSH),
         CONTROLLED(Scenery(org.rs.consts.Scenery.DUMMY_15627, 2855, 3552, 0, 10, 3), WeaponInterface.STYLE_CONTROLLED, -1),
-        DEFENCE(Scenery(org.rs.consts.Scenery.DUMMY_15630, 2855, 3550, 0, 10, 3), WeaponInterface.STYLE_DEFENSIVE, -1,),
-        AGGRESSIVE(Scenery(org.rs.consts.Scenery.DUMMY_15626, 2860, 3553, 0, 10, 1), WeaponInterface.STYLE_AGGRESSIVE, -1,),
+        DEFENCE(Scenery(org.rs.consts.Scenery.DUMMY_15630, 2855, 3550, 0, 10, 3), WeaponInterface.STYLE_DEFENSIVE, -1),
+        AGGRESSIVE(Scenery(org.rs.consts.Scenery.DUMMY_15626, 2860, 3553, 0, 10, 1), WeaponInterface.STYLE_AGGRESSIVE, -1),
         ACCURATE(Scenery(org.rs.consts.Scenery.DUMMY_15624, 2856, 3554, 0), WeaponInterface.STYLE_ACCURATE, -1),
     }
 
@@ -44,41 +45,65 @@ class DummyRoomPlugin : OptionHandler() {
             object : Pulse(10) {
                 var activeDummy: Boolean = false
                 var controlled: Scenery? = null
+                var dummy: Dummy? = null
+                var timeStamp: Int = 0
 
                 override fun pulse(): Boolean {
                     if (!activeDummy) {
                         delay = 10
                         timeStamp = ticks
                         dummy = RandomFunction.getRandomElement(Dummy.values())
-                        SceneryBuilder.replace(getObject(dummy!!.scenery.location), dummy!!.scenery, 11)
-                        activeDummy = true
-                        if (dummy == Dummy.CONTROLLED && controlled == null) {
-                            val l = Location.create(2860, 3551, 0)
-                            controlled =
-                                Scenery(dummy!!.scenery.id, l, 10, 1)
-                            SceneryBuilder.replace(getObject(l), controlled, 11)
+
+                        val dummyLocation = dummy!!.scenery.location
+                        val existingDummy = getObject(dummyLocation)
+                        if (existingDummy != null && !existingDummy.isActive) {
+                            SceneryBuilder.replace(existingDummy, dummy!!.scenery, 11)
+                        } else if (existingDummy == null) {
+                            val chunk = getRegionChunk(dummyLocation)
+                            chunk.store(dummy!!.scenery)
+                            LandscapeParser.addScenery(dummy!!.scenery)
                         }
+
+                        activeDummy = true
+
+                        if (dummy == Dummy.CONTROLLED && controlled == null) {
+                            val controlledLoc = Location.create(2860, 3551, 0)
+                            controlled = Scenery(dummy!!.scenery.id, controlledLoc, 10, 1)
+
+                            val existingControlled = getObject(controlledLoc)
+                            if (existingControlled != null) {
+                                SceneryBuilder.replace(existingControlled, controlled, 11)
+                            } else {
+                                val chunk = getRegionChunk(controlledLoc)
+                                chunk.store(controlled!!)
+                                LandscapeParser.addScenery(controlled!!)
+                            }
+                        }
+
                         return false
                     }
+
                     delay = 4
                     var animation = Animation.create(4164)
                     animation.setObject(dummy!!.scenery)
-                    getRegionChunk(dummy!!.scenery.location).flag(AnimateObjectUpdateFlag(animation),)
+                    getRegionChunk(dummy!!.scenery.location).flag(AnimateObjectUpdateFlag(animation))
                     activeDummy = false
+
                     if (controlled != null) {
                         animation = Animation.create(4164)
                         animation.setObject(controlled)
                         getRegionChunk(controlled!!.location).flag(AnimateObjectUpdateFlag(animation))
                         controlled = null
                     }
+
                     return false
                 }
-            },
+            }
         )
         return this
     }
 
-    override fun handle(player: Player, node: Node, option: String, ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val scenery = node as Scenery
         if (scenery.id == org.rs.consts.Scenery.INFORMATION_SCROLL_15656) {
             openInterface(player, Components.WARGUILD_DUMMY_412)

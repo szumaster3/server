@@ -1,7 +1,7 @@
 package core.net.packet.out
 
 import core.game.system.config.XteaParser.Companion.getRegionXTEA
-import core.game.world.map.RegionChunk
+import core.game.world.map.BuildRegionChunk
 import core.game.world.map.RegionManager.forId
 import core.game.world.map.build.DynamicRegion
 import core.net.packet.IoBuffer
@@ -25,7 +25,7 @@ class BuildDynamicScene : OutgoingPacket<OutgoingContext.DynamicScene> {
         buffer.putLEShortA(player.location.getSceneY())
         buffer.setBitAccess()
         var r = player.viewport.region
-        val chunks = Array(4) { Array(13) { arrayOfNulls<RegionChunk>(13) } }
+        val chunks = Array(4) { Array(13) { arrayOfNulls<BuildRegionChunk>(13) } }
         val baseX = player.location.regionX - 6
         val baseY = player.location.regionY - 6
         for (z in 0..3) {

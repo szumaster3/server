@@ -866,7 +866,7 @@ public class Player extends Entity {
         getViewport().setCurrentPlane(RegionManager.forId(66666).getPlanes()[3]);
         playerFlag.setLastSceneGraph(null);
         playerFlag.setUpdateSceneGraph(false);
-        playerFlag.setLastViewport(new RegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
+        playerFlag.setLastViewport(new BuildRegionChunk[Viewport.CHUNK_SIZE][Viewport.CHUNK_SIZE]);
         renderInfo.getLocalNpcs().clear();
         renderInfo.getLocalPlayers().clear();
         renderInfo.setLastLocation(null);

@@ -2,7 +2,6 @@ import core.api.regionspec.*
 import core.api.regionspec.contracts.FillChunkContract
 import core.game.world.map.BuildRegionChunk
 import core.game.world.map.Region
-import core.game.world.map.RegionChunk
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import org.junit.jupiter.api.Assertions
@@ -111,7 +110,7 @@ class RegionSpecificationTests {
 
     @Test fun fillChunkContractShouldAllowChunkSetCallback() {
         class TemporaryFillContract(
-            chunk: RegionChunk,
+            chunk: BuildRegionChunk,
         ) : FillChunkContract(chunk) {
             var callBackRan = false
 
