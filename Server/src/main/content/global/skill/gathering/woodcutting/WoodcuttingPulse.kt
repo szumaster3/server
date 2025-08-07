@@ -3,7 +3,7 @@ package content.global.skill.gathering.woodcutting
 import content.data.items.SkillingTool
 import content.data.items.SkillingTool.Companion.getAxe
 import content.global.skill.farming.FarmingPatch.Companion.forObject
-import core.api.playAudio
+import core.api.*
 import core.cache.def.impl.ItemDefinition.Companion.forId
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.FaceAnim
@@ -23,6 +23,8 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager.getLocalPlayers
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
+import org.rs.consts.Items
+import org.rs.consts.NPCs
 import org.rs.consts.Sounds
 import java.util.*
 import java.util.stream.Collectors
@@ -32,11 +34,8 @@ import java.util.stream.Collectors
  *
  * @author ceik
  */
-class WoodcuttingPulse(private val player: Player, private val node: Scenery) : Pulse(
-    1,
-    player,
-    node
-) {
+class WoodcuttingPulse(private val player: Player, private val node: Scenery) : Pulse(1, player, node) {
+
     private val woodcuttingSounds = intArrayOf(
         Sounds.WOODCUTTING_HIT_3038,
         Sounds.WOODCUTTING_HIT_3039,
@@ -47,8 +46,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
 
     private var resource: WoodcuttingNode? = null
     private var ticks = 0
-    protected var resetAnimation: Boolean = true
-
+    private var resetAnimation: Boolean = true
 
     init {
         super.stop()
@@ -56,7 +54,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
 
     fun message(type: Int) {
         if (type == 0) {
-            player.packetDispatch.sendMessage("You swing your axe at the tree.")
+            sendMessage(player, "You swing your axe at the tree.")
         }
     }
 
@@ -88,19 +86,18 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
     }
 
     fun checkRequirements(): Boolean {
-        if (player.getSkills().getLevel(Skills.WOODCUTTING) < resource!!.getLevel()) {
-            player.packetDispatch.sendMessage("You need a woodcutting level of " + resource!!.getLevel() + " to chop this tree.")
+        if (getStatLevel(player, Skills.WOODCUTTING) < resource!!.getLevel()) {
+            sendMessage(player, "You need a woodcutting level of " + resource!!.getLevel() + " to chop this tree.")
             return false
         }
         if (getAxe(player) == null) {
-            player.packetDispatch.sendMessage("You do not have an axe to use.")
+            sendMessage(player, "You do not have an axe to use.")
             return false
         }
-        if (player.inventory.freeSlots() < 1) {
-            player.dialogueInterpreter.sendDialogue(
-                "Your inventory is too full to hold any more " + forId(
-                    resource!!.getReward()
-                ).name.lowercase(Locale.getDefault()) + "."
+        if (freeSlots(player) < 1) {
+            sendDialogue(
+                player,
+                "Your inventory is too full to hold any more " + forId(resource!!.getReward()).name.lowercase(Locale.getDefault()) + "."
             )
             return false
         }
@@ -128,11 +125,12 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         if (++ticks % 4 != 0) {
             return false
         }
-        if (node.id == 10041) {
-            player.dialogueInterpreter.sendDialogues(
-                2574,
-                FaceAnim.FURIOUS,
-                if (RandomFunction.random(2) == 1) "You'll blow my cover! I'm meant to be hidden!" else "Will you stop that?"
+        if (node.id == org.rs.consts.Scenery.TREE_10041) {
+            sendNPCDialogue(
+                player,
+                NPCs.BANK_GUARD_2574,
+                if (RandomFunction.random(2) == 1) "You'll blow my cover! I'm meant to be hidden!" else "Will you stop that?",
+                FaceAnim.FURIOUS
             )
             return true
         }
@@ -141,63 +139,63 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         }
 
         // 20% chance to auto burn logs when using "inferno adze" item
-        if (getAxe(player)!!.id == 13661 && RandomFunction.random(100) < 25) {
-            player.sendMessage("You chop some logs. The heat of the inferno adze incinerates them.")
+        if (getAxe(player)!!.id == Items.INFERNO_ADZE_13661 && RandomFunction.random(100) < 25) {
+            sendMessage(player, "You chop some logs. The heat of the inferno adze incinerates them.")
             Projectile.create(player, null, 1776, 35, 30, 20, 25)
                 .transform(player, Location(player.location.x + 2, player.location.y), true, 25, 25).send()
-            player.getSkills().addExperience(Skills.WOODCUTTING, resource!!.getExperience())
-            player.getSkills().addExperience(Skills.FIREMAKING, resource!!.getExperience())
+            rewardXP(player, Skills.WOODCUTTING, resource!!.getExperience())
+            rewardXP(player, Skills.FIREMAKING, resource!!.getExperience())
             return rollDepletion()
         }
 
-        //actual reward calculations
+        // Actual reward calculations
         var reward = resource!!.getReward()
         var rewardAmount = 0
         if (reward > 0) {
-            reward = calculateReward(reward) // calculate rewards
-            rewardAmount = calculateRewardAmount(reward) // calculate amount
+            reward = calculateReward(reward) // Calculate rewards
+            rewardAmount = calculateRewardAmount(reward) // Calculate amount
 
-            //SkillingPets.checkPetDrop(player, SkillingPets.BEAVER); // roll for pet
+            // SkillingPets.checkPetDrop(player, SkillingPets.BEAVER); // roll for pet
 
-            //add experience
+            // Add experience
             val experience = calculateExperience(resource!!.reward, rewardAmount)
 
-            player.getSkills().addExperience(Skills.WOODCUTTING, experience, true)
+            rewardXP(player, Skills.WOODCUTTING, experience)
 
-            //send the message for the resource reward, and in the case of the dramen tree, authentically abort the chopping action
+            // Send the message for the resource reward, and in the case of the dramen tree, authentically abort the chopping action
             if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                player.packetDispatch.sendMessage("You cut a branch from the Dramen tree.")
+                sendMessage(player, "You cut a branch from the Dramen tree.")
                 stop()
             } else {
-                player.packetDispatch.sendMessage("You get some " + forId(reward).name.lowercase(Locale.getDefault()) + ".")
+                sendMessage(player, "You get some " + forId(reward).name.lowercase(Locale.getDefault()) + ".")
             }
-            //give the reward
-            player.inventory.add(Item(reward, rewardAmount))
+            // Reward
+            addItem(player, reward, rewardAmount)
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))
-            var cutLogs = player.getAttribute<Int>("$STATS_BASE:$STATS_LOGS", 0)
+            var cutLogs = player.getAttribute("$STATS_BASE:$STATS_LOGS", 0)
             player.setAttribute("/save:$STATS_BASE:$STATS_LOGS", ++cutLogs)
 
-            //calculate bonus bird nest for mining
-            //int chance = 282;
-            //if (RandomFunction.random(chance) == chance / 2) {
-            //    if(SkillcapePerks.isActive(SkillcapePerks.NEST_HUNTER,player)){
-            //        if(!player.getInventory().add(BirdNest.getRandomNest(false).getNest())){
-            //            BirdNest.drop(player);
-            //        }
-            //    } else {
-            //        BirdNest.drop(player);
-            //    }
-            //}
+            // Calculate bonus bird nest for mining.
+            // int chance = 282;
+            // if (RandomFunction.random(chance) == chance / 2) {
+            //     if(SkillcapePerks.isActive(SkillcapePerks.NEST_HUNTER,player)){
+            //         if(!player.getInventory().add(BirdNest.getRandomNest(false).getNest())){
+            //             BirdNest.drop(player);
+            //         }
+            //     } else {
+            //         BirdNest.drop(player);
+            //     }
+            // }
         }
 
         return rollDepletion()
     }
 
     private fun rollDepletion(): Boolean {
-        //transform to depleted version
-        //OSRS and RS3 Wikis both agree: All trees present in 2009 are a 1/8 fell chance, aside from normal trees/dead trees which are 100%
-        //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
-        //RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
+        // transform to depleted version
+        // OSRS and RS3 Wikis both agree: All trees present in 2009 are a 1/8 fell chance, aside from normal trees/dead trees which are 100%
+        // OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
+        // RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
         if (resource!!.getRespawnRate() > 0) {
             if (RandomFunction.roll(8) || resource!!.identifier.toInt() == 1 || resource!!.identifier.toInt() == 2 || resource!!.identifier.toInt() == 3 || resource!!.identifier.toInt() == 6) {
                 if (resource!!.isFarming) {
@@ -226,13 +224,13 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         var amount = 1
 
         // 3239: Hollow tree (bark) 10% chance of obtaining
-        if (reward == 3239 && RandomFunction.random(100) >= 10) {
+        if (reward == Items.BARK_3239 && RandomFunction.random(100) >= 10) {
             amount = 0
         }
 
         // Seers village medium reward - extra normal log while in seer's village
-        if (reward == 1511 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(1)
-            && player.viewport.region.id == 10806
+        if (reward == Items.LOGS_1511 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)
+                .isComplete(1) && player.viewport.region.id == 10806
         ) {
             amount = 2
         }
@@ -259,7 +257,8 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         }
 
         // Seers village medium reward - extra 10% xp from maples while wearing headband
-        if (reward == 1517 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(1)
+        if (reward == Items.MAPLE_LOGS_1517 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)
+                .isComplete(1)
             && player.equipment[EquipmentContainer.SLOT_HAT] != null && player.equipment[EquipmentContainer.SLOT_HAT].id == 14631
         ) {
             experience *= 1.10
