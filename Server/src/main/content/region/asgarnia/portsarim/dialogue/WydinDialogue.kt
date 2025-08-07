@@ -53,28 +53,27 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 1
                 }
 
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            player(FaceAnim.ASKING, "Yes, can I work out front now?")
-                            stage = 10
-                        }
-
-                        2 -> {
-                            player(FaceAnim.ASKING, "Yes, are you going to pay me yet?")
-                            stage = 20
-                        }
-
-                        3 -> {
-                            player(FaceAnim.HALF_GUILTY, "No, it's a complete mess.")
-                            stage = 30
-                        }
-
-                        4 -> {
-                            player(FaceAnim.HALF_GUILTY, "Can I buy something please?")
-                            stage = 40
-                        }
+                1 -> when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.ASKING, "Yes, can I work out front now?")
+                        stage = 10
                     }
+
+                    2 -> {
+                        player(FaceAnim.ASKING, "Yes, are you going to pay me yet?")
+                        stage = 20
+                    }
+
+                    3 -> {
+                        player(FaceAnim.HALF_GUILTY, "No, it's a complete mess.")
+                        stage = 30
+                    }
+
+                    4 -> {
+                        player(FaceAnim.HALF_GUILTY, "Can I buy something please?")
+                        stage = 40
+                    }
+                }
 
                 10 -> {
                     npc(FaceAnim.NEUTRAL, "No, I'm the one who works here.")
@@ -113,28 +112,27 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 1
                 }
 
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            player(FaceAnim.HAPPY, "Yes please.")
-                            stage = 10
-                        }
-
-                        2 -> {
-                            player(FaceAnim.HALF_GUILTY, "No, thank you.")
-                            stage = END_DIALOGUE
-                        }
-
-                        3 -> {
-                            player(FaceAnim.ASKING, "What can you recommend?")
-                            stage = 30
-                        }
-
-                        4 -> {
-                            player(FaceAnim.ASKING, "Can I get a job here?")
-                            stage = 40
-                        }
+                1 -> when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.HAPPY, "Yes please.")
+                        stage = 10
                     }
+
+                    2 -> {
+                        player(FaceAnim.HALF_GUILTY, "No, thank you.")
+                        stage = END_DIALOGUE
+                    }
+
+                    3 -> {
+                        player(FaceAnim.ASKING, "What can you recommend?")
+                        stage = 30
+                    }
+
+                    4 -> {
+                        player(FaceAnim.ASKING, "Can I get a job here?")
+                        stage = 40
+                    }
+                }
 
                 10 -> {
                     end()
@@ -155,18 +153,17 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 32
                 }
 
-                32 ->
-                    when (buttonId) {
-                        1 -> {
-                            player(FaceAnim.FRIENDLY, "Hmm, I think I'll try one.")
-                            stage = 10
-                        }
-
-                        2 -> {
-                            player(FaceAnim.HALF_GUILTY, "I don't like the sound of that.")
-                            stage = END_DIALOGUE
-                        }
+                32 -> when (buttonId) {
+                    1 -> {
+                        player(FaceAnim.FRIENDLY, "Hmm, I think I'll try one.")
+                        stage = 10
                     }
+
+                    2 -> {
+                        player(FaceAnim.HALF_GUILTY, "I don't like the sound of that.")
+                        stage = END_DIALOGUE
+                    }
+                }
 
                 40 -> {
                     npc(
@@ -177,17 +174,17 @@ class WydinDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 41
                 }
 
-                41 ->
-                    if (!player.inventory.contains(1005, 1) &&
-                        !player.equipment.contains(1005, 1) &&
-                        !player.bank.contains(1005, 1)
-                    ) {
-                        player(FaceAnim.SAD, "No, I haven't.")
-                        stage = 42
-                    } else {
-                        player(FaceAnim.HAPPY, "Yes, I have one.")
-                        stage = 50
-                    }
+                41 -> if (!player.inventory.contains(1005, 1) && !player.equipment.contains(
+                        1005,
+                        1
+                    ) && !player.bank.contains(1005, 1)
+                ) {
+                    player(FaceAnim.SAD, "No, I haven't.")
+                    stage = 42
+                } else {
+                    player(FaceAnim.HAPPY, "Yes, I have one.")
+                    stage = 50
+                }
 
                 42 -> {
                     npc(

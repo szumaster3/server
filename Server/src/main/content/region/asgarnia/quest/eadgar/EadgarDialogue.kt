@@ -19,27 +19,15 @@ class EadgarDialogue(player: Player? = null) : Dialogue(player) {
         if (!isQuestComplete(player, Quests.TROLL_STRONGHOLD)) {
             sendDialogue(player, "Mad Eadgar seems too busy to talk.").also { stage = END_DIALOGUE }
         } else {
-            npcl(
-                FaceAnim.HALF_GUILTY,
-                "Welcome to Mad Eadgar's! Happiness in a bowl! Would you care to sample our delicious home cooking?",
-            )
+            npcl(FaceAnim.HALF_GUILTY, "Welcome to Mad Eadgar's! Happiness in a bowl! Would you care to sample our delicious home cooking?")
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                playerl(
-                    FaceAnim.HALF_GUILTY,
-                    "I need to find some goutweed. Sanfew said you might be able to help.",
-                ).also { stage++ }
-
-            1 ->
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Sanfew, you say? Ah, haven't seen him in a while. Goutweed is used as an ingredient in troll cooking. You should ask one of their cooks.",
-                ).also { stage = END_DIALOGUE }
+            0 -> playerl(FaceAnim.HALF_GUILTY, "I need to find some goutweed. Sanfew said you might be able to help.").also { stage++ }
+            1 -> npcl(FaceAnim.HALF_GUILTY, "Sanfew, you say? Ah, haven't seen him in a while. Goutweed is used as an ingredient in troll cooking. You should ask one of their cooks.").also { stage = END_DIALOGUE }
         }
         return true
     }

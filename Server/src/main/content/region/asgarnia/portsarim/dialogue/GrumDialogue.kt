@@ -24,19 +24,14 @@ class GrumDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, I'm not that rich.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.GRUM_556)
-                    }
-                    2 -> player(FaceAnim.HALF_GUILTY, "No, I', not that rich.").also { stage++ }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.GRUM_556)
                 }
-            2 ->
-                npc(FaceAnim.ANNOYED, "Get out, then! We don't want any riff-raff in here.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+                2 -> player(FaceAnim.HALF_GUILTY, "No, I', not that rich.").also { stage++ }
+            }
+            2 -> npc(FaceAnim.ANNOYED, "Get out, then! We don't want any riff-raff in here.").also { stage = END_DIALOGUE }
         }
         return true
     }

@@ -32,8 +32,7 @@ class MonkOfEntranaDialogue(player: Player? = null) : Dialogue(player) {
             "leave your weaponry and armour behind. This is",
             "Saradomin's will.",
         ).also {
-            stage =
-                0
+            stage = 0
         }
         return true
     }
@@ -41,40 +40,22 @@ class MonkOfEntranaDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("No, not right now.", "Yes, okay, I'm ready to go.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player("No, not right now.").also { stage = 10 }
-                    2 -> player("Yes, okay, I'm ready to go.").also { stage = 20 }
-                }
+            1 -> when (buttonId) {
+                1 -> player("No, not right now.").also { stage = 10 }
+                2 -> player("Yes, okay, I'm ready to go.").also { stage = 20 }
+            }
 
             10 -> npc("Very well.").also { stage = END_DIALOGUE }
             20 -> npc("Very well. One moment please.").also { stage++ }
             21 -> sendDialogue(player!!, "The monk quickly searches you.").also { stage++ }
             22 -> {
                 if (!ItemDefinition.canEnterEntrana(player)) {
-                    npc(
-                        FaceAnim.ANNOYED,
-                        "NO WEAPONS OR ARMOUR are permitted on holy",
-                        "Entrana AT ALL. We will not allow you to travel there",
-                        "in breach of mighty Saradomin's edict.",
-                    ).also {
-                        stage =
-                            23
-                    }
+                    npc(FaceAnim.ANNOYED, "NO WEAPONS OR ARMOUR are permitted on holy", "Entrana AT ALL. We will not allow you to travel there", "in breach of mighty Saradomin's edict.").also { stage = 23 }
                     return true
                 }
                 npc("All is satisfactory. You may board the boat now.").also { stage = 24 }
             }
-
-            23 ->
-                npc(FaceAnim.NEUTRAL,
-                    "Do not try and decieve us again. Come back when you",
-                    "have liad down your Zamorakian instruments of death.",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
-
+            23 -> npc(FaceAnim.NEUTRAL, "Do not try and decieve us again. Come back when you", "have liad down your Zamorakian instruments of death.").also { stage = END_DIALOGUE }
             24 -> {
                 end()
                 Charter.PORT_SARIM_TO_ENTRANA.sail(player)
@@ -82,14 +63,11 @@ class MonkOfEntranaDialogue(player: Player? = null) : Dialogue(player) {
                     finishDiaryTask(player, DiaryType.FALADOR, 0, 14)
                 }
             }
-
             25 -> options("Yes, I'm ready to go.", "Not just yet.").also { stage++ }
-            26 ->
-                when (buttonId) {
-                    1 -> player("Yes, I'm ready to go.").also { stage++ }
-                    2 -> player("Not just yet.").also { stage = END_DIALOGUE }
-                }
-
+            26 -> when (buttonId) {
+                1 -> player("Yes, I'm ready to go.").also { stage++ }
+                2 -> player("Not just yet.").also { stage = END_DIALOGUE }
+            }
             27 -> npc("Okay, let's board...").also { stage++ }
             28 -> {
                 end()
@@ -99,13 +77,12 @@ class MonkOfEntranaDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray =
-        intArrayOf(
-            NPCs.MONK_OF_ENTRANA_657,
-            NPCs.MONK_OF_ENTRANA_658,
-            NPCs.MONK_OF_ENTRANA_2728,
-            NPCs.MONK_OF_ENTRANA_2729,
-            NPCs.MONK_OF_ENTRANA_2730,
-            NPCs.MONK_OF_ENTRANA_2731,
-        )
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.MONK_OF_ENTRANA_657,
+        NPCs.MONK_OF_ENTRANA_658,
+        NPCs.MONK_OF_ENTRANA_2728,
+        NPCs.MONK_OF_ENTRANA_2729,
+        NPCs.MONK_OF_ENTRANA_2730,
+        NPCs.MONK_OF_ENTRANA_2731,
+    )
 }

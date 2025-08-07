@@ -24,20 +24,11 @@ class JackSeagullDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                sendDialogueOptions(
-                    player,
-                    "What would you like to say?",
-                    "What are you doing here?",
-                    "Have you got any quests I could do?",
-                ).also {
-                    stage++
-                }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HALF_GUILTY, "What are you doing here?").also { stage++ }
-                    2 -> player(FaceAnim.HALF_GUILTY, "Have you got any quests I could do?").also { stage = 4 }
-                }
+            0 -> sendDialogueOptions(player, "What would you like to say?", "What are you doing here?", "Have you got any quests I could do?").also { stage++ }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "What are you doing here?").also { stage++ }
+                2 -> player(FaceAnim.HALF_GUILTY, "Have you got any quests I could do?").also { stage = 4 }
+            }
             2 -> npc(FaceAnim.HALF_GUILTY, "Drinking.").also { stage++ }
             3 -> player(FaceAnim.HALF_GUILTY, "Fair enough.").also { stage = END_DIALOGUE }
             4 -> npc(FaceAnim.HALF_GUILTY, "Nay, I've nothing for ye to do.").also { stage++ }

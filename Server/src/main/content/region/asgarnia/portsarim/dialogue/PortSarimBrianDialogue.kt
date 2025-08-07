@@ -23,11 +23,10 @@ class PortSarimBrianDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.FRIENDLY, "So, are you selling something?").also { stage++ }
-                    2 -> player(FaceAnim.HAPPY, "'Ello.").also { stage = 3 }
-                }
+            0 -> when (buttonId) {
+                1 -> player(FaceAnim.FRIENDLY, "So, are you selling something?").also { stage++ }
+                2 -> player(FaceAnim.HAPPY, "'Ello.").also { stage = 3 }
+            }
             1 -> npc(FaceAnim.HAPPY, "Yep, take a look at these great axes.").also { stage++ }
             2 -> end().also { openNpcShop(player, npc.id) }
             3 -> npc(FaceAnim.HAPPY, "'Ello.").also { stage = END_DIALOGUE }

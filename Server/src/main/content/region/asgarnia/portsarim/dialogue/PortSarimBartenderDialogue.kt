@@ -26,22 +26,20 @@ class PortSarimBartenderDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HAPPY, "Hello there!").also { stage++ }
-            1 ->
-                sendDialogueOptions(
-                    player,
-                    "Choose an option:",
-                    "Could I buy a beer, please.",
-                    "Bye, then.",
-                ).also { stage++ }
+            1 -> sendDialogueOptions(
+                player,
+                "Choose an option:",
+                "Could I buy a beer, please.",
+                "Bye, then.",
+            ).also { stage++ }
 
-            2 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HAPPY, "Could I buy a beer, please?").also { stage++ }
-                    2 -> {
-                        player(FaceAnim.FRIENDLY, "Bye, then.").also { stage = 6 }
-                        stage = 20
-                    }
+            2 -> when (buttonId) {
+                1 -> player(FaceAnim.HAPPY, "Could I buy a beer, please?").also { stage++ }
+                2 -> {
+                    player(FaceAnim.FRIENDLY, "Bye, then.").also { stage = 6 }
+                    stage = 20
                 }
+            }
 
             3 -> npc(FaceAnim.FRIENDLY, "Sure, that will be two gold coins, please.").also { stage++ }
             4 -> player(FaceAnim.FRIENDLY, "Okay, here you go.").also { stage++ }

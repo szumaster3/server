@@ -68,21 +68,13 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
 
             21 -> openPayGardenerDialogue(player, patches[0])
             22 -> openPayGardenerDialogue(player, patches[1])
-            30 -> npc(
-                FaceAnim.NEUTRAL,
-                "That depends on whether I have it to sell. What is it",
-                "that you're looking for?",
-            ).also {
-                stage++
-            }
-
+            30 -> npc(FaceAnim.NEUTRAL, "That depends on whether I have it to sell. What is it", "that you're looking for?").also { stage++ }
             31 -> showTopics(
                 Topic(FaceAnim.NEUTRAL, "Some plant cure.", 100),
                 Topic(FaceAnim.NEUTRAL, "A bucket of compost.", 200),
                 Topic(FaceAnim.NEUTRAL, "A rake.", 300),
                 Topic("(See more items)", 32, true),
             )
-
             32 -> showTopics(
                 Topic(FaceAnim.NEUTRAL, "A watering can.", 400),
                 Topic(FaceAnim.NEUTRAL, "A gardening trowel.", 500),
@@ -90,18 +82,9 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("(See previous items)", 31, true),
                 Topic(FaceAnim.NEUTRAL, "Forget it.", 40, true),
             )
-
             40 -> player("Forget it, you don't have anything I need.").also { stage = END_DIALOGUE }
-            100 -> npc(
-                "Plant cure, eh? I might have some put aside for myself.",
-                "Tell you what. I'll sell you some plant cure for 25 gp if",
-                "you like."
-            ).also { stage++ }
-
-            101 -> options(
-                "Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere."
-            ).also { stage++ }
-
+            100 -> npc("Plant cure, eh? I might have some put aside for myself.", "Tell you what. I'll sell you some plant cure for 25 gp if", "you like.").also { stage++ }
+            101 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             102 -> when (buttonId) {
                 1 -> {
                     player(FaceAnim.HAPPY, "Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -115,15 +98,8 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("No thanks, I can get that much cheaper elsewhere.").also { stage = END_DIALOGUE }
             }
 
-            200 -> npc(
-                "A bucket of compost, eh? I might have one spare...",
-                "tell you what, I'll sell it to you for 35 gp if you like."
-            ).also { stage++ }
-
-            201 -> options(
-                "Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere."
-            ).also { stage++ }
-
+            200 -> npc("A bucket of compost, eh? I might have one spare...", "tell you what, I'll sell it to you for 35 gp if you like.").also { stage++ }
+            201 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             202 -> when (buttonId) {
                 1 -> {
                     player("Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -137,20 +113,8 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("No thanks, I can get that much cheaper elsewhere.").also { stage = END_DIALOGUE }
             }
 
-            300 -> npc(
-                "A rake, eh? I might have one spare...",
-                "tell you what, I'll sell it to you for 15 gp if you like.",
-            ).also {
-                stage++
-            }
-
-            301 -> options(
-                "Yes, that sounds like a fair price.",
-                "No thanks, I can get that much cheaper elsewhere.",
-            ).also {
-                stage++
-            }
-
+            300 -> npc("A rake, eh? I might have one spare...", "tell you what, I'll sell it to you for 15 gp if you like.").also { stage++ }
+            301 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             302 -> when (buttonId) {
                 1 -> {
                     player("Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -163,21 +127,8 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> player("No thanks, I can get that much cheaper elsewhere.").also { stage = END_DIALOGUE }
             }
-
-            400 -> npc(
-                "A watering can, eh? I might have one spare...",
-                "tell you what, I'll sell it to you for 25 gp if you like.",
-            ).also {
-                stage++
-            }
-
-            401 -> options(
-                "Yes, that sounds like a fair price.",
-                "No thanks, I can get that much cheaper elsewhere.",
-            ).also {
-                stage++
-            }
-
+            400 -> npc("A watering can, eh? I might have one spare...", "tell you what, I'll sell it to you for 25 gp if you like.").also { stage++ }
+            401 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             402 -> when (buttonId) {
                 1 -> {
                     player("Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -190,21 +141,8 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> player("No thanks, I can get that much cheaper elsewhere.").also { stage = END_DIALOGUE }
             }
-
-            500 -> npc(
-                "A gardening trowel, eh? I might have one spare...",
-                "tell you what, I'll sell it to you for 15 gp if you like.",
-            ).also {
-                stage++
-            }
-
-            501 -> options(
-                "Yes, that sounds like a fair price.",
-                "No thanks, I can get that much cheaper elsewhere.",
-            ).also {
-                stage++
-            }
-
+            500 -> npc("A gardening trowel, eh? I might have one spare...", "tell you what, I'll sell it to you for 15 gp if you like.").also { stage++ }
+            501 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             502 -> when (buttonId) {
                 1 -> {
                     player("Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -217,21 +155,8 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> player("No thanks, I can get that much cheaper elsewhere.").also { stage = END_DIALOGUE }
             }
-
-            600 -> npc(
-                "A seed dibber, eh? I might have one spare...",
-                "tell you what, I'll sell it to you for 15 gp if you like.",
-            ).also {
-                stage++
-            }
-
-            601 -> options(
-                "Yes, that sounds like a fair price.",
-                "No thanks, I can get that much cheaper elsewhere.",
-            ).also {
-                stage++
-            }
-
+            600 -> npc("A seed dibber, eh? I might have one spare...", "tell you what, I'll sell it to you for 15 gp if you like.").also { stage++ }
+            601 -> options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.").also { stage++ }
             602 -> when (buttonId) {
                 1 -> {
                     player("Yes, that sounds like a fair price.").also { stage = END_DIALOGUE }
@@ -251,14 +176,7 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
                 Topic(FaceAnim.NEUTRAL, "I can't be bothered - I'd rather pay you to do it.", 1020),
             )
 
-            1020 -> npc(
-                FaceAnim.NEUTRAL,
-                "Well, it's a lot of hard work - if you pay me 200 GP",
-                "I'll chop it down for you.",
-            ).also {
-                stage++
-            }
-
+            1020 -> npc(FaceAnim.NEUTRAL, "Well, it's a lot of hard work - if you pay me 200 GP", "I'll chop it down for you.").also { stage++ }
             1021 -> {
                 if (inInventory(player, Items.COINS_995, 200)) {
                     showTopics(
@@ -316,7 +234,7 @@ class GardenerDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    fun openPayGardenerDialogue(
+    private fun openPayGardenerDialogue(
         player: Player,
         fPatch: FarmingPatch,
     ) {

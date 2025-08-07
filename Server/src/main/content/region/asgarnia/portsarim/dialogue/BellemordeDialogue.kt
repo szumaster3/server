@@ -31,13 +31,8 @@ class BellemordeDialogue(player: Player? = null) : Dialogue(player) {
                     npc(FaceAnim.CHILD_FRIENDLY, "Hello human.").also { stage++ }
                 }
             }
-
             1 -> player("Would you like a fish?").also { stage++ }
-            2 ->
-                npc(FaceAnim.CHILD_FRIENDLY, "I don't want your fish. I hunt and eat what I", "need by myself.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            2 -> npc(FaceAnim.CHILD_FRIENDLY, "I don't want your fish. I hunt and eat what I", "need by myself.").also { stage = END_DIALOGUE }
         }
         return true
     }

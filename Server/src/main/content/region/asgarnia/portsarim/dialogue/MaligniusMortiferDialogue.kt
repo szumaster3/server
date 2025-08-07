@@ -34,28 +34,27 @@ class MaligniusMortiferDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Who are you and what are you doing here?")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player("Can you teach me something about magic?")
-                        stage = 20
-                    }
-
-                    3 -> {
-                        player("Where can I get clothes like those?")
-                        stage = 30
-                    }
-
-                    4 -> {
-                        player("Actually, I don't want to talk to you.")
-                        stage = 40
-                    }
+            1 -> when (buttonId) {
+                1 -> {
+                    player("Who are you and what are you doing here?")
+                    stage = 10
                 }
+
+                2 -> {
+                    player("Can you teach me something about magic?")
+                    stage = 20
+                }
+
+                3 -> {
+                    player("Where can I get clothes like those?")
+                    stage = 30
+                }
+
+                4 -> {
+                    player("Actually, I don't want to talk to you.")
+                    stage = 40
+                }
+            }
 
             10 -> {
                 npc(

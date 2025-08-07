@@ -25,17 +25,14 @@ class SecurityGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                if (!inInventory(player, Items.SECURITY_BOOK_9003)) {
-                    addItemOrDrop(player, Items.SECURITY_BOOK_9003)
-                    player("Oh? Thanks.").also { stage++ }
-                } else {
-                    playerl(FaceAnim.HALF_GUILTY, "I don't have space to take anything from you at the moment.").also {
-                        stage =
-                            2
-                    }
+            0 -> if (!inInventory(player, Items.SECURITY_BOOK_9003)) {
+                addItemOrDrop(player, Items.SECURITY_BOOK_9003)
+                player("Oh? Thanks.").also { stage++ }
+            } else {
+                playerl(FaceAnim.HALF_GUILTY, "I don't have space to take anything from you at the moment.").also {
+                    stage = 2
                 }
-
+            }
             1 -> npc(FaceAnim.OLD_NORMAL, "You're welcome.").also { stage = END_DIALOGUE }
             2 -> npc(FaceAnim.OLD_NORMAL, "Okay. Have a nice day.").also { stage = END_DIALOGUE }
         }

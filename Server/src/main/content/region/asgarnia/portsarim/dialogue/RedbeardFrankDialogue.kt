@@ -37,9 +37,9 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (quest!!.getStage(player) == 20 &&
-                    !player.inventory.containsItem(KEY) &&
-                    !player.bank.containsItem(KEY)
+                if (quest!!.getStage(player) == 20 && !player.inventory.containsItem(KEY) && !player.bank.containsItem(
+                        KEY
+                    )
                 ) {
                     player("I seem to have lost my chest key...")
                     stage = 700
@@ -62,46 +62,44 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 10
             }
 
-            10 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Arr!")
-                        stage = 12
-                    }
-
-                    2 -> {
-                        player("Do you have anything for trade?")
-                        stage = 13
-                    }
-
-                    3 -> {
-                        player("Tell me about the Falador Achievement Diary.")
-                        stage = 80
-                    }
+            10 -> when (buttonId) {
+                1 -> {
+                    player("Arr!")
+                    stage = 12
                 }
 
-            11 ->
-                when (buttonId) {
-                    1 -> {
-                        player("I'm in search of treasure.")
-                        stage = 40
-                    }
-
-                    2 -> {
-                        player("Arr!")
-                        stage = 12
-                    }
-
-                    3 -> {
-                        player("Do you have anything for trade?")
-                        stage = 13
-                    }
-
-                    4 -> {
-                        player("Tell me about the Falador Achievement Diary.")
-                        stage = 80
-                    }
+                2 -> {
+                    player("Do you have anything for trade?")
+                    stage = 13
                 }
+
+                3 -> {
+                    player("Tell me about the Falador Achievement Diary.")
+                    stage = 80
+                }
+            }
+
+            11 -> when (buttonId) {
+                1 -> {
+                    player("I'm in search of treasure.")
+                    stage = 40
+                }
+
+                2 -> {
+                    player("Arr!")
+                    stage = 12
+                }
+
+                3 -> {
+                    player("Do you have anything for trade?")
+                    stage = 13
+                }
+
+                4 -> {
+                    player("Tell me about the Falador Achievement Diary.")
+                    stage = 80
+                }
+            }
 
             12 -> {
                 npc("Arr!")
@@ -113,14 +111,13 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 999
             }
 
-            20 ->
-                if (!player.inventory.containsItem(KARAMJAN_RUM)) {
-                    player("No, not yet.")
-                    stage = 21
-                } else {
-                    player("Yes, I've got some.")
-                    stage = 31
-                }
+            20 -> if (!player.inventory.containsItem(KARAMJAN_RUM)) {
+                player("No, not yet.")
+                stage = 21
+            } else {
+                player("Yes, I've got some.")
+                stage = 31
+            }
 
             21 -> {
                 npc("Not suprising, tis no easy task to get it off Karamja.")
@@ -174,15 +171,14 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 34
             }
 
-            34 ->
-                if (player.inventory.remove(KARAMJAN_RUM)) {
-                    if (!player.inventory.add(KEY)) {
-                        GroundItemManager.create(KEY, player)
-                    }
-                    quest!!.setStage(player, 20)
-                    interpreter.sendItemMessage(KEY.id, "Frank happily takes the rum... ... and hands you a key")
-                    stage = 35
+            34 -> if (player.inventory.remove(KARAMJAN_RUM)) {
+                if (!player.inventory.add(KEY)) {
+                    GroundItemManager.create(KEY, player)
                 }
+                quest!!.setStage(player, 20)
+                interpreter.sendItemMessage(KEY.id, "Frank happily takes the rum... ... and hands you a key")
+                stage = 35
+            }
 
             35 -> {
                 npc(
@@ -230,19 +226,18 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 45
             }
 
-            45 ->
-                when (buttonId) {
-                    1 -> {
-                        quest!!.start(player)
-                        player("Ok, I will bring you some rum.")
-                        stage = 47
-                    }
-
-                    2 -> {
-                        player("Not right now.")
-                        stage = 46
-                    }
+            45 -> when (buttonId) {
+                1 -> {
+                    quest!!.start(player)
+                    player("Ok, I will bring you some rum.")
+                    stage = 47
                 }
+
+                2 -> {
+                    player("Not right now.")
+                    stage = 46
+                }
+            }
 
             46 -> {
                 npc("Fair enough. I'll still be here and thirsty whenever you", "feel like helpin' out.")
@@ -296,38 +291,36 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
 
-            80 ->
-                if (player.getAttribute("falador-diary-talk-first-time", false)) {
-                    npc("So you're interested in exploring Falador and it's", "surrounding areas, eh?")
-                    setAttribute(player, "/save:falador-diary-talk-first-time", true)
-                    stage = 100
-                } else {
-                    npc("How are you getting on with the Achievement Diary?")
-                    stage = 90
-                }
+            80 -> if (player.getAttribute("falador-diary-talk-first-time", false)) {
+                npc("So you're interested in exploring Falador and it's", "surrounding areas, eh?")
+                setAttribute(player, "/save:falador-diary-talk-first-time", true)
+                stage = 100
+            } else {
+                npc("How are you getting on with the Achievement Diary?")
+                stage = 90
+            }
 
             90 -> {
                 options("I've come for my reward.", "I'm doing good.", "I have a question.")
                 stage = 91
             }
 
-            91 ->
-                when (buttonId) {
-                    1 -> {
-                        player("I've come for my reward.")
-                        stage = 200
-                    }
-
-                    2 -> {
-                        player("I'm doing good.")
-                        stage = 220
-                    }
-
-                    3 -> {
-                        player("I have a question.")
-                        stage = 105
-                    }
+            91 -> when (buttonId) {
+                1 -> {
+                    player("I've come for my reward.")
+                    stage = 200
                 }
+
+                2 -> {
+                    player("I'm doing good.")
+                    stage = 220
+                }
+
+                3 -> {
+                    player("I have a question.")
+                    stage = 105
+                }
+            }
 
             100 -> {
                 player("Er... I guess.")
@@ -358,76 +351,73 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 105
             }
 
-            105 ->
-                if (!Diary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
-                    options(
-                        "What is the Achievement Diary?",
-                        "What are the rewards?",
-                        "How do I claim the rewards?",
-                        "See you later.",
-                    )
-                    stage = 106
-                } else {
-                    options(
-                        "Can you remind me what my Falador shield does, please?",
-                        "What is the Achievement Diary?",
-                        "What are the rewards?",
-                        "How do I claim the rewards?",
-                        "See you later.",
-                    )
-                    stage = 107
+            105 -> if (!Diary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
+                options(
+                    "What is the Achievement Diary?",
+                    "What are the rewards?",
+                    "How do I claim the rewards?",
+                    "See you later.",
+                )
+                stage = 106
+            } else {
+                options(
+                    "Can you remind me what my Falador shield does, please?",
+                    "What is the Achievement Diary?",
+                    "What are the rewards?",
+                    "How do I claim the rewards?",
+                    "See you later.",
+                )
+                stage = 107
+            }
+
+            106 -> when (buttonId) {
+                1 -> {
+                    player("What is the Achievement Diary?")
+                    stage = 110
                 }
 
-            106 ->
-                when (buttonId) {
-                    1 -> {
-                        player("What is the Achievement Diary?")
-                        stage = 110
-                    }
-
-                    2 -> {
-                        player("What are the rewards?")
-                        stage = 120
-                    }
-
-                    3 -> {
-                        player("How do I claim the rewards?")
-                        stage = 130
-                    }
-
-                    4 -> {
-                        player("See you later.")
-                        stage = 999
-                    }
+                2 -> {
+                    player("What are the rewards?")
+                    stage = 120
                 }
 
-            107 ->
-                when (buttonId) {
-                    1 -> {
-                        player("Can you remind me what my Falador shield does, please?")
-                        stage = 150
-                    }
-
-                    2 -> {
-                        player("What is the Achievement Diary?")
-                        stage = 110
-                    }
-
-                    3 -> {
-                        player("What are the rewards?")
-                        stage = 120
-                    }
-
-                    4 -> {
-                        player("How do I claim the rewards?")
-                        stage = 130
-                    }
-
-                    5 -> {
-                        player("See you later.")
-                        stage = 999
-                    }
+                3 -> {
+                    player("How do I claim the rewards?")
+                    stage = 130
                 }
+
+                4 -> {
+                    player("See you later.")
+                    stage = 999
+                }
+            }
+
+            107 -> when (buttonId) {
+                1 -> {
+                    player("Can you remind me what my Falador shield does, please?")
+                    stage = 150
+                }
+
+                2 -> {
+                    player("What is the Achievement Diary?")
+                    stage = 110
+                }
+
+                3 -> {
+                    player("What are the rewards?")
+                    stage = 120
+                }
+
+                4 -> {
+                    player("How do I claim the rewards?")
+                    stage = 130
+                }
+
+                5 -> {
+                    player("See you later.")
+                    stage = 999
+                }
+            }
 
             110 -> {
                 npc(
@@ -535,20 +525,19 @@ class RedbeardFrankDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 105
             }
 
-            200 ->
-                if (Diary.canReplaceReward(player, DiaryType.FALADOR, level)) {
-                    playerl(FaceAnim.HALF_GUILTY, "I seem to have lost my shield...")
-                    stage = 250
-                } else if (Diary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
-                    npc("But you've already gotten yours!")
-                    stage = 105
-                } else if (Diary.hasCompletedLevel(player, DiaryType.FALADOR, level)) {
-                    npc("So, you've finished. Well done! I believe congratulations", "are in order.")
-                    stage = 201
-                } else {
-                    npc("But you haven't finished!")
-                    stage = 105
-                }
+            200 -> if (Diary.canReplaceReward(player, DiaryType.FALADOR, level)) {
+                playerl(FaceAnim.HALF_GUILTY, "I seem to have lost my shield...")
+                stage = 250
+            } else if (Diary.hasClaimedLevelRewards(player, DiaryType.FALADOR, level)) {
+                npc("But you've already gotten yours!")
+                stage = 105
+            } else if (Diary.hasCompletedLevel(player, DiaryType.FALADOR, level)) {
+                npc("So, you've finished. Well done! I believe congratulations", "are in order.")
+                stage = 201
+            } else {
+                npc("But you haven't finished!")
+                stage = 105
+            }
 
             201 -> {
                 player("I believe rewards are in order.")
