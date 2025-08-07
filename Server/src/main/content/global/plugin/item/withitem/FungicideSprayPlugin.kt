@@ -13,17 +13,22 @@ class FungicideSprayPlugin : InteractionListener {
     override fun defineListeners() {
         /*
          * Handles reloading the Fungicide spray.
+         * It can only be reloaded when fully empty (charge 0).
          */
+        val sprayIds = (Items.FUNGICIDE_SPRAY_10_7421..Items.FUNGICIDE_SPRAY_0_7431).toList()
 
-        onUseWith(IntType.ITEM, Items.FUNGICIDE_7432, *(Items.FUNGICIDE_SPRAY_10_7421..Items.FUNGICIDE_SPRAY_0_7431).toIntArray()) { player, used, with ->
-            if (with.id in Items.FUNGICIDE_SPRAY_10_7421..Items.FUNGICIDE_SPRAY_1_7430) {
-                sendMessage(player, "You don't need reload right now.")
-                return@onUseWith false
-            }
-            if (removeItem(player, used.asItem())) {
-                replaceSlot(player, with.asItem().slot, Item(Items.FUNGICIDE_SPRAY_10_7421))
+        onUseWith(IntType.ITEM, Items.FUNGICIDE_7432, *sprayIds.toIntArray()) { player, used, with ->
+            if (with.id != Items.FUNGICIDE_SPRAY_0_7431) {
+                sendMessage(player, "You don't need to reload right now.")
                 return@onUseWith true
             }
+
+            if (removeItem(player, used.asItem())) {
+                replaceSlot(player, with.asItem().slot, Item(Items.FUNGICIDE_SPRAY_10_7421))
+                sendMessage(player, "You refill the fungicide spray.")
+                return@onUseWith true
+            }
+
             return@onUseWith false
         }
     }

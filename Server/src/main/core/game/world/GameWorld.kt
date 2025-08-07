@@ -190,7 +190,14 @@ object GameWorld {
         SceneryDefinition.definitions.values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
 
         if (ServerConstants.PRELOAD_MAP) {
-            (7483..15420).forEach { id -> RegionManager.forId(id).also { Region.load(it) } }
+            var count = 0
+            (7483..15420).forEach { id ->
+                RegionManager.forId(id).also {
+                    Region.load(it)
+                    count++
+                }
+            }
+            log(GameWorld::class.java, Log.INFO, "Preload $count regions.")
         }
 
         System.gc()
