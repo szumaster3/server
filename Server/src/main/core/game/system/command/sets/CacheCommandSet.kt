@@ -16,6 +16,57 @@ import kotlin.reflect.jvm.isAccessible
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        /*
+         * Dump RangeWeapon definitions.
+         */
+
+        define(
+            name = "dumpranged",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpranged",
+            description = "Dumps all RangeWeapon definitions to a .txt file."
+        ) { player, _ ->
+
+            val dump = File("dumps/ranged_weapons_config.txt")
+            dump.parentFile.mkdirs()
+
+            val builder = StringBuilder()
+
+            core.game.node.entity.combat.equipment.RangeWeapon.getAll().forEach { weapon ->
+                builder.appendLine(weapon.toString())
+            }
+
+            dump.writeText(builder.toString())
+
+            player.debug("RangeWeapon definitions dumped to $dump.")
+        }
+
+        /*
+         * Dump ammunition definitions.
+         */
+
+        define(
+            name = "dumpammo",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpammo",
+            description = "Dumps all Ammunition definitions to a .txt file."
+        ) { player, _ ->
+
+            val dump = File("dumps/ammunition_config.txt")
+            dump.parentFile.mkdirs()
+
+            val builder = StringBuilder()
+
+            core.game.node.entity.combat.equipment.Ammunition.getAll().forEach { ammo ->
+                builder.appendLine(ammo.toString())
+            }
+
+            dump.writeText(builder.toString())
+
+            player.debug("Ammunition definitions dumped to $dump.")
+        }
+
         /*
          * Dump render animations.
          */

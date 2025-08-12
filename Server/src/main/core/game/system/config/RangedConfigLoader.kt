@@ -79,7 +79,7 @@ class RangedConfigLoader {
                     e.get("drop_ammo").asBoolean,
                     e.get("ammunition").asString.split(",").map { it.toInt() }
                 )
-                RangeWeapon.getRangeWeapons().putIfAbsent(id, weapon)
+                RangeWeapon.putRangeWeapon(weapon)
                 count++
             }
         }

@@ -550,4 +550,25 @@ public class Projectile {
         this.endLocation = endLocation;
     }
 
+    /**
+     * Gets a string data of the projectile.
+     *
+     * @return the string data
+     */
+    @Override
+    public String toString() {
+        return "Projectile(" +
+                "projectileId=" + projectileId +
+                ", startHeight=" + startHeight +
+                ", endHeight=" + endHeight +
+                ", startDelay=" + startDelay +
+                ", speed=" + speed +
+                ", angle=" + angle +
+                ", distance=" + distance +
+                ", source=" + (source != null ? source.getClass().getSimpleName() : "null") +
+                ", victim=" + (victim != null ? victim.getClass().getSimpleName() : "null") +
+                ", sourceLocation=" + sourceLocation +
+                ", endLocation=" + endLocation +
+                ')';
+    }
 }
