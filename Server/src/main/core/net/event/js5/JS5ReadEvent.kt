@@ -1,6 +1,7 @@
 package core.net.event.js5
 
 import core.net.*
+import shared.consts.Network
 import java.nio.ByteBuffer
 
 class JS5ReadEvent(
@@ -61,12 +62,12 @@ class JS5ReadEvent(
     }
 
     companion object {
-        const val PREFETCH_REQUEST = 0
-        const val PRIORITY_REQUEST = 1
-        const val STATUS_LOGGED_IN = 2
-        const val STATUS_LOGGED_OUT = 3
+        const val PREFETCH_REQUEST = Network.PREFETCH_REQUEST
+        const val PRIORITY_REQUEST = Network.PRIORITY_REQUEST
+        const val STATUS_LOGGED_IN = Network.STATUS_LOGGED_IN
+        const val STATUS_LOGGED_OUT = Network.STATUS_LOGGED_OUT
         const val ENCRYPTED = 4
-        const val ACKNOWLEDGE = 6
+        const val ACKNOWLEDGE = Network.ACKNOWLEDGE
         const val DISCONNECT = 7
     }
 }

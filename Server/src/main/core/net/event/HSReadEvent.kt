@@ -8,6 +8,7 @@ import core.net.lobby.WorldList
 import core.net.registry.AccountRegister
 import core.tools.Log
 import core.tools.RandomFunction
+import shared.consts.Network
 import java.nio.ByteBuffer
 import java.util.concurrent.ConcurrentHashMap
 
@@ -30,12 +31,12 @@ class HSReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(session,
 
         val opcode = buffer.get().toInt() and 0xFF
         when (opcode) {
-            14 -> {
+            Network.LOGIN_REQUEST -> {
                 session.setNameHash(buffer.get().toInt() and 0xFF)
                 session.setServerKey(RandomFunction.RANDOM.nextLong())
                 session.write(true)
             }
-            15 -> {
+            Network.HANDSHAKE_REQUEST -> {
                 val revision = buffer.int
                 // val subRevision = buffer.int
                 buffer.flip()
@@ -46,7 +47,9 @@ class HSReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(session,
                 }
                 session.write(false)
             }
-            147, 186, 36 -> {
+            Network.VERIFY_BIRTHDAY_INFORMATION,
+            Network.VERIFY_USERNAME_INFORMATION,
+            Network.SUBMIT_ACCOUNT_REGISTRATION -> {
                 AccountRegister.read(session, opcode, buffer)
             }
             255 -> { // World list

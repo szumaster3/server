@@ -5,6 +5,7 @@ import core.net.packet.IoBuffer
 import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
+import shared.consts.Network
 
 /**
  * Represents the outgoing container packet.
@@ -15,7 +16,7 @@ class ContainerPacket : OutgoingPacket<OutgoingContext.Container> {
     override fun send(context: OutgoingContext.Container) {
         var buffer: IoBuffer? = null
         if (context.clear) {
-            buffer = IoBuffer(144)
+            buffer = IoBuffer(Network.UPDATE_CONTAINER)
             buffer.putIntB(context.interfaceId shl 16 or context.childId)
         } else {
             val slotBased = context.slots != null

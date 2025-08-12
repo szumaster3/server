@@ -4,6 +4,7 @@ import core.game.node.entity.skill.Skills
 import core.net.packet.IoBuffer
 import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
+import shared.consts.Network
 import kotlin.math.ceil
 
 /**
@@ -14,7 +15,7 @@ import kotlin.math.ceil
 class SkillLevel : OutgoingPacket<OutgoingContext.SkillContext> {
 
     override fun send(context: OutgoingContext.SkillContext) {
-        val buffer = IoBuffer(38)
+        val buffer = IoBuffer(Network.SEND_SKILL_LEVEL)
         buffer.cypherOpcode(context.player.session.getIsaacPair()!!.output)
         val skills = context.player.getSkills()
         if (context.skillId == Skills.PRAYER) {

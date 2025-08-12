@@ -5,6 +5,7 @@ import core.net.packet.IoBuffer
 import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
+import shared.consts.Network
 
 /**
  * The update scene graph outgoing packet.
@@ -13,7 +14,7 @@ import core.net.packet.PacketHeader
  */
 class UpdateSceneGraph : OutgoingPacket<OutgoingContext.SceneGraph> {
     override fun send(context: OutgoingContext.SceneGraph) {
-        val buffer = IoBuffer(162, PacketHeader.SHORT)
+        val buffer = IoBuffer(Network.UPDATE_SCENE_GRAPH, PacketHeader.SHORT)
         val player = context.player
         buffer.cypherOpcode(player.session.getIsaacPair()!!.output)
         player.playerFlags.lastSceneGraph = player.location

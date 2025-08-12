@@ -4,6 +4,7 @@ import core.net.packet.IoBuffer
 import core.net.packet.OutgoingContext
 import core.net.packet.OutgoingPacket
 import core.net.packet.PacketHeader
+import shared.consts.Network
 
 /**
  * The run script outgoing packet.
@@ -35,7 +36,7 @@ class RunScriptPacket : OutgoingPacket<OutgoingContext.RunScript> {
     override fun send(context: OutgoingContext.RunScript) {
         val types = context.string
         val objects = context.objects
-        val buffer = IoBuffer(115, PacketHeader.SHORT)
+        val buffer = IoBuffer(Network.RUN_SCRIPT, PacketHeader.SHORT)
         buffer.putShort(context.player.interfaceManager.getPacketCount(1))
 
         buffer.putString(types)
