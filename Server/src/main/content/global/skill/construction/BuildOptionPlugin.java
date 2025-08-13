@@ -8,21 +8,23 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.Log;
+import core.plugin.ClassScanner;
 
 import static core.api.ContentAPIKt.log;
 
 /**
- * Handles the build options.
+ * The build option handling plugin.
+ * @author Emperor
+ *
  */
 @Initializable
 public final class BuildOptionPlugin extends OptionHandler {
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.setOptionHandler("build", this);
         SceneryDefinition.setOptionHandler("remove", this);
         ClassScanner.definePlugin(new RemoveDialogue());
@@ -35,33 +37,32 @@ public final class BuildOptionPlugin extends OptionHandler {
             player.getPacketDispatch().sendMessage("You have to be in building mode to do this.");
             return true;
         }
-        Scenery scenery = ((Scenery) node);
+        Scenery object = ((Scenery) node);
         if (option.equals("remove")) {
-            Decoration decoration = Decoration.getDecoration(player, scenery);
-            if (decoration == null || !scenery.isActive()) {
+            Decoration decoration = Decoration.getDecoration(player, object);
+            if (decoration == null || !object.isActive()) {
                 return false;
             }
-            player.getDialogueInterpreter().open("con:removedec", scenery);
+            player.getDialogueInterpreter().open("con:removedec", object);
             return true;
         }
         player.setAttribute("con:hsobject", node);
-        if (BuildingUtils.isDoorHotspot(scenery)) {
-            int[] pos = BuildingUtils.roomExists(player, scenery);
+        if (BuildingUtils.isDoorHotspot(object)) {
+            int[] pos = BuildingUtils.roomExists(player, object);
             if (pos != null) {
                 player.getDialogueInterpreter().open("con:remove", "room", pos);
                 return true;
             }
             if (player.getHouseManager().getRoomAmount() < player.getHouseManager().getMaximumRooms(player)) {
                 player.getInterfaceManager().open(new Component(402));
-
             } else {
                 player.getPacketDispatch().sendMessage("You currently have the maximum amount of rooms available.");
             }
             return true;
         }
-        Hotspot hotspot = player.getHouseManager().getHotspot(scenery);
-        if (hotspot == null || !isBuildable(player, scenery, hotspot)) {
-            log(this.getClass(), Log.WARN, "Construction (building):  " + hotspot + " : " + scenery + " chunkX = " + scenery.getLocation().getChunkX() + ", chunkY = " + scenery.getLocation().getChunkY());
+        Hotspot hotspot = player.getHouseManager().getHotspot(object);
+        if (hotspot == null || !isBuildable(player, object, hotspot)) {
+            log(this.getClass(), Log.WARN,  "Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
             return true;
         }
 
@@ -70,8 +71,14 @@ public final class BuildOptionPlugin extends OptionHandler {
         return true;
     }
 
-    private static boolean isBuildable(Player player, Scenery scenery, Hotspot hotspot) {
-        Room room = player.getHouseManager().getRoom(scenery.getLocation());
+    /**
+     * Checks if the hotspot can be used.
+     * @param player The player.
+     * @param hotspot The hotspot.
+     * @return {@code True} if so.
+     */
+    private static boolean isBuildable(Player player, Scenery object, Hotspot hotspot) {
+        Room room = player.getHouseManager().getRoom(object.getLocation());
         if (room == null) {
             return false;
         }
@@ -112,21 +119,27 @@ public final class BuildOptionPlugin extends OptionHandler {
         }
     }
 
+    /**
+     * Handles the removing a decoration dialogue.
+     * @author Emperor
+     */
     private static class RemoveDialogue extends Dialogue {
 
-        private Scenery scenery;
+        /**
+         * The object.
+         */
+        private Scenery object;
 
         /**
-         * Instantiates a new Remove dialogue.
+         * Constructs a new {@code RemoveDialogue} {@code Object}.
          */
         public RemoveDialogue() {
             super();
         }
 
         /**
-         * Instantiates a new Remove dialogue.
-         *
-         * @param player the player
+         * Constructs a new {@code RemoveDialogue} {@code Object}.
+         * @param player The player.
          */
         public RemoveDialogue(Player player) {
             super(player);
@@ -138,9 +151,9 @@ public final class BuildOptionPlugin extends OptionHandler {
         }
 
         @Override
-        public boolean open(java.lang.Object... args) {
+        public boolean open(Object... args) {
             interpreter.sendOptions("Really remove it?", "Yes", "No");
-            scenery = (Scenery) args[0];
+            object = (Scenery) args[0];
             return true;
         }
 
@@ -148,7 +161,7 @@ public final class BuildOptionPlugin extends OptionHandler {
         public boolean handle(int interfaceId, int buttonId) {
             switch (buttonId) {
                 case 1:
-                    BuildingUtils.removeDecoration(player, scenery);
+                    BuildingUtils.removeDecoration(player, object);
                     break;
             }
             end();
@@ -157,7 +170,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 
         @Override
         public int[] getIds() {
-            return new int[]{DialogueInterpreter.getDialogueKey("con:removedec")};
+            return new int[] { DialogueInterpreter.getDialogueKey("con:removedec") };
         }
 
     }

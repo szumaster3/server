@@ -1,7 +1,6 @@
 package content.global.skill.construction;
 
 import core.game.node.scenery.Scenery;
-import core.game.world.map.Direction;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
@@ -882,11 +881,6 @@ public enum RoomProperties {
 	private final int configuration;
 
 	/**
-	 * The current rotation of the room.
-	 */
-	private Direction rotation = Direction.NORTH;
-
-	/**
 	 * The hotspots in this room.
 	 */
 	private final Hotspot[] hotspots;
@@ -927,7 +921,6 @@ public enum RoomProperties {
 		Region.load(region, true);
 		RegionChunk chunk = region.getPlanes()[0].getRegionChunk(chunkX, chunkY);
 		return new boolean[] { isExit(chunk, 7, 3), isExit(chunk, 3, 0), isExit(chunk, 0, 3), isExit(chunk, 3, 7) };
-
 	}
 
 	/**

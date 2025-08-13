@@ -6,8 +6,15 @@ import shared.consts.Scenery;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a building hotspot.
+ * @author Emperor
+ */
 public enum BuildHotspot {
 
+    /**
+     * Low level garden hotspots.
+     */
     CENTREPIECE_1(Scenery.CENTREPIECE_SPACE_15361, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.PORTAL, Decoration.ROCK, Decoration.POND, Decoration.IMP_STATUE, Decoration.SMALL_OBELISK, Decoration.DUNGEON_ENTRANCE),
     BIG_TREE_1(Scenery.BIG_TREE_SPACE_15362, BuildHotspotType.INDIVIDUAL, BuildingUtils.PLANT_ANIM, Decoration.BIG_DEAD_TREE, Decoration.BIG_TREE, Decoration.BIG_OAK_TREE, Decoration.BIG_WILLOW_TREE, Decoration.BIG_MAPLE_TREE, Decoration.BIG_YEW_TREE, Decoration.BIG_MAGIC_TREE),
     TREE_1(Scenery.TREE_SPACE_15363, BuildHotspotType.INDIVIDUAL, BuildingUtils.PLANT_ANIM, Decoration.DEAD_TREE, Decoration.TREE, Decoration.OAK_TREE, Decoration.WILLOW_TREE, Decoration.MAPLE_TREE, Decoration.YEW_TREE, Decoration.MAGIC_TREE),
@@ -16,6 +23,9 @@ public enum BuildHotspot {
     SMALL_PLANT_1(Scenery.SMALL_PLANT_SPACE_1_15366, BuildHotspotType.INDIVIDUAL, BuildingUtils.PLANT_ANIM, Decoration.PLANT, Decoration.SMALL_FERN, Decoration.FERN_SP),
     SMALL_PLANT_2(Scenery.SMALL_PLANT_SPACE_2_15367, BuildHotspotType.INDIVIDUAL, BuildingUtils.PLANT_ANIM, Decoration.DOCK_LEAF, Decoration.THISTLE, Decoration.REEDS),
 
+    /**
+     * Low level Parlor hotspots.
+     */
     CHAIRS_1(Scenery.CHAIR_SPACE_15410, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRUDE_CHAIR, Decoration.WOODEN_CHAIR, Decoration.ROCKING_CHAIR, Decoration.OAK_CHAIR, Decoration.OAK_ARMCHAIR, Decoration.TEAK_ARMCHAIR, Decoration.MAHOGANY_ARMCHAIR),
     CHAIRS_2(Scenery.CHAIR_SPACE_15411, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRUDE_CHAIR, Decoration.WOODEN_CHAIR, Decoration.ROCKING_CHAIR, Decoration.OAK_CHAIR, Decoration.OAK_ARMCHAIR, Decoration.TEAK_ARMCHAIR, Decoration.MAHOGANY_ARMCHAIR),
     CHAIRS_3(Scenery.CHAIR_SPACE_15412, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRUDE_CHAIR, Decoration.WOODEN_CHAIR, Decoration.ROCKING_CHAIR, Decoration.OAK_CHAIR, Decoration.OAK_ARMCHAIR, Decoration.TEAK_ARMCHAIR, Decoration.MAHOGANY_ARMCHAIR),
@@ -27,6 +37,9 @@ public enum BuildHotspot {
     RUG2(Scenery.RUG_SPACE_15414, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
     RUG3(Scenery.RUG_SPACE_15413, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CENTER, Decoration.RED_RUG_CENTER, Decoration.OPULENT_RUG_CENTER),
 
+    /**
+     * Low level Kitchen hotspots.
+     */
     LARDER(Scenery.LARDER_SPACE_15403, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_LARDER, Decoration.OAK_LARDER, Decoration.TEAK_LARDER),
     SINK(Scenery.SINK_SPACE_15404, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.PUMP_AND_DRAIN, Decoration.PUMP_AND_TUB, Decoration.SINK),
     KITCHEN_TABLE(Scenery.TABLE_SPACE_15405, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.KITCHEN_WOODEN_TABLE, Decoration.KITCHEN_OAK_TABLE, Decoration.KITCHEN_TEAK_TABLE),
@@ -36,6 +49,9 @@ public enum BuildHotspot {
     SHELVES_2(Scenery.SHELF_SPACE_15399, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_SHELVES_1, Decoration.WOODEN_SHELVES_2, Decoration.WOODEN_SHELVES_3, Decoration.OAK_SHELVES_1, Decoration.OAK_SHELVES_2, Decoration.TEAK_SHELVES_1, Decoration.TEAK_SHELVES_2),
     BARRELS(Scenery.BARREL_SPACE_15401, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.BASIC_BEER_BARREL, Decoration.CIDER_BARREL, Decoration.ASGARNIAN_ALE_BARREL, Decoration.GREENMANS_ALE_BARREL, Decoration.DRAGON_BITTER_BARREL, Decoration.CHEFS_DELIGHT_BARREL),
 
+    /**
+     * Low-level Dining hotspots.
+     */
     FIREPLACE_DINING(Scenery.FIREPLACE_SPACE_15301, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CLAY_FIREPLACE, Decoration.STONE_FIREPLACE, Decoration.MARBLE_FIREPLACE),
     DINING_TABLE(Scenery.TABLE_SPACE_15298, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.DINING_TABLE_WOOD, Decoration.DINING_TABLE_OAK, Decoration.DINING_TABLE_CARVED_OAK, Decoration.DINING_TABLE_TEAK, Decoration.DINING_TABLE_CARVED_TEAK, Decoration.DINING_TABLE_MAHOGANY, Decoration.DINING_TABLE_OPULENT),
     DINING_CURTAINS(Scenery.CURTAIN_SPACE_15302, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.TORN_CURTAINS, Decoration.CURTAINS, Decoration.OPULENT_CURTAINS),
@@ -44,6 +60,9 @@ public enum BuildHotspot {
     ROPE_BELL_PULL(Scenery.BELL_PULL_SPACE_15304, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.ROPE_PULL, Decoration.BELL_PULL, Decoration.FANCY_BELL_PULL),
     WALL_DECORATION(Scenery.DECORATION_SPACE_15303, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECORATION, Decoration.TEAK_DECORATION, Decoration.GILDED_DECORATION),
 
+    /**
+     * Low-level Work shop hotspots.
+     */
     REPAIR(Scenery.REPAIR_SPACE_15448, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.REPAIR_BENCH, Decoration.WHETSTONE, Decoration.ARMOUR_STAND),
     WORKBENCH(Scenery.WORKBENCH_SPACE_15439, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.WORKBENCH_WOODEN, Decoration.WORKBENCH_OAK, Decoration.WORKBENCH_STEEL_FRAME, Decoration.WORKBENCH_WITH_VICE, Decoration.WORKBENCH_WITH_LATHE),
     CRAFTING(Scenery.CLOCKMAKING_SPACE_15441, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRAFTING_TABLE_1, Decoration.CRAFTING_TABLE_2, Decoration.CRAFTING_TABLE_3, Decoration.CRAFTING_TABLE_4),
@@ -54,6 +73,9 @@ public enum BuildHotspot {
     TOOL5(Scenery.TOOL_SPACE_15447, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.TOOL_STORE_1, Decoration.TOOL_STORE_2, Decoration.TOOL_STORE_3, Decoration.TOOL_STORE_4, Decoration.TOOL_STORE_5),
     HERALDRY(Scenery.HERALDRY_SPACE_15450, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.PLUMING_STAND, Decoration.SHIELD_EASEL, Decoration.BANNER_EASEL),
 
+    /**
+     * Bedroom hotspots.
+     */
     BED(Scenery.BED_SPACE_15260, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.WOODEN_BED, Decoration.OAK_BED, Decoration.LARGE_OAK_BED, Decoration.TEAK_BED, Decoration.LARGE_TEAK_BED, Decoration.FOUR_POSTER, Decoration.GILDED_FOUR_POSTER),
     CLOCK(Scenery.CLOCK_SPACE_15268, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_CLOCK, Decoration.TEAK_CLOCK, Decoration.GILDED_CLOCK),
     DRESSER(Scenery.DRESSER_SPACE_15262, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.SHAVING_STAND, Decoration.OAK_SHAVING_STAND, Decoration.OAK_DRESSER, Decoration.TEAK_DRESSER, Decoration.FANCY_TEAK_DRESSER, Decoration.MAHOGANY_DRESSER, Decoration.GILDED_DRESSER),
@@ -63,6 +85,9 @@ public enum BuildHotspot {
     BEDROOM_RUG2(Scenery.RUG_SPACE_15265, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
     BEDROOM_RUG3(Scenery.RUG_SPACE_15266, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CORNER, Decoration.RED_RUG_CORNER, Decoration.OPULENT_RUG_CORNER),
 
+    /**
+     * Skill hall hotspots.
+     */
     ARMOUR_SPACE(Scenery.ARMOUR_SPACE_15385, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MITHRIL_ARMOUR, Decoration.ADAMANT_ARMOUR, Decoration.RUNE_ARMOUR),
     ARMOUR_SPACE2(Scenery.ARMOUR_SPACE_15384, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MITHRIL_ARMOUR, Decoration.ADAMANT_ARMOUR, Decoration.RUNE_ARMOUR),
     HEAD_TROPHY(Scenery.HEAD_TROPHY_SPACE_15382, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.CRAWLING_HAND, Decoration.COCKATRICE_HEAD, Decoration.BASILISK_HEAD, Decoration.KURASK_HEAD, Decoration.ABYSSAL_DEMON_HEAD, Decoration.KBD_HEAD, Decoration.KQ_HEAD),
@@ -72,17 +97,26 @@ public enum BuildHotspot {
     HALL_RUG2(Scenery.RUG_SPACE_15378, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
     HALL_RUG3(Scenery.RUG_SPACE_15379, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CORNER, Decoration.RED_RUG_CORNER, Decoration.OPULENT_RUG_CORNER),
 
+    /**
+     * Games room hotspots.
+     */
     RANGING_GAME(Scenery.RANGING_GAME_SPACE_15346, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.HOOP_AND_STICK, Decoration.DARTBOARD, Decoration.ARCHERY_TARGET),
     ATTACK_STONE(Scenery.STONE_SPACE_15344, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CLAY_STONE, Decoration.LIMESTONE_STONE, Decoration.MARBLE_STONE),
     PRIZE_CHEST(Scenery.PRIZE_CHEST_SPACE_15343, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_CHEST, Decoration.TEAK_CHEST, Decoration.MAHOGANY_CHEST),
     ELEMENTAL_BALANCE(Scenery.ELEMENTAL_BALANCE_SPACE_15345, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.BALANCE_1, Decoration.BALANCE_2, Decoration.BALANCE_3),
     GAME_SPACE(Scenery.GAME_SPACE_15342, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.JESTER, Decoration.TREASURE_HUNT, Decoration.HANGMAN),
 
+    /**
+     * Portal room hotspots.
+     */
     TELEPORT_FOCUS(Scenery.CENTREPIECE_SPACE_15409, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TELEPORT_FOCUS, Decoration.GREATER_TELEPORT_FOCUS, Decoration.SCRYING_POOL),
     PORTAL1(Scenery.PORTAL_SPACE_15406, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TEAK_PORTAL, Decoration.MAHOGANY_PORTAL, Decoration.MARBLE_PORTAL, Decoration.TEAK_VARROCK_PORTAL, Decoration.MAHOGANY_VARROCK_PORTAL, Decoration.MARBLE_VARROCK_PORTAL, Decoration.TEAK_LUMBRIDGE_PORTAL, Decoration.MAHOGANY_LUMBRIDGE_PORTAL, Decoration.MARBLE_LUMBRIDGE_PORTAL, Decoration.TEAK_FALADOR_PORTAL, Decoration.MAHOGANY_FALADOR_PORTAL, Decoration.MARBLE_FALADOR_PORTAL, Decoration.TEAK_CAMELOT_PORTAL, Decoration.MAHOGANY_CAMELOT_PORTAL, Decoration.MARBLE_CAMELOT_PORTAL, Decoration.TEAK_ARDOUGNE_PORTAL, Decoration.MAHOGANY_ARDOUGNE_PORTAL, Decoration.MARBLE_ARDOUGNE_PORTAL, Decoration.TEAK_YANILLE_PORTAL, Decoration.MAHOGANY_YANILLE_PORTAL, Decoration.MARBLE_YANILLE_PORTAL, Decoration.TEAK_KHARYRLL_PORTAL, Decoration.MAHOGANY_KHARYRLL_PORTAL, Decoration.MARBLE_KHARYRLL_PORTAL),
     PORTAL2(Scenery.PORTAL_SPACE_15407, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TEAK_PORTAL, Decoration.MAHOGANY_PORTAL, Decoration.MARBLE_PORTAL, Decoration.TEAK_VARROCK_PORTAL, Decoration.MAHOGANY_VARROCK_PORTAL, Decoration.MARBLE_VARROCK_PORTAL, Decoration.TEAK_LUMBRIDGE_PORTAL, Decoration.MAHOGANY_LUMBRIDGE_PORTAL, Decoration.MARBLE_LUMBRIDGE_PORTAL, Decoration.TEAK_FALADOR_PORTAL, Decoration.MAHOGANY_FALADOR_PORTAL, Decoration.MARBLE_FALADOR_PORTAL, Decoration.TEAK_CAMELOT_PORTAL, Decoration.MAHOGANY_CAMELOT_PORTAL, Decoration.MARBLE_CAMELOT_PORTAL, Decoration.TEAK_ARDOUGNE_PORTAL, Decoration.MAHOGANY_ARDOUGNE_PORTAL, Decoration.MARBLE_ARDOUGNE_PORTAL, Decoration.TEAK_YANILLE_PORTAL, Decoration.MAHOGANY_YANILLE_PORTAL, Decoration.MARBLE_YANILLE_PORTAL, Decoration.TEAK_KHARYRLL_PORTAL, Decoration.MAHOGANY_KHARYRLL_PORTAL, Decoration.MARBLE_KHARYRLL_PORTAL),
     PORTAL3(Scenery.PORTAL_SPACE_15408, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TEAK_PORTAL, Decoration.MAHOGANY_PORTAL, Decoration.MARBLE_PORTAL, Decoration.TEAK_VARROCK_PORTAL, Decoration.MAHOGANY_VARROCK_PORTAL, Decoration.MARBLE_VARROCK_PORTAL, Decoration.TEAK_LUMBRIDGE_PORTAL, Decoration.MAHOGANY_LUMBRIDGE_PORTAL, Decoration.MARBLE_LUMBRIDGE_PORTAL, Decoration.TEAK_FALADOR_PORTAL, Decoration.MAHOGANY_FALADOR_PORTAL, Decoration.MARBLE_FALADOR_PORTAL, Decoration.TEAK_CAMELOT_PORTAL, Decoration.MAHOGANY_CAMELOT_PORTAL, Decoration.MARBLE_CAMELOT_PORTAL, Decoration.TEAK_ARDOUGNE_PORTAL, Decoration.MAHOGANY_ARDOUGNE_PORTAL, Decoration.MARBLE_ARDOUGNE_PORTAL, Decoration.TEAK_YANILLE_PORTAL, Decoration.MAHOGANY_YANILLE_PORTAL, Decoration.MARBLE_YANILLE_PORTAL, Decoration.TEAK_KHARYRLL_PORTAL, Decoration.MAHOGANY_KHARYRLL_PORTAL, Decoration.MARBLE_KHARYRLL_PORTAL),
 
+    /**
+     * Quest Hall hotspots.
+     */
     GUILD_TROPHY(Scenery.GUILD_TROPHY_SPACE_15394, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.ANTIDRAGON_SHIELD, Decoration.AMULET_OF_GLORY, Decoration.CAPE_OF_LEGENDS),
     PORTRAIT(Scenery.PORTRAIT_SPACE_15392, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.KING_ARTHUR, Decoration.ELENA, Decoration.GIANT_DWARF, Decoration.MISCELLANIANS),
     LANDSCAPE(Scenery.LANDSCAPE_SPACE_15393, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.LUMBRIDGE, Decoration.THE_DESERT, Decoration.MORYTANIA, Decoration.KARAMJA, Decoration.ISAFDAR),
@@ -90,12 +124,19 @@ public enum BuildHotspot {
     MAP(Scenery.MAP_SPACE_15396, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.SMALL_MAP, Decoration.MEDIUM_MAP, Decoration.LARGE_MAP),
     BOOKCASE2(Scenery.BOOKCASE_SPACE_15397, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WOODEN_BOOKCASE, Decoration.OAK_BOOKCASE, Decoration.MAHOGANY_BOOKCASE),
 
-    // OBELISK(44911, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MINI_OBELISK),
-    // PET_FEEDER(44910, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_FEEDER, Decoration.TEAK_PET_FEEDER, Decoration.MAHOGANY_PET_FEEDER),
-    // PET_HOUSE(44909, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_HOUSE, Decoration.TEAK_PET_HOUSE, Decoration.MAHOGANY_PET_HOUSE, Decoration.CONSECRATED_PET_HOUSE, Decoration.DESECRATED_PET_HOUSE, Decoration.NATURAL_PET_HOUSE),
-    // HABITAT_1(44907, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
-    // HABITAT_2(44908, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
+    /**
+     * Manegerie Hotspots
+     */
+    OBELISK(44911, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.MINI_OBELISK),
+    PET_FEEDER(44910, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_FEEDER, Decoration.TEAK_PET_FEEDER, Decoration.MAHOGANY_PET_FEEDER),
+    PET_HOUSE(44909, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_PET_HOUSE, Decoration.TEAK_PET_HOUSE, Decoration.MAHOGANY_PET_HOUSE, Decoration.CONSECRATED_PET_HOUSE, Decoration.DESECRATED_PET_HOUSE, Decoration.NATURAL_PET_HOUSE),
+    HABITAT_1(44907, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
+    HABITAT_2(44908, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.GARDEN_HABITAT, Decoration.JUNGLE_HABITAT, Decoration.DESERT_HABITAT, Decoration.POLAR_HABITAT, Decoration.VOLCANIC_HABITAT),
 
+
+    /**
+     * Combat room hotspots.
+     */
     WALL_DECORATION2(Scenery.DECORATION_SPACE_15297, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECORATION, Decoration.TEAK_DECORATION, Decoration.GILDED_DECORATION),
     STORAGE_SPACE(Scenery.STORAGE_SPACE_15296, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.GLOVE_RACK, Decoration.WEAPONS_RACK, Decoration.EXTRA_WEAPONS_RACK),
     CR_RING(Scenery.COMBAT_RING_SPACE_15277, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.BOXING_RING, Decoration.FENCING_RING, Decoration.COMBAT_RING, Decoration.NOTHING, Decoration.NOTHING2),
@@ -118,10 +159,16 @@ public enum BuildHotspot {
     CR_FLOOR7(Scenery.COMBAT_RING_SPACE_15294, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.BOXING_MAT_CORNER, Decoration.FENCING_MAT_CORNER, Decoration.COMBAT_MAT_CORNER, Decoration.NOTHING, Decoration.NOTHING2),
     CR_FLOOR8(Scenery.COMBAT_RING_SPACE_15295, BuildHotspotType.LINKED, BuildingUtils.BUILD_MID_ANIM, Decoration.BOXING_MAT_CORNER, Decoration.FENCING_MAT_CORNER, Decoration.COMBAT_MAT_CORNER, Decoration.NOTHING, Decoration.RANGING_PEDESTALS),
 
+    /**
+     * Quest hall hotspots.
+     */
     Q_HALL_RUG(Scenery.RUG_SPACE_15387, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CENTER, Decoration.RED_RUG_CENTER, Decoration.OPULENT_RUG_CENTER),
     Q_HALL_RUG2(Scenery.RUG_SPACE_15388, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
     Q_HALL_RUG3(Scenery.RUG_SPACE_15389, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CORNER, Decoration.RED_RUG_CORNER, Decoration.OPULENT_RUG_CORNER),
 
+    /**
+     * Study hotspots.
+     */
     GLOBE(Scenery.GLOBE_SPACE_15421, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.GLOBE, Decoration.ORNAMENTAL_GLOBE, Decoration.LUNAR_GLOBE, Decoration.CELESTIAL_GLOBE, Decoration.ARMILLARY_SPHERE, Decoration.SMALL_ORREY, Decoration.LARGE_ORREY),
     LECTERN(Scenery.LECTERN_SPACE_15420, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN),
     CRYSTAL_BALL(Scenery.CRYSTAL_BALL_SPACE_15422, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.CRYSTAL_BALL, Decoration.ELEMENTAL_SPHERE, Decoration.CRYSTAL_OF_POWER),
@@ -129,6 +176,9 @@ public enum BuildHotspot {
     WALL_CHART(Scenery.WALL_CHART_SPACE_15423, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.ALCHEMICAL_CHART, Decoration.ASTRONOMICAL_CHART, Decoration.INFERNAL_CHART),
     TELESCOPE(Scenery.TELESCOPE_SPACE_15424, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.TELESCOPE1, Decoration.TELESCOPE2, Decoration.TELESCOPE3),
 
+    /**
+     * Costume room hotspots.
+     */
     TREASURE_CHEST(Scenery.TREASURE_CHEST_SPACE_18813, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_TREASURE_CHEST, Decoration.TEAK_TREASURE_CHEST, Decoration.MAHOGANY_TREASURE_CHEST),
     ARMOUR_CASE(Scenery.ARMOUR_CASE_SPACE_18815, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_ARMOUR_CASE, Decoration.TEAK_ARMOUR_CASE, Decoration.MGANY_ARMOUR_CASE),
     MAGIC_WARDROBE(Scenery.MAGIC_WARDROBE_SPACE_18811, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_MAGIC_WARDROBE, Decoration.C_OAK_MAGIC_WARDROBE, Decoration.TEAK_MAGIC_WARDROBE, Decoration.C_TEAK_MAGIC_WARDROBE, Decoration.MGANY_MAGIC_WARDROBE, Decoration.GILDED_MAGIC_WARDROBE, Decoration.MARBLE_MAGIC_WARDROBE),
@@ -136,6 +186,9 @@ public enum BuildHotspot {
     TOY_BOX(Scenery.TOY_BOX_SPACE_18812, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_TOY_BOX, Decoration.TEAK_TOY_BOX, Decoration.MAHOGANY_TOY_BOX),
     COSTUME_BOX(Scenery.FANCY_DRESS_BOX_SPACE_18814, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_COSTUME_BOX, Decoration.TEAK_COSTUME_BOX, Decoration.MAHOGANY_COSTUME_BOX),
 
+    /**
+     * Chapel hotspots.
+     */
     ALTAR(Scenery.ALTAR_SPACE_15270, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_ALTAR, Decoration.TEAK_ALTAR, Decoration.CLOTH_ALTAR, Decoration.MAHOGANY_ALTAR, Decoration.LIMESTONE_ALTAR, Decoration.MARBLE_ALTAR, Decoration.GILDED_ALTAR),
     STATUE(Scenery.STATUE_SPACE_15275, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.SMALL_STATUE, Decoration.MEDIUM_STATUE, Decoration.LARGE_STATUE),
     MUSICAL(Scenery.MUSICAL_SPACE_15276, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.WINDCHIMES, Decoration.BELLS, Decoration.ORGAN),
@@ -145,6 +198,9 @@ public enum BuildHotspot {
     CHAPEL_RUG(Scenery.RUG_SPACE_15273, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_END, Decoration.RED_RUG_END, Decoration.OPULENT_RUG_END),
     CHAPEL_RUG2(Scenery.RUG_SPACE_15274, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.BROWN_RUG_CORNER, Decoration.RED_RUG_CORNER, Decoration.OPULENT_RUG_CORNER),
 
+    /**
+     * Formal garden hotspots.
+     */
     CENTREPIECE_2(Scenery.CENTREPIECE_SPACE_15368, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.PORTAL, Decoration.GAZEBO, Decoration.DUNGEON_ENTRANCE, Decoration.SMALL_FOUNTAIN, Decoration.LARGE_FOUNTAIN, Decoration.POSH_FOUNTAIN),
     FENCING(Scenery.FENCING_15369, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.BOUNDARY_STONES, Decoration.WOODEN_FENCE, Decoration.STONE_WALL, Decoration.IRON_RAILINGS, Decoration.PICKET_FENCE, Decoration.GARDEN_FENCE, Decoration.MARBLE_WALL),
     SMALL_PLANT1(Scenery.SMALL_PLANT_15375, BuildHotspotType.INDIVIDUAL, BuildingUtils.PLANT_ANIM, Decoration.SUNFLOWER, Decoration.MARIGOLDS, Decoration.ROSES),
@@ -155,6 +211,9 @@ public enum BuildHotspot {
     HEDGE2(Scenery.HEDGING_15371, BuildHotspotType.LINKED, BuildingUtils.PLANT_ANIM, Decoration.THORNY_HEDGE2, Decoration.NICE_HEDGE2, Decoration.SMALL_BOX_HEDGE2, Decoration.TOPIARY_HEDGE2, Decoration.FANCY_HEDGE2, Decoration.TALL_FANCY_HEDGE2, Decoration.TALL_BOX_HEDGE2),
     HEDGE3(Scenery.HEDGING_15372, BuildHotspotType.LINKED, BuildingUtils.PLANT_ANIM, Decoration.THORNY_HEDGE3, Decoration.NICE_HEDGE3, Decoration.SMALL_BOX_HEDGE3, Decoration.TOPIARY_HEDGE3, Decoration.FANCY_HEDGE3, Decoration.TALL_FANCY_HEDGE3, Decoration.TALL_BOX_HEDGE3),
 
+    /**
+     * Throne room hotspots.
+     */
     THRONE(Scenery.THRONE_SPACE_15426, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_THRONE, Decoration.TEAK_THRONE, Decoration.MAHOGANY_THRONE, Decoration.GILDED_THRONE, Decoration.SKELETON_THRONE, Decoration.CRYSTAL_THRONE, Decoration.DEMONIC_THRONE),
     LEVER(Scenery.LEVER_SPACE_15435, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.OAK_LEVER, Decoration.TEAK_LEVER, Decoration.MAHOGANY_LEVER),
     FLOOR(new int[]{Scenery.FLOOR_SPACE_15427, Scenery.FLOOR_SPACE_15428, Scenery.FLOOR_SPACE_15429, Scenery.FLOOR_SPACE_15430, Scenery.FLOOR_SPACE_15431, Scenery.FLOOR_SPACE_15432}, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_LOW_ANIM, Decoration.FLOOR_DECORATION, Decoration.STEEL_CAGE, Decoration.FLOOR_TRAP, Decoration.MAGIC_CIRCLE, Decoration.MAGIC_CAGE),
@@ -163,6 +222,9 @@ public enum BuildHotspot {
     TRAPDOOR(Scenery.TRAPDOOR_SPACE_15438, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_LOW_ANIM, Decoration.OAK_TRAPDOOR, Decoration.TEAK_TRAPDOOR, Decoration.MAHOGANY_TRAPDOOR),
     DECORATION(Scenery.DECORATION_SPACE_15434, BuildHotspotType.CREST, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DECO, Decoration.TEAK_DECO, Decoration.GILDED_DECO, Decoration.ROUND_SHIELD, Decoration.SQUARE_SHIELD, Decoration.KITE_SHIELD),
 
+    /**
+     * Oubliette hotspots.
+     */
     FLOOR_MID(Scenery.FLOOR_SPACE_MID_15347, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.SPIKES_MID, Decoration.TENTACLE_MID, Decoration.FP_FLOOR_MID, Decoration.ROCNAR_FLOOR_MID),
     FLOOR_SIDE(Scenery.FLOOR_SPACE_SIDE_15348, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.SPIKES_SIDE, Decoration.TENTACLE_SIDE, Decoration.FP_FLOOR_SIDE, Decoration.ROCNAR_FLOOR_SIDE),
     FLOOR_CORNER(Scenery.FLOOR_SPACE_CORNER_15349, BuildHotspotType.LINKED, BuildingUtils.BUILD_LOW_ANIM, Decoration.SPIKES_CORNER, Decoration.TENTACLE_CORNER, Decoration.FP_FLOOR_CORNER, Decoration.ROCNAR_FLOOR_CORNER),
@@ -174,6 +236,9 @@ public enum BuildHotspot {
     LADDER(Scenery.LADDER_SPACE_15356, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_LADDER, Decoration.TEAK_LADDER, Decoration.MAHOGANY_LADDER),
     OUBLIETTE_LIGHT(Scenery.LIGHTING_SPACE_15355, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.CANDLE, Decoration.TORCH, Decoration.SKULL_TORCH),
 
+    /**
+     * Corridor, junction, stairs, TODO: pit trap
+     */
     DUNGEON_DOOR_LEFT(Scenery.DOOR_SPACE_15328, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DOOR_LEFT, Decoration.STEEL_DOOR_LEFT, Decoration.MARBLE_DOOR_LEFT),
     DUNGEON_DOOR_RIGHT(Scenery.DOOR_SPACE_15329, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DOOR_RIGHT, Decoration.STEEL_DOOR_RIGHT, Decoration.MARBLE_DOOR_RIGHT),
     DUNGEON_DOOR_LEFT2(Scenery.DOOR_SPACE_15326, BuildHotspotType.LINKED, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_DOOR_LEFT, Decoration.STEEL_DOOR_LEFT, Decoration.MARBLE_DOOR_LEFT),
@@ -190,50 +255,96 @@ public enum BuildHotspot {
     DUNGEON_LIGHT2(Scenery.LIGHTING_SPACE_34138, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.CANDLE, Decoration.TORCH, Decoration.SKULL_TORCH),
     DUNGEON_PIT_GUARD(36676, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_HIGH_ANIM, Decoration.PIT_DOG, Decoration.PIT_OGRE, Decoration.PIT_ROCK_PROTECTOR, Decoration.PIT_SCABARITE, Decoration.PIT_BLACK_DEMON, Decoration.PIT_IRON_DRAGON),
 
+    /**
+     * Treasure room
+     */
     MONSTER(Scenery.MONSTER_SPACE_15257, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.DEMON, Decoration.KALPHITE_SOLDIER, Decoration.TOK_XIL, Decoration.DAGANNOTH, Decoration.STEEL_DRAGON),
     TREASURE_CHEST1(Scenery.TREASURE_SPACE_15256, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.WOODEN_CRATE, Decoration.OAK_T_CHEST, Decoration.TEAK_T_CHEST, Decoration.MGANY_T_CHEST, Decoration.MAGIC_CHEST),
     WALL_DECORATION1(Scenery.DECORATION_SPACE_15259, BuildHotspotType.CREST, BuildingUtils.BUILD_HIGH_ANIM, Decoration.ROUND_SHIELD, Decoration.SQUARE_SHIELD, Decoration.KITE_SHIELD),
 
+    /**
+     * Stairways.
+     */
     STAIRWAYS(Scenery.STAIR_SPACE_15380, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_STAIRCASE, Decoration.TEAK_STAIRCASE, Decoration.SPIRAL_STAIRCASE, Decoration.MARBLE_STAIRCASE, Decoration.MARBLE_SPIRAL),
     QUEST_STAIRWAYS(Scenery.STAIR_SPACE_15390, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_STAIRCASE, Decoration.TEAK_STAIRCASE, Decoration.SPIRAL_STAIRCASE, Decoration.MARBLE_STAIRCASE, Decoration.MARBLE_SPIRAL),
     STAIRWAYS_DUNGEON(new int[]{Scenery.STAIR_SPACE_15380, Scenery.STAIR_SPACE_15380, Scenery.STAIR_SPACE_15380, Scenery.STAIR_SPACE_15380, Scenery.STAIR_SPACE_15390, Scenery.STAIR_SPACE_15390}, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.OAK_STAIRCASE, Decoration.TEAK_STAIRCASE, Decoration.SPIRAL_STAIRCASE, Decoration.MARBLE_STAIRCASE, Decoration.MARBLE_SPIRAL),
 
+    /**
+     * Stairways.
+     */
     STAIRS_DOWN(Scenery.STAIR_SPACE_15381, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_LOW_ANIM, Decoration.OAK_STAIRS_DOWN, Decoration.TEAK_STAIRS_DOWN, Decoration.SPIRAL_STAIRS_DOWN, Decoration.MARBLE_STAIRS_DOWN, Decoration.MARBLE_SPIRAL_DOWN),
     STAIRS_DOWN2(Scenery.STAIR_SPACE_15391, BuildHotspotType.STAIRCASE, BuildingUtils.BUILD_LOW_ANIM, Decoration.OAK_STAIRS_DOWN, Decoration.TEAK_STAIRS_DOWN, Decoration.SPIRAL_STAIRS_DOWN, Decoration.MARBLE_STAIRS_DOWN, Decoration.MARBLE_SPIRAL_DOWN),
 
+    /**
+     * Window hotspots.
+     */
     WINDOW(Scenery.WINDOW_13830, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_WINDOW, Decoration.WHITEWASHED_STONE_WINDOW, Decoration.FREMENNIK_WINDOW, Decoration.TROPICAL_WOOD_WINDOW, Decoration.FANCY_STONE_WINDOW),
 
-    FLATPACK(38427, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK),
+
+    /**
+     * Flatpack hotspots for making flatpacks
+     */
+    FLATPACK(38427, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK,Decoration.FLATPACK),
     ;
 
+    /**
+     * The object id.
+     */
     private final int objectId;
 
+    /**
+     * The object ids.
+     */
     private final int[] objectIds;
 
+    /**
+     * The decorations to build on this hotspot.
+     */
     private final Decoration[] decorations;
 
+    /**
+     * The hotspot type.
+     */
     private final BuildHotspotType type;
 
+    /**
+     * The building animation.
+     */
     private final Animation buildingAnimation;
 
+    /**
+     * The linked hotspots
+     */
     private static final List<BuildHotspot[]> linkedHotspots = new ArrayList<BuildHotspot[]>();
 
+    /**
+     * Configures hotspots.
+     */
     static {
-        linkedHotspots.add(new BuildHotspot[]{RUG, RUG2, RUG3});
-        linkedHotspots.add(new BuildHotspot[]{BEDROOM_RUG, BEDROOM_RUG2, BEDROOM_RUG3});
-        linkedHotspots.add(new BuildHotspot[]{HALL_RUG, HALL_RUG2, HALL_RUG3});
-        linkedHotspots.add(new BuildHotspot[]{CR_RING, CR_RING2, CR_RING3, CR_RING4, CR_CORNER, CR_CORNER2, CR_CORNER3, CR_CORNER4, CR_FLOOR, CR_FLOOR2, CR_FLOOR3, CR_FLOOR4, CR_FLOOR5, CR_FLOOR6, CR_FLOOR7, CR_FLOOR8, CR_INVISIBLE_WALL, CR_INVISIBLE_WALL2, CR_INVISIBLE_WALL3});
-        linkedHotspots.add(new BuildHotspot[]{Q_HALL_RUG, Q_HALL_RUG2, Q_HALL_RUG3});
-        linkedHotspots.add(new BuildHotspot[]{CHAPEL_RUG, CHAPEL_RUG2});
-        linkedHotspots.add(new BuildHotspot[]{HEDGE1, HEDGE2, HEDGE3});
-        linkedHotspots.add(new BuildHotspot[]{FLOOR_MID, FLOOR_SIDE, FLOOR_CORNER, OUBLIETTE_FLOOR, OUBLIETTE_FLOOR_1});
-        linkedHotspots.add(new BuildHotspot[]{PRISON, PRISON_DOOR});
-        linkedHotspots.add(new BuildHotspot[]{DUNGEON_DOOR_LEFT, DUNGEON_DOOR_RIGHT});
-        linkedHotspots.add(new BuildHotspot[]{DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2});
-        linkedHotspots.add(new BuildHotspot[]{SMALL_PLANT_1, SMALL_PLANT1});
-        linkedHotspots.add(new BuildHotspot[]{SHELVES, SHELVES_2});// linkedHotspots.add(new BuildHotspot[]{HABITAT_1, HABITAT_2});
+        linkedHotspots.add(new BuildHotspot[] { RUG, RUG2, RUG3 });
+        linkedHotspots.add(new BuildHotspot[] { BEDROOM_RUG, BEDROOM_RUG2, BEDROOM_RUG3 });
+        linkedHotspots.add(new BuildHotspot[] { HALL_RUG, HALL_RUG2, HALL_RUG3 });
+        linkedHotspots.add(new BuildHotspot[] { CR_CORNER, CR_CORNER2, CR_CORNER3, CR_CORNER4, CR_RING,
+                CR_RING2, CR_RING3, CR_RING4, CR_FLOOR, CR_FLOOR2, CR_FLOOR3, CR_FLOOR4, CR_FLOOR5,
+                CR_FLOOR6, CR_FLOOR7, CR_FLOOR8, CR_INVISIBLE_WALL, CR_INVISIBLE_WALL2, CR_INVISIBLE_WALL3});
+        linkedHotspots.add(new BuildHotspot[] { Q_HALL_RUG, Q_HALL_RUG2, Q_HALL_RUG3 });
+        linkedHotspots.add(new BuildHotspot[] { CHAPEL_RUG, CHAPEL_RUG2 });
+        linkedHotspots.add(new BuildHotspot[] { HEDGE1, HEDGE2, HEDGE3 });
+        linkedHotspots.add(new BuildHotspot[] { FLOOR_MID, FLOOR_SIDE, FLOOR_CORNER, OUBLIETTE_FLOOR, OUBLIETTE_FLOOR_1 });
+        linkedHotspots.add(new BuildHotspot[] { PRISON, PRISON_DOOR });
+        linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT, DUNGEON_DOOR_RIGHT });
+        linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2 });
+        linkedHotspots.add(new BuildHotspot[] { HABITAT_1, HABITAT_2 });
+        linkedHotspots.add(new BuildHotspot[] { SMALL_PLANT_1, SMALL_PLANT1 });
+        linkedHotspots.add(new BuildHotspot[] { SHELVES, SHELVES_2 });
     }
 
+    /**
+     * Constructs a new {@code BuildHotspot} {@code Object}.
+     * @param objectId The object id.
+     * @param buildingAnimation The building animation.
+     * @param decorations The decoration.
+     */
     private BuildHotspot(int objectId, BuildHotspotType type, Animation buildingAnimation, Decoration... decorations) {
         this.objectId = objectId;
         this.objectIds = null;
@@ -242,6 +353,12 @@ public enum BuildHotspot {
         this.decorations = decorations;
     }
 
+    /**
+     * Constructs a new {@code BuildHotspot} {@code Object}.
+     * @param objectIds The objects ids.
+     * @param buildingAnimation The building animation.
+     * @param decorations The decoration.
+     */
     private BuildHotspot(int[] objectIds, BuildHotspotType type, Animation buildingAnimation, Decoration... decorations) {
         this.objectId = objectIds[0];
         this.objectIds = objectIds;
@@ -251,11 +368,10 @@ public enum BuildHotspot {
     }
 
     /**
-     * Gets the BuildHotspot corresponding to the given object id and housing style.
-     *
-     * @param id    the object id to match
-     * @param style the housing style
-     * @return the matching BuildHotspot, or null if none found
+     * Gets the building hotspot for the given object id.
+     * @param id The object id.
+     * @param style The housing style.
+     * @return The building hotspot.
      */
     public static BuildHotspot forId(int id, HousingStyle style) {
         for (BuildHotspot spot : values()) {
@@ -267,10 +383,9 @@ public enum BuildHotspot {
     }
 
     /**
-     * Gets the array of linked BuildHotspots that includes the specified hotspot.
-     *
-     * @param b the BuildHotspot to find linked hotspots for
-     * @return an array of linked BuildHotspots, or null if none found
+     * Gets the linked hotspots (if any)
+     * @param b - the buildhotspot to find linked hotspots
+     * @return BuildHotspot[] or null
      */
     public static BuildHotspot[] getLinkedHotspots(BuildHotspot b) {
         for (BuildHotspot[] list : linkedHotspots) {
@@ -284,10 +399,9 @@ public enum BuildHotspot {
     }
 
     /**
-     * Gets the index of the given Decoration within this hotspot's decorations array.
-     *
-     * @param deco the Decoration to find
-     * @return the index of the decoration, or -1 if not found
+     * Gets the decoration index.
+     * @param deco The decoration.
+     * @return The index.
      */
     public int getDecorationIndex(Decoration deco) {
         for (int i = 0; i < decorations.length; i++) {
@@ -299,10 +413,9 @@ public enum BuildHotspot {
     }
 
     /**
-     * Gets the object id for this hotspot based on the specified housing style.
-     *
-     * @param style the housing style
-     * @return the object id for the given style, or the default object id if none available
+     * Gets the objectId.
+     * @param style The current housing style.
+     * @return The objectId.
      */
     public int getObjectId(HousingStyle style) {
         if (objectIds != null) {
@@ -312,45 +425,40 @@ public enum BuildHotspot {
     }
 
     /**
-     * Gets the default object id for this hotspot.
-     *
-     * @return the object id
+     * Gets the objectId.
+     * @return The objectId.
      */
     public int getObjectId() {
         return objectId;
     }
 
     /**
-     * Gets the type of this BuildHotspot.
-     *
-     * @return the BuildHotspotType
+     * Gets the type
+     * @return type
      */
     public BuildHotspotType getType() {
         return type;
     }
 
     /**
-     * Gets the array of Decorations available for this hotspot.
-     *
-     * @return an array of Decorations
+     * Gets the decorations.
+     * @return The decorations.
      */
     public Decoration[] getDecorations() {
         return decorations;
     }
 
     /**
-     * Gets the array of object ids associated with this hotspot for different styles.
-     *
-     * @return an array of object ids
+     * Gets the objectIds value.
+     * @return The objectIds.
      */
     public int[] getObjectIds() {
         return objectIds;
     }
 
     /**
-     * Gets the animation used when building on this hotspot.
-     *
-     * @return the build Animation
+     * Gets the buildingAnimation value.
+     * @return The buildingAnimation.
      */
     public Animation getBuildingAnimation() {
         return buildingAnimation;

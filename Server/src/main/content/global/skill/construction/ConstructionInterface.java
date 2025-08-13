@@ -1,5 +1,6 @@
 package content.global.skill.construction;
 
+
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -15,7 +16,9 @@ import shared.consts.Components;
 import static core.api.ContentAPIKt.log;
 
 /**
- * The Construction interface.
+ * Handles the creating of a decoration object.
+ *
+ * @author Emperor
  */
 @Initializable
 public final class ConstructionInterface extends ComponentPlugin {
@@ -56,6 +59,8 @@ public final class ConstructionInterface extends ComponentPlugin {
 
                         if (hotspot.getHotspot() == BuildHotspot.FLATPACK) {
                             deco = Decoration.forInterfaceItemId(itemId);
+                            player.debug("Building flatpack: " + itemId);
+                            player.debug("Building flatpack: " + deco.name());
 
                             if (debug || checkRequirements(player, deco))
                                 BuildingUtils.createFlatpack(player, deco, debug);

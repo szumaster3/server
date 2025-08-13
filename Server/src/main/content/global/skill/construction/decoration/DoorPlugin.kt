@@ -33,26 +33,20 @@ class DoorPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val door = node as Scenery
-        val second = DoorActionHandler.getSecondDoor(door) ?: return true
-
         when (option) {
-            "open" -> DoorActionHandler.open(
-                door, second,
-                getReplaceId(door), getReplaceId(second),
-                 true, -1,  false
-            )
-            "close" -> DoorActionHandler.close(
-                door, second,
-                getReplaceId(door), getReplaceId(second.asScenery().wrapper),
-                true, -1, false
-            )
+            "pick-lock", "force" -> return false
         }
-
+        val `object` = node as Scenery
+        val second = DoorActionHandler.getSecondDoor(`object`) ?: return false
+        DoorActionHandler.open(`object`, second, getReplaceId(`object`), getReplaceId(second), true, 500, false)
         return true
     }
 
-
+    /**
+     * Gets the replacement id for the door.
+     * @param object The door.
+     * @return The replacement object id.
+     */
     private fun getReplaceId(`object`: Scenery): Int {
         for (data in REPLACEMENT) {
             if (`object`.id == data[0]) {
@@ -62,9 +56,10 @@ class DoorPlugin : OptionHandler() {
         return `object`.id + 6
     }
 
-
-
     companion object {
+        /**
+         * The replacement ids.
+         */
         val REPLACEMENT = arrayOf(
             intArrayOf(13100, 13102),
             intArrayOf(13101, 13103),

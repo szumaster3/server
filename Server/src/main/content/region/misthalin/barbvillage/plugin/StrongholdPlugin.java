@@ -20,6 +20,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
+import core.game.world.map.Point;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -218,7 +219,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
             public boolean pulse() {
                 switch (++counter) {
                     case 1:
-                        final java.awt.Point p = DoorActionHandler.getRotationPoint(object.getRotation());
+                        final Point p = DoorActionHandler.getRotationPoint(object.getRotation());
                         Location destination = !player.getLocation().equals(object.getLocation()) ? object.getLocation() : object.getLocation().transform((int) p.getX(), (int) p.getY(), 0);
                         player.getProperties().setTeleportLocation(destination);
                         break;
