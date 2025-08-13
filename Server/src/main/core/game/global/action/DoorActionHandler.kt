@@ -11,10 +11,10 @@ import core.game.system.config.DoorConfigLoader.Companion.forId
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.game.world.map.Point
 import core.game.world.map.RegionManager.getObject
 import core.game.world.map.path.Pathfinder
 import shared.consts.Sounds
-import java.awt.Point
 
 /**
  * Handles door-related actions.
