@@ -6,15 +6,21 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
+import shared.consts.Quests
 
+/**
+ * Represents the Mistag dialogue.
+ *
+ * Relations:
+ * - Death to the Dorgeshuun quest
+ */
 class MistagDialogueFile : DialogueFile() {
     override fun handle(
         componentID: Int,
         buttonID: Int,
     ) {
         npc = NPC(NPCs.MISTAG_2084)
-        val questName = "Death to the Dorgeshuun"
-        val questStage = getQuestStage(player!!, questName)
+        val questStage = getQuestStage(player!!, Quests.DEATH_TO_THE_DORGESHUUN)
         when {
             (questStage == 0) -> {
                 when (stage) {

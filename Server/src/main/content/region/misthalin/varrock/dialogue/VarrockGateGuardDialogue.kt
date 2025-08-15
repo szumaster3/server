@@ -13,14 +13,10 @@ import shared.consts.NPCs
  */
 @Initializable
 class VarrockGateGuardDialogue(player: Player? = null) : Dialogue(player) {
-    
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(
-            FaceAnim.HALF_GUILTY,
-            "Please don't disturb me, I've got to keep an eye out for",
-            "suspicious individuals.",
-        ).also { stage = END_DIALOGUE }
+        npc(FaceAnim.HALF_GUILTY, "Please don't disturb me, I've got to keep an eye out for", "suspicious individuals.").also { stage = END_DIALOGUE }
         return true
     }
 

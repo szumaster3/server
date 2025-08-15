@@ -50,18 +50,17 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 457
             }
 
-            20 ->
-                if (!player.inventory.contains(755, 1)) {
-                    player(FaceAnim.HALF_GUILTY, "Romeo...great news...I've been in touch with Juliet!")
-                    stage = 300
-                } else {
-                    player(
-                        FaceAnim.HALF_GUILTY,
-                        "Romeo...great news...I've been in touch with Juliet!",
-                        "She's written a message for you...",
-                    )
-                    stage = 400
-                }
+            20 -> if (!player.inventory.contains(755, 1)) {
+                player(FaceAnim.HALF_GUILTY, "Romeo...great news...I've been in touch with Juliet!")
+                stage = 300
+            } else {
+                player(
+                    FaceAnim.HALF_GUILTY,
+                    "Romeo...great news...I've been in touch with Juliet!",
+                    "She's written a message for you...",
+                )
+                stage = 400
+            }
 
             30 -> {
                 player(FaceAnim.HALF_GUILTY, "Hey again Romeo!")
@@ -83,14 +82,13 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 326
             }
 
-            60 ->
-                if (!player.inventory.contains(756, 1)) {
-                    player("Hi Romeo!")
-                    stage = 326
-                } else {
-                    interpreter.sendItemMessage(756, "Romeo spots the Cadava potion.")
-                    stage = 350
-                }
+            60 -> if (!player.inventory.contains(756, 1)) {
+                player("Hi Romeo!")
+                stage = 326
+            } else {
+                interpreter.sendItemMessage(756, "Romeo spots the Cadava potion.")
+                stage = 350
+            }
 
             70 -> {
                 player(
@@ -117,18 +115,17 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 1
             }
 
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HALF_GUILTY, "No sorry. I haven't seen her.")
-                        stage = 200
-                    }
-
-                    2 -> {
-                        player(FaceAnim.HALF_GUILTY, "Perhaps I can help find her for you? What does she", "look like?")
-                        stage = 10
-                    }
+            1 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HALF_GUILTY, "No sorry. I haven't seen her.")
+                    stage = 200
                 }
+
+                2 -> {
+                    player(FaceAnim.HALF_GUILTY, "Perhaps I can help find her for you? What does she", "look like?")
+                    stage = 10
+                }
+            }
 
             10 -> {
                 npc(FaceAnim.HALF_GUILTY, "Oh would you? That would be great! She has this sort", "of hair...")
@@ -202,23 +199,22 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 20
             }
 
-            20 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HALF_GUILTY, "Yes, ok, I'll let her know.")
-                        stage = 100
-                    }
-
-                    2 -> {
-                        player(
-                            FaceAnim.HALF_GUILTY,
-                            "Sorry Romeo, I've got better things to do right now but maybe latter?",
-                        )
-                        stage = 50
-                    }
-
-                    3 -> end()
+            20 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HALF_GUILTY, "Yes, ok, I'll let her know.")
+                    stage = 100
                 }
+
+                2 -> {
+                    player(
+                        FaceAnim.HALF_GUILTY,
+                        "Sorry Romeo, I've got better things to do right now but maybe latter?",
+                    )
+                    stage = 50
+                }
+
+                3 -> end()
+            }
 
             100 -> {
                 npc(FaceAnim.HALF_GUILTY, "Oh great! And tell her that I want to kiss her a give.")
@@ -250,15 +246,14 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 106
             }
 
-            105 ->
-                when (buttonId) {
-                    1 -> {}
-                    2 -> {}
-                    3 -> {
-                        npc(FaceAnim.HALF_GUILTY, "Ok, thanks.")
-                        stage = 106
-                    }
+            105 -> when (buttonId) {
+                1 -> {}
+                2 -> {}
+                3 -> {
+                    npc(FaceAnim.HALF_GUILTY, "Ok, thanks.")
+                    stage = 106
                 }
+            }
 
             106 -> end()
             200 -> {
@@ -520,28 +515,27 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 431
             }
 
-            431 ->
-                when (buttonId) {
-                    1 -> {
-                        player("How are you?")
-                        stage = 500
-                    }
-
-                    2 -> {
-                        player("Where can I find Father Lawrence?")
-                        stage = 530
-                    }
-
-                    3 -> {
-                        player("Have you heard anything from Juliet?")
-                        stage = 560
-                    }
-
-                    4 -> {
-                        player("Ok, thanks.")
-                        stage = 580
-                    }
+            431 -> when (buttonId) {
+                1 -> {
+                    player("How are you?")
+                    stage = 500
                 }
+
+                2 -> {
+                    player("Where can I find Father Lawrence?")
+                    stage = 530
+                }
+
+                3 -> {
+                    player("Have you heard anything from Juliet?")
+                    stage = 560
+                }
+
+                4 -> {
+                    player("Ok, thanks.")
+                    stage = 580
+                }
+            }
 
             580 -> end()
             560 -> {
@@ -798,8 +792,12 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val height = 450
                 val speed = 55
                 val other = 1
-                pos = OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x + 3, y + 4, height, other, speed)
-                rot = OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x - 1, y - 2, height, other, speed)
+                pos = OutgoingContext.Camera(
+                    player, OutgoingContext.CameraType.POSITION, x + 3, y + 4, height, other, speed
+                )
+                rot = OutgoingContext.Camera(
+                    player, OutgoingContext.CameraType.ROTATION, x - 1, y - 2, height, other, speed
+                )
                 PacketRepository.send(CameraViewPacket::class.java, pos)
                 PacketRepository.send(CameraViewPacket::class.java, rot)
                 Pulser.submit(
@@ -812,18 +810,18 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                             val height = 450
                             val speed = 100
                             val other = 1
-                            pos =
-                                OutgoingContext.Camera(
-                                    player,
-                                    OutgoingContext.CameraType.POSITION,
-                                    x - 5,
-                                    y - 4,
-                                    height,
-                                    other,
-                                    speed,
-                                )
-                            rot =
-                                OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x + 2, y, height, other, speed)
+                            pos = OutgoingContext.Camera(
+                                player,
+                                OutgoingContext.CameraType.POSITION,
+                                x - 5,
+                                y - 4,
+                                height,
+                                other,
+                                speed,
+                            )
+                            rot = OutgoingContext.Camera(
+                                player, OutgoingContext.CameraType.ROTATION, x + 2, y, height, other, speed
+                            )
                             PacketRepository.send(CameraViewPacket::class.java, pos!!)
                             PacketRepository.send(CameraViewPacket::class.java, rot!!)
                             interpreter.sendDialogues(
@@ -850,8 +848,11 @@ class RomeoDialogue(player: Player? = null) : Dialogue(player) {
                 val height = 330
                 val speed = 100
                 val other = 1
-                val pos = OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y - 1, height, other, speed)
-                val rot = OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, x + 20, y + 50, height, other, speed)
+                val pos =
+                    OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, x, y - 1, height, other, speed)
+                val rot = OutgoingContext.Camera(
+                    player, OutgoingContext.CameraType.ROTATION, x + 20, y + 50, height, other, speed
+                )
                 PacketRepository.send(CameraViewPacket::class.java, pos)
                 PacketRepository.send(CameraViewPacket::class.java, rot)
                 close()

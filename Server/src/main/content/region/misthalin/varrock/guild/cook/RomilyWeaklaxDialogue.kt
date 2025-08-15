@@ -43,10 +43,10 @@ class RomilyWeaklaxDialogue(player: Player? = null) : Dialogue(player) {
         pieReward = PieReward.forId(pieId)
 
         if (args.size > 1 && (args[1] as Item).id == Items.WILD_PIE_7208) {
-            npc(FaceAnim.HALF_ASKING,"Is that a wild pie for me?")
+            npc(FaceAnim.HALF_ASKING, "Is that a wild pie for me?")
             stage = 100
         } else {
-            npc(FaceAnim.HAPPY,"Hello and welcome to my pie shop, how can I help you?")
+            npc(FaceAnim.HAPPY, "Hello and welcome to my pie shop, how can I help you?")
             stage = if (pieId != 0 && pieAmt != 0) 2 else 0
         }
         return true
@@ -62,7 +62,9 @@ class RomilyWeaklaxDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player("I'm good thanks.").also { stage = END_DIALOGUE }
             }
 
-            2 -> options("I'd like to buy some pies.", "I've got those pies you wanted.", "I'm good thanks.").also { stage++ }
+            2 -> options(
+                "I'd like to buy some pies.", "I've got those pies you wanted.", "I'm good thanks."
+            ).also { stage++ }
 
             3 -> when (buttonId) {
                 1 -> player("I'd like to buy some pies.").also { stage = 10 }
@@ -90,11 +92,13 @@ class RomilyWeaklaxDialogue(player: Player? = null) : Dialogue(player) {
                         npc("Doesn't look like you have the $pieAmt ${Item(pieId).name}s I requested.")
                         stage = END_DIALOGUE
                     }
+
                     deficit == 0 -> {
                         npc("Thank you very much!")
                         removeAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT)
                         removeAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT)
                     }
+
                     else -> {
                         npc("Thank you! If you could bring me the other $deficit pies, that'd be great!")
                         setAttribute(player, GameAttributes.DIARY_VARROCK_ROMILY_WEAKLAX_PIE_AMOUNT, deficit)
@@ -133,12 +137,11 @@ class RomilyWeaklaxDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.ROMILY_WEAKLAX_3205)
 
     private enum class PieReward(val id: Int, val reward: Int) {
-        APPLE(Items.APPLE_PIE_2323, 84),
-        REDBERRY(Items.REDBERRY_PIE_2325, 90),
-        MEAT(Items.MEAT_PIE_2327, 96),
-        GARDEN(Items.GARDEN_PIE_7178, 112),
-        FISH(Items.FISH_PIE_7188, 125),
-        ADMIRAL(Items.ADMIRAL_PIE_7198, 387);
+        APPLE(Items.APPLE_PIE_2323, 84), REDBERRY(Items.REDBERRY_PIE_2325, 90), MEAT(Items.MEAT_PIE_2327, 96), GARDEN(
+            Items.GARDEN_PIE_7178,
+            112
+        ),
+        FISH(Items.FISH_PIE_7188, 125), ADMIRAL(Items.ADMIRAL_PIE_7198, 387);
 
         companion object {
             fun forId(id: Int): PieReward? = values().find { it.id == id }

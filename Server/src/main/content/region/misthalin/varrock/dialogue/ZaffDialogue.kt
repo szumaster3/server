@@ -101,38 +101,33 @@ class ZaffDialogue : OptionHandler() {
                     }
                 }
 
-                1 ->
-                    when (buttonId) {
-                        1 -> {
-                            sendPlayerDialogue(player, "Yes, please.", FaceAnim.HALF_GUILTY)
-                            stage = 10
-                        }
-
-                        2 -> {
-                            sendPlayerDialogue(player, "No, thank you.", FaceAnim.HALF_GUILTY)
-                            stage = 20
-                        }
-
-                        3 -> {
-                            if (quest!!.getStage(player) == 60) {
-                                player("Rat Burgiss sent me!")
-                                stage = 70
-                            } else if (quest!!.getStage(player) == 80) {
-                                player("We did it! We beat Surok!")
-                                stage = 200
-                            } else {
-                                sendPlayerDialogue(player, "Can I have another ring?", FaceAnim.HALF_GUILTY)
-                                stage = 50
-                            }
-                        }
+                1 -> when (buttonId) {
+                    1 -> {
+                        sendPlayerDialogue(player, "Yes, please.", FaceAnim.HALF_GUILTY)
+                        stage = 10
                     }
 
+                    2 -> {
+                        sendPlayerDialogue(player, "No, thank you.", FaceAnim.HALF_GUILTY)
+                        stage = 20
+                    }
+
+                    3 -> {
+                        if (quest!!.getStage(player) == 60) {
+                            player("Rat Burgiss sent me!")
+                            stage = 70
+                        } else if (quest!!.getStage(player) == 80) {
+                            player("We did it! We beat Surok!")
+                            stage = 200
+                        } else {
+                            sendPlayerDialogue(player, "Can I have another ring?", FaceAnim.HALF_GUILTY)
+                            stage = 50
+                        }
+                    }
+                }
+
                 10 -> {
-                    if (player.achievementDiaryManager
-                            .getDiary(DiaryType.VARROCK)!!
-                            .levelRewarded
-                            .contains(true)
-                    ) {
+                    if (player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.levelRewarded.contains(true)) {
                         npcl(FaceAnim.FRIENDLY, "Would you like to hear about my battlestaves?")
                         stage = 1000
                     } else {
@@ -309,18 +304,17 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 1000 -> options("Yes, please.", "No, thanks.").also { stage++ }
-                1001 ->
-                    when (buttonId) {
-                        1 -> {
-                            end()
-                            openDialogue(player, 9679, npc)
-                        }
-
-                        2 -> {
-                            end()
-                            openNpcShop(player, NPCs.ZAFF_546)
-                        }
+                1001 -> when (buttonId) {
+                    1 -> {
+                        end()
+                        openDialogue(player, 9679, npc)
                     }
+
+                    2 -> {
+                        end()
+                        openNpcShop(player, NPCs.ZAFF_546)
+                    }
+                }
             }
             return true
         }
@@ -374,28 +368,27 @@ class ZaffDialogue : OptionHandler() {
                     stage = 1
                 }
 
-                1 ->
-                    end().also {
-                        sendInputDialogue(player, InputType.AMOUNT, "Enter an amount:") { value ->
-                            ammount = getStoreFile().getInt(player.username.lowercase())
-                            var amt = value as Int
-                            if (amt > maxStaffs - ammount) amt = maxStaffs - ammount
-                            val coinage = amt * 7000
-                            if (!inInventory(player, Items.COINS_995, coinage)) {
-                                sendDialogue(player, "You can't afford that many.")
-                                return@sendInputDialogue
-                            }
+                1 -> end().also {
+                    sendInputDialogue(player, InputType.AMOUNT, "Enter an amount:") { value ->
+                        ammount = getStoreFile().getInt(player.username.lowercase())
+                        var amt = value as Int
+                        if (amt > maxStaffs - ammount) amt = maxStaffs - ammount
+                        val coinage = amt * 7000
+                        if (!inInventory(player, Items.COINS_995, coinage)) {
+                            sendDialogue(player, "You can't afford that many.")
+                            return@sendInputDialogue
+                        }
 
-                            if (amt == 0) {
-                                return@sendInputDialogue
-                            }
+                        if (amt == 0) {
+                            return@sendInputDialogue
+                        }
 
-                            if (removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)) {
-                                addItem(player, Items.BATTLESTAFF_1392, amt)
-                                getStoreFile().addProperty(player.username.lowercase(), amt + ammount)
-                            }
+                        if (removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)) {
+                            addItem(player, Items.BATTLESTAFF_1392, amt)
+                            getStoreFile().addProperty(player.username.lowercase(), amt + ammount)
                         }
                     }
+                }
 
                 2 -> player(FaceAnim.HALF_GUILTY, "Oh, okay then. I'll try again another time.").also { stage++ }
 

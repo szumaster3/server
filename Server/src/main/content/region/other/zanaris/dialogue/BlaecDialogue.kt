@@ -8,6 +8,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the Blaec dialogue.
+ */
 @Initializable
 class BlaecDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -24,10 +27,7 @@ class BlaecDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean = true
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
     override fun newInstance(player: Player?): Dialogue = BlaecDialogue(player)
 

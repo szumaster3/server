@@ -11,6 +11,9 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the Lunderwin dialogue.
+ */
 @Initializable
 class LunderwinDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -28,20 +31,16 @@ class LunderwinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                if (!inInventory(player, Items.CABBAGE_1965)) {
-                    player("Alas, I have no cabbages either...").also { stage++ }
-                } else {
-                    options("Yes, I'll sell you all my cabbages.", "No, I will keep my cabbbages.").also { stage = 2 }
-                }
-
+            0 -> if (!inInventory(player, Items.CABBAGE_1965)) {
+                player("Alas, I have no cabbages either...").also { stage++ }
+            } else {
+                options("Yes, I'll sell you all my cabbages.", "No, I will keep my cabbbages.").also { stage = 2 }
+            }
             1 -> npc(FaceAnim.OLD_CALM_TALK1, "Pity be that, I want badly do.").also { stage = END_DIALOGUE }
-            2 ->
-                when (buttonId) {
-                    1 -> player("Yes, I'll sell you all my cabbages.").also { stage++ }
-                    2 -> player("No, I will keep my cabbbages.").also { stage = END_DIALOGUE }
-                }
-
+            2 -> when (buttonId) {
+                1 -> player("Yes, I'll sell you all my cabbages.").also { stage++ }
+                2 -> player("No, I will keep my cabbbages.").also { stage = END_DIALOGUE }
+            }
             3 -> {
                 val invAmount = amountInInventory(player!!, Items.CABBAGE_1965)
                 if (removeItem(player, Item(Items.CABBAGE_1965, invAmount), Container.INVENTORY)) {

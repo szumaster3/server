@@ -35,11 +35,7 @@ class GravingasDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             else -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "Will you join with me and protect against the evil ban",
-                    "of Necrovarus and his disciples?",
-                ).also { stage = 1 }
+                npc(FaceAnim.FRIENDLY, "Will you join with me and protect against the evil ban", "of Necrovarus and his disciples?").also { stage = 1 }
             }
         }
         return true

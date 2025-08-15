@@ -8,6 +8,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the Coordinator dialogue.
+ */
 @Initializable
 class CoordinatorDialogue(player: Player? = null) : Dialogue(player) {
     

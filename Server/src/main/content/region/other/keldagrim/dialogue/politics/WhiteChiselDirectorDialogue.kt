@@ -8,7 +8,7 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * Represents the White Chisel Director dialogue.
+ * Represents the White Chisel director dialogue.
  */
 @Initializable
 class WhiteChiselDirectorDialogue(player: Player? = null) : Dialogue(player) {

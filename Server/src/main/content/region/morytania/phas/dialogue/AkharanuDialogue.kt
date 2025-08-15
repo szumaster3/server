@@ -31,10 +31,7 @@ class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        componentId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(componentId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Why are you, errr, so stiff?", "Do you sell anything?").also { stage++ }
             1 -> when (buttonId) {
@@ -53,6 +50,8 @@ class AkharanuDialogue(player: Player? = null) : Dialogue(player) {
         }
         return true
     }
+
+    override fun newInstance(player: Player?): Dialogue = AkharanuDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.AK_HARANU_1688, NPCs.AK_HARANU_1689)
 }

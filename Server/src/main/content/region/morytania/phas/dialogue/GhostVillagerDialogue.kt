@@ -33,11 +33,7 @@ class GhostVillagerDialogue(player: Player? = null) : Dialogue(player) {
                     return true
                 }
                 if (inEquipment(player!!, Items.BEDSHEET_4284)) {
-                    npc(
-                        "Why are you wearing that bedsheet?",
-                        "If you're trying to pretend to be one of us, you're",
-                        "not fooling anybody - you're not even green!",
-                    )
+                    npc("Why are you wearing that bedsheet?", "If you're trying to pretend to be one of us, you're", "not fooling anybody - you're not even green!")
                     stage = END_DIALOGUE
                     return true
                 }
@@ -50,10 +46,7 @@ class GhostVillagerDialogue(player: Player? = null) : Dialogue(player) {
                         1 -> npc("We do not talk to the warm-bloods.").also { stage = END_DIALOGUE }
                         2 -> npc("What do you want, mortal?").also { stage = END_DIALOGUE }
                         3 -> npc("Why did we have to listen to that maniacal priest?").also { stage = END_DIALOGUE }
-                        4 ->
-                            npc("Worship the Ectofuntus all you want, but", "don't bother us, human.").also {
-                                stage = END_DIALOGUE
-                            }
+                        4 -> npc("Worship the Ectofuntus all you want, but", "don't bother us, human.").also { stage = END_DIALOGUE }
                     }
                 }
             }
@@ -62,6 +55,8 @@ class GhostVillagerDialogue(player: Player? = null) : Dialogue(player) {
         }
         return true
     }
+
+    override fun newInstance(player: Player?): Dialogue = GhostVillagerDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_VILLAGER_1697)
 }

@@ -27,26 +27,13 @@ class ScavvoDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                showTopics(
-                    Topic("No - toys are for kids.", END_DIALOGUE),
-                    Topic("Let's have a look, then.", 6),
-                    Topic(FaceAnim.HAPPY, "Ooh, goody-goody - toys!", 6),
-                    IfTopic(
-                        FaceAnim.HALF_ASKING,
-                        "Why do you sell most rune armour but not platebodies?",
-                        5,
-                        !isQuestComplete(player, Quests.DRAGON_SLAYER),
-                    ),
-                )
-            5 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Oh, you have to complete a special quest in order to wear rune platebodies. You should talk to the guild master downstairs about that",
-                ).also {
-                    stage =
-                        END_DIALOGUE
-                }
+            0 -> showTopics(
+                Topic("No - toys are for kids.", END_DIALOGUE),
+                Topic("Let's have a look, then.", 6),
+                Topic(FaceAnim.HAPPY, "Ooh, goody-goody - toys!", 6),
+                IfTopic(FaceAnim.HALF_ASKING, "Why do you sell most rune armour but not platebodies?", 5, !isQuestComplete(player, Quests.DRAGON_SLAYER)),
+            )
+            5 -> npcl(FaceAnim.FRIENDLY, "Oh, you have to complete a special quest in order to wear rune platebodies. You should talk to the guild master downstairs about that").also { stage = END_DIALOGUE }
             6 -> {
                 end()
                 openNpcShop(player, NPCs.SCAVVO_537)

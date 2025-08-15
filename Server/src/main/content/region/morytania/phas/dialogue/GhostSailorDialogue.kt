@@ -23,29 +23,21 @@ class GhostSailorDialogue(player: Player? = null) : Dialogue(player) {
             npcl(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo").also { stage = 3 }
             return true
         }
-        player(
-            "Hi there. Why do you still bother having ships here? I",
-            "mean - you're dead, what use are they to you?",
-        )
+        player("Hi there. Why do you still bother having ships here? I", "mean - you're dead, what use are they to you?")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    "We keep ships because we still need trade in",
-                    "Phasmatys. Every trader that comes to Phastmatys is",
-                    "made to worship the Ectofuntus, so that the Ectopower",
-                    "doesn't run out.",
-                ).also { stage++ }
-
+            0 -> npc("We keep ships because we still need trade in", "Phasmatys. Every trader that comes to Phastmatys is", "made to worship the Ectofuntus, so that the Ectopower", "doesn't run out.").also { stage++ }
             1 -> player("So, without traders to worship in the Temple you're", "history right?").also { stage++ }
             2 -> npc("Aye, matey.").also { stage = END_DIALOGUE }
             3 -> sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
         }
         return true
     }
+
+    override fun newInstance(player: Player?): Dialogue = GhostSailorDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_SAILOR_1703)
 }

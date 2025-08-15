@@ -51,11 +51,7 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             1 -> if (amountInInventory(player, Items.ECTO_TOKEN_4278) >= 2) {
-                options(
-                    "I would like to enter Port Phasmatys - here's 2 Ectotokens.",
-                    "I'm not paying you Ectotokens just to go through a gate.",
-                    "Where can I get Ectotokens?",
-                ).also { stage++ }
+                options("I would like to enter Port Phasmatys - here's 2 Ectotokens.", "I'm not paying you Ectotokens just to go through a gate.", "Where can I get Ectotokens?").also { stage++ }
             } else {
                 options("I don't have that many Ectotokens.", "Where can I get Ectotokens?").also { stage = 6 }
             }
@@ -78,6 +74,8 @@ class GhostGuardDialogue(player: Player? = null) : Dialogue(player) {
         }
         return true
     }
+
+    override fun newInstance(player: Player?): Dialogue = GhostGuardDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.GHOST_GUARD_1706)
 }

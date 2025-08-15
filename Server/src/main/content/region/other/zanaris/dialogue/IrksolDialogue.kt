@@ -9,6 +9,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the Irksol dialogue.
+ */
 @Initializable
 class IrksolDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -21,11 +24,10 @@ class IrksolDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("I'm interested in these deals.", "No thanks, just browsing.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.NEUTRAL, "I'm interested in these deals.").also { stage++ }
-                    2 -> player("No thanks, just browsing.").also { stage = 4 }
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.NEUTRAL, "I'm interested in these deals.").also { stage++ }
+                2 -> player("No thanks, just browsing.").also { stage = 4 }
+            }
             2 -> npcl(FaceAnim.FRIENDLY, "Aha! A connoisseur! Check out these beauties!").also { stage++ }
             3 -> {
                 end()

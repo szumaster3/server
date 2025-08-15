@@ -8,6 +8,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the Blue Opal director dialogue.
+ */
 @Initializable
 class BlueOpalDirectorDialogue(player: Player? = null) : Dialogue(player) {
 

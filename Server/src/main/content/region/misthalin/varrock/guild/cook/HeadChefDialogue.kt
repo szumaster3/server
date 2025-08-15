@@ -14,7 +14,7 @@ import shared.consts.NPCs
  */
 @Initializable
 class HeadChefDialogue(player: Player? = null) : Dialogue(player) {
-    
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         var door = false
@@ -60,18 +60,17 @@ class HeadChefDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 2
             }
 
-            2 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.HAPPY, "Nice cape, you're wearing!")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player(FaceAnim.FRIENDLY, "Thanks, bye.")
-                        stage = 3
-                    }
+            2 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.HAPPY, "Nice cape, you're wearing!")
+                    stage = 10
                 }
+
+                2 -> {
+                    player(FaceAnim.FRIENDLY, "Thanks, bye.")
+                    stage = 3
+                }
+            }
 
             3 -> end()
             10 -> {
@@ -91,18 +90,17 @@ class HeadChefDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 101
             }
 
-            101 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.FRIENDLY, "No thanks.")
-                        stage = 110
-                    }
-
-                    2 -> {
-                        player("Yes, please.")
-                        stage = 150
-                    }
+            101 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.FRIENDLY, "No thanks.")
+                    stage = 110
                 }
+
+                2 -> {
+                    player("Yes, please.")
+                    stage = 150
+                }
+            }
 
             110 -> {
                 interpreter.sendDialogues(847, FaceAnim.HAPPY, "Okay, come back to me if you change your mind.")
@@ -125,18 +123,17 @@ class HeadChefDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 152
             }
 
-            152 ->
-                when (buttonId) {
-                    1 -> {
-                        player(FaceAnim.EXTREMELY_SHOCKED, "That's much too expensive.")
-                        stage = 160
-                    }
-
-                    2 -> {
-                        player(FaceAnim.HAPPY, "Sure.")
-                        stage = 200
-                    }
+            152 -> when (buttonId) {
+                1 -> {
+                    player(FaceAnim.EXTREMELY_SHOCKED, "That's much too expensive.")
+                    stage = 160
                 }
+
+                2 -> {
+                    player(FaceAnim.HAPPY, "Sure.")
+                    stage = 200
+                }
+            }
 
             160 -> {
                 interpreter.sendDialogues(847, FaceAnim.HALF_GUILTY, "I'm sorry you feel that way.")

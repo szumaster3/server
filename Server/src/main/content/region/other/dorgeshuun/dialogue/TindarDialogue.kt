@@ -30,10 +30,7 @@ class TindarDialogue(player: Player? = null) : Dialogue(player) {
             3 -> {
                 end()
                 if (freeSlots(player) == 0) {
-                    npcl(
-                        FaceAnim.OLD_NORMAL,
-                        "Looks like your hands are full. You'll have to free up some inventory space before I sell you anything.",
-                    )
+                    npcl(FaceAnim.OLD_NORMAL, "Looks like your hands are full. You'll have to free up some inventory space before I sell you anything.")
                 } else if (amountInInventory(player, Items.COINS_995) < 10) {
                     player("But I don't have enough money on me.")
                 } else {

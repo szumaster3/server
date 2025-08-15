@@ -35,19 +35,28 @@ class DorgeshuunPlugin : InteractionListener {
 
     override fun defineListeners() {
 
+        /*
+         * Handles talk to Cave goblins NPC.
+         */
+
         on(CAVE_GOBLINS, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, CaveGoblinsDialogueFile())
             return@on true
         }
+
+        /*
+         * Handles talk to Ambassador Alvijar NPC.
+         */
 
         on(NPCs.AMBASSADOR_ALVIJAR_5863, IntType.NPC, "talk-to") { player, _ ->
             player.dialogueInterpreter.open(5887)
             return@on true
         }
 
-        /**
-         * Exchange
+        /*
+         * Handles exchange brooch for mining helmet.
          */
+
         onUseWith(IntType.NPC, Items.BROOCH_5008, NPCs.MISTAG_2084) { player, used, npc ->
             val randomReward = arrayOf(Items.MINING_HELMET_5013, Items.MINING_HELMET_5014).random()
 
@@ -70,6 +79,10 @@ class DorgeshuunPlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles open the bone doors.
+         */
+
         on(BONE_DOORS, IntType.SCENERY, "open") { player, node ->
             when (node.id) {
                 Scenery.BONE_DOOR_32952, Scenery.BONE_DOOR_32953 -> {
@@ -89,6 +102,10 @@ class DorgeshuunPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles open the bone doors.
+         */
 
         on(DOORS, IntType.SCENERY, "open") { player, node ->
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())

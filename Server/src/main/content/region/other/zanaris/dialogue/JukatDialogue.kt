@@ -9,6 +9,9 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the Jukat dialogue.
+ */
 @Initializable
 class JukatDialogue(player: Player? = null) : Dialogue(player) {
 
@@ -21,14 +24,13 @@ class JukatDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No thanks, I'm just browsing.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> {
-                        end()
-                        openNpcShop(player, NPCs.JUKAT_564)
-                    }
-                    2 -> player("No thanks, I'm just browsing.").also { stage = END_DIALOGUE }
+            1 -> when (buttonId) {
+                1 -> {
+                    end()
+                    openNpcShop(player, NPCs.JUKAT_564)
                 }
+                2 -> player("No thanks, I'm just browsing.").also { stage = END_DIALOGUE }
+            }
         }
         return true
     }

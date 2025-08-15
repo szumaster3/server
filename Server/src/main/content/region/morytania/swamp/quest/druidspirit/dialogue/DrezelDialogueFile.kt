@@ -14,6 +14,12 @@ import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Sounds
 
+/**
+ * Represents the Drezel dialogue file.
+ *
+ * Relations:
+ * - [Nature Spirit quest][content.region.morytania.swamp.quest.druidspirit.NatureSpirit]
+ */
 class DrezelDialogueFile : DialogueFile() {
     var questStage = 0
 
@@ -72,48 +78,16 @@ class DrezelDialogueFile : DialogueFile() {
                     4 -> playerl(FaceAnim.FRIENDLY, "Yes, I'll go and look for him.").also { stage = 10 }
                     5 -> playerl(FaceAnim.NEUTRAL, "Sorry, I don't think I can help.").also { stage = END_DIALOGUE }
                 }
-
-                5 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Filliman knew how to tackle them, but I've not heard from him in a long time. Ghasts, when they attack, will devour any food you have. If you have no food, they'll draw their nourishment from you!",
-                ).also {
-                    stage = 3
-                }
-
-                6 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    " We put a fence around it to stop unwary travellers going in. Anyone who dies in the swamp is forever cursed to haunt it as a Ghast. Ghasts attack travellers, turning food to rotten filth.",
-                ).also {
-                    stage = 3
-                }
-
-                10 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "That's great, but it is very dangerous. Are you sure you want to do this?",
-                ).also {
-                    stage++
-                }
-
+                5 -> npcl(FaceAnim.NEUTRAL, "Filliman knew how to tackle them, but I've not heard from him in a long time. Ghasts, when they attack, will devour any food you have. If you have no food, they'll draw their nourishment from you!").also { stage = 3 }
+                6 -> npcl(FaceAnim.NEUTRAL, " We put a fence around it to stop unwary travellers going in. Anyone who dies in the swamp is forever cursed to haunt it as a Ghast. Ghasts attack travellers, turning food to rotten filth.").also { stage = 3 }
+                10 -> npcl(FaceAnim.NEUTRAL, "That's great, but it is very dangerous. Are you sure you want to do this?").also { stage++ }
                 11 -> options("Yes, I'm sure.", "Sorry, I don't think I can help.").also { stage++ }
                 12 -> when (buttonID) {
                     1 -> playerl(FaceAnim.FRIENDLY, "Yes, I'm sure.").also { stage = 20 }
                     2 -> playerl(FaceAnim.NEUTRAL, "Sorry, I don't think I can help.").also { stage = END_DIALOGUE }
                 }
-
-                20 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "That's great! Many Thanks! Now then, please be aware of the Ghasts, you cannot attack them, only Filliman knew how to take them on.",
-                ).also {
-                    stage++
-                }
-
-                21 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Just run from them if you can. If you start to get lost, try to make your way back to the temple.",
-                ).also {
-                    stage++
-                }
-
+                20 -> npcl(FaceAnim.NEUTRAL, "That's great! Many Thanks! Now then, please be aware of the Ghasts, you cannot attack them, only Filliman knew how to take them on.").also { stage++ }
+                21 -> npcl(FaceAnim.NEUTRAL, "Just run from them if you can. If you start to get lost, try to make your way back to the temple.").also { stage++ }
                 22 -> {
                     sendDoubleItemDialogue(
                         player!!,
@@ -128,69 +102,26 @@ class DrezelDialogueFile : DialogueFile() {
                     }
                     stage++
                 }
-
-                23 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Please take this food to Filliman, he'll probably appreciate a bit of cooked food. Now, he's never revealed where he lives in the swamps but I guess he'd be to the south, search for him won't you?",
-                ).also {
-                    stage++
-                }
-
-                24 -> playerl(
-                    FaceAnim.FRIENDLY,
-                    "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.",
-                ).also {
+                23 -> npcl(FaceAnim.NEUTRAL, "Please take this food to Filliman, he'll probably appreciate a bit of cooked food. Now, he's never revealed where he lives in the swamps but I guess he'd be to the south, search for him won't you?").also { stage++ }
+                24 -> playerl(FaceAnim.FRIENDLY, "I'll do my very best, don't worry, if he's in there and he's still alive I'll definitely find him.").also {
                     stage = END_DIALOGUE
                     player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).start(player!!)
                 }
             }
         } else if (questStage == 15) {
             when (stage) {
-                0 -> playerl(
-                    FaceAnim.HALF_GUILTY,
-                    "I've found Filliman and you should prepare for some sad news.",
-                ).also { stage++ }
-
+                0 -> playerl(FaceAnim.HALF_GUILTY, "I've found Filliman and you should prepare for some sad news.").also { stage++ }
                 1 -> npcl(FaceAnim.HALF_GUILTY, "You mean... he's dead?").also { stage++ }
-                2 -> playerl(
-                    FaceAnim.NEUTRAL,
-                    "Well, er sort of. I got to his camp and I encountered a spirit of some kind. I don't think it was a Ghast, it tried to communicate with me, but made no sense, it was all 'ooooh' this and 'oooh' that.",
-                ).also {
-                    stage++
-                }
-
-                3 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Hmmm, that's very interesting, I seem to remember Father Aereck in Lumbridge and his predecessor Father Urhney having a similar issue. Though this is probably not related to your problem.",
-                ).also {
-                    stage++
-                }
-
-                4 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    " I will pray that it wasn't the spirit of my friend Filliman, but some lost soul who needs some help. Please do let me know how you get on with it.",
-                ).also {
-                    stage = END_DIALOGUE
-                }
+                2 -> playerl(FaceAnim.NEUTRAL, "Well, er sort of. I got to his camp and I encountered a spirit of some kind. I don't think it was a Ghast, it tried to communicate with me, but made no sense, it was all 'ooooh' this and 'oooh' that.").also { stage++ }
+                3 -> npcl(FaceAnim.NEUTRAL, "Hmmm, that's very interesting, I seem to remember Father Aereck in Lumbridge and his predecessor Father Urhney having a similar issue. Though this is probably not related to your problem.").also { stage++ }
+                4 -> npcl(FaceAnim.NEUTRAL, " I will pray that it wasn't the spirit of my friend Filliman, but some lost soul who needs some help. Please do let me know how you get on with it.").also { stage = END_DIALOGUE }
             }
         } else if (questStage == 35) {
             when (stage) {
-                0 -> playerl(
-                    FaceAnim.FRIENDLY,
-                    "Hello again! I'm helping Filliman, he plans to become a nature spirit. I have a spell to cast but first I need to be blessed. Can you bless me?",
-                ).also {
-                    stage++
-                }
-
+                0 -> playerl(FaceAnim.FRIENDLY, "Hello again! I'm helping Filliman, he plans to become a nature spirit. I have a spell to cast but first I need to be blessed. Can you bless me?").also { stage++ }
                 1 -> npcl(FaceAnim.NEUTRAL, "But you haven't sneezed!").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "You're so funny! But can you bless me?").also { stage++ }
-                3 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Very well my friend, prepare yourself for the blessings of Saradomin. Here we go!",
-                ).also {
-                    stage++
-                }
-
+                3 -> npcl(FaceAnim.NEUTRAL, "Very well my friend, prepare yourself for the blessings of Saradomin. Here we go!").also { stage++ }
                 4 -> {
                     end()
                     player!!.lock()
@@ -198,29 +129,15 @@ class DrezelDialogueFile : DialogueFile() {
                 }
             }
         } else if (questStage == 40) {
-            npcl(
-                FaceAnim.NEUTRAL,
-                "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!",
-            ).also {
+            npcl(FaceAnim.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also {
                 stage = END_DIALOGUE
                 player!!.questRepository.getQuest(Quests.NATURE_SPIRIT).setStage(player!!, 45)
             }
         } else if (questStage == 100) {
             when (stage) {
-                0 -> npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Greetings again adventurer. How go your travels in Morytania? Is it as evil as I have heard?",
-                ).also {
-                    stage++
-                }
-
+                0 -> npcl(FaceAnim.HALF_GUILTY, "Greetings again adventurer. How go your travels in Morytania? Is it as evil as I have heard?").also { stage++ }
                 1 -> playerl(FaceAnim.FRIENDLY, "I've lost my wolfbane dagger.").also { stage++ }
-                2 -> npcl(
-                    FaceAnim.FRIENDLY,
-                    "Yes, I know! Luckily for you it washed up on the banks of the Salve earlier!",
-                ).also {
-                    stage++
-                }
+                2 -> npcl(FaceAnim.FRIENDLY, "Yes, I know! Luckily for you it washed up on the banks of the Salve earlier!").also { stage++ }
 
                 3 -> if (freeSlots(player!!) == 0) {
                     end()
@@ -238,18 +155,16 @@ class DrezelDialogueFile : DialogueFile() {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Hello, friend, how goes your quest with Filliman?").also { stage++ }
                 1 -> playerl(FaceAnim.NEUTRAL, "Still working at it.").also { stage++ }
-                2 -> npcl(FaceAnim.NEUTRAL, "Well enough! Do let me know when something develops!").also {
-                    stage = END_DIALOGUE
-                }
+                2 -> npcl(FaceAnim.NEUTRAL, "Well enough! Do let me know when something develops!").also { stage = END_DIALOGUE }
             }
         }
     }
 }
 
-private class BlessingPulse(
-    val drezel: NPC,
-    val player: Player,
-) : Pulse() {
+/**
+ * Handles blessing the spell.
+ */
+private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse() {
     var ticks = 0
 
     override fun pulse(): Boolean {

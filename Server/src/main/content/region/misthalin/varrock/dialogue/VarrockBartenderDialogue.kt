@@ -28,22 +28,13 @@ class VarrockBartenderDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.HALF_ASKING,
-                    "Good day to you, brave adventurer. Can I get you a",
-                    "refreshing beer?",
-                ).also {
-                    stage++
-                }
-
+            0 -> npc(FaceAnim.HALF_ASKING, "Good day to you, brave adventurer. Can I get you a", "refreshing beer?").also { stage++ }
             1 -> options("Yes please!", "No thanks.", "How much?").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HAPPY, "Yes please!").also { stage = 10 }
-                    2 -> player(FaceAnim.NEUTRAL, "No thanks.").also { stage = 20 }
-                    3 -> player(FaceAnim.HALF_ASKING, "How much?").also { stage = 30 }
-                }
+            2 -> when (buttonId) {
+                1 -> player(FaceAnim.HAPPY, "Yes please!").also { stage = 10 }
+                2 -> player(FaceAnim.NEUTRAL, "No thanks.").also { stage = 20 }
+                3 -> player(FaceAnim.HALF_ASKING, "How much?").also { stage = 30 }
+            }
 
             10 -> npc(FaceAnim.FRIENDLY, "Ok then, that's two gold coins please.").also { stage++ }
             11 -> {
@@ -64,11 +55,10 @@ class VarrockBartenderDialogue(player: Player? = null) : Dialogue(player) {
             20 -> npc(FaceAnim.FRIENDLY, "Let me know if you change your mind.").also { stage = END_DIALOGUE }
             30 -> npc(FaceAnim.FRIENDLY, "Two gold pieces a pint. So, what do you say?").also { stage++ }
             31 -> options("Yes please!", "No thanks.").also { stage++ }
-            32 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HAPPY, "Yes please!").also { stage = 10 }
-                    2 -> player(FaceAnim.NEUTRAL, "No thanks.").also { stage = 20 }
-                }
+            32 -> when (buttonId) {
+                1 -> player(FaceAnim.HAPPY, "Yes please!").also { stage = 10 }
+                2 -> player(FaceAnim.NEUTRAL, "No thanks.").also { stage = 20 }
+            }
         }
         return true
     }
