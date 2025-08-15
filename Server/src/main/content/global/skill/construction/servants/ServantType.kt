@@ -24,9 +24,3 @@ enum class ServantType(
         fun forId(id: Int): ServantType? = values().find { it.id == id }
     }
 }
-
-// rick 1 hide
-// maid 3 hide
-// cook 5 hide
-// butler 6 buttler
-// demon 7

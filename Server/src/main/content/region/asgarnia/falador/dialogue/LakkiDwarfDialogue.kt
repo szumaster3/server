@@ -27,5 +27,5 @@ class LakkiDwarfDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.LAKKI_THE_DELIVERY_DWARF_7722)
+    override fun getIds(): IntArray = intArrayOf(NPCs.LAKKI_THE_DELIVERY_DWARF_7722, 7728)
 }

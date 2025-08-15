@@ -23,7 +23,16 @@ object GlobalStatistics {
     }
 
     @JvmStatic
+    fun incrementStealCakes() {
+        val archive = getStealCakesArchive()
+        archive.addProperty("count", archive.getInt("count") + 1)
+    }
+
+    @JvmStatic
     fun getDailyGuardPickpockets(): Int = getGuardPickpocketArchive().getInt("count")
+
+    @JvmStatic
+    fun getDailyStealCakes(): Int = getStealCakesArchive().getInt("count")
 
     @JvmStatic
     fun getDailyDeaths(): Int = getDailyDeathArchive().getInt("players")
@@ -36,4 +45,7 @@ object GlobalStatistics {
 
     @JvmStatic
     private fun getGuardPickpocketArchive(): JsonObject = ServerStore.getArchive("daily-guard-pickpockets")
+
+    @JvmStatic
+    private fun getStealCakesArchive(): JsonObject = ServerStore.getArchive("daily-steal-cakes")
 }
