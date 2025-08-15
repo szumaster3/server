@@ -49,6 +49,7 @@ class ImmerseWorld : StartupListener {
                     immerseFishingGuild()
                     immerseAdventurer()
                     immerseFalador()
+                    immerseArdougne()
                     immerseGE()
                 }
             }
@@ -92,7 +93,7 @@ class ImmerseWorld : StartupListener {
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(2702, 3397, 0)),
             )
             GeneralBotCreator(
-                content.global.bots.SeersFlax(),
+                SeersFlax(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2738, 3444, 0)),
             )
             GeneralBotCreator(
@@ -149,11 +150,11 @@ class ImmerseWorld : StartupListener {
                 ),
             )
             GeneralBotCreator(
-                content.global.bots.FarmerThiever(),
+                FarmerThiever(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3094, 3243, 0)),
             )
             GeneralBotCreator(
-                content.global.bots.FarmerThiever(),
+                FarmerThiever(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3094, 3243, 0)),
             )
             GeneralBotCreator(
@@ -236,6 +237,13 @@ class ImmerseWorld : StartupListener {
                     assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness),
                 )
             }
+        }
+
+        fun immerseArdougne() {
+            GeneralBotCreator(
+                CakeBandit(),
+                skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2662, 3302, 0)),
+            )
         }
 
         fun immerseFalador() {

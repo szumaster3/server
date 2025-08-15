@@ -131,6 +131,7 @@ public class TeleportManager {
             entity.getPulseManager().run(type.getPulse(entity, location));
         } else {
             entity.lock(12);
+            entity.getLocks().lockComponent(12);
             entity.getImpactHandler().setDisabledTicks(teleportType == -1 ? 5 : 12);
             GameWorld.getPulser().submit(currentTeleport);
         }

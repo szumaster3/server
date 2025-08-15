@@ -9,7 +9,6 @@ import core.game.interaction.MovementPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
 import shared.consts.Scenery
@@ -20,10 +19,16 @@ class CakeBandit : Script() {
     private val stealZone = ZoneBorders(2652, 3295, 2669, 3316)
     private val bankZone = ZoneBorders(2640, 3277, 2661, 3293)
     private val bankId = Scenery.BANK_BOOTH_34752
-    private val targetObjectId = Scenery.BAKER_S_STALL_34384
+    private val stallId = Scenery.BAKER_S_STALL_34384
     private val foodIds = listOf(Items.CAKE_1891, Items.BREAD_2309, Items.CHOCOLATE_SLICE_1901)
 
     override fun tick() {
+        for (id in foodIds) {
+            if (bot.inventory.containsItem(Item(id))) {
+                scriptAPI.eat(id)
+                break
+            }
+        }
         when (state) {
             State.INIT -> handleStealState()
             State.TO_BANK -> goToBank()
@@ -38,54 +43,32 @@ class CakeBandit : Script() {
             return
         }
 
-        val cakeStall = scriptAPI?.getNearestNode(targetObjectId, true) ?: return
+        val cakeStall = scriptAPI?.getNearestNode(stallId, true) ?: return
         val destinationReached =
             bot.destinationFlag
                 .getDestination(bot, cakeStall)
                 ?.withinDistance(cakeStall.location) == true
 
-        bot.interfaceManager?.close()
-
         if (!destinationReached) {
             bot.pulseManager.run(
-                object : MovementPulse(bot, cakeStall.location, DestinationFlag.ENTITY) {
+                object : MovementPulse(bot, cakeStall.location, DestinationFlag.OBJECT) {
                     override fun pulse(): Boolean {
                         InteractionListeners.run(
-                            targetObjectId,
+                            stallId,
                             IntType.SCENERY,
                             "steal-from",
                             bot,
                             cakeStall
                         )
-                        eatFood()
                         return true
                     }
                 }
             )
         } else {
-            InteractionListeners.run(targetObjectId, IntType.SCENERY, "steal-from", bot, cakeStall)
-            eatFood()
+            InteractionListeners.run(stallId, IntType.SCENERY, "steal-from", bot, cakeStall)
         }
 
         if (bot.inventory.isFull) state = State.TO_BANK
-    }
-
-    private fun eatFood() {
-        if (
-            bot.inventory.toArray().filterNotNull().any { it.id in foodIds } &&
-            bot.skills.lifepoints < bot.skills.getStaticLevel(3)
-        ) {
-            for (id in foodIds) {
-                if (bot.inventory.containsItem(Item(id))) {
-                    scriptAPI.eat(id)
-                    break
-                }
-            }
-        }
-
-        if (bot.inventory.toArray().filterNotNull().count { it.id in foodIds } < 3) {
-            state = State.TO_BANK
-        }
     }
 
     private fun goToBank() {
@@ -94,7 +77,7 @@ class CakeBandit : Script() {
         } else {
             val bank = scriptAPI?.getNearestNode(bankId, true) ?: return
             bot.pulseManager.run(
-                object : MovementPulse(bot, bank.location, DestinationFlag.ENTITY) {
+                object : MovementPulse(bot, bank.location, DestinationFlag.OBJECT) {
                     override fun pulse(): Boolean {
                         state = State.BANKING
                         return true
@@ -137,12 +120,15 @@ class CakeBandit : Script() {
         val script = CakeBandit()
         script.bot =
             SkillingBotAssembler()
-                .produce(SkillingBotAssembler.Wealth.POOR, Location.create(2662, 3302, 0))
+                .produce(SkillingBotAssembler.Wealth.AVERAGE, bot.startLocation)
         return script
     }
 
     init {
-        skills[Skills.THIEVING] = 5
+        skills[Skills.ATTACK] = 25
+        skills[Skills.STRENGTH] = 45
+        skills[Skills.DEFENCE] = 35
+        skills[Skills.THIEVING] = 25
     }
 
     enum class State {
