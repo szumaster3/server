@@ -91,4 +91,5 @@ object Regions {
     const val CORPOREAL_BEAST_CAVE_11844 = 11844
     const val TORMENTED_DEMON_10329 = 10329
     const val NORTH_JATIZSO_9532 = 9532
+    const val RANGING_GUILD_10549 = 10549
 }

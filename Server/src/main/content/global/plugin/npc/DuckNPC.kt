@@ -12,7 +12,7 @@ import shared.consts.NPCs
 class DuckNPC : NPCBehavior(NPCs.DUCK_46, NPCs.DUCK_2693, NPCs.DUCK_6113) {
     private val forceChat = arrayOf("Eep!", "Quack!")
     private var tickDelay = 0
-    private val TICK_INTERVAL = 5
+    private val TICK_INTERVAL = 30
 
     override fun tick(self: NPC): Boolean {
         tickDelay++

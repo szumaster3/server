@@ -66216,13 +66216,13 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Very neat.",
     "name": "Maid",
     "safespot": null,
     "id": "4237"
   },
   {
-    "examine": "",
+    "examine": "I hope she can find all the ingredients!",
     "name": "Cook",
     "defence_level": "1",
     "safespot": null,
@@ -66234,7 +66234,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "I hope she can find all the ingredients!",
     "name": "Cook",
     "safespot": null,
     "id": "4239"
@@ -66252,7 +66252,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "He knows how to buttle.",
     "name": "Butler",
     "safespot": null,
     "id": "4241"

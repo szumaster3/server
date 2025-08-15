@@ -369,7 +369,7 @@ class SeersVillageAchievementDiary : DiaryEventHookBase(DiaryType.SEERS_VILLAGE)
             )
         }
 
-        if (event.itemId in RANGING_GUILD_STOCK) {
+        if (event.itemId in RANGING_GUILD_STOCK && player.viewport.region!!.id == 10549) {
             finishTask(
                 player,
                 DiaryLevel.MEDIUM,
