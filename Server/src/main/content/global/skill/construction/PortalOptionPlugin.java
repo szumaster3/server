@@ -15,7 +15,7 @@ import static core.api.ContentAPIKt.sendInputDialogue;
 import static core.api.ContentAPIKt.sendMessage;
 
 /**
- * The type Portal option plugin.
+ * Handles the poh portal options.
  */
 @Initializable
 public final class PortalOptionPlugin extends OptionHandler {

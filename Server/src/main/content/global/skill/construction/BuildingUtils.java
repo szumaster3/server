@@ -19,6 +19,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.out.ContainerPacket;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
+import shared.consts.Components;
 import shared.consts.Items;
 
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ import static core.api.ContentAPIKt.*;
 
 /**
  * Utility class for building.
- * @author Emperor
  *
+ * @author Emperor
  */
 public final class BuildingUtils {
 
@@ -73,17 +74,18 @@ public final class BuildingUtils {
     /**
      * The watering can(8) item id.
      */
-    public static final int WATERING_CAN = 5340;
+    public static final int WATERING_CAN = Items.WATERING_CAN8_5340;
 
-    private static final int[] BUILD_INDEXES = { 0, 2, 4, 6, 1, 3, 5 };
+    private static final int[] BUILD_INDEXES = {0, 2, 4, 6, 1, 3, 5};
 
     /**
      * Opens the building furniture interface.
-     * @param player The player.
+     *
+     * @param player  The player.
      * @param hotspot The hotspot.
      */
     public static void openBuildInterface(Player player, BuildHotspot hotspot) {
-        player.getInterfaceManager().open(new Component(396));
+        player.getInterfaceManager().open(new Component(Components.POH_BUILD_FURNITURE_396));
         Item[] items = new Item[7];
 
         int c261Value = 0;
@@ -94,9 +96,9 @@ public final class BuildingUtils {
             //97 +
             if (menuIndex >= hotspot.getDecorations().length || (hotspot.getDecorations()[menuIndex] != null && hotspot.getDecorations()[menuIndex].isInvisibleNode())) {
                 for (int j = 0; j < 5; j++) {
-                    player.getPacketDispatch().sendString("", 396, itemsStringOffset + j);
+                    player.getPacketDispatch().sendString("", Components.POH_BUILD_FURNITURE_396, itemsStringOffset + j);
                 }
-                player.getPacketDispatch().sendString("", 396, 140 + menuIndex);
+                player.getPacketDispatch().sendString("", Components.POH_BUILD_FURNITURE_396, 140 + menuIndex);
                 c261Value += (1 << (menuIndex + 1));
                 continue;
             }
@@ -110,7 +112,7 @@ public final class BuildingUtils {
                     if (j == decoration.getItems().length && decoration.getNailAmount() > 0) {
                         player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, (itemsStringOffset + 1) + j);
                     } else {
-                        player.getPacketDispatch().sendString("", 396, (itemsStringOffset + 1) + j);
+                        player.getPacketDispatch().sendString("", Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j);
                     }
                 } else {
                     Item item = decoration.getItems()[j];
@@ -136,16 +138,17 @@ public final class BuildingUtils {
                 c261Value += (1 << (menuIndex + 1));
             }
             setVarp(player, 1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
-            player.getPacketDispatch().sendString("Level " + decoration.getLevel(), 396, 140 + menuIndex);
+            player.getPacketDispatch().sendString("Level " + decoration.getLevel(), Components.POH_BUILD_FURNITURE_396, 140 + menuIndex);
             //player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
         }
 
         setVarp(player, 261, c261Value);
-        PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, 396, 132, 8, items, false));
+        PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false));
     }
 
     /**
      * Checks if the object is a door hotspot.
+     *
      * @param object The object.
      * @return {@code True} if so.
      */
@@ -297,18 +300,19 @@ public final class BuildingUtils {
 
     /**
      * Sets a decoration for the given hotspot.
-     * @param player The player.
-     * @param region The region.
-     * @param room The room.
+     *
+     * @param player  The player.
+     * @param region  The region.
+     * @param room    The room.
      * @param hotspot The hotspot to set the decoration for.
-     * @param object The object representing the hotspot.
-     * @param deco The decoration to set.
+     * @param object  The object representing the hotspot.
+     * @param deco    The decoration to set.
      */
     private static void setDecoration(Player player, Region region, Room room, Hotspot hotspot, Scenery object, Decoration deco) {
         Location l = object.getLocation();
         HousingStyle style = player.getHouseManager().getStyle();
         int decIndex = hotspot.getHotspot().getDecorationIndex(deco);
-        switch(hotspot.getHotspot().getType()) {
+        switch (hotspot.getHotspot().getType()) {
             case STAIRCASE:
                 int z = l.getZ();
                 if (region == player.getHouseManager().getDungeonRegion()) {
@@ -335,8 +339,7 @@ public final class BuildingUtils {
                                             r.updateProperties(player, RoomProperties.SKILL_HALL_2);
                                         } else if (r.getProperties() == RoomProperties.QUEST_HALL) {
                                             r.updateProperties(player, RoomProperties.QUEST_HALL_2);
-                                        }
-                                        else {
+                                        } else {
                                             break;
                                         }
                                         player.getHouseManager().reload(player, true);
@@ -398,6 +401,7 @@ public final class BuildingUtils {
 
     /**
      * Remove the decoration
+     *
      * @param player the player
      * @param object the object to remove
      */
@@ -434,12 +438,13 @@ public final class BuildingUtils {
 
     /**
      * Removes the decoration.
-     * @param player The player.
-     * @param region The region.
-     * @param room The room.
+     *
+     * @param player  The player.
+     * @param region  The region.
+     * @param room    The room.
      * @param hotspot The hotspot to remove the decoration from.
-     * @param object The object.
-     * @param style The housing style.
+     * @param object  The object.
+     * @param style   The housing style.
      */
     private static void removeDecoration(Player player, Region region, Room room, Hotspot hotspot, Scenery object, HousingStyle style) {
         Location l = object.getLocation();
@@ -476,11 +481,9 @@ public final class BuildingUtils {
                 if (l.getZ() == 1) {
                     if (room.getProperties() == RoomProperties.SKILL_HALL_2) {
                         room.updateProperties(player, RoomProperties.SKILL_HALL);
-                    }
-                    else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
+                    } else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
                         room.updateProperties(player, RoomProperties.QUEST_HALL);
-                    }
-                    else {
+                    } else {
                         break;
                     }
                     player.getHouseManager().reload(player, true);
@@ -531,8 +534,9 @@ public final class BuildingUtils {
 
     /**
      * Checks if the decoration can be built.
+     *
      * @param player The player.
-     * @param deco The decoration.
+     * @param deco   The decoration.
      * @param object The object.
      * @return {@code True} if so.
      */
@@ -554,9 +558,10 @@ public final class BuildingUtils {
 
     /**
      * Checks if the decoration can be built.
-     * @param player The player.
+     *
+     * @param player  The player.
      * @param hotspot The hotspot.
-     * @param object The object.
+     * @param object  The object.
      * @return {@code True} if so.
      */
     @SuppressWarnings("unused")
@@ -567,7 +572,7 @@ public final class BuildingUtils {
             case STAIRWAYS:
             case QUEST_STAIRWAYS:
             case STAIRWAYS_DUNGEON:
-                BuildHotspot[] stairs = { BuildHotspot.STAIRS_DOWN, BuildHotspot.STAIRS_DOWN2, BuildHotspot.STAIRWAYS, BuildHotspot.QUEST_STAIRWAYS, BuildHotspot.STAIRWAYS_DUNGEON };
+                BuildHotspot[] stairs = {BuildHotspot.STAIRS_DOWN, BuildHotspot.STAIRS_DOWN2, BuildHotspot.STAIRWAYS, BuildHotspot.QUEST_STAIRWAYS, BuildHotspot.STAIRWAYS_DUNGEON};
                 for (int i = 0; i < 2; i++) {
                     int plane = (z + 1 + (i * 2)) % 4;
                     Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
@@ -590,8 +595,9 @@ public final class BuildingUtils {
 
     /**
      * Builds a room.
+     *
      * @param player The player.
-     * @param room The room to build.
+     * @param room   The room to build.
      * @param reload
      */
     public static void buildRoom(Player player, Room room, int z, int x, int y, boolean[] exits, boolean reload) {
@@ -614,11 +620,9 @@ public final class BuildingUtils {
 
             if (count == 4) {
                 room = Room.create(player, RoomProperties.ROOF_4_EXIT);
-            }
-            else if (count == 3) {
+            } else if (count == 3) {
                 room = Room.create(player, RoomProperties.ROOF_3_EXIT);
-            }
-            else if ((exits[0] != exits[2]) || (exits[1] != exits[3])) {
+            } else if ((exits[0] != exits[2]) || (exits[1] != exits[3])) {
                 room = Room.create(player, RoomProperties.ROOF_3_EXIT);
             } else {
                 room = Room.create(player, RoomProperties.ROOF_2_EXIT);
@@ -632,8 +636,9 @@ public final class BuildingUtils {
 
     /**
      * Checks of a room exists.
+     *
      * @param player the player
-     * @param door the door hotspot the player is trying to build at
+     * @param door   the door hotspot the player is trying to build at
      * @return true if the room is built already
      */
     public static int[] roomExists(Player player, Scenery door) {
@@ -650,6 +655,7 @@ public final class BuildingUtils {
 
     /**
      * Gets the room offset.
+     *
      * @param door The door.
      * @return The room offset [x, y].
      */
@@ -658,25 +664,26 @@ public final class BuildingUtils {
         int rotation = door.getRotation();
         if (player.getLocation().getChunkX() != l.getLocation().getChunkX()
                 || player.getLocation().getChunkY() != l.getLocation().getChunkY()) {
-            return new int[] { l.getChunkX(), l.getChunkY() };
+            return new int[]{l.getChunkX(), l.getChunkY()};
         }
         switch (rotation) {
             case 0: //West
-                return new int[] { l.getChunkX() - 1, l.getChunkY() };
+                return new int[]{l.getChunkX() - 1, l.getChunkY()};
             case 1: //North
-                return new int[] { l.getChunkX(), l.getChunkY() + 1};
+                return new int[]{l.getChunkX(), l.getChunkY() + 1};
             case 2: //East
-                return new int[] { l.getChunkX() + 1, l.getChunkY() };
+                return new int[]{l.getChunkX() + 1, l.getChunkY()};
             case 3: //South
-                return new int[] { l.getChunkX(), l.getChunkY() - 1};
+                return new int[]{l.getChunkX(), l.getChunkY() - 1};
         }
         return null;
     }
 
     /**
      * Gets the available rotations of the room to build.
+     *
      * @param exits The exits of the room.
-     * @param z The plane
+     * @param z     The plane
      * @param roomX The room x-coordinate.
      * @param roomY The room y-coordinate.
      * @return The available rotations for the room [NORTH, EAST, SOUTH, WEST].
@@ -707,6 +714,7 @@ public final class BuildingUtils {
 
     /**
      * Gets the exit requirements for the given room.
+     *
      * @param roomX The room x-coordinate.
      * @param roomY The room y-coordinate.
      * @return The requirements on the exit indexes. -1 if exit must be absent, +1 if exit must be present.

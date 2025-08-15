@@ -6,6 +6,9 @@ import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
 
+/**
+ * Handles the house options interface.
+ */
 class HouseOptionInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(Components.POH_HOUSE_OPTIONS_398) { player, _, _, buttonID, _, _ ->

@@ -21,6 +21,9 @@ import core.tools.DARK_BLUE
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Represents the house servants dialogue.
+ */
 class HouseServantDialogue(
     player: Player? = null,
 ) : Dialogue(player) {
@@ -46,7 +49,7 @@ class HouseServantDialogue(
                 expression,
                 false,
                 "You don't have a house that I can work in.",
-                "I'll be waiting here if you decide to buy a house.",
+                "I'll be waiting here if you decide to buy a house."
             ).also { stage = 100 }
             return true
         }
@@ -59,7 +62,7 @@ class HouseServantDialogue(
                     expression,
                     false,
                     fontColor + "You're not aristocracy, but I suppose you'd do. Do you",
-                    fontColor + "want a good cook for " + type!!.cost + fontColor + " coins?",
+                    fontColor + "want a good cook for " + type!!.cost + fontColor + " coins?"
                 ).also { stage = 0 }
                 return true
             }
@@ -70,7 +73,7 @@ class HouseServantDialogue(
                 false,
                 "You need a Construction level of " + type.level + " and you must not",
                 "currently have another person working for you",
-                "in order to hire me.",
+                "in order to hire me."
             ).also { stage = 100 }
             return true
         } else {
@@ -87,7 +90,7 @@ class HouseServantDialogue(
                         expression,
                         false,
                         fontColor + "Very well, I will take these logs to the mill and",
-                        fontColor + "have them converted into planks.",
+                        fontColor + "have them converted into planks."
                     ).also { stage = 110 }
                     return true
                 }
@@ -100,7 +103,7 @@ class HouseServantDialogue(
                             false,
                             fontColor + "I have returned with what you asked me to",
                             fontColor + "retrieve. As I see your inventory is full, I shall wait",
-                            fontColor + "with these " + fontColor + servant.item.amount + fontColor + " items until you are ready.",
+                            fontColor + "with these " + fontColor + servant.item.amount + fontColor + " items until you are ready."
                         ).also { stage = 100 }
                         return true
                     }

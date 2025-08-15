@@ -89,7 +89,7 @@ class StewMakingPlugin : InteractionListener {
         }
 
         /*
-         * Handles creating Uncooked stew.
+         * Handles creating uncooked stew.
          */
 
         STEW_INGREDIENTS.forEach { ingredient ->
@@ -110,7 +110,7 @@ class StewMakingPlugin : InteractionListener {
         }
 
         /*
-         * Handles creating Uncooked curry.
+         * Handles creating uncooked curry.
          */
 
         registerRecipe(
@@ -126,7 +126,7 @@ class StewMakingPlugin : InteractionListener {
         }
 
         /*
-         * Handles creating Uncooked curry.
+         * Handles creating uncooked curry.
          */
 
         onUseWith(IntType.ITEM, CURRY_LEAF, UNCOOKED_STEW) { player, usedNode, withNode ->
@@ -139,7 +139,7 @@ class StewMakingPlugin : InteractionListener {
             val amount = amountInInventory(player, usedNode.id)
 
             if (amount < requiredAmount) {
-                sendMessage(player, "You need ${requiredAmount - amount} curry leaves to mix with the stew.")
+                sendMessage(player, "You need ${requiredAmount - amount} more curry leaves to mix with the stew.")
                 return@onUseWith true
             }
 

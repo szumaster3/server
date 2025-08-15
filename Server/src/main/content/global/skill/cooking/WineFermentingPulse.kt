@@ -10,6 +10,9 @@ import core.game.system.task.Pulse
 import core.tools.RandomFunction
 import shared.consts.Items
 
+/**
+ * Handles the wine fermenting.
+ */
 class WineFermentingPulse(
     delay: Int,
     val player: Player,

@@ -9,16 +9,6 @@ import shared.consts.Items
 
 /**
  * Represents the cooking dialogue.
- *
- * @param args Arguments required for initialization:
- * - [Int]: Initial item id (raw item).
- * - [Scenery]: Object used for cooking (e.g., fire, range).
- *
- * **Optionally includes**:
- *   - [Int]: Product item id (used for sinew flow).
- *   - [Boolean]: Whether it's sinew.
- *   - [Scenery]: Cooking object again.
- *   - [Int]: Item id.
  */
 class CookingDialogue(vararg val args: Any) : DialogueFile() {
 

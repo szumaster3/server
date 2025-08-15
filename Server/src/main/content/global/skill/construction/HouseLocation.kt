@@ -7,6 +7,9 @@ import core.game.world.map.Location
 import core.tools.StringUtils
 import shared.consts.Scenery
 
+/**
+ * Represents the house locations.
+ */
 enum class HouseLocation(
     val portalId: Int,
     val exitLocation: Location?,

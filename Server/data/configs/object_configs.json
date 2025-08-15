@@ -15370,5 +15370,9 @@
   {
     "examine": "The mysterious centre of a crop circle.",
     "ids": "24991"
+  },
+  {
+    "examine": "You can build a table here.",
+    "ids": "15298"
   }
 ]
