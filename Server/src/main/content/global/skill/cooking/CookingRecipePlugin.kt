@@ -22,16 +22,14 @@ class CookingRecipePlugin : InteractionListener {
                     return@onUseWith true
                 }
 
-                val (ingredient, secondary) = if (used.id in recipe.ingredientIds) used to with else with to used
-
                 if (recipe.requiresKnife && !inInventory(player, Items.KNIFE_946)) {
-                    sendMessage(player, "You need a knife to prepare ${getItemName(ingredient.id).lowercase()}.")
+                    sendMessage(player, "You need a knife to prepare this recipe.")
                     return@onUseWith true
                 }
 
-                val ingredientCount = amountInInventory(player, ingredient.id)
-                val secondaryCount = amountInInventory(player, secondary.id)
-                val maxAmount = min(ingredientCount, secondaryCount)
+                val ingredientCounts = recipe.ingredientIds.map { amountInInventory(player, it) }
+                val secondaryCount = amountInInventory(player, recipe.secondaryId)
+                val maxAmount = min(secondaryCount, ingredientCounts.minOrNull() ?: 0)
 
                 if (maxAmount <= 0) {
                     sendMessage(player, "You don't have the required ingredients.")
@@ -39,11 +37,21 @@ class CookingRecipePlugin : InteractionListener {
                 }
 
                 fun process(amount: Int) {
-                    if (!removeItem(player, ingredient.id) || !removeItem(player, secondary.id)) {
-                        sendMessage(player, "You don't have the required ingredients.")
-                        return
+                    for (id in recipe.ingredientIds) {
+                        repeat(amount) {
+                            if (!removeItem(player, id)) {
+                                sendMessage(player, "You don't have the required ingredients.")
+                                return
+                            }
+                        }
                     }
 
+                    repeat(amount) {
+                        if (!removeItem(player, recipe.secondaryId)) {
+                            sendMessage(player, "You don't have the required ingredients.")
+                            return
+                        }
+                    }
                     recipe.productId?.let { addItem(player, it, amount) }
                     recipe.returnsContnainer?.let { addItemOrDrop(player, it, amount) }
                     recipe.xpReward?.let { rewardXP(player, Skills.COOKING, it * amount) }
@@ -60,9 +68,7 @@ class CookingRecipePlugin : InteractionListener {
                     recipe.productId?.let { withItems(it) }
 
                     create { _, amount ->
-                        runTask(player, 2, amount) {
-                            process(amount)
-                        }
+                        runTask(player, 2, amount) { process(amount) }
                     }
 
                     calculateMaxAmount { maxAmount }
