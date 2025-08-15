@@ -39,9 +39,9 @@ class GliderPlugin : InteractionListener, InterfaceListener {
                 npc(node.id, FaceAnim.OLD_DEFAULT, "What do you want human?")
                 player(FaceAnim.HALF_GUILTY, "May you fly me somewhere on your glider?")
                 if (!isQuestComplete(player, Quests.THE_GRAND_TREE)) {
-                    npc(FaceAnim.OLD_ANGRY3, "I only fly friends of the gnomes!")
+                    npc(node.id, FaceAnim.OLD_ANGRY3, "I only fly friends of the gnomes!")
                 } else {
-                    npc(FaceAnim.OLD_DEFAULT, "If you wish.")
+                    npc(node.id, FaceAnim.OLD_DEFAULT, "If you wish.")
                     end {
                         openInterface(player, Components.GLIDERMAP_138)
                     }

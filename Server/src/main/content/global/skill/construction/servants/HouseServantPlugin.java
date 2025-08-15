@@ -28,7 +28,7 @@ public class HouseServantPlugin extends UseWithHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        addHandler(NPCs.RICK_4235, NPC_TYPE, this);
+        addHandler(NPCs.RICK_4236, NPC_TYPE, this);
         addHandler(NPCs.MAID_4237, NPC_TYPE, this);
         addHandler(NPCs.COOK_4239, NPC_TYPE, this);
         addHandler(NPCs.BUTLER_4241, NPC_TYPE, this);

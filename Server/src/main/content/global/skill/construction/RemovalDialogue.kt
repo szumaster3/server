@@ -2,6 +2,7 @@ package content.global.skill.construction
 
 import core.api.sendDialogueOptions
 import core.api.sendPlainDialogue
+import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.node.entity.player.Player
@@ -30,6 +31,7 @@ class RemovalDialogue() : Dialogue() {
             ?.replace("_", " ")
             ?: "room"
 
+        setTitle(player, 2)
         sendDialogueOptions(player, "Remove the $roomName?", "Yes", "No")
         stage = 0
         return true

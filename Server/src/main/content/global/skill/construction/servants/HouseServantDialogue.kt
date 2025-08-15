@@ -4,7 +4,6 @@ import content.global.skill.construction.items.PlankType
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
@@ -12,7 +11,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import core.game.world.GameWorld
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
@@ -33,8 +31,8 @@ class HouseServantDialogue(
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val manager = player.houseManager
-        val expression = if (npc.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
-        val fontColor = if (npc.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
+        val expression = if (npc.id == NPCs.DEMON_BUTLER_4243) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
+        val fontColor = if (npc.id == NPCs.DEMON_BUTLER_4243) DARK_BLUE else BLACK
         val inHouse = manager.isInHouse(player)
 
         if (args.size > 1) {
@@ -43,38 +41,16 @@ class HouseServantDialogue(
         }
 
         if (!manager.hasHouse() && inHouse) {
-            sendNPCDialogueLines(
-                player,
-                npc.id,
-                expression,
-                false,
-                "You don't have a house that I can work in.",
-                "I'll be waiting here if you decide to buy a house."
-            ).also { stage = 100 }
+            npc(expression, "You don't have a house that I can work in.", "I'll be waiting here if you decide to buy a house.").also { stage = 100 }
             return true
         }
         if (!manager.hasServant()) {
             val type = ServantType.forId(npc.id)
             if (getStatLevel(player, Skills.CONSTRUCTION) >= type!!.level) {
-                sendNPCDialogueLines(
-                    player,
-                    npc.id,
-                    expression,
-                    false,
-                    fontColor + "You're not aristocracy, but I suppose you'd do. Do you",
-                    fontColor + "want a good cook for " + type!!.cost + fontColor + " coins?"
-                ).also { stage = 0 }
+                npc(expression, fontColor + "You're not aristocracy, but I suppose you'd do. Do you", fontColor + "want a good cook for " + type!!.cost + fontColor + " coins?").also { stage = 0 }
                 return true
             }
-            sendNPCDialogueLines(
-                player,
-                npc.id,
-                expression,
-                false,
-                "You need a Construction level of " + type.level + " and you must not",
-                "currently have another person working for you",
-                "in order to hire me."
-            ).also { stage = 100 }
+            npc(expression, "You need a Construction level of " + type.level + " and you must not", "currently have another person working for you", "in order to hire me.").also { stage = 100 }
             return true
         } else {
             val servant = manager.servant
@@ -84,200 +60,53 @@ class HouseServantDialogue(
             if (inHouse) {
                 follow(player, servant)
                 if (sawmill) {
-                    sendNPCDialogueLines(
-                        player,
-                        servant.id,
-                        expression,
-                        false,
-                        fontColor + "Very well, I will take these logs to the mill and",
-                        fontColor + "have them converted into planks."
-                    ).also { stage = 110 }
+                    npc(expression,  fontColor + "Very well, I will take these logs to the mill and", fontColor + "have them converted into planks.").also { stage = 110 }
                     return true
                 }
                 if (servant.item.amount > 0) {
                     if (freeSlots(player) < 1) {
-                        sendNPCDialogueLines(
-                            player,
-                            servant.id,
-                            expression,
-                            false,
-                            fontColor + "I have returned with what you asked me to",
-                            fontColor + "retrieve. As I see your inventory is full, I shall wait",
-                            fontColor + "with these " + fontColor + servant.item.amount + fontColor + " items until you are ready."
-                        ).also { stage = 100 }
+                        npc(expression, fontColor + "I have returned with what you asked me to", fontColor + "retrieve. As I see your inventory is full, I shall wait", fontColor + "with these " + fontColor + servant.item.amount + fontColor + " items until you are ready.").also { stage = 100 }
                         return true
                     }
-                    sendNPCDialogueLines(
-                        player,
-                        servant.id,
-                        expression,
-                        false,
-                        fontColor + "I have returned with what you asked me to",
-                        fontColor + "retrieve."
-                    ).also { stage = 150 }
+                    npc(expression, fontColor + "I have returned with what you asked me to", fontColor + "retrieve.").also { stage = 150 }
                     return true
                 }
-                sendNPCDialogueLines(
-                    player,
-                    servant.id,
-                    expression,
-                    false,
-                    fontColor + "Yes, " + fontColor + (if (player.appearance.isMale) "sir" else "ma'am") + "?",
-                    fontColor + "You have " + fontColor + (8 - servant.uses) + fontColor + " uses of my services remaining."
-                ).also { stage = 50 }
+                npc(expression, fontColor + "Yes, " + fontColor + (if (player.appearance.isMale) "sir" else "ma'am") + "?", fontColor + "You have " + fontColor + (8 - servant.uses) + fontColor + " uses of my services remaining.").also { stage = 50 }
             } else if (npc.id != servant.id) {
-                sendNPCDialogueLines(
-                    player,
-                    servant.id,
-                    expression,
-                    false,
-                    "You already have someone working for you.",
-                    "Fire them first before hiring me."
-                ).also { stage = 100 }
+                npc(expression,"You already have someone working for you.", "Fire them first before hiring me.").also { stage = 100 }
             }
         }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val manager = player.houseManager
         val servant = manager.servant
         var type = ServantType.forId(npc.id)
-        val expression = if (npc.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
-        val fontColor = if (npc.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
+        val expression = if (type?.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
+        val fontColor = if (type?.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
         when (stage) {
             0 -> options("What can you do?", "Tell me about your previous jobs.", "You're hired!").also { stage++ }
-            1 -> when (buttonId) {
-                1 -> when (npc.id) {
-                    NPCs.RICK_4235 -> dialogue(player) {
-                        player("What can you do?")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "I'm a great cook, me! I used to work with a rat-catcher, I used to cook for him."
-                        )
-                        npc(FaceAnim.HALF_GUILTY, "There's a dozen different ways you can cook a rat!")
-                    }
-
-                    NPCs.MAID_4237 -> dialogue(player) {
-                        player("What can you do?")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "Well, I can, um, I can cook meals and make tea and everything, and I can even take things to and from the bank for you."
-                        )
-                        npc(FaceAnim.HALF_GUILTY, "I won't make any mistakes this time and everything will be fine!")
-                    }
-
-                    NPCs.COOK_4239 -> dialogue(player) {
-                        player("What can you do?")
-                        npc(FaceAnim.HALF_GUILTY, "I, sir, am the finest cook in all ${GameWorld.settings!!.name}!")
-                        npc(FaceAnim.HALF_GUILTY, "I can also make good time going to the bank or the sawmill.")
-                    }
-
-                    NPCs.BUTLER_4241 -> dialogue(player) {
-                        player("What can you do?")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "I can fulfill all sir's domestic service needs with efficiency and impeccable manners."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "I hate to boast, but I can say with confidence that no mortal can make trips to the bank or sawmill faster than I!"
-                        )
-                    }
-
-                    NPCs.DEMON_BUTLER_4243 -> dialogue(player) {
-                        player("What can you do?")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "I can fulfill all sir's domestic service needs with efficiency and impeccable manners."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "I hate to boast, but I can say with confidence that no mortal can make trips to the bank or sawmill faster than I!"
-                        )
+            1 ->//I am at thy command, my master.
+            when (buttonId) {
+                1 -> {
+                    when (type?.id) {
+                        NPCs.RICK_4235 -> interpreter.open(ServantRickDialogue(), npc)
+                        NPCs.MAID_4237 -> interpreter.open(ServantMaidDialogue(), npc)
+                        NPCs.COOK_4239 -> interpreter.open(ServantCookDialogue(), npc)
+                        NPCs.BUTLER_4241 -> interpreter.open(ServantButlerDialogue(), npc)
+                        NPCs.DEMON_BUTLER_4243 -> interpreter.open(ServantDemonButlerDialogue(), npc)
                     }
                 }
-
-                2 -> when (npc.id) {
-                    NPCs.RICK_4235 -> dialogue(player) {
-                        player("Tell me about your previous jobs.")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "Well, city warder Bravek once threw a chair at me and yelled at me to get him a hangover cure. So I made it and I think it worked, 'cause then he threw another chair at me and that one hit!"
-                        )
-                        player(FaceAnim.HALF_GUILTY, "So you've been in West Ardougne?")
-                        npc(FaceAnim.HALF_GUILTY, "Yeah but I ain't got the plague or nuthin'! Honest, guv!")
-                    }
-
-                    NPCs.MAID_4237 -> dialogue(player) {
-                        player("Tell me about your previous jobs.")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "Oh! Oh! I, well, I, er. It wasn't really my fault, I mean, it was, but not really. I mean, how was I to know that that plate was so valuable?"
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "It was just lying around and I don't know art, it just looked like a pretty pattern and I just had to use it because there weren't enough plates."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "And no one had told me that Dennis was off sick and hadn't fed the dogs so I wasn't expecting them to jump up at me when I was carrying the food and it, it went all over the place, gravy and potatoes and bits of fine porcelain and I'm so sorry."
-                        )
-                        npc(FaceAnim.HALF_GUILTY, "It won't happen again, I promise.")
-                    }
-
-                    NPCs.COOK_4239 -> dialogue(player) {
-                        player("Tell me about your previous jobs.")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "I used to be the cook for the old Duke of Lumbridge. Visiting dignitaries praised me for my fine banquets!"
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "But then someone found a rule that said that only one family could hold that post."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            "Overnight I was fired and replaced by some fool who can't even bake a cake without help!"
-                        )
-                    }
-
-                    NPCs.BUTLER_4241 -> dialogue(player) {
-                        player("Tell me about your previous jobs.")
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "From a humble beginning as a dish-washer I have worked my way up through the ranks of domestic service in the households of nobles from Varrock and Ardougne."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "As a life-long servant I have naturally suppressed any personality of my own and trained myself never to use the second person when talking to a superior."
-                        )
-                        npc(
-                            FaceAnim.HALF_GUILTY,
-                            DARK_BLUE + "I have usually worked in the large households of the aristocracy, but now that such a large number of private persons are building their own houses I decided to offer them my services."
-                        )
-                    }
-
-                    NPCs.DEMON_BUTLER_4243 -> dialogue(player) {
-                        player("Tell me about your previous jobs.")
-                        npc(
-                            FaceAnim.OLD_NORMAL,
-                            DARK_BLUE + "For millennia I have served and waited on the mighty Demon Lords of the Infernal Dimensions."
-                        )
-                        npc(
-                            FaceAnim.OLD_NORMAL,
-                            DARK_BLUE + "I began as a humble footman in the household of Lord Thammaron, and for several centuries I was the private valet to Delrith."
-                        )
-                        npc(
-                            FaceAnim.OLD_NORMAL,
-                            DARK_BLUE + "I have also worked in the Grim Underworld, escorting the souls of the dead to their final abodes. But the incessant shadows and hellfire wary me, so I have come to serve mortal masters in the realms of light."
-                        )
+                2 -> {
+                    when (type?.id) {
+                        NPCs.RICK_4235 -> interpreter.open(ServantRickDialogueExtension(), npc)
+                        NPCs.MAID_4237 -> interpreter.open(ServantMaidDialogueExtension(), npc)
+                        NPCs.COOK_4239 -> interpreter.open(ServantCookDialogueExtension(), npc)
+                        NPCs.BUTLER_4241 -> interpreter.open(ServantButlerDialogueExtension(), npc)
+                        NPCs.DEMON_BUTLER_4243 -> interpreter.open(ServantDemonButlerDialogueExtension(), npc)
                     }
                 }
-
                 3 -> {
                     if (!manager.hasHouse()) {
                         sendNPCDialogueLines(
@@ -294,7 +123,6 @@ class HouseServantDialogue(
                     stage = 2
                 }
             }
-
             2 -> sendNPCDialogue(
                 player,
                 npc.id,
@@ -509,14 +337,7 @@ class HouseServantDialogue(
 
             59 -> {
                 if (freeSlots(player) < 1) {
-                    sendNPCDialogueLines(
-                        player,
-                        servant.id,
-                        expression,
-                        false,
-                        fontColor + "I would love to share my fine cooking with",
-                        fontColor + "you, but you have no space to take anything.",
-                    ).also { stage = 50 }
+                    npc(expression, fontColor + "I would love to share my fine cooking with", fontColor + "you, but you have no space to take anything.").also { stage = 50 }
                     return true
                 }
                 if (!requirements(player, null, false)) {
@@ -531,14 +352,7 @@ class HouseServantDialogue(
                     }
                 }
                 servant.uses += 1
-                sendNPCDialogueLines(
-                    player,
-                    servant.id,
-                    expression,
-                    false,
-                    fontColor + "Luckily for you, I already have some made. Here you",
-                    fontColor + "go.",
-                )
+                npc(expression, fontColor + "Luckily for you, I already have some made. Here you", fontColor + "go.")
                 stage = 100
             }
 
@@ -547,13 +361,7 @@ class HouseServantDialogue(
                 2 -> bankFetch(player, Item(Items.OAK_PLANK_8778))
                 3 -> bankFetch(player, Item(Items.TEAK_PLANK_8780))
                 4 -> bankFetch(player, Item(Items.MAHOGANY_PLANK_8782))
-                5 -> options(
-                    "Soft clay",
-                    "Limestone bricks",
-                    "Steel bars",
-                    "Cloth",
-                    "More options",
-                ).also { stage++ }
+                5 -> options("Soft clay", "Limestone bricks", "Steel bars", "Cloth", "More options").also { stage++ }
             }
 
             61 -> when (buttonId) {
@@ -570,14 +378,7 @@ class HouseServantDialogue(
                 3 -> bankFetch(player, Item(Items.MAGIC_STONE_8788))
             }
 
-            75 -> sendNPCDialogueLines(
-                player,
-                servant.id,
-                expression,
-                false,
-                fontColor + "Very well. I will return to the Guild of the Servants",
-                fontColor + "in Ardougne if you wish to re-hire me.",
-            ).also { stage++ }
+            75 -> npc(expression, fontColor + "Very well. I will return to the Guild of the Servants", fontColor + "in Ardougne if you wish to re-hire me.").also { stage++ }
 
             76 -> {
                 end()
@@ -602,13 +403,7 @@ class HouseServantDialogue(
                 var amtLeft = servant.item.amount
                 var flag = false
                 if (amtLeft < 1 || servant.item == null) {
-                    sendNPCDialogueLines(
-                        player,
-                        servant.id,
-                        expression,
-                        false,
-                        fontColor + "I don't have any items left.",
-                    ).also { stage = 100 }
+                    npc(expression, fontColor + "I don't have any items left.").also { stage = 100 }
                     return true
                 }
                 if (amtLeft > freeSlots(player)) {
@@ -618,13 +413,7 @@ class HouseServantDialogue(
                 servant.item.amount -= amtLeft
                 player.inventory.add(Item(servant.item.id, amtLeft))
                 if (flag) {
-                    sendNPCDialogueLines(
-                        player,
-                        servant.id,
-                        expression,
-                        false,
-                        fontColor + "I still have " + fontColor + servant.item.amount + fontColor + " left for you to take from me.",
-                    ).also { stage = 100 }
+                    npc(expression, fontColor + "I still have " + fontColor + servant.item.amount + fontColor + " left for you to take from me.").also { stage = 100 }
                 } else {
                     end()
                 }
@@ -643,13 +432,7 @@ class HouseServantDialogue(
         val expression = if (npc.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
         val fontColor = if (npc.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
         if (!sawmill && freeSlots(player) < 1) {
-            sendNPCDialogueLines(
-                player,
-                servant.id,
-                expression,
-                false,
-                fontColor + "You don't have any space in your inventory.",
-            ).also { stage = 100 }
+            npc(expression, fontColor + "You don't have any space in your inventory.").also { stage = 100 }
             return false
         }
         if (servant.uses >= 8) {

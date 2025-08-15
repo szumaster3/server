@@ -89,8 +89,8 @@ class AlkharidPlugin : InteractionListener {
                 }
                 addItem(player, Items.AL_KHARID_FLYER_7922) -> {
                     dialogue(player) {
-                        npc(FaceAnim.CHILD_NORMAL, "Here! Take one and let me get back to work.")
-                        npc(FaceAnim.CHILD_THINKING, "I still have hundreds of these flyers to hand out. I wonder if Ali would notice if I quietly dumped them somewhere?")
+                        npc(node.id, FaceAnim.CHILD_NORMAL, "Here! Take one and let me get back to work.")
+                        npc(node.id, FaceAnim.CHILD_THINKING, "I still have hundreds of these flyers to hand out. I wonder if Ali would notice if I quietly dumped them somewhere?")
                     }
                 }
                 else -> return@on false
