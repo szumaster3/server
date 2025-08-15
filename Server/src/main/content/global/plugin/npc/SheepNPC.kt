@@ -62,7 +62,7 @@ private val sheepIds =
 class SheepNPC : NPCBehavior(*sheepIds), InteractionListener {
 
     private var tickDelay = 0
-    private val TICK_INTERVAL = 30
+    private val TICK_INTERVAL = 5
 
     override fun tick(self: NPC): Boolean {
         if (self.properties.combatPulse.isAttacking || DeathTask.isDead(self)) {

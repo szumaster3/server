@@ -1,7 +1,7 @@
 package core.net
 
 import core.auth.AuthResponse
-import core.cache.crypto.ISAACPair
+import core.cache.secure.ISAACPair
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.ClientInfo
 import core.game.world.repository.Repository

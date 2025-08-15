@@ -10,19 +10,19 @@ import shared.consts.NPCs
  * Handles the Duck NPC.
  */
 class DuckNPC : NPCBehavior(NPCs.DUCK_46, NPCs.DUCK_2693, NPCs.DUCK_6113) {
-    private val forceChat = listOf("Eep!", "Quack!")
+    private val forceChat = arrayOf("Eep!", "Quack!")
     private var tickDelay = 0
-    private val TICK_INTERVAL = 10
+    private val TICK_INTERVAL = 5
 
     override fun tick(self: NPC): Boolean {
         tickDelay++
-        if (tickDelay < TICK_INTERVAL) return true
+        if (tickDelay < TICK_INTERVAL) return super.tick(self)
         tickDelay = 0
 
-        if (RandomFunction.random(15) == 5) {
+        if (RandomFunction.roll(2)) {
             sendChat(self, forceChat.random())
         }
-        return true
+
+        return super.tick(self)
     }
 }
-

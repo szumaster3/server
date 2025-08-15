@@ -1,7 +1,7 @@
 package core.net.event
 
 import core.ServerConstants
-import core.cache.ByteBufferExtensions
+import core.cache.util.ByteBufferExtensions
 import core.game.world.GameWorld
 import core.net.IoSession
 import core.net.IoWriteEvent

@@ -36,15 +36,31 @@ class MissCheeversPlugin : InteractionListener {
             val itemId: Int,
             val attribute: String,
         ) {
-            CUPRIC_SULPHATE_5577(Items.CUPRIC_SULPHATE_5577, "rd:cupricsulphate"),
-            ACETIC_ACID_5578(Items.ACETIC_ACID_5578, "rd:aceticacid"),
-            GYPSUM_5579(Items.GYPSUM_5579, "rd:gypsum"),
-            SODIUM_CHLORIDE_5580(Items.SODIUM_CHLORIDE_5580, "rd:sodiumchloride"),
-            NITROUS_OXIDE_5581(Items.NITROUS_OXIDE_5581, "rd:nitrousoxide"),
-            VIAL_OF_LIQUID_5582(Items.VIAL_OF_LIQUID_5582, "rd:vialofliquid"),
-            TIN_ORE_POWDER_5583(Items.TIN_ORE_POWDER_5583, "rd:tinorepowder"),
-            CUPRIC_ORE_POWDER_5584(Items.CUPRIC_ORE_POWDER_5584, "rd:cupricorepowder"),
-            ;
+            CUPRIC_SULPHATE_5577(
+                Items.CUPRIC_SULPHATE_5577,
+                "rd:cupricsulphate"
+            ),
+            ACETIC_ACID_5578(Items.ACETIC_ACID_5578, "rd:aceticacid"), GYPSUM_5579(
+                Items.GYPSUM_5579,
+                "rd:gypsum"
+            ),
+            SODIUM_CHLORIDE_5580(
+                Items.SODIUM_CHLORIDE_5580,
+                "rd:sodiumchloride"
+            ),
+            NITROUS_OXIDE_5581(
+                Items.NITROUS_OXIDE_5581,
+                "rd:nitrousoxide"
+            ),
+            VIAL_OF_LIQUID_5582(
+                Items.VIAL_OF_LIQUID_5582,
+                "rd:vialofliquid"
+            ),
+            TIN_ORE_POWDER_5583(
+                Items.TIN_ORE_POWDER_5583,
+                "rd:tinorepowder"
+            ),
+            CUPRIC_ORE_POWDER_5584(Items.CUPRIC_ORE_POWDER_5584, "rd:cupricorepowder"), ;
 
             companion object {
                 val vialMap = values().associateBy { it.itemId }
@@ -55,11 +71,15 @@ class MissCheeversPlugin : InteractionListener {
             val itemId: Int,
             val attribute: String,
         ) {
-            CUPRIC_SULPHATE_5577(Items.CUPRIC_SULPHATE_5577, "rd:doorcupricsulphate"),
-            ACETIC_ACID_5578(Items.ACETIC_ACID_5578, ""),
-            SODIUM_CHLORIDE_5580(Items.SODIUM_CHLORIDE_5580, ""),
-            VIAL_OF_LIQUID_5582(Items.VIAL_OF_LIQUID_5582, "rd:doorvialofliquid"),
-            ;
+            CUPRIC_SULPHATE_5577(
+                Items.CUPRIC_SULPHATE_5577,
+                "rd:doorcupricsulphate"
+            ),
+            ACETIC_ACID_5578(Items.ACETIC_ACID_5578, ""), SODIUM_CHLORIDE_5580(
+                Items.SODIUM_CHLORIDE_5580,
+                ""
+            ),
+            VIAL_OF_LIQUID_5582(Items.VIAL_OF_LIQUID_5582, "rd:doorvialofliquid"), ;
 
             companion object {
                 val doorVialsArray = values().map { it.itemId }.toIntArray()
@@ -70,44 +90,43 @@ class MissCheeversPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        val searchActions =
-            mapOf(
-                Scenery.OLD_BOOKSHELF_7327 to { player: Player ->
+        val searchActions = mapOf(
+            Scenery.OLD_BOOKSHELF_7327 to { player: Player ->
+                RDUtils.searchingHelper(
+                    player,
+                    magnet,
+                    Items.MAGNET_5604,
+                    "You search the bookshelves...",
+                    "Hidden amongst the books you find a magnet.",
+                )
+            },
+            Scenery.OLD_BOOKSHELF_7328 to { player: Player ->
+                if (getAttribute(player, "/save:rd:help", -1) < 3) {
+                    sendMessage(player, "You search the bookshelves...")
+                    sendMessageWithDelay(player, "You find nothing of interest.", 1)
+                } else {
                     RDUtils.searchingHelper(
                         player,
-                        magnet,
-                        Items.MAGNET_5604,
+                        book,
+                        Items.ALCHEMICAL_NOTES_5588,
                         "You search the bookshelves...",
-                        "Hidden amongst the books you find a magnet.",
+                        "You find a book that looks like it might be helpful.",
                     )
-                },
-                Scenery.OLD_BOOKSHELF_7328 to { player: Player ->
-                    if (getAttribute(player, "/save:rd:help", -1) < 3) {
-                        sendMessage(player, "You search the bookshelves...")
-                        sendMessageWithDelay(player, "You find nothing of interest.", 1)
-                    } else {
-                        RDUtils.searchingHelper(
-                            player,
-                            book,
-                            Items.ALCHEMICAL_NOTES_5588,
-                            "You search the bookshelves...",
-                            "You find a book that looks like it might be helpful.",
-                        )
-                    }
-                },
-                Scenery.OLD_BOOKSHELF_7329 to { player: Player ->
-                    RDUtils.searchingHelper(
-                        player,
-                        knife,
-                        Items.KNIFE_5605,
-                        "You search the bookshelves...",
-                        "Hidden amongst the books you find a knife.",
-                    )
-                },
-                Scenery.OLD_BOOKSHELF_7330 to { player: Player ->
-                    RDUtils.searchingHelper(player, "", 0, "You search the bookshelves...", "")
-                },
-            )
+                }
+            },
+            Scenery.OLD_BOOKSHELF_7329 to { player: Player ->
+                RDUtils.searchingHelper(
+                    player,
+                    knife,
+                    Items.KNIFE_5605,
+                    "You search the bookshelves...",
+                    "Hidden amongst the books you find a knife.",
+                )
+            },
+            Scenery.OLD_BOOKSHELF_7330 to { player: Player ->
+                RDUtils.searchingHelper(player, "", 0, "You search the bookshelves...", "")
+            },
+        )
 
         searchActions.forEach { (scenery, action) ->
             on(scenery, IntType.SCENERY, "search") { player, _ ->
@@ -116,16 +135,15 @@ class MissCheeversPlugin : InteractionListener {
             }
         }
 
-        val vialItems =
-            listOf(
-                Items.ACETIC_ACID_5578,
-                Items.CUPRIC_SULPHATE_5577,
-                Items.GYPSUM_5579,
-                Items.SODIUM_CHLORIDE_5580,
-                Items.NITROUS_OXIDE_5581,
-                Items.TIN_ORE_POWDER_5583,
-                Items.CUPRIC_ORE_POWDER_5584,
-            )
+        val vialItems = listOf(
+            Items.ACETIC_ACID_5578,
+            Items.CUPRIC_SULPHATE_5577,
+            Items.GYPSUM_5579,
+            Items.SODIUM_CHLORIDE_5580,
+            Items.NITROUS_OXIDE_5581,
+            Items.TIN_ORE_POWDER_5583,
+            Items.CUPRIC_ORE_POWDER_5584,
+        )
         val sceneryIDs = (Scenery.SHELVES_7333..Scenery.SHELVES_7339).toList()
 
         vialItems.forEachIndexed { index, item ->
@@ -146,12 +164,11 @@ class MissCheeversPlugin : InteractionListener {
             return@on true
         }
 
-        val crateInteractions =
-            mapOf(
-                Scenery.CRATE_7347 to Pair(tin, Items.TIN_5600),
-                Scenery.CRATE_7348 to Pair(chisel, Items.CHISEL_5601),
-                Scenery.CRATE_7349 to Pair(wire, Items.BRONZE_WIRE_5602),
-            )
+        val crateInteractions = mapOf(
+            Scenery.CRATE_7347 to Pair(tin, Items.TIN_5600),
+            Scenery.CRATE_7348 to Pair(chisel, Items.CHISEL_5601),
+            Scenery.CRATE_7349 to Pair(wire, Items.BRONZE_WIRE_5602),
+        )
 
         crateInteractions.forEach { (scenery, attributes) ->
             on(scenery, IntType.SCENERY, "search") { player, node ->
@@ -273,7 +290,7 @@ class MissCheeversPlugin : InteractionListener {
                 "There is a stone slab here obstructing the door.",
                 "There is a small hole in the slab that looks like it might be for a handle.",
             )
-            sendMessage(player, "It's nearly a perfect fit!")
+            // sendMessage(player, "It's nearly a perfect fit!")
             return@on true
         }
 
@@ -311,32 +328,23 @@ private class VialShelfDialogueFile(
     override fun create(b: DialogueBuilder) {
         b.onPredicate { _ -> true }.branch { _ -> flaskIdsArray.size }.let { branch ->
 
-            branch
-                .onValue(3)
-                .line("There are three vials on this shelf.")
-                .options("Take the vials?")
+            branch.onValue(3).line("There are three vials on this shelf.").options("Take the vials?")
                 .let { optionBuilder ->
-                    optionBuilder
-                        .option("Take one vial.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take one vial.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             if (specialAttribute != null) {
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 3) - 1)
                                 print(getAttribute(player, specialAttribute, 3))
                             }
                         }
-                    optionBuilder
-                        .option("Take two vials.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take two vials.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             addItemOrDrop(player, flaskIdsArray[1])
                             if (specialAttribute != null) {
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 3) - 2)
                             }
                         }
-                    optionBuilder
-                        .option("Take all three vials.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take all three vials.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             addItemOrDrop(player, flaskIdsArray[1])
                             addItemOrDrop(player, flaskIdsArray[2])
@@ -344,48 +352,35 @@ private class VialShelfDialogueFile(
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 3) - 3)
                             }
                         }
-                    optionBuilder
-                        .option("Don't take a vial.")
-                        .end()
+                    optionBuilder.option("Don't take a vial.").end()
                 }
-            branch
-                .onValue(2)
-                .line("There are two vials on this shelf.")
-                .options("Take the vials?")
+            branch.onValue(2).line("There are two vials on this shelf.").options("Take the vials?")
                 .let { optionBuilder ->
-                    optionBuilder
-                        .option("Take the first vial.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take the first vial.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             if (specialAttribute != null) {
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 2) - 1)
                             } else {
                                 setAttribute(
                                     player,
-                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!
-                                        .attribute,
+                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!.attribute,
                                     true,
                                 )
                             }
                         }
-                    optionBuilder
-                        .option("Take the second vial.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take the second vial.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[1])
                             if (specialAttribute != null) {
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 2) - 1)
                             } else {
                                 setAttribute(
                                     player,
-                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[1]]!!
-                                        .attribute,
+                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[1]]!!.attribute,
                                     true,
                                 )
                             }
                         }
-                    optionBuilder
-                        .option("Take both vials.")
-                        .endWith { _, player ->
+                    optionBuilder.option("Take both vials.").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             addItemOrDrop(player, flaskIdsArray[1])
                             if (specialAttribute != null) {
@@ -393,48 +388,35 @@ private class VialShelfDialogueFile(
                             } else {
                                 setAttribute(
                                     player,
-                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!
-                                        .attribute,
+                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!.attribute,
                                     true,
                                 )
                                 setAttribute(
                                     player,
-                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[1]]!!
-                                        .attribute,
+                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[1]]!!.attribute,
                                     true,
                                 )
                             }
                         }
                 }
 
-            branch
-                .onValue(1)
-                .line("There is a vial on this shelf.")
-                .options("Take the vial?")
-                .let { optionBuilder ->
-                    optionBuilder
-                        .option("YES")
-                        .endWith { _, player ->
+            branch.onValue(1).line("There is a vial on this shelf.").options("Take the vial?").let { optionBuilder ->
+                    optionBuilder.option("YES").endWith { _, player ->
                             addItemOrDrop(player, flaskIdsArray[0])
                             if (specialAttribute != null) {
                                 setAttribute(player, specialAttribute, getAttribute(player, specialAttribute, 1) - 1)
                             } else {
                                 setAttribute(
                                     player,
-                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!
-                                        .attribute,
+                                    MissCheeversPlugin.Companion.Vials.vialMap[flaskIdsArray[0]]!!.attribute,
                                     true,
                                 )
                             }
                         }
-                    optionBuilder
-                        .option("NO")
-                        .end()
+                    optionBuilder.option("NO").end()
                 }
 
-            branch
-                .onValue(0)
-                .line("There is nothing of interest on these shelves.")
+            branch.onValue(0).line("There is nothing of interest on these shelves.")
         }
     }
 }
@@ -459,70 +441,27 @@ class MissCheeversDialogueFile(
             0 -> {
                 val helpStatus = getAttribute(player!!, "/save:rd:help", -1)
                 if (helpStatus > 1) {
-                    playerl(
-                        FaceAnim.FRIENDLY,
-                        "Please... I am REALLY stuck... Isn't there ANYTHING you can do to help me...?",
-                    ).also { stage = 6 }
+                    playerl(FaceAnim.FRIENDLY, "Please... I am REALLY stuck... Isn't there ANYTHING you can do to help me...?").also { stage = 6 }
                 } else {
                     playerl(FaceAnim.FRIENDLY, "Can you give me any help?").also { stage++ }
                 }
             }
 
             1 -> npcl(FaceAnim.FRIENDLY, "No, I am sorry, but that is forbidden by our rules.").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "If you are having a particularly tough time of it, I suggest you leave and come back later when you are in a more receptive frame of mind.",
-                ).also { stage++ }
-
-            3 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Sometimes a break from concentration will yield fresh insight. Our aim is to test you, but not to the point of frustration!",
-                ).also { stage++ }
-
+            2 -> npcl(FaceAnim.FRIENDLY, "If you are having a particularly tough time of it, I suggest you leave and come back later when you are in a more receptive frame of mind.").also { stage++ }
+            3 -> npcl(FaceAnim.FRIENDLY, "Sometimes a break from concentration will yield fresh insight. Our aim is to test you, but not to the point of frustration!").also { stage++ }
             4 -> playerl(FaceAnim.FRIENDLY, "Okay, thanks!").also { stage++ }
             5 -> {
                 end()
                 setAttribute(player!!, "/save:rd:help", 2)
             }
-
-            6 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Well... Look, I really shouldn't say anything about this room, but...",
-                ).also { stage++ }
-
-            7 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "When I was attempting to join the Temple Knights I myself had to do this puzzle myself.",
-                ).also { stage++ }
-
-            8 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "It was slightly different, but the idea behind it was the same, and I left the notes I had made while doing it hidden in one of the bookcases.",
-                ).also { stage++ }
-
-            9 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "If you look carefully you may find them, and they may be of some use to you.",
-                ).also { stage++ }
-
-            10 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "I really can't be any more help than that I'm afraid, it is more than my job's worth to have given you the help I already have.",
-                ).also { stage++ }
-
+            6 -> npcl(FaceAnim.FRIENDLY, "Well... Look, I really shouldn't say anything about this room, but...").also { stage++ }
+            7 -> npcl(FaceAnim.FRIENDLY, "When I was attempting to join the Temple Knights I myself had to do this puzzle myself.").also { stage++ }
+            8 -> npcl(FaceAnim.FRIENDLY, "It was slightly different, but the idea behind it was the same, and I left the notes I had made while doing it hidden in one of the bookcases.").also { stage++ }
+            9 -> npcl(FaceAnim.FRIENDLY, "If you look carefully you may find them, and they may be of some use to you.").also { stage++ }
+            10 -> npcl(FaceAnim.FRIENDLY, "I really can't be any more help than that I'm afraid, it is more than my job's worth to have given you the help I already have.").also { stage++ }
             11 -> playerl(FaceAnim.FRIENDLY, "Okay, thanks a lot, you've been very helpful!").also { stage++ }
-            12 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Best of luck with the test @name. I hope your application is successful.",
-                ).also { stage++ }
+            12 -> npcl(FaceAnim.FRIENDLY, "Best of luck with the test @name. I hope your application is successful.").also { stage++ }
 
             13 -> {
                 end()
@@ -534,32 +473,10 @@ class MissCheeversDialogueFile(
     private fun handleChallengeDialogue() {
         clearAttributes()
         when (stage) {
-            0 ->
-                npcl(FaceAnim.FRIENDLY, "Greetings, @name. Welcome to my challenge.")
-                    .also {
-                        player!!.faceLocation(
-                            location(2469, 4941, 0),
-                        )
-                    }.also { stage++ }
-
-            1 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "All you need to do is leave from the opposite door to where you came in by.",
-                ).also { stage++ }
-
-            2 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "I will warn you that this is more complicated than it may at first appear.",
-                ).also { stage++ }
-
-            3 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "I should also warn you that there are limited supplies of the items in this room, so think carefully before using them, you may find yourself stuck and have to leave to start again!",
-                ).also { stage++ }
-
+            0 -> npcl(FaceAnim.FRIENDLY, "Greetings, @name. Welcome to my challenge.").also { player!!.faceLocation(location(2469, 4941, 0)) }.also { stage++ }
+            1 -> npcl(FaceAnim.FRIENDLY, "All you need to do is leave from the opposite door to where you came in by.").also { stage++ }
+            2 -> npcl(FaceAnim.FRIENDLY, "I will warn you that this is more complicated than it may at first appear.").also { stage++ }
+            3 -> npcl(FaceAnim.FRIENDLY, "I should also warn you that there are limited supplies of the items in this room, so think carefully before using them, you may find yourself stuck and have to leave to start again!").also { stage++ }
             4 -> npcl(FaceAnim.FRIENDLY, "Best of luck!").also { stage++ }
             5 -> {
                 end()
@@ -578,8 +495,7 @@ class MissCheeversDialogueFile(
             removeAttribute(player!!, chisel)
             removeAttribute(player!!, wire)
             removeAttribute(player!!, vials)
-            MissCheeversPlugin.Companion.Vials.vialMap
-                .forEach { removeAttribute(player!!, it.value.attribute) }
+            MissCheeversPlugin.Companion.Vials.vialMap.forEach { removeAttribute(player!!, it.value.attribute) }
             MissCheeversPlugin.Companion.DoorVials.doorVialsRequiredMap.forEach {
                 removeAttribute(
                     player!!,

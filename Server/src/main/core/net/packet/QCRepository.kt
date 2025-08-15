@@ -6,7 +6,7 @@ import core.cache.Cache
 import core.cache.CacheIndex
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.ItemDefinition
-import core.cache.ByteBufferExtensions
+import core.cache.util.ByteBufferExtensions
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse

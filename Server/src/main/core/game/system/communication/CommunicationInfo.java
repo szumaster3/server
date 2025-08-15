@@ -1,7 +1,7 @@
 package core.game.system.communication;
 
 import core.auth.UserAccountInfo;
-import core.cache.ByteBufferExtensions;
+import core.cache.util.ByteBufferExtensions;
 import core.game.node.entity.player.Player;
 import core.game.system.mysql.SQLTable;
 import core.game.system.task.Pulse;

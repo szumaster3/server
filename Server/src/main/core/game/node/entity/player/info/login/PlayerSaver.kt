@@ -1,6 +1,6 @@
 package core.game.node.entity.player.info.login
 
-import com.google.gson.GsonBuilder
+import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import content.global.skill.summoning.familiar.BurdenBeast
@@ -60,26 +60,12 @@ class PlayerSaver(val player: Player) {
 
     fun save() = runBlocking {
         if (!player.details.saveParsed) return@runBlocking
-
-        val gson = GsonBuilder().setPrettyPrinting().create()
-        val json = gson.toJson(populate())
-
+        val json = Gson().toJson(populate())
+        val saveFile = File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json")
         try {
-            val saveDir = File(ServerConstants.PLAYER_SAVE_PATH)
-            if (!saveDir.exists()) {
-                saveDir.mkdirs()
-            }
-            val saveFile = File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json")
-            if (!saveFile.exists()) {
-                saveFile.createNewFile()
-            }
-
-            withContext(Dispatchers.IO) {
-                FileWriter(saveFile).use { file ->
-                    file.write(json)
-                    file.flush()
-                }
-            }
+            saveFile.parentFile?.mkdirs()
+            if (!saveFile.exists()) saveFile.createNewFile()
+            withContext(Dispatchers.IO) { FileWriter(saveFile).use { it.write(json) } }
         } catch (e: IOException) {
             e.printStackTrace()
         }

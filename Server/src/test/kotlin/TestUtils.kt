@@ -2,8 +2,8 @@ import content.global.skill.farming.timers.CropGrowth
 import core.ServerConstants
 import core.api.log
 import core.cache.Cache
-import core.cache.crypto.ISAACCipher
-import core.cache.crypto.ISAACPair
+import core.cache.secure.ISAACCipher
+import core.cache.secure.ISAACPair
 import core.game.interaction.ScriptProcessor
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface

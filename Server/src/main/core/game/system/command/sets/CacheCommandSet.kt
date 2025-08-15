@@ -1,6 +1,9 @@
 package core.game.system.command.sets
 
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
+import core.ServerConstants
 import core.cache.Cache
 import core.cache.CacheArchive
 import core.cache.CacheIndex
@@ -16,6 +19,131 @@ import kotlin.reflect.jvm.isAccessible
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+        /*
+             * Modify object_configs.json.
+             */
+
+        define(
+            name = "dumpobjects",
+            privilege = Privilege.ADMIN,
+            usage = "::dumpobjects",
+            description = "A dump that allows you to add data to objects_configs."
+        ) { player, _ ->
+
+            val gson = GsonBuilder()
+                .disableHtmlEscaping()
+                .setPrettyPrinting()
+                .create()
+
+            val sourceFile = File(ServerConstants.CONFIG_PATH + "object_configs.json")
+            val outputFile = File(ServerConstants.CONFIG_PATH + "object_configs_dump.json")
+
+            if (!sourceFile.exists()) {
+                player.debug("object_configs.json not found.")
+                return@define
+            }
+
+            val configs = gson.fromJson(FileReader(sourceFile), JsonArray::class.java)
+
+            val dataMap = linkedMapOf<Pair<String, String>, MutableSet<Int>>()
+
+            for (element in configs) {
+                val e = element.asJsonObject
+                val ids = e.get("ids")?.asString
+                    ?.split(",")
+                    ?.mapNotNull { it.trim().toIntOrNull() }
+                    ?: continue
+
+                val firstId = ids.firstOrNull() ?: continue
+                val objDef = SceneryDefinition.forId(firstId)
+
+                val name = objDef?.name ?: "null"
+                val examine = objDef?.examine ?: e.get("examine")?.asString ?: "null"
+
+                dataMap.computeIfAbsent(examine to name) { linkedSetOf() }.addAll(ids)
+            }
+
+            val outputArray = JsonArray()
+            for ((key, ids) in dataMap) {
+                val (examine, name) = key
+                val ordered = JsonObject().apply {
+                    addProperty("name", name)
+                    addProperty("ids", ids.joinToString(","))
+                    addProperty("examine", examine)
+                }
+                outputArray.add(ordered)
+            }
+
+            FileWriter(outputFile).use { writer ->
+                gson.toJson(outputArray, writer)
+            }
+
+            player.debug("Dumped ${outputArray.size()} grouped object configs to ${outputFile.name}.")
+        }
+
+        /*
+         * Split npc spawns.
+         */
+
+        define(
+            name = "splitspawns",
+            privilege = Privilege.ADMIN,
+            usage = "::splitspawns",
+            description = "Splits npc_spawns.json into region-based json (merged loc_data)."
+        ) { player, _ ->
+
+            val gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
+            val sourceFile = File(ServerConstants.CONFIG_PATH + "npc_spawns.json")
+            val outputDir = File(ServerConstants.CONFIG_PATH + "npc_spawns/")
+            outputDir.mkdirs()
+
+            if (!sourceFile.exists()) {
+                player.debug("npc_spawns.json not found.")
+                return@define
+            }
+
+            val configs = gson.fromJson(FileReader(sourceFile), JsonArray::class.java)
+            val regionMap = mutableMapOf<Int, MutableMap<Int, JsonObject>>() // region -> npc_id -> object
+
+            for (configElement in configs) {
+                val e = configElement.asJsonObject
+                val npcId = e.get("npc_id").asInt
+                val npcName = NPCDefinition.forId(npcId)?.name ?: "null"
+
+                val locData = e.get("loc_data").asString
+                val points = locData.split("-").map { it.trim() }.filter { it.isNotEmpty() }
+
+                for (point in points) {
+                    val tokens = point.removePrefix("{").removeSuffix("}").split(",").map { it.trim() }
+                    if (tokens.size < 5) continue
+
+                    val x = tokens[0].toInt()
+                    val y = tokens[1].toInt()
+                    val regionId = (x shr 6 shl 8) or (y shr 6)
+
+                    val regionEntries = regionMap.computeIfAbsent(regionId) { mutableMapOf() }
+                    val npcEntry = regionEntries.computeIfAbsent(npcId) {
+                        JsonObject().apply {
+                            addProperty("name", npcName)
+                            addProperty("npc_id", npcId.toString())
+                            addProperty("loc_data", "")
+                        }
+                    }
+
+                    val updatedLocData = npcEntry.get("loc_data").asString + "$point-"
+                    npcEntry.addProperty("loc_data", updatedLocData)
+                }
+            }
+
+            for ((regionId, npcMap) in regionMap) {
+                val outFile = File(outputDir, "region_$regionId.json")
+                FileWriter(outFile).use { writer ->
+                    gson.toJson(npcMap.values.toList(), writer)
+                }
+            }
+
+            player.debug("Split ${configs.size()} NPC spawns into ${regionMap.size} regions.")
+        }
 
         /*
          * Dump RangeWeapon definitions.

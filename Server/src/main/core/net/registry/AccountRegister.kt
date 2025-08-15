@@ -3,7 +3,7 @@ package core.net.registry
 import core.ServerConstants
 import core.api.log
 import core.auth.UserAccountInfo.Companion.createDefault
-import core.cache.ByteBufferExtensions.getString
+import core.cache.util.ByteBufferExtensions.getString
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.GameWorld.authenticator

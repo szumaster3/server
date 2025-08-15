@@ -1,7 +1,7 @@
 package core.net.packet;
 
-import core.cache.crypto.ISAACCipher;
-import core.cache.ByteBufferExtensions;
+import core.cache.secure.ISAACCipher;
+import core.cache.util.ByteBufferExtensions;
 
 import java.nio.ByteBuffer;
 

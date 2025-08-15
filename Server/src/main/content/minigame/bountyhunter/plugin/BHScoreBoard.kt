@@ -1,6 +1,6 @@
 package content.minigame.bountyhunter.plugin
 
-import core.cache.ByteBufferExtensions
+import core.cache.util.ByteBufferExtensions
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.tools.StringUtils

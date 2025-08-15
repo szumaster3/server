@@ -22,6 +22,7 @@ import core.tools.Log
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Components
+import shared.consts.Items
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -162,33 +163,56 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
     }
 
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
+        if (state == null || victim == null) return
+
         var start: Graphics? = null
-        if (state!!.ammunition != null) {
-            start = state.ammunition.startGraphics
-            state.ammunition.projectile!!.copy(entity, victim, 5.0).send()
-            if (state.weapon.type == WeaponType.DOUBLE_SHOT && state.ammunition.darkBowGraphics != null) {
-                start = state.ammunition.darkBowGraphics
-                val speed = (55 + entity.location.getDistance(victim!!.location) * 10).toInt()
-                Projectile.create(entity, victim, state.ammunition.projectile!!.projectileId, 40, 36, 41, speed, 25)
-                    .send()
+        var projectile: Projectile? = null
+
+        state.ammunition?.let { ammo ->
+            start = ammo.startGraphics
+            projectile = ammo.projectile
+        }
+
+        if (projectile == null && state.weapon != null) {
+            RangeWeapon.get(state.weapon.id)?.let { rw ->
+                rw.ammunition.forEach { ammoId ->
+                    Ammunition.get(ammoId)?.let { ammo ->
+                        start = ammo.startGraphics
+                        projectile = ammo.projectile
+                        return@let
+                    }
+                }
             }
-        } else if (entity is NPC) {
-            if (entity.definition.combatGraphics[0] != null) {
-                start = entity.definition.combatGraphics[0]
+        }
+
+        projectile?.copy(entity, victim, 5.0)?.send() ?: run {
+            if (state.weapon?.type == WeaponType.THROWN) {
+                Projectile.create(entity, victim, state.weapon.id, 40, 36, 41, 50, 25).send()
             }
-            val g = entity.definition.combatGraphics[1]
-            if (g != null) {
+        }
+
+        if (state.weapon?.type == WeaponType.DOUBLE_SHOT) {
+            state.ammunition?.darkBowGraphics?.let { dbow ->
+                start = dbow
+                val speed = (55 + entity.location.getDistance(victim.location) * 10).toInt()
+                Projectile.create(entity, victim, state.ammunition?.projectile?.projectileId ?: state.weapon.id,
+                    40, 36, 41, speed, 25).send()
+            }
+        }
+
+        if (entity is NPC) {
+            entity.definition.combatGraphics.getOrNull(0)?.let { start = it }
+            entity.definition.combatGraphics.getOrNull(1)?.let { g ->
                 Projectile.ranged(entity, victim, g.id, g.height, 36, 41, 5).send()
             }
         }
-        val weapon: RangeWeapon? = state.weapon?.let { RangeWeapon.get(it.id) }
-        val anim = entity.properties.attackAnimation.id
-        weapon?.let {
-            if ((anim == Animations.PUNCH_422 || anim == Animations.KICK_423)) {
-                entity.visualize(it.animation, start)
-                return
-            }
+
+        val weaponAnim = RangeWeapon.get(state.weapon?.id ?: -1)?.animation
+        if (weaponAnim != null && (entity.properties.attackAnimation.id == Animations.PUNCH_422 || entity.properties.attackAnimation.id == Animations.KICK_423)) {
+            entity.visualize(weaponAnim, start)
+            return
         }
+
         entity.visualize(entity.properties.attackAnimation, start)
     }
 
@@ -283,6 +307,13 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
     }
 
     companion object {
+        /**
+         * Checks if the player has enough ammunition to use their ranged weapon.
+         *
+         * @param e The entity performing the attack.
+         * @param state The current battle state containing weapon and ammo info.
+         * @return True if the player has enough ammo, false otherwise.
+         */
         fun hasAmmo(e: Entity?, state: BattleState?): Boolean {
             if (e !is Player) return true
             val weaponType = state?.weapon?.type ?: return false
@@ -317,68 +348,80 @@ open class RangeSwingHandler(vararg flags: SwingHandlerFlag) : CombatSwingHandle
             return false
         }
 
+        /**
+         * Consumes ammunition for a ranged attack and handles dropping ammo on the ground.
+         *
+         * @param e The entity performing the attack. Must be a Player.
+         * @param state The current battle state containing weapon and ammo info.
+         * @param location The location to drop ammo, if applicable.
+         */
         fun useAmmo(e: Entity, state: BattleState, location: Location?) {
             if (e !is Player) return
-
             val weaponType = state.weapon.type
             val amount = if (weaponType == WeaponType.DOUBLE_SHOT) 2 else 1
 
             if (weaponType == WeaponType.DEGRADING) {
+                e.debug("Degrading weapon used. No ammo consumed.")
                 return
             }
 
-            if (weaponType == WeaponType.THROWN) {
-                val weaponItem = e.equipment[EquipmentContainer.SLOT_WEAPON] ?: return
-                if (weaponItem.amount < amount) {
-                    e.packetDispatch.sendMessage("You do not have enough ammo left.")
-                    return
-                }
-                e.equipment.replace(Item(weaponItem.id, weaponItem.amount - amount, weaponItem.charge), EquipmentContainer.SLOT_WEAPON)
-                return
-            }
+            val (itemId, slot) = when (weaponType) {
+                WeaponType.THROWN -> e.equipment[EquipmentContainer.SLOT_WEAPON]?.let { it.id to EquipmentContainer.SLOT_WEAPON }
+                else -> state.weapon.ammunition?.id?.let { it to state.weapon.ammunitionSlot }
+            } ?: return
 
-            val ammo = state.weapon.ammunition ?: return
-            if (state.weapon.ammunitionSlot == -1) return
-
-            val dropRate = getDropRate(e)
-            if (dropRate == -1.0) return
-
-            val ammoItem = e.equipment[state.weapon.ammunitionSlot] ?: return
-            if (ammoItem.amount < amount) {
+            val currentItem = e.equipment[slot] ?: run {
                 e.packetDispatch.sendMessage("You do not have enough ammo left.")
                 return
             }
 
-            e.equipment.replace(Item(ammo.id, ammoItem.amount - amount, ammoItem.charge), state.weapon.ammunitionSlot)
+            if (currentItem.amount < amount) {
+                e.packetDispatch.sendMessage("You do not have enough ammo left.")
+                return
+            }
 
-            var dropLocation = location
-            if (dropLocation != null) {
-                val flag = RegionManager.getClippingFlag(dropLocation)
-                if (flag and 0x200000 != 0) {
-                    dropLocation = null
-                }
-                if (dropLocation != null && state.rangeWeapon.dropAmmo) {
-                    val rate = 5 * (1.0 + e.skills.getLevel(Skills.RANGE) * 0.01) * dropRate
-                    if (RandomFunction.randomize(rate.toInt()) != 0) {
-                        val drop = GroundItemManager.increase(Item(ammo.id, amount), dropLocation, e)
-                        if (drop != null) {
-                            if (e.getAttribute<Any?>("duel:ammo", null) != null) {
-                                (e.getAttribute<Any>("duel:ammo") as ArrayList<GroundItem?>).add(drop)
+            e.equipment.replace(Item(itemId, currentItem.amount - amount, currentItem.charge), slot)
+            e.debug("${if (weaponType == WeaponType.THROWN) "Thrown weapon" else "Ammo"} used: id=$itemId, amount=$amount, remaining=${e.equipment[slot]?.amount ?: 0}")
+
+            location?.let { loc ->
+                val dropRate = getDropRate(e)
+                if (dropRate != -1.0) {
+                    val flag = RegionManager.getClippingFlag(loc)
+                    val isWater = flag and 0x200000 != 0
+                    if (!isWater && state.rangeWeapon.dropAmmo) {
+                        val chance = 5 * (1.0 + e.skills.getLevel(Skills.RANGE) * 0.01) * dropRate
+                        e.debug("Ammo drop chance calculated: $chance")
+                        if (RandomFunction.randomize(chance.toInt()) == 0) {
+                            val drop = GroundItemManager.increase(Item(itemId, amount), loc, e)
+                            drop?.let {
+                                e.getAttribute<ArrayList<GroundItem?>>("duel:ammo")?.add(it)
+                                e.debug("Ammo dropped: id=$itemId, amount=$amount, location=$loc")
                             }
                         }
+                    } else if (isWater) {
+                        e.debug("Ammo not dropped because location is water: $loc")
                     }
                 }
             }
-            if (e.equipment[state.rangeWeapon.ammunitionSlot] == null) {
+
+            if (e.equipment[slot] == null || e.equipment[slot]?.amount == 0) {
                 e.packetDispatch.sendMessage("You have no ammo left in your quiver!")
+                e.debug("Quiver empty after usage.")
             }
         }
 
+        /**
+         * Gets the drop rate modifier for ammo, based on player equipment.
+         *
+         * @param e The entity performing the attack.
+         * @return A double representing the drop rate, -1.0 if dropping is disabled, or 1.0 for normal drop.
+         */
         private fun getDropRate(e: Entity?): Double {
             if (e is Player) {
                 val cape = e.equipment[EquipmentContainer.SLOT_CAPE]
                 val weapon = e.equipment[EquipmentContainer.SLOT_WEAPON]
-                if (cape != null && (cape.id == 10498 || cape.id == 10499) && weapon != null && weapon.id != 10034 && weapon.id != 10033) {
+                if (cape != null && (cape.id == Items.AVAS_ATTRACTOR_10498 || cape.id == Items.AVAS_ACCUMULATOR_10499) &&
+                    weapon != null && weapon.id != Items.RED_CHINCHOMPA_10034 && weapon.id != Items.CHINCHOMPA_10033) {
                     val rate = 80
                     if (RandomFunction.random(100) < rate) {
                         val torso = e.equipment[EquipmentContainer.SLOT_CHEST]

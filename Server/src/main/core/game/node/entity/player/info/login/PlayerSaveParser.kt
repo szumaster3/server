@@ -33,31 +33,21 @@ class PlayerSaveParser(val player: Player) {
     var read = true
 
     fun parse() {
-        val jsonFile = File(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
-        if (jsonFile.exists()) {
-            try {
-                FileReader(jsonFile).use { fileReader ->
-                    val element = JsonParser.parseReader(fileReader)
-                    if (element.isJsonObject) {
-                        saveFile = element.asJsonObject
-                        parseData()
-                        player.details.saveParsed = true
-                        read = true
-                    } else {
-                        log(this::class.java, Log.WARN, "Save file for ${player.name} is not a valid JSON object.")
-                        read = false
-                        player.details.saveParsed = false
-                    }
-                }
-            } catch (e: Exception) {
-                log(this::class.java, Log.ERR, "Error reading save file for ${player.name}: ${e.message}")
-                read = false
-                player.details.saveParsed = false
-            }
-        } else {
+        val file = File("${ServerConstants.PLAYER_SAVE_PATH}${player.name}.json")
+        if (!file.exists()) {
             player.details.saveParsed = true
             read = false
-            log(this::class.java, Log.INFO, "No save file found for ${player.name}. Treating as a new player (saveParsed = true).")
+            return
+        }
+        runCatching {
+            FileReader(file).use { saveFile = JsonParser.parseReader(it).asJsonObject }
+            parseData()
+            read = true
+            player.details.saveParsed = true
+        }.onFailure {
+            log(this::class.java, Log.ERR, "Error parsing save file for ${player.name}: ${it.message}")
+            read = false
+            player.details.saveParsed = false
         }
     }
 

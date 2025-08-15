@@ -34,7 +34,7 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
     )
 
     private var ticks = 0
-    private val TICK_INTERVAL = 20
+    private val TICK_INTERVAL = 6
 
     override fun onCreation(self: NPC) {
         self.configureMovementPath(*route)
@@ -43,32 +43,42 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
     }
 
     override fun tick(self: NPC): Boolean {
-        ticks++
-        if (ticks < TICK_INTERVAL) return super.tick(self)
-        ticks = 0
+        if (!self.isWalks && !self.locks.isMovementLocked()) {
+            self.locks.lockMovement(RandomFunction.random(4, 6))
 
-        if (RandomFunction.roll(8)) {
-            sendChat(self, forceChat.random())
-            handleThrow(self)
+            if (RandomFunction.roll(2)) {
+                sendChat(self, forceChat.random())
+            }
         }
+
+        ticks++
+        if (ticks >= TICK_INTERVAL) {
+            ticks = 0
+            if (RandomFunction.roll(3)) {
+                sendChat(self, forceChat.random())
+                handleThrow(self)
+            }
+        }
+
         return super.tick(self)
     }
 
     private fun handleThrow(self: NPC) {
         if (!finishedMoving(self)) return
-        lockMovement(self, 1)
-        queueScript(self, 0, QueueStrength.SOFT) {
+        self.walkingQueue.reset()
+        self.locks.lockMovement(3)
+        queueScript(self, 1, QueueStrength.SOFT) {
             sendChat(self, "Take this")
             animate(self, Animations.THROW_385)
             faceLocation(self, self.location.transform(Direction.SOUTH))
             playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_1398, 1)
             spawnProjectile(
                 self.location,
-                self.location.transform(Direction.SOUTH, 4),
+                self.location.transform(Direction.SOUTH, 8),
                 Graphics.THROWING_VIAL_49,
-                30,
-                20,
-                10,
+                42,
+                32,
+                15,
                 100,
                 0,
             )

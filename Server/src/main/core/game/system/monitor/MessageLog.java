@@ -1,6 +1,6 @@
 package core.game.system.monitor;
 
-import core.cache.ByteBufferExtensions;
+import core.cache.util.ByteBufferExtensions;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

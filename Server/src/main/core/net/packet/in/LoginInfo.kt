@@ -1,7 +1,7 @@
 package core.net.packet.`in`
 
-import core.cache.crypto.ISAACCipher
-import core.cache.crypto.ISAACPair
+import core.cache.secure.ISAACCipher
+import core.cache.secure.ISAACPair
 
 class LoginInfo(
     var showAds: Boolean, // Unused
