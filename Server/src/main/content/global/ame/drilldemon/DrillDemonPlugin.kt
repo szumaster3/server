@@ -21,9 +21,8 @@ import shared.consts.Sounds
  * Handles interaction for Drill demon random event.
  * @author Ceikry (March 18, 2021)
  */
-class DrillDemonListener :
-    InteractionListener,
-    MapArea {
+class DrillDemonPlugin : InteractionListener, MapArea {
+
     val MATS =
         intArrayOf(
             Scenery.EXERCISE_MAT_10076,
@@ -37,12 +36,7 @@ class DrillDemonListener :
             if (inBorders(player, DrillDemonUtils.DD_AREA)) {
                 openDialogue(player, SergeantDamienDialogue(isCorrect = true), DrillDemonUtils.DD_NPC)
             } else {
-                sendNPCDialogue(
-                    player,
-                    NPCs.SERGEANT_DAMIEN_2790,
-                    "I Haven't given you the order yet, worm!",
-                    FaceAnim.OLD_DEFAULT,
-                )
+                sendNPCDialogue(player, NPCs.SERGEANT_DAMIEN_2790, "I Haven't given you the order yet, worm!", FaceAnim.OLD_DEFAULT)
             }
             return@on true
         }

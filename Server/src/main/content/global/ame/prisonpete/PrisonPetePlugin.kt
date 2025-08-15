@@ -13,7 +13,7 @@ import shared.consts.*
  * Handles the interactions for Prison pete random event.
  * @author szu
  */
-class PrisonPeteListener : InteractionListener, MapArea {
+class PrisonPetePlugin : InteractionListener, MapArea {
 
     init {
         val sceneryData = listOf(

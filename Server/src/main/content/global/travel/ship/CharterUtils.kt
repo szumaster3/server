@@ -16,7 +16,7 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 /**
- * Utility object providing functionality for charter ship travel.
+ * Utility for charter ship travel.
  */
 object CharterUtils {
     private const val MAX_SAFE_DISTANCE = 30
@@ -27,19 +27,12 @@ object CharterUtils {
     val component = Component(Components.SAILING_TRANSPORT_WORLD_MAP_95)
 
     /**
-     * Finds a destination matching the provided button id.
-     *
-     * @param button The interface button ID clicked by the player.
-     * @return The matching [Destination] or `null` if none matches.
+     * Finds destination by button id.
      */
     private fun forButton(button: Int) = values().find { it.button == button }
 
     /**
-     * Finds the nearest charter base destination to the given location,
-     * within a maximum safe distance.
-     *
-     * @param location The location to compare against all charter bases.
-     * @return The nearest [Destination] base if within [MAX_SAFE_DISTANCE], or `null` otherwise.
+     * Finds nearest charter base within safe distance.
      */
     private fun findNearestBase(location: Location?): Destination? =
         values().find { it.base?.withinDistance(location!!, MAX_SAFE_DISTANCE) == true }
@@ -59,10 +52,7 @@ object CharterUtils {
     }
 
     /**
-     * Handles button click events within the charter interface.
-     *
-     * @param player The player interacting with the interface.
-     * @param button The button id clicked.
+     * Handles charter button click.
      */
     fun handle(player: Player, button: Int) {
         val destination = forButton(button) ?: return
@@ -75,12 +65,7 @@ object CharterUtils {
     }
 
     /**
-     * Calculates the travel cost for the player to the specified destination,
-     * applying any discounts if the player has the Ring of Charos equipped.
-     *
-     * @param player The player traveling.
-     * @param destination The chosen travel destination.
-     * @return The final travel cost in coins.
+     * Gets travel cost with discounts applied.
      */
     private fun getCost(player: Player, destination: Destination): Int {
         val baseCost = destination.getCost(player, destination)
@@ -88,11 +73,7 @@ object CharterUtils {
     }
 
     /**
-     * Gets which interface components should be hidden
-     * depending on the player's current charter base.
-     *
-     * @param base The nearest charter [Destination] base.
-     * @return Array of component IDs to hide.
+     * Gets interface components to hide depending on nearest base.
      */
     private fun getHiddenComponents(base: Destination): IntArray =
         buildList {

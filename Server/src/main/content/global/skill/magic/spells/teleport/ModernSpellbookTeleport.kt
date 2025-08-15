@@ -19,10 +19,6 @@ import shared.consts.Quests
 
 class ModernSpellbookTeleport : SpellListener("modern") {
 
-    private val POH_START_TICK = 0
-    private val POH_POST_TICK = 4
-    private val POH_END_TICK = 6
-
     override fun defineListeners() {
 
         /*
@@ -255,7 +251,7 @@ class ModernSpellbookTeleport : SpellListener("modern") {
         addXP(player, 30.0)
         setDelay(player, true)
 
-        GameWorld.Pulser.submit(object : Pulse(POH_POST_TICK, player) {
+        GameWorld.Pulser.submit(object : Pulse(4, player) {
             override fun pulse(): Boolean {
                 player.houseManager.postEnter(player, false)
                 return true

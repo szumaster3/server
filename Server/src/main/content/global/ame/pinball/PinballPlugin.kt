@@ -18,7 +18,7 @@ import shared.consts.Components
  * Handles pinball re interactions.
  * @author szu
  */
-class PinballListener : InteractionListener, MapArea {
+class PinballPlugin : InteractionListener, MapArea {
     init {
         PinballUtils.PINBALL_EVENT_MYSTERIOUS_OLD_MAN.init()
         PinballUtils.PINBALL_EVENT_MYSTERIOUS_OLD_MAN.isWalks = false
@@ -94,11 +94,7 @@ class PinballListener : InteractionListener, MapArea {
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(PinballUtils.PINBALL_EVENT_ZONE_BORDERS)
 
-    override fun entityStep(
-        entity: Entity,
-        location: Location,
-        lastLocation: Location,
-    ) {
+    override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         if (entity is Player) {
             val player = entity.asPlayer()
             if (getVarbit(player, PinballUtils.VARBIT_PINBALL_SCORE) >= 10) {
@@ -113,10 +109,7 @@ class PinballListener : InteractionListener, MapArea {
         ZoneRestriction.FIRES,
     )
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             val player = entity.asPlayer()
             PinballUtils.cleanup(player)

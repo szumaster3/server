@@ -19,7 +19,7 @@ import shared.consts.Scenery
  * Handles interactions for Maze random event.
  * @author Ovenbread, szu
  */
-class MazeListener : InteractionListener {
+class MazePlugin : InteractionListener {
     private val rewardIDs = intArrayOf(Items.COINS_995, Items.FEATHER_314, Items.IRON_ARROW_884, Items.CHAOS_RUNE_562, Items.STEEL_ARROW_886, Items.DEATH_RUNE_560, Items.COAL_454, Items.NATURE_RUNE_561, Items.MITHRIL_ORE_448)
     private val itemsDivisor = arrayOf(1.0, 2.0, 3.0, 9.0, 12.0, 18.0, 45.0, 162.0, 180.0)
     private val wallIDs = intArrayOf(Scenery.WALL_3628, Scenery.WALL_3629, Scenery.WALL_3630, Scenery.WALL_3631, Scenery.WALL_3632)

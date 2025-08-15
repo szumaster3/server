@@ -21,7 +21,7 @@ import shared.consts.Sounds
  * Handles interaction for Evil bob random event.
  * @author szu, Zerken
  */
-class EvilBobListener :
+class EvilBobPlugin :
     InteractionListener,
     MapArea {
     override fun defineListeners() {

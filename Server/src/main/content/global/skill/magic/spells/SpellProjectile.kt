@@ -19,11 +19,5 @@ object SpellProjectile {
     /**
      * Creates a new projectile.
      */
-    fun create(graphicId: Int): Projectile = Projectile.create(
-        null as Entity?,
-        null as Entity?,
-        graphicId,
-        40, 36, 52,
-        75, 15, 11
-    )
+    fun create(graphicId: Int): Projectile = Projectile.create(null as Entity?, null as Entity?, graphicId, 40, 36, 52, 75, 15, 11)
 }

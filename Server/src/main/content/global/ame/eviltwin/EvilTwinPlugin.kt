@@ -19,7 +19,7 @@ import shared.consts.NPCs
  * Handles the evil twin random event.
  * @author Emperor, szu
  */
-class EvilTwinListener :
+class EvilTwinPlugin :
     InteractionListener,
     MapArea {
     private val mollyId = (NPCs.MOLLY_3892..NPCs.MOLLY_3911).toIntArray()

@@ -14,7 +14,7 @@ import shared.consts.NPCs
 /**
  * Handles the pattern recognition interactions.
  */
-class PatternRecognitionListener : InteractionListener {
+class PatternRecognitionPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(MORDAUT, IntType.NPC, "talk-to") { player, node ->

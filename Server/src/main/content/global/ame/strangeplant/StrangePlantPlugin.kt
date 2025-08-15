@@ -15,7 +15,7 @@ import shared.consts.NPCs
  * Handles interaction with strange plant NPC.
  * @author Zerken
  */
-class StrangePlantListener : InteractionListener {
+class StrangePlantPlugin : InteractionListener {
     override fun defineListeners() {
         on(NPCs.STRANGE_PLANT_407, IntType.NPC, "pick") { player, node ->
             if (AntiMacro.getEventNpc(player) != node) {

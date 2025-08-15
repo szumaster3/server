@@ -16,9 +16,7 @@ import shared.consts.Scenery
  * Handles interaction for Freaky forester random event.
  * @author szu
  */
-class FreakyForesterListener :
-    InteractionListener,
-    MapArea {
+class FreakyForesterPlugin : InteractionListener, MapArea {
     private val exitPortal = Scenery.PORTAL_8972
     private val freakNpc = NPCs.FREAKY_FORESTER_2458
     private val pheasants = intArrayOf(NPCs.PHEASANT_2459, NPCs.PHEASANT_2460, NPCs.PHEASANT_2461, NPCs.PHEASANT_2462)

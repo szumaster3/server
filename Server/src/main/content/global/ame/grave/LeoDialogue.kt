@@ -39,7 +39,7 @@ class LeoDialogue : DialogueFile() {
             8 -> {
                 end()
                 setAttribute(player!!, "random:talk-to", true)
-                GravediggerListener.init(player!!)
+                GravediggerPlugin.init(player!!)
                 openInterface(player!!, Components.MESSAGESCROLL_220).also {
                     sendString(player!!, arrayOf("You need to:", "Pick up the coffins.", "Check the body inside.", "Find out where they need to be buried.", "Put all give coffins in the correct graves.", "Then talk to Leo to get a reward.", "You can store items in the mausoleum if you need more", "inventory space.").joinToString("<br>"), Components.MESSAGESCROLL_220, 6)
                 }
@@ -64,7 +64,7 @@ class LeoDialogue : DialogueFile() {
             13 -> npcl("Here, I'll take you back to where I found you, and give you your reward.").also { stage++ }
             14 -> {
                 end()
-                GravediggerListener.cleanup(player!!)
+                GravediggerPlugin.cleanup(player!!)
                 val rewardID = listOf(Items.ZOMBIE_MASK_7594, Items.ZOMBIE_SHIRT_7592, Items.ZOMBIE_TROUSERS_7593, Items.ZOMBIE_GLOVES_7595, Items.ZOMBIE_BOOTS_7596)
                 player!!.pulseManager.run(
                     object : Pulse(2) {
@@ -96,7 +96,7 @@ class LeoDialogue : DialogueFile() {
                 player!!.pulseManager.run(
                     object : Pulse(2) {
                         override fun pulse(): Boolean {
-                            GravediggerListener.cleanup(player!!)
+                            GravediggerPlugin.cleanup(player!!)
                             return true
                         }
                     }

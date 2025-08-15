@@ -18,7 +18,7 @@ class Graveyard : MapArea {
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
         if (entity is Player) {
-            GravediggerListener.init(entity)
+            GravediggerPlugin.init(entity)
         }
     }
 
@@ -43,11 +43,11 @@ class Graveyard : MapArea {
         if (entity is Player) {
             val player = entity
 
-            if (anyInInventory(player, *GravediggerListener.COFFIN_IDS)) {
-                GravediggerListener.COFFIN_IDS.forEach { removeAll(player, it) }
+            if (anyInInventory(player, *GravediggerPlugin.COFFIN_IDS)) {
+                GravediggerPlugin.COFFIN_IDS.forEach { removeAll(player, it) }
             }
 
-            GravediggerListener.reset(player)
+            GravediggerPlugin.reset(player)
             removeAttributes(player, "random:talk-to")
         }
     }

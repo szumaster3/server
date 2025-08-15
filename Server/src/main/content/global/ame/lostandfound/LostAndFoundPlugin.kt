@@ -13,7 +13,7 @@ import shared.consts.Items
  * TODO; Complete
  * @author Vexia
  */
-class LostAndFoundListener : InteractionListener {
+class LostAndFoundPlugin : InteractionListener {
     private val sceneryIDs = (8998..9006).toIntArray()
 
     override fun defineListeners() {
