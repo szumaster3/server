@@ -111,11 +111,11 @@ object ClimbActionHandler {
      * @return True if the climbing action was successfully started, false otherwise.
      */
     @JvmStatic
-    fun climbLadder(player: Player, startLadder: Scenery, option: String): Boolean {
+    fun climbLadder(player: Player, startLadder: Scenery?, option: String): Boolean {
         var endLadder: Scenery? = null
         var animation: Animation? = CLIMB_UP
 
-        if (startLadder.name.startsWith("Stair")) {
+        if (startLadder!!.name.startsWith("Stair")) {
             animation = null
         }
 
@@ -263,20 +263,19 @@ object ClimbActionHandler {
         return scenery.name == "Trapdoor"
     }
 
-    class ClimbDialogue() : Dialogue() {
+    internal class ClimbDialogue : Dialogue {
+        constructor()
 
-        constructor(player: Player) : this() {
-            this.player = player
-        }
+        constructor(player: Player?) : super(player)
 
-        private lateinit var scenery: Scenery
+        private var scenery: Scenery? = null
 
-        override fun newInstance(player: Player): Dialogue {
+        override fun newInstance(player: Player?): Dialogue {
             return ClimbDialogue(player)
         }
 
         override fun open(vararg args: Any?): Boolean {
-            scenery = args[0] as Scenery
+            scenery = args[0] as Scenery?
             interpreter.sendOptions("What would you like to do?", "Climb Up.", "Climb Down.")
             stage = 0
             return true
