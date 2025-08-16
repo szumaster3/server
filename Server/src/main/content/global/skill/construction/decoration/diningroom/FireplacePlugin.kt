@@ -34,13 +34,20 @@ class FireplacePlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        if (!inInventory(player, Items.LOGS_1511) || !inInventory(player, Items.TINDERBOX_590)) {
+        if(player.houseManager.isBuildingMode) {
+            sendMessage(player, "You cannot do this in building mode.")
+            return true
+        }
+        if (!anyInInventory(player, Items.LOGS_1511, Items.TINDERBOX_590)) {
             sendMessage(player, "You need some logs and a tinderbox in order to light the fireplace.")
             return true
         }
-
-        if(player.houseManager.isBuildingMode) {
-            sendMessage(player, "You cannot do this in building mode.")
+        if (!inInventory(player, Items.LOGS_1511, 1)) {
+            sendMessage(player, "You need some logs in order to light the fireplace.")
+            return true
+        }
+        if (!inInventory(player, Items.TINDERBOX_590, 1)) {
+            sendMessage(player, "You need a tinderbox in order to light the fireplace.")
             return true
         }
 

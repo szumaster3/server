@@ -1,13 +1,17 @@
 package content.global.skill.construction.decoration.diningroom
 
-import content.global.skill.construction.servants.Servant
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
+import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Scenery
+import shared.consts.Sounds
 
 /**
  * Handles the bell pull interaction.
@@ -29,7 +33,25 @@ class BellPullPlugin : OptionHandler() {
             player.sendMessage("You have no servant to ring.")
             return true
         }
-        servant.init()
+
+        if (player.getAttribute("servant:call", false) == true) {
+            player.sendMessage("Your servant has already been called!")
+            return true
+        }
+
+        // Temporary solution because it spawns behind a wall.
+        // val destination = getPathableCardinal(servant.asNpc(), player.location)
+        playAudio(player, Sounds.BELL_2192)
+        servant.teleporter.send(player.location, TeleportManager.TeleportType.INSTANT)
+        player.setAttribute("servant:call", true)
+
+        GameWorld.Pulser.submit(object : Pulse(17) {
+            override fun pulse(): Boolean {
+                player.removeAttribute("servant:call")
+                return true
+            }
+        })
         return true
     }
+
 }
