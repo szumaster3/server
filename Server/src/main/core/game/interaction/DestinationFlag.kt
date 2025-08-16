@@ -1,5 +1,6 @@
 package core.game.interaction
 
+import core.api.log
 import core.game.global.action.DoorActionHandler
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -7,6 +8,7 @@ import core.game.node.scenery.Scenery
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.tools.Log
 import kotlin.math.abs
 
 /**
@@ -171,32 +173,36 @@ open class DestinationFlag {
         @JvmField
         val OBJECT = object : DestinationFlag() {
             override fun getDestination(mover: Entity, node: Node): Location {
-                val scenery = node as Scenery
-                return when (scenery.type) {
-                    in 0..3, 9 -> DoorActionHandler.getDestination(mover, scenery)
-                    4, 5 -> scenery.location
+                if (node !is Scenery) {
+                    log(this.javaClass, Log.WARN, "DestinationFlag.OBJECT fallback, node=${node::class.simpleName}")
+                    return node.location
+                }
+
+                return when (node.type) {
+                    in 0..3, 9 -> DoorActionHandler.getDestination(mover, node)
+                    4, 5 -> node.location
                     else -> {
-                        var sizeX = scenery.definition.sizeX
-                        var sizeY = scenery.definition.sizeY
-                        if (scenery.rotation % 2 != 0) {
+                        var sizeX = node.definition.sizeX
+                        var sizeY = node.definition.sizeY
+                        if (node.rotation % 2 != 0) {
                             val tmp = sizeX
                             sizeX = sizeY
                             sizeY = tmp
                         }
-                        val dir = Direction.forWalkFlag(scenery.definition.blockFlag, scenery.rotation)
+                        val dir = Direction.forWalkFlag(node.definition.blockFlag, node.rotation)
                         val destination = if (dir != null) {
-                            getDestination(mover, scenery, sizeX, sizeY, dir, 3)
+                            getDestination(mover, node, sizeX, sizeY, dir, 3)
                         } else {
                             getDestination(
                                 mover,
-                                scenery,
+                                node,
                                 sizeX,
                                 sizeY,
-                                Direction.getLogicalDirection(scenery.location, mover.location),
+                                Direction.getLogicalDirection(node.location, mover.location),
                                 0
                             )
                         }
-                        return destination ?: scenery.location
+                        destination ?: node.location
                     }
                 }
             }
@@ -212,7 +218,14 @@ open class DestinationFlag {
              * @param count Rotation offset (used when direction is known).
              * @return The closest reachable tile near the object, or null if none found.
              */
-            private fun getDestination(mover: Entity, scenery: Scenery, sizeX: Int, sizeY: Int, startDir: Direction, count: Int): Location? {
+            private fun getDestination(
+                mover: Entity,
+                scenery: Scenery,
+                sizeX: Int,
+                sizeY: Int,
+                startDir: Direction,
+                count: Int
+            ): Location? {
                 var closest: Location? = null
                 var distance = 9999.9
                 val loc = scenery.location

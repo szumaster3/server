@@ -18,6 +18,7 @@ import core.tools.BLACK
 import core.tools.DARK_BLUE
 import shared.consts.Items
 import shared.consts.NPCs
+import shared.consts.Vars
 
 /**
  * Represents the house servants dialogue.
@@ -26,12 +27,16 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
 
     private var sawmill = false
     private var logs: Item? = null
+    private val lastFetch = "con:lastfetch"
+    private val lastFetchType = "con:lastfetchtype"
+    val gender = if (player!!.isMale) "sir" else "madam"
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         val manager = player.houseManager
-        val expression = if (npc.id == NPCs.DEMON_BUTLER_4243) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
-        val fontColor = if (npc.id == NPCs.DEMON_BUTLER_4243) DARK_BLUE else BLACK
+        val type = ServantType.forId(npc.id)
+        val expression = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
+        val fontColor = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) DARK_BLUE else BLACK
         val inHouse = manager.isInHouse(player)
 
         if (args.size > 1) {
@@ -41,21 +46,31 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
 
         // Player has no house.
         if (!manager.hasHouse() && inHouse) {
-            npc(expression, "You don't have a house that I can work in.", "I'll be waiting here if you decide to buy a house.").also { stage = 100 }
+            npc(expression, fontColor + "You don't have a house that I can work in.", "I'll be waiting here if you decide to buy a house.").also { stage = 100 }
             return true
         }
 
         // Player has no servant yet.
         if (!manager.hasServant()) {
-            val type = ServantType.forId(npc.id) ?: return true
-            val requirements = getStatLevel(player, Skills.CONSTRUCTION) >= type.level
-
+            val requirements = getStatLevel(player, Skills.CONSTRUCTION) >= type!!.level
             if (requirements) {
                 // Offer to hire a new servant.
-                npc(expression, fontColor + "You're not aristocracy, but I suppose you'd do. Do you", fontColor + "want a good cook for " + type.cost + fontColor + " coins?").also { stage = 0 }
+                when(type?.id) {
+                    NPCs.RICK_4236 -> npcl(FaceAnim.SAD, "'Allo mate! Got a job going? Only ${type.cost} coins!").also { stage = 0 }
+                    NPCs.MAID_4238 -> npcl(FaceAnim.FRIENDLY, "Oh! Please hire me, $gender! I'm very good, well, I'm not bad, and my fee's only ${type.cost} coins.").also { stage = 0 }
+                    NPCs.COOK_4240 -> npcl(FaceAnim.HALF_ASKING, "You're not aristocracy but I suppose you'd do. Do you want a good cook for ${type.cost} coins?").also { stage = 0 }
+                    NPCs.BUTLER_4242 -> npcl(FaceAnim.NEUTRAL, "Good day, $gender. Would $gender care to hire a good butler for 5000 coins?").also { stage = 0 }
+                    NPCs.DEMON_BUTLER_4244 -> npcl(FaceAnim.OLD_DEFAULT, fontColor + "Greetings! I am Alathazdrar, butler to the Demon Lords, and I offer thee my services for a mere ${type.cost} coins!").also { stage = 0 }
+                }
             } else {
                 // Player does not meet level requirements.
-                npc(expression, "You need a Construction level of " + type.level + " and you must not", "currently have another person working for you", "in order to hire me.").also { stage = 100 }
+                when(type?.id) {
+                    NPCs.RICK_4236 -> npcl(FaceAnim.SAD, "Sorry mate, but I'm not allowed to work for anyone without level 20 Construction. It's a safety 'azard!").also { stage = 100 }
+                    NPCs.MAID_4238 -> npcl(FaceAnim.SAD, "Oh! Oh dear! I'm terribly sorry, $gender, but I'm not allowed to work for anyone unless they have level 25 Construction. If a house is poorly made I might damage it by mistake!").also { stage = 100 }
+                    NPCs.COOK_4240 -> npcl(FaceAnim.HALF_GUILTY, "Hmph! I don't work for just anyone, you know! I refuse to work for someone who's below level 30 Construction!").also { stage = 100 }
+                    NPCs.BUTLER_4242 -> npcl(FaceAnim.NEUTRAL, "I must respectfully decline, $gender. I offer a very exclusive service and will only work for people with over level 40 Construction.").also { stage = 100 }
+                    NPCs.DEMON_BUTLER_4244 -> npcl(FaceAnim.OLD_DEFAULT, fontColor + "You, a mere mortal with level ${player.skills.getLevel(Skills.CONSTRUCTION)} Construction, wish to employ ME, butler to Great Ones of the Outer Darkness? Ha ha ha! I refuse to work for anyone below level 50 Construction.").also { stage = 100 }
+                }
             }
             return true
         }
@@ -67,11 +82,7 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
         if (!inHouse) {
             // Player is not in house but tries to hire a different servant.
             if (npc.id != servant.id) {
-                npc(
-                    expression,
-                    "You already have someone working for you.",
-                    "Fire them first before hiring me."
-                ).also { stage = 100 }
+                npc(expression, fontColor + "You already have someone working for you.", "Fire them first before hiring me.").also { stage = 100 }
             }
             return true
         }
@@ -89,17 +100,24 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
         if (servant.item.amount > 0) {
             if (freeSlots(player) < 1) {
                 // Inventory full, servant waits with items.
+                // Butler -> "Your goods, sir."
                 npc(expression, fontColor + "I have returned with what you asked me to", fontColor + "retrieve. As I see your inventory is full, I shall wait", fontColor + "with these " + fontColor + servant.item.amount + fontColor + " items until you are ready.").also { stage = 100 }
             } else {
                 // Inventory has space, deliver items.
+                // Demon butler -> "I shall fly on wings of unholy flame to bring you the", "items you desire from where they are stored safely."
                 npc(expression, fontColor + "I have returned with what you asked me to", fontColor + "retrieve.").also { stage = 150 }
             }
             return true
         }
 
         // Greeting and service usage info.
-        npc(expression, fontColor + "Yes, " + (if (player.appearance.isMale) "sir" else "ma'am") + "?", fontColor + "You have " + (8 - servant.uses) + " uses of my services remaining.").also { stage = 50 }
-
+        when(type?.id) {
+            NPCs.RICK_4236 -> npcl(FaceAnim.THINKING, "Yes, $gender?").also { stage = 50 } // TODO
+            NPCs.MAID_4238 -> npcl(FaceAnim.HALF_THINKING, "Yes? I mean, yes, $gender?").also { stage = 50 }
+            NPCs.COOK_4240 -> npcl(FaceAnim.HALF_THINKING, "Yes, $gender?").also { stage = 50 } // TODO
+            NPCs.BUTLER_4242 -> npcl(FaceAnim.THINKING, "Yes, $gender?").also { stage = 50 }
+            NPCs.DEMON_BUTLER_4244 -> npcl(FaceAnim.OLD_DEFAULT, "$fontColor I am at thy command, my master.").also { stage = 50 }
+        }
         return true
     }
 
@@ -107,31 +125,29 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
         val manager = player.houseManager
         val servant = manager.servant
         var type = ServantType.forId(npc.id)
-        val expression = if (type?.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
-        val fontColor = if (type?.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
+        val expression = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
+        val fontColor = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) DARK_BLUE else BLACK
 
         when (stage) {
             0 -> options("What can you do?", "Tell me about your previous jobs.", "You're hired!").also { stage++ }
             1 -> when (buttonId) {
                 1 -> when (type?.id) {
-                    NPCs.RICK_4235 -> interpreter.open(ServantRickDialogue(), npc)
-                    NPCs.MAID_4237 -> interpreter.open(ServantMaidDialogue(), npc)
-                    NPCs.COOK_4239 -> interpreter.open(ServantCookDialogue(), npc)
-                    NPCs.BUTLER_4241 -> interpreter.open(ServantButlerDialogue(), npc)
-                    NPCs.DEMON_BUTLER_4243 -> interpreter.open(ServantDemonButlerDialogue(), npc)
+                    NPCs.RICK_4236          -> interpreter.open(ServantRickDialogue(), npc)
+                    NPCs.MAID_4238          -> interpreter.open(ServantMaidDialogue(), npc)
+                    NPCs.COOK_4240          -> interpreter.open(ServantCookDialogue(), npc)
+                    NPCs.BUTLER_4242        -> interpreter.open(ServantButlerDialogue(), npc)
+                    NPCs.DEMON_BUTLER_4244  -> interpreter.open(ServantDemonButlerDialogue(), npc)
                 }
                 2 -> when (type?.id) {
-                    NPCs.RICK_4235 -> interpreter.open(ServantRickDialogueExtension(), npc)
-                    NPCs.MAID_4237 -> interpreter.open(ServantMaidDialogueExtension(), npc)
-                    NPCs.COOK_4239 -> interpreter.open(ServantCookDialogueExtension(), npc)
-                    NPCs.BUTLER_4241 -> interpreter.open(ServantButlerDialogueExtension(), npc)
-                    NPCs.DEMON_BUTLER_4243 -> interpreter.open(ServantDemonButlerDialogueExtension(), npc)
+                    NPCs.RICK_4236          -> interpreter.open(ServantRickDialogueExtension(), npc)
+                    NPCs.MAID_4238          -> interpreter.open(ServantMaidDialogueExtension(), npc)
+                    NPCs.COOK_4240          -> interpreter.open(ServantCookDialogueExtension(), npc)
+                    NPCs.BUTLER_4242        -> interpreter.open(ServantButlerDialogueExtension(), npc)
+                    NPCs.DEMON_BUTLER_4244  -> interpreter.open(ServantDemonButlerDialogueExtension(), npc)
                 }
                 3 -> {
                     if (!manager.hasHouse()) {
-                        npc(expression,"You don't have a house that I can work in.",
-                            "I'll be waiting here if you decide to buy a house."
-                        )
+                        npc(expression, fontColor + "You don't have a house that I can work in.", "I'll be waiting here if you decide to buy a house.")
                         stage = 100
                         return true
                     }
@@ -139,27 +155,50 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 2
                 }
             }
-            2 -> npc(expression, fontColor + "Alright, " + (if (player.appearance.isMale) "sir" else "ma'am") + ". I can start work immediately.").also { stage++ }
+            2 -> when(type?.id) {
+                NPCs.RICK_4236 -> npcl(FaceAnim.CHEER_TALK, "Cheers, mate! Look forward to working with you!").also { stage++ }
+                NPCs.MAID_4238 -> npcl(FaceAnim.HAPPY, "Oh! Oh, thank you $gender, thank you!").also { stage++ }
+                NPCs.COOK_4240 -> npcl(FaceAnim.FRIENDLY, "Alright, $gender. I can start work immediately.").also { stage++ }
+                NPCs.BUTLER_4242 -> npcl(FaceAnim.HAPPY, "Thank you, $gender. I can start work immediately.").also { stage++ }
+                NPCs.DEMON_BUTLER_4244 -> npcl(FaceAnim.OLD_DEFAULT, fontColor + "I shall devote my every art to thy service, my Master.").also { stage++ }
+            }
             3 -> {
                 if (type != null && player.inventory.getAmount(Items.COINS_995) >= type.cost && player.inventory.remove(Item(Items.COINS_995, type.cost))) {
                     manager.servant = Servant(type)
+                    val hideMap = mapOf(
+                        NPCs.RICK_4236 to 1,
+                        NPCs.MAID_4238 to 3,
+                        NPCs.COOK_4240 to 5,
+                        NPCs.BUTLER_4242 to 6,
+                        NPCs.DEMON_BUTLER_4244 to 8
+                    )
+                    val hide = hideMap[type?.id] ?: 0
+                    setVarbit(player, Vars.VARBIT_POH_SERVANT_HIRED_2190, hide, true)
                     sendDialogue(player, "The servant heads to your house.")
                     stage = 100
                 } else {
-                    sendDialogue(player, "You don't have enough money to pay the servant's hiring fee.")
-                    stage = 100
+                    playerl(FaceAnim.HALF_GUILTY, "You're hired... well, I don't have the money on me, but can I owe you? I'm good for it, honest.")
+                    stage = 4
                 }
             }
+            4 -> when(type?.id) {
+                NPCs.RICK_4236 -> npcl(FaceAnim.THINKING, "Nice try, mate, but I don't start work without cash up front.").also { stage = 100 }
+                NPCs.MAID_4238 -> npcl(FaceAnim.SAD, "Oh... I'm terribly sorry, $gender, but I'd really prefer to be paid before I start work.").also { stage = 100 }
+                NPCs.COOK_4240 -> npcl(FaceAnim.HALF_THINKING, "Are you having a laugh? No cash up front, no cook.").also { stage = 100 }
+                NPCs.BUTLER_4242 -> npcl(FaceAnim.NEUTRAL, "I regret that I cannot agree to begin my duties until I have been paid.").also { stage = 100 }
+                NPCs.DEMON_BUTLER_4244 -> npcl(FaceAnim.OLD_DEFAULT, fontColor + "I regret, Master, that I must insist on payment up front.").also { stage = 100 }
+            }
+
             // In house options.
             50 -> options("Go to the bank/sawmill...", "Misc...", "Stop following me.", "You're fired!").also { stage++ }
             51 -> {
                 type = servant.type
                 when (buttonId) {
                     1 -> {
-                        val lastFetch = if (!servant.attributes.containsKey("con:lastfetch")) {
+                        val lastFetch = if (!servant.attributes.containsKey(lastFetch)) {
                             "Repeat last fetch task"
                         } else {
-                            "Fetch another " + (type.capacity.toString() + " x " + (servant.getAttribute<Any>("con:lastfetch") as Item).name.lowercase()) + " (" + (servant.getAttribute("con:lastfetchtype")) + ")"
+                            "Fetch another " + (type.capacity.toString() + " x " + (servant.getAttribute<Any>(lastFetch) as Item).name.lowercase()) + " (" + (servant.getAttribute(lastFetchType)) + ")"
                         }
                         options(lastFetch, "Go to the bank", "Go to the sawmill", "Pay wages (${servant.uses}/8 uses)")
                         stage++
@@ -177,16 +216,16 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
             // Fetch / Bank / Sawmill logic.
             52 -> when (buttonId) {
                 1 -> {
-                    if (!servant.attributes.containsKey("con:lastfetch")) {
+                    if (!servant.attributes.containsKey(lastFetch)) {
                         npc(expression, fontColor + "I haven't recently fetched anything from the bank or", fontColor + "sawmill for you.")
                         stage = 50
                         return true
                     }
-                    when (servant.getAttribute<String>("con:lastfetchtype")) {
-                        "bank" -> bankFetch(player, servant.getAttribute("con:lastfetch"))
+                    when (servant.getAttribute<String>(lastFetchType)) {
+                        "bank" -> bankFetch(player, servant.getAttribute(lastFetch))
                         else -> {
                             end()
-                            sawmillRun(player, servant.getAttribute("con:lastfetch"))
+                            sawmillRun(player, servant.getAttribute(lastFetch))
                         }
                     }
                 }
@@ -301,19 +340,10 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
                 servant.uses = 0
                 servant.clear()
                 servant.location = Location(0, 0)
+                setVarbit(player, Vars.VARBIT_POH_SERVANT_HIRED_2190, 0, true)
                 manager.servant = null
             }
             100 -> {
-                val hideMap = mapOf(
-                    NPCs.RICK_4235 to 1,
-                    NPCs.MAID_4237 to 3,
-                    NPCs.COOK_4239 to 5,
-                    NPCs.BUTLER_4241 to 6,
-                    NPCs.DEMON_BUTLER_4243 to 7
-                )
-
-                val hide = hideMap[type?.id] ?: 0
-                setVarbit(player, 2190, hide)
                 end()
             }
             // Sawmill run.
@@ -393,18 +423,18 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
         val manager = player.houseManager
         val servant = manager.servant
         val type = manager.servant.type
-        val expression = if (npc.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
-        val fontColor = if (npc.id == NPCs.DEMON_BUTLER_4243) BLUE else BLACK
+        val expression = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
+        val fontColor = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) DARK_BLUE else BLACK
         if (item == null || !requirements(player, item, true)) {
             return
         }
         if (type == ServantType.MAID || type == ServantType.RICK) {
-            npc(expression,fontColor + "I am unable to take planks to the sawmill.",)
+            npc(expression,fontColor + "I am unable to take planks to the sawmill.")
             return
         }
         var amt = player.inventory.getAmount(item)
         if (amt < 1) {
-            npc(expression,fontColor + "You don't have any more of that type of log.",)
+            npc(expression,fontColor + "You don't have any more of that type of log.")
             return
         }
         for (plank in PlankType.values()) {
@@ -430,8 +460,8 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
                             override fun pulse(): Boolean {
                                 servant.isInvisible = false
                                 servant.locks.unlockMovement()
-                                servant.setAttribute("con:lastfetch", Item(item.id, 1))
-                                servant.setAttribute("con:lastfetchtype", "sawmill")
+                                servant.setAttribute(lastFetch, Item(item.id, 1))
+                                servant.setAttribute(lastFetchType, "sawmill")
                                 interpreter.open(servant.id, servant)
                                 return true
                             }
@@ -453,8 +483,8 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
         val manager = player!!.houseManager
         val servant = manager.servant
         val type = manager.servant.type
-        val expression = if (npc.id != NPCs.DEMON_BUTLER_4243) FaceAnim.HALF_GUILTY else FaceAnim.OLD_DEFAULT
-        val fontColor = if (npc.id != NPCs.DEMON_BUTLER_4243) BLACK else DARK_BLUE
+        val expression = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_GUILTY
+        val fontColor = if (type?.id in NPCs.DEMON_BUTLER_4243..NPCs.DEMON_BUTLER_4244) DARK_BLUE else BLACK
         if (item == null || !requirements(player, item, false)) {
             return
         }
@@ -485,8 +515,8 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
                         manager.servant.item = fetch
                         interpreter.open(servant.id, servant)
                     }
-                    servant.setAttribute("con:lastfetch", Item(fetch.id, 1))
-                    servant.setAttribute("con:lastfetchtype", "bank")
+                    servant.setAttribute(lastFetch, Item(fetch.id, 1))
+                    servant.setAttribute(lastFetchType, "bank")
                     manager.servant.uses += 1
                     follow(player, servant)
                     return true
@@ -496,7 +526,7 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     /**
-     * Makes an servant follow a player.
+     * Makes a servant follow a player.
      *
      * @param player The player to follow.
      * @param npc The NPC that will follow the player.

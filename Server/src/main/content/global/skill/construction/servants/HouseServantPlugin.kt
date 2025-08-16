@@ -1,5 +1,6 @@
 package content.global.skill.construction.servants
 
+import core.api.sendNPCDialogue
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.plugin.ClassScanner.definePlugin
@@ -29,13 +30,17 @@ class HouseServantPlugin : UseWithHandler(*IDS) {
             return true
         }
 
+        if(event.usedItem.id == Items.BONES_526 && event.usedWith.id == NPCs.DEMON_BUTLER_4244) {
+            sendNPCDialogue(event.player, event.usedWith.id, core.tools.DARK_BLUE + "Bones are a tool of prayer, and demonic magic prevents me from touching them, my Lord.")
+            return true
+        }
+
         event.player.dialogueInterpreter.open(
             event.usedWith.asNpc().id,
             event.usedWith.asNpc(),
             true,
             event.usedItem
         )
-
         return true
     }
 

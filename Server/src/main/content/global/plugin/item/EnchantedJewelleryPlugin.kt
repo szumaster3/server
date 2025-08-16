@@ -48,7 +48,7 @@ class EnchantedJewelleryPlugin : InteractionListener {
         val jewellery = EnchantedJewellery.idMap[item.id] ?: return
 
         if (!jewellery.crumbled && jewellery.isLastItemIndex(jewellery.getItemIndex(item))) {
-            sendMessage(player, "It will need to be recharged before you can use it again.")
+            sendMessage(player, "You will need to recharge your ${jewellery.getJewelleryType(item)} before you can use it again.")
             return
         }
 
