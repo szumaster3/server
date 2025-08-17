@@ -209,7 +209,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
          * @param player The player.
          */
         fun checkDarkArea(player: Player): Boolean {
-            for (r in player.zoneMonitor.zones) {
+            for (r in player.zoneMonitor.getZones()) {
                 if (r.zone is DarkZone) {
                     val zone = r.zone as DarkZone
                     if (!hasUnlimitedLightSource(player)) {

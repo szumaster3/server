@@ -8,6 +8,7 @@ import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
@@ -24,8 +25,8 @@ import kotlin.reflect.full.createInstance
  * @author Ceikry
  */
 abstract class RandomEventNPC(
-    id: Int,
-) : NPC(id) {
+    vararg val id: Int
+) : NPC(id.first()) {
     lateinit var player: Player
     abstract var loot: WeightBasedTable?
     var spawnLocation: Location? = null
@@ -34,17 +35,23 @@ abstract class RandomEventNPC(
     var finalized = false
     var timerPaused = false
     var ticksLeft = secondsToTicks(180)
+    var npcs: List<RandomEventNPC> = emptyList()
+    var respawnAll: Boolean = true
 
     open fun create(
         player: Player,
         loot: WeightBasedTable? = null,
         type: String = "",
+        npcs: List<RandomEventNPC> = emptyList(),
+        respawnAll: Boolean = true
     ): RandomEventNPC {
         val event = this::class.createInstance()
         if (event is PatternRecognitionNPC) event.type = type
         event.loot = loot
         event.player = player
         event.spawnLocation = RegionManager.getSpawnLocation(player, this)
+        event.npcs = npcs
+        event.respawnAll = respawnAll
         return event
     }
 
@@ -60,20 +67,20 @@ abstract class RandomEventNPC(
     open fun follow() {
         pulseManager.run(
             (
-                object : MovementPulse(this, player, Pathfinder.DUMB) {
-                    override fun pulse(): Boolean {
-                        face(player)
-                        return false
+                    object : MovementPulse(this, player, Pathfinder.DUMB) {
+                        override fun pulse(): Boolean {
+                            face(player)
+                            return false
+                        }
                     }
-                }
-            ),
+                    ),
             PulseType.STANDARD,
         )
     }
 
     override fun tick() {
         super.tick()
-        if (player.getAttribute<RandomEventNPC?>("re-npc", null) != this) {
+        if (player.getAttribute<RandomEventNPC?>(AntiMacro.EVENT_NPC, null) != this) {
             terminate()
             return
         }
@@ -105,7 +112,7 @@ abstract class RandomEventNPC(
         timerPaused = false
         spawnLocation ?: terminate()
         location = spawnLocation!!
-        player.setAttribute("re-npc", this)
+        player.setAttribute(AntiMacro.EVENT_NPC, this)
         super.init()
     }
 
@@ -133,7 +140,7 @@ abstract class RandomEventNPC(
 
     override fun clear() {
         super.clear()
-        if (player.getAttribute<RandomEventNPC?>("re-npc", null) == this) player.removeAttribute("re-npc")
+        if (player.getAttribute<RandomEventNPC?>(AntiMacro.EVENT_NPC, null) == this) player.removeAttribute(AntiMacro.EVENT_NPC)
     }
 
     abstract fun talkTo(npc: NPC)

@@ -97,7 +97,8 @@ class NPCListener : InteractionListener {
                 return@on true
             }
 
-            if (RandomEvents.randomIDs.contains(node.id)) {
+            val eventNpc = AntiMacro.getEventNpc(player)
+            if (RandomEvents.randomIDs.contains(eventNpc?.id)) {
                 if (AntiMacro.getEventNpc(player) == null ||
                     AntiMacro.getEventNpc(player) != node.asNpc() ||
                     AntiMacro

@@ -38,9 +38,11 @@ class AntiMacro :
             return true
         }
 
-        eventNpc.init()
+        val npcsToInit = if (eventNpc.respawnAll) eventNpc.npcs else listOf(eventNpc.npcs.first())
+        npcsToInit.forEach { it.init() }
         setAttribute(entity, EVENT_NPC, eventNpc)
-        entity.debug("[AntiMacro] Fired ${eventSelection.name}.")
+        val spawnedIds = npcsToInit.joinToString(",") { it.id.toString() }
+        entity.debug("[AntiMacro] Fired ${eventSelection.name} with NPC IDs: $spawnedIds")
         return true
     }
 

@@ -28,7 +28,7 @@ class ZoneBuilder : StartupListener {
          */
         @JvmStatic
         fun configure(zone: MapZone) {
-            zone.uid = zone.name.hashCode()
+            zone.setUid(zone.name.hashCode())
             zone.configure()
         }
     }

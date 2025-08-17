@@ -223,4 +223,107 @@ class RandomEventTests {
             Assertions.assertEquals(expectedEvent, resultEvent)
         }
     }
+
+    @Test fun frogEventRespawnAllTrueSpawnsAllNPCs() {
+        TestUtils.getMockPlayer("frogRespawnAllTrue").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            frogEvent.respawnAll = true
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            Assertions.assertEquals(frogEvent.npc.ids.size, eventNpc.npcs.size)
+            Assertions.assertTrue(eventNpc.isActive)
+            eventNpc.npcs.forEach { Assertions.assertTrue(it.isActive) }
+            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.npcs.first().id)
+        }
+    }
+
+    @Test fun frogEventRespawnAllFalseSpawnsOnlyFirstNPC() {
+        TestUtils.getMockPlayer("frogRespawnAllFalse").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            frogEvent.respawnAll = false
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            Assertions.assertEquals(1, eventNpc.npcs.size)
+            Assertions.assertTrue(eventNpc.isActive)
+            eventNpc.npcs.forEach { Assertions.assertTrue(it.isActive) }
+            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.npcs.first().id)
+        }
+    }
+
+    @Test fun frogEventTerminateDeactivatesAllNPCsAndEvent() {
+        TestUtils.getMockPlayer("frogTerminateTest").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            AntiMacro.terminateEventNpc(p)
+
+            Assertions.assertFalse(eventNpc.isActive)
+            eventNpc.npcs.forEach { Assertions.assertFalse(it.isActive) }
+            Assertions.assertNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun frogEventClearRemovesEventNPCAndDeactivatesNPCs() {
+        TestUtils.getMockPlayer("frogClearTest").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            eventNpc.clear()
+
+            Assertions.assertFalse(eventNpc.isActive)
+            eventNpc.npcs.forEach { Assertions.assertFalse(it.isActive) }
+            Assertions.assertNull(AntiMacro.getEventNpc(p))
+        }
+    }
+
+    @Test fun frogEventOriginalIdMatchesFirstNPC() {
+        TestUtils.getMockPlayer("frogOriginalIdTest").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.originalId)
+        }
+    }
+
+    @Test fun frogEventTerminateAndForceRespawnSpawnsNewNPCList() {
+        TestUtils.getMockPlayer("frogTerminateAndRespawn").use { p ->
+            val timer = getTimer<AntiMacro>(p) ?: Assertions.fail("AntiMacro timer is null!")
+            val frogEvent = RandomEvents.KISS_THE_FROG
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val firstEventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            AntiMacro.terminateEventNpc(p)
+
+            AntiMacro.forceEvent(p, frogEvent)
+            timer.nextExecution = getWorldTicks() + 1
+            TestUtils.advanceTicks(2, false)
+
+            val secondEventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
+            Assertions.assertNotEquals(firstEventNpc, secondEventNpc)
+            Assertions.assertTrue(secondEventNpc.isActive)
+            secondEventNpc.npcs.forEach { Assertions.assertTrue(it.isActive) }
+        }
+    }
 }

@@ -57,7 +57,7 @@ class DuelArenaActivity : ActivityPlugin("Duel arena", false, false, true) {
         if (e.isPlayer &&
             e
                 .asPlayer()
-                .zoneMonitor.zones.size > 1
+                .zoneMonitor.getZones().size > 1
         ) {
             super.continueAttack(e, target, style, message)
         } else {
@@ -87,7 +87,7 @@ class DuelArenaActivity : ActivityPlugin("Duel arena", false, false, true) {
         if (e.isPlayer &&
             e
                 .asPlayer()
-                .zoneMonitor.zones.size > 1
+                .zoneMonitor.getZones().size > 1
         ) {
             return true
         }

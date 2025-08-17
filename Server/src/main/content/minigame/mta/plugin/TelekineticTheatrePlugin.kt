@@ -128,7 +128,7 @@ class TelekineticTheatrePlugin @JvmOverloads constructor(val player: Player? = n
     }
 
     override fun configure() {
-        uid = name.hashCode()
+        setUid(name.hashCode())
         region = DynamicRegion.create(13463)
         base = Location.create(
             region!!.borders!!.southWestX,

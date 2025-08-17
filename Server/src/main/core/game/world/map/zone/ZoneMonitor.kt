@@ -24,12 +24,12 @@ class ZoneMonitor(val entity: Entity) {
     /**
      * List of region zones the entity is currently in.
      */
-    val zones: MutableList<RegionZone> = ArrayList(20)
+    private val zones: MutableList<RegionZone> = ArrayList(20)
 
     /**
      * List of music zones the entity is currently in.
      */
-    val musicZones: MutableList<MusicZone> = ArrayList(20)
+    private val musicZones: MutableList<MusicZone> = ArrayList(20)
 
     /**
      * Returns the type of the first non-zero zone type the entity is in.
@@ -300,7 +300,7 @@ class ZoneMonitor(val entity: Entity) {
      */
     fun isInZone(name: String): Boolean {
         val uid = name.hashCode()
-        return zones.any { it.zone.uid == uid }
+        return zones.any { it.zone.getUid() == uid }
     }
 
     /**

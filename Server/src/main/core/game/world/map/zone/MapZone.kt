@@ -38,7 +38,7 @@ abstract class MapZone(
     /**
      * The map zone UID.
      */
-    var uid: Int = 0
+    private var uid: Int = 0
 
     /**
      * If random events should be fired in this zone.
@@ -217,7 +217,7 @@ abstract class MapZone(
     /**
      * Registers this zone in the regions for the given borders.
      */
-    fun register(borders: ZoneBorders) {
+    open fun register(borders: ZoneBorders) {
         borders.regionIds.forEach { id ->
             RegionManager.forId(id)?.add(RegionZone(this, borders))
         }
@@ -317,4 +317,12 @@ abstract class MapZone(
      * Computes the UID based on the zone name
      */
     fun getUid(): Int = name.hashCode()
+
+    /**
+     * Sets the uid for this map zone.
+     * @param uid The uid.
+     */
+    fun setUid(uid: Int) {
+        this.uid = uid
+    }
 }
