@@ -20,15 +20,9 @@ class TowerOfLifePlugin : InteractionListener {
         on(TOWER_DOORS, IntType.SCENERY, "open") { player, node ->
             if (!hasRequirement(player, Quests.TOWER_OF_LIFE)) return@on true
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-            if (player.location.y ==
-                3225
-            ) {
-                sendPlayerDialogue(
-                    player,
-                    "Wow, this place looks special. Best I look around for something to fix.",
-                    FaceAnim.AMAZED,
-                )
-            }
+            playAudio(player, Sounds.TOL_DOOR_OPEN_AND_CLOSE_3419)
+            if (player.location.y == 3225)
+                sendPlayerDialogue(player, "Wow, this place looks special. Best I look around for something to fix.", FaceAnim.AMAZED)
             return@on true
         }
 
