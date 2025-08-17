@@ -20,59 +20,59 @@ class StorageBoxInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(INTERFACE) { player, _, _, buttonID, _, _ ->
             val typeName = getAttribute(player, "con:storage:type", null) as? String ?: return@on true
-            val type = Storable.Type.valueOf(typeName.uppercase())
+            val type = StorableType.valueOf(typeName.uppercase())
             handleStorageInteraction(player, buttonID, type)
             return@on true
         }
     }
 
-    private fun getContainer(player: Player, type: Storable.Type) =
+    private fun getContainer(player: Player, type: StorableType) =
         player.getCostumeRoomState().getContainer(type)
 
-    private fun getRelevantItems(type: Storable.Type): List<Storable> {
+    private fun getRelevantItems(type: StorableType): List<Storable> {
         val trailTiers = listOf(
-            Storable.Type.LOW_LEVEL_TRAILS,
-            Storable.Type.MED_LEVEL_TRAILS,
-            Storable.Type.HIGH_LEVEL_TRAILS
+            StorableType.LOW_LEVEL_TRAILS,
+            StorableType.MED_LEVEL_TRAILS,
+            StorableType.HIGH_LEVEL_TRAILS
         )
         val magicTiers = listOf(
-            Storable.Type.ONE_SET_OF_ARMOUR,
-            Storable.Type.TWO_SETS_OF_ARMOUR,
-            Storable.Type.THREE_SETS_OF_ARMOUR,
-            Storable.Type.FOUR_SETS_OF_ARMOUR,
-            Storable.Type.FIVE_SETS_OF_ARMOUR,
-            Storable.Type.SIX_SETS_OF_ARMOUR
+            StorableType.ONE_SET_OF_ARMOUR,
+            StorableType.TWO_SETS_OF_ARMOUR,
+            StorableType.THREE_SETS_OF_ARMOUR,
+            StorableType.FOUR_SETS_OF_ARMOUR,
+            StorableType.FIVE_SETS_OF_ARMOUR,
+            StorableType.SIX_SETS_OF_ARMOUR
         )
         val armourTiers = listOf(
-            Storable.Type.TWO_SETS_ARMOUR_CASE,
-            Storable.Type.FOUR_SETS_ARMOUR_CASE,
-            Storable.Type.ALL_SETS_ARMOUR_CASE
+            StorableType.TWO_SETS_ARMOUR_CASE,
+            StorableType.FOUR_SETS_ARMOUR_CASE,
+            StorableType.ALL_SETS_ARMOUR_CASE
         )
 
         return Storable.values().filter {
             when (type) {
-                Storable.Type.LOW_LEVEL_TRAILS -> it.type == type
-                Storable.Type.MED_LEVEL_TRAILS -> it.type in trailTiers.take(2)
-                Storable.Type.HIGH_LEVEL_TRAILS -> it.type in trailTiers
+                StorableType.LOW_LEVEL_TRAILS -> it.type == type
+                StorableType.MED_LEVEL_TRAILS -> it.type in trailTiers.take(2)
+                StorableType.HIGH_LEVEL_TRAILS -> it.type in trailTiers
 
-                Storable.Type.ONE_SET_OF_ARMOUR -> it.type == Storable.Type.ONE_SET_OF_ARMOUR
-                Storable.Type.TWO_SETS_OF_ARMOUR -> it.type in magicTiers.take(2)
-                Storable.Type.THREE_SETS_OF_ARMOUR -> it.type in magicTiers.take(3)
-                Storable.Type.FOUR_SETS_OF_ARMOUR -> it.type in magicTiers.take(4)
-                Storable.Type.FIVE_SETS_OF_ARMOUR -> it.type in magicTiers.take(5)
-                Storable.Type.SIX_SETS_OF_ARMOUR -> it.type in magicTiers.take(6)
-                Storable.Type.ALL_SETS_OF_ARMOUR -> it.type in magicTiers
+                StorableType.ONE_SET_OF_ARMOUR -> it.type == StorableType.ONE_SET_OF_ARMOUR
+                StorableType.TWO_SETS_OF_ARMOUR -> it.type in magicTiers.take(2)
+                StorableType.THREE_SETS_OF_ARMOUR -> it.type in magicTiers.take(3)
+                StorableType.FOUR_SETS_OF_ARMOUR -> it.type in magicTiers.take(4)
+                StorableType.FIVE_SETS_OF_ARMOUR -> it.type in magicTiers.take(5)
+                StorableType.SIX_SETS_OF_ARMOUR -> it.type in magicTiers.take(6)
+                StorableType.ALL_SETS_OF_ARMOUR -> it.type in magicTiers
 
-                Storable.Type.TWO_SETS_ARMOUR_CASE -> it.type in armourTiers.take(1)
-                Storable.Type.FOUR_SETS_ARMOUR_CASE -> it.type in armourTiers.take(2)
-                Storable.Type.ALL_SETS_ARMOUR_CASE -> it.type in armourTiers
+                StorableType.TWO_SETS_ARMOUR_CASE -> it.type in armourTiers.take(1)
+                StorableType.FOUR_SETS_ARMOUR_CASE -> it.type in armourTiers.take(2)
+                StorableType.ALL_SETS_ARMOUR_CASE -> it.type in armourTiers
 
                 else -> it.type == type
             }
         }
     }
 
-    private fun handleStorageInteraction(player: Player, id: Int, type: Storable.Type) {
+    private fun handleStorageInteraction(player: Player, id: Int, type: StorableType) {
         val container = getContainer(player, type)
         val allItems = getRelevantItems(type)
         val pageIndex = container.getPageIndex(type)
@@ -146,7 +146,7 @@ class StorageBoxInterface : InterfaceListener {
         }
     }
 
-    private fun renderPage(player: Player, type: Storable.Type) {
+    private fun renderPage(player: Player, type: StorableType) {
         val container = getContainer(player, type)
         val allItems = getRelevantItems(type)
         val stored = container.getItems(type).toSet()
@@ -210,7 +210,7 @@ class StorageBoxInterface : InterfaceListener {
         }
     }
 
-    private fun openStorageInterface(player: Player, type: Storable.Type) {
+    private fun openStorageInterface(player: Player, type: StorableType) {
         setAttribute(player, "con:storage:type", type.name)
         openInterface(player, INTERFACE)
         renderPage(player, type)
@@ -226,7 +226,7 @@ class StorageBoxInterface : InterfaceListener {
          * @param player The player.
          * @param type The storage type.
          */
-        fun openStorage(player: Player, type: Storable.Type) {
+        fun openStorage(player: Player, type: StorableType) {
             instance.openStorageInterface(player, type)
         }
     }

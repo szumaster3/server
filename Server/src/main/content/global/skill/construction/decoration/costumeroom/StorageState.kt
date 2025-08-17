@@ -9,27 +9,27 @@ class StorageState(val player: Player) {
         BOOK, CAPE, FANCY, TOY, TRAILS, ARMOUR, ARMOUR_CASE;
 
         companion object {
-            fun fromType(type: Storable.Type): ContainerGroup = when (type) {
-                Storable.Type.BOOK -> BOOK
-                Storable.Type.CAPE -> CAPE
-                Storable.Type.FANCY -> FANCY
-                Storable.Type.TOY -> TOY
+            fun fromType(type: StorableType): ContainerGroup = when (type) {
+                StorableType.BOOK -> BOOK
+                StorableType.CAPE -> CAPE
+                StorableType.FANCY -> FANCY
+                StorableType.TOY -> TOY
 
-                Storable.Type.LOW_LEVEL_TRAILS,
-                Storable.Type.MED_LEVEL_TRAILS,
-                Storable.Type.HIGH_LEVEL_TRAILS -> TRAILS
+                StorableType.LOW_LEVEL_TRAILS,
+                StorableType.MED_LEVEL_TRAILS,
+                StorableType.HIGH_LEVEL_TRAILS -> TRAILS
 
-                Storable.Type.ONE_SET_OF_ARMOUR,
-                Storable.Type.TWO_SETS_OF_ARMOUR,
-                Storable.Type.THREE_SETS_OF_ARMOUR,
-                Storable.Type.FOUR_SETS_OF_ARMOUR,
-                Storable.Type.FIVE_SETS_OF_ARMOUR,
-                Storable.Type.SIX_SETS_OF_ARMOUR,
-                Storable.Type.ALL_SETS_OF_ARMOUR -> ARMOUR
+                StorableType.ONE_SET_OF_ARMOUR,
+                StorableType.TWO_SETS_OF_ARMOUR,
+                StorableType.THREE_SETS_OF_ARMOUR,
+                StorableType.FOUR_SETS_OF_ARMOUR,
+                StorableType.FIVE_SETS_OF_ARMOUR,
+                StorableType.SIX_SETS_OF_ARMOUR,
+                StorableType.ALL_SETS_OF_ARMOUR -> ARMOUR
 
-                Storable.Type.TWO_SETS_ARMOUR_CASE,
-                Storable.Type.FOUR_SETS_ARMOUR_CASE,
-                Storable.Type.ALL_SETS_ARMOUR_CASE -> ARMOUR_CASE
+                StorableType.TWO_SETS_ARMOUR_CASE,
+                StorableType.FOUR_SETS_ARMOUR_CASE,
+                StorableType.ALL_SETS_ARMOUR_CASE -> ARMOUR_CASE
             }
         }
     }
@@ -42,7 +42,7 @@ class StorageState(val player: Player) {
         }
     }
 
-    fun getContainer(type: Storable.Type): StorageContainer {
+    fun getContainer(type: StorableType): StorageContainer {
         return containers[ContainerGroup.fromType(type)]!!
     }
 
