@@ -102,7 +102,7 @@ class LostCityPlugin : InteractionListener {
                         override fun pulse(): Boolean {
                             when (count++) {
                                 0 -> {
-                                    sendMessageWithDelay(player, "The world starts to shimmer...", 1)
+                                    sendMessage(player, "The world starts to shimmer...", 1)
                                     teleport(player, Location(2452, 4473, 0), TeleportType.FAIRY_RING)
                                 }
 

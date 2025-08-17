@@ -158,7 +158,7 @@ class WildernessPlugin : InteractionListener {
                         ) {
                             sendMessage(player, "A magical force has stopped you from teleporting.")
                         } else {
-                            sendMessageWithDelay(player, "... and teleport into the lair of the King Black Dragon!", 5)
+                            sendMessage(player, "... and teleport into the lair of the King Black Dragon!", 5)
                             teleport(player, Location.create(2272, 4680, 0))
                         }
                     }
@@ -166,7 +166,7 @@ class WildernessPlugin : InteractionListener {
 
                 Scenery.LEVER_1817 -> {
                     teleport(player, Location.create(3067, 10253, 0))
-                    sendMessageWithDelay(player, "... and teleport out of the lair of the King Black Dragon!", 5)
+                    sendMessage(player, "... and teleport out of the lair of the King Black Dragon!", 5)
                 }
             }
 

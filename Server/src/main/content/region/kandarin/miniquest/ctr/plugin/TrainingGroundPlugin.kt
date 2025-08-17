@@ -52,7 +52,7 @@ class TrainingGroundPlugin : InteractionListener {
                     val spawnLocation = Location.create(2758, 3508, 2)
 
                     KnightWavesNPC(tier, spawnLocation, player).init()
-                    sendMessageWithDelay(player, "Remember, only melee combat is allowed in here.", 1)
+                    sendMessage(player, "Remember, only melee combat is allowed in here.", 1)
                     return true
                 }
             })

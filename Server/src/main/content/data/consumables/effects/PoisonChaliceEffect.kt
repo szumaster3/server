@@ -1,7 +1,7 @@
 package content.data.consumables.effects
 
 import core.api.impact
-import core.api.sendMessageWithDelay
+import core.api.sendMessage
 import core.game.consumable.ConsumableEffect
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
@@ -35,7 +35,7 @@ class PoisonChaliceEffect : ConsumableEffect() {
 
         private val EFFECTS: List<(Player) -> Unit> = listOf(
             { player ->
-                sendMessageWithDelay(player, "It has a slight taste of apricot.", 1)
+                sendMessage(player, "It has a slight taste of apricot.", 1)
             },
             { player ->
                 val boost = rand(1.0, 4.0)
@@ -92,7 +92,7 @@ class PoisonChaliceEffect : ConsumableEffect() {
 
         private fun multiEffect(player: Player, vararg effects: ConsumableEffect, message: String) {
             MultiEffect(*effects).activate(player)
-            sendMessageWithDelay(player, message, 1)
+            sendMessage(player, message, 1)
         }
     }
 }

@@ -37,12 +37,12 @@ class PatternRecognitionNPC(
                         player.musicPlayer.unlock(Music.SCHOOLS_OUT_371)
                     }
                     teleport(player, Location(1886, 5025, 0), TeleportManager.TeleportType.NORMAL)
-                    sendMessageWithDelay(
+                    sendMessage(
                         player,
                         "Answer three out of six questions correctly to be teleported back where you",
                         3,
                     )
-                    sendMessageWithDelay(player, "came from.", 3)
+                    sendMessage(player, "came from.", 3)
                     AntiMacro.terminateEventNpc(player)
                     return@queueScript delayScript(player, getAnimation(8939).duration + getAnimation(8941).duration)
                 }

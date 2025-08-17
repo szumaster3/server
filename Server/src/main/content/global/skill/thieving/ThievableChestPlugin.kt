@@ -100,7 +100,7 @@ class ThievableChestPlugin : OptionHandler() {
                 animate(player, Animations.OPEN_CHEST_536, false)
                 lock(player, 2)
                 sendMessage(player, "You search the chest for traps.")
-                sendMessageWithDelay(player, "You find nothing.", 1)
+                sendMessage(player, "You find nothing.", 1)
                 return
             }
             if (freeSlots(player) == 0) {

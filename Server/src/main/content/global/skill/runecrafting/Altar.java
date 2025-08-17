@@ -84,13 +84,13 @@ public enum Altar {
                 break;
             case LAW:
                 if (!ItemDefinition.canEnterEntrana(player)) {
-                    sendMessage(player, "You can't take weapons and armour into the law rift.");
+                    sendMessage(player, "You can't take weapons and armour into the law rift.", null);
                     return;
                 }
                 break;
             case COSMIC:
                 if (!isQuestComplete(player, Quests.LOST_CITY)) {
-                    sendMessage(player, "You need to have completed the Lost City quest in order to do that.");
+                    sendMessage(player, "You need to have completed the Lost City quest in order to do that.", null);
                     return;
                 }
                 break;

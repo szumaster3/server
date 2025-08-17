@@ -2,7 +2,7 @@ package content.region.fremennik.rellekka.miniquest.shadow_maj.cutscene
 
 import content.region.fremennik.rellekka.miniquest.shadow_maj.npc.GhostBouncerNPC.Companion.spawnGhostBouncer
 import core.api.location
-import core.api.sendMessageWithDelay
+import core.api.sendMessage
 import core.api.unlock
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -52,18 +52,11 @@ class CavernCutscene(
             }
 
             5 ->
-                playerDialogueUpdate(
-                    FaceAnim.ANGRY,
-                    "Khazard tricked me! This is no reward, he's trying to get me killed...AGAIN!",
-                )
+                playerDialogueUpdate(FaceAnim.ANGRY, "Khazard tricked me! This is no reward, he's trying to get me killed...AGAIN!")
 
             6 -> {
                 end()
-                sendMessageWithDelay(
-                    player,
-                    "An evil prescence in the cave prevents your prayers from being heard.",
-                    10,
-                )
+                sendMessage(player, "An evil prescence in the cave prevents your prayers from being heard.", 10)
                 spawnGhostBouncer(player)
                 unlock(player)
                 resetCamera()

@@ -20,7 +20,7 @@ class BeehivePlugin : InteractionListener {
             if (!inInventory(player, Items.INSECT_REPELLENT_28, 1)) {
                 sendMessage(player, "The bees fly out of the hive and sting you!")
                 impact(player, 2, ImpactHandler.HitsplatType.NORMAL, 1)
-                sendMessageWithDelay(player, "Maybe you can clear them out somehow.", 2)
+                sendMessage(player, "Maybe you can clear them out somehow.", 2)
                 return@on true
             }
 

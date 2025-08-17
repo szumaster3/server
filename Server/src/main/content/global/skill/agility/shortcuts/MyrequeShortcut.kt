@@ -1,7 +1,6 @@
 package content.global.skill.agility.shortcuts
 
 import core.api.sendMessage
-import core.api.sendMessageWithDelay
 import core.api.teleport
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -23,7 +22,7 @@ class MyrequeShortcut : InteractionListener {
 
         on(Scenery.WALL_5052, IntType.SCENERY, "search") { player, node ->
             sendMessage(player, "You search the wall and find the door which Veliaf told you about.")
-            sendMessageWithDelay(player, "You walk through.", 1)
+            sendMessage(player, "You walk through.", 1)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
         }

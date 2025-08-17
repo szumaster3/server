@@ -652,7 +652,7 @@ class WatchTowerPlugin : InteractionListener {
 
         on(Scenery.ROCK_OF_DALGROTH_2816, IntType.SCENERY, "prospect") { player, _ ->
             sendMessage(player, "You examine the rock for ogres...")
-            sendMessageWithDelay(player, "The rock contains crystal!", 1)
+            sendMessage(player, "The rock contains crystal!", 1)
             return@on true
         }
 

@@ -107,7 +107,7 @@ public final class PortalOptionPlugin extends OptionHandler {
                         case 3:
                             if (player.getIronmanManager().isIronman()) {
                                 end();
-                                sendMessage(player, "You can't do that as an ironman.");
+                                sendMessage(player, "You can't do that as an ironman.", null);
                                 return true;
                             }
                             sendInputDialogue(player, false, "Enter friend's name:", (value) -> {

@@ -97,7 +97,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
             330 -> {
                 end()
                 finishQuest(player, Quests.GERTRUDES_CAT)
-                sendMessageWithDelay(player, "...and some food!", 1)
+                sendMessage(player, "...and some food!", 1)
                 updateQuestTab(player)
             }
             1000 -> npc(FaceAnim.HALF_GUILTY, "Good good, See you again.").also { stage = END_DIALOGUE }

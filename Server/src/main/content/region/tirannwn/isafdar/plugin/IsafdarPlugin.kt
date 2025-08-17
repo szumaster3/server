@@ -23,10 +23,10 @@ class IsafdarPlugin: InteractionListener {
         on(Scenery.BOOKCASE_8752, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the bookshelves...")
             if (!inInventory(player, Items.PRIFDDINAS_HISTORY_6073)) {
-                sendMessageWithDelay(player, "and find a book named 'Prifddinas History'.", 1)
+                sendMessage(player, "and find a book named 'Prifddinas History'.", 1)
                 addItem(player, Items.PRIFDDINAS_HISTORY_6073)
             } else {
-                sendMessageWithDelay(player, "You don't find anything interesting.", 1)
+                sendMessage(player, "You don't find anything interesting.", 1)
             }
             return@on true
         }

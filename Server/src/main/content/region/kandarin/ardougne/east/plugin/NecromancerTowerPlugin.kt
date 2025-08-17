@@ -24,7 +24,7 @@ class NecromancerTowerPlugin : InteractionListener {
         on(Scenery.BOOKCASE_6894, IntType.SCENERY, "search") { player, _ ->
             if (inInventory(player, Items.NECROMANCY_BOOK_4837)) {
                 sendMessage(player, "You search the bookcase...")
-                sendMessageWithDelay(player, "You find nothing of interest to you.", 1)
+                sendMessage(player, "You find nothing of interest to you.", 1)
                 return@on true
             }
 

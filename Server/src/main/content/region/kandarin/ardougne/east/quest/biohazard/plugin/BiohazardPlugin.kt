@@ -129,7 +129,7 @@ class BiohazardPlugin : InteractionListener {
         on(Scenery.WATCHTOWER_FENCE_2067, IntType.SCENERY, "investigate") { player, _ ->
             if (removeItem(player, Items.BIRD_FEED_422)) {
                 sendMessage(player, "You throw a handful of seeds onto the watchtower.")
-                sendMessageWithDelay(player, "The mourners do not seem to notice.", 1)
+                sendMessage(player, "The mourners do not seem to notice.", 1)
                 setAttribute(player, GameAttributes.FEED_ON_FENCE, true)
             }
             return@on true
@@ -141,7 +141,7 @@ class BiohazardPlugin : InteractionListener {
             }
             if (removeItem(player, used.asItem())) {
                 sendMessage(player, "You throw a handful of seeds onto the watchtower.")
-                sendMessageWithDelay(player, "The mourners do not seem to notice.", 1)
+                sendMessage(player, "The mourners do not seem to notice.", 1)
                 setAttribute(player, GameAttributes.FEED_ON_FENCE, true)
             }
             return@onUseWith true
@@ -182,7 +182,7 @@ class BiohazardPlugin : InteractionListener {
                 )
             } else {
                 sendMessage(player, "You open the cage.")
-                sendMessageWithDelay(player, "The pigeons don't want to leave.", 1)
+                sendMessage(player, "The pigeons don't want to leave.", 1)
             }
             return@on true
         }
@@ -280,7 +280,7 @@ class BiohazardPlugin : InteractionListener {
 
                 if (getQuestStage(player, Quests.BIOHAZARD) in 1..6) {
                     sendMessage(player, "The door is locked. You can hear the mourners eating...")
-                    sendMessageWithDelay(player, "You need to distract them from their stew.", 1)
+                    sendMessage(player, "You need to distract them from their stew.", 1)
                     return@on true
                 }
 

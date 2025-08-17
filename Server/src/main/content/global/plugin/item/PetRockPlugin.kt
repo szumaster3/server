@@ -120,7 +120,7 @@ private class PetRockDialogue : DialogueFile() {
                 }
                 5 -> {
                     playerl(FaceAnim.FRIENDLY, "Be a good rock...")
-                    sendMessageWithDelay(player!!, "You wait a few seconds and pick your rock back up and pet it.", 6)
+                    sendMessage(player!!, "You wait a few seconds and pick your rock back up and pet it.", 6)
                     visualize(player!!, Animations.PET_ROCK_FETCH_6664, Graphics.PET_ROCK_1156)
                     end()
                 }

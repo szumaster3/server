@@ -103,7 +103,7 @@ class MissCheeversPlugin : InteractionListener {
             Scenery.OLD_BOOKSHELF_7328 to { player: Player ->
                 if (getAttribute(player, "/save:rd:help", -1) < 3) {
                     sendMessage(player, "You search the bookshelves...")
-                    sendMessageWithDelay(player, "You find nothing of interest.", 1)
+                    sendMessage(player, "You find nothing of interest.", 1)
                 } else {
                     RDUtils.searchingHelper(
                         player,
@@ -217,7 +217,7 @@ class MissCheeversPlugin : InteractionListener {
         onUseWith(IntType.ITEM, Items.TIN_5592, Items.VIAL_OF_LIQUID_5582) { player, used, with ->
             RDUtils.processItemUsage(player, used.asItem(), with.asItem(), Item(Items.TIN_5593))
             sendMessage(player, "You notice the tin gets quite warm as you do this.")
-            sendMessageWithDelay(player, "A lumpy white mixture is made, that seems to be hardening.", 1)
+            sendMessage(player, "A lumpy white mixture is made, that seems to be hardening.", 1)
             return@onUseWith true
         }
 
@@ -298,7 +298,7 @@ class MissCheeversPlugin : InteractionListener {
             if (removeItem(player, used.id)) {
                 playAudio(player, Sounds.RECRUIT_SPADE_1742)
                 sendMessage(player, "You slide the spade into the hole in the stone...")
-                sendMessageWithDelay(player, "It's nearly a perfect fit!", 1)
+                sendMessage(player, "It's nearly a perfect fit!", 1)
                 setVarbit(player, doorVarbit, 1)
             }
             return@onUseWith true

@@ -62,7 +62,7 @@ class ZanarisSqueezeShortcut : AgilityShortcut(intArrayOf(Scenery.JUTTING_WALL_1
             else -> return true
         }
         return if (agilityLevel < requiredLevel) {
-            sendMessageWithDelay(player, "You need an agility level of $requiredLevel to negotiate this obstacle.", 1)
+            sendMessage(player, "You need an agility level of $requiredLevel to negotiate this obstacle.", 1)
             false
         } else true
     }

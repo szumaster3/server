@@ -41,7 +41,7 @@ public final class LegendsGuildPlugin extends OptionHandler {
                     case 2391:
                     case 2392:
                         DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
-                        sendMessage(player, "The guards salute you as you walk past.");
+                        sendMessage(player, "The guards salute you as you walk past.", null);
                         NPC guard = findLocalNPC(player, NPCs.LEGENDS_GUARD_398);
                         if (guard != null) {
                             sendChat(guard, "Legends' Guild member approaching!", 1);
@@ -50,9 +50,9 @@ public final class LegendsGuildPlugin extends OptionHandler {
                     case 2896:
                     case 2897:
                         DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
-                        sendMessage(player, "You push the huge Legends Guild doors open.");
+                        sendMessage(player, "You push the huge Legends Guild doors open.", null);
                         if (player.getLocation().getY() < 3374) {
-                            sendMessage(player, "You approach the Legends Guild main doors.");
+                            sendMessage(player, "You approach the Legends Guild main doors.", null);
                         }
                         break;
                 }

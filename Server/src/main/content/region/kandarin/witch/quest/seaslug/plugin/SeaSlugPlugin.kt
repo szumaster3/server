@@ -76,8 +76,8 @@ class SeaSlugPlugin : InteractionListener {
 
             if (removeItem(player, UNLIT_TORCH)) {
                 sendMessage(player, "You rub together the dry sticks and the sticks catch alight.")
-                sendMessageWithDelay(player, "You place the smoulding twigs to your torch.", 1)
-                sendMessageWithDelay(player, "Your torch lights.", 1)
+                sendMessage(player, "You place the smoulding twigs to your torch.", 1)
+                sendMessage(player, "Your torch lights.", 1)
                 addItemOrDrop(player, LIT_TORCH)
                 playAudio(player, Sounds.SLUG_TORCH_LIT_3028)
                 setQuestStage(player, Quests.SEA_SLUG, 20)
@@ -128,8 +128,8 @@ class SeaSlugPlugin : InteractionListener {
             if(getQuestStage(player, Quests.SEA_SLUG) < 20) {
                 sendMessage(player, "But nothing interesting happens.")
             } else {
-                sendMessageWithDelay(player, "The wood is rotten and crumbles away...", 1)
-                sendMessageWithDelay(player, "...leaving an opening big enough for Kenneth to climb through.", 2)
+                sendMessage(player, "The wood is rotten and crumbles away...", 1)
+                sendMessage(player, "...leaving an opening big enough for Kenneth to climb through.", 2)
                 replaceScenery(node.asScenery(), BROKEN_WALL, -1)
                 setQuestStage(player, Quests.SEA_SLUG, 25)
             }
@@ -166,7 +166,7 @@ class SeaSlugPlugin : InteractionListener {
             // After speak with Kent with/without torch.
             if (inInventory(player, Items.LIT_TORCH_594) && getQuestStage(player, Quests.SEA_SLUG) >= 20) {
                 ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-up")
-                sendMessageWithDelay(player, "The fishermen seem afraid of your torch.", 1)
+                sendMessage(player, "The fishermen seem afraid of your torch.", 1)
 
             } else {
                 getSmack(player)

@@ -255,7 +255,7 @@ class KeldagrimPlugin : InteractionListener {
             sendMessage(player, "You search the books...")
             when {
                 inInventory(player, Items.EXPLORERS_NOTES_11677) -> {
-                    sendMessageWithDelay(player, "You find nothing of interest to you.", 1)
+                    sendMessage(player, "You find nothing of interest to you.", 1)
                 }
                 freeSlots(player) == 0 -> {
                     sendMessage(player, "You need at least one free inventory space to take from the shelves.")

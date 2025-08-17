@@ -39,7 +39,7 @@ class LarderPlugin : InteractionListener {
                                 end()
                                 items[stage]?.let { (item, message) ->
                                     addItem(player, item, 1, Container.INVENTORY)
-                                    sendMessageWithDelay(player, message, 1)
+                                    sendMessage(player, message, 1)
                                     animate(player, SEARCH_ANIM)
                                 }
                             }

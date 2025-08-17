@@ -174,7 +174,7 @@ class WarningListener : InteractionListener, InterfaceListener {
                                         getScenery(3443, 3458, 0)!!
                                     }
                                 DoorActionHandler.handleAutowalkDoor(player, targetScenery)
-                                sendMessageWithDelay(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
+                                sendMessage(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
                                 WarningManager.increment(player, component.id)
                             }
 
@@ -384,7 +384,7 @@ class WarningListener : InteractionListener, InterfaceListener {
             val targetX = if (player.location.x > 3443) 3444 else 3443
             val targetScenery = getScenery(targetX, 3458, 0)!!
             DoorActionHandler.handleAutowalkDoor(player, targetScenery)
-            sendMessageWithDelay(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
+            sendMessage(player, "You walk into the gloomy atmosphere of Mort Myre.", 3)
             return@on true
         }
 

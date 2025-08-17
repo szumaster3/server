@@ -79,7 +79,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                 openNpcShop(player, node.getId());
                 break;
             case Items.CRONE_MADE_AMULET_10500:
-                sendMessage(player, "Perhaps you should wait a few hundred years or so?");
+                sendMessage(player, "Perhaps you should wait a few hundred years or so?", null);
                 break;
             case Items.RESEARCH_NOTES_10492:
                 open(player);
@@ -87,7 +87,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
             case Items.BUTTONS_688:
                 lock(player, 1);
                 if (getStatLevel(player, Skills.CRAFTING) < 3) {
-                    sendMessage(player, "You need a Crafting level of at least 3 in order to do that.");
+                    sendMessage(player, "You need a Crafting level of at least 3 in order to do that.", null);
                     return true;
                 }
                 rewardXP(player, Skills.CRAFTING, 5.0);
@@ -110,7 +110,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
     public void open(Player player) {
         clearCache(player);
         openInterface(player, Components.ANMA_RGB_480);
-        sendMessage(player, "You fiddle with the notes.");
+        sendMessage(player, "You fiddle with the notes.", null);
     }
 
     /**
@@ -148,13 +148,13 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                 @Override
                 public boolean pulse() {
                     if (!player.getZoneMonitor().isInZone("rimmington mine")) {
-                        sendMessage(player, "You aren't in the right area for this to work.");
+                        sendMessage(player, "You aren't in the right area for this to work.", null);
                     } else {
                         if (player.getDirection() != Direction.NORTH) {
-                            sendMessage(player, "You think that facing North might work better.");
+                            sendMessage(player, "You think that facing North might work better.", null);
                         } else {
                             player.getInventory().replace(new Item(Items.BAR_MAGNET_10489), event.getUsedItem().getSlot());
-                            sendMessage(player, "You hammer the iron bar and create a magnet.");
+                            sendMessage(player, "You hammer the iron bar and create a magnet.", null);
                         }
                     }
                     return true;
@@ -193,7 +193,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                     if (quest.getStage(player) <= 28) {
                         SkillingTool tool = SkillingTool.getAxe(player);
                         if (tool == null || tool.ordinal() < 4) {
-                            sendMessage(player, "You don't have the required axe in order to do that.");
+                            sendMessage(player, "You don't have the required axe in order to do that.", null);
                             return true;
                         }
                         Animation animation = getAnimation(tool.getAnimation());
@@ -202,24 +202,24 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                             quest.setStage(player, 29);
                         }
                         sendMessage(player, "The axe bounces off the undead wood." +
-                                (quest.getStage(player) == 28 || quest.getStage(player) == 29 ? " I should report this to Ava." : ""));
+                                (quest.getStage(player) == 28 || quest.getStage(player) == 29 ? " I should report this to Ava." : ""), null);
                         return true;
                     }
                     if (freeSlots(player) < 1) {
-                        sendMessage(player, "Your inventory is full right now.");
+                        sendMessage(player, "Your inventory is full right now.", null);
                         return true;
                     }
                     if (!inInventory(player, Items.BLESSED_AXE_10491, 1) && !inEquipment(player, Items.BLESSED_AXE_10491, 1)) {
-                        sendMessage(player, "You don't have an axe which could possibly affect this wood.");
+                        sendMessage(player, "You don't have an axe which could possibly affect this wood.", null);
                         return true;
                     }
                     Animation animation = getAnimation(Items.MITHRIL_AXE_1355);
                     lock(player, animation.getDefinition().getDurationTicks());
                     if (RandomFunction.random(10) < 3) {
-                        sendMessage(player, "You almost remove a suitable twig, but you don't quite manage it.");
+                        sendMessage(player, "You almost remove a suitable twig, but you don't quite manage it.", null);
                     } else {
                         addItem(player, Items.UNDEAD_TWIGS_10490, 1, Container.INVENTORY);
-                        sendMessage(player, "You cut some undead twigs.");
+                        sendMessage(player, "You cut some undead twigs.", null);
                         rewardXP(player, Skills.WOODCUTTING, 5.0);
                     }
                     player.animate(animation, 2);
@@ -240,7 +240,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                 quest.setStage(player, 29);
             }
             sendMessage(player, "The axe bounces off the undead wood." +
-                    (quest.getStage(player) == 28 || quest.getStage(player) == 29 ? " I should report this to Ava." : ""));
+                    (quest.getStage(player) == 28 || quest.getStage(player) == 29 ? " I should report this to Ava." : ""), null);
             return true;
         }
 
@@ -295,7 +295,7 @@ public class AnimalMagnetismPlugin extends OptionHandler {
                         player.setAttribute("note-disabled", true);
                         player.getInventory().add(AnimalMagnetism.TRANSLATED_NOTES);
                         playAudio(player, 3283);
-                        sendMessage(player, "It suddenly all makes sense.");
+                        sendMessage(player, "It suddenly all makes sense.", null);
                     }
                 }
             }

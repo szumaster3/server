@@ -165,9 +165,9 @@ class LumbridgePlugin : InteractionListener {
                             when (counter++) {
                                 0 -> {
                                     sendMessage(player, "You start cranking the lever.")
-                                    sendMessageWithDelay(player, "The flag reaches the top...", 8)
+                                    sendMessage(player, "The flag reaches the top...", 8)
                                     sendChat(player, "All Hail the Duke!", 9)
-                                    sendMessageWithDelay(player, "...and slowly descends.", 12)
+                                    sendMessage(player, "...and slowly descends.", 12)
                                     animateScenery(node.asScenery(), 9979)
                                     animate(player, Animations.LUMBRIDG_FLAG_CRAKING_A_9977)
                                 }

@@ -170,7 +170,7 @@ class TrollheimPlugin : OptionHandler() {
                 lock(player, 3)
                 lockInteractions(player, 3)
                 sendMessage(player, "You climb onto the rock...")
-                sendMessageWithDelay(player, "...and step down the other side.", 3)
+                sendMessage(player, "...and step down the other side.", 3)
                 xOffset = if (player.location.x < loc.x) 2 else -2
                 val scenery = (node as core.game.node.scenery.Scenery)
                 when (id) {
@@ -386,7 +386,7 @@ class TrollheimPlugin : OptionHandler() {
                         lock(player, 3)
                         lockInteractions(player, 3)
                         sendMessage(player, "You climb onto the rock...")
-                        sendMessageWithDelay(player, "...and step down the other side.", 3)
+                        sendMessage(player, "...and step down the other side.", 3)
                         when (player.location) {
                             Location.create(2884, 3684, 0) ->
                                 ForceMovement
@@ -616,7 +616,7 @@ class TrollheimPlugin : OptionHandler() {
                         lock(player, 3)
                         lockInteractions(player, 3)
                         sendMessage(player, "You climb onto the rock...")
-                        sendMessageWithDelay(player, "...and step down the other side.", 3)
+                        sendMessage(player, "...and step down the other side.", 3)
                         when (scenery.location) {
                             Location(2916, 3672, 0) ->
                                 ForceMovement

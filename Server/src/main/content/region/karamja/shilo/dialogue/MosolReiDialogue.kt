@@ -2,7 +2,6 @@ package content.region.karamja.shilo.dialogue
 
 import core.api.hasRequirement
 import core.api.sendMessage
-import core.api.sendMessageWithDelay
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -37,11 +36,7 @@ class MosolReiDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> {
                     end()
                     sendMessage(player, "Mosol leads you into the village.")
-                    sendMessageWithDelay(
-                        player,
-                        "Mosol leaves you by the gate and walks back out into the jungle.",
-                        1,
-                    )
+                    sendMessage(player, "Mosol leaves you by the gate and walks back out into the jungle.", 1)
                 }
 
                 2 -> {

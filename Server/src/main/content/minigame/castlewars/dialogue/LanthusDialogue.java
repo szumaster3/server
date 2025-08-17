@@ -197,7 +197,7 @@ public class LanthusDialogue extends Dialogue {
                 break;
 
             default:
-                sendMessage(player, "Error - unknown stage " + stage);
+                player.debug("Error - unknown stage " + stage);
                 stage = END_DIALOGUE;
                 break;
         }

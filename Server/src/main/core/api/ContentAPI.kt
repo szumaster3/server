@@ -1070,21 +1070,6 @@ fun sendMessages(
 }
 
 /**
- * Sends a message to the player with a specified delay in ticks.
- *
- * @param player The player to send the message to.
- * @param message The message to send.
- * @param ticks The delay in ticks before the message is sent.
- */
-fun sendMessageWithDelay(
-    player: Player,
-    message: String,
-    ticks: Int,
-) {
-    player.sendMessage(message, ticks)
-}
-
-/**
  * Sends a chat message to the entity, optionally with a delay.
  *
  * @param entity The entity to send the chat message to.

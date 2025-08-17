@@ -144,7 +144,7 @@ public final class TradeContainer extends Container {
             return false;
         }
         if ((playerIsBot || targetIsBot) && (playerIP.equals(targetIP) || playerMac.equals(targetMac) || playerHost.equals(targetHost))) {
-            sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."));
+            sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."), null);
             return false;
         }
         if (item.getName().equals("Coins") && item.getId() != 995) {

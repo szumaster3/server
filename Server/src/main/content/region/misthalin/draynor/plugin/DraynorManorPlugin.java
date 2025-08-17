@@ -21,7 +21,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
-import static core.api.ContentAPIKt.sendMessageWithDelay;
+import static core.api.ContentAPIKt.sendMessage;
+import static core.api.ContentAPIKt.sendMessages;
 
 /**
  * The type Draynor manor plugin.
@@ -72,7 +73,7 @@ public final class DraynorManorPlugin extends OptionHandler {
                     player.getPacketDispatch().sendMessage("The doors won't open.");
                     return true;
                 }
-                sendMessageWithDelay(player, "The doors slam shut behind you.", 2);
+                sendMessage(player, "The doors slam shut behind you.", 2);
                 DoorActionHandler.handleDoor(player, (Scenery) node);
                 return true;
             case 131:

@@ -70,7 +70,7 @@ class MageArenaPlugin: InteractionListener {
             if (node.id != Scenery.SPARKLING_POOL_2879) {
                 if (!player.getSavedData().activityData.hasKilledKolodion()) {
                     sendMessage(player, "You step into the pool.")
-                    sendMessageWithDelay(player, "Your boots get wet.", 1)
+                    sendMessage(player, "Your boots get wet.", 1)
                 } else {
                     sendDialogueLines(
                         player,

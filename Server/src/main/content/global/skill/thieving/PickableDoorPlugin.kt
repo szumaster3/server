@@ -154,11 +154,7 @@ class PickableDoorPlugin : OptionHandler() {
                 sendMessage(player, "You attempt to pick the lock.")
                 val hit = RandomFunction.random(10) < 5
                 impact(player, RandomFunction.random(1, 3), ImpactHandler.HitsplatType.NORMAL)
-                sendMessageWithDelay(
-                    player,
-                    if (hit) "You have activated a trap on the lock." else "You fail to pick the lock.",
-                    1,
-                )
+                sendMessage(player, if (hit) "You have activated a trap on the lock." else "You fail to pick the lock.", 1)
                 return
             }
             if (isLockpick && !inInventory(player, LOCK_PICK)) {
@@ -171,7 +167,7 @@ class PickableDoorPlugin : OptionHandler() {
                 escape(player)
             }
             sendMessage(player, "You attempt to pick the lock.")
-            sendMessageWithDelay(player, "You " + (if (success) "manage" else "fail") + " to pick the lock.", 1)
+            sendMessage(player, "You " + (if (success) "manage" else "fail") + " to pick the lock.", 1)
         }
 
         /**

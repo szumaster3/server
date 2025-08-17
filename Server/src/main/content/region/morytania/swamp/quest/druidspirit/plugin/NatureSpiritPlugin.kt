@@ -99,7 +99,7 @@ class NatureSpiritPlugin : InteractionListener {
         on(GROTTO_EXIT, IntType.SCENERY, "exit") { player, _ ->
             sendMessage(player, "You prepare to exit the grotto.")
             player.teleport(Location.create(3439, 3337, 0), 1)
-            sendMessageWithDelay(player, "You crawl back out of the grotto.", 1)
+            sendMessage(player, "You crawl back out of the grotto.", 1)
             return@on true
         }
 
