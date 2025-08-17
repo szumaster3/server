@@ -234,10 +234,10 @@ class RandomEventTests {
             TestUtils.advanceTicks(2, false)
 
             val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
-            Assertions.assertEquals(frogEvent.npc.ids.size, eventNpc.npcs.size)
+            Assertions.assertEquals(frogEvent.npc.id.size, eventNpc.npcs.size)
             Assertions.assertTrue(eventNpc.isActive)
             eventNpc.npcs.forEach { Assertions.assertTrue(it.isActive) }
-            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.npcs.first().id)
+            Assertions.assertEquals(frogEvent.npc.id.first(), eventNpc.npcs.first().id)
         }
     }
 
@@ -254,7 +254,7 @@ class RandomEventTests {
             Assertions.assertEquals(1, eventNpc.npcs.size)
             Assertions.assertTrue(eventNpc.isActive)
             eventNpc.npcs.forEach { Assertions.assertTrue(it.isActive) }
-            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.npcs.first().id)
+            Assertions.assertEquals(frogEvent.npc.id.first(), eventNpc.npcs.first().id)
         }
     }
 
@@ -301,7 +301,7 @@ class RandomEventTests {
             TestUtils.advanceTicks(2, false)
 
             val eventNpc = AntiMacro.getEventNpc(p) ?: Assertions.fail("Event NPC should not be null")
-            Assertions.assertEquals(frogEvent.npc.ids.first(), eventNpc.originalId)
+            Assertions.assertEquals(frogEvent.npc.id.first(), eventNpc.originalId)
         }
     }
 
