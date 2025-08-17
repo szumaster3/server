@@ -1,4 +1,4 @@
-package content.region.asgarnia.burthorpe.handlers.wguild.barrel
+package content.region.asgarnia.burthope.guild.warriors_guild
 
 import core.api.sendChat
 import core.api.setVarp
@@ -78,21 +78,23 @@ class BarrelRoomPlugin : MapZone("wg barrel", true), Plugin<Any> {
                 player.lock(5)
                 player.animate(Animation.create(4180))
                 val lock = Lock("You're too busy balancing barrels to do that!")
-                player.locks.lock()
                 player.locks.equipmentLock = lock
                 player.packetDispatch.sendMessage("You pick up the keg and balance it on your head carefully.")
                 val jimmy = Repository.findNPC(NPCs.JIMMY_4298)
                 val barrels = player.getAttribute("barrel_count", -1)
-                when{
+                when {
                     barrels in 1..3 -> sendChat(jimmy!!.asNpc(), "Ya got no chance o' beatin' me ${player.name}!")
                     else -> sendChat(jimmy!!.asNpc(), "No one's stronger than me, 'speshly not ${player.name}!")
                 }
                 GameWorld.Pulser.submit(object : Pulse(3, player) {
                     override fun pulse(): Boolean {
                         player.equipment.replace(Item(barrelId), EquipmentContainer.SLOT_HAT)
-                        player.appearance.setAnimations(Animation.create(4178))
+                        player.appearance.setAnimations(Animation(4178))
                         player.appearance.standAnimation = 4179
+                        player.appearance.walkAnimation = 4178
+                        player.appearance.runAnimation = 4178
                         player.appearance.sync()
+
                         player.setAttribute("barrel_count", barrelId)
                         (node as Scenery).setChildIndex(player, 1)
 
@@ -175,6 +177,9 @@ class BarrelRoomPlugin : MapZone("wg barrel", true), Plugin<Any> {
             player.removeAttribute("barrel_count")
             player.walkingQueue.isRunDisabled = false
             player.equipment.replace(null, EquipmentContainer.SLOT_HAT)
+
+            val def = player.appearance
+            player.appearance.standAnimation = def.standAnimation
             player.appearance.setAnimations(null)
             player.appearance.sync()
             setVarp(player, 793, 0)
