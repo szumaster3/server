@@ -187,11 +187,11 @@ object GameWorld {
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
-        SceneryDefinition.definitions.values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
+        SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
 
         if (ServerConstants.PRELOAD_MAP) {
             var count = 0
-            (7483..15420).forEach { id ->
+            (6230..15416).forEach { id ->
                 RegionManager.forId(id).also {
                     Region.load(it)
                     count++
