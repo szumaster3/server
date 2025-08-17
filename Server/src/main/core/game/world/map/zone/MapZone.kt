@@ -217,7 +217,7 @@ abstract class MapZone(
     /**
      * Registers this zone in the regions for the given borders.
      */
-    fun register(borders: ZoneBorders) {
+    open fun register(borders: ZoneBorders) {
         borders.regionIds.forEach { id ->
             RegionManager.forId(id)?.add(RegionZone(this, borders))
         }
