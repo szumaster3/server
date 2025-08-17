@@ -20,6 +20,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import shared.consts.Quests;
+import shared.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 
@@ -86,11 +87,13 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
             return;
         }
         scenery.setCharge(88);
+        playAudio(player, Sounds.TREEDOOR_OPEN_93);
         SceneryBuilder.replace(scenery, scenery.transform(scenery.getId() == 1967 ? 1969 : 1970), 4);
         AgilityHandler.walk(player, -1, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() <= 3491 ? 2 : -2, 0), new Animation(1426), 0, null, false);
         GameWorld.getPulser().submit(new Pulse(4) {
             @Override
             public boolean pulse() {
+                playAudio(player, Sounds.TREEDOOR_CLOSE_92);
                 scenery.setCharge(1000);
                 return true;
             }
