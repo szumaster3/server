@@ -40,6 +40,7 @@ enum class RandomEvents(
     val loot: WeightBasedTable? = null,
     val skillIds: IntArray = intArrayOf(),
     val type: String = "",
+    var respawnAll: Boolean = true
 ) {
     SANDWICH_LADY(npc = SandwichLadyNPC()),
     GENIE(npc = GenieNPC()),

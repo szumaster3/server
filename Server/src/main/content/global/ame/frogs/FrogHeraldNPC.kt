@@ -10,7 +10,7 @@ import shared.consts.NPCs
  * Represents Frog herald random event NPC.
  * @author szu
  */
-class FrogHeraldNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.FROG_2471) {
+class FrogHeraldNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs.FROG_2471, NPCs.FROG_2469, NPCs.FROG_2470) {
 
     private val phrases =
         arrayOf(

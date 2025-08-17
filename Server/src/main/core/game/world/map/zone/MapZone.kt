@@ -38,7 +38,7 @@ abstract class MapZone(
     /**
      * The map zone UID.
      */
-    var uid: Int = 0
+    private var uid: Int = 0
 
     /**
      * If random events should be fired in this zone.
