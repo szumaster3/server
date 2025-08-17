@@ -316,6 +316,8 @@ object Vars {
     const val VARP_IFACE_WARNING_MESSAGES_1049 = 1049
     const val VARP_IFACE_WARNING_MESSAGES_1050 = 1050
 
+    const val VARBIT_POH_SERVANT_HIRED_2190 = 2190
+
     const val VARBIT_ANCIENT_CAVES_2840 = 2840                // 1-7
     const val VARBIT_BATTLEFIELD_RAMPAGE_2994 = 2994          // 1-10
     const val VARBIT_BIG_CHOMPY_BIRD_HUNTING_2772 = 2772      // 5-65
