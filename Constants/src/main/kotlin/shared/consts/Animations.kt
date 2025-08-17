@@ -967,6 +967,9 @@ object Animations {
     const val GETTING_UP_OFF_THE_FLOOR_2921 = 2921
     const val GET_FLOOR_OBSTACLE_10743 = 10743
     const val GET_HIT_WITH_HANDS_ON_STOMACH_9072 = 9072
+    const val MORPH_TO_FROG_2377 = 2377
+    const val FROG_KISS_2374 = 2374
+    const val MORPH_FROM_FROG_2375 = 2375
     const val GET_INTO_FROG_POSITION_2377 = 2377
     const val GET_IN_SEAT_9595 = 9595
     const val GET_KNEES_LIFT_HAND_UP_10184 = 10184
@@ -2021,7 +2024,8 @@ object Animations {
     const val MOURNER_DEFENCE_416 = 416
     const val MOVE_FORWARD_5015 = 5015
     const val MOVE_FORWARD_TO_CLIMB_UP_LADDER_9136 = 9136
-    const val MOVE_FORWARD_TO_GRAB_4004 = 4004
+    const val MOVE_CRANE_4003 = 4003
+    const val MOVE_CRANE_FORWARD_TO_GRAB_4004 = 4004
     const val MOVE_GRAB_SOMETHING_834 = 834
     const val MOVE_GRAB_SOMETHING_B_835 = 835
     const val MOVE_HAND_1354 = 1354
@@ -2398,6 +2402,7 @@ object Animations {
     const val RAISE_HAND_IN_AIR_8973 = 8973
     const val RAISE_HAND_IN_AIR_8975 = 8975
     const val RAISE_HAND_IN_AIR_8976 = 8976
+    const val RANDOM_TP_OLD_714 = 714
     const val RAKE_10574 = 10574
     const val RAKE_2273 = 2273
     const val RAPTOR_ATTACK_2820 = 2820
@@ -3415,7 +3420,7 @@ object Animations {
     const val WOODCUTTING_WITH_VOLATILE_CLAY_AXE_1907 = 1907
     const val WOODPECKER_DANCE_6409 = 6409
     const val WORKMAN_IDLE_6425 = 6425
-    const val WRANGLING_EAGLE_WITH_ROPE_5210 = 5210
+     const val WRANGLING_EAGLE_WITH_ROPE_5210 = 5210
     const val WRANGLING_ROPE_2910 = 2910
     const val WRANGLING_ROPE_TEMPLE_TREKKING_3739 = 3739
     const val WRITE_SOMETHING_909 = 909

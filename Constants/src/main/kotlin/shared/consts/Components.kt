@@ -184,6 +184,7 @@ object Components {
     const val MIRROR_CONTROLLER_181 = 181
     const val LOGOUT_182 = 182
     const val GOBLIN_SYMBOL_BOOK_183 = 183
+    const val MACRO_CERTER_IDENTIFY_AN_OBJECT_184 = 184
     const val MACRO_COMBILOCK_185 = 185
     const val MACRO_EVIL_BOB_186 = 186
     const val MUSIC_V3_187 = 187
