@@ -5550,7 +5550,7 @@
   },
   {
     "ge_buy_limit": "10000",
-    "examine": "unlit: Arrows with bronze heads and oil-soaked cloth. lit: An easy to make, bronze-headed fire arrow.",
+    "examine": "Arrows with bronze heads and oil-soaked cloth.",
     "grand_exchange_price": "162",
     "durability": null,
     "name": "Bronze fire arrows",

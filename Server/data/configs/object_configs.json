@@ -15374,5 +15374,9 @@
   {
     "examine": "You can build a table here.",
     "ids": "15298"
+  },
+  {
+    "examine": "He's dead.",
+    "ids": "26306"
   }
 ]
