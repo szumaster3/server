@@ -66,8 +66,8 @@ class SunderSpecialHandler :
     ) {
         entity.visualize(
             Animation(5870),
-            Graphics(shared.consts.Graphics.BARRELCHEST_ANCHOR_SPECIAL_1027),
-        )
+            Graphics(shared.consts.Graphics.BARRELCHEST_ANCHOR_SPECIAL_M_1027),
+            )
     }
 
     override fun fireEvent(

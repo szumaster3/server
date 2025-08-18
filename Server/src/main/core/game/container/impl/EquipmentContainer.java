@@ -15,6 +15,8 @@ import core.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static core.api.ContentAPIKt.setVarp;
 
@@ -391,5 +393,15 @@ public final class EquipmentContainer extends Container {
             player.getPacketDispatch().sendString(BONUS_NAMES[index++] + bonusValue, 667, i);
         }
         player.getPacketDispatch().sendString("Attack bonus", 667, 34);
+    }
+
+    public Set<Integer> ids() {
+        Set<Integer> ids = new HashSet<>();
+        for (Item item : toArray()) {
+            if (item != null) {
+                ids.add(item.getId());
+            }
+        }
+        return ids;
     }
 }

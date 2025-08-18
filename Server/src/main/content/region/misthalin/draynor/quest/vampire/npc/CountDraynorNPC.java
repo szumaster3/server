@@ -82,7 +82,7 @@ public class CountDraynorNPC extends AbstractNPC {
                 for (Location l : CANDLE_LOCATION) {
                     if (p.getLocation().equals(l)) {
                         p.sendChat(FORCE_CHAT[RandomFunction.random(FORCE_CHAT.length)]);
-                        sendMessage(p, "The candles burn your feet!");
+                        sendMessage(p, "The candles burn your feet!", null);
                         break;
                     }
                 }
@@ -117,10 +117,10 @@ public class CountDraynorNPC extends AbstractNPC {
             if (inInventory(p, Items.HAMMER_2347, 1) && p.getInventory().remove(new Item(Items.STAKE_1549))) {
                 if (p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).getStage(p) == 30) {
                     p.getQuestRepository().getQuest(Quests.VAMPIRE_SLAYER).finish(p);
-                    sendMessage(p, "You hammer the stake into the vampire's chest!");
+                    sendMessage(p, "You hammer the stake into the vampire's chest!", null);
                 }
             } else {
-                sendMessage(p, "You're unable to push the stake far enough in!");
+                sendMessage(p, "You're unable to push the stake far enough in!", null);
             }
         }
         setRespawn(false);
