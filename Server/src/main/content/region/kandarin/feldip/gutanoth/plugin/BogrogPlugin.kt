@@ -20,7 +20,6 @@ class BogrogPlugin : InteractionListener {
          */
 
         on(NPCs.BOGROG_4472, IntType.NPC, "swap") { player, _ ->
-            sendMessage(player, "Pick the pouches and scrolls you wish to trade for shards.")
             openSwap(player)
             return@on true
         }
@@ -41,17 +40,8 @@ class BogrogPlugin : InteractionListener {
                 return
             }
 
-            sendItemSelect(
-                player,
-                "Value",
-                "Swap 1",
-                "Swap 5",
-                "Swap 10",
-                "Swap X",
-                "Swap All",
-                "Examine",
-                keepAlive = true
-            ) { slot, index ->
+            sendMessage(player, "Pick the pouches and scrolls you wish to trade for shards.")
+            sendItemSelect(player, "Value", "Swap 1", "Swap 5", "Swap 10", "Swap X", "Swap All", "Examine", keepAlive = true) { slot, index ->
                 BogrogPouchUtils.handle(player, index, slot)
             }
         }
