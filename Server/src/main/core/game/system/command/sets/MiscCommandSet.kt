@@ -6,6 +6,7 @@ import content.global.plugin.iface.Page
 import content.global.plugin.iface.PageSet
 import content.global.skill.farming.timers.Compost
 import content.global.skill.farming.timers.CropGrowth
+import content.minigame.fishingtrawler.plugin.FishingTrawlerContainer
 import content.minigame.fishingtrawler.plugin.TrawlerLoot
 import core.ServerConstants
 import core.api.*
@@ -493,16 +494,22 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "rolltrawlerloot",
             privilege = Privilege.ADMIN,
-            usage = "::rolltrawlerloot <lt>ROLL COUNT<gt>",
-            description = "Rolls some trawler loot.",
+            usage = "::rolltrawlerloot <ROLL COUNT>",
+            description = "Rolls some trawler loot and opens the reward interface."
         ) { player, args ->
-            val rolls =
-                if (args.size < 2) {
-                    100
-                } else {
-                    args[1].toInt()
-                }
-            TrawlerLoot.addLootAndMessage(player, player.skills.getLevel(Skills.FISHING), rolls, false)
+            val rolls = if (args.size < 2) 100 else args[1].toIntOrNull() ?: 100
+
+            val fishingLevel = player.skills.getLevel(Skills.FISHING)
+            val exp = (((0.015 * fishingLevel)) * fishingLevel) * rolls
+            player.skills.addExperience(Skills.FISHING, exp)
+
+            val loot = TrawlerLoot.getLoot(fishingLevel, rolls, false)
+            val container = FishingTrawlerContainer(player)
+            loot.forEach { item -> container.add(item) }
+            player.setAttribute("ft-container", container)
+
+            container.open()
+            player.sendMessage("Opened Fishing Trawler reward interface with $rolls rolls.")
         }
 
         define(

@@ -15,6 +15,8 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import shared.consts.Animations
+import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Scenery
 
@@ -86,7 +88,8 @@ class FishingTrawlerInteractionHandler : InteractionListener {
                 sendPlayerDialogue(player, "I'd better not go stealing other people's fish.", FaceAnim.HALF_GUILTY)
                 return@on true
             }
-            player.dialogueInterpreter.open(18237582)
+            animate(player, Animations.MULTI_BEND_OVER_827)
+            openInterface(player, Components.TRAWLER_REWARD_367)
             return@on true
         }
 
@@ -169,44 +172,6 @@ class FishingTrawlerInteractionHandler : InteractionListener {
             return@on true
         }
     }
-}
-
-@Initializable
-class NetLootDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
-    var session: FishingTrawlerSession? = null
-    var rolls = 0
-
-    override fun newInstance(player: Player?): Dialogue = NetLootDialogue(player)
-
-    override fun open(vararg args: Any?): Boolean {
-        rolls = player.getAttribute("/save:ft-rolls", 0)
-        if (rolls == 0) return false
-        player.dialogueInterpreter.sendOptions("Skip Junk Items?", "Yes", "No")
-        stage = 0
-        return true
-    }
-
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        val level = player.skills.getLevel(Skills.FISHING)
-        when (buttonId) {
-            1 -> TrawlerLoot.addLootAndMessage(player, level, rolls, true)
-            2 -> TrawlerLoot.addLootAndMessage(player, level, rolls, false)
-        }
-        player.skills.addExperience(
-            Skills.FISHING,
-            (((0.015 * player.skills.getLevel(Skills.FISHING))) * player.skills.getLevel(Skills.FISHING)) * rolls,
-        )
-        player.removeAttribute("ft-rolls")
-        end()
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(18237582)
 }
 
 @Initializable

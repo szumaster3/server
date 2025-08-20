@@ -88,40 +88,6 @@ object TrawlerLoot {
         return loot
     }
 
-    @JvmStatic
-    fun addLootAndMessage(player: Player, fishLevel: Int, rolls: Int, skipJunk: Boolean, ) {
-        if (rolls < 1) return
-        val frequencyList = listOf<MutableMap<String, Int>>(HashMap(), HashMap(), HashMap())
-        getLoot(fishLevel, rolls, skipJunk).forEach {
-            if (!player.bank.add(it)) GroundItemManager.create(it, player)
-            when (it.id) {
-                in trawlerFishIds -> frequencyList[0].merge(it.name, 1, Int::plus)
-                in trawlerMisc -> frequencyList[1].merge(it.name, 1, Int::plus)
-                in junkItems -> frequencyList[2].merge(it.name, 1, Int::plus)
-            }
-        }
-        player.sendMessage(colorize("%RYour reward has been sent to your bank:"))
-
-        frequencyList.forEachIndexed { idx, fMap ->
-            if (fMap.isNotEmpty()) {
-                splitLines(
-                    fMap.entries.joinToString(
-                        prefix =
-                            if (idx == 0) {
-                                "Fish: "
-                            } else if (idx == 1) {
-                                "Misc: "
-                            } else {
-                                "Junk: "
-                            },
-                        postfix = ".",
-                    ) { "${it.key}: ${it.value}" },
-                    85,
-                ).forEach { player.sendMessage(it) }
-            }
-        }
-    }
-
     private val lootTable =
         arrayOf(
             WeightedChanceItem(0, 1, 1430),

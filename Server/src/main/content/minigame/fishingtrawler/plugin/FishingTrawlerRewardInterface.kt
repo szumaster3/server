@@ -1,44 +1,47 @@
 package content.minigame.fishingtrawler.plugin
 
-import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
-import core.game.node.entity.player.Player
-import core.game.node.item.Item
-import core.plugin.Plugin
-import shared.consts.Components
-import kotlin.math.ceil
+import core.api.sendMessage
+import core.game.interaction.InterfaceListener
 
-class FishingTrawlerRewardInterface : ComponentPlugin() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(Components.TRAWLER_REWARD_367, this)
-        return this
-    }
+/**
+ * Represents the Fishing trawler reward interface.
+ */
+class FishingTrawlerRewardListener : InterfaceListener {
 
-    override fun open(
-        player: Player?,
-        component: Component?,
-    ) {
-        super.open(player, component)
-        val session: FishingTrawlerSession? = player?.getAttribute("ft-session", null)
-        session ?: return
-
-        val numRolls = ceil(session.fishAmount / session.players.size.toDouble()).toInt()
-        player?.removeAttribute("ft-session")
-
-        val loot = ArrayList<Item>()
-        for (i in 0 until numRolls) {
+    override fun defineInterfaceListeners() {
+        onOpen(FishingTrawlerContainer.INTERFACE_ID) { player, _ ->
+            player.impactHandler.disabledTicks = 15
+            return@onOpen true
         }
-    }
 
-    override fun handle(
-        player: Player?,
-        component: Component?,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
-        TODO("Not yet implemented")
+        /*
+         * Handles close and drop items.
+         */
+
+        onClose(FishingTrawlerContainer.INTERFACE_ID) { player, _ ->
+            val container = player.getAttribute<FishingTrawlerContainer>("ft-container")
+            container?.close()
+            player.removeAttribute("ft-container")
+            sendMessage(player, core.tools.RED + "The remaining items have been dropped on the ground!")
+            return@onClose true
+        }
+
+        /*
+         * Handles withdraw for buttons.
+         */
+
+        on(FishingTrawlerContainer.INTERFACE_ID) { player, _, opcode, _, slot, _ ->
+            val container = player.getAttribute<FishingTrawlerContainer>("ft-container") ?: return@on true
+
+            when (opcode) {
+                81 -> container.withdraw(slot, 1)
+                206 -> {
+                    val it = container[slot] ?: return@on true
+                    container.withdraw(slot, it.amount)
+                }
+            }
+
+            return@on true
+        }
     }
 }
