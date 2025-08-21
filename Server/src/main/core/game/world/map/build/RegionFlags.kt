@@ -1,553 +1,250 @@
-package core.game.world.map.build;
+package core.game.world.map.build
 
-import core.game.world.map.RegionManager;
-import kotlin.Pair;
-
-import static java.lang.Math.max;
+import core.game.world.map.RegionManager
+import kotlin.math.max
 
 /**
- * Holds a region's flags like clipping flags, members
+ * Holds a region's flags like clipping and members.
+ * Supports local (0..63) and global flags.
  *
  * @author Emperor
  */
-public final class RegionFlags {
-
-    public static final int TILE_OBJECT = 0x40000;
-    public static final int EMPTY_TILE = 0;
-    public static final int SOLID_TILE = 0x200000;
-    public static final int OBJ_10_PROJECTILE = 0x20000;
-    public static final int OBJ_10 = 0x100;
-    /**
-     * The plane.
-     */
-    private final int plane;
+class RegionFlags(
+    val plane: Int,
+    val baseX: Int,
+    val baseY: Int,
+    private val projectile: Boolean = false
+) {
 
     /**
-     * If the region is members only.
+     * True if region is members-only.
      */
-    private boolean members;
+    var members: Boolean = false
 
     /**
-     * The base x-coordinate.
+     * Optional landscape data for the region.
      */
-    private final int baseX;
+    var landscape: Array<BooleanArray>? = null
 
-    /**
-     * The base y-coordinate.
-     */
-    private final int baseY;
-
-    /**
-     * The landscape data.
-     */
-    private boolean[][] landscape;
-
-    /**
-     * If the flags are set for projectile clipping
-     */
-    private final boolean projectile;
-
-    /**
-     * Constructs a new {@code RegionFlags} {@code Object}.
-     *
-     * @param x The base x-coordinate (absolute).
-     * @param y The base y-coordinate (absolute).
-     */
-    public RegionFlags(int plane, int x, int y) {
-        this(plane, x, y, false);
+    companion object {
+        const val TILE_OBJECT = 0x40000
+        const val EMPTY_TILE = 0
+        const val SOLID_TILE = 0x200000
+        const val OBJ_10_PROJECTILE = 0x20000
+        const val OBJ_10 = 0x100
     }
 
-    /**
-     * Constructs a new {@code RegionFlags} {@code Object}.
-     *
-     * @param x The base x-coordinate (absolute).
-     * @param y The base y-coordinate (absolute).
-     */
-    public RegionFlags(int plane, int x, int y, boolean projectile) {
-        this.plane = plane;
-        this.baseX = x;
-        this.baseY = y;
-        this.projectile = projectile;
-    }
+    constructor(plane: Int, x: Int, y: Int) : this(plane, x, y, false)
 
     /**
-     * Flags a solid tile.
-     *
-     * @param x The x-coordinate.
-     * @param y The y-coordinate.
+     * Flag a solid tile.
      */
-    public void flagSolidTile(int x, int y) {
-        flag(x, y, SOLID_TILE);
-    }
-
-    public void flagEmptyTile(int x, int y) {
-        flag(x, y, EMPTY_TILE);
-    }
+    fun flagSolidTile(x: Int, y: Int) = flag(x, y, SOLID_TILE)
 
     /**
-     * Flags a tile object (object type 22).
-     *
-     * @param x The x-coordinate.
-     * @param y The y-coordinate.
+     * Flag an empty tile.
      */
-    public void flagTileObject(int x, int y) {
-        flag(x, y, TILE_OBJECT);
-    }
+    fun flagEmptyTile(x: Int, y: Int) = flag(x, y, EMPTY_TILE)
 
     /**
-     * Unflags a tile object.
-     *
-     * @param x The x-coordinate.
-     * @param y The y-coordinate.
+     * Flag a tile object (type 22).
      */
-    public void unflagTileObject(int x, int y) {
-        unflag(x, y, TILE_OBJECT);
-    }
+    fun flagTileObject(x: Int, y: Int) = flag(x, y, TILE_OBJECT)
 
     /**
-     * Flags a solid object (type 10/11).
-     *
-     * @param x                 The x-coordinate
-     * @param y                 The y-coordinate.
-     * @param sizeX             The x-size of the object.
-     * @param sizeY             The y-size of the object.
-     * @param projectileClipped If the object is solid.
+     * Unflag a tile object.
      */
-    public void flagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
-        int clipdata = OBJ_10;
-        if (projectileClipped) {
-            clipdata += OBJ_10_PROJECTILE;
-        }
-        for (int i = x; i < x + sizeX; i++) {
-            for (int j = y; j < y + sizeY; j++) {
-                flag(i, j, clipdata);
+    fun unflagTileObject(x: Int, y: Int) = unflag(x, y, TILE_OBJECT)
+
+    /**
+     * Flag a solid object.
+     *
+     * @param projectileClipped True if blocks projectiles.
+     */
+    fun flagSolidObject(x: Int, y: Int, sizeX: Int, sizeY: Int, projectileClipped: Boolean) {
+        var clipdata = OBJ_10
+        if (projectileClipped) clipdata += OBJ_10_PROJECTILE
+        for (i in x until x + sizeX) {
+            for (j in y until y + sizeY) {
+                flag(i, j, clipdata)
             }
         }
     }
 
     /**
-     * Adds a flag.
-     *
-     * @param x        The x-coordinate.
-     * @param y        The y-coordinate.
-     * @param clipdata The clip data.
+     * Unflag a solid object.
      */
-    public void flag(int x, int y, int clipdata) {
-        if (x > -1 && x < 64 && y > -1 && y < 64) {
-            addFlag(x, y, clipdata);
-        } else {
-            RegionManager.addClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
-        }
-    }
-
-    /**
-     * Unflags a solid object (type 10/11).
-     *
-     * @param x                 The x-coordinate
-     * @param y                 The y-coordinate.
-     * @param sizeX             The x-size of the object.
-     * @param sizeY             The y-size of the object.
-     * @param projectileClipped If the object is solid.
-     */
-    public void unflagSolidObject(int x, int y, int sizeX, int sizeY, boolean projectileClipped) {
-        int clipdata = OBJ_10;
-        if (projectileClipped) {
-            clipdata += OBJ_10_PROJECTILE;
-        }
-        for (int i = x; i < x + sizeX; i++) {
-            for (int j = y; j < y + sizeY; j++) {
-                unflag(i, j, clipdata);
+    fun unflagSolidObject(x: Int, y: Int, sizeX: Int, sizeY: Int, projectileClipped: Boolean) {
+        var clipdata = OBJ_10
+        if (projectileClipped) clipdata += OBJ_10_PROJECTILE
+        for (i in x until x + sizeX) {
+            for (j in y until y + sizeY) {
+                unflag(i, j, clipdata)
             }
         }
     }
 
     /**
-     * Removes a flag.
-     *
-     * @param x        The x-coordinate.
-     * @param y        The y-coordinate.
-     * @param clipdata The clip data.
+     * Add a flag locally or globally if out of bounds.
      */
-    public void unflag(int x, int y, int clipdata) {
-        if (x > -1 && x < 64 && y > -1 && y < 64) {
-            removeFlag(x, y, clipdata);
-        } else {
-            RegionManager.removeClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata);
-        }
-    }
-
-    private Pair<Integer, Integer> getFlagIndex(int x, int y) {
-        return new Pair<>(((baseX >> 6) << 8) | (baseY >> 6), (plane * 64 * 64) + (x * 64) + y);
-    }
-
-    public int getFlag(int x, int y) {
-        Pair<Integer, Integer> indices = getFlagIndex(x, y);
-        return RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()];
-    }
-
-    public void addFlag(int x, int y, int clipdata) {
-        int current = getFlag(x, y);
-        Pair<Integer, Integer> indices = getFlagIndex(x, y);
-        RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = max(0, current) | clipdata;
-    }
-
-    public void removeFlag(int x, int y, int clipdata) {
-        int current = getFlag(x, y);
-        Pair<Integer, Integer> indices = getFlagIndex(x, y);
-        if ((current & clipdata) == 0) return;
-        current = max(0, current) & ~clipdata;
-
-        RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = current;
-    }
-
-    public void clearFlag(int x, int y) {
-        Pair<Integer, Integer> indices = getFlagIndex(x, y);
-        RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = 0;
-    }
-
-    public void invalidateFlag(int x, int y) {
-        Pair<Integer, Integer> indices = getFlagIndex(x, y);
-        RegionManager.getFlags(indices.getFirst(), projectile)[indices.getSecond()] = -1;
+    fun flag(x: Int, y: Int, clipdata: Int) {
+        if (x in 0..63 && y in 0..63) addFlag(x, y, clipdata)
+        else RegionManager.addClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata)
     }
 
     /**
-     * Flags a door object (type 0-3).
-     *
-     * @param x                 The x-coordinate
-     * @param y                 The y-coordinate.
-     * @param rotation          The rotation.
-     * @param type              The type.
-     * @param projectileClipped If the door is solid.
+     * Remove a flag locally or globally if out of bounds.
      */
-    public void flagDoorObject(int x, int y, int rotation, int type, boolean projectileClipped) {
-        switch (type) {
-            case 0:
-                switch (rotation) {
-                    case 0:
-                        flag(x, y, 0x80);
-                        flag(x - 1, y, 0x8);
-                        break;
-                    case 1:
-                        flag(x, y, 0x2);
-                        flag(x, y + 1, 0x20);
-                        break;
-                    case 2:
-                        flag(x, y, 0x8);
-                        flag(x + 1, y, 0x80);
-                        break;
-                    case 3:
-                        flag(x, y, 0x20);
-                        flag(x, y - 1, 0x2);
-                        break;
-                }
-                break;
-            case 1:
-            case 3:
-                switch (rotation) {
-                    case 0:
-                        flag(x, y, 0x1);
-                        flag(x - 1, y + 1, 0x10);
-                        break;
-                    case 1:
-                        flag(x, y, 0x4);
-                        flag(x + 1, y + 1, 0x40);
-                        break;
-                    case 2:
-                        flag(x, y, 0x10);
-                        flag(x + 1, y - 1, 0x1);
-                        break;
-                    case 3:
-                        flag(x, y, 0x40);
-                        flag(x - 1, y - 1, 0x4);
-                        break;
-                }
-                break;
-            case 2:
-                switch (rotation) {
-                    case 0:
-                        flag(x, y, 0x82);
-                        flag(x - 1, y, 0x8);
-                        flag(x, y + 1, 0x20);
-                        break;
-                    case 1:
-                        flag(x, y, 0xA);
-                        flag(x, y + 1, 0x20);
-                        flag(x + 1, y, 0x80);
-                        break;
-                    case 2:
-                        flag(x, y, 0x28);
-                        flag(x + 1, y, 0x80);
-                        flag(x, y - 1, 0x2);
-                        break;
-                    case 3:
-                        flag(x, y, 0xA0);
-                        flag(x, y - 1, 0x2);
-                        flag(x - 1, y, 0x8);
-                        break;
-                }
-                break;
+    fun unflag(x: Int, y: Int, clipdata: Int) {
+        if (x in 0..63 && y in 0..63) removeFlag(x, y, clipdata)
+        else RegionManager.removeClippingFlag(plane, baseX + x, baseY + y, projectile, clipdata)
+    }
+
+    /**
+     * Get internal indices for a tile.
+     */
+    private fun getFlagIndex(x: Int, y: Int): Pair<Int, Int> =
+        Pair(((baseX shr 6) shl 8) or (baseY shr 6), (plane * 64 * 64) + (x * 64) + y)
+
+    /**
+     * Get flag value for a tile.
+     */
+    fun getFlag(x: Int, y: Int): Int {
+        val (regionIndex, tileIndex) = getFlagIndex(x, y)
+        return RegionManager.getFlags(regionIndex, projectile)[tileIndex]
+    }
+
+    /**
+     * Add a flag locally.
+     */
+    fun addFlag(x: Int, y: Int, clipdata: Int) {
+        val current = getFlag(x, y)
+        val (regionIndex, tileIndex) = getFlagIndex(x, y)
+        RegionManager.getFlags(regionIndex, projectile)[tileIndex] = max(0, current) or clipdata
+    }
+
+    /**
+     * Remove a flag locally.
+     */
+    fun removeFlag(x: Int, y: Int, clipdata: Int) {
+        var current = getFlag(x, y)
+        val (regionIndex, tileIndex) = getFlagIndex(x, y)
+        if ((current and clipdata) == 0) return
+        current = max(0, current) and clipdata.inv()
+        RegionManager.getFlags(regionIndex, projectile)[tileIndex] = current
+    }
+
+    /**
+     * Clear a tile's flags.
+     */
+    fun clearFlag(x: Int, y: Int) {
+        val (regionIndex, tileIndex) = getFlagIndex(x, y)
+        RegionManager.getFlags(regionIndex, projectile)[tileIndex] = 0
+    }
+
+    /**
+     * Invalidate a tile's flags.
+     */
+    fun invalidateFlag(x: Int, y: Int) {
+        val (regionIndex, tileIndex) = getFlagIndex(x, y)
+        RegionManager.getFlags(regionIndex, projectile)[tileIndex] = -1
+    }
+
+    /**
+     * Flag a door object (0-3 type).
+     */
+    fun flagDoorObject(x: Int, y: Int, rotation: Int, type: Int, projectileClipped: Boolean) {
+        when (type) {
+            0 -> when (rotation) {
+                0 -> { flag(x, y, 0x80); flag(x - 1, y, 0x8) }
+                1 -> { flag(x, y, 0x2); flag(x, y + 1, 0x20) }
+                2 -> { flag(x, y, 0x8); flag(x + 1, y, 0x80) }
+                3 -> { flag(x, y, 0x20); flag(x, y - 1, 0x2) }
+            }
+            1, 3 -> when (rotation) {
+                0 -> { flag(x, y, 0x1); flag(x - 1, y + 1, 0x10) }
+                1 -> { flag(x, y, 0x4); flag(x + 1, y + 1, 0x40) }
+                2 -> { flag(x, y, 0x10); flag(x + 1, y - 1, 0x1) }
+                3 -> { flag(x, y, 0x40); flag(x - 1, y - 1, 0x4) }
+            }
+            2 -> when (rotation) {
+                0 -> { flag(x, y, 0x82); flag(x - 1, y, 0x8); flag(x, y + 1, 0x20) }
+                1 -> { flag(x, y, 0xA); flag(x, y + 1, 0x20); flag(x + 1, y, 0x80) }
+                2 -> { flag(x, y, 0x28); flag(x + 1, y, 0x80); flag(x, y - 1, 0x2) }
+                3 -> { flag(x, y, 0xA0); flag(x, y - 1, 0x2); flag(x - 1, y, 0x8) }
+            }
         }
+
         if (projectileClipped) {
-            switch (type) {
-                case 0:
-                    switch (rotation) {
-                        case 0:
-                            flag(x, y, 0x10000);
-                            flag(x - 1, y, 0x1000);
-                            break;
-                        case 1:
-                            flag(x, y, 0x400);
-                            flag(x, y + 1, 0x4000);
-                            break;
-                        case 2:
-                            flag(x, y, 0x1000);
-                            flag(x + 1, y, 0x10000);
-                            break;
-                        case 3:
-                            flag(x, y, 0x4000);
-                            flag(x, y - 1, 0x400);
-                            break;
-                    }
-                    break;
-                case 1:
-                case 3:
-                    switch (rotation) {
-                        case 0:
-                            flag(x, y, 0x200);
-                            flag(x - 1, y + 1, 0x2000);
-                            break;
-                        case 1:
-                            flag(x, y, 0x800);
-                            flag(x + 1, y + 1, 0x8000);
-                            break;
-                        case 2:
-                            flag(x, y, 0x2000);
-                            flag(x + 1, y - 1, 0x200);
-                            break;
-                        case 3:
-                            flag(x, y, 0x8000);
-                            flag(x - 1, y - 1, 0x800);
-                            break;
-                    }
-                    break;
-                case 2:
-                    switch (rotation) {
-                        case 0:
-                            flag(x, y, 0x10400);
-                            flag(x - 1, y, 0x1000);
-                            flag(x, y + 1, 0x4000);
-                            break;
-                        case 1:
-                            flag(x, y, 0x1400);
-                            flag(x, y + 1, 0x4000);
-                            flag(x + 1, y, 0x10000);
-                            break;
-                        case 2:
-                            flag(x, y, 0x5000);
-                            flag(x + 1, y, 0x10000);
-                            flag(x, y - 1, 0x400);
-                            break;
-                        case 3:
-                            flag(x, y, 0x14000);
-                            flag(x, y - 1, 0x400);
-                            flag(x - 1, y, 0x1000);
-                            break;
-                    }
-                    break;
+            when (type) {
+                0 -> when (rotation) {
+                    0 -> { flag(x, y, 0x10000); flag(x - 1, y, 0x1000) }
+                    1 -> { flag(x, y, 0x400); flag(x, y + 1, 0x4000) }
+                    2 -> { flag(x, y, 0x1000); flag(x + 1, y, 0x10000) }
+                    3 -> { flag(x, y, 0x4000); flag(x, y - 1, 0x400) }
+                }
+                1, 3 -> when (rotation) {
+                    0 -> { flag(x, y, 0x200); flag(x - 1, y + 1, 0x2000) }
+                    1 -> { flag(x, y, 0x800); flag(x + 1, y + 1, 0x8000) }
+                    2 -> { flag(x, y, 0x2000); flag(x + 1, y - 1, 0x200) }
+                    3 -> { flag(x, y, 0x8000); flag(x - 1, y - 1, 0x800) }
+                }
+                2 -> when (rotation) {
+                    0 -> { flag(x, y, 0x10400); flag(x - 1, y, 0x1000); flag(x, y + 1, 0x4000) }
+                    1 -> { flag(x, y, 0x1400); flag(x, y + 1, 0x4000); flag(x + 1, y, 0x10000) }
+                    2 -> { flag(x, y, 0x5000); flag(x + 1, y, 0x10000); flag(x, y - 1, 0x400) }
+                    3 -> { flag(x, y, 0x14000); flag(x, y - 1, 0x400); flag(x - 1, y, 0x1000) }
+                }
             }
         }
     }
 
     /**
-     * Unlags a door object (type 0-3).
-     *
-     * @param x                 The x-coordinate
-     * @param y                 The y-coordinate.
-     * @param rotation          The rotation.
-     * @param type              The type.
-     * @param projectileClipped If the door is solid.
+     * Unflag a door object (0-3 type).
      */
-    public void unflagDoorObject(int x, int y, int rotation, int type, boolean projectileClipped) {
-        switch (type) {
-            case 0:
-                switch (rotation) {
-                    case 0:
-                        unflag(x, y, 0x80);
-                        unflag(x - 1, y, 0x8);
-                        break;
-                    case 1:
-                        unflag(x, y, 0x2);
-                        unflag(x, y + 1, 0x20);
-                        break;
-                    case 2:
-                        unflag(x, y, 0x8);
-                        unflag(x + 1, y, 0x80);
-                        break;
-                    case 3:
-                        unflag(x, y, 0x20);
-                        unflag(x, y - 1, 0x2);
-                        break;
-                }
-                break;
-            case 1:
-            case 3:
-                switch (rotation) {
-                    case 0:
-                        unflag(x, y, 0x1);
-                        unflag(x - 1, y + 1, 0x10);
-                        break;
-                    case 1:
-                        unflag(x, y, 0x4);
-                        unflag(x + 1, y + 1, 0x40);
-                        break;
-                    case 2:
-                        unflag(x, y, 0x10);
-                        unflag(x + 1, y - 1, 0x1);
-                        break;
-                    case 3:
-                        unflag(x, y, 0x40);
-                        unflag(x - 1, y - 1, 0x4);
-                        break;
-                }
-                break;
-            case 2:
-                switch (rotation) {
-                    case 0:
-                        unflag(x, y, 0x82);
-                        unflag(x - 1, y, 0x8);
-                        unflag(x, y + 1, 0x20);
-                        break;
-                    case 1:
-                        unflag(x, y, 0xA);
-                        unflag(x, y + 1, 0x20);
-                        unflag(x + 1, y, 0x80);
-                        break;
-                    case 2:
-                        unflag(x, y, 0x28);
-                        unflag(x + 1, y, 0x80);
-                        unflag(x, y - 1, 0x2);
-                        break;
-                    case 3:
-                        unflag(x, y, 0xA0);
-                        unflag(x, y - 1, 0x2);
-                        unflag(x - 1, y, 0x8);
-                        break;
-                }
-                break;
-        }
-        if (projectileClipped) {
-            switch (type) {
-                case 0:
-                    switch (rotation) {
-                        case 0:
-                            unflag(x, y, 0x10000);
-                            unflag(x - 1, y, 0x1000);
-                            break;
-                        case 1:
-                            unflag(x, y, 0x400);
-                            unflag(x, y + 1, 0x4000);
-                            break;
-                        case 2:
-                            unflag(x, y, 0x1000);
-                            unflag(x + 1, y, 0x10000);
-                            break;
-                        case 3:
-                            unflag(x, y, 0x4000);
-                            unflag(x, y - 1, 0x400);
-                            break;
-                    }
-                    break;
-                case 1:
-                case 3:
-                    switch (rotation) {
-                        case 0:
-                            unflag(x, y, 0x200);
-                            unflag(x - 1, y + 1, 0x2000);
-                            break;
-                        case 1:
-                            unflag(x, y, 0x800);
-                            unflag(x + 1, y + 1, 0x8000);
-                            break;
-                        case 2:
-                            unflag(x, y, 0x2000);
-                            unflag(x + 1, y - 1, 0x200);
-                            break;
-                        case 3:
-                            unflag(x, y, 0x8000);
-                            unflag(x - 1, y - 1, 0x800);
-                            break;
-                    }
-                    break;
-                case 2:
-                    switch (rotation) {
-                        case 0:
-                            unflag(x, y, 0x10400);
-                            unflag(x - 1, y, 0x1000);
-                            unflag(x, y + 1, 0x4000);
-                            break;
-                        case 1:
-                            unflag(x, y, 0x1400);
-                            unflag(x, y + 1, 0x4000);
-                            unflag(x + 1, y, 0x10000);
-                            break;
-                        case 2:
-                            unflag(x, y, 0x5000);
-                            unflag(x + 1, y, 0x10000);
-                            unflag(x, y - 1, 0x400);
-                            break;
-                        case 3:
-                            unflag(x, y, 0x14000);
-                            unflag(x, y - 1, 0x400);
-                            unflag(x - 1, y, 0x1000);
-                            break;
-                    }
-                    break;
+    fun unflagDoorObject(x: Int, y: Int, rotation: Int, type: Int, projectileClipped: Boolean) {
+        when (type) {
+            0 -> when (rotation) {
+                0 -> { unflag(x, y, 0x80); unflag(x - 1, y, 0x8) }
+                1 -> { unflag(x, y, 0x2); unflag(x, y + 1, 0x20) }
+                2 -> { unflag(x, y, 0x8); unflag(x + 1, y, 0x80) }
+                3 -> { unflag(x, y, 0x20); unflag(x, y - 1, 0x2) }
+            }
+            1, 3 -> when (rotation) {
+                0 -> { unflag(x, y, 0x1); unflag(x - 1, y + 1, 0x10) }
+                1 -> { unflag(x, y, 0x4); unflag(x + 1, y + 1, 0x40) }
+                2 -> { unflag(x, y, 0x10); unflag(x + 1, y - 1, 0x1) }
+                3 -> { unflag(x, y, 0x40); unflag(x - 1, y - 1, 0x4) }
+            }
+            2 -> when (rotation) {
+                0 -> { unflag(x, y, 0x82); unflag(x - 1, y, 0x8); unflag(x, y + 1, 0x20) }
+                1 -> { unflag(x, y, 0xA); unflag(x, y + 1, 0x20); unflag(x + 1, y, 0x80) }
+                2 -> { unflag(x, y, 0x28); unflag(x + 1, y, 0x80); unflag(x, y - 1, 0x2) }
+                3 -> { unflag(x, y, 0xA0); unflag(x, y - 1, 0x2); unflag(x - 1, y, 0x8) }
             }
         }
-    }
 
-    /**
-     * Gets the members.
-     *
-     * @return The members.
-     */
-    public boolean isMembers() {
-        return members;
-    }
-
-    /**
-     * Sets the members.
-     *
-     * @param members The members to set.
-     */
-    public void setMembers(boolean members) {
-        this.members = members;
-    }
-
-    /**
-     * Gets the plane.
-     *
-     * @return The plane.
-     */
-    public int getPlane() {
-        return plane;
-    }
-
-    /**
-     * Gets the landscape.
-     *
-     * @return The landscape.
-     */
-    public boolean[][] getLandscape() {
-        return landscape;
-    }
-
-    /**
-     * Sets the landscape.
-     *
-     * @param landscape The landscape to set.
-     */
-    public void setLandscape(boolean[][] landscape) {
-        this.landscape = landscape;
+        if (projectileClipped) {
+            when (type) {
+                0 -> when (rotation) {
+                    0 -> { unflag(x, y, 0x10000); unflag(x - 1, y, 0x1000) }
+                    1 -> { unflag(x, y, 0x400); unflag(x, y + 1, 0x4000) }
+                    2 -> { unflag(x, y, 0x1000); unflag(x + 1, y, 0x10000) }
+                    3 -> { unflag(x, y, 0x4000); unflag(x, y - 1, 0x400) }
+                }
+                1, 3 -> when (rotation) {
+                    0 -> { unflag(x, y, 0x200); unflag(x - 1, y + 1, 0x2000) }
+                    1 -> { unflag(x, y, 0x800); unflag(x + 1, y + 1, 0x8000) }
+                    2 -> { unflag(x, y, 0x2000); unflag(x + 1, y - 1, 0x200) }
+                    3 -> { unflag(x, y, 0x8000); unflag(x - 1, y - 1, 0x800) }
+                }
+                2 -> when (rotation) {
+                    0 -> { unflag(x, y, 0x10400); unflag(x - 1, y, 0x1000); unflag(x, y + 1, 0x4000) }
+                    1 -> { unflag(x, y, 0x1400); unflag(x, y + 1, 0x4000); unflag(x + 1, y, 0x10000) }
+                    2 -> { unflag(x, y, 0x5000); unflag(x + 1, y, 0x10000); unflag(x, y - 1, 0x400) }
+                    3 -> { unflag(x, y, 0x14000); unflag(x, y - 1, 0x400); unflag(x - 1, y, 0x1000) }
+                }
+            }
+        }
     }
 }
