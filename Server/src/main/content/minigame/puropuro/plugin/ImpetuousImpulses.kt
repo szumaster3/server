@@ -20,6 +20,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
+import shared.consts.Regions
 
 @Initializable
 class ImpetuousImpulses : MapZone("puro puro", true), Plugin<Any> {
@@ -71,7 +72,7 @@ class ImpetuousImpulses : MapZone("puro puro", true), Plugin<Any> {
     }
 
     override fun configure() {
-        registerRegion(10307)
+        registerRegion(Regions.PURO_PURO_10307)
         WHEAT.add(WheatSet(0, Location.create(2606, 4329, 0), Location.create(2606, 4328, 0)))
         WHEAT.add(WheatSet(1, Location.create(2596, 4331, 0), Location.create(2597, 4331, 0)))
         WHEAT.add(WheatSet(0, Location.create(2580, 4326, 0), Location.create(2580, 4325, 0)))

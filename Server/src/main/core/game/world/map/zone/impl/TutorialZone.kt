@@ -8,14 +8,26 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBuilder
+import core.plugin.Initializable
+import core.plugin.Plugin
+import shared.consts.Regions
 
 /**
  * Represents the tutorial zone area.
  */
-class TutorialZone : MapZone("tutorial", true) {
+@Initializable
+class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
+
+    override fun newInstance(arg: Any?): Plugin<Any?> {
+        ZoneBuilder.configure(this)
+        return this
+    }
 
     override fun configure() {
-        REGIONS.forEach(::registerRegion)
+        for (regionId in REGIONS) {
+            registerRegion(regionId)
+        }
     }
 
     override fun teleport(entity: Entity, type: Int, node: Node?): Boolean {
@@ -36,12 +48,16 @@ class TutorialZone : MapZone("tutorial", true) {
         return super.teleport(entity, type, node)
     }
 
+    override fun fireEvent(identifier: String, vararg args: Any): Any? {
+        return null
+    }
+
     companion object {
         /**
          * Represents the tutorial region ids.
          */
         private val REGIONS = intArrayOf(
-            12079, 12180, 12592, 12436, 12335, 12336
+            Regions.TUTORIAL_ISLAND_12079, Regions.TUTORIAL_ISLAND_12180, Regions.TUTORIAL_ISLAND_12592, Regions.TUTORIAL_ISLAND_12436, Regions.TUTORIAL_ISLAND_12335, Regions.TUTORIAL_ISLAND_12336
         )
     }
 }
