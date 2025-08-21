@@ -140,19 +140,33 @@ public final class Room {
             if (spot.getHotspot() == null) {
                 continue;
             }
+
+            boolean isDoor = spot.getHotspot() == BuildHotspot.DOOR_LEFT || spot.getHotspot() == BuildHotspot.DOOR_RIGHT;
             int index = chunk.getIndex(x, y, spot.getHotspot().getObjectId(house.getStyle()));
             Scenery[][] objects = chunk.getObjects(index);
             Scenery object = objects[x][y];
+
             if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
-                if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
+                if (isDoor) {
+                    Decoration defaultDoor = spot.getHotspot().getDecorations()[1];
+                    int id = defaultDoor.getObjectId(house.getStyle());
+                    SceneryBuilder.replace(object, object.transform(
+                            id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+                } else if (spot.getDecorationIndex() > -1
+                        && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
                     int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
                     if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
                         id += house.getCrest().ordinal();
                     }
-                    SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
-                } else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
-                    chunk.add(object.transform(house.getStyle().getWindow().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
+                    SceneryBuilder.replace(object, object.transform(
+                            id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+                } else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle())
+                        || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
+                    chunk.add(object.transform(
+                            house.getStyle().getWindow().getObjectId(house.getStyle()),
+                            object.getRotation(), object.getType()));
                 }
+
                 int[] pos = RegionChunk.getRotatedPosition(x, y, object.getSizeX(), object.getSizeY(), 0, rotation.toInteger());
                 spot.setCurrentX(pos[0]);
                 spot.setCurrentY(pos[1]);
@@ -183,7 +197,10 @@ public final class Room {
                     if (object != null) {
                         boolean isBuilt = object instanceof Constructed;
                         boolean isWall = object.getId() == 13065 || object.getId() == house.getStyle().getWallId();
-                        boolean isDoor = object.getId() == house.getStyle().getDoorId() || object.getId() == house.getStyle().getSecondDoorId();
+                        boolean isDoor = object.getId() == house.getStyle().getDoorId()
+                                || object.getId() == house.getStyle().getSecondDoorId()
+                                || isDoorDecoration(object.getId(), house.getStyle());
+
                         if (!isBuilt && !isWall && !isDoor) {
                             SceneryBuilder.remove(object);
                             chunk.remove(object);
@@ -196,7 +213,6 @@ public final class Room {
 
     /**
      * Replaces the door hotspots with doors, walls, or passageways as needed.
-     * TODO: it is believed that doors authentically remember their open/closed state for the usual duration (see e.g. https://www.youtube.com/watch?v=nRGux739h8s 1:00 vs 1:55), but this is not possible with the current HouseManager approach, which deallocates the instance as soon as the player leaves.
      *
      * @param housePlane The room's plane in house.
      * @param house      The house manager.
@@ -206,6 +222,7 @@ public final class Room {
         Room[][][] rooms = house.getRooms();
         int rx = chunk.getCurrentBase().getChunkX();
         int ry = chunk.getCurrentBase().getChunkY();
+
         for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
             for (int x = 0; x < 8; x++) {
                 for (int y = 0; y < 8; y++) {
@@ -214,34 +231,80 @@ public final class Room {
                         boolean edge = false;
                         Room otherRoom = null;
                         switch (object.getRotation()) {
-                            case 0: //east
+                            case 0: // east
                                 edge = rx == 0;
                                 otherRoom = edge ? null : rooms[housePlane][rx - 1][ry];
                                 break;
-                            case 1: //south
+                            case 1: // south
                                 edge = ry == 7;
                                 otherRoom = edge ? null : rooms[housePlane][rx][ry + 1];
                                 break;
-                            case 2: //west
+                            case 2: // west
                                 edge = rx == 7;
                                 otherRoom = edge ? null : rooms[housePlane][rx + 1][ry];
                                 break;
-                            case 3: //north
+                            case 3: // north
                                 edge = ry == 0;
                                 otherRoom = edge ? null : rooms[housePlane][rx][ry - 1];
                                 break;
                             default:
                                 log(this.getClass(), Log.ERR, "Impossible rotation when placing doors??");
                         }
-                        int replaceId = getReplaceId(housePlane, house, this, edge, otherRoom, object);
-                        if (replaceId == -1) {
+
+                        if (edge) {
+                            int wallId = house.getStyle().getWallId();
+                            SceneryBuilder.replace(object, object.transform(wallId));
                             continue;
                         }
-                        SceneryBuilder.replace(object, object.transform(replaceId));
+
+                        if (otherRoom != null) {
+                            int newId = getDoorDecorationId(object, house.getStyle());
+                            if (newId != -1) {
+                                SceneryBuilder.replace(object, object.transform(newId));
+                            }
+                            continue;
+                        }
+
+                        int wallId = house.getStyle().getWallId();
+                        SceneryBuilder.replace(object, object.transform(wallId));
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Returns the correct door for the hotspot (left/right) in a given house style.
+     */
+    private int getDoorDecorationId(Scenery hotspot, HousingStyle style) {
+        if (hotspot.getId() == 15313) { // left
+            for (Decoration deco : BuildHotspot.DOOR_LEFT.getDecorations()) {
+                if (deco != null) return deco.getObjectId(style);
+            }
+        }
+        if (hotspot.getId() == 15314) { // right
+            for (Decoration deco : BuildHotspot.DOOR_RIGHT.getDecorations()) {
+                if (deco != null) return deco.getObjectId(style);
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Checks whether a given objectId is a door decoration (left or right).
+     */
+    private boolean isDoorDecoration(int objectId, HousingStyle style) {
+        for (Decoration deco : BuildHotspot.DOOR_LEFT.getDecorations()) {
+            if (deco != null && deco.getObjectId(style) == objectId) {
+                return true;
+            }
+        }
+        for (Decoration deco : BuildHotspot.DOOR_RIGHT.getDecorations()) {
+            if (deco != null && deco.getObjectId(style) == objectId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

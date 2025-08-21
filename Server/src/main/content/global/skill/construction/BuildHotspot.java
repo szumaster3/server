@@ -203,6 +203,9 @@ public enum BuildHotspot {
 
     WINDOW(Scenery.WINDOW_13830, BuildHotspotType.RECURSIVE, BuildingUtils.BUILD_HIGH_ANIM, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_WINDOW, Decoration.WHITEWASHED_STONE_WINDOW, Decoration.FREMENNIK_WINDOW, Decoration.TROPICAL_WOOD_WINDOW, Decoration.FANCY_STONE_WINDOW),
 
+    DOOR_LEFT(Scenery.DOOR_HOTSPOT_15313, BuildHotspotType.LINKED, null, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_DOOR_LEFT, Decoration.WHITEWASHED_STONE_DOOR_LEFT,Decoration.FREMENNIK_STYLE_WOOD_DOOR_LEFT, Decoration.TROPICAL_WOOD_DOOR_LEFT,  Decoration.FANCY_STONE_DOOR_LEFT),
+    DOOR_RIGHT(Scenery.DOOR_HOTSPOT_15314, BuildHotspotType.LINKED, null, Decoration.BASIC_WOOD_WINDOW, Decoration.BASIC_STONE_DOOR_RIGHT,  Decoration.WHITEWASHED_STONE_DOOR_RIGHT, Decoration.FREMENNIK_STYLE_WOOD_DOOR_RIGHT, Decoration.FANCY_STONE_SECOND_DOOR_RIGHT),
+
     FLATPACK(38427, BuildHotspotType.INDIVIDUAL, BuildingUtils.BUILD_MID_ANIM, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK, Decoration.FLATPACK),
     ;
 
@@ -231,6 +234,7 @@ public enum BuildHotspot {
         linkedHotspots.add(new BuildHotspot[]{DUNGEON_DOOR_LEFT, DUNGEON_DOOR_RIGHT});
         linkedHotspots.add(new BuildHotspot[]{DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2});
         linkedHotspots.add(new BuildHotspot[]{SMALL_PLANT_1, SMALL_PLANT1});
+        linkedHotspots.add(new BuildHotspot[]{DOOR_LEFT, DOOR_RIGHT});
         linkedHotspots.add(new BuildHotspot[]{SHELVES, SHELVES_2});// linkedHotspots.add(new BuildHotspot[]{HABITAT_1, HABITAT_2});
     }
 

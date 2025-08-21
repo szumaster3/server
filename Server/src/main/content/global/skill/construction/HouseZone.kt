@@ -8,6 +8,7 @@ import core.game.world.map.RegionManager.forId
 import core.game.world.map.RegionManager.removeRegion
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneRestriction
+import core.game.world.map.zone.ZoneType
 
 class HouseZone(
     private val house: HouseManager,
@@ -17,6 +18,7 @@ class HouseZone(
     private val restrictedItems = (7668..7737)
 
     override fun configure() {
+        zoneType = ZoneType.P_O_H.id
         unregisterOldRegions()
         registerRegion(house.houseRegion.id)
         if (house.dungeonRegion != null) {

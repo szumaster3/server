@@ -64,8 +64,15 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.SMALL_PLANT_1, 3, 1),
             new Hotspot(BuildHotspot.SMALL_PLANT_2, 4, 5),
             new Hotspot(BuildHotspot.BIG_PLANT_1, 6, 0, 7, 1),
-            new Hotspot(BuildHotspot.TREE_1, 6, 6, 7, 7)),
-
+            new Hotspot(BuildHotspot.TREE_1, 6, 6, 7, 7),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 4),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 0, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 3, 7),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 4, 7),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 7, 4),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 7, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 3, 0)),
     /**
      * The kitchen.
      */
@@ -85,7 +92,11 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.SINK, 7, 3, 7, 4),
             new Hotspot(BuildHotspot.SHELVES, 1, 7),
             new Hotspot(BuildHotspot.SHELVES, 6, 7),
-            new Hotspot(BuildHotspot.SHELVES_2, 7, 6)),
+            new Hotspot(BuildHotspot.SHELVES_2, 7, 6),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 4),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 0, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 3, 0)),
 
     /**
      * Dining room.
@@ -114,7 +125,13 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.DINING_BENCH_1, 4, 2),
             new Hotspot(BuildHotspot.DINING_BENCH_1, 5, 2),
             new Hotspot(BuildHotspot.ROPE_BELL_PULL, 0, 0),
-            new Hotspot(BuildHotspot.DINING_TABLE, 2, 3, 5, 4)),
+            new Hotspot(BuildHotspot.DINING_TABLE, 2, 3, 5, 4),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 4),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 0, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 7, 4),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 7, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 3, 0)),
 
     /**
      * Workshop.
@@ -136,7 +153,11 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.TOOL2, 6, 0),
             new Hotspot(BuildHotspot.TOOL1, 1, 0),
             new Hotspot(BuildHotspot.TOOL3, 0, 1),
-            new Hotspot(BuildHotspot.TOOL5, 0, 6)),
+            new Hotspot(BuildHotspot.TOOL5, 0, 6),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 3, 7),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 4, 7),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 3, 0)),
 
     /**
      * Bedroom.
@@ -189,7 +210,11 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.BEDROOM_RUG3, 1, 1),
             new Hotspot(BuildHotspot.BEDROOM_RUG3, 1, 4),
             new Hotspot(BuildHotspot.BEDROOM_RUG3, 6, 1),
-            new Hotspot(BuildHotspot.BEDROOM_RUG3, 6, 4)),
+            new Hotspot(BuildHotspot.BEDROOM_RUG3, 6, 4),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 4),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 3),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 3, 0)),
 
     /**
      * Skill hall.
@@ -409,7 +434,9 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.MAGIC_WARDROBE, 3, 7, 5, 7),
             new Hotspot(BuildHotspot.CAPE_RACK, 6, 6),
             new Hotspot(BuildHotspot.TOY_BOX, 7, 3, 7, 4),
-            new Hotspot(BuildHotspot.COSTUME_BOX, 3, 3, 4, 4)),
+            new Hotspot(BuildHotspot.COSTUME_BOX, 3, 3, 4, 4),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 3, 0)),
 
     /**
      * Chapel room.
@@ -437,7 +464,11 @@ public enum RoomProperties {
             new Hotspot(BuildHotspot.CHAPEL_WINDOW, 2, 7),
             new Hotspot(BuildHotspot.CHAPEL_WINDOW, 5, 7),
             new Hotspot(BuildHotspot.CHAPEL_WINDOW, 7, 5),
-            new Hotspot(BuildHotspot.CHAPEL_WINDOW, 7, 2)),
+            new Hotspot(BuildHotspot.CHAPEL_WINDOW, 7, 2),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 0, 4),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 0, 3),
+            new Hotspot(BuildHotspot.DOOR_RIGHT, 4, 0),
+            new Hotspot(BuildHotspot.DOOR_LEFT, 3, 0)),
 
     /**
      * Portal chamber.
