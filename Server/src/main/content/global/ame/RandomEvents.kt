@@ -44,7 +44,7 @@ enum class RandomEvents(
     SANDWICH_LADY(npc = SandwichLadyNPC()),
     GENIE(npc = GenieNPC()),
     CERTER(
-        npc = CerterNPC(),
+        CerterNPC(),
         loot =
             WeightBasedTable.create(
                 WeightedItem(Items.UNCUT_SAPPHIRE_1623, 1, 1, 3.4),

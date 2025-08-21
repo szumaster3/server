@@ -7,6 +7,7 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.timer.impl.AntiMacro
+import shared.consts.Components
 import shared.consts.Items
 
 /**
@@ -14,7 +15,7 @@ import shared.consts.Items
  * @author Ceikry (March 18, 2021)
  */
 class CerterInterface : InterfaceListener {
-    val CERTER_INTERFACE = 184
+    val CERTER_INTERFACE = Components.MACRO_CERTER_IDENTIFY_AN_OBJECT_184
     val OPTION_A_CHILD = 1
     val OPTION_B_CHILD = 2
     val OPTION_C_CHILD = 3

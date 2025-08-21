@@ -13,13 +13,17 @@ import shared.consts.Sounds
 
 /**
  * Represents the Certer NPC.
- * @author Ceikry (March 18, 2021)
+ * @author Ceikry
  */
+val certersNPC = listOf(NPCs.NILES_2536, NPCs.MILES_2537, NPCs.GILES_2538).random()
+// If in region 11924 = npc + 820
+
 class CerterNPC(
-    override var loot: WeightBasedTable? = null,
-) : RandomEventNPC(NPCs.GILES_2538) {
-    lateinit var pName: String
-    lateinit var phrases: Array<String>
+    override var loot: WeightBasedTable? = null
+) : RandomEventNPC(certersNPC) {
+
+    private lateinit var pName: String
+    private lateinit var phrases: Array<String>
 
     override fun tick() {
         if (!timerPaused) {
@@ -40,15 +44,16 @@ class CerterNPC(
 
     override fun init() {
         super.init()
-        pName = player.username.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
-        phrases =
-            arrayOf(
-                "Greetings $pName, I need your help.",
-                "ehem... Hello $pName, please talk to me!",
-                "Hello, are you there $pName?",
-                "It's really rude to ignore someone, $pName!",
-                "No-one ignores me!",
-            )
+        pName = player.username.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase() else it.toString()
+        }
+        phrases = arrayOf(
+            "Greetings $pName, I need your help.",
+            "Ehem... Hello $pName, please talk to me!",
+            "Hello, are you there $pName?",
+            "It's really rude to ignore someone, $pName!",
+            "No-one ignores me!"
+        )
         player.setAttribute(GameAttributes.RE_PAUSE, false)
         player.setAttribute(GameAttributes.CERTER_REWARD, false)
         sendChat(phrases[0])

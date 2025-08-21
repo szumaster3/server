@@ -9,6 +9,7 @@ import core.game.node.entity.impl.PulseType
 import core.game.system.timer.impl.AntiMacro
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
+import shared.consts.Components
 
 /**
  * Represents the Certer dialogue.
@@ -17,7 +18,7 @@ import shared.consts.Animations
 class CerterDialogue(
     val initial: Boolean,
 ) : DialogueFile() {
-    val CERTER_INTERFACE = 184
+    val CERTER_INTERFACE = Components.MACRO_CERTER_IDENTIFY_AN_OBJECT_184
 
     override fun handle(
         componentID: Int,
