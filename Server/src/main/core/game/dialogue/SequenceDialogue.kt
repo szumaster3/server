@@ -1,10 +1,10 @@
 package core.game.dialogue
 
 import core.api.sendInputDialogue
-import core.game.dialogue.SequenceDialogue.DialogueLine
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.tools.END_DIALOGUE
 
 /**
  * Utility for sequential dialogue handling.
@@ -26,6 +26,7 @@ object SequenceDialogue {
      * Represents a single dialogue entry in a sequence.
      */
     sealed class DialogueLine {
+
         /**
          * A standard speech line (player or NPCs).
          *
@@ -33,15 +34,31 @@ object SequenceDialogue {
          * @param expression (Optional) Facial animation.
          * @param messages Dialogue message lines.
          */
-        data class SpeechLine(val entity: Entity?, val expression: FaceAnim?, val messages: Array<out String>) :
-            DialogueLine()
+        data class SpeechLine(
+            val entity: Entity?,
+            val expression: FaceAnim?,
+            val messages: Array<out String>
+        ) : DialogueLine()
 
         /**
          * A plain dialogue line directly sent to the player.
          *
          * @param messages Dialogue message lines.
          */
-        data class messageLine(val messages: Array<out String>) : DialogueLine()
+        data class MessageLine(val messages: Array<out String>) : DialogueLine() {
+            override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (javaClass != other?.javaClass) return false
+
+                other as MessageLine
+
+                return messages.contentEquals(other.messages)
+            }
+
+            override fun hashCode(): Int {
+                return messages.contentHashCode()
+            }
+        }
 
         /**
          * An item-based dialogue line.
@@ -58,7 +75,11 @@ object SequenceDialogue {
          * @param secondId Second item ID to show.
          * @param messages Dialogue message lines.
          */
-        data class DoubleItemLine(val firstId: Int, val secondId: Int, val messages: Array<out String>) : DialogueLine()
+        data class DoubleItemLine(
+            val firstId: Int,
+            val secondId: Int,
+            val messages: Array<out String>
+        ) : DialogueLine()
 
         /**
          * An input line for string or numeric value input.
@@ -67,32 +88,48 @@ object SequenceDialogue {
          * @param prompt Prompt message displayed to the player.
          * @param handler Callback receiving the entered value (String or Int).
          */
-        data class InputLine(val numeric: Boolean, val prompt: String, val handler: (Any, (Boolean) -> Unit) -> Unit) : DialogueLine()
+        data class InputLine(
+            val numeric: Boolean,
+            val prompt: String,
+            val handler: (Any, (Boolean) -> Unit) -> Unit
+        ) : DialogueLine()
 
         /**
          * An options line for selecting one choice.
          *
-         * @param title   Options title.
+         * @param title Options title.
          * @param options List of option strings.
          * @param onSelect Callback invoked with selected index (1-based).
          */
-        data class OptionsLine(val title: String, val options: Array<out String>, val onSelect: (Int) -> Unit) :
-            DialogueLine()
+        data class OptionsLine(
+            val title: String,
+            val options: Array<out String>,
+            val onSelect: (Int) -> Unit
+        ) : DialogueLine()
     }
 
     /**
      * Sends a dialogue sequence to a player.
      *
-     * @param player     Target player.
-     * @param lines      Dialogue lines to show.
+     * @param player Target player.
+     * @param lines Dialogue lines to show.
      * @param onComplete (Optional) callback after sequence ends.
      */
     fun sendSequenceDialogue(
-        player: Player, lines: List<DialogueLine>, onComplete: (() -> Unit)? = null
+        player: Player,
+        lines: List<DialogueLine>,
+        onComplete: (() -> Unit)? = null
     ) {
         fun sendAt(i: Int) {
             if (i >= lines.size) {
                 onComplete?.invoke()
+                try {
+                    val current = player.dialogueInterpreter.dialogue
+                    if (current != null && current.file != null) {
+                        current.file.stage = (END_DIALOGUE)
+                    }
+                } catch (_: Exception) {}
+                player.dialogueInterpreter.close()
                 return
             }
 
@@ -108,8 +145,7 @@ object SequenceDialogue {
                     player.dialogueInterpreter.sendDialogues(entity, expr, *entry.messages)
                     player.dialogueInterpreter.addAction { _, _ -> sendAt(i + 1) }
                 }
-
-                is DialogueLine.messageLine -> {
+                is DialogueLine.MessageLine -> {
                     if (entry.messages.isEmpty()) {
                         sendAt(i + 1)
                         return
@@ -117,39 +153,38 @@ object SequenceDialogue {
                     player.dialogueInterpreter.sendDialogue(*entry.messages)
                     player.dialogueInterpreter.addAction { _, _ -> sendAt(i + 1) }
                 }
-
                 is DialogueLine.ItemLine -> {
-                    if (entry.messages.isEmpty()) {
+                    if (entry.messages.isEmpty() || entry.itemId <= 0) {
                         sendAt(i + 1)
                         return
                     }
                     player.dialogueInterpreter.sendItemMessage(entry.itemId, *entry.messages)
                     player.dialogueInterpreter.addAction { _, _ -> sendAt(i + 1) }
                 }
-
                 is DialogueLine.DoubleItemLine -> {
-                    if (entry.messages.isEmpty()) {
+                    if (entry.messages.isEmpty() || entry.firstId <= 0 || entry.secondId <= 0) {
                         sendAt(i + 1)
                         return
                     }
-                    if (entry.firstId <= 0 || entry.secondId <= 0) {
-                        throw IllegalArgumentException("Invalid DoubleItemLine item IDs: firstId=${entry.firstId}, secondId=${entry.secondId}")
-                    }
                     player.dialogueInterpreter.sendDoubleItemMessage(
-                        entry.firstId, entry.secondId, entry.messages.joinToString("\n")
+                        entry.firstId,
+                        entry.secondId,
+                        entry.messages.joinToString("\n")
                     )
                     player.dialogueInterpreter.addAction { _, _ -> sendAt(i + 1) }
                 }
-
                 is DialogueLine.InputLine -> {
                     val type = if (entry.numeric) InputType.NUMERIC else InputType.STRING_SHORT
                     sendInputDialogue(player, type, entry.prompt) { value ->
                         entry.handler(value) { continueDialogue ->
-                            if (continueDialogue) sendAt(i + 1) else onComplete?.invoke()
+                            if (continueDialogue) sendAt(i + 1)
+                            else {
+                                onComplete?.invoke()
+                                player.dialogueInterpreter.close()
+                            }
                         }
                     }
                 }
-
                 is DialogueLine.OptionsLine -> {
                     require(entry.options.size <= 5) {
                         "OptionsLine at index $i has more than 5 options (was: ${entry.options.size})"
@@ -166,15 +201,23 @@ object SequenceDialogue {
             }
         }
 
-        if (lines.isNotEmpty()) sendAt(0) else onComplete?.invoke()
+        if (lines.isNotEmpty()) {
+            sendAt(0)
+        } else {
+            onComplete?.invoke()
+            player.dialogueInterpreter.close()
+        }
     }
 
     /**
      * Sends a dialogue sequence using vararg syntax.
+     *
      * @see SequenceDialogue
      */
     fun sendSequenceDialogue(
-        player: Player, vararg lines: DialogueLine, onComplete: (() -> Unit)? = null
+        player: Player,
+        vararg lines: DialogueLine,
+        onComplete: (() -> Unit)? = null
     ) = sendSequenceDialogue(player, listOf(*lines), onComplete)
 
     /**
@@ -184,29 +227,24 @@ object SequenceDialogue {
      * @param messages Vararg lines of message
      * @throws IllegalArgumentException if no messages are provided
      */
-    fun playerLine(expression: FaceAnim?, vararg messages: String): DialogueLine.SpeechLine {
-        require(messages.isNotEmpty()) { "Player dialogue must not be empty." }
-        return DialogueLine.SpeechLine(null, expression, messages)
-    }
+    fun playerLine(expression: FaceAnim?, vararg messages: String) =
+        DialogueLine.SpeechLine(null, expression, messages)
 
     /**
      * Creates a player speech line from a single multiline string.
      */
-    fun playerLine(expression: FaceAnim?, message: String): DialogueLine.SpeechLine =
+    fun playerLine(expression: FaceAnim?, message: String) =
         DialogueLine.SpeechLine(null, expression, splitLines(message))
 
     /**
      * Creates a plain message dialogue line (no actor or animation).
      */
-    fun dialogueLine(vararg messages: String): DialogueLine.messageLine {
-        require(messages.isNotEmpty()) { "Dialogue must not be empty." }
-        return DialogueLine.messageLine(messages)
-    }
+    fun dialogueLine(vararg messages: String) = DialogueLine.MessageLine(messages)
 
     /**
      * Creates a plain message dialogue line from a multiline string.
      */
-    fun dialogueLine(message: String): DialogueLine.messageLine = DialogueLine.messageLine(splitLines(message))
+    fun dialogueLine(message: String) = DialogueLine.MessageLine(splitLines(message))
 
     /**
      * Creates an NPC speech line with multiple messages.
@@ -216,69 +254,49 @@ object SequenceDialogue {
      * @param messages Vararg lines of message
      * @throws IllegalArgumentException if no messages are provided
      */
-    fun npcLine(npc: Entity, expression: FaceAnim?, vararg messages: String): DialogueLine.SpeechLine {
-        require(messages.isNotEmpty()) { "Empty dialogue line. At least one message is required." }
-        return DialogueLine.SpeechLine(npc, expression, messages)
-    }
+    fun npcLine(npc: Entity, expression: FaceAnim?, vararg messages: String) =
+        DialogueLine.SpeechLine(npc, expression, messages)
 
     /**
      * Creates an NPC speech line from a single multiline string.
      */
-    fun npcLine(npc: Entity, expression: FaceAnim?, message: String): DialogueLine.SpeechLine {
-        require(message.isNotEmpty()) { "Invalid NPC dialogue: cannot be empty." }
-        return DialogueLine.SpeechLine(npc, expression, splitLines(message))
-    }
+    fun npcLine(npc: Entity, expression: FaceAnim?, message: String) =
+        DialogueLine.SpeechLine(npc, expression, splitLines(message))
 
     /**
      * Creates an NPC speech line from a single multiline string.
      */
     fun npcLine(npc: Any, expression: FaceAnim?, message: String): DialogueLine.SpeechLine {
-        require(message.isNotEmpty()) { "Invalid NPC dialogue: cannot be empty." }
-
-        val npcEntity = when (npc) {
-            is NPC -> npc
-            is Int -> NPC(npc)
-            else -> throw IllegalArgumentException("Invalid NPC type: ${npc::class.simpleName}")
-        }
-
+        val npcEntity =
+            when (npc) {
+                is NPC -> npc
+                is Int -> NPC(npc)
+                else -> throw IllegalArgumentException("Invalid NPC type: ${npc::class.simpleName}")
+            }
         return DialogueLine.SpeechLine(npcEntity, expression, splitLines(message))
     }
 
     /**
      * Creates an item dialogue line showing an item with messages.
      */
-    fun itemLine(itemId: Int, vararg messages: String): DialogueLine.ItemLine {
-        require(itemId > 0) { "Item ID must be positive and non-zero." }
-        require(messages.isNotEmpty()) { "Empty item line. At least one message is required." }
-        return DialogueLine.ItemLine(itemId, messages)
-    }
+    fun itemLine(itemId: Int, vararg messages: String) = DialogueLine.ItemLine(itemId, messages)
 
     /**
      * Creates an item dialogue from a single multiline string.
      */
-    fun itemLine(itemId: Int, message: String): DialogueLine.ItemLine {
-        require(itemId > 0) { "Item ID must be positive and non-zero." }
-        return DialogueLine.ItemLine(itemId, splitLines(message))
-    }
+    fun itemLine(itemId: Int, message: String) = DialogueLine.ItemLine(itemId, splitLines(message))
 
     /**
      * Creates a double-item dialogue line with messages.
      */
-    fun doubleItemLine(firstId: Int, secondId: Int, vararg messages: String): DialogueLine.DoubleItemLine {
-        require(firstId > 0) { "First item ID must be positive and non-zero." }
-        require(secondId > 0) { "Second item ID must be positive and non-zero." }
-        require(messages.isNotEmpty()) { "Empty dialogue line. At least one message is required." }
-        return DialogueLine.DoubleItemLine(firstId, secondId, messages)
-    }
+    fun doubleItemLine(firstId: Int, secondId: Int, vararg messages: String) =
+        DialogueLine.DoubleItemLine(firstId, secondId, messages)
 
     /**
      * Creates a double-item dialogue line from a single multiline string.
      */
-    fun doubleItemLine(firstId: Int, secondId: Int, message: String): DialogueLine.DoubleItemLine {
-        require(firstId > 0) { "First item ID must be positive and non-zero." }
-        require(secondId > 0) { "Second item ID must be positive and non-zero." }
-        return DialogueLine.DoubleItemLine(firstId, secondId, splitLines(message))
-    }
+    fun doubleItemLine(firstId: Int, secondId: Int, message: String) =
+        DialogueLine.DoubleItemLine(firstId, secondId, splitLines(message))
 
     /**
      * Creates an input dialogue line with a prompt and a handler.
@@ -293,112 +311,84 @@ object SequenceDialogue {
      * @param options Options (1-5)
      * @param onSelect Callback with selected index (1-based)
      */
-    fun options(title: String, vararg options: String, onSelect: (Int) -> Unit): DialogueLine.OptionsLine {
-        require(options.isNotEmpty()) { "Options must not be empty." }
-        require(options.size in 1..5) { "Options value between 1 and 5, got [${options.size}]." }
-        return DialogueLine.OptionsLine(title, options, onSelect)
-    }
+    fun options(title: String, vararg options: String, onSelect: (Int) -> Unit) =
+        DialogueLine.OptionsLine(title, options, onSelect)
 
-    /**
-     * DSL-style builder for sequential dialogues.
-     */
+    /** DSL-style builder for sequential dialogues. */
     fun dialogue(player: Player, block: DialogueBuilder.() -> Unit) {
         val builder = DialogueBuilder().apply(block)
         sendSequenceDialogue(player, builder.lines, builder.onComplete)
     }
 
-    /**
-     * DSL builder for dialogue sequence.
-     */
+    /** DSL builder for dialogue sequence. */
     class DialogueBuilder {
         val lines = mutableListOf<DialogueLine>()
         var onComplete: (() -> Unit)? = null
 
-        fun message(vararg message: String) {
-            lines += dialogueLine(*message)
-        }
+        fun message(vararg message: String) = lines.add(dialogueLine(*message))
 
-        fun message(message: String) {
-            lines += dialogueLine(*splitLines(message))
-        }
+        fun message(message: String) = lines.add(dialogueLine(*splitLines(message)))
 
-        fun player(message: String) {
-            lines += playerLine(FaceAnim.HALF_GUILTY, *splitLines(message))
-        }
+        fun player(message: String) =
+            lines.add(playerLine(FaceAnim.HALF_GUILTY, *splitLines(message)))
 
-        fun player(expression: FaceAnim?, message: String) {
-            lines += playerLine(expression, *splitLines(message))
-        }
+        fun player(expression: FaceAnim?, message: String) =
+            lines.add(playerLine(expression, *splitLines(message)))
 
-        fun player(expression: FaceAnim?, vararg message: String) {
-            lines += playerLine(expression, *message)
-        }
+        fun player(expression: FaceAnim?, vararg message: String) =
+            lines.add(playerLine(expression, *message))
 
-        fun player(vararg message: String) {
-            lines += playerLine(FaceAnim.HALF_GUILTY, *message)
-        }
+        fun player(vararg message: String) = lines.add(playerLine(FaceAnim.HALF_GUILTY, *message))
 
-        fun npc(npc: Entity, message: String) {
-            lines += npcLine(npc, FaceAnim.HALF_GUILTY, *splitLines(message))
-        }
+        fun npc(npc: Entity, message: String) =
+            lines.add(npcLine(npc, FaceAnim.HALF_GUILTY, *splitLines(message)))
 
-        fun npc(npc: Entity, expression: FaceAnim?, message: String) {
-            lines += npcLine(npc, expression, *splitLines(message))
-        }
+        fun npc(npc: Entity, expression: FaceAnim?, message: String) =
+            lines.add(npcLine(npc, expression, *splitLines(message)))
 
-        fun npc(npc: Entity, expression: FaceAnim?, vararg message: String) {
-            lines += npcLine(npc, expression, *message)
-        }
+        fun npc(npc: Entity, expression: FaceAnim?, vararg message: String) =
+            lines.add(npcLine(npc, expression, *message))
 
         fun npc(npcId: Int, expression: FaceAnim?, vararg message: String) {
             val split = message.flatMap { splitLines(it).toList() }.toTypedArray()
-            lines += npcLine(NPC(npcId), expression, *split)
+            lines.add(npcLine(NPC(npcId), expression, *split))
         }
 
-        fun npc(npc: Entity, vararg message: String) {
-            lines += npcLine(npc, FaceAnim.HALF_GUILTY, *message)
-        }
+        fun npc(npc: Entity, vararg message: String) =
+            lines.add(npcLine(npc, FaceAnim.HALF_GUILTY, *message))
 
-        fun npc(npc: Int, vararg message: String) {
-            lines += npcLine(NPC(npc), FaceAnim.HALF_GUILTY, *message)
-        }
+        fun npc(npc: Int, vararg message: String) =
+            lines.add(npcLine(NPC(npc), FaceAnim.HALF_GUILTY, *message))
 
-        fun npc(npc: Int, message: String) {
-            lines += npcLine(NPC(npc), FaceAnim.HALF_GUILTY, *splitLines(message))
-        }
+        fun npc(npc: Int, message: String) =
+            lines.add(npcLine(NPC(npc), FaceAnim.HALF_GUILTY, *splitLines(message)))
 
         fun npc(npc: Any, expression: FaceAnim?, vararg message: String) {
-            val npcEntity = when (npc) {
-                is NPC -> npc
-                is Int -> NPC(npc)
-                else -> throw IllegalArgumentException("Invalid NPC: ${npc::class.simpleName}.")
-            }
-            lines += npcLine(npcEntity, expression, *message)
+            val npcEntity =
+                when (npc) {
+                    is NPC -> npc
+                    is Int -> NPC(npc)
+                    else -> throw IllegalArgumentException("Invalid NPC: ${npc::class.simpleName}.")
+                }
+            lines.add(npcLine(npcEntity, expression, *message))
         }
 
-        fun item(itemId: Int, vararg message: String) {
-            lines += itemLine(itemId, *message)
-        }
+        fun item(itemId: Int, vararg message: String) = lines.add(itemLine(itemId, *message))
 
-        fun item(itemId: Int, message: String) {
-            lines += itemLine(itemId, *splitLines(message))
-        }
+        fun item(itemId: Int, message: String) = lines.add(itemLine(itemId, *splitLines(message)))
 
-        fun doubleItem(itemId1: Int, itemId2: Int, vararg message: String) {
-            lines += doubleItemLine(itemId1, itemId2, *message)
-        }
+        fun doubleItem(itemId1: Int, itemId2: Int, vararg message: String) =
+            lines.add(doubleItemLine(itemId1, itemId2, *message))
 
-        fun doubleItem(itemId1: Int, itemId2: Int, message: String) {
-            lines += doubleItemLine(itemId1, itemId2, *splitLines(message))
-        }
+        fun doubleItem(itemId1: Int, itemId2: Int, message: String) =
+            lines.add(doubleItemLine(itemId1, itemId2, *splitLines(message)))
 
-        fun input(numeric: Boolean, prompt: String, handler: (Any, (Boolean) -> Unit) -> Unit) {
-            lines += inputLine(numeric, prompt, handler)
-        }
+        fun input(numeric: Boolean, prompt: String, handler: (Any, (Boolean) -> Unit) -> Unit) =
+            lines.add(inputLine(numeric, prompt, handler))
 
         fun options(title: String?, vararg options: String, onSelect: (Int) -> Unit) {
             val realTitle = title ?: "Select an Option"
-            lines += SequenceDialogue.options(realTitle, *options, onSelect = onSelect)
+            lines.add(SequenceDialogue.options(realTitle, *options, onSelect = onSelect))
         }
 
         fun end(callback: () -> Unit) {
