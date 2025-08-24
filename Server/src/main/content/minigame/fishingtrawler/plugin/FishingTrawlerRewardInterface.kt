@@ -6,7 +6,7 @@ import core.game.interaction.InterfaceListener
 /**
  * Represents the Fishing trawler reward interface.
  */
-class FishingTrawlerRewardListener : InterfaceListener {
+class FishingTrawlerRewardInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         onOpen(FishingTrawlerContainer.INTERFACE_ID) { player, _ ->
