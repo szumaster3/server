@@ -1,13 +1,10 @@
 package content.region.fremennik.plugin
 
+import content.region.fremennik.dialogue.JarvaldTravelDialogue
 import core.api.*
-import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.item.Item
 import core.game.world.map.Location
-import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Scenery
@@ -112,23 +109,9 @@ class FremennikPlugin : InteractionListener {
          * Handles travel between Waterbirth Island and Rellekka.
          */
 
-        arrayOf(2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438).forEach { id ->
-            on(id, IntType.NPC, "option:travel") { player, npc ->
-                dialogue(player) {
-                    options("Leave island?", "YES", "NO") { opt ->
-                        if (npc.id == 2438 && opt == 1) {
-                            FremennikShipHelper.sail(player, Travel.WATERBIRTH_TO_RELLEKKA)
-                        } else if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                            npc(npc.id, FaceAnim.HALF_ASKING, "So do you have the 1000 coins for my service, and are you ready to leave now?")
-                            options(null, "YES", "NO") { button ->
-                                if (button == 1) removeItem(player, Item(Items.COINS_995, 1000))
-                                FremennikShipHelper.sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
-                            }
-                        }
-                    }
-                }
-                return@on true
-            }
+        on(intArrayOf(2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437, NPCs.JARVALD_2438), IntType.NPC, "option:travel") { player, npc ->
+            openDialogue(player, JarvaldTravelDialogue())
+            return@on true
         }
     }
 }

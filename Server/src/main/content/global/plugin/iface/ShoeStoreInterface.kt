@@ -4,8 +4,8 @@ import core.api.*
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
@@ -125,13 +125,19 @@ class ShoeStoreInterface : ComponentPlugin() {
 
         setAttribute(player, paymentCheck, true)
 
-        dialogue(player) {
-            npc(NPCs.YRSA_1301, FaceAnim.FRIENDLY, "I think they suit you.")
-            player(FaceAnim.HAPPY, "Thanks!")
-        }
-
         closeInterface(player)
         setVarp(player, 261, 0)
+        openDialogue(player, EndDialogue())
+    }
+
+    inner class EndDialogue : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> npc(NPCs.YRSA_1301, FaceAnim.FRIENDLY, "I think they suit you.").also { stage++ }
+                1 -> player(FaceAnim.HAPPY, "Thanks!").also { stage++ }
+                2 -> end()
+            }
+        }
     }
 
     /**

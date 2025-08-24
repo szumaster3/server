@@ -1,13 +1,9 @@
 package content.global.ame.drunkdwarf
 
 import content.global.ame.RandomEventNPC
-import core.api.addItemOrDrop
-import core.api.getWorldTicks
-import core.api.playGlobalAudio
-import core.api.sendChat
+import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.node.entity.npc.NPC
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.update.flag.context.Animation
@@ -71,13 +67,9 @@ class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEvent
     override fun talkTo(npc: NPC) {
         attackDelay = getWorldTicks() + 10
         this.pulseManager.clear()
-        dialogue(player) {
-            npc(npc.id, FaceAnim.OLD_DRUNK_RIGHT, "I 'new it were you matey! 'Ere, have some ob the good stuff!")
-            end {
-                addItemOrDrop(player, Items.BEER_1917)
-                addItemOrDrop(player, Items.KEBAB_1971)
-                AntiMacro.terminateEventNpc(player)
-            }
-        }
+        sendNPCDialogue(player, npc.id, "I 'new it were you matey! 'Ere, have some ob the good stuff!", FaceAnim.OLD_DRUNK_RIGHT)
+        addItemOrDrop(player, Items.BEER_1917)
+        addItemOrDrop(player, Items.KEBAB_1971)
+        AntiMacro.terminateEventNpc(player)
     }
 }

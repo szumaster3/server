@@ -3,7 +3,7 @@ package content.region.asgarnia.portsarim.plugin
 import core.api.*
 import core.api.getQuestStage
 import core.api.closeDialogue
-import core.game.dialogue.SequenceDialogue.dialogue
+import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -173,17 +173,32 @@ class PortSarimPlugin : InteractionListener {
          */
 
         on(Scenery.CAVE_33173, IntType.SCENERY, "exit") { player, _ ->
-            dialogue(player) {
-                message("STOP! The creatures in this cave are VERY Dangerous. Are you", "sure you want to enter?")
-                options(null, "Yes, I'm not afraid of death!", "No thanks, I don't want to die!") { buttonId ->
-                    if (buttonId == 1) {
+            openDialogue(player, EntranceDialogue())
+            return@on true
+        }
+    }
+
+    inner class EntranceDialogue : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogueLines(player!!, "STOP! The creatures in this cave are VERY Dangerous. Are you", "sure you want to enter?")
+                    stage++
+                }
+                1 -> {
+                    options("Yes, I'm not afraid of death!", "No thanks, I don't want to die!")
+                    stage++
+                }
+                2 -> {
+                    end()
+                    if (buttonID == 1) {
                         val LOCATION = Location.create(3056, 9555, 0)
-                        player.properties.teleportLocation = LOCATION
-                        sendMessage(player, "You venture into the icy cavern.")
+                        player!!.properties.teleportLocation = LOCATION
+                        sendMessage(player!!, "You venture into the icy cavern.")
                     }
                 }
             }
-            return@on true
+
         }
     }
 }

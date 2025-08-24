@@ -2,7 +2,6 @@ package content.global.activity.creation
 
 import core.api.*
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
@@ -175,23 +174,6 @@ class CreatureCreationPlugin : InteractionListener {
             return@on true
         }
 
-        /*
-         * Handles dialogue with Homunculus NPC.
-         */
-
-        on(NPCs.HOMUNCULUS_5581, IntType.NPC, "talk-to") { player, node ->
-            dialogue(player) {
-                player(FaceAnim.HALF_ASKING, "Hi there, you mentioned something about creating monsters...?")
-                npc(node.id, FaceAnim.OLD_NORMAL, "Good! I gain know from alchemists and builders. Me make beings.")
-                player(FaceAnim.THINKING, "Interesting. Tell me if I'm right.")
-                player(FaceAnim.THINKING, "By the alchemists and builders creating you, you have inherited their combined knowledge in much the same way that a child might inherit the looks of their parents.")
-                npc(node.id, FaceAnim.OLD_NORMAL, "Yes, you right!")
-                player(FaceAnim.HALF_ASKING, "So what do you need me to do?")
-                npc(node.id, FaceAnim.OLD_NORMAL, "Inspect symbol of life altars around dungeon. You see item give. Use item on altar. Activate altar to create, you fight.")
-                player(FaceAnim.NOD_YES, "Okay. Sounds like a challenge.")
-            }
-            return@on true
-        }
     }
 
     private fun activateAltar(player: Player, symbol: CreatureCreation, node: Node) {

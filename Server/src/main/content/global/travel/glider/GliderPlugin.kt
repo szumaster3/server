@@ -2,7 +2,6 @@ package content.global.travel.glider
 
 import core.api.*
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
@@ -34,19 +33,8 @@ class GliderPlugin : InteractionListener, InterfaceListener {
          * Handles talking to gnomes.
          */
 
-        on(GNOME_ID, IntType.NPC, "talk-to") { player, node ->
-            dialogue(player) {
-                npc(node.id, FaceAnim.OLD_DEFAULT, "What do you want human?")
-                player(FaceAnim.HALF_GUILTY, "May you fly me somewhere on your glider?")
-                if (!isQuestComplete(player, Quests.THE_GRAND_TREE)) {
-                    npc(node.id, FaceAnim.OLD_ANGRY3, "I only fly friends of the gnomes!")
-                } else {
-                    npc(node.id, FaceAnim.OLD_DEFAULT, "If you wish.")
-                    end {
-                        openInterface(player, Components.GLIDERMAP_138)
-                    }
-                }
-            }
+        on(GNOME_ID, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, GnomeDialogue())
             return@on true
         }
 

@@ -4,8 +4,8 @@ import content.global.activity.ttrail.ClueLevel
 import content.global.activity.ttrail.ClueScroll
 import content.global.activity.ttrail.TreasureTrailManager
 import core.api.*
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -37,10 +37,10 @@ abstract class ChallengeClueScroll(
      */
     override fun read(player: Player) {
         for (i in 1..8) {
-            player.packetDispatch.sendString("", interfaceId, i)
+            sendString(player, "", interfaceId, i)
         }
         super.read(player)
-        player.packetDispatch.sendString("<br><br><br><br><br>" + question?.replace("<br>", "<br><br>"), interfaceId, 1)
+        sendString(player,"<br><br><br><br><br>" + question?.replace("<br>", "<br><br>"), interfaceId, 1)
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class ChallengeClueScroll(
 
         val clueScroll = getClueForNpc(player, npc)
         if (clueScroll != null) {
-            handleNPC(player, npc, clueScroll)
+            ChallengeDialogue(player, npc, clueScroll)
             return true
         }
 
@@ -70,59 +70,58 @@ abstract class ChallengeClueScroll(
         /**
          * Opens dialogue for player answering the clue question with the NPC.
          */
-        fun handleNPC(player: Player, npc: NPC, clue: ChallengeClueScroll) {
-            dialogue(player) {
-                val facialExpression = if (npc.id in intArrayOf(
-                        NPCs.UGLUG_NAR_2039,
-                        NPCs.GNOME_COACH_2802,
-                        NPCs.GNOME_BALL_REFEREE_635,
-                        NPCs.GNOME_TRAINER_162
-                    )
-                ) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_ASKING
-
-                val randomAnswer = arrayOf("Here is your reward!", "Spot on!").random()
-
-                npc(npc.id, facialExpression, "Please enter the answer to the question.")
-
-                input(numeric = true, prompt = "Enter your answer") { value, resume ->
-                    val answer = value as? Int
-                    if (answer == null || answer != clue.answer) {
-                        npc(npc.id, "That isn't right, keep trying.")
-                        resume(false)
-                        return@input
+         class ChallengeDialogue(player: Player, npc: NPC, var clue: ChallengeClueScroll) : DialogueFile() {
+            override fun handle(componentID: Int, buttonID: Int) {
+                npc = NPC(npc!!.originalId)
+                val manager = TreasureTrailManager.getInstance(player!!)
+                val clueScroll = getClueScrolls()[clue.clueId]
+                val anagramClue = AnagramScroll.getClueForNpc(player!!, npc!!)
+                val facialExpression = if (npc!!.id in intArrayOf(NPCs.UGLUG_NAR_2039, NPCs.GNOME_COACH_2802, NPCs.GNOME_BALL_REFEREE_635, NPCs.GNOME_TRAINER_162)) FaceAnim.OLD_DEFAULT else FaceAnim.HALF_ASKING
+                when(stage) {
+                    0 -> {
+                        npc(npc!!.id, facialExpression, "Please enter the answer to the question.")
                     }
+                    1 -> {
+                        sendInputDialogue(player!!, numeric = true, prompt = "Enter your answer") { value ->
+                            val randomAnswer = arrayOf("Here is your reward!", "Spot on!").random()
+                            val answer = value as? Int
+                            if (answer == null || answer != clue.answer) {
+                                npc(npc!!.id, "That isn't right, keep trying.")
+                                return@sendInputDialogue
+                            }
 
-                    if (freeSlots(player) == 0) {
-                        sendNPCDialogue(player, npc.id, "Your inventory is full, make some room first.", facialExpression)
-                        resume(false)
-                        return@input
-                    }
+                            if (freeSlots(player!!) == 0) {
+                                sendNPCDialogue(player!!, npc!!.id, "Your inventory is full, make some room first.", facialExpression)
+                                return@sendInputDialogue
+                            }
 
-                    npc(npc.id, randomAnswer)
-                    resume(true)
+                            npc(npc!!.id, randomAnswer)
 
-                    val manager = TreasureTrailManager.getInstance(player)
-                    val clueScroll = getClueScrolls()[clue.clueId]
-                    val anagramClue = AnagramScroll.getClueForNpc(player, npc)
+                            if (clueScroll != null) {
+                                removeItem(player!!, clueScroll.clueId)
+                                anagramClue?.let { removeItem(player!!, it.clueId) }
 
-                    if (clueScroll != null) {
-                        removeItem(player, clueScroll.clueId)
-                        anagramClue?.let { removeItem(player, it.clueId) }
+                                removeAttributes(player!!, "anagram_clue_active")
+                                clueScroll.reward(player!!)
 
-                        removeAttributes(player, "anagram_clue_active")
-                        clueScroll.reward(player)
-
-                        if (manager.isCompleted) {
-                            sendItemDialogue(player, Items.CASKET_405, "You've found a casket!")
-                            manager.clearTrail()
-                        } else {
-                            val newClue = clueScroll.level?.let { getClue(it) }
-                            if (newClue != null) {
-                                sendItemDialogue(player, newClue, "You receive another clue scroll.")
-                                addItem(player, newClue.id, 1)
+                                stage++
                             }
                         }
                     }
+                    2 -> {
+                        if (manager.isCompleted) {
+                            sendItemDialogue(player!!, Items.CASKET_405, "You've found a casket!")
+                            manager.clearTrail()
+                        } else {
+                            val newClue = clueScroll?.level?.let { getClue(it) }
+                            if (newClue != null) {
+                                sendItemDialogue(player!!, newClue, "You receive another clue scroll.")
+                                addItem(player!!, newClue.id, 1)
+                            }
+                        }
+                        stage++
+                    }
+                    3 -> end()
                 }
             }
         }

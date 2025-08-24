@@ -4,7 +4,6 @@ import content.global.ame.RandomEventNPC
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.SequenceDialogue.dialogue
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.system.timer.impl.AntiMacro
@@ -25,14 +24,10 @@ class SecurityGuardNPC(
     }
 
     override fun talkTo(npc: NPC) {
-        dialogue(player) {
-            npc(npc.id, FaceAnim.OLD_DEFAULT, "My records show you have your recovery questions", "set. Here, take this small gift and book and explore the", "Stronghold of Security. There's some great rewards to", "be had there!")
-            end {
-                AntiMacro.rollEventLoot(player).forEach { addItemOrDrop(player, it.id, it.amount) }
-                addItemOrDrop(player, Items.SECURITY_BOOK_9003)
-                AntiMacro.terminateEventNpc(player)
-            }
-        }
+        sendNPCDialogueLines(player, npc.id,FaceAnim.OLD_DEFAULT, false, "My records show you have your recovery questions", "set. Here, take this small gift and book and explore the", "Stronghold of Security. There's some great rewards to", "be had there!")
+        AntiMacro.rollEventLoot(player).forEach { addItemOrDrop(player, it.id, it.amount) }
+        addItemOrDrop(player, Items.SECURITY_BOOK_9003)
+        AntiMacro.terminateEventNpc(player)
     }
 
     override fun finalizeDeath(killer: Entity?) {
@@ -55,9 +50,7 @@ class SecurityGuardNPC(
             AntiMacro.terminateEventNpc(player)
         }
         super.tick()
-        if (!player.viewport.currentPlane!!.npcs
-                .contains(this)
-        ) {
+        if (!player.viewport.currentPlane!!.npcs.contains(this)) {
             this.clear()
         }
     }
