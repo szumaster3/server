@@ -5200,7 +5200,7 @@ object Animations {
     const val ANIMATION_4968 = 4968
     const val HERBLORE_SKILLCAPE_4969 = 4969
     const val ANIMATION_4970 = 4970
-    const val ANIMATION_4971 = 4971
+    const val HP_SKILLCAPE_4971 = 4971
     const val ANIMATION_4972 = 4972
     const val RANGED_SKILLCAPE_4973 = 4973
     const val ANIMATION_4974 = 4974

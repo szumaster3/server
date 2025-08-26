@@ -200,17 +200,16 @@ enum class Emotes(
         lockedMessage = "This emote can be unlocked during the Lost Tribe quest.",
     ) {
         override fun play(player: Player) {
-            if (isEligibleForGoblinBow(player)) {
-                getLocalNpcs(player).forEach { npc ->
-                    if (npc.id == NPCs.MISTAG_2084 && withinDistance(
-                            npc,
-                            player.location,
-                            3,
-                        ) && player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 45
-                    ) {
-                        player.dialogueInterpreter.open(NPCs.MISTAG_2084, npc, "greeting")
-                        setAttribute(player, "/save:mistag-greeted", true)
-                    }
+            if (isEligibleForGoblinBow(player) &&
+                player.getQuestRepository().getQuest(Quests.THE_LOST_TRIBE).getStage(player) == 45
+            ) {
+                val mistag = getLocalNpcs(player).firstOrNull { npc ->
+                    npc.id == NPCs.MISTAG_2084 && withinDistance(npc, player.location, 3)
+                }
+
+                mistag?.let { npc ->
+                    player.dialogueInterpreter.open(NPCs.MISTAG_2084, npc, "greeting")
+                    setAttribute(player, "/save:mistag-greeted", true)
                 }
             }
             super.play(player)
@@ -419,146 +418,150 @@ enum class Emotes(
                 Items.ATTACK_CAPE_9747,
                 Items.ATTACK_CAPET_9748,
                 shared.consts.Graphics.ATTACK_SKILLCAPE_823,
-                4959,
+                Animations.ATTACK_SKILLCAPE_4959,
             ),
             intArrayOf(
                 Items.STRENGTH_CAPE_9750,
                 Items.STRENGTH_CAPET_9751,
                 shared.consts.Graphics.STRENGTH_SKILLCAPE_828,
-                4981,
+                Animations.STRENGTH_SKILLCAPE_4981,
             ),
             intArrayOf(
                 Items.DEFENCE_CAPE_9753,
                 Items.DEFENCE_CAPET_9754,
                 shared.consts.Graphics.DEFENCE_SKILLCAPE_824,
-                4961,
+                Animations.DEFENCE_SKILLCAPE_4961,
             ),
             intArrayOf(
                 Items.RANGING_CAPE_9756,
                 Items.RANGING_CAPET_9757,
                 shared.consts.Graphics.RANGED_SKILLCAPE_832,
-                4973,
+                Animations.RANGED_SKILLCAPE_4973,
             ),
             intArrayOf(
                 Items.PRAYER_CAPE_9759,
                 Items.PRAYER_CAPET_9760,
                 shared.consts.Graphics.PRAYER_SKILLCAPE_829,
-                4979,
+                Animations.PRAYER_SKILLCAPE_4979,
             ),
             intArrayOf(
                 Items.MAGIC_CAPE_9762,
                 Items.MAGIC_CAPET_9763,
                 shared.consts.Graphics.MAGIC_SKILLCAPE_813,
-                4939,
+                Animations.MAGIC_SKILLCAPE_4939,
             ),
             intArrayOf(
                 Items.RUNECRAFT_CAPE_9765,
                 Items.RUNECRAFT_CAPET_9766,
                 shared.consts.Graphics.RC_SKILLCAPE_817,
-                4947,
+                Animations.RC_SKILLCAPE_4947,
             ),
             intArrayOf(
                 Items.HITPOINTS_CAPE_9768,
                 Items.HITPOINTS_CAPET_9769,
                 shared.consts.Graphics.HP_SKILLCAPE_MALE_833,
-                4971,
+                Animations.HP_SKILLCAPE_4971,
             ),
             intArrayOf(
                 Items.AGILITY_CAPE_9771,
                 Items.AGILITY_CAPET_9772,
                 shared.consts.Graphics.AGILITY_SKILLCAPE_830,
-                4977,
+                Animations.AGILITY_SKILLCAPE_4977,
             ),
             intArrayOf(
                 Items.HERBLORE_CAPE_9774,
                 Items.HERBLORE_CAPET_9775,
                 shared.consts.Graphics.HERBLORE_SKILLCAPE_835,
-                4969,
+                Animations.HERBLORE_SKILLCAPE_4969,
             ),
             intArrayOf(
                 Items.THIEVING_CAPE_9777,
                 Items.THIEVING_CAPET_9778,
                 shared.consts.Graphics.THIEVING_SKILLCAPE_826,
-                4965,
+                Animations.THIEVING_SKILLCAPE_4965,
             ),
             intArrayOf(
                 Items.CRAFTING_CAPE_9780,
                 Items.CRAFTING_CAPET_9781,
                 shared.consts.Graphics.CRAFTING_SKILLCAPE_818,
-                4949,
+                Animations.CRAFTING_SKILLCAPE_4949,
             ),
             intArrayOf(
                 Items.FLETCHING_CAPE_9783,
                 Items.FLETCHING_CAPET_9784,
                 shared.consts.Graphics.FLETCHING_SKILLCAPE_812,
-                4937,
+                Animations.FLETCHING_SKILLCAPE_4937,
             ),
             intArrayOf(
                 Items.SLAYER_CAPE_9786,
                 Items.SLAYER_CAPET_9787,
                 shared.consts.Graphics.SLAYER_ACCOMPLISHMENT_CAPE_1656,
-                4967,
+                Animations.SLAYER_SKILLCAPE_4967,
             ),
             intArrayOf(
                 Items.CONSTRUCT_CAPE_9789,
                 Items.CONSTRUCT_CAPET_9790,
                 shared.consts.Graphics.CON_SKILLCAPE_820,
-                4953,
+                Animations.CONSTRUCTION_SKILLCAPE_4953,
             ),
             intArrayOf(
                 Items.MINING_CAPE_9792,
                 Items.MINING_CAPET_9793,
                 shared.consts.Graphics.MINING_SKILLCAPE_814,
-                4941,
+                Animations.MINING_SKILLCAPE_4941,
             ),
             intArrayOf(
                 Items.SMITHING_CAPE_9795,
                 Items.SMITHING_CAPET_9796,
                 shared.consts.Graphics.SMITHING_SKILLCAPE_815,
-                4943,
+                Animations.SMITHING_SKILLCAPE_4943,
             ),
             intArrayOf(
                 Items.FISHING_CAPE_9798,
                 Items.FISHING_CAPET_9799,
                 shared.consts.Graphics.FISHING_SKILLCAPE_819,
-                4951,
+                Animations.FISHING_SKILLCAPE_4951,
             ),
             intArrayOf(
                 Items.COOKING_CAPE_9801,
                 Items.COOKING_CAPET_9802,
                 shared.consts.Graphics.COOKING_SKILLCAPE_821,
-                4955,
+                Animations.COOKING_SKILLCAPE_4955,
             ),
             intArrayOf(
                 Items.FIREMAKING_CAPE_9804,
                 Items.FIREMAKING_CAPET_9805,
                 shared.consts.Graphics.FIREMAKING_SKILLCAPE_831,
-                4975,
+                Animations.FIREMAKING_SKILLCAPE_4975,
             ),
             intArrayOf(
                 Items.WOODCUTTING_CAPE_9807,
                 Items.WOODCUT_CAPET_9808,
                 shared.consts.Graphics.WC_SKILLCAPE_822,
-                4957,
+                Animations.WOODCUTING_SKILLCAPE_4957,
             ),
             intArrayOf(
                 Items.FARMING_CAPE_9810,
                 Items.FARMING_CAPET_9811,
                 shared.consts.Graphics.FARMING_SKILLCAPE_825,
-                4963,
+                Animations.FARMING_SKILLCAPE_4963,
             ),
             intArrayOf(
                 Items.SUMMONING_CAPE_12169,
                 Items.SUMMONING_CAPET_12170,
                 shared.consts.Graphics.SUMMONING_SKILLCAPE_EMOTE_1515,
-                8525,
+                Animations.SUMMONING_SKILLCAPE_8525,
             ),
-            intArrayOf(Items.QUEST_POINT_CAPE_9813, -1, shared.consts.Graphics.QUEST_SKILLCAPE_816, 4945),
+            intArrayOf(
+                Items.QUEST_POINT_CAPE_9813,
+                -1,
+                shared.consts.Graphics.QUEST_SKILLCAPE_816,
+                Animations.QUEST_SKILLCAPE_4945),
             intArrayOf(
                 Items.HUNTER_CAPE_9948,
                 Items.HUNTER_CAPET_9949,
                 shared.consts.Graphics.HUNTER_SKILLCAPE_EMOTE_907,
-                5158,
+                Animations.HUNTER_SKILLCAPE_5158,
             ),
         )
 
