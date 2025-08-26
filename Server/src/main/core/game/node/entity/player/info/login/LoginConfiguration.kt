@@ -325,13 +325,13 @@ object LoginConfiguration {
     }
 
     private fun setConfigs(player: Player) {
-        setVarbit(player, 4322, 1, true)
+        setVarbit(player, 4322, 1)
 
 
         if (getAttribute(player, GameAttributes.KW_COMPLETE, false)) {
-            setVarbit(player, 3909, 8, true)
+            setVarbit(player, 3909, 8)
         } else {
-            setVarbit(player, 3909, 0, true)
+            setVarbit(player, 3909, 0)
         }
     }
 }
