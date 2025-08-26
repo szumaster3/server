@@ -512,7 +512,7 @@ class WarningListener : InteractionListener, InterfaceListener {
         player.removeAttribute("wildy_ditch")
         val (start, end) = getDitchLocations(player.location, ditch.location, ditch.rotation)
         forceMove(player, start, end, 0, 60, null, Animations.JUMP_OVER_OBSTACLE_6132)
-        playAudio(player, Sounds.JUMP2_2462, 30)
+        playAudio(player, Sounds.JUMP2_2462, 3)
     }
 
     private fun handleGate(player: Player) {
