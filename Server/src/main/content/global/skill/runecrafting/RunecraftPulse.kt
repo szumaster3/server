@@ -120,43 +120,47 @@ class RunecraftPulse(
     private fun craft() {
         val item = Item(essence.id, essenceAmount)
         val amount = player.inventory.getAmount(item)
+
         if (!altar.isOurania) {
+            val hasExplorerRing = inEquipment(player, Items.EXPLORERS_RING_2_13561, 1)
             var total = 0
+
             for (j in 0 until amount) {
                 total += multiplier
-            }
-            val i = Item(rune.rune.id, total)
 
-            if (removeItem(player, item) && hasSpaceFor(player, i)) {
-                addItem(player, i.id, total)
+                /*
+                 * 10% chance of crafting an additional runes with explorer's ring 2.
+                 */
+                if (hasExplorerRing && rune in listOf(Rune.AIR, Rune.EARTH, Rune.FIRE, Rune.WATER)) {
+                    if (RandomFunction.getRandom(9) == 0) {
+                        total += 1
+                        rewardXP(player, Skills.RUNECRAFTING, rune.experience)
+                    }
+                }
+            }
+
+            val craftedRunes = Item(rune.rune.id, total)
+            if (removeItem(player, item) && hasSpaceFor(player, craftedRunes)) {
+                addItem(player, craftedRunes.id, craftedRunes.amount)
                 player.incrementAttribute("/save:$STATS_BASE:$STATS_RC", amount)
                 sendMessage(
                     player,
-                    "You bind the temple's power into " + (if (combination) combo!!.rune.name.lowercase() else rune.rune.name.lowercase()) + "s.",
+                    "You bind the temple's power into " + (if (combination) combo!!.rune.name.lowercase() else rune.rune.name.lowercase()) + "s."
                 )
 
                 var xp = rune.experience * amount
-                if ((altar == Altar.AIR && inEquipment(
-                        player, Items.AIR_RUNECRAFTING_GLOVES_12863, 1
-                    )) || (altar == Altar.WATER && inEquipment(
-                        player, Items.WATER_RUNECRAFTING_GLOVES_12864, 1
-                    )) || (altar == Altar.EARTH && inEquipment(player, Items.EARTH_RUNECRAFTING_GLOVES_12865, 1))
+                if ((altar == Altar.AIR && inEquipment(player, Items.AIR_RUNECRAFTING_GLOVES_12863, 1)) ||
+                    (altar == Altar.WATER && inEquipment(player, Items.WATER_RUNECRAFTING_GLOVES_12864, 1)) ||
+                    (altar == Altar.EARTH && inEquipment(player, Items.EARTH_RUNECRAFTING_GLOVES_12865, 1))
                 ) {
                     xp += xp * updateCharges(player, amount) / amount
                 }
                 rewardXP(player, Skills.RUNECRAFTING, xp)
 
-                if (altar == Altar.NATURE) {
-                    finishDiaryTask(player, DiaryType.KARAMJA, 2, 3)
-                }
-
-                if (altar == Altar.AIR && i.amount >= 196) {
-                    finishDiaryTask(player, DiaryType.FALADOR, 2, 2)
-                }
-
-                if (altar == Altar.WATER && rune == Rune.WATER) {
-                    finishDiaryTask(player, DiaryType.LUMBRIDGE, 1, 11)
-                }
+                // Diary checks
+                if (altar == Altar.NATURE) finishDiaryTask(player, DiaryType.KARAMJA, 2, 3)
+                if (altar == Altar.AIR && craftedRunes.amount >= 196) finishDiaryTask(player, DiaryType.FALADOR, 2, 2)
+                if (altar == Altar.WATER && rune == Rune.WATER) finishDiaryTask(player, DiaryType.LUMBRIDGE, 1, 11)
             }
         } else {
             if (removeItem(player, item)) {
@@ -167,19 +171,17 @@ class RunecraftPulse(
                         val temp = Rune.values()[RandomFunction.random(Rune.values().size)]
                         if (getStatLevel(player, Skills.RUNECRAFTING) >= temp.level) {
                             rune = temp
-                        } else {
-                            if (RandomFunction.random(3) == 1) {
-                                rune = temp
-                            }
+                        } else if (RandomFunction.random(3) == 1) {
+                            rune = temp
                         }
                     }
                     rewardXP(player, Skills.RUNECRAFTING, rune.experience * 2)
-                    val runeItem = rune.rune
-                    addItem(player, runeItem.id)
+                    addItem(player, rune.rune.id)
                 }
             }
         }
     }
+
 
     private fun combine() {
         val remove = if (node!!.name.contains("talisman")) {
