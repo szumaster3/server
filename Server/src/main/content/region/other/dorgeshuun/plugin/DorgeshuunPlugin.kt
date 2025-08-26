@@ -1,6 +1,7 @@
 package content.region.other.dorgeshuun.plugin
 
 import content.region.other.dorgeshuun.dialogue.CaveGoblinsDialogueFile
+import content.region.other.dorgeshuun.dialogue.SpitgoblinDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -34,6 +35,14 @@ class DorgeshuunPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
+        /*
+         * Handles talk to spit goblin NPC.
+         */
+
+        on(NPCs.SPIT_GOBLIN_5823, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, SpitgoblinDialogue())
+            return@on true
+        }
 
         /*
          * Handles talk to Cave goblins NPC.

@@ -92,6 +92,15 @@ class CreatureCreationPlugin : InteractionListener {
         }
 
         /*
+         * Handles talk to homunculus.
+         */
+
+        on(NPCs.HOMUNCULUS_5581, IntType.SCENERY, "talk-to") { player, _ ->
+            openDialogue(player, HomunculusDialogue())
+            return@on true
+        }
+
+        /*
          * Handles close the trapdoor.
          */
 

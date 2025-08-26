@@ -4,8 +4,6 @@ import core.api.*
 import core.api.isQuestComplete
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.npc.NPC
-import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Scenery
 
@@ -24,10 +22,11 @@ class SpiritTreePlugin : InteractionListener {
 
         on(spiritTrees, IntType.SCENERY, "talk-to", "teleport") { player, _ ->
             if (!isQuestComplete(player, Quests.TREE_GNOME_VILLAGE)) {
-                player.sendMessage("The tree doesn't feel like talking.")
+                sendDialogue(player, "The tree doesn't feel like talking.")
                 return@on true
             }
-            openDialogue(player, SpiritTreeDialogue(true), NPC(NPCs.SPIRIT_TREE_3636))
+            val showIntro = getUsedOption(player) == "talk-to"
+            openDialogue(player, SpiritTreeDialogue(showIntro))
             return@on true
         }
     }

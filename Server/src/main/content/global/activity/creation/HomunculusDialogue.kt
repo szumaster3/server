@@ -1,19 +1,18 @@
 package content.global.activity.creation
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
  * Represents the Homunculus dialogue.
  */
-@Initializable
-class HomunculusDialogue(player: Player? = null) : Dialogue(player) {
+class HomunculusDialogue : DialogueFile() {
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.HOMUNCULUS_5581)
         when(stage) {
            0 -> playerl(FaceAnim.HALF_ASKING, "Hi there, you mentioned something about creating monsters...?").also { stage++ }
            1 -> npcl(FaceAnim.OLD_NORMAL, "Good! I gain know from alchemists and builders. Me make beings.").also { stage++ }
@@ -24,10 +23,5 @@ class HomunculusDialogue(player: Player? = null) : Dialogue(player) {
            6 -> npcl(FaceAnim.OLD_NORMAL, "Inspect symbol of life altars around dungeon. You see item give. Use item on altar. Activate altar to create, you fight.").also { stage++ }
            7 -> playerl(FaceAnim.NOD_YES, "Okay. Sounds like a challenge.").also { stage = END_DIALOGUE }
         }
-        return true
-    }
-
-    override fun getIds(): IntArray {
-        return intArrayOf(NPCs.HOMUNCULUS_5581)
     }
 }
