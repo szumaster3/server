@@ -23,6 +23,9 @@ import shared.consts.Quests
 import shared.consts.Sounds
 import kotlin.math.max
 
+/**
+ * Handles the process of Runecrafting at altars.
+ */
 class RunecraftPulse(
     player: Player?,
     node: Item?,
@@ -117,6 +120,9 @@ class RunecraftPulse(
         }
     }
 
+    /**
+     * Handles craft the standard runes at an altar.
+     */
     private fun craft() {
         val item = Item(essence.id, essenceAmount)
         val amount = player.inventory.getAmount(item)
@@ -182,7 +188,9 @@ class RunecraftPulse(
         }
     }
 
-
+    /**
+     * Handles craft the combination runes.
+     */
     private fun combine() {
         val remove = if (node!!.name.contains("talisman")) {
             node!!
@@ -227,8 +235,15 @@ class RunecraftPulse(
         }
     }
 
+    /**
+     * @return true if the player currently has the spell Imbue active.
+     */
     private fun hasSpellImbue(): Boolean = player.getAttribute("spell:imbue", 0) > ticks
 
+    /**
+     * Determines the total number of essence that can be used,
+     * depending on altar type and rune type.
+     */
     private val essenceAmount: Int
         get() {
             if (altar.isOurania && inInventory(player, Items.PURE_ESSENCE_7936)) {
@@ -243,6 +258,10 @@ class RunecraftPulse(
             }
         }
 
+    /**
+     * Determines which type of essence item will be consumed,
+     * depending on altar type and rune type.
+     */
     private val essence: Item
         get() {
             if (altar.isOurania && inInventory(player, Items.PURE_ESSENCE_7936)) {
@@ -257,6 +276,11 @@ class RunecraftPulse(
             }
         }
 
+    /**
+     * Multiplier for runes created per essence at the altar.
+     *
+     * @see getMultiplier
+     */
     val multiplier: Int
         get() {
             if (altar.isOurania) {
@@ -267,6 +291,9 @@ class RunecraftPulse(
             return getMultiplier(rcLevel, rune, runecraftingFormulaRevision)
         }
 
+    /**
+     * @return true if the player has a Binding Necklace equipped.
+     */
     fun hasBindingNecklace(): Boolean = inEquipment(player, BINDING_NECKLACE)
 
     companion object {
@@ -276,11 +303,11 @@ class RunecraftPulse(
         private val ANIMATION = Animation(Animations.OLD_RUNECRAFT_791, Priority.HIGH)
         private val Graphics = Graphics(shared.consts.Graphics.RUNECRAFTING_GRAPHIC_186, 100)
 
-        fun getMultiplier(
-            rcLevel: Int,
-            rune: Rune,
-            rcFormulaRevision: Int
-        ): Int {
+        /**
+         * Calculates the multiplier of runes created per essence,
+         * based on RC level and the altars rune type.
+         */
+        fun getMultiplier(rcLevel: Int, rune: Rune, rcFormulaRevision: Int): Int {
             val multipleLevels = rune.getMultiple() ?: return 1
             var i = 0
 
