@@ -7,7 +7,6 @@ import core.api.*
 import core.game.component.Component
 import core.game.interaction.InteractionListeners
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.world.GameWorld
@@ -127,7 +126,7 @@ object LoginConfiguration {
         checkEmotes(player)
         setupItems(player)
         setupSpellBook(player)
-        setupPrayer(player)
+        setConfigs(player)
     }
 
     /**
@@ -325,11 +324,14 @@ object LoginConfiguration {
         player.spellBookManager.update(player)
     }
 
-    private fun setupPrayer(player: Player) {
+    private fun setConfigs(player: Player) {
+        setVarbit(player, 4322, 1, true)
+
+
         if (getAttribute(player, GameAttributes.KW_COMPLETE, false)) {
-            setVarbit(player, 3909, 8)
+            setVarbit(player, 3909, 8, true)
         } else {
-            setVarbit(player, 3909, 0)
+            setVarbit(player, 3909, 0, true)
         }
     }
 }
