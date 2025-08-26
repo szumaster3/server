@@ -135,7 +135,7 @@ public final class Prayer {
         if (prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0) {
             if (getPlayer().getSkills().getPrayerPoints() == 0) {
                 playAudio(getPlayer(), Sounds.PRAYER_DRAIN_2672);
-                getPlayer().sendMessage("You need to recharge your Prayer at an altar.");
+                getPlayer().sendMessage("You have run out of prayer points; you must recharge at an altar.");
                 reset();
                 return;
             }

@@ -13,7 +13,7 @@ class RunecraftTests {
     ) {
         var total = 0.0
         for (i in 0 until 3000) {
-            total += RunecraftPulse.getMultiplier(rcLevel, rune, revision, false)
+            total += RunecraftPulse.getMultiplier(rcLevel, rune, revision)
         }
         val average = total / 3000.0
         Assertions.assertTrue(lo <= average && average <= hi, "rollRc: $rcLevel ${rune.name} $revision: $average")
