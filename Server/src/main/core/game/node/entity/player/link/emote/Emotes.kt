@@ -23,10 +23,18 @@ enum class Emotes(
     val graphics: Int? = -1,
     val lockedMessage: String? = null,
 ) {
-    YES(buttonId = 2, animation = Animations.NOD_HEAD_855), NO(
-        buttonId = 3, animation = Animations.SHAKE_HEAD_856
+    YES(
+        buttonId = 2,
+        animation = Animations.NOD_HEAD_855
     ),
-    BOW(buttonId = 4, animation = Animations.BOW_858) {
+    NO(
+        buttonId = 3,
+        animation = Animations.SHAKE_HEAD_856
+    ),
+    BOW(
+        buttonId = 4,
+        animation = Animations.BOW_858
+    ) {
         override fun play(player: Player) {
             val hat = player.equipment[EquipmentContainer.SLOT_LEGS]
             if (hat?.id == Items.PANTALOONS_10396) {
@@ -36,7 +44,10 @@ enum class Emotes(
             }
         }
     },
-    ANGRY(buttonId = 5, animation = Animations.ANGRY_859) {
+    ANGRY(
+        buttonId = 5,
+        animation = Animations.ANGRY_859
+    ) {
         override fun play(player: Player) {
             val hat = player.equipment[EquipmentContainer.SLOT_HAT]
             if (hat?.id == Items.A_POWDERED_WIG_10392) {
@@ -46,7 +57,14 @@ enum class Emotes(
             }
         }
     },
-    THINK(buttonId = 6, animation = Animations.THINK_857), WAVE(buttonId = 7, animation = Animations.WAVE_863) {
+    THINK(
+        buttonId = 6,
+        animation = Animations.THINK_857
+    ),
+    WAVE(
+        buttonId = 7,
+        animation = Animations.WAVE_863
+    ) {
         override fun play(player: Player) {
             val weapon = player.equipment[EquipmentContainer.SLOT_WEAPON]
             if (weapon?.id == Items.SLED_4084) {
@@ -56,7 +74,14 @@ enum class Emotes(
             }
         }
     },
-    SHRUG(buttonId = 8, animation = Animations.SHRUG_2113), CHEER(buttonId = 9, animation = Animations.CHEER_862) {
+    SHRUG(
+        buttonId = 8,
+        animation = Animations.SHRUG_2113
+    ),
+    CHEER(
+        buttonId = 9,
+        animation = Animations.CHEER_862
+    ) {
         override fun play(player: Player) {
             val weapon = player.equipment[EquipmentContainer.SLOT_WEAPON]
             if (weapon?.id == Items.SLED_4084) {
@@ -66,7 +91,10 @@ enum class Emotes(
             }
         }
     },
-    BECKON(buttonId = 10, animation = Animations.BECKON_864) {
+    BECKON(
+        buttonId = 10,
+        animation = Animations.BECKON_864
+    ) {
         override fun play(player: Player) {
             val weapon = player.equipment[EquipmentContainer.SLOT_WEAPON]
             when {
@@ -92,10 +120,18 @@ enum class Emotes(
             }
         }
     },
-    JUMP_FOR_JOY(buttonId = 11, animation = Animations.JUMP_FOR_JOY_2109), LAUGH(
-        buttonId = 12, animation = Animations.LAUGH_861
+    JUMP_FOR_JOY(
+        buttonId = 11,
+        animation = Animations.JUMP_FOR_JOY_2109
     ),
-    YAWN(buttonId = 13, animation = Animations.YAWN_2111) {
+    LAUGH(
+        buttonId = 12,
+        animation = Animations.LAUGH_861
+    ),
+    YAWN(
+        buttonId = 13,
+        animation = Animations.YAWN_2111
+    ) {
         override fun play(player: Player) {
             val hat = player.equipment[EquipmentContainer.SLOT_HAT]
             if (hat?.id == Items.SLEEPING_CAP_10398) {
@@ -105,7 +141,10 @@ enum class Emotes(
             }
         }
     },
-    DANCE(buttonId = 14, animation = Animations.DANCE_866) {
+    DANCE(
+        buttonId = 14,
+        animation = Animations.DANCE_866
+    ) {
         override fun play(player: Player) {
             val legs = player.equipment[EquipmentContainer.SLOT_LEGS]
             if (legs?.id == Items.FLARED_TROUSERS_10394) {
@@ -115,17 +154,38 @@ enum class Emotes(
             }
         }
     },
-    JIG(buttonId = 15, animation = Animations.JIG_EMOTE_2106), SPIN(
-        buttonId = 16, animation = Animations.HUMAN_TWIRL_2107
+    JIG(
+        buttonId = 15,
+        animation = Animations.JIG_EMOTE_2106
     ),
-    HEADBANG(buttonId = 17, animation = Animations.HEADBANG_EMOTE_2108), CRY(
-        buttonId = 18, animation = Animations.CRY_860
+    SPIN(
+        buttonId = 16,
+        animation = Animations.HUMAN_TWIRL_2107
     ),
-    BLOW_KISS(buttonId = 19, animation = Animations.HUMAN_BLOW_KISS_1374, graphics = shared.consts.Graphics.HEART_574), PANIC(
-        buttonId = 20, animation = Animations.PANIC_2105
+    HEADBANG(
+        buttonId = 17,
+        animation = Animations.HEADBANG_EMOTE_2108
     ),
-    RASPBERRY(buttonId = 21, animation = Animations.RASPBERRY_2110), CLAP(
-        buttonId = 22, animation = Animations.CLAP_865
+    CRY(
+        buttonId = 18,
+        animation = Animations.CRY_860
+    ),
+    BLOW_KISS(
+        buttonId = 19,
+        animation = Animations.HUMAN_BLOW_KISS_1374,
+        graphics = shared.consts.Graphics.HEART_574
+    ),
+    PANIC(
+        buttonId = 20,
+        animation = Animations.PANIC_2105
+    ),
+    RASPBERRY(
+        buttonId = 21,
+        animation = Animations.RASPBERRY_2110
+    ),
+    CLAP(
+        buttonId = 22,
+        animation = Animations.CLAP_865
     ) {
         override fun play(player: Player) {
             val weapon = player.equipment[EquipmentContainer.SLOT_WEAPON]
@@ -136,7 +196,10 @@ enum class Emotes(
             }
         }
     },
-    SALUTE(buttonId = 23, animation = Animations.SALUTE_2112) {
+    SALUTE(
+        buttonId = 23,
+        animation = Animations.SALUTE_2112
+    ) {
         override fun play(player: Player) {
             if (isEligibleForSalute(player)) {
                 forceEmote(player, Animation(Animations.SALUTE_2112), Graphics(-1))
@@ -248,7 +311,9 @@ enum class Emotes(
         animation = Animations.HUMAN_BUNNY_HOP_6111,
         lockedMessage = "This emote can be unlocked by playing an Easter holiday event.",
     ),
-    SKILLCAPE(buttonId = 39) {
+    SKILLCAPE(
+        buttonId = 39
+    ) {
         override fun play(player: Player) {
             val cape = player.equipment[EquipmentContainer.SLOT_CAPE]
             if (cape == null) {
@@ -621,6 +686,6 @@ enum class Emotes(
          * @return True if the player can use it.
          */
         private fun isEligibleForGoblinBow(player: Player): Boolean =
-            player.location.getRegionId() == 13206 && !player.getAttribute("mistag-greeted", false)
+            player.location.regionId == 13206 && !player.getAttribute("mistag-greeted", false)
     }
 }
