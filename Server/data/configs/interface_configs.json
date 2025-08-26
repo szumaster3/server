@@ -756,12 +756,6 @@
     "tabIndex": "-1"
   },
   {
-    "id": "398",
-    "interfaceType": "3",
-    "walkable": "false",
-    "tabIndex": "-1"
-  },
-  {
     "id": "399",
     "interfaceType": "1",
     "walkable": "false",
