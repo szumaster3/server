@@ -10,7 +10,7 @@ object AncientSpells {
     const val BLOOD_BLITZ = 5
     const val BLOOD_BARRAGE = 7
     const val SMOKE_RUSH = 8
-    const val SMOKE_BURST = 19
+    const val SMOKE_BURST = 10
     const val SMOKE_BLITZ = 9
     const val SMOKE_BARRAGE = 11
     const val SHADOW_RUSH = 12

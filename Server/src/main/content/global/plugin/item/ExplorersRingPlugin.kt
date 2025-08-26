@@ -92,7 +92,7 @@ class ExplorersRingPlugin : InteractionListener {
     /**
      * Gets the diary level based on item id.
      */
-    fun getRingLevel(id: Int): Int =
+    private fun getRingLevel(id: Int): Int =
         when (id) {
             Items.EXPLORERS_RING_1_13560 -> 1
             Items.EXPLORERS_RING_2_13561 -> 2

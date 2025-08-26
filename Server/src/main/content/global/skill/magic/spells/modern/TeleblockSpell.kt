@@ -20,7 +20,6 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Animations
-import shared.consts.Graphics as Gfx
 import shared.consts.Sounds
 
 @Initializable
