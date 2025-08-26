@@ -13,7 +13,7 @@ import shared.consts.NPCs
  * Handles the BattlefieldNPC.
  */
 @Initializable
-class BattlefieldNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, location) {
+class BattlefieldNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     private var nextActionTime = 0L
     private var isGnome = false
 
@@ -70,7 +70,7 @@ class BattlefieldNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id
     override fun getIds(): IntArray = ID
 
     companion object {
-        private val ID = intArrayOf(NPCs.KHAZARD_TROOPER_2245, NPCs.KHAZARD_TROOPER_2246, NPCs.GNOME_67, NPCs.MOUNTED_TERRORBIRD_GNOME_1752, NPCs.GNOME_TROOP_2247, NPCs.GNOME_2249, NPCs.GNOME_2250, NPCs.GNOME_2251, NPCs.TORTOISE_3808, NPCs.MOUNTED_TERRORBIRD_GNOME_6109)
+        private val ID = intArrayOf(NPCs.KHAZARD_TROOPER_2245, NPCs.KHAZARD_TROOPER_2246, NPCs.GNOME_67, NPCs.MOUNTED_TERRORBIRD_GNOME_1752, NPCs.GNOME_TROOP_2247, NPCs.GNOME_2249, NPCs.GNOME_2250, NPCs.GNOME_2251, NPCs.TORTOISE_3808, NPCs.MOUNTED_TERRORBIRD_GNOME_6109, NPCs.MOUNTED_TERRORBIRD_GNOME_6110, NPCs.MOUNTED_TERRORBIRD_GNOME_6111)
         private val GNOMES = intArrayOf(NPCs.GNOME_67, NPCs.MOUNTED_TERRORBIRD_GNOME_1752, NPCs.GNOME_TROOP_2247, NPCs.GNOME_2249, NPCs.GNOME_2250, NPCs.GNOME_2251, NPCs.TORTOISE_3808, NPCs.MOUNTED_TERRORBIRD_GNOME_6109)
         private val TROOPERS = intArrayOf(NPCs.KHAZARD_TROOPER_2245, NPCs.KHAZARD_TROOPER_2246)
         private val TROOPERS_FORCE_CHAT = arrayOf("Get off of me, ya little pest!", "Die, you filthy goblin!", "Victory will be ours!", "We will crush you!")
