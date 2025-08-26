@@ -50,7 +50,7 @@ class MainInterface : ComponentPlugin() {
 
             Components.TOPLEVEL_548 -> {
                 if (button in 38..44 || button in 20..26) {
-                    player.interfaceManager.currentTabIndex = getTabIndex(button)
+                    player.interfaceManager.setViewedTab(getTabIndex(button))
                 }
 
                 when (button) {
