@@ -17,7 +17,7 @@ class FiorDialogue : DialogueFile() {
             0 -> playerl("Hi. What are you doing?").also { stage++ }
             1 -> npcl(FaceAnim.OLD_DEFAULT, "Relaxing after a long day at the factory.").also { stage++ }
             2 -> npcl(FaceAnim.OLD_DEFAULT, "If I keep up this winning streak, I mightn't have to go into work tomorrow.").also { stage++ }
-            3 -> playerl("Do you mind me asking how much you have won?").also { stage++ }
+            3 -> playerl(FaceAnim.FRIENDLY, "Do you mind me asking how much you have won?").also { stage++ }
             4 -> npcl(FaceAnim.OLD_DEFAULT, "Not at all, I'm up 10 coins so far.").also { stage++ }
             5 -> playerl("Umm ok.").also { stage++ }
             6 -> playerl("So how do these rat pits work?").also { stage++ }

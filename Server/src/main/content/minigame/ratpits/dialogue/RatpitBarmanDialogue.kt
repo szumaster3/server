@@ -28,7 +28,7 @@ class RatpitBarmanDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val faceAnim = if (npc.id == 2991) FaceAnim.OLD_DEFAULT else FaceAnim.FRIENDLY
+        val faceAnim = if (npc.id == NPCs.RAUBORN_2991) FaceAnim.OLD_DEFAULT else FaceAnim.FRIENDLY
         when (stage) {
             0 -> options("A beer please.", "I'd like some food please.", "I have to go").also { stage++ }
             1 -> when (buttonId) {
@@ -48,13 +48,14 @@ class RatpitBarmanDialogue(player: Player? = null) : Dialogue(player) {
             }
             4 -> options("Pay.", "Don't pay.").also { stage++ }
             5 -> when (buttonId) {
-                1 -> if (!removeItem(player, Item(Items.COINS_995, 20))) {
-                    player(FaceAnim.HALF_GUILTY, "Sorry, I don't have 20 coins on me.").also {
-                        stage = END_DIALOGUE
+                1 -> {
+                    end()
+                    if (!removeItem(player, Item(Items.COINS_995, 20))) {
+                        player(FaceAnim.HALF_GUILTY, "Sorry, I don't have 20 coins on me.")
+                    } else {
+                        npc(faceAnim, "Thanks for your custom.")
+                        addItem(player, Items.STEW_2003)
                     }
-                } else {
-                    addItem(player, Items.STEW_2003)
-                    npc(faceAnim, "Thanks for your custom.")
                 }
                 2 -> player(FaceAnim.HALF_GUILTY, "Sorry, I changed my mind.").also { stage = END_DIALOGUE }
             }
