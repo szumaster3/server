@@ -44663,17 +44663,17 @@
   },
   {
     "ids": "11404",
-    "examine": "Hot!",
+    "examine": "A red log fire.",
     "render_anim": "475"
   },
   {
     "ids": "11405",
-    "examine": "Hot!",
+    "examine": "A green log fire.",
     "render_anim": "475"
   },
   {
     "ids": "11406",
-    "examine": "Hot!",
+    "examine": "A blue log fire.",
     "render_anim": "475"
   },
   {
@@ -56404,6 +56404,16 @@
   {
     "ids": "19997",
     "examine": "Dead animal head. Lovely."
+  },
+  {
+    "ids": "20000",
+    "examine": "A white log fire.",
+    "render_anim": "475"
+  },
+  {
+    "ids": "20001",
+    "examine": "A purple log fire.",
+    "render_anim": "475"
   },
   {
     "ids": "20134",

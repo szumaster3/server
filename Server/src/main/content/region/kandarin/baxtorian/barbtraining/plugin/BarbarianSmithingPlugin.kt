@@ -1,4 +1,4 @@
-package content.region.kandarin.plugin.barbtraining.plugin
+package content.region.kandarin.baxtorian.barbtraining.plugin
 
 import core.api.*
 import core.api.sendSkillDialogue
@@ -38,7 +38,7 @@ private enum class BarbarianWeapon(val requiredWood: Int, val requiredBar: Int, 
     }
 }
 
-private class BarbSmithingPulse(player: Player?, val weapon: BarbarianWeapon, var amount: Int, var button: Int, ) : SkillPulse<Item>(player, null) {
+private class BarbarianSmithingPulse(player: Player?, val weapon: BarbarianWeapon, var amount: Int, var button: Int, ) : SkillPulse<Item>(player, null) {
     val hasta = weapon.hastaId
     val spear = weapon.spearId
 
@@ -106,7 +106,7 @@ private class BarbSmithingPulse(player: Player?, val weapon: BarbarianWeapon, va
     override fun message(type: Int) {}
 }
 
-class BarbSmithingPlugin : InteractionListener {
+class BarbarianSmithingPlugin : InteractionListener {
 
     private val bars = BarbarianWeapon.values().map { it.requiredBar }.toIntArray()
 
@@ -124,7 +124,7 @@ class BarbSmithingPlugin : InteractionListener {
                 create { id, amount ->
                     submitIndividualPulse(
                         entity = player,
-                        pulse = BarbSmithingPulse(player, weapon, amount, id),
+                        pulse = BarbarianSmithingPulse(player, weapon, amount, id),
                     )
                 }
                 calculateMaxAmount {

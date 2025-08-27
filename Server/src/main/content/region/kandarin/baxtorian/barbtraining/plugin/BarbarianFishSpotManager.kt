@@ -1,13 +1,13 @@
-package content.region.kandarin.plugin.barbtraining.plugin
+package content.region.kandarin.baxtorian.barbtraining.plugin
 
 import core.api.StartupListener
 import core.api.TickListener
 import core.game.world.map.Location
 import core.tools.RandomFunction
 
-class BarbFishSpotManager : TickListener, StartupListener {
+class BarbarianFishSpotManager : TickListener, StartupListener {
     var ticks = 0
-    val spots = ArrayList<BarbFishingSpot>()
+    val spots = ArrayList<BarbarianFishingSpot>()
 
     companion object {
         val usedLocations = arrayListOf<Location>()
@@ -41,7 +41,7 @@ class BarbFishSpotManager : TickListener, StartupListener {
 
     override fun startup() {
         for (i in 0 until 5) {
-            spots.add(BarbFishingSpot(getNewLoc(), getNewTTL()).also { it.init() })
+            spots.add(BarbarianFishingSpot(getNewLoc(), getNewTTL()).also { it.init() })
         }
     }
 }

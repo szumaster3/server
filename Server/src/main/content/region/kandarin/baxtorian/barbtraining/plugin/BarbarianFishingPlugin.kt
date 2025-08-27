@@ -1,9 +1,6 @@
-package content.region.kandarin.plugin.barbtraining.plugin
+package content.region.kandarin.baxtorian.barbtraining.plugin
 
-import content.region.kandarin.plugin.barbtraining.BarbarianTraining
-import content.region.kandarin.plugin.barbtraining.plugin.BarbFishSpotManager.Companion.getNewLoc
-import content.region.kandarin.plugin.barbtraining.plugin.BarbFishSpotManager.Companion.getNewTTL
-import content.region.kandarin.plugin.barbtraining.plugin.BarbFishSpotManager.Companion.usedLocations
+import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -12,31 +9,21 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Scenery
 
-class BarbFishingPlugin : InteractionListener {
-    private val fishCuttingIds = intArrayOf(
-        Items.LEAPING_TROUT_11328,
-        Items.LEAPING_SALMON_11330,
-        Items.LEAPING_STURGEON_11332
-    )
-    private val barbFishingSpot = NPCs.FISHING_SPOT_1176
-    private val barbarianBed = Scenery.BARBARIAN_BED_25268
-    private val barbarianRod = Items.BARBARIAN_ROD_11323
+class BarbarianFishingPlugin : InteractionListener {
+    private val FISH_BAIT = intArrayOf(Items.LEAPING_TROUT_11328, Items.LEAPING_SALMON_11330, Items.LEAPING_STURGEON_11332)
 
     override fun defineListeners() {
-        on(barbarianBed, IntType.SCENERY, "search") { player, _ ->
+        on(Scenery.BARBARIAN_BED_25268, IntType.SCENERY, "search") { player, _ ->
             if (getAttribute(player, BarbarianTraining.FISHING_BASE, false)) {
-                if (!inInventory(player, barbarianRod) && freeSlots(player) > 0) {
+                if (!inInventory(player, Items.BARBARIAN_ROD_11323) && freeSlots(player) > 0) {
                     sendMessage(player, "You find a heavy fishing rod under the bed and take it.")
-                    addItem(player, barbarianRod)
+                    addItem(player, Items.BARBARIAN_ROD_11323, 1)
                 } else {
                     sendMessage(player, "You don't find anything that interests you.")
                 }
@@ -46,7 +33,7 @@ class BarbFishingPlugin : InteractionListener {
             return@on true
         }
 
-        on(barbFishingSpot, IntType.NPC, "fish") { player, _ ->
+        on(NPCs.FISHING_SPOT_1176, IntType.NPC, "fish") { player, _ ->
             if (!getAttribute(player, BarbarianTraining.FISHING_START, false)) {
                 sendMessage(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
                 return@on true
@@ -57,14 +44,14 @@ class BarbFishingPlugin : InteractionListener {
             return@on true
         }
 
-        onUseWith(IntType.ITEM, Items.KNIFE_946, *fishCuttingIds) { player, _, with ->
+        onUseWith(IntType.ITEM, Items.KNIFE_946, *FISH_BAIT) { player, _, with ->
             val slots = freeSlots(player)
             val hasOffcuts = inInventory(player, Items.FISH_OFFCUTS_11334)
             if (slots < 2 && (slots < 1 || !hasOffcuts)) {
                 sendMessage(player, "You don't have enough space in your pack to attempt cutting open the fish.")
                 return@onUseWith false
             }
-            submitIndividualPulse(player, BarbFishCuttingPulse(player, with.id))
+            submitIndividualPulse(player, BarbarianFishCuttingPulse(player, with.id))
             return@onUseWith true
         }
 
@@ -74,14 +61,7 @@ class BarbFishingPlugin : InteractionListener {
 
 private class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player, NPC(NPCs.FISHING_SPOT_1176)) {
 
-    private val fishingBait = anyInInventory(
-        player,
-        Items.FISHING_BAIT_313,
-        Items.FEATHER_314,
-        Items.ROE_11324,
-        Items.FISH_OFFCUTS_11334,
-        Items.CAVIAR_11326,
-    )
+    private val FISHING_BAIT = anyInInventory(player, Items.FISHING_BAIT_313, Items.FEATHER_314, Items.ROE_11324, Items.FISH_OFFCUTS_11334, Items.CAVIAR_11326)
 
     override fun checkRequirements(): Boolean {
         if (getStatLevel(player, Skills.FISHING) < 48) {
@@ -89,21 +69,14 @@ private class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player, NPC(NPC
             return false
         }
         if (getStatLevel(player, Skills.AGILITY) < 15 || getStatLevel(player, Skills.STRENGTH) < 15) {
-            player.sendMessages(
-                "You need a ",
-                if (getStatLevel(player, Skills.AGILITY) < 15 && getStatLevel(
-                        player,
-                        Skills.STRENGTH,
-                    ) < 15
+            player.sendMessages("You need a ", if (getStatLevel(player, Skills.AGILITY) < 15 && getStatLevel(player, Skills.STRENGTH) < 15
                 ) {
                     "agility and strength"
                 } else if (getStatLevel(player, Skills.AGILITY) < 15) {
                     "agility"
                 } else {
                     "strength"
-                },
-                " level of at least 15 to fish here.",
-            )
+                }, " level of at least 15 to fish here.",)
             return false
         }
         if (!inInventory(player, Items.BARBARIAN_ROD_11323)) {
@@ -116,7 +89,7 @@ private class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player, NPC(NPC
             return false
         }
 
-        if (!fishingBait) {
+        if (!FISHING_BAIT) {
             sendMessage(player, "You don't have any bait with which to fish.")
             return false
         }
@@ -187,36 +160,5 @@ private class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player, NPC(NPC
         if (fishing >= 58 && (strength >= 30 && agility >= 30)) possibleIndex++
         if (fishing >= 70 && (strength >= 45 && agility >= 45)) possibleIndex++
         return Item(fish[RandomFunction.random(possibleIndex + 1)])
-    }
-}
-
-private class BarbFishCuttingPulse(val player: Player, val fish: Int) : Pulse(0) {
-
-    override fun pulse(): Boolean {
-        player.animator.animate(Animation(Animations.CRAFT_KNIFE_5244))
-        player.inventory.remove(Item(fish))
-        player.inventory.add(Item(Items.FISH_OFFCUTS_11334))
-        player.inventory.add(
-            Item(
-                when (fish) {
-                    Items.LEAPING_TROUT_11328, Items.LEAPING_SALMON_11330 -> Items.ROE_11324
-                    Items.LEAPING_STURGEON_11332 -> Items.CAVIAR_11326
-                    else -> 0
-                },
-            ),
-        )
-
-        player.skills.addExperience(
-            Skills.COOKING,
-            when (fish) {
-                Items.LEAPING_TROUT_11328, Items.LEAPING_SALMON_11330 -> 10.0
-                Items.LEAPING_STURGEON_11332 -> 15.0
-                else -> 0.0
-            },
-        )
-
-        sendMessage(player, "You cut open the fish and extract some roe, but the rest of the fish is reduced to")
-        sendMessage(player, "useless fragments, which you discard.")
-        return true
     }
 }

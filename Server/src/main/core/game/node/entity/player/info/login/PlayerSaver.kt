@@ -482,6 +482,14 @@ class PlayerSaver(val player: Player) {
         activityData.addProperty("hardcoreDeath", player.savedData.activityData.hardcoreDeath)
         activityData.addProperty("topGrabbed", player.savedData.activityData.isTopGrabbed)
 
+        activityData.addProperty("barbFiremakingBow", player.savedData.activityData.isBarbarianFiremakingBow)
+        activityData.addProperty("barbFiremakingPyre", player.savedData.activityData.isBarbarianFiremakingPyre)
+        activityData.addProperty("barbFishingRod", player.savedData.activityData.isBarbarianFishingRod)
+        activityData.addProperty("barbFishingBarehand", player.savedData.activityData.isBarbarianFishingBarehand)
+        activityData.addProperty("barbSmithingSpear", player.savedData.activityData.isBarbarianSmithingSpear)
+        activityData.addProperty("barbSmithingHasta", player.savedData.activityData.isBarbarianSmithingHasta)
+        activityData.addProperty("barbHerblore", player.savedData.activityData.isBarbarianHerbloreAttackMix)
+
         root.add("activityData", activityData)
     }
 

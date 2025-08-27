@@ -1,10 +1,10 @@
-package content.region.kandarin.plugin.barbtraining.book
+package content.region.kandarin.baxtorian.barbtraining.book
 
 import content.global.plugin.iface.BookInterface
 import content.global.plugin.iface.BookLine
 import content.global.plugin.iface.Page
 import content.global.plugin.iface.PageSet
-import content.region.kandarin.plugin.barbtraining.BarbarianTraining
+import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.getAttribute
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

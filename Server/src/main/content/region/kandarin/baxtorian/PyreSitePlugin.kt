@@ -1,4 +1,4 @@
-package content.region.kandarin.plugin
+package content.region.kandarin.baxtorian
 
 import content.data.items.SkillingTool
 import content.global.skill.firemaking.Log

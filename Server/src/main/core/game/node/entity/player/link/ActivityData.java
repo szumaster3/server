@@ -29,6 +29,21 @@ public final class ActivityData {
     private boolean hardcoreDeath;
     boolean topGrabbed;
 
+    // Barbarian Firemaking
+    private boolean barbarianFiremakingBow;   // Lighting fires with a bow
+    private boolean barbarianFiremakingPyre;  // Lighting pyre ships
+
+    // Barbarian Fishing
+    private boolean barbarianFishingRod;      // Heavy rod fishing
+    private boolean barbarianFishingBarehand; // Barehanded fishing
+
+    // Barbarian Smithing
+    private boolean barbarianSmithingSpear;   // Spear smithing
+    private boolean barbarianSmithingHasta;   // Hasta smithing
+
+    // Barbarian Herblore
+    private boolean barbarianHerbloreAttackMix; // Attack potion + roe
+
     /**
      * Instantiates a new Activity data.
      */
@@ -517,4 +532,102 @@ public final class ActivityData {
     public int getKolodionStage() {
         return kolodionStage;
     }
+
+    /**
+     * Checks if the player has completed bow firemaking.
+     *
+     * @return true if bow firemaking is done, false otherwise
+     */
+    public boolean isBarbarianFiremakingBow() { return barbarianFiremakingBow; }
+
+    /**
+     * Sets the completion status of bow firemaking.
+     *
+     * @param barbarianFiremakingBow true if bow firemaking is done
+     */
+    public void setBarbarianFiremakingBow(boolean barbarianFiremakingBow) { this.barbarianFiremakingBow = barbarianFiremakingBow; }
+
+    /**
+     * Checks if the player has completed pyre ship firemaking.
+     *
+     * @return true if pyre ship firemaking is done, false otherwise
+     */
+    public boolean isBarbarianFiremakingPyre() { return barbarianFiremakingPyre; }
+
+    /**
+     * Sets the completion status of pyre ship firemaking.
+     *
+     * @param barbarianFiremakingPyre true if pyre ship firemaking is done
+     */
+    public void setBarbarianFiremakingPyre(boolean barbarianFiremakingPyre) { this.barbarianFiremakingPyre = barbarianFiremakingPyre; }
+
+    /**
+     * Checks if the player has completed rod fishing.
+     *
+     * @return true if rod fishing is done, false otherwise
+     */
+    public boolean isBarbarianFishingRod() { return barbarianFishingRod; }
+
+    /**
+     * Sets the completion status of rod fishing.
+     *
+     * @param barbarianFishingRod true if rod fishing is done
+     */
+    public void setBarbarianFishingRod(boolean barbarianFishingRod) { this.barbarianFishingRod = barbarianFishingRod; }
+
+    /**
+     * Checks if the player has completed barehanded fishing.
+     *
+     * @return true if barehanded fishing is done, false otherwise
+     */
+    public boolean isBarbarianFishingBarehand() { return barbarianFishingBarehand; }
+
+    /**
+     * Sets the completion status of barehanded fishing.
+     *
+     * @param barbarianFishingBarehand true if barehanded fishing is done
+     */
+    public void setBarbarianFishingBarehand(boolean barbarianFishingBarehand) { this.barbarianFishingBarehand = barbarianFishingBarehand; }
+
+    /**
+     * Checks if the player has completed spear smithing.
+     *
+     * @return true if spear smithing is done, false otherwise
+     */
+    public boolean isBarbarianSmithingSpear() { return barbarianSmithingSpear; }
+
+    /**
+     * Sets the completion status of spear smithing.
+     *
+     * @param barbarianSmithingSpear true if spear smithing is done
+     */
+    public void setBarbarianSmithingSpear(boolean barbarianSmithingSpear) { this.barbarianSmithingSpear = barbarianSmithingSpear; }
+
+    /**
+     * Checks if the player has completed hasta smithing.
+     *
+     * @return true if hasta smithing is done, false otherwise
+     */
+    public boolean isBarbarianSmithingHasta() { return barbarianSmithingHasta; }
+
+    /**
+     * Sets the completion status of hasta smithing.
+     *
+     * @param barbarianSmithingHasta true if hasta smithing is done
+     */
+    public void setBarbarianSmithingHasta(boolean barbarianSmithingHasta) { this.barbarianSmithingHasta = barbarianSmithingHasta; }
+
+    /**
+     * Checks if the player has completed herblore (attack mix).
+     *
+     * @return true if herblore attack mix is done, false otherwise
+     */
+    public boolean isBarbarianHerbloreAttackMix() { return barbarianHerbloreAttackMix; }
+
+    /**
+     * Sets the completion status of herblore (attack mix).
+     *
+     * @param barbarianHerbloreAttackMix true if herblore attack mix is done
+     */
+    public void setBarbarianHerbloreAttackMix(boolean barbarianHerbloreAttackMix) { this.barbarianHerbloreAttackMix = barbarianHerbloreAttackMix; }
 }

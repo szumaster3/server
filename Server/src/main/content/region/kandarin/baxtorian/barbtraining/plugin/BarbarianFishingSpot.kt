@@ -1,10 +1,10 @@
-package content.region.kandarin.plugin.barbtraining.plugin
+package content.region.kandarin.baxtorian.barbtraining.plugin
 
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import shared.consts.NPCs
 
-class BarbFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(NPCs.FISHING_SPOT_1176) {
+class BarbarianFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(NPCs.FISHING_SPOT_1176) {
 
     init {
         location = loc
@@ -21,10 +21,10 @@ class BarbFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(NPCs.FISHIN
     )
 
     override fun handleTickActions() {
-        if (location != loc) properties.teleportLocation = loc.also { ttl = BarbFishSpotManager.getNewTTL() }
+        if (location != loc) properties.teleportLocation = loc.also { ttl = BarbarianFishSpotManager.getNewTTL() }
         if (ttl-- <= 0) {
-            BarbFishSpotManager.Companion.usedLocations.remove(location)
-            loc = BarbFishSpotManager.Companion.getNewLoc()
+            BarbarianFishSpotManager.usedLocations.remove(location)
+            loc = BarbarianFishSpotManager.getNewLoc()
         }
     }
 }

@@ -1,7 +1,7 @@
-package content.region.kandarin.plugin.barbtraining.plugin
+package content.region.kandarin.baxtorian.barbtraining.plugin
 
 import content.global.skill.herblore.BarbarianMix
-import content.region.kandarin.plugin.barbtraining.BarbarianTraining
+import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -11,7 +11,7 @@ import core.game.node.entity.skill.Skills
 import shared.consts.Animations
 import shared.consts.Items
 
-class BarbHerblorePlugin : InteractionListener {
+class BarbarianHerblorePlugin : InteractionListener {
     override fun defineListeners() {
 
         for (potion in BarbarianMix.values()) {

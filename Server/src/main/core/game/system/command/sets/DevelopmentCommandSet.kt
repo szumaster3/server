@@ -6,7 +6,7 @@ import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
 import content.minigame.mta.plugin.MTAZone
 import content.region.island.tutorial.plugin.TutorialStage
-import content.region.kandarin.plugin.barbtraining.BarbarianTraining
+import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
