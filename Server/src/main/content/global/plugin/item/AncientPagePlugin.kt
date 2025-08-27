@@ -53,54 +53,43 @@ class AncientPagePlugin : InteractionListener {
 
             for (i in 0..25) {
                 if (getAttribute(player, "${GameAttributes.LORE_ANCIENT_PAGES_TRANSCRIPT}:${Items.ANCIENT_PAGE_11341 + i}", false)) {
-                    ownedPages.add(i)
+                    ownedPages.add(i + 1)
                 }
             }
 
             CONTENTS.clear()
-            ancientPageTranscripts // Generate content pages.
-                .mapIndexed { index, lines ->
-                    val cleanedLines = lines.filter { it.isNotBlank() }.map { it.trim() }
-                    val splitLines = cleanedLines.flatMap { line -> splitText(line).toList() }
 
-                    val isPageLeft = index % 2 == 0
-                    var pageID = if (isPageLeft) 55 else 66
+            val pages = ancientPageTranscripts.mapIndexedNotNull { index, lines ->
+                val cleanedLines = lines.filter { it.isNotBlank() }.map { it.trim() }
+                val splitLines = cleanedLines.flatMap { splitText(it).toList() }
 
-                    // Create book lines.
-                    val bookLines = splitLines.mapIndexed { lineIndex, text ->
-                        if (pageID + lineIndex > 76) {
-                            pageID = 55
-                        } else if (pageID + lineIndex > 65) {
-                            pageID = 66
-                        }
-                        BookLine(text, pageID + lineIndex)
+                if (splitLines.isEmpty()) return@mapIndexedNotNull null
+
+                var pageID = if (index % 2 == 0) 55 else 66
+
+                val bookLines = splitLines.mapIndexed { lineIndex, text ->
+                    if (pageID + lineIndex > 76) {
+                        pageID = 55
+                    } else if (pageID + lineIndex > 65) {
+                        pageID = 66
                     }
-
-                    if (bookLines.isNotEmpty()) {
-                        Page(*bookLines.toTypedArray())
-                    } else {
-                        null
-                    }
+                    BookLine(text, pageID + lineIndex)
                 }
-                .filterNotNull()
-                .chunked(2) // Group pages into pairs.
-                .forEachIndexed { setIndex, pages ->
-                    val leftPageID = setIndex * 2 + 1
-                    val rightPageID = leftPageID + 1
 
-                    val leftPage = if (ownedPages.contains(leftPageID)) {
-                        pages.getOrElse(0) { return@forEachIndexed }
-                    } else {
-                        return@forEachIndexed
-                    }
+                Page(*bookLines.toTypedArray())
+            }
 
-                    val rightPage = if (pages.size > 1 && ownedPages.contains(rightPageID)) {
-                        pages.getOrElse(1) { return@forEachIndexed }
-                    } else {
-                        return@forEachIndexed
-                    }
-                    CONTENTS.add(PageSet(leftPage, rightPage))
-                }
+            pages.chunked(2).forEachIndexed { setIndex, pagePair ->
+                if (pagePair.isEmpty()) return@forEachIndexed
+
+                val leftPageID = setIndex * 2 + 1
+                val rightPageID = leftPageID + 1
+
+                val leftPage = if (ownedPages.contains(leftPageID) && pagePair.isNotEmpty()) pagePair[0] else EMPTY_PAGE
+                val rightPage = if (ownedPages.contains(rightPageID) && pagePair.size > 1) pagePair[1] else EMPTY_PAGE
+
+                CONTENTS.add(PageSet(leftPage, rightPage))
+            }
 
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
             return@on true
@@ -108,6 +97,7 @@ class AncientPagePlugin : InteractionListener {
     }
 
     companion object {
+        private val EMPTY_PAGE = Page(BookLine("", 0))
         private val ancientPageTranscripts = listOf(
             // Ancient page number 1.
             listOf( // TODO: Handle split correction caused by absent source data.
