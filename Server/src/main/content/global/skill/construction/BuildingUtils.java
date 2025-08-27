@@ -112,7 +112,7 @@ public final class BuildingUtils {
                     if (j == decoration.getItems().length && decoration.getNailAmount() > 0) {
                         player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, (itemsStringOffset + 1) + j);
                     } else {
-                        player.getPacketDispatch().sendString("", Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j);
+                        player.getPacketDispatch().sendString("", 396, (itemsStringOffset + 1) + j);
                     }
                 } else {
                     Item item = decoration.getItems()[j];
@@ -180,7 +180,7 @@ public final class BuildingUtils {
     public static void buildDecoration(final Player player, final Hotspot hotspot, final Decoration deco, final Scenery object, final boolean usingFlatpack) {
         final int nailAmount = deco.getNailAmount();
         final NailType type = nailAmount > 0 ? NailType.get(player, nailAmount) : null;
-        if (nailAmount > 0 && type == null) {
+        if (nailAmount > 0 && type == null && !usingFlatpack && !player.isAdmin()) {
             player.getPacketDispatch().sendMessage("You don't have the right materials.");
             return;
         }
@@ -637,8 +637,8 @@ public final class BuildingUtils {
     /**
      * Checks of a room exists.
      *
-     * @param player the player
-     * @param door   the door hotspot the player is trying to build at
+     * @param player The player
+     * @param door   The door hotspot the player is trying to build at
      * @return true if the room is built already
      */
     public static int[] roomExists(Player player, Scenery door) {

@@ -745,14 +745,14 @@
   },
   {
     "id": "395",
-    "interfaceType": "1",
+    "interfaceType": "4",
     "walkable": "false",
     "tabIndex": "-1"
   },
   {
-    "id": "396",
-    "interfaceType": "2",
-    "walkable": "true",
+    "id": "398",
+    "interfaceType": "3",
+    "walkable": "false",
     "tabIndex": "-1"
   },
   {
