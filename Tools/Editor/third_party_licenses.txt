@@ -1,0 +1,142 @@
+Application Version: 2.0.4-internal
+Kotlin Version: 1.7.10
+Java Version: 17
+
+---
+
+This application bundles third-party libraries with the following licenses:
+
+Library: rs2-file-server
+Group ID: com.greghib
+Version: latest
+URL: https://github.com/GregHib/rs2-file-server
+License: BSD 3-Clause License
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. Neither the name of the project nor the names of its contributors may be
+   used to endorse or promote products derived from this software without
+   specific prior written permission.
+
+(see: https://github.com/GregHib/rs2-file-server/blob/master/LICENSE)
+
+---
+
+Library: rs.cache-library
+Group ID: com.displee
+Version: 6.8.1
+URL: https://github.com/displee/core.cache
+License: MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+(see: https://github.com/displee/core.cache/blob/master/LICENSE)
+
+---
+
+Library: disio
+Group ID: com.displee
+Version: 2.2
+URL: https://github.com/displee/disio
+License: MIT License
+
+(see: https://github.com/displee/disio/blob/master/LICENSE)
+
+---
+
+Library: Darklaf
+Group ID: com.github.weisj
+Artifact: darklaf-core
+Version: 3.0.2
+URL: https://github.com/weisJ/darklaf
+License: Apache License 2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+---
+
+Library: swing-dsl
+Group ID: com.github.weisJ
+Version: 0.1.0
+URL: https://github.com/weisJ/swing-dsl
+License: MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+(see: https://github.com/weisJ/swing-dsl/blob/master/LICENSE)
+
+---
+
+Library: Markdown JVM
+Group ID: org.jetbrains
+Artifact: markdown-jvm
+Version: 0.2.0
+URL: https://github.com/JetBrains/markdown
+License: Apache License 2.0
+
+(see: https://github.com/JetBrains/markdown/blob/master/LICENSE.txt)
+
+---
+
+Library: gson
+Location: libs/gson.jar
+License: Apache License 2.0
+URL: https://github.com/google/gson
+Version: 2.9.0
+
+(see: https://github.com/google/gson/blob/master/LICENSE)
+
+---
+
+Note:
+This application and its components may include dependencies licensed under different terms.
+You must comply with each library’s license when distributing or modifying this software.
+
+---
+
+Icon Attribution:
+The icon integrated within this application was sourced from the RuneScape Wiki:
+URL: https://runescape.wiki/images/Apple-touch-icon.png?2d422
+
+License:
+Creative Commons Attribution-NonCommercial-ShareAlike 3.0 (CC BY-NC-SA 3.0)
+https://creativecommons.org/licenses/by-nc-sa/3.0/
+
+Usage Terms:
+- Non-commercial use only
+- Attribution required
+- ShareAlike applies to derivatives
+- Additional terms may apply (see RuneScape Wiki)
+
+Trademarks:
+RuneScape® and Old School RuneScape® are trademarks of Jagex Limited.
+This tool is third-party and not affiliated with or endorsed by Jagex Limited.
+
+Icon Attribution:
+URL: https://runescape.wiki/images/Apple-touch-icon.png?2d422
