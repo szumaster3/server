@@ -15,6 +15,7 @@ import core.game.system.task.Pulse
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
+import shared.consts.Sounds
 import kotlin.math.max
 
 class ZygomiteNPC :
@@ -92,6 +93,7 @@ class ZygomiteNPC :
         } else {
             sendMessage(player, "The zygomite is covered in fungicide. It bubbles away to nothing!")
             replaceSlot(player, used.asItem().slot, Item(used.id + 1))
+            playAudio(player, Sounds.ZYGO_SPRAY_1967)
             with.startDeath(player)
         }
         return true

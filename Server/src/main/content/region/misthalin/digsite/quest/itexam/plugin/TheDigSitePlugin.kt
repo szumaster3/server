@@ -22,10 +22,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Scenery
+import shared.consts.*
 
 class TheDigSitePlugin : InteractionListener {
     override fun defineListeners() {
@@ -235,6 +232,7 @@ class TheDigSitePlugin : InteractionListener {
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
+                                playAudio(player, Sounds.DIGSITE_PANNING_2377)
                                 animate(player, PANNING_ANIMATION)
                                 return@queueScript delayScript(player, PANNING_ANIMATION.duration)
                             }
@@ -336,6 +334,7 @@ class TheDigSitePlugin : InteractionListener {
                         when (stage) {
                             0 -> {
                                 sendMessage(player, "You dig through the earth...")
+                                playAudio(player, Sounds.DIGSITE_DIG_TROWEL_2376)
                                 animate(player, TROWEL_ANIMATION)
                                 lock(player, TROWEL_ANIMATION.duration)
                                 return@queueScript delayScript(player, TROWEL_ANIMATION.duration)
@@ -367,12 +366,13 @@ class TheDigSitePlugin : InteractionListener {
             val level2Dig = ZoneBorders(3350, 3424, 3363, 3430)
             if (level2Dig.insideBorder(player.location)) {
                 if (getQuestStage(player, Quests.THE_DIG_SITE) >= 5) {
+                    lock(player, TROWEL_ANIMATION.duration)
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
                                 sendMessage(player, "You dig through the earth...")
+                                playAudio(player, Sounds.DIGSITE_DIG_TROWEL_2376)
                                 animate(player, TROWEL_ANIMATION)
-                                lock(player, TROWEL_ANIMATION.duration)
                                 return@queueScript delayScript(player, TROWEL_ANIMATION.duration)
                             }
 
@@ -403,12 +403,13 @@ class TheDigSitePlugin : InteractionListener {
             val level1DigRight = ZoneBorders(3367, 3403, 3372, 3414)
             if (level1DigCentre.insideBorder(player.location) || level1DigRight.insideBorder(player.location)) {
                 if (getQuestStage(player, Quests.THE_DIG_SITE) >= 4) {
+                    lock(player, TROWEL_ANIMATION.duration)
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
                                 sendMessage(player, "You dig through the earth...")
+                                playAudio(player, Sounds.DIGSITE_DIG_TROWEL_2376)
                                 animate(player, TROWEL_ANIMATION)
-                                lock(player, TROWEL_ANIMATION.duration)
                                 return@queueScript delayScript(player, TROWEL_ANIMATION.duration)
                             }
 
@@ -439,12 +440,13 @@ class TheDigSitePlugin : InteractionListener {
             val trainingDigRight = ZoneBorders(3367, 3397, 3372, 3400)
             if (trainingDigLeft.insideBorder(player.location) || trainingDigRight.insideBorder(player.location)) {
                 if (getQuestStage(player, Quests.THE_DIG_SITE) >= 3) {
+                    lock(player, TROWEL_ANIMATION.duration)
                     queueScript(player, 0, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
                                 sendMessage(player, "You dig through the earth...")
+                                playAudio(player, Sounds.DIGSITE_DIG_TROWEL_2376)
                                 animate(player, TROWEL_ANIMATION)
-                                lock(player, TROWEL_ANIMATION.duration)
                                 return@queueScript delayScript(player, TROWEL_ANIMATION.duration)
                             }
 
@@ -482,10 +484,7 @@ class TheDigSitePlugin : InteractionListener {
                 } else {
                     sendMessage(player, "You operate the winch...")
                     queueScript(player, 2, QueueStrength.NORMAL) {
-                        sendPlayerDialogue(
-                            player,
-                            "Hey, I think I could fit down here. I need something to help me get all the way down.",
-                        )
+                        sendPlayerDialogue(player, "Hey, I think I could fit down here. I need something to help me get all the way down.")
                         sendMessage(player, "The bucket descends, but does not reach the bottom.")
                         return@queueScript stopExecuting(player)
                     }
@@ -494,29 +493,10 @@ class TheDigSitePlugin : InteractionListener {
                 openDialogue(
                     player,
                     object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
+                        override fun handle(componentID: Int, buttonID: Int) {
                             when (stage) {
-                                0 ->
-                                    npc(
-                                        NPCs.DIGSITE_WORKMAN_613,
-                                        "Sorry; this area is private. The only way you'll get to",
-                                        "use these is by impressing the archaeological expert up",
-                                        "at the center.",
-                                    ).also {
-                                        stage++
-                                    }
-                                1 ->
-                                    npc(
-                                        NPCs.DIGSITE_WORKMAN_613,
-                                        "Find something worthwhile and he might let you use the",
-                                        "winches. Until then, get lost!",
-                                    ).also {
-                                        stage =
-                                            END_DIALOGUE
-                                    }
+                                0 -> npc(NPCs.DIGSITE_WORKMAN_613, "Sorry; this area is private. The only way you'll get to", "use these is by impressing the archaeological expert up", "at the center.").also { stage++ }
+                                1 -> npc(NPCs.DIGSITE_WORKMAN_613, "Find something worthwhile and he might let you use the", "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                             }
                         }
                     },
@@ -535,29 +515,10 @@ class TheDigSitePlugin : InteractionListener {
                     openDialogue(
                         player,
                         object : DialogueFile() {
-                            override fun handle(
-                                componentID: Int,
-                                buttonID: Int,
-                            ) {
+                            override fun handle(componentID: Int, buttonID: Int) {
                                 when (stage) {
-                                    0 ->
-                                        npc(
-                                            NPCs.DIGSITE_WORKMAN_613,
-                                            "Sorry; this area is private. The only way you'll get to",
-                                            "use these is by impressing the archaeological expert up",
-                                            "at the center.",
-                                        ).also {
-                                            stage++
-                                        }
-                                    1 ->
-                                        npc(
-                                            NPCs.DIGSITE_WORKMAN_613,
-                                            "Find something worthwhile and he might let you use the",
-                                            "winches. Until then, get lost!",
-                                        ).also {
-                                            stage =
-                                                END_DIALOGUE
-                                        }
+                                    0 -> npc(NPCs.DIGSITE_WORKMAN_613, "Sorry; this area is private. The only way you'll get to", "use these is by impressing the archaeological expert up", "at the center.").also { stage++ }
+                                    1 -> npc(NPCs.DIGSITE_WORKMAN_613, "Find something worthwhile and he might let you use the", "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                                 }
                             }
                         },
@@ -599,25 +560,10 @@ class TheDigSitePlugin : InteractionListener {
                 openDialogue(
                     player,
                     object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
+                        override fun handle(componentID: Int, buttonID: Int) {
                             when (stage) {
-                                0 ->
-                                    npc(
-                                        NPCs.DIGSITE_WORKMAN_613,
-                                        "Sorry; this area is private. The only way you'll get to",
-                                        "use these is by impressing the archaeological expert up",
-                                        "at the center.",
-                                    ).also { stage++ }
-
-                                1 ->
-                                    npc(
-                                        NPCs.DIGSITE_WORKMAN_613,
-                                        "Find something worthwhile and he might let you use the",
-                                        "winches. Until then, get lost!",
-                                    ).also { stage = END_DIALOGUE }
+                                0 -> npc(NPCs.DIGSITE_WORKMAN_613, "Sorry; this area is private. The only way you'll get to", "use these is by impressing the archaeological expert up", "at the center.").also { stage++ }
+                                1 -> npc(NPCs.DIGSITE_WORKMAN_613, "Find something worthwhile and he might let you use the", "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                             }
                         }
                     },
@@ -635,25 +581,10 @@ class TheDigSitePlugin : InteractionListener {
                     openDialogue(
                         player,
                         object : DialogueFile() {
-                            override fun handle(
-                                componentID: Int,
-                                buttonID: Int,
-                            ) {
+                            override fun handle(componentID: Int, buttonID: Int) {
                                 when (stage) {
-                                    0 ->
-                                        npc(
-                                            NPCs.DIGSITE_WORKMAN_613,
-                                            "Sorry; this area is private. The only way you'll get to",
-                                            "use these is by impressing the archaeological expert up",
-                                            "at the center.",
-                                        ).also { stage++ }
-
-                                    1 ->
-                                        npc(
-                                            NPCs.DIGSITE_WORKMAN_613,
-                                            "Find something worthwhile and he might let you use the",
-                                            "winches. Until then, get lost!",
-                                        ).also { stage = END_DIALOGUE }
+                                    0 -> npc(NPCs.DIGSITE_WORKMAN_613, "Sorry; this area is private. The only way you'll get to", "use these is by impressing the archaeological expert up", "at the center.").also { stage++ }
+                                    1 -> npc(NPCs.DIGSITE_WORKMAN_613, "Find something worthwhile and he might let you use the", "winches. Until then, get lost!").also { stage = END_DIALOGUE }
                                 }
                             }
                         },
@@ -679,19 +610,11 @@ class TheDigSitePlugin : InteractionListener {
 
         on(Scenery.BRICK_2362, SCENERY, "search") { player, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 8) {
-                sendPlayerDialogue(
-                    player,
-                    "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...",
-                    FaceAnim.THINKING,
-                )
+                sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FaceAnim.THINKING)
                 setQuestStage(player, Quests.THE_DIG_SITE, 9)
             }
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
-                sendPlayerDialogue(
-                    player,
-                    "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...",
-                    FaceAnim.THINKING,
-                )
+                sendPlayerDialogue(player, "Hmmm, there's a room past these bricks. If I could move them out of the way then I could find out what's inside. Maybe there's someone around here who can help...", FaceAnim.THINKING)
             }
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
                 sendPlayerDialogue(player, "The brick is covered with the chemicals I made.", FaceAnim.THINKING)

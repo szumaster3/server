@@ -1,8 +1,6 @@
 package content.global.skill.magic.spells.lunar
 
-import core.api.removeAttribute
-import core.api.sendDialogueOptions
-import core.api.setAttribute
+import core.api.*
 import core.game.component.Component
 import core.game.dialogue.Dialogue
 import core.game.node.Node
@@ -21,6 +19,7 @@ import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
+import shared.consts.Sounds
 
 @Initializable
 class SpellbookSwapSpell :
@@ -52,8 +51,7 @@ class SpellbookSwapSpell :
             return false
         }
         player.lock(9)
-        player.animate(ANIMATION)
-        player.graphics(Graphics)
+        visualize(player, ANIMATION, Graphics)
         player.dialogueInterpreter.open(3264731)
         val id = RandomFunction.random(1, 500000)
         setAttribute(player, "spell:swap", id)
@@ -99,6 +97,7 @@ class SpellbookSwapDialogue(
                     2 -> type = 2
                 }
                 val book = if (type == 1) SpellBook.ANCIENT else SpellBook.MODERN
+                playAudio(player, Sounds.LUNAR_CHANGE_SPELLBOOK_3613)
                 player.spellBookManager.setSpellBook(book)
                 player.interfaceManager.openTab(Component(book.interfaceId))
                 end()

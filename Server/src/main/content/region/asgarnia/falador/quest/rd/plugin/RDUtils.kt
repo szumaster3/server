@@ -74,7 +74,7 @@ object RDUtils {
         replaceSlot(player, slot = used.index, Item(newItem.id))
         replaceSlot(player, slot = with.index, Item(Items.VIAL_229))
         animate(player, Animation(Animations.HUMAN_USE_PESTLE_AND_MORTAR_364))
-        playAudio(player, Sounds.VIALPOUR_2613)
+        playAudio(player, Sounds.POUR_STICKY_LIQUID_2216)
         sendMessage(player, "You empty the vial into the tin.")
     }
 
@@ -87,7 +87,7 @@ object RDUtils {
 
         if (removeItem(player, used.id)) {
             animate(player, Animation(Animations.POUR_VIAL_2259))
-            playAudio(player, Sounds.VIALPOUR_2613)
+            playAudio(player, Sounds.POUR_STICKY_LIQUID_2216)
 
             val doorVial = MissCheeversPlugin.Companion.DoorVials.doorVialsMap[used.id]
             if (doorVial != null) {
@@ -106,7 +106,7 @@ object RDUtils {
             }
         ) {
             animate(player, Animation(2259))
-            playAudio(player, Sounds.VIALPOUR_2613)
+            playAudio(player, Sounds.POUR_STICKY_LIQUID_2216)
             sendMessage(player, "Something caused a reaction when mixed!")
             sendMessage(player, "The spade gets hotter, and expands slightly.")
             setVarbit(player, MissCheeversPlugin.doorVarbit, 2)

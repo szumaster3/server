@@ -485,7 +485,12 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
      * @author Vexia
      */
     public enum Lever {
-        LEVER_A(shared.consts.Scenery.LEVER_A_11451, shared.consts.Scenery.LEVER_A_11452), LEVER_B(shared.consts.Scenery.LEVER_B_11453, shared.consts.Scenery.LEVER_B_11454), LEVER_C(shared.consts.Scenery.LEVER_C_11455, shared.consts.Scenery.LEVER_C_11456), LEVER_D(shared.consts.Scenery.LEVER_D_11457, shared.consts.Scenery.LEVER_D_11458), LEVER_E(shared.consts.Scenery.LEVER_E_11459, shared.consts.Scenery.LEVER_E_11460), LEVER_F(shared.consts.Scenery.LEVER_F_11461, shared.consts.Scenery.LEVER_F_11462);
+        LEVER_A(shared.consts.Scenery.LEVER_A_11451, shared.consts.Scenery.LEVER_A_11452),
+        LEVER_B(shared.consts.Scenery.LEVER_B_11453, shared.consts.Scenery.LEVER_B_11454),
+        LEVER_C(shared.consts.Scenery.LEVER_C_11455, shared.consts.Scenery.LEVER_C_11456),
+        LEVER_D(shared.consts.Scenery.LEVER_D_11457, shared.consts.Scenery.LEVER_D_11458),
+        LEVER_E(shared.consts.Scenery.LEVER_E_11459, shared.consts.Scenery.LEVER_E_11460),
+        LEVER_F(shared.consts.Scenery.LEVER_F_11461, shared.consts.Scenery.LEVER_F_11462);
 
         /**
          * Represents the object id.

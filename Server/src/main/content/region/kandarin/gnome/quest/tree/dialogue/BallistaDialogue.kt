@@ -1,14 +1,10 @@
 package content.region.kandarin.gnome.quest.tree.dialogue
 
-import core.api.getAttribute
-import core.api.getQuestStage
-import core.api.setQuestStage
-import core.api.sendDialogue
-import core.api.sendDialogueOptions
-import core.api.setTitle
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.tools.END_DIALOGUE
 import shared.consts.Quests
+import shared.consts.Sounds
 
 class BallistaDialogue : DialogueFile() {
     override fun handle(
@@ -41,13 +37,17 @@ class BallistaDialogue : DialogueFile() {
                 2 -> {
                     sendDialogue(player!!, "You entered the height and y coordinates you got from the tracker gnomes.")
                     val answer = getAttribute(player!!, "treegnome:xcoord", 1)
+                    playAudio(player!!, Sounds.TREEVILLAGE_CATABOW_LAUNCH_3488)
                     when (buttonID) {
                         answer -> {
+                            playAudio(player!!, Sounds.TREEVILLAGE_CATABOW_HIT_3487, 1)
                             sendDialogue(player!!, "The huge spear flies through the air and screams down directly into the Khazard stronghold. A deafening crash echoes over the battlefield as the front entrance is reduced to rubble.")
                             setQuestStage(player!!, Quests.TREE_GNOME_VILLAGE, 31)
                         }
 
-                        else -> sendDialogue(player!!, "The huge spear completely misses the Khazard stronghold!")
+                        else -> {
+                            sendDialogue(player!!, "The huge spear completely misses the Khazard stronghold!")
+                        }
                     }
                     stage = END_DIALOGUE
                 }

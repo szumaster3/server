@@ -4,6 +4,7 @@ import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.LunarSpells
 import core.api.openInterface
 import core.game.node.item.Item
+import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
 
@@ -20,7 +21,7 @@ class NpcContactSpell : SpellListener("lunar") {
                 removeRunes(player)
                 addXP(player, 63.0)
                 setDelay(player, false)
-                visualizeSpell(player, 4413, 728, 130, 3618)
+                visualizeSpell(player, Animations.LUNAR_NPC_CONTACT_4413, 728, 130, 3618)
             }
         }
     }

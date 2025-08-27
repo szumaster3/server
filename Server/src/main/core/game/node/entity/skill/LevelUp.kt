@@ -9,6 +9,7 @@ import core.game.world.GameWorld
 import core.game.world.update.flag.context.Graphics
 import core.tools.DARK_RED
 import shared.consts.Components
+import shared.consts.Sounds
 import shared.consts.Vars
 
 /**
@@ -85,11 +86,9 @@ object LevelUp {
         }
 
         if (TOTAL_LEVEL_MILESTONES.contains(player.skills.getTotalLevel())) {
+            playAudio(player, Sounds.FIREWORK_2396, 1)
             Graphics.send(Graphics(GRAPHIC.random(), 100, 50), player.location)
-            sendMessage(
-                player,
-                DARK_RED + "Well done! You've reached the total level ${player.skills.getTotalLevel()} milestone!",
-            )
+            sendMessage(player, DARK_RED + "Well done! You've reached the total level ${player.skills.getTotalLevel()} milestone!")
         }
 
         if (player.skills.getTotalLevel() == 2376) {

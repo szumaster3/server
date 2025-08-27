@@ -14,10 +14,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Animations
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
+import shared.consts.*
 
 /**
  * Represents the Wizard dialogue.
@@ -279,6 +276,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
             500 -> npcl(FaceAnim.NEUTRAL, "Won't bother? Won't bother! Perhaps this quest is too hard for you?").also { stage = END_DIALOGUE }
 
             600 -> npc(FaceAnim.HAPPY, "Excellent! That seems to be all the pieces. Now I can", "assemble it...").also {
+                playAudio(player, Sounds.WATCHTOWER_MAKE_RELIC_3267, 1)
                 animate(findLocalNPC(player, npc.id)!!, Animations.CLIMB_JUMP_UP_5352)
                 stage++
             }

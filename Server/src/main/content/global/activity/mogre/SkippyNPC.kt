@@ -71,7 +71,8 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
             sendChat(self, "Take this")
             animate(self, Animations.THROW_385)
             faceLocation(self, self.location.transform(Direction.SOUTH))
-            playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_1398, 1)
+            playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_THROW_1401, 1)
+            playGlobalAudio(self.location, Sounds.SKIPPY_THROWGLASS_IMPACT_1400, 15)
             spawnProjectile(
                 self.location,
                 self.location.transform(Direction.SOUTH, 8),

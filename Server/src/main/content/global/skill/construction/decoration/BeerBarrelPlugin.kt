@@ -1,8 +1,8 @@
 package content.global.skill.construction.decoration
 
-import core.api.removeItem
-import core.api.sendMessage
+import core.api.*
 import core.game.interaction.NodeUsageEvent
+import core.game.interaction.QueueStrength
 import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -11,6 +11,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Animations
 import shared.consts.Items
+import shared.consts.Sounds
 import shared.consts.Scenery as Obj
 
 /**
@@ -38,9 +39,13 @@ class BeerBarrelPlugin : UseWithHandler(Items.BEER_GLASS_1919) {
         val scenery = event.usedWith as Scenery
 
         if (removeItem(player, Item(Items.BEER_GLASS_1919, 1))) {
-            player.animate(Animation.create(Animations.HUMAN_WITHDRAW_833))
-            sendMessage(player, "You fill up your glass.")
-            player.inventory.add(Item(getReward(scenery.id), 1))
+            queueScript(player, 1, QueueStrength.WEAK) {
+                playAudio(player, Sounds.FILL_GLASS_2395)
+                player.animate(Animation.create(Animations.HUMAN_WITHDRAW_833))
+                sendMessage(player, "You fill up your glass.")
+                player.inventory.add(Item(getReward(scenery.id), 1))
+                return@queueScript stopExecuting(player)
+            }
         }
         return true
     }

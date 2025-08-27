@@ -50,7 +50,11 @@ class ToysOptionPlugin : InteractionListener {
             when (option) {
                 "play" -> animate(player, YOYO_PLAY)
                 "loop" -> animate(player, YOYO_LOOP)
-                "walk" -> animate(player, YOYO_WALK)
+                "walk" -> {
+                    playAudio(player, Sounds.YOYO_WIND_2265)
+                    animate(player, YOYO_WALK)
+
+                }
                 "crazy" -> animate(player, YOYO_CRAZY)
             }
             return@on true

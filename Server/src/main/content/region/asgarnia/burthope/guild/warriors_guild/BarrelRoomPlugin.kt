@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthope.guild.warriors_guild
 
+import core.api.playAudio
 import core.api.sendChat
 import core.api.setVarp
 import core.cache.def.impl.SceneryDefinition
@@ -25,6 +26,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.NPCs
+import shared.consts.Sounds
 
 /**
  * Handles the Barrel room.
@@ -129,6 +131,18 @@ class BarrelRoomPlugin : MapZone("wg barrel", true), Plugin<Any> {
 
     companion object {
         /**
+         * Barrel sound effects.
+         */
+        private fun getBarrelAudio(barrels: Int): Int {
+            return when (barrels) {
+                0,1 -> Sounds.WARGUILD_DROP_BARRELS_1920
+                2 -> Sounds.WARGUILD_DROP_BARRELS_1_1921
+                3 -> Sounds.WARGUILD_DROP_BARRELS_2_1922
+                else -> Sounds.WARGUILD_DROP_BARRELS_1920
+            }
+        }
+
+        /**
          * The players list.
          */
         private val players: MutableList<Player> = mutableListOf()
@@ -157,6 +171,7 @@ class BarrelRoomPlugin : MapZone("wg barrel", true), Plugin<Any> {
                         player.packetDispatch.sendMessage("Some of the barrels hit you on their way to the floor.")
                         player.impactHandler.manualHit(player, 1, HitsplatType.NORMAL)
                         player.visualize(Animation.create(4177), Graphics.create(689 - barrels))
+                        playAudio(player, getBarrelAudio(barrels))
                         val jimmy = Repository.findNPC(NPCs.JIMMY_4298)
                         sendChat(jimmy!!.asNpc(), "Wow! That'sh bery impr....imp...impresh.... good ${player.name}! Equalsh my record!")
                         it.remove()
