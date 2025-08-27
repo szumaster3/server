@@ -35,7 +35,7 @@ class BarbarianFishingPlugin : InteractionListener {
 
         on(NPCs.FISHING_SPOT_1176, IntType.NPC, "fish") { player, _ ->
             if (!getAttribute(player, BarbarianTraining.FISHING_START, false)) {
-                sendMessage(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
+                sendDialogue(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
                 return@on true
             }
 

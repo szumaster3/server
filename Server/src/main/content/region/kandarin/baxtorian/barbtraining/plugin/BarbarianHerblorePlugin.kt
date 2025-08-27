@@ -44,7 +44,7 @@ class BarbarianHerblorePlugin : InteractionListener {
     private fun handle(player: Player, inputPotion: Node, egg: Node): Boolean {
         val potion = BarbarianMix.forId(inputPotion.id) ?: return false
         if (!getAttribute(player, BarbarianTraining.HERBLORE_START, false)) {
-            sendMessage(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
+            sendDialogue(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
             return true
         }
         if (!hasLevelStat(player, Skills.HERBLORE, potion.level)) {

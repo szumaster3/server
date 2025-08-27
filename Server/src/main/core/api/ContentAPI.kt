@@ -3157,12 +3157,8 @@ fun dumpContainer(
             }
         }
     }
-    bank.refresh()
-    return dumpedCount.also{
-        runTask(player, 1) {
-            bank.update()
-        }
-    }
+
+    return dumpedCount
 }
 
 /**

@@ -3,6 +3,7 @@ package content.region.kandarin.baxtorian
 import content.data.items.SkillingTool
 import content.global.skill.firemaking.Log
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
+import core.api.sendDialogue
 import core.api.sendDialogueLines
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
@@ -52,7 +53,7 @@ class PyreSitePlugin : OptionHandler() {
 
         if (!hasCompleted) {
             if (!hasStarted) {
-                player.dialogueInterpreter.sendDialogue("You must begin the relevant section of Otto Godblessed's barbarian training.")
+                sendDialogue(player, "You must begin the relevant section of Otto Godblessed's barbarian training.")
                 return true
             } else {
                 player.removeAttribute(BarbarianTraining.PYRESHIP_START)
