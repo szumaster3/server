@@ -630,4 +630,19 @@ public final class ActivityData {
      * @param barbarianHerbloreAttackMix true if herblore attack mix is done
      */
     public void setBarbarianHerbloreAttackMix(boolean barbarianHerbloreAttackMix) { this.barbarianHerbloreAttackMix = barbarianHerbloreAttackMix; }
+
+    /**
+     * Checks if the player has completed all Barbarian training activities.
+     *
+     * @return true if all barbarian activities are completed, false otherwise
+     */
+    public boolean hasCompleteBarbarianTraining() {
+        return barbarianFiremakingBow &&
+                barbarianFiremakingPyre &&
+                barbarianFishingRod &&
+                barbarianFishingBarehand &&
+                barbarianSmithingSpear &&
+                barbarianSmithingHasta &&
+                barbarianHerbloreAttackMix;
+    }
 }

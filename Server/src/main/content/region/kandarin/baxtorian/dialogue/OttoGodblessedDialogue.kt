@@ -19,6 +19,12 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+        if (player.savedData.activityData.hasCompleteBarbarianTraining()){
+            npcl(FaceAnim.FRIENDLY, "Welcome back oh friend of the spirits, I am humbled in your presence.")
+            stage = 500
+            return true
+        }
+
         if (!hasItem(player, Item(Items.BARBARIAN_SKILLS_11340))) {
             if (freeSlots(player) > 0) {
                 npc("I see you have free space and no record of the tasks I", "have set you. Please take this book as a record of your", "progress - between the spirits and your diligence, I", "expect it will always be up to date.").also { stage = END_DIALOGUE }
@@ -247,9 +253,103 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
                 npc("You have now mastered the barbarian smithing techniques.").also { stage = END_DIALOGUE }
             }
 
+            // After complete.
+            500 -> {
+                player("That's very kind, but I was wondering whether you have any more information for me?")
+                stage++
+            }
+            501 -> {
+                npcl(FaceAnim.FRIENDLY,"You are no longer the apprentice, but the master. Seek to inspire us with your daring deeds and legendary feats. Aspire to join the spirits when your time comes.")
+                stage++
+            }
+            502 -> {
+                setTitle(player, 3)
+                sendDialogueOptions(player, "Choose an option:", "Could you tell me more of these spirits you continually refer to?", "I wish to change how I fish.", "I have no more questions at this time.")
+                stage++
+            }
+            503 -> when(buttonId) {
+                1 -> {
+                    // Spirits explanation.
+                    player("Could you tell me more of these spirits you continually refer to?")
+                    stage++
+                }
+                2 -> {
+                    // Change fishing.
+                    player("I wish to change how I fish.")
+                    stage = 520
+                }
+                3 -> {
+                    // End dialogue.
+                    player("I have no more questions at this time.")
+                    stage = 530
+                }
+            }
+            504 -> {
+                npcl(FaceAnim.FRIENDLY, "Certainly, though it is quite simple - they are the barbarians of the past, who have died in the passing of the years.").also { stage++ }
+                stage++
+            }
+            505 -> {
+                npcl(FaceAnim.FRIENDLY, "There are three categories which learned sages claim may describe all spirits encountered. The majority are at peace, having died with their ambitions sated, even if this ambition was as simple as a glorious death.")
+                stage++
+            }
+            506 -> {
+                player("So those are the spirits who give us guidance. What of the other sorts?")
+                stage++
+            }
+            507 -> {
+                npc("A second category of spirit is made up of those who are not yet at peace. However, all that is needed is for their mortal remains to be laid to rest and they will join the peaceful majority.")
+                stage++
+            }
+            508 -> {
+                player("I can see the pyres serve this purpose. The final category is also restless?")
+                stage++
+            }
+            509 -> {
+                npc("Alas, there is a small minority who will never be at rest. These have been slain in moments of insanity by their brothers or by adventurers.")
+                stage++
+            }
+            510 -> {
+                npcl(FaceAnim.FRIENDLY, "They are not at rest and will attack those they blame for their tortured state. They are not known, however, for being able to determine this blame with any great accuracy, so may be considered as dangerous to all.")
+                stage++
+            }
+            511 -> {
+                player("I thank you Otto, it makes a bit more sense now.")
+                stage = 502
+            }
+
+            // Change fishing technique.
+            520 -> {
+                npc("So be it.")
+                toggleBarbarianFishing(player)
+                stage = END_DIALOGUE
+            }
+
+            530 -> {
+                npc("In that case, farewell.")
+                stage = END_DIALOGUE
+            }
             else -> return true
         }
         return true
+    }
+
+    /**
+     * Toggles between barehand fishing and regular fishing.
+     *
+     * @param player the player.
+     */
+    private fun toggleBarbarianFishing(player: Player) {
+        val barbFishing = player.getAttribute("fishing:technique:barehand", false)
+
+        if (barbFishing) {
+            // Revert to default fishing
+            player.setAttribute("/save:fishing:technique:barehand", false)
+            sendMessage(player, "You revert to default fishing techniques.")
+        } else {
+            // Switch to barbarian fishing
+            player.setAttribute("/save:fishing:technique:barehand", true)
+            sendMessage(player, "You revert to barbarian fishing techniques.")
+        }
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.OTTO_GODBLESSED_2725)
