@@ -110,9 +110,9 @@ public final class BuildingUtils {
             for (int j = 0; j < 4; j++) {
                 if (j >= decoration.getItems().length) {
                     if (j == decoration.getItems().length && decoration.getNailAmount() > 0) {
-                        player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, (itemsStringOffset + 1) + j);
+                        player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j);
                     } else {
-                        player.getPacketDispatch().sendString("", 396, (itemsStringOffset + 1) + j);
+                        player.getPacketDispatch().sendString("", Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j);
                     }
                 } else {
                     Item item = decoration.getItems()[j];
@@ -131,7 +131,7 @@ public final class BuildingUtils {
                         player.getPacketDispatch().sendString(s, 396, 15 + offset + j);
                         continue;
                     }*/
-                    player.getPacketDispatch().sendString(s, 396, (itemsStringOffset + 1) + j);
+                    player.getPacketDispatch().sendString(s, Components.POH_BUILD_FURNITURE_396, (itemsStringOffset + 1) + j);
                 }
             }
             if (hasRequirements) {
