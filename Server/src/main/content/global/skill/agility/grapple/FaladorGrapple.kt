@@ -19,6 +19,7 @@ import core.plugin.Plugin
 import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
+import shared.consts.Sounds
 
 @Initializable
 class FaladorGrapple : OptionHandler() {
@@ -108,6 +109,7 @@ class FaladorGrapple : OptionHandler() {
                             when (counter++) {
                                 1 -> {
                                     player.faceLocation(destination)
+                                    playAudio(player, Sounds.CROSSBOW_GRAPPLING_2928)
                                     player.visualize(
                                         Animation(Animations.FIRE_CROSSBOW_TO_CLIMB_WALL_4455),
                                         Graphics(shared.consts.Graphics.MITHRIL_GRAPPLE_760),

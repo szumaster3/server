@@ -16,6 +16,7 @@ import core.tools.StringUtils
 import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
+import shared.consts.Sounds
 
 /**
  * Represents weaving items.
@@ -101,6 +102,7 @@ private class WeavingPulse(player: Player?, node: Scenery?, private val type: We
     override fun animate() {
         if (ticks % 5 == 0) {
             animate(player, ANIMATION)
+            playAudio(player, Sounds.LOOM_WEAVE_2587, 1)
         }
     }
 

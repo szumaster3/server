@@ -11,10 +11,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.plugin.ClassScanner
-import shared.consts.Animations
-import shared.consts.Components
-import shared.consts.Items
-import shared.consts.Scenery
+import shared.consts.*
 import java.util.*
 
 /**
@@ -176,6 +173,7 @@ private class DairyChurnPulse(
 
     override fun animate() {
         player.animate(ANIMATION)
+        playAudio(player, Sounds.CHURN_2574, 1)
     }
 
     override fun reward(): Boolean {

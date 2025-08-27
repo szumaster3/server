@@ -6,6 +6,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
+import shared.consts.Sounds
 import kotlin.math.min
 
 class BattlestaffPlugin : InteractionListener {
@@ -23,6 +24,7 @@ class BattlestaffPlugin : InteractionListener {
 
             if (amountInInventory(player, used.id) == 1 || amountInInventory(player, with.id) == 1) {
                 if (removeItem(player, product.required) && removeItem(player, BATTLESTAFF_ID)) {
+                    playAudio(player, Sounds.ATTACH_ORB_2585)
                     addItem(player, product.productId, product.amount)
                     rewardXP(player, Skills.CRAFTING, product.experience)
                 }
@@ -36,6 +38,7 @@ class BattlestaffPlugin : InteractionListener {
                         if (amount < 1) return@runTask
 
                         if (removeItem(player, product.required) && removeItem(player, BATTLESTAFF_ID)) {
+                            playAudio(player, Sounds.ATTACH_ORB_2585)
                             addItem(player, product.productId)
                             rewardXP(player, Skills.CRAFTING, product.experience)
                         }

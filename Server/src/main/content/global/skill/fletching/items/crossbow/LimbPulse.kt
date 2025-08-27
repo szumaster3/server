@@ -1,10 +1,12 @@
 package content.global.skill.fletching.items.crossbow
 
+import core.api.playAudio
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
+import shared.consts.Sounds
 
 class LimbPulse(
     player: Player?,
@@ -32,6 +34,7 @@ class LimbPulse(
 
     override fun animate() {
         player.animate(Animation.create(limb.animation))
+        playAudio(player, Sounds.STRING_CROSSBOW_2924)
     }
 
     override fun reward(): Boolean {
