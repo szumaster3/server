@@ -7,12 +7,12 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListeners
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
 
 class BarbarianSalmon : Script() {
     private var state = State.FISHING
+    private var cooldownTicks = 0
 
     override fun tick() {
         when (state) {
@@ -26,25 +26,28 @@ class BarbarianSalmon : Script() {
             }
 
             State.DROP_FISH -> {
-                var droppedAny = false
+                var isDropped = false
 
-                val salmonCount = bot.inventory.getAmount(Items.RAW_SALMON_331)
-                if (salmonCount > 0) {
-                    val dropAmount = RandomFunction.random(1, salmonCount)
-                    produceGroundItem(bot, Items.RAW_SALMON_331, dropAmount, bot.location)
-                    bot.inventory.remove(Item(Items.RAW_SALMON_331, dropAmount))
-                    droppedAny = true
+                if (bot.inventory.containsAtLeastOneItem(Items.RAW_SALMON_331)) {
+                    produceGroundItem(bot, Items.RAW_SALMON_331, 1, bot.location)
+                    bot.inventory.remove(Item(Items.RAW_SALMON_331, 1))
+                    isDropped = true
+                } else if (bot.inventory.containsAtLeastOneItem(Items.RAW_TROUT_335)) {
+                    produceGroundItem(bot, Items.RAW_TROUT_335, 1, bot.location)
+                    bot.inventory.remove(Item(Items.RAW_TROUT_335, 1))
+                    isDropped = true
                 }
 
-                val troutCount = bot.inventory.getAmount(Items.RAW_TROUT_335)
-                if (troutCount > 0) {
-                    val dropAmount = RandomFunction.random(1, troutCount)
-                    produceGroundItem(bot, Items.RAW_TROUT_335, dropAmount, bot.location)
-                    bot.inventory.remove(Item(Items.RAW_TROUT_335, dropAmount))
-                    droppedAny = true
+                if (!isDropped || !bot.inventory.isFull) {
+                    cooldownTicks = (10..20).random()
+                    state = State.COOLDOWN
                 }
+            }
 
-                if (!droppedAny || !bot.inventory.isFull) {
+            State.COOLDOWN -> {
+                if (cooldownTicks > 0) {
+                    cooldownTicks--
+                } else {
                     state = State.REFILL_BAIT
                 }
             }
@@ -64,7 +67,10 @@ class BarbarianSalmon : Script() {
 
     override fun newInstance(): Script {
         val script = BarbarianSalmon()
-        script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.values().random(), bot.startLocation)
+        script.bot = SkillingBotAssembler().produce(
+            SkillingBotAssembler.Wealth.values().random(),
+            bot.startLocation
+        )
         return script
     }
 
@@ -77,6 +83,7 @@ class BarbarianSalmon : Script() {
     enum class State {
         FISHING,
         DROP_FISH,
+        COOLDOWN,
         REFILL_BAIT,
     }
 }
