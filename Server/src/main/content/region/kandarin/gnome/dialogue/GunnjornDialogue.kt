@@ -76,77 +76,78 @@ class GunnjornDialogue(player: Player? = null) : Dialogue(player) {
             14 -> playerl(FaceAnim.FRIENDLY, "That's all I need for now. Bye.").also { stage++ }
             15 -> npcl(FaceAnim.FRIENDLY, "Bye for now. Come back if you need any help.").also { stage = END_DIALOGUE }
             16 -> {
-                val firstTalk = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_GUNNJORN_TALK, false)
-                val perfectLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_PERFECT_LAPS, 0)
-                val completeLaps = getAttribute(player, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, false)
-                val hasAgileTop = hasAnItem(player, Items.AGILE_TOP_14696).container != null
-                when {
-                    completeLaps && !firstTalk && !hasAgileTop -> {
-                        npcl(
-                            FaceAnim.FRIENDLY,
-                            "Sure, and congratulations, ${player.username}! That took dedication and great dexterity to complete that many laps."
-                        )
-                        stage = 17
-                    }
+                val p = player ?: return true
+                val firstTalk = getAttribute(p, GameAttributes.BARBARIAN_OUTPOST_GUNNJORN_TALK, false)
+                val perfectLaps = getAttribute(p, GameAttributes.BARBARIAN_OUTPOST_PERFECT_LAPS, 0)
+                val completeLaps = getAttribute(p, GameAttributes.BARBARIAN_OUTPOST_COURSE_REWARD, false)
+                val hasAgileTop = hasAnItem(p, Items.AGILE_TOP_14696).container != null
 
-                    completeLaps && firstTalk && !hasAgileTop -> {
-                        npcl(FaceAnim.FRIENDLY, "Of course. How can I help?")
-                        stage = 26
+                when {
+                    completeLaps && !hasAgileTop -> {
+                        if (!firstTalk) {
+                            npcl(FaceAnim.FRIENDLY, "Sure, and congratulations, ${p.username}! That took dedication and great dexterity to complete that many laps.")
+                            stage = 17
+                        } else {
+                            npcl(FaceAnim.FRIENDLY, "Of course. How can I help?")
+                            stage = 26
+                        }
                     }
 
                     else -> {
-                        npcl(
-                            FaceAnim.FRIENDLY,
-                            "There's no reward for you just yet. Your lap count is only $perfectLaps. It's 250 successful laps or no reward."
-                        )
-                        stage = END_DIALOGUE
+                        npcl(FaceAnim.SAD, "There's no reward for you just yet. Your lap count is only $perfectLaps. It's 250 successful laps or no reward.")
+                        stage = 28
                     }
                 }
             }
             17 -> npcl(FaceAnim.FRIENDLY, "As promised, I'll give you an item you may find useful - an Agile top. You'll find yourself lighter than usual while wearing it.").also { stage++ }
             18 -> npcl(FaceAnim.FRIENDLY, "We barbarians are tough folks, as you know, so it'll even keep you safe if you get drawn into combat.").also { stage++ }
             19 -> {
+                val p = player ?: return true
                 end()
-                if (freeSlots(player!!) == 0) {
+                if (freeSlots(p) == 0) {
                     npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
+                addItem(p, Items.AGILE_TOP_14696)
                 npcl(FaceAnim.HAPPY, "There you go. Enjoy!")
-                addItem(player, Items.AGILE_TOP_14696)
-                stage = END_DIALOGUE
+                setAttribute(p, GameAttributes.BARBARIAN_OUTPOST_GUNNJORN_TALK, true)
+                stage = 28
             }
 
             /*
-             * Horror from the deep dialogue.
+             * Horror from the deep dialogue
              */
-
             20 -> playerl(FaceAnim.HALF_ASKING, "Hi, are you called Gunnjorn?").also { stage++ }
             21 -> npc(FaceAnim.FRIENDLY, "Why, indeed I am. I own this agility course, it can be", "very dangerous!").also { stage++ }
             22 -> player(FaceAnim.FRIENDLY, "Yeah, that's great. Anyway, I understand you have a", "cousin named Larrissa who gave you a key...?").also { stage++ }
             23 -> npc(FaceAnim.FRIENDLY, "Yes, she did! How did you know of this? She said she", "probably wouldn't need it, but gave it to me for safe", "keeping just in case.").also { stage++ }
             24 -> player(FaceAnim.FRIENDLY, "Well, something has happened at the lighthouse, and she", "has been locked out. I need you to give me her key.").also { stage++ }
+
             25 -> {
-                end()
-                if (freeSlots(player!!) == 0) {
+                val p = player ?: return true
+                if (freeSlots(p) == 0) {
                     npc(FaceAnim.HALF_GUILTY, "Well, I would give you the key, but apparently you", "don't have any room.")
                     return true
                 }
+                addItem(p, Items.LIGHTHOUSE_KEY_3848)
+                setQuestStage(p, Quests.HORROR_FROM_THE_DEEP, 5)
                 npc(FaceAnim.HAPPY, "Sure. Here you go.")
-                addItem(player!!, Items.LIGHTHOUSE_KEY_3848)
-                setQuestStage(player!!, Quests.HORROR_FROM_THE_DEEP, 5)
+                stage = 28
             }
 
             26 -> player("Any chance of another Agile top?").also { stage++ }
+
             27 -> {
-                end()
-                if (freeSlots(player!!) == 0) {
+                val p = player ?: return true
+                if (freeSlots(p) == 0) {
                     npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
+                addItem(p, Items.AGILE_TOP_14696)
                 npcl(FaceAnim.HAPPY, "Here you go.")
-                addItem(player, Items.AGILE_TOP_14696)
-                stage = END_DIALOGUE
+                stage = 28
             }
+            28 -> end()
         }
         return true
     }

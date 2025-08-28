@@ -811,7 +811,7 @@
     "examine": "Magic boots that make you lighter than normal.",
     "durability": null,
     "name": "Boots of lightness",
-    "weight": "-4.5",
+    "weight": "0.3",
     "archery_ticket_price": "0",
     "id": "88",
     "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
@@ -132668,6 +132668,7 @@
     "remove_sleeves": "true",
     "name": "Agile top",
     "archery_ticket_price": "0",
+    "requirements": "{1,35}-{3,35}",
     "id": "14696",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
@@ -132682,6 +132683,7 @@
     "id": "14697",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "requirements": "{1,35}-{3,35}",
     "equipment_slot": "4"
   },
   {
@@ -132696,6 +132698,7 @@
     "id": "14698",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "requirements": "{1,35}-{3,35}",
     "equipment_slot": "7"
   },
   {
@@ -132708,6 +132711,7 @@
     "id": "14699",
     "absorb": "0,0,0",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "requirements": "{1,35}-{3,35}",
     "equipment_slot": "7"
   },
   {

@@ -1,10 +1,7 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.data.GameAttributes
-import core.api.addItem
-import core.api.freeSlots
-import core.api.getAttribute
-import core.api.hasAnItem
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -12,6 +9,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
+import shared.consts.Items
 import shared.consts.NPCs
 
 /**
@@ -59,53 +57,53 @@ class GnomeTrainerDialogue(player: Player? = null) : Dialogue(player) {
                 val count = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_PERFECT_LAPS, 0)
                 val firstTalk = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_GNOME_TALK, false)
                 val completeLaps = getAttribute(player, GameAttributes.GNOME_STRONGHOLD_COURSE_REWARD, false)
-                val hasAgileLegs = hasAnItem(player, 14698).container != null
+                val hasAgileLegs = hasAnItem(player, Items.AGILE_LEGS_14698).container != null
 
                 when {
-                    completeLaps && !firstTalk && !hasAgileLegs -> {
-                        npcl(
-                            FaceAnim.FRIENDLY,
-                            "Well, it looks like you've completed our challenge! Take this as a reward: some Agile legs. You'll find yourself much lighter than usual while wearing them. They are made from the toughest material we gnomes could find, so it might even protect you in combat."
-                        )
-                        stage = 18
-                    }
-
-                    completeLaps && firstTalk && !hasAgileLegs -> {
-                        npcl(FaceAnim.FRIENDLY, "Of course. How can I help?")
-                        stage = 19
+                    completeLaps && !hasAgileLegs -> {
+                        if (!firstTalk) {
+                            npcl(FaceAnim.OLD_DEFAULT, "Well, it looks like you've completed our challenge! Take this as a reward: some Agile legs. You'll find yourself much lighter than usual while wearing them. They are made from the toughest material we gnomes could find, so it might even protect you in combat.")
+                            stage = 18
+                        } else {
+                            npcl(FaceAnim.OLD_DEFAULT, "Of course. How can I help?")
+                            stage = 19
+                        }
                     }
 
                     else -> {
-                        npcl(FaceAnim.FRIENDLY, "Well, you've still got work to do. Your lap count is $count. It's 250 successful laps for the reward!")
-                        stage = END_DIALOGUE
+                        npc(FaceAnim.OLD_DEFAULT, "Well, you've still got work to do. Your lap count is $count.", "It's 250 successful laps for reward!")
+                        stage = 22
                     }
                 }
             }
 
             18 -> {
-                end()
-                if (freeSlots(player!!) == 0) {
-                    npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
+                val p = player ?: return true
+                if (freeSlots(p) == 0) {
+                    npc(FaceAnim.OLD_DEFAULT, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
-                addItem(player, 14698)
+                addItem(p,  Items.AGILE_LEGS_14698)
                 npcl(FaceAnim.OLD_NORMAL, "There you go. Enjoy!")
+                setAttribute(p, GameAttributes.GNOME_STRONGHOLD_GNOME_TALK, true)
+                stage = 22
             }
 
             19 -> player("Any chance of some more Agile legs?").also { stage++ }
+
             20 -> {
-                end()
-                if (freeSlots(player!!) == 0) {
-                    npc(FaceAnim.HALF_GUILTY, "Well, I would give you the reward, but apparently you", "don't have any room.")
+                val p = player ?: return true
+                if (freeSlots(p) == 0) {
+                    npc(FaceAnim.OLD_DEFAULT, "Well, I would give you the reward, but apparently you", "don't have any room.")
                     return true
                 }
-                addItem(player, 14698)
+                addItem(p,  Items.AGILE_LEGS_14698)
                 npcl(FaceAnim.OLD_NORMAL, "Here you go, try not to lose them.")
+                stage = 22
             }
 
-            21 -> npcl(FaceAnim.OLD_NORMAL, "Bye for now. Come back if you need any assistance.").also {
-                stage = END_DIALOGUE
-            }
+            21 -> npcl(FaceAnim.OLD_NORMAL, "Bye for now. Come back if you need any assistance.").also { stage = 22 }
+            22 -> end()
         }
         return true
     }
