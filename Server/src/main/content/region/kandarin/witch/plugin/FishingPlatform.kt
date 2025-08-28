@@ -9,6 +9,7 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.repository.Repository
@@ -49,15 +50,17 @@ class FishingPlatform : InteractionListener, MapArea {
      * Handles the fishermen attack.
      */
     private fun fishermanAttack(player: Player) {
-        openInterface(player, Components.FADE_TO_BLACK_115)
+        player.lock()
         playAudio(player, Sounds.SLUG_FISHERMAN_ATTACK_3022)
         sendMessage(player, "The fishermen approach you...")
         sendMessage(player, "and smack you on the head with a fishing rod!")
-        queueScript(player, 3, QueueStrength.NORMAL) { _: Int ->
+        openInterface(player, Components.FADE_TO_BLACK_115)
+        teleport(player, Location.create(2784, 3287, 0), TeleportManager.TeleportType.INSTANT, 3)
+        queueScript(player, 6, QueueStrength.NORMAL) { _: Int ->
+            player.unlock()
             sendChat(player, "Ouch!")
             openInterface(player, Components.FADE_FROM_BLACK_170)
-            teleport(player, Location.create(2784, 3287, 0))
-            delayScript(player, 3)
+            return@queueScript stopExecuting(player)
         }
     }
 

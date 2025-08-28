@@ -106,15 +106,6 @@ class SeaSlugPlugin : InteractionListener {
         }
 
         /*
-         * Handles using lit torch on ice cube.
-         */
-
-        onUseWith(IntType.NPC, LIT_TORCH, Scenery.ICE_CUBE_18400) { player, _, _ ->
-            sendMessage(player, "Nothing interesting happens.")
-            return@onUseWith true
-        }
-
-        /*
          * Handles interaction with wall.
          */
 
