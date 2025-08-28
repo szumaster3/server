@@ -9,6 +9,7 @@ import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import shared.consts.Graphics
 import shared.consts.Items
 import shared.consts.Sounds
 
@@ -16,6 +17,9 @@ import shared.consts.Sounds
  * Represents the Super heat spell.
  */
 class SuperHeatSpell : SpellListener("modern") {
+
+    val SOUND_EFFECT = Sounds.SUPERHEAT_FAIL_191
+    val GRAPHICS = Graphics.SPLASH_629
 
     override fun defineListeners() {
         onCast(ModernSpells.SUPERHEAT, ITEM) { player, node ->
@@ -26,11 +30,15 @@ class SuperHeatSpell : SpellListener("modern") {
                 runes = arrayOf(Item(Items.FIRE_RUNE_554, 4), Item(Items.NATURE_RUNE_561, 1)),
             )
             if (!item.name.contains("ore") && !item.name.equals("coal", true)) {
-                sendMessage(player, "You can only cast this spell on ore.")
+                playAudio(player, SOUND_EFFECT)
+                sendGraphics(player, GRAPHICS)
+                sendMessage(player, "You need to cast superheat item on ore.")
                 return@onCast
             }
 
             if (item.id == Items.ELEMENTAL_ORE_2892) {
+                playAudio(player, SOUND_EFFECT)
+                sendGraphics(player, GRAPHICS)
                 sendMessage(player, "Even this spell is not hot enough to heat this item.")
                 return@onCast
             }

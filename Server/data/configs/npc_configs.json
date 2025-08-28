@@ -68877,7 +68877,7 @@
   {
     "examine": "Big... Cow-like... But cows don't have serpent tails!",
     "melee_animation": "4271",
-    "combat_audio": "511,330,329",
+    "combat_audio": "328,330,329",
     "attack_speed": "4",
     "magic_level": "35",
     "spell_id": "7",
@@ -68901,7 +68901,7 @@
   {
     "examine": "Big... Cow-like... But cows don't have serpent tails!",
     "melee_animation": "4271",
-    "combat_audio": "511,330,329",
+    "combat_audio": "328,330,329",
     "attack_speed": "4",
     "magic_level": "35",
     "spell_id": "7",
