@@ -119,11 +119,24 @@ object SummoningCreator {
      */
     class CreatePulse(player: Player?, private val type: SummoningNode, private val amount: Int) : SkillPulse<Item?>(player, null) {
 
+        private val regionLocations = mapOf(
+            9366  to Location(2323, 9629, 0),
+            9372  to Location(2332, 10009, 0),
+            10031 to Location(2521, 3055, 0),
+            10802 to Location(2716, 3211, 0),
+            13201 to Location(3295, 9311, 0),
+            13720 to null
+        )
 
-        private val objectIDs = when(player?.location?.regionId){
-            10031 -> getObject(Location(2521, 3055, 0))
-            10802 -> getObject(Location(2716, 3211, 0))
-             else -> getObject(Location(2209, 5344, 0))
+        private val objectIDs = run {
+            val regionId = player?.location?.regionId
+            if (regionId == 13720) {
+                val z = if (player?.location?.z != 1) 0 else 1
+                getObject(Location(3441, 9749, z))
+            } else {
+                val loc = regionLocations[regionId] ?: Location(2209, 5344, 0)
+                getObject(loc)
+            }
         }
 
         /**

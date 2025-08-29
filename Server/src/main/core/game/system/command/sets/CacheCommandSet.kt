@@ -9,9 +9,15 @@ import core.cache.CacheArchive
 import core.cache.CacheIndex
 import core.cache.def.impl.*
 import core.game.system.command.Privilege
+import core.game.world.map.RegionManager
+import core.game.world.map.RegionPlane
 import core.plugin.Initializable
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.*
 import java.lang.reflect.Modifier
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
@@ -19,6 +25,49 @@ import kotlin.reflect.jvm.isAccessible
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+        define(
+            name = "findobjects",
+            privilege = Privilege.ADMIN,
+            usage = "::findobjects <option>",
+            description = "Scans loaded regions for all objects with the given option. Toggle preload maps to true."
+        ) { player, args ->
+
+            val option = args?.getOrNull(1)?.lowercase() ?: run {
+                player.debug("Usage: ::findobjects <option>")
+                return@define
+            }
+
+            val exportDir = File("dumps")
+            if (!exportDir.exists()) exportDir.mkdirs()
+
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM_HH-mm"))
+            val dump = File(exportDir, "object_dump_$timestamp.txt")
+
+            GlobalScope.launch {
+                var found = 0
+                dump.bufferedWriter().use { writer ->
+                    for (region in RegionManager.regionCache.values) {
+                        for (z in 0..3) {
+                            val plane = region.planes[z] ?: continue
+                            val grid = plane.objects ?: continue
+                            for (x in 0 until RegionPlane.REGION_SIZE) {
+                                for (y in 0 until RegionPlane.REGION_SIZE) {
+                                    val scenery = grid[x][y] ?: continue
+                                    val def = SceneryDefinition.forId(scenery.id) ?: continue
+                                    if (def.options?.any { it.equals(option, ignoreCase = true) } == true) {
+                                        found++
+                                        val loc = scenery.location
+                                        writer.write("${scenery.id} - (${loc.x}, ${loc.y}, ${loc.z}) [region=${region.id}]\n")
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                player.debug("Saved $found objects with option '$option' -> ${dump.path}")
+            }
+        }
+
         define(
             name = "droptabledesc",
             privilege = Privilege.ADMIN,
