@@ -118,7 +118,13 @@ object SummoningCreator {
      * item removal, and experience reward.
      */
     class CreatePulse(player: Player?, private val type: SummoningNode, private val amount: Int) : SkillPulse<Item?>(player, null) {
-        private val objectIDs = getObject(Location(2209, 5344, 0))
+
+
+        private val objectIDs = when(player?.location?.regionId){
+            10031 -> getObject(Location(2521, 3055, 0))
+            10802 -> getObject(Location(2716, 3211, 0))
+             else -> getObject(Location(2209, 5344, 0))
+        }
 
         /**
          * Checks the requirements for the creation of the summoning item, including level and required items.
