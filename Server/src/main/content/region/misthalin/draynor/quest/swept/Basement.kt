@@ -19,31 +19,28 @@ class Basement : MapArea {
 
     override fun areaEnter(entity: Entity) {
         super.areaEnter(entity)
-        if (entity is Player) {
-            val p = entity.asPlayer()
-            if (inBorders(p, bettyBasement)) {
-                SweptUtils.spawnBettyBasementNPCs()
-            }
+        if (entity !is Player) return
 
-            registerLogoutListener(p, GameAttributes.QUEST_SWEPT_AWAY) { p ->
-                SweptUtils.removeBettyNPCs()
-                if (anyInInventory(p, *SweptUtils.CREATURE_PEN_ITEM)) {
-                    for (creatureItem in SweptUtils.CREATURE_PEN_ITEM) {
-                        removeItem(p, creatureItem)
-                    }
-                }
-
-                return@registerLogoutListener
-            }
-
-            setAttribute(p, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, 0)
+        val p = entity.asPlayer()
+        if (inBorders(p, bettyBasement)) {
+            SweptUtils.spawnBettyBasementNPCs()
         }
+
+        registerLogoutListener(p, GameAttributes.QUEST_SWEPT_AWAY) { player ->
+            SweptUtils.removeBettyNPCs()
+            for (pen in SweptUtils.Pen.values()) {
+                if (pen.itemId != -1 && inInventory(player, pen.itemId)) {
+                    removeItem(player, pen.itemId)
+                }
+            }
+
+            return@registerLogoutListener
+        }
+
+        setAttribute(p, GameAttributes.QUEST_SWEPT_AWAY_CREATURE_INTER, 0)
     }
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             val p = entity.asPlayer()
             if (inBorders(entity, hettyBasement)) {

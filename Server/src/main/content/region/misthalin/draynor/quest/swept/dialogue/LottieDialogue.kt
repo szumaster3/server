@@ -36,7 +36,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 showTopics(
                     Topic<Any?>("Who are you and what are you doing in Betty's basement?", 20, false),
-                    Topic<Any?>("I need to retrieve Betty's wand.", 1, true),
+                    Topic<Any?>("I need to retrieve Betty's wand.", 1, false),
                     Topic<Any?>("What is this place?", 25, false),
                     Topic<Any?>("No need to be rude!", 29, false)
                 )
