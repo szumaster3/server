@@ -276,7 +276,7 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             40 -> when (buttonId) {
                 1 -> {
                     playerl(FaceAnim.HALF_GUILTY, "Sure, I can do that for you.")
-                    stage = 43
+                    stage = 46
                 }
 
                 2 -> {
@@ -325,9 +325,14 @@ class MaggieDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             46 -> {
+                npc(FaceAnim.HAPPY, "Excellent. Here's my broom then, cha. Hurry back", "once that's enchanted, won't you?")
+                stage++
+            }
+
+            47 -> {
                 end()
                 player("Of course.")
-                player.inventory.add(Item(Items.BROOMSTICK_14057))
+                addItemOrDrop(player, Items.BROOMSTICK_14057, 1)
                 setQuestStage(player, Quests.SWEPT_AWAY, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_SWEPT_AWAY_PROGRESS_5448, 1)
             }
