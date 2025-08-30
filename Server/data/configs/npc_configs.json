@@ -126318,7 +126318,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "A friendly little pet.",
+    "examine": "A fully grown feline.",
     "name": "Cat",
     "defence_level": "1",
     "safespot": null,
@@ -126330,7 +126330,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A friendly not so little pet.",
     "name": "Lazy cat",
     "defence_level": "1",
     "safespot": null,
@@ -126342,7 +126342,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "?",
     "name": "Overgrown cat",
     "defence_level": "1",
     "safespot": null,
@@ -126354,7 +126354,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A friendly little pet.",
     "name": "Kitten",
     "defence_level": "1",
     "safespot": null,
