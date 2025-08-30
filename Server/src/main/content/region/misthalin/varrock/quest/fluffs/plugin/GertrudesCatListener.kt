@@ -28,7 +28,7 @@ class GertrudesCatListener : InteractionListener {
 
             if (node is NPC) {
                 sendMessage(player, "You search the crate.")
-                sendMessage(player, "You find nothing.")
+                sendMessage(player, "You find nothing.", 1)
             }
 
             if (getQuestStage(player, Quests.GERTRUDES_CAT) == 40) {
@@ -62,7 +62,11 @@ class GertrudesCatListener : InteractionListener {
         }
 
         onUseWith(IntType.NPC, Items.DOOGLE_SARDINE_1552, NPCs.GERTRUDES_CAT_2997) { player, used, with ->
-            if (getQuestStage(player, Quests.GERTRUDES_CAT) == 30 && removeItem(player, used.asItem())) {
+            if (getQuestStage(player, Quests.GERTRUDES_CAT) < 30){
+                sendMessage(player, "Fluffs doesn't seem to be hungry right now.")
+                        return@onUseWith true
+            }
+            if(removeItem(player, used.asItem())) {
                 animate(player, Animations.MULTI_BEND_OVER_827)
                 sendChat(with.asNpc(), "Mew!")
                 playAudio(player, Sounds.KITTENS_MEW_339)

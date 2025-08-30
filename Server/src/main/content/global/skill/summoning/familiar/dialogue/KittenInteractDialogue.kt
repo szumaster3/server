@@ -1,110 +1,132 @@
 package content.global.skill.summoning.familiar.dialogue
 
+import content.global.skill.summoning.pet.Pet
+import content.global.skill.summoning.pet.Pets
 import core.api.*
 import core.game.dialogue.Dialogue
-import core.game.node.entity.npc.NPC
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import core.tools.END_DIALOGUE
+import core.tools.RandomFunction
 import shared.consts.Animations
+import shared.consts.Items
+import shared.consts.Sounds
 
+/**
+ * Represents the cats dialogue.
+ */
 @Initializable
 class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun open(vararg args: Any?): Boolean {
+        val npcName = npc?.id?.let { getNPCName(it) } ?: "kitten"
+        val displayName = if (npcName.contains("cat", ignoreCase = true)) "cat" else "kitten"
+        val familiar = player.familiarManager.familiar ?: return false
+
+        if (familiar.owner != player && familiar.name.lowercase().contains("hell")) {
+            npcl(null,"Hiss! Go away before I scratch those curious eyes out!")
+            return true
+        }
+
         setTitle(player, 3)
-        sendDialogueOptions(
-            player,
-            "Interact with Kitten",
-            "Stroke",
-            "Chase vermin",
-            "Shoo away"
-        )
+        sendDialogueOptions(player, "Interact with $displayName", "Stroke.", "Chase vermin.", "Shoo away.")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val familiar = player.familiarManager.familiar ?: return false
+
         when (stage) {
             0 -> when (buttonId) {
                 1 -> {
-                    player.familiarManager.familiar.face(player)
-                    animate(player, PLAYER_STROKE_ANIMATION)
-                    playAudio(player, 340)
-                    player.familiarManager.familiar.animate(KITTEN_STROKE_ANIMATION)
-                    player.familiarManager.familiar.sendChat("Purr...purr...")
-                    interpreter.sendDialogues(player, null, "That cat sure loves to be stroked.")
-                    stage = 5
+                    val anim = PLAYER_STROKE_ANIMATION.duration
+                    queueScript(player, 1, QueueStrength.WEAK) {
+                        player.animate(PLAYER_STROKE_ANIMATION)
+                        familiar.face(player)
+                        familiar.animate(KITTEN_STROKE_ANIMATION)
+                        playAudio(player, Sounds.PURR_340)
+                        familiar.sendChat("Purr...purr...", 1)
+                        sendDialogue(player, "That cat sure loves to be stroked.")
+                        familiar.sendChat("Miaow!", anim)
+                        return@queueScript stopExecuting(player)
+                    }
                 }
-
                 2 -> {
                     end()
                     player.sendChat("Go on puss...kill that rat!")
-                    var cant = true
-                    var rat: NPC? = null
-                    for (n in getLocalNpcs(player.location, 10)) {
-                        if (!n.name.contains("rat")) {
-                            cant = false
-                            continue
-                        }
-                        if (n.location.getDistance(player.familiarManager.familiar.location) < 8) {
-                            cant = true
-                            rat = n
-                            break
-                        } else {
-                            cant = false
-                        }
-                    }
-                    if (!cant) {
+
+                    val rat = getLocalNpcs(player.location, 10)
+                        .filter { it.name.contains("rat", ignoreCase = true) }
+                        .minByOrNull { it.location.getDistance(familiar.location) }
+
+                    if (rat == null || rat.location.getDistance(familiar.location) >= 8) {
                         sendMessage(player, "Your cat cannot get to its prey.")
-                    } else {
-                        playAudio(player, 339)
-                        player.familiarManager.familiar.sendChat("Meeeoooooowwww!")
-                        val path = Pathfinder.find(player.familiarManager.familiar, rat)
-                        path.walk(player.familiarManager.familiar)
-                        rat!!.sendChat("Eeek!")
-                        Pulser.submit(
-                            object : Pulse(5) {
-                                override fun pulse(): Boolean {
-                                    player.familiarManager.familiar.call()
-                                    sendMessage(player, "The rat manages to get away!")
-                                    return true
-                                }
-                            },
-                        )
+                        return true
                     }
+
+                    playAudio(player, Sounds.KITTENS_MEW_339)
+                    familiar.sendChat("Meeeeeoooowww!")
+                    Pathfinder.find(familiar, rat).walk(familiar)
+                    rat.sendChat("Eeek!")
+
+                    Pulser.submit(object : Pulse(5) {
+                        override fun pulse(): Boolean {
+                            familiar.call()
+                            sendMessage(player, "The rat manages to get away!")
+
+                            if (rat.name.equals("hell-rat", ignoreCase = true) && RandomFunction.random(1, 100) == 1) {
+                                familiar.owner.setAttribute("/save:hellcat", true)
+
+                                val pet = familiar as Pet
+                                val pets = Pets.forId(pet.itemId) ?: return true
+
+                                val hellcatID = when (pet.itemId) {
+                                    pets.babyItemId -> Items.HELL_KITTEN_7583
+                                    pets.grownItemId -> Items.HELL_CAT_7582
+                                    pets.overgrownItemId -> Items.OVERGROWN_HELLCAT_7581
+                                    in Items.LAZY_CAT_6549..Items.LAZY_CAT_6554 -> Items.LAZY_HELL_CAT_7584
+                                    in Items.WILY_CAT_6555..Items.WILY_CAT_6560,
+                                    Items.WILY_CAT_14093 -> Items.WILY_HELLCAT_7585
+                                    else -> return true
+                                }
+                                val item = Item(hellcatID)
+                                player.familiarManager.morphPet(item, false, pet.location)
+                                sendMessage(player, "Your cat suddenly transforms!")
+                                familiar.face(player)
+                                familiar.sendChat("Meoooooow!")
+                            }
+                            return true
+                        }
+                    })
                 }
                 3 -> {
                     sendDialogueOptions(player, "Are you sure?", "Yes I am.", "No I'm not.")
                     stage = 4
                 }
             }
+
             4 -> when (buttonId) {
                 1 -> {
                     end()
-                    if (player.familiarManager.hasFamiliar()) {
-                        player.sendChat("Shoo cat!")
-                        val currentPet = player.familiarManager.familiar as content.global.skill.summoning.pet.Pet
-                        player.familiarManager.familiar.sendChat("Miaow!")
-                        player.familiarManager.removeDetails(currentPet.itemIdHash)
-                        player.familiarManager.familiar.dismiss()
-                        player.packetDispatch.sendMessage("The cat has run away.")
-                    }
+                    if (!player.familiarManager.hasFamiliar()) return true
+                    val pet = player.familiarManager.familiar
+                    player.sendChat("Shoo cat!")
+                    pet.sendChat("Miaow!")
+                    player.familiarManager.removeDetails(pet.idHash)
+                    pet.dismiss()
+                    player.packetDispatch.sendMessage("The cat has run away.")
                 }
-
-                2 -> {
-                    end()
-                    stage = END_DIALOGUE
-                }
+                2 -> end()
             }
 
             5 -> {
-                if (player.familiarManager.hasFamiliar()) {
-                    player.familiarManager.familiar.sendChat("Miaow!")
-                }
+                familiar.sendChat("Miaow!")
                 end()
             }
         }

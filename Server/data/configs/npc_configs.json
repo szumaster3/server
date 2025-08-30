@@ -56021,7 +56021,7 @@
     "attack_level": "48"
   },
   {
-    "examine": "",
+    "examine": "A hellish not-so-little pet.",
     "name": "Overgrown hellcat",
     "defence_level": "1",
     "safespot": null,
@@ -56045,7 +56045,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A hellish little pet.",
     "name": "Hell-kitten",
     "defence_level": "1",
     "safespot": null,
@@ -56057,7 +56057,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "A hellish not-so-little pet.",
     "name": "Lazy hellcat",
     "defence_level": "1",
     "safespot": null,
@@ -56069,7 +56069,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "",
+    "examine": "Wily and hellish.",
     "name": "Wily hellcat",
     "defence_level": "1",
     "safespot": null,

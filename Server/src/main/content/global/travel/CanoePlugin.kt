@@ -156,7 +156,7 @@ class CanoePlugin :
             LUMBRIDGE(12850, 1839, Location(3243, 3235), Location(3243, 3237), Location(-1, 0), Location.create(3239, 3242, 0), Location(3240, 3242, 0), "Lumbridge"),
             CHAMPIONS(12852, 1840, Location(3204, 3343), Location(3202, 3343), Location(0, -1), Location.create(3199, 3344, 0), Location(3199, 3344, 0), "the Champion's Guild"),
             BARBARIAN(12341, 1841, Location(3112, 3409), Location(3112, 3411), Location(-1, 0), Location.create(3109, 3411, 0), Location(3109, 3415), "Barbarian Village"),
-            EDGEVILLE(12342, 1842, Location(3132, 3508), Location(3132, 3510), Location(-1, 0), Location.create(3132, 3510, 0), Location(3132, 3510), "Edgeville"),
+            EDGEVILLE(12342, 1842, Location(3132, 3508), Location(3132, 3510), Location(-1, 0), Location.create(3132, 3510, 0), Location(3129, 3501, 0), "Edgeville"),
             WILDERNESS(12603, 0, Location(0, 0), Location(0, 0), Location(0, 0), Location.create(3142, 3795, 0), Location(3141, 3796, 0), "the Wilderness Pond"),
             ;
 
@@ -207,7 +207,7 @@ class CanoePlugin :
             queueScript(player, chopTicks, QueueStrength.WEAK) { stage ->
                 when (stage) {
                     0 -> {
-                        setVarbit(player, stationVarbit!!, CanoeStationSceneries.TREE_FALLING.varbitValue)
+                        // setVarbit(player, stationVarbit!!, CanoeStationSceneries.TREE_FALLING.varbitValue)
                         animateScenery(player, node.asScenery(), CANOE_TREE_FALLING_ANIMATION.id)
                         return@queueScript delayScript(player, CANOE_TREE_FALLING_ANIMATION.duration)
                     }
