@@ -52,8 +52,7 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
             line++
         }
         if (stage >= 4) {
-            line(player, "I spoke to Maggie, who thanked me for helping her", line++, stage > 99)
-            line(player, "prepare the goulash.", line++, stage > 99)
+            line(player, "I spoke to Maggie, who thanked me for helping her prepare the goulash.", line++, stage > 99)
             line(player, "She has offered me 10 bowls of goulash in return for my help.", line++, stage > 99)
             line++
         }
