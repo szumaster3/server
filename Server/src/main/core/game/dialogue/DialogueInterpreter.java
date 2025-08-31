@@ -202,6 +202,14 @@ public final class DialogueInterpreter {
                 player.dispatch(new DialogueCloseEvent(d));
             }
         }
+
+        if (player.getAttribute("runscript", null) != null) {
+            player.removeAttribute("runscript");
+            player.removeAttribute("input-type");
+            player.removeAttribute("parseamount");
+            player.getPacketDispatch().sendRunScript(101, "");
+        }
+
         activeTopics.clear();
         return dialogue == null;
     }
