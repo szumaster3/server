@@ -1,12 +1,7 @@
 package content.region.kandarin.khazard.quest.arena.dialogue
 
-import content.region.kandarin.khazard.quest.arena.cutscene.ScorpionFightCutscene
-import core.api.face
-import core.api.findNPC
-import core.api.lock
-import core.api.lockInteractions
-import core.api.getQuestStage
-import core.api.setQuestStage
+import content.region.kandarin.khazard.quest.arena.cutscene.FightTwoCutscene
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -59,7 +54,7 @@ class HengradDialogue : DialogueFile() {
                     10 -> {
                         end()
                         setQuestStage(player!!, Quests.FIGHT_ARENA, 88)
-                        ScorpionFightCutscene(player!!).start()
+                        FightTwoCutscene(player!!).start()
                     }
                 }
         }

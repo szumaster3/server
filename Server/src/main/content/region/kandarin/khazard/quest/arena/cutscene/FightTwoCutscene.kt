@@ -1,6 +1,6 @@
 package content.region.kandarin.khazard.quest.arena.cutscene
 
-import content.region.kandarin.khazard.quest.arena.npc.ScorpionNPC
+import content.region.kandarin.khazard.quest.arena.npc.KhazardScorpionNPC
 import core.api.animate
 import core.api.location
 import core.api.sendChat
@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import shared.consts.NPCs
 
-class ScorpionFightCutscene(
+class FightTwoCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {
@@ -99,9 +99,7 @@ class ScorpionFightCutscene(
             }
 
             14 -> {
-                dialogueUpdate(
-                    "From above you hear a voice..... 'Ladies and gentlemen! Let today's first fight between the outsider and everyone's favourite scorpion commence.'",
-                )
+                dialogueUpdate(true, "From above you hear a voice..... 'Ladies and gentlemen! Let today's first fight between the outsider and everyone's favourite scorpion commence.'")
             }
 
             15 -> {
@@ -110,7 +108,6 @@ class ScorpionFightCutscene(
                 teleport(player, 43, 19)
                 timedUpdate(1)
             }
-
             16 -> {
                 moveCamera(42, 23)
                 rotateCamera(46, 23)
@@ -143,7 +140,7 @@ class ScorpionFightCutscene(
             21 -> {
                 end {
                     player.unlock()
-                    ScorpionNPC.Companion.spawnScorpion(player)
+                    KhazardScorpionNPC.spawnScorpion(player)
                 }
             }
         }

@@ -1,9 +1,9 @@
 package content.region.kandarin.khazard.quest.arena.plugin
 
-import content.region.kandarin.khazard.quest.arena.cutscene.JeremyRescueCutscene
+import content.region.kandarin.khazard.quest.arena.cutscene.FightOneCutscene
 import content.region.kandarin.khazard.quest.arena.cutscene.PrisonCutscene
 import content.region.kandarin.khazard.quest.arena.dialogue.*
-import content.region.kandarin.khazard.quest.arena.npc.GeneralNPC
+import content.region.kandarin.khazard.quest.arena.npc.GeneralKhazardNPC
 import core.api.*
 import core.api.getQuestStage
 import core.api.setQuestStage
@@ -39,7 +39,7 @@ class FightArenaPlugin : InteractionListener {
         private const val CELL_KEY = Items.KHAZARD_CELL_KEYS_76
 
         val Jeremy = NPC(NPCs.JEREMY_SERVIL_265, Location.create(2616, 3167, 0))
-        val General = GeneralNPC(NPCs.GENERAL_KHAZARD_258, Location.create(2605, 3156, 0))
+        val General = GeneralKhazardNPC(NPCs.GENERAL_KHAZARD_258, Location.create(2605, 3156, 0))
     }
 
     init {
@@ -125,26 +125,21 @@ class FightArenaPlugin : InteractionListener {
         }
 
         on(MAIN_DOOR, IntType.SCENERY, "open") { player, node ->
+            val hasArmour = allInEquipment(player, HELMET, ARMOR)
             when (player.location.y) {
                 3171 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                3172 -> {
-                    if (allInEquipment(player, HELMET, ARMOR)) {
-                        openDialogue(player, EastDoorSupportDialogue())
-                    } else {
-                        sendPlayerDialogue(player, "This door appears to be locked.")
-                    }
-                    return@on true
+                3172 -> if (hasArmour) {
+                    openDialogue(player, DoorSupportDialogue(isWest = false))
+                } else {
+                    sendPlayerDialogue(player, "This door appears to be locked.")
                 }
             }
             when (player.location.x) {
                 2585 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                2584 -> {
-                    if (allInEquipment(player, HELMET, ARMOR)) {
-                        openDialogue(player, WestDoorSupportDialogue())
-                    } else {
-                        sendPlayerDialogue(player, "This door appears to be locked.")
-                    }
-                    return@on true
+                2584 -> if (hasArmour) {
+                    openDialogue(player, DoorSupportDialogue(isWest = true))
+                } else {
+                    sendPlayerDialogue(player, "This door appears to be locked.")
                 }
             }
             return@on true
@@ -159,7 +154,7 @@ class FightArenaPlugin : InteractionListener {
                 PrisonCutscene(player).start()
             } else if (getQuestStage(player, Quests.FIGHT_ARENA) >= 68) {
                 setAttribute(player, "spawn-ogre", true)
-                JeremyRescueCutscene(player).start()
+                FightOneCutscene(player).start()
             }
             return@onUseWith true
         }

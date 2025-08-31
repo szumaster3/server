@@ -15,21 +15,19 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class OgreNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
+class KhazardOgreNPC(id: Int = 0, location: Location? = null, ) : AbstractNPC(id, location) {
     override fun construct(
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC = OgreNPC(id, location)
+    ): AbstractNPC = KhazardOgreNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_OGRE_270)
 
     companion object {
+        @JvmStatic
         fun spawnOgre(player: Player) {
-            val ogre = OgreNPC(NPCs.KHAZARD_OGRE_270)
+            val ogre = KhazardOgreNPC(NPCs.KHAZARD_OGRE_270)
             ogre.location = location(2603, 3166, 0)
             ogre.isWalks = true
             ogre.isAggressive = true

@@ -480,7 +480,7 @@ object Components {
     const val COMPONENT_476 = 476
     const val CUSTOM_FUR_CLOTHING_477 = 477
     const val COMPONENT_478 = 478
-    const val COMPONENT_479 = 479
+    const val SKAVID_MAP_479 = 479
     const val ANMA_RGB_480 = 480
     const val SNOW_B_OVERLAY_481 = 481
     const val SNOW_A_OVERLAY_482 = 482

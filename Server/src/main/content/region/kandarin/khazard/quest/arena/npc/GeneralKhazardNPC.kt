@@ -1,5 +1,6 @@
 package content.region.kandarin.khazard.quest.arena.npc
 
+import content.data.GameAttributes
 import content.region.kandarin.khazard.quest.arena.dialogue.JeremyServilDialogueFile
 import content.region.kandarin.khazard.quest.arena.plugin.FightArenaPlugin.Companion.General
 import core.api.openDialogue
@@ -15,15 +16,9 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class GeneralNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = GeneralNPC(id, location)
+class GeneralKhazardNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = GeneralKhazardNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.GENERAL_KHAZARD_258)
 
@@ -37,7 +32,7 @@ class GeneralNPC(
         if (killer is Player) {
             if (getQuestStage(killer, Quests.FIGHT_ARENA) == 97) {
                 setQuestStage(killer, Quests.FIGHT_ARENA, 98)
-                setAttribute(killer, "/save:quest:arena-optional-task", true)
+                setAttribute(killer, GameAttributes.FIGHT_ARENA_OPTIONAL_KILL, true)
             }
             openDialogue(killer.asPlayer(), JeremyServilDialogueFile())
         }

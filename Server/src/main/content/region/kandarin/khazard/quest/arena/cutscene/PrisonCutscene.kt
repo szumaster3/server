@@ -60,11 +60,7 @@ class PrisonCutscene(
 
             6 -> {
                 face(getNPC(KHAZARD_GUARD)!!, player)
-                dialogueUpdate(
-                    KHAZARD_GUARD,
-                    FaceAnim.FRIENDLY,
-                    "The General seems to have taken a liking to you. He'd normally kill imposters like you without a second thought.",
-                )
+                dialogueUpdate(KHAZARD_GUARD, FaceAnim.FRIENDLY, "The General seems to have taken a liking to you. He'd normally kill imposters like you without a second thought.")
             }
 
             7 -> {

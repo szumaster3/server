@@ -8,25 +8,49 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
+import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.BankZone;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import shared.consts.NPCs;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Stray dog npc.
+ * Represents a stray dog NPC in Varrock.
  */
 @Initializable
 public class StrayDogNPC extends AbstractNPC {
 
-    private static final int[] ID = {5918, 5917};
+    /**
+     * The stray dog npc ids.
+     */
+    private static final int[] ID = {NPCs.STRAY_DOG_5918, NPCs.STRAY_DOG_5917};
 
+    /**
+     * The player currently being followed by the dog.
+     */
     private Player target;
 
+    /**
+     * The delay between movements.
+     */
     private long delay;
 
+    /**
+     * The primary bank zone that the dog avoids.
+     */
+    private static final ZoneBorders BANK = new ZoneBorders(3179, 3432, 3194, 3446);
+
+    /**
+     * Secondary bank zone that the dog avoids.
+     */
+    private static final ZoneBorders BANK_2 = new ZoneBorders(3250, 3416, 3257, 3423);
+
+    /**
+     * List of nearby players within range of the dog.
+     */
     private List<Player> players = new ArrayList<>(20);
 
     /**
@@ -73,10 +97,7 @@ public class StrayDogNPC extends AbstractNPC {
 
     @Override
     public boolean canMove(Location l) {
-        if (BankZone.BANK_ZONE_0.insideBorder(l) || BankZone.BANK_ZONE_1.insideBorder(l)) {
-            return false;
-        }
-        return true;
+        return !BANK.insideBorder(l) && !BANK_2.insideBorder(l);
     }
 
     @Override
@@ -87,8 +108,8 @@ public class StrayDogNPC extends AbstractNPC {
     /**
      * Gets follow pulse.
      *
-     * @param target the target
-     * @return the follow pulse
+     * @param target the target.
+     * @return the follow pulse.
      */
     public MovementPulse getFollowPulse(final Player target) {
         return new MovementPulse(this, target, DestinationFlag.FOLLOW_ENTITY) {

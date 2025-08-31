@@ -10,9 +10,8 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import shared.consts.NPCs
 
-class OutpostHistoryCutscene(
-    player: Player,
-) : Cutscene(player) {
+class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
         setExit(player.location.transform(0, 0, 0))
         if (player.settings.isRunToggled) {
@@ -48,11 +47,7 @@ class OutpostHistoryCutscene(
                 rotateCamera(4, 19, 300, 1)
                 timedUpdate(1)
             }
-
-            4 -> {
-                dialogueUpdate("the building has seen much action.")
-            }
-
+            4 -> dialogueUpdate(true, "the building has seen much action.")
             5 -> {
                 moveCamera(9, 24, 300, 1)
                 rotateCamera(5, 16, 300, 1)
@@ -65,20 +60,13 @@ class OutpostHistoryCutscene(
                 timedUpdate(3)
             }
 
-            7 -> {
-                dialogueUpdate("It started life as an outpost.")
-            }
-
+            7 -> dialogueUpdate(true, "It started life as an outpost.")
             8 -> {
                 moveCamera(0, 7, 400, 1)
                 rotateCamera(4, 19, 400, 1)
                 timedUpdate(8)
             }
-
-            9 -> {
-                dialogueUpdate("Its sole purpose to see incoming armies,")
-            }
-
+            9 -> dialogueUpdate(true, "Its sole purpose to see incoming armies,")
             10 -> {
                 moveCamera(13, 31, 400, 1)
                 rotateCamera(13, 31, 400, 1)
@@ -90,7 +78,7 @@ class OutpostHistoryCutscene(
 
             11 -> {
                 move(getNPC(NPCs.HOBGOBLIN_122)!!, 12, 29)
-                dialogueUpdate("before they saw the city of Ardougne.")
+                dialogueUpdate(true, "before they saw the city of Ardougne.")
             }
 
             12 -> {

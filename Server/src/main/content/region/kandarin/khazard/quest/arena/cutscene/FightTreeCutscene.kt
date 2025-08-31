@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import shared.consts.NPCs
 
-class BouncerFightCutscene(
+class FightTreeCutscene(
     player: Player,
 ) : Cutscene(player) {
     override fun setup() {

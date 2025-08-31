@@ -18,19 +18,14 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class BouncerNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = BouncerNPC(id, location)
+class BouncerNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = BouncerNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.BOUNCER_269)
 
     companion object {
+        @JvmStatic
         fun spawnBouncer(player: Player) {
             val bouncer = BouncerNPC(NPCs.BOUNCER_269)
             bouncer.location = location(2604, 3160, 0)

@@ -53,8 +53,8 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
         if (victim == null) {
             victim = p.getProperties().getCombatPulse().getLastVictim();
             if (victim == null || GameWorld.getTicks() - p.getAttribute("combat-stop", -1) > 2 || !MeleeSwingHandler.Companion.canMelee(p, victim, 1)) {
-                p.getPacketDispatch().sendMessage("Warning: Since the maul's special is an instant attack, it will be wasted when used ");
-                p.getPacketDispatch().sendMessage("on a first strike.");
+                p.getPacketDispatch().sendMessage("Warning: Since the maul's special is an instant attack, it will be wasted when used on a");
+                p.getPacketDispatch().sendMessage("first strike.");
                 return -1;
             }
         }

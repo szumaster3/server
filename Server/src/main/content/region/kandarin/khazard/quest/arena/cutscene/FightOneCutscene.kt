@@ -1,7 +1,7 @@
 package content.region.kandarin.khazard.quest.arena.cutscene
 
-import content.region.kandarin.khazard.quest.arena.plugin.FightArenaPlugin.Companion.Jeremy
-import content.region.kandarin.khazard.quest.arena.npc.OgreNPC.Companion.spawnOgre
+import content.region.kandarin.khazard.quest.arena.npc.KhazardOgreNPC
+import content.region.kandarin.khazard.quest.arena.plugin.FightArenaPlugin
 import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
@@ -11,9 +11,8 @@ import core.game.world.map.Direction
 import shared.consts.Animations
 import shared.consts.NPCs
 
-class JeremyRescueCutscene(
-    player: Player,
-) : Cutscene(player) {
+class FightOneCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
         setExit(location(2603, 3155, 0))
         if (player.settings.isRunToggled) {
@@ -30,11 +29,7 @@ class JeremyRescueCutscene(
 
             1 -> {
                 face(Jeremy, player, 1)
-                dialogueUpdate(
-                    NPCs.JEREMY_SERVIL_265,
-                    FaceAnim.CHILD_NORMAL,
-                    "Wow! Please set me free, then we can find my dad. I overheard a guard talking. I think they're taken him to the arena.",
-                )
+                dialogueUpdate(NPCs.JEREMY_SERVIL_265, FaceAnim.CHILD_NORMAL, "Wow! Please set me free, then we can find my dad. I overheard a guard talking. I think they're taken him to the arena.")
             }
 
             2 -> {
@@ -150,11 +145,7 @@ class JeremyRescueCutscene(
             }
 
             20 -> {
-                getNPC(OGRE)!!.faceLocation(
-                    getNPC(
-                        JUSTIN,
-                    )!!.location,
-                )
+                getNPC(OGRE)!!.faceLocation(getNPC(JUSTIN)!!.location)
                 animate(getNPC(OGRE)!!, 359)
                 animate(getNPC(JUSTIN)!!, 404)
                 timedUpdate(1)
@@ -163,7 +154,7 @@ class JeremyRescueCutscene(
             21 -> {
                 end {
                     clearHintIcon(player)
-                    spawnOgre(player)
+                    KhazardOgreNPC.spawnOgre(player)
                 }
             }
         }
@@ -174,5 +165,6 @@ class JeremyRescueCutscene(
         private const val JEREMY_RESCUE = NPCs.JEREMY_SERVIL_266
         private const val JUSTIN = NPCs.JUSTIN_SERVIL_267
         private const val OGRE = NPCs.KHAZARD_OGRE_270
+        private val Jeremy = FightArenaPlugin.Jeremy
     }
 }

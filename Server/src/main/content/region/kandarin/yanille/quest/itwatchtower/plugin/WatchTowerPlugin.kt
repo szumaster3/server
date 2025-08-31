@@ -15,7 +15,6 @@ import core.api.finishQuest
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.api.setQuestStage
-import core.api.closeDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
@@ -184,29 +183,20 @@ class WatchTowerPlugin : InteractionListener {
         }
 
         /*
-         * Handles open the chest.
+         * Handles interaction with tobans chest.
          */
 
-        onUseWith(IntType.SCENERY, Items.TOBANS_KEY_2378, Scenery.CHEST_2790) { player, _, with ->
-            if(freeSlots(player) == 0) {
-                sendMessage(player, "Not enough space in your inventory.")
-                return@onUseWith true
-            }
+        on(Scenery.CHEST_2790, IntType.SCENERY, "open")  { player, node ->
+            handleTobansChest(player, node.asScenery())
+            return@on true
+        }
 
-            if(inInventory(player, Items.TOBANS_GOLD_2393)) {
-                sendMessage(player, "The chest is empty.")
-                return@onUseWith true
-            }
+        /*
+         * Handles use the key on the tobans chest.
+         */
 
-            if(!inInventory(player, Items.TOBANS_KEY_2378)) {
-                sendPlayerDialogue(player, "I think I need a key of some sort...")
-                sendMessage(player, "The chest is locked.")
-            } else {
-                sendMessage(player, "You use the key Og gave you.")
-                replaceScenery(with.asScenery(), 2828, 3)
-                sendItemDialogue(player, Items.TOBANS_GOLD_2393, "You find a stash of gold inside.")
-                addItem(player, Items.TOBANS_GOLD_2393, 1)
-            }
+        onUseWith(IntType.SCENERY, Items.TOBANS_KEY_2378, Scenery.CHEST_2790) { player, _, scenery ->
+            handleTobansChest(player, scenery.asScenery())
             return@onUseWith true
         }
 
@@ -345,7 +335,6 @@ class WatchTowerPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, Items.ROCK_CAKE_2379, NPCs.OGRE_GUARD_860) { player, _, with ->
-            val npc = with.asNpc()
             if (!inInventory(player, Items.ROCK_CAKE_2379)) return@onUseWith true
 
             if(isQuestComplete(player, Quests.WATCHTOWER)) {
@@ -466,15 +455,14 @@ class WatchTowerPlugin : InteractionListener {
          * Handles using cave nightshade on an enclave guard.
          */
 
-        onUseWith(IntType.NPC, Items.CAVE_NIGHTSHADE_2398, NPCs.ENCLAVE_GUARD_870) { player, _, with ->
-            sendNPCDialogueLines(player, with.id, FaceAnim.OLD_DEFAULT, false, "What is this? Arrrrgh! I cannot stand this plant! Argh,", "it burns! It burns!")
-            runTask(player, 3) {
-                if (!WarningManager.isDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE) || isQuestComplete(player, Quests.WATCHTOWER)) {
+        onUseWith(IntType.NPC, Items.CAVE_NIGHTSHADE_2398, NPCs.ENCLAVE_GUARD_870) { player, _, npc ->
+            sendNPCDialogueLines(player, npc.id, FaceAnim.OLD_DEFAULT, false, "What is this? Arrrrgh! I cannot stand this plant! Argh,", "it burns! It burns!")
+            addDialogueAction(player) { _, _ ->
+                if (!WarningManager.isDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE)) {
                     WarningManager.openWarning(player, Warnings.WATCHTOWER_SHAMAN_CAVE)
-                } else {
-                    EnclaveCutscene(player).start(true)
+                    return@addDialogueAction
                 }
-                sendMessage(player, "You run past the guard while he's busy.")
+                passEnclaveGuard(player)
             }
             return@onUseWith true
         }
@@ -890,7 +878,9 @@ class WatchTowerPlugin : InteractionListener {
         }
     }
 
-
+    /**
+     * Searches a bush for a quest-related item.
+     */
     private fun searchBush(player: Player, item: Pair<Int, String>?): Boolean {
         when {
             item == null || getQuestStage(player, Quests.WATCHTOWER) < 1 -> sendPlayerDialogue(player, "Hmmm, nothing here.", FaceAnim.NEUTRAL)
@@ -901,5 +891,47 @@ class WatchTowerPlugin : InteractionListener {
             else -> sendPlayerDialogue(player, "I have already searched this place.", FaceAnim.NEUTRAL)
         }
         return true
+    }
+
+    /**
+     * Handles the player interacting with Tobans chest.
+     */
+    private fun handleTobansChest(player: Player, scenery: core.game.node.scenery.Scenery? = null) {
+        if (!inInventory(player, Items.TOBANS_KEY_2378)) {
+            sendMessage(player, "The chest is locked.")
+            sendPlayerDialogue(player, "I think I need a key of some sort...")
+            return
+        }
+
+        if (inInventory(player, Items.TOBANS_GOLD_2393)) {
+            sendMessage(player, "I don't need another one of these.")
+            return
+        }
+
+        sendMessage(player, "You use the key Og gave you.")
+        scenery?.let { replaceScenery(it, 2828, 3) }
+        sendItemDialogue(player, Items.TOBANS_GOLD_2393, "You find a stash of gold inside.")
+
+        addDialogueAction(player) { _, _ ->
+            if (freeSlots(player) == 0) {
+                sendDialogue(player, "You don't have enough inventory space for that.")
+            } else {
+                addItem(player, Items.TOBANS_GOLD_2393, 1)
+            }
+        }
+    }
+
+    /**
+     * Handles the player passing the enclave guard after distracting him.
+     */
+    private fun passEnclaveGuard(player: Player) {
+        if (isQuestComplete(player, Quests.WATCHTOWER)) {
+            teleport(player, Location.create(2588, 9410, 0), TeleportManager.TeleportType.INSTANT)
+        } else {
+            runTask(player, 3) {
+                EnclaveCutscene(player).start(true)
+            }
+        }
+        sendMessage(player, "You run past the guard while he's busy.")
     }
 }

@@ -198,15 +198,25 @@ abstract class Cutscene(val player: Player) {
     /**
      * Updates the player's dialogue with a standard message during the cutscene.
      *
-     * @param message The message to display.
+     * @param splitLines Split lines automatically. (Default: `false`)
+     * @param messages The message to display.
      * @param onContinue The action to perform when the dialogue is continued.
      */
     fun dialogueUpdate(
-        message: String,
-        onContinue: () -> Unit = { incrementStage() },
+        splitLines: Boolean = false,
+        vararg messages: String,
+        onContinue: () -> Unit = { incrementStage() }
     ) {
-        logCutscene("Sending standard dialogue update.")
-        sendDialogue(player, message)
+        logCutscene("Sending standard dialogue update. splitLines=$splitLines")
+
+        val finalMessage = messages.joinToString(" ")
+
+        if (splitLines) {
+            sendDialogue(player, finalMessage)
+        } else {
+            player.dialogueInterpreter.sendDialogue(*messages)
+        }
+
         player.dialogueInterpreter.addAction { _, _ -> onContinue.invoke() }
     }
 
@@ -334,8 +344,8 @@ abstract class Cutscene(val player: Player) {
      */
     fun start(hideMiniMap: Boolean) {
         logCutscene("Starting cutscene for ${player.username}.")
-        region = RegionManager.forId(player.location.getRegionId())
-        base = RegionManager.forId(player.location.getRegionId()).baseLocation
+        region = RegionManager.forId(player.location.regionId)
+        base = RegionManager.forId(player.location.regionId).baseLocation
         setup()
         if (hideMiniMap) {
             setMinimapState(player, 2)
@@ -348,10 +358,7 @@ abstract class Cutscene(val player: Player) {
         player.properties.safeRespawn = player.location
         player.lock()
         player.hook(Event.SelfDeath, CUTSCENE_DEATH_HOOK)
-        player.logoutListeners["cutscene"] = { player ->
-            player.location = exitLocation
-            player.getCutscene()?.end()
-        }
+        player.logoutListeners["cutscene"] = { p -> onLogout(p) }
         AntiMacro.pause(player)
     }
 
@@ -602,6 +609,14 @@ abstract class Cutscene(val player: Player) {
      */
     fun setExit(location: Location) {
         exitLocation = location
+    }
+
+    /**
+     * Sets the exit location for logout/disconnect.
+     */
+    open fun onLogout(p: Player) {
+        p.location = exitLocation
+        p.getCutscene()?.end()
     }
 
     /**

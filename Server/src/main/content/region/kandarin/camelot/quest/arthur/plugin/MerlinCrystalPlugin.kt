@@ -1,6 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur.plugin
 
 import content.data.GameAttributes
+import content.region.kandarin.camelot.quest.arthur.cutscene.CrateCutscene
 import content.region.kandarin.camelot.quest.arthur.dialogue.*
 import core.api.*
 import core.api.getQuestStage
@@ -11,13 +12,13 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Scenery
+import core.game.world.update.flag.context.Animation
+import shared.consts.*
 
 class MerlinCrystalPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(intArrayOf(Scenery.LARGE_DOOR_72, Scenery.LARGE_DOOR_71), IntType.SCENERY, "open") { player, node ->
             val door = node.asScenery()
@@ -38,6 +39,7 @@ class MerlinCrystalPlugin : InteractionListener {
             DoorActionHandler.handleDoor(player, door)
             return@on true
         }
+
         on(intArrayOf(Scenery.LARGE_DOOR_72, Scenery.LARGE_DOOR_71), IntType.SCENERY, "knock-at") { player, _ ->
             if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 10) {
                 sendDialogue(player, "The door is securely locked.")
@@ -59,6 +61,7 @@ class MerlinCrystalPlugin : InteractionListener {
 
             return@on true
         }
+
         on(NPCs.SIR_MORDRED_247, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, SirMordredDialogueFile(), NPCs.SIR_MORDRED_247)
             return@on true
@@ -128,9 +131,20 @@ class MerlinCrystalPlugin : InteractionListener {
 
         on(Scenery.CRATE_63, IntType.SCENERY, "hide-in") { player, _ ->
             if (getQuestStage(player, Quests.MERLINS_CRYSTAL) >= 30) {
-                openDialogue(player, CrateDialogueFile())
-                registerLogoutListener(player, "hide-in") {
-                    player.properties.teleportLocation = Location.create(2778, 3401, 0)
+                sendDialogueLines(player, "The crate is empty. It's just about big enough to hide inside.")
+                addDialogueAction(player) { _, button ->
+                    setTitle(player, 2)
+                    sendDialogueOptions(player, "Would you like to hide inside the create?", "Yes.", "No.")
+                    addDialogueAction(player) { p, _ ->
+                        when (button) {
+                            2 -> {
+                                p.animate(Animation.create(Animations.MULTI_BEND_OVER_827))
+                                sendDialogue(p, "You climb inside the crate and wait.")
+                                addDialogueAction(player) { _, _ -> CrateCutscene(p).start(true) }
+                            }
+                            else -> sendDialogue(p, "You leave the empty crate alone.")
+                        }
+                    }
                 }
                 return@on true
             }
@@ -149,9 +163,25 @@ class MerlinCrystalPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+        on(intArrayOf(Scenery.CRATE_WALL_65,Scenery.CRATE_WALL_66), IntType.SCENERY, "climb-out") { player, node ->
+                setTitle(player, 2)
+                sendDialogueOptions(player, "Would you like to get back out of the crate?", "Yes.", "No.")
+                addDialogueAction(player) { _, selected ->
+                    when(selected) {
+                        2 -> sendDialogue(player, "You climb out of the crate.").also {
+                            teleport(player, Location.create(2778, 3401, 0), TeleportManager.TeleportType.INSTANT)
+                        }
+                        else -> sendDialogue(player, "You decide to stay in the crate.")
+                    }
+                }
+                return@on true
+            }
+        */
+
         on(Items.BAT_BONES_530, IntType.ITEM, "drop") { player, node ->
-            val merlinStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
-            var doingQuest =
+                val merlinStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
+                var doingQuest =
                 merlinStage == 40 && player.getAttribute(GameAttributes.ATTR_STATE_ALTAR_FINISH, false) == true
 
             if (doingQuest) {
@@ -178,10 +208,7 @@ class MerlinCrystalPlugin : InteractionListener {
         }
     }
 
-    private fun smashCrystal(
-        player: Player,
-        wielding: Boolean,
-    ) {
+    private fun smashCrystal(player: Player, wielding: Boolean, ) {
         if(isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             sendMessage(player, "You have already freed Merlin from the crystal.")
             return
@@ -206,10 +233,7 @@ class MerlinCrystalPlugin : InteractionListener {
 
         queueScript(player, delay, QueueStrength.SOFT) { _ ->
             if (player.equipment.contains(Items.EXCALIBUR_35, 1) &&
-                getQuestStage(
-                    player,
-                    Quests.MERLINS_CRYSTAL,
-                ) == 50
+                getQuestStage(player, Quests.MERLINS_CRYSTAL) == 50
             ) {
                 sendMessage(player, "...and it shatters under the force of Excalibur!")
                 openDialogue(player, MerlinDialogueFile(true))

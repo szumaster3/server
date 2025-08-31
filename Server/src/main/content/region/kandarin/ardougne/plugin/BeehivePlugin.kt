@@ -5,9 +5,13 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 
+/**
+ * Handles interaction with beehive.
+ */
 class BeehivePlugin : InteractionListener {
 
     override fun defineListeners() {
@@ -18,19 +22,19 @@ class BeehivePlugin : InteractionListener {
 
         on(shared.consts.Scenery.BEEHIVE_68, IntType.SCENERY, "take-from", "take-honey") { player, _ ->
             if (!inInventory(player, Items.INSECT_REPELLENT_28, 1)) {
-                sendMessage(player, "The bees fly out of the hive and sting you!")
-                impact(player, 2, ImpactHandler.HitsplatType.NORMAL, 1)
-                sendMessage(player, "Maybe you can clear them out somehow.", 2)
+                impact(player, 2, ImpactHandler.HitsplatType.NORMAL)
+                sendMessage(player, "Suddenly bees fly out of the hive and sting you.")
                 return@on true
             }
 
             when (getUsedOption(player)) {
                 "take-from" -> {
-                    if (!removeItem(player, Item(Items.BUCKET_1925, 1), Container.INVENTORY)) {
+                    val bucket = player.inventory.getItem(Item(Items.BUCKET_1925))
+                    if (bucket == null) {
                         sendMessage(player, "You need a bucket to do that.")
                     } else {
-                        addItem(player, Items.BUCKET_OF_WAX_30)
-                        sendMessage(player, "You fill your bucket with wax from the hive.")
+                        setAttribute(player, GameAttributes.BEEHIVE_INTERACTION, true)
+                        handleTakeWax(player, bucket)
                     }
                 }
                 "take-honey" -> {
@@ -55,23 +59,34 @@ class BeehivePlugin : InteractionListener {
             when (usedItem.id) {
                 Items.INSECT_REPELLENT_28 -> {
                     if (getAttribute(player, GameAttributes.BEEHIVE_INTERACTION, false)) {
-                        sendDialogueLines(player, "You have already cleared the hive of its bees. You can now safely collect wax from the hive.")
+                        sendDialogue(player, "You have already cleared the hive of its bees. You can now safely collect wax from the hive.")
                     } else {
-                        sendDialogueLines(player, "You pour insect repellent on the beehive. You see the bees leaving the hive.")
+                        sendDialogueLines(player, "You pour insect repellent on the beehive. You see the bees leaving the", "hive.")
                         setAttribute(player, GameAttributes.BEEHIVE_INTERACTION, true)
                     }
                 }
-
-                Items.BUCKET_1925 -> {
-                    if (getAttribute(player, GameAttributes.BEEHIVE_INTERACTION, false)) {
-                        sendDialogueLines(player, "You get some wax from the beehive.")
-                        replaceSlot(player, usedItem.slot, Item(Items.BUCKET_OF_WAX_30, 1))
-                    } else {
-                        sendDialogueLines(player, "It would be dangerous to stick the bucket into the hive while the bees are still in it. Perhaps you can clear them out somehow.")
-                    }
-                }
+                Items.BUCKET_1925 -> handleTakeWax(player, usedItem)
             }
             return@onUseWith true
+        }
+    }
+
+    /**
+     * Handles taking wax from the beehive with a bucket.
+     */
+    private fun handleTakeWax(player: Player, bucket: Item) {
+        sendDialogueLines(player, "You try to get some wax from the beehive.")
+        addDialogueAction(player) { _, _ ->
+            if (getAttribute(player, GameAttributes.BEEHIVE_INTERACTION, false)) {
+                sendDialogueLines(player, "You get some wax from the beehive.")
+                replaceSlot(player, bucket.slot, Item(Items.BUCKET_OF_WAX_30, 1))
+                removeAttribute(player, GameAttributes.BEEHIVE_INTERACTION)
+                addDialogueAction(player) { _, _ ->
+                    sendDialogueLines(player, "The bees fly back to the hive as the repellent wears off.")
+                }
+            } else {
+                sendDialogue(player, "It would be dangerous to stick the bucket into the hive while the bees are still in it. Perhaps you can clear them out somehow.")
+            }
         }
     }
 }

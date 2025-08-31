@@ -207,7 +207,7 @@ class CanoePlugin :
             queueScript(player, chopTicks, QueueStrength.WEAK) { stage ->
                 when (stage) {
                     0 -> {
-                        // setVarbit(player, stationVarbit!!, CanoeStationSceneries.TREE_FALLING.varbitValue)
+                        setVarbit(player, stationVarbit!!, CanoeStationSceneries.TREE_FALLING.varbitValue)
                         animateScenery(player, node.asScenery(), CANOE_TREE_FALLING_ANIMATION.id)
                         return@queueScript delayScript(player, CANOE_TREE_FALLING_ANIMATION.duration)
                     }

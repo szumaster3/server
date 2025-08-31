@@ -28,8 +28,8 @@ class KnightsNotesScroll : InteractionListener {
 
     override fun defineListeners() {
         on(Items.KNIGHTS_NOTES_11734, IntType.ITEM, "read") { player, _ ->
-            sendDialogueOptions(player, "The scroll is sealed. Do you still want to open it?", "Yes", "No")
             setTitle(player, 2)
+            sendDialogueOptions(player, "The scroll is sealed. Do you still want to open it?", "Yes", "No")
             addDialogueAction(player) { player, button ->
                 if (button == 2) {
                     sendMessage(player, "You break the wax seal and open the scroll.")

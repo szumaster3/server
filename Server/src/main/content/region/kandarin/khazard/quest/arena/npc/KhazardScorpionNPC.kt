@@ -18,21 +18,16 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class ScorpionNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = ScorpionNPC(id, location)
+class KhazardScorpionNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = KhazardScorpionNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_SCORPION_271)
 
     companion object {
+        @JvmStatic
         fun spawnScorpion(player: Player) {
-            val scorpion = ScorpionNPC(NPCs.KHAZARD_SCORPION_271)
+            val scorpion = KhazardScorpionNPC(NPCs.KHAZARD_SCORPION_271)
             scorpion.location = location(2604, 3159, 0)
             scorpion.isWalks = true
             scorpion.isAggressive = true

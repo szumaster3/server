@@ -411,4 +411,7 @@ internal object GameAttributes {
 
     // Fred the farmer.
     const val FRED_SEEN_THE_THING = "/save:activity-shapeshifter"
+
+    // Fight Arena quest.
+    const val FIGHT_ARENA_OPTIONAL_KILL = "/save:quest:arena-optional-task"
 }

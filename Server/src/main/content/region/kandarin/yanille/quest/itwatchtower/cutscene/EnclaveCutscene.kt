@@ -44,7 +44,7 @@ class EnclaveCutscene(player: Player) : Cutscene(player) {
                 timedUpdate(1)
             }
 
-            3 -> dialogueUpdate("Meanwhile, in the Shaman's enclave...")
+            3 -> dialogueUpdate(true, "Meanwhile, in the Shaman's enclave...")
             4 -> {
                 playAudio(player, Sounds.WATCHTOWER_DRAGON_ATTACK_3266)
                 visualize(getNPC(NPCs.BLUE_DRAGON_5178)!!, Animation(Animations.DRAGON_BREATH_81, Priority.HIGH), Graphics(shared.consts.Graphics.DRAGON_BREATH_1, 64))

@@ -31,6 +31,7 @@ class TindelMerchantPlugin : InteractionListener {
         private const val COINS = Items.COINS_995
         private const val COINS_REQUIRED = 100
 
+        @JvmStatic
         fun success(player: Player, skill: Int): Boolean {
             val level = player.getSkills().getLevel(skill).toDouble()
             val minChance = 50.0
@@ -48,12 +49,7 @@ class TindelMerchantPlugin : InteractionListener {
                 inventory.contains(SWORD, 1) -> SWORD
                 inventory.contains(SCIMITAR, 1) -> SCIMITAR
                 else -> {
-                    sendNPCDialogue(
-                        player,
-                        TINDEL,
-                        "Sorry my friend, but you don't seem to have any swords that need to be identified.",
-                        FaceAnim.HALF_GUILTY
-                    )
+                    sendNPCDialogue(player, TINDEL, "Sorry my friend, but you don't seem to have any swords that need to be identified.", FaceAnim.HALF_GUILTY)
                     return
                 }
             }
@@ -63,12 +59,7 @@ class TindelMerchantPlugin : InteractionListener {
                 return
             }
 
-            sendDoubleItemDialogue(
-                player,
-                weaponType,
-                Items.COINS_8896,
-                "You hand Tindel 100 coins plus the ${getItemName(weaponType).lowercase()}."
-            )
+            sendDoubleItemDialogue(player, weaponType, Items.COINS_8896, "You hand Tindel 100 coins plus the ${getItemName(weaponType).lowercase()}.")
 
             addDialogueAction(player) { _, _ ->
                 val equipmentType = when (weaponType) {
@@ -86,12 +77,7 @@ class TindelMerchantPlugin : InteractionListener {
                     sendItemDialogue(player, repaired.id, "Tindel gives you a ${getItemName(repaired.id).lowercase()}.")
                     addItem(player, repaired.id)
                 } else {
-                    sendNPCDialogue(
-                        player,
-                        TINDEL,
-                        "Sorry my friend, but the item wasn't worth anything. I've disposed of it for you.",
-                        FaceAnim.HALF_GUILTY
-                    )
+                    sendNPCDialogue(player, TINDEL, "Sorry my friend, but the item wasn't worth anything. I've disposed of it for you.", FaceAnim.HALF_GUILTY)
                 }
             }
         }

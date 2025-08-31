@@ -50,7 +50,7 @@ class CityGuardDialogue : DialogueFile() {
                 end()
                 npc!!.attack(player)
             }
-            5 -> npc(FaceAnim.OLD_NORMAL, "Is that so... You humour me small t'ing, answer this", "riddle and I will help you...").also { stage++ }
+            5 -> npc(FaceAnim.OLD_DEFAULT, "Is that so... You humour me small t'ing, answer this", "riddle and I will help you...").also { stage++ }
             6 -> npc(FaceAnim.OLD_DEFAULT, "I want you to bring me an item: I will give you all the", "letters of this item, you work out what it is...").also { stage++ }
             7 -> npc(FaceAnim.OLD_DEFAULT,"My first is in days, but not in years, My second is in", "evil, and also in tears, My third is in all, but not in", "none, My fourth is in hot, but not in sun.").also { stage++ }
             8 -> npc(FaceAnim.OLD_DEFAULT, "My fifth is in heaven, and also in hate, My sixth is in", "fearing, but not in fate, My seventh is in plush, but not", "in place.").also { stage++ }

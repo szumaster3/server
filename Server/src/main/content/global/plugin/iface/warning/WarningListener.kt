@@ -49,6 +49,7 @@ class WarningListener : InteractionListener, InterfaceListener {
             Components.CWS_WARNING_24_581,
             Components.CWS_WARNING_26_627,
             Components.CWS_WARNING_13_572,
+            Components.CWS_WARNING_12_573,
             Components.CWS_WARNING_15_578
         )
 
@@ -200,6 +201,19 @@ class WarningListener : InteractionListener, InterfaceListener {
                                     }
                                 climb(player, Animation(Animations.MULTI_BEND_OVER_827), ladderLocation!!)
                                 WarningManager.increment(player, component.id)
+                            }
+
+                            Components.CWS_WARNING_12_573 -> {
+                                if(isQuestComplete(player, Quests.WATCHTOWER)) {
+                                    teleport(player, Location.create(2588, 9410, 0), TeleportManager.TeleportType.INSTANT)
+                                    sendMessage(player, "You run past the guard while he's busy.")
+                                } else {
+                                    runTask(player, 3) {
+                                        EnclaveCutscene(player).start(true)
+                                        WarningManager.increment(player, component.id)
+                                        sendMessage(player, "You run past the guard while he's busy.")
+                                    }
+                                }
                             }
 
                             Components.CWS_WARNING_15_578 -> {
