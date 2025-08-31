@@ -43,7 +43,7 @@ class CrateDialogueFile : DialogueFile() {
             }
 
             3 -> {
-                CrateCutscene(player!!).start()
+                CrateCutscene(player!!).start(true)
                 sendDialogue(player!!, "You wait.")
                 stage++
             }

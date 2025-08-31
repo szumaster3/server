@@ -129,6 +129,9 @@ class MerlinCrystalPlugin : InteractionListener {
         on(Scenery.CRATE_63, IntType.SCENERY, "hide-in") { player, _ ->
             if (getQuestStage(player, Quests.MERLINS_CRYSTAL) >= 30) {
                 openDialogue(player, CrateDialogueFile())
+                registerLogoutListener(player, "hide-in") {
+                    player.properties.teleportLocation = Location.create(2778, 3401, 0)
+                }
                 return@on true
             }
 
