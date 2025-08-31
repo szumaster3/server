@@ -207,6 +207,9 @@ class WarningListener : InteractionListener, InterfaceListener {
                                 WarningManager.increment(player, component.id)
                                 player.dispatch(FairyRingDialEvent(FairyRing.AJQ))
                                 teleport(player, FairyRing.AJQ.tile!!, TeleportManager.TeleportType.FAIRY_RING)
+                                if (!player.savedData.globalData.hasTravelLog(2)) {
+                                    player.savedData.globalData.setTravelLog(2)
+                                }
                             }
 
                             Components.CWS_WARNING_23_564 -> {

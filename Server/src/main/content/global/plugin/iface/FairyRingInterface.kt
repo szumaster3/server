@@ -129,18 +129,16 @@ class FairyRingInterface : InterfaceListener {
         val ring2index = getVarbit(player, VB_RING_2)
         val ring3index = getVarbit(player, VB_RING_3)
         val code = "${RING_1[ring1index]}${RING_2[ring2index]}${RING_3[ring3index]}"
-        val ring: FairyRing? =
-            try {
-                FairyRing.valueOf(code.uppercase())
-            } catch (e: Exception) {
-                null
-            }
+        val ring: FairyRing? = try {
+            FairyRing.valueOf(code.uppercase())
+        } catch (e: Exception) {
+            null
+        }
 
-        if (ring != null && !WarningManager.isDisabled(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)) {
+        if (ring == FairyRing.AJQ && !WarningManager.isDisabled(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)) {
             WarningManager.openWarning(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)
             return
         }
-
 
         var tile = ring?.tile
         if (ring?.checkAccess(player) != true) {
@@ -187,7 +185,7 @@ class FairyRingInterface : InterfaceListener {
     }
 }
 
-enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int = -1, ) {
+enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int = -1) {
     AIQ(Location.create(2996, 3114, 0), "Asgarnia: Mudskipper Point", 15),
     AIR(Location.create(2700, 3247, 0), "Islands: South of Witchaven", 16),
     AJQ(Location.create(2735, 5221, 0), "Dungeons: Dark cave south of Dorgesh-Kaann", 19),
@@ -203,14 +201,16 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
     BIP(Location.create(3410, 3324, 0), "Islands: River Salve", 30),
     BIQ(Location.create(3251, 3095, 0), "Kharidian Desert: Near Kalphite hive", 31),
     BIS(Location.create(2635, 3266, 0), "Kandarin: Ardougne Zoo unicorns", 33),
-    BJR(null, "Other Realms: Realm of the Fisher King", 36),
+    BJR(Location.create(2650, 4730, 0), "Other realms: Realm of the Fisher King", 36){
+        override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.HOLY_GRAIL, "to use this ring.")
+    },
     BKP(Location.create(2385, 3035, 0), "Feldip Hills: South of Castle Wars", 38),
     BKQ(Location.create(3041, 4532, 0), "Other realms: Enchanted Valley", 39),
     BKR(Location.create(3469, 3431, 0), "Morytania: Mort Myre, south of Canifis", 40) {
         override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.PRIEST_IN_PERIL, "to use this ring.")
     },
     BLP(Location.create(2437, 5126, 0), "Dungeons: TzHaar area", 42),
-    BLQ(null, "Yu'biusk", 43),
+    BLQ(null, "Other realms: Yu'biusk", 43),
     BLR(Location.create(2740, 3351, 0), "Kandarin: Legends' Guild", 44),
     CIP(Location.create(2513, 3884, 0), "Islands: Miscellania", 46) {
         override fun checkAccess(player: Player): Boolean = requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "to use this ring.")
