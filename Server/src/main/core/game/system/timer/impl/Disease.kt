@@ -1,5 +1,6 @@
 package core.game.system.timer.impl
 
+import com.google.gson.JsonObject
 import core.api.hasTimerActive
 import core.api.playAudio
 import core.api.removeTimer
@@ -11,7 +12,6 @@ import core.game.system.timer.PersistTimer
 import core.game.system.timer.RSTimer
 import core.game.system.timer.TimerFlag
 import core.tools.RandomFunction
-import com.google.gson.JsonObject
 import shared.consts.Sounds
 
 class Disease :

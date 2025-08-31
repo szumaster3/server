@@ -2,7 +2,6 @@ package core.game.system.config
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import core.ServerConstants
 import core.api.log
 import core.cache.def.impl.DataMap

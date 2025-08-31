@@ -2,6 +2,7 @@ package core.game.system.config
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
+import content.global.activity.ttrail.ClueLevel
 import core.ServerConstants
 import core.api.log
 import core.cache.def.impl.NPCDefinition
@@ -9,7 +10,6 @@ import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator
 import core.game.world.update.flag.context.Animation
 import core.tools.Log
-import content.global.activity.ttrail.ClueLevel
 import java.io.FileReader
 
 class NPCConfigParser {

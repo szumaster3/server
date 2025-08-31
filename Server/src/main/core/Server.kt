@@ -1,7 +1,6 @@
 package core
 
 import core.api.log
-import core.game.node.entity.combat.equipment.Ammunition
 import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.game.system.config.ServerConfigParser

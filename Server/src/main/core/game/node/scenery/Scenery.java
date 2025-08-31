@@ -1,7 +1,7 @@
 package core.game.node.scenery;
 
-import core.cache.def.impl.VarbitDefinition;
 import core.cache.def.impl.SceneryDefinition;
+import core.cache.def.impl.VarbitDefinition;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.InteractPlugin;
 import core.game.node.Node;
@@ -15,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.setVarbit;
+import static core.api.ContentAPIKt.setVarp;
 
 /**
  * Represents a scenery.

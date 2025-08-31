@@ -14,7 +14,10 @@ import core.game.world.map.RegionPlane
 import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.*
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
+import java.io.IOException
 import java.lang.reflect.Modifier
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

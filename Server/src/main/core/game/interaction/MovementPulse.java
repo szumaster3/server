@@ -1,5 +1,6 @@
 package core.game.interaction;
 
+import core.api.utils.Vector;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.WalkingQueue;
@@ -7,7 +8,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.NPCBehavior;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
@@ -16,13 +16,12 @@ import core.game.world.map.path.Pathfinder;
 import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.ClearMinimapFlag;
-import kotlin.jvm.functions.Function2;
 import kotlin.Pair;
-import core.api.utils.Vector;
-
-import static core.api.ContentAPIKt.*;
+import kotlin.jvm.functions.Function2;
 
 import java.util.Deque;
+
+import static core.api.ContentAPIKt.*;
 
 /**
  * Handles a movement task.

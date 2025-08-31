@@ -82,11 +82,11 @@ import core.tools.TickUtilsKt;
 import core.worker.ManagementEvents;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import proto.management.ClanLeaveNotification;
+import proto.management.PlayerStatusUpdate;
 import shared.consts.Components;
 import shared.consts.Items;
 import shared.consts.Sounds;
-import proto.management.ClanLeaveNotification;
-import proto.management.PlayerStatusUpdate;
 
 import java.util.Arrays;
 import java.util.HashMap;

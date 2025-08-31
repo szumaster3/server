@@ -1,8 +1,6 @@
 package core.game.worldevents.events.halloween
 
 import core.ServerStore
-import core.ServerStore.Companion.getInt
-import core.ServerStore.Companion.getString
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

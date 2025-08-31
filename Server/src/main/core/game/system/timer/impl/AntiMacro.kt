@@ -1,5 +1,6 @@
 package core.game.system.timer.impl
 
+import com.google.gson.JsonObject
 import content.global.ame.RandomEventNPC
 import content.global.ame.RandomEvents
 import core.api.*
@@ -13,7 +14,6 @@ import core.game.world.map.zone.ZoneRestriction
 import core.game.world.repository.Repository
 import core.tools.RandomFunction
 import core.tools.colorize
-import com.google.gson.JsonObject
 
 class AntiMacro :
     PersistTimer(

@@ -24,7 +24,6 @@ import core.game.world.repository.Repository
 import core.tools.colorize
 import core.tools.secondsToTicks
 import shared.consts.*
-import java.util.Map
 import kotlin.math.min
 
 class GraveController : PersistWorld, TickListener, InteractionListener, Commands {

@@ -1,6 +1,7 @@
 package core.game.interaction
 
 import core.api.*
+import core.game.bots.AIPlayer
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -10,10 +11,10 @@ import core.game.node.scenery.Scenery
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
-import core.game.bots.AIPlayer
 import core.tools.Log
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.lang.Integer.max
-import java.io.*
 
 /**
  * Handles movement-based interaction scripts for an entity.

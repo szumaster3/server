@@ -9,7 +9,6 @@ import core.game.node.entity.npc.NPC
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.tools.Log
-import java.io.File
 import java.io.FileReader
 
 class NPCSpawner {

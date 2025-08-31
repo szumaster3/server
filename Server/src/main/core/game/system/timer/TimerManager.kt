@@ -3,7 +3,6 @@ package core.game.system.timer
 import com.google.gson.JsonObject
 import core.api.getWorldTicks
 import core.api.log
-import core.api.registerTimer
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.tools.Log
