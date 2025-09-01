@@ -12,7 +12,7 @@ import shared.consts.Quests
 class ChronozonNPC(
     id: Int,
     location: Location?,
-) : AbstractNPC(NPCs.CHRONOZON_667, Location(3085, 9923, 0)) {
+) : AbstractNPC(NPCs.CHRONOZON_667, Location(3085, 9936, 0)) {
     private lateinit var targetplayer: Player
     private var amountOfFireDamageTaken: Int = 0
     private var amountOfAirDamageTaken: Int = 0
