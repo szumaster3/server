@@ -8,7 +8,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import shared.consts.Items
 
-class SnelmItemCraftingPlugin : InteractionListener {
+class SnelmHelmetsCraftingPlugin : InteractionListener {
 
     private val shellIDs = Snelm.values().map(Snelm::shell).toIntArray()
 
