@@ -30,6 +30,8 @@ open class SkillDialogueHandler(
      * Opens the skill dialogue interface for the player.
      */
     fun open() {
+        if(player.interfaceManager.isOpened())
+            player.interfaceManager.close()
         player.dialogueInterpreter.open(SKILL_DIALOGUE, this)
     }
 

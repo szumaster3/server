@@ -26,19 +26,25 @@ class LeatherCraftingPulse(player: Player?, node: Item?, private val craft: Leat
             sendDialogue(player, "You need a Crafting level of ${craft.level} to make " + (if (StringUtils.isPlusN(name)) "an " else "a ") + name + ".")
             return false
         }
-        if (!craft.studded && !inInventory(player, Items.NEEDLE_1733, 1)) {
-            sendDialogue(player, "You need a needle to make this.")
+        if (craft.studded && !inInventory(player, Items.STEEL_STUDS_2370, 1)) {
+            sendDialogue(player, "You need steel studs to make this.")
             return false
-        }
-        if (!craft.studded && !inInventory(player, Items.THREAD_1734)) {
-            sendDialogue(player, "You need thread to make this.")
-            return false
+        } else if (!craft.studded) {
+            if (!inInventory(player, Items.NEEDLE_1733, 1)) {
+                sendDialogue(player, "You need a needle to make this.")
+                return false
+            }
+            if (!inInventory(player, Items.THREAD_1734)) {
+                sendDialogue(player, "You need thread to make this.")
+                return false
+            }
         }
         if (!inInventory(player, craft.input, craft.amount)) {
             sendDialogue(player, "You need ${craft.amount} ${getItemName(craft.input).lowercase()} to make this.")
             amount = 0
             return false
         }
+
         closeInterface(player)
         return true
     }
