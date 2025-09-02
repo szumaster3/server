@@ -1,6 +1,5 @@
 package content.global.skill.crafting.spinning
 
-import core.game.node.item.Item
 import shared.consts.Items
 
 /**
@@ -22,22 +21,6 @@ enum class Spinning(val button: Int, val need: Int, val product: Int, val level:
 
     companion object {
         private val buttonMap: Map<Int, Spinning> = values().associateBy { it.button }
-        private val allNeed: List<Item> = values().map { Item(it.need, 1) }
-        private val allProduct: List<Item> = values().map { Item(it.product, 1) }
-
-        /**
-         * Finds [Spinning] by button id or null if none.
-         */
         fun forId(id: Int): Spinning? = buttonMap[id]
-
-        /**
-         * Gets all required items for spinning.
-         */
-        fun getAllNeed(): List<Item> = allNeed
-
-        /**
-         * Gets all product items from spinning.
-         */
-        fun getAllProduct(): List<Item> = allProduct
     }
 }

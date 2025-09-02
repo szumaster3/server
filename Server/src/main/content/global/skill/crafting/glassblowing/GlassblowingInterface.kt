@@ -5,7 +5,6 @@ import core.game.dialogue.InputType
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Components
@@ -73,6 +72,6 @@ class GlassblowingInterface :
         amount: Int,
     ) {
         closeInterface(player)
-        submitIndividualPulse(player, GlassblowingPulse(player, product, amount), type = PulseType.STANDARD)
+        submitIndividualPulse(player, GlassblowingPulse(player, product, amount))
     }
 }

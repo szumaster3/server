@@ -2,7 +2,6 @@ package content.global.skill.crafting.casting.gold
 
 import core.api.*
 import core.game.component.Component
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -193,7 +192,7 @@ object Jewellery {
             items[index] = Item(data.items[i], 1 * amount)
         }
         closeInterface(player)
-        submitIndividualPulse(player, JewelleryCraftingPulse(player, null, data, amount), type = PulseType.STANDARD)
+        submitIndividualPulse(player, JewelleryCraftingPulse(player, null, data, amount))
     }
 
     /**

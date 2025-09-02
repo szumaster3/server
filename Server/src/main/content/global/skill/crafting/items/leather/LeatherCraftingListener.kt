@@ -4,173 +4,117 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.impl.PulseType
-import core.game.node.entity.skill.Skills
+import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Components
 import shared.consts.Items
+import kotlin.math.max
 
-class LeatherCraftingListener : InteractionListener , InterfaceListener {
-    val STUDDED_LEATHER = StuddedArmour.values().map { it.leather }.toIntArray()
-    val DRAGON_LEATHER = intArrayOf(Items.GREEN_D_LEATHER_1745, Items.BLUE_D_LEATHER_2505, Items.RED_DRAGON_LEATHER_2507, Items.BLACK_D_LEATHER_2509)
+/**
+ * Handles leather crafting.
+ */
+class LeatherCraftingListener : InteractionListener, InterfaceListener {
 
     override fun defineListeners() {
+        val TOOLS = intArrayOf(Items.STEEL_STUDS_2370, Items.NEEDLE_1733)
+        val LEATHER = LeatherCraft.values().map { it.input }.toIntArray()
 
-        /*
-         * Handles crafting soft leather.
-         */
+        onUseWith(IntType.ITEM, TOOLS, *LEATHER) { player, used, with ->
+            val craft = LeatherCraft.forInput(with.id).firstOrNull() ?: return@onUseWith true
+            val requiredTool =
+                if (craft.type == LeatherCraft.Type.STUDDED) Items.STEEL_STUDS_2370 else Items.NEEDLE_1733
 
-        onUseWith(IntType.ITEM, Items.LEATHER_1741, Items.NEEDLE_1733) { player, _, _ ->
+            if (used.id != requiredTool) {
+                sendMessage(
+                    player,
+                    "You need ${if (requiredTool == Items.NEEDLE_1733) "a needle" else "steel studs"} to craft this leather."
+                )
+                return@onUseWith true
+            }
+
+            closeDialogue(player)
+            openLeatherInterface(player, craft.type, with.id)
+            return@onUseWith true
+        }
+    }
+
+    /**
+     * Opens the leather crafting interface.
+     */
+    private fun openLeatherInterface(player: Player, type: LeatherCraft.Type, inputId: Int) {
+        if (type == LeatherCraft.Type.SOFT) {
             openInterface(player, Components.LEATHER_CRAFTING_154)
-            return@onUseWith true
+            return
         }
 
-        /*
-         * Handles crafting studded leather.
-         */
+        val crafts = LOOKUP_TABLE[type]?.get(inputId) ?: return
+        if (crafts.isEmpty()) return
 
-        onUseWith(IntType.ITEM, STUDDED_LEATHER, Items.STEEL_STUDS_2370) { player, used, _ ->
-            val item = StuddedArmour.forId(used.id) ?: return@onUseWith true
+        sendSkillDialogue(player) {
+            val items = crafts.map { it.product }.toIntArray()
+            withItems(*items)
 
-            sendSkillDialogue(player) {
-                withItems(item.product)
-                create { _, amount ->
+            create { id, amount ->
+                val craft = LeatherCraft.forProduct(id)
+                if (craft != null) {
                     submitIndividualPulse(
-                        entity = player,
-                        pulse = StuddedArmourPulse(player, Item(item.leather), item, amount),
-                        type = PulseType.STANDARD
+                        player,
+                        LeatherCraftingPulse(player, Item(craft.input), craft, amount)
                     )
-                }
-
-                calculateMaxAmount {
-                    amountInInventory(player, used.id)
-                }
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles crafting the snakeskin.
-         */
-
-        onUseWith(IntType.ITEM, Items.NEEDLE_1733, Items.SNAKESKIN_6289) { player, used, _ ->
-            sendString(player, "Which snakeskin item would you like to make?", Components.SKILL_MAKE_306, 27)
-            sendSkillDialogue(player) {
-                withItems(Items.SNAKESKIN_BODY_6322, Items.SNAKESKIN_CHAPS_6324, Items.SNAKESKIN_VBRACE_6330, Items.SNAKESKIN_BANDANA_6326, Items.SNAKESKIN_BOOTS_6328)
-                create { id, amount ->
-                    val item = SnakeskinLeather.forId(id)
-                    item?.let {
-                        submitIndividualPulse(
-                            entity = player,
-                            pulse = SnakeskinCraftingPulse(player, null, amount, it),
-                            type = PulseType.STANDARD
-                        )
-                    } ?: sendMessage(player, "Invalid snakeskin item selected.")
-                }
-                calculateMaxAmount {
-                    amountInInventory(player, used.id)
-                }
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles crafting hard leather.
-         */
-
-        onUseWith(IntType.ITEM, Items.HARD_LEATHER_1743, Items.NEEDLE_1733) { player, used, _ ->
-            if (getStatLevel(player, Skills.CRAFTING) < 28) {
-                sendDialogue(player, "You need a crafting level of " + 28 + " to make a hard leather body.")
-                return@onUseWith false
-            }
-            sendSkillDialogue(player) {
-                withItems(Items.HARDLEATHER_BODY_1131)
-                create { _, amount ->
-                    submitIndividualPulse(
-                        entity = player,
-                        pulse = HardLeatherCraftingPulse(player, used.asItem(), amount),
-                        type = PulseType.STANDARD
-                    )
-                }
-                calculateMaxAmount {
-                    amountInInventory(player, used.id)
-                }
-            }
-            return@onUseWith true
-        }
-
-        /*
-         * Handles crafting dragon leather.
-         */
-
-        onUseWith(IntType.ITEM, DRAGON_LEATHER, Items.NEEDLE_1733) { player, used, with ->
-            val index = IntArray(3)
-
-            if (used.id == Items.GREEN_D_LEATHER_1745) {
-                index[0] = DragonLeather.GREEN_D_HIDE_BODY.product
-                index[1] = DragonLeather.GREEN_D_HIDE_VAMBS.product
-                index[2] = DragonLeather.GREEN_D_HIDE_CHAPS.product
-            }
-            if (used.id == Items.BLUE_D_LEATHER_2505) {
-                index[0] = DragonLeather.BLUE_D_HIDE_BODY.product
-                index[1] = DragonLeather.BLUE_D_HIDE_VAMBS.product
-                index[2] = DragonLeather.BLUE_D_HIDE_CHAPS.product
-            }
-            if (used.id == Items.RED_DRAGON_LEATHER_2507) {
-                index[0] = DragonLeather.RED_D_HIDE_BODY.product
-                index[1] = DragonLeather.RED_D_HIDE_VAMBS.product
-                index[2] = DragonLeather.RED_D_HIDE_CHAPS.product
-            }
-            if (used.id == Items.BLACK_D_LEATHER_2509) {
-                index[0] = DragonLeather.BLACK_D_HIDE_BODY.product
-                index[1] = DragonLeather.BLACK_D_HIDE_VAMBS.product
-                index[2] = DragonLeather.BLACK_D_HIDE_CHAPS.product
+                } else player.debug("Invalid leather item selected.")
             }
 
-            sendSkillDialogue(player) {
-                withItems(*index)
-                create { id, amount ->
-                    val item = DragonLeather.forId(id)
-                    submitIndividualPulse(
-                        entity = player,
-                        pulse = DragonLeatherCraftingPulse(player, null, item!!, amount),
-                        type = PulseType.STANDARD
-                    )
-                }
-                calculateMaxAmount {
-                    amountInInventory(player, used.id)
-                }
+            calculateMaxAmount {
+                crafts.firstOrNull()?.let { max(0, amountInInventory(player, it.input)) } ?: 0
             }
-            return@onUseWith true
         }
     }
 
     override fun defineInterfaceListeners() {
         on(Components.LEATHER_CRAFTING_154) { player, _, opcode, buttonID, _, _ ->
+            val productId = SOFT_LEATHER_BUTTONS[buttonID] ?: return@on true
+            val craft = LeatherCraft.forProduct(productId) ?: return@on true
             var amount = 0
-            val soft = SoftLeather.forButton(buttonID) ?: return@on true
             when (opcode) {
                 155 -> amount = 1
                 196 -> amount = 5
-                124 -> amount = amountInInventory(player, Items.LEATHER_1741)
+                124 -> amount = amountInInventory(player, craft.input)
                 199 -> {
-                    sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
-                        submitIndividualPulse(
-                            entity = player,
-                            pulse = SoftLeatherCraftingPulse(player, Item(Items.LEATHER_1741), soft, value as Int),
-                            type = PulseType.STANDARD
-                        )
+                    sendInputDialogue(player, true, "Enter the amount:") { value ->
+                        val amt = value as? Int ?: return@sendInputDialogue
+                        if (amt <= 0) return@sendInputDialogue
+                        submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amt))
                     }
                     return@on true
                 }
             }
-            submitIndividualPulse(
-                player,
-                SoftLeatherCraftingPulse(player, null, soft, amount),
-                type = PulseType.STANDARD
-            )
+            submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount))
             return@on true
         }
     }
-}
 
+    companion object {
+        /**
+         * Represents buttons map for soft leather crafting.
+         */
+        private val SOFT_LEATHER_BUTTONS = mapOf(
+            28 to Items.LEATHER_BODY_1129,
+            29 to Items.LEATHER_GLOVES_1059,
+            30 to Items.LEATHER_BOOTS_1061,
+            31 to Items.LEATHER_VAMBRACES_1063,
+            32 to Items.LEATHER_CHAPS_1095,
+            33 to Items.COIF_1169,
+            34 to Items.LEATHER_COWL_1167
+        )
+
+        /**
+         * Represents lookup table for leather crafting.
+         */
+        private val LOOKUP_TABLE: Map<LeatherCraft.Type, Map<Int, List<LeatherCraft>>> =
+            LeatherCraft.values()
+                .groupBy { it.type }
+                .mapValues {
+                    (_, crafts) -> crafts.groupBy { it.input }
+                }
+    }
+}
