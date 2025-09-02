@@ -14,10 +14,10 @@ import shared.consts.Items
  */
 class LeatherCraftingListener : InteractionListener, InterfaceListener {
     override fun defineListeners() {
-
+        val TOOLS = intArrayOf(Items.STEEL_STUDS_2370, Items.NEEDLE_1733)
         val LEATHER = LeatherCraft.values().map { it.input }.toIntArray()
 
-        onUseWith(IntType.ITEM, LEATHER) { player, used, with ->
+        onUseWith(IntType.ITEM, TOOLS, *LEATHER) { player, used, with ->
             val craft = LeatherCraft.forInput(with.id)?.firstOrNull() ?: return@onUseWith true
 
             when (craft.type) {
