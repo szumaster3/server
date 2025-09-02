@@ -14,38 +14,39 @@ import shared.consts.Items
  * Handles leather crafting.
  */
 class LeatherCraftingListener : InteractionListener, InterfaceListener {
-
     override fun defineListeners() {
 
-        /*
-         * Handles crafting different types of leather.
-         */
+        val LEATHER = LeatherCraft.values().map { it.input }.toIntArray()
 
-        onUseWith(IntType.ITEM, Items.NEEDLE_1733, *LeatherCraft.values().map { it.input }.toIntArray()) { player, _, with ->
-            val craft = LeatherCraft.forInput(with.id).firstOrNull()
-            craft?.let {
-                val typeToOpen = when (it.type) {
-                    LeatherCraft.Type.SOFT -> LeatherCraft.Type.SOFT
-                    LeatherCraft.Type.STUDDED -> return@onUseWith true
-                    else -> it.type
+        onUseWith(IntType.ITEM, LEATHER) { player, used, with ->
+            val craft = LeatherCraft.forInput(with.id)?.firstOrNull() ?: return@onUseWith true
+
+            when (craft.type) {
+                LeatherCraft.Type.SOFT -> {
+                    if (used.id == Items.NEEDLE_1733) {
+                        openInterface(player, with.id, LeatherCraft.Type.SOFT)
+                    } else {
+                        sendMessage(player, "You need a needle to craft this leather.")
+                    }
                 }
-                openInterface(player, with.id, typeToOpen)
+                LeatherCraft.Type.STUDDED -> {
+                    if (used.id == Items.STEEL_STUDS_2370) {
+                        openInterface(player, with.id, LeatherCraft.Type.STUDDED)
+                    } else {
+                        sendMessage(player, "You need steel studs to craft this leather.")
+                    }
+                }
+                else -> {
+                    sendMessage(player, "You cannot craft this type of leather with that item.")
+                }
             }
-            return@onUseWith true
-        }
 
-        /*
-         * Handles studdy crafting.
-         */
-
-        onUseWith(IntType.ITEM, Items.STEEL_STUDS_2370, *LeatherCraft.values().map { it.input }.toIntArray()) { player, used, with ->
-            openInterface(player, with.id, LeatherCraft.Type.STUDDED)
             return@onUseWith true
         }
     }
 
     /**
-     * Opens the leather interface for a specific leather type.
+     * Opens the leather crafting interface for a leather type and input item.
      */
     private fun openInterface(player: Player, inputId: Int, type: LeatherCraft.Type) {
         val craft = LeatherCraft.forInput(inputId).firstOrNull { it.type == type } ?: return
@@ -53,7 +54,7 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
     }
 
     /**
-     * Opens the crafting interface or skill dialogue depending on the leather type.
+     * Opens the crafting interface depends on leather type.
      */
     private fun openLeatherInterface(player: Player, type: LeatherCraft.Type) {
         when (type) {
@@ -64,11 +65,16 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
                 create { id, amount ->
                     val craft = LeatherCraft.forProduct(id)
                     if (craft != null) {
-                        submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount), type = PulseType.STANDARD)
+                        submitIndividualPulse(
+                            player,
+                            LeatherCraftingPulse(player, Item(craft.input), craft, amount),
+                            type = PulseType.STANDARD
+                        )
                     } else player.debug("Invalid leather item selected.")
                 }
                 calculateMaxAmount {
-                    LeatherCraft.values().firstOrNull { it.type == type }?.let { amountInInventory(player, it.input) } ?: 0
+                    LeatherCraft.values().firstOrNull { it.type == type }?.let { amountInInventory(player, it.input) }
+                        ?: 0
                 }
             }
         }
@@ -77,7 +83,8 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
     override fun defineInterfaceListeners() {
         on(Components.LEATHER_CRAFTING_154) { player, _, opcode, buttonID, _, _ ->
             val craft = LeatherCraft.values().firstOrNull { it.product == buttonID } ?: return@on true
-            val amount = when (opcode) {
+            if (buttonID !in 29..34) return@on true
+            var amount = when (opcode) {
                 155 -> 1
                 196 -> 5
                 124 -> amountInInventory(player, craft.input)
