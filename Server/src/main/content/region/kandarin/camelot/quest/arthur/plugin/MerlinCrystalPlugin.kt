@@ -6,6 +6,7 @@ import content.region.kandarin.camelot.quest.arthur.dialogue.*
 import core.api.*
 import core.api.getQuestStage
 import core.api.isQuestComplete
+import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.DropListener
 import core.game.interaction.IntType
@@ -131,25 +132,10 @@ class MerlinCrystalPlugin : InteractionListener {
 
         on(Scenery.CRATE_63, IntType.SCENERY, "hide-in") { player, _ ->
             if (getQuestStage(player, Quests.MERLINS_CRYSTAL) >= 30) {
-                sendDialogueLines(player, "The crate is empty. It's just about big enough to hide inside.")
-                addDialogueAction(player) { _, button ->
-                    setTitle(player, 2)
-                    sendDialogueOptions(player, "Would you like to hide inside the create?", "Yes.", "No.")
-                    addDialogueAction(player) { p, _ ->
-                        when (button) {
-                            2 -> {
-                                p.animate(Animation.create(Animations.MULTI_BEND_OVER_827))
-                                sendDialogue(p, "You climb inside the crate and wait.")
-                                addDialogueAction(player) { _, _ -> CrateCutscene(p).start(true) }
-                            }
-                            else -> sendDialogue(p, "You leave the empty crate alone.")
-                        }
-                    }
-                }
-                return@on true
+                openDialogue(player, CrateDialogue())
+            } else {
+                player.sendMessage("You have no reason to do that...")
             }
-
-            player.sendMessage("You have no reason to do that...")
             return@on true
         }
 
@@ -243,6 +229,46 @@ class MerlinCrystalPlugin : InteractionListener {
 
             player.unlock()
             return@queueScript stopExecuting(player)
+        }
+    }
+
+    inner class CrateDialogue : DialogueFile() {
+
+        init {
+            stage = 0
+        }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogue(player!!, "The crate is empty. It's just about big enough to hide inside.")
+                    stage = 1
+                }
+                1 -> {
+                    setTitle(player!!, 2)
+                    sendDialogueOptions(player!!, "Would you like to hide inside the crate?", "Yes.", "No.")
+                    stage = 2
+                }
+                2 -> {
+                    when(buttonID) {
+                        1 -> {
+                            player!!.animate(Animation.create(Animations.MULTI_BEND_OVER_827))
+                            sendDialogue(player!!, "You climb inside the crate and wait.")
+                            stage = 3
+                        }
+                        else -> {
+                            sendDialogue(player!!, "You leave the empty crate alone.")
+                            stage = 4
+                        }
+                    }
+                }
+                3 -> {
+                    end().also {
+                        CrateCutscene(player!!).start(true)
+                    }
+                }
+                4 -> end()
+            }
         }
     }
 }

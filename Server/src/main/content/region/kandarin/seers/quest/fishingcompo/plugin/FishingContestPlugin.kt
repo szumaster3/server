@@ -4,11 +4,13 @@ import content.data.GameAttributes
 import core.api.*
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.node.Node
 import core.game.world.map.Location
 import core.game.world.repository.Repository
 import core.game.world.update.flag.context.Animation
@@ -61,39 +63,12 @@ class FishingContestPlugin : InteractionListener {
                 Scenery.GATE_48 -> Pair(Scenery.GATE_48, Scenery.GATE_47)
                 else -> null
             }
+
             when (node.id) {
                 Scenery.GATE_47, Scenery.GATE_48 -> {
-                    // Exit during competition.
-                    if(player.location.x < 2643 && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_CONTEST, false)) {
-                        sendNPCDialogue(player, NPCs.BONZO_225, "So you're calling it quits here for now?")
-                        addDialogueAction(player) { _, button ->
-                            sendDialogueOptions(player, "Select an option",
-                                "Yes I'll compete again another day.",
-                                "Actually I'll go back and catch some more."
-                            )
-                            addDialogueAction(player) { _, _ ->
-                                if(button == 2) {
-                                    removeAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_CONTEST)
-                                    sendPlayerDialogue(player, "Yes I'll compete again another day.")
-                                    runTask(player, 3) {
-                                        if (gatePair != null) {
-                                            DoorActionHandler.autowalkFence(
-                                                player,
-                                                node.asScenery(),
-                                                gatePair.first,
-                                                gatePair.second
-                                            )
-                                        }
-                                        sendNPCDialogue(player, NPCs.BONZO_225, "Ok, I'll see you again.")
-                                    }
-                                } else {
-                                    sendPlayerDialogue(player, "Actually I'll go back and catch some more.")
-                                    runTask(player, 3) {
-                                        sendNPCDialogue(player, NPCs.BONZO_225, "Good luck!")
-                                    }
-                                }
-                            }
-                        }
+                    if (player.location.x < 2643 && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_CONTEST, false)) {
+                        openDialogue(player, FishingCompetitionExitDialogue(node, gatePair))
+                        return@on true
                     }
 
                     val shownPass = getVarbit(player, Vars.VARBIT_FISHING_CONTEST_PASS_SHOWN_2053)
@@ -105,22 +80,11 @@ class FishingContestPlugin : InteractionListener {
                                 sendMessage(player, "You need a fishing pass to fish here.")
                             }
                         }
-
                         !inInventory(player, Items.FISHING_ROD_307) -> {
-                            sendDialogueLines(
-                                player,
-                                "I should probably get a rod from",
-                                "Grandpa Jack before starting."
-                            )
+                            sendDialogueLines(player, "I should probably get a rod from", "Grandpa Jack before starting.")
                         }
-
-                        else -> if (gatePair != null) {
-                            DoorActionHandler.autowalkFence(
-                                player,
-                                node.asScenery(),
-                                gatePair.first,
-                                gatePair.second
-                            )
+                        else -> gatePair?.let {
+                            DoorActionHandler.autowalkFence(player, node.asScenery(), it.first, it.second)
                         }
                     }
                 }
@@ -128,16 +92,8 @@ class FishingContestPlugin : InteractionListener {
                 Scenery.GATE_52, Scenery.GATE_53 -> {
                     if (inBorders(player, 2647, 3468, 2652, 3469)) {
                         face(findNPC(NPCs.FORESTER_231)!!, player, 3)
-                        sendNPCDialogue(
-                            player,
-                            NPCs.FORESTER_231,
-                            "Hey! You can't come through here! This is private land!",
-                            FaceAnim.ANGRY
-                        )
-                        sendMessage(
-                            player,
-                            "There might be a gap in the fence somewhere where he wouldn't see you sneak in."
-                        )
+                        sendNPCDialogue(player, NPCs.FORESTER_231, "Hey! You can't come through here! This is private land!", FaceAnim.ANGRY)
+                        sendMessage(player, "There might be a gap in the fence somewhere where he wouldn't see you sneak in.")
                         sendMessage(player, "You should look around.")
                     } else {
                         sendDialogue(player, "This gate is locked.")
@@ -175,6 +131,50 @@ class FishingContestPlugin : InteractionListener {
         on(NPCs.BONZO_225, IntType.NPC, "pay") { player, _ ->
             player.dialogueInterpreter.open(NPCs.BONZO_225, Repository.findNPC(NPCs.BONZO_225))
             return@on true
+        }
+    }
+
+    /**
+     * Represents dialogue for leaving the fishing competition through the gate.
+     */
+    inner class FishingCompetitionExitDialogue(
+        private val node: Node,
+        private val gatePair: Pair<Int, Int>?
+    ) : DialogueFile() {
+
+        init { stage = 0 }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendNPCDialogue(player!!, NPCs.BONZO_225, "So you're calling it quits here for now?")
+                    stage = 1
+                }
+                1 -> {
+                    options("Yes I'll compete again another day.", "Actually I'll go back and catch some more.")
+                    stage = 2
+                }
+                2 -> {
+                    when(buttonID) {
+                        1 -> {
+                            removeAttribute(player!!, GameAttributes.QUEST_FISHINGCOMPO_CONTEST)
+                            sendPlayerDialogue(player!!, "Yes I'll compete again another day.")
+                            runTask(player!!, 3) {
+                                gatePair?.let { DoorActionHandler.autowalkFence(player!!, node.asScenery(), it.first, it.second) }
+                                sendNPCDialogue(player!!, NPCs.BONZO_225, "Ok, I'll see you again.")
+                                end()
+                            }
+                        }
+                        2 -> { // "Go back and catch more"
+                            sendPlayerDialogue(player!!, "Actually I'll go back and catch some more.")
+                            runTask(player!!, 3) {
+                                sendNPCDialogue(player!!, NPCs.BONZO_225, "Good luck!")
+                                end()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

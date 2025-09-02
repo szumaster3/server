@@ -96,7 +96,7 @@ class WizardTowerListener : InteractionListener {
             sendDialogueLines(player, "There's a large selection of books, the majority of which look fairly", "old. Some very strange names... You pick one at random:")
             addDialogueAction(player) { p, button ->
                 if(button > 0) {
-                    sendDialogue(player, bookName.toString())
+                    sendDialogue(player, bookName)
                     runTask(player, 3) {
                         sendPlayerDialogue(player, "Interesting...")
                     }

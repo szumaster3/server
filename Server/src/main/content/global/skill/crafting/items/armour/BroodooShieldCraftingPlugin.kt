@@ -8,6 +8,7 @@ import core.game.node.item.Item
 import shared.consts.Animations
 import shared.consts.Items
 import content.global.skill.construction.items.NailType
+import core.game.dialogue.DialogueFile
 import core.game.node.entity.player.Player
 import kotlin.math.min
 
@@ -23,7 +24,6 @@ class BroodooShieldCraftingPlugin : InteractionListener {
 
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.HAMMER_2347, *itemIDs.keys.toIntArray()) { player, _, with ->
-
             val maskId = with.id
             val shieldId = itemIDs[maskId] ?: return@onUseWith false
 
@@ -37,43 +37,20 @@ class BroodooShieldCraftingPlugin : InteractionListener {
             when (checkNails(player, nailsRequired)) {
                 NailCheck.NONE -> {
                     sendMessage(player, "You don't have nails.")
-                    return@onUseWith true
                 }
                 NailCheck.NOT_ENOUGH -> {
                     sendMessage(player, "You don't have enough nails.")
-                    return@onUseWith true
                 }
                 NailCheck.ONLY_EXPENSIVE -> {
-                    sendDoubleItemDialogue(
-                        player,
-                        Items.BLACK_NAILS_4821,
-                        Items.RUNE_NAILS_4824,
-                        "You have no low cost nails which means that you will most likely use black, mithril, adamantite or rune nails, are you sure you want to continue?"
-                    )
-                    addDialogueAction(player) { _, _ ->
-                        sendDialogueOptions(
-                            player,
-                            "Select an Option",
-                            "Yes, I'll make the shield with the higher value nails.",
-                            "Er, no. I'll get some cheaper nails..."
-                        )
-                        addDialogueAction(player) { _, buttonID ->
-                            if (buttonID == 2) {
-                                if (remove(player, maskId)) {
-                                    craft(player, shieldId, maskId)
-                                }
-                            }
-                        }
-                    }
-                    return@onUseWith true
+                    openDialogue(player, CreateBroodooShieldDialogue(maskId,shieldId))
                 }
                 NailCheck.HAS_CHEAP -> {
                     if (remove(player, maskId)) {
                         craft(player, shieldId, maskId)
                     }
-                    return@onUseWith true
                 }
             }
+            return@onUseWith true
         }
     }
 
@@ -138,5 +115,34 @@ class BroodooShieldCraftingPlugin : InteractionListener {
             if (nailsToRemove <= 0) break
         }
         return nailsToRemove == 0
+    }
+
+    inner class CreateBroodooShieldDialogue(
+        private val maskId: Int,
+        private val shieldId: Int
+    ) : DialogueFile() {
+
+        init {
+            stage = 0
+        }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDoubleItemDialogue(player!!, Items.BLACK_NAILS_4821, Items.RUNE_NAILS_4824, "You have no low cost nails which means that you will most likely use black, mithril, adamantite or rune nails, are you sure you want to continue?")
+                    stage = 1
+                }
+                1 -> {
+                    options("Yes, I'll make the shield with the higher value nails.", "Er, no. I'll get some cheaper nails...")
+                    stage = 2
+                }
+                2 -> {
+                    when(buttonID){
+                        1 -> if (remove(player!!, maskId)) end().also { craft(player!!, shieldId, maskId) }
+                        2 -> end()
+                    }
+                }
+            }
+        }
     }
 }

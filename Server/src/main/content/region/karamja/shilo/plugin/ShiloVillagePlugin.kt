@@ -1,6 +1,8 @@
 package content.region.karamja.shilo.plugin
 
+import content.region.karamja.shilo.dialogue.ShiloTravelDialogue
 import core.api.*
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -141,7 +143,7 @@ class ShiloVillagePlugin : InteractionListener {
          * @param player The player who is traveling.
          * @param npc The NPC id that the player is interacting with.
          */
-        private fun quickTravel(player: Player, npc: Int) {
+        fun quickTravel(player: Player, npc: Int) {
             if (!hasRequirement(player, Quests.SHILO_VILLAGE, true)) return
             val isShilo = npc == NPCs.HAJEDY_510
             val npcName = getNPCName(npc)
@@ -179,43 +181,8 @@ class ShiloVillagePlugin : InteractionListener {
          * @param npc The NPC offering the cart ride. If null, the dialogue will not proceed.
          */
         private fun handleTravelDialogue(player: Player, npc: NPC?) {
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return
-            val isShilo = npc?.id == NPCs.HAJEDY_510
-            val destination = if (isShilo) "Shilo Village" else "Brimhaven"
-
-            sendNPCDialogue(
-                player,
-                npc!!.id,
-                "I am offering a cart ride to $destination if you're interested? It will cost 10 gold coins. Is that Ok?"
-            )
-
-            addDialogueAction(player) { _, _ ->
-                sendDialogueOptions(
-                    player,
-                    "Select an Option",
-                    "Yes please, I'd like to go to $destination.",
-                    "No, thanks."
-                )
-                addDialogueAction(player) { player, button ->
-                    closeDialogue(player)
-                    if (button == 2) {
-                        if (!inInventory(player, Items.COINS_995, 10)) {
-                            sendPlayerDialogue(
-                                player,
-                                "Sorry, I don't seem to have enough coins.",
-                                FaceAnim.HALF_GUILTY
-                            )
-                        }
-                        sendMessage(
-                            player,
-                            "You hop into the cart and the driver urges the horses on. You take a taxing journey through the jungle to $destination."
-                        )
-                        quickTravel(player, npc.id)
-                    } else {
-                        sendPlayerDialogue(player, "No, thanks.")
-                    }
-                }
-            }
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE) || npc == null) return
+            openDialogue(player, ShiloTravelDialogue())
         }
     }
 }

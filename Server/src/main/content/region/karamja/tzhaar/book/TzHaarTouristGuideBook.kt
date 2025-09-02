@@ -5,9 +5,11 @@ import content.global.plugin.iface.BookLine
 import content.global.plugin.iface.Page
 import content.global.plugin.iface.PageSet
 import core.api.*
+import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
+import shared.consts.Components
 import shared.consts.Items
 
 class TzHaarTouristGuideBook : InteractionListener {
@@ -405,30 +407,39 @@ class TzHaarTouristGuideBook : InteractionListener {
         pageNum: Int,
         buttonID: Int,
     ): Boolean {
-        BookInterface.pageSetup(
-            player,
-            BookInterface.FANCY_BOOK_2_27,
-            TITLE,
-            CONTENTS,
-        )
+        BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_2_27, TITLE, CONTENTS)
         return true
     }
 
     override fun defineListeners() {
         on(Items.TZHAAR_TOURIST_GUIDE_13244, IntType.ITEM, "read") { player, _ ->
-            sendDialogueLines(player, "You open a book and see that there is note stuck to the inside of", "the cover.")
-            addDialogueAction(player) { _, _ ->
-                setTitle(player, 2)
-                sendDialogueOptions(player, "What do you want to do?", "Read the book.", "Read the note.")
-                addDialogueAction(player) { player, button ->
-                    if (button == 2) {
-                        BookInterface.openBook(player, BookInterface.FANCY_BOOK_2_27, ::display)
-                    } else {
-                        openInterface(player, 739)
+            openDialogue(player, TouristGuideDialogue())
+            return@on true
+        }
+    }
+
+    inner class TouristGuideDialogue : DialogueFile() {
+
+        init { stage = 0 }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogueLines(player!!, "You open a book and see that there is note stuck to the inside of", "the cover.")
+                    stage = 1
+                }
+                1 -> {
+                    setTitle(player!!, 2)
+                    options("Read the book.", "Read the note.")
+                    stage = 2
+                }
+                2 -> {
+                    when(buttonID) {
+                        1 -> end().also { BookInterface.openBook(player!!, BookInterface.FANCY_BOOK_2_27, ::display) }
+                        2 -> end().also { openInterface(player!!, Components.TZHAAR_NUMBERS_739) }
                     }
                 }
             }
-            return@on true
         }
     }
 }

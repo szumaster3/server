@@ -8,6 +8,7 @@ import core.api.openDoor
 import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.api.setQuestStage
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -33,25 +34,7 @@ class HorrorFromTheDeepPlugin : InteractionListener {
          */
 
         on(Scenery.BOOKCASE_4617, IntType.SCENERY, "search") { player, _ ->
-            sendDialogue(player, "There are three books here that look important... What would you like to do?")
-            addDialogueAction(player) { _, _ ->
-                sendDialogueOptions(player, "Select an option", "Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books")
-                addDialogueAction(player) { _, button ->
-                    val book = arrayOf(Item(Items.MANUAL_3847), Item(Items.DIARY_3846), Item(Items.JOURNAL_3845))
-                    val bookIDs = book.toList()
-                    if (freeSlots(player) < (if (button == 5) bookIDs.size else 1)) {
-                        sendDialogue(player, "You do not have enough room to take ${if (bookIDs.size > 1) "all three" else "that"}.")
-                        return@addDialogueAction
-                    }
-                    when (button) {
-                        2 -> player.inventory.add(book[0])
-                        3 -> player.inventory.add(book[1])
-                        4 -> player.inventory.add(book[2])
-                        5 -> player.inventory.add(*book)
-                    }
-                }
-            }
-
+            openDialogue(player, BookcaseDialogue())
             return@on true
         }
 
@@ -330,6 +313,49 @@ class HorrorFromTheDeepPlugin : InteractionListener {
             forceMove(player, player.location, Location(2596, 3608, 0), 0, 120, Direction.WEST, Animations.AGILITY_START_ALT_3277)
             runTask(player, 6) { forceWalk(player, Location.create(2595, 3608, 0), "") }
             return@on true
+        }
+    }
+
+    inner class BookcaseDialogue : DialogueFile() {
+
+        init {
+            stage = 0
+        }
+
+        private val books = arrayOf(
+            Item(Items.MANUAL_3847, 1),
+            Item(Items.DIARY_3846, 1),
+            Item(Items.JOURNAL_3845, 1)
+        )
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogue(player!!, "There are three books here that look important... What would you like to do?")
+                    stage = 1
+                }
+                1 -> {
+                    options("Take the Lighthouse Manual", "Take the ancient Diary", "Take Jossik's Journal", "Take all three books")
+                    stage = 2
+                }
+                2 -> {
+                    val bookIDs = books.toList()
+                    val freeSlots = freeSlots(player!!)
+
+                    if (buttonID == 4 && freeSlots < bookIDs.size || buttonID in 1..3 && freeSlots < 1) {
+                        sendDialogue(player!!, "You do not have enough room to take ${if (buttonID == 4) "all three" else "that"}.")
+                        return
+                    }
+
+                    when(buttonID) {
+                        1 -> player!!.inventory.add(books[0])
+                        2 -> player!!.inventory.add(books[1])
+                        3 -> player!!.inventory.add(books[2])
+                        4 -> player!!.inventory.add(*books)
+                    }
+                    end()
+                }
+            }
         }
     }
 }

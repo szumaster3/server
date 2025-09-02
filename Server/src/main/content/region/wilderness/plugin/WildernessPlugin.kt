@@ -2,6 +2,7 @@ package content.region.wilderness.plugin
 
 import content.data.GameAttributes
 import core.api.*
+import core.game.dialogue.DialogueFile
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -58,40 +59,14 @@ class WildernessPlugin : InteractionListener {
          */
 
         on(WILDERNESS_LADDER, IntType.SCENERY, "pull") { player, node ->
-            when (node.id) {
+            when(node.id) {
                 Scenery.LEVER_1814 -> {
-                    sendDialogue(player, "Warning! Pulling the lever will teleport you deep into the wilderness.")
-                    addDialogueAction(player) { _, _ ->
-                        setTitle(player, 2)
-                        sendDialogueOptions(
-                            player, "Select an option", "Yes I'm brave.", "Eep! The wilderness... No thank you."
-                        )
-                        addDialogueAction(player) { player, button ->
-                            if (button == 2) {
-                                lock(player, 2)
-                                animate(player, Animations.PULL_DOWN_LEVER_2140)
-                                playAudio(player, Sounds.LEVER_2400)
-                                sendMessage(player, "You pull the lever...")
-                                queueScript(player, 2, QueueStrength.WEAK) {
-                                    if (!hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
-                                        teleport(player, Location.create(3154, 3923, 0))
-                                        sendMessage(player, "...And teleport into the wilderness.")
-                                    } else {
-                                        sendMessage(player, "A magical force has stopped you from teleporting.")
-                                    }
-                                    stopExecuting(player)
-                                }
-                            } else {
-                                closeDialogue(player)
-                            }
-                        }
-                    }
+                    openDialogue(player, WildernessLeverDialogue())
                 }
 
                 /*
-                 * Handles mage bank & mage arena & wilderness levers.
+                 * Other levers: mage bank, arena, etc.
                  */
-
                 Scenery.LEVER_1815, Scenery.LEVER_5959, Scenery.LEVER_5960, Scenery.LEVER_9706, Scenery.LEVER_9707 -> {
                     if (!player.savedData.activityData.hasKilledKolodion() && node.id == Scenery.LEVER_9706) {
                         sendNPCDialogue(player, NPCs.KOLODION_905, "You're not allowed in there. Come downstairs if you want to enter my arena.")
@@ -114,7 +89,6 @@ class WildernessPlugin : InteractionListener {
                                     else -> Location(3105, 3956, 0)
                                 }
                                 teleport(player, destination)
-
                                 val message = when (node.id) {
                                     Scenery.LEVER_1815 -> "out of the wilderness."
                                     Scenery.LEVER_5959 -> "into the mage's cave."
@@ -208,6 +182,46 @@ class WildernessPlugin : InteractionListener {
         on(Scenery.DOOR_39200, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "The door doesn't open.")
             return@on true
+        }
+    }
+
+    inner class WildernessLeverDialogue : DialogueFile() {
+
+        init { stage = 0 }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogue(player!!, "Warning! Pulling the lever will teleport you deep into the wilderness.")
+                    stage = 1
+                }
+                1 -> {
+                    setTitle(player!!, 2)
+                    options("Yes I'm brave.", "Eep! The wilderness... No thank you.")
+                    stage = 2
+                }
+                2 -> {
+                    when(buttonID) {
+                        1 -> {
+                            end()
+                            lock(player!!, 2)
+                            animate(player!!, Animations.PULL_DOWN_LEVER_2140)
+                            playAudio(player!!, Sounds.LEVER_2400)
+                            sendMessage(player!!, "You pull the lever...")
+                            queueScript(player!!, 2, QueueStrength.WEAK) {
+                                if (!hasTimerActive(player!!, GameAttributes.TELEBLOCK_TIMER)) {
+                                    teleport(player!!, Location.create(3154, 3923, 0))
+                                    sendMessage(player!!, "...And teleport into the wilderness.")
+                                } else {
+                                    sendMessage(player!!, "A magical force has stopped you from teleporting.")
+                                }
+                                return@queueScript stopExecuting(player!!)
+                            }
+                        }
+                        2 -> end()
+                    }
+                }
+            }
         }
     }
 }

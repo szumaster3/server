@@ -3,6 +3,7 @@ package content.region.kandarin.seers.quest.fishingcompo
 import content.data.GameAttributes
 import core.api.*
 import core.game.component.CloseEvent
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -83,33 +84,48 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
 
         player.interfaceManager.getComponent(Components.QUEST_COMPLETE_SCROLL_277)?.closeEvent = CloseEvent { p, _ ->
             val npcId = getAttribute(player, "temp-npc", 0)
-            val isMale = player.isMale
-            val gender = if (isMale) "lad" else "lass"
-
-            sendNPCDialogueLines(
-                player, npcId, FaceAnim.OLD_DEFAULT, false,
-                "You've done us proud. Thank you $gender. I think we can",
-                "now trust you enough to let you in..."
-            )
-
-            addDialogueAction(player) { _, _ ->
-                sendPlayerDialogue(player, "In where?", FaceAnim.HALF_ASKING)
-                addDialogueAction(player) { _, _ ->
-                    sendNPCDialogueLines(
-                        player, npcId, FaceAnim.OLD_NORMAL, false,
-                        "Why, the tunnel of course! You may now come and go",
-                        "freely, avoiding the wolves and dangers of the cold, high",
-                        "mountain. You could even stop in for a beer or two!"
-                    )
-                    addDialogueAction(player) { _, _ ->
-                        sendPlayerDialogue(player, "Excellent. That will come in most handy.")
-                    }
-                }
-            }
+            openDialogue(player, FishingQuestCompleteDialogue(npcId))
             return@CloseEvent true
         }
     }
 
     override fun newInstance(`object`: Any?): Quest = this
 
+    inner class FishingQuestCompleteDialogue(private val npcId: Int) : DialogueFile() {
+
+        init { stage = 0 }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    val isMale = player!!.isMale
+                    val gender = if (isMale) "lad" else "lass"
+                    sendNPCDialogueLines(
+                        player!!, npcId, FaceAnim.OLD_DEFAULT, false,
+                        "You've done us proud. Thank you $gender. I think we can",
+                        "now trust you enough to let you in..."
+                    )
+                    stage = 1
+                }
+                1 -> {
+                    sendPlayerDialogue(player!!, "In where?", FaceAnim.HALF_ASKING)
+                    stage = 2
+                }
+                2 -> {
+                    sendNPCDialogueLines(
+                        player!!, npcId, FaceAnim.OLD_NORMAL, false,
+                        "Why, the tunnel of course! You may now come and go",
+                        "freely, avoiding the wolves and dangers of the cold, high",
+                        "mountain. You could even stop in for a beer or two!"
+                    )
+                    stage = 3
+                }
+                3 -> {
+                    sendPlayerDialogue(player!!, "Excellent. That will come in most handy.")
+                    stage = 4
+                }
+                4 -> end()
+            }
+        }
+    }
 }

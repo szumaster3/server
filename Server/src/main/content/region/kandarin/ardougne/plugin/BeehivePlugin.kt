@@ -2,6 +2,7 @@ package content.region.kandarin.ardougne.plugin
 
 import content.data.GameAttributes
 import core.api.*
+import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
@@ -34,7 +35,7 @@ class BeehivePlugin : InteractionListener {
                         sendMessage(player, "You need a bucket to do that.")
                     } else {
                         setAttribute(player, GameAttributes.BEEHIVE_INTERACTION, true)
-                        handleTakeWax(player, bucket)
+                        openDialogue(player, BeehiveWaxDialogue(bucket))
                     }
                 }
                 "take-honey" -> {
@@ -65,7 +66,7 @@ class BeehivePlugin : InteractionListener {
                         setAttribute(player, GameAttributes.BEEHIVE_INTERACTION, true)
                     }
                 }
-                Items.BUCKET_1925 -> handleTakeWax(player, usedItem)
+                Items.BUCKET_1925 -> openDialogue(player, BeehiveWaxDialogue(usedItem))
             }
             return@onUseWith true
         }
@@ -74,18 +75,35 @@ class BeehivePlugin : InteractionListener {
     /**
      * Handles taking wax from the beehive with a bucket.
      */
-    private fun handleTakeWax(player: Player, bucket: Item) {
-        sendDialogueLines(player, "You try to get some wax from the beehive.")
-        addDialogueAction(player) { _, _ ->
-            if (getAttribute(player, GameAttributes.BEEHIVE_INTERACTION, false)) {
-                sendDialogueLines(player, "You get some wax from the beehive.")
-                replaceSlot(player, bucket.slot, Item(Items.BUCKET_OF_WAX_30, 1))
-                removeAttribute(player, GameAttributes.BEEHIVE_INTERACTION)
-                addDialogueAction(player) { _, _ ->
-                    sendDialogueLines(player, "The bees fly back to the hive as the repellent wears off.")
+    inner class BeehiveWaxDialogue(private val bucket: Item) : DialogueFile() {
+
+        init {
+            stage = 0
+        }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendDialogueLines(player!!, "You try to get some wax from the beehive.")
+                    stage = 1
                 }
-            } else {
-                sendDialogue(player, "It would be dangerous to stick the bucket into the hive while the bees are still in it. Perhaps you can clear them out somehow.")
+                1 -> {
+                    if (getAttribute(player!!, GameAttributes.BEEHIVE_INTERACTION, false)) {
+                        sendDialogueLines(player!!, "You get some wax from the beehive.")
+                        replaceSlot(player!!, bucket.slot, Item(Items.BUCKET_OF_WAX_30, 1))
+                        removeAttribute(player!!, GameAttributes.BEEHIVE_INTERACTION)
+                        stage = 2
+                    } else {
+                        sendDialogue(player!!, "It would be dangerous to stick the bucket into the hive while the bees are still in it. Perhaps you can clear them out somehow.")
+                        stage = 3
+                    }
+                }
+                2 -> {
+                    sendDialogueLines(player!!, "The bees fly back to the hive as the repellent wears off.")
+                    stage = 3
+                }
+
+                3 -> end()
             }
         }
     }

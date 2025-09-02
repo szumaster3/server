@@ -191,73 +191,23 @@ class PlagueCityPlugin : InteractionListener {
 
         on(Scenery.DOOR_35991, IntType.SCENERY, "open") { player, node ->
             val questStage = getQuestStage(player, Quests.PLAGUE_CITY)
-            if (questStage < 11) {
-                sendDialogueLines(player, "The door won't open.", "You notice a black cross on the door.")
-                return@on true
-            }
 
-            if (questStage == 11) {
-                openDialogue(player, HeadMournerDialogue())
-                return@on true
-            }
-
-            if (questStage == 16) {
-                sendPlayerDialogue(player, "I have a warrant from Bravek to enter here.")
-                addDialogueAction(player) { player, button ->
-
-                    sendNPCDialogue(
-                        player, NPCs.MOURNER_3216, "This is highly irregular. Please wait...", FaceAnim.ANNOYED
-                    )
-                    addDialogueAction(player) { _, _ ->
-                        lock(player, 6)
-                        lockInteractions(player, 6)
-                        queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
-                            when (stage) {
-                                0 -> {
-                                    findLocalNPC(player, NPCs.MOURNER_717)?.apply {
-                                        sendChat("Hey... I got someone here with a warrant from Bravek, what should we do?")
-                                        faceLocation(location(2536, 3273, 0))
-                                    }
-                                    return@queueScript delayScript(player, 1)
-                                }
-
-                                1 -> {
-                                    findLocalNPC(player, NPCs.MOURNER_3216)?.apply {
-                                        sendChat("Well, you can't let them in...", 1)
-                                        faceLocation(location(2537, 3273, 0))
-                                    }
-                                    return@queueScript delayScript(player, 1)
-                                }
-
-                                2 -> {
-                                    getObject(location(2540, 3273, 0))?.asScenery()?.let {
-                                        DoorActionHandler.handleAutowalkDoor(player, it)
-                                    }
-                                    return@queueScript delayScript(player, 3)
-                                }
-
-                                3 -> {
-                                    setQuestStage(player, Quests.PLAGUE_CITY, 17)
-                                    sendDialogueLines(
-                                        player,
-                                        "You wait until the mourner's back is turned and sneak into the building."
-                                    )
-                                    return@queueScript stopExecuting(player)
-                                }
-
-                                else -> return@queueScript stopExecuting(player)
-                            }
-                        }
-
-                    }
+            when {
+                questStage < 11 -> {
+                    sendDialogueLines(player, "The door won't open.", "You notice a black cross on the door.")
                 }
-            }
-
-
-            if (questStage in 17..100) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-            } else {
-                openDialogue(player, MournerWestDialogue())
+                questStage == 11 -> {
+                    openDialogue(player, HeadMournerDialogue())
+                }
+                questStage == 16 -> {
+                    openDialogue(player, PlagueCityDoorDialogue())
+                }
+                questStage in 17..100 -> {
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                }
+                else -> {
+                    openDialogue(player, MournerWestDialogue())
+                }
             }
 
             return@on true
@@ -592,6 +542,59 @@ class PlagueCityPlugin : InteractionListener {
                 3304,
                 0,
             )
+        }
+    }
+
+    inner class PlagueCityDoorDialogue : DialogueFile() {
+
+        init { stage = 0 }
+
+        override fun handle(componentID: Int, buttonID: Int) {
+            when(stage) {
+                0 -> {
+                    sendPlayerDialogue(player!!, "I have a warrant from Bravek to enter here.")
+                    stage = 1
+                }
+                1 -> {
+                    sendNPCDialogue(player!!, NPCs.MOURNER_3216, "This is highly irregular. Please wait...", FaceAnim.ANNOYED)
+                    stage = 2
+                }
+                2 -> {
+                    end()
+                    lock(player!!, 6)
+                    lockInteractions(player!!, 6)
+                    queueScript(player!!, 1, QueueStrength.SOFT) { stageIndex: Int ->
+                        when(stageIndex) {
+                            0 -> {
+                                findLocalNPC(player!!, NPCs.MOURNER_717)?.apply {
+                                    sendChat("Hey... I got someone here with a warrant from Bravek, what should we do?")
+                                    faceLocation(location(2536, 3273, 0))
+                                }
+                                delayScript(player!!, 1)
+                            }
+                            1 -> {
+                                findLocalNPC(player!!, NPCs.MOURNER_3216)?.apply {
+                                    sendChat("Well, you can't let them in...", 1)
+                                    faceLocation(location(2537, 3273, 0))
+                                }
+                                delayScript(player!!, 1)
+                            }
+                            2 -> {
+                                getObject(location(2540, 3273, 0))?.asScenery()?.let {
+                                    DoorActionHandler.handleAutowalkDoor(player!!, it)
+                                }
+                                delayScript(player!!, 3)
+                            }
+                            3 -> {
+                                setQuestStage(player!!, Quests.PLAGUE_CITY, 17)
+                                sendDialogueLines(player!!, "You wait until the mourner's back is turned and sneak into the building.")
+                                return@queueScript stopExecuting(player!!)
+                            }
+                            else -> return@queueScript stopExecuting(player!!)
+                        }
+                    }
+                }
+            }
         }
     }
 }
