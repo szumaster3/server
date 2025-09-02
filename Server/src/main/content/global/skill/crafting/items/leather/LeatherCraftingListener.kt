@@ -11,35 +11,35 @@ import shared.consts.Components
 import shared.consts.Items
 
 /**
- * Handles opening leather crafting interfaces and submitting crafting pulses.
+ * Handles leather crafting.
  */
 class LeatherCraftingListener : InteractionListener, InterfaceListener {
 
     override fun defineListeners() {
-        /*
-         * Handles open interface when using needle or studs on leather,dragonhide...
-         */
-
-        onUseWith(IntType.ITEM, Items.NEEDLE_1733, *LeatherCraft.values().map { it.input }.toIntArray()) { player, used, with ->
-            openLeatherInterfaceForType(player, with.id, LeatherCraft.Type.SOFT)
-            return@onUseWith true
-        }
 
         /*
-         * Handles of types of leather crafting.
+         * Handles crafting different types of leather.
          */
 
-        onUseWith(IntType.ITEM, Items.NEEDLE_1733, *LeatherCraft.values().map { it.input }.toIntArray()) { player, used, with ->
-            val craft = LeatherCraft.forInput(with.id).firstOrNull { it.type != LeatherCraft.Type.SOFT && it.type != LeatherCraft.Type.STUDDED }
-            craft?.let { openLeatherInterface(player, it.type) }
+        onUseWith(IntType.ITEM, Items.NEEDLE_1733, *LeatherCraft.values().map { it.input }.toIntArray()) { player, _, with ->
+            val craft = LeatherCraft.forInput(with.id).firstOrNull()
+            craft?.let {
+                val typeToOpen = when (it.type) {
+                    LeatherCraft.Type.SOFT -> LeatherCraft.Type.SOFT
+                    LeatherCraft.Type.STUDDED -> return@onUseWith true
+                    else -> it.type
+                }
+                openInterface(player, with.id, typeToOpen)
+            }
             return@onUseWith true
         }
 
         /*
          * Handles studdy crafting.
          */
+
         onUseWith(IntType.ITEM, Items.STEEL_STUDS_2370, *LeatherCraft.values().map { it.input }.toIntArray()) { player, used, with ->
-            openLeatherInterfaceForType(player, with.id, LeatherCraft.Type.STUDDED)
+            openInterface(player, with.id, LeatherCraft.Type.STUDDED)
             return@onUseWith true
         }
     }
@@ -47,7 +47,7 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
     /**
      * Opens the leather interface for a specific leather type.
      */
-    private fun openLeatherInterfaceForType(player: Player, inputId: Int, type: LeatherCraft.Type) {
+    private fun openInterface(player: Player, inputId: Int, type: LeatherCraft.Type) {
         val craft = LeatherCraft.forInput(inputId).firstOrNull { it.type == type } ?: return
         openLeatherInterface(player, craft.type)
     }
@@ -90,7 +90,7 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
                 else -> 1
             }
             submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount), type = PulseType.STANDARD)
-            true
+            return@on true
         }
     }
 }
