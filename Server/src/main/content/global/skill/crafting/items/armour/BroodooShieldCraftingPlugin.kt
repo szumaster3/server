@@ -19,29 +19,29 @@ class BroodooShieldCraftingPlugin : InteractionListener {
         Items.TRIBAL_MASK_6339 to Items.BROODOO_SHIELD_10_6259
     )
     private val snakeskinId = Items.SNAKESKIN_6289
+    private val nailsRequired = 8
 
     override fun defineListeners() {
-        onUseWith(
-            IntType.ITEM,
-            Items.HAMMER_2347,
-            *itemIDs.keys.toIntArray()
-        ) { player, _, with ->
+        onUseWith(IntType.ITEM, Items.HAMMER_2347, *itemIDs.keys.toIntArray()) { player, _, with ->
 
             val maskId = with.id
             val shieldId = itemIDs[maskId] ?: return@onUseWith false
 
             if (!hasLevel(player, Skills.CRAFTING, 35)) return@onUseWith false
 
-            val resourcesNeeded = arrayOf(Item(maskId, 1), Item(snakeskinId, 2))
+            if (!inInventory(player, snakeskinId, 2)) {
+                sendMessage(player, "You don't have enough snakeskins.")
+                return@onUseWith true
+            }
 
-            when (checkNails(player, 8)) {
+            when (checkNails(player, nailsRequired)) {
                 NailCheck.NONE -> {
                     sendMessage(player, "You don't have nails.")
-                    return@onUseWith false
+                    return@onUseWith true
                 }
                 NailCheck.NOT_ENOUGH -> {
                     sendMessage(player, "You don't have enough nails.")
-                    return@onUseWith false
+                    return@onUseWith true
                 }
                 NailCheck.ONLY_EXPENSIVE -> {
                     sendDoubleItemDialogue(
@@ -59,24 +59,32 @@ class BroodooShieldCraftingPlugin : InteractionListener {
                         )
                         addDialogueAction(player) { _, buttonID ->
                             if (buttonID == 2) {
-                                craft(player, resourcesNeeded, shieldId, maskId)
+                                if (remove(player, maskId)) {
+                                    craft(player, shieldId, maskId)
+                                }
                             }
                         }
                     }
                     return@onUseWith true
                 }
                 NailCheck.HAS_CHEAP -> {
-                    craft(player, resourcesNeeded, shieldId, maskId)
+                    if (remove(player, maskId)) {
+                        craft(player, shieldId, maskId)
+                    }
                     return@onUseWith true
                 }
             }
         }
     }
 
-    private fun craft(player: Player, resources: Array<Item>, shieldId: Int, maskId: Int) {
-        if (!removeItem(player, resources) || !removeNails(player)) {
-            return
-        }
+    private fun remove(player: Player, maskId: Int): Boolean {
+        if (!removeItem(player, maskId)) return false
+        if (!removeItem(player, Item(snakeskinId, 2))) return false
+        if (!removeNails(player)) return false
+        return true
+    }
+
+    private fun craft(player: Player, shieldId: Int, maskId: Int) {
         val animation = when (maskId) {
             Items.TRIBAL_MASK_6335 -> Animations.CRAFT_SHIELD_GREEN_2410
             Items.TRIBAL_MASK_6337 -> Animations.CRAFT_SHIELD_ORANGE_2411
@@ -107,11 +115,8 @@ class BroodooShieldCraftingPlugin : InteractionListener {
             val count = player.inventory.getAmount(Item(nail.itemId, 1))
             if (count > 0) {
                 total += count
-                if (nail.ordinal <= NailType.STEEL.ordinal) {
-                    hasCheap = true
-                } else {
-                    hasExpensive = true
-                }
+                if (nail.ordinal <= NailType.STEEL.ordinal) hasCheap = true
+                else hasExpensive = true
             }
         }
 
@@ -122,7 +127,7 @@ class BroodooShieldCraftingPlugin : InteractionListener {
     }
 
     private fun removeNails(player: Player): Boolean {
-        var nailsToRemove = 8
+        var nailsToRemove = nailsRequired
         for (nailType in NailType.values) {
             val amountInInventory = player.inventory.getAmount(Item(nailType.itemId, 1))
             if (amountInInventory > 0) {
