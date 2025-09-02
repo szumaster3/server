@@ -10,6 +10,7 @@ import core.plugin.PluginType;
 import core.tools.Log;
 import shared.consts.Components;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import static core.api.ContentAPIKt.log;
@@ -32,8 +33,8 @@ public abstract class Dialogue implements Plugin<Player> {
     protected DialogueInterpreter interpreter;
     public DialogueFile file;
 
-    protected ArrayList<String> optionNames = new ArrayList<>(10);
-    protected ArrayList<DialogueFile> optionFiles = new ArrayList<>(10);
+    protected ArrayList<String> optionNames = new ArrayList<String>(10);
+    protected ArrayList<DialogueFile> optionFiles = new ArrayList<DialogueFile>(10);
 
     protected final int TWO_OPTIONS = Components.MULTI2_228;
     protected final int THREE_OPTIONS = Components.MULTI3_230;
@@ -135,8 +136,10 @@ public abstract class Dialogue implements Plugin<Player> {
     @Override
     public Dialogue newInstance(Player player) {
         try {
-            return (Dialogue) Class.forName(this.getClass().getCanonicalName()).getDeclaredConstructor(Player.class).newInstance(player);
-        } catch (ReflectiveOperationException e) {
+            Class<?> classReference = Class.forName(this.getClass().getCanonicalName());
+            return (Dialogue) classReference.getDeclaredConstructor(Player.class).newInstance(player);
+        } catch (ClassNotFoundException | IllegalAccessException | IllegalArgumentException | NoSuchMethodException |
+                 InvocationTargetException | InstantiationException e) {
             e.printStackTrace();
             return null;
         }
@@ -170,9 +173,9 @@ public abstract class Dialogue implements Plugin<Player> {
     public abstract boolean handle(int interfaceId, int buttonId);
 
     /**
-     * Returns the dialogue ids this dialogue handles.
+     * Returns the npc ids this dialogue handles.
      *
-     * @return array of dialogue ids
+     * @return array of npc ids
      */
     public abstract int[] getIds();
 
@@ -182,8 +185,11 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param messages dialogue lines
      * @return dialogue component
      */
-    public Component npc(String... messages) {
-        return npc == null ? interpreter.sendDialogues(getIds()[0], getIds()[0] > 8591 ? FaceAnim.OLD_NORMAL : FaceAnim.FRIENDLY, messages) : interpreter.sendDialogues(npc, npc.getId() > 8591 ? FaceAnim.OLD_NORMAL : FaceAnim.FRIENDLY, messages);
+    public Component npc(final String... messages) {
+        if (npc == null) {
+            return interpreter.sendDialogues(getIds()[0], getIds()[0] > 8591 ? FaceAnim.OLD_NORMAL : FaceAnim.FRIENDLY, messages);
+        }
+        return interpreter.sendDialogues(npc, npc.getId() > 8591 ? FaceAnim.OLD_NORMAL : FaceAnim.FRIENDLY, messages);
     }
 
     /**
@@ -193,7 +199,7 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param messages dialogue lines
      * @return dialogue component
      */
-    public Component npc(int id, String... messages) {
+    public Component npc(int id, final String... messages) {
         return interpreter.sendDialogues(id, FaceAnim.FRIENDLY, messages);
     }
 
@@ -214,8 +220,11 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param messages   dialogue lines
      * @return dialogue component
      */
-    public Component npc(FaceAnim expression, String... messages) {
-        return npc == null ? interpreter.sendDialogues(getIds()[0], expression, messages) : interpreter.sendDialogues(npc, expression, messages);
+    public Component npc(FaceAnim expression, final String... messages) {
+        if (npc == null) {
+            return interpreter.sendDialogues(getIds()[0], expression, messages);
+        }
+        return interpreter.sendDialogues(npc, expression, messages);
     }
 
     /**
@@ -224,7 +233,7 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param messages dialogue lines
      * @return dialogue component
      */
-    public Component player(String... messages) {
+    public Component player(final String... messages) {
         return interpreter.sendDialogues(player, null, messages);
     }
 
@@ -235,7 +244,7 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param messages   dialogue lines
      * @return dialogue component
      */
-    public Component player(FaceAnim expression, String... messages) {
+    public Component player(FaceAnim expression, final String... messages) {
         return interpreter.sendDialogues(player, expression, messages);
     }
 
@@ -244,7 +253,7 @@ public abstract class Dialogue implements Plugin<Player> {
      *
      * @param options option texts
      */
-    public void options(String... options) {
+    public void options(final String... options) {
         interpreter.sendOptions("Select an Option", options);
     }
 
@@ -279,7 +288,7 @@ public abstract class Dialogue implements Plugin<Player> {
      * Advances to the next dialogue stage.
      */
     public void next() {
-        stage++;
+        this.stage += 1;
     }
 
     /**
@@ -288,11 +297,10 @@ public abstract class Dialogue implements Plugin<Player> {
      * @param file dialogue file to load
      */
     public void loadFile(DialogueFile file) {
-        if (file != null) {
-            this.file = file.load(player, npc, interpreter);
-            this.file.setDialogue(this);
-            stage = START_DIALOGUE;
-        }
+        if (file == null) return;
+        this.file = file.load(player, npc, interpreter);
+        this.file.setDialogue(this);
+        stage = START_DIALOGUE;
     }
 
     /**
@@ -360,11 +368,10 @@ public abstract class Dialogue implements Plugin<Player> {
             interpreter.activeTopics.add(topic);
             validTopics.add(topic.getText());
         }
-
-        if (validTopics.isEmpty()) {
+        if (validTopics.size() == 0) {
             return true;
         } else if (validTopics.size() == 1) {
-            Topic<?> topic = interpreter.activeTopics.get(0);
+            Topic topic = interpreter.activeTopics.get(0);
             if (topic.getToStage() instanceof DialogueFile) {
                 DialogueFile topicFile = (DialogueFile) topic.getToStage();
                 interpreter.getDialogue().loadFile(topicFile);
