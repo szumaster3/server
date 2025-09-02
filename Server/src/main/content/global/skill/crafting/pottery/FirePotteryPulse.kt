@@ -14,12 +14,7 @@ import shared.consts.Sounds
 /**
  * Represents the Fire pottery pulse.
  */
-class FirePotteryPulse(
-    player: Player?,
-    node: Item?,
-    val pottery: Pottery,
-    var amount: Int,
-) : SkillPulse<Item?>(player, node) {
+class FirePotteryPulse(player: Player?, node: Item?, val pottery: Pottery, var amount: Int) : SkillPulse<Item?>(player, node) {
 
     private var ticks = 0
 

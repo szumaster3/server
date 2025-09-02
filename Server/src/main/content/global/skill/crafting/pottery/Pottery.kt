@@ -16,11 +16,6 @@ enum class Pottery(val unfinished: Item, val product: Item, val level: Int, val 
 
     companion object {
         private val unfinishedMap: Map<Int, Pottery> = values().associateBy { it.unfinished.id }
-
-        /**
-         * Finds [Pottery] by unfinished item id or returns `null` if none.
-         */
-        @JvmStatic
         fun forId(id: Int): Pottery? = unfinishedMap[id]
     }
 }

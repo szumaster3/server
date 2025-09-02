@@ -3,9 +3,7 @@ package content.global.skill.crafting.rawmaterial
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.tools.RandomUtils
@@ -59,7 +57,7 @@ class RawMaterialPlugin : InteractionListener {
             addDialogueAction(player) { _, button ->
                 if (button == 2) {
                     val amount = min(amountInInventory(player, with.id), amountInInventory(player, with.id))
-                    submitIndividualPulse(player, GraniteCutPulse(player, Item(with.id), amount), type = PulseType.STANDARD)
+                    submitIndividualPulse(player, GraniteCutPulse(player, Item(with.id), amount))
                 } else closeDialogue(player)
             }
             return@onUseWith true

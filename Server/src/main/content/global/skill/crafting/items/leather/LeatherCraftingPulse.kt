@@ -17,13 +17,7 @@ import shared.consts.Items
  * @param craft  Recipe from [LeatherCraft]
  * @param amount How many crafts to attempt
  */
-class LeatherCraftingPulse(
-    player: Player?,
-    node: Item?,
-    private val craft: LeatherCraft,
-    private var amount: Int
-) : SkillPulse<Item?>(player, node) {
-
+class LeatherCraftingPulse(player: Player?, node: Item?, private val craft: LeatherCraft, private var amount: Int) : SkillPulse<Item?>(player, node) {
     private var ticks = 0
 
     override fun checkRequirements(): Boolean {
@@ -32,11 +26,11 @@ class LeatherCraftingPulse(
             sendDialogue(player, "You need a Crafting level of ${craft.level} to make " + (if (StringUtils.isPlusN(name)) "an " else "a ") + name + ".")
             return false
         }
-        if (!inInventory(player, Items.NEEDLE_1733)) {
+        if (!craft.studded && !inInventory(player, Items.NEEDLE_1733, 1)) {
             sendDialogue(player, "You need a needle to make this.")
             return false
         }
-        if (!inInventory(player, Items.THREAD_1734)) {
+        if (!craft.studded && !inInventory(player, Items.THREAD_1734)) {
             sendDialogue(player, "You need thread to make this.")
             return false
         }
@@ -45,7 +39,6 @@ class LeatherCraftingPulse(
             amount = 0
             return false
         }
-
         closeInterface(player)
         return true
     }

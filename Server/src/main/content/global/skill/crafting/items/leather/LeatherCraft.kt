@@ -1,7 +1,7 @@
 package content.global.skill.crafting.items.leather
 
-import shared.consts.Items
 import core.game.node.entity.player.link.diary.DiaryType
+import shared.consts.Items
 
 /**
  * Unified leather crafting data.

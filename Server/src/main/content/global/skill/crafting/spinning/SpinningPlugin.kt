@@ -4,14 +4,13 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.impl.PulseType
 import core.game.node.item.Item
 import shared.consts.Components
 import shared.consts.Scenery
 
 class SpinningPlugin : InteractionListener, InterfaceListener {
 
-    val SPINNING_WHEEL = intArrayOf(Scenery.SPINNING_WHEEL_2644, Scenery.SPINNING_WHEEL_4309, Scenery.SPINNING_WHEEL_8748, Scenery.SPINNING_WHEEL_20365, Scenery.SPINNING_WHEEL_21304, Scenery.SPINNING_WHEEL_25824, Scenery.SPINNING_WHEEL_26143, Scenery.SPINNING_WHEEL_34497, Scenery.SPINNING_WHEEL_36970, Scenery.SPINNING_WHEEL_37476)
+    private val SPINNING_WHEEL = intArrayOf(Scenery.SPINNING_WHEEL_2644, Scenery.SPINNING_WHEEL_4309, Scenery.SPINNING_WHEEL_8748, Scenery.SPINNING_WHEEL_20365, Scenery.SPINNING_WHEEL_21304, Scenery.SPINNING_WHEEL_25824, Scenery.SPINNING_WHEEL_26143, Scenery.SPINNING_WHEEL_34497, Scenery.SPINNING_WHEEL_36970, Scenery.SPINNING_WHEEL_37476)
 
     override fun defineListeners() {
         on(SPINNING_WHEEL, IntType.SCENERY, "spin") { player, _ ->
@@ -38,13 +37,11 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
                             submitIndividualPulse(
                                 entity = player,
                                 pulse = SpinningPulse(player, Item(spin.need, 1), value.toInt(), spin),
-                                type = PulseType.STANDARD
                             )
                         } else {
                             submitIndividualPulse(
                                 entity = player,
                                 pulse = SpinningPulse(player, Item(spin.need, 1), value as Int, spin),
-                                type = PulseType.STANDARD
                             )
                         }
                     }
@@ -54,8 +51,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
             }
             submitIndividualPulse(
                 entity = player,
-                pulse = SpinningPulse(player, Item(spin.need, 1), amt, spin),
-                type = PulseType.STANDARD
+                pulse = SpinningPulse(player, Item(spin.need, 1), amt, spin)
             )
             return@on true
         }

@@ -4,7 +4,6 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Components
@@ -67,8 +66,7 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
                     if (craft != null) {
                         submitIndividualPulse(
                             player,
-                            LeatherCraftingPulse(player, Item(craft.input), craft, amount),
-                            type = PulseType.STANDARD
+                            LeatherCraftingPulse(player, Item(craft.input), craft, amount)
                         )
                     } else player.debug("Invalid leather item selected.")
                 }
@@ -90,13 +88,13 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
                 124 -> amountInInventory(player, craft.input)
                 199 -> {
                     sendInputDialogue(player, true, "Enter the amount:") { value ->
-                        submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, value as Int), type = PulseType.STANDARD)
+                        submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, value as Int))
                     }
                     return@on true
                 }
                 else -> 1
             }
-            submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount), type = PulseType.STANDARD)
+            submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount))
             return@on true
         }
     }

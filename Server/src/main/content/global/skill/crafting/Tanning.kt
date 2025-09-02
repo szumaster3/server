@@ -11,95 +11,24 @@ import shared.consts.Items
 /**
  * Represents the different types of tanning.
  */
-enum class Tanning(val button: Int, val item: Int, val product: Int) {
-    /**
-     * Tanning soft leather from cowhide.
-     */
-    SOFT_LEATHER(
-        button = 1,
-        item = Items.COWHIDE_1739,
-        product = Items.LEATHER_1741,
-    ),
-
-    /**
-     * Tanning hard leather from cowhide.
-     */
-    HARD_LEATHER(
-        button = 2,
-        item = Items.COWHIDE_1739,
-        product = Items.HARD_LEATHER_1743,
-    ),
-
-    /**
-     * Tanning snakeskin from snake hide.
-     */
-    SNAKESKIN(
-        button = 3,
-        item = Items.SNAKE_HIDE_6287,
-        product = Items.SNAKESKIN_6289,
-    ),
-
-    /**
-     * Tanning snakeskin from a different type of snake hide.
-     */
-    SNAKESKIN2(
-        button = 4,
-        item = Items.SNAKE_HIDE_7801,
-        product = Items.SNAKESKIN_6289,
-    ),
-
-    /**
-     * Tanning green dragonhide into green dragon leather.
-     */
-    GREENDHIDE(
-        button = 5,
-        item = Items.GREEN_DRAGONHIDE_1753,
-        product = Items.GREEN_D_LEATHER_1745,
-    ),
-
-    /**
-     * Tanning blue dragonhide into blue dragon leather.
-     */
-    BLUEDHIDE(
-        button = 6,
-        item = Items.BLUE_DRAGONHIDE_1751,
-        product = Items.BLUE_D_LEATHER_2505,
-    ),
-
-    /**
-     * Tanning red dragonhide into red dragon leather.
-     */
-    REDDHIDE(
-        button = 7,
-        item = Items.RED_DRAGONHIDE_1749,
-        product = Items.RED_DRAGON_LEATHER_2507,
-    ),
-
-    /**
-     * Tanning black dragonhide into black dragon leather.
-     */
-    BLACKDHIDE(
-        button = 8,
-        item = Items.BLACK_DRAGONHIDE_1747,
-        product = Items.BLACK_D_LEATHER_2509,
-    ),
-    ;
+enum class Tanning(val item: Int, val product: Int, val button: Int) {
+    SOFT_LEATHER(Items.COWHIDE_1739, Items.LEATHER_1741, 1),
+    HARD_LEATHER(Items.COWHIDE_1739, Items.HARD_LEATHER_1743, 2),
+    SNAKESKIN(Items.SNAKE_HIDE_6287, Items.SNAKESKIN_6289, 3),
+    SNAKESKIN2(Items.SNAKE_HIDE_7801, Items.SNAKESKIN_6289, 4),
+    GREEN_DRAGONHIDE(Items.GREEN_DRAGONHIDE_1753, Items.GREEN_D_LEATHER_1745, 5),
+    BLUE_DRAGONHIDE(Items.BLUE_DRAGONHIDE_1751, Items.BLUE_D_LEATHER_2505, 6),
+    RED_DRAGONHIDE(Items.RED_DRAGONHIDE_1749, Items.RED_DRAGON_LEATHER_2507, 7),
+    BLACK_DRAGONHIDE(Items.BLACK_DRAGONHIDE_1747, Items.BLACK_D_LEATHER_2509, 8), ;
 
     companion object {
         private val buttonMap: Map<Int, Tanning> = values().associateBy { it.button }
-        private val itemMap: Map<Int, Tanning> = values().associateBy { it.item }
 
         /**
          * Gets [Tanning] by button id or `null` if none.
          */
         @JvmStatic
         fun forId(id: Int): Tanning? = buttonMap[id]
-
-        /**
-         * Gets [Tanning] by item id or `null` if none.
-         */
-        @JvmStatic
-        fun forItemId(id: Int): Tanning? = itemMap[id]
 
         /**
          * Opens tanning interface for the player.
@@ -133,10 +62,19 @@ enum class Tanning(val button: Int, val item: Int, val product: Int) {
                 return
             }
 
-            if (removeItem(player, Item(Items.COINS_995, coinsRequired * availableAmount)) &&
-                removeItem(player, Item(def.item, availableAmount))) {
+            if (removeItem(player, Item(Items.COINS_995, coinsRequired * availableAmount)) && removeItem(
+                    player,
+                    Item(def.item, availableAmount)
+                )
+            ) {
                 addItem(player, def.product, availableAmount)
-                sendMessage(player, "The tanner tans ${if (availableAmount > 1) "$availableAmount ${getItemName(def.item).lowercase()}s" else getItemName(def.item).lowercase()} for you.")
+                sendMessage(
+                    player, "The tanner tans ${
+                        if (availableAmount > 1) "$availableAmount ${getItemName(def.item).lowercase()}s" else getItemName(
+                            def.item
+                        ).lowercase()
+                    } for you."
+                )
                 if (def == SOFT_LEATHER) finishDiaryTask(player, DiaryType.LUMBRIDGE, 1, 2)
             } else {
                 sendMessage(player, "You don't have enough coins to tan that many.")
