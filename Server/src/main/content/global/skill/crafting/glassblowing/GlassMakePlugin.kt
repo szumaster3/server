@@ -4,7 +4,6 @@ import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.impl.PulseType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
@@ -48,8 +47,7 @@ class GlassMakePlugin : InteractionListener {
                 create { id, amount ->
                     submitIndividualPulse(
                         player,
-                        GlassMakePulse(player, id, amount),
-                        type = PulseType.STANDARD
+                        GlassMakePulse(player, id, amount)
                     )
                 }
                 calculateMaxAmount { _ ->

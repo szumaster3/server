@@ -1,8 +1,10 @@
 package core.game.dialogue
 
+import core.api.clockReady
 import core.api.repositionChild
 import core.api.sendItemZoomOnInterface
 import core.api.sendString
+import core.game.interaction.Clocks
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Point
@@ -30,6 +32,8 @@ open class SkillDialogueHandler(
      * Opens the skill dialogue interface for the player.
      */
     fun open() {
+        if(player.interfaceManager.isOpened())
+            player.interfaceManager.close()
         player.dialogueInterpreter.open(SKILL_DIALOGUE, this)
     }
 
@@ -55,6 +59,7 @@ open class SkillDialogueHandler(
         amount: Int,
         index: Int,
     ) {
+        if(!clockReady(player, Clocks.SKILLING)) return
     }
 
     /**

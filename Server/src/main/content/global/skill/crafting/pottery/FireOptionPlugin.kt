@@ -3,7 +3,6 @@ package content.global.skill.crafting.pottery
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.impl.PulseType
 import shared.consts.Items
 import shared.consts.Scenery
 
@@ -33,20 +32,12 @@ class FireOptionPlugin : InteractionListener {
                 create { selectedItemId, amount ->
                     val pottery = potteryMap[selectedItemId]
                     if (pottery != null) {
-                        player.pulseManager.run(
-                            FirePotteryPulse(
-                                player = player,
-                                node = pottery.unfinished,
-                                pottery = pottery,
-                                amount = amount,
-                            ),
-                            pulseType = PulseType.STANDARD
-                        )
+                        player.pulseManager.run(FirePotteryPulse(player = player, node = pottery.unfinished, pottery = pottery, amount = amount))
                     }
                 }
 
-                calculateMaxAmount { amount ->
-                    amountInInventory(player, amount)
+                calculateMaxAmount { selectedItemId ->
+                    amountInInventory(player, selectedItemId)
                 }
             }
             return@on true
