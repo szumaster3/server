@@ -23,13 +23,12 @@ class DoorPlateauDialogueFile(val door: Int) : DialogueFile() {
         if (door == 1) {
             npc = NPC(NPCs.HAROLD_1078)
             when (stage) {
-                0 ->
-                    if (player!!.location.y < 3543) {
-                        end()
-                        DoorActionHandler.handleAutowalkDoor(player!!, getScenery(2906, 3543, 1)!!)
-                    } else {
-                        sendDialogue(player!!, "You knock on the door.").also { stage++ }
-                    }
+                0 -> if (player!!.location.y < 3543) {
+                    end()
+                    DoorActionHandler.handleAutowalkDoor(player!!, getScenery(2906, 3543, 1)!!)
+                } else {
+                    sendDialogue(player!!, "You knock on the door.").also { stage++ }
+                }
 
                 1 -> npcl(FaceAnim.FRIENDLY, "Come on in!").also { stage++ }
                 2 -> {
@@ -90,11 +89,10 @@ class DoorPlateauDialogueFile(val door: Int) : DialogueFile() {
             when (getQuestStage(player!!, Quests.DEATH_PLATEAU)) {
                 in 0..24 -> {
                     when (stage) {
-                        0 ->
-                            npcl(
-                                FaceAnim.FRIENDLY,
-                                "Where do you think you're going? This is private property!",
-                            ).also { stage = END_DIALOGUE }
+                        0 -> npcl(
+                            FaceAnim.FRIENDLY,
+                            "Where do you think you're going? This is private property!",
+                        ).also { stage = END_DIALOGUE }
                     }
                 }
 

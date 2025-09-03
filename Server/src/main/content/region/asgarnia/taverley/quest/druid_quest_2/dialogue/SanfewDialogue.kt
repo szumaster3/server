@@ -39,6 +39,7 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
                         )
                         stage = 2
                     }
+
                     else -> {
                         player(
                             FaceAnim.HALF_GUILTY,
@@ -50,22 +51,21 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             1 -> end()
-            2 ->
-                when (buttonId) {
-                    1 -> {
-                        player(
-                            FaceAnim.HALF_GUILTY,
-                            "I've been sent to assist you with the ritual to purify the",
-                            "Varrockian stone circle.",
-                        )
-                        stage = 5
-                    }
-
-                    2 -> {
-                        player(FaceAnim.NEUTRAL, "Actually, I don't need to speak to you.")
-                        stage = 3
-                    }
+            2 -> when (buttonId) {
+                1 -> {
+                    player(
+                        FaceAnim.HALF_GUILTY,
+                        "I've been sent to assist you with the ritual to purify the",
+                        "Varrockian stone circle.",
+                    )
+                    stage = 5
                 }
+
+                2 -> {
+                    player(FaceAnim.NEUTRAL, "Actually, I don't need to speak to you.")
+                    stage = 3
+                }
+            }
 
             3 -> {
                 npc(FaceAnim.FRIENDLY, "Well, we all make mistakes sometimes.")
@@ -98,11 +98,10 @@ class SanfewDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 8
             }
 
-            8 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.ASKING, "Where can I find this cauldron?").also { stage = 9 }
-                    2 -> player(FaceAnim.FRIENDLY, "Ok, I'll do that then.").also { stage = 10 }
-                }
+            8 -> when (buttonId) {
+                1 -> player(FaceAnim.ASKING, "Where can I find this cauldron?").also { stage = 9 }
+                2 -> player(FaceAnim.FRIENDLY, "Ok, I'll do that then.").also { stage = 10 }
+            }
 
             9 -> {
                 npc(

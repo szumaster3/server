@@ -35,24 +35,22 @@ class AlfonseTheWaiterDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Yes, please.", "No, thank you.", "Where do you get your Karambwan from?").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.HALF_GUILTY, "Yes, please.").also { stage = 10 }
-                    2 -> player(FaceAnim.HALF_GUILTY, "No, thank you.").also { stage = END_DIALOGUE }
-                    3 -> player(FaceAnim.HALF_GUILTY, "Where do you get your Karambwan from?").also { stage = 30 }
-                }
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "Yes, please.").also { stage = 10 }
+                2 -> player(FaceAnim.HALF_GUILTY, "No, thank you.").also { stage = END_DIALOGUE }
+                3 -> player(FaceAnim.HALF_GUILTY, "Where do you get your Karambwan from?").also { stage = 30 }
+            }
 
             10 -> {
                 end()
                 openNpcShop(player, NPCs.ALFONSE_THE_WAITER_793)
             }
 
-            30 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "We buy directly off Lubufu, a local fisherman. He",
-                    "seems to have a monopoly over Karambwan sales.",
-                ).also { stage = END_DIALOGUE }
+            30 -> npc(
+                FaceAnim.HALF_GUILTY,
+                "We buy directly off Lubufu, a local fisherman. He",
+                "seems to have a monopoly over Karambwan sales.",
+            ).also { stage = END_DIALOGUE }
         }
         return false
     }
@@ -70,38 +68,26 @@ class AlfonseTheWaiterDialogue(player: Player? = null) : Dialogue(player) {
  */
 class AlfonseTheWaiterDialogueFile : DialogueBuilderFile() {
     override fun create(b: DialogueBuilder) {
-        b
-            .onPredicate { _ -> true }
-            .npc("Welcome to the Shrimp and Parrot.", "Would you like to order, sir?")
-            .options()
+        b.onPredicate { _ -> true }.npc("Welcome to the Shrimp and Parrot.", "Would you like to order, sir?").options()
             .let { optionBuilder ->
-                optionBuilder
-                    .option_playerl("Yes please.")
-                    .endWith { _, player ->
+                optionBuilder.option_playerl("Yes please.").endWith { _, player ->
                         openNpcShop(player, npc!!.id)
                     }
 
-                optionBuilder
-                    .option_playerl("No thank you.")
-                    .end()
+                optionBuilder.option_playerl("No thank you.").end()
 
-                optionBuilder
-                    .optionIf("Do you sell Gherkins?") { player ->
+                optionBuilder.optionIf("Do you sell Gherkins?") { player ->
                         return@optionIf getQuestStage(player, Quests.HEROES_QUEST) >= 2 && HeroesQuest.isPhoenix(player)
-                    }.playerl("Do you sell Gherkins?")
-                    .npc(
+                    }.playerl("Do you sell Gherkins?").npc(
                         "Hmmmm Gherkins eh? Ask Charlie the cook, round the",
                         "back. He may have some 'gherkins' for you!",
-                    ).linel("Alfonse winks at you.")
-                    .endWith { _, player ->
+                    ).linel("Alfonse winks at you.").endWith { _, player ->
                         if (getQuestStage(player, Quests.HEROES_QUEST) == 2) {
                             setQuestStage(player, Quests.HEROES_QUEST, 3)
                         }
                     }
 
-                optionBuilder
-                    .option("Where do you get your Karambwan from?")
-                    .npc(
+                optionBuilder.option("Where do you get your Karambwan from?").npc(
                         "We buy directly off Lubufu, a local fisherman. He",
                         "seems to have a monopoly over Karambwan sales.",
                     ).end()

@@ -54,18 +54,17 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
 
-            3 ->
-                when (buttonId) {
-                    1 -> {
-                        playerl(FaceAnim.HALF_ASKING, "What's the matter?")
-                        stage = 5
-                    }
-
-                    2 -> {
-                        playerl(FaceAnim.NEUTRAL, "Well if you're not going to answer then I'll go.")
-                        stage++
-                    }
+            3 -> when (buttonId) {
+                1 -> {
+                    playerl(FaceAnim.HALF_ASKING, "What's the matter?")
+                    stage = 5
                 }
+
+                2 -> {
+                    playerl(FaceAnim.NEUTRAL, "Well if you're not going to answer then I'll go.")
+                    stage++
+                }
+            }
 
             4 -> {
                 sendDialogue("The boy sniffs slightly.")
@@ -88,18 +87,17 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
 
-            7 ->
-                when (buttonId) {
-                    1 -> {
-                        playerl(FaceAnim.HAPPY, "Ok, I'll see what I can do.")
-                        stage = 10
-                    }
-
-                    2 -> {
-                        player(FaceAnim.NEUTRAL, "Get it back yourself.")
-                        stage++
-                    }
+            7 -> when (buttonId) {
+                1 -> {
+                    playerl(FaceAnim.HAPPY, "Ok, I'll see what I can do.")
+                    stage = 10
                 }
+
+                2 -> {
+                    player(FaceAnim.NEUTRAL, "Get it back yourself.")
+                    stage++
+                }
+            }
 
             8 -> {
                 npc(FaceAnim.CHILD_SAD, "You're a meany.")
@@ -117,14 +115,13 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
 
-            11 ->
-                if (!removeItem(player, Items.BALL_2407)) {
-                    player("Not yet.")
-                    stage++
-                } else {
-                    sendItemDialogue(player, Items.BALL_2407, "You give the ball back.")
-                    stage = 13
-                }
+            11 -> if (!removeItem(player, Items.BALL_2407)) {
+                player("Not yet.")
+                stage++
+            } else {
+                sendItemDialogue(player, Items.BALL_2407, "You give the ball back.")
+                stage = 13
+            }
 
             12 -> {
                 npc(FaceAnim.CHILD_GUILTY, "Well it's in the shed in that garden.")
@@ -135,6 +132,7 @@ class BoyDialogue(player: Player? = null) : Dialogue(player) {
                 npc(FaceAnim.CHILD_FRIENDLY, "Thank you so much!")
                 stage++
             }
+
             14 -> {
                 end()
                 finishQuest(player, Quests.WITCHS_HOUSE)
