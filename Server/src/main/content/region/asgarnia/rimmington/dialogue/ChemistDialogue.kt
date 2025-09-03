@@ -69,6 +69,7 @@ class ChemistDialogue(player: Player? = null) : Dialogue(player) {
             21 -> player("Good thanks.").also { stage++ }
             22 -> npc("Good to hear, sorry but I have a few things to do", "now.").also { stage++ }
             23 -> player("Well I'd better let you get on then.").also { stage = END_DIALOGUE }
+
             30 -> npc("Jolly good, the odder the better. I like oddities.").also { stage++ }
             31 -> player("Do you know how I might distill a mix of anchovy oil", "and flowers so that it forms a layer on the inside of a", "butterfly jar?").also { stage++ }
             32 -> npc("That is an odd question. I commend you for it. Why", "would you want to do that?").also { stage++ }

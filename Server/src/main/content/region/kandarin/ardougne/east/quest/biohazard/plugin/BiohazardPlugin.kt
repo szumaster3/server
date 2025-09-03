@@ -26,67 +26,6 @@ class BiohazardPlugin : InteractionListener {
     val WATCHTOWER_CORNER_LOCATION = Location(2561, 3303, 0)
 
     override fun defineListeners() {
-        on(NPCs.CHANCY_338, IntType.NPC, "talk-to") { player, _ ->
-            if (getQuestStage(player, Quests.BIOHAZARD) in 1..100) {
-                if (getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, true)) {
-                    openDialogue(player, ChancyDialogue())
-                } else {
-                    sendNPCDialogue(
-                        player,
-                        NPCs.CHANCY_338,
-                        "Look, I've got your vial but I'm not taking two. I always like to play the percentages.",
-                    )
-                }
-            } else {
-                sendDialogue(player, "Chancy doesn't feel like talking.")
-            }
-            return@on true
-        }
-
-        on(NPCs.DA_VINCI_336, IntType.NPC, "talk-to") { player, _ ->
-            if (getQuestStage(player, Quests.BIOHAZARD) in 1..100) {
-                if (getAttribute(player, GameAttributes.SECOND_VIAL_CORRECT, true)) {
-                    openDialogue(player, DaVinciDialogue())
-                } else {
-                    sendNPCDialogue(
-                        player,
-                        NPCs.DA_VINCI_336,
-                        "Oh, it's you again. Please don't distract me now, I'm contemplating the sublime.",
-                    )
-                }
-            } else {
-                sendDialogue(player, "Da Vinci does not feel sufficiently moved to talk.")
-            }
-            return@on true
-        }
-
-        on(NPCs.DA_VINCI_337, IntType.NPC, "talk-to") { player, node ->
-            if (getAttribute(player, GameAttributes.SECOND_VIAL_CORRECT, false)) {
-                openDialogue(player, DaVinciDialogue(), node.id)
-            } else {
-                sendDialogue(player, "Da Vinci does not feel sufficiently moved to talk.")
-            }
-            return@on true
-        }
-
-        on(NPCs.CHANCY_339, IntType.NPC, "talk-to") { player, node ->
-            if (getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)) {
-                openDialogue(player, ChancyDialogue(), node.id)
-            } else {
-                sendDialogue(player, "Chancy doesn't feel like talking.")
-            }
-            return@on true
-        }
-
-        on(NPCs.HOPS_341, IntType.NPC, "talk-to") { player, node ->
-            if (getAttribute(player, GameAttributes.THIRD_VIAL_CORRECT, false)) {
-                openDialogue(player, HopsDialogue(), node.id)
-            } else {
-                sendDialogue(player, "Hops doesn't feel like talking.")
-            }
-            return@on true
-        }
-
         on(NPCs.GUIDOR_343, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, GuidorDialogue())
             return@on true
@@ -117,17 +56,16 @@ class BiohazardPlugin : InteractionListener {
             if (getAttribute(player, GameAttributes.FEED_ON_FENCE, false)) {
                 if (player.location != FENCE_CORNER_LOCATION) return@on true
                 face(player, WATCHTOWER_CORNER_LOCATION)
-                var counter = 0
                 submitIndividualPulse(
                     player,
                     object : Pulse() {
+                        var counter = 0
                         override fun pulse(): Boolean {
-                            counter++
-                            when (counter) {
+                            when (counter++) {
                                 0 -> sendMessage(player, "You open the cage.")
-                                2 -> sendMessage(player, "The pigeons fly towards the watch tower.")
-                                4 -> sendMessage(player, "The mourners are frantically trying to scare the pigeons away.")
-                                5 -> {
+                                3 -> sendMessage(player, "The pigeons fly towards the watch tower.")
+                                6 -> sendMessage(player, "The mourners are frantically trying to scare the pigeons away.")
+                                9 -> {
                                     spawnProjectile(
                                         Projectile.getLocation(player),
                                         Location(2561, 3303, 0),
@@ -171,23 +109,14 @@ class BiohazardPlugin : InteractionListener {
         on(Scenery.CUPBOARD_2057, IntType.SCENERY, "search") { player, node ->
             if (inInventory(player, Items.BIRD_FEED_422)) {
                 sendMessage(player, "You search the cupboard but find nothing interesting.")
-                return@on false
+                return@on true
             } else {
                 openDialogue(
                     player,
                     object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
+                        override fun handle(componentID: Int, buttonID: Int) {
                             when (stage) {
-                                0 ->
-                                    sendItemDialogue(
-                                        player,
-                                        Items.BIRD_FEED_422,
-                                        "The cupboard is full of birdfeed.",
-                                    ).also { stage++ }
-
+                                0 -> sendItemDialogue(player, Items.BIRD_FEED_422, "The cupboard is full of birdfeed.").also { stage++ }
                                 1 -> player("Mmm, birdfeed! Now what could I do with that?").also { stage++ }
                                 2 -> {
                                     end()
@@ -276,10 +205,10 @@ class BiohazardPlugin : InteractionListener {
         on(Scenery.BOX_2063, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the box...")
             if (!inEquipmentOrInventory(player, Items.DOCTORS_GOWN_430)) {
-                sendMessage(player, "and find a doctor's gown.")
+                sendMessage(player, "...and find a doctor's gown.")
                 addItemOrDrop(player, Items.DOCTORS_GOWN_430)
             } else {
-                sendMessage(player, "but you find nothing of interest.")
+                sendMessage(player, "...but you find nothing of interest.")
             }
             return@on true
         }
@@ -324,31 +253,14 @@ class BiohazardPlugin : InteractionListener {
                 else -> null
             }
             if (isQuestComplete(player, Quests.BIOHAZARD)) {
-                sendNPCDialogueLines(
-                    player,
-                    NPCs.GUARD_344,
-                    FaceAnim.NEUTRAL,
-                    false,
-                    "The king has granted you access to ths training area.",
-                    "Make good use of it, soon all your strength will be",
-                    "needed.",
-                )
+                sendNPCDialogueLines(player, NPCs.GUARD_344, FaceAnim.NEUTRAL, false, "The king has granted you access to ths training area.", "Make good use of it, soon all your strength will be", "needed.")
                 addDialogueAction(player) { _, _ ->
                     if (gatePair != null) {
-                        DoorActionHandler.autowalkFence(
-                            player,
-                            node.asScenery(),
-                            gatePair.first,
-                            gatePair.second
-                        )
+                        DoorActionHandler.autowalkFence(player, node.asScenery(), gatePair.first, gatePair.second)
                     }
                 }
             } else {
-                sendDialogueLines(
-                    player,
-                    "You need to complete Biohazard to get access to the Combat",
-                    "Training Camp.",
-                )
+                sendDialogueLines(player, "You need to complete Biohazard to get access to the Combat", "Training Camp.")
             }
             return@on true
         }
@@ -360,59 +272,6 @@ class BiohazardPlugin : InteractionListener {
                 return@setDest Location(2542, 3331, 0)
             } else {
                 return@setDest Location.create(2541, 3331, 0)
-            }
-        }
-    }
-
-    inner class DaVinciDialogue : DialogueFile() {
-        override fun handle(componentID: Int, buttonID: Int) {
-            when(stage) {
-                0 -> npc("Hello again. I hope your journey was as pleasant as", "mine.").also { stage++ }
-                1 -> playerl("Well, as they say, it's always sunny in Gielinor.").also { stage++ }
-                2 -> npc("Ok, here it is.").also { stage++ }
-                3 -> {
-                    end()
-                    sendMessage(player!!, "He gives you the vial of ethenea.")
-                    player("Thanks, you've been a big help.")
-                    addItemOrDrop(player!!, Items.ETHENEA_415, 1)
-                    removeAttribute(player!!, GameAttributes.SECOND_VIAL_CORRECT)
-                }
-            }
-        }
-    }
-
-    inner class ChancyDialogue : DialogueFile() {
-        override fun handle(componentID: Int, buttonID: Int) {
-            when(stage) {
-                0 -> player("Hi, thanks for doing that.").also { stage++ }
-                1 -> npc("No problem.").also { stage++ }
-                2 -> npc("Next time give me something more valuable...", "I couldn't get anything for this on the blackmarket.").also { stage++ }
-                3 -> {
-                    end()
-                    player("That was the idea.")
-                    sendMessage(player!!, "He gives you the vial of liquid honey.")
-                    addItemOrDrop(player!!, Items.LIQUID_HONEY_416, 1)
-                    removeAttribute(player!!, GameAttributes.FIRST_VIAL_CORRECT)
-                }
-            }
-        }
-    }
-
-    inner class HopsDialogue : DialogueFile() {
-        override fun handle(componentID: Int, buttonID: Int) {
-            when(stage) {
-                0 -> player("Hello, how was your journey?").also { stage++ }
-                1 -> npc("Pretty thirst-inducing actually...").also { stage++ }
-                2 -> player("Please tell me that you haven't drunk the contents...").also { stage++ }
-                3 -> npc(FaceAnim.SCARED, "Oh the gods no! What do you take me for?").also { stage++ }
-                4 -> npc("Here's your vial anyway.").also { stage++ }
-                5 -> {
-                    end()
-                    sendMessage(player!!, "He gives you the vial of ethenea.")
-                    addItemOrDrop(player!!, Items.SULPHURIC_BROLINE_417, 1)
-                    removeAttribute(player!!, GameAttributes.THIRD_VIAL_CORRECT)
-                    player("Thanks, I'll let you get your drink now.")
-                }
             }
         }
     }
