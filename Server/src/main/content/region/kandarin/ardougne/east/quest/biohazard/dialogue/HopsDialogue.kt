@@ -35,7 +35,7 @@ class HopsDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
 
-            !GameWorld.settings!!.isMembers && npc.id == NPCs.HOPS_340 -> {
+            !GameWorld.settings!!.isMembers && npc.id == NPCs.HOPS_341 -> {
                 sendDialogue(player, "Hops don't wanna talk now. Try different world, HIC!")
                 stage = END_DIALOGUE
             }
