@@ -32,19 +32,9 @@ class ElenaPlagueCityDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentID: Int, buttonID: Int): Boolean {
         when (stage) {
-            1 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Thank you, being kidnapped was so inconvenient. I was on my way back to East Ardougne with some samples, I want to see if I can diagnose a cure for this plague.",
-                ).also { stage++ }
-
+            1 -> npcl(FaceAnim.FRIENDLY, "Thank you, being kidnapped was so inconvenient. I was on my way back to East Ardougne with some samples, I want to see if I can diagnose a cure for this plague.").also { stage++ }
             2 -> playerl(FaceAnim.FRIENDLY, "Well you can leave via the manhole near the gate.").also { stage++ }
-            3 ->
-                npcl(
-                    FaceAnim.FRIENDLY,
-                    "Go and see my father, I'll make sure he adequately rewards you. Now I'd better leave while I still can.",
-                ).also { stage++ }
-
+            3 -> npcl(FaceAnim.FRIENDLY, "Go and see my father, I'll make sure he adequately rewards you. Now I'd better leave while I still can.").also { stage++ }
             4 -> {
                 end()
                 setQuestStage(player!!, Quests.PLAGUE_CITY, 99)

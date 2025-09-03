@@ -6,6 +6,7 @@ import core.api.getQuestStage
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
 import core.game.dialogue.Dialogue
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -21,24 +22,24 @@ class ElenaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-
-        return if (
-            isQuestComplete(player, Quests.PLAGUE_CITY) &&
-            !isQuestComplete(player, Quests.BIOHAZARD) && getQuestStage(player, Quests.BIOHAZARD) > 0) {
+        if (isQuestComplete(player, Quests.PLAGUE_CITY)){
             end()
             openDialogue(player, ElenaBiohazardDialogue())
-            true
         } else {
-            npc("Hello.")
-            stage = END_DIALOGUE
-            true
+            npc("Hello Elena.")
         }
+        return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean = true
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when(stage) {
+            0 -> npcl(FaceAnim.HALF_ASKING, "Hey, how are you?").also { stage++ }
+            1 -> playerl(FaceAnim.HAPPY, "Good thanks, yourself?").also { stage++ }
+            2 -> npcl(FaceAnim.HALF_THINKING, "Not bad, let me know when you hear from King Lathas again.").also { stage++ }
+            3 -> playerl(FaceAnim.NOD_YES, "Will do.").also { stage = END_DIALOGUE }
+        }
+        return true
+    }
 
     override fun newInstance(player: Player?): Dialogue = ElenaDialogue(player)
 

@@ -56,34 +56,11 @@ class BiohazardPlugin : InteractionListener {
             if (getAttribute(player, GameAttributes.FEED_ON_FENCE, false)) {
                 if (player.location != FENCE_CORNER_LOCATION) return@on true
                 face(player, WATCHTOWER_CORNER_LOCATION)
-                submitIndividualPulse(
-                    player,
-                    object : Pulse() {
-                        var counter = 0
-                        override fun pulse(): Boolean {
-                            when (counter++) {
-                                0 -> sendMessage(player, "You open the cage.")
-                                3 -> sendMessage(player, "The pigeons fly towards the watch tower.")
-                                6 -> sendMessage(player, "The mourners are frantically trying to scare the pigeons away.")
-                                9 -> {
-                                    spawnProjectile(
-                                        Projectile.getLocation(player),
-                                        Location(2561, 3303, 0),
-                                        72,
-                                        40,
-                                        200,
-                                        0,
-                                        250,
-                                        25,
-                                    )
-                                    setQuestStage(player, Quests.BIOHAZARD, 4)
-                                    return true
-                                }
-                            }
-                            return false
-                        }
-                    },
-                )
+                sendMessage(player, "You open the cage.")
+                spawnProjectile(Projectile.getLocation(player), Location(2561, 3303, 0), 72, 40, 200, 0, 250, 25)
+                sendMessage(player, "The pigeons fly towards the watch tower.", 1)
+                sendMessage(player, "The mourners are frantically trying to scare the pigeons away.", 2)
+                setQuestStage(player, Quests.BIOHAZARD, 4)
             } else {
                 sendMessage(player, "You open the cage.")
                 sendMessage(player, "The pigeons don't want to leave.", 1)
