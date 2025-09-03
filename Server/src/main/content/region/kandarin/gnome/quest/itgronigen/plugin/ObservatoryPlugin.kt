@@ -42,6 +42,11 @@ class ObservatoryPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
+        on(OBSERVATORY_ASSISTANT, IntType.NPC, "Talk-to") { player, _ ->
+            openDialogue(player, ObservatoryAssistantDialogue())
+            return@on true
+        }
+
         on(DUNGEON_STAIRS_UP, IntType.SCENERY, "climb up") { player, node ->
             val questStage = getQuestStage(player, Quests.OBSERVATORY_QUEST)
             if (node.location.x == 2335 && node.location.y == 9351) {
