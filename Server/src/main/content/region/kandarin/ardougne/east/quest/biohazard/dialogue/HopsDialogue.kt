@@ -36,7 +36,7 @@ class HopsDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             !GameWorld.settings!!.isMembers && npc.id == NPCs.HOPS_340 -> {
-                player(FaceAnim.HALF_ASKING, "Hops don't wanna talk now. Try different world, HIC!")
+                sendDialogue(player, "Hops don't wanna talk now. Try different world, HIC!")
                 stage = END_DIALOGUE
             }
 

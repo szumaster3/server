@@ -109,38 +109,31 @@ class ChancyDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
             }
-
             9 -> npc("Be Lucky!").also { stage++ }
             10 -> {
                 end()
                 setAttribute(player!!, GameAttributes.FIRST_VIAL_CORRECT, true)
             }
-
             11 -> {
                 end()
                 setAttribute(player!!, GameAttributes.FIRST_VIAL_WRONG, true)
             }
-
             12 -> {
                 if(getAttribute(player, GameAttributes.FIRST_VIAL_CORRECT, false)) {
                     npc("No problem.")
                     stage++
                 } else {
-                    npc("Next time give me something more valuable...", "I couldn't get anything for this on the blackmarket.")
-                    stage = 14
+                    npcl(FaceAnim.FRIENDLY, "No problem. I've got some money for you actually.")
+                    stage = 15
                 }
             }
-            13 -> {
+            13 -> npc("Next time give me something more valuable...", "I couldn't get anything for this on the blackmarket.")
+            14 -> {
                 end()
                 player("That was the idea.")
                 sendMessage(player!!, "He gives you the vial of liquid honey.")
                 addItemOrDrop(player!!, Items.LIQUID_HONEY_416, 1)
                 removeAttribute(player!!, GameAttributes.FIRST_VIAL_CORRECT)
-            }
-            14 -> {
-                npcl(FaceAnim.FRIENDLY, "No problem. I've got some money for you actually.")
-                removeAttribute(player!!, GameAttributes.FIRST_VIAL_WRONG)
-                stage++
             }
             15 -> playerl(FaceAnim.FRIENDLY, "What do you mean?").also { stage++ }
             16 -> npcl(FaceAnim.FRIENDLY, "Well, it turns out that potion you gave me, was quite valuable...").also { stage++ }
@@ -153,8 +146,12 @@ class ChancyDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> playerl(FaceAnim.FRIENDLY, "No! Nothing could be further from the truth!").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "You have no idea what you have just done!").also { stage = 24 }
             }
-            23 -> npcl(FaceAnim.HALF_THINKING, "Well, there's no pleasing some people.").also { stage = END_DIALOGUE }
-            24 -> npcl(FaceAnim.HALF_THINKING, "Ignorance is bliss I'm afraid.").also { stage = END_DIALOGUE }
+            23 -> npcl(FaceAnim.HALF_THINKING, "Well, there's no pleasing some people.").also { stage = 25 }
+            24 -> npcl(FaceAnim.HALF_THINKING, "Ignorance is bliss I'm afraid.").also { stage = 25 }
+            25 -> {
+                end()
+                removeAttribute(player, GameAttributes.FIRST_VIAL_WRONG)
+            }
         }
         return true
     }
