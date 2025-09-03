@@ -9,7 +9,7 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * Tribal weapon salesman dialogue.
+ * Represents the Tribal weapon salesman dialogue.
  */
 @Initializable
 class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
@@ -24,11 +24,10 @@ class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npc("Greetings, traveller. Are you interested in any throwing", "weapons?").also { stage++ }
             1 -> options("Yes I am.", "Not really.").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> player("Yes I am.").also { stage++ }
-                    2 -> player("Not really.").also { stage += 3 }
-                }
+            2 -> when (buttonId) {
+                1 -> player("Yes I am.").also { stage++ }
+                2 -> player("Not really.").also { stage += 3 }
+            }
             3 -> npc("That is a good thing.").also { stage++ }
             4 -> end().also { openNpcShop(player, npc.id) }
             5 -> npc("No bother to me.").also { stage = END_DIALOGUE }

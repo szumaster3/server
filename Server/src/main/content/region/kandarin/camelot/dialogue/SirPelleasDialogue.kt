@@ -18,22 +18,17 @@ class SirPelleasDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
-                0 -> npcl(FaceAnim.FRIENDLY, "Greetings to the court of King Arthur!").also {
-                    if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 0) {
-                        stage = 1
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 10) {
-                        stage = 10
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 20 || getQuestStage(
-                            player!!,
-                            Quests.MERLINS_CRYSTAL
-                        ) == 30
-                    ) {
-                        stage = 20
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40) {
-                        stage = 40
+                0 -> {
+                    npcl(FaceAnim.FRIENDLY, "Greetings to the court of King Arthur!")
+                    val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
+                    stage = when (questStage) {
+                        0 -> 1
+                        10 -> 10
+                        20, 30 -> 20
+                        in 40..100 -> 40
+                        else -> END_DIALOGUE
                     }
                 }
-
                 1 -> playerl(FaceAnim.HALF_ASKING, "Hello. I'm looking for a quest. Who should I talk to?").also { stage++ }
                 2 -> npcl(FaceAnim.NEUTRAL, "King Arthur will let you know. I believe he has a quest at the moment.").also { stage = END_DIALOGUE }
                 10 -> playerl(FaceAnim.NEUTRAL, "Any suggestions on freeing Merlin?").also { stage++ }

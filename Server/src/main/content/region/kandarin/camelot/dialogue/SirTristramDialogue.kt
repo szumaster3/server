@@ -21,18 +21,17 @@ class SirTristramDialogue(player: Player? = null) : Dialogue(player) {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Hail Arthur, King of the Britons!").also { stage++ }
-                1 -> playerl(FaceAnim.NEUTRAL, "Um... Hello.").also {
-                    if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 0) {
-                        stage = 2
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 10) {
-                        stage = 10
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 20 || getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 30) {
-                        stage = 20
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40) {
-                        stage = 40
+                1 -> {
+                    playerl(FaceAnim.NEUTRAL, "Um... Hello.")
+                    val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
+                    stage = when (questStage) {
+                        0 -> 2
+                        10 -> 10
+                        20, 30 -> 20
+                        in 40..100 -> 40
+                        else -> END_DIALOGUE
                     }
                 }
-
                 2 -> playerl(FaceAnim.NEUTRAL, "I'm looking for adventure! More specifically, some sort of quest.").also { stage++ }
                 3 -> npcl(FaceAnim.NEUTRAL, "...Then hail Arthur, King of Britons, like I just said.").also { stage++ }
                 4 -> playerl(FaceAnim.NEUTRAL, "Oh. Ok.").also { stage++ }

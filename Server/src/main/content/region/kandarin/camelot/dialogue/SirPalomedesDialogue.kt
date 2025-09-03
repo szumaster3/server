@@ -15,23 +15,21 @@ import shared.consts.Quests
  */
 @Initializable
 class SirPalomedesDialogue(player: Player? = null) : Dialogue(player) {
+
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 -> {
-                    npcl(FaceAnim.NEUTRAL, "Hello there adventurer, what do you want of me?").also {
-                        if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 0) {
-                            stage = 1
-                        } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 10) {
-                            stage = 10
-                        } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 20 || getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 30) {
-                            stage = 20
-                        } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40) {
-                            stage = 40
-                        }
+                    npcl(FaceAnim.NEUTRAL, "Hello there adventurer, what do you want of me?")
+                    val questStage = getQuestStage(player!!, Quests.MERLINS_CRYSTAL)
+                    stage = when (questStage) {
+                        0 -> 1
+                        10 -> 10
+                        20, 30 -> 20
+                        in 40..100 -> 40
+                        else -> END_DIALOGUE
                     }
                 }
-
                 1 -> playerl(FaceAnim.NEUTRAL, "I'd like some advice on finding a quest.").also { stage++ }
                 2 -> npcl(FaceAnim.NEUTRAL, "I do not know of any myself... but it would perhaps be worth your while asking the King if he has any tasks for you.").also { stage = END_DIALOGUE }
                 10 -> playerl(FaceAnim.NEUTRAL, "I'd like some advice on breaking that Crystal Merlin's trapped in.").also { stage++ }

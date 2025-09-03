@@ -8,7 +8,7 @@ import core.plugin.Initializable
 import shared.consts.NPCs
 
 /**
- * Bow arrow salesman dialogue.
+ * Represents the Bow arrow salesman dialogue.
  */
 @Initializable
 class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
@@ -23,11 +23,10 @@ class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npc("A fair day, traveller. Would you like to see my wares?").also { stage++ }
             1 -> options("Yes please.", "No thanks.").also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 -> end().also { openNpcShop(player, npc.id) }
-                    2 -> end()
-                }
+            2 -> when (buttonId) {
+                1 -> end().also { openNpcShop(player, npc.id) }
+                2 -> end()
+            }
         }
         return true
     }

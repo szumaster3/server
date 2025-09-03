@@ -24,13 +24,7 @@ class FranklinCaranosDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Hello again, " + player.username + ".").also { stage++ }
             1 -> playerl(FaceAnim.ASKING, "Hello. How's the repair work going?").also { stage++ }
-            2 ->
-                npcl(
-                    FaceAnim.NEUTRAL,
-                    "I'm working on it. I can always do with more iron sheets, so if you've got any more, I'll give you 20 gp per sheet.",
-                ).also {
-                    stage++
-                }
+            2 -> npcl(FaceAnim.NEUTRAL, "I'm working on it. I can always do with more iron sheets, so if you've got any more, I'll give you 20 gp per sheet.").also { stage++ }
             3 -> playerl(FaceAnim.NEUTRAL, "Thanks, I'll remember that.").also { stage = END_DIALOGUE }
         }
         return true

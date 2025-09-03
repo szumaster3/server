@@ -26,16 +26,15 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
     val STAGE_MERLIN_FINISH = 20
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val questStage = getQuestStage(player!!, Quests.HOLY_GRAIL)
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
-                0 -> {
-                    if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 60) {
-                        playerl(FaceAnim.NEUTRAL, "I have freed Merlin from his crystal!").also { stage++ }
-                        stage = STAGE_MERLIN_FINISH
-                    } else {
-                        npcl(FaceAnim.NEUTRAL, "Welcome to my court. I am King Arthur.")
-                        stage++
-                    }
+                0 -> if (getQuestStage(player, Quests.MERLINS_CRYSTAL) == 60) {
+                    playerl(FaceAnim.NEUTRAL, "I have freed Merlin from his crystal!").also { stage++ }
+                    stage = STAGE_MERLIN_FINISH
+                } else {
+                    npcl(FaceAnim.NEUTRAL, "Welcome to my court. I am King Arthur.")
+                    stage++
                 }
                 1 -> showTopics(
                     Topic(FaceAnim.NEUTRAL, "I want to become a Knight of the Round Table!", 2),
@@ -70,28 +69,27 @@ class KingArthurDialogue(player: Player? = null) : Dialogue(player) {
             }
         } else {
             when (stage) {
-                0 -> {
-                    if (isQuestComplete(player!!, Quests.HOLY_GRAIL)) {
+                0 -> when {
+                    isQuestComplete(player, Quests.HOLY_GRAIL) -> {
                         npcl(FaceAnim.NEUTRAL, "Thank you for retrieving the Grail! You shall be long remembered as one of the greatest heroes amongst the Knights of the Round Table!")
                         stage = END_DIALOGUE
-                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0) {
+                    }
+                    questStage == 0 -> {
                         playerl(FaceAnim.NEUTRAL, "Now I am a knight of the round table, do you have any more quests for me?")
                         stage++
-                    } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 40) {
+                    }
+                    questStage == 40 -> {
                         playerl(FaceAnim.NEUTRAL, "Hello, do you have a knight named Sir Percival?")
                         stage = 40
-                    } else {
+                    }
+                    else -> {
                         npcl(FaceAnim.NEUTRAL, "How goes thy quest?")
-                        stage = if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 50 && player!!.hasItem(Item(Items.HOLY_GRAIL_19, 1))) {
-                            60
-                        } else {
-                            30
-                        }
+                        stage =
+                            if (questStage == 50 && player.hasItem(Item(Items.HOLY_GRAIL_19, 1))) 60
+                            else 30
                     }
                 }
-                1 -> npcl(FaceAnim.NEUTRAL, "Aha! I'm glad you are here! I am sending out various knights on an important quest. I was wondering if you too would like to take up this quest?").also {
-                    stage++
-                }
+                1 -> npcl(FaceAnim.NEUTRAL, "Aha! I'm glad you are here! I am sending out various knights on an important quest. I was wondering if you too would like to take up this quest?").also { stage++ }
                 2 -> showTopics(
                     Topic(FaceAnim.NEUTRAL, "Tell me of this quest.", 13),
                     Topic(FaceAnim.NEUTRAL, "I am weary of questing for the time being...", 23),

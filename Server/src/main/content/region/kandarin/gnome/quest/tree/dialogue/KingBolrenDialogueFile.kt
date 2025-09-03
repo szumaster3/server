@@ -64,8 +64,8 @@ class KingBolrenDialogueFile : DialogueFile() {
 
             questStage < 31 -> {
                 when (stage) {
-                    1 -> npcl(FaceAnim.OLD_NORMAL, "Hello traveller, we must retrieve the orb. It's being held by Khazard troops north of here.").also { stage++ }
-                    2 -> playerl(FaceAnim.FRIENDLY, "Ok, I'll try my best.").also { stage = END_DIALOGUE }
+                    0 -> npcl(FaceAnim.OLD_NORMAL, "Hello traveller, we must retrieve the orb. It's being held by Khazard troops north of here.").also { stage++ }
+                    1 -> playerl(FaceAnim.FRIENDLY, "Ok, I'll try my best.").also { stage = END_DIALOGUE }
                 }
             }
 

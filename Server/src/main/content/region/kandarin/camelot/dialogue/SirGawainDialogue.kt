@@ -16,7 +16,7 @@ import shared.consts.Quests
  * Represents Sir Gawain dialogue.
  */
 @Initializable
-class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
+class SirGawainDialogue(player: Player? = null) : Dialogue(player) {
     val STAGE_LE_FAYE_END = 20
     val STAGE_PROGRESS = 15
 
@@ -24,16 +24,15 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
         if (!isQuestComplete(player, Quests.MERLINS_CRYSTAL)) {
             when (stage) {
                 0 -> {
-                    npcl(FaceAnim.HAPPY, "Good day to you " + (if (player!!.isMale) "sir" else "madam") + "!")
-
-                    if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 0) {
-                        stage = 1
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) == 10) {
-                        stage = 10
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) in 20..30) {
-                        stage = 20
-                    } else if (getQuestStage(player!!, Quests.MERLINS_CRYSTAL) >= 40) {
-                        stage = 40
+                    val title = if (player!!.isMale) "sir" else "madam"
+                    npcl(FaceAnim.HAPPY, "Good day to you $title!")
+                    val questStage = getQuestStage(player, Quests.MERLINS_CRYSTAL)
+                    stage = when (questStage) {
+                        0 -> 1
+                        10 -> 10
+                        in 20..30 -> 20
+                        in 40..100 -> 40
+                        else -> END_DIALOGUE
                     }
                 }
 
@@ -58,10 +57,7 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
                 }
 
                 11 -> {
-                    npcl(
-                        FaceAnim.NEUTRAL,
-                        "I'm a little stumped myself. We've tried opening it with anything and everything!",
-                    )
+                    npcl(FaceAnim.NEUTRAL, "I'm a little stumped myself. We've tried opening it with anything and everything!")
                     stage = END_DIALOGUE
                 }
 
@@ -76,10 +72,7 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
                 }
 
                 17 -> {
-                    npc(
-                        "She lives in her stronghold to the south of here,",
-                        "guarded by some renegade knights led by Sir Mordred.",
-                    )
+                    npc("She lives in her stronghold to the south of here,", "guarded by some renegade knights led by Sir Mordred.")
                     setQuestStage(player!!, Quests.MERLINS_CRYSTAL, 20)
                     player!!.getQuestRepository().syncronizeTab(player)
                     stage++
@@ -87,11 +80,7 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
 
                 18 -> {
                     showTopics(
-                        Topic(
-                            FaceAnim.NEUTRAL,
-                            "Any idea how to get into Moran Le Faye's stronghold?",
-                            STAGE_LE_FAYE_END,
-                        ),
+                        Topic(FaceAnim.NEUTRAL, "Any idea how to get into Moran Le Faye's stronghold?", STAGE_LE_FAYE_END),
                         Topic(FaceAnim.NEUTRAL, "Thank you for the information.", 25),
                     )
                 }
@@ -108,11 +97,7 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
 
                 30 -> {
                     showTopics(
-                        Topic(
-                            FaceAnim.NEUTRAL,
-                            "Any idea how to get into Moran Le Faye's stronghold?",
-                            STAGE_LE_FAYE_END,
-                        ),
+                        Topic(FaceAnim.NEUTRAL, "Any idea how to get into Moran Le Faye's stronghold?", STAGE_LE_FAYE_END),
                         Topic(FaceAnim.NEUTRAL, "Hello again.", END_DIALOGUE),
                     )
                 }
@@ -130,11 +115,7 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
         } else {
             when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Good day to you sir!").also {
-                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0 || isQuestComplete(
-                            player!!,
-                            Quests.HOLY_GRAIL
-                        )
-                    ) {
+                    if (getQuestStage(player!!, Quests.HOLY_GRAIL) == 0 || isQuestComplete(player!!, Quests.HOLY_GRAIL)) {
                         stage = 1
                     } else if (getQuestStage(player!!, Quests.HOLY_GRAIL) >= 10) {
                         stage = 10
@@ -145,27 +126,11 @@ class SirGawainDialogue(player: Player? = null, ) : Dialogue(player) {
                     Topic(FaceAnim.NEUTRAL, "Good day.", END_DIALOGUE),
                     Topic(FaceAnim.NEUTRAL, "Know you of any quests sir knight?", 5),
                 )
-
-                5 -> npcl(FaceAnim.NEUTRAL, "I think you've done the main quest we were on right now...").also {
-                    stage = END_DIALOGUE
-                }
-
+                5 -> npcl(FaceAnim.NEUTRAL, "I think you've done the main quest we were on right now...").also { stage = END_DIALOGUE }
                 10 -> playerl(FaceAnim.NEUTRAL, "I seek the Grail in the name of Camelot!").also { stage++ }
-                11 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "The Grail? That is truly a noble quest indeed. None but Galahad have come close.",
-                ).also {
-                    stage++
-                }
-
+                11 -> npcl(FaceAnim.NEUTRAL, "The Grail? That is truly a noble quest indeed. None but Galahad have come close.").also { stage++ }
                 12 -> playerl(FaceAnim.NEUTRAL, "Galahad? Who is he?").also { stage++ }
-                13 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "He used to be one of the Knights of the Round Table, but he mysteriously disappeared many years ago.",
-                ).also {
-                    stage++
-                }
-
+                13 -> npcl(FaceAnim.NEUTRAL, "He used to be one of the Knights of the Round Table, but he mysteriously disappeared many years ago.").also { stage++ }
                 14 -> playerl(FaceAnim.NEUTRAL, "Why would he quit being a Knight?").also { stage++ }
                 15 -> npcl(FaceAnim.NEUTRAL, "That is a good question.").also { stage++ }
                 16 -> npcl(FaceAnim.NEUTRAL, "I'm afraid I don't have the answer.").also { stage = END_DIALOGUE }

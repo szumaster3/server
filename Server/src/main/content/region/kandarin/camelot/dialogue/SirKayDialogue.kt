@@ -22,7 +22,6 @@ import shared.consts.Quests
 @Initializable
 class SirKayDialogue(player: Player? = null) : Dialogue(player) {
 
-
     private var diaryLevel = 2
 
     override fun open(vararg args: Any?): Boolean {

@@ -14,9 +14,7 @@ class BallistaDialogue : DialogueFile() {
         val questStage = getQuestStage(player!!, Quests.TREE_GNOME_VILLAGE)
         if (questStage > 30) {
             when (stage) {
-                0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also {
-                    stage = END_DIALOGUE
-                }
+                0 -> sendDialogue(player!!, "The Khazard stronghold has already been breached.").also { stage = END_DIALOGUE }
             }
         } else if (questStage != 30) {
             return

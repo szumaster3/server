@@ -13,15 +13,9 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class KhazardWarlordNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location?,
-        vararg objects: Any?,
-    ): AbstractNPC = KhazardWarlordNPC(id, location)
+class KhazardWarlordNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location?, vararg objects: Any?): AbstractNPC = KhazardWarlordNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.KHAZARD_WARLORD_477)
 
