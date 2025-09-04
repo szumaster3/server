@@ -2441,10 +2441,10 @@ fun setTitle(player: Player, options: Int) {
     require(options in 2..5) { "Expected option value between 2 and 5, got $options." }
 
     val componentId = when (options) {
-        5 -> 234
-        4 -> 232
-        3 -> 230
-        else -> 228
+        5 -> Components.MULTI5_234
+        4 -> Components.MULTI4_232
+        3 -> Components.MULTI3_230
+        else -> Components.MULTI2_228
     }
 
     setComponentVisibility(player, componentId, 4 + options, true)
