@@ -2437,43 +2437,18 @@ fun setComponentVisibility(
  * @param options The options determining the visibility of components (should be between 2 and 5).
  * @throws IllegalArgumentException If options are outside the valid range.
  */
-fun setTitle(
-    player: Player,
-    options: Int,
-) {
-    setComponentVisibility(
-        player,
-        if (options == 5) {
-            234
-        } else if (options == 4) {
-            232
-        } else if (options == 3) {
-            230
-        } else {
-            228
-        },
-        (4 + options),
-        true,
-    )
-    setComponentVisibility(
-        player,
-        if (options == 5) {
-            234
-        } else if (options == 4) {
-            232
-        } else if (options == 3) {
-            230
-        } else {
-            228
-        },
-        if (options == 2 || options == 4) 9 else 10,
-        false,
-    )
-    if (options > 5) {
-        throw java.lang.IllegalArgumentException(
-            "Expected option value between 2 and 5, got ${options::class.java.simpleName}.",
-        )
+fun setTitle(player: Player, options: Int) {
+    require(options in 2..5) { "Expected option value between 2 and 5, got $options." }
+
+    val componentId = when (options) {
+        5 -> 234
+        4 -> 232
+        3 -> 230
+        else -> 228
     }
+
+    setComponentVisibility(player, componentId, 4 + options, true)
+    setComponentVisibility(player, componentId, if (options == 2 || options == 4) 9 else 10, false)
 }
 
 /**
@@ -2723,19 +2698,20 @@ fun sendItemDialogue(
  * Sends a dialogue involving two items to the player.
  *
  * @param player The player receiving the dialogue.
- * @param item1 The first item involved in the dialogue.
- * @param item2 The second item involved in the dialogue.
+ * @param primaryItem The first item involved in the dialogue.
+ * @param secondaryItem The second item involved in the dialogue.
  * @param message The message to display alongside the items.
  */
 fun sendDoubleItemDialogue(
     player: Player,
-    item1: Any,
-    item2: Any,
-    message: String,
+    primaryItem: Any,
+    secondaryItem: Any,
+    message: String
 ) {
-    when (item1) {
-        is Item -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Item, message)
-        is Int -> player.dialogueInterpreter.sendDoubleItemMessage(item1, item2 as Int, message)
+    when {
+        primaryItem is Item && secondaryItem is Item -> player.dialogueInterpreter.sendDoubleItemMessage(primaryItem, secondaryItem, message)
+        primaryItem is Int && secondaryItem is Int -> player.dialogueInterpreter.sendDoubleItemMessage(primaryItem, secondaryItem, message)
+        else -> throw IllegalArgumentException("Item types must match: both Item or both Int")
     }
 }
 
