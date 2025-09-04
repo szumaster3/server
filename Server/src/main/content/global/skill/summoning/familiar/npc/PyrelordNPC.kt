@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import content.global.skill.crafting.casting.gold.Jewellery
+import content.global.skill.crafting.jewellery.Jewellery
 import content.global.skill.firemaking.FireMakingPulse
 import content.global.skill.firemaking.Log
 import content.global.skill.summoning.familiar.Familiar

@@ -34,13 +34,13 @@ class FritzTheGlassblowerDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Would you like me to explain my craft to you?").also { stage++ }
-            1 -> options("Yes please. I'd be fascinated to hear what you do.", "No thanks, I doubt I'll ever turn my hand to glassblowing.").also { stage++ }
+            1 -> options("Yes please. I'd be fascinated to hear what you do.", "No thanks, I doubt I'll ever turn my hand to glass.").also { stage++ }
             2 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Yes please. I'd be fascinated to hear what you do.").also { stage = 10 }
-                2 -> player(FaceAnim.HALF_GUILTY, "No thanks, I doubt I'll ever turn my hand to glassblowing.").also { stage = END_DIALOGUE }
+                2 -> player(FaceAnim.HALF_GUILTY, "No thanks, I doubt I'll ever turn my hand to glass.").also { stage = END_DIALOGUE }
             }
-            10 -> npc(FaceAnim.HALF_GUILTY, "I'm extremely pleased to hear that! I've always wanted", "an apprentice. Let me talk to you through the secrets of", "glassblowing.").also { stage++ }
-            11 -> npc(FaceAnim.HALF_GUILTY, "Glass is made from soda ash and silica. We get out", "soda ash by collecting seaweed from the rocks - the", "prevailing currents make the north-west corner of the", "island the best place to find it, it can also be found in").also { stage++ }
+            10 -> npc(FaceAnim.HALF_GUILTY, "I'm extremely pleased to hear that! I've always wanted", "an apprentice. Let me talk to you through the secrets of", "glass.").also { stage++ }
+            11 -> npc(FaceAnim.HALF_GUILTY, "GlassProduct is made from soda ash and silica. We get out", "soda ash by collecting seaweed from the rocks - the", "prevailing currents make the north-west corner of the", "island the best place to find it, it can also be found in").also { stage++ }
             12 -> npc(FaceAnim.HALF_GUILTY, "your nets sometimes when you're fishing, on Karamja", "island or at the Piscatoris Fishing Colonly in the nets", "there. To turn seaweed into soda ash, all you need to", "do is burn it on a fire. Feel free to use the range in").also { stage++ }
             13 -> npc(FaceAnim.HALF_GUILTY, "my house for that; it's the one directly west of here.", "Next we collect sand from the sandpit that you'll also", "find just west of here, there are other located in", "Yanille and Shilo Village.").also { stage++ }
             14 -> npc(FaceAnim.HALF_GUILTY, "You'll need a bucket to cary it in. Tell you what, you", "can have this old one of mine.").also { stage++ }
@@ -53,7 +53,7 @@ class FritzTheGlassblowerDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 16
             }
             16 -> npc(FaceAnim.HALF_GUILTY, "There are many things you can use the molten glass", "for once you have made it. Depending on how talented", "you are, you could try turning it into something, like a", "fishbowl, for example. If you'd like to try your hand at").also { stage++ }
-            17 -> npc(FaceAnim.HALF_GUILTY, "the fine art of glassblowing you can use my spare", "glassblowing pipe. I think I left it on the chest of", "drawers in my house this morning.").also { stage++ }
+            17 -> npc(FaceAnim.HALF_GUILTY, "the fine art of glass you can use my spare", "glass pipe. I think I left it on the chest of", "drawers in my house this morning.").also { stage++ }
             18 -> npc(FaceAnim.HALF_GUILTY, "Alternatively I am always happy to buy the molten glass", "from you, saves me running about making it for", "myself.").also { stage++ }
             19 -> player(FaceAnim.HALF_GUILTY, "That sounds good. How much will you pay me?").also { stage++ }
             20 -> npc(FaceAnim.HALF_GUILTY, "Tell you what, because you've been interested in my", "art, I'll pay you the premium price of 20 gold pieces", "for each piece of molten glass you bring me.").also { stage = END_DIALOGUE }

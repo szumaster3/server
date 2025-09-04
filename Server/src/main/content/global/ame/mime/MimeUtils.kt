@@ -59,13 +59,13 @@ object MimeUtils {
             }
 
             (!hasLegs) -> {
-                sendDialogue(player, "You can now use Glass Wall emote!")
+                sendDialogue(player, "You can now use GlassProduct Wall emote!")
                 addItemOrDrop(player, Items.MIME_LEGS_3059, 1)
                 unlockEmote(player, 29)
             }
 
             (!hasBoots) && (!hasGloves) -> {
-                sendDialogue(player, "You can now use Glass Box emote!")
+                sendDialogue(player, "You can now use GlassProduct Box emote!")
                 addItemOrDrop(player, Items.MIME_GLOVES_3060, 1)
                 addItemOrDrop(player, Items.MIME_BOOTS_3061, 1)
                 unlockEmote(player, 26)

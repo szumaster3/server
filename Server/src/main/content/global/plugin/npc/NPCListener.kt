@@ -16,6 +16,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.IdleAbstractNPC
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.timer.impl.AntiMacro
 import core.game.worldevents.events.HolidayRandomEventNPC
 import core.game.worldevents.events.HolidayRandomEvents
@@ -45,7 +46,7 @@ class NPCListener : InteractionListener {
          */
 
         on(PEER_THE_SEER, IntType.NPC, "deposit") { player, _ ->
-            if (!anyInEquipment(player, Items.FREMENNIK_SEA_BOOTS_1_14571, Items.FREMENNIK_SEA_BOOTS_2_14572, Items.FREMENNIK_SEA_BOOTS_3_14573)) {
+            if (!isDiaryComplete(player, DiaryType.FREMENNIK, 0)) {
                 sendNPCDialogue(player, NPCs.PEER_THE_SEER_1288, "Do not pester me, Outlander! I will only deposit items into the banks of those who have earned Fremennik sea boots!", FaceAnim.ANNOYED)
                 return@on true
             }
