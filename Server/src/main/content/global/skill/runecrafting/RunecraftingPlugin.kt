@@ -41,11 +41,7 @@ class RunecraftingPlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         if (!isQuestComplete(player, Quests.RUNE_MYSTERIES) && player.details.rights !== Rights.ADMINISTRATOR) {
             sendMessage(player, "You need to finish the Rune Mysteries Quest in order to do this.")
             return true
@@ -122,8 +118,5 @@ class RunecraftingPlugin : OptionHandler() {
 
     override fun isWalk(): Boolean = false
 
-    override fun isWalk(
-        player: Player,
-        node: Node,
-    ): Boolean = node !is Item
+    override fun isWalk(player: Player, node: Node): Boolean = node !is Item
 }

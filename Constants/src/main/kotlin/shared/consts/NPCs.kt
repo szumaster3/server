@@ -2258,7 +2258,7 @@ object NPCs {
     const val BED_2254 = 2254
     const val THING_UNDER_THE_BED_2255 = 2255
     const val PALADIN_2256 = 2256
-    const val PALADIN_2257 = 2257
+    const val NULL_2257 = 2257
     const val MAGE_OF_ZAMORAK_2258 = 2258
     const val MAGE_OF_ZAMORAK_2259 = 2259
     const val MAGE_OF_ZAMORAK_2260 = 2260

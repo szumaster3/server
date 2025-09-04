@@ -129,10 +129,7 @@ class MysteriousRuinsPlugin : InteractionListener {
     /**
      * Checks if the player has completed the quest required for interacting with the ruin.
      */
-    private fun checkQuestCompletion(
-        player: Player,
-        ruin: MysteriousRuins,
-    ): Boolean = when (ruin) {
+    private fun checkQuestCompletion(player: Player, ruin: MysteriousRuins): Boolean = when (ruin) {
         MysteriousRuins.DEATH -> hasRequirement(player, QuestReq(QuestRequirements.MEP_2), true)
         MysteriousRuins.BLOOD -> hasRequirement(player, QuestReq(QuestRequirements.SEERGAZE), true)
         else -> hasRequirement(player, QuestReq(QuestRequirements.RUNE_MYSTERIES), true)
@@ -141,11 +138,7 @@ class MysteriousRuinsPlugin : InteractionListener {
     /**
      * Teleports the player to the mysterious ruin after using the talisman.
      */
-    private fun teleportToRuinTalisman(
-        player: Player,
-        talisman: Item,
-        ruin: MysteriousRuins,
-    ) {
+    private fun teleportToRuinTalisman(player: Player, talisman: Item, ruin: MysteriousRuins) {
         lock(player, 4)
         animate(player, Animations.MULTI_BEND_OVER_827)
         sendMessage(player, "You hold the ${talisman.name} towards the mysterious ruins.")
@@ -155,11 +148,7 @@ class MysteriousRuinsPlugin : InteractionListener {
     /**
      * Submits a pulse to teleport the player to the ruin after a short delay.
      */
-    private fun submitTeleportPulse(
-        player: Player,
-        ruin: MysteriousRuins,
-        delay: Int,
-    ) {
+    private fun submitTeleportPulse(player: Player, ruin: MysteriousRuins, delay: Int) {
         sendMessage(player, "You feel a powerful force take hold of you.")
         submitWorldPulse(
             object : Pulse(delay, player) {

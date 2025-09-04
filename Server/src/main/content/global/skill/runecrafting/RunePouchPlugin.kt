@@ -20,11 +20,7 @@ class RunePouchPlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val rEssAmt = player.inventory.getAmount(Items.RUNE_ESSENCE_1436)
         val pEssAmt = player.inventory.getAmount(Items.PURE_ESSENCE_7936)
         var preferenceFlag = 0

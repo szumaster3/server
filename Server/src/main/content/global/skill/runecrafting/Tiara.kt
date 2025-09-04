@@ -22,13 +22,14 @@ enum class Tiara(val item: Item, val experience: Double) {
     ;
 
     /**
-     * Gets the talisman for this tiara
+     * Gets the talisman for this tiara.
      */
     val talisman: Talisman?
         get() = Talisman.values().find { it.name == name }
 
     companion object {
         private val itemToTiara = values().associateBy { it.item.id }
+        @JvmStatic
         fun forItem(item: Item): Tiara? = itemToTiara[item.id]
     }
 }

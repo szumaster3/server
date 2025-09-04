@@ -170,7 +170,7 @@ enum class CookableItems(
     /**
      * Sea turtle.
      */
-    SEA_TURTLE(Items.SEA_TURTLE_397, Items.RAW_SEA_TURTLE_395, Items.BURNT_SEA_TURTLE_399, 82, 212.0, 1, 202, 1, 222),
+    SEA_TURTLE(Items.SEA_TURTLE_397, Items.RAW_SEA_TURTLE_395, Items.BURNT_SEA_TURTLE_399, 82, 211.3, 1, 202, 1, 222),
 
     /**
      * Manta ray.

@@ -235,10 +235,7 @@ class AbyssPlugin : InteractionListener {
         /**
          * Updates the player's view of Abyss obstacles based on their location.
          */
-        fun rotateObstacles(
-            player: Player,
-            abyssLoc: AbyssLocation,
-        ) {
+        fun rotateObstacles(player: Player, abyssLoc: AbyssLocation) {
             setVarbit(player, Vars.VARBIT_SCENERY_ABYSS_OBSTACLES_625, abyssLoc.getSegment(), true)
         }
 
@@ -250,14 +247,7 @@ class AbyssPlugin : InteractionListener {
         /**
          * Handles an Abyss obstacle interaction.
          */
-        fun handleObstacle(
-            obstacle: Node,
-            player: Player,
-            skill: Int,
-            varbitVal: Int?,
-            animation: Animation,
-            messages: Array<String>,
-        ): Boolean {
+        fun handleObstacle(obstacle: Node, player: Player, skill: Int, varbitVal: Int?, animation: Animation, messages: Array<String>): Boolean {
             log(this::class.java, Log.FINE, "handled abyss ${obstacle.name}")
             player.lock()
             player.animate(animation)
@@ -309,10 +299,7 @@ class AbyssPlugin : InteractionListener {
 /**
  * Represents a polar-coordinate location within the Abyss.
  */
-class AbyssLocation(
-    val radius: Double,
-    val angle: Double,
-) {
+class AbyssLocation(val radius: Double, val angle: Double) {
     /**
      * Moves the location closer to the Abyss center.
      *

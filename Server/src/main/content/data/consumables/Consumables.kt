@@ -40,7 +40,7 @@ enum class Consumables {
     COOKED_CRAB_MEAT(Food(intArrayOf(Items.COOKED_CRAB_MEAT_7521, Items.COOKED_CRAB_MEAT_7523, Items.COOKED_CRAB_MEAT_7524, Items.COOKED_CRAB_MEAT_7525, Items.COOKED_CRAB_MEAT_7526), HealingEffect(10))),
     FAT_SNAIL(Food(intArrayOf(Items.FAT_SNAIL_MEAT_3373), RandomHealthEffect(7, 9))),
     SALMON(Food(intArrayOf(Items.SALMON_329), HealingEffect(9))),
-    SLIMY_EEL(Food(intArrayOf(Items.COOKED_SLIMY_EEL_3381), RandomHealthEffect(7, 9))),
+    SLIMY_EEL(Food(intArrayOf(Items.COOKED_SLIMY_EEL_3381), RandomHealthEffect(6, 10))),
     TUNA(Food(intArrayOf(Items.TUNA_361), HealingEffect(10))),
     CHOPPED_TUNA(Food(intArrayOf(Items.CHOPPED_TUNA_7086, Items.BOWL_1923), HealingEffect(10))),
     CHOPPED_ONION(Food(intArrayOf(Items.CHOPPED_ONION_1871, Items.BOWL_1923), HealingEffect(1), "It's sad to see a grown man/woman cry.")),

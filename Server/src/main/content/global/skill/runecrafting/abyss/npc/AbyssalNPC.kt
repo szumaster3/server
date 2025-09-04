@@ -44,12 +44,9 @@ class AbyssalNPC : AbstractNPC {
     private fun getPouch(player: Player): Item? {
         return when {
             !player.hasItem(Item(RunePouch.SMALL.pouch)) -> Item(RunePouch.SMALL.pouch)
-            !player.hasItem(Item(RunePouch.MEDIUM.pouch)) && !player.hasItem(RunePouch.MEDIUM.decayedPouch) -> Item(
-                RunePouch.MEDIUM.pouch)
-            !player.hasItem(Item(RunePouch.LARGE.pouch)) && !player.hasItem(RunePouch.LARGE.decayedPouch) -> Item(
-                RunePouch.LARGE.pouch)
-            !player.hasItem(Item(RunePouch.GIANT.pouch)) && !player.hasItem(RunePouch.GIANT.decayedPouch) -> Item(
-                RunePouch.GIANT.pouch)
+            !player.hasItem(Item(RunePouch.MEDIUM.pouch)) && !player.hasItem(RunePouch.MEDIUM.decayedPouch) -> Item(RunePouch.MEDIUM.pouch)
+            !player.hasItem(Item(RunePouch.LARGE.pouch)) && !player.hasItem(RunePouch.LARGE.decayedPouch) -> Item(RunePouch.LARGE.pouch)
+            !player.hasItem(Item(RunePouch.GIANT.pouch)) && !player.hasItem(RunePouch.GIANT.decayedPouch) -> Item(RunePouch.GIANT.pouch)
             else -> null
         }
     }

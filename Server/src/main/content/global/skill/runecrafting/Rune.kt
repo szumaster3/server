@@ -59,6 +59,7 @@ enum class Rune(val rune: Item, val level: Int, val experience: Double, private 
         /**
          * Returns the Rune matching the given name, or null if none.
          */
+        @JvmStatic
         fun forName(name: String): Rune? = values().find { it.name == name }
     }
 }

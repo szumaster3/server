@@ -3697,7 +3697,7 @@
   },
   {
     "ge_buy_limit": "20000",
-    "examine": "A rare catch.",
+    "examine": "Looks wrinkly.",
     "grand_exchange_price": "2397",
     "durability": null,
     "name": "Raw sea turtle",

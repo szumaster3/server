@@ -17,11 +17,7 @@ class PouchManager(val player: Player) {
         Items.GIANT_POUCH_5514 to Pouches(12, 140, 75),
     )
 
-    fun addToPouch(
-        itemId: Int,
-        amount: Int,
-        essence: Int,
-    ) {
+    fun addToPouch(itemId: Int, amount: Int, essence: Int) {
         val pouchId = if (isDecayedPouch(itemId)) itemId - 1 else itemId
         if (!checkRequirement(pouchId)) {
             sendMessage(player, "You lack the required level to use this pouch.")
@@ -173,11 +169,7 @@ class PouchManager(val player: Player) {
         return pouches[pouchId - 1] != null
     }
 
-    class Pouches(
-        val capacity: Int,
-        val maxCharges: Int,
-        val levelRequirement: Int,
-    ) {
+    class Pouches(val capacity: Int, val maxCharges: Int, val levelRequirement: Int) {
         var container = Container(capacity)
         var currentCap = capacity
         var charges = maxCharges

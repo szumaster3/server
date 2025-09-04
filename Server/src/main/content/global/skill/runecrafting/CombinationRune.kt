@@ -29,6 +29,7 @@ enum class CombinationRune(val rune: Item, val level: Int, val experience: Doubl
         /**
          * Gets the matching [CombinationRune] for a given [altar] and [item].
          */
+        @JvmStatic
         fun forAltar(altar: Altar, item: Item): CombinationRune? {
             for (rune in values()) {
                 for (alt in rune.altars) {
