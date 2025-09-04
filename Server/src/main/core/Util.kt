@@ -1,11 +1,16 @@
 package core
 
+import core.game.node.entity.player.Player
+import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import core.game.world.map.Location
+import core.game.world.repository.Repository
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.stream.Collectors
 import kotlin.math.abs
 import kotlin.math.pow
@@ -282,4 +287,47 @@ object Util {
         }
     }
 
+    /**
+     * Bans a player by username for a specified duration.
+     */
+    @JvmStatic
+    fun banPlayer(username: String, durationString: String) {
+        if (!GameWorld.accountStorage.checkUsernameTaken(username)) {
+            throw IllegalArgumentException("Invalid username: $username")
+        }
+
+        val playerToBan: Player? = Repository.getPlayerByName(username)
+        val durationTokens = durationString.toCharArray()
+        var intToken = ""
+        var durationMillis = 0L
+        var durationUnit: TimeUnit = TimeUnit.NANOSECONDS
+
+        for (token in durationTokens) {
+            if (token.toString().toIntOrNull() != null) {
+                intToken += token
+            } else {
+                val durationInt = (intToken.toIntOrNull() ?: throw IllegalArgumentException("Invalid duration: $intToken"))
+                durationUnit = when (token) {
+                    'd' -> TimeUnit.DAYS
+                    'h' -> TimeUnit.HOURS
+                    'm' -> TimeUnit.MINUTES
+                    's' -> TimeUnit.SECONDS
+                    else -> TimeUnit.SECONDS
+                }
+                durationMillis = durationUnit.toMillis(durationInt.toLong())
+            }
+        }
+
+        playerToBan?.details?.accountInfo?.banEndTime = System.currentTimeMillis() + durationMillis
+        playerToBan?.clear()
+
+        GameWorld.Pulser.submit(object : Pulse(2) {
+            override fun pulse(): Boolean {
+                val info = GameWorld.accountStorage.getAccountInfo(username)
+                info.banEndTime = System.currentTimeMillis() + durationMillis
+                GameWorld.accountStorage.update(info)
+                return true
+            }
+        })
+    }
 }

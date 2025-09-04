@@ -36,7 +36,7 @@ class RellekkaPlugin : InteractionListener, MapArea {
         private val DOWN2B: Location? = Location.create(2727, 3805, 1)
 
         private val STAIRS = intArrayOf(Scenery.STEPS_19690, Scenery.STEPS_19691)
-        private val JARVALD_WRAPPER = NPCs.NULL_2435
+        private val JARVALD_NPC = intArrayOf(NPCs.NULL_2435, NPCs.JARVALD_2436, NPCs.JARVALD_2437,NPCs.JARVALD_2438)
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2602, 3639, 2739, 3741))
@@ -98,7 +98,7 @@ class RellekkaPlugin : InteractionListener, MapArea {
          * Handles use an item on Jarvald.
          */
 
-        onUseAnyWith(IntType.NPC, JARVALD_WRAPPER) { player, _, with ->
+        onUseAnyWith(IntType.NPC, *JARVALD_NPC) { player, _, with ->
             sendNPCDialogue(player, with.id, "Thank you, but I have no need for that!")
             return@onUseAnyWith true
         }

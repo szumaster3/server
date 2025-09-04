@@ -24,8 +24,7 @@ class BardurPlugin : InteractionListener {
          * Handles interaction with Bardur NPCs.
          */
 
-        onUseWith(IntType.NPC, exchangeItemIDs, NPCs.BARDUR_2879) { player, node, _ ->
-
+        onUseWith(IntType.NPC, exchangeItemIDs, NPCs.BARDUR_2879) { player, _, node ->
             val npc = node.asNpc()
             if (npc.inCombat()) {
                 sendMessage(player, "He's busy right now.")
@@ -33,11 +32,7 @@ class BardurPlugin : InteractionListener {
             }
 
             if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.BARDUR_2879,
-                    "I do not trust you Outlander, I will not accept your gifts, no matter what your intention..."
-                )
+                sendNPCDialogue(player, NPCs.BARDUR_2879, "I do not trust you Outlander, I will not accept your gifts, no matter what your intention...")
             } else {
                 npc.impactHandler.disabledTicks = 60
                 openDialogue(player, BardurExchangeDialogue())
