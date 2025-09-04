@@ -1,6 +1,7 @@
 package content.global.skill.crafting.pottery
 
 import core.api.*
+import core.game.interaction.Clocks
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.SkillPulse
@@ -36,9 +37,9 @@ class PotteryCraftingPulse(player: Player?, node: Item?, var amount: Int, val po
     }
 
     override fun reward(): Boolean {
-        if (++ticks % 5 != 0) {
-            return false
-        }
+        if (!clockReady(player, Clocks.SKILLING)) return false
+        delayClock(player, Clocks.SKILLING, 5)
+
         if (removeItem(player, SOFT_CLAY)) {
             if (pottery == Pottery.BOWL && withinDistance(player, Location(3086, 3410, 0))) {
                 setAttribute(player, "/save:diary:varrock:spun-bowl", true)

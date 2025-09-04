@@ -85,7 +85,6 @@ class RawMaterialPlugin : InteractionListener {
                             }
 
                             animate(player, Animations.HUMAN_CHISEL_LIMESTONE_4470)
-                            playAudio(player, Sounds.CHISEL_2586)
 
                             if (removeItem(player, used.id)) {
                                 val successProbability = BASE_SUCCESS_PROBABILITY + getStatLevel(player, Skills.CRAFTING) * SUCCESS_PER_LEVEL

@@ -30,7 +30,7 @@ class WeavingPulse(player: Player?, node: Scenery?, private val type: Weaving, p
             sendMessage(player, "You need a crafting level of at least ${type.level} to do this.")
             return false
         }
-        if (!inInventory(player, type.required.id)) {
+        if (!inInventory(player, type.required.id, type.required.amount)) {
             sendMessage(player, "You need ${type.required.amount} $required$suffix to weave $article ${type.product.name.lowercase()}.")
             return false
         }

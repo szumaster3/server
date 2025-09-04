@@ -46,9 +46,7 @@ class MakingHistoryPlugin : InteractionListener {
         }
 
         onDig(Location(2440, 3145, 0)) { player ->
-            if (inInventory(player, Items.ENCHANTED_KEY_6754) &&
-                getVarbit(player, MHUtils.ERIN_PROGRESS) >= 1
-            ) {
+            if (inInventory(player, Items.ENCHANTED_KEY_6754) && getVarbit(player, MHUtils.ERIN_PROGRESS) >= 1) {
                 sendDialogue(player, "You use the spade and find a chest. Wonder what's inside?")
                 addItemOrDrop(player, Items.CHEST_6759)
                 setVarbit(player, MHUtils.ERIN_PROGRESS, 2, true)
@@ -58,11 +56,7 @@ class MakingHistoryPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.ENCHANTED_KEY_6754, Items.CHEST_6759) { player, _, _ ->
             if (removeItem(player, Item(Items.CHEST_6759))) {
-                sendDialogueLines(
-                    player,
-                    "You look in the chest and find a journal, and then you throw away",
-                    "the chest.",
-                )
+                sendDialogueLines(player, "You look in the chest and find a journal, and then you throw away", "the chest.")
                 addItemOrDrop(player, Items.JOURNAL_6755)
                 setVarbit(player, MHUtils.ERIN_PROGRESS, 4, true)
                 setAttribute(player, MHUtils.ATTRIBUTE_ERIN_PROGRESS, true)
@@ -77,35 +71,24 @@ class MakingHistoryPlugin : InteractionListener {
                 return@on true
             }
 
-            when {
-                inBorders(player, getRegionBorders(10574)) -> {
-                    sendMessage(player, "It's very cold")
-                    playAudio(player, Sounds.HISTORY_KEY_COLD_1198)
-                }
-                inBorders(player, getRegionBorders(10546)) -> {
-                    sendMessage(player, "It's cold")
-                    playAudio(player, Sounds.HISTORY_KEY_COLD_1198)
-                }
-                inBorders(player, getRegionBorders(10290)) -> {
-                    sendMessage(player, "It's warm")
-                    playAudio(player, Sounds.HISTORY_KEY_WARM_1202)
-                }
-                inBorders(player, getRegionBorders(10289)) -> {
-                    sendMessage(player, "It's hot")
-                    playAudio(player, Sounds.HISTORY_KEY_HOT_1200)
-                }
-                inBorders(player, getRegionBorders(9776)) -> {
-                    sendMessage(player, "It's very hot")
-                    playAudio(player, Sounds.HISTORY_KEY_HOT_1200)
-                }
-                inBorders(player, getRegionBorders(9777)) -> {
-                    sendMessage(player, "Ouch! It's burning hot and warmer than last time")
-                    playAudio(player, Sounds.HISTORY_KEY_BURNING_1197)
-                }
-                else -> {
-                    sendMessage(player, "It's freezing")
-                    playAudio(player, Sounds.HISTORY_KEY_FREEZING_1199)
-                }
+            val keyHints = listOf(
+                getRegionBorders(10574) to ("It's very cold" to Sounds.HISTORY_KEY_COLD_1198),
+                getRegionBorders(10546) to ("It's cold" to Sounds.HISTORY_KEY_COLD_1198),
+                getRegionBorders(10290) to ("It's warm" to Sounds.HISTORY_KEY_WARM_1202),
+                getRegionBorders(10289) to ("It's hot" to Sounds.HISTORY_KEY_HOT_1200),
+                getRegionBorders(9776) to ("It's very hot" to Sounds.HISTORY_KEY_HOT_1200),
+                getRegionBorders(9777) to ("Ouch! It's burning hot and warmer than last time" to Sounds.HISTORY_KEY_BURNING_1197),
+            )
+
+            val match = keyHints.firstOrNull { (region, _) -> inBorders(player, region) }
+
+            if (match != null) {
+                val (message, sound) = match.second
+                sendMessage(player, message)
+                playAudio(player, sound)
+            } else {
+                sendMessage(player, "It's freezing")
+                playAudio(player, Sounds.HISTORY_KEY_FREEZING_1199)
             }
 
             return@on true

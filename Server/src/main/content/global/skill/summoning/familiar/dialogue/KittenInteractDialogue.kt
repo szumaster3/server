@@ -95,6 +95,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
                                     else -> return true
                                 }
                                 val item = Item(hellcatID)
+                                playAudio(player, Sounds.CAT_INTO_HELLCAT_1008)
                                 player.familiarManager.morphPet(item, false, pet.location)
                                 sendMessage(player, "Your cat suddenly transforms!")
                                 familiar.face(player)
