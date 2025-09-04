@@ -34,8 +34,19 @@ class DraugenNPC(val player: Player) : NPC(NPCs.THE_DRAUGEN_1279, player.locatio
         super.finalizeDeath(killer)
         setAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_KILL, true)
         removeAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_DRAUGEN_LOCATION)
-        if (removeItem(player, Item(Items.HUNTERS_TALISMAN_3696), Container.INVENTORY)) {
-            addItem(player, Items.HUNTERS_TALISMAN_3697, 1, Container.INVENTORY)
-        }
+
+        val oldTalisman = Items.HUNTERS_TALISMAN_3696
+        val newTalisman = Items.HUNTERS_TALISMAN_3697
+
+        /*
+         * Remove all old talismans from inventory and bank.
+         */
+        removeAll(player, oldTalisman, Container.INVENTORY)
+        removeAll(player, oldTalisman, Container.BANK)
+
+        /*
+         * Add new talisman to inventory
+         */
+        addItem(player, newTalisman, 1, Container.INVENTORY)
     }
 }
