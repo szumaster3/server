@@ -19,7 +19,7 @@ import shared.consts.NPCs
 class RockCrabNPC(id: Int = -1, location: Location? = null) : AbstractNPC(id, location, false) {
 
     private var aggressor = false
-    private var target: Player? = null
+    private var target: Entity? = null
 
     init {
         if (id != -1 && location != null) {
