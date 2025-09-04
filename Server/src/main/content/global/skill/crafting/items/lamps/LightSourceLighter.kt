@@ -13,7 +13,7 @@ import core.plugin.Plugin
 import shared.consts.Items
 
 @Initializable
-class LightSourcePlugin : UseWithHandler(Items.TINDERBOX_590, Items.CANDLE_36, Items.BLACK_CANDLE_38) {
+class LightSourceLighter : UseWithHandler(Items.TINDERBOX_590, Items.CANDLE_36, Items.BLACK_CANDLE_38) {
     override fun newInstance(arg: Any?): Plugin<Any> {
         addHandler(Items.TINDERBOX_590, ITEM_TYPE, this)
         addHandler(Items.UNLIT_TORCH_596, ITEM_TYPE, this)

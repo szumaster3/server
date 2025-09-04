@@ -1,6 +1,6 @@
 package content.region.karamja.taibwo.quest.junglepotion.plugin
 
-import content.global.skill.herblore.HerbItem
+import content.global.skill.herblore.herbs.HerbItem
 import core.api.addItem
 import core.api.replaceScenery
 import core.api.sendItemDialogue

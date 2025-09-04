@@ -7,7 +7,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import core.tools.Log
 
-class LightExtinguishPlugin : InteractionListener {
+class LightSourceExtinguisher : InteractionListener {
 
     override fun defineListeners() {
         fun Container.replace(item: Item, with: Item) {

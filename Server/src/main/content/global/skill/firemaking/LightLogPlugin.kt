@@ -11,12 +11,16 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
 
+/**
+ * Represents the plugin used to light a log.
+ * @author Vexia
+ */
 @Initializable
-class FiremakingHandler : OptionHandler() {
+class LightLogPlugin : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         submitIndividualPulse(
             player,
-            FireMakingPulse(
+            FireMakingPlugin(
                 player,
                 (node as Item),
                 (node as GroundItem)

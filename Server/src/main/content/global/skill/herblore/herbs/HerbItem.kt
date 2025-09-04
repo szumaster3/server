@@ -1,4 +1,4 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.herbs
 
 import core.game.node.item.Item
 import shared.consts.Items

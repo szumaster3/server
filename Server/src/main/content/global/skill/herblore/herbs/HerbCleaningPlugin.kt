@@ -1,4 +1,4 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.herbs
 
 import core.api.*
 import core.game.interaction.IntType
@@ -16,7 +16,10 @@ class HerbCleaningPlugin : InteractionListener {
             val herb: HerbItem = HerbItem.forItem(node as Item) ?: return@on true
 
             if (getDynLevel(player, Skills.HERBLORE) < herb.level) {
-                sendMessage(player, "You cannot clean this herb. You need a Herblore level of " + herb.level + " to attempt this.")
+                sendMessage(
+                    player,
+                    "You cannot clean this herb. You need a Herblore level of " + herb.level + " to attempt this."
+                )
                 return@on true
             }
 
@@ -28,11 +31,11 @@ class HerbCleaningPlugin : InteractionListener {
             sendMessage(
                 player,
                 "You clean the dirt from the " +
-                    herb.product.name
-                        .lowercase()
-                        .replace("clean", "")
-                        .trim { it <= ' ' } +
-                    " leaf.",
+                        herb.product.name
+                            .lowercase()
+                            .replace("clean", "")
+                            .trim { it <= ' ' } +
+                        " leaf.",
             )
             return@on true
         }

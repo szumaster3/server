@@ -1,5 +1,6 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.potions
 
+import content.global.skill.herblore.HerblorePulse
 import core.api.amountInInventory
 import core.api.asItem
 import core.game.dialogue.SkillDialogueHandler

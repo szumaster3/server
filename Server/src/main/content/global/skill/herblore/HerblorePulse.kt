@@ -1,5 +1,6 @@
 package content.global.skill.herblore
 
+import content.global.skill.herblore.potions.GenericPotion
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse

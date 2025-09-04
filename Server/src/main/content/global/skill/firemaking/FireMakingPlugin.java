@@ -23,7 +23,7 @@ import static core.api.ContentAPIKt.replaceSlot;
 /**
  * Represents making fire plugin.
  */
-public final class FireMakingPulse extends SkillPulse<Item> {
+public final class FireMakingPlugin extends SkillPulse<Item> {
 
     private static final Animation ANIMATION = new Animation(Animations.TINDERBOX_733);
 
@@ -42,7 +42,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
      * @param node       the node
      * @param groundItem the ground item
      */
-    public FireMakingPulse(Player player, Item node, GroundItem groundItem) {
+    public FireMakingPlugin(Player player, Item node, GroundItem groundItem) {
         super(player, node);
         this.fire = Log.forId(node.getId());
         if (groundItem == null) {

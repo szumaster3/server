@@ -21,7 +21,7 @@ import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
 
-class FishingPlugin : InteractionListener {
+class FishingListener : InteractionListener {
     override fun defineListeners() {
         val spotIds = FishingSpot.values().flatMap { it.ids.toList() }.toIntArray()
 

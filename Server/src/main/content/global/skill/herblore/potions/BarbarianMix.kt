@@ -1,4 +1,4 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.potions
 
 import shared.consts.Items
 

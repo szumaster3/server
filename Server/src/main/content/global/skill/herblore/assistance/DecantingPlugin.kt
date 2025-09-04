@@ -1,4 +1,4 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.assistance
 
 import content.data.consumables.Consumables
 import core.api.*
@@ -60,21 +60,9 @@ class DecantingPlugin : InteractionListener {
             }
 
             if (leftoverDose != 0 && fullDoses == 0) {
-                replaceSlot(
-                    player,
-                    with.slot,
-                    Item(potionUsed.ids[potionUsed.ids.size - totalDosage]),
-                    with,
-                    Container.INVENTORY,
-                )
+                replaceSlot(player, with.slot, Item(potionUsed.ids[potionUsed.ids.size - totalDosage]), with, Container.INVENTORY)
             } else if (leftoverDose != 0) {
-                replaceSlot(
-                    player,
-                    used.slot,
-                    Item(potionUsed.ids[potionUsed.ids.size - leftoverDose]),
-                    used,
-                    Container.INVENTORY,
-                )
+                replaceSlot(player, used.slot, Item(potionUsed.ids[potionUsed.ids.size - leftoverDose]), used, Container.INVENTORY)
             }
 
             if (leftoverDose == 0 || fullDoses == 0) {

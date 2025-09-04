@@ -1,4 +1,4 @@
-package content.global.skill.herblore
+package content.global.skill.herblore.potions
 
 import core.api.getStatLevel
 import core.api.hasRequirement
@@ -22,16 +22,44 @@ class GuthixRestPlugin : InteractionListener {
         HERB_TEA_MIX_3(listOf(Items.CLEAN_MARRENTILL_251), Items.HERB_TEA_MIX_4468),
         HERB_TEA_MIX_4(listOf(Items.CLEAN_HARRALANDER_255, Items.CLEAN_MARRENTILL_251), Items.HERB_TEA_MIX_4470),
         HERB_TEA_MIX_5(listOf(Items.CLEAN_HARRALANDER_255, Items.CLEAN_GUAM_249), Items.HERB_TEA_MIX_4472),
-        HERB_TEA_MIX_6(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249), Items.HERB_TEA_MIX_4474), HERB_TEA_MIX_7(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_MARRENTILL_251), Items.HERB_TEA_MIX_4476),
-        HERB_TEA_MIX_8(listOf(Items.CLEAN_HARRALANDER_255, Items.CLEAN_MARRENTILL_251, Items.CLEAN_GUAM_249), Items.HERB_TEA_MIX_4478),
-        HERB_TEA_MIX_9(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249, Items.CLEAN_MARRENTILL_251), Items.HERB_TEA_MIX_4480),
-        HERB_TEA_MIX_10(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249, Items.CLEAN_HARRALANDER_255), Items.HERB_TEA_MIX_4482),
-        COMPLETE_MIX(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249, Items.CLEAN_MARRENTILL_251, Items.CLEAN_HARRALANDER_255), Items.GUTHIX_REST3_4419),
+        HERB_TEA_MIX_6(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249), Items.HERB_TEA_MIX_4474), HERB_TEA_MIX_7(listOf(
+            Items.CLEAN_GUAM_249,
+            Items.CLEAN_MARRENTILL_251
+        ), Items.HERB_TEA_MIX_4476
+        ),
+        HERB_TEA_MIX_8(listOf(Items.CLEAN_HARRALANDER_255, Items.CLEAN_MARRENTILL_251, Items.CLEAN_GUAM_249),
+            Items.HERB_TEA_MIX_4478
+        ),
+        HERB_TEA_MIX_9(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249, Items.CLEAN_MARRENTILL_251),
+            Items.HERB_TEA_MIX_4480
+        ),
+        HERB_TEA_MIX_10(listOf(Items.CLEAN_GUAM_249, Items.CLEAN_GUAM_249, Items.CLEAN_HARRALANDER_255),
+            Items.HERB_TEA_MIX_4482
+        ),
+        COMPLETE_MIX(listOf(
+            Items.CLEAN_GUAM_249,
+            Items.CLEAN_GUAM_249,
+            Items.CLEAN_MARRENTILL_251,
+            Items.CLEAN_HARRALANDER_255
+        ), Items.GUTHIX_REST3_4419
+        ),
     }
 
     override fun defineListeners() {
         val herbsArray = herbIds.toIntArray()
-        val teaMixes = intArrayOf(Items.HERB_TEA_MIX_4464, Items.HERB_TEA_MIX_4466, Items.HERB_TEA_MIX_4468, Items.HERB_TEA_MIX_4470, Items.HERB_TEA_MIX_4472, Items.HERB_TEA_MIX_4474, Items.HERB_TEA_MIX_4476, Items.HERB_TEA_MIX_4478, Items.HERB_TEA_MIX_4480, Items.HERB_TEA_MIX_4482, Items.CUP_OF_HOT_WATER_4460)
+        val teaMixes = intArrayOf(
+            Items.HERB_TEA_MIX_4464,
+            Items.HERB_TEA_MIX_4466,
+            Items.HERB_TEA_MIX_4468,
+            Items.HERB_TEA_MIX_4470,
+            Items.HERB_TEA_MIX_4472,
+            Items.HERB_TEA_MIX_4474,
+            Items.HERB_TEA_MIX_4476,
+            Items.HERB_TEA_MIX_4478,
+            Items.HERB_TEA_MIX_4480,
+            Items.HERB_TEA_MIX_4482,
+            Items.CUP_OF_HOT_WATER_4460
+        )
 
         onUseWith(IntType.ITEM, herbsArray, *teaMixes) { player, used, base ->
             return@onUseWith handleMix(player, used.asItem(), base.asItem())

@@ -13,7 +13,8 @@ import shared.consts.Quests
 import kotlin.math.min
 
 
-class FiremakingPlugin : InteractionListener {
+class FiremakingListener : InteractionListener {
+
     companion object {
         private val dyesIDs = Origami.values().map { it.base }.toIntArray()
         private val balloonIDs = Origami.values().map { it.product }.toIntArray()
@@ -28,7 +29,7 @@ class FiremakingPlugin : InteractionListener {
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
             player.pulseManager.run(
-                FireMakingPulse(
+                FireMakingPlugin(
                     player,
                     with.asItem(),
                     null
@@ -38,13 +39,7 @@ class FiremakingPlugin : InteractionListener {
         }
 
         onUseWith(IntType.GROUND_ITEM, Items.TINDERBOX_590, *logs) { player, _, with ->
-            player.pulseManager.run(
-                FireMakingPulse(
-                    player,
-                    with.asItem(),
-                    with as GroundItem
-                )
-            )
+            player.pulseManager.run(FireMakingPlugin(player, with.asItem(), with as GroundItem))
             return@onUseWith true
         }
 
@@ -59,15 +54,7 @@ class FiremakingPlugin : InteractionListener {
                 sendMessage(player, "You don't have required items in your inventory.")
             } else {
                 addItem(player, firelighter.product, 1)
-                sendMessage(
-                    player,
-                    "You coat the log with the " +
-                        getItemName(firelighter.base)
-                            .replaceFirst(
-                                "firelighter",
-                                "chemicals",
-                            ).lowercase() + ".",
-                )
+                sendMessage(player, "You coat the log with the " + getItemName(firelighter.base).replaceFirst("firelighter", "chemicals").lowercase() + ".",)
             }
             return@onUseWith true
         }
