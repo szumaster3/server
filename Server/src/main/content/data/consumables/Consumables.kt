@@ -404,7 +404,7 @@ enum class Consumables {
                     consumablesMap[id] = consumable
                 }
                 if (consumable.consumable is Potion) {
-                    potionsList.addAll(consumable.consumable.ids)
+                    potionsList.addAll(consumable.consumable.ids.toList())
                 }
             }
 
