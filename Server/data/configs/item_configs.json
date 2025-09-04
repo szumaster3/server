@@ -2806,14 +2806,14 @@
     "equipment_slot": "2"
   },
   {
-    "examine": "An urn containing Glarial's ashes./An empty urn made for Glarial's ashes.",
+    "examine": "An urn containing Glarial's ashes.",
     "durability": null,
     "name": "Glarial's urn",
     "archery_ticket_price": "0",
     "id": "296"
   },
   {
-    "examine": "An urn containing Glarial's ashes./An empty urn made for Glarial's ashes.",
+    "examine": "An empty urn made for Glarial's ashes.",
     "durability": null,
     "name": "Glarial's urn",
     "archery_ticket_price": "0",
@@ -3942,7 +3942,7 @@
     "id": "422"
   },
   {
-    "examine": "(empty) It's empty...  (full) It's full of pigeons.",
+    "examine": "It's full of pigeons.",
     "durability": null,
     "name": "Pigeon cage",
     "weight": "0.1",
@@ -3950,7 +3950,7 @@
     "id": "424"
   },
   {
-    "examine": "(empty) It's empty...  (full) It's full of pigeons.",
+    "examine": "It's empty...",
     "durability": null,
     "name": "Pigeon cage",
     "weight": "0.1",
@@ -5037,7 +5037,7 @@
   },
   {
     "remove_sleeves": "true",
-    "examine": "I feel closer to the gods when I am wearing this. (Top) If a shade had knees, this would keep them nice and warm. (Bottom)",
+    "examine": "I feel closer to the gods when I am wearing this.",
     "durability": null,
     "name": "Shade robe",
     "weight": "2",
@@ -5047,7 +5047,7 @@
     "equipment_slot": "4"
   },
   {
-    "examine": "I feel closer to the gods when I am wearing this. (Top) If a shade had knees, this would keep them nice and warm. (Bottom)",
+    "examine": "If a shade had knees, this would keep them nice and warm.",
     "durability": null,
     "name": "Shade robe",
     "weight": "2",
@@ -70102,6 +70102,8 @@
     "bonuses": "4,3,-2,0,0,0,2,1,0,0,0,5,0,0,0",
     "equip_audio": "2248",
     "render_anim": "2584",
+    "attack_audios": "2500,2500,2517,2500",
+    "attack_anims": "381,381,390,381",
     "equipment_slot": "3"
   },
   {
@@ -72458,35 +72460,35 @@
     "id": "7960"
   },
   {
-    "examine": "A diary with one/two/three/four/five page(s).",
+    "examine": "A diary with one page.",
     "durability": null,
     "name": "Burnt diary",
     "archery_ticket_price": "0",
     "id": "7961"
   },
   {
-    "examine": "A diary with one/two/three/four/five page(s).",
+    "examine": "A diary with two pages.",
     "durability": null,
     "name": "Burnt diary",
     "archery_ticket_price": "0",
     "id": "7962"
   },
   {
-    "examine": "A diary with one/two/three/four/five page(s).",
+    "examine": "A diary with three pages.",
     "durability": null,
     "name": "Burnt diary",
     "archery_ticket_price": "0",
     "id": "7963"
   },
   {
-    "examine": "A diary with one/two/three/four/five page(s).",
+    "examine": "A diary with four pages.",
     "durability": null,
     "name": "Burnt diary",
     "archery_ticket_price": "0",
     "id": "7964"
   },
   {
-    "examine": "A diary with one/two/three/four/five page(s).",
+    "examine": "A diary with five pages.",
     "durability": null,
     "name": "Burnt diary",
     "archery_ticket_price": "0",
@@ -115164,7 +115166,7 @@
   },
   {
     "destroy_message": "If you drop this ink, you will need to call to the guards for a replacement.",
-    "examine": "An empty ink bottle./This is full of ink.",
+    "examine": "This is full of ink.",
     "durability": null,
     "name": "Ink bottle",
     "tradeable": "false",
@@ -115190,7 +115192,7 @@
   },
   {
     "destroy_message": "If you drop this ink, you will need to call to the guards for a replacement.",
-    "examine": "An empty ink bottle./This is full of ink.",
+    "examine": "An empty ink bottle.",
     "durability": null,
     "name": "Ink bottle",
     "tradeable": "false",

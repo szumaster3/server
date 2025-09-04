@@ -1,6 +1,9 @@
 package content.region.fremennik.plugin
 
+import content.data.GameAttributes
+import content.region.kandarin.pisc.quest.phoenix.InPyreNeed
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
@@ -9,7 +12,7 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.Components
 
 /**
- * Represents all possible ship destinations and their properties.
+ * Travel destinations available in Fremennik.
  */
 enum class Travel(val destination: String, val location: Location, val animation: Int, val component: Int? = null, val slot: Int = -1) {
     RELLEKKA_TO_MISC(      "Miscellania",       Location(2581, 3845, 0), 1372, Components.MISC_SHIPJOURNEY_224,     7),
@@ -33,25 +36,37 @@ object FremennikShipHelper {
 
     @JvmStatic
     fun sail(player: Player, travel: Travel) {
-        val animDuration = animationDuration(Animation(travel.animation))
-        lock(player, animDuration + 3)
-        lockInteractions(player, animDuration)
-        sendMessage(player, "You board the longship...")
+        val delay = 3
+        val animDuration = Animation(travel.animation).duration
+        setAttribute(player, GameAttributes.ORIGINAL_LOCATION, player.location)
+
+        lock(player, 2 * animDuration)
+        lockInteractions(player, 2 * animDuration)
+
         openOverlay(player, Components.FADE_TO_BLACK_115)
-        travel.component?.let { openInterface(player, it) }
-        if (travel.component != null && travel.slot >= 0) {
-            animateInterface(player, travel.component, travel.slot, travel.animation)
+        sendMessage(player, "You board the longship...")
+
+        registerLogoutListener(player, "fremennik-travel") { p ->
+            p.location = getAttribute(p, GameAttributes.ORIGINAL_LOCATION, player.location)
         }
-        teleport(player, travel.location, TeleportManager.TeleportType.INSTANT, 1)
-        submitWorldPulse(object : Pulse(animDuration + 3) {
-            override fun pulse(): Boolean {
-                openOverlay(player, Components.FADE_FROM_BLACK_170)
-                sendMessage(player, "The ship arrives at ${travel.destination}.")
-                closeInterface(player)
-                closeOverlay(player)
-                unlock(player)
-                return true
+
+        travel.component
+            ?.takeIf { travel.slot >= 0 }
+            ?.let {
+                openInterface(player, it)
+                animateInterface(player, it, travel.slot, travel.animation)
             }
-        })
+
+        teleport(player, travel.location, TeleportManager.TeleportType.INSTANT, 1)
+
+        queueScript(player, animDuration + delay, QueueStrength.SOFT) {
+            openOverlay(player, Components.FADE_FROM_BLACK_170)
+            sendMessage(player, "The ship arrives at ${travel.destination}.")
+            clearLogoutListener(player, "fremennik-travel")
+            closeInterface(player)
+            closeOverlay(player)
+            unlock(player)
+            return@queueScript stopExecuting(player)
+        }
     }
 }
