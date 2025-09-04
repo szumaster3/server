@@ -15,7 +15,8 @@ private const val COUNCIL_WORKER = 1287
 /**
  * Represents the Council Worker dialogue file.
  */
-class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean = false, val beerId: Int? = null) : DialogueFile() {
+class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean = false, val beerId: Int? = null) :
+    DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         if (isBeerInteraction) {
@@ -26,12 +27,7 @@ class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean 
                 }
 
                 1 -> {
-                    npc(
-                        COUNCIL_WORKER,
-                        "Ta very much like. That'll hit the spot nicely.. Here,",
-                        "You can have this. I picked it up as a souvenir on me",
-                        "last holz.",
-                    )
+                    npc(COUNCIL_WORKER, "Ta very much like. That'll hit the spot nicely.. Here,", "You can have this. I picked it up as a souvenir on me", "last holz.")
                     if (beerId != null) {
                         if (removeItem(player!!, beerId)) {
                             addItem(player!!, Items.STRANGE_OBJECT_3713)
@@ -44,14 +40,12 @@ class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean 
             }
         } else if (questStage in 1..99) {
             when (stage) {
-                START_DIALOGUE ->
-                    if (getQuestStage(player!!, Quests.THE_FREMENNIK_TRIALS) > 0) {
-                        player("I know this is an odd question, but are you", "a member of the elder council?")
-                        stage =
-                            1
-                    } else {
-                        end()
-                    }
+                START_DIALOGUE -> if (getQuestStage(player!!, Quests.THE_FREMENNIK_TRIALS) > 0) {
+                    player("I know this is an odd question, but are you", "a member of the elder council?")
+                    stage = 1
+                } else {
+                    end()
+                }
 
                 1 -> {
                     npc(COUNCIL_WORKER, "'fraid not, ${if (player!!.isMale) "sir" else "miss"}.")
@@ -59,22 +53,17 @@ class CouncilWorkerDialogue(val questStage: Int, var isBeerInteraction: Boolean 
                 }
 
                 2 -> {
-                    npc(
-                        COUNCIL_WORKER,
-                        "Say, would you do me a favor? I'm quite parched.",
-                        "If you bring me a beer, I'll make it worthwhile.",
-                    )
+                    npc(COUNCIL_WORKER, "Say, would you do me a favor? I'm quite parched.", "If you bring me a beer, I'll make it worthwhile.")
                     stage++
                 }
 
-                3 ->
-                    if (inInventory(player!!, Items.BEER_3803) || inInventory(player!!, Items.BEER_1917)) {
-                        player("Oh, I have one here! Take it.")
-                        stage = 0
-                        isBeerInteraction = true
-                    } else {
-                        end()
-                    }
+                3 -> if (inInventory(player!!, Items.BEER_3803) || inInventory(player!!, Items.BEER_1917)) {
+                    player("Oh, I have one here! Take it.")
+                    stage = 0
+                    isBeerInteraction = true
+                } else {
+                    end()
+                }
             }
         }
     }
