@@ -3151,6 +3151,7 @@ fun dumpContainer(
         }
     }
 
+    player.bank.refresh()
     return dumpedCount
 }
 
