@@ -3,44 +3,50 @@ package content.global.plugin.iface
 import core.api.getVarbit
 import core.api.setVarbit
 import core.game.component.Component
-import core.game.interaction.InterfaceListener
+import core.game.component.ComponentDefinition
+import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
+import core.plugin.Initializable
+import core.plugin.Plugin
 import shared.consts.Components
 import shared.consts.Vars
 
 /**
  * Handles the world map interface.
- * @author Emperor, szu
+ * @author Emperor
  */
-class WorldMapInterface : InterfaceListener {
+@Initializable
+class WorldMapInterface : ComponentPlugin() {
+
     companion object {
-        private const val RESIZABLE_WINDOW = Components.TOPLEVEL_FULLSCREEN_746
-        private const val REGULAR_WINDOW = Components.TOPLEVEL_548
         private const val KEY_SORT_VARBIT = Vars.VARBIT_INTERFACE_WORLD_MAP_KEY_SORT_5367
-        private const val RESET_KEY_SORT = 0
         private const val MAX_KEY_SORT_VALUE = 3
     }
 
-    override fun defineInterfaceListeners() {
-        on(Components.WORLDMAP_755) { player, _, _, buttonID, _, _ ->
-            when (buttonID) {
-                3 -> openWorldMapWindow(player)
-                29 -> toggleKeySort(player)
+    @Throws(Throwable::class)
+    override fun newInstance(arg: Any?): Plugin<Any> {
+        ComponentDefinition.put(Components.WORLDMAP_755, this)
+        return this
+    }
+
+    override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
+        when (button) {
+            3 -> {
+                player.interfaceManager.openWindowsPane(
+                    Component(if (player.interfaceManager.isResizable) 746 else 548),
+                    2
+                )
+                player.packetDispatch.sendRunScript(1187, "ii", 0, 0)
+                player.updateSceneGraph(true)
+                return true
             }
-            return@on true
+            29 -> {
+                var keySort = getVarbit(player, KEY_SORT_VARBIT)
+                keySort = (keySort + 1) % MAX_KEY_SORT_VALUE
+                setVarbit(player, KEY_SORT_VARBIT, keySort)
+                return true
+            }
+            else -> return true
         }
-    }
-
-    private fun openWorldMapWindow(player: Player) {
-        val windowId = if (player.interfaceManager.isResizable) RESIZABLE_WINDOW else REGULAR_WINDOW
-        player.interfaceManager.openWindowsPane(Component(windowId), 2)
-        player.packetDispatch.sendRunScript(1187, "ii", RESET_KEY_SORT, RESET_KEY_SORT)
-        player.updateSceneGraph(true)
-    }
-
-    private fun toggleKeySort(player: Player) {
-        var keySort = getVarbit(player, KEY_SORT_VARBIT)
-        keySort = (keySort + 1) % MAX_KEY_SORT_VALUE
-        setVarbit(player, KEY_SORT_VARBIT, keySort)
     }
 }
