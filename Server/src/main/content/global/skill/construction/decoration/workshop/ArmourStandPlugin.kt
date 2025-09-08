@@ -242,19 +242,13 @@ class ArmourStandPlugin : UseWithHandler(
      * @param player The player repairing the item.
      * @param item   The damaged item.
      */
-    private fun repair(
-        player: Player,
-        item: Item,
-    ): Boolean {
+    private fun repair(player: Player, item: Item): Boolean {
         animate(player, Animations.CHURN_PLUMING_STAND_3654)
         getRepairType(player, item)
         return true
     }
 
-    private fun getRepairType(
-        player: Player,
-        item: Item,
-    ) {
+    private fun getRepairType(player: Player, item: Item) {
         val repairType = when (item.id) {
             Items.BROKEN_ARROW_687 -> BrokenItem.EquipmentType.ARROWS
             Items.BROKEN_STAFF_689 -> BrokenItem.EquipmentType.STAVES
@@ -275,21 +269,10 @@ class ArmourStandPlugin : UseWithHandler(
         }
     }
 
-    inner class RepairDialogue(
-        val item: Item,
-        var cost: Int,
-        var product: Item,
-    ) : DialogueFile() {
-        override fun handle(
-            componentID: Int,
-            buttonID: Int,
-        ) {
+    inner class RepairDialogue(val item: Item, var cost: Int, var product: Item) : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
-                0 -> sendDialogue(
-                    player!!,
-                    "Would you like to repair your ${getItemName(item.id)} for $cost gp?",
-                ).also { stage++ }
-
+                0 -> sendDialogue(player!!, "Would you like to repair your ${getItemName(item.id)} for $cost gp?").also { stage++ }
                 1 -> options("Yes, please", "No, thanks.").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {

@@ -21,11 +21,11 @@ class StatsTabInterface : InterfaceListener {
             if (getAttribute(player, "levelup:${config.skillID}", false)) {
                 removeAttributes(player, "levelup:${config.skillID}")
                 LevelUp.sendFlashingIcons(player, -1)
-                setVarp(player, 1230, ADVANCE_CONFIGS[config.skillID])
+                setVarp(player, Vars.VARP_STATS_TAB_1230, ADVANCE_CONFIGS[config.skillID])
                 openInterface(player, Components.STATS_TAB_741)
             } else {
                 openInterface(player, Components.SKILL_GUIDE_V2_499)
-                setVarp(player, 965, config.configID)
+                setVarp(player, Vars.VARP_ADVANCED_CONFIG_965, config.configID)
                 setAttribute(player, "skillMenu", config.configID)
             }
             if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {

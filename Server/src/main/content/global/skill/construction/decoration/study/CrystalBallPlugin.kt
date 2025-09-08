@@ -14,162 +14,110 @@ import shared.consts.Scenery
 
 class CrystalBallPlugin : InteractionListener {
 
-    /**
-     * Represents magical staves used in combination with the crystal ball or elemental magic.
-     *
-     * @property staffId the item ID of the staff
-     * @property start the animation played when beginning to use the staff
-     * @property end the animation played when finishing use
-     * @property cost the optional cost item (e.g., runes) required for using the staff
-     * @property type the type of the staff ([StaffType.REGULAR], [StaffType.BATTLE], or [StaffType.MYSTIC])
-     */
+    private enum class Element(val runeId: Int) {
+        AIR(Items.AIR_RUNE_556),
+        WATER(Items.WATER_RUNE_555),
+        EARTH(Items.EARTH_RUNE_557),
+        FIRE(Items.FIRE_RUNE_554);
+
+        override fun toString(): String = name.lowercase().replaceFirstChar { it.uppercase() }
+    }
+
+    private enum class StaffType {
+        REGULAR, BATTLE, MYSTIC;
+
+        /**
+         * Gets the cost (if required) for a given type of staff on the selected object.
+         */
+        fun getCostFor(sceneryId: Int): Item? = when (sceneryId) {
+            Scenery.CRYSTAL_BALL_13659 -> if (this == REGULAR) null else null
+            Scenery.ELEMENTAL_SPHERE_13660 -> when (this) {
+                REGULAR -> null
+                BATTLE -> Item(Items.AIR_RUNE_556, 100)
+                MYSTIC -> null
+            }
+            Scenery.CRYSTAL_OF_POWER_13661 -> when (this) {
+                REGULAR -> null
+                BATTLE -> Item(Items.AIR_RUNE_556, 100)
+                MYSTIC -> Item(Items.AIR_RUNE_556, 1000)
+            }
+            else -> null
+        }
+
+        fun isAllowedOn(sceneryId: Int): Boolean = getCostFor(sceneryId) != null || this == REGULAR
+    }
+
     private enum class Staff(
         val staffId: Int,
+        val element: Element,
+        val type: StaffType,
         val start: Animation,
         val end: Animation,
-        val cost: Item? = null,
-        var type: StaffType,
+        val baseCost: Item? = null,
     ) {
-        STAFF_OF_AIR(Items.STAFF_OF_AIR_1381, Animation(Animations.STAFF_OF_AIR_4043), Animation(Animations.STAFF_OF_AIR_4044), type = StaffType.REGULAR),
-        STAFF_OF_WATER(Items.STAFF_OF_WATER_1383, Animation(Animations.STAFF_OF_WATER_4047), Animation(Animations.STAFF_OF_WATER_4048), type = StaffType.REGULAR),
-        STAFF_OF_EARTH(Items.STAFF_OF_EARTH_1385, Animation(Animations.STAFF_OF_EARTH_4045), Animation(Animations.STAFF_OF_EARTH_4046), type = StaffType.REGULAR),
-        STAFF_OF_FIRE(Items.STAFF_OF_FIRE_1387, Animation(Animations.STAFF_OF_FIRE_4049), Animation(Animations.STAFF_OF_FIRE_4050), type = StaffType.REGULAR),
+        STAFF_OF_AIR(Items.STAFF_OF_AIR_1381, Element.AIR, StaffType.REGULAR, Animation(Animations.STAFF_OF_AIR_4043), Animation(Animations.STAFF_OF_AIR_4044)),
+        STAFF_OF_WATER(Items.STAFF_OF_WATER_1383, Element.WATER, StaffType.REGULAR, Animation(Animations.STAFF_OF_WATER_4047), Animation(Animations.STAFF_OF_WATER_4048)),
+        STAFF_OF_EARTH(Items.STAFF_OF_EARTH_1385, Element.EARTH, StaffType.REGULAR, Animation(Animations.STAFF_OF_EARTH_4045), Animation(Animations.STAFF_OF_EARTH_4046)),
+        STAFF_OF_FIRE(Items.STAFF_OF_FIRE_1387, Element.FIRE, StaffType.REGULAR, Animation(Animations.STAFF_OF_FIRE_4049), Animation(Animations.STAFF_OF_FIRE_4050)),
 
-        AIR_BATTLESTAFF(Items.AIR_BATTLESTAFF_1397, Animation(Animations.AIR_BATTLESTAFF_4051), Animation(Animations.AIR_BATTLESTAFF_4052), Item(Items.AIR_RUNE_556, 100), type = StaffType.BATTLE),
-        WATER_BATTLESTAFF(Items.WATER_BATTLESTAFF_1395, Animation(Animations.WATER_BATTLESTAFF_4055), Animation(Animations.WATER_BATTLESTAFF_4056), Item(Items.WATER_RUNE_555, 100), type = StaffType.BATTLE),
-        EARTH_BATTLESTAFF(Items.EARTH_BATTLESTAFF_1399, Animation(Animations.EARTH_STAFF_4053), Animation(Animations.EARTH_STAFF_4054), Item(Items.EARTH_RUNE_557, 100), type = StaffType.BATTLE),
-        FIRE_BATTLESTAFF(Items.FIRE_BATTLESTAFF_1393, Animation(Animations.FIRE_BATTLESTAFF_4057), Animation(Animations.FIRE_BATTLESTAFF_4058), Item(Items.FIRE_RUNE_554, 100), type = StaffType.BATTLE),
+        AIR_BATTLESTAFF(Items.AIR_BATTLESTAFF_1397, Element.AIR, StaffType.BATTLE, Animation(Animations.AIR_BATTLESTAFF_4051), Animation(Animations.AIR_BATTLESTAFF_4052), Item(Items.AIR_RUNE_556, 100)),
+        WATER_BATTLESTAFF(Items.WATER_BATTLESTAFF_1395, Element.WATER, StaffType.BATTLE, Animation(4059), Animation(4060), Item(Items.WATER_RUNE_555, 100)),
+        EARTH_BATTLESTAFF(Items.EARTH_BATTLESTAFF_1399, Element.EARTH, StaffType.BATTLE, Animation(4055), Animation(4056), Item(Items.EARTH_RUNE_557, 100)),
+        FIRE_BATTLESTAFF(Items.FIRE_BATTLESTAFF_1393, Element.FIRE, StaffType.BATTLE, Animation(Animations.FIRE_BATTLESTAFF_4057), Animation(Animations.FIRE_BATTLESTAFF_4058), Item(Items.FIRE_RUNE_554, 100)),
 
-        MYSTIC_AIR_STAFF(Items.MYSTIC_AIR_STAFF_1405, Animation(Animations.MYSTIC_AIR_STAFF_4059), Animation(Animations.MYSTIC_AIR_STAFF_4060), Item(Items.AIR_RUNE_556, 1000), type = StaffType.MYSTIC),
-        MYSTIC_WATER_STAFF(Items.MYSTIC_WATER_STAFF_1403, Animation(Animations.MYSTIC_WATER_STAFF_4063), Animation(Animations.MYSTIC_WATER_STAFF_4064), Item(Items.WATER_RUNE_555, 1000), type = StaffType.MYSTIC),
-        MYSTIC_EARTH_STAFF(Items.MYSTIC_EARTH_STAFF_1407, Animation(Animations.MYSTIC_EARTH_STAFF_4061), Animation(Animations.MYSTIC_EARTH_STAFF_4062), Item(Items.EARTH_RUNE_557, 1000), type = StaffType.MYSTIC),
-        MYSTIC_FIRE_STAFF(Items.MYSTIC_FIRE_STAFF_1401, Animation(Animations.MYSTIC_FIRE_STAFF_4065), Animation(Animations.MYSTIC_FIRE_STAFF_4066), Item(Items.FIRE_RUNE_554, 1000), type = StaffType.MYSTIC),
-        ;
+        MYSTIC_AIR_STAFF(Items.MYSTIC_AIR_STAFF_1405, Element.AIR, StaffType.MYSTIC, Animation(4061), Animation(4062), Item(Items.AIR_RUNE_556, 1000)),
+        MYSTIC_WATER_STAFF(Items.MYSTIC_WATER_STAFF_1403, Element.WATER, StaffType.MYSTIC, Animation(4069), Animation(4070), Item(Items.WATER_RUNE_555, 1000)),
+        MYSTIC_EARTH_STAFF(Items.MYSTIC_EARTH_STAFF_1407, Element.EARTH, StaffType.MYSTIC, Animation(4065), Animation(4066), Item(Items.EARTH_RUNE_557, 1000)),
+        MYSTIC_FIRE_STAFF(Items.MYSTIC_FIRE_STAFF_1401, Element.FIRE, StaffType.MYSTIC, Animation(4071), Animation(4072), Item(Items.FIRE_RUNE_554, 1000));
 
         companion object {
-            /**
-             * All staff enum entries.
-             */
-            val VALUES = values()
+            val MAP = values().associateBy { it.staffId }
+            val IDS = values().map { it.staffId }.toIntArray()
 
-            /**
-             * Map of staffId to [Staff] entry.
-             */
-            val MAP = VALUES.associateBy { it.staffId }
-
-            /**
-             * Array of all staff ids.
-             */
-            val ALL_STAFFS = VALUES.map { it.staffId }.toIntArray()
-
-            /**
-             * Gets the staff id for a type and elemental name.
-             *
-             * @param type the staff type.
-             * @param element the element contained in the staffs name.
-             * @return the matching staff id.
-             */
-            fun getProduct(type: StaffType, element: String): Int? = VALUES.firstOrNull { it.type == type && it.name.contains(element, ignoreCase = true) }?.staffId
-
-            /**
-             * Gets the cost item for the given staff id.
-             *
-             * @param staffId the id the staff.
-             * @return the cost item or null.
-             */
-            fun getCost(staffId: Int): Item? = MAP[staffId]?.cost
+            fun productFor(type: StaffType, element: Element): Int? =
+                values().firstOrNull { it.type == type && it.element == element }?.staffId
         }
     }
 
-    /**
-     * Represents the category of a staff.
-     */
-    private enum class StaffType { REGULAR, BATTLE, MYSTIC }
-
-    /**
-     * Represents the ids rystal ball and elemental sphere objects used with staves.
-     */
-    private val crystalBallObjects = intArrayOf(Scenery.CRYSTAL_BALL_13659, Scenery.ELEMENTAL_SPHERE_13660, Scenery.CRYSTAL_OF_POWER_13661)
+    private val crystalBallObjects = intArrayOf(
+        Scenery.CRYSTAL_BALL_13659,
+        Scenery.ELEMENTAL_SPHERE_13660,
+        Scenery.CRYSTAL_OF_POWER_13661
+    )
 
     override fun defineListeners() {
-        onUseWith(IntType.SCENERY, Staff.ALL_STAFFS, *crystalBallObjects) { player, staff, scenery ->
-            val staff = Staff.MAP[staff.id] ?: return@onUseWith false
-            val staffType = staff.type
-            val requiredCost =
-                when (scenery.id) {
-                    Scenery.CRYSTAL_BALL_13659 ->
-                        if (staffType == StaffType.REGULAR) {
-                            null
-                        } else {
-                            sendMessage(player, "You can only change the element of basic staves on this crystal ball.")
-                            return@onUseWith false
-                        }
-                    Scenery.ELEMENTAL_SPHERE_13660 ->
-                        when (staffType) {
-                            StaffType.REGULAR -> null
-                            StaffType.BATTLE -> Item(Items.AIR_RUNE_556, 100)
-                            else -> {
-                                sendMessage(
-                                    player,
-                                    "You can only change the element of basic staves and battlestaves on this sphere.",
-                                )
-                                return@onUseWith false
-                            }
-                        }
-                    Scenery.CRYSTAL_OF_POWER_13661 ->
-                        when (staffType) {
-                            StaffType.REGULAR -> null
-                            StaffType.BATTLE -> Item(Items.AIR_RUNE_556, 100)
-                            StaffType.MYSTIC -> Item(Items.AIR_RUNE_556, 1000)
-                        }
-                    else -> return@onUseWith false
-                }
+        onUseWith(IntType.SCENERY, Staff.IDS, *crystalBallObjects) { player, item, scenery ->
+            val staff = Staff.MAP[item.id] ?: return@onUseWith false
 
-            handleElementSelection(player, staff, requiredCost)
+            if (!staff.type.isAllowedOn(scenery.id)) {
+                sendMessage(player, "You cannot change this type of staff on this device.")
+                return@onUseWith false
+            }
+
+            val cost = staff.type.getCostFor(scenery.id)
+            handleElementSelection(player, staff, cost)
             return@onUseWith true
         }
     }
 
-    /**
-     * Select an element for the given staff.
-     */
-    private fun handleElementSelection(
-        player: Player,
-        staff: Staff,
-        cost: Item?,
-    ) {
-        val elements = arrayOf("Air", "Water", "Earth", "Fire")
-        sendDialogueOptions(player, "Select an element", *elements)
+    private fun handleElementSelection(player: Player, staff: Staff, cost: Item?) {
+        sendDialogueOptions(player, "Select an element", *Element.values().map { it.toString() }.toTypedArray())
         addDialogueAction(player) { _, buttonID ->
             val index = buttonID - 2
-            if (index in elements.indices) {
-                val selectedElement = elements[index]
-                changeStaffElement(player, staff, selectedElement)
+            if (index in Element.values().indices) {
+                val element = Element.values()[index]
+                changeStaffElement(player, staff, element)
             }
         }
     }
-    /**
-     * Changes the staffs element.
-     *
-     * @param element the element to change.
-     */
-    private fun changeStaffElement(player: Player, staff: Staff, element: String) {
-        val elementRunes =
-            mapOf(
-                "Air"   to Items.AIR_RUNE_556,
-                "Water" to Items.WATER_RUNE_555,
-                "Earth" to Items.EARTH_RUNE_557,
-                "Fire"  to Items.FIRE_RUNE_554,
-            )
 
-        val runeId = elementRunes[element] ?: return
-        val product = Staff.getProduct(staff.type, element) ?: return
-        val baseCost = staff.cost?.amount ?: 0
-
-        val requiredRunes = if (baseCost > 0) Item(runeId, baseCost) else null
+    private fun changeStaffElement(player: Player, staff: Staff, element: Element) {
+        val productId = Staff.productFor(staff.type, element) ?: return
+        val baseCost = staff.baseCost?.amount ?: 0
+        val requiredRunes = if (baseCost > 0) Item(element.runeId, baseCost) else null
 
         if (requiredRunes != null && !player.inventory.contains(requiredRunes.id, requiredRunes.amount)) {
-            sendMessage(player, "You need ${requiredRunes.amount} ${element.lowercase()} runes to change this staff.")
+            sendMessage(player, "You need ${requiredRunes.amount} ${element.toString().lowercase()} runes to change this staff.")
             return
         }
 
@@ -179,7 +127,7 @@ class CrystalBallPlugin : InteractionListener {
 
         requiredRunes?.let { player.inventory.remove(it) }
         player.inventory.remove(Item(staff.staffId))
-        player.inventory.add(Item(product))
+        player.inventory.add(Item(productId))
 
         sendMessage(player, "The staff feels very light for a moment.")
     }
