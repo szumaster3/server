@@ -1,7 +1,5 @@
 package content.global.plugin.iface
 
-import content.data.GameAttributes
-import core.api.getAttribute
 import core.api.getVarbit
 import core.api.setVarbit
 import core.game.component.Component
@@ -26,12 +24,7 @@ class WorldMapInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(Components.WORLDMAP_755) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                3 -> {
-                    if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
-                        return@on true
-                    }
-                    openWorldMapWindow(player)
-                }
+                3 -> openWorldMapWindow(player)
                 29 -> toggleKeySort(player)
             }
             return@on true

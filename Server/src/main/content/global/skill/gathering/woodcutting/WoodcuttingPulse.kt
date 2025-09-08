@@ -247,7 +247,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
         }
 
         // Bark
-        if (reward == 3239) {
+        if (reward == Items.BARK_3239) {
             // If we receive the item, give the full experience points otherwise give the base amount
             if (amount >= 1) {
                 experience = 275.2
