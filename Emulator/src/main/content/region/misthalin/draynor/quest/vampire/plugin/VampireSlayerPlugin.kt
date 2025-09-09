@@ -19,23 +19,17 @@ class VampireSlayerPlugin: InteractionListener {
             return@on true
         }
 
-        on(Scenery.CUPBOARD_33503, IntType.SCENERY, "close", "search") { player, node ->
-            when(node.interaction.options.toString()) {
-                "close" -> {
-                    animate(player, Animations.CLOSE_CUPBOARD_543)
-                    playAudio(player, Sounds.CUPBOARD_CLOSE_57)
-                    sendMessage(player, "You close the cupboard.")
-                    replaceScenery(node.asScenery(), Scenery.CUPBOARD_33502, -1)
+        on(Scenery.CUPBOARD_33503, IntType.SCENERY, "search") { player, _ ->
+            when {
+                freeSlots(player) == 0 -> {
+                    sendMessage(player, "Not enough inventory space.")
                 }
-                "search" -> {
-                    when {
-                        !inInventory(player, Items.GARLIC_1550) -> {
-                            sendMessage(player, "The cupboard contains garlic. You take a clove.")
-                            addItem(player, Items.GARLIC_1550, 1)
-                        }
-                        freeSlots(player) == 0 -> sendMessage(player, "Not enough inventory space.")
-                        else -> sendMessage(player, "You search the cupboard but find nothing.")
-                    }
+                !inInventory(player, Items.GARLIC_1550) -> {
+                    sendMessage(player, "The cupboard contains garlic. You take a clove.")
+                    addItem(player, Items.GARLIC_1550, 1)
+                }
+                else -> {
+                    sendMessage(player, "You search the cupboard but find nothing.")
                 }
             }
             return@on true
