@@ -261,6 +261,7 @@ class KharaziDungeonPlugin : InteractionListener {
                 }
                 1 -> {
                     end()
+                    sendMessage(player!!, "You try to crawl through...")
                     if (buttonID == 1) {
                         /* Fail:
                          * sendMessage(player, "You get cramped into a tiny space and start to suffocate.")
@@ -268,7 +269,6 @@ class KharaziDungeonPlugin : InteractionListener {
                          * sendMessage(player, "Eventually you manage to break free.")
                          * sendMessage(player, "But you scrape yourself very badly as you force your way out.")
                          * sendMessage(player, "... and you're totally exhausted from the experience.")
-                         * sendMessage(player, "You try to crawl through...")
                          */
 
                         // Success:
