@@ -131,6 +131,12 @@ class KharaziDungeonPlugin : InteractionListener {
             return true
         }
 
+        if (freeSlots(player) == 0) {
+            sendMessage(player, "Your inventory is too full to hold any more rocks.")
+            return true
+        }
+
+
         if (state == 0) {
             sendMessage(player, "You swing your pickaxe at the rock.")
             animate(player, pickaxe.animation)
