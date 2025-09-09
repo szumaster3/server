@@ -23,19 +23,13 @@ class MelenaMoonlanderDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npcl(FaceAnim.FRIENDLY, "Hi. Welcome to the general store. How might I help you?").also { stage++ }
             1 -> options("What can you sell me?", "I have a question...", "I'm good thanks, bye.").also { stage++ }
             2 -> when (buttonId) {
-                1 -> {
-                    end()
-                    openNpcShop(player, NPCs.MELANA_MOONLANDER_4516)
-                }
-
+                1 -> end().also { openNpcShop(player, NPCs.MELANA_MOONLANDER_4516) }
                 2 -> player(FaceAnim.HALF_ASKING, "I have a question...").also { stage = 11 }
                 3 -> player(FaceAnim.FRIENDLY, "I'm good thanks, bye.").also { stage = END_DIALOGUE }
             }
-
             11 -> npc(FaceAnim.FRIENDLY, "About magic of course.").also { stage++ }
             12 -> player(FaceAnim.SUSPICIOUS, "Sorry?").also { stage++ }
             13 -> npcl(FaceAnim.FRIENDLY, "I said about magic of course. You know, in response to your question.").also { stage++ }
-
             14 -> player(FaceAnim.HALF_THINKING, "But I didn't ask anything yet.").also { stage++ }
             15 -> npcl(FaceAnim.FRIENDLY, "Yes, but you were thinking of asking me how I was floating.").also { stage++ }
             16 -> player(FaceAnim.AMAZED, "That's true! How could you possibly know that?").also { stage++ }

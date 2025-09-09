@@ -14,12 +14,7 @@ class HallaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(
-            FaceAnim.FRIENDLY,
-            "Welcome to Miscellania's first clothing store!",
-            "We sell clothing made especially for Fremenniks",
-            "and Dwarves.",
-        )
+        npc(FaceAnim.FRIENDLY, "Welcome to Miscellania's first clothing store!", "We sell clothing made especially for Fremenniks", "and Dwarves.")
         return true
     }
 

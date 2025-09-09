@@ -21,12 +21,7 @@ class OsvaldDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.NEUTRAL, "Would you like to buy anything,", "your Royal Highness?").also { stage++ }
-            1 -> options(
-                "Could you show me what you have for sale?",
-                "No thank you, I don't need food just now.",
-                "What's it like living down here?",
-            ).also { stage++ }
-
+            1 -> options("Could you show me what you have for sale?", "No thank you, I don't need food just now.", "What's it like living down here?").also { stage++ }
             2 -> when (buttonId) {
                 1 -> player(FaceAnim.ASKING, "Could you show me what you have for sale?").also { stage++ }
                 2 -> player(FaceAnim.NEUTRAL, "No thank you, I don't need food just now.").also { stage = END_DIALOGUE }

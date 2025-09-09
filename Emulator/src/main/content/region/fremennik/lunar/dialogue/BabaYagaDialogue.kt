@@ -21,11 +21,7 @@ class BabaYagaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (isQuestComplete(player, Quests.SWEPT_AWAY) && inInventory(player, Items.BROOMSTICK_14057) && getDynLevel(
-                player,
-                Skills.MAGIC
-            ) >= 73 && getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_ENCH, false)
-        ) {
+        if (isQuestComplete(player, Quests.SWEPT_AWAY) && inInventory(player, Items.BROOMSTICK_14057) && getDynLevel(player, Skills.MAGIC) >= 73 && getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_ENCH, false)) {
             options("Talk about brooms.", "Talk about something else...")
             stage = 20
         }
