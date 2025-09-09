@@ -6945,14 +6945,14 @@ object Animations {
     const val ANIMATION_6699 = 6699
     const val SHIELD_DRAGONFIRE_6700 = 6700
     const val ANIMATION_6701 = 6701
-    const val CUT_THING_6702 = 6702
-    const val JUMP_OVER_WILDERNESS_WALL_6703 = 6703
+    const val OFFCUTS_6702 = 6702
+    const val BAREHAND_FISHING_6703 = 6703
     const val NULL_6704 = 6704
     const val BAREHAND_SHARK_6705 = 6705
     const val BAREHAND_SHARK_6706 = 6706
     const val BAREHAND_SWORDFISH_6707 = 6707
     const val BAREHAND_SWORDFISH_6708 = 6708
-    const val LONGHALL_REASSURE = 6709
+    const val BAREHAND_FISHING_6709 = 6709
     const val BAREHAND_TUNA_6710 = 6710
     const val BAREHAND_TUNA_6711 = 6711
     const val HAMMER_6712 = 6712

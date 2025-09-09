@@ -65,14 +65,9 @@ class BarbarianHerblorePlugin : InteractionListener {
         rewardXP(player, Skills.HERBLORE, potion.exp)
         sendMessage(player, "You combine your potion with the ${getItemName(egg.id).lowercase()}.")
 
-        if (getAttribute(player, BarbarianTraining.HERBLORE_BASE, false)) {
-            removeAttribute(player, BarbarianTraining.HERBLORE_BASE)
+        if (!getAttribute(player, BarbarianTraining.HERBLORE_FULL, false)) {
+            sendDialogueLines(player, "You feel you have learned more of barbarian ways. Otto might wish", "to talk to you more.")
             setAttribute(player, BarbarianTraining.HERBLORE_FULL, true)
-            sendDialogueLines(
-                player,
-                "You feel you have learned more of barbarian ways. Otto might wish",
-                "to talk to you more."
-            )
         }
         return true
     }

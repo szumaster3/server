@@ -1,5 +1,6 @@
 package content.region.kandarin.baxtorian.barbtraining.plugin
 
+import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
 import core.api.sendSkillDialogue
 import core.game.interaction.IntType
@@ -76,7 +77,7 @@ private class BarbarianSmithingPulse(player: Player?, val weapon: BarbarianWeapo
     }
 
     override fun animate() {
-        animate(player, Animations.HUMAN_ANVIL_HAMMER_SMITHING_898)
+        animate(player, Animations.HAMMER_6712)
     }
 
     override fun reward(): Boolean {
@@ -93,6 +94,15 @@ private class BarbarianSmithingPulse(player: Player?, val weapon: BarbarianWeapo
             player.inventory.add(Item(if (index == 0) spear else hasta, 1))
 
             sendMessage(player, "You make a ${getItemName(if (index == 0) spear else hasta)}.")
+
+            if (!getAttribute(player, BarbarianTraining.SPEAR_FULL, false) && index == 0) {
+                sendDialogueLines(player, "You feel you have learned more of barbarian ways. Otto might wish", "to talk to you more.")
+                setAttribute(player, BarbarianTraining.SPEAR_FULL, true)
+            }
+            if (!getAttribute(player, BarbarianTraining.HASTA_FULL, false) && index != 0) {
+                sendDialogueLines(player, "You feel you have learned more of barbarian ways. Otto might wish", "to talk to you more.")
+                setAttribute(player, BarbarianTraining.HASTA_FULL, true)
+            }
             amount--
             return amount == 0
         }
@@ -115,18 +125,33 @@ class BarbarianSmithingPlugin : InteractionListener {
         onUseWith(IntType.SCENERY, bars, Scenery.BARBARIAN_ANVIL_25349) { player, used, _ ->
             val weapon = BarbarianWeapon.product[used.id] ?: return@onUseWith true
 
+            val canMakeSpear = player.savedData.activityData.isBarbarianSmithingSpear
+            val canMakeHasta = player.savedData.activityData.isBarbarianSmithingHasta
+
+            if (!canMakeSpear && !canMakeHasta) {
+                sendMessage(player, "You haven't learned to smith these weapons yet.")
+                return@onUseWith true
+            }
+
             sendSkillDialogue(player) {
-                withItems(weapon.spearId.asItem(), weapon.hastaId.asItem())
+                val items = mutableListOf<Item>()
+                if (canMakeSpear) items.add(weapon.spearId.asItem())
+                if (canMakeHasta) items.add(weapon.hastaId.asItem())
+
+                withItems(*items.toTypedArray())
+
                 create { id, amount ->
                     submitIndividualPulse(
                         entity = player,
                         pulse = BarbarianSmithingPulse(player, weapon, amount, id),
                     )
                 }
+
                 calculateMaxAmount {
                     amountInInventory(player, used.id)
                 }
             }
+
             return@onUseWith true
         }
     }

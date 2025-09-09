@@ -22,6 +22,7 @@ import core.net.packet.PacketWriteQueue
 import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
+import core.tools.GREEN
 import core.tools.RED
 import core.tools.colorize
 import kotlinx.coroutines.GlobalScope
@@ -66,6 +67,17 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
             hotspots[hotspotIndex].decorationIndex = decorationIndex
             player.sendMessage("Decoration index of hotspot $hotspotIndex set to $decorationIndex.")
+        }
+
+        /*
+         * Command to enable barehand fishing.
+         */
+
+        define(name = "barehand", Privilege.ADMIN) { p, _ ->
+            val newState = !getAttribute(p, GameAttributes.BARBARIAN_BAREHAND_FISHING, false)
+            setAttribute(p, GameAttributes.BARBARIAN_BAREHAND_FISHING, newState)
+            p.savedData.activityData.isBarbarianFishingBarehand = newState
+            p.debug("Barehand fishing ${if (newState) "$GREEN enabled" else "$RED disabled"}</col>.")
         }
 
         /*

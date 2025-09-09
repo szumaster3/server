@@ -417,4 +417,7 @@ internal object GameAttributes {
 
     // Observatory quest.
     const val RECEIVED_JUG_OF_WINE = "/save:observatory:assistant-gift"
+
+    // Barbarian fishing
+    const val BARBARIAN_BAREHAND_FISHING = "/save:fishing:technique:barehand"
 }

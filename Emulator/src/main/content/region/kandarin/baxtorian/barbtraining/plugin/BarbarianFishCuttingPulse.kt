@@ -16,7 +16,7 @@ import core.tools.RandomUtils
 class BarbarianFishCuttingPulse(val player: Player, val fish: Int) : Pulse(0) {
 
     override fun pulse(): Boolean {
-        player.animator.animate(Animation(Animations.CRAFT_KNIFE_5244))
+        player.animator.animate(Animation(Animations.OFFCUTS_6702))
         player.inventory.remove(Item(fish))
 
         val level = player.skills.getLevel(Skills.COOKING)
