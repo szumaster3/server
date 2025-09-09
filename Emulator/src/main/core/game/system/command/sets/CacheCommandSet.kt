@@ -14,11 +14,14 @@ import core.game.world.map.RegionPlane
 import core.plugin.Initializable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.BufferedWriter
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 import java.io.IOException
 import java.lang.reflect.Modifier
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.full.memberProperties
@@ -706,56 +709,37 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Dumps for educational purposes CS2 mapping data to a .csv file.
+         * Command to dump all CS2 mappings to a file.
          */
 
         define(
             name = "dumpcs2",
             privilege = Privilege.ADMIN,
             usage = "::dumpcs2",
-            description = "Dumps CS2 mapping data to a .json file.",
-        ) { p, _ ->
-
-            val dump = File("dumps/clientscripts.json")
-            val gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-
+            description = "Dumps all CS2 mappings to ./cs2.txt",
+        ) { player, _ ->
+            val path = Paths.get("dumps/cs2.txt")
+            Files.createDirectories(path.parent)
             try {
-                val allProperties = CS2Mapping::class.memberProperties.map { it.name }
-                val dataList = mutableListOf<Map<String, Any?>>()
-
-                for (itemId in 0 until 6000) {
-                    val itemDef = CS2Mapping.forId(itemId) ?: continue
-
-                    val map = allProperties.associateWith { propName ->
-                        val prop = CS2Mapping::class.memberProperties.find { it.name == propName }
-                        prop?.let {
-                            it.isAccessible = true
-                            try {
-                                val value = it.getter.call(itemDef)
-                                when (value) {
-                                    is Array<*> -> value.joinToString(";") { it.toString() }
-                                    is List<*> -> value.joinToString(";") { it.toString() }
-                                    is Map<*, *> -> value
-                                    null -> null
-                                    else -> value
-                                }
-                            } catch (e: Exception) {
-                                "Error"
-                            }
-                        } ?: null
+                BufferedWriter(Files.newBufferedWriter(path)).use { bw ->
+                    for (i in 0 until 10000) {
+                        val mapping = CS2Mapping.forId(i) ?: continue
+                        val mappingMap = mapping.map ?: continue
+                        bw.append("ScriptAPI - $i [")
+                        for ((index, value) in mappingMap) {
+                            bw.append("$value: $index ")
+                        }
+                        bw.append("]")
+                        bw.newLine()
                     }
-
-                    dataList.add(map)
                 }
-                dump.bufferedWriter().use { writer ->
-                    gson.toJson(dataList, writer)
-                }
-
-                p.debug("CS2 data has been successfully dumped to $dump.")
-            } catch (e: IOException) {
-                p.debug("Error writing to JSON file: ${e.message}")
+                player.debug("CS2 mappings dumped successfully to dumps/cs2.txt")
+            } catch (e: Exception) {
+                player.debug("Failed to dump CS2 mappings: ${e.message}")
                 e.printStackTrace()
             }
+
+            return@define
         }
 
         /*

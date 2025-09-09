@@ -3,6 +3,7 @@ package content.region.karamja.plugin
 import content.data.items.SkillingTool
 import core.api.*
 import core.game.dialogue.DialogueFile
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -25,26 +26,37 @@ class KharaziDungeonPlugin : InteractionListener {
          * Handles enter to the Kharazi dungeon.
          */
 
-        on(Scenery.MOSSY_ROCK_24300, IntType.SCENERY, "search") { player, _ ->
-            sendMessage(player, "You try to crawl through...")
-            player.dialogueInterpreter.sendDialogue(
-                "You see that there is a small crevice that you may be able to crawl",
-                "through."
-            )
-            addDialogueAction(player) { p, button ->
-                setTitle(player, 2)
-                sendDialogueOptions(
-                    p,
-                    "Crawl though hole?",
-                    "Yes, I'll crawl through. I'm very athletic.",
-                    "No, I'm a bit claustrophobic."
+        on(intArrayOf(Scenery.MOSSY_ROCK_24300,Scenery.ROCKS_2902), IntType.SCENERY, "search") { player, _ ->
+            sendMessage(player, "You search the rocks but you see nothing significant...")
+            runTask(player, 3) {
+                sendDialogueLines(
+                    player,
+                    "You see that there is a small crevice that you may be able to crawl",
+                    "through. Would you like to try to crawl through, it looks quite an",
+                    "enclosed area?"
                 )
-                if (button >= 2) {
-                    teleport(player, Location.create(2772, 9341, 0), TeleportManager.TeleportType.INSTANT)
-                    sendMessage(player, "You contort your body to fit the crevice.")
-                    sendMessage(player, "You adroitly squeeze, serpent-like, into the crevice.", 1)
-                    sendMessage(player, "You find a small narrow tunnel that goes for some distance.", 1)
-                    sendMessage(player, "After some time, you find a small cave opening... and walk through.", 2)
+                sendMessage(player, "...at first.", 1)
+                addDialogueAction(player) { player, _ ->
+                    player.dialogueInterpreter.actions.clear().also {
+                        openDialogue(player, SearchRock())
+                    }
+                }
+            }
+            return@on true
+        }
+
+        on(Scenery.TABLE_2906, IntType.SCENERY, "look-at", "search") { player, _ ->
+            val option = getUsedOption(player)
+            when (option) {
+                "look-at" -> sendDialogue(player, "A crudely constructed makeshift table made from various pieces of wood. You see a piece of screwed up paper on the table top.")
+                else -> {
+                    sendMessage(player, "You start searching the table...")
+                    if (inInventory(player, Items.A_SCRIBBLED_NOTE_718)) {
+                        sendItemDialogue(player, Items.A_SCRIBBLED_NOTE_718, "After some time you find a scrumpled up piece of paper. It looks like rubbish.")
+                    } else {
+                        sendDialogue(player,"You find a scrap of paper with what looks like nonsense written on it.")
+                        addItemOrDrop(player, Items.A_SCRIBBLED_NOTE_718, 1)
+                    }
                 }
             }
             return@on true
@@ -76,10 +88,42 @@ class KharaziDungeonPlugin : InteractionListener {
             allowedDistance = 1,
             handler = ::handleSmash,
         )
+        /*
+         * Handles exit from old gate location.
+         */
 
+        on(Scenery.JAGGED_WALL_2926, IntType.SCENERY, "look") { player, _ ->
+            sendDialogue(player, "It looks like this room was once sealed, but the top wall fell down. If you're feeling particularly agile, you could try jumping over it.")
+            return@on true
+        }
+
+        /*
+         * Handles reading the scribbled note.
+         */
+
+        on(Items.A_SCRIBBLED_NOTE_718, IntType.ITEM, "read") { player, _ ->
+            openDialogue(player, ScribbledNote())
+            return@on true
+        }
+
+        /*
+         * Handles exit from old gate location.
+         */
 
         on(Scenery.CREVICE_2918, IntType.SCENERY, "look-at", "search") { player, _ ->
             teleport(player, Location.create(2794, 9339, 0), TeleportManager.TeleportType.INSTANT)
+            return@on true
+        }
+
+        /*
+         * Handles interaction with ancient gates.
+         */
+
+        on(intArrayOf(Scenery.ANCIENT_GATE_2922,Scenery.ANCIENT_GATE_2923), IntType.SCENERY, "open") { player, node ->
+            if(player.location.y <= 9313)
+                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            else
+                openDialogue(player, AncientGate(), node)
             return@on true
         }
     }
@@ -90,6 +134,9 @@ class KharaziDungeonPlugin : InteractionListener {
         }
     }
 
+    /**
+     * Searching the north-eastern bookcase (Legends' Quests).
+     */
     inner class NorthEasternBookcase : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
@@ -114,6 +161,127 @@ class KharaziDungeonPlugin : InteractionListener {
                         sendMessage(player!!, "You decide not to squeeze yourself into that ridiculously small crevice.")
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Handles opening the second ancient gate (base for Legends' Quests).
+     */
+    inner class AncientGate : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> {
+                    sendDialogueLines(player!!,"Two huge metal doors bar the way further... There is an intense and", "unpleasant feeling from this place and as you peer through the", "cracks in the door you can see why.")
+                    stage++
+                }
+                1 -> {
+                    sendDialogueLines(player!!,"You see dark, shadowy shapes flapping around in the", "still, dark air...")
+                    stage++
+                }
+                2 -> {
+                    sendDialogueLines(player!!,"You push the doors... They're quite stiff... They won't budge with a ", "normal push. Do you want to try to force them open with brute", "strength?")
+                    stage++
+                }
+                3 -> {
+                    setTitle(player!!, 2)
+                    sendDialogueOptions(player!!, "Use brute strength on the gates?", "Yes, I'm very strong, I'll force them open.", "No, I'm having second thoughts.")
+                    stage++
+                }
+                4 -> {
+                    if (buttonID == 1) {
+                        sendDialogue(player!!, "You ripple your muscles and prepare to exert yourself...")
+                        stage++
+                    } else {
+                        sendMessage(player!!, "You decide against forcing the doors.")
+                    }
+                }
+                5 -> {
+                    sendChat(player!!, "Hup!")
+                    sendDialogue(player!!, "You brace yourself against the doors...")
+                    stage++
+                }
+                6 -> {
+                    sendChat(player!!, "Urghhhhh!")
+                    sendDialogue(player!!, "You start to force the doors open...")
+                    stage++
+                }
+                7 -> {
+                    sendChat(player!!, "Arghhhhhhh!")
+                    sendDialogue(player!!, "You push and push...")
+                    stage++
+                }
+                8 -> {
+                    sendChat(player!!, "Shhhhhhhshshehshsh")
+                    sendDialogue(player!!, "...and you just manage to force the doors open slightly, just enough to force yourself through.")
+                    stage++
+                }
+                9 -> {
+                    end()
+                    val node = getScenery(Location(2810, 9314, 0))
+                    DoorActionHandler.handleAutowalkDoor(player!!, node!!.asScenery())
+                }
+            }
+        }
+    }
+
+    inner class ScribbledNote : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> {
+                    sendDialogueLines(player!!,"You try your best to decode the writing.", "This is what you make out...")
+                    stage++
+                }
+                1 -> {
+                    sendItemDialogue(player!!, Items.A_SCRIBBLED_NOTE_718 , "I fear that the spirit of an ancient one resides within me and uses me... I am too weak to cast the curse myself and fight the beast within.")
+                    stage++
+                }
+                2 -> {
+                    sendItemDialogue(player!!, Items.A_SCRIBBLED_NOTE_718 , "Day 3 ...my last hope is that someone will read this and aid me... I am undone and I fear....")
+                    stage++
+                }
+                3 -> {
+                    sendDialogueLines(player!!,"The writing trails off at this point.")
+                    stage++
+                }
+                4 -> {
+                    end()
+                }
+            }
+        }
+    }
+
+    inner class SearchRock : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> {
+                    setTitle(player!!, 2)
+                    sendDialogueOptions(player!!, "Crawl into hole?", "Yes, I'll crawl through. I'm very athletic.", "No, I'm pretty scared of enclosed areas.")
+                    stage++
+                }
+                1 -> if (buttonID == 1) {
+                    /* Fail:
+                     * sendMessage(player, "You get cramped into a tiny space and start to suffocate.")
+                     * sendMessage(player, "You wriggle and wriggle but you cannot get out.")
+                     * sendMessage(player, "Eventually you manage to break free.")
+                     * sendMessage(player, "But you scrape yourself very badly as you force your way out.")
+                     * sendMessage(player, "... and you're totally exhausted from the experience.")
+                     * sendMessage(player, "You try to crawl through...")
+                     */
+
+                    // Success:
+                    teleport(player!!, Location.create(2772, 9341, 0), TeleportManager.TeleportType.INSTANT)
+                    sendMessage(player!!, "You contort your body to fit the crevice.")
+                    sendMessage(player!!, "You adroitly squeeze serpent like into the crevice.", 1)
+                    sendMessage(player!!, "You find a small narrow tunnel that goes for some distance.", 1)
+                    sendMessage(player!!, "After some time, you find a small cave opening... and walk through.", 2)
+                    stage = 2
+                } else {
+                    sendDialogue(player!!, "You decide against forcing yourself into the tiny crevice. And realise that you have much better things to do. Like visit inns and mine ore.")
+                    stage = 2
+                }
+
+                2 -> end()
             }
         }
     }
@@ -145,13 +313,15 @@ class KharaziDungeonPlugin : InteractionListener {
 
         animate(player, pickaxe.animation)
         if (!checkReward(player, pickaxe)) {
-            sendMessage(player, "You only scratch the rock.")
+            sendMessage(player, "You only succeed in scratching the rock.")
+            sendMessage(player, "The pick clangs heavily against the rock face and the vibrations rattle your nerves.")
             delayClock(player, Clocks.SKILLING, 3)
             return delayScript(player, 2)
         }
 
         replaceScenery(boulder.asScenery(), 2918, 5)
-        sendMessage(player, "You smash the rock to bits.")
+        sendMessage(player, "You manage to smash the rock to bits.")
+        sendMessage(player, "You get some rock.")
         addItem(player, Items.ROCK_1480, 1)
         rewardXP(player, Skills.MINING, 35.0)
         resetAnimator(player)

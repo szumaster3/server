@@ -653,6 +653,7 @@ class WatchTowerPlugin : InteractionListener {
                 teleport(player, Location.create(2541, 3054, 0), TeleportManager.TeleportType.INSTANT)
             } else {
                 teleport(player, Location.create(2781, 2935, 0), TeleportManager.TeleportType.INSTANT)
+                sendMessage(player, "You crawl back out of the cavern...")
             }
             return@on true
         }

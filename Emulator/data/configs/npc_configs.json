@@ -15597,7 +15597,9 @@
     "strength_level": "1",
     "attack_speed": "4",
     "id": "929",
+    "lifepoints": "5",
     "aggressive": "false",
+    "magic_level": "65",
     "magic_level": "1",
     "range_level": "1",
     "attack_level": "1"
@@ -15610,8 +15612,10 @@
     "strength_level": "1",
     "attack_speed": "4",
     "id": "930",
+    "lifepoints": "27",
+    "strength_level": "1",
     "aggressive": "false",
-    "magic_level": "1",
+    "magic_level": "65",
     "range_level": "1",
     "attack_level": "1"
   },
