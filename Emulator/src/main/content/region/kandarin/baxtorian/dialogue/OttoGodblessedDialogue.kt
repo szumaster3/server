@@ -107,10 +107,10 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 300
                 } else if(player.savedData.activityData.isBarbarianSmithingSpear && player.getAttribute(BarbarianTraining.FISHING_FULL, false)) {
                     player(FaceAnim.HALF_ASKING,"What of the one handed spears of which you spoke?")
-                    stage = 309
+                    stage = 308
                 } else {
                     player("Tell me more about the use of spears.")
-                    stage = 301
+                    stage = 300
                 }
             }
 
@@ -220,29 +220,28 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             220 -> playerl(FaceAnim.HAPPY, "I thank you Otto, it makes a bit more sense now.").also { stage = 20 }
 
             // Smithing
-            300 -> npcl(FaceAnim.FRIENDLY, "You have mastered spear smithing. Next, learn the one-handed hasta smithing.").also { stage++ }
-            301 -> if(!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) {
-                npcl(FaceAnim.FRIENDLY, "The next step is to manufacture a spear, suitable for combat. ").also { stage++ }
+            300 -> if(!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) {
+                npcl(FaceAnim.FRIENDLY, "The next step is to manufacture a spear, suitable for combat.").also { stage++ }
             } else {
-                npc(FaceAnim.FRIENDLY, "Many warriors complain that spears are difficult to find", "We barbarians thus forge our own.").also { stage = 307 }
+                npc(FaceAnim.FRIENDLY, "Many warriors complain that spears are difficult to find", "We barbarians thus forge our own.").also { stage = 306 }
             }
-            302 -> npcl(FaceAnim.FRIENDLY, "Our distance cousins on Karamja are in need of help, however, and you must aid them before I can aid you.").also { stage++ }
-            303 -> npcl(FaceAnim.NEUTRAL, "You must go now and complete the Tai Bwo Wannai Trio quest.").also { stage++ }
-            304 -> playerl(FaceAnim.HALF_THINKING, "Couldn't you just take a bribe or something? I am sure you could do with some cash.").also { stage++ }
-            305 -> npcl(FaceAnim.HALF_GUILTY, "I am afraid this is a vital step; the spirits foresee that your understanding of spears will increase through this quest.").also { stage++ }
-            306 -> npcl(FaceAnim.NEUTRAL, "You may not progress in the use of spears until you have completed this mission.").also { stage = 20 }
-            307 -> player(FaceAnim.HALF_ASKING, "Can i just use some metal on an anvil, or is there", "something else involved?").also { stage++ }
-            308 -> npc(FaceAnim.NEUTRAL, "If you use our special barbarian anvil here, you will", "find it ideal. Other anvils are not sturdy enough or", "shaped appropriately for the forging work involved", "Make any of our spears and return.").also {
+            301 -> npcl(FaceAnim.FRIENDLY, "Our distance cousins on Karamja are in need of help, however, and you must aid them before I can aid you.").also { stage++ }
+            302 -> npcl(FaceAnim.NEUTRAL, "You must go now and complete the Tai Bwo Wannai Trio quest.").also { stage++ }
+            303 -> playerl(FaceAnim.HALF_THINKING, "Couldn't you just take a bribe or something? I am sure you could do with some cash.").also { stage++ }
+            304 -> npcl(FaceAnim.HALF_GUILTY, "I am afraid this is a vital step; the spirits foresee that your understanding of spears will increase through this quest.").also { stage++ }
+            305 -> npcl(FaceAnim.NEUTRAL, "You may not progress in the use of spears until you have completed this mission.").also { stage = 20 }
+            306 -> player(FaceAnim.HALF_ASKING, "Can i just use some metal on an anvil, or is there", "something else involved?").also { stage++ }
+            307 -> npc(FaceAnim.NEUTRAL, "If you use our special barbarian anvil here, you will", "find it ideal. Other anvils are not sturdy enough or", "shaped appropriately for the forging work involved", "Make any of our spears and return.").also {
                 player.savedData.activityData.setBarbarianSmithingSpear(true)
                 stage = 20
             }
 
-            309 -> npc(FaceAnim.NEUTRAL, "The next step is to manufacture a one-handed version", "of a spear, suitable for combat. Such a spear is known", "to us as a hasta.").also { stage++ }
-            310 -> player(FaceAnim.HALF_ASKING, "Can't I just pick one up and use it in one hand?").also { stage++ }
-            311 -> npc(FaceAnim.NEUTRAL, "You may try, but the process involves a differently", "balanced spear. A normal one is unlikely to benefit you.").also { stage++ }
-            312 -> npc(FaceAnim.NEUTRAL, "Before you may use such a weapon in anger, you","must make an example. Only then will you fully", "understand the poise and techniques involved.").also { stage++ }
-            313 -> player(FaceAnim.HALF_ASKING,"So I must create a hasta? I see. This makes sense.").also { stage++ }
-            314 -> npc(FaceAnim.NEUTRAL, "Indeed. You may use our special anvil for this spear", "type too. The ways of black and dragon hastae are", "beyond our knowledge, however.").also {
+            308 -> npc(FaceAnim.NEUTRAL, "The next step is to manufacture a one-handed version", "of a spear, suitable for combat. Such a spear is known", "to us as a hasta.").also { stage++ }
+            309 -> player(FaceAnim.HALF_ASKING, "Can't I just pick one up and use it in one hand?").also { stage++ }
+            310 -> npc(FaceAnim.NEUTRAL, "You may try, but the process involves a differently", "balanced spear. A normal one is unlikely to benefit you.").also { stage++ }
+            311 -> npc(FaceAnim.NEUTRAL, "Before you may use such a weapon in anger, you","must make an example. Only then will you fully", "understand the poise and techniques involved.").also { stage++ }
+            312 -> player(FaceAnim.HALF_ASKING,"So I must create a hasta? I see. This makes sense.").also { stage++ }
+            313 -> npc(FaceAnim.NEUTRAL, "Indeed. You may use our special anvil for this spear", "type too. The ways of black and dragon hastae are", "beyond our knowledge, however.").also {
                 player.savedData.activityData.setBarbarianSmithingHasta(true)
                 stage = 20
             }
