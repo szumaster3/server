@@ -129,14 +129,9 @@ private class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player, NPC(NPC
             rewardXP(player, Skills.STRENGTH, stragiXP[index].toDouble())
             sendMessage(player, "You catch a ${reward.name.lowercase()}.")
 
-            if (getAttribute(player, BarbarianTraining.FISHING_BASE, false)) {
-                removeAttribute(player, BarbarianTraining.FISHING_BASE)
-                setAttribute(player, BarbarianTraining.FISHING_FULL, true)
-                sendDialogueLines(
-                    player,
-                    "You feel you have learned more of barbarian ways. Otto might wish",
-                    "to talk to you more.",
-                )
+            if (!getAttribute(player, BarbarianTraining.FISHING_BASE, false)) {
+                sendDialogueLines(player, "You feel you have learned more of barbarian ways. Otto might wish", "to talk to you more.")
+                setAttribute(player, BarbarianTraining.FISHING_BASE, true)
             }
         }
         super.setDelay(5)
