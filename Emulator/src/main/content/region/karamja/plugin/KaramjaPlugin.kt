@@ -1,15 +1,19 @@
 package content.region.karamja.plugin
 
+import content.global.skill.gathering.SkillReward
 import content.data.items.SkillingTool
+import content.global.skill.gathering.woodcutting.WoodcuttingNode
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
+import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.node.Node
+import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import shared.consts.*
 
@@ -23,39 +27,14 @@ class KaramjaPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(JUNGLE_BUSH, IntType.SCENERY, "chop-down") { player, node ->
-            val chopDown = (1..5).random()
-
-            if (!anyInEquipment(player, *MACHETE_ID) || !anyInInventory(player, *MACHETE_ID)) {
-                sendDialogue(player, "You need a machete to cut your way through this dense jungle bush.")
-                return@on false
-            }
-
-            val tool = SkillingTool.getMachete(player)
-            animate(player, tool!!.animation)
-            playAudio(player, Sounds.MACHETE_SLASH_1286)
-            setAttribute(player, "chop-bush", 0)
-
-            player.pulseManager.run(object : Pulse() {
-                var counter = 0
-                override fun pulse(): Boolean {
-                    counter++
-                    if (counter < chopDown) {
-                        animate(player, getAnimation(node.id))
-                    } else {
-                        player.walkingQueue.reset()
-                        replaceScenery(node.asScenery(), Scenery.SLASHED_BUSH_2895, 20)
-                        produceGroundItem(player, Items.LOGS_1511, 1, node.location)
-                        rewardXP(player, Skills.WOODCUTTING, 100.0)
-                        removeAttribute(player, "chop-bush")
-                        player.walkingQueue.addPath(node.location.x, node.location.y, true)
-                    }
-
-                    return counter >= chopDown
-                }
-            })
-            return@on true
-        }
+        defineInteraction(
+            IntType.SCENERY,
+            JUNGLE_BUSH,
+            "chop-down",
+            persistent = true,
+            allowedDistance = 1,
+            handler = ::handleChopBush
+        )
 
         on(CUSTOM_OFFICERS, IntType.NPC, "pay-fare") { player, node ->
             if (!isQuestComplete(player, Quests.PIRATES_TREASURE)) {
@@ -117,12 +96,7 @@ class KaramjaPlugin : InteractionListener {
                     }
 
                     1 -> {
-                        produceGroundItem(
-                            player,
-                            Items.PALM_LEAF_2339,
-                            1,
-                            getPathableRandomLocalCoordinate(player, 1, node.location),
-                        )
+                        produceGroundItem(player, Items.PALM_LEAF_2339, 1, getPathableRandomLocalCoordinate(player, 1, node.location))
                         sendMessage(player, "A palm leaf falls to the ground.")
                         return@queueScript stopExecuting(player)
                     }
@@ -171,5 +145,57 @@ class KaramjaPlugin : InteractionListener {
             openNpcShop(player, NPCs.TIADECHE_1164)
             return@on true
         }
+    }
+
+    private fun handleChopBush(player: Player, bush: Node, state: Int): Boolean {
+        val machete = SkillingTool.getMachete(player)
+
+        if (machete == null) {
+            sendMessage(player, "You need a machete to cut your way through this dense jungle bush.")
+            return true
+        }
+
+        if (!finishedMoving(player) || !clockReady(player, Clocks.SKILLING)) {
+            clearScripts(player)
+            return true
+        }
+
+        if (state == 0) {
+            sendMessage(player, "You swing your machete at the jungle plant.")
+            animate(player, machete.animation)
+            playAudio(player, Sounds.MACHETE_SLASH_1286)
+            return delayScript(player, 2)
+        }
+
+        animate(player, machete.animation)
+
+        val jungleBushNode = when (bush.id) {
+            WoodcuttingNode.JUNGLE_BUSH_1.id -> WoodcuttingNode.JUNGLE_BUSH_1
+            WoodcuttingNode.JUNGLE_BUSH_2.id -> WoodcuttingNode.JUNGLE_BUSH_2
+            else -> null
+        }
+
+        if (jungleBushNode == null || !SkillReward.checkWoodcuttingReward(player, jungleBushNode, machete)) {
+            delayClock(player, Clocks.SKILLING, 3)
+            return delayScript(player, 2)
+        }
+
+        replaceScenery(bush.asScenery(), Scenery.SLASHED_BUSH_2895, 20)
+        produceGroundItem(player, Items.LOGS_1511, 1, bush.location)
+        rewardXP(player, Skills.WOODCUTTING, 100.0)
+        resetAnimator(player)
+
+        val target = if (player.location.y > bush.location.y)
+            bush.location.transform(0, -1, 0)
+        else
+            bush.location.transform(0, 1, 0)
+
+        forceMove(player, player.location, target, 0, 60, null, Animations.WALK_819) {
+            sendMessage(player, "You hack your way through the jungle bush.")
+            delayClock(player, Clocks.SKILLING, 3)
+            clearScripts(player)
+        }
+
+        return delayScript(player, 2)
     }
 }

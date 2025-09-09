@@ -348,56 +348,36 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(
-            name = "dumprenders",
+            name = "dumprenderanim",
             privilege = Privilege.ADMIN,
-            usage = "::dumprenders",
-            description = "Dumps all RenderAnimationDefinition definitions to a .txt file.",
-        ) { p, _ ->
-            val dumpFile = File("dumps/render_animations.txt")
+            usage = "::dumprenderanim",
+            description = "Dumps all render animations to dumps/render_anim.txt",
+        ) { player, _ ->
+            val path = Paths.get("dumps/render_anim.txt")
+            Files.createDirectories(path.parent)
 
-            dumpFile.parentFile?.let { parent ->
-                if (!parent.exists()) parent.mkdirs()
-            }
-
-            val result = mutableListOf<String>()
-            val index = CacheIndex.CONFIGURATION
-
-            val fileCount = Cache.getArchiveFileCount(index, 32)
-            if (fileCount <= 0) {
-                p.debug("No BAS_TYPE archive found.")
-                return@define
-            }
-
-            for (id in 0 until fileCount) {
-                val data = Cache.getData(index, 32, id) ?: continue
-
-                try {
-                    val def = RenderAnimationDefinition.forId(id) ?: continue
-                    val builder = StringBuilder()
-                    builder.append("RenderAnimationDefinition ID: $id\n")
-
-                    RenderAnimationDefinition::class.java.declaredFields
-                        .filter { !Modifier.isStatic(it.modifiers) }
-                        .forEach { field ->
-                            field.isAccessible = true
-                            val value = field.get(def)
-
-                            if (value is Array<*>) {
-                                builder.append("${field.name} = [${value.joinToString()}]\n")
-                            } else {
-                                builder.append("${field.name} = $value\n")
-                            }
-                        }
-
-                    builder.append("\n")
-                    result.add(builder.toString())
-                } catch (e: Exception) {
-                    println("Error parsing render animation id $id: ${e.message}")
+            try {
+                BufferedWriter(Files.newBufferedWriter(path)).use { bw ->
+                    val capacity = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE)
+                    for (i in 0 until capacity) {
+                        val def = RenderAnimationDefinition.forId(i) ?: continue
+                        bw.append("RenderAnim $i -> ")
+                        bw.append("stand=${def.standAnimationId}, ")
+                        bw.append("walk=${def.walkAnimationId}, ")
+                        bw.append("run=${def.runAnimationId}, ")
+                        bw.append("turn180=${def.turn180Animation}, ")
+                        bw.append("turnCW=${def.turnCWAnimation}, ")
+                        bw.append("turnCCW=${def.turnCCWAnimation}")
+                        bw.newLine()
+                    }
                 }
+                player.debug("Render animations dumped successfully to dumps/render_anim.txt")
+            } catch (e: Exception) {
+                player.debug("Failed to dump render animations: ${e.message}")
+                e.printStackTrace()
             }
 
-            dumpFile.writeText(result.joinToString(separator = "\n"))
-            p.debug("Render animation definitions dumped to ${dumpFile.path}.")
+            return@define
         }
 
         /*
@@ -464,158 +444,31 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
          * Dumps detailed info about interface.
          */
 
-        define(
-            name = "dumpiface",
-            privilege = Privilege.ADMIN,
-            usage = "::dumpiface <interfaceId>",
-            description = "Dumps detailed info about interface.",
-        ) { player, args ->
+        define("dumpifaces") { player, _ ->
+            val maxId = Cache.getIndexCapacity(CacheIndex.COMPONENTS)
+            for (id in 0 until maxId) {
+                IfaceDefinition.forId(id)?.let { dumpIface(it) }
+            }
+        }
+
+        define("dumpiface") { player, args ->
             if (args.size < 2) {
-                player.debug("Usage: ::dumpiface <interfaceId>")
+                player.debug("Usage: dumpiface <id>")
                 return@define
             }
 
-            val ifaceId = args[1].toIntOrNull()
-            if (ifaceId == null) {
-                player.debug("Invalid interface ID: ${args[1]}")
+            val id = args[1].toIntOrNull()
+            if (id == null) {
+                player.debug("Invalid ID: ${args[1]}")
                 return@define
             }
 
-            val ifaceDef = try {
-                IfaceDefinition.forId(ifaceId)
-            } catch (e: Exception) {
-                player.debug("Error loading interface $ifaceId: ${e.message}")
-                null
+            val def = IfaceDefinition.forId(id)
+            if (def == null) {
+                player.debug("Interface $id does not exist.")
+            } else {
+                dumpIface(def)
             }
-
-            if (ifaceDef == null) {
-                player.debug("Interface $ifaceId not found.")
-                return@define
-            }
-
-            val children = ifaceDef.children ?: emptyArray()
-            if (children.isEmpty()) {
-                player.debug("Interface $ifaceId has no children.")
-                return@define
-            }
-
-            val exportDir = File("dumps/components")
-            if (!exportDir.exists()) exportDir.mkdirs()
-            val dump = File(exportDir, "$ifaceId.txt")
-
-            val writer = dump.bufferedWriter()
-            try {
-                children.forEachIndexed { index, child ->
-                    if (child == null) return@forEachIndexed
-
-                    val isEmpty = (child.type == null) && (child.baseWidth ?: 0) == 0 && (child.baseHeight ?: 0) == 0
-                    if (isEmpty) return@forEachIndexed
-
-                    writer.write("Child: $index")
-
-                    fun appendIfNotDefault(name: String, value: Any?, default: Any?) {
-                        if (value != null && value != default) {
-                            writer.write("  $name: $value\n")
-                        }
-                    }
-
-                    appendIfNotDefault("clientCode", child.clientCode, 0)
-                    appendIfNotDefault("baseX", child.baseX, 0)
-                    appendIfNotDefault("baseY", child.baseY, 0)
-                    appendIfNotDefault("baseWidth", child.baseWidth, 0)
-                    appendIfNotDefault("baseHeight", child.baseHeight, 0)
-                    appendIfNotDefault("dynWidth", child.dynWidth, 0)
-                    appendIfNotDefault("dynHeight", child.dynHeight, 0)
-                    appendIfNotDefault("xMode", child.xMode, 0)
-                    appendIfNotDefault("yMode", child.yMode, 0)
-                    appendIfNotDefault("overlayer", child.overlayer, 0)
-                    appendIfNotDefault("hidden", child.hidden, false)
-                    appendIfNotDefault("scrollMaxH", child.scrollMaxH, 0)
-                    appendIfNotDefault("scrollMaxV", child.scrollMaxV, 0)
-                    appendIfNotDefault("noClickThrough", child.noClickThrough, false)
-                    appendIfNotDefault("spriteId", child.spriteId, 0)
-                    appendIfNotDefault("activeSpriteId", child.activeSpriteId, 0)
-                    appendIfNotDefault("angle2d", child.angle2d, 0)
-                    appendIfNotDefault("hasAlpha", child.hasAlpha, false)
-                    appendIfNotDefault("spriteTiling", child.spriteTiling, false)
-                    appendIfNotDefault("alpha", child.alpha, 0)
-                    appendIfNotDefault("outlineThickness", child.outlineThickness, 0)
-                    appendIfNotDefault("shadowColor", child.shadowColor, 0)
-                    appendIfNotDefault("hFlip", child.hFlip, false)
-                    appendIfNotDefault("vFlip", child.vFlip, false)
-                    appendIfNotDefault("modelType", child.modelType, 0)
-                    appendIfNotDefault("activeModelType", child.activeModelType, 0)
-                    appendIfNotDefault("modelId", child.modelId, 0)
-                    appendIfNotDefault("activeModelId", child.activeModelId, 0)
-                    appendIfNotDefault("unknownModelProp_1", child.unknownModelProp_1, 0)
-                    appendIfNotDefault("unknownModelProp_2", child.unknownModelProp_2, 0)
-                    appendIfNotDefault("modelXAngle", child.modelXAngle, 0)
-                    appendIfNotDefault("modelYAngle", child.modelYAngle, 0)
-                    appendIfNotDefault("modelYOffset", child.modelYOffset, 0)
-                    appendIfNotDefault("modelZoom", child.modelZoom, 0)
-                    appendIfNotDefault("modelAnimId", child.modelAnimId, 0)
-                    appendIfNotDefault("activeModelAnimId", child.activeModelAnimId, 0)
-                    appendIfNotDefault("modelOrtho", child.modelOrtho, false)
-                    appendIfNotDefault("unknownModelProp_3", child.unknownModelProp_3, 0)
-                    appendIfNotDefault("unknownModelProp_4", child.unknownModelProp_4, 0)
-                    appendIfNotDefault("unknownModelProp_5", child.unknownModelProp_5, false)
-                    appendIfNotDefault("unknownModelProp_6", child.unknownModelProp_6, 0)
-                    appendIfNotDefault("unknownModelProp_7", child.unknownModelProp_7, 0)
-                    appendIfNotDefault("font", child.font, 0)
-                    appendIfNotDefault("text", child.text, null)
-                    appendIfNotDefault("activeText", child.activeText, null)
-                    appendIfNotDefault("vPadding", child.vPadding, 0)
-                    appendIfNotDefault("halign", child.halign, 0)
-                    appendIfNotDefault("valign", child.valign, 0)
-                    appendIfNotDefault("shadowed", child.shadowed, false)
-                    appendIfNotDefault("color", child.color, 0)
-                    appendIfNotDefault("activeColor", child.activeColor, 0)
-                    appendIfNotDefault("overColor", child.overColor, 0)
-                    appendIfNotDefault("unknownColor", child.unknownColor, 0)
-                    appendIfNotDefault("filled", child.filled, false)
-                    appendIfNotDefault("lineWidth", child.lineWidth, 0)
-                    appendIfNotDefault("unknownProp_8", child.unknownProp_8, false)
-                    if (child.unknownIntArray_1 != null) writer.write("  unknownIntArray_1: ${child.unknownIntArray_1!!.joinToString(",")}\n")
-                    if (child.unknownIntArray_2 != null) writer.write("  unknownIntArray_2: ${child.unknownIntArray_2!!.joinToString(",")}\n")
-                    if (child.unknownByteArray_1 != null) writer.write("  unknownByteArray_1: ${child.unknownByteArray_1!!.joinToString(",")}\n")
-                    if (child.unknownByteArray_2 != null) writer.write("  unknownByteArray_2: ${child.unknownByteArray_2!!.joinToString(",")}\n")
-                    appendIfNotDefault("optionBase", child.optionBase, null)
-                    if (child.ops != null) writer.write("  ops: ${child.ops!!.joinToString(",")}\n")
-                    appendIfNotDefault("dragDeadzone", child.dragDeadzone, 0)
-                    appendIfNotDefault("dragDeadtime", child.dragDeadtime, 0)
-                    appendIfNotDefault("dragRenderBehavior", child.dragRenderBehavior, false)
-                    appendIfNotDefault("opCircumfix", child.opCircumfix, null)
-                    appendIfNotDefault("opSuffix", child.opSuffix, null)
-                    appendIfNotDefault("option", child.option, null)
-                    appendIfNotDefault("unknownProp_9", child.unknownProp_9, 0)
-                    appendIfNotDefault("unknownProp_10", child.unknownProp_10, 0)
-                    appendIfNotDefault("unknownProp_11", child.unknownProp_11, 0)
-                    if (child.cs1ComparisonOperands != null) writer.write("  cs1ComparisonOperands: ${child.cs1ComparisonOperands!!.joinToString(",")}\n")
-                    if (child.cs1ComparisonOpcodes != null) writer.write("  cs1ComparisonOpcodes: ${child.cs1ComparisonOpcodes!!.joinToString(",")}\n")
-                    if (child.cs1Scripts != null) {
-                        writer.write("  cs1Scripts:\n")
-                        child.cs1Scripts!!.forEachIndexed { i, arr ->
-                            writer.write("    Script $i: ${arr?.joinToString(",") ?: "null"}\n")
-                        }
-                    }
-                    if (child.objCounts != null) writer.write("  objCounts: ${child.objCounts!!.joinToString(",")}\n")
-                    if (child.objTypes != null) writer.write("  objTypes: ${child.objTypes!!.joinToString(",")}\n")
-                    appendIfNotDefault("invMarginX", child.invMarginX, 0)
-                    appendIfNotDefault("invMarginY", child.invMarginY, 0)
-                    if (child.invOffsetX != null) writer.write("  invOffsetX: ${child.invOffsetX!!.joinToString(",")}\n")
-                    if (child.invOffsetY != null) writer.write("  invOffsetY: ${child.invOffsetY!!.joinToString(",")}\n")
-                    if (child.invSprite != null) writer.write("  invSprite: ${child.invSprite!!.joinToString(",")}\n")
-                    appendIfNotDefault("buttonType", child.buttonType, 0)
-                    if (child.invOptions != null) writer.write("  invOptions: ${child.invOptions!!.joinToString(",")}\n")
-                    appendIfNotDefault("parent", child.parent, 0)
-
-                    writer.write("\n")
-                }
-            } finally {
-                writer.close()
-            }
-
-            player.debug("Interface $ifaceId dumped to file: $dump.")
         }
 
         /*
@@ -880,6 +733,68 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             } catch (e: Exception) {
                 p.debug("Error saving JSON file: ${e.message}")
             }
+        }
+    }
+
+    fun dumpIface(def: IfaceDefinition, indent: String = "") {
+        val dir = Paths.get("dumps/ifaces")
+        Files.createDirectories(dir)
+        val file = dir.resolve("iface_${def.id}.txt")
+
+        BufferedWriter(Files.newBufferedWriter(file)).use { bw ->
+            fun writeLine(line: String = "") = bw.appendLine(indent + line)
+
+            writeLine("Interface Dump for ID: ${def.id}")
+            writeLine("-------------------------------------------------")
+            for (field in def.javaClass.declaredFields) {
+                field.isAccessible = true
+                val value = field.get(def)
+                val valueStr = when {
+                    value == null -> "null"
+                    value is Array<*> -> value.joinToString(", ", "[", "]") { it?.toString() ?: "null" }
+                    value is IntArray -> value.joinToString(", ", "[", "]")
+                    value is ByteArray -> value.joinToString(", ", "[", "]")
+                    value is ShortArray -> value.joinToString(", ", "[", "]")
+                    value is BooleanArray -> value.joinToString(", ", "[", "]")
+                    value is FloatArray -> value.joinToString(", ", "[", "]")
+                    value is DoubleArray -> value.joinToString(", ", "[", "]")
+                    else -> value.toString()
+                }
+                writeLine("${field.name} = $valueStr")
+            }
+
+            def.scripts?.let { scripts ->
+                writeLine("LinkedScripts:")
+                for (field in scripts.javaClass.declaredFields) {
+                    field.isAccessible = true
+                    val script = field.get(scripts) as? ScriptArgs
+                    val argsStr = script?.args?.joinToString(", ") ?: "null"
+                    writeLine(" ${field.name}: id=${script?.id ?: "null"}, args=[$argsStr]")
+                }
+            }
+
+            def.triggers?.let { triggers ->
+                writeLine("ScriptTriggers:")
+                for (field in triggers.javaClass.declaredFields) {
+                    field.isAccessible = true
+                    val arr = field.get(triggers) as? IntArray
+                    writeLine(" ${field.name}: ${arr?.joinToString(", ") ?: "null"}")
+                }
+            }
+
+            def.children?.let { children ->
+                writeLine("Child:")
+                for ((index, child) in children.withIndex()) {
+                    if (child != null) {
+                        writeLine(" [$index] ID=${child.id}, Type=${child.type}, Text=${child.text}, Hidden=${child.hidden}")
+                        dumpIface(child, indent + "  ")
+                    } else {
+                        writeLine(" [$index]: null")
+                    }
+                }
+            }
+
+            writeLine("-------------------------------------------------")
         }
     }
 }

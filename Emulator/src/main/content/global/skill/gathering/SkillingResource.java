@@ -274,11 +274,11 @@ public enum SkillingResource {
     /**
      * The Jungle bush 1.
      */
-    JUNGLE_BUSH_1(Scenery.JUNGLE_BUSH_2892, 1, 0.15, 50 | 100 << 16, 100.0, 1511, 1, "jungle bush", null, 2894, Skills.WOODCUTTING),
+    JUNGLE_BUSH_1(Scenery.JUNGLE_BUSH_2892, 1, 0.15, 50 | 100 << 16, 100.0, 1511, 1, "jungle bush", null, 0, Skills.WOODCUTTING), // 2894
     /**
      * The Jungle bush 2.
      */
-    JUNGLE_BUSH_2(Scenery.JUNGLE_BUSH_2893, 1, 0.15, 50 | 100 << 16, 100.0, 1511, 1, "jungle bush", null, 2895, Skills.WOODCUTTING),
+    JUNGLE_BUSH_2(Scenery.JUNGLE_BUSH_2893, 1, 0.15, 50 | 100 << 16, 100.0, 1511, 1, "jungle bush", null, 0, Skills.WOODCUTTING), // 2895
 
     /**
      * The Achey tree.

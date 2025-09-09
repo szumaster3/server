@@ -45,6 +45,15 @@ class KharaziDungeonPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching the bookcase (Clue scenery?)
+         */
+
+        on(Scenery.BOOKCASE_393, IntType.SCENERY, "search") { player, _ ->
+            sendDialogue(player, "This bamboo book shelf doesn't house many books, it doesn't look as if the Shaman has much opportunity to read at the moment in any case.")
+            return@on true
+        }
+
         on(Scenery.TABLE_2906, IntType.SCENERY, "look-at", "search") { player, _ ->
             val option = getUsedOption(player)
             when (option) {
@@ -70,7 +79,6 @@ class KharaziDungeonPlugin : InteractionListener {
             val option = getUsedOption(player)
             when (option) {
                 "look" -> sendDialogue(player, "This bamboo book shelf doesn't house many books, it doesn't look as if the Shaman has much opportunity to read at the moment in any case.")
-
                 else -> openDialogue(player, NorthEasternBookcase())
             }
             return@on true

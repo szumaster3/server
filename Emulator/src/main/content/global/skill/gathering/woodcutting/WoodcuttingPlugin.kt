@@ -25,6 +25,7 @@ import core.game.system.command.sets.STATS_BASE
 import core.game.system.command.sets.STATS_LOGS
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
+import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Sounds
@@ -129,9 +130,24 @@ class WoodcuttingPlugin : InteractionListener {
                 }
 
                 if (resource == WoodcuttingNode.DRAMEN_TREE) {
-                    sendMessage(player,"You cut a branch from the Dramen tree.")
+                    sendMessage(player, "You cut a branch from the Dramen tree.")
+                } else if (resource.isJungleTree()) {
+                    sendMessage(player, "You get some wood.")
+                    resetAnimator(player)
+
+                    val jungleTree = getScenery(node.location)
+                    val targetLocation = jungleTree?.location?.let {
+                        if (player.location.y > it.y) it.transform(0, -1, 0) else it.transform(0, 1, 0)
+                    }
+                    targetLocation?.let { target ->
+                        forceMove(player, player.location, target, 0, 60, null, Animations.WALK_819) {
+                            sendMessage(player, "You hack your way through the tree.")
+                            sendMessage(player, "You move deeper into the jungle.", 1)
+                        }
+                    }
                 } else {
-                    sendMessage(player, "You get some " + ItemDefinition.forId(reward).name.lowercase() + ".",)
+                    val itemName = ItemDefinition.forId(reward).name.lowercase()
+                    sendMessage(player, "You get some $itemName.")
                 }
 
                 player.inventory.add(Item(reward, rewardAmount))
@@ -302,4 +318,6 @@ class WoodcuttingPlugin : InteractionListener {
         }
         return experience * amount
     }
+
+    fun WoodcuttingNode.isJungleTree() = this.identifier.toInt() == 4
 }
