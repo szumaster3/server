@@ -84,15 +84,15 @@ class SmeltingPulse : SkillPulse<Item?> {
     }
 
     override fun reward(): Boolean {
+        if (!superHeat && ++ticks % 5 != 0) {
+            return false
+        }
         if (!superHeat) {
             sendMessage(
                 player,
                 "You place a lump of " + StringUtils.formatDisplayName(bar.toString()).lowercase() + " in the furnace.",
             )
-            if (!clockReady(player, Clocks.SKILLING)) return false
-            delayClock(player, Clocks.SKILLING, 5)
         }
-
         for (i in bar!!.ores) {
             if (!removeItem(player, i)) {
                 return true

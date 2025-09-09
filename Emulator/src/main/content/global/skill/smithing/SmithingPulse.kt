@@ -72,9 +72,10 @@ class SmithingPulse(
     }
 
     override fun reward(): Boolean {
-        if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 4)
-
+        if (delay == 1) {
+            delay = 4
+            return false
+        }
         player.lock(4)
         player.inventory.remove(Item(bar.barType.barType, bar.smithingType.required))
         val item = Item(node!!.id, bar.smithingType.productAmount)
