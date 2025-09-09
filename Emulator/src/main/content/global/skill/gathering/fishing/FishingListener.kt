@@ -192,11 +192,6 @@ class FishingListener : InteractionListener {
         val barehand = isBarehandEnabled(player)
 
         if (barehand && option.isHarpoonType()) {
-            if (!player.savedData.activityData.isBarbarianFishingBarehand) {
-                sendDialogue(player, "You must first learn barehand fishing from Otto.")
-                return false
-            }
-
             val minFishingLevel = option.fish.minOf { fish ->
                 when (fish) {
                     Fish.TUNA -> 55
@@ -214,7 +209,6 @@ class FishingListener : InteractionListener {
                     else -> 0
                 }
             }
-
             if (player.skills.getLevel(Skills.FISHING) < minFishingLevel || player.skills.getLevel(Skills.STRENGTH) < minStrengthLevel) {
                 sendDialogue(player, "You don't meet the requirements to barehand these fish.")
                 return false
