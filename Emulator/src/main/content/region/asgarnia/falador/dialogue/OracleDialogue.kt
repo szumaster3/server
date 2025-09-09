@@ -14,7 +14,7 @@ import shared.consts.Quests
  */
 @Initializable
 class OracleDialogue(player: Player? = null) : Dialogue(player) {
-    
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         quest = player.getQuestRepository().getQuest(Quests.DRAGON_SLAYER)
@@ -27,36 +27,14 @@ class OracleDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (quest!!.getStage(player)) {
-            20 ->
-                when (stage) {
-                    0 ->
-                        npc(
-                            "The map's behind a door below,",
-                            "but entering is rather tough.",
-                            "This is that you need to know:",
-                            "You must use the following stuff.",
-                        ).also {
-                            stage++
-                        }
-                    1 ->
-                        npc(
-                            "First, a drink used by a mage.",
-                            "Next, some worm string, changed to sheet.",
-                            "Then, a small crustacean cage.",
-                            "Last, a bowl that's not seen heat.",
-                        ).also {
-                            stage =
-                                END_DIALOGUE
-                        }
-                }
-            else ->
-                when (stage) {
-                    0 ->
-                        npc("Don't judge a book by its cover - judge it on its'", "grammar and punctuation.").also {
-                            stage =
-                                END_DIALOGUE
-                        }
-                }
+            20 -> when (stage) {
+                0 -> npc("The map's behind a door below,", "but entering is rather tough.", "This is that you need to know:", "You must use the following stuff.").also { stage++ }
+                1 -> npc("First, a drink used by a mage.", "Next, some worm string, changed to sheet.", "Then, a small crustacean cage.", "Last, a bowl that's not seen heat.").also { stage = END_DIALOGUE }
+            }
+
+            else -> when (stage) {
+                0 -> npc("Don't judge a book by its cover - judge it on its'", "grammar and punctuation.").also { stage = END_DIALOGUE }
+            }
         }
         return true
     }
