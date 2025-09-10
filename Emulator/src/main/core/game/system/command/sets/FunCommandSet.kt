@@ -21,6 +21,7 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
+import shared.consts.Animations
 import shared.consts.Sounds
 import java.awt.HeadlessException
 import java.awt.Toolkit
@@ -33,6 +34,13 @@ class FunCommandSet : CommandSet(Privilege.ADMIN) {
     var npcs: List<NPC> = ArrayList()
 
     override fun defineCommands() {
+        define(
+            name = "bike",
+            privilege = Privilege.ADMIN,
+        ) { player, args ->
+            animate(player, Animations.USE_BIKE_MACHINE_2433)
+        }
+
         define(
             name = "npcanim",
             privilege = Privilege.ADMIN,

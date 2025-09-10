@@ -1,7 +1,7 @@
 package core
 
 import TestUtils
-import content.global.skill.gathering.GatheringPlugin
+//import content.global.skill.gathering.GatheringPlugin
 import content.global.skill.gathering.woodcutting.WoodcuttingPlugin
 import core.api.log
 import core.cache.def.impl.NPCDefinition
@@ -23,7 +23,7 @@ class PathfinderTests {
     companion object {
         init {
             TestUtils.preTestSetup()
-            GatheringPlugin().defineListeners()
+            //GatheringPlugin().defineListeners()
             WoodcuttingPlugin().defineListeners()
         }
 

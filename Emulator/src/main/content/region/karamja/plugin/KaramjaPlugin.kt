@@ -190,7 +190,7 @@ class KaramjaPlugin : InteractionListener {
         else
             bush.location.transform(0, 1, 0)
 
-        forceMove(player, player.location, target, 0, 60, null, Animations.WALK_819) {
+        forceMove(player, player.location, target, 0, 90, null, Animations.WALK_819) {
             sendMessage(player, "You hack your way through the jungle bush.")
             delayClock(player, Clocks.SKILLING, 3)
             clearScripts(player)

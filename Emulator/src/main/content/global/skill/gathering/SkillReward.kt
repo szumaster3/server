@@ -10,6 +10,9 @@ import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
 import kotlin.random.Random
 
+/**
+ * Utility object for calculating skill-based success chances.
+ */
 object SkillReward {
     /**
      * Checks if a woodcutting action succeeds based on woodcutting level,
