@@ -30,7 +30,7 @@ class SpellBookManager {
      */
     fun update(player: Player) {
         player.interfaceManager.openTab(Component(spellBook))
-        Objects.requireNonNull(SpellBook.forInterface(spellBook))?.let { setVarbit(player, 357, it.ordinal) }
+        SpellBook.forInterface(spellBook)?.let { setVarbit(player, 357, it.ordinal) }
     }
 
     /**
