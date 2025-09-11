@@ -5,9 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 
-abstract class State(
-    val player: Player? = null,
-) {
+abstract class State(val player: Player? = null) {
     var pulse: Pulse? = null
 
     abstract fun save(root: JsonObject)

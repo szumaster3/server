@@ -13,12 +13,7 @@ class StateRepository : StartupListener {
         val states = HashMap<String, State>()
 
         fun loadStateClasses() {
-            val result =
-                ClassGraph()
-                    .enableClassInfo()
-                    .enableAnnotationInfo()
-                    .acceptPackages("content")
-                    .scan()
+            val result = ClassGraph().enableClassInfo().enableAnnotationInfo().acceptPackages("content").scan()
             result.getClassesWithAnnotation("core.game.node.entity.state.PlayerState").forEach {
                 val key =
                     it.getAnnotationInfo("core.game.node.entity.state.PlayerState").parameterValues[0].value as String

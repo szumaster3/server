@@ -1,9 +1,11 @@
 package core.game.node.entity.player.link
 
+import core.api.setVarbit
 import core.game.component.Component
 import core.game.node.entity.combat.spell.MagicSpell
 import core.game.node.entity.player.Player
 import shared.consts.Components
+import java.util.*
 
 /**
  * Manages a player's spellbook, allowing switching between different magic spellbooks.
@@ -27,12 +29,8 @@ class SpellBookManager {
      * @param player The player whose interface should be updated.
      */
     fun update(player: Player) {
-        val spellBook = SpellBook.forInterface(this.spellBook)
-        if (spellBook != null) {
-            player.interfaceManager.openTab(Component(spellBook.interfaceId))
-        } else {
-            player.interfaceManager.openTab(Component(SpellBook.MODERN.interfaceId))
-        }
+        player.interfaceManager.openTab(Component(spellBook))
+        Objects.requireNonNull(SpellBook.forInterface(spellBook))?.let { setVarbit(player, 357, it.ordinal) }
     }
 
     /**

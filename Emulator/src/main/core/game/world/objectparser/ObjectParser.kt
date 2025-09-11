@@ -27,9 +27,6 @@ class ObjectParser : StartupListener {
 
             val parseList = doc.getElementsByTagName("ObjectAction")
 
-            var added = 0
-            var removed = 0
-
             for (i in 0 until parseList.length) {
                 val parseNode = parseList.item(i)
                 if (parseNode.nodeType == Node.ELEMENT_NODE) {
@@ -57,7 +54,6 @@ class ObjectParser : StartupListener {
                                 "s"  -> 6
                                 else -> 1
                             }
-                            added++
                             LandscapeParser.addScenery(Scenery(id, x, y, z, objType, dir))
                         }
                         "remove" -> {
@@ -69,14 +65,11 @@ class ObjectParser : StartupListener {
                             if (parseElement.hasAttribute("type")) {
                                 objType = parseElement.getAttribute("type").toInt()
                             }
-                            removed++
                             LandscapeParser.removeScenery(Scenery(id, x, y, z, objType, 0))
                         }
                     }
                 }
             }
-            val total = added + removed
-            // log(this::class.java, Log.DEBUG, "Parsed : T=[$total]A=[$added]R=[$removed]")
         } catch (e: Exception) {
             e.printStackTrace()
         }
