@@ -16,7 +16,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.*
 
@@ -42,52 +41,101 @@ enum class Balloon(
     GRAND_TREE("Grand Tree", NPCs.ASSISTANT_LE_SMITH_5056, Location(2480, 3458), Items.MAGIC_LOGS_1513, 60, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 23, 15, 19139);
 
     companion object {
-        private val valuesList = values()
-        private val npcMap = valuesList.associateBy { it.npc }
-        private val buttonMap = valuesList.associateBy { it.button }
-        private val sceneryMap = valuesList.associateBy { it.wrapperId }
+        /**
+         * Maps NPC id to [Balloon].
+         */
+        private val npcMap: Map<Int, Balloon> by lazy {
+            values().associateBy { it.npc }
+        }
 
-        private val animations = Array(valuesList.size) { IntArray(valuesList.size) }
+        /**
+         * Maps interface button to [Balloon].
+         */
+        private val buttonToBalloon: Map<Int, Balloon> by lazy {
+            values().associateBy { it.button }
+        }
 
-        private val rawRoutes = listOf(
-            ENTRANA to TAVERLEY,
-            ENTRANA to CRAFT_GUILD,
-            ENTRANA to VARROCK,
-            ENTRANA to GRAND_TREE,
-            ENTRANA to CASTLE_WARS,
-            VARROCK to CRAFT_GUILD,
-            TAVERLEY to CRAFT_GUILD,
-            TAVERLEY to CASTLE_WARS,
-            CRAFT_GUILD to CASTLE_WARS,
-            GRAND_TREE to CASTLE_WARS,
-            GRAND_TREE to CRAFT_GUILD,
-            TAVERLEY to GRAND_TREE,
-            VARROCK to GRAND_TREE
+        /**
+         * Gets [Balloon] for given button.
+         */
+        fun fromButtonId(buttonId: Int): Balloon? = buttonToBalloon[buttonId]
+
+        /**
+         * Maps scenery to [Balloon].
+         */
+        private val sceneryToBalloon: Map<Int, Balloon> by lazy {
+            values().associateBy { it.wrapperId }
+        }
+
+        /**
+         * Gets [Balloon] for given scenery.
+         */
+        fun fromSceneryId(id: Int): Balloon? = sceneryToBalloon[id]
+
+        /**
+         * Gets [Balloon] for given NPC.
+         */
+        fun fromNpcId(npcId: Int): Balloon? = npcMap[npcId]
+
+        /**
+         * Animation ids for balloon travel routes.
+         */
+        private val animations: Map<Pair<Balloon, Balloon>, Int> = mapOf(
+            ENTRANA to TAVERLEY to 5110,
+            TAVERLEY to ENTRANA to 5111,
+            ENTRANA to CRAFT_GUILD to 5112,
+            CRAFT_GUILD to ENTRANA to 5113,
+            ENTRANA to VARROCK to 5114,
+            VARROCK to ENTRANA to 5115,
+            ENTRANA to GRAND_TREE to 5116,
+            GRAND_TREE to ENTRANA to 5117,
+            ENTRANA to CASTLE_WARS to 5118,
+            CASTLE_WARS to ENTRANA to 5119,
+            VARROCK to CRAFT_GUILD to 5120,
+            CRAFT_GUILD to VARROCK to 5121,
+            VARROCK to TAVERLEY to 5122,
+            TAVERLEY to VARROCK to 5123,
+            TAVERLEY to CRAFT_GUILD to 5124,
+            CRAFT_GUILD to TAVERLEY to 5125,
+            TAVERLEY to CASTLE_WARS to 5126,
+            CASTLE_WARS to TAVERLEY to 5127,
+            CRAFT_GUILD to CASTLE_WARS to 5128,
+            CASTLE_WARS to CRAFT_GUILD to 5129,
+            VARROCK to CASTLE_WARS to 5130,
+            CASTLE_WARS to VARROCK to 5131,
+            GRAND_TREE to CASTLE_WARS to 5132,
+            CASTLE_WARS to GRAND_TREE to 5133,
+            GRAND_TREE to CRAFT_GUILD to 5134,
+            CRAFT_GUILD to GRAND_TREE to 5135,
+            TAVERLEY to GRAND_TREE to 5136,
+            GRAND_TREE to TAVERLEY to 5137,
+            VARROCK to GRAND_TREE to 5138,
+            GRAND_TREE to VARROCK to 5139
         )
 
-        init {
-            var animId = 5110
-            for ((from, to) in rawRoutes) {
-                animations[from.ordinal][to.ordinal] = animId
-                animations[to.ordinal][from.ordinal] = animId + 1
-                animId += 2
-            }
-        }
-
-        fun fromNpcId(npcId: Int): Balloon? = npcMap[npcId]
-        fun fromButtonId(buttonId: Int): Balloon? = buttonMap[buttonId]
-        fun fromSceneryId(wrapperId: Int): Balloon? = sceneryMap[wrapperId]
-
+        /**
+         * Gets the animation id for traveling from one balloon location to another.
+         *
+         * @param from The origin balloon location.
+         * @param to The destination balloon location.
+         * @return The animation id.
+         * @throws IllegalStateException if no animation exists for the given route.
+         */
         fun getAnimationId(from: Balloon, to: Balloon): Int {
-            val animId = animations[from.ordinal][to.ordinal]
-            if (animId == 0) error("No animation for route [$from] -> [$to]")
-            return animId
+            return animations[from to to].takeIf { it != 0 }
+                ?: error("No animation for route [$from] -> [$to]")
         }
 
+        /**
+         * Unlocks a new destination after a successful navigation from Entrana.
+         */
         fun unlockDestination(player: Player, destination: Balloon) {
             if (getVarbit(player, destination.varbitId) != 1) {
                 setVarbit(player, destination.varbitId, 1, true)
-                if (destination != ENTRANA) rewardXP(player, Skills.FIREMAKING, 2000.0)
+                val xp = 2000
+                if (destination != ENTRANA) {
+                    rewardXP(player, Skills.FIREMAKING, xp.toDouble())
+                }
                 sendMessage(player, "You have unlocked the balloon route to ${destination.areaName}!")
             }
         }
