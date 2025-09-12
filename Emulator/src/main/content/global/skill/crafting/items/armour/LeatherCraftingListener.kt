@@ -1,6 +1,7 @@
 package content.global.skill.crafting.items.armour
 
 import core.api.*
+import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
@@ -20,15 +21,19 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
         val LEATHER = LeatherProduct.values().map { it.input }.toIntArray()
 
         onUseWith(IntType.ITEM, TOOLS, *LEATHER) { player, used, with ->
+
+            if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
+
             val craft = LeatherProduct.forInput(with.id).firstOrNull() ?: return@onUseWith true
-            val requiredTool =
-                if (craft.type == LeatherProduct.Type.STUDDED) Items.STEEL_STUDS_2370 else Items.NEEDLE_1733
+            val requiredTool = if (craft.type == LeatherProduct.Type.STUDDED) Items.STEEL_STUDS_2370 else Items.NEEDLE_1733
 
             if (used.id != requiredTool) {
-                sendMessage(
-                    player,
-                    "You need ${if (requiredTool == Items.NEEDLE_1733) "a needle" else "steel studs"} to craft this leather."
-                )
+                sendMessage(player, "You need ${if (requiredTool == Items.NEEDLE_1733) "a needle" else "steel studs"} to craft this leather.")
+                return@onUseWith true
+            }
+
+            if (!inInventory(player, Items.THREAD_1734)) {
+                sendDialogue(player, "You need thread to make this.")
                 return@onUseWith true
             }
 
@@ -61,7 +66,7 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
                         player,
                         LeatherCraftingPulse(player, Item(craft.input), craft, amount)
                     )
-                } else player.debug("Invalid leather item selected.")
+                }
             }
 
             calculateMaxAmount {

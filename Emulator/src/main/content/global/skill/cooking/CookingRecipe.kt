@@ -88,10 +88,10 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     MUSHROOM_POTATO(Items.MUSHROOM_AND_ONION_7066, Items.POTATO_WITH_BUTTER_6703, Items.MUSHROOM_POTATO_7058, 64, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
     TUNA_POTATO(Items.TUNA_AND_CORN_7068, Items.POTATO_WITH_BUTTER_6703, Items.TUNA_POTATO_7060, 68, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
 
-    SKEWERED_BIRD_MEAT(Items.RAW_BIRD_MEAT_9978, Items.IRON_SPIT_7225, Items.SKEWERED_BIRD_MEAT_9984, 11),
-    SKEWERED_RABBIT(Items.RAW_RABBIT_3226,Items.IRON_SPIT_7225, Items.SKEWERED_RABBIT_7224, 16),
-    SKEWERED_BEAST(Items.RAW_BEAST_MEAT_9986, Items.IRON_SPIT_7225, Items.SKEWERED_BEAST_9992, 21),
-    SKEWERED_CHOMPY(Items.RAW_CHOMPY_2876, Items.IRON_SPIT_7225, Items.SKEWERED_CHOMPY_7230, 30),
+    SKEWERED_BIRD_MEAT(Items.RAW_BIRD_MEAT_9978, Items.IRON_SPIT_7225, Items.SKEWERED_BIRD_MEAT_9984, 11, message = "You skewer the bird meat."),
+    SKEWERED_RABBIT(Items.RAW_RABBIT_3226,Items.IRON_SPIT_7225, Items.SKEWERED_RABBIT_7224, 16, message = "You skewer the rabbit meat."),
+    SKEWERED_BEAST(Items.RAW_BEAST_MEAT_9986, Items.IRON_SPIT_7225, Items.SKEWERED_BEAST_9992, 21, message = "You skewer the beast meat."),
+    SKEWERED_CHOMPY(Items.RAW_CHOMPY_2876, Items.IRON_SPIT_7225, Items.SKEWERED_CHOMPY_7230, 30, message = "You skewer the chompy bird meat."),
 
     SPIDER_ON_STICK(Items.SPIDER_CARCASS_6291, Items.SKEWER_STICK_6305, Items.SPIDER_ON_STICK_6293),
     SPIDER_ON_SHAFT(Items.SPIDER_CARCASS_6291, Items.ARROW_SHAFT_52, Items.SPIDER_ON_SHAFT_6295),

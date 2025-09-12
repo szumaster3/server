@@ -25,6 +25,8 @@ class CookingRecipeHandler : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, CookingRecipe.INGREDIENT_IDS, *CookingRecipe.SECONDARY_IDS) { player, used, with ->
+            if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
+
             val recipe = CookingRecipe.values().find { r ->
                 (r.ingredientID == used.id && r.secondaryID == with.id) ||
                         (r.ingredientID == with.id && r.secondaryID == used.id)
@@ -54,8 +56,6 @@ class CookingRecipeHandler : InteractionListener {
                 sendMessage(player, "You must add butter to the baked potato before adding toppings.")
                 return@onUseWith true
             }
-
-            if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             val ingredientAmount = amountInInventory(player, recipe.ingredientID)
             val secondaryAmount = amountInInventory(player, recipe.secondaryID)
