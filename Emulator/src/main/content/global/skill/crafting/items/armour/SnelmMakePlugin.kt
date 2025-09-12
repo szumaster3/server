@@ -19,7 +19,7 @@ class SnelmMakePlugin : InteractionListener {
 
             val available = amountInInventory(player, used.id)
             if (available < 1) {
-                sendMessage(player, "You do not have enough ${getItemName(used.id).lowercase()} to craft this.")
+                sendMessage(player, "You do not have enough ${getItemName(used.id).lowercase()} to make this.")
                 return@onUseWith true
             }
 

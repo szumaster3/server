@@ -7,9 +7,9 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import kotlin.math.max
 import shared.consts.Components
 import shared.consts.Items
-import kotlin.math.max
 
 /**
  * Handles leather crafting.
@@ -17,18 +17,17 @@ import kotlin.math.max
 class LeatherCraftingListener : InteractionListener, InterfaceListener {
 
     override fun defineListeners() {
-        val TOOLS = intArrayOf(Items.STEEL_STUDS_2370, Items.NEEDLE_1733)
-        val LEATHER = LeatherProduct.values().map { it.input }.toIntArray()
-
         onUseWith(IntType.ITEM, TOOLS, *LEATHER) { player, used, with ->
-
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-
             val craft = LeatherProduct.forInput(with.id).firstOrNull() ?: return@onUseWith true
-            val requiredTool = if (craft.type == LeatherProduct.Type.STUDDED) Items.STEEL_STUDS_2370 else Items.NEEDLE_1733
+            val requiredTool =
+                if (craft.type == LeatherProduct.Type.STUDDED) Items.STEEL_STUDS_2370 else Items.NEEDLE_1733
 
             if (used.id != requiredTool) {
-                sendMessage(player, "You need ${if (requiredTool == Items.NEEDLE_1733) "a needle" else "steel studs"} to craft this leather.")
+                sendMessage(
+                    player,
+                    "You need ${if (requiredTool == Items.NEEDLE_1733) "a needle" else "steel studs"} to craft this leather."
+                )
                 return@onUseWith true
             }
 
@@ -62,16 +61,11 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
             create { id, amount ->
                 val craft = LeatherProduct.forProduct(id)
                 if (craft != null) {
-                    submitIndividualPulse(
-                        player,
-                        LeatherCraftingPulse(player, Item(craft.input), craft, amount)
-                    )
+                    submitIndividualPulse(player, LeatherCraftingPulse(player, Item(craft.input), craft, amount))
                 }
             }
 
-            calculateMaxAmount {
-                crafts.firstOrNull()?.let { max(0, amountInInventory(player, it.input)) } ?: 0
-            }
+            calculateMaxAmount { crafts.firstOrNull()?.let { max(0, amountInInventory(player, it.input)) } ?: 0 }
         }
     }
 
@@ -100,26 +94,33 @@ class LeatherCraftingListener : InteractionListener, InterfaceListener {
 
     companion object {
         /**
+         * The tools needed for crafting.
+         */
+        val TOOLS = intArrayOf(Items.STEEL_STUDS_2370, Items.NEEDLE_1733)
+
+        /**
+         * The leather type.
+         */
+        val LEATHER = LeatherProduct.values().map { it.input }.toIntArray()
+
+        /**
          * Represents buttons map for soft leather crafting.
          */
-        private val SOFT_LEATHER_BUTTONS = mapOf(
-            28 to Items.LEATHER_BODY_1129,
-            29 to Items.LEATHER_GLOVES_1059,
-            30 to Items.LEATHER_BOOTS_1061,
-            31 to Items.LEATHER_VAMBRACES_1063,
-            32 to Items.LEATHER_CHAPS_1095,
-            33 to Items.COIF_1169,
-            34 to Items.LEATHER_COWL_1167
-        )
+        private val SOFT_LEATHER_BUTTONS =
+            mapOf(
+                28 to Items.LEATHER_BODY_1129,
+                29 to Items.LEATHER_GLOVES_1059,
+                30 to Items.LEATHER_BOOTS_1061,
+                31 to Items.LEATHER_VAMBRACES_1063,
+                32 to Items.LEATHER_CHAPS_1095,
+                33 to Items.COIF_1169,
+                34 to Items.LEATHER_COWL_1167
+            )
 
         /**
          * Represents lookup table for leather crafting.
          */
         private val LOOKUP_TABLE: Map<LeatherProduct.Type, Map<Int, List<LeatherProduct>>> =
-            LeatherProduct.values()
-                .groupBy { it.type }
-                .mapValues {
-                    (_, crafts) -> crafts.groupBy { it.input }
-                }
+            LeatherProduct.values().groupBy { it.type }.mapValues { (_, crafts) -> crafts.groupBy { it.input } }
     }
 }

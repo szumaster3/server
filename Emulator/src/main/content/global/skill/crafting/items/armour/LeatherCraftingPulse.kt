@@ -44,11 +44,12 @@ class LeatherCraftingPulse(player: Player?, node: Item?, private val craft: Leat
             }
         }
         if (!inInventory(player, craft.input, craft.amount)) {
-            sendDialogue(player, "You need ${craft.amount} ${getItemName(craft.input).lowercase()} to make this.")
+            val itemName = getItemName(craft.input).lowercase()
+            val itemText = if (craft.amount == 1) itemName else "${itemName}s"
+            sendDialogue(player, "You need ${craft.amount} $itemText to make this.")
             amount = 0
             return false
         }
-
         closeInterface(player)
         return true
     }

@@ -1,18 +1,17 @@
 package content.global.skill.crafting.items.armour
 
-import core.game.interaction.InteractionListener
-import shared.consts.Items
 import core.api.*
 import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import shared.consts.Items
 
-class HeaddressMakePlugin : InteractionListener {
+class FeatherHeaddressMakePlugin : InteractionListener {
 
     override fun defineListeners() {
         onUseWith(IntType.ITEM, Items.COIF_1169, *FeatherHeaddress.baseIds) { player, used, _ ->
             val item = FeatherHeaddress.forBase(used.id) ?: return@onUseWith false
-
             if (!hasLevelDyn(player, Skills.CRAFTING, 79)) {
                 sendMessage(player, "You need a crafting level of at least 79 in order to do this.")
                 return@onUseWith true
@@ -36,12 +35,14 @@ class HeaddressMakePlugin : InteractionListener {
             sendSkillDialogue(player) {
                 withItems(item.product)
                 create { _, amount ->
-                    runTask(player, 1, amount) {
-                        if (amount < 1) return@runTask
-                        if (removeItem(player, Item(item.base, 20 * amount))) {
-                            addItem(player, item.product, amount)
-                            rewardXP(player, Skills.CRAFTING, 50.0 * amount)
-                            sendMessage(player, "You add the feathers to the coif to make $amount feathered headdress(es).")
+                    if (amount < 1) return@create
+                    runTask(player, delay = 1, repeatTimes = amount) {
+                        if (removeItem(player, Item(item.base, 20))) {
+                            addItem(player, item.product, 1)
+                            rewardXP(player, Skills.CRAFTING, 50.0)
+                            sendMessage(player, "You add the feathers to the coif to make ${if (amount > 1) "$amount feathered headdresses" else "a feathered headdress"}.")
+                        } else {
+                            sendMessage(player, "You don't have enough materials to continue crafting.")
                         }
                     }
                 }
@@ -51,7 +52,9 @@ class HeaddressMakePlugin : InteractionListener {
             return@onUseWith true
         }
     }
+
 }
+
 
 private enum class FeatherHeaddress(val base: Int, val product: Int) {
     FEATHER_HEADDRESS_BLUE(Items.BLUE_FEATHER_10089, Items.FEATHER_HEADDRESS_12210),

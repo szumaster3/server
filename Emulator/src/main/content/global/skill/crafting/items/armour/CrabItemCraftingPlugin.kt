@@ -4,7 +4,6 @@ import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import shared.consts.Items
 
 class CrabItemCraftingPlugin : InteractionListener {
@@ -15,10 +14,6 @@ class CrabItemCraftingPlugin : InteractionListener {
     )
 
     override fun defineListeners() {
-
-        /*
-         * Handles crafting crab claws & crab helmet.
-         */
 
         onUseWith(IntType.ITEM, Items.CHISEL_1755, *CRAB_ITEMS.keys.toIntArray()) { player, _, used ->
             val (productId, xp) = CRAB_ITEMS[used.id] ?: return@onUseWith true
@@ -47,12 +42,14 @@ class CrabItemCraftingPlugin : InteractionListener {
             sendSkillDialogue(player) {
                 withItems(productId)
                 create { _, amount ->
-                    runTask(player, 1, amount) {
-                        if (amount < 1) return@runTask
-                        if (removeItem(player, Item(used.id, amount))) {
-                            addItem(player, productId, amount)
-                            rewardXP(player, Skills.CRAFTING, xp * amount)
-                            sendMessage(player, "You craft $amount ${if (amount > 1) "${productName}s" else productName}.")
+                    if (amount < 1) return@create
+                    runTask(player, delay = 1, repeatTimes = amount) {
+                        if (removeItem(player, used.id)) {
+                            addItem(player, productId)
+                            rewardXP(player, Skills.CRAFTING, xp)
+                            sendMessage(player, "You craft ${if (amount > 1) "$amount ${productName}s" else "a $productName"}.")
+                        } else {
+                            sendMessage(player, "You do not have enough ${getItemName(used.id).lowercase()} to continue crafting.")
                         }
                     }
                 }
