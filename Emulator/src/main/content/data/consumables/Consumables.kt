@@ -76,6 +76,7 @@ enum class Consumables {
     SUPER_KEBAB(Food(intArrayOf(Items.SUPER_KEBAB_4608), SuperKebabEffect())),
     REDBERRY_PIE(HalfableFood(intArrayOf(Items.REDBERRY_PIE_2325, Items.HALF_A_REDBERRY_PIE_2333, Items.PIE_DISH_2313), HealingEffect(5))),
     MINCED_MEAT(Food(intArrayOf(Items.MINCED_MEAT_7070, Items.BOWL_1923), HealingEffect(2))),
+    SPICY_MINCED_MEAT(Food(intArrayOf(Items.SPICY_MINCED_MEAT_9996, Items.BOWL_1923), HealingEffect(2))),
     MEAT_PIE(HalfableFood(intArrayOf(Items.MEAT_PIE_2327, Items.HALF_A_MEAT_PIE_2331, Items.PIE_DISH_2313), HealingEffect(6))),
     APPLE_PIE(HalfableFood(intArrayOf(Items.APPLE_PIE_2323, Items.HALF_AN_APPLE_PIE_2335, Items.PIE_DISH_2313), HealingEffect(7))),
     GARDEN_PIE(HalfableFood(intArrayOf(Items.GARDEN_PIE_7178, Items.HALF_A_GARDEN_PIE_7180, Items.PIE_DISH_2313), MultiEffect(HealingEffect(6), SkillEffect(Skills.FARMING, 3.0, 0.0)))),

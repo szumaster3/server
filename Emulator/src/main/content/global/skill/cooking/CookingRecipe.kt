@@ -19,7 +19,13 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
 
     SLICED_MUSHROOMS(Items.MUSHROOM_6004, Items.BOWL_1923, Items.SLICED_MUSHROOMS_7080, requiresKnife = true, animation = -1, message = "You slice the mushrooms into the bowl."),
     MINCED_MEAT(Items.COOKED_MEAT_2142, Items.BOWL_1923, Items.MINCED_MEAT_7070, requiresKnife = true, animation = -1, message = "You chop the meat into the bowl."),
-    SPICY_SAUCE(Items.GNOME_SPICE_2169, Items.CHOPPED_GARLIC_7074, Items.SPICY_SAUCE_7072, 9, message = "You mix the ingredients to make spicy sauce.", xpReward = 25.0),
+    SPICY_MINCED_MEAT(Items.COOKED_MEAT_2142, Items.SPICE_2007, Items.SPICY_MINCED_MEAT_9996, requiresKnife = true, animation = -1, message = "You chop the meat into the bowl."),
+    SPICY_MINCED_MEAT_ALT(Items.COOKED_MEAT_2142, Items.GNOME_SPICE_2169, Items.SPICY_MINCED_MEAT_9996, requiresKnife = true, animation = -1, message = "You chop the meat into the bowl."),
+
+    SPICY_SAUCE(Items.CHOPPED_GARLIC_7074, Items.GNOME_SPICE_2169, Items.SPICY_SAUCE_7072, 9, message = "You mix the ingredients to make spicy sauce.", xpReward = 25.0),
+    SPICY_TOMATO(Items.CHOPPED_TOMATO_1869, Items.SPICE_2007, Items.SPICY_TOMATO_9994, message = "You mix the ingredients to make spicy tomatoes."),
+    SPICY_TOMATO_ALT(Items.CHOPPED_TOMATO_1869, Items.GNOME_SPICE_2169, Items.SPICY_TOMATO_9994, message = "You mix the ingredients to make spicy tomatoes."),
+
     SWEETCORN(Items.COOKED_SWEETCORN_5988, Items.BOWL_1923, Items.SWEETCORN_7088, requiresKnife = true, requiredLevel = 67, animation = -1, message = "You cut the sweetcorn into the bowl."),
     UNCOOKED_EGG(Items.EGG_1944, Items.BOWL_1923, Items.UNCOOKED_EGG_7076, message = "You carefully break the egg into the bowl."),
     ONION_AND_TOMATO(Items.CHOPPED_ONION_1871, Items.TOMATO_1982, Items.ONION_AND_TOMATO_1875, requiresKnife = true, message = "You cut the onion into the bowl."),
@@ -32,8 +38,7 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     SUPER_KEBAB_ALT(Items.UGTHANKI_KEBAB_1883, Items.RED_HOT_SAUCE_4610, Items.SUPER_KEBAB_4608, message = "You add red hot sauce to make a super kebab."),
     SUPER_KEBAB_ALT_ALT(Items.UGTHANKI_KEBAB_1885, Items.RED_HOT_SAUCE_4610, Items.SUPER_KEBAB_4608, message = "You add red hot sauce to make a super kebab."),
     CHILLI_CON_CARNE(Items.SPICY_SAUCE_7072, Items.MINCED_MEAT_7070, Items.CHILLI_CON_CARNE_7062, 9, message = "You mix the ingredients to make the topping.", xpReward = 25.0, returnsContainer = Items.BOWL_1923),
-    CHILLI_CON_CARNE_ALT(Items.SPICY_SAUCE_7072, Items.COOKED_MEAT_2142, Items.CHILLI_CON_CARNE_7062, 9, requiresKnife = true, message = "You put the cut up meat into the bowl.", xpReward = 25.0, returnsContainer = Items.BOWL_1923),
-    SPICY_TOMATO(Items.CHOPPED_TOMATO_1869, Items.GNOME_SPICE_2169, Items.SPICY_TOMATO_9994, message = "You mix the ingredients to make spicy tomatoes."),
+    CHILLI_CON_CARNE_ALT(Items.SPICY_SAUCE_7072, Items.COOKED_MEAT_2142, Items.CHILLI_CON_CARNE_7062, 9, requiresKnife = true, message = "You put the cut up meat into the bowl.", xpReward = 25.0),
     TUNA_AND_CORN(Items.SWEETCORN_7088, Items.TUNA_361, Items.TUNA_AND_CORN_7068, 1, animation = -1, requiresKnife = false,  message = "You mix the tuna with the sweetcorn."),
     TUNA_AND_CORN_ALT(Items.CHOPPED_TUNA_7086, Items.COOKED_SWEETCORN_5988, Items.TUNA_AND_CORN_7068, requiredLevel = 67, message = "You mix the ingredients to make the topping.", xpReward = 204.0),
     EGG_AND_TOMATO(Items.SCRAMBLED_EGG_7078, Items.TOMATO_1982, Items.EGG_AND_TOMATO_7064, 23, message = "You mix the scrambled egg with the tomato.", xpReward = 50.0),
