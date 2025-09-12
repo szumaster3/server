@@ -2,6 +2,7 @@ package content.global.skill.crafting.pottery
 
 import core.Util.formatItemName
 import core.api.*
+import core.game.interaction.Clocks
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.SkillPulse
@@ -40,6 +41,9 @@ class FirePotteryPulse(player: Player?, node: Item?, val pottery: Pottery, var a
     }
 
     override fun reward(): Boolean {
+        if (!clockReady(player, Clocks.SKILLING)) return false
+        delayClock(player, Clocks.SKILLING, 5)
+
         ticks++
 
         lock(player, 5)

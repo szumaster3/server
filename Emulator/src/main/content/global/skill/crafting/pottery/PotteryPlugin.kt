@@ -18,13 +18,11 @@ import shared.consts.Quests
 import shared.consts.Scenery
 import java.util.*
 
-@Initializable
-class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
+val SOFT_CLAY = Items.SOFT_CLAY_1761
+val UNFIRED_POTTERY_ID = intArrayOf(Items.UNFIRED_POT_1787, Items.UNFIRED_PIE_DISH_1789, Items.UNFIRED_BOWL_1791, Items.UNFIRED_PLANT_POT_5352, Items.UNFIRED_POT_LID_4438)
 
-    private val SOFT_CLAY = Items.SOFT_CLAY_1761
-    private val OVENS = intArrayOf(
-        Scenery.POTTERY_OVEN_2643, Scenery.POTTERY_OVEN_4308, Scenery.POTTERY_OVEN_11601, Scenery.POTTERY_OVEN_34802
-    )
+@Initializable
+class PotteryPlugin : UseWithHandler(SOFT_CLAY) {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         FireOvenPlugin().newInstance(arg)
@@ -42,7 +40,7 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
         val player = event.player
         object : SkillDialogueHandler(player, SkillDialogueHandler.SkillDialogue.FIVE_OPTION, *getPottery(false)) {
             override fun create(amount: Int, index: Int) {
-                player.pulseManager.run(PotteryCraftingPulse(player, event.usedItem, amount, Pottery.values()[index]),)
+                player.pulseManager.run(PotteryCraftingPulse(player, event.usedItem, amount, Pottery.values()[index]))
             }
 
             override fun getAll(index: Int): Int = amountInInventory(player, SOFT_CLAY)
@@ -67,22 +65,13 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
             return this
         }
 
-        override fun handle(
-            player: Player,
-            node: Node,
-            option: String,
-        ): Boolean {
+        override fun handle(player: Player, node: Node, option: String): Boolean {
             getSkillHandler(player).open()
             return true
         }
 
-        inner class FireUseHandler : UseWithHandler(
-            Items.UNFIRED_POT_1787,
-            Items.UNFIRED_PIE_DISH_1789,
-            Items.UNFIRED_BOWL_1791,
-            Items.UNFIRED_PLANT_POT_5352,
-            Items.UNFIRED_POT_LID_4438
-        ) {
+        inner class FireUseHandler : UseWithHandler(*UNFIRED_POTTERY_ID) {
+
             override fun newInstance(arg: Any?): Plugin<Any> {
                 addHandler(Scenery.POTTERY_OVEN_2643, OBJECT_TYPE, this)
                 addHandler(Scenery.POTTERY_OVEN_4308, OBJECT_TYPE, this)
@@ -109,13 +98,15 @@ class PotteryPlugin : UseWithHandler(Items.SOFT_CLAY_1761) {
             object : SkillDialogueHandler(player, SkillDialogueHandler.SkillDialogue.FIVE_OPTION, *getPottery(true)) {
                 override fun create(amount: Int, index: Int) {
                     player.pulseManager.run(
-                        FirePotteryPulse(
-                            player, Pottery.values()[index].unfinished, Pottery.values()[index], amount
-                        )
+                        FirePotteryPulse(player, Pottery.values()[index].unfinished, Pottery.values()[index], amount)
                     )
                 }
 
                 override fun getAll(index: Int): Int = player.inventory.getAmount(Pottery.values()[index].unfinished)
             }
+    }
+
+    companion object {
+        private val OVENS = intArrayOf(Scenery.POTTERY_OVEN_2643, Scenery.POTTERY_OVEN_4308, Scenery.POTTERY_OVEN_11601, Scenery.POTTERY_OVEN_34802)
     }
 }
