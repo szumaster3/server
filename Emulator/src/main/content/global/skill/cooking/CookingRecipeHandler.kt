@@ -22,22 +22,23 @@ class CookingRecipeHandler : InteractionListener {
     override fun defineListeners() {
         onUseWith(IntType.ITEM, firstIngredient, *secondIngredient) { player, used, with ->
             val product = CookingRecipe.forId(used.id) ?: return@onUseWith true
+
             if (!hasLevelDyn(player, Skills.COOKING, product.requiredLevel)) {
                 sendMessage(player, "You need a Cooking level of at least ${product.requiredLevel} to make this.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (product.requiresKnife && !inInventory(player, Items.KNIFE_946)) {
                 sendMessage(player, "You need a knife to prepare this recipe.")
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (!inInventory(player, product.ingredientID)) {
-                return@onUseWith false
+                return@onUseWith true
             }
 
             if (!inInventory(player, product.secondaryID)) {
-                return@onUseWith false
+                return@onUseWith true
             }
 
             val ingredientAmount = amountInInventory(player, used.id)
@@ -47,6 +48,7 @@ class CookingRecipeHandler : InteractionListener {
             if (maxAmount == 1) {
                 val ingredientItem = player.inventory.getItem(used.asItem()) ?: return@onUseWith true
                 player.inventory.replace(Item(product.productID, 1), ingredientItem.slot)
+
                 if (product.secondaryID != Items.KNIFE_946) {
                     player.inventory.getItem(with.asItem())?.let { secondaryItem ->
                         product.returnsContainer?.let { container ->
@@ -69,8 +71,10 @@ class CookingRecipeHandler : InteractionListener {
                 create { _, amount ->
                     runTask(player, 2, amount) {
                         if (amount < 1) return@runTask
+
                         val ingredientItem = player.inventory.getItem(used.asItem()) ?: return@runTask
                         player.inventory.replace(Item(product.productID, 1), ingredientItem.slot)
+
                         if (product.secondaryID != Items.KNIFE_946) {
                             player.inventory.get(product.secondaryID)?.let { secondaryItem ->
                                 product.returnsContainer?.let { container ->
@@ -80,16 +84,19 @@ class CookingRecipeHandler : InteractionListener {
                         } else {
                             product.returnsContainer?.let { addItemOrDrop(player, it, 1) }
                         }
+
                         product.xpReward?.let { rewardXP(player, Skills.COOKING, it) }
                         product.message?.let { sendMessage(player, it) }
                         product.animation?.let { animate(player, it) }
                         delayClock(player, Clocks.SKILLING, 2)
                     }
                 }
+
                 calculateMaxAmount { _ ->
                     min(amountInInventory(player, product.ingredientID), amountInInventory(player, product.secondaryID))
                 }
             }
+
             return@onUseWith true
         }
 
