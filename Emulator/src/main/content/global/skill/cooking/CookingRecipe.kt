@@ -4,7 +4,7 @@ import shared.consts.Animations
 import shared.consts.Items
 
 /**
- * Enum containing all cooking recipes.
+ * Cooking recipe definitions.
  */
 enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val productID: Int, val requiredLevel: Int = 1, val animation: Int? = null, val requiresKnife: Boolean = false, val message: String? = null, val xpReward: Double? = null, val returnsContainer: Int? = null) {
     CHOCOLATE_CAKE(Items.CHOCOLATE_BAR_1973, Items.CAKE_1891, Items.CHOCOLATE_CAKE_1897, 50, message = "You add chocolate to the cake.", xpReward = 30.0),
@@ -17,7 +17,7 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     CHOPPED_TOMATO(Items.TOMATO_1982, Items.BOWL_1923, Items.CHOPPED_TOMATO_1869, requiresKnife = true, animation = -1, message = "You chop the tomato into the bowl."),
     CHOPPED_UGTHANKI(Items.UGTHANKI_MEAT_1861, Items.BOWL_1923, Items.CHOPPED_UGTHANKI_1873, requiresKnife = true, animation = -1, message = "You chop the meat into the bowl."),
 
-    SLICED_MUSHROOMS(Items.MUSHROOM_6004, Items.BOWL_1923, Items.SLICED_MUSHROOMS_7080, requiresKnife = true, animation = -1, message = "You slice the mushrooms."),
+    SLICED_MUSHROOMS(Items.MUSHROOM_6004, Items.BOWL_1923, Items.SLICED_MUSHROOMS_7080, requiresKnife = true, animation = -1, message = "You slice the mushrooms into the bowl."),
     MINCED_MEAT(Items.COOKED_MEAT_2142, Items.BOWL_1923, Items.MINCED_MEAT_7070, requiresKnife = true, animation = -1, message = "You chop the meat into the bowl."),
     SPICY_SAUCE(Items.GNOME_SPICE_2169, Items.CHOPPED_GARLIC_7074, Items.SPICY_SAUCE_7072, 9, message = "You mix the ingredients to make spicy sauce.", xpReward = 25.0),
     SWEETCORN(Items.COOKED_SWEETCORN_5988, Items.BOWL_1923, Items.SWEETCORN_7088, requiresKnife = true, requiredLevel = 67, animation = -1, message = "You cut the sweetcorn into the bowl."),
@@ -54,7 +54,7 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     UNCOOKED_MEAT_PIE_FIRST_PART(Items.COOKED_MEAT_2142, Items.PIE_SHELL_2315, Items.UNCOOKED_MEAT_PIE_2319, 20, message = "You fill the pie with cooked meat."),
     UNCOOKED_MEAT_PIE_ALT_FIRST_PART(Items.COOKED_CHICKEN_2140, Items.PIE_SHELL_2315, Items.UNCOOKED_MEAT_PIE_2319, 20, message = "You fill the pie with cooked meat."),
     MUD_PIE_FIRST_PART(Items.COMPOST_6032, Items.PIE_SHELL_2315, Items.PART_MUD_PIE_7164, 29, message = "You fill the pie with compost.", returnsContainer = Items.BUCKET_1925),
-    UNCOOKED_APPLE_PIE(Items.COOKING_APPLE_1955, Items.PIE_SHELL_2315, Items.UNCOOKED_APPLE_PIE_2317, 30, message = "You fill the pie with apple."),
+    UNCOOKED_APPLE_PIE(Items.COOKING_APPLE_1955, Items.PIE_SHELL_2315, Items.UNCOOKED_APPLE_PIE_2317, 30, message = "You fill the pie with apple slices."),
     GARDEN_PIE_FIRST_PART(Items.TOMATO_1982, Items.PIE_SHELL_2315, Items.PART_GARDEN_PIE_7172, 34, message = "You fill the pie with tomato."),
     FISH_PIE_FIRST_PART(Items.TROUT_333, Items.PIE_SHELL_2315, Items.PART_FISH_PIE_7182, 47, message = "You fill the pie with trout."),
     ADMIRAL_PIE_FIRST_PART(Items.SALMON_329, Items.PIE_SHELL_2315, Items.PART_ADMIRAL_PIE_7192, 70, message = "You fill the pie with salmon."),
@@ -66,7 +66,8 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     PART_FISH_PIE_SECOND_PART(Items.COD_339, Items.PART_FISH_PIE_7182, Items.PART_FISH_PIE_7184, 47, message = "You add cod to the fish pie."),
     PART_ADMIRAL_PIE_SECOND_PART(Items.TUNA_361, Items.PART_ADMIRAL_PIE_7192, Items.PART_ADMIRAL_PIE_7194, 70, message = "You add tuna to the admiral pie."),
     PART_WILD_PIE_SECOND_PART(Items.RAW_CHOMPY_2876, Items.PART_WILD_PIE_7202, Items.PART_WILD_PIE_7204, 85, message = "You add chompy to the wild pie."),
-    PART_SUMMER_PIE_SECOND_PART(Items.WATERMELON_5982, Items.PART_SUMMER_PIE_7212, Items.PART_SUMMER_PIE_7214, 95, message = "You add watermelon to the summer pie."),
+    PART_SUMMER_PIE_SECOND_PART(Items.WATERMELON_5982, Items.PART_SUMMER_PIE_7212, Items.PART_SUMMER_PIE_7214, 95, message = "You fill the pie with watermelon slices."),
+
     RAW_MUD_PIE_SECOND_PART(Items.CLAY_434, Items.PART_MUD_PIE_7166, Items.RAW_MUD_PIE_7168, 29, message = "You prepare a raw mud pie."),
     RAW_GARDEN_PIE_SECOND_PART(Items.CABBAGE_1965, Items.PART_GARDEN_PIE_7174, Items.RAW_GARDEN_PIE_7176, 34, message = "You prepare a raw garden pie."),
     RAW_GARDEN_PIE_ALT_SECOND_PART(Items.CABBAGE_1967, Items.PART_GARDEN_PIE_7174, Items.RAW_GARDEN_PIE_7176, 34, message = "You prepare a raw garden pie."),
@@ -76,11 +77,11 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     RAW_FISH_PIE_SECOND_PART(Items.PART_FISH_PIE_7184, Items.POTATO_1942, Items.RAW_FISH_PIE_7186, 47, message = "You prepare a fish pie."),
 
     POTATO_WITH_BUTTER(Items.PAT_OF_BUTTER_6697, Items.BAKED_POTATO_6701, Items.POTATO_WITH_BUTTER_6703, 39, message = "You add the butter to the potato.", xpReward = 40.5),
-    CHILLI_POTATO(Items.CHILLI_CON_CARNE_7062, Items.POTATO_WITH_BUTTER_6703, Items.CHILLI_POTATO_7054, 41, message = "You add the topping to the potato.", xpReward = 10.0),
+    POTATO_WITH_CHEESE(Items.POTATO_WITH_BUTTER_6703, Items.CHEESE_1985, Items.POTATO_WITH_CHEESE_6705, 47, message = "You add the topping to the potato.", xpReward = 40.5),
+    CHILLI_POTATO(Items.CHILLI_CON_CARNE_7062, Items.POTATO_WITH_BUTTER_6703, Items.CHILLI_POTATO_7054, 41, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
     EGG_POTATO(Items.EGG_AND_TOMATO_7064, Items.POTATO_WITH_BUTTER_6703, Items.EGG_POTATO_7056, 51, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
-    MUSHROOM_POTATO(Items.MUSHROOM_AND_ONION_7066, Items.POTATO_WITH_BUTTER_6703, Items.MUSHROOM_POTATO_7058, 64, message = "You add the topping to the potato.", xpReward = 10.0),
-    POTATO_WITH_CHEESE(Items.CHEESE_1985, Items.POTATO_WITH_BUTTER_6703, Items.POTATO_WITH_CHEESE_6705, 47, message = "You add the topping to the potato.", xpReward = 10.0),
-    TUNA_POTATO(Items.TUNA_AND_CORN_7068, Items.POTATO_WITH_BUTTER_6703, Items.TUNA_POTATO_7060, 68, message = "You add the topping to the potato.", xpReward = 10.0),
+    MUSHROOM_POTATO(Items.MUSHROOM_AND_ONION_7066, Items.POTATO_WITH_BUTTER_6703, Items.MUSHROOM_POTATO_7058, 64, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
+    TUNA_POTATO(Items.TUNA_AND_CORN_7068, Items.POTATO_WITH_BUTTER_6703, Items.TUNA_POTATO_7060, 68, message = "You add the topping to the potato.", xpReward = 10.0, returnsContainer = Items.BOWL_1923),
 
     SKEWERED_BIRD_MEAT(Items.RAW_BIRD_MEAT_9978, Items.IRON_SPIT_7225, Items.SKEWERED_BIRD_MEAT_9984, 11),
     SKEWERED_RABBIT(Items.RAW_RABBIT_3226,Items.IRON_SPIT_7225, Items.SKEWERED_RABBIT_7224, 16),
@@ -90,18 +91,36 @@ enum class CookingRecipe(val ingredientID: Int, val secondaryID: Int, val produc
     SPIDER_ON_STICK(Items.SPIDER_CARCASS_6291, Items.SKEWER_STICK_6305, Items.SPIDER_ON_STICK_6293),
     SPIDER_ON_SHAFT(Items.SPIDER_CARCASS_6291, Items.ARROW_SHAFT_52, Items.SPIDER_ON_SHAFT_6295),
 
-    NETTLE_WATER(Items.NETTLES_4241, Items.BOWL_OF_WATER_1921, Items.NETTLE_WATER_4237),
-    NETTLE_TEA_MILKY(Items.BUCKET_OF_MILK_1927, Items.NETTLE_TEA_4239, Items.NETTLE_TEA_4240, 1, returnsContainer = Items.BUCKET_1925),
-    NETTLE_TEA_MILKY_ALT(Items.BUCKET_OF_MILK_1927, Items.PORCELAIN_CUP_4244, Items.CUP_OF_TEA_4246, 1, returnsContainer = Items.BUCKET_1925),
-    NETTLE_TEA_CUP(Items.NETTLE_TEA_4239, Items.EMPTY_CUP_1980, Items.CUP_OF_TEA_4242, returnsContainer = Items.BOWL_1923),
-    NETTLE_TEA_CUP_ALT(Items.NETTLE_TEA_4240, Items.EMPTY_CUP_1980, Items.CUP_OF_TEA_4243, returnsContainer = Items.BOWL_1923),
-    NETTLE_TEA_PORCELAIN_CUP(Items.NETTLE_TEA_4239,  Items.PORCELAIN_CUP_4244, Items.CUP_OF_TEA_4245, returnsContainer = Items.BOWL_1923),
-    NETTLE_TEA_MILKY_PORCELAIN_CUP(Items.NETTLE_TEA_4240, Items.PORCELAIN_CUP_4244, Items.CUP_OF_TEA_4246, returnsContainer = Items.BOWL_1923);
+    INCOMPLETE_STEW_POTATO(Items.POTATO_1942, Items.BOWL_OF_WATER_1921, Items.INCOMPLETE_STEW_1999, 25, message = "You cut up the potato and put it into the bowl."),
+    INCOMPLETE_STEW_MEAT(Items.COOKED_MEAT_2142, Items.BOWL_OF_WATER_1921, Items.INCOMPLETE_STEW_1997, 25, message = "You cut up the meat and put it into the bowl."),
+    INCOMPLETE_STEW_MEAT_ALT(Items.COOKED_CHICKEN_2140, Items.BOWL_OF_WATER_1921, Items.INCOMPLETE_STEW_1997, 25, message = "You cut up the meat and put it into the bowl."),
+
+    UNCOOKED_STEW_POTATO(Items.POTATO_1942, Items.INCOMPLETE_STEW_1999, Items.UNCOOKED_STEW_2001, 25, message = "You cut up the potato and put it into the stew."),
+    UNCOOKED_STEW_MEAT(Items.COOKED_MEAT_2142, Items.INCOMPLETE_STEW_1997, Items.UNCOOKED_STEW_2001, 25, message = "You cut up the meat and put it into the stew."),
+    UNCOOKED_STEW_MEAT_ALT(Items.COOKED_CHICKEN_2140, Items.INCOMPLETE_STEW_1997, Items.UNCOOKED_STEW_2001, 25, message = "You cut up the meat and put it into the stew."),
+    UNCOOKED_STEW_SPICE(Items.UNCOOKED_STEW_2001, Items.SPICE_2007, Items.UNCOOKED_CURRY_2009,60, message = "You mix the spice with the stew."),
+
+    NETTLE_WATER(Items.NETTLES_4241, Items.BOWL_OF_WATER_1921, Items.NETTLE_WATER_4237, message = "You place the nettles into the bowl of water."),
+    NETTLE_TEA_MILKY(Items.NETTLE_TEA_4239, Items.BUCKET_OF_MILK_1927, Items.NETTLE_TEA_4240, 1, returnsContainer = Items.BUCKET_1925, message = "You add the milk to the nettle tea."),
+    NETTLE_TEA_MILKY_ALT(Items.PORCELAIN_CUP_4244, Items.BUCKET_OF_MILK_1927, Items.CUP_OF_TEA_4246, 1, returnsContainer = Items.BUCKET_1925, message = "You add the milk to the tea."),
+    NETTLE_TEA_CUP(Items.NETTLE_TEA_4239, Items.EMPTY_CUP_1980, Items.CUP_OF_TEA_4242, returnsContainer = Items.BOWL_1923, message = "You fill the cup with nettle tea."),
+    NETTLE_TEA_CUP_ALT(Items.NETTLE_TEA_4240, Items.EMPTY_CUP_1980, Items.CUP_OF_TEA_4243, returnsContainer = Items.BOWL_1923, message = "You fill the cup with the tea."),
+    NETTLE_TEA_PORCELAIN_CUP(Items.NETTLE_TEA_4239,  Items.PORCELAIN_CUP_4244, Items.CUP_OF_TEA_4245, returnsContainer = Items.BOWL_1923, message = "You pour the nettle tea into the porcelain cup."),
+    NETTLE_TEA_MILKY_PORCELAIN_CUP(Items.NETTLE_TEA_4240, Items.PORCELAIN_CUP_4244, Items.CUP_OF_TEA_4246, returnsContainer = Items.BOWL_1923, message = "You pour the tea into the porcelain cup.");
 
     companion object {
-        private val requiredMap: Map<Int, CookingRecipe> = values().associateBy { it.requiredLevel }
+        private val recipeMap: MutableMap<Int, CookingRecipe> = HashMap()
+
+        val INGREDIENT_IDS = CookingRecipe.values().map { it.ingredientID }.toIntArray()
+        val SECONDARY_IDS = CookingRecipe.values().map { it.secondaryID }.toIntArray()
+
+        init {
+            for (recipe in values()) {
+                recipeMap[recipe.ingredientID] = recipe
+            }
+        }
 
         @JvmStatic
-        fun forId(itemId: Int): CookingRecipe? = CookingRecipe.requiredMap[itemId]
+        fun forId(id: Int): CookingRecipe? = recipeMap[id]
     }
 }

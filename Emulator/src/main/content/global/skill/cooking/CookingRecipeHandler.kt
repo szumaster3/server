@@ -18,15 +18,30 @@ import kotlin.math.min
  */
 class CookingRecipeHandler : InteractionListener {
 
-    private val firstIngredient = CookingRecipe.values().map { it.ingredientID }.toIntArray()
-    private val secondIngredient = CookingRecipe.values().map { it.secondaryID }.toIntArray()
-
     override fun defineListeners() {
-        onUseWith(IntType.ITEM, firstIngredient, *secondIngredient) { player, used, with ->
-            val recipe = CookingRecipe.forId(used.id) ?: return@onUseWith true
+
+        /*
+         * Handles create single-ingredient recipes.
+         */
+
+        onUseWith(IntType.ITEM, CookingRecipe.INGREDIENT_IDS, *CookingRecipe.SECONDARY_IDS) { player, used, with ->
+            val recipe = CookingRecipe.values().find { r ->
+                (r.ingredientID == used.id && r.secondaryID == with.id) ||
+                        (r.ingredientID == with.id && r.secondaryID == used.id)
+            }
+
+            if (recipe == null) {
+                sendMessage(player, "You do not have the required ingredients to make this.")
+                return@onUseWith true
+            }
 
             if (!hasLevelDyn(player, Skills.COOKING, recipe.requiredLevel)) {
                 sendMessage(player, "You need a Cooking level of at least ${recipe.requiredLevel} to make this.")
+                return@onUseWith true
+            }
+
+            if (!inInventory(player, recipe.ingredientID) || !inInventory(player, recipe.secondaryID)) {
+                sendMessage(player, "You do not have the required ingredients to make this.")
                 return@onUseWith true
             }
 
@@ -35,83 +50,106 @@ class CookingRecipeHandler : InteractionListener {
                 return@onUseWith true
             }
 
-            if (!inInventory(player, recipe.ingredientID) || !inInventory(player, recipe.secondaryID)) {
+            if(used.id == Items.CHEESE_1985 && with.id == Items.BAKED_POTATO_6701) {
+                sendMessage(player, "You must add butter to the baked potato before adding toppings.")
                 return@onUseWith true
             }
 
-            val ingredientAmount = amountInInventory(player, used.id)
-            val secondaryAmount = amountInInventory(player, with.id)
+            if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
+
+            val ingredientAmount = amountInInventory(player, recipe.ingredientID)
+            val secondaryAmount = if (recipe.requiresKnife) Int.MAX_VALUE else amountInInventory(player, recipe.secondaryID)
             val maxAmount = min(ingredientAmount, secondaryAmount)
 
-            val handler: SkillDialogueHandler = object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(recipe.ingredientID)) {
+            val handler = object : SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, Item(recipe.productID)) {
                 override fun create(amount: Int, index: Int) {
-                    player.pulseManager.run(object : SkillPulse<Item?>(player, Item(recipe.ingredientID)) {
+                    player.pulseManager.run(object : SkillPulse<Item?>(player, Item(recipe.productID)) {
                         private var remaining = amount
+                        private var tick = 0
 
-                        override fun checkRequirements(): Boolean {
-                            return inInventory(player, recipe.ingredientID) && inInventory(player, recipe.secondaryID)
-                        }
+                        override fun checkRequirements(): Boolean =
+                            inInventory(player, recipe.ingredientID) &&
+                                    (!recipe.requiresKnife && inInventory(player, recipe.secondaryID) ||
+                                            recipe.requiresKnife && inInventory(player, Items.KNIFE_946))
 
                         override fun animate() {
                             recipe.animation?.let { animate(player, it) }
                         }
 
                         override fun reward(): Boolean {
-                            val ingredientItem = player.inventory.getItem(used.asItem()) ?: return true
-                            player.inventory.replace(Item(recipe.productID, 1), ingredientItem.slot)
-
-                            if (recipe.secondaryID != Items.KNIFE_946) {
-                                player.inventory.get(recipe.secondaryID)?.let { secondaryItem ->
-                                    recipe.returnsContainer?.let { container ->
-                                        player.inventory.replace(Item(container, 1), secondaryItem.slot)
-                                    }
-                                }
-                            } else {
-                                recipe.returnsContainer?.let { addItemOrDrop(player, it, 1) }
+                            if (tick < 2) {
+                                tick++
+                                return false
                             }
-
-                            recipe.xpReward?.let { rewardXP(player, Skills.COOKING, it) }
-                            recipe.message?.let { sendMessage(player, it) }
-
-                            delayClock(player, Clocks.SKILLING, 2)
+                            processRecipe(player, recipe)
                             remaining--
+                            tick = 0
+                            delayClock(player, Clocks.SKILLING, 2)
                             return remaining <= 0
                         }
                     })
                 }
 
-                override fun getAll(index: Int): Int {
-                    return min(amountInInventory(player, recipe.ingredientID), amountInInventory(player, recipe.secondaryID))
-                }
+                override fun getAll(index: Int): Int = maxAmount
             }
 
-            if (maxAmount == 1) {
-                handler.create(1, 1)
-            } else {
-                handler.open()
-            }
+            if (maxAmount > 1) handler.open() else handler.create(0, 1)
 
             return@onUseWith true
         }
 
-
+        /*
+         * Handles create ugthanki kebab.
+         */
 
         onUseWith(IntType.ITEM, Items.PITTA_BREAD_1865, Items.KEBAB_MIX_1881) { player, _, _ ->
             handleSpecialRecipe(player)
             return@onUseWith true
         }
 
-        onUseWith(
-            IntType.ITEM, Items.CAKE_TIN_1887, Items.EGG_1944, Items.BUCKET_OF_MILK_1927, Items.POT_OF_FLOUR_1933
-        ) { player, _, _ ->
+        /*
+         * Handles create a cake.
+         */
+
+        onUseWith(IntType.ITEM, Items.CAKE_TIN_1887, Items.EGG_1944, Items.BUCKET_OF_MILK_1927, Items.POT_OF_FLOUR_1933) { player, _, _ ->
             handleCakeRecipe(player)
             return@onUseWith true
         }
 
-        onUseWith(IntType.ITEM, Items.CHEESE_1985, Items.POTATO_1942) { player, _, _ ->
-            sendMessage(player, "You must add butter to the baked potato before adding toppings.")
+        /*
+         * Handles create uncooked curry.
+         */
+
+        onUseWith(IntType.ITEM, Items.CURRY_LEAF_5970, Items.UNCOOKED_STEW_2001) { player, usedNode, withNode ->
+            if (!hasLevelDyn(player, Skills.COOKING, 60)) {
+                sendDialogue(player, "You need an Cooking level of at least 60 to make that.")
+                return@onUseWith true
+            }
+
+            val requiredAmount = 3
+            val amount = amountInInventory(player, usedNode.id)
+
+            if (amount < requiredAmount) {
+                sendMessage(player, "You need ${requiredAmount - amount} more curry leaves to mix with the stew.")
+                return@onUseWith true
+            }
+
+            if (removeItem(player, Item(usedNode.id, requiredAmount), Container.INVENTORY) &&
+                removeItem(player, Item(withNode.id, 1), Container.INVENTORY)) {
+                addItem(player, Items.UNCOOKED_CURRY_2009, 1, Container.INVENTORY)
+                sendMessage(player, "You mix the curry leaves with the stew.")
+            }
             return@onUseWith true
         }
+    }
+
+    private fun processRecipe(player: Player, recipe: CookingRecipe) {
+        if (!removeItem(player, recipe.ingredientID)) return
+        if (!removeItem(player, recipe.secondaryID)) return
+        recipe.returnsContainer?.let { addItemOrDrop(player, it, 1) }
+        addItem(player, recipe.productID, 1)
+        recipe.xpReward?.let { rewardXP(player, Skills.COOKING, it) }
+        recipe.message?.let { sendMessage(player, it) }
     }
 
     /**
@@ -184,4 +222,5 @@ class CookingRecipeHandler : InteractionListener {
         sendMessage(player, "You mix the milk, flour, and egg together to make a raw cake mix.")
         delayClock(player, Clocks.SKILLING, 2)
     }
+
 }

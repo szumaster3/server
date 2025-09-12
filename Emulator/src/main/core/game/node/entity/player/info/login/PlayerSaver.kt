@@ -65,7 +65,13 @@ class PlayerSaver(val player: Player) {
         try {
             saveFile.parentFile?.mkdirs()
             if (!saveFile.exists()) saveFile.createNewFile()
-            withContext(Dispatchers.IO) { FileWriter(saveFile).use { it.write(json) } }
+
+            val content = saveFile.readText()
+            if (content.isBlank() || content == "{}") {
+                withContext(Dispatchers.IO) { FileWriter(saveFile).use { it.write(json) } }
+            } else {
+                withContext(Dispatchers.IO) { FileWriter(saveFile).use { it.write(json) } }
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
