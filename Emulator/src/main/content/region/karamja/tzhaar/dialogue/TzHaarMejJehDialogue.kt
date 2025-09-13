@@ -96,7 +96,6 @@ class TzHaarMejJehDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(
-        DialogueInterpreter.getDialogueKey("tzhaar-mej"),
         NPCs.TZHAAR_MEJ_JAL_2617
     )
 }
