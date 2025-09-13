@@ -9,20 +9,15 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
+/**
+ * Represents the TzHaar NPCs dialogue.
+ */
 @Initializable
-class TzHaarDialogue : Dialogue {
+class TzHaarDialogue(player: Player? = null) : Dialogue(player) {
 
-    constructor()
-
-    constructor(player: Player?) : super(player)
-
-    override fun newInstance(player: Player): Dialogue {
-        return TzHaarDialogue(player)
-    }
-
-    override fun open(vararg args: Any): Boolean {
+    override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FaceAnim.CHILD_FRIENDLY, "Can I help you JalYt-Ket-" + player.username + "?")
+        npc(FaceAnim.CHILD_GUILTY, "You want help JalYt-Ket-" + player.username + "?")
         return true
     }
 
@@ -33,9 +28,7 @@ class TzHaarDialogue : Dialogue {
                 1 -> end().also { openNpcShop(player, npc.id) }
                 2 -> player("What did you call me?").also { stage++ }
                 3 -> player("No I'm fine thanks.").also { stage = END_DIALOGUE }
-
             }
-
             2 -> npc(FaceAnim.CHILD_FRIENDLY, "Are you not JalYt-Ket?").also { stage++ }
             3 -> options("What's a 'JalYt-Ket'?", "I guess so...", "No I'm not!").also { stage++ }
             4 -> when (buttonId) {
@@ -52,7 +45,15 @@ class TzHaarDialogue : Dialogue {
         return true
     }
 
+    override fun newInstance(player: Player): Dialogue {
+        return TzHaarDialogue(player)
+    }
+
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.TZHAAR_HUR_TEL_2620, NPCs.TZHAAR_HUR_LEK_2622, NPCs.TZHAAR_MEJ_ROH_2623)
+        return intArrayOf(
+            NPCs.TZHAAR_HUR_TEL_2620,
+            NPCs.TZHAAR_HUR_LEK_2622,
+            NPCs.TZHAAR_MEJ_ROH_2623
+        )
     }
 }
