@@ -447,187 +447,80 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "dumpiface",
             privilege = Privilege.ADMIN,
-            usage = "::dumpiface <interfaceId>",
-            description = "Dumps detailed info about interface.",
-        ) { player, args ->
-            if (args.size < 2) {
-                player.debug("Usage: ::dumpiface <interfaceId>")
+            usage = "::dumpiface <id>",
+            description = "Dumps interface definitions as JSON to a file.",
+        ) { p, args ->
+            val gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
+            val dumps = File("dumps")
+            if (!dumps.exists()) dumps.mkdirs()
+
+            if (args.isEmpty()) {
+                p.debug("Usage: ::dumpiface <id>")
                 return@define
             }
 
-            val ifaceId = args[1].toIntOrNull()
-            if (ifaceId == null) {
-                player.debug("Invalid interface ID: ${args[1]}")
+            val i = args[1].toIntOrNull()
+            if (i == null) {
+                p.debug("Invalid interface id=$i.")
                 return@define
             }
 
-            val ifaceDef = try {
-                IfaceDefinition.forId(ifaceId)
-            } catch (e: Exception) {
-                player.debug("Error loading interface $ifaceId: ${e.message}")
-                null
-            }
-
-            if (ifaceDef == null) {
-                player.debug("Interface $ifaceId not found.")
+            val iface = IfaceDefinition.forId(i)
+            if (iface == null) {
+                p.debug("Interface for id=$i not found.")
                 return@define
             }
 
-            val children = ifaceDef.children ?: emptyArray()
-            if (children.isEmpty()) {
-                player.debug("Interface $ifaceId has no children.")
-                return@define
-            }
-
-            val exportDir = File("dumps/components")
-            if (!exportDir.exists()) exportDir.mkdirs()
-            val dump = File(exportDir, "$ifaceId.txt")
-
-            val writer = dump.bufferedWriter()
-            try {
-                children.forEachIndexed { index, child ->
-                    if (child == null) return@forEachIndexed
-
-                    val isEmpty = (child.type == null) && (child.baseWidth ?: 0) == 0 && (child.baseHeight ?: 0) == 0
-                    if (isEmpty) return@forEachIndexed
-
-                    writer.write("Child: $index")
-
-                    fun appendIfNotDefault(name: String, value: Any?, default: Any?) {
-                        if (value != null && value != default) {
-                            writer.write("  $name: $value\n")
-                        }
-                    }
-
-                    appendIfNotDefault("clientCode", child.clientCode, 0)
-                    appendIfNotDefault("baseX", child.baseX, 0)
-                    appendIfNotDefault("baseY", child.baseY, 0)
-                    appendIfNotDefault("baseWidth", child.baseWidth, 0)
-                    appendIfNotDefault("baseHeight", child.baseHeight, 0)
-                    appendIfNotDefault("dynWidth", child.dynWidth, 0)
-                    appendIfNotDefault("dynHeight", child.dynHeight, 0)
-                    appendIfNotDefault("xMode", child.xMode, 0)
-                    appendIfNotDefault("yMode", child.yMode, 0)
-                    appendIfNotDefault("overlayer", child.overlayer, 0)
-                    appendIfNotDefault("hidden", child.hidden, false)
-                    appendIfNotDefault("scrollMaxH", child.scrollMaxH, 0)
-                    appendIfNotDefault("scrollMaxV", child.scrollMaxV, 0)
-                    appendIfNotDefault("noClickThrough", child.noClickThrough, false)
-                    appendIfNotDefault("spriteId", child.spriteId, 0)
-                    appendIfNotDefault("activeSpriteId", child.activeSpriteId, 0)
-                    appendIfNotDefault("angle2d", child.angle2d, 0)
-                    appendIfNotDefault("hasAlpha", child.hasAlpha, false)
-                    appendIfNotDefault("spriteTiling", child.spriteTiling, false)
-                    appendIfNotDefault("alpha", child.alpha, 0)
-                    appendIfNotDefault("outlineThickness", child.outlineThickness, 0)
-                    appendIfNotDefault("shadowColor", child.shadowColor, 0)
-                    appendIfNotDefault("hFlip", child.hFlip, false)
-                    appendIfNotDefault("vFlip", child.vFlip, false)
-                    appendIfNotDefault("modelType", child.modelType, 0)
-                    appendIfNotDefault("activeModelType", child.activeModelType, 0)
-                    appendIfNotDefault("modelId", child.modelId, 0)
-                    appendIfNotDefault("activeModelId", child.activeModelId, 0)
-                    appendIfNotDefault("unknownModelProp_1", child.unknownModelProp_1, 0)
-                    appendIfNotDefault("unknownModelProp_2", child.unknownModelProp_2, 0)
-                    appendIfNotDefault("modelXAngle", child.modelXAngle, 0)
-                    appendIfNotDefault("modelYAngle", child.modelYAngle, 0)
-                    appendIfNotDefault("modelYOffset", child.modelYOffset, 0)
-                    appendIfNotDefault("modelZoom", child.modelZoom, 0)
-                    appendIfNotDefault("modelAnimId", child.modelAnimId, 0)
-                    appendIfNotDefault("activeModelAnimId", child.activeModelAnimId, 0)
-                    appendIfNotDefault("modelOrtho", child.modelOrtho, false)
-                    appendIfNotDefault("unknownModelProp_3", child.unknownModelProp_3, 0)
-                    appendIfNotDefault("unknownModelProp_4", child.unknownModelProp_4, 0)
-                    appendIfNotDefault("unknownModelProp_5", child.unknownModelProp_5, false)
-                    appendIfNotDefault("unknownModelProp_6", child.unknownModelProp_6, 0)
-                    appendIfNotDefault("unknownModelProp_7", child.unknownModelProp_7, 0)
-                    appendIfNotDefault("font", child.font, 0)
-                    appendIfNotDefault("text", child.text, null)
-                    appendIfNotDefault("activeText", child.activeText, null)
-                    appendIfNotDefault("vPadding", child.vPadding, 0)
-                    appendIfNotDefault("halign", child.halign, 0)
-                    appendIfNotDefault("valign", child.valign, 0)
-                    appendIfNotDefault("shadowed", child.shadowed, false)
-                    appendIfNotDefault("color", child.color, 0)
-                    appendIfNotDefault("activeColor", child.activeColor, 0)
-                    appendIfNotDefault("overColor", child.overColor, 0)
-                    appendIfNotDefault("unknownColor", child.unknownColor, 0)
-                    appendIfNotDefault("filled", child.filled, false)
-                    appendIfNotDefault("lineWidth", child.lineWidth, 0)
-                    appendIfNotDefault("unknownProp_8", child.unknownProp_8, false)
-                    if (child.unknownIntArray_1 != null) writer.write("  unknownIntArray_1: ${child.unknownIntArray_1!!.joinToString(",")}\n")
-                    if (child.unknownIntArray_2 != null) writer.write("  unknownIntArray_2: ${child.unknownIntArray_2!!.joinToString(",")}\n")
-                    if (child.unknownByteArray_1 != null) writer.write("  unknownByteArray_1: ${child.unknownByteArray_1!!.joinToString(",")}\n")
-                    if (child.unknownByteArray_2 != null) writer.write("  unknownByteArray_2: ${child.unknownByteArray_2!!.joinToString(",")}\n")
-                    appendIfNotDefault("optionBase", child.optionBase, null)
-                    if (child.ops != null) writer.write("  ops: ${child.ops!!.joinToString(",")}\n")
-                    appendIfNotDefault("dragDeadzone", child.dragDeadzone, 0)
-                    appendIfNotDefault("dragDeadtime", child.dragDeadtime, 0)
-                    appendIfNotDefault("dragRenderBehavior", child.dragRenderBehavior, false)
-                    appendIfNotDefault("opCircumfix", child.opCircumfix, null)
-                    appendIfNotDefault("opSuffix", child.opSuffix, null)
-                    appendIfNotDefault("option", child.option, null)
-                    appendIfNotDefault("unknownProp_9", child.unknownProp_9, 0)
-                    appendIfNotDefault("unknownProp_10", child.unknownProp_10, 0)
-                    appendIfNotDefault("unknownProp_11", child.unknownProp_11, 0)
-                    if (child.cs1ComparisonOperands != null) writer.write("  cs1ComparisonOperands: ${child.cs1ComparisonOperands!!.joinToString(",")}\n")
-                    if (child.cs1ComparisonOpcodes != null) writer.write("  cs1ComparisonOpcodes: ${child.cs1ComparisonOpcodes!!.joinToString(",")}\n")
-                    if (child.cs1Scripts != null) {
-                        writer.write("  cs1Scripts:\n")
-                        child.cs1Scripts!!.forEachIndexed { i, arr ->
-                            writer.write("    Script $i: ${arr?.joinToString(",") ?: "null"}\n")
-                        }
-                    }
-                    if (child.objCounts != null) writer.write("  objCounts: ${child.objCounts!!.joinToString(",")}\n")
-                    if (child.objTypes != null) writer.write("  objTypes: ${child.objTypes!!.joinToString(",")}\n")
-                    appendIfNotDefault("invMarginX", child.invMarginX, 0)
-                    appendIfNotDefault("invMarginY", child.invMarginY, 0)
-                    if (child.invOffsetX != null) writer.write("  invOffsetX: ${child.invOffsetX!!.joinToString(",")}\n")
-                    if (child.invOffsetY != null) writer.write("  invOffsetY: ${child.invOffsetY!!.joinToString(",")}\n")
-                    if (child.invSprite != null) writer.write("  invSprite: ${child.invSprite!!.joinToString(",")}\n")
-                    appendIfNotDefault("buttonType", child.buttonType, 0)
-                    if (child.invOptions != null) writer.write("  invOptions: ${child.invOptions!!.joinToString(",")}\n")
-                    appendIfNotDefault("parent", child.parent, 0)
-                    val linked = child.scripts
-                    if (linked != null) {
-                        writer.write("  linkedScripts:\n")
-
-                        fun dumpScript(name: String, script: ScriptArgs?) {
-                            if (script != null) {
-                                writer.write("    $name: ${script.args?.joinToString(",") ?: "empty"}\n")
-                            }
-                        }
-
-                        dumpScript("unknown", linked.unknown)
-                        dumpScript("onMouseOver", linked.onMouseOver)
-                        dumpScript("onMouseLeave", linked.onMouseLeave)
-                        dumpScript("onUseWith", linked.onUseWith)
-                        dumpScript("onUse", linked.onUse)
-                        dumpScript("onVarpTransmit", linked.onVarpTransmit)
-                        dumpScript("onInvTransmit", linked.onInvTransmit)
-                        dumpScript("onStatTransmit", linked.onStatTransmit)
-                        dumpScript("onTimer", linked.onTimer)
-                        dumpScript("onOptionClick", linked.onOptionClick)
-                        dumpScript("onMouseRepeat", linked.onMouseRepeat)
-                        dumpScript("onClickRepeat", linked.onClickRepeat)
-                        dumpScript("onDrag", linked.onDrag)
-                        dumpScript("onRelease", linked.onRelease)
-                        dumpScript("onHold", linked.onHold)
-                        dumpScript("onDragStart", linked.onDragStart)
-                        dumpScript("onDragRelease", linked.onDragRelease)
-                        dumpScript("onScroll", linked.onScroll)
-                        dumpScript("onVarcTransmit", linked.onVarcTransmit)
-                        dumpScript("onVarcstrTransmit", linked.onVarcstrTransmit)
-                    }
-                    writer.write("\n")
+            fun dumpMap(c: IfaceDefinition): Map<String, Any?> {
+                val map = mutableMapOf<String, Any?>(
+                    "childId" to c.id,
+                    "type" to c.type?.name,
+                    "baseX" to c.baseX,
+                    "baseY" to c.baseY,
+                    "baseWidth" to c.baseWidth,
+                    "baseHeight" to c.baseHeight,
+                    "overlayer" to c.overlayer,
+                    "spriteId" to c.spriteId
+                )
+                if (!c.ops.isNullOrEmpty()) map["ops"] = c.ops!!.filterNotNull()
+                c.scripts?.let { s ->
+                    val scr = mutableMapOf<String, Any>()
+                    s.unknown?.let { scr["unknown"] = listOf(it.id, it.args) }
+                    s.onMouseOver?.let { scr["onMouseOver"] = listOf(it.id, it.args) }
+                    s.onMouseLeave?.let { scr["onMouseLeave"] = listOf(it.id, it.args) }
+                    s.onUseWith?.let { scr["onUseWith"] = listOf(it.id, it.args) }
+                    s.onUse?.let { scr["onUse"] = listOf(it.id, it.args) }
+                    s.onVarpTransmit?.let { scr["onVarpTransmit"] = listOf(it.id, it.args) }
+                    s.onInvTransmit?.let { scr["onInvTransmit"] = listOf(it.id, it.args) }
+                    s.onStatTransmit?.let { scr["onStatTransmit"] = listOf(it.id, it.args) }
+                    s.onTimer?.let { scr["onTimer"] = listOf(it.id, it.args) }
+                    s.onOptionClick?.let { scr["onOptionClick"] = listOf(it.id, it.args) }
+                    s.onMouseRepeat?.let { scr["onMouseRepeat"] = listOf(it.id, it.args) }
+                    s.onClickRepeat?.let { scr["onClickRepeat"] = listOf(it.id, it.args) }
+                    s.onDrag?.let { scr["onDrag"] = listOf(it.id, it.args) }
+                    s.onRelease?.let { scr["onRelease"] = listOf(it.id, it.args) }
+                    s.onHold?.let { scr["onHold"] = listOf(it.id, it.args) }
+                    s.onDragStart?.let { scr["onDragStart"] = listOf(it.id, it.args) }
+                    s.onDragRelease?.let { scr["onDragRelease"] = listOf(it.id, it.args) }
+                    s.onScroll?.let { scr["onScroll"] = listOf(it.id, it.args) }
+                    s.onVarcTransmit?.let { scr["onVarcTransmit"] = listOf(it.id, it.args) }
+                    s.onVarcstrTransmit?.let { scr["onVarcstrTransmit"] = listOf(it.id, it.args) }
+                    if (scr.isNotEmpty()) map["scripts"] = scr
                 }
-            } finally {
-                writer.close()
+                return map
             }
 
-            player.debug("Interface $ifaceId dumped to file: $dump.")
-        }
+            val c = mutableListOf<Map<String, Any?>>()
+            c.add(dumpMap(iface))
+            iface.children
+                ?.filter { it != null && (it.spriteId != 0 || it.baseWidth != 0 || it.baseHeight != 0 || !it.ops.isNullOrEmpty() || it.scripts != null) }
+                ?.forEach { it?.let { it1 -> dumpMap(it1) }?.let { it2 -> c.add(it2) } }
 
+            val dump = File(dumps, "$i.json")
+            dump.writeText(gson.toJson(c))
+
+            p.debug("Iface id=$i dumped to $dump.")
+        }
 
         /*
          * Dumps for educational purposes identity kit configurations to a .csv file.

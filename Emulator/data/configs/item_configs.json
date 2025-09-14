@@ -20626,7 +20626,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "On ground: Cabbage... yuck!In inventory: Yuck, I don't like cabbage.",
+    "examine": "Cabbage... yuck!",
     "grand_exchange_price": "41",
     "durability": null,
     "name": "Cabbage",
@@ -20645,7 +20645,7 @@
     "id": "1966"
   },
   {
-    "examine": "On ground: Cabbage... yuck!In inventory: Yuck, I don't like cabbage.",
+    "examine": "Yuck, I don't like cabbage.",
     "grand_exchange_price": "55",
     "durability": null,
     "name": "Cabbage",
@@ -42781,7 +42781,7 @@
     "id": "4619"
   },
   {
-    "examine": "It looks horrible.On ground: Not good for eating.",
+    "examine": "Not good for eating.",
     "durability": null,
     "name": "Black mushroom",
     "weight": "1",
