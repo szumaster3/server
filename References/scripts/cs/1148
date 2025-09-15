@@ -1,4 +1,0 @@
-push_i 2
-set_bright_pref 0
-call 1152
-return 0

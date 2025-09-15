@@ -1,8 +1,0 @@
-load_global_i 42
-load_i 0
-if_eq_i 1
-jump 3
-push_i -1
-store_global_i 42
-call 178
-return 0

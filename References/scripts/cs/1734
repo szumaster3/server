@@ -1,4 +1,0 @@
-load_i 0
-load_i 1
-call 1735
-return 0

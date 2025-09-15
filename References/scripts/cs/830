@@ -1,4 +1,0 @@
-load_i 0
-load_i 1
-call 831
-return 0

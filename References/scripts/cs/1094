@@ -1,8 +1,0 @@
-push_icfg 1241
-push_i 1
-if_eq_i 1
-jump 2
-call 1095
-jump 1
-call 1096
-return 0

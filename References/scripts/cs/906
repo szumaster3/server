@@ -1,3 +1,0 @@
-push_i 1
-store_global_i 116
-return 0

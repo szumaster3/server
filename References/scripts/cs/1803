@@ -1,6 +1,0 @@
-push_i 0
-push_i 0
-load_i 0
-op2100 0
-call 1784
-return 0

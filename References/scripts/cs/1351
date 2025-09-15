@@ -1,9 +1,0 @@
-load_i 0
-load_i 1
-op200 0
-push_i 1
-if_eq_i 1
-jump 2
-load_i 2
-set_wgt_sprite 0
-return 0

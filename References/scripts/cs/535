@@ -1,7 +1,0 @@
-push_vbit_i 4103
-push_i 10
-div_i 0
-tostr_i 0
-load_i 0
-op2112 0
-return 0

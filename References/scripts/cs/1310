@@ -1,7 +1,0 @@
-push_i -1
-load_i 0
-op2108 0
-push_i -1
-load_i 0
-op2110 0
-return 0

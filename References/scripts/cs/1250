@@ -1,7 +1,0 @@
-load_i 0
-load_i 1
-load_i 2
-load_i 3
-load_i 4
-call 1251
-return 0

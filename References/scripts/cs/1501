@@ -1,6 +1,0 @@
-load_i 1
-call 41
-push_i 0
-load_i 0
-op2103 0
-return 0

@@ -1,6 +1,0 @@
-load_i 1
-skill_curr_lvl 0
-tostr_i 0
-load_i 0
-op2112 0
-return 0

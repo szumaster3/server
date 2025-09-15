@@ -1,9 +1,0 @@
-push_vbit_i 2880
-tostr_i 0
-push_i 30867458
-op2112 0
-push_vbit_i 2881
-tostr_i 0
-push_i 30867459
-op2112 0
-return 0

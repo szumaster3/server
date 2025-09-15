@@ -1,6 +1,0 @@
-call 1455
-call 1456
-push_i 1
-call 1463
-call 1474
-return 0

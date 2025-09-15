@@ -1,9 +1,0 @@
-push_i 1
-push_i 53149700
-op2003 0
-push_i 13150820
-push_i 53149701
-op2101 0
-push_i 53149731
-call 41
-return 0

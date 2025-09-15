@@ -1,6 +1,0 @@
-load_i 0
-load_i 1
-load_i 2
-load_i 3
-call 1298
-return 0

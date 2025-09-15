@@ -1,8 +1,0 @@
-load_i 0
-call 1184
-push_i 838
-load_i 0
-push_s "I"
-load_i 0
-op2422 0
-return 0

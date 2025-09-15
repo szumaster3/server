@@ -1,4 +1,0 @@
-push_vbit_i 4398
-push_i 2
-call 846
-return 0

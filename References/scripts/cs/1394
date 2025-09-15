@@ -1,7 +1,0 @@
-push_s "Kill Count : "
-push_vbit_i 464
-tostr_i 0
-concat_s 2
-push_i 1572864
-op2112 0
-return 0

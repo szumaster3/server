@@ -1,6 +1,0 @@
-push_icfg 173
-call 734
-store_global_i 214
-load_i 0
-call 1741
-return 0

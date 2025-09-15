@@ -1,7 +1,0 @@
-push_vbit_i 907
-tostr_i 0
-push_s "%"
-concat_s 2
-push_i 24707076
-op2112 0
-return 0

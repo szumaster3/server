@@ -1,4 +1,0 @@
-push_i 1
-set_stereo_snd_pref 0
-call 1156
-return 0

@@ -1,4 +1,0 @@
-load_i 0
-set_stereo_snd_pref 0
-call 1220
-return 0

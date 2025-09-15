@@ -1,9 +1,0 @@
-load_i 0
-push_i 0
-op200 0
-push_i 1
-if_eq_i 1
-jump 2
-push_i 255
-set_wgt_transp 0
-return 0

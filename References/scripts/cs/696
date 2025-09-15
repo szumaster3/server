@@ -1,8 +1,0 @@
-close_wgt 0
-push_s "Cancelled."
-op3100 0
-push_i 1042
-push_i 1
-push_i 0
-op3200 0
-return 0

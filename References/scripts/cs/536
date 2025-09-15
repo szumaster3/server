@@ -1,9 +1,0 @@
-push_i 537
-push_tick 0
-push_tick 0
-push_i 25
-add_i 0
-push_s "ii"
-push_i 48824322
-op2408 0
-return 0

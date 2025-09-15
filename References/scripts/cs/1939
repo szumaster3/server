@@ -1,7 +1,0 @@
-push_tick 0
-load_global_i 558
-push_i 30
-mult_i 0
-add_i 0
-store_global_i 556
-return 0

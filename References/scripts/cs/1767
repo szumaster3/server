@@ -1,4 +1,0 @@
-push_i 4
-call 71
-call 1766
-return 0

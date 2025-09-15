@@ -1,5 +1,0 @@
-load_s 0
-store_global_s 25
-load_s 1
-store_global_s 26
-return 0

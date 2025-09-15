@@ -1,5 +1,0 @@
-load_i 0
-load_i 1
-call 1345
-set_scene_shad_pref 0
-return 0

@@ -1,7 +1,0 @@
-push_i 0
-push_i 53149699
-op2003 0
-push_i 16777215
-push_i 53149726
-op2101 0
-return 0

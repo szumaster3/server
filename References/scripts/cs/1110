@@ -1,7 +1,0 @@
-run_energy 0
-tostr_i 0
-push_s "%"
-concat_s 2
-push_i 17104909
-op2112 0
-return 0

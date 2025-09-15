@@ -1,8 +1,0 @@
-op5306 0
-push_i 2
-if_gteq_i 1
-jump 2
-call 1385
-jump 1
-call 1386
-return 0

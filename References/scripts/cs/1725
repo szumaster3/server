@@ -1,9 +1,0 @@
-push_i 0
-load_i 0
-op2003 0
-push_i 1726
-load_i 0
-push_s "I"
-load_i 0
-op2408 0
-return 0

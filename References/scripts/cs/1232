@@ -1,9 +1,0 @@
-push_i 105
-push_i 105
-push_i 1669
-load_i 0
-push_i 48759155
-call 1345
-op3408 0
-store_global_i 182
-return 0

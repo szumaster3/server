@@ -1,5 +1,0 @@
-push_s "billing_core"
-push_s "paymentoptions.ws"
-push_i 1
-op5400 0
-return 0

@@ -1,8 +1,0 @@
-push_i 1338
-load_s 0
-load_s 1
-load_i 0
-push_s "ss1"
-push_i 29163522
-op2400 0
-return 0

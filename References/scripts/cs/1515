@@ -1,8 +1,0 @@
-push_vbit_i 4908
-push_i 0
-if_eq_i 1
-jump 2
-call 1517
-jump 1
-call 1516
-return 0

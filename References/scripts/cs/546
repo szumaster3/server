@@ -1,5 +1,0 @@
-push_i 0
-store_global_i 80
-load_i 0
-op102 0
-return 0

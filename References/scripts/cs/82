@@ -1,6 +1,0 @@
-sys_updt_time 0
-push_i 0
-if_gt_i 1
-jump 1
-call 89
-return 0

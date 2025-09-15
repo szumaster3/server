@@ -1,7 +1,0 @@
-push_i 300
-store_global_i 51
-push_i 0
-store_global_i 50
-push_i 0
-store_global_i 52
-return 0

@@ -1,7 +1,0 @@
-push_s "terms/terms.ws?cty="
-load_global_i 182
-tostr_i 0
-concat_s 2
-push_i 1
-op5421 0
-return 0

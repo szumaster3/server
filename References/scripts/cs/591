@@ -1,8 +1,0 @@
-push_i -1
-set_icfg 1112
-push_i -1
-set_icfg 1113
-push_i -1
-set_icfg 1109
-call 621
-return 0

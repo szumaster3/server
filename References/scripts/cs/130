@@ -1,6 +1,0 @@
-load_s 0
-filter_xml 0
-store_s 1
-load_s 1
-rm_ignore 0
-return 0

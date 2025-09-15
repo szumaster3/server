@@ -1,6 +1,0 @@
-call 1719
-push_i 50528459
-push_i 1
-push_i 15
-call 1612
-return 0

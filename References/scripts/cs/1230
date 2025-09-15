@@ -1,5 +1,0 @@
-load_i 0
-push_i 48759163
-call 1345
-store_global_i 180
-return 0

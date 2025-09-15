@@ -1,8 +1,0 @@
-load_i 1
-skill_curr_lvl 0
-store_global_i 80
-load_i 0
-load_i 1
-load_i 2
-call 547
-return 0

@@ -1,7 +1,0 @@
-push_i 12
-call 1548
-load_i 0
-load_i 1
-load_i 2
-call 1809
-return 0

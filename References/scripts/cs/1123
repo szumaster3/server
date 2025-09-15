@@ -1,5 +1,0 @@
-load_global_s 34
-store_global_s 32
-push_i 48759025
-call 1174
-return 0

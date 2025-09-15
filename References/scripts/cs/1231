@@ -1,7 +1,0 @@
-push_i 2009
-load_i 0
-push_i 48759159
-call 1345
-sub_i 0
-store_global_i 181
-return 0

@@ -1,7 +1,0 @@
-push_icfg 531
-tostr_i 0
-push_s " %"
-concat_s 2
-push_i 13697028
-op2112 0
-return 0

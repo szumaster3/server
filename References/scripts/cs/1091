@@ -1,7 +1,0 @@
-push_i 93
-load_i 1
-inv_item_amt 0
-tostr_i 0
-load_i 0
-op2112 0
-return 0

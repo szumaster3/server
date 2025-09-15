@@ -1,9 +1,0 @@
-load_global_i 192
-tostr_i 0
-push_i 49938529
-op2112 0
-call 1466
-tostr_i 0
-push_i 49938530
-op2112 0
-return 0

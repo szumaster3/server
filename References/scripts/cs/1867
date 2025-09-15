@@ -1,5 +1,0 @@
-push_s "www"
-push_s "parents.ws"
-push_i 0
-op5400 0
-return 0

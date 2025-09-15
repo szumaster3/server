@@ -1,7 +1,0 @@
-push_s "Score: "
-push_vbit_i 2121
-tostr_i 0
-concat_s 2
-load_i 0
-op2112 0
-return 0

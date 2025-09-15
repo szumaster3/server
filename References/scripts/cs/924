@@ -1,8 +1,0 @@
-load_i 0
-call 680
-push_i 0
-store_global_i 2
-push_i 13408512
-load_i 1
-op2101 0
-return 0

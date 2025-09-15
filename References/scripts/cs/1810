@@ -1,5 +1,0 @@
-load_i 0
-load_i 1
-load_i 2
-call 1811
-return 0

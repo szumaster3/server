@@ -1,4 +1,0 @@
-push_i 1484
-push_i 9
-call 1029
-return 0

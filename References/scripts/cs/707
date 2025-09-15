@@ -1,5 +1,0 @@
-push_i 255
-store_global_i 215
-push_i 0
-store_global_i 216
-return 0

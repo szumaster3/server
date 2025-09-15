@@ -1,5 +1,0 @@
-load_i 0
-call 680
-push_i 6881493
-call 41
-return 0

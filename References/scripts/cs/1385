@@ -1,7 +1,0 @@
-push_i 0
-call 1309
-push_i 1201
-push_i 48889868
-op2105 0
-call 1308
-return 0

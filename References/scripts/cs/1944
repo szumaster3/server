@@ -1,9 +1,0 @@
-push_s 0
-push_i 52559888
-op2112 0
-push_i 1
-push_i 52559891
-op2003 0
-push_i 0
-store_global_i 581
-return 0

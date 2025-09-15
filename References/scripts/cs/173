@@ -1,4 +1,0 @@
-load_i 0
-store_global_i 42
-call 178
-return 0

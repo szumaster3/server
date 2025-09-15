@@ -1,4 +1,0 @@
-load_i 0
-push_tick 0
-call 147
-return 0
