@@ -493,7 +493,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                     addIfNotNull("parent", def.parent)
                 }
 
-                addIfNotNull("type", def.type?.name)
+                addIfNotNull("type", def.type?.name?.lowercase())
                 addIfNotNull("version", def.version)
                 addIfNotNull("clientCode", def.clientCode)
                 addIfNotNull("baseX", def.baseX)
