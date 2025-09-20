@@ -8,6 +8,7 @@ import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
+import core.game.world.map.Location
 import shared.consts.NPCs
 
 class CavernCutscene(
@@ -20,6 +21,11 @@ class CavernCutscene(
         }
         loadRegion(6985)
         addNPC(NPCs.BOUNCER_5564, 31, 30, Direction.NORTH_EAST)
+    }
+
+    override fun onLogout(p: Player) {
+        setExit(Location.create(2617, 9828, 0))
+        super.onLogout(player)
     }
 
     override fun runStage(stage: Int) {
