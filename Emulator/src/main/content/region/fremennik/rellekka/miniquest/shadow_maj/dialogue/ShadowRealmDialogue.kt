@@ -19,7 +19,7 @@ import shared.consts.NPCs
  * - [GeneralShadow]
  */
 @Initializable
-class ShadowRealmGhostDialogue(player: Player? = null) : Dialogue(player) {
+class ShadowRealmDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         return when {

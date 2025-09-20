@@ -88,7 +88,7 @@ class SinSeerDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("Never mind.").also { stage = END_DIALOGUE }
             }
             23 -> if (!removeItem(player, Item(Items.COINS_995, 40))) {
-                sendDialogue(player!!, "You don't have enough money.").also { stage = END_DIALOGUE }
+                npcl(FaceAnim.HALF_GUILTY, "Sorry, you don't have enough money.").also { stage = END_DIALOGUE }
             } else {
                 npcl(FaceAnim.NEUTRAL, "You have done many great deeds...but many terrible deeds. Sometimes you do them by accident, but they are still sins.").also { stage++ }
             }

@@ -35,53 +35,52 @@ class GeneralShadowPlugin : InteractionListener {
          */
 
         on(Scenery.CRACK_21800, IntType.SCENERY, "Enter") { player, node ->
-            if (GeneralShadow.isComplete(player)) {
-                teleport(player, Location.create(1759, 4711, 0), TeleportManager.TeleportType.INSTANT, 1)
-                return@on true
-            }
-            if (node.location.x == 1759 && node.location.y == 4712) {
-                teleport(player, Location.create(2617, 9828, 0), TeleportManager.TeleportType.INSTANT, 1)
-                return@on true
-            }
-            if (getAttribute(player, GeneralShadow.GS_RECEIVED_SEVERED_LEG, false)
-                && GeneralShadow.getShadowProgress(player) == 4
-                && inInventory(player, Items.SEVERED_LEG_10857)
-            ) {
-                openDialogue(
-                    player,
-                    object : DialogueFile() {
-                        override fun handle(
-                            componentID: Int,
-                            buttonID: Int,
-                        ) {
-                            when (stage) {
-                                0 -> sendDialogue(
-                                    player,
-                                    "You have a bad feeling about crawling into the next cavern.",
-                                ).also { stage++ }
-                                1 -> {
-                                    setTitle(player, 2)
-                                    options("Yes", "No", title = "Do you want to enter the cavern?")
-                                    stage++
-                                }
-
-                                2 -> when (buttonID) {
-                                    1 -> {
-                                        end()
-                                        lock(player, 1000)
-                                        lockInteractions(player, 1000)
-                                        CavernCutscene(player).start()
+            when {
+                node.location.x == 1759 && node.location.y == 4712 -> {
+                    teleport(player, Location.create(2617, 9828, 0), TeleportManager.TeleportType.INSTANT, 1)
+                    return@on true
+                }
+                GeneralShadow.isComplete(player) && node.location.x == 2617 && node.location.y == 9827 -> {
+                    teleport(player, Location.create(1759, 4711, 0), TeleportManager.TeleportType.INSTANT, 1)
+                    return@on true
+                }
+                getAttribute(player, GeneralShadow.GS_RECEIVED_SEVERED_LEG, false)
+                        && GeneralShadow.getShadowProgress(player) == 4
+                        && inInventory(player, Items.SEVERED_LEG_10857) -> {
+                    openDialogue(
+                        player,
+                        object : DialogueFile() {
+                            override fun handle(componentID: Int, buttonID: Int) {
+                                when (stage) {
+                                    0 -> {
+                                        sendDialogue(player, "You have a bad feeling about crawling into the next cavern.")
+                                        stage++
                                     }
-
-                                    2 -> end()
+                                    1 -> {
+                                        setTitle(player, 2)
+                                        options("Yes", "No", title = "Do you want to enter the cavern?")
+                                        stage++
+                                    }
+                                    2 -> when (buttonID) {
+                                        1 -> {
+                                            end()
+                                            CavernCutscene(player).start()
+                                        }
+                                        2 -> end()
+                                    }
                                 }
                             }
-                        }
-                    },
-                    node,
-                )
+                        },
+                        node
+                    )
+                    return@on true
+                }
+
+                else -> {
+                    sendMessage(player, "You have a bad feeling about crawling into the next cavern.")
+                    return@on false
+                }
             }
-            return@on true
         }
     }
 }

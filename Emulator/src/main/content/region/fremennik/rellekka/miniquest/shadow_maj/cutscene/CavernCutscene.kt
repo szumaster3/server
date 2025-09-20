@@ -62,7 +62,7 @@ class CavernCutscene(
 
             6 -> {
                 end()
-                sendMessage(player, "An evil prescence in the cave prevents your prayers from being heard.", 10)
+                sendMessage(player, "An evil presence in the cave prevents your prayers from being heard.", 10)
                 spawnGhostBouncer(player)
                 unlock(player)
                 resetCamera()
