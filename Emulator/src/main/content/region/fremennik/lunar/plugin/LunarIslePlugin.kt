@@ -17,8 +17,6 @@ class LunarIslePlugin : InteractionListener {
         private const val CLOSED_DOOR = Scenery.DOOR_16774
         private const val OPENED_DOOR = Scenery.DOOR_16777
         private const val HOUSE = NPCs.HOUSE_4512
-        private const val LADDER_UP = Scenery.LADDER_16640
-        private const val LADDER_DOWN = Scenery.LADDER_36306
         private val CYRISUS = intArrayOf(NPCs.CYRISUS_5893, NPCs.CYRISUS_5894, NPCs.CYRISUS_5895, NPCs.CYRISUS_5896, NPCs.CYRISUS_5897)
     }
 
@@ -38,22 +36,6 @@ class LunarIslePlugin : InteractionListener {
         on(HOUSE, IntType.NPC, "go-inside") { player, _ ->
             teleport(player, location(2451, 4645, 0), TeleportType.INSTANT)
             PlayerCamera(player).shake(1, 0, 0, 16, 20)
-            return@on true
-        }
-
-        on(LADDER_UP, IntType.SCENERY, "climb-up") { player, _ ->
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
-            queueScript(player, 1, QueueStrength.SOFT) {
-                return@queueScript teleport(player, location(2141, 3944, 0))
-            }
-            return@on true
-        }
-
-        on(LADDER_DOWN, IntType.SCENERY, "climb-down") { player, _ ->
-            animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
-            queueScript(player, 1, QueueStrength.SOFT) {
-                return@queueScript teleport(player, location(2329, 10353, 2))
-            }
             return@on true
         }
 

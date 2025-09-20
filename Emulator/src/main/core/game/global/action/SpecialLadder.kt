@@ -104,6 +104,8 @@ enum class SpecialLadder(private val location: Location, private val destination
     LEGENDS_GUILD_STAIRCASE_DOWN(Location.create(2724, 3374, 0), Location.create(2725, 9775, 0)),
     LUMBRIDGE_LEARNING_THE_ROPES_DOWN(Location.create(3230, 3241, 0), Location.create(3290, 4936, 0)),
     LUMBRIDGE_LEARNING_THE_ROPES_UP(Location.create(3290, 4935, 0), Location.create(3230, 3240, 0)),
+    LUNAR_ISLE_MINE_DOWN(Location.create(2142, 3944,0), Location.create(2329, 10353, 2)),
+    LUNAR_ISLE_MINE_UP(Location.create(2330, 10353,2), Location.create(2141, 3944,0)),
     MOVARIO_LADDER_UP(Location.create(2036, 4379, 0), Location.create(2502, 3255, 0)),
     MYREQUE_INN_BASEMENT_UP(Location.create(3477, 9846, 0), Location.create(3496, 3465, 0)),
     NEITIZNOT_STAIRS_UP(Location.create(2363, 3799, 0), Location.create(2364, 3799, 2)),
