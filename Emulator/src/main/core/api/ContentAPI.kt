@@ -1874,6 +1874,7 @@ fun setVarbit(
     val current = getVarp(player, def.varpId) and (mask shl def.startBit).inv()
     val newValue = (value and mask) shl def.startBit
     setVarp(player, def.varpId, current or newValue, save)
+    player.debug("${def.varpId} save=$save")
 }
 
 /**
@@ -1899,6 +1900,7 @@ fun setVarbit(
     }
 
     setVarbit(player, def, value, save)
+    player.debug("$def $save")
 }
 
 /**
