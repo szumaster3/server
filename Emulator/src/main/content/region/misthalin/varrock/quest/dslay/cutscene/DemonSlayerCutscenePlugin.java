@@ -28,10 +28,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
-import shared.consts.Animations;
-import shared.consts.NPCs;
-import shared.consts.Quests;
-import shared.consts.Sounds;
+import shared.consts.*;
 
 import static core.api.ContentAPIKt.*;
 
@@ -104,7 +101,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
 
     @Override
     public boolean start(final Player player, final boolean login, java.lang.Object... args) {
-        final NPC[] npcs = new NPC[]{NPC.create(4658, base.transform(29, 43, 0)), NPC.create(4659, base.transform(29, 40, 0)), NPC.create(4662, base.transform(26, 40, 0)), NPC.create(4660, base.transform(26, 43, 0))};
+        final NPC[] npcs = new NPC[]{NPC.create(NPCs.DARK_WIZARD_4658, base.transform(29, 43, 0)), NPC.create(4659, base.transform(29, 40, 0)), NPC.create(4662, base.transform(26, 40, 0)), NPC.create(4660, base.transform(26, 43, 0))};
         for (NPC n : npcs) {
             playAudio(player, DELRITH_APPEAR);
             n.init();
@@ -489,7 +486,7 @@ public final class DemonSlayerCutscenePlugin extends CutscenePlugin {
                         public boolean pulse() {
                             switch (counter++) {
                                 case 5:
-                                    playAudio(player, SUMMON_DEMON);
+                                    playJingle(player, Music.DELRITH_SUMMON_195);
                                     cutscene.delrith = NPC.create(DemonSlayerCutscenePlugin.DELRITH, cutscene.getBase().transform(27, 40, 0));
                                     cutscene.delrith.init();
                                     cutscene.delrith.animate(ANIMATION);

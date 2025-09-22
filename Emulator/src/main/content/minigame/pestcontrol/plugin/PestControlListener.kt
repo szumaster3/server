@@ -1,6 +1,6 @@
 package content.minigame.pestcontrol.plugin
 
-import content.global.travel.ship.Charter
+import content.global.travel.ship.CharterShip
 import content.minigame.pestcontrol.npc.*
 import core.api.*
 import core.cache.def.impl.NPCDefinition
@@ -88,7 +88,7 @@ class PestControlListener : InteractionListener {
 
                 "leave" -> {
                     if (session == null) {
-                        Charter.PEST_TO_PORT_SARIM.sail(player)
+                        CharterShip.PEST_TO_PORT_SARIM.sail(player)
                         return@on true
                     }
                     player.properties.teleportLocation = session.activity.leaveLocation

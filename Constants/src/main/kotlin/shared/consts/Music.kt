@@ -171,8 +171,8 @@ object Music {
     const val LONESOME_168 = 168
     const val CRYSTAL_SWORD_169 = 169
     const val THE_SHADOW_170 = 170
-    const val MUSIC_171 = 171
-    const val MUSIC_172 = 172
+    const val CHARTER_JINGLE_171 = 171
+    const val SAILING_JOURNEY_172 = 172
     const val DUNJUN_173 = 173
     const val MUSIC_174 = 174
     const val SPIRIT_175 = 175

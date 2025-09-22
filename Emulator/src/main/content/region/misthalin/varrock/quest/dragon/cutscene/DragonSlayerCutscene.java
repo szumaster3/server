@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.quest.dragon.cutscene;
 
-import content.global.travel.ship.Charter;
+import content.global.travel.ship.CharterShip;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;
@@ -90,7 +90,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
     public void end() {
         super.end();
         this.getBobinPulse().stop();
-        player.getProperties().setTeleportLocation(Charter.PORT_SARIM_TO_CRANDOR.getLocation());
+        player.getProperties().setTeleportLocation(CharterShip.PORT_SARIM_TO_CRANDOR.getLocation());
         player.getInterfaceManager().close();
         player.animate(ANIMATION);
         player.getDialogueInterpreter().close();
@@ -437,8 +437,8 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                             stage = 512;
                             break;
                         case 512:
-                            setAttribute(player, "real-end", Charter.PORT_SARIM_TO_CRANDOR.getLocation());
-                            setAttribute(player, "cutscene:original-loc", Charter.PORT_SARIM_TO_CRANDOR.getLocation());
+                            setAttribute(player, "real-end", CharterShip.PORT_SARIM_TO_CRANDOR.getLocation());
+                            setAttribute(player, "cutscene:original-loc", CharterShip.PORT_SARIM_TO_CRANDOR.getLocation());
                             PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 4, 4, 1200, 4, 4));
                             player.getDialogueInterpreter().sendPlainMessage(true, "<col=8A0808>CRASH!");
                             cutscene.stop(true);
@@ -465,7 +465,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
                             break;
                         case 10:
                             end();
-                            Charter.PORT_SARIM_TO_CRANDOR.sail(player);
+                            CharterShip.PORT_SARIM_TO_CRANDOR.sail(player);
                             GameWorld.getPulser().submit(new Pulse(17) {
                                 @Override
                                 public boolean pulse() {

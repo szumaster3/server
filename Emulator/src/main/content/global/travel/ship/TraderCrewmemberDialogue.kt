@@ -17,15 +17,15 @@ import shared.consts.NPCs
  * Represents the Charter dialogue.
  */
 @Initializable
-class CharterDialogue(player: Player? = null) : Dialogue(player) {
+class TraderCrewmemberDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var destination: CharterUtils.Destination? = null
+    private var destination: CharterShipUtils.Destination? = null
     private var cost = 0
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (args.size > 1) {
-            destination = (args[1] as CharterUtils.Destination)
+            destination = (args[1] as CharterShipUtils.Destination)
             cost = args[2] as Int
             core.api.sendDialogue(player, "To sail to " + StringUtils.formatDisplayName(destination!!.name) + " from here will cost you " + cost + " gold. Are you sure you want to pay that?")
             stage = 14
@@ -66,7 +66,7 @@ class CharterDialogue(player: Player? = null) : Dialogue(player) {
             12 -> npc(FaceAnim.HAPPY, "Certainly sir, where would you like to go?").also { stage++ }
             13 -> {
                 end()
-                CharterUtils.open(player)
+                CharterShipUtils.open(player)
             }
 
             14 -> options("Ok", "Choose again", "No").also { stage++ }
@@ -89,7 +89,7 @@ class CharterDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> {
                     end()
-                    CharterUtils.open(player)
+                    CharterShipUtils.open(player)
                 }
 
                 3 -> end()
@@ -98,7 +98,7 @@ class CharterDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue = CharterDialogue(player)
+    override fun newInstance(player: Player?): Dialogue = TraderCrewmemberDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(
         NPCs.TRADER_STAN_4650,

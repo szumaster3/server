@@ -21,7 +21,6 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-
         if (args.size > 1 && isQuestComplete(player, Quests.PIRATES_TREASURE)) {
             when {
                 hasCharosRing() -> travel()
@@ -30,7 +29,6 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
             }
             return true
         }
-
         sendMessage(player, "You may only use the Pay-fare option after completing Pirate's Treasure.")
         npc(FaceAnim.HALF_GUILTY, "Do you want to go on a trip to Karamja?")
         return true
@@ -38,7 +36,11 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc(FaceAnim.HALF_GUILTY, "The trip will cost you 30 coins.").also { stage++ }
+            0 -> {
+                npc(FaceAnim.HALF_GUILTY, "The trip will cost you 30 coins.")
+                stage = 1
+            }
+
             1 -> {
                 val opts = if (hasCharosRing()) {
                     arrayOf("Yes, please.", "No, thank you.", "(Charm) Or I could pay you nothing at all...")
@@ -52,25 +54,36 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
             2 -> when (buttonId) {
                 1 -> {
                     player(FaceAnim.HALF_GUILTY, "Yes, please.")
-                    stage = if (hasKaramjaDiscount()) 9 else 11
+                    stage = if (hasKaramjaDiscount()) 3 else 4
                 }
-                2 -> player(FaceAnim.HALF_GUILTY, "No, thank you.").also { stage = 20 }
-                3 -> player(FaceAnim.HALF_GUILTY, "Or I could pay you nothing at all...").also { stage = 5 }
+                2 -> {
+                    player(FaceAnim.HALF_GUILTY, "No, thank you.")
+                    stage = 7
+                }
+                3 -> {
+                    player(FaceAnim.HALF_GUILTY, "Or I could pay you nothing at all...")
+                    stage = 5
+                }
             }
 
-            5 -> npc(FaceAnim.HALF_GUILTY, "Mmmm ... Nothing at all you say ...").also { stage++ }
+            3 -> pay(15)
+            4 -> pay(30)
+
+            5 -> {
+                npc(FaceAnim.HALF_GUILTY, "Mmmm ... Nothing at all you say ...")
+                stage = 6
+            }
+
             6 -> {
                 npc(FaceAnim.HALF_GUILTY, "Yes, why not - jump aboard then.")
                 if (!hasDiaryTaskComplete(player, DiaryType.FALADOR, 1, 10)) {
                     finishDiaryTask(player, DiaryType.FALADOR, 1, 10)
                 }
-                stage = 30
+                travel()
+                stage = 7
             }
-            9 -> npc(FaceAnim.HALF_GUILTY, "Wait a minute... Aren't those Karamja gloves?", "Thought I'd seen you helping around the island.", "You can go on half price - 15 coins.").also { stage++ }
-            10 -> pay(15)
-            11 -> pay(30)
-            20 -> end()
-            30 -> travel()
+
+            7 -> end()
         }
         return true
     }
@@ -85,27 +98,29 @@ class SeamanDialogue(player: Player? = null) : Dialogue(player) {
                 "You do not have enough money for that."
             }
             sendDialogue(player, msg)
-            sendMessage(player, "You can not afford that.")
+            sendMessage(player, "You cannot afford that.")
+            stage = 7
             return
         }
+
         if (hasKaramjaDiscount()) {
             sendMessages(player, "The Seaman smiles as he recognises you as having earned Karamja gloves", "and lets you pass for half price - 15 coins.")
         } else {
-            sendMessage(player, "You pay 30 coins and board the ship.")
+            sendMessage(player, "You pay $price coins and board the ship.")
         }
+
         travel()
+        stage = 7
     }
 
     private fun travel() {
         end()
-        Charter.PORT_SARIM_TO_KARAMJA.sail(player)
+        CharterShip.PORT_SARIM_TO_KARAMJA.sail(player)
     }
 
-    private fun hasCharosRing(): Boolean =
-        player.equipment[EquipmentContainer.SLOT_RING]?.id == Items.RING_OF_CHAROSA_6465
+    private fun hasCharosRing(): Boolean = player.equipment[EquipmentContainer.SLOT_RING]?.id == Items.RING_OF_CHAROSA_6465
 
-    private fun hasKaramjaDiscount(): Boolean =
-        isDiaryComplete(player, DiaryType.KARAMJA, 0) || player!!.achievementDiaryManager.hasGlove()
+    private fun hasKaramjaDiscount(): Boolean = isDiaryComplete(player, DiaryType.KARAMJA, 0) || player!!.achievementDiaryManager.hasGlove()
 
     override fun getIds(): IntArray =
         intArrayOf(NPCs.CAPTAIN_TOBIAS_376, NPCs.SEAMAN_LORRIS_377, NPCs.SEAMAN_THRESNOR_378)

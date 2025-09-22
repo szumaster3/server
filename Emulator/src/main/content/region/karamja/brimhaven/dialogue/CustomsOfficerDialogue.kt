@@ -1,6 +1,6 @@
 package content.region.karamja.brimhaven.dialogue
 
-import content.global.travel.ship.Charter
+import content.global.travel.ship.CharterShip
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -81,12 +81,12 @@ class CustomsOfficerDialogue(player: Player? = null) : Dialogue(player) {
                     return true
                 } else {
                     end()
-                    var charter: Charter? = null
+                    var charter: CharterShip? = null
                     if (player.location.getDistance(LOCATIONS[0]) < 40) {
-                        charter = Charter.BRIMHAVEN_TO_ARDOUGNE
+                        charter = CharterShip.BRIMHAVEN_TO_ARDOUGNE
                     }
                     if (player.location.getDistance(LOCATIONS[1]) < 40) {
-                        charter = Charter.MUSA_POINT_TO_PORT_SARIM
+                        charter = CharterShip.MUSA_POINT_TO_PORT_SARIM
                     }
 
                     sendMessage(player, "You pay $amount coins and board the ship.")

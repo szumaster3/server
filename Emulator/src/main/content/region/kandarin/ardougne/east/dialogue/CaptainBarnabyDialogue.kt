@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.east.dialogue
 
-import content.global.travel.ship.Charter
+import content.global.travel.ship.CharterShip
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -68,9 +68,7 @@ class CaptainBarnabyDialogue : DialogueFile() {
                     sendMessage(player!!, "You can not afford that.")
                 } else {
                     sendMessage(player!!, "You pay $amount coins and board the ship.")
-                    playJingle(player!!, 171)
-                    sendDialogue(player!!, "The ship arrives at Brimhaven.")
-                    Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player!!)
+                    CharterShip.ARDOUGNE_TO_BRIMHAVEN.sail(player!!)
                 }
             }
 
@@ -87,9 +85,7 @@ class CaptainBarnabyDialogue : DialogueFile() {
             7 -> {
                 end()
                 sendMessage(player!!, "You board the ship.")
-                playJingle(player!!, 171)
-                sendDialogue(player!!, "The ship arrives at Brimhaven.")
-                Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player!!)
+                CharterShip.ARDOUGNE_TO_BRIMHAVEN.sail(player!!)
             }
         }
     }

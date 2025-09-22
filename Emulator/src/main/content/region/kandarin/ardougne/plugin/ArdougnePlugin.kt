@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.plugin
 
-import content.global.travel.ship.Charter
+import content.global.travel.ship.CharterShip
 import content.region.kandarin.ardougne.east.dialogue.CaptainBarnabyDialogue
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import core.api.*
@@ -29,20 +29,17 @@ class ArdougnePlugin : InteractionListener {
 
         on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "pay-fare") { player, _ ->
             val hasCharosRing = inEquipment(player, Items.RING_OF_CHAROSA_6465)
-            val amount = if (isDiaryComplete(player, DiaryType.KARAMJA, 0)) 15 else 30
+            val fareAmount = if (isDiaryComplete(player, DiaryType.KARAMJA, 0)) 15 else 30
 
-            if (hasCharosRing) {
-                sendMessage(player, "You board the ship.")
-                playJingle(player, 171)
-                Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player)
-            } else {
-                if (!removeItem(player, Item(Items.COINS_995, amount))) {
-                    sendMessage(player, "You can not afford that.")
+            if (hasCharosRing || removeItem(player, Item(Items.COINS_995, fareAmount))) {
+                if (hasCharosRing) {
+                    sendMessage(player, "You board the ship.")
                 } else {
-                    sendMessage(player, "You pay $amount coins and board the ship.")
-                    playJingle(player, 171)
-                    Charter.ARDOUGNE_TO_BRIMHAVEN.sail(player)
+                    sendMessage(player, "You pay $fareAmount coins and board the ship.")
                 }
+                CharterShip.ARDOUGNE_TO_BRIMHAVEN.sail(player)
+            } else {
+                sendMessage(player, "You cannot afford that.")
             }
 
             return@on true

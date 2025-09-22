@@ -1,6 +1,6 @@
 package content.minigame.pestcontrol.dialogue
 
-import content.global.travel.ship.Charter
+import content.global.travel.ship.CharterShip
 import core.api.playJingle
 import core.api.sendDialogueLines
 import core.api.sendNPCDialogueLines
@@ -78,7 +78,7 @@ class SquireDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc("Ok, but please come back soon and help us.").also { stage++ }
             4 -> {
                 end()
-                Charter.PEST_TO_PORT_SARIM.sail(player)
+                CharterShip.PEST_TO_PORT_SARIM.sail(player)
             }
 
             5 -> npc(FaceAnim.HALF_GUILTY, "I'm a Squire for the Void Knights.").also { stage++ }
@@ -93,7 +93,7 @@ class SquireDialogue(player: Player? = null) : Dialogue(player) {
             11 -> npc(FaceAnim.HALF_GUILTY, "Certainly, right this way.").also { stage++ }
             12 -> {
                 end()
-                Charter.PORT_SARIM_TO_PEST_CONTROL.sail(player)
+                CharterShip.PORT_SARIM_TO_PEST_CONTROL.sail(player)
             }
             13 -> options("What's going on?", "How do I repair things?", "I want to leave.", "I'd better get back to it then.").also { stage++ }
             14 -> when (buttonId) {

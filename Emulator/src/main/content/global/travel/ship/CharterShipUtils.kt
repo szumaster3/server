@@ -1,15 +1,14 @@
 package content.global.travel.ship
 
-import content.global.travel.ship.CharterUtils.Destination.values
 import core.api.*
 import core.game.component.Component
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.repository.Repository.findNPC
+import core.tools.StringUtils
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
@@ -18,54 +17,53 @@ import shared.consts.Quests
 /**
  * Utility for charter ship travel.
  */
-object CharterUtils {
+object CharterShipUtils {
     private const val MAX_SAFE_DISTANCE = 30
-
-    /**
-     * Represents the sailing map interface.
-     */
+    // Charter map.
     val component = Component(Components.SAILING_TRANSPORT_WORLD_MAP_95)
+    // Button map.
+    private val BUTTON_MAP = Destination.values().associateBy { it.button }
 
     /**
-     * Finds destination by button id.
+     * Finds a destination by button id.
      */
-    private fun forButton(button: Int) = values().find { it.button == button }
+    private fun forButton(button: Int) = BUTTON_MAP[button]
 
     /**
-     * Finds nearest charter base within safe distance.
+     * Finds nearest base within safe distance.
      */
     private fun findNearestBase(location: Location?): Destination? =
-        values().find { it.base?.withinDistance(location!!, MAX_SAFE_DISTANCE) == true }
+        Destination.values().find { it.base?.withinDistance(location!!, MAX_SAFE_DISTANCE) == true }
 
     /**
-     * Opens the charter travel interface.
-     *
-     * @param player The player opening the charter interface.
+     * Opens charter interface.
      */
     fun open(player: Player) {
         findNearestBase(player.location)?.let { base ->
-            getHiddenComponents(base).forEach {
-                player.packetDispatch.sendInterfaceConfig(Components.SAILING_TRANSPORT_WORLD_MAP_95, it, true)
+            getHiddenComponents(base).forEach { child ->
+                sendInterfaceConfig(player, Components.SAILING_TRANSPORT_WORLD_MAP_95, child, true)
             }
-            player.interfaceManager.open(component)
+            openInterface(player, component.id)
         }
     }
 
     /**
-     * Handles charter button click.
+     * Handles button click on charter interface.
      */
     fun handle(player: Player, button: Int) {
         val destination = forButton(button) ?: return
         if (!destination.checkTravel(player)) return
+
         val cost = getCost(player, destination)
         closeInterface(player)
+
         findNPC(NPCs.TRADER_CREWMEMBER_4651)?.let {
             openDialogue(player, NPCs.TRADER_CREWMEMBER_4651, it, destination, cost)
         }
     }
 
     /**
-     * Gets travel cost with discounts applied.
+     * Calculates cost.
      */
     private fun getCost(player: Player, destination: Destination): Int {
         val baseCost = destination.getCost(player, destination)
@@ -75,33 +73,36 @@ object CharterUtils {
     /**
      * Gets interface components to hide depending on nearest base.
      */
-    private fun getHiddenComponents(base: Destination): IntArray =
-        buildList {
-            arrayOf(Destination.CRANDOR).forEach {
-                add(it.xChild)
-                add(it.nameChild)
-            }
-            add(base.xChild)
-            add(base.nameChild)
-            when (base) {
-                Destination.KARAMJA -> addBoth(Destination.PORT_SARIM)
-                Destination.PORT_SARIM -> addBoth(Destination.KARAMJA)
-                else -> {}
-            }
-        }.toIntArray()
-
-    private fun MutableList<Int>.addBoth(dest: Destination) {
-        add(dest.xChild)
-        add(dest.nameChild)
+    private fun getHiddenComponents(base: Destination): IntArray {
+        val hidden = mutableListOf(
+            Destination.CRANDOR.xChild, Destination.CRANDOR.nameChild,
+            base.xChild, base.nameChild
+        )
+        when (base) {
+            Destination.KARAMJA -> hidden += listOf(Destination.PORT_SARIM.xChild, Destination.PORT_SARIM.nameChild)
+            Destination.PORT_SARIM -> hidden += listOf(Destination.KARAMJA.xChild, Destination.KARAMJA.nameChild)
+            else -> {}
+        }
+        return hidden.toIntArray()
     }
 
+    private fun loc(x: Int, y: Int, z: Int = 0) = Location.create(x, y, z)
+
     /**
-     * Represents a charter ship travel destination.
+     * Enum representing all possible charter destinations.
      */
-    enum class Destination(val location: Location, val button: Int, val costs: IntArray, val base: Location?, val xChild: Int, val nameChild: Int) {
+    enum class Destination(
+        val destination: Location,
+        val button: Int,
+        val costs: IntArray,
+        val base: Location?,
+        val xChild: Int,
+        val nameChild: Int
+    ) {
         CATHERBY(loc(2792, 3417, 1), 25, intArrayOf(480, 0, 480, 625, 1600, 3250, 1000, 1600, 3200, 3400), loc(2797, 3414), 3, 14),
         PORT_PHASMATYS(loc(3705, 3503, 1), 24, intArrayOf(3650, 3250, 1850, 0, 0, 0, 2050, 1850, 3200, 1100), loc(3702, 3502), 2, 13) {
-            override fun checkTravel(player: Player) = requireQuest(player, Quests.PRIEST_IN_PERIL, "to go there.")
+            override fun checkTravel(player: Player) =
+                requireQuest(player, Quests.PRIEST_IN_PERIL, "to go there.")
         },
         CRANDOR(loc(2792, 3417, 1), 32, intArrayOf(0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800), null, 10, 21),
         BRIMHAVEN(loc(2763, 3238, 1), 28, intArrayOf(0, 480, 480, 925, 400, 3650, 1600, 400, 3200, 3800), loc(2760, 3238), 6, 17) {
@@ -125,66 +126,50 @@ object CharterUtils {
         OO_GLOG(loc(2623, 2857, 0), 33, intArrayOf(300, 3400, 2000, 550, 5000, 2800, 1400, 900, 3200, 0), loc(2622, 2857), 11, 22),
         MOS_LE_HARMLESS(loc(3668, 2931, 1), 31, intArrayOf(725, 625, 1025, 0, 1025, 0, 325, 275, 1600, 500), loc(3671, 2933), 9, 20);
 
-        /**
-         * Gets the travel cost from the player's nearest base to the given destination.
-         *
-         * @param player The player traveling.
-         * @param dest The destination to calculate cost for.
-         * @return The travel cost in coins.
-         */
         open fun getCost(player: Player, dest: Destination): Int {
             val current = findNearestBase(player.location) ?: return 0
             val costTable = values().filterNot { it == CRANDOR }
             return current.costs[costTable.indexOf(dest)]
         }
 
-        /**
-         * Checks if the player meets the requirements to travel to this destination.
-         *
-         * @param player The player attempting travel.
-         * @return `true` if travel is allowed, `false` otherwise.
-         */
         open fun checkTravel(player: Player): Boolean = true
 
-        /**
-         * Initiates the sailing process.
-         *
-         * @param player The player sailing.
-         */
         fun sail(player: Player) {
-            player.lock(7)
+            lock(player, 7)
             val start = player.location
-            Pulser.submit(
-                object : Pulse(1) {
-                    var count: Int = 0
+            val destName = StringUtils.formatDisplayName(name)
 
-                    override fun pulse(): Boolean {
-                        when (count++) {
-                            0 -> openOverlay(player, Components.FADE_TO_BLACK_115)
-                            2 -> setMinimapState(player, 2)
-                            3 -> teleport(player, location, TeleportManager.TeleportType.INSTANT)
-                            5 -> {
-                                player.unlock()
-                                closeInterface(player)
-                                closeOverlay(player)
-                                restoreTabs(player)
-                                setMinimapState(player, 0)
-                                sendMessage(player, "You pay the fare and sail to $name.")
-                                if (start.withinDistance(Location.create(3001, 3032, 0))) {
-                                    finishDiaryTask(player, DiaryType.KARAMJA, 1, 17)
-                                }
-                                return true
-                            }
-                        }
-                        return false
+            registerLogoutListener(player, "charter-pulse") { p ->
+                p.location = start
+            }
+
+            queueScript(player, 1, QueueStrength.SOFT) { stage ->
+                when (stage) {
+                    0 -> {
+                        playJingle(player, 171)
+                        openOverlay(player, Components.FADE_TO_BLACK_115)
+                        setMinimapState(player, 2)
+                        teleport(player, destination, TeleportManager.TeleportType.INSTANT, 3)
+                        return@queueScript delayScript(player, 5)
                     }
-                },
-            )
+
+                    1 -> {
+                        unlock(player)
+                        closeInterface(player)
+                        closeOverlay(player)
+                        restoreTabs(player)
+                        setMinimapState(player, 0)
+                        sendMessage(player, "You pay the fare and sail to $destName.")
+
+                        when(destination){
+                            SHIPYARD.destination -> finishDiaryTask(player, DiaryType.KARAMJA, 1, 17)
+                        }
+                        return@queueScript stopExecuting(player)
+                    }
+
+                    else -> return@queueScript stopExecuting(player)
+                }
+            }
         }
     }
-
-    /**
-     * Helper to create a Location
-     */
-    private fun loc(x: Int, y: Int, z: Int = 0) = Location.create(x, y, z)
 }

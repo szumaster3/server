@@ -121,23 +121,21 @@ object StringUtils {
      */
     @JvmStatic
     fun formatDisplayName(name: String): String {
-        var name = name
-        name = name.replace("_".toRegex(), " ")
-        name = name.lowercase(Locale.getDefault())
-        val newName = StringBuilder()
-        var wasSpace = true
-        for (i in 0 until name.length) {
-            if (wasSpace) {
-                newName.append(("" + name[i]).uppercase(Locale.getDefault()))
-                wasSpace = false
+        val lower = name.replace("_", " ").lowercase(Locale.getDefault())
+        val result = StringBuilder()
+        var capitalize = true
+
+        for (ch in lower) {
+            if (capitalize && ch.isLetter()) {
+                result.append(ch.uppercaseChar())
+                capitalize = false
             } else {
-                newName.append(name[i])
+                result.append(ch)
             }
-            if (name[i] == ' ') {
-                wasSpace = true
-            }
+            capitalize = ch == ' '
         }
-        return newName.toString()
+
+        return result.toString()
     }
 
     /**

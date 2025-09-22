@@ -3852,10 +3852,17 @@ fun openSingleTab(
 }
 
 /**
- * Sets the state of the player's minimap (visible or hidden).
+ * Sets the state of the player's minimap.
+ *
+ * ```
+ * // States
+ * 0 - visible
+ * 1 - locked
+ * 2 - hidden
+ * ```
  *
  * @param player The player whose minimap state is being updated.
- * @param state The state of the minimap. This could represent whether the minimap is visible or hidden.
+ * @param state The state of the minimap.
  */
 fun setMinimapState(
     player: Player,

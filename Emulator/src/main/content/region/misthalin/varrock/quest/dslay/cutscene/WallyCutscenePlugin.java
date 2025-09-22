@@ -10,7 +10,11 @@ import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
 import core.net.packet.OutgoingContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
+import shared.consts.Music;
+import shared.consts.NPCs;
 import shared.consts.Quests;
+
+import static core.api.ContentAPIKt.playJingle;
 
 /**
  * The type Wally cutscene plugin.
@@ -44,7 +48,7 @@ public class WallyCutscenePlugin extends CutscenePlugin {
         player.lock();
         PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 3, 305, 1, 35));
         PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, player.getLocation().getX() + 10, player.getLocation().getY() + 12, 305, 1, 35));
-        player.getDialogueInterpreter().open(882, Repository.findNPC(882), this);
+        player.getDialogueInterpreter().open(NPCs.GYPSY_ARIS_882, Repository.findNPC(NPCs.GYPSY_ARIS_882), this);
     }
 
     @Override
@@ -54,8 +58,9 @@ public class WallyCutscenePlugin extends CutscenePlugin {
 
     @Override
     public void fade() {
+        playJingle(player, Music.WALLY_CUTSCENE_196);
         player.getQuestRepository().getQuest(Quests.DEMON_SLAYER).start(player);
-        player.getDialogueInterpreter().open(882, Repository.findNPC(882), this);
+        player.getDialogueInterpreter().open(NPCs.GYPSY_ARIS_882, Repository.findNPC(NPCs.GYPSY_ARIS_882), this);
     }
 
     @Override

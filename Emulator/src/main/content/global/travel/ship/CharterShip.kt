@@ -7,11 +7,12 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.tools.StringUtils
 import shared.consts.Components
+import shared.consts.Vars
 
 /**
  * Represents various charter routes with their data.
  */
-enum class Charter(val location: Location, val config: Int, val delay: Int, val destination: String) {
+enum class CharterShip(val location: Location, val config: Int, val delay: Int, val destination: String) {
     PORT_SARIM_TO_ENTRANA(Location.create(2834, 3331, 1), 1, 15, "Entrana"),
     ENTRANA_TO_PORT_SARIM(Location.create(3048, 3234, 0), 2, 15, "Port Sarim"),
     PORT_SARIM_TO_CRANDOR(Location.create(2849, 3238, 0), 3, 12, "Crandor"),
@@ -41,7 +42,7 @@ enum class Charter(val location: Location, val config: Int, val delay: Int, val 
         /**
          * Starts the sailing pulse.
          */
-        fun sail(player: Player, charter: Charter) {
+        fun sail(player: Player, charter: CharterShip) {
             submitIndividualPulse(player, CharterPulse(player, charter))
         }
     }
@@ -50,23 +51,23 @@ enum class Charter(val location: Location, val config: Int, val delay: Int, val 
 /**
  * Represents the charter pulse.
  */
-class CharterPulse(
-    private val player: Player,
-    private val charter: Charter,
-) : Pulse(1) {
+private class CharterPulse(private val player: Player, private val charter: CharterShip) : Pulse(1) {
     private var counter = 0
 
     override fun pulse(): Boolean {
-        when (counter++) {
-            0 -> prepare()
-            1 -> if (charter != Charter.PORT_SARIM_TO_CRANDOR) {
+        counter++
+
+        when {
+            counter == 1 -> prepare()
+            counter == 2 && charter != CharterShip.PORT_SARIM_TO_CRANDOR -> {
                 player.properties.teleportLocation = charter.location
             }
-            else -> if (counter == charter.delay) {
+            counter >= charter.delay -> {
                 arrive()
                 return true
             }
         }
+
         return false
     }
 
@@ -74,17 +75,18 @@ class CharterPulse(
         lock(player, charter.delay + 1)
         openInterface(player, Components.SHIP_MAP_299)
         setMinimapState(player, 2)
-        setVarp(player, 75, charter.config)
+        setVarp(player, Vars.VARP_IFACE_CHARTER_CONFIG_75, charter.config)
     }
 
     private fun arrive() {
         unlock(player)
-        setVarp(player, 75, 0)
+        setVarp(player, Vars.VARP_IFACE_CHARTER_CONFIG_75, 0)
         closeInterface(player)
         setMinimapState(player, 0)
-        if (charter.destination != "Crandor") {
-            sendDialogue(player, "The ship arrives at ${StringUtils.formatDisplayName(charter.destination)}.")
-            closeInterface(player)
+
+        val destination = StringUtils.formatDisplayName(charter.destination)
+        if (destination != "crandor") {
+            sendDialogue(player, "The ship arrives at $destination.")
         } else {
             openInterface(player, Components.SOULBANE_DARKNESS_317)
             setMinimapState(player, 2)
@@ -93,9 +95,10 @@ class CharterPulse(
         }
 
         when (charter) {
-            Charter.MUSA_POINT_TO_PORT_SARIM -> finishDiaryTask(player, DiaryType.KARAMJA, 0, 3)
-            Charter.BRIMHAVEN_TO_ARDOUGNE -> finishDiaryTask(player, DiaryType.KARAMJA, 0, 4)
-            Charter.CAIRN_ISLAND_TO_PORT_KHAZARD -> finishDiaryTask(player, DiaryType.KARAMJA, 1, 6)
+            CharterShip.MUSA_POINT_TO_PORT_SARIM -> finishDiaryTask(player, DiaryType.KARAMJA, 0, 3)
+            CharterShip.BRIMHAVEN_TO_ARDOUGNE -> finishDiaryTask(player, DiaryType.KARAMJA, 0, 4)
+            CharterShip.CAIRN_ISLAND_TO_PORT_KHAZARD -> finishDiaryTask(player, DiaryType.KARAMJA, 1, 6)
+            CharterShip.PORT_SARIM_TO_ENTRANA -> finishDiaryTask(player, DiaryType.FALADOR, 0, 14)
             else -> {}
         }
     }
