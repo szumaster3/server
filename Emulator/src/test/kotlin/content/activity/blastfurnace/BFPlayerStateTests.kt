@@ -2,9 +2,11 @@ package content.activity.blastfurnace
 
 import TestUtils
 import content.global.skill.smithing.Bar
+import content.minigame.blastfurnace.plugin.BFPlayerState
 import content.minigame.blastfurnace.plugin.BlastFurnace
 import core.api.addItem
 import core.api.amountInInventory
+import core.api.setVarbit
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import shared.consts.Items
@@ -14,24 +16,29 @@ class BFPlayerStateTests {
         TestUtils.preTestSetup()
     }
 
-    @Test fun processPerfectGoldOre() {
+    @Test
+    fun processPerfectGoldOre() {
         TestUtils.getMockPlayer("bf-perfectgold").use { p ->
             val state = BlastFurnace.getPlayerState(p)
+            setVarbit(p, BFPlayerState.DISPENSER_STATE, 0, true)
+
             state.container.addOre(Items.PERFECT_GOLD_ORE_446, 5)
             state.container.addCoal(10)
 
-            Assertions.assertEquals(true, state.processOresIntoBars())
+            Assertions.assertTrue(state.processOresIntoBars())
             Assertions.assertEquals(5, state.container.getBarAmount(Bar.PERFECT_GOLD))
-            Assertions.assertEquals(false, state.processOresIntoBars())
+
+            Assertions.assertFalse(state.processOresIntoBars())
             Assertions.assertEquals(5, state.container.getBarAmount(Bar.PERFECT_GOLD))
 
             state.coolBars()
             state.container.addOre(Items.PERFECT_GOLD_ORE_446, 3)
-            Assertions.assertEquals(true, state.processOresIntoBars())
+
+            Assertions.assertTrue(state.processOresIntoBars())
             Assertions.assertEquals(8, state.container.getBarAmount(Bar.PERFECT_GOLD))
 
             state.coolBars()
-            Assertions.assertEquals(true, state.claimBars(Bar.PERFECT_GOLD, 3))
+            Assertions.assertTrue(state.claimBars(Bar.PERFECT_GOLD, 3))
             Assertions.assertEquals(3, amountInInventory(p, Items.PERFECT_GOLD_BAR_2365))
             Assertions.assertEquals(5, state.container.getBarAmount(Bar.PERFECT_GOLD))
         }

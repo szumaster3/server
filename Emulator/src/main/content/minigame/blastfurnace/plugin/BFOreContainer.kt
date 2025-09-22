@@ -180,16 +180,11 @@ class BFOreContainer {
             val jsonOres = root.getAsJsonArray("ores")
             val jsonBars = root.getAsJsonArray("bars")
 
-            if (jsonOres != null) {
-                for (i in cont.ores.indices) {
-                    cont.ores[i] = if (i < jsonOres.size()) jsonOres[i].asInt else -1
-                }
+            for (i in 0 until BlastUtils.ORE_LIMIT) {
+                cont.ores[i] = jsonOres.get(i)?.asInt ?: -1
             }
-
-            if (jsonBars != null) {
-                for (i in cont.barAmounts.indices) {
-                    cont.barAmounts[i] = if (i < jsonBars.size()) jsonBars[i].asInt else 0
-                }
+            for (i in 0 until 10) {
+                cont.barAmounts[i] = jsonBars.get(i)?.asInt ?: 0
             }
 
             cont.coalRemaining = root.get("coal")?.asInt ?: 0
