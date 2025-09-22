@@ -25,7 +25,13 @@ import core.tools.END_DIALOGUE
 import shared.consts.*
 
 class TheDigSitePlugin : InteractionListener {
+
     override fun defineListeners() {
+        on(NPCs.NISHA_4648, IntType.NPC, "talk-to") { player, _ ->
+            //Panning_archaeologist_(female)?oldid=1169942
+            return@on false
+        }
+
         on(Items.LEVEL_1_CERTIFICATE_691, ITEM, "look-at") { player, _ ->
             openInterface(player, 440)
             sendString(player, player.username, 440, 5)

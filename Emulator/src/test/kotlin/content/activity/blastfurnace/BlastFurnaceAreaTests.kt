@@ -2,6 +2,7 @@ package content.activity.blastfurnace
 
 import TestUtils
 import com.google.gson.JsonObject
+import content.global.skill.smithing.Bar
 import content.minigame.blastfurnace.plugin.BlastFurnace
 import content.minigame.blastfurnace.plugin.BlastFurnacePlugin
 import content.minigame.blastfurnace.plugin.BlastUtils
@@ -107,6 +108,25 @@ class BlastFurnaceAreaTests {
             BlastFurnace.placeAllOre(p)
             Assertions.assertEquals(2, BlastFurnace.getAmountOnBelt(p, Items.COAL_453))
             Assertions.assertEquals(0, amountInInventory(p, Items.COAL_453))
+        }
+    }
+
+    @Test fun playerShouldBeAbleToPlacePerfectGoldOreOnBelt() {
+        TestUtils.getMockPlayer("bf-perfectgold-belt").use { p ->
+            addItem(p, Items.PERFECT_GOLD_ORE_446, 5)
+            BlastFurnace.placeAllOre(p)
+            Assertions.assertEquals(5, BlastFurnace.getAmountOnBelt(p, Items.PERFECT_GOLD_ORE_446))
+            Assertions.assertEquals(0, amountInInventory(p, Items.PERFECT_GOLD_ORE_446))
+        }
+    }
+
+    @Test fun processPerfectGoldOreFromBelt() {
+        TestUtils.getMockPlayer("bf-perfectgold-process").use { p ->
+            val state = BlastFurnace.getPlayerState(p)
+            state.container.addOre(Items.PERFECT_GOLD_ORE_446, 5)
+            state.container.addCoal(10)
+            Assertions.assertEquals(true, state.processOresIntoBars())
+            Assertions.assertEquals(5, state.container.getBarAmount(Bar.PERFECT_GOLD))
         }
     }
 

@@ -7,6 +7,7 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import shared.consts.Vars
 
 class BFPlayerState(
     val player: Player,
@@ -100,6 +101,7 @@ class BFPlayerState(
             Bar.RUNITE -> RUNITE_COUNT
             Bar.GOLD -> GOLD_COUNT
             Bar.SILVER -> SILVER_COUNT
+            Bar.PERFECT_GOLD -> PERF_GOLD_COUNT
             else -> 0
         }
 
@@ -143,15 +145,17 @@ class BFPlayerState(
     }
 
     companion object {
-        const val DISPENSER_STATE = 936
-        const val COAL_NEEDED = 940
-        const val BRONZE_COUNT = 941
-        const val IRON_COUNT = 942
-        const val STEEL_COUNT = 943
-        const val MITHRIL_COUNT = 944
-        const val ADDY_COUNT = 945
-        const val RUNITE_COUNT = 946
-        const val GOLD_COUNT = 947
-        const val SILVER_COUNT = 948
+        const val DISPENSER_STATE = Vars.VARBIT_BF_DISPENSER_STATE_936
+        const val COAL_NEEDED     = Vars.VARBIT_BF_COAL_NEEDED_940
+        const val BRONZE_COUNT    = Vars.VARBIT_BF_BRONZE_COUNT_941
+        const val IRON_COUNT      = Vars.VARBIT_BF_IRON_COUNT_942
+        const val STEEL_COUNT     = Vars.VARBIT_BF_STEEL_COUNT_943
+        const val MITHRIL_COUNT   = Vars.VARBIT_BF_MITHRIL_COUNT_944
+        const val ADDY_COUNT      = Vars.VARBIT_BF_ADDY_COUNT_945
+        const val RUNITE_COUNT    = Vars.VARBIT_BF_RUNITE_COUNT_946
+        const val GOLD_COUNT      = Vars.VARBIT_BF_GOLD_COUNT_947
+        const val SILVER_COUNT    = Vars.VARBIT_BF_SILVER_COUNT_948
+        const val PERF_GOLD_COUNT = Vars.VARBIT_BF_PERFECT_GOLD_COUNT_958
+        const val COAL_TOTAL      = Vars.VARBIT_BF_COAL_TOTAL_949
     }
 }

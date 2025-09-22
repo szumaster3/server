@@ -1,7 +1,5 @@
 package content.global.plugin.iface
 
-import content.data.GameAttributes
-import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.skill.LevelUp
@@ -37,10 +35,8 @@ class StatsTabInterface : InterfaceListener {
             return@on true
         }
 
-        on(Components.GAME_INTERFACE_740) { player, _, _, buttonID, _, _ ->
-            if (buttonID == 3) {
-                closeInterface(player)
-            }
+        on(Components.GAME_INTERFACE_740, 3) { player, _, _, _, _, _ ->
+            closeInterface(player)
             return@on true
         }
     }

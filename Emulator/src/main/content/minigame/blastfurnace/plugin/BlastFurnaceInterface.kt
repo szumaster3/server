@@ -2,6 +2,7 @@ package content.minigame.blastfurnace.plugin
 
 import content.global.skill.smithing.Bar
 import core.api.animateInterface
+import core.api.setComponentVisibility
 import core.api.submitIndividualPulse
 import core.game.interaction.InterfaceListener
 import core.game.system.task.Pulse
@@ -17,6 +18,7 @@ class BlastFurnaceInterface : InterfaceListener {
         }
 
         onOpen(Components.BLAST_FURNACE_TEMP_GAUGE_30) { player, _ ->
+            setComponentVisibility(player, Components.BLAST_FURNACE_TEMP_GAUGE_30, 53, false)
             submitIndividualPulse(
                 player,
                 object : Pulse() {
@@ -29,6 +31,7 @@ class BlastFurnaceInterface : InterfaceListener {
             )
             return@onOpen true
         }
+
         onClose(Components.BLAST_FURNACE_TEMP_GAUGE_30) { player, _ ->
             player.pulseManager.clear()
             return@onClose true
@@ -52,6 +55,8 @@ class BlastFurnaceInterface : InterfaceListener {
             27, 29 -> Pair(id == 29, Bar.RUNITE)
             24, 26 -> Pair(id == 26, Bar.SILVER)
             21, 23 -> Pair(id == 23, Bar.GOLD)
+            2, 4 -> Pair(id == 4, Bar.PERFECT_GOLD)
+
             else -> Pair(false, Bar.BRONZE)
         }
 }

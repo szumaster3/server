@@ -12,7 +12,7 @@ import shared.consts.Items
 class BFOreContainer {
     private var coalRemaining = 0
     private var ores = Array(BlastUtils.ORE_LIMIT * 2) { -1 }
-    private var barAmounts = Array(9) { 0 }
+    private var barAmounts = Array(10) { 0 }
 
     fun addCoal(amount: Int): Int {
         val maxAdd = BlastUtils.COAL_LIMIT - coalRemaining
@@ -177,15 +177,21 @@ class BFOreContainer {
     companion object {
         fun fromJson(root: JsonObject): BFOreContainer {
             val cont = BFOreContainer()
-            val jsonOres = root.getAsJsonArray("ores") ?: return cont
-            val jsonBars = root.getAsJsonArray("bars") ?: return cont
+            val jsonOres = root.getAsJsonArray("ores")
+            val jsonBars = root.getAsJsonArray("bars")
 
-            for (i in 0 until BlastUtils.ORE_LIMIT) {
-                cont.ores[i] = jsonOres.get(i)?.asInt ?: -1
+            if (jsonOres != null) {
+                for (i in cont.ores.indices) {
+                    cont.ores[i] = if (i < jsonOres.size()) jsonOres[i].asInt else -1
+                }
             }
-            for (i in 0 until 9) {
-                cont.barAmounts[i] = jsonBars.get(i)?.asInt ?: 0
+
+            if (jsonBars != null) {
+                for (i in cont.barAmounts.indices) {
+                    cont.barAmounts[i] = if (i < jsonBars.size()) jsonBars[i].asInt else 0
+                }
             }
+
             cont.coalRemaining = root.get("coal")?.asInt ?: 0
             return cont
         }
