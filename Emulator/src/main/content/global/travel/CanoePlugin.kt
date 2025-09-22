@@ -241,11 +241,7 @@ class CanoePlugin : InteractionListener, InterfaceListener {
          * Handles pre-config the shape canoe interface.
          */
 
-        onOpen(IFACE_CANOE_SHAPING) { player, _ ->
-            for (i in intArrayOf(13,19,27,28)) {
-                sendAnimationOnInterface(player, 3308, IFACE_CANOE_SHAPING, i)
-            }
-            sendAnimationOnInterface(player, -1, IFACE_CANOE_SHAPING, 41)
+        onOpen(IFACE_CANOE_SHAPING) { player, _ -> // 10217
             CanoeType.values().forEach {
                 if (getStatLevel(player, Skills.WOODCUTTING) >= it.level && it != CanoeType.LOG) {
                     setComponentVisibility(
@@ -307,10 +303,6 @@ class CanoePlugin : InteractionListener, InterfaceListener {
          */
 
         onOpen(IFACE_CANOE_DEST) { player, component ->
-            for (i in intArrayOf(31,32,33,34,41)) {
-                sendAnimationOnInterface(player, 3308, IFACE_CANOE_DEST, i)
-            }
-            sendAnimationOnInterface(player, -1, IFACE_CANOE_SHAPING, 41)
             val canoe = CanoeType.map[getAttribute(player, CANOE_SELECTED, 0)]!!
             val origin = CanoeStation.get(player.location)
             CanoeStation.values().forEach { station ->
