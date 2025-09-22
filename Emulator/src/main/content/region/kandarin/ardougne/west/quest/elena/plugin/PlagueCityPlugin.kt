@@ -36,8 +36,8 @@ class PlagueCityPlugin : InteractionListener {
 
     companion object {
         const val BUCKET_USES_ATTRIBUTE = "/save:elena:bucket"
-        const val TIED_ROPE_VARBIT = Vars.VARP_QUEST_PLAGUE_CITY_TIED_ROPE_1787
-        const val MUD_PATCH_VARBIT = Vars.VARP_QUEST_PLAGUE_CITY_MUD_PATCH_1785
+        const val TIED_ROPE_VARBIT = Vars.VARBIT_QUEST_PLAGUE_CITY_TIED_ROPE_1787
+        const val MUD_PATCH_VARBIT = Vars.VARBIT_QUEST_PLAGUE_CITY_MUD_PATCH_1785
         val MANS = intArrayOf(NPCs.MAN_728, NPCs.MAN_729, NPCs.MAN_351)
         val WOMANS =
             intArrayOf(NPCs.WOMAN_352, NPCs.WOMAN_353, NPCs.WOMAN_354, NPCs.WOMAN_360, NPCs.WOMAN_362, NPCs.WOMAN_363)

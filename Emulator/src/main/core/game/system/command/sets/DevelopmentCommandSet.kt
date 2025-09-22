@@ -120,6 +120,32 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
+ * Command to send model on the interface.
+ */
+        define(
+            name = "model",
+            privilege = Privilege.ADMIN,
+            usage = "::model [interfaceId] [componentId] [modelId] [zoom]",
+            description = "Send a model on the interface component."
+        ) { player, args ->
+            if (args.size < 4) {
+                return@define reject(player, "Usage: ::model [interfaceId] [componentId] [modelId] optional=[zoom]")
+            }
+
+            val interfaceId = args[1].toIntOrNull()
+            val componentId = args[2].toIntOrNull()
+            val modelId = args[3].toIntOrNull()
+            val zoom = args.getOrNull(4)?.toIntOrNull() ?: 800
+
+            if (interfaceId == null || componentId == null || modelId == null) {
+                return@define reject(player, "All arguments must be valid integers.")
+            }
+
+            player.packetDispatch.sendModelOnInterface(modelId, interfaceId, componentId, zoom)
+            player.debug("model=[$modelId], iface=[$interfaceId], comp=[$componentId], zoom=[$zoom].")
+        }
+
+        /*
          * Command to send animation on the interface.
          */
 

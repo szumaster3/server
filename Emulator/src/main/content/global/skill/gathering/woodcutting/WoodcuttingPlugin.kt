@@ -29,7 +29,6 @@ import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Sounds
-import kotlin.streams.toList
 
 class WoodcuttingPlugin : InteractionListener {
 
@@ -47,6 +46,8 @@ class WoodcuttingPlugin : InteractionListener {
             Sounds.WOODCUTTING_HIT_3041,
             Sounds.WOODCUTTING_HIT_3042,
         )
+
+    private val buildingCanoeSound = Sounds.BUILD_CANOE_2729
 
     override fun defineListeners() {
         defineInteraction(
@@ -219,12 +220,10 @@ class WoodcuttingPlugin : InteractionListener {
     private fun animateWoodcutting(player: Player) {
         if (!player.animator.isAnimating) {
             animate(player, SkillingTool.getAxe(player)!!.animation)
-            val playersAroundMe: List<Player> =
-                RegionManager
-                    .getLocalPlayers(player, 2)
-                    .stream()
-                    .filter { p: Player -> p.username != player.username }
-                    .toList()
+            val playersAroundMe = RegionManager
+                .getLocalPlayers(player, 2)
+                .filter { it.username != player.username }
+
             val soundIndex = RandomFunction.random(0, woodcuttingSounds.size)
             for (p in playersAroundMe) {
                 playAudio(p, woodcuttingSounds[soundIndex])
@@ -237,7 +236,7 @@ class WoodcuttingPlugin : InteractionListener {
         resource: WoodcuttingNode,
         node: Node,
     ): Boolean {
-        var regionId = player.location.getRegionId()
+        var regionId = player.location.regionId
         if (regionId == 10300 || regionId == 10044) {
             var npc = if (regionId == 10300) NPCs.CARPENTER_KJALLAK_3916 else NPCs.LUMBERJACK_LEIF_1395
             sendNPCDialogue(player, npc, "Hey! You're not allowed to chop those!")
@@ -295,7 +294,7 @@ class WoodcuttingPlugin : InteractionListener {
         var amount = amount
         var experience: Double = resource.experience
         val reward = resource.reward
-        if (player.location.getRegionId() == 10300) {
+        if (player.location.regionId == 10300) {
             return 1.0
         }
 
@@ -319,5 +318,5 @@ class WoodcuttingPlugin : InteractionListener {
         return experience * amount
     }
 
-    fun WoodcuttingNode.isJungleTree() = this.identifier.toInt() == 4
+    private fun WoodcuttingNode.isJungleTree() = this.identifier.toInt() == 4
 }

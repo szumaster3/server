@@ -160,7 +160,7 @@ object CharterShipUtils {
                         restoreTabs(player)
                         setMinimapState(player, 0)
                         sendMessage(player, "You pay the fare and sail to $destName.")
-
+                        clearLogoutListener(player, "charter-pulse")
                         when(destination){
                             SHIPYARD.destination -> finishDiaryTask(player, DiaryType.KARAMJA, 1, 17)
                         }
