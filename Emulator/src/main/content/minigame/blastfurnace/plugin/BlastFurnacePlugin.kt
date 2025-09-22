@@ -13,6 +13,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
+import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Sounds
 
@@ -248,12 +249,12 @@ class BlastFurnacePlugin : InteractionListener {
         }
 
         on(BlastUtils.TEMP_GAUGE, IntType.SCENERY, "read") { p, _ ->
-            openInterface(p, 30)
+            openInterface(p, Components.BLAST_FURNACE_TEMP_GAUGE_30)
             return@on true
         }
 
         on(BlastUtils.DISPENSER, IntType.SCENERY, "search", "take") { p, _ ->
-            openInterface(p, 28)
+            openInterface(p, Components.BLAST_FURNACE_BAR_STOCK_28)
             return@on true
         }
 
@@ -358,18 +359,14 @@ class BlastFurnacePlugin : InteractionListener {
         }
 
         on(BlastUtils.SINK, SCENERY, "fill-bucket") { player, _ ->
-            player.pulseManager.run(
-                object : Pulse(1) {
-                    override fun pulse(): Boolean {
-                        if (removeItem(player, Items.BUCKET_1925)) {
-                            animate(player, 832)
-                            sendMessage(player, "You fill the bucket from the sink.")
-                            addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
-                        }
-                        return true
-                    }
-                },
-            )
+            if (removeItem(player, Items.BUCKET_1925)) {
+                queueScript(player, 1, QueueStrength.SOFT) {
+                    animate(player, Animations.MULTI_TAKE_832)
+                    sendMessage(player, "You fill the bucket from the sink.")
+                    addItemOrDrop(player, Items.BUCKET_OF_WATER_1929)
+                    return@queueScript stopExecuting(player)
+                }
+            }
             return@on true
         }
     }

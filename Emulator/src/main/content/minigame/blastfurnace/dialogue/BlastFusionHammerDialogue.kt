@@ -5,6 +5,7 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE
+import core.tools.Log
 import shared.consts.Items
 import shared.consts.NPCs
 
@@ -19,8 +20,7 @@ class BlastFusionHammerDialogue : DialogueFile() {
             1 -> options("Yes, I'll take your offer.", "Sorry, I'll keep hold of the hammer for now.").also { stage++ }
             2 -> when (buttonID) {
                 1 -> playerl(FaceAnim.FRIENDLY, "Yes, I'll take your offer.").also { stage++ }
-                2 -> playerl(FaceAnim.FRIENDLY, "Sorry, I'll keep hold of the hammer for now.").also {
-                    stage = END_DIALOGUE
+                2 -> playerl(FaceAnim.FRIENDLY, "Sorry, I'll keep hold of the hammer for now.").also { stage = END_DIALOGUE
                 }
             }
 
@@ -29,17 +29,19 @@ class BlastFusionHammerDialogue : DialogueFile() {
                 val hammer = Items.BLAST_FUSION_HAMMER_14478
 
                 end()
-                if (!inInventory(player!!, coins) && freeSlots(player!!) == 0) {
-                    sendMessage(player!!, "You don't have enough inventory space for this.")
+
+                if (!inInventory(player!!, hammer)) {
+                    sendMessage(player!!, "You don't have the required item in your inventory.")
                     return
                 }
 
                 if (!removeItem(player!!, hammer)) {
-                    sendDialogue(player!!, "You don't have the required item in your inventory.")
+                    log(this.javaClass, Log.INFO, "[${player?.username}]: Failed to remove the $hammer from inventory.")
                     return
                 }
-                sendItemDialogue(player!!, hammer, "You hand over the hammer: Blast fusion hammer and get 1,000,000 coins.")
-                addItemOrDrop(player!!, coins, 1_000_000)
+
+                sendItemDialogue(player!!, hammer, "You hand over the Blast Fusion Hammer and receive 1,000,000 coins.")
+                addItemOrBank(player!!, coins, 1_000_000)
             }
         }
     }

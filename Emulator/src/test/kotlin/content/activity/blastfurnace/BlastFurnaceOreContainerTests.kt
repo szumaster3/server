@@ -98,6 +98,13 @@ class BlastFurnaceOreContainerTests {
                     150,
                     arrayOf(Pair(Bar.GOLD, 28)),
                 ),
+                Data( // ~
+                    150,
+                    arrayOf(Pair(Items.PERFECT_GOLD_ORE_446, 28)),
+                    arrayOf(Pair(Items.PERFECT_GOLD_ORE_446, 0)),
+                    150,
+                    arrayOf(Pair(Bar.PERFECT_GOLD, 28)),
+                ),
                 Data( // edge case - 18 silver and 10 runite with 58 coal produces 18 silver bars and 10 runite bars with 18 coal remaining
                     58,
                     arrayOf(Pair(Items.SILVER_ORE_442, 18), Pair(Items.RUNITE_ORE_451, 10)),

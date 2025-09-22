@@ -12,26 +12,20 @@ import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
 
-class BlastFurnace :
-    MapArea,
-    PersistPlayer,
-    TickListener {
+/**
+ * Blast Furnace minigame.
+ */
+class BlastFurnace : MapArea, PersistPlayer, TickListener {
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(bfArea)
 
-    override fun savePlayer(
-        player: Player,
-        save: JsonObject,
-    ) {
+    override fun savePlayer(player: Player, save: JsonObject) {
         val state = playerStates[player.details.uid]
         if (state != null) {
             save.add("bf-state", state.toJson())
         }
     }
 
-    override fun parsePlayer(
-        player: Player,
-        data: JsonObject,
-    ) {
+    override fun parsePlayer(player: Player, data: JsonObject) {
         playerStates.remove(player.details.uid)
         if (data.has("bf-state")) {
             val stateObj = data.getAsJsonObject("bf-state")
@@ -47,10 +41,7 @@ class BlastFurnace :
         }
     }
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             playersInArea.remove(entity)
             val state = getPlayerState(entity)
@@ -79,6 +70,9 @@ class BlastFurnace :
         pedaler = null
     }
 
+    /**
+     * Handles pumper logic (XP, damage if overheated).
+     */
     private fun updatePumper() {
         if (pumper != null) {
             if (state.stoveTemp == 0) return
@@ -92,6 +86,9 @@ class BlastFurnace :
         }
     }
 
+    /**
+     * Handles pedaler logic (XP, stamina drain, belt movement).
+     */
     private fun updatePedaler() {
         if (pedaler == null) return
         var oresPedaled = false
@@ -106,6 +103,9 @@ class BlastFurnace :
         }
     }
 
+    /**
+     * Updates furnace scenery visuals (pipes, belt, stove, animations).
+     */
     private fun updateVisuals() {
         sceneryController.updateStove(state.stoveTemp)
         sceneryController.updateBreakable(
@@ -117,6 +117,9 @@ class BlastFurnace :
         sceneryController.updateAnimations(pedaler != null, state.beltBroken, state.cogBroken)
     }
 
+    /**
+     * Converts ores into bars if furnace is at optimal temperature.
+     */
     private fun processBars() {
         if (state.furnaceTemp !in 51..66) return
         var totalProcessed = 0
@@ -128,16 +131,52 @@ class BlastFurnace :
     }
 
     companion object {
+        /**
+         * Furnace area borders.
+         */
         val bfArea = ZoneBorders(1934, 4955, 1958, 4975)
+
+        /**
+         * Players currently inside the area.
+         */
         val playersInArea = ArrayList<Player>()
+
+        /**
+         * Tracks Blast Furnace state per player.
+         */
         val playerStates = HashMap<Int, BFPlayerState>()
+
+        /**
+         * Shared machine state (temperatures, pipes, belts, etc.).
+         */
         val state = BlastState()
+
+        /**
+         * Controls furnace-related scenery updates.
+         */
         val sceneryController = BFSceneryController()
+
+        /**
+         * Player currently pedaling the conveyor.
+         */
         var pedaler: Player? = null
+
+        /**
+         * Player currently pumping the furnace.
+         */
         var pumper: Player? = null
 
+        /**
+         * Checks if a player is within the minigame area.
+         */
         fun insideBorders(player: Player): Boolean = bfArea.insideBorder(player.location)
 
+        /**
+         * Places ores from player inventory onto the belt.
+         *
+         * @param id The ore id.
+         * @param accountForSkill The smithing level.
+         */
         fun placeAllOre(
             p: Player,
             id: Int = -1,
@@ -162,13 +201,10 @@ class BlastFurnace :
                 var maxAmt = oreContainer.getAvailableSpace(oreId, level)
 
                 if (oreId == Items.COPPER_ORE_436 || oreId == Items.TIN_ORE_438) {
-                    maxAmt += (
-                        BlastUtils.ORE_LIMIT -
-                            getAmountOnBelt(
-                                p,
-                                oreId,
-                            )
-                    )
+                    maxAmt += (BlastUtils.ORE_LIMIT - getAmountOnBelt(
+                        p,
+                        oreId,
+                    ))
                 }
 
                 if (oreId == Items.COAL_453) {
@@ -184,6 +220,9 @@ class BlastFurnace :
             }
         }
 
+        /**
+         * Gets or creates Blast Furnace state for player.
+         */
         fun getPlayerState(p: Player): BFPlayerState {
             if (playerStates[p.details.uid] != null) return playerStates[p.details.uid]!!
             val state = BFPlayerState(p)
@@ -191,23 +230,25 @@ class BlastFurnace :
             return state
         }
 
+        /**
+         * Gets the ore container for player.
+         */
         fun getOreContainer(p: Player): BFOreContainer = getPlayerState(p).container
 
-        fun addOreToBelt(
-            p: Player,
-            id: Int,
-            amount: Int,
-        ): BFBeltOre {
+        /**
+         * Adds ore entity to the conveyor belt.
+         */
+        fun addOreToBelt(p: Player, id: Int, amount: Int): BFBeltOre {
             val beltOre = BFBeltOre(p, id, amount, BFBeltOre.ORE_START_LOC)
             beltOre.createNpc()
             getPlayerState(p).oresOnBelt.add(beltOre)
             return beltOre
         }
 
-        fun getAmountOnBelt(
-            p: Player,
-            id: Int,
-        ): Int {
+        /**
+         * Gets the total amount of a ore type on belt.
+         */
+        fun getAmountOnBelt(p: Player, id: Int): Int {
             var total = 0
             for (ore in getPlayerState(p).oresOnBelt) {
                 if (ore.id == id) total += ore.amount
@@ -215,12 +256,18 @@ class BlastFurnace :
             return total
         }
 
+        /**
+         * Gets the total amount of all ores (except coal) on p belt.
+         */
         fun getTotalOreOnBelt(p: Player): Int {
             var total = 0
             for (ore in getPlayerState(p).oresOnBelt) if (ore.id != Items.COAL_453) total += ore.amount
             return total
         }
 
+        /**
+         * Calculates coal required for a given bar type.
+         */
         fun getNeededCoal(bar: Bar): Int {
             var coalAmount = 0
 
@@ -236,43 +283,47 @@ class BlastFurnace :
             return coalAmount
         }
 
-        fun getBarForOreId(
-            id: Int,
-            coalAmount: Int,
-            level: Int,
-        ): Bar? =
-            when (id) {
-                Items.COPPER_ORE_436, Items.TIN_ORE_438 -> Bar.BRONZE
-                Items.IRON_ORE_440 -> if (coalAmount >= 1 && level >= Bar.STEEL.level) Bar.STEEL else Bar.IRON
-                else -> Bar.forOre(id)
-            }
+        /**
+         * Gets the bar type for a given ore id.
+         */
+        fun getBarForOreId(id: Int, coalAmount: Int, level: Int): Bar? = when (id) {
+            Items.COPPER_ORE_436, Items.TIN_ORE_438 -> Bar.BRONZE
+            Items.IRON_ORE_440 -> if (coalAmount >= 1 && level >= Bar.STEEL.level) Bar.STEEL else Bar.IRON
+            Items.PERFECT_GOLD_ORE_446 -> Bar.PERFECT_GOLD
+            else -> Bar.forOre(id)
+        }
 
-        fun getNpcForOre(id: Int): Int =
-            when (id) {
-                Items.IRON_ORE_440 -> NPCs.IRON_ORE_2556
-                Items.COPPER_ORE_436 -> NPCs.COPPER_ORE_2555
-                Items.TIN_ORE_438 -> NPCs.TIN_ORE_2554
-                Items.COAL_453 -> NPCs.COAL_2562
-                Items.MITHRIL_ORE_447 -> NPCs.MITHRIL_ORE_2557
-                Items.ADAMANTITE_ORE_449 -> NPCs.ADAMANTITE_ORE_2558
-                Items.SILVER_ORE_442 -> NPCs.SILVER_ORE_2560
-                Items.GOLD_ORE_444 -> NPCs.GOLD_ORE_2561
-                Items.RUNITE_ORE_451 -> NPCs.RUNITE_ORE_2559
-                else -> -1
-            }
+        /**
+         * Gets the NPC representing an ore rock on the belt.
+         */
+        fun getNpcForOre(id: Int): Int = when (id) {
+            Items.TIN_ORE_438 -> NPCs.TIN_ORE_2554
+            Items.COPPER_ORE_436 -> NPCs.COPPER_ORE_2555
+            Items.IRON_ORE_440 -> NPCs.IRON_ORE_2556
+            Items.MITHRIL_ORE_447 -> NPCs.MITHRIL_ORE_2557
+            Items.ADAMANTITE_ORE_449 -> NPCs.ADAMANTITE_ORE_2558
+            Items.RUNITE_ORE_451 -> NPCs.RUNITE_ORE_2559
+            Items.SILVER_ORE_442 -> NPCs.SILVER_ORE_2560
+            Items.GOLD_ORE_444 -> NPCs.GOLD_ORE_2561
+            Items.COAL_453 -> NPCs.COAL_2562
+            Items.PERFECT_GOLD_ORE_446 -> NPCs.PERFECT_GOLD_ORE_2563
+            else -> -1
+        }
 
-        fun getEntranceFee(
-            hasCharos: Boolean,
-            smithLevel: Int,
-        ): Int {
+        /**
+         * Entrance fee calculation.
+         * +Charos ring
+         * +Smithing level
+         */
+        fun getEntranceFee(hasCharos: Boolean, smithLevel: Int): Int {
             if (smithLevel >= BlastUtils.SMITH_REQ) return 0
             return if (hasCharos) BlastUtils.ENTRANCE_FEE / 2 else BlastUtils.ENTRANCE_FEE
         }
 
-        fun enter(
-            player: Player,
-            feePaid: Boolean,
-        ) {
+        /**
+         * Start minigame.
+         */
+        fun enter(player: Player, feePaid: Boolean) {
             if (feePaid && !hasTimerActive<BFTempEntranceTimer>(player)) registerTimer(player, BFTempEntranceTimer())
             teleport(player, BlastUtils.ENTRANCE_LOC)
         }

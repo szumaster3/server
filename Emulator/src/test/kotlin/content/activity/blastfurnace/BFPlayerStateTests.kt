@@ -2,9 +2,11 @@ package content.activity.blastfurnace
 
 import TestUtils
 import content.global.skill.smithing.Bar
+import content.minigame.blastfurnace.plugin.BFPlayerState
 import content.minigame.blastfurnace.plugin.BlastFurnace
 import core.api.addItem
 import core.api.amountInInventory
+import core.api.setVarbit
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import shared.consts.Items

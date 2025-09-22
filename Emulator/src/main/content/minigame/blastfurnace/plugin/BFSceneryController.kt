@@ -4,6 +4,7 @@ import core.api.animateScenery
 import core.api.getScenery
 import core.api.replaceScenery
 import core.game.world.map.Location
+import shared.consts.Scenery
 
 class BFSceneryController {
     fun updateBreakable(
@@ -18,55 +19,27 @@ class BFSceneryController {
         val pumpPipe = getScenery(pumpPipeLoc)!!
 
         if (potPipeBroken && potPipe.id != BROKEN_POT_PIPE) {
-            replaceScenery(
-                potPipe,
-                BROKEN_POT_PIPE,
-                -1,
-            )
+            replaceScenery(potPipe, BROKEN_POT_PIPE, -1)
         } else if (!potPipeBroken && potPipe.id == BROKEN_POT_PIPE) {
-            replaceScenery(
-                potPipe,
-                DEFAULT_POT_PIPE,
-                -1,
-            )
+            replaceScenery(potPipe, DEFAULT_POT_PIPE, -1)
         }
 
         if (pumpPipeBroken && pumpPipe.id != BROKEN_PUMP_PIPE) {
-            replaceScenery(
-                pumpPipe,
-                BROKEN_PUMP_PIPE,
-                -1,
-            )
+            replaceScenery(pumpPipe, BROKEN_PUMP_PIPE, -1)
         } else if (!pumpPipeBroken && pumpPipe.id == BROKEN_PUMP_PIPE) {
-            replaceScenery(
-                pumpPipe,
-                DEFAULT_PUMP_PIPE,
-                -1,
-            )
+            replaceScenery(pumpPipe, DEFAULT_PUMP_PIPE, -1)
         }
 
         if (beltBroken && beltObj.id != BROKEN_BELT) {
-            replaceScenery(
-                beltObj,
-                BROKEN_BELT,
-                -1,
-            )
+            replaceScenery(beltObj, BROKEN_BELT, -1)
         } else if (!beltBroken && beltObj.id == BROKEN_BELT) {
-            replaceScenery(
-                beltObj,
-                DEFAULT_BELT,
-                -1,
-            )
+            replaceScenery(beltObj, DEFAULT_BELT, -1)
         }
 
         if (cogBroken && gearObj.id != BROKEN_COG) {
             replaceScenery(gearObj, BROKEN_COG, -1)
         } else if (!cogBroken && gearObj.id == BROKEN_COG) {
-            replaceScenery(
-                gearObj,
-                DEFAULT_COG,
-                -1,
-            )
+            replaceScenery(gearObj, DEFAULT_COG, -1)
         }
     }
 
@@ -136,17 +109,17 @@ class BFSceneryController {
         var centralGearLoc = Location(1945, 4966, 0)
         var stoveLoc = Location(1948, 4963, 0)
 
-        const val DEFAULT_BELT = 9102
-        const val BROKEN_BELT = 9103
-        const val DEFAULT_COG = 9104
-        const val BROKEN_COG = 9105
-        const val DEFAULT_POT_PIPE = 9116
-        const val BROKEN_POT_PIPE = 9117
-        const val DEFAULT_PUMP_PIPE = 9120
-        const val BROKEN_PUMP_PIPE = 9121
-        const val STOVE_COLD = 9085
-        const val STOVE_WARM = 9086
-        const val STOVE_HOT = 9087
+        const val DEFAULT_BELT = Scenery.DRIVE_BELT_9102
+        const val BROKEN_BELT = Scenery.DRIVE_BELT_9103
+        const val DEFAULT_COG = Scenery.COGS_9104
+        const val BROKEN_COG = Scenery.COGS_9105
+        const val DEFAULT_POT_PIPE = Scenery.PIPES_9116
+        const val BROKEN_POT_PIPE = Scenery.PIPES_9117
+        const val DEFAULT_PUMP_PIPE = Scenery.PIPES_9120
+        const val BROKEN_PUMP_PIPE = Scenery.PIPES_9121
+        const val STOVE_COLD = Scenery.STOVE_9085
+        const val STOVE_WARM = Scenery.STOVE_9086
+        const val STOVE_HOT = Scenery.STOVE_9087
         const val BELT_ANIM = 2435
         const val GEAR_ANIM = 2436
     }
