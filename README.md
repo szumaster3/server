@@ -1,3 +1,13 @@
+This project is a **fork** of [2009Scape](https://gitlab.com/2009scape/2009scape).
+
+This fork is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.  
+You are free to use, modify, and distribute this software under the terms of the AGPL-3.0.
+
+All changes made in this fork are also licensed under the AGPL-3.0.  
+For the full license text, see the [LICENSE](./LICENSE) file or visit [gnu.org](https://www.gnu.org/licenses/agpl-3.0.html).
+
+***
+
 ### Prerequisites
 
 Before setting up the project, make sure you have the following installed:
