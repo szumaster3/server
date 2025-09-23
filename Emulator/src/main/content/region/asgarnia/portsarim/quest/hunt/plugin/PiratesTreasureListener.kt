@@ -59,6 +59,7 @@ class PiratesTreasureListener : InteractionListener {
         /*
          * Handles dig at treasure locations.
          */
+
         DIG_LOCATIONS.forEach { location ->
             onDig(location) { player ->
                 val quest = getQuest(player, Quests.PIRATES_TREASURE)
