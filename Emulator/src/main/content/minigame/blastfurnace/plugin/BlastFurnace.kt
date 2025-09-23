@@ -191,14 +191,14 @@ class BlastFurnace : MapArea, PersistPlayer, TickListener {
                 if (getNpcForOre(item.id) == -1) continue
                 if (id != -1 && item.id != id) continue
 
-                val bar = getBarForOreId(item.id, oreContainer.coalAmount(), level)!!
+                val bar = getBarForOreId(item.id, oreContainer.coalAmount(p), level)!!
                 if (bar.level > level) continue
 
                 oreCounts[item.id] = (oreCounts[item.id] ?: 0) + item.amount
             }
 
             for ((oreId, amount) in oreCounts) {
-                var maxAmt = oreContainer.getAvailableSpace(oreId, level)
+                var maxAmt = oreContainer.getAvailableSpace(p, oreId, level)
 
                 if (oreId == Items.COPPER_ORE_436 || oreId == Items.TIN_ORE_438) {
                     maxAmt += (BlastUtils.ORE_LIMIT - getAmountOnBelt(

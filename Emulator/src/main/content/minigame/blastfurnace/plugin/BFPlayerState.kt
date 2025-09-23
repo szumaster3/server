@@ -17,6 +17,13 @@ class BFPlayerState(
     var barsNeedCooled = false
         private set
 
+    /**
+     * Processes ores into bars at the Blast Furnace.
+     *
+     * @param player The player processing ores.
+     * @param container The ore container used in the furnace.
+     * @return true if ores were successfully processed into bars, false otherwise.
+     */
     fun processOresIntoBars(): Boolean {
         if (barsNeedCooled && getVarbit(player, DISPENSER_STATE) == 1) {
             setVarbit(player, DISPENSER_STATE, 2, true)
@@ -25,7 +32,7 @@ class BFPlayerState(
 
         if (getVarbit(player, DISPENSER_STATE) != 0 || !container.hasAnyOre()) return false
 
-        val xpReward = container.convertToBars(getStatLevel(player, Skills.SMITHING))
+        val xpReward = container.convertToBars(player, getStatLevel(player, Skills.SMITHING))
         if (xpReward > 0) {
             rewardXP(player, Skills.SMITHING, xpReward)
             setVarbit(player, DISPENSER_STATE, 1, true)
@@ -36,6 +43,10 @@ class BFPlayerState(
         return false
     }
 
+    /**
+     * Updates the tick cycle for ores moving on the conveyor belt.
+     * Removes ores that have finished traveling.
+     */
     fun updateOres() {
         val toRemove = ArrayList<BFBeltOre>()
         for (ore in oresOnBelt) {
@@ -44,17 +55,37 @@ class BFPlayerState(
         oresOnBelt.removeAll(toRemove)
     }
 
+    /**
+     * Cools down bars after smelting is complete.
+     * Updates the dispenser state to allow collection.
+     */
     fun coolBars() {
         barsNeedCooled = false
         setVarbit(player, DISPENSER_STATE, 3, true)
     }
 
+    /**
+     * Resets the dispenser state if bars have been cooled and checked.
+     */
     fun checkBars() {
         if (getVarbit(player, DISPENSER_STATE) == 3) setVarbit(player, DISPENSER_STATE, 0, true)
     }
 
+    /**
+     * Checks if the player has any bars available to claim.
+     *
+     * @return true if the dispenser contains any smelted bars.
+     */
     fun hasBarsClaimable(): Boolean = container.getTotalBarAmount() > 0
 
+    /**
+     * Attempts to claim bars from the Blast Furnace dispenser.
+     *
+     * @param player The player claiming the bars.
+     * @param bar The type of bar to claim.
+     * @param amount The requested amount of bars.
+     * @return true if bars were claimed, false otherwise.
+     */
     fun claimBars(
         bar: Bar,
         amount: Int,
@@ -84,27 +115,36 @@ class BFPlayerState(
         var totalCoalNeeded = 0
         val level = getStatLevel(player, Skills.SMITHING)
         for ((id, amount) in container.getOreAmounts()) {
-            val barType = BlastFurnace.getBarForOreId(id, container.coalAmount(), level)
+            val barType = BlastFurnace.getBarForOreId(id, container.coalAmount(player), level)
             totalCoalNeeded += BlastFurnace.getNeededCoal(barType!!) * amount
         }
 
-        setVarbit(player, COAL_NEEDED, (totalCoalNeeded - container.coalAmount()).coerceAtLeast(0))
+        setVarbit(player, COAL_NEEDED, (totalCoalNeeded - container.coalAmount(player)).coerceAtLeast(0))
     }
 
-    private fun getVarbitForBar(bar: Bar): Int =
-        when (bar) {
-            Bar.BRONZE -> BRONZE_COUNT
-            Bar.IRON -> IRON_COUNT
-            Bar.STEEL -> STEEL_COUNT
-            Bar.MITHRIL -> MITHRIL_COUNT
-            Bar.ADAMANT -> ADDY_COUNT
-            Bar.RUNITE -> RUNITE_COUNT
-            Bar.GOLD -> GOLD_COUNT
-            Bar.SILVER -> SILVER_COUNT
-            Bar.PERFECT_GOLD -> PERF_GOLD_COUNT
-            else -> 0
-        }
+    /**
+     * Gets the varbit id for tracking the
+     * count of a given bar type.
+     *
+     * @param bar The bar type to resolve.
+     * @return varbit id.
+     */
+    private fun getVarbitForBar(bar: Bar): Int = when (bar) {
+        Bar.BRONZE -> BRONZE_COUNT
+        Bar.IRON -> IRON_COUNT
+        Bar.STEEL -> STEEL_COUNT
+        Bar.MITHRIL -> MITHRIL_COUNT
+        Bar.ADAMANT -> ADDY_COUNT
+        Bar.RUNITE -> RUNITE_COUNT
+        Bar.GOLD -> GOLD_COUNT
+        Bar.SILVER -> SILVER_COUNT
+        Bar.PERFECT_GOLD -> PERF_GOLD_COUNT
+        else -> 0
+    }
 
+    /**
+     * Serializes the player bf state to JSON.
+     */
     fun toJson(): JsonObject {
         val save = JsonObject()
         save.add("bf-ore-cont", container.toJson())
@@ -122,6 +162,9 @@ class BFPlayerState(
         return save
     }
 
+    /**
+     * Restores the player bf state from JSON data.
+     */
     fun readJson(data: JsonObject) {
         oresOnBelt.clear()
         if (data.has("bf-ore-cont")) {

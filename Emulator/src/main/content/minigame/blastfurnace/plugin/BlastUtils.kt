@@ -2,6 +2,7 @@ package content.minigame.blastfurnace.plugin
 
 import core.game.world.map.Location
 import shared.consts.Scenery
+import shared.consts.Vars
 
 object BlastUtils {
     val ENTRANCE_LOC = Location(1940, 4958, 0)
@@ -30,7 +31,7 @@ object BlastUtils {
     const val SMITH_REQ = 60
     const val ENTRANCE_FEE = 2500
     const val FEE_ENTRANCE_DURATION = 1000
-    const val COAL_LIMIT = 226
+    const val COAL_LIMIT = Vars.VARBIT_BF_COAL_TOTAL_949
     const val ORE_LIMIT = 28
     const val BAR_LIMIT = 28
     const val COKE_LIMIT = 15
