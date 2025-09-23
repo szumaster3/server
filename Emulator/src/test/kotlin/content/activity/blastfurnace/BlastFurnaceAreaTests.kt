@@ -9,6 +9,7 @@ import content.minigame.blastfurnace.plugin.BlastUtils
 import core.ServerConstants
 import core.api.addItem
 import core.api.amountInInventory
+import core.api.getVarbit
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -123,8 +124,8 @@ class BlastFurnaceAreaTests {
     @Test fun processPerfectGoldOreFromBelt() {
         TestUtils.getMockPlayer("bf-perfectgold-process").use { p ->
             val state = BlastFurnace.getPlayerState(p)
-            state.container.addOre(Items.PERFECT_GOLD_ORE_446, 5)
-            state.container.addCoal(10)
+            state.container.addOre(p,Items.PERFECT_GOLD_ORE_446, 5)
+            state.container.addCoal(p,10)
             Assertions.assertEquals(true, state.processOresIntoBars())
             Assertions.assertEquals(5, state.container.getBarAmount(Bar.PERFECT_GOLD))
         }
@@ -133,8 +134,9 @@ class BlastFurnaceAreaTests {
     @Test fun playerShouldNotBeAbleToPlaceMoreOreThanCanFitOnBelt() {
         TestUtils.getMockPlayer("bf-toomuchoreonbelt").use { p ->
             val cont = BlastFurnace.getOreContainer(p)
-            cont.addCoal(BlastUtils.COAL_LIMIT - 15)
-            cont.addOre(Items.IRON_ORE_440, BlastUtils.ORE_LIMIT - 13)
+            val limit = getVarbit(p, BlastUtils.COAL_LIMIT)
+            cont.addCoal(p, limit - 15)
+            cont.addOre(p, Items.IRON_ORE_440, BlastUtils.ORE_LIMIT - 13)
 
             addItem(p, Items.COAL_453, 15)
             addItem(p, Items.IRON_ORE_440, 13)
@@ -152,8 +154,8 @@ class BlastFurnaceAreaTests {
     @Test fun beltOreLimitsShouldAccountForCreatedBars() {
         TestUtils.getMockPlayer("bf-baraccountedfor").use { p ->
             val cont = BlastFurnace.getOreContainer(p)
-            cont.addOre(Items.IRON_ORE_440, BlastUtils.ORE_LIMIT - 15)
-            cont.convertToBars()
+            cont.addOre(p, Items.IRON_ORE_440, BlastUtils.ORE_LIMIT - 15)
+            cont.convertToBars(p)
 
             addItem(p, Items.IRON_ORE_440, 20)
             BlastFurnace.placeAllOre(p)
@@ -235,8 +237,8 @@ class BlastFurnaceAreaTests {
     @Test fun BFAreaShouldPersistInfoAcrossPlayerRelogs() {
         TestUtils.getMockPlayer("bf-persistence").use { p ->
             var container = BlastFurnace.getOreContainer(p)
-            container.addOre(Items.IRON_ORE_440, 15)
-            container.addCoal(40)
+            container.addOre(p, Items.IRON_ORE_440, 15)
+            container.addCoal(p, 40)
 
             BlastFurnace.addOreToBelt(p, Items.IRON_ORE_440, 4)
             BlastFurnace.addOreToBelt(p, Items.RUNITE_ORE_451, 10)
@@ -250,8 +252,8 @@ class BlastFurnaceAreaTests {
 
             area.parsePlayer(p, saveObj)
             container = BlastFurnace.getOreContainer(p)
-            Assertions.assertEquals(15, container.getOreAmount(Items.IRON_ORE_440))
-            Assertions.assertEquals(40, container.coalAmount())
+            Assertions.assertEquals(15, container.getOreAmount(p, Items.IRON_ORE_440))
+            Assertions.assertEquals(40, container.coalAmount(p))
             Assertions.assertEquals(4, BlastFurnace.getAmountOnBelt(p, Items.IRON_ORE_440))
             Assertions.assertEquals(10, BlastFurnace.getAmountOnBelt(p, Items.RUNITE_ORE_451))
             Assertions.assertEquals(20, BlastFurnace.getAmountOnBelt(p, Items.COAL_453))

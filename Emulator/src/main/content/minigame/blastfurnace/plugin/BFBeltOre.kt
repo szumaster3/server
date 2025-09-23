@@ -21,7 +21,7 @@ class BFBeltOre(
 
     fun tick(): Boolean {
         if (location == ORE_END_LOC && npcInstance != null) {
-            state.container.addOre(id, amount)
+            state.container.addOre(player, id, amount)
             npcInstance?.clear()
             npcInstance = null
             return true
