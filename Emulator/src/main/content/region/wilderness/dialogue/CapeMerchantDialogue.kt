@@ -25,16 +25,17 @@ class CapeMerchantDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> showTopics(
                 Topic("What's so special about your capes?", 1, false),
-                Topic("Yes please!", 3, false),
-                Topic("No thanks.", 4, false)
+                Topic("Yes please!", 4, false),
+                Topic("No thanks.", 5, false)
             )
             1 -> npc("Ahh well they make it less likely that you'll accidently", "attack anyone wearing the same cape as you and easier", "to attack everyone else. They also make it easier to", "distinguish people who're wearing the same cape as you").also { stage++ }
-            2 -> npc("from everyone else. They're very useful when out in", "the wilderness with friends or anyone else you don't", "want to harm.").also { stage = END_DIALOGUE }
-            3 -> {
+            2 -> npc("from everyone else. They're very useful when out in", "the wilderness with friends or anyone else you don't", "want to harm.").also { stage++ }
+            3 -> npc("So would you like to buy one?").also { stage++ }
+            4 -> {
                 end()
                 openNpcShop(player, npc.id)
             }
-            4 -> end()
+            5 -> end()
         }
         return true
     }
