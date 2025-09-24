@@ -43,7 +43,7 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
     /**
      * The last x-amount entered.
      */
-    var lastAmountX: Int = 50
+    var lastAmountX: Int = -1
         private set
 
     /**
@@ -82,10 +82,26 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
      * forcing the client to re-draw the items
      */
     fun refreshDepositBoxInterface() {
+        val currentX = getVarp(player, 1249)
+
+        val setOptions = buildList {
+            add("Examine")
+            add("Deposit-X")
+            if (currentX != -1) add("Deposit-$currentX")
+            add("Deposit-All")
+            add("Deposit-10")
+            add("Deposit-5")
+            add("Deposit-1")
+        }.toTypedArray()
+
         InterfaceContainer.generateItems(
-            player, player.inventory.toArray(), arrayOf(
-                "Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"
-            ), 11, 15, 5, 7
+            player,
+            player.inventory.toArray(),
+            setOptions,
+            11,
+            15,
+            5,
+            7
         )
     }
 
@@ -111,7 +127,9 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
         super.refresh()
         player.inventory.refresh()
         player.inventory.listeners.add(listener)
-        setVarp(player, 1249, lastAmountX)
+        if (lastAmountX != -1) {
+            setVarp(player, 1249, lastAmountX)
+        }
         val settings = IfaceSettingsBuilder().enableOptions(IntRange(0, 5)).enableExamine().enableSlotSwitch().build()
         player.packetDispatch.sendIfaceSettings(settings, 0, 763, 0, 27)
         isOpen = true
@@ -136,7 +154,9 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
         player.interfaceManager.openSingleTab(Component(763))
         player.inventory.listeners.add(player.bank.listener)
         player.inventory.refresh()
-        setVarp(player, 1249, lastAmountX)
+        if (lastAmountX != -1) {
+            setVarp(player, 1249, lastAmountX)
+        }
         player.packetDispatch.sendIfaceSettings(1278, 73, 762, 0, SIZE)
         val settings = IfaceSettingsBuilder().enableOptions(IntRange(0, 5)).enableExamine().enableSlotSwitch().build()
         player.packetDispatch.sendIfaceSettings(settings, 0, 763, 0, 27)
@@ -393,13 +413,13 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
          * Gets the insert items value.
          * @return `True` if inserting items mode is enabled.
          */
-        get() = getVarbit(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304) == 1
+        get() = getVarp(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304) == 1
         /**
          * Sets the insert items value.
          * @param insertItems The insert items value.
          */
         set(insertItems) {
-            setVarbit(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304, if (insertItems) 1 else 0, true)
+            setVarp(player, Vars.VARP_IFACE_BANK_INSERT_MODE_304, if (insertItems) 1 else 0)
         }
 
     /**

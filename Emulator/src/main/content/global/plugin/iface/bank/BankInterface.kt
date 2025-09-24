@@ -26,6 +26,7 @@ class BankInterface : InterfaceListener {
         private const val BANK_V2_MAIN_BUTTON_BOB_DEPOSIT = 18
         private const val BANK_V2_MAIN_BUTTON_SEARCH_BANK = 20
         private const val BANK_V2_MAIN_BUTTON_HELP = 23
+        private const val BANK_V2_MENU_ELEMENT = 73
 
         private const val THRESHOLD_EXACT_QUANTITY = 100_000
 
@@ -101,7 +102,9 @@ class BankInterface : InterfaceListener {
     ): Boolean {
         val item = from.get(slot) ?: return true
         resetSearch(player)
-
+        if (getVarbit(player, 4895) == 2 && getVarp(player, 281) < 1000 && getVarbit(player, 4931) < 30) {
+            return false
+        }
         when (BankItemAction.fromOpcode(opcode)) {
             BankItemAction.WITHDRAW_ONE -> transfer(player, slot, 1, isWithdraw)
             BankItemAction.WITHDRAW_FIVE -> transfer(player, slot, 5, isWithdraw)
@@ -114,7 +117,6 @@ class BankInterface : InterfaceListener {
             null -> player.debug("Unknown container menu opcode $opcode")
         }
 
-        if (isWithdraw) player.bank.refresh()
         return true
     }
 
@@ -157,13 +159,16 @@ class BankInterface : InterfaceListener {
          */
 
         on(Components.BANK_V2_MAIN_762) { player, _, opcode, buttonID, slot, _ ->
+            if (getVarbit(player, 4895) == 2 && getVarp(player, 281) < 1000 && getVarbit(player, 4931) < 30) {
+                return@on false
+            }
             when (buttonID) {
                 BANK_V2_MAIN_BUTTON_HELP -> openDialogue(player, BankHelpDialogue())
                 BANK_V2_MAIN_BUTTON_BOB_DEPOSIT -> openDialogue(player, BankDepositDialogue())
                 BANK_V2_MAIN_BUTTON_INSERT_MODE -> player.bank.isInsertItems = !player.bank.isInsertItems
                 BANK_V2_MAIN_BUTTON_NOTE_MODE -> player.bank.isNoteItems = !player.bank.isNoteItems
                 BANK_V2_MAIN_BUTTON_SEARCH_BANK -> setAttribute(player, "search", true)
-                73 -> handleContainerMenu(player, opcode, slot, player.bank, player.inventory, true)
+                BANK_V2_MENU_ELEMENT -> handleContainerMenu(player, opcode, slot, player.bank, player.inventory, true)
                 in BANK_TABS -> handleTabInteraction(player, opcode, buttonID)
             }
             return@on true

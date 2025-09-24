@@ -1,6 +1,7 @@
 package content.global.skill.summoning.familiar
 
 import content.global.skill.summoning.SummoningPouch
+import core.api.getVarp
 import core.api.sendMessage
 import core.game.component.CloseEvent
 import core.game.component.Component
@@ -192,27 +193,63 @@ abstract class BurdenBeast : Familiar {
 
         container.shift()
         owner.interfaceManager.openSingleTab(Component(Components.LORE_BANK_SIDE_665))
-        InterfaceContainer.generateItems(
-            owner,
-            owner.inventory.toArray(),
-            arrayOf("Examine", "Store-X", "Store-All", "Store-10", "Store-5", "Store-1"),
-            Components.LORE_BANK_SIDE_665,
-            0,
-            7,
-            4,
-            93
-        )
+        val currentX = getVarp(owner, 1249)
+
+        /*
+         * Main options.
+         */
+
+        val setOptions =
+            buildList {
+                add("Examine<col=ff9040>")
+                add("Withdraw-All but one")
+                add("Withdraw-All")
+                add("Withdraw-X")
+                if (currentX != -1) add("Withdraw-$currentX")
+                add("Withdraw-10")
+                add("Withdraw-5")
+                add("Withdraw-1")
+            }
+                .toTypedArray()
+
         InterfaceContainer.generateItems(
             owner,
             container.toArray(),
-            arrayOf("Examine", "Withdraw-X", "Withdraw-All", "Withdraw-10", "Withdraw-5", "Withdraw-1"),
+            setOptions,
             Components.LORE_BANK_671,
             27,
             5,
             6,
             30
         )
+
+        /*
+         * Side options.
+         */
+
+        val setOptionsSide =
+            buildList {
+                add("Examine<col=ff9040>")
+                add("Store-X")
+                if (currentX != -1) add("Store-$currentX")
+                add("Store-All")
+                add("Store-10")
+                add("Store-5")
+                add("Store-1")
+            }
+                .toTypedArray()
+
+        InterfaceContainer.generateItems(
+            owner,
+            owner.inventory.toArray(),
+            setOptionsSide,
+            Components.LORE_BANK_SIDE_665,
+            0,
+            7,
+            4,
+            93
+        )
+
         container.refresh()
     }
-
 }
