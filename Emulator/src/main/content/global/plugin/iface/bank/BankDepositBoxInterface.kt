@@ -51,11 +51,8 @@ class BankDepositBoxInterface : InterfaceListener {
                 OP_AMOUNT_ALL -> player.bank.addItem(slot, player.inventory.getAmount(item))
                 else -> player.debug("Unknown deposit box menu opcode $opcode")
             }
-
-            player.bank.refreshDepositBoxInterface()
-            animate(player, Animations.HUMAN_BANK_DEPOSIT_BOX_834)
         }
-
+        animate(player, Animations.HUMAN_BANK_DEPOSIT_BOX_834)
         return true
     }
 

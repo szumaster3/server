@@ -195,7 +195,7 @@ abstract class BurdenBeast : Familiar {
         InterfaceContainer.generateItems(
             owner,
             owner.inventory.toArray(),
-            arrayOf("Examine", "Store-X", "Store-All", "Store-10", "Store-5", "Store-1"),
+            arrayOf("Store-X", "Store-All", "Store-10", "Store-5", "Store-1"),
             Components.LORE_BANK_SIDE_665,
             0,
             7,
@@ -205,7 +205,7 @@ abstract class BurdenBeast : Familiar {
         InterfaceContainer.generateItems(
             owner,
             container.toArray(),
-            arrayOf("Examine", "Withdraw-X", "Withdraw-All", "Withdraw-10", "Withdraw-5", "Withdraw-1"),
+            arrayOf("Withdraw-X", "Withdraw-All", "Withdraw-10", "Withdraw-5", "Withdraw-1"),
             Components.LORE_BANK_671,
             27,
             5,

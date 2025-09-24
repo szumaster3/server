@@ -68,7 +68,7 @@ class BurdenBeastInterface : InterfaceListener {
                         Unit
                     }
                 }
-                168 -> {
+                9 -> {
                     item?.definition?.let { player.packetDispatch.sendMessage(it.examine) }
                     return true
                 }

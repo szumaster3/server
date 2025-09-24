@@ -22,13 +22,7 @@ class NarfsDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "'Narf'? You think that's funny?",
-                    "At least I Don't call myself '" + player.username + "' ",
-                    "Where did you get a name like that?",
-                ).also { stage++ }
+            0 -> npc(FaceAnim.HALF_GUILTY, "'Narf'? You think that's funny?", "At least I Don't call myself '" + player.username + "' ", "Where did you get a name like that?").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "It seemed like a good idea at the time!").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "Bah!").also { stage = END_DIALOGUE }
         }

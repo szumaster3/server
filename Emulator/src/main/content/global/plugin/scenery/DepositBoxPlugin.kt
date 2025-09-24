@@ -42,7 +42,14 @@ class DepositBoxPlugin : InteractionListener {
             InterfaceContainer.generateItems(
                 player,
                 player.inventory.toArray(),
-                arrayOf("Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"),
+                arrayOf(
+                    "Deposit-All",
+                    "Deposit-X",
+                    "Deposit-${getVarp(player, 1249)}",
+                    "Deposit-10",
+                    "Deposit-5",
+                    "Deposit-1"
+                ),
                 Components.BANK_DEPOSIT_BOX_11,
                 15,
                 5,
