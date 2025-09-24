@@ -161,6 +161,7 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
             21 -> npcl(FaceAnim.NEUTRAL, "Yes I know, it was returned to me.").also { stage++ }
             22 -> npcl(FaceAnim.HALF_GUILTY, "If you want it back you're going to have to collect another 25 sets of bones.").also {
                 setAttribute(player, "/save:demon-slayer:traiborn", true)
+                removeAttribute(player, "demon-slayer:third-key")
                 stage = END_DIALOGUE
             }
             23 -> npcl(FaceAnim.HALF_GUILTY, "A thingummywut? Where? Where?").also { stage++ }
