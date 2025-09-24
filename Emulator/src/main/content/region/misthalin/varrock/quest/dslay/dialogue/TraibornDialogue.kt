@@ -90,7 +90,7 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
                             given += toRemove
                         }
                     }
-
+                    player.setAttribute("/save:$LAST_GIVEN_BONES", given)
                     player.setAttribute("/save:$TOTAL_BONES", submitted + given)
                     player("I have some bones.")
                     stage = 13
@@ -100,9 +100,9 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc("Give 'em here then.").also { stage++ }
 
             14 -> {
-                val given = player.getAttribute(TOTAL_BONES, 0)
-                val sets = if (given == 1) "set" else "sets"
-                sendItemDialogue(player, BONES[0], "You give Traiborn $given $sets of bones.")
+                val lastGiven = player.getAttribute(LAST_GIVEN_BONES, 0)
+                val sets = if (lastGiven == 1) "set" else "sets"
+                sendItemDialogue(player, BONES[0], "You give Traiborn $lastGiven $sets of bones.")
                 stage++
             }
 
@@ -115,6 +115,7 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 56
                 } else {
                     removeAttribute(player, TOTAL_BONES)
+                    removeAttribute(player, LAST_GIVEN_BONES)
                     npc("Hurrah! That's all $TOTAL_BONES_NEEDED sets of bones.")
                     stage = 16
                 }
@@ -125,22 +126,17 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
                 stage++
             }
             17 -> {
-                val scenery =
-                    Scenery(shared.consts.Scenery.TRAIBORN_WARDROBE_17434, Location.create(3113, 3161, 1), 11, 1)
+                val scenery = Scenery(shared.consts.Scenery.TRAIBORN_WARDROBE_17434, Location.create(3113, 3161, 1), 11, 1)
                 SceneryBuilder.add(scenery)
                 npc.faceLocation(scenery.location)
                 npc.animate(ANIMATION)
-                if (player.inventory.remove(BONES[0]) || player.inventory.remove(BONES[1])) {
-                    removeAttribute(player, "demon-slayer:traiborn")
-                    player.inventory.add(DemonSlayerUtils.THIRD_KEY)
-                    interpreter.sendItemMessage(DemonSlayerUtils.THIRD_KEY.id, "Traiborn hands you a key.")
-                    setAttribute(player, "/save:demon-slayer:third-key", true)
-                    stage = 19
-                } else {
-                    npcl(FaceAnim.NEUTRAL, "I still need 25 sets of bones.")
-                    stage = END_DIALOGUE
-                    return true
-                }
+
+                removeAttribute(player, "demon-slayer:traiborn")
+                player.inventory.add(DemonSlayerUtils.THIRD_KEY)
+                interpreter.sendItemMessage(DemonSlayerUtils.THIRD_KEY.id, "Traiborn hands you a key.")
+                setAttribute(player, "/save:demon-slayer:third-key", true)
+                stage = 19
+
                 Pulser.submit(object : Pulse(1) {
                     var counter = 0
                     override fun pulse(): Boolean {
@@ -236,6 +232,7 @@ class TraibornDialogue(player: Player? = null) : Dialogue(player) {
         private val BONES = arrayOf(Item(Items.BONES_526, 25), Item(Items.BONES_2530, 25))
         private val ANIMATION = Animation(Animations.OPEN_CHEST_536)
         private const val TOTAL_BONES = "demon-slayer:traiborn:bones"
+        private const val LAST_GIVEN_BONES = "last-given"
         private const val TOTAL_BONES_NEEDED = 25
     }
 

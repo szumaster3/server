@@ -24523,6 +24523,36 @@
     "id": "2398"
   },
   {
+    "destroy_message": "You can get another one from the wizard Traiborn.",
+    "examine": "The Wizard Traiborn gave me this key to Silverlight's case.",
+    "durability": null,
+    "tradeable": "false",
+    "weight": "1.0",
+    "name": "Silverlight key",
+    "archery_ticket_price": "0",
+    "id": "2399"
+  },
+  {
+    "destroy_message": "You can get another one from Captain Rovin.",
+    "examine": "Captain Rovin gave me this key to Silverlight's case.",
+    "durability": null,
+    "tradeable": "false",
+    "weight": "1.0",
+    "name": "Silverlight key",
+    "archery_ticket_price": "0",
+    "id": "2400"
+  },
+  {
+    "destroy_message": "You can get another one from the drain outside the Varrock Palace kitchen.",
+    "examine": "Sir Prysin dropped this key down the drain.",
+    "durability": null,
+    "tradeable": "false",
+    "weight": "1.0",
+    "name": "Silverlight key",
+    "archery_ticket_price": "0",
+    "id": "2401"
+  },
+  {
     "turn90cw_anim": "821",
     "examine": "The magical sword 'Silverlight'.",
     "walk_anim": "819",
