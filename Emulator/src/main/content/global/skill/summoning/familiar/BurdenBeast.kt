@@ -1,7 +1,6 @@
 package content.global.skill.summoning.familiar
 
 import content.global.skill.summoning.SummoningPouch
-import core.api.getVarp
 import core.api.sendMessage
 import core.game.component.CloseEvent
 import core.game.component.Component
@@ -193,50 +192,27 @@ abstract class BurdenBeast : Familiar {
 
         container.shift()
         owner.interfaceManager.openSingleTab(Component(Components.LORE_BANK_SIDE_665))
-
-        /*
-         * Main options.
-         */
         InterfaceContainer.generateItems(
             owner,
             owner.inventory.toArray(),
-            arrayOf(
-                "Store-1",
-                "Store-5",
-                "Store-10",
-                "Store-${getVarp(owner, 1249)}",
-                "Store-X",
-                "Store-All"
-            ),
+            arrayOf("Store-X", "Store-All", "Store-10", "Store-5", "Store-1"),
             Components.LORE_BANK_SIDE_665,
             0,
             7,
             4,
             93
         )
-
-        /*
-         * Side options.
-         */
-
         InterfaceContainer.generateItems(
             owner,
             container.toArray(),
-            arrayOf(
-                "Withdraw-1",
-                "Withdraw-5",
-                "Withdraw-10",
-                "Withdraw-${getVarp(owner, 1249)}",
-                "Withdraw-X",
-                "Withdraw-All"
-            ),
+            arrayOf("Withdraw-X", "Withdraw-All", "Withdraw-10", "Withdraw-5", "Withdraw-1"),
             Components.LORE_BANK_671,
             27,
             5,
             6,
             30
         )
-
         container.refresh()
     }
+
 }

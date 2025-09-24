@@ -44,7 +44,7 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
     /**
      * The last x-amount entered.
      */
-    var lastAmountX: Int = -1
+    var lastAmountX: Int = 50
         private set
 
     /**
@@ -138,9 +138,7 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
         super.refresh()
         player.inventory.refresh()
         player.inventory.listeners.add(listener)
-        if (lastAmountX != -1) {
-            setVarp(player, 1249, lastAmountX)
-        }
+        setVarp(player, 1249, lastAmountX)
         val settings = IfaceSettingsBuilder().enableOptions(IntRange(0, 5)).enableExamine().enableSlotSwitch().build()
         player.packetDispatch.sendIfaceSettings(settings, 0, 763, 0, 27)
         isOpen = true
@@ -165,9 +163,7 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
         player.interfaceManager.openSingleTab(Component(763))
         player.inventory.listeners.add(player.bank.listener)
         player.inventory.refresh()
-        if (lastAmountX != -1) {
-            setVarp(player, 1249, lastAmountX)
-        }
+        setVarp(player, 1249, lastAmountX)
         player.packetDispatch.sendIfaceSettings(1278, 73, 762, 0, SIZE)
         val settings = IfaceSettingsBuilder().enableOptions(IntRange(0, 5)).enableExamine().enableSlotSwitch().build()
         player.packetDispatch.sendIfaceSettings(settings, 0, 763, 0, 27)
@@ -357,7 +353,6 @@ class BankContainer(player: Player) : Container(SIZE, ContainerType.ALWAYS_STACK
             val slot = freeSlot()
             replace(tempTabItems[i], slot, false)
         }
-        setVarbit(player, 4893, tabStartSlot[tabId])
         refresh() //We only refresh once.
     }
 
