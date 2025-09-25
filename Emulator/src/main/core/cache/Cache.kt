@@ -46,6 +46,7 @@ object Cache {
         versionTable = generateUKeys()
         provider = DataProvider(cacheLibrary)
         parseDefinitions()
+        InterfacePacking(cacheLibrary).packInterfaces()
     }
 
     /**
