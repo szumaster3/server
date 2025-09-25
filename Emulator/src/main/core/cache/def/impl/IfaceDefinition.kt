@@ -763,7 +763,6 @@ class IfaceDefinition {
             when (def.type) {
                 ComponentType.SPRITE -> {
                     buffer.p4(def.spriteId)
-                    buffer.p4(def.activeSpriteId)
                     buffer.p2(def.angle2d)
                     var spriteFlags = 0
                     if (def.spriteTiling) spriteFlags = spriteFlags or 0x1

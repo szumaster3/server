@@ -6,20 +6,27 @@ import com.displee.cache.index.archive.Archive
 import core.api.log
 import core.cache.def.impl.ComponentType
 import core.cache.def.impl.IfaceDefinition
+import core.cache.def.impl.LinkedScripts
 import core.tools.Log
 
 class CachePacking(private val cache: CacheLibrary) {
 
     fun addGraphicComponent(
         def: Int,
+        index: Int,
         x: Int,
         y: Int,
         width: Int,
         height: Int,
-        index: Int,
         overlay: Int = -1,
         spriteId: Int = -1,
-        ops: Array<String?>? = emptyArray()
+        scripts: LinkedScripts? = null,
+        alpha: Int = 0,
+        outline: Int = 0,
+        hFlip: Boolean = false,
+        vFlip: Boolean = false,
+        spriteTiling: Boolean = false,
+        shadowColor: Int = 0
     ): IfaceDefinition {
         val root = IfaceDefinition.forId(def) ?: error("Interface $def not found")
 
@@ -33,17 +40,16 @@ class CachePacking(private val cache: CacheLibrary) {
             this.baseY = y
             this.baseWidth = width
             this.baseHeight = height
-
             this.overlayer = overlay
             this.spriteId = spriteId
-            this.activeSpriteId = spriteId
-            this.spriteTiling = false
-            this.hasAlpha = false
-            this.alpha = 0
-            this.outlineThickness = 0
-            this.shadowColor = 0
-            this.hFlip = false
-            this.vFlip = false
+            this.spriteTiling = spriteTiling
+            this.hasAlpha = alpha > 0
+            this.alpha = alpha
+            this.outlineThickness = outline
+            this.shadowColor = shadowColor
+            this.hFlip = hFlip
+            this.vFlip = vFlip
+            this.scripts = scripts
         }
 
         val currentChildren = root.children ?: arrayOfNulls<IfaceDefinition>(index + 1)
@@ -52,20 +58,10 @@ class CachePacking(private val cache: CacheLibrary) {
         }
         updatedChildren[index] = newSprite
         root.children = updatedChildren
-
-        log(this.javaClass, Log.INFO, "New sprite added: baseWidth=${newSprite.baseWidth}, baseHeight=${newSprite.baseHeight}, spriteId=${newSprite.spriteId}")
-
         saveComponent(def, index, newSprite)
         return newSprite
     }
 
-    /**
-     * Encodes and writes a single child component into the cache.
-     *
-     * @param ifaceId The id of the parent interface.
-     * @param childIndex The child index within the interface.
-     * @param def The [IfaceDefinition] to save.
-     */
     private fun saveComponent(ifaceId: Int, childIndex: Int, def: IfaceDefinition) {
         val encodedBytes = IfaceDefinition.encode(def)
 

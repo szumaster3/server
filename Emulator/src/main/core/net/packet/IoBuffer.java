@@ -116,7 +116,6 @@ public class IoBuffer {
      * Writes a JAG-compliant string.
      */
     public IoBuffer writeJagString(String str) {
-        this.p1(0);
         for (int i = 0; i < str.length(); i++) {
             this.p1(str.charAt(i));
         }

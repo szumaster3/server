@@ -43,10 +43,10 @@ object Cache {
     fun init(cachePath: String?) {
         progressListener = SystemLogger.CreateProgressListener()
         cacheLibrary = CacheLibrary(cachePath.toString(), false, progressListener)
+        InterfacePacking(cacheLibrary).packInterfaces()
         versionTable = generateUKeys()
         provider = DataProvider(cacheLibrary)
         parseDefinitions()
-        InterfacePacking(cacheLibrary).packInterfaces()
     }
 
     /**
