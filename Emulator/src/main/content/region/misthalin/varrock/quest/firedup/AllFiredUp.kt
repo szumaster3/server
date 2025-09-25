@@ -9,6 +9,7 @@ import core.plugin.Initializable
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
+import shared.consts.Vars
 
 /**
  * Represents the All Fired Up quest.
@@ -134,12 +135,13 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
 
     override fun finish(player: Player) {
         super.finish(player)
-        player ?: return
-        sendString(player, "20,000gp,", 277, 8 + 2)
-        sendString(player, "5,500 Firemaking XP", 277, 9 + 2)
-        sendString(player, "Full access to the beacon network", 277, 10 + 2)
-        sendString(player, "1 Quest Point", 277, 11 + 2)
+        var line = 10
         sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.TINDERBOX_590, 235)
+        drawReward(player, "1 Quest Point", line++)
+        drawReward(player, "20,000gp", line++)
+        drawReward(player, "5,500 Firemaking XP", line++)
+        drawReward(player, "Access to the All Fired Up", line++)
+        drawReward(player, "minigame", line)
         rewardXP(player, Skills.FIREMAKING, 5500.0)
         if (freeSlots(player) == 0) {
             addItemOrBank(player, Items.COINS_995, 20000)
@@ -147,17 +149,15 @@ class AllFiredUp : Quest(Quests.ALL_FIRED_UP, 157, 156, 1) {
             addItem(player, Items.COINS_995, 20000)
         }
         AFUBeacon.resetAllBeacons(player)
-        setVarbit(player, 1283, 0)
+        setVarbit(player, Vars.VARBIT_QUEST_ALL_FIREDUP_PROGRESS_1283, 0)
+        setVarbit(player, 5134, 1, true)
         updateQuestTab(player)
     }
 
     override fun getConfig(player: Player?, stage: Int): IntArray {
-        if (stage == 100) return intArrayOf(1282, 90)
-        if (stage > 0) {
-            return intArrayOf(1282, 1)
-        } else {
-            return intArrayOf(1282, 0)
-        }
+        if(stage == 100) return intArrayOf(1282, 90)
+        if(stage > 0) return intArrayOf(1282, 1)
+        else return intArrayOf(1282, 0)
     }
 
     override fun newInstance(`object`: Any?): Quest = this
