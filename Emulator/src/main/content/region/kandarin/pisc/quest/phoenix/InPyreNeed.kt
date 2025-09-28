@@ -115,9 +115,9 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
         )
 
         /**
-         * Locations where NPCs will respawn.
+         * NPC respawn locations for first region.
          */
-        val NPC_RESPAWNS = arrayOf(
+        val NPC_RESPAWNS_REGION_0 = arrayOf(
             Location.create(3464, 5242, 0),
             Location.create(3460, 5237, 0),
             Location.create(3484, 5234, 0),
@@ -142,6 +142,12 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
             Location.create(3547, 5222, 0),
             Location.create(3547, 5232, 0),
             Location.create(3545, 5240, 0),
+        )
+
+        /**
+         * NPC respawn locations in second region.
+         */
+        val NPC_RESPAWNS_REGION_1 = arrayOf(
             Location.create(3465, 5210, 0),
             Location.create(3462, 5205, 0),
             Location.create(3466, 5204, 0),
@@ -163,7 +169,6 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
             Location.create(3474, 5242, 0),
             Location.create(3480, 5243, 0),
         )
-
     }
 
     override fun drawJournal(player: Player, stage: Int) {
