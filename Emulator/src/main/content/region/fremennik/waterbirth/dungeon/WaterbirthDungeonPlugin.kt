@@ -1,7 +1,7 @@
 package content.region.fremennik.waterbirth.dungeon
 
-import content.global.plugin.iface.warning.WarningListener
-import content.global.plugin.iface.warning.Warnings
+import content.global.plugin.iface.WarningListener
+import content.global.plugin.iface.Warnings
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.global.action.ClimbActionHandler

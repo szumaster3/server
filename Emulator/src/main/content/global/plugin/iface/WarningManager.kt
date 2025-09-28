@@ -1,6 +1,5 @@
-package content.global.plugin.iface.warning
+package content.global.plugin.iface
 
-import content.global.plugin.iface.FairyRing
 import content.region.kandarin.yanille.quest.itwatchtower.cutscene.EnclaveCutscene
 import core.api.*
 import core.game.component.Component
@@ -94,8 +93,8 @@ class WarningListener : InteractionListener, InterfaceListener {
     }
 
     private val cwsWarnings = mapOf(
-        Components.CWS_WARNING_24_581 to 3872,
-        Components.CWS_WARNING_26_627 to 4132
+        Components.CWS_WARNING_24_581 to Vars.VARBIT_CWS_WARNING_24_3872,
+        Components.CWS_WARNING_26_627 to Vars.VARBIT_CWS_WARNING_26_4132
     )
 
     fun handle(player: Player, component: Int) {
@@ -289,12 +288,7 @@ class WarningListener : InteractionListener, InterfaceListener {
 
         fun handleShantayPassWarning(player: Player) {
             if (!removeItem(player, Item(Items.SHANTAY_PASS_1854, 1))) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.SHANTAY_GUARD_838,
-                    "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.",
-                    FaceAnim.NEUTRAL
-                )
+                sendNPCDialogue(player, NPCs.SHANTAY_GUARD_838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FaceAnim.NEUTRAL)
             } else {
                 sendMessage(player, "You go through the gate.")
                 forceMove(player, player.location, player.location.transform(0, if (player.location.y > 3116) -2 else 2, 0), 30, 120, null)

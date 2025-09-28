@@ -1,7 +1,7 @@
 package content.region.misthalin.barbvillage.plugin;
 
-import content.global.plugin.iface.warning.WarningListener;
-import content.global.plugin.iface.warning.Warnings;
+import content.global.plugin.iface.WarningListener;
+import content.global.plugin.iface.Warnings;
 import content.region.misthalin.barbvillage.dialogue.CradleOfLifeDialogue;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;

@@ -5,8 +5,6 @@ import core.game.event.FairyRingDialEvent
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import content.global.plugin.iface.warning.WarningListener
-import content.global.plugin.iface.warning.Warnings
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location

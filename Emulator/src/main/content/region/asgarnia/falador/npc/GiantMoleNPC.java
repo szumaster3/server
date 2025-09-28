@@ -1,8 +1,8 @@
 package content.region.asgarnia.falador.npc;
 
 import content.data.LightSource;
-import content.global.plugin.iface.warning.WarningListener;
-import content.global.plugin.iface.warning.Warnings;
+import content.global.plugin.iface.WarningListener;
+import content.global.plugin.iface.Warnings;
 import core.api.utils.BossKillCounter;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DigAction;

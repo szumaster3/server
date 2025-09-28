@@ -1,7 +1,7 @@
 package content.global.skill.construction
 
-import content.global.plugin.iface.warning.WarningListener
-import content.global.plugin.iface.warning.Warnings
+import content.global.plugin.iface.WarningListener
+import content.global.plugin.iface.Warnings
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 import shared.consts.Components

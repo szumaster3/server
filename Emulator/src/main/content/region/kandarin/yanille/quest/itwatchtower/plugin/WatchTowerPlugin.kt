@@ -3,9 +3,8 @@ package content.region.kandarin.yanille.quest.itwatchtower.plugin
 import content.data.GameAttributes
 import content.data.LightSource
 import content.data.items.SkillingTool
-import content.global.plugin.iface.warning.WarningListener
-import content.global.plugin.iface.warning.Warnings
-import content.region.kandarin.yanille.quest.itwatchtower.cutscene.EnclaveCutscene
+import content.global.plugin.iface.WarningListener
+import content.global.plugin.iface.Warnings
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.BattlementDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.CityGuardDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.OgreGuardNorthWestGateDialogue

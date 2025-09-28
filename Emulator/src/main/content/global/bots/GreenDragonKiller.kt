@@ -101,7 +101,7 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
     }
 
     private fun lootingState() {
-        val items = AIRepository.groundItems.get(bot)
+        val items = AIRepository.groundItems[bot]
         if (items.isNullOrEmpty()) {
             state = State.KILLING
             return
@@ -133,13 +133,11 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
     }
 
     private fun toBankState() {
-        // najpierw cross ditch jeśli potrzebne
         if (!wildernessLine.insideBorder(bot) && bot.location.y > 3521) {
             crossWildernessDitch()
             return
         }
 
-        // jeśli nie w banku, podbiega pod bank
         if (!bankZone.insideBorder(bot)) {
             val target = bankZone.randomLoc
             bot.pulseManager.run(object : MovementPulse(bot, target, DestinationFlag.LOCATION) {

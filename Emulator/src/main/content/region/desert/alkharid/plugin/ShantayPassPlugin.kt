@@ -1,7 +1,7 @@
 package content.region.desert.alkharid.plugin
 
-import content.global.plugin.iface.warning.WarningListener
-import content.global.plugin.iface.warning.Warnings
+import content.global.plugin.iface.WarningListener
+import content.global.plugin.iface.Warnings
 import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.dialogue.FaceAnim
