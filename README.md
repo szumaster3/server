@@ -17,7 +17,7 @@ A fork of <a href="https://gitlab.com/2009scape/2009scape">2009Scape</a> with AG
 <a href="#license">License</a>
 </div>
 
----
+#  
 
 ## Prerequisites
 
@@ -27,8 +27,6 @@ Before setting up the project, ensure the following:
 - **IntelliJ IDEA** – Download from [JetBrains](https://www.jetbrains.com/idea/download/)
 
 > Windows users: Enable **Developer Mode** before proceeding.
-
----
 
 ## Fork & Clone
 
@@ -45,16 +43,12 @@ git clone <your-fork-ssh-or-https-url>
 cd <your-project-folder>
 ```
 
----
-
 ## Import Project in IntelliJ
 
 1. Open IntelliJ IDEA.
 2. Select `File` > `Open...` and choose the project root.
 3. IntelliJ should detect `pom.xml` and import the Maven project automatically.
 4. Set Project SDK to **Java 11** or higher.
-
----
 
 ## Setup Git & SSH
 
@@ -72,8 +66,6 @@ git config --global user.name "example"
 git config --global user.email "example@example.eu"
 ```
 
----
-
 ## Build Project
 
 Run from the project root:
@@ -84,8 +76,6 @@ mvn clean install
 
 This compiles and packages all files.
 
----
-
 ## Run Project
 
 ```bash
@@ -93,8 +83,6 @@ mvn exec:java -f pom.xml
 ```
 
 > Tip: Run via IntelliJ by right-clicking `pom.xml` > `Run 'exec:java'`.
-
----
 
 ## Contributing
 
@@ -113,16 +101,12 @@ git commit -am "Changes"
 
 4. Push and open a merge request.
 
----
-
 ## Troubleshooting
 
 - **Java version mismatch**: `java -version` should be 11+.
 - **Maven issues**: Check with `mvn -version`.
 - **IDE errors**: Reimport Maven project or invalidate caches (`File > Invalidate Caches / Restart`).
 - **SSH issues**: Ensure public key is added to GitLab.
-
----
 
 ## License
 
