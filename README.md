@@ -1,9 +1,4 @@
 <div align="center">
-
-<img src="" alt="Logo" width="300">
-
-</div>
-<div align="center">
 A fork of <a href="https://gitlab.com/2009scape/2009scape">2009Scape</a> with AGPL-3.0 licensing.
 </div>
 <div align="center">
@@ -16,6 +11,8 @@ A fork of <a href="https://gitlab.com/2009scape/2009scape">2009Scape</a> with AG
 <a href="#contributing">Contributing</a> •
 <a href="#license">License</a>
 </div>
+
+___
 
 # Prerequisites
 
