@@ -1,0 +1,2088 @@
+# 498 Configs
+- [List_0](498/498_interface_dump.txt) `Interface dump`
+- [List_1](498/498_interface_scripts.txt) `Interface scripts`
+- [List_2](498/498_item_dump.txt) `Item dump`
+- [List_3](498/498_npc_configs.txt) `NPC configs`
+- [List_4](498/498_npc_dump.txt) `NPC dump`
+- [List_5](498/498_object_anims.txt) `Object animations`
+- [List_6](498/498_object_configs.txt) `Object configs`
+- [List_7](498/498_object_dump.txt) `Object dump`
+- [List_8](498/498_clothing_dump.txt) `Clothing dump`
+- [List_9](498/498_hidden_child_dump.txt) `Hidden child dump`
+- [List_10](498/498_interface_configs.txt) `Interface configs`
+- [List_11](498/498_interface_containers.txt) `Interface containers`
+
+# 530 Configs
+- [List_0](530/animations.txt) `Animations`
+- [List_1](530/graphics.txt) `Graphics`
+- [List_2](530/linked-anims.txt) `Linked animations`
+- [List_3](530/synth_debug_names.txt) `synth_debug_names`
+
+# 562 Configs
+- [List_0](562/562_interface_configs.txt) `Interface configs`
+
+# 530 Scripts (Author: Joshua-F)
+
+- [Script_0](scripts/proc.quicksort.txt) `proc.quicksort]`  
+- [Script_1](scripts/proc.inv_total_available.txt) `proc.inv_total_available]`  
+- [Script_2](scripts/proc.script2.txt)  
+- [Script_3](scripts/proc.script3.txt)  
+- [Script_4](scripts/proc.script4.txt)  
+- [Script_5](scripts/proc.script5.txt)  
+- [Script_6](scripts/clientscript.magic_init.txt) `clientscript.magic_init]`  
+- [Script_7](scripts/clientscript.script7.txt)  
+- [Script_8](scripts/clientscript.script8.txt)  
+- [Script_9](scripts/clientscript.script9.txt)  
+- [Script_10](scripts/clientscript.magic_addtooltip.txt) `clientscript.magic_addtooltip]`  
+- [Script_11](scripts/clientscript.magic_deltooltip.txt) `clientscript.magic_deltooltip]`  
+- [Script_12](scripts/proc.script12.txt)  
+- [Script_13](scripts/proc.script13.txt)  
+- [Script_14](scripts/proc.script14.txt)  
+- [Script_15](scripts/clientscript.quickchat_tutorial_init.txt) `clientscript.quickchat_tutorial_init]`  
+- [Script_16](scripts/clientscript.magic_updateicon.txt) `clientscript.magic_updateicon]`  
+- [Script_17](scripts/clientscript.magic_entertargetmode.txt) `clientscript.magic_entertargetmode]`  
+- [Script_18](scripts/clientscript.magic_leavetargetmode.txt) `clientscript.magic_leavetargetmode]`  
+- [Script_19](scripts/proc.magic_runecount.txt) `proc.magic_runecount]`  
+- [Script_20](scripts/proc.magic_tostring.txt) `proc.magic_tostring]`  
+- [Script_21](scripts/proc.magic_updateicon.txt) `proc.magic_updateicon]`  
+- [Script_22](scripts/clientscript.script22.txt)  
+- [Script_23](scripts/clientscript.script23.txt)  
+- [Script_24](scripts/proc.script24.txt)  
+- [Script_25](scripts/clientscript.shop_main_start.txt) `clientscript.shop_main_start]`  
+- [Script_26](scripts/clientscript.magictraining_shop.txt) `clientscript.magictraining_shop]`  
+- [Script_27](scripts/clientscript.magictraining_shop_points.txt) `clientscript.magictraining_shop_points]`  
+- [Script_28](scripts/clientscript.loot_toggle_client.txt) `clientscript.loot_toggle_client]`  
+- [Script_29](scripts/clientscript.closebutton_click.txt) `clientscript.closebutton_click]`  
+- [Script_30](scripts/clientscript.scrollbar_vertical.txt) `clientscript.scrollbar_vertical]`  
+- [Script_31](scripts/proc.scrollbar_vertical.txt) `proc.scrollbar_vertical]`  
+- [Script_32](scripts/clientscript.scrollbar_vertical_up.txt) `clientscript.scrollbar_vertical_up]`  
+- [Script_33](scripts/clientscript.scrollbar_vertical_down.txt) `clientscript.scrollbar_vertical_down]`  
+- [Script_34](scripts/clientscript.scrollbar_vertical_jump.txt) `clientscript.scrollbar_vertical_jump]`  
+- [Script_35](scripts/clientscript.scrollbar_vertical_drag.txt) `clientscript.scrollbar_vertical_drag]`  
+- [Script_36](scripts/clientscript.scrollbar_vertical_wheel.txt) `clientscript.scrollbar_vertical_wheel]`  
+- [Script_37](scripts/proc.scrollbar_vertical_doscroll.txt) `proc.scrollbar_vertical_doscroll]`  
+- [Script_38](scripts/clientscript.addtooltip.txt) `clientscript.addtooltip]`  
+- [Script_39](scripts/proc.addtooltip_action.txt) `proc.addtooltip_action]`  
+- [Script_40](scripts/clientscript.deltooltip.txt) `clientscript.deltooltip]`  
+- [Script_41](scripts/proc.deltooltip_action.txt) `proc.deltooltip_action]`  
+- [Script_42](scripts/proc.bool_to_int.txt) `proc.bool_to_int]`  
+- [Script_43](scripts/clientscript.trail_reward_generation.txt) `clientscript.trail_reward_generation]`  
+- [Script_44](scripts/clientscript.graphic_swapper.txt) `clientscript.graphic_swapper]`  
+- [Script_45](scripts/clientscript.text_colour_swapper.txt) `clientscript.text_colour_swapper]`  
+- [Script_46](scripts/proc.tostring_spacer.txt) `proc.tostring_spacer]`  
+- [Script_47](scripts/proc.script47.txt)  
+- [Script_48](scripts/clientscript.script48.txt)  
+- [Script_49](scripts/clientscript.prayer_varupdate.txt) `clientscript.prayer_varupdate]`  
+- [Script_50](scripts/clientscript.topstat_prayer_button_update.txt) `clientscript.topstat_prayer_button_update]`  
+- [Script_51](scripts/proc.script51.txt)  
+- [Script_52](scripts/clientscript.prayer_statupdate.txt) `clientscript.prayer_statupdate]`  
+- [Script_53](scripts/clientscript.prayer_level.txt) `clientscript.prayer_level]`  
+- [Script_54](scripts/clientscript.wilderness_level_update.txt) `clientscript.wilderness_level_update]`  
+- [Script_55](scripts/proc.script55.txt)  
+- [Script_56](scripts/proc.area_task_complete.txt) `proc.area_task_complete]`  
+- [Script_57](scripts/proc.script57.txt)  
+- [Script_58](scripts/clientscript.script58.txt)  
+- [Script_59](scripts/clientscript.script59.txt)  
+- [Script_60](scripts/clientscript.dream_bank_init.txt) `clientscript.dream_bank_init]`  
+- [Script_61](scripts/clientscript.dream_chest_init.txt) `clientscript.dream_chest_init]`  
+- [Script_62](scripts/proc.quicksort_enum.txt) `proc.quicksort_enum]`  
+- [Script_63](scripts/clientscript.scrollbar_vertical_graphics.txt) `clientscript.scrollbar_vertical_graphics]`  
+- [Script_64](scripts/clientscript.vm_kudos_set.txt) `clientscript.vm_kudos_set]`  
+- [Script_65](scripts/clientscript.set_spinner.txt) `clientscript.set_spinner]`  
+- [Script_66](scripts/clientscript.spinner.txt) `clientscript.spinner]`  
+- [Script_67](scripts/clientscript.model_swapper.txt) `clientscript.model_swapper]`  
+- [Script_68](scripts/clientscript.text_swapper.txt) `clientscript.text_swapper]`  
+- [Script_69](scripts/clientscript.comp_sethide.txt) `clientscript.comp_sethide]`  
+- [Script_70](scripts/clientscript.tzhaar_fightpit_foesremaining.txt) `clientscript.tzhaar_fightpit_foesremaining]`  
+- [Script_71](scripts/proc.if_switchside.txt) `proc.if_switchside]`  
+- [Script_72](scripts/proc.scrollbar_resize.txt) `proc.scrollbar_resize]`  
+- [Script_73](scripts/clientscript.chatdefault_onkey.txt) `clientscript.chatdefault_onkey]`  
+- [Script_74](scripts/proc.add_to_inputstring.txt) `proc.add_to_inputstring]`  
+- [Script_75](scripts/proc.chatout_scrollup.txt) `proc.chatout_scrollup]`  
+- [Script_76](scripts/proc.chatout_scrolldown.txt) `proc.chatout_scrolldown]`  
+- [Script_77](scripts/proc.chatout_add.txt) `proc.chatout_add]`  
+- [Script_78](scripts/proc.chatout_set.txt) `proc.chatout_set]`  
+- [Script_79](scripts/proc.chatout_get.txt) `proc.chatout_get]`  
+- [Script_80](scripts/clientscript.trail_puzzle_generation.txt) `clientscript.trail_puzzle_generation]`  
+- [Script_81](scripts/clientscript.chatdefault_updatechatbox.txt) `clientscript.chatdefault_updatechatbox]`  
+- [Script_82](scripts/clientscript.rebootwatch.txt) `clientscript.rebootwatch]`  
+- [Script_83](scripts/clientscript.splitpm_changed.txt) `clientscript.splitpm_changed]`  
+- [Script_84](scripts/proc.rebuildchatbox.txt) `proc.rebuildchatbox]`  
+- [Script_85](scripts/proc.pool_say_focus.txt) `proc.pool_say_focus]`  
+- [Script_86](scripts/clientscript.chat_op.txt) `clientscript.chat_op]`  
+- [Script_87](scripts/clientscript.macro_pinball_score.txt) `clientscript.macro_pinball_score]`  
+- [Script_88](scripts/clientscript.private_op.txt) `clientscript.private_op]`  
+- [Script_89](scripts/proc.rebuildpmbox.txt) `proc.rebuildpmbox]`  
+- [Script_90](scripts/proc.filtertest.txt) `proc.filtertest]`  
+- [Script_91](scripts/proc.pm_filtertest.txt) `proc.pm_filtertest]`  
+- [Script_92](scripts/clientscript.v2_stone_button.txt) `clientscript.v2_stone_button]`  
+- [Script_93](scripts/clientscript.v2_stone_button_filled.txt) `clientscript.v2_stone_button_filled]`  
+- [Script_94](scripts/clientscript.v2_stone_button_in.txt) `clientscript.v2_stone_button_in]`  
+- [Script_95](scripts/clientscript.v2_stone_button_in_filled.txt) `clientscript.v2_stone_button_in_filled]`  
+- [Script_96](scripts/clientscript.v2_stone_button_out.txt) `clientscript.v2_stone_button_out]`  
+- [Script_97](scripts/clientscript.v2_stone_button_out_filled.txt) `clientscript.v2_stone_button_out_filled]`  
+- [Script_98](scripts/proc.create_graphic.txt) `proc.create_graphic]`  
+- [Script_99](scripts/clientscript.duel_stake_init.txt) `clientscript.duel_stake_init]`  
+- [Script_100](scripts/clientscript.script100.txt)  
+- [Script_101](scripts/clientscript.meslayer_close.txt) `clientscript.meslayer_close]`  
+- [Script_102](scripts/proc.meslayer_mode1.txt) `proc.meslayer_mode1]`  
+- [Script_103](scripts/clientscript.meslayer_mode2.txt) `clientscript.meslayer_mode2]`  
+- [Script_104](scripts/clientscript.meslayer_mode3.txt) `clientscript.meslayer_mode3]`  
+- [Script_105](scripts/clientscript.meslayer_mode4.txt) `clientscript.meslayer_mode4]`  
+- [Script_106](scripts/clientscript.trail_puzzle_click.txt) `clientscript.trail_puzzle_click]`  
+- [Script_107](scripts/proc.meslayer_mode6.txt) `proc.meslayer_mode6]`  
+- [Script_108](scripts/clientscript.meslayer_mode7.txt) `clientscript.meslayer_mode7]`  
+- [Script_109](scripts/clientscript.meslayer_mode8.txt) `clientscript.meslayer_mode8]`  
+- [Script_110](scripts/clientscript.meslayer_mode9.txt) `clientscript.meslayer_mode9]`  
+- [Script_111](scripts/proc.meslayer_mode10.txt) `proc.meslayer_mode10]`  
+- [Script_112](scripts/clientscript.meslayer_onkey.txt) `clientscript.meslayer_onkey]`  
+- [Script_113](scripts/clientscript.script113.txt)  
+- [Script_114](scripts/clientscript.switchside_init.txt) `clientscript.switchside_init]`  
+- [Script_115](scripts/clientscript.switchside.txt) `clientscript.switchside]`  
+- [Script_116](scripts/clientscript.script116.txt)  
+- [Script_117](scripts/clientscript.flashside_vartransmit.txt) `clientscript.flashside_vartransmit]`  
+- [Script_118](scripts/clientscript.death_deathkeepinit.txt) `clientscript.death_deathkeepinit]`  
+- [Script_119](scripts/clientscript.component_pulse_start.txt) `clientscript.component_pulse_start]`  
+- [Script_120](scripts/clientscript.pattern_spin.txt) `clientscript.pattern_spin]`  
+- [Script_121](scripts/proc.getsideicon.txt) `proc.getsideicon]`  
+- [Script_122](scripts/clientscript.component_pulse_timer.txt) `clientscript.component_pulse_timer]`  
+- [Script_123](scripts/clientscript.friend_init.txt) `clientscript.friend_init]`  
+- [Script_124](scripts/clientscript.friend_transmit.txt) `clientscript.friend_transmit]`  
+- [Script_125](scripts/proc.friend_update.txt) `proc.friend_update]`  
+- [Script_126](scripts/clientscript.friend_op.txt) `clientscript.friend_op]`  
+- [Script_127](scripts/clientscript.ignore_init.txt) `clientscript.ignore_init]`  
+- [Script_128](scripts/clientscript.ignore_transmit.txt) `clientscript.ignore_transmit]`  
+- [Script_129](scripts/proc.ignore_update.txt) `proc.ignore_update]`  
+- [Script_130](scripts/clientscript.ignore_op.txt) `clientscript.ignore_op]`  
+- [Script_131](scripts/clientscript.snapshot_open.txt) `clientscript.snapshot_open]`  
+- [Script_132](scripts/proc.script132.txt)  
+- [Script_133](scripts/clientscript.snapshot_onkey.txt) `clientscript.snapshot_onkey]`  
+- [Script_134](scripts/clientscript.snapshot_mutetoggle.txt) `clientscript.snapshot_mutetoggle]`  
+- [Script_135](scripts/clientscript.snapshot_report.txt) `clientscript.snapshot_report]`  
+- [Script_136](scripts/clientscript.script136.txt)  
+- [Script_137](scripts/clientscript.script137.txt)  
+- [Script_138](scripts/clientscript.meslayer_ondialogabort.txt) `clientscript.meslayer_ondialogabort]`  
+- [Script_139](scripts/clientscript.subchanged_init.txt) `clientscript.subchanged_init]`  
+- [Script_140](scripts/clientscript.subchanged.txt) `clientscript.subchanged]`  
+- [Script_141](scripts/clientscript.script141.txt)  
+- [Script_142](scripts/clientscript.trade_confirm_init.txt) `clientscript.trade_confirm_init]`  
+- [Script_143](scripts/clientscript.interface_flash_slot.txt) `clientscript.interface_flash_slot]`  
+- [Script_144](scripts/clientscript.interface_flash_fade.txt) `clientscript.interface_flash_fade]`  
+- [Script_145](scripts/clientscript.script145.txt)  
+- [Script_146](scripts/clientscript.script146.txt)  
+- [Script_147](scripts/proc.script147.txt)  
+- [Script_148](scripts/proc.script148.txt)  
+- [Script_149](scripts/clientscript.interface_inv_init.txt) `clientscript.interface_inv_init]`  
+- [Script_150](scripts/clientscript.interface_inv_init_big.txt) `clientscript.interface_inv_init_big]`  
+- [Script_151](scripts/clientscript.interface_inv_update_big.txt) `clientscript.interface_inv_update_big]`  
+- [Script_152](scripts/proc.interface_inv_update.txt) `proc.interface_inv_update]`  
+- [Script_153](scripts/proc.interface_inv_update_big.txt) `proc.interface_inv_update_big]`  
+- [Script_154](scripts/proc.interface_inv_draw_slot_big.txt) `proc.interface_inv_draw_slot_big]`  
+- [Script_155](scripts/clientscript.interface_inv_dragcomplete_swap_big.txt) `clientscript.interface_inv_dragcomplete_swap_big]`  
+- [Script_156](scripts/clientscript.interface_inv_dragcomplete_shuffle_big.txt) `clientscript.interface_inv_dragcomplete_shuffle_big]`  
+- [Script_157](scripts/proc.scrollbar_ondrag_doscroll.txt) `proc.scrollbar_ondrag_doscroll]`  
+- [Script_158](scripts/clientscript.interface_invother_init.txt) `clientscript.interface_invother_init]`  
+- [Script_159](scripts/clientscript.interface_invother_update_big.txt) `clientscript.interface_invother_update_big]`  
+- [Script_160](scripts/proc.interface_invother_update_big.txt) `proc.interface_invother_update_big]`  
+- [Script_161](scripts/proc.interface_invother_draw_slot_big.txt) `proc.interface_invother_draw_slot_big]`  
+- [Script_162](scripts/clientscript.interface_inv_drag_slot.txt) `clientscript.interface_inv_drag_slot]`  
+- [Script_163](scripts/clientscript.cws_toggle.txt) `clientscript.cws_toggle]`  
+- [Script_164](scripts/clientscript.cws_graphic_swap.txt) `clientscript.cws_graphic_swap]`  
+- [Script_165](scripts/clientscript.cws_graphic_swap_2.txt) `clientscript.cws_graphic_swap_2]`  
+- [Script_166](scripts/proc.cws_cc_getvar.txt) `proc.cws_cc_getvar]`  
+- [Script_167](scripts/clientscript.cws_mouseover.txt) `clientscript.cws_mouseover]`  
+- [Script_168](scripts/clientscript.pattern_cards_select.txt) `clientscript.pattern_cards_select]`  
+- [Script_169](scripts/clientscript.kr_mouseleave_colour.txt) `clientscript.kr_mouseleave_colour]`  
+- [Script_170](scripts/clientscript.kr_tumbler_height.txt) `clientscript.kr_tumbler_height]`  
+- [Script_171](scripts/clientscript.kr_display_riddle.txt) `clientscript.kr_display_riddle]`  
+- [Script_172](scripts/clientscript.script172.txt)  
+- [Script_173](scripts/clientscript.chat_button_select.txt) `clientscript.chat_button_select]`  
+- [Script_174](scripts/clientscript.chat_button_deselect.txt) `clientscript.chat_button_deselect]`  
+- [Script_175](scripts/clientscript.chat_button_onop.txt) `clientscript.chat_button_onop]`  
+- [Script_176](scripts/clientscript.script176.txt)  
+- [Script_177](scripts/clientscript.redraw_chat_buttons.txt) `clientscript.redraw_chat_buttons]`  
+- [Script_178](scripts/proc.redraw_chat_buttons.txt) `proc.redraw_chat_buttons]`  
+- [Script_179](scripts/proc.chat_alert_get.txt) `proc.chat_alert_get]`  
+- [Script_180](scripts/proc.chat_alert_enable.txt) `proc.chat_alert_enable]`  
+- [Script_181](scripts/proc.chat_alert_reset.txt) `proc.chat_alert_reset]`  
+- [Script_182](scripts/clientscript.chat_alert_flash.txt) `clientscript.chat_alert_flash]`  
+- [Script_183](scripts/proc.chat_alert_set.txt) `proc.chat_alert_set]`  
+- [Script_184](scripts/proc.chat_set_filter.txt) `proc.chat_set_filter]`  
+- [Script_185](scripts/proc.chat_get_filter.txt) `proc.chat_get_filter]`  
+- [Script_186](scripts/proc.small_button_pressed.txt) `proc.small_button_pressed]`  
+- [Script_187](scripts/proc.small_button_blue.txt) `proc.small_button_blue]`  
+- [Script_188](scripts/clientscript.large_button_highlight.txt) `clientscript.large_button_highlight]`  
+- [Script_189](scripts/proc.large_button_highlight.txt) `proc.large_button_highlight]`  
+- [Script_190](scripts/clientscript.large_button.txt) `clientscript.large_button]`  
+- [Script_191](scripts/proc.large_button.txt) `proc.large_button]`  
+- [Script_192](scripts/proc.chatalerts.txt) `proc.chatalerts]`  
+- [Script_193](scripts/proc.panetest.txt) `proc.panetest]`  
+- [Script_194](scripts/clientscript.joinchat_onop.txt) `clientscript.joinchat_onop]`  
+- [Script_195](scripts/clientscript.script195.txt)  
+- [Script_196](scripts/clientscript.script196.txt)  
+- [Script_197](scripts/proc.script197.txt)  
+- [Script_198](scripts/proc.getclanicon.txt) `proc.getclanicon]`  
+- [Script_199](scripts/clientscript.script199.txt)  
+- [Script_200](scripts/clientscript.script200.txt)  
+- [Script_201](scripts/clientscript.script201.txt)  
+- [Script_202](scripts/proc.script202.txt)  
+- [Script_203](scripts/proc.script203.txt)  
+- [Script_204](scripts/clientscript.clansetrank.txt) `clientscript.clansetrank]`  
+- [Script_205](scripts/clientscript.duel_initworn.txt) `clientscript.duel_initworn]`  
+- [Script_206](scripts/clientscript.duel_confirm_text.txt) `clientscript.duel_confirm_text]`  
+- [Script_207](scripts/proc.duel_addtostring.txt) `proc.duel_addtostring]`  
+- [Script_208](scripts/clientscript.script208.txt)  
+- [Script_209](scripts/clientscript.script209.txt)  
+- [Script_210](scripts/clientscript.script210.txt)  
+- [Script_211](scripts/clientscript.script211.txt)  
+- [Script_212](scripts/clientscript.script212.txt)  
+- [Script_213](scripts/clientscript.script213.txt)  
+- [Script_214](scripts/clientscript.script214.txt)  
+- [Script_215](scripts/clientscript.script215.txt)  
+- [Script_216](scripts/clientscript.script216.txt)  
+- [Script_217](scripts/clientscript.script217.txt)  
+- [Script_218](scripts/clientscript.script218.txt)  
+- [Script_219](scripts/clientscript.script219.txt)  
+- [Script_220](scripts/clientscript.script220.txt)  
+- [Script_221](scripts/clientscript.script221.txt)  
+- [Script_222](scripts/clientscript.script222.txt)  
+- [Script_223](scripts/clientscript.script223.txt)  
+- [Script_224](scripts/proc.script224.txt)  
+- [Script_225](scripts/clientscript.script225.txt)  
+- [Script_226](scripts/clientscript.script226.txt)  
+- [Script_227](scripts/clientscript.script227.txt)  
+- [Script_228](scripts/clientscript.script228.txt)  
+- [Script_229](scripts/clientscript.script229.txt)  
+- [Script_230](scripts/clientscript.script230.txt)  
+- [Script_231](scripts/clientscript.script231.txt)  
+- [Script_232](scripts/clientscript.script232.txt)  
+- [Script_233](scripts/clientscript.script233.txt)  
+- [Script_234](scripts/clientscript.script234.txt)  
+- [Script_235](scripts/clientscript.script235.txt)  
+- [Script_236](scripts/clientscript.script236.txt)  
+- [Script_237](scripts/clientscript.script237.txt)  
+- [Script_238](scripts/clientscript.script238.txt)  
+- [Script_239](scripts/clientscript.script239.txt)  
+- [Script_240](scripts/clientscript.script240.txt)  
+- [Script_241](scripts/clientscript.script241.txt)  
+- [Script_242](scripts/clientscript.script242.txt)  
+- [Script_243](scripts/clientscript.script243.txt)  
+- [Script_244](scripts/clientscript.script244.txt)  
+- [Script_245](scripts/clientscript.script245.txt)  
+- [Script_246](scripts/clientscript.script246.txt)  
+- [Script_247](scripts/clientscript.script247.txt)  
+- [Script_248](scripts/clientscript.script248.txt)  
+- [Script_249](scripts/clientscript.script249.txt)  
+- [Script_250](scripts/clientscript.script250.txt)  
+- [Script_251](scripts/clientscript.script251.txt)  
+- [Script_252](scripts/clientscript.script252.txt)  
+- [Script_253](scripts/clientscript.script253.txt)  
+- [Script_254](scripts/clientscript.script254.txt)  
+- [Script_255](scripts/clientscript.script255.txt)  
+- [Script_256](scripts/clientscript.script256.txt)  
+- [Script_257](scripts/clientscript.script257.txt)  
+- [Script_258](scripts/clientscript.script258.txt)  
+- [Script_259](scripts/clientscript.script259.txt)  
+- [Script_260](scripts/clientscript.script260.txt)  
+- [Script_261](scripts/clientscript.script261.txt)  
+- [Script_262](scripts/clientscript.script262.txt)  
+- [Script_263](scripts/clientscript.script263.txt)  
+- [Script_264](scripts/clientscript.script264.txt)  
+- [Script_265](scripts/clientscript.script265.txt)  
+- [Script_266](scripts/clientscript.script266.txt)  
+- [Script_267](scripts/clientscript.script267.txt)  
+- [Script_268](scripts/clientscript.script268.txt)  
+- [Script_269](scripts/clientscript.script269.txt)  
+- [Script_270](scripts/clientscript.script270.txt)  
+- [Script_271](scripts/clientscript.script271.txt)  
+- [Script_272](scripts/clientscript.script272.txt)  
+- [Script_273](scripts/clientscript.script273.txt)  
+- [Script_274](scripts/clientscript.script274.txt)  
+- [Script_275](scripts/clientscript.script275.txt)  
+- [Script_276](scripts/clientscript.script276.txt)  
+- [Script_277](scripts/clientscript.script277.txt)  
+- [Script_278](scripts/clientscript.script278.txt)  
+- [Script_279](scripts/clientscript.script279.txt)  
+- [Script_280](scripts/clientscript.script280.txt)  
+- [Script_281](scripts/clientscript.script281.txt)  
+- [Script_282](scripts/clientscript.script282.txt)  
+- [Script_283](scripts/clientscript.script283.txt)  
+- [Script_284](scripts/clientscript.script284.txt)  
+- [Script_285](scripts/clientscript.script285.txt)  
+- [Script_286](scripts/clientscript.script286.txt)  
+- [Script_287](scripts/clientscript.script287.txt)  
+- [Script_288](scripts/clientscript.script288.txt)  
+- [Script_289](scripts/clientscript.script289.txt)  
+- [Script_290](scripts/clientscript.script290.txt)  
+- [Script_291](scripts/clientscript.script291.txt)  
+- [Script_292](scripts/clientscript.script292.txt)  
+- [Script_293](scripts/clientscript.script293.txt)  
+- [Script_294](scripts/clientscript.script294.txt)  
+- [Script_295](scripts/clientscript.script295.txt)  
+- [Script_296](scripts/clientscript.script296.txt)  
+- [Script_297](scripts/clientscript.script297.txt)  
+- [Script_298](scripts/proc.script298.txt)  
+- [Script_299](scripts/clientscript.deltooltip_graphic_swapper.txt) `clientscript.deltooltip_graphic_swapper]`  
+- [Script_300](scripts/clientscript.script300.txt)  
+- [Script_301](scripts/clientscript.script301.txt)  
+- [Script_302](scripts/clientscript.script302.txt)  
+- [Script_303](scripts/clientscript.script303.txt)  
+- [Script_304](scripts/clientscript.script304.txt)  
+- [Script_305](scripts/clientscript.script305.txt)  
+- [Script_306](scripts/clientscript.script306.txt)  
+- [Script_307](scripts/clientscript.script307.txt)  
+- [Script_308](scripts/clientscript.script308.txt)  
+- [Script_309](scripts/clientscript.script309.txt)  
+- [Script_310](scripts/clientscript.script310.txt)  
+- [Script_311](scripts/clientscript.script311.txt)  
+- [Script_312](scripts/clientscript.script312.txt)  
+- [Script_313](scripts/clientscript.script313.txt)  
+- [Script_314](scripts/clientscript.script314.txt)  
+- [Script_315](scripts/clientscript.script315.txt)  
+- [Script_316](scripts/proc.script316.txt)  
+- [Script_317](scripts/clientscript.script317.txt)  
+- [Script_318](scripts/clientscript.script318.txt)  
+- [Script_319](scripts/clientscript.script319.txt)  
+- [Script_320](scripts/clientscript.script320.txt)  
+- [Script_321](scripts/clientscript.script321.txt)  
+- [Script_322](scripts/clientscript.script322.txt)  
+- [Script_323](scripts/clientscript.script323.txt)  
+- [Script_324](scripts/clientscript.script324.txt)  
+- [Script_325](scripts/clientscript.script325.txt)  
+- [Script_326](scripts/clientscript.script326.txt)  
+- [Script_327](scripts/clientscript.script327.txt)  
+- [Script_328](scripts/clientscript.script328.txt)  
+- [Script_329](scripts/clientscript.script329.txt)  
+- [Script_330](scripts/clientscript.script330.txt)  
+- [Script_331](scripts/clientscript.script331.txt)  
+- [Script_332](scripts/clientscript.script332.txt)  
+- [Script_333](scripts/clientscript.script333.txt)  
+- [Script_334](scripts/clientscript.script334.txt)  
+- [Script_335](scripts/clientscript.script335.txt)  
+- [Script_336](scripts/clientscript.script336.txt)  
+- [Script_337](scripts/clientscript.script337.txt)  
+- [Script_338](scripts/clientscript.script338.txt)  
+- [Script_339](scripts/clientscript.script339.txt)  
+- [Script_340](scripts/clientscript.script340.txt)  
+- [Script_341](scripts/clientscript.script341.txt)  
+- [Script_342](scripts/clientscript.script342.txt)  
+- [Script_343](scripts/clientscript.script343.txt)  
+- [Script_344](scripts/clientscript.script344.txt)  
+- [Script_345](scripts/clientscript.script345.txt)  
+- [Script_346](scripts/clientscript.script346.txt)  
+- [Script_347](scripts/clientscript.script347.txt)  
+- [Script_348](scripts/clientscript.script348.txt)  
+- [Script_349](scripts/clientscript.script349.txt)  
+- [Script_350](scripts/clientscript.script350.txt)  
+- [Script_351](scripts/clientscript.script351.txt)  
+- [Script_352](scripts/clientscript.script352.txt)  
+- [Script_353](scripts/clientscript.script353.txt)  
+- [Script_354](scripts/clientscript.script354.txt)  
+- [Script_355](scripts/clientscript.script355.txt)  
+- [Script_356](scripts/clientscript.script356.txt)  
+- [Script_357](scripts/clientscript.script357.txt)  
+- [Script_358](scripts/clientscript.script358.txt)  
+- [Script_359](scripts/clientscript.script359.txt)  
+- [Script_360](scripts/clientscript.script360.txt)  
+- [Script_361](scripts/clientscript.script361.txt)  
+- [Script_362](scripts/clientscript.script362.txt)  
+- [Script_363](scripts/clientscript.script363.txt)  
+- [Script_364](scripts/clientscript.script364.txt)  
+- [Script_365](scripts/proc.script365.txt)  
+- [Script_366](scripts/proc.script366.txt)  
+- [Script_367](scripts/clientscript.script367.txt)  
+- [Script_368](scripts/clientscript.script368.txt)  
+- [Script_369](scripts/clientscript.script369.txt)  
+- [Script_370](scripts/clientscript.script370.txt)  
+- [Script_371](scripts/clientscript.script371.txt)  
+- [Script_372](scripts/clientscript.script372.txt)  
+- [Script_373](scripts/clientscript.script373.txt)  
+- [Script_374](scripts/clientscript.script374.txt)  
+- [Script_375](scripts/clientscript.script375.txt)  
+- [Script_376](scripts/clientscript.script376.txt)  
+- [Script_377](scripts/clientscript.script377.txt)  
+- [Script_378](scripts/clientscript.script378.txt)  
+- [Script_379](scripts/clientscript.script379.txt)  
+- [Script_380](scripts/clientscript.script380.txt)  
+- [Script_381](scripts/clientscript.script381.txt)  
+- [Script_382](scripts/clientscript.script382.txt)  
+- [Script_383](scripts/clientscript.script383.txt)  
+- [Script_384](scripts/clientscript.script384.txt)  
+- [Script_385](scripts/clientscript.script385.txt)  
+- [Script_386](scripts/clientscript.script386.txt)  
+- [Script_387](scripts/clientscript.script387.txt)  
+- [Script_388](scripts/clientscript.script388.txt)  
+- [Script_389](scripts/clientscript.script389.txt)  
+- [Script_390](scripts/clientscript.script390.txt)  
+- [Script_391](scripts/clientscript.script391.txt)  
+- [Script_392](scripts/clientscript.script392.txt)  
+- [Script_393](scripts/clientscript.script393.txt)  
+- [Script_394](scripts/clientscript.script394.txt)  
+- [Script_395](scripts/proc.script395.txt)  
+- [Script_396](scripts/clientscript.script396.txt)  
+- [Script_397](scripts/clientscript.script397.txt)  
+- [Script_398](scripts/proc.script398.txt)  
+- [Script_399](scripts/proc.script399.txt)  
+- [Script_400](scripts/clientscript.script400.txt)  
+- [Script_401](scripts/clientscript.script401.txt)  
+- [Script_402](scripts/clientscript.script402.txt)  
+- [Script_403](scripts/clientscript.script403.txt)  
+- [Script_404](scripts/clientscript.script404.txt)  
+- [Script_405](scripts/clientscript.script405.txt)  
+- [Script_406](scripts/clientscript.script406.txt)  
+- [Script_407](scripts/clientscript.script407.txt)  
+- [Script_408](scripts/clientscript.script408.txt)  
+- [Script_409](scripts/clientscript.script409.txt)  
+- [Script_410](scripts/clientscript.script410.txt)  
+- [Script_411](scripts/clientscript.script411.txt)  
+- [Script_412](scripts/clientscript.script412.txt)  
+- [Script_413](scripts/clientscript.script413.txt)  
+- [Script_414](scripts/clientscript.script414.txt)  
+- [Script_415](scripts/clientscript.script415.txt)  
+- [Script_416](scripts/clientscript.script416.txt)  
+- [Script_417](scripts/clientscript.script417.txt)  
+- [Script_418](scripts/clientscript.script418.txt)  
+- [Script_419](scripts/clientscript.script419.txt)  
+- [Script_420](scripts/clientscript.script420.txt)  
+- [Script_421](scripts/clientscript.script421.txt)  
+- [Script_422](scripts/clientscript.script422.txt)  
+- [Script_423](scripts/clientscript.script423.txt)  
+- [Script_424](scripts/clientscript.script424.txt)  
+- [Script_425](scripts/clientscript.script425.txt)  
+- [Script_426](scripts/clientscript.script426.txt)  
+- [Script_427](scripts/clientscript.script427.txt)  
+- [Script_428](scripts/proc.script428.txt)  
+- [Script_429](scripts/proc.script429.txt)  
+- [Script_430](scripts/clientscript.script430.txt)  
+- [Script_431](scripts/clientscript.script431.txt)  
+- [Script_432](scripts/clientscript.script432.txt)  
+- [Script_433](scripts/clientscript.script433.txt)  
+- [Script_434](scripts/clientscript.script434.txt)  
+- [Script_435](scripts/clientscript.script435.txt)  
+- [Script_436](scripts/clientscript.script436.txt)  
+- [Script_437](scripts/clientscript.script437.txt)  
+- [Script_438](scripts/clientscript.script438.txt)  
+- [Script_439](scripts/clientscript.script439.txt)  
+- [Script_440](scripts/clientscript.script440.txt)  
+- [Script_441](scripts/clientscript.script441.txt)  
+- [Script_442](scripts/clientscript.script442.txt)  
+- [Script_443](scripts/clientscript.script443.txt)  
+- [Script_444](scripts/clientscript.script444.txt)  
+- [Script_445](scripts/clientscript.script445.txt)  
+- [Script_446](scripts/clientscript.script446.txt)  
+- [Script_447](scripts/clientscript.script447.txt)  
+- [Script_448](scripts/clientscript.script448.txt)  
+- [Script_449](scripts/clientscript.script449.txt)  
+- [Script_450](scripts/clientscript.script450.txt)  
+- [Script_451](scripts/clientscript.script451.txt)  
+- [Script_452](scripts/clientscript.script452.txt)  
+- [Script_453](scripts/clientscript.script453.txt)  
+- [Script_454](scripts/clientscript.script454.txt)  
+- [Script_455](scripts/clientscript.script455.txt)  
+- [Script_456](scripts/clientscript.script456.txt)  
+- [Script_457](scripts/clientscript.script457.txt)  
+- [Script_458](scripts/clientscript.script458.txt)  
+- [Script_459](scripts/clientscript.script459.txt)  
+- [Script_460](scripts/clientscript.script460.txt)  
+- [Script_461](scripts/clientscript.script461.txt)  
+- [Script_462](scripts/clientscript.script462.txt)  
+- [Script_463](scripts/clientscript.script463.txt)  
+- [Script_464](scripts/clientscript.script464.txt)  
+- [Script_465](scripts/clientscript.script465.txt)  
+- [Script_466](scripts/clientscript.script466.txt)  
+- [Script_467](scripts/clientscript.script467.txt)  
+- [Script_468](scripts/clientscript.script468.txt)  
+- [Script_469](scripts/clientscript.script469.txt)  
+- [Script_470](scripts/clientscript.script470.txt)  
+- [Script_471](scripts/clientscript.script471.txt)  
+- [Script_472](scripts/clientscript.script472.txt)  
+- [Script_473](scripts/clientscript.script473.txt)  
+- [Script_474](scripts/clientscript.script474.txt)  
+- [Script_475](scripts/clientscript.script475.txt)  
+- [Script_476](scripts/clientscript.script476.txt)  
+- [Script_477](scripts/clientscript.script477.txt)  
+- [Script_478](scripts/clientscript.script478.txt)  
+- [Script_479](scripts/clientscript.script479.txt)  
+- [Script_480](scripts/clientscript.script480.txt)  
+- [Script_481](scripts/clientscript.script481.txt)  
+- [Script_482](scripts/clientscript.script482.txt)  
+- [Script_483](scripts/clientscript.script483.txt)  
+- [Script_484](scripts/clientscript.script484.txt)  
+- [Script_485](scripts/clientscript.script485.txt)  
+- [Script_486](scripts/clientscript.script486.txt)  
+- [Script_487](scripts/clientscript.script487.txt)  
+- [Script_488](scripts/clientscript.script488.txt)  
+- [Script_489](scripts/clientscript.script489.txt)  
+- [Script_490](scripts/clientscript.script490.txt)  
+- [Script_491](scripts/clientscript.script491.txt)  
+- [Script_492](scripts/clientscript.script492.txt)  
+- [Script_493](scripts/clientscript.script493.txt)  
+- [Script_494](scripts/clientscript.script494.txt)  
+- [Script_495](scripts/clientscript.script495.txt)  
+- [Script_496](scripts/clientscript.script496.txt)  
+- [Script_497](scripts/clientscript.script497.txt)  
+- [Script_498](scripts/clientscript.script498.txt)  
+- [Script_499](scripts/clientscript.script499.txt)  
+- [Script_500](scripts/clientscript.script500.txt)  
+- [Script_501](scripts/clientscript.script501.txt)  
+- [Script_502](scripts/clientscript.script502.txt)  
+- [Script_503](scripts/proc.script503.txt)  
+- [Script_504](scripts/proc.script504.txt)  
+- [Script_505](scripts/proc.script505.txt)  
+- [Script_506](scripts/proc.partnercheck.txt) `proc.partnercheck]`  
+- [Script_507](scripts/clientscript.script507.txt)  
+- [Script_508](scripts/clientscript.snapshot_main_load.txt) `clientscript.snapshot_main_load]`  
+- [Script_509](scripts/clientscript.script509.txt)  
+- [Script_510](scripts/clientscript.script510.txt)  
+- [Script_511](scripts/clientscript.script511.txt)  
+- [Script_512](scripts/clientscript.script512.txt)  
+- [Script_513](scripts/clientscript.script513.txt)  
+- [Script_514](scripts/clientscript.script514.txt)  
+- [Script_515](scripts/clientscript.script515.txt)  
+- [Script_516](scripts/clientscript.script516.txt)  
+- [Script_517](scripts/clientscript.script517.txt)  
+- [Script_518](scripts/clientscript.loot_ontimer.txt) `clientscript.loot_ontimer]`  
+- [Script_519](scripts/proc.script519.txt)  
+- [Script_520](scripts/proc.script520.txt)  
+- [Script_521](scripts/clientscript.initialise_stat_xp.txt) `clientscript.initialise_stat_xp]`  
+- [Script_522](scripts/clientscript.assist_skill_update.txt) `clientscript.assist_skill_update]`  
+- [Script_523](scripts/proc.enum_var.txt) `proc.enum_var]`  
+- [Script_524](scripts/clientscript.script524.txt)  
+- [Script_525](scripts/clientscript.stats_stat.txt) `clientscript.stats_stat]`  
+- [Script_526](scripts/clientscript.assist_comp_sethide.txt) `clientscript.assist_comp_sethide]`  
+- [Script_527](scripts/clientscript.assist_display_icon.txt) `clientscript.assist_display_icon]`  
+- [Script_528](scripts/proc.assist_set_icon.txt) `proc.assist_set_icon]`  
+- [Script_529](scripts/clientscript.assist_tooltip.txt) `clientscript.assist_tooltip]`  
+- [Script_530](scripts/proc.script530.txt)  
+- [Script_531](scripts/clientscript.script531.txt)  
+- [Script_532](scripts/clientscript.stats_statbase.txt) `clientscript.stats_statbase]`  
+- [Script_533](scripts/clientscript.assist_flash_button.txt) `clientscript.assist_flash_button]`  
+- [Script_534](scripts/clientscript.assist_clear_button.txt) `clientscript.assist_clear_button]`  
+- [Script_535](scripts/clientscript.script535.txt)  
+- [Script_536](scripts/clientscript.assist_overlay_flash_icon.txt) `clientscript.assist_overlay_flash_icon]`  
+- [Script_537](scripts/clientscript.assist_flash_icon.txt) `clientscript.assist_flash_icon]`  
+- [Script_538](scripts/clientscript.xbows_init.txt) `clientscript.xbows_init]`  
+- [Script_539](scripts/clientscript.xbows_bolts.txt) `clientscript.xbows_bolts]`  
+- [Script_540](scripts/clientscript.xbows_level.txt) `clientscript.xbows_level]`  
+- [Script_541](scripts/clientscript.crafting_level.txt) `clientscript.crafting_level]`  
+- [Script_542](scripts/clientscript.crafting_level_hide.txt) `clientscript.crafting_level_hide]`  
+- [Script_543](scripts/proc.assist_switch_var.txt) `proc.assist_switch_var]`  
+- [Script_544](scripts/clientscript.stats_skilltotal.txt) `clientscript.stats_skilltotal]`  
+- [Script_545](scripts/clientscript.stats_mouseover.txt) `clientscript.stats_mouseover]`  
+- [Script_546](scripts/proc.sideinit_comp_close.txt) `proc.sideinit_comp_close]`  
+- [Script_547](scripts/proc.stats_mouseover_create.txt) `proc.stats_mouseover_create]`  
+- [Script_548](scripts/clientscript.stats_update.txt) `clientscript.stats_update]`  
+- [Script_549](scripts/clientscript.script549.txt)  
+- [Script_550](scripts/clientscript.script550.txt)  
+- [Script_551](scripts/clientscript.script551.txt)  
+- [Script_552](scripts/clientscript.script552.txt)  
+- [Script_553](scripts/clientscript.script553.txt)  
+- [Script_554](scripts/clientscript.script554.txt)  
+- [Script_555](scripts/clientscript.script555.txt)  
+- [Script_556](scripts/clientscript.script556.txt)  
+- [Script_557](scripts/clientscript.script557.txt)  
+- [Script_558](scripts/proc.script558.txt)  
+- [Script_559](scripts/proc.script559.txt)  
+- [Script_560](scripts/clientscript.script560.txt)  
+- [Script_561](scripts/clientscript.duel2_select_type_vartrans.txt) `clientscript.duel2_select_type_vartrans]`  
+- [Script_562](scripts/clientscript.script562.txt)  
+- [Script_563](scripts/clientscript.script563.txt)  
+- [Script_564](scripts/clientscript.script564.txt)  
+- [Script_565](scripts/clientscript.script565.txt)  
+- [Script_566](scripts/clientscript.script566.txt)  
+- [Script_567](scripts/clientscript.duel_stake_vartrans.txt) `clientscript.duel_stake_vartrans]`  
+- [Script_568](scripts/clientscript.addtooltip_dynamic.txt) `clientscript.addtooltip_dynamic]`  
+- [Script_569](scripts/proc.addtooltip_action_dynamic.txt) `proc.addtooltip_action_dynamic]`  
+- [Script_570](scripts/clientscript.objdialog_reset.txt) `clientscript.objdialog_reset]`  
+- [Script_571](scripts/clientscript.objdialog_close.txt) `clientscript.objdialog_close]`  
+- [Script_572](scripts/clientscript.objdialog_ondialogabort.txt) `clientscript.objdialog_ondialogabort]`  
+- [Script_573](scripts/proc.objdialog_close.txt) `proc.objdialog_close]`  
+- [Script_574](scripts/clientscript.objdialog_onkey.txt) `clientscript.objdialog_onkey]`  
+- [Script_575](scripts/clientscript.objdialog_delay_timer.txt) `clientscript.objdialog_delay_timer]`  
+- [Script_576](scripts/proc.objdialog_refreshsearch.txt) `proc.objdialog_refreshsearch]`  
+- [Script_577](scripts/proc.objdialog_dosearch.txt) `proc.objdialog_dosearch]`  
+- [Script_578](scripts/proc.objdialog_doscrollbar.txt) `proc.objdialog_doscrollbar]`  
+- [Script_579](scripts/clientscript.objdialog_highlight.txt) `clientscript.objdialog_highlight]`  
+- [Script_580](scripts/clientscript.objdialog_select.txt) `clientscript.objdialog_select]`  
+- [Script_581](scripts/clientscript.script581.txt)  
+- [Script_582](scripts/proc.script582.txt)  
+- [Script_583](scripts/clientscript.script583.txt)  
+- [Script_584](scripts/proc.script584.txt)  
+- [Script_585](scripts/clientscript.stockmarket_onload.txt) `clientscript.stockmarket_onload]`  
+- [Script_586](scripts/clientscript.stockmarket_onstocktransmit.txt) `clientscript.stockmarket_onstocktransmit]`  
+- [Script_587](scripts/clientscript.stockmarket_onvartransmit.txt) `clientscript.stockmarket_onvartransmit]`  
+- [Script_588](scripts/clientscript.script588.txt)  
+- [Script_589](scripts/clientscript.stockmarket_oninvtransmit.txt) `clientscript.stockmarket_oninvtransmit]`  
+- [Script_590](scripts/clientscript.stockmarket_offerbutton.txt) `clientscript.stockmarket_offerbutton]`  
+- [Script_591](scripts/clientscript.stockmarket_choosecancel.txt) `clientscript.stockmarket_choosecancel]`  
+- [Script_592](scripts/clientscript.stockmarket_choosebuy.txt) `clientscript.stockmarket_choosebuy]`  
+- [Script_593](scripts/proc.script593.txt)  
+- [Script_594](scripts/proc.script594.txt)  
+- [Script_595](scripts/clientscript.script595.txt)  
+- [Script_596](scripts/clientscript.stock_offercount_minus.txt) `clientscript.stock_offercount_minus]`  
+- [Script_597](scripts/clientscript.stock_offercount_plus.txt) `clientscript.stock_offercount_plus]`  
+- [Script_598](scripts/clientscript.script598.txt)  
+- [Script_599](scripts/clientscript.script599.txt)  
+- [Script_600](scripts/clientscript.script600.txt)  
+- [Script_601](scripts/clientscript.script601.txt)  
+- [Script_602](scripts/proc.script602.txt)  
+- [Script_603](scripts/clientscript.script603.txt)  
+- [Script_604](scripts/clientscript.stock_offerprice_minus.txt) `clientscript.stock_offerprice_minus]`  
+- [Script_605](scripts/clientscript.stock_offerprice_plus.txt) `clientscript.stock_offerprice_plus]`  
+- [Script_606](scripts/clientscript.script606.txt)  
+- [Script_607](scripts/clientscript.script607.txt)  
+- [Script_608](scripts/clientscript.script608.txt)  
+- [Script_609](scripts/proc.script609.txt)  
+- [Script_610](scripts/clientscript.script610.txt)  
+- [Script_611](scripts/clientscript.script611.txt)  
+- [Script_612](scripts/clientscript.script612.txt)  
+- [Script_613](scripts/clientscript.script613.txt)  
+- [Script_614](scripts/clientscript.script614.txt)  
+- [Script_615](scripts/clientscript.script615.txt)  
+- [Script_616](scripts/clientscript.script616.txt)  
+- [Script_617](scripts/clientscript.script617.txt)  
+- [Script_618](scripts/clientscript.script618.txt)  
+- [Script_619](scripts/clientscript.script619.txt)  
+- [Script_620](scripts/clientscript.script620.txt)  
+- [Script_621](scripts/proc.script621.txt)  
+- [Script_622](scripts/proc.script622.txt)  
+- [Script_623](scripts/proc.script623.txt)  
+- [Script_624](scripts/proc.script624.txt)  
+- [Script_625](scripts/proc.script625.txt)  
+- [Script_626](scripts/proc.script626.txt)  
+- [Script_627](scripts/proc.script627.txt)  
+- [Script_628](scripts/proc.script628.txt)  
+- [Script_629](scripts/clientscript.script629.txt)  
+- [Script_630](scripts/proc.script630.txt)  
+- [Script_631](scripts/clientscript.script631.txt)  
+- [Script_632](scripts/proc.script632.txt)  
+- [Script_633](scripts/clientscript.script633.txt)  
+- [Script_634](scripts/clientscript.script634.txt)  
+- [Script_635](scripts/clientscript.script635.txt)  
+- [Script_636](scripts/proc.script636.txt)  
+- [Script_637](scripts/clientscript.script637.txt)  
+- [Script_638](scripts/proc.script638.txt)  
+- [Script_639](scripts/clientscript.script639.txt)  
+- [Script_640](scripts/proc.script640.txt)  
+- [Script_641](scripts/clientscript.script641.txt)  
+- [Script_642](scripts/proc.script642.txt)  
+- [Script_643](scripts/clientscript.script643.txt)  
+- [Script_644](scripts/proc.script644.txt)  
+- [Script_645](scripts/clientscript.script645.txt)  
+- [Script_646](scripts/proc.script646.txt)  
+- [Script_647](scripts/clientscript.script647.txt)  
+- [Script_648](scripts/clientscript.script648.txt)  
+- [Script_649](scripts/clientscript.script649.txt)  
+- [Script_650](scripts/clientscript.script650.txt)  
+- [Script_651](scripts/proc.script651.txt)  
+- [Script_652](scripts/proc.script652.txt)  
+- [Script_653](scripts/clientscript.stock_v2_stone_button_filled.txt) `clientscript.stock_v2_stone_button_filled]`  
+- [Script_654](scripts/clientscript.stockcollect_onload.txt) `clientscript.stockcollect_onload]`  
+- [Script_655](scripts/clientscript.script655.txt)  
+- [Script_656](scripts/clientscript.script656.txt)  
+- [Script_657](scripts/proc.script657.txt)  
+- [Script_658](scripts/proc.script658.txt)  
+- [Script_659](scripts/proc.script659.txt)  
+- [Script_660](scripts/proc.script660.txt)  
+- [Script_661](scripts/proc.script661.txt)  
+- [Script_662](scripts/proc.script662.txt)  
+- [Script_663](scripts/clientscript.gravestone_plaque_setup.txt) `clientscript.gravestone_plaque_setup]`  
+- [Script_664](scripts/clientscript.script664.txt)  
+- [Script_665](scripts/clientscript.script665.txt)  
+- [Script_666](scripts/proc.script666.txt)  
+- [Script_667](scripts/proc.script667.txt)  
+- [Script_668](scripts/proc.script668.txt)  
+- [Script_669](scripts/clientscript.script669.txt)  
+- [Script_670](scripts/proc.script670.txt)  
+- [Script_671](scripts/proc.script671.txt)  
+- [Script_672](scripts/proc.script672.txt)  
+- [Script_673](scripts/proc.script673.txt)  
+- [Script_674](scripts/proc.script674.txt)  
+- [Script_675](scripts/clientscript.script675.txt)  
+- [Script_676](scripts/clientscript.script676.txt)  
+- [Script_677](scripts/clientscript.script677.txt)  
+- [Script_678](scripts/clientscript.partyroom_interface_setup.txt) `clientscript.partyroom_interface_setup]`  
+- [Script_679](scripts/proc.v2_stone_button.txt) `proc.v2_stone_button]`  
+- [Script_680](scripts/proc.v2_stone_button_filled.txt) `proc.v2_stone_button_filled]`  
+- [Script_681](scripts/clientscript.gravestone_shop_setup.txt) `clientscript.gravestone_shop_setup]`  
+- [Script_682](scripts/proc.gravestone_shop_createbutton.txt) `proc.gravestone_shop_createbutton]`  
+- [Script_683](scripts/proc.gravestone_shop_model.txt) `proc.gravestone_shop_model]`  
+- [Script_684](scripts/proc.script684.txt)  
+- [Script_685](scripts/clientscript.script685.txt)  
+- [Script_686](scripts/proc.script686.txt)  
+- [Script_687](scripts/clientscript.gravestone_shop_select.txt) `clientscript.gravestone_shop_select]`  
+- [Script_688](scripts/clientscript.cc_graphic_swapper.txt) `clientscript.cc_graphic_swapper]`  
+- [Script_689](scripts/proc.script689.txt)  
+- [Script_690](scripts/clientscript.script690.txt)  
+- [Script_691](scripts/clientscript.script691.txt)  
+- [Script_692](scripts/clientscript.worldmap_keysort_button.txt) `clientscript.worldmap_keysort_button]`  
+- [Script_693](scripts/proc.rgb_to_hex.txt) `proc.rgb_to_hex]`  
+- [Script_694](scripts/clientscript.script694.txt)  
+- [Script_695](scripts/clientscript.interface_invother_init_big.txt) `clientscript.interface_invother_init_big]`  
+- [Script_696](scripts/clientscript.bankpin_cancel.txt) `clientscript.bankpin_cancel]`  
+- [Script_697](scripts/clientscript.script697.txt)  
+- [Script_698](scripts/clientscript.script698.txt)  
+- [Script_699](scripts/clientscript.script699.txt)  
+- [Script_700](scripts/clientscript.bankpin_buttonnumber.txt) `clientscript.bankpin_buttonnumber]`  
+- [Script_701](scripts/clientscript.imp_bank_setup.txt) `clientscript.imp_bank_setup]`  
+- [Script_702](scripts/clientscript.openurl_nologin.txt) `clientscript.openurl_nologin]`  
+- [Script_703](scripts/clientscript.script703.txt)  
+- [Script_704](scripts/proc.bank_v2_get_tab_scrollpos.txt) `proc.bank_v2_get_tab_scrollpos]`  
+- [Script_705](scripts/proc.bank_v2_set_tab_scrollpos.txt) `proc.bank_v2_set_tab_scrollpos]`  
+- [Script_706](scripts/proc.bank_v2_get_tab_size.txt) `proc.bank_v2_get_tab_size]`  
+- [Script_707](scripts/clientscript.script707.txt)  
+- [Script_708](scripts/clientscript.script708.txt)  
+- [Script_709](scripts/clientscript.script709.txt)  
+- [Script_710](scripts/clientscript.script710.txt)  
+- [Script_711](scripts/proc.script711.txt)  
+- [Script_712](scripts/clientscript.script712.txt)  
+- [Script_713](scripts/proc.script713.txt)  
+- [Script_714](scripts/clientscript.interface_flash_slot_static.txt) `clientscript.interface_flash_slot_static]`  
+- [Script_715](scripts/clientscript.script715.txt)  
+- [Script_716](scripts/clientscript.script716.txt)  
+- [Script_717](scripts/clientscript.script717.txt)  
+- [Script_718](scripts/clientscript.script718.txt)  
+- [Script_719](scripts/proc.script719.txt)  
+- [Script_720](scripts/clientscript.script720.txt)  
+- [Script_721](scripts/clientscript.window_resize.txt) `clientscript.window_resize]`  
+- [Script_722](scripts/proc.window_resize.txt) `proc.window_resize]`  
+- [Script_723](scripts/proc.script723.txt)  
+- [Script_724](scripts/clientscript.statusicons_addtooltip.txt) `clientscript.statusicons_addtooltip]`  
+- [Script_725](scripts/clientscript.script725.txt)  
+- [Script_726](scripts/clientscript.script726.txt)  
+- [Script_727](scripts/clientscript.script727.txt)  
+- [Script_728](scripts/clientscript.script728.txt)  
+- [Script_729](scripts/clientscript.script729.txt)  
+- [Script_730](scripts/proc.script730.txt)  
+- [Script_731](scripts/clientscript.rcguild_overlay_load.txt) `clientscript.rcguild_overlay_load]`  
+- [Script_732](scripts/clientscript.fade_out_darkness.txt) `clientscript.fade_out_darkness]`  
+- [Script_733](scripts/clientscript.fade_in_darkness.txt) `clientscript.fade_in_darkness]`  
+- [Script_734](scripts/proc.int_to_bool.txt) `proc.int_to_bool]`  
+- [Script_735](scripts/clientscript.arrow_update.txt) `clientscript.arrow_update]`  
+- [Script_736](scripts/proc.arrow_set.txt) `proc.arrow_set]`  
+- [Script_737](scripts/proc.script737.txt)  
+- [Script_738](scripts/proc.script738.txt)  
+- [Script_739](scripts/proc.script739.txt)  
+- [Script_740](scripts/clientscript.script740.txt)  
+- [Script_741](scripts/clientscript.script741.txt)  
+- [Script_742](scripts/clientscript.script742.txt)  
+- [Script_743](scripts/clientscript.script743.txt)  
+- [Script_744](scripts/proc.script744.txt)  
+- [Script_745](scripts/clientscript.script745.txt)  
+- [Script_746](scripts/clientscript.script746.txt)  
+- [Script_747](scripts/clientscript.script747.txt)  
+- [Script_748](scripts/clientscript.script748.txt)  
+- [Script_749](scripts/clientscript.script749.txt)  
+- [Script_750](scripts/proc.script750.txt)  
+- [Script_751](scripts/clientscript.lore_head_update.txt) `clientscript.lore_head_update]`  
+- [Script_752](scripts/clientscript.script752.txt)  
+- [Script_753](scripts/clientscript.script753.txt)  
+- [Script_754](scripts/clientscript.script754.txt)  
+- [Script_755](scripts/clientscript.lore_points_update.txt) `clientscript.lore_points_update]`  
+- [Script_756](scripts/clientscript.script756.txt)  
+- [Script_757](scripts/clientscript.lore_interface_inv_init.txt) `clientscript.lore_interface_inv_init]`  
+- [Script_758](scripts/clientscript.lore_interface_inv_update.txt) `clientscript.lore_interface_inv_update]`  
+- [Script_759](scripts/proc.lore_interface_inv_update.txt) `proc.lore_interface_inv_update]`  
+- [Script_760](scripts/proc.script760.txt)  
+- [Script_761](scripts/proc.script761.txt)  
+- [Script_762](scripts/proc.script762.txt)  
+- [Script_763](scripts/clientscript.script763.txt)  
+- [Script_764](scripts/clientscript.script764.txt)  
+- [Script_765](scripts/proc.script765.txt)  
+- [Script_766](scripts/proc.lore_pouch_checker.txt) `proc.lore_pouch_checker]`  
+- [Script_767](scripts/proc.lore_obj_checker.txt) `proc.lore_obj_checker]`  
+- [Script_768](scripts/proc.lore_magic_pouch_checker.txt) `proc.lore_magic_pouch_checker]`  
+- [Script_769](scripts/clientscript.lore_pouch_counter.txt) `clientscript.lore_pouch_counter]`  
+- [Script_770](scripts/clientscript.lore_addtooltip.txt) `clientscript.lore_addtooltip]`  
+- [Script_771](scripts/proc.lore_itemcount.txt) `proc.lore_itemcount]`  
+- [Script_772](scripts/clientscript.topstat_run_text_init.txt) `clientscript.topstat_run_text_init]`  
+- [Script_773](scripts/proc.lore_updateicon.txt) `proc.lore_updateicon]`  
+- [Script_774](scripts/clientscript.script774.txt)  
+- [Script_775](scripts/proc.script775.txt)  
+- [Script_776](scripts/clientscript.script776.txt)  
+- [Script_777](scripts/clientscript.script777.txt)  
+- [Script_778](scripts/clientscript.lore_deltooltip.txt) `clientscript.lore_deltooltip]`  
+- [Script_779](scripts/clientscript.script779.txt)  
+- [Script_780](scripts/proc.lore_tostring.txt) `proc.lore_tostring]`  
+- [Script_781](scripts/proc.lore_tostring_pouch.txt) `proc.lore_tostring_pouch]`  
+- [Script_782](scripts/clientscript.lore_blanktip.txt) `clientscript.lore_blanktip]`  
+- [Script_783](scripts/clientscript.quickchat_tutorial_loadcontent.txt) `clientscript.quickchat_tutorial_loadcontent]`  
+- [Script_784](scripts/clientscript.quickchat_tutorial_showpage.txt) `clientscript.quickchat_tutorial_showpage]`  
+- [Script_785](scripts/proc.script785.txt)  
+- [Script_786](scripts/clientscript.script786.txt)  
+- [Script_787](scripts/clientscript.equipscreen_init.txt) `clientscript.equipscreen_init]`  
+- [Script_788](scripts/proc.script788.txt)  
+- [Script_789](scripts/clientscript.script789.txt)  
+- [Script_790](scripts/clientscript.script790.txt)  
+- [Script_791](scripts/clientscript.script791.txt)  
+- [Script_792](scripts/clientscript.script792.txt)  
+- [Script_793](scripts/proc.script793.txt)  
+- [Script_794](scripts/proc.script794.txt)  
+- [Script_795](scripts/proc.wolf_pouch_checker.txt) `proc.wolf_pouch_checker]`  
+- [Script_796](scripts/clientscript.script796.txt)  
+- [Script_797](scripts/clientscript.script797.txt)  
+- [Script_798](scripts/proc.script798.txt)  
+- [Script_799](scripts/proc.wolf_magic_pouch_checker.txt) `proc.wolf_magic_pouch_checker]`  
+- [Script_800](scripts/clientscript.script800.txt)  
+- [Script_801](scripts/clientscript.script801.txt)  
+- [Script_802](scripts/proc.arrow_update.txt) `proc.arrow_update]`  
+- [Script_803](scripts/clientscript.script803.txt)  
+- [Script_804](scripts/proc.script804.txt)  
+- [Script_805](scripts/proc.script805.txt)  
+- [Script_806](scripts/proc.script806.txt)  
+- [Script_807](scripts/proc.topstat_calculate_percent.txt) `proc.topstat_calculate_percent]`  
+- [Script_808](scripts/clientscript.script808.txt)  
+- [Script_809](scripts/clientscript.script809.txt)  
+- [Script_810](scripts/proc.script810.txt)  
+- [Script_811](scripts/clientscript.script811.txt)  
+- [Script_812](scripts/clientscript.script812.txt)  
+- [Script_813](scripts/proc.script813.txt)  
+- [Script_814](scripts/proc.script814.txt)  
+- [Script_815](scripts/clientscript.script815.txt)  
+- [Script_816](scripts/clientscript.script816.txt)  
+- [Script_817](scripts/proc.script817.txt)  
+- [Script_818](scripts/proc.script818.txt)  
+- [Script_819](scripts/clientscript.script819.txt)  
+- [Script_820](scripts/clientscript.script820.txt)  
+- [Script_821](scripts/proc.script821.txt)  
+- [Script_822](scripts/proc.script822.txt)  
+- [Script_823](scripts/proc.script823.txt)  
+- [Script_824](scripts/proc.script824.txt)  
+- [Script_825](scripts/clientscript.stats_scrollbar_setup.txt) `clientscript.stats_scrollbar_setup]`  
+- [Script_826](scripts/clientscript.script826.txt)  
+- [Script_827](scripts/clientscript.script827.txt)  
+- [Script_828](scripts/clientscript.script828.txt)  
+- [Script_829](scripts/clientscript.script829.txt)  
+- [Script_830](scripts/clientscript.script830.txt)  
+- [Script_831](scripts/proc.script831.txt)  
+- [Script_832](scripts/clientscript.music_v3_setcolour.txt) `clientscript.music_v3_setcolour]`  
+- [Script_833](scripts/clientscript.music_ops.txt) `clientscript.music_ops]`  
+- [Script_834](scripts/clientscript.script834.txt)  
+- [Script_835](scripts/clientscript.script835.txt)  
+- [Script_836](scripts/clientscript.script836.txt)  
+- [Script_837](scripts/proc.music_getvar.txt) `proc.music_getvar]`  
+- [Script_838](scripts/clientscript.topstat_run_text_update.txt) `clientscript.topstat_run_text_update]`  
+- [Script_839](scripts/clientscript.script839.txt)  
+- [Script_840](scripts/clientscript.script840.txt)  
+- [Script_841](scripts/proc.script841.txt)  
+- [Script_842](scripts/clientscript.script842.txt)  
+- [Script_843](scripts/clientscript.script843.txt)  
+- [Script_844](scripts/clientscript.script844.txt)  
+- [Script_845](scripts/clientscript.script845.txt)  
+- [Script_846](scripts/proc.script846.txt)  
+- [Script_847](scripts/clientscript.script847.txt)  
+- [Script_848](scripts/clientscript.script848.txt)  
+- [Script_849](scripts/proc.script849.txt)  
+- [Script_850](scripts/proc.script850.txt)  
+- [Script_851](scripts/proc.script851.txt)  
+- [Script_852](scripts/proc.script852.txt)  
+- [Script_853](scripts/proc.script853.txt)  
+- [Script_854](scripts/proc.script854.txt)  
+- [Script_855](scripts/proc.script855.txt)  
+- [Script_856](scripts/clientscript.script856.txt)  
+- [Script_857](scripts/clientscript.script857.txt)  
+- [Script_858](scripts/clientscript.script858.txt)  
+- [Script_859](scripts/clientscript.script859.txt)  
+- [Script_860](scripts/clientscript.script860.txt)  
+- [Script_861](scripts/proc.script861.txt)  
+- [Script_862](scripts/clientscript.script862.txt)  
+- [Script_863](scripts/clientscript.script863.txt)  
+- [Script_864](scripts/clientscript.script864.txt)  
+- [Script_865](scripts/clientscript.script865.txt)  
+- [Script_866](scripts/clientscript.script866.txt)  
+- [Script_867](scripts/proc.script867.txt)  
+- [Script_868](scripts/clientscript.script868.txt)  
+- [Script_869](scripts/proc.script869.txt)  
+- [Script_870](scripts/clientscript.script870.txt)  
+- [Script_871](scripts/clientscript.script871.txt)  
+- [Script_872](scripts/clientscript.script872.txt)  
+- [Script_873](scripts/clientscript.script873.txt)  
+- [Script_874](scripts/clientscript.script874.txt)  
+- [Script_875](scripts/clientscript.script875.txt)  
+- [Script_876](scripts/clientscript.script876.txt)  
+- [Script_877](scripts/clientscript.script877.txt)  
+- [Script_878](scripts/clientscript.script878.txt)  
+- [Script_879](scripts/clientscript.script879.txt)  
+- [Script_880](scripts/clientscript.script880.txt)  
+- [Script_881](scripts/clientscript.script881.txt)  
+- [Script_882](scripts/clientscript.script882.txt)  
+- [Script_883](scripts/clientscript.script883.txt)  
+- [Script_884](scripts/clientscript.script884.txt)  
+- [Script_885](scripts/clientscript.script885.txt)  
+- [Script_886](scripts/clientscript.script886.txt)  
+- [Script_887](scripts/clientscript.script887.txt)  
+- [Script_888](scripts/clientscript.script888.txt)  
+- [Script_889](scripts/clientscript.script889.txt)  
+- [Script_890](scripts/clientscript.script890.txt)  
+- [Script_891](scripts/clientscript.script891.txt)  
+- [Script_892](scripts/clientscript.script892.txt)  
+- [Script_893](scripts/clientscript.script893.txt)  
+- [Script_894](scripts/clientscript.script894.txt)  
+- [Script_895](scripts/clientscript.script895.txt)  
+- [Script_896](scripts/proc.script896.txt)  
+- [Script_897](scripts/clientscript.script897.txt)  
+- [Script_898](scripts/clientscript.script898.txt)  
+- [Script_899](scripts/clientscript.script899.txt)  
+- [Script_900](scripts/clientscript.script900.txt)  
+- [Script_901](scripts/clientscript.script901.txt)  
+- [Script_902](scripts/clientscript.script902.txt)  
+- [Script_903](scripts/clientscript.script903.txt)  
+- [Script_904](scripts/clientscript.script904.txt)  
+- [Script_905](scripts/clientscript.script905.txt)  
+- [Script_906](scripts/clientscript.script906.txt)  
+- [Script_907](scripts/clientscript.script907.txt)  
+- [Script_908](scripts/clientscript.script908.txt)  
+- [Script_909](scripts/clientscript.script909.txt)  
+- [Script_910](scripts/clientscript.script910.txt)  
+- [Script_911](scripts/clientscript.script911.txt)  
+- [Script_912](scripts/clientscript.script912.txt)  
+- [Script_913](scripts/clientscript.script913.txt)  
+- [Script_914](scripts/clientscript.script914.txt)  
+- [Script_915](scripts/proc.v2_stone_button_out_filled.txt) `proc.v2_stone_button_out_filled]`  
+- [Script_916](scripts/clientscript.script916.txt)  
+- [Script_917](scripts/clientscript.script917.txt)  
+- [Script_918](scripts/clientscript.script918.txt)  
+- [Script_919](scripts/clientscript.script919.txt)  
+- [Script_920](scripts/clientscript.script920.txt)  
+- [Script_921](scripts/clientscript.script921.txt)  
+- [Script_922](scripts/clientscript.script922.txt)  
+- [Script_923](scripts/clientscript.script923.txt)  
+- [Script_924](scripts/clientscript.script924.txt)  
+- [Script_925](scripts/clientscript.script925.txt)  
+- [Script_926](scripts/clientscript.script926.txt)  
+- [Script_927](scripts/proc.script927.txt)  
+- [Script_928](scripts/proc.script928.txt)  
+- [Script_929](scripts/clientscript.script929.txt)  
+- [Script_930](scripts/clientscript.script930.txt)  
+- [Script_931](scripts/proc.script931.txt)  
+- [Script_932](scripts/proc.script932.txt)  
+- [Script_933](scripts/proc.script933.txt)  
+- [Script_934](scripts/clientscript.script934.txt)  
+- [Script_935](scripts/proc.script935.txt)  
+- [Script_936](scripts/proc.script936.txt)  
+- [Script_937](scripts/clientscript.script937.txt)  
+- [Script_938](scripts/clientscript.script938.txt)  
+- [Script_939](scripts/clientscript.script939.txt)  
+- [Script_940](scripts/proc.script940.txt)  
+- [Script_941](scripts/proc.script941.txt)  
+- [Script_942](scripts/proc.script942.txt)  
+- [Script_943](scripts/proc.script943.txt)  
+- [Script_944](scripts/clientscript.script944.txt)  
+- [Script_945](scripts/clientscript.script945.txt)  
+- [Script_946](scripts/proc.script946.txt)  
+- [Script_947](scripts/clientscript.script947.txt)  
+- [Script_948](scripts/clientscript.script948.txt)  
+- [Script_949](scripts/proc.script949.txt)  
+- [Script_950](scripts/proc.script950.txt)  
+- [Script_951](scripts/proc.script951.txt)  
+- [Script_952](scripts/proc.script952.txt)  
+- [Script_953](scripts/clientscript.script953.txt)  
+- [Script_954](scripts/clientscript.script954.txt)  
+- [Script_955](scripts/clientscript.script955.txt)  
+- [Script_956](scripts/clientscript.script956.txt)  
+- [Script_957](scripts/clientscript.fairyrings_log_init.txt) `clientscript.fairyrings_log_init]`  
+- [Script_958](scripts/clientscript.fairyrings_log_shuffle.txt) `clientscript.fairyrings_log_shuffle]`  
+- [Script_959](scripts/proc.fairyrings_log_sort.txt) `proc.fairyrings_log_sort]`  
+- [Script_960](scripts/clientscript.script960.txt)  
+- [Script_961](scripts/clientscript.script961.txt)  
+- [Script_962](scripts/clientscript.fairyrings_clockwise.txt) `clientscript.fairyrings_clockwise]`  
+- [Script_963](scripts/clientscript.fairyrings_anticlockwise.txt) `clientscript.fairyrings_anticlockwise]`  
+- [Script_964](scripts/clientscript.fairyrings_vartransmit.txt) `clientscript.fairyrings_vartransmit]`  
+- [Script_965](scripts/clientscript.fairyrings_rotate.txt) `clientscript.fairyrings_rotate]`  
+- [Script_966](scripts/proc.fairyrings_rotate_component.txt) `proc.fairyrings_rotate_component]`  
+- [Script_967](scripts/proc.script967.txt)  
+- [Script_968](scripts/clientscript.script968.txt)  
+- [Script_969](scripts/clientscript.script969.txt)  
+- [Script_970](scripts/proc.script970.txt)  
+- [Script_971](scripts/clientscript.script971.txt)  
+- [Script_972](scripts/clientscript.script972.txt)  
+- [Script_973](scripts/proc.script973.txt)  
+- [Script_974](scripts/proc.script974.txt)  
+- [Script_975](scripts/proc.script975.txt)  
+- [Script_976](scripts/proc.script976.txt)  
+- [Script_977](scripts/proc.script977.txt)  
+- [Script_978](scripts/proc.script978.txt)  
+- [Script_979](scripts/proc.script979.txt)  
+- [Script_980](scripts/proc.script980.txt)  
+- [Script_981](scripts/proc.script981.txt)  
+- [Script_982](scripts/proc.script982.txt)  
+- [Script_983](scripts/proc.script983.txt)  
+- [Script_984](scripts/proc.script984.txt)  
+- [Script_985](scripts/proc.script985.txt)  
+- [Script_986](scripts/proc.script986.txt)  
+- [Script_987](scripts/proc.script987.txt)  
+- [Script_988](scripts/proc.script988.txt)  
+- [Script_989](scripts/proc.script989.txt)  
+- [Script_990](scripts/proc.script990.txt)  
+- [Script_991](scripts/proc.script991.txt)  
+- [Script_992](scripts/proc.script992.txt)  
+- [Script_993](scripts/proc.script993.txt)  
+- [Script_994](scripts/proc.script994.txt)  
+- [Script_995](scripts/proc.script995.txt)  
+- [Script_996](scripts/proc.script996.txt)  
+- [Script_997](scripts/proc.script997.txt)  
+- [Script_998](scripts/proc.script998.txt)  
+- [Script_999](scripts/proc.script999.txt)  
+- [Script_1000](scripts/proc.script1000.txt)  
+- [Script_1001](scripts/proc.script1001.txt)  
+- [Script_1002](scripts/proc.script1002.txt)  
+- [Script_1003](scripts/proc.script1003.txt)  
+- [Script_1004](scripts/proc.script1004.txt)  
+- [Script_1005](scripts/proc.script1005.txt)  
+- [Script_1006](scripts/proc.script1006.txt)  
+- [Script_1007](scripts/proc.script1007.txt)  
+- [Script_1008](scripts/proc.script1008.txt)  
+- [Script_1009](scripts/proc.script1009.txt)  
+- [Script_1010](scripts/proc.script1010.txt)  
+- [Script_1011](scripts/proc.script1011.txt)  
+- [Script_1012](scripts/proc.script1012.txt)  
+- [Script_1013](scripts/proc.script1013.txt)  
+- [Script_1014](scripts/proc.script1014.txt)  
+- [Script_1015](scripts/proc.script1015.txt)  
+- [Script_1016](scripts/proc.script1016.txt)  
+- [Script_1017](scripts/proc.script1017.txt)  
+- [Script_1018](scripts/proc.script1018.txt)  
+- [Script_1019](scripts/proc.script1019.txt)  
+- [Script_1020](scripts/proc.script1020.txt)  
+- [Script_1021](scripts/proc.script1021.txt)  
+- [Script_1022](scripts/proc.script1022.txt)  
+- [Script_1023](scripts/proc.script1023.txt)  
+- [Script_1024](scripts/proc.script1024.txt)  
+- [Script_1025](scripts/proc.script1025.txt)  
+- [Script_1026](scripts/clientscript.quickchat_tutorial_button_mouseover.txt) `clientscript.quickchat_tutorial_button_mouseover]`  
+- [Script_1027](scripts/clientscript.quickchat_tutorial_button_mouseleave.txt) `clientscript.quickchat_tutorial_button_mouseleave]`  
+- [Script_1028](scripts/clientscript.script1028.txt)  
+- [Script_1029](scripts/proc.script1029.txt)  
+- [Script_1030](scripts/proc.script1030.txt)  
+- [Script_1031](scripts/clientscript.script1031.txt)  
+- [Script_1032](scripts/proc.quickchat_tutorial_showpage.txt) `proc.quickchat_tutorial_showpage]`  
+- [Script_1033](scripts/proc.quickchat_tutorial_displaydata.txt) `proc.quickchat_tutorial_displaydata]`  
+- [Script_1034](scripts/proc.quickchat_tutorial_addtext.txt) `proc.quickchat_tutorial_addtext]`  
+- [Script_1035](scripts/clientscript.script1035.txt)  
+- [Script_1036](scripts/proc.script1036.txt)  
+- [Script_1037](scripts/proc.quickchat_phrase_objdialog.txt) `proc.quickchat_phrase_objdialog]`  
+- [Script_1038](scripts/clientscript.quickchat_phrase_objdialog_onkey.txt) `clientscript.quickchat_phrase_objdialog_onkey]`  
+- [Script_1039](scripts/proc.quickchat_objdialog_dosearch.txt) `proc.quickchat_objdialog_dosearch]`  
+- [Script_1040](scripts/clientscript.script1040.txt)  
+- [Script_1041](scripts/proc.quickchat_objdialog_refreshsearch.txt) `proc.quickchat_objdialog_refreshsearch]`  
+- [Script_1042](scripts/proc.quickchat_objdialog_doscrollbar.txt) `proc.quickchat_objdialog_doscrollbar]`  
+- [Script_1043](scripts/clientscript.quickchat_objdialog_highlight.txt) `clientscript.quickchat_objdialog_highlight]`  
+- [Script_1044](scripts/proc.script1044.txt)  
+- [Script_1045](scripts/clientscript.script1045.txt)  
+- [Script_1046](scripts/clientscript.script1046.txt)  
+- [Script_1047](scripts/proc.quickchat_phrase_countdialog.txt) `proc.quickchat_phrase_countdialog]`  
+- [Script_1048](scripts/clientscript.quickchat_phrase_countdialog_onkey.txt) `clientscript.quickchat_phrase_countdialog_onkey]`  
+- [Script_1049](scripts/clientscript.quickchat_open_onop.txt) `clientscript.quickchat_open_onop]`  
+- [Script_1050](scripts/proc.quickchat_open.txt) `proc.quickchat_open]`  
+- [Script_1051](scripts/proc.quickchat_open_context.txt) `proc.quickchat_open_context]`  
+- [Script_1052](scripts/proc.quickchat_respond.txt) `proc.quickchat_respond]`  
+- [Script_1053](scripts/clientscript.quickchat_close.txt) `clientscript.quickchat_close]`  
+- [Script_1054](scripts/proc.quickchat_close.txt) `proc.quickchat_close]`  
+- [Script_1055](scripts/clientscript.quickchat_closebutton_mouseover.txt) `clientscript.quickchat_closebutton_mouseover]`  
+- [Script_1056](scripts/clientscript.quickchat_closebutton_mouseleave.txt) `clientscript.quickchat_closebutton_mouseleave]`  
+- [Script_1057](scripts/clientscript.script1057.txt)  
+- [Script_1058](scripts/clientscript.script1058.txt)  
+- [Script_1059](scripts/clientscript.quickchat_onkey.txt) `clientscript.quickchat_onkey]`  
+- [Script_1060](scripts/clientscript.quickchat_menu_select.txt) `clientscript.quickchat_menu_select]`  
+- [Script_1061](scripts/proc.quickchat_menu_select.txt) `proc.quickchat_menu_select]`  
+- [Script_1062](scripts/proc.quickchat_menu_add.txt) `proc.quickchat_menu_add]`  
+- [Script_1063](scripts/proc.quickchat_response_add.txt) `proc.quickchat_response_add]`  
+- [Script_1064](scripts/proc.quickchat_menu_scroll.txt) `proc.quickchat_menu_scroll]`  
+- [Script_1065](scripts/clientscript.quickchat_menu_scroll.txt) `clientscript.quickchat_menu_scroll]`  
+- [Script_1066](scripts/proc.quickchat_path_scroll.txt) `proc.quickchat_path_scroll]`  
+- [Script_1067](scripts/clientscript.quickchat_return.txt) `clientscript.quickchat_return]`  
+- [Script_1068](scripts/proc.quickchat_return.txt) `proc.quickchat_return]`  
+- [Script_1069](scripts/proc.quickchat_phrase_resend.txt) `proc.quickchat_phrase_resend]`  
+- [Script_1070](scripts/clientscript.quickchat_phrase.txt) `clientscript.quickchat_phrase]`  
+- [Script_1071](scripts/proc.quickchat_phrase.txt) `proc.quickchat_phrase]`  
+- [Script_1072](scripts/proc.quickchat_phrase_setup.txt) `proc.quickchat_phrase_setup]`  
+- [Script_1073](scripts/clientscript.quickchat_phrase_int.txt) `clientscript.quickchat_phrase_int]`  
+- [Script_1074](scripts/proc.quickchat_phrase_int.txt) `proc.quickchat_phrase_int]`  
+- [Script_1075](scripts/clientscript.quickchat_phrase_obj.txt) `clientscript.quickchat_phrase_obj]`  
+- [Script_1076](scripts/proc.quickchat_phrase_obj.txt) `proc.quickchat_phrase_obj]`  
+- [Script_1077](scripts/proc.quickchat_phrase_send.txt) `proc.quickchat_phrase_send]`  
+- [Script_1078](scripts/proc.quickchat_phrase_setint.txt) `proc.quickchat_phrase_setint]`  
+- [Script_1079](scripts/proc.quickchat_phrase_setobj.txt) `proc.quickchat_phrase_setobj]`  
+- [Script_1080](scripts/clientscript.script1080.txt)  
+- [Script_1081](scripts/clientscript.script1081.txt)  
+- [Script_1082](scripts/clientscript.script1082.txt)  
+- [Script_1083](scripts/clientscript.script1083.txt)  
+- [Script_1084](scripts/proc.script1084.txt)  
+- [Script_1085](scripts/clientscript.clanwars_setup_createbox.txt) `clientscript.clanwars_setup_createbox]`  
+- [Script_1086](scripts/proc.clanwars_setup_createbox.txt) `proc.clanwars_setup_createbox]`  
+- [Script_1087](scripts/clientscript.script1087.txt)  
+- [Script_1088](scripts/proc.script1088.txt)  
+- [Script_1089](scripts/proc.script1089.txt)  
+- [Script_1090](scripts/proc.quickchat_friend_status.txt) `proc.quickchat_friend_status]`  
+- [Script_1091](scripts/clientscript.script1091.txt)  
+- [Script_1092](scripts/clientscript.script1092.txt)  
+- [Script_1093](scripts/clientscript.script1093.txt)  
+- [Script_1094](scripts/clientscript.script1094.txt)  
+- [Script_1095](scripts/proc.cutscene_overlay_clamp.txt) `proc.cutscene_overlay_clamp]`  
+- [Script_1096](scripts/proc.cutscene_overlay_resize.txt) `proc.cutscene_overlay_resize]`  
+- [Script_1097](scripts/proc.script1097.txt)  
+- [Script_1098](scripts/proc.script1098.txt)  
+- [Script_1099](scripts/clientscript.options_mouse.txt) `clientscript.options_mouse]`  
+- [Script_1100](scripts/proc.script1100.txt)  
+- [Script_1101](scripts/clientscript.options_chat.txt) `clientscript.options_chat]`  
+- [Script_1102](scripts/clientscript.script1102.txt)  
+- [Script_1103](scripts/clientscript.script1103.txt)  
+- [Script_1104](scripts/clientscript.script1104.txt)  
+- [Script_1105](scripts/clientscript.options_aid.txt) `clientscript.options_aid]`  
+- [Script_1106](scripts/proc.script1106.txt)  
+- [Script_1107](scripts/clientscript.script1107.txt)  
+- [Script_1108](scripts/proc.script1108.txt)  
+- [Script_1109](scripts/clientscript.script1109.txt)  
+- [Script_1110](scripts/clientscript.update_runenergy.txt) `clientscript.update_runenergy]`  
+- [Script_1111](scripts/clientscript.script1111.txt)  
+- [Script_1112](scripts/proc.script1112.txt)  
+- [Script_1113](scripts/proc.script1113.txt)  
+- [Script_1114](scripts/proc.script1114.txt)  
+- [Script_1115](scripts/proc.script1115.txt)  
+- [Script_1116](scripts/proc.script1116.txt)  
+- [Script_1117](scripts/clientscript.script1117.txt)  
+- [Script_1118](scripts/proc.script1118.txt)  
+- [Script_1119](scripts/proc.script1119.txt)  
+- [Script_1120](scripts/proc.script1120.txt)  
+- [Script_1121](scripts/proc.script1121.txt)  
+- [Script_1122](scripts/clientscript.statusicons_deltooltip.txt) `clientscript.statusicons_deltooltip]`  
+- [Script_1123](scripts/clientscript.script1123.txt)  
+- [Script_1124](scripts/proc.script1124.txt)  
+- [Script_1125](scripts/proc.script1125.txt)  
+- [Script_1126](scripts/proc.script1126.txt)  
+- [Script_1127](scripts/proc.script1127.txt)  
+- [Script_1128](scripts/proc.script1128.txt)  
+- [Script_1129](scripts/proc.script1129.txt)  
+- [Script_1130](scripts/proc.script1130.txt)  
+- [Script_1131](scripts/proc.script1131.txt)  
+- [Script_1132](scripts/clientscript.script1132.txt)  
+- [Script_1133](scripts/clientscript.script1133.txt)  
+- [Script_1134](scripts/clientscript.script1134.txt)  
+- [Script_1135](scripts/clientscript.script1135.txt)  
+- [Script_1136](scripts/clientscript.script1136.txt)  
+- [Script_1137](scripts/clientscript.script1137.txt)  
+- [Script_1138](scripts/clientscript.script1138.txt)  
+- [Script_1139](scripts/clientscript.script1139.txt)  
+- [Script_1140](scripts/clientscript.script1140.txt)  
+- [Script_1141](scripts/clientscript.script1141.txt)  
+- [Script_1142](scripts/clientscript.script1142.txt)  
+- [Script_1143](scripts/clientscript.script1143.txt)  
+- [Script_1144](scripts/clientscript.script1144.txt)  
+- [Script_1145](scripts/clientscript.script1145.txt)  
+- [Script_1146](scripts/clientscript.script1146.txt)  
+- [Script_1147](scripts/clientscript.script1147.txt)  
+- [Script_1148](scripts/clientscript.script1148.txt)  
+- [Script_1149](scripts/clientscript.script1149.txt)  
+- [Script_1150](scripts/clientscript.script1150.txt)  
+- [Script_1151](scripts/clientscript.script1151.txt)  
+- [Script_1152](scripts/proc.script1152.txt)  
+- [Script_1153](scripts/clientscript.sound_mono.txt) `clientscript.sound_mono]`  
+- [Script_1154](scripts/clientscript.sound_stereo.txt) `clientscript.sound_stereo]`  
+- [Script_1155](scripts/clientscript.script1155.txt)  
+- [Script_1156](scripts/proc.script1156.txt)  
+- [Script_1157](scripts/clientscript.meslayer_mode12.txt) `clientscript.meslayer_mode12]`  
+- [Script_1158](scripts/clientscript.script1158.txt)  
+- [Script_1159](scripts/proc.script1159.txt)  
+- [Script_1160](scripts/clientscript.script1160.txt)  
+- [Script_1161](scripts/clientscript.script1161.txt)  
+- [Script_1162](scripts/proc.script1162.txt)  
+- [Script_1163](scripts/proc.script1163.txt)  
+- [Script_1164](scripts/clientscript.script1164.txt)  
+- [Script_1165](scripts/proc.script1165.txt)  
+- [Script_1166](scripts/clientscript.script1166.txt)  
+- [Script_1167](scripts/clientscript.script1167.txt)  
+- [Script_1168](scripts/clientscript.script1168.txt)  
+- [Script_1169](scripts/proc.script1169.txt)  
+- [Script_1170](scripts/clientscript.script1170.txt)  
+- [Script_1171](scripts/proc.script1171.txt)  
+- [Script_1172](scripts/clientscript.loginscreen_load.txt) `clientscript.loginscreen_load]`  
+- [Script_1173](scripts/clientscript.loginscreen_setactivemenu.txt) `clientscript.loginscreen_setactivemenu]`  
+- [Script_1174](scripts/proc.loginscreen_setactivemenu.txt) `proc.loginscreen_setactivemenu]`  
+- [Script_1175](scripts/clientscript.script1175.txt)  
+- [Script_1176](scripts/clientscript.script1176.txt)  
+- [Script_1177](scripts/clientscript.script1177.txt)  
+- [Script_1178](scripts/clientscript.script1178.txt)  
+- [Script_1179](scripts/clientscript.script1179.txt)  
+- [Script_1180](scripts/clientscript.script1180.txt)  
+- [Script_1181](scripts/clientscript.script1181.txt)  
+- [Script_1182](scripts/clientscript.script1182.txt)  
+- [Script_1183](scripts/proc.script1183.txt)  
+- [Script_1184](scripts/proc.topstat_run_text_update.txt) `proc.topstat_run_text_update]`  
+- [Script_1185](scripts/proc.loginscreen_brightness.txt) `proc.loginscreen_brightness]`  
+- [Script_1186](scripts/proc.script1186.txt)  
+- [Script_1187](scripts/clientscript.script1187.txt)  
+- [Script_1188](scripts/proc.script1188.txt)  
+- [Script_1189](scripts/clientscript.script1189.txt)  
+- [Script_1190](scripts/clientscript.script1190.txt)  
+- [Script_1191](scripts/clientscript.script1191.txt)  
+- [Script_1192](scripts/proc.script1192.txt)  
+- [Script_1193](scripts/clientscript.script1193.txt)  
+- [Script_1194](scripts/proc.script1194.txt)  
+- [Script_1195](scripts/clientscript.script1195.txt)  
+- [Script_1196](scripts/proc.script1196.txt)  
+- [Script_1197](scripts/clientscript.script1197.txt)  
+- [Script_1198](scripts/proc.script1198.txt)  
+- [Script_1199](scripts/clientscript.script1199.txt)  
+- [Script_1200](scripts/proc.script1200.txt)  
+- [Script_1201](scripts/clientscript.script1201.txt)  
+- [Script_1202](scripts/proc.script1202.txt)  
+- [Script_1203](scripts/clientscript.script1203.txt)  
+- [Script_1204](scripts/proc.script1204.txt)  
+- [Script_1205](scripts/clientscript.script1205.txt)  
+- [Script_1206](scripts/proc.script1206.txt)  
+- [Script_1207](scripts/clientscript.script1207.txt)  
+- [Script_1208](scripts/proc.script1208.txt)  
+- [Script_1209](scripts/clientscript.script1209.txt)  
+- [Script_1210](scripts/proc.script1210.txt)  
+- [Script_1211](scripts/clientscript.script1211.txt)  
+- [Script_1212](scripts/clientscript.script1212.txt)  
+- [Script_1213](scripts/clientscript.script1213.txt)  
+- [Script_1214](scripts/clientscript.loginscreen_slider_click.txt) `clientscript.loginscreen_slider_click]`  
+- [Script_1215](scripts/clientscript.loginscreen_slider_drag.txt) `clientscript.loginscreen_slider_drag]`  
+- [Script_1216](scripts/proc.loginscreen_musicvol.txt) `proc.loginscreen_musicvol]`  
+- [Script_1217](scripts/proc.loginscreen_soundvol.txt) `proc.loginscreen_soundvol]`  
+- [Script_1218](scripts/proc.loginscreen_bgsoundvol.txt) `proc.loginscreen_bgsoundvol]`  
+- [Script_1219](scripts/clientscript.loginscreen_stereo.txt) `clientscript.loginscreen_stereo]`  
+- [Script_1220](scripts/proc.loginscreen_stereo.txt) `proc.loginscreen_stereo]`  
+- [Script_1221](scripts/clientscript.loginscreen_keypress.txt) `clientscript.loginscreen_keypress]`  
+- [Script_1222](scripts/proc.script1222.txt)  
+- [Script_1223](scripts/clientscript.script1223.txt)  
+- [Script_1224](scripts/clientscript.script1224.txt)  
+- [Script_1225](scripts/clientscript.script1225.txt)  
+- [Script_1226](scripts/clientscript.script1226.txt)  
+- [Script_1227](scripts/clientscript.script1227.txt)  
+- [Script_1228](scripts/clientscript.script1228.txt)  
+- [Script_1229](scripts/clientscript.script1229.txt)  
+- [Script_1230](scripts/clientscript.script1230.txt)  
+- [Script_1231](scripts/clientscript.script1231.txt)  
+- [Script_1232](scripts/clientscript.script1232.txt)  
+- [Script_1233](scripts/clientscript.script1233.txt)  
+- [Script_1234](scripts/clientscript.script1234.txt)  
+- [Script_1235](scripts/clientscript.script1235.txt)  
+- [Script_1236](scripts/clientscript.script1236.txt)  
+- [Script_1237](scripts/clientscript.script1237.txt)  
+- [Script_1238](scripts/clientscript.script1238.txt)  
+- [Script_1239](scripts/proc.script1239.txt)  
+- [Script_1240](scripts/proc.script1240.txt)  
+- [Script_1241](scripts/proc.script1241.txt)  
+- [Script_1242](scripts/proc.script1242.txt)  
+- [Script_1243](scripts/proc.script1243.txt)  
+- [Script_1244](scripts/proc.script1244.txt)  
+- [Script_1245](scripts/proc.script1245.txt)  
+- [Script_1246](scripts/proc.script1246.txt)  
+- [Script_1247](scripts/proc.script1247.txt)  
+- [Script_1248](scripts/clientscript.script1248.txt)  
+- [Script_1249](scripts/clientscript.loginscreen_camera_timer.txt) `clientscript.loginscreen_camera_timer]`  
+- [Script_1250](scripts/clientscript.loginscreen_camfinished.txt) `clientscript.loginscreen_camfinished]`  
+- [Script_1251](scripts/proc.script1251.txt)  
+- [Script_1252](scripts/clientscript.script1252.txt)  
+- [Script_1253](scripts/clientscript.script1253.txt)  
+- [Script_1254](scripts/clientscript.script1254.txt)  
+- [Script_1255](scripts/clientscript.script1255.txt)  
+- [Script_1256](scripts/clientscript.script1256.txt)  
+- [Script_1257](scripts/clientscript.script1257.txt)  
+- [Script_1258](scripts/clientscript.script1258.txt)  
+- [Script_1259](scripts/clientscript.script1259.txt)  
+- [Script_1260](scripts/clientscript.script1260.txt)  
+- [Script_1261](scripts/clientscript.script1261.txt)  
+- [Script_1262](scripts/clientscript.zep_mouse_over.txt) `clientscript.zep_mouse_over]`  
+- [Script_1263](scripts/clientscript.zep_mouse_leave.txt) `clientscript.zep_mouse_leave]`  
+- [Script_1264](scripts/proc.options_mouse.txt) `proc.options_mouse]`  
+- [Script_1265](scripts/proc.options_chat.txt) `proc.options_chat]`  
+- [Script_1266](scripts/clientscript.boardgames_options_ranked.txt) `clientscript.boardgames_options_ranked]`  
+- [Script_1267](scripts/proc.script1267.txt)  
+- [Script_1268](scripts/clientscript.boardgames_options_time.txt) `clientscript.boardgames_options_time]`  
+- [Script_1269](scripts/proc.options_aid.txt) `proc.options_aid]`  
+- [Script_1270](scripts/clientscript.boardgames_options_pick_piece.txt) `clientscript.boardgames_options_pick_piece]`  
+- [Script_1271](scripts/proc.script1271.txt)  
+- [Script_1272](scripts/proc.options_poh.txt) `proc.options_poh]`  
+- [Script_1273](scripts/clientscript.script1273.txt)  
+- [Script_1274](scripts/clientscript.script1274.txt)  
+- [Script_1275](scripts/clientscript.script1275.txt)  
+- [Script_1276](scripts/clientscript.script1276.txt)  
+- [Script_1277](scripts/clientscript.draughts_inv_init.txt) `clientscript.draughts_inv_init]`  
+- [Script_1278](scripts/clientscript.draughts_inv_update.txt) `clientscript.draughts_inv_update]`  
+- [Script_1279](scripts/proc.draughts_inv_update.txt) `proc.draughts_inv_update]`  
+- [Script_1280](scripts/proc.script1280.txt)  
+- [Script_1281](scripts/clientscript.script1281.txt)  
+- [Script_1282](scripts/clientscript.script1282.txt)  
+- [Script_1283](scripts/clientscript.script1283.txt)  
+- [Script_1284](scripts/proc.script1284.txt)  
+- [Script_1285](scripts/clientscript.script1285.txt)  
+- [Script_1286](scripts/clientscript.script1286.txt)  
+- [Script_1287](scripts/proc.script1287.txt)  
+- [Script_1288](scripts/clientscript.script1288.txt)  
+- [Script_1289](scripts/clientscript.script1289.txt)  
+- [Script_1290](scripts/clientscript.script1290.txt)  
+- [Script_1291](scripts/clientscript.farming_tools_main_update.txt) `clientscript.farming_tools_main_update]`  
+- [Script_1292](scripts/clientscript.farming_tools_side_update.txt) `clientscript.farming_tools_side_update]`  
+- [Script_1293](scripts/proc.script1293.txt)  
+- [Script_1294](scripts/clientscript.hauntedmine_controls_load.txt) `clientscript.hauntedmine_controls_load]`  
+- [Script_1295](scripts/clientscript.hauntedmine_controls_startanim.txt) `clientscript.hauntedmine_controls_startanim]`  
+- [Script_1296](scripts/clientscript.script1296.txt)  
+- [Script_1297](scripts/clientscript.options_update_all.txt) `clientscript.options_update_all]`  
+- [Script_1298](scripts/proc.script1298.txt)  
+- [Script_1299](scripts/proc.script1299.txt)  
+- [Script_1300](scripts/clientscript.script1300.txt)  
+- [Script_1301](scripts/proc.script1301.txt)  
+- [Script_1302](scripts/clientscript.switchside_varc.txt) `clientscript.switchside_varc]`  
+- [Script_1303](scripts/clientscript.switchside_op.txt) `clientscript.switchside_op]`  
+- [Script_1304](scripts/proc.if_switchside_op.txt) `proc.if_switchside_op]`  
+- [Script_1305](scripts/proc.current_side_if.txt) `proc.current_side_if]`  
+- [Script_1306](scripts/proc.side_if_closeall.txt) `proc.side_if_closeall]`  
+- [Script_1307](scripts/clientscript.script1307.txt)  
+- [Script_1308](scripts/proc.script1308.txt)  
+- [Script_1309](scripts/proc.script1309.txt)  
+- [Script_1310](scripts/proc.script1310.txt)  
+- [Script_1311](scripts/proc.script1311.txt)  
+- [Script_1312](scripts/proc.script1312.txt)  
+- [Script_1313](scripts/proc.script1313.txt)  
+- [Script_1314](scripts/proc.getsidehidden.txt) `proc.getsidehidden]`  
+- [Script_1315](scripts/clientscript.topstat_run_button_init.txt) `clientscript.topstat_run_button_init]`  
+- [Script_1316](scripts/clientscript.topstat_run_button_vartransmit.txt) `clientscript.topstat_run_button_vartransmit]`  
+- [Script_1317](scripts/clientscript.script1317.txt)  
+- [Script_1318](scripts/clientscript.script1318.txt)  
+- [Script_1319](scripts/clientscript.script1319.txt)  
+- [Script_1320](scripts/clientscript.script1320.txt)  
+- [Script_1321](scripts/clientscript.script1321.txt)  
+- [Script_1322](scripts/clientscript.script1322.txt)  
+- [Script_1323](scripts/clientscript.script1323.txt)  
+- [Script_1324](scripts/clientscript.script1324.txt)  
+- [Script_1325](scripts/clientscript.script1325.txt)  
+- [Script_1326](scripts/clientscript.script1326.txt)  
+- [Script_1327](scripts/clientscript.script1327.txt)  
+- [Script_1328](scripts/clientscript.script1328.txt)  
+- [Script_1329](scripts/proc.script1329.txt)  
+- [Script_1330](scripts/clientscript.script1330.txt)  
+- [Script_1331](scripts/clientscript.script1331.txt)  
+- [Script_1332](scripts/clientscript.script1332.txt)  
+- [Script_1333](scripts/clientscript.script1333.txt)  
+- [Script_1334](scripts/clientscript.script1334.txt)  
+- [Script_1335](scripts/clientscript.script1335.txt)  
+- [Script_1336](scripts/clientscript.script1336.txt)  
+- [Script_1337](scripts/proc.script1337.txt)  
+- [Script_1338](scripts/clientscript.script1338.txt)  
+- [Script_1339](scripts/clientscript.script1339.txt)  
+- [Script_1340](scripts/clientscript.script1340.txt)  
+- [Script_1341](scripts/clientscript.script1341.txt)  
+- [Script_1342](scripts/clientscript.script1342.txt)  
+- [Script_1343](scripts/clientscript.dropdownbox_quick.txt) `clientscript.dropdownbox_quick]`  
+- [Script_1344](scripts/clientscript.dropdownbox.txt) `clientscript.dropdownbox]`  
+- [Script_1345](scripts/proc.dropdownbox_getselected.txt) `proc.dropdownbox_getselected]`  
+- [Script_1346](scripts/proc.dropdownbox.txt) `proc.dropdownbox]`  
+- [Script_1347](scripts/clientscript.dropdownbox_openclose.txt) `clientscript.dropdownbox_openclose]`  
+- [Script_1348](scripts/proc.dropdownbox_open.txt) `proc.dropdownbox_open]`  
+- [Script_1349](scripts/proc.dropdownbox_close.txt) `proc.dropdownbox_close]`  
+- [Script_1350](scripts/clientscript.dropdownbox_selectelement.txt) `clientscript.dropdownbox_selectelement]`  
+- [Script_1351](scripts/clientscript.dropdownbox_mouseoverarrow.txt) `clientscript.dropdownbox_mouseoverarrow]`  
+- [Script_1352](scripts/clientscript.dropdownbox_mouseoutarrow.txt) `clientscript.dropdownbox_mouseoutarrow]`  
+- [Script_1353](scripts/clientscript.dropdownbox_mouseoverelement.txt) `clientscript.dropdownbox_mouseoverelement]`  
+- [Script_1354](scripts/clientscript.dropdownbox_mouseoutelement.txt) `clientscript.dropdownbox_mouseoutelement]`  
+- [Script_1355](scripts/proc.dropdownbox_refuse.txt) `proc.dropdownbox_refuse]`  
+- [Script_1356](scripts/clientscript.cc_text_colour_swapper.txt) `clientscript.cc_text_colour_swapper]`  
+- [Script_1357](scripts/clientscript.settrans.txt) `clientscript.settrans]`  
+- [Script_1358](scripts/clientscript.v2_stone_button_filled_deltooltip.txt) `clientscript.v2_stone_button_filled_deltooltip]`  
+- [Script_1359](scripts/proc.script1359.txt)  
+- [Script_1360](scripts/proc.v2_stone_button_in_proc.txt) `proc.v2_stone_button_in_proc]`  
+- [Script_1361](scripts/proc.v2_stone_button_in_filled_proc.txt) `proc.v2_stone_button_in_filled_proc]`  
+- [Script_1362](scripts/clientscript.chatdefault_init.txt) `clientscript.chatdefault_init]`  
+- [Script_1363](scripts/proc.v2_stone_button_out_proc.txt) `proc.v2_stone_button_out_proc]`  
+- [Script_1364](scripts/proc.subchanged.txt) `proc.subchanged]`  
+- [Script_1365](scripts/proc.component_pulse_start.txt) `proc.component_pulse_start]`  
+- [Script_1366](scripts/clientscript.script1366.txt)  
+- [Script_1367](scripts/clientscript.script1367.txt)  
+- [Script_1368](scripts/clientscript.script1368.txt)  
+- [Script_1369](scripts/clientscript.worldmap_init.txt) `clientscript.worldmap_init]`  
+- [Script_1370](scripts/clientscript.script1370.txt)  
+- [Script_1371](scripts/clientscript.script1371.txt)  
+- [Script_1372](scripts/proc.worldmap_setzoom.txt) `proc.worldmap_setzoom]`  
+- [Script_1373](scripts/clientscript.worldmap_toggleoverview.txt) `clientscript.worldmap_toggleoverview]`  
+- [Script_1374](scripts/proc.worldmap_showoverview.txt) `proc.worldmap_showoverview]`  
+- [Script_1375](scripts/clientscript.script1375.txt)  
+- [Script_1376](scripts/proc.script1376.txt)  
+- [Script_1377](scripts/clientscript.script1377.txt)  
+- [Script_1378](scripts/proc.script1378.txt)  
+- [Script_1379](scripts/clientscript.script1379.txt)  
+- [Script_1380](scripts/clientscript.script1380.txt)  
+- [Script_1381](scripts/clientscript.script1381.txt)  
+- [Script_1382](scripts/clientscript.worldmap_onkey.txt) `clientscript.worldmap_onkey]`  
+- [Script_1383](scripts/clientscript.script1383.txt)  
+- [Script_1384](scripts/proc.script1384.txt)  
+- [Script_1385](scripts/proc.side_if_closeall_fullscreen.txt) `proc.side_if_closeall_fullscreen]`  
+- [Script_1386](scripts/proc.side_if_closeall_windowed.txt) `proc.side_if_closeall_windowed]`  
+- [Script_1387](scripts/proc.side_if_open.txt) `proc.side_if_open]`  
+- [Script_1388](scripts/proc.script1388.txt)  
+- [Script_1389](scripts/clientscript.script1389.txt)  
+- [Script_1390](scripts/clientscript.script1390.txt)  
+- [Script_1391](scripts/clientscript.script1391.txt)  
+- [Script_1392](scripts/clientscript.script1392.txt)  
+- [Script_1393](scripts/clientscript.script1393.txt)  
+- [Script_1394](scripts/clientscript.barrows_killcount_update.txt) `clientscript.barrows_killcount_update]`  
+- [Script_1395](scripts/clientscript.script1395.txt)  
+- [Script_1396](scripts/clientscript.script1396.txt)  
+- [Script_1397](scripts/clientscript.script1397.txt)  
+- [Script_1398](scripts/clientscript.script1398.txt)  
+- [Script_1399](scripts/clientscript.script1399.txt)  
+- [Script_1400](scripts/clientscript.script1400.txt)  
+- [Script_1401](scripts/clientscript.script1401.txt)  
+- [Script_1402](scripts/clientscript.script1402.txt)  
+- [Script_1403](scripts/clientscript.script1403.txt)  
+- [Script_1404](scripts/clientscript.worldmap_vartransmit.txt) `clientscript.worldmap_vartransmit]`  
+- [Script_1405](scripts/clientscript.boardgames_options_onload.txt) `clientscript.boardgames_options_onload]`  
+- [Script_1406](scripts/proc.script1406.txt)  
+- [Script_1407](scripts/proc.boardgames_options_ranked.txt) `proc.boardgames_options_ranked]`  
+- [Script_1408](scripts/proc.boardgames_options_time.txt) `proc.boardgames_options_time]`  
+- [Script_1409](scripts/proc.boardgames_options_pick_piece.txt) `proc.boardgames_options_pick_piece]`  
+- [Script_1410](scripts/clientscript.script1410.txt)  
+- [Script_1411](scripts/clientscript.script1411.txt)  
+- [Script_1412](scripts/clientscript.v2_small_button_filled.txt) `clientscript.v2_small_button_filled]`  
+- [Script_1413](scripts/clientscript.script1413.txt)  
+- [Script_1414](scripts/clientscript.script1414.txt)  
+- [Script_1415](scripts/clientscript.script1415.txt)  
+- [Script_1416](scripts/clientscript.script1416.txt)  
+- [Script_1417](scripts/clientscript.script1417.txt)  
+- [Script_1418](scripts/clientscript.script1418.txt)  
+- [Script_1419](scripts/clientscript.meslayer_mode5.txt) `clientscript.meslayer_mode5]`  
+- [Script_1420](scripts/clientscript.flashside_timer.txt) `clientscript.flashside_timer]`  
+- [Script_1421](scripts/proc.script1421.txt)  
+- [Script_1422](scripts/clientscript.script1422.txt)  
+- [Script_1423](scripts/clientscript.script1423.txt)  
+- [Script_1424](scripts/clientscript.agilityarena_overlay.txt) `clientscript.agilityarena_overlay]`  
+- [Script_1425](scripts/proc.script1425.txt)  
+- [Script_1426](scripts/proc.script1426.txt)  
+- [Script_1427](scripts/clientscript.script1427.txt)  
+- [Script_1428](scripts/clientscript.script1428.txt)  
+- [Script_1429](scripts/clientscript.script1429.txt)  
+- [Script_1430](scripts/proc.script1430.txt)  
+- [Script_1431](scripts/proc.script1431.txt)  
+- [Script_1432](scripts/proc.comlevel.txt) `proc.comlevel]`  
+- [Script_1433](scripts/clientscript.toplevel_init.txt) `clientscript.toplevel_init]`  
+- [Script_1434](scripts/clientscript.toplevel_fovchange.txt) `clientscript.toplevel_fovchange]`  
+- [Script_1435](scripts/proc.script1435.txt)  
+- [Script_1436](scripts/proc.dropdownbox_init.txt) `proc.dropdownbox_init]`  
+- [Script_1437](scripts/clientscript.tutorial_progress_bar.txt) `clientscript.tutorial_progress_bar]`  
+- [Script_1440](scripts/clientscript.script1440.txt)  
+- [Script_1441](scripts/clientscript.script1441.txt)  
+- [Script_1442](scripts/clientscript.script1442.txt)  
+- [Script_1443](scripts/clientscript.tog_update_interface.txt) `clientscript.tog_update_interface]`  
+- [Script_1444](scripts/clientscript.bank_v2_help_init.txt) `clientscript.bank_v2_help_init]`  
+- [Script_1445](scripts/clientscript.script1445.txt)  
+- [Script_1446](scripts/clientscript.bank_v2_help_showpage.txt) `clientscript.bank_v2_help_showpage]`  
+- [Script_1447](scripts/proc.bank_v2_help_showpage.txt) `proc.bank_v2_help_showpage]`  
+- [Script_1448](scripts/clientscript.bank_v2_sideupdate.txt) `clientscript.bank_v2_sideupdate]`  
+- [Script_1449](scripts/clientscript.bank_v2_build_init.txt) `clientscript.bank_v2_build_init]`  
+- [Script_1450](scripts/proc.bank_v2_build_slots.txt) `proc.bank_v2_build_slots]`  
+- [Script_1451](scripts/clientscript.bank_v2_rebuild.txt) `clientscript.bank_v2_rebuild]`  
+- [Script_1452](scripts/clientscript.bank_v2_rebuild_delayed.txt) `clientscript.bank_v2_rebuild_delayed]`  
+- [Script_1453](scripts/proc.script1453.txt)  
+- [Script_1454](scripts/clientscript.bank_v2_bankitemdrag.txt) `clientscript.bank_v2_bankitemdrag]`  
+- [Script_1455](scripts/proc.bank_v2_hide_all.txt) `proc.bank_v2_hide_all]`  
+- [Script_1456](scripts/proc.bank_v2_show_all.txt) `proc.bank_v2_show_all]`  
+- [Script_1457](scripts/proc.bank_v2_show_range.txt) `proc.bank_v2_show_range]`  
+- [Script_1458](scripts/proc.bank_v2_build_scrollbar.txt) `proc.bank_v2_build_scrollbar]`  
+- [Script_1459](scripts/proc.bank_v2_build_tabs.txt) `proc.bank_v2_build_tabs]`  
+- [Script_1460](scripts/proc.script1460.txt)  
+- [Script_1461](scripts/proc.script1461.txt)  
+- [Script_1462](scripts/proc.script1462.txt)  
+- [Script_1463](scripts/proc.bank_v2_tab_highlight.txt) `proc.bank_v2_tab_highlight]`  
+- [Script_1464](scripts/proc.script1464.txt)  
+- [Script_1465](scripts/clientscript.script1465.txt)  
+- [Script_1466](scripts/proc.bank_v2_get_size.txt) `proc.bank_v2_get_size]`  
+- [Script_1467](scripts/proc.bank_v2_get_tab_range.txt) `proc.bank_v2_get_tab_range]`  
+- [Script_1468](scripts/proc.bank_v2_get_tab.txt) `proc.bank_v2_get_tab]`  
+- [Script_1469](scripts/proc.script1469.txt)  
+- [Script_1470](scripts/proc.script1470.txt)  
+- [Script_1471](scripts/clientscript.bank_v2_search.txt) `clientscript.bank_v2_search]`  
+- [Script_1472](scripts/clientscript.script1472.txt)  
+- [Script_1473](scripts/proc.script1473.txt)  
+- [Script_1474](scripts/proc.script1474.txt)  
+- [Script_1475](scripts/proc.bank_v2_search_update.txt) `proc.bank_v2_search_update]`  
+- [Script_1476](scripts/clientscript.bank_v2_search_delayed.txt) `clientscript.bank_v2_search_delayed]`  
+- [Script_1477](scripts/clientscript.script1477.txt)  
+- [Script_1478](scripts/proc.bank_v2_confirmsearch.txt) `proc.bank_v2_confirmsearch]`  
+- [Script_1479](scripts/proc.bank_v2_show_search.txt) `proc.bank_v2_show_search]`  
+- [Script_1480](scripts/clientscript.script1480.txt)  
+- [Script_1481](scripts/clientscript.bank_v2_clickaddbutton.txt) `clientscript.bank_v2_clickaddbutton]`  
+- [Script_1482](scripts/clientscript.bank_v2_bankitemdrop.txt) `clientscript.bank_v2_bankitemdrop]`  
+- [Script_1483](scripts/clientscript.bank_v2_tab_highlight_revert.txt) `clientscript.bank_v2_tab_highlight_revert]`  
+- [Script_1484](scripts/clientscript.bank_v2_close.txt) `clientscript.bank_v2_close]`  
+- [Script_1485](scripts/clientscript.bank_v2_cert_click.txt) `clientscript.bank_v2_cert_click]`  
+- [Script_1486](scripts/clientscript.bank_cert_button.txt) `clientscript.bank_cert_button]`  
+- [Script_1487](scripts/proc.bank_cert_button.txt) `proc.bank_cert_button]`  
+- [Script_1488](scripts/clientscript.bank_v2_swap_click.txt) `clientscript.bank_v2_swap_click]`  
+- [Script_1489](scripts/clientscript.bank_sort_button.txt) `clientscript.bank_sort_button]`  
+- [Script_1490](scripts/proc.bank_sort_button.txt) `proc.bank_sort_button]`  
+- [Script_1491](scripts/clientscript.tab_1_click.txt) `clientscript.tab_1_click]`  
+- [Script_1492](scripts/clientscript.tab_2_click.txt) `clientscript.tab_2_click]`  
+- [Script_1493](scripts/clientscript.tab_3_click.txt) `clientscript.tab_3_click]`  
+- [Script_1494](scripts/clientscript.tab_4_click.txt) `clientscript.tab_4_click]`  
+- [Script_1495](scripts/clientscript.tab_5_click.txt) `clientscript.tab_5_click]`  
+- [Script_1496](scripts/clientscript.tab_6_click.txt) `clientscript.tab_6_click]`  
+- [Script_1497](scripts/clientscript.tab_7_click.txt) `clientscript.tab_7_click]`  
+- [Script_1498](scripts/clientscript.tab_8_click.txt) `clientscript.tab_8_click]`  
+- [Script_1499](scripts/clientscript.tab_9_click.txt) `clientscript.tab_9_click]`  
+- [Script_1500](scripts/proc.bank_v2_tab_click.txt) `proc.bank_v2_tab_click]`  
+- [Script_1501](scripts/clientscript.bank_v2_tooltipoff.txt) `clientscript.bank_v2_tooltipoff]`  
+- [Script_1502](scripts/clientscript.script1502.txt)  
+- [Script_1503](scripts/clientscript.script1503.txt)  
+- [Script_1504](scripts/clientscript.script1504.txt)  
+- [Script_1505](scripts/clientscript.script1505.txt)  
+- [Script_1506](scripts/clientscript.script1506.txt)  
+- [Script_1507](scripts/clientscript.script1507.txt)  
+- [Script_1508](scripts/clientscript.script1508.txt)  
+- [Script_1509](scripts/clientscript.script1509.txt)  
+- [Script_1510](scripts/proc.script1510.txt)  
+- [Script_1511](scripts/clientscript.script1511.txt)  
+- [Script_1512](scripts/clientscript.script1512.txt)  
+- [Script_1513](scripts/clientscript.script1513.txt)  
+- [Script_1514](scripts/proc.script1514.txt)  
+- [Script_1515](scripts/clientscript.script1515.txt)  
+- [Script_1516](scripts/proc.script1516.txt)  
+- [Script_1517](scripts/proc.script1517.txt)  
+- [Script_1518](scripts/clientscript.script1518.txt)  
+- [Script_1519](scripts/clientscript.script1519.txt)  
+- [Script_1520](scripts/clientscript.script1520.txt)  
+- [Script_1521](scripts/clientscript.script1521.txt)  
+- [Script_1522](scripts/proc.script1522.txt)  
+- [Script_1523](scripts/clientscript.script1523.txt)  
+- [Script_1524](scripts/clientscript.script1524.txt)  
+- [Script_1525](scripts/clientscript.script1525.txt)  
+- [Script_1526](scripts/proc.script1526.txt)  
+- [Script_1527](scripts/clientscript.script1527.txt)  
+- [Script_1528](scripts/clientscript.script1528.txt)  
+- [Script_1529](scripts/proc.script1529.txt)  
+- [Script_1530](scripts/proc.script1530.txt)  
+- [Script_1531](scripts/proc.script1531.txt)  
+- [Script_1532](scripts/clientscript.script1532.txt)  
+- [Script_1533](scripts/clientscript.topstat_run_button_mouseover.txt) `clientscript.topstat_run_button_mouseover]`  
+- [Script_1534](scripts/clientscript.topstat_run_button_op.txt) `clientscript.topstat_run_button_op]`  
+- [Script_1535](scripts/proc.script1535.txt)  
+- [Script_1536](scripts/proc.script1536.txt)  
+- [Script_1537](scripts/proc.script1537.txt)  
+- [Script_1538](scripts/proc.script1538.txt)  
+- [Script_1539](scripts/proc.script1539.txt)  
+- [Script_1540](scripts/clientscript.script1540.txt)  
+- [Script_1541](scripts/proc.script1541.txt)  
+- [Script_1542](scripts/proc.script1542.txt)  
+- [Script_1543](scripts/proc.script1543.txt)  
+- [Script_1544](scripts/proc.script1544.txt)  
+- [Script_1545](scripts/proc.script1545.txt)  
+- [Script_1546](scripts/proc.script1546.txt)  
+- [Script_1547](scripts/clientscript.meslayer_varc_update.txt) `clientscript.meslayer_varc_update]`  
+- [Script_1548](scripts/proc.meslayer_close.txt) `proc.meslayer_close]`  
+- [Script_1549](scripts/proc.meslayer_mode11.txt) `proc.meslayer_mode11]`  
+- [Script_1550](scripts/clientscript.script1550.txt)  
+- [Script_1551](scripts/clientscript.script1551.txt)  
+- [Script_1552](scripts/clientscript.script1552.txt)  
+- [Script_1553](scripts/clientscript.script1553.txt)  
+- [Script_1554](scripts/clientscript.script1554.txt)  
+- [Script_1555](scripts/clientscript.script1555.txt)  
+- [Script_1556](scripts/clientscript.script1556.txt)  
+- [Script_1557](scripts/clientscript.script1557.txt)  
+- [Script_1558](scripts/clientscript.script1558.txt)  
+- [Script_1559](scripts/clientscript.script1559.txt)  
+- [Script_1560](scripts/proc.script1560.txt)  
+- [Script_1561](scripts/proc.script1561.txt)  
+- [Script_1562](scripts/proc.script1562.txt)  
+- [Script_1563](scripts/clientscript.script1563.txt)  
+- [Script_1564](scripts/proc.script1564.txt)  
+- [Script_1565](scripts/clientscript.script1565.txt)  
+- [Script_1566](scripts/proc.script1566.txt)  
+- [Script_1567](scripts/clientscript.script1567.txt)  
+- [Script_1568](scripts/proc.script1568.txt)  
+- [Script_1569](scripts/clientscript.script1569.txt)  
+- [Script_1570](scripts/proc.script1570.txt)  
+- [Script_1571](scripts/proc.script1571.txt)  
+- [Script_1572](scripts/clientscript.script1572.txt)  
+- [Script_1573](scripts/clientscript.script1573.txt)  
+- [Script_1574](scripts/clientscript.script1574.txt)  
+- [Script_1575](scripts/clientscript.script1575.txt)  
+- [Script_1576](scripts/clientscript.script1576.txt)  
+- [Script_1577](scripts/clientscript.script1577.txt)  
+- [Script_1578](scripts/clientscript.script1578.txt)  
+- [Script_1579](scripts/clientscript.script1579.txt)  
+- [Script_1580](scripts/clientscript.script1580.txt)  
+- [Script_1581](scripts/clientscript.script1581.txt)  
+- [Script_1582](scripts/clientscript.script1582.txt)  
+- [Script_1583](scripts/clientscript.script1583.txt)  
+- [Script_1584](scripts/clientscript.script1584.txt)  
+- [Script_1585](scripts/clientscript.script1585.txt)  
+- [Script_1586](scripts/clientscript.script1586.txt)  
+- [Script_1587](scripts/clientscript.script1587.txt)  
+- [Script_1588](scripts/clientscript.script1588.txt)  
+- [Script_1589](scripts/clientscript.script1589.txt)  
+- [Script_1590](scripts/clientscript.script1590.txt)  
+- [Script_1591](scripts/clientscript.script1591.txt)  
+- [Script_1592](scripts/clientscript.script1592.txt)  
+- [Script_1593](scripts/clientscript.script1593.txt)  
+- [Script_1594](scripts/clientscript.script1594.txt)  
+- [Script_1595](scripts/clientscript.script1595.txt)  
+- [Script_1596](scripts/clientscript.script1596.txt)  
+- [Script_1597](scripts/clientscript.script1597.txt)  
+- [Script_1598](scripts/clientscript.script1598.txt)  
+- [Script_1599](scripts/clientscript.script1599.txt)  
+- [Script_1600](scripts/clientscript.script1600.txt)  
+- [Script_1601](scripts/clientscript.script1601.txt)  
+- [Script_1602](scripts/clientscript.script1602.txt)  
+- [Script_1603](scripts/clientscript.script1603.txt)  
+- [Script_1604](scripts/clientscript.script1604.txt)  
+- [Script_1605](scripts/clientscript.script1605.txt)  
+- [Script_1606](scripts/clientscript.script1606.txt)  
+- [Script_1607](scripts/clientscript.script1607.txt)  
+- [Script_1608](scripts/clientscript.script1608.txt)  
+- [Script_1609](scripts/clientscript.script1609.txt)  
+- [Script_1610](scripts/clientscript.script1610.txt)  
+- [Script_1611](scripts/clientscript.script1611.txt)  
+- [Script_1612](scripts/proc.script1612.txt)  
+- [Script_1613](scripts/clientscript.script1613.txt)  
+- [Script_1614](scripts/clientscript.script1614.txt)  
+- [Script_1615](scripts/clientscript.script1615.txt)  
+- [Script_1616](scripts/clientscript.script1616.txt)  
+- [Script_1617](scripts/clientscript.script1617.txt)  
+- [Script_1618](scripts/clientscript.script1618.txt)  
+- [Script_1619](scripts/clientscript.script1619.txt)  
+- [Script_1620](scripts/clientscript.script1620.txt)  
+- [Script_1621](scripts/clientscript.script1621.txt)  
+- [Script_1622](scripts/clientscript.script1622.txt)  
+- [Script_1623](scripts/clientscript.script1623.txt)  
+- [Script_1624](scripts/clientscript.script1624.txt)  
+- [Script_1625](scripts/clientscript.script1625.txt)  
+- [Script_1626](scripts/clientscript.script1626.txt)  
+- [Script_1627](scripts/clientscript.script1627.txt)  
+- [Script_1628](scripts/clientscript.script1628.txt)  
+- [Script_1629](scripts/clientscript.script1629.txt)  
+- [Script_1630](scripts/clientscript.script1630.txt)  
+- [Script_1631](scripts/clientscript.script1631.txt)  
+- [Script_1632](scripts/clientscript.script1632.txt)  
+- [Script_1633](scripts/clientscript.script1633.txt)  
+- [Script_1634](scripts/clientscript.script1634.txt)  
+- [Script_1635](scripts/clientscript.script1635.txt)  
+- [Script_1636](scripts/clientscript.script1636.txt)  
+- [Script_1637](scripts/clientscript.script1637.txt)  
+- [Script_1638](scripts/clientscript.script1638.txt)  
+- [Script_1639](scripts/clientscript.script1639.txt)  
+- [Script_1640](scripts/clientscript.script1640.txt)  
+- [Script_1641](scripts/clientscript.script1641.txt)  
+- [Script_1642](scripts/clientscript.script1642.txt)  
+- [Script_1643](scripts/clientscript.script1643.txt)  
+- [Script_1644](scripts/clientscript.script1644.txt)  
+- [Script_1645](scripts/clientscript.script1645.txt)  
+- [Script_1646](scripts/clientscript.script1646.txt)  
+- [Script_1647](scripts/clientscript.script1647.txt)  
+- [Script_1648](scripts/clientscript.script1648.txt)  
+- [Script_1649](scripts/clientscript.script1649.txt)  
+- [Script_1650](scripts/clientscript.script1650.txt)  
+- [Script_1651](scripts/clientscript.script1651.txt)  
+- [Script_1652](scripts/clientscript.script1652.txt)  
+- [Script_1653](scripts/clientscript.script1653.txt)  
+- [Script_1654](scripts/clientscript.script1654.txt)  
+- [Script_1655](scripts/clientscript.script1655.txt)  
+- [Script_1656](scripts/clientscript.script1656.txt)  
+- [Script_1657](scripts/clientscript.script1657.txt)  
+- [Script_1658](scripts/clientscript.script1658.txt)  
+- [Script_1659](scripts/clientscript.script1659.txt)  
+- [Script_1660](scripts/clientscript.script1660.txt)  
+- [Script_1661](scripts/clientscript.script1661.txt)  
+- [Script_1662](scripts/clientscript.script1662.txt)  
+- [Script_1663](scripts/clientscript.script1663.txt)  
+- [Script_1664](scripts/clientscript.script1664.txt)  
+- [Script_1665](scripts/clientscript.script1665.txt)  
+- [Script_1666](scripts/clientscript.script1666.txt)  
+- [Script_1667](scripts/clientscript.script1667.txt)  
+- [Script_1668](scripts/clientscript.script1668.txt)  
+- [Script_1669](scripts/clientscript.script1669.txt)  
+- [Script_1670](scripts/clientscript.script1670.txt)  
+- [Script_1671](scripts/clientscript.script1671.txt)  
+- [Script_1672](scripts/clientscript.script1672.txt)  
+- [Script_1673](scripts/clientscript.script1673.txt)  
+- [Script_1674](scripts/clientscript.script1674.txt)  
+- [Script_1675](scripts/clientscript.script1675.txt)  
+- [Script_1676](scripts/clientscript.script1676.txt)  
+- [Script_1677](scripts/clientscript.script1677.txt)  
+- [Script_1678](scripts/clientscript.script1678.txt)  
+- [Script_1679](scripts/clientscript.script1679.txt)  
+- [Script_1680](scripts/clientscript.script1680.txt)  
+- [Script_1681](scripts/clientscript.script1681.txt)  
+- [Script_1682](scripts/clientscript.script1682.txt)  
+- [Script_1683](scripts/clientscript.script1683.txt)  
+- [Script_1684](scripts/clientscript.script1684.txt)  
+- [Script_1685](scripts/clientscript.script1685.txt)  
+- [Script_1686](scripts/clientscript.script1686.txt)  
+- [Script_1687](scripts/clientscript.script1687.txt)  
+- [Script_1688](scripts/clientscript.script1688.txt)  
+- [Script_1689](scripts/clientscript.script1689.txt)  
+- [Script_1690](scripts/clientscript.script1690.txt)  
+- [Script_1691](scripts/clientscript.script1691.txt)  
+- [Script_1692](scripts/clientscript.script1692.txt)  
+- [Script_1693](scripts/clientscript.script1693.txt)  
+- [Script_1694](scripts/clientscript.script1694.txt)  
+- [Script_1695](scripts/clientscript.script1695.txt)  
+- [Script_1696](scripts/clientscript.script1696.txt)  
+- [Script_1697](scripts/clientscript.script1697.txt)  
+- [Script_1698](scripts/clientscript.script1698.txt)  
+- [Script_1699](scripts/clientscript.script1699.txt)  
+- [Script_1700](scripts/clientscript.script1700.txt)  
+- [Script_1701](scripts/clientscript.script1701.txt)  
+- [Script_1702](scripts/clientscript.script1702.txt)  
+- [Script_1703](scripts/clientscript.script1703.txt)  
+- [Script_1704](scripts/clientscript.script1704.txt)  
+- [Script_1705](scripts/clientscript.script1705.txt)  
+- [Script_1706](scripts/clientscript.script1706.txt)  
+- [Script_1707](scripts/clientscript.script1707.txt)  
+- [Script_1708](scripts/clientscript.script1708.txt)  
+- [Script_1709](scripts/clientscript.script1709.txt)  
+- [Script_1710](scripts/proc.script1710.txt)  
+- [Script_1711](scripts/proc.script1711.txt)  
+- [Script_1712](scripts/proc.script1712.txt)  
+- [Script_1713](scripts/proc.script1713.txt)  
+- [Script_1714](scripts/proc.script1714.txt)  
+- [Script_1715](scripts/proc.script1715.txt)  
+- [Script_1716](scripts/proc.script1716.txt)  
+- [Script_1717](scripts/proc.script1717.txt)  
+- [Script_1718](scripts/proc.script1718.txt)  
+- [Script_1719](scripts/proc.script1719.txt)  
+- [Script_1720](scripts/proc.script1720.txt)  
+- [Script_1721](scripts/proc.script1721.txt)  
+- [Script_1722](scripts/clientscript.script1722.txt)  
+- [Script_1723](scripts/clientscript.script1723.txt)  
+- [Script_1724](scripts/clientscript.component_flash_start.txt) `clientscript.component_flash_start]`  
+- [Script_1725](scripts/proc.component_flash_start.txt) `proc.component_flash_start]`  
+- [Script_1726](scripts/clientscript.component_flash_timer.txt) `clientscript.component_flash_timer]`  
+- [Script_1727](scripts/clientscript.component_flash_stop.txt) `clientscript.component_flash_stop]`  
+- [Script_1728](scripts/proc.component_flash_stop.txt) `proc.component_flash_stop]`  
+- [Script_1729](scripts/clientscript.script1729.txt)  
+- [Script_1730](scripts/proc.script1730.txt)  
+- [Script_1731](scripts/clientscript.script1731.txt)  
+- [Script_1732](scripts/clientscript.script1732.txt)  
+- [Script_1733](scripts/clientscript.script1733.txt)  
+- [Script_1734](scripts/clientscript.script1734.txt)  
+- [Script_1735](scripts/proc.script1735.txt)  
+- [Script_1736](scripts/clientscript.script1736.txt)  
+- [Script_1737](scripts/clientscript.script1737.txt)  
+- [Script_1738](scripts/proc.script1738.txt)  
+- [Script_1739](scripts/clientscript.script1739.txt)  
+- [Script_1740](scripts/clientscript.topstat_run_button_update.txt) `clientscript.topstat_run_button_update]`  
+- [Script_1741](scripts/proc.topstat_run_button_update.txt) `proc.topstat_run_button_update]`  
+- [Script_1742](scripts/proc.script1742.txt)  
+- [Script_1743](scripts/proc.script1743.txt)  
+- [Script_1744](scripts/proc.script1744.txt)  
+- [Script_1745](scripts/clientscript.script1745.txt)  
+- [Script_1746](scripts/clientscript.brew_boiler1.txt) `clientscript.brew_boiler1]`  
+- [Script_1747](scripts/clientscript.brew_boiler2.txt) `clientscript.brew_boiler2]`  
+- [Script_1748](scripts/clientscript.script1748.txt)  
+- [Script_1749](scripts/clientscript.brew_boiler3.txt) `clientscript.brew_boiler3]`  
+- [Script_1750](scripts/clientscript.emote_unlock.txt) `clientscript.emote_unlock]`  
+- [Script_1751](scripts/proc.durationmes.txt) `proc.durationmes]`  
+- [Script_1752](scripts/clientscript.brew_bitternut.txt) `clientscript.brew_bitternut]`  
+- [Script_1753](scripts/clientscript.script1753.txt)  
+- [Script_1754](scripts/clientscript.brew_buckets.txt) `clientscript.brew_buckets]`  
+- [Script_1755](scripts/clientscript.brew_colourwater.txt) `clientscript.brew_colourwater]`  
+- [Script_1756](scripts/clientscript.brew_bark.txt) `clientscript.brew_bark]`  
+- [Script_1757](scripts/clientscript.script1757.txt)  
+- [Script_1758](scripts/clientscript.script1758.txt)  
+- [Script_1759](scripts/clientscript.script1759.txt)  
+- [Script_1760](scripts/clientscript.brew_redscore.txt) `clientscript.brew_redscore]`  
+- [Script_1761](scripts/clientscript.brew_bluescore.txt) `clientscript.brew_bluescore]`  
+- [Script_1762](scripts/clientscript.brew_time.txt) `clientscript.brew_time]`  
+- [Script_1763](scripts/clientscript.script1763.txt)  
+- [Script_1764](scripts/clientscript.script1764.txt)  
+- [Script_1765](scripts/clientscript.script1765.txt)  
+- [Script_1766](scripts/proc.script1766.txt)  
+- [Script_1767](scripts/clientscript.script1767.txt)  
+- [Script_1768](scripts/clientscript.script1768.txt)  
+- [Script_1769](scripts/clientscript.clanwars_orb.txt) `clientscript.clanwars_orb]`  
+- [Script_1770](scripts/proc.script1770.txt)  
+- [Script_1771](scripts/proc.script1771.txt)  
+- [Script_1772](scripts/proc.script1772.txt)  
+- [Script_1773](scripts/proc.script1773.txt)  
+- [Script_1774](scripts/proc.clanwars_resynch_melee.txt) `proc.clanwars_resynch_melee]`  
+- [Script_1775](scripts/proc.clanwars_resynch_magic.txt) `proc.clanwars_resynch_magic]`  
+- [Script_1776](scripts/proc.clanwars_resynch_ranged.txt) `proc.clanwars_resynch_ranged]`  
+- [Script_1777](scripts/proc.clanwars_resynch_prayer.txt) `proc.clanwars_resynch_prayer]`  
+- [Script_1778](scripts/proc.clanwars_resynch_summoning.txt) `proc.clanwars_resynch_summoning]`  
+- [Script_1779](scripts/proc.clanwars_resynch_food.txt) `proc.clanwars_resynch_food]`  
+- [Script_1780](scripts/proc.clanwars_resynch_potions.txt) `proc.clanwars_resynch_potions]`  
+- [Script_1781](scripts/proc.script1781.txt)  
+- [Script_1782](scripts/proc.clanwars_resynch_accept.txt) `proc.clanwars_resynch_accept]`  
+- [Script_1783](scripts/proc.clanwars_focuslayer.txt) `proc.clanwars_focuslayer]`  
+- [Script_1784](scripts/proc.clanwars_updateside.txt) `proc.clanwars_updateside]`  
+- [Script_1785](scripts/proc.clanwars_updateside_textbox.txt) `proc.clanwars_updateside_textbox]`  
+- [Script_1786](scripts/clientscript.clanwars_overlay_status_init.txt) `clientscript.clanwars_overlay_status_init]`  
+- [Script_1787](scripts/clientscript.clanwars_overlay_status.txt) `clientscript.clanwars_overlay_status]`  
+- [Script_1788](scripts/proc.script1788.txt)  
+- [Script_1789](scripts/clientscript.clanwars_overlay_status_timecounter.txt) `clientscript.clanwars_overlay_status_timecounter]`  
+- [Script_1790](scripts/proc.script1790.txt)  
+- [Script_1791](scripts/proc.script1791.txt)  
+- [Script_1792](scripts/clientscript.clanwars_overlay_rules.txt) `clientscript.clanwars_overlay_rules]`  
+- [Script_1793](scripts/clientscript.clanwars_ffa_warning_setup.txt) `clientscript.clanwars_ffa_warning_setup]`  
+- [Script_1794](scripts/clientscript.script1794.txt)  
+- [Script_1795](scripts/proc.script1795.txt)  
+- [Script_1796](scripts/clientscript.clanwars_setup_maininit.txt) `clientscript.clanwars_setup_maininit]`  
+- [Script_1797](scripts/clientscript.script1797.txt)  
+- [Script_1798](scripts/clientscript.script1798.txt)  
+- [Script_1799](scripts/clientscript.script1799.txt)  
+- [Script_1800](scripts/clientscript.clanwars_setup_acceptlayer.txt) `clientscript.clanwars_setup_acceptlayer]`  
+- [Script_1801](scripts/proc.script1801.txt)  
+- [Script_1802](scripts/proc.script1802.txt)  
+- [Script_1803](scripts/clientscript.script1803.txt)  
+- [Script_1804](scripts/clientscript.clanwars_setup_magictooltip.txt) `clientscript.clanwars_setup_magictooltip]`  
+- [Script_1805](scripts/clientscript.script1805.txt)  
+- [Script_1806](scripts/proc.script1806.txt)  
+- [Script_1807](scripts/clientscript.script1807.txt)  
+- [Script_1808](scripts/clientscript.script1808.txt)  
+- [Script_1809](scripts/proc.script1809.txt)  
+- [Script_1810](scripts/clientscript.script1810.txt)  
+- [Script_1811](scripts/proc.script1811.txt)  
+- [Script_1812](scripts/proc.script1812.txt)  
+- [Script_1813](scripts/clientscript.script1813.txt)  
+- [Script_1814](scripts/proc.script1814.txt)  
+- [Script_1815](scripts/proc.script1815.txt)  
+- [Script_1816](scripts/clientscript.clanwars_end_setup.txt) `clientscript.clanwars_end_setup]`  
+- [Script_1817](scripts/proc.clanwars_end_victory.txt) `proc.clanwars_end_victory]`  
+- [Script_1818](scripts/proc.clanwars_end_defeat.txt) `proc.clanwars_end_defeat]`  
+- [Script_1819](scripts/proc.clanwars_end_draw.txt) `proc.clanwars_end_draw]`  
+- [Script_1820](scripts/proc.clanwars_setup_clicktest.txt) `proc.clanwars_setup_clicktest]`  
+- [Script_1821](scripts/clientscript.script1821.txt)  
+- [Script_1822](scripts/clientscript.script1822.txt)  
+- [Script_1823](scripts/clientscript.script1823.txt)  
+- [Script_1824](scripts/clientscript.script1824.txt)  
+- [Script_1825](scripts/clientscript.script1825.txt)  
+- [Script_1826](scripts/clientscript.clanwars_setup_melee.txt) `clientscript.clanwars_setup_melee]`  
+- [Script_1827](scripts/clientscript.clanwars_setup_magic.txt) `clientscript.clanwars_setup_magic]`  
+- [Script_1828](scripts/clientscript.clanwars_setup_ranged.txt) `clientscript.clanwars_setup_ranged]`  
+- [Script_1829](scripts/clientscript.clanwars_setup_prayer.txt) `clientscript.clanwars_setup_prayer]`  
+- [Script_1830](scripts/clientscript.clanwars_setup_summoning.txt) `clientscript.clanwars_setup_summoning]`  
+- [Script_1831](scripts/clientscript.clanwars_setup_food.txt) `clientscript.clanwars_setup_food]`  
+- [Script_1832](scripts/clientscript.clanwars_setup_potions.txt) `clientscript.clanwars_setup_potions]`  
+- [Script_1833](scripts/clientscript.script1833.txt)  
+- [Script_1834](scripts/clientscript.clanwars_setup_accept_button.txt) `clientscript.clanwars_setup_accept_button]`  
+- [Script_1835](scripts/clientscript.clanwars_ffa.txt) `clientscript.clanwars_ffa]`  
+- [Script_1836](scripts/clientscript.clanwars_setup_vartransmit.txt) `clientscript.clanwars_setup_vartransmit]`  
+- [Script_1837](scripts/clientscript.clanwars_setup_varctransmit.txt) `clientscript.clanwars_setup_varctransmit]`  
+- [Script_1838](scripts/clientscript.clanwars_setup_varcstrtransmit.txt) `clientscript.clanwars_setup_varcstrtransmit]`  
+- [Script_1839](scripts/proc.worldmap_key_build.txt) `proc.worldmap_key_build]`  
+- [Script_1840](scripts/proc.worldmap_createline.txt) `proc.worldmap_createline]`  
+- [Script_1841](scripts/proc.worldmap_createtitle.txt) `proc.worldmap_createtitle]`  
+- [Script_1842](scripts/proc.worldmap_quicksort_alphabetical.txt) `proc.worldmap_quicksort_alphabetical]`  
+- [Script_1843](scripts/proc.worldmap_quicksort_category.txt) `proc.worldmap_quicksort_category]`  
+- [Script_1844](scripts/proc.script1844.txt)  
+- [Script_1845](scripts/proc.script1845.txt)  
+- [Script_1846](scripts/clientscript.script1846.txt)  
+- [Script_1847](scripts/clientscript.script1847.txt)  
+- [Script_1848](scripts/clientscript.script1848.txt)  
+- [Script_1849](scripts/proc.script1849.txt)  
+- [Script_1850](scripts/clientscript.script1850.txt)  
+- [Script_1851](scripts/proc.script1851.txt)  
+- [Script_1852](scripts/proc.script1852.txt)  
+- [Script_1853](scripts/proc.script1853.txt)  
+- [Script_1854](scripts/proc.script1854.txt)  
+- [Script_1855](scripts/proc.script1855.txt)  
+- [Script_1856](scripts/proc.script1856.txt)  
+- [Script_1857](scripts/proc.script1857.txt)  
+- [Script_1858](scripts/proc.script1858.txt)  
+- [Script_1859](scripts/proc.script1859.txt)  
+- [Script_1860](scripts/proc.script1860.txt)  
+- [Script_1861](scripts/clientscript.script1861.txt)  
+- [Script_1862](scripts/clientscript.script1862.txt)  
+- [Script_1863](scripts/clientscript.script1863.txt)  
+- [Script_1864](scripts/clientscript.construction_materials.txt) `clientscript.construction_materials]`  
+- [Script_1865](scripts/clientscript.script1865.txt)  
+- [Script_1866](scripts/proc.script1866.txt)  
+- [Script_1867](scripts/clientscript.quickchat_locked_link.txt) `clientscript.quickchat_locked_link]`  
+- [Script_1868](scripts/proc.script1868.txt)  
+- [Script_1869](scripts/proc.script1869.txt)  
+- [Script_1870](scripts/proc.script1870.txt)  
+- [Script_1871](scripts/clientscript.script1871.txt)  
+- [Script_1872](scripts/clientscript.script1872.txt)  
+- [Script_1873](scripts/proc.script1873.txt)  
+- [Script_1874](scripts/proc.script1874.txt)  
+- [Script_1875](scripts/proc.script1875.txt)  
+- [Script_1876](scripts/clientscript.script1876.txt)  
+- [Script_1877](scripts/clientscript.quickchat_enter_search.txt) `clientscript.quickchat_enter_search]`  
+- [Script_1878](scripts/clientscript.script1878.txt)  
+- [Script_1879](scripts/proc.script1879.txt)  
+- [Script_1880](scripts/clientscript.script1880.txt)  
+- [Script_1881](scripts/proc.script1881.txt)  
+- [Script_1882](scripts/proc.script1882.txt)  
+- [Script_1883](scripts/clientscript.script1883.txt)  
+- [Script_1884](scripts/clientscript.script1884.txt)  
+- [Script_1885](scripts/clientscript.script1885.txt)  
+- [Script_1886](scripts/proc.script1886.txt)  
+- [Script_1887](scripts/proc.script1887.txt)  
+- [Script_1888](scripts/proc.script1888.txt)  
+- [Script_1889](scripts/proc.world_x_pvp.txt) `proc.world_x_pvp]`  
+- [Script_1890](scripts/clientscript.script1890.txt)  
+- [Script_1891](scripts/clientscript.script1891.txt)  
+- [Script_1892](scripts/clientscript.script1892.txt)  
+- [Script_1893](scripts/proc.script1893.txt)  
+- [Script_1894](scripts/proc.script1894.txt)  
+- [Script_1895](scripts/proc.script1895.txt)  
+- [Script_1896](scripts/clientscript.script1896.txt)  
+- [Script_1897](scripts/clientscript.script1897.txt)  
+- [Script_1898](scripts/proc.script1898.txt)  
+- [Script_1899](scripts/proc.script1899.txt)  
+- [Script_1900](scripts/proc.quickchat_enter_search.txt) `proc.quickchat_enter_search]`  
+- [Script_1901](scripts/clientscript.script1901.txt)  
+- [Script_1902](scripts/proc.script1902.txt)  
+- [Script_1903](scripts/clientscript.script1903.txt)  
+- [Script_1904](scripts/proc.script1904.txt)  
+- [Script_1905](scripts/proc.script1905.txt)  
+- [Script_1906](scripts/clientscript.script1906.txt)  
+- [Script_1907](scripts/clientscript.script1907.txt)  
+- [Script_1908](scripts/clientscript.script1908.txt)  
+- [Script_1909](scripts/clientscript.sc_remaining_clay_help.txt) `clientscript.sc_remaining_clay_help]`  
+- [Script_1910](scripts/clientscript.script1910.txt)  
+- [Script_1911](scripts/clientscript.script1911.txt)  
+- [Script_1912](scripts/clientscript.script1912.txt)  
+- [Script_1913](scripts/clientscript.script1913.txt)  
+- [Script_1914](scripts/clientscript.script1914.txt)  
+- [Script_1915](scripts/clientscript.sc_processing_init.txt) `clientscript.sc_processing_init]`  
+- [Script_1916](scripts/clientscript.script1916.txt)  
+- [Script_1917](scripts/clientscript.script1917.txt)  
+- [Script_1918](scripts/clientscript.script1918.txt)  
+- [Script_1919](scripts/proc.script1919.txt)  
+- [Script_1920](scripts/clientscript.script1920.txt)  
+- [Script_1921](scripts/clientscript.script1921.txt)  
+- [Script_1922](scripts/clientscript.script1922.txt)  
+- [Script_1923](scripts/clientscript.script1923.txt)  
+- [Script_1924](scripts/clientscript.sc_reward_shop_init.txt) `clientscript.sc_reward_shop_init]`  
+- [Script_1925](scripts/clientscript.script1925.txt)  
+- [Script_1926](scripts/clientscript.script1926.txt)  
+- [Script_1927](scripts/proc.script1927.txt)  
+- [Script_1928](scripts/proc.script1928.txt)  
+- [Script_1929](scripts/proc.script1929.txt)  
+- [Script_1930](scripts/proc.script1930.txt)  
+- [Script_1931](scripts/proc.script1931.txt)  
+- [Script_1932](scripts/clientscript.script1932.txt)  
+- [Script_1933](scripts/clientscript.script1933.txt)  
+- [Script_1934](scripts/clientscript.script1934.txt)  
+- [Script_1935](scripts/clientscript.script1935.txt)  
+- [Script_1936](scripts/clientscript.script1936.txt)  
+- [Script_1937](scripts/clientscript.script1937.txt)  
+- [Script_1938](scripts/clientscript.script1938.txt)  
+- [Script_1939](scripts/clientscript.script1939.txt)  
+- [Script_1940](scripts/clientscript.script1940.txt)  
+- [Script_1941](scripts/clientscript.script1941.txt)  
+- [Script_1942](scripts/proc.script1942.txt)  
+- [Script_1943](scripts/clientscript.script1943.txt)  
+- [Script_1944](scripts/clientscript.script1944.txt)  
+- [Script_1945](scripts/clientscript.script1945.txt)  
+- [Script_1946](scripts/clientscript.script1946.txt)  
+- [Script_1947](scripts/clientscript.script1947.txt)  
+- [Script_1948](scripts/clientscript.script1948.txt)  
+- [Script_1949](scripts/clientscript.script1949.txt)  
+- [Script_1950](scripts/proc.script1950.txt)  
+- [Script_1951](scripts/clientscript.statusicons_serverupdate.txt) `clientscript.statusicons_serverupdate]`  
+- [Script_1952](scripts/proc.statusicons_deltooltip.txt) `proc.statusicons_deltooltip]`  
+- [Script_1953](scripts/clientscript.script1953.txt)  
+- [Script_1954](scripts/clientscript.script1954.txt)  
+- [Script_1955](scripts/clientscript.script1955.txt)  
+- [Script_1956](scripts/clientscript.script1956.txt)  
+- [Script_1957](scripts/clientscript.script1957.txt)  
+- [Script_1958](scripts/clientscript.script1958.txt)  
+- [Script_1959](scripts/clientscript.script1959.txt)  
+- [Script_1960](scripts/clientscript.script1960.txt)  
+- [Script_1961](scripts/clientscript.script1961.txt)  
+- [Script_1962](scripts/clientscript.agilityarena_colour.txt) `clientscript.agilityarena_colour]`  
+- [Script_1963](scripts/clientscript.pest_mouseover.txt) `clientscript.pest_mouseover]`  
+- [Script_1964](scripts/clientscript.pest_mouseleave.txt) `clientscript.pest_mouseleave]`  
+- [Script_1965](scripts/clientscript.pest_confirm_mouseover.txt) `clientscript.pest_confirm_mouseover]`  
+- [Script_1966](scripts/clientscript.script1966.txt)  
+- [Script_1967](scripts/clientscript.script1967.txt)  
+- [Script_1968](scripts/clientscript.script1968.txt)  
+- [Script_1969](scripts/proc.script1969.txt)  
+- [Script_1970](scripts/clientscript.script1970.txt)  
+- [Script_1971](scripts/proc.script1971.txt)  
+- [Script_1972](scripts/clientscript.script1972.txt)  
+- [Script_1973](scripts/clientscript.script1973.txt)  
+- [Script_1974](scripts/clientscript.script1974.txt)  
+- [Script_1975](scripts/proc.script1975.txt)  
+- [Script_1976](scripts/proc.script1976.txt)  
+- [Script_1977](scripts/proc.script1977.txt)  
+- [Script_1978](scripts/proc.script1978.txt)  
+- [Script_1979](scripts/proc.script1979.txt)  
+- [Script_1980](scripts/proc.script1980.txt)  
+- [Script_1981](scripts/proc.script1981.txt)  
+- [Script_1982](scripts/proc.script1982.txt)  
+- [Script_1983](scripts/proc.script1983.txt)  
+- [Script_1984](scripts/proc.script1984.txt)  
+- [Script_1985](scripts/proc.script1985.txt)  
+- [Script_1986](scripts/proc.script1986.txt)  
+- [Script_1987](scripts/proc.script1987.txt)  
+- [Script_1988](scripts/clientscript.script1988.txt)  
+- [Script_1989](scripts/clientscript.script1989.txt)  
+- [Script_1990](scripts/clientscript.script1990.txt)  
+- [Script_1991](scripts/clientscript.script1991.txt)  
+- [Script_1992](scripts/clientscript.script1992.txt)  
+- [Script_1993](scripts/clientscript.script1993.txt)  
+- [Script_1994](scripts/clientscript.script1994.txt)  
+- [Script_1995](scripts/clientscript.script1995.txt)  
+- [Script_1996](scripts/clientscript.script1996.txt)  
+- [Script_1997](scripts/clientscript.script1997.txt)  
+- [Script_1998](scripts/clientscript.script1998.txt)  
+- [Script_1999](scripts/clientscript.script1999.txt)  
+- [Script_2000](scripts/clientscript.script2000.txt)  
+- [Script_2001](scripts/clientscript.script2001.txt)  
+- [Script_2002](scripts/clientscript.script2002.txt)  
+- [Script_2003](scripts/clientscript.script2003.txt)  
+- [Script_2004](scripts/clientscript.script2004.txt)  
+- [Script_2005](scripts/clientscript.script2005.txt)  
+- [Script_2006](scripts/clientscript.script2006.txt)  
+- [Script_2007](scripts/clientscript.script2007.txt)  
+- [Script_2008](scripts/clientscript.script2008.txt)  
+- [Script_2009](scripts/clientscript.script2009.txt)  
+- [Script_2010](scripts/clientscript.script2010.txt)  
+- [Script_2011](scripts/clientscript.script2011.txt)  
+- [Script_2012](scripts/clientscript.script2012.txt)  
+- [Script_2013](scripts/clientscript.script2013.txt)  
+- [Script_2014](scripts/clientscript.script2014.txt)  
+- [Script_2015](scripts/clientscript.script2015.txt)  
+- [Script_2016](scripts/clientscript.script2016.txt)  
+- [Script_2017](scripts/clientscript.script2017.txt)  
+- [Script_2018](scripts/clientscript.script2018.txt)  
+- [Script_2019](scripts/clientscript.script2019.txt)  
+- [Script_2020](scripts/clientscript.script2020.txt)  
+- [Script_2021](scripts/clientscript.script2021.txt)  
+- [Script_2022](scripts/clientscript.script2022.txt)  
+- [Script_2023](scripts/clientscript.script2023.txt)  
+- [Script_2024](scripts/clientscript.script2024.txt)  
+- [Script_2025](scripts/clientscript.script2025.txt)  
+- [Script_2026](scripts/proc.script2026.txt)  
+- [Script_2027](scripts/clientscript.script2027.txt)  
+- [Script_2028](scripts/clientscript.script2028.txt)  
+- [Script_2029](scripts/clientscript.script2029.txt)  
+- [Script_2030](scripts/clientscript.script2030.txt)  
+- [Script_2031](scripts/clientscript.script2031.txt)  
+- [Script_2032](scripts/clientscript.trawler_water_level.txt) `clientscript.trawler_water_level]`  
+- [Script_2033](scripts/clientscript.script2033.txt)  
+- [Script_2034](scripts/proc.script2034.txt)  
+- [Script_2035](scripts/proc.script2035.txt)  
+- [Script_2036](scripts/proc.script2036.txt)  
+- [Script_2037](scripts/proc.script2037.txt)  
+- [Script_2038](scripts/proc.script2038.txt)  
+- [Script_2039](scripts/proc.script2039.txt)  
+- [Script_2040](scripts/clientscript.blast_furnace_coal.txt) `clientscript.blast_furnace_coal]`  
+- [Script_2041](scripts/clientscript.blast_furnace_bar_stock.txt) `clientscript.blast_furnace_bar_stock]`  
+- [Script_2042](scripts/proc.script2042.txt)  
+- [Script_2043](scripts/clientscript.script2043.txt)  
+- [Script_2044](scripts/clientscript.script2044.txt)  
+- [Script_2045](scripts/clientscript.worldmap_overlay.txt) `clientscript.worldmap_overlay]`  
+- [Script_2046](scripts/proc.worldmap_overlay_clear.txt) `proc.worldmap_overlay_clear]`  
+- [Script_2047](scripts/proc.script2047.txt)  
+- [Script_2048](scripts/proc.script2048.txt)  
+- [Script_2049](scripts/proc.worldmap_setupgraphic.txt) `proc.worldmap_setupgraphic]`  
+- [Script_2050](scripts/proc.worldmap_hidegraphic.txt) `proc.worldmap_hidegraphic]`  
+- [Script_2051](scripts/proc.script2051.txt)  
+- [Script_2052](scripts/proc.worldmap_setuptext.txt) `proc.worldmap_setuptext]`  
+- [Script_2053](scripts/clientscript.worldmap_op.txt) `clientscript.worldmap_op]`  
+- [Script_2054](scripts/clientscript.script2054.txt)  
+- [Script_2055](scripts/proc.mescoord.txt) `proc.mescoord]`  
+- [Script_2056](scripts/proc.script2056.txt)  
+- [Script_2057](scripts/clientscript.script2057.txt)  
+- [Script_2058](scripts/clientscript.script2058.txt)  
+- [Script_2059](scripts/proc.script2059.txt)  
+- [Script_2060](scripts/clientscript.script2060.txt)  
+- [Script_2061](scripts/clientscript.script2061.txt)  
+- [Script_2062](scripts/clientscript.gnomeglider_init.txt) `clientscript.gnomeglider_init]`  
+- [Script_2063](scripts/clientscript.gnomeglider_update.txt) `clientscript.gnomeglider_update]`  
+- [Script_2064](scripts/proc.gnomeglider_update.txt) `proc.gnomeglider_update]`  
