@@ -28,11 +28,11 @@
 /build/libs/
 /build/tmp/
 /out/
-target/Constants-1.0.0.jar
-Constants/**/*.class
-Constants/.gradle/
-Constants/build/
-Constants/target/*
+target/Config-1.0.0.jar
+Config/**/*.class
+Config/.gradle/
+Config/build/
+Config/target/*
 
 __pycache__/
 
@@ -51,6 +51,7 @@ out/
 out/**
 pyvenv.cfg
 share/
+traget/**
+
 nullmain_file_cache.dat2
 nullmain_file_cache.idx255
-traget/**

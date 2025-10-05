@@ -27,4 +27,5 @@ data/players/**
 data/profile/**
 data/cache.zip
 out/**
+ge_test.db
 /data/playerstats/player_stats.db
