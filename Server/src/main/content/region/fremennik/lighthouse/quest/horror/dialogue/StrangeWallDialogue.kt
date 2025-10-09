@@ -41,7 +41,7 @@ class StrangeWallDialogue(private val items: Int) : DialogueFile() {
 
     private fun handleItemAction() {
         val player = player ?: return
-        val vbits = itemVbits[items] ?: return
+        val vbit = itemVbits[items] ?: return
         val itemName = getItemName(items).lowercase()
 
         end()
@@ -51,11 +51,14 @@ class StrangeWallDialogue(private val items: Int) : DialogueFile() {
         }
 
         sendMessage(player, "You place a $itemName into the slot in the wall.")
-        setVarbit(player, vbits, 1, true)
+        setVarbit(player, vbit, 1, true)
 
         /*
-         * Increment strange wall door unlock.
+         * Increment strange wall door unlock only if all items are placed.
          */
-        incrementVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_STRANGE_WALL_UNLOCKED_35, 1, true)
+        val allPlaced = itemVbits.values.all { getVarbit(player, it) == 1 }
+        if (allPlaced) {
+            incrementVarbit(player, Vars.VARBIT_HORROR_FROM_THE_DEEP_STRANGE_WALL_UNLOCKED_35, 1, true)
+        }
     }
 }

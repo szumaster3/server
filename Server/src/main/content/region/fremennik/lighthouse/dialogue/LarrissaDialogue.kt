@@ -74,7 +74,6 @@ class LarrissaDialogue(player: Player? = null) : Dialogue(player) {
                     24 -> {
                         end()
                         npcl(FaceAnim.FRIENDLY, "Thank you so much!")
-                        // setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 1)
                     }
                 }
             }

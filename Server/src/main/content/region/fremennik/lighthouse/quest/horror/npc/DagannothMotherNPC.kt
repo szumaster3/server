@@ -273,10 +273,7 @@ class DagannothMotherNPC(
         }
     }
 
-    class DagannothTransform(
-        val player: Player?,
-        val dagannoth: DagannothMotherNPC,
-    ) : Pulse() {
+    class DagannothTransform(val player: Player?, val dagannoth: DagannothMotherNPC) : Pulse() {
         var counter = 0
 
         override fun pulse(): Boolean {

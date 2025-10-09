@@ -2,7 +2,6 @@ package content.region.fremennik.lighthouse.quest.horror.plugin
 
 import core.api.*
 import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.interaction.InterfaceListener
 import core.game.interaction.QueueStrength
 import shared.consts.Components
@@ -53,7 +52,7 @@ class HorrorMetalDoorInterface : InterfaceListener {
                 queueScript(player, 1, QueueStrength.SOFT) {
                     sendMessage(player, "You hear the sound of something moving within the wall.")
                     playAudio(player, Sounds.STRANGEDOOR_SOUND_1627)
-                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 50)
+                    setVarbit(player, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34, 50, true)
                     return@queueScript stopExecuting(player)
                 }
             }
