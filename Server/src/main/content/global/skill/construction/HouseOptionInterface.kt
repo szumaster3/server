@@ -1,7 +1,7 @@
 package content.global.skill.construction
 
-import content.global.plugin.iface.WarningListener
-import content.global.plugin.iface.Warnings
+import core.game.node.entity.player.link.WarningManager
+import core.game.node.entity.player.link.Warnings
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
@@ -10,41 +10,42 @@ import shared.consts.Components
  * Handles the house options interface.
  */
 class HouseOptionInterface : InterfaceListener {
+
+    companion object {
+        private const val BUILD_MODE_ON = 14
+        private const val BUILD_MODE_OFF = 1
+        private const val EXPEL_GUESTS = 15
+        private const val LEAVE_HOUSE = 13
+    }
+
     override fun defineInterfaceListeners() {
         on(Components.POH_HOUSE_OPTIONS_398) { player, _, _, buttonID, _, _ ->
-            when (buttonID) {
-                14 -> {
-                    if (player.houseManager.isInHouse(player) && !WarningListener.isDisabled(player, Warnings.PLAYER_OWNED_HOUSES)) {
-                        WarningListener.openWarning(
-                            player,
-                            Warnings.PLAYER_OWNED_HOUSES,
-                        )
-                    } else {
-                        player.houseManager.toggleBuildingMode(player, true)
-                    }
-                    return@on true
+            if (buttonID == BUILD_MODE_ON) {
+                if (player.houseManager.isInHouse(player) && !WarningManager.isDisabled(player, Warnings.PLAYER_OWNED_HOUSES)) {
+                    WarningManager.openWarning(player, Warnings.PLAYER_OWNED_HOUSES)
+                } else {
+                    player.houseManager.toggleBuildingMode(player, true)
                 }
-                1 -> {
-                    player.houseManager.toggleBuildingMode(player, false)
-                    return@on true
-                }
-
-                15 -> {
-                    player.houseManager.expelGuests(player)
-                    return@on true
-                }
-
-                13 -> {
-                    if (!player.houseManager.isInHouse(player)) {
-                        sendMessage(player, "You can't do this outside of your house.")
-                        return@on true
-                    }
-                    HouseManager.leave(player)
-                    return@on true
-                }
-
-                else -> return@on false
+                return@on true
             }
+            if (buttonID == BUILD_MODE_OFF) {
+                player.houseManager.toggleBuildingMode(player, false)
+                return@on true
+            }
+            if (buttonID == EXPEL_GUESTS) {
+                player.houseManager.expelGuests(player)
+                return@on true
+            }
+            if (buttonID == LEAVE_HOUSE) {
+                if (!player.houseManager.isInHouse(player)) {
+                    sendMessage(player, "You can't do this outside of your house.")
+                } else {
+                    HouseManager.leave(player)
+                }
+                return@on true
+            }
+
+            return@on false
         }
     }
 }
