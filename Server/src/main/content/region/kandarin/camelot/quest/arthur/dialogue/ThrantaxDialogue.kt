@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.region.kandarin.camelot.quest.arthur.npc.ThrantaxTheMightyNPC
 import core.api.setQuestStage
 import core.api.sendDialogue
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setAttribute
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -44,7 +44,7 @@ class ThrantaxDialogue : DialogueFile() {
             2 -> {
                 shuffled = options.toMutableList().apply { shuffle() }.toTypedArray()
 
-                sendDialogueOptions(
+                sendOptions(
                     player!!,
                     "Select an Option",
                     shuffled[0],

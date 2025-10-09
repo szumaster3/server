@@ -51,7 +51,7 @@ class StoneSplittingPlugin : InteractionListener {
             if (!hasTool(player, Items.CHISEL_1755)) return@onUseWith true
 
             setTitle(player, 2)
-            sendDialogueOptions(player, "What would you like to do?", "Split the block into smaller pieces.", "Nothing.")
+            sendOptions(player, "What would you like to do?", "Split the block into smaller pieces.", "Nothing.")
 
             addDialogueAction(player) { _, button ->
                 if (button == 2) {

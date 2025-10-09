@@ -66,7 +66,7 @@ class HirkoDialogue(player: Player? = null) : Dialogue(player) {
             }
             24 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Would you like to buy a pouch?", "Yes I'll pay the 1500gp.", "Thanks for telling me. Bye!")
+                sendOptions(player, "Would you like to buy a pouch?", "Yes I'll pay the 1500gp.", "Thanks for telling me. Bye!")
                 stage++
             }
             25 -> when(buttonId) {

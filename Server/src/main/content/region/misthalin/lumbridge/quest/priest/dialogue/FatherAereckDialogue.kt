@@ -59,7 +59,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
             0 -> {
                 if (isQuestComplete(player, Quests.THE_RESTLESS_GHOST)) {
                     setTitle(player, 4)
-                    sendDialogueOptions(
+                    sendOptions(
                         player,
                         "What would you like to say?",
                         "Can you change my gravestone now?",
@@ -70,7 +70,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 1
                 } else {
                     setTitle(player, 4)
-                    sendDialogueOptions(
+                    sendOptions(
                         player,
                         "What would you like to say?",
                         "Who's Saradomin?",

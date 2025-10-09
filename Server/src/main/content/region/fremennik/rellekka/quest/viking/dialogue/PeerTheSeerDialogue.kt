@@ -81,7 +81,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                 player(FaceAnim.HAPPY, "Hello Peer.")
                 stage = 150
             } else {
-                sendDialogueOptions(player!!, title = "What would you like to ask?", "Wallasalki Bone Armour", "The Fremennik Trials")
+                sendOptions(player!!, title = "What would you like to ask?", "Wallasalki Bone Armour", "The Fremennik Trials")
                 stage = 159
             }
             return true
@@ -95,7 +95,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                 npc(FaceAnim.SAD, "I have no interest in talking to you just now outerlander.")
                 stage = 1000
             } else {
-                sendDialogueOptions(player!!, title = "What would you like to ask?", "Wallasalki Bone Armour", "The Fremennik Trials")
+                sendOptions(player!!, title = "What would you like to ask?", "Wallasalki Bone Armour", "The Fremennik Trials")
                 stage = 167
             }
         }

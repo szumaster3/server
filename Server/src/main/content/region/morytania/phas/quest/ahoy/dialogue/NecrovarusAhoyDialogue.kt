@@ -71,7 +71,7 @@ class NecrovarusAhoyDialogue : DialogueFile() {
                 1 -> player("No, Necrovarus, I am not insane. With this enchanted", "amulet of ghostspeak I have the power to command you", "to do my will!").also { stage++ }
                 2 -> {
                     setTitle(player!!, 3)
-                    sendDialogueOptions(player!!, "What do you want to command Necrovarus to do?", "Let any ghost who so wishes pass on into the next world.", "Tell me a joke.", "Do a chicken impression.").also { stage++ }
+                    sendOptions(player!!, "What do you want to command Necrovarus to do?", "Let any ghost who so wishes pass on into the next world.", "Tell me a joke.", "Do a chicken impression.").also { stage++ }
                 }
                 3 -> when (buttonID) {
                     1 -> player("Let any ghost who so wishes pass on into the next world.").also { stage = 14 }

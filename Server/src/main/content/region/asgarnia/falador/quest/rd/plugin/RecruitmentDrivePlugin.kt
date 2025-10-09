@@ -87,7 +87,7 @@ class RecruitmentDrivePlugin :
         }
 
         on(Rooms.portalsIDs, IntType.SCENERY, "use") { player, _ ->
-            sendDialogueOptions(player, "Quit the training grounds?", "YES.", "NO.")
+            sendOptions(player, "Quit the training grounds?", "YES.", "NO.")
             addDialogueAction(player) { player, buttonID ->
                 if (buttonID == 2) {
                     FailCutscene(player).start()

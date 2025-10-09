@@ -63,7 +63,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
                     return true
                 }
                 setTitle(player, 4)
-                sendDialogueOptions(player, "What would you like to say?", "Is there anything I can do for you?", "Could you check my bank for junk, please?", "I've got something I'd like you to look at.", "I'd just like to ask you something.")
+                sendOptions(player, "What would you like to say?", "Is there anything I can do for you?", "Could you check my bank for junk, please?", "I've got something I'd like you to look at.", "I'd just like to ask you something.")
                 stage = 1
             }
 
@@ -97,7 +97,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             40 -> npc("Please, do!").also { stage++ }
             41 -> {
                 setTitle(player, 5)
-                sendDialogueOptions(player, "Pick a topic", "Distant lands", "Strange beasts", "days gone by", "Gods and demons", "Your hat!").also { stage++ }
+                sendOptions(player, "Pick a topic", "Distant lands", "Strange beasts", "days gone by", "Gods and demons", "Your hat!").also { stage++ }
             }
             42 -> when (buttonId) {
                 1 -> options("The Wilderness", "Misty jungles", "Underground domains", "Mystical realms").also { stage = 52 }
@@ -109,7 +109,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             43 -> npc("Why, thank you! I rather like it myself.").also { stage++ }
             44 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "What would you like to say?", "You should give it back, you know.", "How can I get a hat like that?").also { stage++ }
+                sendOptions(player, "What would you like to say?", "You should give it back, you know.", "How can I get a hat like that?").also { stage++ }
             }
             45 -> when (buttonId) {
                 1 -> player("You should give it back, you know.").also { stage++ }
@@ -120,7 +120,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             48 -> npc("Now you've got that off your chest, would you like to", "ask me about anything else?").also { stage++ }
             49 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "What would you like to say?", "How can I get a hat like that?", "Yes please.", "Thanks, maybe some other time.").also { stage++ }
+                sendOptions(player, "What would you like to say?", "How can I get a hat like that?", "Yes please.", "Thanks, maybe some other time.").also { stage++ }
             }
             50 -> when (buttonId) {
                 1 -> player("How can I get a hat like that?").also { stage = 187 }
@@ -143,7 +143,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
             59 -> npcl(FaceAnim.HALF_GUILTY, "Is there anything else you'd like to ask?").also { stage++ }
             60 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "What would you like to say?", "Yes please.", "Thanks, maybe some other time.")
+                sendOptions(player, "What would you like to say?", "Yes please.", "Thanks, maybe some other time.")
                 stage++
             }
             61 -> when (buttonId) {
@@ -294,7 +294,7 @@ class WiseOldManDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("I believe you are the person to talk to if I want to buy", "a Quest Point Cape?").also { stage++ }
                 2 -> {
                     setTitle(player, 4)
-                    sendDialogueOptions(player, "What would you like to say?", "Is there anything I can do for you?", "Could you check my bank for junk, please?", "I've got something I'd like you to look at.", "I'd just like to ask you something.").also { stage = 1 }
+                    sendOptions(player, "What would you like to say?", "Is there anything I can do for you?", "Could you check my bank for junk, please?", "I've got something I'd like you to look at.", "I'd just like to ask you something.").also { stage = 1 }
                 }
             }
             501 -> npc("Indeed you believe rightly, " + player.username + ", and if you know that", "then you'll also know that they cost 99000 coins.").also { stage++ }

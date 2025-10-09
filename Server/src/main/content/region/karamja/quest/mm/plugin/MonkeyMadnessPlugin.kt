@@ -206,7 +206,7 @@ class MonkeyMadnessPlugin : InteractionListener {
         }
 
         onEquip(Items.TENTH_SQUAD_SIGIL_4035) { player, _ ->
-            sendDialogueOptions(player, "Let the sigil teleport you when worn?")
+            sendOptions(player, "Let the sigil teleport you when worn?")
             setQuestStage(player, Quests.MONKEY_MADNESS, 94)
 
             PacketRepository.send(

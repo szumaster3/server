@@ -1,6 +1,6 @@
 package content.global.skill.construction
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendPlainDialogue
 import core.api.setTitle
 import core.game.dialogue.Dialogue
@@ -30,7 +30,7 @@ class RemovalDialogue : Dialogue {
         }
         room = player.houseManager.rooms[plane][pos[0]][pos[1]]
         setTitle(player, 2)
-        sendDialogueOptions(
+        sendOptions(
             player,
             "Remove the " + (if (room != null) {
                 room!!.properties.name.lowercase().replace("_", " ")

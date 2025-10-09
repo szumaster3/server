@@ -1,6 +1,6 @@
 package content.minigame.duelarena.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -26,7 +26,7 @@ class MubarizDialogue(player: Player? = null) : Dialogue(player) {
             0 -> npc(FaceAnim.HALF_GUILTY, "Welcome to the Duel Arena!").also { stage++ }
             1 -> player(FaceAnim.HALF_GUILTY, "Thanks! I need some information.").also { stage++ }
             2 -> npc(FaceAnim.HALF_GUILTY, "What would you like to know?").also { stage++ }
-            3 -> sendDialogueOptions(player, "Information", "What is this place?", "How do I challenge someone to a duel?", "What kind of options are there?", "This place looks really old, where did it come from?").also { stage++ }
+            3 -> sendOptions(player, "Information", "What is this place?", "How do I challenge someone to a duel?", "What kind of options are there?", "This place looks really old, where did it come from?").also { stage++ }
 
             4 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "What is this place?").also { stage = 10 }

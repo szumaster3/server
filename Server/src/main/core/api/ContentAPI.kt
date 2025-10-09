@@ -1139,7 +1139,7 @@ fun sendDialogueLines(
  * @param title The title of the options dialogue.
  * @param options The options available to the player.
  */
-fun sendDialogueOptions(
+fun sendOptions(
     player: Player,
     title: String,
     vararg options: String,

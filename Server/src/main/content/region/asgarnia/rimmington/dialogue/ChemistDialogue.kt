@@ -6,7 +6,7 @@ import core.api.addItemOrDrop
 import core.api.openDialogue
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -29,9 +29,9 @@ class ChemistDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         setTitle(player, 4)
         if (!isQuestComplete(player, Quests.BIOHAZARD) && isQuestInProgress(player, Quests.BIOHAZARD, 10, 99)) {
-            sendDialogueOptions(player, "Do you want to talk about lamps?", "Yes.", "Your quest.", "Impling jars.", "Falador Achievement Diary.").also { stage = 1 }
+            sendOptions(player, "Do you want to talk about lamps?", "Yes.", "Your quest.", "Impling jars.", "Falador Achievement Diary.").also { stage = 1 }
         } else {
-            sendDialogueOptions(player, "Do you want to talk about lamps?", "Yes.", "No.", "Impling jars.", "Falador Achievement Diary.")
+            sendOptions(player, "Do you want to talk about lamps?", "Yes.", "No.", "Impling jars.", "Falador Achievement Diary.")
         }
         return true
     }

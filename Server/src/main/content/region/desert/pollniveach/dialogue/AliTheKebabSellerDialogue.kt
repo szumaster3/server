@@ -1,6 +1,6 @@
 package content.region.desert.pollniveach.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -44,7 +44,7 @@ class AliTheKebabSellerDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("No thanks, I'm good.").also { stage = END_DIALOGUE }
             }
 
-            12 -> sendDialogueOptions(
+            12 -> sendOptions(
                 player,
                 "Select one.",
                 "I want a kebab, please.",

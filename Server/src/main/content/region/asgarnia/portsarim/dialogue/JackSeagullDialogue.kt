@@ -1,6 +1,6 @@
 package content.region.asgarnia.portsarim.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -24,7 +24,7 @@ class JackSeagullDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "What would you like to say?", "What are you doing here?", "Have you got any quests I could do?").also { stage++ }
+            0 -> sendOptions(player, "What would you like to say?", "What are you doing here?", "Have you got any quests I could do?").also { stage++ }
             1 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "What are you doing here?").also { stage++ }
                 2 -> player(FaceAnim.HALF_GUILTY, "Have you got any quests I could do?").also { stage = 4 }

@@ -30,7 +30,7 @@ class TeleportCrystalPlugin : InteractionListener {
                 sendMessage(player, "A magical force has stopped you from teleporting.")
                 return@on true
             }
-            sendDialogueOptions(player, "Select an Option", "Teleport to Lletya", "Cancel").also {
+            sendOptions(player, "Select an Option", "Teleport to Lletya", "Cancel").also {
                 addDialogueAction(player) { player, button ->
                     when(button) {
                         2 -> {

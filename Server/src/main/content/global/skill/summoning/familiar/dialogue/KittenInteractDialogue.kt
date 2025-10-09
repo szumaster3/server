@@ -35,7 +35,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
         }
 
         setTitle(player, 3)
-        sendDialogueOptions(player, "Interact with $displayName", "Stroke.", "Chase vermin.", "Shoo away.")
+        sendOptions(player, "Interact with $displayName", "Stroke.", "Chase vermin.", "Shoo away.")
         return true
     }
 
@@ -106,7 +106,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
                     })
                 }
                 3 -> {
-                    sendDialogueOptions(player, "Are you sure?", "Yes I am.", "No I'm not.")
+                    sendOptions(player, "Are you sure?", "Yes I am.", "No I'm not.")
                     stage = 4
                 }
             }

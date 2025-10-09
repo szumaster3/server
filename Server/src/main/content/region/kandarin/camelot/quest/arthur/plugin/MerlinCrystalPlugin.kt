@@ -13,7 +13,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
@@ -152,7 +151,7 @@ class MerlinCrystalPlugin : InteractionListener {
         /*
         on(intArrayOf(Scenery.CRATE_WALL_65,Scenery.CRATE_WALL_66), IntType.SCENERY, "climb-out") { player, node ->
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Would you like to get back out of the crate?", "Yes.", "No.")
+                sendOptions(player, "Would you like to get back out of the crate?", "Yes.", "No.")
                 addDialogueAction(player) { _, selected ->
                     when(selected) {
                         2 -> sendDialogue(player, "You climb out of the crate.").also {
@@ -246,7 +245,7 @@ class MerlinCrystalPlugin : InteractionListener {
                 }
                 1 -> {
                     setTitle(player!!, 2)
-                    sendDialogueOptions(player!!, "Would you like to hide inside the crate?", "Yes.", "No.")
+                    sendOptions(player!!, "Would you like to hide inside the crate?", "Yes.", "No.")
                     stage = 2
                 }
                 2 -> {

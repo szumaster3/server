@@ -26,12 +26,12 @@ class RechargeDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Recharge sceptre?", "Yes, please.", "No, thanks.").also { stage++ }
+                sendOptions(player, "Recharge sceptre?", "Yes, please.", "No, thanks.").also { stage++ }
             }
             1 -> when (buttonId) {
                 1 -> {
                     setTitle(player, 3)
-                    sendDialogueOptions(player, "Recharge with?", "Clay/Ivory Artefacts(24)", "Stone Artefacts(12)", "Gold Artefacts(6)").also { stage = 20 }
+                    sendOptions(player, "Recharge with?", "Clay/Ivory Artefacts(24)", "Stone Artefacts(12)", "Gold Artefacts(6)").also { stage = 20 }
                 }
 
                 2 -> stage = 100

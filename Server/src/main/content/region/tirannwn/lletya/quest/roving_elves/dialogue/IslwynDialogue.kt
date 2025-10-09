@@ -170,7 +170,7 @@ class IslwynDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             9 -> {
-                sendDialogueOptions(player, "Do you want to;", "Tell the truth?", "Lie?", "Leave the old elf be?")
+                sendOptions(player, "Do you want to;", "Tell the truth?", "Lie?", "Leave the old elf be?")
                 stage = 10
             }
 

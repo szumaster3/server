@@ -835,7 +835,7 @@ class ZavisticRarveSellBlackPrismDialogue : DialogueFile() {
 
             3 -> {
                 setTitle(player!!, 2)
-                sendDialogueOptions(
+                sendOptions(
                     player!!,
                     "WHO WOULD YOU LIKE TO SELL THE PRISM TO?",
                     "Sell it to Zavistic for 2000",

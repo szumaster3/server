@@ -17,7 +17,7 @@ class BookcaseWest : DialogueFile() {
         when (stage) {
             START_DIALOGUE -> {
                 setTitle(player!!, 4)
-                sendDialogueOptions(player!!, "Which book would you like to read?", "1001 Ways To Eat Fried Gizzards", "Practical Gardening For The Headless", "Human Taxidermy for Nincompoops", "The Joy of Gravedigging")
+                sendOptions(player!!, "Which book would you like to read?", "1001 Ways To Eat Fried Gizzards", "Practical Gardening For The Headless", "Human Taxidermy for Nincompoops", "The Joy of Gravedigging")
                 stage++
             }
 
@@ -41,7 +41,7 @@ class BookcaseEastDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val opposingGender = if (player!!.isMale) "female" else "male"
         when (stage) {
-            START_DIALOGUE -> sendDialogueOptions(player!!, "Which book would you like to read?", "Men are from Morytania, Women are from Lumbridge", "Chimney Sweeping on a Budget", "Handy Maggot Avoidance Techniques", "My Family and Other Zombies").also { stage++ }
+            START_DIALOGUE -> sendOptions(player!!, "Which book would you like to read?", "Men are from Morytania, Women are from Lumbridge", "Chimney Sweeping on a Budget", "Handy Maggot Avoidance Techniques", "My Family and Other Zombies").also { stage++ }
             1 -> when (buttonID) {
                 1 -> sendDialogue(player!!, "You discover some fascinating insights into the mind of the $opposingGender kind.").also { stage = END_DIALOGUE }
                 2 -> ChimneySweepingOnABudgetBook.display(player!!, 0, 0).also { end() }

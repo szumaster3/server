@@ -232,7 +232,7 @@ class RunecraftingGuildPlugin : InteractionListener, InterfaceListener, MapArea 
          */
 
         on(WIZARD_NPCs, IntType.NPC, "talk-to") { player, _ ->
-            sendDialogueOptions(player, "Select an option", "I want to join the orb project!", "Never mind.")
+            sendOptions(player, "Select an option", "I want to join the orb project!", "Never mind.")
             addDialogueAction(player) { _, _ ->
                 closeDialogue(player)
             }

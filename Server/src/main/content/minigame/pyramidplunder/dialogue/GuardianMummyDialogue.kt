@@ -1,7 +1,7 @@
 package content.minigame.pyramidplunder.dialogue
 
 import content.minigame.pyramidplunder.plugin.PyramidPlunderMinigame
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -27,7 +27,7 @@ class GuardianMummyDialogue(player: Player? = null) : Dialogue(player) {
             1 -> npcl(FaceAnim.OLD_NOT_INTERESTED, "Another 'archaeologist'. I'm not going to let you plunder my master's tomb you know.").also { stage++ }
             2 -> playerl(FaceAnim.NEUTRAL, "That's a shame. Have you got anything else I could do while I'm here?").also { stage++ }
             3 -> npcl(FaceAnim.OLD_NOT_INTERESTED, "If it will keep you out of mischief I suppose I could set something up for you... I have a few rooms full of some things you humans might consider valuable, do you want to give it a go?").also { stage++ }
-            4 -> sendDialogueOptions(player, "Play Pyramid Plunder?", "That sounds like fun; what do I do?", "Not right now.", "I know what I'm doing, so let's get on with it.").also { stage++ }
+            4 -> sendOptions(player, "Play Pyramid Plunder?", "That sounds like fun; what do I do?", "Not right now.", "I know what I'm doing, so let's get on with it.").also { stage++ }
             5 -> when (buttonId) {
                 1 -> playerl(FaceAnim.FRIENDLY, "That sounds like fun; what do I do?").also { stage = 10 }
                 2 -> playerl(FaceAnim.NEUTRAL, "Not right now.").also { stage = END_DIALOGUE }
@@ -38,7 +38,7 @@ class GuardianMummyDialogue(player: Player? = null) : Dialogue(player) {
             12 -> npcl(FaceAnim.OLD_NOT_INTERESTED, "The rewards also become more lucrative the further into the tomb you go. You will also have to deactivate a trap in order to enter the main part of each room.").also { stage++ }
             13 -> npcl(FaceAnim.OLD_NOT_INTERESTED, "When you want to move onto the next room you need to find the correct door first.").also { stage++ }
             14 -> npcl(FaceAnim.OLD_NOT_INTERESTED, "There are four possible exits... you must open the door before finding out whether it is the exit or not. Opening the doors require picking their locks. Having a lockpick will make this easier.").also { stage++ }
-            15 -> sendDialogueOptions(player, "Do you have any more questions?", "How do I leave the game?", "How do I get the artefacts?", "What do I do with the artefacts I collect?", "I'm ready to give it a go now.").also { stage++ }
+            15 -> sendOptions(player, "Do you have any more questions?", "How do I leave the game?", "How do I get the artefacts?", "What do I do with the artefacts I collect?", "I'm ready to give it a go now.").also { stage++ }
             16 -> when (buttonId) {
                 1 -> playerl(FaceAnim.FRIENDLY, "How do I leave the game?").also { stage = 20 }
                 2 -> playerl(FaceAnim.FRIENDLY, "How do I get the artefacts?").also { stage = 30 }

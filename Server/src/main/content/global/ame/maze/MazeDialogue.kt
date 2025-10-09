@@ -1,6 +1,6 @@
 package content.global.ame.maze
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -20,7 +20,7 @@ class MazeDialogue : DialogueFile() {
             0 -> npc(FaceAnim.ASKING, "Are you lost? ${player?.username} Or would you like to deposit", "items into your bank account?").also { stage++ }
             1 -> {
                 setTitle(player!!, 4)
-                sendDialogueOptions(player!!, "What would you like to say?", "What I meant to be doing?", "I want to bank my stuff.", "I give up! Can I leave now?", "No, I'm alright.")
+                sendOptions(player!!, "What would you like to say?", "What I meant to be doing?", "I want to bank my stuff.", "I give up! Can I leave now?", "No, I'm alright.")
                 stage = 2
             }
             2 -> when(buttonID) {

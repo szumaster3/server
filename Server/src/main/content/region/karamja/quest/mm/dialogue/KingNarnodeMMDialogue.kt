@@ -29,7 +29,7 @@ class KingNarnodeMMDialogue : DialogueFile() {
                 13 -> playerl("It is a long way...").also { stage++ }
                 14 -> npcl("But I need to know what happened. These are elite soldiers - their disappearance cannot simply be ignored. I cannot wait any longer.").also { stage++ }
                 15 -> npcl("And so i ask you: would you visit Glough's old shipyard in Karamja and find out if the 10th squad ever managed to reach?",).also { stage++ }
-                16 -> sendDialogueOptions(player!!, "Start Monkey Madness quest?", "Yes", "No").also { stage++ }
+                16 -> sendOptions(player!!, "Start Monkey Madness quest?", "Yes", "No").also { stage++ }
                 17 -> when (buttonID) {
                     1 -> playerl("Ok, I'll do it.").also { stage++ }
                     2 -> end()

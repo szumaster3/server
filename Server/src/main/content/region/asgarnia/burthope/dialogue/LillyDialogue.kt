@@ -1,7 +1,7 @@
 package content.region.asgarnia.burthope.dialogue
 
 import core.api.openNpcShop
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -27,7 +27,7 @@ class LillyDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player(FaceAnim.HALF_GUILTY, "Umm... do you sell potions?").also { stage++ }
             1 -> npc(FaceAnim.HALF_GUILTY, "Erm... yes. When I'm not drinking them.").also { stage++ }
             2 ->
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "What would you like to say?",
                     "I'd like to see what you have for sale.",

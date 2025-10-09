@@ -1,7 +1,7 @@
 package content.region.asgarnia.portsarim.dialogue
 
 import core.api.isQuestComplete
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -29,9 +29,9 @@ class LongbowBenDialogue(player: Player? = null) : Dialogue(player) {
             0 -> {
                 setTitle(player, 2)
                 if (!isQuestComplete(player, Quests.PIRATES_TREASURE)) {
-                    sendDialogueOptions(player, "What would you like to say?", "I'm looking for Redbeard Frank.", "Why are you called Longbow Ben?", "Have you got any quests I could do?").also { stage++ }
+                    sendOptions(player, "What would you like to say?", "I'm looking for Redbeard Frank.", "Why are you called Longbow Ben?", "Have you got any quests I could do?").also { stage++ }
                 } else {
-                    sendDialogueOptions(player, "What would you like to say?", "Why are you called Longbow Ben?", "Have you got any quests I could do?").also { stage++ }
+                    sendOptions(player, "What would you like to say?", "Why are you called Longbow Ben?", "Have you got any quests I could do?").also { stage++ }
                 }
             }
             1 -> if (!isQuestComplete(player, Quests.PIRATES_TREASURE)) {

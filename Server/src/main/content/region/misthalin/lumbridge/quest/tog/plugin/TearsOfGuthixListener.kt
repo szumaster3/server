@@ -2,7 +2,6 @@ package content.region.misthalin.lumbridge.quest.tog.plugin
 
 import content.region.misthalin.lumbridge.quest.tog.npc.LightCreatureBehavior
 import core.api.*
-import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.impl.ForceMovement
@@ -112,7 +111,7 @@ class TearsOfGuthixListener : InteractionListener {
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) {
                 crossTheChasm(player, target)
             } else {
-                sendDialogueOptions(player, "Select an Option", "Across the Chasm.", "Into the Chasm.")
+                sendOptions(player, "Select an Option", "Across the Chasm.", "Into the Chasm.")
                 addDialogueAction(player) { _, button ->
                     if (button == 2) crossTheChasm(player, target)
                     else player.teleport(Location.create(2538, 5881, 0))

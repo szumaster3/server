@@ -25,7 +25,7 @@ object PartyRoomUtils {
         lock(player, 3)
         face(player, scenery.location)
         animate(player, Animations.HUMAN_PARTY_ROOM_LEVER_6933)
-        sendDialogueOptions(
+        sendOptions(
             player,
             "Select an Option",
             "Ballon Bonanza (1000 coins).",

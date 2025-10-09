@@ -1,7 +1,7 @@
 package content.region.asgarnia.falador.mining_guild.dialogue
 
 import core.api.getStatLevel
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -25,7 +25,7 @@ class MiningGuildDwarfDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "What would you like to say?", "What have you got in the Guild?", "What do you dwarves do with the ore you mine?", "No thanks, I'm fine.").also { stage++ }
+            0 -> sendOptions(player, "What would you like to say?", "What have you got in the Guild?", "What do you dwarves do with the ore you mine?", "No thanks, I'm fine.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> playerl(FaceAnim.ASKING, "What have you got in the Guild?").also { stage++ }
                 2 -> playerl(FaceAnim.ASKING, "What do you dwarves do with the ore you mine?").also { stage = 5 }

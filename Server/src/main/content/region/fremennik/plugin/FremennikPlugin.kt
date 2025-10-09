@@ -95,7 +95,7 @@ class FremennikPlugin : InteractionListener {
                     FremennikShipHelper.sail(player, Travel.RELLEKKA_TO_ICEBERG)
                 } else {
                     setTitle(player, 2)
-                    sendDialogueOptions(player, "Where would you like to travel?", "Iceberg", "Stay here")
+                    sendOptions(player, "Where would you like to travel?", "Iceberg", "Stay here")
                     addDialogueAction(player) { _, button ->
                         if (button == 1) FremennikShipHelper.sail(player, Travel.RELLEKKA_TO_ICEBERG)
                         else closeDialogue(player)

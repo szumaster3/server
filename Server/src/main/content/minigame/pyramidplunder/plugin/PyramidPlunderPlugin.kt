@@ -64,7 +64,7 @@ class PyramidPlunderPlugin : InteractionListener {
             }
 
             setTitle(player, 4)
-            sendDialogueOptions(
+            sendOptions(
                 player,
                 "Which Pyramid do you want to teleport to?",
                 "Jalsavrah",

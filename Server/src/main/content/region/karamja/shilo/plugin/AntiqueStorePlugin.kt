@@ -73,7 +73,7 @@ private class BlackPrismDialogue : DialogueFile() {
 
             2 -> {
                 setTitle(player!!, 2)
-                sendDialogueOptions(
+                sendOptions(
                     player!!,
                     "SELL THE PRISM FOR 5000 COINS?",
                     "Yes, I'll sell it for 5000",
@@ -130,7 +130,7 @@ private class YanniDialogue(antique: Int) : DialogueFile() {
 
             2 -> {
                 setTitle(player!!, 2)
-                sendDialogueOptions(player!!, "Sell the $itemName?", "Yes.", "No.")
+                sendOptions(player!!, "Sell the $itemName?", "Yes.", "No.")
                 stage++
             }
 

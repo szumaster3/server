@@ -2,7 +2,7 @@ package content.global.plugin.item
 
 import content.data.EnchantedJewellery
 import core.api.addDialogueAction
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendMessage
 import core.api.setTitle
 import core.cache.def.impl.ItemDefinition
@@ -57,7 +57,7 @@ class JewelleryTeleportOptionHandler : OptionHandler() {
             jewellery.use(player, item, 0, isEquipped)
         } else {
             setTitle(player, jewellery.options.size)
-            sendDialogueOptions(player, "Where would you like to teleport to?", *jewellery.options)
+            sendOptions(player, "Where would you like to teleport to?", *jewellery.options)
             addDialogueAction(player) { p, buttonID ->
                 jewellery.use(p, item, buttonID - 2, isEquipped)
             }

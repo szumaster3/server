@@ -45,7 +45,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
 
             16 -> {
                 setTitle(player!!, 5)
-                sendDialogueOptions(player!!, title = "What would you like to hear more about?", "Crafting the logs.", "Light a fire.", "Netting a Fishing spot.", "Cooking shrimp.", "Nothing, thanks.")
+                sendOptions(player!!, title = "What would you like to hear more about?", "Crafting the logs.", "Light a fire.", "Netting a Fishing spot.", "Cooking shrimp.", "Nothing, thanks.")
             }
         }
         return true

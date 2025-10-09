@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
 import core.api.removeItem
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -27,7 +27,7 @@ class TrampDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "What would you like to say?", "Yes, I can spare a little money.", "Sorry, you'll have to earn it yourself.").also { stage++ }
+            0 -> sendOptions(player, "What would you like to say?", "Yes, I can spare a little money.", "Sorry, you'll have to earn it yourself.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Yes, I can spare a little money.").also { stage = 2 }
                 2 -> player(FaceAnim.FURIOUS, "Sorry, you'll have to earn it yourself, just like I did.").also {

@@ -43,7 +43,7 @@ class WaterbirthDungeonPlugin : OptionHandler() {
             10193 -> player.properties.teleportLocation = Location(2545, 10143, 0)
             10177 -> when (option) {
                 "climb" -> {
-                    sendDialogueOptions(player, "Climb Up.", "Climb Down.")
+                    sendOptions(player, "Climb Up.", "Climb Down.")
                     addDialogueAction(player) { p, button ->
                         when (button) {
                             1 -> ClimbActionHandler.climb(

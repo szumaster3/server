@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.mining_guild.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -25,7 +25,7 @@ class DwarfSkillcapeDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0, 11 -> {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "What would you like to say?",
                     "What have you got in the Guild?",
@@ -117,7 +117,7 @@ class DwarfSkillcapeDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             41 -> if (player.getSkills().getStaticLevel(Skills.MINING) < 99) {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "What would you like to say?",
                     "What have you got in the Guild?",

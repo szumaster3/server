@@ -89,7 +89,7 @@ class InPyreNeedPlugin : InteractionListener {
 
             if (player.location == InPyreNeed.PHOENIX_CHAMBER || player.location == Location.create(3535, 5186, 0)) {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Are you sure you want to leave?", "Yes", "No")
+                sendOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
                     when (button) {
                         2 -> {
@@ -296,7 +296,7 @@ class InPyreNeedPlugin : InteractionListener {
             val phoenixEggling =
                 core.game.node.entity.npc.NPC.create(NPCs.PHOENIX_EGGLING_8550, Location.create(3567, 5230, 0))
             if (node.id == NPCs.LARGE_EGG_8552) {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "What would you like to do?",
                     "Clap at the egg to make it hatch.",

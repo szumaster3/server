@@ -8,7 +8,7 @@ import shared.consts.Items;
 import shared.consts.NPCs;
 
 import static core.api.ContentAPIKt.addItemOrDrop;
-import static core.api.ContentAPIKt.sendDialogueOptions;
+import static core.api.ContentAPIKt.sendOptions;
 import static core.tools.DialogueHelperKt.END_DIALOGUE;
 
 /**
@@ -41,7 +41,7 @@ public class InformationClerkDialogue extends Dialogue {
     public boolean handle(int interfaceId, int buttonId) {
         switch (stage) {
             case 0:
-                sendDialogueOptions(player, "What would you like to do?",
+                sendOptions(player, "What would you like to do?",
                         "Take a map of the Museum.",
                         "Find out about the Dig Site exhibit.",
                         "Find out about the Timeline exhibit.",

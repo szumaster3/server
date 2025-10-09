@@ -75,7 +75,7 @@ class PortSarimPlugin : InteractionListener {
 
             if (!player.getAttribute("wydin-rum", false)) {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Do you want to take a banana?", "Yes.", "No.")
+                sendOptions(player, "Do you want to take a banana?", "Yes.", "No.")
                 addDialogueAction(player) { _, option ->
                     closeDialogue(player)
                     if (option == 2) {

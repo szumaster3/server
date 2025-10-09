@@ -4,7 +4,7 @@ import content.region.kandarin.plugin.RowingBoatHelper
 import core.api.inEquipment
 import core.api.hasRequirement
 import core.api.removeItem
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -63,10 +63,10 @@ class KathyCorkatDialogue(player: Player? = null) : Dialogue(player) {
             9 -> {
                 if (!inEquipment(player, Items.RING_OF_CHAROSA_6465)) {
                     setTitle(player, 2)
-                    sendDialogueOptions(player!!, "What would you like to say?", "I'm not afraid - let's go!", "Dangerous? Nah, forget it!")
+                    sendOptions(player!!, "What would you like to say?", "I'm not afraid - let's go!", "Dangerous? Nah, forget it!")
                 } else {
                     setTitle(player, 3)
-                    sendDialogueOptions(player!!, "What would you like to say?", "I'm not afraid - let's go!", "Dangerous? Nah, forget it!", "A lady this beautiful shouldn't be so afraid!")
+                    sendOptions(player!!, "What would you like to say?", "I'm not afraid - let's go!", "Dangerous? Nah, forget it!", "A lady this beautiful shouldn't be so afraid!")
                 }
                 stage++
             }
@@ -118,7 +118,7 @@ class KathyCorkatDialogue(player: Player? = null) : Dialogue(player) {
 
             23 -> {
                 setTitle(player!!, 3)
-                sendDialogueOptions(player!!, "What would you like to say?", "Why don't you row right into the Colony?", "Yes please.", "No thanks.").also {
+                sendOptions(player!!, "What would you like to say?", "Why don't you row right into the Colony?", "Yes please.", "No thanks.").also {
                     stage++
                 }
             }

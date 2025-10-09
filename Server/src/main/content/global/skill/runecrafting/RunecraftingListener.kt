@@ -52,7 +52,7 @@ class RunecraftingListener : InteractionListener {
             altar?.let {
                 onUseWith(IntType.SCENERY, item.items.id, it.scenery) { player, used, _ ->
                     setTitle(player, 2)
-                    sendDialogueOptions(player, "Do you want to enchant a tiara or staff?", "Tiara.", "Staff.")
+                    sendOptions(player, "Do you want to enchant a tiara or staff?", "Tiara.", "Staff.")
                     addDialogueAction(player) { p, button ->
                         if (button == 2 && !inInventory(p, Items.TIARA_5525, 1)) {
                             return@addDialogueAction sendMessage(p, "You need a tiara.")

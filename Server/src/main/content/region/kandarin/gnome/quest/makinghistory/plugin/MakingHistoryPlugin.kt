@@ -95,7 +95,7 @@ class MakingHistoryPlugin : InteractionListener {
         }
 
         on(Scenery.BOOKCASE_10273, IntType.SCENERY, "study") { player, _ ->
-            sendDialogueOptions(player, "There's a great variety of books. Which shall you choose?", "The History of the Outpost.", "The Times of Lathas.", "The Mysterious Adventurer.")
+            sendOptions(player, "There's a great variety of books. Which shall you choose?", "The History of the Outpost.", "The Times of Lathas.", "The Mysterious Adventurer.")
             addDialogueAction(player) { p, button ->
                 closeDialogue(player)
                 when (button) {

@@ -32,7 +32,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
 
         if (hasStarted) {
             setTitle(player, 3)
-            sendDialogueOptions(
+            sendOptions(
                 player,
                 "Choose an option:",
                 "Please, supply me details of your cunning with harpoons.",
@@ -69,7 +69,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             12 -> npc("These secrets must, however, wait until you have", "learned of the more basic skills.").also { stage++ }
             13 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "Choose an option:",
                     "Please, supply me details of your cunning with harpoons.",
@@ -251,7 +251,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             501 -> npcl(FaceAnim.FRIENDLY, "You are no longer the apprentice, but the master. Seek to inspire us with your daring deeds and legendary feats. Aspire to join the spirits when your time comes.").also { stage++ }
             502 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "Choose an option:", "Could you tell me more of these spirits you continually refer to?", "I wish to change how I fish.", "I have no more questions at this time.")
+                sendOptions(player, "Choose an option:", "Could you tell me more of these spirits you continually refer to?", "I wish to change how I fish.", "I have no more questions at this time.")
                 stage++
             }
             503 -> when (buttonId) {

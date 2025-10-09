@@ -322,7 +322,7 @@ class PyramidPlunderMinigame :
                             0 -> sendDialogue(player, "Do you really want to leave the Tomb?").also { stage++ }
                             1 -> {
                                 setTitle(player, 2)
-                                sendDialogueOptions(player, "Leave the Tomb?", "Yes, I'm out of here.", "Ah, I think I'll stay a little longer.").also { stage++ }
+                                sendOptions(player, "Leave the Tomb?", "Yes, I'm out of here.", "Ah, I think I'll stay a little longer.").also { stage++ }
                             }
                             2 -> when (buttonID) {
                                     1 -> {

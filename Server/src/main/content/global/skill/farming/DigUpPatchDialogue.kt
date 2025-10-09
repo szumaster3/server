@@ -30,7 +30,7 @@ class DigUpPatchDialogue(
             }
         }
         setTitle(player, 2)
-        sendDialogueOptions(
+        sendOptions(
             player,
             "Are you sure you want to dig up this patch?",
             "Yes, I want to clear it for new crops.",

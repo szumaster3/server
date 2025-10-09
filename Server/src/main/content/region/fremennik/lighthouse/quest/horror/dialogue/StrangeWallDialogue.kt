@@ -35,7 +35,7 @@ class StrangeWallDialogue(private val items: Int) : DialogueFile() {
 
             1 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Really place the rune into the door?", "Yes", "No")
+                sendOptions(player, "Really place the rune into the door?", "Yes", "No")
                 stage++
             }
 

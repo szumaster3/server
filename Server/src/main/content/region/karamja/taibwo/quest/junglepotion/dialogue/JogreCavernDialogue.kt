@@ -2,7 +2,7 @@ package content.region.karamja.taibwo.quest.junglepotion.dialogue
 
 import core.api.sendDialogue
 import core.api.sendDialogueLines
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
@@ -31,7 +31,7 @@ class JogreCavernDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Would you like to enter the caves?", "Yes, I'll enter the cave.", "No thanks, I'll give it a miss.")
+                sendOptions(player, "Would you like to enter the caves?", "Yes, I'll enter the cave.", "No thanks, I'll give it a miss.")
                 stage++
             }
 

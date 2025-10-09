@@ -317,7 +317,7 @@ class WizardElrissDialogue(player: Player? = null) : Dialogue(player) {
                  * Similar to FOG.
                  */
                 setTitle(player, 4)
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "How many tokens do you need?",
                     "50",

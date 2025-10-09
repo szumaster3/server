@@ -1,7 +1,7 @@
 package content.region.asgarnia.falador.dialogue
 
 import core.api.openNpcShop
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -21,7 +21,7 @@ class GardenSupplierDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(componentId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "Select one", "Yes, please!", "No, thanks.").also { stage++ }
+            0 -> sendOptions(player, "Select one", "Yes, please!", "No, thanks.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> player("Yes, please!").also { stage++ }
                 2 -> player("No, thanks.").also { stage = END_DIALOGUE }

@@ -26,7 +26,7 @@ class VarrockCookDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "What would you like to say?",
                     "Can you sell me any food?",

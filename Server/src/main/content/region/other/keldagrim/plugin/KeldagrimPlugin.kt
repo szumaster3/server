@@ -178,7 +178,7 @@ class KeldagrimPlugin : InteractionListener {
                     )
                 }
                 Scenery.TRAIN_CART_7028 -> {
-                    sendDialogueOptions(player, "What would you like to do?", *options)
+                    sendOptions(player, "What would you like to do?", *options)
                     addDialogueAction(player) { p, choice ->
                         when {
                             choice == options.size -> closeDialogue(p)
@@ -190,7 +190,7 @@ class KeldagrimPlugin : InteractionListener {
                     }
                 }
                 else -> {
-                    sendDialogueOptions(player, "What would you like to do?", "Travel to Keldagrim", "Stay here")
+                    sendOptions(player, "What would you like to do?", "Travel to Keldagrim", "Stay here")
                     addDialogueAction(player) { p, choice ->
                         if (choice == 1) startTravelToKeldagrim(p) else closeDialogue(p)
                     }

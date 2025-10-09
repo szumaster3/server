@@ -22,7 +22,7 @@ class FaladorSquireDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        sendDialogueOptions(player, "What do you want to do?", "Chat", "Talk about the Falador Achievement Diary")
+        sendOptions(player, "What do you want to do?", "Chat", "Talk about the Falador Achievement Diary")
         stage = -1
         return true
     }

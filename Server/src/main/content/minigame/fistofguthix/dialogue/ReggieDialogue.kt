@@ -1,7 +1,7 @@
 package content.minigame.fistofguthix.dialogue
 
 import core.api.openInterface
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -61,7 +61,7 @@ class ReggieDialogue(player: Player? = null) : Dialogue(player) {
             9 -> npcl(FaceAnim.FRIENDLY, "Oh, they're nothing special in themselves. They are just tokens we use as currency.").also { stage = 8 }
             10 -> {
                 setTitle(player, 4)
-                sendDialogueOptions(player, title = "How many tokens do you want to buy?", "50", "100", "250", "500").also { stage++ }
+                sendOptions(player, title = "How many tokens do you want to buy?", "50", "100", "250", "500").also { stage++ }
             }
             11 -> {
                 buyAmount = when (buttonId) {

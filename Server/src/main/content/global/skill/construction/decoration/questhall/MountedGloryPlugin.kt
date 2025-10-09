@@ -27,7 +27,7 @@ class MountedGloryPlugin : InteractionListener {
             when (option) {
                 "rub" -> {
                     setTitle(player, 5)
-                    sendDialogueOptions(player, "Where would you like to teleport to?", "Edgeville", "Karamja", "Draynor Village", "Al Kharid", "Nowhere")
+                    sendOptions(player, "Where would you like to teleport to?", "Edgeville", "Karamja", "Draynor Village", "Al Kharid", "Nowhere")
                     addDialogueAction(player) { _, button ->
                         when (button) {
                             2 -> teleport(player, node, 0)

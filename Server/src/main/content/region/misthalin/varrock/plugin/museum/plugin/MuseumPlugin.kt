@@ -131,7 +131,7 @@ class MuseumPlugin :
         on(TOOL_RACK, IntType.SCENERY, "take") { player, node ->
             face(player, node)
             setTitle(player, 5)
-            sendDialogueOptions(
+            sendOptions(
                 player,
                 "Which tool would you like?",
                 "Trowel",

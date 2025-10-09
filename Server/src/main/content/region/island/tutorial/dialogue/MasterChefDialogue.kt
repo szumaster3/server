@@ -31,7 +31,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
             19, 20 -> npc(FaceAnim.HAPPY, "Hello again.")
             in 21..100 -> {
                 setTitle(player!!, 3)
-                sendDialogueOptions(
+                sendOptions(
                     player!!,
                     title = "What would you like to hear more about?",
                     "Making dough.",

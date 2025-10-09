@@ -111,7 +111,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
             101 -> {
                 if (anyInInventory(player, Items.DAGANNOTH_HIDE_6155, Items.ROCK_SHELL_CHUNK_6157, Items.ROCK_SHELL_SHARD_6159, Items.ROCK_SHELL_SPLINTER_6161)) {
                     setTitle(player, 2)
-                    sendDialogueOptions(player, "What would you like to ask about?", "Rock Crab Armour", "Show me what you've got.").also { stage++ }
+                    sendOptions(player, "What would you like to ask about?", "Rock Crab Armour", "Show me what you've got.").also { stage++ }
                 } else {
                     end()
                     openNpcShop(player, NPCs.SKULGRIMEN_1303)

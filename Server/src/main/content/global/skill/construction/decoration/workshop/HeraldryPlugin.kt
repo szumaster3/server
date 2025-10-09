@@ -64,7 +64,7 @@ class HeraldryPlugin : InteractionListener {
                                         else -> 5
                                     },
                                 )
-                                sendDialogueOptions(
+                                sendOptions(
                                     player,
                                     "What do you want to make?",
                                     *when (sceneryID) {

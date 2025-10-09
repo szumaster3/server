@@ -1,6 +1,6 @@
 package content.region.desert.pollniveach.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
@@ -23,7 +23,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
         buttonId: Int,
     ): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(
+            0 -> sendOptions(
                 player,
                 "Select one.",
                 "A discount camel store?",
@@ -49,7 +49,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
                 "a source of kebab meat you know!"
             ).also { stage++ }
 
-            21 -> sendDialogueOptions(
+            21 -> sendOptions(
                 player,
                 "Select one.",
                 "So can I buy a camel then? I'm hungry!",
@@ -112,7 +112,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             26 -> {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "Select one.",
                     "Well yes actually I'd like to ask about something else.",
@@ -183,7 +183,7 @@ class AliTheCamelManDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             310 -> {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "Select one.",
                     "In what way?",

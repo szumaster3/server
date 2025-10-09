@@ -188,7 +188,7 @@ public class PortalChamberPlugin extends OptionHandler {
             switch (stage) {
                 case 0:
                     setTitle(player, 3);
-                    sendDialogueOptions(player, "Redirect which portal?", "1 Portal", "2 Portal", "3 Portal.");
+                    sendOptions(player, "Redirect which portal?", "1 Portal", "2 Portal", "3 Portal.");
                     stage = 1;
                     break;
                 case 1:

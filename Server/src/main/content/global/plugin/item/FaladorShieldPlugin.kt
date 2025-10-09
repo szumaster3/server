@@ -31,7 +31,7 @@ class FaladorShieldPlugin : InteractionListener {
                 "prayer-restore" -> {
                     val attrTime = player.getAttribute<Long>("diary:falador:shield-restore-time")
                     setTitle(player, 2)
-                    sendDialogueOptions(
+                    sendOptions(
                         player,
                         "Are you sure you wish to recharge?",
                         "Yes, recharge my Prayer points.",

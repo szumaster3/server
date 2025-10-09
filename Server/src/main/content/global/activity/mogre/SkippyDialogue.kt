@@ -229,7 +229,7 @@ class SkippyDialogueFile : DialogueFile() {
 
             88 -> {
                 setTitle(player!!, 4)
-                sendDialogueOptions(player!!, "What would you like to say?", "Yes, please.", "Who are you?", "Can I decide later?", "I'll stay here for the Tutorial.")
+                sendOptions(player!!, "What would you like to say?", "Yes, please.", "Who are you?", "Can I decide later?", "I'll stay here for the Tutorial.")
                 stage++
             }
             89 -> when (buttonID) {
@@ -243,7 +243,7 @@ class SkippyDialogueFile : DialogueFile() {
             92 -> npcl(FaceAnim.HALF_ASKING, "So, anyway, do you want to skip the Tutorial?").also { stage = 95 }
             93 -> npcl(FaceAnim.NOD_NO, "Unfortunately, so far there is no such possibility.").also { stage = 92 }
             94 -> npcl(FaceAnim.NOD_YES, "Good choice.").also { stage = END_DIALOGUE }
-            95 -> sendDialogueOptions(player!!, "What would you like to say?", "Yes, please.", "Can I decide later?", "I'll stay here for the Tutorial.").also { stage++ }
+            95 -> sendOptions(player!!, "What would you like to say?", "Yes, please.", "Can I decide later?", "I'll stay here for the Tutorial.").also { stage++ }
             96 ->
                 when (buttonID) {
                     1 -> npc(FaceAnim.HAPPY, "Prepare yourself!").also { stage = 97 }

@@ -166,7 +166,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
                 sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
             }
             55 -> playerl(FaceAnim.HALF_GUILTY, "No, actually I have some stuff to do here first.")
-            56 -> sendDialogueOptions(player, "Leave island?", "YES", "NO").also { stage++ }
+            56 -> sendOptions(player, "Leave island?", "YES", "NO").also { stage++ }
             57 -> when (buttonId) {
                 1 -> {
                     end()

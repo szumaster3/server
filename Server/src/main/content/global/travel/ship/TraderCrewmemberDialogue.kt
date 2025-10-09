@@ -2,7 +2,7 @@ package content.global.travel.ship
 
 import core.api.inInventory
 import core.api.openNpcShop
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -38,7 +38,7 @@ class TraderCrewmemberDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "Choose an option:", "Yes, who are you?", "Yes, I would like to charter a ship.").also {
+            0 -> sendOptions(player, "Choose an option:", "Yes, who are you?", "Yes, I would like to charter a ship.").also {
                 stage++
             }
             1 -> when (buttonId) {

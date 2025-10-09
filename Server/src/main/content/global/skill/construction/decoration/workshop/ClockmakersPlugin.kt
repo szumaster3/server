@@ -76,7 +76,7 @@ class ClockmakersPlugin : InteractionListener {
             }
 
             setTitle(player, productList.size)
-            sendDialogueOptions(
+            sendOptions(
                 player,
                 "What would you like to craft?",
                 *productList.map { getItemName(it.itemId) }.toTypedArray(),

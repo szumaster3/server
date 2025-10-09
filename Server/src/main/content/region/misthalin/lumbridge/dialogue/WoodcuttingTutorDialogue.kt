@@ -69,7 +69,7 @@ class WoodcuttingTutorDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("What is that cape you're wearing?").also { stage = 520 }
                 3 -> player("Goodbye.").also { stage = END_DIALOGUE }
             }
-            510 -> sendDialogueOptions(player, "Trees", "Oak and Willow", "Maple and Yew", "Magic and other trees", "Axes", "Go back to teaching").also { stage++ }
+            510 -> sendOptions(player, "Trees", "Oak and Willow", "Maple and Yew", "Magic and other trees", "Axes", "Go back to teaching").also { stage++ }
             511 -> when (buttonId) {
                 1 -> sendDoubleItemDialogue(player, Items.LOGS_1511, Items.OAK_LOGS_1521, "Almost every tree can be chopped down. Normal logs will be produced by chopping 'Trees' and Oak logs will come from chopping 'Oak Trees'. You can find Oak trees in amongst normal trees scatterd about the").also { stage = 5100 }
                 2 -> sendItemDialogue(player, Items.MAPLE_LOGS_1517, "Maple logs can be gleaned from Maple trees. You'll usually find Maple trees standing alone amongst other trees.").also { stage = 5200 }
@@ -84,7 +84,7 @@ class WoodcuttingTutorDialogue(player: Player? = null) : Dialogue(player) {
             5200 -> sendItemDialogue(player, Items.YEW_LOGS_1515, "Yew trees are few and far between. We do our best to cultivate them. Look for the tree icon on your mini map to find rare trees. Try North of Port Sarim.").also { stage = 510 }
             5100 -> sendDoubleItemDialogue(player, Items.LOGS_1511, Items.OAK_LOGS_1521, "lands.").also { stage = 5101 }
             5101 -> sendItemDialogue(player, Items.WILLOW_LOGS_1519, "Willow trees will yield willow logs. You'll find willows like to grow near water, you can find some south of Draynor.").also { stage = 5102 }
-            5102 -> sendDialogueOptions(player, "Trees", "Oak and Willow", "Maple and Yew", "Magic and other trees", "Axes", "Go back to teaching").also { stage = 511 }
+            5102 -> sendOptions(player, "Trees", "Oak and Willow", "Maple and Yew", "Magic and other trees", "Axes", "Go back to teaching").also { stage = 511 }
             520 -> npc("This is a Skillcape of Woodcutting. Only a person who", "has achieved the highest possible level in a skill can wear", "one.").also { stage = END_DIALOGUE }
         }
         return true

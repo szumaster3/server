@@ -103,7 +103,7 @@ class FruitBatFamiliar(owner: Player? = null, id: Int = FRUIT_BAT) :
     override fun defineListeners() {
         on(FRUIT_BAT, IntType.NPC, "Interact") { player, node ->
             val familiar = node as? BurdenBeast ?: return@on false
-            sendDialogueOptions(player, "Select an Option", "Chat", "Fly", "Withdraw")
+            sendOptions(player, "Select an Option", "Chat", "Fly", "Withdraw")
             addDialogueAction(player) { _, button ->
                 when (button) {
                     2 -> openDialogue(player, node.id, node.asNpc())

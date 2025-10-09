@@ -435,7 +435,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     end();
                     break;
                 case 100:
-                    sendDialogueOptions(player, "Tell them whatever they want to know.", "Politely tell them no.", "Politely tell them no and then use the 'Report Abuse' button.");
+                    sendOptions(player, "Tell them whatever they want to know.", "Politely tell them no.", "Politely tell them no and then use the 'Report Abuse' button.");
                     stage = 101;
                     break;
                 case 101:
@@ -458,7 +458,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     end();
                     break;
                 case 1000:
-                    sendDialogueOptions(player, "Select an Option", "No, it might steal my password.", "I'll gave it a try and see if I like it.", "Sure, he's used it a lot, so can I.");
+                    sendOptions(player, "Select an Option", "No, it might steal my password.", "I'll gave it a try and see if I like it.", "Sure, he's used it a lot, so can I.");
                     stage = 10001;
                     break;
                 case 10001:
@@ -478,7 +478,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 200:
-                    sendDialogueOptions(player, "Select an Option", "My friends.", "Relatives.", "Nobody.");
+                    sendOptions(player, "Select an Option", "My friends.", "Relatives.", "Nobody.");
                     stage = 201;
                     break;
                 case 201:
@@ -498,7 +498,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 300:
-                    sendDialogueOptions(player, "Select an Option", "To help me recover my password if I forget it or it is stolen.", "To let " + GameWorld.getSettings().getName() + " know more about its players.", "To see if I can type in random letters on my keyboard.");
+                    sendOptions(player, "Select an Option", "To help me recover my password if I forget it or it is stolen.", "To let " + GameWorld.getSettings().getName() + " know more about its players.", "To see if I can type in random letters on my keyboard.");
                     stage = 301;
                     break;
                 case 301:
@@ -518,7 +518,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 400:
-                    sendDialogueOptions(player, "Select an Option", "My friends", "Relatives", "Nobody");
+                    sendOptions(player, "Select an Option", "My friends", "Relatives", "Nobody");
                     stage = 401;
                     break;
                 case 401:
@@ -538,7 +538,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 500:
-                    sendDialogueOptions(player, "Select an Option", "My friends", "My brother", "Nobody");
+                    sendOptions(player, "Select an Option", "My friends", "My brother", "Nobody");
                     stage = 501;
                     break;
                 case 501:
@@ -558,7 +558,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 600:
-                    sendDialogueOptions(player, "Select an Option", "Email.", "Website popup.", "Game Inbox on the " + GameWorld.getSettings().getName() + " Website.");
+                    sendOptions(player, "Select an Option", "Email.", "Website popup.", "Game Inbox on the " + GameWorld.getSettings().getName() + " Website.");
                     stage = 601;
                     break;
                 case 601:
@@ -578,7 +578,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 700:
-                    sendDialogueOptions(player, "Select an Option", "Never", "Every couple of months", "Every day");
+                    sendOptions(player, "Select an Option", "Never", "Every couple of months", "Every day");
                     stage = 701;
                     break;
                 case 701:
@@ -598,7 +598,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 800:
-                    sendDialogueOptions(player, "Select an Option", "Nothing.", "Give them my password.", "Don't tell them anything and inform " + GameWorld.getSettings().getName() + " through the game website.");
+                    sendOptions(player, "Select an Option", "Nothing.", "Give them my password.", "Don't tell them anything and inform " + GameWorld.getSettings().getName() + " through the game website.");
                     stage = 801;
                     break;
                 case 801:
@@ -618,7 +618,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1900:
-                    sendDialogueOptions(player, "Select an Option", "Yes.", "No.");
+                    sendOptions(player, "Select an Option", "Yes.", "No.");
                     stage = 1901;
                     break;
                 case 1901:
@@ -634,7 +634,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1100:
-                    sendDialogueOptions(player, "Select an Option", "Yes.", "No.", "If I'm going to be quick.");
+                    sendOptions(player, "Select an Option", "Yes.", "No.", "If I'm going to be quick.");
                     stage = 1101;
                     break;
                 case 1101:
@@ -654,7 +654,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1111:
-                    sendDialogueOptions(player, "Select an Option", "On " + GameWorld.getSettings().getName() + " and all fansites.", "Only on the " + GameWorld.getSettings().getName() + " website.", "On all websites I visit.");
+                    sendOptions(player, "Select an Option", "On " + GameWorld.getSettings().getName() + " and all fansites.", "Only on the " + GameWorld.getSettings().getName() + " website.", "On all websites I visit.");
                     stage = 1112;
                     break;
                 case 1112:
@@ -674,7 +674,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1200:
-                    sendDialogueOptions(player, "Select an Option", "Your real life bank PIN.", "Your birthday.", "The birthday of a famous person or event.");
+                    sendOptions(player, "Select an Option", "Your real life bank PIN.", "Your birthday.", "The birthday of a famous person or event.");
                     stage = 1201;
                     break;
                 case 1201:
@@ -694,7 +694,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1300:
-                    sendDialogueOptions(player, "Select an Option", "Virus scan my computer then change my password and recoveries.", "Change my password and recoveries then virus scan my computer.", "Nothing, it will go away on its own.");
+                    sendOptions(player, "Select an Option", "Virus scan my computer then change my password and recoveries.", "Change my password and recoveries then virus scan my computer.", "Nothing, it will go away on its own.");
                     stage = 1301;
                     break;
                 case 1301:
@@ -714,7 +714,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1400:
-                    sendDialogueOptions(player, "Select an Option", "Memorable", "Easy to guess", "Random gibberish");
+                    sendOptions(player, "Select an Option", "Memorable", "Easy to guess", "Random gibberish");
                     stage = 1401;
                     break;
                 case 1401:
@@ -734,7 +734,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1500:
-                    sendDialogueOptions(player, "Select an Option", "Give them the information they asked for.", "Don't tell them anything and ignore them.");
+                    sendOptions(player, "Select an Option", "Give them the information they asked for.", "Don't tell them anything and ignore them.");
                     stage = 1501;
                     break;
                 case 1501:
@@ -754,7 +754,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1600:
-                    sendDialogueOptions(player, "Select an Option", "Tell them never to use them.", "Use the Account Management section on the " + GameWorld.getSettings().getName() + " website.", "'Recover a Lost Password' section on the " + GameWorld.getSettings().getName() + " website.");
+                    sendOptions(player, "Select an Option", "Tell them never to use them.", "Use the Account Management section on the " + GameWorld.getSettings().getName() + " website.", "'Recover a Lost Password' section on the " + GameWorld.getSettings().getName() + " website.");
                     stage = 1601;
                     break;
                 case 1601:
@@ -770,7 +770,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1700:
-                    sendDialogueOptions(player, "Select an Option", " Don't give them any information and send an 'Abuse report'.", "Don't tell them anything and ignore them.", "Give them the information they asked for.");
+                    sendOptions(player, "Select an Option", " Don't give them any information and send an 'Abuse report'.", "Don't tell them anything and ignore them.", "Give them the information they asked for.");
                     stage = 1701;
                     break;
                 case 1701:
@@ -790,7 +790,7 @@ public final class StrongholdPlugin extends MapZone implements Plugin<Object> {
                     }
                     break;
                 case 1800:
-                    sendDialogueOptions(player, "Select an Option", "On the " + GameWorld.getSettings().getName() + " website.", "By searching the internet.", "Nowhere.");
+                    sendOptions(player, "Select an Option", "On the " + GameWorld.getSettings().getName() + " website.", "By searching the internet.", "Nowhere.");
                     stage = 1801;
                     break;
                 case 1801:

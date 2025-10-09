@@ -1,7 +1,7 @@
 package content.region.kandarin.pisc.dialogue
 
 import core.api.hasRequirement
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -39,7 +39,7 @@ class DevinMendelbergDialogue(player: Player? = null) : Dialogue(player) {
             6 -> npcl(FaceAnim.HALF_GUILTY, "If you want to help, you can get Kathy to take you up to the Colony. Herman's looking for someone to run an important errand for him.").also { stage++ }
             7 -> playerl(FaceAnim.FRIENDLY, "I'll bear it in mind.").also { stage++ }
             8 -> end().also { stage = END_DIALOGUE }
-            9 -> sendDialogueOptions(player, "What would you like to say?", "How are things going for the Colony?", "What are you doing?", "You know all your doors get stuck open?", "Nothing, I'm fine.").also { stage++ }
+            9 -> sendOptions(player, "What would you like to say?", "How are things going for the Colony?", "What are you doing?", "You know all your doors get stuck open?", "Nothing, I'm fine.").also { stage++ }
             10 -> when (buttonId) {
                 1 -> player("How are things going for the Colony?").also { stage++ }
                 2 -> player("What are you doing?").also { stage = 17 }

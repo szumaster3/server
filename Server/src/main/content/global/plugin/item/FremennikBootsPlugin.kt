@@ -52,7 +52,7 @@ private class SeaBootsDialogue : DialogueFile() {
                     2 -> options += listOf("Free lyre teleport.", "Explain benefits.", "Cancel.")
                     3 -> options += listOf("Free lyre teleport.", "Lyre teleport destination.", "Explain benefits.", "Cancel.")
                 }
-                sendDialogueOptions(player!!, "What would you like to do?", *options.toTypedArray())
+                sendOptions(player!!, "What would you like to do?", *options.toTypedArray())
                 stage++
             }
 
@@ -125,7 +125,7 @@ private class SeaBootsDialogue : DialogueFile() {
             5 -> {
                 setTitle(player!!, 2)
                 val option1 = if (inInventory(player!!, Items.RAW_BASS_363)) "A raw bass." else "A raw shark."
-                sendDialogueOptions(player!!, "What do you offer?", option1, "Nothing at the moment.")
+                sendOptions(player!!, "What do you offer?", option1, "Nothing at the moment.")
                 stage++
             }
 
@@ -172,7 +172,7 @@ private class SeaBootsDialogue : DialogueFile() {
 
             8 -> {
                 setTitle(player!!, 2)
-                sendDialogueOptions(player!!, "Do this now?", "Yes.", "No.")
+                sendOptions(player!!, "Do this now?", "Yes.", "No.")
                 stage = 9
             }
 
@@ -226,7 +226,7 @@ private class SeaBootsDialogue : DialogueFile() {
 
             13 -> {
                 setTitle(player!!, 3)
-                sendDialogueOptions(player!!, "Choose a destination:", "Rellekka", "Waterbirth Island", "Don't change.")
+                sendOptions(player!!, "Choose a destination:", "Rellekka", "Waterbirth Island", "Don't change.")
                 stage++
             }
 

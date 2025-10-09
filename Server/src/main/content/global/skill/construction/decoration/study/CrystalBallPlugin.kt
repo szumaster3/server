@@ -1,7 +1,7 @@
 package content.global.skill.construction.decoration.study
 
 import core.api.addDialogueAction
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -101,7 +101,7 @@ class CrystalBallPlugin : InteractionListener {
     }
 
     private fun handleElementSelection(player: Player, staff: Staff, cost: Item?) {
-        sendDialogueOptions(player, "Select an element", *Element.values().map { it.toString() }.toTypedArray())
+        sendOptions(player, "Select an element", *Element.values().map { it.toString() }.toTypedArray())
         addDialogueAction(player) { _, buttonID ->
             val index = buttonID - 2
             if (index in Element.values().indices) {

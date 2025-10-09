@@ -2,7 +2,7 @@ package content.region.kandarin.feldip.ooglog.dialogue
 
 import core.api.hasRequirement
 import core.api.sendDialogue
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -31,7 +31,7 @@ class ChiefTessDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(
+            0 -> sendOptions(
                 player,
                 "What would you like to talk about?",
                 "As a First Resort quest.",

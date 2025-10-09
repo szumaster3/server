@@ -42,7 +42,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
             in 43..100 -> {
                 setTitle(player!!, 3)
-                sendDialogueOptions(player!!, title = "What would you like to hear more about?", "Tell me about prospecting again.", "Tell me about Mining again.", "Nope, I'm ready to move on!")
+                sendOptions(player!!, title = "What would you like to hear more about?", "Tell me about prospecting again.", "Tell me about Mining again.", "Nope, I'm ready to move on!")
             }
         }
         return true

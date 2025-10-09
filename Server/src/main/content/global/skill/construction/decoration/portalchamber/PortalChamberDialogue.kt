@@ -1,6 +1,6 @@
 package content.global.skill.construction.decoration.portalchamber
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -24,7 +24,7 @@ class PortalChamberDialogue(
                     3 -> directPortal("falador")
                     4 -> {
                         setTitle(player, 4)
-                        sendDialogueOptions(
+                        sendOptions(
                             player,
                             "Select a destination",
                             "Camelot",
@@ -54,7 +54,7 @@ class PortalChamberDialogue(
 
     override fun open(vararg args: Any?): Boolean {
         setTitle(player, 4)
-        sendDialogueOptions(player, "Select a destination", "Varrock", "Lumbridge", "Falador", "More...")
+        sendOptions(player, "Select a destination", "Varrock", "Lumbridge", "Falador", "More...")
         return true
     }
 

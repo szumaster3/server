@@ -1,7 +1,7 @@
 package content.minigame.stealingcreation.dialogue
 
 import core.api.openInterface
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.setTitle
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -29,7 +29,7 @@ class RewardsMysticDialogue(player: Player? = null) : Dialogue(player) {
             2 -> npc(FaceAnim.HAPPY, "Well done! A fast learner, that's what I like to see.", "Goodbye.").also { stage = END_DIALOGUE }
             3 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "What would you like to say?", "Show me the rewards, please.", "Tell me about the rewards.", "Never mind.").also { stage++ }
+                sendOptions(player, "What would you like to say?", "Show me the rewards, please.", "Tell me about the rewards.", "Never mind.").also { stage++ }
             }
             4 -> when (buttonId) {
                 1 -> player(FaceAnim.HAPPY, "Show me the rewards, please.").also {
@@ -44,7 +44,7 @@ class RewardsMysticDialogue(player: Player? = null) : Dialogue(player) {
             7 -> npcl(FaceAnim.FRIENDLY, "All the rewards are made from the same sacred clay that your team works so hard to harvest, which gives them some rather special properties.").also { stage++ }
             8 -> {
                 setTitle(player, 4)
-                sendDialogueOptions(player, "What would you like to say?", "Tell me more about tool rewards.", "Tell me more about equipment rewards.", "Show me the rewards, please.", "Thanks.").also { stage++ }
+                sendOptions(player, "What would you like to say?", "Tell me more about tool rewards.", "Tell me more about equipment rewards.", "Show me the rewards, please.", "Thanks.").also { stage++ }
             }
             9 -> when (buttonId) {
                 1 -> player(FaceAnim.NEUTRAL, "Tell me more about tool rewards.").also { stage++ }

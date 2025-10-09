@@ -30,10 +30,10 @@ class HieronymusAvlafrimDialogue(player: Player? = null) : Dialogue(player) {
             0 -> {
                 if (getAttribute(player, "gnomecopter:unlocked", false)) {
                     setTitle(player, 5)
-                    sendDialogueOptions(player, "What would you like to say?", "Remind me what it is you do here.", "Tell me how you made the gnomecopters.", "Have you got anything good for sale?", "Can I buy a gnomecopter?", "Nothing at the moment, thank you.").also { stage++ }
+                    sendOptions(player, "What would you like to say?", "Remind me what it is you do here.", "Tell me how you made the gnomecopters.", "Have you got anything good for sale?", "Can I buy a gnomecopter?", "Nothing at the moment, thank you.").also { stage++ }
                 } else {
                     setTitle(player, 3)
-                    sendDialogueOptions(player, "What would you like to say?", "What's Gnomecopter Tours?", "Have you got anything good for sale?", "Nothing at the moment, thank you.").also { stage++ }
+                    sendOptions(player, "What would you like to say?", "What's Gnomecopter Tours?", "Have you got anything good for sale?", "Nothing at the moment, thank you.").also { stage++ }
                 }
             }
             1 -> if (getAttribute(player, "gnomecopter:unlocked", false)) {
@@ -54,7 +54,7 @@ class HieronymusAvlafrimDialogue(player: Player? = null) : Dialogue(player) {
             2 -> npc(FaceAnim.OLD_NORMAL, "The gnomecopters are something Sasquine and I", "invented. Using a unique blend of gnomic engineering", "and human magic, we've launched a whole new kind of", "tour experience.").also { stage++ }
             3 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "What would you like to say?", "How did you make them?", "What exactly can these things do?").also { stage++ }
+                sendOptions(player, "What would you like to say?", "How did you make them?", "What exactly can these things do?").also { stage++ }
             }
             4 -> when (buttonId) {
                 1 -> player("How did you make them?").also { stage++ }

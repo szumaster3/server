@@ -30,7 +30,7 @@ class BallistaDialogue : DialogueFile() {
 
                 1 -> {
                     setTitle(player!!, 4)
-                    sendDialogueOptions(player!!, "Enter the x-coordinate of the stronghold", "0001", "0002", "0003", "0004").also { stage++ }
+                    sendOptions(player!!, "Enter the x-coordinate of the stronghold", "0001", "0002", "0003", "0004").also { stage++ }
                 }
                 2 -> {
                     sendDialogue(player!!, "You entered the height and y coordinates you got from the tracker gnomes.")

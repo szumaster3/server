@@ -270,7 +270,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::mtahat",
             description = "MTA points manager.",
         ) { player, _ ->
-            sendDialogueOptions(player, "devops", "add pizzazz points", "check points", "close")
+            sendOptions(player, "devops", "add pizzazz points", "check points", "close")
             addDialogueAction(player) { _, button ->
                 when (button) {
                     2 -> {

@@ -51,7 +51,7 @@ class StoragePlugin : InteractionListener {
         ) {
             when (stage) {
                 0 ->
-                    sendDialogueOptions(
+                    sendOptions(
                         player!!,
                         "What do you want to take?" +
                             showTopics(

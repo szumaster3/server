@@ -50,7 +50,7 @@ class CrateCutscene(player: Player) : Cutscene(player) {
             18 -> dialogueUpdate(false, "You feel the crate being put down.")
             19 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Would you like to get back out of the crate?", "Yes.", "No.")
+                sendOptions(player, "Would you like to get back out of the crate?", "Yes.", "No.")
                 addDialogueAction(player) { _, selected ->
                     when(selected) {
                         2 -> dialogueUpdate(false, "You climb out of the crate.").also { updateStage(23) }

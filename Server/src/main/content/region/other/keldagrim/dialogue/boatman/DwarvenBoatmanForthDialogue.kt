@@ -39,7 +39,7 @@ class DwarvenBoatmanForthDialogue(player: Player? = null) : Dialogue(player) {
                 9 -> npcl(FaceAnim.OLD_HAPPY, "Mind, this trip could take a few minutes! Are you sure you're ready to go as well?").also { stage++ }
                 10 -> {
                     setTitle(player, 2)
-                    sendDialogueOptions(player, "(Not Done) Start The Giant Dwarf quest?", "Yes", "No").also { stage++ }
+                    sendOptions(player, "(Not Done) Start The Giant Dwarf quest?", "Yes", "No").also { stage++ }
                 }
                 11 -> when (buttonId) {
                     1 -> playerl(FaceAnim.FRIENDLY, "Yes, I'm ready and don't mind it taking a few minutes.").also { stage = 12 }

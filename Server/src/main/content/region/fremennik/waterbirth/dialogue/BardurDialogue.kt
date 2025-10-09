@@ -89,7 +89,7 @@ class BardurExchangeDialogue : DialogueFile() {
         npc = NPC(NPCs.BARDUR_2879)
         when (stage) {
             0 -> npcl(FaceAnim.FRIENDLY, "Ah, just what I was looking for! You wish to trade me that for a cooked shark?").also { stage++ }
-            1 -> sendDialogueOptions(player, "Trade with Bardur?", "YES", "NO").also { stage++ }
+            1 -> sendOptions(player, "Trade with Bardur?", "YES", "NO").also { stage++ }
             2 -> when (buttonID) {
                 1 -> {
                     var tradedCount = 0

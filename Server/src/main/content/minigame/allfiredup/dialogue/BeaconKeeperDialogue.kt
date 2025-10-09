@@ -4,7 +4,7 @@ import content.minigame.allfiredup.plugin.AFUBeacon
 import content.minigame.allfiredup.plugin.AFUSession
 import content.minigame.allfiredup.plugin.BeaconState
 import core.api.getStatLevel
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -73,7 +73,7 @@ class BeaconKeeperDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("Nevermind.").also { stage = END_DIALOGUE }
             }
             11 -> npcl(faceExpression, "Certainly, adventurer. Do you have logs for me?").also { stage++ }
-            12 -> sendDialogueOptions(player, "Do you want to give five logs to the fire tender?", "Yes.", "No.").also { stage++ }
+            12 -> sendOptions(player, "Do you want to give five logs to the fire tender?", "Yes.", "No.").also { stage++ }
             13 -> when (buttonId) {
                 1 -> {
                     if (logs.id != 0) {

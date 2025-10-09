@@ -155,7 +155,7 @@ class KharaziDungeonPlugin : InteractionListener {
 
                 1 -> {
                     setTitle(player!!, 2)
-                    sendDialogueOptions(player!!, "Would you like to squeeze into this crevice?", "Yes please!", "No thanks!")
+                    sendOptions(player!!, "Would you like to squeeze into this crevice?", "Yes please!", "No thanks!")
                     stage++
                 }
 
@@ -193,7 +193,7 @@ class KharaziDungeonPlugin : InteractionListener {
                 }
                 3 -> {
                     setTitle(player!!, 2)
-                    sendDialogueOptions(player!!, "Use brute strength on the gates?", "Yes, I'm very strong, I'll force them open.", "No, I'm having second thoughts.")
+                    sendOptions(player!!, "Use brute strength on the gates?", "Yes, I'm very strong, I'll force them open.", "No, I'm having second thoughts.")
                     stage++
                 }
                 4 -> {
@@ -264,7 +264,7 @@ class KharaziDungeonPlugin : InteractionListener {
             when (stage) {
                 0 -> {
                     setTitle(player!!, 2)
-                    sendDialogueOptions(player!!, "Crawl into hole?", "Yes, I'll crawl through. I'm very athletic.", "No, I'm pretty scared of enclosed areas.")
+                    sendOptions(player!!, "Crawl into hole?", "Yes, I'll crawl through. I'm very athletic.", "No, I'm pretty scared of enclosed areas.")
                     stage++
                 }
                 1 -> {

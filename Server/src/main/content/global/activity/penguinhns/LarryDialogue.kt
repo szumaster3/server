@@ -20,7 +20,7 @@ import shared.consts.NPCs
 class LarryDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         setTitle(player, 2)
-        sendDialogueOptions(player, "I want to speak to Larry about:", "Cold War", "Penguin Hide and Seek")
+        sendOptions(player, "I want to speak to Larry about:", "Cold War", "Penguin Hide and Seek")
         return true
     }
 

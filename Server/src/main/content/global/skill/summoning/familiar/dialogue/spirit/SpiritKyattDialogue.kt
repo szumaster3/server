@@ -2,7 +2,7 @@ package content.global.skill.summoning.familiar.dialogue.spirit
 
 import content.global.skill.summoning.familiar.Familiar
 import core.api.openDialogue
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.api.sendMessage
 import core.api.teleport
 import core.game.dialogue.Dialogue
@@ -43,7 +43,7 @@ class SpiritKyattDialogue : Dialogue {
             sendMessage(player, "This is not your follower.")
             return true
         } else {
-            sendDialogueOptions(player, "Select an Option", "Chat", "Teleport")
+            sendOptions(player, "Select an Option", "Chat", "Teleport")
         }
         return true
     }

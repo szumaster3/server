@@ -44,7 +44,7 @@ class BroomstickPlugin : InteractionListener {
                 return@on true
             }
 
-            sendDialogueOptions(player, "Select an Option", "Teleport to Sorceress's Garden", "Cancel")
+            sendOptions(player, "Select an Option", "Teleport to Sorceress's Garden", "Cancel")
             addDialogueAction(player) { _, option ->
                 when (option) {
                     2 -> {

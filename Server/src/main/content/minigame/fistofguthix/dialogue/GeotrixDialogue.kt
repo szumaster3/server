@@ -1,6 +1,6 @@
 package content.minigame.fistofguthix.dialogue
 
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -45,7 +45,7 @@ class GeotrixDialogue(player: Player? = null) : Dialogue(player) {
             13 -> player("And what is that, exactly?").also { stage++ }
             14 -> npc("The truth is, none of us really know. This place is special", "to Guthix, because Fiara is here. And we know it has", "something to do with the 'Fist of Guthix' because", "Fiara occasionally mentions it.").also { stage++ }
             15 -> npc("But other than that, we only have theories.", "Do you want to hear about them?").also { stage++ }
-            16 -> sendDialogueOptions(player, "I suppose so...", "Getorix's theory.", "Pontimer's theory.", "Alran's theory.", "I'd better get going.").also { stage++ }
+            16 -> sendOptions(player, "I suppose so...", "Getorix's theory.", "Pontimer's theory.", "Alran's theory.", "I'd better get going.").also { stage++ }
             17 -> when (buttonId) {
                 1 -> npc("Well, this is definitely the truth. Don't believe what", "Alran and Pontimer tell you, they are just", "making it up.").also { stage = 19 }
                 2 -> npc("If you want the true story, then this is it. After the", "God Wars, Guthix found something dangerous here and", "used his power to protect it.").also { stage = 24 }
@@ -61,7 +61,7 @@ class GeotrixDialogue(player: Player? = null) : Dialogue(player) {
             26 -> player("So where does the Fist of Guthix come", "into this, then?").also { stage++ }
             27 -> npc("Exactly! That's what I told him. It just", "doesn't make sense. My theory makes much more", "sense.").also { stage++ }
             28 -> npc("Do you want to hear another theory?").also { stage++ }
-            29 -> sendDialogueOptions(player, "I suppose so...", "Pontimer's theory.", "Alran's theory.", "I'd better get going.").also { stage++ }
+            29 -> sendOptions(player, "I suppose so...", "Pontimer's theory.", "Alran's theory.", "I'd better get going.").also { stage++ }
             30 -> when (buttonId) {
                 1 -> npc("This is Pontimer's personal delusion on the subject.", "After the God Wars, Guthix found something dangerous", "here and used his power to protect it.").also { stage = 24 }
                 2 -> npc("This is what Alran thinks, for what it's worth...which", "isn't very much, if you ask me. Guthix has", "apparently left us a test. He deliberately", "created this site of power as a test", "of individual strength and balance.").also { stage = 32 }

@@ -39,7 +39,7 @@ class CaptainShanksDialogue(player: Player? = null) : Dialogue(player) {
             -1 -> npc(FaceAnim.HALF_ASKING, "I see you don't have a ticket for the ship, my colleague", "normally only sells them in Shilo village. But I could sell", "you one for a small additional charge.").also { stage = 3 }
             0 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "Captain Shanks asks, 'Where are you bound?", "Khazard Port please.", "Port Sarim please.", "Nowhere just at the moment thanks.").also { stage++ }
+                sendOptions(player, "Captain Shanks asks, 'Where are you bound?", "Khazard Port please.", "Port Sarim please.", "Nowhere just at the moment thanks.").also { stage++ }
             }
             1 -> when (buttonId) {
                 1 -> {
@@ -67,7 +67,7 @@ class CaptainShanksDialogue(player: Player? = null) : Dialogue(player) {
             }
             4 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Buy a ticket for " + coins!!.amount + " gold pieces.", "Yes, I'll buy a ticket for the ship.", "No thanks, not just at the moment.").also {
+                sendOptions(player, "Buy a ticket for " + coins!!.amount + " gold pieces.", "Yes, I'll buy a ticket for the ship.", "No thanks, not just at the moment.").also {
                     stage++
                 }
             }
@@ -93,7 +93,7 @@ class CaptainShanksDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npcl(FaceAnim.HALF_ASKING, "Ok, now you have your ticket, do you want to sail anywhere?").also { stage++ }
             9 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "Captain Shanks asks, 'Do you want to sail anywhere?'", "Khazard Port please.", "Port Sarim please.", "Nowhere just at the moment thanks.").also { stage = 1 }
+                sendOptions(player, "Captain Shanks asks, 'Do you want to sail anywhere?'", "Khazard Port please.", "Port Sarim please.", "Nowhere just at the moment thanks.").also { stage = 1 }
             }
             10 -> npcl(FaceAnim.HAPPY, "Very well then me old shipmate, I'll just take your ticket and then we'll set sail.").also { stage++ }
             11 -> {

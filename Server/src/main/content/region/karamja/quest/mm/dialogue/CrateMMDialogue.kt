@@ -30,7 +30,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
 
             1 -> when (stage) {
                 0 -> sendItemDialogue(player!!, Items.THREAD_1734, "The crate is full of ... crafting thread.").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
+                1 -> sendOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {
                         addItemOrDrop(player!!, Items.THREAD_1734)
@@ -42,7 +42,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
             }
             2 -> when (stage) {
                 0 -> sendItemDialogue(player!!, Items.MONKEY_DENTURES_4006, "The crate is full of ... magical monkey talking dentures!").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
+                1 -> sendOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {
                         addItemOrDrop(player!!, Items.MONKEY_DENTURES_4006)
@@ -68,7 +68,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
 
             4 -> when (stage) {
                 0 -> sendDialogue(player!!, "You find a hole in the floor under the crate! All you can see is the faint glimmer of light from extremely far below.").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Would you like to go down?", "Yes, I'm sure.", "No, not yet.").also { stage++ }
+                1 -> sendOptions(player!!, "Would you like to go down?", "Yes, I'm sure.", "No, not yet.").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> sendDialogue(player!!, "You begin to lower yourself into the hole...").also {
                         stage = 10
@@ -102,7 +102,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
 
             5 -> when (stage) {
                 0 -> sendItemDialogue(player!!, Items.TINDERBOX_590, "The crate is full of ... tinderboxes.").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
+                1 -> sendOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {
                         addItemOrDrop(player!!, Items.TINDERBOX_590)
@@ -115,7 +115,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
 
             6 -> when (stage) {
                 0 -> sendItemDialogue(player!!, Items.EYE_OF_GNOME_4008, "The crate is full of ... slimy gnome eyes!").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
+                1 -> sendOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {
                         addItemOrDrop(player!!, Items.EYE_OF_GNOME_4008)
@@ -128,7 +128,7 @@ class CrateMMDialogue(val it: Int) : DialogueFile() {
 
             7 -> when (stage) {
                 0 -> sendItemDialogue(player!!, Items.HAMMER_2347, "The crate is full of ... hammers.").also { stage++ }
-                1 -> sendDialogueOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
+                1 -> sendOptions(player!!, "Do you wish to take one?", "Yes", "No").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> {
                         addItemOrDrop(player!!, Items.HAMMER_2347)

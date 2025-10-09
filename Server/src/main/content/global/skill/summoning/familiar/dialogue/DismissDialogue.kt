@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.dialogue
 
 import content.global.skill.summoning.pet.Pet
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter
 import core.game.node.entity.player.Player
@@ -28,9 +28,9 @@ class DismissDialogue : Dialogue {
 
     override fun open(vararg args: Any?): Boolean {
         if (player.familiarManager.familiar is Pet) {
-            sendDialogueOptions(player, "Free pet?", "Yes", "No")
+            sendOptions(player, "Free pet?", "Yes", "No")
         } else {
-            sendDialogueOptions(player, "Dismiss Familiar?", "Yes", "No")
+            sendOptions(player, "Dismiss Familiar?", "Yes", "No")
         }
         return true
     }

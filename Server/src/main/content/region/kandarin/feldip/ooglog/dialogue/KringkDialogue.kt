@@ -33,7 +33,7 @@ class KringkDialogue(player: Player? = null) : Dialogue(player) {
             4 -> end()
             5 -> {
                 setTitle(player, 2)
-                sendDialogueOptions(player, "Would you like to buy an ogre wig for 50 gp?", "Yes, please.", "No, thank you.").also { stage++ }
+                sendOptions(player, "Would you like to buy an ogre wig for 50 gp?", "Yes, please.", "No, thank you.").also { stage++ }
             }
 
             6 -> when (buttonId) {

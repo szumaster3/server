@@ -354,7 +354,7 @@ class PikkupstixDialogue(player: Player? = null) : Dialogue(player) {
                 34 -> npc("If you like! It's good to see you training.").also { stage++ }
                 35 -> end().also { openNpcShop(player, NPCs.PIKKUPSTIX_6971) }
                 400 -> npc("Of course. Skillcapes are a symbol of achievement. Only", "people who have mastered a skill and reached level 99 can", "get their hands on them and gain the benefits they carry.", "Is there something else I can help you with perhaps?").also { stage++ }
-                401 -> sendDialogueOptions(player, "Choose an option:", "So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.").also { stage = 1 }
+                401 -> sendOptions(player, "Choose an option:", "So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.").also { stage = 1 }
                 599 -> npc("Why yes you can! I must warn you that they cost", "a total of 99000 coins. Do you wish to still", "buy a Skillcape of Summoning?").also { stage = 601 }
                 600 -> when (buttonId) {
                     1 -> player(FaceAnim.HALF_ASKING,"So, what's summoning all about, then?").also { stage = 10 }

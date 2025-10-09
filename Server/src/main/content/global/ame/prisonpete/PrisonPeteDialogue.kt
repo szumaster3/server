@@ -81,7 +81,7 @@ class PrisonPeteDialogue(
             when (stage) {
                 0 -> {
                     setTitle(player!!, 2)
-                    sendDialogueOptions(player!!, "What would you like to say?", "What is this place?", "How do I get out of here?").also { stage++ }
+                    sendOptions(player!!, "What would you like to say?", "What is this place?", "How do I get out of here?").also { stage++ }
                 }
                 1 -> when (buttonID) {
                     1 -> player(FaceAnim.DISGUSTED_HEAD_SHAKE, "What is this place?").also { stage++ }

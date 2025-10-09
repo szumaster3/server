@@ -79,7 +79,7 @@ class CradleOfLifeDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             4 -> {
-                sendDialogueOptions(
+                sendOptions(
                     player,
                     "Choose your style of boots",
                     "I'll take the colourful ones!",

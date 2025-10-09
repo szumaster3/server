@@ -1,7 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
 import core.api.isQuestComplete
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -25,7 +25,7 @@ class MissSchismDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> sendDialogueOptions(player, "What would you like to say?", "Ok, tell me about the news.", "Who are you?", "I'm not talking to you, you horrible woman.").also { stage++ }
+            0 -> sendOptions(player, "What would you like to say?", "Ok, tell me about the news.", "Who are you?", "I'm not talking to you, you horrible woman.").also { stage++ }
             1 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "Ok, tell me about the news.").also { stage++ }
                 2 -> player(FaceAnim.HALF_GUILTY, "Who are you?").also { stage = 15 }

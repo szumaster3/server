@@ -108,7 +108,7 @@ class ZaffDialogue : OptionHandler() {
                             "Yes, please.", "No, thank you."
                         )
                     }
-                    sendDialogueOptions(player, "Select an Option", *options)
+                    sendOptions(player, "Select an Option", *options)
                     stage = 1
                 }
 

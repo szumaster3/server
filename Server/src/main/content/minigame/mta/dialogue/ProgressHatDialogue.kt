@@ -2,10 +2,9 @@ package content.minigame.mta.dialogue
 
 import content.minigame.mta.plugin.MTAZone
 import content.minigame.mta.plugin.ProgressHat
-import core.api.getVarbit
 import core.api.hasAnItem
 import core.api.removeItem
-import core.api.sendDialogueOptions
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.splitLines
@@ -89,7 +88,7 @@ class ProgressHatDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             4 -> {
-                sendDialogueOptions(player, "Destroy Hat?", "Yes", "No")
+                sendOptions(player, "Destroy Hat?", "Yes", "No")
                 stage = 5
             }
 

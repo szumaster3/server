@@ -30,7 +30,7 @@ class ToolPlugin : InteractionListener {
         on(sceneryIDs, IntType.SCENERY, "search") { player, node ->
             ToolStore.forId(node.id)?.let { toolStore ->
                 val optionName = toolStore.tools.map { getItemName(it) }.toTypedArray()
-                sendDialogueOptions(player, "Select a tool", *optionName)
+                sendOptions(player, "Select a tool", *optionName)
                 addDialogueAction(player) { player, buttonID ->
                     val index = buttonID - 2
                     if (index in toolStore.tools.indices) {

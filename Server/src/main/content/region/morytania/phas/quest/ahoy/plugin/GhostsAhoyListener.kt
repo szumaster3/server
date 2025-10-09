@@ -204,7 +204,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
                         when (stage) {
                             0 -> {
                                 setTitle(player, 3)
-                                sendDialogueOptions(
+                                sendOptions(
                                     player,
                                     "Which part of the flag do you want to dye?",
                                     "Top half",

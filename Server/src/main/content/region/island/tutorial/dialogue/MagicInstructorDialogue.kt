@@ -82,7 +82,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
             71 -> when (stage) {
                 0 -> {
                     setTitle(player, 2)
-                    sendDialogueOptions(player, "Do you want to go to the mainland?", "Yes.", "No.").also { stage++ }
+                    sendOptions(player, "Do you want to go to the mainland?", "Yes.", "No.").also { stage++ }
                 }
                 1 -> when (buttonId) {
                     1 -> playerl(FaceAnim.NEUTRAL, "I'm ready to go now, thank you.").also { stage++ }

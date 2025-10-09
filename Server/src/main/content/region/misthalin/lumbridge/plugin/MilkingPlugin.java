@@ -46,7 +46,7 @@ public final class MilkingPlugin extends OptionHandler {
         //if (player.questRepository.getStage(Quests.COOKS_ASSISTANT) > 0 && player.questRepository.getStage(Quests.COOKS_ASSISTANT) < 100) {
         //    sendPlayerDialogue(player, "Hmm, I'm not sure if this is top-quality milk. Maybe that lady over there can help me.", FaceAnim.THINKING);
         //    addDialogueAction(player, (player1, buttonId) -> {
-        //        sendDialogueOptions(player, "Select an option", "Yes", "No");
+        //        sendOptions(player, "Select an option", "Yes", "No");
         //        if (buttonId == 2) {
         //            milk(player, (Scenery) node);
         //        }
@@ -135,7 +135,7 @@ public final class MilkingPlugin extends OptionHandler {
             //if (event.getPlayer().questRepository.getStage(Quests.COOKS_ASSISTANT) > 0 && event.getPlayer().questRepository.getStage(Quests.COOKS_ASSISTANT) < 100) {
             //    sendPlayerDialogue(event.getPlayer(), "Hmm, I'm not sure if this is top-quality milk. Maybe that lady over there can help me.", FaceAnim.THINKING);
             //    addDialogueAction(event.getPlayer(), (player1, buttonId) -> {
-            //        sendDialogueOptions(event.getPlayer(), "Select an option", "Yes", "No");
+            //        sendOptions(event.getPlayer(), "Select an option", "Yes", "No");
             //        if (buttonId == 2) {
             //            milk(event.getPlayer(), (Scenery) event.getUsedWith());
             //        }

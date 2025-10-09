@@ -71,7 +71,7 @@ class BlessSpiritShieldPlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            sendDialogueOptions(player, "Combine the two?", "Yes", "No")
+            sendOptions(player, "Combine the two?", "Yes", "No")
             addDialogueAction(player) { _, buttonId ->
                 when (buttonId) {
                     2 -> {

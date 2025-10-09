@@ -108,7 +108,7 @@ class GrishFinishDialogue : DialogueFile() {
             }
 
             1 -> if (getAttribute(player!!, ZogreUtils.RECEIVED_KEY_FROM_GRISH, false)) {
-                sendDialogueOptions(
+                sendOptions(
                     player!!,
                     "Grish asks if you have the items yet.",
                     "Nope, not yet.",

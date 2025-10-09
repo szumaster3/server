@@ -80,7 +80,7 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
                  * There's no earlier check for these items, so both options always shows.
                  */
                 setTitle(player, 2)
-                sendDialogueOptions(player!!, "Which would you like to make?", "Omni-tiara.", "Omni-staff.")
+                sendOptions(player!!, "Which would you like to make?", "Omni-tiara.", "Omni-staff.")
                 stage++
             }
 
@@ -173,7 +173,7 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
             25 -> npc("Very well. Let's have a look at it.").also { stage++ }
             26 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "Which pouch would you like to repair?", "Repair large pouch for 9,000 gp.", "Repair giant pouch for 12,000 gp.", "Never mind.")
+                sendOptions(player, "Which pouch would you like to repair?", "Repair large pouch for 9,000 gp.", "Repair giant pouch for 12,000 gp.", "Never mind.")
                 stage++
             }
 
@@ -220,7 +220,7 @@ class WizardKorvakDialogue(player: Player? = null) : Dialogue(player) {
             30 -> npc("Ah, coins to fund my rock collection.").also { stage++ }
             31 -> {
                 setTitle(player, 3)
-                sendDialogueOptions(player, "Which pouch would you like to buy?", "Buy a large pouch for 25,000 gp.", "Buy a giant pouch for 50,000 gp.", "Never mind.")
+                sendOptions(player, "Which pouch would you like to buy?", "Buy a large pouch for 25,000 gp.", "Buy a giant pouch for 50,000 gp.", "Never mind.")
                 stage++
             }
 
