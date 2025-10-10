@@ -20,7 +20,6 @@ import shared.consts.Components;
 
 import static core.api.ContentAPIKt.setVarp;
 
-
 /**
  * Represents the weapon interface component.
  *

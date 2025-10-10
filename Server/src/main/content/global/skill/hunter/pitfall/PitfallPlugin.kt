@@ -8,6 +8,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
@@ -223,6 +224,9 @@ class PitfallPlugin : InteractionListener {
         on(pitId, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, xp, goodFur, badFur)
             sendMessage(player, "You've caught a $name!")
+
+            if(pitId == shared.consts.Scenery.COLLAPSED_TRAP_19231)
+                finishDiaryTask(player, DiaryType.KARAMJA, 1, 13)
             return@on true
         }
     }

@@ -16,14 +16,9 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
-    var clearTime = 0
+    private var disappearing = false
 
-    override fun canBeAttackedBy(
-        self: NPC,
-        attacker: Entity,
-        style: CombatStyle,
-        shouldSendMessage: Boolean,
-    ): Boolean {
+    override fun canBeAttackedBy(self: NPC, attacker: Entity, style: CombatStyle, shouldSendMessage: Boolean): Boolean {
         if (attacker is Player) {
             if (attacker == getAttribute<Player?>(self, "target", null)) {
                 return true
@@ -34,10 +29,13 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
     }
 
     override fun tick(self: NPC): Boolean {
+        if (disappearing) {
+            return true
+        }
         val player: Player? = getAttribute<Player?>(self, "target", null)
-        if (clearTime++ > 800) {
-            clearTime = 0
-            if (player != null) {
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, self.walkRadius)) {
+            if (player != null && !disappearing) {
+                disappearing = true
                 sendMessage(player, "Fareed has lost interest in you, and returned to his flames.")
                 removeAttribute(player, DesertTreasure.attributeFareedInstance)
             }
@@ -46,37 +44,29 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
         return true
     }
 
-    override fun beforeDamageReceived(
-        self: NPC,
-        attacker: Entity,
-        state: BattleState,
-    ) {
+    override fun beforeDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
         if (state.style == CombatStyle.MAGIC && state.spell !is WaterSpell) {
             state.neutralizeHits()
         }
     }
 
-    override fun beforeAttackFinalized(
-        self: NPC,
-        victim: Entity,
-        state: BattleState,
-    ) {
+    override fun beforeAttackFinalized(self: NPC, victim: Entity, state: BattleState) {
         if (victim is Player) {
             if (!inEquipment(victim, Items.ICE_GLOVES_1580)) {
                 val weapon = getItemFromEquipment(victim, EquipmentSlot.WEAPON)
                 if (weapon != null) {
                     EquipHandler.unequip(victim, EquipmentContainer.SLOT_WEAPON, weapon.id)
+                    sendMessage(victim, "The heat from the warrior causes you to drop your weapon.")
                 }
-
-                sendMessage(victim, "The heat from the warrior causes you to drop your weapon.")
+//                val weapon = getItemFromEquipment(victim, EquipmentSlot.WEAPON)
+//                if(weapon != null && removeItem(victim, weapon.id, Container.EQUIPMENT)) {
+//                    addItemOrDrop(victim, weapon.id)
+//                }
             }
         }
     }
 
-    override fun onDeathFinished(
-        self: NPC,
-        killer: Entity,
-    ) {
+    override fun onDeathFinished(self: NPC, killer: Entity) {
         if (killer is Player) {
             addItemOrDrop(killer, Items.SMOKE_DIAMOND_4672)
             sendMessage(killer, "You take the Diamond of Smoke from the ashes of the warrior.")

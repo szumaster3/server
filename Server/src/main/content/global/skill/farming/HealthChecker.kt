@@ -3,10 +3,12 @@ package content.global.skill.farming
 import core.api.log
 import core.api.rewardXP
 import core.api.sendMessage
+import core.api.finishDiaryTask
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -54,6 +56,7 @@ class HealthChecker : OptionHandler() {
             PatchType.FRUIT_TREE_PATCH -> {
                 patch.setCurrentState(patch.getCurrentState() - 14)
                 sendMessage(player, "You examine the tree for signs of disease and find that it is in perfect health.")
+                if (fPatch == FarmingPatch.BRIMHAVEN_FRUIT_TREE) finishDiaryTask(player, DiaryType.KARAMJA, 1, 12)
             }
 
             PatchType.BUSH_PATCH -> {
@@ -63,10 +66,7 @@ class HealthChecker : OptionHandler() {
 
             PatchType.CACTUS_PATCH -> {
                 patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
-                sendMessage(
-                    player,
-                    "You examine the cactus for signs of disease and find that it is in perfect health.",
-                )
+                sendMessage(player, "You examine the cactus for signs of disease and find that it is in perfect health.")
             }
 
             else -> log(this::class.java, Log.ERR, "Unreachable patch type from when(type) switch in HealthChecker.kt")

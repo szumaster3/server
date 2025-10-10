@@ -28,6 +28,7 @@ object WarningActions {
      * Handles Wilderness Ditch jump interaction.
      */
 
+    @JvmStatic
     fun handleWildernessJump(player: Player) {
         val ditch = player.getAttribute<core.game.node.scenery.Scenery>("wildy_ditch") ?: return
         player.removeAttribute("wildy_ditch")
@@ -36,17 +37,18 @@ object WarningActions {
 
         if (player.location.getDistance(ditch.location) < 3) {
             forceMove(player, start, end, 0, 60, null, Animations.JUMP_OVER_OBSTACLE_6132)
-            playAudio(player, Sounds.JUMP2_2462, 3)
+            playAudio(player, Sounds.JUMP2_2462)
         } else {
             queueScript(player, 0, QueueStrength.NORMAL) {
                 forceMove(player, start, end, 0, 60, null, Animations.JUMP_OVER_OBSTACLE_6132)
-                playAudio(player, Sounds.JUMP2_2462, 3)
+                playAudio(player, Sounds.JUMP2_2462, 1)
                 return@queueScript stopExecuting(player)
             }
         }
     }
 
-    private fun getDitchLocations(playerLoc: Location, ditchLoc: Location, rotation: Int): Pair<Location, Location> {
+    @JvmStatic
+    fun getDitchLocations(playerLoc: Location, ditchLoc: Location, rotation: Int): Pair<Location, Location> {
         val (x, y) = playerLoc.x to playerLoc.y
         return if (rotation % 2 == 0) {
             if (y <= ditchLoc.y)

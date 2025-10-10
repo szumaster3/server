@@ -1,5 +1,6 @@
 package content.global.bots
 
+import core.api.forceMove
 import core.game.bots.*
 import core.game.interaction.DestinationFlag
 import core.game.interaction.IntType
@@ -11,15 +12,17 @@ import core.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.combat.InteractionType
 import core.game.node.entity.combat.MeleeSwingHandler
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.WarningActions
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.impl.WildernessZone
 import core.tools.RandomFunction
+import shared.consts.Animations
 import kotlin.random.Random
 import shared.consts.Items
+import shared.consts.Scenery
 
 class GreenDragonKiller(val style: CombatStyle) : Script() {
 
@@ -149,13 +152,13 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
         } else state = State.BANKING
     }
 
-    private fun crossWildernessDitch() {
-        val ditch = scriptAPI.getNearestNode("Wilderness Ditch", true) ?: return
+    private fun crossWildernessDitch(onCrossed: (() -> Unit)? = null) {
+        val ditch = scriptAPI.getNearestNode(Scenery.WILDERNESS_DITCH_23271, true) ?: return
         bot.pulseManager.run(object : MovementPulse(bot, ditch, DestinationFlag.OBJECT) {
             override fun pulse(): Boolean {
                 bot.faceLocation(ditch.location)
                 InteractionListeners.run(ditch.id, IntType.SCENERY, "cross", bot, ditch.asScenery())
-                state = State.TO_BANK
+                onCrossed?.invoke()
                 return true
             }
         })
@@ -186,17 +189,28 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
     }
 
     private fun toDragonsState() {
-        val runTo = Location.create(3085, 3520, 0)
-        if (bot.location != runTo) {
-            bot.pulseManager.run(object : MovementPulse(bot, runTo, DestinationFlag.LOCATION) {
+        val ditch = scriptAPI.getNearestNode(Scenery.WILDERNESS_DITCH_23271, true) ?: run {
+            runToDragons()
+            return
+        }
+
+        val (start, end) = WarningActions.getDitchLocations(bot.location, ditch.location, 0)
+
+        if (bot.location != start) {
+            bot.pulseManager.run(object : MovementPulse(bot, start, DestinationFlag.LOCATION) {
                 override fun pulse(): Boolean {
-                    state = State.TO_DRAGONS
                     return true
                 }
             })
             return
         }
 
+        forceMove(bot, start, end, 0, 60, null, Animations.JUMP_OVER_OBSTACLE_6132) {
+            runToDragons()
+        }
+    }
+
+    private fun runToDragons() {
         if (myBorders?.insideBorder(bot) == true) {
             state = State.KILLING
             return

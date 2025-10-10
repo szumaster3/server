@@ -3,12 +3,16 @@ package core.game.node.entity.player.link
 import core.api.*
 import core.game.component.Component
 import core.game.global.action.DoorActionHandler
+import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.WarningActions.getDitchLocations
 import core.tools.DARK_PURPLE
-import shared.consts.*
-import core.game.interaction.IntType
+import shared.consts.Animations
+import shared.consts.Components
+import shared.consts.Scenery
+import shared.consts.Vars
 
 class WarningManager : InteractionListener, InterfaceListener {
 
@@ -58,10 +62,9 @@ class WarningManager : InteractionListener, InterfaceListener {
     private fun handleSceneryInteraction(player: Player, warning: Warnings, node: core.game.node.scenery.Scenery) {
         when (warning) {
             Warnings.MORT_MYRE -> player.setAttribute("myre_gate", node)
-            Warnings.WILDERNESS_DITCH -> player.setAttribute("wildy_gate", node)
+            Warnings.WILDERNESS_DITCH -> player.setAttribute("wildy_ditch", node)
             else -> {}
         }
-
         if (isWarningDisabled(player, warning)) {
             warning.action(player)
         } else {
@@ -138,8 +141,7 @@ class WarningManager : InteractionListener, InterfaceListener {
             Scenery.DARK_HOLE_5947 to Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE,
             Scenery.GATE_3506 to Warnings.MORT_MYRE,
             Scenery.GATE_3507 to Warnings.MORT_MYRE,
-            Scenery.TOWER_LADDER_2511 to Warnings.RANGING_GUILD,
-            Scenery.WILDERNESS_DITCH_23271 to Warnings.WILDERNESS_DITCH
+            Scenery.TOWER_LADDER_2511 to Warnings.RANGING_GUILD
         )
 
         @JvmStatic
