@@ -69,8 +69,8 @@ class ShantayPassPlugin : InteractionListener {
                 sendMessage(player, "You go through the gate.")
                 AgilityHandler.walk(player, 0, player.location, destination, null, 0.0, null)
             } else {
-                if (!WarningManager.isDisabled(player, Warnings.SHANTAY_PASS)) {
-                    openInterface(player, Components.CWS_WARNING_10_565)
+                if (!WarningManager.isWarningDisabled(player, Warnings.SHANTAY_PASS)) {
+                    WarningManager.openWarningInterface(player, Warnings.SHANTAY_PASS)
                 } else if (!removeItem(player, Items.SHANTAY_PASS_1854)) {
                     sendNPCDialogue(player, NPCs.SHANTAY_GUARD_838, "You need a Shantay pass to get through this gate. See Shantay, he will sell you one for a very reasonable price.", FaceAnim.NEUTRAL)
                 } else {

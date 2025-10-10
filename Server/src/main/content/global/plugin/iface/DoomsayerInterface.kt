@@ -32,9 +32,9 @@ class DoomsayerInterface : InterfaceListener {
                     return@on true
                 }
 
-                val wasDisabled = WarningManager.isDisabled(player, warning)
-                WarningManager.toggleWarning(player, warning)
-                sendMessage(player, "You have ${if (!wasDisabled) "disabled" else "enabled"} the warning.")
+                val isDisbled = WarningManager.isWarningDisabled(player, warning)
+                WarningManager.toggleWarning(player, warning.component)
+                sendMessage(player, "You have ${if (!isDisbled) "disabled" else "enabled"} the warning.")
             }
             return@on true
         }

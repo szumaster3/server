@@ -25,6 +25,7 @@ import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
+import core.game.node.entity.player.link.WarningActions
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
@@ -445,11 +446,12 @@ class WatchTowerPlugin : InteractionListener {
         onUseWith(IntType.NPC, Items.CAVE_NIGHTSHADE_2398, NPCs.ENCLAVE_GUARD_870) { player, _, npc ->
             sendNPCDialogueLines(player, npc.id, FaceAnim.OLD_DEFAULT, false, "What is this? Arrrrgh! I cannot stand this plant! Argh,", "it burns! It burns!")
             addDialogueAction(player) { _, _ ->
-                if (!WarningManager.isDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE)) {
-                    WarningManager.openWarning(player, Warnings.WATCHTOWER_SHAMAN_CAVE)
+                if (!WarningManager.isWarningDisabled(player, Warnings.WATCHTOWER_SHAMAN_CAVE)) {
+                    WarningManager.openWarningInterface(player, Warnings.WATCHTOWER_SHAMAN_CAVE)
                     return@addDialogueAction
+                } else {
+                    WarningActions.handleWatchtower(player)
                 }
-                WarningManager.handleWatchTowerWarning(player)
             }
             return@onUseWith true
         }

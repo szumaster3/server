@@ -84,8 +84,8 @@ class WaterbirthDungeonPlugin : OptionHandler() {
             }
 
             10230 -> {
-                if (!WarningManager.isDisabled(player, Warnings.DAGANNOTH_KINGS_LADDER)) {
-                    WarningManager.openWarning(player, Warnings.DAGANNOTH_KINGS_LADDER)
+                if (!WarningManager.isWarningDisabled(player, Warnings.DAGANNOTH_KINGS_LADDER)) {
+                    WarningManager.openWarningInterface(player, Warnings.DAGANNOTH_KINGS_LADDER)
                 } else {
                     teleport(player, Location.create(2899, 4449, 0))
                 }

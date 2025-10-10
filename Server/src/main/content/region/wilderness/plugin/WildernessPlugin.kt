@@ -149,12 +149,12 @@ class WildernessPlugin : InteractionListener {
 
 
         on(Scenery.ENTRANCE_37749, IntType.SCENERY, "go-through") { player, _ ->
-            teleport(player, Location.create(2885, 4372, 2))
+            teleport(player, Location.create(2885, 4372, 2), TeleportType.INSTANT)
             return@on true
         }
 
         on(Scenery.EXIT_37928, IntType.SCENERY, "go-through") { player, _ ->
-            teleport(player, Location.create(3214, 3782, 0))
+            teleport(player, Location.create(3214, 3782, 0), TeleportType.INSTANT)
             return@on true
         }
 

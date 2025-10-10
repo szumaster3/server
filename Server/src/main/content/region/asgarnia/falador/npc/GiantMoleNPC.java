@@ -197,8 +197,9 @@ public final class GiantMoleNPC extends AbstractNPC {
                     player.getPacketDispatch().sendMessage("It's going to be dark down there, I should bring a light source.");
                     return;
                 }
-                if (!WarningManager.isDisabled(player, Warnings.FALADOR_MOLE_LAIR)) {
-                    WarningManager.openWarning(player, Warnings.FALADOR_MOLE_LAIR);
+                if (!WarningManager.isWarningDisabled(player, Warnings.FALADOR_MOLE_LAIR)) {
+                    WarningManager.openWarningInterface(player, Warnings.FALADOR_MOLE_LAIR);
+                    return;
                 } else {
                     player.getProperties().setTeleportLocation(Location.create(1752, 5237, 0));
                     playAudio(player, Sounds.ROOF_COLLAPSE_1384);

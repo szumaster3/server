@@ -21,8 +21,8 @@ class HouseOptionInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         on(Components.POH_HOUSE_OPTIONS_398) { player, _, _, buttonID, _, _ ->
             if (buttonID == BUILD_MODE_ON) {
-                if (player.houseManager.isInHouse(player) && !WarningManager.isDisabled(player, Warnings.PLAYER_OWNED_HOUSES)) {
-                    WarningManager.openWarning(player, Warnings.PLAYER_OWNED_HOUSES)
+                if (player.houseManager.isInHouse(player) && !WarningManager.isWarningDisabled(player, Warnings.PLAYER_OWNED_HOUSES)) {
+                    WarningManager.openWarningInterface(player, Warnings.PLAYER_OWNED_HOUSES)
                 } else {
                     player.houseManager.toggleBuildingMode(player, true)
                 }

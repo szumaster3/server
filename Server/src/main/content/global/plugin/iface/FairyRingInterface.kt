@@ -135,8 +135,8 @@ class FairyRingInterface : InterfaceListener {
             null
         }
 
-        if (ring == FairyRing.AJQ && !WarningManager.isDisabled(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)) {
-            WarningManager.openWarning(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)
+        if (ring == FairyRing.AJQ && !WarningManager.isWarningDisabled(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)) {
+            WarningManager.openWarningInterface(player, Warnings.FAIRY_RING_TO_DORGESH_KAAN)
             return
         }
 
