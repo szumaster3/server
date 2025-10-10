@@ -22,7 +22,7 @@ enum class Warnings(
         Vars.VARBIT_WILDERNESS_WARNING_382_3857,
         Components.WILDERNESS_WARNING_382,
         67,
-        WarningActions::handleWildernessJump
+        { WarningActions::handleWildernessJump }
     ),
 
     CORPOREAL_BEAST_DANGEROUS(

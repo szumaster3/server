@@ -231,6 +231,16 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
             }
             return@on true
         }
+
+        on(NPCs.OZIACH_747, IntType.NPC, "trade") { player, node ->
+            val questStage = getQuestStage(player, Quests.DRAGON_SLAYER)
+            when (questStage) {
+                0 -> sendNPCDialogue(player, node.id, "I ain't got nothing to sell ye, adventurer. Leave me be!", FaceAnim.ANNOYED)
+                in 1..99 -> sendNPCDialogue(player, node.id, "I'm not sellin' ye anything till you've slayed that dragon! Now be off wi' ye.", FaceAnim.ANNOYED)
+                else -> shopsByNpc[node.id]?.openFor(player)
+            }
+            return@on true
+        }
     }
 
     override fun defineInterfaceListeners() {

@@ -4878,8 +4878,10 @@ fun applyPoison(
     if (hasTimerActive<PoisonImmunity>(entity)) {
         return
     }
+    if(entity.isPoisonImmune()) {
+        return
+    }
     val existingTimer = getTimer<Poison>(entity)
-
     if (existingTimer != null) {
         existingTimer.severity = severity
         existingTimer.damageSource = source

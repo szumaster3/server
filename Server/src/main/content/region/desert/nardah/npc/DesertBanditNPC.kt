@@ -1,6 +1,7 @@
 package content.region.desert.nardah.npc
 
 import content.data.God
+import core.api.inEquipment
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.npc.AbstractNPC
@@ -61,7 +62,10 @@ class DesertBanditNPC(
             when {
                 NON_AFFILIATED_ITEMS.contains(item.id) -> return -1
                 SARADOMIN_ITEMS.contains(item.id) -> return 1
-                ZAMORAK_ITEMS.contains(item.id) -> return 2
+                ZAMORAK_ITEMS.contains(item.id) ||
+                        inEquipment(player, Items.DAGONHAI_HAT_14499) ||
+                        inEquipment(player, Items.DAGONHAI_ROBE_TOP_14497) ||
+                        inEquipment(player, Items.DAGONHAI_ROBE_BOTTOM_14501) -> return 2
             }
         }
         return 0

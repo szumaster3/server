@@ -151,6 +151,10 @@ class HeraldryPlugin : InteractionListener {
                                     sendDialogue(player, "You need ${getItemName(itemID)} to do this.")
                                     return
                                 }
+                                // if((productID == 8474 || productID == 8724) && getStatLevel(player, Skills.PRAYER) < 70) {
+                                //     sendDialogue(player, "You need a Prayer level of 70 in order to do this.")
+                                //     return
+                                // }
                                 if (itemID != null) {
                                     removeItem(player, Item(itemID, 1), Container.INVENTORY)
                                 }

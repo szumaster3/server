@@ -134,7 +134,7 @@ class GrandExchange : StartupListener, Commands {
             itemID: Int,
             fromBot: Boolean = false,
         ): Int {
-            var base = max(PriceIndex.getValue(itemID), getItemDefPrice(itemID))
+            var base = PriceIndex.getValue(itemID)
             if (fromBot) base = (max(BotPrices.getPrice(itemID), base) * 1.10).toInt()
             return base
         }

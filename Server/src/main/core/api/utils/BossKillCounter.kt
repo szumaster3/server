@@ -39,7 +39,7 @@ enum class BossKillCounter(val npc: IntArray, val bossName: String) {
          * @param npc The NPC ID to search for.
          * @return The matching [BossKillCounter] or `null` if no match is found.
          */
-        fun forNPC(npc: Int): BossKillCounter? {
+        private fun forNPC(npc: Int): BossKillCounter? {
             for (kc in values()) {
                 if (kc.npc.contains(npc)) {
                     return kc

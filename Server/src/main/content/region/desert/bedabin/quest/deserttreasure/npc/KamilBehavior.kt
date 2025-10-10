@@ -4,10 +4,7 @@ import content.region.desert.bedabin.quest.deserttreasure.DTUtils
 import content.region.desert.bedabin.quest.deserttreasure.DesertTreasure
 import core.api.*
 import core.game.node.entity.Entity
-import core.game.node.entity.combat.BattleState
-import core.game.node.entity.combat.CombatStyle
-import core.game.node.entity.combat.CombatSwingHandler
-import core.game.node.entity.combat.MultiSwingHandler
+import core.game.node.entity.combat.*
 import core.game.node.entity.combat.equipment.SwitchAttack
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
@@ -17,7 +14,7 @@ import core.tools.RandomFunction
 import shared.consts.NPCs
 
 class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
-    var clearTime = 0
+    private var disappearing = false
 
     override fun canBeAttackedBy(
         self: NPC,
@@ -35,10 +32,13 @@ class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
     }
 
     override fun tick(self: NPC): Boolean {
+        if (disappearing) {
+            return true
+        }
         val player: Player? = getAttribute<Player?>(self, "target", null)
-        if (clearTime++ > 800) {
-            clearTime = 0
-            if (player != null) {
+        if (player == null || !self.location.withinDistance(self.properties.spawnLocation, (self.walkRadius*1.5).toInt())) {
+            if (player != null && !disappearing) {
+                disappearing = true
                 sendMessage(player, "Kamil vanishes on an icy wind...")
                 removeAttribute(player, DesertTreasure.attributeKamilInstance)
             }
@@ -69,7 +69,7 @@ class KamilBehavior : NPCBehavior(NPCs.KAMIL_1913) {
     ): CombatSwingHandler = KamilCombatHandler()
 }
 
-private class KamilCombatHandler :
+class KamilCombatHandler :
     MultiSwingHandler(
         SwitchAttack(CombatStyle.MELEE.swingHandler, null),
     ) {
@@ -86,13 +86,15 @@ private class KamilCombatHandler :
                     "frozen:immunity",
                 )
             ) {
+                sendChat(entity as NPC, "Sallamakar Ro!")
+                impact(victim, 5)
+                impact(victim, 5)
                 registerTimer(victim, spawnTimer("frozen", 7, true))
                 sendMessage(victim, "You've been frozen!")
-                sendChat(entity as NPC, "Sallamakar Ro!")
                 sendGraphics(539, victim.location)
                 victim.properties.combatPulse.stop()
             } else {
-                animate(entity!!, Animation(440))
+                entity?.animate(Animation(440))
             }
         }
         super.impact(entity, victim, state)
