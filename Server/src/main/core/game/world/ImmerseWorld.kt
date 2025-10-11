@@ -241,7 +241,7 @@ class ImmerseWorld : StartupListener {
 
         fun immerseArdougne() {
             GeneralBotCreator(
-                CakeBandit(),
+                ArdougneStallThief(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2662, 3302, 0)),
             )
         }

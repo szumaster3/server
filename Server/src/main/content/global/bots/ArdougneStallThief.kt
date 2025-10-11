@@ -1,5 +1,6 @@
 package content.global.bots
 
+import core.api.produceGroundItem
 import core.game.bots.Script
 import core.game.bots.SkillingBotAssembler
 import core.game.interaction.IntType
@@ -10,23 +11,22 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Items
 import shared.consts.Scenery
+import kotlin.random.Random
 
-class CakeBandit : Script() {
+class ArdougneStallThief : Script() {
 
     private var state = State.INIT
     private val stealZone = ZoneBorders(2652, 3295, 2669, 3316)
-    private val bankZone = ZoneBorders(2640, 3277, 2661, 3293)
-    private val bankId = Scenery.BANK_BOOTH_34752
     private val stallId = Scenery.BAKER_S_STALL_34384
 
-    private val foodItems =
-        listOf(Items.CAKE_1891, Items.BREAD_2309, Items.CHOCOLATE_SLICE_1901).map { Item(it) }
+    private val foodItems = listOf(
+        Items.CAKE_1891, Items.BREAD_2309, Items.CHOCOLATE_SLICE_1901
+    ).map { Item(it) }
 
     private var nextStealTick: Long = 0
     private var lastWalkTick: Long = 0
-    private val walkDelay = 1000L
+    private var walkDelay: Long = Random.nextLong(1000, 2000)
     private var targetStallLoc: Location? = null
-    private var targetBankLoc: Location? = null
     private var currentDestination: Location? = null
 
     override fun tick() {
@@ -34,15 +34,12 @@ class CakeBandit : Script() {
 
         val hpThreshold = bot.skills.lifepoints * 0.1
         val low = bot.skills.lifepoints <= hpThreshold
-
         if (low || foodItems.any { bot.inventory.containsItem(it) }) {
             foodItems.firstOrNull { bot.inventory.containsItem(it) }?.let { scriptAPI.eat(it.id) }
         }
 
         when (state) {
             State.INIT -> handleStealState(now)
-            State.TO_BANK -> handleToBankState(now)
-            State.BANKING -> handleBanking()
             State.RETURN -> handleReturnState(now)
         }
     }
@@ -63,47 +60,23 @@ class CakeBandit : Script() {
         if (!bot.location.withinDistance(targetStallLoc!!, 1)) {
             walkTo(targetStallLoc!!, now)
         } else {
-            val cakeStall = scriptAPI.getNearestNode(stallId, true) ?: return
-            InteractionListeners.run(stallId, IntType.SCENERY, "steal-from", bot, cakeStall)
-            nextStealTick = now + 2500
+            val stallNode = scriptAPI.getNearestNode(stallId, true) ?: return
+            InteractionListeners.run(stallId, IntType.SCENERY, "steal-from", bot, stallNode)
+            nextStealTick = now + Random.nextLong(2000, 4000)
         }
 
-        if (bot.inventory.isFull) state = State.TO_BANK
-    }
+        if (bot.inventory.isFull) {
+            val stealable = bot.inventory.toArray()
+                .filterNotNull()
+                .filter { it.id in foodItems.map { f -> f.id } }
 
-    private fun handleToBankState(now: Long) {
-        if (!bankZone.insideBorder(bot)) {
-            walkToRandomLocation(bankZone, now)
-            return
+            stealable.forEach { item ->
+                repeat(item.amount) {
+                    bot.inventory.remove(Item(item.id, 1))
+                    produceGroundItem(bot, item.id, 1, bot.location)
+                }
+            }
         }
-
-        if (targetBankLoc == null) {
-            val bankNode = scriptAPI.getNearestNode(bankId, true) ?: return
-            targetBankLoc = bankNode.location
-        }
-
-        if (!bot.location.withinDistance(targetBankLoc!!, 1)) {
-            walkTo(targetBankLoc!!, now)
-        } else {
-            state = State.BANKING
-        }
-    }
-
-    private fun handleBanking() {
-        if (bot.inventory.isEmpty()) {
-            state = State.RETURN
-            return
-        }
-
-        bot.inventory
-            .toArray()
-            .filterNotNull()
-            .filter { it.id in foodItems.map { f -> f.id } }
-            .forEach { bot.bank.add(it) }
-
-        bot.inventory.clear()
-        bot.fullRestore()
-        state = State.RETURN
     }
 
     private fun handleReturnState(now: Long) {
@@ -125,10 +98,11 @@ class CakeBandit : Script() {
         scriptAPI.walkTo(loc)
         currentDestination = loc
         lastWalkTick = now
+        walkDelay = Random.nextLong(1000, 2000)
     }
 
     override fun newInstance(): Script {
-        val script = CakeBandit()
+        val script = ArdougneStallThief()
         script.bot =
             SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.AVERAGE, bot.startLocation)
         return script
@@ -143,8 +117,6 @@ class CakeBandit : Script() {
 
     enum class State {
         INIT,
-        TO_BANK,
-        BANKING,
         RETURN
     }
 }
