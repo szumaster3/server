@@ -394,7 +394,7 @@ enum class CookableItems(
 
     companion object {
         /**
-         * Maps raw item IDs to CookableItems.
+         * Maps raw item IDs to [CookableItems].
          */
         val cookingMap = HashMap<Int, CookableItems>()
 
@@ -450,7 +450,7 @@ enum class CookableItems(
         }
 
         /**
-         * Gets CookableItems by raw item id.
+         * Gets [CookableItems] by raw item id.
          */
         @JvmStatic
         fun forId(id: Int): CookableItems? = cookingMap[id]

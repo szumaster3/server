@@ -29,7 +29,7 @@ class GeneralKhazardDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(5573)
 }
 
-class GeneralKhazardDialogueFile: DialogueFile() {
+private class GeneralKhazardDialogueFile: DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         val progress = GeneralShadow.getShadowProgress(player!!)

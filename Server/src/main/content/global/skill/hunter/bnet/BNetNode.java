@@ -9,35 +9,60 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Graphics;
 
 /**
- * The type B net node.
+ * Represents a general "Butterfly Net node, used for capturing
+ * butterflies and implings using nets.
  */
 public class BNetNode {
 
+    /**
+     * The butterfly jar item.
+     */
     private static final Item BUTTERFLY_JAR = new Item(10012);
 
     /**
-     * The constant IMPLING_JAR.
+     * The impling jar item.
      */
     protected static final Item IMPLING_JAR = new Item(11260);
 
+    /**
+     * The NPCs associated with this node.
+     */
     private final int[] npcs;
 
+    /**
+     * The level requirements:
+     * [0] = Hunter
+     * [1] = Bare-hand Hunter
+     * [2] = Agility
+     */
     private final int[] levels;
 
+    /**
+     * The experience rewards:
+     * [0] = regular catch
+     * [1] = bare-hand Hunter XP
+     * [2] = bare-hand Agility XP
+     */
     private final double[] experience;
 
+    /**
+     * The graphics send during capture.
+     */
     private final Graphics[] graphics;
 
+    /**
+     * The reward item given upon successful capture.
+     */
     private final Item reward;
 
     /**
-     * Instantiates a new B net node.
+     * Constructs a new {@code BNetNode}.
      *
-     * @param npcs       the npcs
-     * @param levels     the levels
-     * @param experience the experience
-     * @param graphics   the graphics
-     * @param reward     the reward
+     * @param npcs       the NPC IDs that can be caught
+     * @param levels     the level requirements (Hunter, Bare-hand Hunter, Agility)
+     * @param experience the experience values (Hunter, Bare-hand Hunter, Agility)
+     * @param graphics   the graphics effects to display during capture
+     * @param reward     the reward item given when captured
      */
     public BNetNode(int[] npcs, int[] levels, double[] experience, Graphics[] graphics, Item reward) {
         this.npcs = npcs;
@@ -48,10 +73,10 @@ public class BNetNode {
     }
 
     /**
-     * Reward.
+     * Grants rewards and experience to the player after a successful catch.
      *
-     * @param player the player
-     * @param npc    the npc
+     * @param player the player who caught the NPC
+     * @param npc    the caught NPC
      */
     public void reward(Player player, NPC npc) {
         if (!isBareHand(player)) {
@@ -68,11 +93,11 @@ public class BNetNode {
     }
 
     /**
-     * Message.
+     * Sends contextual messages to the player upon catching.
      *
      * @param player  the player
-     * @param type    the type
-     * @param success the success
+     * @param type    the message type (1 = caught)
+     * @param success whether the capture succeeded
      */
     public void message(Player player, int type, boolean success) {
         if (!success) {
@@ -89,20 +114,20 @@ public class BNetNode {
     }
 
     /**
-     * Has jar boolean.
+     * Checks if the player has the required jar to capture the NPC.
      *
      * @param player the player
-     * @return the boolean
+     * @return {@code true} if the player has the jar, otherwise {@code false}
      */
     public boolean hasJar(Player player) {
         return player.getInventory().containsItem(getJar());
     }
 
     /**
-     * Has weapon boolean.
+     * Checks if the player has a weapon equipped (prevents net catching).
      *
      * @param player the player
-     * @return the boolean
+     * @return {@code true} if the player has a non-net weapon equipped
      */
     public boolean hasWeapon(Player player) {
         Item item = player.getEquipment().get(EquipmentContainer.SLOT_WEAPON);
@@ -110,114 +135,113 @@ public class BNetNode {
     }
 
     /**
-     * Has net boolean.
+     * Checks if the player has a butterfly or impling net equipped.
      *
      * @param player the player
-     * @return the boolean
+     * @return {@code true} if the player has a valid net equipped
      */
     public boolean hasNet(Player player) {
         return player.getEquipment().contains(10010, 1) || player.getEquipment().contains(11259, 1);
     }
 
     /**
-     * Is bare hand boolean.
+     * Determines whether the player is eligible to catch using bare hands.
      *
      * @param player the player
-     * @return the boolean
+     * @return {@code true} if the player meets both Hunter and Agility requirements
      */
     public boolean isBareHand(Player player) {
         return !hasNet(player) && player.getSkills().getLevel(Skills.HUNTER) >= getBareHandLevel() && player.getSkills().getLevel(Skills.AGILITY) >= getAgilityLevel();
     }
 
     /**
-     * Gets experience.
+     * Gets the Hunter experience awarded for a successful capture.
      *
      * @param player the player
-     * @return the experience
+     * @return the base Hunter experience
      */
     public double getExperience(Player player) {
         return experience[0];
     }
 
     /**
-     * Gets level.
+     * Gets the Hunter level required to catch the NPC with a net.
      *
-     * @return the level
+     * @return the required Hunter level
      */
     public int getLevel() {
         return levels[0];
     }
 
     /**
-     * Gets agility level.
+     * Gets the Agility level required for bare-hand catching.
      *
-     * @return the agility level
+     * @return the required Agility level
      */
     public int getAgilityLevel() {
         return levels[2];
     }
 
     /**
-     * Gets bare hand level.
+     * Gets the Hunter level required for bare-hand catching.
      *
-     * @return the bare hand level
+     * @return the required bare-hand Hunter level
      */
     public int getBareHandLevel() {
         return levels[1];
     }
 
     /**
-     * Get npcs int [ ].
+     * Gets the array of NPCs that this node applies to.
      *
-     * @return the int [ ]
+     * @return the NPCs
      */
     public int[] getNpcs() {
         return npcs;
     }
 
     /**
-     * Get levels int [ ].
+     * Gets all level requirement values.
      *
-     * @return the int [ ]
+     * @return the level array
      */
     public int[] getLevels() {
         return levels;
     }
 
     /**
-     * Get experiences double [ ].
+     * Gets all experience values for the node.
      *
-     * @return the double [ ]
+     * @return the experience array
      */
     public double[] getExperiences() {
         return experience;
     }
 
     /**
-     * Get graphics graphics [ ].
+     * Gets the capture graphics effects.
      *
-     * @return the graphics [ ]
+     * @return the graphics array
      */
     public Graphics[] getGraphics() {
         return graphics;
     }
 
     /**
-     * Gets reward.
+     * Gets the reward item given upon successful capture.
      *
-     * @return the reward
+     * @return the reward item
      */
     public Item getReward() {
         return reward;
     }
 
     /**
-     * Gets jar.
+     * Gets the jar item required for this node (default: butterfly jar).
      *
-     * @return the jar
+     * @return the jar item
      */
     public Item getJar() {
         return BUTTERFLY_JAR;
     }
-
 }
