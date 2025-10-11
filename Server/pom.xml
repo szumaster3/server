@@ -202,7 +202,6 @@
                             <version>2.42.0</version>
                         </path>
                     </annotationProcessorPaths>
-                    <basedir/>
                 </configuration>
                 <executions>
                     <execution>
