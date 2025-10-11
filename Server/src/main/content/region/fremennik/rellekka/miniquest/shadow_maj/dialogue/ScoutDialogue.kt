@@ -27,7 +27,7 @@ class ScoutDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(5574, 5575, 5576, 5577)
 }
 
-class ScoutDialogueFile : DialogueFile() {
+private class ScoutDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val progress = GeneralShadow.getShadowProgress(player!!)
         val receivedLeg = getAttribute(player!!, GeneralShadow.GS_RECEIVED_SEVERED_LEG, false)

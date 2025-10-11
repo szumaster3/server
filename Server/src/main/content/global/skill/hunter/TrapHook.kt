@@ -4,10 +4,8 @@ import core.game.world.GameWorld.settings
 import core.game.world.map.Location
 import core.tools.RandomFunction
 
-class TrapHook(
-    val wrapper: TrapWrapper,
-    val locations: Array<Location>,
-) {
+class TrapHook(val wrapper: TrapWrapper, val locations: Array<Location>) {
+
     val chanceLocation: Location?
         get() {
             val chance = wrapper.chanceRate

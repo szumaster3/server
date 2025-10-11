@@ -41,18 +41,11 @@ class DeadfallSetting :
     override fun createHook(wrapper: TrapWrapper): TrapHook =
         TrapHook(wrapper, getLocations(wrapper.`object`).toTypedArray())
 
-    override fun reward(
-        player: Player,
-        node: Node,
-        wrapper: TrapWrapper,
-    ) {
+    override fun reward(player: Player, node: Node, wrapper: TrapWrapper) {
         removeItem(player, getLog(player)!!.logId)
     }
 
-    override fun clear(
-        wrapper: TrapWrapper,
-        type: Int,
-    ): Boolean {
+    override fun clear(wrapper: TrapWrapper, type: Int): Boolean {
         if (super.clear(wrapper, type)) {
             addScenery(
                 wrapper.`object`.transform(
@@ -64,10 +57,7 @@ class DeadfallSetting :
         return false
     }
 
-    override fun canCatch(
-        wrapper: TrapWrapper,
-        npc: NPC,
-    ): Boolean {
+    override fun canCatch(wrapper: TrapWrapper, npc: NPC): Boolean {
         val x = wrapper.`object`.location.x
         val y = wrapper.`object`.location.y
         val direction = wrapper.`object`.direction
@@ -86,29 +76,17 @@ class DeadfallSetting :
         return true
     }
 
-    override fun isSuccess(
-        player: Player,
-        node: TrapNode,
-    ): Boolean = true
+    override fun isSuccess(player: Player, node: TrapNode): Boolean = true
 
-    override fun getTransformId(
-        wrapper: TrapWrapper,
-        node: TrapNode,
-    ): Int {
+    override fun getTransformId(wrapper: TrapWrapper, node: TrapNode): Int {
         val dir = wrapper.`object`.attributes.getAttribute("kebbit-dir", 0)
         val id = if (dir == 0) node.objectIds[0] else node.objectIds[1]
         return id
     }
 
-    override fun getFinalId(
-        wrapper: TrapWrapper,
-        node: TrapNode,
-    ): Int = node.objectIds[2]
+    override fun getFinalId(wrapper: TrapWrapper, node: TrapNode): Int = node.objectIds[2]
 
-    override fun buildObject(
-        player: Player,
-        node: Node,
-    ): Scenery = node.asScenery().transform(getObjectForNode(node))
+    override fun buildObject(player: Player, node: Node): Scenery = node.asScenery().transform(getObjectForNode(node))
 
     override fun getLimitMessage(player: Player): String = "You can only have one deadfall trap at a time."
 

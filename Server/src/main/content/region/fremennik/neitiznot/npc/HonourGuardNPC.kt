@@ -15,7 +15,8 @@ class HonourGuardNPC : AbstractNPC {
     constructor() : super(NPCs.HONOUR_GUARD_5514, null, true)
     private constructor(id: Int, location: Location) : super(id, location)
 
-    override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC = HonourGuardNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC =
+        HonourGuardNPC(id, location)
 
     private val targetTrolls = setOf(
         NPCs.ICE_TROLL_FEMALE_5523,
