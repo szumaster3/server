@@ -8,89 +8,95 @@ import core.api.log
 import core.game.world.GameWorld
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
 
 /**
  * Handles server log printing.
  * @author Ceikry
  */
 object SystemLogger {
-    private val t = Terminal()
-    private val errT = t.forStdErr()
-    private val formatter = SimpleDateFormat("HH:mm:ss")
+    val t = Terminal()
+    val errT = t.forStdErr()
+    val formatter = SimpleDateFormat("HH:mm:ss")
 
-    private fun getTime(): String = "[" + formatter.format(Date()) + "]"
-
-    private val classColors: List<(String) -> String> = listOf(
-        { TextColors.cyan(it) },
-        { TextColors.magenta(it) },
-        { TextColors.green(it) },
-        { TextColors.yellow(it) },
-        { TextColors.blue(it) },
-        { TextColors.white(it) },
-        { TextColors.brightRed(it) },
-        { TextColors.brightBlue(it) },
-        { TextColors.brightMagenta(it) }
-    )
-
-    private fun getClassColor(clazz: Class<*>): (String) -> String {
-        val index = abs(clazz.name.hashCode()) % classColors.size
-        return classColors[index]
-    }
+    private fun getTime(): String = "[" + formatter.format(Date(System.currentTimeMillis())) + "]"
 
     @JvmStatic
     fun processLogEntry(clazz: Class<*>, log: Log, message: String) {
-        val classColor = getClassColor(clazz)
-        val prefix = classColor("[${clazz.simpleName}]")
-
         when (log) {
             Log.DEBUG -> {
-                if (GameWorld.settings?.isDevMode != true) return
-                t.println(TextColors.cyan("${getTime()} [DEBUG] $prefix $message"))
+                if (GameWorld.settings?.isDevMode != true) {
+                    return
+                }
+                val msg = TextColors.white("${getTime()}: [${clazz.simpleName}] $message")
+                t.println(msg)
             }
 
             Log.FINE -> {
-                if (ServerConstants.LOG_LEVEL < LogLevel.VERBOSE) return
-                t.println(TextColors.gray("${getTime()} [FINE] $prefix $message"))
+                if (ServerConstants.LOG_LEVEL < LogLevel.VERBOSE) {
+                    return
+                }
+                val msg = TextColors.gray("${getTime()}: [${clazz.simpleName}] $message")
+                t.println(msg)
             }
 
             Log.INFO -> {
-                if (ServerConstants.LOG_LEVEL < LogLevel.DETAILED) return
-                t.println(TextColors.white("${getTime()} [INFO] $prefix $message"))
+                if (ServerConstants.LOG_LEVEL < LogLevel.DETAILED) {
+                    return
+                }
+
+                val msg = "${getTime()}: [${clazz.simpleName}] $message"
+                t.println(msg)
             }
 
             Log.WARN -> {
-                if (ServerConstants.LOG_LEVEL < LogLevel.CAUTIOUS) return
-                t.println(TextColors.yellow("${getTime()} [WARN] $prefix $message"))
+                if (ServerConstants.LOG_LEVEL < LogLevel.CAUTIOUS) {
+                    return
+                }
+
+                val msg = TextColors.yellow("${getTime()}: [${clazz.simpleName}] $message")
+                t.println(msg)
             }
 
             Log.ERR -> {
-                errT.println(TextColors.red("${getTime()} [ERROR] $prefix $message"))
+                val msg = "${getTime()}: [${clazz.simpleName}] $message"
+                errT.println(msg)
             }
         }
     }
 
     @JvmStatic
-    fun logGE(message: String) = log(this::class.java, Log.FINE, TextColors.blue("[GE] $message"))
+    fun logGE(message: String) {
+        log(this::class.java, Log.FINE, "[  GE] $message")
+    }
 
     @JvmStatic
-    fun logStartup(message: String) = log(this::class.java, Log.INFO, TextColors.green("[STARTUP] $message"))
+    fun logStartup(message: String) {
+        log(this::class.java, Log.FINE, "[STARTUP] $message")
+    }
 
     @JvmStatic
-    fun logShutdown(message: String) = log(this::class.java, Log.INFO, TextColors.green("[SHUTDOWN] $message"))
+    fun logShutdown(message: String) {
+        log(this::class.java, Log.FINE, "[SHUTDOWN] $message")
+    }
 
-    fun logMS(s: String) = log(this::class.java, Log.FINE, TextColors.magenta("[MS] $s"))
+    fun logMS(s: String) {
+        log(this::class.java, Log.FINE, "[  MS] $s")
+    }
 
     @JvmStatic
     fun logCache(message: String) {
+        val msg = TextColors.gray("${getTime()}: [Cache] $message")
         if (message.isNotBlank()) {
-            t.println(TextColors.gray("${getTime()} [Cache] $message"))
+            t.println(msg)
         }
     }
 
     class CreateProgressListener : ProgressListener {
-        override fun notify(progress: Double, message: String?) {
-            logCache(message ?: "")
+        override fun notify(
+            progress: Double,
+            message: String?,
+        ) {
+            logCache(message.toString())
         }
     }
 }
