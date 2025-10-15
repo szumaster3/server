@@ -142,6 +142,22 @@ class ImmerseWorld : StartupListener {
                 ),
             )
             GeneralBotCreator(
+                LumbridgeGoblinKiller(),
+                assembler.produce(
+                    CombatBotAssembler.Type.MAGE,
+                    CombatBotAssembler.Tier.LOW,
+                    Location.create(3263, 3235, 0),
+                ),
+            )
+            GeneralBotCreator(
+                GoblinKiller(),
+                assembler.produce(
+                    CombatBotAssembler.Type.MELEE,
+                    CombatBotAssembler.Tier.LOW,
+                    Location.create(3260, 3231, 0),
+                ),
+            )
+            GeneralBotCreator(
                 FarmerThiever(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3094, 3243, 0)),
             )

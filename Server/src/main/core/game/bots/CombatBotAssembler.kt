@@ -1,5 +1,7 @@
 package core.game.bots
 
+import core.game.node.entity.combat.spell.CombatSpell
+import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location
@@ -36,7 +38,7 @@ class CombatBotAssembler {
         return when (type) {
             Type.RANGE -> assembleRangedBot(tier, location)
             Type.MELEE -> assembleMeleeBot(tier, location)
-            Type.MAGE -> assembleMeleeBot(tier, location)
+            Type.MAGE -> assembleMageBot(tier, location)
         }
     }
 
@@ -65,6 +67,19 @@ class CombatBotAssembler {
         val bot = CombatBot(location)
         generateStats(bot, tier, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE)
         meleeBotGear(bot)
+        return bot
+    }
+
+    /**
+     * Builds a mage combat bot with level-appropriate stats and equipment.
+     *
+     * @param tier defines stat and gear scaling
+     * @param location bot spawn location
+     */
+    private fun assembleMageBot(tier: Tier, location: Location): CombatBot {
+        val bot = CombatBot(location)
+        generateStats(bot, tier, Skills.DEFENCE, Skills.MAGIC)
+        mageBotGear(bot)
         return bot
     }
 
@@ -214,6 +229,25 @@ class CombatBotAssembler {
         equipHighest(bot, NBOOTS)
         equipHighest(bot, meleeWeaponSlotGear)
         bot.equipment.refresh()
+    }
+
+    /**
+     * Equips a mage bot with the best available gear for its stats.
+     *
+     * @param bot bot instance to equip
+     */
+    private fun mageBotGear(bot: AIPlayer) {
+        equipHighest(bot, mageHeadGear)
+        equipHighest(bot, mageBottomGear)
+        equipHighest(bot, mageShieldSlotGear)
+        equipHighest(bot, mageTopGear)
+        equipHighest(bot, CAPE)
+        equipHighest(bot, mageWeaponSlotGear)
+        bot.properties.autocastSpell = ((SpellBookManager.SpellBook.MODERN.getSpell(1) as CombatSpell?))
+        bot.inventory.add(Item(Items.AIR_RUNE_556, 1000))
+        bot.inventory.add(Item(Items.MIND_RUNE_558, 1000))
+        bot.equipment.refresh()
+        bot.inventory.refresh()
     }
 
     /**
@@ -533,6 +567,12 @@ class CombatBotAssembler {
     private val meleeBottomGear = arrayOf(1081, 1083, 1085, 1087, 1089, 1091, 1093, 4759, 1067, 1069, 1071, 1073, 1075, 1077, 1079, 4722, 4751, 4722, 4751)
     private val meleeShieldSlotGear = arrayOf(1171, 1173, 1175, 1177, 1179, 1181, 1183, 1185, 1187, 1189, 1191, 1193, 1195, 1197, 1199, 1201)
     private val meleeWeaponSlotGear = arrayOf(Items.BRONZE_SWORD_1277, Items.IRON_SWORD_1279, Items.STEEL_SWORD_1281, Items.BLACK_SWORD_1283, Items.MITHRIL_SWORD_1285, Items.ADAMANT_SWORD_1287, Items.RUNE_SWORD_1289, Items.BRONZE_LONGSWORD_1291, Items.IRON_LONGSWORD_1293, Items.STEEL_LONGSWORD_1295, Items.BLACK_LONGSWORD_1297, Items.MITHRIL_LONGSWORD_1299, Items.ADAMANT_LONGSWORD_1301, Items.RUNE_LONGSWORD_1303, Items.DRAGON_LONGSWORD_1305, Items.BRONZE_SCIMITAR_1321, Items.IRON_SCIMITAR_1323, Items.STEEL_SCIMITAR_1325, Items.BLACK_SCIMITAR_1327, Items.MITHRIL_SCIMITAR_1329, Items.ADAMANT_SCIMITAR_1331, Items.RUNE_SCIMITAR_1333, Items.DRAGON_SCIMITAR_4587, Items.ABYSSAL_WHIP_4151, Items.BRONZE_BATTLEAXE_1375, Items.IRON_BATTLEAXE_1363, Items.STEEL_BATTLEAXE_1365, Items.BLACK_BATTLEAXE_1367, Items.MITHRIL_BATTLEAXE_1369, Items.ADAMANT_BATTLEAXE_1371, Items.RUNE_BATTLEAXE_1373, Items.DRAGON_BATTLEAXE_1377)
+
+    private val mageHeadGear = arrayOf(Items.BLUE_HAT_740, Items.WIZARD_HAT_579, Items.GHOSTLY_HOOD_6109, Items.COMBAT_HOOD_100_12964, Items.MYSTIC_HAT_4089)
+    private val mageTopGear = arrayOf(Items.WIZARD_ROBE_577, Items.ZAMORAK_ROBE_1033, Items.GHOSTLY_ROBE_6107, Items.COMBAT_ROBE_TOP_100_12971, Items.MYSTIC_ROBE_TOP_4091)
+    private val mageBottomGear = arrayOf(Items.BLUE_SKIRT_1011, Items.ZAMORAK_ROBE_1035, Items.GHOSTLY_ROBE_6108, Items.COMBAT_ROBE_BOTTOM_100_12978, Items.MYSTIC_ROBE_BOTTOM_4093)
+    private val mageShieldSlotGear = arrayOf(Items.WOODEN_SHIELD_1171)
+    private val mageWeaponSlotGear = arrayOf(Items.STAFF_OF_AIR_1381, Items.STAFF_OF_EARTH_1385, Items.STAFF_OF_FIRE_1387, Items.AIR_TALISMAN_STAFF_13630, Items.EARTH_TALISMAN_STAFF_13633)
 
     private val NGLOVES = arrayOf(1059, 2922, 2912, 2902, 2932, 2942, 3799)
     private val NBOOTS = arrayOf(4121, 4123, 4125, 4127, 4129, 4131, 1061, 1837, 2579, 9005)

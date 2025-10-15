@@ -5,7 +5,6 @@ import content.data.consumables.effects.HealingEffect
 import core.game.consumable.Consumable
 import core.game.consumable.Food
 import core.game.node.entity.player.link.appearance.Gender
-import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Direction
@@ -32,10 +31,6 @@ class CombatBot(
         if (skills.lifepoints == 0) {
             deregister(uid)
         }
-    }
-
-    fun CheckPrayer(type: Array<PrayerType?>) {
-        for (i in type.indices) prayer.toggle(type[i])
     }
 
     fun eat(foodId: Int) {
