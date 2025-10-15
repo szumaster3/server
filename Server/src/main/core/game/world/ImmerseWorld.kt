@@ -128,14 +128,6 @@ class ImmerseWorld : StartupListener {
             GeneralBotCreator(
                 CowKiller(),
                 assembler.produce(
-                    CombatBotAssembler.Type.RANGE,
-                    CombatBotAssembler.Tier.MED,
-                    Location.create(3261, 3269, 0),
-                ),
-            )
-            GeneralBotCreator(
-                CowKiller(),
-                assembler.produce(
                     CombatBotAssembler.Type.MELEE,
                     CombatBotAssembler.Tier.LOW,
                     Location.create(3261, 3269, 0),
