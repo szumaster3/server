@@ -70,12 +70,12 @@ class ImmerseWorld : StartupListener {
             if (Random.nextBoolean()) {
                 GeneralBotCreator(
                     Adventurer(CombatStyle.MELEE),
-                    assembler.MeleeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge, -1, 1, -1, 1)),
+                    assembler.meleeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge, -1, 1, -1, 1)),
                 )
             } else {
                 GeneralBotCreator(
                     Adventurer(CombatStyle.RANGE),
-                    assembler.RangeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge, -1, 1, -1, 1)),
+                    assembler.rangeAdventurer(tiers.random(), randomizeLocationInRanges(lumbridge, -1, 1, -1, 1)),
                 )
             }
         }
@@ -226,7 +226,7 @@ class ImmerseWorld : StartupListener {
             repeat(6) {
                 GeneralBotCreator(
                     GreenDragonKiller(CombatStyle.MELEE),
-                    assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED, wilderness),
+                    assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.HIGH, wilderness),
                 )
             }
         }

@@ -2421,6 +2421,15 @@ fun closeChatBox(player: Player) {
 }
 
 /**
+ * Closes the single tab for the player.
+ *
+ * @param player The player whose tab will be closed.
+ */
+fun closeSingleTab(player: Player) {
+    player.interfaceManager.closeSingleTab()
+}
+
+/**
  * Sets the visibility of a component in the player's interface.
  *
  * @param player The player whose interface component visibility will be set.

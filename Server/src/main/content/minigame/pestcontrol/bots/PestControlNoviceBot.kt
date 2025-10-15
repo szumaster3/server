@@ -43,9 +43,9 @@ class PestControlNoviceBot(
             this.customState = "Fighting NPCs"
         }
         if (num <= 2) {
-            CombatBotAssembler().gearPCnMeleeBot(this)
+            CombatBotAssembler().meleeBotNovice(this)
         } else {
-            CombatBotAssembler().gearPCnRangedBot(this, Random().nextInt() % 2 == 0)
+            CombatBotAssembler().rangeBotNovice(this, Random().nextInt() % 2 == 0)
         }
     }
 

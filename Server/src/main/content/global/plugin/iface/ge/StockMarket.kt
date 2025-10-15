@@ -9,7 +9,6 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
-import core.net.packet.out.Config
 import core.net.packet.out.ContainerPacket
 import core.tools.Log
 import core.tools.SystemLogger
@@ -26,9 +25,9 @@ import kotlin.math.min
 class StockMarket : InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.STOCKMARKET_105) { player, _ ->
-            player.packetDispatch.sendInterfaceConfig(105, 193, true)
-            player.packetDispatch.sendIfaceSettings(6, 211, 105, -1, -1)
-            player.packetDispatch.sendIfaceSettings(6, 209, 105, -1, -1)
+            sendInterfaceConfig(player,105, 193, true)
+            sendIfaceSettings(player, 6, 211, 105, -1, -1)
+            sendIfaceSettings(player,6, 209, 105, -1, -1)
             setVarp(player, 1112, -1)
             return@onOpen true
         }
@@ -50,7 +49,7 @@ class StockMarket : InterfaceListener {
             }
             val item = player.inventory[slot] ?: return@on false
             when (op) {
-                196 -> player.packetDispatch.sendMessage(item.definition.examine)
+                196 -> sendMessages(player, item.definition.examine)
                 155 -> {
                     val offer = getAttribute(player, "ge-temp", GrandExchangeOffer())
                     val index = getAttribute(player, "ge-index", -1)
@@ -74,7 +73,7 @@ class StockMarket : InterfaceListener {
                     offer.index = index
                     updateVarbits(player, offer, index, true)
                     setAttribute(player, "ge-temp", offer)
-                    player.packetDispatch.sendString(GrandExchange.getOfferStats(id, true), 105, 142)
+                    sendString(player, GrandExchange.getOfferStats(id, true), 105, 142)
                 }
             }
             return@on true
@@ -95,7 +94,7 @@ class StockMarket : InterfaceListener {
                     }
 
                 190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
-                194 -> player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
+                194 -> openChatbox(player, Components.EXCHANGE_SEARCH_389)
                 203 -> abortOffer(player, openedOffer)
                 18, 34, 50, 69, 88, 107 -> {
                     openedIndex = (button - 18) shr 4
@@ -106,12 +105,9 @@ class StockMarket : InterfaceListener {
                         updateVarbits(player, openedOffer, openedIndex)
                     }
                     if (openedOffer != null) {
-                        player.packetDispatch.sendString(
-                            GrandExchange.getOfferStats(
-                                openedOffer.itemID,
-                                openedOffer.sell,
-                            ),
-                            105,
+                        sendString(player,
+                            GrandExchange.getOfferStats(openedOffer.itemID, openedOffer.sell),
+                            Components.STOCKMARKET_105,
                             142,
                         )
                     }
@@ -121,7 +117,7 @@ class StockMarket : InterfaceListener {
                     openedIndex = (button - 30) shr 4
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex)
-                    player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
+                    openChatbox(player,Components.EXCHANGE_SEARCH_389)
                     if(player.interfaceManager.chatbox!!.id == 389) {
                         player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
                     }
@@ -156,7 +152,7 @@ class StockMarket : InterfaceListener {
                 170 ->
                     sendInputDialogue(player, false, "Enter the amount:") { value ->
                         if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                            player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
+                            openChatbox(player, Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
                         s = s.replace("k", "000")
@@ -187,7 +183,7 @@ class StockMarket : InterfaceListener {
                 185 ->
                     sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
                         if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                            player.interfaceManager.openChatbox(Components.EXCHANGE_SEARCH_389)
+                            openChatbox(player, Components.EXCHANGE_SEARCH_389)
                         }
                         var s = value.toString()
                         updateOfferValue(player, tempOffer, s.toInt())
@@ -196,8 +192,8 @@ class StockMarket : InterfaceListener {
 
                 195 -> closeInterface(player)
                 127 -> {
-                    player.interfaceManager.closeSingleTab()
-                    player.interfaceManager.closeChatbox()
+                    closeChatBox(player)
+                    closeSingleTab(player)
                 }
             }
 
@@ -499,11 +495,11 @@ class StockMarket : InterfaceListener {
          * @param player The player returning to the main interface.
          */
         fun toMainInterface(player: Player) {
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1112, -1))
-            PacketRepository.send(Config::class.java, OutgoingContext.Config(player, 1113, -1))
-            player.interfaceManager.closeChatbox()
-            player.interfaceManager.closeSingleTab()
-            player.setAttribute("ge-index", -1)
+            setVarbit(player, 1112, -1)
+            setVarbit(player, 1113, -1)
+            closeChatBox(player)
+            closeSingleTab(player)
+            setAttribute(player, "ge-index", -1)
         }
     }
 }

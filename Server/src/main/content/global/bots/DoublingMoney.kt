@@ -3,7 +3,6 @@ package content.global.bots
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import content.global.bots.Adventurer.Companion.lumbridge
 import core.ServerConstants
 import core.game.bots.AIRepository
 import core.game.bots.Script
@@ -299,7 +298,7 @@ class DoublingMoney : Script() {
     }
 
     fun terminate() {
-        scriptAPI.teleport(lumbridge)
+        scriptAPI.teleport(Location.create(3222, 3219, 0))
         debtOwed = 0
         bot.isActive = false
         sleepTime = 500

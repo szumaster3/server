@@ -109,9 +109,9 @@ class PestControlIntermediateBot(
             this.customState = "Fighting NPCs"
         }
         if (num <= 2) {
-            CombatBotAssembler().gearPCiMeleeBot(this)
+            CombatBotAssembler().meleeBotIntermediate(this)
         } else {
-            CombatBotAssembler().gearPCiRangedBot(this, Random().nextInt() % 2 == 0)
+            CombatBotAssembler().rangeBotIntermediate(this, Random().nextInt() % 2 == 0)
         }
     }
 

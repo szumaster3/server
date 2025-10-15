@@ -1,18 +1,12 @@
 package content.global.plugin.iface.ge
 
-import core.api.ContainerListener
-import core.api.getAttribute
-import core.api.openInterface
-import core.api.setAttribute
-import core.game.component.Component
+import core.api.*
 import core.game.container.Container
 import core.game.container.ContainerEvent
-import core.game.container.access.InterfaceContainer
 import core.game.container.access.InterfaceContainer.generateItems
 import core.game.ge.ItemSet
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import shared.consts.Components
 
 /**
@@ -23,7 +17,7 @@ class ExchangeItemSets : InterfaceListener {
         onClose(Components.EXCHANGE_ITEMSETS_645) { player, _ ->
             val listener = getAttribute<InventoryListener?>(player, "ge-listener", null)
             player.inventory.listeners.remove(listener)
-            player.interfaceManager.closeSingleTab()
+            closeSingleTab(player)
             player.removeAttribute("container-key")
             player.removeAttribute("ge-listener")
             return@onClose true
@@ -37,7 +31,7 @@ class ExchangeItemSets : InterfaceListener {
         @JvmStatic
         fun openFor(player: Player) {
             openInterface(player, Components.EXCHANGE_ITEMSETS_645)
-            player.interfaceManager.openSingleTab(Component(Components.EXCHANGE_SETS_SIDE_644))
+            openSingleTab(player, Components.EXCHANGE_SETS_SIDE_644)
             val listener: InventoryListener
             setAttribute(player, "ge-listener", InventoryListener(player).also { listener = it })
             player.inventory.listeners.add(listener)
