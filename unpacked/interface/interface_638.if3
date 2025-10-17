@@ -1,0 +1,17 @@
+[com0]
+type=layer
+width=16391
+height=16391
+widthmode=proportion
+heightmode=proportion
+
+[com1]
+type=graphic
+x=15
+y=15
+width=25
+height=25
+xmode=abs_right
+layer=com0
+graphic=overlay_duel
+

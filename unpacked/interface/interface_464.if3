@@ -1,0 +1,613 @@
+[com0]
+type=layer
+x=173
+y=1
+width=16
+height=258
+
+[com1]
+type=layer
+y=1
+width=173
+height=258
+scrollwidth=174
+scrollheight=602
+onload=script30(interface_464:com0, interface_464:com1)
+onvartransmit=script1750
+onvartransmitlist=varplayer_313,varplayer_465,varplayer_802,varplayer_1085,varplayer_1328
+
+[com2]
+type=graphic
+x=-2
+y=6
+width=48
+height=48
+layer=com1
+graphic="emotes,0"
+transmitop1=yes
+op1=Yes
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Yes", 50, 150)
+
+[com3]
+type=graphic
+x=42
+y=6
+width=48
+height=48
+layer=com1
+graphic="emotes,1"
+transmitop1=yes
+op1=No
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "No", 50, 150)
+
+[com4]
+type=graphic
+x=86
+y=6
+width=48
+height=48
+layer=com1
+graphic="emotes,3"
+transmitop1=yes
+op1=Bow
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Bow", 50, 150)
+
+[com5]
+type=graphic
+x=130
+y=6
+width=48
+height=48
+layer=com1
+graphic="emotes,4"
+transmitop1=yes
+op1=Angry
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Angry", 50, 150)
+
+[com6]
+type=graphic
+x=-2
+y=55
+width=48
+height=48
+layer=com1
+graphic="emotes,2"
+transmitop1=yes
+op1=Think
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Think", 50, 150)
+
+[com7]
+type=graphic
+x=42
+y=55
+width=48
+height=48
+layer=com1
+graphic="emotes,8"
+transmitop1=yes
+op1=Wave
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Wave", 50, 150)
+
+[com8]
+type=graphic
+x=86
+y=55
+width=48
+height=48
+layer=com1
+graphic="emotes,20"
+transmitop1=yes
+op1=Shrug
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Shrug", 50, 150)
+
+[com9]
+type=graphic
+x=130
+y=55
+width=48
+height=48
+layer=com1
+graphic="emotes,7"
+transmitop1=yes
+op1=Cheer
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Cheer", 50, 150)
+
+[com10]
+type=graphic
+x=-3
+y=104
+width=48
+height=48
+layer=com1
+graphic="emotes,9"
+transmitop1=yes
+op1=Beckon
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Beckon", 50, 150)
+
+[com11]
+type=graphic
+x=86
+y=104
+width=48
+height=48
+layer=com1
+graphic="emotes,16"
+transmitop1=yes
+op1=Jump for Joy
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Jump For Joy", 50, 150)
+
+[com12]
+type=graphic
+x=39
+y=104
+width=48
+height=48
+layer=com1
+graphic="emotes,6"
+transmitop1=yes
+op1=Laugh
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Laugh", 50, 150)
+
+[com13]
+type=graphic
+x=130
+y=104
+width=48
+height=48
+layer=com1
+graphic="emotes,18"
+transmitop1=yes
+op1=Yawn
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Yawn", 50, 150)
+
+[com14]
+type=graphic
+x=-1
+y=153
+width=48
+height=48
+layer=com1
+graphic="emotes,10"
+transmitop1=yes
+op1=Dance
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Dance", 50, 150)
+
+[com15]
+type=graphic
+x=42
+y=153
+width=48
+height=48
+layer=com1
+graphic="emotes,13"
+transmitop1=yes
+op1=Jig
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Jig", 50, 150)
+
+[com16]
+type=graphic
+x=86
+y=153
+width=48
+height=48
+layer=com1
+graphic="emotes,14"
+transmitop1=yes
+op1=Spin
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Spin", 50, 150)
+
+[com17]
+type=graphic
+x=130
+y=153
+width=48
+height=48
+layer=com1
+graphic="emotes,15"
+transmitop1=yes
+op1=Headbang
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Headbang", 50, 150)
+
+[com18]
+type=graphic
+x=-1
+y=202
+width=48
+height=48
+layer=com1
+graphic="emotes,5"
+transmitop1=yes
+op1=Cry
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Cry", 50, 150)
+
+[com19]
+type=graphic
+x=42
+y=202
+width=48
+height=48
+layer=com1
+graphic="emotes,21"
+transmitop1=yes
+op1=Blow Kiss
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Blow Kiss", 50, 150)
+
+[com20]
+type=graphic
+x=86
+y=202
+width=48
+height=48
+layer=com1
+graphic="emotes,12"
+transmitop1=yes
+op1=Panic
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Panic", 50, 150)
+
+[com21]
+type=graphic
+x=130
+y=202
+width=48
+height=48
+layer=com1
+graphic="emotes,17"
+transmitop1=yes
+op1=Raspberry
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Raspberry", 50, 150)
+
+[com22]
+type=graphic
+x=-1
+y=252
+width=48
+height=48
+layer=com1
+graphic="emotes,11"
+transmitop1=yes
+op1=Clap
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Clap", 50, 150)
+
+[com23]
+type=graphic
+x=42
+y=252
+width=48
+height=48
+layer=com1
+graphic="emotes,19"
+transmitop1=yes
+op1=Salute
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Salute", 50, 150)
+
+[com24]
+type=graphic
+x=86
+y=252
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,6"
+transmitop1=yes
+op1=Goblin Bow
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Goblin Bow", 50, 150)
+
+[com25]
+type=graphic
+x=130
+y=252
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,7"
+transmitop1=yes
+op1=Goblin Salute
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Goblin Salute", 50, 150)
+
+[com26]
+type=graphic
+x=-2
+y=302
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,2"
+transmitop1=yes
+op1=Glass Box
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Glass Box", 50, 150)
+
+[com27]
+type=graphic
+x=42
+y=302
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,3"
+transmitop1=yes
+opbase= 
+op1=Climb Rope
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Climb Rope", 50, 150)
+
+[com28]
+type=graphic
+x=86
+y=302
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,4"
+transmitop1=yes
+op1=Lean
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Lean", 50, 150)
+
+[com29]
+type=graphic
+x=130
+y=302
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,5"
+transmitop1=yes
+op1=Glass Wall
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Glass Wall", 50, 150)
+
+[com30]
+type=graphic
+x=130
+y=352
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,9"
+transmitop1=yes
+op1=Slap Head
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Slap Head", 50, 150)
+
+[com31]
+type=graphic
+x=42
+y=352
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,10"
+transmitop1=yes
+op1=Stomp
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Stomp", 50, 150)
+
+[com32]
+type=graphic
+x=86
+y=352
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,11"
+transmitop1=yes
+op1=Flap
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Flap", 50, 150)
+
+[com33]
+type=graphic
+x=-6
+y=352
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,12"
+transmitop1=yes
+op1=Idea
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Idea", 50, 150)
+
+[com34]
+type=graphic
+x=-3
+y=403
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,13"
+transmitop1=yes
+op1=Zombie Walk
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Zombie Walk", 50, 150)
+
+[com35]
+type=graphic
+x=42
+y=403
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,14"
+transmitop1=yes
+op1=Zombie Dance
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Zombie Dance", 50, 150)
+
+[com36]
+type=graphic
+x=86
+y=403
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,17"
+transmitop1=yes
+op1=Zombie Hand
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Zombie Hand", 50, 150)
+
+[com37]
+type=graphic
+x=130
+y=403
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,8"
+transmitop1=yes
+op1=Scared
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Scared", 50, 150)
+
+[com38]
+type=graphic
+x=-3
+y=453
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,15"
+transmitop1=yes
+op1=Bunny Hop
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Bunny-hop", 50, 150)
+
+[com39]
+type=graphic
+x=42
+y=453
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,16"
+transmitop1=yes
+op1=Skill Cape
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Skillcape", 50, 150)
+
+[com40]
+type=graphic
+x=86
+y=453
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,18"
+transmitop1=yes
+op1=Snowman Dance
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Snowman Dance", 50, 150)
+
+[com41]
+type=graphic
+x=130
+y=453
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,19"
+transmitop1=yes
+op1=Air Guitar
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Air Guitar", 50, 150)
+
+[com42]
+type=graphic
+x=-2
+y=503
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,20"
+transmitop1=yes
+op1=Safety First
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Safety First", 50, 150)
+
+[com43]
+type=graphic
+x=42
+y=503
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,21"
+transmitop1=yes
+op1=Explore
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Explore", 50, 150)
+
+[com44]
+type=graphic
+x=86
+y=503
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,11"
+transmitop1=yes
+op1=Trick
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Trick", 50, 150)
+
+[com45]
+type=graphic
+x=130
+y=503
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,24"
+transmitop1=yes
+op1=Freeze and Melt
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Freeze", 50, 150)
+
+[com46]
+type=graphic
+y=554
+width=48
+height=48
+layer=com1
+graphic="emotes_locked,25"
+transmitop1=yes
+transmitop10=yes
+op1=Give Thanks
+op10= 
+onmouseleave=script40(interface_464:com47)
+onmouserepeat=script38(event_com, interface_464:com47, "Give Thanks", 50, 150)
+
+[com47]
+type=layer
+x=34
+y=119
+width=100
+height=50
+layer=com1
+

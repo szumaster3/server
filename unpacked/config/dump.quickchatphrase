@@ -1,0 +1,3657 @@
+[chatphrase_0]
+template=What is your level in Agility?
+autoresponse=chatphrase_1
+
+[chatphrase_1]
+template=My Agility level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_1
+dynamiccommand=stat_base,agility
+
+[chatphrase_2]
+template=Let's go to Agility course: <?
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1505
+
+[chatphrase_3]
+template=Race you!
+
+[chatphrase_4]
+template=Are there any Agility shortcuts near here?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_226
+
+[chatphrase_5]
+template=Where's a good place for me to train Agility?
+autoresponse=chatphrase_6
+
+[chatphrase_6]
+template=Try training your Agility at: <.
+dynamiccommand=listdialog,enum_1505
+
+[chatphrase_7]
+template=What is your level in Attack?
+autoresponse=chatphrase_8
+
+[chatphrase_8]
+template=My Attack level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_8
+dynamiccommand=stat_base,attack
+
+[chatphrase_9]
+template=I'm training Attack.
+
+[chatphrase_10]
+template=Which NPC is good for me to train Attack on?
+autoresponse=chatphrase_11
+
+[chatphrase_11]
+template=Try training on: <.
+dynamiccommand=listdialog,enum_1524
+
+[chatphrase_12]
+template=What is your level in Construction?
+autoresponse=chatphrase_13
+
+[chatphrase_13]
+template=My Construction level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_13
+dynamiccommand=stat_base,construction
+
+[chatphrase_14]
+template=Would you please build me a flat-pack: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1490
+
+[chatphrase_15]
+template=What is your level in Cooking?
+autoresponse=chatphrase_16
+
+[chatphrase_16]
+template=My Cooking level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_16
+dynamiccommand=stat_base,cooking
+
+[chatphrase_17]
+template=What are you cooking?
+autoresponse=chatphrase_18
+
+[chatphrase_18]
+template=I'm cooking: <.
+dynamiccommand=listdialog,enum_1492
+
+[chatphrase_19]
+template=Would you please cook me: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1492
+
+[chatphrase_20]
+template=What's a good way for me to train Cooking?
+autoresponse=chatphrase_21
+
+[chatphrase_21]
+template=Try cooking: <.
+dynamiccommand=listdialog,enum_1492
+
+[chatphrase_22]
+template=What is your level in Crafting?
+autoresponse=chatphrase_23
+
+[chatphrase_23]
+template=My Crafting level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_23
+dynamiccommand=stat_base,crafting
+
+[chatphrase_24]
+template=What are you crafting?
+autoresponse=chatphrase_25
+
+[chatphrase_25]
+template=I am crafting: <.
+dynamiccommand=listdialog,enum_1493
+
+[chatphrase_26]
+template=Would you please craft me: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1493
+
+[chatphrase_27]
+template=What's a good way for me to train Crafting?
+autoresponse=chatphrase_28
+
+[chatphrase_28]
+template=Try crafting: <.
+dynamiccommand=listdialog,enum_1493
+
+[chatphrase_29]
+template=What is your level in Defence?
+autoresponse=chatphrase_30
+
+[chatphrase_30]
+template=My Defence level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_30
+dynamiccommand=stat_base,defence
+
+[chatphrase_31]
+template=I'm training Defence.
+
+[chatphrase_32]
+template=Which NPC is good for me to train Defence on?
+autoresponse=chatphrase_11
+
+[chatphrase_33]
+template=What is your level in Farming?
+autoresponse=chatphrase_34
+
+[chatphrase_34]
+template=My Farming level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_34
+dynamiccommand=stat_base,farming
+
+[chatphrase_35]
+template=What are you growing?
+autoresponse=chatphrase_36
+
+[chatphrase_36]
+template=I'm growing crop: <.
+dynamiccommand=listdialog,enum_1494
+
+[chatphrase_37]
+template=What's a good crop for me to train Farming?
+autoresponse=chatphrase_38
+
+[chatphrase_38]
+template=Try growing crop: <.
+dynamiccommand=listdialog,enum_1494
+
+[chatphrase_39]
+template=Vinesweeper is a good way to train Farming.
+
+[chatphrase_40]
+template=What is your level in Firemaking?
+autoresponse=chatphrase_41
+
+[chatphrase_41]
+template=My Firemaking level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_41
+dynamiccommand=stat_base,firemaking
+
+[chatphrase_42]
+template=What logs are you burning?
+autoresponse=chatphrase_43
+
+[chatphrase_43]
+template=I'm burning logs: <.
+dynamiccommand=listdialog,enum_1495
+
+[chatphrase_44]
+template=Where's a good place for me to train Firemaking?
+autoresponse=chatphrase_45
+
+[chatphrase_45]
+template=Try burning logs at: <.
+dynamiccommand=listdialog,enum_1544
+
+[chatphrase_46]
+template=What is your level in Fishing?
+autoresponse=chatphrase_47
+
+[chatphrase_47]
+template=My Fishing level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_47
+dynamiccommand=stat_base,fishing
+
+[chatphrase_48]
+template=What are you fishing?
+autoresponse=chatphrase_49
+
+[chatphrase_49]
+template=I'm fishing: <.
+dynamiccommand=listdialog,enum_1491
+
+[chatphrase_50]
+template=Would you please fish me: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1491
+
+[chatphrase_51]
+template=What's a good way for me to train Fishing?
+autoresponse=chatphrase_52
+
+[chatphrase_52]
+template=Try fishing for: <.
+dynamiccommand=listdialog,enum_1491
+
+[chatphrase_53]
+template=Fishing Trawler is a good way to train Fishing.
+
+[chatphrase_54]
+template=What is your level in Fletching?
+autoresponse=chatphrase_55
+
+[chatphrase_55]
+template=My Fletching level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_55
+dynamiccommand=stat_base,fletching
+
+[chatphrase_56]
+template=What are you Fletching?
+autoresponse=chatphrase_57
+
+[chatphrase_57]
+template=I'm fletching: <.
+dynamiccommand=listdialog,enum_1496
+
+[chatphrase_58]
+template=Would you please fletch me: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1496
+
+[chatphrase_59]
+template=What's a good thing for me to train Fletching?
+autoresponse=chatphrase_60
+
+[chatphrase_60]
+template=Try fletching: <.
+dynamiccommand=listdialog,enum_1496
+
+[chatphrase_61]
+template=What is your level in Herblore?
+autoresponse=chatphrase_62
+
+[chatphrase_62]
+template=My Herblore level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_62
+dynamiccommand=stat_base,herblore
+
+[chatphrase_63]
+template=Would you please mix me a potion: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1526
+
+[chatphrase_64]
+template=What potion are you mixing?
+autoresponse=chatphrase_65
+
+[chatphrase_65]
+template=I'm mixing potion: <.
+dynamiccommand=listdialog,enum_1526
+
+[chatphrase_66]
+template=Where can I get the secondary ingredient: <?
+autoresponse=chatphrase_228
+dynamiccommand=listdialog,enum_1516
+
+[chatphrase_67]
+template=What's a good potion for me to train Herblore?
+autoresponse=chatphrase_68
+
+[chatphrase_68]
+template=Try mixing potion: <.
+dynamiccommand=listdialog,enum_1526
+
+[chatphrase_69]
+template=What is your level in Hitpoints?
+autoresponse=chatphrase_70
+
+[chatphrase_70]
+template=My Hitpoints level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_70
+dynamiccommand=stat_base,hitpoints
+
+[chatphrase_71]
+template=I'm training Hitpoints.
+
+[chatphrase_72]
+template=Which NPC is good for me to train Hitpoints on?
+autoresponse=chatphrase_11
+
+[chatphrase_73]
+template=What is your level in Hunter?
+autoresponse=chatphrase_74
+
+[chatphrase_74]
+template=My Hunter level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_74
+dynamiccommand=stat_base,hunter
+
+[chatphrase_75]
+template=Would you please hunt me: <.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1543
+
+[chatphrase_76]
+template=What creature should I use to train hunting?
+autoresponse=chatphrase_77
+
+[chatphrase_77]
+template=Try hunting: <.
+dynamiccommand=listdialog,enum_1543
+
+[chatphrase_78]
+template=What is your level in Thieving?
+autoresponse=chatphrase_79
+
+[chatphrase_79]
+template=My Thieving level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_79
+dynamiccommand=stat_base,thieving
+
+[chatphrase_80]
+template=What's a good way for me to train Thieving?
+autoresponse=chatphrase_81
+autoresponse=chatphrase_82
+autoresponse=chatphrase_83
+
+[chatphrase_81]
+template=Try thieving from: <.
+dynamiccommand=listdialog,enum_1540
+
+[chatphrase_82]
+template=Pyramid Plunder is a good way to train Thieving.
+
+[chatphrase_83]
+template=Sorceress's Garden is a good way to train Thieving.
+
+[chatphrase_84]
+template=What is your level in Summoning?
+autoresponse=chatphrase_85
+
+[chatphrase_85]
+template=My Summoning level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_85
+dynamiccommand=stat_base,summoning
+
+[chatphrase_86]
+template=Which do you think is the best familiar?
+autoresponse=chatphrase_87
+
+[chatphrase_87]
+template=I like the familiar: <.
+dynamiccommand=listdialog,enum_1539
+
+[chatphrase_88]
+template=I can summon up to: <.
+dynamiccommand=listdialog,enum_1539
+
+[chatphrase_89]
+template=What NPC drops a lot of charms?
+autoresponse=chatphrase_90
+
+[chatphrase_90]
+template=Good charm droppers are: <.
+dynamiccommand=listdialog,enum_1499
+
+[chatphrase_91]
+template=What is your level in Strength?
+autoresponse=chatphrase_92
+
+[chatphrase_92]
+template=My Strength level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_92
+dynamiccommand=stat_base,strength
+
+[chatphrase_93]
+template=I'm training Strength.
+
+[chatphrase_94]
+template=Which NPC is good for me to train Strength on?
+autoresponse=chatphrase_11
+
+[chatphrase_95]
+template=What is your level in Smithing?
+autoresponse=chatphrase_96
+
+[chatphrase_96]
+template=My Smithing level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_96
+dynamiccommand=stat_base,smithing
+
+[chatphrase_97]
+template=What are you smithing?
+autoresponse=chatphrase_98
+
+[chatphrase_98]
+template=I am smithing: < <.
+dynamiccommand=listdialog,enum_1530
+dynamiccommand=listdialog,enum_1498
+
+[chatphrase_99]
+template=Would you please smith me: < <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1530
+dynamiccommand=listdialog,enum_1498
+
+[chatphrase_100]
+template=What's a good item for me to train Smithing?
+autoresponse=chatphrase_101
+
+[chatphrase_101]
+template=Try smithing: < <.
+dynamiccommand=listdialog,enum_1530
+dynamiccommand=listdialog,enum_1498
+
+[chatphrase_102]
+template=What is your level in Slayer?
+autoresponse=chatphrase_103
+
+[chatphrase_103]
+template=My Slayer level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_103
+dynamiccommand=stat_base,slayer
+
+[chatphrase_104]
+template=What is your current Slayer assignment?
+autoresponse=chatphrase_105
+
+[chatphrase_105]
+template=My current Slayer assignment is: <.
+dynamiccommand=enum_string,enum_1563,varplayer_395
+
+[chatphrase_106]
+template=Do you have spare Slayer equipment: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1538
+
+[chatphrase_107]
+template=You need the following Slayer equipment: <.
+autoresponse=chatphrase_158
+dynamiccommand=listdialog,enum_1538
+
+[chatphrase_108]
+template=Would you like to borrow: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_445
+autoresponse=chatphrase_666
+autoresponse=chatphrase_539
+autoresponse=chatphrase_540
+autoresponse=chatphrase_542
+dynamiccommand=objtradedialog
+
+[chatphrase_109]
+template=Get our orbs to the altar!
+
+[chatphrase_110]
+template=What is your level in Runecrafting?
+autoresponse=chatphrase_111
+
+[chatphrase_111]
+template=My Runecrafting level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_111
+dynamiccommand=stat_base,runecraft
+
+[chatphrase_112]
+template=I'm going to craft rune: <.
+dynamiccommand=listdialog,enum_1535
+
+[chatphrase_113]
+template=What's the best way for me to train Runecrafting?
+autoresponse=chatphrase_114
+
+[chatphrase_114]
+template=Try crafting runes at: <.
+dynamiccommand=listdialog,enum_1536
+
+[chatphrase_115]
+template=What is your level in Ranged?
+autoresponse=chatphrase_116
+
+[chatphrase_116]
+template=My Ranged level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_116
+dynamiccommand=stat_base,ranged
+
+[chatphrase_117]
+template=What's a good NPC for me to train Ranged on?
+autoresponse=chatphrase_118
+
+[chatphrase_118]
+template=Try ranging: <.
+dynamiccommand=listdialog,enum_1525
+
+[chatphrase_119]
+template=What is your level in Prayer?
+autoresponse=chatphrase_120
+
+[chatphrase_120]
+template=My Prayer level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_120
+dynamiccommand=stat_base,prayer
+
+[chatphrase_121]
+template=Use your prayer: <.
+dynamiccommand=listdialog,enum_1534
+
+[chatphrase_122]
+template=Turn your prayers off.
+
+[chatphrase_123]
+template=I'm going to train Prayer at the Ectofuntus.
+
+[chatphrase_124]
+template=I'm going to train Prayer at my POH altar.
+
+[chatphrase_125]
+template=I'm going to recharge my Prayer.
+autoresponse=chatphrase_162
+
+[chatphrase_126]
+template=What is your level in Mining?
+autoresponse=chatphrase_127
+
+[chatphrase_127]
+template=My Mining level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_127
+dynamiccommand=stat_base,mining
+
+[chatphrase_128]
+template=What pickaxe are you using?
+autoresponse=chatphrase_129
+
+[chatphrase_129]
+template=I'm using a pickaxe made of: <.
+dynamiccommand=listdialog,enum_1531
+
+[chatphrase_130]
+template=What ore are you mining?
+autoresponse=chatphrase_131
+
+[chatphrase_131]
+template=I'm mining ore: <.
+dynamiccommand=listdialog,enum_1529
+
+[chatphrase_132]
+template=Where's a good place for me to train mining?
+autoresponse=chatphrase_133
+
+[chatphrase_133]
+template=Try mining at: <.
+dynamiccommand=listdialog,enum_1533
+
+[chatphrase_134]
+template=What is your level in Magic?
+autoresponse=chatphrase_135
+
+[chatphrase_135]
+template=My Magic level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_135
+dynamiccommand=stat_base,magic
+
+[chatphrase_136]
+template=What spell are you casting?
+autoresponse=chatphrase_137
+
+[chatphrase_137]
+template=I'm casting spell: <.
+dynamiccommand=listdialog,enum_1527
+
+[chatphrase_138]
+template=Would you please cast: <.
+dynamiccommand=listdialog,enum_1527
+
+[chatphrase_139]
+template=What spell book are you on?
+autoresponse=chatphrase_140
+
+[chatphrase_140]
+template=I am on spell book: <.
+dynamiccommand=listdialog,enum_1528
+
+[chatphrase_141]
+template=What is your level in Woodcutting?
+autoresponse=chatphrase_142
+
+[chatphrase_142]
+template=My Woodcutting level is <.
+autoresponse=chatphrase_612
+autoresponse=chatphrase_613
+autoresponse=chatphrase_614
+autoresponse=chatphrase_142
+dynamiccommand=stat_base,woodcutting
+
+[chatphrase_143]
+template=What woodcutting axe do you use?
+autoresponse=chatphrase_144
+
+[chatphrase_144]
+template=I'm using a woodcutting axe made of: <.
+dynamiccommand=listdialog,enum_1532
+
+[chatphrase_145]
+template=Where's a good place for me to train Woodcutting?
+autoresponse=chatphrase_146
+
+[chatphrase_146]
+template=Try training Woodcutting at: <.
+dynamiccommand=listdialog,enum_1500
+
+[chatphrase_147]
+template=Hello!
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_148]
+template=Hi.
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_149]
+template=Good day.
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_150]
+template=Nice to meet you.
+autoresponse=chatphrase_642
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_151]
+template=How are you?
+autoresponse=chatphrase_177
+autoresponse=chatphrase_178
+autoresponse=chatphrase_179
+autoresponse=chatphrase_180
+autoresponse=chatphrase_181
+autoresponse=chatphrase_182
+
+[chatphrase_152]
+template=Happy <!
+autoresponse=chatphrase_158
+dynamiccommand=listdialog,enum_1521
+
+[chatphrase_153]
+template=Yes.
+
+[chatphrase_154]
+template=No.
+
+[chatphrase_155]
+template=No problem.
+
+[chatphrase_156]
+template=Maybe.
+
+[chatphrase_157]
+template=I don't know.
+
+[chatphrase_158]
+template=Thank you.
+
+[chatphrase_159]
+template=You're welcome.
+
+[chatphrase_160]
+template=Sorry.
+
+[chatphrase_161]
+template=Bye!
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_162]
+template=See you later.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_163]
+template=Be right back.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_164]
+template=I've got to go.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_165]
+template=Goodnight.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_165
+
+[chatphrase_166]
+template=I have to log off.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_167]
+template=Please stop that.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_160
+
+[chatphrase_168]
+template=That's good.
+
+[chatphrase_169]
+template=That's bad.
+
+[chatphrase_170]
+template=Please run.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_172
+autoresponse=chatphrase_250
+
+[chatphrase_171]
+template=Hang on a second.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_172]
+template=I can't do that.
+
+[chatphrase_173]
+template=w00t!
+autoresponse=chatphrase_173
+
+[chatphrase_174]
+template=Not right now.
+autoresponse=chatphrase_661
+
+[chatphrase_175]
+template=I'm happy!
+
+[chatphrase_176]
+template=I'm sad.
+
+[chatphrase_177]
+template=I'm great!
+
+[chatphrase_178]
+template=I'm good.
+
+[chatphrase_179]
+template=I'm okay.
+
+[chatphrase_180]
+template=Meh.
+
+[chatphrase_181]
+template=I've been better.
+
+[chatphrase_182]
+template=I'm having a bad day.
+
+[chatphrase_183]
+template=:-)
+
+[chatphrase_184]
+template=:-(
+
+[chatphrase_185]
+template=:-|
+
+[chatphrase_186]
+template=:-D
+
+[chatphrase_187]
+template=:-S
+
+[chatphrase_188]
+template=:-O
+
+[chatphrase_189]
+template=:-P
+
+[chatphrase_190]
+template=;-)
+
+[chatphrase_191]
+template=I won!
+
+[chatphrase_192]
+template=Aww, I lost.
+
+[chatphrase_193]
+template=Good game, all.
+
+[chatphrase_194]
+template=Who wants a rematch?
+autoresponse=chatphrase_343
+autoresponse=chatphrase_154
+
+[chatphrase_195]
+template=Well done.
+autoresponse=chatphrase_158
+
+[chatphrase_196]
+template=Unlucky, maybe next time.
+
+[chatphrase_197]
+template=Got you with that one!
+
+[chatphrase_198]
+template=Buh bye.
+
+[chatphrase_199]
+template=That's gotta hurt.
+
+[chatphrase_200]
+template=Another one bites the dust.
+
+[chatphrase_201]
+template=I have you now!
+
+[chatphrase_202]
+template=Fear my leet skills.
+
+[chatphrase_203]
+template=I'll get you!
+
+[chatphrase_204]
+template=I'm coming for ya.
+
+[chatphrase_205]
+template=Run and hide, pal.
+
+[chatphrase_206]
+template=Don't hurt me!
+
+[chatphrase_207]
+template=I love this game!
+
+[chatphrase_208]
+template=I don't like this game.
+
+[chatphrase_209]
+template=I like your item: <.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+dynamiccommand=objdialog
+
+[chatphrase_210]
+template=Nicely done.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_211]
+template=Nice hit.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_212]
+template=I like your familiar.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_213]
+template=I like your pet.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_214]
+template=You look cool.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_215]
+template=Nice levels.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_216]
+template=Nice level in: <.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+dynamiccommand=listdialog,enum_1517
+
+[chatphrase_217]
+template=Help!
+
+[chatphrase_218]
+template=Would you please assist me in: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1552
+
+[chatphrase_219]
+template=Would you protect my gravestone, please?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_220]
+template=Would you please help me fight: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1520
+
+[chatphrase_221]
+template=Try looking in the Game Guide.
+autoresponse=chatphrase_158
+
+[chatphrase_222]
+template=Would you please teleport me to: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1518
+
+[chatphrase_223]
+template=Would you please teleport us to: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1519
+
+[chatphrase_224]
+template=How do I get to location: <?
+autoresponse=chatphrase_230
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_225]
+template=Could you please lead me to location: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_241
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_226]
+template=Follow me.
+
+[chatphrase_227]
+template=Follow me to: <.
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_228]
+template=Go to location: <.
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_229]
+template=Where can I get item: <?
+autoresponse=chatphrase_228
+autoresponse=chatphrase_706
+autoresponse=chatphrase_707
+dynamiccommand=objdialog
+
+[chatphrase_230]
+template=That is < of <.
+dynamiccommand=listdialog,enum_1502
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_231]
+template=Where are you?
+autoresponse=chatphrase_708
+
+[chatphrase_232]
+template=Where is the nearest: <.
+autoresponse=chatphrase_233
+autoresponse=chatphrase_228
+autoresponse=chatphrase_230
+dynamiccommand=listdialog,enum_1488
+
+[chatphrase_233]
+template=Go: <.
+autoresponse=chatphrase_158
+dynamiccommand=listdialog,enum_1502
+
+[chatphrase_234]
+template=Use transport: <.
+dynamiccommand=listdialog,enum_1487
+
+[chatphrase_235]
+template=What are you doing?
+autoresponse=chatphrase_236
+autoresponse=chatphrase_237
+autoresponse=chatphrase_238
+autoresponse=chatphrase_239
+autoresponse=chatphrase_240
+autoresponse=chatphrase_241
+
+[chatphrase_236]
+template=I am training: <.
+dynamiccommand=listdialog,enum_1517
+
+[chatphrase_237]
+template=I am playing: <.
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_238]
+template=I am doing quest: <.
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_239]
+template=I am doing a treasure trail.
+
+[chatphrase_240]
+template=I am in random event: <.
+dynamiccommand=listdialog,enum_1546
+
+[chatphrase_241]
+template=I am busy, sorry.
+
+[chatphrase_242]
+template=Add me please.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_243]
+template=Would you like to go to play: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_244]
+template=Would you like to fight: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1520
+
+[chatphrase_245]
+template=Meet me on RuneScape world: <.
+autoresponse=chatphrase_246
+autoresponse=chatphrase_248
+autoresponse=chatphrase_249
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1542
+
+[chatphrase_246]
+template=I'll wait for you at location: <.
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_247]
+template=Can I play too?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_248]
+template=I'll come to you.
+
+[chatphrase_249]
+template=You come to me.
+
+[chatphrase_250]
+template=Please wait whilst my run energy recharges.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_251]
+template=Help me open this door; stand on the button.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_252]
+template=Destroy the support.
+
+[chatphrase_253]
+template=Take the left path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_256
+autoresponse=chatphrase_257
+autoresponse=chatphrase_258
+
+[chatphrase_254]
+template=Take the middle path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_256
+autoresponse=chatphrase_257
+autoresponse=chatphrase_258
+
+[chatphrase_255]
+template=Take the right path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_256
+autoresponse=chatphrase_257
+autoresponse=chatphrase_258
+
+[chatphrase_256]
+template=I'll take the left path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_253
+autoresponse=chatphrase_254
+autoresponse=chatphrase_255
+
+[chatphrase_257]
+template=I'll take the middle path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_253
+autoresponse=chatphrase_254
+autoresponse=chatphrase_255
+
+[chatphrase_258]
+template=I'll take the right path.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+autoresponse=chatphrase_253
+autoresponse=chatphrase_254
+autoresponse=chatphrase_255
+
+[chatphrase_259]
+template=I'll take on Dagannoth <.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1506
+
+[chatphrase_260]
+template=You take on Dagannoth <.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1506
+
+[chatphrase_261]
+template=Leave Dagannoth < for now.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1506
+
+[chatphrase_262]
+template=Stay close to the water.
+
+[chatphrase_263]
+template=Telegrab the drop.
+
+[chatphrase_264]
+template=I have to go to a bank.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_162
+
+[chatphrase_265]
+template=Where is the mole?
+autoresponse=chatphrase_267
+autoresponse=chatphrase_268
+autoresponse=chatphrase_269
+autoresponse=chatphrase_270
+autoresponse=chatphrase_271
+autoresponse=chatphrase_157
+
+[chatphrase_266]
+template=I need a tinderbox or light source.
+autoresponse=chatphrase_787
+
+[chatphrase_267]
+template=It's at the centre!
+
+[chatphrase_268]
+template=It's at the north, near the entrance.
+
+[chatphrase_269]
+template=It's at the south, near the exit.
+
+[chatphrase_270]
+template=It's to the east of the cavern.
+
+[chatphrase_271]
+template=It's to the west of the cavern.
+
+[chatphrase_272]
+template=Poison it!
+
+[chatphrase_273]
+template=Kill Armadyl's followers.
+
+[chatphrase_274]
+template=Kill Bandos's followers.
+
+[chatphrase_275]
+template=Kill Saradomin's followers.
+
+[chatphrase_276]
+template=Kill Zamorak's followers.
+
+[chatphrase_277]
+template=Attack the lower-level creatures.
+
+[chatphrase_278]
+template=I don't have enough kills yet.
+
+[chatphrase_279]
+template=Don't waste your food and potions yet.
+
+[chatphrase_280]
+template=Let's go to the boss room!
+autoresponse=chatphrase_278
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_281]
+template=Attack the boss!
+
+[chatphrase_282]
+template=Attack the Magic sub-boss!
+
+[chatphrase_283]
+template=Attack the Ranged sub-boss!
+
+[chatphrase_284]
+template=Attack the melee sub-boss!
+
+[chatphrase_285]
+template=I have to recharge my Prayer.
+
+[chatphrase_286]
+template=I'm outta here!
+
+[chatphrase_287]
+template=Stand opposite me.
+
+[chatphrase_288]
+template=Get this guardian off me!
+
+[chatphrase_289]
+template=She's protecting against Ranged and Magic; use melee!
+
+[chatphrase_290]
+template=She's invulnerable to melee; use Magic or Ranged!
+
+[chatphrase_291]
+template=I'm going to be role: <.
+dynamiccommand=listdialog,enum_1507
+
+[chatphrase_292]
+template=We need role: <.
+dynamiccommand=listdialog,enum_1507
+
+[chatphrase_293]
+template=What wave should we do?
+autoresponse=chatphrase_294
+
+[chatphrase_294]
+template=We should do wave: <.
+dynamiccommand=listdialog,enum_1508
+
+[chatphrase_295]
+template=What are you spending your Barbarian Assault points on?
+autoresponse=chatphrase_296
+autoresponse=chatphrase_297
+
+[chatphrase_296]
+template=I'm spending my Barbarian Assault points on: <.
+dynamiccommand=listdialog,enum_1510
+
+[chatphrase_297]
+template=I'm going to gamble.
+
+[chatphrase_298]
+template=Someone use the egg launcher.
+
+[chatphrase_299]
+template=Someone get on the horn.
+
+[chatphrase_300]
+template=I need healing.
+
+[chatphrase_301]
+template=Repair the traps.
+
+[chatphrase_302]
+template=Build some barricades.
+
+[chatphrase_303]
+template=How many Stealing Creation Points do you have?
+autoresponse=chatphrase_611
+
+[chatphrase_304]
+template=I'm joining the Zamorak team.
+
+[chatphrase_305]
+template=I'm joining the Saradomin team.
+
+[chatphrase_306]
+template=I'm using the Guthix portal.
+
+[chatphrase_307]
+template=The Zamorak team is full.
+
+[chatphrase_308]
+template=The Saradomin team is full.
+
+[chatphrase_309]
+template=Where is our flag?
+autoresponse=chatphrase_312
+autoresponse=chatphrase_321
+autoresponse=chatphrase_322
+autoresponse=chatphrase_323
+autoresponse=chatphrase_324
+autoresponse=chatphrase_325
+autoresponse=chatphrase_326
+
+[chatphrase_310]
+template=Where is their flag?
+autoresponse=chatphrase_311
+autoresponse=chatphrase_321
+autoresponse=chatphrase_322
+autoresponse=chatphrase_323
+autoresponse=chatphrase_324
+autoresponse=chatphrase_325
+autoresponse=chatphrase_326
+
+[chatphrase_311]
+template=I have their flag!
+
+[chatphrase_312]
+template=They have our flag!
+
+[chatphrase_313]
+template=Collapse the tunnels.
+
+[chatphrase_314]
+template=Fire the catapult!
+
+[chatphrase_315]
+template=Climb up the walls!
+
+[chatphrase_316]
+template=Build some barricades!
+
+[chatphrase_317]
+template=Destroy their barricades!
+
+[chatphrase_318]
+template=Defend our flag!
+autoresponse=chatphrase_154
+autoresponse=chatphrase_319
+
+[chatphrase_319]
+template=Capture their flag!
+autoresponse=chatphrase_154
+autoresponse=chatphrase_318
+autoresponse=chatphrase_311
+
+[chatphrase_320]
+template=Medic! I need a bandage!
+
+[chatphrase_321]
+template=Underground.
+
+[chatphrase_322]
+template=In the open.
+
+[chatphrase_323]
+template=In our castle!
+
+[chatphrase_324]
+template=In their castle.
+
+[chatphrase_325]
+template=At the east stepping stones.
+
+[chatphrase_326]
+template=At the west stepping stones.
+
+[chatphrase_327]
+template=Attack my opponent!
+
+[chatphrase_328]
+template=Retreat!
+
+[chatphrase_329]
+template=Charge!
+
+[chatphrase_330]
+template=Take out their mages.
+
+[chatphrase_331]
+template=Take out their rangers.
+
+[chatphrase_332]
+template=Take out their meleers.
+
+[chatphrase_333]
+template=Take out their high-levels.
+
+[chatphrase_334]
+template=Take out their low-levels.
+
+[chatphrase_335]
+template=Rally to me!
+
+[chatphrase_336]
+template=Protect our mages.
+
+[chatphrase_337]
+template=Protect our rangers.
+
+[chatphrase_338]
+template=Protect our meleers.
+
+[chatphrase_339]
+template=Protect our high-levels.
+
+[chatphrase_340]
+template=Protect our low-levels.
+
+[chatphrase_341]
+template=I challenge you to a friendly duel.
+autoresponse=chatphrase_343
+autoresponse=chatphrase_154
+
+[chatphrase_342]
+template=I challenge you to a staked duel.
+autoresponse=chatphrase_343
+autoresponse=chatphrase_154
+
+[chatphrase_343]
+template=I accept.
+
+[chatphrase_344]
+template=Turn on the rule: <.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1511
+
+[chatphrase_345]
+template=Turn off the rule: <.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1511
+
+[chatphrase_346]
+template=Lower your stake.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_347]
+template=Increase your stake.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_348]
+template=Let's fight!
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_349]
+template=You have no chance.
+
+[chatphrase_350]
+template=I'm going to win.
+
+[chatphrase_351]
+template=Take that!
+
+[chatphrase_352]
+template=How's that for some damage?
+autoresponse=chatphrase_211
+autoresponse=chatphrase_203
+
+[chatphrase_353]
+template=What are you spending your Fist of Guthix points on?
+autoresponse=chatphrase_354
+
+[chatphrase_354]
+template=I'm spending my Fist of Guthix points on: <.
+dynamiccommand=listdialog,enum_1512
+
+[chatphrase_355]
+template=What is your Fist of Guthix rating?
+autoresponse=chatphrase_356
+
+[chatphrase_356]
+template=My Fist of Guthix rating is: <.
+dynamiccommand=var_player_int,varplayer_1208
+
+[chatphrase_357]
+template=You'll never find me.
+
+[chatphrase_358]
+template=I'm at the centre, near the Fist of Guthix.
+
+[chatphrase_359]
+template=I'm in the houses.
+
+[chatphrase_360]
+template=I'm around the edge.
+
+[chatphrase_361]
+template=I've got charges: <.
+dynamiccommand=var_player_bit,varplayerbit_4562
+
+[chatphrase_362]
+template=Come out, come out, wherever you are.
+
+[chatphrase_363]
+template=How many charges have you got?
+autoresponse=chatphrase_361
+
+[chatphrase_364]
+template=I'm getting on the novice lander.
+
+[chatphrase_365]
+template=I'm getting on the intermediate lander.
+
+[chatphrase_366]
+template=I'm getting on the veteran lander.
+
+[chatphrase_367]
+template=I'm going to trade my points in.
+autoresponse=chatphrase_368
+
+[chatphrase_368]
+template=What are you spending your Pest Control points on?
+autoresponse=chatphrase_369
+
+[chatphrase_369]
+template=I'm spending my Pest Control points on: <.
+dynamiccommand=listdialog,enum_1513
+
+[chatphrase_370]
+template=The west portal shield is down - attack it!
+
+[chatphrase_371]
+template=The east portal shield is down - attack it!
+
+[chatphrase_372]
+template=The south-west portal shield is down - attack it!
+
+[chatphrase_373]
+template=The south-east portal shield is down - attack it!
+
+[chatphrase_374]
+template=Protect the Void Knight!
+
+[chatphrase_375]
+template=Close the gates!
+
+[chatphrase_376]
+template=Repair the gates!
+
+[chatphrase_377]
+template=Someone get up the tower!
+
+[chatphrase_378]
+template=Attack the brawlers!
+
+[chatphrase_379]
+template=Attack the defilers!
+
+[chatphrase_380]
+template=Attack the ravagers!
+
+[chatphrase_381]
+template=Attack the shifters!
+
+[chatphrase_382]
+template=Attack the spinners!
+
+[chatphrase_383]
+template=Attack the splatters!
+
+[chatphrase_384]
+template=Attack the torchers!
+
+[chatphrase_385]
+template=You're going down!
+
+[chatphrase_386]
+template=You can't beat me!
+
+[chatphrase_387]
+template=Don't attack me!
+
+[chatphrase_388]
+template=Who will fight me?
+autoresponse=chatphrase_814
+
+[chatphrase_389]
+template=Someone's trying to hide!
+
+[chatphrase_390]
+template=Team up with me.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_391]
+template=Who would like a game of: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1514
+
+[chatphrase_392]
+template=Nice move.
+autoresponse=chatphrase_158
+
+[chatphrase_393]
+template=Hehe, bad move. :-P
+
+[chatphrase_394]
+template=I love what you've done with the place.
+autoresponse=chatphrase_158
+
+[chatphrase_395]
+template=I'm not fond of your decor.
+
+[chatphrase_396]
+template=Where is your player-owned house?
+autoresponse=chatphrase_397
+
+[chatphrase_397]
+template=My house is in <.
+dynamiccommand=listdialog,enum_1515
+
+[chatphrase_398]
+template=Could I use your POH: <?
+autoresponse=chatphrase_401
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1497
+
+[chatphrase_399]
+template=Activate your dungeon.
+
+[chatphrase_400]
+template=Welcome to my humble abode.
+
+[chatphrase_401]
+template=Mi casa, su casa.
+
+[chatphrase_402]
+template=I challenge you on the attack stone.
+
+[chatphrase_403]
+template=Let's play hoop and stick.
+
+[chatphrase_404]
+template=Let's play darts.
+
+[chatphrase_405]
+template=Let's have a go at the archery game.
+
+[chatphrase_406]
+template=Let's do the jester game.
+
+[chatphrase_407]
+template=Let's have a treasure hunt.
+
+[chatphrase_408]
+template=Let's do the elemental balance.
+
+[chatphrase_409]
+template=Let's have a boxing match.
+
+[chatphrase_410]
+template=Let's have a fencing match.
+
+[chatphrase_411]
+template=Let's have a duel.
+
+[chatphrase_412]
+template=Let's use the ranging pedestals.
+
+[chatphrase_413]
+template=Let's use the balance beam.
+
+[chatphrase_414]
+template=Everyone gather on the trapdoor.
+
+[chatphrase_415]
+template=Turn on challenge mode.
+
+[chatphrase_416]
+template=I got the treasure!
+
+[chatphrase_417]
+template=Nice dungeon.
+autoresponse=chatphrase_158
+
+[chatphrase_418]
+template=Your dungeon is too hard for me.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_173
+autoresponse=chatphrase_160
+
+[chatphrase_419]
+template=Pass to me!
+
+[chatphrase_420]
+template=Shoot!
+
+[chatphrase_421]
+template=Goal!
+
+[chatphrase_422]
+template=Tackle them!
+
+[chatphrase_423]
+template=Let's get this party started.
+
+[chatphrase_424]
+template=I'm putting a valuable item in the chest.
+autoresponse=chatphrase_173
+
+[chatphrase_425]
+template=Pull the lever.
+
+[chatphrase_426]
+template=What drop did you get?
+autoresponse=chatphrase_427
+
+[chatphrase_427]
+template=I got item: <.
+dynamiccommand=objdialog
+
+[chatphrase_428]
+template=w00t! I got something awesome!
+autoresponse=chatphrase_426
+
+[chatphrase_429]
+template=Balloon drop!
+
+[chatphrase_430]
+template=Time for the dancing knights!
+
+[chatphrase_431]
+template=I'm doing a Treasure Trail Clue.
+
+[chatphrase_432]
+template=Looking for Black Arm gang partner for Heroes' Quest.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_827
+autoresponse=chatphrase_828
+
+[chatphrase_433]
+template=Looking for Phoenix gang partner for Heroes' Quest.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_827
+autoresponse=chatphrase_828
+
+[chatphrase_434]
+template=Looking for Black Arm gang partner for Shield of Arrav.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_827
+autoresponse=chatphrase_828
+
+[chatphrase_435]
+template=Looking for Phoenix gang partner for Shield of Arrav.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_827
+autoresponse=chatphrase_828
+
+[chatphrase_436]
+template=Okay, time to get the key.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_437]
+template=Trade me the key.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_438]
+template=Use your contacts and the key to get into position.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_439]
+template=Range Grip now!
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_440]
+template=Here's one of the candlesticks.
+autoresponse=chatphrase_158
+
+[chatphrase_441]
+template=Trade me one of the candlesticks.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_442]
+template=Thanks for your help.
+autoresponse=chatphrase_159
+autoresponse=chatphrase_158
+autoresponse=chatphrase_442
+autoresponse=chatphrase_162
+autoresponse=chatphrase_161
+
+[chatphrase_443]
+template=Good luck with the rest of the quest.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_442
+autoresponse=chatphrase_162
+autoresponse=chatphrase_161
+
+[chatphrase_444]
+template=Trade me the Phoenix gang storage room key.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_445]
+template=Certainly! Send me a trade offer.
+
+[chatphrase_446]
+template=Trade me the other half of the certificate.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+
+[chatphrase_447]
+template=Get on the stove.
+
+[chatphrase_448]
+template=Start pumping.
+
+[chatphrase_449]
+template=Stop pumping.
+
+[chatphrase_450]
+template=Pedal the conveyor belt.
+
+[chatphrase_451]
+template=Fix the broken parts.
+
+[chatphrase_452]
+template=Check the temperature.
+
+[chatphrase_453]
+template=Someone switch roles with me.
+
+[chatphrase_454]
+template=The furnace is hot enough - smelt away!
+
+[chatphrase_455]
+template=Repair the nets with some rope!
+
+[chatphrase_456]
+template=Plug the leaks with some swamp paste!
+
+[chatphrase_457]
+template=Bail out some water with a bucket!
+
+[chatphrase_458]
+template=Don't just stand there, do something!
+
+[chatphrase_459]
+template=We are going down with the ship! :(
+autoresponse=chatphrase_457
+autoresponse=chatphrase_180
+
+[chatphrase_460]
+template=We need more resources.
+
+[chatphrase_461]
+template=More people fight the shades.
+
+[chatphrase_462]
+template=Repair the walls.
+
+[chatphrase_463]
+template=Someone light the altar!
+
+[chatphrase_464]
+template=I'm off to burn some shades.
+
+[chatphrase_465]
+template=I'm off to use my keys.
+
+[chatphrase_466]
+template=I'm joining Fancy Dan's team.
+
+[chatphrase_467]
+template=I'm joining San Fan's team.
+
+[chatphrase_468]
+template=Get more bitternuts.
+
+[chatphrase_469]
+template=Get more sweetgrubs.
+
+[chatphrase_470]
+template=Get more scrapeytree bark.
+
+[chatphrase_471]
+template=Put more coloured water in.
+
+[chatphrase_472]
+template=Put more water in.
+
+[chatphrase_473]
+template=Get wood for the boiler.
+
+[chatphrase_474]
+template=Let off the steam!
+
+[chatphrase_475]
+template=Destroy their water pumps.
+
+[chatphrase_476]
+template=Set fire to their still.
+
+[chatphrase_477]
+template=Destroy their bridges.
+
+[chatphrase_478]
+template=Burn their trees.
+
+[chatphrase_479]
+template=Fix the water pumps.
+
+[chatphrase_480]
+template=Repair the bridge.
+
+[chatphrase_481]
+template=Craft more repair sections.
+
+[chatphrase_482]
+template=Douse the trees.
+
+[chatphrase_483]
+template=Buying one of item: <.
+autoresponse=chatphrase_488
+dynamiccommand=objtradedialog
+
+[chatphrase_484]
+template=Buying some of item: <.
+autoresponse=chatphrase_489
+dynamiccommand=objtradedialog
+
+[chatphrase_485]
+template=Buying item on G.E. at highest price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_486]
+template=Buying item on G.E. at market price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_487]
+template=Buying item on G.E. at lowest price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_488]
+template=Selling one of item: <.
+autoresponse=chatphrase_483
+dynamiccommand=objtradedialog
+
+[chatphrase_489]
+template=Selling some of item: <.
+autoresponse=chatphrase_484
+dynamiccommand=objtradedialog
+
+[chatphrase_490]
+template=Selling item on G.E. at highest price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_491]
+template=Selling item on G.E. at market price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_492]
+template=Selling item on G.E. at lowest price: <.
+dynamiccommand=objtradedialog
+
+[chatphrase_493]
+template=Bank sale!
+
+[chatphrase_494]
+template=I want more of item: <.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=objdialog
+
+[chatphrase_495]
+template=I want less of item: <.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_154
+dynamiccommand=objdialog
+
+[chatphrase_496]
+template=That's too much – would you accept less?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_497]
+template=That's not enough – would you offer more?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_498]
+template=No deal, sorry.
+
+[chatphrase_499]
+template=It's a deal!
+
+[chatphrase_500]
+template=What is that you're wearing/wielding: <?
+autoresponse=chatphrase_501
+dynamiccommand=listdialog,enum_1522
+
+[chatphrase_501]
+template=That item is: <.
+dynamiccommand=objdialog
+
+[chatphrase_502]
+template=Could I please borrow: <?
+autoresponse=chatphrase_445
+autoresponse=chatphrase_538
+autoresponse=chatphrase_539
+autoresponse=chatphrase_540
+autoresponse=chatphrase_541
+autoresponse=chatphrase_543
+dynamiccommand=objtradedialog
+
+[chatphrase_503]
+template=Could I please have some antipoison?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_504]
+template=Could I please have some food?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_505]
+template=Hang on; my inventory is full.
+autoresponse=chatphrase_162
+
+[chatphrase_506]
+template=I got an item: <.
+dynamiccommand=objdialog
+
+[chatphrase_507]
+template=Let's play Chess.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_508]
+template=Let's play Arcanists.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_509]
+template=Let's play TetraLink.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_510]
+template=Let's play Shattered Plans.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_511]
+template=Can I join you?
+
+[chatphrase_512]
+template=I'm playing a Rated game.
+
+[chatphrase_513]
+template=Invite me, please.
+
+[chatphrase_514]
+template=I am trying to get Achievements.
+
+[chatphrase_515]
+template=I am trying to increase my ranking.
+
+[chatphrase_516]
+template=Come and meet me on my world.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_517]
+template=Let's play RuneScape.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_518]
+template=Let's play Castle Wars.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_519]
+template=Let's play Barbarian Assault.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_520]
+template=Let's play Fist of Guthix.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_521]
+template=Let's play Bounty Hunter.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_522]
+template=Let's play Clan Wars.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_523]
+template=Let's play Duel Arena.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_524]
+template=Would you like to join my clan?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_525]
+template=Can I join your clan?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_526]
+template=What is your clan rank?
+autoresponse=chatphrase_528
+
+[chatphrase_527]
+template=What does your clan like to do?
+autoresponse=chatphrase_529
+
+[chatphrase_528]
+template=My clan rank is: <.
+dynamiccommand=enum_string_clan,enum_1564
+
+[chatphrase_529]
+template=Our clan likes to play: <.
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_530]
+template=We need to stock up on item: <.
+dynamiccommand=objdialog
+
+[chatphrase_531]
+template=We should boost skill: <.
+dynamiccommand=listdialog,enum_1517
+
+[chatphrase_532]
+template=Everyone turn LootShare on.
+
+[chatphrase_533]
+template=Everyone turn LootShare off.
+
+[chatphrase_534]
+template=CoinShare is on.
+
+[chatphrase_535]
+template=CoinShare is off.
+
+[chatphrase_536]
+template=Bring equipment style: <.
+dynamiccommand=listdialog,enum_1509
+
+[chatphrase_537]
+template=Bring item: <.
+dynamiccommand=objdialog
+
+[chatphrase_538]
+template=Sorry, I'd rather not.
+
+[chatphrase_539]
+template=Sorry, this isn't a good time.
+
+[chatphrase_540]
+template=I don't think that's possible.
+
+[chatphrase_541]
+template=I'm currently lending an item, so I can't lend you anything just now.
+
+[chatphrase_542]
+template=I'm currently borrowing an item.
+
+[chatphrase_543]
+template=Sorry, I haven't got one of those.
+
+[chatphrase_544]
+template=I'd like the loan duration to be: <
+autoresponse=chatphrase_544
+autoresponse=chatphrase_661
+dynamiccommand=listdialog,enum_1642
+
+[chatphrase_545]
+template=I'm planning to log out; this will end the loan.
+autoresponse=chatphrase_546
+autoresponse=chatphrase_661
+
+[chatphrase_546]
+template=Please wait a moment before logging out!
+
+[chatphrase_547]
+template=I have < Quest Points.
+autoresponse=chatphrase_173
+autoresponse=chatphrase_210
+autoresponse=chatphrase_180
+autoresponse=chatphrase_547
+dynamiccommand=var_player_int,varplayer_101
+
+[chatphrase_548]
+template=Make a barrier!
+
+[chatphrase_549]
+template=Repel the enemy orbs!
+
+[chatphrase_550]
+template=Get into the portal!
+
+[chatphrase_551]
+template=Time is running out!
+
+[chatphrase_552]
+template=What should I do?
+
+[chatphrase_553]
+template=I am joining Wizard Acantha's team.
+
+[chatphrase_554]
+template=I am joining Wizard Vief's team.
+
+[chatphrase_555]
+template=Join Wizard Acantha's team.
+
+[chatphrase_556]
+template=Join Wizard Vief's team.
+
+[chatphrase_557]
+template=Which team should I join?
+autoresponse=chatphrase_556
+autoresponse=chatphrase_555
+
+[chatphrase_558]
+template=Which team are you on?
+autoresponse=chatphrase_553
+autoresponse=chatphrase_554
+
+[chatphrase_559]
+template=What are you buying?
+autoresponse=chatphrase_560
+
+[chatphrase_560]
+template=I am buying: <.
+dynamiccommand=listdialog,enum_1695
+
+[chatphrase_561]
+template=My current Slayer assignment is complete.
+
+[chatphrase_562]
+template=Let's allow run-ins.
+autoresponse=chatphrase_563
+autoresponse=chatphrase_562
+
+[chatphrase_563]
+template=Let's choose knock-out mode.
+autoresponse=chatphrase_562
+autoresponse=chatphrase_563
+
+[chatphrase_564]
+template=Let's have a kill-count target of: <.
+autoresponse=chatphrase_564
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+dynamiccommand=listdialog,enum_1801
+
+[chatphrase_565]
+template=Let's have a time limit of: <.
+autoresponse=chatphrase_565
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+dynamiccommand=listdialog,enum_1802
+
+[chatphrase_566]
+template=Let's use arena: <.
+autoresponse=chatphrase_566
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+dynamiccommand=listdialog,enum_1803
+
+[chatphrase_567]
+template=Let's have a 'safe' battle.
+autoresponse=chatphrase_568
+autoresponse=chatphrase_567
+
+[chatphrase_568]
+template=Let's have a 'dangerous' battle.
+autoresponse=chatphrase_567
+autoresponse=chatphrase_568
+
+[chatphrase_569]
+template=Let's allow melee.
+autoresponse=chatphrase_570
+autoresponse=chatphrase_569
+
+[chatphrase_570]
+template=Let's forbid melee.
+autoresponse=chatphrase_569
+autoresponse=chatphrase_570
+
+[chatphrase_571]
+template=Let's allow all spells.
+autoresponse=chatphrase_574
+autoresponse=chatphrase_573
+autoresponse=chatphrase_572
+autoresponse=chatphrase_571
+
+[chatphrase_572]
+template=Let's allow only the standard spellbook.
+autoresponse=chatphrase_574
+autoresponse=chatphrase_573
+autoresponse=chatphrase_571
+autoresponse=chatphrase_572
+
+[chatphrase_573]
+template=Let's allow only the Bind/Snare/Entangle spells.
+autoresponse=chatphrase_571
+autoresponse=chatphrase_572
+autoresponse=chatphrase_574
+autoresponse=chatphrase_573
+
+[chatphrase_574]
+template=Let's forbid magical combat.
+autoresponse=chatphrase_571
+autoresponse=chatphrase_572
+autoresponse=chatphrase_573
+autoresponse=chatphrase_574
+
+[chatphrase_575]
+template=Let's allow ranging.
+autoresponse=chatphrase_576
+autoresponse=chatphrase_575
+
+[chatphrase_576]
+template=Let's forbid ranging.
+autoresponse=chatphrase_575
+autoresponse=chatphrase_576
+
+[chatphrase_577]
+template=Let's allow Summoning.
+autoresponse=chatphrase_578
+autoresponse=chatphrase_577
+
+[chatphrase_578]
+template=Let's forbid Summoning.
+autoresponse=chatphrase_577
+autoresponse=chatphrase_578
+
+[chatphrase_579]
+template=Let's allow Prayer.
+autoresponse=chatphrase_580
+autoresponse=chatphrase_579
+
+[chatphrase_580]
+template=Let's forbid Prayer.
+autoresponse=chatphrase_579
+autoresponse=chatphrase_580
+
+[chatphrase_581]
+template=Let's allow food.
+autoresponse=chatphrase_582
+autoresponse=chatphrase_581
+
+[chatphrase_582]
+template=Let's forbid food.
+autoresponse=chatphrase_581
+autoresponse=chatphrase_582
+
+[chatphrase_583]
+template=Let's allow potions.
+autoresponse=chatphrase_584
+autoresponse=chatphrase_583
+
+[chatphrase_584]
+template=Let's forbid potions.
+autoresponse=chatphrase_583
+autoresponse=chatphrase_584
+
+[chatphrase_585]
+template=Let's play Pixelate.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_586]
+template=Let's play Pool.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_587]
+template=Let's play Deko Bloko.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_588]
+template=Let's play Brick-a-Brac.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_589]
+template=I am going to make: <.
+dynamiccommand=listdialog,enum_2025
+
+[chatphrase_590]
+template=I am gathering sacred clay.
+
+[chatphrase_591]
+template=I am building barriers.
+
+[chatphrase_592]
+template=I am making items.
+
+[chatphrase_593]
+template=I need: <.
+dynamiccommand=listdialog,enum_2025
+
+[chatphrase_594]
+template=Destroy their barriers!
+
+[chatphrase_595]
+template=Kill the enemy!
+
+[chatphrase_596]
+template=Gather more clay!
+
+[chatphrase_597]
+template=Make more items!
+
+[chatphrase_598]
+template=Would you like to ally with my clan?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_599]
+template=I challenge your clan to a game.
+autoresponse=chatphrase_343
+autoresponse=chatphrase_154
+
+[chatphrase_600]
+template=My clan is ready.
+
+[chatphrase_601]
+template=My clan is not ready.
+
+[chatphrase_602]
+template=We need more: <.
+dynamiccommand=listdialog,enum_2026
+
+[chatphrase_603]
+template=What are your skilling levels?
+autoresponse=chatphrase_604
+autoresponse=chatphrase_605
+autoresponse=chatphrase_606
+
+[chatphrase_604]
+template=My levels are: Fishing:<  Hunter:<  Woodcutting:<  Mining:<
+dynamiccommand=stat_base,fishing
+dynamiccommand=stat_base,hunter
+dynamiccommand=stat_base,woodcutting
+dynamiccommand=stat_base,mining
+
+[chatphrase_605]
+template=My levels are: Smithing:<  Crafting:<  Fletching:<
+dynamiccommand=stat_base,smithing
+dynamiccommand=stat_base,crafting
+dynamiccommand=stat_base,fletching
+
+[chatphrase_606]
+template=My levels are: Construction:<  Herblore:<  Cooking:<  Runecrafting:<
+dynamiccommand=stat_base,construction
+dynamiccommand=stat_base,herblore
+dynamiccommand=stat_base,cooking
+dynamiccommand=stat_base,runecraft
+
+[chatphrase_607]
+template=What are your combat levels?
+autoresponse=chatphrase_608
+autoresponse=chatphrase_609
+
+[chatphrase_608]
+template=My levels are: Attack:<  Strength:<  Ranged:<  Magic:<
+dynamiccommand=stat_base,attack
+dynamiccommand=stat_base,strength
+dynamiccommand=stat_base,ranged
+dynamiccommand=stat_base,magic
+
+[chatphrase_609]
+template=My levels are: Defence:<  Prayer:<  Hitpoints:<  Summoning:<
+dynamiccommand=stat_base,defence
+dynamiccommand=stat_base,prayer
+dynamiccommand=stat_base,hitpoints
+dynamiccommand=stat_base,summoning
+
+[chatphrase_610]
+template=What is your combat level?
+
+[chatphrase_611]
+template=I have < Stealing Creation Points.
+dynamiccommand=var_player_bit,varplayerbit_5505
+
+[chatphrase_612]
+template=That's great.
+
+[chatphrase_613]
+template=That's OK.
+
+[chatphrase_614]
+template=That's low.
+
+[chatphrase_615]
+template=I need < experience to get my next Agility level.
+dynamiccommand=enum_string_statbase,enum_2140,agility
+
+[chatphrase_616]
+template=I need < experience to get my next Attack level.
+dynamiccommand=enum_string_statbase,enum_2140,attack
+
+[chatphrase_617]
+template=I need < experience to get my next Construction level.
+dynamiccommand=enum_string_statbase,enum_2140,construction
+
+[chatphrase_618]
+template=I need < experience to get my next Cooking level.
+dynamiccommand=enum_string_statbase,enum_2140,cooking
+
+[chatphrase_619]
+template=I need < experience to get my next Crafting level.
+dynamiccommand=enum_string_statbase,enum_2140,crafting
+
+[chatphrase_620]
+template=I need < experience to get my next Defence level.
+dynamiccommand=enum_string_statbase,enum_2140,defence
+
+[chatphrase_621]
+template=I need < experience to get my next Farming level.
+dynamiccommand=enum_string_statbase,enum_2140,farming
+
+[chatphrase_622]
+template=I need < experience to get my next Firemaking level.
+dynamiccommand=enum_string_statbase,enum_2140,firemaking
+
+[chatphrase_623]
+template=I need < experience to get my next Fishing level.
+dynamiccommand=enum_string_statbase,enum_2140,fishing
+
+[chatphrase_624]
+template=I need < experience to get my next Fletching level.
+dynamiccommand=enum_string_statbase,enum_2140,fletching
+
+[chatphrase_625]
+template=I need < experience to get my next Herblore level.
+dynamiccommand=enum_string_statbase,enum_2140,herblore
+
+[chatphrase_626]
+template=I need < experience to get my next Hitpoints level.
+dynamiccommand=enum_string_statbase,enum_2140,hitpoints
+
+[chatphrase_627]
+template=I need < experience to get my next Hunter level.
+dynamiccommand=enum_string_statbase,enum_2140,hunter
+
+[chatphrase_628]
+template=I need < experience to get my next Thieving level.
+dynamiccommand=enum_string_statbase,enum_2140,thieving
+
+[chatphrase_629]
+template=I need < experience to get my next Summoning level.
+dynamiccommand=enum_string_statbase,enum_2140,summoning
+
+[chatphrase_630]
+template=I need < experience to get my next Strength level.
+dynamiccommand=enum_string_statbase,enum_2140,strength
+
+[chatphrase_631]
+template=I need < experience to get my next Smithing level.
+dynamiccommand=enum_string_statbase,enum_2140,smithing
+
+[chatphrase_632]
+template=What Slayer master should I use?
+autoresponse=chatphrase_633
+
+[chatphrase_633]
+template=You should use the Slayer master in: <.
+dynamiccommand=listdialog,enum_2139
+
+[chatphrase_634]
+template=I need < experience to get my next Slayer level.
+dynamiccommand=enum_string_statbase,enum_2140,slayer
+
+[chatphrase_635]
+template=I need < experience to get my next Runecrafting level.
+dynamiccommand=enum_string_statbase,enum_2140,runecraft
+
+[chatphrase_636]
+template=I need < experience to get my next Ranged level.
+dynamiccommand=enum_string_statbase,enum_2140,ranged
+
+[chatphrase_637]
+template=I need < experience to get my next Prayer level.
+dynamiccommand=enum_string_statbase,enum_2140,prayer
+
+[chatphrase_638]
+template=I need < experience to get my next Mining level.
+dynamiccommand=enum_string_statbase,enum_2140,mining
+
+[chatphrase_639]
+template=I need < experience to get my next Magic level.
+dynamiccommand=enum_string_statbase,enum_2140,magic
+
+[chatphrase_640]
+template=I need < experience to get my next Woodcutting level.
+dynamiccommand=enum_string_statbase,enum_2140,woodcutting
+
+[chatphrase_641]
+template=Happy Birthday!
+autoresponse=chatphrase_158
+
+[chatphrase_642]
+template=Hai2u
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_643]
+template=Yo!
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_644]
+template=Hey.
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_645]
+template=What's up?
+autoresponse=chatphrase_177
+autoresponse=chatphrase_178
+autoresponse=chatphrase_179
+autoresponse=chatphrase_180
+autoresponse=chatphrase_181
+autoresponse=chatphrase_182
+
+[chatphrase_646]
+template=Hello again.
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_647]
+template=Welcome back.
+autoresponse=chatphrase_147
+autoresponse=chatphrase_148
+autoresponse=chatphrase_149
+autoresponse=chatphrase_643
+autoresponse=chatphrase_644
+autoresponse=chatphrase_645
+autoresponse=chatphrase_646
+autoresponse=chatphrase_647
+autoresponse=chatphrase_648
+autoresponse=chatphrase_649
+
+[chatphrase_648]
+template=How's it going?
+autoresponse=chatphrase_177
+autoresponse=chatphrase_178
+autoresponse=chatphrase_179
+autoresponse=chatphrase_180
+autoresponse=chatphrase_181
+autoresponse=chatphrase_182
+
+[chatphrase_649]
+template=Sup?
+autoresponse=chatphrase_177
+autoresponse=chatphrase_178
+autoresponse=chatphrase_179
+autoresponse=chatphrase_180
+autoresponse=chatphrase_181
+autoresponse=chatphrase_182
+
+[chatphrase_650]
+template=Merry Christmas!
+autoresponse=chatphrase_651
+autoresponse=chatphrase_652
+autoresponse=chatphrase_656
+autoresponse=chatphrase_657
+
+[chatphrase_651]
+template=Season's Greetings!
+autoresponse=chatphrase_651
+autoresponse=chatphrase_652
+autoresponse=chatphrase_656
+autoresponse=chatphrase_657
+
+[chatphrase_652]
+template=Happy Christmas!
+autoresponse=chatphrase_651
+autoresponse=chatphrase_652
+autoresponse=chatphrase_656
+autoresponse=chatphrase_657
+
+[chatphrase_653]
+template=Happy Easter!
+autoresponse=chatphrase_653
+
+[chatphrase_654]
+template=Happy Hallowe'en!
+autoresponse=chatphrase_655
+
+[chatphrase_655]
+template=Trick or Treat!
+autoresponse=chatphrase_654
+
+[chatphrase_656]
+template=Happy Holidays!
+autoresponse=chatphrase_651
+autoresponse=chatphrase_652
+autoresponse=chatphrase_656
+autoresponse=chatphrase_657
+
+[chatphrase_657]
+template=Holidays are here!
+autoresponse=chatphrase_651
+autoresponse=chatphrase_652
+autoresponse=chatphrase_656
+autoresponse=chatphrase_657
+
+[chatphrase_658]
+template=Happy New Year!
+autoresponse=chatphrase_658
+
+[chatphrase_659]
+template=Happy Thanksgiving!
+autoresponse=chatphrase_659
+
+[chatphrase_660]
+template=Happy 4th of July!
+autoresponse=chatphrase_660
+
+[chatphrase_661]
+template=Okay.
+
+[chatphrase_662]
+template=Of course.
+
+[chatphrase_663]
+template=That's fine.
+
+[chatphrase_664]
+template=Yay!
+
+[chatphrase_665]
+template=No way.
+
+[chatphrase_666]
+template=No thank you.
+
+[chatphrase_667]
+template=Nope.
+
+[chatphrase_668]
+template=Never mind.
+
+[chatphrase_669]
+template=I have added you to my ignore list.
+
+[chatphrase_670]
+template=Bai2u
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_671]
+template=I'll be back in <.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+dynamiccommand=listdialog,enum_2136
+
+[chatphrase_672]
+template=Later!
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+autoresponse=chatphrase_672
+
+[chatphrase_673]
+template=I'll see you around.
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_672
+
+[chatphrase_674]
+template=I'm going now. See ya!
+autoresponse=chatphrase_161
+autoresponse=chatphrase_162
+autoresponse=chatphrase_673
+
+[chatphrase_675]
+template=It was nice to meet you!
+autoresponse=chatphrase_676
+
+[chatphrase_676]
+template=You too!
+
+[chatphrase_677]
+template=:-x
+
+[chatphrase_678]
+template=:'(
+
+[chatphrase_679]
+template=:)
+
+[chatphrase_680]
+template=:(
+
+[chatphrase_681]
+template=O_o
+
+[chatphrase_682]
+template=Go!
+
+[chatphrase_683]
+template=I've got you trapped.
+
+[chatphrase_684]
+template=KO!
+
+[chatphrase_685]
+template=Come and get me!
+
+[chatphrase_686]
+template=I'll get you next time.
+
+[chatphrase_687]
+template=Come back and fight!
+
+[chatphrase_688]
+template=I can't lose!
+
+[chatphrase_689]
+template=I like your style.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_690]
+template=I like your emote.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_691]
+template=I like your skillcape.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_692]
+template=I like your house.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_693]
+template=You're cool.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_694]
+template=You're awesome.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_695]
+template=Congratulations.
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_696]
+template=Fantastic!
+autoresponse=chatphrase_158
+autoresponse=chatphrase_183
+
+[chatphrase_697]
+template=If someone is annoying you, add them to your ignore list.
+
+[chatphrase_698]
+template=The report abuse button is at the bottom of the screen.
+
+[chatphrase_699]
+template=Can you help me?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_241
+
+[chatphrase_700]
+template=Do you need help?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_701]
+template=Can I help you with the Assist System?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_702]
+template=I'll Assist Runecrafting. My level is: <.
+dynamiccommand=stat_base,runecraft
+
+[chatphrase_703]
+template=Can I help you?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_704]
+template=Where can I start <?
+autoresponse=chatphrase_228
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_705]
+template=Where is: <?
+autoresponse=chatphrase_228
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_706]
+template=You need to complete: <.
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_707]
+template=You need to play: <.
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_708]
+template=I am < of <.
+dynamiccommand=listdialog,enum_1502
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_709]
+template=Can you help me with quest: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_710]
+template=How many Quest Points do you have?
+autoresponse=chatphrase_547
+
+[chatphrase_711]
+template=Have you completed quest: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_712]
+template=Have you started quest: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+dynamiccommand=listdialog,enum_1541
+
+[chatphrase_713]
+template=What quest are you doing?
+autoresponse=chatphrase_238
+
+[chatphrase_714]
+template=brb
+
+[chatphrase_715]
+template=btw
+
+[chatphrase_716]
+template=ftw
+
+[chatphrase_717]
+template=gtg
+
+[chatphrase_718]
+template=idk
+
+[chatphrase_719]
+template=imo
+
+[chatphrase_720]
+template=jk
+
+[chatphrase_721]
+template=lmho
+
+[chatphrase_722]
+template=lol
+
+[chatphrase_723]
+template=np
+
+[chatphrase_724]
+template=nty
+
+[chatphrase_725]
+template=nfs
+
+[chatphrase_726]
+template=plz
+
+[chatphrase_727]
+template=rofl
+
+[chatphrase_728]
+template=roflcopters
+
+[chatphrase_729]
+template=tbh
+
+[chatphrase_730]
+template=ttyl
+
+[chatphrase_731]
+template=ty
+
+[chatphrase_732]
+template=yw
+
+[chatphrase_733]
+template=Awesome!
+
+[chatphrase_734]
+template=Cool!
+
+[chatphrase_735]
+template=!!!
+
+[chatphrase_736]
+template=Sweet!
+
+[chatphrase_737]
+template=Hail Saradomin!
+
+[chatphrase_738]
+template=Hail Guthix!
+
+[chatphrase_739]
+template=Hail Zamorak!
+
+[chatphrase_740]
+template=That rocks!
+
+[chatphrase_741]
+template=Haha!
+
+[chatphrase_742]
+template=Hahahahahaha!
+
+[chatphrase_743]
+template=Tee hee!
+
+[chatphrase_744]
+template=Muhahahaha!
+
+[chatphrase_745]
+template=Hee hee!
+
+[chatphrase_746]
+template=Heh.
+
+[chatphrase_747]
+template=Could you wait a second?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_748]
+template=Could you leave me alone, please?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+autoresponse=chatphrase_160
+
+[chatphrase_749]
+template=Do you want to come to my world?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_750]
+template=Don't follow me, it's dangerous.
+
+[chatphrase_751]
+template=Please answer me.
+
+[chatphrase_752]
+template=Oh no!
+
+[chatphrase_753]
+template=I am using Quick Chat.
+
+[chatphrase_754]
+template=I can't answer that on Quick Chat.
+
+[chatphrase_755]
+template=Can you ask someone else? Sorry.
+autoresponse=chatphrase_661
+autoresponse=chatphrase_155
+
+[chatphrase_756]
+template=Please don't ask difficult questions.
+
+[chatphrase_757]
+template=I'm using Quick Chat, as my keyboard isn't working.
+
+[chatphrase_758]
+template=I'm on a Quick Chat world.
+
+[chatphrase_759]
+template=I can only use Quick Chat.
+
+[chatphrase_760]
+template=Leave me alone!
+
+[chatphrase_761]
+template=Eek!
+
+[chatphrase_762]
+template=Don't kill me!
+
+[chatphrase_763]
+template=I've run out of food.
+
+[chatphrase_764]
+template=You're too good at this.
+
+[chatphrase_765]
+template=I've got a bad feeling about this.
+
+[chatphrase_766]
+template=This is scary!
+
+[chatphrase_767]
+template=We won!
+
+[chatphrase_768]
+template=We did it!
+
+[chatphrase_769]
+template=I did it!
+
+[chatphrase_770]
+template=I am so good at this.
+
+[chatphrase_771]
+template=Victory is mine.
+
+[chatphrase_772]
+template=We owned!
+
+[chatphrase_773]
+template=Did I just win, again?
+
+[chatphrase_774]
+template=We lost.
+
+[chatphrase_775]
+template=I lost.
+
+[chatphrase_776]
+template=I'm not very good at this.
+
+[chatphrase_777]
+template=I'm a newb.
+
+[chatphrase_778]
+template=I can't believe we lost.
+
+[chatphrase_779]
+template=I can't believe I lost.
+
+[chatphrase_780]
+template=Did we lose?
+
+[chatphrase_781]
+template=I got owned!
+
+[chatphrase_782]
+template=Try World: <.
+dynamiccommand=listdialog,enum_1542
+
+[chatphrase_783]
+template=Let's go to world: <.
+dynamiccommand=listdialog,enum_1542
+
+[chatphrase_784]
+template=What world is best to play: <?
+autoresponse=chatphrase_782
+dynamiccommand=listdialog,enum_1503
+
+[chatphrase_785]
+template=What world is best to kill: <?
+autoresponse=chatphrase_782
+dynamiccommand=listdialog,enum_1520
+
+[chatphrase_786]
+template=Let's all get Dagannoth <.
+dynamiccommand=listdialog,enum_1506
+
+[chatphrase_787]
+template=I have a <. You can have it.
+dynamiccommand=objdialog
+
+[chatphrase_788]
+template=Who is tanking the boss?
+autoresponse=chatphrase_789
+
+[chatphrase_789]
+template=I am tanking the boss!
+
+[chatphrase_790]
+template=I will tank the boss.
+
+[chatphrase_791]
+template=What eggs should I be collecting?
+autoresponse=chatphrase_792
+autoresponse=chatphrase_794
+autoresponse=chatphrase_793
+
+[chatphrase_792]
+template=Collect red eggs!
+
+[chatphrase_793]
+template=Collect blue eggs!
+
+[chatphrase_794]
+template=Collect green eggs!
+
+[chatphrase_795]
+template=What food should I be dropping?
+autoresponse=chatphrase_796
+autoresponse=chatphrase_797
+autoresponse=chatphrase_798
+
+[chatphrase_796]
+template=Drop tofu!
+
+[chatphrase_797]
+template=Drop meat!
+
+[chatphrase_798]
+template=Drop worms!
+
+[chatphrase_799]
+template=What food should I be using?
+autoresponse=chatphrase_800
+autoresponse=chatphrase_801
+autoresponse=chatphrase_802
+
+[chatphrase_800]
+template=Use poison tofu!
+
+[chatphrase_801]
+template=Use poison meat!
+
+[chatphrase_802]
+template=Use poison worms!
+
+[chatphrase_803]
+template=The cannon does not make you lose points.
+
+[chatphrase_804]
+template=Attack the Penance fighters!
+
+[chatphrase_805]
+template=Attack the Penance rangers!
+
+[chatphrase_806]
+template=Attack the Penance runners!
+
+[chatphrase_807]
+template=Attack the Penance healers!
+
+[chatphrase_808]
+template=What styles should we be using?
+autoresponse=chatphrase_809
+autoresponse=chatphrase_810
+autoresponse=chatphrase_811
+autoresponse=chatphrase_812
+
+[chatphrase_809]
+template=Use style Controlled/Bronze/Wind
+
+[chatphrase_810]
+template=Use style Accurate/Iron/Water
+
+[chatphrase_811]
+template=Use style Aggressive/Steel/Earth
+
+[chatphrase_812]
+template=Use style Defensive/Mithril/Fire
+
+[chatphrase_813]
+template=I need about < more points to get : <
+dynamiccommand=listdialog,enum_2137
+dynamiccommand=listdialog,enum_1513
+
+[chatphrase_814]
+template=I will fight you!
+
+[chatphrase_815]
+template=Good luck!
+
+[chatphrase_816]
+template=Good game!
+
+[chatphrase_817]
+template=Better luck next time!
+
+[chatphrase_818]
+template=Want to come to my player-owned house?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_819]
+template=Party at my house in: <
+dynamiccommand=listdialog,enum_1515
+
+[chatphrase_820]
+template=I found a penguin at: <.
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_821]
+template=I have found < penguins this week.
+dynamiccommand=var_player_bit,varplayerbit_5276
+
+[chatphrase_822]
+template=The circus is at: <.
+dynamiccommand=listdialog,enum_1504
+
+[chatphrase_823]
+template=The star will land at: < in <.
+dynamiccommand=listdialog,enum_1504
+dynamiccommand=listdialog,enum_2136
+
+[chatphrase_824]
+template=The star's level is: <.
+dynamiccommand=listdialog,enum_2135
+
+[chatphrase_825]
+template=Does anyone have a telescope?
+autoresponse=chatphrase_826
+
+[chatphrase_826]
+template=I have a telescope.
+
+[chatphrase_827]
+template=I am in the Phoenix gang.
+
+[chatphrase_828]
+template=I am in the Black Arm gang.
+
+[chatphrase_829]
+template=Go green, please!
+
+[chatphrase_830]
+template=Go yellow, please!
+
+[chatphrase_831]
+template=Stay inside the altar.
+
+[chatphrase_832]
+template=Go further out!
+
+[chatphrase_833]
+template=Block the gap!
+
+[chatphrase_834]
+template=Remove that barrier!
+
+[chatphrase_835]
+template=Push it to me!
+
+[chatphrase_836]
+template=Our pile is here!
+
+[chatphrase_837]
+template=Everyone stay together.
+
+[chatphrase_838]
+template=Don't attack their tanks!
+
+[chatphrase_839]
+template=Attack!
+
+[chatphrase_840]
+template=Let's play Stealing Creation.
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_661
+
+[chatphrase_841]
+template=Looking for a clan to war!
+
+[chatphrase_842]
+template=We will war you!
+
+[chatphrase_843]
+template=You are my target.
+
+[chatphrase_844]
+template=Want to fight with armour on?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_845]
+template=Want to fight with armour off?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_846]
+template=Drink potions!
+
+[chatphrase_847]
+template=I have < left of penalty.
+dynamiccommand=listdialog,enum_2138
+
+[chatphrase_848]
+template=Off please.
+
+[chatphrase_849]
+template=No safing, please.
+
+[chatphrase_850]
+template=No item protection, please.
+
+[chatphrase_851]
+template=Kill him!
+
+[chatphrase_852]
+template=Watch out for the fire!
+
+[chatphrase_853]
+template=I hope that you have an Anti-Dragon Fire shield with you!
+
+[chatphrase_854]
+template=I'm off to solo the KBD!
+
+[chatphrase_855]
+template=We are nearly at the KBD's lair.
+
+[chatphrase_856]
+template=Melee him!
+
+[chatphrase_857]
+template=Range him!
+
+[chatphrase_858]
+template=Mage him!
+
+[chatphrase_859]
+template=What is the best world to sell: <?
+autoresponse=chatphrase_782
+dynamiccommand=objdialog
+
+[chatphrase_860]
+template=It's not for sale.
+
+[chatphrase_861]
+template=Can I buy your: <?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+autoresponse=chatphrase_860
+dynamiccommand=objdialog
+
+[chatphrase_862]
+template=What is the best world to buy: <?
+autoresponse=chatphrase_782
+dynamiccommand=objdialog
+
+[chatphrase_863]
+template=You should check on the Forums.
+
+[chatphrase_864]
+template=Have you looked in the Game Manual?
+autoresponse=chatphrase_153
+autoresponse=chatphrase_154
+
+[chatphrase_865]
+template=The rules are under the Game Guide on the website.
+
+[chatphrase_866]
+template=Join my clan chat channel.
+

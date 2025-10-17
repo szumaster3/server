@@ -1,0 +1,580 @@
+[com0]
+type=rectangle
+y=25
+width=190
+height=224
+colour=0x000000
+fill=yes
+trans=200
+
+[com1]
+type=text
+x=14
+y=11
+width=152
+height=15
+layer=com7
+textfont=b12_full
+text=Free Play Tasks
+textshadow=yes
+colour=0xff9900
+transmitop1=yes
+op1=Read Journal
+
+[com2]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Lumbridge/Draynor
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com2, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1256,varplayer_1257,varplayer_1258
+
+[com3]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Beginner
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com3, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1256,varplayer_1257,varplayer_1258
+
+[com4]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com4, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1256,varplayer_1257,varplayer_1258
+
+[com5]
+type=text
+x=14
+y=31
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com5, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1256,varplayer_1257,varplayer_1258
+
+[com6]
+type=text
+x=14
+y=61
+width=152
+height=15
+layer=com7
+textfont=b12_full
+text=Members' Tasks
+textshadow=yes
+colour=0xff9900
+transmitop1=yes
+op1=Read Journal
+
+[com7]
+type=layer
+y=24
+width=175
+height=225
+onload=script1393
+
+[com8]
+type=graphic
+x=164
+y=4
+width=18
+height=18
+graphic="achievement_diary_icons,0"
+transmitop1=yes
+op1=Swap to Quest List
+
+[com9]
+type=text
+x=14
+y=4
+width=152
+height=15
+textfont=b12_full
+text=Achievement Diary
+textshadow=yes
+colour=0xff9933
+
+[com10]
+type=layer
+x=174
+y=24
+width=16
+height=225
+
+[com11]
+type=text
+x=14
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Karamja
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com11, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1000,varplayer_1001,varplayer_1002
+
+[com12]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com12, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1000,varplayer_1001,varplayer_1002
+
+[com13]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com13, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1000,varplayer_1001,varplayer_1002
+
+[com14]
+type=text
+x=15
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com14, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1000,varplayer_1001,varplayer_1002
+
+[com15]
+type=text
+x=14
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Varrock
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com15, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1071,varplayer_1072,varplayer_1073
+
+[com16]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com16, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1071,varplayer_1072,varplayer_1073
+
+[com17]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com17, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1071,varplayer_1072,varplayer_1073
+
+[com18]
+type=text
+x=16
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com18, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1071,varplayer_1072,varplayer_1073
+
+[com19]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com7
+textfont=p11_full
+text=Fremennik
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+op1=Read Journal
+onmouseover=script45(interface_259:com19, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1358,varplayer_1359
+
+[com20]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com20, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1358,varplayer_1359
+
+[com21]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com21, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1358,varplayer_1359
+
+[com22]
+type=text
+x=15
+y=153
+width=155
+height=14
+layer=com7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com22, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1358,varplayer_1359
+
+[com23]
+type=text
+x=15
+y=129
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Falador
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com23, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1360,varplayer_1361
+
+[com24]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com24, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1360,varplayer_1361
+
+[com25]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com25, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1360,varplayer_1361
+
+[com26]
+type=text
+x=17
+y=129
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com26, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1360,varplayer_1361
+
+[com27]
+type=text
+x=15
+y=105
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Seers' Village
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com27, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1372,varplayer_1373,varplayer_1374
+
+[com28]
+type=text
+x=17
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Easy
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com28, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1372,varplayer_1373,varplayer_1374
+
+[com29]
+type=text
+x=17
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Medium
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com29, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1372,varplayer_1373,varplayer_1374
+
+[com30]
+type=text
+x=17
+y=79
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=Hard
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop10=yes
+op1=Read Journal
+op10= 
+onmouseover=script45(interface_259:com30, ^white)
+onmouseleave=script59(event_com)
+onvartransmit=script58
+onvartransmitlist=varplayer_1372,varplayer_1373,varplayer_1374
+
+[com31]
+type=text
+x=14
+y=81
+width=152
+height=15
+layer=com7
+textfont=p11_full
+text=More coming soon...
+textshadow=yes
+colour=0xff0000
+transmitop1=yes
+transmitop2=yes
+transmitop3=yes
+transmitop4=yes
+transmitop5=yes
+transmitop6=yes
+transmitop7=yes
+transmitop8=yes
+transmitop9=yes
+transmitop10=yes
+op1=Read Journal
+op2=       
+op3=       
+op4=       
+op5=       
+op6=       
+op7=       
+op8=       
+op9=       
+op10=       
+onmouseover=script45(event_com, ^white)
+onmouseleave=script45(event_com, ^red)
+
+[com32]
+type=graphic
+y=9
+width=190
+height=32
+graphic="v2_stone_borders,23"
+tiling=yes
+transmitop10=yes
+op10=  
+
+[com33]
+type=graphic
+y=236
+width=190
+height=32
+graphic="v2_stone_borders,23"
+tiling=yes
+transmitop10=yes
+op10=  
+
