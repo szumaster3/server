@@ -60,7 +60,11 @@ class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
     private fun handleInGame() {
         start = true
 
-        // Jeśli bot przypadkiem znalazł się poza polem bitwy — wracamy
+        /*
+         * If the bot accidentally finds itself
+         * outside the battlefield, it returns.
+         */
+
         if (PCUtils.isOutsideGangplank(getLocation(), lander)) {
             PestControlActivityPlugin().leave(this, false)
             getClosestNodeWithEntry(50, lander.ladderId)?.let {
