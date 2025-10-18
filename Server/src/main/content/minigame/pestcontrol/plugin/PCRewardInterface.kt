@@ -369,64 +369,33 @@ class PCRewardInterface : ComponentPlugin() {
 
         fun select(player: Player, optionIndex: Int) {
             if (isSkillReward) {
-                sendString(
-                    player,
-                    core.tools.WHITE +
-                            Skills.SKILL_NAME[skill!!] +
-                            " - " +
-                            calculateExperience(player, skill, 1) +
-                            " xp",
-                    header
-                )
-                sendString(
-                    player,
-                    core.tools.WHITE + getOptionString(optionIndex),
-                    childs[optionIndex]
-                )
-            } else {
-                sendString(player, core.tools.WHITE + text, header)
-                if (isCharm) {
-                    sendString(
-                        player,
-                        core.tools.WHITE + getOptionString(optionIndex),
-                        childs[optionIndex]
-                    )
-                }
+                val skillId = skill ?: return
+                val skillName = Skills.SKILL_NAME[skillId]
+                val xpAmount = calculateExperience(player, skillId, 1)
+
+                sendString(player, "${core.tools.WHITE}$skillName - $xpAmount xp", header)
+                sendString(player, "${core.tools.WHITE}${getOptionString(optionIndex)}", childs[optionIndex])
+                return
+            }
+            sendString(player, "${core.tools.WHITE}$text", header)
+            if (isCharm) {
+                sendString(player, "${core.tools.WHITE}${getOptionString(optionIndex)}", childs[optionIndex])
             }
         }
 
         fun deselect(player: Player, optionIndex: Int) {
-            if (isSkillReward) {
-                sendString(
-                    player,
-                    "<col=784F1C>" + getOptionString(optionIndex),
-                    childs[optionIndex]
-                )
-            } else if (isCharm) {
-                sendString(
-                    player,
-                    "<col=784F1C>" + getOptionString(optionIndex),
-                    childs[optionIndex]
-                )
+            if (isSkillReward || isCharm) {
+                sendString(player, "<col=784F1C>${getOptionString(optionIndex)}", childs[optionIndex])
             }
         }
 
         private fun getOptionString(optionIndex: Int): String {
-            return if (isCharm) {
-                when (optionIndex) {
-                    0 -> "(2 Pts)"
-                    1 -> "(28 Pts)"
-                    2 -> "(56 Pts)"
-                    else -> "(?)"
-                }
+            val points = if (isCharm) {
+                arrayOf("(2 Pts)", "(28 Pts)", "(56 Pts)")
             } else {
-                when (optionIndex) {
-                    0 -> "(1 Pt)"
-                    1 -> "(10 Pts)"
-                    2 -> "(100 Pts)"
-                    else -> "(?)"
-                }
+                arrayOf("(1 Pt)", "(10 Pts)", "(100 Pts)")
             }
+            return points.getOrElse(optionIndex) { "(?)" }
         }
 
         open fun checkItemRequirement(player: Player, optionIndex: Int): Boolean = true

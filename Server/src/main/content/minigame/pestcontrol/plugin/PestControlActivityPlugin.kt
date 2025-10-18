@@ -265,17 +265,13 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
                 remaining > 50 -> "Next Departure: 1 min"
                 else -> "Next Departure: 30 seconds"
             }
-        p.packetDispatch.sendString(text, Components.PEST_LANDER_OVERLAY_407, 13)
+        sendString(p, text, Components.PEST_LANDER_OVERLAY_407, 13)
     }
 
     /** Notify all waiting players about current queue size. */
     private fun updatePlayerCount() {
-        if (waitingPlayers.isEmpty()) {
-            sendString(player, "Players Ready: 0", Components.PEST_LANDER_OVERLAY_407, 14)
-            return
-        }
         for (p in waitingPlayers) {
-            sendString(player, "Players Ready: ${waitingPlayers.size}", Components.PEST_LANDER_OVERLAY_407, 14)
+            sendString(p, "Players Ready: ${waitingPlayers.size?: 0}", Components.PEST_LANDER_OVERLAY_407, 14)
         }
     }
 
