@@ -2,12 +2,9 @@ package content.minigame.pestcontrol.plugin
 
 import content.minigame.pestcontrol.npc.*
 import core.ServerConstants
-import core.api.curePoison
-import core.api.isPoisoned
-import core.api.sendString
+import core.api.*
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin
-import core.game.component.Component
 import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -171,6 +168,7 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
             }
             waitingPlayers.remove(p)
             updatePlayerCount()
+            clearLogoutListener(player, "pc_logout")
         }
         return super.leave(e, logout)
     }
@@ -234,26 +232,22 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
         }
         waitingPlayers.add(p)
         openLanderInterface(p)
+
+        registerLogoutListener(player, "pc_logout") { player ->
+            val landerLoc = leaveLocation
+            player.location = landerLoc
+            player.properties.teleportLocation = landerLoc
+        }
         return true
     }
 
     /** Opens the lander waiting interface for a player. */
     private fun openLanderInterface(p: Player) {
-        p.interfaceManager.openOverlay(Component(Components.PEST_LANDER_OVERLAY_407))
+        openOverlay(player, Components.PEST_LANDER_OVERLAY_407)
         updateTime(p)
         updatePlayerCount()
-        sendString(
-            p,
-            "Points: ${p.savedData.activityData.pestPoints}",
-            Components.PEST_LANDER_OVERLAY_407,
-            16
-        )
-        sendString(
-            p,
-            StringUtils.formatDisplayName(type.name),
-            Components.PEST_LANDER_OVERLAY_407,
-            3
-        )
+        sendString(p, "Points: ${p.savedData.activityData.pestPoints}", Components.PEST_LANDER_OVERLAY_407, 16)
+        sendString(p, StringUtils.formatDisplayName(type.name), Components.PEST_LANDER_OVERLAY_407, 3)
     }
 
     /** Updates the countdown shown to a waiting player. */
@@ -276,18 +270,19 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
     }
 
     override fun death(e: Entity, killer: Entity?): Boolean {
-        if (e is Player && e.viewport.region!!.regionId == Regions.PEST_CONTROL_10536) {
-            val session: PestControlSession? =
-                e.getExtension<PestControlSession>(PestControlSession::class.java)
-            if (session != null) {
-                val base = session.region.baseLocation
-                e.properties.teleportLocation =
-                    base.transform(
+        if (e is Player) {
+            val region = e.viewport.region
+            if (region != null && region.regionId == Regions.PEST_CONTROL_10536) {
+                val session = e.getExtension<PestControlSession>(PestControlSession::class.java)
+                if (session != null) {
+                    val base = session.region.baseLocation
+                    e.properties.teleportLocation = base.transform(
                         32 + RandomFunction.RANDOM.nextInt(4),
                         49 + RandomFunction.RANDOM.nextInt(6),
                         0
                     )
-                return true
+                    return true
+                }
             }
         }
         return super.death(e, killer)
