@@ -28,23 +28,17 @@ verify:jdk11:
   stage: build
   script:
     - 'mvn $MAVEN_CLI_OPTS verify'
-  except:
-    variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   rules:
-    - changes:
-        - "**/*"
-        - "!Client/**/*"
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - when: always
 
 test:json:
   stage: test
   script:
     - 'apt-get install -q -y --no-install-recommends jq'
     - 'find . -name \*.json -type f -print0 | xargs -0 -n1 -P8 jq empty'
-  except:
-    variables:
-      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   rules:
-    - changes:
-        - "**/*"
-        - "!Client/**/*"
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+      when: never
+    - when: always
