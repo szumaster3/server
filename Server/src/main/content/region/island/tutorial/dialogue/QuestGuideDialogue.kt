@@ -31,7 +31,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
             27 -> {
-                sendUnclosablePlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
+                sendPlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
                 TutorialStage.removeHintIcon(player)
                 setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
                 player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))

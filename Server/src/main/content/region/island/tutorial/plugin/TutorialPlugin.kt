@@ -2,7 +2,6 @@ package content.region.island.tutorial.plugin
 
 import content.data.GameAttributes
 import core.api.*
-import core.game.component.Component
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
@@ -27,10 +26,13 @@ class TutorialPlugin : InteractionListener {
             val tutorialStage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
 
             if (tutorialStage != 3) {
-                val messageComponent = player.dialogueInterpreter.sendPlainMessage(
-                    false, "", "You need to talk to the ${GameWorld.settings?.name ?: "Gielinor" } Guide before you are allowed to", "proceed through this door.", ""
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to talk to the ${GameWorld.settings?.name ?: "Gielinor"} Guide before you are allowed to",
+                    "proceed through this door.",
+                    ""
                 )
-                Component.setUnclosable(player, messageComponent)
                 return@on false
             }
 
@@ -53,15 +55,12 @@ class TutorialPlugin : InteractionListener {
 
         on(WOODEN_GATE, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 16) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to talk to the Survival Guide and",
-                        "complete her tasks before you are allowed to",
-                        "proceed through this gate."
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to talk to the Survival Guide and",
+                    "complete her tasks before you are allowed to",
+                    "proceed through this gate."
                 )
                 return@on false
             }
@@ -86,14 +85,11 @@ class TutorialPlugin : InteractionListener {
 
         on(COOK_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 17) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You may not pass this door yet. Try following the instructions.",
-                        "",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You may not pass this door yet. Try following the instructions.",
+                    "",
                 )
                 return@on false
             }
@@ -108,32 +104,36 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(COOK_GUIDE_DOOR_EXIT, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) < 21) {
-                Component.setUnclosable(
-                    player,
+            val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
+
+            when {
+                stage < 21 -> {
                     player.dialogueInterpreter.sendPlainMessage(
                         false,
                         "",
                         "You need to finish the Master Chef's tasks first.",
                         "",
-                    ),
-                )
-                return@on false
-            } else if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) > 22) {
-                Component.setUnclosable(
-                    player,
+                    )
+                    return@on false
+                }
+
+                stage in 21..22 -> {
+                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 23)
+                    TutorialStage.load(player, 23)
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                    return@on true
+                }
+
+                else -> {
                     player.dialogueInterpreter.sendPlainMessage(
                         false,
                         "",
                         "Follow the path to the home of the quest guide.",
                         "",
-                    ),
-                )
+                    )
+                    return@on false
+                }
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 23)
-            TutorialStage.load(player, 23)
-            DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-            return@on true
         }
 
         /*
@@ -142,14 +142,11 @@ class TutorialPlugin : InteractionListener {
 
         on(QUEST_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 26) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to finish the Master Chef's tasks first.",
-                        "",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to finish the Master Chef's tasks first.",
+                    "",
                 )
                 return@on false
             }
@@ -165,7 +162,12 @@ class TutorialPlugin : InteractionListener {
 
         on(QUEST_LADDER_DOWN, IntType.SCENERY, "climb-down") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) < 29) {
-                sendNPCDialogue(player, NPCs.QUEST_GUIDE_949, "I don't think you're ready to go down there yet.", FaceAnim.HALF_GUILTY)
+                sendNPCDialogue(
+                    player,
+                    NPCs.QUEST_GUIDE_949,
+                    "I don't think you're ready to go down there yet.",
+                    FaceAnim.HALF_GUILTY
+                )
                 return@on false
             }
 
@@ -203,26 +205,20 @@ class TutorialPlugin : InteractionListener {
         on(COMBAT_GATE, IntType.SCENERY, "open") { player, node ->
             val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1)
             if (stage < 42) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to finish with Mining and Smithing first.",
-                        "",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to finish with Mining and Smithing first.",
+                    "",
                 )
                 return@on false
             }
             if (stage >= 44) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "Follow the path to the Combat Instructor.",
-                        "",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "Follow the path to the Combat Instructor.",
+                    "",
                 )
                 return@on false
             }
@@ -261,14 +257,11 @@ class TutorialPlugin : InteractionListener {
 
         on(COMBAT_LADDER, IntType.SCENERY, "climb-up") { player, _ ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 55) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You're not ready to continue yet. You need to know",
-                        "about combat before you go on.",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You're not ready to continue yet. You need to know",
+                    "about combat before you go on.",
                 )
                 return@on false
             }
@@ -294,14 +287,11 @@ class TutorialPlugin : InteractionListener {
          */
         on(BANK_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 57) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to open your bank first.",
-                        "",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to open your bank first.",
+                    "",
                 )
                 return@on false
             }
@@ -313,14 +303,11 @@ class TutorialPlugin : InteractionListener {
 
         on(FINANCE_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 59) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to talk to the Account Guide before you",
-                        "are allowed to proceed through this door.",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to talk to the Account Guide before you",
+                    "are allowed to proceed through this door.",
                 )
                 return@on false
             }
@@ -332,14 +319,11 @@ class TutorialPlugin : InteractionListener {
 
         on(CHURCH_DOOR_EXIT, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 66) {
-                Component.setUnclosable(
-                    player,
-                    player.dialogueInterpreter.sendPlainMessage(
-                        false,
-                        "",
-                        "You need to finish Brother Brace's tasks before you",
-                        "are allowed to proceed through this door.",
-                    ),
+                player.dialogueInterpreter.sendPlainMessage(
+                    false,
+                    "",
+                    "You need to finish Brother Brace's tasks before you",
+                    "are allowed to proceed through this door.",
                 )
                 return@on false
             }

@@ -50,14 +50,11 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> npc(FaceAnim.LAUGH, "Hahahahahaha! You call THAT cooking? Some shrimp", "on an open log fire? Oh, no, no no. I am going to", "teach you the fine art of cooking bread.").also { stage++ }
                 2 -> npc("And no fine meal is complete without good music, so", "we'll cover that while you're here too.").also { stage++ }
                 3 -> {
-                    Component.setUnclosable(
-                        player,
-                        interpreter.sendDoubleItemMessage(
+                   interpreter.sendDoubleItemMessage(
                             Items.BUCKET_OF_WATER_1929,
                             Items.POT_OF_FLOUR_1933,
                             "The Cooking Guide gives you a <col=08088A>bucket of water<col> and a <col=08088A>pot of flour</col>.",
-                        ),
-                    )
+                        )
                     addItem(player, Items.BUCKET_OF_WATER_1929)
                     addItem(player, Items.POT_OF_FLOUR_1933)
                     stage++
@@ -95,7 +92,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
                         return true
                     }
                     if (!player.inventory.containsItems(Item(Items.POT_OF_FLOUR_1933, 1)) && removeItem(player, Item(Items.EMPTY_POT_1931))) {
-                        Component.setUnclosable(player, interpreter.sendItemMessage(Items.POT_OF_FLOUR_1933, "The Master Chef gives you another pot of flour."),)
+                        interpreter.sendItemMessage(Items.POT_OF_FLOUR_1933, "The Master Chef gives you another pot of flour.")
                         addItem(player, Items.POT_OF_FLOUR_1933, 1)
                         TutorialStage.load(player, 19)
                         return true

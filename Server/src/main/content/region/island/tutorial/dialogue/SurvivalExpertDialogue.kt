@@ -37,7 +37,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
             8 -> npcl(FaceAnim.FRIENDLY, "Light the logs in your backpack to make a fire.").also { stage = END_DIALOGUE }
 
             12 -> if (!inInventory(player, Items.SMALL_FISHING_NET_303)) {
-                Component.setUnclosable(player, interpreter.sendItemMessage(Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a <col=08088A>net</col>!"),)
+                interpreter.sendItemMessage(Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a <col=08088A>net</col>!")
                 addItem(player, Items.SMALL_FISHING_NET_303)
             } else {
                 npc("Well done! Next we need to get some food in our", "bellies. We'll need something to cook. There are shrimp", "in the pond there, so let's catch and cook some.").also { stage = END_DIALOGUE }
@@ -55,7 +55,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
         when (player?.getAttribute(TutorialStage.TUTORIAL_STAGE, 0)) {
             4 -> when (stage) {
                 0 -> {
-                    Component.setUnclosable(player, interpreter.sendDoubleItemMessage(Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!"),)
+                    interpreter.sendDoubleItemMessage(Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
                     addItem(player, Items.TINDERBOX_590)
                     addItem(player, Items.BRONZE_AXE_1351)
                     stage++
@@ -68,7 +68,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
             }
             11 -> when (stage) {
                 0 -> {
-                    Component.setUnclosable(player, interpreter.sendItemMessage(Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a <col=08088A>net</col>!"),)
+                    interpreter.sendItemMessage(Items.SMALL_FISHING_NET_303, "The Survival Guide gives you a <col=08088A>net</col>!")
                     addItem(player, Items.SMALL_FISHING_NET_303)
                     stage++
                 }
