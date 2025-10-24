@@ -138,22 +138,22 @@ private constructor() : MapZone("Multicombat", true) {
 
         @JvmField
         val FIGHT_CAVE = ZoneBorders(3210, 9333, 3339, 9424)
-        val KALPHITE_LAIR_REGION = 13972
-        val ABYSS_AREA_REGION = 12107
-        val FREMENNIK_ROCK_CRABS_REGION = 10554
-        val WIZARDS_TOWER_REGION = 12337
-        val ZMI_REGION = 13131
-        val THZAAR_CAVE_REGION_0 = 7236
-        val THZAAR_CAVE_REGION_1 = 7492
-        val THZAAR_CAVE_REGION_2 = 7748
-        val THZAAR_CAVE_REGION_3 = 12610
-        val CORPOREAL_BEAST_REGION = 11844
-        val TDS_REGION = 10329
-        val NORTH_JATIZSO_REGION = 9532
-        val DESERT_BANDITS_REGION_0 = 12590
-        val DESERT_BANDITS_REGION_1 = 11318
-        val PHOENIX_LAIR_1 = 13905
-        val PHOENIX_LAIR_2 = 14161
+        const val KALPHITE_LAIR_REGION = 13972
+        const val ABYSS_AREA_REGION = 12107
+        const val FREMENNIK_ROCK_CRABS_REGION = 10554
+        const val WIZARDS_TOWER_REGION = 12337
+        const val ZMI_REGION = 13131
+        const val THZAAR_CAVE_REGION_0 = 7236
+        const val THZAAR_CAVE_REGION_1 = 7492
+        const val THZAAR_CAVE_REGION_2 = 7748
+        const val THZAAR_CAVE_REGION_3 = 12610
+        const val CORPOREAL_BEAST_REGION = 11844
+        const val TDS_REGION = 10329
+        const val NORTH_JATIZSO_REGION = 9532
+        const val DESERT_BANDITS_REGION_0 = 12590
+        const val DESERT_BANDITS_REGION_1 = 11318
+        const val PHOENIX_LAIR_1 = 13905
+        const val PHOENIX_LAIR_2 = 14161
         val TROLLHEIM_GWD_BORDERS = ZoneBorders(2869, 3687, 2940, 3839)
     }
 }
