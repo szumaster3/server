@@ -1,6 +1,7 @@
 package core.game.world.map.zone.impl
 
 import content.data.GameAttributes
+import content.region.island.tutorial.plugin.TutorialStage
 import core.api.getAttribute
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -34,7 +35,13 @@ class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
             if (entity.rights == Rights.ADMINISTRATOR) {
                 return super.teleport(entity, type, node)
             }
-            if (!getAttribute(entity, GameAttributes.TUTORIAL_COMPLETE, false)) return false
+
+            val tutorialComplete = getAttribute(entity, GameAttributes.TUTORIAL_COMPLETE, false)
+            val tutorialStage = getAttribute(entity, TutorialStage.TUTORIAL_STAGE, -1)
+
+            if (!tutorialComplete && tutorialStage < 72) {
+                return false
+            }
         }
         return super.teleport(entity, type, node)
     }
@@ -48,7 +55,12 @@ class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
          * Represents the tutorial region ids.
          */
         private val REGIONS = intArrayOf(
-            Regions.TUTORIAL_ISLAND_12079, Regions.TUTORIAL_ISLAND_12180, Regions.TUTORIAL_ISLAND_12592, Regions.TUTORIAL_ISLAND_12436, Regions.TUTORIAL_ISLAND_12335, Regions.TUTORIAL_ISLAND_12336
+            Regions.TUTORIAL_ISLAND_12079,
+            Regions.TUTORIAL_ISLAND_12180,
+            Regions.TUTORIAL_ISLAND_12592,
+            Regions.TUTORIAL_ISLAND_12436,
+            Regions.TUTORIAL_ISLAND_12335,
+            Regions.TUTORIAL_ISLAND_12336
         )
     }
 }

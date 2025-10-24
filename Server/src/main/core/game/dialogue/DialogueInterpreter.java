@@ -1,5 +1,7 @@
 package core.game.dialogue;
 
+import content.data.GameAttributes;
+import content.region.island.tutorial.plugin.TutorialStage;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
@@ -192,9 +194,11 @@ public final class DialogueInterpreter {
         if (dialogue != null) {
             actions.clear();
 
-            if (player.getInterfaceManager().chatbox != null && player.getInterfaceManager().chatbox.getCloseEvent() != null) {
+            if (player.getInterfaceManager().chatbox != null &&
+                    player.getInterfaceManager().chatbox.getCloseEvent() != null) {
                 return true;
             }
+
             if (dialogue != null) {
                 Dialogue d = dialogue;
                 dialogue = null;
@@ -203,11 +207,18 @@ public final class DialogueInterpreter {
             }
         }
 
-        if (player.getAttribute("runscript", null) != null) {
-            player.removeAttribute("runscript");
-            player.removeAttribute("input-type");
-            player.removeAttribute("parseamount");
-            player.getPacketDispatch().sendRunScript(101, "");
+        boolean tutorialComplete = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false);
+        int tutorialStage = player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1);
+
+        if (tutorialComplete || tutorialStage >= 72) {
+            if (player.getAttribute("runscript", null) != null) {
+                player.removeAttribute("runscript");
+                player.removeAttribute("input-type");
+                player.removeAttribute("parseamount");
+                player.getPacketDispatch().sendRunScript(101, "");
+            }
+        } else {
+            TutorialStage.load(player, Math.max(tutorialStage, 0), false);
         }
 
         activeTopics.clear();

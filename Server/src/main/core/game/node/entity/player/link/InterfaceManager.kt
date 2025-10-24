@@ -1,6 +1,7 @@
 package core.game.node.entity.player.link
 
 import content.data.GameAttributes
+import content.region.island.tutorial.plugin.TutorialStage
 import content.region.island.tutorial.plugin.TutorialStage.hideTabs
 import core.api.isQuestComplete
 import core.api.log
@@ -21,6 +22,7 @@ import core.net.packet.out.WindowsPane
 import core.tools.Log
 import shared.consts.Components
 import shared.consts.Quests
+import kotlin.math.max
 
 /**
  * Manages interface components for a player.
@@ -184,10 +186,19 @@ class InterfaceManager(
      * @return True if successfully closed or nothing was open, false if closure failed.
      */
     fun close(): Boolean {
-        if (player.getAttribute<Any?>("runscript", null) != null) {
-            player.removeAttribute("runscript")
-            player.packetDispatch.sendRunScript(101, "")
+        val tutorialComplete = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
+        val tutorialStage = player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1)
+
+        if (tutorialComplete || tutorialStage >= 72) {
+            if (player.getAttribute<Any?>("runscript", null) != null) {
+                player.removeAttribute("runscript")
+                player.packetDispatch.sendRunScript(101, "")
+            }
+        } else {
+            val tutorialStage = max(tutorialStage, 0)
+            TutorialStage.load(player, tutorialStage, false)
         }
+
         // Component 333 is an immediate(no-fading) full-screen HD-mode black screen which auto-clears when interrupted.
         if (overlay != null && overlay!!.id == Components.BLACK_OVERLAY_333) {
             closeOverlay()
@@ -195,10 +206,13 @@ class InterfaceManager(
         if (opened != null && opened!!.close(player)) {
             if (opened != null && (!opened!!.definition!!.isWalkable || opened!!.id == 14)) {
                 PacketRepository.send(
-                    CloseInterface::class.java, OutgoingContext.InterfaceContext(
-                        player, opened!!.definition!!.getWindowPaneId(
-                            isResizable
-                        ), opened!!.definition!!.getChildId(isResizable), opened!!.id, opened!!.definition!!.isWalkable
+                    CloseInterface::class.java,
+                    OutgoingContext.InterfaceContext(
+                        player,
+                        opened!!.definition!!.getWindowPaneId(isResizable),
+                        opened!!.definition!!.getChildId(isResizable),
+                        opened!!.id,
+                        opened!!.definition!!.isWalkable
                     )
                 )
                 player.dispatch(InterfaceCloseEvent(opened!!))

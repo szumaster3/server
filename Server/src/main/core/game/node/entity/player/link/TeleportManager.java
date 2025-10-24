@@ -908,7 +908,7 @@ public class TeleportManager {
      *
      * @param player the player for whom the tutorial complete.
      */
-    public static void completeTutorial(Player player) {
+    private static void completeTutorial(Player player) {
         setVarbit(player, TutorialStage.FLASHING_ICON, 0);
         setVarp(player, 281, 1000, true);
         setAttribute(player, "/save:tutorial:complete", true);
