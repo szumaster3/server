@@ -2,7 +2,6 @@ package content.region.fremennik.lighthouse.quest.horror.npc
 
 import content.region.fremennik.lighthouse.quest.horror.dialogue.JossikLighthouseDialogue
 import core.api.*
-import core.api.setQuestStage
 import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
@@ -13,6 +12,7 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.NPCs
 import shared.consts.Quests
+import shared.consts.Vars
 
 @Initializable
 class DagonnothBabyNPC(
@@ -58,7 +58,7 @@ class DagonnothBabyNPC(
     override fun finalizeDeath(killer: Entity?) {
         if (killer is Player) {
             lock(killer, 2)
-            setQuestStage(killer, Quests.HORROR_FROM_THE_DEEP, 60)
+            setVarbit(killer, Vars.VARBIT_QUEST_HORROR_FROM_THE_DEEP_PROGRESS_34, 60)
             clearHintIcon(killer)
             queueScript(killer, 1, QueueStrength.SOFT) {
                 face(findNPC(NPCs.JOSSIK_1335)).also {
