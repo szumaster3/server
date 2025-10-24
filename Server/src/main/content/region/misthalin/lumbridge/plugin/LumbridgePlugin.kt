@@ -18,7 +18,6 @@ import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
-import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Components
@@ -39,7 +38,7 @@ class LumbridgePlugin : InteractionListener {
          */
 
         on(NPCs.BANK_TUTOR_7961, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, BankTutorDialogue(), node.id)
+            openDialogue(player, BankTutorDialogue())
             return@on true
         }
 
@@ -241,8 +240,8 @@ class LumbridgePlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.BANK_TUTOR_7961), "talk-to") { _, _ ->
-            return@setDest Location.create(3208, 3220, 2)
+        setDest(IntType.NPC, intArrayOf(NPCs.BANK_TUTOR_7961), "talk-to") { _, npc ->
+            return@setDest npc.location.transform(npc.direction, 2)
         }
     }
 

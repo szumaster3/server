@@ -1,6 +1,8 @@
 package content.region.island.tutorial.plugin
 
 import content.data.GameAttributes
+import content.global.dialogue.BankerDialogue
+import content.region.island.tutorial.dialogue.BankerGuideDialogue
 import content.region.misthalin.lumbridge.dialogue.BankTutorDialogue
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -283,22 +285,31 @@ class TutorialPlugin : InteractionListener {
          * Handles bank guide dialogue.
          */
 
-        on(NPCs.BANKER_953, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, BankTutorDialogue(), node.id)
+        on(NPCs.BANKER_953, IntType.NPC, "talk-to") { player, _ ->
+            openDialogue(player, BankerGuideDialogue())
+            return@on true
+        }
+
+        /*
+         * Handles use the bank booth.
+         */
+
+        on(Scenery.BANK_BOOTH_3045, IntType.SCENERY, "use") { player, _ ->
+            openDialogue(player, BankerGuideDialogue())
             return@on true
         }
 
         /*
          * Handles bank guide door during tutorial.
          */
+
         on(BANK_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 57) {
-                player.dialogueInterpreter.sendPlainMessage(
-                    false,
-                    "",
-                    "You need to open your bank first.",
-                    "",
-                )
+                player.dialogueInterpreter.sendPlainMessage(false, "", "You need to open your bank first.", "")
+                return@on false
+            }
+            if(getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) == 58) {
+                player.dialogueInterpreter.sendPlainMessage(false, "", "You've already done that. Perhaps you should move on.")
                 return@on false
             }
             setAttribute(player, TutorialStage.TUTORIAL_STAGE, 58)
@@ -307,13 +318,16 @@ class TutorialPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles finance guide doors.
+         */
+
         on(FINANCE_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 59) {
                 player.dialogueInterpreter.sendPlainMessage(
                     false,
-                    "",
-                    "You need to talk to the Account Guide before you",
-                    "are allowed to proceed through this door.",
+                    "You should complete your objective before",
+                    "talking to Finance Advisor."
                 )
                 return@on false
             }
@@ -322,6 +336,11 @@ class TutorialPlugin : InteractionListener {
             DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             return@on true
         }
+
+
+        /*
+         * Handles exit from church.
+         */
 
         on(CHURCH_DOOR_EXIT, IntType.SCENERY, "open") { player, node ->
             if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 66) {
@@ -338,6 +357,10 @@ class TutorialPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles restriction with wielding weapons/tools on tutorial island.
+         */
+
         onEquip(intArrayOf(BRONZE_AXE, BRONZE_PICKAXE)) { player, _ ->
             val restriction = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
             if (restriction < 45) {
@@ -349,8 +372,8 @@ class TutorialPlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(IntType.NPC, intArrayOf(NPCs.BANKER_953), "talk-to") { _, _ ->
-            return@setDest Location.create(3122, 3123, 0)
+        setDest(IntType.NPC, intArrayOf(NPCs.BANKER_953), "talk-to") { _, npc ->
+            return@setDest npc.location.transform(npc.direction, 2)
         }
     }
 

@@ -2,12 +2,16 @@ package content.region.misthalin.lumbridge.dialogue
 
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.node.entity.npc.NPC
+import core.tools.START_DIALOGUE
+import shared.consts.NPCs
 
 class BankTutorDialogue: DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.BANK_TUTOR_7961)
         when (stage) {
-            0 -> npc("Good day, would you like to access your bank account?").also { stage++ }
+            START_DIALOGUE -> npc("Good day, would you like to access your bank account?").also { stage++ }
             1 -> options("How do I use the bank?", "I'd like to access my bank account please.", "I'd like to check my PIN settings.").also { stage++ }
             2 -> when (buttonID) {
                 1 -> options("Using the bank itself.", "Using Bank deposit boxes.", "What's this PIN thing that people keep talking about?", "Goodbye.").also { stage++ }

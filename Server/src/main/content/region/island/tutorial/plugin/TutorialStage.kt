@@ -851,6 +851,7 @@ object TutorialStage {
 
             57 -> {
                 hideTabs(player, login)
+                registerHintIcon(player, Location.create(3125, 3124)!!, 100) // FINANCIAL DOOR
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "This is your bank box.",
                     "You can store stuff here for safekeeping. If you die, anything",
@@ -863,7 +864,6 @@ object TutorialStage {
             58 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3125, 3124)!!, 100) // FINANCIAL DOOR
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Financial advice",
                     "",
@@ -876,6 +876,7 @@ object TutorialStage {
             59 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
+                registerHintIcon(player, Location.create(3130, 3124)!!, 100) // EXIT (FINANCIAL DOOR)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "",
@@ -941,7 +942,6 @@ object TutorialStage {
                 hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 10)
                 player.interfaceManager.openTab(Component(Components.IGNORE2_551))
-                player.interfaceManager.openTab(Component(Components.CLANJOIN_589))
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "This is your Friends List.",
                     "",
