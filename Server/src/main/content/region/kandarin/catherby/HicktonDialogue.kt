@@ -8,6 +8,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
@@ -25,74 +26,32 @@ class HicktonDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> stage = if (isMaster(player, Skills.FLETCHING)) {
-                options(
-                    "Can I buy a Skillcape of Fletching?",
-                    "Yes, please.",
-                    "No, I prefer to bash things close up.",
-                )
-                100
+                options("Can I buy a Skillcape of Fletching?", "Yes, please.", "No, I prefer to bash things close up.")
+                2
             } else {
                 options("Yes, please.", "No, I prefer to bash things close up.")
                 1
             }
-
             1 -> when (buttonId) {
-                1 -> {
-                    end()
-                    npc.openShop(player)
-                }
+                1 -> end().also { npc.openShop(player) }
+                2 -> player(FaceAnim.EVIL_LAUGH, "No, I prefer to bash things close up.").also { stage = END_DIALOGUE }
 
-                2 -> {
-                    player(FaceAnim.EVIL_LAUGH, "No, I prefer to bash things close up.")
-                    stage = 20
-                }
             }
+            2 -> when (buttonId) {
+                1 -> player("Can I buy a Skillcape of Fletching?").also { stage++ }
+                2 -> end().also { npc.openShop(player) }
+                3 -> player(FaceAnim.EVIL_LAUGH, "No, I prefer to bash things close up.").also { stage = END_DIALOGUE }
 
-            20 -> end()
-            100 -> when (buttonId) {
-                1 -> {
-                    player("Can I buy a Skillcape of Fletching?")
-                    stage = -99
-                }
-
-                2 -> {
-                    end()
-                    npc.openShop(player)
-                }
-
-                3 -> {
-                    player(FaceAnim.EVIL_LAUGH, "No, I prefer to bash things close up.")
-                    stage = 20
-                }
             }
-
-            -99 -> {
-                npc("You will have to pay a fee of 99,000 gp.")
-                stage = 101
-            }
-
-            101 -> {
-                options("Yes, here you go.", "No, thanks.")
-                stage = 102
-            }
-
-            102 -> when (buttonId) {
-                1 -> {
-                    player("Yes, here you go.")
-                    stage = 103
-                }
-
+            3 -> npc("You will have to pay a fee of 99,000 gp.").also { stage++ }
+            4 -> options("Yes, here you go.", "No, thanks.").also { stage++ }
+            5 -> when (buttonId) {
+                1 -> player("Yes, here you go.").also { stage++ }
                 2 -> end()
             }
-
-            103 -> {
-                if (purchase(player, Skills.FLETCHING)) {
-                    npc("There you go! Enjoy.")
-                }
-                stage = 104
+            6 -> if (purchase(player, Skills.FLETCHING)) {
+                npc("There you go! Enjoy.").also { stage = END_DIALOGUE }
             }
-
-            104 -> end()
         }
         return true
     }
