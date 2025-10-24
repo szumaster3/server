@@ -4,6 +4,7 @@ import core.api.MapArea
 import core.api.getRegionBorders
 import core.api.inBorders
 import core.api.openOverlay
+import core.api.closeOverlay
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -31,6 +32,13 @@ class SnowZone : MapArea {
         if(entity is Player){
             val p = entity
             openSnowOverlay(p)
+        }
+    }
+
+    override fun areaLeave(entity: Entity, logout: Boolean) {
+        if(entity is Player){
+            val p = entity
+            closeOverlay(p)
         }
     }
 
