@@ -1,7 +1,6 @@
 package content.minigame.pestcontrol.bots
 
 import content.minigame.pestcontrol.plugin.PCUtils
-import content.minigame.pestcontrol.plugin.PestControlActivityPlugin
 import core.game.bots.CombatBotAssembler
 import core.game.bots.PvMBots
 import core.game.world.map.Location
@@ -10,13 +9,14 @@ import kotlin.random.Random
 
 class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
     PvMBots(landerLocation(location, lander)) {
+
     private var tick = 0
     private val random = Random(System.nanoTime())
     private var insideBoatWalks = 3
     private var justTeleported = false
     var moveTimer = 0
     var openedGate = false
-    var start = false
+    var start = true
 
     private val combatHandler = CombatState(this)
     private val role = if (random.nextInt(100) < 30) "defend_squire" else "attack_portals"
@@ -31,59 +31,87 @@ class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
         OUTSIDE_GANGPLANK,
         WAITING_IN_BOAT,
         PLAY_GAME,
-        GET_TO_PC
+        GET_TO_PC,
+        POST_GAME
     }
 
     override fun tick() {
         super.tick()
-        if (--moveTimer > 0) return
         tick++
+        if (moveTimer > 0) moveTimer--
 
         when (state) {
             State.GET_TO_PC -> handleTeleportOrMove()
             State.OUTSIDE_GANGPLANK -> handleOutsideBoat()
             State.WAITING_IN_BOAT -> handleBoatIdle()
             State.PLAY_GAME -> handleInGame()
+            State.POST_GAME -> handlePostGameReturn()
         }
     }
 
     private val state: State
         get() =
             when {
+                inPostGame -> State.POST_GAME
                 PCUtils.isInLander(getLocation(), lander) -> State.WAITING_IN_BOAT
                 PCUtils.isInPestControlInstance(this) -> State.PLAY_GAME
-                PCUtils.isOutsideGangplank(getLocation(), lander) ->
-                    State.OUTSIDE_GANGPLANK
+                PCUtils.isOutsideGangplank(getLocation(), lander) -> State.OUTSIDE_GANGPLANK
                 else -> State.GET_TO_PC
             }
 
-    private fun handleInGame() {
+    private var inPostGame = false
+
+    private fun startPostGameReturn() {
+        inPostGame = true
+        openedGate = false
         start = true
+        moveTimer = Random.nextInt(2, 5)
+        customState = "Returning to lander..."
+    }
 
-        /*
-         * If the bot accidentally finds itself
-         * outside the battlefield, it returns.
-         */
-
-        if (PCUtils.isOutsideGangplank(getLocation(), lander)) {
-            PestControlActivityPlugin().leave(this, false)
-            getClosestNodeWithEntry(50, lander.ladderId)?.let {
-                it.interaction.handle(this, it.interaction[0])
-            }
+    private fun handlePostGameReturn() {
+        if (PCUtils.isInLander(location, lander)) {
+            inPostGame = false
+            moveTimer = Random.nextInt(2, 5)
+            customState = "Waiting in lander for next round..."
+            return
         }
 
-        walkingQueue.isRunning = true
+        if (!walkingQueue.isMoving && moveTimer <= 0) {
+            walkToPosSmart(lander.boatBorder.randomLoc)
+            moveTimer = Random.nextInt(3, 7)
+            customState = "Returning to lander..."
+        }
+    }
+
+    private fun handleInGame() {
+        val session = PCUtils.getMyPestControlSession(this)
+        if (session?.isActive != true) {
+            startPostGameReturn()
+            return
+        }
+
+        if (start) {
+            customState = "Game started – initializing..."
+            start = false
+            moveTimer = RandomFunction.random(3, 7)
+        }
 
         when (role) {
             "attack_portals" -> {
-                combatHandler.handleCombat()
+                if (moveTimer <= 0) {
+                    customState = "Attacking portals"
+                    combatHandler.handleCombat()
+                }
             }
-
             "defend_squire" -> {
-                moveTimer = RandomFunction.random(2, 10)
-                val squireLoc = PCUtils.getMyPestControlSession(this)?.squire?.location ?: location
-                randomWalkAroundPoint(squireLoc, 5)
-                combatHandler.handleDefense()
+                if (moveTimer <= 0) {
+                    val squireLoc = session?.squire?.location ?: location
+                    randomWalkAroundPoint(squireLoc, 5)
+                    customState = "Defending squire near ${squireLoc.x},${squireLoc.y}"
+                    combatHandler.handleDefense()
+                    moveTimer = RandomFunction.random(2, 8)
+                }
             }
         }
     }

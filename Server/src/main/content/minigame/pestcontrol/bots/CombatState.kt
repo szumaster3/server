@@ -20,8 +20,6 @@ import kotlin.random.Random
  */
 class CombatState(private val bot: PestControlScript) {
 
-    private val random = Random(System.nanoTime())
-
     /**
      * The combat-related states.
      */
@@ -37,14 +35,21 @@ class CombatState(private val bot: PestControlScript) {
      * Main offensive logic.
      */
     fun handleCombat() {
-        val session = PCUtils.getMyPestControlSession(bot)
+        val session = PCUtils.getMyPestControlSession(bot) ?: return
         val gate = bot.getClosestNodeWithEntry(75, PCUtils.GATE_ENTRIES.toMutableList())
-        val portal = session?.aportals?.firstOrNull { it.isActive }
+        val portal = session.aportals.firstOrNull { it.isActive }
 
         when {
             bot.start -> startRound(session)
+            gate != null && session.aportals.isEmpty() -> {
+                if (!bot.location.withinDistance(gate.location, 1)) {
+                    move(gate.location, 1)
+                    bot.customState = "Moving to gate ${gate.id}"
+                } else {
+                    openGate(gate)
+                }
+            }
             portal != null -> attackOrMoveToPortal(portal)
-            gate != null && session?.aportals?.isEmpty() == true -> openGate(gate)
             else -> fallbackToNearbyNPCs()
         }
     }
@@ -68,7 +73,7 @@ class CombatState(private val bot: PestControlScript) {
         bot.start = false
         val squireLoc = session?.squire?.location ?: bot.location
         bot.randomWalkAroundPoint(squireLoc, 10)
-        bot.moveTimer = random.nextInt(5, 10)
+        bot.moveTimer = Random.nextInt(5, 10)
     }
 
     /**
@@ -77,11 +82,31 @@ class CombatState(private val bot: PestControlScript) {
      * @param gate The gate [Node] to interact with.
      */
     private fun openGate(gate: Node) {
-        if (bot.openedGate) return
-        bot.customState = "${State.OPENING_GATE} (${gate.id})"
+        if (bot.openedGate || gatesInUse.contains(gate.id)) return
+        gatesInUse.add(gate.id)
+
+        if (!bot.location.withinDistance(gate.location, 1)) {
+            move(gate.location, 1)
+            bot.customState = "Moving to gate ${gate.id}"
+            return
+        }
+
         InteractionListeners.run(gate.id, IntType.SCENERY, "open", bot, gate)
+        bot.customState = "Activated gate ${gate.id}"
         bot.openedGate = true
-        bot.moveTimer = random.nextInt(3, 6)
+        bot.moveTimer = Random.nextInt(3, 6)
+
+        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location, Pathfinder.SMART) {
+            private var ticks = 0
+            override fun pulse(): Boolean {
+                ticks++
+                if (ticks >= 5) {
+                    gatesInUse.remove(gate.id)
+                    return true
+                }
+                return false
+            }
+        })
     }
 
     /**
@@ -97,7 +122,7 @@ class CombatState(private val bot: PestControlScript) {
         } else {
             move(portal.location)
         }
-        bot.moveTimer = random.nextInt(5, 12)
+        bot.moveTimer = Random.nextInt(5, 12)
     }
 
     /**
@@ -106,7 +131,7 @@ class CombatState(private val bot: PestControlScript) {
     fun fallbackToNearbyNPCs() {
         bot.customState = State.ATTACKING_NPC.name
         bot.AttackNpcsInRadius(aggressionRange())
-        if (random.nextInt(100) < 30) bot.eat(379)
+        if (Random.nextInt(100) < 30) bot.eat(379)
     }
 
     /**
@@ -115,8 +140,7 @@ class CombatState(private val bot: PestControlScript) {
      * @return The [NPC] instance if found, otherwise null.
      */
     private fun findSpinnerNPC(): NPC? =
-        RegionManager.getLocalNpcs(bot, 10)
-            .firstOrNull { it.name.equals("spinner", ignoreCase = true) }
+        RegionManager.getLocalNpcs(bot, 10).firstOrNull { it.name.equals("spinner", ignoreCase = true) }
 
     /**
      * Moves the bot toward a specified location.
@@ -170,5 +194,9 @@ class CombatState(private val bot: PestControlScript) {
         PCUtils.LanderZone.NOVICE -> 5
         PCUtils.LanderZone.INTERMEDIATE -> 7
         PCUtils.LanderZone.VETERAN -> 9
+    }
+
+    companion object {
+        private val gatesInUse = mutableSetOf<Int>()
     }
 }
