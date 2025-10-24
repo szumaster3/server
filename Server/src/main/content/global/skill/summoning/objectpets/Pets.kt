@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet
+package content.global.skill.summoning.objectpets
 
 import core.api.log
 import core.game.node.entity.player.Player

@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet
+package content.global.skill.summoning.objectpets
 
 import core.game.node.item.Item
 import shared.consts.Items

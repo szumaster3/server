@@ -6,8 +6,7 @@ import core.game.interaction.InteractionListener
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import content.global.skill.summoning.familiar.FamiliarManager
-import content.global.skill.summoning.pet.Pet
+import content.global.skill.summoning.objectpets.Pet
 import core.game.node.item.Item
 
 class MilkOnHellcatPlugin : InteractionListener {

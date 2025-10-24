@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet;
+package content.global.skill.summoning.objectpets;
 
 /**
  * The PetDetails class holds the data for a pet's hunger, growth, and individual state.

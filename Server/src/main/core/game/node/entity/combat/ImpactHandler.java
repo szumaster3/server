@@ -2,7 +2,7 @@ package core.game.node.entity.combat;
 
 import content.data.EnchantedJewellery;
 import content.global.skill.summoning.familiar.Familiar;
-import content.global.skill.summoning.pet.Pet;
+import content.global.skill.summoning.objectpets.Pet;
 import core.game.bots.AIPlayer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.Entity;

@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet
+package content.global.skill.summoning.objectpets
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

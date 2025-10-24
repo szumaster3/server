@@ -5,7 +5,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Items
 import shared.consts.NPCs
-import content.global.skill.summoning.pet.Pets
+import content.global.skill.summoning.objectpets.Pets
 
 class CivilianCatPlugin : InteractionListener {
 

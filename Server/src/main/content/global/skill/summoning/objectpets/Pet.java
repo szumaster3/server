@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet;
+package content.global.skill.summoning.objectpets;
 
 import content.global.skill.summoning.familiar.Familiar;
 import content.global.skill.summoning.familiar.FamiliarSpecial;

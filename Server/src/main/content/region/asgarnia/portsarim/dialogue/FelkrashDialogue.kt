@@ -9,7 +9,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Items
-import content.global.skill.summoning.pet.Pets
+import content.global.skill.summoning.objectpets.Pets
 import core.api.hasRequirement
 import core.api.openInterface
 import core.api.sendDialogue

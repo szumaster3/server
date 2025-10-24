@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet
+package content.global.skill.summoning.objectpets
 
 import core.api.*
 import core.game.interaction.IntType

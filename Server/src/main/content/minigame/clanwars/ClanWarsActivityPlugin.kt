@@ -193,7 +193,7 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
             player.skullManager.isWilderness = true
             player.interfaceManager.openOverlay(Component(265))
         } else if (e is content.global.skill.summoning.familiar.Familiar &&
-            e !is content.global.skill.summoning.pet.Pet
+            e !is content.global.skill.summoning.objectpets.Pet
         ) {
             val familiar = e
             if (familiar.isCombatFamiliar) {
@@ -315,7 +315,7 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
                 e.setLocation(leaveLocation)
             }
         } else if (e is content.global.skill.summoning.familiar.Familiar &&
-            e !is content.global.skill.summoning.pet.Pet
+            e !is content.global.skill.summoning.objectpets.Pet
         ) {
             val familiar = e
             if (familiar.isCombatFamiliar) {

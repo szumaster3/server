@@ -119,7 +119,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
                     Items.HELL_KITTEN_7583,
                 )
                 if (player.familiarManager.hasFamiliar()) {
-                    val pet = player.familiarManager.familiar as content.global.skill.summoning.pet.Pet
+                    val pet = player.familiarManager.familiar as content.global.skill.summoning.objectpets.Pet
                     for (i in kittens) {
                         if (pet.itemId == i) {
                             has = true

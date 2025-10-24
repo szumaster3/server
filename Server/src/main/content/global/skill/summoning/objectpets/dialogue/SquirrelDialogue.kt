@@ -1,4 +1,4 @@
-package content.global.skill.summoning.pet.dialogue
+package content.global.skill.summoning.objectpets.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.dialogue
 
-import content.global.skill.summoning.pet.Pet
+import content.global.skill.summoning.objectpets.Pet
 import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueInterpreter

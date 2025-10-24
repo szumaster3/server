@@ -1,27 +1,24 @@
-package content.global.skill.summoning.pet.dialogue
+package content.global.skill.summoning.objectpets.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * Represents the Wily hellcat dialogue.
+ * Represents the Hell kitten dialogue.
  */
 @Initializable
-class WilyHellcatDialogue : Dialogue {
-    override fun newInstance(player: Player?): Dialogue = WilyHellcatDialogue(player)
+class HellKittenDialogue : Dialogue {
+    override fun newInstance(player: Player?): Dialogue = HellKittenDialogue(player)
 
     constructor()
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npcl(FaceAnim.CHILD_NORMAL, "Meeow! I'm ready to take on the world and its dogs!")
-        stage = 0
+        npcl(FaceAnim.CHILD_NORMAL, "Meow! I'm ready to take on some pesky rats!")
         return true
     }
 
@@ -33,7 +30,7 @@ class WilyHellcatDialogue : Dialogue {
             }
 
             1 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "I'm as happy as a demon in a lava pit!")
+                npcl(FaceAnim.CHILD_NORMAL, "Great, I'm ready for action!")
                 stage++
             }
 
@@ -43,12 +40,14 @@ class WilyHellcatDialogue : Dialogue {
             }
 
             3 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "I'm feeling a bit like a ghost in a cake shop.")
+                npcl(FaceAnim.CHILD_NORMAL, "Still young and fresh, not like you at all.")
                 stage = END_DIALOGUE
             }
         }
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WILY_HELLCAT_3507)
+    override fun getIds(): IntArray = intArrayOf(
+        NPCs.HELL_KITTEN_3505
+    )
 }

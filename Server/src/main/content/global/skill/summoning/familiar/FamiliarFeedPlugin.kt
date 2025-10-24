@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar
 
-import content.global.skill.summoning.pet.Pet
+import content.global.skill.summoning.objectpets.Pet
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.plugin.Initializable

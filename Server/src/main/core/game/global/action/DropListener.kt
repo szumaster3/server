@@ -1,6 +1,6 @@
 package core.game.global.action
 
-import content.global.skill.summoning.pet.Pets
+import content.global.skill.summoning.objectpets.Pets
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

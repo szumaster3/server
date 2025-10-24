@@ -47,8 +47,8 @@ class SummoningTabInterface : InterfaceListener {
                         if (opcode == 155) {
                             player.dialogueInterpreter.open("dismiss_dial")
                         } else if (opcode == 196) {
-                            if (player.familiarManager.familiar is content.global.skill.summoning.pet.Pet) {
-                                val pet = player.familiarManager.familiar as content.global.skill.summoning.pet.Pet
+                            if (player.familiarManager.familiar is content.global.skill.summoning.objectpets.Pet) {
+                                val pet = player.familiarManager.familiar as content.global.skill.summoning.objectpets.Pet
                                 player.familiarManager.removeDetails(pet.getItemIdHash())
                             }
                             player.familiarManager.dismiss()
