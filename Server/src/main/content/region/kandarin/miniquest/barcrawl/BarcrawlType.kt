@@ -60,10 +60,10 @@ enum class BarcrawlType {
             start: Boolean,
         ) {
             if (!start) {
-                sendMessages(player, "Blueberry signs your card.")
+                sendMessage(player, "Blueberry signs your card.")
             } else {
                 super.message(player, start)
-                sendMessages(player, "Your mouth and throat burns as you gulp it down.")
+                sendMessage(player, "Your mouth and throat burns as you gulp it down.")
             }
         }
     },
@@ -240,7 +240,7 @@ enum class BarcrawlType {
             start: Boolean,
         ) {
             if (!start) {
-                sendMessages(player, "Zamo signs your card.")
+                sendMessage(player, "Zamo signs your card.")
                 sendDialogue(player, "Mmmmm, dat was luverly...")
             } else {
                 sendMessages(player, "You buy some Ape Bite liqueur.", "You swirl it around and swallow it.")

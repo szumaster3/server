@@ -260,7 +260,7 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         on(Scenery.CHEST_39279, IntType.SCENERY, "search") { player, _ ->
             if (!getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_WAND, false)) {
-                sendMessages(player, "You search the chest and find Betty's wand.")
+                sendMessage(player, "You search the chest and find Betty's wand.")
                 addItemOrDrop(player, Items.BETTYS_WAND_14068)
                 setAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_WAND, true)
             } else sendMessage(player, "You search the chest but find nothing.")

@@ -53,12 +53,12 @@ class ObjectManagerPlugin : OptionHandler() {
                         name.contains("drawers") -> {
                             player.animate(Animation(546))
                             playAudio(player, Sounds.DRAWER_OPEN_64)
-                            player.packetDispatch.sendMessages("You open the drawers.")
+                            player.packetDispatch.sendMessage("You open the drawers.")
                         }
                         name.contains("wardrobe") -> {
                             player.animate(Animation(Animations.OPEN_WARDROBE_545))
                             playAudio(player, Sounds.WARDROBE_OPEN_96)
-                            player.packetDispatch.sendMessages("You open the wardrobe.")
+                            player.packetDispatch.sendMessage("You open the wardrobe.")
                         }
                         name.contains("cupboard") -> {
                             if(scenery.id >= 33502) {
@@ -67,7 +67,7 @@ class ObjectManagerPlugin : OptionHandler() {
                                 player.animate(Animation(535))
                             }
                             playAudio(player, Sounds.CUPBOARD_OPEN_58)
-                            player.packetDispatch.sendMessages("You open the cupboard.")
+                            player.packetDispatch.sendMessage("You open the cupboard.")
                         }
                     }
                     replaceScenery(node, node.id + 1, -1)
@@ -86,12 +86,12 @@ class ObjectManagerPlugin : OptionHandler() {
                             player.animate(Animation(547))
                             animate(player, 547, false)
                             playAudio(player, Sounds.DRAWER_CLOSE_63)
-                            player.packetDispatch.sendMessages("You close the drawers.")
+                            player.packetDispatch.sendMessage("You close the drawers.")
                         }
                         name.contains("wardrobe") -> {
                             player.animate(Animation(546))
                             playAudio(player, Sounds.WARDROBE_CLOSE_95)
-                            player.packetDispatch.sendMessages("You close the wardrobe.")
+                            player.packetDispatch.sendMessage("You close the wardrobe.")
                         }
                         name.contains("cupboard") -> {
                             if(scenery.id >= 33502) {
@@ -100,7 +100,7 @@ class ObjectManagerPlugin : OptionHandler() {
                                 player.animate(Animation(536))
                             }
                             playAudio(player, Sounds.CUPBOARD_CLOSE_57)
-                            player.packetDispatch.sendMessages("You close the cupboard.")
+                            player.packetDispatch.sendMessage("You close the cupboard.")
                         }
                     }
                     replaceScenery(node, node.id - 1, -1)

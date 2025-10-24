@@ -184,7 +184,7 @@ class SmeltingPlugin : InteractionListener {
             if (removeItem(player, Item(Items.TIN_ORE_438, 1)) && removeItem(player, Item(Items.COPPER_ORE_436, 1))) {
                 animate(player, smeltAnimation)
                 playAudio(player, Sounds.FURNACE_2725, 1)
-                sendTutorialMessage(player, "You smelt the copper and tin together in the furnace.")
+                sendMessage(player, "You smelt the copper and tin together in the furnace.")
                 addItem(player, Items.BRONZE_BAR_2349)
                 queueScript(player, 4, QueueStrength.SOFT) {
                     rewardXP(player, Skills.SMITHING, Bar.BRONZE.experience)
@@ -196,7 +196,7 @@ class SmeltingPlugin : InteractionListener {
                             original = if (used.id != Items.TIN_ORE_438) Items.COPPER_ORE_436 else Items.TIN_ORE_438,
                         ),
                     )
-                    sendTutorialMessage(player, "You retrieve a bar of bronze.")
+                    sendMessage(player, "You retrieve a bar of bronze.")
                     return@queueScript stopExecuting(player)
                 }
             }

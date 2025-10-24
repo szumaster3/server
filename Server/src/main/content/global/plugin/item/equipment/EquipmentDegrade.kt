@@ -95,7 +95,7 @@ class EquipmentDegrade {
             val charges = itemCharges.getOrElse(this.id) { 1000 }
             if (set?.size!! > 2) {
                 p?.equipment?.remove(this)
-                p?.sendMessages("$name have degraded slightly!")
+                p?.sendMessage("$name have degraded slightly!")
                 if (set.isNextLast(this.id)) {
                     p?.let { addItemOrDrop(it, set.getNext(this.id)) }
                     p?.sendMessage("Your $name has broken.")

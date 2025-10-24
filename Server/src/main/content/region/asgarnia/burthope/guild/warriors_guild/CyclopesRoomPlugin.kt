@@ -107,7 +107,7 @@ class CyclopesRoomPlugin :
                         }
                         removeAttribute(player, "sent_dialogue")
                         player.inventory.remove(tokens10)
-                        player.sendMessages("10 tokens are taken as you enter the room.")
+                        player.sendMessage("10 tokens are taken as you enter the room.")
                         Companion.enter(player)
                     } else {
                         leave(player)
