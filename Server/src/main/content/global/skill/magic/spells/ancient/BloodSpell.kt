@@ -1,5 +1,6 @@
 package content.global.skill.magic.spells.ancient
 
+import content.global.skill.magic.spells.ancient.def.BloodSpellDefinition
 import core.api.playGlobalAudio
 import core.game.node.Node
 import core.game.node.entity.Entity

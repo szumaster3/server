@@ -1,17 +1,15 @@
 package content.global.skill.magic.spells.modern
 
+import content.global.skill.magic.spells.modern.def.CurseSpellDefinition
 import core.api.drainStatLevel
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.spell.CombatSpell
 import core.game.node.entity.combat.spell.SpellType
-import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.node.entity.skill.Skills
-import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
-import shared.consts.Animations
 
 /**
  * Represents the Curse spell.

@@ -1,5 +1,6 @@
 package content.global.skill.magic.spells.ancient
 
+import content.global.skill.magic.spells.ancient.def.IceSpellDefinition
 import core.api.hasTimerActive
 import core.api.playGlobalAudio
 import core.api.registerTimer

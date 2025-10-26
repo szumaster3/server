@@ -1,5 +1,6 @@
 package content.global.skill.magic.spells.ancient
 
+import content.global.skill.magic.spells.ancient.def.SmokeSpellDefinition
 import core.api.applyPoison
 import core.api.playGlobalAudio
 import core.game.node.Node

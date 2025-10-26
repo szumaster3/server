@@ -1,4 +1,4 @@
-package content.global.skill.magic.spells.modern
+package content.global.skill.magic.spells.modern.def
 
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.spell.Runes
@@ -41,22 +41,4 @@ enum class GodSpellDefinition(val staffId: Int, val requiredCasts: Int = 100, va
         runes = arrayOf(Runes.BLOOD_RUNE.getItem(2), Runes.FIRE_RUNE.getItem(4), Runes.AIR_RUNE.getItem(1)),
         effect = { _, victim -> core.api.drainStatLevel(victim, Skill.MAGIC, 0.05, 0.05) }
     );
-
-    companion object {
-        private val values = enumValues<GodSpellDefinition>()
-
-        fun fromRunes(runes: Array<Item>): GodSpellDefinition? {
-            val inputSet = runes.map { it.id to it.amount }.toSet()
-            for (spell in values) {
-                val spellSet = spell.runes.map { it.id to it.amount }.toSet()
-                if (spellSet == inputSet) {
-                    return spell
-                }
-            }
-            return null
-        }
-
-        fun fromIndex(index: Int): GodSpellDefinition? =
-            if (index in values.indices) values[index] else null
-    }
 }

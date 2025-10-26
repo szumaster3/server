@@ -2,8 +2,8 @@ package content.global.plugin.npc
 
 import content.global.skill.magic.spells.ModernSpells
 import content.global.skill.magic.spells.SpellProjectile
-import content.global.skill.magic.spells.modern.BindSpellDefinition
-import content.global.skill.magic.spells.modern.CurseSpellDefinition
+import content.global.skill.magic.spells.modern.def.BindSpellDefinition
+import content.global.skill.magic.spells.modern.def.CurseSpellDefinition
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.*
 import core.game.node.entity.combat.equipment.SwitchAttack

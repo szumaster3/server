@@ -1,4 +1,4 @@
-package content.global.skill.magic.spells.ancient
+package content.global.skill.magic.spells.ancient.def
 
 import content.global.skill.magic.spells.AncientSpells
 import core.game.node.entity.combat.spell.Runes
