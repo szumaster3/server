@@ -56,36 +56,61 @@ class DumpCommand : CommandPlugin() {
         val f = File(System.getProperty("user.dir") + File.separator + "${type}list.html")
         println(f.absolutePath)
         val writer = f.bufferedWriter()
+
         writer.writeLn("<head>")
-        writer.writeLn("<link rel=\"stylesheet\" type=\"text/css\" href=\"../S/table_template.css\">")
+        writer.writeLn("<style>")
+        writer.writeLn("""
+        td {
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        tr {
+            border-bottom: 1px solid black;
+        }
+
+        th {
+            border: 1px solid black;
+        }
+
+        .item-id {
+            color: #FF0004;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    """.trimIndent())
+        writer.writeLn("</style>")
         writer.writeLn("</head>")
-        writer.writeLn("<table style='width:100%'>")
+
+        writer.writeLn("<table>")
         writer.writeLn("<tr>")
         writer.writeLn("<th>$type name</th>")
         writer.writeLn("<th>$type ID</th>")
         writer.writeLn("<th>Examine Text</th>")
         writer.writeLn("</tr>")
+
         when (type) {
             "item" -> for (i in ItemDefinition.definitions.values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
-                writer.writeLn("<td id=\"id\">${i.id}</td>")
+                writer.writeLn("<td class=\"item-id\">${i.id}</td>")
                 writer.writeLn("<td>${i.examine}</td>")
                 writer.writeLn("</tr>")
             }
-
             "object" -> for (i in SceneryDefinition.getDefinitions().values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
-                writer.writeLn("<td>${i.id}</td>")
+                writer.writeLn("<td class=\"item-id\">${i.id}</td>")
                 writer.writeLn("<td>${i.examine}</td>")
                 writer.writeLn("</tr>")
             }
-
             "npc" -> for (i in NPCDefinition.definitions.values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
-                writer.writeLn("<td>${i.id}</td>")
+                writer.writeLn("<td class=\"item-id\">${i.id}</td>")
                 writer.writeLn("<td>${i.examine}</td>")
                 writer.writeLn("</tr>")
             }
