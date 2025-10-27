@@ -1,6 +1,0 @@
-[submodule "Client"]
-	path = Client
-	url = https://github.com/Pazaz/RT4-Client.git
-[submodule "Cache"]
-	path = Cache
-	url = git@gitlab.com:openscape/tools/cache.git
