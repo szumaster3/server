@@ -7,7 +7,7 @@ import com.google.gson.JsonObject
 import core.api.log
 import core.api.sendMessage
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -92,7 +92,7 @@ class SpawnCommandSet : CommandSet(Privilege.ADMIN) {
             }
             val id = args[1].toIntOrNull() ?: return@define
             var amount = (args.getOrNull(2) ?: "1").toInt()
-            if (id > Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
+            if (id > Cache.getIndexCapacity(Archive.JS5_CONFIG_OBJ)) {
                 reject(player, "Item ID '$id' out of range.")
                 return@define
             }

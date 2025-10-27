@@ -122,7 +122,7 @@
         <dependency>
             <groupId>com.displee</groupId>
             <artifactId>rs-cache-library</artifactId>
-            <version>7.3.1</version>
+            <version>8.0.1</version>
         </dependency>
     </dependencies>
 

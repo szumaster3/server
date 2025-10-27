@@ -1,7 +1,7 @@
 package core.cache.def.impl
 
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.net.g1
 import core.net.g2
 import core.net.g3
@@ -39,7 +39,7 @@ class AnimationDefinition {
         @JvmStatic
         fun forId(emoteId: Int): AnimationDefinition? = try {
             animationDefinition[emoteId] ?: run {
-                val data = Cache.getData(CacheIndex.SEQUENCE_CONFIGURATION, emoteId ushr 7, emoteId and 0x7f)
+                val data = Cache.getData(Archive.JS5_CONFIG_SEQ, emoteId ushr 7, emoteId and 0x7f)
                 val def = AnimationDefinition()
                 data?.let { def.readValueLoop(ByteBuffer.wrap(it)) }
                 def.changeValues()

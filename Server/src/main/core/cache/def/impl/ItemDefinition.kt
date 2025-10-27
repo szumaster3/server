@@ -7,7 +7,7 @@ import core.api.log
 import core.api.sendString
 import core.cache.Cache.getData
 import core.cache.Cache.getIndexCapacity
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.cache.def.Definition
 import core.game.container.Container
 import core.game.interaction.OptionHandler
@@ -28,47 +28,47 @@ import kotlin.math.round
  * The type Item definition.
  */
 class ItemDefinition : Definition<Item?>() {
-    @JvmField var interfaceModelId = 0
-    @JvmField var modelZoom = 0
-    @JvmField var modelRotationX = 0
-    @JvmField var modelRotationY = 0
-    @JvmField var modelOffset1: Int = 0
-    @JvmField var modelOffset2: Int = 0
-    @JvmField var stackable = false
-    @JvmField var value = 1
-    @JvmField var membersOnly = false
-    @JvmField var maleWornModelId1 = -1
-    @JvmField var femaleWornModelId1 = -1
-    @JvmField var maleWornModelId2 = -1
-    @JvmField var femaleWornModelId2 = -1
-    @JvmField var maleWornModelId3: Int = -1
-    @JvmField var femaleWornModelId3: Int = -1
-    @JvmField var maleWornModelId4: Int = -1
-    @JvmField var femaleWornModelId4: Int = -1
-    @JvmField var groundOptions: Array<String?>
-    @JvmField var originalModelColors: ShortArray? = null
-    @JvmField var modifiedModelColors: ShortArray? = null
-    @JvmField var textureColour1: ShortArray? = null
-    @JvmField var textureColour2: ShortArray? = null
-    @JvmField var unknownArray1: ByteArray? = null
-    @JvmField var unknownArray2: IntArray? = null
-    @JvmField val unknownArray3: Array<IntArray>? = null
-    @JvmField var unnoted = true
-    @JvmField var colourEquip1 = -1
-    @JvmField var colourEquip2 = 0
-    @JvmField var noteId = -1
-    @JvmField var noteTemplateId = -1
-    @JvmField var stackIds: IntArray? = null
-    @JvmField var stackAmounts: IntArray? = null
-    @JvmField var teamId = 0
-    @JvmField var lendId = -1
-    @JvmField var lendTemplateId = -1
-    @JvmField var recolourId: Int = -1
-    @JvmField var recolourTemplateId: Int = -1
-    @JvmField var equipId = 0
-    @JvmField var itemRequirements: HashMap<Int, Int>? = null
-    @JvmField var clientScriptData: HashMap<Int, Any>? = null
-    @JvmField var itemType = 0
+    private var interfaceModelId = 0
+    private var modelZoom = 0
+    private var modelRotationX = 0
+    private var modelRotationY = 0
+    private var modelOffset1: Int = 0
+    private var modelOffset2: Int = 0
+    private var stackable = false
+    private var value = 1
+    private var membersOnly = false
+    private var maleWornModelId1 = -1
+    private var femaleWornModelId1 = -1
+    private var maleWornModelId2 = -1
+    private var femaleWornModelId2 = -1
+    private var maleWornModelId3: Int = -1
+    private var femaleWornModelId3: Int = -1
+    private var maleWornModelId4: Int = -1
+    private var femaleWornModelId4: Int = -1
+    private var groundOptions: Array<String?>
+    private var originalModelColors: ShortArray? = null
+    private var modifiedModelColors: ShortArray? = null
+    private var textureColour1: ShortArray? = null
+    private var textureColour2: ShortArray? = null
+    private var unknownArray1: ByteArray? = null
+    private var unknownArray2: IntArray? = null
+    private val unknownArray3: Array<IntArray>? = null
+    private var unnoted = true
+    private var colourEquip1 = -1
+    private var colourEquip2 = 0
+    private var noteId = -1
+    private var noteTemplateId = -1
+    private var stackIds: IntArray? = null
+    private var stackAmounts: IntArray? = null
+    private var teamId = 0
+    private var lendId = -1
+    private var lendTemplateId = -1
+    private var recolourId: Int = -1
+    private var recolourTemplateId: Int = -1
+    private var equipId = 0
+    private var itemRequirements: HashMap<Int, Int>? = null
+    private var clientScriptData: HashMap<Int, Any>? = null
+    private var itemType = 0
 
     /**
      * Transfer note definition.
@@ -186,9 +186,7 @@ class ItemDefinition : Definition<Item?>() {
                 if (message) {
                     val name = Skills.SKILL_NAME[skill]
                     player.packetDispatch.sendMessage(
-                        "You need a" + (if (isPlusN(name)) "n " else " ") + name + " level of " + level + " to " +
-                            (if (wield) "wear " else "use ") +
-                            "this.",
+                        "You need a" + (if (isPlusN(name)) "n " else " ") + name + " level of " + level + " to " + (if (wield) "wear " else "use ") + "this.",
                     )
                 }
                 return false
@@ -198,7 +196,9 @@ class ItemDefinition : Definition<Item?>() {
     }
 
     private val allowedNames = setOf("trousers", "tribal top", "woven top", "chompy bird hat", "cape")
-    private val excludedKeywords = listOf("(class", "camo ", "larupia", "kyatt", " stole", "moonclan", "villager ", "tribal", "spirit ", "gauntlets")
+    private val excludedKeywords = listOf(
+        "(class", "camo ", "larupia", "kyatt", " stole", "moonclan", "villager ", "tribal", "spirit ", "gauntlets"
+    )
     private val allowedSubstrings = listOf("satchel", "naval", " partyhat")
 
     /**
@@ -364,14 +364,13 @@ class ItemDefinition : Definition<Item?>() {
      * @param currency the currency
      * @return the boolean
      */
-    fun hasShopCurrencyValue(currency: Int): Boolean =
-        when (currency) {
-            Items.COINS_995 -> isTradeable
-            Items.TOKKUL_6529 -> hasShopCurrencyValue(ItemConfigParser.TOKKUL_PRICE)
-            Items.ARCHERY_TICKET_1464 -> hasShopCurrencyValue(ItemConfigParser.ARCHERY_TICKET_PRICE)
-            Items.CASTLE_WARS_TICKET_4067 -> hasShopCurrencyValue(ItemConfigParser.CASTLE_WARS_TICKET_PRICE)
-            else -> false
-        }
+    fun hasShopCurrencyValue(currency: Int): Boolean = when (currency) {
+        Items.COINS_995 -> isTradeable
+        Items.TOKKUL_6529 -> hasShopCurrencyValue(ItemConfigParser.TOKKUL_PRICE)
+        Items.ARCHERY_TICKET_1464 -> hasShopCurrencyValue(ItemConfigParser.ARCHERY_TICKET_PRICE)
+        Items.CASTLE_WARS_TICKET_4067 -> hasShopCurrencyValue(ItemConfigParser.CASTLE_WARS_TICKET_PRICE)
+        else -> false
+    }
 
     val maxValue: Int
         /**
@@ -865,12 +864,10 @@ class ItemDefinition : Definition<Item?>() {
             if (action == null) {
                 continue
             }
-            if (action.equals("wield", ignoreCase = true) ||
-                action.equals(
+            if (action.equals("wield", ignoreCase = true) || action.equals(
                     "wear",
                     ignoreCase = true,
-                ) ||
-                action.equals("equip", ignoreCase = true)
+                ) || action.equals("equip", ignoreCase = true)
             ) {
                 return true
             }
@@ -949,7 +946,6 @@ class ItemDefinition : Definition<Item?>() {
          * @return the item plugin
          */
         get() = getConfiguration<ItemPlugin>("wrapper", null)
-
         /**
          * Sets item plugin.
          *
@@ -997,8 +993,8 @@ class ItemDefinition : Definition<Item?>() {
          * Parse.
          */
         fun parse() {
-            for (itemId in 0 until getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
-                val data = getData(CacheIndex.ITEM_CONFIGURATION, itemId ushr 8, itemId and 0xFF)
+            for (itemId in 0 until getIndexCapacity(Archive.JS5_CONFIG_OBJ)) {
+                val data = getData(Archive.JS5_CONFIG_OBJ, itemId ushr 8, itemId and 0xFF)
 
                 if (data == null) {
                     definitions[itemId] = ItemDefinition()
@@ -1057,11 +1053,13 @@ class ItemDefinition : Definition<Item?>() {
                         def.modelOffset1 = buffer.g2()
                         if (def.modelOffset1 > 32767) def.modelOffset1 -= 65536
                     }
+
                     8 -> {
                         def.modelOffset2 = buffer.g2()
                         if (def.modelOffset2 > 32767) def.modelOffset2 -= 65536
                     }
-                    10 -> { }
+
+                    10 -> {}
                     11 -> def.stackable = true
                     12 -> def.value = buffer.g4()
                     16 -> def.membersOnly = true
@@ -1080,6 +1078,7 @@ class ItemDefinition : Definition<Item?>() {
                             def.modifiedModelColors!![i] = buffer.g2b().toShort()
                         }
                     }
+
                     41 -> {
                         val length = buffer.g1()
                         def.textureColour1 = ShortArray(length)
@@ -1089,11 +1088,13 @@ class ItemDefinition : Definition<Item?>() {
                             def.textureColour2!![i] = buffer.g2b().toShort()
                         }
                     }
+
                     42 -> {
                         val length = buffer.g1()
                         def.unknownArray1 = ByteArray(length)
                         for (i in 0 until length) def.unknownArray1!![i] = buffer.get()
                     }
+
                     65 -> def.unnoted = true
                     78 -> def.colourEquip1 = buffer.g2()
                     79 -> def.colourEquip2 = buffer.g2()
@@ -1113,6 +1114,7 @@ class ItemDefinition : Definition<Item?>() {
                         def.stackIds!![opcode - 100] = buffer.g2()
                         def.stackAmounts!![opcode - 100] = buffer.g2()
                     }
+
                     110, 111, 112 -> buffer.g2()
                     113, 114 -> buffer.g1()
                     115 -> def.teamId = buffer.g1()
@@ -1123,10 +1125,12 @@ class ItemDefinition : Definition<Item?>() {
                         buffer.g1()
                         buffer.g1()
                     }
+
                     127, 128, 129, 130 -> {
                         buffer.g1()
                         buffer.g2()
                     }
+
                     249 -> {
                         val length = buffer.g1()
                         if (def.clientScriptData == null) def.clientScriptData = HashMap()
@@ -1137,6 +1141,7 @@ class ItemDefinition : Definition<Item?>() {
                             def.clientScriptData!![key] = value
                         }
                     }
+
                     else -> break
                 }
             }
@@ -1148,7 +1153,7 @@ class ItemDefinition : Definition<Item?>() {
          */
         fun defineTemplates() {
             var equipId = 0
-            for (i in 0 until getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
+            for (i in 0 until getIndexCapacity(Archive.JS5_CONFIG_OBJ)) {
                 val def = forId(i)
                 if (def.noteTemplateId != -1) {
                     def.transferNoteDefinition(forId(def.noteId), forId(def.noteTemplateId))
@@ -1188,74 +1193,132 @@ class ItemDefinition : Definition<Item?>() {
 
         private fun checkContainer(container: Container): Boolean {
             for (item in container.toArray()) {
-                if (item != null && !item.definition.isAllowed)
-                    return false
+                if (item != null && !item.definition.isAllowed) return false
             }
             return true
         }
 
         private val permittedItems = hashSetOf(
-            Items.COMBAT_BRACELET1_11124, Items.COMBAT_BRACELET2_11122,
-            Items.COMBAT_BRACELET3_11120, Items.COMBAT_BRACELET4_11118,
-            Items.REGEN_BRACELET_11133, Items.BOOTS_OF_LIGHTNESS_88,
-            Items.CLIMBING_BOOTS_3105, Items.BLUE_BERET_2633,
-            Items.BLACK_BERET_2635, Items.WHITE_BERET_2637,
-            Items.BROOMSTICK_14057, Items.SPOTTED_CAPE_10069,
-            Items.SPOTTIER_CAPE_10071, Items.SARADOMIN_CAPE_2412,
-            Items.ZAMORAK_CAPE_2414, Items.GUTHIX_CAPE_2413,
-            Items.SARADOMIN_CLOAK_10446, Items.ZAMORAK_CLOAK_10450,
-            Items.GUTHIX_CLOAK_10448, Items.TAN_CAVALIER_2639,
-            Items.BLACK_CAVALIER_2643, Items.DARK_CAVALIER_2641,
-            Items.DAVY_KEBBIT_HAT_12568, Items.FIXED_DEVICE_6082,
-            Items.FLARED_TROUSERS_10394, Items.GIANTS_HAND_13666,
-            Items.GNOME_SCARF_9470, Items.HOLY_BOOK_3840,
-            Items.DAMAGED_BOOK_3839, Items.UNHOLY_BOOK_3842,
-            Items.DAMAGED_BOOK_3841, Items.BOOK_OF_BALANCE_3844,
-            Items.DAMAGED_BOOK_3843, Items.HAM_SHIRT_4298,
-            Items.HAM_ROBE_4300, Items.HAM_HOOD_4302,
-            Items.HAM_CLOAK_4304, Items.HAM_LOGO_4306,
-            Items.GLOVES_4308, Items.BOOTS_4310,
-            Items.ICE_GLOVES_1580, Items.MIND_HELMET_9733,
-            Items.MONKS_ROBE_542, Items.MONKS_ROBE_544,
-            Items.PRIEST_GOWN_426, Items.PRIEST_GOWN_428,
-            Items.SHADE_ROBE_546, Items.SHADE_ROBE_548,
-            Items.ZAMORAK_ROBE_1033, Items.ZAMORAK_ROBE_1035,
-            Items.NURSE_HAT_6548, Items.OMNI_TIARA_13655,
-            Items.PENANCE_GLOVES_10553, Items.PET_ROCK_3695,
-            Items.SALVE_AMULETE_10588, Items.SKELETAL_BOOTS_6147,
-            Items.SKELETAL_GLOVES_6153, Items.SKIRT_5048,
-            Items.WARLOCK_TOP_14076, Items.WARLOCK_LEGS_14077,
-            Items.WARLOCK_CLOAK_14081, Items.WIZARD_BOOTS_2579,
-            Items.BONES_TO_BANANAS_8014, Items.BONES_TO_PEACHES_8015,
-            Items.ENCHANT_SAPPHIRE_8016, Items.ENCHANT_EMERALD_8017,
-            Items.ENCHANT_RUBY_8018, Items.ENCHANT_DIAMOND_8019,
-            Items.ENCHANT_DRAGONSTN_8020, Items.ENCHANT_ONYX_8021,
+            Items.COMBAT_BRACELET1_11124,
+            Items.COMBAT_BRACELET2_11122,
+            Items.COMBAT_BRACELET3_11120,
+            Items.COMBAT_BRACELET4_11118,
+            Items.REGEN_BRACELET_11133,
+            Items.BOOTS_OF_LIGHTNESS_88,
+            Items.CLIMBING_BOOTS_3105,
+            Items.BLUE_BERET_2633,
+            Items.BLACK_BERET_2635,
+            Items.WHITE_BERET_2637,
+            Items.BROOMSTICK_14057,
+            Items.SPOTTED_CAPE_10069,
+            Items.SPOTTIER_CAPE_10071,
+            Items.SARADOMIN_CAPE_2412,
+            Items.ZAMORAK_CAPE_2414,
+            Items.GUTHIX_CAPE_2413,
+            Items.SARADOMIN_CLOAK_10446,
+            Items.ZAMORAK_CLOAK_10450,
+            Items.GUTHIX_CLOAK_10448,
+            Items.TAN_CAVALIER_2639,
+            Items.BLACK_CAVALIER_2643,
+            Items.DARK_CAVALIER_2641,
+            Items.DAVY_KEBBIT_HAT_12568,
+            Items.FIXED_DEVICE_6082,
+            Items.FLARED_TROUSERS_10394,
+            Items.GIANTS_HAND_13666,
+            Items.GNOME_SCARF_9470,
+            Items.HOLY_BOOK_3840,
+            Items.DAMAGED_BOOK_3839,
+            Items.UNHOLY_BOOK_3842,
+            Items.DAMAGED_BOOK_3841,
+            Items.BOOK_OF_BALANCE_3844,
+            Items.DAMAGED_BOOK_3843,
+            Items.HAM_SHIRT_4298,
+            Items.HAM_ROBE_4300,
+            Items.HAM_HOOD_4302,
+            Items.HAM_CLOAK_4304,
+            Items.HAM_LOGO_4306,
+            Items.GLOVES_4308,
+            Items.BOOTS_4310,
+            Items.ICE_GLOVES_1580,
+            Items.MIND_HELMET_9733,
+            Items.MONKS_ROBE_542,
+            Items.MONKS_ROBE_544,
+            Items.PRIEST_GOWN_426,
+            Items.PRIEST_GOWN_428,
+            Items.SHADE_ROBE_546,
+            Items.SHADE_ROBE_548,
+            Items.ZAMORAK_ROBE_1033,
+            Items.ZAMORAK_ROBE_1035,
+            Items.NURSE_HAT_6548,
+            Items.OMNI_TIARA_13655,
+            Items.PENANCE_GLOVES_10553,
+            Items.PET_ROCK_3695,
+            Items.SALVE_AMULETE_10588,
+            Items.SKELETAL_BOOTS_6147,
+            Items.SKELETAL_GLOVES_6153,
+            Items.SKIRT_5048,
+            Items.WARLOCK_TOP_14076,
+            Items.WARLOCK_LEGS_14077,
+            Items.WARLOCK_CLOAK_14081,
+            Items.WIZARD_BOOTS_2579,
+            Items.BONES_TO_BANANAS_8014,
+            Items.BONES_TO_PEACHES_8015,
+            Items.ENCHANT_SAPPHIRE_8016,
+            Items.ENCHANT_EMERALD_8017,
+            Items.ENCHANT_RUBY_8018,
+            Items.ENCHANT_DIAMOND_8019,
+            Items.ENCHANT_DRAGONSTN_8020,
+            Items.ENCHANT_ONYX_8021,
             Items.ECTOPHIAL_4251
         )
 
         private val bannedItems = hashSetOf(
-            Items.CAPE_OF_LEGENDS_1052, Items.FIRE_CAPE_6570,
-            Items.AVAS_ATTRACTOR_10498, Items.AVAS_ACCUMULATOR_10499,
-            Items.COOKING_GAUNTLETS_775, Items.CHAOS_GAUNTLETS_777,
-            Items.GOLDSMITH_GAUNTLETS_776, Items.SILVER_SICKLE_2961,
-            Items.SILVER_SICKLEB_2963, Items.SILVER_SICKLE_EMERALDB_13155,
-            Items.KARAMJA_GLOVES_1_11136, Items.KARAMJA_GLOVES_2_11138,
-            Items.KARAMJA_GLOVES_3_11140, Items.EXPLORERS_RING_1_13560,
-            Items.EXPLORERS_RING_2_13561, Items.EXPLORERS_RING_3_13562,
-            Items.FANCY_BOOTS_9005, Items.FIGHTING_BOOTS_9006,
-            Items.VYREWATCH_TOP_9634, Items.VYREWATCH_LEGS_9636,
-            Items.VYREWATCH_SHOES_9638, Items.BARB_TAIL_HARPOON_10129,
-            Items.BUTTERFLY_NET_10010, Items.MIME_MASK_3057,
-            Items.DWARF_CANNON_SET_11967, Items.CANNON_BARRELS_10,
-            Items.CANNON_BASE_6, Items.CANNON_STAND_8, Items.CANNON_FURNACE_12,
-            Items.HOLY_WATER_732, Items.ENCHANTED_WATER_TIARA_11969,
-            Items.OMNI_TALISMAN_STAFF_13642, Items.FREMENNIK_SEA_BOOTS_1_14571,
-            Items.FREMENNIK_SEA_BOOTS_2_14572, Items.FREMENNIK_SEA_BOOTS_3_14573,
-            Items.ROBIN_HOOD_HAT_2581, Items.SAFETY_GLOVES_12629,
-            Items.FALADOR_SHIELD_1_14577, Items.FALADOR_SHIELD_2_14578,
-            Items.FALADOR_SHIELD_3_14579, Items.AGILE_TOP_14696,
-            Items.AGILE_TOP_14697, Items.AGILE_LEGS_14698, Items.AGILE_LEGS_14699,
-            Items.PROSYTE_HARNESS_M_9666, Items.INITIATE_HARNESS_M_9668,
+            Items.CAPE_OF_LEGENDS_1052,
+            Items.FIRE_CAPE_6570,
+            Items.AVAS_ATTRACTOR_10498,
+            Items.AVAS_ACCUMULATOR_10499,
+            Items.COOKING_GAUNTLETS_775,
+            Items.CHAOS_GAUNTLETS_777,
+            Items.GOLDSMITH_GAUNTLETS_776,
+            Items.SILVER_SICKLE_2961,
+            Items.SILVER_SICKLEB_2963,
+            Items.SILVER_SICKLE_EMERALDB_13155,
+            Items.KARAMJA_GLOVES_1_11136,
+            Items.KARAMJA_GLOVES_2_11138,
+            Items.KARAMJA_GLOVES_3_11140,
+            Items.EXPLORERS_RING_1_13560,
+            Items.EXPLORERS_RING_2_13561,
+            Items.EXPLORERS_RING_3_13562,
+            Items.FANCY_BOOTS_9005,
+            Items.FIGHTING_BOOTS_9006,
+            Items.VYREWATCH_TOP_9634,
+            Items.VYREWATCH_LEGS_9636,
+            Items.VYREWATCH_SHOES_9638,
+            Items.BARB_TAIL_HARPOON_10129,
+            Items.BUTTERFLY_NET_10010,
+            Items.MIME_MASK_3057,
+            Items.DWARF_CANNON_SET_11967,
+            Items.CANNON_BARRELS_10,
+            Items.CANNON_BASE_6,
+            Items.CANNON_STAND_8,
+            Items.CANNON_FURNACE_12,
+            Items.HOLY_WATER_732,
+            Items.ENCHANTED_WATER_TIARA_11969,
+            Items.OMNI_TALISMAN_STAFF_13642,
+            Items.FREMENNIK_SEA_BOOTS_1_14571,
+            Items.FREMENNIK_SEA_BOOTS_2_14572,
+            Items.FREMENNIK_SEA_BOOTS_3_14573,
+            Items.ROBIN_HOOD_HAT_2581,
+            Items.SAFETY_GLOVES_12629,
+            Items.FALADOR_SHIELD_1_14577,
+            Items.FALADOR_SHIELD_2_14578,
+            Items.FALADOR_SHIELD_3_14579,
+            Items.AGILE_TOP_14696,
+            Items.AGILE_TOP_14697,
+            Items.AGILE_LEGS_14698,
+            Items.AGILE_LEGS_14699,
+            Items.PROSYTE_HARNESS_M_9666,
+            Items.INITIATE_HARNESS_M_9668,
             Items.PROSYTE_HARNESS_F_9670
         )
 
@@ -1289,22 +1352,21 @@ class ItemDefinition : Definition<Item?>() {
             return OPTION_HANDLERS[name]
         }
 
-        private val BONUS_NAMES =
-            arrayOf(
-                "Stab: ",
-                "Slash: ",
-                "Crush: ",
-                "Magic: ",
-                "Ranged: ",
-                "Stab: ",
-                "Slash: ",
-                "Crush: ",
-                "Magic: ",
-                "Ranged: ",
-                "Summoning: ",
-                "Strength: ",
-                "Prayer: ",
-            )
+        private val BONUS_NAMES = arrayOf(
+            "Stab: ",
+            "Slash: ",
+            "Crush: ",
+            "Magic: ",
+            "Ranged: ",
+            "Stab: ",
+            "Slash: ",
+            "Crush: ",
+            "Magic: ",
+            "Ranged: ",
+            "Summoning: ",
+            "Strength: ",
+            "Prayer: ",
+        )
 
         /**
          * Stats update.
@@ -1325,7 +1387,7 @@ class ItemDefinition : Definition<Item?>() {
                 val bonusValue = if (bonus > -1) ("+$bonus") else bonus.toString()
                 sendString(player, BONUS_NAMES[index++] + bonusValue, Components.EQUIP_SCREEN2_667, i)
             }
-            sendString(player,"Attack bonus", Components.EQUIP_SCREEN2_667, 34)
+            sendString(player, "Attack bonus", Components.EQUIP_SCREEN2_667, 34)
         }
 
         /**

@@ -2,7 +2,7 @@ package core.cache.def.impl
 
 import core.api.log
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.cache.util.ByteBufferExtensions
 import core.tools.Log
 import core.tools.StringUtils
@@ -54,7 +54,7 @@ class DataMap private constructor(val id: Int) {
             val archive = id ushr 8
             val file = id and 0xFF
 
-            val data = Cache.getData(CacheIndex.ENUM_CONFIGURATION, archive, file)
+            val data = Cache.getData(Archive.JS5_CONFIG_ENUM, archive, file)
             val def = parse(id, data)
             definitions[id] = def
             return def

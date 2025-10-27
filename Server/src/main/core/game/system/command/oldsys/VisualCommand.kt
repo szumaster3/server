@@ -6,7 +6,7 @@ import core.api.sendMessage
 import core.api.setVarp
 import core.api.submitWorldPulse
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
@@ -266,7 +266,7 @@ class VisualCommand : CommandPlugin() {
                     return true
                 }
                 val componentId = toInteger(args[1]!!)
-                val componentSize = Cache.getIndexCapacity(CacheIndex.COMPONENTS)
+                val componentSize = Cache.getIndexCapacity(Archive.JS5_INTERFACES)
                 if (componentId < 0 || componentId > componentSize) {
                     player!!.debug(
                         "Invalid component id [id=$componentId, max=$componentSize].",

@@ -3,8 +3,8 @@ package core.cache.def.impl
 import core.api.log
 import core.cache.Cache.getArchiveCapacity
 import core.cache.Cache.getData
-import core.cache.CacheArchive
-import core.cache.CacheIndex
+import core.cache.Group
+import core.cache.Archive
 import core.game.world.GameWorld.prompt
 import core.net.g1
 import core.net.g2
@@ -18,45 +18,45 @@ import java.nio.ByteBuffer
  */
 class RenderAnimationDefinition {
     var turn180Animation: Int
-    var anInt951: Int = -1
-    var anInt952: Int
+    private var anInt951: Int = -1
+    private var anInt952: Int
     var turnCWAnimation: Int = -1
-    var anInt954: Int
-    var anInt955: Int
-    var anInt956: Int = 0
-    var anInt957: Int
-    var anInt958: Int
-    var anIntArray959: IntArray? = null
-    var anInt960: Int
-    var anInt961: Int = 0
-    var anInt962: Int
+    private var anInt954: Int
+    private var anInt955: Int
+    private var anInt956: Int = 0
+    private var anInt957: Int
+    private var anInt958: Int
+    private var anIntArray959: IntArray? = null
+    private var anInt960: Int
+    private var anInt961: Int = 0
+    private var anInt962: Int
     var walkAnimationId: Int
-    var anInt964: Int
-    var anInt965: Int = 0
-    var anInt966: Int
-    var standAnimationIds: IntArray? = null
-    var anInt969: Int = 0
-    var anIntArray971: IntArray? = null
+    private var anInt964: Int
+    private var anInt965: Int = 0
+    private var anInt966: Int
+    private var standAnimationIds: IntArray? = null
+    private var anInt969: Int = 0
+    private var anIntArray971: IntArray? = null
     var standAnimationId: Int
-    var anInt973: Int = 0
-    var anInt974: Int
-    var anInt975: Int = 0
+    private var anInt973: Int = 0
+    private var anInt974: Int
+    private var anInt975: Int = 0
     var runAnimationId: Int
-    var anInt977: Int
-    var aBoolean978: Boolean = true
-    var anIntArrayArray979: Array<IntArray?>? = null
-    var anInt980: Int = 0
+    private var anInt977: Int
+    private var aBoolean978: Boolean = true
+    private var anIntArrayArray979: Array<IntArray?>? = null
+    private var anInt980: Int = 0
     var turnCCWAnimation: Int
-    var anInt983: Int
-    var anInt985: Int
-    var anInt986: Int
-    var anInt987: Int
-    var anInt988: Int = 0
-    var anInt989: Int
-    var anInt990: Int
-    var anInt992: Int = 0
-    var anInt993: Int = 0
-    var anInt994: Int = 0
+    private var anInt983: Int
+    private var anInt985: Int
+    private var anInt986: Int
+    private var anInt987: Int
+    private var anInt988: Int = 0
+    private var anInt989: Int
+    private var anInt990: Int
+    private var anInt992: Int = 0
+    private var anInt993: Int = 0
+    private var anInt994: Int = 0
 
     private fun parse(buffer: ByteBuffer) {
         while (true) {
@@ -174,7 +174,7 @@ class RenderAnimationDefinition {
     companion object {
         fun forId(animId: Int): RenderAnimationDefinition? {
             if (animId == -1) return null
-            val data = getData(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE, animId)
+            val data = getData(Archive.JS5_CONFIG, Group.BAS_TYPE, animId)
             val defs = RenderAnimationDefinition()
             if (data != null) {
                 defs.parse(ByteBuffer.wrap(data))
@@ -183,7 +183,7 @@ class RenderAnimationDefinition {
                     RenderAnimationDefinition::class.java,
                     Log.ERR,
                     "No definitions found for render animation $animId, size=" +
-                            getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE) + "!",
+                            getArchiveCapacity(Archive.JS5_CONFIG, Group.BAS_TYPE) + "!",
                 )
             }
             return defs

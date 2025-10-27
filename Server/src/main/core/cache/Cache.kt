@@ -65,10 +65,10 @@ object Cache {
      * @return A byte array containing CRC and revision info for each cache index.
      */
     private fun generateUKeys(): ByteArray {
-        val buffer = ByteBuffer.allocate(cacheLibrary.indices().size * 8)
-        for (index in cacheLibrary.indices()) {
-            buffer.putInt(index.crc)
-            buffer.putInt(index.revision)
+        val buffer = ByteBuffer.allocate(cacheLibrary.indices.size * 8)
+        for (index in cacheLibrary.indices) {
+            index?.crc?.let { buffer.putInt(it) }
+            index?.revision?.let { buffer.putInt(it) }
         }
         return buffer.array()
     }
@@ -79,7 +79,7 @@ object Cache {
      * @param index The cache index to retrieve.
      * @return The corresponding `Index` object.
      */
-    fun getIndex(index: CacheIndex): Index = cacheLibrary.index(index.id)
+    fun getIndex(index: Archive): Index = cacheLibrary.index(index.id)!!
 
     /**
      * Gets data from the cache for the index, archive, and file.
@@ -91,7 +91,7 @@ object Cache {
      */
     @JvmStatic
     fun getData(
-        index: CacheIndex,
+        index: Archive,
         archive: Int,
         file: Int,
     ): ByteArray? = cacheLibrary.data(index.id, archive, file, null)
@@ -106,8 +106,8 @@ object Cache {
      */
     @JvmStatic
     fun getData(
-        index: CacheIndex,
-        archive: CacheArchive,
+        index: Archive,
+        archive: Group,
         file: Int,
     ): ByteArray? = cacheLibrary.data(index.id, archive.id, file, null)
 
@@ -120,7 +120,7 @@ object Cache {
      */
     @JvmStatic
     fun getData(
-        index: CacheIndex,
+        index: Archive,
         archive: String,
     ): ByteArray? = cacheLibrary.data(index.id, archive, 0)
 
@@ -134,7 +134,7 @@ object Cache {
      */
     @JvmStatic
     fun getData(
-        index: CacheIndex,
+        index: Archive,
         archive: String,
         xtea: IntArray,
     ): ByteArray? = cacheLibrary.data(index.id, archive, 0, xtea)
@@ -148,9 +148,9 @@ object Cache {
      */
     @JvmStatic
     fun getArchiveId(
-        index: CacheIndex,
+        index: Archive,
         archive: String,
-    ): Int = cacheLibrary.index(index.id).archiveId(archive)
+    ): Int = cacheLibrary.index(index.id)!!.archiveId(archive)
 
     /**
      * Gets the number of files within a given archive in a specific cache index.
@@ -161,12 +161,12 @@ object Cache {
      */
     @JvmStatic
     fun getArchiveCapacity(
-        index: CacheIndex,
-        archive: CacheArchive,
+        index: Archive,
+        archive: Group,
     ): Int =
         cacheLibrary
             .index(index.id)
-            .archive(archive.id)
+            ?.archive(archive.id)
             ?.files()
             ?.size ?: -1
 
@@ -179,10 +179,10 @@ object Cache {
      */
     @JvmStatic
     fun getArchiveFileCount(
-        index: CacheIndex,
+        index: Archive,
         archive: Int,
     ): Int {
-        val archiveObject = cacheLibrary.index(index.id).archive(archive)
+        val archiveObject = cacheLibrary.index(index.id)?.archive(archive)
         return archiveObject?.files()?.size ?: -1
     }
 
@@ -194,8 +194,10 @@ object Cache {
      * @return The total capacity of the index.
      */
     @JvmStatic
-    fun getIndexCapacity(index: CacheIndex): Int {
-        val lastArchive = (cacheLibrary.index(index.id).archives().last())
-        return (lastArchive.files().size) + (lastArchive.id * 256)
+    fun getIndexCapacity(index: Archive): Int {
+        val lastArchive = cacheLibrary.index(index.id)?.archives()?.lastOrNull() ?: return 0
+        val fileCount = lastArchive.files().size
+        val archiveOffset = lastArchive.id * 256
+        return fileCount + archiveOffset
     }
 }

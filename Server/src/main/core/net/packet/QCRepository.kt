@@ -3,7 +3,7 @@ package core.net.packet
 import content.global.skill.slayer.SlayerManager
 import core.api.getSlayerTask
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.cache.def.impl.DataMap
 import core.cache.def.impl.ItemDefinition
 import core.cache.util.ByteBufferExtensions
@@ -24,7 +24,7 @@ import java.util.*
  * @author Ceikry
  */
 object QCRepository {
-    private val quickChatIndex = Cache.getIndex(CacheIndex.QUICK_CHAT_MESSAGES)
+    private val quickChatIndex = Cache.getIndex(Archive.JS5_QUICKCHAT)
 
     /**
      * The entry method that connects to the other more specific methods
@@ -365,7 +365,7 @@ object QCRepository {
     }
 
     private fun getQCString(index: Int): String {
-        val data = Cache.getData(CacheIndex.QUICK_CHAT_MESSAGES, 1, index)
+        val data = Cache.getData(Archive.JS5_QUICKCHAT, 1, index)
         return ByteBufferExtensions.getString(ByteBuffer.wrap(data))
     }
 }

@@ -5,8 +5,8 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.ServerConstants
 import core.cache.Cache
-import core.cache.CacheArchive
-import core.cache.CacheIndex
+import core.cache.Group
+import core.cache.Archive
 import core.cache.def.impl.*
 import core.game.system.command.Privilege
 import core.game.world.map.RegionManager
@@ -354,7 +354,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
             try {
                 BufferedWriter(Files.newBufferedWriter(path)).use { bw ->
-                    val capacity = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.BAS_TYPE)
+                    val capacity = Cache.getArchiveCapacity(Archive.JS5_CONFIG, Group.BAS_TYPE)
                     for (i in 0 until capacity) {
                         val def = RenderAnimationDefinition.forId(i) ?: continue
                         bw.append("RenderAnim $i -> ")
@@ -393,7 +393,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
 
             val dataMapStrings = mutableListOf<String>()
-            val index = CacheIndex.ENUM_CONFIGURATION
+            val index = Archive.JS5_CONFIG_ENUM
             val archiveCount = Cache.getIndex(index).archives().size
 
             for (archiveId in 0 until archiveCount) {
@@ -639,7 +639,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Dumps identity kits data to a .json file.",
         ) { p, _ ->
 
-            val length = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.IDK_TYPE)
+            val length = Cache.getArchiveCapacity(Archive.JS5_CONFIG, Group.IDK_TYPE)
             val dump = File("dumps/identity_kits.json")
             val gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
 
@@ -694,7 +694,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
             val items = mutableListOf<Map<String, Any?>>()
 
-            for (itemId in 0 until Cache.getIndexCapacity(CacheIndex.ITEM_CONFIGURATION)) {
+            for (itemId in 0 until Cache.getIndexCapacity(Archive.JS5_CONFIG_OBJ)) {
                 val itemDef = ItemDefinition.forId(itemId) ?: continue
                 val itemMap =
                     itemDef::class
@@ -775,9 +775,9 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
                 val dataList = mutableListOf<Map<String, Any?>>()
 
-                val archiveFileCount = Cache.getArchiveFileCount(CacheIndex.CONFIGURATION, 26)
+                val archiveFileCount = Cache.getArchiveFileCount(Archive.JS5_CONFIG, 26)
                 for (fID in 0 until archiveFileCount) {
-                    val file = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.STRUCT_TYPE, fID)
+                    val file = Cache.getData(Archive.JS5_CONFIG, Group.STRUCT_TYPE, fID)
                     if (file != null) {
                         val def = Struct.decode(fID, file)
                         val map = mapOf(
@@ -829,7 +829,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
             val excludedFields = setOf("handlers")
 
-            for (npcId in 0 until Cache.getIndexCapacity(CacheIndex.NPC_CONFIGURATION)) {
+            for (npcId in 0 until Cache.getIndexCapacity(Archive.JS5_CONFIG_NPC)) {
                 val npcDef = NPCDefinition.forId(npcId) ?: continue
                 val npcMap = mutableMapOf<String, Any?>()
 

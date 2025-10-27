@@ -2,7 +2,7 @@ package core.cache.def.impl
 
 import core.cache.Cache.getData
 import core.cache.Cache.getIndexCapacity
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
 import java.nio.ByteBuffer
@@ -148,7 +148,7 @@ class IfaceDefinition {
 
         private fun loadAndParse(id: Int): IfaceDefinition {
             val def = IfaceDefinition()
-            val childCount = getIndexCapacity(CacheIndex.COMPONENTS)
+            val childCount = getIndexCapacity(Archive.JS5_INTERFACES)
             def.children = arrayOfNulls(childCount)
             def.id = id
             def.parent = id
@@ -167,7 +167,7 @@ class IfaceDefinition {
             def.parent = id
             defCache[def.id] = def
 
-            val dataRaw = getData(CacheIndex.COMPONENTS, id, childIndex) ?: return def
+            val dataRaw = getData(Archive.JS5_INTERFACES, id, childIndex) ?: return def
 
             val data = IoBuffer(-1, PacketHeader.NORMAL, ByteBuffer.wrap(dataRaw))
 

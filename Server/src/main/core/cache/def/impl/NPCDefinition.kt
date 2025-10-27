@@ -3,7 +3,7 @@ package core.cache.def.impl
 import core.api.getVarp
 import core.api.log
 import core.cache.Cache.getData
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.cache.def.Definition
 import core.game.interaction.OptionHandler
 import core.game.node.entity.npc.NPC
@@ -22,60 +22,60 @@ import java.nio.ByteBuffer
  * Represents the NPC definitions.
  */
 class NPCDefinition(id: Int) : Definition<NPC?>() {
-    @JvmField var size: Int = 1
-    @JvmField var combatLevel: Int
-    @JvmField var headIcons: Int
-    @JvmField var minimapDot: Boolean
-    @JvmField var dropTables: NPCDropTables = NPCDropTables(this)
-    @JvmField var ambientLight: Int
-    @JvmField var shadowLight: Int
-    @JvmField var modelSizeX: Int
-    @JvmField var rotated: Boolean
-    @JvmField var modelSizeY: Int
-    @JvmField var varbitId: Int
-    @JvmField var childNPCIds: IntArray? = null
-    @JvmField var ambientSoundId: Int
-    @JvmField var contrast: Int
-    @JvmField var modelPitch: Byte
-    @JvmField var clickable: Boolean
-    @JvmField var modelYaw: Int
-    @JvmField var modelRoll: Byte
-    @JvmField var visible: Boolean
-    @JvmField var hasRenderPriority: Boolean
-    @JvmField var originalColors: ShortArray? = null
-    @JvmField var recolorHueShift: ByteArray? = null
-    @JvmField var ambientSoundVolume: Short
-    @JvmField var hasShadow: Boolean
-    @JvmField var modelScaleX: Int
-    @JvmField var modifiedColors: ShortArray? = null
-    @JvmField var modelIds: IntArray
-    @JvmField var ambientSoundMinDelay: Int
-    @JvmField var ambientSoundMaxDelay: Int
-    @JvmField var ambientSoundLoops: Int
-    @JvmField var combatLevelOverride: Int
-    @JvmField var mapIconId: Int
-    @JvmField var cursorOp: Int
-    @JvmField var mapSceneId: Int
-    @JvmField var shadowModifier: Int
-    @JvmField var originalTextures: ShortArray? = null
-    @JvmField var clickableAreaId: Int
-    @JvmField var varpId: Int
-    @JvmField var transparency: Int
-    @JvmField var headIconModels: IntArray? = null
-    @JvmField var lightModifier: Short
-    @JvmField var modifiedTextures: ShortArray? = null
-    @JvmField var shadowOpacity: Int
-    @JvmField var modelScaleY: Int
-    @JvmField var cursor: Int
-    @JvmField var standAnimation: Int
-    @JvmField var walkAnimation: Int
-    @JvmField var renderAnimationId: Int = 0
-    @JvmField var combatDistance: Int = 0
-    @JvmField var combatGraphics: Array<Graphics?> = arrayOfNulls(3)
-    @JvmField var turnAnimation: Int = 0
-    @JvmField var turn180Animation: Int = 0
-    @JvmField var turnCWAnimation: Int = 0
-    @JvmField var turnCCWAnimation: Int = 0
+    private var size: Int = 1
+    private var combatLevel: Int
+    private var headIcons: Int
+    private var minimapDot: Boolean
+    private var dropTables: NPCDropTables = NPCDropTables(this)
+    private var ambientLight: Int
+    private var shadowLight: Int
+    private var modelSizeX: Int
+    private var rotated: Boolean
+    private var modelSizeY: Int
+    private var varbitId: Int
+    private var childNPCIds: IntArray? = null
+    private var ambientSoundId: Int
+    private var contrast: Int
+    private var modelPitch: Byte
+    private var clickable: Boolean
+    private var modelYaw: Int
+    private var modelRoll: Byte
+    private var visible: Boolean
+    private var hasRenderPriority: Boolean
+    private var originalColors: ShortArray? = null
+    private var recolorHueShift: ByteArray? = null
+    private var ambientSoundVolume: Short
+    private var hasShadow: Boolean
+    private var modelScaleX: Int
+    private var modifiedColors: ShortArray? = null
+    private var modelIds: IntArray
+    private var ambientSoundMinDelay: Int
+    private var ambientSoundMaxDelay: Int
+    private var ambientSoundLoops: Int
+    private var combatLevelOverride: Int
+    private var mapIconId: Int
+    private var cursorOp: Int
+    private var mapSceneId: Int
+    private var shadowModifier: Int
+    private var originalTextures: ShortArray? = null
+    private var clickableAreaId: Int
+    private var varpId: Int
+    private var transparency: Int
+    private var headIconModels: IntArray? = null
+    private var lightModifier: Short
+    private var modifiedTextures: ShortArray? = null
+    private var shadowOpacity: Int
+    private var modelScaleY: Int
+    private var cursor: Int
+    private var standAnimation: Int
+    private var walkAnimation: Int
+    private var renderAnimationId: Int = 0
+    private var combatDistance: Int = 0
+    private var combatGraphics: Array<Graphics?> = arrayOfNulls(3)
+    private var turnAnimation: Int = 0
+    private var turn180Animation: Int = 0
+    private var turnCWAnimation: Int = 0
+    private var turnCCWAnimation: Int = 0
 
     init {
         this.id = id
@@ -582,7 +582,7 @@ class NPCDefinition(id: Int) : Definition<NPC?>() {
             var def = DEFINITIONS[id]
             if (def == null) {
                 def = NPCDefinition(id)
-                val data = getData(CacheIndex.NPC_CONFIGURATION, id ushr 7, id and 0x7f)
+                val data = getData(Archive.JS5_CONFIG_NPC, id ushr 7, id and 0x7f)
                 if (data == null) {
                     if (id != -1) {
                     }

@@ -1,6 +1,6 @@
 package core.cache.def.impl;
 
-import core.cache.CacheIndex;
+import core.cache.Archive;
 import core.cache.def.Definition;
 import core.cache.util.ByteBufferExtensions;
 import core.game.interaction.OptionHandler;
@@ -577,8 +577,8 @@ public class SceneryDefinition extends Definition<Scenery> {
      * @throws Throwable the throwable.
      */
     public static void parse() throws Throwable {
-        for (int objectId = 0; objectId < getIndexCapacity(CacheIndex.SCENERY_CONFIGURATION); objectId++) {
-            byte[] data = getData(CacheIndex.SCENERY_CONFIGURATION, objectId >>> 8, objectId & 0xFF);
+        for (int objectId = 0; objectId < getIndexCapacity(Archive.JS5_CONFIG_LOC); objectId++) {
+            byte[] data = getData(Archive.JS5_CONFIG_LOC, objectId >>> 8, objectId & 0xFF);
             if (data == null) {
                 SceneryDefinition.getDefinitions().put(objectId, new SceneryDefinition());
                 continue;

@@ -1,7 +1,7 @@
 package core.game.world.map;
 
 import core.cache.Cache;
-import core.cache.CacheIndex;
+import core.cache.Archive;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
@@ -326,7 +326,7 @@ public class Region {
             int regionY = regionId & 0xFF;
             String regionName = regionX + "_" + regionY;
 
-            int mapscapeId = Cache.getArchiveId(CacheIndex.LANDSCAPES, "m" + regionName);
+            int mapscapeId = Cache.getArchiveId(Archive.JS5_MAPS, "m" + regionName);
             if (mapscapeId < 0 && !isDynamic) {
                 region.loaded = true;
                 return;
@@ -341,7 +341,7 @@ public class Region {
             }
 
             if (mapscapeId > -1) {
-                byte[] mapscapeBytes = Cache.getData(CacheIndex.LANDSCAPES, "m" + regionName);
+                byte[] mapscapeBytes = Cache.getData(Archive.JS5_MAPS, "m" + regionName);
                 if (mapscapeBytes == null)
                     return;
 
@@ -352,9 +352,9 @@ public class Region {
             region.hasFlags = isDynamic;
             region.loaded = true;
 
-            int landscapeId = Cache.getArchiveId(CacheIndex.LANDSCAPES, "l" + regionName);
+            int landscapeId = Cache.getArchiveId(Archive.JS5_MAPS, "l" + regionName);
             if (landscapeId > -1) {
-                byte[] landscapeBytes = Cache.getData(CacheIndex.LANDSCAPES, "l" + regionName,
+                byte[] landscapeBytes = Cache.getData(Archive.JS5_MAPS, "l" + regionName,
                         XteaParser.Companion.getRegionXTEA(regionId));
 
                 if (landscapeBytes == null || landscapeBytes.length < 4)

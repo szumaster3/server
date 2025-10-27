@@ -1,7 +1,7 @@
 package core.cache.def.impl
 
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.net.g1
 import core.net.g2
 import core.net.g2s
@@ -12,21 +12,21 @@ import java.nio.ByteBuffer
  * Represents a graphical definition used for rendering graphics.
  */
 class GraphicDefinition {
-    var modelID: Int = 0
-    var animationID: Int = -1
-    var sizeXY: Int = 128
-    var sizeZ: Int = 128
-    var rotation: Int = 0
-    var ambient: Int = 0
-    var originalModelColor: ShortArray? = null
-    var modifiedModelColor: ShortArray? = null
-    var originalTextureColor: ShortArray? = null
-    var modifiedTextureColor: ShortArray? = null
-    var castsShadow: Boolean = false
-    var modelShadow: Int = 0
-    var graphicsId: Int = 0
-    var renderPriority: Byte = 0
-    var shadowOpacity: Int = -1
+    private var modelID: Int = 0
+    private var animationID: Int = -1
+    private var sizeXY: Int = 128
+    private var sizeZ: Int = 128
+    private var rotation: Int = 0
+    private var ambient: Int = 0
+    private var originalModelColor: ShortArray? = null
+    private var modifiedModelColor: ShortArray? = null
+    private var originalTextureColor: ShortArray? = null
+    private var modifiedTextureColor: ShortArray? = null
+    private var castsShadow: Boolean = false
+    private var modelShadow: Int = 0
+    private var graphicsId: Int = 0
+    private var renderPriority: Byte = 0
+    private var shadowOpacity: Int = -1
 
     companion object {
         private val graphicDefinitions = mutableMapOf<Int, GraphicDefinition>()
@@ -35,7 +35,7 @@ class GraphicDefinition {
          * Get graphic definition by id.
          */
         fun forId(gfxId: Int): GraphicDefinition = graphicDefinitions[gfxId] ?: run {
-            val data = Cache.getData(CacheIndex.GRAPHICS, gfxId ushr 8, gfxId and 0xFF)
+            val data = Cache.getData(Archive.JS5_CONFIG_SPOT, gfxId ushr 8, gfxId and 0xFF)
             GraphicDefinition().apply {
                 graphicsId = gfxId
                 data?.let { readValueLoop(ByteBuffer.wrap(it)) }

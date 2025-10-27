@@ -2,7 +2,7 @@ package core.cache.def.impl
 
 import core.api.getVarbit
 import core.cache.Cache.getData
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.game.node.entity.player.Player
 import core.net.g1
 import core.net.g2
@@ -92,7 +92,7 @@ class VarbitDefinition {
             MAPPING[id]?.let { return it }
 
             val def = VarbitDefinition(id)
-            val bs = getData(CacheIndex.VAR_BIT, id ushr 10, id and 0x3FF)
+            val bs = getData(Archive.JS5_CONFIG_STRUCT, id ushr 10, id and 0x3FF)
             if (bs != null) {
                 val buffer = ByteBuffer.wrap(bs)
                 var opcode: Int

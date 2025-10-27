@@ -2,8 +2,8 @@ package core.cache.def.impl
 
 import core.api.log
 import core.cache.Cache
-import core.cache.CacheArchive
-import core.cache.CacheIndex
+import core.cache.Group
+import core.cache.Archive
 import core.cache.util.ByteBufferExtensions
 import core.net.g1
 import core.net.g4
@@ -49,7 +49,7 @@ class Struct(val id: Int) {
          * @return The [Struct] instance.
          */
         fun get(id: Int): Struct = definitions[id] ?: run {
-            val data = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.STRUCT_TYPE, id)
+            val data = Cache.getData(Archive.JS5_CONFIG, Group.STRUCT_TYPE, id)
             decode(id, data).also { definitions[id] = it }
         }
 

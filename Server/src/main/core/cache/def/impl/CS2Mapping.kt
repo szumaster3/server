@@ -1,7 +1,7 @@
 package core.cache.def.impl
 
 import core.cache.Cache
-import core.cache.CacheIndex
+import core.cache.Archive
 import core.game.world.GameWorld
 import core.net.g1
 import core.net.g2
@@ -76,7 +76,7 @@ class CS2Mapping private constructor(val scriptId: Int) {
         fun forId(scriptId: Int): CS2Mapping? {
             maps[scriptId]?.let { return it }
             val mapping = CS2Mapping(scriptId)
-            val bs = Cache.getData(CacheIndex.ENUM_CONFIGURATION, scriptId ushr 8, scriptId and 0xFF) ?: return null
+            val bs = Cache.getData(Archive.JS5_CONFIG_ENUM, scriptId ushr 8, scriptId and 0xFF) ?: return null
             mapping.load(ByteBuffer.wrap(bs))
             maps[scriptId] = mapping
             return mapping

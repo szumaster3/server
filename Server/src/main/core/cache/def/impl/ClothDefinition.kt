@@ -2,8 +2,8 @@ package core.cache.def.impl
 
 import core.ServerConstants
 import core.cache.Cache
-import core.cache.CacheArchive
-import core.cache.CacheIndex
+import core.cache.Group
+import core.cache.Archive
 import core.net.g1
 import core.net.g2
 import core.net.g2s
@@ -17,10 +17,10 @@ class ClothDefinition {
     var bodyModelIds: IntArray? = null
     var notSelectable: Boolean = false
     var headModelIds: IntArray = intArrayOf(-1, -1, -1, -1, -1)
-    var originalColors: IntArray? = null
-    var modifiedColors: IntArray? = null
-    var originalTextureColors: IntArray? = null
-    var modifiedTextureColors: IntArray? = null
+    private var originalColors: IntArray? = null
+    private var modifiedColors: IntArray? = null
+    private var originalTextureColors: IntArray? = null
+    private var modifiedTextureColors: IntArray? = null
 
     companion object {
         /**
@@ -28,7 +28,7 @@ class ClothDefinition {
          */
         fun forId(clothId: Int): ClothDefinition {
             val def = ClothDefinition()
-            val data = Cache.getData(CacheIndex.CONFIGURATION, CacheArchive.IDK_TYPE, clothId)
+            val data = Cache.getData(Archive.JS5_CONFIG, Group.IDK_TYPE, clothId)
             data?.let { def.load(ByteBuffer.wrap(it)) }
             return def
         }
@@ -43,7 +43,7 @@ class ClothDefinition {
             } catch (e: Throwable) {
                 e.printStackTrace()
             }
-            val length = Cache.getArchiveCapacity(CacheIndex.CONFIGURATION, CacheArchive.IDK_TYPE)
+            val length = Cache.getArchiveCapacity(Archive.JS5_CONFIG, Group.IDK_TYPE)
             for (i in 0 until length) forId(i)
         }
     }
