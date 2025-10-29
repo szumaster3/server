@@ -19,25 +19,12 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) in 1..12) {
-            npc(
-                FaceAnim.OLD_DEFAULT,
-                "You needs to stay away from dis place...yous get da",
-                "sickies and mebe yous goes to dead if yous da unlucky",
-                "fing.",
-            )
-            stage = 0
-        } else if (getVarbit(player, Vars.VARBIT_QUEST_ZOGRE_GATE_PASSAGE_496) == 1 ||
-            getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13
-        ) {
+            npc(FaceAnim.OLD_DEFAULT, "You needs to stay away from dis place...yous get da", "sickies and mebe yous goes to dead if yous da unlucky", "fing.")
+        } else if (getVarbit(player, Vars.VARBIT_QUEST_ZOGRE_GATE_PASSAGE_496) == 1 || getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13) {
             npc(FaceAnim.OLD_DEFAULT, "Yeah, whats yous wants creatures?")
             stage = END_DIALOGUE
         } else {
-            npc(
-                FaceAnim.OLD_DEFAULT,
-                "You needs to stay away from dis place...yous get da",
-                "sickies and mebe yous goes to dead if yous da unlucky",
-                "fing.",
-            )
+            npc(FaceAnim.OLD_DEFAULT, "You needs to stay away from dis place...yous get da", "sickies and mebe yous goes to dead if yous da unlucky", "fing.")
             stage = 5
         }
         return true
@@ -45,25 +32,13 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                player(
-                    "But Grish has asked me to look into this place and find",
-                    "out why all the undead ogres are here.",
-                ).also {
-                    stage++
-                }
-            1 ->
-                npc(
-                    FaceAnim.OLD_DEFAULT,
-                    "Ok, dat is da big, big scary, danger fing!",
-                    "You's sure you's wants to go in?",
-                ).also {
-                    stage++
-                }
+            0 -> player("But Grish has asked me to look into this place and find", "out why all the undead ogres are here.").also { stage++ }
+            1 -> npc(FaceAnim.OLD_DEFAULT, "Ok, dat is da big, big scary, danger fing!", "You's sure you's wants to go in?").also { stage++ }
             2 -> player("Yes, I'm sure.").also { stage++ }
             3 -> npc(FaceAnim.OLD_DEFAULT, "Ok, I opens da stoppa's for yous creature.").also { stage++ }
             4 -> {
                 end()
+                lock(player, 6)
                 submitWorldPulse(
                     object : Pulse() {
                         var counter = 0
@@ -86,15 +61,7 @@ class OgreGuardDialogue(player: Player? = null) : Dialogue(player) {
                                 5 -> {
                                     end()
                                     face(npc.asNpc(), player, 2)
-                                    sendNPCDialogue(
-                                        player,
-                                        NPCs.OGRE_GUARD_2042,
-                                        "Ok der' yous goes!",
-                                        FaceAnim.OLD_DEFAULT,
-                                    ).also {
-                                        stage =
-                                            END_DIALOGUE
-                                    }
+                                    sendNPCDialogue(player, NPCs.OGRE_GUARD_2042, "Ok der' yous goes!", FaceAnim.OLD_DEFAULT).also { stage = END_DIALOGUE }
                                     return true
                                 }
                             }

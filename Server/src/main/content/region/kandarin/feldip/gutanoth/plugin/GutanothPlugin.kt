@@ -40,11 +40,7 @@ class GutanothPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        on(
-            STAIRS_TO_CRYPT,
-            IntType.SCENERY,
-            "climb-down"
-        ) { player, node ->
+        on(STAIRS_TO_CRYPT, IntType.SCENERY, "climb-down") { player, node ->
             submitWorldPulse(
                 object : Pulse() {
                     var counter = 0
@@ -61,11 +57,7 @@ class GutanothPlugin : InteractionListener {
                                     if (node.location == Location(2443, 9417, 2)) {
                                         Location(2442, 9418, 0)
                                     } else {
-                                        Location(
-                                            2477,
-                                            9437,
-                                            2,
-                                        )
+                                        Location(2477, 9437, 2)
                                     },
                                 )
                             }
@@ -77,11 +69,7 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        on(
-            STAIRS_TO_JIGGIG,
-            IntType.SCENERY,
-            "climb-up"
-        ) { player, node ->
+        on(STAIRS_TO_JIGGIG, IntType.SCENERY, "climb-up") { player, node ->
             teleport(
                 player,
                 if (node.location == Location(2443, 9417, 0)) Location(2446, 9417, 2) else Location(2485, 3045, 0),
@@ -90,11 +78,7 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        on(
-            BROKEN_LECTURN,
-            IntType.SCENERY,
-            "search"
-        ) { player, _ ->
+        on(BROKEN_LECTURN, IntType.SCENERY, "search") { player, _ ->
             if (player.inCombat()) {
                 sendMessage(player, "You're in mortal danger, you don't have time to search!")
                 return@on true
@@ -102,33 +86,17 @@ class GutanothPlugin : InteractionListener {
 
             animate(player, Animation(Animations.HUMAN_BURYING_BONES_827))
             sendMessage(player, "You search the broken down lecturn.")
-            if (inInventory(
-                    player,
-                    TORN_PAGE
-                ) || getAttribute(player, ZogreUtils.TORN_PAGE_ACQUIRED, false)
-            ) {
+            if (inInventory(player, TORN_PAGE) || getAttribute(player, ZogreUtils.TORN_PAGE_ACQUIRED, false)) {
                 sendMessage(player, "You find nothing here this time.")
             } else {
                 setAttribute(player, ZogreUtils.TORN_PAGE_ACQUIRED, true)
-                sendDoubleItemDialogue(
-                    player,
-                    -1,
-                    TORN_PAGE,
-                    "You find a half torn page...it has spidery writing all over it.",
-                )
-                addItemOrDrop(
-                    player,
-                    TORN_PAGE
-                )
+                sendDoubleItemDialogue(player, -1, TORN_PAGE, "You find a half torn page...it has spidery writing all over it.")
+                addItemOrDrop(player, TORN_PAGE)
             }
             return@on true
         }
 
-        on(
-            SKELETON,
-            IntType.SCENERY,
-            "search"
-        ) { player, _ ->
+        on(SKELETON, IntType.SCENERY, "search") { player, _ ->
             if (getAttribute(player, ZogreUtils.ZOMBIE_NPC_ACTIVE, false)) {
                 sendMessage(player, "You find nothing on the corpse.")
             } else if (player.inCombat()) {
@@ -140,21 +108,13 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        on(
-            SPAWNED_ZOMBIE,
-            IntType.NPC,
-            "talk-to"
-        ) { _, node ->
+        on(SPAWNED_ZOMBIE, IntType.NPC, "talk-to") { _, node ->
             val npc = node.asNpc()
             sendChat(npc, "Raaarrrggghhh")
             return@on true
         }
 
-        on(
-            COFFIN,
-            IntType.SCENERY,
-            "pick-lock"
-        ) { player, node ->
+        on(COFFIN, IntType.SCENERY, "pick-lock") { player, node ->
             val sceneryId = node.asScenery()
             val loot = content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.Companion.forId(sceneryId.id)?.roll()
                 ?.firstOrNull() ?: return@on false
@@ -190,13 +150,7 @@ class GutanothPlugin : InteractionListener {
             submitIndividualPulse(
                 player,
                 object : Pulse(2) {
-                    var table = PickpocketPlugin.pickpocketRoll(
-                        player,
-                        84.0,
-                        240.0,
-                        content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.OGRE_COFFIN.table
-                    )
-
+                    var table = PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.OGRE_COFFIN.table)
                     override fun pulse(): Boolean {
                         if (table != null) {
                             sendMessage(player, "You unlock the coffin...")
@@ -215,32 +169,15 @@ class GutanothPlugin : InteractionListener {
                             addItem(player, loot.id, loot.amount)
                             rewardXP(player, Skills.THIEVING, 1.0)
                             if (loot.id in
-                                intArrayOf(
-                                    Items.FAYRG_BONES_4830,
-                                    Items.RAURG_BONES_4832,
-                                    Items.OURG_BONES_4834,
-                                    Items.ZOGRE_BONES_4812,
-                                )
+                                intArrayOf(Items.FAYRG_BONES_4830, Items.RAURG_BONES_4832, Items.OURG_BONES_4834, Items.ZOGRE_BONES_4812)
                             ) {
-                                sendDoubleItemDialogue(
-                                    player,
-                                    -1,
-                                    loot.id,
-                                    "You find some ancestral ${getItemName(loot.id)}.",
-                                )
+                                sendDoubleItemDialogue(player, -1, loot.id, "You find some ancestral ${getItemName(loot.id)}.")
                                 sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
                             } else {
-                                sendItemDialogue(
-                                    player,
-                                    if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id,
-                                    "You find something...",
-                                )
+                                sendItemDialogue(player, if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id, "You find something...")
                             }
                         } else {
-                            sendMessage(
-                                player,
-                                "You fail to pick the lock - your fingers get numb from fumbling with the lock.",
-                            )
+                            sendMessage(player, "You fail to pick the lock - your fingers get numb from fumbling with the lock.")
                             val disease = RandomFunction.random(100) <= 4
                             if (disease) {
                                 sendMessage(player, "Your clumsiness releases a disease ridden spore cloud.")
@@ -260,22 +197,12 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        on(
-            COFFIN,
-            IntType.SCENERY,
-            "open"
-        ) { player, node ->
+        on(COFFIN, IntType.SCENERY, "open") { player, node ->
             val sceneryId = node.asScenery()
-            val loot = content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.Companion.forId(sceneryId.id)?.roll()
-                ?.firstOrNull() ?: return@on false
+            val loot = content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.Companion.forId(sceneryId.id)?.roll()?.firstOrNull() ?: return@on false
 
             if (getVarbit(player, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) < 13) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.OGRE_GUARD_2042,
-                    "Yous best not touch dem till yous chat wiv Grish - use look at dem again more when yous do stuff for Grish.",
-                    FaceAnim.OLD_DEFAULT,
-                )
+                sendNPCDialogue(player, NPCs.OGRE_GUARD_2042, "Yous best not touch dem till yous chat wiv Grish - use look at dem again more when yous do stuff for Grish.", FaceAnim.OLD_DEFAULT)
                 return@on false
             }
 
@@ -299,39 +226,21 @@ class GutanothPlugin : InteractionListener {
                     object : Pulse(2) {
                         override fun pulse(): Boolean {
                             sendMessage(player, "The key crumbles in the lock!")
-                            replaceScenery(
-                                sceneryId,
-                                if (sceneryId.id ==
-                                    Scenery.OGRE_COFFIN_6848
-                                ) {
+                            replaceScenery(sceneryId,
+                                if (sceneryId.id == Scenery.OGRE_COFFIN_6848) {
                                     Scenery.OGRE_COFFIN_6890
                                 } else {
                                     Scenery.OGRE_COFFIN_6851
-                                },
-                                2,
+                                }, 2
                             )
                             addItem(player, loot.id, loot.amount)
                             if (loot.id in
-                                intArrayOf(
-                                    Items.FAYRG_BONES_4830,
-                                    Items.RAURG_BONES_4832,
-                                    Items.OURG_BONES_4834,
-                                    Items.ZOGRE_BONES_4812,
-                                )
+                                intArrayOf(Items.FAYRG_BONES_4830, Items.RAURG_BONES_4832, Items.OURG_BONES_4834, Items.ZOGRE_BONES_4812)
                             ) {
-                                sendDoubleItemDialogue(
-                                    player,
-                                    -1,
-                                    loot.id,
-                                    "You find some ancestral ${getItemName(loot.id)}.",
-                                )
+                                sendDoubleItemDialogue(player, -1, loot.id, "You find some ancestral ${getItemName(loot.id)}.")
                                 sendMessage(player, "You find some ancestral ${getItemName(loot.id)}.")
                             } else {
-                                sendItemDialogue(
-                                    player,
-                                    if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id,
-                                    "You find something...",
-                                )
+                                sendItemDialogue(player, if (loot.id == Items.COINS_995) Items.COINS_8897 else loot.id, "You find something...")
                             }
                             return true
                         }
@@ -341,34 +250,14 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        on(
-            QUEST_COFFIN,
-            IntType.SCENERY,
-            "search"
-        ) { player, _ ->
+        on(QUEST_COFFIN, IntType.SCENERY, "search") { player, _ ->
             openDialogue(
                 player,
                 object : DialogueFile() {
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
+                    override fun handle(componentID: Int, buttonID: Int) {
                         when (stage) {
-                            0 ->
-                                sendDialogueLines(
-                                    player,
-                                    "You search the coffin and find a small geometrically shaped hole in",
-                                    "the side. It looks as if this hole was made with a considerable amount",
-                                    "of force, maybe the thing which made the hole is still inside?",
-                                ).also { stage++ }
-
-                            1 ->
-                                sendDialogueLines(
-                                    player,
-                                    "The lock looks quite crude, with some skill and a slender blade, you",
-                                    "may be able to force it.",
-                                ).also { stage++ }
-
+                            0 -> sendDialogueLines(player, "You search the coffin and find a small geometrically shaped hole in", "the side. It looks as if this hole was made with a considerable amount", "of force, maybe the thing which made the hole is still inside?").also { stage++ }
+                            1 -> sendDialogueLines(player, "The lock looks quite crude, with some skill and a slender blade, you", "may be able to force it.").also { stage++ }
                             2 -> {
                                 end()
                                 setAttribute(player, "/save:${ZogreUtils.ZOMBIE_NPC_ACTIVE}", true)
@@ -392,19 +281,8 @@ class GutanothPlugin : InteractionListener {
                         buttonID: Int,
                     ) {
                         when (stage) {
-                            0 ->
-                                sendItemDialogue(
-                                    player,
-                                    Items.KNIFE_5605,
-                                    "With some skill you manage to slide the blade along the lock edge and click into place the teeth of the primitive mechanism.",
-                                ).also { stage++ }
-
-                            1 ->
-                                sendDialogue(
-                                    player,
-                                    "The lid looks heavy, but now that you've unlocked it, you may be able to lift it. You prepare yourself.",
-                                ).also { stage++ }
-
+                            0 -> sendItemDialogue(player, Items.KNIFE_5605, "With some skill you manage to slide the blade along the lock edge and click into place the teeth of the primitive mechanism.").also { stage++ }
+                            1 -> sendDialogue(player, "The lid looks heavy, but now that you've unlocked it, you may be able to lift it. You prepare yourself.").also { stage++ }
                             2 -> {
                                 player("Urrrgggg.")
                                 sendChat(player, "Urrrgggg.")
@@ -456,10 +334,7 @@ class GutanothPlugin : InteractionListener {
             openDialogue(
                 player,
                 object : DialogueFile() {
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
+                    override fun handle(componentID: Int, buttonID: Int) {
                         when (stage) {
                             0 -> {
                                 sendDoubleItemDialogue(player, -1, BACKPACK, "Just before you open the backpack, you notice a small leather patch with the monkier: 'B.Uahn', on it.").also { stage++ }

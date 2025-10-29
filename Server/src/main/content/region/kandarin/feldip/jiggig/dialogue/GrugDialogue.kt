@@ -17,10 +17,7 @@ class GrugDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean = true
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
     override fun newInstance(player: Player?): Dialogue = GrugDialogue(player)
 

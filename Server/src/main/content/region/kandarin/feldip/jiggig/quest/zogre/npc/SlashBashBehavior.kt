@@ -16,11 +16,7 @@ class SlashBashBehavior : NPCBehavior(NPCs.SLASH_BASH_2060) {
         self.task.undead = true
     }
 
-    override fun beforeAttackFinalized(
-        self: NPC,
-        victim: Entity,
-        state: BattleState,
-    ) {
+    override fun beforeAttackFinalized(self: NPC, victim: Entity, state: BattleState) {
         super.beforeAttackFinalized(self, victim, state)
         if (RandomFunction.roll(10)) {
             registerTimer(victim, spawnTimer("disease", minutesToTicks(22.5)))
