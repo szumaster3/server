@@ -8,16 +8,22 @@ import core.game.system.timer.impl.Disease
 import core.game.world.repository.Repository
 import shared.consts.Items
 import kotlin.math.min
+import kotlin.math.roundToInt
 
-class InoculationBracePlugin :
-    InteractionListener,
-    Commands {
+class InoculationBracePlugin : InteractionListener, Commands {
+
     private val maxProtection = 275
+    private val maxCharges = 1000
+    private val chargePerDamage = maxCharges.toDouble() / maxProtection
 
     override fun defineListeners() {
         on(Items.INOCULATION_BRACE_11088, IntType.ITEM, "operate") { player, node ->
-            val remainingProtection = getCharge(node.asItem())
-            sendMessage(player, "Your bracelet will protect you from $remainingProtection points of disease damage.")
+            val charges = getCharge(node.asItem())
+            val remainingProtection = ((charges / chargePerDamage).coerceAtLeast(0.0)).roundToInt()
+            sendMessage(
+                player,
+                "Your bracelet will protect you from $remainingProtection more points of disease damage."
+            )
             return@on true
         }
 
@@ -32,42 +38,52 @@ class InoculationBracePlugin :
 
             val diseaseTimer = getTimer<Disease>(player)
             if (diseaseTimer != null && isDiseased(player)) {
-                val blockedDamage = min(diseaseTimer.hitsLeft, charges)
-                charges -= blockedDamage
-                setCharge(node, charges)
+                val remainingProtection = (charges / chargePerDamage).toInt().coerceAtLeast(0)
+                val blockedDamage = min(diseaseTimer.hitsLeft, remainingProtection)
+                val usedCharges = (blockedDamage * chargePerDamage).roundToInt()
+                charges -= usedCharges
+                setCharge(node, charges.coerceAtLeast(0))
 
                 if (charges <= 0) {
-                    sendMessage(player, "Your bracelet crumbles to dust.")
+                    sendMessage(player, "Your bracelet crumbles to dust after absorbing disease damage.")
                     removeItem(player, node, Container.EQUIPMENT)
+                } else {
+                    val remaining = ((charges / chargePerDamage).coerceAtLeast(0.0)).roundToInt()
+                    sendMessage(
+                        player,
+                        "Your bracelet absorbs $blockedDamage points of disease damage. Remaining protection: $remaining."
+                    )
                 }
             }
+
             return@onEquip true
         }
     }
 
     override fun defineCommands() {
-        define("disease", privilege = Privilege.ADMIN, "Disease for testing purposes.") { player, strings ->
-            if (strings.size != 3) {
-                sendMessage(player, "Invalid arguments. Use: ::disease username damage")
+        define(
+            "disease",
+            privilege = Privilege.ADMIN,
+            description = "Applies disease damage for testing purposes."
+        ) { player, args ->
+
+            if (args.size != 3) {
+                sendMessage(player, "Usage: ::disease <username> <damage>")
                 return@define
             }
 
-            val targetName = strings[1]
-            val damage = strings[2].toIntOrNull()
+            val targetName = args[1]
+            val damage = args[2].toIntOrNull()
             val targetPlayer = Repository.getPlayerByName(targetName)
 
-            if (targetPlayer == null) {
-                sendMessage(player, "Player [$targetName] does not exist.")
-                return@define
+            when {
+                targetPlayer == null -> sendMessage(player, "Player '$targetName' does not exist.")
+                damage == null -> sendMessage(player, "Damage must be a valid number.")
+                else -> {
+                    applyDisease(player, targetPlayer, damage)
+                    sendMessage(player, "Applied $damage disease damage to $targetName.")
+                }
             }
-
-            if (damage == null) {
-                sendMessage(player, "Damage must be a valid integer. Use: ::disease username damage")
-                return@define
-            }
-
-            applyDisease(targetPlayer, targetPlayer, damage)
-            sendMessage(player, "Applied [$damage] disease damage to [$targetName].")
         }
     }
 }

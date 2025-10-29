@@ -1999,8 +1999,8 @@ object Graphics {
     const val GRAPHIC_1959 = 1959
     const val GRAPHIC_1960 = 1960
     const val GRAPHIC_1961 = 1961
-    const val GRAPHIC_1962 = 1962
-    const val GRAPHIC_1963 = 1963
+    const val FALADOR_SHIELD_PRAY_RESTORE_1962 = 1962
+    const val FALADOR_SHIELD_PRAY_RESTORE_1963 = 1963
     const val FALADOR_SHIELD_PRAY_RESTORE_1964 = 1964
     const val FALADOR_SHIELD_3_EMOTE_1965 = 1965
     const val FALADOR_SHIELD_1_EMOTE_1966 = 1966

@@ -6,6 +6,9 @@ import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.player.Player
 
+/**
+ * Handles the "search" option for bird nest items.
+ */
 class BirdNestPlugin : InteractionListener {
 
     private val nestIds = BirdNestDropTable.values().map { it.nest.id }.toIntArray()
