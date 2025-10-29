@@ -26,7 +26,7 @@ class TutorialPlugin : InteractionListener {
         on(RS_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             val tutorialStage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
 
-            if (tutorialStage != 3) {
+            if (tutorialStage < 4) {
                 player.dialogueInterpreter.sendPlainMessage(
                     false,
                     "",
@@ -34,6 +34,11 @@ class TutorialPlugin : InteractionListener {
                     "proceed through this door.",
                     ""
                 )
+                return@on false
+            }
+
+            if(tutorialStage == 4) {
+                sendMessage(player, "You've already done that. Perhaps you should move on.")
                 return@on false
             }
 

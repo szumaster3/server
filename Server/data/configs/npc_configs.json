@@ -1939,18 +1939,18 @@
     "magic_level": "1",
     "defence_animation": "5489",
     "weakness": "8",
-    "slayer_exp": "17",
+    "slayer_exp": "13",
     "magic_animation": "5485",
     "death_animation": "5491",
     "name": "Skeleton",
-    "defence_level": "24",
+    "defence_level": "23",
     "safespot": null,
     "lifepoints": "17",
-    "strength_level": "24",
+    "strength_level": "23",
     "id": "92",
-    "aggressive": "false",
+    "aggressive": "true",
     "range_level": "1",
-    "attack_level": "24"
+    "attack_level": "23"
   },
   {
     "examine": "Could do with gaining a few pounds.",

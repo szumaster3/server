@@ -420,4 +420,7 @@ internal object GameAttributes {
 
     // Barbarian fishing
     const val BARBARIAN_BAREHAND_FISHING = "/save:fishing:technique:barehand"
+
+    // Returning Clarence miniquest.
+    const val RETURNING_CLARENCE_COMPLETE = "/save:hansand2:complete"
 }

@@ -15,7 +15,7 @@ class ZavisticRarveNPC(
     id: Int = 0,
     location: Location? = null,
 ) : AbstractNPC(id, location) {
-    var clearTime = 0
+    private var clearTime = 0
     private val player: Player? = null
 
     override fun construct(

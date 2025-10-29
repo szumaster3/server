@@ -1,9 +1,11 @@
 package content.region.kandarin.feldip.jiggig.quest.zogre.dialogue
 
+import content.data.GameAttributes
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -32,7 +34,8 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
         BLACK_PRISM,
         POTION,
         POST_QUEST,
-        SELL_BLACK_PRISM
+        SELL_BLACK_PRISM,
+        RETURNING_CLARENCE
     }
 
     private var flow = Flow.NONE
@@ -57,6 +60,7 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
             Flow.POTION -> handlePotion(interfaceId, buttonId)
             Flow.POST_QUEST -> handleLast(interfaceId, buttonId)
             Flow.SELL_BLACK_PRISM -> handleSellBlackPrism(interfaceId, buttonId)
+            Flow.RETURNING_CLARENCE -> handleMiniquestReturningClarence(interfaceId, buttonId)
             else -> end()
         }
         return true
@@ -76,6 +80,7 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
         val hasBlackPrismAndTornPage = hasBlackPrism && hasTornPage && !getAttribute(p, ZogreUtils.SITHIK_DIALOGUE_UNLOCK, false)
         val hasOrLostStrangePotion = getAttribute(p, ZogreUtils.TALK_WITH_ZAVISTIC_DONE, false)
         val hasTalkWithSithik = getAttribute(p, ZogreUtils.TALK_WITH_SITHIK_OGRE_DONE, false)
+        val hasReqForMiniquest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(player, Quests.ZOGRE_FLESH_EATERS) == 100 && hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false)
 
         when (stage) {
             0 -> {
@@ -92,10 +97,14 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
                 if (hasTalkWithSithik) {
                     flow = Flow.POST_QUEST
                     stage = 0
+                } else if (hasReqForMiniquest) {
+                    flow = Flow.RETURNING_CLARENCE
+                    stage = 0
                 } else {
                     playerl(FaceAnim.FRIENDLY, "But I was told to ring the bell if I wanted some attention.")
                     stage++
                 }
+
             }
 
             2 -> {
@@ -511,6 +520,77 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
             else -> end()
+        }
+    }
+
+    /**
+     * Handles the dialogue after hand of the sand - starts returning clarence miniquest.
+     */
+    private fun handleMiniquestReturningClarence(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.ZAVISTIC_RARVE_2059)
+        val miniquestComplete = getAttribute(player, GameAttributes.RETURNING_CLARENCE_COMPLETE, false)
+        when (stage) {
+            0 -> showTopics(
+                Topic("I'm here about the sicks...err Zogres", 1, true),
+                Topic("I have a rather sandy problem that I'd like to palm off on you.",
+                    if(miniquestComplete) 8 else 5, true
+                )
+            )
+            1 -> npcl(FaceAnim.FRIENDLY, "Don't you worry about Sithik, he's not likely to be moving from his bed for a long time. When he eventually does get better, he's going to be sent before a disciplinary tribunal, then we'll sort out what's what.").also { stage++ }
+            2 -> playerl(FaceAnim.FRIENDLY, "Thank you for your help with all of this.").also { stage++ }
+            3 -> npcl(FaceAnim.FRIENDLY, "Ooohh, no thanks required. It's I who should be thanking you my friend...your investigative mind has shown how vigilant we really should be for this type of evil use of the magical arts.").also { stage++ }
+            4 -> {
+                Flow.DEFAULT_AFTER_QUEST
+                stage = 0
+            }
+            5 -> if(!inInventory(player, Items.HAND_11763)) {
+                npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage++ }
+            } else if(getVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055) == 35){
+                npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 32 }
+            } else {
+                player("I think...that I might have found something.").also { stage = 17 }
+            }
+            6 -> player(FaceAnim.HALF_ASKING, "I'll see what I can do, I'm sure I saw a hand", "somewhere...If I find it I'll give it to you.").also { stage++ }
+            7 -> {
+                Flow.DEFAULT_AFTER_QUEST
+                stage = 0
+            }
+            8 -> npcl(FaceAnim.FRIENDLY, "It's so good to have Clarence back in mostly one piece.")
+            9 -> player(FaceAnim.HALF_ASKING, "Back?").also { stage++ }
+            10 -> npcl(FaceAnim.FRIENDLY, "Yes indeed: he may not be alive, but he is buried in the grounds of the Wizards' Guild here. So he is back with us. All thanks to you.").also { stage++ }
+            11 -> player(FaceAnim.HALF_ASKING, "Pleased I could lend a hand.").also { stage++ }
+            12 -> npcl(FaceAnim.FRIENDLY, "That was an incredibly bad pun. You know that puns are the lowest form of wheat?").also { stage++ }
+            13 -> player(FaceAnim.HALF_ASKING, "Sorry, I don't seem to be able to help myself... I appear to have lost my head.").also { stage++ }
+            14 -> npcl(FaceAnim.FRIENDLY, "ARG! Another! Away with you!").also { stage++ }
+            15 -> player(FaceAnim.HALF_ASKING, "But...").also { stage++ }
+            16 -> {
+                Flow.DEFAULT_AFTER_QUEST
+                stage = 0
+            }
+            17 -> npcl(FaceAnim.FRIENDLY, "Oh? What's that?").also { stage++ }
+            18 -> player(FaceAnim.NEUTRAL, "Another hand.").also { stage++ }
+            19 -> npc(FaceAnim.NEUTRAL, "In the sand?").also { stage++ }
+            20 -> player(FaceAnim.NEUTRAL, "No.").also { stage++ }
+            21 -> npc(FaceAnim.NEUTRAL, "On your arm?").also { stage++ }
+            22 -> player("Err, no, I mean, yes...but...no.").also { stage++ }
+            23 -> npc(FaceAnim.NEUTRAL, "Oh my, it really does sound like you've lost your head", "and are a bit shaken up!").also { stage++ }
+            24 -> player("Wouldn't you be? It was in a package in the RPDT in", "Ardougne. But I have it here with me.").also { stage++ }
+            25 -> sendItemDialogue(player, Items.HAND_11763, "You show the hand to Zavistic.").also { stage++ }
+            26 -> npc(FaceAnim.EXTREMELY_SHOCKED, "It's...It's Clarence. I shall keep it with the rest of him...if", "we can find enough, we can finally put him to rest.").also { stage++ }
+            27 -> player("You mean, you didn't already burn him...or, at least,", "what y ou had of him?").also { stage++ }
+            28 -> npc(FaceAnim.EXTREMELY_SHOCKED, "Oh no, that would be terrible! We must find as much", "as we can before we bury him so that he go whole", "to the Wizards' Great Hall.").also { stage++ }
+            29 -> player("Right. Are all wizards a little potty?").also { stage++ }
+            30 -> player.dialogueInterpreter.sendItemMessage(Items.HAND_11763, "You hand over the hand and get a weird sense of déja", "vu.").also { stage++ }
+            31 -> if(removeItem(player, Items.HAND_11763)) {
+                npc("Thank you for helping us, please see if you can find", "any more of him.")
+                setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 35)
+                stage = END_DIALOGUE
+            } else end()
+            32 -> player("I'll see what I can do, I'm sure I saw some other body", "parts somewhere...If I find any I'll give them to you.").also { stage++ }
+            33 -> {
+                Flow.DEFAULT_AFTER_QUEST
+                stage = 0
+            }
         }
     }
 }

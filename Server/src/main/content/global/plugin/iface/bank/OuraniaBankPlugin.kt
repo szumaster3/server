@@ -1,4 +1,4 @@
-package content.region.kandarin.plugin
+package content.global.plugin.iface.bank
 
 import core.api.*
 import core.api.openBankAccount

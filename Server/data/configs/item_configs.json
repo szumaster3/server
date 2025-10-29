@@ -63863,7 +63863,7 @@
     "name": "Wizard's head",
     "tradeable": "false",
     "destroy": "true",
-    "weight": "3",
+    "weight": "3.628",
     "archery_ticket_price": "0",
     "id": "6957"
   },
@@ -101128,7 +101128,7 @@
   },
   {
     "destroy_message": "You can get the diary again from Sandy's desk.",
-    "examine": "A locked/unlocked diary.",
+    "examine": "A locked diary.",
     "durability": null,
     "name": "Locked diary",
     "tradeable": "false",
@@ -101138,13 +101138,24 @@
   },
   {
     "destroy_message": "You can get the diary again from Sandy's desk.",
-    "examine": "A locked/unlocked diary.",
+    "examine": "A unlocked diary.",
     "durability": null,
     "name": "Unlocked diary",
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
     "id": "11762"
+  },
+  {
+    "destroy_message": "You can get the hand again from the creatures in the Jade Vine.",
+    "examine": "A wizard's severed hand. You can tell by the robes.",
+    "durability": null,
+    "name": "Unlocked diary",
+    "tradeable": "false",
+    "destroy": "true",
+    "archery_ticket_price": "0",
+    "id": "11763",
+    "weight": "0.001"
   },
   {
     "destroy_message": "You can get the foot again from the creatures in the Jade Vine.",
@@ -101158,7 +101169,7 @@
   },
   {
     "destroy_message": "You can get the arm again from the creatures in the Jade Vine.",
-    "examine": "\"A wizard's severed arm. You can tell by the robes.",
+    "examine": "A wizard's severed arm. You can tell by the robes.",
     "durability": null,
     "name": "Left arm",
     "tradeable": "false",

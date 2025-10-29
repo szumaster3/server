@@ -16,7 +16,7 @@ import shared.consts.Vars
 
 @Initializable
 class BrentleVahnNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
-    var despawnTime = 0
+    private var despawnTime = 0
     private val player: Player? = null
 
     override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = BrentleVahnNPC(id, location)

@@ -7,6 +7,7 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
@@ -144,7 +145,7 @@ class PiratePeteDialogue(player: Player? = null) : Dialogue(player) {
                         1 -> openOverlay(player, Components.FADE_TO_BLACK_115)
                         3 -> {
                             val destination = if(npc.id == NPCs.PIRATE_PETE_2826) Location(3680, 3536, 0) else Location(2162, 5114, 1)
-                            player.teleporter.send(destination)
+                            player.teleporter.send(destination, TeleportManager.TeleportType.INSTANT)
                         }
                         6 -> openOverlay(player, Components.FADE_FROM_BLACK_170)
                         7 -> player.unlock()

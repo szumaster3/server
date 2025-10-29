@@ -105,10 +105,10 @@ object TutorialStage {
             }
 
             1 -> {
+                removeHintIcon(player)
                 player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
                 player.interfaceManager.openTab(Component(Components.OPTIONS_261))
                 setVarbit(player, FLASHING_ICON, 12)
-                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Game Options",
                     "",
@@ -120,6 +120,7 @@ object TutorialStage {
 
             2 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -135,7 +136,7 @@ object TutorialStage {
             3 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3098, 3107)!!, 100) // DOOR (RS GUIDE EXIT)
+                registerHintIcon(player, Location.create(3098, 3107, 0)!!, 100) // DOOR (RS GUIDE EXIT)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Interacting with scenery",
                     "You can interact with many items of scenery by simply clicking on",
@@ -147,6 +148,7 @@ object TutorialStage {
 
             4 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.SURVIVAL_EXPERT_943)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Moving around",
@@ -174,7 +176,8 @@ object TutorialStage {
             6 -> {
                 hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 4)
-                registerHintIcon(player, Location.create(3100, 3095)!!) // TREE
+                removeHintIcon(player)
+                registerHintIcon(player, Location.create(3100, 3095, 0), 100) // TREE
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Cut down a tree",
                     "You can click on the backpack icon at any time to view the items that",
@@ -233,6 +236,7 @@ object TutorialStage {
 
             11 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 2)
                 registerHintIcon(player, Repository.findNPC(NPCs.SURVIVAL_EXPERT_943)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -306,7 +310,8 @@ object TutorialStage {
 
             16 -> {
                 hideTabs(player, login)
-                registerHintIcon(player, Location.create(3090, 3091)!!, 50) // FENCE
+                removeHintIcon(player)
+                registerHintIcon(player, Location.create(3090, 3091, 0), 50) // FENCE
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Well done, you've just cooked your first " + settings!!.name + " meal.",
                     "If you'd like a recap on anything you've learnt so far, speak to",
@@ -319,7 +324,7 @@ object TutorialStage {
             17 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3079, 3084)!!, 100) // DOOR (COOKING)
+                registerHintIcon(player, Location.create(3079, 3084,0), 100) // DOOR (COOKING)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Find your next instructor",
                     "Follow the path until you get to the door with the yellow arrow",
@@ -356,7 +361,7 @@ object TutorialStage {
 
             20 -> {
                 hideTabs(player, login)
-                registerHintIcon(player, Location.create(3076, 3081)!!, 50) // COOKING RANGE
+                registerHintIcon(player, Location.create(3076, 3081, 0), 50) // COOKING RANGE
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Cooking dough",
                     "",
@@ -383,7 +388,7 @@ object TutorialStage {
             22 -> {
                 hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Location.create(3073, 3090)!!, 100) // DOOR (COOKING EXIT)
+                registerHintIcon(player, Location.create(3073, 3090, 0), 100) // DOOR (COOKING EXIT)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "The Music Player",
                     "From this interface you can control the music that is played.",
@@ -432,7 +437,7 @@ object TutorialStage {
             26 -> {
                 hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Location.create(3086, 3126)!!, 50) // DOOR (QUEST GUIDE)
+                registerHintIcon(player, Location.create(3086, 3126, 0), 50) // DOOR (QUEST GUIDE)
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                     "Run to the next guide",
                     "Now that you have the run button turned on, follow the path",
@@ -474,7 +479,7 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Location.create(3088, 3119)!!) // LADDER (QUEST END)
+                registerHintIcon(player, Location.create(3088, 3119, 0), 50) // LADDER (QUEST END)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "Moving on",
@@ -501,7 +506,7 @@ object TutorialStage {
             31 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3076, 9504)!!, 50)
+                registerHintIcon(player, Location.create(3076, 9504, 0), 50)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Prospecting",
                     "",
@@ -534,7 +539,7 @@ object TutorialStage {
             33 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3086, 9501)!!, 50)
+                registerHintIcon(player, Location.create(3086, 9501, 0), 50)
                 Pulser.submit(
                     object : Pulse(1) {
                         override fun pulse(): Boolean {
@@ -567,7 +572,7 @@ object TutorialStage {
             35 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3076, 9504)!!, 50)
+                registerHintIcon(player, Location.create(3076, 9504, 0), 50)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Mining",
                     "",
@@ -591,7 +596,7 @@ object TutorialStage {
             37 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3086, 9501)!!)
+                registerHintIcon(player, Location.create(3086, 9501, 0), 50)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Mining",
                     "",
@@ -604,7 +609,7 @@ object TutorialStage {
             38 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3079, 9496)!!)
+                registerHintIcon(player, Location.create(3079, 9496, 0), 50)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Smelting",
                     "You should now have both some copper and tin ore. So let's",
@@ -630,7 +635,7 @@ object TutorialStage {
             41 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3084, 9499)!!, 50)
+                registerHintIcon(player, Location.create(3084, 9499, 0), 50)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Smithing a dagger",
                     "To smith you'll need a hammer - like the one you were given by",
@@ -654,7 +659,7 @@ object TutorialStage {
 
             43 -> {
                 hideTabs(player, login)
-                registerHintIcon(player, Location(3095, 9502)!!, 100)
+                registerHintIcon(player, Location.create(3095, 9502, 0), 100)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You've finished in this area.",
                     "",
@@ -760,7 +765,7 @@ object TutorialStage {
             50 -> {
                 hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 0)
-                registerHintIcon(player, Location.create(3111, 9519)!!, 100)
+                registerHintIcon(player, Location.create(3111, 9519, 0), 100)
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                     "This is your combat interface.",
                     "From this interface you can select the type of attack your",
@@ -825,7 +830,7 @@ object TutorialStage {
             55 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3111, 9526)!!, 100)
+                registerHintIcon(player, Location.create(3111, 9526, 0), 100)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Moving on.",
                     "You have completed the tasks here. To move on, click on the",
@@ -851,7 +856,7 @@ object TutorialStage {
             57 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3125, 3124)!!, 100) // FINANCIAL DOOR
+                registerHintIcon(player, Location.create(3125, 3124, 0), 100) // FINANCIAL DOOR
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "This is your bank box.",
                     "You can store stuff here for safekeeping. If you die, anything",
@@ -877,7 +882,7 @@ object TutorialStage {
             59 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3130, 3124)!!, 100) // EXIT (FINANCIAL DOOR)
+                registerHintIcon(player, Location.create(3130, 3124, 0), 100) // EXIT (FINANCIAL DOOR)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "",
@@ -968,7 +973,7 @@ object TutorialStage {
             66 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3122, 3102)!!, 100)
+                registerHintIcon(player, Location.create(3122, 3102, 0), 100)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "Your final instructor!",

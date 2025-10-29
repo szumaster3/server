@@ -59,6 +59,8 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
         if (!canTeleport(player, nextJewellery)) {
             return false
         }
+        lock(player, 4)
+        closeAllInterfaces(player)
         submitWorldPulse(
             object : Pulse(0) {
                 private var count = 0
@@ -67,11 +69,9 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
                 override fun pulse(): Boolean {
                     when (count) {
                         0 -> {
-                            lock(player, 4)
                             visualize(player, ANIMATION, Graphics)
                             playGlobalAudio(player.location, Sounds.TP_ALL_200)
                             player.impactHandler.disabledTicks = 4
-                            closeInterface(player)
                         }
 
                         3 -> {
