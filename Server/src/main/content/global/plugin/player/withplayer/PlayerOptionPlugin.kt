@@ -1,4 +1,4 @@
-package content.global.plugin.player
+package content.global.plugin.player.withplayer
 
 import core.game.bots.AIPlayer
 import core.game.bots.AIRepository

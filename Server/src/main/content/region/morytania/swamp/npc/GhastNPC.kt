@@ -16,8 +16,6 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
@@ -86,44 +84,42 @@ class GhastNPC : AbstractNPC {
         if (NSUtils.activatePouch(player, this)) return
         val inventoryItems = player.inventory.toArray().filterNotNull()
 
-        GlobalScope.launch {
-            val foodInInventory = inventoryItems.firstOrNull { item ->
-                val consumable = Consumables.getConsumableById(item.id)
-                consumable?.consumable is Food
+        val foodInInventory = inventoryItems.firstOrNull { item ->
+            val consumable = Consumables.getConsumableById(item.id)
+            consumable?.consumable is Food
+        }
+
+        if (foodInInventory != null) {
+            playAudio(player, Sounds.FOOD_ROT_1494)
+            removeItem(player, foodInInventory, Container.INVENTORY)
+            addItem(player, Items.ROTTEN_FOOD_2959)
+            sendMessage(player, "You feel something attacking your backpack, and smell a terrible stench.")
+            return
+        }
+
+        val foodInSatchel = inventoryItems.firstOrNull { item ->
+            item.id in SatchelPlugin.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
+        }
+
+        if (foodInSatchel != null) {
+            val chargesAmount = getCharge(foodInSatchel)
+            val foodFound = SatchelPlugin.SATCHEL_RESOURCES.firstOrNull { foodId ->
+                chargesAmount >= (foodId + BASE_CHARGE_AMOUNT)
             }
 
-            if (foodInInventory != null) {
-                playAudio(player, Sounds.FOOD_ROT_1494)
-                removeItem(player, foodInInventory, Container.INVENTORY)
-                addItem(player, Items.ROTTEN_FOOD_2959)
-                sendMessage(player, "You feel something attacking your backpack, and smell a terrible stench.")
-                return@launch
+            if (foodFound != null) {
+                addItem(player, Items.ROTTEN_FOOD_2959, 1)
+                adjustCharge(foodInSatchel, -(foodFound + BASE_CHARGE_AMOUNT))
+                sendMessage(player, "You feel something attacking your satchel, and smell a terrible stench.")
+                return
             }
+        }
 
-            val foodInSatchel = inventoryItems.firstOrNull { item ->
-                item.id in SatchelPlugin.SATCHEL_IDS && getCharge(item) >= BASE_CHARGE_AMOUNT
-            }
-
-            if (foodInSatchel != null) {
-                val chargesAmount = getCharge(foodInSatchel)
-                val foodFound = SatchelPlugin.SATCHEL_RESOURCES.firstOrNull { foodId ->
-                    chargesAmount >= (foodId + BASE_CHARGE_AMOUNT)
-                }
-
-                if (foodFound != null) {
-                    addItem(player, Items.ROTTEN_FOOD_2959, 1)
-                    adjustCharge(foodInSatchel, -(foodFound + BASE_CHARGE_AMOUNT))
-                    sendMessage(player, "You feel something attacking your satchel, and smell a terrible stench.")
-                    return@launch
-                }
-            }
-
-            if (RandomFunction.roll(3)) {
-                sendMessage(player, "An attacking Ghast just misses you.")
-            } else {
-                impact(player, RandomFunction.random(3, 6), ImpactHandler.HitsplatType.NORMAL)
-                sendMessage(player, "A supernatural force draws energy from you.")
-            }
+        if (RandomFunction.roll(3)) {
+            sendMessage(player, "An attacking Ghast just misses you.")
+        } else {
+            impact(player, RandomFunction.random(3, 6), ImpactHandler.HitsplatType.NORMAL)
+            sendMessage(player, "A supernatural force draws energy from you.")
         }
     }
 
