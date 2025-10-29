@@ -55,7 +55,6 @@ class RSGuideDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 npc.unlock()
                 setAttribute(player, TutorialStage.TUTORIAL_STAGE, 3)
-                removeHintIcon(player)
                 TutorialStage.load(player, 3)
             }
         }

@@ -26,21 +26,21 @@ class TutorialPlugin : InteractionListener {
         on(RS_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
             val tutorialStage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
 
-            if (tutorialStage < 4) {
-                player.dialogueInterpreter.sendPlainMessage(
-                    false,
-                    "",
-                    "You need to talk to the ${GameWorld.settings?.name ?: "Gielinor"} Guide before you are allowed to",
-                    "proceed through this door.",
-                    ""
-                )
+            if (tutorialStage != 3) {
+                if(player.location.x < 3097) {
+                    player.dialogueInterpreter.sendPlainMessage(
+                        false,
+                        "",
+                        "You need to talk to the ${GameWorld.settings?.name ?: "Gielinor"} Guide before you are allowed to",
+                        "proceed through this door.",
+                        ""
+                    )
+                } else {
+                    sendDialogue(player, "You've already done that. Perhaps you should move on.")
+                }
                 return@on false
             }
 
-            if(tutorialStage == 4) {
-                sendMessage(player, "You've already done that. Perhaps you should move on.")
-                return@on false
-            }
 
             setAttribute(player, TutorialStage.TUTORIAL_STAGE, 4)
             TutorialStage.load(player, 4)
@@ -288,7 +288,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(Scenery.LADDER_3031, IntType.SCENERY, "climb-down") { player, _ ->
-            sendMessage(player, "You've already done that. Perhaps you should move on.")
+            sendDialogue(player, "You've already done that. Perhaps you should move on.")
             return@on false
         }
 
