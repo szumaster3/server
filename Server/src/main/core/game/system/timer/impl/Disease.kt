@@ -1,6 +1,7 @@
 package core.game.system.timer.impl
 
 import com.google.gson.JsonObject
+import content.global.plugin.item.InoculationBracePlugin
 import core.api.hasTimerActive
 import core.api.playAudio
 import core.api.removeTimer
@@ -49,18 +50,29 @@ class Disease :
             playAudio(entity, Sounds.DISEASE_HITSPLAT_2388)
         }
 
-        val damage = RandomFunction.random(1, 5)
+        var damage = RandomFunction.random(1, 5)
 
-        // The disease hit is purely visual,
-        // it doesn't deal any damage to the player.
+        if (entity is Player) {
+            val plugin = InoculationBracePlugin.instance
+            if (plugin != null) {
+                val blocked = plugin.applyDiseaseAbsorption(entity, damage)
+                damage -= blocked
+                if (damage <= 0) {
+                    return hitsLeft-- > 0
+                }
+            }
+        }
+
         entity.impactHandler.visualHit(entity, damage, HitsplatType.DISEASE)
 
         var skillId = RandomFunction.random(24)
         if (skillId == 3) skillId--
         entity.skills.updateLevel(skillId, -damage, 0)
+
         if (--hitsLeft == 0 && entity is Player) {
-            sendMessage(entity, "The disease has wore off.")
+            sendMessage(entity, "The disease has worn off.")
         }
+
         return hitsLeft > 0
     }
 
