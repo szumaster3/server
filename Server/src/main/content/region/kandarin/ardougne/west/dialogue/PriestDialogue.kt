@@ -21,24 +21,15 @@ class PriestDialogue(player: Player? = null) : Dialogue(player) {
         if (!isQuestComplete(player, Quests.PLAGUE_CITY)) {
             playerl(FaceAnim.FRIENDLY, "Hello there.")
         } else {
-            npcl(
-                FaceAnim.HAPPY,
-                "Praise Saradomin! The Mourners are gone, and we can live free of the fear of plague!",
-            ).also {
-                stage =
-                    END_DIALOGUE
-            }
+            npcl(FaceAnim.HAPPY, "Praise Saradomin! The Mourners are gone, and we can live free of the fear of plague!").also { stage = END_DIALOGUE }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npcl(FaceAnim.FRIENDLY, "I wish there was more I could do for these people.").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            0 -> npcl(FaceAnim.FRIENDLY, "I wish there was more I could do for these people.").also { stage = END_DIALOGUE }
+            // It's going to take a lot of work to fix the damage done to this city.
         }
         return true
     }

@@ -39,8 +39,7 @@ class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
             1 -> player("I'm ok thanks.").also { stage++ }
             2 -> npcl(FaceAnim.FRIENDLY, "Well in that case I'd better get back to work. Take care.").also { stage++ }
             3 -> playerl(FaceAnim.FRIENDLY, "You too.").also { stage = END_DIALOGUE }
-            4 -> npcl(FaceAnim.NEUTRAL, "Now that we can get in and out again, people are getting healthier, but it'll be a long time before West Ardougne is really a nice place to live.").also { stage = END_DIALOGUE
-            }
+            4 -> npcl(FaceAnim.NEUTRAL, "Now that we can get in and out again, people are getting healthier, but it'll be a long time before West Ardougne is really a nice place to live.").also { stage = END_DIALOGUE }
         }
         return true
     }

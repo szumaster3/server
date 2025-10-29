@@ -25,12 +25,7 @@ class TowerOfLife : Quest(Quests.TOWER_OF_LIFE, 134, 133, 2, Vars.VARBIT_QUEST_T
             line++
             line(
                 player,
-                if (hasLevelStat(
-                        player,
-                        Skills.CONSTRUCTION,
-                        10,
-                    )
-                ) {
+                if (hasLevelStat(player, Skills.CONSTRUCTION, 10)) {
                     "---Level 10 Construction/--"
                 } else {
                     "!!Level 10 Construction??"

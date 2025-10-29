@@ -17,10 +17,7 @@ class RecruiterDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(
-            FaceAnim.FRIENDLY,
-            "Citizens of West Ardougne. Who will join the Royal Army of Ardougne? It is a very noble cause. Fight alongside King Tyras, crusading in the darklands of the west!",
-        )
+        npcl(FaceAnim.FRIENDLY, "Citizens of West Ardougne. Who will join the Royal Army of Ardougne? It is a very noble cause. Fight alongside King Tyras, crusading in the darklands of the west!")
         return true
     }
 
@@ -28,11 +25,7 @@ class RecruiterDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> sendNPCDialogue(player, NPCs.MAN_726, "Plague bringer!").also { stage++ }
             1 -> sendNPCDialogue(player, NPCs.MAN_726, "King Tyras is scum!").also { stage++ }
-            2 ->
-                npcl(FaceAnim.FRIENDLY, "Tyras will be informed of these words of treason!").also {
-                    stage =
-                        END_DIALOGUE
-                }
+            2 -> npcl(FaceAnim.FRIENDLY, "Tyras will be informed of these words of treason!").also { stage = END_DIALOGUE }
         }
         return true
     }

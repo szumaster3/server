@@ -30,18 +30,14 @@ class LadyKeliDialogue(player: Player? = null) : Dialogue(player) {
                 sendChat(npc, "You tricked me, and tied me up, Guards kill this stranger!")
                 val npcc = RegionManager.getLocalNpcs(player)
                 for (n in npcc) {
-                    if (n.id == 917) {
+                    if (n.id == NPCs.JAIL_GUARD_917) {
                         n.sendChat("Yes M'lady")
                         n.properties.combatPulse.attack(player)
                     }
                 }
                 end()
             }
-
-            else -> {
-                player(FaceAnim.HALF_GUILTY, "Are you the famous Lady Keli? Leader of the toughest", "gang of mercenary killers around?")
-                stage = 0
-            }
+            else -> player(FaceAnim.HALF_GUILTY, "Are you the famous Lady Keli? Leader of the toughest", "gang of mercenary killers around?")
         }
         return true
     }

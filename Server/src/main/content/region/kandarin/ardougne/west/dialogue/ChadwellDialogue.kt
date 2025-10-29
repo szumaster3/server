@@ -24,17 +24,14 @@ class ChadwellDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> options("Let's see what you've got.", "Nothing thanks.").also { stage++ }
-            1 ->
-                when (buttonId) {
-                    1 -> player(FaceAnim.FRIENDLY, "Let's see what you've got.").also { stage++ }
-                    2 -> player(FaceAnim.FRIENDLY, "Nothing thanks.").also { stage = 3 }
-                }
-
+            1 -> when (buttonId) {
+                1 -> player(FaceAnim.FRIENDLY, "Let's see what you've got.").also { stage++ }
+                2 -> player(FaceAnim.FRIENDLY, "Nothing thanks.").also { stage = 3 }
+            }
             2 -> {
                 end()
                 openNpcShop(player, NPCs.CHADWELL_971)
             }
-
             3 -> npc(FaceAnim.FRIENDLY, "Okay then.").also { stage = END_DIALOGUE }
         }
         return true

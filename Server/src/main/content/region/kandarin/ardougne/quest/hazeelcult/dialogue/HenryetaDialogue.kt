@@ -14,10 +14,7 @@ import shared.consts.Quests
 @Initializable
 class HenryetaDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ): Boolean {
+    override fun handle(componentID: Int, buttonID: Int): Boolean {
         val questStage = getQuestStage(player!!, Quests.HAZEEL_CULT)
 
         when {
@@ -41,9 +38,12 @@ class HenryetaDialogue(player: Player? = null) : Dialogue(player) {
                         if (getAttribute(player, "hazeelcult:mahjarrat", true) && !getAttribute(player, "hazeelcult:carnillean", true)) {
                             playerl(FaceAnim.FRIENDLY, "Hello.").also { stage++ }
                         } else {
-                            sendMessage(player, "They aren't interested in talking to you.").also { stage = END_DIALOGUE }
+                            sendMessage(player, "They aren't interested in talking to you.").also {
+                                stage = END_DIALOGUE
+                            }
                         }
                     }
+
                     1 -> npcl(FaceAnim.SAD, "Those hooligans! They slaughtered my precious Scruffy! I shall never recover! I am emotionally scarred for life!").also { stage = END_DIALOGUE }
                     2 -> playerl(FaceAnim.NEUTRAL, "Yeah... Hopefully someone finds them soon.").also { stage = END_DIALOGUE }
                 }
@@ -51,15 +51,27 @@ class HenryetaDialogue(player: Player? = null) : Dialogue(player) {
 
             (questStage == 100) -> when (stage) {
                 0 -> {
-                    if (getAttribute(player, "hazeelcult:mahjarrat", true) && !getAttribute(player, "hazeelcult:carnillean", true)) {
+                    if (getAttribute(player, "hazeelcult:mahjarrat", true) && !getAttribute(
+                            player, "hazeelcult:carnillean", true
+                        )
+                    ) {
                         playerl(FaceAnim.FRIENDLY, "Hello.").also { stage = 1 }
                     } else {
                         playerl(FaceAnim.FRIENDLY, "Hello.").also { stage = 3 }
                     }
                 }
-                1 -> npcl(FaceAnim.HALF_ASKING, "Oh, it's you. I'm very disappointed that you never found those awful cultists. You're quite useless really, aren't you?").also { stage++ }
+
+                1 -> npcl(
+                    FaceAnim.HALF_ASKING,
+                    "Oh, it's you. I'm very disappointed that you never found those awful cultists. You're quite useless really, aren't you?"
+                ).also { stage++ }
+
                 2 -> playerl(FaceAnim.HAPPY, "Yup, I guess I am.").also { stage = END_DIALOGUE }
-                3 -> npcl(FaceAnim.FRIENDLY, "Hello again adventurer! Since you dealt with those horrible hooligan cultists, things have vastly improved for us around here!").also { stage++ }
+                3 -> npcl(
+                    FaceAnim.FRIENDLY,
+                    "Hello again adventurer! Since you dealt with those horrible hooligan cultists, things have vastly improved for us around here!"
+                ).also { stage++ }
+
                 4 -> playerl(FaceAnim.HAPPY, "My pleasure, Lady Henryeta.").also { stage = END_DIALOGUE }
             }
         }
