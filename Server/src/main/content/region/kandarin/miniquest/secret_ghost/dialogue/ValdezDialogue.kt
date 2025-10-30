@@ -23,7 +23,7 @@ class ValdezDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(2381)
 }
 
-class ValdezDialogueFile : DialogueFile() {
+private class ValdezDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             0 -> {

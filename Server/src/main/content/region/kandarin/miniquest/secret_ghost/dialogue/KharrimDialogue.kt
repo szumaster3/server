@@ -22,7 +22,8 @@ class KharrimDialogue(player: Player? = null) : Dialogue(player) {
     override fun newInstance(player: Player?): Dialogue = KharrimDialogue(player)
     override fun getIds(): IntArray = intArrayOf(2388, 2389, 2390)
 }
-class KharrimDialogueFile : DialogueFile() {
+
+private class KharrimDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             0 -> {

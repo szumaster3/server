@@ -24,7 +24,7 @@ class DhalakDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(2385, 2386, 2387)
 }
 
-class DhalakDialogueFile : DialogueFile() {
+private class DhalakDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             0 -> {

@@ -23,7 +23,7 @@ class RennardDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(2382, 2383, 2384)
 }
 
-class RennardDialogueFile : DialogueFile() {
+private class RennardDialogueFile : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
             0 -> {
