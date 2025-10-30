@@ -8,14 +8,15 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
+import core.game.world.map.Location
+import core.game.world.repository.Repository
+import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Vars
+import shared.consts.*
 
 @Initializable
 class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
@@ -35,7 +36,8 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
         POTION,
         POST_QUEST,
         SELL_BLACK_PRISM,
-        RETURNING_CLARENCE
+        RETURNING_CLARENCE,
+        RETURNING_EVIDENCE
     }
 
     private var flow = Flow.NONE
@@ -61,6 +63,7 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
             Flow.POST_QUEST -> handleLast(interfaceId, buttonId)
             Flow.SELL_BLACK_PRISM -> handleSellBlackPrism(interfaceId, buttonId)
             Flow.RETURNING_CLARENCE -> handleMiniquestReturningClarence(interfaceId, buttonId)
+            Flow.RETURNING_EVIDENCE -> handleMiniquestComplete(interfaceId, buttonId)
             else -> end()
         }
         return true
@@ -545,8 +548,10 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
             }
             5 -> if(!inInventory(player, Items.HAND_11763)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage++ }
-            } else if(getVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055) == 35){
+            } else if(getVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055) == 35) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 32 }
+            } else if(getAttribute(player,GameAttributes.RETURNING_CLARENCE_CHECKPOINT, false)) {
+                npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 41 }
             } else {
                 player("I think...that I might have found something.").also { stage = 17 }
             }
@@ -555,7 +560,7 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
                 Flow.DEFAULT_AFTER_QUEST
                 stage = 0
             }
-            8 -> npcl(FaceAnim.FRIENDLY, "It's so good to have Clarence back in mostly one piece.")
+            8 -> npcl(FaceAnim.FRIENDLY, "It's so good to have Clarence back in mostly one piece.").also { stage++ }
             9 -> player(FaceAnim.HALF_ASKING, "Back?").also { stage++ }
             10 -> npcl(FaceAnim.FRIENDLY, "Yes indeed: he may not be alive, but he is buried in the grounds of the Wizards' Guild here. So he is back with us. All thanks to you.").also { stage++ }
             11 -> player(FaceAnim.HALF_ASKING, "Pleased I could lend a hand.").also { stage++ }
@@ -568,7 +573,35 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 0
             }
             17 -> npcl(FaceAnim.FRIENDLY, "Oh? What's that?").also { stage++ }
-            18 -> player(FaceAnim.NEUTRAL, "Another hand.").also { stage++ }
+            18 -> {
+                val items = listOf(
+                    Items.TORSO_11765,
+                    Items.LEFT_ARM_11766,
+                    Items.RIGHT_ARM_11767,
+                    Items.LEFT_LEG_11768,
+                    Items.RIGHT_LEG_11769,
+                    Items.FOOT_11764
+                )
+
+                for (item in items) {
+                    if (inInventory(player, item)) {
+                        player.inventory.remove(Item(item, 1))
+                        val message = when(item) {
+                            Items.LEFT_ARM_11766 -> "You give the left arm to Zavistic."
+                            Items.RIGHT_ARM_11767 -> "You pass the right arm to Zavistic."
+                            Items.LEFT_LEG_11768 -> "You present the left leg to Zavistic."
+                            Items.RIGHT_LEG_11769 -> "You thrust the right leg at Zavistic who almost doesn't catch it"
+                            Items.TORSO_11765 -> "You bodily heave the torso out of your pack to the wizard's astonishment."
+                            Items.FOOT_11764 -> "You wave the foot in an amusing manner at Zavistic who turns a satisfying shade of pale until you foot the bill and hand it over."
+                            else -> ""
+                        }
+                        if (message.isEmpty()) continue
+                        sendDialogue(player, message)
+                    }
+                }
+                setAttribute(player, GameAttributes.RETURNING_CLARENCE_CHECKPOINT, true)
+                stage = 34
+            }
             19 -> npc(FaceAnim.NEUTRAL, "In the sand?").also { stage++ }
             20 -> player(FaceAnim.NEUTRAL, "No.").also { stage++ }
             21 -> npc(FaceAnim.NEUTRAL, "On your arm?").also { stage++ }
@@ -590,6 +623,68 @@ class ZavisticRarveDialogue(player: Player? = null) : Dialogue(player) {
             33 -> {
                 Flow.DEFAULT_AFTER_QUEST
                 stage = 0
+            }
+
+            34 -> npcl(FaceAnim.FRIENDLY, "Than you so much for returning Clarence to us. Despite the lack of his foot we shall go ahead with the burial soon. We must find some more evidence against that scoundrel Sandy first, though. Take a look around his office, would you? See what you can dig up.").also { stage++ }
+            35 -> player(FaceAnim.HALF_ASKING, "You're welcome ... but why on earth do we need more evidence? Surely we solved that when he got arrested?").also { stage++ }
+            36 -> npcl(FaceAnim.FRIENDLY, "I would agree with you, but the courts want more evidence to have a trial.").also { stage++ }
+            37 -> player(FaceAnim.HALF_ASKING, "Is this the court in Seer's Village?").also { stage++ }
+            38 -> npcl(FaceAnim.FRIENDLY, "Yes indeed, we have heard good things of them.").also { stage++ }
+            39 -> player(FaceAnim.HALF_ASKING, "Yes, they appeared to be very fair.").also { stage++ }
+            40 -> npcl(FaceAnim.FRIENDLY, "A very fair one ... so prove us right, find that evidence! There must be something. We need time to prepare the burial anyway: digging a hole for a coffin is a grave matter. I can teleport you there if you're ready, but only once as I'm very busy.").also { stage++ }
+            41 -> options("Yes, I'm ready to go.", "I'm not ready yet. I'll be back.").also { stage++ }
+            42 -> when(buttonID) {
+                1 -> player(FaceAnim.HALF_ASKING, "Yes, I'm ready to go.").also { stage++ }
+                2 -> player("I'm not ready yet. I'll be back.").also { stage = END_DIALOGUE }
+            }
+            43 -> npcl(FaceAnim.FRIENDLY, "Okay, just click your heels three times and you'll be there.").also { stage++ }
+            44 -> player(FaceAnim.SCARED, "Err ... what?").also { stage++ }
+            45 -> npcl(FaceAnim.LAUGH, "Only joking, there was a girl last week who believed me, but she disappeared before I could teleport her!").also { stage++ }
+            // TODO; Casting: animation & graphics.
+            46 -> {
+                end()
+                val rarve = Repository.findNPC(NPCs.ZAVISTIC_RARVE_2059)
+                rarve?.face(player)
+                rarve?.animate(Animation(Animations.CAST_SPELL_707))
+                teleport(player, Location.create(2789, 3175, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD, 2)
+            }
+        }
+    }
+
+    /**
+     * Handles the finish dialogue of returning clarence miniquest.
+     */
+    private fun handleMiniquestComplete(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.ZAVISTIC_RARVE_2059)
+        when (stage) {
+            0 -> if(!inInventory(player, Items.UNLOCKED_DIARY_11762)) {
+                Flow.DEFAULT_AFTER_QUEST
+                stage = 0
+            } else {
+                npcl(FaceAnim.FRIENDLY, "What are you doing... Oh, it's you ... sorry ... didn't realise. What can I do for you?").also { stage++ }
+            }
+            1  -> player(FaceAnim.HALF_ASKING, "I have a rather sandy problem that I'd like to palm off on you.").also { stage++ }
+            2  -> npcl(FaceAnim.FRIENDLY, "Do you have anything we can use against that rotten murderer Sandy?").also { stage++ }
+            3  -> player(FaceAnim.HALF_ASKING, "I'm sure I could find a sword somewhere ...").also { stage++ }
+            4  -> npcl(FaceAnim.FRIENDLY, "No, no. I mean evidence!").also { stage++ }
+            5  -> player(FaceAnim.HALF_ASKING, "As a matter of fact, yes. I have his diary!").also { stage++ }
+            6  -> npcl(FaceAnim.FRIENDLY, "How does that help us? Surely you wouldn't record that kind of thing in your diary? 'Dear Diary, today I killed a wonderful, talented wizard ... ' that would be silly!").also { stage++ }
+            7  -> player(FaceAnim.HALF_ASKING, "Actually, he did! I think he was a few buckets short of a full sandpit.").also { stage++ }
+            8  -> npcl(FaceAnim.FRIENDLY, "Well, that's the evidence we need then!").also { stage++ }
+            9 -> sendItemDialogue(player, Items.UNLOCKED_DIARY_11762, "You hand over the diary and Zavistic hands you some runes as a reward.").also {
+                removeItem(player, Items.UNLOCKED_DIARY_11762)
+                stage++
+            }
+            10 -> npcl(FaceAnim.FRIENDLY, "This will definitely put Sandy away. Now that we have this we can bury Clarence. For all your hard work you are invited to the ceremony.").also { stage++ }
+            11 -> options("Sure. I'd be honoured to attend.", "I'll be back in a bit.").also { stage++ }
+            12 -> when(buttonID){
+                1 -> player(FaceAnim.FRIENDLY, "Sure. I'd be honoured to attend.").also { stage++ }
+                2 -> player("I'll be back in a bit.").also { stage = END_DIALOGUE }
+            }
+
+            13 -> {
+
+
             }
         }
     }

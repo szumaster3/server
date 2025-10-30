@@ -68,12 +68,7 @@ class MainInterface : ComponentPlugin() {
                         }
                     }
 
-                    66, 110 -> {
-                        if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
-                            return false
-                        }
-                        configureWorldMap(player)
-                    }
+                    66, 110 -> configureWorldMap(player)
                     69 -> sendString(player, "When you have finished playing ${GameWorld.settings?.name}, always use the button below to logout safely.", 182, 0)
                 }
                 return true

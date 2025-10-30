@@ -423,4 +423,5 @@ internal object GameAttributes {
 
     // Returning Clarence miniquest.
     const val RETURNING_CLARENCE_COMPLETE = "/save:hansand2:complete"
+    const val RETURNING_CLARENCE_CHECKPOINT = "/save:handsand2:checkpoint"
 }
