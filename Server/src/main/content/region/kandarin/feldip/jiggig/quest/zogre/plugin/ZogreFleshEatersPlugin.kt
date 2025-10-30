@@ -78,11 +78,6 @@ class ZogreFleshEatersPlugin : InteractionListener {
         }
 
         on(SITHIK, IntType.SCENERY, "talk-to") { player, _ ->
-            openDialogue(player, NPCs.SITHIK_INTS_2061, NPCs.SITHIK_INTS_2061)
-            return@on true
-        }
-
-        on(SITHIK, IntType.SCENERY, "talk-to") { player, _ ->
             val dialogue = when {
                 getAttribute(player, ZogreUtils.SITHIK_DIALOGUE_UNLOCK, false) -> SithikQuestDialogueFile()
                 inInventory(player, ZogreUtils.STRANGE_POTION) -> SithikIntsStrangePotionDialogueFile()
