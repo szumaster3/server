@@ -213,36 +213,31 @@ class ZogreFleshEatersPlugin : InteractionListener {
             val hasCharcoal = inInventory(player, Items.CHARCOAL_973)
             val hasPapyrus = inInventory(player, Items.PAPYRUS_970)
             val hasBook = inInventory(player, ZogreUtils.PORTRAI_BOOK)
-            val free = freeSlots(player)
+            val freeSlots = freeSlots(player)
 
-            fun need(slots: Int) = if (free < slots) {
-                sendDialogue(player, "You need ${if (slots == 1) "free inventory space" else "$slots free inventory spaces."}")
-                true
-            } else false
+            fun hasFree(slots: Int) = freeSlots >= slots.also {
+                if (freeSlots < slots) {
+                    val txt = if (slots == 1) "a free inventory space" else "$slots free inventory spaces"
+                    sendDialogue(player, "You need $txt.")
+                }
+            }
+
+            fun give(item: Int, msg: String) = player.apply {
+                sendItemDialogue(this, item, msg)
+                addItemOrDrop(this, item, 1)
+            }
 
             when {
-                hasCharcoal && hasPapyrus && !hasBook && !need(1) -> {
-                    sendItemDialogue(player, ZogreUtils.PORTRAI_BOOK, "You find a book on portraiture.")
-                    addItemOrDrop(player, ZogreUtils.PORTRAI_BOOK, 1)
-                }
-
+                hasCharcoal && hasPapyrus && !hasBook && hasFree(1) -> give(ZogreUtils.PORTRAI_BOOK, "You find a book on portraiture.")
                 hasCharcoal && hasPapyrus -> sendDialogue(player, "You search but find nothing.")
-
-                hasCharcoal && !need(1) -> {
-                    sendItemDialogue(player, Items.PAPYRUS_970, "You find some papyrus.")
-                    addItemOrDrop(player, Items.PAPYRUS_970, 1)
+                hasCharcoal && hasFree(1) -> give(Items.PAPYRUS_970, "You find some papyrus.")
+                hasPapyrus && hasFree(1) -> give(Items.CHARCOAL_973, "You find some charcoal.")
+                hasFree(3) -> player.apply {
+                    sendDoubleItemDialogue(this, Items.CHARCOAL_973, Items.PAPYRUS_970, "You find some charcoal and papyrus.")
+                    addItemOrDrop(this, Items.CHARCOAL_973, 1)
+                    addItemOrDrop(this, Items.PAPYRUS_970, 1)
                 }
-
-                hasPapyrus && !need(1) -> {
-                    sendItemDialogue(player, Items.CHARCOAL_973, "You find some charcoal.")
-                    addItemOrDrop(player, Items.CHARCOAL_973, 1)
-                }
-
-                !need(3) -> {
-                    sendDoubleItemDialogue(player, Items.CHARCOAL_973, Items.PAPYRUS_970, "You find some charcoal and papyrus.")
-                    addItemOrDrop(player, Items.CHARCOAL_973, 1)
-                    addItemOrDrop(player, Items.PAPYRUS_970, 1)
-                }
+                else -> Unit
             }
 
             return@on true
@@ -271,10 +266,10 @@ class ZogreFleshEatersPlugin : InteractionListener {
 
         onUseWith(IntType.GROUND_ITEM, ZogreUtils.STRANGE_POTION, Items.CUP_OF_TEA_4838) { player, used, _ ->
             lock(player, 2)
-            animate(player, 537)
+            animate(player, Animations.PUT_OBJECT_ON_TABLE_537)
             replaceSlot(player, used.asItem().index, Item(Items.SAMPLE_BOTTLE_3377))
-            sendItemDialogue(player, ZogreUtils.STRANGE_POTION, "You pour some of the potion into the cup.")
             setAttribute(player, ZogreUtils.SITHIK_TURN_INTO_OGRE, true)
+            sendItemDialogue(player, ZogreUtils.STRANGE_POTION, "You pour some of the potion into the cup.")
             return@onUseWith true
         }
     }

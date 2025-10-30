@@ -2,7 +2,6 @@ package content.region.kandarin.feldip.jiggig
 
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
 import core.api.*
-import core.api.closeDialogue
 import core.api.utils.PlayerCamera
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
@@ -11,68 +10,61 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 
 class JiggigCave : MapArea {
-    override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(2445, 9458, 2447, 9467))
 
-    override fun entityStep(
-        entity: Entity,
-        location: Location,
-        lastLocation: Location,
-    ) {
+    override fun defineAreaBorders(): Array<ZoneBorders> =
+        arrayOf(CHARRED_AREA)
+
+    override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         super.entityStep(entity, location, lastLocation)
-        if (entity is Player) {
-            val player = entity.asPlayer()
 
-            if (inBorders(player, CHARRED_AREA)) {
-                stopWalk(entity)
-                if (getAttribute(entity.asPlayer(), ZogreUtils.CHARRED_AREA, false)) {
-                    return
-                }
+        if (entity !is Player) return
+        val player = entity
 
-                lock(entity, 4)
-                submitWorldPulse(
-                    object : Pulse() {
-                        var counter = 0
+        if (!inBorders(player, CHARRED_AREA)) return
+        if (getAttribute(player, ZogreUtils.CHARRED_AREA, false)) return
 
-                        override fun pulse(): Boolean {
-                            when (counter++) {
-                                0 -> {
-                                    entity.dialogueInterpreter.sendPlainMessage(
-                                        true,
-                                        "You enter this blackened, charred area -",
-                                        "it looks like some sort of explosion has taken place.",
-                                    )
-                                    sendMessage(
-                                        entity,
-                                        "You enter this blackened, charred area - it looks like there's been an explosion!",
-                                    )
-                                }
+        stopWalk(player)
+        lock(player, 4)
+        playCharredAreaSequence(player)
+    }
 
-                                1 -> {
-                                    closeDialogue(entity)
-                                    PlayerCamera(entity).setPosition(2447, 9457, 400)
-                                    PlayerCamera(entity).panTo(2441, 9459, 400, 100)
-                                }
+    private fun playCharredAreaSequence(player: Player) {
+        submitWorldPulse(object : Pulse() {
+            private var step = 0
 
-                                2 -> {
-                                    PlayerCamera(entity).rotateTo(2441, 9459, 300, 10)
-                                }
+            override fun pulse(): Boolean {
+                when (step++) {
+                    0 -> {
+                        val message = "You enter this blackened, charred area — it looks like some sort of explosion has taken place."
+                        player.dialogueInterpreter.sendPlainMessage(true, message)
+                        sendMessage(player, message)
+                    }
 
-                                3 -> {
-                                    PlayerCamera(entity).reset()
-                                    setAttribute(entity, "/save${ZogreUtils.CHARRED_AREA}", true)
-                                    unlock(entity)
-                                    return true
-                                }
-                            }
-                            return false
+                    1 -> {
+                        closeDialogue(player)
+                        PlayerCamera(player).apply {
+                            setPosition(2447, 9457, 400)
+                            panTo(2441, 9459, 400, 100)
                         }
-                    },
-                )
+                    }
+
+                    2 -> {
+                        PlayerCamera(player).rotateTo(2441, 9459, 300, 10)
+                    }
+
+                    3 -> {
+                        PlayerCamera(player).reset()
+                        setAttribute(player, "/save${ZogreUtils.CHARRED_AREA}", true)
+                        unlock(player)
+                        return true
+                    }
+                }
+                return false
             }
-        }
+        })
     }
 
     companion object {
-        val CHARRED_AREA = ZoneBorders(2445, 9458, 2447, 9467)
+        private val CHARRED_AREA = ZoneBorders(2445, 9458, 2447, 9467)
     }
 }
