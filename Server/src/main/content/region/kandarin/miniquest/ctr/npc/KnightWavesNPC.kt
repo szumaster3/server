@@ -44,12 +44,16 @@ class KnightWavesNPC : AbstractNPC {
         player?.let {
             if (!it.isActive || !getLocalPlayers(this).contains(it)) {
                 it.removeAttribute(GameAttributes.KW_SPAWN)
+                pulseManager.clear()
                 clear()
             } else if (!properties.combatPulse.isAttacking) {
                 properties.combatPulse.attack(it)
             }
         }
-        if (timer++ > 5000) poofClear(this)
+        if (timer++ > 5000) {
+            pulseManager.clear()
+            poofClear(this)
+        }
     }
 
     /**
@@ -58,7 +62,7 @@ class KnightWavesNPC : AbstractNPC {
     override fun finalizeDeath(killer: Entity?) {
         if (killer == player) {
             this.asNpc().isInvisible = true
-            type?.transform(this, player)
+            (type ?: return poofClear(this)).transform(this, player)
             timer = 0
         } else {
             super.finalizeDeath(killer)
@@ -82,11 +86,10 @@ class KnightWavesNPC : AbstractNPC {
                 }
 
                 CombatStyle.RANGE, CombatStyle.MAGIC -> {
-                    val specialAttack = player!!.getExtension<WeaponInterface>(WeaponInterface::class.java)
-                    if (specialAttack.isSpecialBar && state.style != CombatStyle.MELEE) {
+                    val specialAttack = player?.getExtension<WeaponInterface>(WeaponInterface::class.java)
+                    if (specialAttack?.isSpecialBar == true && state.style != CombatStyle.MELEE) {
                         if (state.estimatedHit > -1) state.estimatedHit = 0
                     }
-                    if (state.secondaryHit > -1) state.secondaryHit = 0
                 }
 
                 else -> {
@@ -140,34 +143,33 @@ class KnightWavesNPC : AbstractNPC {
             npc.pulseManager.clear()
             npc.walkingQueue.reset()
             player?.setAttribute(GameAttributes.KW_TIER, this.id)
-            Pulser.submit(
-                object : Pulse(3, npc, player) {
-                    private var counter = 0
 
-                    override fun pulse(): Boolean = when (++counter) {
-                        1 -> {
-                            npc.unlock()
-                            npc.animator.reset()
-                            npc.fullRestore()
-                            npc.type = newType
-                            npc.transform(newType!!.id)
-                            npc.impactHandler.disabledTicks = 1
-                            npc.isInvisible = false
-                            if (newType != IX) {
-                                npc.properties.combatPulse.attack(player)
-                            } else {
-                                teleport(player!!, Location.create(2750, 3507, 2).transform(Direction.SOUTH))
-                                MerlinKnightWavesNPC.spawnMerlin(player)
-                                npc.clear()
-                            }
-                            player?.unlock()
-                            true
+            Pulser.submit(object : Pulse(3, npc, player) {
+                override fun pulse(): Boolean {
+                    if (!npc.isActive) return true
+
+                    npc.unlock()
+                    npc.animator.reset()
+                    npc.fullRestore()
+                    npc.impactHandler.disabledTicks = 1
+                    npc.isInvisible = false
+
+                    if (newType == IX) {
+                        player?.let {
+                            teleport(it, Location.create(2750, 3507, 2).transform(Direction.SOUTH))
+                            MerlinKnightWavesNPC.spawnMerlin(it)
                         }
-
-                        else -> false
+                        npc.clear()
+                    } else {
+                        npc.type = newType
+                        npc.transform(newType!!.id)
+                        npc.properties.combatPulse.attack(player)
                     }
-                },
-            )
+
+                    player?.unlock()
+                    return true
+                }
+            })
         }
 
         /**

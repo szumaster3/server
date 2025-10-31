@@ -82,17 +82,14 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun runContentHooks() {
-        if (read && saveFile != null) {
+        if (read)
             contentHooks.forEach { it.parsePlayer(player, saveFile!!) }
-            player.details.saveParsed = true
-        }
+        player.details.saveParsed = true
     }
 
     fun parseVarps() {
-        val varps = saveFile?.getAsJsonArray("varps")
-        if (varps != null) {
-            player.varpManager.parse(varps)
-        }
+        if (saveFile!!.has("varps"))
+            player.varpManager.parse(saveFile!!.getAsJsonArray("varps"))
     }
 
     fun parseAttributes() {
@@ -133,19 +130,27 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun parseSkills() {
-        val data = saveFile?.getAsJsonArray("skills")
-        if (data != null) {
-            player.skills.parse(data)
-            player.skills.experienceGained = saveFile?.get("totalEXP")?.asDouble ?: 0.0
-            player.skills.experienceMultiplier = saveFile?.get("exp_multiplier")?.asDouble ?: 1.0
-        } else {
-            player.skills.experienceMultiplier = GameWorld.settings?.default_xp_rate ?: 1.0
+        val save = saveFile ?: return
+
+        val skillData = save.getAsJsonArray("skills")
+        player.skills.parse(skillData)
+
+        player.skills.experienceGained = save.get("totalEXP").asDouble
+        player.skills.experienceMultiplier = save.get("exp_multiplier").asDouble
+
+        if (GameWorld.settings?.default_xp_rate != 5.0) {
+            player.skills.experienceMultiplier = GameWorld.settings?.default_xp_rate!!
         }
 
-        if (saveFile?.has("milestone") == true) {
-            val milestone = saveFile?.getAsJsonObject("milestone")
-            player.skills.combatMilestone = milestone?.get("combatMilestone")?.asInt ?: 0
-            player.skills.skillMilestone = milestone?.get("skillMilestone")?.asInt ?: 0
+        if (player.skills.experienceMultiplier >= 10) {
+            val divisor = player.skills.experienceMultiplier / 5.0
+            player.skills.correct(divisor)
+        }
+
+        if (save.has("milestone")) {
+            val milestone = save.getAsJsonObject("milestone")
+            player.skills.combatMilestone = milestone.get("combatMilestone").asInt
+            player.skills.skillMilestone = milestone.get("skillMilestone").asInt
         }
     }
 

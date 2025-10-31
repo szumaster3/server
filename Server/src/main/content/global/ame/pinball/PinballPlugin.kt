@@ -33,44 +33,48 @@ class PinballPlugin : InteractionListener, MapArea {
             lock(player, 1)
             animate(player, Animations.HUMAN_MULTI_USE_832)
 
-            if (points > 9) {
-                sendPlainDialogue(player, true, "", "Congratulations - you can now leave the arena.")
+            fun updateScoreDisplay() =
                 sendString(player, "Score: $points", Components.PINBALL_INTERFACE_263, 1)
+
+            fun resetPinballTarget() {
+                setAttribute(player, GameAttributes.RE_PINBALL_OBJ, (0..4).random())
+                PinballUtils.replaceTag(player)
+                PinballUtils.generateTag(player)
+            }
+
+            if (points >= 10) {
+                sendPlainDialogue(player, true, "", "Congratulations - you can now leave the arena.")
+                updateScoreDisplay()
                 return@on true
             }
 
-            /*
-             * Reset score if the wrong post is tagged.
-             */
-
             if (node.id in PinballUtils.PINBALL_EVENT_WRONG_SCENERY_IDs) {
-                setVarbit(player, 2121, 0)
                 points = 0
-                sendString(player, "Score: $points", Components.PINBALL_INTERFACE_263, 1)
+                setVarbit(player, 2121, points)
+                updateScoreDisplay()
+
                 sendUnclosablePlainDialogue(
                     player,
                     true,
                     "",
                     "Wrong post! Your score has been reset.",
-                    "Tag the post with the " + BLUE + "flashing rings</col>.",
+                    "Tag the post with the ${BLUE}flashing rings</col>."
                 )
-                setAttribute(player, GameAttributes.RE_PINBALL_OBJ, (0..4).random())
-                PinballUtils.replaceTag(player)
-                PinballUtils.generateTag(player)
-            } else {
-                points += 1
-                setVarbit(player, 2121, points)
-                sendString(player, "Score: $points", Components.PINBALL_INTERFACE_263, 1)
-                sendUnclosablePlainDialogue(player, true, "", "Well done! Now tag the next post.")
 
-                if (points < 10) {
-                    setAttribute(player, GameAttributes.RE_PINBALL_OBJ, (0..4).random())
-                    PinballUtils.replaceTag(player)
-                    PinballUtils.generateTag(player)
-                } else {
-                    PinballUtils.replaceTag(player)
-                    sendPlainDialogue(player, true, "", "Congratulations - you can now leave the arena.")
-                }
+                resetPinballTarget()
+                return@on true
+            }
+
+            points += 1
+            setVarbit(player, 2121, points)
+            updateScoreDisplay()
+
+            if (points < 10) {
+                sendUnclosablePlainDialogue(player, true, "", "Well done! Now tag the next post.")
+                resetPinballTarget()
+            } else {
+                PinballUtils.replaceTag(player)
+                sendPlainDialogue(player, true, "", "Congratulations - you can now leave the arena.")
             }
 
             return@on true

@@ -37,7 +37,12 @@ object DrillDemonUtils {
     fun changeSignsAndAssignTask(player: Player) {
         setVarp(player, DD_SIGN_VARP, 0)
         val tempList = arrayListOf(DD_SIGN_RUN, DD_SIGN_JUMP, DD_SIGN_PUSHUP, DD_SIGN_SITUP).shuffled().toMutableList()
-        val tempOffsetList = arrayListOf(1335, 1336, 1337, 1338).shuffled().toMutableList()
+        val tempOffsetList = arrayListOf(
+            Vars.VARBIT_RE_DRILL_DEMON_SIGN_RUN_1335,
+            Vars.VARBIT_RE_DRILL_DEMON_SIGN_SITUP_1336,
+            Vars.VARBIT_RE_DRILL_DEMON_SIGN_PUSHUP_1337,
+            Vars.VARBIT_RE_DRILL_DEMON_SIGN_JUMP_1338
+        ).shuffled().toMutableList()
         val task = tempList.random()
         val taskOffset = tempOffsetList.random()
 
@@ -56,10 +61,10 @@ object DrillDemonUtils {
     @JvmStatic
     fun getVarbitForId(id: Int): Int =
         when (id) {
-            Scenery.EXERCISE_MAT_10076 -> 1335
-            Scenery.EXERCISE_MAT_10077 -> 1336
-            Scenery.EXERCISE_MAT_10078 -> 1337
-            Scenery.EXERCISE_MAT_10079 -> 1338
+            Scenery.EXERCISE_MAT_10076 -> Vars.VARBIT_RE_DRILL_DEMON_SIGN_RUN_1335
+            Scenery.EXERCISE_MAT_10077 -> Vars.VARBIT_RE_DRILL_DEMON_SIGN_SITUP_1336
+            Scenery.EXERCISE_MAT_10078 -> Vars.VARBIT_RE_DRILL_DEMON_SIGN_PUSHUP_1337
+            Scenery.EXERCISE_MAT_10079 -> Vars.VARBIT_RE_DRILL_DEMON_SIGN_JUMP_1338
             else -> 0
         }
 
