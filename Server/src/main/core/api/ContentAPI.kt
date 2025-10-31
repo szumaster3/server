@@ -1037,25 +1037,8 @@ fun sendMessage(
     if (ticks != null) {
         player.sendMessages(ticks, *lines)
     } else {
-        if (getVarp(player, 281) == 1000 || player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
-            player.sendMessages(*lines)
-        } else {
-            player.dialogueInterpreter.sendBoldInput(message)
-        }
+        player.sendMessages(*splitLines(message, 86))
     }
-}
-
-/**
- * Sends a tutorial message to the player, displayed in bold input format.
- *
- * @param player The player to send the tutorial message to.
- * @param message The tutorial message.
- */
-fun sendTutorialMessage(
-    player: Player,
-    message: String,
-) {
-    player.dialogueInterpreter.sendBoldInput(message)
 }
 
 /**
