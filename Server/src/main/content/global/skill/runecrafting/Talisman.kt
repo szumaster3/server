@@ -1,5 +1,6 @@
 package content.global.skill.runecrafting
 
+import core.api.sendMessage
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
@@ -7,21 +8,21 @@ import shared.consts.Items
 /**
  * Represents the various talismans used in Runecrafting.
  */
-enum class Talisman(val item: Item, private val ruin: MysteriousRuins?) {
-    AIR(Item(Items.AIR_TALISMAN_1438), MysteriousRuins.AIR),
-    MIND(Item(Items.MIND_TALISMAN_1448), MysteriousRuins.MIND),
-    WATER(Item(Items.WATER_TALISMAN_1444), MysteriousRuins.WATER),
-    EARTH(Item(Items.EARTH_TALISMAN_1440), MysteriousRuins.EARTH),
-    FIRE(Item(Items.FIRE_TALISMAN_1442), MysteriousRuins.FIRE),
-    ELEMENTAL(Item(Items.ELEMENTAL_TALISMAN_5516), null),
-    BODY(Item(Items.BODY_TALISMAN_1446), MysteriousRuins.BODY),
-    COSMIC(Item(Items.COSMIC_TALISMAN_1454), MysteriousRuins.COSMIC),
-    CHAOS(Item(Items.CHAOS_TALISMAN_1452), MysteriousRuins.CHAOS),
-    NATURE(Item(Items.NATURE_TALISMAN_1462), MysteriousRuins.NATURE),
-    LAW(Item(Items.LAW_TALISMAN_1458), MysteriousRuins.LAW),
-    DEATH(Item(Items.DEATH_TALISMAN_1456), MysteriousRuins.DEATH),
-    BLOOD(Item(Items.BLOOD_TALISMAN_1450), MysteriousRuins.BLOOD),
-    SOUL(Item(Items.SOUL_TALISMAN_1460), null),
+enum class Talisman(val item: Int, private val ruin: MysteriousRuins?) {
+    AIR(Items.AIR_TALISMAN_1438, MysteriousRuins.AIR),
+    MIND(Items.MIND_TALISMAN_1448, MysteriousRuins.MIND),
+    WATER(Items.WATER_TALISMAN_1444, MysteriousRuins.WATER),
+    EARTH(Items.EARTH_TALISMAN_1440, MysteriousRuins.EARTH),
+    FIRE(Items.FIRE_TALISMAN_1442, MysteriousRuins.FIRE),
+    ELEMENTAL(Items.ELEMENTAL_TALISMAN_5516, null),
+    BODY(Items.BODY_TALISMAN_1446, MysteriousRuins.BODY),
+    COSMIC(Items.COSMIC_TALISMAN_1454, MysteriousRuins.COSMIC),
+    CHAOS(Items.CHAOS_TALISMAN_1452, MysteriousRuins.CHAOS),
+    NATURE(Items.NATURE_TALISMAN_1462, MysteriousRuins.NATURE),
+    LAW(Items.LAW_TALISMAN_1458, MysteriousRuins.LAW),
+    DEATH(Items.DEATH_TALISMAN_1456, MysteriousRuins.DEATH),
+    BLOOD(Items.BLOOD_TALISMAN_1450, MysteriousRuins.BLOOD),
+    SOUL(Items.SOUL_TALISMAN_1460, null),
     ;
 
     /**
@@ -29,7 +30,7 @@ enum class Talisman(val item: Item, private val ruin: MysteriousRuins?) {
      */
     fun locate(player: Player) {
         if (this == ELEMENTAL || ruin == null) {
-            player.packetDispatch.sendMessage("You cannot tell which direction the Talisman is pulling...")
+            sendMessage(player, "You cannot tell which direction the Talisman is pulling...")
             return
         }
         val loc = ruin.base
@@ -44,7 +45,7 @@ enum class Talisman(val item: Item, private val ruin: MysteriousRuins?) {
             player.location.x > loc.x + 1 -> "west"
             else -> "unknown direction"
         }
-        player.packetDispatch.sendMessage("The talisman pulls towards the $direction.")
+        sendMessage(player, "The talisman pulls towards the $direction.")
     }
 
     /**
@@ -54,7 +55,7 @@ enum class Talisman(val item: Item, private val ruin: MysteriousRuins?) {
         get() = Tiara.values().find { it.name == name }
 
     companion object {
-        private val itemMap = values().associateBy { it.item.id }
+        private val itemMap = values().associateBy { it.item }
         private val nameMap = values().associateBy { it.name }
 
         /**

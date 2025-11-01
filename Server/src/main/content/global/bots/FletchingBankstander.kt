@@ -13,6 +13,7 @@ class FletchingBankstander : Script() {
 
     override fun tick() {
         val bank = scriptAPI.getNearestNode("Bank booth")
+        val fletchData = Fletching.getEntries(Items.LOGS_1511)?.firstOrNull() ?: return
         bot.faceLocation(bank?.location)
         state =
             when (state) {
@@ -24,7 +25,7 @@ class FletchingBankstander : Script() {
                             bot,
                             Item(Items.LOGS_1511),
                             27,
-                            Fletching.FletchingItems.ARROW_SHAFT,
+                            fletchData,
                         ),
                     )
                     State.BANKING

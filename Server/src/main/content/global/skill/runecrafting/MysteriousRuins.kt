@@ -6,7 +6,7 @@ import core.game.world.map.Location
 /**
  * Represents the various Mysterious Ruins
  */
-enum class MysteriousRuins(val `object`: IntArray, val base: Location, @JvmField val end: Location, val talisman: Talisman, val tiara: Tiara) {
+enum class MysteriousRuins(val sceneryIds: IntArray, val base: Location, @JvmField val end: Location, val talisman: Talisman, val tiara: Tiara) {
     AIR(intArrayOf(2452, 7103, 7104), Location.create(2983, 3292, 0), Location.create(2841, 4829, 0), Talisman.AIR, Tiara.AIR),
     MIND(intArrayOf(2453, 7105, 7106), Location.create(2980, 3514, 0), Location.create(2793, 4828, 0), Talisman.MIND, Tiara.MIND),
     WATER(intArrayOf(2454, 7107, 7108), Location.create(3184, 3163, 0), Location.create(3494, 4832, 0), Talisman.WATER, Tiara.WATER),
@@ -25,6 +25,6 @@ enum class MysteriousRuins(val `object`: IntArray, val base: Location, @JvmField
          * Returns [MysteriousRuins] matching the scenery object's id, or null if none.
          */
         fun forObject(scenery: Scenery): MysteriousRuins? =
-            values().find { ruin -> scenery.id in ruin.`object` }
+            values().find { ruin -> scenery.id in ruin.sceneryIds }
     }
 }

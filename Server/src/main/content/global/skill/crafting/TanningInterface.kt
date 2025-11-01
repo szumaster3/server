@@ -23,7 +23,6 @@ class TanningInterface : InterfaceListener {
                         155 -> 1
                         196 -> 5
                         234 -> player.inventory.getAmount(Item(type.item, 1))
-                        124, 199 -> return@on true
                         else -> 0
                     }
                     if (amount > 0) TanningProduct.tan(player, amount, type)

@@ -10,8 +10,8 @@ import shared.consts.Items
 
 class RunePouchPlugin : OptionHandler() {
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any?): Plugin<Any>? {
-        for (i in 5509..5515) {
+    override fun newInstance(arg: Any?): Plugin<Any> {
+        for (i in Items.SMALL_POUCH_5509..Items.GIANT_POUCH_5515) {
             ItemDefinition.forId(i).handlers["option:fill"] = this
             ItemDefinition.forId(i).handlers["option:empty"] = this
             ItemDefinition.forId(i).handlers["option:check"] = this

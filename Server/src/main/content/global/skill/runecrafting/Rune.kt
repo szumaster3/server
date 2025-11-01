@@ -23,24 +23,19 @@ enum class Rune(val rune: Item, val level: Int, val experience: Double, private 
     SOUL(Runes.SOUL_RUNE.transform(), 90, 11.0);
 
     /**
-     * Gets the multiples of experience for this rune.
+     *  @return XP multipliers for this rune.
      */
-    fun getMultiple(): IntArray? = multiple
+    fun getMultiple(): IntArray = multiple
 
     /**
-     * Determines if the rune is considered "normal" (i.e., part of the base set of runes).
+     * @return true if this is one of the basic runes.
      */
     val isNormal: Boolean
         get() = this == AIR || this == MIND || this == WATER || this == EARTH || this == FIRE || this == BODY
 
-    /**
-     * Determines if the rune has experience multiples.
-     */
-    fun isMultiple(): Boolean = getMultiple() != null
-
     companion object {
         /**
-         * Map of item IDs to their [Rune] entries.
+         * Maps rune item ids to Rune entry.
          */
         private val itemToRune = HashMap<Int, Rune>()
 
@@ -51,13 +46,13 @@ enum class Rune(val rune: Item, val level: Int, val experience: Double, private 
         }
 
         /**
-         * Returns the Rune matching the given Item, or null if none.
+         * Gets the Rune for the given item, or null if none.
          */
         @JvmStatic
         fun forItem(item: Item): Rune? = itemToRune[item.id]
 
         /**
-         * Returns the Rune matching the given name, or null if none.
+         * Gets the Rune by name, or null if none.
          */
         @JvmStatic
         fun forName(name: String): Rune? = values().find { it.name == name }

@@ -11,7 +11,6 @@ import core.game.node.entity.player.link.quest.QuestRequirements
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import shared.consts.Animations
-import shared.consts.Items
 
 /**
  * Represents interactions with the mysterious ruins in the game.
@@ -19,22 +18,7 @@ import shared.consts.Items
 class MysteriousRuinsPlugin : InteractionListener {
     private val sceneryIDs = allRuins()
     private val stavesIDs = RunecraftingStaff.values().map { it.staffId }.toIntArray()
-    private val talismanIDs = arrayOf(
-        Items.AIR_TALISMAN_1438,
-        Items.MIND_TALISMAN_1448,
-        Items.WATER_TALISMAN_1444,
-        Items.EARTH_TALISMAN_1440,
-        Items.FIRE_TALISMAN_1442,
-        Items.ELEMENTAL_TALISMAN_5516,
-        Items.BODY_TALISMAN_1446,
-        Items.COSMIC_TALISMAN_1454,
-        Items.CHAOS_TALISMAN_1452,
-        Items.NATURE_TALISMAN_1462,
-        Items.LAW_TALISMAN_1458,
-        Items.DEATH_TALISMAN_1456,
-        Items.BLOOD_TALISMAN_1450,
-        Items.SOUL_TALISMAN_1460
-    ).toIntArray()
+    private val talismanIDs = RunecraftingStaff.values().map { it.talisman }.toIntArray()
 
     override fun defineListeners() {
 
@@ -64,7 +48,7 @@ class MysteriousRuinsPlugin : InteractionListener {
      * Retrieves all the ids for the mysterious ruins.
      */
     private fun allRuins(): IntArray =
-        MysteriousRuins.values().flatMap { ruins -> ruins.`object`.asList() }.toIntArray()
+        MysteriousRuins.values().flatMap { ruins -> ruins.sceneryIds.asList() }.toIntArray()
 
     /**
      * Handles the interaction when a talisman is used with a scenery object.
@@ -106,10 +90,7 @@ class MysteriousRuinsPlugin : InteractionListener {
     /**
      * Handles the interaction when the player uses a tiara with a scenery object.
      */
-    private fun handleTiara(
-        player: Player,
-        node: Node,
-    ): Boolean {
+    private fun handleTiara(player: Player, node: Node): Boolean {
         val ruin = MysteriousRuins.forObject(node.asScenery())
 
         if (!checkQuestCompletion(player, ruin!!)) {

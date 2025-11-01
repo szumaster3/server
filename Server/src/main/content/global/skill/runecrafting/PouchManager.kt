@@ -151,7 +151,7 @@ class PouchManager(val player: Player) {
         }
     }
 
-    fun checkRequirement(pouchId: Int): Boolean {
+    private fun checkRequirement(pouchId: Int): Boolean {
         val p = pouches[pouchId]
         p ?: return false
         return player.skills.getLevel(Skills.RUNECRAFTING) >= p.levelRequirement
@@ -164,7 +164,7 @@ class PouchManager(val player: Player) {
         player.sendMessage("This pouch has space for ${p.container.freeSlots()} more essence.")
     }
 
-    fun isDecayedPouch(pouchId: Int): Boolean {
+    private fun isDecayedPouch(pouchId: Int): Boolean {
         if (pouchId == Items.MEDIUM_POUCH_5510) return false
         return pouches[pouchId - 1] != null
     }

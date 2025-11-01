@@ -35,8 +35,8 @@ class FalconryPlugin : ActivityPlugin(FALCONRY_ZONE, false, false, false), MapAr
     companion object {
         val FALCONRY_ZONE = "falconry"
 
-        fun removeItems(player: Player?) {
-            removeItem(player!!, Items.FALCONERS_GLOVE_10023, Container.INVENTORY)
+        fun removeItems(player: Player) {
+            removeItem(player, Items.FALCONERS_GLOVE_10023, Container.INVENTORY)
             removeItem(player, Items.FALCONERS_GLOVE_10023, Container.EQUIPMENT)
             removeItem(player, Items.FALCONERS_GLOVE_10024, Container.INVENTORY)
             removeItem(player, Items.FALCONERS_GLOVE_10024, Container.EQUIPMENT)

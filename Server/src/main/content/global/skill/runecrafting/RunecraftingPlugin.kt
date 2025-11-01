@@ -112,7 +112,7 @@ class RunecraftingPlugin : OptionHandler() {
             SceneryDefinition.forId(altar.exit).handlers["option:use"] = this
         }
         for (talisman in Talisman.values()) {
-            ItemDefinition.forId(talisman.item.id).handlers["option:locate"] = this
+            ItemDefinition.forId(talisman.item).handlers["option:locate"] = this
         }
     }
 

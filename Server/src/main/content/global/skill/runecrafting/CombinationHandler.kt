@@ -9,7 +9,7 @@ import core.plugin.Plugin
  * Handles the combination of talismans and runes.
  */
 class CombinationHandler :
-    UseWithHandler(Talisman.AIR.item.id, Talisman.WATER.item.id, Talisman.EARTH.item.id, Talisman.FIRE.item.id, Rune.WATER.rune.id, Rune.EARTH.rune.id, Rune.AIR.rune.id, Rune.FIRE.rune.id) {
+    UseWithHandler(Talisman.AIR.item, Talisman.WATER.item, Talisman.EARTH.item, Talisman.FIRE.item, Rune.WATER.rune.id, Rune.EARTH.rune.id, Rune.AIR.rune.id, Rune.FIRE.rune.id) {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (altar in Altar.values()) {

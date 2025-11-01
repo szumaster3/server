@@ -172,10 +172,10 @@ class AbyssPlugin : InteractionListener {
             )
         }
 
-        /**
+        /*
          * Handles squeezing through a gap obstacle.
-         * Plays an audio effect when attempting.
          */
+
         on(Scenery.GAP_7164, IntType.SCENERY, "squeeze-through") { player, node ->
             playAudio(player, Sounds.ABYSSAL_SQUEEZETHROUGH_2709)
             return@on handleObstacle(
