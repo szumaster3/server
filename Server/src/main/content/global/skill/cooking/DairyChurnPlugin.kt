@@ -12,7 +12,17 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.plugin.ClassScanner
 import shared.consts.*
-import java.util.*
+
+/**
+ * Represents dairy products.
+ */
+enum class Churnable(val product: Item, val xp: Double, val animation: Animation?) {
+    BUCKET_OF_MILK(Item(Items.BUCKET_OF_MILK_1927), 0.0, null),
+    CREAM(Item(Items.POT_OF_CREAM_2130), 18.0, Animation(Animations.CHURN_CREAM_2793)),
+    BUTTER(Item(Items.PAT_OF_BUTTER_6697), 41.0, Animation(Animations.CHURN_BUTTER_2794)),
+    CHEESE(Item(Items.CHEESE_1985), 64.0, Animation(Animations.CHURN_CHEESE_2795));
+    override fun toString(): String = name.lowercase().replace("_", " ").replace("bucket of ", "")
+}
 
 /**
  * Handles interactions with dairy churns.
@@ -35,33 +45,29 @@ class DairyChurnPlugin : InteractionListener {
 
     companion object {
         const val DIALOGUE_ID = 984374
-    }
 
-    private fun checkIngredients(player: Player): Boolean {
-        if (!anyInInventory(player, *ingredients)) {
-            sendMessage(player, "You need some milk, cream or butter to use in the churn.")
-            return false
-        }
-        return true
+        private val CHURN_DELAY = mapOf<Pair<Churnable, Churnable>, Int>(
+            Churnable.BUCKET_OF_MILK to Churnable.CREAM to 10,
+            Churnable.BUCKET_OF_MILK to Churnable.BUTTER to 20,
+            Churnable.BUCKET_OF_MILK to Churnable.CHEESE to 27,
+            Churnable.CREAM to Churnable.BUTTER to 10,
+            Churnable.CREAM to Churnable.CHEESE to 17,
+            Churnable.BUTTER to Churnable.CHEESE to 7
+        )
+
+        fun getChurnDelay(ingredient: Churnable, product: Churnable): Int =
+            CHURN_DELAY[ingredient to product] ?: 0
     }
 
     override fun defineListeners() {
         ClassScanner.definePlugin(DairyChurnDialogue())
 
-        /*
-         * Handles clicking on churn.
-         */
         on(churns, IntType.SCENERY, "churn") { player, _ ->
-            if (!checkIngredients(player)) return@on true
             player.dialogueInterpreter.open(DIALOGUE_ID)
             return@on true
         }
 
-        /*
-         * Handles using ingredients on churn.
-         */
         onUseWith(IntType.SCENERY, ingredients, *churns) { player, _, _ ->
-            if (!checkIngredients(player)) return@onUseWith true
             player.dialogueInterpreter.open(DIALOGUE_ID)
             return@onUseWith true
         }
@@ -71,51 +77,65 @@ class DairyChurnPlugin : InteractionListener {
 /**
  * Dialogue shown when interacting with a dairy churn.
  */
-class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
+private class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
+
+    private data class ChurnOption(val churnable: Churnable, val amount: Int)
+
+    private val churnOptionsOp1 = mapOf(
+        4 to ChurnOption(Churnable.CHEESE, 1),
+        3 to ChurnOption(Churnable.CHEESE, 5),
+        2 to ChurnOption(Churnable.CHEESE, 10)
+    )
+
+    private val churnOptionsOp2 = mapOf(
+        8 to ChurnOption(Churnable.CHEESE, 1),
+        7 to ChurnOption(Churnable.CHEESE, 5),
+        6 to ChurnOption(Churnable.CHEESE, 10),
+        5 to ChurnOption(Churnable.BUTTER, 1),
+        4 to ChurnOption(Churnable.BUTTER, 5),
+        3 to ChurnOption(Churnable.BUTTER, 10)
+    )
+
+    private val churnOptionsOp3 = mapOf(
+        12 to ChurnOption(Churnable.CHEESE, 1),
+        11 to ChurnOption(Churnable.CHEESE, 5),
+        10 to ChurnOption(Churnable.CHEESE, 10),
+        9  to ChurnOption(Churnable.BUTTER, 1),
+        8  to ChurnOption(Churnable.BUTTER, 5),
+        7  to ChurnOption(Churnable.BUTTER, 10),
+        6  to ChurnOption(Churnable.CREAM, 1),
+        5  to ChurnOption(Churnable.CREAM, 5),
+        4  to ChurnOption(Churnable.CREAM, 10)
+    )
 
     override fun open(vararg args: Any?): Boolean {
         val interfaceId = when {
-            inInventory(player, Items.BUCKET_OF_MILK_1927) || inInventory(player, Items.PAT_OF_BUTTER_6697) -> Components.COOKING_CHURN_OP3_74
-            inInventory(player, Items.POT_OF_CREAM_2130) -> Components.COOKING_CHURN_OP2_73
-            else -> return false
+            getStatLevel(player, Skills.COOKING) >= 48 -> Components.COOKING_CHURN_OP3_74
+            getStatLevel(player, Skills.COOKING) >= 38 -> Components.COOKING_CHURN_OP2_73
+            getStatLevel(player, Skills.COOKING) >= 21 -> Components.COOKING_CHURN_OP1_72
+            else -> {
+                sendMessage(player, "You must have a Cooking level of at least 21 to use this.")
+                return false
+            }
         }
+
         openChatbox(player, interfaceId)
         return true
     }
 
-    private data class ChurnOption(val input: Int, val product: DairyProduct, val amount: Int)
-
-    private val churnOptions: Map<Int, Map<Int, ChurnOption>> = mapOf(
-        Components.COOKING_CHURN_OP3_74 to mapOf(
-            13 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.CHEESE, 1),
-            12 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.CHEESE, 5),
-            11 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.CHEESE, 10),
-            10 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.PAT_OF_BUTTER, 1),
-            9 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.PAT_OF_BUTTER, 5),
-            8 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.PAT_OF_BUTTER, 10),
-            7 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.POT_OF_CREAM, 1),
-            6 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.POT_OF_CREAM, 5),
-            5 to ChurnOption(Items.BUCKET_OF_MILK_1927, DairyProduct.POT_OF_CREAM, 10)
-        ),
-        Components.COOKING_CHURN_OP2_73 to mapOf(
-            9 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.CHEESE, 1),
-            8 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.CHEESE, 5),
-            7 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.CHEESE, 10),
-            6 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.PAT_OF_BUTTER, 1),
-            5 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.PAT_OF_BUTTER, 5),
-            4 to ChurnOption(Items.POT_OF_CREAM_2130, DairyProduct.PAT_OF_BUTTER, 10)
-        ),
-        Components.COOKING_CHURN_OP1_72 to mapOf(
-            5 to ChurnOption(Items.PAT_OF_BUTTER_6697, DairyProduct.CHEESE, 1),
-            4 to ChurnOption(Items.PAT_OF_BUTTER_6697, DairyProduct.CHEESE, 5),
-            3 to ChurnOption(Items.PAT_OF_BUTTER_6697, DairyProduct.CHEESE, 10)
-        )
-    )
-
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val id = if (churnOptions.containsKey(interfaceId)) interfaceId else Components.COOKING_CHURN_OP1_72
-        val option = churnOptions[id]?.get(buttonId) ?: return false
-        player.pulseManager.run(DairyChurnPulse(player, Item(option.input), option.product, option.amount))
+        val map = when (interfaceId) {
+            Components.COOKING_CHURN_OP3_74 -> churnOptionsOp3
+            Components.COOKING_CHURN_OP2_73 -> churnOptionsOp2
+            Components.COOKING_CHURN_OP1_72 -> churnOptionsOp1
+            else -> return false
+        }
+
+        val option = map[buttonId] ?: run {
+            println("No option found for button=$buttonId.")
+            return false
+        }
+        player.pulseManager.run(DairyChurnPulse(player, option.churnable, option.amount))
         return true
     }
 
@@ -127,75 +147,61 @@ class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
  * Handles the churning process for dairy products.
  */
 private class DairyChurnPulse(
-    player: Player?,
-    private val input: Item,
-    private val dairy: DairyProduct,
+    player: Player,
+    private val churnable: Churnable,
     private var amount: Int
-) : SkillPulse<Item?>(player, input) {
+) : SkillPulse<Item?>(player, churnable.product) {
 
     companion object {
-        private val ANIMATION = Animation(Animations.CHURN_BUTTER_2793)
         private val BUCKET = Item(Items.BUCKET_1925)
     }
 
-    init {
-        delay = 8
-    }
+    private var ingredient: Churnable? = null
+    private var cycle: Int = 0
+    private var ticks = 0
 
     override fun checkRequirements(): Boolean {
         closeChatBox(player)
-
-        val availableInput = dairy.inputsItems.firstOrNull { inInventory(player, it.id) }
-        if (availableInput == null) {
-            sendMessage(player, "You need ${getItemName(input.id)} to use this churn.")
+        ingredient = player.findIngredient(churnable) ?: run {
+            sendMessage(player, "You need some milk to churn $churnable.")
             return false
         }
-
-        if (getStatLevel(player, Skills.COOKING) < dairy.level) {
-            sendMessage(player, "You need a Cooking level of ${dairy.level} to process this item.")
-            return false
-        }
-
-        val availableAmount = amountInInventory(player, availableInput.id)
-        if (amount > availableAmount) amount = availableAmount
-        if (amount < 1) return false
-
+        node = ingredient!!.product
+        cycle = DairyChurnPlugin.getChurnDelay(ingredient!!, churnable)
         animate()
-        node = availableInput
         return true
     }
 
     override fun animate() {
-        player.animate(ANIMATION)
+        player.animate(churnable.animation)
         playAudio(player, Sounds.CHURN_2574, 1)
     }
 
     override fun reward(): Boolean {
-        repeat(amount) {
-            val usedInput = dairy.inputsItems.firstOrNull { removeItem(player, it) } ?: return@repeat
-            player.inventory.add(dairy.product)
-            if (usedInput.id == Items.BUCKET_OF_MILK_1927) addItemOrDrop(player, BUCKET.id)
+        ticks++
+        if (ticks < cycle) return false
+        ticks = 0
 
-            val productName = getItemName(dairy.product.id).lowercase(Locale.getDefault())
-            val article = if (productName.firstOrNull()?.isVowel() == true) "an" else "a"
-            sendMessage(player, "You make $article $productName.")
+        val ingredientId = player.findIngredient(churnable)?.product ?: return true
+        if (!removeItem(player, ingredientId)) return true
 
-            player.dispatch(ResourceProducedEvent(dairy.product.id, 1, usedInput, Items.BUCKET_OF_MILK_1927))
-            player.getSkills().addExperience(Skills.COOKING, dairy.experience, true)
-        }
-        return true
+        addItem(player, churnable.product.id)
+        if (ingredientId.id == Items.BUCKET_OF_MILK_1927) addItemOrDrop(player, BUCKET.id)
+
+        sendMessage(player, "You make $churnable.")
+        player.dispatch(ResourceProducedEvent(churnable.product.id, 1, ingredientId, Items.BUCKET_OF_MILK_1927))
+        rewardXP(player, Skills.COOKING, churnable.xp)
+
+        amount--
+        return amount <= 0
     }
-
-    private fun Char.isVowel(): Boolean = this.lowercaseChar() in "aeiou"
 }
 
-/**
- * Represents dairy products.
- */
-enum class DairyProduct(val level: Int, val experience: Double, val product: Item, inputs: Array<Int>) {
-    POT_OF_CREAM(21, 18.0, Item(Items.POT_OF_CREAM_2130), arrayOf(Items.BUCKET_OF_MILK_1927)),
-    PAT_OF_BUTTER(38, 40.5, Item(Items.PAT_OF_BUTTER_6697), arrayOf(Items.BUCKET_OF_MILK_1927, Items.POT_OF_CREAM_2130)),
-    CHEESE(48, 64.0, Item(Items.CHEESE_1985), arrayOf(Items.BUCKET_OF_MILK_1927, Items.POT_OF_CREAM_2130, Items.PAT_OF_BUTTER_6697));
-
-    val inputsItems: Array<Item> by lazy { inputs.map { Item(it) }.toTypedArray() }
+private fun Player.findIngredient(forProduct: Churnable): Churnable? = when (forProduct) {
+    Churnable.CHEESE -> listOf(Churnable.BUTTER, Churnable.CREAM, Churnable.BUCKET_OF_MILK)
+        .firstOrNull { inventory.containsItem(it.product) }
+    Churnable.BUTTER -> listOf(Churnable.CREAM, Churnable.BUCKET_OF_MILK)
+        .firstOrNull { inventory.containsItem(it.product) }
+    Churnable.CREAM -> if (inventory.containsItem(Churnable.BUCKET_OF_MILK.product)) Churnable.BUCKET_OF_MILK else null
+    else -> null
 }

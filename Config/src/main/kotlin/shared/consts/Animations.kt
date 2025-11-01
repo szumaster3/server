@@ -2791,9 +2791,9 @@ object Animations {
     const val BEND_ON_GROUND_2790 = 2790
     const val ANIMATION_2791 = 2791
     const val ANIMATION_2792 = 2792
-    const val CHURN_BUTTER_2793 = 2793
-    const val DWARF_AXE_2794 = 2794
-    const val THE_RAPTOR_ATTACK_WITH_FLAIL_2795 = 2795
+    const val CHURN_CREAM_2793 = 2793
+    const val CHURN_BUTTER_2794 = 2794
+    const val CHURN_CHEESE_2795 = 2795
     const val CRAWLING_2796 = 2796
     const val STAND_2797 = 2797
     const val OLD_HOME_TP_2798 = 2798
