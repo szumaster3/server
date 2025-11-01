@@ -137,9 +137,9 @@ internal object GameAttributes {
     const val QUEST_SWEPT_AWAY_BETTY_ENCH_RECEIVED = "/save:quest:swept-away:betty-enchantment-completed"
     const val QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED = "/save:quest:swept-away:old-crone-completed"
     const val QUEST_SWEPT_AWAY_ALI_THE_HAG_ENCH_RECEIVED = "/save:quest:swept-away:ali-the-hag-completed"
+    // TODO
     const val QUEST_SWEPT_AWAY_SORCERESS_APPRENTICE_RECEIVED = "/save:quest:swept-away:sorceress-apprentice-completed"
 
-    const val QUEST_SWEPT_AWAY_LINE = "/save:quest:sweep-away:line"
     const val QUEST_SWEPT_AWAY_BETTY_WAND = "quest:swept-away:item"
     const val QUEST_SWEPT_AWAY_CREATURE_INTER = "/save:quest:sweep-away:creature_interactions"
     const val QUEST_SWEPT_AWAY_LABELS = "/save:quest:swept-away:labels"

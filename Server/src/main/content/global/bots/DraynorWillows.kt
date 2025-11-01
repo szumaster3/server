@@ -76,8 +76,8 @@ class DraynorWillows : Script(){
     }
 
     init {
-        inventory.add(Item(Items.BRONZE_AXE_1351))
-        skills[Skills.WOODCUTTING] = 35
+        inventory.add(Item(Items.RUNE_AXE_1359))
+        skills[Skills.WOODCUTTING] = 42
     }
 
     override fun newInstance(): Script {

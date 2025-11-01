@@ -11,13 +11,16 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.emote.Emotes
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import shared.consts.*
 
 class SweptAwayPlugin : InteractionListener, InterfaceListener {
+
+    init {
+        SweptUtils.spawnAllLines()
+    }
 
     override fun defineListeners() {
 
@@ -54,15 +57,6 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
 
         on(Scenery.TRAPDOOR_39331, IntType.SCENERY, "close") { player, _ ->
             setVarbit(player, SweptUtils.VARBIT_RIMMINGTON_TRAPDOOR, 0)
-            return@on true
-        }
-
-        /*
-         * Handles talking to NPC Aggie.
-         */
-
-        on(NPCs.AGGIE_8207, IntType.NPC, "talk-to") { player, node ->
-            player.dialogueInterpreter.open(NPCs.AGGIE_8207, node.id)
             return@on true
         }
 
@@ -117,21 +111,13 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
             return@on true
         }
 
-        val sweepLines =
-            hashMapOf<Int, (Player) -> Unit>(
-                Scenery.LINE_39364 to SweptUtils::sweepFirstLines,
-                Scenery.LINE_39377 to SweptUtils::sweepSecondLines,
-                Scenery.LINE_39408 to SweptUtils::sweepThirdLines,
-                Scenery.LINE_39414 to SweptUtils::sweepFourthLines,
-            )
-
         /*
          * Handles sweeping the lines of the area during the quest.
          */
 
-        sweepLines.forEach { (lineId, sweepAction) ->
+        SweptUtils.allLines.forEach { (lineId, _) ->
             on(lineId, IntType.SCENERY, "sweep-away") { player, _ ->
-                sweepAction(player)
+                SweptUtils.sweepLines(player, lineId)
                 return@on true
             }
         }
@@ -239,7 +225,6 @@ class SweptAwayPlugin : InteractionListener, InterfaceListener {
             SweptUtils.checkMagicSlate(player)
             return@on true
         }
-
 
         /*
          * Handles opening the lottie chest.

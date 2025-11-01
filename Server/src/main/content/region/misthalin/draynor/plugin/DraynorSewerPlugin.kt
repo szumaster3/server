@@ -1,5 +1,6 @@
 package content.region.misthalin.draynor.plugin
 
+import core.api.runTask
 import core.api.sendNPCDialogue
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
@@ -19,7 +20,10 @@ class DraynorSewerPlugin: InteractionListener {
          */
 
         on(Scenery.LADDER_26518, IntType.SCENERY, "climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.CLIMB_OUT_OF_LADDER_IN_DRAYNOR_SEWER_2413), Location.create(3118, 3243, 0))
+            player.animate(climbAnimation)
+            runTask(player, 2) {
+                ClimbActionHandler.climb(player, null, Location.create(3118, 3243, 0))
+            }
             return@on true
         }
 
@@ -28,7 +32,10 @@ class DraynorSewerPlugin: InteractionListener {
          */
 
         on(Scenery.LADDER_32015, IntType.SCENERY, "climb-up") { player, _ ->
-            ClimbActionHandler.climb(player, Animation(Animations.CLIMB_OUT_OF_LADDER_IN_DRAYNOR_SEWER_2413), Location.create(3084, 3271, 0))
+            player.animate(climbAnimation)
+            runTask(player, 2) {
+                ClimbActionHandler.climb(player, null, Location.create(3084, 3271, 0))
+            }
             return@on true
         }
 
@@ -36,5 +43,9 @@ class DraynorSewerPlugin: InteractionListener {
             sendNPCDialogue(player, with.id, "I have no ussse for that...")
             return@onUseAnyWith true
         }
+    }
+
+    companion object {
+        val climbAnimation = Animation(Animations.CLIMB_OUT_OF_LADDER_IN_DRAYNOR_SEWER_2413)
     }
 }

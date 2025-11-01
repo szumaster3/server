@@ -1,5 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
+import content.data.GameAttributes
+import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils.resetLines
 import core.api.*
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
@@ -14,6 +16,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.*
 
 /**
@@ -32,6 +35,18 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                 "What do you need to make blue dye?",
             )
             stage = 42
+            return true
+        }
+        if(npc.id == NPCs.AGGIE_8207) {
+            if (getQuestStage(player, Quests.SWEPT_AWAY) == 3) {
+                player("Woah, I felt that down to my toes!")
+                stage = 911
+            } else if(getQuestStage(player, Quests.SWEPT_AWAY) == 2 && player.getAttribute("total_sweeps", 0) >= 0) {
+                npcl(FaceAnim.SAD, "Hmm, that doesn't look quite right. To enchant the broom, you need to sweep away 4 lines to make a pattern of 4 small triangles - and no extra lines or shapes.").also { stage = 921 }
+            } else {
+                player("Woah! Where are we and what are we doing here?")
+                stage = 900
+            }
             return true
         }
         quest = player.getQuestRepository().getQuest(Quests.PRINCE_ALI_RESCUE)
@@ -61,7 +76,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 720
                     return true
                 }
-                if (!isQuestComplete(player, Quests.SWEPT_AWAY)) {
+                if (!isQuestComplete(player, Quests.SWEPT_AWAY) && getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
                     options(
                         "What could you make for me?",
                         "Cool, do you turn people into frogs?",
@@ -495,11 +510,11 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                         override fun pulse(): Boolean {
                             when (counter++) {
                                 0 -> openInterface(player, Components.FADE_TO_BLACK_120)
-                                1 ->
+                                3 ->
                                     teleport(
                                         player,
                                         Location(3291, 4514, 0),
-                                        TeleportManager.TeleportType.NORMAL,
+                                        TeleportManager.TeleportType.INSTANT,
                                     )
                                 6 -> {
                                     openInterface(player, Components.FADE_FROM_BLACK_170)
@@ -514,6 +529,86 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
                     },
                 )
             }
+            900 -> npc("Oh, this is just a little place that some of us witches use", "on occasion. It's rather convenient for the occasional", "ritual or spell.").also { stage++ }
+            901 -> npc("Not only is it infused with a bit of magical peace, but", "it's out of the way enough that we don't get a lot of", "unnecessary interruptions.").also { stage++ }
+            902 -> player("Ah, right. Which leaves the question of what we're doing", "here.").also { stage++ }
+            903 -> npc("You want that broom of yours enchanted, right?").also { stage++ }
+            904 -> player("Right.").also { stage++ }
+            905 -> npc("Well the best way to enchant that hunk of dead wood", "is to harness the power latent in this magical symbol", "here.").also { stage++ }
+            906 -> npc("Do you see that pattern of 16 lines thrown out of sand", "on the ground?").also { stage++ }
+            907 -> player("How could I miss it?").also { stage++ }
+            908 -> npc("In order to enchant the broom, you need to sweep", "away 4 lines of those 16 lines, such that you leave only 4", "small triangles on the ground - and nothing else.").also { stage++ }
+            909 -> npc("If you run into any trouble, let me know and I'll", "reconfigure the original pattern for you. I can also", "teleport you back to Draynor when you're ready to", "leave.").also { stage++ }
+            910 -> {
+                player("Okay, thanks. I'll give it a try.")
+                end()
+                setQuestStage(player, Quests.SWEPT_AWAY, 2)
+                stage = END_DIALOGUE
+            }
+            911 -> npcl(FaceAnim.HAPPY, "You did it! The enchantment form the sand pattern has infused Maggie's broom. There's nothing more to do here howl come have a chat when you're ready and I'll take you back to Draynor with me.").also { stage++ }
+            912 -> player("Wow that was impressive.").also { stage++ }
+            913 -> npc("Yes, there is a lot of power in these types of magical", "symbols.").also { stage++ }
+            914 -> options("Is there anything else that needs to be done here?", "Where are we?", "I'd like to go back to Draynor, please.").also { stage++ }
+            915 -> when (buttonId) {
+                1 -> player("Is there anything else that needs to be done here?").also { stage = 918 }
+                2 -> player("Where are we?").also { stage = 919 }
+                3 -> player("I'd like to go back to Draynor, please.").also { stage++ }
+
+            }
+            916 -> npc("Sure thing! Just hold on to your hat and you'll be back", "in Draynor before you can wiggle your nose.").also { stage++ }
+            917 -> {
+                end()
+                lock(player, 6)
+                GameWorld.Pulser.submit(
+                    object : Pulse() {
+                        var counter = 0
+
+                        override fun pulse(): Boolean {
+                            when (counter++) {
+                                0 -> openInterface(player, Components.FADE_TO_BLACK_120)
+                                3 ->
+                                    core.api.teleport(
+                                        player,
+                                        Location.create(3086, 3259, 0),
+                                        TeleportManager.TeleportType.INSTANT,
+                                    )
+
+                                6 -> {
+                                    unlock(player)
+                                    openInterface(player, Components.FADE_FROM_BLACK_170)
+                                    return true
+                                }
+                            }
+                            return false
+                        }
+                    },
+                )
+            }
+            918 -> npc(FaceAnim.HALF_GUILTY, "Not everything you were supposed to do has been done.").also { stage = 914 }
+            919 -> npc("Oh, this is just a little place that some of us witches use", "on occasion. It's rather convenient for the occasional", "ritual or spell.").also { stage++ }
+            920 -> npc("Not only is it infused with a bit of magical peace, but", "it's out of the way enough that we don't get a lot of", "unnecessary interruptions.").also { stage = 914 }
+
+            921 -> npcl(FaceAnim.HAPPY, "Would you like me to lay out the sand lines so that you can try again?").also { stage++ }
+            922 -> options("Yes, please.", "No, thank you.").also { stage++ }
+            923 -> when (buttonId) {
+                1 -> {
+                    npc("Okay, just one moment.")
+                    lock(player, 9)
+                    openInterface(player, Components.FADE_TO_BLACK_120)
+                    runTask(player, 6) {
+                        closeInterface(player)
+                        openInterface(player, Components.FADE_FROM_BLACK_170)
+                        resetLines(player)
+                    }
+                    stage = END_DIALOGUE
+                }
+
+                2 -> {
+                    player("No, thank you.")
+                    stage++
+                }
+            }
+            924 -> npcl(FaceAnim.HAPPY, "All right. If you change your mind, just let me know.").also { stage = END_DIALOGUE }
         }
         return true
     }
@@ -534,7 +629,7 @@ class AggieDialogue(player: Player? = null) : Dialogue(player) {
         return player.inventory.containsItem(BUCKET_OF_WATER) || player.inventory.containsItem(JUG_OF_WATER)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922)
+    override fun getIds(): IntArray = intArrayOf(NPCs.AGGIE_922, NPCs.AGGIE_8207)
 
     companion object {
         private val ANIMATION = Animation(Animations.AGGIE_MIXING_DYE_4352)

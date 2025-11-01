@@ -33,14 +33,7 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
             line(player, "I have agreed to help Maggie prepare a batch of the 'good stuff'", line++, true)
             line(player, "that she is concocting in her pauldron.", line++, true)
             line(player, "Maggie gave me a broom which I've had enchanted by", line++, stage > 4)
-            line(
-                player,
-                "!!Hetty?? in !!Rimmington??,",
-                line++,
-                getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_HETTY_ENCH, false) ||
-                    getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false) ||
-                    stage > 4
-            )
+            line(player, "!!Hetty?? in !!Rimmington??,", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_HETTY_ENCH, false) || getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false) || stage > 4)
             line(player, "!!Betty?? in !!Port Sarim?? and", line++, stage > 4)
             line(player, "!!Aggie?? in !!Draynor??.", line++, stage > 4)
             line++
@@ -64,7 +57,8 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
             line(player, "!!Ali the Hag?? in !!Pollnivneach??", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_ALI_THE_HAG_ENCH_RECEIVED, false))
             line(player, "The !!Old Crone?? near the !!Slayer Tower?? (with level 53 Magic)", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED, false))
             line(player, "!!Baba Yaga?? of !!Lunar Isle?? (with level 73 Magic)", line++, getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_BETTY_ENCH_RECEIVED, false))
-            line(player, "!!Kardia?? in the !!Underground Pass?? (with level 93 Magic)", line++, false) // TODO
+            // TODO
+            line(player, "!!Kardia?? in the !!Underground Pass?? (with level 93 Magic)", line++, false)
             line++
             line(player, "I should talk to these !!witches?? for more information.", line, false)
         }
@@ -73,7 +67,7 @@ class SweptAway : Quest(Quests.SWEPT_AWAY, 160, 159, 1, Vars.VARBIT_QUEST_SWEPT_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.BROOMSTICK_14057, 230)
+        displayQuestItem(player, Items.BROOMSTICK_14057)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "A broom", ln++)
         drawReward(player, "Access to 10 portions of", ln++)
