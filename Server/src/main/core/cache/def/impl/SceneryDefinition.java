@@ -851,6 +851,9 @@ public class SceneryDefinition extends Definition<Scenery> {
         if (id == 29292) {
             projectileClipped = false;
         }
+        if (id == 28779) {
+            clipType = 1;
+        }
     }
 
     /**

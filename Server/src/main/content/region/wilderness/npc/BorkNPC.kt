@@ -84,12 +84,31 @@ class BorkNPC : AbstractNPC {
             object : Pulse(10, player) {
                 override fun pulse(): Boolean {
                     player!!.unlock()
-                    player!!.dialogueInterpreter.sendDialogues(
-                        player,
-                        FaceAnim.FURIOUS,
-                        "That monk - he called to Zamorak for revenge!",
-                    )
+                    player!!.dialogueInterpreter.sendDialogues(player, FaceAnim.FURIOUS, "That monk - he called to Zamorak for revenge!")
+                    /*
+                     * player!!.dialogueInterpreter.sendDialogues(player, FaceAnim.SCARED, "What, th-? This power again! It must be Zamorak! I can't fight something this strong! I better loot what I can and get out of here!")
+                     */
+
+                    /*
+                     * Wait
+                     */
                     player!!.sendMessage("Something is shaking the whole cavern! You should get out of here quick!")
+                    /*
+                     * Wait 1
+                     * player!!.sendMessage("You are hit by falling rocks! Look out!")
+                     */
+
+                    /*
+                     * Wait 2
+                     * sendPlayerDialogue(player, "I better loot what I can and get out of here!")
+                     */
+
+                    /*
+                     * Wait 3
+                     * sendChat(player, "I'm getting out of here!")
+                     * sendMessage(player, "I'm getting out of here!")
+                     */
+
                     PacketRepository.send(
                         CameraViewPacket::class.java,
                         OutgoingContext.Camera(player!!, OutgoingContext.CameraType.SHAKE, 3, 2, 2, 2, 2),

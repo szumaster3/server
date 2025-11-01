@@ -46,9 +46,9 @@ enum class Warnings(
     PLAYER_OWNED_HOUSES(Vars.VARBIT_CWS_WARNING_5_3855, Components.CWS_WARNING_5_563, 55, { it.houseManager.toggleBuildingMode(it, true) }),
     DROPPED_ITEMS_IN_RANDOM_EVENTS(Vars.VARBIT_CWS_WARNING_6_3856, Components.CWS_WARNING_6_566, 54, {}),
     ICY_PATH_AREA(Vars.VARBIT_ICY_PATH_AREA_3861, Components.CWS_WARNING_11_327, 57, {}),
-    CHAOS_TUNNELS_EAST(Vars.VARBIT_CHAOS_TUNNELS_EAST_4307, Components.CWS_WARNING_27_676, 75, WarningHandler::handleChaosTunnels),
-    CHAOS_TUNNELS_CENTRAL(Vars.VARBIT_CHAOS_TUNNELS_CENTRAL_4308, Components.CWS_WARNING_28_677, 76, WarningHandler::handleChaosTunnels),
-    CHAOS_TUNNELS_WEST(Vars.VARBIT_CHAOS_TUNNELS_WEST_4309, Components.CWS_WARNING_29_678, 77, WarningHandler::handleChaosTunnels);
+    CHAOS_TUNNELS_EAST(Vars.VARBIT_CHAOS_TUNNELS_EAST_4307, Components.CWS_WARNING_27_676, 75, {}),
+    CHAOS_TUNNELS_CENTRAL(Vars.VARBIT_CHAOS_TUNNELS_CENTRAL_4308, Components.CWS_WARNING_28_677, 76, {}),
+    CHAOS_TUNNELS_WEST(Vars.VARBIT_CHAOS_TUNNELS_WEST_4309, Components.CWS_WARNING_29_678, 77, {});
 
     companion object {
         val values = enumValues<Warnings>()

@@ -24,7 +24,7 @@ class ZygomiteNPC : NPCBehavior(NPCs.FUNGI_3344, NPCs.FUNGI_3345, NPCs.ZYGOMITE_
         on(intArrayOf(NPCs.FUNGI_3344, NPCs.FUNGI_3345), IntType.NPC, "pick") { player, node ->
             val fungi = node as NPC
             if (getStatLevel(player, Skills.SLAYER) < 57) {
-                sendMessage(player, "Zygomite is Slayer monster that require a Slayer level of 57 to kill.")
+                sendMessage(player, "You need a higher slayer level to know how to wound this monster.")
                 return@on true
             }
             lock(player, 3)

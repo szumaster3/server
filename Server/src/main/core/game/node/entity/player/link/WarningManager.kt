@@ -20,7 +20,7 @@ class WarningManager : InteractionListener, InterfaceListener {
          */
 
         SCENERY_WARNINGS.forEach { (sceneryId, warning) ->
-            on(sceneryId, IntType.SCENERY, "go-through", "climb", "open", "cross", "climb-down", "climb-up", "enter") { player, node ->
+            on(sceneryId, IntType.SCENERY, "go-through", "climb", "open", "cross", "climb-down", "climb-up") { player, node ->
                 if ((sceneryId == Scenery.GATE_3506 || sceneryId == Scenery.GATE_3507) && player.location.y < 3458) {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 } else {
@@ -106,10 +106,7 @@ class WarningManager : InteractionListener, InterfaceListener {
             Scenery.DARK_HOLE_5947 to Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE,
             Scenery.GATE_3506 to Warnings.MORT_MYRE,
             Scenery.GATE_3507 to Warnings.MORT_MYRE,
-            Scenery.TOWER_LADDER_2511 to Warnings.RANGING_GUILD,
-            Scenery.RIFT_28891 to Warnings.CHAOS_TUNNELS_WEST,
-            Scenery.RIFT_28892 to Warnings.CHAOS_TUNNELS_CENTRAL,
-            Scenery.RIFT_28893 to Warnings.CHAOS_TUNNELS_EAST
+            Scenery.TOWER_LADDER_2511 to Warnings.RANGING_GUILD
         )
 
         @JvmStatic
