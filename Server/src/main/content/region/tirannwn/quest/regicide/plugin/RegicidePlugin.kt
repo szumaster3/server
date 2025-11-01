@@ -61,7 +61,7 @@ class RegicidePlugin : InteractionListener {
             if (!inInventory(player, Items.EMPTY_POT_1931)) {
                 sendMessage(player, "Nothing interesting happens.")
             } else {
-                replaceSlot(player, used.asItem().slot, Item(Items.POT_OF_QUICKLIME_3214))
+                replaceSlot(player, used.asItem().index, Item(Items.POT_OF_QUICKLIME_3214))
                 removeItem(player, Items.EMPTY_POT_1931)
             }
             return@onUseWith true
