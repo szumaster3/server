@@ -254,14 +254,14 @@ class ZavisticRarveDialogues : DialogueFile() {
                 2 -> player("I'll be back in a bit.").also { stage = END_DIALOGUE }
             }
 
-            68 -> {
-                if(!getAttribute(player!!, GameAttributes.RETURNING_CLARENCE_COMPLETE, false)) {
-                    setAttribute(player!!, GameAttributes.RETURNING_CLARENCE_COMPLETE, true)
-                    rewardXP(player!!, Skills.MAGIC, 10000.0)
-                    addItemOrBank(player!!, Items.BLOOD_RUNE_565, 200)
-                    addItemOrBank(player!!, Items.LAW_RUNE_563, 100)
+            68 -> player?.let { p ->
+                if (!getAttribute(p, GameAttributes.RETURNING_CLARENCE_COMPLETE, false)) {
+                    setAttribute(p, GameAttributes.RETURNING_CLARENCE_COMPLETE, true)
+                    rewardXP(p, Skills.MAGIC, 10000.0)
+                    addItemOrBank(p, Items.BLOOD_RUNE_565, 200)
+                    addItemOrBank(p, Items.LAW_RUNE_563, 100)
                 }
-                FurnealCutscene(player!!).start(true)
+                FurnealCutscene(p).start(true)
             }
 
             // 69 -> if (getAttribute(player!!, ZogreUtils.TALK_ABOUT_SIGN_PORTRAIT, false)) {

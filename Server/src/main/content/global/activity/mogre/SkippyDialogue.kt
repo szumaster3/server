@@ -86,13 +86,13 @@ class SkippyDialogueFile : DialogueFile() {
             }
             2 -> npc("What?").also { stage++ }
             3 -> {
-                val duration = animationDuration(Animation(Animations.USE_BUCKET_ALT_4255))
+                val duration = animationCycles(Animations.POUR_BUCKET_2771)
                 if(!removeItem(player!!, Items.BUCKET_OF_WATER_1929)) return
                 submitIndividualPulse(
                     player!!,
                     object : Pulse(duration) {
                         override fun pulse(): Boolean {
-                            animate(player!!, Animations.USE_BUCKET_ALT_4255)
+                            animate(player!!, Animations.POUR_BUCKET_2771) // Animations.USE_BUCKET_ALT_4255
                             playAudio(player!!, Sounds.SKIPPY_BUCKET_1399)
                             addItem(player!!, Items.BUCKET_1925)
                             npc("Ahhhhhhhhhhgh! That's cold! Are you trying to kill me?")

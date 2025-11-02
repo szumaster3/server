@@ -58573,5 +58573,9 @@
     "ids": "42004",
     "examine": "Contains traces of Summoning energy.",
     "render_anim": "8510"
+  },
+  {
+    "ids": "27089",
+    "examine": "A snake in a tree."
   }
 ]

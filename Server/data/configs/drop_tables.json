@@ -48645,36 +48645,6 @@
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
-        "id": "11766",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "11767",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "11768",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "11769",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "11764",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
         "weight": "5.0",
         "id": "31",
         "maxAmount": "1"
