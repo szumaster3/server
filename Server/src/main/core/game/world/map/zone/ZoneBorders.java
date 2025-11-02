@@ -55,10 +55,10 @@ public final class ZoneBorders {
     /**
      * Constructs a new {@code ZoneBorders} {@code Object}.
      *
-     * @param x1 The south west x-coordinate.
-     * @param y1 The south west y-coordinate.
-     * @param x2 The north east x-coordinate.
-     * @param y2 The north east y-coordinate.
+     * @param x1 The south-west x-coordinate.
+     * @param y1 The south-west y-coordinate.
+     * @param x2 The north-east x-coordinate.
+     * @param y2 The north-east y-coordinate.
      *           Invariant enforced at runtime.
      */
     public ZoneBorders(int x1, int y1, int x2, int y2) {
@@ -71,10 +71,10 @@ public final class ZoneBorders {
     /**
      * Constructs a new {@code ZoneBorders} {@code Object}.
      *
-     * @param x1    The south west x-coordinate.
-     * @param y1    The south west y-coordinate.
-     * @param x2    The north east x-coordinate.
-     * @param y2    The north east y-coordinate.
+     * @param x1    The south-west x-coordinate.
+     * @param y1    The south-west y-coordinate.
+     * @param x2    The north-east x-coordinate.
+     * @param y2    The north-east y-coordinate.
      *              Invariant enforced at runtime.
      * @param plane the plane.
      */
@@ -89,10 +89,10 @@ public final class ZoneBorders {
     /**
      * Constructs a new {@code ZoneBorders} {@code Object}.
      *
-     * @param x1             The south west x-coordinate.
-     * @param y1             The south west y-coordinate.
-     * @param x2             The north east x-coordinate.
-     * @param y2             The north east y-coordinate.
+     * @param x1             The south-west x-coordinate.
+     * @param y1             The south-west y-coordinate.
+     * @param x2             The north-east x-coordinate.
+     * @param y2             The north-east y-coordinate.
      *                       Invariant enforced at runtime.
      * @param plane          the plane.
      * @param zeroPlaneCheck the plane check.
@@ -281,7 +281,7 @@ public final class ZoneBorders {
     }
 
     /**
-     * Gets the bplane.
+     * Gets the plane.
      *
      * @return the plane
      */
@@ -290,7 +290,7 @@ public final class ZoneBorders {
     }
 
     /**
-     * Sets the baplane.
+     * Sets the plane.
      *
      * @param plane the plane to set.
      */

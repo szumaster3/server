@@ -14,8 +14,9 @@ import core.game.event.InterfaceOpenEvent
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld.settings
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.InterfaceContext
+import core.net.packet.context.WindowsPaneContext
 import core.net.packet.out.CloseInterface
 import core.net.packet.out.Interface
 import core.net.packet.out.WindowsPane
@@ -102,7 +103,7 @@ class InterfaceManager(
 
         PacketRepository.send(
             WindowsPane::class.java,
-            OutgoingContext.WindowsPane(player, windowsPane.id, if (overlap) 1 else 0)
+            WindowsPaneContext(player, windowsPane.id, if (overlap) 1 else 0)
         )
         windowsPane.open(player)
 
@@ -128,7 +129,7 @@ class InterfaceManager(
             windowsPane.definition.type = InterfaceType.SINGLE_TAB
         }
 
-        PacketRepository.send(WindowsPane::class.java, OutgoingContext.WindowsPane(player, windowsPane.id, type))
+        PacketRepository.send(WindowsPane::class.java, WindowsPaneContext(player, windowsPane.id, type))
         windowsPane.open(player)
 
         if (opened != null) player.dispatch(InterfaceOpenEvent(opened!!))
@@ -197,7 +198,7 @@ class InterfaceManager(
             if (!opened!!.definition!!.isWalkable || opened!!.id == 14) {
                 PacketRepository.send(
                     CloseInterface::class.java,
-                    OutgoingContext.InterfaceContext(
+                    InterfaceContext(
                         player,
                         opened!!.definition!!.getWindowPaneId(isResizable),
                         opened!!.definition!!.getChildId(isResizable),
@@ -259,7 +260,7 @@ class InterfaceManager(
             }
             if (component.definition!!.type == InterfaceType.TAB) {
                 PacketRepository.send(
-                    CloseInterface::class.java, OutgoingContext.InterfaceContext(
+                    CloseInterface::class.java, InterfaceContext(
                         player,
                         component.definition.getWindowPaneId(
                             isResizable
@@ -272,7 +273,7 @@ class InterfaceManager(
                 return true
             }
             PacketRepository.send(
-                CloseInterface::class.java, OutgoingContext.InterfaceContext(
+                CloseInterface::class.java, InterfaceContext(
                     player, component.definition.getWindowPaneId(
                         isResizable
                     ), component.definition.getChildId(isResizable), component.id, component.definition.isWalkable
@@ -436,29 +437,29 @@ class InterfaceManager(
         //Hp orb
         PacketRepository.send(
             Interface::class.java,
-            OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 13 else 70, Components.TOPSTAT_HITPOINTS_748, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 13 else 70, Components.TOPSTAT_HITPOINTS_748, true)
         )
         //Prayer orb
         PacketRepository.send(
             Interface::class.java,
-            OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 14 else 71, Components.TOPSTAT_PRAYER_749, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 14 else 71, Components.TOPSTAT_PRAYER_749, true)
         )
         //Energy orb
         PacketRepository.send(
             Interface::class.java,
-            OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 15 else 72, Components.TOPSTAT_RUN_750, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 15 else 72, Components.TOPSTAT_RUN_750, true)
         )
         //Summoning bar
         if (isQuestComplete(player, Quests.WOLF_WHISTLE) && settings?.isMembers == true) {
             PacketRepository.send(
                 Interface::class.java,
-                OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 16 else 73, Components.TOPSTAT_LORE_747, true)
+                InterfaceContext(player, windowPaneId, if (isResizable) 16 else 73, Components.TOPSTAT_LORE_747, true)
             )
         }
         //Split PM
         PacketRepository.send(
             Interface::class.java,
-            OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 71 else 10, Components.PMCHAT_754, true)
+            InterfaceContext(player, windowPaneId, if (isResizable) 71 else 10, Components.PMCHAT_754, true)
         )
     }
 
@@ -545,9 +546,9 @@ class InterfaceManager(
     fun openChatbox(component: Component) {
         if (component.id == DEFAULT_CHATBOX) {
             if (chatbox == null || (chatbox!!.id != DEFAULT_CHATBOX && chatbox!!.definition!!.type == InterfaceType.CHATBOX)) {
-                PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
-                PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
-                PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, InterfaceType.CHATBOX.fixedPaneId, InterfaceType.CHATBOX.fixedChildId, Components.CHATDEFAULT_137, true))
+                PacketRepository.send(Interface::class.java, InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
+                PacketRepository.send(Interface::class.java, InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
+                PacketRepository.send(Interface::class.java, InterfaceContext(player, InterfaceType.CHATBOX.fixedPaneId, InterfaceType.CHATBOX.fixedChildId, Components.CHATDEFAULT_137, true))
             }
             chatbox = component
             setVarp(player, 334, 1)
@@ -576,8 +577,8 @@ class InterfaceManager(
                 openDefaultTabs()
             }
             openInfoBars()
-            PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
-            PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
+            PacketRepository.send(Interface::class.java, InterfaceContext(player, windowPaneId, if (isResizable) 23 else 14, Components.FILTERBUTTONS_751, true))
+            PacketRepository.send(Interface::class.java, InterfaceContext(player, windowPaneId, if (isResizable) 70 else 75, Components.CHATTOP_752, true))
         }
     }
 

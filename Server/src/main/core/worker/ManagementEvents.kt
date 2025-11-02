@@ -10,8 +10,9 @@ import core.game.system.communication.ClanRepository
 import core.game.system.communication.CommunicationInfo
 import core.game.world.GameWorld
 import core.game.world.repository.Repository
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContactContext
+import core.net.packet.context.MessageContext
 import core.net.packet.out.CommunicationMessage
 import core.net.packet.out.ContactPackets
 import core.tools.SystemLogger
@@ -55,16 +56,16 @@ object ManagementEvents {
      */
     private fun handleLoggingFor(event: Message) {
         when (event) {
-            is PlayerStatusUpdate -> SystemLogger.logMS("${event.username} -(WLD)> ${event.world}")
-            is RequestContactInfo -> SystemLogger.logMS("${event.username} -> RQ CONTACT INFO")
-            is SendContactInfo -> SystemLogger.logMS("${event.username} <- SND CONTACT INFO")
-            is PrivateMessage -> SystemLogger.logMS("[PM] ${event.sender}->${event.receiver}: ${event.message}")
-            is ClanMessage -> SystemLogger.logMS("[CM:${event.clanName}] ${event.sender}: ${event.message}")
-            is JoinClanRequest -> SystemLogger.logMS("${event.username} +CL ${event.clanName}")
-            is LeaveClanRequest -> SystemLogger.logMS("${event.username} -CL ${event.clanName}")
-            is RequestClanInfo -> SystemLogger.logMS("REQUEST CLAN INFO: ${event.clanOwner}")
-            is SendClanInfo -> SystemLogger.logMS("RECEIVE CLAN INFO: ${event.clanOwner}->${event.clanName}")
-            is ClanJoinNotification -> SystemLogger.logMS("${event.username} JOINED CLAN ${event.clanName}")
+            is PlayerStatusUpdate    -> SystemLogger.logMS("${event.username} -(WLD)> ${event.world}")
+            is RequestContactInfo    -> SystemLogger.logMS("${event.username} -> RQ CONTACT INFO")
+            is SendContactInfo       -> SystemLogger.logMS("${event.username} <- SND CONTACT INFO")
+            is PrivateMessage        -> SystemLogger.logMS("[PM] ${event.sender}->${event.receiver}: ${event.message}")
+            is ClanMessage           -> SystemLogger.logMS("[CM:${event.clanName}] ${event.sender}: ${event.message}")
+            is JoinClanRequest       -> SystemLogger.logMS("${event.username} +CL ${event.clanName}")
+            is LeaveClanRequest      -> SystemLogger.logMS("${event.username} -CL ${event.clanName}")
+            is RequestClanInfo       -> SystemLogger.logMS("REQUEST CLAN INFO: ${event.clanOwner}")
+            is SendClanInfo          -> SystemLogger.logMS("RECEIVE CLAN INFO: ${event.clanOwner}->${event.clanName}")
+            is ClanJoinNotification  -> SystemLogger.logMS("${event.username} JOINED CLAN ${event.clanName}")
             is ClanLeaveNotification -> SystemLogger.logMS("${event.username} LEFT CLAN ${event.clanName}")
         }
     }
@@ -93,15 +94,15 @@ object ManagementEvents {
                     Repository.playerNames.keys.toList()
                 }.filter {
                     Repository.getPlayerByName(
-                            it,
-                        )?.communication?.contacts?.containsKey(event.username) == true
+                        it,
+                    )?.communication?.contacts?.containsKey(event.username) == true
                 }
 
                 for (playerName in notifiablePlayers) {
                     val p = Repository.getPlayerByName(playerName) ?: continue
                     p.communication.contacts[event.username]?.worldId = event.world
                     PacketRepository.send(
-                        ContactPackets::class.java, OutgoingContext.Contact(p, event.username, event.world)
+                        ContactPackets::class.java, ContactContext(p, event.username, event.world)
                     )
                 }
             }
@@ -138,7 +139,7 @@ object ManagementEvents {
 
                 PacketRepository.send(
                     ContactPackets::class.java,
-                    OutgoingContext.Contact(p, OutgoingContext.Contact.UPDATE_STATE_TYPE),
+                    ContactContext(p, ContactContext.UPDATE_STATE_TYPE),
                 )
 
                 p.communication.contacts.clear()
@@ -151,7 +152,7 @@ object ManagementEvents {
                     c.rank = ClanRank.values()[contact.rank]
                     PacketRepository.send(
                         ContactPackets::class.java,
-                        OutgoingContext.Contact(p, contact.username, contact.world),
+                        ContactContext(p, contact.username, contact.world),
                     )
                 }
 
@@ -161,7 +162,7 @@ object ManagementEvents {
 
                 PacketRepository.send(
                     ContactPackets::class.java,
-                    OutgoingContext.Contact(p, OutgoingContext.Contact.IGNORE_LIST_TYPE),
+                    ContactContext(p, ContactContext.IGNORE_LIST_TYPE)
                 )
             }
 
@@ -182,11 +183,11 @@ object ManagementEvents {
                 if (sender != null) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        OutgoingContext.MessageContext(
+                        MessageContext(
                             sender,
                             event.receiver,
                             event.rank,
-                            OutgoingContext.MessageContext.SEND_MESSAGE,
+                            MessageContext.SEND_MESSAGE,
                             event.message
                         ),
                     )
@@ -195,11 +196,11 @@ object ManagementEvents {
                 if (receiver != null) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        OutgoingContext.MessageContext(
+                        MessageContext(
                             receiver,
                             event.sender,
                             event.rank,
-                            OutgoingContext.MessageContext.RECEIVE_MESSAGE,
+                            MessageContext.RECEIVE_MESSAGE,
                             event.message,
                         ),
                     )
@@ -356,11 +357,11 @@ object ManagementEvents {
                 for (member in clan.players.filter { it.player != null }) {
                     PacketRepository.send(
                         CommunicationMessage::class.java,
-                        OutgoingContext.MessageContext(
+                        MessageContext(
                             member.player,
                             event.sender,
                             event.rank,
-                            OutgoingContext.MessageContext.CLAN_MESSAGE,
+                            MessageContext.CLAN_MESSAGE,
                             event.message,
                         ),
                     )

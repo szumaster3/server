@@ -1,11 +1,11 @@
 package content.global.skill.construction.decoration.workshop
 
+import core.api.*
 import content.data.GameAttributes
 import content.global.skill.construction.BuildHotspot
 import content.global.skill.construction.BuildingUtils.buildDecoration
 import content.global.skill.construction.Decoration
 import content.global.skill.construction.Hotspot
-import core.api.*
 import core.game.component.Component
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -13,38 +13,48 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Items
 import kotlin.math.min
+import shared.consts.Scenery as Objects
 
-class WorkbenchPlugin :
-    InterfaceListener,
-    InteractionListener {
-    private val flatpackItemIDs = Decoration.values().map { it.interfaceItem }.toIntArray()
-    private val buildHotspot = BuildHotspot.values().map { it.objectId }.toIntArray()
-    private val workBenchIDs = intArrayOf(shared.consts.Scenery.WORKBENCH_13704, shared.consts.Scenery.WORKBENCH_13705, shared.consts.Scenery.WORKBENCH_13706, shared.consts.Scenery.WORKBENCH_13707, shared.consts.Scenery.WORKBENCH_13708)
+/**
+ * Handles the workbench interface and interactions in a poh.
+ */
+class WorkbenchPlugin : InterfaceListener, InteractionListener {
+    companion object {
+        private val FLATPACK_ITEM_IDS = Decoration.values().map { it.interfaceItem }.toIntArray()
+        private val BUILD_HOTSPOT_OBJECT = BuildHotspot.values().map { it.objectId }.toIntArray()
+        private val WORKBENCH_OBJECT_IDS = intArrayOf(
+            Objects.WORKBENCH_13704,
+            Objects.WORKBENCH_13705,
+            Objects.WORKBENCH_13706,
+            Objects.WORKBENCH_13707,
+            Objects.WORKBENCH_13708
+        )
+    }
 
     override fun defineListeners() {
-        on(workBenchIDs, IntType.SCENERY, "work-at") { player, obj ->
+        on(WORKBENCH_OBJECT_IDS, IntType.SCENERY, "work-at") { player, obj ->
             player.interfaceManager.close()
             openInterface(player, Components.POH_WORKBENCH_397)
             when (obj.id) {
-                shared.consts.Scenery.WORKBENCH_13704 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 20)
-                shared.consts.Scenery.WORKBENCH_13705 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 40)
-                shared.consts.Scenery.WORKBENCH_13706 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 60)
-                shared.consts.Scenery.WORKBENCH_13707 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 80)
-                shared.consts.Scenery.WORKBENCH_13708 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 99)
+                Objects.WORKBENCH_13704 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 20)
+                Objects.WORKBENCH_13705 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 40)
+                Objects.WORKBENCH_13706 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 60)
+                Objects.WORKBENCH_13707 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 80)
+                Objects.WORKBENCH_13708 -> setAttribute(player, GameAttributes.CON_FLATPACK_TIER, 99)
             }
 
             return@on true
         }
 
-        for (hotspot in buildHotspot) {
-            onUseWith(IntType.SCENERY, flatpackItemIDs, hotspot) { player, used, with ->
-                return@onUseWith buildFlatpackOnHotspot(player, used.asItem(), with.asScenery())
+        for (hotspot in BUILD_HOTSPOT_OBJECT) {
+            onUseWith(IntType.SCENERY, FLATPACK_ITEM_IDS, hotspot) { player, used, with ->
+                return@onUseWith buildFlatpack(player, used.asItem(), with.asScenery())
             }
         }
     }
@@ -80,11 +90,15 @@ class WorkbenchPlugin :
         }
     }
 
-    private fun buildFlatpackOnHotspot(
-        player: Player,
-        used: Item,
-        with: Scenery,
-    ): Boolean {
+    /**
+     * Builds a flatpack item.
+     *
+     * @param player The player building the item.
+     * @param used The flatpack item used.
+     * @param with The scenery where the item is built.
+     * @return True if building was successful, false otherwise.
+     */
+    private fun buildFlatpack(player: Player, used: Item, with: Scenery): Boolean {
         val hotspotUsed = player.houseManager.getHotspot(with)
         val decorationUsed = Decoration.forObjectId(used.id)
 
@@ -100,10 +114,13 @@ class WorkbenchPlugin :
         return true
     }
 
-    private fun openBuildInterface(
-        player: Player,
-        hotspot: BuildHotspot,
-    ) {
+    /**
+     * Opens the build interface for a given furniture type.
+     *
+     * @param player The player opening the interface.
+     * @param hotspot The hotspot representing the furniture type.
+     */
+    private fun openBuildInterface(player: Player, hotspot: BuildHotspot) {
         val BUILD_INDEXES = intArrayOf(0, 2, 4, 6, 1, 3, 5)
         player.interfaceManager.open(Component(396))
         val tempItems: Array<Item?> = arrayOfNulls(7)
@@ -180,7 +197,7 @@ class WorkbenchPlugin :
 
         PacketRepository.send(
             ContainerPacket::class.java,
-            OutgoingContext.Container(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
+            ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false),
         )
     }
 }

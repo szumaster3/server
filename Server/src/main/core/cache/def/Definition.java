@@ -7,58 +7,61 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a general definition for various types of game nodes.
+ * Represents a node definitions.
  *
- * @param <T> the type parameter for the node
+ * @param <T> The node type.
+ * @author Emperor
  */
 public class Definition<T extends Node> {
 
     /**
-     * The Id of the definition.
+     * The node id.
      */
     protected int id;
 
     /**
-     * The Name of the definition, defaulting to "null" if not set.
+     * The name.
      */
     protected String name = "null";
 
     /**
-     * A description or examine text for the definition.
+     * The examine info.
      */
     protected String examine;
 
     /**
-     * The options related to this definition.
+     * The options.
      */
     protected String[] options;
 
     /**
-     * A map of handlers associated with the definition, allowing dynamic configuration retrieval.
+     * The configurations.
      */
-    protected final Map<String, Object> handlers = new HashMap<>();
+    protected final Map<String, Object> handlers = new HashMap<String, Object>();
 
     /**
-     * Default constructor for the Definition class.
+     * Constructs a new {@code Definition} {@code Object}.
      */
     public Definition() {
-        // Empty.
+        /*
+         * empty.
+         */
     }
 
     /**
-     * Checks if the definition has any valid options.
+     * Checks if this node has options.
      *
-     * @return true if the definition has valid options, false otherwise
+     * @return {@code True} if so.
      */
     public boolean hasOptions() {
         return hasOptions(true);
     }
 
     /**
-     * Checks if the definition has any valid options.
+     * Checks if this node has options.
      *
-     * @param examine whether to check for the "Examine" option as well
-     * @return true if the definition has valid options, false otherwise
+     * @param examine If examine should be treated as an option.
+     * @return {@code True} if so.
      */
     public boolean hasOptions(boolean examine) {
         if (name.equals("null") || options == null) {
@@ -75,11 +78,10 @@ public class Definition<T extends Node> {
     }
 
     /**
-     * Retrieves a configuration associated with the provided key.
+     * Gets a configuration of this item's definitions.
      *
-     * @param <V> the type of the configuration
-     * @param key the key of the configuration to retrieve
-     * @return the configuration associated with the key, or null if not found
+     * @param key The key.
+     * @return The configuration value.
      */
     @SuppressWarnings("unchecked")
     public <V> V getConfiguration(String key) {
@@ -87,12 +89,12 @@ public class Definition<T extends Node> {
     }
 
     /**
-     * Retrieves a configuration associated with the provided key, with a fallback value.
+     * Gets a configuration from this item's definitions.
      *
-     * @param <V>  the type of the configuration
-     * @param key  the key of the configuration to retrieve
-     * @param fail the fallback value if the configuration is not found
-     * @return the configuration associated with the key, or the fallback value if not found
+     * @param key  The key.
+     * @param fail The object to return if there was no value found for this
+     *             key.
+     * @return The value, or the fail object.
      */
     @SuppressWarnings("unchecked")
     public <V> V getConfiguration(String key, V fail) {
@@ -104,53 +106,51 @@ public class Definition<T extends Node> {
     }
 
     /**
-     * Retrieves the ID of the definition.
+     * Gets the id.
      *
-     * @return the ID of the definition
+     * @return The id.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * Sets the ID of the definition.
+     * Sets the id.
      *
-     * @param id the new ID of the definition
+     * @param id The id to set.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Retrieves the name of the definition.
+     * Gets the name.
      *
-     * @return the name of the definition
+     * @return The name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the name of the definition.
+     * Sets the name.
      *
-     * @param name the new name of the definition
+     * @param name The name to set.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Retrieves the examine text for the definition.
-     * If not already set, it attempts to retrieve it from the handlers map or generate a default one.
+     * Gets the examine.
      *
-     * @return the examine text
+     * @return The examine.
      */
     public String getExamine() {
         if (examine == null) {
             try {
-                if (handlers.get("examine") != null) {
+                if (handlers.get("examine") != null)
                     examine = handlers.get("examine").toString();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -166,38 +166,39 @@ public class Definition<T extends Node> {
     }
 
     /**
-     * Sets the examine text for the definition.
+     * Sets the examine.
      *
-     * @param examine the new examine text
+     * @param examine The examine to set.
      */
     public void setExamine(String examine) {
         this.examine = examine;
     }
 
     /**
-     * Retrieves the options associated with the definition.
+     * Gets the options.
      *
-     * @return the options associated with the definition
+     * @return The options.
      */
     public String[] getOptions() {
         return options;
     }
 
     /**
-     * Sets the options for the definition.
+     * Sets the options.
      *
-     * @param options the new options for the definition
+     * @param options The options to set.
      */
     public void setOptions(String[] options) {
         this.options = options;
     }
 
     /**
-     * Retrieves the handlers map associated with the definition.
+     * Gets the configurations.
      *
-     * @return the handlers map
+     * @return The configurations.
      */
     public Map<String, Object> getHandlers() {
         return handlers;
     }
+
 }

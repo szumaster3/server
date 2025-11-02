@@ -277,7 +277,7 @@ enum class Storable(
 
     companion object {
         /**
-         * Map of item ids to [Storable].
+         * Map of all item ids to their [Storable].
          */
         private val idToStorable: Map<Int, Storable> by lazy {
             values().flatMap { storable ->
@@ -288,101 +288,72 @@ enum class Storable(
         /**
          * Set of all item ids across all [Storable].
          */
-        private val allItemIds: Set<Int> by lazy {
-            idToStorable.keys
+        private val allItemIds: Set<Int> by lazy { idToStorable.keys }
+
+        /**
+         * Precomputed set of item ids for each Storable for fast lookup.
+         */
+        private val storableIdSets: Map<Storable, Set<Int>> by lazy {
+            values().associateWith { it.takeIds.toSet() }
         }
 
         /**
-         * Gets all item ids from all [Storable].
-         *
-         * @return All item ids.
+         * Returns all item ids from all storables.
          */
         fun allIds(): Set<Int> = allItemIds
 
         /**
-         * Finds the [Storable] containing the given item id.
-         *
-         * @param id The item id.
-         * @return The matching [Storable] or null.
+         * Finds the storable for the given item id.
          */
         fun fromId(id: Int): Storable? = idToStorable[id]
 
         /**
-         * Checks if the player owns at least one item from the given [Storable]
-         * in either equipment or bank.
-         *
-         * @param player The player.
-         * @param storable The [Storable] to check.
-         * @return True if player owns any item from the Storable.
+         * Checks if the player owns at least one item from
+         * the storable in equipment or bank.
          */
         fun hasStorable(player: Player, storable: Storable): Boolean {
-            val ids = storable.takeIds
-            val equipment = player.equipment.toArray()
-            val bank = player.bank.toArray()
-
-            for (id in ids) {
-                if (equipment.any { it?.id == id } || bank.any { it?.id == id }) return true
-            }
-            return false
+            val ownedIds = (player.equipment.toArray() + player.bank.toArray())
+                .mapNotNull { it?.id }
+                .toSet()
+            return storableIdSets[storable]?.any { it in ownedIds } ?: false
         }
 
         /**
-         * Checks if the player owns any item from any [Storable]
-         * in either equipment or bank.
-         *
-         * @param player The player.
-         * @return True if player owns any Storable item.
+         * Checks if the player owns any item
+         * from any storable in equipment or bank.
          */
         fun hasAnyStorable(player: Player): Boolean {
-            val equipment = player.equipment.toArray()
-            val bank = player.bank.toArray()
-
-            for (id in allItemIds) {
-                if (equipment.any { it?.id == id } || bank.any { it?.id == id }) return true
-            }
-            return false
+            val ownedIds = (player.equipment.toArray() + player.bank.toArray())
+                .mapNotNull { it?.id }
+                .toSet()
+            return allItemIds.any { it in ownedIds }
         }
 
         /**
-         * Checks if the player has at least one item from the given [Storable] equipped.
-         *
-         * @param player The player.
-         * @param storable The [Storable] to check.
-         * @return True if player has any item equipped.
+         * Checks if the player has at least one
+         * item from the given storable equipped.
          */
         fun hasStorableEquipped(player: Player, storable: Storable): Boolean {
-            val equipment = player.equipment.toArray()
-            for (id in storable.takeIds) {
-                if (equipment.any { it?.id == id }) return true
-            }
-            return false
+            val equippedIds = player.equipment.toArray().mapNotNull { it?.id }.toSet()
+            return storableIdSets[storable]?.any { it in equippedIds } ?: false
         }
 
         /**
-         * Checks if the player has at least one item from the given [Storable] in inventory.
-         *
-         * @param player The player.
-         * @param storable The [Storable] to check.
-         * @return True if player has any item in inventory.
+         * Checks if the player has at least one
+         * item from the given storable in inventory.
          */
         fun hasStorableInInventory(player: Player, storable: Storable): Boolean {
-            val inventory = player.inventory.toArray()
-            for (id in storable.takeIds) {
-                if (inventory.any { it?.id == id }) return true
-            }
-            return false
+            val inventoryIds = player.inventory.toArray().mapNotNull { it?.id }.toSet()
+            return storableIdSets[storable]?.any { it in inventoryIds } ?: false
         }
 
         /**
-         * Returns all [Storable]s that the player owns in their bank.
-         *
-         * @param player The player.
-         * @return List of [Storable]s.
+         * Gets all [Storable]s that the player owns in their bank.
          */
         fun getStorablesInBank(player: Player): List<Storable> {
-            val bank = player.bank.toArray()
+            val bankIds = player.bank.toArray().mapNotNull { it?.id }.toSet()
             return values().filter { storable ->
-                storable.takeIds.any { id -> bank.any { it?.id == id } }
+                storableIdSets[storable]?.any { it in bankIds } ?: false
             }
         }
     }

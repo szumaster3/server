@@ -32,10 +32,10 @@ public final class DefaultCombatSpell extends CombatSpell {
      * @param npc The NPC.
      */
     public DefaultCombatSpell(NPC npc) {
-        super(SpellType.BOLT, SpellBookManager.SpellBook.MODERN, 0, 0.0, -1, -1, npc.getProperties().getMagicAnimation(), npc.getDefinition().combatGraphics[0], null, npc.getDefinition().combatGraphics[2]);
-        if (npc.getDefinition().combatGraphics[1] != null) {
-            this.projectileId = npc.getDefinition().combatGraphics[1].getId();
-            this.startHeight = npc.getDefinition().combatGraphics[1].getHeight();
+        super(SpellType.BOLT, SpellBookManager.SpellBook.MODERN, 0, 0.0, -1, -1, npc.getProperties().getMagicAnimation(), npc.getDefinition().getCombatGraphics()[0], null, npc.getDefinition().getCombatGraphics()[2]);
+        if (npc.getDefinition().getCombatGraphics()[1] != null) {
+            this.projectileId = npc.getDefinition().getCombatGraphics()[1].getId();
+            this.startHeight = npc.getDefinition().getCombatGraphics()[1].getHeight();
         } else {
             this.projectileId = -1;
             this.startHeight = 42;

@@ -1,26 +1,40 @@
 package core.net.packet.`in`
 
-import core.cache.secure.ISAACCipher
-import core.cache.secure.ISAACPair
+import core.cache.crypto.ISAACCipher
+import core.cache.crypto.ISAACPair
 
 class LoginInfo(
-    var showAds: Boolean, // Unused
+    var showAds: Boolean, //Unused
     var windowMode: Int,
     var screenWidth: Int,
     var screenHeight: Int,
     var displayMode: Int,
-    var adAffiliateId: Int, // Unused
+    var adAffiliateId: Int, //Unused
     var settingsHash: Int,
     var currentPacketCount: Int,
     var username: String,
     var password: String,
     var isaacPair: ISAACPair,
     var opcode: Int,
-    var crcSums: IntArray,
+    var crcSums: IntArray
 ) {
     companion object {
         fun createDefault(): LoginInfo {
-            return LoginInfo(false, 0, 0, 0, 0, 0, 0, 0, "", "", ISAACPair(ISAACCipher(intArrayOf()), ISAACCipher(intArrayOf())), 0, IntArray(Login.CACHE_INDEX_COUNT))
+            return LoginInfo(
+                false,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                "",
+                "",
+                ISAACPair(ISAACCipher(intArrayOf()), ISAACCipher(intArrayOf())),
+                0,
+                IntArray(Login.CACHE_INDEX_COUNT)
+            )
         }
     }
 

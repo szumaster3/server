@@ -111,7 +111,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.definitions.size) {
+                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -158,7 +158,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.definitions.size) {
+                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -222,7 +222,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
                     reject(player, "INVALID TARGET USERNAME.")
                 }
 
-                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.definitions.size) {
+                if (itemID == null || itemID <= 0 || itemID > ItemDefinition.getDefinitions().size) {
                     reject(player, "INVALID ITEM ID ENTERED.")
                 }
 
@@ -346,7 +346,7 @@ class SystemCommandSet : CommandSet(Privilege.ADMIN) {
         player: Player,
         id: Int,
     ): Pair<Item, core.game.container.Container>? {
-        if (id !in 0 until ItemDefinition.definitions.size) return null
+        if (id !in 0 until ItemDefinition.getDefinitions().size) return null
         arrayOf(player.inventory, player.equipment, player.bankPrimary, player.bankSecondary).forEach { container ->
             container.toArray().firstOrNull { it?.id == id }?.let { return Pair(it, container) }
         }

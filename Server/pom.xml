@@ -118,12 +118,6 @@
             <version>2.9.0</version>
             <scope>compile</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.displee/rs-cache-library -->
-        <dependency>
-            <groupId>com.displee</groupId>
-            <artifactId>rs-cache-library</artifactId>
-            <version>8.0.1</version>
-        </dependency>
     </dependencies>
 
     <build>

@@ -69,8 +69,10 @@ import core.game.world.update.flag.PlayerFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.IoSession;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.DynamicSceneContext;
+import core.net.packet.context.SceneGraphContext;
+import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
@@ -94,7 +96,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static core.api.ContentAPIKt.*;
-import static core.api.utils.PermadeathKt.Permadeath;
+import static core.api.utils.PermanentDeathKt.permanentDeath;
+import static core.game.system.command.sets.StatsAttributeSetKt.STATS_BASE;
+import static core.game.system.command.sets.StatsAttributeSetKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
 
 /**
@@ -212,6 +216,8 @@ public class Player extends Entity {
      * Handles packet dispatching for the player.
      */
     private final PacketDispatch packetDispatch = new PacketDispatch(this);
+
+    public Boolean isAfkLogout;
 
     private StorageState costumeRoomState;
 
@@ -605,7 +611,7 @@ public class Player extends Entity {
         playerFlag.setUpdateSceneGraph(false);
         renderInfo.updateInformation();
         if (getSkills().isLifepointsUpdate()) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext(this, Skills.HITPOINTS));
+            PacketRepository.send(SkillLevel.class, new SkillContext(this, Skills.HITPOINTS));
             getSkills().setLifepointsUpdate(false);
         }
         if (getAttribute("flagged-for-save", false)) {
@@ -667,6 +673,9 @@ public class Player extends Entity {
     @Override
     public void finalizeDeath(Entity killer) {
         if (!isPlaying()) return;
+        //if the player has already been full cleared, it has already disconnected.
+        // This code is probably getting called because something is maintaining a
+        // stale reference.
 
         GlobalStatistics.incrementDeathCount();
         settings.setSpecialEnergy(100);
@@ -675,32 +684,32 @@ public class Player extends Entity {
         if (!k.isActive()) {
             k = this;
         }
-        if (this.isArtificial() && killer instanceof Player) {
+        if (this.isArtificial() && killer instanceof Player){
             setAttribute("dead", true);
         }
         if (this.isArtificial() && killer instanceof NPC) {
             return;
         }
-        if (killer instanceof Player && killer.getName() != getName()
-
-                && getWorldTicks() - killer.getAttribute("/save:last-murder-news", 0) >= 500) {
-            Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
-            sendNews(killer.getUsername() + " has murdered " + getUsername() + " with " + (wep == null ? "their fists." : (StringUtils.isPlusN(wep.getName()) ? "an " : "a ") + wep.getName()));
-            killer.setAttribute("/save:last-murder-news", getWorldTicks());
+        if (killer instanceof Player && killer.getName() != getName()) { // the latter happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source
+            long unixSeconds = System.currentTimeMillis() / 1000L;
+            if (unixSeconds - killer.getAttribute("/save:last-murder-news", 0L) >= 300) {
+                Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
+                killer.setAttribute("/save:last-murder-news", unixSeconds);
+            }
         }
         getPacketDispatch().sendMessage("Oh dear, you are dead!");
+        incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
+
         packetDispatch.sendTempMusic(90);
         if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
-
             if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)) {
-
                 if (getAttributes().containsKey("permadeath")) {
-                    Permadeath(this);
+                    permanentDeath(this);
                     return;
                 }
             }
-            GroundItemManager.create(new Item(Items.BONES_526), this.getAttribute("/save:original-loc", location), k);
-            final Container[] c = DeathTask.Companion.getContainers(this);
+            GroundItemManager.create(new Item(Items.BONES_526), this.getAttribute("/save:original-loc",location), k);
+            final Container[] c = DeathTask.getContainers(this);
 
             for (Item i : getEquipment().toArray()) {
                 if (i == null) continue;
@@ -721,8 +730,10 @@ public class Player extends Entity {
                     if (item == null) continue;
                     if (killer instanceof Player)
                         itemsLost.append(getItemName(item.getId())).append("(").append(item.getAmount()).append("), ");
-                    if (GraveController.shouldCrumble(item.getId())) continue;
-                    if (GraveController.shouldRelease(item.getId())) continue;
+                    if (GraveController.shouldCrumble(item.getId()))
+                        continue;
+                    if (GraveController.shouldRelease(item.getId()))
+                        continue;
                     if (!item.getDefinition().isTradeable()) {
                         if (killer instanceof Player) {
                             int value = item.getDefinition().getAlchemyValue(true);
@@ -751,10 +762,10 @@ public class Player extends Entity {
         skullManager.setSkulled(false);
         removeAttribute("combat-time");
         getPrayer().reset();
-        removeAttribute("original-loc");
-        interfaceManager.openDefaultTabs();
-        setComponentVisibility(this, Components.TOPLEVEL_548, 69, false);
-        setComponentVisibility(this, Components.TOPLEVEL_FULLSCREEN_746, 12, false);
+        removeAttribute("original-loc"); //in case you died inside a random event
+        interfaceManager.openDefaultTabs(); //in case you died inside a random that had blanked them
+        setComponentVisibility(this, Components.TOPLEVEL_548, 69, false); //reenable the logout button (SD)
+        setComponentVisibility(this, Components.TOPLEVEL_FULLSCREEN_746, 12, false); //reenable the logout button (HD)
         super.finalizeDeath(killer);
         appearance.sync();
         if (!getSavedData().globalData.isDeathScreenDisabled()) {
@@ -909,9 +920,9 @@ public class Player extends Entity {
     public void updateSceneGraph(boolean login) {
         Region region = getViewport().getRegion();
         if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
-            PacketRepository.send(BuildDynamicScene.class, new OutgoingContext.DynamicScene(this, login));
+            PacketRepository.send(BuildDynamicScene.class, new DynamicSceneContext(this, login));
         } else {
-            PacketRepository.send(UpdateSceneGraph.class, new OutgoingContext.SceneGraph(this, login));
+            PacketRepository.send(UpdateSceneGraph.class, new SceneGraphContext(this, login));
         }
     }
 
@@ -937,7 +948,7 @@ public class Player extends Entity {
      * Send messages.
      *
      * @param messages the messages
-     * @param ticks the ticks
+     * @param ticks    the ticks
      */
     public void sendMessages(int ticks, String... messages) {
         packetDispatch.sendMessages(ticks, messages);

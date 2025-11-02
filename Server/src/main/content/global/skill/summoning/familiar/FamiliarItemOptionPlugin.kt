@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar
 
 import content.global.skill.summoning.objectpets.Pets
-import core.cache.def.impl.ItemDefinition.Companion.forId
+import core.cache.def.impl.ItemDefinition.forId
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -11,10 +11,14 @@ import core.plugin.Plugin
 import shared.consts.Items
 
 /**
- * The familiar item option plugin.
+ * Handles interaction options for summoning familiar items.
  */
 @Initializable
 class FamiliarItemOptionPlugin : OptionHandler() {
+
+    /**
+     * Registers this plugin as the handler for familiar-related items.
+     */
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (p in Pets.values()) {
@@ -33,13 +37,15 @@ class FamiliarItemOptionPlugin : OptionHandler() {
         return this
     }
 
+    /**
+     * Handles a player interacting with a familiar item.
+     */
     override fun handle(player: Player, node: Node, option: String): Boolean {
         when (option) {
             "drop" -> {
                 player.familiarManager.summon((node as Item), true)
                 return true
             }
-
             "release" -> {
                 if (node.id == Items.CLOCKWORK_CAT_7771) {
                     player.familiarManager.summon((node as Item), true)

@@ -4,7 +4,7 @@ import content.data.items.SkillingTool
 import content.data.items.SkillingTool.Companion.getAxe
 import content.global.skill.farming.FarmingPatch.Companion.forObject
 import core.api.*
-import core.cache.def.impl.ItemDefinition.Companion.forId
+import core.cache.def.impl.ItemDefinition.forId
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.FaceAnim
 import core.game.event.ResourceProducedEvent

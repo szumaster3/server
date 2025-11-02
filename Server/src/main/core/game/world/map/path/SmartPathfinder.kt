@@ -15,11 +15,7 @@ import java.io.StringWriter
 import java.util.*
 import javax.imageio.ImageIO
 
-class SmartPathfinder
-/**
- * Constructs a new `SmartPathfinder` `Object`.
- */
-internal constructor() : Pathfinder() {
+class SmartPathfinder internal constructor() : Pathfinder() {
     /**
      * The x-queue.
      */

@@ -6,8 +6,8 @@ import core.api.sendString
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Point
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
 import core.tools.StringUtils
 import shared.consts.Components
@@ -291,7 +291,7 @@ open class SkillDialogueHandler(
                         player, "<br><br><br><br>" + handler.getName(item), Components.SKILL_MAKE_306, 10 + 4 * i
                     )
                     player.packetDispatch.sendItemZoomOnInterface(item.id, 160, Components.SKILL_MAKE_306, 2 + i)
-                    PacketRepository.send(RepositionChild::class.java, OutgoingContext.ChildPosition(player, Components.SKILL_MAKE_306, 2 + i, Point(positions[i][0], positions[i][1])))
+                    PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MAKE_306, 2 + i, positions[i][0], positions[i][1]))
                 }
                 repositionChild(player, Components.SKILL_MAKE_306, 0, 12, 15)
                 repositionChild(player, Components.SKILL_MAKE_306, 1, 431, 15)

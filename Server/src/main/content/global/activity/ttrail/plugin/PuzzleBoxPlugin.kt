@@ -10,8 +10,8 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Items
@@ -162,7 +162,7 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
     private fun sendPuzzleContainer(player: Player, items: Array<Item>) {
         PacketRepository.send(
             ContainerPacket::class.java,
-            OutgoingContext.Container(player, -1, -1, 140, items, 25, false)
+            ContainerContext(player, -1, -1, 140, items, 25, false)
         )
     }
 

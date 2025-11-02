@@ -6,6 +6,7 @@ import core.game.world.map.zone.ZoneRestriction
 
 /**
  * Represents a bank zone.
+ *
  * @author Vexia
  */
 class BankZone : MapZone("bank", true, ZoneRestriction.CANNON, ZoneRestriction.FIRES) {

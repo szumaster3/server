@@ -1,7 +1,7 @@
 package core.game.world.map.build;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.cache.util.ByteBufferExtensions;
+import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
@@ -27,14 +27,14 @@ public final class LandscapeParser {
     public static void parse(Region r, byte[][][] mapscape, ByteBuffer buffer, boolean storeObjects) {
         int objectId = -1;
         for (; ; ) {
-            int offset = ByteBufferExtensions.getBigSmart(buffer);
+            int offset = ByteBufferUtils.getBigSmart(buffer);
             if (offset == 0) {
                 break;
             }
             objectId += offset;
             int location = 0;
             for (; ; ) {
-                offset = ByteBufferExtensions.getSmart(buffer);
+                offset = ByteBufferUtils.getSmart(buffer);
                 if (offset == 0) {
                     break;
                 }

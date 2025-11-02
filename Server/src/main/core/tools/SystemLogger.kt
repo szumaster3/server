@@ -1,6 +1,5 @@
 package core.tools
 
-import com.displee.cache.ProgressListener
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import core.ServerConstants
@@ -91,14 +90,14 @@ object SystemLogger {
         }
     }
 
-    class CreateProgressListener : ProgressListener {
-        override fun notify(
-            progress: Double,
-            message: String?,
-        ) {
-            logCache(message.toString())
-        }
-    }
+    // class CreateProgressListener : ProgressListener {
+    //     override fun notify(
+    //         progress: Double,
+    //         message: String?,
+    //     ) {
+    //         logCache(message.toString())
+    //     }
+    // }
 }
 
 enum class LogLevel {

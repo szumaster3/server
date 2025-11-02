@@ -3,6 +3,9 @@ package core.game.bots
 import core.game.node.item.Item
 import core.game.world.map.Location
 
+/**
+ * Responsible for assembling AI skilling bots.
+ */
 class SkillingBotAssembler {
     fun produce(type: Wealth, loc: Location): AIPlayer {
         return assembleBot(AIPlayer(loc),type)

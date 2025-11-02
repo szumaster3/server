@@ -13,8 +13,8 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Graphics
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
 import shared.consts.Components
@@ -131,8 +131,8 @@ object EvilTwinUtils {
     fun locationUpdate(player: Player, entity: Entity, last: Location?) {
         if (entity == craneNPC && entity.walkingQueue.queue.size > 1 && player.interfaceManager.singleTab != null) {
             val l: Location = entity.location
-            PacketRepository.send(CameraViewPacket::class.java, OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5))
-            PacketRepository.send(CameraViewPacket::class.java, OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5))
+            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5))
+            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5))
         } else if (entity == player) {
             if (mollyNPC!!.isHidden(player) && entity.location.getLocalX() < 9) {
                 showNPCs(true)
@@ -153,9 +153,9 @@ object EvilTwinUtils {
     fun updateCraneCam(player: Player, x: Int, y: Int) {
         if (player.interfaceManager.singleTab != null) {
             var loc = region.baseLocation.transform(14, 20, 0)
-            PacketRepository.send(CameraViewPacket::class.java, OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100))
+            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100))
             loc = region.baseLocation.transform(x, 4 + y - (if (x < 14 || x > 14) (y / 4) else 0), 0)
-            PacketRepository.send(CameraViewPacket::class.java, OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100))
+            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100))
         }
         setAttribute(player, crane_x_loc, x)
         setAttribute(player, crane_y_loc, y)

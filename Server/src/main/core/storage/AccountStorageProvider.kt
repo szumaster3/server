@@ -7,24 +7,38 @@ import core.auth.UserAccountInfo
  */
 interface AccountStorageProvider {
 
-    /** Returns true if the username exists. */
+    /**
+     * Gets true if the username exists.
+     */
     fun checkUsernameTaken(username: String): Boolean
 
-    /** Returns account info for the given username. */
+    /**
+     * Gets account info for the given username.
+     */
     fun getAccountInfo(username: String): UserAccountInfo
 
-    /** Returns usernames associated with the given IP. */
+    /**
+     * Gets usernames associated with the given IP.
+     */
     fun getUsernamesWithIP(ip: String): List<String>
 
-    /** Stores account info. */
+    /**
+     * Stores account info.
+     */
     fun store(info: UserAccountInfo)
 
-    /** Updates account info. */
+    /**
+     * Updates account info.
+     */
     fun update(info: UserAccountInfo)
 
-    /** Removes account info. */
+    /**
+     * Removes account info.
+     */
     fun remove(info: UserAccountInfo)
 
-    /** Returns a list of online friends. */
+    /**
+     * Returns a list of online friends.
+     */
     fun getOnlineFriends(username: String): List<String>
 }

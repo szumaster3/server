@@ -6,18 +6,30 @@ import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.DisplayModelContext
 import core.net.packet.out.DisplayModel
 import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.Components
 import java.util.*
 
+/**
+ * Represents a Barrows puzzle in the Barrows minigame.
+ *
+ * @property questionModels the model IDs for the puzzle questions
+ * @property answerModels the model IDs for the puzzle answers, where the correct answer is encoded
+ */
 class BarrowsPuzzle private constructor(
     private val questionModels: IntArray,
-    private vararg val answerModels: Int,
+    private vararg val answerModels: Int
 ) : ComponentPlugin() {
+
+    /**
+     * Creates a new instance of this puzzle with shuffled answer models.
+     *
+     * @return a new [BarrowsPuzzle] instance with answers shuffled
+     */
     fun create(): BarrowsPuzzle {
         val answers = answerModels.copyOf(answerModels.size)
         val list: MutableList<Int> = ArrayList(20)
@@ -31,28 +43,34 @@ class BarrowsPuzzle private constructor(
         return BarrowsPuzzle(questionModels, *answers)
     }
 
+    /**
+     * Registers this puzzle plugin with the component system.
+     *
+     * @param arg unused parameter
+     * @return the plugin instance
+     */
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.put(Components.BARROWS_PUZZLE_25, this)
         return this
     }
 
-    override fun handle(
-        player: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
+    /**
+     * Handles player interaction with the puzzle component.
+     *
+     * @param player the player interacting with the component
+     * @param component the component instance
+     * @param opcode the interaction opcode
+     * @param button the button pressed
+     * @param slot the component slot pressed
+     * @param itemId the item id, if applicable
+     * @return `true` if the action was handled, `false` otherwise
+     */
+    override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
         when (button) {
             2, 3, 5 -> {
                 player.interfaceManager.close()
-                val correct =
-                    player.getAttribute(
-                        "puzzle:answers",
-                        IntArray(3),
-                    )[if (button == 5) 2 else button - 2] shr 16 and 0xFF == 1
+                val correct = player.getAttribute("puzzle:answers", IntArray(3))[if (button == 5) 2 else button - 2] shr 16 and 0xFF == 1
                 if (!correct) {
                     sendMessage(player, "You got the puzzle wrong! You can hear the catacombs moving around you.")
                     BarrowsActivityPlugin.shuffleCatacombs(player)
@@ -67,6 +85,9 @@ class BarrowsPuzzle private constructor(
     }
 
     companion object {
+        /**
+         * Predefined puzzle shape configurations.
+         */
         val SHAPES =
             BarrowsPuzzle(
                 intArrayOf(6734, 6735, 6736),
@@ -97,6 +118,12 @@ class BarrowsPuzzle private constructor(
             )
         private val COMPONENT = Component(25)
 
+        /**
+         * Opens a random Barrows puzzle for the player.
+         * Ensures the new puzzle is different from the last one.
+         *
+         * @param player the player to open the puzzle for
+         */
         fun open(player: Player) {
             var index = RandomFunction.random(4)
             if (index == player.getAttribute("puzzle:index", -1)) {
@@ -105,10 +132,13 @@ class BarrowsPuzzle private constructor(
             open(player, index)
         }
 
-        fun open(
-            player: Player,
-            index: Int,
-        ) {
+        /**
+         * Opens the specified Barrows puzzle for the player.
+         *
+         * @param player the player to open the puzzle for
+         * @param index the index of the puzzle shape to open (0-3)
+         */
+        fun open(player: Player, index: Int) {
             var puzzle = SHAPES
             when (index) {
                 1 -> puzzle = LINES
@@ -122,45 +152,28 @@ class BarrowsPuzzle private constructor(
             for (i in puzzle.questionModels.indices) {
                 PacketRepository.send(
                     DisplayModel::class.java,
-                    OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.MODEL,
-                        puzzle.questionModels[i],
-                        0,
-                        25,
-                        6 + i,
-                    ),
+                    DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.questionModels[i], 0, 25, 6 + i),
                 )
             }
             for (i in puzzle.answerModels.indices) {
                 PacketRepository.send(
                     DisplayModel::class.java,
-                    OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.MODEL,
-                        puzzle.answerModels[i] and 0xFFFF,
-                        0,
-                        25,
-                        2 + i,
-                    ),
+                    DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.answerModels[i] and 0xFFFF, 0, 25, 2 + i),
                 )
             }
             PacketRepository.send(
                 DisplayModel::class.java,
-                OutgoingContext.DisplayModel(
-                    player,
-                    OutgoingContext.DisplayModel.ModelType.MODEL,
-                    puzzle.answerModels[2] and 0xFFFF,
-                    0,
-                    25,
-                    5,
-                ),
+                DisplayModelContext(player, DisplayModelContext.ModelType.MODEL, puzzle.answerModels[2] and 0xFFFF, 0, 25, 5),
             )
         }
 
-        private fun getAnswerModel(
-            modelId: Int,
-            correct: Boolean,
-        ): Int = modelId or ((if (correct) 1 else 0) shl 16)
+        /**
+         * Encodes a puzzle answer model id with a correctness flag.
+         *
+         * @param modelId the model id
+         * @param correct `true` if this is the correct answer, `false` otherwise
+         * @return the encoded model integer
+         */
+        private fun getAnswerModel(modelId: Int, correct: Boolean): Int = modelId or ((if (correct) 1 else 0) shl 16)
     }
 }

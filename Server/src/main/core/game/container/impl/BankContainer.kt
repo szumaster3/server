@@ -14,8 +14,8 @@ import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.settings
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Vars
@@ -413,7 +413,7 @@ class BankContainer(private val player: Player) : Container(SIZE, ContainerType.
             // constructor: (player, interfaceId, childId, containerId, items, split, vararg slots)
             PacketRepository.send(
                 ContainerPacket::class.java,
-                OutgoingContext.Container(p, iface, BANK_CHILD_ID, containerType, items, false, *slots)
+                ContainerContext(p, iface, BANK_CHILD_ID, containerType, items, false, *slots)
             )
         }
 
@@ -421,7 +421,7 @@ class BankContainer(private val player: Player) : Container(SIZE, ContainerType.
             // constructor: (player, interfaceId, childId, containerId, items, length, split)
             PacketRepository.send(
                 ContainerPacket::class.java,
-                OutgoingContext.Container(p, iface, BANK_CHILD_ID, containerType, items, length, false)
+                ContainerContext(p, iface, BANK_CHILD_ID, containerType, items, length, false)
             )
         }
 

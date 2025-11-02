@@ -4,18 +4,44 @@ import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import shared.consts.Items
 
+/**
+ * Handles the interface and interactions for
+ * the Construction Costume Room storage boxes.
+ */
 class StorageBoxInterface : InterfaceListener {
-    private val INTERFACE = 467
-    private val CONTAINER_COMPONENT = 164
-    private val TOTAL_SLOTS = 30
-    private val PAGE_SIZE = TOTAL_SLOTS - 1
-    private val BUTTON_MORE = Items.MORE_10165
-    private val BUTTON_BACK = Items.BACK_10166
+    companion object {
+        private const val INTERFACE = 467
+        private const val COMPONENT = 164
+        private const val SIZE = 30
+        private const val PAGE_SIZE = SIZE - 1
+        private const val BUTTON_MORE = Items.MORE_10165
+        private const val BUTTON_BACK = Items.BACK_10166
+
+        /**
+         * Singleton instance of the storage interface.
+         */
+        lateinit var instance: StorageBoxInterface
+            private set
+
+        /**
+         * Opens the storage box.
+         *
+         * @param player The player.
+         * @param type The type of storage to open.
+         */
+        fun openStorage(player: Player, type: StorableType) {
+            instance.openStorageForType(player, type)
+        }
+    }
+
+    init {
+        instance = this
+    }
 
     override fun defineInterfaceListeners() {
         on(INTERFACE) { player, _, _, buttonId, _, _ ->
@@ -26,74 +52,37 @@ class StorageBoxInterface : InterfaceListener {
         }
     }
 
-    private fun getContainer(player: Player, type: StorableType) =
+    /**
+     * Gets the storage container.
+     */
+    private fun getStorageContainer(player: Player, type: StorableType) =
         player.getCostumeRoomState().getContainer(type)
 
-    private fun getRelevantItems(type: StorableType): List<Storable> {
-        val trailTiers = listOf(
-            StorableType.LOW_LEVEL_TRAILS,
-            StorableType.MED_LEVEL_TRAILS,
-            StorableType.HIGH_LEVEL_TRAILS
-        )
-        val magicTiers = listOf(
-            StorableType.ONE_SET_OF_ARMOUR,
-            StorableType.TWO_SETS_OF_ARMOUR,
-            StorableType.THREE_SETS_OF_ARMOUR,
-            StorableType.FOUR_SETS_OF_ARMOUR,
-            StorableType.FIVE_SETS_OF_ARMOUR,
-            StorableType.SIX_SETS_OF_ARMOUR
-        )
-        val armourTiers = listOf(
-            StorableType.TWO_SETS_ARMOUR_CASE,
-            StorableType.FOUR_SETS_ARMOUR_CASE,
-            StorableType.ALL_SETS_ARMOUR_CASE
-        )
-
-        return Storable.values().filter {
-            when (type) {
-                StorableType.LOW_LEVEL_TRAILS -> it.type == type
-                StorableType.MED_LEVEL_TRAILS -> it.type in trailTiers.take(2)
-                StorableType.HIGH_LEVEL_TRAILS -> it.type in trailTiers
-
-                StorableType.ONE_SET_OF_ARMOUR -> it.type == StorableType.ONE_SET_OF_ARMOUR
-                StorableType.TWO_SETS_OF_ARMOUR -> it.type in magicTiers.take(2)
-                StorableType.THREE_SETS_OF_ARMOUR -> it.type in magicTiers.take(3)
-                StorableType.FOUR_SETS_OF_ARMOUR -> it.type in magicTiers.take(4)
-                StorableType.FIVE_SETS_OF_ARMOUR -> it.type in magicTiers.take(5)
-                StorableType.SIX_SETS_OF_ARMOUR -> it.type in magicTiers
-                StorableType.ALL_SETS_OF_ARMOUR -> it.type in magicTiers
-
-                StorableType.TWO_SETS_ARMOUR_CASE -> it.type in armourTiers.take(1)
-                StorableType.FOUR_SETS_ARMOUR_CASE -> it.type in armourTiers.take(2)
-                StorableType.ALL_SETS_ARMOUR_CASE -> it.type in armourTiers
-
-                else -> it.type == type
-            }
-        }
-    }
-
+    /**
+     * Handles interaction with storage interface.
+     */
     private fun handleStorageInteraction(player: Player, buttonId: Int, type: StorableType) {
-        val container = getContainer(player, type)
-        val allItems = getRelevantItems(type)
+        val container = getStorageContainer(player, type)
+        val allItems = StorableRepository.getRelevantItems(type)
         val pageIndex = container.getPageIndex(type)
 
         val pageItems = allItems.drop(pageIndex * PAGE_SIZE).take(PAGE_SIZE)
-        val slots = MutableList<Any?>(TOTAL_SLOTS) { null }
+        val slots = MutableList<Any?>(SIZE) { null }
 
         var idx = 0
         pageItems.forEach {
-            if (idx >= TOTAL_SLOTS) return@forEach
+            if (idx >= SIZE) return@forEach
             slots[idx++] = it
         }
 
         val hasPrev = pageIndex > 0
         val hasNext = allItems.size > (pageIndex + 1) * PAGE_SIZE
 
-        if (hasNext && idx < TOTAL_SLOTS) slots[idx++] = "MORE"
-        if (hasPrev && idx < TOTAL_SLOTS) slots[idx] = "BACK"
+        if (hasNext && idx < SIZE) slots[idx++] = "MORE"
+        if (hasPrev && idx < SIZE) slots[idx] = "BACK"
 
         val slotIndex = when {
-            buttonId in 56..(56 + (TOTAL_SLOTS - 1) * 2) step 2 -> (buttonId - 56) / 2
+            buttonId in 56..(56 + (SIZE - 1) * 2) step 2 -> (buttonId - 56) / 2
             buttonId in 165..223 step 2 -> (buttonId - 165) / 2
             else -> return
         }
@@ -102,19 +91,22 @@ class StorageBoxInterface : InterfaceListener {
             "MORE" -> {
                 container.nextPage(type, allItems.size, PAGE_SIZE)
                 openInterface(player, INTERFACE)
-                renderPage(player, type)
+                updateStorageInterface(player, type)
             }
             "BACK" -> {
                 container.prevPage(type)
                 openInterface(player, INTERFACE)
-                renderPage(player, type)
+                updateStorageInterface(player, type)
             }
-            is Storable -> handleItemClick(player, clicked, type)
+            is Storable -> processItemTransaction(player, clicked, type)
         }
     }
 
-    private fun handleItemClick(player: Player, item: Storable, type: StorableType) {
-        val container = getContainer(player, type)
+    /**
+     * Handles taking or depositing an item from/to the storage.
+     */
+    private fun processItemTransaction(player: Player, item: Storable, type: StorableType) {
+        val container = getStorageContainer(player, type)
         val storedItems = container.getItems(type).toSet()
         val actualId = item.takeIds.firstOrNull() ?: item.displayId
 
@@ -141,29 +133,29 @@ class StorageBoxInterface : InterfaceListener {
                 sendMessage(player, "You don't have that item in your inventory.")
             }
         }
-        renderPage(player, type)
+        updateStorageInterface(player, type)
     }
 
-    private fun renderPage(player: Player, type: StorableType) {
-        val container = getContainer(player, type)
-        val allItems = getRelevantItems(type)
+    private fun updateStorageInterface(player: Player, type: StorableType) {
+        val container = getStorageContainer(player, type)
+        val allItems = StorableRepository.getRelevantItems(type)
         val stored = container.getItems(type).toSet()
         val pageIndex = container.getPageIndex(type)
 
         val pageItems = allItems.drop(pageIndex * PAGE_SIZE).take(PAGE_SIZE)
-        val slots = MutableList<Any?>(TOTAL_SLOTS) { null }
+        val slots = MutableList<Any?>(SIZE) { null }
 
         var idx = 0
         pageItems.forEach {
-            if (idx >= TOTAL_SLOTS) return@forEach
+            if (idx >= SIZE) return@forEach
             slots[idx++] = it
         }
 
         val hasPrev = pageIndex > 0
         val hasNext = allItems.size > (pageIndex + 1) * PAGE_SIZE
 
-        if (hasNext && idx < TOTAL_SLOTS) slots[idx++] = "MORE"
-        if (hasPrev && idx < TOTAL_SLOTS) slots[idx] = "BACK"
+        if (hasNext && idx < SIZE) slots[idx++] = "MORE"
+        if (hasPrev && idx < SIZE) slots[idx] = "BACK"
 
         val title = when {
             type.name.contains("TRAILS") -> "Treasure chest"
@@ -184,10 +176,10 @@ class StorageBoxInterface : InterfaceListener {
 
         PacketRepository.send(
             ContainerPacket::class.java,
-            OutgoingContext.Container(player, INTERFACE, CONTAINER_COMPONENT, TOTAL_SLOTS, itemsArray, false)
+            ContainerContext(player, INTERFACE, COMPONENT, SIZE, itemsArray, false)
         )
 
-        repeat(TOTAL_SLOTS) { i ->
+        repeat(SIZE) { i ->
             val nameComponent = 55 + i * 2
             val iconComponent = 165 + i * 2
             val hiddenIconComponent = 166 + i * 2
@@ -213,22 +205,9 @@ class StorageBoxInterface : InterfaceListener {
         }
     }
 
-    private fun openStorageInterface(player: Player, type: StorableType) {
+    private fun openStorageForType(player: Player, type: StorableType) {
         setAttribute(player, "con:storage:type", type.name)
         openInterface(player, INTERFACE)
-        renderPage(player, type)
-    }
-
-    companion object {
-        lateinit var instance: StorageBoxInterface
-            private set
-
-        fun openStorage(player: Player, type: StorableType) {
-            instance.openStorageInterface(player, type)
-        }
-    }
-
-    init {
-        instance = this
+        updateStorageInterface(player, type)
     }
 }

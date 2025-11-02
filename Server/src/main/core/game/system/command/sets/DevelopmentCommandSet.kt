@@ -20,8 +20,8 @@ import core.game.system.command.Privilege
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.repository.Repository
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketWriteQueue
+import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
 import core.tools.DARK_BLUE
@@ -568,7 +568,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
          */
 
         define(name = "testpacket", Privilege.ADMIN) { player, _ ->
-            PacketWriteQueue.write(ResetInterface(), OutgoingContext.PlayerContext(player))
+            PacketWriteQueue.write(ResetInterface(), PlayerContext(player))
         }
 
         /*

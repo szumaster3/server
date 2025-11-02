@@ -2,61 +2,45 @@ package core.auth
 
 import java.sql.Timestamp
 
-class UserAccountInfo(
-    var username: String,
-    var password: String,
-    var uid: Int,
-    var rights: Int,
-    var credits: Int,
-    var ip: String,
-    var lastUsedIp: String,
-    var muteEndTime: Long,
-    var banEndTime: Long,
-    var contacts: String,
-    var blocked: String,
-    var clanName: String,
-    var currentClan: String,
-    var clanReqs: String,
-    var timePlayed: Long,
-    var lastLogin: Long,
-    var online: Boolean,
-    var joinDate: Timestamp,
-) {
+/**
+ * Represents a user's account information and state data.
+ */
+class UserAccountInfo(var username: String, var password: String, var uid: Int, var rights: Int, var credits: Int, var ip: String, var lastUsedIp: String, var muteEndTime: Long, var banEndTime: Long, var contacts: String, var blocked: String, var clanName: String, var currentClan: String, var clanReqs: String, var timePlayed: Long, var lastLogin: Long, var online: Boolean, var joinDate: Timestamp) {
     companion object {
+        /**
+         * The reference instance used for comparisons.
+         */
         val default = createDefault()
 
+        /**
+         * Creates a new account with default values.
+         *
+         * @return A [UserAccountInfo] instance initialized with safe defaults.
+         */
         @JvmStatic
         fun createDefault(): UserAccountInfo =
-            UserAccountInfo(
-                username = "",
-                password = "",
-                uid = 0,
-                rights = 0,
-                credits = 0,
-                ip = "",
-                lastUsedIp = "",
-                muteEndTime = 0L,
-                banEndTime = 0L,
-                contacts = "",
-                blocked = "",
-                clanName = "",
-                currentClan = "",
-                clanReqs = "1,0,8,9",
-                timePlayed = 0L,
-                lastLogin = 0L,
-                online = false,
-                joinDate = Timestamp(System.currentTimeMillis()),
-            ).also {
+            UserAccountInfo(username = "", password = "", uid = 0, rights = 0, credits = 0, ip = "", lastUsedIp = "", muteEndTime = 0L, banEndTime = 0L, contacts = "", blocked = "", clanName = "", currentClan = "", clanReqs = "1,0,8,9", timePlayed = 0L, lastLogin = 0L, online = false, joinDate = Timestamp(System.currentTimeMillis())).also {
                 it.setInitialReferenceValues()
             }
     }
 
+    /**
+     * Snapshot of field values for change detection.
+     */
     lateinit var initialValues: Array<Any>
 
+    /**
+     * Stores the current field values for later comparison.
+     */
     fun setInitialReferenceValues() {
         initialValues = toArray()
     }
 
+    /**
+     * Gets a list of indices for changed fields and the current field values.
+     *
+     * @return A pair of (changed field indices, current values).
+     */
     fun getChangedFields(): Pair<ArrayList<Int>, Array<Any>> {
         val current = toArray()
         val changed = ArrayList<Int>()
@@ -68,27 +52,13 @@ class UserAccountInfo(
         return Pair(changed, current)
     }
 
+    /**
+     * Converts all user fields into an array for quick iteration and comparison.
+     *
+     * @return An [Array] of all stored field values.
+     */
     fun toArray(): Array<Any> =
-        arrayOf(
-            username,
-            password,
-            uid,
-            rights,
-            credits,
-            ip,
-            lastUsedIp,
-            muteEndTime,
-            banEndTime,
-            contacts,
-            blocked,
-            clanName,
-            currentClan,
-            clanReqs,
-            timePlayed,
-            lastLogin,
-            online,
-            joinDate,
-        )
+        arrayOf(username, password, uid, rights, credits, ip, lastUsedIp, muteEndTime, banEndTime, contacts, blocked, clanName, currentClan, clanReqs, timePlayed, lastLogin, online, joinDate)
 
     override fun toString(): String = "USER:$username,PASS:$password,UID:$uid,RIGHTS:$rights,CREDITS:$credits,IP:$ip,LASTIP:$lastUsedIp"
 
@@ -140,5 +110,10 @@ class UserAccountInfo(
         return result
     }
 
+    /**
+     * Checks whether this account matches the default (uninitialized) state.
+     *
+     * @return `true` if all fields are equal to the default instance.
+     */
     fun isDefault(): Boolean = this == default
 }

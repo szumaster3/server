@@ -3,8 +3,8 @@ package core.game.container.access
 import core.api.IfaceSettingsBuilder
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 
 /**
@@ -62,7 +62,7 @@ object InterfaceContainer {
         val itemArray = Array(items.size) { i -> items[i] ?: Item() }
         val settings = IfaceSettingsBuilder().enableAllOptions().build()
         player.packetDispatch.sendIfaceSettings(settings, childIndex, interfaceIndex, 0, items.size)
-        PacketRepository.send(ContainerPacket::class.java, OutgoingContext.Container(player, -1, -2, key, itemArray, items.size, false))
+        PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -2, key, itemArray, items.size, false))
         return increment()
     }
 

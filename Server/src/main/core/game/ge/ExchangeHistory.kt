@@ -16,13 +16,18 @@ import java.util.*
  *
  * @author Emperor, Angle
  */
-class ExchangeHistory(
-    private val player: Player? = null,
-) : PersistPlayer, LoginListener {
-    // Stores the player's history of completed Grand Exchange offers (maximum 5 records).
+class ExchangeHistory(private val player: Player? = null) : PersistPlayer, LoginListener {
+
+    /*
+     * Stores the player's history of completed
+     * Grand Exchange offers (maximum 5 records).
+     */
     var history = arrayOfNulls<GrandExchangeOffer>(5)
 
-    // Stores the records of the player's Grand Exchange offers, including both active and completed offers.
+    /*
+     * Stores the records of the player's Grand Exchange
+     * offers, including both active and completed offers.
+     */
     val offerRecords = arrayOfNulls<OfferRecord>(6)
 
     /**

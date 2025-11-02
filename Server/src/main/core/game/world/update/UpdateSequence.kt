@@ -7,8 +7,8 @@ import core.game.world.map.RegionManager
 import core.game.world.repository.InitializingNodeList
 import core.game.world.repository.Repository
 import core.integration.grafana.Grafana
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
 
 /**
@@ -28,7 +28,7 @@ class UpdateSequence {
         lobbyList = Repository.lobbyPlayers
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
-        lobbyList!!.map { PacketRepository.send(ClearMinimapFlag::class.java, OutgoingContext.PlayerContext(it)) }
+        lobbyList!!.map { PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
 
         var npcTickStart = System.currentTimeMillis()
         npcList!!.forEach(NPC::tick)

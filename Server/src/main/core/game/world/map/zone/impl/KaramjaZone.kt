@@ -67,6 +67,6 @@ class KaramjaZone : MapZone("karamja", true) {
         /**
          * Represents the karamjan rum.
          */
-        private val KARAMJAN_RUM = Items.KARAMJAN_RUM_431
+        private const val KARAMJAN_RUM = Items.KARAMJAN_RUM_431
     }
 }

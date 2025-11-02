@@ -7,8 +7,8 @@ import core.game.ge.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import core.tools.Log
 import core.tools.SystemLogger
@@ -18,16 +18,16 @@ import shared.consts.Sounds
 import kotlin.math.min
 
 /**
- * Handles the grand exchange interface (Stock Market).
+ * Handles the grand exchange interface.
  *
  * @author Ceikry
  */
 class StockMarket : InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.STOCKMARKET_105) { player, _ ->
-            sendInterfaceConfig(player,105, 193, true)
+            sendInterfaceConfig(player, 105, 193, true)
             sendIfaceSettings(player, 6, 211, 105, -1, -1)
-            sendIfaceSettings(player,6, 209, 105, -1, -1)
+            sendIfaceSettings(player, 6, 209, 105, -1, -1)
             setVarp(player, 1112, -1)
             return@onOpen true
         }
@@ -85,13 +85,12 @@ class StockMarket : InterfaceListener {
             var openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
 
             when (button) {
-                209, 211 ->
-                    if (openedOffer == null) {
-                        SystemLogger.logGE("[WARN] Player tried to withdraw item with null openedOffer!")
-                        return@on false
-                    } else {
-                        withdraw(player, openedOffer, (button - 209) shr 1, op)
-                    }
+                209, 211 -> if (openedOffer == null) {
+                    SystemLogger.logGE("[WARN] Player tried to withdraw item with null openedOffer!")
+                    return@on false
+                } else {
+                    withdraw(player, openedOffer, (button - 209) shr 1, op)
+                }
 
                 190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
                 194 -> openChatbox(player, Components.EXCHANGE_SEARCH_389)
@@ -105,7 +104,8 @@ class StockMarket : InterfaceListener {
                         updateVarbits(player, openedOffer, openedIndex)
                     }
                     if (openedOffer != null) {
-                        sendString(player,
+                        sendString(
+                            player,
                             GrandExchange.getOfferStats(openedOffer.itemID, openedOffer.sell),
                             Components.STOCKMARKET_105,
                             142,
@@ -117,8 +117,8 @@ class StockMarket : InterfaceListener {
                     openedIndex = (button - 30) shr 4
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex)
-                    openChatbox(player,Components.EXCHANGE_SEARCH_389)
-                    if(player.interfaceManager.chatbox!!.id == 389) {
+                    openChatbox(player, Components.EXCHANGE_SEARCH_389)
+                    if (player.interfaceManager.chatbox!!.id == 389) {
                         player.packetDispatch.sendRunScript(570, "s", "Grand Exchange Item Search")
                     }
                 }
@@ -128,7 +128,9 @@ class StockMarket : InterfaceListener {
                     openedOffer = ExchangeHistory.getInstance(player).getOffer(openedIndex)
                     updateVarbits(player, openedOffer, openedIndex, true)
                     player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107)).open(player)
-                    player.packetDispatch.sendRunScript(149, "IviiiIsssss", "", "", "", "Examine", "Offer", -1, 0, 7, 4, 93, 7012370)
+                    player.packetDispatch.sendRunScript(
+                        149, "IviiiIsssss", "", "", "", "Examine", "Offer", -1, 0, 7, 4, 93, 7012370
+                    )
                     val settings = IfaceSettingsBuilder().enableOptions(0, 1).build()
                     player.packetDispatch.sendIfaceSettings(settings, 18, 107, 0, 27)
                 }
@@ -139,56 +141,47 @@ class StockMarket : InterfaceListener {
                 164 -> updateOfferAmount(player, tempOffer, if (tempOffer.sell) 10 else tempOffer.amount + 10)
                 166 -> updateOfferAmount(player, tempOffer, if (tempOffer.sell) 100 else tempOffer.amount + 100)
                 168 -> {
-                    val amt =
-                        if (tempOffer.sell) {
-                            getInventoryAmount(player, tempOffer.itemID)
-                        } else {
-                            tempOffer.amount + 1000
-                        }
+                    val amt = if (tempOffer.sell) {
+                        getInventoryAmount(player, tempOffer.itemID)
+                    } else {
+                        tempOffer.amount + 1000
+                    }
 
                     updateOfferAmount(player, tempOffer, amt)
                 }
 
-                170 ->
-                    sendInputDialogue(player, false, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                            openChatbox(player, Components.EXCHANGE_SEARCH_389)
-                        }
-                        var s = value.toString()
-                        s = s.replace("k", "000")
-                        s = s.replace("K", "000")
-                        s = s.replace("m", "000000")
-                        s = s.replace("M", "000000")
-                        updateOfferAmount(player, tempOffer, s.toInt())
-                        setAttribute(player, "ge-temp", tempOffer)
+                170 -> sendInputDialogue(player, false, "Enter the amount:") { value ->
+                    if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
+                        openChatbox(player, Components.EXCHANGE_SEARCH_389)
                     }
+                    var s = value.toString()
+                    s = s.replace("k", "000")
+                    s = s.replace("K", "000")
+                    s = s.replace("m", "000000")
+                    s = s.replace("M", "000000")
+                    updateOfferAmount(player, tempOffer, s.toInt())
+                    setAttribute(player, "ge-temp", tempOffer)
+                }
 
                 180 -> updateOfferValue(player, tempOffer, GrandExchange.getRecommendedPrice(tempOffer.itemID))
-                177 ->
-                    updateOfferValue(
-                        player,
-                        tempOffer,
-                        (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 0.95).toInt(),
-                    )
+                177 -> updateOfferValue(
+                    player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 0.95).toInt()
+                )
 
-                183 ->
-                    updateOfferValue(
-                        player,
-                        tempOffer,
-                        (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 1.05).toInt(),
-                    )
+                183 -> updateOfferValue(
+                    player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 1.05).toInt()
+                )
 
                 171 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue - 1)
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
-                185 ->
-                    sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
-                        if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
-                            openChatbox(player, Components.EXCHANGE_SEARCH_389)
-                        }
-                        var s = value.toString()
-                        updateOfferValue(player, tempOffer, s.toInt())
-                        setAttribute(player, "ge-temp", tempOffer)
+                185 -> sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
+                    if (player.interfaceManager.chatbox?.id == Components.EXCHANGE_SEARCH_389) {
+                        openChatbox(player, Components.EXCHANGE_SEARCH_389)
                     }
+                    var s = value.toString()
+                    updateOfferValue(player, tempOffer, s.toInt())
+                    setAttribute(player, "ge-temp", tempOffer)
+                }
 
                 195 -> closeInterface(player)
                 127 -> {
@@ -196,7 +189,6 @@ class StockMarket : InterfaceListener {
                     closeSingleTab(player)
                 }
             }
-
             setAttribute(player, "ge-index", openedIndex)
             setAttribute(player, "ge-temp", tempOffer)
             return@on true
@@ -226,11 +218,7 @@ class StockMarket : InterfaceListener {
      * @param offer The current Grand Exchange offer being made.
      * @param newAmt The new amount of items being offered.
      */
-    private fun updateOfferAmount(
-        player: Player,
-        offer: GrandExchangeOffer,
-        newAmt: Int,
-    ) {
+    private fun updateOfferAmount(player: Player, offer: GrandExchangeOffer, newAmt: Int) {
         offer.amount = newAmt
         setVarp(player, 1110, newAmt)
     }
@@ -241,10 +229,7 @@ class StockMarket : InterfaceListener {
      * @param player The player requesting the offer cancellation.
      * @param offer The Grand Exchange offer to be aborted.
      */
-    private fun abortOffer(
-        player: Player,
-        offer: GrandExchangeOffer?,
-    ) {
+    private fun abortOffer(player: Player, offer: GrandExchangeOffer?) {
         if (offer == null) {
             log(this::class.java, Log.WARN, "Opened offer was null and was attempted to be aborted!")
             return
@@ -256,7 +241,7 @@ class StockMarket : InterfaceListener {
             log(
                 this::class.java,
                 Log.WARN,
-                "Offer ${offer.uid}[${offer.index}]: ${if (offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted",
+                "Offer ${offer.uid}[${offer.index}]: ${if (offer.sell) "s" else "b"} ${offer.itemID}x ${offer.amount} was NO LONGER active when abort attempted"
             )
             return
         }
@@ -271,27 +256,18 @@ class StockMarket : InterfaceListener {
     }
 
     enum class OfferConfirmResult {
-        Success,
-        ZeroCoins,
-        TooManyCoins,
-        NotEnoughItemsOrCoins,
-        ItemRemovalFailure,
-        OfferPlacementError,
+        Success, ZeroCoins, TooManyCoins, NotEnoughItemsOrCoins, ItemRemovalFailure, OfferPlacementError,
     }
 
     /**
-     * Confirms the details of a Grand Exchange offer and processes the transaction.
+     * Confirms the offer.
      *
      * @param player The player confirming the offer.
      * @param offer The offer being confirmed.
      * @param index The index of the offer in the Grand Exchange.
      * @return The result of the offer confirmation.
      */
-    fun confirmOffer(
-        player: Player,
-        offer: GrandExchangeOffer,
-        index: Int,
-    ): OfferConfirmResult {
+    fun confirmOffer(player: Player, offer: GrandExchangeOffer, index: Int): OfferConfirmResult {
         if (offer.offeredValue < 1) {
             playAudio(player, Sounds.GE_TRADE_ERROR_4039)
             sendMessage(player, "You can't make an offer for 0 coins.")
@@ -346,10 +322,7 @@ class StockMarket : InterfaceListener {
         return OfferConfirmResult.Success
     }
 
-    private fun getInventoryAmount(
-        player: Player,
-        itemId: Int,
-    ): Int {
+    private fun getInventoryAmount(player: Player, itemId: Int): Int {
         val item = Item(itemId)
         var amount = player.inventory.getAmount(item)
         if (item.definition.noteId > -1) {
@@ -359,11 +332,6 @@ class StockMarket : InterfaceListener {
     }
 
     companion object {
-        /**
-         * Opens the Grand Exchange interface for the player.
-         *
-         * @param player The player opening the interface.
-         */
         @JvmStatic
         fun openFor(player: Player) {
             if (player.ironmanManager.checkRestriction()) {
@@ -373,25 +341,11 @@ class StockMarket : InterfaceListener {
                 player.bankPinManager.openType(4)
                 return
             }
-
             openInterface(player, Components.STOCKMARKET_105)
         }
 
-        /**
-         * Updates the varbits for a Grand Exchange offer.
-         *
-         * @param player The player making the offer.
-         * @param offer The Grand Exchange offer being updated.
-         * @param index The index of the offer.
-         * @param sale Whether the offer is a sale or not (optional).
-         */
         @JvmStatic
-        fun updateVarbits(
-            player: Player,
-            offer: GrandExchangeOffer?,
-            index: Int,
-            sale: Boolean? = null,
-        ) {
+        fun updateVarbits(player: Player, offer: GrandExchangeOffer?, index: Int, sale: Boolean? = null) {
             val isSale = sale ?: offer?.sell ?: false
             var lowPrice = 0
             var highPrice = 0
@@ -408,37 +362,16 @@ class StockMarket : InterfaceListener {
             setVarp(player, 1114, recommendedPrice)
             setVarp(player, 1115, lowPrice)
             setVarp(player, 1116, highPrice)
-            if (offer?.withdraw != null) {
-                val items = offer.withdraw.filterNotNull().toTypedArray()
+            if (offer != null) {
                 PacketRepository.send(
                     ContainerPacket::class.java,
-                    OutgoingContext.Container(
-                        player,
-                        interfaceId = -1,
-                        childId = -1757,
-                        containerId = 523 + offer.index,
-                        items = items,
-                        split = false
-                    )
+                    ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
                 )
             }
         }
 
-        /**
-         * Withdraws items from a Grand Exchange offer based on the given operation.
-         *
-         * @param player The player requesting the withdrawal.
-         * @param offer The Grand Exchange offer being processed.
-         * @param index The index of the withdrawal.
-         * @param op The operation type (e.g., withdraw notes or items).
-         */
         @JvmStatic
-        fun withdraw(
-            player: Player,
-            offer: GrandExchangeOffer,
-            index: Int,
-            op: Int,
-        ) {
+        fun withdraw(player: Player, offer: GrandExchangeOffer, index: Int, op: Int) {
             val item = offer.withdraw[index]
             if (item == null) {
                 log(this::class.java, Log.WARN, "Offer withdraw $index is null!")
@@ -490,9 +423,7 @@ class StockMarket : InterfaceListener {
         }
 
         /**
-         * Returns the player to the main Grand Exchange interface.
-         *
-         * @param player The player returning to the main interface.
+         * Returns to the main interface.
          */
         fun toMainInterface(player: Player) {
             setVarbit(player, 1112, -1)

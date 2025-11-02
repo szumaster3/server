@@ -8,8 +8,8 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.InterfaceContext
 import core.net.packet.out.CloseInterface
 import core.net.packet.out.Interface
 
@@ -87,30 +87,23 @@ private constructor() : MapZone("Multicombat", true) {
         if (e is Player) {
             val p = e
             val resizable = p.interfaceManager.isResizable
-            PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(Interface::class.java, InterfaceContext(p, p.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
             p.packetDispatch.sendInterfaceConfig(745, 1, false)
         }
         e.properties.isMultiZone = true
         return super.enter(e)
     }
 
-    override fun leave(
-        e: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(e: Entity, logout: Boolean): Boolean {
         if (!logout && e is Player) {
             val resizable = e.interfaceManager.isResizable
-            PacketRepository.send(CloseInterface::class.java, OutgoingContext.InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
+            PacketRepository.send(CloseInterface::class.java, InterfaceContext(e, e.interfaceManager.windowPaneId, if (resizable) 17 else 7, 745, true),)
         }
         e.properties.isMultiZone = false
         return super.leave(e, logout)
     }
 
-    override fun move(
-        e: Entity,
-        loc: Location,
-        destination: Location,
-    ): Boolean {
+    override fun move(e: Entity, loc: Location, destination: Location): Boolean {
         if (e.properties.isNPCWalkable) {
             return true
         }

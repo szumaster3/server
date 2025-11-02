@@ -87,6 +87,7 @@ class DeathTask private constructor() : NodeTask(1) {
          * @param player The player.
          * @return The containers, index 0 = kept items, index 1 = lost items.
          */
+        @JvmStatic
         fun getContainers(player: Player): Array<Container?> {
             val containers = arrayOfNulls<Container>(2)
             val wornItems = Container(42, ContainerType.ALWAYS_STACK)
@@ -162,6 +163,7 @@ class DeathTask private constructor() : NodeTask(1) {
          * @param e The entity.
          * @return `True` if so.
          */
+        @JvmStatic
         fun isDead(e: Entity): Boolean {
             return if (e is NPC) e.respawnTick > ticks || e.getAttribute(
                 "state:death",

@@ -588,7 +588,7 @@ public class Container {
             int amount = Integer.parseInt(i.get("amount").getAsString());
             int charge = Integer.parseInt(i.get("charge").getAsString());
 
-            if (id >= ItemDefinition.definitions.size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
+            if (id >= ItemDefinition.getDefinitions().size() || id < 0 || slot >= items.length || id == Items.MAGIC_CARPET_5614) {
                 // skip invalid or special items
             } else {
                 Item it = items[slot] = new Item(id, amount, charge);

@@ -12,11 +12,20 @@ import core.game.world.map.Location
 import core.tools.RandomFunction
 import kotlin.random.Random
 
+/**
+ * Represents an AI-controlled combat bot.
+ */
 class CombatBot(
     location: Location,
 ) : AIPlayer(location) {
     var tick = 0
 
+    /**
+     * Randomizes the bot's appearance and direction.
+     *
+     * Randomly assigns a gender and facing direction,
+     * then recalculates combat level and synchronizes the appearance.
+     */
     override fun updateRandomValues() {
         appearance.gender = if (RandomFunction.random(5) == 1) Gender.FEMALE else Gender.MALE
         setDirection(Direction.values()[Random.nextInt(Direction.values().size)])
@@ -24,6 +33,9 @@ class CombatBot(
         appearance.sync()
     }
 
+    /**
+     * Executes logic on each tick.
+     */
     override fun tick() {
         super.tick()
         this.tick++
@@ -33,6 +45,10 @@ class CombatBot(
         }
     }
 
+    /**
+     * Makes the bot eat a food item if
+     * its health is low enough.
+     */
     fun eat(foodId: Int) {
         val foodItem = Item(foodId)
         if (skills.getStaticLevel(Skills.HITPOINTS) >= skills.lifepoints * 3 && inventory.containsItem(foodItem)) {

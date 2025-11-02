@@ -16,9 +16,15 @@ import core.game.world.map.zone.ZoneBorders
 
 /**
  * Represents the moderator zone.
+ *
  * @author Vexia
  */
 class ModeratorZone : MapZone("Moderator Zone", true) {
+
+    override fun configure() {
+        register(ZoneBorders(2840, 5204, 2853, 5224))
+    }
+
     override fun enter(entity: Entity): Boolean {
         if (entity !is Player) {
             return true
@@ -34,10 +40,7 @@ class ModeratorZone : MapZone("Moderator Zone", true) {
         return true
     }
 
-    override fun leave(
-        entity: Entity,
-        logout: Boolean,
-    ): Boolean {
+    override fun leave(entity: Entity, logout: Boolean): Boolean {
         if (entity !is Player) {
             return true
         }
@@ -45,18 +48,10 @@ class ModeratorZone : MapZone("Moderator Zone", true) {
         return true
     }
 
-    override fun interact(
-        entity: Entity,
-        target: Node,
-        option: Option,
-    ): Boolean {
+    override fun interact(entity: Entity, target: Node, option: Option): Boolean {
         if (entity is Player) {
         }
         return super.interact(entity, target, option)
-    }
-
-    override fun configure() {
-        register(ZoneBorders(2840, 5204, 2853, 5224))
     }
 
     companion object {
@@ -78,10 +73,7 @@ class ModeratorZone : MapZone("Moderator Zone", true) {
          * @param on the toggle switch.
          */
         @JvmStatic
-        fun toggle(
-            player: Player,
-            on: Boolean,
-        ) {
+        fun toggle(player: Player, on: Boolean) {
             sendMessage(player, toggleMessage)
             if (!on) {
                 for (p in getLocalPlayers(center)) {

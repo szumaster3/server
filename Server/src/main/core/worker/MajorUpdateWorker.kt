@@ -22,9 +22,6 @@ import kotlin.system.exitProcess
 
 /**
  * Responsible for executing the main server update loop.
- *
- * Handles ticking of the game world, processing packets, disconnections,
- * daily/weekly resets, and scheduled server restarts.
  */
 class MajorUpdateWorker {
 
@@ -41,11 +38,6 @@ class MajorUpdateWorker {
 
         /**
          * Performs a spin-wait loop to maintain consistent tick timing.
-         *
-         * @param deviation The deviation from previous cycles.
-         * @param start Cycle start time in nanoseconds.
-         * @param end Cycle end time in nanoseconds.
-         * @return [ElapsedCycle] containing timing information.
          */
         private fun spinwait(deviation: Long, start: Long, end: Long): ElapsedCycle {
             val consumed = max(0, (end - start) + deviation)
@@ -162,8 +154,8 @@ class MajorUpdateWorker {
              */
 
             for (player in Repository.players.filter { !it.isArtificial }) {
-                if (System.currentTimeMillis() - player.session.getLastPing() > 20000L) {
-                    player.session.setLastPing(Long.MAX_VALUE)
+                if (System.currentTimeMillis() - player.session.lastPing > 20000L) {
+                    player.session.lastPing = Long.MAX_VALUE
                     player.session.disconnect()
                 }
                 if (!player.isActive &&

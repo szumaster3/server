@@ -18,8 +18,8 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
@@ -179,13 +179,13 @@ public final class HouseManager {
      */
     private void openLoadInterface(Player player) {
         openInterface(player, Components.POH_HOUSE_LOADING_SCREEN_399);
-        PacketRepository.send(MinimapState.class, new OutgoingContext.MinimapState(player, 2));
+        PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
         playAudio(player, Sounds.POH_TP_984);
 
         GameWorld.getPulser().submit(new Pulse(6, player) {
             @Override
             public boolean pulse() {
-                PacketRepository.send(MinimapState.class, new OutgoingContext.MinimapState(player, 0));
+                PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
                 player.getInterfaceManager().close();
                 return true;
             }

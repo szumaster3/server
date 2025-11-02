@@ -3,8 +3,8 @@ package core.game.node.entity.player.link
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository.send
+import core.net.packet.context.HintIconContext
 import core.net.packet.out.HintIcon
 
 /**
@@ -17,7 +17,7 @@ import core.net.packet.out.HintIcon
 class HintIconManager {
 
     /** Active hint icons for this player (max 8). */
-    private val hintIcons: Array<OutgoingContext.HintIcon?> = arrayOfNulls(MAXIMUM_SIZE)
+    private val hintIcons: Array<HintIconContext?> = arrayOfNulls(MAXIMUM_SIZE)
 
     /** Cached index of the next available slot. */
     private var cachedFreeSlot: Int = 0
@@ -59,7 +59,7 @@ class HintIconManager {
      * @param slot The slot index.
      * @return The hint icon or null.
      */
-    fun getIcon(slot: Int): OutgoingContext.HintIcon? = hintIcons.getOrNull(slot)
+    fun getIcon(slot: Int): HintIconContext? = hintIcons.getOrNull(slot)
 
     companion object {
         /**
@@ -117,7 +117,7 @@ class HintIconManager {
                 else -> 2
             }
 
-            val icon = OutgoingContext.HintIcon(player, slot, arrowId, resolvedTargetType, target, modelId, height)
+            val icon = HintIconContext(player, slot, arrowId, resolvedTargetType, target, modelId, height)
             send(HintIcon::class.java, icon)
             manager.hintIcons[slot] = icon
             return slot

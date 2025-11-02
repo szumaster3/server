@@ -9,8 +9,9 @@ import core.game.node.entity.player.info.Rights;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
 import core.net.amsc.WorldCommunicator;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.ClanContext;
+import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.UpdateClanChat;
 import core.worker.ManagementEvents;
@@ -20,26 +21,74 @@ import proto.management.ClanLeaveNotification;
 import java.util.*;
 
 /**
- * The type Clan repository.
+ * Handles clan communication.
+ * @author Emperor
  */
 public final class ClanRepository {
+
+    /**
+     * The maximum amount of members to be in a clan chat.
+     */
     private static final int MAX_MEMBERS = 100;
+
+    /**
+     * The clan repository.
+     */
     private static final Map<String, ClanRepository> CLAN_REPOSITORY = new HashMap<>();
+
+    /**
+     * The name of the clan owner.
+     */
     private final String owner;
+
+    /**
+     * The clan name.
+     */
     private String name = "Chat disabled";
+
+    /**
+     * The rank required for joining.
+     */
     private ClanRank joinRequirement = ClanRank.ANY_FRIEND;
+
+    /**
+     * The rank required for messaging.
+     */
     private ClanRank messageRequirement = ClanRank.ANYONE;
+
+    /**
+     * The rank required for kicking members.
+     */
     private ClanRank kickRequirement = ClanRank.ONLY_ME;
+
+    /**
+     * The rank required for loot-share.
+     */
     private ClanRank lootRequirement = ClanRank.NO_ONE;
+
+    /**
+     * The members mapping.
+     */
     private final Map<String, ClanRank> ranks = new HashMap<>();
+
+    /**
+     * The banned players.
+     */
     private final Map<String, Long> banned = new HashMap<>();
+
+    /**
+     * The players who are currently in the friends chat.
+     */
     private List<ClanEntry> players = new ArrayList<>(MAX_MEMBERS);
+
+    /**
+     * The current clan wars activity.
+     */
     private ActivityPlugin clanWar;
 
     /**
-     * Instantiates a new Clan repository.
-     *
-     * @param owner the owner
+     * Constructs a new {@code ClanRepository} {@code Object}.
+     * @param owner The owner of the clan.
      */
     public ClanRepository(String owner) {
         this.owner = owner;
@@ -94,7 +143,7 @@ public final class ClanRepository {
     /**
      * Clean.
      *
-     * @param disable the disable
+     * @param disable to disable
      */
     public void clean(boolean disable) {
         if (WorldCommunicator.isEnabled()) {
@@ -161,11 +210,11 @@ public final class ClanRepository {
             if (p != null) {
                 PacketRepository.send(
                         CommunicationMessage.class,
-                        new OutgoingContext.MessageContext(
+                        new MessageContext(
                                 p,
                                 player.getName(),
                                 Rights.getChatIcon(player),
-                                OutgoingContext.MessageContext.CLAN_MESSAGE,
+                                MessageContext.CLAN_MESSAGE,
                                 message
                         )
                 );
@@ -200,11 +249,11 @@ public final class ClanRepository {
         for (ClanEntry e : players) {
             PacketRepository.send(
                     CommunicationMessage.class,
-                    new OutgoingContext.MessageContext(
+                    new MessageContext(
                             e.getPlayer(),
                             player.getName(),
                             Rights.getChatIcon(player),
-                            OutgoingContext.MessageContext.CLAN_MESSAGE,
+                            MessageContext.CLAN_MESSAGE,
                             "[Attempting to kick/ban " + target.getUsername() + " from this Clan Chat.]"
                     )
             );
@@ -239,7 +288,7 @@ public final class ClanRepository {
                 banned.clear();
             }
         }
-        PacketRepository.send(UpdateClanChat.class, new OutgoingContext.Clan(player, this, true));
+        PacketRepository.send(UpdateClanChat.class, new ClanContext(player, this, true));
         player.getPacketDispatch().sendMessage(message);
         if (clanWar != null && !isDefault()) {
             clanWar.fireEvent("leavefc", player);
@@ -277,7 +326,7 @@ public final class ClanRepository {
         for (Iterator<ClanEntry> it = players.iterator(); it.hasNext(); ) {
             ClanEntry e = it.next();
             if (e.getWorldId() == GameWorld.getSettings().getWorldId() && e.getPlayer() != null) {
-                PacketRepository.send(UpdateClanChat.class, new OutgoingContext.Clan(e.getPlayer(), this, false));
+                PacketRepository.send(UpdateClanChat.class, new ClanContext(e.getPlayer(), this, false));
             }
         }
     }

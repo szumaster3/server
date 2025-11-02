@@ -96,7 +96,7 @@ class PestControlListener : InteractionListener {
             when (getUsedOption(player)) {
                 "talk-to" -> {
                     if (session == null) {
-                        val handler = NPCDefinition.optionHandlers[getUsedOption(player)]
+                        val handler = NPCDefinition.getOptionHandlers()[getUsedOption(player)]
                         handler!!.handle(player, node, getUsedOption(player))
                         return@on true
                     } else {

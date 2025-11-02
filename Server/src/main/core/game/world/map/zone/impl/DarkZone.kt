@@ -30,7 +30,15 @@ import java.util.*
 class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
 
     /**
-     * Configures the boundaries and regions for the Dark Zone.
+     * TODO Confirm locations that require light sources.
+     *  - [ ] A genie's cave west of Nardah.
+     *  - [ ] Dorgesh-Kaan South Dungeon.
+     *  - [x] Falador Mole Lair.
+     *  - [x] Lumbridge Swamp Caves.
+     *  - [x] Mos Le'Harmless Caves.
+     *  - [ ] Sophanem Dungeon.
+     *  - [ ] Temple of Ikov, room downstairs.
+     *  - [x] Skavid Caves.
      */
     override fun configure() {
         register(ZoneBorders(1728, 5120, 1791, 5247))
@@ -51,28 +59,23 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
     }
 
     override fun interact(entity: Entity, target: Node, option: Option): Boolean {
-        if (target is Item) {
-            val s = forProductId(target.id)
-            if (s != null) {
-                val name = option.name.lowercase(Locale.getDefault())
-                val player = entity.asPlayer()
-                if (name == "drop") {
-                    sendMessage(player, "Dropping the " + s.getName() + " would leave you without a light source.")
-                    return true
-                }
-                if (name == "extinguish") {
-                    sendMessage(
-                        player,
-                        "Extinguishing the " + s.getName() + " would leave you without a light source.",
-                    )
-                    return true
-                }
-                if (name == "destroy") {
-                    sendMessage(player, "Destroying the headband would leave you without a light source.")
-                    return true
-                }
-            }
+        if (target !is Item) return false
+
+        val product = forProductId(target.id) ?: return false
+        val player = entity.asPlayer()
+        val action = option.name.lowercase(Locale.getDefault())
+
+        val lightSourceWarning = when (action) {
+            "drop", "extinguish", "destroy" -> true
+            else -> false
         }
+
+        if (lightSourceWarning) {
+            val itemName = if (action == "destroy") "headband" else product.name
+            sendMessage(player, "Destroying the $itemName would leave you without a light source.")
+            return true
+        }
+
         return false
     }
 
@@ -81,7 +84,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
             val player = entity.asPlayer()
             val source = getActiveLightSource(player)
 
-            if (hasUnlimitedLightSource(player)) return false
+            if (alwaysLit(player)) return false
 
             if (source == null) {
                 player.interfaceManager.openOverlay(DARKNESS_OVERLAY)
@@ -144,18 +147,19 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
     companion object {
 
         /**
-         * Checks if the player has any items that provide unlimited light source.
+         * Checks if the player has any items that provide with always lit light source.
          * TODO:
          *  Headband 1 -> should act as dim light source.
          *  Headband 2 -> should acts as a medium light source.
          *  Headband 3 -> should acts as a bright light source.
+         *  Oil lamps(or lower)can provoke an explosion in the Lumbridge cave, which extinguishes the lamp and does 15 damage.
          *
          * @param player The player whose equipment is checked.
          * @return Boolean indicating whether the player has an unlimited light source.
          */
-        private fun hasUnlimitedLightSource(player: Player): Boolean {
+        private fun alwaysLit(player: Player): Boolean {
             return player.equipment.containsAtLeastOneItem(
-                Item(DiaryManager(player).headband), Item(Items.FIREMAKING_CAPE_9804), Item(Items.FIREMAKING_CAPET_9805)
+                Item(DiaryManager(player).headband),
             )
         }
 
@@ -174,10 +178,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
 
                     override fun pulse(): Boolean {
                         if (count == 0) {
-                            sendMessage(
-                                player,
-                                "You hear tiny insects skittering over the ground...",
-                            )
+                            sendMessage(player, "You hear tiny insects skittering over the ground...")
                         } else if (count == 5) {
                             sendMessage(player, "Tiny biting insects swarm all over you!")
                         } else if (count > 5) {
@@ -212,7 +213,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
             for (r in player.zoneMonitor.getZones()) {
                 if (r.zone is DarkZone) {
                     val zone = r.zone as DarkZone
-                    if (!hasUnlimitedLightSource(player)) {
+                    if (!alwaysLit(player)) {
                         zone.updateOverlay(player)
                     }
                     return true

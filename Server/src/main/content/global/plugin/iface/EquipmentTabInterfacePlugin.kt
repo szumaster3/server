@@ -18,8 +18,8 @@ import core.game.interaction.InteractionListeners.run
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -41,14 +41,7 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
         return this
     }
 
-    override fun handle(
-        p: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int,
-    ): Boolean {
+    override fun handle(p: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
         if (component.id == Components.EQUIP_SCREEN2_667) {
             if (button != 14) {
                 return false
@@ -136,11 +129,7 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
                     val kept = itemArray[0]
                     val amtKeptOnDeath = kept!!.itemCount()
                     if (amtKeptOnDeath > 4 && zoneType == 0) {
-                        log(
-                            this.javaClass,
-                            Log.ERR,
-                            "Items kept on death interface should not contain more than 4 items when not in a safe zone!",
-                        )
+                        log(this.javaClass, Log.ERR, "Items kept on death interface should not contain more than 4 items when not in a safe zone!")
                     }
 
                     val slot0 = kept!!.getId(0)
@@ -162,17 +151,7 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
                         0
                     }
 
-                    val params = arrayOf<Any>(
-                        hasBoB,
-                        skulled,
-                        slot3,
-                        slot2,
-                        slot1,
-                        slot0,
-                        amtKeptOnDeath,
-                        zoneType,
-                        "You are skulled.",
-                    )
+                    val params = arrayOf<Any>(hasBoB, skulled, slot3, slot2, slot1, slot0, amtKeptOnDeath, zoneType, "You are skulled.")
                     p.packetDispatch.sendRunScript(118, "siiooooii", *params)
                     p.interfaceManager.openComponent(Components.ITEMS_LOSE_ON_DEATH_102)
                 }
@@ -196,17 +175,11 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
                     }
                     val listener: ContainerListener = object : ContainerListener {
                         override fun update(c: Container?, e: ContainerEvent?) {
-                            PacketRepository.send(
-                                ContainerPacket::class.java,
-                                OutgoingContext.Container(p, -1, -1, 98, e!!.items, false, *e.slots),
-                            )
+                            PacketRepository.send(ContainerPacket::class.java, ContainerContext(p, -1, -1, 98, e!!.items, false, *e.slots))
                         }
 
                         override fun refresh(c: Container?) {
-                            PacketRepository.send(
-                                ContainerPacket::class.java,
-                                OutgoingContext.Container(p, -1, -1, 98, c!!, false),
-                            )
+                            PacketRepository.send(ContainerPacket::class.java, ContainerContext(p, -1, -1, 98, c!!, false))
                         }
                     }
                     p.interfaceManager.openComponent(Components.EQUIP_SCREEN2_667)
@@ -219,17 +192,10 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
                     p.setAttribute("equip_stats_open", true)
                     EquipmentContainer.update(p)
                     p.interfaceManager.openSingleTab(Component(Components.INVENTORY_WEAR2_670))
-                    p.generateItems(
-                        Components.INVENTORY_WEAR2_670,
-                        0,
-                        listOf("Equip"),
-                        7,
-                        4,
-                        93
-                    )
+                    p.generateItems(Components.INVENTORY_WEAR2_670, 0, listOf("Equip"), 7, 4, 93)
                     p.inventory.listeners.add(listener)
                     p.inventory.refresh()
-                    ItemDefinition.statsUpdate(p)
+                    ItemDefinition.refreshEquipmentBonuses(p)
                     p.packetDispatch.sendIfaceSettings(1278, 14, Components.EQUIP_SCREEN2_667, 0, 13)
                 }
             }

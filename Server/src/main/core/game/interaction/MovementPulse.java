@@ -13,8 +13,8 @@ import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import kotlin.Pair;
 import kotlin.jvm.functions.Function2;
@@ -239,7 +239,7 @@ public abstract class MovementPulse extends Pulse {
                         if (near) {
                             ((Player) mover).getPacketDispatch().sendMessage("I can't reach that.");
                         }
-                        PacketRepository.send(ClearMinimapFlag.class, new OutgoingContext.PlayerContext((Player) mover));
+                        PacketRepository.send(ClearMinimapFlag.class, new PlayerContext((Player) mover));
                     }
                     stop();
                     return true;

@@ -13,8 +13,8 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -31,8 +31,8 @@ class GrandExchangeInterface : ComponentPlugin() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        // ComponentDefinition.put(105, this) // Main interface
-        // ComponentDefinition.put(107, this) // Selling tab
+//      ComponentDefinition.put(Components.STOCKMARKET_105, this)
+//      ComponentDefinition.put(Components.STOCKSIDE_107, this)
         ComponentDefinition.put(Components.STOCKCOLLECT_109, this)
         ComponentDefinition.put(Components.EXCHANGE_SEARCH_389, this)
         ComponentDefinition.put(Components.EXCHANGE_SETS_SIDE_644, this)
@@ -158,11 +158,7 @@ class GrandExchangeInterface : ComponentPlugin() {
                     sendMessage(player, "You successfully traded your item components for a set!")
                 }
                 playAudio(player, Sounds.GE_TRADE_OK_4044)
-                PacketRepository.send(
-                    ContainerPacket::class.java, OutgoingContext.Container(
-                        player, -1, -2, player.getAttribute("container-key", 93), player.inventory, false
-                    )
-                )
+                PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -2, player.getAttribute("container-key", 93), player.inventory, false))
             }
 
             155 -> {

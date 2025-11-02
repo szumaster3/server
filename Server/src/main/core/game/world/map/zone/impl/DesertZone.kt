@@ -19,6 +19,9 @@ import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
 
+/**
+ * Represents the Desert zone.
+ */
 @Initializable
 class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
 
@@ -92,7 +95,6 @@ class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
         private val ANIMATION = Animation(Animations.EAT_OLD_829)
         private val PLAYERS: MutableList<Player> = ArrayList(20)
         private val DESERT_DELAY = "desert-delay"
-        private val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
         private val TUTORIAL_COMPLETE = GameAttributes.TUTORIAL_COMPLETE
         private val DESERT_ZONE = "Desert Zone"
         private val pulse: Pulse = object : Pulse(3) {

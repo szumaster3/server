@@ -16,10 +16,5 @@ enum class ZoneRestriction {
     ;
 
     val flag: Int
-        /**
-         * Gets the restriction flag.
-         *
-         * @return The flag.
-         */
         get() = 1 shl ordinal
 }

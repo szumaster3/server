@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar
 
-import core.cache.def.impl.NPCDefinition.Companion.setOptionHandler
+import core.cache.def.impl.NPCDefinition.setOptionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -8,10 +8,14 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 
 /**
- * The familiar npc option plugin.
+ * Handles interaction options for summoning familiars.
  */
 @Initializable
 class FamiliarNPCOptionPlugin : OptionHandler() {
+
+    /**
+     * Registers this plugin as the handler for familiar options.
+     */
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         setOptionHandler("pick-up", this)
@@ -22,6 +26,9 @@ class FamiliarNPCOptionPlugin : OptionHandler() {
         return this
     }
 
+    /**
+     * Handles an interaction with a familiar NPC.
+     */
     override fun handle(player: Player, node: Node, option: String): Boolean {
         if (node !is Familiar) {
             return false
@@ -36,7 +43,6 @@ class FamiliarNPCOptionPlugin : OptionHandler() {
                 player.faceLocation(familiar.getFaceLocation(player.location))
                 player.familiarManager.pickup()
             }
-
             "interact-with" -> player.dialogueInterpreter.open(343823)
             "interact" -> player.dialogueInterpreter.open(node.getId(), node)
             "store", "withdraw" -> {

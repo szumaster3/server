@@ -21,8 +21,8 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.CameraContext;
 import core.net.packet.out.CameraViewPacket;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
@@ -71,8 +71,8 @@ public final class GoblinDiplomacyCutscene extends CutscenePlugin {
     @Override
     public void open() {
         player.getDialogueInterpreter().open(NPCs.GENERAL_WARTFACE_4494, npcs.get(1), this);
-        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.POSITION, player.getLocation().getX() + 4, player.getLocation().getY() + 1, 390, 1, 100));
-        PacketRepository.send(CameraViewPacket.class, new OutgoingContext.Camera(player, OutgoingContext.CameraType.ROTATION, player.getLocation().getX() + 2, player.getLocation().getY(), 390, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, player.getLocation().getX() + 4, player.getLocation().getY() + 1, 390, 1, 100));
+        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, player.getLocation().getX() + 2, player.getLocation().getY(), 390, 1, 100));
     }
 
     @Override

@@ -715,7 +715,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             val npcid = args[1].toIntOrNull() ?: reject(player, "Invalid NPC ID.")
 
             GlobalScope.launch {
-                for (def in NPCDefinition.definitions.values) {
+                for (def in NPCDefinition.getDefinitions().values) {
                     def ?: continue
                     def.childNPCIds ?: continue
                     for (id in def.childNPCIds!!) {

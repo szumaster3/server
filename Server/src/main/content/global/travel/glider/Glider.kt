@@ -7,8 +7,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import shared.consts.Components
 import shared.consts.NPCs
@@ -28,6 +28,7 @@ enum class Glider(val button: Int, val location: Location, val config: Int, val 
         /**
          * Sends glider config to the player based on NPC.
          */
+        @JvmStatic
         fun sendConfig(npc: NPC, player: Player) {
             val g = forNpc(npc.id)
             if (g != null) {
@@ -38,6 +39,7 @@ enum class Glider(val button: Int, val location: Location, val config: Int, val 
         /**
          * Gets glider by npc id, or null.
          */
+        @JvmStatic
         fun forNpc(npcId: Int): Glider? {
             for (data in values()) {
                 if (data.npc == npcId) {
@@ -84,7 +86,7 @@ class GliderPulse(
         } else if (count == 2 && crash) {
             PacketRepository.send(
                 CameraViewPacket::class.java,
-                OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 4, 4, 1200, 4, 4),
+                CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1200, 4, 4),
             )
             sendMessage(player, "The glider almost gets blown from its path as it withstands heavy winds.")
         }

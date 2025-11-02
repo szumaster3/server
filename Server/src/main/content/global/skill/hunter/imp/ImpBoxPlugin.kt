@@ -5,12 +5,14 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.item.Item
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
 import shared.consts.Items
 
-
+/**
+ * Handles imp box related interactions.
+ */
 class ImpBoxPlugin : InteractionListener, InterfaceListener {
 
     private val impBoxComponent = 478
@@ -41,13 +43,22 @@ class ImpBoxPlugin : InteractionListener, InterfaceListener {
     }
 
     override fun defineInterfaceListeners() {
+
+        /*
+         * Handles opening imb box interface.
+         */
+
         onOpen(impBoxComponent) { player, _ ->
             PacketRepository.send(
                 ContainerPacket::class.java,
-                OutgoingContext.Container(player, impBoxComponent, 61, 91, player.inventory, true),
+                ContainerContext(player, impBoxComponent, 61, 91, player.inventory, true),
             )
             return@onOpen true
         }
+
+        /*
+         * Handles interaction with interface.
+         */
 
         on(impBoxComponent) { player, _, _, _, slot, _ ->
             val boxId = intArrayOf(Items.IMP_IN_A_BOX1_10028, Items.IMP_IN_A_BOX2_10027)

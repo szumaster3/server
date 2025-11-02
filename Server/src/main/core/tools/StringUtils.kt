@@ -38,6 +38,7 @@ object StringUtils {
      * @return the corresponding CP1252 character
      * @throws IllegalArgumentException if the byte represents 0 (invalid character)
      */
+    @JvmStatic
     fun getFromByte(value: Byte): Char {
         var out = value.toInt() and 0xFF
         if (out == 0) {

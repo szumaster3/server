@@ -15,8 +15,8 @@ import core.game.node.entity.player.link.request.assist.AssistSessionPulse;
 import core.game.node.item.Item;
 import core.game.world.GameWorld;
 import core.game.world.repository.Repository;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.SkillContext;
 import core.net.packet.out.SkillLevel;
 import core.plugin.type.ExperiencePlugins;
 import kotlin.Pair;
@@ -293,7 +293,7 @@ public final class Skills {
             }
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, slot));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
             entity.dispatch(new XPGainEvent(slot, experienceAdd));
         }
         if (GameWorld.getTicks() - lastUpdate >= 200) {
@@ -470,7 +470,7 @@ public final class Skills {
         }
         Player player = (Player) entity;
         for (int i = 0; i < 24; i++) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext(player, i));
+            PacketRepository.send(SkillLevel.class, new SkillContext(player, i));
         }
         LevelUp.sendFlashingIcons(player, -1);
     }
@@ -552,7 +552,7 @@ public final class Skills {
 
     private int calculateCombatLevel() {
         if (entity instanceof NPC) {
-            return ((NPC) entity).getDefinition().combatLevel;
+            return ((NPC) entity).getDefinition().getCombatLevel();
         }
 
         int attackStrength = staticLevels[ATTACK] + staticLevels[STRENGTH];
@@ -635,7 +635,7 @@ public final class Skills {
         dynamicLevels[slot] = level;
 
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, slot));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, slot));
             entity.dispatch(new DynamicSkillLevelChangeEvent(slot, previousLevel, level));
         }
     }
@@ -781,7 +781,7 @@ public final class Skills {
     public void rechargePrayerPoints() {
         prayerPoints = staticLevels[PRAYER];
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -799,7 +799,7 @@ public final class Skills {
         // prayerPoints = staticLevels[PRAYER];
         // }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -817,7 +817,7 @@ public final class Skills {
             prayerPoints = staticLevels[PRAYER];
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -829,7 +829,7 @@ public final class Skills {
     public void setPrayerPoints(double amount) {
         prayerPoints = amount;
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, PRAYER));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, PRAYER));
         }
     }
 
@@ -855,7 +855,7 @@ public final class Skills {
             dynamicLevels[skill] = maximum;
         }
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, skill));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, skill));
         }
         return left;
     }
@@ -893,7 +893,7 @@ public final class Skills {
     public void setStaticLevel(int skill, int level) {
         experience[skill] = getExperienceByLevel(staticLevels[skill] = dynamicLevels[skill] = level);
         if (entity instanceof Player) {
-            PacketRepository.send(SkillLevel.class, new OutgoingContext.SkillContext((Player) entity, skill));
+            PacketRepository.send(SkillLevel.class, new SkillContext((Player) entity, skill));
         }
     }
 
@@ -954,84 +954,79 @@ public final class Skills {
     }
 
     /**
-     * Is lifepoints update boolean.
+     * Gets the lifepointsUpdate.
      *
-     * @return the boolean
+     * @return The lifepointsUpdate.
      */
     public boolean isLifepointsUpdate() {
         return lifepointsUpdate;
     }
 
     /**
-     * Sets lifepoints update.
+     * Sets the lifepointsUpdate.
      *
-     * @param lifepointsUpdate the lifepoints update
+     * @param lifepointsUpdate The lifepointsUpdate to set.
      */
     public void setLifepointsUpdate(boolean lifepointsUpdate) {
         this.lifepointsUpdate = lifepointsUpdate;
     }
 
     /**
-     * Get static levels int [ ].
+     * Gets the statis levels.
      *
-     * @return the int [ ]
+     * @return the level.
      */
     public int[] getStaticLevels() {
         return staticLevels;
     }
 
     /**
-     * Has level boolean.
+     * Checks if the player has the required level.
      *
-     * @param skillId the skill id
-     * @param i       the
-     * @return the boolean
+     * @param skillId the skill id.
+     * @param i       the level.
+     * @return {@code True} if so.
      */
     public boolean hasLevel(int skillId, int i) {
         return getStaticLevel(skillId) >= i;
     }
 
     /**
-     * Gets combat milestone.
+     * Gets the combatMilestone value.
      *
-     * @return the combat milestone
+     * @return The combatMilestone.
      */
     public int getCombatMilestone() {
         return combatMilestone;
     }
 
     /**
-     * Sets combat milestone.
+     * Sets the combatMilestones value.
      *
-     * @param combatMilestone the combat milestone
+     * @param combatMilestone The combatMilestones to set.
      */
     public void setCombatMilestone(int combatMilestone) {
         this.combatMilestone = combatMilestone;
     }
 
     /**
-     * Gets skill milestone.
+     * Gets the skillMilestone value.
      *
-     * @return the skill milestone
+     * @return The skillMilestone.
      */
     public int getSkillMilestone() {
         return skillMilestone;
     }
 
     /**
-     * Sets skill milestone.
+     * Sets the skillMilestone value.
      *
-     * @param skillMilestone the skill milestone
+     * @param skillMilestone The skillMilestone to set.
      */
     public void setSkillMilestone(int skillMilestone) {
         this.skillMilestone = skillMilestone;
     }
 
-    /**
-     * Get dynamic levels int [ ].
-     *
-     * @return the int [ ]
-     */
     public int[] getDynamicLevels() {
         return dynamicLevels;
     }

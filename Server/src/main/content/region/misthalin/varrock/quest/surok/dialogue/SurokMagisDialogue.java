@@ -76,7 +76,7 @@ public class SurokMagisDialogue extends Dialogue {
                 if (args.length >= 2) {
                     cutscene = player.getAttribute("cutscene", null);
                     if (args.length == 3) {
-                        player.getDialogueInterpreter().sendDialogues(cutscene.getZaff(), null, "Your teleport spell has been corrupted, Surok! I have", "placed a magic block on this room. You will remain here,", "under guard, in the library from now on.");
+                        player.getDialogueInterpreter().sendDialogues(cutscene.getZAFF(), null, "Your teleport spell has been corrupted, Surok! I have", "placed a magic block on this room. You will remain here,", "under guard, in the library from now on.");
                         stage = 12;
                         return true;
                     }
@@ -437,10 +437,10 @@ public class SurokMagisDialogue extends Dialogue {
                     case 10:
                         close();
                         player.unlock();
-                        cutscene.getKing().unlock();
+                        cutscene.getKING().unlock();
                         cutscene.reset();
                         player.getInterfaceManager().restoreTabs();
-                        cutscene.getKing().getProperties().getCombatPulse().attack(player);
+                        cutscene.getKING().getProperties().getCombatPulse().attack(player);
                         stage = 11;
                         break;
                     case 11:
@@ -453,7 +453,7 @@ public class SurokMagisDialogue extends Dialogue {
                         stage++;
                         break;
                     case 13:
-                        interpreter.sendDialogues(cutscene.getZaff(), null, "You will not escape justice this time, Surok!");
+                        interpreter.sendDialogues(cutscene.getZAFF(), null, "You will not escape justice this time, Surok!");
                         stage = 14;
                         break;
                     case 14:
@@ -461,7 +461,7 @@ public class SurokMagisDialogue extends Dialogue {
                         stage = 16;
                         break;
                     case 16:
-                        interpreter.sendDialogues(cutscene.getZaff(), null, "Thank you for your help, " + player.getUsername() + ". I will put the", "room back in order and then I must leave. Surok is", "defeated and will be no more trouble for us. We will", "guard him more closely from now on!");
+                        interpreter.sendDialogues(cutscene.getZAFF(), null, "Thank you for your help, " + player.getUsername() + ". I will put the", "room back in order and then I must leave. Surok is", "defeated and will be no more trouble for us. We will", "guard him more closely from now on!");
                         stage++;
                         break;
                     case 17:

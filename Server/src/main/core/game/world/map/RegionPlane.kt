@@ -8,8 +8,8 @@ import core.game.node.scenery.Scenery
 import core.game.world.map.build.DynamicRegion
 import core.game.world.map.build.RegionFlags
 import core.game.world.update.flag.chunk.ItemUpdateFlag
-import core.net.packet.OutgoingContext.BuildItem
 import core.net.packet.PacketRepository.send
+import core.net.packet.context.BuildItemContext
 import core.net.packet.out.ClearGroundItem
 import core.net.packet.out.ConstructGroundItem
 import java.util.*
@@ -268,7 +268,7 @@ class RegionPlane(
         val g = item
         if (g.isPrivate) {
             if (g.dropper != null) {
-                send(ConstructGroundItem::class.java, BuildItem(g.dropper, item))
+                send(ConstructGroundItem::class.java, BuildItemContext(g.dropper, item))
             }
             return
         }
@@ -307,7 +307,7 @@ class RegionPlane(
         if (item.isPrivate) {
             // https://runescape.wiki/w/Drops
             if (item.dropper != null && item.dropper.isPlaying && item.dropper.location.withinDistance(l)) {
-                send(ClearGroundItem::class.java, BuildItem(item.dropper, item))
+                send(ClearGroundItem::class.java, BuildItemContext(item.dropper, item))
             }
             return
         }

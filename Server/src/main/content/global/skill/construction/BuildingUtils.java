@@ -14,8 +14,8 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
 import core.game.world.update.flag.context.Animation;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.tools.Log;
 import org.jetbrains.annotations.NotNull;
@@ -143,7 +143,7 @@ public final class BuildingUtils {
         }
 
         setVarp(player, 261, c261Value);
-        PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false));
+        PacketRepository.send(ContainerPacket.class, new ContainerContext(player, Components.POH_BUILD_FURNITURE_396, 132, 8, items, false));
     }
 
     /**

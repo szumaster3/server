@@ -11,7 +11,7 @@ import shared.consts.Scenery
 
 class HatStandPlugin : InteractionListener {
 
-    private val hats = ItemDefinition.definitions.values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HEAD.ordinal }.map { it.id }.toIntArray()
+    private val hats = ItemDefinition.getDefinitions().values.filter { it.getConfiguration("equipment_slot",0) == EquipmentSlot.HEAD.ordinal }.map { it.id }.toIntArray()
     private val hatStand = Scenery.HAT_STAND_374
 
     override fun defineListeners() {

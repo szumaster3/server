@@ -3,8 +3,9 @@ package core.game.node.entity.player.link.music;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.GameWorld;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.MusicContext;
+import core.net.packet.context.StringContext;
 import core.net.packet.out.MusicPacket;
 import core.net.packet.out.StringPacket;
 import shared.consts.Music;
@@ -180,8 +181,8 @@ public final class MusicPlayer {
      */
     public void play(MusicEntry entry) {
         if (!looping || currentMusicId != entry.getId()) {
-            PacketRepository.send(MusicPacket.class, new OutgoingContext.Music(player, entry.getId(), false));
-            PacketRepository.send(StringPacket.class, new OutgoingContext.StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
+            PacketRepository.send(MusicPacket.class, new MusicContext(player, entry.getId(), false));
+            PacketRepository.send(StringPacket.class, new StringContext(player, entry.getName() + (player.isDebug() ? (" (" + entry.getId() + ")") : ""), 187, 14));
             currentMusicId = entry.getId();
             playing = true;
         }
@@ -238,7 +239,7 @@ public final class MusicPlayer {
         if (GameWorld.getTicks() % 20 == 0) {
             if (!isPlaying()) {
                 try {
-                    PacketRepository.send(MusicPacket.class, new OutgoingContext.Music(player, currentMusicId, false));
+                    PacketRepository.send(MusicPacket.class, new MusicContext(player, currentMusicId, false));
                 } catch (Exception e) {
                     //
                 }

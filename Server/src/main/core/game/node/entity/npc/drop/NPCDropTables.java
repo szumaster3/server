@@ -213,7 +213,7 @@ public final class NPCDropTables {
      * @return The ratio.
      */
     public double getStabilizerRatio() {
-        return (1 / (1 + def.combatLevel)) * 10;
+        return (1 / (1 + def.getCombatLevel())) * 10;
     }
 
     /**

@@ -64,7 +64,7 @@ class ChaosTunnelPlugin : MapArea, InteractionListener {
                 return@on true
             }
 
-            val cannonIds = ItemDefinition.definitions.values
+            val cannonIds = ItemDefinition.getDefinitions().values
                 .filter { it.name.contains("cannon", ignoreCase = true) }
                 .map { it.id }
 

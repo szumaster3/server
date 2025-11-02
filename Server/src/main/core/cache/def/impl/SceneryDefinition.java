@@ -1,8 +1,8 @@
 package core.cache.def.impl;
 
-import core.cache.Archive;
+import core.cache.Cache;
 import core.cache.def.Definition;
-import core.cache.util.ByteBufferExtensions;
+import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
@@ -15,8 +15,6 @@ import java.util.Map;
 
 import static core.api.ContentAPIKt.getVarp;
 import static core.api.ContentAPIKt.log;
-import static core.cache.Cache.getData;
-import static core.cache.Cache.getIndexCapacity;
 
 /**
  * Represents an object's definition.
@@ -577,14 +575,16 @@ public class SceneryDefinition extends Definition<Scenery> {
      * @throws Throwable the throwable.
      */
     public static void parse() throws Throwable {
-        for (int objectId = 0; objectId < getIndexCapacity(Archive.JS5_CONFIG_LOC); objectId++) {
-            byte[] data = getData(Archive.JS5_CONFIG_LOC, objectId >>> 8, objectId & 0xFF);
+        for (int objectId = 0; objectId < Cache.getObjectDefinitionsSize(); objectId++) {
+            byte[] data = Cache.getIndexes()[16].getFileData(getContainerId(objectId), objectId & 0xff);
             if (data == null) {
                 SceneryDefinition.getDefinitions().put(objectId, new SceneryDefinition());
+                //SystemLogger.logErr("Could not load object definitions for id " + objectId + " - no data!");
                 continue;
             }
             SceneryDefinition def = SceneryDefinition.parseDefinition(objectId, ByteBuffer.wrap(data));
             if (def == null) {
+                //	SystemLogger.logErr("Could not load object definitions for id " + objectId + " - no definitions found!");
                 return;
             }
             SceneryDefinition.getDefinitions().put(objectId, def);
@@ -619,12 +619,14 @@ public class SceneryDefinition extends Definition<Scenery> {
     public static SceneryDefinition parseDefinition(int objectId, ByteBuffer buffer) {
         SceneryDefinition def = new SceneryDefinition();
         def.id = objectId;
+//		SystemLogger.logErr("----------------------------------------------------\n\n\n");
         while (true) {
             if (!buffer.hasRemaining()) {
                 log(SceneryDefinition.class, Log.ERR, "Buffer empty for " + objectId);
                 break;
             }
             int opcode = buffer.get() & 0xFF;
+            //SystemLogger.logErr("Parsing object " + objectId + " op " + opcode);
             if (opcode == 1 || opcode == 5) {
                 int length = buffer.get() & 0xff;
                 if (def.modelIds == null) {
@@ -642,7 +644,7 @@ public class SceneryDefinition extends Definition<Scenery> {
                     buffer.position(buffer.position() + (length * (opcode == 1 ? 3 : 2)));
                 }
             } else if (opcode == 2) {
-                def.name = ByteBufferExtensions.getString(buffer);
+                def.name = ByteBufferUtils.getString(buffer);
             } else if (opcode == 14) {
                 def.sizeX = buffer.get() & 0xFF;
             } else if (opcode == 15) {
@@ -674,7 +676,7 @@ public class SceneryDefinition extends Definition<Scenery> {
             } else if (opcode == 39) {
                 def.anInt3840 = buffer.get() * 5;
             } else if (opcode >= 30 && opcode < 35) {
-                def.options[opcode - 30] = ByteBufferExtensions.getString(buffer);
+                def.options[opcode - 30] = ByteBufferUtils.getString(buffer);
                 if (def.options[opcode - 30].equals("Hidden")) {
                     def.options[opcode - 30] = null;
                     def.hasHiddenOptions = true;
@@ -770,7 +772,7 @@ public class SceneryDefinition extends Definition<Scenery> {
                 def.aByte3912 = (byte) 2;
                 def.anInt3882 = 256 * buffer.get() & 0xFF;
             } else if (opcode == 82 || opcode == 88) {
-
+                // Nothing.
             } else if (opcode == 89) {
                 def.aBoolean3895 = false;
             } else if (opcode == 90) {
@@ -785,7 +787,7 @@ public class SceneryDefinition extends Definition<Scenery> {
             } else if (opcode == 95) {
                 def.aByte3912 = (byte) 5;
             } else if (opcode == 96 || opcode == 97) {
-
+                //
             } else if (opcode == 100) {
                 buffer.get();
                 buffer.getShort();
@@ -797,11 +799,11 @@ public class SceneryDefinition extends Definition<Scenery> {
                 int length = buffer.get() & 0xFF;
                 for (int i = 0; i < length; i++) {
                     boolean string = buffer.get() == 1;
-                    ByteBufferExtensions.getMedium(buffer);
+                    ByteBufferUtils.getMedium(buffer); // script id
                     if (!string) {
-                        buffer.getInt();
+                        buffer.getInt(); // Value
                     } else {
-                        ByteBufferExtensions.getString(buffer);
+                        ByteBufferUtils.getString(buffer); // value
                     }
                 }
             } else {

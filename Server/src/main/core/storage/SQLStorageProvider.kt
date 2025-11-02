@@ -14,13 +14,17 @@ class SQLStorageProvider : AccountStorageProvider {
     var connectionUsername = ""
     var connectionPassword = ""
 
-    /** Returns a database connection. */
+    /**
+     * Gets a database connection.
+     */
     fun getConnection(): Connection {
         Class.forName("com.mysql.cj.jdbc.Driver")
         return DriverManager.getConnection(connectionString, connectionUsername, connectionPassword)
     }
 
-    /** Sets database connection parameters. */
+    /**
+     * Sets database connection parameters.
+     */
     fun configure(
         host: String,
         databaseName: String,
@@ -32,7 +36,9 @@ class SQLStorageProvider : AccountStorageProvider {
         connectionPassword = password
     }
 
-    /** Returns true if the username exists. */
+    /**
+     * Gets true if the username exists.
+     */
     override fun checkUsernameTaken(username: String): Boolean {
         val conn = getConnection()
         conn.use {
@@ -43,7 +49,9 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /** Loads account info or returns default if not found. */
+    /**
+     * Loads account info or returns default if not found.
+     */
     override fun getAccountInfo(username: String): UserAccountInfo {
         val conn = getConnection()
         conn.use { con ->
@@ -78,7 +86,9 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /** Stores new account info. */
+    /**
+     * Stores new account info.
+     */
     override fun store(info: UserAccountInfo) {
         val conn = getConnection()
         conn.use {
@@ -113,7 +123,9 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /** Updates changed fields for an account. */
+    /**
+     * Updates changed fields for an account.
+     */
     override fun update(info: UserAccountInfo) {
         val (fields, data) = info.getChangedFields()
         if (fields.isEmpty()) return
@@ -138,7 +150,9 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /** Deletes account by username. */
+    /**
+     * Deletes account by username.
+     */
     override fun remove(info: UserAccountInfo) {
         val conn = getConnection()
         conn.use {
@@ -148,7 +162,9 @@ class SQLStorageProvider : AccountStorageProvider {
         }
     }
 
-    /** Returns online friends for the given user. */
+    /**
+     * Gets online friends for the given user.
+     */
     override fun getOnlineFriends(username: String): List<String> {
         val conn = getConnection()
         var tokens = ""
@@ -162,7 +178,9 @@ class SQLStorageProvider : AccountStorageProvider {
             .mapNotNull { (name, _) -> if (Repository.getPlayerByName(name) != null) name else null }
     }
 
-    /** Returns usernames linked to the given IP. */
+    /**
+     * Gets usernames linked to the given IP.
+     */
     override fun getUsernamesWithIP(ip: String): List<String> {
         val conn = getConnection()
         val result = ArrayList<String>()

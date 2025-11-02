@@ -33,10 +33,20 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.*
 
+/**
+ * Handles the Warrior's Guild catapult room.
+ */
 @Initializable
-class CatapultRoomPlugin :
-    MapZone("wg catapult", true),
-    Plugin<Any> {
+class CatapultRoomPlugin : MapZone("wg catapult", true), Plugin<Any> {
+
+    /**
+     * Represents the types of catapult attacks.
+     *
+     * @property graphicId the graphic effect id.
+     * @property objectId the object ID of the catapult projectile.
+     * @property success the animation played when the attack is successfully defended.
+     * @property fail the animation played when the attack is failed.
+     */
     private enum class CatapultAttack(val graphicId: Int, val objectId: Int, val success: Animation, val fail: Animation) {
         SPIKY_BALL(Graphics.W_GUILD_SPIKE_BALL_679, Scenery.CATAPULT_15617, Animation.create(Animations.BEND_DOWN_ON_KNEES_HAND_IN_FRONT_OF_FACE_4169), Animation.create(Animations.FALL_BACK_KNEES_4173)),
         FLUNG_ANVIL(Graphics.W_GUILD_ANVIL_CAT_680, Scenery.CATAPULT_15619, Animation.create(Animations.MOVE_HEAD_TO_LISTEN_ON_DOOR_4168), Animation.create(Animations.FALL_BACK_BUTT_4172)),
@@ -54,21 +64,20 @@ class CatapultRoomPlugin :
                     return this
                 }
 
-                override fun handle(
-                    player: Player,
-                    node: Node,
-                    option: String,
-                ): Boolean {
+                override fun handle(player: Player, node: Node, option: String): Boolean {
                     if (node is Item) {
                         if (player.location != TARGET) {
                             player.packetDispatch.sendMessage("You may not equip this shield outside the target area in the Warrior's Guild.")
                             return true
                         }
                         if (player.equipment[EquipmentContainer.SLOT_WEAPON] != null) {
-                            player.dialogueInterpreter.sendDialogue("You will need to make sure your sword hand is free to equip this", "shield.")
+                            player.dialogueInterpreter.sendDialogue(
+                                "You will need to make sure your sword hand is free to equip this",
+                                "shield."
+                            )
                             return true
                         }
-                        ItemDefinition.optionHandlers["wield"]!!.handle(player, node, option)
+                        ItemDefinition.getOptionHandlers()["wield"]!!.handle(player, node, option)
                         if (player.equipment.getNew(EquipmentContainer.SLOT_SHIELD).id == SHIELD_ID) {
                             player.interfaceManager.removeTabs(2, 3, 5, 6, 7, 11, 12)
                             player.interfaceManager.openTab(4, Component(Components.WARGUILD_DEFENCE_MINI_411))
@@ -88,14 +97,7 @@ class CatapultRoomPlugin :
                     return this
                 }
 
-                override fun handle(
-                    player: Player,
-                    component: Component,
-                    opcode: Int,
-                    button: Int,
-                    slot: Int,
-                    itemId: Int,
-                ): Boolean {
+                override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
                     if (button in 9..12) {
                         val attack = CatapultAttack.values()[button - 9]
                         setAttribute(player, "catapult_def", attack)
@@ -111,6 +113,9 @@ class CatapultRoomPlugin :
 
     override fun fireEvent(identifier: String, vararg args: Any): Any? = null
 
+    /**
+     * Configures the zone borders and stops the catapult pulse initially.
+     */
     override fun configure() {
         super.register(ZoneBorders(2837, 3542, 2847, 3556))
         pulse.stop()
@@ -143,11 +148,29 @@ class CatapultRoomPlugin :
     }
 
     companion object {
+        /**
+         * The target location where players must defend against catapult attacks.
+         */
         val TARGET: Location = Location.create(2842, 3545, 1)
+
+        /**
+         * Shield item id used for defense.
+         */
         private const val SHIELD_ID = Items.DEFENSIVE_SHIELD_8856
+
+        /**
+         * List of active players in the catapult room.
+         */
         private val players: MutableList<Player> = ArrayList(20)
+
+        /**
+         * The current catapult attack.
+         */
         private var attack: CatapultAttack? = null
 
+        /**
+         * Pulse that triggers random catapult attacks.
+         */
         private val pulse: Pulse =
             object : Pulse(10) {
                 override fun pulse(): Boolean {
@@ -187,7 +210,17 @@ class CatapultRoomPlugin :
                             }
                         },
                     )
-                    Projectile.create(Location.create(2842, 3554, 1), Location.create(2842, 3545, 1), attack!!.graphicId, 70, 32, 80, 220, 20, 11).send()
+                    Projectile.create(
+                        Location.create(2842, 3554, 1),
+                        Location.create(2842, 3545, 1),
+                        attack!!.graphicId,
+                        70,
+                        32,
+                        80,
+                        220,
+                        20,
+                        11
+                    ).send()
                     val scenery = getObject(Location.create(2840, 3552, 1))
                     if (scenery != null) SceneryBuilder.replace(scenery, scenery.transform(attack!!.objectId), 4)
                     for (p in players) {

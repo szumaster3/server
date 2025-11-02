@@ -13,28 +13,21 @@ class PacketWriteQueue {
         private val packetsToWrite = LinkedList<QueuedPacket<*>>()
 
         @JvmStatic
-        fun <T> handle(
-            packet: OutgoingPacket<T>,
-            context: T,
-        ) {
+        fun <T> handle(packet: OutgoingPacket<T>, context: T) {
             when (packet) {
-                // Dynamic packets need to be sent immediately
+                //Dynamic packets need to be sent immediately
                 is UpdateSceneGraph,
                 is BuildDynamicScene,
                 is InstancedLocationUpdate,
                 is Logout,
-                is ClearRegionChunk,
-                -> packet.send(context)
-                // Rest get queued up and sent at the end of the tick (authentic)
+                is ClearRegionChunk -> packet.send(context)
+                //Rest get queued up and sent at the end of the tick (authentic)
                 else -> push(packet, context)
             }
         }
 
         @JvmStatic
-        fun <T> push(
-            packet: OutgoingPacket<T>,
-            context: T,
-        ) {
+        fun <T> push(packet: OutgoingPacket<T>, context: T) {
             if (context == null) {
                 log(this::class.java, Log.ERR, "${packet::class.java.simpleName} tried to queue with a null context!")
                 return
@@ -60,10 +53,7 @@ class PacketWriteQueue {
         }
 
         @Suppress("UNCHECKED_CAST")
-        fun <T> write(
-            out: OutgoingPacket<*>,
-            context: T,
-        ) {
+        fun <T> write(out: OutgoingPacket<*>, context: T) {
             val pack = out as? OutgoingPacket<T>
             val ctx = context as? T
             if (pack == null || ctx == null) {
@@ -74,7 +64,4 @@ class PacketWriteQueue {
     }
 }
 
-class QueuedPacket<T>(
-    val out: OutgoingPacket<T>,
-    val context: T,
-)
+class QueuedPacket<T>(val out: OutgoingPacket<T>, val context: T)

@@ -13,8 +13,8 @@ import core.game.world.GameWorld
 import core.game.world.map.RegionManager
 import core.game.world.repository.Repository
 import core.game.world.update.UpdateSequence
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.InterfaceContext
 import core.net.packet.out.Interface
 import core.plugin.Plugin
 import core.tools.Log
@@ -92,17 +92,9 @@ object LoginConfiguration {
         player.interfaceManager.openWindowsPane(lobbyPane)
         player.interfaceManager.opened = lobbyInterface
 
-        PacketRepository.send(Interface::class.java, OutgoingContext.InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
-        PacketRepository.send(
-            Interface::class.java,
-            OutgoingContext.InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true),
-        )
-        sendString(
-            player,
-            GameWorld.settings?.message_string ?: "",
-            selectedMessageModel,
-            getMessageChild(selectedMessageModel),
-        )
+        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
+        PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 3, selectedMessageModel, true))
+        sendString(player, GameWorld.settings?.message_string ?: "", selectedMessageModel, getMessageChild(selectedMessageModel))
     }
 
     /**

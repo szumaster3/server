@@ -55,10 +55,6 @@ object Server {
 
     /**
      * Main entry point for the server.
-     * Parses configuration, starts networking, and manages the game world lifecycle.
-     *
-     * @param args Command-line arguments, where the first argument can be a config file path.
-     * @throws Throwable if there is a critical failure during startup.
      */
     @Throws(Throwable::class)
     @JvmStatic

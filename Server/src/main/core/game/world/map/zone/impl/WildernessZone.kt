@@ -57,12 +57,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
     }
 
     /**
-     * Rolls exclusive loot drops for:
-     * - [Revenants][content.region.wilderness.npc.revenants.RevenantNPC]
-     * - [Chaos Elemental][content.region.wilderness.npc.ChaosElementalNPC]
-     *
-     * @param e The NPC that died.
-     * @param killer The player who killed the NPC.
+     * Rolls exclusive loot drops.
      */
     private fun rollWildernessExclusiveLoot(e: Entity, killer: Entity) {
         if (killer !is Player || e !is NPC) return
@@ -89,11 +84,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
 
         PVP_GEAR.forEach { gearId ->
             if (RandomFunction.roll(pvpGearRate)) {
-                val amount =
-                    if (gearId == Items.MORRIGANS_JAVELIN_13879 || gearId == Items.MORRIGANS_THROWING_AXE_13883) RandomFunction.random(
-                        15,
-                        50
-                    ) else 1
+                val amount = if (gearId == Items.MORRIGANS_JAVELIN_13879 || gearId == Items.MORRIGANS_THROWING_AXE_13883) RandomFunction.random(15, 50) else 1
                 val reward = Item(gearId, amount)
                 produceGroundItem(killer, reward.id, reward.amount, e.dropLocation)
                 announceDrop(killer, reward, e.name)
@@ -244,6 +235,7 @@ class WildernessZone(vararg val borders: ZoneBorders) :
             if (settings!!.wild_pvp_enabled) p.interaction.set(Option.P_ATTACK)
             p.skullManager.isWilderness = true
         }
+
         @JvmStatic
         fun checkTeleport(p: Player, level: Int): Boolean {
             if (p.skullManager.level > level && !p.skullManager.isWildernessDisabled) {

@@ -20,7 +20,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.repository.Repository;
-import core.net.packet.OutgoingContext;
+import core.net.packet.context.MessageContext;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
@@ -29,17 +29,44 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
- * The type Ai player.
+ * Represents an Artificial Intelligent Player.
+ *
+ * @author Emperor
  */
 public class AIPlayer extends Player {
 
     private static int currentUID = 0x1;
     private static final List<String> botNames = new ArrayList<String>();
+
+    /**
+     * The active Artificial intelligent players mapping.
+     */
     private static final Map<Integer, AIPlayer> botMapping = new HashMap<>();
-    private static String OSRScopyLine;
+
+    /**
+     * A line of data from namesandarmor.txt that will be used to generate the appearance
+     * Data in format: <pre> name:cblevel:helmet:cape:neck:weapon:chest:shield:unknown:legs:unknown:gloves:boots: </pre>
+     */
+    private static String string;
+
+    /**
+     * The AIP's UID.
+     */
     private final int uid;
+
+    /**
+     * The start location of the AIP.
+     */
     private final Location startLocation;
+
+    /**
+     * The username.
+     */
     private String username;
+
+    /**
+     * The player controlling this AIP.
+     */
     private Player controller;
 
     static {
@@ -79,7 +106,7 @@ public class AIPlayer extends Player {
     }
 
     /**
-     * Update random values.
+     * Generates bot configuration.
      */
     public void updateRandomValues() {
         this.getAppearance().setGender(RandomFunction.random(5) == 1 ? Gender.FEMALE : Gender.MALE);
@@ -96,11 +123,11 @@ public class AIPlayer extends Player {
     }
 
     private void setLevels() {
-        int maxLevel = RandomFunction.random(1, Math.min(parseOSRS(1), 99));
+        int maxLevel = RandomFunction.random(1, Math.min(1, 99));
         for (int i = 0; i < Skills.NUM_SKILLS; i++) {
             this.getSkills().setStaticLevel(i, RandomFunction.linearDecreaseRand(maxLevel));
         }
-        int combatLevelsLeft = parseOSRS(1);
+        int combatLevelsLeft = RandomFunction.random(3, 126);
         int hitpoints = Math.max(RandomFunction.random(10, Math.min(maxLevel, combatLevelsLeft * 4)), 10);
         combatLevelsLeft -= 0.25 * hitpoints;
         int prayer = combatLevelsLeft > 0 ? RandomFunction.random(Math.min(maxLevel, combatLevelsLeft * 8)) : 1;
@@ -120,31 +147,6 @@ public class AIPlayer extends Player {
         this.getSkills().setStaticLevel(Skills.STRENGTH, strength);
         this.getSkills().setStaticLevel(Skills.RANGE, combatLevelsLeft / 2);
         this.getSkills().setStaticLevel(Skills.MAGIC, combatLevelsLeft / 2);
-    }
-
-    private void giveArmor() {
-        equipIfExists(new Item(parseOSRS(2)), EquipmentContainer.SLOT_HAT);
-        equipIfExists(new Item(parseOSRS(3)), EquipmentContainer.SLOT_CAPE);
-        equipIfExists(new Item(parseOSRS(4)), EquipmentContainer.SLOT_AMULET);
-        equipIfExists(new Item(parseOSRS(5)), EquipmentContainer.SLOT_WEAPON);
-        equipIfExists(new Item(parseOSRS(6)), EquipmentContainer.SLOT_CHEST);
-        equipIfExists(new Item(parseOSRS(7)), EquipmentContainer.SLOT_SHIELD);
-        equipIfExists(new Item(parseOSRS(9)), EquipmentContainer.SLOT_LEGS);
-        equipIfExists(new Item(parseOSRS(11)), EquipmentContainer.SLOT_HANDS);
-        equipIfExists(new Item(parseOSRS(12)), EquipmentContainer.SLOT_FEET);
-    }
-
-    private int parseOSRS(int index) {
-        return Integer.parseInt(OSRScopyLine.split(":")[index]);
-    }
-
-    private void equipIfExists(Item e, int slot) {
-        if (e == null || e.getName().equalsIgnoreCase("null")) {
-            return;
-        }
-        if (e.getId() != 0)
-            getEquipment().replace(e, slot);
-
     }
 
     /**
@@ -176,11 +178,11 @@ public class AIPlayer extends Player {
     }
 
     /**
-     * Update random osr scopy line.
+     * Update..
      *
      * @param fileName the file name
      */
-    public static void updateRandomOSRScopyLine(String fileName) {
+    public static void update(String fileName) {
         Random rand = new Random();
         int n = 0;
         try {
@@ -191,7 +193,7 @@ public class AIPlayer extends Player {
                     if (line.length() < 3 || line.startsWith("#")) {
                         continue;
                     }
-                    OSRScopyLine = line;
+                    string = line;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -202,9 +204,9 @@ public class AIPlayer extends Player {
 
     private static String retrieveRandomName(String fileName) {
         do {
-            updateRandomOSRScopyLine(fileName);
-        } while (OSRScopyLine.startsWith("#") || OSRScopyLine.contains("_") || OSRScopyLine.contains(" "));
-        return OSRScopyLine.split(":")[0];
+            update(fileName);
+        } while (string.startsWith("#") || string.contains("_") || string.contains(" "));
+        return string.split(":")[0];
     }
 
     private static String retrieveRandomName() {
@@ -288,8 +290,7 @@ public class AIPlayer extends Player {
      */
     public boolean checkVictimIsPlayer() {
         if (this.getProperties().getCombatPulse().getVictim() != null)
-            if (this.getProperties().getCombatPulse().getVictim().isPlayer())
-                return true;
+            if (this.getProperties().getCombatPulse().getVictim().isPlayer()) return true;
         return false;
     }
 
@@ -314,8 +315,7 @@ public class AIPlayer extends Player {
         for (int i = 0; i < 28; i++) {
             Item item = this.getInventory().get(i);
             if (item != null) {
-                if (item.getId() == id)
-                    return item;
+                if (item.getId() == id) return item;
             }
         }
         return null;
@@ -326,36 +326,26 @@ public class AIPlayer extends Player {
      *
      * @param ctx the ctx
      */
-    public void handleIncomingChat(OutgoingContext.MessageContext ctx) {
+    public void handleIncomingChat(MessageContext ctx) {
     }
-
 
     private ArrayList<Node> getNodeInRange(int range, int entry) {
         int meX = this.getLocation().getX();
         int meY = this.getLocation().getY();
         ArrayList<Node> nodes = new ArrayList<Node>();
         for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
-            if (npc.getId() == entry)
-                nodes.add(npc);
+            if (npc.getId() == entry) nodes.add(npc);
         }
         for (int x = 0; x < range; x++) {
             for (int y = 0; y < range - x; y++) {
                 Node node = RegionManager.getObject(0, meX + x, meY + y);
-                if (node != null)
-                    if (node.getId() == entry)
-                        nodes.add(node);
+                if (node != null) if (node.getId() == entry) nodes.add(node);
                 Node node2 = RegionManager.getObject(0, meX + x, meY - y);
-                if (node2 != null)
-                    if (node2.getId() == entry)
-                        nodes.add(node2);
+                if (node2 != null) if (node2.getId() == entry) nodes.add(node2);
                 Node node3 = RegionManager.getObject(0, meX - x, meY + y);
-                if (node3 != null)
-                    if (node3.getId() == entry)
-                        nodes.add(node3);
+                if (node3 != null) if (node3.getId() == entry) nodes.add(node3);
                 Node node4 = RegionManager.getObject(0, meX - x, meY - y);
-                if (node4 != null)
-                    if (node4.getId() == entry)
-                        nodes.add(node4);
+                if (node4 != null) if (node4.getId() == entry) nodes.add(node4);
             }
         }
         return nodes;
@@ -367,27 +357,18 @@ public class AIPlayer extends Player {
 
         ArrayList<Node> nodes = new ArrayList<Node>();
         for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
-            if (entrys.contains(npc.getId()))
-                nodes.add(npc);
+            if (entrys.contains(npc.getId())) nodes.add(npc);
         }
         for (int x = 0; x < range; x++) {
             for (int y = 0; y < range - x; y++) {
                 Node node = RegionManager.getObject(0, meX + x, meY + y);
-                if (node != null)
-                    if (entrys.contains(node.getId()))
-                        nodes.add(node);
+                if (node != null) if (entrys.contains(node.getId())) nodes.add(node);
                 Node node2 = RegionManager.getObject(0, meX + x, meY - y);
-                if (node2 != null)
-                    if (entrys.contains(node2.getId()))
-                        nodes.add(node2);
+                if (node2 != null) if (entrys.contains(node2.getId())) nodes.add(node2);
                 Node node3 = RegionManager.getObject(0, meX - x, meY + y);
-                if (node3 != null)
-                    if (entrys.contains(node3.getId()))
-                        nodes.add(node3);
+                if (node3 != null) if (entrys.contains(node3.getId())) nodes.add(node3);
                 Node node4 = RegionManager.getObject(0, meX - x, meY - y);
-                if (node4 != null)
-                    if (entrys.contains(node4.getId()))
-                        nodes.add(node4);
+                if (node4 != null) if (entrys.contains(node4.getId())) nodes.add(node4);
             }
         }
         return nodes;

@@ -2,66 +2,64 @@ package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
+import core.game.world.map.Point;
+import core.tools.Log;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
-import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
-import core.game.world.update.flag.EntityFlag;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.net.packet.OutgoingContext;
+import core.game.world.update.flag.EntityFlag;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.*;
+import core.net.packet.context.DisplayModelContext.ModelType;
 import core.net.packet.out.*;
-import core.tools.Log;
 
 import static core.api.ContentAPIKt.log;
-import static core.api.ContentAPIKt.setVarp;
+import static core.api.ContentAPIKt.*;
 
 /**
- * The type Packet dispatch.
+ * Represents the class used to dispatching packets.
+ *
+ * @author Emperor
+ * @author Vexia
  */
 public final class PacketDispatch {
 
+    /**
+     * The instance of the {@code Player}.
+     */
     private final Player player;
 
-    private final OutgoingContext.PlayerContext context;
+    /**
+     * The player context.
+     */
+    private final PlayerContext context;
 
     /**
-     * Instantiates a new Packet dispatch.
+     * Constructs a new {@code PacketDispatch} {@code Object}.
      *
-     * @param player the player
+     * @param player the player.
      */
     public PacketDispatch(Player player) {
         this.player = player;
-        this.context = new OutgoingContext.PlayerContext(player);
+        this.context = new PlayerContext(player);
     }
 
-    /**
-     * Send varp.
-     *
-     * @param index the index
-     * @param value the value
-     */
     public void sendVarp(int index, int value) {
-        PacketRepository.send(Config.class, new OutgoingContext.Config(player, index, value, false));
+        PacketRepository.send(Config.class, new ConfigContext(player, index, value));
     }
 
-    /**
-     * Send varc update.
-     *
-     * @param index the index
-     * @param value the value
-     */
     public void sendVarcUpdate(short index, int value) {
-        PacketRepository.send(VarcUpdate.class, new OutgoingContext.VarcUpdate(player, index, value));
+        PacketRepository.send(VarcUpdate.class, new VarcUpdateContext(player, index, value));
     }
 
     /**
-     * Send message.
+     * Send a game message.
      *
-     * @param message the message
+     * @param message The game message.
      */
     public void sendMessage(String message) {
         if (message == null) {
@@ -74,13 +72,13 @@ public final class PacketDispatch {
             log(this.getClass(), Log.ERR, "Message length out of bounds (" + message + ")!");
             message = message.substring(0, 255);
         }
-        PacketRepository.send(GameMessage.class, new OutgoingContext.GameMessage(player, message));
+        PacketRepository.send(GameMessage.class, new GameMessageContext(player, message));
     }
 
     /**
-     * Send messages.
+     * Sends game messages.
      *
-     * @param messages the messages
+     * @param messages the messages.
      */
     public void sendMessages(final String... messages) {
         for (String message : messages) {
@@ -89,28 +87,10 @@ public final class PacketDispatch {
     }
 
     /**
-     * Send messages.
+     * Method used to send a game message on a tick.
      *
-     * @param messages the messages
-     * @param ticks the ticks
-     */
-    public void sendMessages(int ticks, final String... messages) {
-        GameWorld.getPulser().submit(new Pulse(ticks, player) {
-            @Override
-            public boolean pulse() {
-                for (String message : messages) {
-                    sendMessage(message);
-                }
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Send message.
-     *
-     * @param message the message
-     * @param ticks   the ticks
+     * @param message the message.
+     * @param ticks   the ticks.
      */
     public void sendMessage(final String message, int ticks) {
         GameWorld.getPulser().submit(new Pulse(ticks, player) {
@@ -123,274 +103,194 @@ public final class PacketDispatch {
     }
 
     /**
-     * Send iface settings.
+     * Send a access mask.
      *
-     * @param settingsHash the settings hash
-     * @param childId      the child id
-     * @param interfaceId  the interface id
-     * @param offset       the offset
-     * @param length       the length
+     * @param settingsHash The access mask settingsHash.
+     * @param childId      The access mask child id.
+     * @param interfaceId  The access mask interface Id.
+     * @param offset       The access mask off set.
+     * @param length       The access mask length.
      */
     public void sendIfaceSettings(int settingsHash, int childId, int interfaceId, int offset, int length) {
-        PacketRepository.send(AccessMask.class, new OutgoingContext.AccessMask(player, settingsHash, childId, interfaceId, offset, length));
+        PacketRepository.send(AccessMask.class, new AccessMaskContext(player, settingsHash, childId, interfaceId, offset, length));
     }
+
     /**
-     * Send windows pane.
+     * Send a windowns pane.
      *
-     * @param windowId the window id
-     * @param type     the type
+     * @param windowId The windows pane id.
+     * @param type     The windowns pane type.
      */
     public void sendWindowsPane(int windowId, int type) {
-        PacketRepository.send(WindowsPane.class, new OutgoingContext.WindowsPane(player, windowId, type));
+        PacketRepository.send(WindowsPane.class, new WindowsPaneContext(player, windowId, type));
     }
 
     /**
-     * Send system update.
+     * sends the system update packet.
      *
-     * @param time the time
+     * @param time the amount of time.
      */
     public void sendSystemUpdate(int time) {
-        PacketRepository.send(SystemUpdatePacket.class, new OutgoingContext.SystemUpdate(player, time));
+        PacketRepository.send(SystemUpdatePacket.class, new SystemUpdateContext(player, time));
     }
 
     /**
-     * Send music.
+     * Sends music packet.
      *
-     * @param musicId the music id
+     * @param musicId The music id.
      */
     public void sendMusic(int musicId) {
-        PacketRepository.send(MusicPacket.class, new OutgoingContext.Music(player, musicId, false));
+        PacketRepository.send(MusicPacket.class, new MusicContext(player, musicId));
     }
 
     /**
-     * Send temp music.
+     * Sends the temporary music packet.
      *
-     * @param musicId the music id
+     * @param musicId The music id.
      */
     public void sendTempMusic(int musicId) {
-        PacketRepository.send(MusicPacket.class, new OutgoingContext.Music(player, musicId, true));
+        PacketRepository.send(MusicPacket.class, new MusicContext(player, musicId, true));
     }
 
     /**
-     * Send script config.
+     * Sends a client script config to the player.
      *
-     * @param id         the id
-     * @param value      the value
-     * @param types      the types
-     * @param parameters the parameters
+     * @param id    The id to set.
+     * @param value The value of the config.
      */
-    public void sendScriptConfig(int id, int value, String types, java.lang.Object... parameters) {
-        PacketRepository.send(CSConfigPacket.class, new OutgoingContext.CSConfig(player, id, value, types, parameters));
+    public void sendScriptConfig(int id, int value, String types, Object... parameters) {
+        PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, types, parameters));
     }
 
     /**
-     * Send run script.
+     * Send a run script.
      *
-     * @param id      the id
-     * @param string  the string
-     * @param objects the objects
+     * @param id      The run script id.
+     * @param string  The run script string.
+     * @param objects The run scripts objects.
      */
-    public void sendRunScript(int id, String string, java.lang.Object... objects) {
-        PacketRepository.send(RunScriptPacket.class, new OutgoingContext.RunScript(player, id, string, objects));
+    public void sendRunScript(int id, String string, Object... objects) {
+        PacketRepository.send(RunScriptPacket.class, new RunScriptContext(player, id, string, objects));
     }
 
     /**
-     * Send string.
+     * Send a StringPacket.
      *
-     * @param string      the string
-     * @param interfaceId the interface id
-     * @param lineId      the line id
+     * @param string      The string.
+     * @param interfaceId The interface id.
+     * @param lineId      The line id.
      */
     public void sendString(String string, int interfaceId, int lineId) {
-        PacketRepository.send(StringPacket.class, new OutgoingContext.StringContext(player, string, interfaceId, lineId));
+        PacketRepository.send(StringPacket.class, new StringContext(player, string, interfaceId, lineId));
     }
 
     /**
-     * Send run energy.
+     * Send a update packet for the amount of run energy.
      */
     public void sendRunEnergy() {
         PacketRepository.send(RunEnergy.class, getContext());
     }
 
     /**
-     * Send logout.
+     * Send the logout packet.
      */
     public void sendLogout() {
         PacketRepository.send(Logout.class, getContext());
     }
 
     /**
-     * Send animation interface.
+     * Send the interface animation packet.
      *
-     * @param animationId the animation id
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param animationId The animation id.
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendAnimationInterface(int animationId, int interfaceId, int childId) {
-        PacketRepository.send(AnimateInterface.class, new OutgoingContext.AnimateInterface(player, animationId, interfaceId, childId));
+        PacketRepository.send(AnimateInterface.class, new AnimateInterfaceContext(player, animationId, interfaceId, childId));
     }
 
     /**
-     * Send player on interface.
+     * Send the player on interface packet.
      *
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendPlayerOnInterface(int interfaceId, int childId) {
-        PacketRepository.send(
-                DisplayModel.class,
-                new OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.PLAYER,
-                        -1,
-                        0,
-                        interfaceId,
-                        childId,
-                        0
-                )
-        );
+        // fixme right now for iface 68-71 the player is massive
+        // The zoom for the other windows is 2150
+        // for these 4 individuals it should be 796 but dmc.setZoom doesn't work
+        DisplayModelContext dmc = new DisplayModelContext(player, interfaceId, childId);
+        dmc.setZoom(796); // this appears to do nothing
+        PacketRepository.send(DisplayModel.class, dmc);
     }
 
     /**
-     * Send npc on interface.
+     * Send the non-player character on interface packet.
      *
-     * @param npcId       the npc id
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param npcId       The non-player character's id.
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendNpcOnInterface(int npcId, int interfaceId, int childId) {
-        PacketRepository.send(
-                DisplayModel.class,
-                new OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.NPC,
-                        npcId,
-                        0,
-                        interfaceId,
-                        childId,
-                        0
-                )
-        );
+        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, npcId, interfaceId, childId));
     }
 
-    /**
-     * Send model on interface.
-     *
-     * @param modelID     the model id
-     * @param interfaceId the interface id
-     * @param childId     the child id
-     * @param zoom        the zoom
-     */
     public void sendModelOnInterface(int modelID, int interfaceId, int childId, int zoom) {
-        PacketRepository.send(
-                DisplayModel.class,
-                new OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.MODEL,
-                        modelID,
-                        0,
-                        interfaceId,
-                        childId,
-                        zoom
-                )
-        );
+        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.MODEL, modelID, zoom, interfaceId, childId, new Object()));
     }
 
-    /**
-     * Send angle on interface.
-     *
-     * @param interfaceId the interface id
-     * @param childId     the child id
-     * @param zoom        the zoom
-     * @param pitch       the pitch
-     * @param yaw         the yaw
-     */
+    public void sendRepositionOnInterface(int interfaceId, int childId, int positionX, int positionY) {
+        PacketRepository.send(RepositionChild.class, new ChildPositionContext(player, interfaceId, childId, positionX, positionY));
+    }
+
     public void sendAngleOnInterface(int interfaceId, int childId, int zoom, int pitch, int yaw) {
-        PacketRepository.send(InterfaceSetAngle.class, new OutgoingContext.Default(player, new Object[]{pitch, zoom, yaw, interfaceId, childId})
-);
+        PacketRepository.send(InterfaceSetAngle.class, new DefaultContext(player, pitch, zoom, yaw, interfaceId, childId));
     }
 
     /**
-     * Send item on interface.
+     * Send the item on interface packet.
      *
-     * @param itemId      the item id
-     * @param amount      the amount
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param itemId      The item id.
+     * @param amount      The item amount.
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendItemOnInterface(int itemId, int amount, int interfaceId, int childId) {
-        PacketRepository.send(
-                DisplayModel.class,
-                new OutgoingContext.DisplayModel(
-                        player,
-                        OutgoingContext.DisplayModel.ModelType.ITEM,
-                        itemId,
-                        amount,
-                        interfaceId,
-                        childId,
-                        0
-                )
-        );
+        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, amount, interfaceId, childId));
     }
 
     /**
-     * Send item zoom on interface.
+     * Send the item on interface packet.
      *
-     * @param itemId      the item id
-     * @param zoom        the zoom
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param itemId      The item id.
+     * @param zoom        the zoom.
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendItemZoomOnInterface(int itemId, int zoom, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new OutgoingContext.DisplayModel(player, OutgoingContext.DisplayModel.ModelType.ITEM, itemId, zoom, interfaceId, childId, zoom));
+        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, zoom, interfaceId, childId, zoom));
     }
 
-    /**
-     * Send inter set items options script.
-     *
-     * @param interfaceId the interface id
-     * @param componentId the component id
-     * @param key         the key
-     * @param width       the width
-     * @param height      the height
-     * @param options     the options
-     */
     public void sendInterSetItemsOptionsScript(int interfaceId, int componentId, int key, int width, int height, String... options) {
         sendInterSetItemsOptionsScript(interfaceId, componentId, key, false, width, height, options);
     }
 
-    /**
-     * Send inter set items options script.
-     *
-     * @param interfaceId the interface id
-     * @param componentId the component id
-     * @param key         the key
-     * @param negativeKey the negative key
-     * @param width       the width
-     * @param height      the height
-     * @param options     the options
-     */
     public void sendInterSetItemsOptionsScript(int interfaceId, int componentId, int key, boolean negativeKey, int width, int height, String... options) {
-        java.lang.Object[] parameters = new java.lang.Object[6 + options.length];
+        Object[] parameters = new Object[6 + options.length];
         int index = 0;
         for (int count = options.length - 1; count >= 0; count--)
             parameters[index++] = options[count];
-        parameters[index++] = -1;
-        parameters[index++] = 0;
+        parameters[index++] = -1; // dunno but always this
+        parameters[index++] = 0;// dunno but always this, maybe startslot?
         parameters[index++] = height;
         parameters[index++] = width;
         parameters[index++] = key;
         parameters[index++] = interfaceId << 16 | componentId;
         sendRunScript(negativeKey ? 695 : 150, parameters);
+        // name says*/
     }
 
-    /**
-     * Send run script.
-     *
-     * @param scriptId the script id
-     * @param params   the params
-     */
-    public void sendRunScript(int scriptId, java.lang.Object... params) {
+    public void sendRunScript(int scriptId, Object... params) {
         String parameterTypes = "";
         if (params != null) {
             for (int count = params.length - 1; count >= 0; count--) {
@@ -403,75 +303,76 @@ public final class PacketDispatch {
         sendRunScript(scriptId, parameterTypes, params);
     }
 
+
     /**
-     * Send item zoom on interface.
+     * Send the item on interface packet.
      *
-     * @param itemId      the item id
-     * @param amount      the amount
-     * @param zoom        the zoom
-     * @param interfaceId the interface id
-     * @param childId     the child id
+     * @param itemId      The item id.
+     * @param amount      The amount.
+     * @param zoom        the zoom.
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
      */
     public void sendItemZoomOnInterface(int itemId, int amount, int zoom, int interfaceId, int childId) {
-        PacketRepository.send(DisplayModel.class, new OutgoingContext.DisplayModel(player, OutgoingContext.DisplayModel.ModelType.ITEM, itemId, amount, interfaceId, childId, zoom));
+        PacketRepository.send(DisplayModel.class, new DisplayModelContext(player, ModelType.ITEM, itemId, amount, interfaceId, childId, zoom));
     }
 
     /**
-     * Send interface config.
+     * Send the interface config packet.
      *
-     * @param interfaceId the interface id
-     * @param childId     the child id
-     * @param hide        the hide
+     * @param interfaceId The interface id.
+     * @param childId     The child id.
+     * @param hide        If the component should be hidden.
      */
     public void sendInterfaceConfig(int interfaceId, int childId, boolean hide) {
-        PacketRepository.send(InterfaceConfig.class, new OutgoingContext.InterfaceConfigContext(player, interfaceId, childId, hide));
+        PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, interfaceId, childId, hide));
     }
 
     /**
-     * Send animation.
+     * Send a animation update flag mask.
      *
-     * @param id the id
+     * @param id The animation id.
      */
     public void sendAnimation(int id) {
         player.getUpdateMasks().register(EntityFlag.Animate, new Animation(id));
     }
 
     /**
-     * Send animation.
+     * Send a animation update flag mask.
      *
-     * @param id    the id
-     * @param delay the delay
+     * @param id    The animation id.
+     * @param delay The animation delay.
      */
     public void sendAnimation(int id, int delay) {
         player.getUpdateMasks().register(EntityFlag.Animate, new Animation(id, delay));
     }
 
     /**
-     * Send graphic.
+     * Send a graphic update flag mask.
      *
-     * @param id the id
+     * @param id The graphic id.
      */
     public void sendGraphic(int id) {
         player.getUpdateMasks().register(EntityFlag.SpotAnim, new Graphics(id));
     }
 
     /**
-     * Send positioned graphic.
+     * Sends the positioned graphic.
      *
-     * @param id       the id
-     * @param height   the height
-     * @param delay    the delay
-     * @param location the location
+     * @param id       the id.
+     * @param height   the height.
+     * @param delay    the delay.
+     * @param location the location.
      */
     public void sendPositionedGraphic(int id, int height, int delay, Location location) {
-        PacketRepository.send(PositionedGraphic.class, new OutgoingContext.PositionedGraphic(player, new Graphics(id, height, delay), location, 0, 0));
+        PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, new Graphics(id, height, delay), location, 0, 0));
     }
 
     /**
-     * Send global position graphic.
+     * Sends a global graphic.
      *
-     * @param id       the id
-     * @param location the location
+     * @param id       the id.
+     * @param location the location.
      */
     public void sendGlobalPositionGraphic(int id, Location location) {
         for (Player player : RegionManager.getLocalPlayers(location)) {
@@ -480,77 +381,68 @@ public final class PacketDispatch {
     }
 
     /**
-     * Send positioned graphics.
+     * Sends the positioned graphic.
      *
-     * @param graphics the graphics
-     * @param location the location
+     * @param graphics the graphics.
+     * @param location the location.
      */
     public void sendPositionedGraphics(Graphics graphics, Location location) {
-        PacketRepository.send(PositionedGraphic.class, new OutgoingContext.PositionedGraphic(player, graphics, location, 0, 0));
+        PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, graphics, location, 0, 0));
     }
 
     /**
-     * Send scenery animation.
+     * Method used to send an object animation.
      *
-     * @param scenery   the scenery
-     * @param animation the animation
+     * @param object    the object.
+     * @param animation the animation.
      */
-    public void sendSceneryAnimation(Scenery scenery, Animation animation) {
+    public void sendSceneryAnimation(Scenery object, Animation animation) {
         animation = new Animation(animation.getId(), animation.getDelay(), animation.getPriority());
-        animation.setObject(scenery);
-        RegionManager.getRegionChunk(scenery.getLocation()).flag(new AnimateObjectUpdateFlag(animation));
+        animation.setObject(object);
+        RegionManager.getRegionChunk(object.getLocation()).flag(new AnimateObjectUpdateFlag(animation));
     }
 
     /**
-     * Send scenery animation.
+     * Method used to send an object animation.
      *
-     * @param scenery   the scenery
-     * @param animation the animation
-     * @param global    the global
+     * @param object    the object.
+     * @param animation the animation.
+     * @param global    if the animation is global or not.
      */
-    public void sendSceneryAnimation(Scenery scenery, Animation animation, boolean global) {
+    public void sendSceneryAnimation(Scenery object, Animation animation, boolean global) {
         if (global) {
-            sendSceneryAnimation(scenery, animation);
+            sendSceneryAnimation(object, animation);
             return;
         }
-        animation.setObject(scenery);
-        PacketRepository.send(AnimateObjectPacket.class, new OutgoingContext.AnimateObject(player, animation));
+        animation.setObject(object);
+        PacketRepository.send(AnimateObjectPacket.class, new AnimateObjectContext(player, animation));
     }
 
     /**
-     * Send graphic.
+     * Send a graphic update flag mask.
      *
-     * @param id     the id
-     * @param height the height
+     * @param id     The graphic id.
+     * @param height The graphic height.
      */
     public void sendGraphic(int id, int height) {
         player.getUpdateMasks().register(EntityFlag.SpotAnim, new Graphics(id, height));
     }
 
-    /**
-     * Send left shifted varbit.
-     *
-     * @param varpIndex the varp index
-     * @param offset    the offset
-     * @param value     the value
-     */
+    public void sendVarClient(int id, int value, boolean cs2) {
+        PacketRepository.send(Config.class, new ConfigContext(player, id, value, cs2));
+    }
+
     public void sendLeftShiftedVarbit(int varpIndex, int offset, int value) {
         setVarp(player, varpIndex, (value << offset));
     }
 
-    /**
-     * Send right shifted varbit.
-     *
-     * @param varpIndex the varp index
-     * @param offset    the offset
-     * @param value     the value
-     */
     public void sendRightShiftedVarbit(int varpIndex, int offset, int value) {
         setVarp(player, varpIndex, (value >> offset));
     }
 
+
     /**
-     * Gets player.
+     * Gets the player.
      *
      * @return the player
      */
@@ -559,45 +451,24 @@ public final class PacketDispatch {
     }
 
     /**
-     * Gets context.
+     * Gets the context.
      *
-     * @return the context
+     * @return The context.
      */
-    public OutgoingContext.PlayerContext getContext() {
+    public PlayerContext getContext() {
         return context;
     }
 
-    /**
-     * Send script configs.
-     *
-     * @param id     the id
-     * @param value  the value
-     * @param type   the type
-     * @param params the params
-     */
-    public void sendScriptConfigs(int id, int value, String type, java.lang.Object... params) {
-        PacketRepository.send(CSConfigPacket.class, new OutgoingContext.CSConfig(player, id, value, type, params));
+    public void sendScriptConfigs(int id, int value, String type, Object... params) {
+        PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, type, params));
     }
 
-    /**
-     * Reset interface.
-     *
-     * @param id the id
-     */
     public void resetInterface(int id) {
-        PacketRepository.send(ResetInterface.class, new OutgoingContext.InterfaceContext(player, 0, 0, id, false));
+        PacketRepository.send(ResetInterface.class, new InterfaceContext(player, 0, 0, id, false));
     }
 
-    /**
-     * Send reposition on interface.
-     *
-     * @param id        the id
-     * @param component the component
-     * @param x         the x
-     * @param y         the y
-     */
-    public void sendRepositionOnInterface(int id, int component, int x, int y) {
-        PacketRepository.send(RepositionChild.class, new OutgoingContext.ChildPosition(player, id, component, new Point(x, y)));
+    public void sendLastLoginInfo() {
+        PacketRepository.send(LastLoginInfo.class, new PlayerContext(player));
     }
 
 }

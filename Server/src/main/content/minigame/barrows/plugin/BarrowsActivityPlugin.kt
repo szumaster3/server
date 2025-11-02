@@ -26,19 +26,24 @@ import core.game.world.map.RegionManager.getRegionPlayers
 import core.game.world.map.RegionManager.getTeleportLocation
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Graphics
-import core.net.packet.OutgoingContext
 import core.net.packet.PacketRepository
+import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.tools.RandomFunction
+import shared.consts.Components
 
+/**
+ * Handles the Barrows minigame activity.
+ */
 @Initializable
 class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
-    override fun locationUpdate(
-        e: Entity,
-        last: Location,
-    ) {
+    /**
+     * Updates the location in the Barrows area,
+     * handling tunnel visibility for the minimap.
+     */
+    override fun locationUpdate(e: Entity, last: Location) {
         if (e is Player && e.getViewport().region!!.id == 14231) {
             var tunnel = false
             for (border in MINI_TUNNELS) {
@@ -54,6 +59,9 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         }
     }
 
+    /**
+     * Handles an entity entering the Barrows area.
+     */
     override fun enter(e: Entity): Boolean {
         if (e is Player) {
             val player = e.asPlayer()
@@ -90,10 +98,10 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         return super.enter(e)
     }
 
-    override fun leave(
-        e: Entity,
-        logout: Boolean,
-    ): Boolean {
+    /**
+     * Handles an entity leaving.
+     */
+    override fun leave(e: Entity, logout: Boolean): Boolean {
         if (e is Player) {
             val player = e.asPlayer()
             setMinimapState(player, 0)
@@ -120,10 +128,10 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         return super.leave(e, logout)
     }
 
-    override fun death(
-        e: Entity,
-        killer: Entity,
-    ): Boolean {
+    /**
+     * Handles the death of an entity.
+     */
+    override fun death(e: Entity, killer: Entity): Boolean {
         var player: Player? = null
         if (killer is Player) {
             player = killer
@@ -255,7 +263,7 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                     reward(player)
                     PacketRepository.send(
                         CameraViewPacket::class.java,
-                        OutgoingContext.Camera(player, OutgoingContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
+                        CameraContext(player, CameraContext.CameraType.SHAKE, 3, 2, 2, 2, 2),
                     )
                     return true
                 }
@@ -264,21 +272,12 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
         return false
     }
 
-    override fun actionButton(
-        player: Player,
-        interfaceId: Int,
-        buttonId: Int,
-        slot: Int,
-        itemId: Int,
-        opcode: Int,
-    ): Boolean = false
+    override fun actionButton(player: Player, interfaceId: Int, buttonId: Int, slot: Int, itemId: Int, opcode: Int): Boolean = false
 
-    override fun continueAttack(
-        e: Entity,
-        target: Node,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    /**
+     * Prevents attacking a BarrowBrother NPC unless it is your target.
+     */
+    override fun continueAttack(e: Entity, target: Node, style: CombatStyle, message: Boolean): Boolean {
         if (target is BarrowBrotherNPC) {
             var p: Player? = null
             if (e is Player) {
@@ -299,6 +298,9 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
 
     override fun getSpawnLocation(): Location? = null
 
+    /**
+     * Configures Barrows plugins.
+     */
     override fun configure() {
         definePlugin(BarrowsPuzzle.SHAPES)
         registerRegion(14231)
@@ -307,9 +309,15 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
     }
 
     companion object {
+        /**
+         * Barrows tunnel configurations.
+         */
         private val TUNNEL_CONFIGS =
             intArrayOf(55328769, 2867201, 44582944, 817160, 537688072, 40763408, 44320784, 23478274)
 
+        /**
+         * Mini tunnel borders.
+         */
         private val MINI_TUNNELS =
             arrayOf(
                 ZoneBorders(3532, 9665, 3570, 9671),
@@ -331,7 +339,10 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                 ZoneBorders(3558, 9677, 3562, 9678),
             )
 
-        private val OVERLAY = Component(24)
+        /**
+         * Component overlay used in Barrows
+         */
+        private val OVERLAY = Component(Components.BARROWS_OVERLAY_24)
 
         private val PULSE: Pulse =
             object : Pulse(0) {
@@ -375,12 +386,18 @@ class BarrowsActivityPlugin : ActivityPlugin("Barrows", false, false, false) {
                 }
             }
 
+        /**
+         * Randomly shuffles the catacomb layout for a player.
+         */
         fun shuffleCatacombs(player: Player?) {
             var value = TUNNEL_CONFIGS[RandomFunction.random(TUNNEL_CONFIGS.size)]
             value = value or (1 shl 6 + RandomFunction.random(4))
             setVarp(player!!, 452, value)
         }
 
+        /**
+         * Sends Barrows configuration to player.
+         */
         fun sendConfiguration(player: Player) {
             val data = player.getSavedData().activityData
             var config = data.barrowKills shl 17

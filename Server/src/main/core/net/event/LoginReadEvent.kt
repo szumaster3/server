@@ -13,7 +13,7 @@ import java.nio.ByteBuffer
  * Handles login reading events.
  * @author Ceikry
  */
-class LoginReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(session, buffer) {
+class LoginReadEvent(session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(session, buffer) {
     override fun read(session: IoSession, buffer: ByteBuffer) {
         try {
             val (response, info) = Login.decodeFromBuffer(buffer)
@@ -30,8 +30,8 @@ class LoginReadEvent(session: IoSession, buffer: ByteBuffer) : IoReadEvent(sessi
             val details = PlayerDetails(info.username)
             details.accountInfo = accountInfo
             details.communication.parse(accountInfo)
-            session.setClientInfo(ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight))
-            session.setIsaacPair(info.isaacPair)
+            session.clientInfo = ClientInfo(info.displayMode, info.windowMode, info.screenWidth, info.screenHeight)
+            session.isaacPair = info.isaacPair
             session.associatedUsername = info.username
             Login.proceedWith(session, details, info.opcode)
         } catch (e: Exception) {

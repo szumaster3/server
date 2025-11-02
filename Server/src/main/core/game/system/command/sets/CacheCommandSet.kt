@@ -5,8 +5,6 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.ServerConstants
 import core.cache.Cache
-import core.cache.Group
-import core.cache.Archive
 import core.cache.def.impl.*
 import core.game.system.command.Privilege
 import core.game.world.map.RegionManager
@@ -340,87 +338,6 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Dump render animations.
-         */
-
-        define(
-            name = "dumprenderanim",
-            privilege = Privilege.ADMIN,
-            usage = "::dumprenderanim",
-            description = "Dumps all render animations to dumps/render_anim.txt",
-        ) { player, _ ->
-            val path = Paths.get("dumps/render_anim.txt")
-            Files.createDirectories(path.parent)
-
-            try {
-                BufferedWriter(Files.newBufferedWriter(path)).use { bw ->
-                    val capacity = Cache.getArchiveCapacity(Archive.JS5_CONFIG, Group.BAS_TYPE)
-                    for (i in 0 until capacity) {
-                        val def = RenderAnimationDefinition.forId(i) ?: continue
-                        bw.append("RenderAnim $i -> ")
-                        bw.append("stand=${def.standAnimationId}, ")
-                        bw.append("walk=${def.walkAnimationId}, ")
-                        bw.append("run=${def.runAnimationId}, ")
-                        bw.append("turn180=${def.turn180Animation}, ")
-                        bw.append("turnCW=${def.turnCWAnimation}, ")
-                        bw.append("turnCCW=${def.turnCCWAnimation}")
-                        bw.newLine()
-                    }
-                }
-                player.debug("Render animations dumped successfully to dumps/render_anim.txt")
-            } catch (e: Exception) {
-                player.debug("Failed to dump render animations: ${e.message}")
-                e.printStackTrace()
-            }
-
-            return@define
-        }
-
-        /*
-         * Dump datamaps.
-         */
-
-        define(
-            name = "dumpdatamaps",
-            privilege = Privilege.ADMIN,
-            usage = "::dumpdatamaps",
-            description = "Dumps all DataMap definitions to a .txt file.",
-        ) { p, _ ->
-            val dump = File("dumps/datamaps_config.txt")
-
-            dump.parentFile?.let { parent ->
-                if (!parent.exists()) parent.mkdirs()
-            }
-
-            val dataMapStrings = mutableListOf<String>()
-            val index = Archive.JS5_CONFIG_ENUM
-            val archiveCount = Cache.getIndex(index).archives().size
-
-            for (archiveId in 0 until archiveCount) {
-                val fileCount = Cache.getArchiveFileCount(index, archiveId)
-                if (fileCount <= 0) continue
-
-                for (fileId in 0 until fileCount) {
-                    val id = (archiveId shl 8) or fileId
-                    val data = Cache.getData(index, archiveId, fileId) ?: continue
-
-                    try {
-                        val def = DataMap.get(id)
-                        dataMapStrings.add(def.toString())
-                    } catch (e: Exception) {
-                        println("Error parsing DataMap ID $id: ${e.message}")
-                    }
-                }
-            }
-
-            dump.printWriter().use { writer ->
-                dataMapStrings.forEach { writer.println(it) }
-            }
-
-            p.debug("DataMap have been successfully dumped to ${dump.path}.")
-        }
-
-        /*
          * Show icons.
          */
 
@@ -629,55 +546,6 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Dumps for educational purposes identity kit configurations to a .csv file.
-         */
-
-        define(
-            name = "dumpidk",
-            privilege = Privilege.ADMIN,
-            usage = "::dumpidk",
-            description = "Dumps identity kits data to a .json file.",
-        ) { p, _ ->
-
-            val length = Cache.getArchiveCapacity(Archive.JS5_CONFIG, Group.IDK_TYPE)
-            val dump = File("dumps/identity_kits.json")
-            val gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-
-            try {
-                dump.parentFile?.let { parent ->
-                    if (!parent.exists()) parent.mkdirs()
-                }
-                val dataList = mutableListOf<Map<String, Any?>>()
-
-                for (i in 0 until length) {
-                    val def = ClothDefinition.forId(i) ?: continue
-
-                    val bodyModelIdsString = def.bodyModelIds?.joinToString(";") { it.toString() }
-                    val headModelIdsString = def.headModelIds?.joinToString(";") { it.toString() }
-
-                    val map = mapOf(
-                        "id" to i,
-                        "bodyPartId" to def.bodyPartId,
-                        "bodyModelIds" to bodyModelIdsString,
-                        "isSelectable" to !def.notSelectable,
-                        "headModelIds" to headModelIdsString
-                    )
-
-                    dataList.add(map)
-                }
-
-                dump.bufferedWriter().use { writer ->
-                    gson.toJson(dataList, writer)
-                }
-
-                p.debug("Identity kits data has been successfully dumped to $dump.")
-            } catch (e: IOException) {
-                e.printStackTrace()
-                p.debug("Error writing to JSON file: ${e.message}")
-            }
-        }
-
-        /*
          * Dumps for educational purposes item definitions into a .json.
          */
 
@@ -694,7 +562,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
             val items = mutableListOf<Map<String, Any?>>()
 
-            for (itemId in 0 until Cache.getIndexCapacity(Archive.JS5_CONFIG_OBJ)) {
+            for (itemId in 0 until Cache.getItemDefinitionsSize()) {
                 val itemDef = ItemDefinition.forId(itemId) ?: continue
                 val itemMap =
                     itemDef::class
@@ -753,58 +621,6 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Dumps for educational purposes struct data to a .csv file.
-         */
-
-        define(
-            name = "dumpstructs",
-            privilege = Privilege.ADMIN,
-            usage = "::dumpstructs",
-            description = "Dumps structs data to a .json file.",
-        ) { player, _ ->
-
-            val dump = File("dumps/structs.json")
-            val gson = GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create()
-
-            try {
-                dump.parentFile?.let { parent ->
-                    if (!parent.exists()) {
-                        parent.mkdirs()
-                    }
-                }
-
-                val dataList = mutableListOf<Map<String, Any?>>()
-
-                val archiveFileCount = Cache.getArchiveFileCount(Archive.JS5_CONFIG, 26)
-                for (fID in 0 until archiveFileCount) {
-                    val file = Cache.getData(Archive.JS5_CONFIG, Group.STRUCT_TYPE, fID)
-                    if (file != null) {
-                        val def = Struct.decode(fID, file)
-                        val map = mapOf(
-                            "id" to def.id,
-                            "data" to when (val data = def.dataStore) {
-                                is Array<*> -> data.joinToString(";") { it.toString() }
-                                is Iterable<*> -> data.joinToString(";") { it.toString() }
-                                null -> null
-                                else -> data.toString()
-                            }
-                        )
-                        dataList.add(map)
-                    }
-                }
-
-                dump.bufferedWriter().use { writer ->
-                    gson.toJson(dataList, writer)
-                }
-
-                player.debug("Struct data has been successfully dumped to $dump.")
-            } catch (e: IOException) {
-                e.printStackTrace()
-                reject(player, "Error writing to file: ${e.message}")
-            }
-        }
-
-        /*
          * Dumps for educational purposes the NPC definitions into a .json file.
          */
 
@@ -829,7 +645,7 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
             val excludedFields = setOf("handlers")
 
-            for (npcId in 0 until Cache.getIndexCapacity(Archive.JS5_CONFIG_NPC)) {
+            for (npcId in 0 until Cache.getNPCDefinitionsSize()) {
                 val npcDef = NPCDefinition.forId(npcId) ?: continue
                 val npcMap = mutableMapOf<String, Any?>()
 

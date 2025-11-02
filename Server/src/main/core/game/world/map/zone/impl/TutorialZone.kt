@@ -19,15 +19,15 @@ import shared.consts.Regions
 @Initializable
 class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
 
-    override fun newInstance(arg: Any?): Plugin<Any?> {
-        ZoneBuilder.configure(this)
-        return this
-    }
-
     override fun configure() {
         for (regionId in REGIONS) {
             registerRegion(regionId)
         }
+    }
+
+    override fun newInstance(arg: Any?): Plugin<Any?> {
+        ZoneBuilder.configure(this)
+        return this
     }
 
     override fun teleport(entity: Entity, type: Int, node: Node?): Boolean {

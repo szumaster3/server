@@ -122,25 +122,25 @@ public final class Appearance {
             NPCDefinition def = NPCDefinition.forId(npcId);
             renderAnimationId = def.renderAnimationId;
             setStandAnimation(def.standAnimation);
-            int turn = def.turnAnimation;
+            int turn = def.getTurnAnimation();
             if (turn < 1) {
                 turn = def.walkAnimation;
             }
             setStandTurnAnimation(turn);
             setWalkAnimation(def.walkAnimation);
             setRunAnimation(def.walkAnimation);
-            if (def.turn180Animation > 0) {
-                setTurn180(def.turn180Animation);
+            if (def.getTurn180Animation() > 0) {
+                setTurn180(def.getTurn180Animation());
             } else {
                 setTurn180(turn);
             }
-            if (def.turnCWAnimation > 0) {
-                setTurn90cw(def.turnCWAnimation);
+            if (def.getTurnCWAnimation() > 0) {
+                setTurn90cw(def.getTurnCWAnimation());
             } else {
                 setTurn90cw(turn);
             }
-            if (def.turnCCWAnimation > 0) {
-                setTurn90ccw(def.turnCCWAnimation);
+            if (def.getTurnCCWAnimation() > 0) {
+                setTurn90ccw(def.getTurnCCWAnimation());
             } else {
                 setTurn90ccw(turn);
             }

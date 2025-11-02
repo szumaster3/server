@@ -37,7 +37,7 @@ class DumpCommand : CommandPlugin() {
         val f = File(System.getProperty("user.dir") + File.separator + "${type}list.txt")
         val writer = f.bufferedWriter()
         when (type) {
-            "item" -> for (i in ItemDefinition.definitions.values) {
+            "item" -> for (i in ItemDefinition.getDefinitions().values) {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
 
@@ -45,7 +45,7 @@ class DumpCommand : CommandPlugin() {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
 
-            "npc" -> for (i in NPCDefinition.definitions.values) {
+            "npc" -> for (i in NPCDefinition.getDefinitions().values) {
                 writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
             }
         }
@@ -93,7 +93,7 @@ class DumpCommand : CommandPlugin() {
         writer.writeLn("</tr>")
 
         when (type) {
-            "item" -> for (i in ItemDefinition.definitions.values) {
+            "item" -> for (i in ItemDefinition.getDefinitions().values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td class=\"item-id\">${i.id}</td>")
@@ -107,7 +107,7 @@ class DumpCommand : CommandPlugin() {
                 writer.writeLn("<td>${i.examine}</td>")
                 writer.writeLn("</tr>")
             }
-            "npc" -> for (i in NPCDefinition.definitions.values) {
+            "npc" -> for (i in NPCDefinition.getDefinitions().values) {
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td class=\"item-id\">${i.id}</td>")

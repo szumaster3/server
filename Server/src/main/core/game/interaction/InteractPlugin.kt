@@ -12,8 +12,8 @@ import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
-import core.net.packet.OutgoingContext.InteractionOptionContext
 import core.net.packet.PacketRepository.send
+import core.net.packet.context.InteractionOptionContext
 import core.net.packet.out.InteractionOption
 import core.tools.Log
 import java.util.*

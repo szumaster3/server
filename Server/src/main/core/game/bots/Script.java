@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a base AI script for automated bot behavior.
+ */
 public abstract class Script {
 
     public ScriptAPI scriptAPI;

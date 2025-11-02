@@ -1,7 +1,6 @@
 package core.game.world.map;
 
 import core.cache.Cache;
-import core.cache.Archive;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
@@ -316,63 +315,49 @@ public class Region {
      */
     public static void load(Region region, boolean build) {
         try {
-            if (region.loaded && region.build == build)
+            if (region.isLoaded() && region.isBuild() == build) {
                 return;
-
+            }
             region.build = build;
-            boolean isDynamic = region instanceof DynamicRegion;
-            int regionId = isDynamic ? ((DynamicRegion) region).getRegionId() : region.getId();
-            int regionX = (regionId >> 8) & 0xFF;
+            boolean dynamic = region instanceof DynamicRegion;
+            int regionId = dynamic ? ((DynamicRegion) region).getRegionId() : region.getId();
+            int regionX = regionId >> 8 & 0xFF;
             int regionY = regionId & 0xFF;
-            String regionName = regionX + "_" + regionY;
+            int mapscapeId = Cache.getIndexes()[5].getArchiveId("m" + regionX + "_" + regionY);
 
-            int mapscapeId = Cache.getArchiveId(Archive.JS5_MAPS, "m" + regionName);
-            if (mapscapeId < 0 && !isDynamic) {
-                region.loaded = true;
+            if (mapscapeId < 0 && !dynamic) {
+                region.setLoaded(true);
                 return;
             }
 
-            byte[][][] mapscapeData = new byte[4][Region.SIZE][Region.SIZE];
-
+            byte[][][] mapscapeData = new byte[4][SIZE][SIZE];
             for (RegionPlane plane : region.planes) {
-                plane.getFlags().setLandscape(new boolean[Region.SIZE][Region.SIZE]);
-                //plane.getFlags().clippingFlags = new int[Region.SIZE][Region.SIZE];
-                //plane.getProjectileFlags().clippingFlags = new int[Region.SIZE][Region.SIZE];
+                plane.getFlags().setLandscape(new boolean[SIZE][SIZE]);
+                //plane.getFlags().setClippingFlags(new int[SIZE][SIZE]);
+                //plane.getProjectileFlags().setClippingFlags(new int[SIZE][SIZE]);
             }
-
             if (mapscapeId > -1) {
-                byte[] mapscapeBytes = Cache.getData(Archive.JS5_MAPS, "m" + regionName);
-                if (mapscapeBytes == null)
-                    return;
-
-                ByteBuffer mapscapeBuffer = ByteBuffer.wrap(mapscapeBytes);
-                MapscapeParser.parse(region, mapscapeData, mapscapeBuffer);
+                ByteBuffer mapscape = ByteBuffer.wrap(Cache.getIndexes()[5].getCacheFile().getContainerUnpackedData(mapscapeId));
+                MapscapeParser.parse(region, mapscapeData, mapscape);
             }
-
-            region.hasFlags = isDynamic;
-            region.loaded = true;
-
-            int landscapeId = Cache.getArchiveId(Archive.JS5_MAPS, "l" + regionName);
+            region.hasFlags = dynamic;
+            region.setLoaded(true);
+            int landscapeId = Cache.getIndexes()[5].getArchiveId("l" + regionX + "_" + regionY);
             if (landscapeId > -1) {
-                byte[] landscapeBytes = Cache.getData(Archive.JS5_MAPS, "l" + regionName,
-                        XteaParser.Companion.getRegionXTEA(regionId));
-
-                if (landscapeBytes == null || landscapeBytes.length < 4)
+                byte[] landscape = Cache.getIndexes()[5].getFileData(landscapeId, 0, XteaParser.Companion.getRegionXTEA(regionId));
+                if (landscape == null || landscape.length < 4) {
                     return;
-
+                }
                 region.hasFlags = true;
                 try {
-                    ByteBuffer landscapeBuffer = ByteBuffer.wrap(landscapeBytes);
-                    LandscapeParser.parse(region, mapscapeData, landscapeBuffer, build);
+                    LandscapeParser.parse(region, mapscapeData, ByteBuffer.wrap(landscape), build);
                 } catch (Throwable t) {
-                    log(Region.class, Log.ERR, "Failed parsing region " + regionId + "!");
+                    new Throwable("Failed parsing region " + regionId + "!", t).printStackTrace();
                 }
             }
-
             MapscapeParser.clipMapscape(region, mapscapeData);
-
         } catch (Throwable e) {
-            log(Region.class, Log.ERR, "Exception while loading region: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -406,8 +391,7 @@ public class Region {
                 }
             }
         }
-        if (r.isBuild())
-            r.setLoaded(false);
+        if (r.isBuild()) r.setLoaded(false);
         r.activityPulse.stop();
         return true;
     }

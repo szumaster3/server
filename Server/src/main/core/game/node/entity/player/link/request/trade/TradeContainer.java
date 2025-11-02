@@ -10,24 +10,23 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
-import core.net.packet.OutgoingContext;
 import core.net.packet.PacketRepository;
+import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
 import static core.api.ContentAPIKt.sendMessage;
 import static core.tools.GlobalsKt.colorize;
 
 /**
- * The type Trade container.
+ * Represents a player's trade container.
  */
 public final class TradeContainer extends Container {
 
     private final Player player;
 
     /**
-     * Instantiates a new Trade container.
-     *
-     * @param player the player
+     * Creates a new trade container for a player.
+     * @param player the owner of this container
      */
     public TradeContainer(final Player player) {
         super(28, ContainerType.DEFAULT, SortType.ID);
@@ -70,10 +69,9 @@ public final class TradeContainer extends Container {
     }
 
     /**
-     * Withdraw.
-     *
-     * @param slot   the slot
-     * @param amount the amount
+     * Withdraws an item from the trade back to inventory.
+     * @param slot the trade slot
+     * @param amount the amount to withdraw
      */
     public void withdraw(final int slot, int amount) {
         Item item = getItem(slot, this);
@@ -193,22 +191,22 @@ public final class TradeContainer extends Container {
     }
 
     /**
-     * The type Trade listener.
+     * Listener for trade container updates.
      */
     public final class TradeListener implements ContainerListener {
 
         @Override
         public void update(Container c, ContainerEvent event) {//type 541 - loaning
-            PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, 64212, 90, c.toArray(), c.capacity(), false));
+            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, 64212, 90, c.toArray(), c.capacity(), false));
             if (TradeModule.getExtension(player) != null && TradeModule.getExtension(TradeModule.getExtension(player).getTarget()) != null) {
-                PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, 60981, -2, 91, TradeModule.getExtension(TradeModule.getExtension(player).getTarget()).getContainer().toArray(), 27, false));
+                PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 60981, -2, 91, TradeModule.getExtension(TradeModule.getExtension(player).getTarget()).getContainer().toArray(), 27, false));
             }
             checkAlert();
         }
 
         @Override
         public void refresh(Container c) {
-            PacketRepository.send(ContainerPacket.class, new OutgoingContext.Container(player, -1, 64209, 93, player.getInventory(), false));
+            PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, 64209, 93, player.getInventory(), false));
         }
 
     }
