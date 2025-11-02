@@ -146,7 +146,7 @@ class ZavisticRarveDialogues : DialogueFile() {
             15 -> npcl(FaceAnim.FRIENDLY, "Ooohh, no thanks required. It's I who should be thanking you my friend...your investigative mind has shown how vigilant we really should be for this type of evil use of the magical arts.").also { stage = 5 }
             16 -> if(!inInventory(player!!, Items.HAND_11763)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage++ }
-            } else if(getVarbit(player!!, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055) == 35) {
+            } else if(hasRequirement(player!!, Quests.BACK_TO_MY_ROOTS, false)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 41 }
             } else if(getAttribute(player!!,GameAttributes.RETURNING_CLARENCE_CHECKPOINT, false)) {
                 npc(FaceAnim.FRIENDLY, "Thank you so much for helping to bring Clarence home", "and lock up his murderer! I only wish we could find", "the rest of him to truly put him to rest.").also { stage = 49 }
@@ -206,7 +206,6 @@ class ZavisticRarveDialogues : DialogueFile() {
             39 -> player!!.dialogueInterpreter.sendItemMessage(Items.HAND_11763, "You hand over the hand and get a weird sense of déja", "vu.").also { stage++ }
             40 -> if(removeItem(player!!, Items.HAND_11763)) {
                 npc("Thank you for helping us, please see if you can find", "any more of him.")
-                setVarbit(player!!, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 35, true)
                 stage = END_DIALOGUE
             } else end()
             41 -> player("I'll see what I can do, I'm sure I saw some other body", "parts somewhere...If I find any I'll give them to you.").also { stage = 5 }
