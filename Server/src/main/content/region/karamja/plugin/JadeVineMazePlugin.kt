@@ -3,12 +3,12 @@ package content.region.karamja.plugin
 import content.data.items.SkillingTool
 import content.global.skill.agility.AgilityHandler
 import core.api.*
+import core.cache.def.impl.VarbitDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.world.GameWorld
 import core.game.world.map.Direction
@@ -17,64 +17,139 @@ import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.*
+import kotlin.math.sqrt
 
+/**
+ * Handles player interactions primarily related to quests in the Jade Vine Maze.
+ *
+ * Quest chronology:
+ * 1. The Hand in the Sand  - prequel quest
+ * 2. Back to my Roots      - main quest
+ * 3. One Foot in the Grave - miniquest / sequel
+ */
 class JadeVineMazePlugin : MapArea, InteractionListener {
 
-    /**
-     * The trees with snakes objects.
-     */
-    private val STRIKE_OBJECTS = mapOf(
-        27089 to listOf(
-            Location.create(2888, 2998),
-            Location.create(2888, 2987),
-            Location.create(2923, 2980),
-            Location.create(2920, 2975)
+    companion object {
+        /**
+         * The tree snake scenery ids.
+         *///https://runescape.wiki/w/Tree_(snake)
+        private val STRIKE_OBJECTS = mapOf(
+            27089 to listOf(
+                Location.create(2888, 2998),
+                Location.create(2888, 2987),
+                Location.create(2923, 2980),
+                Location.create(2920, 2975)
+            )
         )
-    )
 
-    private val CLIMB_UP_DESTINATION = mapOf(
-        2998 to Location.create(2896, 2998, 2),
-        2978 to Location.create(2907, 2978, 2),
-        2975 to Location.create(2917, 2975, 2),
-        2973 to Location.create(2908, 2973, 2)
-    )
+        /**
+         * Maximum distance from the tree at which the snake can strike.
+         */
+        private const val STRIKE_RANGE = 1.0
 
-    private val CLIMB_DOWN_DESTINATION = mapOf(
-        3004 to Location.create(2892, 3004, 2),
-        2990 to Location.create(2900, 2991, 1),
-        2987 to Location.create(2894, 2988, 1),
-        2980 to Location.create(2894, 2979, 1),
-        2982 to Location.create(2894, 2982, 2),
-        2978 to Location.create(2918, 2978, 1),
-        2973 to Location.create(2909, 2973, 1)
-    )
+        /**
+         * The locations for climbing up vines.
+         * - Key: The Y-coordinate of the vine.
+         * - Value: The location player will arrive at when climbing up.
+         */
+        private val CLIMB_UP_DESTINATION = mapOf(
+            2998 to Location.create(2896, 2998, 2),
+            2978 to Location.create(2907, 2978, 2),
+            2975 to Location.create(2917, 2975, 2),
+            2973 to Location.create(2908, 2973, 2)
+        )
+
+        /**
+         * Destination locations for climbing down vines.
+         * - Key: The Y-coordinate of the vine.
+         * - Value: The location player will arrive at when climbing down.
+         */
+        private val CLIMB_DOWN_DESTINATION = mapOf(
+            3004 to Location.create(2892, 3004, 2),
+            2990 to Location.create(2900, 2991, 1),
+            2987 to Location.create(2894, 2988, 1),
+            2980 to Location.create(2894, 2979, 1),
+            2982 to Location.create(2894, 2982, 2),
+            2978 to Location.create(2918, 2978, 1),
+            2973 to Location.create(2909, 2973, 1)
+        )
+
+        /**
+         * The predefinied locations for transport to another random vine
+         * or hole within the maze via Hole (jade vine maze).
+         */// https://runescape.wiki/w/Hole_(jade_vine_maze)
+        private val HOLE_LOCATIONS = arrayOf(
+            Location.create(2883, 2995),
+            Location.create(2896, 2982),
+            Location.create(2897, 2994),
+            Location.create(2905, 2983),
+            Location.create(2908, 2960),
+            Location.create(2909, 2986)
+        )
+
+        /**
+         * Root object locations used in Back to my Roots.
+         */
+        private val ROOTS_LOCATIONS = mapOf(
+            27059 to listOf( // Roots
+                Location.create(2904, 2973),
+                Location.create(2905, 2975),
+                Location.create(2908, 2975),
+                Location.create(2903, 2971),
+                Location.create(2907, 2976)
+            ),
+        )
+    }
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
         return arrayOf(getRegionBorders(Regions.JADE_VINE_MAZE_11566))
     }
 
+    /**
+     * The movement watcher in this area.
+     *
+     * Checks if the player is within striking range of any Tree (snake).
+     * A nearby snake may strike, potentially poisoning the player.
+     */
+    /* Hit chance decreases with Agility (1 = 99% hit, 99 = 0% hit).
+     * ╔═════════╦════════════════╗
+     * ║ Agility ║ chanceToHit (%)║
+     * ╠═════════╬════════════════╣
+     * ║ 1       ║ 98.99          ║
+     * ║ 25      ║ 74.75          ║
+     * ║ 50      ║ 49.49          ║
+     * ║ 75      ║ 24.24          ║
+     * ║ 99      ║ 0              ║
+     * ╚═════════╩════════════════╝
+     */
     override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         super.entityStep(entity, location, lastLocation)
-
         if (entity !is Player) return
-        val p = entity
+        val player = entity
         val delay = "jade_vine_maze:strike_delay"
-        if (p.getAttribute(delay, -1) > GameWorld.ticks) return
-        for ((_, locations) in STRIKE_OBJECTS) {
-            if (locations.any { it.x == location.x && it.y == location.y && it.z == location.z }) {
+        if (getAttribute(player, delay, -1) > GameWorld.ticks) return
+        for ((_, locations) in STRIKE_OBJECTS)
+        {
+            for (treeLocation in locations)
+            {
+                val dx = (player.location.x - treeLocation.x).toDouble()
+                val dy = (player.location.y - treeLocation.y).toDouble()
+                val distance = sqrt(dx * dx + dy * dy)
 
-                val agility = p.getSkills().getStaticLevel(Skills.AGILITY)
-                val roll = (agility / 99.0 * 100).toInt()
-                val success = !RandomFunction.roll(roll)
-
-                if (success) {
-                    applyPoison(p, p, 6)
-                } else {
-                    p.sendMessage("Your Agility enables you to evade the snike strike.")
+                if (distance <= STRIKE_RANGE)
+                {
+                    val agility = getDynLevel(player, Skills.AGILITY)
+                    val chance = ((99 - agility).toDouble() / 99) * 100
+                    val roll = Math.random() * 100
+                    if (roll < chance) {
+                        applyPoison(player, player, 6)
+                        sendMessage(player, "The snake strikes and poisons you!")
+                    } else {
+                        sendMessage(player, "Your Agility enables you to evade the snake strike.")
+                    }
+                    setAttribute(player, delay, GameWorld.ticks + 3)
+                    break
                 }
-
-                p.setAttribute(delay, GameWorld.ticks + 3)
-                break
             }
         }
     }
@@ -85,8 +160,12 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
          * Handles enter to vine maze.
          */
 
-        on(Scenery.VINE_27126, IntType.SCENERY, "climb-up") { player, _ ->
-            forceMove(player, player.location, Location.create(2888, 3005, 1), 0, 60, null)
+        on(Scenery.VINE_27126, IntType.SCENERY, "climb-up") { player, node ->
+            when(node.location.y) {
+                2987 -> forceMove(player, player.location, Location.create(2885, 2987, 1), 0, 60, null, 3599)
+                else -> forceMove(player, player.location, Location.create(2888, 3005, 1), 0, 60, null)
+
+            }
             return@on true
         }
 
@@ -107,10 +186,11 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
             return@on true
         }
 
-        on(Scenery.VINE_27128, IntType.SCENERY, "climb-up") { player, node ->
+        on(Scenery.VINE_27128, IntType.SCENERY, "climb-up") { player, _ ->
             when(player.location.y) {
-                2988 -> forceMove(player, player.location, Location.create(2895, 2988, 1), 0, 60, null, 3599)
-                else -> forceMove(player, player.location, Location.create(2891, 3000, 1), 0, 60, null, 3599)
+                2988 -> forceMove(player, player.location, Location.create(2895, 2988, 1), 0, 60, null, 819)
+                2993 -> forceMove(player, player.location, Location.create(2898, 2994, 1), 0, 60, null, 819)
+                else -> forceMove(player, player.location, Location.create(2891, 3000, 1), 0, 60, null, 819)
             }
             return@on true
         }
@@ -123,6 +203,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         on(Scenery.VINE_27130, IntType.SCENERY, "climb-down") { player, node ->
             when(node.location.y) {
+                3006 -> forceMove(player, player.location, Location.create(2888, 3007, 0), 0, 30, null, Animations.JUMP_OVER_7268)
                 3000 -> forceMove(player, player.location, Location.create(2889, 3000, 0), 0, 30, null, Animations.JUMP_OVER_7268)
                 2988 -> forceMove(player, player.location, Location.create(2897, 2988, 0), 0, 30, null, Animations.JUMP_OVER_7268)
                 else -> forceMove(player, player.location, Location.create(2898, 2992, 0), 0, 30, null, Animations.JUMP_OVER_7268)
@@ -167,13 +248,12 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         /*
          * Handles swing on the vine.
-         * TODO: GFX
          */
 
         on(Scenery.VINE_27180, IntType.SCENERY, "swing-on") { player, _ ->
             lock(player, 3)
             playAudio(player, Sounds.SWING_ACROSS_2494)
-            forceMove(player, player.location, Location.create(2901, 2985, 2), 30, 120, null, Animations.ROPE_SWING_751) {
+            forceMove(player, player.location, Location.create(2901, 2985, 2), 30, 90, null, Animations.SWING_ACROSS_OBSTACLE_3130) {
                 sendMessage(player, "You skillfully swing across.")
             }
             return@on true
@@ -190,44 +270,13 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
             lock(player, 8)
             if (!fail) {
-                AgilityHandler.walk(
-                    player,
-                    -1,
-                    player.location,
-                    destination,
-                    Animation.create(762),
-                    0.0,
-                    "You skillfully cross the vine."
-                )
+                AgilityHandler.walk(player, -1, player.location, destination, Animation.create(762), 0.0, "You skillfully cross the vine.")
             } else {
-                AgilityHandler.walk(
-                    player,
-                    -1,
-                    player.location,
-                    destination,
-                    Animation.create(762),
-                    0.0,
-                    null
-                )
-                AgilityHandler.fail(
-                    player,
-                    0,
-                    Location.create(2913, 2979, 0),
-                    Animation.create(Animations.FALL_BALANCE_764),
-                    0,
-                    "You lose your footing and fall into the water."
-                )
+                AgilityHandler.walk(player, -1, player.location, destination, Animation.create(762), 0.0, null)
+                AgilityHandler.fail(player, 0, Location.create(2913, 2979, 0), Animation.create(Animations.FALL_BALANCE_764), 0, "You lose your footing and fall into the water.")
                 runTask(player, 3) {
-                    player.animate(Animation.create(765))
-                    forceMove(
-                        player,
-                        player.location,
-                        Location.create(2912, 2980, 0),
-                        0,
-                        90,
-                        null,
-                        Animations.CLIMB_UP_OUT_OF_WATER_7273
-                    ) {
+                    player.animate(Animation.create(Animations.DROWN_765))
+                    forceMove(player, player.location, Location.create(2912, 2980, 0), 0, 90, null, Animations.CLIMB_UP_OUT_OF_WATER_7273) {
                         sendMessage(player, "You scramble out of the water before the crocodiles take an interest.")
                     }
                 }
@@ -237,17 +286,12 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         }
 
         /*
-         * Handles shortcut to waterfall.
-         * TODO: Animation + Map other locations.
+         * Handles travel through jade vine maze.
          */
 
-        on(Scenery.HOLE_27186, IntType.SCENERY, "enter") { player, node ->
-            if(node.location.x == 2908 && node.location.y == 2960) {
-                teleport(player, Location.create(2909, 2985, 0), TeleportManager.TeleportType.INSTANT)
-            }
-            if(node.location.x == 2909 && node.location.y == 2986) {
-                teleport(player, Location.create(2908, 2961, 0), TeleportManager.TeleportType.INSTANT)
-            }
+        on(Scenery.HOLE_27186, IntType.SCENERY, "enter") { player, _ ->
+            val randomTravelLocation = HOLE_LOCATIONS.random()
+            player.teleport(randomTravelLocation)
             return@on true
         }
 
@@ -268,6 +312,55 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         on(Scenery.VINE_27181, IntType.SCENERY, "enter") { player, _ ->
             player.animate(Animation(832))
             player.teleport(Location.create(2908, 2964, 0), 1)
+            return@on true
+        }
+
+        /*
+         * Handles player interaction with Loose Soil in the "Back to my Roots" quest.
+         *
+         * TODO:
+         *  - If a root cutting does not grow, the player should be able to dig it up
+         *    and plant another cutting in a different soil spot.
+         *
+         *    Varbits:
+         *    - DIG interaction: 4058
+         *    - CUT interaction: 4059
+         *    - 4060 (1) (for items 11770 & soil spots)
+         *    - 4061 (2) (for items 11771 & soil spots)
+         *    - 4062 (3) (for items 11772 & soil spots)
+         *    - 4063 (4) (for items 11773 & soil spots)
+         *    - 4064 (5) (for items 11774 & soil spots)
+         *
+         *   These likely determine the chance that a root cutting will fail
+         *   when planted in a pot.
+         */
+        on(27194, /*(WRAPPER)*/ IntType.SCENERY, "dig", "cut") { player, node ->
+            val opt = getUsedOption(player)
+            if(opt == "dig" && !inInventory(player, Items.SPADE_952)) {
+                sendMessage(player, "You need a spade to do that.")
+                return@on false
+            }
+
+            val varbit = VarbitDefinition.forSceneryId(27058)//27194
+            setVarbit(player, varbit, 1, true)
+            if(opt == "cut" && inInventory(player, Items.PLANT_POT_5357)) {
+                player.animate(Animation(2291))
+                player.dialogueInterpreter.sendItemMessage(
+                    Items.POTTED_ROOT_11776,
+                    "You carefully plant the cutting in the pot. Now to wait",
+                    "and see if it grows!"
+                )
+                runTask(player, 3) {
+                    val rand = RandomFunction.random(4060, 4064)
+                    if(rand == varbit.varpId) {
+                        sendDialogue(player, "Your cutting seems to have taken successfully.")
+                        addItem(player, Items.ROOT_CUTTING_11770)
+                        setVarbit(player, varbit, 2, true)
+                    } else {
+                        addItem(player, Items.WILTED_CUTTING_11775)
+                    }
+                }
+            }
             return@on true
         }
     }
