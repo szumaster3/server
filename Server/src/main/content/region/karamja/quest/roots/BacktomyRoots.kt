@@ -1,0 +1,110 @@
+package content.region.karamja.quest.roots
+
+import shared.consts.Vars
+import core.api.*
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
+import shared.consts.Items
+import shared.consts.Quests
+
+@Initializable
+class BacktomyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 0, 1, 65) {
+
+    override fun drawJournal(player: Player, stage: Int) {
+        super.drawJournal(player, stage)
+        var line = 11
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to !!Horacio?? in !!East??", line++, false)
+            line(player, "!!Ardougne?? in the !!Handelmort Mansion?? garden.", line++, false)
+            line(player, "Before I begin I will need to:", line++, false)
+            line(player, if (hasLevelStat(player, Skills.WOODCUTTING, 72)) "---Have at least level 72 Woodcutting./--" else "!!Have at least level 72 Woodcutting.??", line++)
+            line(player, if (hasLevelStat(player, Skills.FIREMAKING, 53)) "---Have at least level 53 Firemaking./--" else "!!Have at least level 53 Firemaking.??", line++)
+            line(player, if (hasLevelStat(player, Skills.SLAYER, 59)) "---Have at least level 59 Slayer./--" else "!!Have at least level 59 Slayer.??", line++)
+            line(player, if (hasLevelStat(player, Skills.AGILITY, 55)) "---Have at least level 55 Agility./--" else "!!Have at least 55 Agility.??", line++)
+            line++
+            line(player, "I also need to have completed:", line++, false)
+            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", line++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR))
+            line(player, "!!${Quests.TRIBAL_TOTEM}??.", line++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
+            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, hasRequirement(player, Quests.THE_HAND_IN_THE_SAND))
+            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", line++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS))
+            line++
+        }
+
+        if (stage == 1) {
+            line(player, "I have spoken to Wizard Cromperty and found out about", line++, false)
+            line(player, "his missing parcel.", line++, false)
+
+            line(player, "I have spoken to an R.P.D.T. worker.", line++, false)
+
+            line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", line++, false)
+            line(player, "I also acquired a severed wizards hand.", line++, false)
+
+            line(player, "I found out about Wizard Cromperty's special", line++, false)
+            line(player, "preservation magic - !!a sealed pot??.", line++, false)
+
+            line(player, "I have spoken to Garth the farmer about root", line++, false)
+            line(player, "cuttings and getting to the roots of the !!Jade Vine??", line++, false)
+            line(player, "which is located east of !!Shilo Village??.", line++, false)
+
+            line(player, "My potted cutting took successfully and I", line++, false)
+            line(player, "sealed it in the airtight pot.", line++, false)
+
+            line(player, "I returned the cutting to Horacio.", line++, false)
+            line(player, "I agreed to grow the cutting for Horacio in the prepared patch", line++, false)
+            line(player, "at Handelmort Mansion.", line++, false)
+
+            line(player, "Horacio asked me to kill the wild vine.", line++, false)
+
+            line(player, "I have found out how to care for my own Jade Vine.", line++, false)
+
+            line(player, "I can now grow my own Jade Vine in the patch", line++, false)
+            line(player, "outside Handelmort Mansion in East Ardougne.", line++, false)
+            line(player, "If I ever lose the seed or need help with it, Horacio will help.", line++, false)
+            line++
+        }
+
+        if (stage == 100) {
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+        }
+    }
+
+    override fun finish(player: Player) {
+        super.finish(player)
+        var ln = 10
+        // 16.01.2009
+        displayQuestItem(player, Items.JADE_VINE_SEED_11778)
+        drawReward(player, "1 Quest Point", ln++)
+        drawReward(player, "24K Farming XP", ln++)
+        drawReward(player, "40K Woodcutting XP", ln++)
+        drawReward(player, "23K Slayer XP", ln++)
+        drawReward(player, "15K Agility XP", ln++)
+        drawReward(player, "New vine Farming patch", ln++)
+        drawReward(player, "Jade vine seed", ln)
+        rewardXP(player, Skills.FIREMAKING, 24000.0)
+        rewardXP(player, Skills.WOODCUTTING, 40000.0)
+        rewardXP(player, Skills.SLAYER, 15000.0)
+        rewardXP(player, Skills.AGILITY, 15000.0)
+        setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 65, true)
+        addItemOrDrop(player, Items.JADE_VINE_SEED_11778)
+    }
+
+
+    override fun newInstance(`object`: Any?): Quest {
+        return this
+    }
+
+}
+//1 quest point
+//24,000 Farming experience
+//40,000 Woodcutting experience
+//23,000 Slayer experience
+//15,000 Agility experience
+//Vine Farming Patch in East Ardougne
+//Jade vine seed
+//Access to jade vine maze and ability to kill giant ant soldiers, giant ant workers, tenacious toucans, giant wasps, frogs and pernicious parrots within it.
+//Transportation between Eagles' Peak and Karamja using the Karamjan Jungle eagle.
+//Ability to slay the wild jade vine for extra Slayer and Farming experience once every 15 hours.
+//2 Treasure Hunter keys (Ironman accounts will not receive these)
