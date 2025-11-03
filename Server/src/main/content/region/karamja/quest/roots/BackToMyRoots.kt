@@ -37,33 +37,43 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
         if (stage == 2) {
             line(player, "I have spoken to Wizard Cromperty and found out about", line++, true)
             line(player, "his missing parcel.", line++, true)
+            line++
         }
         if (stage == 3) {
-            line(player, "I have spoken to an R.P.D.T. worker.", line++, false)
+            line(player, "I have spoken to an R.P.D.T. worker.", line++, true)
+            line++
         }
 
         if (stage == 4) {
-            line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", line++, false)
-            line(player, "I also acquired a severed wizards hand.", line++, false)
+            line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", line++, true)
+            line(player, "I also acquired a severed wizards hand.", line++, true)
+            line++
+            line(player, "I found out about Wizard Cromperty's special", line++, true)
+            line(player, "preservation magic - !!a sealed pot??.", line++, true)
+            line++
+        }
 
-            line(player, "I found out about Wizard Cromperty's special", line++, false)
-            line(player, "preservation magic - !!a sealed pot??.", line++, false)
+        if(stage == 6) {
+            line(player, "I have spoken to Garth the farmer about root", line++, true)
+            line(player, "cuttings and getting to the roots of the !!Jade Vine??", line++, true)
+            line(player, "which is located east of !!Shilo Village??.", line++, true)
+            line++
+        }
 
-            line(player, "I have spoken to Garth the farmer about root", line++, false)
-            line(player, "cuttings and getting to the roots of the !!Jade Vine??", line++, false)
-            line(player, "which is located east of !!Shilo Village??.", line++, false)
-
+        if(stage == 7) {
             line(player, "My potted cutting took successfully and I", line++, false)
             line(player, "sealed it in the airtight pot.", line++, false)
+            line++
+        }
 
+        if(stage == 8) {
             line(player, "I returned the cutting to Horacio.", line++, false)
             line(player, "I agreed to grow the cutting for Horacio in the prepared patch", line++, false)
             line(player, "at Handelmort Mansion.", line++, false)
-
+            line++
             line(player, "Horacio asked me to kill the wild vine.", line++, false)
-
             line(player, "I have found out how to care for my own Jade Vine.", line++, false)
-
+            line++
             line(player, "I can now grow my own Jade Vine in the patch", line++, false)
             line(player, "outside Handelmort Mansion in East Ardougne.", line++, false)
             line(player, "If I ever lose the seed or need help with it, Horacio will help.", line++, false)
@@ -72,7 +82,7 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
 
         if (stage == 100) {
             line++
-            line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line, false)
         }
     }
 

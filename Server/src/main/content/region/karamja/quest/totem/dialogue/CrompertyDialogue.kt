@@ -3,8 +3,10 @@ package content.region.karamja.quest.totem.dialogue
 import content.global.travel.EssenceTeleport
 import core.api.*
 import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
+import core.game.interaction.QueueStrength
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -15,6 +17,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.*
 
 @Initializable
@@ -97,7 +100,15 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
                 questTeleport(player, npc)
                 end()
             }
-            27 -> player(FaceAnim.HALF_ASKING, "Horacio tells me that you may have something that", "could help me preserve a vine cutting?").also { stage++ }
+            27 -> if(getQuestStage(player, Quests.BACK_TO_MY_ROOTS) == 4) {
+                if(!inInventory(player, Items.POT_LID_4440)) {
+                    npc("Have you made the pot lid yet?").also { stage = 41 }
+                } else {
+                    npcl(FaceAnim.FRIENDLY, "Ah, brilliant, I see you have completed a fine work of art.").also { stage = 45 }
+                }
+            } else {
+                player(FaceAnim.HALF_ASKING, "Horacio tells me that you may have something that", "could help me preserve a vine cutting?").also { stage++ }
+            }
             28 -> npc(FaceAnim.FRIENDLY, "Ah yes, my very latest invention, but it's still in", "experimental stages at the moment, and quite fragile.").also { stage++ }
             29 -> player(FaceAnim.HALF_ASKING, "So what is it and can I have one?").also { stage++ }
             30 -> npc(FaceAnim.FRIENDLY, "Oh, can't possibly let you have one I'm afraid. All top", "secret and hush-hush.").also { stage++ }
@@ -119,14 +130,38 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 this.npc.teleporter.send(Location.create(2683, 3326, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                 if(player.location == Location.create(2683, 3326, 0)) player.moveStep()
-                // Package opened by NPC.
-                npc.sendChat("Now, let's see what we have here...", 3)
-                npc.animate(Animation(-1))// TODO
-                setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 25)
+                queueScript(player, 3,QueueStrength.SOFT) {
+                    npc.faceLocation(Location.create(2683, 3325, 0))
+                    npc.sendChat("Now, let's see what we have here...", 1)
+                    npc.animate(Animation(11141)) // TODO
+                    setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 25)
+                    this.npc.teleporter.send(Location.create(2683, 3327, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD).also {
+                        openDialogue(player, WizardCrompertyDialogue())
+
+                    }
+                }
+
             }
 
-            41 -> {}
-
+            41 -> playerl(FaceAnim.FRIENDLY, "Not yet, no.").also { stage++ }
+            42 -> npcl(FaceAnim.HALF_ASKING, "Well, get cracking then!").also { stage++ }
+            43 -> playerl(FaceAnim.FRIENDLY, "I thought you wanted a whole pot lid?").also { stage++ }
+            44 -> npcl(FaceAnim.HALF_ASKING, "...!").also { stage = END_DIALOGUE }
+            45 -> playerl(FaceAnim.FRIENDLY, "It's a pot lid.").also { stage++ }
+            46 -> npcl(FaceAnim.FRIENDLY, "Yes, yes, it is, I hope it fits your pot okay - you do have a pot to go with it, right? You'll need both the pot and the lid to preserve the cutting, and make sure the seal is nice and tight. Now, to find out more about how").also { stage++ }
+            47 -> npcl(FaceAnim.FRIENDLY, "to take the cuttings, Horacio tells me to tell you that... err... or is that the other way around?").also { stage++ }
+            48 -> playerl(FaceAnim.FRIENDLY, "Just tell me what Horacio said.").also { stage++ }
+            49 -> npcl(FaceAnim.FRIENDLY, "I think it was that you were to talk to a nice man called Garth.").also { stage++ }
+            50 -> playerl(FaceAnim.FRIENDLY, "Well, that really helps... Runescape's not exactly small, you know.").also { stage++ }
+            51 -> npcl(FaceAnim.FRIENDLY, "Erm. Oh, I think he said something about a jungle and that Garth was a farmer.").also { stage++ }
+            52 -> playerl(FaceAnim.FRIENDLY, "Ahh, that Garth, on Karamja. Right, I'll go see him then.").also { stage++ }
+            53 -> npcl(FaceAnim.FRIENDLY, "Would you like me to telep-").also { stage++ }
+            54 -> playerl(FaceAnim.SCARED, "No! I'll walk, thanks!").also { stage++ }
+            55 -> npcl(FaceAnim.THINKING, "You can walk on water? How impressive... I'll want to talk to you about that sometime. Perhaps I could manipulate the molecules and make them somehow get friendlier and then I could...").also {
+                sendDialogueLines(player, "You think it best to depart before Wizard Cromperty thinks up", "anymore inventions.")
+                setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 5)
+                stage = END_DIALOGUE
+            }
             1000 -> end()
         }
         return true
@@ -174,5 +209,27 @@ class CrompertyDialogue(player: Player? = null) : Dialogue(player) {
                 }
             },
         )
+    }
+}
+
+private class WizardCrompertyDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        npc = NPC(844)
+        when(stage) {
+            0 -> npc(FaceAnim.NEUTRAL, "Argh! My specialist equipment is broken. Those", "bumbling idiots at the R.P.D.T. have messed up a", "simple job again!").also { stage++ }
+            1 -> playerl(FaceAnim.FRIENDLY, "It's a pot lid.").also { stage++ }
+            2 -> npcl(FaceAnim.HALF_ASKING, "WHAT? I'll have you know this is specialist magical equipment.").also { stage++ }
+            3 -> playerl(FaceAnim.FRIENDLY, "It's still a pot lid.").also { stage++ }
+            4 -> npcl(FaceAnim.HALF_ASKING, "Are you implying that I'm lying, young man/woman?").also { stage++ }
+            5 -> playerl(FaceAnim.FRIENDLY, "No, not at all, sir... *whispers* I'm implying you're a bit potty.").also { stage++ }
+            6 -> npcl(FaceAnim.HALF_ASKING, "I heard that... I will need a new one, do you think you can make it?").also { stage++ }
+            7 -> playerl(FaceAnim.FRIENDLY, "Some people make pottery to earn a living, but not me: I just run errands for potty wizards...").also { stage++ }
+            8 -> npcl(FaceAnim.HALF_ASKING, "Why, you young whippersnapper! Don't you know that only foolish potters make wisecracks?").also { stage++ }
+            9 -> playerl(FaceAnim.FRIENDLY, "Okay, okay, I'll make your pot lid.").also {
+                setQuestStage(player!!, Quests.BACK_TO_MY_ROOTS, 4)
+                setVarbit(player!!, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 30, true)
+                stage = END_DIALOGUE
+            }
+        }
     }
 }

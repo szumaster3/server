@@ -1,9 +1,6 @@
-package content.region.karamja.plugin
+package content.region.karamja.npc
 
-import content.data.GameAttributes
-import core.api.getAttribute
 import core.api.hasRequirement
-import core.api.isQuestComplete
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior

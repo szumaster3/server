@@ -189,7 +189,7 @@ class CreatureCreationPlugin : InteractionListener {
         sendNPCDialogue(player, NPCs.HOMUNCULUS_5581, "You have the materials needed. Here goes!", FaceAnim.OLD_NORMAL)
         addDialogueAction(player) { _, button ->
             if (button >= 5) {
-                replaceScenery(node.asScenery(), node.id + 1, 3)
+                animateScenery(node.asScenery(), 5844)
                 spawnCreature(player, symbol)
                 symbol.materials.forEach { removeAttributes(player, "${symbol.name}:$it") }
             } else {

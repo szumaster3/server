@@ -6,6 +6,7 @@ import core.api.*
 import core.cache.def.impl.VarbitDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.Player
@@ -99,6 +100,14 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
                 Location.create(2907, 2976)
             ),
         )
+
+        private val ROOT_CUTTINGS = intArrayOf(
+            Items.ROOT_CUTTING_11770,
+            Items.ROOT_CUTTING_11771,
+            Items.ROOT_CUTTING_11772,
+            Items.ROOT_CUTTING_11773,
+            Items.ROOT_CUTTING_11774,
+        )
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
@@ -161,7 +170,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
          */
 
         on(Scenery.VINE_27126, IntType.SCENERY, "climb-up") { player, node ->
-            when(node.location.y) {
+            when (node.location.y) {
                 2987 -> forceMove(player, player.location, Location.create(2885, 2987, 1), 0, 60, null, 3599)
                 else -> forceMove(player, player.location, Location.create(2888, 3005, 1), 0, 60, null)
 
@@ -170,9 +179,17 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         }
 
         on(Scenery.VINE_27151, IntType.SCENERY, "climb-up") { player, node ->
-            when(node.location.y) {
+            when (node.location.y) {
                 2982 -> forceMove(player, player.location, Location.create(2892, 2982, 3), 0, 60, null, 3599)
-                2987 -> forceMove(player, player.location, Location.create(2894, 2987, 2), 0, 60, null, 3599).also { player.moveStep() }
+                2987 -> forceMove(
+                    player,
+                    player.location,
+                    Location.create(2894, 2987, 2),
+                    0,
+                    60,
+                    null,
+                    3599
+                ).also { player.moveStep() }
             }
             return@on true
         }
@@ -187,7 +204,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         }
 
         on(Scenery.VINE_27128, IntType.SCENERY, "climb-up") { player, _ ->
-            when(player.location.y) {
+            when (player.location.y) {
                 2988 -> forceMove(player, player.location, Location.create(2895, 2988, 1), 0, 60, null, 819)
                 2993 -> forceMove(player, player.location, Location.create(2898, 2994, 1), 0, 60, null, 819)
                 else -> forceMove(player, player.location, Location.create(2891, 3000, 1), 0, 60, null, 819)
@@ -202,11 +219,46 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         }
 
         on(Scenery.VINE_27130, IntType.SCENERY, "climb-down") { player, node ->
-            when(node.location.y) {
-                3006 -> forceMove(player, player.location, Location.create(2888, 3007, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                3000 -> forceMove(player, player.location, Location.create(2889, 3000, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                2988 -> forceMove(player, player.location, Location.create(2897, 2988, 0), 0, 30, null, Animations.JUMP_OVER_7268)
-                else -> forceMove(player, player.location, Location.create(2898, 2992, 0), 0, 30, null, Animations.JUMP_OVER_7268)
+            when (node.location.y) {
+                3006 -> forceMove(
+                    player,
+                    player.location,
+                    Location.create(2888, 3007, 0),
+                    0,
+                    30,
+                    null,
+                    Animations.JUMP_OVER_7268
+                )
+
+                3000 -> forceMove(
+                    player,
+                    player.location,
+                    Location.create(2889, 3000, 0),
+                    0,
+                    30,
+                    null,
+                    Animations.JUMP_OVER_7268
+                )
+
+                2988 -> forceMove(
+                    player,
+                    player.location,
+                    Location.create(2897, 2988, 0),
+                    0,
+                    30,
+                    null,
+                    Animations.JUMP_OVER_7268
+                )
+
+                else -> forceMove(
+                    player,
+                    player.location,
+                    Location.create(2898, 2992, 0),
+                    0,
+                    30,
+                    null,
+                    Animations.JUMP_OVER_7268
+                )
             }
             return@on true
         }
@@ -253,7 +305,15 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         on(Scenery.VINE_27180, IntType.SCENERY, "swing-on") { player, _ ->
             lock(player, 3)
             playAudio(player, Sounds.SWING_ACROSS_2494)
-            forceMove(player, player.location, Location.create(2901, 2985, 2), 30, 90, null, Animations.SWING_ACROSS_OBSTACLE_3130) {
+            forceMove(
+                player,
+                player.location,
+                Location.create(2901, 2985, 2),
+                30,
+                90,
+                null,
+                Animations.SWING_ACROSS_OBSTACLE_3130
+            ) {
                 sendMessage(player, "You skillfully swing across.")
             }
             return@on true
@@ -270,13 +330,36 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
             lock(player, 8)
             if (!fail) {
-                AgilityHandler.walk(player, -1, player.location, destination, Animation.create(762), 0.0, "You skillfully cross the vine.")
+                AgilityHandler.walk(
+                    player,
+                    -1,
+                    player.location,
+                    destination,
+                    Animation.create(762),
+                    0.0,
+                    "You skillfully cross the vine."
+                )
             } else {
                 AgilityHandler.walk(player, -1, player.location, destination, Animation.create(762), 0.0, null)
-                AgilityHandler.fail(player, 0, Location.create(2913, 2979, 0), Animation.create(Animations.FALL_BALANCE_764), 0, "You lose your footing and fall into the water.")
+                AgilityHandler.fail(
+                    player,
+                    0,
+                    Location.create(2913, 2979, 0),
+                    Animation.create(Animations.FALL_BALANCE_764),
+                    0,
+                    "You lose your footing and fall into the water."
+                )
                 runTask(player, 3) {
                     player.animate(Animation.create(Animations.DROWN_765))
-                    forceMove(player, player.location, Location.create(2912, 2980, 0), 0, 90, null, Animations.CLIMB_UP_OUT_OF_WATER_7273) {
+                    forceMove(
+                        player,
+                        player.location,
+                        Location.create(2912, 2980, 0),
+                        0,
+                        90,
+                        null,
+                        Animations.CLIMB_UP_OUT_OF_WATER_7273
+                    ) {
                         sendMessage(player, "You scramble out of the water before the crocodiles take an interest.")
                     }
                 }
@@ -317,51 +400,73 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
 
         /*
          * Handles player interaction with Loose Soil in the "Back to my Roots" quest.
-         *
-         * TODO:
-         *  - If a root cutting does not grow, the player should be able to dig it up
-         *    and plant another cutting in a different soil spot.
-         *
-         *    Varbits:
-         *    - DIG interaction: 4058
-         *    - CUT interaction: 4059
-         *    - 4060 (1) (for items 11770 & soil spots)
-         *    - 4061 (2) (for items 11771 & soil spots)
-         *    - 4062 (3) (for items 11772 & soil spots)
-         *    - 4063 (4) (for items 11773 & soil spots)
-         *    - 4064 (5) (for items 11774 & soil spots)
-         *
-         *   These likely determine the chance that a root cutting will fail
-         *   when planted in a pot.
          */
-        on(27194, /*(WRAPPER)*/ IntType.SCENERY, "dig", "cut") { player, node ->
-            val opt = getUsedOption(player)
-            if(opt == "dig" && !inInventory(player, Items.SPADE_952)) {
-                sendMessage(player, "You need a spade to do that.")
-                return@on false
-            }
 
-            val varbit = VarbitDefinition.forSceneryId(27058)//27194
-            setVarbit(player, varbit, 1, true)
-            if(opt == "cut" && inInventory(player, Items.PLANT_POT_5357)) {
-                player.animate(Animation(2291))
+        on(27194, IntType.SCENERY, "dig", "cut") { player, _ ->
+            val opt = getUsedOption(player)
+            if (opt == "dig") {
+                if (!inInventory(player, Items.SPADE_952)) {
+                    sendDialogue(player, "You need a spade to do that.")
+                } else {
+                    sendDialogue(player, "You dig at the soil and expose the Vine's root.")
+                }
+            }
+            if (opt == "cut" && inInventory(player, Items.TROWEL_676)) {
+                player.animate(Animation(Animations.GARDENING_TROWEL_2272))
+                sendDialogue(player, "You carefully take a root cutting.")
+                addItem(player, Items.ROOT_CUTTING_11770)
+            }
+            return@on true
+        }
+
+        /*
+         * Handles getting potted root.
+         */
+
+        onUseWith(IntType.ITEM, ROOT_CUTTINGS, Items.PLANT_POT_5357) { player, used, with ->
+            if (removeItem(player, used.id) && removeItem(player, with.id)) {
                 player.dialogueInterpreter.sendItemMessage(
                     Items.POTTED_ROOT_11776,
                     "You carefully plant the cutting in the pot. Now to wait",
                     "and see if it grows!"
                 )
-                runTask(player, 3) {
-                    val rand = RandomFunction.random(4060, 4064)
-                    if(rand == varbit.varpId) {
-                        sendDialogue(player, "Your cutting seems to have taken successfully.")
-                        addItem(player, Items.ROOT_CUTTING_11770)
-                        setVarbit(player, varbit, 2, true)
-                    } else {
-                        addItem(player, Items.WILTED_CUTTING_11775)
-                    }
-                }
+                addItem(player, Items.POTTED_ROOT_11776, 1)
             }
-            return@on true
+
+            queueScript(player, 3, QueueStrength.SOFT) {
+                val rand = RandomFunction.random(4060, 4064)
+                if (rand == 4062) {
+                    sendDialogue(player, "Your cutting seems to have taken successfully.")
+                    setVarbit(player, 4062, 2)
+                } else {
+                    removeItem(player, Items.POTTED_ROOT_11776)
+                    sendDialogueLines(
+                        player,
+                        "The cutting fails to take properly and wilts. You remove it from the",
+                        "plant pot"
+                    )
+                    addItem(player, Items.PLANT_POT_5357)
+                    addItem(player, Items.WILTED_CUTTING_11775)
+                }
+                return@queueScript stopExecuting(player)
+            }
+            return@onUseWith true
+        }
+
+        /*
+         * Handles creating sealed pot?
+         */
+
+        onUseWith(IntType.ITEM, Items.POTTED_ROOT_11776, Items.POT_LID_4440) { player, used, with ->
+            if (getVarbit(player, 4062) != 2 || getQuestStage(player, Quests.BACK_TO_MY_ROOTS) < 6) {
+                return@onUseWith false
+            }
+
+            removeItem(player, used.asItem())
+            removeItem(player, with.asItem())
+            addItemOrDrop(player, Items.SEALED_POT_11777)
+            setVarbit(player, 4062, 3)
+            return@onUseWith true
         }
     }
 
