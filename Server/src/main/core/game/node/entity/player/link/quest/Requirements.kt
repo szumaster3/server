@@ -759,6 +759,7 @@ enum class QuestRequirements(
         QuestReq(FAVOR),
         QuestReq(TOTEM),
         QuestReq(SAND),
+        QuestReq(FAIRYTALE_1),
         SkillReq(Skills.WOODCUTTING, 72, true),
         SkillReq(Skills.FIREMAKING, 53),
         SkillReq(Skills.SLAYER, 59),

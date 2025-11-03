@@ -58577,5 +58577,17 @@
   {
     "ids": "27089",
     "examine": "A snake in a tree."
+  },
+  {
+    "ids": "27054,27055",
+    "examine": "A smelly package."
+  },
+  {
+    "ids": "27056",
+    "examine": "A table."
+  },
+  {
+    "ids": "27057",
+    "examine": "The opened package."
   }
 ]

@@ -10,11 +10,13 @@ import shared.consts.Items
 import shared.consts.Quests
 
 @Initializable
-class BacktomyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 0, 1, 65) {
+class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 0, 1, 65) {
+
+    private val requirements = BooleanArray(8)
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
-        var line = 11
+        var line = 12
         if (stage == 0) {
             line(player, "I can start this quest by speaking to !!Horacio?? in !!East??", line++, false)
             line(player, "!!Ardougne?? in the !!Handelmort Mansion?? garden.", line++, false)
@@ -25,19 +27,22 @@ class BacktomyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
             line(player, if (hasLevelStat(player, Skills.AGILITY, 55)) "---Have at least level 55 Agility./--" else "!!Have at least 55 Agility.??", line++)
             line++
             line(player, "I also need to have completed:", line++, false)
-            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", line++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR))
+            line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", line++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false))
             line(player, "!!${Quests.TRIBAL_TOTEM}??.", line++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
-            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, hasRequirement(player, Quests.THE_HAND_IN_THE_SAND))
-            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", line++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS))
+            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false))
+            line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", line++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false))
             line++
         }
 
-        if (stage == 1) {
-            line(player, "I have spoken to Wizard Cromperty and found out about", line++, false)
-            line(player, "his missing parcel.", line++, false)
-
+        if (stage == 2) {
+            line(player, "I have spoken to Wizard Cromperty and found out about", line++, true)
+            line(player, "his missing parcel.", line++, true)
+        }
+        if (stage == 3) {
             line(player, "I have spoken to an R.P.D.T. worker.", line++, false)
+        }
 
+        if (stage == 4) {
             line(player, "I have returned the R.P.D.T. to normal - parcels will now be delivered", line++, false)
             line(player, "I also acquired a severed wizards hand.", line++, false)
 
@@ -91,6 +96,22 @@ class BacktomyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
         addItemOrDrop(player, Items.JADE_VINE_SEED_11778)
     }
 
+    override fun hasRequirements(player: Player): Boolean {
+        requirements[0] = hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false)
+        requirements[1] = isQuestComplete(player, Quests.TRIBAL_TOTEM)
+        requirements[2] = hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false)
+        requirements[3] = hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false)
+        requirements[4] = getStatLevel(player, Skills.WOODCUTTING) >= 72
+        requirements[5] = getStatLevel(player, Skills.FIREMAKING) >= 53
+        requirements[6] = getStatLevel(player, Skills.SLAYER) >= 59
+        requirements[7] = getStatLevel(player, Skills.AGILITY) >= 55
+        for (bool in requirements) {
+            if (!bool) {
+                return false
+            }
+        }
+        return true
+    }
 
     override fun newInstance(`object`: Any?): Quest {
         return this
