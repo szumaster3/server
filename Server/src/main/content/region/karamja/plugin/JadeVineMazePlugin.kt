@@ -76,7 +76,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
         )
 
         /**
-         * The predefinied locations for transport to another random vine
+         * The predefined locations for transport to another random vine
          * or hole within the maze via Hole (jade vine maze).
          */// https://runescape.wiki/w/Hole_(jade_vine_maze)
         private val HOLE_LOCATIONS = arrayOf(
@@ -460,7 +460,7 @@ class JadeVineMazePlugin : MapArea, InteractionListener {
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 removeItem(player, Items.POT_LID_4440)
                 addItemOrDrop(player, Items.SEALED_POT_11777)
-                // setVarbit(player, 4062, 3)
+                setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 50)
                 setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 7)
             }
             return@onUseWith true

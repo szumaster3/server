@@ -430,4 +430,7 @@ internal object GameAttributes {
     const val MILK_SUBMITTED = "cooks_assistant:milk_submitted"
     const val ALL_SUBMITTED = "cooks_assistant:all_submitted"
     const val PART_SUBMITTED = "cooks_assistant:submitted_some_items"
+
+    // Back to my Roots quest.
+    const val VINE_FIGHT = "/save:jade-vine-fight"
 }

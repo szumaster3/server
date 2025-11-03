@@ -85,9 +85,30 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
 
-            27 -> playerl(FaceAnim.FRIENDLY, "Well... simply de vine... I haven't got the Jade Vine cutting yet. In fact... I've forgotten what I'm doing.").also { stage++ }
-            28 -> npcl(FaceAnim.FRIENDLY, "Oh dear! You were getting a special Jade Vine plant for me, but to protect it you'll need to talk to the Wizard Cromperty first.").also { stage++ }
-            29 -> player(FaceAnim.HAPPY, "Aha! I remember now.").also { stage = END_DIALOGUE }
+            27 -> when(quest.getStage(player)){
+                7 -> player("Guess what? I got you a cutting... and it should still be alive, too!").also { stage++ }
+                6 -> npcl(FaceAnim.HALF_ASKING, "Umm. Have you had time to plant that vine yet?").also { stage = 39 }
+                else -> playerl(FaceAnim.FRIENDLY, "Well... simply de vine... I haven't got the Jade Vine cutting yet. In fact... I've forgotten what I'm doing.").also { stage = 42 }
+            }
+
+            28 -> npcl(FaceAnim.FRIENDLY, "Wow! You managed it - you must be an incredibly accomplished farmer, and quite handy in a muddle too. How did you find the trip?").also { stage++ }
+            29 -> playerl(FaceAnim.FRIENDLY, " Oh, it wasn't that hard.").also { stage++ }
+            30 -> npcl(FaceAnim.FRIENDLY, "Well, I think it was pretty amazing. As me old dad says, 'Looking for oranges on an apple tree will be fruitless searchin', but I appear to have picked a real ripe one in you.").also { stage++ }
+            31 -> playerl(FaceAnim.FRIENDLY, " Yeeeesss?").also { stage++ }
+            32 -> npcl(FaceAnim.FRIENDLY, "Well I kind of thought that you might...").also { stage++ }
+            33 -> playerl(FaceAnim.FRIENDLY, " Might?").also { stage++ }
+            34 -> npcl(FaceAnim.FRIENDLY, "Err... plant and grow it?").also { stage++ }
+            35 -> playerl(FaceAnim.FRIENDLY, " WHAT? After all I just went through to get you that wretched cutting? You now want me to grow it, too? Who's the gardener here?").also { stage++ }
+            36 -> npcl(FaceAnim.FRIENDLY, "Hold your nasturtiums. I didn't ask you to chop your head off or anything. Just plant and grow the vine till it's adult. I can take over then. You see I've got all those ugly beds to dig and replant").also { stage++ }
+            37 -> npcl(FaceAnim.FRIENDLY, "with new flowers.").also { stage++ }
+            38 -> playerl(FaceAnim.FRIENDLY, " I have a feeling I'm going to regret this but okay. Just this once. And only because I wouldn't want to see you kill it and waste all my hard work.").also { stage = END_DIALOGUE }
+
+            39 -> playerl(FaceAnim.SAD, "No, but I will, eventually.").also { stage++ }
+            40 -> npcl(FaceAnim.FRIENDLY, "Well, I've managed to keep one patch free of weeds, you can use that one.").also { stage++ }
+            41 -> playerl(FaceAnim.HAPPY, "Okay.").also { stage = END_DIALOGUE }
+
+            42 -> npcl(FaceAnim.FRIENDLY, "Oh dear! You were getting a special Jade Vine plant for me, but to protect it you'll need to talk to the Wizard Cromperty first.").also { stage++ }
+            43 -> player(FaceAnim.HAPPY, "Aha! I remember now.").also { stage = END_DIALOGUE }
         }
         return true
     }
