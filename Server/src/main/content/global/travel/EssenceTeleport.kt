@@ -26,9 +26,9 @@ object EssenceTeleport {
     private val LOCATIONS = arrayOf(Location.create(2911, 4832, 0), Location.create(2913, 4837, 0), Location.create(2930, 4850, 0), Location.create(2894, 4811, 0), Location.create(2896, 4845, 0), Location.create(2922, 4820, 0), Location.create(2931, 4813, 0))
     private const val CURSE_PROJECTILE = shared.consts.Graphics.CURSE_PROJECTILE_109
     private val ANIMATION = Animation(Animations.ATTACK_437)
-    private val OLD_ANIMATION = Animation(Animations.BALLER_CLAP_198)
-    private val GLOWING_HANDS_GFX = Graphics(shared.consts.Graphics.CURSE_CAST_108)
-    private val TELEPORT_GFX = Graphics(shared.consts.Graphics.CURSE_IMPACT_110, 150)
+    private val OLD_ANIMATION = Animation(198)
+    private val TP_CAST_GFX = Graphics(shared.consts.Graphics.CURSE_CAST_108)
+    private val TELEPORT_GFX = Graphics(shared.consts.Graphics.CURSE_IMPACT_110, 100)
 
     /**
      * Teleports to the Rune Essence mine via NPC.
@@ -41,7 +41,7 @@ object EssenceTeleport {
 
         npc.animate(if (npc.id == NPCs.BRIMSTAIL_171) OLD_ANIMATION else ANIMATION)
         npc.faceTemporary(player, 1)
-        npc.graphics(GLOWING_HANDS_GFX)
+        npc.graphics(TP_CAST_GFX)
         player.lock(4)
         playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
         Projectile.create(npc, player, CURSE_PROJECTILE).send()
@@ -54,7 +54,6 @@ object EssenceTeleport {
                 when (counter++) {
                     0 -> player.graphics(TELEPORT_GFX)
                     1 -> {
-                        handleScryingOrb(player, npc)
                         player.savedData.globalData.setEssenceTeleporter(npc.id)
                         player.graphics(TELEPORT_GFX)
                         val loc = LOCATIONS.random()
@@ -62,6 +61,7 @@ object EssenceTeleport {
                         player.dispatch(TeleportEvent(TeleportManager.TeleportType.TELE_OTHER, TeleportMethod.NPC, npc, loc))
                     }
                     2 -> {
+                        chargeScryingOrb(player, npc)
                         player.unlock()
                         return true
                     }
@@ -100,34 +100,46 @@ object EssenceTeleport {
     }
 
     /**
-     * Handles the scrying orb mechanics during tp.
-     *
-     * Relations:
-     * - [RuneMysteries quest][content.region.misthalin.lumbridge.quest.ariane1.RuneMysteries]
+     * Handles the charging of the scrying
+     * orb (enter the abyss) during teleportation
+     * to the essence mine.
      */
-    private fun handleScryingOrb(player: Player, npc: NPC) {
+    private fun chargeScryingOrb(player: Player, npc: NPC) {
         if (getStage(player) != 2) return
-        val slot = player.inventory.getSlot(Item(Items.SCRYING_ORB_5519))
-        val item = player.inventory.get(slot) ?: return
-
         val wizard = Wizard.forNPC(npc.id)
-        if (item.charge == 1000) player.savedData.globalData.resetAbyss()
 
-        if (!player.savedData.globalData.hasAbyssCharge(wizard.ordinal)) {
-            player.savedData.globalData.setAbyssCharge(wizard.ordinal)
-            item.charge += 1
+        val orbs = player.inventory.toArray().filter { it?.id == Items.SCRYING_ORB_5519 }
 
-            if (item.charge == 1003) {
-                player.sendMessage("Your scrying orb has absorbed enough teleport information.")
-                player.inventory.replace(Item(Items.SCRYING_ORB_5518), slot)
+        if (orbs.isEmpty()) return
+        var orbCharged = false
+
+        for (orb in orbs) {
+            if (orb == null) continue
+            if (orb.charge == 1000) player.savedData.globalData.resetAbyss()
+            if (!player.savedData.globalData.hasAbyssCharge(wizard.ordinal)) {
+                player.savedData.globalData.setAbyssCharge(wizard.ordinal)
+                orb.charge += 1
             }
+            if (orb.charge >= 1003) {
+                orbCharged = true
+                break
+            }
+        }
+
+        if (orbCharged) {
+            for (orb in orbs) {
+                orb?.let { player.inventory.remove(it) }
+            }
+
+            player.inventory.add(Item(Items.SCRYING_ORB_5518))
+            player.sendMessage("Your scrying orb has absorbed enough teleport information.")
         }
     }
 
     /**
      * Gets the current Rune Mysteries quest data.
      */
-    fun getStage(player: Player): Int = getVarp(player, 492)
+    fun getStage(player: Player): Int = getVarp(player, Vars.VARP_ENTER_THE_ABYSS_PROGRESS_492)
 
     /**
      * Returns a random essence mine location.
@@ -139,7 +151,7 @@ object EssenceTeleport {
      * Represents a wizards available teleports.
      */
     private enum class Wizard(val npc: Int, val mask: Int, val location: Location) {
-        BRIMSTAIL(NPCs.BRIMSTAIL_171, 0x1, Location.create(2409, 9815, 0)),
+        BRIMSTAIL(NPCs.BRIMSTAIL_171, 0, Location.create(2409, 9815, 0)),
         AUBURY(NPCs.AUBURY_553, 0x2, Location(3253, 3401, 0)),
         SEDRIDOR(NPCs.SEDRIDOR_300, 0x4, Location(3107, 9573, 0)),
         DISTENTOR(NPCs.WIZARD_DISTENTOR_462, 0x8, Location(2591, 3085, 0)),

@@ -18,7 +18,7 @@ class RiverTrollNPC(
 
     override fun init() {
         super.init()
-        val index = max(0, (player.properties.combatLevel / 20) - 1)
+        val index = max(0, (player.properties.currentCombatLevel / 20) - 1)
         val id = ids.toList()[index]
         this.transform(id)
         this.attack(player)

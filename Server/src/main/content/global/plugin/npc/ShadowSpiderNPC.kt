@@ -35,7 +35,7 @@ class ShadowSpiderNPC : NPCBehavior(NPCs.SHADOW_SPIDER_58) {
         val nearbyPlayers = RegionManager.getLocalPlayers(self, 8)
         for (player in nearbyPlayers) {
             val isInWild = self.zoneMonitor.isInZone("Wilderness") || player.zoneMonitor.isInZone("Wilderness")
-            self.isAggressive = (player.properties.combatLevel < 105) || isInWild
+            self.isAggressive = (player.properties.currentCombatLevel < 105) || isInWild
         }
         return true
     }

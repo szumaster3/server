@@ -91,13 +91,13 @@ class TheGolemListener : InteractionListener, InterfaceListener {
                 clientStage = Math.max(clientStage, 10)
             }
             setVarbit(player, Vars.VARBIT_QUEST_THE_GOLEM_PROGRESS_346, clientStage, true)
-            setVarbit(player, 348, clayUsed)
-            setVarbit(player, 354, gemsTaken)
-            setVarbit(player, 355, statuetteTaken)
-            setVarbit(player, 349, rotation0)
-            setVarbit(player, 350, rotation1)
-            setVarbit(player, 351, rotation2)
-            setVarbit(player, 352, statuettePlaced * (rotation3 + 1))
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_CLAY_USED_348, clayUsed)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_REMOVED_GEMS_AGRITH_NAAR_THRONE_354, gemsTaken)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_STATUETTE_TAKEN_355, statuetteTaken)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_STATUETTE_ROTATION_349, rotation0)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_STATUETTE_ROTATION_350, rotation1)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_STATUETTE_ROTATION_351, rotation2)
+            setVarbit(player, Vars.VARBIT_THE_GOLEM_STATUETTE_PLACED_352, statuettePlaced * (rotation3 + 1))
         }
     }
 

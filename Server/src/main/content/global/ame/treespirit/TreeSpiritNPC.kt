@@ -20,7 +20,7 @@ class TreeSpiritNPC(
 
     override fun init() {
         super.init()
-        val index = max(0, min(ids.size - 1, (player.properties.combatLevel / 20) - 1))
+        val index = max(0, min(ids.size - 1, (player.properties.currentCombatLevel / 20) - 1))
         val id = ids[index]
         this.transform(id)
         this.setAttribute("no-spawn-return", true)

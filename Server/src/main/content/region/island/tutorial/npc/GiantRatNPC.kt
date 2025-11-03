@@ -27,9 +27,9 @@ class GiantRatNPC : AbstractNPC {
     override fun init() {
         super.init()
         isAggressive = false
-        getSkills().setLevel(Skills.HITPOINTS, 5)
-        getSkills().setStaticLevel(Skills.HITPOINTS, 5)
-        getSkills().lifepoints = 5
+        getSkills().setLevel(Skills.HITPOINTS, 3)
+        getSkills().setStaticLevel(Skills.HITPOINTS, 3)
+        getSkills().lifepoints = 3
     }
 
     override fun construct(

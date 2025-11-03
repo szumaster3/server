@@ -132,10 +132,10 @@ class EquipmentTabInterfacePlugin : ComponentPlugin() {
                         log(this.javaClass, Log.ERR, "Items kept on death interface should not contain more than 4 items when not in a safe zone!")
                     }
 
-                    val slot0 = kept!!.getId(0)
-                    val slot1 = kept!!.getId(1)
-                    val slot2 = kept!!.getId(2)
-                    val slot3 = kept!!.getId(3)
+                    val slot0 = kept.getId(0)
+                    val slot1 = kept.getId(1)
+                    val slot2 = kept.getId(2)
+                    val slot3 = kept.getId(3)
                     val skulled = if (p.skullManager.isSkulled) 1 else 0
                     val hasBoB = if (p.familiarManager.hasFamiliar()) {
                         if (p.familiarManager.familiar.isBurdenBeast) {

@@ -124,8 +124,12 @@ class ChaosTunnelPlugin : MapArea, InteractionListener {
                         return@on false
                     }
 
+                    if (isFixed(player)) {
+                        sendMessage(player, "Surok's power over this portal has been removed, allowing it to function properly.")
+                    }
+
+                    var stained = isStained(scenery)
                     if (!isFixed(player)) {
-                        var stained = isStained(scenery)
                         if (!stained && RandomFunction.random(100) <= 3) {
                             stained = true
                             setStainedTime(scenery)

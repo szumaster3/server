@@ -11,7 +11,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
-class GoblinRagAndBoneNPC : NPCBehavior(*goblinIds) {
+class Goblin : NPCBehavior(*goblinIds) {
     companion object {
         private val goblinIds =
             intArrayOf(
