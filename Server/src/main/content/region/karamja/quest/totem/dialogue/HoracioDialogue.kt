@@ -86,6 +86,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             27 -> when(quest.getStage(player)){
+                8 -> npcl(FaceAnim.FRIENDLY, "You call yourself a farmer? How could you let the vine go wild like that?").also { stage = 44 }
                 7 -> player("Guess what? I got you a cutting... and it should still be alive, too!").also { stage++ }
                 6 -> npcl(FaceAnim.HALF_ASKING, "Umm. Have you had time to plant that vine yet?").also { stage = 39 }
                 else -> playerl(FaceAnim.FRIENDLY, "Well... simply de vine... I haven't got the Jade Vine cutting yet. In fact... I've forgotten what I'm doing.").also { stage = 42 }
@@ -109,6 +110,19 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
 
             42 -> npcl(FaceAnim.FRIENDLY, "Oh dear! You were getting a special Jade Vine plant for me, but to protect it you'll need to talk to the Wizard Cromperty first.").also { stage++ }
             43 -> player(FaceAnim.HAPPY, "Aha! I remember now.").also { stage = END_DIALOGUE }
+
+            44 -> playerl(FaceAnim.FRIENDLY, "Oh, stop vining. I didn't know it would go wild and try to kill you.").also { stage++ }
+            45 -> npcl(FaceAnim.FRIENDLY, "Oh, I don't think I can take much more of this.").also { stage++ }
+            46 -> playerl(FaceAnim.FRIENDLY, "Do they always do that?").also { stage++ }
+            47 -> npcl(FaceAnim.FRIENDLY, "Why, yes, they do. If you let this species get wild by leaving it unpruned, it will attack anything. Some closely related species that can pop up pretty much anywhere has a large purple fruit, you've probably seen it. Anyways, thank you for saving my life.").also { stage++ }
+            48 -> playerl(FaceAnim.FRIENDLY, "You're welcome.").also { stage++ }
+            49 -> npcl(FaceAnim.FRIENDLY, "Here, take this seed that the vine dropped and if you need another, let me know. You can use the other vine patch here if you want. Remember that if you don't prune your vine every couple of days, it will grow wild").also { stage++ }
+            50 -> npcl(FaceAnim.FRIENDLY, "and you'll have to kill it, or get me to do it. I'm going to go replant my vine - now we have seeds it'll be easy! Oh, I'm so glad you managed to help, I'm going to contact the Slayer Masters about this, I bet they").also { stage++ }
+            51 -> npcl(FaceAnim.FRIENDLY, "haven't fought a strongylodon macrobotrys vine for a long time, we thought they'd been hunted to extinction at one point. Still, your jade vine may prove useful for training your Slayer abilities.").also {
+                finishQuest(player, Quests.BACK_TO_MY_ROOTS)
+                stage = END_DIALOGUE
+            }
+
         }
         return true
     }

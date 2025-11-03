@@ -1,6 +1,7 @@
 package content.region.karamja.quest.roots
 
 import content.data.GameAttributes
+import content.data.items.SkillingTool
 import content.region.karamja.quest.roots.npc.HoracioNPC
 import content.region.karamja.quest.roots.npc.WildJadeVineNPC
 import core.api.*
@@ -38,12 +39,12 @@ class BackToMyRootsPlugin : InteractionListener {
          * Handles spawn the wild jade vine.
          */
 
-        onUseWith(IntType.SCENERY, Items.SEALED_POT_11777, Scenery.HORACIO_S_JADE_VINE_PATCH_27061) { player, used, with ->
+        onUseWith(IntType.SCENERY, Items.SEALED_POT_11777, Scenery.HORACIO_S_JADE_VINE_PATCH_27061) { player, used, _ ->
             if(removeItem(player, used.asItem())) {
-                lock(player, 3)
+                lock(player, 7)
                 openInterface(player, 795)
                 sendString(player, "The small cutting slowly grows and matures....", 795, 1)
-                runTask(player, 3) {
+                runTask(player, 6) {
                     closeInterface(player)
                     setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 55) // n.
                     openDialogue(player, HoracioDialogueFile())
@@ -57,36 +58,60 @@ class BackToMyRootsPlugin : InteractionListener {
          */
 
         on(Scenery.WILD_JADE_VINE_27062, IntType.SCENERY, "attack") { player, _ ->
-            val horacio = HoracioNPC()
-            val wildJade = WildJadeVineNPC()
-            player.lock()
+            val axe = SkillingTool.getAxe(player)
+            if (axe == null || !inEquipment(player, axe.id)) {
+                sendDialogue(player, "You need an axe equipped to kill the vine!")
+                return@on false
+            }
+
+            if (!inInventory(player, Items.SECATEURS_5329)) {
+                sendDialogue(player, "You need secateurs to help with the vines.")
+                return@on false
+            }
+
             openOverlay(player, Components.FADE_TO_BLACK_120)
-
-            region.add(player)
-
             setAttribute(player, GameAttributes.VINE_FIGHT, player.location)
             registerLogoutListener(player, GameAttributes.VINE_FIGHT) { p ->
                 p.location = getAttribute(p, GameAttributes.VINE_FIGHT, player.location)
                 removeAttribute(p, GameAttributes.VINE_FIGHT)
             }
 
-            horacio.init()
-            wildJade.init()
-
-            runTask(player, 10) {
+            runTask(player, 8) {
+                region.add(player)
                 closeOverlay(player)
                 openOverlay(player, Components.FADE_FROM_BLACK_170)
 
+                val base = region.baseLocation
+                val horacioLocation = base.transform(12, 49, 0)
+                val vineLocation = base.transform(14, 49, 0)
+                val playerLocation = base.transform(14, 48, 0)
+
+                // TODO:
+                //  Currently, both NPCs and players are moved
+                //  forward by 1 tile due to an engine issue.
+
+                val horacio = HoracioNPC(NPCs.HORACIO_845, horacioLocation)
+                val wildJade = WildJadeVineNPC(NPCs.WILD_JADE_VINE_3409, vineLocation).apply {
+                    target = player
+                }
+
+                horacio.init()
+                wildJade.init()
+
+                region.add(horacio)
+                region.add(wildJade)
+
+                teleport(player, playerLocation)
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 60)
 
-                player.properties.teleportLocation =
-                    region.baseLocation.transform(15, 49, 0)
-                horacio.properties.teleportLocation =
-                    region.baseLocation.transform(12, 49, 0)
-                wildJade.properties.teleportLocation =
-                    region.baseLocation.transform(14, 50, 0)
+                player.locks.lockMovement(10000000)
 
-                horacio.face(wildJade)
+                runTask(player, 3) {
+                    wildJade.attack(player)
+                    horacio.face(wildJade)
+                    horacio.sendChat("ARG! It's tangled me!", 3)
+                    horacio.sendChat("Kill it! You're my only hope!", 5)
+                }
             }
             return@on true
         }

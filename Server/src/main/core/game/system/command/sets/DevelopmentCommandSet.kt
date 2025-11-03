@@ -37,6 +37,15 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
 
+        define(
+            name = "unlock",
+            privilege = Privilege.ADMIN,
+            usage = "::unlock",
+            description = "Unlocks."
+        ) { p, _ ->
+            p.unlock()
+        }
+
         /*
          * Command to receive pest control points.
          */
