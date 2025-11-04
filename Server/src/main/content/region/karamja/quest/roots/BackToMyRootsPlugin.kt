@@ -10,6 +10,8 @@ import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
+import core.game.node.scenery.SceneryBuilder
+import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
 import core.game.world.update.flag.context.Animation
@@ -83,12 +85,8 @@ class BackToMyRootsPlugin : InteractionListener {
 
                 val base = region.baseLocation
                 val horacioLocation = base.transform(12, 49, 0)
-                val vineLocation = base.transform(14, 49, 0)
-                val playerLocation = base.transform(14, 48, 0)
-
-                // TODO:
-                //  Currently, both NPCs and players are moved
-                //  forward by 1 tile due to an engine issue.
+                val vineLocation = base.transform(14, 50, 0)
+                val playerLocation = base.transform(14, 49, 0)
 
                 val horacio = HoracioNPC(NPCs.HORACIO_845, horacioLocation)
                 val wildJade = WildJadeVineNPC(NPCs.WILD_JADE_VINE_3409, vineLocation).apply {
@@ -103,9 +101,8 @@ class BackToMyRootsPlugin : InteractionListener {
 
                 teleport(player, playerLocation)
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 60)
-
                 player.locks.lockMovement(10000000)
-
+                SceneryBuilder.remove(RegionManager.getObject(0,142, 50)) // The object visually remains the same, but this change allows proper interaction.
                 runTask(player, 3) {
                     wildJade.attack(player)
                     horacio.face(wildJade)

@@ -7,6 +7,7 @@ import content.global.activity.jobs.JobManager
 import content.minigame.mta.plugin.MTAZone
 import content.region.island.tutorial.plugin.TutorialStage
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
+import content.region.kandarin.yanille.quest.handsand2.FurnealCutscene
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
@@ -36,6 +37,15 @@ import shared.consts.Items
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        define(
+            name = "furneal",
+            privilege = Privilege.ADMIN,
+            usage = "::furneal",
+            description = ""
+        ) { p, _ ->
+            FurnealCutscene(p).start()
+        }
 
         define(
             name = "unlock",
