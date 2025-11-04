@@ -13,23 +13,49 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
-import static core.api.ContentAPIKt.setVarp;
+import static core.api.ContentAPIKt.*;
 
 /**
- * The type Chest viewer.
+ * A chest viewer.
+ *
+ * @author Vexia
  */
 public final class ChestViewer {
+
+    /**
+     * The objects for the chest queue interface.
+     */
     private static final Object[] BEING_DROPPED = new Object[]{"", "", "", "", "", "", "", "", "", -1, 0, 39, 6, 92, 647 << 16 | 27};
+
+    /**
+     * The objects for the dropping interface.
+     */
     private static final Object[] READY_TO_DROP = new Object[]{"", "", "", "", "", "", "", "", "", -1, 0, 39, 6, 91, 647 << 16 | 28};
+
+    /**
+     * The objects for the accept interface.
+     */
     private static final Object[] ACCEPT = new Object[]{"", "", "", "", "Withdraw-X", "Withdraw-All", "Withdraw-10", "Withdraw-5", "Withdraw-1", -1, 0, 4, 10, 90, 647 << 16 | 29};
+
+    /**
+     * The objects for the singletab.
+     */
     private final static Object[] INV_OPTIONS = new Object[]{"", "", "", "", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit", -1, 0, 7, 4, 94, 648 << 16};
+
+    /**
+     * The player viewing the chest.
+     */
     private final Player player;
+
+    /**
+     * The container.
+     */
     private final DepositContainer container;
 
     /**
-     * Instantiates a new Chest viewer.
+     * Constructs a new {@Code ChestViewer} {@Code Object}
      *
-     * @param player the player
+     * @param player the player.
      */
     public ChestViewer(Player player) {
         this.player = player;
@@ -37,9 +63,7 @@ public final class ChestViewer {
     }
 
     /**
-     * View chest viewer.
-     *
-     * @return the chest viewer
+     * Views the chest.
      */
     public ChestViewer view() {
         container.open();
@@ -56,10 +80,10 @@ public final class ChestViewer {
     }
 
     /**
-     * Update.
+     * Updates the chest viewer.
      *
-     * @param type  the type
-     * @param event the event
+     * @param type  the type.
+     * @param event the event.
      */
     public void update(int type, ContainerEvent event) {
         if (event == null) {
@@ -69,11 +93,11 @@ public final class ChestViewer {
             switch (type) {
                 case 0:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", BEING_DROPPED);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 92, PartyRoomPlugin.chestQueue.toArray(), 10, false));
+                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 92, PartyRoomPlugin.getChestQueue().toArray(), 10, false));
                     break;
                 case 1:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", READY_TO_DROP);
-                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 91, PartyRoomPlugin.chestQueue.toArray(), 10, false));
+                    PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 91, PartyRoomPlugin.getPartyChest().toArray(), 10, false));
                     break;
                 case 2:
                     player.getPacketDispatch().sendRunScript(150, "IviiiIsssssssss", ACCEPT);
@@ -84,14 +108,14 @@ public final class ChestViewer {
     }
 
     /**
-     * Accept.
+     * Accepts the container.
      */
     public void accept() {
-        if (PartyRoomPlugin.chestQueue.itemCount() + getContainer().itemCount() > 215) {
+        if (PartyRoomPlugin.getChestQueue().itemCount() + getContainer().itemCount() > 215) {
             player.sendMessage("The chest is full.");
             return;
         }
-        PartyRoomPlugin.chestQueue.addAll(getContainer());
+        PartyRoomPlugin.getChestQueue().addAll(getContainer());
         getContainer().clear();
         PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 90, new Item[]{}, 10, false));
         PartyRoomPlugin.update(0, null);
@@ -99,7 +123,7 @@ public final class ChestViewer {
     }
 
     /**
-     * Gets container.
+     * Gets the container.
      *
      * @return the container
      */
@@ -108,7 +132,7 @@ public final class ChestViewer {
     }
 
     /**
-     * Gets player.
+     * Gets the player.
      *
      * @return the player
      */
@@ -117,10 +141,15 @@ public final class ChestViewer {
     }
 
     /**
-     * The type Chest close event.
+     * The close event for the chest interface.
+     *
+     * @author Vexia
      */
     public class ChestCloseEvent implements CloseEvent {
 
+        /**
+         * If the container has given back the items.
+         */
         private boolean given = false;
 
         @Override
@@ -139,17 +168,27 @@ public final class ChestViewer {
     }
 
     /**
-     * The type Deposit container.
+     * The container used when depositng items.
+     *
+     * @author Vexia
      */
     public class DepositContainer extends Container {
 
+        /**
+         * The player.
+         */
         private final Player player;
+
+        /**
+         * The party deposit listener.
+         */
         private final PartyDepositListener listener;
 
         /**
-         * Instantiates a new Deposit container.
+         * Constructs a new {@Code DepositContainer} {@Code
+         * Object}
          *
-         * @param player the player
+         * @param player the player.
          */
         public DepositContainer(Player player) {
             super(8, ContainerType.DEFAULT, SortType.ID);
@@ -158,9 +197,7 @@ public final class ChestViewer {
         }
 
         /**
-         * Open deposit container.
-         *
-         * @return the deposit container
+         * Opens the container.
          */
         public DepositContainer open() {
             super.refresh();
@@ -172,10 +209,10 @@ public final class ChestViewer {
         }
 
         /**
-         * Add item.
+         * Adds an item to the container.
          *
-         * @param slot   the slot
-         * @param amount the amount
+         * @param slot   The item slot.
+         * @param amount The amount.
          */
         public void addItem(int slot, int amount) {
             if (slot < 0 || slot > player.getInventory().capacity() || amount < 1) {
@@ -211,10 +248,11 @@ public final class ChestViewer {
         }
 
         /**
-         * Take item.
+         * Takes a item from the container and adds one to the inventory
+         * container.
          *
-         * @param slot   the slot
-         * @param amount the amount
+         * @param slot   The slot.
+         * @param amount The amount.
          */
         public void takeItem(int slot, int amount) {
             if (slot < 0 || slot > super.capacity() || amount <= 0) {
@@ -257,14 +295,23 @@ public final class ChestViewer {
             PartyRoomPlugin.update(1, null);
         }
 
-        private
-        class PartyDepositListener implements ContainerListener {
-            private final Player player;
+        /**
+         * Listeners to the part deposit container.
+         *
+         * @author Vexia
+         */
+        private class PartyDepositListener implements ContainerListener {
 
             /**
-             * Instantiates a new Party deposit listener.
+             * The player reference.
+             */
+            private Player player;
+
+            /**
+             * Constructs a new {@code PartyDepsositContainer.java}
+             * {@code Object}.
              *
-             * @param player the player
+             * @param player
              */
             public PartyDepositListener(Player player) {
                 this.player = player;

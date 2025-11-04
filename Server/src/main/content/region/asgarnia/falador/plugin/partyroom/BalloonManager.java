@@ -1,5 +1,8 @@
 package content.region.asgarnia.falador.plugin.partyroom;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -18,26 +21,37 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 
-import java.util.ArrayList;
-import java.util.List;
+import static core.api.ContentAPIKt.*;
 
-import static core.api.ContentAPIKt.setVarp;
 
 /**
- * The type Balloon manager.
+ * Manages the droped party balloons.
+ *
+ * @author Vexia
  */
 public final class BalloonManager extends OptionHandler {
+
+    /**
+     * The list of dropped balloons.
+     */
     private static final List<Scenery> balloons = new ArrayList<>(20);
+
+    /**
+     * The count down time until droping.
+     */
     private int countdown;
 
     /**
-     * Instantiates a new Balloon manager.
+     * Constructs a new {@Code BalloonManager} {@Code Object}
      */
     public BalloonManager() {
+        /**
+         * empty.
+         */
     }
 
     @Override
-    public Plugin<java.lang.Object> newInstance(java.lang.Object arg) throws Throwable {
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (PartyBalloon balloon : PartyBalloon.values()) {
             SceneryDefinition.forId(balloon.getBalloonId()).getHandlers().put("option:burst", this);
         }
@@ -60,7 +74,7 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * Start.
+     * Starts the count down.
      */
     public void start() {
         if (isCountingDown()) {
@@ -85,11 +99,14 @@ public final class BalloonManager extends OptionHandler {
         });
     }
 
+    /**
+     * Drops the balloons.
+     */
     private void drop() {
         countdown = 0;
         balloons.clear();
-        PartyRoomPlugin.partyChest.addAll(PartyRoomPlugin.chestQueue);
-        PartyRoomPlugin.chestQueue.clear();
+        PartyRoomPlugin.getPartyChest().addAll(PartyRoomPlugin.getChestQueue());
+        PartyRoomPlugin.getChestQueue().clear();
         PartyRoomPlugin.update();
         GameWorld.getPulser().submit(new Pulse(1) {
             int waves;
@@ -111,6 +128,11 @@ public final class BalloonManager extends OptionHandler {
         });
     }
 
+    /**
+     * Gets the balloon drop.
+     *
+     * @return the balloon.
+     */
     private Scenery getBalloon() {
         final Location location = new Location(3045 + RandomFunction.randomSign(RandomFunction.getRandom(8)), 3378 + RandomFunction.randomSign(RandomFunction.getRandom(6)), 0);
         if (!RegionManager.isTeleportPermitted(location) || RegionManager.getObject(location) != null) {
@@ -120,13 +142,13 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * Is cluttered boolean.
+     * Checks if the floor is cluttered.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public boolean isCluttered() {
-        for (Scenery scenery : balloons) {
-            if (RegionManager.getObject(scenery.getLocation()) != null) {
+        for (Scenery object : balloons) {
+            if (RegionManager.getObject(object.getLocation()) != null) {
                 return true;
             }
         }
@@ -134,9 +156,9 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * Gets drop delay.
+     * Gets the drop delay depending on wealth.
      *
-     * @return the drop delay
+     * @return the delay.
      */
     public int getDropDelay() {
         int wealth = getWealth();
@@ -153,25 +175,25 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * Gets wealth.
+     * Gets the amount of wealth in the chest.
      *
-     * @return the wealth
+     * @return the wealth.
      */
     public int getWealth() {
-        return PartyRoomPlugin.chestQueue.getWealth() + PartyRoomPlugin.partyChest.getWealth();
+        return PartyRoomPlugin.getChestQueue().getWealth() + PartyRoomPlugin.getPartyChest().getWealth();
     }
 
     /**
-     * Is counting down boolean.
+     * Checks if the balloon manager is counting down.
      *
-     * @return the boolean
+     * @return {@code True} if so.
      */
     public boolean isCountingDown() {
         return countdown > GameWorld.getTicks();
     }
 
     /**
-     * Gets balloons.
+     * Gets the balloons.
      *
      * @return the balloons
      */
@@ -180,7 +202,7 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * Gets countdown.
+     * Gets the countdown.
      *
      * @return the countdown
      */
@@ -189,68 +211,50 @@ public final class BalloonManager extends OptionHandler {
     }
 
     /**
-     * The enum Party balloon.
+     * A party balloon.
+     *
+     * @author Vexia
      */
     enum PartyBalloon {
+        YELLOW(115, 123), RED(116, 124), BLUE(117, 125), GREEN(118, 126), PURPLE(119, 127), WHITE(120, 128), GREEN_BLUE(121, 129), TRI(122, 130);
 
         /**
-         * Yellow party balloon.
+         * The balloon id.
          */
-        YELLOW(115, 123),
-
-        /**
-         * Red party balloon.
-         */
-        RED(116, 124),
-        /**
-         * Blue party balloon.
-         */
-        BLUE(117, 125),
-        /**
-         * Green party balloon.
-         */
-        GREEN(118, 126),
-        /**
-         * Purple party balloon.
-         */
-        PURPLE(119, 127),
-        /**
-         * White party balloon.
-         */
-        WHITE(120, 128),
-        /**
-         * Green blue party balloon.
-         */
-        GREEN_BLUE(121, 129),
-        /**
-         * Tri party balloon.
-         */
-        TRI(122, 130);
-
         private final int balloonId;
+
+        /**
+         * The popping id.
+         */
         private final int popId;
 
-        PartyBalloon(int balloonId, int popId) {
+        /**
+         * Constructs a new {@Code PartyBallon} {@Code Object}
+         *
+         * @param balloonId the balloon id.
+         * @param popId     the pop id.
+         */
+        private PartyBalloon(int balloonId, int popId) {
             this.balloonId = balloonId;
             this.popId = popId;
         }
 
         /**
-         * Burst.
+         * Bursts a party balloon.
          *
-         * @param player  the player
-         * @param scenery the scenery
+         * @param player the player.
+         * @param object the object.
          */
-        public void burst(final Player player, final Scenery scenery) {
-            final Scenery popped = scenery.transform(popId);
-            if (!getBalloons().contains(scenery)) {
+        public void burst(final Player player, final Scenery object) {
+            final Scenery popped = object.transform(popId);
+            if (!getBalloons().contains(object)) {
                 player.sendMessage("Error! Balloon not registered.");
                 return;
             }
             player.lock(2);
-            SceneryBuilder.remove(scenery);
+            SceneryBuilder.remove(object);
             SceneryBuilder.add(popped);
-            getBalloons().remove(scenery);
+            getBalloons().remove(object);
             player.animate(Animation.create(10017));
 
             GameWorld.getPulser().submit(new Pulse(1) {
@@ -262,10 +266,10 @@ public final class BalloonManager extends OptionHandler {
                         case 1:
                             SceneryBuilder.remove(popped);
                             if (!player.getIronmanManager().isIronman() && RandomFunction.random(3) == 1) {
-                                GroundItem ground = getGround(scenery.getLocation(), player);
+                                GroundItem ground = getGround(object.getLocation(), player);
                                 if (ground != null) {
                                     GroundItemManager.create(ground);
-                                    PartyRoomPlugin.partyChest.shift();
+                                    PartyRoomPlugin.getPartyChest().shift();
                                     PartyRoomPlugin.update();
                                 }
                             }
@@ -276,19 +280,26 @@ public final class BalloonManager extends OptionHandler {
             });
         }
 
+        /**
+         * Gets the ground item.
+         *
+         * @param location the location.
+         * @param player   the player.
+         * @return the ground item.
+         */
         private GroundItem getGround(Location location, Player player) {
-            final Item item = PartyRoomPlugin.partyChest.toArray()[RandomFunction.random(PartyRoomPlugin.partyChest.itemCount())];
+            final Item item = PartyRoomPlugin.getPartyChest().toArray()[RandomFunction.random(PartyRoomPlugin.getPartyChest().itemCount())];
             if (item == null) {
                 return null;
             }
-            if (PartyRoomPlugin.partyChest.remove(item)) {
+            if (PartyRoomPlugin.getPartyChest().remove(item)) {
                 final Item dropItem;
                 int newamt;
                 if (item.getAmount() > 1) {
                     newamt = RandomFunction.random(1, item.getAmount());
                     if (item.getAmount() - newamt > 0) {
                         Item newItem = new Item(item.getId(), item.getAmount() - newamt);
-                        PartyRoomPlugin.partyChest.add(newItem);
+                        PartyRoomPlugin.getPartyChest().add(newItem);
                     }
                     dropItem = new Item(item.getId(), newamt);
                 } else {
@@ -300,10 +311,10 @@ public final class BalloonManager extends OptionHandler {
         }
 
         /**
-         * For id party balloon.
+         * Gets a party balloon.
          *
-         * @param id the id
-         * @return the party balloon
+         * @param id the id.
+         * @return the balloon.
          */
         public static PartyBalloon forId(int id) {
             for (PartyBalloon balloon : values()) {
@@ -315,22 +326,23 @@ public final class BalloonManager extends OptionHandler {
         }
 
         /**
-         * Gets balloon id.
+         * Gets the balloonId.
          *
-         * @return the balloon id
+         * @return the balloonId
          */
         public int getBalloonId() {
             return balloonId;
         }
 
         /**
-         * Gets pop id.
+         * Gets the popId.
          *
-         * @return the pop id
+         * @return the popId
          */
         public int getPopId() {
             return popId;
         }
+
     }
 
 }
