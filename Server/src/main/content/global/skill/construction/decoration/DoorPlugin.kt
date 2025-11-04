@@ -8,7 +8,6 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -38,15 +37,11 @@ class DoorPlugin : OptionHandler() {
         val second = DoorActionHandler.getSecondDoor(door) ?: return true
 
         when (option) {
-            "open" -> {
-                DoorActionHandler.open(
-                    door, second,
-                    getReplaceId(door), getReplaceId(second),
-                    true, -1,  false
-                )
-                SceneryBuilder.remove(door)
-                SceneryBuilder.remove(second)
-            }
+            "open" -> DoorActionHandler.open(
+                door, second,
+                getReplaceId(door), getReplaceId(second),
+                true, -1,  false
+            )
         }
 
         return true
