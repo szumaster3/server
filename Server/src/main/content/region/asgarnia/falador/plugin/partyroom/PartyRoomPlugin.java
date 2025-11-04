@@ -31,6 +31,8 @@ import core.plugin.Initializable;
 import core.plugin.ClassScanner;
 import shared.consts.Animations;
 import shared.consts.Components;
+import shared.consts.Items;
+import shared.consts.NPCs;
 
 /**
  * Handles the party room.
@@ -152,7 +154,7 @@ public final class PartyRoomPlugin extends OptionHandler {
         dancing = true;
         final List<NPC> npcs = new ArrayList<NPC>();
         for (int i = 0; i < 6; i++) {
-            NPC npc = NPC.create(660, Location.create(3043 + i, 3378, 0));
+            NPC npc = NPC.create(NPCs.KNIGHT_660, Location.create(3043 + i, 3378, 0));
             npc.init();
             npcs.add(npc);
         }
@@ -208,8 +210,6 @@ public final class PartyRoomPlugin extends OptionHandler {
      * @param object the object.
      */
     private void handleLever(Player player, Scenery object) {
-        player.lock(3);
-        player.faceLocation(object.getLocation());
         player.getDialogueInterpreter().sendOptions("Select an Option", "Ballon Bonanza (1000 coins).", "Nightly Dance (500 coins).", "No reward.");
         player.getDialogueInterpreter().addAction(new DialogueAction() {
             @Override
@@ -220,11 +220,10 @@ public final class PartyRoomPlugin extends OptionHandler {
                             player.getDialogueInterpreter().sendDialogue("The floor is too cluttered at the moment.");
                         } else if (balloonManager.isCountingDown()) {
                             player.getDialogueInterpreter().sendDialogue("A count down has already begun.");
-                        } else if (player.getInventory().contains(995, 1000)) {
+                        } else if (player.getInventory().contains(Items.COINS_995, 1000)) {
                             balloonManager.start();
-                            player.getInventory().remove(new Item(995, 1000));
-                            animateScenery(player, object, 9386,true);
-                            player.animate(ANIMATION, 1);
+                            player.getInventory().remove(new Item(Items.COINS_995, 1000));
+                            animateLever(player, object);
                         } else {
                             player.getDialogueInterpreter().sendDialogue("Balloon Bonanza costs 1000 coins.");
                         }
@@ -232,11 +231,10 @@ public final class PartyRoomPlugin extends OptionHandler {
                     case 3:
                         if (isDancing()) {
                             player.getDialogueInterpreter().sendDialogue("The party room knights are already here!");
-                        } else if (player.getInventory().contains(995, 500)) {
+                        } else if (player.getInventory().contains(Items.COINS_995, 500)) {
                             commenceDance();
-                            player.getInventory().remove(new Item(995, 500));
-                            animateScenery(player, object, 9386,true);
-                            player.animate(ANIMATION, 1);
+                            player.getInventory().remove(new Item(Items.COINS_995, 500));
+                            animateLever(player, object);
                         } else {
                             player.getDialogueInterpreter().sendDialogue("Nightly Dance costs 500 coins.");
                         }
@@ -244,6 +242,42 @@ public final class PartyRoomPlugin extends OptionHandler {
                     default:
                         break;
                 }
+            }
+        });
+    }
+
+    /**
+     * Animates the player pulling the lever
+     * and updates the scenery object.
+     *
+     * @param player the player.
+     * @param object the object.
+     */
+    private void animateLever(Player player, Scenery object) {
+        player.lock(3);
+
+        // player.faceLocation(object.getLocation());
+        // Not authentic. https://www.youtube.com/watch?v=giofl1mTP_M
+
+        GameWorld.getPulser().submit(new Pulse(1) {
+            private int ticks = 0;
+
+            @Override
+            public boolean pulse() {
+                switch (ticks) {
+                    case 0:
+                        player.animate(ANIMATION);
+                        break;
+                    case 2: // Perfect synchronization.
+                        animateScenery(player, object, 9386, true);
+                        break;
+                    case 5:
+                        animateScenery(player, object, -1, true);
+                        return true;
+                }
+
+                ticks++;
+                return false;
             }
         });
     }
@@ -315,7 +349,7 @@ public final class PartyRoomPlugin extends OptionHandler {
                 return true;
             }
             switch (component.id) {
-                case 648:
+                case Components.PARTY_ROOM_DEPOSIT_648:
                     if (itemId == -1) {
                         if (player.getInventory().get(slot) != null) {
                             itemId = player.getInventory().get(slot).getId();
@@ -345,7 +379,7 @@ public final class PartyRoomPlugin extends OptionHandler {
                             break;
                     }
                     break;
-                case 647:
+                case Components.PARTY_ROOM_DEPOSIT_647:
                     switch (button) {
                         case 25:
                             viewer.accept();
