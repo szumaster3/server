@@ -25,9 +25,10 @@ class FletchingPulse(
     private val fletch: Fletching.FletchData
 ) : SkillPulse<Item>(player, node) {
 
+    private val animationId = if(node.id == Items.MAGIC_LOGS_1513) Animation(Animations.CUT_MAGIC_LOGS_7211) else Animation(Animations.FLETCH_LOGS_1248)
+
     companion object {
         private val bankZone = ZoneBorders(2721, 3493, 2730, 3487)
-        private val ANIMATION = Animation(Animations.FLETCH_LOGS_1248)
     }
 
     private var finalAmount = 0
@@ -70,7 +71,7 @@ class FletchingPulse(
     }
 
     override fun animate() {
-        player.animate(ANIMATION)
+        player.animate(animationId)
     }
 
     override fun reward(): Boolean {

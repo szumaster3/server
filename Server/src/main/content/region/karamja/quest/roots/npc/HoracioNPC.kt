@@ -36,7 +36,7 @@ class HoracioNPC(
 
         if (RandomFunction.roll(2)) {
             sendGraphics(1171, this.location)
-            this.asNpc().animate(Animation(3239))
+            this.asNpc().animate(Animation(3635))
             core.api.sendChat(this, forceChat.random())
         }
     }
