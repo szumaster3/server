@@ -25,7 +25,7 @@ class DrunkenDwarfNPC(override var loot: WeightBasedTable? = null) : RandomEvent
         "I hates you @name!",
         "Aww comeon, talk to ikle me @name!"
     )
-    private val dwarfWave = Animation(Animations.DWARF_WAVE_105)
+    private val dwarfWave = Animation(105)
     private var attackPhrase = false
     private var attackDelay = 0
     private var lastPhraseTime = 0

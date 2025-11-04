@@ -39,7 +39,7 @@ class MetalDragonNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, 
         private val DRAGONFIRE: SwitchAttack = DragonfireSwingHandler.get(
             false,
             52,
-            Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
+            Animation(81, Priority.HIGH),
             null,
             null,
             Projectile.create(null as Entity?, null, Graphics.GIANT_ORANGE_BLAST_54, 40, 36, 41, 46, 20, 255)

@@ -58581,5 +58581,21 @@
   {
     "ids": "27186",
     "examine": "I wonder where this leads?"
+  },
+  {
+    "ids": "27054,27055",
+    "examine": "A smelly package."
+  },
+  {
+    "ids": "27056",
+    "examine": "A table."
+  },
+  {
+    "ids": "27057",
+    "examine": "The opened package."
+  },
+  {
+    "ids": "27062",
+    "examine": "Looks like it's out of control!"
   }
 ]

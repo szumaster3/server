@@ -24,7 +24,7 @@ enum class FireType(
     val task: NodeTask,
 ) {
     FIERY_BREATH(
-        Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
+        Animation(81, Priority.HIGH),
         Graphics.KBD_FIERY_PROJECTILE_393,
         object : NodeTask(0) {
             override fun exec(

@@ -66,7 +66,7 @@ class ChromaticDragonNPC(
             DragonfireSwingHandler.get(
                 true,
                 52,
-                Animation(Animations.DRAGON_BREATH_81, Priority.HIGH),
+                Animation(81, Priority.HIGH),
                 Graphics(1, 64),
                 null,
                 null,

@@ -142,7 +142,7 @@ class DragonForgePlugin : InteractionListener {
         private val MITHRIL_DRAGON_NPC = intArrayOf(NPCs.MITHRIL_DRAGON_5363, NPCs.MITHRIL_DRAGON_8424)
         private val STRANGE_KEYS = intArrayOf(Items.STRANGE_KEY_LOOP_14469, Items.STRANGE_KEY_TEETH_14470)
         private val DRAGONKIN_KEY = Item(Items.DRAGONKIN_KEY_14471, 1)
-        private val DRAGON_BREATH_ANIMATION = Animation(Animations.DRAGON_BREATH_81, Animator.Priority.HIGH)
+        private val DRAGON_BREATH_ANIMATION = Animation(81, Animator.Priority.HIGH)
         private val DRAGON_BREATH_GFX = Graphics(shared.consts.Graphics.DRAGON_FIRE_BREATH_DARKER_COLOR_953)
     }
 }
