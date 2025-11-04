@@ -17,6 +17,7 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
+import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Plugin
@@ -101,6 +102,14 @@ class TelekineticGrabSpell :
 
         if (entity is Player) {
             val player = entity.asPlayer()
+
+            val partyRoom = ZoneBorders(3036, 3371, 3055, 3385)
+            if (partyRoom.insideBorder(player)) {
+                // This message has remained unchanged since RuneScape Classic.
+                sendMessage(player, "You can't cast this spell within the vicinity of the party hall.")
+                return false
+            }
+
             if (!player.inventory.hasSpaceFor(item as Item?)) {
                 sendMessage(player, "You don't have enough inventory space.")
                 return false
@@ -110,6 +119,7 @@ class TelekineticGrabSpell :
             }
         }
         if (isBlocked(SPELL_ID, (item as Node?)!!)) {
+
             sendDialogue(entity.asPlayer(), "You can't do that.")
             return false
         }
