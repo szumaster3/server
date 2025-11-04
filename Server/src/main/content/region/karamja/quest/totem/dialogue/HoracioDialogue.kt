@@ -79,7 +79,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             24 -> npc(FaceAnim.SAD, "idea, though: go talk to that mad Wizard Cromperty. He", "has been boasting recently that he has discovered", "preservation magic. I'm not sure I believe him, though.").also { stage++ }
             25 -> player(FaceAnim.HAPPY, "Okay, I'm off to see the wizard... so long as he's not", "going to teleport me places again, we should be fine!").also { stage++ }
             26 -> npc(FaceAnim.FRIENDLY, "That would be excellent!").also {
-                // Unlocks: Crmoperty dialogue
+                // Unlocks: Crmoperty dialogue.
                 setQuestStage(player, Quests.BACK_TO_MY_ROOTS, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 1, true)
                 stage = END_DIALOGUE
@@ -95,14 +95,14 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             28 -> npcl(FaceAnim.FRIENDLY, "Wow! You managed it - you must be an incredibly accomplished farmer, and quite handy in a muddle too. How did you find the trip?").also { stage++ }
             29 -> playerl(FaceAnim.FRIENDLY, " Oh, it wasn't that hard.").also { stage++ }
             30 -> npcl(FaceAnim.FRIENDLY, "Well, I think it was pretty amazing. As me old dad says, 'Looking for oranges on an apple tree will be fruitless searchin', but I appear to have picked a real ripe one in you.").also { stage++ }
-            31 -> playerl(FaceAnim.FRIENDLY, " Yeeeesss?").also { stage++ }
+            31 -> playerl(FaceAnim.FRIENDLY, "Yeeeesss?").also { stage++ }
             32 -> npcl(FaceAnim.FRIENDLY, "Well I kind of thought that you might...").also { stage++ }
             33 -> playerl(FaceAnim.FRIENDLY, " Might?").also { stage++ }
             34 -> npcl(FaceAnim.FRIENDLY, "Err... plant and grow it?").also { stage++ }
             35 -> playerl(FaceAnim.FRIENDLY, " WHAT? After all I just went through to get you that wretched cutting? You now want me to grow it, too? Who's the gardener here?").also { stage++ }
             36 -> npcl(FaceAnim.FRIENDLY, "Hold your nasturtiums. I didn't ask you to chop your head off or anything. Just plant and grow the vine till it's adult. I can take over then. You see I've got all those ugly beds to dig and replant").also { stage++ }
             37 -> npcl(FaceAnim.FRIENDLY, "with new flowers.").also { stage++ }
-            38 -> playerl(FaceAnim.FRIENDLY, " I have a feeling I'm going to regret this but okay. Just this once. And only because I wouldn't want to see you kill it and waste all my hard work.").also { stage = END_DIALOGUE }
+            38 -> playerl(FaceAnim.FRIENDLY, "I have a feeling I'm going to regret this but okay. Just this once. And only because I wouldn't want to see you kill it and waste all my hard work.").also { stage = END_DIALOGUE }
 
             39 -> playerl(FaceAnim.SAD, "No, but I will, eventually.").also { stage++ }
             40 -> npcl(FaceAnim.FRIENDLY, "Well, I've managed to keep one patch free of weeds, you can use that one.").also { stage++ }
@@ -114,11 +114,14 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             44 -> playerl(FaceAnim.FRIENDLY, "Oh, stop vining. I didn't know it would go wild and try to kill you.").also { stage++ }
             45 -> npcl(FaceAnim.FRIENDLY, "Oh, I don't think I can take much more of this.").also { stage++ }
             46 -> playerl(FaceAnim.FRIENDLY, "Do they always do that?").also { stage++ }
-            47 -> npcl(FaceAnim.FRIENDLY, "Why, yes, they do. If you let this species get wild by leaving it unpruned, it will attack anything. Some closely related species that can pop up pretty much anywhere has a large purple fruit, you've probably seen it. Anyways, thank you for saving my life.").also { stage++ }
-            48 -> playerl(FaceAnim.FRIENDLY, "You're welcome.").also { stage++ }
-            49 -> npcl(FaceAnim.FRIENDLY, "Here, take this seed that the vine dropped and if you need another, let me know. You can use the other vine patch here if you want. Remember that if you don't prune your vine every couple of days, it will grow wild").also { stage++ }
-            50 -> npcl(FaceAnim.FRIENDLY, "and you'll have to kill it, or get me to do it. I'm going to go replant my vine - now we have seeds it'll be easy! Oh, I'm so glad you managed to help, I'm going to contact the Slayer Masters about this, I bet they").also { stage++ }
-            51 -> npcl(FaceAnim.FRIENDLY, "haven't fought a strongylodon macrobotrys vine for a long time, we thought they'd been hunted to extinction at one point. Still, your jade vine may prove useful for training your Slayer abilities.").also {
+            47 -> npc(FaceAnim.FRIENDLY, "Why, yes, they do. If you let this species get wild by", "leaving it unpruned, it will attack anything. Some closely", "related species that can pop up pretty much anywhere", "has a large purple fruit, you've probably seen it.").also { stage++ }
+            48 -> npc(FaceAnim.FRIENDLY,"Anyways, thank you for saving my life.").also { stage++ }
+            49 -> playerl(FaceAnim.FRIENDLY, "You're welcome.").also { stage++ }
+            50 -> npc(FaceAnim.FRIENDLY, "Here, take this seed that the vine dropped and if you", "need another, let me know. You can use the other vine", "patch here if you want. Remember that if you don't", "prune your vine every couple of days, it will grow wild").also { stage++ }
+            51 -> npc(FaceAnim.FRIENDLY, "and you'll have to kill it...or get me to do it. I'm going", "to go replant my vine - now we have seeds it'll be easy!", "Oh, I'm so glad you managed to help, I'm going to contact the Slayer Masters about this, I bet they").also { stage++ }
+            52 -> npc(FaceAnim.FRIENDLY, "haven't fought a strongylodon macrobotrys vine for a", "long time, we thought they'd been hunted to extinction", "at one point. Still, your jade vine may prove useful for", "training your Slayer abilities.").also { stage++ }
+            53 -> {
+                end()
                 finishQuest(player, Quests.BACK_TO_MY_ROOTS)
                 stage = END_DIALOGUE
             }
