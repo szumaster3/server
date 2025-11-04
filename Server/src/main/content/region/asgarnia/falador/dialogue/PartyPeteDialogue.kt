@@ -39,7 +39,7 @@ class PartyPeteDialogue(player: Player? = null) : Dialogue(player) {
             5 -> when (buttonId) {
                 1 -> player(FaceAnim.HALF_GUILTY, "I love your hair!").also { stage++ }
                 2 -> player(FaceAnim.HALF_GUILTY, "Why's there a chameleon in here?").also { stage = 9 }
-                3 -> options("So, what's this room for?", "What's the big lever over there for?", "What's the gold chest for?", "I wanna party!", "More.").also { stage = 3 }
+                3 -> options("So, what's this room for?", "What's the big lever over there for?", "What's the gold chest for?", "I wanna party!", "More...").also { stage = 3 }
             }
             6 -> npcl(FaceAnim.HAPPY, "Isn't it groovy? I liked it so much, I had extras made for my party goers. Would you like to buy one?").also { stage++ }
             7 -> options("Yes", "No").also { stage++ }
@@ -65,7 +65,7 @@ class PartyPeteDialogue(player: Player? = null) : Dialogue(player) {
             54 -> player(FaceAnim.HALF_GUILTY, "Woop! Thanks Pete!").also { stage = END_DIALOGUE }
             55 -> npc(FaceAnim.HALF_GUILTY, "Simple. With the lever you can do some fun stuff.").also { stage++ }
             56 -> player(FaceAnim.HALF_GUILTY, "What kind of stuff?").also { stage++ }
-            57 -> npc(FaceAnim.HALF_GUILTY, "A balloon drop costs 1000 gold. For this, you get 200", "balloons dropped across the whole of the party room. You", "canthen have fun popping the balloons!").also { stage++ }
+            57 -> npc(FaceAnim.HALF_GUILTY, "A balloon drop costs 1000 gold. For this, you get 200", "balloons dropped across the whole of the party room. You", "can then have fun popping the balloons!").also { stage++ }
             58 -> npc(FaceAnim.HALF_GUILTY, "Any items in the Party Drop Chest will be put into balloons", "as soon as you pull the lever.").also { stage++ }
             59 -> npc(FaceAnim.HALF_GUILTY, "When the balloons are released, you can burst them to", "get at the items!").also { stage++ }
             60 -> npc(FaceAnim.HALF_GUILTY, "For 500 gold, you can summon the Party Room Knights,", "who will dance for your delight. Their singing isn't a", "delight, though.").also { stage = END_DIALOGUE }
