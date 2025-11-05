@@ -35,6 +35,8 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
             sendDialogue(player, "You need to activate the magical scrying orb, obtained from the wizard in Yanille, to capture the conversation with Sandy!")
         } else if(inInventory(player, Items.MAGICAL_ORB_A_6951)) {
             player("Now, I'm going to ask you some questions and I want", "you to answer me truthfully...").also { stage = 9 }
+        } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)  == 10){
+            npcl(FaceAnim.NEUTRAL, "I don't have time to talk to you. Go away!").also { stage = END_DIALOGUE }
         } else {
             npcl(FaceAnim.NEUTRAL, "Sand is yellow,").also { stage = 4 }
         }
@@ -57,7 +59,7 @@ class SandyDialogue(player: Player? = null) : Dialogue(player) {
             5 -> npcl(FaceAnim.NEUTRAL, "Sand puts money,").also { stage++ }
             6 -> npcl(FaceAnim.NEUTRAL, "In my hand!").also { stage = END_DIALOGUE }
             7 -> showTopics(
-                Topic("There's a herd of huge mutant herring about to drop from the sky!",88),
+                Topic("There's a herd of huge mutant herring about to drop from the sky!",8),
                 Topic("But the pygmy shrews have eaten all the sand!", 8),
                 Topic("A small parrot with a pink banana is sitting outside your window!", 8)
             )

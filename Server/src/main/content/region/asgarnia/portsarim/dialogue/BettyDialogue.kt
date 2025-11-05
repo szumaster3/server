@@ -116,6 +116,8 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 npcl(FaceAnim.FRIENDLY, "Ok, now the last ingredient, something personal from the person you need to tell the truth, else it won't work!").also { stage = 44 }
             } else if(handProgress == 5) {
                 npcl(FaceAnim.HAPPY, "Hello deary! How did the serum work?").also { stage = 48 }
+            } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 10) {
+                npcl(FaceAnim.FRIENDLY, "Hello again deary. Come back and tell me what happened when all the fuss is over.").also { stage = 56 }
             } else {
                 playerl(FaceAnim.HALF_ASKING, "I've come from Yanille, the wizard says you can make Truth Serum?").also { stage++ }
             }
@@ -195,7 +197,7 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
             53 -> player("Bad things?").also { stage++ }
             54 -> npc(FaceAnim.FRIENDLY, "Well.... bits might drop off.").also { stage++ }
             55 -> player("Oh! I... see. I'll remember to dilute it then.").also { stage = END_DIALOGUE }
-
+            56 -> player("Ok Betty, I'll be back!").also { stage = END_DIALOGUE }
 
         }
         return true
