@@ -79,7 +79,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npcl(FaceAnim.FRIENDLY, "P'raps tha smell will get t'Guard Cap'ain's nose out o'his beer fer 2 seconds!").also {
                 setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 1, true)
-                setVarbit(player, 1525, 0, true)
+                setVarbit(player, 1535, 0, true)
                 stage = END_DIALOGUE
             }
 

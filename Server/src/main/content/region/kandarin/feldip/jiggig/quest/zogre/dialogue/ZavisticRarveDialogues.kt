@@ -88,6 +88,11 @@ class ZavisticRarveDialogues : DialogueFile() {
                     }
                 }
 
+                handVarbit == 5 -> {
+                    npcl(FaceAnim.HALF_ASKING, "Have you made the serum and talked to Sandy yet?")
+                    stage = 173
+                }
+
                 hasMiniQuestDiaryItem -> {
                     player(FaceAnim.HALF_ASKING, "I have a rather sandy problem that I'd like to palm off on you.")
                     stage = 57
@@ -621,6 +626,7 @@ class ZavisticRarveDialogues : DialogueFile() {
                 teleport(player!!, Location.create(3014, 3259, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                 stage = END_DIALOGUE
             }
+            173 -> playerl(FaceAnim.FRIENDLY, "ot yet, but don't bust a gut over it!").also { stage = END_DIALOGUE }
         }
     }
 }

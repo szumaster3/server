@@ -63,7 +63,7 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
             line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
         }
         if(stage == 8) {
-            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++)
             line(player, "I have drugged Sandy's coffee.", line++)
             line(player, "I have interrogated Sandy.", line++)
             line(player, "I have returned the information from the orb.", line++)
@@ -78,7 +78,6 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
             line++
             line(player, "Every day I may ask Bert to transport some sand to my bank.", line++)
             line(player, "You can collect your sand now.", line) // "You'll need to wait about X hours to collect your sand."
-
         }
     }
 
