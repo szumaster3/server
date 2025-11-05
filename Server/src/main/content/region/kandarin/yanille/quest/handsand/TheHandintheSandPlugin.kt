@@ -108,13 +108,25 @@ class TheHandintheSandPlugin : InteractionListener {
         }
 
         /*
-         * Handles making pink dye.
+         * Handles making redberry juice.
          */
 
         onUseWith(IntType.ITEM, Items.REDBERRIES_1951, Items.BOTTLED_WATER_6953) { player, used, with ->
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 sendMessage(player, "Now you just need to add the white berries to make the pink dye.")
-                addItem(player, Items.PINK_DYE_6955, 1)
+                addItem(player, Items.REDBERRY_JUICE_6954, 1)
+            }
+            return@onUseWith true
+        }
+
+        /*
+         * Handles making pink dye.
+         */
+
+        onUseWith(IntType.ITEM, Items.WHITE_BERRIES_239, Items.REDBERRY_JUICE_6954) { player, used, with ->
+            if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
+                sendItemDialogue(player, Items.ROSE_TINTED_LENS_6956, "You have successfully made the rose tinted lens!")
+                addItem(player, Items.ROSE_TINTED_LENS_6956, 1)
             }
             return@onUseWith true
         }
