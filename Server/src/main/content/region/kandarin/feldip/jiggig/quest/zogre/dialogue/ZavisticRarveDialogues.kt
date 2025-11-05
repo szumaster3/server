@@ -2,7 +2,7 @@ package content.region.kandarin.feldip.jiggig.quest.zogre.dialogue
 
 import content.data.GameAttributes
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
-import content.region.kandarin.yanille.quest.handsand2.FurnealCutscene
+import content.region.kandarin.yanille.quest.handsand2.FuneralCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -260,7 +260,7 @@ class ZavisticRarveDialogues : DialogueFile() {
                     addItemOrBank(p, Items.BLOOD_RUNE_565, 200)
                     addItemOrBank(p, Items.LAW_RUNE_563, 100)
                 }
-                FurnealCutscene(p).start(true)
+                FuneralCutscene(p).start(true)
             }
 
             // 69 -> if (getAttribute(player!!, ZogreUtils.TALK_ABOUT_SIGN_PORTRAIT, false)) {
