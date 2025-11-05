@@ -22,13 +22,17 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             npcl(FaceAnim.HALF_ASKING, "Did ye see yon Guard Capt'n 'bout hand?").also { stage = 11}
         } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 3) {
             npcl(FaceAnim.HALF_ASKING, "Wha' info ye find 'bout hand, ${player.username}?").also { stage = 15 }
+        } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 4) {
+            npcl(FaceAnim.HALF_ASKING, "Ey'up ${player.username}. Did yer see Sandy in Brimhaven 'bout me rota?").also { stage = 21 }
         } else {
-            npc(FaceAnim.SAD, "Eeee, wha' shall I do! I'll mos' certainly lose tha job...")
+            npcl(FaceAnim.SAD, "Eeee, wha' shall I do! I'll mos' certainly lose tha job...")
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val hasBertRota = inInventory(player, Items.BERTS_ROTA_6947) || inBank(player, Items.BERTS_ROTA_6947)
+
         when(stage) {
             0 -> player(FaceAnim.HALF_ASKING, "Lose your job? What's wrong, why?").also { stage++ }
             1 -> npcl(FaceAnim.SAD, "I w-w-work...over yon sand pit...and weeell...I found...this...hand! T'were buried in't Sand!").also { stage++ }
@@ -85,6 +89,22 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
                 setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 4)
                 stage = END_DIALOGUE
             }
+
+            21 -> if(!hasBertRota) {
+                player(FaceAnim.HALF_GUILTY, "Err, no, I kind of... lost it...").also { stage++ }
+            } else {
+                player("No, I'll fit it in my schedule somewhere soon.").also { stage = END_DIALOGUE }
+            }
+
+            22 -> if(freeSlots(player) == 0) {
+                npcl(FaceAnim.FRIENDLY, "Lucky fer yorn tha' I's made a copy then ain't it, I's 'ave been given it to yer iffen you 'ad some space in yer invent'ry.").also { stage++ }
+            } else {
+                npcl(FaceAnim.FRIENDLY, "Lucky fer yorn tha' I's made a copy then ain't it, 'ere 'ave another.")
+                addItem(player, Items.BERTS_ROTA_6947, 1)
+                stage = END_DIALOGUE
+            }
+            23 -> player(FaceAnim.ASKING, "What did you say?").also { stage++ }
+            24 -> npcl(FaceAnim.HALF_THINKING, "Is you stupid? I said I'd give ye another but yer bags be full!").also { stage = END_DIALOGUE }
 
         }
 
