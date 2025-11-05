@@ -27,7 +27,7 @@ class ZavisticRarveDialogues : DialogueFile() {
         npc = NPC(NPCs.ZAVISTIC_RARVE_2059)
         val questComplete = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS) == 100
         val zogreProgress = isQuestInProgress(p, Quests.ZOGRE_FLESH_EATERS, 1, 99)
-        val canStartMiniQuest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS) == 100 && hasRequirement(p, Quests.THE_HAND_IN_THE_SAND, false)
+        val canStartMiniQuest = getVarbit(p, Vars.VARBIT_QUEST_ZORGE_FLESH_EATERS_PROGRESS_487) == 13 || getQuestStage(p, Quests.ZOGRE_FLESH_EATERS) == 100 && isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND)
         val miniquestComplete = getVarbit(p, Vars.VARBIT_MINIQUEST_RETURNING_CLARENCE_PROGRESS_4054) == 1
         val hasMiniQuestDiaryItem = inInventory(p, Items.UNLOCKED_DIARY_11762)
         val hasBlackPrism = inInventory(p, Items.BLACK_PRISM_4808) && !getAttribute(p, ZogreUtils.TALK_ABOUT_BLACK_PRISM, false)
@@ -35,11 +35,12 @@ class ZavisticRarveDialogues : DialogueFile() {
         val usedTankard = inInventory(p, Items.DRAGON_INN_TANKARD_4811) && !getAttribute(p, ZogreUtils.TALK_ABOUT_TANKARD, false)
         val hasOrLostStrangePotion = getAttribute(p, ZogreUtils.TALK_WITH_ZAVISTIC_DONE, false)
         val saleBlackPrism = questComplete && inInventory(p, Items.BLACK_PRISM_4808)
+        val handProgress = getQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND)
 
         when (stage) {
             START_DIALOGUE -> if(getAttribute(player!!, ZogreUtils.NPC_ACTIVE, false)) {
-                if (hasRequirement(player!!, Quests.THE_HAND_IN_THE_SAND, false)) {
-                    npcl(FaceAnim.NEUTRAL, "What are you doing... Oh, it's you... sorry... didn't realise... what can I do for you?"). also { stage = 2 }
+                if (isQuestComplete(player!!, Quests.THE_HAND_IN_THE_SAND)) {
+                    npcl(FaceAnim.NEUTRAL, "What are you doing... Oh, it's you... sorry... didn't realise... what can I do for you?"). also { stage = 3 }
                 } else {
                     npcl(FaceAnim.NEUTRAL, "What are you doing ringing that bell?! Don't you think some of us have work to do?").also { stage = 1 }
                 }
@@ -61,6 +62,18 @@ class ZavisticRarveDialogues : DialogueFile() {
                         Topic("I have a rather sandy problem that I'd like to palm off on you.",  16)
                     }
                 )
+
+                handProgress == 2 -> if(!inInventory(player!!, Items.BEER_SOAKED_HAND_6946)){
+                    sendDialogue(player!!, "Maybe you should have the hand with you before speaking to Zavistic.").also { stage = END_DIALOGUE }
+                } else {
+                    sendItemDialogue(player!!, Items.BEER_SOAKED_HAND_6946, "You wave the hand at the wizard.")
+                    stage = 145
+                }
+
+                handProgress == 3 -> {
+                    npcl(FaceAnim.HALF_GUILTY, "Did you find out who killed Clarence yet?")
+                    stage = 156
+                }
 
                 hasMiniQuestDiaryItem -> {
                     player(FaceAnim.HALF_ASKING, "I have a rather sandy problem that I'd like to palm off on you.")
@@ -529,6 +542,25 @@ class ZavisticRarveDialogues : DialogueFile() {
                     else -> 5
                 }
             }
+
+            145 -> player("Ummm... Do you have all your wizards?").also { stage++ }
+            146 -> npcl(FaceAnim.HALF_ASKING, "All my.... whatever do you mean...?").also { stage++ }
+            147 -> playerl(FaceAnim.FRIENDLY, "The Guard Captain asked me to see if you have any... missing... wizards.").also { stage++ }
+            148 -> npcl(FaceAnim.HALF_ASKING, "That's silly! No one would kill a wizard... would they?").also { stage++ }
+            149 -> playerl(FaceAnim.FRIENDLY, "Erm... no...").also { stage++ }
+            150 -> playerl(FaceAnim.FRIENDLY, "Well.. maybe, you see Bert found this hand and it might belong to.. a wizard!").also { stage++ }
+            151 -> npcl(FaceAnim.HALF_ASKING, "Bert? Ahh yes, the sandman who seems to have been working very long hours recently. Let's see that hand...").also { stage++ }
+            152 -> sendItemDialogue(player!!, Items.BEER_SOAKED_HAND_6946, "You hand it over.").also {
+                removeItem(player!!, Items.BEER_SOAKED_HAND_6946)
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 3)
+                stage++
+            }
+            153 -> npcl(FaceAnim.HALF_ASKING, "Oh my! This is most definitely Clarence, my most able student! You must find out who did this!").also { stage++ }
+            154 -> playerl(FaceAnim.FRIENDLY, "Do you have any input as to the matter at hand?").also { stage++ }
+            155 -> npcl(FaceAnim.HALF_ASKING, "Well.... Ask Bert about the long hours he's been working, that sounds suspicious to me. Digging things up at all hours of the day isn't natural.").also { stage = END_DIALOGUE }
+
+            156 -> player("Not yet, but don't lose your head over it.").also { stage = END_DIALOGUE }
+
         }
     }
 }

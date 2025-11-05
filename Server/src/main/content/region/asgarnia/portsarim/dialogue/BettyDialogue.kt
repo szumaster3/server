@@ -34,7 +34,7 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                     "Talk to Betty about her shop.",
                     "Talk to Betty about pink dye.",
                 ).also { stage = 10 }
-            } else if (hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false)) {
+            } else if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)) {
                 options(
                     "Can I see your wares?",
                     "Sorry, I'm not into magic.",

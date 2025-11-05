@@ -29,7 +29,7 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
             line(player, "I also need to have completed:", line++)
             line(player, "!!${Quests.ONE_SMALL_FAVOUR}??.", line++, hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false))
             line(player, "!!${Quests.TRIBAL_TOTEM}??.", line++, isQuestComplete(player, Quests.TRIBAL_TOTEM))
-            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false))
+            line(player, "!!${Quests.THE_HAND_IN_THE_SAND}??.", line++, isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND))
             line(player, "!!${Quests.FAIRYTALE_I_GROWING_PAINS}??.", line++, hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false))
             line++
         }
@@ -109,7 +109,7 @@ class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QU
     override fun hasRequirements(player: Player): Boolean {
         requirements[0] = hasRequirement(player, Quests.ONE_SMALL_FAVOUR, false)
         requirements[1] = isQuestComplete(player, Quests.TRIBAL_TOTEM)
-        requirements[2] = hasRequirement(player, Quests.THE_HAND_IN_THE_SAND, false)
+        requirements[2] = isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)
         requirements[3] = hasRequirement(player, Quests.FAIRYTALE_I_GROWING_PAINS, false)
         requirements[4] = getStatLevel(player, Skills.WOODCUTTING) >= 72
         requirements[5] = getStatLevel(player, Skills.FIREMAKING) >= 53
