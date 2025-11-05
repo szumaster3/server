@@ -39,8 +39,9 @@ class ZavisticRarveDialogues : DialogueFile() {
         val saleBlackPrism = questComplete && inInventory(p, Items.BLACK_PRISM_4808)
         val handProgress = getQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND)
         val handVarbit = getVarbit(player!!, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
-        val hasScryingOrb = inInventory(player!!, Items.MAGICAL_ORB_6950) && inBank(player!!, Items.MAGICAL_ORB_6950)
-        val hasScryingOrbA = inInventory(player!!, Items.MAGICAL_ORB_A_6951) && inBank(player!!, Items.MAGICAL_ORB_A_6951)
+        val hasScryingOrb = inInventory(player!!, Items.MAGICAL_ORB_6950) || inBank(player!!, Items.MAGICAL_ORB_6950)
+        val hasScryingOrbA = inInventory(player!!, Items.MAGICAL_ORB_A_6951) || inBank(player!!, Items.MAGICAL_ORB_A_6951)
+        val hasVisitedEntrana = inInventory(player!!, Items.WIZARDS_HEAD_6957) || inBank(player!!, Items.WIZARDS_HEAD_6957)
 
         when (stage) {
             START_DIALOGUE -> if(getAttribute(player!!, ZogreUtils.NPC_ACTIVE, false)) {
@@ -119,6 +120,11 @@ class ZavisticRarveDialogues : DialogueFile() {
                     removeItem(player!!, Item(Items.EARTH_RUNE_557, 5))
                     playerl(FaceAnim.HAPPY, "I've brought what you wanted, what are you going to do?")
                     stage = 180
+                }
+
+                handProgress == 13 -> if(!hasVisitedEntrana) {
+                    npcl(FaceAnim.HALF_ASKING, "Did you visit the Entrana sandpit yet? Ask the worker there if he's found an arm or a leg.")
+                    stage = 182
                 }
 
                 // ZOGRE FLESH EATERS & RETURNING CLARENCE
@@ -666,6 +672,8 @@ class ZavisticRarveDialogues : DialogueFile() {
                 end()
                 SandpitCutscene(player!!).start(true)
             }
+            182 -> playerl(FaceAnim.HALF_GUILTY, "Not yet no. I've been running around like a headless chicken, but I'll get to it!").also { stage = END_DIALOGUE }
+
         }
     }
 }

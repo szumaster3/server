@@ -101,9 +101,31 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
         }
 
         if (stage == 12) {
-            line(player, "The Sandpit has been enchanted.", line++)
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+            line(player, "I have returned the information from the orb.", line++, true)
+            line(player, "The Sandpit has been enchanted.", line++, true)
             line(player, "I have retrieved the head of a wizard.", line++)
-            line(player, "The dead wizard has been buried and Sandy arrested for murder.", line++)
+        }
+        if(stage == 13) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+            line(player, "I have returned the information from the orb.", line++, true)
+            line(player, "The Sandpit has been enchanted.", line++, true)
+            line(player, "I have retrieved the head of a wizard.", line++, true)
+            line(player, "The dead wizard has been buried and Sandy arrested for murder.", line++, true)
         }
 
         if (stage == 100) {

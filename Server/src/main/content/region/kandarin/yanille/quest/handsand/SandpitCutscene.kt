@@ -10,6 +10,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs
+import shared.consts.Quests
 
 class SandpitCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
@@ -60,7 +61,10 @@ private class SandpitCutsceneEndDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage) {
             0 ->npcl(FaceAnim.HAPPY, "There, the sand pit will now magically refill. No more work for Bert!").also { stage++ }
-            1 ->npcl(FaceAnim.FRIENDLY, "We must find the rest of Clarence, I've sent some wizards out to some of the sandpits, would you please check the Entrana sandpit?").also { stage = END_DIALOGUE }
+            1 ->npcl(FaceAnim.FRIENDLY, "We must find the rest of Clarence, I've sent some wizards out to some of the sandpits, would you please check the Entrana sandpit?").also {
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 12)
+                stage = END_DIALOGUE
+            }
         }
     }
 }
