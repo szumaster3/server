@@ -63883,8 +63883,8 @@
     "id": "6948"
   },
   {
-    "destroy_message": "You can reclaim this item from the place you found it.",
-    "examine": "Maybe I should read this...",
+    "destroy_message": "Speak to Bert in Yanille to find another magical scroll.",
+    "examine": "This scroll glows with an inner light.",
     "durability": null,
     "name": "A magic scroll",
     "archery_ticket_price": "0",

@@ -10,12 +10,12 @@ import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.world.map.Location
+import core.game.world.repository.Repository
+import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Vars
+import shared.consts.*
 
 /**
  * Represents the Betty dialogue.
@@ -107,7 +107,11 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
             31 -> npc("There you go! I'm sure t hat's just the spice that", "Maggie's looking for.").also { stage++ }
             32 -> player("Many thanks.").also { stage = END_DIALOGUE }
             33 -> options("Can I see your wares?", "Sorry, I'm not into magic.").also { stage = 1 }
-            34 -> playerl(FaceAnim.HALF_ASKING, "I've come from Yanille, the wizard says you can make Truth Serum?").also { stage++ }
+            34 -> if(getAttribute(player, GameAttributes.HAND_SAND_BETTY_POTION, false)) {
+                npcl(FaceAnim.FRIENDLY, "Wonderful deary. When you're ready, just stand in the open doorway and focus the light on the empty vial on my desk and I'll pour the serum into it.").also { stage = 40 }
+            } else {
+                playerl(FaceAnim.HALF_ASKING, "I've come from Yanille, the wizard says you can make Truth Serum?").also { stage++ }
+            }
             35 -> npcl(FaceAnim.FRIENDLY, "This is true deary, I'll need an empty vial.").also { stage++ }
             36 -> if(!removeItem(player, Items.VIAL_229)) {
                 playerl(FaceAnim.HAPPY, "I'll have to go find one then, I'll be back!").also { stage = END_DIALOGUE }
@@ -125,6 +129,21 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("I'm afraid I've forgotten how!", 39, false)
             )
             39 -> npcl(FaceAnim.FRIENDLY, "Pink dye can be made from red berries in the bottle I gave you. Add white berries to make the pink dye and then you just need to use that on a bullseye lens. Good luck!").also { stage = END_DIALOGUE }
+            40 -> player("Ok, what does that do?").also { stage++ }
+            41 -> npcl(FaceAnim.FRIENDLY, "Why it makes the person who drinks it unable to hide in the shadow of lies. The light of truth will shine!").also { stage++ }
+            42 -> {
+                end()
+                lock(player, 3)
+                val bettyNPC = Repository.findNPC(this.npc.id)
+                forceWalk(bettyNPC!!.asNpc(), Location.create(3012, 3258, 0), "")
+                runTask(player, 3) {
+                    bettyNPC.faceLocation(Location.create(3014, 3258, 0))
+                    bettyNPC.animate(Animation(Animations.HUMAN_MULTI_USE_832), 1)
+                    setVarbit(player, 1537, 1)
+                    sendItemDialogue(player, Items.VIAL_229, "Betty places a vial on her counter.")
+                }
+            }
+
         }
         return true
     }

@@ -433,4 +433,7 @@ internal object GameAttributes {
 
     // Back to my Roots quest.
     const val VINE_FIGHT = "/save:jade-vine-fight"
+
+    // The Hand in the Sand quest.
+    const val HAND_SAND_BETTY_POTION = "/save:handsand:betty_shine_potion"
 }

@@ -1,7 +1,9 @@
 package content.region.kandarin.yanille.quest.handsand
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.FaceAnim
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.world.update.flag.context.Animation
@@ -139,9 +141,33 @@ class TheHandintheSandPlugin : InteractionListener {
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
                 sendItemDialogue(player, Items.ROSE_TINTED_LENS_6956, "You have successfully made the rose tinted lens!")
                 addItem(player, Items.ROSE_TINTED_LENS_6956, 1)
+                setAttribute(player, GameAttributes.HAND_SAND_BETTY_POTION, true)
             }
             return@onUseWith true
         }
+
+        on(Scenery.DOOR_40108, IntType.SCENERY, "open") { player, node ->
+            DoorActionHandler.handleDoor(player, node.asScenery())
+            return@on true
+        }
+
+        /*
+         * Handles making the truth serum
+         */
+
+        onUseWith(IntType.SCENERY, Items.ROSE_TINTED_LENS_6956, Scenery.COUNTER_10813) { player, used, _ ->
+            if(player.location.x == 3016 && player.location.y == 3259) {
+                if(removeItem(player, used.asItem())) {
+                    sendItemDialogue(player, Items.TRUTH_SERUM_6952, "As you focus the light on the vial and betty pours the potion in, the lens heats up and shatters. After a few seconds betty hand you the vial of Truth Serum.")
+                    addItem(player, Items.TRUTH_SERUM_6952, 1)
+                    setVarbit(player, 1537, 0)
+                }
+            } else {
+                sendMessage(player, "You need to be standing in the doorway.")
+            }
+            return@onUseWith true
+        }
+
     }
 
 }
