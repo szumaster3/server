@@ -1,6 +1,5 @@
 package content.region.misthalin.varrock.dialogue
 
-import content.global.plugin.iface.FurClothingInterface
 import core.api.openInterface
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue

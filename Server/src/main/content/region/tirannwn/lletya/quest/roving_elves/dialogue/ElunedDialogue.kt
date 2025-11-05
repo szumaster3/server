@@ -2,8 +2,6 @@ package content.region.tirannwn.lletya.quest.roving_elves.dialogue
 
 import content.region.tirannwn.lletya.quest.roving_elves.RovingElves
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

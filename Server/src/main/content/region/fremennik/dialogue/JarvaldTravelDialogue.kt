@@ -2,7 +2,6 @@ package content.region.fremennik.dialogue
 
 import content.region.fremennik.plugin.FremennikShipHelper
 import content.region.fremennik.plugin.Travel
-import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.isQuestComplete
 import core.api.removeItem
 import core.api.sendMessage

@@ -6,7 +6,6 @@ import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
-import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import shared.consts.Items
 

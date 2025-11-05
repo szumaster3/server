@@ -2,7 +2,6 @@ package content.region.kandarin.feldip.quest.chompybird.npc
 
 import content.region.kandarin.feldip.quest.chompybird.plugin.ChompyBird
 import core.api.*
-import core.api.produceGroundItem
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.MovementPulse

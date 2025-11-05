@@ -1,19 +1,21 @@
 package content.region.misthalin.draynor.wizard_tower.plugin
 
+import content.global.travel.EssenceTeleport
 import core.api.*
-import core.api.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.diary.DiaryType
-import core.game.world.map.Location
-import core.game.world.update.flag.context.Graphics
-import content.global.travel.EssenceTeleport
 import core.game.system.task.Pulse
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import shared.consts.*
+import core.game.world.update.flag.context.Graphics
+import shared.consts.Animations
+import shared.consts.NPCs
+import shared.consts.Quests
+import shared.consts.Scenery
 
 class WizardTowerListener : InteractionListener {
     private val WIZARD_BOOKCASE = intArrayOf(Scenery.BOOKCASE_12539, Scenery.BOOKCASE_12540)

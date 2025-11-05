@@ -3,17 +3,11 @@ package content.region.kandarin.yanille.quest.itwatchtower.plugin
 import content.data.GameAttributes
 import content.data.LightSource
 import content.data.items.SkillingTool
-import core.game.node.entity.player.link.WarningManager
-import core.game.node.entity.player.link.Warnings
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.BattlementDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.CityGuardDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.OgreGuardNorthWestGateDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.OgreGuardSouthEastGateDialogue
 import core.api.*
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
@@ -26,6 +20,8 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.WarningHandler
+import core.game.node.entity.player.link.WarningManager
+import core.game.node.entity.player.link.Warnings
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.Location

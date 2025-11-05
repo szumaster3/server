@@ -2,9 +2,6 @@ package content.region.misthalin.draynor.quest.swept.plugin
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.hasEmote
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

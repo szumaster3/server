@@ -3,7 +3,6 @@ package content.region.kandarin.feldip.jiggig.dialogue
 import content.region.kandarin.feldip.jiggig.quest.zogre.dialogue.GrishFinishDialogue
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
 import core.api.*
-import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

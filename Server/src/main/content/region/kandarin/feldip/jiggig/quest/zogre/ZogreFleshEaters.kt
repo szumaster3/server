@@ -2,7 +2,6 @@ package content.region.kandarin.feldip.jiggig.quest.zogre
 
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
 import core.api.*
-import core.api.isQuestComplete
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills

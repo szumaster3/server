@@ -1,6 +1,9 @@
 package content.region.tirannwn.isafdar.plugin
 
-import core.api.*
+import core.api.addItem
+import core.api.inInventory
+import core.api.sendMessage
+import core.api.teleport
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager

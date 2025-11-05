@@ -1,7 +1,6 @@
 package content.region.kandarin.pisc.quest.phoenix.custcene
 
 import content.region.kandarin.pisc.quest.phoenix.InPyreNeed
-import content.region.kandarin.pisc.quest.phoenix.plugin.InPyreNeedPlugin
 import core.api.setVarbit
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player

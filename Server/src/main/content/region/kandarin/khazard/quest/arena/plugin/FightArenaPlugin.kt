@@ -5,8 +5,6 @@ import content.region.kandarin.khazard.quest.arena.cutscene.PrisonCutscene
 import content.region.kandarin.khazard.quest.arena.dialogue.*
 import content.region.kandarin.khazard.quest.arena.npc.GeneralKhazardNPC
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

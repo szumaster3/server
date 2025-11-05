@@ -4,7 +4,6 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Vars

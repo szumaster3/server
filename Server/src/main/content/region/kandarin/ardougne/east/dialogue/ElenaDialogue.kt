@@ -1,10 +1,8 @@
 package content.region.kandarin.ardougne.east.dialogue
 
 import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.ElenaBiohazardDialogue
-import core.api.openDialogue
-import core.api.getQuestStage
 import core.api.isQuestComplete
-import core.api.isQuestInProgress
+import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

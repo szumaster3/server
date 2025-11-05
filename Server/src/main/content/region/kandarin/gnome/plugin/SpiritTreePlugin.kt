@@ -1,7 +1,9 @@
 package content.region.kandarin.gnome.plugin
 
-import core.api.*
+import core.api.getUsedOption
 import core.api.isQuestComplete
+import core.api.openDialogue
+import core.api.sendDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Quests

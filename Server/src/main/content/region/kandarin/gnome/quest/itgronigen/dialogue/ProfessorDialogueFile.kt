@@ -3,9 +3,6 @@ package content.region.kandarin.gnome.quest.itgronigen.dialogue
 import content.region.kandarin.gnome.quest.itgronigen.plugin.ObservatoryPlugin
 import content.region.kandarin.gnome.quest.itgronigen.plugin.ObservatoryPlugin.Companion.FAIL_ATTRIBUTE
 import core.api.*
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic

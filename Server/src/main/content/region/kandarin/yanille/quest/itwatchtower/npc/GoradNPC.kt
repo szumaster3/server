@@ -1,11 +1,6 @@
 package content.region.kandarin.yanille.quest.itwatchtower.npc
 
-import core.api.addItem
-import core.api.freeSlots
-import core.api.produceGroundItem
-import core.api.getQuestStage
-import core.api.sendItemDialogue
-import core.api.sendMessage
+import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player

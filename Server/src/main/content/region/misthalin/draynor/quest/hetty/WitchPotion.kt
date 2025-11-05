@@ -1,10 +1,6 @@
 package content.region.misthalin.draynor.quest.hetty
 
-import core.api.closeChatBox
-import core.api.inInventory
-import core.api.updateQuestTab
-import core.api.rewardXP
-import core.api.sendItemZoomOnInterface
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills

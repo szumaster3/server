@@ -3,7 +3,6 @@ package content.region.kandarin.ardougne.east.quest.biohazard.npc
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
-import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.plugin.Initializable
 import shared.consts.Items

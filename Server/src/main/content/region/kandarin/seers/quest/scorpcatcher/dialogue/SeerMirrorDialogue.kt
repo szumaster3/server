@@ -2,11 +2,7 @@ package content.region.kandarin.seers.quest.scorpcatcher.dialogue
 
 import content.data.GameAttributes
 import content.region.kandarin.seers.quest.scorpcatcher.ScorpionCatcherPlugin
-import core.api.getAttribute
-import core.api.lock
-import core.api.setQuestStage
-import core.api.removeAttribute
-import core.api.setAttribute
+import core.api.*
 import core.game.component.Component
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

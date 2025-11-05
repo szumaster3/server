@@ -1,7 +1,7 @@
 package content.region.kandarin.gnome.dialogue
 
-import core.api.openDialogue
 import core.api.getQuestStage
+import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

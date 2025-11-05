@@ -1,7 +1,6 @@
 package content.region.tirannwn.lletya.quest.roving_elves.plugin
 
 import content.region.tirannwn.lletya.quest.roving_elves.RovingElves
-import core.api.sendDialogue
 import core.api.sendDialogueLines
 import core.api.sendMessage
 import core.cache.def.impl.ItemDefinition

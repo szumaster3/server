@@ -2,9 +2,6 @@ package content.region.kandarin.witch.quest.seaslug.dialogue
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

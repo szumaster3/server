@@ -1,10 +1,6 @@
 package content.region.misthalin.draynor.wizard_tower.dialogue
 
-import core.api.rewardXP
-import core.api.sendMessage
-import core.api.sendNPCDialogue
-import core.api.sendPlayerDialogue
-import core.api.sendSkillDialogue
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.event.ResourceProducedEvent
 import core.game.node.entity.npc.NPC

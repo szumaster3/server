@@ -1,14 +1,16 @@
 package content.region.misthalin.varrock.quest.dslay.dialogue
 
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
-import core.api.*
+import core.api.freeSlots
+import core.api.getQuestStage
+import core.api.hasAnItem
+import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.quest.Quest
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests

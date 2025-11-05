@@ -1,14 +1,14 @@
 package content.region.kandarin.baxtorian.barbtraining.plugin
 
+import core.api.sendMessage
 import core.game.node.entity.player.Player
-import core.game.world.update.flag.context.Animation
-import core.api.*
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.update.flag.context.Animation
+import core.tools.RandomUtils
 import shared.consts.Animations
 import shared.consts.Items
-import core.tools.RandomUtils
 
 /**
  * Handles the cutting of barbarian leaping fish into roe/caviar and offcuts.

@@ -2,9 +2,9 @@ package content.region.kandarin.ardougne.quest.sheepherder.dialogue
 
 import content.region.kandarin.ardougne.quest.sheepherder.SheepHerder
 import core.api.addItemOrDrop
-import core.api.hasAnItem
 import core.api.finishQuest
 import core.api.getQuestStage
+import core.api.hasAnItem
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
 import core.plugin.Initializable

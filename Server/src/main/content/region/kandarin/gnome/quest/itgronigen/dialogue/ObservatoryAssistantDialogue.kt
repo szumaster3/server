@@ -2,7 +2,6 @@ package content.region.kandarin.gnome.quest.itgronigen.dialogue
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

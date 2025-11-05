@@ -1,8 +1,5 @@
 package content.region.asgarnia.falador.plugin.partyroom;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -21,7 +18,10 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static core.api.ContentAPIKt.setVarp;
 
 
 /**

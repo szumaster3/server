@@ -2,7 +2,6 @@ package content.region.kandarin.feldip.jiggig.quest.zogre.npc
 
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
 import core.api.*
-import core.api.produceGroundItem
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.npc.AbstractNPC

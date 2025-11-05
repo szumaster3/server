@@ -1,11 +1,7 @@
 package content.region.misthalin.varrock.quest.dragon.npc
 
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
-import core.api.calculateDragonFireMaxHit
-import core.api.inInventory
-import core.api.playJingle
-import core.api.getQuestStage
-import core.api.sendMessage
+import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -27,7 +23,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.NPCs

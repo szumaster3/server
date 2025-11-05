@@ -1,8 +1,8 @@
 package content.region.kandarin.quest.luc2.dialogue
 
 import core.api.addItemOrDrop
-import core.api.inInventory
 import core.api.getQuestStage
+import core.api.inInventory
 import core.api.sendItemDialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.IfTopic

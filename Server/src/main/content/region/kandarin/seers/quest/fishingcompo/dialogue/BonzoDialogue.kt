@@ -2,8 +2,6 @@ package content.region.kandarin.seers.quest.fishingcompo.dialogue
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

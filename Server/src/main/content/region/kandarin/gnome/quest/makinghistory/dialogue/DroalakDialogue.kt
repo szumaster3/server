@@ -2,8 +2,6 @@ package content.region.kandarin.gnome.quest.makinghistory.dialogue
 
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
 import core.api.*
-import core.api.transformNpc
-import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

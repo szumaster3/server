@@ -3,8 +3,6 @@ package content.region.misthalin.draynor.wizard_tower.guild
 import content.global.skill.runecrafting.Talisman
 import content.region.misthalin.draynor.wizard_tower.guild.RunecraftingGuildPlugin.ShopItem
 import core.api.*
-import core.api.isQuestComplete
-import core.api.closeDialogue
 import core.cache.def.impl.ItemDefinition
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.InputType

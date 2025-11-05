@@ -1,8 +1,8 @@
 package content.region.kandarin.seers.quest.elemental_workshop.npc
 
 import content.data.items.SkillingTool
-import core.api.sendDialogue
 import core.api.getTool
+import core.api.sendDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity

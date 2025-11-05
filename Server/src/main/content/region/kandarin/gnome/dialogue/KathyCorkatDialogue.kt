@@ -1,11 +1,7 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.region.kandarin.plugin.RowingBoatHelper
-import core.api.inEquipment
-import core.api.hasRequirement
-import core.api.removeItem
-import core.api.sendOptions
-import core.api.setTitle
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

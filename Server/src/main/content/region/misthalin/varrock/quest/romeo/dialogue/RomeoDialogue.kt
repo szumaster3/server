@@ -1,9 +1,9 @@
 package content.region.misthalin.varrock.quest.romeo.dialogue
 
 import content.region.misthalin.varrock.quest.romeo.cutscene.RomeoAndJulietCutscene
+import core.api.sendItemDialogue
 import core.api.setQuestStage
 import core.api.updateQuestTab
-import core.api.sendItemDialogue
 import core.game.activity.ActivityManager
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

@@ -1,8 +1,8 @@
 package content.region.misthalin.varrock.dialogue
 
 import core.api.removeItem
-import core.api.sendOptions
 import core.api.sendMessage
+import core.api.sendOptions
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

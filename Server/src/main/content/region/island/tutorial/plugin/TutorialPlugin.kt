@@ -13,7 +13,10 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.repository.Repository
-import shared.consts.*
+import shared.consts.Animations
+import shared.consts.Items
+import shared.consts.NPCs
+import shared.consts.Scenery
 
 class TutorialPlugin : InteractionListener {
 

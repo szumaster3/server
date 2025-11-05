@@ -11,8 +11,6 @@ import content.region.misthalin.varrock.plugin.museum.dialogue.OrlandoSmithDialo
 import content.region.misthalin.varrock.quest.crest.dialogue.DimintheisDialogue
 import content.region.misthalin.varrock.quest.phoenixgang.dialogue.CuratorHaigHalenDialogue
 import core.api.*
-import core.api.getQuestPoints
-import core.api.isQuestComplete
 import core.game.diary.DiaryAreaTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel

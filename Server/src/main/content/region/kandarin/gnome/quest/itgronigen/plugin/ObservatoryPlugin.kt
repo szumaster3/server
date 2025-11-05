@@ -1,13 +1,10 @@
 package content.region.kandarin.gnome.quest.itgronigen.plugin
 
 import content.region.kandarin.gnome.quest.itgronigen.cutscene.ObservatoryCutscene
-import content.region.kandarin.gnome.quest.itgronigen.dialogue.*
+import content.region.kandarin.gnome.quest.itgronigen.dialogue.ObservatoryAssistantDialogue
 import content.region.kandarin.gnome.quest.itgronigen.npc.GoblinGuardNPC.Companion.spawnGoblinGuard
 import content.region.kandarin.gnome.quest.itgronigen.npc.PoisonSpiderNPC.Companion.spawnPoisonSpider
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.api.utils.PlayerCamera
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType

@@ -3,10 +3,6 @@ package content.region.kandarin.ardougne.east.dialogue.market
 import content.global.activity.enchkey.EnchKeyUtils
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
 import core.api.*
-import core.api.openNpcShop
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

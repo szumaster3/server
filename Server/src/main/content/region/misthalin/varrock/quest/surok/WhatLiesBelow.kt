@@ -2,8 +2,6 @@ package content.region.misthalin.varrock.quest.surok
 
 import content.region.misthalin.varrock.quest.surok.plugin.WhatLiesBelowListener
 import core.api.*
-import core.api.isQuestComplete
-import core.api.updateQuestTab
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills

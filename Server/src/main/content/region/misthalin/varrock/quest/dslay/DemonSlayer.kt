@@ -7,7 +7,10 @@ import content.region.misthalin.varrock.quest.dslay.dialogue.GypsyArisDialogue
 import content.region.misthalin.varrock.quest.dslay.dialogue.SirPyrsinDialogue
 import content.region.misthalin.varrock.quest.dslay.dialogue.TraibornDialogue
 import content.region.misthalin.varrock.quest.dslay.plugin.DemonSlayerUtils
-import core.api.*
+import core.api.allInInventory
+import core.api.removeAttributes
+import core.api.sendItemZoomOnInterface
+import core.api.updateQuestTab
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.item.Item

@@ -1,7 +1,10 @@
 package content.region.kandarin.ardougne.east.dialogue
 
 import content.global.travel.ship.CharterShip
-import core.api.*
+import core.api.inEquipment
+import core.api.isDiaryComplete
+import core.api.removeItem
+import core.api.sendMessage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.link.diary.DiaryType

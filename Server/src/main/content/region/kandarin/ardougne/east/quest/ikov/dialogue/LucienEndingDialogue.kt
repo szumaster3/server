@@ -1,11 +1,6 @@
 package content.region.kandarin.ardougne.east.quest.ikov.dialogue
 
-import core.api.inInventory
-import core.api.openDialogue
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.removeItem
-import core.api.sendMessage
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile

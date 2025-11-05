@@ -2,10 +2,6 @@ package content.region.kandarin.ardougne.quest.cog.handlers
 
 import content.region.kandarin.ardougne.quest.cog.ClockTower
 import core.api.*
-import core.api.removeGroundItem
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

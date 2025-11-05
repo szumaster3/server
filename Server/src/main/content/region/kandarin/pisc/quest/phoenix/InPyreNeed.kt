@@ -2,7 +2,6 @@ package content.region.kandarin.pisc.quest.phoenix
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.allInInventory
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest

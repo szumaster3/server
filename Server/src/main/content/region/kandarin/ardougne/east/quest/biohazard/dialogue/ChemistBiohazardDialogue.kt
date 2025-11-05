@@ -1,10 +1,6 @@
 package content.region.kandarin.ardougne.east.quest.biohazard.dialogue
 
-import core.api.addItemOrDrop
-import core.api.getQuestStage
-import core.api.setQuestStage
-import core.api.removeItem
-import core.api.sendMessage
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

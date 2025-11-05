@@ -2,8 +2,8 @@ package content.region.kandarin.seers.quest.elemental_quest_2.dialogue
 
 import content.region.kandarin.seers.quest.elemental_quest_2.plugin.EW2Utils
 import core.api.addItemOrDrop
-import core.api.sendOptions
 import core.api.sendItemDialogue
+import core.api.sendOptions
 import core.game.dialogue.DialogueFile
 
 class SchematicCrateDialogue : DialogueFile() {

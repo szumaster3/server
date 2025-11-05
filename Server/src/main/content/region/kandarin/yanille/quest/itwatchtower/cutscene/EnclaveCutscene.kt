@@ -1,7 +1,6 @@
 package content.region.kandarin.yanille.quest.itwatchtower.cutscene
 
 import core.api.*
-import core.api.setQuestStage
 import core.game.activity.Cutscene
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator.Priority
@@ -10,7 +9,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import shared.consts.Animations
 import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Sounds

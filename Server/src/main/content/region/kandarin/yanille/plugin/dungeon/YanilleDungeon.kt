@@ -2,7 +2,6 @@ package content.region.kandarin.yanille.plugin.dungeon
 
 import content.global.skill.agility.AgilityHandler
 import core.api.*
-import core.api.applyPoison
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

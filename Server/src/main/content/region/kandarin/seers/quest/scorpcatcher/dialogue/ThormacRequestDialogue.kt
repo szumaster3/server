@@ -3,9 +3,6 @@ package content.region.kandarin.seers.quest.scorpcatcher.dialogue
 import content.data.GameAttributes
 import content.region.kandarin.seers.quest.scorpcatcher.ScorpionCatcherPlugin
 import core.api.*
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.component.Component
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

@@ -7,7 +7,6 @@ import content.region.kandarin.gnome.quest.tree.dialogue.BallistaDialogue
 import content.region.kandarin.gnome.quest.tree.dialogue.ElkoyDialogue
 import content.region.kandarin.gnome.quest.tree.dialogue.KhazardWarlordDialogue
 import core.api.*
-import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler

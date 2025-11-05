@@ -1,8 +1,6 @@
 package content.region.kandarin.plugin
 
 import core.api.*
-import core.api.allInInventory
-import core.api.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength

@@ -1,8 +1,6 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.node.entity.npc.NPC
 import core.tools.END_DIALOGUE

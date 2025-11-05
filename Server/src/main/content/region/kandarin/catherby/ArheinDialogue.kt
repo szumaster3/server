@@ -2,8 +2,6 @@ package content.region.kandarin.catherby
 
 import core.ServerStore
 import core.api.*
-import core.api.openNpcShop
-import core.api.getQuestStage
 import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

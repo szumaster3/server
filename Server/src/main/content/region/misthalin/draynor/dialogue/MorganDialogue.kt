@@ -1,9 +1,9 @@
 package content.region.misthalin.draynor.dialogue
 
 import content.region.misthalin.draynor.quest.vampire.dialogue.MorganVampireDialogue
-import core.api.openDialogue
 import core.api.getQuest
 import core.api.getQuestStage
+import core.api.openDialogue
 import core.api.updateQuestTab
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

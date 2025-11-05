@@ -4,7 +4,6 @@ import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import shared.consts.NPCs

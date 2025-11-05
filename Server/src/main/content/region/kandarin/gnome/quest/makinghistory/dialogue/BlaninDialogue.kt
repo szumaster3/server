@@ -1,8 +1,8 @@
 package content.region.kandarin.gnome.quest.makinghistory.dialogue
 
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
-import core.api.getVarbit
 import core.api.getQuestStage
+import core.api.getVarbit
 import core.api.sendDialogue
 import core.api.setVarbit
 import core.game.dialogue.Dialogue

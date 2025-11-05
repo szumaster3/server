@@ -1,7 +1,7 @@
 package content.region.kandarin.gnome.quest.tree.dialogue
 
-import core.api.inInventory
 import core.api.getQuestStage
+import core.api.inInventory
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

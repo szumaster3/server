@@ -9,7 +9,6 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneBorders;
-import core.game.world.map.zone.impl.BankZone;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import shared.consts.NPCs;

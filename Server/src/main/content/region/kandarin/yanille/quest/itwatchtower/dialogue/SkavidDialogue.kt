@@ -1,12 +1,7 @@
 package content.region.kandarin.yanille.quest.itwatchtower.dialogue
 
 import content.data.GameAttributes
-import core.api.addItemOrDrop
-import core.api.getAttribute
-import core.api.getQuestStage
-import core.api.setQuestStage
-import core.api.sendItemDialogue
-import core.api.sendMessage
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic

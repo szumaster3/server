@@ -4,8 +4,6 @@ import content.data.GameAttributes
 import content.region.fremennik.rellekka.dialogue.YrsaDiaryDialogue
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
-import core.api.openNpcShop
-import core.api.isQuestComplete
 import core.game.container.impl.EquipmentContainer
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

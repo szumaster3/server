@@ -2,9 +2,6 @@ package content.region.misthalin.draynor.wizard_tower.dialogue
 
 import content.global.travel.EssenceTeleport.teleport
 import core.api.*
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

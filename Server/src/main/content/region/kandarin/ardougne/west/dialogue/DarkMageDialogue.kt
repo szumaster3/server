@@ -1,6 +1,9 @@
 package content.region.kandarin.ardougne.west.dialogue
 
-import core.api.*
+import core.api.amountInInventory
+import core.api.hasRequirement
+import core.api.removeItem
+import core.api.replaceSlot
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

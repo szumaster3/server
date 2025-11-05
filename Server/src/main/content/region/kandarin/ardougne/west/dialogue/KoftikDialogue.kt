@@ -1,6 +1,6 @@
 package content.region.kandarin.ardougne.west.dialogue
 
-import core.api.*
+import core.api.sendMessage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
 import core.plugin.Initializable

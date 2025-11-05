@@ -1,10 +1,8 @@
 package content.region.fremennik.plugin.dungeon.npc
 
-import core.api.findLocalNPC
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.game.world.repository.Repository
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.NPCs

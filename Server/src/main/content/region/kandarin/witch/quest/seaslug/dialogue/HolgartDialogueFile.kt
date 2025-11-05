@@ -2,12 +2,7 @@ package content.region.kandarin.witch.quest.seaslug.dialogue
 
 import content.region.kandarin.witch.plugin.PlatformHelper
 import content.region.kandarin.witch.quest.seaslug.cutscene.HolgartCutscene
-import core.api.Container
-import core.api.inInventory
-import core.api.getQuestStage
-import core.api.setQuestStage
-import core.api.removeItem
-import core.api.sendItemDialogue
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

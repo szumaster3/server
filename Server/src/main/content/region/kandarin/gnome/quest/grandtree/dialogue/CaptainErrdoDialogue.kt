@@ -1,8 +1,8 @@
 package content.region.kandarin.gnome.quest.grandtree.dialogue
 
 import content.global.travel.glider.Glider
-import core.api.openInterface
 import core.api.getQuestStage
+import core.api.openInterface
 import core.api.teleport
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

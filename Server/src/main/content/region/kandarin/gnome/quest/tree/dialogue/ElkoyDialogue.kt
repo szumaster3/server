@@ -3,7 +3,6 @@ package content.region.kandarin.gnome.quest.tree.dialogue
 import content.region.kandarin.gnome.quest.tree.TreeGnomeVillage.Companion.mazeEntrance
 import content.region.kandarin.gnome.quest.tree.TreeGnomeVillage.Companion.mazeVillage
 import core.api.*
-import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

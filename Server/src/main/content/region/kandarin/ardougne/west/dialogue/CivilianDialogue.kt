@@ -2,7 +2,10 @@ package content.region.kandarin.ardougne.west.dialogue
 
 import content.global.skill.construction.decoration.costumeroom.Storable
 import content.global.skill.construction.decoration.costumeroom.Storable.Companion.hasStorableEquipped
-import core.api.*
+import core.api.addItem
+import core.api.inInventory
+import core.api.removeItem
+import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

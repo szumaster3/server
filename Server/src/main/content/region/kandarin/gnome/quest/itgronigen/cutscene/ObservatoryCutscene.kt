@@ -1,7 +1,6 @@
 package content.region.kandarin.gnome.quest.itgronigen.cutscene
 
 import core.api.*
-import core.api.setQuestStage
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

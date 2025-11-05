@@ -1,8 +1,8 @@
 package content.region.kandarin.ardougne.quest.cog.dialogue
 
 import content.region.kandarin.ardougne.quest.cog.ClockTower
-import core.api.getAttribute
 import core.api.finishQuest
+import core.api.getAttribute
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.dialogue.DialogueFile

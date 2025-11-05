@@ -1,7 +1,6 @@
 package content.region.misthalin.draynor.wizard_tower.quest.imp
 
 import core.api.*
-import core.api.allInInventory
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills

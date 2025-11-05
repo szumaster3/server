@@ -8,10 +8,6 @@ import content.region.kandarin.gnome.quest.grandtree.dialogue.KingNarnodeUnderGr
 import content.region.kandarin.gnome.quest.grandtree.dialogue.ShipyardWorkerDialogueFile
 import content.region.karamja.quest.mm.dialogue.KingNarnodeMMDialogue
 import core.api.*
-import core.api.getQuestStage
-import core.api.hasRequirement
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

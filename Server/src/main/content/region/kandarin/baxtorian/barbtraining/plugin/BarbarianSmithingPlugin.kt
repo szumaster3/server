@@ -2,7 +2,6 @@ package content.region.kandarin.baxtorian.barbtraining.plugin
 
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
-import core.api.sendSkillDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

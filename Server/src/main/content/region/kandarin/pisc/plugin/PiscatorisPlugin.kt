@@ -2,7 +2,6 @@ package content.region.kandarin.pisc.plugin
 
 import content.region.kandarin.plugin.RowingBoatHelper
 import core.api.*
-import core.api.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item

@@ -2,7 +2,6 @@ package content.region.kandarin.ardougne.dialogue
 
 import content.region.kandarin.ardougne.quest.cog.dialogue.BrotherKojoDialogueFile
 import core.api.*
-import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

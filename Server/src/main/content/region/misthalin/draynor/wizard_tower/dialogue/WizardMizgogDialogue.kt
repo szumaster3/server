@@ -2,9 +2,6 @@ package content.region.misthalin.draynor.wizard_tower.dialogue
 
 import content.region.misthalin.draynor.wizard_tower.quest.imp.ImpCatcher
 import core.api.*
-import core.api.openNpcShop
-import core.api.allInInventory
-import core.api.*
 import core.api.utils.PlayerCamera
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

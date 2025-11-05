@@ -5,7 +5,6 @@ import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.NPCs
 

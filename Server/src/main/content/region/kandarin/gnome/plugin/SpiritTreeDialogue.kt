@@ -5,11 +5,11 @@ import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.game.node.entity.player.link.diary.DiaryType
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs

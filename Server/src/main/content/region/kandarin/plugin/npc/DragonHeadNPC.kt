@@ -1,8 +1,8 @@
 package content.region.kandarin.plugin.npc
 
-import core.api.transformNpc
 import core.api.location
 import core.api.sendMessage
+import core.api.transformNpc
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle

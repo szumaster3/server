@@ -2,9 +2,6 @@ package content.region.kandarin.seers.quest.elemental_quest_2.plugin
 
 import content.region.kandarin.seers.quest.elemental_quest_2.dialogue.SchematicCrateDialogue
 import core.api.*
-import core.api.transformNpc
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC

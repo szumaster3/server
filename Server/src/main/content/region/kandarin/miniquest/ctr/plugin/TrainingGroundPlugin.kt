@@ -3,7 +3,6 @@ package content.region.kandarin.miniquest.ctr.plugin
 import content.data.GameAttributes
 import content.region.kandarin.miniquest.ctr.npc.KnightWavesNPC
 import core.api.*
-import core.api.hasRequirement
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.system.task.Pulse

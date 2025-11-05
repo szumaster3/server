@@ -2,10 +2,6 @@ package content.region.misthalin.draynor.quest.swept.plugin
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.getNPCName
-import core.api.getQuestStage
-import core.api.setQuestStage
-import core.api.unlockEmote
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

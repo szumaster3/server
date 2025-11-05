@@ -2,7 +2,10 @@ package content.region.fremennik.rellekka.quest.viking.plugin
 
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.npc.DraugenNPC
-import core.api.*
+import core.api.getAttribute
+import core.api.sendDialogue
+import core.api.sendMessage
+import core.api.setAttribute
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.Entity

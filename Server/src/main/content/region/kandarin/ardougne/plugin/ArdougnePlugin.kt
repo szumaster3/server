@@ -4,7 +4,6 @@ import content.global.travel.ship.CharterShip
 import content.region.kandarin.ardougne.east.dialogue.CaptainBarnabyDialogue
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import core.api.*
-import core.api.hasRequirement
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

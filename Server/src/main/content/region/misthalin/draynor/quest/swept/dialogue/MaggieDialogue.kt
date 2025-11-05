@@ -1,12 +1,6 @@
 package content.region.misthalin.draynor.quest.swept.dialogue
 
-import core.api.addItemOrDrop
-import core.api.hasAnItem
-import core.api.finishQuest
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
-import core.api.setVarbit
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

@@ -22,7 +22,6 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 import static core.api.ContentAPIKt.sendMessage;
-import static core.api.ContentAPIKt.sendMessages;
 
 /**
  * The type Draynor manor plugin.

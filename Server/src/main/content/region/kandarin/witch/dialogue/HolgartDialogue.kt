@@ -2,9 +2,9 @@ package content.region.kandarin.witch.dialogue
 
 import content.region.kandarin.witch.plugin.PlatformHelper
 import content.region.kandarin.witch.quest.seaslug.dialogue.HolgartDialogueFile
-import core.api.openDialogue
 import core.api.isQuestComplete
 import core.api.isQuestInProgress
+import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

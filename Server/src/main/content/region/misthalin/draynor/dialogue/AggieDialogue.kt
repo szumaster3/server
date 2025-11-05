@@ -1,9 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
-import content.data.GameAttributes
 import content.region.misthalin.draynor.quest.swept.plugin.SweptUtils.resetLines
 import core.api.*
-import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

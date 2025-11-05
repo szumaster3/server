@@ -1,12 +1,10 @@
 package content.region.fremennik.plugin
 
 import content.data.GameAttributes
-import content.region.kandarin.pisc.quest.phoenix.InPyreNeed
 import core.api.*
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import shared.consts.Components

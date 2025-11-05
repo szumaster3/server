@@ -2,11 +2,8 @@ package content.region.kandarin.ardougne.east.quest.biohazard.plugin
 
 import content.data.GameAttributes
 import content.global.skill.agility.AgilityHandler
-import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.*
+import content.region.kandarin.ardougne.east.quest.biohazard.dialogue.GuidorDialogue
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler

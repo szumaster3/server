@@ -2,8 +2,6 @@ package content.region.misthalin.varrock.quest.surok.plugin
 
 import content.data.items.SkillingTool.Companion.getPickaxe
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

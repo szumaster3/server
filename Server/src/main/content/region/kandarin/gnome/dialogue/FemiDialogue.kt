@@ -1,11 +1,7 @@
 package content.region.kandarin.gnome.dialogue
 
 import content.region.kandarin.gnome.quest.grandtree.plugin.TheGrandTreeUtils
-import core.api.inBorders
-import core.api.getQuestStage
-import core.api.isQuestInProgress
-import core.api.sendDialogue
-import core.api.setAttribute
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

@@ -4,8 +4,8 @@ import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.world.map.Location
 import core.game.node.entity.player.link.TeleportManager
+import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import shared.consts.Items
 import shared.consts.NPCs

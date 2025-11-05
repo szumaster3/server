@@ -1,6 +1,9 @@
 package content.region.kandarin.seers.plugin
 
-import core.api.*
+import core.api.MapArea
+import core.api.finishDiaryTask
+import core.api.removeAttribute
+import core.api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType

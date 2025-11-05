@@ -1,8 +1,8 @@
 package content.region.kandarin.ardougne.quest.hazeelcult.npc
 
 import content.region.kandarin.ardougne.quest.hazeelcult.plugin.HazeelCultPlugin
-import core.api.produceGroundItem
 import core.api.isQuestInProgress
+import core.api.produceGroundItem
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player

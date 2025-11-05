@@ -1,8 +1,6 @@
 package content.region.misthalin.draynor.quest.vampire.plugin
 
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC

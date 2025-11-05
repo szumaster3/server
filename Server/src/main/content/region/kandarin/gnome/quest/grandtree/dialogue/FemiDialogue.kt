@@ -1,11 +1,7 @@
 package content.region.kandarin.gnome.quest.grandtree.dialogue
 
 import content.region.kandarin.gnome.quest.grandtree.plugin.TheGrandTreeUtils
-import core.api.getAttribute
-import core.api.getQuestStage
-import core.api.removeItem
-import core.api.sendDialogue
-import core.api.sendItemDialogue
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

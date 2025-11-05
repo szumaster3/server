@@ -5,12 +5,12 @@ import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
-import shared.consts.Items
-import shared.consts.NPCs
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import shared.consts.Items
+import shared.consts.NPCs
 import shared.consts.Quests
 
 /**

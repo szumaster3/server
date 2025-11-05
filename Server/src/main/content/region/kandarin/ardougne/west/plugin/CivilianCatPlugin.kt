@@ -1,11 +1,14 @@
 package content.region.kandarin.ardougne.west.plugin
 
-import core.api.*
+import content.global.skill.summoning.objectpets.Pets
+import core.api.addItem
+import core.api.removeItem
+import core.api.sendItemDialogue
+import core.api.sendNPCDialogue
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Items
 import shared.consts.NPCs
-import content.global.skill.summoning.objectpets.Pets
 
 class CivilianCatPlugin : InteractionListener {
 

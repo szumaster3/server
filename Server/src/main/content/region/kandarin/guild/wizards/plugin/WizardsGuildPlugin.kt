@@ -1,11 +1,7 @@
 package content.region.kandarin.guild.wizards.plugin
 
 import content.global.travel.EssenceTeleport.teleport
-import core.api.getDynLevel
-import core.api.isQuestComplete
-import core.api.sendMessage
-import core.api.sendNPCDialogue
-import core.api.sendPlayerDialogue
+import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler

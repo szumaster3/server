@@ -1,7 +1,6 @@
 package content.region.kandarin.seers.quest.murder.plugin
 
 import core.api.*
-import core.api.getQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

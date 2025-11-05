@@ -1,11 +1,6 @@
 package content.region.kandarin.seers.quest.murder.dialogue
 
-import core.api.inInventory
-import core.api.getQuestStage
-import core.api.isQuestComplete
-import core.api.setQuestStage
-import core.api.sendDialogue
-import core.api.sendItemDialogue
+import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -13,7 +8,6 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
-
 
 
 class PoisonSalesmanDialogueFile : DialogueFile() {

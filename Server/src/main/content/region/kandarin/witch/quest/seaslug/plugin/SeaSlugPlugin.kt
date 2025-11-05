@@ -3,8 +3,6 @@ package content.region.kandarin.witch.quest.seaslug.plugin
 import content.region.kandarin.witch.quest.seaslug.cutscene.KennithCutscene
 import content.region.kandarin.witch.quest.seaslug.dialogue.KennithDialogueFile
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

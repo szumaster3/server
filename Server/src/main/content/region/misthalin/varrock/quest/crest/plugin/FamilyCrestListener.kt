@@ -1,8 +1,6 @@
 package content.region.misthalin.varrock.quest.crest.plugin
 
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

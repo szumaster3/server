@@ -5,7 +5,6 @@ import content.global.plugin.iface.FairyRing
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import content.region.kandarin.seers.dialogue.ThormacDialogue
 import core.api.*
-import core.api.isQuestComplete
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel
 import core.game.event.*

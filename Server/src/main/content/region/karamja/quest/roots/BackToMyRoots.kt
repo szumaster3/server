@@ -1,6 +1,5 @@
 package content.region.karamja.quest.roots
 
-import shared.consts.Vars
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -8,6 +7,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.Quests
+import shared.consts.Vars
 
 @Initializable
 class BackToMyRoots : Quest(Quests.BACK_TO_MY_ROOTS, 143, 142, 1, Vars.VARBIT_QUEST_BACK_TO_MY_ROOTS_PROGRESS_4055, 0, 1, 65) {

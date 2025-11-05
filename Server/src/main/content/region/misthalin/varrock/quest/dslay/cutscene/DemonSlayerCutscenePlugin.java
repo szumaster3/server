@@ -28,7 +28,10 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
-import shared.consts.*;
+import shared.consts.Music;
+import shared.consts.NPCs;
+import shared.consts.Quests;
+import shared.consts.Sounds;
 
 import static core.api.ContentAPIKt.*;
 

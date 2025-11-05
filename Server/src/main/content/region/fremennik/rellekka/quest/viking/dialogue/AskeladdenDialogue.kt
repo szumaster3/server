@@ -3,8 +3,6 @@ package content.region.fremennik.rellekka.quest.viking.dialogue
 import content.data.GameAttributes
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
