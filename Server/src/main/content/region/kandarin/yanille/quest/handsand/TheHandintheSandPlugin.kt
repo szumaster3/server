@@ -127,8 +127,7 @@ class TheHandintheSandPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.WHITE_BERRIES_239, Items.REDBERRY_JUICE_6954) { player, used, with ->
             if(removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
-                sendItemDialogue(player, Items.ROSE_TINTED_LENS_6956, "You have successfully made the rose tinted lens!")
-                addItem(player, Items.ROSE_TINTED_LENS_6956, 1)
+                addItem(player, Items.PINK_DYE_6955, 1)
             }
             return@onUseWith true
         }

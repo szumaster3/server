@@ -34,6 +34,8 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val hasBottle = inInventory(player, Items.BOTTLED_WATER_6953) && inBank(player, Items.BOTTLED_WATER_6953)
+
         when (stage) {
             0 -> if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
                 options("Talk to Betty about Swept Away.", "Talk to Betty about her shop.", "Talk to Betty about pink dye.").also { stage = 10 }
@@ -126,7 +128,9 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
             }
             38 -> showTopics(
                 Topic("I'm still working on it.", END_DIALOGUE, false),
-                Topic("I'm afraid I've forgotten how!", 39, false)
+                Topic("I'm afraid I've forgotten how!", 39, false),
+                // Inauthentic.
+                IfTopic("Ask about bottled water.", 43, !hasBottle && freeSlots(player) >= 1, true)
             )
             39 -> npcl(FaceAnim.FRIENDLY, "Pink dye can be made from red berries in the bottle I gave you. Add white berries to make the pink dye and then you just need to use that on a bullseye lens. Good luck!").also { stage = END_DIALOGUE }
             40 -> player("Ok, what does that do?").also { stage++ }
@@ -143,6 +147,11 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                     sendItemDialogue(player, Items.VIAL_229, "Betty places a vial on her counter.")
                 }
             }
+            43 -> {
+                end()
+                addItem(player, Items.BOTTLED_WATER_6953, 1)
+            }
+
 
         }
         return true
