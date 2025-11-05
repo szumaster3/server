@@ -32,22 +32,38 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
         if(stage == 2) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I need to show the hand to the !!Wizards?? in !!Yanille??.", line++)
-
         }
         if(stage == 3) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
         }
         if(stage == 4) {
-            line(player, "I have Bert's copy of the Rota.", line++)
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
         }
         if(stage == 5) {
-            line(player, "I have Sandy's copy of the Rota.", line++)
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
         }
         if(stage == 6) {
-            line(player, "I have taken the scroll to Zavistic Rarve.", line++)
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
         }
         if(stage == 7) {
-            line(player, "I have distracted Sandy successfully.", line++)
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+        }
+        if(stage == 8) {
+            line(player, "I have distracted Sandy successfully.", line++, true)
             line(player, "I have drugged Sandy's coffee.", line++)
             line(player, "I have interrogated Sandy.", line++)
             line(player, "I have returned the information from the orb.", line++)
@@ -61,7 +77,7 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
             line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
             line++
             line(player, "Every day I may ask Bert to transport some sand to my bank.", line++)
-            line(player, "You can collect your sand now.", line++) // "You'll need to wait about X hours to collect your sand."
+            line(player, "You can collect your sand now.", line) // "You'll need to wait about X hours to collect your sand."
 
         }
     }
@@ -69,10 +85,11 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.PINK_DYE_6955)
+        displayQuestItem(player, Items.SANDY_HAND_6945)
         drawReward(player, "1 Quest Point", ln++)
-        drawReward(player, "1,000 Thieving XP", ln++)
-        drawReward(player, "9,000 Crafting XP", ln)
+        drawReward(player, "1000 Thieving XP", ln++)
+        drawReward(player, "9000 Crafting XP", ln++)
+        drawReward(player, "Secret reward from Bert", ln)
         rewardXP(player, Skills.THIEVING, 1000.0)
         rewardXP(player, Skills.CRAFTING, 9000.0)
         setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 160, true)

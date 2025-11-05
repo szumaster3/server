@@ -11,7 +11,6 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
-import core.game.world.repository.Repository
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -130,24 +129,25 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 Topic("I'm still working on it.", END_DIALOGUE, false),
                 Topic("I'm afraid I've forgotten how!", 39, false),
                 // Inauthentic.
-                IfTopic("Ask about bottled water.", 43, !hasBottle && freeSlots(player) >= 1, true)
+                IfTopic("Ask about bottled water.", 42, !hasBottle && freeSlots(player) >= 1, true)
             )
             39 -> npcl(FaceAnim.FRIENDLY, "Pink dye can be made from red berries in the bottle I gave you. Add white berries to make the pink dye and then you just need to use that on a bullseye lens. Good luck!").also { stage = END_DIALOGUE }
             40 -> player("Ok, what does that do?").also { stage++ }
-            41 -> npcl(FaceAnim.FRIENDLY, "Why it makes the person who drinks it unable to hide in the shadow of lies. The light of truth will shine!").also { stage++ }
-            42 -> {
+            41 -> npcl(FaceAnim.FRIENDLY, "Why it makes the person who drinks it unable to hide in the shadow of lies. The light of truth will shine!").also {
                 end()
-                lock(player, 3)
-                val bettyNPC = Repository.findNPC(this.npc.id)
-                forceWalk(bettyNPC!!.asNpc(), Location.create(3012, 3258, 0), "")
-                runTask(player, 3) {
-                    bettyNPC.faceLocation(Location.create(3014, 3258, 0))
-                    bettyNPC.animate(Animation(Animations.HUMAN_MULTI_USE_832), 1)
-                    setVarbit(player, 1537, 1)
-                    sendItemDialogue(player, Items.VIAL_229, "Betty places a vial on her counter.")
+                player.lock(3)
+                npc.walkingQueue.reset(false)
+                runTask(player, 1) {
+                    forceWalk(npc.asNpc(), Location(3012, 3258, 0), "")
+                    npc.faceLocation(Location(3014, 3258, 0))
+                    npc.animate(Animation(Animations.HUMAN_MULTI_USE_832))
+                    runTask(player, 2) {
+                        setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 1)
+                        sendItemDialogue(player, Items.VIAL_229, "Betty places a vial on her counter.")
+                    }
                 }
             }
-            43 -> {
+            42 -> {
                 end()
                 addItem(player, Items.BOTTLED_WATER_6953, 1)
             }

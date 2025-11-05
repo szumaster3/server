@@ -3,9 +3,10 @@ package content.region.kandarin.yanille.quest.handsand
 import content.data.GameAttributes
 import core.api.*
 import core.game.dialogue.FaceAnim
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.*
@@ -19,25 +20,25 @@ class TheHandintheSandPlugin : InteractionListener {
         val BEER_IDS = intArrayOf(Items.GREENMANS_ALE_1909, Items.DRAGON_BITTER_1911)
         private val SANDY = intArrayOf(3110, 3111, NPCs.SANDY_3112, NPCs.SANDY_3113)
 
-        val fakeContent = arrayOf(
+        val bertRotaCopy = arrayOf(
             "Sandy's Sand Corp - Brimhaven",
-                    "",
+            "",
             "    Bert's Rota - Copy   ",
-                    "",
+            "",
             "Week 1 - 6am-10pm - 50gps",
-                    "",
+            "",
             "Week 2 - 6am-10pm - 50gps",
-                    "",
+            "",
             "Week 3 - 6am-10pm - 50gps",
-                    "",
+            "",
             "Week 4 - 6am-10pm - 50gps",
-                    "",
+            "",
             "Week 5 - 6am-10pm - 50gps",
-                    "",
+            "",
             "Week 6 - 6am-10pm - 50gps"
         )
 
-        val originalContent = arrayOf(
+        val bertRotaOriginal = arrayOf(
             "Sandy's Sand Corp - Brimhaven",
             "",
             "    Bert's Rota - Original   ",
@@ -73,7 +74,7 @@ class TheHandintheSandPlugin : InteractionListener {
 
         on(Items.BERTS_ROTA_6947, IntType.ITEM, "Read") { player, _ ->
             openInterface(player, Components.BLANK_SCROLL_222)
-            sendString(player, fakeContent.joinToString("<br>"), Components.BLANK_SCROLL_222, 1)
+            sendString(player, bertRotaCopy.joinToString("<br>"), Components.BLANK_SCROLL_222, 1)
             return@on true
         }
 
@@ -83,7 +84,7 @@ class TheHandintheSandPlugin : InteractionListener {
 
         on(Items.SANDYS_ROTA_6948, IntType.ITEM, "Read") { player, _ ->
             openInterface(player, Components.BLANK_SCROLL_222)
-            sendString(player, originalContent.joinToString("<br>"), Components.BLANK_SCROLL_222, 1)
+            sendString(player, bertRotaOriginal.joinToString("<br>"), Components.BLANK_SCROLL_222, 1)
             return@on true
         }
 
@@ -145,28 +146,31 @@ class TheHandintheSandPlugin : InteractionListener {
             return@onUseWith true
         }
 
-        on(Scenery.DOOR_40108, IntType.SCENERY, "open") { player, node ->
-            DoorActionHandler.handleDoor(player, node.asScenery()!!)
-            return@on true
-        }
-
         /*
          * Handles making the truth serum
          */
 
-        onUseWith(IntType.SCENERY, Items.ROSE_TINTED_LENS_6956, Scenery.COUNTER_10813) { player, used, _ ->
-            if(player.location.x == 3016 && player.location.y == 3259) {
-                if(removeItem(player, used.asItem())) {
-                    sendItemDialogue(player, Items.TRUTH_SERUM_6952, "As you focus the light on the vial and betty pours the potion in, the lens heats up and shatters. After a few seconds betty hand you the vial of Truth Serum.")
+        onUseWithAt(
+            IntType.SCENERY,
+            Items.ROSE_TINTED_LENS_6956,
+            Scenery.COUNTER_10813,
+            Location.create(3016, 3259, 0)
+        ) { player, used, _ ->
+            lock(player, 3)
+            queueScript(player, 1, QueueStrength.SOFT) {
+                if (removeItem(player, used.asItem())) {
+                    sendItemDialogue(
+                        player,
+                        Items.TRUTH_SERUM_6952,
+                        "As you focus the light on the vial and Betty pours the potion in, the lens heats up and shatters. After a few seconds Betty hands you the vial of Truth Serum."
+                    )
+                    player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(72), 8)
+                    setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 0)
                     addItem(player, Items.TRUTH_SERUM_6952, 1)
-                    setVarbit(player, 1537, 0)
                 }
-            } else {
-                sendMessage(player, "You need to be standing in the doorway.")
+                return@queueScript stopExecuting(player)
             }
-            return@onUseWith true
+            return@onUseWithAt true
         }
-
     }
-
 }

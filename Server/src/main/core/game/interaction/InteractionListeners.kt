@@ -375,6 +375,63 @@ object InteractionListeners {
     }
 
     /**
+     * Runs a use-with interaction between two nodes with required location.
+     */
+    @JvmStatic
+    fun run(
+        used: Node,
+        with: Node,
+        type: IntType,
+        player: Player,
+        requiredLocation: Location? = null
+    ): Boolean {
+        val flag = when (type) {
+            IntType.NPC, IntType.PLAYER -> DestinationFlag.ENTITY
+            IntType.SCENERY -> DestinationFlag.OBJECT
+            IntType.GROUND_ITEM -> DestinationFlag.ITEM
+            else -> DestinationFlag.OBJECT
+        }
+        if (player.locks.isInteractionLocked()) return false
+        if (requiredLocation != null && player.location != requiredLocation) {
+            return false
+        }
+
+        var flipped = false
+
+        val method: ((Player, Node, Node) -> Boolean) = when {
+            with is Player -> get(-1, used.id, 4) ?: return false
+            else -> get(used.id, with.id, type.ordinal) ?: if (type == IntType.ITEM) {
+                get(with.id, used.id, type.ordinal)?.also { flipped = true } ?: return false
+            } else return false
+        }
+
+        val destOverride = if (flipped) {
+            getOverride(type.ordinal, used.id, "use") ?: getOverride(type.ordinal, with.id) ?: getOverride(type.ordinal, "use")
+        } else {
+            getOverride(type.ordinal, with.id, "use") ?: getOverride(type.ordinal, used.id) ?: getOverride(type.ordinal, "use")
+        }
+
+        if (type != IntType.ITEM && !isUseWithInstant(method)) {
+            if (player.locks.isMovementLocked()) return false
+            player.pulseManager.run(object : MovementPulse(player, with, flag, destOverride) {
+                override fun pulse(): Boolean {
+                    if (player.zoneMonitor.useWith(used.asItem(), with)) return true
+                    player.faceLocation(with.location)
+                    if (flipped) {
+                        method.invoke(player, with, used)
+                    } else {
+                        method.invoke(player, used, with)
+                    }
+                    return true
+                }
+            })
+            return true
+        } else {
+            return if (flipped) method.invoke(player, with, used) else method.invoke(player, used, with)
+        }
+    }
+
+    /**
      * Adds use-with handler for multiple pairs.
      */
     fun add(type: Int, used: IntArray, with: IntArray, handler: (Player, Node, Node) -> Boolean) {
