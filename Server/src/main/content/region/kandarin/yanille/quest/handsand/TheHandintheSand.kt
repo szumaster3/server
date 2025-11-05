@@ -12,6 +12,9 @@ import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.Quests
 
+/**
+ * Represents the Hand in the Sand quest journal.
+ */
 @Initializable
 class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 0, 1, 160) {
 
@@ -19,57 +22,110 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
         super.drawJournal(player, stage)
         var line = 11
 
-        if(stage == 0) {
+        if (stage == 0) {
             line(player, "I can start this quest by speaking to !!Bert?? in !!Yanille?? in the", line++)
             line(player, "house near the !!Sandpit??.", line++)
             line(player, "Before I begin I will need to:", line++)
             line(player, "!!Have level 17 Thieving??.", line++, hasLevelStat(player, Skills.THIEVING, 17))
             line(player, "!!Have level 49 Crafting??.", line++, hasLevelStat(player, Skills.THIEVING, 49))
         }
-        if(stage == 1) {
+
+        if (stage == 1) {
             line(player, "I should speak to the Guard Captain.", line++)
         }
-        if(stage == 2) {
+
+        if (stage == 2) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I need to show the hand to the !!Wizards?? in !!Yanille??.", line++)
         }
-        if(stage == 3) {
+
+        if (stage == 3) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
         }
-        if(stage == 4) {
-            line(player, "I have spoken to the Guard Captain.", line++, true)
-            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
-            line(player, "I have Bert's copy of the Rota.", line++, true)
-        }
-        if(stage == 5) {
+
+        if (stage == 4) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
             line(player, "I have Bert's copy of the Rota.", line++, true)
-            line(player, "I have Sandy's copy of the Rota.", line++, true)
         }
-        if(stage == 6) {
+        if (stage == 5) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
             line(player, "I have Bert's copy of the Rota.", line++, true)
             line(player, "I have Sandy's copy of the Rota.", line++, true)
-            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
         }
-        if(stage == 7) {
+        if (stage == 6) {
             line(player, "I have spoken to the Guard Captain.", line++, true)
             line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
             line(player, "I have Bert's copy of the Rota.", line++, true)
             line(player, "I have Sandy's copy of the Rota.", line++, true)
             line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
         }
-        if(stage == 8) {
+        if (stage == 7) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+        }
+        if (stage == 9) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
             line(player, "I have distracted Sandy successfully.", line++, true)
-            line(player, "I have drugged Sandy's coffee.", line++)
-            line(player, "I have interrogated Sandy.", line++)
-            line(player, "I have returned the information from the orb.", line++)
-            line(player, "The Sandpit has been enchanted.", line++)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+        }
+        if (stage == 10) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+        }
+        if (stage == 11) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+            line(player, "I have returned the information from the orb.", line++, true)
+        }
+
+        if (stage == 12) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+            line(player, "I have returned the information from the orb.", line++, true)
+            line(player, "The Sandpit has been enchanted.", line++, true)
             line(player, "I have retrieved the head of a wizard.", line++)
-            line(player, "The dead wizard has been buried and Sandy arrested for murder.", line++)
+        }
+        if(stage == 13) {
+            line(player, "I have spoken to the Guard Captain.", line++, true)
+            line(player, "I have shown the hand to the Wizards in Yanille.", line++, true)
+            line(player, "I have Bert's copy of the Rota.", line++, true)
+            line(player, "I have Sandy's copy of the Rota.", line++, true)
+            line(player, "I have taken the scroll to Zavistic Rarve.", line++, true)
+            line(player, "I have distracted Sandy successfully.", line++, true)
+            line(player, "I have drugged Sandy's coffee.", line++, true)
+            line(player, "I have interrogated Sandy.", line++, true)
+            line(player, "I have returned the information from the orb.", line++, true)
+            line(player, "The Sandpit has been enchanted.", line++, true)
+            line(player, "I have retrieved the head of a wizard.", line++, true)
+            line(player, "The dead wizard has been buried and Sandy arrested for murder.", line++, true)
         }
 
         if (stage == 100) {
@@ -77,8 +133,11 @@ class TheHandintheSand : Quest(Quests.THE_HAND_IN_THE_SAND, 72, 71, 1, Vars.VARB
             line(player, "<col=FF0000>QUEST COMPLETE!", line, false)
             line++
             line(player, "Every day I may ask Bert to transport some sand to my bank.", line++)
-            line(player, "You can collect your sand now.", line) // "You'll need to wait about X hours to collect your sand."
-
+            line(
+                player,
+                "You can collect your sand now.",
+                line
+            ) // "You'll need to wait about X hours to collect your sand."
         }
     }
 

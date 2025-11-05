@@ -2,6 +2,7 @@ package content.region.kandarin.feldip.jiggig.quest.zogre.dialogue
 
 import content.data.GameAttributes
 import content.region.kandarin.feldip.jiggig.quest.zogre.plugin.ZogreUtils
+import content.region.kandarin.yanille.quest.handsand.SandpitCutscene
 import content.region.kandarin.yanille.quest.handsand2.FuneralCutscene
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -38,7 +39,9 @@ class ZavisticRarveDialogues : DialogueFile() {
         val saleBlackPrism = questComplete && inInventory(p, Items.BLACK_PRISM_4808)
         val handProgress = getQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND)
         val handVarbit = getVarbit(player!!, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
-        val hasScryingOrb = inInventory(player!!, Items.MAGICAL_ORB_6950) && inBank(player!!, Items.MAGICAL_ORB_6950)
+        val hasScryingOrb = inInventory(player!!, Items.MAGICAL_ORB_6950) || inBank(player!!, Items.MAGICAL_ORB_6950)
+        val hasScryingOrbA = inInventory(player!!, Items.MAGICAL_ORB_A_6951) || inBank(player!!, Items.MAGICAL_ORB_A_6951)
+        val hasVisitedEntrana = inInventory(player!!, Items.WIZARDS_HEAD_6957) || inBank(player!!, Items.WIZARDS_HEAD_6957)
 
         when (stage) {
             START_DIALOGUE -> if(getAttribute(player!!, ZogreUtils.NPC_ACTIVE, false)) {
@@ -57,6 +60,8 @@ class ZavisticRarveDialogues : DialogueFile() {
             4 -> npcl("Well...anyway...we're very busy here, hurry up what do you want?").also { stage = 5 }
             5 -> when {
 
+                // MINIQUEST
+
                 canStartMiniQuest -> showTopics(
                     Topic("I'm here about the sicks...err Zogres", 13, true),
                     if (miniquestComplete) {
@@ -65,6 +70,13 @@ class ZavisticRarveDialogues : DialogueFile() {
                         Topic("I have a rather sandy problem that I'd like to palm off on you.",  16)
                     }
                 )
+
+                hasMiniQuestDiaryItem -> {
+                    player(FaceAnim.HALF_ASKING, "I have a rather sandy problem that I'd like to palm off on you.")
+                    stage = 57
+                }
+
+                // HAND IN THE SAND
 
                 handProgress == 2 -> if(!inInventory(player!!, Items.BEER_SOAKED_HAND_6946)){
                     sendDialogue(player!!, "Maybe you should have the hand with you before speaking to Zavistic.").also { stage = END_DIALOGUE }
@@ -88,10 +100,38 @@ class ZavisticRarveDialogues : DialogueFile() {
                     }
                 }
 
-                hasMiniQuestDiaryItem -> {
-                    player(FaceAnim.HALF_ASKING, "I have a rather sandy problem that I'd like to palm off on you.")
-                    stage = 57
+                handVarbit == 5 -> {
+                    npcl(FaceAnim.HALF_ASKING, "Have you made the serum and talked to Sandy yet?")
+                    stage = 173
                 }
+
+                handProgress in 7..10 -> if(!hasScryingOrbA) {
+                    player("I got the whole story from Sandy... but I lost the orb.")
+                    stage = 174
+                } else {
+                    sendItemDialogue(player!!, Items.MAGICAL_ORB_A_6951, "You hand the magical scrying orb to the Wizard and watch as the recording is played back.")
+                    stage = 177
+                }
+
+                handProgress == 11 -> if(!inInventory(player!!, Items.BUCKET_OF_SAND_1783) && !inInventory(player!!, Items.EARTH_RUNE_557, 5)) {
+                    npcl(FaceAnim.THINKING, "You really mean you forgot? Bring me 5 earth runes and 1 bucket of sand to help stop that moneygrabbing Sandy!").also { stage = END_DIALOGUE }
+                } else {
+                    removeItem(player!!, Items.BUCKET_OF_SAND_1783)
+                    removeItem(player!!, Item(Items.EARTH_RUNE_557, 5))
+                    playerl(FaceAnim.HAPPY, "I've brought what you wanted, what are you going to do?")
+                    stage = 180
+                }
+
+                handProgress == 13 -> if(!hasVisitedEntrana) {
+                    npcl(FaceAnim.HALF_ASKING, "Did you visit the Entrana sandpit yet? Ask the worker there if he's found an arm or a leg.")
+                    stage = 182
+                } else {
+                    removeItem(player!!, Items.WIZARDS_HEAD_6957)
+                    sendItemDialogue(player!!, Items.WIZARDS_HEAD_6957, "You show the wizard the head.")
+                    stage = 183
+                }
+
+                // ZOGRE FLESH EATERS & RETURNING CLARENCE
 
                 zogreProgress -> {
                     val opts = if (getAttribute(player!!, ZogreUtils.TALK_ABOUT_SIGN_PORTRAIT, false)) {
@@ -621,6 +661,29 @@ class ZavisticRarveDialogues : DialogueFile() {
                 teleport(player!!, Location.create(3014, 3259, 0), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                 stage = END_DIALOGUE
             }
+            173 -> playerl(FaceAnim.FRIENDLY, "ot yet, but don't bust a gut over it!").also { stage = END_DIALOGUE }
+            174 -> npcl(FaceAnim.FRIENDLY, "It's ok, I saw the whole thing as the orb is connected via magic to me as I enchanted it.").also { stage++ }
+            175 -> npcl(FaceAnim.HALF_THINKING, "I think this Sandy needs a lesson, please bring me 5 earth runes and a bucket of sand.").also { stage++ }
+            176 -> playerl(FaceAnim.HAPPY, "Umm.. ok, I'll get you the 5 earth runes and bucket of sand.").also {
+                setQuestStage(player!!, Quests.THE_HAND_IN_THE_SAND, 11)
+                stage = END_DIALOGUE
+            }
+            177 -> npcl(FaceAnim.THINKING, "Well, well...I think this Sandy needs a lesson, please bring me 5 earth runes and a bucket of sand.").also { stage++ }
+            178 -> player(FaceAnim.ASKING, "Erm, why?").also { stage++ }
+            179 -> npcl(FaceAnim.ANNOYED, "Don't question me or you'll end up as braindead as that legless Guard Captain!").also { stage = 176 }
+            180 -> npcl(FaceAnim.FRIENDLY, "Ahh excellent, let's have those! Watch and learn...").also { stage++ }
+            181 -> {
+                end()
+                SandpitCutscene(player!!).start(true)
+            }
+            182 -> playerl(FaceAnim.HALF_GUILTY, "Not yet no. I've been running around like a headless chicken, but I'll get to it!").also { stage = END_DIALOGUE }
+            183 -> npcl(FaceAnim.HAPPY, "Alas poor Clarence. I knew him, ${player!!.username}.").also { stage++ }
+            184 -> npcl(FaceAnim.FRIENDLY, "Thank you - we shall bury him today. I have sent word for the guards to arrest Sandy, so no one will ever see him again!").also { stage++ }
+            185 -> {
+                end()
+                finishQuest(player!!, Quests.THE_HAND_IN_THE_SAND)
+            }
+
         }
     }
 }

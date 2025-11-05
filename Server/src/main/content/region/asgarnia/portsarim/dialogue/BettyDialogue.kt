@@ -34,15 +34,15 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         val hasBottle = inInventory(player, Items.BOTTLED_WATER_6953) && inBank(player, Items.BOTTLED_WATER_6953)
-
+        val handProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
         when (stage) {
             0 -> if (getQuestStage(player, Quests.SWEPT_AWAY) >= 1) {
                 options("Talk to Betty about Swept Away.", "Talk to Betty about her shop.", "Talk to Betty about pink dye.").also { stage = 10 }
             } else if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)) {
                 options("Can I see your wares?", "Sorry, I'm not into magic.", "Talk to Betty about pink dye.").also { stage++ }
-            } else if(isQuestInProgress(player, Quests.THE_HAND_IN_THE_SAND, 1, 99)) {
+            } else if(isQuestInProgress(player, Quests.THE_HAND_IN_THE_SAND, 7, 99)) {
                 showTopics(
-                    IfTopic("Talk to Betty about the Hand in the Sand.", 34, getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) >= 7, true),
+                    Topic("Talk to Betty about the Hand in the Sand.", 34, true),
                     Topic("Talk to Betty about her shop.", 33, true)
                 )
             } else {
@@ -66,12 +66,13 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("No thanks, Betty.").also { stage = END_DIALOGUE }
                 2 -> player("Yes, please!").also { stage++ }
             }
-
             5 -> {
                 end()
                 if (freeSlots(player) == 0) {
                     sendMessage(player, "You don't have enough inventory space.")
-                } else if (!removeItem(player, Item(Items.COINS_995, 20))) {
+                    return true
+                }
+                if (!removeItem(player, Item(Items.COINS_995, 20))) {
                     sendDialogue(player, "You don't have enough coins for that.")
                 } else {
                     sendDialogue("You hand over 20 gold pieces in return for the dye.")
@@ -108,10 +109,31 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
             31 -> npc("There you go! I'm sure t hat's just the spice that", "Maggie's looking for.").also { stage++ }
             32 -> player("Many thanks.").also { stage = END_DIALOGUE }
             33 -> options("Can I see your wares?", "Sorry, I'm not into magic.").also { stage = 1 }
-            34 -> if(getAttribute(player, GameAttributes.HAND_SAND_BETTY_POTION, false)) {
-                npcl(FaceAnim.FRIENDLY, "Wonderful deary. When you're ready, just stand in the open doorway and focus the light on the empty vial on my desk and I'll pour the serum into it.").also { stage = 40 }
-            } else {
-                playerl(FaceAnim.HALF_ASKING, "I've come from Yanille, the wizard says you can make Truth Serum?").also { stage++ }
+            34 -> when {
+                getAttribute(player, GameAttributes.HAND_SAND_BETTY_POTION, false) -> {
+                    npcl(FaceAnim.FRIENDLY, "Wonderful deary. When you're ready, just stand in the open doorway and focus the light on the empty vial on my desk and I'll pour the serum into it.")
+                    stage = 40
+                }
+
+                handProgress == 8 -> {
+                    npcl(FaceAnim.FRIENDLY, "Ok, now the last ingredient, something personal from the person you need to tell the truth, else it won't work!")
+                    stage = 44
+                }
+
+                handProgress == 5 -> {
+                    npcl(FaceAnim.HAPPY, "Hello deary! How did the serum work?")
+                    stage = 48
+                }
+
+                handProgress == 10 -> {
+                    npcl(FaceAnim.FRIENDLY, "Hello again deary. Come back and tell me what happened when all the fuss is over.")
+                    stage = 56
+                }
+
+                else -> {
+                    playerl(FaceAnim.HALF_ASKING, "I've come from Yanille, the wizard says you can make Truth Serum?")
+                    stage++
+                }
             }
             35 -> npcl(FaceAnim.FRIENDLY, "This is true deary, I'll need an empty vial.").also { stage++ }
             36 -> if(!removeItem(player, Items.VIAL_229)) {
@@ -132,7 +154,7 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                 IfTopic("Ask about bottled water.", 42, !hasBottle && freeSlots(player) >= 1, true)
             )
             39 -> npcl(FaceAnim.FRIENDLY, "Pink dye can be made from red berries in the bottle I gave you. Add white berries to make the pink dye and then you just need to use that on a bullseye lens. Good luck!").also { stage = END_DIALOGUE }
-            40 -> player("Ok, what does that do?").also { stage++ }
+            40 -> playerl(FaceAnim.HALF_ASKING, "Ok, what does that do?").also { stage++ }
             41 -> npcl(FaceAnim.FRIENDLY, "Why it makes the person who drinks it unable to hide in the shadow of lies. The light of truth will shine!").also {
                 end()
                 player.lock(3)
@@ -147,11 +169,49 @@ class BettyDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
             }
-            42 -> {
-                end()
-                addItem(player, Items.BOTTLED_WATER_6953, 1)
+            42 -> npc("I'll need an empty vial.").also { stage++ }
+            43 -> if(!removeItem(player, Items.VIAL_229)) {
+                playerl(FaceAnim.HAPPY, "I'll have to go find one then, I'll be back!").also { stage = END_DIALOGUE }
+            } else {
+                player("I have one here!").also {
+                    addItem(player, Items.BOTTLED_WATER_6953, 1)
+                    stage = END_DIALOGUE
+                }
             }
+            44 -> if(!inInventory(player, Items.SAND_6958)) {
+                player("Ok, I'll see if I can find something.").also { stage = END_DIALOGUE }
+            } else {
+                playerl(FaceAnim.HALF_ASKING, "What about this sand straight from his pocket?").also { stage++ }
 
+            }
+            45 -> npcl(FaceAnim.HAPPY, "That's excellent deary!").also { stage++ }
+            46 -> {
+                removeItem(player, Items.SAND_6958)
+                setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 5, true)
+                sendItemDialogue(player, Items.SAND_6958, "You hand the sand and watch Betty sprinkle it in the serum, it fizzes.")
+                stage++
+            }
+            47 -> npcl(FaceAnim.FRIENDLY, "Don't forget to dilute it in something like tea or coffee.").also { stage = END_DIALOGUE }
+
+            48 -> showTopics(
+                Topic("I've forgotten how to use the serum.", 51),
+                Topic("I've lost it!", 49)
+            )
+            49 -> if(freeSlots(player) == 0){
+                npcl(FaceAnim.FRIENDLY, "That's not a problem, I kept some of it here just in case, but you have no space for it! Come back when you do.").also { stage = END_DIALOGUE }
+            } else {
+                npcl(FaceAnim.FRIENDLY, "That's not a problem, I kept some of it here just in case, here you are!").also { stage++ }
+            }
+            50 -> sendItemDialogue(player, Items.TRUTH_SERUM_6952, "Betty hands you a new vial of truth serum.").also {
+                addItem(player, Items.TRUTH_SERUM_6952, 1)
+                stage = END_DIALOGUE
+            }
+            51 -> player("I haven't tried it yet.").also { stage++ }
+            52 -> npcl(FaceAnim.FRIENDLY, "Well don't forget to dilute it in a drink or something else bad things might happen.").also { stage++ }
+            53 -> player("Bad things?").also { stage++ }
+            54 -> npc(FaceAnim.FRIENDLY, "Well.... bits might drop off.").also { stage++ }
+            55 -> player("Oh! I... see. I'll remember to dilute it then.").also { stage = END_DIALOGUE }
+            56 -> player("Ok Betty, I'll be back!").also { stage = END_DIALOGUE }
 
         }
         return true

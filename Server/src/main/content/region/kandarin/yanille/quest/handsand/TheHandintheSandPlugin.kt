@@ -6,6 +6,7 @@ import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -150,27 +151,70 @@ class TheHandintheSandPlugin : InteractionListener {
          * Handles making the truth serum
          */
 
-        onUseWithAt(
-            IntType.SCENERY,
-            Items.ROSE_TINTED_LENS_6956,
-            Scenery.COUNTER_10813,
-            Location.create(3016, 3259, 0)
-        ) { player, used, _ ->
+        onUseWith(IntType.SCENERY, Items.ROSE_TINTED_LENS_6956, Scenery.COUNTER_10813) { player, used, _ ->
             lock(player, 3)
             queueScript(player, 1, QueueStrength.SOFT) {
                 if (removeItem(player, used.asItem())) {
-                    sendItemDialogue(
-                        player,
-                        Items.TRUTH_SERUM_6952,
-                        "As you focus the light on the vial and Betty pours the potion in, the lens heats up and shatters. After a few seconds Betty hands you the vial of Truth Serum."
-                    )
+                    sendItemDialogue(player, Items.TRUTH_SERUM_6952, "As you focus the light on the vial and Betty pours the potion in, the lens heats up and shatters. After a few seconds Betty hands you the vial of Truth Serum.")
                     player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(72), 8)
                     setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 0)
                     addItem(player, Items.TRUTH_SERUM_6952, 1)
                 }
                 return@queueScript stopExecuting(player)
             }
-            return@onUseWithAt true
+            return@onUseWith true
+        }
+
+        /*
+         * Handles put the sand to truth serum.
+         */
+
+        onUseWith(IntType.ITEM, Items.PINK_DYE_6955, Items.LANTERN_LENS_4542) { player, used, with ->
+            sendDialogue(player, "Perhaps you should let Betty do that, it looks tricky.")
+            return@onUseWith true
+        }
+
+        /*
+         * Handles put truth serum to sandy coffee.
+         */
+
+        onUseWith(IntType.SCENERY, Items.TRUTH_SERUM_6952, Scenery.SANDY_S_COFFEE_MUG_10807) { player, used, _ ->
+            if(removeItem(player, used.asItem())) {
+                setVarbit(player, 1535, 0, true)
+                sendDialogue(player, "You pour the serum into Sandy's coffee, then a little while later watch him drink it.")
+                setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 9)
+            }
+            return@onUseWith true
+        }
+
+        /*
+         * Handles use magical orb (not activated) on sandy NPC.
+         */
+
+        onUseWith(IntType.NPC, Items.MAGICAL_ORB_6950, *SANDY) { player, _, _ ->
+            sendDialogue(player,"You need to activate the magical scrying orb, obtained from the wizard in Yanille, to capture the conversation with Sandy!")
+            return@onUseWith true
+        }
+
+        /*
+         * Handles activating the orb.
+         */
+
+        on(Items.MAGICAL_ORB_6950, IntType.ITEM, "activate") { player, node ->
+            if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 9) {
+                replaceSlot(player, node.index, Item(Items.MAGICAL_ORB_A_6951, 1))
+                sendItemDialogue(player, Items.MAGICAL_ORB_A_6951, "You rub the magical scrying orb as the Wizard told you, it starts to glow, recording everything it sees and hears, now you can talk to Sandy in Brimhaven.")
+            } else {
+                sendItemDialogue(player, Items.MAGICAL_ORB_6950, "You rub the magical scrying orb but nothing interesting happens.")
+            }
+            return@on true
+        }
+
+    }
+
+    override fun defineDestinationOverrides() {
+        setDest(IntType.SCENERY, intArrayOf(Scenery.COUNTER_10813), "use") { player, node ->
+            return@setDest Location.create(3016, 3259, 0)
         }
     }
 }

@@ -26,31 +26,72 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
         val username = player?.username?.lowercase() ?: ""
         val alreadyClaimed = store[username]?.asBoolean ?: false
         val hasBankSpace = hasSpaceFor(player, Item(Items.BUCKET_OF_SAND_1783, 1)) ?: false
+        val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
 
-        if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 1) {
-            npcl(FaceAnim.HALF_ASKING, "Did ye see yon Guard Capt'n 'bout hand?").also { stage = 11}
-        } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 3) {
-            npcl(FaceAnim.HALF_ASKING, "Wha' info ye find 'bout hand, ${player.username}?").also { stage = 15 }
-        } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 4) {
-            npcl(FaceAnim.HALF_ASKING, "Ey'up ${player.username}. Did yer see Sandy in Brimhaven 'bout me rota?").also { stage = 21 }
-        } else if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 6) {
-            npcl(FaceAnim.HALF_ASKING, "I be hopin' tha search is goin' well... are tha wizard's owning up ta anythin' yet?").also { stage = 29 }
-        } else if(inInventory(player, Items.SANDYS_ROTA_6948)) {
-            playerl(FaceAnim.FRIENDLY, "I managed to get a copy of the original rota. Your hours changed a week ago!").also { stage = 25 }
-        } else {
-            npcl(FaceAnim.SAD, "Eeee, wha' shall I do! I'll mos' certainly lose tha job...")
+        if (isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)) {
+            when {
+                alreadyClaimed -> {
+                    npc("'Ello there, ${player?.username}! Hope yer be havin' fun. I be a wee bi' busy to 'elp wit' yon sand. Come back tomorrow.")
+                    stage = END_DIALOGUE
+                }
+
+                !hasBankSpace -> {
+                    npc("Eeee, ye've go' no free space in yon bank, ${player?.username}. Make some room 'tween the fishes 'n boots fore ye come back ta me.")
+                    stage = END_DIALOGUE
+                }
+
+                else -> {
+                    val randomDialogue = (1..4).random()
+                    when (randomDialogue) {
+                        1 -> {
+                            npcl(FaceAnim.HAPPY, "Mornin' ${player.username}!")
+                            stage = 100
+                        }
+                        2 -> {
+                            npcl(FaceAnim.HAPPY, "'Ello there ${player.username}!")
+                            stage = 110
+                        }
+                        3 -> {
+                            npcl(FaceAnim.HAPPY, "I thought i' were you comin' in ${player.username}. I sposin' you be wantin' yer sand today?")
+                            stage = 120
+                        }
+                        4 -> {
+                            npcl(FaceAnim.HAPPY, "'Ello again ${player.username}!")
+                            stage = 130
+                        }
+                    }
+                }
+            }
+            return true
         }
 
-        // if (alreadyClaimed) {
-        //     npc("'Ello there, ${player?.username}! Hope yer be havin' fun. I be a wee bi' busy to 'elp wit' yon sand. Come back tomorrow.")
-        //     stage = END_DIALOGUE
-        // } else if (!hasBankSpace) {
-        //     npc("Eeee, ye've go' no free space in yon bank, ${player?.username}. Make some room 'tween the fishes 'n boots fore ye come back ta me.")
-        //     stage = END_DIALOGUE
-        // } else {
-        //     npc("'Ello again ${player?.username}!")
-        //     stage = 0
-        // }
+        when (questStage) {
+            1 -> {
+                npcl(FaceAnim.HALF_ASKING, "Did ye see yon Guard Capt'n 'bout hand?")
+                stage = 11
+            }
+            3 -> {
+                npcl(FaceAnim.HALF_ASKING, "Wha' info ye find 'bout hand, ${player.username}?")
+                stage = 15
+            }
+            4 -> {
+                npcl(FaceAnim.HALF_ASKING, "Ey'up ${player.username}. Did yer see Sandy in Brimhaven 'bout me rota?")
+                stage = 21
+            }
+            6 -> {
+                npcl(FaceAnim.HALF_ASKING, "I be hopin' tha search is goin' well... are tha wizard's owning up ta anythin' yet?")
+                stage = 29
+            }
+            else -> {
+                if (inInventory(player, Items.SANDYS_ROTA_6948)) {
+                    playerl(FaceAnim.FRIENDLY, "I managed to get a copy of the original rota. Your hours changed a week ago!")
+                    stage = 25
+                } else {
+                    npcl(FaceAnim.SAD, "Eeee, wha' shall I do! I'll mos' certainly lose tha job...")
+                }
+            }
+        }
+
         return true
     }
 
@@ -79,7 +120,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npcl(FaceAnim.FRIENDLY, "P'raps tha smell will get t'Guard Cap'ain's nose out o'his beer fer 2 seconds!").also {
                 setQuestStage(player, Quests.THE_HAND_IN_THE_SAND, 1)
                 setVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527, 1, true)
-                setVarbit(player, 1525, 0, true)
+                setVarbit(player, 1535, 0, true)
                 stage = END_DIALOGUE
             }
 
@@ -142,20 +183,83 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
             }
             29 -> npcl(FaceAnim.FRIENDLY, "O'course ${player.username}, le's be 'avin'yon rota and 'ere be tha scroll, yer be takin' it back ta those inferrrnal wizards quick sharp!").also { stage = END_DIALOGUE }
             30 -> playerl(FaceAnim.NEUTRAL, "I've found out a lot and will let you know when it's all over.").also { stage = END_DIALOGUE }
-        }
 
-        // when (stage) {
-        //     0 -> playerl(FaceAnim.FRIENDLY, "Bert! Good news!").also { stage++ }
-        //     1 -> npcl(FaceAnim.FRIENDLY, "Arrr...Good news be always handy.").also { stage++ }
-        //     2 -> playerl(FaceAnim.FRIENDLY, "They arrested Sandy for the murder of a wizard and the sand pit now refills itself!").also { stage++ }
-        //     3 -> npcl(FaceAnim.FRIENDLY, "ME JOB! I'VE LOSTED ME JOB! 'ow c'n yer say tha' be good news?? Me wife'll tear me limb fr'm limb!").also { stage++ }
-        //     4 -> playerl(FaceAnim.FRIENDLY, "Don't worry, the Wizards are going to pay you a large pension so that you can retire...").also { stage++ }
-        //     5 -> npcl(FaceAnim.FRIENDLY, "Bu' wha'll I be doin' wit' me day now! I be lovin' tha sand.").also { stage++ }
-        //     6 -> playerl(FaceAnim.FRIENDLY, "What will you do with your day? Well....You could build sand castles with your own two hands!").also { stage++ }
-        //     7 -> npcl(FaceAnim.FRIENDLY, "I din't think so... bu' iffen yer ever need someone ta haul buckets o'sand 'round, ye be lettin' me know ${player!!.username}, I's can help yer!").also { stage++ }
-        //     8 -> playerl(FaceAnim.FRIENDLY, "Wow! That would be great, buckets of sand direct to bank everday you say? That's great!").also { stage++ }
-        //     9 -> end()
-        // }
+            100 -> {
+                player("Hello there Bert!")
+                stage = 101
+            }
+            101 -> {
+                npcl(FaceAnim.HAPPY, "I be goin' ou' on a limb and guessin' ye wan's yer sand today!")
+                stage = 102
+            }
+            102 -> {
+                player("Yes, I'd like the sand please Bert.")
+                stage = 103
+            }
+            103 -> {
+                npcl(FaceAnim.HAPPY, "I'll ge' righ' on it!")
+                stage = 140
+            }
+
+            110 -> {
+                player("Hope you're having a good day!")
+                stage = 111
+            }
+            111 -> {
+                npcl(FaceAnim.NEUTRAL, "Oh arr, no' too bad, though sometimes I could do wi' a second pair o' hands! I'll be gettin' on movin' them there buckets o' sand to yer bank!")
+                stage = 112
+            }
+            112 -> {
+                player("Thanks Bert, see you tomorrow!")
+                stage = 140
+            }
+
+            120 -> {
+                player("Aye...I mean, yes please Bert!")
+                stage = 121
+            }
+            121 -> {
+                npcl(FaceAnim.HAPPY, "I'll ge' on wit' movin' it. Thankee fer makin' sure Sandy go' it in t'neck fer 'is double dealin's!")
+                stage = 122
+            }
+            122 -> {
+                player("Excellent! While you move the sand to my bank, I'll do something else, see you later!")
+                stage = 140
+            }
+
+            130 -> {
+                player("Hello Bert, could I have my sand today please?")
+                stage = 131
+            }
+            131 -> {
+                npcl(FaceAnim.HAPPY, "Aye, give me a minute cause I be rushed off me feet!")
+                stage = 132
+            }
+            132 -> {
+                player("Thanks for the sand Bert!")
+                stage = 140
+            }
+
+            140 -> {
+                end()
+                rewardSand(84)
+            }
+
+        }
+        /*
+        when (stage) {
+            0 -> playerl(FaceAnim.FRIENDLY, "Bert! Good news!").also { stage++ }
+            1 -> npcl(FaceAnim.FRIENDLY, "Arrr...Good news be always handy.").also { stage++ }
+            2 -> playerl(FaceAnim.FRIENDLY, "They arrested Sandy for the murder of a wizard and the sand pit now refills itself!").also { stage++ }
+            3 -> npcl(FaceAnim.FRIENDLY, "ME JOB! I'VE LOSTED ME JOB! 'ow c'n yer say tha' be good news?? Me wife'll tear me limb fr'm limb!").also { stage++ }
+            4 -> playerl(FaceAnim.FRIENDLY, "Don't worry, the Wizards are going to pay you a large pension so that you can retire...").also { stage++ }
+            5 -> npcl(FaceAnim.FRIENDLY, "Bu' wha'll I be doin' wit' me day now! I be lovin' tha sand.").also { stage++ }
+            6 -> playerl(FaceAnim.FRIENDLY, "What will you do with your day? Well....You could build sand castles with your own two hands!").also { stage++ }
+            7 -> npcl(FaceAnim.FRIENDLY, "I din't think so... bu' iffen yer ever need someone ta haul buckets o'sand 'round, ye be lettin' me know ${player!!.username}, I's can help yer!").also { stage++ }
+            8 -> playerl(FaceAnim.FRIENDLY, "Wow! That would be great, buckets of sand direct to bank everday you say? That's great!").also { stage++ }
+            9 -> end()
+        }
+        */
         return true
     }
 

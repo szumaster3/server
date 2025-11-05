@@ -85,16 +85,6 @@ class EntranaPlugin : InteractionListener, MapArea {
             return@on true
         }
 
-        on(NPCs.MAZION_3114, IntType.NPC, "talk-to") { player, node ->
-            val randomDialogue = (1..3).random()
-            when (randomDialogue) {
-                1 -> sendNPCDialogue(player, node.id, "Nice weather we're having today!")
-                2 -> sendNPCDialogue(player, node.id, "Hello ${player.name}, fine day today!")
-                3 -> sendNPCDialogue(player, node.id, "Please leave me alone, a parrot stole my banana.")
-            }
-            return@on true
-        }
-
         on(NPCs.CRONE_217, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Hello deary.",  FaceAnim.HALF_GUILTY)
             runTask(player, 3) {

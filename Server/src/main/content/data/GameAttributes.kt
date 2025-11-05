@@ -436,4 +436,5 @@ internal object GameAttributes {
 
     // The Hand in the Sand quest.
     const val HAND_SAND_BETTY_POTION = "/save:handsand:betty_shine_potion"
+    const val HAND_SAND_SANDY_ANSWERS = "/save:handsand:sandy_answers"
 }
