@@ -70,31 +70,6 @@ interface InteractionListener : ContentInterface {
         InteractionListeners.add(type.ordinal, used, with, handler)
     }
 
-    fun onUseWithAt(
-        type: IntType,
-        used: Int,
-        with: Int,
-        location: Location,
-        handler: (player: Player, used: Node, with: Node) -> Boolean
-    ) {
-        onUseWith(type, used, with) { player, u, w ->
-            if (player.location != location) return@onUseWith false
-            handler(player, u, w)
-        }
-    }
-
-    fun onUseWithAt(
-        type: IntType,
-        used: Int,
-        with: IntArray,
-        location: Location,
-        handler: (player: Player, used: Node, with: Node) -> Boolean
-    ) {
-        with.forEach { w ->
-            onUseWithAt(type, used, w, location, handler)
-        }
-    }
-
     fun onUseAnyWith(
         type: IntType,
         vararg with: Int,
