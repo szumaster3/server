@@ -14,6 +14,9 @@ import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import shared.consts.*
 
+/**
+ * Handles all Fight Arena quest-related interactions.
+ */
 class FightArenaPlugin : InteractionListener {
     companion object {
         const val GENERAL = NPCs.GENERAL_KHAZARD_258
@@ -51,20 +54,37 @@ class FightArenaPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles dialogue with Jeremy Servil inside the prison area.
+         */
+
         on(NPCs.JEREMY_SERVIL_266, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, JeremyServilDialogueFile(), npc)
             return@on true
         }
+
+        /*
+         * Handles dialogue with General Khazard.
+         */
 
         on(GENERAL, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, GeneralKhazardDialogue(), npc)
             return@on true
         }
 
+        /*
+         * Handles dialogue with Hengrad (fellow prisoner).
+         */
+
         on(HENGRAD, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, HengradDialogue(), npc)
             return@on true
         }
+
+        /*
+         * Handles dialogue with a lazy Khazard guards near the arena area.
+         */
 
         on(A_LAZY_GUARD_1, SCENERY, "talk-to") { player, node ->
             openDialogue(player, ALazyGuardDialogue(), node)
@@ -74,6 +94,10 @@ class FightArenaPlugin : InteractionListener {
             openDialogue(player, ALazyGuardDialogue(), node)
             return@on true
         }
+
+        /*
+         * Handles borrowing Khazard armor from the stand.
+         */
 
         on(FULL_ARMOR_STAND, IntType.SCENERY, "borrow") { player, node ->
             val hasArmor = hasAnItem(player, ARMOR).container != null
@@ -113,6 +137,10 @@ class FightArenaPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles stealing Khazard cell keys from the sleeping guard table.
+         */
+
         on(A_LAZY_GUARD_2, IntType.SCENERY, "steal-keys") { player, _ ->
             face(player, location(2618, 3144, 0))
             setVarbit(player, 5627, 3, true)
@@ -123,6 +151,10 @@ class FightArenaPlugin : InteractionListener {
             sendMessage(player, "You pick up the keys from the table.")
             return@on true
         }
+
+        /*
+         * Handles the main gate interaction inside the arena.
+         */
 
         on(MAIN_DOOR, IntType.SCENERY, "open") { player, node ->
             val hasArmour = allInEquipment(player, HELMET, ARMOR)
@@ -145,11 +177,11 @@ class FightArenaPlugin : InteractionListener {
             return@on true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            CELL_KEY,
-            CELL_DOOR_2,
-        ) { player, _, _ ->
+        /*
+         * Handles using Khazard cell keys on Jeremy cell door.
+         */
+
+        onUseWith(IntType.SCENERY, CELL_KEY, CELL_DOOR_2) { player, _, _ ->
             if (getQuestStage(player, Quests.FIGHT_ARENA) == 88) {
                 PrisonCutscene(player).start()
             } else if (getQuestStage(player, Quests.FIGHT_ARENA) >= 68) {
@@ -159,27 +191,27 @@ class FightArenaPlugin : InteractionListener {
             return@onUseWith true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            CELL_KEY,
-            CELL_DOOR_1,
-        ) { player, _, _ ->
+        /*
+         * Handles using Khazard cell keys on the wrong cell.
+         */
+
+        onUseWith(IntType.SCENERY, CELL_KEY, CELL_DOOR_1) { player, _, _ ->
             if (getQuestStage(player, Quests.FIGHT_ARENA) >= 68) {
-                sendDialogue(
-                    player,
-                    "I don't want to attract too much attention by freeing all the prisoners. I need to find Jeremy and he's not in this cell.",
-                )
+                sendDialogue(player, "I don't want to attract too much attention by freeing all the prisoners. I need to find Jeremy and he's not in this cell.")
             } else {
                 sendMessage(player, "The cell gate is securely locked.")
             }
             return@onUseWith false
         }
 
+        /*
+         * Handles attempting to open cell doors without keys.
+         */
+
         on(CELL_DOOR_1, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "the cell gate is securely locked.")
             return@on false
         }
-
         on(CELL_DOOR_2, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "the cell gate is securely locked.")
             return@on false
@@ -187,9 +219,18 @@ class FightArenaPlugin : InteractionListener {
     }
 
     override fun defineDestinationOverrides() {
+
+        /*
+         * Handles destination for talking to Jeremy Servil in his cell.
+         */
+
         setDest(IntType.NPC, intArrayOf(JEREMY_A), "talk-to") { _, _ ->
             return@setDest Location.create(2617, 3167, 0)
         }
+
+        /*
+         * Handles destination pathing for fight slave NPCs.
+         */
 
         setDest(IntType.NPC, intArrayOf(FIGHT_SLAVE), "talk-to") { player, _ ->
             if (inBorders(player, 2585, 3139, 2605, 3148)) {
@@ -201,13 +242,25 @@ class FightArenaPlugin : InteractionListener {
             }
         }
 
+        /*
+         * Handles destination for Kelvin NPC interaction.
+         */
+
         setDest(IntType.NPC, intArrayOf(KELVIN), "talk-to") { _, _ ->
             return@setDest Location.create(2589, 3141, 0)
         }
 
+        /*
+         * Handles destination for Joe NPC interaction.
+         */
+
         setDest(IntType.NPC, intArrayOf(JOE), "talk-to") { _, _ ->
             return@setDest Location.create(2589, 3141, 0)
         }
+
+        /*
+         * Handles destination for stealing keys from the lazy guard table.
+         */
 
         setDest(IntType.SCENERY, intArrayOf(A_LAZY_GUARD_2), "steal-keys") { _, _ ->
             return@setDest Location.create(2619, 3143, 0)

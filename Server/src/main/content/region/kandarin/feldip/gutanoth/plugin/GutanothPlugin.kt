@@ -11,6 +11,7 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.combat.ImpactHandler
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -21,25 +22,34 @@ import core.tools.RandomFunction
 import core.tools.minutesToTicks
 import shared.consts.*
 
+/**
+ * Handles Gutanoth cave interactions.
+ */
 class GutanothPlugin : InteractionListener {
+
     companion object {
-        val OGRE_DOORS = intArrayOf(Scenery.OGRE_STONE_DOOR_6871, Scenery.OGRE_STONE_DOOR_6872)
-        val COFFIN = intArrayOf(Scenery.OGRE_COFFIN_6848, Scenery.OGRE_COFFIN_6850)
-        const val STAIRS_TO_JIGGIG = Scenery.STAIRS_6842
-        const val STAIRS_TO_CRYPT = Scenery.STAIRS_6841
-        const val BROKEN_LECTURN = Scenery.BROKEN_LECTURN_6846
-        const val SPAWNED_ZOMBIE = NPCs.ZOMBIE_1826
-        const val SKELETON = Scenery.SKELETON_6893
-        const val QUEST_COFFIN = Scenery.OGRE_COFFIN_6844
-        const val QUEST_COFFIN_2 = Scenery.OGRE_COFFIN_6845
-        const val BLACK_PRISM = Items.BLACK_PRISM_4808
-        const val TORN_PAGE = Items.TORN_PAGE_4809
-        const val DRAGON_TANKARD = Items.DRAGON_INN_TANKARD_4811
-        const val BACKPACK = Items.RUINED_BACKPACK_4810
-        const val STAND = Scenery.STAND_6897
+        private val OGRE_DOORS = intArrayOf(Scenery.OGRE_STONE_DOOR_6871, Scenery.OGRE_STONE_DOOR_6872)
+        private val COFFIN = intArrayOf(Scenery.OGRE_COFFIN_6848, Scenery.OGRE_COFFIN_6850)
+        private const val STAIRS_TO_JIGGIG = Scenery.STAIRS_6842
+        private const val STAIRS_TO_CRYPT = Scenery.STAIRS_6841
+        private const val BROKEN_LECTURN = Scenery.BROKEN_LECTURN_6846
+        private const val SPAWNED_ZOMBIE = NPCs.ZOMBIE_1826
+        private const val SKELETON = Scenery.SKELETON_6893
+        private const val QUEST_COFFIN = Scenery.OGRE_COFFIN_6844
+        private const val QUEST_COFFIN_2 = Scenery.OGRE_COFFIN_6845
+        private const val BLACK_PRISM = Items.BLACK_PRISM_4808
+        private const val TORN_PAGE = Items.TORN_PAGE_4809
+        private const val DRAGON_TANKARD = Items.DRAGON_INN_TANKARD_4811
+        private const val BACKPACK = Items.RUINED_BACKPACK_4810
+        private const val STAND = Scenery.STAND_6897
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles climbing down into the crypt using stairs.
+         */
+
         on(STAIRS_TO_CRYPT, IntType.SCENERY, "climb-down") { player, node ->
             submitWorldPulse(
                 object : Pulse() {
@@ -69,14 +79,27 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles climbing up the stairs to exit the crypt.
+         */
+
         on(STAIRS_TO_JIGGIG, IntType.SCENERY, "climb-up") { player, node ->
             teleport(
                 player,
-                if (node.location == Location(2443, 9417, 0)) Location(2446, 9417, 2) else Location(2485, 3045, 0),
+                if (node.location == Location(2443, 9417, 0)) {
+                    Location(2446, 9417, 2)
+                } else {
+                    Location(2485, 3045, 0)
+                },
+                TeleportManager.TeleportType.INSTANT
             )
             sendMessage(player, "You climb up the steps.")
             return@on true
         }
+
+        /*
+         * Handles searching the broken lectern.
+         */
 
         on(BROKEN_LECTURN, IntType.SCENERY, "search") { player, _ ->
             if (player.inCombat()) {
@@ -96,6 +119,10 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching skeletons inside the crypt.
+         */
+
         on(SKELETON, IntType.SCENERY, "search") { player, _ ->
             if (getAttribute(player, ZogreUtils.ZOMBIE_NPC_ACTIVE, false)) {
                 sendMessage(player, "You find nothing on the corpse.")
@@ -108,11 +135,19 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles talking to the spawned zombie.
+         */
+
         on(SPAWNED_ZOMBIE, IntType.NPC, "talk-to") { _, node ->
             val npc = node.asNpc()
             sendChat(npc, "Raaarrrggghhh")
             return@on true
         }
+
+        /*
+         * Handles picking locks on ogre coffins.
+         */
 
         on(COFFIN, IntType.SCENERY, "pick-lock") { player, node ->
             val sceneryId = node.asScenery()
@@ -197,6 +232,10 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles opening ogre coffins with a key.
+         */
+
         on(COFFIN, IntType.SCENERY, "open") { player, node ->
             val sceneryId = node.asScenery()
             val loot = content.region.kandarin.feldip.gutanoth.plugin.OgreCoffin.Companion.forId(sceneryId.id)?.roll()?.firstOrNull() ?: return@on false
@@ -250,6 +289,10 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching the quest coffin.
+         */
+
         on(QUEST_COFFIN, IntType.SCENERY, "search") { player, _ ->
             openDialogue(
                 player,
@@ -269,17 +312,15 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
-        onUseWith(
-            IntType.SCENERY, Items.KNIFE_946,
-            QUEST_COFFIN
-        ) { player, _, _ ->
+        /*
+         * Handles using knife on the quest coffin to unlock and open it.
+         */
+
+        onUseWith(IntType.SCENERY, Items.KNIFE_946, QUEST_COFFIN) { player, _, _ ->
             openDialogue(
                 player,
                 object : DialogueFile() {
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
+                    override fun handle(componentID: Int, buttonID: Int) {
                         when (stage) {
                             0 -> sendItemDialogue(player, Items.KNIFE_5605, "With some skill you manage to slide the blade along the lock edge and click into place the teeth of the primitive mechanism.").also { stage++ }
                             1 -> sendDialogue(player, "The lid looks heavy, but now that you've unlocked it, you may be able to lift it. You prepare yourself.").also { stage++ }
@@ -314,6 +355,10 @@ class GutanothPlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles finding the Black Prism inside the quest coffin.
+         */
+
         on(QUEST_COFFIN_2, IntType.SCENERY, "search") { player, _ ->
             if (inInventory(player, BLACK_PRISM) || getAttribute(player, ZogreUtils.BLACK_PRISM_ACQUIRED, 0) > 3) {
                 sendMessage(player, "You find nothing inside this time.")
@@ -325,6 +370,11 @@ class GutanothPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles opening the backpack found during the quest.
+         * Contains the Dragon Tankard, Knife, and Rotten Food.
+         */
 
         on(BACKPACK, IntType.ITEM, "open") { player, _ ->
             if (freeSlots(player) < 3) {
@@ -362,16 +412,18 @@ class GutanothPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles examining quest items.
+         */
+
         on(BLACK_PRISM, IntType.ITEM, "look-at") { player, _ ->
             sendDialogue(player, "It looks like a smokey black gem of some sort...very creepy. Some magical force must have prevented it from being shattered when it hit the coffin.")
             return@on true
         }
-
         on(DRAGON_TANKARD, IntType.ITEM, "look-at") { player, _ ->
             sendDialogue(player, "A stout ceramic tankard with a Dragon Emblem on the side, the words, $BLUE'Ye Olde Dragon Inn' are inscribed in the bottom.'</col>.")
             return@on true
         }
-
         on(TORN_PAGE, IntType.ITEM, "read") { player, _ ->
             sendDialogue(player, "You don't manage to understand all of it as there is only a half page here. But it seems the spell was used to place a curse on an area and for all time raise the dead.")
             runTask(player, 3) {
@@ -379,6 +431,10 @@ class GutanothPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles opening the tomb gates with the required key.
+         */
 
         on(OGRE_DOORS, IntType.SCENERY, "open") { player, node ->
             if (!inInventory(player, Items.OGRE_GATE_KEY_4839) || !getAttribute(player, ZogreUtils.RECEIVED_KEY_FROM_GRISH, false)) {
@@ -392,6 +448,10 @@ class GutanothPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles searching the stand to spawn the Slash Bash boss.
+         */
 
         on(STAND, IntType.SCENERY, "search") { player, _ ->
             sendDialogue(player, "You search the plinth...")

@@ -16,14 +16,13 @@ import shared.consts.Items
 import shared.consts.NPCs
 import java.util.concurrent.TimeUnit
 
-private const val CHEST = shared.consts.Scenery.CHEST_2827
 /**
  * Handles interactions with the Gutanoth chest.
  */
 class GutanothChestPlugin : InteractionListener {
 
     override fun defineListeners() {
-        on(CHEST, IntType.SCENERY, "open") { player, node ->
+        on(shared.consts.Scenery.CHEST_2827, IntType.SCENERY, "open") { player, node ->
             val delay = getAttribute(player, "gutanoth-chest-delay", 0L)
             GameWorld.Pulser.submit(ChestPulse(player, System.currentTimeMillis() > delay, node as Scenery))
             return@on true
@@ -34,11 +33,7 @@ class GutanothChestPlugin : InteractionListener {
 /**
  * Handles the chest opening pulse.
  */
-private class ChestPulse(
-    val player: Player,
-    val isLooted: Boolean,
-    val chest: Scenery,
-) : Pulse() {
+private class ChestPulse(val player: Player, val isLooted: Boolean, val chest: Scenery) : Pulse() {
 
     private var ticks = 0
 
@@ -47,11 +42,7 @@ private class ChestPulse(
             0 -> {
                 lock(player, 3)
                 animate(player, Animations.HUMAN_OPEN_CHEST_536)
-                SceneryBuilder.replace(
-                    chest,
-                    Scenery(2828, chest.location, chest.rotation),
-                    5
-                )
+                SceneryBuilder.replace(chest, Scenery(2828, chest.location, chest.rotation), 5)
             }
             3 -> {
                 lootChest()

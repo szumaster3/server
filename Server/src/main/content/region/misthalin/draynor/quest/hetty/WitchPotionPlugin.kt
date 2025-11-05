@@ -11,6 +11,11 @@ import shared.consts.Scenery
 
 class WitchPotionPlugin: InteractionListener {
     override fun defineListeners() {
+
+        /*
+         * Handles drinking from cauldron (Witch potion quest).
+         */
+
         on(Scenery.CAULDRON_2024, IntType.SCENERY, "Drink From") { player, _ ->
             when (getQuestStage(player, Quests.WITCHS_POTION)) {
                 20, 100 -> sendPlayerDialogue(player, "As nice as that looks I think I'll give it a miss for now.")

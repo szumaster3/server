@@ -15,9 +15,6 @@ import shared.consts.Quests
  */
 object PlatformHelper {
 
-    /**
-     * Starts a travel sequence between Witchaven and another location.
-     */
     @JvmStatic
     fun sail(player: Player, travel: Travel) {
         openInterface(player, Components.FADE_TO_BLACK_115)

@@ -11,10 +11,19 @@ import shared.consts.Scenery
 class TzHaarCityPlugin : InteractionListener {
 
     override fun defineListeners() {
+
+        /*
+         * Handles lock for the not implemented scenery.
+         */
+
         on(Scenery.CRACK_IN_WALL_9358, IntType.SCENERY, "go-through") { player, _ ->
             sendMessage(player, "Nothing interesting happens.")
             return@on true
         }
+
+        /*
+         * Handles entering the main Fight Caves entrance.
+         */
 
         on(Scenery.CAVE_ENTRANCE_9356, IntType.SCENERY, "enter") { player, _ ->
             if (player.familiarManager.hasFamiliar()) {
@@ -25,15 +34,27 @@ class TzHaarCityPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles entering the secondary cave entrance.
+         */
+
         on(Scenery.CAVE_ENTRANCE_31284, IntType.SCENERY, "enter") { player, _ ->
             teleport(player, Location.create(2480, 5175, 0))
             return@on true
         }
 
+        /*
+         * Handles exiting the cave from Fight Caves.
+         */
+
         on(Scenery.CAVE_EXIT_9359, IntType.SCENERY, "enter") { player, _ ->
             teleport(player, Location.create(2866, 9571, 0))
             return@on true
         }
+
+        /*
+         * Handles passing through the hot vent door.
+         */
 
         on(Scenery.HOT_VENT_DOOR_9369, IntType.SCENERY, "pass") { player, _ ->
             ActivityManager.start(player, "fight pits", false)
@@ -41,7 +62,7 @@ class TzHaarCityPlugin : InteractionListener {
         }
 
         /*
-         * Special interaction for obsidian wall.
+         * Handles mining interaction with the obsidian wall.
          */
 
         on(Scenery.OBSIDIAN_WALL_31230, IntType.SCENERY, "mine") { player, _ ->

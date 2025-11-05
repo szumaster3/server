@@ -27,6 +27,11 @@ class KaramjaPlugin : InteractionListener {
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles chopping dense jungle bushes with a machete to clear a path.
+         */
+
         defineInteraction(
             IntType.SCENERY,
             JUNGLE_BUSH,
@@ -35,6 +40,11 @@ class KaramjaPlugin : InteractionListener {
             allowedDistance = 1,
             handler = ::handleChopBush
         )
+
+        /*
+         * Handles Customs Officer "Pay-fare" dialogue interaction
+         *  after completing Pirate's Treasure quest.
+         */
 
         on(CUSTOM_OFFICERS, IntType.NPC, "pay-fare") { player, node ->
             if (!isQuestComplete(player, Quests.PIRATES_TREASURE)) {
@@ -46,11 +56,19 @@ class KaramjaPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles climbing down through the volcano pothole entrance.
+         */
+
         on(Scenery.ROCKS_492, IntType.SCENERY, "climb-down") { player, _ ->
             ClimbActionHandler.climb(player, null, Location.create(2856, 9567, 0))
             sendMessage(player, "You climb down through the pot hole.")
             return@on true
         }
+
+        /*
+         * Handles climbing up the hanging rope out of the Karamja volcano.
+         */
 
         on(Scenery.CLIMBING_ROPE_1764, IntType.SCENERY, "climb-up") { player, _ ->
             ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(2856, 3167, 0))
@@ -58,6 +76,10 @@ class KaramjaPlugin : InteractionListener {
             sendMessage(player, "You appear on the volcano rim.", 1)
             return@on true
         }
+
+        /*
+         * Handles picking pineapples from Karamja pineapple plants.
+         */
 
         on(PINEAPPLE_PLANT, IntType.SCENERY, "pick") { player, node ->
             if (!hasSpaceFor(player, Item(Items.PINEAPPLE_2114))) {
@@ -78,10 +100,18 @@ class KaramjaPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching banana trees that have no bananas left.
+         */
+
         on(Scenery.BANANA_TREE_2078, IntType.SCENERY, "search") { player, _ ->
             sendMessage(player, "There are no bananas left on the tree.")
             return@on true
         }
+
+        /*
+         * Handles shaking leafy palm trees to drop palm leaves onto the ground.
+         */
 
         on(Scenery.LEAFY_PALM_TREE_2975, IntType.SCENERY, "Shake") { player, node ->
             queueScript(player, 0, QueueStrength.WEAK) { stage: Int ->
@@ -106,6 +136,11 @@ class KaramjaPlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+         * Handles using pure essence notes on Jiminua to
+         * un-note them for a 2-coin fee per essence.
+         */
 
         onUseWith(IntType.NPC, Items.PURE_ESSENCE_7937, NPCs.JIMINUA_560) { player, used, _ ->
             assert(used.id == Items.PURE_ESSENCE_7937)
@@ -140,6 +175,11 @@ class KaramjaPlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles Tiadeche NPC trade interaction
+         * (available after Tai Bwo Wannai Trio quest).
+         */
+
         on(NPCs.TIADECHE_1164, IntType.NPC, "trade") { player, _ ->
             if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) return@on true
             openNpcShop(player, NPCs.TIADECHE_1164)
@@ -147,6 +187,12 @@ class KaramjaPlugin : InteractionListener {
         }
     }
 
+    /**
+     * Handles chopping jungle bushes using a machete.
+     * @param player The player.
+     * @param bush The node id.
+     * @param state The stage.
+     */
     private fun handleChopBush(player: Player, bush: Node, state: Int): Boolean {
         val machete = SkillingTool.getMachete(player)
 

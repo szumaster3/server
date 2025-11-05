@@ -113,12 +113,20 @@ class ShiloVillagePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles opening the wooden gate when entering or leaving Shilo Village.
+         */
+
         on(WOODEN_GATE, IntType.SCENERY, "open") { player, node ->
             val nextDoorId = if (player.location.y == 2952) node.id - 1 else node.id + 1
             DoorActionHandler.autowalkFence(player, node.asScenery(), node.id, nextDoorId)
             if (player.location.x == 2867) sendMessage(player, "You make your way out of Shilo Village.")
             return@on true
         }
+
+        /*
+         * Handles opening the metal gate near the Shilo Village exit.
+         */
 
         on(METAL_GATE, IntType.SCENERY, "open") { player, node ->
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -141,6 +149,7 @@ class ShiloVillagePlugin : InteractionListener {
          * @param player The player who is traveling.
          * @param npc The NPC id that the player is interacting with.
          */
+        @JvmStatic
         fun quickTravel(player: Player, npc: Int) {
             if (!hasRequirement(player, Quests.SHILO_VILLAGE, true)) return
             val isShilo = npc == NPCs.HAJEDY_510

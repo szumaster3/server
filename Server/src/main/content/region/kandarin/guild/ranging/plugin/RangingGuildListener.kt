@@ -54,6 +54,10 @@ class RangingGuildListener : InteractionListener, MapArea {
 
     override fun defineListeners() {
 
+        /*
+         * Handles conversation with the Ranging Guild Doorman.
+         */
+
         on(NPCs.RANGING_GUILD_DOORMAN_679, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello there.")
             addDialogueAction(player) { _, _ ->
@@ -70,6 +74,10 @@ class RangingGuildListener : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles dialogue with a Ranging Guild Guard.
+         */
+
         on(NPCs.GUARD_678, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello there.")
             addDialogueAction(player) { _, _ ->
@@ -85,6 +93,9 @@ class RangingGuildListener : InteractionListener, MapArea {
             return@on true
         }
 
+        /*
+         * Handles "fire-at" interaction with the archery target.
+         */
         on(Scenery.TARGET_2513, IntType.SCENERY, "fire-at") { player, node ->
             if (player.archeryTargets <= 0) {
                 sendNPCDialogueLines(

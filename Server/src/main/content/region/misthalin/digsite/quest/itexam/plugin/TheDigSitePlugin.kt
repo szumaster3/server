@@ -32,11 +32,21 @@ class TheDigSitePlugin : InteractionListener {
             return@on false
         }
 
+        /*
+         * Handles inspecting the Level 1 Certificate item.
+         * Displays a certificate interface with the player name.
+         */
+
         on(Items.LEVEL_1_CERTIFICATE_691, ITEM, "look-at") { player, _ ->
             openInterface(player, 440)
             sendString(player, player.username, 440, 5)
             return@on true
         }
+
+        /*
+         * Handles inspecting the Level 2 Certificate item.
+         * Displays a certificate interface with the player name.
+         */
 
         on(Items.LEVEL_2_CERTIFICATE_692, ITEM, "look-at") { player, _ ->
             openInterface(player, 441)
@@ -44,18 +54,22 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles inspecting the Level 3 Certificate item.
+         * Displays a certificate interface with the player name.
+         */
+
         on(Items.LEVEL_3_CERTIFICATE_693, ITEM, "look-at") { player, _ ->
             openInterface(player, 444)
             sendString(player, player.username, 444, 5)
             return@on true
         }
 
-        on(
-            intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565),
-            NPC,
-            "steal-from",
-        ) { player, node ->
+        /*
+         * Handles stealing from Digsite Workmen NPCs.
+         */
 
+        on(intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565), NPC, "steal-from") { player, node ->
             if (getStatLevel(player, Skills.THIEVING) < 25) {
                 sendMessage(player, "You need a Thieving level of 25 to do that.")
                 return@on true
@@ -69,23 +83,13 @@ class TheDigSitePlugin : InteractionListener {
                 player.animator.animate(PickpocketPlugin.PICKPOCKET_ANIM)
                 val rollOutcome = PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, workmanPickpocketingTable)
                 if (rollOutcome != null) {
-                    queueScript(
-                        player,
-                        PickpocketPlugin.PICKPOCKET_ANIM.duration,
-                        QueueStrength.NORMAL,
-                    ) { stage: Int ->
+                    queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
                                 if (rollOutcome.size > 0) {
                                     addItemOrDrop(player, rollOutcome[0].id)
                                     when (rollOutcome[0].id) {
-                                        Items.ANIMAL_SKULL_671 ->
-                                            sendItemDialogue(
-                                                player,
-                                                Items.ANIMAL_SKULL_671,
-                                                "You steal an animal skull.",
-                                            )
-
+                                        Items.ANIMAL_SKULL_671 -> sendItemDialogue(player, Items.ANIMAL_SKULL_671, "You steal an animal skull.")
                                         else -> sendMessage(player, "You steal something.")
                                     }
                                 } else {
@@ -113,22 +117,14 @@ class TheDigSitePlugin : InteractionListener {
                 val rollOutcome =
                     PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, workmanPostQuestPickpocketingTable)
                 if (rollOutcome != null) {
-                    queueScript(
-                        player,
-                        PickpocketPlugin.PICKPOCKET_ANIM.duration,
-                        QueueStrength.NORMAL,
-                    ) { stage: Int ->
+                    queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage: Int ->
                         when (stage) {
                             0 -> {
                                 if (rollOutcome.size > 0) {
                                     addItemOrDrop(player, rollOutcome[0].id)
                                     when (rollOutcome[0].id) {
                                         Items.ANIMAL_SKULL_671 ->
-                                            sendItemDialogue(
-                                                player,
-                                                Items.ANIMAL_SKULL_671,
-                                                "You steal an animal skull.",
-                                            )
+                                            sendItemDialogue(player, Items.ANIMAL_SKULL_671, "You steal an animal skull.")
 
                                         else -> sendMessage(player, "You steal something.")
                                     }
@@ -156,54 +152,56 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles trying to pickpocket a student at the Digsite.
+         */
+
         on(NPCs.STUDENT_617, NPC, "pickpocket") { player, _ ->
             sendDialogue(player, "I don't think I should try to steal from this poor student.")
 
             return@on true
         }
 
+        /*
+         * Handles searching a bush.
+         */
+
         on(Scenery.BUSH_2357, SCENERY, "search") { player, _ ->
             sendMessage(player, "You search the bush... You find nothing of interest.")
             return@on true
         }
 
-        on(Scenery.BUSH_2358, SCENERY, "search") { player, _ ->
-            openDialogue(
-                player,
-                object : DialogueFile() {
-                    override fun handle(
-                        componentID: Int,
-                        buttonID: Int,
-                    ) {
-                        when (stage) {
-                            0 ->
-                                playerl("Hey, something has been dropped here...").also {
-                                    addItemOrDrop(player, Items.TEDDY_673)
-                                    stage++
-                                }
+        /*
+         * Handles searching the quest bush where the teddy bear item can be found.
+         */
 
-                            1 ->
-                                sendItemDialogue(player, Items.TEDDY_673, "You find... something.").also {
-                                    stage = END_DIALOGUE
-                                }
-                        }
-                    }
-                },
-            )
+        on(Scenery.BUSH_2358, SCENERY, "search") { player, _ ->
+            if(inInventory(player, Items.TEDDY_673)) return@on false
+            sendPlayerDialogue(player, "Hey, something has been dropped here...")
+            runTask(player, 3){
+                sendItemDialogue(player, Items.TEDDY_673, "You find... something.")
+                addItemOrDrop(player, Items.TEDDY_673)
+            }
             return@on true
         }
 
+        /*
+         * Handles giving a cup of tea to the Panning Guide NPC.
+         * Unlocks permission for the player to pan for items.
+         */
+
         onUseWith(NPC, Items.CUP_OF_TEA_712, NPCs.PANNING_GUIDE_620) { player, used, with ->
             if (removeItem(player, used)) {
-                sendNPCDialogue(
-                    player,
-                    with.id,
-                    "Ah! Lovely! You can't beat a good cuppa! You're free to pan all you want.",
-                )
+                sendNPCDialogue(player, with.id, "Ah! Lovely! You can't beat a good cuppa! You're free to pan all you want.")
                 setAttribute(player, TheDigSite.attributePanningGuideTea, true)
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles using a panning tray on the panning point.
+         * Allows panning only if the player gave tea to the guide.
+         */
 
         onUseWith(SCENERY, Items.PANNING_TRAY_677, Scenery.PANNING_POINT_2363) { player, used, _ ->
             if (getAttribute(player, TheDigSite.attributePanningGuideTea, false)) {
@@ -231,6 +229,11 @@ class TheDigSitePlugin : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles direct panning interaction at the panning point.
+         * Requires permission and an empty panning tray in inventory.
+         */
 
         on(Scenery.PANNING_POINT_2363, SCENERY, "pan") { player, _ ->
             if (getAttribute(player, TheDigSite.attributePanningGuideTea, false)) {
@@ -269,10 +272,18 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching an empty panning tray.
+         */
+
         on(Items.PANNING_TRAY_677, ITEM, "search") { player, _ ->
             sendMessage(player, "The panning tray is empty.")
             return@on true
         }
+
+        /*
+         * Handles searching a full panning tray.
+         */
 
         on(Items.PANNING_TRAY_679, ITEM, "search") { player, used ->
             sendMessage(player, "You search the contents of the tray.")
@@ -282,47 +293,12 @@ class TheDigSitePlugin : InteractionListener {
                 if (tableRoll.size > 0) {
                     addItemOrDrop(player, tableRoll[0].id)
                     when (tableRoll[0].id) {
-                        Items.COINS_995 ->
-                            sendItemDialogue(
-                                player,
-                                Items.COINS_995,
-                                "You find some coins within the mud.",
-                            )
-
-                        Items.NUGGETS_680 ->
-                            sendItemDialogue(
-                                player,
-                                Items.PANNING_TRAY_678,
-                                "You find some gold nuggets within the mud.",
-                            )
-
-                        Items.OYSTER_407 ->
-                            sendItemDialogue(
-                                player,
-                                Items.OYSTER_407,
-                                "You find an oyster within the mud.",
-                            )
-
-                        Items.UNCUT_OPAL_1625 ->
-                            sendItemDialogue(
-                                player,
-                                Items.UNCUT_OPAL_1625,
-                                "You find a gem within the mud!",
-                            )
-
-                        Items.UNCUT_JADE_1627 ->
-                            sendItemDialogue(
-                                player,
-                                Items.UNCUT_JADE_1627,
-                                "You find a gem within the mud!",
-                            )
-
-                        Items.SPECIAL_CUP_672 ->
-                            sendItemDialogue(
-                                player,
-                                Items.SPECIAL_CUP_672,
-                                "You find a shiny cup covered in mud.",
-                            )
+                        Items.COINS_995 -> sendItemDialogue(player, Items.COINS_995, "You find some coins within the mud.")
+                        Items.NUGGETS_680 -> sendItemDialogue(player, Items.PANNING_TRAY_678, "You find some gold nuggets within the mud.")
+                        Items.OYSTER_407 -> sendItemDialogue(player, Items.OYSTER_407, "You find an oyster within the mud.")
+                        Items.UNCUT_OPAL_1625 -> sendItemDialogue(player, Items.UNCUT_OPAL_1625, "You find a gem within the mud!")
+                        Items.UNCUT_JADE_1627 -> sendItemDialogue(player, Items.UNCUT_JADE_1627, "You find a gem within the mud!")
+                        Items.SPECIAL_CUP_672 -> sendItemDialogue(player, Items.SPECIAL_CUP_672, "You find a shiny cup covered in mud.")
                     }
                 } else {
                     sendItemDialogue(player, Items.PANNING_TRAY_679, "The tray contains only plain mud.")
@@ -330,6 +306,10 @@ class TheDigSitePlugin : InteractionListener {
             }
             return@on true
         }
+
+        /*
+          * Handles digging in soil spots using a trowel at different Digsite levels.
+          */
 
         onUseWith(SCENERY, Items.TROWEL_676, Scenery.SOIL_2376, Scenery.SOIL_2377, Scenery.SOIL_2378) { player, _, _ ->
             val level3DigRight = ZoneBorders(3370, 3437, 3377, 3442)
@@ -475,6 +455,10 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles operating the winch in the Digsite area.
+         */
+
         on(Scenery.WINCH_2350, SCENERY, "operate") { player, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) >= 11) {
                 sendMessage(player, "You try to climb down the rope...")
@@ -512,6 +496,12 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles using a rope on the northeast winch during The Dig Site quest.
+         * Allows the player to tie a rope if the quest stage is 8 or higher.
+         * Otherwise, a workman blocks access.
+         */
+
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.WINCH_2350) { player, used, _ ->
             if (removeItem(player, used)) {
                 if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
@@ -534,10 +524,18 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles climbing up the northeast winch rope from the cave below.
+         */
+
         on(Scenery.ROPE_2352, SCENERY, "climb-up") { player, _ ->
             teleport(player, Location(3370, 3427))
             return@on true
         }
+
+        /*
+         * Handles operating the west winch.
+         */
 
         on(Scenery.WINCH_2351, SCENERY, "operate") { player, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) >= 11) {
@@ -578,6 +576,10 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles using a rope on the west winch.
+         */
+
         onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.WINCH_2351) { player, used, _ ->
             if (removeItem(player, used)) {
                 if (getQuestStage(player, Quests.THE_DIG_SITE) >= 8) {
@@ -600,19 +602,27 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles climbing up the west winch rope from the underground cavern.
+         */
+
         on(Scenery.ROPE_2353, SCENERY, "climb-up") { player, _ ->
             teleport(player, Location(3354, 3417))
             return@on true
         }
 
-        on(Items.INVITATION_LETTER_696, ITEM, "read") { player, _ ->
-            sendPlayerDialogue(
-                player,
-                "It says, 'I give permission for the bearer... to use the mine shafts on site. - signed Terrance Balando, Archaeological Expert, City of Varrock.",
-            )
+        /*
+         * Handles reading the invitation letter item.
+         */
 
+        on(Items.INVITATION_LETTER_696, ITEM, "read") { player, _ ->
+            sendPlayerDialogue(player, "It says, 'I give permission for the bearer... to use the mine shafts on site. - signed Terrance Balando, Archaeological Expert, City of Varrock.")
             return@on true
         }
+
+        /*
+         * Handles searching the brick wall near the Digsite cave.
+         */
 
         on(Scenery.BRICK_2362, SCENERY, "search") { player, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 8) {
@@ -628,10 +638,18 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching the locked chest before obtaining the key.
+         */
+
         on(Scenery.CHEST_2361, SCENERY, "search") { player, _ ->
             sendMessage(player, "The chest is locked.")
             return@on true
         }
+
+        /*
+         * Handles using the chest key on the locked chest to unlock it.
+         */
 
         onUseWith(IntType.SCENERY, Items.CHEST_KEY_709, Scenery.CHEST_2361) { player, used, with ->
             if (!removeItem(player, used)) {
@@ -642,6 +660,11 @@ class TheDigSitePlugin : InteractionListener {
             replaceScenery(with.asScenery(), Scenery.CHEST_2360, 100)
             return@onUseWith true
         }
+
+        /*
+         * Handles searching specimen trays for archaeological finds.
+         * Requires specimen jar in inventory.
+         */
 
         on(Scenery.SPECIMEN_TRAY_2375, SCENERY, "search") { player, _ ->
             if (inInventory(player, Items.SPECIMEN_JAR_669)) {
@@ -657,11 +680,21 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching the now-unlocked chest
+         * to find the chemical powder.
+         */
+
         on(Scenery.CHEST_2360, SCENERY, "search") { player, _ ->
             addItemOrDrop(player, Items.CHEMICAL_POWDER_700)
             sendItemDialogue(player, Items.CHEMICAL_POWDER_700, "You find some unusual powder inside...")
             return@on true
         }
+
+        /*
+         * Handles filling a vial with the
+         * unidentified liquid from the open barrel.
+         */
 
         onUseWith(SCENERY, Items.VIAL_229, Scenery.BARREL_17297) { player, used, _ ->
             if (removeItem(player, used)) {
@@ -686,6 +719,10 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles attempting to open a sealed barrel without tools.
+         */
+
         on(Scenery.BARREL_17296, SCENERY, "search", "open") { player, _ ->
             sendPlayerDialogue(
                 player,
@@ -695,20 +732,28 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles prying open the sealed barrel using a trowel.
+         */
+
         onUseWith(SCENERY, Items.TROWEL_676, Scenery.BARREL_17296) { player, _, _ ->
             sendPlayerDialogue(player, "Great! It's opened it.")
             setVarbit(player, TheDigSite.barrelVarbit, 1)
             return@onUseWith true
         }
 
+        /*
+         * Handles searching the open barrel before obtaining a vial.
+         */
+
         on(Scenery.BARREL_17297, SCENERY, "search") { player, _ ->
-            sendPlayerDialogue(
-                player,
-                "I can't pick this up with my bare hands! I'll need something to put it in. It looks and smells rather dangerous though, so it'll need to be something small and capable of containing dangerous chemicals.",
-                FaceAnim.THINKING,
-            )
+            sendPlayerDialogue(player, "I can't pick this up with my bare hands! I'll need something to put it in. It looks and smells rather dangerous though, so it'll need to be something small and capable of containing dangerous chemicals.", FaceAnim.THINKING)
             return@on true
         }
+
+        /*
+         * Handles mixing ammonium nitrate with nitroglycerin.
+         */
 
         onUseWith(ITEM, Items.AMMONIUM_NITRATE_701, Items.NITROGLYCERIN_703) { player, used, with ->
             if (getStatLevel(player, Skills.HERBLORE) < 10) {
@@ -723,6 +768,10 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles mixing mixed chemicals with ground charcoal.
+         */
+
         onUseWith(ITEM, Items.MIXED_CHEMICALS_705, Items.GROUND_CHARCOAL_704) { player, used, with ->
             if (getStatLevel(player, Skills.HERBLORE) < 10) {
                 sendMessage(player, "You need level 10 Herblore to combine the chemicals.")
@@ -735,6 +784,11 @@ class TheDigSitePlugin : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles adding arceniaroot to the foul mixture
+         * to create the explosive compound.
+         */
 
         onUseWith(ITEM, Items.MIXED_CHEMICALS_706, Items.ARCENIA_ROOT_708) { player, used, with ->
             if (getStatLevel(player, Skills.HERBLORE) < 10) {
@@ -749,6 +803,11 @@ class TheDigSitePlugin : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles using the chemical compound on the brick wall.
+         * Updates quest progress to stage 10.
+         */
 
         onUseWith(SCENERY, Items.CHEMICAL_COMPOUND_707, Scenery.BRICK_2362) { player, used, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 9) {
@@ -766,6 +825,11 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles igniting the chemical compound with a tinderbox
+         * to blast open the bricks.
+         */
+
         onUseWith(SCENERY, Items.TINDERBOX_590, Scenery.BRICK_2362) { player, _, _ ->
             if (getQuestStage(player, Quests.THE_DIG_SITE) == 10) {
                 setQuestStage(player, Quests.THE_DIG_SITE, 11)
@@ -780,18 +844,13 @@ class TheDigSitePlugin : InteractionListener {
 
                         1 -> {
                             sendMessage(player, "Fizz..")
-                            sendPlayerDialogue(
-                                player,
-                                "Woah! This is going to blow! I'd better run!",
-                                FaceAnim.EXTREMELY_SHOCKED,
-                            )
+                            sendPlayerDialogue(player, "Woah! This is going to blow! I'd better run!", FaceAnim.EXTREMELY_SHOCKED)
                             return@queueScript delayScript(player, BENDING_DOWN_ANIMATION.duration)
                         }
 
                         2 -> {
                             player.walkingQueue.reset()
                             player.walkingQueue.addPath(3366, 9830)
-
                             return@queueScript delayScript(player, 8)
                         }
 
@@ -804,11 +863,7 @@ class TheDigSitePlugin : InteractionListener {
                             PlayerCamera(player).reset()
                             teleport(player, Location(3366, 9766))
                             unlock(player)
-                            sendPlayerDialogue(
-                                player,
-                                "Wow, that was a big explosion! What's that noise I can hear? Sounds like bones moving or something...",
-                                FaceAnim.EXTREMELY_SHOCKED,
-                            )
+                            sendPlayerDialogue(player, "Wow, that was a big explosion! What's that noise I can hear? Sounds like bones moving or something...", FaceAnim.EXTREMELY_SHOCKED)
                             return@queueScript stopExecuting(player)
                         }
 
@@ -819,6 +874,10 @@ class TheDigSitePlugin : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles picking up the stone tablet in the underground chamber.
+         */
+
         on(Scenery.STONE_TABLET_17367, SCENERY, "take") { player, _ ->
             setVarbit(player, TheDigSite.tabletVarbit, 1)
             addItemOrDrop(player, Items.STONE_TABLET_699)
@@ -826,10 +885,18 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles reading the stone tablet item.
+         */
+
         on(Items.STONE_TABLET_699, ITEM, "read") { player, _ ->
             sendPlayerDialogue(player, "It says: Tremble mortal, before the altar of our dread lord Zaros.")
             return@on true
         }
+
+        /*
+         * Handles emptying the unidentified liquid from a vial.
+         */
 
         on(Items.UNIDENTIFIED_LIQUID_702, ITEM, "empty") { player, node ->
             if (removeItem(player, node)) {
@@ -838,6 +905,11 @@ class TheDigSitePlugin : InteractionListener {
             sendChat(player, "You very carefully empty out the liquid.")
             return@on true
         }
+
+        /*
+         * Handles dropping dangerous liquid items,
+         * causing them to explode and damage the player.
+         */
 
         on(Items.UNIDENTIFIED_LIQUID_702, ITEM, "drop") { player, node ->
             removeItem(player, node)
@@ -879,6 +951,11 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching cupboards for
+         * quest-related items (specimen jars, rock picks).
+         */
+
         on(Scenery.CUPBOARD_17303, SCENERY, "search") { player, _ ->
             sendItemDialogue(player, Items.SPECIMEN_JAR_669, "You find a specimen jar.")
             addItemOrDrop(player, Items.SPECIMEN_JAR_669)
@@ -891,11 +968,19 @@ class TheDigSitePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching sacks for specimen jars.
+         */
+
         on(intArrayOf(Scenery.SACKS_2354, Scenery.SACKS_2355, Scenery.SACKS_2356), SCENERY, "search") { player, _ ->
             sendItemDialogue(player, Items.SPECIMEN_JAR_669, "You find a specimen jar.")
             addItemOrDrop(player, Items.SPECIMEN_JAR_669)
             return@on true
         }
+
+        /*
+         * Handles searching the bookcase to obtain the Book on Chemicals.
+         */
 
         on(Scenery.BOOKCASE_35224, SCENERY, "search") { player, _ ->
             sendMessage(player, "You search through the bookcase...")
@@ -903,6 +988,10 @@ class TheDigSitePlugin : InteractionListener {
             addItemOrDrop(player, Items.BOOK_ON_CHEMICALS_711)
             return@on true
         }
+
+        /*
+         * Handles reading the various signposts around the Digsite.
+         */
 
         on(Scenery.SIGNPOST_2366, SCENERY, "read") { player, _ ->
             sendMessage(player, "This site is for training purposes only.")

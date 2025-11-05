@@ -10,6 +10,9 @@ import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Scenery
 
+/**
+ * Handles interactions with camelot aquarium.
+ */
 class AquariumPlugin : InteractionListener {
     private val petFish = intArrayOf(Items.FISHBOWL_6670, Items.FISHBOWL_6671, Items.FISHBOWL_6672)
     private val feedAnim = Animation(Animations.FEED_BOWL_2781)
@@ -28,12 +31,21 @@ class AquariumPlugin : InteractionListener {
     )
 
     override fun defineListeners() {
+
+        /*
+         * Handles using a fishbowl on the aquarium to place pet fish inside.
+         */
+
         onUseWith(IntType.SCENERY, petFish, Scenery.AQUARIUM_10091) { player, used, _ ->
             if(removeItem(player, used.asItem(), Container.INVENTORY)) {
                 addItem(player, Items.FISHBOWL_6667, 1)
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles using any items on pet fish.
+         */
 
         onUseAnyWith(IntType.ITEM, *petFish) { player, used, _ ->
             fishFoodInteraction[used.id]?.invoke(player, used.asItem())

@@ -11,7 +11,12 @@ import core.game.world.map.Location
 import shared.consts.NPCs
 import shared.consts.Scenery
 
+/**
+ * Handles interactions inside and around
+ * brimstail cave in the Tree Gnome Stronghold.
+ */
 class BrimstailCavePlugin : InteractionListener {
+
     companion object {
         private val CAVE_EXIT = intArrayOf(Scenery.TUNNEL_17222, Scenery.TUNNEL_17223)
         private const val CAVE_ENTER = Scenery.CAVE_ENTRANCE_17209
@@ -21,6 +26,11 @@ class BrimstailCavePlugin : InteractionListener {
     }
 
     override fun defineListeners() {
+
+        /*
+         * Handles entering and exiting the cave.
+         */
+
         on(CAVE_ENTER, IntType.SCENERY, "enter") { player, _ ->
             teleport(player, Location.create(2408, 9812, 0))
             return@on true
@@ -30,6 +40,10 @@ class BrimstailCavePlugin : InteractionListener {
             teleport(player, Location(2402, 3419, 0))
             return@on true
         }
+
+        /*
+         * Handles interaction with Brimstail table.
+         */
 
         on(TABLE, IntType.SCENERY, "take-bowl") { player, _ ->
             sendNPCDialogue(
@@ -41,10 +55,18 @@ class BrimstailCavePlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles searching the aspidistra plant.
+         */
+
         on(ASPIDISTRA_PLANT, IntType.SCENERY, "search") { player, _ ->
             sendDialogue(player, "Gronda Gronda!")
             return@on true
         }
+
+        /*
+         * Handles essence teleport option for Brimstail NPC.
+         */
 
         on(BRIMSTAIL, IntType.NPC, "teleport") { player, node ->
             EssenceTeleport.teleport(node.asNpc(), player)

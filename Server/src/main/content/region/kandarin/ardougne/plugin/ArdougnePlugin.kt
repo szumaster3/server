@@ -17,15 +17,31 @@ import shared.consts.Quests
 class ArdougnePlugin : InteractionListener {
 
     override fun defineListeners() {
+
+        /*
+         * Handles talking to Sir Galahad
+         * for the Holy Grail quest.
+         */
+
         on(NPCs.GALAHAD_218, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, GalahadDialogue())
             return@on true
         }
 
+        /*
+         * Handles talking to Captain Barnaby
+         * for ship travel dialogue.
+         */
+
         on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "talk-to") { player, npc ->
             openDialogue(player, CaptainBarnabyDialogue(), npc)
             return@on true
         }
+
+        /*
+         * Handles paying fare to Captain Barnaby
+         * for ship travel to Brimhaven.
+         */
 
         on(NPCs.CAPTAIN_BARNABY_4974, IntType.NPC, "pay-fare") { player, _ ->
             val hasCharosRing = inEquipment(player, Items.RING_OF_CHAROSA_6465)
@@ -44,6 +60,11 @@ class ArdougnePlugin : InteractionListener {
 
             return@on true
         }
+
+        /*
+         * Handles using a ferret on Charlie
+         * during the Eagles Peak quest.
+         */
 
         onUseWith(IntType.NPC, Items.FERRET_10092, NPCs.CHARLIE_5138) { player, _, npc ->
             if (!hasRequirement(player, Quests.EAGLES_PEAK)) return@onUseWith true

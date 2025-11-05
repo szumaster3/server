@@ -14,7 +14,13 @@ import shared.consts.NPCs
 import shared.consts.Scenery
 
 class BrimhavenDungeonPlugin : InteractionListener {
+
     override fun defineListeners() {
+
+        /*
+         * Handles entering the Brimhaven Dungeon entrance.
+         */
+
         on(ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
             if (!getAttribute(player, "saniboch:paid", false) || !player.achievementDiaryManager.getDiary(DiaryType.KARAMJA)!!.isComplete) {
                 sendNPCDialogue(player, NPCs.SANIBOCH_1595, "You can't go in there without paying!", FaceAnim.NEUTRAL)
@@ -26,30 +32,53 @@ class BrimhavenDungeonPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles leaving the dungeon through the exit.
+         */
+
         on(EXIT, IntType.SCENERY, "leave") { player, _ ->
             player.properties.teleportLocation = Location.create(2745, 3152, 0)
             return@on true
         }
 
+        /*
+         * Handles interaction with the dungeon stairs.
+         */
         on(STAIRS, IntType.SCENERY, "walk-up", "walk-down") { player, node ->
             BrimhavenUtils.handleStairs(node.asScenery(), player)
             return@on true
         }
+
+        /*
+         * Handles jumping across the stepping stones.
+         */
 
         on(STEPPING_STONE, IntType.SCENERY, "jump-from") { player, node ->
             BrimhavenUtils.handleSteppingStones(player, node.asScenery())
             return@on true
         }
 
+        /*
+         * Handles chopping through vines.
+         */
+
         on(VINE, IntType.SCENERY, "chop-down") { player, node ->
             BrimhavenUtils.handleVines(player, node.asScenery())
             return@on true
         }
 
+        /*
+         * Handles paying Saniboch to grant access to the dungeon.
+         */
+
         on(SANIBOCH, IntType.NPC, "pay") { player, node ->
             player.dialogueInterpreter.open(NPCs.SANIBOCH_1595, node.asNpc(), 10)
             return@on true
         }
+
+        /*
+         * Handles walking across log balance obstacles in the dungeon.
+         */
 
         on(LOG_BALANCE, IntType.SCENERY, "walk-across") { player, node ->
             if (getStatLevel(player, Skills.AGILITY) < 30) {

@@ -27,41 +27,47 @@ class ClockTowerListener : InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23),
-            Scenery.CLOCK_SPINDLE_25,
-        ) { player, _, _ ->
+
+        /*
+         * Handles trying to use any cog on the first spindle (invalid).
+         */
+
+        onUseWith(IntType.SCENERY, intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23), Scenery.CLOCK_SPINDLE_25) { player, _, _ ->
             sendMessage(player, "The cog doesn't seem to fit.")
             return@onUseWith true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23),
-            Scenery.CLOCK_SPINDLE_26,
-        ) { player, _, _ ->
+        /*
+         * Handles trying to use any cog on the second spindle (invalid).
+         */
+
+        onUseWith(IntType.SCENERY, intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23), Scenery.CLOCK_SPINDLE_26) { player, _, _ ->
             sendMessage(player, "The cog doesn't seem to fit.")
             return@onUseWith true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23),
-            Scenery.CLOCK_SPINDLE_27,
-        ) { player, _, _ ->
+
+        /*
+         * Handles trying to use any cog on the third spindle (invalid).
+         */
+
+        onUseWith(IntType.SCENERY, intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23), Scenery.CLOCK_SPINDLE_27) { player, _, _ ->
             sendMessage(player, "The cog doesn't seem to fit.")
             return@onUseWith true
         }
 
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23),
-            Scenery.CLOCK_SPINDLE_28,
-        ) { player, _, _ ->
+        /*
+         * Handles trying to use any cog on the fourth spindle (invalid).
+         */
+
+        onUseWith(IntType.SCENERY, intArrayOf(Items.WHITE_COG_20, Items.BLACK_COG_21, Items.BLUE_COG_22, Items.RED_COG_23), Scenery.CLOCK_SPINDLE_28) { player, _, _ ->
             sendMessage(player, "The cog doesn't seem to fit.")
             return@onUseWith true
         }
+
+        /*
+         * Handles placing the White Cog on its correct spindle.
+         */
 
         onUseWith(IntType.SCENERY, Items.WHITE_COG_20, Scenery.CLOCK_SPINDLE_31) { player, _, _ ->
             if (!getAttribute(player, ClockTower.WHITE_COG_ATTR, false)) {
@@ -78,6 +84,10 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles placing the Black Cog on its correct spindle.
+         */
+
         onUseWith(IntType.SCENERY, Items.BLACK_COG_21, Scenery.CLOCK_SPINDLE_30) { player, _, _ ->
             if (!getAttribute(player, ClockTower.BLACK_COG_ATTR, false)) {
                 if (removeItem(player, Items.BLACK_COG_21)) {
@@ -92,6 +102,10 @@ class ClockTowerListener : InteractionListener {
             }
             return@onUseWith true
         }
+
+        /*
+         * Handles placing the Blue Cog on its correct spindle.
+         */
 
         onUseWith(IntType.SCENERY, Items.BLUE_COG_22, Scenery.CLOCK_SPINDLE_32) { player, _, _ ->
             if (!getAttribute(player, ClockTower.BLUE_COG_ATTR, false)) {
@@ -108,6 +122,10 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles placing the Red Cog on its correct spindle.
+         */
+
         onUseWith(IntType.SCENERY, Items.RED_COG_23, Scenery.CLOCK_SPINDLE_29) { player, _, _ ->
             if (!getAttribute(player, ClockTower.RED_COG_ATTR, false)) {
                 if (removeItem(player, Items.RED_COG_23)) {
@@ -123,8 +141,11 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
-        val levers = intArrayOf(Scenery.LEVER_33, Scenery.LEVER_34)
-        on(levers, IntType.SCENERY, "pull") { player, node ->
+        /*
+         * Handles pulling the levers to open or close the metal gates.
+         */
+
+        on(intArrayOf(Scenery.LEVER_33, Scenery.LEVER_34), IntType.SCENERY, "pull") { player, node ->
             val leverScenery = node.asScenery()
 
             if (leverScenery.location.equals(2591, 9661, 0)) {
@@ -158,10 +179,18 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles trying to open the metal gate directly (blocked side).
+         */
+
         on(Scenery.GATE_37, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "The door doesn't seem to open from here...")
             return@on true
         }
+
+        /*
+         * Handles using Rat Poison on the food trough to poison the rats.
+         */
 
         onUseWith(IntType.SCENERY, Items.RAT_POISON_24, Scenery.FOOD_TROUGH_40) { player, _, _ ->
             if (getAttribute(player, ClockTower.RATS_POISONED_ATTR, false)) {
@@ -182,13 +211,7 @@ class ClockTowerListener : InteractionListener {
                             var xDeath = 0
                             var yDeath = -1
                             for (rat in rats) {
-                                Pathfinder
-                                    .find(
-                                        rat.location,
-                                        location(loc.x + xDeath, loc.y + yDeath, loc.z),
-                                        true,
-                                        Pathfinder.SMART,
-                                    ).walk(rat)
+                                Pathfinder.find(rat.location, location(loc.x + xDeath, loc.y + yDeath, loc.z), true, Pathfinder.SMART).walk(rat)
                                 xDeath++
                                 if (xDeath == 4) {
                                     xDeath = 0
@@ -205,6 +228,10 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles going through the rat gate once its been loosened.
+         */
+
         on(Scenery.GATE_39, IntType.SCENERY, "go-through") { player, node ->
             if (getAttribute(player, ClockTower.RATS_POISONED_ATTR, false)) {
                 sendDialogueLines(
@@ -220,17 +247,22 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles pushing the secret wall to reveal a passage.
+         */
+
         on(Scenery.WALL_1586, IntType.SCENERY, "push") { player, node ->
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
         }
 
+        /*
+         * Handles taking the White Cog from the ground (one cog limit).
+         */
+
         on(Items.WHITE_COG_20, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
-                inInventory(
-                    player,
-                    Items.BLACK_COG_21,
-                ) ||
+                inInventory(player, Items.BLACK_COG_21) ||
                 inInventory(player, Items.BLUE_COG_22) ||
                 inInventory(player, Items.RED_COG_23)
             ) {
@@ -242,6 +274,10 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles cooling the Black Cog using a bucket of water.
+         */
+
         onUseWith(IntType.GROUND_ITEM, Items.BUCKET_OF_WATER_1929, Items.BLACK_COG_21) { player, _, _ ->
             if (removeItem(player, Items.BUCKET_OF_WATER_1929)) {
                 addItem(player, Items.BUCKET_1925)
@@ -251,25 +287,20 @@ class ClockTowerListener : InteractionListener {
             return@onUseWith true
         }
 
+        /*
+         * Handles taking the Black Cog, with cooling and glove checks.
+         */
+
         on(Items.BLACK_COG_21, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
-                inInventory(
-                    player,
-                    Items.BLACK_COG_21,
-                ) ||
+                inInventory(player, Items.BLACK_COG_21) ||
                 inInventory(player, Items.BLUE_COG_22) ||
                 inInventory(player, Items.RED_COG_23)
             ) {
                 sendDialogue(player, "The cogs are too heavy to carry more than one at a time.")
                 return@on true
             }
-            if (hasSpaceFor(player, Item(Items.BLACK_COG_21)) &&
-                getAttribute(
-                    player,
-                    ClockTower.BLACK_COG_COOLED_ATTR,
-                    false,
-                )
-            ) {
+            if (hasSpaceFor(player, Item(Items.BLACK_COG_21)) && getAttribute(player, ClockTower.BLACK_COG_COOLED_ATTR, false)) {
                 addItem(player, Items.BLACK_COG_21)
                 removeGroundItem(groundItem as GroundItem)
                 return@on true
@@ -279,19 +310,8 @@ class ClockTowerListener : InteractionListener {
                 return@on true
             }
             if (hasSpaceFor(player, Item(Items.BLACK_COG_21)) &&
-                (
-                    inInventory(
-                        player,
-                        Items.BUCKET_OF_WATER_1929,
-                        1,
-                    ) ||
-                        inEquipment(player, Items.ICE_GLOVES_1580)
-                ) &&
-                !getAttribute(
-                    player,
-                    ClockTower.BLACK_COG_COOLED_ATTR,
-                    false,
-                )
+                (inInventory(player, Items.BUCKET_OF_WATER_1929, 1) || inEquipment(player, Items.ICE_GLOVES_1580)) &&
+                !getAttribute(player, ClockTower.BLACK_COG_COOLED_ATTR, false)
             ) {
                 if (!inEquipment(player, Items.ICE_GLOVES_1580) && removeItem(player, Items.BUCKET_OF_WATER_1929)) {
                     sendDialogue(player, "You pour water over the cog. It quickly cools down enough to take.")
@@ -300,11 +320,8 @@ class ClockTowerListener : InteractionListener {
                     setAttribute(player, ClockTower.BLACK_COG_COOLED_ATTR, true)
                     removeGroundItem(groundItem as GroundItem)
                 } else if (inEquipment(player, Items.ICE_GLOVES_1580) &&
-                    !inInventory(
-                        player,
-                        Items.BUCKET_OF_WATER_1929,
-                    )
-                ) {
+                    !inInventory(player, Items.BUCKET_OF_WATER_1929))
+                {
                     sendDialogue(player, "You grab the cog with your ice gloves. It quickly cools down enough to take.")
                     setAttribute(player, ClockTower.BLACK_COG_COOLED_ATTR, true)
                     removeGroundItem(groundItem as GroundItem)
@@ -314,12 +331,13 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles taking the Blue Cog from the ground (one cog limit).
+         */
+
         on(Items.BLUE_COG_22, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
-                inInventory(
-                    player,
-                    Items.BLACK_COG_21,
-                ) ||
+                inInventory(player, Items.BLACK_COG_21) ||
                 inInventory(player, Items.BLUE_COG_22) ||
                 inInventory(player, Items.RED_COG_23)
             ) {
@@ -331,12 +349,13 @@ class ClockTowerListener : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles taking the Red Cog from the ground (one cog limit).
+         */
+
         on(Items.RED_COG_23, IntType.GROUND_ITEM, "take") { player, groundItem ->
             if (inInventory(player, Items.WHITE_COG_20) ||
-                inInventory(
-                    player,
-                    Items.BLACK_COG_21,
-                ) ||
+                inInventory(player, Items.BLACK_COG_21) ||
                 inInventory(player, Items.BLUE_COG_22) ||
                 inInventory(player, Items.RED_COG_23)
             ) {

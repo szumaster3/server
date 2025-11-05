@@ -28,11 +28,7 @@ class RangingGuildPlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         val id = if (node is Scenery) node.getId() else 0
         when (option) {
             "open" ->
@@ -44,19 +40,12 @@ class RangingGuildPlugin : OptionHandler() {
                                 return true
                             }
                         }
-                        handleAutowalkDoor(
-                            player,
-                            (node as Scenery),
+                        handleAutowalkDoor(player, (node as Scenery),
                             if (player.location.y >= 3438) {
                                 Location.create(2659, 3437, 0)
                             } else {
-                                Location.create(
-                                    2657,
-                                    3439,
-                                    0,
-                                )
-                            },
-                        )
+                                Location.create(2657, 3439, 0)
+                            },)
                     }
                 }
 
@@ -76,10 +65,7 @@ class RangingGuildPlugin : OptionHandler() {
         return true
     }
 
-    override fun getDestination(
-        node: Node,
-        n: Node,
-    ): Location? {
+    override fun getDestination(node: Node, n: Node): Location? {
         if (n is Scenery) {
             if (n.definition.hasAction("open")) {
                 if (n.getId() == 2514) {

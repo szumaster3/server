@@ -14,13 +14,25 @@ import shared.consts.NPCs
 import shared.consts.Scenery
 import kotlin.math.ceil
 
+/**
+ * Handles all general Brimhaven area interactions.
+ */
 class BrimhavenPlugin : InteractionListener {
 
     override fun defineListeners() {
+
+        /*
+         * Handles climbing up the ladder to leave the agility arena.
+         */
+
         on(AGILITY_ARENA_EXIT_LADDER, IntType.SCENERY, "climb-up") { player, _ ->
             ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, AGILITY_ARENA_HUT)
             return@on true
         }
+
+        /*
+         * Handles climbing down into the agility arena.
+         */
 
         on(AGILITY_ARENA_ENTRANCE_LADDER, IntType.SCENERY, "climb-down") { player, _ ->
             if (!getAttribute(player, "capn_izzy", false)) {
@@ -33,25 +45,45 @@ class BrimhavenPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles talking to Capn Izzy NPC.
+         */
+
         on(NPCs.CAPN_IZZY_NO_BEARD_437, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, CapnIzzyDialogue(0), node)
             return@on true
         }
+
+        /*
+         * Handles paying Capn Izzy NPC for access to the agility arena.
+         */
 
         on(NPCs.CAPN_IZZY_NO_BEARD_437, IntType.NPC, "pay") { player, node ->
             openDialogue(player, CapnIzzyDialogue(2), node)
             return@on true
         }
 
+        /*
+         * Handles talking to Pirate Jackie.
+         */
+
         on(NPCs.PIRATE_JACKIE_THE_FRUIT_1055, IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, PirateJackieDialogue(), node)
             return@on true
         }
 
+        /*
+         * Handles trading with Pirate Jackie to open ticket exchange interface.
+         */
+
         on(NPCs.PIRATE_JACKIE_THE_FRUIT_1055, IntType.NPC, "trade") { player, _ ->
             openInterface(player, TICKET_EXCHANGE)
             return@on true
         }
+
+        /*
+         * Handles trying to open the locked rear door in the restaurant.
+         */
 
         on(RESTAURANT_REAR_DOOR, IntType.SCENERY, "open") { player, _ ->
             sendMessage(player, "You try and open the door...")
@@ -59,15 +91,27 @@ class BrimhavenPlugin : InteractionListener {
             return@on true
         }
 
+        /*
+         * Handles interacting with the Karambwan fishing spot.
+         */
+
         on(KARAMBWAN_FISHING_SPOT, IntType.NPC, "fish") { player, node ->
             sendNPCDialogue(player, node.id, "Keep off my fishing spot, whippersnapper!", FaceAnim.FURIOUS)
             return@on true
         }
 
+        /*
+         * Handles Sandy NPC small-talk.
+         */
+
         on(SANDY, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(player, node.id, "Nice day for sand isn't it?", FaceAnim.FURIOUS)
             return@on true
         }
+
+        /*
+         * Handles random pirate NPC greetings.
+         */
 
         on(PIRATE, IntType.NPC, "talk-to") { player, node ->
             sendPlayerDialogue(player, "Hello!", FaceAnim.HALF_GUILTY)

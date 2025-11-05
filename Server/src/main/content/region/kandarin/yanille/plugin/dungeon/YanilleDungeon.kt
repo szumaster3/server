@@ -7,6 +7,7 @@ import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.SceneryBuilder
@@ -42,17 +43,17 @@ class YanilleDungeon : MapZone("Yanille agility", true), InteractionListener {
         ZoneBuilder.configure(this)
 
         on(Scenery.STAIRCASE_1728, IntType.SCENERY, "climb-down") { player, _ ->
-            teleport(player, Location(2620, 9565, 0))
+            teleport(player, Location(2620, 9565, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
         }
 
         on(Scenery.STAIRCASE_1729, IntType.SCENERY, "climb-up") { player, _ ->
-            teleport(player, Location(2620, 9496, 0))
+            teleport(player, Location(2620, 9496, 0),  TeleportManager.TeleportType.INSTANT)
             return@on true
         }
 
         on(Scenery.STAIRCASE_2316, IntType.SCENERY, "climb-up") { player, _ ->
-            teleport(player, Location(2569, 9525, 0))
+            teleport(player, Location(2569, 9525, 0),  TeleportManager.TeleportType.INSTANT)
             return@on true
         }
 

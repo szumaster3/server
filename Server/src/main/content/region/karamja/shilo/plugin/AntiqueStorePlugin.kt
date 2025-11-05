@@ -17,10 +17,15 @@ class AntiqueStorePlugin : InteractionListener {
 
     override fun defineListeners() {
 
+        /*
+         * Handles talk to Yanni NPC.
+         */
+
         on(NPCs.YANNI_SALIKA_515, IntType.NPC, "talk-to")  { player, node ->
             openDialogue(player, YanniSalikaDialogue(), node)
             return@on true
         }
+
         /*
          * Handles antique items exchange with Yanni NPCs.
          */
