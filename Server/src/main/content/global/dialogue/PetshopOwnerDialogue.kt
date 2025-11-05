@@ -27,7 +27,7 @@ class PetshopOwnerDialogue(player: Player? = null) : Dialogue(player) {
             val npcs: List<NPC> = RegionManager.getLocalNpcs(player)
             for (n in npcs) if (n.id == NPCs.PET_SHOP_OWNER_6893) npc = n
             dogName = args[0].toString()
-            puppy = args[1] as Item
+            puppy = Item(args[1] as Int)
             player("No, the $dogName.")
             stage = 699
             return true
@@ -84,6 +84,7 @@ class PetshopOwnerDialogue(player: Player? = null) : Dialogue(player) {
                 if (freeSlots(player) == 0) {
                     npc(FaceAnim.ASKING, "Where are you going to put it, on your head? You can't", "buy a puppy unless you have space to hold it.")
                     sendMessage(player, "You don't have enough inventory space.")
+                    end()
                     return true
                 }
 
@@ -92,10 +93,11 @@ class PetshopOwnerDialogue(player: Player? = null) : Dialogue(player) {
 
                 if (!removeItem(player, coins)) {
                     sendMessage(player, "You don't have the required coins in order to do this.")
+                    end()
                     return true
                 }
 
-                addItem(player, puppyId)
+                addItem(player, puppyId, 1)
                 npc(FaceAnim.HAPPY, "There you go! I hope you two get on.")
                 stage = 708
             }
