@@ -116,11 +116,12 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
     }
 
     private fun openPuzzle(player: Player, type: String) {
-        val box = Puzzle.forType(type) ?: return
-        openPuzzleInterface(player)
-        val puzzle = generatePuzzle(box.fullSolution)
-        sessionState[player] = type to puzzle.toMutableList()
-        sendPuzzle(player, type)
+        Puzzle.forType(type)?.let { box ->
+            openPuzzleInterface(player)
+            val puzzle = generatePuzzle(box.fullSolution)
+            sessionState[player] = type to puzzle
+            sendPuzzle(player, type)
+        }
     }
 
     private fun openPuzzleInterface(player: Player) {
@@ -145,57 +146,53 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
         val puzzle = data ?: sessionState[player]?.second ?: return
         PacketRepository.send(
             ContainerPacket::class.java,
-            ContainerContext(player, -1, -1, 140, puzzle.map { it.takeIf { it != -1 }?.let(::Item) }.toTypedArray(), 25, false)
+            ContainerContext(player, -1, -1, 140, puzzle.map { if (it != -1) Item(it) else null }.toTypedArray(), 25, false)
         )
     }
 
     fun generatePuzzle(solution: List<Int>): MutableList<Int> {
         val puzzle = solution.filter { it != -1 }.toMutableList().apply { add(-1) }
-        var emptyIndex = puzzle.size - 1
-        val lastMove = mutableListOf<Int>()
+        var emptyIndex = puzzle.lastIndex
 
         repeat(200) {
-            val row = emptyIndex / 5
-            val col = emptyIndex % 5
-            val moves = mutableListOf<Int>()
-            if (row > 0) moves.add(emptyIndex - 5)
-            if (row < 4) moves.add(emptyIndex + 5)
-            if (col > 0) moves.add(emptyIndex - 1)
-            if (col < 4) moves.add(emptyIndex + 1)
-            lastMove.firstOrNull()?.let { moves.remove(it) }
-            val move = moves.random()
-            puzzle[emptyIndex] = puzzle[move]
-            puzzle[move] = -1
-            lastMove.clear()
-            lastMove.add(emptyIndex)
-            emptyIndex = move
+            val emptyRow = emptyIndex / 5
+            val emptyCol = emptyIndex % 5
+
+            var moved = false
+            while (!moved) {
+                val move = (0..3).random()
+                val target = when (move) {
+                    0 -> emptyIndex - 5
+                    1 -> emptyIndex + 5
+                    2 -> emptyIndex - 1
+                    else -> emptyIndex + 1
+                }
+
+                val targetRow = target / 5
+                val targetCol = target % 5
+
+                if (target in 0..24 && (targetRow == emptyRow || targetCol == emptyCol)) {
+                    puzzle[emptyIndex] = puzzle[target]
+                    puzzle[target] = -1
+                    emptyIndex = target
+                    moved = true
+                }
+            }
         }
 
-        fixFourUnderFive(puzzle, solution)
-        ensureEmptyTileBottomRight(puzzle)
-        return puzzle
-    }
-
-    private fun fixFourUnderFive(puzzle: MutableList<Int>, solution: List<Int>) {
         val idx4 = puzzle.indexOf(solution[3])
         val idx5 = puzzle.indexOf(solution[4])
-        if (idx4 == -1 || idx5 == -1) return
-        val row4 = idx4 / 5
-        val col4 = idx4 % 5
-        val row5 = idx5 / 5
-        val col5 = idx5 % 5
-        if (row4 == row5 + 1 && col4 == col5) {
+        if (idx4 / 5 == idx5 / 5 + 1 && idx4 % 5 == idx5 % 5) {
             puzzle[idx4] = puzzle[idx5]
             puzzle[idx5] = solution[4]
         }
-    }
 
-    private fun ensureEmptyTileBottomRight(puzzle: MutableList<Int>) {
-        val idx = puzzle.indexOf(-1)
-        if (idx != 24) {
-            puzzle[idx] = puzzle[24]
-            puzzle[24] = -1
+        if (puzzle.last() != -1) {
+            val emptyIdx = puzzle.indexOf(-1)
+            puzzle[emptyIdx] = puzzle.last().also { puzzle[puzzle.lastIndex] = -1 }
         }
+
+        return puzzle
     }
 
     /**
