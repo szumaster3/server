@@ -169,7 +169,7 @@ class TheHandintheSandPlugin : InteractionListener {
          * Handles put the sand to truth serum.
          */
 
-        onUseWith(IntType.ITEM, Items.PINK_DYE_6955, Items.LANTERN_LENS_4542) { player, used, with ->
+        onUseWith(IntType.ITEM, Items.SAND_6958, Items.TRUTH_SERUM_6952) { player, _, _ ->
             sendDialogue(player, "Perhaps you should let Betty do that, it looks tricky.")
             return@onUseWith true
         }
