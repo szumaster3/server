@@ -1,6 +1,7 @@
 package content.region.kandarin.pisc.quest.phoenix
 
 import content.data.GameAttributes
+import content.region.kandarin.pisc.quest.phoenix.plugin.RebornWarriorNPC
 import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -8,6 +9,7 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.*
@@ -85,7 +87,7 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
         /**
          * The reborn warrior npc ids.
          */
-        val REBORN_WARRIOR_ID = intArrayOf(NPCs.LESSER_REBORN_WARRIOR_8557, NPCs.LESSER_REBORN_WARRIOR_8558, NPCs.GREATER_REBORN_WARRIOR_8559, NPCs.GREATER_REBORN_WARRIOR_8560, NPCs.LESSER_REBORN_RANGER_8561, NPCs.LESSER_REBORN_RANGER_8562, NPCs.GREATER_REBORN_RANGER_8563, NPCs.GREATER_REBORN_RANGER_8564, NPCs.LESSER_REBORN_MAGE_8565, NPCs.LESSER_REBORN_MAGE_8566, NPCs.GREATER_REBORN_MAGE_8567, NPCs.GREATER_REBORN_MAGE_8568)
+        val REBORN_WARRIOR_ID = intArrayOf(NPCs.LESSER_REBORN_WARRIOR_8557, NPCs.LESSER_REBORN_WARRIOR_8558, NPCs.GREATER_REBORN_WARRIOR_8559, NPCs.GREATER_REBORN_WARRIOR_8560, NPCs.LESSER_REBORN_RANGER_8561, NPCs.LESSER_REBORN_RANGER_8562, NPCs.GREATER_REBORN_RANGER_8563, NPCs.GREATER_REBORN_RANGER_8564, NPCs.LESSER_REBORN_MAGE_8565, NPCs.LESSER_REBORN_MAGE_8566, NPCs.GREATER_REBORN_MAGE_8567, NPCs.GREATER_REBORN_MAGE_8568, NPCs.LESSER_REBORN_WARRIOR_8569, NPCs.GREATER_REBORN_WARRIOR_8570)
 
         /**
          * The non-hostile reborn warrior npc ids.
@@ -278,9 +280,13 @@ class InPyreNeed : Quest(Quests.IN_PYRE_NEED, 162, 161, 1, PROGRESS, 0, 1, 30) {
         rewardXP(player, Skills.CRAFTING, 11556.0)
         addItemOrDrop(player, Items.PHOENIX_QUILL_14616, 5)
         setVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761, 30, true)
+        setVarbit(player, 5766, 1, true)
     }
 
-    override fun newInstance(`object`: Any?): Quest = this
+    override fun newInstance(`object`: Any?): Quest {
+        ClassScanner.definePlugin(RebornWarriorNPC())
+        return this
+    }
 }
 /*
  * 1 quest point

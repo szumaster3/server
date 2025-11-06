@@ -23,8 +23,6 @@ import shared.consts.*
 class InPyreNeedPlugin : InteractionListener {
 
     override fun defineListeners() {
-        ClassScanner.definePlugin(RebornWarriorNPC())
-
         /*
          * Handles entering the Phoenix Lair.
          */
@@ -53,7 +51,7 @@ class InPyreNeedPlugin : InteractionListener {
                 }
             }
 
-            if (getVarbit(player, InPyreNeed.PROGRESS) < 1 || !isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+            if (getQuestStage(player, Quests.IN_PYRE_NEED) < 1) {
                 sendNPCDialogue(player, NPCs.PRIEST_OF_GUTHIX_8555, "Hey, wait! I have something to ask you before going down there.", FaceAnim.FRIENDLY)
                 addDialogueAction(player) { p, _ ->
                     sendPlayerDialogue(p, "Maybe I should see what he has to say before entering this dark, scary, and unreasonably warm cave.", FaceAnim.THINKING)
@@ -87,32 +85,24 @@ class InPyreNeedPlugin : InteractionListener {
                 setTitle(player, 2)
                 sendOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
-                    when (button) {
-                        2 -> {
-                            openInterface(player, Components.FADE_TO_BLACK_120)
-                            player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
-                            lock(player, 3)
-                            queueScript(player, 3, QueueStrength.SOFT) {
-                                teleport(player, Location(3566, 5224, 0))
-                                resetAnimator(player)
-                                openInterface(player, Components.FADE_FROM_BLACK_170)
-                                return@queueScript stopExecuting(player)
-                            }
-                        }
+                    val targetLocation = when (button) {
+                        2 -> Location(3566, 5224, 0)
+                        3 -> locations.random()
+                        else -> null
+                    }
 
-                        3 -> {
-                            openInterface(player, Components.FADE_TO_BLACK_120)
-                            player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
-                            lock(player, 3)
-                            queueScript(player, 3, QueueStrength.SOFT) {
-                                teleport(player, locations.random())
-                                resetAnimator(player)
-                                openInterface(player, Components.FADE_FROM_BLACK_170)
-                                return@queueScript stopExecuting(player)
-                            }
+                    if (targetLocation != null) {
+                        lock(player, 3)
+                        openInterface(player, Components.FADE_TO_BLACK_120)
+                        player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
+                        queueScript(player, 3, QueueStrength.SOFT) {
+                            teleport(player, targetLocation)
+                            resetAnimator(player)
+                            openInterface(player, Components.FADE_FROM_BLACK_170)
+                            return@queueScript stopExecuting(player)
                         }
-
-                        else -> closeDialogue(player)
+                    } else {
+                        closeDialogue(player)
                     }
                 }
                 return@on true

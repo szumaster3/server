@@ -19,7 +19,6 @@ class DragonForgePlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, DRAGON_ANVIL, *RUINED_PIECES) { player, _, _ ->
-
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) return@onUseWith false
 
             if (getStatLevel(player, Skills.SMITHING) < 92) {
@@ -28,39 +27,28 @@ class DragonForgePlugin : InteractionListener {
             }
 
             if (!player.inventory.containsItem(FUSION_HAMMER)) {
-                sendMessage(player, "You need a fusion hammer to work the metal with.")
+                sendMessage(player, "You are missing some required items or your hammer.")
                 return@onUseWith false
             }
 
-            if (anyInInventory(player, *RUINED_PIECES) && !allInInventory(player, *RUINED_PIECES)) {
+            if (!allInInventory(player, *RUINED_PIECES)) {
                 sendMessage(player, "You do not have the required items.")
                 return@onUseWith false
             }
 
-            lock(player, 3)
-            lockInteractions(player, 3)
-
-            queueScript(player, 1, QueueStrength.SOFT) { stage ->
-                when (stage) {
-                    0 -> {
-                        sendMessage(player, "You set to work repairing the ruined armour.")
-                        animate(player, SMITHING_ANIMATION)
-                        return@queueScript delayScript(player, SMITHING_ANIMATION.duration)
-                    }
-                    1 -> {
-                        if (removeAll(player, RUINED_PIECES)) {
-                            sendMessage(player, "You finish your efforts...")
-                            removeItem(player, FUSION_HAMMER)
-                            player.inventory.add(DRAGON_PLATEBODY)
-                            rewardXP(player, Skills.SMITHING, 2000.0)
-                        }
-                        unlock(player)
-                        return@queueScript stopExecuting(player)
-                    }
-                    else -> return@queueScript stopExecuting(player)
+            val removedPieces = removeAll(player, RUINED_PIECES)
+            val removedHammer = removeItem(player, FUSION_HAMMER)
+            if (removedPieces && removedHammer) {
+                lock(player, SMITHING_ANIMATION.duration + 3)
+                player.animate(SMITHING_ANIMATION)
+                sendMessage(player, "You set to work repairing the ruined armour.")
+                queueScript(player, SMITHING_ANIMATION.duration, QueueStrength.SOFT) {
+                    addItem(player, DRAGON_PLATEBODY.id, 1)
+                    rewardXP(player, Skills.SMITHING, 2000.0)
+                    sendMessage(player, "You finish your efforts and forge the Dragon Platebody!")
+                    return@queueScript stopExecuting(player)
                 }
             }
-
             return@onUseWith true
         }
 
@@ -103,25 +91,30 @@ class DragonForgePlugin : InteractionListener {
             val npc = with.asNpc()
 
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
-                sendMessage(player, "You cannot currently use any items on that dragon.")
+                sendMessage(player, "You cannot currently use items on this dragon yet.")
                 return@onUseWith true
             }
 
             if (!anyInEquipment(player, *REQUIRED_SHIELD)) {
-                sendMessage(player, "You cannot currently use any items on that dragon.")
+                sendMessage(player, "You need an appropriate shield to approach the dragon safely.")
                 return@onUseWith true
             }
 
             if (!anyInInventory(player, *STRANGE_KEYS)) {
+                sendMessage(player, "You have no keys to use on the dragon.")
                 return@onUseWith true
             }
 
             if (removeAll(player, STRANGE_KEYS, Container.INVENTORY)) {
                 visualize(npc, DRAGON_BREATH_ANIMATION, DRAGON_BREATH_GFX)
                 sendItemDialogue(player, DRAGONKIN_KEY, "The intense heat of the mithril dragon's breath fuses the key halves together.")
-                addItem(player, DRAGONKIN_KEY.id, 1)
+                if (!addItem(player, DRAGONKIN_KEY.id, 1)) {
+                    produceGroundItem(player, DRAGONKIN_KEY.id, 1, player.location)
+                }
                 runTask(player, 3) {
-                    npc.attack(player)
+                    if (!npc.isActive) {
+                        npc.attack(player)
+                    }
                 }
             }
 

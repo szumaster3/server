@@ -2,6 +2,7 @@ package core.game.system.command.sets
 
 import core.api.finishQuest
 import core.api.sendString
+import core.api.updateQuestTab
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.QuestRepository
@@ -62,6 +63,7 @@ class QuestCommandSet : CommandSet(Privilege.ADMIN) {
                     questObject.reset(player)
                 }
                 questObject.updateVarps(player)
+                updateQuestTab(player)
                 notify(player, "<col=209dff>Setting " + questObject.name + " to stage $stage</col>")
             }
         }

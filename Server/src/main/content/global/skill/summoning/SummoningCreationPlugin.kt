@@ -51,10 +51,7 @@ class SummoningCreationPlugin : ComponentPlugin() {
                 return true
             }
             166 -> SummoningPouch.forSlot(if (slot > 50) slot - 1 else slot)?.let { SummoningCreator.list(player, it) }
-            168 -> sendMessage(
-                player,
-                ItemDefinition.forId(SummoningScroll.forId(if (slot > 50) slot - 1 else slot)!!.itemId).examine,
-            )
+            168 -> sendMessage(player, ItemDefinition.forId(SummoningScroll.forId(if (slot > 50) slot - 1 else slot)!!.itemId).examine)
         }
         return true
     }

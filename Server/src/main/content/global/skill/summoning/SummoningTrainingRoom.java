@@ -36,7 +36,7 @@ import shared.consts.Quests;
 import static core.api.ContentAPIKt.*;
 
 /**
- * The type Summoning training room.
+ * Handles the summoning training room.
  */
 @Initializable
 public final class SummoningTrainingRoom extends OptionHandler {

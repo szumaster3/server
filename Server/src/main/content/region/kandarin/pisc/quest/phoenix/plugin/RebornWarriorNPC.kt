@@ -39,14 +39,15 @@ class RebornWarriorNPC : AbstractNPC {
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if (!InPyreNeed.NON_HOSTILE_IDS.contains(this.id)) return
 
-        ticks++
-        if (ticks < 20) return
-
-        ticks = 0
-        if (RandomFunction.random(10) < 3) {
-            sendChat(this.asNpc(), forceChat.random())
+        if (InPyreNeed.NON_HOSTILE_IDS.contains(this.id)) {
+            ticks++
+            if (ticks >= 20) {
+                ticks = 0
+                if (RandomFunction.random(10) < 3) {
+                    sendChat(this, forceChat.random())
+                }
+            }
         }
     }
 

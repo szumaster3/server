@@ -96,7 +96,7 @@ abstract class Forager : BurdenBeast {
      * Hook for subclasses to implement additional passive behavior.
      */
     open fun handlePassiveAction() {
-        // Optional override for custom behavior.
+
     }
 
     /**

@@ -15,46 +15,18 @@ import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Vars
 
-/**
- * Once killed, you will be rewarded with 5 phoenix quills (upon talking to the phoenix) and 5000 Slayer experience,
- * from every kill after that you will only receive 500 Slayer experience. In addition, in subsequent visits you will
- * also receive 7500 Firemaking experience, 3000 Fletching experience, as well as 1000 Crafting experience as a reward
- * for defeating her.
- *
- *
- * Once you have completed the quest, and have 51 Slayer, you may fight the Phoenix after traveling through her lair (Her guardians will block and multi-attack you, be warned.)
- *
- *
- * The Phoenix herself has a Combat level of 235 and has high defence. She attacks purely with magic and has been said to hit up to 29.
- *
- *
- * Note: Your familiar RARELY follows you through the whole set of caves.
- */
 @Initializable
-class PhoenixDialogue : Dialogue {
-    /**
-     * Instantiates a new Phoenix dialogue.
-     */
-    constructor()
-
-    /**
-     * Instantiates a new Phoenix dialogue.
-     *
-     * @param player the player
-     */
-    constructor(player: Player?) : super(player)
+class PhoenixDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
         if (isQuestComplete(player, Quests.IN_PYRE_NEED)) {
-            npcl(
-                FaceAnim.OLD_NORMAL,
-                "(Welcome back, " + player.username + ". It is good to see you are enthusiastic, as ever. Heh heh heh!)"
-            )
+            npcl(FaceAnim.OLD_NORMAL, "(Welcome back, " + player.username + ". It is good to see you are enthusiastic, as ever. Heh heh heh!)")
             stage = 40
+        } else {
+            player(FaceAnim.SCARED, "H...hello?")
+            stage = 0
         }
-        player(FaceAnim.SCARED, "H...hello?")
-        stage = 1
         return true
     }
 

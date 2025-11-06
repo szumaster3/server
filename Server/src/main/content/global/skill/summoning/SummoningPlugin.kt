@@ -24,6 +24,11 @@ class SummoningPlugin : InteractionListener {
                 return@on true
             }
 
+            if(isQuestComplete(player, Quests.IN_PYRE_NEED) && node.id == Items.PHOENIX_POUCH_14624) {
+                sendMessage(player, "You must complete In Pyre Need before you can summon a familiar.")
+                return@on true
+            }
+
             player.familiarManager.summon(node.asItem(), false)
 
             val familiar = player.familiarManager.familiar

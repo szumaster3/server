@@ -58,19 +58,13 @@ object SummoningCreator {
     private val SCROLL_COMPONENT = Component(Components.SUMMONING_SCROLLS_673)
 
     /**
-     * Opens the summoning creation interface for the player, either for pouches or scrolls.
-     *
-     * @param player The player to open the interface for.
-     * @param pouch A boolean indicating whether to open the pouch or scroll interface.
+     * Opens the summoning creation interface.
      */
     @JvmStatic
     fun open(player: Player, pouch: Boolean) = configure(player, pouch)
 
     /**
-     * Configures the summoning interface based on whether the pouch or scroll interface is to be shown.
-     *
-     * @param player The player to configure the interface for.
-     * @param pouch A boolean indicating whether to show the pouch or scroll interface.
+     * Configures the summoning interface.
      */
     @JvmStatic
     fun configure(player: Player, pouch: Boolean) {
@@ -113,10 +107,6 @@ object SummoningCreator {
         player.packetDispatch.sendMessage(CS2Mapping.forId(1186)?.map?.get(pouch.pouchId) as? String)
     }
 
-    /**
-     * Skill pulse used for creating a summoning item, which handles the animation, requirements check,
-     * item removal, and experience reward.
-     */
     class CreatePulse(player: Player?, private val type: SummoningNode, private val amount: Int) : SkillPulse<Item?>(player, null) {
 
         private val regionLocations = mapOf(
@@ -140,22 +130,13 @@ object SummoningCreator {
         }
 
         /**
-         * Checks the requirements for the creation of the summoning item, including level and required items.
-         *
-         * @return True if the requirements are met, false otherwise.
+         * Checks the requirements.
          */
         override fun checkRequirements(): Boolean {
             closeInterface(player)
             return when {
                 getStatLevel(player, Skills.SUMMONING) < type.level -> {
                     sendMessage(player, "You need a Summoning level of at least ${type.level} to do this.")
-                    false
-                }
-
-                type.isPouch &&
-                        type.product.id == Items.PHOENIX_POUCH_14624 &&
-                        !isQuestComplete(player, Quests.IN_PYRE_NEED) -> {
-                    sendMessage(player, "You must complete In Pyre Need to infuse phoenix pouches.")
                     false
                 }
 
