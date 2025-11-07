@@ -4,6 +4,7 @@ import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
+import content.global.skill.summoning.SummoningPouch
 import content.minigame.mta.plugin.MTAZone
 import content.region.island.tutorial.plugin.TutorialStage
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
@@ -37,6 +38,37 @@ import shared.consts.Items
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        define(
+            name = "addpouchitems",
+            privilege = Privilege.ADMIN,
+            usage = "::addpouchitems <pouchId>",
+            description = "Adds all items needed to create pouch."
+        ) { player, args ->
+            if (args.size < 2) {
+                sendMessage(player, "Usage: ::addpouchitems pouchId")
+                return@define
+            }
+
+            val pouchId = args[1].toIntOrNull()
+            if (pouchId == null) {
+                player.debug("Pouch id must be a valid number.")
+                return@define
+            }
+
+            val pouch = SummoningPouch.values().find { it.pouchId == pouchId }
+            if (pouch == null) {
+                sendMessage(player, "No pouch for id=$pouchId.")
+                return@define
+            }
+            player.debug("----Pouch=[${pouch.pouchId}] for NPC=[${pouch.npcId}](Slot=${pouch.slot})-----")
+            pouch.items.forEach { item ->
+                player.inventory.add(item)
+                player.debug("-> [${item.id}][${item.name}]:[${item.amount}]")
+            }
+        }
+
+
         define(
             name = "sandpit",
             privilege = Privilege.ADMIN,
@@ -166,8 +198,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
- * Command to send model on the interface.
- */
+         * Command to send model on the interface.
+         */
+
         define(
             name = "model",
             privilege = Privilege.ADMIN,

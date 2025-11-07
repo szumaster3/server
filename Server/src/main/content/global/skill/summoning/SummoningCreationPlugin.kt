@@ -50,7 +50,11 @@ class SummoningCreationPlugin : ComponentPlugin() {
                 }
                 return true
             }
-            166 -> SummoningPouch.forSlot(if (slot > 50) slot - 1 else slot)?.let { SummoningCreator.list(player, it) }
+            166 -> if(slot == 51) {
+                sendMessage(player, "This pouch requires 1 phoenix quill, 1 crimson charm, 165 spirit shards, and completion of completion of 'In Pyre Need'.")
+            } else {
+                SummoningPouch.forSlot(if (slot > 50) slot - 1 else slot)?.let { SummoningCreator.list(player, it) }
+            }
             168 -> sendMessage(player, ItemDefinition.forId(SummoningScroll.forId(if (slot > 50) slot - 1 else slot)!!.itemId).examine)
         }
         return true
