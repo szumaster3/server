@@ -85,7 +85,7 @@ class InPyreNeedPlugin : InteractionListener {
                 sendOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
                     val targetLocation = when (button) {
-                        2 -> Location(3566, 5224, 0)
+                        2 -> Location(3566, 5224, 0).also { sendMessage(player, "You make your way back to the phoenix's roost.") }
                         3 -> locations.random()
                         else -> null
                     }

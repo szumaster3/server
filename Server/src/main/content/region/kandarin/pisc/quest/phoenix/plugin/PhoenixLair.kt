@@ -7,7 +7,9 @@ import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryType
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneRestriction
 import shared.consts.NPCs
@@ -44,7 +46,7 @@ class PhoenixLair : MapArea {
             val newLoc = locationsPool.random()
             locationsPool.remove(newLoc)
 
-            addScenery(treeId, newLoc, 0, 22)
+            addScenery(treeId, newLoc, 0, SceneryType.CentrepieceStraight)
             currentTreeLocations[treeId] = newLoc
         }
     }
@@ -56,6 +58,11 @@ class PhoenixLair : MapArea {
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {
             val player = entity.asPlayer()
+            val nearbyPlayers = RegionManager.getLocalPlayers(player, 9).filter { it != player }
+
+            if (nearbyPlayers.isNotEmpty()) {
+                return
+            }
             val npcIdsToSpawn = if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
                 listOf(
                     NPCs.LESSER_REBORN_MAGE_8573,

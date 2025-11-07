@@ -58605,5 +58605,9 @@
   {
     "ids": "28716",
     "examine": "Glowing with barely-suppressed energies."
+  },
+  {
+    "ids": "41904,41905,41906,41907",
+    "examine": "It is growing, against the odds, in this cave."
   }
 ]
