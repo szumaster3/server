@@ -13,10 +13,8 @@ import shared.consts.Vars
 
 @Initializable
 class GhostsAhoy : Quest(Quests.GHOSTS_AHOY, 68, 67, 2, Vars.VARBIT_QUEST_GHOST_AHOY_PROGRESS_217, 0, 1, 8) {
-    override fun drawJournal(
-        player: Player,
-        stage: Int,
-    ) {
+
+    override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11
         player ?: return

@@ -19,8 +19,7 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
     companion object {
         @JvmStatic
         fun spawnGiantLobster(player: Player) {
-            val giantLobster =
-                GiantLobsterNPC(NPCs.GIANT_LOBSTER_1693)
+            val giantLobster = GiantLobsterNPC(NPCs.GIANT_LOBSTER_1693)
             giantLobster.location = location(3617, 3543, 0)
             giantLobster.isWalks = true
             giantLobster.isAggressive = true

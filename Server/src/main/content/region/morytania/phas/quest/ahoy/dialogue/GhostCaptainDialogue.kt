@@ -19,11 +19,7 @@ class GhostCaptainDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         when {
             !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> npc(FaceAnim.FRIENDLY, "Woooo wooo wooooo woooo")
-            inBorders(player, 3788, 3556, 3797, 3562) -> options(
-                "Can you take me back to Phasmatys, now?",
-                "There isn't much on this island, is there?",
-            ).also { stage = 7 }
-
+            inBorders(player, 3788, 3556, 3797, 3562) -> options("Can you take me back to Phasmatys, now?", "There isn't much on this island, is there?").also { stage = 7 }
             else -> player("Where do you sail to, in such a small boat?").also { stage = 1 }
         }
         return true

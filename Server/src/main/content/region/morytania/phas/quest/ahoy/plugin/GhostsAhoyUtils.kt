@@ -6,31 +6,39 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.world.map.Location
 import core.tools.RandomFunction
 import shared.consts.*
 
 object GhostsAhoyUtils {
-    val signatures = 0
-
+    const val signatures = 0
     const val shipModel = Items.MODEL_SHIP_4253
     const val silkShipModel = Items.MODEL_SHIP_4254
+    const val rightShip = "/save:ghostsahoy:right-ship"
+    const val colorMatching = "/save:ghostsahoy:paint-ship"
+    const val lastMapScrap = "/save:ghostahoy:map-scrap"
+    const val windSpeed = "/save:ghostsahoy:windspeed"
+    const val logout = "/save:ghostsahoy:bedsheet-costume"
+    const val petitionsigns = "/save:ghostsahoy:petition"
+    const val petitionstart = "/save:ghostsahoy:petition-start"
+    const val petitioncomplete = "/save:ghostsahoy:petition-complete"
+    const val getSignedBow = "/save:ghostsahoy:signed-bow"
+    const val shipFlag = "/save:ghostsahoy:ship-flag"
+    const val shipBottom = "/save:ghostsahoy:ship-bottom"
+    const val shipSkull = "/save:ghostsahoy:ship-skull"
 
-    val rightShip = "/save:ghostsahoy:right-ship"
-
-    val colorMatching = "/save:ghostsahoy:paint-ship"
-
-    val lastMapScrap = "/save:ghostahoy:map-scrap"
-
-    val windSpeed = "/save:ghostsahoy:windspeed"
-
-    val logout = "/save:ghostsahoy:bedsheet-costume"
-    val petitionsigns = "/save:ghostsahoy:petition"
-    val petitionstart = "/save:ghostsahoy:petition-start"
-    val petitioncomplete = "/save:ghostsahoy:petition-complete"
-    val getSignedBow = "/save:ghostsahoy:signed-bow"
-    val shipFlag = "/save:ghostsahoy:ship-flag"
-    val shipBottom = "/save:ghostsahoy:ship-bottom"
-    val shipSkull = "/save:ghostsahoy:ship-skull"
+    val rockJumpMap: Map<Location, Location> = mapOf(
+        Location(3605, 3550, 0) to Location(3602, 3550, 0),
+        Location(3601, 3550, 0) to Location(3604, 3550, 0),
+        Location(3600, 3552, 0) to Location(3597, 3552, 0),
+        Location(3596, 3552, 0) to Location(3599, 3552, 0),
+        Location(3595, 3553, 0) to Location(3595, 3556, 0),
+        Location(3595, 3557, 0) to Location(3595, 3554, 0),
+        Location(3597, 3558, 0) to Location(3597, 3561, 0),
+        Location(3597, 3562, 0) to Location(3597, 3559, 0),
+        Location(3598, 3564, 0) to Location(3601, 3564, 0),
+        Location(3602, 3564, 0) to Location(3599, 3564, 0)
+    )
 
     fun jumpRockPath(player: Player) {
         queueScript(player, 1, QueueStrength.SOFT) {
@@ -52,11 +60,7 @@ object GhostsAhoyUtils {
             player,
             Items.PETITION_FORM_4283,
             "The ghost signs your petition. You have obtained ${
-                getAttribute(
-                    player,
-                    petitionsigns,
-                    signatures.toString(),
-                )
+                getAttribute(player, petitionsigns, signatures.toString())
             } " + if (getAttribute(player, petitionsigns, 0) == 1) "signature so far." else "signature's so far.",
         )
 
