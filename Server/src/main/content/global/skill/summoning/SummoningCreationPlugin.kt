@@ -1,8 +1,6 @@
 package content.global.skill.summoning
 
-import core.api.closeInterface
-import core.api.sendInputDialogue
-import core.api.sendMessage
+import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -15,7 +13,7 @@ import shared.consts.Components
 /**
  * Plugin responsible for handling the Summoning creation interface and pouch usage at obelisks.
  */
-@Initializable
+//@Initializable
 class SummoningCreationPlugin : ComponentPlugin() {
 
     @Throws(Throwable::class)
@@ -51,11 +49,11 @@ class SummoningCreationPlugin : ComponentPlugin() {
                 return true
             }
             166 -> if(slot == 51) {
-                sendMessage(player, "This pouch requires 1 phoenix quill, 1 crimson charm, 165 spirit shards, and completion of completion of 'In Pyre Need'.")
+                sendMessages(player, "This pouch requires 1 phoenix quill, 1 crimson charm, 165 spirit shards, and completion", "of 'In Pyre Need'.")
             } else {
-                SummoningPouch.forSlot(if (slot > 50) slot - 1 else slot)?.let { SummoningCreator.list(player, it) }
+                SummoningPouch.forSlot(slot)?.let { SummoningCreator.list(player, it) }
             }
-            168 -> sendMessage(player, ItemDefinition.forId(SummoningScroll.forId(if (slot > 50) slot - 1 else slot)!!.itemId).examine)
+            168 -> sendMessage(player, itemDefinition(SummoningScroll.forId(slot)!!.itemId).examine)
         }
         return true
     }
@@ -64,15 +62,10 @@ class SummoningCreationPlugin : ComponentPlugin() {
      * Gets the pouch or scroll based on component and slot.
      */
     private fun getPouch(component: Component, slot: Int) = if (component.id == Components.SUMMONING_POUCHES_669) {
-        SummoningPouch.forSlot(getAdjustedSlot(slot))
+        SummoningPouch.forSlot(slot)
     } else {
-        SummoningScroll.forId(getAdjustedSlot(slot))
+        SummoningScroll.forId(slot)
     }
-
-    /**
-     * Adjusts slot values above 50.
-     */
-    private fun getAdjustedSlot(slot: Int) = if (slot > 50) slot - 1 else slot
 
     /**
      * Check the amount based on click opcode.

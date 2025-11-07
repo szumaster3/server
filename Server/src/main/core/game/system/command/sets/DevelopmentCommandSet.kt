@@ -40,13 +40,13 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
     override fun defineCommands() {
 
         define(
-            name = "addpouchitems",
+            name = "additempouch",
             privilege = Privilege.ADMIN,
-            usage = "::addpouchitems <pouchId>",
-            description = "Adds all items needed to create pouch."
+            usage = "::additempouch <lt>slot id<gt>",
+            description = "Adds all items needed to create pouch for interface slot id."
         ) { player, args ->
             if (args.size < 2) {
-                sendMessage(player, "Usage: ::addpouchitems pouchId")
+                sendMessage(player, "Usage: ::additempouch slotId")
                 return@define
             }
 
@@ -56,7 +56,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                 return@define
             }
 
-            val pouch = SummoningPouch.values().find { it.pouchId == pouchId }
+            val pouch = SummoningPouch.values().find { it.slot == pouchId }
             if (pouch == null) {
                 sendMessage(player, "No pouch for id=$pouchId.")
                 return@define
