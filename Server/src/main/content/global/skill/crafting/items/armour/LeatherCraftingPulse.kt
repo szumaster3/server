@@ -55,12 +55,12 @@ class LeatherCraftingPulse(player: Player?, node: Item?, private val craft: Leat
     }
 
     override fun animate() {
-        if (ticks % 5 == 0) animate(player, ANIMATION)
+        if (ticks % 3 == 0) animate(player, ANIMATION)
     }
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 5)
+        delayClock(player, Clocks.SKILLING, 3)
 
         var removed = removeItem(player, Item(craft.input, craft.amount))
         if (craft.studded) {

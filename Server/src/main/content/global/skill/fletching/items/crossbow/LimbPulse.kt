@@ -38,7 +38,7 @@ class LimbPulse(player: Player?, node: Item, private val limb: Limb, private var
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 6)
+        delayClock(player, Clocks.SKILLING, 3)
 
         if (player.inventory.remove(Item(limb.stock), Item(limb.limb))) {
             player.inventory.add(Item(limb.product))

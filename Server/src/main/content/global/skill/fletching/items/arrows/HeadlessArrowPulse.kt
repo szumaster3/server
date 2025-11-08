@@ -42,7 +42,7 @@ class HeadlessArrowPulse(player: Player?, node: Item?, private val feather: Item
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 2)
 
         val featherAmount = player.inventory.getAmount(feather)
         val shaftAmount = player.inventory.getAmount(ARROW_SHAFT)

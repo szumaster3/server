@@ -38,7 +38,7 @@ class ArrowHeadPulse(
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 2)
 
         val tip = Item(arrow.unfinished)
         val tipAmount = player.inventory.getAmount(arrow.unfinished)

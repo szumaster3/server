@@ -43,7 +43,7 @@ class GemBoltPulse(player: Player?, node: Item?, private val bolt: GemBolt, sets
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 2)
 
         val baseAmount = player.inventory.getAmount(bolt.base)
         val tipAmount = player.inventory.getAmount(bolt.tip)

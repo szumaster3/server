@@ -99,7 +99,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
 
     private fun make(player: Player, product: SilverProduct, amount: Int) {
         closeInterface(player)
-        delayClock(player, Clocks.SKILLING, 5)
+        delayClock(player, Clocks.SKILLING, 3)
         submitIndividualPulse(player, pulse = SilverCraftingPulse(player, product, getAttribute(player, "crafting:silver:furnace_id", core.game.node.scenery.Scenery(-1, -1, 0)), amount))
     }
 }

@@ -36,7 +36,7 @@ class GemBoltCutPulse(player: Player?, node: Item?, private val gem: GemBolt, pr
     }
 
     override fun animate() {
-        if (ticks % 6 == 0) {
+        if (ticks % 5 == 0) {
             player.animate(animation)
             playAudio(player, Sounds.CHISEL_2586)
         }
@@ -44,7 +44,7 @@ class GemBoltCutPulse(player: Player?, node: Item?, private val gem: GemBolt, pr
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 4)
+        delayClock(player, Clocks.SKILLING, 5)
 
         val reward =
             when (gem.gem) {

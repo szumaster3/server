@@ -40,7 +40,7 @@ class DartPulse(player: Player?, node: Item?, private val dart: Dart, private va
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 1)
 
         val unfinished = Item(dart.unfinished)
         val dartAmount = player.inventory.getAmount(unfinished)

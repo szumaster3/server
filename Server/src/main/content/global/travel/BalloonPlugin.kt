@@ -195,11 +195,12 @@ class BalloonTravel : InterfaceListener, InteractionListener {
                 return
             }
 
-            lock(player, 7)
-            lockInteractions(player, 7)
+            lock(player, 5)
+            lockInteractions(player, 5)
 
             val animationId = Balloon.getAnimationId(origin, destination)
-            val animationTime = 5
+            val animationTime = animationCycles(animationId)
+
 
             playJingle(player, 118)
 
@@ -207,7 +208,7 @@ class BalloonTravel : InterfaceListener, InteractionListener {
             setMinimapState(player, 2)
             openInterface(player, Components.FADE_TO_BLACK_120)
             sendMessage(player, "You board the balloon and fly to ${destination.areaName}.")
-            queueScript(player, 4, QueueStrength.SOFT) { ticks: Int ->
+            queueScript(player, 0, QueueStrength.SOFT) { ticks: Int ->
                 when (ticks) {
                     0 -> {
                         openInterface(player, Components.ZEP_BALLOON_MAP_469)

@@ -46,7 +46,7 @@ class BrutalArrowPulse(player: Player?, node: Item?, private val arrow: BrutalAr
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 2)
 
         val baseAmount: Int = amountInInventory(player, base)
         val nailAmount: Int = amountInInventory(player, arrow.base)

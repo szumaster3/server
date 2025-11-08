@@ -16,7 +16,7 @@ import core.plugin.Plugin
  * @author Vexia
  */
 @Initializable
-class LightLogPlugin : OptionHandler() {
+class LightLogOptionPlugin : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         submitIndividualPulse(
             player,

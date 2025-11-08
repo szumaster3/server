@@ -19,7 +19,7 @@ class JewelleryCraftingPulse(player: Player?, node: Item?, val type: Jewellery.J
     override fun checkRequirements(): Boolean = getStatLevel(player, Skills.CRAFTING) >= type.level
 
     override fun animate() {
-        if (ticks % 5 == 0) {
+        if (ticks % 3 == 0) {
             animate(player, ANIMATION)
             playAudio(player, Sounds.FURNACE_2725)
         }

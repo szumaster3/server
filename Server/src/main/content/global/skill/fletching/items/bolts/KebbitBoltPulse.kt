@@ -33,7 +33,7 @@ class KebbitBoltPulse(player: Player?, node: Item, private val bolts: KebbitBolt
 
     override fun reward(): Boolean {
         if (!clockReady(player, Clocks.SKILLING)) return false
-        delayClock(player, Clocks.SKILLING, 3)
+        delayClock(player, Clocks.SKILLING, 2)
 
         val base = Item(bolts.base, 1)
         val product = bolts.product

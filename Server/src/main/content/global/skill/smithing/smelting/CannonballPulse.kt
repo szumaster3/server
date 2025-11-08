@@ -44,16 +44,16 @@ class CannonballPulse(
                 animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
             }
 
-            3 -> {
+            1 -> {
                 sendMessage(player, "You pour the molten metal into your cannonball mould.")
                 animate(player, Animations.HUMAN_BURYING_BONES_827)
             }
 
-            4 -> {
+            3 -> {
                 sendMessage(player, "The molten metal cools slowly to form 4 cannonballs.")
             }
 
-            7 -> {
+            5 -> {
                 if (removeItem(player, item)) {
                     addItem(player, Items.CANNONBALL_2, 4)
                     rewardXP(player, Skills.SMITHING, 25.6)
@@ -61,7 +61,7 @@ class CannonballPulse(
                 animate(player, Animations.HUMAN_BURYING_BONES_827)
             }
 
-            10 -> {
+            6 -> {
                 if (--amount == 0 || !inInventory(player, Items.STEEL_BAR_2353)) {
                     return true
                 }
