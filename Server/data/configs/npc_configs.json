@@ -14635,19 +14635,20 @@
   },
   {
     "examine": "Big and ugly looking.",
-    "melee_animation": "2100",
-    "range_animation": "0",
+    "melee_animation": "359",
+    "range_animation": "359",
     "attack_speed": "4",
     "magic_level": "0",
+	"combat_audio": "448,451,450",
     "respawn_delay": "60",
-    "defence_animation": "0",
+    "defence_animation": "360",
     "weakness": "7",
-    "magic_animation": "0",
-    "death_animation": "8576",
+    "magic_animation": "359",
+    "death_animation": "361",
     "name": "Enclave guard",
     "defence_level": "58",
     "safespot": null,
-    "lifepoints": "331",
+    "lifepoints": "116",
     "strength_level": "58",
     "id": "870",
     "aggressive": "false",
@@ -14789,7 +14790,7 @@
     "attack_level": "17"
   },
   {
-    "examine": "An apocolyptic demon./A freshly summoned demon.",
+    "examine": "A freshly summoned demon.",
     "melee_animation": "64",
     "attack_speed": "4",
     "magic_level": "1",
@@ -14807,7 +14808,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "An apocolyptic demon./A freshly summoned demon.",
+    "examine": "An apocolyptic demon.",
     "name": "Weakened Delrith",
     "defence_level": "1",
     "safespot": null,
@@ -89778,7 +89779,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "He/She can look after my money.",
+    "examine": "She can look after my money.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -89796,7 +89797,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "He/She can look after my money.",
+    "examine": "He can look after my money.",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -91701,7 +91702,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "He/She can look after my money.",
+    "examine": "He can look after my money.",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -91713,7 +91714,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "He/She can look after my money.",
+    "examine": "She can look after my money.",
     "name": "Banker",
     "defence_level": "1",
     "safespot": null,
@@ -98660,7 +98661,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "N/A",
+    "examine": "She looks bored.",
     "name": "Terrorbird servant",
     "defence_level": "1",
     "safespot": null,
