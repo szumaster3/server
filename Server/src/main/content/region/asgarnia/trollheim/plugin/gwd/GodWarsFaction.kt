@@ -5,7 +5,6 @@ import core.api.*
 import core.game.node.entity.player.Player
 import shared.consts.Components
 import shared.consts.NPCs
-import shared.consts.Vars
 
 /**
  * Represents a God Wars faction.
@@ -43,7 +42,7 @@ enum class GodWarsFaction(val npcRange: IntRange, private val god: God) {
             val newAmount = (current + increase).coerceAtMost(4000)
             setAttribute(player, attribute, newAmount)
 
-            val componentId = player.getAttribute("gwd:overlay", Components.GODWARS_OVERLAY_601)
+            val componentId = getAttribute(player, "gwd:overlay", Components.GODWARS_OVERLAY_601)
             val childBase = if (componentId == Components.GODWARS_OVERLAY_601 || componentId == 599) 6 else 7
             val displayValue = if (newAmount >= 4000) "Max" else newAmount.toString()
             sendString(player, displayValue, componentId, childBase + faction.ordinal)
