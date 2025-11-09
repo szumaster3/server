@@ -71,6 +71,10 @@ public abstract class MapZone implements Zone {
     public boolean enter(Entity e) {
         if (e instanceof Player) {
             Player p = (Player) e;
+            Region region = RegionManager.forId(p.getLocation().getRegionId());
+            String zoneName = getName() != null ? getName() : "null";
+            int regionId = region != null ? region.getId() : -1;
+            p.debug("Entered zone: " + zoneName + " (region " + regionId + ")");
         } else if (e instanceof NPC) {
             NPC npc = (NPC) e;
             if (e instanceof Familiar && isRestricted(ZoneRestriction.FOLLOWERS.getFlag())) {
