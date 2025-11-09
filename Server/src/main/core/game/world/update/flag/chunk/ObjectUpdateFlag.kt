@@ -10,21 +10,13 @@ import core.net.packet.out.ConstructScenery
  * The object update flag.
  * @author Emperor
  */
-class ObjectUpdateFlag(
-    /**
-     * The object to update.
-     */
-    private val `object`: Scenery,
-    /**
-     * If we should remove the object.
-     */
-    private val remove: Boolean
-) : UpdateFlag<Any?>(null) {
+class ObjectUpdateFlag(private val scenery: Scenery?, private val remove: Boolean) : UpdateFlag<Scenery?>(scenery) {
+
     override fun write(buffer: IoBuffer) {
         if (remove) {
-            ClearScenery.write(buffer, `object`)
+            ClearScenery.write(buffer, scenery!!)
         } else {
-            ConstructScenery.write(buffer, `object`)
+            ConstructScenery.write(buffer, scenery!!)
         }
     }
 
