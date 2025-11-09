@@ -2442,7 +2442,7 @@ fun sendPlayerDialogue(
 }
 
 /**
- * Sends a message to the player on a specific interface.
+ * Sends the player model on a interface.
  *
  * @param player The player receiving the interface.
  * @param iface The interface ID to show the player.
@@ -2455,6 +2455,24 @@ fun sendPlayerOnInterface(
 ) {
     player.packetDispatch.sendPlayerOnInterface(iface, child)
 }
+
+/**
+ * Sends the npc model on a interface.
+ *
+ * @param player The player receiving the interface.
+ * @param npcId The npc id.
+ * @param iface The interface ID to show the player.
+ * @param child The child component ID of the interface.
+ */
+fun sendNpcOnInterface(
+    player: Player,
+    npcId: Int,
+    iface: Int,
+    child: Int,
+) {
+    player.packetDispatch.sendNpcOnInterface(npcId, iface, child)
+}
+
 
 /**
  * Sends a dialogue message from an NPC to the player.

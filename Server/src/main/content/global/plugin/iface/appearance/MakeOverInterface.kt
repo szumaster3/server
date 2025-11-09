@@ -8,16 +8,18 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.appearance.Gender
 import core.game.node.item.Item
+import core.game.system.task.Pulse
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Components
 import shared.consts.Items
+import shared.consts.NPCs
 
 private const val MALE_CHILD_ID = 90
 private const val FEMALE_CHILD_ID = 92
 private const val TEXT_CHILD = 88
 
-private val skincolorButtons = (93..100)
+private val skinColorButtons = (93..100)
 
 /**
  * Represents the Makeover interface.
@@ -31,11 +33,11 @@ class MakeOverInterface : ComponentPlugin() {
         player ?: return
         super.open(player, component)
 
-        player.packetDispatch.sendNpcOnInterface(1, component.id, MALE_CHILD_ID)
-        player.packetDispatch.sendNpcOnInterface(5, component.id, FEMALE_CHILD_ID)
+        sendNpcOnInterface(player, 1, component.id, MALE_CHILD_ID)
+        sendNpcOnInterface(player,5, component.id, FEMALE_CHILD_ID)
 
-        sendAnimationOnInterface(player, FaceAnim.SILENT.animationId, component.id, MALE_CHILD_ID)
-        sendAnimationOnInterface(player, FaceAnim.SILENT.animationId, component.id, FEMALE_CHILD_ID)
+        sendAnimationOnInterface(player, FaceAnim.NEUTRAL.animationId, component.id, MALE_CHILD_ID)
+        sendAnimationOnInterface(player, FaceAnim.NEUTRAL.animationId, component.id, FEMALE_CHILD_ID)
 
         if (inInventory(player, Items.MAKEOVER_VOUCHER_5606)) {
             sendString(player, "USE MAKEOVER VOUCHER", component.id, TEXT_CHILD)
@@ -43,7 +45,7 @@ class MakeOverInterface : ComponentPlugin() {
 
         val currentSkin = player.appearance.skin.color
         setAttribute(player, "mm-previous", currentSkin)
-        sendInterfaceConfig(player, component.id, skincolorButtons.first + currentSkin, true)
+        setVarp(player, 262, currentSkin)
 
         player.toggleWardrobe(true)
         component.setUncloseEvent { pl, _ ->
@@ -69,14 +71,14 @@ class MakeOverInterface : ComponentPlugin() {
 
     override fun handle(player: Player?, component: Component?, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
         player ?: return false
-        if (skincolorButtons.contains(button)) {
+        if (skinColorButtons.contains(button)) {
             updateInterfaceConfigs(player, button)
             return true
         }
         when (button) {
             113, 101 -> updateGender(player, true)
             114, 103 -> updateGender(player, false)
-            88 -> pay(player)
+            TEXT_CHILD -> pay(player)
         }
 
         return true
@@ -87,35 +89,63 @@ class MakeOverInterface : ComponentPlugin() {
     }
 
     private fun pay(player: Player) {
+        val oldGender = player.appearance.gender
         val newColor = player.getAttribute("mm-previous", player.appearance.skin.color)
-        val newGender = player.getAttribute("mm-gender", player.appearance.gender.ordinal)
+        val newGender = Gender.values()[player.getAttribute("mm-gender", oldGender.ordinal)]
 
-        if (newColor == player.appearance.skin.color && Gender.values()[newGender] == player.appearance.gender) {
+        if (newColor == player.appearance.skin.color && newGender == oldGender) {
             closeInterface(player)
+            return
+        }
+
+        val currency = if (inInventory(player, Items.MAKEOVER_VOUCHER_5606)) {
+            Item(Items.MAKEOVER_VOUCHER_5606, 1)
         } else {
-            val currency =
-                if (inInventory(player, Items.MAKEOVER_VOUCHER_5606)) {
-                    Item(Items.MAKEOVER_VOUCHER_5606, 1)
-                } else {
-                    Item(Items.COINS_995, 3000)
+            Item(Items.COINS_995, 3000)
+        }
+
+        if (player.inventory.containsItem(currency)) {
+            setAttribute(player, "mm-paid", true)
+            removeItem(player, currency)
+            closeInterface(player)
+
+            val npc = findNPC(NPCs.MAKE_OVER_MAGE_2676)
+            if (npc!=null && oldGender != newGender) {
+                when {
+                    oldGender == Gender.MALE && newGender == Gender.FEMALE -> {
+                        sendChat(npc, "Ooh!")
+                        npc.transform(NPCs.MAKE_OVER_MAGE_2676)
+                    }
+
+                    oldGender == Gender.FEMALE && newGender == Gender.MALE -> {
+                        sendChat(npc, "Aha!")
+                        npc.transform(NPCs.MAKE_OVER_MAGE_599)
+                    }
                 }
 
-            if (player.inventory.containsItem(currency)) {
-                setAttribute(player, "mm-paid", true)
-                removeItem(player, currency)
-                closeInterface(player)
-            } else {
-                sendDialogue(player, "You can not afford that.")
+                object : Pulse(5) {
+                    override fun pulse(): Boolean {
+                        npc.transform(NPCs.MAKE_OVER_MAGE_599)
+                        return true
+                    }
+                }
             }
+        } else {
+            sendDialogue(player, "You cannot afford that.")
         }
     }
 
     private fun updateInterfaceConfigs(player: Player, button: Int) {
-        val old = player.getAttribute("mm-previous", 0)
-        setAttribute(player, "mm-previous", button - skincolorButtons.first)
-        sendInterfaceConfig(player, Components.MAKEOVER_MAGE_205, old + skincolorButtons.first, false)
-        sendInterfaceConfig(player, Components.MAKEOVER_MAGE_205, button, true)
+        val newIndex = when (button) {
+            in 93..99 -> button - 92
+            100 -> 8
+            else -> return
+        }
+
+        setAttribute(player, "mm-previous", button - skinColorButtons.first)
+        setVarp(player, 262, newIndex)
     }
+
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.put(Components.MAKEOVER_MAGE_205, this)

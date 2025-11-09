@@ -1,6 +1,7 @@
 package content.global.plugin.npc
 
 import core.api.sendChat
+import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
 import core.tools.RandomFunction
@@ -16,18 +17,25 @@ class CowNPC : NPCBehavior(
     NPCs.COW_1767,
     NPCs.COW_3309
 ) {
-    private var tickDelay = RandomFunction.random(30)
-    private val TICK_INTERVAL = 50
+    private var tickDelay = RandomFunction.random(5)
+    private var nextChatTick = RandomFunction.random(20, 40)
 
     override fun tick(self: NPC): Boolean {
-        tickDelay++
-        if (tickDelay < TICK_INTERVAL) return super.tick(self)
-        tickDelay = 0
-
-        if (RandomFunction.random(1000) == 42) {
-            sendChat(self, "Moo")
+        if (self.properties.combatPulse.isAttacking || DeathTask.isDead(self)) {
+            return true
         }
 
-        return super.tick(self)
+        tickDelay++
+
+        if (tickDelay >= nextChatTick) {
+            tickDelay = 0
+            nextChatTick = RandomFunction.random(20, 40)
+
+            if (RandomFunction.random(2) == 1) {
+                sendChat(self, "Moo")
+            }
+        }
+
+        return true
     }
 }

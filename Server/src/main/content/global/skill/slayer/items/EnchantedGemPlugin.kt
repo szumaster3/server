@@ -1,5 +1,6 @@
 package content.global.skill.slayer.items
 
+import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -20,7 +21,11 @@ class EnchantedGemPlugin : InteractionListener {
          */
 
         on(Items.ENCHANTED_GEM_4155, IntType.ITEM, "activate") { player, _ ->
-            openDialogue(player, EnchantedGemDialogue())
+            if (!SlayerManager.getInstance(player).hasStarted())
+                sendMessage(player, "You try to activate the gem...")
+            else
+                openDialogue(player, EnchantedGemDialogue())
+
             return@on true
         }
     }
