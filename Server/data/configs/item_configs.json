@@ -133111,7 +133111,7 @@
     "examine": "The favoured weapon of Bandos.",
     "has_special": "true",
     "durability": null,
-    "weight": "1.8",
+    "weight": "3.0",
     "attack_speed": "5",
     "weapon_interface": "8",
     "equip_audio": "2246",
@@ -133125,7 +133125,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "14642",
-    "bonuses": "40,-2,60,0,0,0,0,0,0,0,0,55,5,0,0"
+    "bonuses": "30,-2,49,0,0,0,0,0,0,0,0,45,0,4,0"
   },
   {
     "requirements": "{0,55}-{2,55}",
@@ -133134,7 +133134,6 @@
     "durability": null,
     "name": "Granite mace",
     "tradeable": "true",
-    "weight": "3.6",
     "archery_ticket_price": "0",
     "id": "14643"
   },
@@ -133144,7 +133143,7 @@
     "has_special": "true",
     "durability": null,
     "destroy": "true",
-    "weight": "3.6",
+    "weight": "3.0",
     "attack_speed": "5",
     "weapon_interface": "8",
     "absorb": "0,0,0",
@@ -133158,7 +133157,7 @@
     "name": "Granite Mace",
     "archery_ticket_price": "0",
     "id": "14644",
-    "bonuses": "40,-2,60,0,0,0,0,0,0,0,0,55,0,5,0"
+    "bonuses": "30,-2,49,0,0,0,0,0,0,0,0,45,0,4,0"
   },
   {
     "examine": "Open the box and choose a gift.",
