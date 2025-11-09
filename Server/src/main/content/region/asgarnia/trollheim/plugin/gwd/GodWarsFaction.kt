@@ -38,19 +38,12 @@ enum class GodWarsFaction(val npcRange: IntRange, private val god: God) {
         fun increaseKillCount(player: Player, faction: GodWarsFaction?, increase: Int) {
             if (faction == null) return
 
-            val varbit = when (faction) {
-                SARADOMIN -> Vars.VARBIT_GWD_KC_SARADOMIN_3972
-                ARMADYL   -> Vars.VARBIT_GWD_KC_ARMADYL_3973
-                BANDOS    -> Vars.VARBIT_GWD_KC_BANDOS_3975
-                ZAMORAK   -> Vars.VARBIT_GWD_KC_ZAMORAK_3976
-            }
-
-            val current = getVarbit(player, varbit)
+            val attribute = "gwd_kc_${faction.name.lowercase()}"
+            val current = getAttribute(player, attribute, 0)
             val newAmount = (current + increase).coerceAtMost(4000)
+            setAttribute(player, attribute, newAmount)
 
-            setVarbit(player, varbit, newAmount, true)
-
-            val componentId = getAttribute(player, "gwd:overlay", Components.GODWARS_OVERLAY_601)
+            val componentId = player.getAttribute("gwd:overlay", Components.GODWARS_OVERLAY_601)
             val childBase = if (componentId == Components.GODWARS_OVERLAY_601 || componentId == 599) 6 else 7
             val displayValue = if (newAmount >= 4000) "Max" else newAmount.toString()
             sendString(player, displayValue, componentId, childBase + faction.ordinal)
@@ -79,17 +72,6 @@ enum class GodWarsFaction(val npcRange: IntRange, private val god: God) {
      * @return true if the player has the item.
      */
     fun isProtected(player: Player): Boolean = hasGodItem(player, god)
-
-    /**
-     * Gets the varbit for this faction.
-     * @return the varbit id.
-     */
-    fun getVarbit(): Int = when (this) {
-        SARADOMIN -> Vars.VARBIT_GWD_KC_SARADOMIN_3972
-        ARMADYL   -> Vars.VARBIT_GWD_KC_ARMADYL_3973
-        BANDOS    -> Vars.VARBIT_GWD_KC_BANDOS_3975
-        ZAMORAK   -> Vars.VARBIT_GWD_KC_ZAMORAK_3976
-    }
 
     /**
      * Gets the [God] for [GodWarsFaction].

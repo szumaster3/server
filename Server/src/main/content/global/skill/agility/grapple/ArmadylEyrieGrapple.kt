@@ -8,7 +8,6 @@ import core.game.node.entity.combat.equipment.RangeWeapon
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
-import core.tools.cyclesToTicks
 import shared.consts.Animations
 import shared.consts.Graphics as Gfx
 import shared.consts.Items
@@ -31,14 +30,14 @@ class ArmadylEyrieGrapple : InteractionListener {
                 else -> {
                     val destination = Location.create(2872, if (player.location.y <= 5269) 5279 else 5269, 2)
                     val delay = animationCycles(Animations.SWING_WITH_CROSSBOW_BANDOS_THRONE_ROOM_6067)
-                    lock(player, cyclesToTicks(delay))
+                    lock(player, 3)
                     sendGraphics(Graphics(Gfx.MITHRIL_GRAPPLE_ABOUT_TO_SHOOT_1036, 96), player.location)
                     forceMove(
                         player = player,
                         start = player.location,
                         dest = destination,
-                        startArrive = 60,
-                        destArrive = delay,
+                        startArrive = 0,
+                        destArrive = 90,
                         dir = null,
                         anim = Animations.SWING_WITH_CROSSBOW_BANDOS_THRONE_ROOM_6067
                     )

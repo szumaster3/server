@@ -42,7 +42,7 @@ class GodWarsChamberEntranceListener : InteractionListener {
                 val name = faction.name.lowercase()
                 val required = 40
 
-                val killCount = getVarbit(player, faction.getVarbit())
+                val killCount = getAttribute(player, "gwd_kc_${faction.name.lowercase()}", -1)
                 if (killCount < required) {
                     sendMessage(player, "You need $required ${StringUtils.formatDisplayName(name)} kills to enter this.")
                     return@on true
