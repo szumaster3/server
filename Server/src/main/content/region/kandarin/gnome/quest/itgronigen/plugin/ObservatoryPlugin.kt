@@ -1,5 +1,6 @@
 package content.region.kandarin.gnome.quest.itgronigen.plugin
 
+import content.data.GameAttributes
 import content.region.kandarin.gnome.quest.itgronigen.cutscene.ObservatoryCutscene
 import content.region.kandarin.gnome.quest.itgronigen.dialogue.ObservatoryAssistantDialogue
 import content.region.kandarin.gnome.quest.itgronigen.npc.GoblinGuardNPC.Companion.spawnGoblinGuard
@@ -16,10 +17,6 @@ import shared.consts.*
 
 class ObservatoryPlugin : InteractionListener {
     companion object {
-        val KEY_ATTRIBUTE = "observatory:goblin-key"
-        val CONSTELLATION_ATTRIBUTE = "observatory:constellation"
-        val FAIL_ATTRIBUTE = "observatory:fail-counter"
-
         private const val OBSERVATORY_ASSISTANT = NPCs.OBSERVATORY_ASSISTANT_6118
         private const val TELESCOPE_SCENERY = Scenery.TELESCOPE_25439
         private const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
@@ -46,27 +43,30 @@ class ObservatoryPlugin : InteractionListener {
 
         on(DUNGEON_STAIRS_UP, IntType.SCENERY, "climb up") { player, node ->
             val questStage = getQuestStage(player, Quests.OBSERVATORY_QUEST)
-            if (node.location.x == 2335 && node.location.y == 9351) {
-                if (questStage in 12..13) {
-                    ObservatoryCutscene(player).start()
-                } else {
-                    teleport(player, Location(2439, 3164, 0))
-                    sendMessage(player, "You climb up the stairs.")
-                }
-            } else {
-                teleport(player, Location(2457, 3186, 0))
-                sendMessage(player, "You climb up the stairs.")
+
+            if (node.location.x == 2335 && node.location.y == 9351 && questStage in 12..13) {
+                ObservatoryCutscene(player).start()
+                return@on true
             }
+
+            val destination = if (node.location.x == 2335 && node.location.y == 9351) {
+                Location(2439, 3164, 0)
+            } else {
+                Location(2457, 3186, 0)
+            }
+
+            teleport(player, destination)
+            sendMessage(player, "You climb up the stairs.")
             return@on true
         }
 
         on(SLEEPING_GUARD, IntType.NPC, "Prod") { player, _ ->
             val animation = Animation(Animations.HUMAN_GUARD_PROD_6839)
-            if (!getAttribute(player, "observatory:goblin-spawn", false)) {
+            if (!getAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_SPAWN, false)) {
                 animate(player, animation)
                 runTask(player, animation.duration) {
                     spawnGoblinGuard(player)
-                    setAttribute(player, "/save:observatory:goblin-spawn", true)
+                    setAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_SPAWN, true)
                 }
             } else {
                 sendMessage(player, "You can't do that right now.")
@@ -75,26 +75,31 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KEY_CHEST, IntType.SCENERY, "open") { player, node ->
-            val random = (0..3).random()
-            if (!isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
-                animate(player, Animations.CLOSE_CHEST_539)
-                replaceScenery(node.asScenery(), node.id + 1, 80)
-                sendMessage(player, "You open the chest.")
-                setAttribute(player, "/save:$KEY_ATTRIBUTE", random)
-                player.incrementAttribute(FAIL_ATTRIBUTE)
-                if (getAttribute(player, FAIL_ATTRIBUTE, -1) == 10) {
-                    removeAttribute(player, KEY_ATTRIBUTE)
-                }
-            } else {
+            if (isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
                 sendMessage(player, "It looks like this chest has already been looted.")
+                return@on true
             }
+
+            val keyIndex = (0..3).random()
+
+            animate(player, Animations.CLOSE_CHEST_539)
+            replaceScenery(node.asScenery(), node.id + 1, 80)
+            sendMessage(player, "You open the chest.")
+
+            setAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY, keyIndex)
+            player.incrementAttribute(GameAttributes.OBSERVATORY_CHEST_FAIL_COUNTER)
+
+            if (getAttribute(player, GameAttributes.OBSERVATORY_CHEST_FAIL_COUNTER, -1) == 10) {
+                removeAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY)
+            }
+
             return@on true
         }
 
         on(KEY_CHEST_OPEN, IntType.SCENERY, "search") { player, _ ->
             animate(player, Animations.CLOSE_CHEST_539)
             sendMessage(player, "You search the chest.")
-            when (getAttribute(player, KEY_ATTRIBUTE, -1)) {
+            when (getAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY, -1)) {
                 0 -> {
                     sendMessage(player, "The chest contains a poisonous spider.")
                     spawnPoisonSpider(player)
@@ -107,7 +112,7 @@ class ObservatoryPlugin : InteractionListener {
                 2 -> {
                     sendMessage(player, "You find a kitchen key.")
                     addItem(player, Items.GOBLIN_KITCHEN_KEY_601)
-                    removeAttribute(player, KEY_ATTRIBUTE)
+                    removeAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY)
                 }
 
                 else -> sendMessage(player, "The chest is empty.")
@@ -116,7 +121,7 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KEY_CHEST_OPEN, IntType.SCENERY, "close") { player, node ->
-            val attribute = getAttribute(player, KEY_ATTRIBUTE, -1)
+            val attribute = getAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_KEY, -1)
             if (attribute != 2 || isQuestComplete(player, Quests.OBSERVATORY_QUEST)) {
                 sendMessage(player, "You can't do that right now.")
             } else {
@@ -128,24 +133,29 @@ class ObservatoryPlugin : InteractionListener {
         }
 
         on(KITCHEN_GATES, IntType.SCENERY, "open") { player, node ->
-            if (getVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_GOBLIN_STOVE_LENS_MOULD_TAKEN_3837) == 1) {
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                return@on true
-            }
+            val scenery = node.asScenery()
+            val hasLensMould = getVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_GOBLIN_STOVE_LENS_MOULD_TAKEN_3837) == 1
+            val gateUnlocked = getVarbit(player, Vars.VARBIT_GOBLIN_KITCHEN_GATE_UNLOCKED_3826) == 1
+            val hasKey = inInventory(player, Items.GOBLIN_KITCHEN_KEY_601)
 
-            if (!inInventory(player, Items.GOBLIN_KITCHEN_KEY_601) ||
-                getQuestStage(
-                    player,
-                    Quests.OBSERVATORY_QUEST,
-                ) < 10
-            ) {
-                sendMessage(player, "These gates are locked, you don't seem to be able to open them.")
-            } else {
-                sendPlayerDialogue(player, "You had better be quick, there may be more guards about.")
-                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                removeItem(player, Items.GOBLIN_KITCHEN_KEY_601)
-                sendMessage(player, "The gate unlocks.")
-                sendMessage(player, "The key is useless now. You discard it.")
+            when {
+                hasLensMould -> {
+                    DoorActionHandler.handleAutowalkDoor(player, scenery)
+                    setVarbit(player, Vars.VARBIT_GOBLIN_KITCHEN_GATE_UNLOCKED_3826, 1, true)
+                }
+
+                !hasKey && !gateUnlocked -> {
+                    sendMessage(player, "These gates are locked, you don't seem to be able to open them.")
+                }
+
+                else -> {
+                    sendPlayerDialogue(player, "You had better be quick, there may be more guards about.")
+                    DoorActionHandler.handleAutowalkDoor(player, scenery)
+                    removeItem(player, Items.GOBLIN_KITCHEN_KEY_601)
+                    sendMessage(player, "The gate unlocks.")
+                    sendMessage(player, "The key is useless now. You discard it.")
+                    setVarbit(player, Vars.VARBIT_GOBLIN_KITCHEN_GATE_UNLOCKED_3826, 1, true)
+                }
             }
             return@on true
         }
@@ -154,12 +164,10 @@ class ObservatoryPlugin : InteractionListener {
             sendDialogueLines(player, "The goblins appear to have been using the lens mould to cook their", "stew!")
             addDialogueAction(player) { _, _ ->
                 animate(player, Animations.CLOSE_CHEST_539)
+                setVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_GOBLIN_STOVE_LENS_MOULD_TAKEN_3837, 1, true)
                 sendDialogue(player, "You shake out its contents and take it with you.")
+                sendChat(player, "Euuuw, that smells awful!", 3)
                 addItemOrDrop(player, Items.LENS_MOULD_602)
-                runTask(player, 3) {
-                    setVarbit(player, Vars.VARBIT_QUEST_OBSERVATORY_GOBLIN_STOVE_LENS_MOULD_TAKEN_3837, 1, true)
-                    sendChat(player, "Euuuw, that smells awful!")
-                }
             }
             return@on true
         }

@@ -36,7 +36,7 @@ class ArmadylEyrieGrapple : InteractionListener {
                         player = player,
                         start = player.location,
                         dest = destination,
-                        startArrive = 30,
+                        startArrive = 0,
                         destArrive = delay,
                         dir = null,
                         anim = Animations.SWING_WITH_CROSSBOW_BANDOS_THRONE_ROOM_6067

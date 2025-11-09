@@ -1,5 +1,6 @@
 package content.region.kandarin.gnome.quest.itgronigen
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -75,7 +76,7 @@ class Observatory : Quest(Quests.OBSERVATORY_QUEST, 96, 95, 2, Vars.VARP_QUEST_O
         drawReward(player, "which constellation you", ln++)
         drawReward(player, "observed", ln)
         rewardXP(player, Skills.CRAFTING, 2250.0)
-        removeAttribute(player, "observatory:goblin-spawn")
+        removeAttribute(player, GameAttributes.OBSERVATORY_GOBLIN_SPAWN)
         setVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_17_3652, 1, true)
     }
 

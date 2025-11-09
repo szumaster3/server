@@ -438,4 +438,10 @@ internal object GameAttributes {
     const val HAND_SAND_BETTY_POTION = "/save:handsand:betty_shine_potion"
     const val HAND_SAND_SANDY_ANSWERS = "/save:handsand:sandy_answers"
     const val HAND_SAND_LAST_SAND_CLAIM = "/save:sand_claim_timer"
+
+    // The Observatory quest.
+    const val OBSERVATORY_GOBLIN_SPAWN = "/save:observatory:goblin-spawn"
+    const val OBSERVATORY_GOBLIN_KEY = "/save:observatory:goblin-key"
+    const val OBSERVATORY_CONSTELLATION = "/save:observatory:constellation"
+    const val OBSERVATORY_CHEST_FAIL_COUNTER = "/save:observatory:fail-counter"
 }

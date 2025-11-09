@@ -15,8 +15,7 @@ class ObservatoryAssistantDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.OBSERVATORY_ASSISTANT_6118)
         val questStage = getQuestStage(player!!, Quests.OBSERVATORY_QUEST)
-        val plankItem = Items.PLANK_960
-        val amountOfPlanks = amountInInventory(player!!, plankItem)
+        val amountOfPlanks = amountInInventory(player!!, Items.PLANK_960)
         when (questStage) {
             0 -> when (stage) {
                 0 -> playerl(FaceAnim.HALF_ASKING, "Hi, are you busy?").also { stage++ }

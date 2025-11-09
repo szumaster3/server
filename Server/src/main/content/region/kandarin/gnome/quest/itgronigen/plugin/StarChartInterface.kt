@@ -25,7 +25,7 @@ class StarChartInterface : InterfaceListener {
                 )
             if (buttonID in button) {
                 for (i in zodiac.entries) {
-                    sendString(player, zodiac[buttonID].toString(), 104, 57)
+                    sendString(player, zodiac[buttonID].toString(), Components.STAR_CHART_104, 57)
                 }
             }
             return@on true

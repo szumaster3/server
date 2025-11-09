@@ -4,6 +4,7 @@ import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
@@ -45,7 +46,7 @@ class GodwarsEntrancePlugin : InteractionListener {
             GameWorld.Pulser.submit(
                 object : Pulse(1, player) {
                     override fun pulse(): Boolean {
-                        teleport(player, Location.create(2882, 5311, 2))
+                        teleport(player, Location.create(2882, 5311, 2), TeleportManager.TeleportType.INSTANT)
                         return true
                     }
                 },
