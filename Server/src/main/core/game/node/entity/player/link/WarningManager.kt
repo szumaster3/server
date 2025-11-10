@@ -102,7 +102,6 @@ class WarningManager : InteractionListener, InterfaceListener {
 
         private val SCENERY_WARNINGS = listOf(
             Scenery.STAIRS_25432 to Warnings.OBSERVATORY_STAIRS,
-            Scenery.CLIMBING_ROPE_5946 to Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE,
             Scenery.DARK_HOLE_5947 to Warnings.LUMBRIDGE_SWAMP_CAVE_ROPE,
             Scenery.GATE_3506 to Warnings.MORT_MYRE,
             Scenery.GATE_3507 to Warnings.MORT_MYRE,
