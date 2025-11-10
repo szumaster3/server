@@ -5,7 +5,6 @@ import content.data.RespawnPoint
 import content.data.setRespawnLocation
 import content.global.activity.jobs.JobManager
 import content.global.skill.summoning.SummoningPouch
-import content.minigame.mta.plugin.MTAZone
 import content.region.island.tutorial.plugin.TutorialStage
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import content.region.kandarin.yanille.quest.handsand.SandpitCutscene
@@ -17,6 +16,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.HintIconManager
 import core.game.node.entity.player.link.SpellBookManager
+import core.game.node.entity.player.link.Warnings
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
@@ -26,10 +26,8 @@ import core.net.packet.PacketWriteQueue
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ResetInterface
 import core.plugin.Initializable
-import core.tools.DARK_BLUE
 import core.tools.GREEN
 import core.tools.RED
-import core.tools.colorize
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import shared.consts.Items
@@ -120,7 +118,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "setpcpoints",
             privilege = Privilege.ADMIN,
-            usage = "::setpcpoints <amount>",
+            usage = "::setpcpoints <lt>amount<gt>",
             description = "Adds pest control points."
         ) { p, args ->
             if (args.size < 2) {
@@ -137,40 +135,34 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
         }
 
+        /*
+         * Command for resetting warnings.
+         */
+
         define(
-            name = "setdeco",
+            name = "resetwarnings",
             privilege = Privilege.ADMIN,
-            usage = "::setdeco <hotspotIndex> <decorationIndex>",
-            description = "Sets decoration index for a hotspot in your current room."
-        ) { player, args ->
+            usage = "::resetwarnings",
+            description = "Resets all warnings"
+        ) { player, _ ->
+            val resetList = mutableListOf<Warnings>()
 
-            if (args.size < 3) {
-                sendMessage(player, "Usage: ::setdeco <hotspotIndex> <decorationIndex>")
-                return@define
+            Warnings.values.forEach { warning ->
+                val currentValue = getVarbit(player, warning.varbit)
+                if (currentValue != 0) {
+                    setVarbit(player, warning.varbit, 0)
+                    resetList.add(warning)
+                }
             }
 
-            val hotspotIndex = args[1].toIntOrNull()
-            val decorationIndex = args[2].toIntOrNull()
-
-            if (hotspotIndex == null || decorationIndex == null) {
-                sendMessage(player, "Both hotspotIndex and decorationIndex must be numbers.")
-                return@define
+            if (resetList.isEmpty()) {
+                player.debug("You don't have any.")
+            } else {
+                player.debug("Reset ${resetList.size} warnings:")
+                resetList.forEach { w ->
+                    player.debug(" - ${w.name}")
+                }
             }
-
-            val room = player.houseManager.getRoom(player.location)
-            if (room == null) {
-                sendMessage(player, "You are not currently in a room.")
-                return@define
-            }
-
-            val hotspots = room.hotspots
-            if (hotspotIndex !in hotspots.indices) {
-                sendMessage(player, "Invalid hotspot index. Valid range: 0 to ${hotspots.size - 1}.")
-                return@define
-            }
-
-            hotspots[hotspotIndex].decorationIndex = decorationIndex
-            sendMessage(player, "Decoration index of hotspot $hotspotIndex set to $decorationIndex.")
         }
 
         /*
@@ -194,47 +186,17 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Command to lock (block) random events for the player.
-         */
-
-        define(
-            name = "relock",
-            privilege = Privilege.ADMIN,
-            usage = "::relock",
-            description = "Lock random events from triggering.",
-        ) { player, _ ->
-            player.setAttribute(GameAttributes.RE_LOCK, true)
-            player.debug(colorize("%RRandom events have been locked (blocked)."))
-            return@define
-        }
-
-        /*
-         * Command to unlock (allow) random events for the player.
-         */
-
-        define(
-            name = "reunlock",
-            privilege = Privilege.ADMIN,
-            usage = "::reunlock",
-            description = "Allow random events to triggering.",
-        ) { player, _ ->
-            player.removeAttribute(GameAttributes.RE_LOCK)
-            player.debug(colorize("%GRandom events have been unlocked (allowed)."))
-            return@define
-        }
-
-        /*
          * Command to send model on the interface.
          */
 
         define(
             name = "model",
             privilege = Privilege.ADMIN,
-            usage = "::model [interfaceId] [componentId] [modelId] [zoom]",
+            usage = "::model <lt>interfaceId<lt> <lt>componentId<lt> <lt>modelId<lt> <lt>zoom<lt>",
             description = "Send a model on the interface component."
         ) { player, args ->
             if (args.size < 4) {
-                return@define reject(player, "Usage: ::model [interfaceId] [componentId] [modelId] optional=[zoom]")
+                return@define reject(player, "Usage: ::model interfaceId componentId modelId (optional zoom)")
             }
 
             val interfaceId = args[1].toIntOrNull()
@@ -257,11 +219,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "com",
             privilege = Privilege.ADMIN,
-            usage = "::com [interfaceId] [animationId] [componentId] [loop (optional)]",
+            usage = "::com <lt>interfaceId<gt> <lt>animationId<gt> <lt>componentId<gt> <lt>loop (optional)<gt>",
             description = "Send an animation on the interface component. Use optional 'loop' to repeat.",
         ) { player, args ->
             if (args.size < 4) {
-                return@define reject(player, "Usage: ::com [interfaceId] [animationId] [componentId] [loop (optional)]")
+                return@define reject(player, "Usage: ::com interfaceId animationId componentId (loop optional)")
             }
 
             val interfaceId = args[1].toIntOrNull()
@@ -278,7 +240,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val pulse = object : Pulse(3) {
                 override fun pulse(): Boolean {
                     player.packetDispatch.sendAnimationInterface(animationId, interfaceId, componentId)
-                    sendMessage(player, "Played animation [$animationId] on interface [$interfaceId] component [$componentId].")
+                    player.debug("Played animation [$animationId] on interface [$interfaceId] component [$componentId].")
 
                     if (loop) {
                         animationId++
@@ -307,9 +269,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             val pulse = player.attributes.remove("com_pulse") as? Pulse
             if (pulse != null) {
                 pulse.stop()
-                sendMessage(player, "Animation loop stopped.")
+                player.debug("Animation loop stopped.")
             } else {
-                sendMessage(player, "No animation loop was running.")
+                player.debug( "No animation loop was running.")
             }
         }
 
@@ -356,7 +318,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "hinticon",
             privilege = Privilege.ADMIN,
-            usage = "::hinticon <npcId> | <x> <y> <height>",
+            usage = "::hinticon <lt>npcId<gt> or <lt>x<gt> <lt>y<gt> <lt>height<gt>",
             description = "Register a hint icon on a node or at a location."
         ) { player, args ->
             when (args.size - 1) {
@@ -399,11 +361,11 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         define(
             name = "settutorialstage",
             privilege = Privilege.ADMIN,
-            usage = "::settutorialstage <stage>",
+            usage = "::settutorialstage <lt>stage<gt>",
             description = "Set tutorial stage."
         ) { player, args ->
             if (args.size < 2) {
-                reject(player, "Usage: ::tutorialstage <stage>")
+                reject(player, "Usage: ::tutorialstage stage")
             }
 
             val stage = args[1].toIntOrNull() ?: reject(player, "Please use a valid integer.")
@@ -426,40 +388,6 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
         }
 
         /*
-         * Command for managing MTA (Mage Training Arena) points.
-         */
-
-        define(
-            name = "mtahat",
-            privilege = Privilege.ADMIN,
-            usage = "::mtahat",
-            description = "MTA points manager.",
-        ) { player, _ ->
-            sendOptions(player, "devops", "add pizzazz points", "check points", "close")
-            addDialogueAction(player) { _, button ->
-                when (button) {
-                    2 -> {
-                        (0..3).forEach { type ->
-                            MTAZone.incrementPoints(player, type, 10000)
-                        }
-                        sendMessage(player, "Added 10,000 pizzazz points to all categories.")
-                    }
-                    3 -> {
-                        val g = MTAZone.pizazzVarbitIds[0] // Max 1808
-                        val t = MTAZone.pizazzVarbitIds[1] // Max 1808
-                        val a = MTAZone.pizazzVarbitIds[2] // ~unlimited
-                        val e = MTAZone.pizazzVarbitIds[3] // ~unlimited
-                        sendMessage(
-                            player,
-                            "MTA: G: [$DARK_BLUE$g</col>] A: [$DARK_BLUE$a</col>] T: [$DARK_BLUE$t</col>] E: [$DARK_BLUE$e</col>]"
-                        )
-                    }
-                    4 -> closeDialogue(player)
-                }
-            }
-        }
-
-        /*
          * Command for buying a house at Rimmington (+10M cash).
          */
 
@@ -470,7 +398,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             description = "Allows you to buy house.",
         ) { player, _ ->
             player.houseManager.createNewHouseAt(content.global.skill.construction.HouseLocation.RIMMINGTON)
-            sendMessage(player, RED + "The house has been bought.")
+            player.debug(RED + "The house has been bought.")
             addItem(player, Items.COINS_995, 10000000)
         }
 
@@ -520,7 +448,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
                     }
                 }
             }
-            sendMessage(player, "All achievement diaries cleared successfully.")
+            player.debug("All achievement diaries cleared successfully.")
         }
 
         /*
@@ -538,7 +466,7 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             playerJobManager.jobAmount = -1
             playerJobManager.jobOriginalAmount = -1
 
-            sendMessage(player, "Job cleared successfully.")
+            player.debug("Job cleared successfully.")
         }
 
         /*
@@ -629,14 +557,14 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
             val varp = args[1].toIntOrNull() ?: reject(player, "Please use a valid int for the varpIndex.")
             GlobalScope.launch {
-                sendMessage(player, "========== Found Varbits for Varp $varp ==========")
+                player.debug("========== Found Varbits for Varp $varp ==========")
                 for (id in 0 until 10000) {
                     val def = VarbitDefinition.forId(id)
                     if (def.varpId == varp) {
-                        sendMessage(player, "${def.id} -> [offset: ${def.startBit}, upperBound: ${def.endBit}]")
+                        player.debug( "${def.id} -> [offset: ${def.startBit}, upperBound: ${def.endBit}]")
                     }
                 }
-                sendMessage(player, "=========================================")
+                player.debug("=========================================")
             }
         }
 

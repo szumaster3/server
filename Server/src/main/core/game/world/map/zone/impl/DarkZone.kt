@@ -44,7 +44,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         register(LUMBRIDGE_DUNGEON_12949)
         register(LUMBRIDGE_DUNGEON_12693)
         register(TEARS_OF_GUTHIX_12948)
-        register(LUMBRIDGE_CELLAR_13206)
+        register(DORGESHUUN_MINE_13206)
         register(MOS_LE_HARMLESS_CAVE_15251)
         register(MOS_LE_HARMLESS_CAVE_14994)
         register(MOS_LE_HARMLESS_CAVE_14995)
@@ -149,7 +149,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         private val LUMBRIDGE_DUNGEON_12949 = getRegionBorders(12949)
         private val LUMBRIDGE_DUNGEON_12693 = getRegionBorders(12693)
         private val TEARS_OF_GUTHIX_12948 = getRegionBorders(12948)
-        private val LUMBRIDGE_CELLAR_13206 = getRegionBorders(13206)
+        private val DORGESHUUN_MINE_13206 = getRegionBorders(13206)
         private val MOS_LE_HARMLESS_CAVE_15251 = getRegionBorders(15251)
         private val MOS_LE_HARMLESS_CAVE_14994 = getRegionBorders(14994)
         private val MOS_LE_HARMLESS_CAVE_14995 = getRegionBorders(14995)
@@ -189,7 +189,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
                 val slot = player.inventory.getSlot(Item(source.product))
                 if (slot != -1) {
                     player.inventory.replace(Item(source.raw), slot, true)
-                    sendMessage(player, core.tools.RED + "Your ${source.name.lowercase()} has gone out!")
+                    sendMessage(player, "Your ${source.name.lowercase()} has gone out!")
                 }
 
                 if (!LightSource.hasActiveLightSource(player)) {

@@ -81,7 +81,7 @@ class WarningManager : InteractionListener, InterfaceListener {
 
     private fun confirmWarning(player: Player, warning: Warnings) {
         warning.action(player)
-        incrementWarning(player, warning)
+//        incrementWarning(player, warning)
     }
 
     private fun handleSceneryInteraction(player: Player, warning: Warnings, node: core.game.node.scenery.Scenery) {

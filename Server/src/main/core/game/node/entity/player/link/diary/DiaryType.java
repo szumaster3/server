@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.diary;
 
+import content.data.Lamps;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import shared.consts.Items;
@@ -62,9 +63,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.KARAMJA_GLOVES_1_11136), new Item(Items.ANTIQUE_LAMP_11137)},
-                    {new Item(Items.KARAMJA_GLOVES_2_11138), new Item(Items.ANTIQUE_LAMP_11139)},
-                    {new Item(Items.KARAMJA_GLOVES_3_11140), new Item(Items.ANTIQUE_LAMP_11141)}
+                    {new Item(Items.KARAMJA_GLOVES_1_11136), new Item(Lamps.KARAMJA_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.KARAMJA_GLOVES_2_11138), new Item(Lamps.KARAMJA_ACHIEVEMENT_MEDIUM.getItem())},
+                    {new Item(Items.KARAMJA_GLOVES_3_11140), new Item(Lamps.KARAMJA_ACHIEVEMENT_HARD.getItem())}
             },
             "To start marking off tasks in your journal, speak to Pirate<br><br>Jackie the Fruit in Brimhaven, Kaleb Paramay in Shilo<br><br>Village or one of the Jungle Foresters north of the<br><br>Kharazi Jungle.",
             new int[]{NPCs.PIRATE_JACKIE_THE_FRUIT_1055, NPCs.KALEB_PARAMAYA_512, NPCs.JUNGLE_FORESTER_401}
@@ -138,9 +139,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.VARROCK_ARMOUR_1_11756), new Item(Items.ANTIQUE_LAMP_11753)},
-                    {new Item(Items.VARROCK_ARMOUR_2_11757), new Item(Items.ANTIQUE_LAMP_11754)},
-                    {new Item(Items.VARROCK_ARMOUR_3_11758), new Item(Items.ANTIQUE_LAMP_11755)}
+                    {new Item(Items.VARROCK_ARMOUR_1_11756), new Item(Lamps.VARROCK_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.VARROCK_ARMOUR_2_11757), new Item(Lamps.VARROCK_ACHIEVEMENT_MEDIUM.getItem())},
+                    {new Item(Items.VARROCK_ARMOUR_3_11758), new Item(Lamps.VARROCK_ACHIEVEMENT_HARD.getItem())}
             },
             "To start marking off tasks in your journal, speak to<br><br>Rat Burgiss south of the city, Reldo in the palace<br><br>library, or Vannaka in the sewers.",
             new int[]{NPCs.RAT_BURGISS_5833, NPCs.RELDO_2660, NPCs.VANNAKA_1597}
@@ -213,9 +214,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.EXPLORERS_RING_1_13560), new Item(Items.ANTIQUE_LAMP_11185)},
-                    {new Item(Items.EXPLORERS_RING_2_13561), new Item(Items.ANTIQUE_LAMP_11186)},
-                    {new Item(Items.EXPLORERS_RING_3_13562), new Item(Items.ANTIQUE_LAMP_11187)}},
+                    {new Item(Items.EXPLORERS_RING_1_13560), new Item(Lamps.LUMBRIDGE_ACHIEVEMENT_BEGINNER.getItem())},
+                    {new Item(Items.EXPLORERS_RING_2_13561), new Item(Lamps.LUMBRIDGE_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.EXPLORERS_RING_3_13562), new Item(Lamps.LUMBRIDGE_ACHIEVEMENT_MEDIUM.getItem())}},
             "To start marking off tasks in your journal, speak to<br><br>Explorer Jack near the Lumbridge General Store, Bob<br><br>in his axe store or Ned in his house in Draynor Village.",
             new int[]{NPCs.EXPLORER_JACK_7969, NPCs.BOB_519, NPCs.NED_743}
 
@@ -272,9 +273,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.FALADOR_SHIELD_1_14577), new Item(Items.ANTIQUE_LAMP_14580)},
-                    {new Item(Items.FALADOR_SHIELD_2_14578), new Item(Items.ANTIQUE_LAMP_14581)},
-                    {new Item(Items.FALADOR_SHIELD_3_14579), new Item(Items.ANTIQUE_LAMP_14582)}
+                    {new Item(Items.FALADOR_SHIELD_1_14577), new Item(Lamps.FALADOR_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.FALADOR_SHIELD_2_14578), new Item(Lamps.FALADOR_ACHIEVEMENT_MEDIUM.getItem())},
+                    {new Item(Items.FALADOR_SHIELD_3_14579), new Item(Lamps.FALADOR_ACHIEVEMENT_HARD.getItem())}
             },
             "To start marking off tasks in your journal, speak to<br><br>Redbeard Frank outside the bar in Port Sarim, The<br><br>Chemist west of Rimmington, or Sir Vyvin's Squire in the<br><br>Falador Castle courtyard.",
             new int[]{NPCs.REDBEARD_FRANK_375, NPCs.CHEMIST_367, NPCs.SQUIRE_606}
@@ -325,9 +326,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.FREMENNIK_SEA_BOOTS_1_14571), new Item(Items.ANTIQUE_LAMP_14574)},
-                    {new Item(Items.FREMENNIK_SEA_BOOTS_2_14572), new Item(Items.ANTIQUE_LAMP_14575)},
-                    {new Item(Items.FREMENNIK_SEA_BOOTS_3_14573), new Item(Items.ANTIQUE_LAMP_14576)}
+                    {new Item(Items.FREMENNIK_SEA_BOOTS_1_14571), new Item(Lamps.FREMENNIK_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.FREMENNIK_SEA_BOOTS_2_14572), new Item(Lamps.FREMENNIK_ACHIEVEMENT_MEDIUM.getItem())},
+                    {new Item(Items.FREMENNIK_SEA_BOOTS_3_14573), new Item(Lamps.FREMENNIK_ACHIEVEMENT_HARD.getItem())}
             },
             "To start marking off tasks in your journal, speak to<br><br>Council Workman on the bridge between the Seers' Village<br><br>and Rellekka, Yrsa in Rellekka or Advisor Ghrim on the<br><br>Miscellania.",
             new int[]{NPCs.COUNCIL_WORKMAN_1287, NPCs.YRSA_1301, NPCs.ADVISOR_GHRIM_1375}
@@ -381,9 +382,9 @@ public enum DiaryType {
                     }
             },
             new Item[][]{
-                    {new Item(Items.SEERS_HEADBAND_1_14631), new Item(Items.ANTIQUE_LAMP_14633)},
-                    {new Item(Items.SEERS_HEADBAND_2_14640), new Item(Items.ANTIQUE_LAMP_14634)},
-                    {new Item(Items.SEERS_HEADBAND_3_14641), new Item(Items.ANTIQUE_LAMP_14635)}
+                    {new Item(Items.SEERS_HEADBAND_1_14631), new Item(Lamps.SEERS_ACHIEVEMENT_EASY.getItem())},
+                    {new Item(Items.SEERS_HEADBAND_2_14640), new Item(Lamps.SEERS_ACHIEVEMENT_MEDIUM.getItem())},
+                    {new Item(Items.SEERS_HEADBAND_3_14641), new Item(Lamps.SEERS_ACHIEVEMENT_HARD.getItem())}
             }, "To start marking off tasks in your journal, speak to<br><br>any seer in Seers' Village, Stankers by the coal<br><br>trucks or Sir Kay in Camelot.",
             new int[]{NPCs.SEER_388, NPCs.STANKERS_383, NPCs.SIR_KAY_241}
 

@@ -116,13 +116,6 @@ object WarningHandler {
         if (!player.savedData.globalData.hasTiedLumbridgeRope()) {
             sendDialogue(player, "There is a sheer drop below the hole. You will need a rope.")
         } else {
-            if(player.location.isInRegion(12693))
-                climb(
-                    player,
-                    Animation(Animations.CLIMB_ROPE_EMOTE_1130),
-                    Location.create(3169, 3171, 0)
-                )
-            else
                 climb(
                     player,
                     Animation(Animations.HUMAN_BURYING_BONES_827),
