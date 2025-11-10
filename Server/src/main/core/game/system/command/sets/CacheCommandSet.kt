@@ -25,6 +25,61 @@ import kotlin.reflect.jvm.isAccessible
 class CacheCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        /*
+         * Command for finding all object with given id.
+         */
+
+        define(
+            name = "findobjectid",
+            privilege = Privilege.ADMIN,
+            usage = "::findobjectid <id>",
+            description = "Scan regions for all instances of the given object ID."
+        ) { player, args ->
+
+            val id = args?.getOrNull(1)?.toIntOrNull() ?: run {
+                reject(player, "Usage: ::findobjectid id")
+                return@define
+            }
+
+            val exportDir = File("dumps")
+            if (!exportDir.exists()) exportDir.mkdirs()
+
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM_HH-mm"))
+            val dump = File(exportDir, "objects_id=${id}_$timestamp.txt")
+
+            GlobalScope.launch {
+                var found = 0
+                dump.bufferedWriter().use { writer ->
+                    for (region in RegionManager.regionCache.values) {
+                        for (z in 0..3) {
+                            val plane = region.planes[z] ?: continue
+                            val grid = plane.objects ?: continue
+                            for (x in 0 until RegionPlane.REGION_SIZE) {
+                                for (y in 0 until RegionPlane.REGION_SIZE) {
+                                    val scenery = grid[x][y] ?: continue
+                                    if (scenery.id != id) continue
+
+                                    val def = SceneryDefinition.forId(scenery.id)
+                                    val loc = scenery.location
+                                    writer.write(
+                                        "[${scenery.id}] - (${loc.x}, ${loc.y}, ${loc.z}) " +
+                                                "[region=${region.id}, name=${def?.name ?: "Unknown"}]\n"
+                                    )
+                                    found++
+                                }
+                            }
+                        }
+                    }
+                }
+                player.debug("Saved $found instances of object ID $id -> ${dump.path}")
+            }
+        }
+
+        /*
+         * Command for listing all object options in-game.
+         */
+
         define(
             name = "findobjects_all",
             privilege = Privilege.ADMIN,
@@ -76,6 +131,10 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        /*
+         * Command for listing all object options in-game.
+         */
+
         define(
             name = "listobjectoptions",
             privilege = Privilege.ADMIN,
@@ -115,6 +174,9 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        /*
+         * Command for finding all objects in-game.
+         */
 
         define(
             name = "findobjects_all_csv",
@@ -170,6 +232,10 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 player.debug("Finished scanning regions.")
             }
         }
+
+        /*
+         * Command for finding objects with given option.
+         */
 
         define(
             name = "findobjects",

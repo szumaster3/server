@@ -68,6 +68,32 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        define(
+            name = "rope",
+            privilege = Privilege.ADMIN,
+            usage = "",
+            description = ""
+        ) { p, _ ->
+           addItem(p, Items.ROPE_954)
+        }
+
+        define(
+            name = "spade",
+            privilege = Privilege.ADMIN,
+            usage = "",
+            description = ""
+        ) { p, _ ->
+            addItem(p, Items.SPADE_952)
+        }
+
+        define(
+            name = "knife",
+            privilege = Privilege.ADMIN,
+            usage = "",
+            description = ""
+        ) { p, _ ->
+            addItem(p, Items.KNIFE_946)
+        }
 
         define(
             name = "sandpit",
