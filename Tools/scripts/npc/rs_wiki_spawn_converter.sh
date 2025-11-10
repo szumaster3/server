@@ -14,7 +14,7 @@
 #   ]
 #
 # Usage:
-#   ./rswiki_npc_spawn_converter.sh
+#   ./rs_wiki_npc_spawn_converter.sh
 # ------------------------------------------------------------------------------
 
 set -e
