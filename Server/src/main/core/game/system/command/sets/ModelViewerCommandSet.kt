@@ -1,8 +1,12 @@
 package core.game.system.command.sets
 
 import content.global.plugin.iface.BookInterface
+import content.global.plugin.iface.BookLine
+import content.global.plugin.iface.Page
+import content.global.plugin.iface.PageSet
 import core.api.getAttribute
 import core.api.setAttribute
+import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege
 import core.plugin.Initializable
@@ -18,160 +22,146 @@ class ModelViewerCommandSet : CommandSet(Privilege.ADMIN) {
         const val ATTRIBUTE_PITCH = "modelPitch"
         const val ATTRIBUTE_YAW = "modelYaw"
 
+        private val buttonAdjustments = mapOf(
+            114 to (ATTRIBUTE_ZOOM to -100),
+            116 to (ATTRIBUTE_PITCH to -100),
+            118 to (ATTRIBUTE_YAW to -100),
+            122 to (ATTRIBUTE_MODEL_NUMBER to -1),
+            124 to (ATTRIBUTE_MODEL_NUMBER to -10),
+            126 to (ATTRIBUTE_MODEL_NUMBER to -100),
+            128 to (ATTRIBUTE_MODEL_NUMBER to -1000),
+            144 to (ATTRIBUTE_ZOOM to 100),
+            146 to (ATTRIBUTE_PITCH to 100),
+            148 to (ATTRIBUTE_YAW to 100),
+            152 to (ATTRIBUTE_MODEL_NUMBER to 1),
+            154 to (ATTRIBUTE_MODEL_NUMBER to 10),
+            156 to (ATTRIBUTE_MODEL_NUMBER to 100),
+            158 to (ATTRIBUTE_MODEL_NUMBER to 1000),
+        )
+
+        private val buttonLabels = mapOf(
+            114 to "-1 zoom", 116 to "-1 pitch", 118 to "-1 yaw",
+            122 to "-1", 124 to "-10", 126 to "-100", 128 to "-1000",
+            144 to "+1 zoom", 146 to "+1 pitch", 148 to "+1 yaw",
+            152 to "+1", 154 to "+10", 156 to "+100", 158 to "+1000"
+        )
+
         @Suppress("UNUSED_PARAMETER")
-        private fun display(
-            player: Player,
-            pageNum: Int,
-            buttonID: Int,
-        ): Boolean {
+        private fun display(player: Player, pageNum: Int, buttonID: Int): Boolean {
             BookInterface.clearBookLines(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS)
             BookInterface.clearButtons(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_BUTTON_IDS)
-            BookInterface.setTitle(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS, TITLE)
+            BookInterface.setTitle(player, BookInterface.FANCY_BOOK_2_27, BookInterface.FANCY_BOOK_2_27_LINE_IDS, "Model Viewer")
 
-            // Custom button interfaces for model book.
-            // These are non-standard. No pages are "turned" here.
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 114, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 116, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 118, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 122, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 124, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 126, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 128, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 144, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 146, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 148, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 152, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 154, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 156, false)
-            player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, 158, false)
-            player.packetDispatch.sendString("-1 zoom", BookInterface.FANCY_BOOK_2_27, 114)
-            player.packetDispatch.sendString("-1 pitch", BookInterface.FANCY_BOOK_2_27, 116)
-            player.packetDispatch.sendString("-1 yaw", BookInterface.FANCY_BOOK_2_27, 118)
-            player.packetDispatch.sendString("-1", BookInterface.FANCY_BOOK_2_27, 122)
-            player.packetDispatch.sendString("-10", BookInterface.FANCY_BOOK_2_27, 124)
-            player.packetDispatch.sendString("-100", BookInterface.FANCY_BOOK_2_27, 126)
-            player.packetDispatch.sendString("-1000", BookInterface.FANCY_BOOK_2_27, 128)
-            player.packetDispatch.sendString("+1 zoom", BookInterface.FANCY_BOOK_2_27, 144)
-            player.packetDispatch.sendString("+1 pitch", BookInterface.FANCY_BOOK_2_27, 146)
-            player.packetDispatch.sendString("+1 yaw", BookInterface.FANCY_BOOK_2_27, 148)
-            player.packetDispatch.sendString("+1", BookInterface.FANCY_BOOK_2_27, 152)
-            player.packetDispatch.sendString("+10", BookInterface.FANCY_BOOK_2_27, 154)
-            player.packetDispatch.sendString("+100", BookInterface.FANCY_BOOK_2_27, 156)
-            player.packetDispatch.sendString("+1000", BookInterface.FANCY_BOOK_2_27, 158)
-
-            // Attach buttons to setAttributes.
-            when (buttonID) {
-                114 -> setAttribute(player, ATTRIBUTE_ZOOM, getAttribute(player, ATTRIBUTE_ZOOM, 700) - 100)
-                116 -> if(getAttribute(player, ATTRIBUTE_PITCH, 0) != 0) setAttribute(player, ATTRIBUTE_PITCH, getAttribute(player, ATTRIBUTE_PITCH, 0) - 100)
-                118 -> setAttribute(player, ATTRIBUTE_YAW, getAttribute(player, ATTRIBUTE_YAW, 0) - 100)
-                122 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) - 1,
-                    )
-                124 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) - 10,
-                    )
-                126 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) - 100,
-                    )
-                128 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) - 1000,
-                    )
-                144 -> setAttribute(player, ATTRIBUTE_ZOOM, getAttribute(player, ATTRIBUTE_ZOOM, 700) + 100)
-                146 -> setAttribute(player, ATTRIBUTE_PITCH, getAttribute(player, ATTRIBUTE_PITCH, 0) + 100)
-                148 -> setAttribute(player, ATTRIBUTE_YAW, getAttribute(player, ATTRIBUTE_YAW, 0) + 100)
-                152 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 1,
-                    )
-                154 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 10,
-                    )
-                156 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 100,
-                    )
-                158 ->
-                    setAttribute(
-                        player,
-                        ATTRIBUTE_MODEL_NUMBER,
-                        getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 1000,
-                    )
+            val buttonIds = buttonAdjustments.keys
+            buttonIds.forEach { id ->
+                player.packetDispatch.sendInterfaceConfig(BookInterface.FANCY_BOOK_2_27, id, false)
+                player.packetDispatch.sendString(buttonLabels[id] ?: "", BookInterface.FANCY_BOOK_2_27, id)
             }
 
-            // Display model number.
-            player.packetDispatch.sendString(
-                "No: " + getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + "   " +
-                    getAttribute(player, ATTRIBUTE_ZOOM, 700) +
-                    " " +
-                    getAttribute(player, ATTRIBUTE_PITCH, 0) +
-                    " " +
-                    getAttribute(player, ATTRIBUTE_YAW, 0),
-                BookInterface.FANCY_BOOK_2_27,
-                38,
-            )
-            player.packetDispatch.sendString(
-                "No: " + (getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 1),
-                BookInterface.FANCY_BOOK_2_27,
-                53,
-            )
+            buttonAdjustments[buttonID]?.let { (attr, delta) ->
+                val current = getAttribute(player, attr, if (attr == ATTRIBUTE_ZOOM) 700 else if (attr == ATTRIBUTE_MODEL_NUMBER) DEF_BOOK else 0)
+                val newValue = current + delta
 
-            // Display the models in the middle.
-            BookInterface.setModelOnPage(
-                player,
-                0,
-                getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK),
+                if (attr == ATTRIBUTE_PITCH && newValue < 0) {
+                    setAttribute(player, attr, 0)
+                    player.debug("Not possible.")
+                } else {
+                    setAttribute(player, attr, newValue)
+                }
+            }
+
+            val modelNo = getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK)
+            val zoom = getAttribute(player, ATTRIBUTE_ZOOM, 700)
+            val pitch = getAttribute(player, ATTRIBUTE_PITCH, 0)
+            val yaw = getAttribute(player, ATTRIBUTE_YAW, 0)
+
+            player.packetDispatch.sendString("No: $modelNo   $zoom $pitch $yaw", BookInterface.FANCY_BOOK_2_27, 38)
+            player.packetDispatch.sendString("No: ${modelNo + 1}", BookInterface.FANCY_BOOK_2_27, 53)
+
+            BookInterface.setModelOnPage(player, 0, modelNo,
                 BookInterface.FANCY_BOOK_2_27,
                 BookInterface.FANCY_BOOK_2_27_IMAGE_ENABLE_DRAW_IDS[7],
                 BookInterface.FANCY_BOOK_2_27_IMAGE_DRAW_IDS[7],
-                getAttribute(player, ATTRIBUTE_ZOOM, 700),
-                getAttribute(player, ATTRIBUTE_PITCH, 0),
-                getAttribute(player, ATTRIBUTE_YAW, 0),
+                zoom, pitch, yaw
             )
-            BookInterface.setModelOnPage(
-                player,
-                0,
-                getAttribute(player, ATTRIBUTE_MODEL_NUMBER, DEF_BOOK) + 1,
+            BookInterface.setModelOnPage(player, 0, modelNo + 1,
                 BookInterface.FANCY_BOOK_2_27,
                 BookInterface.FANCY_BOOK_2_27_IMAGE_ENABLE_DRAW_IDS[22],
                 BookInterface.FANCY_BOOK_2_27_IMAGE_DRAW_IDS[22],
-                getAttribute(player, ATTRIBUTE_ZOOM, 700),
-                getAttribute(player, ATTRIBUTE_PITCH, 0),
-                getAttribute(player, ATTRIBUTE_YAW, 0),
+                zoom, pitch, yaw
             )
+
+            return true
+        }
+
+        private const val MALE_NPC_ID = 1
+        private const val FEMALE_NPC_ID = 5
+
+        private val MALE_IMAGE_ENABLE_ID = BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[4]
+        private val MALE_IMAGE_DRAW_ID = BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[4]
+
+        private val FEMALE_IMAGE_ENABLE_ID = BookInterface.FANCY_BOOK_3_49_IMAGE_ENABLE_DRAW_IDS[15]
+        private val FEMALE_IMAGE_DRAW_ID = BookInterface.FANCY_BOOK_3_49_IMAGE_DRAW_IDS[15]
+
+        private val EXPRESSIONS = enumValues<FaceAnim>()
+            .filterNot { it.name.startsWith("OLD_") }
+            .filterNot { it.name.startsWith("CHILD_") }
+            .filterNot { it.name.startsWith("NEW_") }
+            .toTypedArray()
+
+        private val CONTENTS: Array<PageSet> = EXPRESSIONS.map { anim ->
+            PageSet(
+                Page(BookLine("${anim.animationId} | ${anim.name.lowercase()}", 65))
+            )
+        }.toTypedArray()
+
+        @Suppress("UNUSED_PARAMETER")
+        fun show(player: Player, pageNum: Int, buttonID: Int): Boolean {
+            BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, "Expressions", CONTENTS)
+
+            val anim = EXPRESSIONS.getOrNull(pageNum)
+            if (anim != null) {
+                BookInterface.setNpcOnPage(
+                    player,
+                    pageNum,
+                    MALE_NPC_ID,
+                    BookInterface.FANCY_BOOK_3_49,
+                    MALE_IMAGE_ENABLE_ID,
+                    MALE_IMAGE_DRAW_ID,
+                    anim.animationId,
+                    1200
+                )
+                BookInterface.setNpcOnPage(
+                    player,
+                    pageNum,
+                    FEMALE_NPC_ID,
+                    BookInterface.FANCY_BOOK_3_49,
+                    FEMALE_IMAGE_ENABLE_ID,
+                    FEMALE_IMAGE_DRAW_ID,
+                    anim.animationId,
+                    1200
+                )
+            }
+
             return true
         }
     }
 
     override fun defineCommands() {
         define("models", Privilege.ADMIN) { player, args ->
-
-            // Bad number of args.
             if (args.size > 2) {
                 reject(player, "Usage: ::models")
                 return@define
             }
-
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_2_27, ::display)
-            return@define
+        }
+
+        define("showexpression", Privilege.ADMIN) { player, args ->
+            if (args.size > 1) {
+                reject(player, "Usage: ::showexpression")
+                return@define
+            }
+            BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::display)
         }
     }
 }

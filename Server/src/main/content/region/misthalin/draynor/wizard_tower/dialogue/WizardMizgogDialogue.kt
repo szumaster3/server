@@ -69,7 +69,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
             10 -> npc(FaceAnim.LAUGH, "Or else what? You'll attack me?").also { stage++ }
             11 -> npc(FaceAnim.LOUDLY_LAUGHING, "Hahaha!").also { stage = END_DIALOGUE }
             12 -> npc(FaceAnim.ROLLING_EYES, "Ah now you're assuming I have one to give.").also { stage = END_DIALOGUE }
-            13 -> npc(FaceAnim.NOD_NO,"No, everything is good with the world today.").also { stage = END_DIALOGUE }
+            13 -> npc(FaceAnim.WORRIED,"No, everything is good with the world today.").also { stage = END_DIALOGUE }
             14 -> npc(FaceAnim.HALF_THINKING, "I don't think so, the type of magic I study involves", "years of meditation and research.").also { stage = END_DIALOGUE }
             15 -> {
                 when {

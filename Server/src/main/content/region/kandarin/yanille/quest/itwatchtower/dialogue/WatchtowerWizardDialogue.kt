@@ -360,7 +360,7 @@ class WatchtowerWizardDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
 
-            905 -> npc(FaceAnim.NOD_NO, "Nope. Try the Watchtower Wizard.").also { stage = END_DIALOGUE }
+            905 -> npc(FaceAnim.WORRIED, "Nope. Try the Watchtower Wizard.").also { stage = END_DIALOGUE }
             940 -> {
                 if(removeItem(player, Items.POTION_2394)) {
                     addItem(player, Items.MAGIC_OGRE_POTION_2395)

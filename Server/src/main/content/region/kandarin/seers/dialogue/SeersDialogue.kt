@@ -84,11 +84,11 @@ class SeersDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             202 -> npc("You are now an honorary seer and Geoffrey - who", "works in the field to the south - will give you free flax", "every day. Don't call him 'Geoffrey' though: he prefers", "to be known as 'Flax'.").also { stage++ }
-            203 -> player(FaceAnim.NOD_NO, "Is that it?").also { stage++ }
+            203 -> player(FaceAnim.WORRIED, "Is that it?").also { stage++ }
             204 -> npc("No, no. As well as Flax giving you 30 flax per day,", "you'll be able to see dimly in the dark and your", "defence against magic attacks will be boosted.").also { stage++ }
             205 -> npc("Stankers will allow 140 pieces of coal in his coal truck,", "and you'll get an extra log when cutting normal trees.").also { stage++ }
             206 -> player(FaceAnim.SUSPICIOUS, "Flax? What sort of name is that for a person?").also { stage++ }
-            207 -> npc(FaceAnim.NOD_NO, "I know, I know. The poor boy is a simple soul - he just", "really loves picking flax. A little too much, I fear.").also { stage = 999 }
+            207 -> npc(FaceAnim.WORRIED, "I know, I know. The poor boy is a simple soul - he just", "really loves picking flax. A little too much, I fear.").also { stage = 999 }
             999 -> end()
         }
         return true

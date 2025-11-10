@@ -652,7 +652,7 @@ class WatchTowerPlugin : InteractionListener {
         override fun handle(componentID: Int, buttonID: Int) {
             when(stage) {
                 0 -> npc(FaceAnim.HALF_ASKING, "Another potion? Ooo no, I don't think so...")
-                1 -> npc(FaceAnim.NOD_NO, "I can't let you use this anymore, it is just too dangerous", "I'd better take it from you before you injure yourself.")
+                1 -> npc(FaceAnim.WORRIED, "I can't let you use this anymore, it is just too dangerous", "I'd better take it from you before you injure yourself.")
                 2 -> {
                     end()
                     if (inInventory(player!!, used.id)) {

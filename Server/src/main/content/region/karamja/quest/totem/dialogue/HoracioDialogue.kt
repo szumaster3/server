@@ -68,7 +68,7 @@ class HoracioDialogue(player: Player? = null) : Dialogue(player) {
             13 -> npc("planned there. It may even cheer him up a little.").also { stage++ }
             14 -> player(FaceAnim.HALF_ASKING, "What's wrong with him?").also { stage++ }
             15 -> npc(FaceAnim.SAD, "One of his treasures was stolen...").also { stage++ }
-            16 -> player(FaceAnim.NOD_NO, "Oh...err...I see. There are some...nasty people around", "these days.").also { stage++ }
+            16 -> player(FaceAnim.WORRIED, "Oh...err...I see. There are some...nasty people around", "these days.").also { stage++ }
             17 -> npc(FaceAnim.FRIENDLY, "Indeed there are. Still, life isn't always a bed of roses is", "it? Back to the root of the problem: I need a very rare", "plant... and I think you can get it for me.").also { stage++ }
             18 -> player(FaceAnim.HALF_ASKING, "Oh? What plant would that be? A magic tree?").also { stage++ }
             19 -> npc(FaceAnim.NEUTRAL, "Oh no, no, no. Nothing so mundane! It's a vine, you", "see...").also { stage++ }

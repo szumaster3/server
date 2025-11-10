@@ -60,7 +60,7 @@ class HonourGuardDialogue(player: Player? = null) : Dialogue(player) {
             3 -> player("Have you killed many trolls?").also { stage++ }
             4 -> npc("Of course. It's all part of growing up around here. You", "get used to it.").also { stage++ }
             5 -> player("See you later.").also { stage = END_DIALOGUE }
-            6 -> playerl(FaceAnim.NOD_NO, "No. I only use old, recycled jokes. It's better for the environment.").also { stage++ }
+            6 -> playerl(FaceAnim.WORRIED, "No. I only use old, recycled jokes. It's better for the environment.").also { stage++ }
             7 -> npc(FaceAnim.LAUGH, "HaHa!").also { stage = END_DIALOGUE }
             8 -> player("Good day!").also { stage++ }
             9 -> npc("Are you here to help with the trolls?").also { stage++ }

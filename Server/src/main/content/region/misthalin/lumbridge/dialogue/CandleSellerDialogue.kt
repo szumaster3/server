@@ -42,7 +42,7 @@ class CandleSellerDialogue(player: Player? = null) : Dialogue(player) {
 
             7 -> showTopics(
                 Topic(FaceAnim.HALF_GUILTY, "All right, you win, I'll buy a candle.", 1),
-                Topic(FaceAnim.NOD_NO, "No way.", END_DIALOGUE),
+                Topic(FaceAnim.WORRIED, "No way.", END_DIALOGUE),
                 Topic(FaceAnim.HALF_ASKING, "How do you make lanterns?", 8)
             )
 
@@ -56,7 +56,7 @@ class CandleSellerDialogue(player: Player? = null) : Dialogue(player) {
 
             15 -> showTopics(
                 Topic(FaceAnim.HALF_GUILTY, "All right, you win, I'll buy a candle.", 1),
-                Topic(FaceAnim.NOD_NO, "No thanks, I'd rather curse the darkness.", END_DIALOGUE),
+                Topic(FaceAnim.WORRIED, "No thanks, I'd rather curse the darkness.", END_DIALOGUE),
             )
         }
         return true

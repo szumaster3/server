@@ -64,7 +64,7 @@ class ElenaBiohazardDialogue : DialogueFile() {
                     0 -> player(FaceAnim.HAPPY, "Hello Elena.").also { stage++ }
                     1 -> npc(FaceAnim.HAPPY, "Hello brave adventurer. Any luck finding my distillator?").also { stage++ }
 
-                    2 -> player(FaceAnim.NOD_NO, "No, I'm afraid not.").also { stage++ }
+                    2 -> player(FaceAnim.WORRIED, "No, I'm afraid not.").also { stage++ }
                     3 -> npc(FaceAnim.HAPPY, "Speak to Jerico, he will help you to cross the", "wall. He lives next to the chapel.").also { stage++ }
 
                     4 -> end()

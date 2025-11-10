@@ -26,7 +26,7 @@ class SkippyDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.SKIPPY_2795, NPCs.SKIPPY_2796, NPCs.SKIPPY_2797, NPCs.SKIPPY_2798, NPCs.SKIPPY_2799)
 }
 
-class SkippyDialogueFile : DialogueFile() {
+private class SkippyDialogueFile : DialogueFile() {
 
     companion object {
         const val NETTLE_TEA_BOWL = Items.NETTLE_TEA_4239
@@ -241,7 +241,7 @@ class SkippyDialogueFile : DialogueFile() {
             90 -> npcl(FaceAnim.NEUTRAL, "My name's Skippy. Normally I live down by Rimmington. You should come and see me when you're passing.").also { stage++ }
             91 -> npcl(FaceAnim.LAUGH, "Just lately the Council wants to let people skip the Tutorial, so - ha ha ha - they dump the job on Skippy. Bah!").also { stage++ }
             92 -> npcl(FaceAnim.HALF_ASKING, "So, anyway, do you want to skip the Tutorial?").also { stage = 95 }
-            93 -> npcl(FaceAnim.NOD_NO, "Unfortunately, so far there is no such possibility.").also { stage = 92 }
+            93 -> npcl(FaceAnim.WORRIED, "Unfortunately, so far there is no such possibility.").also { stage = 92 }
             94 -> npcl(FaceAnim.NOD_YES, "Good choice.").also { stage = END_DIALOGUE }
             95 -> sendOptions(player!!, "What would you like to say?", "Yes, please.", "Can I decide later?", "I'll stay here for the Tutorial.").also { stage++ }
             96 ->
