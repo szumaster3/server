@@ -66,31 +66,46 @@ class SlayerPlugin : InteractionListener {
             }
         }
 
+        /*
+         * Handles trapdoor entrance from plague city house to wizards' tower.
+         */
+
         on(TRAPDOOR, IntType.SCENERY, "open") { player, _ ->
             teleport(player, Location(2044, 4649, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
         }
 
-        on(LADDER, IntType.SCENERY, "climb-up") { player, _ ->
-            teleport(player, Location(2543, 3327, 0), TeleportManager.TeleportType.INSTANT)
-            return@on true
-        }
+        /*
+         * Handles stairs lead from the boots of light room.
+         */
 
         on(STAIRS, IntType.SCENERY, "climb-up") { player, _ ->
             ClimbActionHandler.climb(player, null, Location(2649, 9804, 0))
             return@on true
         }
 
-        on(STAIRS_2, IntType.SCENERY, "climb-up") { player, _ ->
+        /*
+         * Handles stairs lead to boots of light room.
+         */
+
+        on(STAIRS_2, IntType.SCENERY, "climb-down") { player, _ ->
             ClimbActionHandler.climb(player, null, Location(2641, 9763, 0))
             return@on true
         }
+
+        /*
+         * Handles enter to mos le harmless cave.
+         */
 
         on(CAVE_ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
             if (!hasRequirement(player, Quests.CABIN_FEVER)) return@on true
             teleport(player, Location(3748, 9373, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
         }
+
+        /*
+         * Handles exit from the mos le harmless cave.
+         */
 
         on(CAVE_EXIT, IntType.SCENERY, "exit") { player, node ->
             val destination = when (node.id) {

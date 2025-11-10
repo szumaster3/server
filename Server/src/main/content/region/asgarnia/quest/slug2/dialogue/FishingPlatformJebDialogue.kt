@@ -1,6 +1,6 @@
 package content.region.asgarnia.quest.slug2.dialogue
 
-import content.region.kandarin.witch.plugin.PlatformHelper
+import content.region.kandarin.witchaven.plugin.PlatformHelper
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

@@ -17,7 +17,7 @@ class DraynorSewerPlugin: InteractionListener {
 
         /*
          * Handles exit from draynor sewers (south).
-         */
+         *
 
         on(Scenery.LADDER_26518, IntType.SCENERY, "climb-up") { player, _ ->
             player.animate(climbAnimation)
@@ -26,10 +26,11 @@ class DraynorSewerPlugin: InteractionListener {
             }
             return@on true
         }
+        */
 
         /*
          * Handles exit from draynor sewers (west).
-         */
+         *
 
         on(Scenery.LADDER_32015, IntType.SCENERY, "climb-up") { player, _ ->
             player.animate(climbAnimation)
@@ -38,6 +39,7 @@ class DraynorSewerPlugin: InteractionListener {
             }
             return@on true
         }
+        */
 
         onUseAnyWith(IntType.NPC, NPCs.RUANTUN_1916) { player, _, with ->
             sendNPCDialogue(player, with.id, "I have no ussse for that...")
