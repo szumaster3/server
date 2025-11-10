@@ -30,6 +30,7 @@ class ImpCatcher : Quest(Quests.IMP_CATCHER, 21, 20, 1, Vars.VARP_QUEST_IMP_CATC
 
             line(player, "I need to collect some items by killing !!Imps??.", line++, allInInventory(player, *beads))
             if (beads.all { inInventory(player, it) }) {
+                line++
                 line(player, "I have collected all the missing beads and need to return", line++)
                 line(player, "them to !!Wizard Mizgog??.", line++)
             } else {
@@ -42,6 +43,7 @@ class ImpCatcher : Quest(Quests.IMP_CATCHER, 21, 20, 1, Vars.VARP_QUEST_IMP_CATC
 
         if(stage == 100) {
             line(player, "I have spoken to Wizard Mizgog.", line++, true)
+            line++
             line(player, "I have collected all the beads.", line++, true)
             line++
             line(player, "Wizard Mizgog thanked me for finding his beads and", line++, true)
