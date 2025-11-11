@@ -1,7 +1,6 @@
 package content.global.activity.mogre
 
 import core.api.*
-import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.Direction
@@ -11,10 +10,10 @@ import shared.consts.Animations
 import shared.consts.Graphics
 import shared.consts.NPCs
 import shared.consts.Sounds
+import core.game.interaction.QueueStrength
 
 /**
  * Represents Skippy NPC for Mogre lore activity.
- * @author szu
  */
 class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
     private val forceChat = arrayOf(
@@ -33,8 +32,8 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
         Location.create(2982, 3196, 0),
     )
 
-    private var ticks = 0
-    private val TICK_INTERVAL = 6
+    private var tickDelay = RandomFunction.random(5)
+    private var nextChatTick = RandomFunction.random(20, 40)
 
     override fun onCreation(self: NPC) {
         self.configureMovementPath(*route)
@@ -45,22 +44,22 @@ class SkippyNPC : NPCBehavior(NPCs.SKIPPY_2795) {
     override fun tick(self: NPC): Boolean {
         if (!self.isWalks && !self.locks.isMovementLocked()) {
             self.locks.lockMovement(RandomFunction.random(4, 6))
+        }
+
+        tickDelay++
+
+        if (tickDelay >= nextChatTick) {
+            tickDelay = 0
+            nextChatTick = RandomFunction.random(20, 40)
 
             if (RandomFunction.roll(2)) {
                 sendChat(self, forceChat.random())
-            }
-        }
-
-        ticks++
-        if (ticks >= TICK_INTERVAL) {
-            ticks = 0
-            if (RandomFunction.roll(3)) {
-                sendChat(self, forceChat.random())
                 handleThrow(self)
             }
+
         }
 
-        return super.tick(self)
+        return true
     }
 
     private fun handleThrow(self: NPC) {

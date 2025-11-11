@@ -58907,20 +58907,6 @@
     ]
   },
   {
-    "default": [
-      {
-        "minAmount": "1",
-        "weight": "1.0",
-        "id": "526",
-        "maxAmount": "1"
-      }
-    ],
-    "charm": [],
-    "ids": "3057,3059,3058,3060,3061,3062,3063,3064,3065,3066,3067",
-    "description": "Champion's Challenge NPC - (Lore activity)",
-    "main": []
-  },
-  {
     "default": [],
     "charm": [],
     "ids": "894",

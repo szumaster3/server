@@ -25,7 +25,7 @@ class SkippyDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.SKIPPY_2795, NPCs.SKIPPY_2796, NPCs.SKIPPY_2797, NPCs.SKIPPY_2798, NPCs.SKIPPY_2799)
 }
 
-private class SkippyDialogueFile : DialogueFile() {
+class SkippyDialogueFile : DialogueFile() {
 
     companion object {
         const val NETTLE_TEA_BOWL = Items.NETTLE_TEA_4239

@@ -166,7 +166,7 @@ public class PrinceAliRescue extends Quest {
      * @param item   the item
      * @return the boolean
      */
-    public static boolean hasItem(final Player player, final Item item) {
+    private static boolean hasItem(final Player player, final Item item) {
         return player.getInventory().containsItem(item);
     }
 

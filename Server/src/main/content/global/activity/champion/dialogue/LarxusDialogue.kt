@@ -1,6 +1,7 @@
 package content.global.activity.champion.dialogue
 
 import content.data.GameAttributes
+import content.global.activity.champion.plugin.ChampionDefinition
 import content.global.activity.champion.plugin.ChampionScrollsDropHandler
 import core.api.*
 import core.game.dialogue.*
@@ -80,12 +81,21 @@ class LarxusDialogueFile(private val challengeStart: Boolean = false) : Dialogue
 
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.LARXUS_3050)
+        val scrollId = ChampionScrollsDropHandler.SCROLLS.firstOrNull { inInventory(player!!, it) }
+        val entry = scrollId?.let { ChampionDefinition.fromScroll(it) }
         if (!challengeStart) return
 
         when (stage) {
             0 -> {
-                val scrollId = ChampionScrollsDropHandler.SCROLLS.firstOrNull { inInventory(player!!, it) }
                 val prefix = "So you want to accept the challenge huh? Well there are some specific rules for these Champion fights. For"
+
+                if (entry?.varbitId != null && getVarbit(player!!, entry.varbitId) == 1) {
+                    removeItem(player!!, scrollId)
+                    npc("You've already defeated this Champion, the challenge is", "void.")
+                    stage = END_DIALOGUE
+                    return
+                }
+
                 val scrollMessage = when (scrollId) {
                     Items.CHAMPION_SCROLL_6798 -> "$prefix this fight you're not allowed to use any Prayer's. Do you still want to proceed?"
                     Items.CHAMPION_SCROLL_6799 -> "$prefix this fight you're only allowed to take Weapons, no other items are allowed. Do you still want to proceed?"
@@ -120,7 +130,7 @@ class LarxusDialogueFile(private val challengeStart: Boolean = false) : Dialogue
             3 -> npcl(FaceAnim.HAPPY, "Your challenger is ready, please go down through the trapdoor when you're ready.").also { stage = 4 }
             4 -> {
                 end()
-                setAttribute(player!!, GameAttributes.ACTIVITY_CHAMPION_CHALLENGE, true)
+                setAttribute(player!!, GameAttributes.ACTIVITY_CHAMPION_CHALLENGE, entry?.scrollId)
             }
         }
     }

@@ -1,7 +1,6 @@
 package content.region.kandarin.baxtorian.dialogue
 
 import content.data.GameAttributes
-import content.region.desert.quest.rescue.PrinceAliRescue.hasItem
 import content.region.kandarin.baxtorian.barbtraining.BarbarianTraining
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -131,7 +130,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> player("I have no more questions at this time.").also { stage++ }
             }
             22 -> {
-                if (!hasItem(player, Item(Items.BARBARIAN_SKILLS_11340)) && freeSlots(player) > 0) {
+                if (!inInventory(player, Items.BARBARIAN_SKILLS_11340) && freeSlots(player) > 0) {
                     npc("I see you have free space and no record of the tasks I", "have set you. Please take this book as a record of your", "progress - between the spirits and your diligence, I", "expect it will always be up to date.")
                     addItem(player, Items.BARBARIAN_SKILLS_11340)
                     stage = 23

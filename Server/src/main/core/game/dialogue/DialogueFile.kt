@@ -159,7 +159,7 @@ abstract class DialogueFile {
      * Displays selectable dialogue topics.
      * @return true if no topics are available, otherwise false.
      */
-    fun showTopics(vararg topics: Topic<*>): Boolean {
+    fun showTopics(vararg topics: Topic<*>, title: String = "Select an Option:"): Boolean {
         val validTopics = ArrayList<String>()
         topics.filter { if (it is IfTopic) it.showCondition else true }.forEach { topic ->
             interpreter!!.activeTopics.add(topic)
@@ -187,7 +187,7 @@ abstract class DialogueFile {
                 return false
             }
             else -> {
-                options(*validTopics.toTypedArray())
+                options(*validTopics.toTypedArray(), title = title)
                 return false
             }
         }
