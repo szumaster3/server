@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome.quest.makinghistory.dialogue
 
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.KingLathasBiohazardDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.KingLathasBiohazardQuestDialogue
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -17,18 +17,42 @@ import shared.consts.Quests
 class KingLathasDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
+        npc = args.getOrNull(0) as? NPC ?: return false
+
         val questStage = getQuestStage(player, Quests.BIOHAZARD)
         val progress = getVarbit(player, MHUtils.PROGRESS)
+
         when {
-            questStage in 16..100 -> end().also { openDialogue(player, KingLathasBiohazardDialogue()) }
-            progress == 3 && inInventory(player, Items.LETTER_6756) -> npcl(FaceAnim.FRIENDLY, "What would you like to talk about?")
-            inInventory(player, Items.LETTER_6757) -> npcl(FaceAnim.FRIENDLY, "Have you taken that letter to Jorral yet?").also { stage = 9 }
-            !inInventory(player, Items.LETTER_6757) -> playerl(FaceAnim.FRIENDLY, "Excuse me sire, but I seem to have lost that letter you gave me.").also { stage = 10 }
+            questStage in 16..100 -> {
+                end()
+                openDialogue(player, KingLathasBiohazardQuestDialogue())
+                return true
+            }
+
+            inInventory(player, Items.LETTER_6757) -> {
+                npcl(FaceAnim.FRIENDLY, "Have you taken that letter to Jorral yet?")
+                stage = 9
+                true
+            }
+
+            !inInventory(player, Items.LETTER_6757) && progress >= 3 -> {
+                playerl(FaceAnim.FRIENDLY, "Excuse me sire, but I seem to have lost that letter you gave me.")
+                stage = 10
+                true
+            }
+
+            progress == 3 && inInventory(player, Items.LETTER_6756) -> {
+                npcl(FaceAnim.FRIENDLY, "What would you like to talk about?")
+                true
+            }
+
             else -> {
-                sendDialogue(player, "The King Lathas is not interested in talking.").also { stage = END_DIALOGUE }
+                end()
+                stage = END_DIALOGUE
+                sendMessage(player, "King Lathas is not interested in talking.")
             }
         }
+
         return true
     }
 

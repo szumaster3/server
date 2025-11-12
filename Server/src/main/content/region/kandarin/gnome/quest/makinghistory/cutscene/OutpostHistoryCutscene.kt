@@ -1,14 +1,16 @@
 package content.region.kandarin.gnome.quest.makinghistory.cutscene
 
-import content.region.kandarin.gnome.quest.makinghistory.dialogue.JorralDialogueExtension
-import core.api.face
-import core.api.openDialogue
-import core.api.runTask
-import core.api.sendDialogue
+import content.region.kandarin.gnome.quest.makinghistory.MHUtils
+import core.api.*
 import core.game.activity.Cutscene
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.FaceAnim
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
+import core.tools.END_DIALOGUE
 import shared.consts.NPCs
+import shared.consts.Quests
 
 class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
 
@@ -82,12 +84,31 @@ class OutpostHistoryCutscene(player: Player) : Cutscene(player) {
             }
 
             12 -> {
-                end().also {
+                setQuestStage(player, Quests.MAKING_HISTORY, 1)
+                setVarbit(player, MHUtils.PROGRESS, 1, true)
+                end {
                     runTask(player, 18) {
-                        openDialogue(player, JorralDialogueExtension())
+                        openDialogue(player, OutpostHistoryDialogue())
                     }
                 }
             }
         }
     }
 }
+
+private class OutpostHistoryDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.JORRAL_2932)
+        when (stage) {
+            0 -> npcl(FaceAnim.HALF_GUILTY, "If all goes well, I hope to be able to turn it into a museum as a monument to the area's history. What do you think?").also { stage++ }
+            1 -> options("Ok, I'll make a stand for history!", "I don't care about some dusty building").also { stage++ }
+            2 -> when (buttonID) {
+                1 -> playerl(FaceAnim.HALF_GUILTY, "OK, I will make a stand for history!").also { stage++ }
+                2 -> playerl(FaceAnim.HALF_GUILTY, "I don't care about some dusty building").also { stage = 4 }
+            }
+            3 -> npcl(FaceAnim.HAPPY, "Oh, thank you so much, you really are my saviour!").also { stage = END_DIALOGUE }
+            4 -> npc("It's doomed. DOOMED!").also { stage = END_DIALOGUE }
+        }
+    }
+}
+

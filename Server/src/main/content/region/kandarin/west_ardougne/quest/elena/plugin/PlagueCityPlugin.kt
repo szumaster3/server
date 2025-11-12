@@ -2,9 +2,9 @@ package content.region.kandarin.west_ardougne.quest.elena.plugin
 
 import content.data.GameAttributes
 import content.region.kandarin.west_ardougne.dialogue.WomanDialogue
-import content.region.kandarin.west_ardougne.west.quest.elena.dialogue.HeadMournerDialogue
-import content.region.kandarin.west_ardougne.west.quest.elena.dialogue.ManRehnisonDialogue
-import content.region.kandarin.west_ardougne.west.quest.elena.dialogue.MournerArdougneDialogue
+import content.region.kandarin.west_ardougne.quest.elena.dialogue.HeadMournerDialogue
+import content.region.kandarin.west_ardougne.quest.elena.dialogue.ManRehnisonDialogue
+import content.region.kandarin.west_ardougne.quest.elena.dialogue.MournerArdougneDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim

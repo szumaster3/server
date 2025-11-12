@@ -85,9 +85,9 @@ class PlayerSaver(val player: Player) {
         player.enchgearManager.save(root)
     }
 
-    // fun saveBoltPouch(root: JsonObject) {
-    //     player.boltPouchManager.save(root)
-    // }
+    fun saveBoltPouch(root: JsonObject) {
+        player.boltPouchManager.save(root)
+    }
 
     fun saveAttributes(root: JsonObject) {
         if (player.gameAttributes.savedAttributes.isNotEmpty()) {

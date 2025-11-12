@@ -1,7 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.plugin
 
 import content.data.GameAttributes
-import content.global.skill.gathering.woodcutting.WoodcuttingPulse
+import content.global.skill.gather.woodcutting.WoodcuttingPulse
 import content.region.fremennik.plugin.LyreTeleport
 import content.region.fremennik.rellekka.dialogue.CouncilWorkerDialogue
 import content.region.fremennik.rellekka.quest.viking.dialogue.FremennikFishermanDialogue

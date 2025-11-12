@@ -26,7 +26,10 @@ class DronDialogue(player: Player? = null) : Dialogue(player) {
                 npcl(FaceAnim.FRIENDLY, "You have your answers, now go away!").also { stage = END_DIALOGUE }
             }
 
-            else -> sendDialogue(player, "Dron seems too busy to talk.").also { stage = END_DIALOGUE }
+            else -> {
+                end()
+                sendMessage(player, "Dron seems too busy to talk.")
+            }
         }
 
         return true

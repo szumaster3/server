@@ -1,8 +1,8 @@
 package content.region.kandarin.west_ardougne.dialogue
 
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.MournerHeadquartersDialogue
-import content.region.kandarin.west_ardougne.west.quest.elena.dialogue.HeadMournerDialogue
-import content.region.kandarin.west_ardougne.west.quest.elena.dialogue.MournerArdougneDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.MournerHeadquartersDialogue
+import content.region.kandarin.west_ardougne.quest.elena.dialogue.HeadMournerDialogue
+import content.region.kandarin.west_ardougne.quest.elena.dialogue.MournerArdougneDialogue
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

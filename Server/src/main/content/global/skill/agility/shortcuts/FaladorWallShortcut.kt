@@ -5,9 +5,7 @@ import core.api.forceMove
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Direction
-import core.game.world.map.Location
 import core.plugin.Initializable
-import shared.consts.Animations
 
 /**
  * Handles the crumbling wall shortcut in Falador.

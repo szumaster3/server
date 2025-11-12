@@ -5,14 +5,9 @@ import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
 import core.api.openNpcShop
 import core.api.isQuestComplete
-import core.api.requireQuest
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.Option
-import core.game.node.Node
-import core.game.node.entity.Entity
-import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
@@ -20,7 +15,6 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Scenery
-import java.util.*
 
 class RellekkaPlugin : InteractionListener, MapArea {
 

@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.diary
 
 import content.data.GameAttributes
-import content.global.plugin.iface.FairyRing
+import content.global.plugins.iface.FairyRing
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.prayer.Bones
 import content.global.travel.CanoePlugin

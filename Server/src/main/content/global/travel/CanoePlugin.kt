@@ -1,6 +1,6 @@
 package content.global.travel
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import core.api.*
 import core.game.interaction.*
 import core.game.node.entity.player.Player

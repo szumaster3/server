@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.quest.anma.plugin
 
-import content.data.items.SkillingTool.Companion.getAxe
+import content.data.skill.SkillingTool.Companion.getAxe
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import core.api.*
 import core.cache.def.impl.ItemDefinition

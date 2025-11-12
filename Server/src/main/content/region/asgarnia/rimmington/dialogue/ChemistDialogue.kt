@@ -1,7 +1,7 @@
 package content.region.asgarnia.rimmington.dialogue
 
 import content.region.asgarnia.falador.diary.ChemistDiaryDialogue
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.ChemistBiohazardDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.ChemistBiohazardQuestDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -47,7 +47,7 @@ class ChemistDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> player("Hi, I need fuel for a lamp.").also { stage = 10 }
                 2 -> {
                     end()
-                    openDialogue(player, ChemistBiohazardDialogue())
+                    openDialogue(player, ChemistBiohazardQuestDialogue())
                 }
                 3 -> player("I have a slightly odd question.").also { stage = 30 }
                 4 -> {

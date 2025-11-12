@@ -1,6 +1,6 @@
 package content.minigame.trawler.plugin
 
-import content.global.skill.gathering.fishing.Fish
+import content.global.skill.gather.fishing.Fish
 import core.game.node.item.Item
 import core.game.node.item.WeightedChanceItem
 import core.tools.RandomFunction

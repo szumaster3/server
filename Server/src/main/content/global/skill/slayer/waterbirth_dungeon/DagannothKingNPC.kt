@@ -1,6 +1,6 @@
 package content.global.skill.slayer.waterbirth_dungeon
 
-import core.api.utils.BossKillCounter
+import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle

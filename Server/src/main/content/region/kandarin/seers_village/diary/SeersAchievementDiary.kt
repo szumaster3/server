@@ -1,7 +1,7 @@
 package content.region.kandarin.seers_village.diary
 
 import content.data.GameAttributes
-import content.global.plugin.iface.FairyRing
+import content.global.plugins.iface.FairyRing
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
 import content.region.kandarin.seers_village.dialogue.ThormacDialogue
 import core.api.*

@@ -1,7 +1,7 @@
 package content.global.skill.slayer
 
 import com.google.gson.JsonObject
-import content.global.plugin.item.equipment.gloves.FOGGlovesListener
+import content.global.plugins.item.equipment.gloves.FOGGlovesListener
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.event.EventHook

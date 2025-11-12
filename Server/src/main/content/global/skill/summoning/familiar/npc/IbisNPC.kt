@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import content.global.skill.gathering.fishing.Fish
+import content.global.skill.gather.fishing.Fish
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager

@@ -1,6 +1,6 @@
 package content.global.dialogue
 
-import content.global.plugin.npc.BankerNPC
+import content.global.plugins.npc.BankerNPC
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

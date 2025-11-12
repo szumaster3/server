@@ -1,7 +1,7 @@
 package content.region.misthalin.draynor.quest.swept.dialogue
 
 import content.data.GameAttributes
-import content.global.plugin.iface.DiangoInterface.Companion.getEligibleItems
+import content.global.plugins.iface.DiangoInterface.Companion.getEligibleItems
 import core.api.getAttribute
 import core.api.inEquipment
 import core.game.dialogue.Dialogue

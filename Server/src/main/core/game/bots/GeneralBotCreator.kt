@@ -1,6 +1,6 @@
 package core.game.bots
 
-import content.global.scripts.Idler
+import content.global.bots.Idler
 import core.Server
 import core.api.TickListener
 import core.api.getWorldTicks

@@ -1,6 +1,6 @@
 package content.region.other.zanaris
 
-import content.global.plugin.iface.FairyRingInterface
+import content.global.plugins.iface.FairyRingInterface
 import content.region.other.keldagrim.dialogue.MagicDoorDialogue
 import core.api.*
 import core.game.global.action.ClimbActionHandler

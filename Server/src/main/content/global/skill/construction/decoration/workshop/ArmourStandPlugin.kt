@@ -1,8 +1,8 @@
 package content.global.skill.construction.decoration.workshop
 
-import content.data.items.BrokenItem
-import content.data.items.BrokenItem.getRepair
-import content.data.items.RepairItem
+import content.data.RepairableItem
+import content.data.RepairableItem.getRepair
+import content.data.skill.RepairableSkillingTool
 import content.region.misthalin.lumbridge.dialogue.BobDialogue
 import core.api.*
 import core.game.dialogue.DialogueFile
@@ -181,7 +181,7 @@ class ArmourStandPlugin : UseWithHandler(
         event ?: return false
         val player = event.player
         val item = event.used.asItem()
-        val repairItem = RepairItem.forId(item.id)
+        val repairItem = RepairableSkillingTool.forId(item.id)
 
         val brokenItem = intArrayOf(
             Items.BROKEN_ARROW_687,
@@ -250,11 +250,11 @@ class ArmourStandPlugin : UseWithHandler(
 
     private fun getRepairType(player: Player, item: Item) {
         val repairType = when (item.id) {
-            Items.BROKEN_ARROW_687 -> BrokenItem.EquipmentType.ARROWS
-            Items.BROKEN_STAFF_689 -> BrokenItem.EquipmentType.STAVES
-            Items.RUSTY_SWORD_686 -> BrokenItem.EquipmentType.SWORDS
-            Items.DAMAGED_ARMOUR_697 -> BrokenItem.EquipmentType.ARMOUR
-            Items.BROKEN_ARMOUR_698 -> BrokenItem.EquipmentType.LEGS
+            Items.BROKEN_ARROW_687 -> RepairableItem.EquipmentType.ARROWS
+            Items.BROKEN_STAFF_689 -> RepairableItem.EquipmentType.STAVES
+            Items.RUSTY_SWORD_686 -> RepairableItem.EquipmentType.SWORDS
+            Items.DAMAGED_ARMOUR_697 -> RepairableItem.EquipmentType.ARMOUR
+            Items.BROKEN_ARMOUR_698 -> RepairableItem.EquipmentType.LEGS
             else -> return
         }
 

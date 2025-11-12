@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.plugin
 
-import content.global.plugin.iface.DiangoInterface
+import content.global.plugins.iface.DiangoInterface
 import content.region.misthalin.draynor.dialogue.TreeGuardDialogue
 import core.api.*
 import core.game.activity.ActivityManager

@@ -2,7 +2,6 @@ package content.region.kandarin.feldip.quest.zogre.plugin
 
 import content.region.kandarin.feldip.quest.zogre.dialogue.*
 import content.region.kandarin.feldip.quest.zogre.npc.ZavisticRarveNPC.Companion.spawnWizard
-import content.region.kandarin.ogre_enclave.zogre.dialogue.*
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

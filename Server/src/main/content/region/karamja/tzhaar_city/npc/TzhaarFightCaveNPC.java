@@ -1,6 +1,6 @@
 package content.region.karamja.tzhaar_city.npc;
 
-import content.global.activity.tzhaar_fightcave.TzhaarFightCavePlugin;
+import content.global.activity.fightcave.TzhaarFightCavePlugin;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;

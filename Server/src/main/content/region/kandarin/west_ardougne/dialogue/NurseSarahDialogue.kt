@@ -22,7 +22,7 @@ class NurseSarahDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         if (isQuestInProgress(player, Quests.BIOHAZARD, 6, 7)) {
             end()
-            openDialogue(player, content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.NurseSarahDialogue())
+            openDialogue(player, NurseSarahDialogue())
             return true
         }
         playerl(FaceAnim.FRIENDLY, "Hello there.")

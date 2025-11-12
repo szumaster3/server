@@ -1,7 +1,7 @@
 package content.region.other.zanaris.quest.lostcity.plugin
 
-import content.data.items.SkillingTool
-import content.global.skill.gathering.woodcutting.WoodcuttingPulse
+import content.data.skill.SkillingTool
+import content.global.skill.gather.woodcutting.WoodcuttingPulse
 import content.region.other.zanaris.quest.lostcity.npc.TreeSpiritNPC
 import core.api.*
 import core.game.dialogue.FaceAnim

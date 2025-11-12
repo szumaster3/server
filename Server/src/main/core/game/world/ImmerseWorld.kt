@@ -1,6 +1,6 @@
 package core.game.world
 
-import content.global.scripts.*
+import content.global.bots.*
 import core.api.StartupListener
 import core.game.bots.CombatBotAssembler
 import core.game.bots.GeneralBotCreator

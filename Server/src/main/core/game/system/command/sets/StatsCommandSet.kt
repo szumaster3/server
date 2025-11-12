@@ -1,13 +1,13 @@
 package core.game.system.command.sets
 
 import content.global.activity.trails.TreasureTrailManager
-import content.global.plugin.iface.BookInterface
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookInterface
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import content.global.skill.slayer.SlayerManager
-import content.global.plugin.item.equipment.WhiteKnightRankManager
+import content.global.plugins.item.equipment.WhiteKnightRankManager
 import core.api.setAttribute
-import core.api.utils.BossKillCounter
+import content.data.BossKillCounter
 import core.api.utils.PlayerStatsCounter
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege

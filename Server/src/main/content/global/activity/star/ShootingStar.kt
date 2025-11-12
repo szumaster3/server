@@ -1,6 +1,6 @@
 package content.global.activity.star
 
-import content.global.scripts.ShootingStarBot
+import content.global.bots.ShootingStarBot
 import core.ServerStore.Companion.getBoolean
 import core.ServerStore.Companion.getInt
 import core.ServerStore.Companion.getString

@@ -1,6 +1,6 @@
 package content.region.island.ape_atoll.dialogue
 
-import content.global.plugin.item.withnpc.ItemsOnZooknockPlugin
+import content.global.plugins.item.withnpc.ItemsOnZooknockPlugin
 import content.region.karamja.quest.mm.cutscene.DungeonPlanCutscene
 import core.api.*
 import core.game.component.Component

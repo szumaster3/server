@@ -1,7 +1,7 @@
 package core.game.node.entity.player;
 
-import content.global.plugin.item.equipment.EquipmentDegrade;
-import content.global.plugin.item.equipment.bolt_pouch.BoltPouchManager;
+import content.global.plugins.item.equipment.EquipmentDegrade;
+import content.global.plugins.item.equipment.bolt_pouch.BoltPouchManager;
 import content.global.skill.construction.HouseManager;
 import content.global.skill.construction.decoration.costumeroom.StorageState;
 import content.global.skill.runecrafting.PouchManager;

@@ -1,7 +1,7 @@
 package content.region.karamja.quest.roots.npc
 
 import content.data.GameAttributes
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import content.region.karamja.quest.roots.BackToMyRootsPlugin
 import core.api.*
 import core.game.node.entity.Entity

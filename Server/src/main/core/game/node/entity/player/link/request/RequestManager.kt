@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link.request
 
-import content.global.scripts.DoublingMoney
+import content.global.bots.DoublingMoney
 import core.game.bots.AIRepository
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld.ticks

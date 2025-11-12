@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue
 
-import content.global.travel.charter_ship.CharterShip
+import content.global.travel.charter.CharterShip
 import core.api.inEquipment
 import core.api.isDiaryComplete
 import core.api.removeItem

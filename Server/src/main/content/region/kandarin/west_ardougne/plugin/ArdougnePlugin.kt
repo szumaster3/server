@@ -1,8 +1,8 @@
 package content.region.kandarin.west_ardougne.plugin
 
-import content.global.travel.charter_ship.CharterShip
-import content.region.kandarin.west_ardougne.east.dialogue.CaptainBarnabyDialogue
+import content.global.travel.charter.CharterShip
 import content.region.kandarin.camelot.quest.grail.dialogue.GalahadDialogue
+import content.region.kandarin.east_ardougne.dialogue.CaptainBarnabyDialogue
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

@@ -1,14 +1,14 @@
 package content.region.kandarin.gnome.quest.makinghistory.book
 
-import content.global.plugin.iface.BookInterface
-import content.global.plugin.iface.BookLine
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookInterface
+import content.global.plugins.iface.BookLine
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import core.game.node.entity.player.Player
 
 class TheMysteriousAdventurer {
     companion object {
-        private val TITLE = "The Mysterious Adventurer"
+        private const val TITLE = "The Mysterious Adventurer"
         private val CONTENTS =
             arrayOf(
                 PageSet(

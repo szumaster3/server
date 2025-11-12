@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link
 
-import content.global.plugin.iface.FairyRing
+import content.global.plugins.iface.FairyRing
 import content.region.kandarin.yanille.quest.itwatchtower.cutscene.EnclaveCutscene
 import core.api.*
 import core.game.dialogue.FaceAnim

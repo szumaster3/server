@@ -1,8 +1,8 @@
 package content.region.karamja
 
-import content.data.items.SkillingTool
-import content.global.skill.gathering.SkillReward
-import content.global.skill.gathering.woodcutting.WoodcuttingNode
+import content.data.skill.SkillingTool
+import content.global.skill.gather.SkillReward
+import content.global.skill.gather.woodcutting.WoodcuttingNode
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler

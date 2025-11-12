@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue
 
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.OmartBiohazardDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.OmartBiohazardQuestDialogue
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
@@ -22,7 +22,7 @@ class OmartDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         val questStage = getQuestStage(player, Quests.BIOHAZARD)
         when (questStage) {
-            in 2..99 -> end().also { openDialogue(player, OmartBiohazardDialogue()) }
+            in 2..99 -> end().also { openDialogue(player, OmartBiohazardQuestDialogue()) }
             100 ->  player("Hello Omart.").also { stage = 3 }
             else -> player("Hello there.")
         }

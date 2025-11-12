@@ -3,7 +3,7 @@ package content.region.wilderness.npc
 import core.api.getPathableRandomLocalCoordinate
 import core.api.playAudio
 import core.api.playGlobalAudio
-import core.api.utils.BossKillCounter
+import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle

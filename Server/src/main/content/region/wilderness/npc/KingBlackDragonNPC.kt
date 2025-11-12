@@ -1,7 +1,7 @@
 package content.region.wilderness.npc
 
 import core.api.calculateDragonFireMaxHit
-import core.api.utils.BossKillCounter
+import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle

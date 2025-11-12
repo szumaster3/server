@@ -11,7 +11,6 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
 import shared.consts.Animations
 import shared.consts.Components
-import shared.consts.Items
 import shared.consts.Sounds
 
 /**

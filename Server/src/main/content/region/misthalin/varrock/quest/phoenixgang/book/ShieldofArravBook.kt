@@ -1,9 +1,9 @@
 package content.region.misthalin.varrock.quest.phoenixgang.book
 
-import content.global.plugin.iface.BookInterface
-import content.global.plugin.iface.BookLine
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookInterface
+import content.global.plugins.iface.BookLine
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import core.api.getQuestStage
 import core.api.setQuestStage
 import core.game.interaction.IntType

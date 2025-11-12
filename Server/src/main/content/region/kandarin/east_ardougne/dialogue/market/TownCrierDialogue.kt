@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
-import content.global.plugin.item.books_and_scrolls.GeneralRuleBook.Companion.openBook
+import content.global.plugins.item.books_and_scrolls.GeneralRuleBook.Companion.openBook
 import core.api.lock
 import core.api.runTask
 import core.api.stopWalk

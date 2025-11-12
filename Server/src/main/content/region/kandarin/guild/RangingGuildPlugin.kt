@@ -41,63 +41,7 @@ import shared.consts.*
 import kotlin.math.floor
 import kotlin.math.max
 
-class RangingGuildTicketExchange : InterfaceListener {
-    override fun defineInterfaceListeners() {
-        onOpen(Components.RANGING_GUILD_TICKET_EXCHANGE_278) { player, _ ->
-            val items = RangingGuildStock.values().map { it.item }
-            player.generateItems(items, Components.RANGING_GUILD_TICKET_EXCHANGE_278, 16, listOf("Buy", "Value"), 3, 6)
-            return@onOpen true
-        }
-
-        on(Components.RANGING_GUILD_TICKET_EXCHANGE_278) { player, _, opcode, _, slot, _ ->
-            val exchange = RangingGuildStock.itemsMap[slot]
-
-            if (exchange == null) {
-                sendMessage(player, "Invalid exchange slot.")
-                return@on true
-            }
-
-            when (opcode) {
-                9 -> {
-                    // Examine item.
-                    sendMessage(player, itemDefinition(exchange.item.id).examine)
-                }
-                155 -> {
-                    // Show value.
-                    sendMessage(player, exchange.value)
-                }
-                196 -> {
-                    // Exchange tickets for item.
-                    val requiredTickets = exchange.tickets
-                    if (freeSlots(player) < 1) {
-                        sendMessage(player, "You don't have enough inventory space.")
-                    } else if (!removeItem(player, Item(Items.ARCHERY_TICKET_1464, requiredTickets))) {
-                        sendMessage(player, "You don't have enough Archery Tickets.")
-                    } else {
-                        player.inventory.add(exchange.item)
-                        sendMessage(player, "You have received ${exchange.item.amount} x ${itemDefinition(exchange.item.id).name}.")
-                    }
-                }
-            }
-            return@on true
-        }
-    }
-}
-
-/**
- * Ticket exchange.
- *
- * @param item      The item to be exchanged.
- * @param tickets   The number of tickets required for the exchange.
- * @param slot      The slot number of the exchange.
- * @param value     The value of the exchange.
- */
-private enum class RangingGuildStock(
-    val item: Item,
-    val tickets: Int,
-    val slot: Int,
-    val value: String,
-) {
+private enum class RangingGuildStock(val item: Item, val tickets: Int, val slot: Int, val value: String) {
     BARB_BOLT_TIPS(Item(Items.BARB_BOLTTIPS_47, 30), 140, 0, "The 30 Barb Boltips cost 140 Archery Tickets."),
     STUDDED_BODY(Item(Items.STUDDED_BODY_1133, 1), 150, 1, "The Studded Body costs 150 Archery Tickets."),
     RUNE_ARROW(Item(Items.RUNE_ARROW_892, 50), 2000, 2, "The 50 Rune Arrows cost 2,000 Archery Tickets."),
@@ -117,7 +61,7 @@ private enum class RangingGuildStock(
     }
 }
 
-class RangingGuildListener : InteractionListener, MapArea {
+class RangingGuildPlugin : InteractionListener, InterfaceListener, MapArea {
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
         return arrayOf(ZoneBorders.forRegion(Regions.RANGING_GUILD_10549))
@@ -223,13 +167,54 @@ class RangingGuildListener : InteractionListener, MapArea {
             return@on true
         }
     }
+
+    override fun defineInterfaceListeners() {
+        onOpen(Components.RANGING_GUILD_TICKET_EXCHANGE_278) { player, _ ->
+            val items = RangingGuildStock.values().map { it.item }
+            player.generateItems(items, Components.RANGING_GUILD_TICKET_EXCHANGE_278, 16, listOf("Buy", "Value"), 3, 6)
+            return@onOpen true
+        }
+
+        on(Components.RANGING_GUILD_TICKET_EXCHANGE_278) { player, _, opcode, _, slot, _ ->
+            val exchange = RangingGuildStock.itemsMap[slot]
+
+            if (exchange == null) {
+                sendMessage(player, "Invalid exchange slot.")
+                return@on true
+            }
+
+            when (opcode) {
+                9 -> {
+                    // Examine item.
+                    sendMessage(player, itemDefinition(exchange.item.id).examine)
+                }
+                155 -> {
+                    // Show value.
+                    sendMessage(player, exchange.value)
+                }
+                196 -> {
+                    // Exchange tickets for item.
+                    val requiredTickets = exchange.tickets
+                    if (freeSlots(player) < 1) {
+                        sendMessage(player, "You don't have enough inventory space.")
+                    } else if (!removeItem(player, Item(Items.ARCHERY_TICKET_1464, requiredTickets))) {
+                        sendMessage(player, "You don't have enough Archery Tickets.")
+                    } else {
+                        player.inventory.add(exchange.item)
+                        sendMessage(player, "You have received ${exchange.item.amount} x ${itemDefinition(exchange.item.id).name}.")
+                    }
+                }
+            }
+            return@on true
+        }
+    }
 }
 
 /**
  * Ranging guild plugin.
  */
 @Initializable
-class RangingGuildPlugin : OptionHandler() {
+private class RangingGuildOptionHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.forId(2514).handlers["option:open"] = this
         SceneryDefinition.forId(2511).handlers["option:climb-up"] = this
@@ -297,7 +282,7 @@ class RangingGuildPlugin : OptionHandler() {
  *
  *  - The dark bow should fire 1 arrow in the Archery Competition, but sound of 2 arrows firing.
  */
-class ArcheryCompetitionPulse(
+private class ArcheryCompetitionPulse(
     private val player: Player,
     private val sceneryId: Scenery,
 ) : Pulse(1, player, sceneryId) {
@@ -396,7 +381,7 @@ class ArcheryCompetitionPulse(
  * Represents the Tribal weapon salesman dialogue.
  */
 @Initializable
-class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+private class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -422,12 +407,11 @@ class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
 }
 
-
 /**
  * Represents the Bow arrow salesman dialogue.
  */
 @Initializable
-class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+private class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -450,12 +434,11 @@ class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
 }
 
-
 /**
  * Represents the Armour salesman dialogue.
  */
 @Initializable
-class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+private class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -543,7 +526,7 @@ class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
  * Represents the Competition judge dialogue.
  */
 @Initializable
-class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
+private class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         if (player.inventory.getAmount(Items.ARCHERY_TICKET_1464) >= 1000 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 1, 7)) {
@@ -768,7 +751,7 @@ class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
  * Represents the Leather worker dialogue.
  */
 @Initializable
-class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
+private class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         player("Hello.")
@@ -798,7 +781,7 @@ class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
  * Represents the Tower advisor dialogue.
  */
 @Initializable
-class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
+private class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -840,7 +823,7 @@ class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
  * Tower archer NPC.
  */
 @Initializable
-class TowerArcherNPC(
+private class TowerArcherNPC(
     id: Int = 0,
     location: Location? = null,
 ) : AbstractNPC(id, location) {

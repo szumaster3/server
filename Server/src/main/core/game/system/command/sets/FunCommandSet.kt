@@ -2,7 +2,7 @@ package core.game.system.command.sets
 
 import com.google.gson.Gson
 import com.google.gson.JsonObject
-import content.global.plugin.item.SpadeDigUtils
+import content.global.plugins.item.SpadeDigUtils
 import content.region.island.tutorial.plugin.CharacterDesign
 import core.api.*
 import core.game.dialogue.DialogueFile

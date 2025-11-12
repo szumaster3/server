@@ -14,7 +14,6 @@ import core.game.node.item.ItemPlugin;
 import core.game.system.config.ItemConfigParser;
 import core.tools.Log;
 import core.tools.StringUtils;
-import shared.consts.Components;
 import shared.consts.Items;
 
 import java.nio.ByteBuffer;

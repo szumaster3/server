@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.museum.plugin
 
 import content.region.misthalin.dig_site.dialogue.GateGuardDialogue
-import content.region.misthalin.varrock.plugin.museum.dialogue.*
+import content.region.misthalin.varrock.museum.dialogue.*
 import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler

@@ -1,9 +1,9 @@
 package core.game.system.command.sets
 
-import content.global.plugin.iface.BookInterface
-import content.global.plugin.iface.BookLine
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookInterface
+import content.global.plugins.iface.BookLine
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import content.global.skill.farming.timers.Compost
 import content.global.skill.farming.timers.CropGrowth
 import content.minigame.trawler.plugin.FishingTrawlerContainer

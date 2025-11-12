@@ -325,10 +325,10 @@ class PlayerSaveParser(val player: Player) {
         player.enchgearManager.parse(headgearData)
     }
 
-    // fun parseBoltPouch() {
-    //     val boltPouchData = saveFile?.getAsJsonArray("bolt_pouch") ?: return
-    //     player.boltPouchManager.parse(boltPouchData)
-    // }
+    fun parseBoltPouch() {
+        val boltPouchData = saveFile?.getAsJsonArray("bolt_pouch") ?: return
+        player.boltPouchManager.parse(boltPouchData)
+    }
 
     fun parseCostumeRoom() {
         val costumeRaw = saveFile?.get("costumeRoom") ?: return

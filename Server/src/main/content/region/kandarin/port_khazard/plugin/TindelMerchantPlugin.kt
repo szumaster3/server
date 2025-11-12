@@ -1,6 +1,6 @@
 package content.region.kandarin.port_khazard.plugin
 
-import content.data.items.BrokenItem
+import content.data.RepairableItem
 import content.region.kandarin.port_khazard.dialogue.TindelMerchantDialogue
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -63,12 +63,12 @@ class TindelMerchantPlugin : InteractionListener {
 
             addDialogueAction(player) { _, _ ->
                 val equipmentType = when (weaponType) {
-                    SWORD -> BrokenItem.EquipmentType.SWORDS
-                    SCIMITAR -> BrokenItem.EquipmentType.SCIMITARS
+                    SWORD -> RepairableItem.EquipmentType.SWORDS
+                    SCIMITAR -> RepairableItem.EquipmentType.SCIMITARS
                     else -> return@addDialogueAction
                 }
 
-                val repaired = BrokenItem.getRepair(equipmentType) ?: return@addDialogueAction
+                val repaired = RepairableItem.getRepair(equipmentType) ?: return@addDialogueAction
 
                 removeItem(player, Item(COINS, COINS_REQUIRED))
                 removeItem(player, Item(weaponType))

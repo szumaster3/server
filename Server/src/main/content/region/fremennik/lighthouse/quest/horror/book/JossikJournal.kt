@@ -1,9 +1,9 @@
 package content.region.fremennik.lighthouse.quest.horror.book
 
-import content.global.plugin.iface.BookInterface
-import content.global.plugin.iface.BookLine
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookInterface
+import content.global.plugins.iface.BookLine
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player

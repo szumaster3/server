@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.dialogue
 
-import content.global.skill.gathering.fishing.Fish
-import content.global.skill.gathering.fishing.Fish.Companion.fishMap
+import content.global.skill.gather.fishing.Fish
+import content.global.skill.gather.fishing.Fish.Companion.fishMap
 import core.api.anyInEquipment
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

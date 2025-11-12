@@ -1,6 +1,6 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.dialogue
 
-import content.region.tirannwn.lletya.quest.roving_elves.RovingElves
+import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

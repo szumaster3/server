@@ -1,6 +1,6 @@
 package content.region.kandarin.west_ardougne.quest.elena.dialogue
 
-import content.region.kandarin.west_ardougne.west.quest.elena.plugin.PlagueCityPlugin
+import content.region.kandarin.west_ardougne.quest.elena.plugin.PlagueCityPlugin
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

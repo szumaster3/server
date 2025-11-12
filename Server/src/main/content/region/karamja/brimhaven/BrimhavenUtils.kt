@@ -1,6 +1,6 @@
 package content.region.karamja.brimhaven
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import content.global.skill.agility.AgilityHandler
 import core.api.*
 import core.game.global.action.ClimbActionHandler

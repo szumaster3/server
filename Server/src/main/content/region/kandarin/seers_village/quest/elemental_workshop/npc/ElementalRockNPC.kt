@@ -1,6 +1,6 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop.npc
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import core.api.getTool
 import core.api.sendDialogue
 import core.game.interaction.IntType

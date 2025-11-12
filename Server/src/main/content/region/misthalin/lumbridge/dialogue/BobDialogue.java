@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.dialogue;
 
-import content.data.items.RepairItem;
-import content.global.plugin.item.equipment.BarrowsEquipmentRegister;
+import content.data.skill.RepairableSkillingTool;
+import content.global.plugins.item.equipment.BarrowsEquipmentRegister;
 import core.game.dialogue.Dialogue;
 import core.game.dialogue.FaceAnim;
 import core.game.node.entity.npc.NPC;
@@ -33,7 +33,7 @@ public final class BobDialogue extends Dialogue {
 
     private Item item;
 
-    private static RepairItem repairitem = null;
+    private static RepairableSkillingTool repairitem = null;
 
     private final int level = 1;
 
@@ -288,7 +288,7 @@ public final class BobDialogue extends Dialogue {
             wrong = (boolean) args[2];
         }
         if (args[3] != null) {
-            repairitem = RepairItem.forId((int) args[3]);
+            repairitem = RepairableSkillingTool.forId((int) args[3]);
             itemId = (int) args[3];
         }
         if (args[4] != null) {

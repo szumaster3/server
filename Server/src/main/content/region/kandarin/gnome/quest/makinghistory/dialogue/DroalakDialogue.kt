@@ -15,62 +15,75 @@ import shared.consts.Quests
 @Initializable
 class DroalakDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun open(vararg args: Any?): Boolean = when {
-        !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> {
-            npcl(FaceAnim.FRIENDLY, "wooo wooo")
-            stage = 31
-            true
-        }
+    override fun open(vararg args: Any?): Boolean {
+        val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
+        val droalakProgress = getVarbit(player, MHUtils.DROALAK_PROGRESS)
 
-        inEquipment(player, Items.GHOSTSPEAK_AMULET_552) && getQuestStage(player, Quests.MAKING_HISTORY) < 1 -> {
-            npcl(FaceAnim.FRIENDLY, "Please, leave me alone.")
-            stage = 24
-            true
-        }
-
-        getVarbit(player, MHUtils.DROALAK_PROGRESS) == 0 || getQuestStage(player, Quests.MAKING_HISTORY) >= 1 -> {
-            playerl(FaceAnim.FRIENDLY, "Hello. Are you Droalak?")
-            stage = 1
-            true
-        }
-
-        !inInventory(player, Items.SAPPHIRE_AMULET_1694) && getVarbit(player, MHUtils.DROALAK_PROGRESS) == 2 -> {
-            playerl(FaceAnim.FRIENDLY, "What do you want me to do again?")
-            stage = 17
-            true
-        }
-
-        inInventory(player, Items.SAPPHIRE_AMULET_1694) && getVarbit(player, MHUtils.DROALAK_PROGRESS) == 2 -> {
-            playerl(FaceAnim.FRIENDLY, "I have a sapphire amulet!")
-            stage = 16
-            true
-        }
-
-        getVarbit(player, MHUtils.DROALAK_PROGRESS) == 4 -> {
-            playerl(FaceAnim.FRIENDLY, "I've given her the amulet. She was very pleased and said she just wanted to know you still cared.")
-            stage = 19
-            true
-        }
-
-        getVarbit(player, MHUtils.DROALAK_PROGRESS) == 5 -> {
-            val dialogueText = if (hasAnItem(player, Items.SCROLL_6758).exists()) {
-                "Take that scroll to Jorral in the outpost."
-            } else {
-                "Thanks for the scroll, but I seem to have lost it."
+        return when {
+            !inEquipment(player, Items.GHOSTSPEAK_AMULET_552) -> {
+                npcl(FaceAnim.FRIENDLY, "wooo wooo")
+                stage = 31
+                true
             }
-            npcl(FaceAnim.FRIENDLY, dialogueText)
-            stage = END_DIALOGUE.takeIf { dialogueText.startsWith("Take") } ?: 25
-            true
-        }
 
-        getVarbit(player, MHUtils.DROALAK_PROGRESS) == 6 -> {
-            playerl(FaceAnim.FRIENDLY, "I have delivered the scroll; you can rest in peace now.")
-            stage = 27
-            true
-        }
+            inEquipment(player, Items.GHOSTSPEAK_AMULET_552) && questStage < 1 -> {
+                npcl(FaceAnim.FRIENDLY, "Please, leave me alone.")
+                stage = 24
+                true
+            }
 
-        else -> true
+            droalakProgress == 0 -> {
+                playerl(FaceAnim.FRIENDLY, "Hello. Are you Droalak?")
+                stage = 1
+                true
+            }
+
+            droalakProgress == 2 && !inInventory(player, Items.SAPPHIRE_AMULET_1694) -> {
+                playerl(FaceAnim.FRIENDLY, "What do you want me to do again?")
+                stage = 17
+                true
+            }
+
+            droalakProgress == 2 && inInventory(player, Items.SAPPHIRE_AMULET_1694) -> {
+                playerl(FaceAnim.FRIENDLY, "I have a sapphire amulet!")
+                stage = 16
+                true
+            }
+
+            droalakProgress == 4 -> {
+                playerl(FaceAnim.FRIENDLY, "I've given her the amulet. She was very pleased and said she just wanted to know you still cared.")
+                stage = 19
+                true
+            }
+
+            droalakProgress == 5 -> {
+                val hasScroll = hasAnItem(player, Items.SCROLL_6758).exists()
+                val dialogueText = if (hasScroll)
+                    "Take that scroll to Jorral in the outpost."
+                else
+                    "Thanks for the scroll, but I seem to have lost it."
+
+                npcl(FaceAnim.FRIENDLY, dialogueText)
+                stage = if (hasScroll) END_DIALOGUE else 25
+                true
+            }
+
+            droalakProgress == 6 -> {
+                playerl(FaceAnim.FRIENDLY, "I have delivered the scroll; you can rest in peace now.")
+                stage = 27
+                true
+            }
+
+            questStage >= 1 -> {
+                playerl(FaceAnim.FRIENDLY, "Hello. Are you Droalak?")
+                stage = 1
+                true
+            }
+
+            else -> true
+        }
     }
+
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {

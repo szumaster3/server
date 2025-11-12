@@ -1,8 +1,8 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop.plugin
 
-import content.global.plugin.iface.BookLine
-import content.global.plugin.iface.Page
-import content.global.plugin.iface.PageSet
+import content.global.plugins.iface.BookLine
+import content.global.plugins.iface.Page
+import content.global.plugins.iface.PageSet
 import core.api.getVarbit
 import core.game.node.entity.player.Player
 import shared.consts.Quests

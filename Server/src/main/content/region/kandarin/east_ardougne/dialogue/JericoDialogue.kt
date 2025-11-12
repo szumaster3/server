@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue
 
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.JericoBiohazardDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.JericoBiohazardQuestDialogue
 import core.api.isQuestComplete
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
@@ -22,7 +22,7 @@ class JericoDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         if (!isQuestComplete(player, Quests.BIOHAZARD)) {
             end()
-            openDialogue(player, JericoBiohazardDialogue())
+            openDialogue(player, JericoBiohazardQuestDialogue())
         } else {
             npcl(FaceAnim.SUSPICIOUS, "Hello.")
         }

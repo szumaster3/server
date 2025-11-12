@@ -1,6 +1,6 @@
 package content.region.kandarin.baxtorian.barbarian_training
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import content.global.skill.firemaking.Log
 import core.api.sendDialogue
 import core.api.sendDialogueLines

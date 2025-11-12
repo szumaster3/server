@@ -1,8 +1,8 @@
 package content.region.kandarin.gnome.dialogue
 
-import content.minigame.gnomecook.plugin.GC_BASE_ATTRIBUTE
-import content.minigame.gnomecook.plugin.GC_TUT_FIN
-import content.minigame.gnomecook.plugin.GC_TUT_PROG
+import content.minigame.gnomecooking.plugin.GC_BASE_ATTRIBUTE
+import content.minigame.gnomecooking.plugin.GC_TUT_FIN
+import content.minigame.gnomecooking.plugin.GC_TUT_PROG
 import core.api.inInventory
 import core.api.sendDialogue
 import core.api.setAttribute

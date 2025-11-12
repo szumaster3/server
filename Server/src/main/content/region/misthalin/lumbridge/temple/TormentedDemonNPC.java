@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.temple;
 
-import core.api.utils.BossKillCounter;
+import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;

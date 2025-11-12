@@ -1,8 +1,8 @@
 package content.region.island.tutorial.plugin
 
-import content.global.skill.gathering.fishing.FishingSpot
-import content.global.skill.gathering.mining.MiningNode
-import content.global.skill.gathering.woodcutting.WoodcuttingNode
+import content.global.skill.gather.fishing.FishingSpot
+import content.global.skill.gather.mining.MiningNode
+import content.global.skill.gather.woodcutting.WoodcuttingNode
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.event.*

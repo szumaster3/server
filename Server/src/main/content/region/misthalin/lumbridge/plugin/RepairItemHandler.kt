@@ -1,6 +1,6 @@
 package content.region.misthalin.lumbridge.plugin
 
-import content.data.items.RepairItem
+import content.data.skill.RepairableSkillingTool
 import content.region.misthalin.lumbridge.dialogue.BobDialogue
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
@@ -22,7 +22,7 @@ class RepairItemHandler : UseWithHandler() {
 
     override fun handle(event: NodeUsageEvent): Boolean {
         val player = event.player
-        val repairItem = RepairItem.forId(event.usedItem.id)
+        val repairItem = RepairableSkillingTool.forId(event.usedItem.id)
 
         if (repairItem == null && !isBarrowsItem(event.usedItem.id)) {
             player.dialogueInterpreter.open(NPCs.BOB_519, event.usedWith, true, true, null)

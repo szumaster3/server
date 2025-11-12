@@ -1,7 +1,7 @@
 package content.region.karamja.quest.roots
 
 import content.data.GameAttributes
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import content.region.karamja.quest.roots.npc.HoracioNPC
 import content.region.karamja.quest.roots.npc.WildJadeVineNPC
 import core.api.*

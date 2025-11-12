@@ -2,7 +2,7 @@ package core
 
 import TestUtils
 //import content.global.skill.gathering.GatheringPlugin
-import content.global.skill.gathering.woodcutting.WoodcuttingPlugin
+import content.global.skill.gather.woodcutting.WoodcuttingPlugin
 import core.api.log
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.*

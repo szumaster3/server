@@ -2,7 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.data.consumables.Consumables
 import content.global.skill.cooking.CookableItems
-import content.global.skill.gathering.fishing.Fish
+import content.global.skill.gather.fishing.Fish
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.game.consumable.Consumable

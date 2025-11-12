@@ -1,6 +1,6 @@
 package content.region.asgarnia.port_sarim.dialogue
 
-import content.global.travel.charter_ship.CharterShip
+import content.global.travel.charter.CharterShip
 import core.api.sendDialogue
 import core.cache.def.impl.ItemDefinition
 import core.game.dialogue.Dialogue

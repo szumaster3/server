@@ -22,31 +22,53 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val progress = getVarbit(player, MHUtils.PROGRESS)
+        val dronProgress = getVarbit(player, MHUtils.DRON_PROGRESS)
 
-        if (!checkRequirements(player) && questStage == 0) {
-            sendDialogue(player, "Jorral seems too busy to talk.")
-            sendMessage(player, "You do not meet the requirements to start this quest.")
-            return false
+        if (questStage == 0) {
+            return when {
+                !checkRequirements(player) -> {
+                    sendDialogue(player, "Jorral seems too busy to talk.")
+                    sendMessage(player, "You do not meet the requirements to start this quest.")
+                    false
+                }
+                else -> {
+                    player("Hi there.")
+                    stage = 1
+                    true
+                }
+            }
         }
 
-        if (checkRequirements(player) && questStage == 0) {
-            player("Hi there.")
-            stage = 1
-            return true
-        }
         when {
             progress == 2 -> stage = 39
-            getVarbit(player, MHUtils.DRON_PROGRESS) == 4 -> stage = 62
+            dronProgress == 4 -> stage = 62
             inInventory(player, Items.CHEST_6759) -> stage = 44
             inInventory(player, Items.JOURNAL_6755) -> stage = 48
             inInventory(player, Items.SCROLL_6758) -> stage = 57
             !inInventory(player, Items.LETTER_6756) -> stage = 85
-            progress == 3 -> player("Hi there.").also { stage = 73 }
-            inInventory(player, Items.LETTER_6756) && questStage >= 1 -> npcl(FaceAnim.HALF_ASKING, "Have you taken that letter to King Lathas in Ardougne yet?").also { stage = 400 }
-            inInventory(player, Items.LETTER_6757) -> playerl(FaceAnim.FRIENDLY, "I've been to see the king and he gave me this letter.").also { stage = 88 }
-            isQuestComplete(player, Quests.MAKING_HISTORY) -> options("How's the outpost?", "Anything else I can help you with?").also { stage = 94 }
-            else -> sendDialogue(player, "Jorral seems too busy to talk.")
+            progress == 3 -> {
+                player("Hi there.")
+                stage = 73
+            }
+            inInventory(player, Items.LETTER_6756) && questStage >= 1 -> {
+                npcl(FaceAnim.HALF_ASKING, "Have you taken that letter to King Lathas in Ardougne yet?")
+                stage = 400
+            }
+            inInventory(player, Items.LETTER_6757) -> {
+                playerl(FaceAnim.FRIENDLY, "I've been to see the king and he gave me this letter.")
+                stage = 88
+            }
+            isQuestComplete(player, Quests.MAKING_HISTORY) -> {
+                options("How's the outpost?", "Anything else I can help you with?")
+                stage = 94
+            }
+            else -> {
+                end()
+                stage = END_DIALOGUE
+                sendMessage(player, "Jorral seems too busy to talk.")
+            }
         }
+
         return true
     }
 
@@ -232,38 +254,4 @@ class JorralDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(NPCs.JORRAL_2932)
 
-}
-
-class JorralDialogueExtension : DialogueFile() {
-    override fun handle(
-        componentID: Int,
-        buttonID: Int,
-    ) {
-        npc = NPC(NPCs.JORRAL_2932)
-        when (stage) {
-            0 -> npcl(
-                FaceAnim.HALF_GUILTY,
-                "If all goes well, I hope to be able to turn it into a museum as a monument to the area's history. What do you think?",
-            ).also { stage++ }
-
-            1 -> options(
-                "Ok, I'll make a stand for history!",
-                "I don't care about some dusty building",
-            ).also { stage++ }
-
-            2 -> when (buttonID) {
-                1 -> playerl(FaceAnim.HALF_GUILTY, "OK, I will make a stand for history!").also { stage++ }
-                2 -> playerl(FaceAnim.HALF_GUILTY, "I don't care about some dusty building").also { stage = 4 }
-            }
-
-            3 -> npcl(FaceAnim.HAPPY, "Oh, thank you so much, you really are my saviour!").also {
-                setQuestStage(player!!, Quests.MAKING_HISTORY, 1)
-                setVarbit(player!!, MHUtils.PROGRESS, 1, true)
-                updateQuestTab(player!!)
-                stage = END_DIALOGUE
-            }
-
-            4 -> npc("It's doomed. DOOMED!").also { stage = END_DIALOGUE }
-        }
-    }
 }

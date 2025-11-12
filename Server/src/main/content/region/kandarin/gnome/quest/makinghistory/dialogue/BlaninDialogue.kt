@@ -1,10 +1,7 @@
 package content.region.kandarin.gnome.quest.makinghistory.dialogue
 
 import content.region.kandarin.gnome.quest.makinghistory.MHUtils
-import core.api.getQuestStage
-import core.api.getVarbit
-import core.api.sendDialogue
-import core.api.setVarbit
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
@@ -19,13 +16,29 @@ class BlaninDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         val questStage = getQuestStage(player, Quests.MAKING_HISTORY)
         val dronProgress = getVarbit(player, MHUtils.DRON_PROGRESS)
+
         when {
+            dronProgress == 2 -> {
+                playerl(FaceAnim.FRIENDLY, "Excuse me.")
+                stage = 13
+            }
+            dronProgress == 4 -> {
+                playerl(FaceAnim.FRIENDLY, "That's one less thing to worry about.")
+                stage = 20
+            }
+
             questStage < 1 -> playerl(FaceAnim.FRIENDLY, "Excuse me.")
-            questStage >= 1 -> playerl(FaceAnim.FRIENDLY, "Hello there. Are you the brother of Dron?").also { stage = 1 }
-            dronProgress == 2 -> playerl(FaceAnim.FRIENDLY, "Excuse me.").also { stage = 13 }
-            dronProgress == 4 -> playerl(FaceAnim.FRIENDLY, "That's one less thing to worry about.").also { stage = 20 }
-            else -> sendDialogue(player, "Blanin seems too busy to talk.")
+            questStage >= 1 -> {
+                playerl(FaceAnim.FRIENDLY, "Hello there. Are you the brother of Dron?")
+                stage = 1
+            }
+
+            else -> {
+                end()
+                sendMessage(player, "Blanin seems too busy to talk.")
+            }
         }
+
         return true
     }
 

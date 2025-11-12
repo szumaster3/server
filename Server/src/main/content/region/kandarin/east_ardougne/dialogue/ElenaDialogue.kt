@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue
 
-import content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.ElenaBiohazardDialogue
+import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.ElenaBiohazardQuestDialogue
 import core.api.isQuestComplete
 import core.api.openDialogue
 import core.game.dialogue.Dialogue
@@ -22,7 +22,7 @@ class ElenaDialogue(player: Player? = null) : Dialogue(player) {
         npc = args[0] as NPC
         if (isQuestComplete(player, Quests.PLAGUE_CITY)){
             end()
-            openDialogue(player, ElenaBiohazardDialogue())
+            openDialogue(player, ElenaBiohazardQuestDialogue())
         } else {
             npc("Hello Elena.")
         }

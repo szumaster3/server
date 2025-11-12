@@ -1,6 +1,7 @@
 package content.region.misthalin.draynor.dialogue
 
 import content.region.desert.quest.rescue.dialogue.NedDialogueFile
+import content.region.misthalin.lumbridge.diary.dialogue.NedDiaryDialogue
 import content.region.misthalin.varrock.quest.dragon.dialogue.NedDialogue
 import core.api.*
 import core.game.dialogue.Dialogue

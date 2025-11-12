@@ -1,6 +1,6 @@
 package content.region.tirannwn.isafdar.lletya.quest.roving_elves.npc
 
-import content.region.tirannwn.lletya.quest.roving_elves.RovingElves
+import content.region.tirannwn.isafdar.lletya.quest.roving_elves.RovingElves
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node

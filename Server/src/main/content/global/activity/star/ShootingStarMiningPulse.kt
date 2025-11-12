@@ -1,6 +1,6 @@
 package content.global.activity.star
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse

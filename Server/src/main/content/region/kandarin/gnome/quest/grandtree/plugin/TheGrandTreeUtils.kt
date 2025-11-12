@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome.quest.grandtree.plugin
 
-import content.global.plugin.iface.ScrollLine
+import content.global.plugins.iface.ScrollLine
 import content.region.kandarin.gnome.quest.grandtree.dialogue.FemiCartDialogueFile
 import core.api.*
 import core.game.node.entity.player.Player

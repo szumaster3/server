@@ -1,6 +1,6 @@
 package core.game.system.command.sets
 
-import content.data.items.ChargedItem
+import content.data.ChargedItem
 import core.api.EquipmentSlot
 import core.api.runTask
 import core.api.sendDialogue

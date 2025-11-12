@@ -1,6 +1,6 @@
 package core.game.interaction
 
-import content.global.plugin.item.SpadeDigUtils
+import content.global.plugins.item.SpadeDigUtils
 import core.api.ContentInterface
 import core.game.node.Node
 import core.game.node.entity.Entity

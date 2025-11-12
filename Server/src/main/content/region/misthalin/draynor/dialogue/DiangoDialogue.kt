@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.dialogue
 
-import content.global.plugin.iface.DiangoInterface
+import content.global.plugins.iface.DiangoInterface
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

@@ -1,7 +1,7 @@
 package core.game.system.timer.impl
 
 import com.google.gson.JsonObject
-import content.global.plugin.item.InoculationBracePlugin
+import content.global.plugins.item.InoculationBracePlugin
 import core.api.hasTimerActive
 import core.api.playAudio
 import core.api.removeTimer

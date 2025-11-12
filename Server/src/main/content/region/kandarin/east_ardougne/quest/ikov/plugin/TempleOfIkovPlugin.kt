@@ -1,7 +1,7 @@
 package content.region.kandarin.east_ardougne.quest.ikov.plugin
 
 import content.data.GameAttributes
-import content.region.kandarin.west_ardougne.east.quest.ikov.npc.FireWarriorOfLesarkusNPC
+import content.region.kandarin.east_ardougne.quest.ikov.npc.FireWarriorOfLesarkusNPC
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.PickupHandler

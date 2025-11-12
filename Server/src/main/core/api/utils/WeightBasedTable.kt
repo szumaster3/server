@@ -3,7 +3,7 @@ package core.api.utils
 import content.data.tables.*
 import content.global.activity.trails.ClueLevel
 import content.global.activity.trails.ClueScroll
-import content.global.plugin.item.equipment.gloves.FOGGlovesListener
+import content.global.plugins.item.equipment.gloves.FOGGlovesListener
 import core.api.inEquipment
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.Entity

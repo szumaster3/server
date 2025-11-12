@@ -1,7 +1,7 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.plugin
 
 import content.data.GameAttributes
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType

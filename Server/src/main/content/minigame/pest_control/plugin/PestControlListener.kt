@@ -1,6 +1,6 @@
 package content.minigame.pest_control.plugin
 
-import content.global.travel.charter_ship.CharterShip
+import content.global.travel.charter.CharterShip
 import content.minigame.pest_control.npc.*
 import core.api.*
 import core.cache.def.impl.NPCDefinition

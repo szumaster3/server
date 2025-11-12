@@ -25,14 +25,19 @@ class MelinaDialogue(player: Player? = null) : Dialogue(player) {
         }
 
         if (questStage >= 1 && inInventory(player, Items.SAPPHIRE_AMULET_1694) && droalakProgress == 2) {
-            playerl(FaceAnim.FRIENDLY, "If you don't mind me asking, are you Melina?").also { stage = 4 }
+            playerl(FaceAnim.FRIENDLY, "If you don't mind me asking, are you Melina?")
+            stage = 4
             return true
         }
 
-        if (questStage >= 1) {
-            playerl(FaceAnim.FRIENDLY, "Hi.").also { stage = 1 }
-        } else {
-            npcl(FaceAnim.HALF_GUILTY, "Leave me be.").also { stage = END_DIALOGUE }
+        else if (questStage >= 1) {
+            playerl(FaceAnim.FRIENDLY, "Hi.")
+            stage = 1
+        }
+
+        else {
+            npcl(FaceAnim.HALF_GUILTY, "Leave me be.")
+            stage = END_DIALOGUE
         }
 
         return true

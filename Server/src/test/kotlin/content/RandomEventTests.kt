@@ -1,8 +1,8 @@
 package content
 
 import TestUtils
-import content.global.random_events.RandomEventNPC
-import content.global.random_events.RandomEvents
+import content.global.random.RandomEventNPC
+import content.global.random.RandomEvents
 import core.api.*
 import core.game.system.timer.impl.AntiMacro
 import core.game.world.map.Location

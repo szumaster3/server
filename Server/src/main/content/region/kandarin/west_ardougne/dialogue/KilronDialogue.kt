@@ -26,7 +26,7 @@ class KilronDialogue(player: Player? = null) : Dialogue(player) {
 
             isQuestInProgress(player, Quests.BIOHAZARD, 1, 99) -> {
                 end()
-                openDialogue(player, content.region.kandarin.west_ardougne.east.quest.biohazard.dialogue.KilronDialogue())
+                openDialogue(player, KilronDialogue())
             }
 
             else -> npc("Hello.").also { stage = END_DIALOGUE }

@@ -1,6 +1,6 @@
 package content.region.asgarnia.white_wolf_mountain
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import core.api.*
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength

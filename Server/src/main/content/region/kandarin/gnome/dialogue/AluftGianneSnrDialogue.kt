@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome.dialogue
 
-import content.minigame.gnomecook.plugin.*
+import content.minigame.gnomecooking.plugin.*
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

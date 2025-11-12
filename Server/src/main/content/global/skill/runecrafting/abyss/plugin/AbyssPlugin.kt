@@ -1,6 +1,6 @@
 package content.global.skill.runecrafting.abyss.plugin
 
-import content.data.items.SkillingTool
+import content.data.skill.SkillingTool
 import content.global.skill.runecrafting.Altar
 import content.global.skill.runecrafting.abyss.dialogue.DarkMageDialogue
 import content.global.skill.runecrafting.abyss.dialogue.MageOfZamorakDialogue
