@@ -8,6 +8,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.MapZone
 import shared.consts.Items
+import shared.consts.Regions
 
 /**
  * Represents the karamja zone area.
@@ -39,29 +40,29 @@ class KaramjaZone : MapZone("karamja", true) {
          * Represents the region ids.
          */
         private val REGIONS = intArrayOf(
-            11309,
-            11054,
-            11566,
-            11565,
-            11567,
-            11568,
-            11053,
-            11821,
-            11055,
-            11057,
-            11569,
-            11822,
-            11823,
-            11310,
-            11311,
-            11312,
-            11313,
-            11314,
-            11056,
-            11057,
-            11058,
-            10802,
-            10801
+            Regions.KARAMJA_11309,
+            Regions.KARAMJA_11054,
+            Regions.KARAMJA_11566,
+            Regions.KARAMJA_11565,
+            Regions.KARAMJA_11567,
+            Regions.KARAMJA_11568,
+            Regions.KARAMJA_11053,
+            Regions.KARAMJA_11821,
+            Regions.KARAMJA_11055,
+            Regions.KARAMJA_11057,
+            Regions.KARAMJA_11569,
+            Regions.KARAMJA_11822,
+            Regions.KARAMJA_11823,
+            Regions.KARAMJA_11310,
+            Regions.KARAMJA_11311,
+            Regions.KARAMJA_11312,
+            Regions.KARAMJA_11313,
+            Regions.KARAMJA_11314,
+            Regions.KARAMJA_11056,
+            Regions.KARAMJA_11057,
+            Regions.KARAMJA_11058,
+            Regions.KARAMJA_10802,
+            Regions.KARAMJA_10801
         )
 
         /**
