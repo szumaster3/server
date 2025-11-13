@@ -33,6 +33,7 @@ import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
+import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.END_DIALOGUE
@@ -219,6 +220,16 @@ private class RangingGuildOptionHandler : OptionHandler() {
         SceneryDefinition.forId(2514).handlers["option:open"] = this
         SceneryDefinition.forId(2511).handlers["option:climb-up"] = this
         SceneryDefinition.forId(2512).handlers["option:climb-down"] = this
+
+        ClassScanner.definePlugins(
+            TribalWeaponSalesmanDialogue(),
+            BowArrowSalesmanDialogue(),
+            ArmourSalesmanDialogue(),
+            CompetitionJudgeDialogue(),
+            LeatherWorkerDialogue(),
+            TowerAdvisorDialogue(),
+            TowerArcherNPC(),
+        )
         return this
     }
 
@@ -274,6 +285,463 @@ private class RangingGuildOptionHandler : OptionHandler() {
             if (n.getId() == 2513) return Location.create(2673, 3420, 0)
         }
         return null
+    }
+
+
+    /**
+     * Represents the Tribal weapon salesman dialogue.
+     */
+    inner class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            player("Hello there.")
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc("Greetings, traveller. Are you interested in any throwing", "weapons?").also { stage++ }
+                1 -> options("Yes I am.", "Not really.").also { stage++ }
+                2 -> when (buttonId) {
+                    1 -> player("Yes I am.").also { stage++ }
+                    2 -> player("Not really.").also { stage += 3 }
+                }
+                3 -> npc("That is a good thing.").also { stage++ }
+                4 -> end().also { openNpcShop(player, npc.id) }
+                5 -> npc("No bother to me.").also { stage = END_DIALOGUE }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
+    }
+
+    /**
+     * Represents the Bow arrow salesman dialogue.
+     */
+    inner class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            player("Hello.").also { stage = 0 }
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc("A fair day, traveller. Would you like to see my wares?").also { stage++ }
+                1 -> options("Yes please.", "No thanks.").also { stage++ }
+                2 -> when (buttonId) {
+                    1 -> end().also { openNpcShop(player, npc.id) }
+                    2 -> end()
+                }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
+    }
+
+    /**
+     * Represents the Armour salesman dialogue.
+     */
+    inner class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            player("Good day to you.")
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc("And to you. Can I help you?").also { stage++ }
+                1 -> if (isMaster(player, Skills.RANGE)) {
+                    options("What do you do here?", "I'd like to see what you sell.", "Can I buy a Skillcape of Range?", "I've seen enough, thanks.").also { stage = 100 }
+                } else {
+                    options("What do you do here?", "I'd like to see what you sell.", "I've seen enough, thanks.").also { stage++ }
+                }
+
+                2 -> when (buttonId) {
+                    1 -> player("What do you do here?").also { stage++ }
+                    2 -> player("I'd like to see what you sell.").also { stage = 20 }
+                    3 -> player("I've seen enough, thanks.").also { stage = 30 }
+                }
+                10 -> npc("I am a supplier of leather armours and accessories. Ask and I will tell you what I know.").also { stage++ }
+                11 -> options("Tell me about your armours.", "Tell me about your accessories.", "I've seen enough, thanks.").also { stage++ }
+                12 -> when (buttonId) {
+                    1 -> player("Tell me about your armours.").also { stage++ }
+                    2 -> player("Tell me about your accessories.").also { stage += 2 }
+                    3 -> player("I've seen enough, thanks.").also { stage = 30 }
+                }
+                13 -> npc("I have normal, studded and hard types.").also { stage = 200 }
+                14 -> npc("Ah yes we have a new range accessories in stock. Essential items for an archer like you. We have vambraces, chaps, cowls, and coifs.").also { stage = 300 }
+                20 -> npc("Indeed, cast your eyes on my wares, adventurer.").also { stage++ }
+                21 -> end().also { openNpcShop(player, npc.id) }
+                30 -> npc("Very good, adventurer.").also { stage = END_DIALOGUE }
+                100 -> when (buttonId) {
+                    1 -> player("What do you do here?").also { stage = 10 }
+                    2 -> player("I'd like to see what you sell.").also { stage = 20 }
+                    3 -> player("Can I buy a Skillcape of Range?").also { stage++ }
+                    4 -> player("I've seen enough, thanks.").also { stage = 30 }
+                }
+                101 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
+                102 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
+                103 -> when (buttonId) {
+                    1 -> player("Okay, here you go.").also { stage++ }
+                    2 -> end()
+                }
+                104 -> if (purchase(player, Skills.RANGE)) npc("There you go! Enjoy.") else end()
+
+                // Tell me about your armours.
+                200 -> options("Tell me about normal leather.", "What's studded leather?", "What's hard leather?", "Enough about armour.").also { stage++ }
+                201 -> when (buttonId) {
+                    1 -> player("Tell me about normal leather.").also { stage++ }
+                    2 -> player("What's studded leather?").also { stage = 203 }
+                    3 -> player("What's hard leather?").also { stage = 204 }
+                    4 -> player("Enough about armour.").also { stage = 30 }
+                }
+                202 -> npcl(FaceAnim.NEUTRAL, "Indeed, lather armour is excellent for archers. It's supple and not very heavy.").also { stage = 200 }
+                203 -> npcl(FaceAnim.NEUTRAL, "Ah now that's leather covered with studs. It's more protective than ordinary leather.").also { stage = 200 }
+                204 -> npcl(FaceAnim.NEUTRAL, "Hard leather is specially treated using oils and drying methods to create a hard wearing armour.").also { stage = 200 }
+
+                // Tell me about your accessories.
+                300 -> options("Tell me about vambraces.", "Tell me about chaps.", "Tell me about cowls.", "Tell me about coifs.", "Enough about armour.").also { stage++ }
+                301 -> when (buttonId) {
+                    1 -> player("Tell me about vambraces.").also { stage++ }
+                    2 -> player("Tell me about chaps.").also { stage = 304 }
+                    3 -> player("Tell me about cowls.").also { stage = 306 }
+                    4 -> player("Tell me about coifs.").also { stage = 308 }
+                    5 -> player("Enough about accessories.").also { stage = 30 }
+                }
+                302 -> npcl(FaceAnim.NEUTRAL, "Ah yes, vambraces. These useful items are for your arms.").also { stage++ }
+                303 -> npcl(FaceAnim.NEUTRAL, "A protective sheath that favours the bow and arrow. An essential purchase.").also { stage = 30 }
+                304 -> npcl(FaceAnim.NEUTRAL, "Chaps have two functions; firstly to protect your legs, and secondly for ease of reloading arrows.").also { stage++ }
+                305 -> npcl(FaceAnim.NEUTRAL, "I can highly recommend these to you for quick archery.").also { stage = 30 }
+                306 -> npcl(FaceAnim.NEUTRAL, "The cowl is a soft leather hat, ideal for protection with manoeuvrability.").also { stage++ }
+                307 -> npcl(FaceAnim.NEUTRAL, "These are highly favoured with our guards.").also { stage = 30 }
+                308 -> npcl(FaceAnim.NEUTRAL, "The coif is a specialized cowl, that has extra chain protection to keep your neck and shoulders safe.").also { stage++ }
+                309 -> npcl(FaceAnim.NEUTRAL, "An excellent addition to our range, traveller.").also { stage = 30 }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.ARMOUR_SALESMAN_682)
+    }
+
+    /**
+     * Represents the Competition judge dialogue.
+     */
+    inner class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            if (player.inventory.getAmount(Items.ARCHERY_TICKET_1464) >= 1000 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 1, 7)) {
+                npc("Wow! I see that you've got yourself a whole load of ", "archery tickets. Well done!")
+                finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 7)
+                stage = -1
+            } else if (player.archeryTargets > 0) {
+                npc("Hello again, do you need reminding of the rules?")
+                stage = 20
+            } else if (player.archeryTotal == 0) {
+                npc("Hello there, would you like to take part in the", "archery competition? It only costs 200 coins to", "enter.")
+                stage = 0
+            } else {
+                val reward = player.archeryTotal / 10
+                npc("Well done. Your score is: " + player.archeryTotal + ".", "For that score you will receive $reward Archery tickets.")
+                player.archeryTargets = -1
+                player.archeryTotal = 0
+                if (!player.inventory.add(Item(Items.ARCHERY_TICKET_1464, reward))) {
+                    player.bank.add(Item(Items.ARCHERY_TICKET_1464, reward))
+                    sendMessage(player, "Your reward was sent to your bank.")
+                }
+                stage = 999
+            }
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                999 -> end()
+                -1 -> if (player.archeryTargets > 0) {
+                    npc("Hello again, do you need reminding of the rules?")
+                    stage = 20
+                } else if (player.archeryTotal == 0) {
+                    npc("Hello there, would you like to take part in the", "archery competition? It only costs 200 coins to", "enter.")
+                    stage = 0
+                } else {
+                    val reward = player.archeryTotal / 10
+                    npc(
+                        "Well done. Your score is: " + player.archeryTotal + ".",
+                        "For that score you will receive $reward Archery tickets.",
+                    )
+                    if (!player.inventory.add(Item(Items.ARCHERY_TICKET_1464, reward))) {
+                        player.bank.add(Item(Items.ARCHERY_TICKET_1464, reward))
+                        sendMessage(player, "Your reward was sent to your bank.")
+                    }
+                    stage = 999
+                }
+
+                0 -> {
+                    options("Sure, I'll give it a go.", "What are the rules?", "No thanks.")
+                    stage++
+                }
+
+                1 -> when (buttonId) {
+                    1 -> {
+                        player("Sure, I'll give it a go.")
+                        stage = 2
+                    }
+
+                    2 -> {
+                        player("What are the rules?")
+                        stage = 5
+                    }
+
+                    3 -> {
+                        player("No thanks.")
+                        stage = 999
+                    }
+                }
+
+                2 -> {
+                    npc("Great! That will be 200 coins then please.")
+                    stage++
+                }
+
+                3 -> if (amountInInventory(player, Items.COINS_995) < 200) {
+                    player("Oops, I don't have enough coins on me...")
+                    stage++
+                } else {
+                    end()
+                    sendMessage(player, "You pay the judge and he gives you 10 bronze arrows.")
+                    removeItem(player, Item(Items.COINS_995, 200))
+                    addItem(player, Items.BRONZE_ARROW_882, 10)
+                    player.archeryTargets = 10
+                    player.archeryTotal = 0
+                }
+
+                4 -> {
+                    npc("Never mind, come back when you've got enough.")
+                    stage = 999
+                }
+
+                5, 22 -> {
+                    npc("The rules are very simple:")
+                    stage++
+                }
+
+                6, 23 -> {
+                    npc(
+                        "You're given 10 shots at the targets, for each hit",
+                        "you will receive points. At the end you'll be",
+                        "rewarded 1 ticket for every 10 points.",
+                    )
+                    stage++
+                }
+
+                7 -> {
+                    npc(
+                        "The tickets can be exchanged for goods from our stores.",
+                        "Do you want to give it a go? Only 200 coins.",
+                    )
+                    stage++
+                }
+
+                8 -> {
+                    options("Sure, I'll give it a go.", "No thanks.")
+                    stage++
+                }
+
+                9 -> when (buttonId) {
+                    1 -> {
+                        player("Sure, I'll give it a go.")
+                        stage = 2
+                    }
+
+                    3 -> {
+                        player("No thanks.")
+                        stage = 999
+                    }
+                }
+
+                20 -> {
+                    val arrows =
+                        (player.inventory.getAmount(Items.BRONZE_ARROW_882) + player.equipment.getAmount(Items.BRONZE_ARROW_882))
+                    if (arrows < 1) {
+                        player("Well, I actually don't have any more arrows. Could I", "get some more?")
+                        stage = 25
+                    } else {
+                        options("Yes please.", "No thanks, I've got it.", "How am I doing so far?")
+                        stage++
+                    }
+                }
+
+                21 -> when (buttonId) {
+                    1 -> {
+                        player("Yes please.")
+                        stage++
+                    }
+
+                    2 -> {
+                        player("No thanks, I've got it.")
+                        stage = 30
+                    }
+
+                    3 -> {
+                        player("How am I doing so far?")
+                        stage = 40
+                    }
+                }
+
+                24 -> {
+                    npc("The tickets can be exchanged for goods from our stores.", "Good Luck!")
+                    stage = 999
+                }
+
+                25 -> {
+                    npc("Ok, but it'll cost you 100 coins.")
+                    stage++
+                }
+
+                26 -> {
+                    options("Sure, I'll take some.", "No thanks.")
+                    stage++
+                }
+
+                27 -> when (buttonId) {
+                    1 -> {
+                        player("Sure, I'll take some.")
+                        stage++
+                    }
+
+                    2 -> {
+                        player("No thanks.")
+                        stage = 999
+                    }
+                }
+
+                28 -> if (player.inventory.getAmount(995) < 100) {
+                    player("Oops, I don't have enough coins on me...")
+                    stage++
+                } else {
+                    end()
+                    player.packetDispatch.sendMessage("You pay the judge and he gives you 10 bronze arrows.")
+                    player.inventory.remove(Item(995, 100))
+                    player.inventory.add(Item(882, 10))
+                }
+
+                30 -> {
+                    npc("Glad to hear it, good luck!")
+                    stage = 999
+                }
+
+                40 -> {
+                    val msg = if (player.archeryTotal <= 0) {
+                        "You haven't started yet."
+                    } else if (player.archeryTotal <= 80) {
+                        "Not bad, keep going."
+                    } else {
+                        "You're pretty good, keep it up."
+                    }
+                    npc("So far your score is: " + player.archeryTotal, msg)
+                    stage = 999
+                }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.COMPETITION_JUDGE_693)
+    }
+
+    /**
+     * Represents the Leather worker dialogue.
+     */
+    inner class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            player("Hello.")
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc("Can I help you?").also { stage++ }
+                1 -> options("What do you do here?", "No thanks.").also { stage++ }
+                2 -> when (buttonId) {
+                    1 -> player("What do you do here?").also { stage++ }
+                    2 -> player("No thanks.").also { stage = 6 }
+                }
+                3 -> npc("Well, I can cure plain cowhides into pieces of leather", "ready for crafting.").also { stage++ }
+                4 -> npc("I work with ordinary, hard or dragonhide leather and", "also snakeskin.").also { stage++ }
+                5 -> end().also { TanningProduct.open(player, npc.id) }
+                6 -> npc("Suit yourself.").also { stage = END_DIALOGUE }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.LEATHERWORKER_680)
+    }
+
+    /**
+     * Represents the Tower advisor dialogue.
+     */
+    inner class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
+
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            player("Hello there, what do you do here?").also { stage++ }
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc("Hi. We are in charge of this practice area.").also { stage++ }
+                1 -> player("This is a practice area?").also { stage++ }
+                2 -> npc("Surrounding us are four towers. Each tower contains", "trained archers of a different level. You'll notice", "it's quite a distance, so you'll need a longbow.").also { stage++ }
+                3 -> {
+                    val rangeLevel: Int = getStatLevel(player, Skills.RANGE)
+                    when {
+                        // north
+                        rangeLevel < 50 -> npc("As you're not very skilled, I advise you to practice", "on the north tower. That'll provide the best", "challenge for you.").also { stage = END_DIALOGUE }
+                        // east
+                        rangeLevel < 60 -> npc("You appear to be somewhat skilled with a bow, so I", "advise you to practice on the south tower. That'll", "provide the best challenge for you.").also { stage = END_DIALOGUE }
+                        // south
+                        rangeLevel < 70 -> npc("You appear to be fairly skilled with a bow, so I", "advise you to practice on the south tower. That'll", "provide the best challenge for you.").also { stage = END_DIALOGUE }
+                        // west
+                        else -> npc("Looks like you're very skilled, so I advise you to", "practice on the west tower. That'll provide the best", "challenge for you.").also { stage = END_DIALOGUE }
+                    }
+                }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(
+            NPCs.TOWER_ADVISOR_684,
+            NPCs.TOWER_ADVISOR_685,
+            NPCs.TOWER_ADVISOR_686,
+            NPCs.TOWER_ADVISOR_687,
+        )
+    }
+
+    /**
+     * Tower archer NPC.
+     */
+    inner class TowerArcherNPC(
+        id: Int = 0,
+        location: Location? = null,
+    ) : AbstractNPC(id, location) {
+        override fun getIds(): IntArray = intArrayOf(NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689, NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691)
+
+        override fun construct(
+            id: Int,
+            location: Location,
+            vararg objects: Any?,
+        ): AbstractNPC = TowerArcherNPC(id, location)
+
+        override fun finalizeDeath(killer: Entity?) {
+            super.finalizeDeath(killer)
+        }
     }
 }
 
@@ -374,468 +842,5 @@ private class ArcheryCompetitionPulse(
         } else {
             return true
         }
-    }
-}
-
-/**
- * Represents the Tribal weapon salesman dialogue.
- */
-@Initializable
-private class TribalWeaponSalesmanDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player("Hello there.")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc("Greetings, traveller. Are you interested in any throwing", "weapons?").also { stage++ }
-            1 -> options("Yes I am.", "Not really.").also { stage++ }
-            2 -> when (buttonId) {
-                1 -> player("Yes I am.").also { stage++ }
-                2 -> player("Not really.").also { stage += 3 }
-            }
-            3 -> npc("That is a good thing.").also { stage++ }
-            4 -> end().also { openNpcShop(player, npc.id) }
-            5 -> npc("No bother to me.").also { stage = END_DIALOGUE }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.TRIBAL_WEAPON_SALESMAN_692)
-}
-
-/**
- * Represents the Bow arrow salesman dialogue.
- */
-@Initializable
-private class BowArrowSalesmanDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player("Hello.").also { stage = 0 }
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc("A fair day, traveller. Would you like to see my wares?").also { stage++ }
-            1 -> options("Yes please.", "No thanks.").also { stage++ }
-            2 -> when (buttonId) {
-                1 -> end().also { openNpcShop(player, npc.id) }
-                2 -> end()
-            }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.BOW_AND_ARROW_SALESMAN_683)
-}
-
-/**
- * Represents the Armour salesman dialogue.
- */
-@Initializable
-private class ArmourSalesmanDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player("Good day to you.")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc("And to you. Can I help you?").also { stage++ }
-            1 -> if (isMaster(player, Skills.RANGE)) {
-                options("What do you do here?", "I'd like to see what you sell.", "Can I buy a Skillcape of Range?", "I've seen enough, thanks.").also { stage = 100 }
-            } else {
-                options("What do you do here?", "I'd like to see what you sell.", "I've seen enough, thanks.").also { stage++ }
-            }
-
-            2 -> when (buttonId) {
-                1 -> player("What do you do here?").also { stage++ }
-                2 -> player("I'd like to see what you sell.").also { stage = 20 }
-                3 -> player("I've seen enough, thanks.").also { stage = 30 }
-            }
-            10 -> npc("I am a supplier of leather armours and accessories. Ask and I will tell you what I know.").also { stage++ }
-            11 -> options("Tell me about your armours.", "Tell me about your accessories.", "I've seen enough, thanks.").also { stage++ }
-            12 -> when (buttonId) {
-                1 -> player("Tell me about your armours.").also { stage++ }
-                2 -> player("Tell me about your accessories.").also { stage += 2 }
-                3 -> player("I've seen enough, thanks.").also { stage = 30 }
-            }
-            13 -> npc("I have normal, studded and hard types.").also { stage = 200 }
-            14 -> npc("Ah yes we have a new range accessories in stock. Essential items for an archer like you. We have vambraces, chaps, cowls, and coifs.").also { stage = 300 }
-            20 -> npc("Indeed, cast your eyes on my wares, adventurer.").also { stage++ }
-            21 -> end().also { openNpcShop(player, npc.id) }
-            30 -> npc("Very good, adventurer.").also { stage = END_DIALOGUE }
-            100 -> when (buttonId) {
-                1 -> player("What do you do here?").also { stage = 10 }
-                2 -> player("I'd like to see what you sell.").also { stage = 20 }
-                3 -> player("Can I buy a Skillcape of Range?").also { stage++ }
-                4 -> player("I've seen enough, thanks.").also { stage = 30 }
-            }
-            101 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
-            102 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
-            103 -> when (buttonId) {
-                1 -> player("Okay, here you go.").also { stage++ }
-                2 -> end()
-            }
-            104 -> if (purchase(player, Skills.RANGE)) npc("There you go! Enjoy.") else end()
-
-            // Tell me about your armours.
-            200 -> options("Tell me about normal leather.", "What's studded leather?", "What's hard leather?", "Enough about armour.").also { stage++ }
-            201 -> when (buttonId) {
-                1 -> player("Tell me about normal leather.").also { stage++ }
-                2 -> player("What's studded leather?").also { stage = 203 }
-                3 -> player("What's hard leather?").also { stage = 204 }
-                4 -> player("Enough about armour.").also { stage = 30 }
-            }
-            202 -> npcl(FaceAnim.NEUTRAL, "Indeed, lather armour is excellent for archers. It's supple and not very heavy.").also { stage = 200 }
-            203 -> npcl(FaceAnim.NEUTRAL, "Ah now that's leather covered with studs. It's more protective than ordinary leather.").also { stage = 200 }
-            204 -> npcl(FaceAnim.NEUTRAL, "Hard leather is specially treated using oils and drying methods to create a hard wearing armour.").also { stage = 200 }
-
-            // Tell me about your accessories.
-            300 -> options("Tell me about vambraces.", "Tell me about chaps.", "Tell me about cowls.", "Tell me about coifs.", "Enough about armour.").also { stage++ }
-            301 -> when (buttonId) {
-                1 -> player("Tell me about vambraces.").also { stage++ }
-                2 -> player("Tell me about chaps.").also { stage = 304 }
-                3 -> player("Tell me about cowls.").also { stage = 306 }
-                4 -> player("Tell me about coifs.").also { stage = 308 }
-                5 -> player("Enough about accessories.").also { stage = 30 }
-            }
-            302 -> npcl(FaceAnim.NEUTRAL, "Ah yes, vambraces. These useful items are for your arms.").also { stage++ }
-            303 -> npcl(FaceAnim.NEUTRAL, "A protective sheath that favours the bow and arrow. An essential purchase.").also { stage = 30 }
-            304 -> npcl(FaceAnim.NEUTRAL, "Chaps have two functions; firstly to protect your legs, and secondly for ease of reloading arrows.").also { stage++ }
-            305 -> npcl(FaceAnim.NEUTRAL, "I can highly recommend these to you for quick archery.").also { stage = 30 }
-            306 -> npcl(FaceAnim.NEUTRAL, "The cowl is a soft leather hat, ideal for protection with manoeuvrability.").also { stage++ }
-            307 -> npcl(FaceAnim.NEUTRAL, "These are highly favoured with our guards.").also { stage = 30 }
-            308 -> npcl(FaceAnim.NEUTRAL, "The coif is a specialized cowl, that has extra chain protection to keep your neck and shoulders safe.").also { stage++ }
-            309 -> npcl(FaceAnim.NEUTRAL, "An excellent addition to our range, traveller.").also { stage = 30 }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.ARMOUR_SALESMAN_682)
-}
-
-/**
- * Represents the Competition judge dialogue.
- */
-@Initializable
-private class CompetitionJudgeDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        if (player.inventory.getAmount(Items.ARCHERY_TICKET_1464) >= 1000 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 1, 7)) {
-            npc("Wow! I see that you've got yourself a whole load of ", "archery tickets. Well done!")
-            finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 7)
-            stage = -1
-        } else if (player.archeryTargets > 0) {
-            npc("Hello again, do you need reminding of the rules?")
-            stage = 20
-        } else if (player.archeryTotal == 0) {
-            npc("Hello there, would you like to take part in the", "archery competition? It only costs 200 coins to", "enter.")
-            stage = 0
-        } else {
-            val reward = player.archeryTotal / 10
-            npc("Well done. Your score is: " + player.archeryTotal + ".", "For that score you will receive $reward Archery tickets.")
-            player.archeryTargets = -1
-            player.archeryTotal = 0
-            if (!player.inventory.add(Item(Items.ARCHERY_TICKET_1464, reward))) {
-                player.bank.add(Item(Items.ARCHERY_TICKET_1464, reward))
-                sendMessage(player, "Your reward was sent to your bank.")
-            }
-            stage = 999
-        }
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            999 -> end()
-            -1 -> if (player.archeryTargets > 0) {
-                npc("Hello again, do you need reminding of the rules?")
-                stage = 20
-            } else if (player.archeryTotal == 0) {
-                npc("Hello there, would you like to take part in the", "archery competition? It only costs 200 coins to", "enter.")
-                stage = 0
-            } else {
-                val reward = player.archeryTotal / 10
-                npc(
-                    "Well done. Your score is: " + player.archeryTotal + ".",
-                    "For that score you will receive $reward Archery tickets.",
-                )
-                if (!player.inventory.add(Item(Items.ARCHERY_TICKET_1464, reward))) {
-                    player.bank.add(Item(Items.ARCHERY_TICKET_1464, reward))
-                    sendMessage(player, "Your reward was sent to your bank.")
-                }
-                stage = 999
-            }
-
-            0 -> {
-                options("Sure, I'll give it a go.", "What are the rules?", "No thanks.")
-                stage++
-            }
-
-            1 -> when (buttonId) {
-                1 -> {
-                    player("Sure, I'll give it a go.")
-                    stage = 2
-                }
-
-                2 -> {
-                    player("What are the rules?")
-                    stage = 5
-                }
-
-                3 -> {
-                    player("No thanks.")
-                    stage = 999
-                }
-            }
-
-            2 -> {
-                npc("Great! That will be 200 coins then please.")
-                stage++
-            }
-
-            3 -> if (amountInInventory(player, Items.COINS_995) < 200) {
-                player("Oops, I don't have enough coins on me...")
-                stage++
-            } else {
-                end()
-                sendMessage(player, "You pay the judge and he gives you 10 bronze arrows.")
-                removeItem(player, Item(Items.COINS_995, 200))
-                addItem(player, Items.BRONZE_ARROW_882, 10)
-                player.archeryTargets = 10
-                player.archeryTotal = 0
-            }
-
-            4 -> {
-                npc("Never mind, come back when you've got enough.")
-                stage = 999
-            }
-
-            5, 22 -> {
-                npc("The rules are very simple:")
-                stage++
-            }
-
-            6, 23 -> {
-                npc(
-                    "You're given 10 shots at the targets, for each hit",
-                    "you will receive points. At the end you'll be",
-                    "rewarded 1 ticket for every 10 points.",
-                )
-                stage++
-            }
-
-            7 -> {
-                npc(
-                    "The tickets can be exchanged for goods from our stores.",
-                    "Do you want to give it a go? Only 200 coins.",
-                )
-                stage++
-            }
-
-            8 -> {
-                options("Sure, I'll give it a go.", "No thanks.")
-                stage++
-            }
-
-            9 -> when (buttonId) {
-                1 -> {
-                    player("Sure, I'll give it a go.")
-                    stage = 2
-                }
-
-                3 -> {
-                    player("No thanks.")
-                    stage = 999
-                }
-            }
-
-            20 -> {
-                val arrows =
-                    (player.inventory.getAmount(Items.BRONZE_ARROW_882) + player.equipment.getAmount(Items.BRONZE_ARROW_882))
-                if (arrows < 1) {
-                    player("Well, I actually don't have any more arrows. Could I", "get some more?")
-                    stage = 25
-                } else {
-                    options("Yes please.", "No thanks, I've got it.", "How am I doing so far?")
-                    stage++
-                }
-            }
-
-            21 -> when (buttonId) {
-                1 -> {
-                    player("Yes please.")
-                    stage++
-                }
-
-                2 -> {
-                    player("No thanks, I've got it.")
-                    stage = 30
-                }
-
-                3 -> {
-                    player("How am I doing so far?")
-                    stage = 40
-                }
-            }
-
-            24 -> {
-                npc("The tickets can be exchanged for goods from our stores.", "Good Luck!")
-                stage = 999
-            }
-
-            25 -> {
-                npc("Ok, but it'll cost you 100 coins.")
-                stage++
-            }
-
-            26 -> {
-                options("Sure, I'll take some.", "No thanks.")
-                stage++
-            }
-
-            27 -> when (buttonId) {
-                1 -> {
-                    player("Sure, I'll take some.")
-                    stage++
-                }
-
-                2 -> {
-                    player("No thanks.")
-                    stage = 999
-                }
-            }
-
-            28 -> if (player.inventory.getAmount(995) < 100) {
-                player("Oops, I don't have enough coins on me...")
-                stage++
-            } else {
-                end()
-                player.packetDispatch.sendMessage("You pay the judge and he gives you 10 bronze arrows.")
-                player.inventory.remove(Item(995, 100))
-                player.inventory.add(Item(882, 10))
-            }
-
-            30 -> {
-                npc("Glad to hear it, good luck!")
-                stage = 999
-            }
-
-            40 -> {
-                val msg = if (player.archeryTotal <= 0) {
-                    "You haven't started yet."
-                } else if (player.archeryTotal <= 80) {
-                    "Not bad, keep going."
-                } else {
-                    "You're pretty good, keep it up."
-                }
-                npc("So far your score is: " + player.archeryTotal, msg)
-                stage = 999
-            }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.COMPETITION_JUDGE_693)
-}
-
-/**
- * Represents the Leather worker dialogue.
- */
-@Initializable
-private class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        player("Hello.")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc("Can I help you?").also { stage++ }
-            1 -> options("What do you do here?", "No thanks.").also { stage++ }
-            2 -> when (buttonId) {
-                1 -> player("What do you do here?").also { stage++ }
-                2 -> player("No thanks.").also { stage = 6 }
-            }
-            3 -> npc("Well, I can cure plain cowhides into pieces of leather", "ready for crafting.").also { stage++ }
-            4 -> npc("I work with ordinary, hard or dragonhide leather and", "also snakeskin.").also { stage++ }
-            5 -> end().also { TanningProduct.open(player, npc.id) }
-            6 -> npc("Suit yourself.").also { stage = END_DIALOGUE }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.LEATHERWORKER_680)
-}
-
-/**
- * Represents the Tower advisor dialogue.
- */
-@Initializable
-private class TowerAdvisorDialogue(player: Player? = null) : Dialogue(player) {
-
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player("Hello there, what do you do here?").also { stage++ }
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc("Hi. We are in charge of this practice area.").also { stage++ }
-            1 -> player("This is a practice area?").also { stage++ }
-            2 -> npc("Surrounding us are four towers. Each tower contains", "trained archers of a different level. You'll notice", "it's quite a distance, so you'll need a longbow.").also { stage++ }
-            3 -> {
-                val rangeLevel: Int = getStatLevel(player, Skills.RANGE)
-                when {
-                    // north
-                    rangeLevel < 50 -> npc("As you're not very skilled, I advise you to practice", "on the north tower. That'll provide the best", "challenge for you.").also { stage = END_DIALOGUE }
-                    // east
-                    rangeLevel < 60 -> npc("You appear to be somewhat skilled with a bow, so I", "advise you to practice on the south tower. That'll", "provide the best challenge for you.").also { stage = END_DIALOGUE }
-                    // south
-                    rangeLevel < 70 -> npc("You appear to be fairly skilled with a bow, so I", "advise you to practice on the south tower. That'll", "provide the best challenge for you.").also { stage = END_DIALOGUE }
-                    // west
-                    else -> npc("Looks like you're very skilled, so I advise you to", "practice on the west tower. That'll provide the best", "challenge for you.").also { stage = END_DIALOGUE }
-                }
-            }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(
-        NPCs.TOWER_ADVISOR_684,
-        NPCs.TOWER_ADVISOR_685,
-        NPCs.TOWER_ADVISOR_686,
-        NPCs.TOWER_ADVISOR_687,
-    )
-}
-
-/**
- * Tower archer NPC.
- */
-@Initializable
-private class TowerArcherNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun getIds(): IntArray = intArrayOf(NPCs.TOWER_ARCHER_688, NPCs.TOWER_ARCHER_689, NPCs.TOWER_ARCHER_690, NPCs.TOWER_ARCHER_691)
-
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any?,
-    ): AbstractNPC = TowerArcherNPC(id, location)
-
-    override fun finalizeDeath(killer: Entity?) {
-        super.finalizeDeath(killer)
     }
 }

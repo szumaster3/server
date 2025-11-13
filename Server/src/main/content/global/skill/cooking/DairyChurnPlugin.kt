@@ -16,13 +16,31 @@ import shared.consts.*
 /**
  * Represents dairy products.
  */
-enum class Churnable(val product: Item, val xp: Double, val animation: Animation?) {
+private enum class Churnable(val product: Item, val xp: Double, val animation: Animation?) {
     BUCKET_OF_MILK(Item(Items.BUCKET_OF_MILK_1927), 0.0, null),
     CREAM(Item(Items.POT_OF_CREAM_2130), 18.0, Animation(Animations.CHURN_CREAM_2793)),
     BUTTER(Item(Items.PAT_OF_BUTTER_6697), 41.0, Animation(Animations.CHURN_BUTTER_2794)),
     CHEESE(Item(Items.CHEESE_1985), 64.0, Animation(Animations.CHURN_CHEESE_2795));
     override fun toString(): String = name.lowercase().replace("_", " ").replace("bucket of ", "")
+
+
+    companion object {
+
+        private val CHURN_DELAY = mapOf<Pair<Churnable, Churnable>, Int>(
+            Churnable.BUCKET_OF_MILK to Churnable.CREAM to 10,
+            Churnable.BUCKET_OF_MILK to Churnable.BUTTER to 20,
+            Churnable.BUCKET_OF_MILK to Churnable.CHEESE to 27,
+            Churnable.CREAM to Churnable.BUTTER to 10,
+            Churnable.CREAM to Churnable.CHEESE to 17,
+            Churnable.BUTTER to Churnable.CHEESE to 7
+        )
+
+        fun getChurnDelay(ingredient: Churnable, product: Churnable): Int =
+            CHURN_DELAY[ingredient to product] ?: 0
+    }
 }
+
+private data class ChurnOption(val churnable: Churnable, val amount: Int)
 
 /**
  * Handles interactions with dairy churns.
@@ -45,18 +63,6 @@ class DairyChurnPlugin : InteractionListener {
 
     companion object {
         const val DIALOGUE_ID = 984374
-
-        private val CHURN_DELAY = mapOf<Pair<Churnable, Churnable>, Int>(
-            Churnable.BUCKET_OF_MILK to Churnable.CREAM to 10,
-            Churnable.BUCKET_OF_MILK to Churnable.BUTTER to 20,
-            Churnable.BUCKET_OF_MILK to Churnable.CHEESE to 27,
-            Churnable.CREAM to Churnable.BUTTER to 10,
-            Churnable.CREAM to Churnable.CHEESE to 17,
-            Churnable.BUTTER to Churnable.CHEESE to 7
-        )
-
-        fun getChurnDelay(ingredient: Churnable, product: Churnable): Int =
-            CHURN_DELAY[ingredient to product] ?: 0
     }
 
     override fun defineListeners() {
@@ -72,75 +78,73 @@ class DairyChurnPlugin : InteractionListener {
             return@onUseWith true
         }
     }
-}
 
-/**
- * Dialogue shown when interacting with a dairy churn.
- */
-private class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
+    inner /**
+     * Dialogue shown when interacting with a dairy churn.
+     */
+    class DairyChurnDialogue(player: Player? = null) : Dialogue(player) {
 
-    private data class ChurnOption(val churnable: Churnable, val amount: Int)
+        private val churnOptionsOp1 = mapOf(
+            4 to ChurnOption(Churnable.CHEESE, 1),
+            3 to ChurnOption(Churnable.CHEESE, 5),
+            2 to ChurnOption(Churnable.CHEESE, 10)
+        )
 
-    private val churnOptionsOp1 = mapOf(
-        4 to ChurnOption(Churnable.CHEESE, 1),
-        3 to ChurnOption(Churnable.CHEESE, 5),
-        2 to ChurnOption(Churnable.CHEESE, 10)
-    )
+        private val churnOptionsOp2 = mapOf(
+            8 to ChurnOption(Churnable.CHEESE, 1),
+            7 to ChurnOption(Churnable.CHEESE, 5),
+            6 to ChurnOption(Churnable.CHEESE, 10),
+            5 to ChurnOption(Churnable.BUTTER, 1),
+            4 to ChurnOption(Churnable.BUTTER, 5),
+            3 to ChurnOption(Churnable.BUTTER, 10)
+        )
 
-    private val churnOptionsOp2 = mapOf(
-        8 to ChurnOption(Churnable.CHEESE, 1),
-        7 to ChurnOption(Churnable.CHEESE, 5),
-        6 to ChurnOption(Churnable.CHEESE, 10),
-        5 to ChurnOption(Churnable.BUTTER, 1),
-        4 to ChurnOption(Churnable.BUTTER, 5),
-        3 to ChurnOption(Churnable.BUTTER, 10)
-    )
+        private val churnOptionsOp3 = mapOf(
+            12 to ChurnOption(Churnable.CHEESE, 1),
+            11 to ChurnOption(Churnable.CHEESE, 5),
+            10 to ChurnOption(Churnable.CHEESE, 10),
+            9  to ChurnOption(Churnable.BUTTER, 1),
+            8  to ChurnOption(Churnable.BUTTER, 5),
+            7  to ChurnOption(Churnable.BUTTER, 10),
+            6  to ChurnOption(Churnable.CREAM, 1),
+            5  to ChurnOption(Churnable.CREAM, 5),
+            4  to ChurnOption(Churnable.CREAM, 10)
+        )
 
-    private val churnOptionsOp3 = mapOf(
-        12 to ChurnOption(Churnable.CHEESE, 1),
-        11 to ChurnOption(Churnable.CHEESE, 5),
-        10 to ChurnOption(Churnable.CHEESE, 10),
-        9  to ChurnOption(Churnable.BUTTER, 1),
-        8  to ChurnOption(Churnable.BUTTER, 5),
-        7  to ChurnOption(Churnable.BUTTER, 10),
-        6  to ChurnOption(Churnable.CREAM, 1),
-        5  to ChurnOption(Churnable.CREAM, 5),
-        4  to ChurnOption(Churnable.CREAM, 10)
-    )
+        override fun open(vararg args: Any?): Boolean {
+            val interfaceId = when {
+                getStatLevel(player, Skills.COOKING) >= 48 -> Components.COOKING_CHURN_OP3_74
+                getStatLevel(player, Skills.COOKING) >= 38 -> Components.COOKING_CHURN_OP2_73
+                getStatLevel(player, Skills.COOKING) >= 21 -> Components.COOKING_CHURN_OP1_72
+                else -> {
+                    sendMessage(player, "You must have a Cooking level of at least 21 to use this.")
+                    return false
+                }
+            }
 
-    override fun open(vararg args: Any?): Boolean {
-        val interfaceId = when {
-            getStatLevel(player, Skills.COOKING) >= 48 -> Components.COOKING_CHURN_OP3_74
-            getStatLevel(player, Skills.COOKING) >= 38 -> Components.COOKING_CHURN_OP2_73
-            getStatLevel(player, Skills.COOKING) >= 21 -> Components.COOKING_CHURN_OP1_72
-            else -> {
-                sendMessage(player, "You must have a Cooking level of at least 21 to use this.")
+            openChatbox(player, interfaceId)
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            val map = when (interfaceId) {
+                Components.COOKING_CHURN_OP3_74 -> churnOptionsOp3
+                Components.COOKING_CHURN_OP2_73 -> churnOptionsOp2
+                Components.COOKING_CHURN_OP1_72 -> churnOptionsOp1
+                else -> return false
+            }
+
+            val option = map[buttonId] ?: run {
+                println("No option found for button=$buttonId.")
                 return false
             }
+            player.pulseManager.run(DairyChurnPulse(player, option.churnable, option.amount))
+            return true
         }
 
-        openChatbox(player, interfaceId)
-        return true
+        override fun newInstance(player: Player?) = DairyChurnDialogue(player)
+        override fun getIds() = intArrayOf(DairyChurnPlugin.DIALOGUE_ID)
     }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val map = when (interfaceId) {
-            Components.COOKING_CHURN_OP3_74 -> churnOptionsOp3
-            Components.COOKING_CHURN_OP2_73 -> churnOptionsOp2
-            Components.COOKING_CHURN_OP1_72 -> churnOptionsOp1
-            else -> return false
-        }
-
-        val option = map[buttonId] ?: run {
-            println("No option found for button=$buttonId.")
-            return false
-        }
-        player.pulseManager.run(DairyChurnPulse(player, option.churnable, option.amount))
-        return true
-    }
-
-    override fun newInstance(player: Player?) = DairyChurnDialogue(player)
-    override fun getIds() = intArrayOf(DairyChurnPlugin.DIALOGUE_ID)
 }
 
 /**
@@ -167,7 +171,7 @@ private class DairyChurnPulse(
             return false
         }
         node = ingredient!!.product
-        cycle = DairyChurnPlugin.getChurnDelay(ingredient!!, churnable)
+        cycle = Churnable.getChurnDelay(ingredient!!, churnable)
         animate()
         return true
     }

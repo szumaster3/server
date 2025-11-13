@@ -13,6 +13,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
@@ -21,6 +22,12 @@ import shared.consts.Scenery
 
 class WizardsGuildPlugin : InteractionListener {
     override fun defineListeners() {
+        ClassScanner.definePlugins(
+            ProfessorImblewynDialogue(),
+            RobeStoreDialogue(),
+            WizardDistentorDialogue()
+        )
+
         on(NPCs.WIZARD_FRUMSCONE_460, IntType.NPC, "talk-to") { player, node ->
             sendNPCDialogue(
                 player,
@@ -85,136 +92,133 @@ class WizardsGuildPlugin : InteractionListener {
         val MAGIC_DOOR = intArrayOf(Scenery.MAGIC_GUILD_DOOR_1600, Scenery.MAGIC_GUILD_DOOR_1601)
         val GATE = intArrayOf(Scenery.GATE_2154, Scenery.GATE_2155)
     }
-}
 
-/**
- * Professor Imblewyn dialogue.
- */
-@Initializable
-private class ProfessorImblewynDialogue(player: Player? = null) : Dialogue(player) {
-
-    /*
-     * Info: Gnome wizard found in the Magic Guild.
+    /**
+     * Professor Imblewyn dialogue.
      */
+    inner class ProfessorImblewynDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        player("I didn't realise gnomes were interested in magic.")
-        return true
-    }
+        /*
+         * Info: Gnome wizard found in the Magic Guild.
+         */
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> npc(FaceAnim.OLD_NORMAL, "Gnomes are interested in everything, lad.").also { stage++ }
-            1 -> player("Of course.").also { stage = END_DIALOGUE }
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            player("I didn't realise gnomes were interested in magic.")
+            return true
         }
-        return true
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> npc(FaceAnim.OLD_NORMAL, "Gnomes are interested in everything, lad.").also { stage++ }
+                1 -> player("Of course.").also { stage = END_DIALOGUE }
+            }
+            return true
+        }
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_IMBLEWYN_4586)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.PROFESSOR_IMBLEWYN_4586)
-}
-
-/**
- * Robe store dialogue.
- */
-@Initializable
-private class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
-
-    /*
-     * Info: Sells mystic equipment in the Wizards' Guild through
-     * the Mystic Robes store. He is located on the 1st floor of
-     * the guild, next to the Magic Store owner.
+    /**
+     * Robe store dialogue.
      */
+    inner class RobeStoreDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        if (Skillcape.isMaster(player, Skills.MAGIC)) {
-            options("Ask about Skillcape.", "Something else").also { stage = 3 }
-        } else {
-            npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also { stage = 0 }
+        /*
+         * Info: Sells mystic equipment in the Wizards' Guild through
+         * the Mystic Robes store. He is located on the 1st floor of
+         * the guild, next to the Magic Store owner.
+         */
+
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            if (Skillcape.isMaster(player, Skills.MAGIC)) {
+                options("Ask about Skillcape.", "Something else").also { stage = 3 }
+            } else {
+                npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also { stage = 0 }
+            }
+            return true
         }
-        return true
-    }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> options("Yes please.", "No thank you.").also { stage++ }
-            1 -> when (buttonId) {
-                1 -> player("Yes please.").also { stage++ }
-                2 -> player("No thank you.").also { stage = END_DIALOGUE }
-            }
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> options("Yes please.", "No thank you.").also { stage++ }
+                1 -> when (buttonId) {
+                    1 -> player("Yes please.").also { stage++ }
+                    2 -> player("No thank you.").also { stage = END_DIALOGUE }
+                }
 
-            2 -> {
-                end()
-                openNpcShop(player, NPCs.ROBE_STORE_OWNER_1658)
-            }
+                2 -> {
+                    end()
+                    openNpcShop(player, NPCs.ROBE_STORE_OWNER_1658)
+                }
 
-            3 -> when (buttonId) {
-                1 -> player("Can I buy a Skillcape of Magic?").also { stage++ }
-                2 -> npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also {
-                    stage = 0
+                3 -> when (buttonId) {
+                    1 -> player("Can I buy a Skillcape of Magic?").also { stage++ }
+                    2 -> npc("Welcome to the Magic Guild Store. Would you like to", "buy some magic supplies?").also {
+                        stage = 0
+                    }
+                }
+
+                4 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
+                5 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
+                6 -> when (buttonId) {
+                    1 -> player("Okay, here you go.").also { stage++ }
+                    2 -> player("No, thanks.").also { stage = END_DIALOGUE }
+                }
+
+                7 -> if (Skillcape.purchase(player, Skills.MAGIC)) {
+                    npc("There you go! Enjoy.").also { stage = END_DIALOGUE }
                 }
             }
-
-            4 -> npc("Certainly! Right when you give me 99000 coins.").also { stage++ }
-            5 -> options("Okay, here you go.", "No, thanks.").also { stage++ }
-            6 -> when (buttonId) {
-                1 -> player("Okay, here you go.").also { stage++ }
-                2 -> player("No, thanks.").also { stage = END_DIALOGUE }
-            }
-
-            7 -> if (Skillcape.purchase(player, Skills.MAGIC)) {
-                npc("There you go! Enjoy.").also { stage = END_DIALOGUE }
-            }
+            return true
         }
-        return true
+
+        override fun getIds(): IntArray = intArrayOf(NPCs.ROBE_STORE_OWNER_1658)
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROBE_STORE_OWNER_1658)
-}
-
-/**
- * Wizard Distentor dialogue.
- */
-@Initializable
-private class WizardDistentorDialogue(player: Player? = null) : Dialogue(player) {
-
-    /*
-     * Info: leader of the Wizards' Guild in Yanille.
-     * Due to his proximity to a bank, he is considered to be one
-     * of the best for transport to the Rune Essence mine.
+    /**
+     * Wizard Distentor dialogue.
      */
+    inner class WizardDistentorDialogue(player: Player? = null) : Dialogue(player) {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc("Welcome to the Magicians' Guild!")
-        return true
-    }
+        /*
+         * Info: leader of the Wizards' Guild in Yanille.
+         * Due to his proximity to a bank, he is considered to be one
+         * of the best for transport to the Rune Essence mine.
+         */
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> player("Hello there.").also { stage++ }
-            1 -> npc("What can I do for you?").also { stage++ }
-            2 -> {
-                if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
-                    player("Nothing thanks, I'm just looking around.").also { stage = 4 }
-                } else {
-                    options("Nothing thanks, I'm just looking around.", "Can you teleport me to Rune Essence?").also { stage++ }
+        override fun open(vararg args: Any?): Boolean {
+            npc = args[0] as NPC
+            npc("Welcome to the Magicians' Guild!")
+            return true
+        }
+
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> player("Hello there.").also { stage++ }
+                1 -> npc("What can I do for you?").also { stage++ }
+                2 -> {
+                    if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
+                        player("Nothing thanks, I'm just looking around.").also { stage = 4 }
+                    } else {
+                        options("Nothing thanks, I'm just looking around.", "Can you teleport me to Rune Essence?").also { stage++ }
+                    }
+                }
+
+                3 -> when (buttonId) {
+                    1 -> player("Nothing thanks, I'm just looking around.").also { stage++ }
+                    2 -> player("Can you teleport me to the Rune Essence?").also { stage = 5 }
+                }
+                4 -> npc("That's fine with me.").also { stage = END_DIALOGUE }
+                5 -> {
+                    end()
+                    EssenceTeleport.teleport(npc, player)
                 }
             }
-
-            3 -> when (buttonId) {
-                1 -> player("Nothing thanks, I'm just looking around.").also { stage++ }
-                2 -> player("Can you teleport me to the Rune Essence?").also { stage = 5 }
-            }
-            4 -> npc("That's fine with me.").also { stage = END_DIALOGUE }
-            5 -> {
-                end()
-                EssenceTeleport.teleport(npc, player)
-            }
+            return true
         }
-        return true
-    }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_DISTENTOR_462)
+        override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_DISTENTOR_462)
+    }
 }
