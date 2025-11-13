@@ -8117,18 +8117,18 @@ headmodel=model_39227
 unknown119=2
 
 [npc_400]
-model=model_40613
-name=Radimus Erkle
+vislevel=0
+size=1
+alwaysontop=yes
 op1=Talk-to
 recol1s=6798
 recol1d=111
 retex1s=material_228
 retex1d=material_426
+name=Radimus Erkle
+model=model_40613
 headmodel=model_39706
-vislevel=0
-alwaysontop=yes
 unknown119=3
-bas=bas_4
 
 [npc_401]
 bas=bas_4

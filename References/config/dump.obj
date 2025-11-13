@@ -175973,7 +175973,6 @@ recol6s=8982
 recol6d=5400
 manhead=model_45459
 womanhead=model_45458
-team=255
 
 [obj_14632]
 members=yes
@@ -176089,14 +176088,10 @@ recol6d=58
 name=Slayer helmet (charged)
 
 [obj_14638]
-model=model_0
 2dzoom=0
-team=1
 
 [obj_14639]
-model=model_0
 2dzoom=0
-team=255
 
 [obj_14640]
 model=model_45471
@@ -176125,7 +176120,6 @@ recol6s=8982
 recol6d=30778
 manhead=model_45472
 womanhead=model_45473
-team=255
 
 [obj_14641]
 model=model_45476
@@ -176154,7 +176148,6 @@ recol6s=8982
 recol6d=9013
 manhead=model_45477
 womanhead=model_45478
-team=255
 
 [obj_14642]
 model=model_45481
@@ -176173,25 +176166,12 @@ stockmarket=yes
 certlink=obj_14643
 ambient=15
 contrast=15
-team=255
 lentlink=obj_14644
 womanwearoff=3,-11,6
 
 [obj_14643]
-model=model_2429
-name=Granite mace
-2dzoom=760
-2dxan=552
-2dyan=28
-2dyof=2
-stackable=yes
-cost=40000
-members=yes
-iop2=Wield
-iop5=Discard
 certlink=obj_14642
 certtemplate=obj_799
-team=255
 
 [obj_14644]
 model=model_40552
@@ -176208,7 +176188,6 @@ iop2=Wield
 iop5=Discard
 ambient=15
 contrast=15
-team=255
 lentlink=obj_14642
 lenttemplate=obj_13009
 womanwearoff=3,-11,6
@@ -176225,7 +176204,6 @@ iop1=Open
 recol1s=22410
 recol1d=60325
 ambient=5
-team=255
 param=param_59,1
 
 [obj_14646]
@@ -176248,14 +176226,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14647
-team=255
 
 [obj_14647]
-model=model_0
-cost=50
 certlink=obj_14646
 certtemplate=obj_799
-team=255
 
 [obj_14648]
 model=model_45483
@@ -176277,14 +176251,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14649
-team=255
 
 [obj_14649]
-model=model_0
-cost=50
 certlink=obj_14648
 certtemplate=obj_799
-team=255
 
 [obj_14650]
 model=model_45483
@@ -176306,14 +176276,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14651
-team=255
 
 [obj_14651]
-model=model_0
-cost=50
 certlink=obj_14650
 certtemplate=obj_799
-team=255
 
 [obj_14652]
 model=model_45483
@@ -176335,14 +176301,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14653
-team=255
 
 [obj_14653]
-model=model_0
-cost=50
 certlink=obj_14652
 certtemplate=obj_799
-team=255
 
 [obj_14654]
 model=model_45483
@@ -176364,14 +176326,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14655
-team=255
 
 [obj_14655]
-model=model_0
-cost=50
 certlink=obj_14654
 certtemplate=obj_799
-team=255
 
 [obj_14656]
 model=model_45483
@@ -176393,14 +176351,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14657
-team=255
 
 [obj_14657]
-model=model_0
-cost=50
 certlink=obj_14656
 certtemplate=obj_799
-team=255
 
 [obj_14658]
 model=model_45483
@@ -176422,14 +176376,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14659
-team=255
 
 [obj_14659]
-model=model_0
-cost=50
 certlink=obj_14658
 certtemplate=obj_799
-team=255
 
 [obj_14660]
 model=model_45483
@@ -176451,14 +176401,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14661
-team=255
 
 [obj_14661]
-model=model_0
-cost=50
 certlink=obj_14660
 certtemplate=obj_799
-team=255
 
 [obj_14662]
 model=model_45483
@@ -176480,14 +176426,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14663
-team=255
 
 [obj_14663]
-model=model_0
-cost=50
 certlink=obj_14662
 certtemplate=obj_799
-team=255
 
 [obj_14664]
 model=model_45483
@@ -176509,14 +176451,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14665
-team=255
 
 [obj_14665]
-model=model_0
-cost=50
 certlink=obj_14664
 certtemplate=obj_799
-team=255
 
 [obj_14666]
 model=model_45483
@@ -176538,14 +176476,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14667
-team=255
 
 [obj_14667]
-model=model_0
-cost=50
 certlink=obj_14666
 certtemplate=obj_799
-team=255
 
 [obj_14668]
 model=model_45483
@@ -176567,14 +176501,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14669
-team=255
 
 [obj_14669]
-model=model_0
-cost=50
 certlink=obj_14668
 certtemplate=obj_799
-team=255
 
 [obj_14670]
 model=model_45483
@@ -176596,14 +176526,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14671
-team=255
 
 [obj_14671]
-model=model_0
-cost=50
 certlink=obj_14670
 certtemplate=obj_799
-team=255
 
 [obj_14672]
 model=model_45483
@@ -176625,14 +176551,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14673
-team=255
 
 [obj_14673]
-model=model_0
-cost=50
 certlink=obj_14672
 certtemplate=obj_799
-team=255
 
 [obj_14674]
 model=model_45483
@@ -176654,14 +176576,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14675
-team=255
 
 [obj_14675]
-model=model_0
-cost=50
 certlink=obj_14674
 certtemplate=obj_799
-team=255
 
 [obj_14676]
 model=model_45483
@@ -176683,14 +176601,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14677
-team=255
 
 [obj_14677]
-model=model_0
-cost=50
 certlink=obj_14676
 certtemplate=obj_799
-team=255
 
 [obj_14678]
 model=model_45483
@@ -176712,14 +176626,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14679
-team=255
 
 [obj_14679]
-model=model_0
-cost=50
 certlink=obj_14678
 certtemplate=obj_799
-team=255
 
 [obj_14680]
 model=model_45483
@@ -176741,14 +176651,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14681
-team=255
 
 [obj_14681]
-model=model_0
-cost=50
 certlink=obj_14680
 certtemplate=obj_799
-team=255
 
 [obj_14682]
 model=model_45483
@@ -176770,14 +176676,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14683
-team=255
 
 [obj_14683]
-model=model_0
-cost=50
 certlink=obj_14682
 certtemplate=obj_799
-team=255
 
 [obj_14684]
 model=model_45483
@@ -176799,14 +176701,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14685
-team=255
 
 [obj_14685]
-model=model_0
-cost=50
 certlink=obj_14684
 certtemplate=obj_799
-team=255
 
 [obj_14686]
 model=model_45483
@@ -176828,14 +176726,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14687
-team=255
 
 [obj_14687]
-model=model_0
-cost=50
 certlink=obj_14686
 certtemplate=obj_799
-team=255
 
 [obj_14688]
 model=model_45483
@@ -176857,14 +176751,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14689
-team=255
 
 [obj_14689]
-model=model_0
-cost=50
 certlink=obj_14688
 certtemplate=obj_799
-team=255
 
 [obj_14690]
 model=model_45483
@@ -176886,14 +176776,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14691
-team=255
 
 [obj_14691]
-model=model_0
-cost=50
 certlink=obj_14690
 certtemplate=obj_799
-team=255
 
 [obj_14692]
 model=model_45483
@@ -176915,14 +176801,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14693
-team=255
 
 [obj_14693]
-model=model_0
-cost=50
 certlink=obj_14692
 certtemplate=obj_799
-team=255
 
 [obj_14694]
 model=model_45483
@@ -176944,14 +176826,10 @@ stockmarket=yes
 manhead=model_45484
 womanhead=model_45485
 certlink=obj_14695
-team=255
 
 [obj_14695]
-model=model_0
-cost=50
 certlink=obj_14694
 certtemplate=obj_799
-team=255
 
 [obj_14696]
 model=model_45489
@@ -176966,7 +176844,6 @@ womanwear=model_45491
 womanwear2=model_45493
 iop2=Wear
 iop5=Destroy
-team=255
 
 [obj_14697]
 model=model_45489
@@ -176980,7 +176857,6 @@ manwear2=model_45492
 womanwear=model_45491
 womanwear2=model_45493
 iop2=Wear
-team=255
 
 [obj_14698]
 model=model_45494
@@ -176993,7 +176869,6 @@ manwear=model_45495
 womanwear=model_45496
 iop2=Wear
 iop5=Destroy
-team=255
 
 [obj_14699]
 model=model_45494
@@ -177005,7 +176880,6 @@ members=yes
 manwear=model_45495
 womanwear=model_45496
 iop2=Wear
-team=255
 
 [obj_14700]
 model=model_31686
