@@ -1,6 +1,6 @@
 package content.region.asgarnia.port_sarim.dialogue
 
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pets
 import core.api.hasRequirement
 import core.api.openInterface
 import core.api.sendDialogue

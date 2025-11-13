@@ -5,7 +5,7 @@ import content.global.plugins.iface.BookInterface
 import content.global.plugins.iface.BookLine
 import content.global.plugins.iface.Page
 import content.global.plugins.iface.PageSet
-import content.region.karamja.brimhaven.BrimhavenPlugin.Companion.success
+import content.region.karamja.brimhaven.plugin.BrimhavenPlugin.Companion.success
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

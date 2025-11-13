@@ -1,0 +1,60 @@
+package content.region.desert.nardah.plugin.kalphite
+
+import core.api.*
+import core.cache.def.impl.SceneryDefinition
+import core.game.interaction.NodeUsageEvent
+import core.game.interaction.OptionHandler
+import core.game.interaction.QueueStrength
+import core.game.interaction.UseWithHandler
+import core.game.node.Node
+import core.game.node.entity.player.Player
+import core.game.node.scenery.Scenery
+import core.game.world.map.Location
+import core.plugin.Initializable
+import core.plugin.Plugin
+import shared.consts.Animations
+import shared.consts.Items
+
+@Initializable
+class KalphiteEntrancePlugin : OptionHandler() {
+
+    override fun newInstance(arg: Any?): Plugin<Any> {
+        val handler = object : UseWithHandler(Items.ROPE_954) {
+            override fun handle(event: NodeUsageEvent): Boolean {
+                val node = event.usedWith as Scenery
+                if (node.id == 3827 || node.id == 23609) {
+                    if (removeItem(event.player, event.usedItem)) {
+                        replaceScenery(node, node.id + 1, 500)
+                        return true
+                    }
+                }
+                return false
+            }
+            override fun newInstance(arg: Any?): Plugin<Any> = this
+        }
+        UseWithHandler.addHandler(3827, UseWithHandler.OBJECT_TYPE, handler)
+        UseWithHandler.addHandler(23609, UseWithHandler.OBJECT_TYPE, handler)
+        SceneryDefinition.forId(3828).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(3829).handlers["option:climb-up"] = this
+        SceneryDefinition.forId(23610).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(3832).handlers["option:climb-up"] = this
+        return this
+    }
+
+    override fun handle(player: Player, node: Node, option: String): Boolean {
+        val node = node as Scenery
+        var destination: Location? = null
+        when (node.id) {
+            23610 -> destination = Location.create(3508, 9493, 0)
+            3832 -> destination = Location.create(3509, 9496, 2)
+        }
+        val dest = destination
+        lock(player, 2)
+        animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
+        queueScript(player, 1, QueueStrength.WEAK) {
+            player.properties.teleportLocation = dest
+            return@queueScript stopExecuting(player)
+        }
+        return true
+    }
+}

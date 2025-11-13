@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.dialogue
 
-import content.global.skill.summoning.objectpets.Pet
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pet
+import content.global.skill.summoning.pets.Pets
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.interaction.QueueStrength

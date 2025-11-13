@@ -1,6 +1,6 @@
 package content.global.skill.construction.decoration.kitchen
 
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pets
 import core.api.animate
 import core.api.lock
 import core.game.interaction.IntType

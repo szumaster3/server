@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.dialogue
 
-import content.region.asgarnia.falador.diary.SquireDiaryDialogue
+import content.region.asgarnia.falador.diary.dialogue.SquireDiaryDialogue
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC

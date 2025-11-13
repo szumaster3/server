@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.ge
 
-import content.global.plugins.iface.grandexchange.ExchangeItemSets
-import content.global.plugins.iface.grandexchange.StockMarket
+import content.global.plugins.iface.ge.ExchangeItemSets
+import content.global.plugins.iface.ge.StockMarket
 import core.api.getUsedOption
 import core.api.openDialogue
 import core.game.ge.ExchangeHistory

@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.dialogue
 
-import content.global.plugins.iface.DiangoInterface
+import content.global.plugins.iface.DiangoReclaimableInterface
 import core.api.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -41,12 +41,12 @@ class DiangoDialogue(player: Player? = null) : Dialogue(player) {
             }
             20 -> npc("Sure thing, let me just see what you're missing.").also { stage++ }
             21 -> {
-                DiangoInterface.open(player)
+                DiangoReclaimableInterface.open(player)
                 end()
             }
             30 -> {
                 end()
-                DiangoInterface.open(player)
+                DiangoReclaimableInterface.open(player)
             }
         }
         return true

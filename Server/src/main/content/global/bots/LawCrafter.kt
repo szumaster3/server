@@ -1,6 +1,6 @@
 package content.global.bots
 
-import content.global.travel.charter.CharterShip
+import content.global.travel.charterships.CharterShip
 import core.cache.def.impl.ItemDefinition
 import core.game.bots.*
 import core.game.node.item.Item

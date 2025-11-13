@@ -2,7 +2,7 @@ package content.global.skill.summoning.familiar;
 
 import content.global.skill.summoning.SummoningPouch;
 import content.global.skill.summoning.SummoningScroll;
-import content.global.skill.summoning.objectpets.Pet;
+import content.global.skill.summoning.pets.Pet;
 import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;

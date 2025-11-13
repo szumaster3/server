@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.quest.swept_cat.dialogue
 
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pets
 import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

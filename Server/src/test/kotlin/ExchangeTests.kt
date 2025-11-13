@@ -1,4 +1,4 @@
-import content.global.plugins.iface.grandexchange.StockMarket
+import content.global.plugins.iface.ge.StockMarket
 import core.game.ge.*
 import core.game.node.item.Item
 import kotlinx.coroutines.GlobalScope

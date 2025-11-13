@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.quest.dragon.cutscene;
 
-import content.global.travel.charter.CharterShip;
+import content.global.travel.charterships.CharterShip;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
 import core.game.activity.CutscenePlugin;

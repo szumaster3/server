@@ -1,6 +1,6 @@
 package content.region.misthalin.edgeville.dialogue
 
-import content.global.skill.summoning.objectpets.Pet
+import content.global.skill.summoning.pets.Pet
 import core.api.hasRequirement
 import core.api.sendMessage
 import core.game.dialogue.Dialogue

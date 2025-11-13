@@ -1,6 +1,6 @@
 package content.global.plugins.item.withnpc
 
-import content.global.skill.summoning.objectpets.Pet
+import content.global.skill.summoning.pets.Pet
 import core.api.animate
 import core.api.removeItem
 import core.api.sendChat

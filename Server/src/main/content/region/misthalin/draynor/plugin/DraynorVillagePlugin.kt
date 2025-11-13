@@ -1,6 +1,6 @@
 package content.region.misthalin.draynor.plugin
 
-import content.global.plugins.iface.DiangoInterface
+import content.global.plugins.iface.DiangoReclaimableInterface
 import content.region.misthalin.draynor.dialogue.TreeGuardDialogue
 import core.api.*
 import core.game.activity.ActivityManager
@@ -52,7 +52,7 @@ class DraynorVillagePlugin : InteractionListener {
          */
 
         on(NPCs.DIANGO_970, IntType.NPC, "holiday-items") { player, _ ->
-            DiangoInterface.open(player)
+            DiangoReclaimableInterface.open(player)
             return@on true
         }
 

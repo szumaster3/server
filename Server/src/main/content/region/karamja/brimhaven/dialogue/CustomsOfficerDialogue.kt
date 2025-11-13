@@ -1,6 +1,6 @@
 package content.region.karamja.brimhaven.dialogue
 
-import content.global.travel.charter.CharterShip
+import content.global.travel.charterships.CharterShip
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

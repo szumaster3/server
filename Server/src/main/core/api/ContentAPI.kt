@@ -4,7 +4,7 @@ import com.moandjiezana.toml.Toml
 import content.data.God
 import content.data.consumables.Consumables
 import content.data.skill.SkillingTool
-import content.global.plugins.iface.grandexchange.StockMarket
+import content.global.plugins.iface.ge.StockMarket
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
 import core.ServerConstants

@@ -1,6 +1,6 @@
 package content.region.kandarin.west_ardougne.plugin
 
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pets
 import core.api.addItem
 import core.api.removeItem
 import core.api.sendItemDialogue

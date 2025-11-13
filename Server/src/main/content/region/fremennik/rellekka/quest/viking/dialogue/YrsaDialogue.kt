@@ -1,7 +1,7 @@
 package content.region.fremennik.rellekka.quest.viking.dialogue
 
 import content.data.GameAttributes
-import content.region.fremennik.diary.YrsaDiaryDialogue
+import content.region.fremennik.diary.dialogue.YrsaDiaryDialogue
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
 import core.game.container.impl.EquipmentContainer

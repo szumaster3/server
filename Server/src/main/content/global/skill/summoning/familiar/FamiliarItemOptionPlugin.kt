@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar
 
-import content.global.skill.summoning.objectpets.Pets
+import content.global.skill.summoning.pets.Pets
 import core.cache.def.impl.ItemDefinition.forId
 import core.game.interaction.OptionHandler
 import core.game.node.Node

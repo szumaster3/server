@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome_village.dialogue
 
-import content.region.kandarin.gnome.quest.tree.dialogue.KingBolrenDialogueFile
+import content.region.kandarin.gnome_stronghold.quest.tree.dialogue.KingBolrenDialogueFile
 import core.api.addItemOrDrop
 import core.api.hasAnItem
 import core.api.isQuestComplete

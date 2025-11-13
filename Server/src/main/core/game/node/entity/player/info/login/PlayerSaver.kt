@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import content.global.skill.summoning.familiar.BurdenBeast
-import content.global.skill.summoning.objectpets.Pet
+import content.global.skill.summoning.pets.Pet
 import core.ServerConstants
 import core.api.PersistPlayer
 import core.api.log

@@ -1,5 +1,6 @@
 package content.region.fremennik.dialogue
 
+import content.region.fremennik.diary.dialogue.CouncilWorkmanDiaryDialogue
 import content.region.fremennik.rellekka.dialogue.CouncilWorkerDialogue
 import core.api.getQuestStage
 import core.api.openDialogue

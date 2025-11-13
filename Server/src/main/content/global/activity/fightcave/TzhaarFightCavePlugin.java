@@ -2,7 +2,6 @@ package content.global.activity.fightcave;
 
 import content.global.skill.slayer.SlayerManager;
 import content.global.skill.slayer.Tasks;
-import content.region.karamja.tzhaar_city.npc.TzhaarFightCaveNPC;
 import content.data.BossKillCounter;
 import core.game.activity.ActivityPlugin;
 import core.game.dialogue.FaceAnim;

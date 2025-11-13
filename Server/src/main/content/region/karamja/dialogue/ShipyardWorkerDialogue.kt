@@ -1,6 +1,6 @@
 package content.region.karamja.dialogue
 
-import content.region.kandarin.gnome.quest.grandtree.dialogue.ShipyardWorkerDialogueFile
+import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.ShipyardWorkerDialogueFile
 import core.api.getQuestStage
 import core.api.openDialogue
 import core.game.dialogue.Dialogue

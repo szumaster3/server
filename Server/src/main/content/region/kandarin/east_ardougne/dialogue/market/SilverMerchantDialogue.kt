@@ -1,8 +1,7 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
-import content.region.kandarin.gnome.quest.makinghistory.MHUtils
-import content.region.kandarin.gnome.quest.makinghistory.plugin.EnchantedKeyTreasures
-import content.region.kandarin.gnome.quest.makinghistory.plugin.MakingHistoryPlugin
+import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
+import content.region.kandarin.gnome_stronghold.quest.makinghistory.plugin.EnchantedKeyTreasures
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueFile
