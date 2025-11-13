@@ -21,7 +21,7 @@ class FremennikPlugin : InteractionListener {
 
         on(NPCs.MARIA_GUNNARS_5508, IntType.NPC, "ferry-neitiznot") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
-            FremennikTransportation.sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
+            FremennikBoat.sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
             return@on true
         }
 
@@ -30,7 +30,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.MARIA_GUNNARS_5507, IntType.NPC, "ferry-rellekka") { player, _ ->
-            FremennikTransportation.sail(player, Travel.NEITIZNOT_TO_RELLEKKA)
+            FremennikBoat.sail(player, Travel.NEITIZNOT_TO_RELLEKKA)
             return@on true
         }
 
@@ -40,7 +40,7 @@ class FremennikPlugin : InteractionListener {
 
         on(NPCs.MORD_GUNNARS_5481, IntType.NPC, "ferry-jatizso") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
-            FremennikTransportation.sail(player, Travel.RELLEKKA_TO_JATIZSO)
+            FremennikBoat.sail(player, Travel.RELLEKKA_TO_JATIZSO)
             return@on true
         }
 
@@ -49,7 +49,7 @@ class FremennikPlugin : InteractionListener {
          */
 
         on(NPCs.MORD_GUNNARS_5482, IntType.NPC, "ferry-rellekka") { player, _ ->
-            FremennikTransportation.sail(player, Travel.JATIZSO_TO_RELLEKKA)
+            FremennikBoat.sail(player, Travel.JATIZSO_TO_RELLEKKA)
             return@on true
         }
 
@@ -59,7 +59,7 @@ class FremennikPlugin : InteractionListener {
 
         on(NPCs.SAILOR_1385, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
-            FremennikTransportation.sail(player, Travel.RELLEKKA_TO_MISC)
+            FremennikBoat.sail(player, Travel.RELLEKKA_TO_MISC)
             return@on true
         }
 
@@ -69,7 +69,7 @@ class FremennikPlugin : InteractionListener {
 
         on(NPCs.SAILOR_1304, IntType.NPC, "travel") { player, _ ->
             if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return@on true
-            FremennikTransportation.sail(player, Travel.MISC_TO_RELLEKKA)
+            FremennikBoat.sail(player, Travel.MISC_TO_RELLEKKA)
             return@on true
         }
 
@@ -79,7 +79,7 @@ class FremennikPlugin : InteractionListener {
 
         on(Scenery.BOAT_21175, IntType.SCENERY, "travel") { player, obj ->
             if (obj.location == Location(2654, 3985, 1)) {
-                FremennikTransportation.sail(player, Travel.ICEBERG_TO_RELLEKKA)
+                FremennikBoat.sail(player, Travel.ICEBERG_TO_RELLEKKA)
             }
             return@on true
         }
@@ -92,12 +92,12 @@ class FremennikPlugin : InteractionListener {
             val option = getUsedOption(player)
             if (obj.location == Location(2708, 3732)) {
                 if (option.equals("iceberg", true)) {
-                    FremennikTransportation.sail(player, Travel.RELLEKKA_TO_ICEBERG)
+                    FremennikBoat.sail(player, Travel.RELLEKKA_TO_ICEBERG)
                 } else {
                     setTitle(player, 2)
                     sendOptions(player, "Where would you like to travel?", "Iceberg", "Stay here")
                     addDialogueAction(player) { _, button ->
-                        if (button == 1) FremennikTransportation.sail(player, Travel.RELLEKKA_TO_ICEBERG)
+                        if (button == 1) FremennikBoat.sail(player, Travel.RELLEKKA_TO_ICEBERG)
                         else closeDialogue(player)
                     }
                 }

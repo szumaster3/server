@@ -1,6 +1,6 @@
 package content.region.fremennik.dialogue
 
-import content.region.fremennik.plugin.FremennikTransportation
+import content.region.fremennik.plugin.FremennikBoat
 import content.region.fremennik.plugin.Travel
 import core.api.isQuestComplete
 import core.api.removeItem
@@ -38,9 +38,9 @@ class JarvaldTravelDialogue : DialogueFile() {
                 end()
                 if (atWaterbirdIsland) {
                     sendNPCDialogue(player!!, NPCs.JARVALD_2438, "Then let us away; There will be death to bring here another day!")
-                    FremennikTransportation.sail(player!!, Travel.WATERBIRTH_TO_RELLEKKA)
+                    FremennikBoat.sail(player!!, Travel.WATERBIRTH_TO_RELLEKKA)
                 } else {
-                    FremennikTransportation.sail(player!!, Travel.RELLEKKA_TO_WATERBIRTH)
+                    FremennikBoat.sail(player!!, Travel.RELLEKKA_TO_WATERBIRTH)
                 }
             }
             2 -> sendNPCDialogue(player!!, NPCs.JARVALD_2438, "Ha Ha Ha! A true huntsman at heart!", FaceAnim.LAUGH).also { stage++ }
@@ -59,10 +59,10 @@ class JarvaldTravelDialogue : DialogueFile() {
                     return
                 }
                 if (atWaterbirdIsland) {
-                    FremennikTransportation.sail(player!!, Travel.WATERBIRTH_TO_RELLEKKA)
+                    FremennikBoat.sail(player!!, Travel.WATERBIRTH_TO_RELLEKKA)
                     sendNPCDialogue(player!!, NPCs.JARVALD_2438, "Then let us away; There will be death to bring here another day!")
                 } else {
-                    FremennikTransportation.sail(player!!, Travel.RELLEKKA_TO_WATERBIRTH)
+                    FremennikBoat.sail(player!!, Travel.RELLEKKA_TO_WATERBIRTH)
                 }
             }
             6 -> playerl(FaceAnim.NEUTRAL, "No, actually I have some stuff to do here first.").also { stage++ }

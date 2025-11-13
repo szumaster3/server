@@ -1,6 +1,6 @@
 package content.region.fremennik.rellekka.dialogue
 
-import content.region.fremennik.plugin.FremennikTransportation.sail
+import content.region.fremennik.plugin.FremennikBoat
 import content.region.fremennik.plugin.Travel
 import core.api.findLocalNPC
 import core.api.getAttribute
@@ -64,7 +64,7 @@ class MariaGunnarsDialogue(player: Player? = null) : Dialogue(player) {
             17 -> npcl(FaceAnim.HAPPY, "However, Neitiznot seems a happy place!").also { stage++ }
             18 -> npcl(FaceAnim.HALF_GUILTY, "The Burgher seems a wiser rule than King Sorvott, although I believe he is worried about the trolls at the moment. They seem to be a big threat.").also { stage = END_DIALOGUE }
             19 -> npc("Sure.").also { stage++ }
-            20 -> end().also { sail(player, Travel.NEITIZNOT_TO_RELLEKKA) }
+            20 -> end().also { FremennikBoat.sail(player, Travel.NEITIZNOT_TO_RELLEKKA) }
             21 -> npc("Fare thee well.").also { stage = END_DIALOGUE }
             22 -> options("Tell me about Neitiznot's geography.", "Tell me about the islands' history.", "Tell me about Burgher Mawnis Burowgar.", "Can you ferry me to Neitiznot?", "I just stopped to say 'hello'.").also { stage++ }
             23 -> when (buttonId) {
@@ -144,7 +144,7 @@ class MariaGunnarsDialogue(player: Player? = null) : Dialogue(player) {
             91 -> {
                 end()
                 if (!requireQuest(player, Quests.THE_FREMENNIK_TRIALS, "")) return true
-                sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
+                FremennikBoat.sail(player, Travel.RELLEKKA_TO_NEITIZNOT)
             }
             92 -> npc("Thanks!").also { stage++ }
             93 -> player("I may be back later.").also { stage++ }

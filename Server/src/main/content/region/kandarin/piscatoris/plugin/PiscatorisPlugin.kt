@@ -1,5 +1,6 @@
 package content.region.kandarin.piscatoris.plugin
 
+import content.region.kandarin.piscatoris.dialogue.KathyCorkatDialogue.Companion.sail
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -23,7 +24,7 @@ class PiscatorisPlugin : InteractionListener {
          */
 
         on(KATHY_CORKAT, IntType.NPC, "travel") { player, node ->
-            Rowboat.sail(player, node.asNpc())
+            sail(player, node.asNpc())
             return@on true
         }
 

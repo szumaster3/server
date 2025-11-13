@@ -1,6 +1,6 @@
 package content.region.fremennik.rellekka.dialogue
 
-import content.region.fremennik.plugin.FremennikTransportation.sail
+import content.region.fremennik.plugin.FremennikBoat
 import content.region.fremennik.plugin.Travel
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
@@ -103,7 +103,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
                     }
                     npcl(FaceAnim.NEUTRAL, message)
                 }
-                sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
+                FremennikBoat.sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
                 setVarbit(player, FIRST_TIME_JOIN_VARBIT, 1, true)
             }
             22 -> playerl(FaceAnim.HALF_GUILTY, "No, actually I have some stuff to do here first.").also { stage++ }
@@ -163,7 +163,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
                 if (firstTimeJoin != 1) {
                     npcl(FaceAnim.FRIENDLY, "I would head straight for the cave and not tarry too long ${FremennikTrials.getFremennikName(player)}, the cold winds on this island can cut right through you should you spend too long in them.")
                 }
-                sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
+                FremennikBoat.sail(player, Travel.RELLEKKA_TO_WATERBIRTH)
             }
             55 -> playerl(FaceAnim.HALF_GUILTY, "No, actually I have some stuff to do here first.")
             56 -> sendOptions(player, "Leave island?", "YES", "NO").also { stage++ }
@@ -181,7 +181,7 @@ class JarvaldDialogue(player: Player? = null) : Dialogue(player) {
                     if (firstTimeJoin != 1) {
                         npcl(FaceAnim.FRIENDLY, "Then let us away; There will be death to bring here another day!")
                     }
-                    sail(player, Travel.WATERBIRTH_TO_RELLEKKA)
+                    FremennikBoat.sail(player, Travel.WATERBIRTH_TO_RELLEKKA)
                 }
                 2 -> npcl(FaceAnim.LOUDLY_LAUGHING, "Ha Ha Ha! A true huntsman at heart!").also { stage++ }
             }
