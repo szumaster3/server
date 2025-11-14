@@ -13,7 +13,8 @@ import kotlin.math.abs
  * @author Emperor, Vexia
  */
 object CharacterDesign {
-    private val MALE_LOOK_IDS = arrayOf(
+
+    val MALE_LOOK_IDS = arrayOf(
         // Male head component ids.
         intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 91, 92, 93, 94, 95, 96, 97, 261, 262, 263, 264, 265, 266, 267, 268),
         // Male jaw component ids.
@@ -30,7 +31,7 @@ object CharacterDesign {
         intArrayOf(42, 43)
     )
 
-    private val FEMALE_LOOK_IDS = arrayOf(
+    val FEMALE_LOOK_IDS = arrayOf(
         // Female head component ids.
         intArrayOf(45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280),
         // Female jaw component ids.

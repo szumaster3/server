@@ -1,5 +1,6 @@
 package content.global.plugins.iface.player
 
+import content.region.island.tutorial.plugin.CharacterDesign
 import core.api.*
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -50,18 +51,17 @@ class MakeoverMageInterface : ComponentPlugin() {
         player.toggleWardrobe(true)
         component.setUncloseEvent { pl, _ ->
             pl.toggleWardrobe(false)
-            if (getAttribute(player, "mm-paid", false)) {
-                val newColor = player.getAttribute("mm-previous", -1)
-                val newGender = player.getAttribute("mm-gender", -1)
-                if (newColor > -1) {
-                    player.appearance.skin.changeColor(newColor)
-                }
+            if (getAttribute(pl, "mm-paid", false)) {
+                val newColor = pl.getAttribute("mm-previous", -1)
+                val newGender = pl.getAttribute("mm-gender", -1)
                 if (newGender > -1) {
-                    player.appearance.changeGender(Gender.values()[newGender])
-                    player.appearance.skin.changeColor(newColor)
+                    mapAppearance(pl, Gender.values()[newGender])
                 }
-                removeAttribute(player, "mm-paid")
-                refreshAppearance(player)
+                if (newColor > -1) {
+                    pl.appearance.skin.changeColor(newColor)
+                }
+                removeAttribute(pl, "mm-paid")
+                refreshAppearance(pl)
             }
             removeAttribute(pl, "mm-previous")
             removeAttribute(pl, "mm-gender")
@@ -144,8 +144,38 @@ class MakeoverMageInterface : ComponentPlugin() {
 
         setAttribute(player, "mm-previous", button - skinColorButtons.first)
         setVarp(player, 262, newIndex)
+        player.appearance.skin.changeColor(button - skinColorButtons.first)
     }
 
+    /**
+     * Maps the player's appearance between genders while preserving visuals.
+     */
+    private fun mapAppearance(player: Player, newGender: Gender) {
+        val appearance = player.appearance
+        val oldGender = appearance.gender
+        if (oldGender == newGender) return
+
+        val oldCache = appearance.appearanceCache.map { it.look to it.color }
+
+        appearance.setGender(newGender)
+
+        val src = if (oldGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
+        val dst = if (newGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
+
+        val newCache = appearance.appearanceCache
+
+        for (i in newCache.indices) {
+            val (oldLook, oldColor) = oldCache.getOrNull(i) ?: continue
+            val s = src.getOrNull(i)
+            val d = dst.getOrNull(i)
+            if (s == null || d == null || s.isEmpty() || d.isEmpty()) continue
+            val idx = s.indexOf(oldLook)
+            val mapped = if (idx != -1 && idx < d.size) d[idx] else d.first()
+            newCache[i].changeLook(mapped)
+            newCache[i].changeColor(oldColor)
+        }
+        appearance.sync()
+    }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.put(Components.MAKEOVER_MAGE_205, this)
