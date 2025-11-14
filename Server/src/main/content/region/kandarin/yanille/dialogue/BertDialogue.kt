@@ -242,7 +242,7 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
 
             140 -> {
                 end()
-                rewardSand(84)
+                rewardSand(player,84)
             }
 
         }
@@ -267,13 +267,16 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(NPCs.BERT_3108)
 
-    private fun rewardSand(amount: Int) {
-        player?.bank?.add(Item(Items.BUCKET_OF_SAND_1783, amount))
-        val store = TheHandintheSand.getStoreFile()
-        val username = player?.username?.lowercase() ?: return
-        store.addProperty(username, true)
-        player.setAttribute(GameAttributes.HAND_SAND_LAST_SAND_CLAIM, System.currentTimeMillis())
-        player?.sendMessages("Thanks for the sand Bert!")
-        stage = END_DIALOGUE
+
+    companion object {
+        fun rewardSand(player:Player, amount: Int) {
+            player?.bank?.add(Item(Items.BUCKET_OF_SAND_1783, amount))
+            val store = TheHandintheSand.getStoreFile()
+            val username = player?.username?.lowercase() ?: return
+            store.addProperty(username, true)
+            player.setAttribute(GameAttributes.HAND_SAND_LAST_SAND_CLAIM, System.currentTimeMillis())
+            player?.sendMessages("Thanks for the sand Bert!")
+            closeDialogue(player)
+        }
     }
 }

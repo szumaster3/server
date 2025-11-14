@@ -1,5 +1,7 @@
 package content.global.plugins.iface
 
+import content.region.kandarin.yanille.dialogue.BertDialogue
+import content.region.kandarin.yanille.quest.handsand.TheHandintheSand.Companion.getStoreFile
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -61,10 +63,18 @@ class NPCContactInterface : InterfaceListener {
         WiseOldMan()
     )
 
-    val random = randomDialogue.random()
-
     override fun defineInterfaceListeners() {
         on(Components.NPC_CONTACT_429) { player, _, _, buttonID, _, _ ->
+            val random = randomDialogue
+                .filter { dialogue ->
+                    if (dialogue is Bert) {
+                        isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)
+                    } else {
+                        true
+                    }
+                }
+                .random()
+
             when (buttonID) {
                 35 -> {
                     closeInterface(player)
@@ -163,6 +173,9 @@ class NPCContactInterface : InterfaceListener {
             componentID: Int,
             buttonID: Int,
         ) {
+            val store = getStoreFile()
+            val username = player?.username?.lowercase() ?: ""
+            val alreadyClaimed = store[username]?.asBoolean ?: false
             npc = NPC(NPCs.BERT_3108)
             when (stage) {
                 0  -> playerl(FaceAnim.FRIENDLY, "Hi there, Bert.").also { stage++ }
@@ -176,15 +189,19 @@ class NPCContactInterface : InterfaceListener {
                     end()
                 }
                 6  -> npcl(FaceAnim.HALF_ASKING, "Oh ar. So wha' do thee want?").also { stage++ }
-                7  -> playerl(FaceAnim.FRIENDLY, "Could you hand some sand into my bank?").also { stage = END_DIALOGUE }
+                7  -> playerl(FaceAnim.FRIENDLY, "Could you hand some sand into my bank?").also { stage++ }
 
-                // TODO: If you have not collected sand for the day
-                8 -> npcl(FaceAnim.HALF_ASKING, "Ah, keep yer 'air on, I'll leg I' to tha bank wit' some sand fer ya.").also { stage++ }
-                9 -> playerl(FaceAnim.FRIENDLY, "Thanks!").also { stage++ }
-
-                // TODO: If you have already collected sand for the day
-                10 -> npcl(FaceAnim.HALF_ASKING, "I be a wee bi' busy to 'elp wit' yon sand, come back tomorra.").also { stage++ }
-                11 -> playerl(FaceAnim.FRIENDLY, "Okay, Bert, I'll come back for my sand a bit later on.").also { stage++ }
+                8 -> if(alreadyClaimed){
+                    npcl(FaceAnim.HALF_ASKING, "I be a wee bi' busy to 'elp wit' yon sand, come back tomorra.").also { stage++ }
+                } else {
+                    npcl(FaceAnim.HALF_ASKING, "Ah, keep yer 'air on, I'll leg I' to tha bank wit' some sand fer ya.").also { stage = 10 }
+                }
+                9 -> playerl(FaceAnim.FRIENDLY, "Okay, Bert, I'll come back for my sand a bit later on.").also { stage = END_DIALOGUE }
+                10 -> {
+                    end()
+                    BertDialogue.rewardSand(player!!,84)
+                    stage = END_DIALOGUE
+                }
             }
         }
     }
