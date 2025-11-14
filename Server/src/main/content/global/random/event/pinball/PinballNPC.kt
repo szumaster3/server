@@ -39,11 +39,11 @@ class PinballNPC(override var loot: WeightBasedTable? = null): RandomEventNPC(NP
                 }
                 1 -> {
                     setMinimapState(player, 2)
-                    face(player, findNPC(NPCs.MYSTERIOUS_OLD_MAN_410)!!)
                     openOverlay(player, Components.PINBALL_INTERFACE_263)
                     setVarbit(player, PinballUtils.VARBIT_PINBALL_SCORE, 0)
                     setAttribute(player, GameAttributes.RE_PINBALL_OBJ, 0)
                     removeTabs(player, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14)
+                    face(player, findNPC(NPCs.MYSTERIOUS_OLD_MAN_410)!!)
                     openDialogue(player, PinballDialogue())
                     AntiMacro.terminateEventNpc(player)
                     return@queueScript stopExecuting(player)
