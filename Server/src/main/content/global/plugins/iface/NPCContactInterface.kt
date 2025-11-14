@@ -63,25 +63,27 @@ class NPCContactInterface : InterfaceListener {
         WiseOldMan()
     )
 
+    val random = randomDialogue.random()
+
     override fun defineInterfaceListeners() {
         on(Components.NPC_CONTACT_429) { player, _, _, buttonID, _, _ ->
-            val random = randomDialogue
-                .filter { dialogue ->
-                    if (dialogue is Bert) {
-                        isQuestComplete(player, Quests.THE_HAND_IN_THE_SAND)
-                    } else {
-                        true
-                    }
-                }
-                .random()
-
             when (buttonID) {
                 35 -> {
                     closeInterface(player)
-                    openDialogue(player, random)
+
+                    val dialogue = randomDialogue.filter { dialogue ->
+                        dialogue.npc?.id != NPCs.BERT_3108 || hasRequirement(player, Quests.THE_HAND_IN_THE_SAND)
+                    }
+
+                    val random = dialogue.randomOrNull()
+                    if (random != null) {
+                        openDialogue(player, random)
+                    }
+
                     return@on true
                 }
             }
+
             var index = when (buttonID) {
                 10, 38 -> 0
                 11, 39 -> 1
@@ -101,7 +103,13 @@ class NPCContactInterface : InterfaceListener {
             if (index == -1) index = RandomFunction.random(contactNPCs.size)
             player.getAttribute<() -> Unit>("contact-caller")?.invoke()
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(contactNPCs[index], NPC(contactNPCs[index], Location(0, 0)))
+            var npcId = contactNPCs[index]
+
+            if (npcId == NPCs.BERT_3108 && !hasRequirement(player, Quests.THE_HAND_IN_THE_SAND)) {
+                npcId = contactNPCs.filter { it != NPCs.BERT_3108 }.random()
+            }
+
+            player.dialogueInterpreter.open(npcId, NPC(npcId, Location(0, 0)))
             return@on true
         }
     }
