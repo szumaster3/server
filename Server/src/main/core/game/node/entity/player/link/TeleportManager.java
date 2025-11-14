@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link;
 
+import content.data.GameAttributes;
 import content.region.island.tutorial.plugin.*;
 import core.ServerConstants;
 import core.game.node.entity.Entity;
@@ -361,7 +362,7 @@ public class TeleportManager {
                     public boolean pulse() {
                         if (count == 18) {
                             player.getProperties().setTeleportLocation(location);
-                            if (player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1) == 72) {
+                            if (player.getAttribute(GameAttributes.TUTORIAL_STAGE, -1) == 72) {
                                 Player p = entity.asPlayer();
                                 completeTutorial(p);
                             }
@@ -919,6 +920,7 @@ public class TeleportManager {
     private static void completeTutorial(Player player) {
         setVarbit(player, TutorialStage.FLASHING_ICON, 0);
         setVarp(player, 281, 1000, true);
+        setVarbit(player, 4895, 0, true);
         setAttribute(player, "/save:tutorial:complete", true);
         setAttribute(player, "/save:tutorial:stage", 73);
 

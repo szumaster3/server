@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.component.Component
@@ -19,7 +20,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             27 -> npc(FaceAnim.FRIENDLY, "Ah. Welcome, adventurer. I'm here to tell you all about", "quests. Lets start by opening the Quest List.")
             28 -> npc(FaceAnim.FRIENDLY, "Now you have the journal open. I'll tell you a bit about", "it At the moment all the quests are shown in red, which", "means you have not started them yet.")
             in 29..72 -> npc(FaceAnim.HALF_ASKING, "Would you like to hear about quests again?")
@@ -29,7 +30,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             27 -> {
                 sendPlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
                 TutorialStage.removeHintIcon(player)
@@ -42,7 +43,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npc("There's not a lot more I can tell you about questing.", "You have to experience the thrill of it yourself to fully", "understand. You may find some adventure in the caves", "under my house.").also { stage++ }
                 3 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 29)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 29)
                     TutorialStage.load(player, 29)
                 }
             }

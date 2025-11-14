@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.getAttribute
 import core.api.setAttribute
@@ -16,7 +17,7 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             58 -> playerl(FaceAnim.FRIENDLY, "Hello, who are you?")
             59 -> npcl(FaceAnim.FRIENDLY, "You're nearly finished. The Prayer instructor would like to have a chat with you in the nearby church.").also { return false }
         }
@@ -24,7 +25,7 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             58 -> when (stage++) {
                 0 -> npcl(FaceAnim.FRIENDLY, "I'm the Financial Advisor. I'm here to tell people how to make money.")
                 1 -> playerl(FaceAnim.FRIENDLY, "Okay. How can I make money then?")
@@ -37,7 +38,7 @@ class FinanceAdvisorDialogue(player: Player? = null) : Dialogue(player) {
                 8 -> npcl(FaceAnim.FRIENDLY, "Well, that about covers it. Move along now.")
                 9 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 59)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 59)
                     TutorialStage.load(player, 59)
                 }
             }

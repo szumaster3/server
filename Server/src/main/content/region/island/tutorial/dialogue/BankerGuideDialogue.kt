@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.setAttribute
 import core.game.dialogue.DialogueFile
@@ -21,7 +22,7 @@ class BankerGuideDialogue: DialogueFile() {
             2 -> when (buttonID) {
                 1 -> {
                     end()
-                    setAttribute(player!!, TutorialStage.TUTORIAL_STAGE, 57)
+                    setAttribute(player!!, GameAttributes.TUTORIAL_STAGE, 57)
                     TutorialStage.load(player!!, 57)
                     player?.bank?.open()
                 }

@@ -213,10 +213,10 @@ class InterfaceManager(
 
         if (wasOpened != null && opened == null) {
             val tutorialComplete = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
-            val tutorialStage = player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1)
+            val tutorialStage = player.getAttribute(GameAttributes.TUTORIAL_STAGE, -1)
             if (!tutorialComplete && tutorialStage < 72) {
                 if (!player.isArtificial) {
-                    TutorialStage.load(player, max(tutorialStage, 0), false)
+                    TutorialStage.load(player, tutorialStage, false)
                 }
             } else {
                 if (player.getAttribute<Any?>("runscript", null) != null) {
@@ -568,8 +568,8 @@ class InterfaceManager(
      * @param windowMode The desired window mode.
      */
     fun switchWindowMode(windowMode: Int) {
-        if (windowMode != player.session.getClientInfo()!!.windowMode) {
-            player.session.getClientInfo()!!.windowMode = windowMode
+        if (windowMode != player.session.clientInfo!!.windowMode) {
+            player.session.clientInfo!!.windowMode = windowMode
             openWindowsPane(Component(if (isResizable) Components.TOPLEVEL_FULLSCREEN_746 else Components.TOPLEVEL_548))
             if (!player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
                 hideTabs(player, false)

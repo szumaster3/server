@@ -16,18 +16,22 @@ import core.net.packet.out.HintIcon
  */
 class HintIconManager {
 
-    /** Active hint icons for this player (max 8). */
+    /**
+     * Active hint icons for this player (max 8).
+     */
     private val hintIcons: Array<HintIconContext?> = arrayOfNulls(MAXIMUM_SIZE)
 
-    /** Cached index of the next available slot. */
+    /**
+     * Cached index of the next available slot.
+     */
     private var cachedFreeSlot: Int = 0
 
     /**
      * Clears all active hint icons.
      */
     fun clear() {
-        hintIcons.indices.filter { hintIcons[it] != null }.forEach { index ->
-            hintIcons[index]?.let { removeHintIcon(it.player, index) }
+        for (i in hintIcons.indices) {
+            hintIcons[i]?.let { removeHintIcon(it.player, i) }
         }
         cachedFreeSlot = 0
     }
@@ -38,17 +42,8 @@ class HintIconManager {
      * @return Free slot index, or -1 if full.
      */
     fun freeSlot(): Int {
-        for (i in cachedFreeSlot until MAXIMUM_SIZE) {
-            if (hintIcons[i] == null) {
-                cachedFreeSlot = i
-                return i
-            }
-        }
-        for (i in 0 until cachedFreeSlot) {
-            if (hintIcons[i] == null) {
-                cachedFreeSlot = i
-                return i
-            }
+        for (i in 0 until MAXIMUM_SIZE) {
+            if (hintIcons[i] == null) return i
         }
         return -1
     }

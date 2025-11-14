@@ -37,7 +37,7 @@ class TutorialZone : MapZone("tutorial", true), Plugin<Any?> {
             }
 
             val tutorialComplete = getAttribute(entity, GameAttributes.TUTORIAL_COMPLETE, false)
-            val tutorialStage = getAttribute(entity, TutorialStage.TUTORIAL_STAGE, -1)
+            val tutorialStage = getAttribute(entity, GameAttributes.TUTORIAL_STAGE, -1)
 
             if (!tutorialComplete && tutorialStage < 72) {
                 return false

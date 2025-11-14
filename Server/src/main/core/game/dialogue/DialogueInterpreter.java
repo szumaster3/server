@@ -209,7 +209,7 @@ public final class DialogueInterpreter {
         }
 
         boolean tutorialComplete = player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false);
-        int tutorialStage = player.getAttribute(TutorialStage.TUTORIAL_STAGE, -1);
+        int tutorialStage = player.getAttribute(GameAttributes.TUTORIAL_STAGE, -1);
 
         if (tutorialComplete || tutorialStage >= 72) {
             if (player.getAttribute("runscript", null) != null) {

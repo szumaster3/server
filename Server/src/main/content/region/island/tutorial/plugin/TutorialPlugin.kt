@@ -27,7 +27,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(RS_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
-            val tutorialStage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
+            val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
 
             if (tutorialStage != 3) {
                 if(player.location.x < 3097) {
@@ -44,7 +44,7 @@ class TutorialPlugin : InteractionListener {
             }
 
 
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 4)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 4)
             TutorialStage.load(player, 4)
 
             val door = node as? core.game.node.scenery.Scenery ?: return@on false
@@ -57,7 +57,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(WOODEN_GATE, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 16) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 16) {
                 sendPlainDialogue(player,false,
                     "",
                     "You need to talk to the Survival Guide and",
@@ -66,7 +66,7 @@ class TutorialPlugin : InteractionListener {
                 )
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 17)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 17)
             TutorialStage.load(player, 17)
             val gatePair = when (node.id) {
                 Scenery.GATE_3015 -> Pair(Scenery.GATE_3015, Scenery.GATE_3016)
@@ -86,11 +86,11 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(COOK_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 17) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 17) {
                 sendPlainDialogue(player,false, "You may not pass this door yet. Try following the instructions.")
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 18)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 18)
             TutorialStage.load(player, 18)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
@@ -101,7 +101,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(COOK_GUIDE_DOOR_EXIT, IntType.SCENERY, "open") { player, node ->
-            val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
+            val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
 
             when {
                 stage < 21 -> {
@@ -110,7 +110,7 @@ class TutorialPlugin : InteractionListener {
                 }
 
                 stage in 21..22 -> {
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 23)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 23)
                     TutorialStage.load(player, 23)
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return@on true
@@ -128,11 +128,11 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(QUEST_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 26) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 26) {
                 sendPlainDialogue(player,false, "You need to finish the Master Chef's tasks first.")
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 27)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 27)
             TutorialStage.load(player, 27)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
@@ -143,13 +143,13 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(QUEST_LADDER_DOWN, IntType.SCENERY, "climb-down") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) < 29) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) < 29) {
                 sendNPCDialogue(player, NPCs.QUEST_GUIDE_949, "I don't think you're ready to go down there yet.", FaceAnim.HALF_GUILTY)
                 return@on false
             }
 
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) == 29) {
-                setAttribute(player, TutorialStage.TUTORIAL_STAGE, 30)
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) == 29) {
+                setAttribute(player, GameAttributes.TUTORIAL_STAGE, 30)
                 TutorialStage.load(player, 30)
             }
             ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-down")
@@ -180,7 +180,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(COMBAT_GATE, IntType.SCENERY, "open") { player, node ->
-            val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, -1)
+            val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
             if (stage < 42) {
                 sendPlainDialogue(player,false, "You need to finish with Mining and Smithing first.")
                 return@on false
@@ -189,7 +189,7 @@ class TutorialPlugin : InteractionListener {
                 sendPlainDialogue(player,false, "Follow the path to the Combat Instructor.")
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 44)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 44)
             TutorialStage.load(player, 44)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
@@ -200,7 +200,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(GIANT_RAT_GATE, IntType.SCENERY, "open") { player, node ->
-            val stage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
+            val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
             if(stage == 54) {
                 sendNPCDialogueLines(player, NPCs.COMBAT_INSTRUCTOR_944, FaceAnim.ANNOYED, false, "No, don't enter the pit. Range the rats from outside the cage.")
                 return@on false
@@ -210,7 +210,7 @@ class TutorialPlugin : InteractionListener {
                 return@on false
             }
             if (stage == 50) {
-                setAttribute(player, TutorialStage.TUTORIAL_STAGE, 51)
+                setAttribute(player, GameAttributes.TUTORIAL_STAGE, 51)
                 TutorialStage.load(player, 51)
             }
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
@@ -222,7 +222,7 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(COMBAT_LADDER, IntType.SCENERY, "climb-up") { player, _ ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 55) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 55) {
                 sendPlainDialogue(player,false,
                     "You're not ready to continue yet. You need to know",
                     "about combat before you go on.",
@@ -230,7 +230,7 @@ class TutorialPlugin : InteractionListener {
                 return@on false
             }
 
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 56)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 56)
             TutorialStage.load(player, 56)
             animate(player, Animations.HUMAN_CLIMB_STAIRS_828)
             teleport(player, Location.create(3111, 3127, 0), TeleportManager.TeleportType.INSTANT, 2)
@@ -269,15 +269,15 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(BANK_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 57) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 57) {
                 sendPlainDialogue(player,false, "", "You need to open your bank first.", "")
                 return@on false
             }
-            if(getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) == 58) {
+            if(getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) == 58) {
                 sendPlainDialogue(player,false, "", "You've already done that. Perhaps you should move on.")
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 58)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 58)
             TutorialStage.load(player, 58)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true
@@ -288,14 +288,14 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(FINANCE_GUIDE_DOOR, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 59) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 59) {
                 sendPlainDialogue(player,false,
                     "You should complete your objective before",
                     "talking to Finance Advisor."
                 )
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 60)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 60)
             TutorialStage.load(player, 60)
             DoorActionHandler.handleAutowalkDoor(player, node as core.game.node.scenery.Scenery)
             return@on true
@@ -307,14 +307,14 @@ class TutorialPlugin : InteractionListener {
          */
 
         on(CHURCH_DOOR_EXIT, IntType.SCENERY, "open") { player, node ->
-            if (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0) != 66) {
+            if (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0) != 66) {
                 sendPlainDialogue(player,false,
                     "You need to finish Brother Brace's tasks before you",
                     "are allowed to proceed through this door.",
                 )
                 return@on false
             }
-            setAttribute(player, TutorialStage.TUTORIAL_STAGE, 67)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 67)
             TutorialStage.load(player, 67)
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             return@on true

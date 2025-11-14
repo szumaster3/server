@@ -1,15 +1,13 @@
 package core.net.packet
 
+import content.data.GameAttributes
 import content.global.plugins.iface.ge.StockMarket
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.SpellListeners
 import content.global.skill.magic.SpellUtils
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.ServerConstants
-import core.api.getAttribute
-import core.api.log
-import core.api.sendMessage
-import core.api.tryPop
+import core.api.*
 import core.api.utils.Vector
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -301,7 +299,11 @@ object PacketProcessor {
             is Packet.ItemExamine -> {
                 val def = ItemDefinition.forId(pkt.id) ?: return
                 pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.value} Model: ${def.interfaceModelId}")
-                pkt.player.sendMessage(def.examine)
+                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
+                if(!completeTutorial)
+                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
+                else
+                    pkt.player.sendMessage(def.examine)
             }
 
             is Packet.SceneryExamine -> {
@@ -311,7 +313,11 @@ object PacketProcessor {
                 if (def.configFile != null)
                     pkt.player.debug("Varbit: ${def.configFile.id}")
                 pkt.player.debug("------------------------------")
-                pkt.player.sendMessage(def.examine)
+                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
+                if(!completeTutorial)
+                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
+                else
+                    pkt.player.sendMessage(def.examine)
             }
 
             is Packet.NpcExamine -> {
@@ -321,7 +327,11 @@ object PacketProcessor {
                 if (def.configFileId != -1)
                     pkt.player.debug("Varbit: ${def.configFileId}")
                 pkt.player.debug("------------------------------")
-                pkt.player.sendMessage(def.examine)
+                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
+                if(!completeTutorial)
+                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
+                else
+                    pkt.player.sendMessage(def.examine)
             }
 
 

@@ -10,7 +10,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.HintIconManager
-import core.game.node.entity.player.link.music.MusicEntry
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
@@ -23,7 +23,6 @@ import shared.consts.*
 import java.util.*
 
 object TutorialStage {
-    const val TUTORIAL_STAGE = GameAttributes.TUTORIAL_STAGE
     const val FLASHING_ICON = Vars.VARBIT_FLASHING_TAB_ICON_3756
 
     @JvmField
@@ -63,23 +62,17 @@ object TutorialStage {
             player.hook(Event.SpellCast, TutorialCastReceiver)
             openOverlay(player, Components.TUTORIAL_PROGRESS_371)
             sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
-            player.musicPlayer.play(MusicEntry.forId(Music.NEWBIE_MELODY_62))
         }
-
-        /*
-        if(!getAttribute(player, STARTER_BANK, false)) {
-            player.bank.add(Item(Items.COINS_995, 25))
-            setAttribute(player, "/save:${STARTER_BANK}", true)
-        }
-         */
 
         updateProgressBar(player)
+
         when (stage) {
             0 -> {
-                player.lock()
+                lock(player, 10)
                 teleport(player, Location.create(3094, 3107, 0))
-                hideTabs(player, login)
+                setVarbit(player, 4895, 2)
                 setMinimapState(player, 2)
+                hideTabs(player, login)
                 CharacterDesign.open(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Getting started",
@@ -91,9 +84,10 @@ object TutorialStage {
             }
 
             39 -> {
-                player.unlock()
                 setMinimapState(player, 0)
-                player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+                hideTabs(player, login)
+                removeHintIcon(player)
+                registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Getting started",
                     "To start the tutorial use your left mouse button to click on the",
@@ -104,10 +98,10 @@ object TutorialStage {
             }
 
             1 -> {
-                player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+                hideTabs(player, login)
                 player.interfaceManager.openTab(Component(Components.OPTIONS_261))
-                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 12)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Game Options",
                     "",
@@ -118,9 +112,9 @@ object TutorialStage {
             }
 
             2 -> {
+                setVarbit(player, FLASHING_ICON, 0)
                 hideTabs(player, login)
                 removeHintIcon(player)
-                setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Game Options",
@@ -527,7 +521,7 @@ object TutorialStage {
                 Pulser.submit(
                     object : Pulse(3) {
                         override fun pulse(): Boolean {
-                            setAttribute(player, TUTORIAL_STAGE, 33)
+                            setAttribute(player, GameAttributes.TUTORIAL_COMPLETE, 33)
                             load(player, 33)
                             return true
                         }
@@ -1064,7 +1058,7 @@ object TutorialStage {
 
     @JvmStatic
     fun hideTabs(player: Player, login: Boolean) {
-        val stage = getAttribute(player, TUTORIAL_STAGE, 0)
+        val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
         if (login) {
             player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
         }
@@ -1112,7 +1106,7 @@ object TutorialStage {
     }
 
     private fun updateProgressBar(player: Player) {
-        val stage = getAttribute(player, TUTORIAL_STAGE, 0)
+        val stage = getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, 0)
         val percent = if (stage == 0 || stage == 39) 0 else ((stage.toDouble() / 74.0) * 100.0).toInt()
         val barPercent = if (stage == 0 || stage == 39) 0 else (((percent.toDouble() / 100.0) * 20.0).toInt() + 1)
         setVarp(player, 406, barPercent)
@@ -1121,21 +1115,25 @@ object TutorialStage {
 
     fun removeHintIcon(player: Player) {
         val slot = player.getAttribute("tutorial:hinticon", -1)
-        if (slot < 0 || slot >= HintIconManager.MAXIMUM_SIZE) {
-            return
-        }
+        if (slot < 0 || slot >= HintIconManager.MAXIMUM_SIZE) return
+
         player.removeAttribute("tutorial:hinticon")
         HintIconManager.removeHintIcon(player, slot)
     }
 
     private fun registerHintIcon(player: Player, node: Node) {
-        setAttribute(player, "tutorial:hinticon", HintIconManager.registerHintIcon(player, node))
+        val slot = HintIconManager.registerHintIcon(player, node)
+        if (slot >= 0) {
+            setAttribute(player, "tutorial:hinticon", slot)
+        }
     }
 
     private fun registerHintIcon(player: Player, location: Location, height: Int) {
-        setAttribute(player, "tutorial:hinticon", HintIconManager.registerHintIcon(player, location, 1, -1, player.hintIconManager.freeSlot(), height, 3))
+        val slot = HintIconManager.registerHintIcon(player, location, arrowId = 1, modelId = -1, slot = player.hintIconManager.freeSlot(), height = height, targetType = 3)
+        if (slot >= 0) {
+            setAttribute(player, "tutorial:hinticon", slot)
+        }
     }
-
 
     fun completeTutorial(player: Player) {
         if (player.rights != Rights.ADMINISTRATOR) {
@@ -1150,6 +1148,7 @@ object TutorialStage {
             setAttribute(player, "/save:tutorial:complete", true)
             setVarbit(player, FLASHING_ICON, 0)
             setVarp(player, 281, 1000, true)
+            setVarbit(player, 4895, 0, true)
             closeOverlay(player)
 
             player.inventory.clear()

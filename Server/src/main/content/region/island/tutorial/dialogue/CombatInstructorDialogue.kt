@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -16,7 +17,7 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             44 -> playerl(FaceAnim.FRIENDLY, "Hi! My name's ${player.username}.")
             47 -> npcl(FaceAnim.FRIENDLY, "Very good, but that little butter knife isn't going to protect you much. Here, take these.")
             53 -> playerl(FaceAnim.FRIENDLY, "I did it! I killed a giant rat!")
@@ -36,14 +37,14 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             44 -> when (stage) {
                 0 -> npcl(FaceAnim.ANGRY, "Do I look like I care? To me you're just another newcomer who thinks they're ready to fight.").also { stage++ }
                 1 -> npcl(FaceAnim.FRIENDLY, "I'm Vannaka, the greatest swordsman alive.").also { stage++ }
                 2 -> npcl(FaceAnim.FRIENDLY, "Let's get started by teaching you to wield a weapon.").also { stage++ }
                 3 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 45)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 45)
                     TutorialStage.load(player, 45)
                 }
             }
@@ -58,7 +59,7 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
                 1 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 48)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 48)
                     TutorialStage.load(player, 48)
                 }
             }
@@ -84,7 +85,7 @@ class CombatInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 3 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 54)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 54)
                     TutorialStage.load(player, 54)
                 }
             }

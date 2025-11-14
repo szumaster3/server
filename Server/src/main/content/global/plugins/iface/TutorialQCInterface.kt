@@ -13,11 +13,11 @@ import shared.consts.Vars
 class TutorialQCInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.QUICKCHAT_TUTORIAL_157) { player, _ ->
-            setVarbit(player, Vars.VARBIT_IFACE_QUICKCHAT_TUTORIAL_4762_4762, 1)
+            setVarbit(player, 4762, 1)
             return@onOpen true
         }
         onClose(Components.QUICKCHAT_TUTORIAL_157) { player, _ ->
-            setVarbit(player, Vars.VARBIT_IFACE_QUICKCHAT_TUTORIAL_4762_4762, 0)
+            setVarbit(player, 4762, 0)
             return@onClose true
         }
 

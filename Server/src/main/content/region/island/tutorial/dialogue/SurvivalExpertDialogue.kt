@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -52,7 +53,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (player?.getAttribute(TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (player?.getAttribute(GameAttributes.TUTORIAL_STAGE, 0)) {
             4 -> when (stage) {
                 0 -> {
                     interpreter.sendDoubleItemMessage(Items.TINDERBOX_590, Items.BRONZE_AXE_1351, "The Survival Guide gives you a <col=08088A>tinderbox</col> and a <col=08088A>bronze axe</col>!")
@@ -62,7 +63,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 1 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 5)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 5)
                     TutorialStage.load(player, 5)
                 }
             }
@@ -74,7 +75,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 1 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 12)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 12)
                     TutorialStage.load(player, 12)
                 }
             }

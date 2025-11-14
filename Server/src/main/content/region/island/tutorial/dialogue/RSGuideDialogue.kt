@@ -1,6 +1,8 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
+import core.api.clearHintIcon
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.dialogue.Dialogue
@@ -16,7 +18,7 @@ class RSGuideDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val tutStage = getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)
+        val tutStage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
 
         when {
             tutStage == 39 -> {
@@ -49,13 +51,13 @@ class RSGuideDialogue(player: Player? = null) : Dialogue(player) {
             4 -> npc(FaceAnim.HAPPY, "You will notice a flashing icon of a spanner; please click", "on this to continue the tutorial.").also { stage++ }
             5 -> {
                 end()
-                setAttribute(player, TutorialStage.TUTORIAL_STAGE, 1)
+                setAttribute(player, GameAttributes.TUTORIAL_STAGE, 1)
                 TutorialStage.load(player, 1)
             }
             6 -> npc(FaceAnim.NEUTRAL, "To continue the tutorial go through that door over", "there and speak to your first instructor!").also { stage++ }
             7 -> {
                 end()
-                setAttribute(player, TutorialStage.TUTORIAL_STAGE, 3)
+                setAttribute(player, GameAttributes.TUTORIAL_STAGE, 3)
                 TutorialStage.load(player, 3)
             }
         }

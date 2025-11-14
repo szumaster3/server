@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -19,7 +20,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             18 -> npc(
                 FaceAnim.FRIENDLY,
                 "Ah! Welcome, newcomer. I am the Master Chef, Lev. It",
@@ -43,7 +44,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             18 -> when (stage) {
                 0 -> npc("I already know how to cook. Brynna taught me just", "now.").also { stage++ }
                 1 -> npc(FaceAnim.LAUGH, "Hahahahahaha! You call THAT cooking? Some shrimp", "on an open log fire? Oh, no, no no. I am going to", "teach you the fine art of cooking bread.").also { stage++ }
@@ -61,7 +62,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
 
                 4 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 19)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 19)
                     TutorialStage.load(player, 19)
                 }
             }

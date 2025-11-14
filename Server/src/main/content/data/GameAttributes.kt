@@ -13,8 +13,8 @@ internal object GameAttributes {
     const val LOGOUT = "/save:logout"
 
     // Tutorial island.
-    const val TUTORIAL_COMPLETE = "tutorial:complete"
-    const val TUTORIAL_STAGE = "tutorial:stage"
+    const val TUTORIAL_COMPLETE = "/save:tutorial:complete"
+    const val TUTORIAL_STAGE = "/save:tutorial:stage"
 
     // Prayer lock.
     const val PRAYER_LOCK = "prayer:lock"

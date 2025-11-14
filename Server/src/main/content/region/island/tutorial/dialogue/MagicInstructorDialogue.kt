@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -20,7 +21,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             67 -> playerl(FaceAnim.FRIENDLY, "Hello.")
             69 -> npc(FaceAnim.FRIENDLY, "Good. This is a list of your spells. Currently you can", "only cast one offensive spell called Wind Strike. Let's", "try it out on one of those chickens.")
             70 -> {
@@ -42,12 +43,12 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             67 -> when (stage++) {
                 0 -> npc(FaceAnim.FRIENDLY, "Good day, newcomer. My name is Terrova. I'm here", "to tell you about$DARK_BLUE Magic</col>. Let's start by opening your", "spell list.")
                 1 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 68)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 68)
                     TutorialStage.load(player, 68)
                 }
             }
@@ -61,7 +62,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
                 1 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 70)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 70)
                     TutorialStage.load(player, 70)
                 }
             }
@@ -90,7 +91,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 7 -> npcl(FaceAnim.HAPPY, "If all else fails, visit the " + GameWorld.settings!!.name + " website for a whole chestload of information on quests skills and minigames as well as a very good starter's guide.").also { stage++ }
                 8 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 72)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 72)
                     TutorialStage.load(player, 72)
                 }
             }

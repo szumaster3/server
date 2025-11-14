@@ -1,5 +1,6 @@
 package content.region.island.tutorial.dialogue
 
+import content.data.GameAttributes
 import content.region.island.tutorial.plugin.TutorialStage
 import core.api.*
 import core.game.dialogue.Dialogue
@@ -15,7 +16,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             30 -> sendNPCDialogue(player, npc.id, "Hi there. You must be new around here. So what do I call you? 'Newcomer' seems so impersonal, and if we're going to be working together, I'd rather tell you by name.")
             34 -> playerl(FaceAnim.FRIENDLY, "I prospected both types of rock! One set contains tin and the other has copper ore inside.")
             35 -> {
@@ -49,7 +50,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (getAttribute(player, TutorialStage.TUTORIAL_STAGE, 0)) {
+        when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             30 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "You can call me ${player.username}.").also { stage++ }
                 1 -> sendNPCDialogue(player, npc.id, "Ok then, ${player.username}. My name is Dezzick and I'm a miner by trade. Let's prospect some of these rocks.").also {
@@ -58,7 +59,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 31)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 31)
                     TutorialStage.load(player, 31)
                 }
             }
@@ -80,7 +81,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
                 3 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 35)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 35)
                     TutorialStage.load(player, 35)
                 }
             }
@@ -98,7 +99,7 @@ class MiningInstructorDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> {
                     end()
-                    setAttribute(player, TutorialStage.TUTORIAL_STAGE, 41)
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 41)
                     TutorialStage.load(player, 41)
                 }
             }

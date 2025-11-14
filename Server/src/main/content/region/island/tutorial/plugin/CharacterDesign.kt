@@ -74,9 +74,9 @@ object CharacterDesign {
             p.getAttribute("char-design:accepted", false)
         }
         reset(player)
-        listOf(22, 92, 97).forEach {
-            sendInterfaceConfig(player, Components.APPEARANCE_771, it, false)
-        }
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 22, false)
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 92, false)
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 97, false)
         setVarp(player, 1262, if (player.appearance.isMale) 1 else 0)
     }
 
