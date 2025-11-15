@@ -9,6 +9,7 @@ import content.global.plugins.item.equipment.WhiteKnightRankManager
 import core.api.setAttribute
 import content.data.BossKillCounter
 import content.data.GameAttributes
+import content.global.skill.construction.CrestType
 import core.api.utils.PlayerStatsCounter
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege
@@ -58,21 +59,21 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
                     0 -> {
                         when (i) {
                             // Various stats
-                            97 -> sendLine(player, "Easy Clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[0]}", i)
-                            68 -> sendLine(player, "Medium Clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[1]}", i)
-                            69 -> sendLine(player, "Hard Clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[2]}", i)
+                            97 -> sendLine(player, "Easy clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[0]}", i)
+                            68 -> sendLine(player, "Medium clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[1]}", i)
+                            69 -> sendLine(player, "Hard clues: ${TreasureTrailManager.getInstance(queryPlayer).completedClues[2]}", i)
                             70 -> sendLine(player, SPACER, i)
-                            71 -> sendLine(player, "Slayer Tasks: ${SlayerManager.getInstance(queryPlayer).flags.completedTasks}", i)
-                            72 -> sendLine(player, "Quest Points: ${queryPlayer.questRepository.points}", i)
-                            73 -> sendLine(player, "Ironman Mode: ${queryPlayer.ironmanManager.mode.name.lowercase()}", i)
+                            71 -> sendLine(player, "Slayer tasks: ${SlayerManager.getInstance(queryPlayer).flags.completedTasks}", i)
+                            72 -> sendLine(player, "Quest points: ${queryPlayer.questRepository.points}", i)
+                            73 -> sendLine(player, "Ironman mode: ${queryPlayer.ironmanManager.mode.name.lowercase()}", i)
                             74 -> sendLine(player, "Deaths: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_DEATHS", 0)}", i)
                             75 -> sendLine(player, SPACER, i)
-                            76 -> sendLine(player, "Logs Chopped: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_LOGS", 0)}", i)
-                            77 -> sendLine(player, "Rocks Mined: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_ROCKS", 0)}", i)
-                            78 -> sendLine(player, "Fish Caught: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FISH", 0)}", i)
-                            79 -> sendLine(player, "Essence Crafted: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_RC", 0)}", i)
-                            80 -> sendLine(player, "Food Cooked: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FOOD_COOKED", 0)}", i)
-                            81 -> sendLine(player, "Cats Raised: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_CATS_RAISED", 0)}", i)
+                            76 -> sendLine(player, "Logs chopped: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_LOGS", 0)}", i)
+                            77 -> sendLine(player, "Rocks mined: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_ROCKS", 0)}", i)
+                            78 -> sendLine(player, "Fish caught: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FISH", 0)}", i)
+                            79 -> sendLine(player, "Essence crafted: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_RC", 0)}", i)
+                            80 -> sendLine(player, "Food cooked: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_FOOD_COOKED", 0)}", i)
+                            81 -> sendLine(player, "Cats raised: ${queryPlayer.getAttribute("$STATS_BASE:$STATS_CATS_RAISED", 0)}", i)
 
                             // Boss KC
                             82 -> sendLine(player, "KBD KC: ${globalData.getBossCounters()[BossKillCounter.KBD.ordinal]}", i)
@@ -111,16 +112,16 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
                             79 -> sendLine(player, SPACER, i)
                             80 -> sendLine(player, "Dark beasts: ${PlayerStatsCounter.getKills(queryPlayer, intArrayOf(NPCs.DARK_BEAST_2783))}", i)
                             81 -> sendLine(player, "Dark bows: ${PlayerStatsCounter.getRareDrops(queryPlayer, Items.DARK_BOW_11235)}", i)
-                            82 -> sendLine(player, "Green Dragons: ${PlayerStatsCounter.getKills(queryPlayer, GREEN_DRAGON_IDS)}", i)
-                            83 -> sendLine(player, "Blue Dragons: ${PlayerStatsCounter.getKills(queryPlayer, BLUE_DRAGON_IDS)}", i)
-                            84 -> sendLine(player, "Red Dragons: ${PlayerStatsCounter.getKills(queryPlayer, RED_DRAGON_IDS)}", i)
-                            85 -> sendLine(player, "Black Dragons: ${PlayerStatsCounter.getKills(queryPlayer, BLACK_DRAGON_IDS)}", i)
+                            82 -> sendLine(player, "Green dragons: ${PlayerStatsCounter.getKills(queryPlayer, GREEN_DRAGON_IDS)}", i)
+                            83 -> sendLine(player, "Blue dragons: ${PlayerStatsCounter.getKills(queryPlayer, BLUE_DRAGON_IDS)}", i)
+                            84 -> sendLine(player, "Red dragons: ${PlayerStatsCounter.getKills(queryPlayer, RED_DRAGON_IDS)}", i)
+                            85 -> sendLine(player, "Black dragons: ${PlayerStatsCounter.getKills(queryPlayer, BLACK_DRAGON_IDS)}", i)
                             86 -> sendLine(player, SPACER, i)
-                            87 -> sendLine(player, "Bronze Dragons: ${PlayerStatsCounter.getKills(queryPlayer, BRONZE_DRAGON_IDS)}", i)
-                            88 -> sendLine(player, "Iron Dragons: ${PlayerStatsCounter.getKills(queryPlayer, IRON_DRAGON_IDS)}", i)
-                            89 -> sendLine(player, "Steel Dragons: ${PlayerStatsCounter.getKills(queryPlayer, STEEL_DRAGON_IDS)}", i)
-                            90 -> sendLine(player, "Mithril Dragons: ${PlayerStatsCounter.getKills(queryPlayer, MITHRIL_DRAGON_IDS)}", i)
-                            91 -> sendLine(player, "Skeletal Wyverns: ${PlayerStatsCounter.getKills(queryPlayer, SKELETAL_WYVERN_IDS)}", i)
+                            87 -> sendLine(player, "Bronze dragons: ${PlayerStatsCounter.getKills(queryPlayer, BRONZE_DRAGON_IDS)}", i)
+                            88 -> sendLine(player, "Iron dragons: ${PlayerStatsCounter.getKills(queryPlayer, IRON_DRAGON_IDS)}", i)
+                            89 -> sendLine(player, "Steel dragons: ${PlayerStatsCounter.getKills(queryPlayer, STEEL_DRAGON_IDS)}", i)
+                            90 -> sendLine(player, "Mithril dragons: ${PlayerStatsCounter.getKills(queryPlayer, MITHRIL_DRAGON_IDS)}", i)
+                            91 -> sendLine(player, "Skeletal wyverns: ${PlayerStatsCounter.getKills(queryPlayer, SKELETAL_WYVERN_IDS)}", i)
                             92 -> sendLine(player, SPACER, i)
                             93 -> sendLine(player, "Draconic visages: ${PlayerStatsCounter.getRareDrops(queryPlayer, Items.DRACONIC_VISAGE_11286)}", i)
                             else -> sendLine(player, "", i)
@@ -164,8 +165,8 @@ class StatsCommandSet : CommandSet(Privilege.STANDARD) {
                         97 -> sendLine(player, "White Knight rank: ${WhiteKnightRankManager.getRank(queryPlayer).name.lowercase()}", i)
                         68 -> sendLine(player, "Black Knights: ${PlayerStatsCounter.getKills(queryPlayer, BLACK_KNIGHT_IDS)}", i)
                         69 -> {
-                            val crest = queryPlayer.getAttribute(GameAttributes.FAMILY_CREST, -1)
-                            sendLine(player, "Family Crest: ${if (crest == -1) "not set" else crest}", i)
+                            val crest = player.getAttribute(GameAttributes.FAMILY_CREST, -1)
+                            sendLine(player, "Family Crest: ${CrestType.values().getOrNull(crest - 1)?.symbol ?: "not set"}", i)
                         }
                         else -> sendLine(player, "", i)
                     }
