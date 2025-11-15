@@ -49,41 +49,46 @@ class EvilTwinInterface : InterfaceListener {
                     for (npc in EvilTwinUtils.region.planes[0].npcs) {
                         if (npc.location == EvilTwinUtils.currentCrane!!.location) {
                             val evilTwin =
-                                EvilTwinUtils.isEvilTwin(npc, player.getAttribute(EvilTwinUtils.randomEvent, 0))
+                                EvilTwinUtils.isEvilTwin(npc, player.getAttribute(EvilTwinUtils.RANDOM_EVENT, 0))
                             if (evilTwin) {
                                 EvilTwinUtils.success = true
                                 sendMessage(player, "You caught the Evil twin!")
                             } else {
                                 sendMessage(player, "You caught an innocent civilian!")
                             }
-                            visualize(npc, 4001, 666)
+
                             npc.lock(10)
                             player.locks.lockComponent(15)
+                            visualize(npc, 4001, 666)
                             EvilTwinUtils.updateCraneCam(player, 10, 4)
                             GameWorld.Pulser.submit(
                                 object : Pulse(5, player) {
                                     var counter: Int = 0
+
                                     override fun pulse(): Boolean {
                                         when (counter++) {
                                             0 -> {
                                                 animate(player, 4004)
                                                 SceneryBuilder.remove(EvilTwinUtils.currentCrane)
-                                                SceneryBuilder.add(Scenery(66, EvilTwinUtils.currentCrane?.location, 22, 0))
+                                                SceneryBuilder.add(
+                                                    Scenery(66, EvilTwinUtils.currentCrane?.location, 22, 0)
+                                                )
                                                 npc.transform(npc.id + 20)
                                                 npc.lock(20)
                                                 npc.walkingQueue.reset()
-                                                npc.walkingQueue.addPath(EvilTwinUtils.region.baseLocation.x + 10, EvilTwinUtils.region.baseLocation.y + 4)
+                                                npc.walkingQueue.addPath(
+                                                    EvilTwinUtils.region.baseLocation.x + 10,
+                                                    EvilTwinUtils.region.baseLocation.y + 4
+                                                )
                                                 delay = npc.walkingQueue.queue.size + 1
                                                 EvilTwinUtils.craneNPC = npc
                                             }
-
                                             1 -> {
                                                 EvilTwinUtils.craneNPC = null
                                                 playAudio(player, Sounds.TWIN_LOWER_CRANE_2272)
                                                 animate(npc, Animation.create(4003), true)
                                                 delay = 3
                                             }
-
                                             2 -> {
                                                 npc.reTransform()
                                                 npc.faceLocation(player.location)
@@ -96,15 +101,17 @@ class EvilTwinInterface : InterfaceListener {
                                                 } else {
                                                     npc.sendChat("You're putting me in prison?!")
                                                 }
-                                                EvilTwinUtils.currentCrane = EvilTwinUtils.currentCrane!!.transform(
-                                                    EvilTwinUtils.currentCrane!!.id,
-                                                    EvilTwinUtils.currentCrane!!.rotation,
-                                                    EvilTwinUtils.region.baseLocation.transform(14, 12, 0)
+                                                EvilTwinUtils.currentCrane =
+                                                    EvilTwinUtils.currentCrane!!.transform(
+                                                        EvilTwinUtils.currentCrane!!.id,
+                                                        EvilTwinUtils.currentCrane!!.rotation,
+                                                        EvilTwinUtils.region.baseLocation.transform(14, 12, 0)
+                                                    )
+                                                SceneryBuilder.add(
+                                                    Scenery(14977, EvilTwinUtils.currentCrane?.location, 22, 0)
                                                 )
-                                                SceneryBuilder.add(Scenery(14977, EvilTwinUtils.currentCrane?.location, 22, 0))
                                                 SceneryBuilder.add(EvilTwinUtils.currentCrane)
                                             }
-
                                             3 -> {
                                                 EvilTwinUtils.updateCraneCam(player, 14, 12)
                                                 if (evilTwin) {
@@ -120,10 +127,15 @@ class EvilTwinInterface : InterfaceListener {
                                     }
                                 }
                             )
-                            player.packetDispatch.sendSceneryAnimation(EvilTwinUtils.currentCrane, Animation.create(4000))
+
+                            player.packetDispatch.sendSceneryAnimation(
+                                EvilTwinUtils.currentCrane,
+                                Animation.create(4000)
+                            )
                             return@on true
                         }
                     }
+
                     EvilTwinUtils.decreaseTries(player)
                     player.packetDispatch.sendSceneryAnimation(EvilTwinUtils.currentCrane, Animation.create(4000))
                     return@on true
@@ -135,8 +147,10 @@ class EvilTwinInterface : InterfaceListener {
                 32 -> EvilTwinUtils.moveCrane(player, Direction.WEST)
                 33 -> closeInterface(player)
             }
+
             playAudio(player, Sounds.TWIN_MOVE_CRANE_2273)
             return@on true
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package content.global.random.event.evil_twin
 
+import content.data.RandomEvent
 import core.api.*
 import core.api.utils.PlayerCamera
 import core.game.interaction.QueueStrength
@@ -12,104 +13,115 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
-import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
 import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
 import core.tools.RandomFunction
-import shared.consts.Components
-import shared.consts.Items
+import shared.consts.*
 
 /**
- * Evil twin utils.
+ * Utility object for handling the Evil Twin random event.
  */
 object EvilTwinUtils {
-
-    // Constants
-    const val randomEvent = "/save:evil_twin:random"
-    const val originalLocation = "/save:original-loc"
-    const val logout = "/save:evil_twin:logout"
-    const val crane_x_loc = "/save:evil_twin:ccx"
-    const val crane_y_loc = "/save:evil_twin:ccy"
-
-    // Rewards
-    val rewards = arrayOf(
-        Item(Items.UNCUT_DIAMOND_1618, 2),
-        Item(Items.UNCUT_RUBY_1620, 3),
-        Item(Items.UNCUT_EMERALD_1622, 3),
-        Item(Items.UNCUT_SAPPHIRE_1624, 4)
-    )
-
-    // Dynamic Region
-    val region: DynamicRegion = DynamicRegion.create(7504) //Regions.RANDOM_EVENT_EVIL_TWIN_7504
-
-    // Variables
-    var success = false
+    const val RANDOM_EVENT = "/save:evil_twin:random"
+    const val CRANE_X_LOC = "/save:evil_twin:ccx"
+    const val CRANE_Y_LOC = "/save:evil_twin:ccy"
     var tries = 3
-    const val offsetX = 0
-    const val offsetY = 0
-
+    var success = false
     var mollyNPC: NPC? = null
     var craneNPC: NPC? = null
     var currentCrane: Scenery? = null
+    val region: DynamicRegion = DynamicRegion.create(Regions.RE_EVIL_TWIN_7504)
+    val rewards =
+        arrayOf(
+            Item(Items.UNCUT_DIAMOND_1618, 2),
+            Item(Items.UNCUT_RUBY_1620, 3),
+            Item(Items.UNCUT_EMERALD_1622, 3),
+            Item(Items.UNCUT_SAPPHIRE_1624, 4)
+        )
 
     /**
-     * Starts the Evil Twin random event for the player.
+     * Starts the event.
      *
-     * @param [player] The player starting the event.
-     * @return `true` if the event was started successfully, `false` otherwise.
+     * @param player The player.
+     * @return `true` if the event was started, `false` otherwise.
      */
     fun start(player: Player): Boolean {
         region.add(player)
-        region.setMusicId(612)
-        currentCrane = Scenery(14976, region.baseLocation.transform(14, 12, 0), 10, 0)
+        region.setMusicId(Music.HEAD_TO_HEAD_612)
+        currentCrane =
+            Scenery(
+                shared.consts.Scenery.EVIL_CLAW_14976,
+                region.baseLocation.transform(14, 12, 0),
+                10,
+                0
+            )
         val color: EvilTwinColors = RandomFunction.getRandomElement(EvilTwinColors.values())
         val model = RandomFunction.random(5)
         val hash = color.ordinal or (model shl 16)
         val npcId = getMollyId(hash)
-        setAttribute(player, randomEvent, hash)
-        mollyNPC = NPC.create(npcId, Location.getRandomLocation(player.location, 1, true))
-        mollyNPC!!.init()
+        setAttribute(player, RANDOM_EVENT, hash)
+        val mollyNPC = NPC.create(npcId, Location.getRandomLocation(player.location, 1, true))
+
+        mollyNPC?.apply {
+            init()
+            isWalks = false
+            isNeverWalks = true
+            isRespawn = false
+        }
+
         sendChat(mollyNPC!!, "I need your help, ${player.username}.")
-        mollyNPC!!.faceTemporary(player, 3)
-        setAttribute(player, originalLocation, player.location)
+        mollyNPC.faceTemporary(player, 3)
+        setAttribute(player, RandomEvent.save(), player.location)
         queueScript(player, 4, QueueStrength.SOFT) {
-            teleport(player, mollyNPC!!, hash)
-            mollyNPC!!.locks.lockMovement(300000)
+            teleport(player, mollyNPC, hash)
+            mollyNPC.locks.lockMovement(300000)
             openDialogue(player, MollyDialogue(3))
             return@queueScript stopExecuting(player)
         }
         return true
     }
 
+    /**
+     * Teleports both player and npc to event region.
+     *
+     * @param player The player.
+     * @param npc The npc.
+     * @param hash The hash of this event.
+     */
     fun teleport(player: Player, npc: NPC, hash: Int) {
         setMinimapState(player, 2)
         npc.properties.teleportLocation = region.baseLocation.transform(4, 15, 0)
         npc.direction = Direction.NORTH
         player.properties.teleportLocation = region.baseLocation.transform(4, 16, 0)
-        registerLogoutListener(player, logout) { p ->
-            p.location = getAttribute(p, originalLocation, player.location)
+        registerLogoutListener(player, RandomEvent.logout()) { p ->
+            p.location = getAttribute(p, RandomEvent.save(), player.location)
         }
         spawnSuspects(hash)
         showNPCs(true)
     }
 
+    /**
+     * Cleans up the event.
+     *
+     * @param player The player.
+     */
     fun cleanup(player: Player) {
         craneNPC = null
         success = false
-        mollyNPC!!.clear()
+        mollyNPC?.clear()
         PlayerCamera(player).reset()
         restoreTabs(player)
-        player.properties.teleportLocation = getAttribute(player, originalLocation, null)
+        player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
         setMinimapState(player, 0)
-        removeAttributes(player, randomEvent, originalLocation, crane_x_loc, crane_y_loc)
-        clearLogoutListener(player, logout)
+        removeAttributes(player, RANDOM_EVENT, RandomEvent.save(), CRANE_X_LOC, CRANE_Y_LOC)
+        clearLogoutListener(player, RandomEvent.logout())
     }
 
     /**
      * Decreases the number of tries the player has left.
      *
-     * @param [player] the player.
+     * @param player The player.
      */
     fun decreaseTries(player: Player) {
         tries--
@@ -122,21 +134,47 @@ object EvilTwinUtils {
     }
 
     /**
-     * Updates the location of the player and entity.
+     * Updates the location based logic for the player and entity.
      *
-     * @param [player] the player.
-     * @param [entity] the entity.
-     * @param [last]   the last location.
+     * @param player The player.
+     * @param entity The entity.
+     * @param last The last known location of the entity.
      */
     fun locationUpdate(player: Player, entity: Entity, last: Location?) {
-        if (entity == craneNPC && entity.walkingQueue.queue.size > 1 && player.interfaceManager.singleTab != null) {
+        if (
+            entity == craneNPC &&
+            entity.walkingQueue.queue.size > 1 &&
+            player.interfaceManager.singleTab != null
+        ) {
             val l: Location = entity.location
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5))
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5))
+            PacketRepository.send(
+                CameraViewPacket::class.java,
+                CameraContext(
+                    player,
+                    CameraContext.CameraType.POSITION,
+                    l.x + 2,
+                    l.y + 3,
+                    520,
+                    1,
+                    5
+                )
+            )
+            PacketRepository.send(
+                CameraViewPacket::class.java,
+                CameraContext(
+                    player,
+                    CameraContext.CameraType.ROTATION,
+                    l.x - 3,
+                    l.y - 3,
+                    420,
+                    1,
+                    5
+                )
+            )
         } else if (entity == player) {
-            if (mollyNPC!!.isHidden(player) && entity.location.getLocalX() < 9) {
+            if (mollyNPC!!.isHidden(player) && entity.location.localX < 9) {
                 showNPCs(true)
-            } else if (!mollyNPC!!.isHidden(player) && entity.location.getLocalX() > 8) {
+            } else if (!mollyNPC!!.isHidden(player) && entity.location.localX > 8) {
                 showNPCs(false)
             }
         }
@@ -144,28 +182,35 @@ object EvilTwinUtils {
     }
 
     /**
-     * Updates the camera view of the crane.
+     * Updates the camera position and rotation based on crane coordinates.
      *
-     * @param [player] the player.
-     * @param [x]      the x-coordinate of the crane.
-     * @param [y]      the y-coordinate of the crane.
+     * @param player The player.
+     * @param x The x-coords of the crane.
+     * @param y The y-coords of the crane.
      */
     fun updateCraneCam(player: Player, x: Int, y: Int) {
         if (player.interfaceManager.singleTab != null) {
             var loc = region.baseLocation.transform(14, 20, 0)
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100))
-            loc = region.baseLocation.transform(x, 4 + y - (if (x < 14 || x > 14) (y / 4) else 0), 0)
-            PacketRepository.send(CameraViewPacket::class.java, CameraContext(player, CameraContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100))
+            PacketRepository.send(
+                CameraViewPacket::class.java,
+                CameraContext(player, CameraContext.CameraType.POSITION, loc.x, loc.y, 520, 1, 100)
+            )
+            loc =
+                region.baseLocation.transform(x, 4 + y - (if (x < 14 || x > 14) (y / 4) else 0), 0)
+            PacketRepository.send(
+                CameraViewPacket::class.java,
+                CameraContext(player, CameraContext.CameraType.ROTATION, loc.x, loc.y, 420, 1, 100)
+            )
         }
-        setAttribute(player, crane_x_loc, x)
-        setAttribute(player, crane_y_loc, y)
+        setAttribute(player, CRANE_X_LOC, x)
+        setAttribute(player, CRANE_Y_LOC, y)
     }
 
     /**
-     * Moves the crane in the specified direction.
+     * Moves the crane in a specified direction.
      *
-     * @param [player]    the player.
-     * @param [direction] the direction to move the crane.
+     * @param player The player.
+     * @param direction The direction.
      */
     fun moveCrane(player: Player, direction: Direction) {
         submitWorldPulse(
@@ -174,16 +219,17 @@ object EvilTwinUtils {
                     if (!direction.canMove(currentCrane!!.location.transform(direction))) {
                         return true
                     }
-                    val craneX: Int = player.getAttribute(crane_x_loc, 14) + direction.stepX
-                    val craneY: Int = player.getAttribute(crane_y_loc, 12) + direction.stepY
+                    val craneX: Int = player.getAttribute(CRANE_X_LOC, 14) + direction.stepX
+                    val craneY: Int = player.getAttribute(CRANE_Y_LOC, 12) + direction.stepY
                     updateCraneCam(player, craneX, craneY)
                     removeScenery(currentCrane!!)
                     addScenery(Scenery(66, currentCrane!!.location, 22, 0))
-                    currentCrane = currentCrane!!.transform(
-                        currentCrane!!.id,
-                        currentCrane!!.rotation,
-                        region.baseLocation.transform(craneX, craneY, 0)
-                    )
+                    currentCrane =
+                        currentCrane!!.transform(
+                            currentCrane!!.id,
+                            currentCrane!!.rotation,
+                            region.baseLocation.transform(craneX, craneY, 0)
+                        )
                     addScenery(Scenery(14977, currentCrane!!.location, 22, 0))
                     addScenery(currentCrane!!)
                     return true
@@ -193,13 +239,13 @@ object EvilTwinUtils {
     }
 
     /**
-     * Shows or hides the NPCs in the Evil Twin region.
+     * Shows or hides Molly.
      *
-     * @param [showMolly] True to show Molly, false to hide Molly.
+     * @param showMolly True to show, false to hide.
      */
-    fun showNPCs(showMolly: Boolean) {
+    private fun showNPCs(showMolly: Boolean) {
         for (npc in region.planes[0].npcs) {
-            if (npc.id in 3852..3891) {
+            if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891) {
                 npc.isInvisible
             } else {
                 mollyNPC!!.isInvisible = !showMolly
@@ -208,60 +254,66 @@ object EvilTwinUtils {
     }
 
     /**
-     * Checks if an NPC is the Evil Twin.
+     * Checks if npc is Evil Twin.
      *
-     * @param [npc]  the NPC to check.
-     * @param [hash] the hash value used to identify the Evil Twin.
-     * @return `true` if the NPC is the Evil Twin, `false` otherwise.
+     * @param npc The NPC to check.
+     * @param hash The hash value of the npc.
+     * @return `true` if the npc is the evil twin, `false` otherwise.
      */
     fun isEvilTwin(npc: NPC, hash: Int): Boolean {
-        val npcId = npc.id - 3852
+        val npcId = npc.id - NPCs.SUSPECT_3852
         val type: Int = npcId / EvilTwinColors.values().size
         val color: Int = npcId - (type * EvilTwinColors.values().size)
         return hash == (color or (type shl 16))
     }
 
     /**
-     * Removes the non-Evil Twin suspects from the Evil Twin region.
+     * Removes all suspects npc.
      *
-     * @param [player] The player.
+     * @param player The player.
      */
     fun removeSuspects(player: Player) {
-        val hash: Int = player.getAttribute(randomEvent, 0)
+        val hash: Int = player.getAttribute(RANDOM_EVENT, 0)
         for (npc in region.planes[0].npcs) {
-            if (npc.id in 3852..3891 && !isEvilTwin(npc, hash)) {
-                Graphics.send(Graphics.create(86), npc.location)
+            if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891 && !isEvilTwin(npc, hash)) {
+                sendGraphics(shared.consts.Graphics.RE_PUFF_86, npc.location)
                 npc.clear()
             }
         }
     }
 
     /**
-     * Spawns the Evil Twin suspects in the Evil Twin region.
+     * Spawns the Evil Twin in the region.
      *
-     * @param [hash] The hash value used to identify the Evil Twin.
+     * @param hash The hash value of the npc.
      */
-    fun spawnSuspects(hash: Int) {
-        if (region.planes[0].npcs.size > 3) {
-            return
-        }
+    private fun spawnSuspects(hash: Int) {
+        if (region.planes[0].npcs.size > 3) return
+
         val npcId = 3852 + (hash and 0xFF)
         for (i in 0..4) {
-            val location = region.baseLocation.transform(11 + RandomFunction.random(8), 6 + RandomFunction.random(6), 0)
+            val location =
+                region.baseLocation.transform(
+                    11 + RandomFunction.random(8),
+                    6 + RandomFunction.random(6),
+                    0
+                )
             val suspect = NPC.create(npcId + (i * EvilTwinColors.values().size), location)
             suspect.isWalks = true
+            suspect.isNeverWalks = false
+            suspect.isRespawn = false
             suspect.walkRadius = 6
             suspect.init()
         }
     }
 
     /**
-     * Gets the Molly NPC ID based on the hash value.
+     * Calculates the npc id for Molly based on a hash.
      *
-     * @param hash The hash value used to identify the Evil Twin.
-     * @return The [MollyNPC] id.
+     * @param hash The hash value.
+     * @return The npc id.
      */
-    fun getMollyId(hash: Int): Int {
+    private fun getMollyId(hash: Int): Int {
         return 3892 + (hash and 0xFF) + (((hash shr 16) and 0xFF) * EvilTwinColors.values().size)
     }
 }

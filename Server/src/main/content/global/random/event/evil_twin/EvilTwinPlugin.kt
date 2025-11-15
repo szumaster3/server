@@ -13,18 +13,20 @@ import core.game.world.map.zone.ZoneRestriction
 import core.net.packet.PacketRepository
 import core.net.packet.context.CameraContext
 import core.net.packet.out.CameraViewPacket
+import shared.consts.Components
 import shared.consts.NPCs
 
 /**
  * Handles the evil twin random event.
  * @author Emperor, szu
  */
-class EvilTwinPlugin :
-    InteractionListener,
-    MapArea {
-    private val mollyId = (NPCs.MOLLY_3892..NPCs.MOLLY_3911).toIntArray()
-    private val doorsId = shared.consts.Scenery.DOOR_14982
-    private val controlPanel = shared.consts.Scenery.CONTROL_PANEL_14978
+class EvilTwinPlugin : InteractionListener, MapArea {
+
+    companion object {
+        private val mollyId = (NPCs.MOLLY_3892..NPCs.MOLLY_3911).toIntArray()
+        private const val DOOR_ID = shared.consts.Scenery.DOOR_14982
+        private const val CONTROL_PANEL_SCENERY_ID = shared.consts.Scenery.CONTROL_PANEL_14978
+    }
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(getRegionBorders(EvilTwinUtils.region.id))
     override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS)
@@ -49,15 +51,15 @@ class EvilTwinPlugin :
          * Handles operating the crane.
          */
 
-        on(controlPanel, IntType.SCENERY, "use") { player, _ ->
+        on(CONTROL_PANEL_SCENERY_ID, IntType.SCENERY, "use") { player, _ ->
             if (EvilTwinUtils.success) {
                 sendMessage(player, "You already caught the evil twin.")
                 return@on true
             } else {
                 player.interfaceManager.openSingleTab(
-                    Component(240).setUncloseEvent { player, c ->
+                    Component(Components.CRANE_CONTROL_240).setUncloseEvent { p, c ->
                         SceneryBuilder.remove(EvilTwinUtils.currentCrane)
-                        SceneryBuilder.add(Scenery(66, EvilTwinUtils.currentCrane?.location, 22, 0))
+                        SceneryBuilder.add(Scenery(shared.consts.Scenery.CRATE_WALL_66, EvilTwinUtils.currentCrane?.location, 22, 0))
                         EvilTwinUtils.currentCrane = EvilTwinUtils.currentCrane!!.transform(EvilTwinUtils.currentCrane!!.id, EvilTwinUtils.currentCrane!!.rotation, EvilTwinUtils.region.baseLocation.transform(14, 12, 0))
                         SceneryBuilder.add(Scenery(14977, EvilTwinUtils.currentCrane?.location, 22, 0))
                         SceneryBuilder.add(EvilTwinUtils.currentCrane)
@@ -75,9 +77,9 @@ class EvilTwinPlugin :
          * Handles doors between molly and twins if player wants to rush.
          */
 
-        on(doorsId, IntType.SCENERY, "open") { player, node ->
+        on(DOOR_ID, IntType.SCENERY, "open") { player, node ->
             val end = DoorActionHandler.getEndLocation(player, node.asScenery())
-            if (player.location.getLocalX() < 9 && !player.getAttribute(GameAttributes.RE_TWIN_DIAL, false)) {
+            if (player.location.localX < 9 && !player.getAttribute(GameAttributes.RE_TWIN_DIAL, false)) {
                 openDialogue(player, MollyDialogue(3), EvilTwinUtils.mollyNPC!!)
                 return@on true
             }

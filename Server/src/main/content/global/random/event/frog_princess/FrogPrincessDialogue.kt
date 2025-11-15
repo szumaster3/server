@@ -1,5 +1,7 @@
 package content.global.random.event.frog_princess
 
+import content.data.GameAttributes
+import core.api.getAttribute
 import core.api.queueScript
 import core.api.stopExecuting
 import core.game.dialogue.Dialogue
@@ -18,7 +20,7 @@ import shared.consts.NPCs
 class FrogPrincessDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val event = player!!.getAttribute(FrogUtils.ATTRIBUTE_FROG_TASK_FAIL, 0)
+        val event = getAttribute(player, GameAttributes.KTF_KISS_FAIL, -1)
         if (event == 0) {
             when (stage) {
                 0 -> npc(FaceAnim.OLD_SAD, "${player!!.username}, you must help me! I have been turned", "into a frog by a well-meaning wizard who suffers from", "an unfortunate obsession with frogs.").also { stage++ }
