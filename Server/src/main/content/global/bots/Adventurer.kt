@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import core.ServerConstants
+import core.api.setVarp
 import core.game.bots.AIRepository
 import core.game.bots.CombatBotAssembler
 import core.game.bots.Script
@@ -59,6 +60,7 @@ class Adventurer(val style: CombatStyle) : Script() {
         inventory.add(Item(1271))
         skills[Skills.MINING] = 90
         skills[Skills.SLAYER] = 90
+        setVarp(bot, 427, 1)
     }
 
     override fun toString(): String =
