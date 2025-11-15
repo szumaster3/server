@@ -317,7 +317,7 @@ class SirReniteeDialogue(player: Player? = null) : Dialogue(player) {
             50 to Triple(Quests.THRONE_OF_MISCELLANIA, "Prince and Princess of Miscellania", Items.MISC_PORTRAIT_7998)
         )
         val landscapes = mapOf(
-            54 to Triple(listOf(Quests.COOKS_ASSISTANT, Quests.RUNE_MYSTERIES, Quests.THE_RESTLESS_GHOST), "Lum", Items.LUMBRIDGE_PAINTING_8002),
+            54 to Triple(listOf(Quests.COOKS_ASSISTANT, Quests.RUNE_MYSTERIES, Quests.THE_RESTLESS_GHOST), "River Lum", Items.LUMBRIDGE_PAINTING_8002),
             55 to Triple(listOf(Quests.THE_TOURIST_TRAP, Quests.THE_FEUD, Quests.THE_GOLEM), "Kharid Desert", Items.DESERT_PAINTING_7999),
             56 to Triple(listOf(Quests.CREATURE_OF_FENKENSTRAIN, Quests.SHADES_OF_MORTTON, Quests.GHOSTS_AHOY, Quests.HAUNTED_MINE), "Morytania", Items.MORYTANIA_PAINTING_8003),
             57 to Triple(listOf(Quests.PIRATES_TREASURE, Quests.TAI_BWO_WANNAI_TRIO, Quests.SHILO_VILLAGE), "Karamja", Items.KARAMJA_PAINTING_8001),
