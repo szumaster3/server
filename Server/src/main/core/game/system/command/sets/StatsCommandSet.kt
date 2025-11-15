@@ -5,11 +5,11 @@ import content.global.plugins.iface.BookInterface
 import content.global.plugins.iface.Page
 import content.global.plugins.iface.PageSet
 import content.global.skill.slayer.SlayerManager
-import content.global.plugins.item.equipment.WhiteKnightRankManager
 import core.api.setAttribute
 import content.data.BossKillCounter
 import content.data.GameAttributes
 import content.global.skill.construction.CrestType
+import content.region.asgarnia.falador.plugin.temple_knights.WhiteKnightRankManager
 import core.api.utils.PlayerStatsCounter
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege
