@@ -13,29 +13,24 @@ import shared.consts.Scenery
  * Represents the Pillory random event interface.
  * @author szu
  */
-class PilloryInterface :
-    InterfaceListener,
-    InteractionListener {
+class PilloryInterface : InterfaceListener, InteractionListener {
+
     override fun defineInterfaceListeners() {
-        on(content.global.random.event.pillory.PilloryUtils.INTERFACE) { player, _, _, buttonID, _, _ ->
+        on(PilloryUtils.INTERFACE) { player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                8 -> content.global.random.event.pillory.PilloryUtils.selectedKey(player, 1)
-                9 -> content.global.random.event.pillory.PilloryUtils.selectedKey(player, 2)
-                10 -> content.global.random.event.pillory.PilloryUtils.selectedKey(player, 3)
+                8  -> PilloryUtils.selectedKey(player, 1)
+                9  -> PilloryUtils.selectedKey(player, 2)
+                10 -> PilloryUtils.selectedKey(player, 3)
             }
             return@on true
-        }
-
-        onOpen(content.global.random.event.pillory.PilloryUtils.INTERFACE) { _, _ ->
-            return@onOpen true
         }
     }
 
     override fun defineListeners() {
         on(Scenery.CAGE_6836, IntType.SCENERY, "unlock") { player, _ ->
-            if (player.location in content.global.random.event.pillory.PilloryUtils.LOCATIONS) {
-                content.global.random.event.pillory.PilloryUtils.randomPillory(player)
-                openInterface(player, content.global.random.event.pillory.PilloryUtils.INTERFACE)
+            if (player.location in PilloryUtils.LOCATIONS) {
+                PilloryUtils.randomPillory(player)
+                openInterface(player, PilloryUtils.INTERFACE)
                 sendPlainDialogue(
                     player,
                     true,
