@@ -1,4 +1,4 @@
-package content.global.skill.construction.decoration.workshop
+package content.global.skill.construction.decoration.workpace
 
 import content.global.skill.construction.BuildingUtils
 import core.api.*

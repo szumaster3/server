@@ -1,4 +1,4 @@
-package content.global.skill.construction.decoration.workshop
+package content.global.skill.construction.decoration.workpace
 
 import content.data.GameAttributes
 import core.api.*

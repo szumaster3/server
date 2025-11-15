@@ -1,4 +1,4 @@
-package content.global.skill.construction.decoration.diningroom
+package content.global.skill.construction.decoration
 
 import content.global.skill.construction.Decoration
 import shared.consts.Animations

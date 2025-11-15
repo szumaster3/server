@@ -1,4 +1,4 @@
-package content.global.skill.construction.decoration.diningroom
+package content.global.skill.construction.decoration
 
 import core.api.playAudio
 import core.cache.def.impl.SceneryDefinition
@@ -14,10 +14,10 @@ import shared.consts.Scenery
 import shared.consts.Sounds
 
 /**
- * Handles the bell pull interaction.
+ * Handles the bell interaction.
  */
 @Initializable
-class BellPullPlugin : OptionHandler() {
+class BellPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.forId(Scenery.ROPE_BELL_PULL_13307).handlers["option:ring"] = this

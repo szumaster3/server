@@ -1,4 +1,4 @@
-package content.global.skill.construction.decoration.diningroom
+package content.global.skill.construction.decoration
 
 import core.api.forceMove
 import core.cache.def.impl.SceneryDefinition
