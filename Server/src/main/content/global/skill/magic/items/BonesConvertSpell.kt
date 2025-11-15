@@ -50,20 +50,14 @@ class BonesConvertSpell : SpellListener("modern") {
         }
     }
 
-    private fun boneConvert(
-        player: Player,
-        bananas: Boolean,
-    ) {
+    private fun boneConvert(player: Player, bananas: Boolean) {
         val isInMTA = player.zoneMonitor.isInZone("Creature Graveyard")
         if (isInMTA && player.getAttribute("tablet-spell", false)) {
             sendMessage(player, "You can not use this tablet in the Mage Training Arena.")
             return
         }
 
-        if (!bananas &&
-            !player.savedData.activityData.isBonesToPeaches &&
-            !player.getAttribute("tablet-spell", false)
-        ) {
+        if (!bananas && !player.savedData.activityData.isBonesToPeaches && !player.getAttribute("tablet-spell", false)) {
             sendMessage(player, "You can only learn this spell from the Mage Training Arena.")
             return
         }
@@ -79,6 +73,15 @@ class BonesConvertSpell : SpellListener("modern") {
             } else {
                 Bones.values().map { it.itemId }.toIntArray()
             }
+
+        // val hasBones = player.inventory.toArray().any { item ->
+        //     item != null && bones.contains(item.id)
+        // }
+
+        // if (!hasBones) {
+        //     sendMessage(player, "At least one bone or big bone must be in your inventory to be able to cast the spell.")
+        //     return
+        // }
 
         for (item in player.inventory.toArray()) {
             item ?: continue
@@ -99,6 +102,7 @@ class BonesConvertSpell : SpellListener("modern") {
                 }
             }
         }
+
         visualizeSpell(player, boneConvertAnimation, boneConvertGraphics)
         playAudio(player, Sounds.BONES_TO_BANANAS_ALL_114)
         removeRunes(player)

@@ -34,6 +34,7 @@ internal object GameAttributes {
     const val CON_LAST_TASK = "construction:servant_last_task"
     const val CON_TASK = "construction:servant_task"
     const val CON_FLATPACK_TIER = "construction:flatpack:tier"
+    const val CON_LECTERN_OBJECT = "ttb:objectid"
 
     const val FAMILY_CREST = "/save:construction:family_crest"
 

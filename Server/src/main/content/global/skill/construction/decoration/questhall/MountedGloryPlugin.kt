@@ -9,6 +9,8 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
+import shared.consts.Animations
 import shared.consts.Items
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
@@ -61,6 +63,7 @@ class MountedGloryPlugin : InteractionListener {
         if (!player.zoneMonitor.teleport(1, Item(Items.AMULET_OF_GLORY_1704))) {
             return
         }
+        player.animate(Animation(Animations.PULL_LEVER_POH_3611))
         Executors.newSingleThreadScheduledExecutor().schedule({
             player.pulseManager.run(
                 object : Pulse(4) {
