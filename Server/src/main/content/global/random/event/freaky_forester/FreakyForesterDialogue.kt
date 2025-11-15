@@ -15,19 +15,39 @@ import shared.consts.NPCs
 class FreakyForesterDialogue : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
-        if (removeItem(player!!, Items.RAW_PHEASANT_6179) && !getAttribute(player!!, GameAttributes.RE_FREAK_COMPLETE, false)) {
-            npcl(FaceAnim.NEUTRAL, "That's not the right one.").also { stage = END_DIALOGUE }
-            setAttribute(player!!, GameAttributes.RE_FREAK_KILLS, false)
-        } else if (removeItem(player!!, Items.RAW_PHEASANT_6178) || getAttribute(player!!, GameAttributes.RE_FREAK_COMPLETE, false)) {
-            npcl(FaceAnim.NEUTRAL, "Thanks, ${player!!.username}, you may leave the area now.").also { stage = END_DIALOGUE }
-            sendChat(findNPC(FreakyForesterUtils.FREAK_NPC)!!, "Thanks, ${player!!.username}, you may leave the area now.")
-            setAttribute(player!!, GameAttributes.RE_FREAK_COMPLETE, true)
-        } else {
-            when (getAttribute(player!!, GameAttributes.RE_FREAK_TASK, -1)) {
-                NPCs.PHEASANT_2459 -> sendNPCDialogue(player!!, FreakyForesterUtils.FREAK_NPC, "Hey there ${player!!.username}. Can you kill the one tailed pheasant please. Bring me the raw pheasant when you're done.").also { stage = END_DIALOGUE }
-                NPCs.PHEASANT_2460 -> sendNPCDialogue(player!!, FreakyForesterUtils.FREAK_NPC, "Hey there ${player!!.username}. Can you kill the two tailed pheasant please. Bring me the raw pheasant when you're done.").also { stage = END_DIALOGUE }
-                NPCs.PHEASANT_2461 -> sendNPCDialogue(player!!, FreakyForesterUtils.FREAK_NPC, "Hey there ${player!!.username}. Can you kill the three tailed pheasant please. Bring me the raw pheasant when you're done.").also { stage = END_DIALOGUE }
-                NPCs.PHEASANT_2462 -> sendNPCDialogue(player!!, FreakyForesterUtils.FREAK_NPC, "Hey there ${player!!.username}. Can you kill the four tailed pheasant please. Bring me the raw pheasant when you're done.").also { stage = END_DIALOGUE }
+        val player = player ?: return
+        val task = getAttribute(player, GameAttributes.RE_FREAK_TASK, -1)
+        val username = player.username
+
+        when {
+            removeItem(player, Items.RAW_PHEASANT_6179) && !getAttribute(player, GameAttributes.RE_FREAK_COMPLETE, false) -> {
+                npcl(FaceAnim.NEUTRAL, "That's not the right one.")
+                setAttribute(player, GameAttributes.RE_FREAK_KILLS, false)
+                stage = END_DIALOGUE
+            }
+
+            removeItem(player, Items.RAW_PHEASANT_6178) || getAttribute(player, GameAttributes.RE_FREAK_COMPLETE, false) -> {
+                val message = "Thanks, $username, you may leave the area now."
+                npcl(FaceAnim.NEUTRAL, message)
+                sendChat(findNPC(FreakyForesterUtils.FREAK_NPC)!!, message)
+                setAttribute(player, GameAttributes.RE_FREAK_COMPLETE, true)
+                stage = END_DIALOGUE
+            }
+
+            else -> {
+                val tails = when (task) {
+                    NPCs.PHEASANT_2459 -> 1
+                    NPCs.PHEASANT_2460 -> 2
+                    NPCs.PHEASANT_2461 -> 3
+                    NPCs.PHEASANT_2462 -> 4
+                    else -> null
+                }
+
+                tails?.let {
+                    val message = "Hey there $username. Can you kill the $it tailed pheasant please. Bring me the raw pheasant when you're done."
+                    sendNPCDialogue(player, FreakyForesterUtils.FREAK_NPC, message)
+                    stage = END_DIALOGUE
+                }
             }
         }
     }

@@ -16,15 +16,18 @@ object FreakyForesterUtils {
     const val FREAK_NPC = NPCs.FREAKY_FORESTER_2458
     val freakArea = ZoneBorders(2587, 4758, 2616, 4788)
 
+    /**
+     * Assigns a random kill task to the player.
+     */
     fun giveFreakTask(player: Player) {
-        when (RandomFunction.getRandom(4)) {
-            0 -> setAttribute(player, GameAttributes.RE_FREAK_TASK, NPCs.PHEASANT_2459)
-            1 -> setAttribute(player, GameAttributes.RE_FREAK_TASK, NPCs.PHEASANT_2460)
-            2 -> setAttribute(player, GameAttributes.RE_FREAK_TASK, NPCs.PHEASANT_2461)
-            3 -> setAttribute(player, GameAttributes.RE_FREAK_TASK, NPCs.PHEASANT_2462)
-            else -> setAttribute(player, GameAttributes.RE_FREAK_TASK, NPCs.PHEASANT_2459)
-        }
-        player.dialogueInterpreter.open(FreakyForesterDialogue(), FREAK_NPC)
+        val pheasants = arrayOf(
+            NPCs.PHEASANT_2459,
+            NPCs.PHEASANT_2460,
+            NPCs.PHEASANT_2461,
+            NPCs.PHEASANT_2462
+        )
+        setAttribute(player, GameAttributes.RE_FREAK_TASK, pheasants.random())
+        openDialogue(player, FreakyForesterDialogue(), FREAK_NPC)
     }
 
     fun cleanup(player: Player) {

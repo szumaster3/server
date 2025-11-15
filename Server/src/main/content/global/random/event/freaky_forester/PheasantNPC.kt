@@ -20,12 +20,11 @@ class PheasantNPC : NPCBehavior(NPCs.PHEASANT_2459, NPCs.PHEASANT_2460, NPCs.PHE
     override fun onDropTableRolled(self: NPC, killer: Entity, drops: ArrayList<Item>) {
         val assignedPheasant = getAttribute(killer, GameAttributes.RE_FREAK_TASK, -1)
         if (assignedPheasant == -1) return
+
         drops.removeLast()
-        if (assignedPheasant == self.id) {
-            drops.add(Item(Items.RAW_PHEASANT_6178))
-        } else {
-            drops.add(Item(Items.RAW_PHEASANT_6179))
-        }
+        val itemToDrop = if (assignedPheasant == self.id) Items.RAW_PHEASANT_6178 else Items.RAW_PHEASANT_6179
+        drops.add(Item(itemToDrop))
+
         setAttribute(killer, GameAttributes.RE_FREAK_KILLS, true)
     }
 
