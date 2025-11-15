@@ -17,6 +17,7 @@ import shared.consts.NPCs
  */
 class EvilBobDialogue(val rewardDialogue: Boolean = false, val rewardXpSkill: Int = Skills.FISHING) : DialogueFile() {
 
+    // TODO: Well, those white knights are far more complicated than you might imagine. Not the 'goodie goodies' they claim to be. Just watch your back.
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.EVIL_BOB_2479)
         if (getAttribute(player!!, GameAttributes.RE_BOB_ZONE, "none") == "none") giveEventFishingSpot(player!!)

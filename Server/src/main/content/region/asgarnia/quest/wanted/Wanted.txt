@@ -15,6 +15,10 @@ import shared.consts.Quests
 @Initializable
 class Wanted : Quest(Quests.WANTED, 130, 129, 1, Vars.VARBIT_QUEST_WANTED_PROGRESS_1051, 0, 1, 11) {
 
+// TODO: Wanted! Upon entering the white knights,
+//  the player is automatically a White Knight Novice
+//  and is credited with 100 black knight kills.
+
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
         var line = 11

@@ -1,61 +1,15 @@
-package content.global.plugins.item.equipment
+package content.region.asgarnia.falador.plugin.temple_knights
 
-import core.api.getAttribute
 import core.api.hasRequirement
-import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.Entity
-import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.shops.Shops
-import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 import shared.consts.Quests
-
-enum class WhiteKnightsRanking(val requiredKillCount: Int) {
-    UNRANKED(0),
-    NOVICE(  100),
-    PEON(    300),
-    PAGE(    500),
-    NOBLE(   800),
-    ADEPT(   1300),
-    MASTER(  1500)
-}
-
-@Initializable
-class BlackKnightNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
-
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = BlackKnightNPC(id, location)
-
-    override fun finalizeDeath(killer: Entity) {
-        super.finalizeDeath(killer)
-        if (killer is Player) {
-            val killsToAdd = if (id > 8000) 12 else 1
-            WhiteKnightRankManager.addToKillCount(killer, killsToAdd)
-        }
-    }
-
-    override fun getIds(): IntArray = ID
-
-    companion object {
-        private val ID = intArrayOf(
-            NPCs.BLACK_KNIGHT_178,
-            NPCs.BLACK_KNIGHT_179,
-            NPCs.BLACK_KNIGHT_2698,
-            NPCs.BLACK_KNIGHT_2777,
-            NPCs.BLACK_KNIGHT_6189,
-            NPCs.ELITE_BLACK_KNIGHT_8324,
-            NPCs.ELITE_BLACK_KNIGHT_8325,
-            NPCs.ELITE_BLACK_KNIGHT_8326,
-            NPCs.ELITE_BLACK_KNIGHT_8327,
-            NPCs.ELITE_BLACK_KNIGHT_8330,
-        )
-    }
-}
 
 /**
  * Represents the Sir Vyvin dialogue.
@@ -91,7 +45,7 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
             10 -> {
                 when {
                     !hasRequirement(player, Quests.WANTED) -> npc("No, I'm sorry.").also { stage = END_DIALOGUE }
-                    rank == WhiteKnightsRanking.UNRANKED -> {
+                    rank == WhiteKnightsRank.UNRANKED -> {
                         npcl(FaceAnim.NEUTRAL,"Well, maybe I do, but you need to prove yourself worthy as a White Knight before I will sell you anything.")
                         stage++
                     }
@@ -134,57 +88,28 @@ class SirVyvinDialogue(player: Player? = null) : Dialogue(player) {
     /**
      * Returns player rank.
      */
-    private fun getRankDialogue(rank: WhiteKnightsRanking): String = when (rank) {
-        WhiteKnightsRanking.NOVICE -> "You are currently at Novice level within the White Knights, so your access to equipment is limited."
-        WhiteKnightsRanking.PEON -> "You are at Peon level within the White Knights, so not much to choose from I'm afraid."
-        WhiteKnightsRanking.PAGE -> "You've reached Page level, that shows a bit of dedication you know! Your available equipment will reflect that!"
-        WhiteKnightsRanking.NOBLE -> "And may I say what a pleasure it is to serve any Knight who has achieved Noble level!"
-        WhiteKnightsRanking.ADEPT -> "And it is so very rare that I see any White Knight who has reached Adept level!"
-        WhiteKnightsRanking.MASTER -> "And for a dedicated White Knight to have reached Master level like yourself, you get only the very best of all equipment available!"
+    private fun getRankDialogue(rank: WhiteKnightsRank): String = when (rank) {
+        WhiteKnightsRank.NOVICE -> "You are currently at Novice level within the White Knights, so your access to equipment is limited."
+        WhiteKnightsRank.PEON -> "You are at Peon level within the White Knights, so not much to choose from I'm afraid."
+        WhiteKnightsRank.PAGE -> "You've reached Page level, that shows a bit of dedication you know! Your available equipment will reflect that!"
+        WhiteKnightsRank.NOBLE -> "And may I say what a pleasure it is to serve any Knight who has achieved Noble level!"
+        WhiteKnightsRank.ADEPT -> "And it is so very rare that I see any White Knight who has reached Adept level!"
+        WhiteKnightsRank.MASTER -> "And for a dedicated White Knight to have reached Master level like yourself, you get only the very best of all equipment available!"
         else -> "Hmm, I'm not sure what rank you are. Strange!"
     }
 
     /**
      * Returns the shop id for rank.
      */
-    private fun getShopForRank(rank: WhiteKnightsRanking): Int = when (rank) {
-        WhiteKnightsRanking.NOVICE -> 269
-        WhiteKnightsRanking.PEON -> 270
-        WhiteKnightsRanking.PAGE -> 271
-        WhiteKnightsRanking.NOBLE -> 272
-        WhiteKnightsRanking.ADEPT -> 273
-        WhiteKnightsRanking.MASTER -> 274
+    private fun getShopForRank(rank: WhiteKnightsRank): Int = when (rank) {
+        WhiteKnightsRank.NOVICE -> 269
+        WhiteKnightsRank.PEON -> 270
+        WhiteKnightsRank.PAGE -> 271
+        WhiteKnightsRank.NOBLE -> 272
+        WhiteKnightsRank.ADEPT -> 273
+        WhiteKnightsRank.MASTER -> 274
         else -> 269
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.SIR_VYVIN_605)
-}
-
-object WhiteKnightRankManager {
-
-    private const val KILL_COUNT = "/save:white_knight_kills"
-
-    private fun getKillCount(player: Player): Int {
-        return getAttribute(player, KILL_COUNT, 0)
-    }
-
-    private fun setKillCount(player: Player, kills: Int) {
-        setAttribute(player, KILL_COUNT, kills)
-    }
-
-    fun addToKillCount(player: Player, kills: Int) {
-        val totalKills = getKillCount(player) + kills
-        setKillCount(player, totalKills)
-    }
-
-    fun addKill(player: Player) {
-        val kills = getKillCount(player) + 1
-        setKillCount(player, kills)
-    }
-
-    fun getRank(player: Player): WhiteKnightsRanking {
-        val kills = getKillCount(player)
-        return WhiteKnightsRanking.values().reversed().find { kills >= it.requiredKillCount } ?: WhiteKnightsRanking.UNRANKED
-    }
-
 }
