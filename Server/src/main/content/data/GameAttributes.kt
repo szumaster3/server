@@ -111,7 +111,7 @@ internal object GameAttributes {
     const val PLANT_NPC = "/save:random:plant"
     const val PLANT_NPC_VALUE = "/save:random:fruits"
 
-    // Certer random event.
+    // Certers random event.
     const val CERTER_REWARD = "random:certer_reward"
     const val CERTER_CORRECT = "random:certer_stage"
     const val CERTER_INDEX = "random:certer_index"
@@ -124,6 +124,9 @@ internal object GameAttributes {
     const val DRILL_OFFSET = "/save:random:drill_offset"
     const val DRILL_TASK = "/save:random:drill_task"
     const val DRILL_COUNTER = "/save:random:drill_score"
+
+    // Kiss the frog random event.
+    const val KTF_KISS_FAIL = "/save:random:kiss_the_frog:fail"
 
     // Swept away continuation (mini-quest).
     const val MINI_PURPLE_CAT = "/save:mini-quest:purple-cat"

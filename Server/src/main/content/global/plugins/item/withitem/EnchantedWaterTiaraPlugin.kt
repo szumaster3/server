@@ -9,8 +9,8 @@ import shared.consts.Items
 import shared.consts.Quests
 import shared.consts.Sounds
 
-class EnchWaterTiaraPlugin : InteractionListener {
-    val tiaraIDs = intArrayOf(Items.WATER_TIARA_5531, Items.ENCHANTED_WATER_TIARA_11969)
+class EnchantedWaterTiaraPlugin : InteractionListener {
+    private val tiaraIDs = intArrayOf(Items.WATER_TIARA_5531, Items.ENCHANTED_WATER_TIARA_11969)
 
     override fun defineListeners() {
 

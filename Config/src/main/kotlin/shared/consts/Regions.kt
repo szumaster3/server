@@ -96,4 +96,5 @@ object Regions {
     const val WIZARDS_GUILD_10288 = 10288
     const val JADE_VINE_MAZE_11566 = 11566
     const val CHAMPION_CHALLENGE_12696 = 12696
+    const val KISS_THE_FROG_9802 = 9802
 }
