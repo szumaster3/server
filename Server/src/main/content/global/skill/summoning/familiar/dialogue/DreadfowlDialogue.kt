@@ -9,64 +9,36 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * The type Dreadfowl dialogue.
+ * Represents the Dreadfowl familiar dialogues.
  */
 @Initializable
 class DreadfowlDialogue : Dialogue {
-    override fun newInstance(player: Player?): Dialogue = DreadfowlDialogue(player)
+    private var branch: Int = 0
 
-    /**
-     * Instantiates a new Dreadfowl dialogue.
-     */
+    override fun newInstance(player: Player?) = DreadfowlDialogue(player)
+
     constructor()
-
-    /**
-     * Instantiates a new Dreadfowl dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when ((Math.random() * 3).toInt()) {
-            0 -> {
-                npcl(FaceAnim.OLD_NORMAL, "Attack! Fight! Annihilate!")
-                stage = 0
-            }
+        branch = (0..2).random()
+        stage = 0
 
-            1 -> {
-                npcl(FaceAnim.OLD_NORMAL, "Can it be fightin' time, please?")
-                stage = 1
-            }
-
-            2 -> {
-                npcl(FaceAnim.OLD_NORMAL, "I want to fight something.")
-                stage = 2
-            }
+        when (branch) {
+            0 -> npcl(FaceAnim.OLD_NORMAL, "Attack! Fight! Annihilate!")
+            1 -> npcl(FaceAnim.OLD_NORMAL, "Can it be fightin' time, please?")
+            2 -> npcl(FaceAnim.OLD_NORMAL, "I want to fight something.")
         }
+
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        when (stage) {
-            0 -> {
-                playerl(FaceAnim.HALF_ASKING, "It always worries me when you're so happy saying that.")
-                stage = END_DIALOGUE
-            }
-
-            1 -> {
-                playerl(FaceAnim.FRIENDLY, "Look I'll find something for you to fight, just give me a second.")
-                stage = END_DIALOGUE
-            }
-
-            2 -> {
-                playerl(FaceAnim.FRIENDLY, "I'll find something for you in a minute - just be patient.")
-                stage = END_DIALOGUE
-            }
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when (branch) {
+            0 -> { playerl(FaceAnim.HALF_ASKING, "It always worries me when you're so happy saying that."); stage = END_DIALOGUE }
+            1 -> { playerl(FaceAnim.FRIENDLY, "Look I'll find something for you to fight, just give me a second."); stage = END_DIALOGUE }
+            2 -> { playerl(FaceAnim.FRIENDLY, "I'll find something for you in a minute - just be patient."); stage = END_DIALOGUE }
         }
         return true
     }

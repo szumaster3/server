@@ -20,6 +20,7 @@ import shared.consts.NPCs
 @Initializable
 class VillagerDialogue(player: Player? = null) : Dialogue(player) {
 
+    private var randomStage: Int? = null
 
     private val randomDialogue = arrayOf(
         "I'm very well thank you.",
@@ -35,9 +36,7 @@ class VillagerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         player("Hello, how's it going?")
-        val stages = intArrayOf(0, 2, 4, 6, 10, 12, 15)
-        val randomStage = stages.random()
-        stage = randomStage
+        stage = randomStage ?: intArrayOf(0, 2, 4, 6, 10, 12, 15).random().also { randomStage = it }
         return true
     }
 

@@ -9,74 +9,40 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * The type Abyssal lurker dialogue.
+ * Represents the Abyssal Lurker familiar dialogue.
  */
 @Initializable
 class AbyssalLurkerDialogue : Dialogue {
+
     override fun newInstance(player: Player?): Dialogue = AbyssalLurkerDialogue(player)
 
-    /**
-     * Instantiates a new Abyssal lurker dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Abyssal lurker dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
+
+    private val responses = listOf(
+        "What? Are we in danger, or something?",
+        "What? Is that even a language?",
+        "What? Do you want something?",
+        "What? Is there somebody down an old well, or something?"
+    )
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when ((Math.random() * 4).toInt()) {
-            0 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Djrej gf'ig sgshe...")
-                stage = 0
-            }
-
-            1 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "To poshi v'kaa!")
-                stage = 1
-            }
-
-            2 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "G-harrve shelmie?")
-                stage = 2
-            }
-
-            3 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Jehifk i'ekfh skjd.")
-                stage = 3
-            }
+        val stageIndex = (Math.random() * responses.size).toInt()
+        stage = stageIndex
+        when (stageIndex) {
+            0 -> npcl(FaceAnim.CHILD_NORMAL, "Djrej gf'ig sgshe...")
+            1 -> npcl(FaceAnim.CHILD_NORMAL, "To poshi v'kaa!")
+            2 -> npcl(FaceAnim.CHILD_NORMAL, "G-harrve shelmie?")
+            3 -> npcl(FaceAnim.CHILD_NORMAL, "Jehifk i'ekfh skjd.")
         }
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        when (stage) {
-            0 -> {
-                playerl(FaceAnim.HALF_ASKING, "What? Are we in danger, or something?")
-                stage = END_DIALOGUE
-            }
-
-            1 -> {
-                playerl(FaceAnim.HALF_ASKING, "What? Is that even a language?")
-                stage = END_DIALOGUE
-            }
-
-            2 -> {
-                playerl(FaceAnim.HALF_ASKING, "What? Do you want something?")
-                stage = END_DIALOGUE
-            }
-
-            3 -> {
-                playerl(FaceAnim.HALF_ASKING, "What? Is there somebody down an old well, or something?")
-                stage = END_DIALOGUE
-            }
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        if (stage in responses.indices) {
+            playerl(FaceAnim.HALF_ASKING, responses[stage])
+            stage = END_DIALOGUE
         }
         return true
     }

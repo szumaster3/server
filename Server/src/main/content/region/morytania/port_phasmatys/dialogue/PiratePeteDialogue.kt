@@ -174,6 +174,8 @@ private class PiratePeteTravelDialogue : DialogueFile() {
         "...slipped and slid into a brick wall."
     )
 
+    private var chosenLine: String? = null
+
     override fun handle(componentID: Int, buttonID: Int) {
         npc = NPC(NPCs.PIRATE_PETE_2825)
         when (stage) {
@@ -182,8 +184,8 @@ private class PiratePeteTravelDialogue : DialogueFile() {
                 stage++
             }
             1 -> {
-                val index = randomDialogue.random()
-                npcl(FaceAnim.NEUTRAL, index)
+                val line = chosenLine ?: randomDialogue.random().also { chosenLine = it }
+                npcl(FaceAnim.NEUTRAL, line)
                 stage++
             }
             2 -> {

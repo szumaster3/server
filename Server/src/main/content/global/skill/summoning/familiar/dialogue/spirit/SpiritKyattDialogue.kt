@@ -15,52 +15,38 @@ import core.plugin.Initializable
 import shared.consts.NPCs
 
 /**
- * The type Spirit kyatt dialogue.
+ * Represents the Spirit Kyatt familiar dialogue.
  */
 @Initializable
 class SpiritKyattDialogue : Dialogue {
+
     override fun newInstance(player: Player?): Dialogue = SpiritKyattDialogue(player)
 
-    /**
-     * Instantiates a new Spirit kyatt dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Spirit kyatt dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        if (npc !is Familiar) {
-            return false
-        }
+        npc = args[0] as? Familiar ?: return false
         val f = npc as Familiar
         if (f.owner != player) {
             sendMessage(player, "This is not your follower.")
             return true
-        } else {
-            sendOptions(player, "Select an Option", "Chat", "Teleport")
         }
+        sendOptions(player, "Select an Option", "Chat", "Teleport")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (buttonId) {
             1 -> openDialogue(player, SpiritKyattDialogueFile())
-            2 ->
+            2 -> {
                 if (!WildernessZone.checkTeleport(player, 20)) {
                     end()
                 } else {
                     teleport(player, Location(2326, 3634, 0), TeleportManager.TeleportType.NORMAL)
                     end()
                 }
+            }
         }
         return true
     }

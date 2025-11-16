@@ -14,52 +14,44 @@ import core.plugin.Initializable
 import shared.consts.NPCs
 
 /**
- * The type Lava titan dialogue.
+ * Represents the Lava Titan familiar dialogue.
  */
 @Initializable
 class LavaTitanDialogue : Dialogue {
+
     override fun newInstance(player: Player?): Dialogue = LavaTitanDialogue(player)
 
-    /**
-     * Instantiates a new Lava titan dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Lava titan dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        if (npc !is Familiar) {
+        npc = args[0] as? NPC ?: return false
+
+        val familiar = npc as? Familiar
+        if (familiar == null) {
             return false
         }
-        val f = npc as Familiar
-        if (f.owner !== player) {
+
+        if (familiar.owner != player) {
             sendMessage(player, "This is not your follower.")
             return true
-        } else {
-            options("Chat", "Teleport to Lava Maze")
         }
+
+        options("Chat", "Teleport to Lava Maze")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (buttonId) {
             1 -> openDialogue(player, LavaTitanDialogueFile())
-            2 ->
+            2 -> {
                 if (!WildernessZone.checkTeleport(player, 20)) {
                     end()
                 } else {
                     teleport(player, Location(3030, 3842, 0), TeleportType.NORMAL)
                     end()
                 }
+            }
         }
         return true
     }

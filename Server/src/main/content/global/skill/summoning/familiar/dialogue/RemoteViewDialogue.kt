@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 /**
- * The type Remote view dialogue.
+ * The Remote view dialogue.
  */
 @Initializable
 class RemoteViewDialogue : Dialogue {
@@ -16,16 +16,7 @@ class RemoteViewDialogue : Dialogue {
 
     override fun newInstance(player: Player?): Dialogue = RemoteViewDialogue(player)
 
-    /**
-     * Instantiates a new Remote view dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Remote view dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
@@ -34,18 +25,9 @@ class RemoteViewDialogue : Dialogue {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         end()
-        RemoteViewer
-            .create(
-                player,
-                familiar,
-                familiar!!.viewAnimation,
-                RemoteViewer.ViewType.values()[buttonId - 1],
-            ).startViewing()
+        RemoteViewer.create(player, familiar, familiar!!.viewAnimation, RemoteViewer.ViewType.values()[buttonId - 1]).startViewing()
         return true
     }
 

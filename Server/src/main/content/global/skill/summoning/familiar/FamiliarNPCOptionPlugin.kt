@@ -13,9 +13,6 @@ import core.plugin.Plugin
 @Initializable
 class FamiliarNPCOptionPlugin : OptionHandler() {
 
-    /**
-     * Registers this plugin as the handler for familiar options.
-     */
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         setOptionHandler("pick-up", this)
@@ -26,9 +23,6 @@ class FamiliarNPCOptionPlugin : OptionHandler() {
         return this
     }
 
-    /**
-     * Handles an interaction with a familiar NPC.
-     */
     override fun handle(player: Player, node: Node, option: String): Boolean {
         if (node !is Familiar) {
             return false

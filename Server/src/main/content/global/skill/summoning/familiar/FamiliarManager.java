@@ -36,20 +36,10 @@ public final class FamiliarManager {
     private int summoningCombatLevel;
     private boolean hasPouch;
 
-    /**
-     * Instantiates a new Familiar manager.
-     *
-     * @param player the player
-     */
     public FamiliarManager(Player player) {
         this.player = player;
     }
 
-    /**
-     * Parse.
-     *
-     * @param familiarData the familiar data
-     */
     public final void parse(JsonObject familiarData) {
         int currentPet = -1;
         if (familiarData.has("currentPet")) {

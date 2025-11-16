@@ -14,6 +14,8 @@ import shared.consts.NPCs
 @Initializable
 class HamMemberDialogue(player: Player? = null) : Dialogue(player) {
 
+    private var randomDialogue: Int? = null
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         player("What are all you people doing here?").also { stage = 1 }
@@ -22,10 +24,13 @@ class HamMemberDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            1 -> when ((1..3).random()) {
-                1 -> npcl(FaceAnim.FRIENDLY, "Many of us disagree with the king about what freedoms the local monster population should have. We're taking a stand and mobilising our forces against the monstrous hordes.").also { stage++ }
-                2 -> npcl(FaceAnim.FRIENDLY, "I'm totally in awe of Johanhus, he really knows what's what. I know he keeps going on about monsters and it's clear there are too many of them, so hey, I agree with whatever Johanhus says.").also { stage++ }
-                3 -> npcl(FaceAnim.FRIENDLY, "We're against the monsters..like Johanhus says...we don't like them...you know.").also { stage++ }
+            1 -> {
+                val response = randomDialogue ?: ((1..3).random().also { randomDialogue = it })
+                when (response) {
+                    1 -> npcl(FaceAnim.FRIENDLY, "Many of us disagree with the king about what freedoms the local monster population should have. We're taking a stand and mobilising our forces against the monstrous hordes.").also { stage++ }
+                    2 -> npcl(FaceAnim.FRIENDLY, "I'm totally in awe of Johanhus, he really knows what's what. I know he keeps going on about monsters and it's clear there are too many of them, so hey, I agree with whatever Johanhus says.").also { stage++ }
+                    3 -> npcl(FaceAnim.FRIENDLY, "We're against the monsters..like Johanhus says...we don't like them...you know.").also { stage++ }
+                }
             }
             2 -> options("Who are you and what do you do here?", "What do you think you're going to achieve?", "Where did all you people come from?", "Ok, thanks.").also { stage++ }
             3 -> when (buttonId) {

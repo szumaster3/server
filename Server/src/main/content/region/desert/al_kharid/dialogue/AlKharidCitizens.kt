@@ -13,20 +13,22 @@ import shared.consts.NPCs
  */
 @Initializable
 class AlKharidCitizens(player: Player? = null) : Dialogue(player) {
-    
+
+    private var randomDialogue: Int? = null
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val randomDialogue = (1..15).random()
-        when (randomDialogue) {
-            1 -> npcl(FaceAnim.FRIENDLY, "Well. This beats doing the shopping!").also { stage = END_DIALOGUE }
-            2 -> npcl(FaceAnim.FRIENDLY, "I wouldn't want to be the poor guy that has to clean up after the duels.").also { stage = 2 }
-            3 -> npcl(FaceAnim.FRIENDLY, "Hi!").also { stage = END_DIALOGUE }
-            4 -> npcl(FaceAnim.FRIENDLY, "What did the skeleton say before it ate?").also { stage = 4 }
-            5 -> npcl(FaceAnim.FRIENDLY, "Ooh. This is exciting!").also { stage = 24 }
-            6 -> npcl(FaceAnim.ASKING, "How can you make a very lively handkerchief?").also { stage = 6 }
-            7 -> npcl(FaceAnim.ASKING, "Why did the skeleton burp?").also { stage = 8 }
-            8 -> npcl(FaceAnim.HAPPY, "My son just won his first duel!").also { stage = 10 }
-            9 -> npcl(FaceAnim.FRIENDLY, "Can't you see I'm watching the duels?").also { stage = END_DIALOGUE }
+        val dialogue = randomDialogue ?: ((1..15).random().also { randomDialogue = it })
+        when (dialogue) {
+            1  -> npcl(FaceAnim.FRIENDLY, "Well. This beats doing the shopping!").also { stage = END_DIALOGUE }
+            2  -> npcl(FaceAnim.FRIENDLY, "I wouldn't want to be the poor guy that has to clean up after the duels.").also { stage = 2 }
+            3  -> npcl(FaceAnim.FRIENDLY, "Hi!").also { stage = END_DIALOGUE }
+            4  -> npcl(FaceAnim.FRIENDLY, "What did the skeleton say before it ate?").also { stage = 4 }
+            5  -> npcl(FaceAnim.FRIENDLY, "Ooh. This is exciting!").also { stage = 24 }
+            6  -> npcl(FaceAnim.ASKING, "How can you make a very lively handkerchief?").also { stage = 6 }
+            7  -> npcl(FaceAnim.ASKING, "Why did the skeleton burp?").also { stage = 8 }
+            8  -> npcl(FaceAnim.HAPPY, "My son just won his first duel!").also { stage = 10 }
+            9  -> npcl(FaceAnim.FRIENDLY, "Can't you see I'm watching the duels?").also { stage = END_DIALOGUE }
             10 -> npcl(FaceAnim.FRIENDLY, "Knock knock!").also { stage = 15 }
             11 -> npcl(FaceAnim.FRIENDLY, "Waaaaassssssuuuuupp?!").also { stage = END_DIALOGUE }
             12 -> npcl(FaceAnim.FRIENDLY, "Hi! I'm here to watch the duels!").also { stage = END_DIALOGUE }
@@ -39,13 +41,13 @@ class AlKharidCitizens(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            2 -> playerl(FaceAnim.FRIENDLY, "Me neither.").also { stage = END_DIALOGUE }
-            4 -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
-            5 -> npcl(FaceAnim.FRIENDLY, "Bone-appetit.").also { stage = END_DIALOGUE }
-            6 -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
-            7 -> npcl(FaceAnim.FRIENDLY, "Put a little boogey in it.").also { stage = END_DIALOGUE }
-            8 -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
-            9 -> npcl(FaceAnim.FRIENDLY, "'Cause it didn't have the guts to fart!").also { stage = END_DIALOGUE }
+            2  -> playerl(FaceAnim.FRIENDLY, "Me neither.").also { stage = END_DIALOGUE }
+            4  -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
+            5  -> npcl(FaceAnim.FRIENDLY, "Bone-appetit.").also { stage = END_DIALOGUE }
+            6  -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
+            7  -> npcl(FaceAnim.FRIENDLY, "Put a little boogey in it.").also { stage = END_DIALOGUE }
+            8  -> playerl(FaceAnim.ASKING, "I don't know?").also { stage++ }
+            9  -> npcl(FaceAnim.FRIENDLY, "'Cause it didn't have the guts to fart!").also { stage = END_DIALOGUE }
             10 -> playerl(FaceAnim.HAPPY, "Congratulations!").also { stage++ }
             11 -> npcl(FaceAnim.AMAZED, "He ripped his opponent in half!").also { stage++ }
             12 -> playerl(FaceAnim.FRIENDLY, "That's gotta hurt!").also { stage++ }

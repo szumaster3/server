@@ -11,156 +11,74 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 /**
- * The type Obsidian golem dialogue.
+ * Represents the Obsidian Golem familiar dialogue.
  */
 @Initializable
 class ObsidianGolemDialogue : Dialogue {
+
+    private var branch = -1
+
     override fun newInstance(player: Player?): Dialogue = ObsidianGolemDialogue(player)
 
-    /**
-     * Instantiates a new Obsidian golem dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Obsidian golem dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
+
         if (inEquipment(player, Items.FIRE_CAPE_6570, 1)) {
-            npcl(FaceAnim.CHILD_NORMAL, "Truly, you are a powerful warrior, Master!")
+            branch = 0
             stage = 0
+            npcl(FaceAnim.CHILD_NORMAL, "Truly, you are a powerful warrior, Master!")
             return true
         }
-        when ((Math.random() * 3).toInt()) {
-            0 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "How many foes have you defeated, Master?")
-                stage = 5
-            }
 
-            1 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Master! We are truly a mighty duo!")
-                stage = 10
-            }
+        branch = (Math.random() * 3).toInt() + 1
+        stage = 0
 
-            2 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Do you ever doubt your programming, Master?")
-                stage = 15
-            }
+        when (branch) {
+            1 -> npcl(FaceAnim.CHILD_NORMAL, "How many foes have you defeated, Master?")
+            2 -> npcl(FaceAnim.CHILD_NORMAL, "Master! We are truly a mighty duo!")
+            3 -> npcl(FaceAnim.CHILD_NORMAL, "Do you ever doubt your programming, Master?")
         }
+
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        when (stage) {
-            0 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Let us go forth and prove our strength, Master!")
-                stage++
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when (branch) {
+            0 -> when (stage) {
+                0 -> npcl(FaceAnim.CHILD_NORMAL, "Let us go forth and prove our strength, Master!").also { stage++ }
+                1 -> playerl(FaceAnim.HALF_ASKING, "Where would you like to prove it?").also { stage++ }
+                2 -> npcl(FaceAnim.CHILD_NORMAL, "The caves of the TzHaar are filled with monsters for us to defeat, Master! TzTok-Jad shall quake in his slippers!").also { stage++ }
+                3 -> playerl(FaceAnim.HALF_ASKING, "Have you ever met TzTok-Jad?").also { stage++ }
+                4 -> npcl(FaceAnim.CHILD_NORMAL, "Alas, Master, I have not. No Master has ever taken me to see him.").also { stage = END_DIALOGUE }
             }
 
-            1 -> {
-                playerl(FaceAnim.HALF_ASKING, "Where would you like to prove it?")
-                stage++
+            1 -> when (stage) {
+                0 -> playerl(FaceAnim.FRIENDLY, "Quite a few, I should think.").also { stage++ }
+                1 -> npcl(FaceAnim.CHILD_NORMAL, "Was your first foe as mighty as the volcano, Master?").also { stage++ }
+                2 -> playerl(FaceAnim.FRIENDLY, "Um, not quite.").also { stage++ }
+                3 -> npcl(FaceAnim.CHILD_NORMAL, "I am sure it must have been a deadly opponent, Master!").also { stage++ }
+                4 -> player(FaceAnim.FRIENDLY, "*Cough*", "It might have been a chicken.", "*Cough*").also { stage = END_DIALOGUE }
             }
 
-            2 -> {
-                npcl(
-                    FaceAnim.CHILD_NORMAL,
-                    "The caves of the TzHaar are filled with monsters for us to defeat, Master! TzTok-Jad shall quake in his slippers!",
-                )
-                stage++
+            2 -> when (stage) {
+                0 -> playerl(FaceAnim.HALF_ASKING, "Do you think so?").also { stage++ }
+                1 -> npcl(FaceAnim.CHILD_NORMAL, "Of course, Master! I am programmed to believe so.").also { stage++ }
+                2 -> playerl(FaceAnim.FRIENDLY, "Do you do anything you're not programmed to?").also { stage++ }
+                3 -> npcl(FaceAnim.CHILD_NORMAL, "No, Master.").also { stage++ }
+                4 -> playerl(FaceAnim.FRIENDLY, "I guess that makes things simple for you...").also { stage = END_DIALOGUE }
             }
 
-            3 -> {
-                playerl(FaceAnim.HALF_ASKING, "Have you ever met TzTok-Jad?")
-                stage++
-            }
-
-            4 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Alas, Master, I have not. No Master has ever taken me to see him.")
-                stage = END_DIALOGUE
-            }
-
-            5 -> {
-                playerl(FaceAnim.FRIENDLY, "Quite a few, I should think.")
-                stage++
-            }
-
-            6 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Was your first foe as mighty as the volcano, Master?")
-                stage++
-            }
-
-            7 -> {
-                playerl(FaceAnim.FRIENDLY, "Um, not quite.")
-                stage++
-            }
-
-            8 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "I am sure it must have been a deadly opponent, Master!")
-                stage++
-            }
-
-            9 -> {
-                player(FaceAnim.FRIENDLY, "*Cough*", "It might have been a chicken.", "*Cough*")
-                stage = END_DIALOGUE
-            }
-
-            10 -> {
-                playerl(FaceAnim.HALF_ASKING, "Do you think so?")
-                stage++
-            }
-
-            11 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Of course, Master! I am programmed to believe so.")
-                stage++
-            }
-
-            12 -> {
-                playerl(FaceAnim.FRIENDLY, "Do you do anything you're not programmed to?")
-                stage++
-            }
-
-            13 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "No, Master.")
-                stage++
-            }
-
-            14 -> {
-                playerl(FaceAnim.FRIENDLY, "I guess that makes things simple for you...")
-                stage = END_DIALOGUE
-            }
-
-            15 -> {
-                playerl(FaceAnim.FRIENDLY, "I don't have programming. I can think about whatever I like.")
-                stage++
-            }
-
-            16 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "What do you think about, Master?")
-                stage++
-            }
-
-            17 -> {
-                playerl(
-                    FaceAnim.FRIENDLY,
-                    "Oh, simple things: the sound of one hand clapping, where the gods come from...Simple things.",
-                )
-                stage++
-            }
-
-            18 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Paradox check = positive. Error. Reboot.")
-                stage = END_DIALOGUE
+            3 -> when (stage) {
+                0 -> playerl(FaceAnim.FRIENDLY, "I don't have programming. I can think about whatever I like.").also { stage++ }
+                1 -> npcl(FaceAnim.CHILD_NORMAL, "What do you think about, Master?").also { stage++ }
+                2 -> playerl(FaceAnim.FRIENDLY, "Oh, simple things: the sound of one hand clapping, where the gods come from...Simple things.").also { stage++ }
+                3 -> npcl(FaceAnim.CHILD_NORMAL, "Paradox check = positive. Error. Reboot.").also { stage = END_DIALOGUE }
             }
         }
+
         return true
     }
 

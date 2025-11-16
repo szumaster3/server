@@ -16,9 +16,6 @@ import shared.consts.Items
 @Initializable
 class FamiliarItemOptionPlugin : OptionHandler() {
 
-    /**
-     * Registers this plugin as the handler for familiar-related items.
-     */
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (p in Pets.values()) {
@@ -37,9 +34,6 @@ class FamiliarItemOptionPlugin : OptionHandler() {
         return this
     }
 
-    /**
-     * Handles a player interacting with a familiar item.
-     */
     override fun handle(player: Player, node: Node, option: String): Boolean {
         when (option) {
             "drop" -> {

@@ -9,22 +9,13 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * The type Wolpertinger dialogue.
+ * Represents the Wolpertinger familiar dialogue.
  */
 @Initializable
 class WolpertingerDialogue : Dialogue {
     override fun newInstance(player: Player?): Dialogue = WolpertingerDialogue(player)
 
-    /**
-     * Instantiates a new Wolpertinger dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Wolpertinger dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
@@ -34,10 +25,7 @@ class WolpertingerDialogue : Dialogue {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean = true
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean = true
 
     override fun getIds(): IntArray = intArrayOf(NPCs.WOLPERTINGER_6869, NPCs.WOLPERTINGER_6870)
 }

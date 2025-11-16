@@ -1,7 +1,6 @@
 package content.global.skill.construction.decoration.workpace
 
-import content.data.RepairableItem
-import content.data.RepairableItem.getRepair
+import content.data.RustyEquipment
 import content.data.skill.RepairableSkillingTool
 import content.region.misthalin.lumbridge.dialogue.BobDialogue
 import core.api.*
@@ -213,13 +212,13 @@ class ArmourStandPlugin : UseWithHandler(
                     product = repairItem.product
                 } else if (BobDialogue.BarrowsEquipment.isBarrowsItem(item.id)) {
                     val type = BobDialogue.BarrowsEquipment.formattedName(item.id)
-                    val single = BobDialogue.BarrowsEquipment.getSingleName(type)
+                    val single = BobDialogue.BarrowsEquipment.getSingleName(type!!)
                     val equipment = BobDialogue.BarrowsEquipment.getEquipmentType(type)
-                    val formattedName = type.lowercase().replace(single, "").trim().replace("'s", "")
+                    val formattedName = type?.lowercase()?.replace(single!!, "")!!.trim().replace("'s", "")
                     val fullEquip =
                         BobDialogue.BarrowsEquipment.BarrowsFullEquipment.forName("$formattedName $equipment")
-                    baseCost = BobDialogue.BarrowsEquipment.getFormattedCost(equipment, item).toDouble()
-                    product = fullEquip.full
+                    baseCost = BobDialogue.BarrowsEquipment.getFormattedCost(equipment!!, item).toDouble()
+                    product = fullEquip!!.full
                 }
 
                 if (product == null || baseCost == 0.0) {
@@ -250,22 +249,18 @@ class ArmourStandPlugin : UseWithHandler(
 
     private fun getRepairType(player: Player, item: Item) {
         val repairType = when (item.id) {
-            Items.BROKEN_ARROW_687 -> RepairableItem.EquipmentType.ARROWS
-            Items.BROKEN_STAFF_689 -> RepairableItem.EquipmentType.STAVES
-            Items.RUSTY_SWORD_686 -> RepairableItem.EquipmentType.SWORDS
-            Items.DAMAGED_ARMOUR_697 -> RepairableItem.EquipmentType.ARMOUR
-            Items.BROKEN_ARMOUR_698 -> RepairableItem.EquipmentType.LEGS
+            Items.BROKEN_ARROW_687 -> RustyEquipment.EquipmentType.ARROWS
+            Items.BROKEN_STAFF_689 -> RustyEquipment.EquipmentType.STAVES
+            Items.RUSTY_SWORD_686 -> RustyEquipment.EquipmentType.SWORDS
+            Items.DAMAGED_ARMOUR_697 -> RustyEquipment.EquipmentType.ARMOUR
+            Items.BROKEN_ARMOUR_698 -> RustyEquipment.EquipmentType.LEGS
             else -> return
         }
 
-        getRepair(repairType)?.let { repairedItem ->
+        RustyEquipment.getRepair(repairType)?.let { repairedItem ->
             player.inventory.remove(item)
             player.inventory.add(repairedItem)
-            sendItemDialogue(
-                player,
-                repairedItem.id,
-                "You repair the ${getItemName(item.id)} and find it is a ${repairedItem.name.lowercase()}.",
-            )
+            sendItemDialogue(player, repairedItem.id, "You repair the ${getItemName(item.id)} and find it is a ${repairedItem.name.lowercase()}.")
         }
     }
 

@@ -9,91 +9,51 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * The type Evil turnip dialogue.
+ * Represents the Evil Turnip familiar dialogue.
  */
 @Initializable
 class EvilTurnipDialogue : Dialogue {
-    override fun newInstance(player: Player?): Dialogue = EvilTurnipDialogue(player)
+    private var branch: Int = 0
 
-    /**
-     * Instantiates a new Evil turnip dialogue.
-     */
+    override fun newInstance(player: Player?) = EvilTurnipDialogue(player)
+
     constructor()
-
-    /**
-     * Instantiates a new Evil turnip dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        when ((Math.random() * 4).toInt()) {
-            0 -> {
-                playerl(FaceAnim.HALF_ASKING, "So, how are you feeling?")
-                stage = 0
-            }
+        branch = (0..3).random()
+        stage = 0
 
-            1 -> {
-                npcl(FaceAnim.OLD_NORMAL, "Hur hur hur...")
-                stage = 3
-            }
-
-            2 -> {
-                npcl(FaceAnim.OLD_NORMAL, "When we gonna fighting things, boss?")
-                stage = 4
-            }
-
-            3 -> {
-                npcl(FaceAnim.OLD_NORMAL, "I are turnip hear me roar! I too deadly to ignore.")
-                stage = 6
-            }
+        when (branch) {
+            0 -> playerl(FaceAnim.HALF_ASKING, "So, how are you feeling?")
+            1 -> npcl(FaceAnim.OLD_NORMAL, "Hur hur hur...")
+            2 -> npcl(FaceAnim.OLD_NORMAL, "When we gonna fighting things, boss?")
+            3 -> npcl(FaceAnim.OLD_NORMAL, "I are turnip hear me roar! I too deadly to ignore.")
         }
+
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        when (stage) {
-            0 -> {
-                npcl(FaceAnim.OLD_NORMAL, "My roots feel hurty. I thinking it be someone I eated.")
-                stage++
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        when (branch) {
+            0 -> when (stage) {
+                0 -> { npcl(FaceAnim.OLD_NORMAL, "My roots feel hurty. I thinking it be someone I eated."); stage++ }
+                1 -> { playerl(FaceAnim.ASKING, "You mean some THING you ate?"); stage++ }
+                2 -> { npcl(FaceAnim.OLD_NORMAL, "Hur hur hur. Yah, sure, why not."); stage = END_DIALOGUE }
             }
 
-            1 -> {
-                playerl(FaceAnim.ASKING, "You mean some THING you ate?")
-                stage++
+            1 -> when (stage) {
+                0 -> { playerl(FaceAnim.FRIENDLY, "Well, as sinister as it's chuckling is, at least it's happy. That's a good thing, right?"); stage = END_DIALOGUE }
             }
 
-            2 -> {
-                npcl(FaceAnim.OLD_NORMAL, "Hur hur hur. Yah, sure, why not.")
-                stage = END_DIALOGUE
+            2 -> when (stage) {
+                0 -> { playerl(FaceAnim.FRIENDLY, "Soon enough."); stage++ }
+                1 -> { npcl(FaceAnim.OLD_NORMAL, "Hur hur hur. I gets the fighting."); stage = END_DIALOGUE }
             }
 
-            3 -> {
-                playerl(
-                    FaceAnim.FRIENDLY,
-                    "Well, as sinister as it's chuckling is, at least it's happy. That's a good thing, right?",
-                )
-                stage = END_DIALOGUE
-            }
-
-            4 -> {
-                playerl(FaceAnim.FRIENDLY, "Soon enough.")
-                stage++
-            }
-
-            5 -> {
-                npcl(FaceAnim.OLD_NORMAL, "Hur hur hur. I gets the fighting.")
-                stage = END_DIALOGUE
-            }
-
-            6 -> {
-                playerl(FaceAnim.FRIENDLY, "I'm glad it's on my side... and not behind me.")
-                stage = END_DIALOGUE
+            3 -> when (stage) {
+                0 -> { playerl(FaceAnim.FRIENDLY, "I'm glad it's on my side... and not behind me."); stage = END_DIALOGUE }
             }
         }
         return true

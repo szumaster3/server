@@ -15,7 +15,7 @@ import shared.consts.Items
 object QuizMaster {
     const val COINS = Items.COINS_995
     const val MYSTERY_BOX = Items.RANDOM_EVENT_GIFT_14645
-    const val SIT_ANIMATION = Animations.SITTING_IN_THERAPIST_CHAIR_FROM_RANDOM_EVENT_2378
+    const val SIT_ANIMATION = Animations.QUIZMASTER_CHAIR_2378
     private val EVENT_LOCATION: Location = Location.create(1952, 4764, 1)
 
     val CORRECT =
@@ -55,10 +55,10 @@ object QuizMaster {
     fun init(player: Player) {
         lockTeleport(player)
         setAttribute(player, RandomEvent.save(), player.location)
-        teleport(player, EVENT_LOCATION, TeleportManager.TeleportType.NORMAL)
         registerLogoutListener(player, RandomEvent.logout()) { p ->
             p.location = getAttribute(p, RandomEvent.save(), player.location)
         }
+        teleport(player, EVENT_LOCATION, TeleportManager.TeleportType.NORMAL)
     }
 
 }

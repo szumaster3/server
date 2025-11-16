@@ -21,6 +21,8 @@ import shared.consts.Vars
 @Initializable
 class BertDialogue(player: Player? = null) : Dialogue(player) {
 
+    private var randomDialogue: Int? = null
+
     override fun open(vararg args: Any?): Boolean {
         val store = TheHandintheSand.getStoreFile()
         val username = player?.username?.lowercase() ?: ""
@@ -41,8 +43,8 @@ class BertDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 else -> {
-                    val randomDialogue = (1..4).random()
-                    when (randomDialogue) {
+                    val dialogue = randomDialogue ?: ((1..4).random().also { randomDialogue = it })
+                    when (dialogue) {
                         1 -> {
                             npcl(FaceAnim.HAPPY, "Mornin' ${player.username}!")
                             stage = 100

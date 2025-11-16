@@ -7,141 +7,61 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import java.util.*
 
-/**
- * The type Abyssal parasite dialogue.
- */
 @Initializable
 class AbyssalParasiteDialogue : Dialogue {
+
     override fun newInstance(player: Player?): Dialogue = AbyssalParasiteDialogue(player)
 
-    /**
-     * Instantiates a new Abyssal parasite dialogue.
-     */
     constructor()
-
-    /**
-     * Instantiates a new Abyssal parasite dialogue.
-     *
-     * @param player the player
-     */
     constructor(player: Player?) : super(player)
+
+    private val npcLines = listOf(
+        "Ongk n'hd?"    to 0,
+        "Noslr'rh..."   to 5,
+        "Ace'e e ur'y!" to 9,
+        "Tdsa tukk!"    to 10,
+        "Tdsa tukk!"    to 12
+    )
+
+    private val playerResponses = mapOf(
+        0  to listOf(FaceAnim.HALF_WORRIED to "Oh, I'm not feeling so well.", FaceAnim.SAD to "Please have mercy!", FaceAnim.AFRAID to "I shouldn't have eaten that kebab. Please stop talking!"),
+        5  to listOf(FaceAnim.HALF_ASKING to "What's the matter?", FaceAnim.HALF_ASKING to "Could you...could you mime what the problem is?"),
+        9  to listOf(FaceAnim.HALF_ASKING to "I want to help it but, aside from the language gap its noises make me retch!"),
+        10 to listOf(FaceAnim.HALF_WORRIED to "I think I'm going to be sick... The noises! Oh, the terrifying noises."),
+        12 to listOf(FaceAnim.AFRAID to "Oh, the noises again.")
+    )
+
+    private val npcFollowUps = mapOf(
+        0   to listOf("Uge f't es?", "F'tp ohl't?"),
+        5   to listOf("Kdso Seo...", "Yiao itl!"),
+        12  to listOf("Hem s'htee?")
+    )
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        val random = Random()
-        val randomIndex = random.nextInt(5)
-
-        when (randomIndex) {
-            0 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Ongk n'hd?")
-                stage = 0
-            }
-
-            1 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Noslr'rh...")
-                stage = 5
-            }
-
-            2 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Ace'e e ur'y!")
-                stage = 9
-            }
-
-            3 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Tdsa tukk!")
-                stage = 10
-            }
-
-            4 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Tdsa tukk!")
-                stage = 12
-            }
-        }
-
+        val (line, startStage) = npcLines.random()
+        stage = startStage
+        npcl(FaceAnim.CHILD_NORMAL, line)
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
-        when (stage) {
-            0 -> {
-                playerl(FaceAnim.HALF_WORRIED, "Oh, I'm not feeling so well.")
-                stage++
-            }
-
-            1 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Uge f't es?")
-                stage++
-            }
-
-            2 -> {
-                playerl(FaceAnim.SAD, "Please have mercy!")
-                stage++
-            }
-
-            3 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "F'tp ohl't?")
-                stage++
-            }
-
-            4 -> {
-                playerl(FaceAnim.AFRAID, "I shouldn't have eaten that kebab. Please stop talking!")
-                stage = END_DIALOGUE
-            }
-
-            5 -> {
-                playerl(FaceAnim.HALF_ASKING, "What's the matter?")
-                stage++
-            }
-
-            6 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Kdso Seo...")
-                stage++
-            }
-
-            7 -> {
-                playerl(FaceAnim.HALF_ASKING, "Could you...could you mime what the problem is?")
-                stage++
-            }
-
-            8 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Yiao itl!")
-                stage++
-            }
-
-            9 -> {
-                playerl(
-                    FaceAnim.HALF_ASKING,
-                    "I want to help it but, aside from the language gap its noises make me retch!",
-                )
-                stage = END_DIALOGUE
-            }
-
-            10 -> {
-                playerl(FaceAnim.HALF_WORRIED, "I think I'm going to be sick... The noises! Oh, the terrifying noises.")
-                stage = END_DIALOGUE
-            }
-
-            11 -> {
-                playerl(FaceAnim.AFRAID, "Oh, the noises again.")
-                stage = END_DIALOGUE
-            }
-
-            12 -> {
-                playerl(FaceAnim.AFRAID, "Oh, the noises again.")
-                stage++
-            }
-
-            13 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Hem s'htee?")
-                stage = END_DIALOGUE
-            }
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val responses = playerResponses[stage] ?: run {
+            stage = END_DIALOGUE
+            return true
         }
 
+        val index = (buttonId - 1).coerceIn(responses.indices)
+        val (anim, text) = responses[index]
+        playerl(anim, text)
+
+        val followUps = npcFollowUps[stage]
+        if (followUps != null && index < followUps.size) {
+            npcl(FaceAnim.CHILD_NORMAL, followUps[index])
+        }
+
+        stage = END_DIALOGUE
         return true
     }
 

@@ -7827,7 +7827,7 @@ object Animations {
     const val ANIMATION_8010 = 8010
     const val ANIMATION_8011 = 8011
     const val ANIMATION_8012 = 8012
-    const val ANIMATION_8013 = 8013
+    const val FAMILIAR_REMOTE_VIEW_8013 = 8013
     const val ANIMATION_8014 = 8014
     const val ANIMATION_8015 = 8015
     const val ANIMATION_8016 = 8016
