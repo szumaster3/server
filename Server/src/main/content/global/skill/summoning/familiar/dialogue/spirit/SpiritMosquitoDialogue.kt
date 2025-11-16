@@ -12,20 +12,16 @@ import shared.consts.NPCs
  * Represents the Spirit Mosquito familiar dialogue.
  */
 @Initializable
-class SpiritMosquitoDialogue : Dialogue {
+class SpiritMosquitoDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var branch: Int = -1
+    private var branch = -1
 
     override fun newInstance(player: Player?): Dialogue = SpiritMosquitoDialogue(player)
 
-    constructor()
-    constructor(player: Player?) : super(player)
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as? NPC ?: return false
-        if (branch == -1) {
-            branch = (Math.random() * 4).toInt()
-        }
+
+        if (branch == -1) branch = (0..3).random()
 
         stage = when (branch) {
             0 -> 0
@@ -53,7 +49,6 @@ class SpiritMosquitoDialogue : Dialogue {
                 2 -> { playerl(FaceAnim.FRIENDLY, "I knew I couldn't trust you."); stage++ }
                 3 -> { npcl(FaceAnim.CHILD_NORMAL, "Oh come on, you won't feel a thing..."); stage = END_DIALOGUE }
             }
-
             1 -> when (stage) {
                 4 -> { playerl(FaceAnim.FRIENDLY, "Which one? The gnomeball team?"); stage++ }
                 5 -> { npcl(FaceAnim.CHILD_NORMAL, "I must confess: I have no idea."); stage++ }
@@ -61,14 +56,12 @@ class SpiritMosquitoDialogue : Dialogue {
                 7 -> { npcl(FaceAnim.CHILD_NORMAL, "I was just trying to be friendly."); stage++ }
                 8 -> { playerl(FaceAnim.FRIENDLY, "Just trying to get to my veins, more like!"); stage = END_DIALOGUE }
             }
-
             2 -> when (stage) {
                 9 -> { playerl(FaceAnim.FRIENDLY, "Why would I drink pirate blood?"); stage++ }
                 10 -> { npcl(FaceAnim.CHILD_NORMAL, "How about dwarf blood?"); stage++ }
                 11 -> { playerl(FaceAnim.FRIENDLY, "I don't think you quite understand..."); stage++ }
                 12 -> { npcl(FaceAnim.CHILD_NORMAL, "Gnome blood, then?"); stage = END_DIALOGUE }
             }
-
             3 -> when (stage) {
                 13 -> { playerl(FaceAnim.FRIENDLY, "What would you like to eat?"); stage++ }
                 14 -> { npcl(FaceAnim.CHILD_NORMAL, "Well, if you're not too attached to your elbow..."); stage++ }

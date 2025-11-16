@@ -44,7 +44,6 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
 
         when (buttonId) {
             1 -> {
-
                 queueScript(player, 1, QueueStrength.WEAK) {
                     player.animate(PLAYER_STROKE_ANIMATION)
                     familiar.face(player)
@@ -57,7 +56,6 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
                 }
             }
             2 -> {
-
                 end()
                 player.sendChat("Go on puss...kill that rat!")
                 val rat = getLocalNpcs(player.location, 10)
@@ -101,7 +99,6 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
                 })
             }
             3 -> {
-
                 sendOptions(player, "Are you sure?", "Yes I am.", "No I'm not.")
                 stage = 4
             }

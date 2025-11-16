@@ -12,21 +12,16 @@ import shared.consts.NPCs
  * Represents the Spirit Dagannoth familiar dialogue.
  */
 @Initializable
-class SpiritDagannothDialogue : Dialogue {
+class SpiritDagannothDialogue(player: Player? = null) : Dialogue(player) {
 
     private var branch: Int = -1
 
     override fun newInstance(player: Player?): Dialogue = SpiritDagannothDialogue(player)
 
-    constructor()
-    constructor(player: Player?) : super(player)
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as? NPC ?: return false
 
-        if (branch == -1) {
-            branch = (Math.random() * 4).toInt()
-        }
+        if (branch == -1) branch = (0..3).random()
 
         stage = when (branch) {
             0 -> 0
@@ -37,9 +32,9 @@ class SpiritDagannothDialogue : Dialogue {
         }
 
         when (branch) {
-            0 -> npc(FaceAnim.CHILD_NORMAL, "Grooooooowl graaaaawl raaaawl?", "(Are you ready to surrender to the power of", "the Deep Waters?)")
-            1 -> npc(FaceAnim.CHILD_NORMAL, "Groooooowl. Hsssssssssssssss!", "(The Deeps will swallow the lands. None will", "stand before us!)")
-            2 -> npc(FaceAnim.CHILD_NORMAL, "Hssssss graaaawl grooooowl, growwwwwwwwwl!", "(Oh how the bleak gulfs hunger for the", "Day of Rising.)")
+            0 -> npc(FaceAnim.CHILD_NORMAL, "Grooooooowl graaaaawl raaaawl?", "(Are you ready to surrender to the power of the Deep Waters?)")
+            1 -> npc(FaceAnim.CHILD_NORMAL, "Groooooowl. Hsssssssssssssss!", "(The Deeps will swallow the lands. None will stand before us!)")
+            2 -> npc(FaceAnim.CHILD_NORMAL, "Hssssss graaaawl grooooowl, growwwwwwwwwl!", "(Oh how the bleak gulfs hunger for the Day of Rising.)")
             3 -> npc(FaceAnim.CHILD_NORMAL, "Raaaawl!", "(Submit!)")
         }
 
@@ -55,19 +50,16 @@ class SpiritDagannothDialogue : Dialogue {
                 3 -> { npc(FaceAnim.CHILD_NORMAL, "Rooooowl?", "(How about now?)"); stage++ }
                 4 -> { playerl(FaceAnim.FRIENDLY, "No, sorry. You might want to try again a little later."); stage = END_DIALOGUE }
             }
-
             1 -> when (stage) {
                 5 -> { playerl(FaceAnim.FRIENDLY, "What if we build boats?"); stage++ }
                 6 -> { npc(FaceAnim.CHILD_NORMAL, "Hsssssssss groooooowl?", "Hssssshsss grrooooooowl?", "(What are boats? The tasty wooden containers full of meat?)"); stage++ }
                 7 -> { playerl(FaceAnim.FRIENDLY, "I suppose they could be described as such, yes."); stage = END_DIALOGUE }
             }
-
             2 -> when (stage) {
                 8 -> { playerl(FaceAnim.FRIENDLY, "My brain hurts when I listen to you talk..."); stage++ }
                 9 -> { npc(FaceAnim.CHILD_NORMAL, "Raaaaawl groooowl grrrrawl!", "(That's the truth biting into your clouded mind!)"); stage++ }
                 10 -> { playerl(FaceAnim.FRIENDLY, "Could you try using a little less truth please?"); stage = END_DIALOGUE }
             }
-
             3 -> when (stage) {
                 11 -> { playerl(FaceAnim.FRIENDLY, "Submit to what?"); stage++ }
                 12 -> { npc(FaceAnim.CHILD_NORMAL, "Hssssssssss rawwwwwl graaaawl!", "(To the inevitable defeat of all life on the Surface!)"); stage++ }
@@ -76,7 +68,6 @@ class SpiritDagannothDialogue : Dialogue {
                 15 -> { playerl(FaceAnim.FRIENDLY, "I'll pass on that one, thanks."); stage = END_DIALOGUE }
             }
         }
-
         return true
     }
 

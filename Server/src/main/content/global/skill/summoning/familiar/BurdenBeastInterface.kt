@@ -21,7 +21,6 @@ class BurdenBeastInterface : InterfaceListener {
         }
     }
 
-
     companion object {
         /**
          * Handles item interactions between the player inventory and the familiar storage.

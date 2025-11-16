@@ -23,46 +23,42 @@ class BloatedLeechDialogue : Dialogue {
     constructor(player: Player?) : super(player)
 
     override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
+        npc = args[0] as? NPC ?: return false
         branch = Random.nextInt(4)
         stage = 0
+
+        when (branch) {
+            0 -> playerl(FaceAnim.HALF_ASKING, "What is?")
+            1 -> playerl(FaceAnim.HALF_ASKING, "Is it terminal?")
+            2 -> playerl(FaceAnim.FRIENDLY, "What? My brains stay inside my head, thanks.")
+            3 -> playerl(FaceAnim.FRIENDLY, "I think we can skip that for now.")
+        }
+
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
-            0 -> {
-                when (stage) {
-                    0 -> { playerl(FaceAnim.HALF_ASKING, "What is?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Never mind. Trust me, I'm almost a doctor."); stage++ }
-                    2 -> { playerl(FaceAnim.FRIENDLY, "I think I'll get a second opinion."); stage = END_DIALOGUE }
-                }
+            0 -> when (stage) {
+                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Never mind. Trust me, I'm almost a doctor."); stage++ }
+                1 -> { playerl(FaceAnim.FRIENDLY, "I think I'll get a second opinion."); stage = END_DIALOGUE }
             }
 
-            1 -> {
-                when (stage) {
-                    0 -> { playerl(FaceAnim.HALF_ASKING, "Is it terminal?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Not yet. Let me get a better look and I'll see what I can do about it."); stage++ }
-                    2 -> { playerl(FaceAnim.FRIENDLY, "There are two ways to take that...and I think I'll err on the side of caution."); stage = END_DIALOGUE }
-                }
+            1 -> when (stage) {
+                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Not yet. Let me get a better look and I'll see what I can do about it."); stage++ }
+                1 -> { playerl(FaceAnim.FRIENDLY, "There are two ways to take that...and I think I'll err on the side of caution."); stage = END_DIALOGUE }
             }
 
-            2 -> {
-                when (stage) {
-                    0 -> { playerl(FaceAnim.FRIENDLY, "What? My brains stay inside my head, thanks."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "That's ok, I can just drill a hole."); stage++ }
-                    2 -> { playerl(FaceAnim.HALF_ASKING, "How about you don't and pretend you did?"); stage = END_DIALOGUE }
-                }
+            2 -> when (stage) {
+                0 -> { npcl(FaceAnim.CHILD_NORMAL, "That's ok, I can just drill a hole."); stage++ }
+                1 -> { playerl(FaceAnim.HALF_ASKING, "How about you don't and pretend you did?"); stage = END_DIALOGUE }
             }
 
-            3 -> {
-                when (stage) {
-                    0 -> { playerl(FaceAnim.FRIENDLY, "I think we can skip that for now."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Who's the doctor here?"); stage++ }
-                    2 -> { playerl(FaceAnim.FRIENDLY, "Not you."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "I may not be a doctor, but I'm keen. Does that not count?"); stage++ }
-                    4 -> { playerl(FaceAnim.FRIENDLY, "In most other fields, yes; in medicine, no."); stage = END_DIALOGUE }
-                }
+            3 -> when (stage) {
+                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Who's the doctor here?"); stage++ }
+                1 -> { playerl(FaceAnim.FRIENDLY, "Not you."); stage++ }
+                2 -> { npcl(FaceAnim.CHILD_NORMAL, "I may not be a doctor, but I'm keen. Does that not count?"); stage++ }
+                3 -> { playerl(FaceAnim.FRIENDLY, "In most other fields, yes; in medicine, no."); stage = END_DIALOGUE }
             }
         }
         return true
