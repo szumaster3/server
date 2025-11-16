@@ -166,7 +166,7 @@ class ModelViewerCommandSet : CommandSet(Privilege.ADMIN) {
 
             val id = args[1].toIntOrNull()
             if (id == null) {
-                reject(player, "Invalid npcId")
+                reject(player, "0-8590")
                 return@define
             }
 
@@ -174,5 +174,23 @@ class ModelViewerCommandSet : CommandSet(Privilege.ADMIN) {
 
             BookInterface.openBook(player, BookInterface.FANCY_BOOK_3_49, ::show)
         }
+
+        /*
+         * Command for visualizing chathead animations.
+         */
+
+        define(
+            name = "expression",
+            privilege = Privilege.ADMIN,
+            usage = "::expression id",
+            description = "Visualizes chathead animations from ID.",
+        ) { player, args ->
+            if (args.size != 2) {
+                reject(player, "Usage: ::expression id")
+            }
+            val id = args[1].toIntOrNull() ?: 9804
+            player.dialogueInterpreter.sendDialogues(player, id, "Expression ID: $id")
+        }
+
     }
 }
