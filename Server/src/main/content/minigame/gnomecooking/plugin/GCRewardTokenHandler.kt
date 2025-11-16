@@ -1,5 +1,6 @@
 package content.minigame.gnomecooking.plugin
 
+import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -12,7 +13,7 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.Items
 
-val gnomeItems = arrayOf(
+private val gnomeItems = arrayOf(
     Items.FRUIT_BATTA_2277,
     Items.TOAD_BATTA_2255,
     Items.CHEESE_PLUSTOM_BATTA_2259,
@@ -31,7 +32,7 @@ val gnomeItems = arrayOf(
 @Initializable
 class GCRewardTokenHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        val def = ItemDefinition.forId(9474)
+        val def = ItemDefinition.forId(Items.REWARD_TOKEN_9474)
         def.handlers["option:check"] = this
         def.handlers["option:activate"] = this
         return this
@@ -44,8 +45,8 @@ class GCRewardTokenHandler : OptionHandler() {
 
         when (option) {
             "check" -> {
-                val charges = player.getAttribute("$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
-                player.dialogueInterpreter.sendDialogue("You have $charges redeemable charges.")
+                val charges = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
+                sendDialogue(player, "You have $charges redeemable charges.")
             }
 
             "activate" -> {
@@ -62,7 +63,7 @@ class GCRewardTokenHandler : OptionHandler() {
         }
 
         override fun open(vararg args: Any?): Boolean {
-            player.dialogueInterpreter.sendOptions("How many charges?", "1", "5", "10")
+            sendOptions(player, "How many charges?", "1", "5", "10")
             stage = 0
             return true
         }
@@ -80,15 +81,15 @@ class GCRewardTokenHandler : OptionHandler() {
             return true
         }
 
-        fun sendCharges(amount: Int, player: Player) {
-            val playerCharges = player.getAttribute("$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
+        private fun sendCharges(amount: Int, player: Player) {
+            val playerCharges = getAttribute(player, "$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", 0)
             if (playerCharges < amount) {
-                player.dialogueInterpreter.sendDialogue("You don't have that many charges.")
+                sendDialogue(player, "You don't have that many charges.")
                 return
             }
 
-            if (player.inventory.freeSlots() < amount) {
-                player.dialogueInterpreter.sendDialogue("You don't have enough space in your inventory.")
+            if (freeSlots(player) < amount) {
+                sendDialogue(player, "You don't have enough space in your inventory.")
                 return
             }
 
@@ -98,15 +99,15 @@ class GCRewardTokenHandler : OptionHandler() {
                 itemList.add(Item(gnomeItems.random()))
             }
 
-            player.dialogueInterpreter.sendDialogue("You put in for delivery of $amount items. Wait a bit...")
+            sendDialogue(player, "You put in for delivery of $amount items. Wait a bit...")
             GameWorld.Pulser.submit(DeliveryPulse(player, itemList))
-            player.setAttribute("/save:$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", playerCharges - amount)
+            setAttribute(player, "/save:$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", playerCharges - amount)
         }
 
         class DeliveryPulse(val player: Player, val items: ArrayList<Item>) : Pulse(RandomFunction.random(15, 30)) {
             override fun pulse(): Boolean {
                 player.inventory.add(*items.toTypedArray())
-                player.dialogueInterpreter.sendDialogue("Your food delivery has arrived!")
+                sendDialogue(player, "Your food delivery has arrived!")
                 return true
             }
         }

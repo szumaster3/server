@@ -85,6 +85,22 @@ class GnomeCookingListener : InteractionListener {
     private val chocolateBombBases = listOf(Items.POT_OF_CREAM_2130, Items.CHOCOLATE_DUST_1975)
     private val chocolateBombRecipe = Items.UNFINISHED_BOWL_9560 to Items.CHOCOLATE_BOMB_2185
 
+    private data class MixerData(val productId: Int, val requiredItems: IntArray, val xp: Double)
+
+    private val mixerMap = hashMapOf(
+        Items.MIXED_BLIZZARD_9566  to MixerData(Items.WIZARD_BLIZZARD_9508, intArrayOf(Items.PINEAPPLE_CHUNKS_2116, Items.LIME_SLICES_2124), 50.0),
+        Items.MIXED_SGG_9567       to MixerData(Items.SHORT_GREEN_GUY_9510, intArrayOf(Items.LIME_SLICES_2124, Items.EQUA_LEAVES_2128), 50.0),
+        Items.MIXED_BLAST_9568     to MixerData(Items.FRUIT_BLAST_9514, intArrayOf(Items.LEMON_SLICES_2106), 50.0),
+        Items.MIXED_PUNCH_9569     to MixerData(Items.PINEAPPLE_PUNCH_9512, intArrayOf(Items.LIME_CHUNKS_2122, Items.PINEAPPLE_CHUNKS_2116, Items.ORANGE_SLICES_2112), 50.0),
+        Items.MIXED_BLURBERRY_SPECIAL_9570 to MixerData(Items.BLURBERRY_SPECIAL_9520, intArrayOf(Items.LEMON_CHUNKS_2104, Items.ORANGE_CHUNKS_2110, Items.EQUA_LEAVES_2128, Items.LIME_SLICES_2124), 50.0),
+        Items.MIXED_SATURDAY_9571  to MixerData(Items.MIXED_SATURDAY_9572, intArrayOf(), 50.0),
+        Items.MIXED_DRAGON_9574    to MixerData(Items.MIXED_DRAGON_9575, intArrayOf(), 50.0)
+    )
+
+    private val finishCocktails = mapOf(
+        Items.MIXED_SATURDAY_9573 to (Items.CHOC_SATURDAY_2074 to arrayOf(Items.CHOCOLATE_DUST_1975, Items.POT_OF_CREAM_2130)), // unfinished choc sat -> finished
+        Items.MIXED_DRAGON_9575   to (Items.MIXED_DRAGON_9576 to arrayOf(Items.PINEAPPLE_CHUNKS_2116, Items.POT_OF_CREAM_2130))   // unfinished drunk drag -> finished
+    )
 
     override fun defineListeners() {
         on(Items.ALUFT_ALOFT_BOX_9477, IntType.ITEM, "check") { player, _, ->
@@ -147,8 +163,8 @@ class GnomeCookingListener : InteractionListener {
         cookLoc.forEach { loc ->
             crunchyCookMap.forEach { (raw, product) ->
                 onUseWith(IntType.SCENERY, loc, raw) { player, _, _ ->
-                    val xp = if (raw == 2202) XP.CRUNCHY_SPECIAL else XP.CRUNCHY
-                    cookItem(player, raw, product, xp, addForm = raw != 2202)
+                    val xp = if (raw == Items.RAW_CRUNCHIES_2202) XP.CRUNCHY_SPECIAL else XP.CRUNCHY
+                    cookItem(player, raw, product, xp, addForm = raw != Items.RAW_CRUNCHIES_2202)
                     return@onUseWith true
                 }
             }
@@ -171,7 +187,6 @@ class GnomeCookingListener : InteractionListener {
             }
             return@onUseWith true
         }
-
 
         crunchyRecipeMap.forEach { (pair, product) ->
             val (garnish, base) = pair
@@ -203,53 +218,87 @@ class GnomeCookingListener : InteractionListener {
 
         chocolateBombBases.forEach { base ->
             onUseWith(IntType.ITEM, base, chocolateBombRecipe.first) { player, _, _ ->
-                val inv = player.inventory
                 val requiredCream = Item(Items.POT_OF_CREAM_2130, 2)
                 val requiredChocDust = Item(Items.CHOCOLATE_DUST_1975)
-                if (!inv.containsItem(requiredCream) || !inv.containsItem(requiredChocDust)) {
+                if (!inInventory(player, requiredCream.id, requiredCream.amount) || !inInventory(player, requiredChocDust.id)) {
                     sendDialogue(player, "You don't have enough ingredients to finish that.")
                     return@onUseWith true
                 }
-                inv.remove(requiredCream)
-                inv.remove(requiredChocDust)
-                inv.remove(Item(chocolateBombRecipe.first))
-                inv.add(Item(chocolateBombRecipe.second))
+                removeItem(player, requiredCream)
+                removeItem(player, requiredChocDust)
+                removeItem(player, chocolateBombRecipe.first)
+                addItem(player, chocolateBombRecipe.second)
                 return@onUseWith true
             }
         }
 
         doughFillRecipeMap.forEach { (mould, product) ->
             onUseWith(IntType.ITEM, Items.GIANNE_DOUGH_2171, mould) { player, used, with ->
-                val inv = player.inventory
-                if (inv.remove(used.asItem()) && inv.remove(with.asItem())) {
-                    inv.add(Item(product))
+                if (removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
+                    addItem(player, product)
                 }
                 return@onUseWith true
             }
         }
+
+        mixerMap.forEach { (mixerId, data) ->
+            on(mixerId, IntType.ITEM, "pour") { player, node ->
+                if (!inInventory(player, Items.COCKTAIL_GLASS_2026)) {
+                    sendDialogue(player, "You need a glass to pour this into.")
+                    return@on true
+                }
+
+                for (reqId in data.requiredItems) {
+                    if (!inInventory(player, reqId)) {
+                        sendDialogue(player, "You don't have the garnishes for this.")
+                        return@on true
+                    }
+                }
+
+                for (reqId in data.requiredItems) removeItem(player, reqId)
+                removeItem(player, node.asItem())
+                removeItem(player, Items.COCKTAIL_GLASS_2026)
+                addItem(player, data.productId)
+                addItem(player, Items.COCKTAIL_SHAKER_2025)
+                rewardXP(player, Skills.COOKING, data.xp)
+                return@on true
+            }
+        }
+
+        finishCocktails.forEach { (unfinishedId, data) ->
+            val (finishedId, requiredItems) = data
+            on(unfinishedId, IntType.ITEM, "add-ingreds") { player, node ->
+                var hasAll = true
+                for (item in requiredItems) {
+                    if (!inInventory(player, item)) {
+                        hasAll = false
+                        break
+                    }
+                }
+
+                if (!hasAll) {
+                    sendDialogue(player, "You don't have the ingredients for this.")
+                    return@on true
+                }
+
+                for (item in requiredItems) removeItem(player, item)
+                removeItem(player, node.asItem())
+                addItem(player, finishedId)
+                return@on true
+            }
+        }
+
     }
 
     private fun cookItem(player: Player, rawId: Int, productId: Int, xp: Double, addMould: Boolean = false, addForm: Boolean = false) {
         player.lock()
         player.animate(Animation(Animations.HUMAN_MAKE_PIZZA_883))
-        queueScript(player, 1, QueueStrength.SOFT) { stage ->
-            val inv = player.inventory
-            when (stage) {
-                0 -> {
-                    if (inv.remove(Item(rawId))) {
-                        inv.add(Item(productId))
-                        if (addMould) inv.add(Item(Items.GNOMEBOWL_MOULD_2166))
-                        if (addForm) inv.add(Item(2165))
-                        if (xp > 0.0) rewardXP(player, Skills.COOKING, xp)
-                        player.unlock()
-                    }
-                    keepRunning(player)
-                }
-                else -> {
-                    player.unlock()
-                    stopExecuting(player)
-                }
-            }
+        if (removeItem(player, rawId)) {
+            addItem(player, productId)
+            if (addMould) addItem(player, Items.GNOMEBOWL_MOULD_2166)
+            if (addForm) addItem(player, Items.CRUNCHY_TRAY_2165)
+            if (xp > 0.0) rewardXP(player, Skills.COOKING, xp)
+            player.unlock()
         }
     }
 
