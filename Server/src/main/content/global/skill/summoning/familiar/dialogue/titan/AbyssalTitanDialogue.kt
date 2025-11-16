@@ -19,7 +19,7 @@ class AbyssalTitanDialogue : Dialogue {
 
     override fun handle(interfaceId: Int, buttonId: Int, ): Boolean {
         if (stage == START_DIALOGUE) {
-            npcl(FaceAnim.CHILD_NORMAL, "Scruunt, scraaan.").also { stage = END_DIALOGUE }
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, "Scruunt, scraaan.").also { stage = END_DIALOGUE }
         }
         return true
     }

@@ -27,7 +27,7 @@ class SpiritWolfDialogue : Dialogue {
         npc = args[0] as? NPC ?: return false
 
         if (anyInInventory(player, *bones.toIntArray())) {
-            npc(FaceAnim.CHILD_NORMAL, "Whuff-Whuff! Arf!", "(Throw the bone! I want to chase it!)")
+            npc(FaceAnim.FAMILIAR_NEUTRAL, "Whuff-Whuff! Arf!", "(Throw the bone! I want to chase it!)")
             stage = 0
             branch = -1
             return true
@@ -44,10 +44,10 @@ class SpiritWolfDialogue : Dialogue {
         }
 
         when (branch) {
-            0 -> npc(FaceAnim.CHILD_NORMAL, "Whurf?", "(What are you doing?)")
-            1 -> npc(FaceAnim.CHILD_NORMAL, "Bark Bark!", "(Danger!)")
-            2 -> npc(FaceAnim.CHILD_NORMAL, "Whuff whuff. Pantpant awff!", "(I smell something good! Hunting time!)")
-            3 -> npc(FaceAnim.CHILD_NORMAL, "Pant pant whine?", "(When am I going to get to chase something?)")
+            0 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Whurf?", "(What are you doing?)")
+            1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Bark Bark!", "(Danger!)")
+            2 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Whuff whuff. Pantpant awff!", "(I smell something good! Hunting time!)")
+            3 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Pant pant whine?", "(When am I going to get to chase something?)")
         }
 
         return true
@@ -61,7 +61,7 @@ class SpiritWolfDialogue : Dialogue {
             }
             1 -> when (stage) {
                 2 -> { playerl(FaceAnim.FRIENDLY, "Where?!"); stage++ }
-                3 -> { npc(FaceAnim.CHILD_NORMAL, "Whiiiine...", "(False alarm...)"); stage = END_DIALOGUE }
+                3 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Whiiiine...", "(False alarm...)"); stage = END_DIALOGUE }
             }
             2 -> if (stage == 4) {
                 playerl(FaceAnim.FRIENDLY, "We can go hunting in a moment. I just have to take care of something first.")

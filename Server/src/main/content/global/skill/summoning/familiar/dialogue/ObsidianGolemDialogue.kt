@@ -29,7 +29,7 @@ class ObsidianGolemDialogue : Dialogue {
         if (inEquipment(player, Items.FIRE_CAPE_6570, 1)) {
             branch = 0
             stage = 0
-            npcl(FaceAnim.CHILD_NORMAL, "Truly, you are a powerful warrior, Master!")
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, "Truly, you are a powerful warrior, Master!")
             return true
         }
 
@@ -37,9 +37,9 @@ class ObsidianGolemDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "How many foes have you defeated, Master?")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "Master! We are truly a mighty duo!")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "Do you ever doubt your programming, Master?")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "How many foes have you defeated, Master?")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Master! We are truly a mighty duo!")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Do you ever doubt your programming, Master?")
         }
 
         return true
@@ -48,34 +48,34 @@ class ObsidianGolemDialogue : Dialogue {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
             0 -> when (stage) {
-                0 -> npcl(FaceAnim.CHILD_NORMAL, "Let us go forth and prove our strength, Master!").also { stage++ }
+                0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Let us go forth and prove our strength, Master!").also { stage++ }
                 1 -> playerl(FaceAnim.HALF_ASKING, "Where would you like to prove it?").also { stage++ }
-                2 -> npcl(FaceAnim.CHILD_NORMAL, "The caves of the TzHaar are filled with monsters for us to defeat, Master! TzTok-Jad shall quake in his slippers!").also { stage++ }
+                2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "The caves of the TzHaar are filled with monsters for us to defeat, Master! TzTok-Jad shall quake in his slippers!").also { stage++ }
                 3 -> playerl(FaceAnim.HALF_ASKING, "Have you ever met TzTok-Jad?").also { stage++ }
-                4 -> npcl(FaceAnim.CHILD_NORMAL, "Alas, Master, I have not. No Master has ever taken me to see him.").also { stage = END_DIALOGUE }
+                4 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Alas, Master, I have not. No Master has ever taken me to see him.").also { stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "Quite a few, I should think.").also { stage++ }
-                1 -> npcl(FaceAnim.CHILD_NORMAL, "Was your first foe as mighty as the volcano, Master?").also { stage++ }
+                1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Was your first foe as mighty as the volcano, Master?").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "Um, not quite.").also { stage++ }
-                3 -> npcl(FaceAnim.CHILD_NORMAL, "I am sure it must have been a deadly opponent, Master!").also { stage++ }
+                3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I am sure it must have been a deadly opponent, Master!").also { stage++ }
                 4 -> player(FaceAnim.FRIENDLY, "*Cough*", "It might have been a chicken.", "*Cough*").also { stage = END_DIALOGUE }
             }
 
             2 -> when (stage) {
                 0 -> playerl(FaceAnim.HALF_ASKING, "Do you think so?").also { stage++ }
-                1 -> npcl(FaceAnim.CHILD_NORMAL, "Of course, Master! I am programmed to believe so.").also { stage++ }
+                1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Of course, Master! I am programmed to believe so.").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "Do you do anything you're not programmed to?").also { stage++ }
-                3 -> npcl(FaceAnim.CHILD_NORMAL, "No, Master.").also { stage++ }
+                3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "No, Master.").also { stage++ }
                 4 -> playerl(FaceAnim.FRIENDLY, "I guess that makes things simple for you...").also { stage = END_DIALOGUE }
             }
 
             3 -> when (stage) {
                 0 -> playerl(FaceAnim.FRIENDLY, "I don't have programming. I can think about whatever I like.").also { stage++ }
-                1 -> npcl(FaceAnim.CHILD_NORMAL, "What do you think about, Master?").also { stage++ }
+                1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "What do you think about, Master?").also { stage++ }
                 2 -> playerl(FaceAnim.FRIENDLY, "Oh, simple things: the sound of one hand clapping, where the gods come from...Simple things.").also { stage++ }
-                3 -> npcl(FaceAnim.CHILD_NORMAL, "Paradox check = positive. Error. Reboot.").also { stage = END_DIALOGUE }
+                3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Paradox check = positive. Error. Reboot.").also { stage = END_DIALOGUE }
             }
         }
 

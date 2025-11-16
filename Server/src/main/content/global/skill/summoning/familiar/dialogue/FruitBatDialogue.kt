@@ -37,18 +37,18 @@ class FruitBatDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            -1 -> npc(FaceAnim.CHILD_NORMAL, "Squeeksqueekasqueeksquee?", "(Can I have a papaya?)")
-            -2 -> npc(FaceAnim.CHILD_NORMAL, "Squeesqueak squeak!", "(I smell fruit!)")
+            -1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeeksqueekasqueeksquee?", "(Can I have a papaya?)")
+            -2 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeesqueak squeak!", "(I smell fruit!)")
             0 -> {
-                npc(FaceAnim.CHILD_NORMAL, "Squeekasqueek squeek?", "(How much longer do you want me for?)")
+                npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeekasqueek squeek?", "(How much longer do you want me for?)")
                 sendChat(npc, "Squeeeak!")
             }
-            1 -> npc(FaceAnim.CHILD_NORMAL, "Squeakdqueesqueak.", "(This place is fun!)")
+            1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeakdqueesqueak.", "(This place is fun!)")
             2 -> {
-                npc(FaceAnim.CHILD_NORMAL, "Squeeksqueekasqueek?", "(Where are we going?)")
+                npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeeksqueekasqueek?", "(Where are we going?)")
                 sendChat(npc, "Squeee!")
             }
-            3 -> npc(FaceAnim.CHILD_NORMAL, "Squeeksqueekasqueek squee?", "(Can you smell lemons?)")
+            3 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeeksqueekasqueek squee?", "(Can you smell lemons?)")
         }
 
         return true
@@ -58,7 +58,7 @@ class FruitBatDialogue : Dialogue {
         when (branch) {
             -1 -> when (stage) {
                 0 -> { playerl(FaceAnim.FRIENDLY, "No, I have a very specific plan for them."); stage++ }
-                1 -> { npc(FaceAnim.CHILD_NORMAL, "Squeek?", "(What?)"); stage++ }
+                1 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeek?", "(What?)"); stage++ }
                 2 -> { playerl(FaceAnim.FRIENDLY, "I was just going to grate it over some other vegetables and eat it. Yum."); stage = END_DIALOGUE }
             }
             -2 -> when (stage) {
@@ -75,7 +75,7 @@ class FruitBatDialogue : Dialogue {
             }
             3 -> when (stage) {
                 0 -> { playerl(FaceAnim.HALF_ASKING, "No, why do you ask?"); stage++ }
-                1 -> { npc(FaceAnim.CHILD_NORMAL, "Squeaksqueak squeaksqueesqueak.", "(Must just be thinking about them.)"); stage = END_DIALOGUE }
+                1 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Squeaksqueak squeaksqueesqueak.", "(Must just be thinking about them.)"); stage = END_DIALOGUE }
             }
         }
 

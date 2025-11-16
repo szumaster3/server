@@ -28,10 +28,10 @@ class SpiritTzKihDialogue : Dialogue {
 
         when (branch) {
             0 -> playerl(FaceAnim.FRIENDLY, "How's it going, Tz-kih?")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "Does JalYt think Tz-kih as strong as Jad Jad?")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "Have you heard of blood bat, JalYt?")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "Pray pray pray pray pray pray pray pray!")
-            4 -> npcl(FaceAnim.CHILD_NORMAL, "You drink pray, me drink pray.")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Does JalYt think Tz-kih as strong as Jad Jad?")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Have you heard of blood bat, JalYt?")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Pray pray pray pray pray pray pray pray!")
+            4 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "You drink pray, me drink pray.")
         }
         return true
     }
@@ -40,25 +40,25 @@ class SpiritTzKihDialogue : Dialogue {
         when (branch) {
             0 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "Pray pray?"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Pray pray?"); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "Don't start with all that again."); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "Hmph, silly JalYt."); stage = END_DIALOGUE }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Hmph, silly JalYt."); stage = END_DIALOGUE }
                 }
             }
 
             1 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Are you as strong as TzTok-Jad? Yeah, sure, why not."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Really? Thanks, JalYt. Tz-Kih strong and happy."); stage = END_DIALOGUE }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Really? Thanks, JalYt. Tz-Kih strong and happy."); stage = END_DIALOGUE }
                 }
             }
 
             2 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Blood bats? You mean vampire bats?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Yes. Blood bat."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Yes. Blood bat."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Yes, I've heard of them. What about them?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Tz-Kih like blood bat, but drink pray pray not blood blood. Blood blood is yuck."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Tz-Kih like blood bat, but drink pray pray not blood blood. Blood blood is yuck."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Thanks, Tz-Kih, that's nice to know."); stage = END_DIALOGUE }
                 }
             }
@@ -66,7 +66,7 @@ class SpiritTzKihDialogue : Dialogue {
             3 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "FRIENDLY down, Tz-Kih, we'll find you something to drink soon."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Pray praaaaaaaaaaaaaay!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Pray praaaaaaaaaaaaaay!"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Okay, okay. FRIENDLY down!"); stage = END_DIALOGUE }
                 }
             }
@@ -74,12 +74,12 @@ class SpiritTzKihDialogue : Dialogue {
             4 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "What's that, Tz-Kih?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "You got pray pray pot. Tz-Kih drink pray pray you, you drink pray pray pot."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You got pray pray pot. Tz-Kih drink pray pray you, you drink pray pray pot."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "You want to drink my Prayer points?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Yes. Pray pray."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Yes. Pray pray."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Err, not right now, Tz-Kih. I, er, need them myself."); stage++ }
                     5 -> { playerl(FaceAnim.FRIENDLY, "Sorry."); stage++ }
-                    6 -> { npcl(FaceAnim.CHILD_NORMAL, "But, pray praaaay...?"); stage = END_DIALOGUE }
+                    6 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "But, pray praaaay...?"); stage = END_DIALOGUE }
                 }
             }
         }

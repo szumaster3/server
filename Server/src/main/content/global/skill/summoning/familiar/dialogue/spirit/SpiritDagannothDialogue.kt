@@ -32,10 +32,10 @@ class SpiritDagannothDialogue(player: Player? = null) : Dialogue(player) {
         }
 
         when (branch) {
-            0 -> npc(FaceAnim.CHILD_NORMAL, "Grooooooowl graaaaawl raaaawl?", "(Are you ready to surrender to the power of the Deep Waters?)")
-            1 -> npc(FaceAnim.CHILD_NORMAL, "Groooooowl. Hsssssssssssssss!", "(The Deeps will swallow the lands. None will stand before us!)")
-            2 -> npc(FaceAnim.CHILD_NORMAL, "Hssssss graaaawl grooooowl, growwwwwwwwwl!", "(Oh how the bleak gulfs hunger for the Day of Rising.)")
-            3 -> npc(FaceAnim.CHILD_NORMAL, "Raaaawl!", "(Submit!)")
+            0 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Grooooooowl graaaaawl raaaawl?", "(Are you ready to surrender to the power of the Deep Waters?)")
+            1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Groooooowl. Hsssssssssssssss!", "(The Deeps will swallow the lands. None will stand before us!)")
+            2 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Hssssss graaaawl grooooowl, growwwwwwwwwl!", "(Oh how the bleak gulfs hunger for the Day of Rising.)")
+            3 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Raaaawl!", "(Submit!)")
         }
 
         return true
@@ -45,26 +45,26 @@ class SpiritDagannothDialogue(player: Player? = null) : Dialogue(player) {
         when (branch) {
             0 -> when (stage) {
                 0 -> { playerl(FaceAnim.FRIENDLY, "Err, not really."); stage++ }
-                1 -> { npc(FaceAnim.CHILD_NORMAL, "Rooooowl?", "(How about now?)"); stage++ }
+                1 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Rooooowl?", "(How about now?)"); stage++ }
                 2 -> { playerl(FaceAnim.FRIENDLY, "No, sorry."); stage++ }
-                3 -> { npc(FaceAnim.CHILD_NORMAL, "Rooooowl?", "(How about now?)"); stage++ }
+                3 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Rooooowl?", "(How about now?)"); stage++ }
                 4 -> { playerl(FaceAnim.FRIENDLY, "No, sorry. You might want to try again a little later."); stage = END_DIALOGUE }
             }
             1 -> when (stage) {
                 5 -> { playerl(FaceAnim.FRIENDLY, "What if we build boats?"); stage++ }
-                6 -> { npc(FaceAnim.CHILD_NORMAL, "Hsssssssss groooooowl?", "Hssssshsss grrooooooowl?", "(What are boats? The tasty wooden containers full of meat?)"); stage++ }
+                6 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Hsssssssss groooooowl?", "Hssssshsss grrooooooowl?", "(What are boats? The tasty wooden containers full of meat?)"); stage++ }
                 7 -> { playerl(FaceAnim.FRIENDLY, "I suppose they could be described as such, yes."); stage = END_DIALOGUE }
             }
             2 -> when (stage) {
                 8 -> { playerl(FaceAnim.FRIENDLY, "My brain hurts when I listen to you talk..."); stage++ }
-                9 -> { npc(FaceAnim.CHILD_NORMAL, "Raaaaawl groooowl grrrrawl!", "(That's the truth biting into your clouded mind!)"); stage++ }
+                9 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Raaaaawl groooowl grrrrawl!", "(That's the truth biting into your clouded mind!)"); stage++ }
                 10 -> { playerl(FaceAnim.FRIENDLY, "Could you try using a little less truth please?"); stage = END_DIALOGUE }
             }
             3 -> when (stage) {
                 11 -> { playerl(FaceAnim.FRIENDLY, "Submit to what?"); stage++ }
-                12 -> { npc(FaceAnim.CHILD_NORMAL, "Hssssssssss rawwwwwl graaaawl!", "(To the inevitable defeat of all life on the Surface!)"); stage++ }
+                12 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Hssssssssss rawwwwwl graaaawl!", "(To the inevitable defeat of all life on the Surface!)"); stage++ }
                 13 -> { playerl(FaceAnim.FRIENDLY, "I think I'll wait a little longer before I just keep over and submit, thanks."); stage++ }
-                14 -> { npc(FaceAnim.CHILD_NORMAL, "Hsssss, grooooowl, raaaaawl.", "(Well, it's your choice, but those that submit first will be eaten first.)"); stage++ }
+                14 -> { npc(FaceAnim.FAMILIAR_NEUTRAL, "Hsssss, grooooowl, raaaaawl.", "(Well, it's your choice, but those that submit first will be eaten first.)"); stage++ }
                 15 -> { playerl(FaceAnim.FRIENDLY, "I'll pass on that one, thanks."); stage = END_DIALOGUE }
             }
         }

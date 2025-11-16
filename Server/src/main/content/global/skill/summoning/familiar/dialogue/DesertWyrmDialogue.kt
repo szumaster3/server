@@ -28,7 +28,7 @@ class DesertWyrmDialogue : Dialogue {
         npc = args[0] as NPC
         if (anyInEquipment(player, *PICKAXE)) {
             branch = 0
-            npcl(FaceAnim.CHILD_NORMAL, "If you have that pick, why make me dig?")
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, "If you have that pick, why make me dig?")
             stage = 0
             return true
         }
@@ -37,10 +37,10 @@ class DesertWyrmDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "This is so unsafe...I should have a hard hat for this work...")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "You can't touch me, I'm part of the union!")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "You know, you might want to register with the union.")
-            4 -> npcl(FaceAnim.CHILD_NORMAL, "Why are you ignoring that good ore seam, " + player.username + "?")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "This is so unsafe...I should have a hard hat for this work...")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "You can't touch me, I'm part of the union!")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "You know, you might want to register with the union.")
+            4 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Why are you ignoring that good ore seam, " + player.username + "?")
         }
 
         return true
@@ -51,39 +51,39 @@ class DesertWyrmDialogue : Dialogue {
             0 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Because it's a little quicker and easier on my arms."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "I should take industrial action over this..."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I should take industrial action over this..."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "You mean you won't work for me any more?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "No. It means me and the lads feed you legs-first into some industrial machinery, maybe the Blast Furnace."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "No. It means me and the lads feed you legs-first into some industrial machinery, maybe the Blast Furnace."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "I'll just be over here, digging."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "That's the spirit, lad!"); stage = END_DIALOGUE }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "That's the spirit, lad!"); stage = END_DIALOGUE }
                 }
             }
             1 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Well, I could get you a rune helm if you like - those are pretty hard."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Keep that up and you'll have the union on your back, " + player.username + "."); stage = END_DIALOGUE }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Keep that up and you'll have the union on your back, " + player.username + "."); stage = END_DIALOGUE }
                 }
             }
             2 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.HALF_ASKING, "Is that some official no touching policy or something?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "You really don't get it, do you " + player.username + "?"); stage = END_DIALOGUE }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You really don't get it, do you " + player.username + "?"); stage = END_DIALOGUE }
                 }
             }
             3 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "I stop bugging you to join the union."); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I stop bugging you to join the union."); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "Ask that again later; I'll have to consider that generous proposal."); stage = END_DIALOGUE }
                 }
             }
             4 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.HALF_ASKING, "Which ore seam?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "There's a good ore seam right underneath us at this very moment."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "There's a good ore seam right underneath us at this very moment."); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "Great! How long will it take for you to get to it?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Five years, give or take."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Five years, give or take."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Five years!"); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "That's if we go opencast, mind. I could probably reach it in three if I just dug."); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "That's if we go opencast, mind. I could probably reach it in three if I just dug."); stage++ }
                     6 -> { playerl(FaceAnim.FRIENDLY, "Right. I see. I think I'll skip it thanks."); stage = END_DIALOGUE }
                 }
             }

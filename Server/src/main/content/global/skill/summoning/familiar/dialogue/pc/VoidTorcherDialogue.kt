@@ -29,9 +29,9 @@ class VoidTorcherDialogue : Dialogue {
 
         when (branch) {
             0 -> playerl(FaceAnim.HALF_ASKING, "You okay there, spinner?")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "'T' is for torcher, that's good enough for me... 'T' is for torcher, I'm happy you can see.")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "Burn, baby, burn! Torcher inferno!")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "So hungry... must devour...")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "'T' is for torcher, that's good enough for me... 'T' is for torcher, I'm happy you can see.")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Burn, baby, burn! Torcher inferno!")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "So hungry... must devour...")
         }
 
         return true
@@ -41,13 +41,13 @@ class VoidTorcherDialogue : Dialogue {
         when (branch) {
             0 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "I not spinner!"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I not spinner!"); stage++ }
                     1 -> { playerl(FaceAnim.HALF_ASKING, "Sorry, splatter?"); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "I not splatter either!"); stage++ }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I not splatter either!"); stage++ }
                     3 -> { playerl(FaceAnim.FRIENDLY, "No, wait, I meant defiler."); stage++ }
-                    4 -> { npcl(FaceAnim.CHILD_NORMAL, "I torcher!"); stage++ }
+                    4 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I torcher!"); stage++ }
                     5 -> { playerl(FaceAnim.FRIENDLY, "Hehe, I know. I was just messing with you."); stage++ }
-                    6 -> { npcl(FaceAnim.CHILD_NORMAL, "Grr. Don't be such a pest."); stage = END_DIALOGUE }
+                    6 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Grr. Don't be such a pest."); stage = END_DIALOGUE }
                 }
             }
             1 -> {
@@ -63,7 +63,7 @@ class VoidTorcherDialogue : Dialogue {
             3 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "*Gulp* Er, yeah, I'll find you something to eat in a minute."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Is flesh-bag scared of torcher?"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Is flesh-bag scared of torcher?"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "No, no. I, er, always look like this... honest."); stage = END_DIALOGUE }
                 }
             }

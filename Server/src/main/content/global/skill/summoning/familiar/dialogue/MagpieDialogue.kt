@@ -37,10 +37,10 @@ class MagpieDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            0 -> npcl(FaceAnim.CHILD_NORMAL, "There's nowt gannin on here...")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "Howway, let's gaan see what's happenin' in toon.")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "Are we gaan oot soon? I'm up fer a good walk me.")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "Ye' been plowdin' i' the claarts aall day.")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "There's nowt gannin on here...")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Howway, let's gaan see what's happenin' in toon.")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Are we gaan oot soon? I'm up fer a good walk me.")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Ye' been plowdin' i' the claarts aall day.")
         }
 
         return true

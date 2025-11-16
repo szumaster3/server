@@ -31,7 +31,7 @@ class SpiritCobraDialogue : Dialogue {
         npc = args[0] as NPC
 
         if (inInventory(player, Items.RING_OF_CHAROSA_6465, 1) || inEquipment(player, Items.RING_OF_CHAROSA_6465, 1)) {
-            npcl(FaceAnim.OLD_NORMAL, "You are under my power!")
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, "You are under my power!")
             stage = 20
             branch = 4
             return true
@@ -39,11 +39,11 @@ class SpiritCobraDialogue : Dialogue {
 
         branch = Random().nextInt(5)
         when (branch) {
-            0 -> npcl(FaceAnim.OLD_NORMAL, "Do we have to do thissss right now?")
-            1 -> npcl(FaceAnim.OLD_NORMAL, "You are feeling ssssleepy...")
-            2 -> npcl(FaceAnim.OLD_NORMAL, "I'm bored, do ssssomething to entertain me...")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Do we have to do thissss right now?")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "You are feeling ssssleepy...")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm bored, do ssssomething to entertain me...")
             3 -> playerl(FaceAnim.FRIENDLY, "Your will is my command...")
-            4 -> npcl(FaceAnim.OLD_NORMAL, "I am king of the world!")
+            4 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I am king of the world!")
         }
         stage = 0
         return true
@@ -54,31 +54,31 @@ class SpiritCobraDialogue : Dialogue {
             0 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Yes, I'm afraid so."); stage++ }
-                    1 -> { npcl(FaceAnim.OLD_NORMAL, "You are under my sssspell..."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You are under my sssspell..."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "I will do as you ask..."); stage++ }
-                    3 -> { npcl(FaceAnim.OLD_NORMAL, "Do we have to do thissss right now?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Do we have to do thissss right now?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Not at all, I had just finished!"); stage = END_DIALOGUE }
                 }
             }
             1 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "I am feeling sssso ssssleepy..."); stage++ }
-                    1 -> { npcl(FaceAnim.OLD_NORMAL, "You will bring me lotssss of sssstuff!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You will bring me lotssss of sssstuff!"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "What ssssort of sssstuff?"); stage++ }
-                    3 -> { npcl(FaceAnim.OLD_NORMAL, "What ssssort of sssstuff have you got?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "What ssssort of sssstuff have you got?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "All kindsss of sssstuff."); stage++ }
-                    5 -> { npcl(FaceAnim.OLD_NORMAL, "Then just keep bringing sssstuff until I'm ssssatissssfied!"); stage = END_DIALOGUE }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Then just keep bringing sssstuff until I'm ssssatissssfied!"); stage = END_DIALOGUE }
                 }
             }
             2 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "Errr, I'm not here to entertain you, you know."); stage++ }
-                    1 -> { npcl(FaceAnim.OLD_NORMAL, "You will do as I assssk..."); stage = END_DIALOGUE }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You will do as I assssk..."); stage = END_DIALOGUE }
                 }
             }
             3 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.OLD_NORMAL, "I'm bored, do ssssomething to entertain me..."); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm bored, do ssssomething to entertain me..."); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "I'll dance for you!");
                         end()
                         animate(player, Animations.DANCE_866, true)
@@ -89,9 +89,9 @@ class SpiritCobraDialogue : Dialogue {
             4 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "You know, I think there is a law against snakes being the king."); stage++ }
-                    1 -> { npcl(FaceAnim.OLD_NORMAL, "My will is your command..."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "My will is your command..."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "I am yours to command..."); stage++ }
-                    3 -> { npcl(FaceAnim.OLD_NORMAL, "I am king of the world!"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I am king of the world!"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "All hail King Serpentor!"); stage = END_DIALOGUE }
                 }
             }

@@ -30,8 +30,8 @@ class SwampTitanDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            0 -> npcl(FaceAnim.CHILD_NORMAL, "Do you smell that? Swamp tar, master. I LOVE the smell of swamp tar in the morning. Smells like...victorin.")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "I'm alone, all alone I say.")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Do you smell that? Swamp tar, master. I LOVE the smell of swamp tar in the morning. Smells like...victorin.")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm alone, all alone I say.")
             2 -> playerl(FaceAnim.FRIENDLY, "Oh, not again. Look, I'll be your friend.")
             3 -> playerl(FaceAnim.FRIENDLY, "Cheer up, it might never happen!")
         }
@@ -45,47 +45,47 @@ class SwampTitanDialogue : Dialogue {
             0 -> {
                 when (stage) {
                     1 -> { playerl(FaceAnim.FRIENDLY, "You actually LIKE the smell of this stuff? It's gross."); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "Of course! I am made of swamp, after all."); stage++ }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Of course! I am made of swamp, after all."); stage++ }
                     3 -> { playerl(FaceAnim.FRIENDLY, "Oh, I'm sorry. I didn't mean...I meant the swamp tar itself smells gross, not you. You smell like lavender. Yes, lavender."); stage++ }
-                    4 -> { npcl(FaceAnim.CHILD_NORMAL, "*sob* Lavender? Lavender! Why would you be so mean? I'm supposed to smell bad."); stage = END_DIALOGUE }
+                    4 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "*sob* Lavender? Lavender! Why would you be so mean? I'm supposed to smell bad."); stage = END_DIALOGUE }
                 }
             }
 
             1 -> {
                 when (stage) {
                     1 -> {playerl(FaceAnim.FRIENDLY, "Oh, stop being so melodramatic."); stage++ }
-                    2 -> {npcl(FaceAnim.CHILD_NORMAL, "It's not easy being greenery...well, decomposing greenery."); stage++ }
+                    2 -> {npcl(FaceAnim.FAMILIAR_NEUTRAL, "It's not easy being greenery...well, decomposing greenery."); stage++ }
                     3 -> {playerl(FaceAnim.HALF_ASKING, "Surely, you're not the only swamp...thing in the world? What about the other swamp titans?"); stage++ }
-                    4 -> {npcl(FaceAnim.CHILD_NORMAL, "They're not my friends...they pick on me...they're so mean..."); stage++ }
+                    4 -> {npcl(FaceAnim.FAMILIAR_NEUTRAL, "They're not my friends...they pick on me...they're so mean..."); stage++ }
                     5 -> {playerl(FaceAnim.ASKING, "Why would they do that?"); stage++ }
-                    6 -> {npcl(FaceAnim.CHILD_NORMAL, "They think I DON'T smell."); stage++ }
+                    6 -> {npcl(FaceAnim.FAMILIAR_NEUTRAL, "They think I DON'T smell."); stage++ }
                     7 -> {playerl(FaceAnim.FRIENDLY, "Oh, yes. That is, er, mean..."); stage = END_DIALOGUE }
                 }
             }
 
             2 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "You'll be my friend, master?"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You'll be my friend, master?"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Yeah, sure, why not."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Really?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Really?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Really really..."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "Oh, I'm so happy!"); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Oh, I'm so happy!"); stage++ }
                     6 -> { playerl(FaceAnim.FRIENDLY, "...even if you do smell like a bog of eternal stench."); stage++ }
-                    7 -> { npcl(FaceAnim.CHILD_NORMAL, "Wait...you think I smell bad?"); stage++ }
+                    7 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Wait...you think I smell bad?"); stage++ }
                     8 -> { playerl(FaceAnim.FRIENDLY, "Erm, yes, but I didn't me"); stage++ }
-                    9 -> { npcl(FaceAnim.CHILD_NORMAL, "Oh, that's the nicest thing anyone's ever said to me! Thank you, master, thank you so much."); stage++ }
-                    10 -> { npcl(FaceAnim.CHILD_NORMAL, "You're my friend AND you think I smell. I'm so very happy!"); stage++ }
+                    9 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Oh, that's the nicest thing anyone's ever said to me! Thank you, master, thank you so much."); stage++ }
+                    10 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You're my friend AND you think I smell. I'm so very happy!"); stage++ }
                     11 -> { playerl(FaceAnim.FRIENDLY, "I guess I did mean it like that."); stage = END_DIALOGUE }
                 }
             }
 
             3 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Oh, why did you have to go and say something like that?"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Oh, why did you have to go and say something like that?"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Like what? I'm trying to cheer you up."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "There's no hope for me, oh woe, oh woe."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "There's no hope for me, oh woe, oh woe."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "I'll leave you alone, then."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "NO! Don't leave me, master!"); stage = END_DIALOGUE }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "NO! Don't leave me, master!"); stage = END_DIALOGUE }
                 }
             }
         }

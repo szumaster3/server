@@ -20,7 +20,7 @@ class WolpertingerDialogue : Dialogue {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npcl(FaceAnim.CHILD_NORMAL, "Raaar! Mewble, whurf whurf.")
+        npcl(FaceAnim.FAMILIAR_NEUTRAL, "Raaar! Mewble, whurf whurf.")
         stage = END_DIALOGUE
         return true
     }

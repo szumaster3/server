@@ -21,7 +21,7 @@ class PhoenixEgglingDialogue : DialogueFile() {
         val hasMeanPet = getAttribute(player!!, GameAttributes.PHOENIX_LAIR_EGGLING_MEAN, false)
 
         when (stage) {
-            0 -> npc(FaceAnim.NEW_HAPPY, "Cheep cheep-chirp chirp?").also { stage++ }
+            0 -> npc(FaceAnim.FAMILIAR_HAPPY, "Cheep cheep-chirp chirp?").also { stage++ }
             1 -> player(FaceAnim.EXTREMELY_SHOCKED, "It's trying to climb into my backpack!").also { stage++ }
             2 -> player(FaceAnim.THINKING, "Hmmm. Should I take it with me?").also { stage++ }
             3 -> options("Hop in the bag, you!", "I have enough mouths to feed.").also { stage++ }
@@ -61,7 +61,7 @@ class PhoenixEgglingDialogue : DialogueFile() {
                         findLocalNPC(player!!, npc!!.id)?.clear()
                         addItemOrBank(player!!, item, 1)
                         setAttribute(player!!, attribute, true)
-                        npcl(FaceAnim.NEW_HAPPY, dialogue)
+                        npcl(FaceAnim.FAMILIAR_HAPPY, dialogue)
                         sendMessage(player!!, "The phoenix eggling is now yours!")
                         sendNews("${player!!.username} has found a Phoenix eggling!")
                         stage = END_DIALOGUE
@@ -69,7 +69,7 @@ class PhoenixEgglingDialogue : DialogueFile() {
                     }
                 }
 
-                2 -> npc(FaceAnim.NEW_HAPPY, "Chiiiirp...").also { stage = END_DIALOGUE }
+                2 -> npc(FaceAnim.FAMILIAR_HAPPY, "Chiiiirp...").also { stage = END_DIALOGUE }
             }
         }
     }

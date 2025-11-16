@@ -30,7 +30,7 @@ class BullAntDialogue : Dialogue {
         when (branch) {
             0 -> playerl(FaceAnim.FRIENDLY, "Sir...wheeze...yes Sir!")
             1 -> playerl(FaceAnim.FRIENDLY, "Sir, yes Sir!")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "Aten...hut!")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Aten...hut!")
             3 -> playerl(FaceAnim.FRIENDLY, "Buck up, Sir, it's not that bad.")
             4 -> playerl(FaceAnim.FRIENDLY, "Sir, nothing Sir!")
         }
@@ -41,32 +41,32 @@ class BullAntDialogue : Dialogue {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
             0 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Not enjoying the run? You need more training biped?"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Not enjoying the run? You need more training biped?"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "Sir, no Sir! Sir, I'm enjoying the run a great deal, Sir!"); stage++ }
-                2 -> { npcl(FaceAnim.CHILD_NORMAL, "Then hop to, Private!"); stage++ }
+                2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Then hop to, Private!"); stage++ }
                 3 -> { playerl(FaceAnim.FRIENDLY, "Sir, yes Sir!"); stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "We're going to work you so hard your boots fall off, understood?"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "We're going to work you so hard your boots fall off, understood?"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "Sir, yes Sir!"); stage++ }
-                2 -> { npcl(FaceAnim.CHILD_NORMAL, "Carry on Private!"); stage = END_DIALOGUE }
+                2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Carry on Private!"); stage = END_DIALOGUE }
             }
 
             2 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "I can't believe they stuck me with you..."); stage++ }
-                1 -> { npcl(FaceAnim.CHILD_NORMAL, "What in the name of all the layers of the abyss do you think you're doing, biped?"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I can't believe they stuck me with you..."); stage++ }
+                1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "What in the name of all the layers of the abyss do you think you're doing, biped?"); stage++ }
                 2 -> { playerl(FaceAnim.FRIENDLY, "Sir, Private Player reporting for immediate active duty, Sir!"); stage++ }
-                3 -> { npcl(FaceAnim.CHILD_NORMAL, "As you were, Private!"); stage = END_DIALOGUE }
+                3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "As you were, Private!"); stage = END_DIALOGUE }
             }
 
             3 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Stow that, Private, and get back to work!"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Stow that, Private, and get back to work!"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "Sir, yes Sir!"); stage = END_DIALOGUE }
             }
 
             4 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Well double-time it, Private, whatever it is!"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Well double-time it, Private, whatever it is!"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "Sir, yes Sir!"); stage = END_DIALOGUE }
             }
         }

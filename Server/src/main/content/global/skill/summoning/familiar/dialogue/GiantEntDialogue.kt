@@ -26,14 +26,14 @@ class GiantEntDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            0 -> npc(FaceAnim.CHILD_NORMAL, "Creeeeeeeeeeeak.....", "(I.....)")
-            1 -> npc(FaceAnim.CHILD_NORMAL, "Creak..... Creaaaaaaaaak.....", "(Am.....)")
-            2 -> npc(FaceAnim.CHILD_NORMAL, "Grooooooooan.....", "(Feeling.....)")
-            3 -> npc(FaceAnim.CHILD_NORMAL, "Groooooooooan.....", "(Sleepy.....)")
-            4 -> npc(FaceAnim.CHILD_NORMAL, "Grooooooan.....creeeeeeeak", "(Restful.....)")
-            5 -> npc(FaceAnim.CHILD_NORMAL, "Grrrrooooooooooooooan.....", "(Achey.....)")
-            6 -> npc(FaceAnim.CHILD_NORMAL, "Creeeeeeeegroooooooan.....", "(Goood.....)")
-            7 -> npc(FaceAnim.CHILD_NORMAL, "Creeeeeeeeeeeeeaaaaaak.....", "(Tired.....)")
+            0 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Creeeeeeeeeeeak.....", "(I.....)")
+            1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Creak..... Creaaaaaaaaak.....", "(Am.....)")
+            2 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Grooooooooan.....", "(Feeling.....)")
+            3 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Groooooooooan.....", "(Sleepy.....)")
+            4 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Grooooooan.....creeeeeeeak", "(Restful.....)")
+            5 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Grrrrooooooooooooooan.....", "(Achey.....)")
+            6 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Creeeeeeeegroooooooan.....", "(Goood.....)")
+            7 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Creeeeeeeeeeeeeaaaaaak.....", "(Tired.....)")
         }
 
         return true
@@ -43,19 +43,19 @@ class GiantEntDialogue : Dialogue {
         when (branch) {
             0 -> when (stage) {
                 0 -> { playerl(FaceAnim.ASKING, "Yes?"); stage++ }
-                1 -> { npcl(FaceAnim.CHILD_NORMAL, "....."); stage++ }
+                1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "....."); stage++ }
                 2 -> { sendDialogue("After a while you realise that the ent has finished speaking for the moment."); stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {
                 0 -> { playerl(FaceAnim.ASKING, "Yes?"); stage++ }
-                1 -> { npcl(FaceAnim.CHILD_NORMAL, "....."); stage++ }
+                1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "....."); stage++ }
                 2 -> { sendDialogue("After a while you realise that the ent has finished speaking for the moment."); stage = END_DIALOGUE }
             }
 
             2 -> when (stage) {
                 0 -> { playerl(FaceAnim.ASKING, "Yes? We almost have a full sentence now - the suspense is killing me!"); stage++ }
-                1 -> { npcl(FaceAnim.CHILD_NORMAL, "....."); stage++ }
+                1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "....."); stage++ }
                 2 -> { sendDialogue("After a while you realise that the ent has finished speaking for the moment."); stage = END_DIALOGUE }
             }
 

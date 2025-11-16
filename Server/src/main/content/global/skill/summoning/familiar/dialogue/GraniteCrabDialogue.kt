@@ -29,7 +29,7 @@ class GraniteCrabDialogue : Dialogue {
 
 
         if (anyInInventory(player, *fishes)) {
-            npcl(FaceAnim.CHILD_NORMAL, "That is not a rock fish...")
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, "That is not a rock fish...")
             stage = END_DIALOGUE
             return true
         }
@@ -52,9 +52,9 @@ class GraniteCrabDialogue : Dialogue {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
             0 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Free fish, please?"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Free fish, please?"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "No...I already told you you can't."); stage++ }
-                2 -> { npcl(FaceAnim.CHILD_NORMAL, "Can it be fish time soon?"); stage++ }
+                2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Can it be fish time soon?"); stage++ }
                 3 -> { playerl(FaceAnim.FRIENDLY, "Great... I get stuck with the only granite crab in existence that can't take no for an answer..."); stage = END_DIALOGUE }
             }
             1 -> stage = END_DIALOGUE

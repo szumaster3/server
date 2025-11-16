@@ -40,24 +40,24 @@ class BloatedLeechDialogue : Dialogue {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
             0 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Never mind. Trust me, I'm almost a doctor."); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Never mind. Trust me, I'm almost a doctor."); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "I think I'll get a second opinion."); stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Not yet. Let me get a better look and I'll see what I can do about it."); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Not yet. Let me get a better look and I'll see what I can do about it."); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "There are two ways to take that...and I think I'll err on the side of caution."); stage = END_DIALOGUE }
             }
 
             2 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "That's ok, I can just drill a hole."); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "That's ok, I can just drill a hole."); stage++ }
                 1 -> { playerl(FaceAnim.HALF_ASKING, "How about you don't and pretend you did?"); stage = END_DIALOGUE }
             }
 
             3 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Who's the doctor here?"); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Who's the doctor here?"); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "Not you."); stage++ }
-                2 -> { npcl(FaceAnim.CHILD_NORMAL, "I may not be a doctor, but I'm keen. Does that not count?"); stage++ }
+                2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I may not be a doctor, but I'm keen. Does that not count?"); stage++ }
                 3 -> { playerl(FaceAnim.FRIENDLY, "In most other fields, yes; in medicine, no."); stage = END_DIALOGUE }
             }
         }

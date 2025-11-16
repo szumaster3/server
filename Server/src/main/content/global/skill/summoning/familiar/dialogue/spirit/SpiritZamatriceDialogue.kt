@@ -155,7 +155,7 @@ class SpiritZamatriceDialogue : Dialogue {
                 stage++
             }
             27 -> {
-                npcl(FaceAnim.CHILD_NORMAL, "Oh, I petrified them really good! Ooooh...okay, point taken.")
+                npcl(FaceAnim.FAMILIAR_NEUTRAL, "Oh, I petrified them really good! Ooooh...okay, point taken.")
                 stage = END_DIALOGUE
             }
         }

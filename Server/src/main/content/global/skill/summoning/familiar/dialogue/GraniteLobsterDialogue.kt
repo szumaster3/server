@@ -43,19 +43,19 @@ class GraniteLobsterDialogue : Dialogue {
         when (branch) {
 
             0 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "The longhall will resound with our celebration!"); stage = END_DIALOGUE }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "The longhall will resound with our celebration!"); stage = END_DIALOGUE }
             }
 
             2 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "I would have settled for raw sharks, but that's good too!"); stage = END_DIALOGUE }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I would have settled for raw sharks, but that's good too!"); stage = END_DIALOGUE }
             }
 
             3 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Yes! To the looting and the plunder!"); stage = END_DIALOGUE }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Yes! To the looting and the plunder!"); stage = END_DIALOGUE }
             }
 
             4 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "Clonkclonkclonk grind clonk grind? (It's nothing personal, you're just an Outlander, you know?)"); stage = END_DIALOGUE }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Clonkclonkclonk grind clonk grind? (It's nothing personal, you're just an Outlander, you know?)"); stage = END_DIALOGUE }
             }
         }
 

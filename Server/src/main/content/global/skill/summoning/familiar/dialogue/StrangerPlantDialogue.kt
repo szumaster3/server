@@ -27,10 +27,10 @@ class StrangerPlantDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            0 -> npcl(FaceAnim.CHILD_NORMAL, "I'M STRANGER PLANT!")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "WILL WE HAVE TO BE HERE LONG?")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "DIIIIVE!")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "I THINK I'M WILTING!")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'M STRANGER PLANT!")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "WILL WE HAVE TO BE HERE LONG?")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "DIIIIVE!")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I THINK I'M WILTING!")
         }
         return true
     }
@@ -40,46 +40,46 @@ class StrangerPlantDialogue : Dialogue {
             0 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "I know you are."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "I KNOW! I'M JUST SAYING!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I KNOW! I'M JUST SAYING!"); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "Do you have to shout like that all of the time?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "WHO'S SHOUTING?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "WHO'S SHOUTING?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "If this is you speaking normally, I'd hate to hear you shouting."); stage = END_DIALOGUE }
                 }
             }
             1 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.FRIENDLY, "We'll be here until I am finished."); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "BUT THERE'S NO DRAMA HERE!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "BUT THERE'S NO DRAMA HERE!"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Well, how about you pretend to be an undercover agent."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "WONDERFUL! WHAT'S MY MOTIVATION?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "WONDERFUL! WHAT'S MY MOTIVATION?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "You're trying to remain stealthy and secretive, while looking out for clues."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "I'LL JUST GET INTO CHARACTER! AHEM!"); stage++ }
-                    6 -> { npcl(FaceAnim.CHILD_NORMAL, "PAPER! PAPER! VARROCK HERALD FOR SALE!"); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'LL JUST GET INTO CHARACTER! AHEM!"); stage++ }
+                    6 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "PAPER! PAPER! VARROCK HERALD FOR SALE!"); stage++ }
                     7 -> { playerl(FaceAnim.HALF_ASKING, "What kind of spy yells loudly like that?"); stage++ }
-                    8 -> { npcl(FaceAnim.CHILD_NORMAL, "ONE WHOSE COVER IDENTITY IS A PAPER-SELLER, OF COURSE!"); stage++ }
+                    8 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "ONE WHOSE COVER IDENTITY IS A PAPER-SELLER, OF COURSE!"); stage++ }
                     9 -> { playerl(FaceAnim.FRIENDLY, "Ask a silly question..."); stage = END_DIALOGUE }
                 }
             }
             2 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.HALF_ASKING, "What? Help! Why dive?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "OH, DON'T WORRY! I JUST LIKE TO YELL THAT FROM TIME TO TIME!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "OH, DON'T WORRY! I JUST LIKE TO YELL THAT FROM TIME TO TIME!"); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "Well, can you give me a little warning next time?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "WHAT, AND TAKE ALL THE FUN OUT OF LIFE?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "WHAT, AND TAKE ALL THE FUN OUT OF LIFE?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "If by 'fun' you mean 'sudden heart attacks', then yes, please take them out of my life!"); stage = END_DIALOGUE }
                 }
             }
             3 -> {
                 when (stage) {
                     0 -> { playerl(FaceAnim.HALF_ASKING, "Do you need some water?"); stage++ }
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "DON'T BE SILLY! I CAN PULL THAT OUT OF THE GROUND!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "DON'T BE SILLY! I CAN PULL THAT OUT OF THE GROUND!"); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "Then why are you wilting?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "IT'S SIMPLE: THERE'S A DISTINCT LACK OF DRAMA!"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "IT'S SIMPLE: THERE'S A DISTINCT LACK OF DRAMA!"); stage++ }
                     4 -> { playerl(FaceAnim.HALF_ASKING, "Drama?"); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "YES, DRAMA!"); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "YES, DRAMA!"); stage++ }
                     6 -> { playerl(FaceAnim.FRIENDLY, "Okay..."); stage++ }
                     7 -> { playerl(FaceAnim.FRIENDLY, "Let's see if we can find some for you."); stage++ }
-                    8 -> { npcl(FaceAnim.CHILD_NORMAL, "LEAD ON!"); stage = END_DIALOGUE }
+                    8 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "LEAD ON!"); stage = END_DIALOGUE }
                 }
             }
         }

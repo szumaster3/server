@@ -50,43 +50,43 @@ class BeaverDialogue : Dialogue {
         when (branch) {
             0 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "'Ere, you 'ave ze logs, now form zem into a mighty dam!"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "'Ere, you 'ave ze logs, now form zem into a mighty dam!"); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "Well, I was thinking of burning, selling, or fletching them."); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "Sacre bleu! Such a waste."); stage = END_DIALOGUE }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Sacre bleu! Such a waste."); stage = END_DIALOGUE }
                 }
             }
 
             1 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "Vot are you doing 'ere when we could be logging and building mighty dams, alors?"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Vot are you doing 'ere when we could be logging and building mighty dams, alors?"); stage++ }
                     1 -> { playerl(FaceAnim.HALF_ASKING, "Why would I want to build a dam again?"); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "Why wouldn't you want to build a dam again?"); stage++ }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Why wouldn't you want to build a dam again?"); stage++ }
                     3 -> { playerl(FaceAnim.FRIENDLY, "I can't argue with that logic."); stage = END_DIALOGUE }
                 }
             }
 
             2 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "Pardonnez-moi - you call yourself a lumberjack?"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Pardonnez-moi - you call yourself a lumberjack?"); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "No"); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "Carry on zen."); stage = END_DIALOGUE }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Carry on zen."); stage = END_DIALOGUE }
                 }
             }
 
             3 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "Paul Bunyan 'as nothing on moi!"); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Paul Bunyan 'as nothing on moi!"); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "Except several feet in height, a better beard, and opposable thumbs."); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "What was zat?"); stage++ }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "What was zat?"); stage++ }
                     3 -> { playerl(FaceAnim.FRIENDLY, "Nothing."); stage = END_DIALOGUE }
                 }
             }
 
             4 -> {
                 when (stage) {
-                    0 -> { npcl(FaceAnim.CHILD_NORMAL, "Zis is a fine day make some lumber."); stage++ }
+                    0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Zis is a fine day make some lumber."); stage++ }
                     1 -> { playerl(FaceAnim.FRIENDLY, "That it is!"); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "So why are you talking to moi? Get chopping!"); stage = END_DIALOGUE }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "So why are you talking to moi? Get chopping!"); stage = END_DIALOGUE }
                 }
             }
         }

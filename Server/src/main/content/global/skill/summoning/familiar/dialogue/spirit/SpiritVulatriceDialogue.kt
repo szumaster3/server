@@ -80,7 +80,7 @@ class SpiritVulatriceDialogue : Dialogue {
                     0 -> { playerl(FaceAnim.HALF_ASKING, "What do you mean?"); stage++ }
                     1 -> { npcl(FaceAnim.OLD_NORMAL, "Well, you never make eye contact with me for a start."); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "What happened the last time someone made eye contact with you?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Oh, I petrified them really good! Ooooh...okay, point taken."); stage = END_DIALOGUE }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Oh, I petrified them really good! Ooooh...okay, point taken."); stage = END_DIALOGUE }
                 }
             }
         }

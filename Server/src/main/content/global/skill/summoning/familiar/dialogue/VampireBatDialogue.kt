@@ -30,10 +30,10 @@ class VampireBatDialogue : Dialogue {
         stage = 0
 
         when (branch) {
-            0 -> npc(FaceAnim.CHILD_NORMAL, "Ze creatures ov ze dark; vat vonderful music zey make.")
-            1 -> npc(FaceAnim.CHILD_NORMAL, "You're vasting all that blood, can I have some?")
-            2 -> npc(FaceAnim.CHILD_NORMAL, "Ven are you going to feed me?")
-            3 -> npc(FaceAnim.CHILD_NORMAL, "Ven can I eat somethink?")
+            0 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Ze creatures ov ze dark; vat vonderful music zey make.")
+            1 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "You're vasting all that blood, can I have some?")
+            2 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Ven are you going to feed me?")
+            3 -> npc(FaceAnim.FAMILIAR_NEUTRAL, "Ven can I eat somethink?")
         }
 
         return true
@@ -47,7 +47,7 @@ class VampireBatDialogue : Dialogue {
                     stage++
                 }
                 1 -> {
-                    npc(FaceAnim.CHILD_NORMAL, "I like it down here. Let's stay and eat moths!")
+                    npc(FaceAnim.FAMILIAR_NEUTRAL, "I like it down here. Let's stay and eat moths!")
                     stage++
                 }
                 2 -> {

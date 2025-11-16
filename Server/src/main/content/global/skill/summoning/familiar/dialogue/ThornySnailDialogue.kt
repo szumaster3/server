@@ -34,8 +34,8 @@ class ThornySnailDialogue : Dialogue {
         when (branch) {
             0 -> npcl(FaceAnim.OLD_NORMAL, "...")
             1 -> npcl(FaceAnim.OLD_NORMAL, "All this running around the place is fun!")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "I think my stomach is drying out...")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "Okay, I have to ask, what are those things you people totter about on?")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "I think my stomach is drying out...")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Okay, I have to ask, what are those things you people totter about on?")
             4 -> npcl(FaceAnim.OLD_NORMAL, "Can you slow down?")
         }
 
@@ -45,13 +45,13 @@ class ThornySnailDialogue : Dialogue {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (branch) {
             0 -> when (stage) {
-                0 -> { npcl(FaceAnim.CHILD_NORMAL, "..."); stage++ }
+                0 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "..."); stage++ }
                 1 -> { playerl(FaceAnim.FRIENDLY, "What's the matter?"); stage++ }
-                2 -> { npcl(FaceAnim.CHILD_NORMAL, "Check your head..."); stage++ }
+                2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Check your head..."); stage++ }
                 3 -> { playerl(FaceAnim.FRIENDLY, "What about it... Oh, wait! Oh, this is pretty awkward..."); stage++ }
-                4 -> { npcl(FaceAnim.CHILD_NORMAL, "You're wearing the spine of one of my relatives as a hat..."); stage++ }
+                4 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "You're wearing the spine of one of my relatives as a hat..."); stage++ }
                 5 -> { playerl(FaceAnim.FRIENDLY, "Well more of a faux-pas, then."); stage++ }
-                6 -> { npcl(FaceAnim.CHILD_NORMAL, "Just a bit..."); stage = END_DIALOGUE }
+                6 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Just a bit..."); stage = END_DIALOGUE }
             }
 
             1 -> when (stage) {

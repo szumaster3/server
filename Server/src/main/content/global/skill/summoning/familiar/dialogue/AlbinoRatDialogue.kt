@@ -42,34 +42,34 @@ class AlbinoRatDialogue : Dialogue {
         when (branch) {
             0 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Not even a little?"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Not even a little?"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Well there was that one time... I'm sorry, no wickedness today."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Awwwwww..."); stage = END_DIALOGUE }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Awwwwww..."); stage = END_DIALOGUE }
                 }
             }
 
             1 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "I dunno - where are we headed?"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I dunno - where are we headed?"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "I hadn't decided yet."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "When we get there, let's loot something nearby!"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "When we get there, let's loot something nearby!"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Sounds like a plan, certainly."); stage = END_DIALOGUE }
                 }
             }
 
             2 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Let's go robbin' graves again!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Let's go robbin' graves again!"); stage++ }
                     2 -> { playerl(FaceAnim.ASKING, "What do you mean 'again'?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Nuffin'..."); stage = END_DIALOGUE }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Nuffin'..."); stage = END_DIALOGUE }
                 }
             }
 
             3 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Well, I worked with a lot of evil people; some of the best."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Well, I worked with a lot of evil people; some of the best."); stage++ }
                     2 -> { playerl(FaceAnim.HALF_ASKING, "Such as?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "I'm not telling! I've got my principles to uphold."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm not telling! I've got my principles to uphold."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "There is honour amongst thieves, it would seem."); stage = END_DIALOGUE }
                 }
             }

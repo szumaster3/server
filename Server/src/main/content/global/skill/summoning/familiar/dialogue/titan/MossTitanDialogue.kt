@@ -29,7 +29,7 @@ class MossTitanDialogue : Dialogue {
 
         when (branch) {
             0 -> playerl(FaceAnim.FRIENDLY, "It's quite a large bug.")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "When you punch 'em, humies go squish.")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "When you punch 'em, humies go squish.")
             2 -> playerl(FaceAnim.FRIENDLY, "Are you quite finished?")
             3 -> playerl(FaceAnim.FRIENDLY, "Let's just wait and see.")
         }
@@ -41,13 +41,13 @@ class MossTitanDialogue : Dialogue {
         when (branch) {
             0 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "He's so cute! I wanna keep him."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "He's so cute! I wanna keep him."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Well, be careful."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "I'm gonna call him Buggie and I'm gonna keep him in a box."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm gonna call him Buggie and I'm gonna keep him in a box."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Don't get overexcited."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "I'm gonna feed him and we're gonna be so happy together!"); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I'm gonna feed him and we're gonna be so happy together!"); stage++ }
                     6 -> { sendDialogue("The Moss titan begins to bounce up and down."); stage++ }
-                    7 -> { npcl(FaceAnim.CHILD_NORMAL, "Aww...Buggie went squish."); stage++ }
+                    7 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Aww...Buggie went squish."); stage++ }
                     8 -> { playerl(FaceAnim.FRIENDLY, "Sigh."); stage = END_DIALOGUE }
                 }
             }
@@ -55,40 +55,40 @@ class MossTitanDialogue : Dialogue {
             1 -> {
                 when (stage) {
                     1 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    2 -> { npcl(FaceAnim.CHILD_NORMAL, "When you push 'em, humies go squish."); stage++ }
+                    2 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "When you push 'em, humies go squish."); stage++ }
                     3 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    4 -> { npcl(FaceAnim.CHILD_NORMAL, "Squish squish squish."); stage++ }
+                    4 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Squish squish squish."); stage++ }
                     5 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    6 -> { npcl(FaceAnim.CHILD_NORMAL, "When you touch 'em, humies go squish."); stage++ }
+                    6 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "When you touch 'em, humies go squish."); stage++ }
                     7 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    8 -> { npcl(FaceAnim.CHILD_NORMAL, "When you talk to 'em, humies go squish."); stage++ }
+                    8 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "When you talk to 'em, humies go squish."); stage++ }
                     9 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    10 -> { npcl(FaceAnim.CHILD_NORMAL, "When you poke 'em, humies go squish."); stage++ }
+                    10 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "When you poke 'em, humies go squish."); stage++ }
                     11 -> { playerl(FaceAnim.FRIENDLY, "..."); stage++ }
-                    12 -> { npcl(FaceAnim.CHILD_NORMAL, "Squish squish squish."); stage++ }
+                    12 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Squish squish squish."); stage++ }
                     13 -> { playerl(FaceAnim.FRIENDLY, "You have problems, you know that. Come on, we have got stuff to do."); stage = END_DIALOGUE }
                 }
             }
 
             2 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "Stampy stampy stampy stampy stampy stampy, I've got big hands."); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Stampy stampy stampy stampy stampy stampy, I've got big hands."); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Done yet?"); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Stampy stampy stampy stampy stampy stampy, I've got big chest."); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Stampy stampy stampy stampy stampy stampy, I've got big chest."); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Done yet?"); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "Stampy stampy stampy stampy stampy stampy, I've got big hair."); stage++ }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Stampy stampy stampy stampy stampy stampy, I've got big hair."); stage++ }
                     6 -> { playerl(FaceAnim.FRIENDLY, "Oh, be quiet and come on."); stage++ }
-                    7 -> { npcl(FaceAnim.CHILD_NORMAL, "..."); stage = END_DIALOGUE }
+                    7 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "..."); stage = END_DIALOGUE }
                 }
             }
 
             3 -> {
                 when (stage) {
-                    1 -> { npcl(FaceAnim.CHILD_NORMAL, "I want to do some squishing of tiny things!"); stage++ }
+                    1 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "I want to do some squishing of tiny things!"); stage++ }
                     2 -> { playerl(FaceAnim.FRIENDLY, "Preferably not me."); stage++ }
-                    3 -> { npcl(FaceAnim.CHILD_NORMAL, "Even if only a little bit, like your foot or something?"); stage++ }
+                    3 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Even if only a little bit, like your foot or something?"); stage++ }
                     4 -> { playerl(FaceAnim.FRIENDLY, "Um, no. I really don't fancy being squished today, thanks."); stage++ }
-                    5 -> { npcl(FaceAnim.CHILD_NORMAL, "Awww..."); stage = END_DIALOGUE }
+                    5 -> { npcl(FaceAnim.FAMILIAR_NEUTRAL, "Awww..."); stage = END_DIALOGUE }
                 }
             }
         }

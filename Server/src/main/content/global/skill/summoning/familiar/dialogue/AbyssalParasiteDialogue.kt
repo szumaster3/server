@@ -42,7 +42,7 @@ class AbyssalParasiteDialogue : Dialogue {
         npc = args[0] as NPC
         val (line, startStage) = npcLines.random()
         stage = startStage
-        npcl(FaceAnim.CHILD_NORMAL, line)
+        npcl(FaceAnim.FAMILIAR_NEUTRAL, line)
         return true
     }
 
@@ -58,7 +58,7 @@ class AbyssalParasiteDialogue : Dialogue {
 
         val followUps = npcFollowUps[stage]
         if (followUps != null && index < followUps.size) {
-            npcl(FaceAnim.CHILD_NORMAL, followUps[index])
+            npcl(FaceAnim.FAMILIAR_NEUTRAL, followUps[index])
         }
 
         stage = END_DIALOGUE

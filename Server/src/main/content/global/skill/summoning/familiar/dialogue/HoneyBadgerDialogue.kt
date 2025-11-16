@@ -25,11 +25,11 @@ class HoneyBadgerDialogue : Dialogue {
         branch = (0..4).random()
         stage = 0
         when (branch) {
-            0 -> npcl(FaceAnim.CHILD_NORMAL, "*An outpouring of sanity-straining abuse*")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "*An outpouring of spittal-flecked insults.*")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "*A lambasting of visibly illustrated obscenities.*")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "*A tirade of biologically questionable threats*")
-            4 -> npcl(FaceAnim.CHILD_NORMAL, "*A stream of eye-watering crudities*")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "*An outpouring of sanity-straining abuse*")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "*An outpouring of spittal-flecked insults.*")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "*A lambasting of visibly illustrated obscenities.*")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "*A tirade of biologically questionable threats*")
+            4 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "*A stream of eye-watering crudities*")
         }
         return true
     }

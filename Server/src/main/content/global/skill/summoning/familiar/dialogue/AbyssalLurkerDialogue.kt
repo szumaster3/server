@@ -31,10 +31,10 @@ class AbyssalLurkerDialogue : Dialogue {
         val stageIndex = (Math.random() * responses.size).toInt()
         stage = stageIndex
         when (stageIndex) {
-            0 -> npcl(FaceAnim.CHILD_NORMAL, "Djrej gf'ig sgshe...")
-            1 -> npcl(FaceAnim.CHILD_NORMAL, "To poshi v'kaa!")
-            2 -> npcl(FaceAnim.CHILD_NORMAL, "G-harrve shelmie?")
-            3 -> npcl(FaceAnim.CHILD_NORMAL, "Jehifk i'ekfh skjd.")
+            0 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Djrej gf'ig sgshe...")
+            1 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "To poshi v'kaa!")
+            2 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "G-harrve shelmie?")
+            3 -> npcl(FaceAnim.FAMILIAR_NEUTRAL, "Jehifk i'ekfh skjd.")
         }
         return true
     }
