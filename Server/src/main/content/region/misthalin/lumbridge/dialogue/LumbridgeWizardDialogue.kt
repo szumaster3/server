@@ -12,7 +12,7 @@ import shared.consts.NPCs
  * Represents the Wizard (Lumbridge swamp) dialogue.
  */
 @Initializable
-class LumbridgeSwampWizardDialogue(player: Player? = null) : Dialogue(player) {
+class LumbridgeWizardDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -28,7 +28,7 @@ class LumbridgeSwampWizardDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue = LumbridgeSwampWizardDialogue(player)
+    override fun newInstance(player: Player?): Dialogue = LumbridgeWizardDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.WIZARD_652)
 }

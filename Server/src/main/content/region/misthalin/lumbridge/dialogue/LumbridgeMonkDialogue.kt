@@ -12,7 +12,7 @@ import shared.consts.NPCs
  * Represents the Monk (Lumbridge swamp) dialogue.
  */
 @Initializable
-class LumbridgeSwampMonkDialogue(player: Player? = null) : Dialogue(player) {
+class LumbridgeMonkDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -27,7 +27,7 @@ class LumbridgeSwampMonkDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue = LumbridgeSwampMonkDialogue(player)
+    override fun newInstance(player: Player?): Dialogue = LumbridgeMonkDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.MONK_651)
 }

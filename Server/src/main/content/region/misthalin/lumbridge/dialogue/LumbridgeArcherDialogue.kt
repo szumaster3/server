@@ -12,7 +12,7 @@ import shared.consts.NPCs
  * Represents the Archer (Lumbridge swamp) dialogue.
  */
 @Initializable
-class LumbridgeSwampArcherDialogue(player: Player? = null) : Dialogue(player) {
+class LumbridgeArcherDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
@@ -29,7 +29,7 @@ class LumbridgeSwampArcherDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun newInstance(player: Player?): Dialogue = LumbridgeSwampArcherDialogue(player)
+    override fun newInstance(player: Player?): Dialogue = LumbridgeArcherDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.ARCHER_649)
 }

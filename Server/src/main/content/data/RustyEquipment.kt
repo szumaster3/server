@@ -6,9 +6,9 @@ import core.tools.RandomFunction
 import shared.consts.Items
 
 /**
- * Handles retrieval of broken or damaged items that can be repaired.
+ * Represents rusty equipment.
  */
-object RepairableItem {
+object RustyEquipment {
 
     private val repairTables: Map<EquipmentType, List<WeightedChanceItem>> = mapOf(
         EquipmentType.ARROWS to listOf(
