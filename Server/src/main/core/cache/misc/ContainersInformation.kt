@@ -1,7 +1,7 @@
 package core.cache.misc
 
 import core.cache.bzip2.BZip2Decompressor
-import core.cache.util.gzip.GZipDecompressor
+import core.cache.gzip.GZipDecompressor
 import java.nio.ByteBuffer
 import java.util.zip.CRC32
 
