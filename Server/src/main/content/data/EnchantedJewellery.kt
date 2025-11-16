@@ -14,6 +14,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Sounds
 
@@ -219,7 +220,7 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
     fun getItemIndex(item: Item): Int = ids.indexOf(item.id)
 
     companion object {
-        private val ANIMATION = Animation(9603)
+        private val ANIMATION = Animation(Animations.ANIMATION_9603)
         private val Graphics = Graphics(shared.consts.Graphics.TP_RING_OF_DUELING_1684)
         val idMap = HashMap<Int, EnchantedJewellery>()
 

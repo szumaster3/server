@@ -478,7 +478,6 @@ public class Player extends Entity {
         return RespawnPoint.LUMBRIDGE.getLocation();
     }
 
-
     /**
      * Toggle wardrobe.
      *
