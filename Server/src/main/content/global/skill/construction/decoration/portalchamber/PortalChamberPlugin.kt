@@ -136,10 +136,10 @@ class PortalChamberPlugin : OptionHandler() {
                     }
                     setTitle(player!!, 3)
                     showTopics(
-                        Topic("1: ${portalNames[0]}", 2),
-                        Topic("2: ${portalNames[1]}", 2),
-                        Topic("3: ${portalNames[2]}", 2),
-                        Topic("Cancel.", END_DIALOGUE),
+                        Topic("1: ${portalNames[0]}", 2, true),
+                        Topic("2: ${portalNames[1]}", 2, true),
+                        Topic("3: ${portalNames[2]}", 2, true),
+                        Topic("Cancel.", END_DIALOGUE, true),
                         title = "Redirect which portal?"
                     )
                     setAttribute(player!!, "con:dp-id", buttonID)
