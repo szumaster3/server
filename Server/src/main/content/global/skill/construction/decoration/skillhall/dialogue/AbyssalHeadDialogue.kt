@@ -18,7 +18,6 @@ class AbyssalHeadDialogue : DialogueFile() {
                     npc(FaceAnim.CHILD_FRIENDLY, "Have you considered visiting$DARK_RED THE ABYSS</col>?").also { stage = 2 }
                 }
             }
-
             1 -> npcl(FaceAnim.CHILD_THINKING, "Cool for ${if (player!!.isMale) "him" else "her"} maybe. How would you like to be stuck on a wall?").also { stage = END_DIALOGUE }
             2 -> options("I visit the abyss all the time.", "It's too scary for me.", "Could I get an abyssal whip?").also { stage++ }
             3 -> when (buttonID) {

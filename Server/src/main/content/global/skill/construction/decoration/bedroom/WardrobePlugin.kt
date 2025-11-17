@@ -3,62 +3,53 @@ package content.global.skill.construction.decoration.bedroom
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.system.task.Pulse
+import core.game.node.entity.player.Player
+import core.game.node.scenery.Scenery
 import shared.consts.Animations
 import shared.consts.Components
-import shared.consts.Scenery
+import shared.consts.Scenery as Objects
 
 class WardrobePlugin : InteractionListener {
-    private val wardrobeSpaceFurniture =
-        intArrayOf(
-            Scenery.SHOE_BOX_13155,
-            Scenery.OAK_DRAWERS_13156,
-            Scenery.OAK_WARDROBE_13157,
-            Scenery.TEAK_DRAWERS_13158,
-            Scenery.TEAK_WARDROBE_13159,
-            Scenery.MAHOGANY_WARDROBE_13160,
-            Scenery.GILDED_WARDROBE_13161,
-        )
 
     override fun defineListeners() {
-        on(wardrobeSpaceFurniture, IntType.SCENERY, "change-clothes") { player, node ->
-            lock(player, 2)
-            submitIndividualPulse(
-                player,
-                object : Pulse() {
-                    var counter = 0
-
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            0 -> animate(player, Animations.OPEN_POH_WARDROBE_535)
-                            2 -> {
-                                if (node.id == Scenery.SHOE_BOX_13155) {
-                                    openInterface(player, Components.YRSA_SHOE_STORE_200)
-                                    sendString(player, node.name, Components.YRSA_SHOE_STORE_200, 13)
-                                } else {
-                                    if (player.appearance.isMale) {
-                                        sendString(player, node.name, Components.YRSA_SHOE_STORE_200, 13)
-                                        setComponentVisibility(player, Components.THESSALIA_CLOTHES_MALE_591, 179, true)
-                                        openInterface(player, Components.THESSALIA_CLOTHES_MALE_591)
-                                    } else {
-                                        sendString(player, node.name, Components.THESSALIA_CLOTHES_FEMALE_594, 61)
-                                        setComponentVisibility(
-                                            player,
-                                            Components.THESSALIA_CLOTHES_FEMALE_594,
-                                            180,
-                                            true,
-                                        )
-                                        openInterface(player, Components.THESSALIA_CLOTHES_FEMALE_594)
-                                    }
-                                }
-                                return true
-                            }
-                        }
-                        return false
-                    }
-                },
-            )
+        on(WARDROBE_FURNITURE_IDS, IntType.SCENERY, "change-clothes") { player, node ->
+            val scenery = node as Scenery
+            lock(player, 3)
+            animate(player, Animations.OPEN_POH_WARDROBE_535)
+            openWardrobe(player, scenery)
             return@on true
         }
+    }
+
+    private fun openWardrobe(player: Player, node: Scenery) {
+        when (node.id) {
+            Objects.SHOE_BOX_13155 -> openInterface(player, Components.YRSA_SHOE_STORE_200, node.name, 13)
+            else -> {
+                val (component, stringComponent) = if (player.appearance.isMale)
+                    Components.THESSALIA_CLOTHES_MALE_591 to 179
+                else
+                    Components.THESSALIA_CLOTHES_FEMALE_594 to 180
+
+                openInterface(player, component, node.name, stringComponent)
+            }
+        }
+    }
+
+    private fun openInterface(player: Player, component: Int, name: String, stringComponent: Int) {
+        sendString(player, name, component, stringComponent)
+        setComponentVisibility(player, component, stringComponent, true)
+        openInterface(player, component)
+    }
+
+    companion object {
+        private val WARDROBE_FURNITURE_IDS = intArrayOf(
+            Objects.SHOE_BOX_13155,
+            Objects.OAK_DRAWERS_13156,
+            Objects.OAK_WARDROBE_13157,
+            Objects.TEAK_DRAWERS_13158,
+            Objects.TEAK_WARDROBE_13159,
+            Objects.MAHOGANY_WARDROBE_13160,
+            Objects.GILDED_WARDROBE_13161
+        )
     }
 }
